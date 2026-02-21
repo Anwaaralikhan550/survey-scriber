@@ -147,7 +147,12 @@ class ValuationScreenPage extends ConsumerWidget {
                 ),
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  child: InspectionPhrasePreview(phrases: phrases),
+                  child: InspectionPhrasePreview(
+                    phraseText: phrases.join('\n\n'),
+                    isEdited: false,
+                    userNote: '',
+                    onUserNoteChanged: (_) {},
+                  ),
                 ),
               ),
             SafeArea(

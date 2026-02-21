@@ -701,7 +701,12 @@ class _InlineHeaderForm extends ConsumerWidget {
           const SizedBox(height: 12),
         ],
         if (phrases.isNotEmpty) ...[
-          InspectionPhrasePreview(phrases: phrases),
+          InspectionPhrasePreview(
+            phraseText: phrases.join('\n\n'),
+            isEdited: false,
+            userNote: '',
+            onUserNoteChanged: (_) {},
+          ),
           const SizedBox(height: 12),
         ],
       ],

@@ -137,6 +137,7 @@ class ReportScreen {
     required this.title,
     required this.fields,
     this.phrases = const [],
+    this.userNote = '',
     this.parentId,
     this.isCompleted = false,
   });
@@ -145,10 +146,14 @@ class ReportScreen {
   final String title;
   final List<ReportField> fields;
   final List<String> phrases;
+  final String userNote;
   final String? parentId;
   final bool isCompleted;
 
-  bool get hasData => fields.any((f) => f.displayValue.isNotEmpty);
+  bool get hasData =>
+      fields.any((f) => f.displayValue.isNotEmpty) ||
+      phrases.isNotEmpty ||
+      userNote.isNotEmpty;
 }
 
 class ReportField {

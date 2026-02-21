@@ -19,6 +19,12 @@ export class SectionResponseDto {
   })
   phraseOutput?: string | null;
 
+  @ApiPropertyOptional({
+    example: '{"activity_chimney_stacks":"Surveyor observed hairline cracks."}',
+    description: 'JSON-encoded surveyor custom notes per screen',
+  })
+  userNotes?: string | null;
+
   @ApiProperty({ example: '2024-01-15T10:30:00.000Z' })
   createdAt: Date;
 

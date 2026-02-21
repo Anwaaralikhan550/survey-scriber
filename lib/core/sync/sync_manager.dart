@@ -633,25 +633,67 @@ class SyncManager {
       }
     }
 
-    // --- TIER 2: Sync sections (skip those whose parent survey failed) ---
+    // --- TIER 2: Sync sections (strict dependency lock) ---
+    //
+    // DEPENDENCY FIX: Four guards prevent the "Section not found 404" race:
+    //   CHECK 1: Parent survey failed IN THIS cycle (in-memory set)
+    //   CHECK 2: Parent survey still unsynced from a PREVIOUS cycle (DB query)
+    //   CHECK 3: Same section already failed this cycle (duplicate row guard)
+    //   CHECK 4: Same section already processed this cycle (CREATE+UPDATE split)
+    final processedSectionEntityIds = <String>{};
     for (final item in sectionItems) {
       if (authAborted) break;
       progressIndex++;
       onProgress?.call(progressIndex, totalItems, item);
 
-      // Check if this section's parent survey failed in this cycle
       final payload = jsonDecode(item.payload) as Map<String, dynamic>;
       final surveyId = payload['surveyId'] as String?;
+
+      // CHECK 1: Parent survey failed in THIS cycle
       if (surveyId != null && failedSurveyIds.contains(surveyId)) {
-        // Parent survey didn't sync — defer this section to next cycle
         AppLogger.d('SyncManager',
-          'Deferring section ${item.entityId}: parent survey $surveyId not yet synced',
+          'Deferring section ${item.entityId}: parent survey $surveyId failed this cycle',
+        );
+        await syncQueueDao.resetToPending(item.id);
+        continue;
+      }
+
+      // CHECK 2: Parent survey still unsynced from a PREVIOUS cycle
+      // (mirrors the hasPendingSync pattern TIER 3 already uses for sections)
+      if (surveyId != null) {
+        final surveyStillUnsynced = await syncQueueDao.hasPendingSync(surveyId);
+        if (surveyStillUnsynced) {
+          AppLogger.d('SyncManager',
+            'Deferring section ${item.entityId}: parent survey $surveyId still unsynced',
+          );
+          await syncQueueDao.resetToPending(item.id);
+          continue;
+        }
+      }
+
+      // CHECK 3: Same section already failed earlier in this cycle
+      // (catches the CREATE+UPDATE split where CREATE failed and UPDATE
+      // would otherwise proceed with a PUT against a non-existent entity)
+      if (failedSectionIds.contains(item.entityId)) {
+        AppLogger.d('SyncManager',
+          'Deferring section ${item.entityId}: duplicate item already failed this cycle',
+        );
+        await syncQueueDao.resetToPending(item.id);
+        continue;
+      }
+
+      // CHECK 4: Another queue item for the same section already processed
+      // this cycle (one entity = one sync attempt per cycle)
+      if (processedSectionEntityIds.contains(item.entityId)) {
+        AppLogger.d('SyncManager',
+          'Deferring section ${item.entityId}: same entity already processed this cycle',
         );
         await syncQueueDao.resetToPending(item.id);
         continue;
       }
 
       final result = await _processOneItem(item);
+      processedSectionEntityIds.add(item.entityId);
       if (result.success) {
         syncedCount++;
       } else if (result.isAuthFailure) {
@@ -665,38 +707,52 @@ class SyncManager {
       }
     }
 
-    // --- TIER 3: Sync answers (skip those whose parent section failed) ---
+    // --- TIER 3: Sync answers (strict dependency lock) ---
+    //
+    // Guards mirror TIER 2 + same-entity dedup for answers.
+    final processedAnswerEntityIds = <String>{};
     for (final item in answerItems) {
       if (authAborted) break;
       progressIndex++;
       onProgress?.call(progressIndex, totalItems, item);
 
-      // Check if this answer's parent section failed in this cycle
       final payload = jsonDecode(item.payload) as Map<String, dynamic>;
       final sectionId = payload['sectionId'] as String?;
+
+      // CHECK 1: Parent section failed in THIS cycle
       if (sectionId != null && failedSectionIds.contains(sectionId)) {
         AppLogger.d('SyncManager',
-          'Deferring answer ${item.entityId}: parent section $sectionId not yet synced',
+          'Deferring answer ${item.entityId}: parent section $sectionId failed this cycle',
         );
         await syncQueueDao.resetToPending(item.id);
         continue;
       }
 
-      // Also check if the section's parent survey failed
-      // (section was deferred, so answer should be too)
-      // We check by looking at whether the section is still pending
+      // CHECK 2: Parent section (or grandparent survey) still unsynced
+      // from a PREVIOUS cycle — hasPendingSync now includes 'failed' status,
+      // so this transitively blocks: survey(failed) → section(pending) → answer(blocked)
       if (sectionId != null) {
-        final sectionStillPending = await syncQueueDao.hasPendingSync(sectionId);
-        if (sectionStillPending) {
+        final sectionStillUnsynced = await syncQueueDao.hasPendingSync(sectionId);
+        if (sectionStillUnsynced) {
           AppLogger.d('SyncManager',
-            'Deferring answer ${item.entityId}: parent section $sectionId still pending',
+            'Deferring answer ${item.entityId}: parent section $sectionId still unsynced',
           );
           await syncQueueDao.resetToPending(item.id);
           continue;
         }
       }
 
+      // CHECK 3: Same answer already processed this cycle (CREATE+UPDATE split)
+      if (processedAnswerEntityIds.contains(item.entityId)) {
+        AppLogger.d('SyncManager',
+          'Deferring answer ${item.entityId}: same entity already processed this cycle',
+        );
+        await syncQueueDao.resetToPending(item.id);
+        continue;
+      }
+
       final result = await _processOneItem(item);
+      processedAnswerEntityIds.add(item.entityId);
       if (result.success) {
         syncedCount++;
       } else if (result.isAuthFailure) {
@@ -962,9 +1018,28 @@ class SyncManager {
           };
           await apiClient.post('surveys', data: createPayload);
         case SyncAction.update:
-          await apiClient.put('surveys/$entityId', data: payload);
+          try {
+            await apiClient.put('surveys/$entityId', data: payload);
+          } on NotFoundException {
+            // UPSERT: Server doesn't have this survey (DB reset, data loss).
+            // Auto-create via POST so dependents (sections, answers) can sync.
+            AppLogger.w('SyncManager',
+              'Survey $entityId not found on server (404 on UPDATE). '
+              'Auto-creating via POST (upsert).',
+            );
+            final createPayload = {'id': entityId, ...payload};
+            await apiClient.post('surveys', data: createPayload);
+          }
         case SyncAction.delete:
-          await apiClient.delete('surveys/$entityId');
+          try {
+            await apiClient.delete('surveys/$entityId');
+          } on NotFoundException {
+            // Entity already gone — treat as success
+            AppLogger.d('SyncManager',
+              'Survey $entityId already deleted on server (404 on DELETE). '
+              'Treating as success.',
+            );
+          }
       }
       return true;
     } catch (e) {
@@ -1046,11 +1121,55 @@ class SyncManager {
             'id': entityId,
             ...bodyPayload,
           };
-          await apiClient.post('surveys/$surveyId/sections', data: createPayload);
+          try {
+            await apiClient.post('surveys/$surveyId/sections', data: createPayload);
+          } on NotFoundException {
+            // Parent survey not found on server — auto-create it from local
+            // DB then retry. Handles server DB reset / data loss gracefully.
+            if (surveyId != null) {
+              AppLogger.w('SyncManager',
+                'Parent survey $surveyId not found while creating section '
+                '$entityId. Auto-creating survey (ensure-parent).',
+              );
+              await _ensureSurveyExists(surveyId);
+              await apiClient.post('surveys/$surveyId/sections', data: createPayload);
+            } else {
+              rethrow;
+            }
+          }
         case SyncAction.update:
-          await apiClient.put('sections/$entityId', data: bodyPayload);
+          try {
+            await apiClient.put('sections/$entityId', data: bodyPayload);
+          } on NotFoundException {
+            // UPSERT: Server doesn't have this section (DB reset, data loss).
+            // Auto-create via POST so dependents (answers) can sync.
+            AppLogger.w('SyncManager',
+              'Section $entityId not found on server (404 on UPDATE). '
+              'Auto-creating via POST (upsert).',
+            );
+            final createPayload = {'id': entityId, ...bodyPayload};
+            try {
+              await apiClient.post('surveys/$surveyId/sections', data: createPayload);
+            } on NotFoundException {
+              // Parent survey also missing — ensure it exists first
+              if (surveyId != null) {
+                await _ensureSurveyExists(surveyId);
+                await apiClient.post('surveys/$surveyId/sections', data: createPayload);
+              } else {
+                rethrow;
+              }
+            }
+          }
         case SyncAction.delete:
-          await apiClient.delete('sections/$entityId');
+          try {
+            await apiClient.delete('sections/$entityId');
+          } on NotFoundException {
+            // Entity already gone — treat as success
+            AppLogger.d('SyncManager',
+              'Section $entityId already deleted on server (404 on DELETE). '
+              'Treating as success.',
+            );
+          }
       }
       return true;
     } catch (e) {
@@ -1096,11 +1215,55 @@ class SyncManager {
             'id': entityId,
             ...bodyPayload,
           };
-          await apiClient.post('sections/$sectionId/answers', data: createPayload);
+          try {
+            await apiClient.post('sections/$sectionId/answers', data: createPayload);
+          } on NotFoundException {
+            // Parent section not found on server — auto-create it from local
+            // DB then retry. Handles server DB reset / data loss gracefully.
+            if (sectionId != null) {
+              AppLogger.w('SyncManager',
+                'Parent section $sectionId not found while creating answer '
+                '$entityId. Auto-creating section (ensure-parent).',
+              );
+              await _ensureSectionExists(sectionId);
+              await apiClient.post('sections/$sectionId/answers', data: createPayload);
+            } else {
+              rethrow;
+            }
+          }
         case SyncAction.update:
-          await apiClient.put('answers/$entityId', data: bodyPayload);
+          try {
+            await apiClient.put('answers/$entityId', data: bodyPayload);
+          } on NotFoundException {
+            // UPSERT: Server doesn't have this answer (DB reset, data loss).
+            // Auto-create via POST.
+            AppLogger.w('SyncManager',
+              'Answer $entityId not found on server (404 on UPDATE). '
+              'Auto-creating via POST (upsert).',
+            );
+            final createPayload = {'id': entityId, ...bodyPayload};
+            try {
+              await apiClient.post('sections/$sectionId/answers', data: createPayload);
+            } on NotFoundException {
+              // Parent section also missing — ensure it exists first
+              if (sectionId != null) {
+                await _ensureSectionExists(sectionId);
+                await apiClient.post('sections/$sectionId/answers', data: createPayload);
+              } else {
+                rethrow;
+              }
+            }
+          }
         case SyncAction.delete:
-          await apiClient.delete('answers/$entityId');
+          try {
+            await apiClient.delete('answers/$entityId');
+          } on NotFoundException {
+            // Entity already gone — treat as success
+            AppLogger.d('SyncManager',
+              'Answer $entityId already deleted on server (404 on DELETE). '
+              'Treating as success.',
+            );
+          }
       }
       return true;
     } catch (e) {
@@ -1122,6 +1285,105 @@ class SyncManager {
           message: 'Answer version conflict with server',
         );
       }
+      rethrow;
+    }
+  }
+
+  /// Ensure a survey exists on the server by reading it from local DB and
+  /// creating it via POST. Used by section/answer sync when the parent survey
+  /// is missing (server DB reset, data loss, etc.).
+  ///
+  /// If the survey already exists (409), this is treated as success.
+  /// If the survey is not in local DB, this is a no-op (nothing to recreate).
+  Future<void> _ensureSurveyExists(String surveyId) async {
+    final survey = await surveysDao.getSurveyById(surveyId);
+    if (survey == null) {
+      AppLogger.w('SyncManager',
+        'Cannot auto-create survey $surveyId: not found in local DB.',
+      );
+      return;
+    }
+
+    // Build payload matching CreateSurveyDto fields exactly.
+    // Backend forbidNonWhitelisted:true rejects unknown fields.
+    final payload = {
+      'id': surveyId,
+      'title': survey.title,
+      'propertyAddress': survey.address ?? '',
+      'status': survey.status.toBackendString(),
+      'type': survey.type.toBackendString(),
+      if (survey.jobRef != null) 'jobRef': survey.jobRef,
+      if (survey.clientName != null) 'clientName': survey.clientName,
+      if (survey.parentSurveyId != null) 'parentSurveyId': survey.parentSurveyId,
+    };
+
+    try {
+      await apiClient.post('surveys', data: payload);
+      AppLogger.d('SyncManager',
+        'Auto-created survey $surveyId on server (ensure-parent).',
+      );
+    } catch (e) {
+      // 409 = already exists — that's fine, the survey is there now
+      if (_isConflictError(e)) {
+        AppLogger.d('SyncManager',
+          'Survey $surveyId already exists on server (409 during ensure-parent).',
+        );
+        return;
+      }
+      // Any other error — log and rethrow so the child sync fails with
+      // a meaningful error instead of silently losing data.
+      AppLogger.e('SyncManager',
+        'Failed to auto-create survey $surveyId: $e',
+      );
+      rethrow;
+    }
+  }
+
+  /// Ensure a section exists on the server by reading it from local DB and
+  /// creating it via POST. Used by answer sync when the parent section
+  /// is missing (server DB reset, data loss, etc.).
+  ///
+  /// This also ensures the grandparent survey exists (transitive dependency).
+  Future<void> _ensureSectionExists(String sectionId) async {
+    final section = await sectionsDao.getSectionById(sectionId);
+    if (section == null) {
+      AppLogger.w('SyncManager',
+        'Cannot auto-create section $sectionId: not found in local DB.',
+      );
+      return;
+    }
+
+    // Ensure the grandparent survey exists first (transitive dependency)
+    await _ensureSurveyExists(section.surveyId);
+
+    // Build payload matching CreateSectionDto fields exactly.
+    // 'surveyId' is a URL param, not a body field.
+    final payload = {
+      'id': sectionId,
+      'title': section.title,
+      'order': section.order,
+      'sectionTypeKey': section.sectionType.apiSectionType,
+    };
+
+    try {
+      await apiClient.post(
+        'surveys/${section.surveyId}/sections',
+        data: payload,
+      );
+      AppLogger.d('SyncManager',
+        'Auto-created section $sectionId on server (ensure-parent).',
+      );
+    } catch (e) {
+      // 409 = already exists — that's fine, the section is there now
+      if (_isConflictError(e)) {
+        AppLogger.d('SyncManager',
+          'Section $sectionId already exists on server (409 during ensure-parent).',
+        );
+        return;
+      }
+      AppLogger.e('SyncManager',
+        'Failed to auto-create section $sectionId: $e',
+      );
       rethrow;
     }
   }

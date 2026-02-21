@@ -25,6 +25,7 @@ class V2RawReportData {
     required this.photoFilePaths,
     required this.signatureRows,
     this.persistedPhrases = const {},
+    this.persistedUserNotes = const {},
   });
 
   final Survey survey;
@@ -48,6 +49,11 @@ class V2RawReportData {
   ///
   /// Empty map for legacy surveys that predate schema v18.
   final Map<String, List<String>> persistedPhrases;
+
+  /// screenId → surveyor's custom note from the `user_note` DB column.
+  ///
+  /// Empty map for surveys that predate schema v19.
+  final Map<String, String> persistedUserNotes;
 }
 
 /// Minimal signature info needed by the builder.
@@ -104,11 +110,13 @@ class ReportDataService {
 
     final screenStates = _buildScreenStatesMap(allScreenRows);
     final persistedPhrases = _buildPersistedPhrasesMap(allScreenRows);
+    final persistedUserNotes = _buildPersistedUserNotesMap(allScreenRows);
 
     AppLogger.d('ReportData',
         'Loaded inspection data: ${allAnswers.length} screens, '
         '${photos.length} photos, ${sigs.length} signatures, '
-        '${persistedPhrases.length} screens with persisted phrases');
+        '${persistedPhrases.length} screens with persisted phrases, '
+        '${persistedUserNotes.length} screens with user notes');
 
     return V2RawReportData(
       survey: survey,
@@ -118,6 +126,7 @@ class ReportDataService {
       photoFilePaths: photos,
       signatureRows: sigs,
       persistedPhrases: persistedPhrases,
+      persistedUserNotes: persistedUserNotes,
     );
   }
 
@@ -143,11 +152,13 @@ class ReportDataService {
 
     final screenStates = _buildScreenStatesMap(allScreenRows);
     final persistedPhrases = _buildPersistedPhrasesMap(allScreenRows);
+    final persistedUserNotes = _buildPersistedUserNotesMap(allScreenRows);
 
     AppLogger.d('ReportData',
         'Loaded valuation data: ${allAnswers.length} screens, '
         '${photos.length} photos, ${sigs.length} signatures, '
-        '${persistedPhrases.length} screens with persisted phrases');
+        '${persistedPhrases.length} screens with persisted phrases, '
+        '${persistedUserNotes.length} screens with user notes');
 
     return V2RawReportData(
       survey: survey,
@@ -157,6 +168,7 @@ class ReportDataService {
       photoFilePaths: photos,
       signatureRows: sigs,
       persistedPhrases: persistedPhrases,
+      persistedUserNotes: persistedUserNotes,
     );
   }
 
@@ -182,6 +194,21 @@ class ReportDataService {
         } catch (_) {
           // Malformed JSON — skip this screen, builder will regenerate
         }
+      }
+    }
+    return result;
+  }
+
+  /// Extract surveyor custom notes from pre-fetched screen rows.
+  ///
+  /// Returns screenId → note text. Empty map for surveys pre-v19.
+  Map<String, String> _buildPersistedUserNotesMap(
+    List<InspectionV2Screen> rows,
+  ) {
+    final result = <String, String>{};
+    for (final row in rows) {
+      if (row.userNote != null && row.userNote!.isNotEmpty) {
+        result[row.screenId] = row.userNote!;
       }
     }
     return result;

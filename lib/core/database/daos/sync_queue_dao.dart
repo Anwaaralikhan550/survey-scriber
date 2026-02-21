@@ -37,11 +37,21 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
     // F10 FIX: Wrap entire operation in transaction to prevent race conditions
     // This ensures atomic select-then-update/insert/delete operations
     return transaction(() async {
-      // Check if there's already a pending item for this entity
+      // Check if there's already a pending OR failed item for this entity.
+      //
+      // CRITICAL: Must include 'failed' status — otherwise a section whose
+      // CREATE permanently failed (retryCount >= maxRetries) will NOT be found,
+      // and a new UPDATE row is inserted as a separate queue item. That naked
+      // UPDATE then races ahead of the unsynced CREATE → 404 on the server.
+      //
+      // We intentionally EXCLUDE 'processing' — modifying an in-flight row's
+      // payload is unsafe (the HTTP request already read the old payload).
+      // Duplicate rows from the processing race are handled by the queue
+      // processor's same-entity dedup guard.
       final existing = await (select(syncQueue)
             ..where((t) => t.entityId.equals(entityId))
             ..where((t) => t.entityType.equals(entityType.name))
-            ..where((t) => t.status.equals('pending')))
+            ..where((t) => t.status.isIn(['pending', 'failed'])))
           .getSingleOrNull();
 
       if (existing != null) {
@@ -417,11 +427,16 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
           conflict: row.read<int?>('conflict') ?? 0,
         ),);
 
-  /// Check if a specific entity has pending sync
+  /// Check if a specific entity has an unsynced queue item.
+  ///
+  /// Includes 'failed' status because a permanently failed parent MUST block
+  /// its children — otherwise children fire 404s against a server that never
+  /// received the parent. The transitive chain:
+  ///   survey(failed) → blocks section → blocks answer
   Future<bool> hasPendingSync(String entityId) async {
     final result = await (select(syncQueue)
           ..where((t) => t.entityId.equals(entityId))
-          ..where((t) => t.status.isIn(['pending', 'processing', 'conflict'])))
+          ..where((t) => t.status.isIn(['pending', 'processing', 'failed', 'conflict'])))
         .getSingleOrNull();
     return result != null;
   }

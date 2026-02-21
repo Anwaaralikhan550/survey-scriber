@@ -44,6 +44,7 @@ export class SectionsService {
           order: dto.order ?? 0,
           ...(dto.sectionTypeKey ? { sectionTypeKey: dto.sectionTypeKey } : {}),
           ...(dto.phraseOutput !== undefined ? { phraseOutput: dto.phraseOutput } : {}),
+          ...(dto.userNotes !== undefined ? { userNotes: dto.userNotes } : {}),
         },
       });
     } catch (error: any) {
@@ -104,6 +105,7 @@ export class SectionsService {
         title: dto.title,
         order: dto.order,
         ...(dto.phraseOutput !== undefined ? { phraseOutput: dto.phraseOutput } : {}),
+        ...(dto.userNotes !== undefined ? { userNotes: dto.userNotes } : {}),
       },
     });
 
@@ -151,6 +153,7 @@ export class SectionsService {
     title: string;
     order: number;
     phraseOutput?: string | null;
+    userNotes?: string | null;
     createdAt: Date;
     updatedAt: Date;
   }): SectionResponseDto {
@@ -160,6 +163,7 @@ export class SectionsService {
       title: section.title,
       order: section.order,
       phraseOutput: section.phraseOutput ?? null,
+      userNotes: section.userNotes ?? null,
       createdAt: section.createdAt,
       updatedAt: section.updatedAt,
     };

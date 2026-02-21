@@ -37,4 +37,14 @@ export class UpdateSectionDto {
   @IsOptional()
   @IsString()
   phraseOutput?: string;
+
+  @ApiPropertyOptional({
+    example: '{"activity_chimney_stacks":"Surveyor observed hairline cracks."}',
+    description:
+      'JSON-encoded surveyor custom notes per screen. ' +
+      'Keys are screen IDs, values are note strings.',
+  })
+  @IsOptional()
+  @IsString()
+  userNotes?: string;
 }

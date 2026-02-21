@@ -382,6 +382,42 @@ abstract class BaseSurveyRepository {
     return jsonEncode(map);
   }
 
+  // ─── User Notes ──────────────────────────────────────────────────
+
+  /// Persist a surveyor's custom note for a single screen.
+  Future<void> saveUserNote({
+    required String surveyId,
+    required String screenId,
+    required String note,
+  }) async {
+    await (_db.update(_db.inspectionV2Screens)
+          ..where((tbl) => tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
+        .write(
+      InspectionV2ScreensCompanion(
+        userNote: Value(note),
+        updatedAt: Value(DateTime.now()),
+      ),
+    );
+  }
+
+  /// Returns the aggregated user notes for all screens in a section.
+  ///
+  /// Result is a JSON map: `{ screenId: "note text" }`.
+  /// Screens with no notes are omitted.
+  Future<String> getAggregatedUserNotes(
+    String surveyId,
+    String sectionKey,
+  ) async {
+    final screens = await getNodesForSection(surveyId, sectionKey);
+    final map = <String, dynamic>{};
+    for (final screen in screens) {
+      if (screen.userNote != null && screen.userNote!.isNotEmpty) {
+        map[screen.screenId] = screen.userNote;
+      }
+    }
+    return jsonEncode(map);
+  }
+
   // ─── Sync Helpers ────────────────────────────────────────────────
 
   /// Returns the sectionKey for a given screen in a survey.

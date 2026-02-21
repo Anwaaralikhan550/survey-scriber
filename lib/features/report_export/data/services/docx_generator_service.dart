@@ -275,6 +275,11 @@ class DocxGeneratorService {
             _writeBulletParagraph(buf, phrase);
           }
         }
+
+        // Surveyor's custom note
+        if (screen.userNote.isNotEmpty) {
+          _writeSurveyorNote(buf, screen.userNote);
+        }
       }
     }
 
@@ -391,6 +396,19 @@ class DocxGeneratorService {
     buf.write('</w:pPr>');
     buf.write('<w:r><w:t xml:space="preserve">\u2022 ');
     buf.write(_escapeXml(text));
+    buf.write('</w:t></w:r></w:p>');
+  }
+
+  /// Write a surveyor's custom note with bold prefix and italic body.
+  void _writeSurveyorNote(StringBuffer buf, String note) {
+    buf.write('<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="E3F2FD"/></w:pPr>');
+    // Bold prefix
+    buf.write('<w:r><w:rPr><w:b/><w:sz w:val="18"/></w:rPr>');
+    buf.write("<w:t xml:space=\"preserve\">Surveyor's Note: </w:t></w:r>");
+    // Italic body
+    buf.write('<w:r><w:rPr><w:i/><w:sz w:val="18"/></w:rPr>');
+    buf.write('<w:t xml:space="preserve">');
+    buf.write(_escapeXml(note));
     buf.write('</w:t></w:r></w:p>');
   }
 

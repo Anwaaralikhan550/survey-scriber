@@ -388,6 +388,38 @@ class PdfGeneratorService {
                 ));
               }
             }
+
+            // Surveyor's custom note
+            if (screen.userNote.isNotEmpty) {
+              widgets.add(pw.SizedBox(height: 4));
+              widgets.add(pw.Container(
+                width: double.infinity,
+                padding: const pw.EdgeInsets.all(8),
+                decoration: pw.BoxDecoration(
+                  color: PdfColor.fromHex('#E3F2FD'),
+                ),
+                child: pw.RichText(
+                  text: pw.TextSpan(
+                    children: [
+                      pw.TextSpan(
+                        text: "Surveyor's Note: ",
+                        style: pw.TextStyle(
+                          fontSize: 8,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.TextSpan(
+                        text: sanitize(screen.userNote),
+                        style: pw.TextStyle(
+                          fontSize: 8,
+                          fontStyle: pw.FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ));
+            }
             widgets.add(pw.SizedBox(height: 6));
           }
         }

@@ -111,6 +111,8 @@ class InspectionScreenState {
     this.screenDefinition,
     this.screenMeta,
     this.answers = const {},
+    this.userNote = '',
+    this.editedPhraseText,
     this.errorMessage,
   });
 
@@ -119,7 +121,17 @@ class InspectionScreenState {
   final InspectionNodeDefinition? screenDefinition;
   final InspectionV2Screen? screenMeta;
   final Map<String, String> answers;
+  final String userNote;
+
+  /// When non-null, the user has manually edited the live preview text.
+  /// Auto-generated phrases stop updating until the user taps "Regenerate".
+  /// When null, auto-generated phrases are shown and update in real-time.
+  final String? editedPhraseText;
+
   final String? errorMessage;
+
+  /// Whether the preview is showing user-edited text vs auto-generated.
+  bool get hasEditedPhrases => editedPhraseText != null;
 
   InspectionScreenState copyWith({
     bool? isLoading,
@@ -127,6 +139,9 @@ class InspectionScreenState {
     InspectionNodeDefinition? screenDefinition,
     InspectionV2Screen? screenMeta,
     Map<String, String>? answers,
+    String? userNote,
+    String? editedPhraseText,
+    bool clearEditedPhraseText = false,
     String? errorMessage,
   }) {
     return InspectionScreenState(
@@ -135,6 +150,10 @@ class InspectionScreenState {
       screenDefinition: screenDefinition ?? this.screenDefinition,
       screenMeta: screenMeta ?? this.screenMeta,
       answers: answers ?? this.answers,
+      userNote: userNote ?? this.userNote,
+      editedPhraseText: clearEditedPhraseText
+          ? null
+          : (editedPhraseText ?? this.editedPhraseText),
       errorMessage: errorMessage,
     );
   }
@@ -167,11 +186,26 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
 
       _initialAnswers = Map<String, String>.from(answers);
 
+      // If there are previously persisted phrases, load them as the
+      // edited text so the user sees exactly what they saved last time.
+      String? loadedPhraseText;
+      if (meta?.phraseOutput != null && meta!.phraseOutput!.isNotEmpty) {
+        try {
+          final decoded = jsonDecode(meta.phraseOutput!) as List<dynamic>;
+          final phrases = decoded.cast<String>();
+          if (phrases.isNotEmpty) {
+            loadedPhraseText = phrases.join('\n\n');
+          }
+        } catch (_) {}
+      }
+
       state = state.copyWith(
         isLoading: false,
         screenDefinition: screenDefinition,
         screenMeta: meta,
         answers: answers,
+        userNote: meta?.userNote ?? '',
+        editedPhraseText: loadedPhraseText,
       );
 
       // Queue V2 section CREATEs on first survey initialization so the
@@ -193,6 +227,20 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
     state = state.copyWith(answers: updated);
   }
 
+  void setUserNote(String note) {
+    state = state.copyWith(userNote: note);
+  }
+
+  /// Called when the user manually edits the live preview text.
+  void setEditedPhrases(String text) {
+    state = state.copyWith(editedPhraseText: text);
+  }
+
+  /// Reset to auto-generated phrases (clears user edits).
+  void resetPhrases() {
+    state = state.copyWith(clearEditedPhraseText: true);
+  }
+
   Future<bool> saveDraft() async {
     if (state.screenDefinition == null) return false;
     state = state.copyWith(isSaving: true);
@@ -203,6 +251,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
         answers: state.answers,
       );
       await _persistPhraseOutput();
+      await _persistUserNote();
       await _queueAnswersForSync();
       state = state.copyWith(isSaving: false);
       return true;
@@ -222,6 +271,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
         answers: state.answers,
       );
       await _persistPhraseOutput();
+      await _persistUserNote();
       await _queueAnswersForSync();
       await _repo.setScreenCompleted(
         surveyId: _surveyId,
@@ -244,17 +294,30 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
 
   // ─── Phrase Persistence ──────────────────────────────────────────
 
-  /// Generate phrase engine output and persist to local Drift + queue
-  /// a section UPDATE for sync so the backend receives the phrases.
+  /// Persist phrase output — uses user-edited text when available,
+  /// otherwise auto-generates from the phrase engine.
   Future<void> _persistPhraseOutput() async {
     if (state.screenDefinition == null) return;
     try {
-      final phraseEngine = _ref.read(inspectionPhraseEngineProvider);
-      final enginePhrases =
-          phraseEngine?.buildPhrases(_screenId, state.answers) ?? const <String>[];
-      final fieldPhrases =
-          FieldPhraseProcessor.buildFieldPhrases(state.screenDefinition!.fields, state.answers);
-      final phrases = [...enginePhrases, ...fieldPhrases];
+      final List<String> phrases;
+      if (state.editedPhraseText != null) {
+        // User has manually edited the preview — persist their text.
+        // Split by double-newline (paragraph breaks) to keep the
+        // List<String> format that the export pipeline expects.
+        phrases = state.editedPhraseText!
+            .split('\n\n')
+            .map((p) => p.trim())
+            .where((p) => p.isNotEmpty)
+            .toList();
+      } else {
+        // Auto-generate from phrase engine (original behaviour).
+        final phraseEngine = _ref.read(inspectionPhraseEngineProvider);
+        final enginePhrases =
+            phraseEngine?.buildPhrases(_screenId, state.answers) ?? const <String>[];
+        final fieldPhrases =
+            FieldPhraseProcessor.buildFieldPhrases(state.screenDefinition!.fields, state.answers);
+        phrases = [...enginePhrases, ...fieldPhrases];
+      }
 
       final phraseJson = jsonEncode(phrases);
       await _repo.savePhraseOutput(
@@ -292,6 +355,47 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       );
     } catch (e) {
       debugPrint('[InspectionSync] Failed to queue phrase output: $e');
+    }
+  }
+
+  // ─── User Note Persistence ──────────────────────────────────────
+
+  /// Persist the surveyor's custom note for this screen and queue for sync.
+  Future<void> _persistUserNote() async {
+    try {
+      await _repo.saveUserNote(
+        surveyId: _surveyId,
+        screenId: _screenId,
+        note: state.userNote.trim(),
+      );
+      await _queueUserNoteForSync();
+    } catch (e) {
+      // Non-fatal: note persistence should not block screen save.
+      debugPrint('[InspectionSync] Failed to persist user note: $e');
+    }
+  }
+
+  /// Queue a section UPDATE with aggregated userNotes from all
+  /// screens in this screen's section.
+  Future<void> _queueUserNoteForSync() async {
+    try {
+      final syncManager = _ref.read(syncManagerProvider);
+      final sectionKey = await _repo.getSectionKeyForScreen(_surveyId, _screenId);
+      if (sectionKey == null) return;
+
+      final sectionId = V2SyncHelper.sectionSyncId(_surveyId, sectionKey);
+      final aggregatedJson = await _repo.getAggregatedUserNotes(_surveyId, sectionKey);
+
+      await syncManager.queueSync(
+        entityType: SyncEntityType.section,
+        entityId: sectionId,
+        action: SyncAction.update,
+        payload: {
+          'userNotes': aggregatedJson,
+        },
+      );
+    } catch (e) {
+      debugPrint('[InspectionSync] Failed to queue user notes: $e');
     }
   }
 

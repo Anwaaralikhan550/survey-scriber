@@ -44,7 +44,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 18;
+  int get schemaVersion => 19;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -138,6 +138,10 @@ class AppDatabase extends _$AppDatabase {
           if (from < 18) {
             await _addColumnIfNotExists(m, 'inspection_v2_screens', 'phrase_output', 'TEXT');
           }
+          // v19: Surveyor user notes per screen (editable live preview)
+          if (from < 19) {
+            await _addColumnIfNotExists(m, 'inspection_v2_screens', 'user_note', 'TEXT');
+          }
         },
         beforeOpen: (details) async {
           // Safety check: ensure required columns exist even if schema version is current
@@ -197,6 +201,9 @@ class AppDatabase extends _$AppDatabase {
     }
     if (!inspectionScreensColumns.contains('phrase_output')) {
       await customStatement('ALTER TABLE inspection_v2_screens ADD COLUMN phrase_output TEXT');
+    }
+    if (!inspectionScreensColumns.contains('user_note')) {
+      await customStatement('ALTER TABLE inspection_v2_screens ADD COLUMN user_note TEXT');
     }
 
     // Check survey_recommendations table columns (v17)

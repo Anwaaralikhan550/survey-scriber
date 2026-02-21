@@ -109,8 +109,12 @@ class ReportBuilder {
         }
       }
 
+      final userNote = rawData.persistedUserNotes[node.id] ?? '';
+
       // Skip screens with no data unless config says otherwise
-      final hasData = fields.any((f) => f.displayValue.isNotEmpty) || phrases.isNotEmpty;
+      final hasData = fields.any((f) => f.displayValue.isNotEmpty) ||
+          phrases.isNotEmpty ||
+          userNote.isNotEmpty;
       if (!hasData && !config.includeEmptyScreens) continue;
 
       screens.add(ReportScreen(
@@ -118,6 +122,7 @@ class ReportBuilder {
         title: node.title,
         fields: fields,
         phrases: phrases,
+        userNote: userNote,
         parentId: node.parentId,
         isCompleted: isCompleted,
       ));

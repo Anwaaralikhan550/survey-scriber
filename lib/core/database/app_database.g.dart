@@ -1896,6 +1896,12 @@ class $InspectionV2ScreensTable extends InspectionV2Screens
   late final GeneratedColumn<String> phraseOutput = GeneratedColumn<String>(
       'phrase_output', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _userNoteMeta =
+      const VerificationMeta('userNote');
+  @override
+  late final GeneratedColumn<String> userNote = GeneratedColumn<String>(
+      'user_note', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _createdAtMeta =
       const VerificationMeta('createdAt');
   @override
@@ -1921,6 +1927,7 @@ class $InspectionV2ScreensTable extends InspectionV2Screens
         displayOrder,
         isCompleted,
         phraseOutput,
+        userNote,
         createdAt,
         updatedAt
       ];
@@ -1997,6 +2004,10 @@ class $InspectionV2ScreensTable extends InspectionV2Screens
           phraseOutput.isAcceptableOrUnknown(
               data['phrase_output']!, _phraseOutputMeta));
     }
+    if (data.containsKey('user_note')) {
+      context.handle(_userNoteMeta,
+          userNote.isAcceptableOrUnknown(data['user_note']!, _userNoteMeta));
+    }
     if (data.containsKey('created_at')) {
       context.handle(_createdAtMeta,
           createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
@@ -2038,6 +2049,8 @@ class $InspectionV2ScreensTable extends InspectionV2Screens
           .read(DriftSqlType.bool, data['${effectivePrefix}is_completed'])!,
       phraseOutput: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}phrase_output']),
+      userNote: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}user_note']),
       createdAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
       updatedAt: attachedDatabase.typeMapping
@@ -2064,6 +2077,7 @@ class InspectionV2Screen extends DataClass
   final int displayOrder;
   final bool isCompleted;
   final String? phraseOutput;
+  final String? userNote;
   final DateTime createdAt;
   final DateTime? updatedAt;
   const InspectionV2Screen(
@@ -2078,6 +2092,7 @@ class InspectionV2Screen extends DataClass
       required this.displayOrder,
       required this.isCompleted,
       this.phraseOutput,
+      this.userNote,
       required this.createdAt,
       this.updatedAt});
   @override
@@ -2099,6 +2114,9 @@ class InspectionV2Screen extends DataClass
     map['is_completed'] = Variable<bool>(isCompleted);
     if (!nullToAbsent || phraseOutput != null) {
       map['phrase_output'] = Variable<String>(phraseOutput);
+    }
+    if (!nullToAbsent || userNote != null) {
+      map['user_note'] = Variable<String>(userNote);
     }
     map['created_at'] = Variable<DateTime>(createdAt);
     if (!nullToAbsent || updatedAt != null) {
@@ -2126,6 +2144,9 @@ class InspectionV2Screen extends DataClass
       phraseOutput: phraseOutput == null && nullToAbsent
           ? const Value.absent()
           : Value(phraseOutput),
+      userNote: userNote == null && nullToAbsent
+          ? const Value.absent()
+          : Value(userNote),
       createdAt: Value(createdAt),
       updatedAt: updatedAt == null && nullToAbsent
           ? const Value.absent()
@@ -2148,6 +2169,7 @@ class InspectionV2Screen extends DataClass
       displayOrder: serializer.fromJson<int>(json['displayOrder']),
       isCompleted: serializer.fromJson<bool>(json['isCompleted']),
       phraseOutput: serializer.fromJson<String?>(json['phraseOutput']),
+      userNote: serializer.fromJson<String?>(json['userNote']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime?>(json['updatedAt']),
     );
@@ -2167,6 +2189,7 @@ class InspectionV2Screen extends DataClass
       'displayOrder': serializer.toJson<int>(displayOrder),
       'isCompleted': serializer.toJson<bool>(isCompleted),
       'phraseOutput': serializer.toJson<String?>(phraseOutput),
+      'userNote': serializer.toJson<String?>(userNote),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime?>(updatedAt),
     };
@@ -2184,6 +2207,7 @@ class InspectionV2Screen extends DataClass
           int? displayOrder,
           bool? isCompleted,
           Value<String?> phraseOutput = const Value.absent(),
+          Value<String?> userNote = const Value.absent(),
           DateTime? createdAt,
           Value<DateTime?> updatedAt = const Value.absent()}) =>
       InspectionV2Screen(
@@ -2199,6 +2223,7 @@ class InspectionV2Screen extends DataClass
         isCompleted: isCompleted ?? this.isCompleted,
         phraseOutput:
             phraseOutput.present ? phraseOutput.value : this.phraseOutput,
+        userNote: userNote.present ? userNote.value : this.userNote,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt.present ? updatedAt.value : this.updatedAt,
       );
@@ -2221,6 +2246,7 @@ class InspectionV2Screen extends DataClass
       phraseOutput: data.phraseOutput.present
           ? data.phraseOutput.value
           : this.phraseOutput,
+      userNote: data.userNote.present ? data.userNote.value : this.userNote,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
     );
@@ -2240,6 +2266,7 @@ class InspectionV2Screen extends DataClass
           ..write('displayOrder: $displayOrder, ')
           ..write('isCompleted: $isCompleted, ')
           ..write('phraseOutput: $phraseOutput, ')
+          ..write('userNote: $userNote, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt')
           ..write(')'))
@@ -2259,6 +2286,7 @@ class InspectionV2Screen extends DataClass
       displayOrder,
       isCompleted,
       phraseOutput,
+      userNote,
       createdAt,
       updatedAt);
   @override
@@ -2276,6 +2304,7 @@ class InspectionV2Screen extends DataClass
           other.displayOrder == this.displayOrder &&
           other.isCompleted == this.isCompleted &&
           other.phraseOutput == this.phraseOutput &&
+          other.userNote == this.userNote &&
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt);
 }
@@ -2292,6 +2321,7 @@ class InspectionV2ScreensCompanion extends UpdateCompanion<InspectionV2Screen> {
   final Value<int> displayOrder;
   final Value<bool> isCompleted;
   final Value<String?> phraseOutput;
+  final Value<String?> userNote;
   final Value<DateTime> createdAt;
   final Value<DateTime?> updatedAt;
   final Value<int> rowid;
@@ -2307,6 +2337,7 @@ class InspectionV2ScreensCompanion extends UpdateCompanion<InspectionV2Screen> {
     this.displayOrder = const Value.absent(),
     this.isCompleted = const Value.absent(),
     this.phraseOutput = const Value.absent(),
+    this.userNote = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -2323,6 +2354,7 @@ class InspectionV2ScreensCompanion extends UpdateCompanion<InspectionV2Screen> {
     required int displayOrder,
     this.isCompleted = const Value.absent(),
     this.phraseOutput = const Value.absent(),
+    this.userNote = const Value.absent(),
     required DateTime createdAt,
     this.updatedAt = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -2345,6 +2377,7 @@ class InspectionV2ScreensCompanion extends UpdateCompanion<InspectionV2Screen> {
     Expression<int>? displayOrder,
     Expression<bool>? isCompleted,
     Expression<String>? phraseOutput,
+    Expression<String>? userNote,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
     Expression<int>? rowid,
@@ -2361,6 +2394,7 @@ class InspectionV2ScreensCompanion extends UpdateCompanion<InspectionV2Screen> {
       if (displayOrder != null) 'display_order': displayOrder,
       if (isCompleted != null) 'is_completed': isCompleted,
       if (phraseOutput != null) 'phrase_output': phraseOutput,
+      if (userNote != null) 'user_note': userNote,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
       if (rowid != null) 'rowid': rowid,
@@ -2379,6 +2413,7 @@ class InspectionV2ScreensCompanion extends UpdateCompanion<InspectionV2Screen> {
       Value<int>? displayOrder,
       Value<bool>? isCompleted,
       Value<String?>? phraseOutput,
+      Value<String?>? userNote,
       Value<DateTime>? createdAt,
       Value<DateTime?>? updatedAt,
       Value<int>? rowid}) {
@@ -2394,6 +2429,7 @@ class InspectionV2ScreensCompanion extends UpdateCompanion<InspectionV2Screen> {
       displayOrder: displayOrder ?? this.displayOrder,
       isCompleted: isCompleted ?? this.isCompleted,
       phraseOutput: phraseOutput ?? this.phraseOutput,
+      userNote: userNote ?? this.userNote,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       rowid: rowid ?? this.rowid,
@@ -2436,6 +2472,9 @@ class InspectionV2ScreensCompanion extends UpdateCompanion<InspectionV2Screen> {
     if (phraseOutput.present) {
       map['phrase_output'] = Variable<String>(phraseOutput.value);
     }
+    if (userNote.present) {
+      map['user_note'] = Variable<String>(userNote.value);
+    }
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
     }
@@ -2462,6 +2501,7 @@ class InspectionV2ScreensCompanion extends UpdateCompanion<InspectionV2Screen> {
           ..write('displayOrder: $displayOrder, ')
           ..write('isCompleted: $isCompleted, ')
           ..write('phraseOutput: $phraseOutput, ')
+          ..write('userNote: $userNote, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('rowid: $rowid')
@@ -8198,6 +8238,7 @@ typedef $$InspectionV2ScreensTableCreateCompanionBuilder
   required int displayOrder,
   Value<bool> isCompleted,
   Value<String?> phraseOutput,
+  Value<String?> userNote,
   required DateTime createdAt,
   Value<DateTime?> updatedAt,
   Value<int> rowid,
@@ -8215,6 +8256,7 @@ typedef $$InspectionV2ScreensTableUpdateCompanionBuilder
   Value<int> displayOrder,
   Value<bool> isCompleted,
   Value<String?> phraseOutput,
+  Value<String?> userNote,
   Value<DateTime> createdAt,
   Value<DateTime?> updatedAt,
   Value<int> rowid,
@@ -8261,6 +8303,9 @@ class $$InspectionV2ScreensTableFilterComposer
 
   ColumnFilters<String> get phraseOutput => $composableBuilder(
       column: $table.phraseOutput, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get userNote => $composableBuilder(
+      column: $table.userNote, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<DateTime> get createdAt => $composableBuilder(
       column: $table.createdAt, builder: (column) => ColumnFilters(column));
@@ -8313,6 +8358,9 @@ class $$InspectionV2ScreensTableOrderingComposer
       column: $table.phraseOutput,
       builder: (column) => ColumnOrderings(column));
 
+  ColumnOrderings<String> get userNote => $composableBuilder(
+      column: $table.userNote, builder: (column) => ColumnOrderings(column));
+
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
       column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
@@ -8362,6 +8410,9 @@ class $$InspectionV2ScreensTableAnnotationComposer
   GeneratedColumn<String> get phraseOutput => $composableBuilder(
       column: $table.phraseOutput, builder: (column) => column);
 
+  GeneratedColumn<String> get userNote =>
+      $composableBuilder(column: $table.userNote, builder: (column) => column);
+
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
 
@@ -8410,6 +8461,7 @@ class $$InspectionV2ScreensTableTableManager extends RootTableManager<
             Value<int> displayOrder = const Value.absent(),
             Value<bool> isCompleted = const Value.absent(),
             Value<String?> phraseOutput = const Value.absent(),
+            Value<String?> userNote = const Value.absent(),
             Value<DateTime> createdAt = const Value.absent(),
             Value<DateTime?> updatedAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -8426,6 +8478,7 @@ class $$InspectionV2ScreensTableTableManager extends RootTableManager<
             displayOrder: displayOrder,
             isCompleted: isCompleted,
             phraseOutput: phraseOutput,
+            userNote: userNote,
             createdAt: createdAt,
             updatedAt: updatedAt,
             rowid: rowid,
@@ -8442,6 +8495,7 @@ class $$InspectionV2ScreensTableTableManager extends RootTableManager<
             required int displayOrder,
             Value<bool> isCompleted = const Value.absent(),
             Value<String?> phraseOutput = const Value.absent(),
+            Value<String?> userNote = const Value.absent(),
             required DateTime createdAt,
             Value<DateTime?> updatedAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -8458,6 +8512,7 @@ class $$InspectionV2ScreensTableTableManager extends RootTableManager<
             displayOrder: displayOrder,
             isCompleted: isCompleted,
             phraseOutput: phraseOutput,
+            userNote: userNote,
             createdAt: createdAt,
             updatedAt: updatedAt,
             rowid: rowid,

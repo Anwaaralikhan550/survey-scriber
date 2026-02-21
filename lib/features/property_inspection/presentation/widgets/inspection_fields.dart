@@ -496,14 +496,71 @@ class _DropdownOption extends StatelessWidget {
   }
 }
 
-class InspectionPhrasePreview extends StatelessWidget {
-  const InspectionPhrasePreview({required this.phrases, super.key});
+class InspectionPhrasePreview extends StatefulWidget {
+  const InspectionPhrasePreview({
+    required this.phraseText,
+    required this.isEdited,
+    this.userNote = '',
+    this.onPhraseTextChanged,
+    this.onRegenerate,
+    this.onUserNoteChanged,
+    super.key,
+  });
 
-  final List<String> phrases;
+  /// The text to display — either auto-generated phrases joined by \n\n
+  /// or the user's manually edited text.
+  final String phraseText;
+
+  /// Whether [phraseText] is the user's own edited version.
+  final bool isEdited;
+
+  final String userNote;
+  final ValueChanged<String>? onPhraseTextChanged;
+  final VoidCallback? onRegenerate;
+  final ValueChanged<String>? onUserNoteChanged;
+
+  @override
+  State<InspectionPhrasePreview> createState() => _InspectionPhrasePreviewState();
+}
+
+class _InspectionPhrasePreviewState extends State<InspectionPhrasePreview> {
+  bool _isEditingPhrases = false;
+  bool _isEditingNote = false;
+  late final TextEditingController _phraseController;
+  late final TextEditingController _noteController;
+
+  @override
+  void initState() {
+    super.initState();
+    _phraseController = TextEditingController(text: widget.phraseText);
+    _noteController = TextEditingController(text: widget.userNote);
+  }
+
+  @override
+  void didUpdateWidget(InspectionPhrasePreview oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Sync phrase controller when auto-generated text changes
+    // (only if user is not currently editing).
+    if (oldWidget.phraseText != widget.phraseText && !_isEditingPhrases) {
+      _phraseController.text = widget.phraseText;
+    }
+    // Sync note controller
+    if (oldWidget.userNote != widget.userNote && !_isEditingNote) {
+      _noteController.text = widget.userNote;
+    }
+  }
+
+  @override
+  void dispose() {
+    _phraseController.dispose();
+    _noteController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final hasNote = widget.userNote.trim().isNotEmpty;
 
     return Container(
       width: double.infinity,
@@ -518,6 +575,7 @@ class InspectionPhrasePreview extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // ── Header row with action buttons ──
           Row(
             children: [
               Icon(
@@ -526,24 +584,204 @@ class InspectionPhrasePreview extends StatelessWidget {
                 color: theme.colorScheme.primary,
               ),
               const SizedBox(width: 8),
-              Text(
-                'Live Preview',
-                style: theme.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w700,
+              Expanded(
+                child: Text(
+                  'Live Preview',
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
+              if (_isEditingPhrases)
+                // "Done" button when editing
+                InkWell(
+                  onTap: () => setState(() => _isEditingPhrases = false),
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Icon(
+                      Icons.check_rounded,
+                      size: 18,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                )
+              else ...[
+                // Edit button
+                InkWell(
+                  onTap: () => setState(() => _isEditingPhrases = true),
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Icon(
+                      Icons.edit_rounded,
+                      size: 16,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                ),
+                // Regenerate button (only when user has edited)
+                if (widget.isEdited) ...[
+                  const SizedBox(width: 4),
+                  InkWell(
+                    onTap: () {
+                      widget.onRegenerate?.call();
+                      setState(() => _isEditingPhrases = false);
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Icon(
+                        Icons.refresh_rounded,
+                        size: 16,
+                        color: theme.colorScheme.tertiary,
+                      ),
+                    ),
+                  ),
+                ],
+              ],
             ],
           ),
           const SizedBox(height: 8),
-          for (final phrase in phrases) ...[
+
+          // ── Phrase text area ──
+          if (_isEditingPhrases)
+            TextField(
+              controller: _phraseController,
+              maxLines: null,
+              minLines: 3,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+                height: 1.4,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Edit preview text...',
+                hintStyle: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant.withOpacity(0.5),
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide:
+                      BorderSide(color: theme.colorScheme.outlineVariant),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide:
+                      BorderSide(color: theme.colorScheme.outlineVariant),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: theme.colorScheme.primary),
+                ),
+              ),
+              onChanged: widget.onPhraseTextChanged,
+            )
+          else
+            // Read-only display
             Text(
-              phrase,
+              widget.phraseText,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
                 height: 1.4,
               ),
             ),
-            const SizedBox(height: 8),
+
+          // ── Divider + User note section ──
+          if (widget.phraseText.isNotEmpty && (hasNote || _isEditingNote))
+            Divider(
+              height: 16,
+              color: theme.colorScheme.outlineVariant.withOpacity(0.3),
+            ),
+
+          if (_isEditingNote) ...[
+            TextField(
+              controller: _noteController,
+              maxLines: 3,
+              minLines: 2,
+              style: theme.textTheme.bodySmall?.copyWith(height: 1.4),
+              decoration: InputDecoration(
+                hintText: 'Add your observation...',
+                hintStyle: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant.withOpacity(0.5),
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide:
+                      BorderSide(color: theme.colorScheme.outlineVariant),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide:
+                      BorderSide(color: theme.colorScheme.outlineVariant),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: theme.colorScheme.primary),
+                ),
+              ),
+              onChanged: widget.onUserNoteChanged,
+            ),
+            const SizedBox(height: 6),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton.icon(
+                onPressed: () => setState(() => _isEditingNote = false),
+                icon: const Icon(Icons.check_rounded, size: 16),
+                label: const Text('Done'),
+                style: TextButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  textStyle: theme.textTheme.labelSmall,
+                ),
+              ),
+            ),
+          ] else if (hasNote) ...[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.edit_note_rounded,
+                    size: 16, color: theme.colorScheme.tertiary),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    widget.userNote,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurface,
+                      fontStyle: FontStyle.italic,
+                      height: 1.4,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () => setState(() => _isEditingNote = true),
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Icon(Icons.edit_rounded,
+                        size: 16, color: theme.colorScheme.primary),
+                  ),
+                ),
+              ],
+            ),
+          ] else ...[
+            TextButton.icon(
+              onPressed: () => setState(() => _isEditingNote = true),
+              icon: Icon(Icons.edit_note_rounded,
+                  size: 18, color: theme.colorScheme.primary),
+              label: Text(
+                'Add Note',
+                style: theme.textTheme.labelMedium
+                    ?.copyWith(color: theme.colorScheme.primary),
+              ),
+              style: TextButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              ),
+            ),
           ],
         ],
       ),
