@@ -31,7 +31,7 @@ abstract final class AppConstants {
   // For local development, override via: --dart-define=API_BASE_URL=http://10.0.2.2:3000/api/v1
   static const String _rawBaseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://192.95.33.150:3000/api/v1',
+    defaultValue: 'http://158.69.1.183:3000/api/v1',
   );
   // Ensure base URL always ends with a slash for proper path joining
   static String get baseUrl => _rawBaseUrl.endsWith('/') ? _rawBaseUrl : '$_rawBaseUrl/';

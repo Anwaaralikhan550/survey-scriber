@@ -1181,10 +1181,14 @@ class SyncManager {
 
             final section = await sectionsDao.getSectionById(entityId);
             if (section == null) {
-              AppLogger.e('SyncManager',
-                'Cannot upsert section $entityId: not found in local DB either.',
+              // Stale queue item: section was removed locally, and server also
+              // doesn't have it. Drop this update item as a no-op so sync
+              // doesn't get stuck forever on an orphaned operation.
+              AppLogger.w('SyncManager',
+                'Dropping stale section update $entityId: '
+                'missing in local DB and server (404).',
               );
-              return false;
+              return true;
             }
 
             final resolvedSurveyId = surveyId ?? section.surveyId;
@@ -1295,10 +1299,14 @@ class SyncManager {
 
             final answer = await answersDao.getAnswerById(entityId);
             if (answer == null) {
-              AppLogger.e('SyncManager',
-                'Cannot upsert answer $entityId: not found in local DB either.',
+              // Stale queue item: answer was removed locally, and server also
+              // doesn't have it. Drop this update item as a no-op so sync
+              // doesn't get stuck forever on an orphaned operation.
+              AppLogger.w('SyncManager',
+                'Dropping stale answer update $entityId: '
+                'missing in local DB and server (404).',
               );
-              return false;
+              return true;
             }
 
             final resolvedSectionId = sectionId ?? answer.sectionId;
