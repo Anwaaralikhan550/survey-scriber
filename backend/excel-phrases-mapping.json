@@ -1,0 +1,1727 @@
+{
+  "Sheet1": {
+    "Form Sections": [
+      "Form Fields"
+    ],
+    "Form Fields": [
+      "Inspection Details",
+      "Party Disclosures"
+    ],
+    "Comment": [
+      "Field Options"
+    ],
+    "Manda": [
+      "Field Options",
+      "Field Texts (Phrases)"
+    ],
+    "Muilt": [
+      "Field Options",
+      "Field Texts (Phrases)"
+    ],
+    "Field Options": [
+      "Report Reference",
+      "Field Texts (Phrases)"
+    ],
+    "Field Texts (Phrases)": [
+      "I do not know of any conflict of interest issue in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct.",
+      "I suspect that a conflict of interest issue may exist in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct. I am known to the property owner or have an interest in the property."
+    ],
+    "Inspection Details": [
+      "Party Disclosures"
+    ],
+    "Report Reference": [],
+    "Enter text": [
+      "I do not know of any conflict of interest issue in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct.",
+      "I suspect that a conflict of interest issue may exist in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct. I am known to the property owner or have an interest in the property.",
+      "County - Post Code"
+    ],
+    "Party Disclosures": [],
+    "None": [
+      "Now / Before",
+      "I do not know of any conflict of interest issue in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct.",
+      "Solar Electricity",
+      "Solar Hot Water",
+      "Front Garden",
+      "Based on the available evidence, it appears that there are no other services or energy sources connected to the property at the time of my inspection.",
+      "Penetrating                   Location                Cause",
+      "Rising                   Location                Cause",
+      "Install French gutters",
+      "Unknown cause",
+      "Where accessible, moisture readings were taken with an electronic moisture meter at random points to internal faces of external walls, and no signs of dampness were observed. No repair is currently needed. The property must be maintained in the normal way.",
+      "All Elevations",
+      "Although I did not observe any evidence of structural movements; I cannot be categorical regarding this given that all buildings are susceptible to movements e.g. settlement movement. It is possible that there are movement cracks in covered and decorated parts of the property.",
+      "Location, construction",
+      "There is no conservatory or porch on the property.",
+      "Not inspected",
+      "No ventilation has been provided in the roof space. The roof space must be ventilated to the outside air to prevent dampness. When installing insulation, the ventilation must not be obstructed.",
+      "No apparent evidence of any severe or active beetle infestation or related wood boring insects was observed. Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation. I also observed no examples of dry rot to the roof timbers. However, ventilation to the roof space should be maintained to prevent conditions favourable to rot."
+    ],
+    "Conflict": [
+      "Now / Before",
+      "Occupancy           Furnishing             Floor Covering",
+      "I suspect that a conflict of interest issue may exist in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct. I am known to the property owner or have an interest in the property."
+    ],
+    "Address": [
+      "Property Status",
+      "Property Facing",
+      "County - Post Code",
+      "When I inspected the property, the weather was (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain)  following a period of (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain) weather.",
+      "When I inspected the property, it was (occupied/unoccupied) and (fully furnished/partly furnished). The floors were (fully /partially) covered with a mixture of fixed and fitted covering.\r\n\r\nThe front of the property is approximately facing (N/S/E/W/NE/NW/SE/SW). All directions given in this report supposes that the reader is standing in front of the building looking towards the rear of the property.",
+      "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear."
+    ],
+    "Town": [
+      "County - Post Code",
+      "When I inspected the property, the weather was (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain)  following a period of (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain) weather.",
+      "When I inspected the property, it was (occupied/unoccupied) and (fully furnished/partly furnished). The floors were (fully /partially) covered with a mixture of fixed and fitted covering.\r\n\r\nThe front of the property is approximately facing (N/S/E/W/NE/NW/SE/SW). All directions given in this report supposes that the reader is standing in front of the building looking towards the rear of the property.",
+      "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+      "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of £545,000.00 [(Five Hundred and Forty Five) Thousand Pounds Only]. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions."
+    ],
+    "County - Post Code": [
+      "When I inspected the property, the weather was (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain)  following a period of (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain) weather.",
+      "When I inspected the property, it was (occupied/unoccupied) and (fully furnished/partly furnished). The floors were (fully /partially) covered with a mixture of fixed and fitted covering.\r\n\r\nThe front of the property is approximately facing (N/S/E/W/NE/NW/SE/SW). All directions given in this report supposes that the reader is standing in front of the building looking towards the rear of the property.",
+      "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+      "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of £545,000.00 [(Five Hundred and Forty Five) Thousand Pounds Only]. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions.",
+      "This property is believed to be a reasonable proposition for purchase, given that you are prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported. These defects are considered normal in properties of this age and construction. Provided that the works are carried out to a good standard, I cannot foresee any problems regarding a future resale of the property in normal market conditions."
+    ],
+    "Weather": [
+      "Property Status",
+      "Property Facing",
+      "Overall Opinion",
+      "Property Type"
+    ],
+    "Now / Before": [
+      "Occupancy           Furnishing             Floor Covering",
+      "Orientation",
+      "Reasonable with Repair",
+      "When I inspected the property, the weather was (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain)  following a period of (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain) weather."
+    ],
+    "Property Status": [
+      "Property Facing",
+      "Overall Opinion",
+      "Property Type"
+    ],
+    "Property Facing": [
+      "Overall Opinion",
+      "Property Type"
+    ],
+    "Orientation": [
+      "Reasonable with Repair",
+      "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear."
+    ],
+    "Overall Opinion": [
+      "Property Type",
+      "Auto-enter type number in word"
+    ],
+    "Auto-enter type number in word": [
+      "Tick and Type in Year. Display e.g. next to tick box."
+    ],
+    "Reasonable": [
+      "Reasonable with Repair",
+      "Vendor Told Me",
+      "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of £545,000.00 [(Five Hundred and Forty Five) Thousand Pounds Only]. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions."
+    ],
+    "Reasonable with Repair": [
+      "Vendor Told Me",
+      "Not extended",
+      "This property is believed to be a reasonable proposition for purchase, given that you are prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported. These defects are considered normal in properties of this age and construction. Provided that the works are carried out to a good standard, I cannot foresee any problems regarding a future resale of the property in normal market conditions."
+    ],
+    "Property Type": [
+      "Year extended"
+    ],
+    "House": [
+      "Vendor Told Me",
+      "Not extended",
+      "The property is a (detached/semi-detached/mid-terrace/end-terrace/other) (house/bungalow) with (one/two/three/four/other) bedrooms."
+    ],
+    "Flat": [
+      "Vendor Told Me",
+      "Not extended",
+      "The property is a (purpose built/conversion/other) flat with (one/two/three/four/other) bedroom. The property is on the (lower ground/ground/first/second/third/fourth/other) floor(s) of a (one/two/three/four/other) storey building with (Two/Four/Six/Eight/other) flats."
+    ],
+    "Year Built": [
+      "Year extended",
+      "Year converted",
+      "Tick and Type in Year. Display e.g. next to tick box."
+    ],
+    "I Think": [
+      "Vendor Told Me",
+      "Not extended",
+      "Based on my knowledge of the area, housing styles, searches and enquiries, I think the property was built (in) e.g. 1945/ (in the) e.g. in the 1944s."
+    ],
+    "Vendor Told Me": [
+      "Not extended",
+      "The vendor informed me during my inspection that the property was built in (Type year)."
+    ],
+    "Year extended": [
+      "Year converted"
+    ],
+    "Not extended": [
+      "Not extended",
+      "Based on the available evidence, I believe that the property has not been extended.",
+      "Based on the available evidence, I believe that the property has not been converted."
+    ],
+    "Known": [
+      "Not extended",
+      "The date of the (front/side/rear) extension is (Type date). Your legal adviser should confirm that all statutory local authority consents and approvals are in place.",
+      "External Walls",
+      "The property was a  (detached/semi-detached/mid-terrace/end-terrace/other) (house/bungalow) which has been converted to self-contained units. The date of conversion is (Type date). Your legal adviser should confirm that all statutory local authority consents and approvals are in place."
+    ],
+    "Unknown": [
+      "Not extended",
+      "The date of the (front/side/rear) extension is not known. Your legal adviser should confirm that all statutory local authority consents and approvals are in place.",
+      "External Walls",
+      "The property was a  (detached/semi-detached/mid-terrace/end-terrace/other) (house/bungalow) which has been converted to self-contained units. The date of conversion is not known. Your legal adviser should confirm that all statutory local authority consents and approvals are in place."
+    ],
+    "Year converted": [
+      "Flat Information",
+      "Construction"
+    ],
+    "Flat Information": [
+      "Construction"
+    ],
+    "Construction": [
+      "No underlining",
+      "The roof structure is (built of traditional cut timber/ made up of factory made trusses/made of steel/other) construction."
+    ],
+    "Type": [
+      "External Walls",
+      "Internal Walls",
+      "The property is believed to be built using  (traditional materials and techniques and/a solid wall/a cavity wall/a timber frame/a steel frame/a concrete frame/other) construction.",
+      "Where visible at ground level, the rainwater goods are made up (mainly of/of a mixture of) (plastic/cast iron/asbestos cement/concrete/metal/other) gutters and downpipes."
+    ],
+    "Roof": [
+      "External Walls",
+      "Internal Walls",
+      "The (flat/pitched) roof structure over the main building is built of (factory made trusses/traditional cut timber construction/other) and are covered in (concrete/clay/natural/composite/mineral felt/rubber/fiberglass/single ply membrane/other) (tiles/sheets).",
+      "The roof over the (conservatory/porch) is (pitched/flat) and covered in (PVC double glazed sections/polycarbonate sheets/concrete tiles/clay tiles/mineral felt/lead/others).",
+      "The (pitched/flat) roof over the (carport/porch canopy/external stairs/other)  is covered in (tile/felt/lead/other).",
+      "Steps/landing",
+      "Decorations",
+      "The roof cover over the carport canopy (has missing tiles/has slipped tiles/ is in disrepair/ is leaking/ is dilapidated/has damaged flashing/is poorly secured). This should be repaired soon."
+    ],
+    "External Walls": [
+      "Internal Walls",
+      "The main external walls are built of ( cavity wall/cavity brick wall/solid wall/solid bounded brick wall/stud wall/other) construction."
+    ],
+    "Finishes": [
+      "Internal Walls",
+      "Externally, the main walls are (fully/partially) rendered (smooth/roughcast)  with (painted/pebble dash/mock Tudor/other)  finishes.",
+      "The outer faces of the external walls are (fully/partially) rendered (smooth/roughcast)  with (painted/pebble dash/mock Tudor/other)  finishes."
+    ],
+    "Cladding": [
+      "Internal Walls",
+      "If timber or steel frame is selected as TYPE of construction, add text.",
+      "The main walls are (fully/partially) cladded with (clay tiles/timber/weathered board/profile sheets/shingle plates/compressed flat panel/insulated cladding/other)  finishing."
+    ],
+    "Internal Walls": [
+      "If timber or steel frame is selected as TYPE of construction, add text.",
+      "The internal walls are built of (stud/solid/lath and plaster/other) partition."
+    ],
+    "Floors": [
+      "If timber or steel frame is selected as TYPE of construction, add text.",
+      "The floors of the property are built (mainly of/of a mixture of) ( suspended timber/solid/suspended bean and block/suspended concrete/in situ-concrete/other) construction.",
+      "The floors are (decked/covered in tiles/other)."
+    ],
+    "Windows": [
+      "If timber or steel frame is selected as TYPE of construction, add text.",
+      "Environmental Impact",
+      "The windows are (mainly of/ a mixture of)  (single/double/secondary/other) glazed (PVC/timber/aluminium/steel/other) units.",
+      "Safety Glass Rating",
+      "No SG Rating",
+      "If double glazed is selected",
+      "Also, the (conservatory/porch) incorporates (single/double)  glazed (PVC/timber/other) windows(s)."
+    ],
+    "Listed Building": [
+      "Other Services"
+    ],
+    "Energy": [
+      "Other Services"
+    ],
+    "Efficiency": [
+      "Environmental Impact",
+      "Solar Electricity",
+      "Solar Hot Water",
+      "Current: (Type text)               Potential:  (Type text)."
+    ],
+    "Environmental Impact": [
+      "Solar Electricity",
+      "Solar Hot Water",
+      "Current: (Type text)               Potential:  (Type text)."
+    ],
+    "Other Services": [],
+    "Solar Electricity": [
+      "Solar Hot Water",
+      "Front Garden",
+      "Rear Garden",
+      "The property has photovoltaic panels designed to produce electricity from sunlight installed on the roof slope(s)."
+    ],
+    "Solar Hot Water": [
+      "Front Garden",
+      "Rear Garden",
+      "Communal Garden",
+      "The property has solar water heating panels installed on the roof slope(s)."
+    ],
+    "Grounds": [],
+    "Area": [
+      "Front Garden",
+      "Rear Garden",
+      "Communal Garden",
+      "The property is set within an established (residential/commercial/rural/conservation/other) area."
+    ],
+    "Topography": [
+      "Front Garden",
+      "Rear Garden",
+      "Communal Garden",
+      "The property occupies a relatively (level/sloppy/hilly/other) ground."
+    ],
+    "Front Garden": [
+      "Rear Garden",
+      "Communal Garden",
+      "Pay and display",
+      "The front garden of the property is (paved/lawned/decked/laid with gravel/laid with stone chippings/laid with tile chippings/ other). The boundary fences are formed in (timber/brick wall/concrete wall/wire mesh/hedges/shrubs/other)."
+    ],
+    "Rear Garden": [
+      "Communal Garden",
+      "Pay and display",
+      "Residential Parking",
+      "The rear garden of the property is (paved/lawned/decked/laid with gravel/laid with stone chippings/laid with tile chippings/ other). The boundary fences are formed in (timber/brick wall/concrete wall/wire mesh/hedges/shrubs/other)."
+    ],
+    "Communal Garden": [
+      "Pay and display",
+      "Residential Parking",
+      "Gated Community",
+      "The communal garden of the property is (paved/lawned/decked/laid with gravel/laid with stone chippings/laid with tile chippings/ other). The boundary fences are formed in (timber/brick wall/concrete wall/wire mesh/hedges/shrubs/other)."
+    ],
+    "Parking": [
+      "Pay and display",
+      "Residential Parking",
+      "Gated Community",
+      "Estate Location",
+      "The property comes with (private/allocated/communal/off street) parking."
+    ],
+    "No parking": [
+      "Pay and display",
+      "Residential Parking",
+      "Gated Community",
+      "Estate Location",
+      "Location Type, Density",
+      "The property does not come with parking."
+    ],
+    "The property does not come with parking.": [
+      "Pay and display parking operates in the immediate area.",
+      "Residential parking operate in the immediate area.",
+      "The property is located within a gated development and accessed via security operated gates.",
+      "The property is located in a (private/local authority) estate.",
+      "The property is in a (well/newly) established residential area with surrounding properties of (low/medium/high) to (low/medium/high) density development."
+    ],
+    "Pay and display": [
+      "Residential Parking",
+      "Gated Community",
+      "Estate Location",
+      "Location Type, Density",
+      "Private road",
+      "Pay and display parking operates in the immediate area."
+    ],
+    "Residential Parking": [
+      "Gated Community",
+      "Estate Location",
+      "Location Type, Density",
+      "Private road",
+      "Residential parking operate in the immediate area."
+    ],
+    "Gated Community": [
+      "Estate Location",
+      "Location Type, Density",
+      "Private road",
+      "The property is located within a gated development and accessed via security operated gates."
+    ],
+    "Estate Location": [
+      "Location Type, Density",
+      "Private road",
+      "Noise / Disturbance",
+      "The property is located in a (private/local authority) estate."
+    ],
+    "Location Type, Density": [
+      "Private road",
+      "Noise / Disturbance",
+      "Conservation",
+      "The property is in a (well/newly) established residential area with surrounding properties of (low/medium/high) to (low/medium/high) density development."
+    ],
+    "Private road": [
+      "Noise / Disturbance",
+      "Conservation",
+      "The road outside the property is likely to be a ‘private road’ that the local council will not be responsible for maintaining. You should ask your legal adviser about this (see section I1 - Regulation)."
+    ],
+    "Add text to Section I1 - Regulations": [
+      "You should ask your legal adviser about the road outside the property which is likely to be a ‘private road’ and your maintenance responsibilities and implications.",
+      "The property is located near a (busy road/train line/train station/airport/motor way/other); this may cause noise or disturbance and may discourage some future buyers thus limiting the sales prospects.",
+      "The property is located in an established conservation area. Your legal adviser should advise you on the implications of the property being situated in this location.",
+      "The local facilities include schools, shops, other retail outlets, bus stops and train stations, observed facilities are within reasonable proximity of the property.",
+      "The property is located in a remote area and likely to be far away from some of the usual facilities and amenities.",
+      "If replacement roof work received Local Authority consents, and approvals. Your Legal Adviser should make further enquiries in this regard and confirm that adequate means of support are in place.",
+      "Add text to: Section I2 - Guarantees",
+      "You should ask your legal adviser to confirm whether the replacement roof covering is covered by a guarantee or warranty and advise on the implications.",
+      "Paragraph (Skip line in output).",
+      "It is possible that the roof covering contains asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded or drilled, without taking suitable safety precautions. When the covering are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment.\r\n\r\nBecause of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
+      "If the removed wall(s) received Local Authority consents and approvals. Your Legal Advisers should make further enquiries in this regard and confirm that adequate means of support are in place.",
+      "You should ask your legal adviser to confirm whether work on the removed wall(s) are covered by a guarantee or warranty and advise on the implications.",
+      "Add text to: Section I1 - Regulations",
+      "The external wall to the (front/side/rear) wall of the (main building/back addition/extension/bay window/garage/other) is not thick enough and vulnerable to damp problems and heat loss (See Section J1 - Risks). This sub-standard construction should be improved soon. In some cases, rebuilding the wall to modern standards may be the only economic option.",
+      "Add text to: Section J1 - Risk to building"
+    ],
+    "Noise / Disturbance": [
+      "Conservation",
+      "The property is located near a (busy road/train line/train station/airport/motor way/other); this may cause noise or disturbance and may discourage some future buyers thus limiting the sales prospects."
+    ],
+    "Conservation": [
+      "If sea, river, canal is selected",
+      "The property is located in an established conservation area. Your legal adviser should advise you on the implications of the property being situated in this location."
+    ],
+    "Facilities": [
+      "Local environment"
+    ],
+    "Accessible": [
+      "If sea, river, canal is selected",
+      "The local facilities include schools, shops, other retail outlets, bus stops and train stations, observed facilities are within reasonable proximity of the property."
+    ],
+    "Remote": [
+      "If sea, river, canal is selected",
+      "If other is entered",
+      "The property is located in a remote area and likely to be far away from some of the usual facilities and amenities."
+    ],
+    "No Adverse": [
+      "If sea, river, canal is selected",
+      "If other is entered",
+      "There are no known or apparent adverse features of the location, and I am not aware of any adverse features that will materially affect the subject property."
+    ],
+    "Flooding": [
+      "If sea, river, canal is selected",
+      "If other is entered",
+      "The property is situated close to (the Sea/a river/ a canal/other) and may be susceptible to occasional or seasonal flooding."
+    ],
+    "If sea, river, canal is selected": [
+      "If other is entered",
+      "Add text to: Section J2 - Risk to Building"
+    ],
+    "Add text to Section J2 - Risk to Building": [
+      "1. The property is situated is close to the Sea and could be susceptible to seasonal flooding.                                                                                                                                                                                                                                         2. The property is situated near a river location and could be susceptible to seasonal flooding.                                                                                                                                                                                                                          3. The property is situated near a canal location and could be susceptible to seasonal flooding.",
+      "The property is situated close to (other) and may be susceptible to occasional or seasonal flooding.",
+      "The property is in a location that could be affected by electromagnetic fields from electricity (substation/pylons/other) located near the property (see section J3 - Risks).\r\nIn addition to being unsightly, it may cause noise and disturbance, or interference may deter some future buyers thus limiting saleability. The possible effects of electromagnetic fields have been the subject of media coverage. The Health Protection Agency (HPA), an independent body with responsibility for advising on electromagnetic fields, has advised that following the studies in 2000 and 2001, there may be risks, in specified circumstances, to the health of certain categories of people. Public perception may, however, affect marketability and future value of the property. If required, technical information can be obtained from the HPA or local electricity company.",
+      "Add text to: Section J3 - Risk to People",
+      "The property is in a location that could be affected by electromagnetic fields from electricity (substation/pylons/other) located near the property."
+    ],
+    "If other is entered": [
+      "Standard text",
+      "Height/Configuration",
+      "The property is situated close to (other) and may be susceptible to occasional or seasonal flooding."
+    ],
+    "Add text to Section J3 - Risk to People": [
+      "The property is in a location that could be affected by electromagnetic fields from electricity (substation/pylons/other) located near the property.",
+      "My inspection was restricted by the surrounding elements, including the layout of the area, and available vantage points from which I was able to view the property.",
+      "My inspection of the roof was restricted due to access restrictions, as well as the height and configuration of the building.",
+      "My inspection of the roof was further restricted due to the proximity of surrounding buildings to the subject property which made it difficult to obtain a full view of the roof slopes.",
+      "There was no direct access to the rear of the building. For this reason,  I cannot make any detailed comments regarding the condition of the rear walls, roof slopes, rainwater goods, etc. You should accept the risk that some defects may exist in these unseen areas.",
+      "E1: One or several pots that are fitted to the to the (main building front/side/rear) chimney stack is (badly cracked/badly broken/largely missing/other) and this is a safety hazard.",
+      "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack (has eroded/is partly missing/is loose/other).This should be repaired soon.",
+      "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack is (badly eroded/largely missing/other).  The chimney should be repointed now.",
+      "This is causing dampness inside the building to the adjoining walls (See section J1 Risks).",
+      "Add text to: Section J1 - Risk to Building",
+      "E1: The chimney stack on the (main building/front/side/rear) is in a poor condition. This is a safety hazard",
+      "An (aerial/satellite) dish attached to the chimney is (loose/rusted/other). This should be repaired soon.",
+      "An (aerial/satellite) dish attached to the chimney is (very loose/badly rusted/other).  This should be repaired now.",
+      "This is a safety hazard, and the aerial/satellite dish may fall to the ground. (see section J3 Risks).",
+      "Add text to: Section J3 - Risk to People",
+      "An (aerial/satellite dish) attached to the chimney is (very loose/badly rusted).This is a safety hazard.",
+      "The chimney stack(s) should regularly be maintained to prevent water penetration and to keep the stacks in good condition. The condition of the chimney pots, flaunching and flashing should be checked during normal maintenance routine to ensure water tightness of the stacks.",
+      "Drop down (NI, 1, 2, 3)",
+      "Notes. Please type in your text in the box provided below…",
+      "E2:Many (roof/ridge/hip) tiles (are loose/have slipped/are missing/are cracked/are poorly secured/are damaged/other). This is a safety hazard.",
+      "Paragraph (Skip line in output).",
+      "The sloping roof covering is in poor condition, and you should replace this now.  This work may need building regulation approval from the local authority. To meet current standards, you may have to carry out additional work (for example strengthening of the roof structure, improving thermal insulation, etc.).This can increase the amount of repair work.",
+      "There is evidence to that appears to suggest that the roof timber structure requires strengthening due to the additional weight of the replacement roof covering. You should contact a qualified person to carry out further investigation and recommend remedial work soon.",
+      "The flat roof covering is (torn/split/damaged/blistered/holding water/covered with moss/other). This should be repaired soon.",
+      "The parapet wall is in very poor condition and this is a safety hazard.",
+      "The (mortar/tiles/clips/other) along the edge of the roof, called the verge, are (damaged/loose/partly missing/cracked/poorly secured/other). This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "The (mortar/tiles/clips/other) along the edge of the roof, called the verge, are (badly damaged/badly cracked/about to drop/other). This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "This is a safety hazard, and parts of the verge may fall to the ground. (see section J3 Risks).",
+      "The roof verge is in very poor condition and this is a safety hazard.",
+      "The valley gutter at the junction of the roofs to the (front/side/rear) of the building is (partially/completely) (blocked with debris/poorly aligned).  This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work. This should be repaired soon.",
+      "You should ask the management company whether any repairs have been undertaken in the past or proposed for the roof covering."
+    ],
+    "E Outside the Property": [
+      "E1: Chimney Stacks",
+      "Limitations"
+    ],
+    "Limitations": [
+      "Not Inspected",
+      "Weather Condition"
+    ],
+    "Standard text": [
+      "Height/Configuration",
+      "Nearby Buildings",
+      "No rear access",
+      "Not applicable",
+      "My inspection was restricted by the surrounding elements, including the layout of the area, and available vantage points from which I was able to view the property.",
+      "The chimney stack(s) should regularly be maintained to prevent water penetration and to keep the stacks in good condition. The condition of the chimney pots, flaunching and flashing should be checked during normal maintenance routine to ensure water tightness of the stacks.",
+      "Blocked and leaking gutters and downpipes can cause damp penetration and timber decay to the structure. These should be inspected and maintained annually to ensure gutters remain watertight.",
+      "Location, construction",
+      "Not every part of the conservatory or porch were inspected in detail. The conservatory or porch should be inspected as part of normal maintenance routine, and all moveable parts should be eased and suitably adjusted.",
+      "If rotted is selected",
+      "Add phrase for flats",
+      "It is not possible to comment on the concealed sections of the woodwork, however, a closer inspection may reveal some defects such as wood rot, e.g. behind guttering, soffits, and fascia.\r\n\r\nWoodwork at roof level is affecetd by weathering and rot due to being exposed to the elements. Therefore, you shoud plan to repair and decorate exposed timber as required to reduce the risk of damage and decay.\r\n\r\nExternal decorations help keep the property in satisfactory condition. Without a protective finish, roof timber elements will quickly deteriorate thus requiring extensive repairs. To prevent this, external surfaces should be redecorated periodically.",
+      "Chimney Flue Not Inspected",
+      "Not fully inspected",
+      "Leaks noted",
+      "I have not inspected parts of the property which were covered, unexposed or inaccessible, and it is not possible to inspect some of these areas without removing carpets or fittings. For this reason, I am unable to report that such parts are free from rot, wood boring insect infestation, and other pests or defects. I could not accept any responsibility for any defect which would have been apparent to me if I had been able to freely inspect these parts of the property.\r\n\r\nIt is possible that defects may exist in unseen areas, and unless the property is fully inspected before purchase commitment, there may be additional costs of repair which must be borne by you."
+    ],
+    "Height/Configuration": [
+      "Nearby Buildings",
+      "No rear access",
+      "Not applicable",
+      "Partial View",
+      "My inspection of the roof was restricted due to access restrictions, as well as the height and configuration of the building."
+    ],
+    "Nearby Buildings": [
+      "No rear access",
+      "Not applicable",
+      "Partial View",
+      "Removed Chimney Stack(s)",
+      "My inspection of the roof was further restricted due to the proximity of surrounding buildings to the subject property which made it difficult to obtain a full view of the roof slopes."
+    ],
+    "No rear access": [
+      "Not applicable",
+      "Partial View",
+      "Removed Chimney Stack(s)",
+      "Removed Pots",
+      "There was no direct access to the rear of the building. For this reason,  I cannot make any detailed comments regarding the condition of the rear walls, roof slopes, rainwater goods, etc. You should accept the risk that some defects may exist in these unseen areas."
+    ],
+    "E1 Chimney Stacks": [
+      "Use ADD Element function",
+      "Not Inspected"
+    ],
+    "Not Inspected": [
+      "I was unable to inspect the communal areas, and so a condition rating has not been allocated. This was because (the area is not accessible/of limited access/other)."
+    ],
+    "Not applicable": [
+      "Partial View",
+      "Removed Chimney Stack(s)",
+      "Removed Pots",
+      "Single Stack",
+      "This section is not applicable to the subject property; I have no further comments.",
+      "Standard text",
+      "Location, construction",
+      "This section is not applicable to the subject property, no further comments."
+    ],
+    "Partial View": [
+      "Removed Chimney Stack(s)",
+      "Removed Pots",
+      "Single Stack",
+      "Number of Pots",
+      "Not Sighted: The chimney stack(s) to the building were not fully sighted, and I cannot fully comment on their condition."
+    ],
+    "Removed Chimney Stack(s)": [
+      "Removed Pots",
+      "Single Stack",
+      "Number of Pots",
+      "The chimney stack to the (main building/front/rear/side) has been removed and covered over with roofing. You should ask your legal adviser to confirm whether the removed chimney stack(s) received building regulation approval (including the issuing of a completion certificate) from the local council and advice on the implications."
+    ],
+    "Removed Pots": [
+      "Single Stack",
+      "Number of Pots",
+      "Waterproofing",
+      "The (front/side/rear/other) chimney stack(s) have had their pots removed and their top sealed."
+    ],
+    "Stacks": [
+      "Select Single or Multiple"
+    ],
+    "Select Single or Multiple": [
+      "Selection for flashing/ flaunching",
+      "Single Stack"
+    ],
+    "Single Stack": [
+      "Number of Pots",
+      "Waterproofing",
+      "The property has one chimney stack, and this is original, and built of traditional brick construction."
+    ],
+    "Location": [
+      "Number of Pots",
+      "Waterproofing",
+      "The chimney stack is installed to the (centre/front/side/rear/other) of the building.",
+      "The chimney stacks are installed on the (front/side/rear/throughout/other) of the building.",
+      "Defects noted",
+      "All Elevations",
+      "An external wall has been removed from (lounge/kitchen/bedroom/other) and this work should have been carried out with building regulation approval and should have included support for the remaining structure. Due to the nature of internal floor and ceiling finishes, I am unable to confirm that the necessary support has been provided and strongly recommend that your legal advisors seek confirmation that the necessary building regulation approval was obtained for this work. In the absence of any consent or proper supervision, there is a risk that further support may be required, incurring additional expense and disturbance.",
+      "Repair soon",
+      "The double glazing units to the (lounge/bedroom/kitchen/bathroom/other) have failed, and the space between the glass panes has ‘misted’ over. This is not a serious defect but is unsightly and can reduce the thermal efficiency of the double glazing. You should replace these soon.\r\n\r\nWhere some double glazed panels have failed, the remainder could suffer similar problems, and you should plan to replace more in the future. It can be difficult to replace just the double glazed units on some older windows. In these cases, you may have to plan to replace the whole window.",
+      "The design of the window(s) does not allow people to escape from a fire. The affected window is in the (lounge/bedroom/study/other) has (no opening/is too small). This is a safety hazard (see section J3 Risks). No repair is currently needed. The property must be maintained in the normal way. To reduce this hazard, you should ask an appropriately qualified person for advice.",
+      "If rotten is selected",
+      "The double glazing to the (main/rear/side/patio/garage/other) door has failed, and the space between the glass panes has ‘misted’ over. This is not a serious defect but is unsightly and can reduce the thermal efficiency of the double glazing. You should replace this soon.\r\n\r\nWhere some double glazed panels have failed, the remainder could suffer similar problems, and you should plan to replace more in the future. It can be difficult to replace just the double glazed units on some older windows. In these cases, you may have to plan to replace the whole window"
+    ],
+    "Number of Pots": [
+      "Waterproofing",
+      "The chimney stack is fitted with (select number) pot(s).",
+      "The chimney stacks are fitted with several pots."
+    ],
+    "Rendering": [
+      "Waterproofing",
+      "The outer faces of the chimney stack is (fully/partially) rendered.",
+      "The outer faces of (some/all) of the chimney stack(s) is (fully/partially) rendered."
+    ],
+    "Selection for flashing/ flaunching": [
+      "Waterproofing"
+    ],
+    "Waterproofing": [
+      "The waterproofing around the base of the chimney at roof level, known as flashings, is assumed formed in (lead/mortar/lead and mortar/tiles/other). The cement bedding around the base of the chimney pot(s) (called flaunching) is assumed formed in (lead/mortar/lead and mortar/tiles/other).",
+      "The waterproofing around the base of the chimneys at roof level, known as flashings, is assumed formed in (lead/mortar/lead and mortar/tiles/other). The cement bedding around the base of the chimney pots (called flaunching) is assumed formed in (lead/mortar/lead and mortar/tiles/other)."
+    ],
+    "Condition": [
+      "Shared Chimney",
+      "Leaning Chimney",
+      "Ridge tiles",
+      "Parapet wall",
+      "Roof Spreading",
+      "Blocked RWG",
+      "Blocked Gullies",
+      "Open Runoffs",
+      "Safety Glass Rating",
+      "Sill Projection",
+      "Wall sealing"
+    ],
+    "Ok": [
+      "Where visible these appear in (reasonable/satisfactory) condition to type and age. No repair is currently needed. The property must be maintained in the normal way.",
+      "Repair soon",
+      "Multiple Stacks",
+      "Number of Pots",
+      "No repair is currently needed. The property must be maintained in the normal way. Over time, brick or stone chimneys can distort and lean over. In the worst cases, the stack can become unstable. At present, this movement is small, and no action is required now. However, this problem can get worse so the chimney should be periodically inspected and you should plan to have the chimney rebuilt at a future time, if the movement continues.",
+      "Chimney                Defect",
+      "No repair is currently needed. The property must be maintained in the normal way. Over time, brick or stone chimneys can distort and lean over. In the worst cases, the stack can become unstable. At present, this movement is small, and no action is required now. However, this problem can get worse so the chimney should be periodically inspected and you should plan to have the chimney rebuilt at a future time if the movement continues.",
+      "Where visible these appear in (reasonable/satisfactory) condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Significant",
+      "Flashing: The waterproofing at the junction of the roof covering and wall (called the flashing), appears to be formed in (lead/mortar/tiles/other). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Cause of defect",
+      "Ridge Tiles: The covering along the top of the roof structure (called the ridge tiles) are assumed formed in (tiles/lead/concrete/other). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Strengthen Timber",
+      "Hip Tiles: The covering along the junction to the roofs slopes (called the hip tiles) are assumed formed in (tiles/lead/concrete/other). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Investigate",
+      "Parapet wall(s): The parapet wall(s) on the roof is built of (bricks/concrete/block/other)  and are (not rendered/fully rendered/partially rendered). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Investigate          Roof slope location",
+      "Roof slope location",
+      "This is normal for this type of roof and is no cause for concern. No repair is currently needed. The property must be maintained in the normal way. The timber used in older roofs can gradually change shape or distort during normal use. This is not a problem and is normal for this type of roof.",
+      "There is evidence to that appears to suggest that the roof timber structure may have required strengthening previously due to the additional weight of the replacement roof covering. The roof timber has now been strengthened as observed within the roof space. No repair is currently required. The property must be maintained as normal.",
+      "Repair Soon",
+      "These are in (reasonable/satisfactory) condition to type and age.  No repair is currently needed. The property must be maintained in the normal way.",
+      "Not Visible",
+      "These appear in (reasonable/satisfactory) condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Penetrating                   Location                Cause",
+      "No SG Rating",
+      "If replacement is selected.",
+      "Safety Hazard",
+      "If replacement door is selected",
+      "The door appears in (reasonable/satisfactory) condition. No repair is currently needed. The property must be maintained in the normal way",
+      "If double glazed is selected",
+      "These appear in (reasonable/satisfactory) condition, no sign of significant defect noted. The property must be maintained in the normal way.",
+      "Construction",
+      "Although l could not inspect the roof space, I did not see a problem (from the outside/or to the ceiling below the roof space). However, one could remain out of sight. No repair is currently needed. The property must be maintained in the normal way. However, if you want to be certain regarding these, the property owner should provide suitable access to allow an appropriately qualified person to carry out a full inspection.",
+      "The original roof structure has been substantially modified to form the loft conversion with most elements now concealed from view. So, I am unable to comment regarding concealed areas. Externally I noted no severe loss of line or pitch to the roof coverings which would suggest it is currently serving its designed function. It is, however, important that you verify through your legal advisers that all regulations and permissions in respect of these modifications were undertaken with all necessary interim and final inspections. Such confirmation should be obtained before purchase commitment.",
+      "No underlining",
+      "The underlining of the roof is installed with (sacking felt/plastic/ timber boarding/other), which should provide a secondary barrier to driving rain and snow.",
+      "The insulation provided to the roof floorboards appears to be adequate.",
+      "The cold water tank within the roof space is formed in plastic and appears in reasonable condition. The water tank and accompanying pipe work appears to be adequately insulated, and no sign of leakage or condensation was noted at the time of my inspection."
+    ],
+    "Shared Chimney": [
+      "Leaning Chimney"
+    ],
+    "Add text to Section I3": [
+      "The chimney stack on the (main building/front/side/rear) is shared. The owner of the neighbouring property may have some legal rights over this shared chimney. You should check with your legal adviser before any work is done.",
+      "The chimney stack on the (main building/front/side/rear) to the property is leaning.",
+      "No repair is currently needed. The property must be maintained in the normal way. Over time, brick or stone chimneys can distort and lean over. In the worst cases, the stack can become unstable. At present, this movement is small, and no action is required now. However, this problem can get worse so the chimney should be periodically inspected and you should plan to have the chimney rebuilt at a future time, if the movement continues.",
+      "Over time, brick or stone chimneys can distort and lean over. In the worst cases, the stack can become unstable. At present, this movement appears significant, and action is required now. You should contact a qualified person to inspected and recommend redial action which may involve rebuilding the chimney.",
+      "The property has (select number) chimney stacks, and they are original and built of traditional brick construction.",
+      "The chimney stack on the (main building/front/side/rear) are shared. The owners of the neighbouring properties may have some legal rights over this shared chimney. You should check with your legal adviser before any work is done.",
+      "No repair is currently needed. The property must be maintained in the normal way. Over time, brick or stone chimneys can distort and lean over. In the worst cases, the stack can become unstable. At present, this movement is small, and no action is required now. However, this problem can get worse so the chimney should be periodically inspected and you should plan to have the chimney rebuilt at a future time if the movement continues."
+    ],
+    "Leaning Chimney": [
+      "Flashing                      Repair soon"
+    ],
+    "Repair soon": [
+      "Multiple Stacks",
+      "Number of Pots",
+      "Waterproofing",
+      "Over time, brick or stone chimneys can distort and lean over. In the worst cases, the stack can become unstable. At present, this movement appears significant, and action is required now. You should contact a qualified person to inspected and recommend redial action which may involve rebuilding the chimney.",
+      "Chimney                Defect",
+      "One or few (roof/ridge/hip) tile(s) (are loose/are lifted/have slipped/are missing/are cracked/are poorly secured/are damaged/other). This should be repaired soon. The fixings on older roofs can weaken and result in more future maintenance. In some cases, it may be economical to replace the whole roof covering rather than continuing to repair.",
+      "Repair soon",
+      "There is evidence to that appears to suggest that the roof timber structure requires strengthening due to the additional weight of the replacement roof covering. You should contact a qualified person to carry out further investigation and recommend remedial work soon.",
+      "The flat roof covering is (torn/split/damaged/blistered/holding water/covered with moss/other). This should be repaired soon.",
+      "The (rendering/copping/flashing/other) of the parapet on the (right/left/rear/front) of the roof are (damaged/loose/partly missing/cracked/poorly secured/other). This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "The (mortar/tiles/clips/other) along the edge of the roof, called the verge, are (damaged/loose/partly missing/cracked/poorly secured/other). This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "If Flat Roof is selected",
+      "The valley gutter at the junction of the roofs to the (front/side/rear) of the building is (partially/completely) (blocked with debris/poorly aligned).  This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work. This should be repaired soon.",
+      "These should be repaired soon.",
+      "The pointing should be replaced soon.",
+      "This should be repaired soon. To repair the lintel properly, it may have to be replaced completely.",
+      "The window sill across the bottom of the window opening in the (front/side/rear) wall of the main (main building/back addition/extension/bay window/other) is (damaged/cracked/ eroded). This should be repaired soon.",
+      "Not inspected",
+      "The (door/windows/door glazing/window glazing/roof glazing/floor/walls/rainwater goods/other)  (is/are/has/have) (cracked/damaged/rotten/leaking/damp/failed/misted over/other. These should be repaired soon.",
+      "Safety Hazard",
+      "Standard text",
+      "If rotted is selected",
+      "The (facias/soffits/barge boards/verge clips/timber cladding/other) to the (main building/back addition/extension/bay window/garage/other) are (rotted/damaged/poorly secured/incomplete/other). This should be repaired soon.",
+      "Parts of the roof timber structure are (distorted/damaged/affected by wood boring insect/rotten/split/missing/ inadequate/not strong enough). This should be repaired soon."
+    ],
+    "Multiple Stacks": [
+      "Number of Pots",
+      "Waterproofing",
+      "The property has (select number) chimney stacks, and they are original and built of traditional brick construction."
+    ],
+    "The chimney stacks are fitted with several pots.": [
+      "The outer faces of (some/all) of the chimney stack(s) is (fully/partially) rendered.",
+      "The waterproofing around the base of the chimneys at roof level, known as flashings, is assumed formed in (lead/mortar/lead and mortar/tiles/other). The cement bedding around the base of the chimney pots (called flaunching) is assumed formed in (lead/mortar/lead and mortar/tiles/other).",
+      "Where visible these appear in (reasonable/satisfactory) condition to type and age. No repair is currently needed. The property must be maintained in the normal way.",
+      "The chimney stacks on the (main building/front/side/rear) are shared. The owners of the neighbouring properties may have some legal rights over this shared chimney. You should check with your legal adviser before any work is done (see section I3).",
+      "Add text to: Section I3"
+    ],
+    "Use ADD repair function": [
+      "E8: Other Joinery and Finishes"
+    ],
+    "Repair": [
+      "Flashing                      Repair soon",
+      "Flaunching                      Repair soon",
+      "Causing damp",
+      "Causing Damp",
+      "Failed Glazing Location",
+      "If in disrepair is selected",
+      "If rotten is selected",
+      "Inadequate Lock Location",
+      "Condition Rating",
+      "Missing cover",
+      "Repair soon",
+      "The water tank is (old/leaking/in disrepair/damaged/other). You should repair/replace this now as required."
+    ],
+    "Flashing                      Repair soon": [
+      "Flaunching                      Repair soon",
+      "Causing damp"
+    ],
+    "Chimney                Defect": [
+      "Chimney                Defect",
+      "The waterproofing between the chimney stack and the roof covering (called the flashing) to the (main building/front/side/rear/other)  chimney stack is (loose/incomplete/split/lifted/other). The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+      "The waterproofing between the chimney stack and the roof covering (called the flashing) to the (main building/front/side/rear) chimney stack is (very loose/largely missing/badly cracked/other). This should be repaired now.",
+      "The cement bedding around the base of the chimney pot (called flaunching) to the (main building/front/side/rear) chimney stack is (cracked/loose/partly missing/other). Although the chimney pot looks satisfactory, it can be damaged when the flaunching is repaired and the pot may need to be replaced as well.",
+      "The cement bedding around the base of the chimney pot (called flaunching) to the (main building/front/side/rear) chimney stack is (badly cracked/very loose/largely missing/other). This should be repaired now",
+      "One or several pots that are fitted to the to the (main building/front/side/rear) chimney stack are (cracked/broken/partly missing/other). To replace the pot, you will have to renew the cement bedding around the base (called the flaunching) that holds the pot in place. The chimney pot may also connect to a chimney flue that serves a heating appliance below, and a suitable replacement must be used.",
+      "One or several pots that are fitted to the to the (main building/front/side/rear) chimney stack are (badly cracked/badly broken/largely missing/other).  This should be repaired now.",
+      "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack (has eroded/is partly missing/is loose/other).This should be repaired soon.",
+      "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack is (badly eroded/largely missing/other).  The chimney should be repointed now."
+    ],
+    "Repair now": [
+      "Flaunching                      Repair soon",
+      "Causing damp",
+      "Chimney Pots                      Repair soon",
+      "Safety hazard",
+      "Re-pointing                       Repair soon",
+      "Chimney in Disrepair                Repair soon",
+      "Default text entry when FLAT is selected",
+      "Condition Rating",
+      "Many (roof/ridge/hip) tiles (are loose/have slipped/are missing/are cracked/are poorly secured/are damaged/other). This is likely to cause damp penetration to the building below (See Section J1 - Risks) and is a safety hazard (See Section J3 Risks). This should be repaired now.",
+      "Repair soon",
+      "The flat roof covering is badly (torn/split/damaged/blistered/ponding/other). This is causing damp penetration to the building below (See Section J1 - Risks). The flat roof covering needs replacing now. To do this, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work.",
+      "The (rendering/copping/flashing/other) of the parapet on the (right/left/rear/front) of the roof are (badly damaged/very loose/other). This should be repaired now. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "The (mortar/tiles/clips/other) along the edge of the roof, called the verge, are (badly damaged/badly cracked/about to drop/other). This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "If asbestos cement pipe is selected",
+      "If insufficient slope is selected",
+      "Standard text",
+      "The (pipes/gutters) (are leaking/are loose/are incomplete/are blocked/are rusted/do not have sufficient slope) and causing damp penetration to nearby walls. You should repair this now to avoid further damage.",
+      "This is allowing damp to get into the building. These should be repaired now.",
+      "This is allowing damp to get into the building (See Section J1 Risks). These should be repaired now.",
+      "Rendering pieces are likely to fall and cause harm to people that may be nearby. This is a hazard (See Section J3 Risks). These should be repaired now.",
+      "This allowing dampness to get inside the building (See Section J1 Risks). The pointing should be replaced now.",
+      "The defect is causing the window frame to distort (See Section J1 Risks). A new lintel/arch is needed, and you may have to organise associated repairs. This can increase the amount of repair work required.",
+      "The window sill across the bottom of the window opening in the (front/side/rear) wall of the main (main building/back addition/extension/bay window/other) is (damaged/unstable/ very distorted/allowing dampness) to get into the building (See Section J1 - Risks). To solve this problem, the lintel will have to be replaced completely, and you may have to organise other associated repairs. This will increase the amount of repair work required.",
+      "Safety Hazard",
+      "The window(s) installed in the (lounge/bedroom/kitchen/other)  (have damaged locks/are difficult to open/are badly worn/are rotten/have broken panes/have failed glazing/are in disrepair/other) and are a safety hazard (See Section J3 - Risks). These should be repaired now as the security of the property is compromised.",
+      "Not inspected",
+      "The (door/windows/door glazing/window glazing/roof glazing/floor/walls/rainwater goods/other)  (is/are/has/have) (badly cracked/ severely damaged/badly rotten/severely leaking/causing damp/failed/other). These should be repaired now.",
+      "Parts of the timber structure are (badly distorted/extensively damaged/extensively affected by wood boring insect/ badly rotted/badly split/largely missing/very inadequate) (See Section J1 - Risks).This could be a safety hazard (See Section J3 - Risks). This should be repaired now."
+    ],
+    "Flaunching                      Repair soon": [
+      "Causing damp",
+      "Chimney Pots                      Repair soon"
+    ],
+    "Causing damp": [
+      "Chimney Pots                      Repair soon",
+      "Safety hazard",
+      "Chimney in Disrepair                Repair soon"
+    ],
+    "Add text to Section J1 - Risk to Building": [
+      "E1: The cement bedding around the base of the chimney pot (called flaunching) to the (main building/front/side/rear)  chimney stack is (badly cracked/very loose/largely missing/other). This is causing damp penetration to the adjoining walls.",
+      "One or several pots that are fitted to the to the (main building/front/side/rear) chimney stack are (cracked/broken/partly missing/other). To replace the pot, you will have to renew the cement bedding around the base (called the flaunching) that holds the pot in place. The chimney pot may also connect to a chimney flue that serves a heating appliance below, and a suitable replacement must be used.",
+      "One or several pots that are fitted to the to the (main building/front/side/rear) chimney stack are (badly cracked/badly broken/largely missing/other).  This should be repaired now.",
+      "This is a safety hazard (see section J3 Risks).",
+      "Add text to: Section J3 - Risk to People",
+      "E1: Some of the mortar between the bricks or stonework (called pointing) to the (main/front/side/rear) chimney stack (has eroded/is partly missing/is loose/other), and this may be causing dampness to nearby elements.",
+      "The chimney stack on the (main building/front/side/rear) is in poor condition. This is a safety hazard (see section J3 Risks). Although this can be repaired, it may be economic to rebuild the whole of the stack. This should be done now. If the chimney is no longer used by heating appliances below, it may be economic to reduce the chimney height to below the level of the roof and extend the covering over.",
+      "E1: The chimney stack on the (main building/front/side/rear) is in a poor condition. This is a safety hazard",
+      "An (aerial/satellite) dish attached to the chimney is (loose/rusted/other). This should be repaired soon."
+    ],
+    "Chimney Pots                      Repair soon": [
+      "Safety hazard",
+      "Re-pointing                       Repair soon"
+    ],
+    "Safety hazard": [
+      "Re-pointing                       Repair soon",
+      "Causing damp",
+      "Default text entry when FLAT is selected",
+      "Condition Rating",
+      "Verge Repair",
+      "Valley Gutters Repair"
+    ],
+    "This is a safety hazard (see section J3 Risks).": [
+      "Add text to: Section J3 - Risk to People",
+      "E1: One or several pots that are fitted to the to the (main building front/side/rear) chimney stack is (badly cracked/badly broken/largely missing/other) and this is a safety hazard.",
+      "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack (has eroded/is partly missing/is loose/other).This should be repaired soon.",
+      "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack is (badly eroded/largely missing/other).  The chimney should be repointed now.",
+      "This is causing dampness inside the building to the adjoining walls (See section J1 Risks)."
+    ],
+    "Re-pointing                       Repair soon": [
+      "Causing damp",
+      "Chimney in Disrepair                Repair soon"
+    ],
+    "Chimney in Disrepair                Repair soon": [
+      "Ariel/Dish                       Repair soon",
+      "Safety hazard"
+    ],
+    "Chimney": [
+      "Type                Defect",
+      "The chimney stack on the (main building/front/side/rear) is in poor condition. This is a safety hazard (see section J3 Risks). Although this can be repaired, it may be economic to rebuild the whole of the stack. This should be done now. If the chimney is no longer used by heating appliances below, it may be economic to reduce the chimney height to below the level of the roof and extend the covering over."
+    ],
+    "Ariel/Dish                       Repair soon": [
+      "Safety hazard",
+      "Default text entry when FLAT is selected"
+    ],
+    "Type                Defect": [
+      "Type                Defect",
+      "Standard text",
+      "An (aerial/satellite) dish attached to the chimney is (loose/rusted/other). This should be repaired soon.",
+      "An (aerial/satellite) dish attached to the chimney is (very loose/badly rusted/other).  This should be repaired now."
+    ],
+    "Default text entry when FLAT is selected": [
+      "Condition Rating",
+      "Weather Condition",
+      "Not inspected",
+      "Standard text"
+    ],
+    "Condition Rating": [
+      "Weather Condition",
+      "Not inspected",
+      "Standard text",
+      "Safety Glass Rating",
+      "Communal Area",
+      "Limitations"
+    ],
+    "Drop down (NI, 1, 2, 3)": [
+      "Notes. Please type in your text in the box provided below…",
+      "It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.",
+      "It was more difficult to detect leakages to roof covering because it was not raining at the time of my inspection. However, no signs were present to suggest that the roof may be leaking.",
+      "At the time of my inspection, there were signs to suggest that the roof may be leaking.",
+      "The rainwater goods could not be viewed due to access restriction, and the height and configuration of the building. I cannot make any comment regarding their composition and condition. The area is exposed and should be regularly checked.",
+      "It was more difficult to detect leakages to the pipes and gutters because it was not raining at the time of my inspection. However, no signs were present to suggest that the gutters are blocked or undersized.",
+      "The walls have been inspected visually and by touch, and have not been opened up. The composition of the wall material cannot be fully confirmed without causing damage to the walls.",
+      "The main external walls to the  (main building/back addition/extension/other) are built of (Type in number) mm (solid bounded brick wall/cavity brick wall/cavity block wall/ cavity stud wall/other) construction.",
+      "The outer faces of the external walls are (fully/partially) rendered (smooth/roughcast)  with (painted/pebble dash/mock Tudor/other)  finishes.",
+      "Not every part of the windows were inspected in detail. The windows should be inspected as part of normal maintenance routine, and all moveable parts should be eased and suitably adjusted.",
+      "The windows installed in the property are made up of  (mainly/a mixture) of (replacement) (PVC/timber/steel/modern PVC sash/modern timber sash/aluminium/old style timber sash/other) (single/double/secondary) glazed units.",
+      "Not every part of the doors were inspected in detail. The doors should be inspected as part of normal maintenance routine, and all moveable parts should be eased and suitably adjusted.",
+      "The (main/rear/side/patio/garage/other) door to the property is a (replacement) (PVC/ timber/steel/aluminium/other) (single/double) glazed.",
+      "Visible British Standard Marks to the double glazing units were noted, this confirms that the units have been fitted with safety glasses.",
+      "This section is not applicable to the subject property, no further comments.",
+      "Not every part of the conservatory or porch were inspected in detail. The conservatory or porch should be inspected as part of normal maintenance routine, and all moveable parts should be eased and suitably adjusted.",
+      "There is no conservatory or porch on the property.",
+      "The usual external work at the eaves level (the edges of the roof where the guttering is fixed) could not be seen due to the height and configuration of the building. I cannot comment on their condition. These are normally formed in timber and should be maintained in good condition to prevent decay.",
+      "The usual external works at the eaves level (the edges of the roof where the guttering is fixed) include (facias/soffits/bargeboards/verge clips/other) and these are made of (timber/PVC/Slates/other).",
+      "These appear in (reasonable/satisfactory) condition, no sign of significant defect noted. The property must be maintained in the normal way.",
+      "I was unable to inspect the communal areas, and so a condition rating has not been allocated. This was because (the area is not accessible/of limited access/other).",
+      "I have not inspected parts of the property which were covered, unexposed or inaccessible, and it is not possible to inspect some of these areas without removing carpets or fittings. For this reason, I am unable to report that such parts are free from rot, wood boring insect infestation, and other pests or defects. I could not accept any responsibility for any defect which would have been apparent to me if I had been able to freely inspect these parts of the property.\r\n\r\nIt is possible that defects may exist in unseen areas, and unless the property is fully inspected before purchase commitment, there may be additional costs of repair which must be borne by you.",
+      "The chimney flues have not been inspected, and it is not possible to comment on the adequacy of any linings. The floor construction could not be inspected because the floor covering has not been lifted. No comment can be made regarding these covered areas.",
+      "I could not fully inspect the roof timber because of (limited roof height/ floors not safe to walk on / some or all of the floors are boarded / excessive storage of personal goods), at the time of my inspection."
+    ],
+    "Add Notes": [
+      "Weather Condition",
+      "Not inspected",
+      "Standard text",
+      "Safety Glass Rating",
+      "Conservatory   Porch",
+      "Communal Area",
+      "Limitations"
+    ],
+    "E2 Roof Covering": [
+      "Use ADD Element function",
+      "Weather Condition"
+    ],
+    "Weather Condition": [
+      "Not inspected"
+    ],
+    "Wet": [
+      "Leaks noted",
+      "Not inspected. location    Assumed Type",
+      "Roof Inspected                      Type             location                     material",
+      "It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining."
+    ],
+    "Dry": [
+      "Leaks noted",
+      "Not inspected. location    Assumed Type",
+      "Roof Inspected                      Type             location                     material",
+      "It was more difficult to detect leakages to roof covering because it was not raining at the time of my inspection. However, no signs were present to suggest that the roof may be leaking.",
+      "It was more difficult to detect leakages to the pipes and gutters because it was not raining at the time of my inspection. However, no signs were present to suggest that the gutters are blocked or undersized."
+    ],
+    "Leaks noted": [
+      "Not inspected. location    Assumed Type",
+      "Roof Inspected                      Type             location                     material",
+      "At the time of my inspection, there were signs to suggest that the roof may be leaking.",
+      "At the time of my inspection, there were signs to suggest that the gutters may be blocked or undersized."
+    ],
+    "Use ADD Element function": [
+      "Conservatory   Porch",
+      "Use ADD repair function",
+      "Communal Area",
+      "Loft Converted"
+    ],
+    "Roofs": [],
+    "Not inspected. location    Assumed Type": [
+      "Roof Inspected                      Type             location                     material",
+      "The roof structure over the (main building/back addition/extension/bay window/dormer window/other) could not be viewed from ground level due to the height and configuration of the building. However, it is judged to be of (pitched/flat/mansard/other) roof construction. The property must be maintained in the normal way."
+    ],
+    "Inspected": [
+      "Ridge tiles",
+      "External communal parts to the  property comprise (automatic gates/CCTV/communal door/entry system/drive access/car park/ walk paths/ gardens/grounds/play ground/other).",
+      "The water tank(s) found within the roof space are formed in (plastic/galvanised metal/asbestos/other)."
+    ],
+    "Weathered": [
+      "Ridge tiles",
+      "Not Visible",
+      "These are weathered commensurate to the age and type of property."
+    ],
+    "Yes": [
+      "The roof covering is weathered to age and type.",
+      "If Flat Roof is selected",
+      "You should ask the management company whether any repairs have been undertaken in the past or proposed for the roof covering.",
+      "Construction",
+      "You should ask the management company whether any repairs have been undertaken in the past or proposed for the rainwater goods."
+    ],
+    "The roof covering is weathered to age and type.": [
+      "Where visible these appear in (reasonable/satisfactory) condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Paragraph (Skip line in output).",
+      "Flashing: The waterproofing at the junction of the roof covering and wall (called the flashing), appears to be formed in (lead/mortar/tiles/other). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Ridge Tiles: The covering along the top of the roof structure (called the ridge tiles) are assumed formed in (tiles/lead/concrete/other). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Hip Tiles: The covering along the junction to the roofs slopes (called the hip tiles) are assumed formed in (tiles/lead/concrete/other). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way."
+    ],
+    "Paragraph (Skip line in output).": [
+      "Flashing: The waterproofing at the junction of the roof covering and wall (called the flashing), appears to be formed in (lead/mortar/tiles/other). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Ridge Tiles: The covering along the top of the roof structure (called the ridge tiles) are assumed formed in (tiles/lead/concrete/other). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Hip Tiles: The covering along the junction to the roofs slopes (called the hip tiles) are assumed formed in (tiles/lead/concrete/other). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Parapet wall(s): The parapet wall(s) on the roof is built of (bricks/concrete/block/other)  and are (not rendered/fully rendered/partially rendered). These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "Minor deflection was noted to the roof (front/side/rear/other) slope(s) but not considered to be structurally significant nor unusual for a building of this age.",
+      "It is possible that the roof covering contains asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded or drilled, without taking suitable safety precautions. When the covering are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment.\r\n\r\nBecause of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
+      "Add text to: Section J3 - Risk to people",
+      "E2: Parts of the roof covering may contain some asbestos and is a safety hazard if disturbed.",
+      "Flat Roof Felt: Flat felt roof coverings have a comparatively short life and will require regular maintenance checks. Even though the general condition of the felt may appear satisfactory to type and age, repairs or replacement must be expected in the future. It is difficult to predict when this will be required as felt roofs can breakdown with little warning, even when visually appearing sound.",
+      "Paragraph (Skip line in output).",
+      "Asbestos: Parts of the (Roof covering/verge/soffits/other) may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded or drilled, without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment.\r\nBecause of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
+      "The surface of the roof slope to the (main building/back addition/other) is uneven or undulating.",
+      "This is normal for this type of roof and is no cause for concern. No repair is currently needed. The property must be maintained in the normal way. The timber used in older roofs can gradually change shape or distort during normal use. This is not a problem and is normal for this type of roof.",
+      "The surface of the roof slope to the (front/side/rear) building is uneven or undulating. There is evidence to that appears to suggest that the roof timber structure requires strengthening. You should contact a qualified person to carry out further investigation and recommend remedial work soon.",
+      "The surface of the roof slope to the (front/side/rear) building is uneven or undulating.",
+      "Many (roof/ridge/hip) tiles (are loose/have slipped/are missing/are cracked/are poorly secured/are damaged/other). This is likely to cause damp penetration to the building below (See Section J1 - Risks) and is a safety hazard (See Section J3 Risks). This should be repaired now.",
+      "Add text to: Section J1 - Risk to building",
+      "E2:Many (roof/ridge/hip) tiles (are loose/have slipped/are missing/are cracked/are poorly secured/are damaged/other). This is likely to cause damp penetration to the building below.",
+      "Add text to: Section J3 - Risk to People",
+      "E2:Many (roof/ridge/hip) tiles (are loose/have slipped/are missing/are cracked/are poorly secured/are damaged/other). This is a safety hazard.",
+      "The sloping roof covering is in poor condition, and you should replace this now.  This work may need building regulation approval from the local authority. To meet current standards, you may have to carry out additional work (for example strengthening of the roof structure, improving thermal insulation, etc.).This can increase the amount of repair work.",
+      "There is evidence to that appears to suggest that the roof timber structure requires strengthening due to the additional weight of the replacement roof covering. You should contact a qualified person to carry out further investigation and recommend remedial work soon.",
+      "The flat roof covering is (torn/split/damaged/blistered/holding water/covered with moss/other). This should be repaired soon.",
+      "The flat roof covering is badly (torn/split/damaged/blistered/ponding/other). This is causing damp penetration to the building below (See Section J1 - Risks). The flat roof covering needs replacing now. To do this, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work.",
+      "The (rendering/copping/flashing/other) of the parapet on the (right/left/rear/front) of the roof are (damaged/loose/partly missing/cracked/poorly secured/other). This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "The (rendering/copping/flashing/other) of the parapet on the (right/left/rear/front) of the roof are (badly damaged/very loose/other). This should be repaired now. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "This is a safety hazard, and parts of the parapet wall may fall to the ground. (see section J3 Risks).",
+      "The parapet wall is in very poor condition and this is a safety hazard.",
+      "The (mortar/tiles/clips/other) along the edge of the roof, called the verge, are (badly damaged/badly cracked/about to drop/other). This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "This is a safety hazard, and parts of the verge may fall to the ground. (see section J3 Risks).",
+      "The roof verge is in very poor condition and this is a safety hazard.",
+      "The valley gutter at the junction of the roofs to the (front/side/rear) of the building is (partially/completely) (blocked with debris/poorly aligned).  This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work. This should be repaired soon.",
+      "You should ask the management company whether any repairs have been undertaken in the past or proposed for the roof covering.",
+      "Your Legal Advisers should confirm responsibility of repairs to the flat roof covering from the management company and that there is an adequate annual sinking fund set aside for repairs and/or replacement should the need arise, so that unexpected repair bill or increased service charge be avoided.",
+      "Drop down (NI, 1, 2, 3)",
+      "Notes. Please type in your text in the box provided below…",
+      "Where visible at ground level, the rainwater goods are made up (mainly of/of a mixture of) (plastic/cast iron/asbestos cement/concrete/metal/other) gutters and downpipes.",
+      "These are in (reasonable/satisfactory) condition to type and age.  No repair is currently needed. The property must be maintained in the normal way.",
+      "Parts of the rainwater goods may be clogged by vegetative growth, and I suspect debris. These should be cleared to prevent water penetration and associated decay to adjoining timbers.",
+      "Blocked gullies were noted, and this can cause rainwater overflows to penetrate nearby structures. This can cause internal dampness or timber rot."
+    ],
+    "Flashing": [
+      "Ridge tiles",
+      "Parapet wall"
+    ],
+    "Ridge tiles": [
+      "Parapet wall"
+    ],
+    "Hip Tiles": [
+      "Parapet wall"
+    ],
+    "Parapet wall": [],
+    "Deflection": [],
+    "Minor": [
+      "Significant",
+      "Cause of defect",
+      "Strengthen Timber",
+      "Investigate",
+      "If replacement roof is selected",
+      "Minor deflection was noted to the roof (front/side/rear/other) slope(s) but not considered to be structurally significant nor unusual for a building of this age.",
+      "Although active infestations of these insects can be serious, I saw only a small infestation that usually results in limited treatment and repair. To be sure, you should ask an appropriately qualified and experienced person to do this soon.",
+      "Although large growths of active wood rot can be serious, in this case, I noticed only a limited outbreak. You should ask an appropriately qualified and experienced person to repair this soon."
+    ],
+    "Significant": [
+      "Cause of defect",
+      "Strengthen Timber",
+      "Investigate",
+      "If replacement roof is selected",
+      "Significant deflection was noted to the (front/side/rear/other) roof slope(s)."
+    ],
+    "Cause of defect": [
+      "Strengthen Timber",
+      "Investigate",
+      "If replacement roof is selected",
+      "The deflection to the (front/side/rear/other) roof slope(s) is likely to be caused by (damaged roof timber/heavy replacement covering/other)."
+    ],
+    "Strengthen Timber": [
+      "Investigate",
+      "If replacement roof is selected",
+      "You should contact a qualified person to replace damaged timber or strengthened any weakened or small timber so that the roof structure can adequately bear the weight of the roof covering."
+    ],
+    "Investigate": [
+      "If replacement roof is selected",
+      "I cannot find the cause of the deflection. You should contact a qualified person for further investigation and provide remedial advice."
+    ],
+    "If replacement roof is selected": [
+      "The replacement roof work would have required Local Authority consents and approvals (See Section I1 – Regulations). Your Legal Adviser should make further enquiries in this regard and confirm that adequate means of support are in place."
+    ],
+    "Add text to Section I2 - Guarantees": [
+      "You should ask your legal adviser to confirm whether the replacement roof covering is covered by a guarantee or warranty and advise on the implications.",
+      "Paragraph (Skip line in output).",
+      "It is possible that the roof covering contains asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded or drilled, without taking suitable safety precautions. When the covering are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment.\r\n\r\nBecause of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
+      "Add text to: Section J3 - Risk to people",
+      "E2: Parts of the roof covering may contain some asbestos and is a safety hazard if disturbed.",
+      "You should ask your legal adviser to confirm whether the damp proof course treatment is covered by a guarantee or warranty and advise on the implications.",
+      "An external wall has been removed from (lounge/kitchen/bedroom/other) and this work should have been carried out with building regulation approval and should have included support for the remaining structure. Due to the nature of internal floor and ceiling finishes, I am unable to confirm that the necessary support has been provided and strongly recommend that your legal advisors seek confirmation that the necessary building regulation approval was obtained for this work. In the absence of any consent or proper supervision, there is a risk that further support may be required, incurring additional expense and disturbance.",
+      "An external wall has been removed from (lounge/kitchen/bedroom/other) and this work should have been carried out with building regulation approval and should have included support for the remaining structure. However, I noted (Describe defect).  But due to the nature of internal floor and ceiling finishes, I am unable to confirm that the necessary support has been provided and strongly recommend that your legal advisors seek confirmation that the necessary building regulation approval was obtained for this work. In the absence of any consent or proper supervision, there is a risk that further support may be required, incurring additional expense and disturbance. You should contact a qualified person for further investigation and advice.",
+      "Although I did not observe any evidence of structural movements; I cannot be categorical regarding this given that all buildings are susceptible to movements e.g. settlement movement. It is possible that there are movement cracks in covered and decorated parts of the property.",
+      "I noted no evidence of any significant recent or progressive structural movement within the property although did observe evidence of usual settlement considered to be within acceptable parameters at this stage. Long-term monitoring would, of course, be necessary to be categorical regarding the structural condition but is not considered warranted by my single inspection within the limitations imposed.",
+      "You should ask your legal adviser to confirm whether the movement repair work is covered by a guarantee or warranty and advise on the implications.",
+      "A number of the bricks to the (front/side/rear) of the (main building/back addition/extension/bay window/other) have deteriorated (this is called spalling).",
+      "These should be repaired soon.",
+      "You should ask your legal adviser to confirm whether the wall tie repair work is covered by a guarantee or warranty and advise on the implications.",
+      "The small beam that spans across the top of the (window/door) opening (called a lintel) in the (front/side/rear) wall of the (main building/back addition/extension/bay window/other) is (damaged/cracked/distorted).",
+      "This should be repaired soon. To repair the lintel properly, it may have to be replaced completely.",
+      "You should ask your legal adviser to confirm whether work on the removed wall(s) are covered by a guarantee or warranty and advise on the implications.",
+      "Add text to: Section I1 - Regulations",
+      "If the removed wall(s) received Local Authority consents and approvals. Your Legal Advisers should make further enquiries in this regard and confirm that adequate means of support are in place.",
+      "Add text to: Section I2 - Guarantees",
+      "The external wall to the (front/side/rear) wall of the (main building/back addition/extension/bay window/garage/other) is not thick enough and vulnerable to damp problems and heat loss (See Section J1 - Risks). This sub-standard construction should be improved soon. In some cases, rebuilding the wall to modern standards may be the only economic option.",
+      "Add text to: Section J1 - Risk to building",
+      "E4: The external wall to the (front/side/rear) wall of the (main building/back addition/extension/bay window/garage/other) is not thick enough and vulnerable to damp problems and heat loss.",
+      "Cavity wall Insulation: There is evidence that cavity wall insulation has been installed. Your legal adviser should be asked to verify the type of insulation used and the existence of any guarantees. See Section I2 - Guarantees. \r\n\r\nThere is evidence that foam cavity wall insulation has been installed. Problems have been associated with this material which can, in time, degrade and allow damp to penetrate the interior or result in accelerated corrosion of wall ties. Your legal adviser should be asked to verify the type of insulation used and the existence of any guarantees. See Section I2 - Guarantees.",
+      "You should ask your legal adviser to check whether the windows have been installed by a contractor registered with FENSA to confirm that safety glazing have been installed. It is recommended that enquiries should be made regarding guarantees to the double glazed windows.",
+      "Where a complete window is replaced, it will have to conform to modern standards. This requires that you will have to either get building regulation approval from the local authority or use a contractor registered with FENSA.\r\n\r\nYou should ask your legal adviser to check whether the windows have been installed by a contractor registered with FENSA. It is recommended that enquiries should be made regarding guarantees to the double glazed windows (See Section I2 - Guarantees) as it is normal to do so.",
+      "You should ask your legal adviser to check whether the replacement windows have been installed by a contractor registered with FENSA. It is recommended that enquiries should be made regarding guarantees to the double glazed windows.",
+      "Double-hung sash windows are expensive to maintain and also tend to be ill-fitting and allow heat loss. From time to time, it is important to employ a joiner to inspect the sash windows, check the cording and also to ease them before redecoration. This is best down in conjunction with the redecoration cycle.",
+      "There is a Velux window installed over the (loft/extension/other) and this is (PVC/timber/steel/other) (single/double/secondary) glazed.",
+      "There are (one/two/three/four/five/other) Velux windows installed over the (loft/extension/other) and these are (PVC/timber/steel/other) (single/double/secondary) glazed.",
+      "These appear in (reasonable/satisfactory) condition. No repair is currently needed. The property must be maintained in the normal way.",
+      "You should ask your legal adviser to check whether the doors have been installed by a contractor registered with FENSA. It is recommended that enquiries should be made regarding guarantees to the double glazing.",
+      "The junction between the door frame and the opening in the walls in which they are fitted are  (properly/fairly/poorly) sealed with no apparent defects or repairs needed. The security offered by the door(s) are (reasonable/inadequate).",
+      "The (main/rear/side/patio/garage/other) door to the property (is damaged/is rotten/is partly worn/is poorly secured/has inadequate lock/has rotted frame/has damaged lock/has failed glazing/sticks against frame/is poorly fitted/other). You should replace or repair the door soon.",
+      "The lock to the (main/rear/side/patio/garage/other) door should be repaired or replaced now as the security of the property may be compromised (See Section J3 - Risk).",
+      "You should ask your legal adviser to check whether the PVC glazed sections to the conservatory/porch have been installed by a contractor registered with FENSA. It is recommended that enquiries should be made regarding guarantees to the double glazing.",
+      "The (conservatory/porch) is open to the main part of the property, and this will result in a high rate of heat loss from the property. A separating door should be fitted between them soon.",
+      "The (conservatory/porch) is in poor condition. You should refurbish or replace it soon.",
+      "The (door/windows/door glazing/window glazing/roof glazing/floor/walls/rainwater goods/other)  (is/are/has/have) (cracked/damaged/rotten/leaking/damp/failed/misted over/other. These should be repaired soon.",
+      "The (door/windows/door glazing/window glazing/roof glazing/floor/walls/rainwater goods/other)  (is/are/has/have) (badly cracked/ severely damaged/badly rotten/severely leaking/causing damp/failed/other). These should be repaired now."
+    ],
+    "If composite roof is selected": [
+      "If flat roof and mineral felt is selected",
+      "It is possible that the roof covering contains asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded or drilled, without taking suitable safety precautions. When the covering are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment.\r\n\r\nBecause of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out."
+    ],
+    "Add text to Section J3 - Risk to people": [
+      "E2: Parts of the roof covering may contain some asbestos and is a safety hazard if disturbed.",
+      "Flat Roof Felt: Flat felt roof coverings have a comparatively short life and will require regular maintenance checks. Even though the general condition of the felt may appear satisfactory to type and age, repairs or replacement must be expected in the future. It is difficult to predict when this will be required as felt roofs can breakdown with little warning, even when visually appearing sound.",
+      "Paragraph (Skip line in output).",
+      "Asbestos: Parts of the (Roof covering/verge/soffits/other) may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded or drilled, without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment.\r\nBecause of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
+      "The surface of the roof slope to the (main building/back addition/other) is uneven or undulating.",
+      "E3: The rainwater goods contain asbestos cement.",
+      "The slope on the guttering is too shallow. This prevents the rainwater from draining properly and may result in future leaks. The gutters should be refitted with an adequate slope soon. You may have to replace parts of the system, and this can increase the amount of repair work.",
+      "Blocked and leaking gutters and downpipes can cause damp penetration and timber decay to the structure. These should be inspected and maintained annually to ensure gutters remain watertight.",
+      "You should ask the management company whether any repairs have been undertaken in the past or proposed for the rainwater goods.",
+      "Drop down (NI, 1, 2, 3)",
+      "E5: (One/Some/Many) of the windows is/are (have damaged locks/are difficult to open/are badly worn/are rotten/have broken panes/have failed glazing/are in disrepair/other) and are a safety hazard.",
+      "The double glazing units to the (lounge/bedroom/kitchen/bathroom/other) have failed, and the space between the glass panes has ‘misted’ over. This is not a serious defect but is unsightly and can reduce the thermal efficiency of the double glazing. You should replace these soon.\r\n\r\nWhere some double glazed panels have failed, the remainder could suffer similar problems, and you should plan to replace more in the future. It can be difficult to replace just the double glazed units on some older windows. In these cases, you may have to plan to replace the whole window.",
+      "Windows that are in poor condition will require comprehensive repair. In some cases, it may be economical to replace the windows entirely.",
+      "Add text to: Section J1 - Risk to building",
+      "E5: Part(s) of the timber window frame is rotten. This should be repaired to avoid further deterioration.",
+      "E5: The design of the window(s) does not allow people to escape from a fire. The affected window is in the (lounge/bedroom/study/other) has (no opening/is too small).",
+      "Notes. Please type in your text in the box provided below…",
+      "E6: The lock to the (main/rear/side/patio/garage/other) door should be repaired or replaced now as the security of the property may be compromised.",
+      "The double glazing to the (main/rear/side/patio/garage/other) door has failed, and the space between the glass panes has ‘misted’ over. This is not a serious defect but is unsightly and can reduce the thermal efficiency of the double glazing. You should replace this soon.\r\n\r\nWhere some double glazed panels have failed, the remainder could suffer similar problems, and you should plan to replace more in the future. It can be difficult to replace just the double glazed units on some older windows. In these cases, you may have to plan to replace the whole window",
+      "The locking arrangement to the (main/rear/side/patio/garage/other) door(s) are not up to current standards and is a security risk. This should be improved soon.",
+      "E6: Part(s) of the timber door or frame is rotten. This should be repaired to avoid further deterioration.",
+      "E8: Parts of the usual work at the eaves level may contain some asbestos and is a safety hazard.",
+      "The (facias/soffits/barge boards/verge clips/timber cladding/other) to the (main building/back addition/extension/bay window/garage/other) are (rotted/damaged/poorly secured/incomplete/other). This should be repaired soon.",
+      "The above defect is a safety hazard. This should be repaired now.",
+      "Timber: You should plan to carry out some redecoration work to further protect the external timber works at the eaves level.",
+      "It is not possible to comment on the concealed sections of the woodwork, however, a closer inspection may reveal some defects such as wood rot, e.g. behind guttering, soffits, and fascia.\r\n\r\nWoodwork at roof level is affecetd by weathering and rot due to being exposed to the elements. Therefore, you shoud plan to repair and decorate exposed timber as required to reduce the risk of damage and decay.\r\n\r\nExternal decorations help keep the property in satisfactory condition. Without a protective finish, roof timber elements will quickly deteriorate thus requiring extensive repairs. To prevent this, external surfaces should be redecorated periodically.",
+      "E9: I could not tell if the glazing to the roof terrace screens is safety glass and this is a hazard.",
+      "The (balcony/carport/roof terrace/staircase/other) walls are (cracked/damaged/eroded/other). This should be repaired soon.",
+      "The roof cover over the carport canopy (has missing tiles/has slipped tiles/ is in disrepair/ is leaking/ is dilapidated/has damaged flashing/is poorly secured). This should be repaired soon.",
+      "The surface of the roof terrace floor is (split/cracked/other). This should be repaired soon.",
+      "E9: The handrail is (not strong enough/ partly rotten/ poorly designed) and could allow people to fall.",
+      "I have not inspected parts of the property which were covered, unexposed or inaccessible, and it is not possible to inspect some of these areas without removing carpets or fittings. For this reason, I am unable to report that such parts are free from rot, wood boring insect infestation, and other pests or defects. I could not accept any responsibility for any defect which would have been apparent to me if I had been able to freely inspect these parts of the property.\r\n\r\nIt is possible that defects may exist in unseen areas, and unless the property is fully inspected before purchase commitment, there may be additional costs of repair which must be borne by you.",
+      "F1: Parts of the timber structure are (badly distorted/extensively damaged/extensively affected by wood boring insect/ badly rotted/badly split/largely missing/very inadequate).This could be a safety hazard",
+      "No apparent evidence of any severe or active beetle infestation or related wood boring insects was observed. Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation. I also observed no examples of dry rot to the roof timbers. However, ventilation to the roof space should be maintained to prevent conditions favourable to rot.",
+      "Although active infestations of these insects can be serious, I saw only a small infestation that usually results in limited treatment and repair. To be sure, you should ask an appropriately qualified and experienced person to do this soon.",
+      "I found an active and extensive infestation of wood-boring insects in parts of the roof structure. This is serious, and you should ask an appropriately qualified and experienced person to repair this problem now."
+    ],
+    "If flat roof and mineral felt is selected": [
+      "Investigate          Roof slope location",
+      "Flat Roof Felt: Flat felt roof coverings have a comparatively short life and will require regular maintenance checks. Even though the general condition of the felt may appear satisfactory to type and age, repairs or replacement must be expected in the future. It is difficult to predict when this will be required as felt roofs can breakdown with little warning, even when visually appearing sound."
+    ],
+    "Contains Asbestos": [
+      "Undulating Roof",
+      "Roof Spreading"
+    ],
+    "Undulating Roof": [
+      "Roof Spreading"
+    ],
+    "Investigate          Roof slope location": [
+      "Roof slope location",
+      "Repair soon",
+      "The surface of the roof slope to the (front/side/rear) building is uneven or undulating. There is evidence to that appears to suggest that the roof timber structure requires strengthening. You should contact a qualified person to carry out further investigation and recommend remedial work soon."
+    ],
+    "Roof Spreading": [
+      "Flat Roof Repair"
+    ],
+    "Roof slope location": [
+      "Repair soon",
+      "The surface of the roof slope to the (front/side/rear) building is uneven or undulating."
+    ],
+    "Add text to Section J1 - Risk to building": [
+      "E2:Many (roof/ridge/hip) tiles (are loose/have slipped/are missing/are cracked/are poorly secured/are damaged/other). This is likely to cause damp penetration to the building below.",
+      "Add text to: Section J3 - Risk to People",
+      "E2:Many (roof/ridge/hip) tiles (are loose/have slipped/are missing/are cracked/are poorly secured/are damaged/other). This is a safety hazard.",
+      "Paragraph (Skip line in output).",
+      "The sloping roof covering is in poor condition, and you should replace this now.  This work may need building regulation approval from the local authority. To meet current standards, you may have to carry out additional work (for example strengthening of the roof structure, improving thermal insulation, etc.).This can increase the amount of repair work.",
+      "E2: The flat roof covering is badly (torn/split/damaged/blistered/ponding/other).",
+      "The (rendering/copping/flashing/other) of the parapet on the (right/left/rear/front) of the roof are (damaged/loose/partly missing/cracked/poorly secured/other). This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "The (rendering/copping/flashing/other) of the parapet on the (right/left/rear/front) of the roof are (badly damaged/very loose/other). This should be repaired now. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+      "E4: Dampness was noted to the (location), but I could not discover the cause. Further investigation and advice from a qualified person is recommended.",
+      "I noted evidence of damp proof course treatment in the property. You should ask your legal adviser to check whether there has been a dampness problem before and if a valid guarantee or warranty covers this work (See Section I2 - Guarantees).                                                                                                                                                                                                                                                                                                                             If not, then, you should ask an appropriately qualified person to inspect the property, assess its condition and identify what repairs are required. Once the repairs have been completed, this person should issue a certificate of ‘structural worthiness’. You should ask your insurance company if this problem would affect your ability to get insurance cover for this property.",
+      "Add text to: Section I2 - Guarantees",
+      "You should ask your legal adviser to confirm whether the damp proof course treatment is covered by a guarantee or warranty and advise on the implications.",
+      "An external wall has been removed from (lounge/kitchen/bedroom/other) and this work should have been carried out with building regulation approval and should have included support for the remaining structure. Due to the nature of internal floor and ceiling finishes, I am unable to confirm that the necessary support has been provided and strongly recommend that your legal advisors seek confirmation that the necessary building regulation approval was obtained for this work. In the absence of any consent or proper supervision, there is a risk that further support may be required, incurring additional expense and disturbance.",
+      "E4: The (front/side/rear) walls of the (main building/back addition/extension/bay window/other) has been damaged by movements cracks potentially arising from (settlement/subsidence/point loading/wall tie rust/other) and this is structurally serious.",
+      "The (front/side/rear) outside wall to the (main building/back addition/extension/bay window/other) has been repaired, and this indicates that movement has previously affected the building. Recent damage suggests the movement has reoccurred (See Section J1 Risks). This shows the previous work was not successful, and you should ask your legal adviser to check if any guarantees or warranties cover this work (See Section I2 - Guarantees). If you do not receive a satisfactory response, you should ask an appropriately qualified person to investigate the feature, cause of the new movement and recommend an appropriate scheme of repair. Evidence of former building movement even where satisfactorily resolved can affect future saleability and suitability for a mortgage.",
+      "You should ask your legal adviser to confirm whether the movement repair work is covered by a guarantee or warranty and advise on the implications.",
+      "E4: Parts of the render coating to the (front/side/rear) of the (main building/back addition/extension/bay window/other) are (cracked/loose).",
+      "Rendering pieces are likely to fall and cause harm to people that may be nearby. This is a hazard (See Section J3 Risks). These should be repaired now.",
+      "Add text to: Section J1 - Risk to people",
+      "E4: Rendering pieces are likely to fall and cause harm to people that may be nearby. This is a hazard.",
+      "The mortar between the bricks (called the pointing) to the (front/side/rear) of the (main building/back addition/extension/bay window/other) has (eroded/loosened).",
+      "E4: The mortar between the bricks (called the pointing) to the (front/side/rear) of the (main building/back addition/extension/bay window/other) has (eroded/loosened).",
+      "Parts of the walls to the (front/rear/side) of the property show signs of previous cavity wall tie repair. No repair is currently needed. The property must be maintained in the normal way. You should ask your legal adviser to check if a valid guarantee or warranty covers this work (see section I2 - Guarantees). If not, you should ask an appropriately qualified person to inspect the walls and check the suitability of the repair.",
+      "You should ask your legal adviser to check whether there are any approvals, guarantees or warranties that cover this work. If not, then you should ask an appropriately qualified person to inspect the property, assess its condition and identify what repairs are required. Once the repairs have been completed, this person should issue a certificate of ‘structural worthiness’. You should ask your insurance company if this problem would affect your ability to get insurance cover for this property (see section 12).",
+      "You should ask your legal adviser to confirm whether the wall tie repair work is covered by a guarantee or warranty and advise on the implications.",
+      "E4: The small beam that spans across the top of the (window/door) opening (called a lintel) in the (front/side/rear) wall of the (main building/back addition/extension/bay window/other) is (damaged/cracked/distorted/bulging).",
+      "The window sill across the bottom of the window opening in the (front/side/rear) wall of the main (main building/back addition/extension/bay window/other) is (damaged/cracked/ eroded). This should be repaired soon.",
+      "The window sill across the bottom of the window opening in the (front/side/rear) wall of the main (main building/back addition/extension/bay window/other) is (damaged/unstable/ very distorted/allowing dampness) to get into the building (See Section J1 - Risks). To solve this problem, the lintel will have to be replaced completely, and you may have to organise other associated repairs. This will increase the amount of repair work required.",
+      "Add text to: Section I1 - Regulations",
+      "If the removed wall(s) received Local Authority consents and approvals. Your Legal Advisers should make further enquiries in this regard and confirm that adequate means of support are in place.",
+      "E4: The external wall to the (front/side/rear) wall of the (main building/back addition/extension/bay window/garage/other) is not thick enough and vulnerable to damp problems and heat loss.",
+      "Cavity wall Insulation: There is evidence that cavity wall insulation has been installed. Your legal adviser should be asked to verify the type of insulation used and the existence of any guarantees. See Section I2 - Guarantees. \r\n\r\nThere is evidence that foam cavity wall insulation has been installed. Problems have been associated with this material which can, in time, degrade and allow damp to penetrate the interior or result in accelerated corrosion of wall ties. Your legal adviser should be asked to verify the type of insulation used and the existence of any guarantees. See Section I2 - Guarantees.",
+      "The external surfaces of the walls or parts of it have been painted. Painting of external wall surfaces can increase the risk of dampness and frost damage. This is because rainwater can find its way through tiny cracks in the paint to saturate the wall but it is then prevented from freely evaporating into the atmosphere by the paint film, which acts as a cloak to entrapped moisture. High levels of internal humidity can also lead to a build-up of entrapped moisture in painted external walls, increasing the risk of spalling in the brickwork. As the external surfaces have been painted, this will be an ongoing decoration/maintenance burden in the future.",
+      "There are (small/medium/medium to large) sized trees close to the property. There are no obvious signs to suggest that these have caused any significant damage to the property, but it would be appropriate to draw up a programme of management for these trees. Trees can cause problems to structures and services on shrinkable subsoil.",
+      "You should ask the management company whether any repairs have been undertaken in the past or proposed for the external walls.",
+      "E5: Part(s) of the timber window frame is rotten. This should be repaired to avoid further deterioration.",
+      "The design of the window(s) does not allow people to escape from a fire. The affected window is in the (lounge/bedroom/study/other) has (no opening/is too small). This is a safety hazard (see section J3 Risks). No repair is currently needed. The property must be maintained in the normal way. To reduce this hazard, you should ask an appropriately qualified person for advice.",
+      "Add text to: Section J3 - Risk to people",
+      "E5: The design of the window(s) does not allow people to escape from a fire. The affected window is in the (lounge/bedroom/study/other) has (no opening/is too small).",
+      "E6: Part(s) of the timber door or frame is rotten. This should be repaired to avoid further deterioration.",
+      "Drop down (NI, 1, 2, 3)",
+      "Notes. Please type in your text in the box provided below…",
+      "This section is not applicable to the subject property, no further comments.",
+      "E8: Parts of the usual work at the eaves level is rotted. This should be repaired to avoid further deterioration.",
+      "As this is a leasehold property, the lease should state when external decorations are due to be carried out; however, you should ask your Legal Adviser to check that this is the case before the exchange of contracts.\r\n\r\nYou should ask the management company whether any repairs have been undertaken in the past or proposed.",
+      "F1: The roof floorboards are (not insulated /adequately insulated)and is causing condensation and mould growth in places.",
+      "No ventilation has been provided in the roof space. The roof space must be ventilated to the outside air to prevent dampness. When installing insulation, the ventilation must not be obstructed.",
+      "The roof space does not have (any/sufficient) ventilation, and this has caused condensation and mould growth in places (See Section J1 - Risks). Additional ventilation should be provided now.",
+      "Add text to: Section J1 - Risk to building",
+      "F1: The roof space does not have (any/sufficient) ventilation, and this has caused condensation and mould growth in places.",
+      "No comment could be made regarding the condition of the tank and pipework because my inspection was limited by stored personal goods.",
+      "Disused Water Tank: There is a disused cold water tank within the (roof space/ airing cupboard/ kitchen/other) is formed in plastic. You should make arrangements to remove this soon.",
+      "The water tank(s) found within the roof space are formed in (plastic/galvanised metal/asbestos/other).",
+      "These appear in reasonable condition to type and age. No repair is currently needed. The property must be maintained as normal.",
+      "F1: The cold water and accompanying pipework are (not insulation/not adequately insulated). The absence of insulation could result in condensation which can cause dampness to nearby elements.",
+      "The water tank is (old/leaking/in disrepair/damaged/other). You should repair/replace this now as required.",
+      "The (plastic/galvanised metal/asbestos) cold water tank cover is (missing/inadequate). This should be replaced soon.",
+      "Parts of the roof timber structure are (distorted/damaged/affected by wood boring insect/rotten/split/missing/ inadequate/not strong enough). This should be repaired soon.",
+      "Parts of the timber structure are (badly distorted/extensively damaged/extensively affected by wood boring insect/ badly rotted/badly split/largely missing/very inadequate) (See Section J1 - Risks).This could be a safety hazard (See Section J3 - Risks). This should be repaired now.",
+      "F1: Parts of the timber structure are (badly distorted/extensively damaged/extensively affected by wood boring insect/ badly rotted/badly split/largely missing/very inadequate).",
+      "F1: Parts of the timber structure are (badly distorted/extensively damaged/extensively affected by wood boring insect/ badly rotted/badly split/largely missing/very inadequate).This could be a safety hazard",
+      "No apparent evidence of any severe or active beetle infestation or related wood boring insects was observed. Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation. I also observed no examples of dry rot to the roof timbers. However, ventilation to the roof space should be maintained to prevent conditions favourable to rot.",
+      "Although active infestations of these insects can be serious, I saw only a small infestation that usually results in limited treatment and repair. To be sure, you should ask an appropriately qualified and experienced person to do this soon.",
+      "F1: Active and extensive infestation of wood-boring insects found in parts of the roof structure.",
+      "Although large growths of active wood rot can be serious, in this case, I noticed only a limited outbreak. You should ask an appropriately qualified and experienced person to repair this soon.",
+      "I found an extensive outbreak of wood rot in parts of the roof structure. This is serious, and you should ask an appropriately experienced person to repair this problem now.",
+      "F1: Extensive outbreak of wood rot found in parts of the roof structure.",
+      "I found that parts of the original timber structure are too small, and this could affect the stability of the roof structure (See Section J1 Risks).You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme.",
+      "F1: Parts of the original timber structure are too small, and this could affect the stability of the roof structure.",
+      "The roof covering is too heavy and has caused the roof structure to distort, sag and caused nearby walls to crack. You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme.",
+      "F1: The roof covering is too heavy and has caused the roof structure to distort, sag and caused nearby walls to crack.",
+      "The roof covering is too heavy and has caused the roof structure to distort and sag. You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme.",
+      "F1: The roof covering is too heavy and has caused the roof structure to distort and sag.",
+      "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. Removed chimney breasts that are poorly supported can affect the structure of the building (See Section J1- Risk). You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon (See Section I1 - Regulations).",
+      "F1: Part of the chimney breast within the roof space of this property has been removed, and I cannot confirm if the remaining structure has been properly supported due to access restrictions.",
+      "Add text to: Section I1 - Regulation",
+      "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon",
+      "Part of the chimney breast within the roof space of this property has been removed, and the remaining structure appears to be properly supported.. You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure, and provide a report with recommendations soon",
+      "Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported. You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon.",
+      "F1: Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse",
+      "Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse. This is a safety hazard. You should ask your legal adviser to check if the local authority gave permission for this work.",
+      "Minor dampness caused by water penetration were noted to the rendered chimney breast within the roof space. This is not unusual for a property of this age and type of construction as no damp proof course would have been provided when the building was constructed.\r\n\r\nThe water penetration may have been exacerbated by poor detailing to the abutment at the junction of the roof and chimney stack. This does not give much cause for concern, however, when next the roof is recovered or during annual maintenance, the detailing to the flashing should be checked.",
+      "The wall between this and the neighbouring dwelling (called the party wall) is partly missing and could allow the fire to pass from one property to another. The wall should be built up and any gaps to the underside of the roof covering sealed soon. The owner of the neighbouring property has some legal rights over this party wall. You should check with your legal adviser before you organise any work (See Section I1 - Regulations)."
+    ],
+    "Poor Roof Condition": [
+      "Repair soon",
+      "The sloping roof covering is in poor condition, and you should replace this now.  This work may need building regulation approval from the local authority. To meet current standards, you may have to carry out additional work (for example strengthening of the roof structure, improving thermal insulation, etc.).This can increase the amount of repair work."
+    ],
+    "Flat Roof Repair": [],
+    "Parapet Wall Repair": [
+      "Safety hazard",
+      "Verge Repair"
+    ],
+    "Verge Repair": [
+      "Safety hazard"
+    ],
+    "Valley Gutters Repair": [
+      "Default text entry when FLAT is selected",
+      "Condition Rating"
+    ],
+    "If Flat Roof is selected": [
+      "Your Legal Advisers should confirm responsibility of repairs to the flat roof covering from the management company and that there is an adequate annual sinking fund set aside for repairs and/or replacement should the need arise, so that unexpected repair bill or increased service charge be avoided."
+    ],
+    "E3 Rainwater Goods RWG": [
+      "Use ADD Element function",
+      "Not inspected"
+    ],
+    "Not inspected": [
+      "Weather Condition",
+      "The usual external work at the eaves level (the edges of the roof where the guttering is fixed) could not be seen due to the height and configuration of the building. I cannot comment on their condition. These are normally formed in timber and should be maintained in good condition to prevent decay.",
+      "Loft Converted",
+      "Roof structure",
+      "Underlining",
+      "No comment could be made regarding the condition of the tank and pipework because my inspection was limited by stored personal goods.",
+      "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. Removed chimney breasts that are poorly supported can affect the structure of the building (See Section J1- Risk). You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon (See Section I1 - Regulations)."
+    ],
+    "Blocked RWG": [
+      "Blocked Gullies",
+      "Open Runoffs"
+    ],
+    "Blocked Gullies": [
+      "Open Runoffs"
+    ],
+    "Open Runoffs": [],
+    "Repair Soon": [
+      "If asbestos cement pipe is selected",
+      "If insufficient slope is selected",
+      "The (pipes/gutters) (are leaking/are loose/are incomplete/are blocked/are rusted/do not have sufficient slope). You should repair this soon."
+    ],
+    "If asbestos cement pipe is selected": [
+      "If insufficient slope is selected",
+      "Standard text",
+      "The rainwater goods contain asbestos cement (See Section J3 - Risks). No repair is currently needed. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before the pipes or gutters are disturbed in any way. This includes activities such as cleaning out gutters, etc."
+    ],
+    "E3 The rainwater goods contain asbestos cement.": [
+      "The slope on the guttering is too shallow. This prevents the rainwater from draining properly and may result in future leaks. The gutters should be refitted with an adequate slope soon. You may have to replace parts of the system, and this can increase the amount of repair work.",
+      "Blocked and leaking gutters and downpipes can cause damp penetration and timber decay to the structure. These should be inspected and maintained annually to ensure gutters remain watertight.",
+      "You should ask the management company whether any repairs have been undertaken in the past or proposed for the rainwater goods.",
+      "Drop down (NI, 1, 2, 3)",
+      "Notes. Please type in your text in the box provided below…"
+    ],
+    "If insufficient slope is selected": [
+      "Standard text",
+      "The slope on the guttering is too shallow. This prevents the rainwater from draining properly and may result in future leaks. The gutters should be refitted with an adequate slope soon. You may have to replace parts of the system, and this can increase the amount of repair work."
+    ],
+    "E4 Main Walls": [
+      "Use ADD Element function",
+      "Standard text"
+    ],
+    "Walls": [
+      "Repair soon",
+      "A number of the bricks to the (front/side/rear) of the (main building/back addition/extension/bay window/other) have deteriorated (this is called spalling).",
+      "Parts of the render coating to the (front/side/rear) wall(s) of the (main building/back addition/extension/bay window/other) are (cracked/loose/missing in places/other).",
+      "The (balcony/carport/roof terrace/staircase/other) walls are built of (bricks/timber/concrete/glazed section/other)."
+    ],
+    "Thickness": [
+      "Construction",
+      "The main external walls to the  (main building/back addition/extension/other) are built of (Type in number) mm (solid bounded brick wall/cavity brick wall/cavity block wall/ cavity stud wall/other) construction."
+    ],
+    "Visible": [
+      "Not Visible",
+      "Penetrating                   Location                Cause",
+      "Rising                   Location                Cause",
+      "Where visible, the walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC) and assumed to consist of (plastic/felt/slates/engineering bricks/other)."
+    ],
+    "Not Visible": [
+      "Penetrating                   Location                Cause",
+      "Rising                   Location                Cause",
+      "Install French gutters",
+      "The walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC) but were not visible because of (pointing/rendered plinth/other) but assumed to be (plastic/felt/slates/engineering bricks/other) for a property of this age."
+    ],
+    "Damp": [],
+    "Present": [
+      "Penetrating                   Location                Cause",
+      "Rising                   Location                Cause",
+      "Install French gutters",
+      "Unknown cause",
+      "Where accessible, moisture readings were taken with an electronic moisture meter at random points to internal faces of external walls, and signs of dampness were noted to the  (type in location)."
+    ],
+    "Cause": [],
+    "Install French gutters": [
+      "Unknown cause",
+      "DPC Treatment noted",
+      "Because of the height of the grounds around the building, parts of the barrier against dampness rising from the ground (called a damp-proof course or DPC) may have been bridged in places thus allowing water penetrations. Guttering (e.g. French gutters) should be installed in-between the external walls and the surrounding grounds to allow rainwater drain off quickly."
+    ],
+    "Unknown cause": [
+      "DPC Treatment noted",
+      "I could not discover the cause of the dampness (See Section J1 Risks). You should ask an appropriately qualified person to inspect the problem and provide you with a report. To do this properly, parts of the property will have to be disturbed, and you should discuss this with the current owner."
+    ],
+    "Removed Wall": [
+      "Condition           Ok"
+    ],
+    "Condition           Ok": [],
+    "Defects noted": [
+      "All Elevations",
+      "An external wall has been removed from (lounge/kitchen/bedroom/other) and this work should have been carried out with building regulation approval and should have included support for the remaining structure. However, I noted (Describe defect).  But due to the nature of internal floor and ceiling finishes, I am unable to confirm that the necessary support has been provided and strongly recommend that your legal advisors seek confirmation that the necessary building regulation approval was obtained for this work. In the absence of any consent or proper supervision, there is a risk that further support may be required, incurring additional expense and disturbance. You should contact a qualified person for further investigation and advice."
+    ],
+    "Usual": [
+      "All Elevations",
+      "I noted no evidence of any significant recent or progressive structural movement within the property although did observe evidence of usual settlement considered to be within acceptable parameters at this stage. Long-term monitoring would, of course, be necessary to be categorical regarding the structural condition but is not considered warranted by my single inspection within the limitations imposed."
+    ],
+    "All Elevations": [
+      "I noted no evidence of any significant recent or progressive structural movement within the property. But, there are signs that the property has been affected by the structural movement as evidenced by cracks to external and internal wall surfaces, junctions and around openings. As far as could be observed, these are considered longstanding in nature, and no significant repairs are required. These should be filled in and redecorated. Long-term monitoring would, of course, be necessary to be categorical regarding the structural condition but is not considered warranted by my single inspection within the limitations imposed."
+    ],
+    "Recent": [
+      "The (front/side/rear) walls of the (main building/back addition/extension/bay window/other) has been damaged by movements cracks potentially arising from (settlement/subsidence/point loading/wall tie rust/other) and this is structurally serious (See Section J1 Risks). Movement in this property is serious, and it could get worse. Parts of the property could become unstable. You should ask an appropriately qualified person to investigate the problem and recommend a scheme of repair. To do this properly, parts of the property will have to be disturbed so you should discuss this with the building owner. Evidence of former building movement (even where satisfactorily resolved) can affect future suitability for mortgage and saleability of the property."
+    ],
+    "Recurrent": [
+      "The (front/side/rear) outside wall to the (main building/back addition/extension/bay window/other) has been repaired, and this indicates that movement has previously affected the building. Recent damage suggests the movement has reoccurred (See Section J1 Risks). This shows the previous work was not successful, and you should ask your legal adviser to check if any guarantees or warranties cover this work (See Section I2 - Guarantees). If you do not receive a satisfactory response, you should ask an appropriately qualified person to investigate the feature, cause of the new movement and recommend an appropriate scheme of repair. Evidence of former building movement even where satisfactorily resolved can affect future saleability and suitability for a mortgage."
+    ],
+    "Spalling": [
+      "Causing Damp"
+    ],
+    "These should be repaired soon.": [
+      "This is allowing damp to get into the building. These should be repaired now.",
+      "Parts of the render coating to the (front/side/rear) wall(s) of the (main building/back addition/extension/bay window/other) are (cracked/loose/missing in places/other).",
+      "These should be repaired soon.",
+      "This is allowing damp to get into the building (See Section J1 Risks). These should be repaired now.",
+      "Add text to: Section J1 - Risk to building",
+      "E4: Parts of the render coating to the (front/side/rear) of the (main building/back addition/extension/bay window/other) are (cracked/loose).",
+      "Rendering pieces are likely to fall and cause harm to people that may be nearby. This is a hazard (See Section J3 Risks). These should be repaired now.",
+      "Add text to: Section J1 - Risk to people"
+    ],
+    "Causing Damp": [
+      "Causing Damp",
+      "Wall Tie Repair"
+    ],
+    "Render": [
+      "Causing Damp"
+    ],
+    "Hazard": [],
+    "Add text to Section J1 - Risk to people": [
+      "E4: Rendering pieces are likely to fall and cause harm to people that may be nearby. This is a hazard.",
+      "The mortar between the bricks (called the pointing) to the (front/side/rear) of the (main building/back addition/extension/bay window/other) has (eroded/loosened).",
+      "The pointing should be replaced soon.",
+      "This allowing dampness to get inside the building (See Section J1 Risks). The pointing should be replaced now."
+    ],
+    "Pointing": [
+      "Causing Damp",
+      "Wall Tie Repair"
+    ],
+    "The pointing should be replaced soon.": [
+      "This allowing dampness to get inside the building (See Section J1 Risks). The pointing should be replaced now.",
+      "Add text to: Section J1 - Risk to building",
+      "E4: The mortar between the bricks (called the pointing) to the (front/side/rear) of the (main building/back addition/extension/bay window/other) has (eroded/loosened).",
+      "Parts of the walls to the (front/rear/side) of the property show signs of previous cavity wall tie repair. No repair is currently needed. The property must be maintained in the normal way. You should ask your legal adviser to check if a valid guarantee or warranty covers this work (see section I2 - Guarantees). If not, you should ask an appropriately qualified person to inspect the walls and check the suitability of the repair.",
+      "You should ask your legal adviser to check whether there are any approvals, guarantees or warranties that cover this work. If not, then you should ask an appropriately qualified person to inspect the property, assess its condition and identify what repairs are required. Once the repairs have been completed, this person should issue a certificate of ‘structural worthiness’. You should ask your insurance company if this problem would affect your ability to get insurance cover for this property (see section 12)."
+    ],
+    "Wall Tie Repair": [],
+    "Lintel": [],
+    "Window Sills": [],
+    "Thin/Slim Wall": [
+      "Cavity Wall Insulation",
+      "Nearby Trees"
+    ],
+    "Cavity Wall Insulation": [
+      "Nearby Trees",
+      "Default text entry when FLAT is selected",
+      "Condition Rating"
+    ],
+    "If painted wall is selected": [
+      "Add Phrase F/M",
+      "The external surfaces of the walls or parts of it have been painted. Painting of external wall surfaces can increase the risk of dampness and frost damage. This is because rainwater can find its way through tiny cracks in the paint to saturate the wall but it is then prevented from freely evaporating into the atmosphere by the paint film, which acts as a cloak to entrapped moisture. High levels of internal humidity can also lead to a build-up of entrapped moisture in painted external walls, increasing the risk of spalling in the brickwork. As the external surfaces have been painted, this will be an ongoing decoration/maintenance burden in the future."
+    ],
+    "Nearby Trees": [
+      "Default text entry when FLAT is selected",
+      "Condition Rating"
+    ],
+    "Add Phrase F/M": [
+      "Standard Text",
+      "Mainly/Mixture",
+      "You should ask the management company whether any repairs have been undertaken in the past or proposed for the external walls."
+    ],
+    "E5 Windows": [
+      "Use ADD Element function"
+    ],
+    "Standard Text": [
+      "Mainly/Mixture",
+      "Replacement",
+      "Type/Glazing",
+      "Not every part of the windows were inspected in detail. The windows should be inspected as part of normal maintenance routine, and all moveable parts should be eased and suitably adjusted.",
+      "replacement, type, glazing, patio",
+      "No SG Rating",
+      "If replacement door is selected",
+      "Not every part of the doors were inspected in detail. The doors should be inspected as part of normal maintenance routine, and all moveable parts should be eased and suitably adjusted."
+    ],
+    "Mainly/Mixture": [
+      "Replacement",
+      "Type/Glazing",
+      "No SG Rating",
+      "The windows installed in the property are made up of  (mainly/a mixture) of (replacement) (PVC/timber/steel/modern PVC sash/modern timber sash/aluminium/old style timber sash/other) (single/double/secondary) glazed units."
+    ],
+    "Replacement": [
+      "Type/Glazing",
+      "No SG Rating"
+    ],
+    "Type/Glazing": [
+      "No SG Rating"
+    ],
+    "Safety Glass Rating": [
+      "Safety Glass Rating"
+    ],
+    "Noted": [
+      "No SG Rating",
+      "If replacement is selected.",
+      "Visible British Standard Marks to the double glazing units were noted, this confirms that the units have been fitted with safety glasses.",
+      "If replacement door is selected",
+      "If double glazed is selected",
+      "Open to building"
+    ],
+    "No SG Rating": [
+      "If replacement is selected.",
+      "There are no British Standard Marks to the double glazing units. I cannot confirm if the units have been fitted with safety glasses.  No repair is currently needed. The property must be maintained in the normal way. \r\nYou should ask your legal adviser to check whether the windows have been installed by a contractor registered with FENSA to confirm that safety glazing has been installed. It is recommended that enquiries should be made regarding guarantees to the double glazed windows (See Section I2 - Guarantees) as it is normal to do so.",
+      "If replacement door is selected",
+      "No Visible British Standard Marks to the double glazing units were noted. I cannot confirm that the doors have been fitted with safety glasses. No repair is currently needed. The property must be maintained in the normal way. \r\n\r\nYou should ask your legal adviser to check whether the doors have been installed by a contractor registered with FENSA to confirm that safety glazing has been installed. It is recommended that enquiries should be made regarding guarantees to the double glazed doors (See Section I2 - Guarantees).",
+      "If double glazed is selected",
+      "Open to building",
+      "Poor condition",
+      "I could not confirm if the (conservatory/porch) are fitted with safety glass. If not, these will be a safety hazard for those who fall against them. Your legal adviser should ask for details of the original installation. If safety glass cannot be confirmed, you should ask an appropriately qualified person to inspect the glass and provide you with a report. Your legal adviser should ask for details of the original installation."
+    ],
+    "If replacement is selected.": [
+      "If old style timber sash is selected.",
+      "Where a complete window is replaced, it will have to conform to modern standards. This requires that you will have to either get building regulation approval from the local authority or use a contractor registered with FENSA.\r\n\r\nYou should ask your legal adviser to check whether the windows have been installed by a contractor registered with FENSA. It is recommended that enquiries should be made regarding guarantees to the double glazed windows (See Section I2 - Guarantees) as it is normal to do so."
+    ],
+    "If old style timber sash is selected.": [
+      "Double-hung sash windows are expensive to maintain and also tend to be ill-fitting and allow heat loss. From time to time, it is important to employ a joiner to inspect the sash windows, check the cording and also to ease them before redecoration. This is best down in conjunction with the redecoration cycle."
+    ],
+    "Velux Window": [
+      "Sill Projection",
+      "Wall sealing"
+    ],
+    "Single": [
+      "There is a Velux window installed over the (loft/extension/other) and this is (PVC/timber/steel/other) (single/double/secondary) glazed."
+    ],
+    "Multiple": [
+      "Safety Hazard",
+      "There are (one/two/three/four/five/other) Velux windows installed over the (loft/extension/other) and these are (PVC/timber/steel/other) (single/double/secondary) glazed."
+    ],
+    "Sill Projection": [
+      "Wall sealing",
+      "Failed Glazing Location"
+    ],
+    "Wall sealing": [
+      "Failed Glazing Location",
+      "If in disrepair is selected"
+    ],
+    "Safety Hazard": [
+      "Add text to: Section J3 - Risk to people",
+      "Standard text",
+      "If rotted is selected",
+      "Add phrase for flats",
+      "The above defect is a safety hazard. This should be repaired now."
+    ],
+    "Failed Glazing Location": [
+      "If in disrepair is selected",
+      "If rotten is selected",
+      "No Fire Escape Risk",
+      "Inadequate Lock Location",
+      "Condition Rating"
+    ],
+    "If in disrepair is selected": [
+      "If rotten is selected",
+      "No Fire Escape Risk"
+    ],
+    "Add text": [
+      "Windows that are in poor condition will require comprehensive repair. In some cases, it may be economical to replace the windows entirely."
+    ],
+    "If rotten is selected": [
+      "No Fire Escape Risk",
+      "Not applicable",
+      "Add text to: Section J1 - Risk to building"
+    ],
+    "No Fire Escape Risk": [
+      "Condition Rating"
+    ],
+    "E6 Outside Doors": [
+      "Use ADD Element function"
+    ],
+    "Doors": [
+      "Safety Glass Rating",
+      "No SG Rating",
+      "The (conservatory/porch) incorporates (single/double)  glazed (PVC/timber/other) door(s)."
+    ],
+    "If replacement door is selected": [
+      "If damaged/stock lock is selected",
+      "Replacement Door(s): You should ask your legal adviser to check whether the doors have been installed by a contractor registered with FENSA to confirm that safety glazing has been installed. It is recommended that enquiries should be made regarding guarantees to the double glazed doors (See Section I2 - Guarantees).\r\n\r\nWhere a complete door is replaced, it will have to conform to modern standards. This requires that you will have to either get building regulation approval from the local authority or use a contractor registered with FENSA."
+    ],
+    "If damaged/stock lock is selected": [
+      "If rotten is selected",
+      "The lock to the (main/rear/side/patio/garage/other) door should be repaired or replaced now as the security of the property may be compromised (See Section J3 - Risk)."
+    ],
+    "Inadequate Lock Location": [
+      "Condition Rating"
+    ],
+    "E7 Conservatory and Porches": [
+      "Use ADD Element function"
+    ],
+    "Conservatory   Porch": [],
+    "Location, construction": [
+      "There is a (conservatory/porch/open porch/integral porch/other) to the (front/side/rear) of the property, and this is built of (brick walls/PVC double glazed sections/timber double glazed sections/other)."
+    ],
+    "Floor": [
+      "No SG Rating",
+      "If double glazed is selected",
+      "The floors are covered in (tiles/laminate flooring/carpets/other).",
+      "Steps/landing",
+      "Decorations",
+      "The surface of the roof terrace floor is (split/cracked/other). This should be repaired soon."
+    ],
+    "If double glazed is selected": [
+      "Open to building",
+      "Poor condition",
+      "Repair soon",
+      "You should ask your legal adviser to check whether the double glazed sections have been installed by a contractor registered with FENSA. It is recommended that enquiries should be made regarding guarantees to the double glazed doors (See Section I2 - Guarantees)."
+    ],
+    "Open to building": [
+      "Poor condition",
+      "Repair soon",
+      "The (conservatory/porch) is open to the main part of the property, and this will result in a high rate of heat loss from the property. A separating door should be fitted between them soon."
+    ],
+    "Poor condition": [
+      "Repair soon",
+      "The (conservatory/porch) is in poor condition. You should refurbish or replace it soon."
+    ],
+    "E8 Other Joinery and Finishes": [
+      "Use ADD Element function"
+    ],
+    "Joinery": [],
+    "Asbestos": [
+      "Repair soon",
+      "Safety Hazard",
+      "Because of possible asbestos content to parts of the usual work at the eaves level, the surfaces should not be drilled or disturbed without prior advice from an appropriately experienced or qualified person (See Section J3 - Risks). No repair is currently needed. The property must be maintained in the normal way.\r\n\r\nAlthough no repairs are required now, you must expect repairs in the future. When this occurs, you will have to use a contractor experienced in this type of work or an asbestos specialist."
+    ],
+    "Redecorate": [
+      "Standard text",
+      "If rotted is selected",
+      "Add phrase for flats",
+      "Timber: You should plan to carry out some redecoration work to further protect the external timber works at the eaves level."
+    ],
+    "If rotted is selected": [
+      "Add phrase for flats",
+      "Add text to: Section J1 - Risk to building"
+    ],
+    "Add phrase for flats": [
+      "Not Applicable",
+      "As this is a leasehold property, the lease should state when external decorations are due to be carried out; however, you should ask your Legal Adviser to check that this is the case before the exchange of contracts.\r\n\r\nYou should ask the management company whether any repairs have been undertaken in the past or proposed."
+    ],
+    "E9 Other": [
+      "Use ADD Element function"
+    ],
+    "Not Applicable": [
+      "Not Inspected",
+      "This section is not applicable to the subject property, no further comments."
+    ],
+    "Communal Area": [
+      "External features"
+    ],
+    "External features": [],
+    "The floors are (decked/covered in tiles/other).": [
+      "The handrails are formed in (timber/steel/other).",
+      "The (balcony/roof terrace/other) drains are laid with (lead/mortar/bitumen/other) and appear well drained and unobstructed.",
+      "These appear in (reasonable/satisfactory). No repair is currently needed. The property must be maintained in the normal way.",
+      "The (pitched/flat) roof over the (carport/porch canopy/external stairs/other)  is covered in (tile/felt/lead/other)."
+    ],
+    "Handrails": [
+      "The handrails are formed in (timber/steel/other)."
+    ],
+    "The handrails are formed in (timber/steel/other).": [
+      "The (balcony/roof terrace/other) drains are laid with (lead/mortar/bitumen/other) and appear well drained and unobstructed.",
+      "These appear in (reasonable/satisfactory). No repair is currently needed. The property must be maintained in the normal way.",
+      "The (pitched/flat) roof over the (carport/porch canopy/external stairs/other)  is covered in (tile/felt/lead/other)."
+    ],
+    "Drains": [
+      "The (balcony/roof terrace/other) drains are laid with (lead/mortar/bitumen/other) and appear well drained and unobstructed.",
+      "Steps/landing",
+      "Decorations",
+      "The roof terrace drains are (too small/ blocked/poorly drained) and cause rainwater ponding. This could allow dampness to get into the building and should be kept clear."
+    ],
+    "Overloaded": [
+      "No Safety Glass"
+    ],
+    "No Safety Glass": [],
+    "Wall": [
+      "Steps/landing",
+      "Decorations",
+      "The (balcony/carport/roof terrace/staircase/other) walls are (cracked/damaged/eroded/other). This should be repaired soon."
+    ],
+    "Steps/landing": [
+      "Decorations",
+      "The surface of the (steps/landing) is (split/ cracked/partly rotted/rusted). This should be repaired soon."
+    ],
+    "Decorations": [
+      "The decorations to the (stairway/fire escape) are (perished/flaking/other). This should be repaired soon."
+    ],
+    "Juliet Balcony": [
+      "Condition Rating"
+    ],
+    "Hand Rails": [
+      "The handrail is (not strong enough/ inadequately designed) and could allow people to fall. You should repair or replace with a more secured alternative (see Section J3 Risks)."
+    ],
+    "F Inside the Property": [
+      "F1: Roof Structure",
+      "Limitations"
+    ],
+    "Chimney Flue Not Inspected": [
+      "Not fully inspected",
+      "Leaks noted",
+      "The chimney flues have not been inspected, and it is not possible to comment on the adequacy of any linings. The floor construction could not be inspected because the floor covering has not been lifted. No comment can be made regarding these covered areas."
+    ],
+    "Not fully inspected": [
+      "Leaks noted",
+      "I could not fully inspect the roof timber because of (limited roof height/ floors not safe to walk on / some or all of the floors are boarded / excessive storage of personal goods), at the time of my inspection."
+    ],
+    "F1 Roof Structure": [
+      "Weather Condition"
+    ],
+    "Defects": [
+      "Construction",
+      "Although I could not inspect the roof space, I noticed some potential problems such as (sagging roof/undulating roof/roof spreading/sagging ceiling/ other). The risk of a defect remaining out of sight is high. You should ask the owner to give access to the roof space and ask an appropriately qualified person to carry out a full inspection now.",
+      "The original roof structure has been substantially modified to form the loft conversion with most elements now concealed from view, and I am unable to comment regarding areas thus concealed. During my inspection, I observed (cracked walls/sagging ceiling/out of square door/other). You should contact a qualified person for further investigation and advice. Also, it is imperative you verify through your legal advisers that all regulations and permissions in respect of these modifications were undertaken with all necessary interim and final inspections and such confirmation should be obtained before purchase commitment.",
+      "No underlining",
+      "The underlining to the roof is (torn, missing in places/damaged/other). This should be repaired soon.",
+      "Missing cover",
+      "Repair soon",
+      "The cold water and accompanying pipework are (not insulation/not adequately insulated). The absence of insulation could result in condensation which can cause dampness to nearby elements (See Section J1 – Risks)."
+    ],
+    "Loft Converted": [
+      "Roof structure",
+      "Underlining"
+    ],
+    "Roof structure": [
+      "Underlining"
+    ],
+    "Underlining": [
+      "Underlining"
+    ],
+    "Insulation": [
+      "Underlining",
+      "Ventilation"
+    ],
+    "No underlining": [
+      "The underside of the roof slope has no felt underlining or timber boarding installed. The absence of such undercover could result in water leakage, lower internal temperatures, higher heating costs, condensation, and mould growth. No repair is currently needed. I will recommend that you contact a qualified person to inspect the roof covering to ascertain its water tightness. The property must be maintained in the normal way."
+    ],
+    "Inadequate": [
+      "The level of thermal insulation is less than current standards of 270 to 300 mm thickness. This will result in lower internal temperatures and increase your heating costs. No repair is currently needed. The property must be maintained in the normal way."
+    ],
+    "Damp noted": [
+      "The roof floorboards are not (insulated /adequately insulated)and is causing condensation and mould growth in places (See Section J1 - Risks). Lack of thermal insulation can result in lower internal temperatures, higher heating costs, condensation, and mould growth. Adequate insulation should be installed now.",
+      "Not inspected",
+      "The roof space does not have (any/sufficient) ventilation, and this has caused condensation and mould growth in places (See Section J1 - Risks). Additional ventilation should be provided now."
+    ],
+    "Ventilation": [],
+    "Water tank": [
+      "Not insulated"
+    ],
+    "Disused": [
+      "Disused Water Tank: There is a disused cold water tank within the (roof space/ airing cupboard/ kitchen/other) is formed in plastic. You should make arrangements to remove this soon."
+    ],
+    "Insulated": [
+      "Not insulated"
+    ],
+    "Missing cover": [
+      "Repair soon",
+      "The (plastic/galvanised metal/asbestos) cold water tank cover is (missing/inadequate). This should be replaced soon."
+    ],
+    "Insect infestation": [],
+    "Severe": [
+      "I found an active and extensive infestation of wood-boring insects in parts of the roof structure. This is serious, and you should ask an appropriately qualified and experienced person to repair this problem now.",
+      "I found an extensive outbreak of wood rot in parts of the roof structure. This is serious, and you should ask an appropriately experienced person to repair this problem now."
+    ],
+    "Timber rot": [
+      "Undersize timber"
+    ],
+    "Undersize timber": [
+      "Roof spreading"
+    ],
+    "Roof spreading": [],
+    "Heavy roof": [
+      "Removed Chimney Breast"
+    ],
+    "Removed Chimney Breast": [],
+    "Add text to Section I1 - Regulation": [
+      "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon",
+      "Part of the chimney breast within the roof space of this property has been removed, and the remaining structure appears to be properly supported.. You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure, and provide a report with recommendations soon",
+      "Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported. You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon.",
+      "Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse (See Section J1 - Risks).This is a safety hazard (see section J3 Risks). You should ask your legal adviser to check if the local authority gave permission for this work.",
+      "Add text to: Section J1 - Risk to building",
+      "Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse. This is a safety hazard. You should ask your legal adviser to check if the local authority gave permission for this work.",
+      "Minor dampness caused by water penetration were noted to the rendered chimney breast within the roof space. This is not unusual for a property of this age and type of construction as no damp proof course would have been provided when the building was constructed.\r\n\r\nThe water penetration may have been exacerbated by poor detailing to the abutment at the junction of the roof and chimney stack. This does not give much cause for concern, however, when next the roof is recovered or during annual maintenance, the detailing to the flashing should be checked.",
+      "The wall between this and the neighbouring dwelling (called the party wall) is partly missing and could allow the fire to pass from one property to another. The wall should be built up and any gaps to the underside of the roof covering sealed soon. The owner of the neighbouring property has some legal rights over this party wall. You should check with your legal adviser before you organise any work (See Section I1 - Regulations).",
+      "Add text to: Section I1 - Regulation",
+      "The wall between this and the neighbouring dwelling (called the party wall) is partly missing and could allow the fire to pass from one property to another. You should check with your legal adviser before you organise any work."
+    ],
+    "Poor support": [
+      "Risk of collapse",
+      "Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported. You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon."
+    ],
+    "Risk of collapse": [
+      "Damp Chimney",
+      "Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse (See Section J1 - Risks).This is a safety hazard (see section J3 Risks). You should ask your legal adviser to check if the local authority gave permission for this work."
+    ],
+    "Damp Chimney": [
+      "Partly missing",
+      "Largely missing",
+      "Minor dampness caused by water penetration were noted to the rendered chimney breast within the roof space. This is not unusual for a property of this age and type of construction as no damp proof course would have been provided when the building was constructed.\r\n\r\nThe water penetration may have been exacerbated by poor detailing to the abutment at the junction of the roof and chimney stack. This does not give much cause for concern, however, when next the roof is recovered or during annual maintenance, the detailing to the flashing should be checked."
+    ],
+    "Partly missing": [
+      "Largely missing",
+      "The wall between this and the neighbouring dwelling (called the party wall) is partly missing and could allow the fire to pass from one property to another. The wall should be built up and any gaps to the underside of the roof covering sealed soon. The owner of the neighbouring property has some legal rights over this party wall. You should check with your legal adviser before you organise any work (See Section I1 - Regulations)."
+    ]
+  },
+  "Sheet2": {},
+  "Sheet3": {}
+}

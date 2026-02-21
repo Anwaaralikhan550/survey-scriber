@@ -1,0 +1,1635 @@
+{
+  "_description": "Manual mapping between app field keys and Excel field keys",
+  "_instructions": "For each app field, specify which Excel field it maps to, and map each option",
+  "_rules": [
+    "If no Excel field exists, set excelField to null",
+    "If option has no Excel phrase, set to null",
+    "100% Excel phrases required - no AI fallback"
+  ],
+  "_stats": {
+    "totalAppFields": 130,
+    "totalExcelFields": 141,
+    "mappedFields": 0,
+    "unmappedFields": 0
+  },
+  "mappings": {
+    "property_type": {
+      "excelField": "property_type",
+      "options": {
+        "Detached House": null,
+        "Semi-Detached House": null,
+        "Terraced House": null,
+        "End Terrace": null,
+        "Bungalow": null,
+        "Flat/Apartment": null,
+        "Maisonette": null,
+        "Cottage": null,
+        "Commercial": null,
+        "Industrial": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Property Type",
+      "_appLabel": "Property Type",
+      "_appOptions": 11
+    },
+    "tenure": {
+      "excelField": null,
+      "options": {
+        "Freehold": null,
+        "Leasehold": null,
+        "Commonhold": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Tenure",
+      "_appOptions": 4
+    },
+    "num_floors": {
+      "excelField": "floors",
+      "options": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5+": null
+      },
+      "notes": "Auto-suggested: Floors",
+      "_appLabel": "Number of Floors",
+      "_appOptions": 5
+    },
+    "num_bedrooms": {
+      "excelField": null,
+      "options": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6+": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Number of Bedrooms",
+      "_appOptions": 6
+    },
+    "info_source": {
+      "excelField": null,
+      "options": {
+        "Client": null,
+        "Estate Agent": null,
+        "Land Registry": null,
+        "Visual Assessment": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Information Source",
+      "_appOptions": 5
+    },
+    "flat_floor_level": {
+      "excelField": null,
+      "options": {
+        "N/A": null,
+        "Basement": null,
+        "Ground": null,
+        "First": null,
+        "Second": null,
+        "Third": null,
+        "Fourth+": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Floor Level",
+      "_appOptions": 7
+    },
+    "flat_total_floors": {
+      "excelField": "floors",
+      "options": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "N/A": null,
+        "6+": null
+      },
+      "notes": "Auto-suggested: Floors",
+      "_appLabel": "Total Floors in Building",
+      "_appOptions": 7
+    },
+    "flat_access_type": {
+      "excelField": null,
+      "options": {
+        "N/A": null,
+        "Own entrance": null,
+        "Communal entrance": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Access Type",
+      "_appOptions": 4
+    },
+    "flat_access_elevation": {
+      "excelField": null,
+      "options": {
+        "N/A": null,
+        "Level": null,
+        "Stepped": null,
+        "Ramped": null,
+        "Lift": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Access Elevation",
+      "_appOptions": 6
+    },
+    "construction_type": {
+      "excelField": "construction",
+      "options": {
+        "Traditional": null,
+        "Non-Traditional": null,
+        "Modern": null,
+        "Mixed": null,
+        "Unknown": null
+      },
+      "notes": "Auto-suggested: Construction",
+      "_appLabel": "Construction",
+      "_appOptions": 5
+    },
+    "listed_building": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Listed Building",
+      "_appOptions": 3
+    },
+    "listed_grade": {
+      "excelField": null,
+      "options": {
+        "Grade I": null,
+        "Grade II*": null,
+        "Grade II": null,
+        "Locally Listed": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Listed Grade",
+      "_appOptions": 4
+    },
+    "energy_rating": {
+      "excelField": "energy",
+      "options": {
+        "A": null,
+        "B": null,
+        "C": null,
+        "D": null,
+        "E": null,
+        "F": null,
+        "G": null,
+        "Unknown": null
+      },
+      "notes": "Auto-suggested: Energy",
+      "_appLabel": "Energy Rating (EPC)",
+      "_appOptions": 8
+    },
+    "ground_type": {
+      "excelField": null,
+      "options": {
+        "Clay": null,
+        "Sandy": null,
+        "Chalk": null,
+        "Rock": null,
+        "Peat": null,
+        "Mixed/Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Ground Type",
+      "_appOptions": 6
+    },
+    "property_location": {
+      "excelField": "location",
+      "options": {
+        "Urban - City Centre": null,
+        "Urban - Suburban": null,
+        "Semi-Rural": null,
+        "Rural": null,
+        "Coastal": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Location",
+      "_appLabel": "Property Location",
+      "_appOptions": 6
+    },
+    "local_environment": {
+      "excelField": "local_environment",
+      "options": {
+        "Residential - Quiet": null,
+        "Residential - Busy": null,
+        "Mixed Use": null,
+        "Commercial Area": null,
+        "Industrial Area": null,
+        "Near Main Road": null,
+        "Near Railway": null,
+        "Near Airport": null
+      },
+      "notes": "Auto-suggested: Local environment",
+      "_appLabel": "Local Environment",
+      "_appOptions": 8
+    },
+    "private_road": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Private Road Access",
+      "_appOptions": 3
+    },
+    "noisy_area": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Located in Noisy Area",
+      "_appOptions": 2
+    },
+    "other_service_type": {
+      "excelField": null,
+      "options": {
+        "Shared Access": null,
+        "Shared Drive": null,
+        "Shared Drain": null,
+        "Party Wall": null,
+        "Flying Freehold": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Other Service Type",
+      "_appOptions": 6
+    },
+    "facilities": {
+      "excelField": "facilities",
+      "options": {
+        "Schools": null,
+        "Shops": null,
+        "Public Transport": null,
+        "Medical Facilities": null,
+        "Parks/Green Spaces": null,
+        "Restaurants/Cafes": null,
+        "Sports/Leisure": null
+      },
+      "notes": "Auto-suggested: Facilities",
+      "_appLabel": "Nearby Facilities",
+      "_appOptions": 7
+    },
+    "wall_construction": {
+      "excelField": "construction",
+      "options": {
+        "Brick/Block Cavity": null,
+        "Solid Brick": null,
+        "Stone": null,
+        "Timber Frame": null,
+        "Steel Frame": null,
+        "Concrete": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Construction",
+      "_appLabel": "Wall Construction",
+      "_appOptions": 7
+    },
+    "foundation_type": {
+      "excelField": null,
+      "options": {
+        "Strip": null,
+        "Raft": null,
+        "Pile": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Foundation Type",
+      "_appOptions": 4
+    },
+    "damp_proof_course": {
+      "excelField": "damp",
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "Auto-suggested: Damp",
+      "_appLabel": "Damp Proof Course",
+      "_appOptions": 3
+    },
+    "external_wall_built_of": {
+      "excelField": null,
+      "options": {
+        "Cavity wall": null,
+        "Cavity brick wall": null,
+        "Solid wall": null,
+        "Solid bonded brick wall": null,
+        "Stud wall": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "External Wall Built Of",
+      "_appOptions": 6
+    },
+    "wall_rendered": {
+      "excelField": "render",
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Partial": null
+      },
+      "notes": "Auto-suggested: Render",
+      "_appLabel": "Wall Rendered",
+      "_appOptions": 3
+    },
+    "wall_finishes": {
+      "excelField": null,
+      "options": {
+        "Painted": null,
+        "Pebble dash": null,
+        "Mock Tudor": null,
+        "Weathered wall": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Wall Finishes",
+      "_appOptions": 5
+    },
+    "cladding_present": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Cladding Present",
+      "_appOptions": 2
+    },
+    "cladding_material": {
+      "excelField": null,
+      "options": {
+        "Clay tiles": null,
+        "Timber": null,
+        "Weathered boards": null,
+        "Profile sheets": null,
+        "Shingle plates": null,
+        "Compressed flat panels": null,
+        "Insulated cladding": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Cladding Material",
+      "_appOptions": 8
+    },
+    "internal_wall_type": {
+      "excelField": null,
+      "options": {
+        "Stud": null,
+        "Solid": null,
+        "Lath and plaster": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Internal Wall Type",
+      "_appOptions": 4
+    },
+    "removed_wall": {
+      "excelField": "removed_wall",
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "Auto-suggested: Removed Wall",
+      "_appLabel": "Removed Wall",
+      "_appOptions": 3
+    },
+    "removed_wall_location": {
+      "excelField": "removed_wall",
+      "options": {
+        "Lounge": null,
+        "Kitchen": null,
+        "Bedroom": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Removed Wall",
+      "_appLabel": "Removed Wall Location",
+      "_appOptions": 4
+    },
+    "wall_defects_noted": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Wall Defects Noted",
+      "_appOptions": 2
+    },
+    "floor_build_type": {
+      "excelField": null,
+      "options": {
+        "Suspended timber": null,
+        "Solid": null,
+        "Suspended beam and block": null,
+        "In situ-concrete": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Floor Build Type",
+      "_appOptions": 5
+    },
+    "window_replacement": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Partial": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Window Replacement",
+      "_appOptions": 3
+    },
+    "window_type": {
+      "excelField": null,
+      "options": {
+        "PVC": null,
+        "Timber": null,
+        "Steel": null,
+        "Modern PVC sash": null,
+        "Modern timber sash": null,
+        "Aluminium": null,
+        "Old style timber sash": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Window Type",
+      "_appOptions": 8
+    },
+    "window_glazing": {
+      "excelField": null,
+      "options": {
+        "Single glazed": null,
+        "Double glazed": null,
+        "Triple glazed": null,
+        "Secondary glazing": null,
+        "Mixed": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Window Glazing",
+      "_appOptions": 5
+    },
+    "window_sealing": {
+      "excelField": null,
+      "options": {
+        "Good": null,
+        "Fair": null,
+        "Poor": null,
+        "Not Visible": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Window Sealing",
+      "_appOptions": 4
+    },
+    "nearby_trees": {
+      "excelField": "nearby_trees",
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "Auto-suggested: Nearby Trees",
+      "_appLabel": "Nearby Trees",
+      "_appOptions": 2
+    },
+    "tree_size": {
+      "excelField": null,
+      "options": {
+        "Small": null,
+        "Medium": null,
+        "Medium to large": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Tree Size",
+      "_appOptions": 3
+    },
+    "roof_type": {
+      "excelField": null,
+      "options": {
+        "Pitched": null,
+        "Flat": null,
+        "Mixed": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Roof Type",
+      "_appOptions": 4
+    },
+    "roof_covering": {
+      "excelField": "cover",
+      "options": {
+        "Tiles": null,
+        "Slate": null,
+        "Felt": null,
+        "Metal": null,
+        "Thatch": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Cover",
+      "_appLabel": "Roof Covering",
+      "_appOptions": 6
+    },
+    "roof_lining": {
+      "excelField": null,
+      "options": {
+        "Felt": null,
+        "Membrane": null,
+        "None Visible": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Roof Lining",
+      "_appOptions": 4
+    },
+    "exterior_condition": {
+      "excelField": "condition",
+      "options": {
+        "Excellent": null,
+        "Good": null,
+        "Fair": null,
+        "Poor": null,
+        "Very Poor": null
+      },
+      "notes": "Auto-suggested: Condition",
+      "_appLabel": "Overall Exterior Condition",
+      "_appOptions": 5
+    },
+    "external_walls": {
+      "excelField": "walls",
+      "options": {
+        "Good": null,
+        "Minor Issues": null,
+        "Needs Repair": null,
+        "Major Issues": null
+      },
+      "notes": "Auto-suggested: Walls",
+      "_appLabel": "External Walls Condition",
+      "_appOptions": 4
+    },
+    "windows": {
+      "excelField": "windows",
+      "options": {
+        "Double Glazed uPVC": null,
+        "Double Glazed Wood": null,
+        "Single Glazed": null,
+        "Secondary Glazing": null
+      },
+      "notes": "Auto-suggested: Windows",
+      "_appLabel": "Windows Type",
+      "_appOptions": 4
+    },
+    "doors_condition": {
+      "excelField": "doors",
+      "options": {
+        "Good": null,
+        "Fair": null,
+        "Poor": null
+      },
+      "notes": "Auto-suggested: Doors",
+      "_appLabel": "External Doors Condition",
+      "_appOptions": 3
+    },
+    "interior_condition": {
+      "excelField": "condition",
+      "options": {
+        "Excellent": null,
+        "Good": null,
+        "Fair": null,
+        "Poor": null,
+        "Very Poor": null
+      },
+      "notes": "Auto-suggested: Condition",
+      "_appLabel": "Overall Interior Condition",
+      "_appOptions": 5
+    },
+    "flooring": {
+      "excelField": null,
+      "options": {
+        "Carpet": null,
+        "Hardwood": null,
+        "Laminate": null,
+        "Tile": null,
+        "Vinyl": null,
+        "Concrete": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Main Flooring Types",
+      "_appOptions": 6
+    },
+    "decoration": {
+      "excelField": null,
+      "options": {
+        "Modern/Updated": null,
+        "Average": null,
+        "Dated": null,
+        "Needs Complete Refurbishment": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Decoration Standard",
+      "_appOptions": 4
+    },
+    "damp_signs": {
+      "excelField": "damp",
+      "options": {
+        "None Visible": null,
+        "Minor Signs": null,
+        "Moderate": null,
+        "Significant": null
+      },
+      "notes": "Auto-suggested: Damp",
+      "_appLabel": "Signs of Damp",
+      "_appOptions": 4
+    },
+    "num_bathrooms": {
+      "excelField": null,
+      "options": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4+": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Number of Bathrooms",
+      "_appOptions": 4
+    },
+    "num_reception": {
+      "excelField": null,
+      "options": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4+": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Number of Reception Rooms",
+      "_appOptions": 4
+    },
+    "kitchen_type": {
+      "excelField": null,
+      "options": {
+        "Fitted Modern": null,
+        "Fitted Traditional": null,
+        "Basic": null,
+        "Open Plan": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Kitchen Type",
+      "_appOptions": 4
+    },
+    "other_rooms": {
+      "excelField": null,
+      "options": {
+        "Utility Room": null,
+        "Conservatory": null,
+        "Garage": null,
+        "Cellar": null,
+        "Loft Conversion": null,
+        "Home Office": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Other Rooms/Features",
+      "_appOptions": 6
+    },
+    "consumer_unit_type": {
+      "excelField": null,
+      "options": {
+        "Modern RCD Protected": null,
+        "Older MCB Type": null,
+        "Fuse Board": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Consumer Unit Type",
+      "_appOptions": 4
+    },
+    "last_electrical_test": {
+      "excelField": null,
+      "options": {
+        "Within 5 years": null,
+        "5-10 years ago": null,
+        "Over 10 years ago": null,
+        "Unknown/Never": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Last Electrical Test",
+      "_appOptions": 4
+    },
+    "mains_gas": {
+      "excelField": "mains_gas",
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "Auto-suggested: Mains Gas",
+      "_appLabel": "Mains Gas Connected",
+      "_appOptions": 3
+    },
+    "mains_water": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Mains Water Connected",
+      "_appOptions": 3
+    },
+    "heating_type": {
+      "excelField": null,
+      "options": {
+        "Gas Central Heating": null,
+        "Oil Central Heating": null,
+        "Electric Central Heating": null,
+        "LPG Central Heating": null,
+        "Heat Pump - Air Source": null,
+        "Heat Pump - Ground Source": null,
+        "Solid Fuel": null,
+        "Underfloor Heating": null,
+        "Storage Heaters": null,
+        "None/Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Primary Heating Type",
+      "_appOptions": 10
+    },
+    "boiler_age": {
+      "excelField": "oil",
+      "options": {
+        "< 5 years": null,
+        "5-10 years": null,
+        "10-15 years": null,
+        "15+ years": null,
+        "Unknown": null
+      },
+      "notes": "Auto-suggested: Oil",
+      "_appLabel": "Boiler Age (years)",
+      "_appOptions": 5
+    },
+    "boiler_location": {
+      "excelField": "oil",
+      "options": {
+        "Kitchen": null,
+        "Utility Room": null,
+        "Garage": null,
+        "Airing Cupboard": null,
+        "Loft": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Oil",
+      "_appLabel": "Boiler Location",
+      "_appOptions": 6
+    },
+    "water_heater_type": {
+      "excelField": null,
+      "options": {
+        "Combi Boiler": null,
+        "System Boiler": null,
+        "Immersion Heater": null,
+        "Unvented Cylinder": null,
+        "Vented Cylinder": null,
+        "Instantaneous": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Water Heater Type",
+      "_appOptions": 7
+    },
+    "water_heater_location": {
+      "excelField": "location",
+      "options": {
+        "Kitchen": null,
+        "Utility Room": null,
+        "Airing Cupboard": null,
+        "Bathroom": null,
+        "Loft": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Location",
+      "_appLabel": "Water Heater Location",
+      "_appOptions": 6
+    },
+    "mains_drainage": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No - Septic Tank": null,
+        "No - Cesspit": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Mains Drainage Connected",
+      "_appOptions": 4
+    },
+    "common_services_present": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null,
+        "N/A": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Common Services Present",
+      "_appOptions": 3
+    },
+    "market_conditions": {
+      "excelField": "condition",
+      "options": {
+        "Strong/Rising": null,
+        "Stable": null,
+        "Weak/Falling": null,
+        "Uncertain": null
+      },
+      "notes": "Auto-suggested: Condition",
+      "_appLabel": "Current Market Conditions",
+      "_appOptions": 4
+    },
+    "demand_level": {
+      "excelField": null,
+      "options": {
+        "High": null,
+        "Moderate": null,
+        "Low": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Local Demand Level",
+      "_appOptions": 3
+    },
+    "time_on_market": {
+      "excelField": null,
+      "options": {
+        "< 1 month": null,
+        "1-3 months": null,
+        "3-6 months": null,
+        "6+ months": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Expected Time on Market",
+      "_appOptions": 4
+    },
+    "party_instructing": {
+      "excelField": null,
+      "options": {
+        "Buyer": null,
+        "Seller": null,
+        "Lender": null,
+        "Solicitor": null,
+        "Estate Agent": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Party Instructing",
+      "_appOptions": 6
+    },
+    "weather_conditions": {
+      "excelField": "weather_condition",
+      "options": {
+        "Sunny": null,
+        "Cloudy": null,
+        "Rainy": null,
+        "Windy": null,
+        "Overcast": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Weather Condition",
+      "_appLabel": "Weather Conditions",
+      "_appOptions": 6
+    },
+    "previous_weather": {
+      "excelField": "weather",
+      "options": {
+        "Dry": null,
+        "Damp": null,
+        "Wet": null,
+        "Freezing": null,
+        "Snowy": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Weather",
+      "_appLabel": "Previous Weather",
+      "_appOptions": 6
+    },
+    "occupancy_status": {
+      "excelField": null,
+      "options": {
+        "Occupied by Owner": null,
+        "Occupied by Tenant": null,
+        "Vacant": null,
+        "Under Renovation": null,
+        "Partially Furnished": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Occupancy Status",
+      "_appOptions": 6
+    },
+    "furnishing_status": {
+      "excelField": null,
+      "options": {
+        "Fully Furnished": null,
+        "Partially Furnished": null,
+        "Unfurnished": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Furnishing Status",
+      "_appOptions": 3
+    },
+    "floor_covering": {
+      "excelField": "cover",
+      "options": {
+        "Carpet": null,
+        "Laminate": null,
+        "Hardwood": null,
+        "Tile": null,
+        "Vinyl": null,
+        "Mixed": null,
+        "None Visible": null
+      },
+      "notes": "Auto-suggested: Cover",
+      "_appLabel": "Floor Covering",
+      "_appOptions": 7
+    },
+    "property_facing": {
+      "excelField": "property_facing",
+      "options": {
+        "North": null,
+        "North-East": null,
+        "East": null,
+        "South-East": null,
+        "South": null,
+        "South-West": null,
+        "West": null,
+        "North-West": null
+      },
+      "notes": "Auto-suggested: Property Facing",
+      "_appLabel": "Property Facing",
+      "_appOptions": 8
+    },
+    "number_of_floors": {
+      "excelField": "floors",
+      "options": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5+": null
+      },
+      "notes": "Auto-suggested: Floors",
+      "_appLabel": "Number of Floors",
+      "_appOptions": 5
+    },
+    "garage_present": {
+      "excelField": null,
+      "options": {
+        "Yes - Attached": null,
+        "Yes - Detached": null,
+        "Yes - Integral": null,
+        "No": null,
+        "Carport Only": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Garage/Outbuilding Present",
+      "_appOptions": 5
+    },
+    "garage_wall_type": {
+      "excelField": "construction",
+      "options": {
+        "Brick": null,
+        "Block": null,
+        "Timber Frame": null,
+        "Metal/Steel": null,
+        "Concrete": null,
+        "Pre-fabricated": null
+      },
+      "notes": "Auto-suggested: Construction",
+      "_appLabel": "Garage Wall Construction",
+      "_appOptions": 6
+    },
+    "garage_roof_type": {
+      "excelField": null,
+      "options": {
+        "Pitched - Tiles": null,
+        "Pitched - Slate": null,
+        "Flat - Felt": null,
+        "Flat - EPDM/Rubber": null,
+        "Flat - GRP": null,
+        "Metal Sheeting": null,
+        "Corrugated": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Garage Roof Type",
+      "_appOptions": 8
+    },
+    "garage_door_type": {
+      "excelField": null,
+      "options": {
+        "Up and Over - Metal": null,
+        "Up and Over - Timber": null,
+        "Roller Shutter": null,
+        "Side Hinged": null,
+        "Sectional": null,
+        "None/Open": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Garage Door Type",
+      "_appOptions": 6
+    },
+    "garage_electrics": {
+      "excelField": null,
+      "options": {
+        "Yes - Full": null,
+        "Yes - Light Only": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Garage Electrics",
+      "_appOptions": 3
+    },
+    "garage_size": {
+      "excelField": null,
+      "options": {
+        "Single": null,
+        "Double": null,
+        "Triple+": null,
+        "Oversized Single": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Garage Size",
+      "_appOptions": 5
+    },
+    "driveway_type": {
+      "excelField": null,
+      "options": {
+        "Block Paving": null,
+        "Tarmac/Asphalt": null,
+        "Gravel": null,
+        "Concrete": null,
+        "Resin Bound": null,
+        "Mixed": null,
+        "None": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Driveway Surface",
+      "_appOptions": 7
+    },
+    "parking_spaces": {
+      "excelField": null,
+      "options": {
+        "0": null,
+        "1": null,
+        "2": null,
+        "3": null,
+        "4+": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Off-Street Parking Spaces",
+      "_appOptions": 5
+    },
+    "garden_aspect": {
+      "excelField": "garden",
+      "options": {
+        "North Facing": null,
+        "South Facing": null,
+        "East Facing": null,
+        "West Facing": null,
+        "Mixed/Unknown": null,
+        "No Garden": null
+      },
+      "notes": "Auto-suggested: Garden",
+      "_appLabel": "Main Garden Aspect",
+      "_appOptions": 6
+    },
+    "boundary_types": {
+      "excelField": null,
+      "options": {
+        "Close Board Fence": null,
+        "Panel Fence": null,
+        "Brick Wall": null,
+        "Stone Wall": null,
+        "Hedge": null,
+        "Metal Railings": null,
+        "None/Open": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Boundary Types",
+      "_appOptions": 7
+    },
+    "loft_accessed": {
+      "excelField": null,
+      "options": {
+        "Yes - Full Access": null,
+        "Yes - Limited Access": null,
+        "No - Not Accessible": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Loft Space Accessed",
+      "_appOptions": 3
+    },
+    "roof_type_structure": {
+      "excelField": "roof_structure",
+      "options": {
+        "Traditional Cut Roof": null,
+        "Trussed Rafters": null,
+        "Flat Roof": null,
+        "Mixed": null,
+        "Unknown/Not Visible": null
+      },
+      "notes": "Auto-suggested: Roof structure",
+      "_appLabel": "Roof Structure Type",
+      "_appOptions": 5
+    },
+    "insulation_type": {
+      "excelField": "insulation",
+      "options": {
+        "Mineral Wool - Adequate (270mm+)": null,
+        "Mineral Wool - Inadequate (<100mm)": null,
+        "Spray Foam": null,
+        "Rigid Board": null,
+        "None/Minimal": null,
+        "Not Visible": null
+      },
+      "notes": "Auto-suggested: Insulation",
+      "_appLabel": "Loft Insulation Type",
+      "_appOptions": 6
+    },
+    "ventilation_adequate": {
+      "excelField": "ventilation",
+      "options": {
+        "Adequate": null,
+        "Inadequate": null,
+        "Not Visible": null
+      },
+      "notes": "Auto-suggested: Ventilation",
+      "_appLabel": "Roof Space Ventilation",
+      "_appOptions": 3
+    },
+    "loft_converted": {
+      "excelField": "loft_converted",
+      "options": {
+        "Yes - Full": null,
+        "Yes - Partial": null,
+        "No": null
+      },
+      "notes": "Auto-suggested: Loft Converted",
+      "_appLabel": "Loft Converted",
+      "_appOptions": 3
+    },
+    "water_tank_material": {
+      "excelField": "water_tank",
+      "options": {
+        "Plastic": null,
+        "Galvanised metal": null,
+        "Asbestos": null,
+        "Other": null,
+        "Not Inspected": null
+      },
+      "notes": "Auto-suggested: Water tank",
+      "_appLabel": "Water Tank Material",
+      "_appOptions": 5
+    },
+    "water_tank_location": {
+      "excelField": "water_tank",
+      "options": {
+        "Roof space": null,
+        "Airing cupboard": null,
+        "Kitchen": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Water tank",
+      "_appLabel": "Water Tank Location",
+      "_appOptions": 4
+    },
+    "water_tank_condition": {
+      "excelField": "water_tank",
+      "options": {
+        "Missing cover": null,
+        "Tank Insulation needed": null,
+        "Disused Water Tank": null
+      },
+      "notes": "Auto-suggested: Water tank",
+      "_appLabel": "Water Tank Condition",
+      "_appOptions": 3
+    },
+    "insect_infestation": {
+      "excelField": "insect_infestation",
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Suspected": null
+      },
+      "notes": "Auto-suggested: Insect infestation",
+      "_appLabel": "Insect Infestation",
+      "_appOptions": 3
+    },
+    "timber_rot": {
+      "excelField": "timber_rot",
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Suspected": null
+      },
+      "notes": "Auto-suggested: Timber rot",
+      "_appLabel": "Timber Rot",
+      "_appOptions": 3
+    },
+    "undersize_timber": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Undersize Timber",
+      "_appOptions": 3
+    },
+    "roof_spreading": {
+      "excelField": "roof_spreading",
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "Auto-suggested: Roof Spreading",
+      "_appLabel": "Roof Spreading",
+      "_appOptions": 3
+    },
+    "heavy_roof": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Heavy Roof",
+      "_appOptions": 3
+    },
+    "removed_chimney_breast": {
+      "excelField": "removed_chimney_breast",
+      "options": {
+        "Yes - Supported": null,
+        "Yes - Unsupported": null,
+        "No": null
+      },
+      "notes": "Auto-suggested: Removed Chimney Breast",
+      "_appLabel": "Removed Chimney Breast",
+      "_appOptions": 3
+    },
+    "party_wall_problem": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null,
+        "Unknown": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Party Wall Problem",
+      "_appOptions": 3
+    },
+    "flues_not_inspected": {
+      "excelField": "not_inspected",
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "Auto-suggested: Not inspected",
+      "_appLabel": "Flues Not Inspected",
+      "_appOptions": 2
+    },
+    "fireplace_types": {
+      "excelField": null,
+      "options": {
+        "An open fire": null,
+        "Gas fire": null,
+        "Imitation system": null,
+        "Wood burning stove": null,
+        "Electric fire": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Fireplace Types",
+      "_appOptions": 6
+    },
+    "worktop_surface": {
+      "excelField": null,
+      "options": {
+        "Timber": null,
+        "Granite": null,
+        "Marble": null,
+        "Glass": null,
+        "Metal": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Worktop Surface",
+      "_appOptions": 6
+    },
+    "wall_cabinet_material": {
+      "excelField": null,
+      "options": {
+        "Timber": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Wall Cabinet Material",
+      "_appOptions": 2
+    },
+    "woodwork_checklist": {
+      "excelField": null,
+      "options": {
+        "Door Sampling - Ok": null,
+        "Out of Square Doors": null,
+        "Glazed Internal Doors": null,
+        "Creaking Stairs": null,
+        "Rocking stair handrails": null,
+        "No Stairs Handrails": null,
+        "Open stair threads": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Woodwork Checklist",
+      "_appOptions": 7
+    },
+    "fitted_cupboards": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Fitted Cupboards",
+      "_appOptions": 2
+    },
+    "damaged_locks": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Damaged Locks",
+      "_appOptions": 2
+    },
+    "bathroom_checklist": {
+      "excelField": null,
+      "options": {
+        "Extractor fan present": null,
+        "Leaking sealants causing damp": null,
+        "Sealant condition poor": null,
+        "Moulding present": null,
+        "Wood rot present": null,
+        "No Cubicle Safety Glass Rating": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Bathroom Checklist",
+      "_appOptions": 6
+    },
+    "communal_area": {
+      "excelField": "communal_area",
+      "options": {
+        "Yes": null,
+        "No": null,
+        "N/A": null
+      },
+      "notes": "Auto-suggested: Communal Area",
+      "_appLabel": "Communal Area",
+      "_appOptions": 3
+    },
+    "cellar_present": {
+      "excelField": "cellar",
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "Auto-suggested: Cellar",
+      "_appLabel": "Cellar Present",
+      "_appOptions": 2
+    },
+    "basement_present": {
+      "excelField": "basement",
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "Auto-suggested: Basement",
+      "_appLabel": "Basement Present",
+      "_appOptions": 2
+    },
+    "damp_meter_used": {
+      "excelField": "damp",
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "Auto-suggested: Damp",
+      "_appLabel": "Damp Meter Used",
+      "_appOptions": 2
+    },
+    "damp_locations": {
+      "excelField": "location",
+      "options": {
+        "Ground Floor Walls": null,
+        "Upper Floor Walls": null,
+        "Window Reveals": null,
+        "Chimney Breast": null,
+        "Bathroom Areas": null,
+        "Kitchen Areas": null,
+        "None Detected": null
+      },
+      "notes": "Auto-suggested: Location",
+      "_appLabel": "Damp Detected Locations",
+      "_appOptions": 7
+    },
+    "damp_type": {
+      "excelField": "damp",
+      "options": {
+        "Rising Damp": null,
+        "Penetrating Damp": null,
+        "Condensation": null,
+        "Plumbing Leak": null,
+        "Unknown Source": null
+      },
+      "notes": "Auto-suggested: Damp",
+      "_appLabel": "Suspected Damp Type",
+      "_appOptions": 5
+    },
+    "safety_risks": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Safety Risks Present?",
+      "_appOptions": 2
+    },
+    "legal_risks": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Legal/Compliance Risks?",
+      "_appOptions": 2
+    },
+    "structural_risks": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Structural Risks?",
+      "_appOptions": 2
+    },
+    "moisture_risks": {
+      "excelField": "damp",
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "Auto-suggested: Damp",
+      "_appLabel": "Moisture/Damp Risks?",
+      "_appOptions": 2
+    },
+    "fire_risks": {
+      "excelField": null,
+      "options": {
+        "Yes": null,
+        "No": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Fire Safety Risks?",
+      "_appOptions": 2
+    },
+    "overall_risk_assessment": {
+      "excelField": null,
+      "options": {
+        "Low": null,
+        "Medium": null,
+        "High": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Overall Risk Assessment",
+      "_appOptions": 3
+    },
+    "valuation_purpose": {
+      "excelField": null,
+      "options": {
+        "Mortgage/Lending": null,
+        "Sale/Purchase": null,
+        "Insurance": null,
+        "Probate": null,
+        "Matrimonial": null,
+        "Asset Valuation": null,
+        "Development": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Purpose of Valuation",
+      "_appOptions": 8
+    },
+    "valuation_type": {
+      "excelField": null,
+      "options": {
+        "Full Inspection": null,
+        "Drive-by/External": null,
+        "Desktop": null,
+        "Re-valuation": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Valuation Type",
+      "_appOptions": 4
+    },
+    "instructing_party": {
+      "excelField": null,
+      "options": {
+        "Lender": null,
+        "Buyer": null,
+        "Seller": null,
+        "Solicitor": null,
+        "Other": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Instructing Party",
+      "_appOptions": 5
+    },
+    "basis_of_valuation": {
+      "excelField": null,
+      "options": {
+        "Market Value (RICS Red Book)": null,
+        "Fair Value": null,
+        "Investment Value": null,
+        "Existing Use Value": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Basis of Valuation",
+      "_appOptions": 4
+    },
+    "valuation_approach": {
+      "excelField": null,
+      "options": {
+        "Comparable Method": null,
+        "Income Method": null,
+        "Cost Method": null,
+        "Residual Method": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Valuation Approach",
+      "_appOptions": 4
+    },
+    "confidence_level": {
+      "excelField": null,
+      "options": {
+        "High ±5%": null,
+        "Medium ±10%": null,
+        "Low ±15%": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Confidence Level",
+      "_appOptions": 3
+    },
+    "access_limitations": {
+      "excelField": "limitations",
+      "options": {
+        "Loft not accessible": null,
+        "Garage not inspected": null,
+        "Outbuildings not inspected": null,
+        "Furniture prevented full inspection": null,
+        "Other": null
+      },
+      "notes": "Auto-suggested: Limitations",
+      "_appLabel": "Access Limitations",
+      "_appOptions": 5
+    },
+    "include_disclaimer": {
+      "excelField": null,
+      "options": {
+        "Yes": null
+      },
+      "notes": "No Excel field found - needs manual mapping or set to null",
+      "_appLabel": "Include Standard Professional Disclaimer",
+      "_appOptions": 1
+    }
+  }
+}

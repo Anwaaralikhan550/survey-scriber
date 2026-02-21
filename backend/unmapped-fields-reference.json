@@ -1,0 +1,1764 @@
+[
+  {
+    "appKey": "property_type",
+    "appLabel": "Property Type",
+    "appOptions": [
+      "Detached House",
+      "Semi-Detached House",
+      "Terraced House",
+      "End Terrace",
+      "Bungalow",
+      "Flat/Apartment",
+      "Maisonette",
+      "Cottage",
+      "Commercial",
+      "Industrial",
+      "Other"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "tenure",
+    "appLabel": "Tenure",
+    "appOptions": [
+      "Freehold",
+      "Leasehold",
+      "Commonhold",
+      "Unknown"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "num_floors",
+    "appLabel": "Number of Floors",
+    "appOptions": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5+"
+    ],
+    "suggestedExcelField": "floors",
+    "suggestedExcelName": "Floors",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "num_bedrooms",
+    "appLabel": "Number of Bedrooms",
+    "appOptions": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6+"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "info_source",
+    "appLabel": "Information Source",
+    "appOptions": [
+      "Client",
+      "Estate Agent",
+      "Land Registry",
+      "Visual Assessment",
+      "Other"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "flat_floor_level",
+    "appLabel": "Floor Level",
+    "appOptions": [
+      "N/A",
+      "Basement",
+      "Ground",
+      "First",
+      "Second",
+      "Third",
+      "Fourth+"
+    ],
+    "suggestedExcelField": "floor_ventilation",
+    "suggestedExcelName": "Floor ventilation",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "flat_total_floors",
+    "appLabel": "Total Floors in Building",
+    "appOptions": [
+      "N/A",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6+"
+    ],
+    "suggestedExcelField": "floors",
+    "suggestedExcelName": "Floors",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "flat_access_type",
+    "appLabel": "Access Type",
+    "appOptions": [
+      "N/A",
+      "Own entrance",
+      "Communal entrance",
+      "Other"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "flat_access_elevation",
+    "appLabel": "Access Elevation",
+    "appOptions": [
+      "N/A",
+      "Level",
+      "Stepped",
+      "Ramped",
+      "Lift",
+      "Other"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "construction_type",
+    "appLabel": "Construction",
+    "appOptions": [
+      "Traditional",
+      "Non-Traditional",
+      "Modern",
+      "Mixed",
+      "Unknown"
+    ],
+    "suggestedExcelField": "construction",
+    "suggestedExcelName": "Construction",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "listed_building",
+    "appLabel": "Listed Building",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "listed_grade",
+    "appLabel": "Listed Grade",
+    "appOptions": [
+      "Grade I",
+      "Grade II*",
+      "Grade II",
+      "Locally Listed"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "energy_rating",
+    "appLabel": "Energy Rating (EPC)",
+    "appOptions": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "Unknown"
+    ],
+    "suggestedExcelField": "energy",
+    "suggestedExcelName": "Energy",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "ground_type",
+    "appLabel": "Ground Type",
+    "appOptions": [
+      "Clay",
+      "Sandy",
+      "Chalk",
+      "Rock",
+      "Peat",
+      "Mixed/Unknown"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "property_location",
+    "appLabel": "Property Location",
+    "appOptions": [
+      "Urban - City Centre",
+      "Urban - Suburban",
+      "Semi-Rural",
+      "Rural",
+      "Coastal",
+      "Other"
+    ],
+    "suggestedExcelField": "location",
+    "suggestedExcelName": "Location",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "local_environment",
+    "appLabel": "Local Environment",
+    "appOptions": [
+      "Residential - Quiet",
+      "Residential - Busy",
+      "Mixed Use",
+      "Commercial Area",
+      "Industrial Area",
+      "Near Main Road",
+      "Near Railway",
+      "Near Airport"
+    ],
+    "suggestedExcelField": "local_environment",
+    "suggestedExcelName": "Local environment",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "private_road",
+    "appLabel": "Private Road Access",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "noisy_area",
+    "appLabel": "Located in Noisy Area",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "communal_area",
+    "suggestedExcelName": "Communal Area",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "other_service_type",
+    "appLabel": "Other Service Type",
+    "appOptions": [
+      "Shared Access",
+      "Shared Drive",
+      "Shared Drain",
+      "Party Wall",
+      "Flying Freehold",
+      "Other"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "facilities",
+    "appLabel": "Nearby Facilities",
+    "appOptions": [
+      "Schools",
+      "Shops",
+      "Public Transport",
+      "Medical Facilities",
+      "Parks/Green Spaces",
+      "Restaurants/Cafes",
+      "Sports/Leisure"
+    ],
+    "suggestedExcelField": "facilities",
+    "suggestedExcelName": "Facilities",
+    "matchConfidence": 190
+  },
+  {
+    "appKey": "wall_construction",
+    "appLabel": "Wall Construction",
+    "appOptions": [
+      "Brick/Block Cavity",
+      "Solid Brick",
+      "Stone",
+      "Timber Frame",
+      "Steel Frame",
+      "Concrete",
+      "Other"
+    ],
+    "suggestedExcelField": "construction",
+    "suggestedExcelName": "Construction",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "foundation_type",
+    "appLabel": "Foundation Type",
+    "appOptions": [
+      "Strip",
+      "Raft",
+      "Pile",
+      "Unknown"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "damp_proof_course",
+    "appLabel": "Damp Proof Course",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": "damp",
+    "suggestedExcelName": "Damp",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "external_wall_built_of",
+    "appLabel": "External Wall Built Of",
+    "appOptions": [
+      "Cavity wall",
+      "Cavity brick wall",
+      "Solid wall",
+      "Solid bonded brick wall",
+      "Stud wall",
+      "Other"
+    ],
+    "suggestedExcelField": "year_built",
+    "suggestedExcelName": "Year Built",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "wall_rendered",
+    "appLabel": "Wall Rendered",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Partial"
+    ],
+    "suggestedExcelField": "render",
+    "suggestedExcelName": "Render",
+    "matchConfidence": 80
+  },
+  {
+    "appKey": "wall_finishes",
+    "appLabel": "Wall Finishes",
+    "appOptions": [
+      "Painted",
+      "Pebble dash",
+      "Mock Tudor",
+      "Weathered wall",
+      "Other"
+    ],
+    "suggestedExcelField": "parapet_wall",
+    "suggestedExcelName": "Parapet wall",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "cladding_present",
+    "appLabel": "Cladding Present",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "cladding_material",
+    "appLabel": "Cladding Material",
+    "appOptions": [
+      "Clay tiles",
+      "Timber",
+      "Weathered boards",
+      "Profile sheets",
+      "Shingle plates",
+      "Compressed flat panels",
+      "Insulated cladding",
+      "Other"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "internal_wall_type",
+    "appLabel": "Internal Wall Type",
+    "appOptions": [
+      "Stud",
+      "Solid",
+      "Lath and plaster",
+      "Other"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "removed_wall",
+    "appLabel": "Removed Wall",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": "removed_wall",
+    "suggestedExcelName": "Removed Wall",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "removed_wall_location",
+    "appLabel": "Removed Wall Location",
+    "appOptions": [
+      "Lounge",
+      "Kitchen",
+      "Bedroom",
+      "Other"
+    ],
+    "suggestedExcelField": "removed_wall",
+    "suggestedExcelName": "Removed Wall",
+    "matchConfidence": 100
+  },
+  {
+    "appKey": "wall_defects_noted",
+    "appLabel": "Wall Defects Noted",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "parapet_wall",
+    "suggestedExcelName": "Parapet wall",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "floor_build_type",
+    "appLabel": "Floor Build Type",
+    "appOptions": [
+      "Suspended timber",
+      "Solid",
+      "Suspended beam and block",
+      "In situ-concrete",
+      "Other"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "window_replacement",
+    "appLabel": "Window Replacement",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Partial"
+    ],
+    "suggestedExcelField": "window_sills",
+    "suggestedExcelName": "Window Sills",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "window_type",
+    "appLabel": "Window Type",
+    "appOptions": [
+      "PVC",
+      "Timber",
+      "Steel",
+      "Modern PVC sash",
+      "Modern timber sash",
+      "Aluminium",
+      "Old style timber sash",
+      "Other"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "window_glazing",
+    "appLabel": "Window Glazing",
+    "appOptions": [
+      "Single glazed",
+      "Double glazed",
+      "Triple glazed",
+      "Secondary glazing",
+      "Mixed"
+    ],
+    "suggestedExcelField": "window_sills",
+    "suggestedExcelName": "Window Sills",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "window_sealing",
+    "appLabel": "Window Sealing",
+    "appOptions": [
+      "Good",
+      "Fair",
+      "Poor",
+      "Not Visible"
+    ],
+    "suggestedExcelField": "window_sills",
+    "suggestedExcelName": "Window Sills",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "nearby_trees",
+    "appLabel": "Nearby Trees",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "nearby_trees",
+    "suggestedExcelName": "Nearby Trees",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "tree_size",
+    "appLabel": "Tree Size",
+    "appOptions": [
+      "Small",
+      "Medium",
+      "Medium to large"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "roof_type",
+    "appLabel": "Roof Type",
+    "appOptions": [
+      "Pitched",
+      "Flat",
+      "Mixed",
+      "Other"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "roof_covering",
+    "appLabel": "Roof Covering",
+    "appOptions": [
+      "Tiles",
+      "Slate",
+      "Felt",
+      "Metal",
+      "Thatch",
+      "Other"
+    ],
+    "suggestedExcelField": "cover",
+    "suggestedExcelName": "Cover",
+    "matchConfidence": 80
+  },
+  {
+    "appKey": "roof_lining",
+    "appLabel": "Roof Lining",
+    "appOptions": [
+      "Felt",
+      "Membrane",
+      "None Visible",
+      "Unknown"
+    ],
+    "suggestedExcelField": "roof_spreading",
+    "suggestedExcelName": "Roof Spreading",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "exterior_condition",
+    "appLabel": "Overall Exterior Condition",
+    "appOptions": [
+      "Excellent",
+      "Good",
+      "Fair",
+      "Poor",
+      "Very Poor"
+    ],
+    "suggestedExcelField": "condition",
+    "suggestedExcelName": "Condition",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "external_walls",
+    "appLabel": "External Walls Condition",
+    "appOptions": [
+      "Good",
+      "Minor Issues",
+      "Needs Repair",
+      "Major Issues"
+    ],
+    "suggestedExcelField": "walls",
+    "suggestedExcelName": "Walls",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "windows",
+    "appLabel": "Windows Type",
+    "appOptions": [
+      "Double Glazed uPVC",
+      "Double Glazed Wood",
+      "Single Glazed",
+      "Secondary Glazing"
+    ],
+    "suggestedExcelField": "windows",
+    "suggestedExcelName": "Windows",
+    "matchConfidence": 190
+  },
+  {
+    "appKey": "doors_condition",
+    "appLabel": "External Doors Condition",
+    "appOptions": [
+      "Good",
+      "Fair",
+      "Poor"
+    ],
+    "suggestedExcelField": "condition",
+    "suggestedExcelName": "Condition",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "interior_condition",
+    "appLabel": "Overall Interior Condition",
+    "appOptions": [
+      "Excellent",
+      "Good",
+      "Fair",
+      "Poor",
+      "Very Poor"
+    ],
+    "suggestedExcelField": "condition",
+    "suggestedExcelName": "Condition",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "flooring",
+    "appLabel": "Main Flooring Types",
+    "appOptions": [
+      "Carpet",
+      "Hardwood",
+      "Laminate",
+      "Tile",
+      "Vinyl",
+      "Concrete"
+    ],
+    "suggestedExcelField": "main_water",
+    "suggestedExcelName": "Main Water",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "decoration",
+    "appLabel": "Decoration Standard",
+    "appOptions": [
+      "Modern/Updated",
+      "Average",
+      "Dated",
+      "Needs Complete Refurbishment"
+    ],
+    "suggestedExcelField": "standard_text",
+    "suggestedExcelName": "Standard text",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "damp_signs",
+    "appLabel": "Signs of Damp",
+    "appOptions": [
+      "None Visible",
+      "Minor Signs",
+      "Moderate",
+      "Significant"
+    ],
+    "suggestedExcelField": "damp",
+    "suggestedExcelName": "Damp",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "num_bedrooms",
+    "appLabel": "Number of Bedrooms",
+    "appOptions": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6+"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "num_bathrooms",
+    "appLabel": "Number of Bathrooms",
+    "appOptions": [
+      "1",
+      "2",
+      "3",
+      "4+"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "num_reception",
+    "appLabel": "Number of Reception Rooms",
+    "appOptions": [
+      "1",
+      "2",
+      "3",
+      "4+"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "kitchen_type",
+    "appLabel": "Kitchen Type",
+    "appOptions": [
+      "Fitted Modern",
+      "Fitted Traditional",
+      "Basic",
+      "Open Plan"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "other_rooms",
+    "appLabel": "Other Rooms/Features",
+    "appOptions": [
+      "Utility Room",
+      "Conservatory",
+      "Garage",
+      "Cellar",
+      "Loft Conversion",
+      "Home Office"
+    ],
+    "suggestedExcelField": "other_services",
+    "suggestedExcelName": "Other Services",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "consumer_unit_type",
+    "appLabel": "Consumer Unit Type",
+    "appOptions": [
+      "Modern RCD Protected",
+      "Older MCB Type",
+      "Fuse Board",
+      "Unknown"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "last_electrical_test",
+    "appLabel": "Last Electrical Test",
+    "appOptions": [
+      "Within 5 years",
+      "5-10 years ago",
+      "Over 10 years ago",
+      "Unknown/Never"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "mains_gas",
+    "appLabel": "Mains Gas Connected",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": "mains_gas",
+    "suggestedExcelName": "Mains Gas",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "mains_water",
+    "appLabel": "Mains Water Connected",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": "water_tank",
+    "suggestedExcelName": "Water tank",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "heating_type",
+    "appLabel": "Primary Heating Type",
+    "appOptions": [
+      "Gas Central Heating",
+      "Oil Central Heating",
+      "Electric Central Heating",
+      "LPG Central Heating",
+      "Heat Pump - Air Source",
+      "Heat Pump - Ground Source",
+      "Solid Fuel",
+      "Underfloor Heating",
+      "Storage Heaters",
+      "None/Unknown"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "boiler_age",
+    "appLabel": "Boiler Age (years)",
+    "appOptions": [
+      "< 5 years",
+      "5-10 years",
+      "10-15 years",
+      "15+ years",
+      "Unknown"
+    ],
+    "suggestedExcelField": "oil",
+    "suggestedExcelName": "Oil",
+    "matchConfidence": 80
+  },
+  {
+    "appKey": "boiler_location",
+    "appLabel": "Boiler Location",
+    "appOptions": [
+      "Kitchen",
+      "Utility Room",
+      "Garage",
+      "Airing Cupboard",
+      "Loft",
+      "Other"
+    ],
+    "suggestedExcelField": "location",
+    "suggestedExcelName": "Location",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "water_heater_type",
+    "appLabel": "Water Heater Type",
+    "appOptions": [
+      "Combi Boiler",
+      "System Boiler",
+      "Immersion Heater",
+      "Unvented Cylinder",
+      "Vented Cylinder",
+      "Instantaneous",
+      "Unknown"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "water_heater_location",
+    "appLabel": "Water Heater Location",
+    "appOptions": [
+      "Kitchen",
+      "Utility Room",
+      "Airing Cupboard",
+      "Bathroom",
+      "Loft",
+      "Other"
+    ],
+    "suggestedExcelField": "location",
+    "suggestedExcelName": "Location",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "mains_drainage",
+    "appLabel": "Mains Drainage Connected",
+    "appOptions": [
+      "Yes",
+      "No - Septic Tank",
+      "No - Cesspit",
+      "Unknown"
+    ],
+    "suggestedExcelField": "mains_electricity",
+    "suggestedExcelName": "Mains Electricity",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "common_services_present",
+    "appLabel": "Common Services Present",
+    "appOptions": [
+      "Yes",
+      "No",
+      "N/A"
+    ],
+    "suggestedExcelField": "other_services",
+    "suggestedExcelName": "Other Services",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "market_conditions",
+    "appLabel": "Current Market Conditions",
+    "appOptions": [
+      "Strong/Rising",
+      "Stable",
+      "Weak/Falling",
+      "Uncertain"
+    ],
+    "suggestedExcelField": "condition",
+    "suggestedExcelName": "Condition",
+    "matchConfidence": 80
+  },
+  {
+    "appKey": "demand_level",
+    "appLabel": "Local Demand Level",
+    "appOptions": [
+      "High",
+      "Moderate",
+      "Low"
+    ],
+    "suggestedExcelField": "local_environment",
+    "suggestedExcelName": "Local environment",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "time_on_market",
+    "appLabel": "Expected Time on Market",
+    "appOptions": [
+      "< 1 month",
+      "1-3 months",
+      "3-6 months",
+      "6+ months"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "party_instructing",
+    "appLabel": "Party Instructing",
+    "appOptions": [
+      "Buyer",
+      "Seller",
+      "Lender",
+      "Solicitor",
+      "Estate Agent",
+      "Other"
+    ],
+    "suggestedExcelField": "party_disclosures",
+    "suggestedExcelName": "Party Disclosures",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "weather_conditions",
+    "appLabel": "Weather Conditions",
+    "appOptions": [
+      "Sunny",
+      "Cloudy",
+      "Rainy",
+      "Windy",
+      "Overcast",
+      "Other"
+    ],
+    "suggestedExcelField": "weather",
+    "suggestedExcelName": "Weather",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "previous_weather",
+    "appLabel": "Previous Weather",
+    "appOptions": [
+      "Dry",
+      "Damp",
+      "Wet",
+      "Freezing",
+      "Snowy",
+      "Other"
+    ],
+    "suggestedExcelField": "weather",
+    "suggestedExcelName": "Weather",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "occupancy_status",
+    "appLabel": "Occupancy Status",
+    "appOptions": [
+      "Occupied by Owner",
+      "Occupied by Tenant",
+      "Vacant",
+      "Under Renovation",
+      "Partially Furnished",
+      "Other"
+    ],
+    "suggestedExcelField": "property_status",
+    "suggestedExcelName": "Property Status",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "furnishing_status",
+    "appLabel": "Furnishing Status",
+    "appOptions": [
+      "Fully Furnished",
+      "Partially Furnished",
+      "Unfurnished"
+    ],
+    "suggestedExcelField": "property_status",
+    "suggestedExcelName": "Property Status",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "floor_covering",
+    "appLabel": "Floor Covering",
+    "appOptions": [
+      "Carpet",
+      "Laminate",
+      "Hardwood",
+      "Tile",
+      "Vinyl",
+      "Mixed",
+      "None Visible"
+    ],
+    "suggestedExcelField": "cover",
+    "suggestedExcelName": "Cover",
+    "matchConfidence": 80
+  },
+  {
+    "appKey": "property_facing",
+    "appLabel": "Property Facing",
+    "appOptions": [
+      "North",
+      "North-East",
+      "East",
+      "South-East",
+      "South",
+      "South-West",
+      "West",
+      "North-West"
+    ],
+    "suggestedExcelField": "property_facing",
+    "suggestedExcelName": "Property Facing",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "number_of_floors",
+    "appLabel": "Number of Floors",
+    "appOptions": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5+"
+    ],
+    "suggestedExcelField": "floors",
+    "suggestedExcelName": "Floors",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "garage_present",
+    "appLabel": "Garage/Outbuilding Present",
+    "appOptions": [
+      "Yes - Attached",
+      "Yes - Detached",
+      "Yes - Integral",
+      "No",
+      "Carport Only"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "garage_wall_type",
+    "appLabel": "Garage Wall Construction",
+    "appOptions": [
+      "Brick",
+      "Block",
+      "Timber Frame",
+      "Metal/Steel",
+      "Concrete",
+      "Pre-fabricated"
+    ],
+    "suggestedExcelField": "construction",
+    "suggestedExcelName": "Construction",
+    "matchConfidence": 40
+  },
+  {
+    "appKey": "garage_roof_type",
+    "appLabel": "Garage Roof Type",
+    "appOptions": [
+      "Pitched - Tiles",
+      "Pitched - Slate",
+      "Flat - Felt",
+      "Flat - EPDM/Rubber",
+      "Flat - GRP",
+      "Metal Sheeting",
+      "Corrugated",
+      "Other"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "garage_door_type",
+    "appLabel": "Garage Door Type",
+    "appOptions": [
+      "Up and Over - Metal",
+      "Up and Over - Timber",
+      "Roller Shutter",
+      "Side Hinged",
+      "Sectional",
+      "None/Open"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "garage_electrics",
+    "appLabel": "Garage Electrics",
+    "appOptions": [
+      "Yes - Full",
+      "Yes - Light Only",
+      "No"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "garage_size",
+    "appLabel": "Garage Size",
+    "appOptions": [
+      "Single",
+      "Double",
+      "Triple+",
+      "Oversized Single",
+      "Unknown"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "driveway_type",
+    "appLabel": "Driveway Surface",
+    "appOptions": [
+      "Block Paving",
+      "Tarmac/Asphalt",
+      "Gravel",
+      "Concrete",
+      "Resin Bound",
+      "Mixed",
+      "None"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "parking_spaces",
+    "appLabel": "Off-Street Parking Spaces",
+    "appOptions": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4+"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "garden_aspect",
+    "appLabel": "Main Garden Aspect",
+    "appOptions": [
+      "North Facing",
+      "South Facing",
+      "East Facing",
+      "West Facing",
+      "Mixed/Unknown",
+      "No Garden"
+    ],
+    "suggestedExcelField": "garden",
+    "suggestedExcelName": "Garden",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "boundary_types",
+    "appLabel": "Boundary Types",
+    "appOptions": [
+      "Close Board Fence",
+      "Panel Fence",
+      "Brick Wall",
+      "Stone Wall",
+      "Hedge",
+      "Metal Railings",
+      "None/Open"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "loft_accessed",
+    "appLabel": "Loft Space Accessed",
+    "appOptions": [
+      "Yes - Full Access",
+      "Yes - Limited Access",
+      "No - Not Accessible"
+    ],
+    "suggestedExcelField": "loft_converted",
+    "suggestedExcelName": "Loft Converted",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "roof_type_structure",
+    "appLabel": "Roof Structure Type",
+    "appOptions": [
+      "Traditional Cut Roof",
+      "Trussed Rafters",
+      "Flat Roof",
+      "Mixed",
+      "Unknown/Not Visible"
+    ],
+    "suggestedExcelField": "roof_structure",
+    "suggestedExcelName": "Roof structure",
+    "matchConfidence": 50
+  },
+  {
+    "appKey": "insulation_type",
+    "appLabel": "Loft Insulation Type",
+    "appOptions": [
+      "Mineral Wool - Adequate (270mm+)",
+      "Mineral Wool - Inadequate (<100mm)",
+      "Spray Foam",
+      "Rigid Board",
+      "None/Minimal",
+      "Not Visible"
+    ],
+    "suggestedExcelField": "insulation",
+    "suggestedExcelName": "Insulation",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "ventilation_adequate",
+    "appLabel": "Roof Space Ventilation",
+    "appOptions": [
+      "Adequate",
+      "Inadequate",
+      "Not Visible"
+    ],
+    "suggestedExcelField": "ventilation",
+    "suggestedExcelName": "Ventilation",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "loft_converted",
+    "appLabel": "Loft Converted",
+    "appOptions": [
+      "Yes - Full",
+      "Yes - Partial",
+      "No"
+    ],
+    "suggestedExcelField": "loft_converted",
+    "suggestedExcelName": "Loft Converted",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "water_tank_material",
+    "appLabel": "Water Tank Material",
+    "appOptions": [
+      "Plastic",
+      "Galvanised metal",
+      "Asbestos",
+      "Other",
+      "Not Inspected"
+    ],
+    "suggestedExcelField": "water_tank",
+    "suggestedExcelName": "Water tank",
+    "matchConfidence": 100
+  },
+  {
+    "appKey": "water_tank_location",
+    "appLabel": "Water Tank Location",
+    "appOptions": [
+      "Roof space",
+      "Airing cupboard",
+      "Kitchen",
+      "Other"
+    ],
+    "suggestedExcelField": "water_tank",
+    "suggestedExcelName": "Water tank",
+    "matchConfidence": 100
+  },
+  {
+    "appKey": "water_tank_condition",
+    "appLabel": "Water Tank Condition",
+    "appOptions": [
+      "Missing cover",
+      "Tank Insulation needed",
+      "Disused Water Tank"
+    ],
+    "suggestedExcelField": "water_tank",
+    "suggestedExcelName": "Water tank",
+    "matchConfidence": 100
+  },
+  {
+    "appKey": "insect_infestation",
+    "appLabel": "Insect Infestation",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Suspected"
+    ],
+    "suggestedExcelField": "insect_infestation",
+    "suggestedExcelName": "Insect infestation",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "timber_rot",
+    "appLabel": "Timber Rot",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Suspected"
+    ],
+    "suggestedExcelField": "timber_rot",
+    "suggestedExcelName": "Timber rot",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "undersize_timber",
+    "appLabel": "Undersize Timber",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": "timber_rot",
+    "suggestedExcelName": "Timber rot",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "roof_spreading",
+    "appLabel": "Roof Spreading",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": "roof_spreading",
+    "suggestedExcelName": "Roof Spreading",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "heavy_roof",
+    "appLabel": "Heavy Roof",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": "roof_spreading",
+    "suggestedExcelName": "Roof Spreading",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "removed_chimney_breast",
+    "appLabel": "Removed Chimney Breast",
+    "appOptions": [
+      "Yes - Supported",
+      "Yes - Unsupported",
+      "No"
+    ],
+    "suggestedExcelField": "removed_chimney_breast",
+    "suggestedExcelName": "Removed Chimney Breast",
+    "matchConfidence": 210
+  },
+  {
+    "appKey": "party_wall_problem",
+    "appLabel": "Party Wall Problem",
+    "appOptions": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "suggestedExcelField": "party_disclosures",
+    "suggestedExcelName": "Party Disclosures",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "flues_not_inspected",
+    "appLabel": "Flues Not Inspected",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "not_inspected",
+    "suggestedExcelName": "Not inspected",
+    "matchConfidence": 100
+  },
+  {
+    "appKey": "fireplace_types",
+    "appLabel": "Fireplace Types",
+    "appOptions": [
+      "An open fire",
+      "Gas fire",
+      "Imitation system",
+      "Wood burning stove",
+      "Electric fire",
+      "Other"
+    ],
+    "suggestedExcelField": "blocked_fireplace",
+    "suggestedExcelName": "Blocked Fireplace",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "worktop_surface",
+    "appLabel": "Worktop Surface",
+    "appOptions": [
+      "Timber",
+      "Granite",
+      "Marble",
+      "Glass",
+      "Metal",
+      "Other"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "wall_cabinet_material",
+    "appLabel": "Wall Cabinet Material",
+    "appOptions": [
+      "Timber",
+      "Other"
+    ],
+    "suggestedExcelField": "parapet_wall",
+    "suggestedExcelName": "Parapet wall",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "woodwork_checklist",
+    "appLabel": "Woodwork Checklist",
+    "appOptions": [
+      "Door Sampling - Ok",
+      "Out of Square Doors",
+      "Glazed Internal Doors",
+      "Creaking Stairs",
+      "Rocking stair handrails",
+      "No Stairs Handrails",
+      "Open stair threads"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "fitted_cupboards",
+    "appLabel": "Fitted Cupboards",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "damaged_locks",
+    "appLabel": "Damaged Locks",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "bathroom_checklist",
+    "appLabel": "Bathroom Checklist",
+    "appOptions": [
+      "Extractor fan present",
+      "Leaking sealants causing damp",
+      "Sealant condition poor",
+      "Moulding present",
+      "Wood rot present",
+      "No Cubicle Safety Glass Rating"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "communal_area",
+    "appLabel": "Communal Area",
+    "appOptions": [
+      "Yes",
+      "No",
+      "N/A"
+    ],
+    "suggestedExcelField": "communal_area",
+    "suggestedExcelName": "Communal Area",
+    "matchConfidence": 200
+  },
+  {
+    "appKey": "cellar_present",
+    "appLabel": "Cellar Present",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "cellar",
+    "suggestedExcelName": "Cellar",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "basement_present",
+    "appLabel": "Basement Present",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "basement",
+    "suggestedExcelName": "Basement",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "damp_meter_used",
+    "appLabel": "Damp Meter Used",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "damp",
+    "suggestedExcelName": "Damp",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "damp_locations",
+    "appLabel": "Damp Detected Locations",
+    "appOptions": [
+      "Ground Floor Walls",
+      "Upper Floor Walls",
+      "Window Reveals",
+      "Chimney Breast",
+      "Bathroom Areas",
+      "Kitchen Areas",
+      "None Detected"
+    ],
+    "suggestedExcelField": "damp",
+    "suggestedExcelName": "Damp",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "damp_type",
+    "appLabel": "Suspected Damp Type",
+    "appOptions": [
+      "Rising Damp",
+      "Penetrating Damp",
+      "Condensation",
+      "Plumbing Leak",
+      "Unknown Source"
+    ],
+    "suggestedExcelField": "damp",
+    "suggestedExcelName": "Damp",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "safety_risks",
+    "appLabel": "Safety Risks Present?",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "safety_hazard",
+    "suggestedExcelName": "Safety hazard",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "legal_risks",
+    "appLabel": "Legal/Compliance Risks?",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "structural_risks",
+    "appLabel": "Structural Risks?",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "moisture_risks",
+    "appLabel": "Moisture/Damp Risks?",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "damp",
+    "suggestedExcelName": "Damp",
+    "matchConfidence": 30
+  },
+  {
+    "appKey": "fire_risks",
+    "appLabel": "Fire Safety Risks?",
+    "appOptions": [
+      "Yes",
+      "No"
+    ],
+    "suggestedExcelField": "safety_hazard",
+    "suggestedExcelName": "Safety hazard",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "overall_risk_assessment",
+    "appLabel": "Overall Risk Assessment",
+    "appOptions": [
+      "Low",
+      "Medium",
+      "High"
+    ],
+    "suggestedExcelField": "overall_opinion",
+    "suggestedExcelName": "Overall Opinion",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "valuation_purpose",
+    "appLabel": "Purpose of Valuation",
+    "appOptions": [
+      "Mortgage/Lending",
+      "Sale/Purchase",
+      "Insurance",
+      "Probate",
+      "Matrimonial",
+      "Asset Valuation",
+      "Development",
+      "Other"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "valuation_type",
+    "appLabel": "Valuation Type",
+    "appOptions": [
+      "Full Inspection",
+      "Drive-by/External",
+      "Desktop",
+      "Re-valuation"
+    ],
+    "suggestedExcelField": "property_type",
+    "suggestedExcelName": "Property Type",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "instructing_party",
+    "appLabel": "Instructing Party",
+    "appOptions": [
+      "Lender",
+      "Buyer",
+      "Seller",
+      "Solicitor",
+      "Other"
+    ],
+    "suggestedExcelField": "party_disclosures",
+    "suggestedExcelName": "Party Disclosures",
+    "matchConfidence": 10
+  },
+  {
+    "appKey": "basis_of_valuation",
+    "appLabel": "Basis of Valuation",
+    "appOptions": [
+      "Market Value (RICS Red Book)",
+      "Fair Value",
+      "Investment Value",
+      "Existing Use Value"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "valuation_approach",
+    "appLabel": "Valuation Approach",
+    "appOptions": [
+      "Comparable Method",
+      "Income Method",
+      "Cost Method",
+      "Residual Method"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "confidence_level",
+    "appLabel": "Confidence Level",
+    "appOptions": [
+      "High ±5%",
+      "Medium ±10%",
+      "Low ±15%"
+    ],
+    "suggestedExcelField": null,
+    "suggestedExcelName": null,
+    "matchConfidence": 0
+  },
+  {
+    "appKey": "access_limitations",
+    "appLabel": "Access Limitations",
+    "appOptions": [
+      "Loft not accessible",
+      "Garage not inspected",
+      "Outbuildings not inspected",
+      "Furniture prevented full inspection",
+      "Other"
+    ],
+    "suggestedExcelField": "limitations",
+    "suggestedExcelName": "Limitations",
+    "matchConfidence": 90
+  },
+  {
+    "appKey": "include_disclaimer",
+    "appLabel": "Include Standard Professional Disclaimer",
+    "appOptions": [
+      "Yes"
+    ],
+    "suggestedExcelField": "standard_text",
+    "suggestedExcelName": "Standard text",
+    "matchConfidence": 10
+  }
+]

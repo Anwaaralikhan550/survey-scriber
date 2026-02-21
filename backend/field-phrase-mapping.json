@@ -1,0 +1,734 @@
+[
+  {
+    "appFieldKey": "property_type",
+    "appFieldLabel": "Property Type",
+    "excelFieldName": "Property Type",
+    "confidence": 1,
+    "optionMappings": {
+      "Other": {
+        "excelOption": "House",
+        "phrase": "The property is a (detached/semi-detached/mid-terrace/end-terrace/other) (house/bungalow) with (one/two/three/four/other) bedrooms.",
+        "confidence": 0.6
+      }
+    }
+  },
+  {
+    "appFieldKey": "info_source",
+    "appFieldLabel": "Information Source",
+    "excelFieldName": "Timber Infestation",
+    "confidence": 0.7588235294117647,
+    "optionMappings": {
+      "Estate Agent": {
+        "excelOption": "Investigate",
+        "phrase": "Woodworm infestation was observed to  (staircase timber/ roof timber to garage/ floor joists in the basement/other), further investigation is required on all timbers to be categorical. Reports and quotations should be obtained from an appropriately qualified person before purchase commitment.",
+        "confidence": 1
+      },
+      "Land Registry": {
+        "excelOption": "Investigate",
+        "phrase": "Woodworm infestation was observed to  (staircase timber/ roof timber to garage/ floor joists in the basement/other), further investigation is required on all timbers to be categorical. Reports and quotations should be obtained from an appropriately qualified person before purchase commitment.",
+        "confidence": 0.8333333333333334
+      },
+      "Visual Assessment": {
+        "excelOption": "Investigate",
+        "phrase": "Woodworm infestation was observed to  (staircase timber/ roof timber to garage/ floor joists in the basement/other), further investigation is required on all timbers to be categorical. Reports and quotations should be obtained from an appropriately qualified person before purchase commitment.",
+        "confidence": 0.625
+      }
+    }
+  },
+  {
+    "appFieldKey": "flat_access_type",
+    "appFieldLabel": "Access Type",
+    "excelFieldName": "Facilities",
+    "confidence": 0.71,
+    "optionMappings": {
+      "Other": {
+        "excelOption": "Remote",
+        "phrase": "The property is located in a remote area and likely to be far away from some of the usual facilities and amenities.",
+        "confidence": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "appFieldKey": "construction_type",
+    "appFieldLabel": "Construction",
+    "excelFieldName": "Construction",
+    "confidence": 0.9249999999999999,
+    "optionMappings": {
+      "Traditional": {
+        "excelOption": "Internal Walls",
+        "phrase": "The internal walls are built of (stud/solid/lath and plaster/other) partition.",
+        "confidence": 0.6923076923076923
+      },
+      "Non-Traditional": {
+        "excelOption": "Internal Walls",
+        "phrase": "The internal walls are built of (stud/solid/lath and plaster/other) partition.",
+        "confidence": 0.7142857142857143
+      },
+      "Unknown": {
+        "excelOption": "Windows",
+        "phrase": "The windows are (mainly of/ a mixture of)  (single/double/secondary/other) glazed (PVC/timber/aluminium/steel/other) units.",
+        "confidence": 0.7142857142857143
+      }
+    }
+  },
+  {
+    "appFieldKey": "local_environment",
+    "appFieldLabel": "Local Environment",
+    "excelFieldName": "Local environment",
+    "confidence": 1,
+    "optionMappings": {
+      "Near Main Road": {
+        "excelOption": "No Adverse",
+        "phrase": "There are no known or apparent adverse features of the location, and I am not aware of any adverse features that will materially affect the subject property.",
+        "confidence": 0.5833333333333334
+      },
+      "Near Airport": {
+        "excelOption": "No Adverse",
+        "phrase": "There are no known or apparent adverse features of the location, and I am not aware of any adverse features that will materially affect the subject property.",
+        "confidence": 0.5454545454545454
+      }
+    }
+  },
+  {
+    "appFieldKey": "private_road",
+    "appFieldLabel": "Private Road Access",
+    "excelFieldName": "Conservatory   Porch",
+    "confidence": 0.776470588235294,
+    "optionMappings": {
+      "Unknown": {
+        "excelOption": "Windows",
+        "phrase": "Also, the (conservatory/porch) incorporates (single/double)  glazed (PVC/timber/other) windows(s).",
+        "confidence": 0.7142857142857143
+      }
+    }
+  },
+  {
+    "appFieldKey": "other_service_type",
+    "appFieldLabel": "Other Service Type",
+    "excelFieldName": "Conservatory   Porch",
+    "confidence": 0.8823529411764706,
+    "optionMappings": {
+      "Other": {
+        "excelOption": "Roof",
+        "phrase": "The roof over the (conservatory/porch) is (pitched/flat) and covered in (PVC double glazed sections/polycarbonate sheets/concrete tiles/clay tiles/mineral felt/lead/others).",
+        "confidence": 0.6
+      }
+    }
+  },
+  {
+    "appFieldKey": "facilities",
+    "appFieldLabel": "Nearby Facilities",
+    "excelFieldName": "Mains Electricity",
+    "confidence": 0.7812499999999999,
+    "optionMappings": {
+      "Public Transport": {
+        "excelOption": "Not Inspected",
+        "phrase": "I did not find the meter; please ask the vendor about the location of the mains electricity meter as it is important that you know where it is located.",
+        "confidence": 0.6
+      },
+      "Sports/Leisure": {
+        "excelOption": "Not Inspected",
+        "phrase": "I did not find the meter; please ask the vendor about the location of the mains electricity meter as it is important that you know where it is located.",
+        "confidence": 0.6153846153846154
+      }
+    }
+  },
+  {
+    "appFieldKey": "wall_construction",
+    "appFieldLabel": "Wall Construction",
+    "excelFieldName": "Party Disclosures",
+    "confidence": 0.8125,
+    "optionMappings": {
+      "Stone": {
+        "excelOption": "None",
+        "phrase": "I do not know of any conflict of interest issue in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct.",
+        "confidence": 0.8
+      },
+      "Concrete": {
+        "excelOption": "Conflict",
+        "phrase": "I suspect that a conflict of interest issue may exist in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct. I am known to the property owner or have an interest in the property.",
+        "confidence": 0.625
+      }
+    }
+  },
+  {
+    "appFieldKey": "external_wall_built_of",
+    "appFieldLabel": "External Wall Built Of",
+    "excelFieldName": "External features",
+    "confidence": 0.7894736842105262,
+    "optionMappings": {
+      "Solid wall": {
+        "excelOption": "Handrails",
+        "phrase": "The handrails are formed in (timber/steel/other).",
+        "confidence": 0.7777777777777778
+      },
+      "Stud wall": {
+        "excelOption": "Walls",
+        "phrase": "The (balcony/carport/roof terrace/staircase/other) walls are built of (bricks/timber/concrete/glazed section/other).",
+        "confidence": 0.625
+      },
+      "Other": {
+        "excelOption": "Roof",
+        "phrase": "The (pitched/flat) roof over the (carport/porch canopy/external stairs/other)  is covered in (tile/felt/lead/other).",
+        "confidence": 0.6
+      }
+    }
+  },
+  {
+    "appFieldKey": "cladding_material",
+    "appFieldLabel": "Cladding Material",
+    "excelFieldName": "Electric Heating",
+    "confidence": 0.875,
+    "optionMappings": {
+      "Profile sheets": {
+        "excelOption": "Point-of-use",
+        "phrase": "The hot water is provided by an individual electric water heaters that provide instantaneous hot water to individual appliance and points (sometimes called a point-of-use water heater). The property must be maintained in the normal way.",
+        "confidence": 0.6153846153846154
+      }
+    }
+  },
+  {
+    "appFieldKey": "internal_wall_type",
+    "appFieldLabel": "Internal Wall Type",
+    "excelFieldName": "Mains Electricity",
+    "confidence": 0.875,
+    "optionMappings": {
+      "Lath and plaster": {
+        "excelOption": "Not Inspected",
+        "phrase": "I did not find the meter; please ask the vendor about the location of the mains electricity meter as it is important that you know where it is located.",
+        "confidence": 0.6428571428571429
+      }
+    }
+  },
+  {
+    "appFieldKey": "removed_wall_location",
+    "appFieldLabel": "Removed Wall Location",
+    "excelFieldName": "Local environment",
+    "confidence": 0.8421052631578947,
+    "optionMappings": {
+      "Bedroom": {
+        "excelOption": "No Adverse",
+        "phrase": "There are no known or apparent adverse features of the location, and I am not aware of any adverse features that will materially affect the subject property.",
+        "confidence": 0.5555555555555556
+      }
+    }
+  },
+  {
+    "appFieldKey": "floor_build_type",
+    "appFieldLabel": "Floor Build Type",
+    "excelFieldName": "Property Type",
+    "confidence": 0.8571428571428571,
+    "optionMappings": {
+      "Other": {
+        "excelOption": "House",
+        "phrase": "The property is a (detached/semi-detached/mid-terrace/end-terrace/other) (house/bungalow) with (one/two/three/four/other) bedrooms.",
+        "confidence": 0.6
+      }
+    }
+  },
+  {
+    "appFieldKey": "window_sealing",
+    "appFieldLabel": "Window Sealing",
+    "excelFieldName": "Window Sills",
+    "confidence": 0.8461538461538461,
+    "optionMappings": {
+      "Not Visible": {
+        "excelOption": "Repair soon",
+        "phrase": "The window sill across the bottom of the window opening in the (front/side/rear) wall of the main (main building/back addition/extension/bay window/other) is (damaged/cracked/ eroded). This should be repaired soon.",
+        "confidence": 0.6
+      }
+    }
+  },
+  {
+    "appFieldKey": "roof_lining",
+    "appFieldLabel": "Roof Lining",
+    "excelFieldName": "Sloping Floor",
+    "confidence": 0.8333333333333334,
+    "optionMappings": {
+      "None Visible": {
+        "excelOption": "Investigate",
+        "phrase": "I recommend you contact a qualified person for further investigation and remedial advice.",
+        "confidence": 0.7272727272727273
+      },
+      "Unknown": {
+        "excelOption": "No Issue",
+        "phrase": "The floor to the (lounge/hall/kitchen/bathroom/utility room/bedrooms/other) is sloping or uneven. This has been caused by longstanding building movement and is no cause for concern. No repair is currently needed. The property must be maintained in the normal way.",
+        "confidence": 0.7142857142857143
+      }
+    }
+  },
+  {
+    "appFieldKey": "windows",
+    "appFieldLabel": "Windows Type",
+    "excelFieldName": "Windows",
+    "confidence": 0.7454545454545454,
+    "optionMappings": {
+      "Single Glazed": {
+        "excelOption": "Mainly/Mixture",
+        "phrase": "The windows installed in the property are made up of  (mainly/a mixture) of (replacement) (PVC/timber/steel/modern PVC sash/modern timber sash/aluminium/old style timber sash/other) (single/double/secondary) glazed units.",
+        "confidence": 0.5384615384615384
+      }
+    }
+  },
+  {
+    "appFieldKey": "decoration",
+    "appFieldLabel": "Decoration Standard",
+    "excelFieldName": "Removed Chimney Breast",
+    "confidence": 0.78,
+    "optionMappings": {
+      "Modern/Updated": {
+        "excelOption": "Not inspected",
+        "phrase": "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. Removed chimney breasts that are poorly supported can affect the structure of the building (See Section J1- Risk). You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon (See Section I1 - Regulations).",
+        "confidence": 0.6923076923076923
+      }
+    }
+  },
+  {
+    "appFieldKey": "kitchen_type",
+    "appFieldLabel": "Kitchen Type",
+    "excelFieldName": "Not Inspected",
+    "confidence": 0.6666666666666666,
+    "optionMappings": {
+      "Fitted Modern": {
+        "excelOption": "Removed Pots",
+        "phrase": "The (front/side/rear/other) chimney stack(s) have had their pots removed and their top sealed.",
+        "confidence": 0.6666666666666666
+      },
+      "Fitted Traditional": {
+        "excelOption": "Removed Chimney Stack(s)",
+        "phrase": "The chimney stack to the (main building/front/rear/side) has been removed and covered over with roofing. You should ask your legal adviser to confirm whether the removed chimney stack(s) received building regulation approval (including the issuing of a completion certificate) from the local council and advice on the implications.",
+        "confidence": 0.75
+      },
+      "Open Plan": {
+        "excelOption": "Not applicable",
+        "phrase": "This section is not applicable to the subject property; I have no further comments.",
+        "confidence": 0.6153846153846154
+      }
+    }
+  },
+  {
+    "appFieldKey": "other_rooms",
+    "appFieldLabel": "Other Rooms/Features",
+    "excelFieldName": "Removed Chimney Breast",
+    "confidence": 0.71,
+    "optionMappings": {
+      "Conservatory": {
+        "excelOption": "Not inspected",
+        "phrase": "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. Removed chimney breasts that are poorly supported can affect the structure of the building (See Section J1- Risk). You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon (See Section I1 - Regulations).",
+        "confidence": 0.5833333333333334
+      },
+      "Loft Conversion": {
+        "excelOption": "Not inspected",
+        "phrase": "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. Removed chimney breasts that are poorly supported can affect the structure of the building (See Section J1- Risk). You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon (See Section I1 - Regulations).",
+        "confidence": 0.7142857142857143
+      }
+    }
+  },
+  {
+    "appFieldKey": "water_heater_type",
+    "appFieldLabel": "Water Heater Type",
+    "excelFieldName": "Conservatory   Porch",
+    "confidence": 0.8235294117647058,
+    "optionMappings": {
+      "Instantaneous": {
+        "excelOption": "Location, construction",
+        "phrase": "There is a (conservatory/porch/open porch/integral porch/other) to the (front/side/rear) of the property, and this is built of (brick walls/PVC double glazed sections/timber double glazed sections/other).",
+        "confidence": 0.6
+      },
+      "Unknown": {
+        "excelOption": "Windows",
+        "phrase": "Also, the (conservatory/porch) incorporates (single/double)  glazed (PVC/timber/other) windows(s).",
+        "confidence": 0.7142857142857143
+      }
+    }
+  },
+  {
+    "appFieldKey": "mains_drainage",
+    "appFieldLabel": "Mains Drainage Connected",
+    "excelFieldName": "Re-pointing                       Repair soon",
+    "confidence": 0.7377272727272728,
+    "optionMappings": {
+      "No - Septic Tank": {
+        "excelOption": "Chimney                Defect",
+        "phrase": "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack (has eroded/is partly missing/is loose/other).This should be repaired soon.",
+        "confidence": 0.5384615384615384
+      }
+    }
+  },
+  {
+    "appFieldKey": "demand_level",
+    "appFieldLabel": "Local Demand Level",
+    "excelFieldName": "Local environment",
+    "confidence": 0.7812499999999999,
+    "optionMappings": {
+      "Moderate": {
+        "excelOption": "No Adverse",
+        "phrase": "There are no known or apparent adverse features of the location, and I am not aware of any adverse features that will materially affect the subject property.",
+        "confidence": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "appFieldKey": "party_instructing",
+    "appFieldLabel": "Party Instructing",
+    "excelFieldName": "Party Disclosures",
+    "confidence": 0.8125,
+    "optionMappings": {
+      "Solicitor": {
+        "excelOption": "Conflict",
+        "phrase": "I suspect that a conflict of interest issue may exist in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct. I am known to the property owner or have an interest in the property.",
+        "confidence": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "appFieldKey": "furnishing_status",
+    "appFieldLabel": "Furnishing Status",
+    "excelFieldName": "Safety Glass Rating",
+    "confidence": 0.764705882352941,
+    "optionMappings": {
+      "Fully Furnished": {
+        "excelOption": "Open to building",
+        "phrase": "The (conservatory/porch) is open to the main part of the property, and this will result in a high rate of heat loss from the property. A separating door should be fitted between them soon.",
+        "confidence": 0.5714285714285714
+      },
+      "Partially Furnished": {
+        "excelOption": "Open to building",
+        "phrase": "The (conservatory/porch) is open to the main part of the property, and this will result in a high rate of heat loss from the property. A separating door should be fitted between them soon.",
+        "confidence": 0.5555555555555556
+      }
+    }
+  },
+  {
+    "appFieldKey": "property_facing",
+    "appFieldLabel": "Property Facing",
+    "excelFieldName": "Property Facing",
+    "confidence": 1,
+    "optionMappings": {
+      "North-East": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.6363636363636364
+      },
+      "North-West": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.5454545454545454
+      }
+    }
+  },
+  {
+    "appFieldKey": "garage_present",
+    "appFieldLabel": "Garage/Outbuilding Present",
+    "excelFieldName": "Re-pointing                       Repair soon",
+    "confidence": 0.7783333333333333,
+    "optionMappings": {
+      "Yes - Attached": {
+        "excelOption": "Chimney                Defect",
+        "phrase": "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack (has eroded/is partly missing/is loose/other).This should be repaired soon.",
+        "confidence": 0.6153846153846154
+      },
+      "Yes - Detached": {
+        "excelOption": "Chimney                Defect",
+        "phrase": "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack (has eroded/is partly missing/is loose/other).This should be repaired soon.",
+        "confidence": 0.6923076923076923
+      }
+    }
+  },
+  {
+    "appFieldKey": "garage_wall_type",
+    "appFieldLabel": "Garage Wall Construction",
+    "excelFieldName": "Re-pointing                       Repair soon",
+    "confidence": 0.7227272727272728,
+    "optionMappings": {
+      "Timber Frame": {
+        "excelOption": "Chimney                Defect",
+        "phrase": "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack (has eroded/is partly missing/is loose/other).This should be repaired soon.",
+        "confidence": 0.5384615384615384
+      },
+      "Pre-fabricated": {
+        "excelOption": "Chimney                Defect",
+        "phrase": "Some of the mortar between the bricks or stonework (called pointing) to the (main building/front/side/rear) chimney stack (has eroded/is partly missing/is loose/other).This should be repaired soon.",
+        "confidence": 0.5384615384615384
+      }
+    }
+  },
+  {
+    "appFieldKey": "garage_roof_type",
+    "appFieldLabel": "Garage Roof Type",
+    "excelFieldName": "Property Facing",
+    "confidence": 1,
+    "optionMappings": {
+      "Metal Sheeting": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.6153846153846154
+      },
+      "Corrugated": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.5454545454545454
+      }
+    }
+  },
+  {
+    "appFieldKey": "garage_door_type",
+    "appFieldLabel": "Garage Door Type",
+    "excelFieldName": "Property Facing",
+    "confidence": 0.9285714285714286,
+    "optionMappings": {
+      "Up and Over - Metal": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.6428571428571429
+      },
+      "Up and Over - Timber": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.7333333333333333
+      },
+      "Sectional": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.5454545454545454
+      },
+      "None/Open": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.6363636363636364
+      }
+    }
+  },
+  {
+    "appFieldKey": "garage_electrics",
+    "appFieldLabel": "Garage Electrics",
+    "excelFieldName": "Electric Heating",
+    "confidence": 0.9333333333333333,
+    "optionMappings": {
+      "Yes - Light Only": {
+        "excelOption": "Point-of-use",
+        "phrase": "The hot water is provided by an individual electric water heaters that provide instantaneous hot water to individual appliance and points (sometimes called a point-of-use water heater). The property must be maintained in the normal way.",
+        "confidence": 0.5833333333333334
+      }
+    }
+  },
+  {
+    "appFieldKey": "garage_size",
+    "appFieldLabel": "Garage Size",
+    "excelFieldName": "Gas Heating",
+    "confidence": 0.7999999999999999,
+    "optionMappings": {
+      "Oversized Single": {
+        "excelOption": "Communal Heating",
+        "phrase": "The property is heated centrally by a communal gas heating system. I could not inspect the boiler unit and cannot comment on the type and condition.",
+        "confidence": 0.6
+      }
+    }
+  },
+  {
+    "appFieldKey": "driveway_type",
+    "appFieldLabel": "Driveway Surface",
+    "excelFieldName": "Party Disclosures",
+    "confidence": 0.7124999999999999,
+    "optionMappings": {
+      "Block Paving": {
+        "excelOption": "Conflict",
+        "phrase": "I suspect that a conflict of interest issue may exist in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct. I am known to the property owner or have an interest in the property.",
+        "confidence": 0.5454545454545454
+      },
+      "Concrete": {
+        "excelOption": "Conflict",
+        "phrase": "I suspect that a conflict of interest issue may exist in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct. I am known to the property owner or have an interest in the property.",
+        "confidence": 0.625
+      },
+      "None": {
+        "excelOption": "None",
+        "phrase": "I do not know of any conflict of interest issue in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct.",
+        "confidence": 1
+      }
+    }
+  },
+  {
+    "appFieldKey": "boundary_types",
+    "appFieldLabel": "Boundary Types",
+    "excelFieldName": "Property Type",
+    "confidence": 0.9230769230769231,
+    "optionMappings": {
+      "Hedge": {
+        "excelOption": "House",
+        "phrase": "The property is a (detached/semi-detached/mid-terrace/end-terrace/other) (house/bungalow) with (one/two/three/four/other) bedrooms.",
+        "confidence": 0.6
+      }
+    }
+  },
+  {
+    "appFieldKey": "roof_type_structure",
+    "appFieldLabel": "Roof Structure Type",
+    "excelFieldName": "Conservatory   Porch",
+    "confidence": 0.8235294117647058,
+    "optionMappings": {
+      "Traditional Cut Roof": {
+        "excelOption": "Location, construction",
+        "phrase": "There is a (conservatory/porch/open porch/integral porch/other) to the (front/side/rear) of the property, and this is built of (brick walls/PVC double glazed sections/timber double glazed sections/other).",
+        "confidence": 0.8
+      },
+      "Flat Roof": {
+        "excelOption": "Floor",
+        "phrase": "The floors are covered in (tiles/laminate flooring/carpets/other).",
+        "confidence": 0.625
+      },
+      "Unknown/Not Visible": {
+        "excelOption": "Location, construction",
+        "phrase": "There is a (conservatory/porch/open porch/integral porch/other) to the (front/side/rear) of the property, and this is built of (brick walls/PVC double glazed sections/timber double glazed sections/other).",
+        "confidence": 0.6
+      }
+    }
+  },
+  {
+    "appFieldKey": "ventilation_adequate",
+    "appFieldLabel": "Roof Space Ventilation",
+    "excelFieldName": "Removed Chimney Breast",
+    "confidence": 0.835,
+    "optionMappings": {
+      "Not Visible": {
+        "excelOption": "Not inspected",
+        "phrase": "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. Removed chimney breasts that are poorly supported can affect the structure of the building (See Section J1- Risk). You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon (See Section I1 - Regulations).",
+        "confidence": 0.5833333333333334
+      }
+    }
+  },
+  {
+    "appFieldKey": "water_tank_material",
+    "appFieldLabel": "Water Tank Material",
+    "excelFieldName": "Laminate/Wood Floor",
+    "confidence": 0.9411764705882353,
+    "optionMappings": {
+      "Asbestos": {
+        "excelOption": "repair soon",
+        "phrase": "The (laminate/wood) flooring to the (kitchen/bathroom/utility room/bedrooms/other) are (worn/damaged/badly fitted/ incomplete/broken /lifted/other). These should be repaired soon.",
+        "confidence": 0.6
+      },
+      "Not Inspected": {
+        "excelOption": "repair soon",
+        "phrase": "The (laminate/wood) flooring to the (kitchen/bathroom/utility room/bedrooms/other) are (worn/damaged/badly fitted/ incomplete/broken /lifted/other). These should be repaired soon.",
+        "confidence": 0.5833333333333334
+      }
+    }
+  },
+  {
+    "appFieldKey": "water_tank_location",
+    "appFieldLabel": "Water Tank Location",
+    "excelFieldName": "Laminate/Wood Floor",
+    "confidence": 0.8823529411764706,
+    "optionMappings": {
+      "Roof space": {
+        "excelOption": "repair soon",
+        "phrase": "The (laminate/wood) flooring to the (kitchen/bathroom/utility room/bedrooms/other) are (worn/damaged/badly fitted/ incomplete/broken /lifted/other). These should be repaired soon.",
+        "confidence": 0.7
+      },
+      "Airing cupboard": {
+        "excelOption": "repair soon",
+        "phrase": "The (laminate/wood) flooring to the (kitchen/bathroom/utility room/bedrooms/other) are (worn/damaged/badly fitted/ incomplete/broken /lifted/other). These should be repaired soon.",
+        "confidence": 0.5714285714285714
+      }
+    }
+  },
+  {
+    "appFieldKey": "roof_spreading",
+    "appFieldLabel": "Roof Spreading",
+    "excelFieldName": "Roof Spreading",
+    "confidence": 1,
+    "optionMappings": {
+      "Unknown": {
+        "excelOption": "Repair now",
+        "phrase": "Many (roof/ridge/hip) tiles (are loose/have slipped/are missing/are cracked/are poorly secured/are damaged/other). This is likely to cause damp penetration to the building below (See Section J1 - Risks) and is a safety hazard (See Section J3 Risks). This should be repaired now.",
+        "confidence": 0.5555555555555556
+      }
+    }
+  },
+  {
+    "appFieldKey": "removed_chimney_breast",
+    "appFieldLabel": "Removed Chimney Breast",
+    "excelFieldName": "Removed Chimney Breast",
+    "confidence": 1,
+    "optionMappings": {
+      "Yes - Supported": {
+        "excelOption": "Not inspected",
+        "phrase": "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. Removed chimney breasts that are poorly supported can affect the structure of the building (See Section J1- Risk). You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon (See Section I1 - Regulations).",
+        "confidence": 0.75
+      },
+      "Yes - Unsupported": {
+        "excelOption": "Not inspected",
+        "phrase": "Part of the chimney breast in the property's roof space has been removed. I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. Removed chimney breasts that are poorly supported can affect the structure of the building (See Section J1- Risk). You should ask your legal adviser to check if the local authority gave permission for this work. If not, you should ask an appropriately qualified professional to inspect the structure and provide a report with recommendations soon (See Section I1 - Regulations).",
+        "confidence": 0.7142857142857143
+      }
+    }
+  },
+  {
+    "appFieldKey": "fireplace_types",
+    "appFieldLabel": "Fireplace Types",
+    "excelFieldName": "Property Facing",
+    "confidence": 0.8571428571428571,
+    "optionMappings": {
+      "An open fire": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.7272727272727273
+      },
+      "Imitation system": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.6666666666666666
+      },
+      "Wood burning stove": {
+        "excelOption": "Orientation",
+        "phrase": "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
+        "confidence": 0.625
+      }
+    }
+  },
+  {
+    "appFieldKey": "valuation_purpose",
+    "appFieldLabel": "Purpose of Valuation",
+    "excelFieldName": "Ornamental Plaster",
+    "confidence": 0.8339869281045751,
+    "optionMappings": {
+      "Insurance": {
+        "excelOption": "Repair",
+        "phrase": "The ceiling includes ornamental plaster features. This is (very loose/badly cracked/partly missing/unstable and may fall) (See Section J3 - Risks). This should be repaired now. Although some damage can be repaired, larger areas may have to be replaced completely. This can increase the repair work required",
+        "confidence": 0.5555555555555556
+      },
+      "Probate": {
+        "excelOption": "Repair",
+        "phrase": "The ceiling includes ornamental plaster features. This is (very loose/badly cracked/partly missing/unstable and may fall) (See Section J3 - Risks). This should be repaired now. Although some damage can be repaired, larger areas may have to be replaced completely. This can increase the repair work required",
+        "confidence": 0.7142857142857143
+      }
+    }
+  },
+  {
+    "appFieldKey": "valuation_type",
+    "appFieldLabel": "Valuation Type",
+    "excelFieldName": "Juliet Balcony",
+    "confidence": 0.8461538461538461,
+    "optionMappings": {
+      "Re-valuation": {
+        "excelOption": "Hand Rails",
+        "phrase": "The handrail is (not strong enough/ inadequately designed) and could allow people to fall. You should repair or replace with a more secured alternative (see Section J3 Risks).",
+        "confidence": 0.5454545454545454
+      }
+    }
+  },
+  {
+    "appFieldKey": "instructing_party",
+    "appFieldLabel": "Instructing Party",
+    "excelFieldName": "Party Disclosures",
+    "confidence": 0.8125,
+    "optionMappings": {
+      "Solicitor": {
+        "excelOption": "Conflict",
+        "phrase": "I suspect that a conflict of interest issue may exist in this transaction as defined by RICS Valuation Standards 2014 and the RICS Rules of Conduct. I am known to the property owner or have an interest in the property.",
+        "confidence": 0.6666666666666666
+      }
+    }
+  }
+]

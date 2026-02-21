@@ -1,0 +1,2412 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "operationId": "HealthController_getHealth_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Health check endpoint",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/api/v1/version": {
+      "get": {
+        "operationId": "HealthController_getVersion_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Version information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get API version information",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "operationId": "AuthController_register_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "409": {
+            "description": "Email already registered"
+          }
+        },
+        "summary": "Register a new user",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "operationId": "AuthController_login_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful - returns user object with tokens",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        },
+        "summary": "Login with email and password",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tokens refreshed successfully - returns user object with new tokens",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or expired refresh token"
+          }
+        },
+        "summary": "Refresh access token using refresh token",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Logged out successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Logout and revoke refresh token",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "operationId": "AuthController_me_v1",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Current user profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Get current authenticated user",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/api/v1/surveys": {
+      "get": {
+        "operationId": "SurveysController_findAll_v1",
+        "parameters": [
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Search query - searches title, client name, property address, and job ref",
+            "schema": {
+              "maxLength": 200,
+              "example": "Main Street",
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (1-based)",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page (1-100)",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "example": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by survey status",
+            "schema": {
+              "enum": [
+                "DRAFT",
+                "IN_PROGRESS",
+                "PAUSED",
+                "COMPLETED",
+                "PENDING_REVIEW",
+                "APPROVED",
+                "REJECTED"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by survey type",
+            "schema": {
+              "enum": [
+                "LEVEL_2",
+                "LEVEL_3",
+                "VALUATION",
+                "SNAGGING",
+                "REINSPECTION",
+                "OTHER"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientName",
+            "required": false,
+            "in": "query",
+            "description": "Filter by client name (partial match)",
+            "schema": {
+              "maxLength": 255,
+              "example": "Smith",
+              "type": "string"
+            }
+          },
+          {
+            "name": "createdFrom",
+            "required": false,
+            "in": "query",
+            "description": "Filter surveys created on or after this date (ISO 8601)",
+            "schema": {
+              "example": "2024-01-01T00:00:00.000Z",
+              "type": "string"
+            }
+          },
+          {
+            "name": "createdTo",
+            "required": false,
+            "in": "query",
+            "description": "Filter surveys created on or before this date (ISO 8601)",
+            "schema": {
+              "example": "2024-12-31T23:59:59.999Z",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of surveys matching search criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SurveyListResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - insufficient role"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Search and list surveys with pagination and filtering",
+        "tags": [
+          "Surveys"
+        ]
+      },
+      "post": {
+        "operationId": "SurveysController_create_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSurveyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Survey created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SurveyResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - insufficient role"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Create a new survey with sections and answers",
+        "tags": [
+          "Surveys"
+        ]
+      }
+    },
+    "/api/v1/surveys/{id}": {
+      "get": {
+        "operationId": "SurveysController_findOne_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Survey UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Survey retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SurveyResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Survey not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Get a survey by ID with all sections and answers",
+        "tags": [
+          "Surveys"
+        ]
+      },
+      "put": {
+        "operationId": "SurveysController_update_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Survey UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSurveyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Survey updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SurveyResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Survey not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Update a survey with sections and answers",
+        "tags": [
+          "Surveys"
+        ]
+      },
+      "delete": {
+        "operationId": "SurveysController_remove_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Survey UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Survey soft-deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSurveyResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Survey not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Soft delete a survey (marks as deleted)",
+        "tags": [
+          "Surveys"
+        ]
+      }
+    },
+    "/api/v1/surveys/{surveyId}/sections": {
+      "post": {
+        "operationId": "SectionsController_create_v1",
+        "parameters": [
+          {
+            "name": "surveyId",
+            "required": true,
+            "in": "path",
+            "description": "Survey UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSectionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Section created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SectionResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Survey not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Create a new section in a survey",
+        "tags": [
+          "Sections"
+        ]
+      }
+    },
+    "/api/v1/sections/{id}": {
+      "put": {
+        "operationId": "SectionsController_update_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Section UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSectionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Section updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SectionResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Section not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Update a section",
+        "tags": [
+          "Sections"
+        ]
+      },
+      "delete": {
+        "operationId": "SectionsController_delete_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Section UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Section deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSectionResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Section not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Delete a section",
+        "tags": [
+          "Sections"
+        ]
+      }
+    },
+    "/api/v1/sections/{sectionId}/answers": {
+      "post": {
+        "operationId": "AnswersController_create_v1",
+        "parameters": [
+          {
+            "name": "sectionId",
+            "required": true,
+            "in": "path",
+            "description": "Section UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAnswerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Answer created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Section not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Create a new answer in a section",
+        "tags": [
+          "Answers"
+        ]
+      }
+    },
+    "/api/v1/answers/{id}": {
+      "put": {
+        "operationId": "AnswersController_update_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Answer UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAnswerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Answer updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Answer not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Update an answer",
+        "tags": [
+          "Answers"
+        ]
+      },
+      "delete": {
+        "operationId": "AnswersController_delete_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Answer UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Answer deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteAnswerResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Answer not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Delete an answer",
+        "tags": [
+          "Answers"
+        ]
+      }
+    },
+    "/api/v1/media/upload": {
+      "post": {
+        "description": "Upload a photo, audio recording, or signature to a survey. File is stored locally and metadata is saved to database.",
+        "operationId": "MediaController_upload_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "surveyId",
+                  "type",
+                  "file"
+                ],
+                "properties": {
+                  "surveyId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Survey UUID to attach media to",
+                    "example": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "PHOTO",
+                      "AUDIO",
+                      "SIGNATURE"
+                    ],
+                    "description": "Type of media being uploaded",
+                    "example": "PHOTO"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The file to upload"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Media uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid file type or size"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Survey not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Upload media file",
+        "tags": [
+          "Media"
+        ]
+      }
+    },
+    "/api/v1/media/{id}": {
+      "get": {
+        "description": "Retrieve metadata for a media file. Does not return the file itself.",
+        "operationId": "MediaController_findOne_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Media UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Media metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Media not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Get media metadata",
+        "tags": [
+          "Media"
+        ]
+      },
+      "delete": {
+        "description": "Hard delete a media file. Removes both the file from storage and the database record.",
+        "operationId": "MediaController_delete_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Media UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Media deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteMediaResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Media not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Delete media",
+        "tags": [
+          "Media"
+        ]
+      }
+    },
+    "/api/v1/media/{id}/file": {
+      "get": {
+        "description": "Stream the actual media file. Sets appropriate Content-Type header.",
+        "operationId": "MediaController_getFile_v1",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Media UUID",
+            "schema": {
+              "example": "550e8400-e29b-41d4-a716-446655440000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File stream",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - not owner or admin"
+          },
+          "404": {
+            "description": "Media not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Download media file",
+        "tags": [
+          "Media"
+        ]
+      }
+    },
+    "/api/v1/sync/push": {
+      "post": {
+        "description": "Accepts a batch of operations from the client offline queue. Processes operations transactionally with idempotency support. Duplicate batches (same idempotencyKey) return cached response.",
+        "operationId": "SyncController_push_v1",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncPushDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sync push processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncPushResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - insufficient role"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Push offline changes to server",
+        "tags": [
+          "Sync"
+        ]
+      }
+    },
+    "/api/v1/sync/pull": {
+      "get": {
+        "description": "Returns entities that have changed since the provided timestamp. Use the returned serverTimestamp as the since parameter for subsequent pulls. Includes surveys, sections, answers, and media metadata owned by the user.",
+        "operationId": "SyncController_pull_v1",
+        "parameters": [
+          {
+            "name": "since",
+            "required": false,
+            "in": "query",
+            "description": "ISO 8601 timestamp to fetch changes after (exclusive)",
+            "schema": {
+              "example": "2024-01-15T10:30:00.000Z",
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Maximum number of changes to return (1-500, default 100)",
+            "schema": {
+              "minimum": 1,
+              "maximum": 500,
+              "default": 100,
+              "example": 100,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Changes retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncPullResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - insufficient role"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Pull server changes",
+        "tags": [
+          "Sync"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "SurveyScriber API",
+    "description": "SurveyScriber Backend API - Professional Field Survey & Inspection Platform\n\n## Authentication\nThis API uses JWT Bearer tokens. Obtain tokens via `/auth/login` and include in the Authorization header.\n\n## Offline-First Architecture\nThe API supports granular CRUD operations for surveys, sections, and answers to enable offline-first Flutter clients to sync individual changes without full survey uploads.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "SurveyScriber Team",
+      "url": "https://surveyscriber.com",
+      "email": "support@surveyscriber.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Health check endpoints for monitoring"
+    },
+    {
+      "name": "Authentication",
+      "description": "User authentication: login, register, refresh tokens"
+    },
+    {
+      "name": "Surveys",
+      "description": "Survey CRUD - main survey operations"
+    },
+    {
+      "name": "Sections",
+      "description": "Section CRUD - granular section management for sync"
+    },
+    {
+      "name": "Answers",
+      "description": "Answer CRUD - granular answer management for sync"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "JWT-auth": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "name": "JWT",
+        "description": "Enter JWT token from /auth/login response",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "DatabaseStatus": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "up",
+            "enum": [
+              "up",
+              "down"
+            ]
+          },
+          "responseTime": {
+            "type": "string",
+            "example": "5ms"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "HealthResponseDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "ok",
+            "enum": [
+              "ok",
+              "degraded"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "uptime": {
+            "type": "number",
+            "example": 12345.678,
+            "description": "Server uptime in seconds"
+          },
+          "database": {
+            "$ref": "#/components/schemas/DatabaseStatus"
+          }
+        },
+        "required": [
+          "status",
+          "timestamp",
+          "uptime",
+          "database"
+        ]
+      },
+      "VersionResponseDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "SurveyScriber API"
+          },
+          "version": {
+            "type": "string",
+            "example": "1.0.0"
+          },
+          "env": {
+            "type": "string",
+            "example": "development",
+            "enum": [
+              "development",
+              "production",
+              "test"
+            ]
+          },
+          "nodeVersion": {
+            "type": "string",
+            "example": "v20.10.0"
+          }
+        },
+        "required": [
+          "name",
+          "version",
+          "env",
+          "nodeVersion"
+        ]
+      },
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "surveyor@example.com",
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "example": "SecurePass123!",
+            "description": "Password (min 8 chars, must include uppercase, lowercase, number)",
+            "minLength": 8
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John",
+            "description": "User first name"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe",
+            "description": "User last name"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ADMIN",
+              "MANAGER",
+              "SURVEYOR",
+              "VIEWER"
+            ],
+            "example": "SURVEYOR",
+            "description": "User role (defaults to SURVEYOR)"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "RegisterResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "email": {
+            "type": "string",
+            "example": "surveyor@example.com"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ADMIN",
+              "MANAGER",
+              "SURVEYOR",
+              "VIEWER"
+            ],
+            "example": "SURVEYOR"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "role"
+        ]
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "surveyor@example.com",
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "example": "SecurePass123!",
+            "description": "User password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "UserResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "email": {
+            "type": "string",
+            "example": "surveyor@example.com"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+44 7700 900000"
+          },
+          "organization": {
+            "type": "string",
+            "example": "RICS Surveyors Ltd"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "example": "https://example.com/avatar.png"
+          },
+          "emailVerified": {
+            "type": "boolean",
+            "example": true
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ADMIN",
+              "MANAGER",
+              "SURVEYOR",
+              "VIEWER"
+            ],
+            "example": "SURVEYOR"
+          },
+          "isActive": {
+            "type": "boolean",
+            "example": true
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "emailVerified",
+          "role",
+          "isActive",
+          "createdAt"
+        ]
+      },
+      "LoginResponseDto": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserResponseDto"
+          },
+          "accessToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+            "description": "JWT access token (expires in 15 minutes)"
+          },
+          "refreshToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+            "description": "Refresh token (expires in 7 days)"
+          },
+          "expiresIn": {
+            "type": "number",
+            "example": 900,
+            "description": "Access token expiration time in seconds"
+          }
+        },
+        "required": [
+          "user",
+          "accessToken",
+          "refreshToken",
+          "expiresIn"
+        ]
+      },
+      "RefreshDto": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+            "description": "Refresh token from login or previous refresh"
+          }
+        },
+        "required": [
+          "refreshToken"
+        ]
+      },
+      "LogoutResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "SurveyListItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "title": {
+            "type": "string",
+            "example": "Level 2 Home Survey - 123 Main Street"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "example": "123 Main Street, London, SW1A 1AA"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "IN_PROGRESS",
+              "PAUSED",
+              "COMPLETED",
+              "PENDING_REVIEW",
+              "APPROVED",
+              "REJECTED"
+            ],
+            "example": "DRAFT"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LEVEL_2",
+              "LEVEL_3",
+              "VALUATION",
+              "SNAGGING",
+              "REINSPECTION",
+              "OTHER"
+            ],
+            "example": "LEVEL_2"
+          },
+          "jobRef": {
+            "type": "string",
+            "example": "JOB-2024-001234"
+          },
+          "clientName": {
+            "type": "string",
+            "example": "John Smith"
+          },
+          "userId": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "propertyAddress",
+          "status",
+          "userId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "PaginationMetaDto": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number",
+            "example": 1,
+            "description": "Current page number"
+          },
+          "limit": {
+            "type": "number",
+            "example": 20,
+            "description": "Items per page"
+          },
+          "total": {
+            "type": "number",
+            "example": 100,
+            "description": "Total number of items"
+          },
+          "totalPages": {
+            "type": "number",
+            "example": 5,
+            "description": "Total number of pages"
+          },
+          "hasNext": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether there is a next page"
+          },
+          "hasPrev": {
+            "type": "boolean",
+            "example": false,
+            "description": "Whether there is a previous page"
+          }
+        },
+        "required": [
+          "page",
+          "limit",
+          "total",
+          "totalPages",
+          "hasNext",
+          "hasPrev"
+        ]
+      },
+      "SurveyListResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SurveyListItemDto"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMetaDto"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "CreateAnswerDto": {
+        "type": "object",
+        "properties": {
+          "questionKey": {
+            "type": "string",
+            "example": "roof_condition",
+            "description": "Unique key identifying the question"
+          },
+          "value": {
+            "type": "string",
+            "example": "Good condition with minor wear",
+            "description": "The answer value"
+          }
+        },
+        "required": [
+          "questionKey",
+          "value"
+        ]
+      },
+      "CreateSectionDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Roof Inspection",
+            "description": "Title of the section"
+          },
+          "order": {
+            "type": "number",
+            "example": 1,
+            "description": "Order of the section within the survey",
+            "default": 0
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "CreateSurveyDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Level 2 Home Survey - 123 Main Street",
+            "description": "Title of the survey"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "example": "123 Main Street, London, SW1A 1AA",
+            "description": "Property address being surveyed"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "IN_PROGRESS",
+              "PAUSED",
+              "COMPLETED",
+              "PENDING_REVIEW",
+              "APPROVED",
+              "REJECTED"
+            ],
+            "example": "DRAFT",
+            "description": "Survey status",
+            "default": "DRAFT"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LEVEL_2",
+              "LEVEL_3",
+              "VALUATION",
+              "SNAGGING",
+              "REINSPECTION",
+              "OTHER"
+            ],
+            "example": "LEVEL_2",
+            "description": "Survey type (LEVEL_2, LEVEL_3, VALUATION, SNAGGING, REINSPECTION, OTHER)",
+            "default": "LEVEL_2"
+          },
+          "jobRef": {
+            "type": "string",
+            "example": "JOB-2024-001234",
+            "description": "Job reference number"
+          },
+          "clientName": {
+            "type": "string",
+            "example": "John Smith",
+            "description": "Client name for the survey"
+          },
+          "parentSurveyId": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000",
+            "description": "Parent survey ID for reinspections"
+          },
+          "sections": {
+            "description": "Sections within the survey",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateSectionDto"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "propertyAddress"
+        ]
+      },
+      "AnswerResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "sectionId": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "questionKey": {
+            "type": "string",
+            "example": "roof_condition"
+          },
+          "value": {
+            "type": "string",
+            "example": "Good condition with minor wear"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "sectionId",
+          "questionKey",
+          "value",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "SectionResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "surveyId": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "title": {
+            "type": "string",
+            "example": "Roof Inspection"
+          },
+          "order": {
+            "type": "number",
+            "example": 1
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "surveyId",
+          "title",
+          "order",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "SurveyResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "title": {
+            "type": "string",
+            "example": "Level 2 Home Survey - 123 Main Street"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "example": "123 Main Street, London, SW1A 1AA"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "IN_PROGRESS",
+              "PAUSED",
+              "COMPLETED",
+              "PENDING_REVIEW",
+              "APPROVED",
+              "REJECTED"
+            ],
+            "example": "DRAFT"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LEVEL_2",
+              "LEVEL_3",
+              "VALUATION",
+              "SNAGGING",
+              "REINSPECTION",
+              "OTHER"
+            ],
+            "example": "LEVEL_2"
+          },
+          "jobRef": {
+            "type": "string",
+            "example": "JOB-2024-001234"
+          },
+          "clientName": {
+            "type": "string",
+            "example": "John Smith"
+          },
+          "parentSurveyId": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "userId": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectionResponseDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "propertyAddress",
+          "status",
+          "userId",
+          "createdAt",
+          "updatedAt",
+          "sections"
+        ]
+      },
+      "UpdateAnswerDto": {
+        "type": "object",
+        "properties": {
+          "questionKey": {
+            "type": "string",
+            "example": "roof_condition_updated",
+            "description": "Unique key identifying the question"
+          },
+          "value": {
+            "type": "string",
+            "example": "Updated: Good condition with minor wear",
+            "description": "The answer value"
+          }
+        }
+      },
+      "UpdateSectionDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Roof Inspection - Updated",
+            "description": "Title of the section"
+          },
+          "order": {
+            "type": "number",
+            "example": 2,
+            "description": "Order of the section within the survey"
+          }
+        }
+      },
+      "UpdateSurveyDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Level 2 Home Survey - 123 Main Street",
+            "description": "Title of the survey"
+          },
+          "propertyAddress": {
+            "type": "string",
+            "example": "123 Main Street, London, SW1A 1AA",
+            "description": "Property address being surveyed"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "IN_PROGRESS",
+              "PAUSED",
+              "COMPLETED",
+              "PENDING_REVIEW",
+              "APPROVED",
+              "REJECTED"
+            ],
+            "example": "COMPLETED",
+            "description": "Survey status"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LEVEL_2",
+              "LEVEL_3",
+              "VALUATION",
+              "SNAGGING",
+              "REINSPECTION",
+              "OTHER"
+            ],
+            "example": "LEVEL_2",
+            "description": "Survey type"
+          },
+          "jobRef": {
+            "type": "string",
+            "example": "JOB-2024-001234",
+            "description": "Job reference number"
+          },
+          "clientName": {
+            "type": "string",
+            "example": "John Smith",
+            "description": "Client name for the survey"
+          },
+          "parentSurveyId": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000",
+            "description": "Parent survey ID for reinspections"
+          },
+          "sections": {
+            "description": "Sections within the survey (replaces existing sections)",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateSectionDto"
+            }
+          }
+        }
+      },
+      "DeleteSurveyResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        },
+        "required": [
+          "success",
+          "id",
+          "deletedAt"
+        ]
+      },
+      "DeleteSectionResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          }
+        },
+        "required": [
+          "success",
+          "id"
+        ]
+      },
+      "DeleteAnswerResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          }
+        },
+        "required": [
+          "success",
+          "id"
+        ]
+      },
+      "MediaResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "surveyId": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "PHOTO",
+              "AUDIO",
+              "SIGNATURE"
+            ],
+            "example": "PHOTO"
+          },
+          "fileName": {
+            "type": "string",
+            "example": "photo_001.jpg"
+          },
+          "mimeType": {
+            "type": "string",
+            "example": "image/jpeg"
+          },
+          "size": {
+            "type": "number",
+            "example": 1024576,
+            "description": "File size in bytes"
+          },
+          "url": {
+            "type": "string",
+            "example": "/api/media/550e8400-e29b-41d4-a716-446655440000/file"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "surveyId",
+          "type",
+          "fileName",
+          "mimeType",
+          "size",
+          "url",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "DeleteMediaResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "id": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          }
+        },
+        "required": [
+          "success",
+          "id"
+        ]
+      },
+      "SyncOperationDto": {
+        "type": "object",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "description": "Client-generated unique ID for this operation (for idempotency)",
+            "example": "op-123e4567-e89b-12d3-a456-426614174000"
+          },
+          "operationType": {
+            "type": "string",
+            "enum": [
+              "CREATE",
+              "UPDATE",
+              "DELETE"
+            ],
+            "description": "Type of operation",
+            "example": "CREATE"
+          },
+          "entityType": {
+            "type": "string",
+            "enum": [
+              "SURVEY",
+              "SECTION",
+              "ANSWER",
+              "MEDIA"
+            ],
+            "description": "Type of entity being synced",
+            "example": "SURVEY"
+          },
+          "entityId": {
+            "type": "string",
+            "description": "UUID of the entity",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "data": {
+            "type": "object",
+            "description": "Entity data payload (for CREATE/UPDATE)",
+            "example": {
+              "title": "New Survey",
+              "propertyAddress": "123 Main St"
+            }
+          },
+          "clientTimestamp": {
+            "type": "string",
+            "description": "ISO timestamp when operation was created on client",
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        },
+        "required": [
+          "operationId",
+          "operationType",
+          "entityType",
+          "entityId"
+        ]
+      },
+      "SyncPushDto": {
+        "type": "object",
+        "properties": {
+          "idempotencyKey": {
+            "type": "string",
+            "description": "Client-generated idempotency key for the entire batch",
+            "example": "batch-123e4567-e89b-12d3-a456-426614174000"
+          },
+          "operations": {
+            "description": "Array of sync operations to apply",
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SyncOperationDto"
+            }
+          }
+        },
+        "required": [
+          "idempotencyKey",
+          "operations"
+        ]
+      },
+      "SyncOperationResultDto": {
+        "type": "object",
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "description": "Client operation ID",
+            "example": "op-123e4567-e89b-12d3-a456-426614174000"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "Whether operation succeeded",
+            "example": true
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message if operation failed",
+            "example": "Entity not found"
+          },
+          "entityId": {
+            "type": "string",
+            "description": "Server-side entity ID (may differ from client for new entities)",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "duplicate": {
+            "type": "boolean",
+            "description": "Whether this operation was a duplicate (idempotent replay)",
+            "example": false
+          }
+        },
+        "required": [
+          "operationId",
+          "success"
+        ]
+      },
+      "SyncPushResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Overall success status",
+            "example": true
+          },
+          "idempotencyKey": {
+            "type": "string",
+            "description": "Idempotency key echoed back",
+            "example": "batch-123e4567-e89b-12d3-a456-426614174000"
+          },
+          "results": {
+            "description": "Results for each operation",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SyncOperationResultDto"
+            }
+          },
+          "serverTimestamp": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Server timestamp when sync was processed",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "batchDuplicate": {
+            "type": "boolean",
+            "description": "Whether entire batch was replayed (duplicate idempotency key)",
+            "example": false
+          }
+        },
+        "required": [
+          "success",
+          "idempotencyKey",
+          "results",
+          "serverTimestamp"
+        ]
+      },
+      "SyncEntityDto": {
+        "type": "object",
+        "properties": {
+          "entityType": {
+            "type": "string",
+            "enum": [
+              "SURVEY",
+              "SECTION",
+              "ANSWER",
+              "MEDIA"
+            ],
+            "description": "Type of entity",
+            "example": "SURVEY"
+          },
+          "entityId": {
+            "type": "string",
+            "description": "Entity UUID",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "changeType": {
+            "type": "string",
+            "enum": [
+              "CREATE",
+              "UPDATE",
+              "DELETE"
+            ],
+            "description": "Type of change",
+            "example": "UPDATE"
+          },
+          "data": {
+            "type": "object",
+            "description": "Entity data (null for DELETE)"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When entity was last updated on server",
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        },
+        "required": [
+          "entityType",
+          "entityId",
+          "changeType",
+          "data",
+          "updatedAt"
+        ]
+      },
+      "SyncPullResponseDto": {
+        "type": "object",
+        "properties": {
+          "changes": {
+            "description": "Array of changed entities",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SyncEntityDto"
+            }
+          },
+          "serverTimestamp": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Server timestamp for this response (use as since for next pull)",
+            "example": "2024-01-15T10:30:00.000Z"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Whether there are more changes to fetch",
+            "example": false
+          },
+          "totalCount": {
+            "type": "number",
+            "description": "Total count of changes matching query",
+            "example": 15
+          }
+        },
+        "required": [
+          "changes",
+          "serverTimestamp",
+          "hasMore",
+          "totalCount"
+        ]
+      }
+    }
+  }
+}

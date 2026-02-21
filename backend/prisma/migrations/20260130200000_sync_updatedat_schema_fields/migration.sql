@@ -1,0 +1,9 @@
+-- Schema alignment: Add updatedAt fields to Prisma schema for models
+-- that already have updated_at columns in the database (added in migration
+-- 20260124_d2_add_updatedat_mutable_models).
+--
+-- Models aligned: Notification, BookingRequest, BookingChangeRequest, WebhookDelivery
+--
+-- No SQL changes needed - columns already exist in the database.
+-- This migration exists only to keep the migration history consistent
+-- with the Prisma schema.

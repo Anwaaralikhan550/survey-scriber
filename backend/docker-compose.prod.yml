@@ -1,0 +1,71 @@
+# ============================================
+# SurveyScriber - Production Docker Compose
+# ============================================
+# Usage:
+#   docker-compose -f docker-compose.prod.yml up -d
+#
+# Prerequisites:
+#   - Set all required environment variables
+#   - Or use .env.production file
+# ============================================
+
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: surveyscriber_backend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - JWT_ACCESS_EXPIRES_IN=${JWT_ACCESS_EXPIRES_IN:-15m}
+      - REFRESH_TOKEN_EXPIRES_DAYS=${REFRESH_TOKEN_EXPIRES_DAYS:-7}
+      - BCRYPT_SALT_ROUNDS=${BCRYPT_SALT_ROUNDS:-12}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - LOG_LEVEL=${LOG_LEVEL:-warn}
+      - MEDIA_STORAGE_DRIVER=${MEDIA_STORAGE_DRIVER:-local}
+      - MEDIA_LOCAL_ROOT=/app/storage
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_PRO_MODEL=${GEMINI_PRO_MODEL:-gemini-2.5-pro}
+      - GEMINI_FLASH_MODEL=${GEMINI_FLASH_MODEL:-gemini-2.5-flash}
+    ports:
+      - '3000:3000'
+    volumes:
+      - backend_storage:/app/storage
+    healthcheck:
+      test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://localhost:3000/api/v1/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: surveyscriber_postgres_prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-surveyscriber}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-surveyscriber_db}
+    # NOTE: No ports exposed to host - database only accessible within Docker network
+    # Backend connects via internal DNS: postgres:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-surveyscriber} -d ${POSTGRES_DB:-surveyscriber_db}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  backend_storage:

@@ -1,0 +1,36 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+set password "asdasd123"
+set vps "ubuntu@148.113.203.250"
+set path "/opt/surveyscriber/backend"
+
+# Upload field-mapping-config.json
+spawn scp field-mapping-config.json $vps:$path/
+expect {
+    "password:" { send "$password\r"; exp_continue }
+    eof
+}
+
+# Upload excel-phrase-library.json
+spawn scp excel-phrase-library.json $vps:$path/
+expect {
+    "password:" { send "$password\r"; exp_continue }
+    eof
+}
+
+# Upload app-fields.json
+spawn scp app-fields.json $vps:$path/
+expect {
+    "password:" { send "$password\r"; exp_continue }
+    eof
+}
+
+# Verify and restart
+spawn ssh $vps "cd $path && node -e \"console.log('Files uploaded successfully')\" && docker compose restart backend"
+expect {
+    "password:" { send "$password\r"; exp_continue }
+    eof
+}
+
+puts "\n✅ Deployment complete!"

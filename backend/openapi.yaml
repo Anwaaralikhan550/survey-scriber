@@ -1,0 +1,513 @@
+openapi: 3.0.0
+info:
+  title: SurveyScriber API
+  description: |
+    Professional Field Survey & Inspection API
+
+    ## Authentication
+    This API uses JWT Bearer authentication. Include the token in the Authorization header:
+    `Authorization: Bearer <token>`
+
+    ## Offline Support
+    The API supports offline-first operations. Use the `/sync` endpoints to synchronize
+    data created while offline.
+  version: 1.0.0
+  contact:
+    name: SurveyScriber Team
+    email: support@surveyscriber.com
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Development server
+  - url: https://api.surveyscriber.com/api/v1
+    description: Production server
+
+tags:
+  - name: auth
+    description: Authentication & authorization
+  - name: users
+    description: User management
+  - name: surveys
+    description: Survey management
+  - name: forms
+    description: Form templates
+  - name: reports
+    description: Reports & analytics
+
+paths:
+  # Auth endpoints
+  /auth/register:
+    post:
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '409':
+          description: Email already exists
+
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: Login with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Invalid credentials
+
+  /auth/refresh:
+    post:
+      tags: [auth]
+      summary: Refresh access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: Token refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+
+  /auth/me:
+    get:
+      tags: [auth]
+      summary: Get current user profile
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Current user data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  # Users endpoints
+  /users:
+    get:
+      tags: [users]
+      summary: Get all users
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+  /users/{id}:
+    get:
+      tags: [users]
+      summary: Get user by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+
+  # Surveys endpoints
+  /surveys:
+    get:
+      tags: [surveys]
+      summary: Get all surveys
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/SurveyStatus'
+        - name: type
+          in: query
+          schema:
+            $ref: '#/components/schemas/SurveyType'
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Paginated list of surveys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurveyListResponse'
+
+    post:
+      tags: [surveys]
+      summary: Create a new survey
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSurveyRequest'
+      responses:
+        '201':
+          description: Survey created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Survey'
+
+  /surveys/{id}:
+    get:
+      tags: [surveys]
+      summary: Get survey by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Survey details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Survey'
+
+    patch:
+      tags: [surveys]
+      summary: Update survey
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSurveyRequest'
+      responses:
+        '200':
+          description: Survey updated
+
+    delete:
+      tags: [surveys]
+      summary: Delete survey
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Survey deleted
+
+  /surveys/{id}/submit:
+    post:
+      tags: [surveys]
+      summary: Submit survey for review
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Survey submitted
+
+  /surveys/sync:
+    post:
+      tags: [surveys]
+      summary: Sync offline surveys
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                surveys:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Survey'
+      responses:
+        '200':
+          description: Sync completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  synced:
+                    type: integer
+                  errors:
+                    type: array
+
+  # Reports endpoints
+  /reports/dashboard:
+    get:
+      tags: [reports]
+      summary: Get dashboard statistics
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Dashboard stats
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardStats'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+
+    RegisterRequest:
+      type: object
+      required: [email, password, firstName, lastName]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        organization:
+          type: string
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        tokenType:
+          type: string
+        expiresIn:
+          type: string
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        organization:
+          type: string
+        role:
+          $ref: '#/components/schemas/UserRole'
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        createdAt:
+          type: string
+          format: date-time
+
+    UserRole:
+      type: string
+      enum: [admin, manager, surveyor, viewer]
+
+    UserStatus:
+      type: string
+      enum: [active, inactive, pending, suspended]
+
+    Survey:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/SurveyType'
+        status:
+          $ref: '#/components/schemas/SurveyStatus'
+        data:
+          type: object
+        address:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        createdById:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+
+    SurveyType:
+      type: string
+      enum: [property_inspection, valuation, site_assessment, inventory, general]
+
+    SurveyStatus:
+      type: string
+      enum: [draft, in_progress, completed, pending_review, approved, rejected]
+
+    CreateSurveyRequest:
+      type: object
+      required: [title, type]
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/SurveyType'
+        formTemplateId:
+          type: string
+          format: uuid
+        address:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+
+    UpdateSurveyRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/SurveyStatus'
+        data:
+          type: object
+
+    SurveyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Survey'
+        meta:
+          type: object
+          properties:
+            total:
+              type: integer
+            page:
+              type: integer
+            limit:
+              type: integer
+            totalPages:
+              type: integer
+
+    DashboardStats:
+      type: object
+      properties:
+        totalSurveys:
+          type: integer
+        completedSurveys:
+          type: integer
+        pendingReview:
+          type: integer
+        inProgress:
+          type: integer
+        totalUsers:
+          type: integer
+        activeSurveyors:
+          type: integer

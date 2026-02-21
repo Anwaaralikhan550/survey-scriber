@@ -86,8 +86,11 @@ NUL
 /test_api.ps1
 /seed.spec.ts
 
-# Backend (separate git repo — add as submodule later if needed)
-backend/
-
 # Node modules (for scripts/)
 node_modules/
+
+# Prisma binaries
+*.dll.node
+
+# Temporary Claude files
+tmpclaude-*

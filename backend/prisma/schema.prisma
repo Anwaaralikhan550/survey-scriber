@@ -1,0 +1,1038 @@
+// Prisma Schema for SurveyScriber Backend
+// Phase 5C-3: Media Upload + Sync Core
+// HARDENED: Added unique constraints for production data integrity
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// Authentication Tables
+// ============================================
+
+/// User roles in the system
+enum UserRole {
+  ADMIN
+  MANAGER
+  SURVEYOR
+  VIEWER
+}
+
+/// User account for authentication and authorization
+model User {
+  id            String    @id @default(uuid()) @db.Uuid
+  email         String    @unique @db.VarChar(255)
+  passwordHash  String    @map("password_hash") @db.VarChar(255)
+  firstName     String?   @map("first_name") @db.VarChar(100)
+  lastName      String?   @map("last_name") @db.VarChar(100)
+  phone         String?   @db.VarChar(50)
+  organization  String?   @db.VarChar(255)
+  avatarUrl     String?   @map("avatar_url") @db.VarChar(500)
+  emailVerified Boolean   @default(false) @map("email_verified")
+  role          UserRole  @default(SURVEYOR)
+  isActive      Boolean   @default(true) @map("is_active")
+  lastLoginAt   DateTime? @map("last_login_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  // Password reset fields (tokens are stored hashed for security)
+  resetPasswordToken     String?   @map("reset_password_token") @db.VarChar(255)
+  resetPasswordExpiresAt DateTime? @map("reset_password_expires_at")
+
+  // Account lockout fields (OWASP A7: brute-force protection)
+  // Added by migration 20260124_h2_account_lockout
+  failedLoginAttempts Int       @default(0) @map("failed_login_attempts")
+  lockedUntil         DateTime? @map("locked_until")
+
+  // Relations
+  refreshTokens                 RefreshToken[]
+  surveys                       Survey[]
+  syncIdempotency               SyncIdempotency[]
+  availability                  SurveyorAvailability[]
+  availabilityExceptions        AvailabilityException[]
+  bookingsAsSurveyor            Booking[]               @relation("BookingSurveyor")
+  bookingsCreated               Booking[]               @relation("BookingCreator")
+  invoicesCreated               Invoice[]               @relation("InvoiceCreator")
+  bookingRequestsReviewed       BookingRequest[]        @relation("BookingRequestReviewer")
+  bookingChangeRequestsReviewed BookingChangeRequest[]  @relation("BookingChangeRequestReviewer")
+  aiUsageLogs                   AiUsageLog[]
+  publishedTrees                V2TreeVersion[]
+
+  // Performance indexes for common queries
+  @@index([role])
+  @@index([isActive])
+  @@map("users")
+}
+
+/// Refresh token for JWT token rotation
+/// Stores HASHED tokens only - never plaintext
+model RefreshToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  tokenHash String    @map("token_hash") @db.VarChar(255)
+  expiresAt DateTime  @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+  @@map("refresh_tokens")
+}
+
+// ============================================
+// Survey Core Tables
+// ============================================
+
+/// Survey status enum - 7 statuses aligned with Flutter
+enum SurveyStatus {
+  DRAFT
+  IN_PROGRESS
+  PAUSED
+  COMPLETED
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+}
+
+/// Survey type enum
+enum SurveyType {
+  LEVEL_2
+  LEVEL_3
+  VALUATION
+  SNAGGING
+  INSPECTION
+  REINSPECTION
+  OTHER
+}
+
+/// Survey - the main inspection document
+model Survey {
+  id              String       @id @default(uuid()) @db.Uuid
+  title           String       @db.VarChar(255)
+  propertyAddress String       @map("property_address") @db.VarChar(500)
+  status          SurveyStatus @default(DRAFT)
+  type            SurveyType?  @default(INSPECTION)
+  jobRef          String?      @map("job_ref") @db.VarChar(100)
+  // Client reference (Phase 2.1) - optional FK for backward compatibility
+  clientId        String?      @map("client_id") @db.Uuid
+  // Legacy client field - kept for backward compatibility
+  clientName      String?      @map("client_name") @db.VarChar(255)
+  parentSurveyId  String?      @map("parent_survey_id") @db.Uuid
+  userId          String       @map("user_id") @db.Uuid
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+  deletedAt       DateTime?    @map("deleted_at")
+  // Report PDF storage path (set when staff exports PDF)
+  reportPdfPath   String?      @map("report_pdf_path") @db.VarChar(500)
+
+  // Relations
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client       Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  parentSurvey Survey?   @relation("SurveyReinspection", fields: [parentSurveyId], references: [id], onDelete: SetNull)
+  childSurveys Survey[]  @relation("SurveyReinspection")
+  sections     Section[]
+  media        Media[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([type])
+  @@index([clientId])
+  @@index([parentSurveyId])
+  @@index([deletedAt])
+  @@index([updatedAt])
+  @@index([createdAt]) // M5 fix: index for date range filters (createdFrom/createdTo)
+  // Search optimization indexes
+  @@index([title])
+  @@index([clientName])
+  @@index([propertyAddress])
+  @@index([jobRef])
+  @@map("surveys")
+}
+
+/// Section - a logical grouping within a survey
+/// HARDENED: Unique constraint on (surveyId, order) prevents duplicate ordering
+model Section {
+  id             String   @id @default(uuid()) @db.Uuid
+  surveyId       String   @map("survey_id") @db.Uuid
+  title          String   @db.VarChar(255)
+  sectionTypeKey String?  @map("section_type_key") @db.VarChar(100)
+  order          Int      @default(0)
+  phraseOutput   String?  @map("phrase_output") @db.Text
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  survey  Survey   @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  answers Answer[]
+
+  @@unique([surveyId, order]) // HARDENING: Prevent duplicate section orders
+  @@index([surveyId])
+  @@index([sectionTypeKey])
+  @@index([updatedAt])
+  @@map("sections")
+}
+
+/// Answer - a single question response within a section
+/// HARDENED: Unique constraint on (sectionId, questionKey) prevents duplicate answers
+model Answer {
+  id          String   @id @default(uuid()) @db.Uuid
+  sectionId   String   @map("section_id") @db.Uuid
+  questionKey String   @map("question_key") @db.VarChar(255)
+  value       String   @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  section Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  @@unique([sectionId, questionKey]) // HARDENING: Prevent duplicate question answers
+  @@index([sectionId])
+  @@index([questionKey])
+  @@index([updatedAt])
+  @@map("answers")
+}
+
+// ============================================
+// Media Storage (Phase 5C-3)
+// ============================================
+
+/// Media type enum
+enum MediaType {
+  PHOTO
+  AUDIO
+  SIGNATURE
+}
+
+/// Media - file attachment metadata for surveys
+/// storagePath: relative path from MEDIA_LOCAL_ROOT
+model Media {
+  id          String    @id @default(uuid()) @db.Uuid
+  surveyId    String    @map("survey_id") @db.Uuid
+  type        MediaType
+  fileName    String    @map("file_name") @db.VarChar(255)
+  mimeType    String    @map("mime_type") @db.VarChar(100)
+  size        Int
+  storagePath String    @map("storage_path") @db.VarChar(500)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  // Relations
+  survey Survey @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+
+  @@index([surveyId])
+  @@index([type])
+  @@index([updatedAt])
+  @@index([deletedAt])
+  @@map("media")
+}
+
+// ============================================
+// Sync Support (Phase 5C-3)
+// ============================================
+
+/// SyncIdempotency - tracks processed sync operations for idempotency
+/// Prevents duplicate operations from being applied twice
+model SyncIdempotency {
+  id             String   @id @default(uuid()) @db.Uuid
+  userId         String   @map("user_id") @db.Uuid
+  idempotencyKey String   @map("idempotency_key") @db.VarChar(255)
+  requestHash    String?  @map("request_hash") @db.VarChar(64)
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, idempotencyKey])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("sync_idempotency")
+}
+
+// ============================================
+// Configuration Management (Phase 6: Dynamic Config)
+// ============================================
+
+/// ConfigVersion - tracks configuration versions for cache invalidation
+model ConfigVersion {
+  id        String   @id @default(uuid()) @db.Uuid
+  version   Int      @default(1)
+  updatedAt DateTime @updatedAt @map("updated_at")
+  updatedBy String?  @map("updated_by") @db.Uuid
+
+  @@index([updatedAt])
+  @@map("config_versions")
+}
+
+/// PhraseCategory - groups related phrases/options together
+model PhraseCategory {
+  id           String    @id @default(uuid()) @db.Uuid
+  slug         String    @unique @db.VarChar(100) // e.g., "property_types", "tenure_types"
+  displayName  String    @map("display_name") @db.VarChar(255) // e.g., "Property Types"
+  description  String?   @db.Text
+  isSystem     Boolean   @default(false) @map("is_system") // Prevent deletion of core categories
+  isActive     Boolean   @default(true) @map("is_active")
+  displayOrder Int       @default(0) @map("display_order")
+  deletedAt    DateTime? @map("deleted_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  phrases          Phrase[]
+  fieldDefinitions FieldDefinition[]
+
+  @@index([slug])
+  @@index([isActive])
+  @@index([displayOrder])
+  @@index([deletedAt])
+  @@map("phrase_categories")
+}
+
+/// Phrase - individual dropdown option or selectable value
+model Phrase {
+  id           String   @id @default(uuid()) @db.Uuid
+  categoryId   String   @map("category_id") @db.Uuid
+  value        String   @db.VarChar(255) // The actual option text
+  displayOrder Int      @default(0) @map("display_order")
+  isActive     Boolean  @default(true) @map("is_active")
+  isDefault    Boolean  @default(false) @map("is_default") // Default selection
+  metadata     Json?    @db.JsonB // Extra config (e.g., color, icon)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  category PhraseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, value]) // Prevent duplicate values in same category
+  @@index([categoryId])
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("phrases")
+}
+
+/// FieldType enum for field definitions
+enum FieldType {
+  TEXT
+  NUMBER
+  DROPDOWN
+  RADIO
+  CHECKBOX
+  DATE
+  SIGNATURE
+  TEXTAREA
+}
+
+/// FieldDefinition - defines form fields for survey sections
+model FieldDefinition {
+  id               String    @id @default(uuid()) @db.Uuid
+  sectionType      String    @map("section_type") @db.VarChar(50) // e.g., "aboutProperty"
+  fieldKey         String    @map("field_key") @db.VarChar(100) // e.g., "property_type"
+  fieldType        FieldType @map("field_type")
+  label            String    @db.VarChar(255)
+  placeholder      String?   @db.VarChar(255)
+  hint             String?   @db.VarChar(500)
+  isRequired       Boolean   @default(false) @map("is_required")
+  displayOrder     Int       @default(0) @map("display_order")
+  phraseCategoryId String?   @map("phrase_category_id") @db.Uuid // Links dropdown/radio to phrases
+  validationRules  Json?     @map("validation_rules") @db.JsonB // e.g., { min: 0, max: 100 }
+  maxLines         Int?      @map("max_lines") // For text areas
+  fieldGroup       String?   @map("field_group") @db.VarChar(100) // UI grouping within section
+  conditionalOn    String?   @map("conditional_on") @db.VarChar(100) // Show when this field key has value
+  conditionalValue String?   @map("conditional_value") @db.VarChar(255) // Required value for conditional
+  description      String?   @db.VarChar(1000) // Extended help text
+  isActive         Boolean   @default(true) @map("is_active")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  phraseCategory PhraseCategory? @relation(fields: [phraseCategoryId], references: [id], onDelete: SetNull)
+
+  @@unique([sectionType, fieldKey]) // Prevent duplicate fields in same section
+  @@index([sectionType])
+  @@index([isActive])
+  @@index([displayOrder])
+  @@index([phraseCategoryId])
+  @@map("field_definitions")
+}
+
+/// SectionTypeDefinition - defines available survey section types
+model SectionTypeDefinition {
+  id           String    @id @default(uuid()) @db.Uuid
+  key          String    @unique @db.VarChar(50)
+  label        String    @db.VarChar(255)
+  description  String?   @db.VarChar(500)
+  icon         String?   @db.VarChar(50)
+  displayOrder Int       @default(0) @map("display_order")
+  surveyTypes  String[]  @default([]) @map("survey_types")
+  isActive     Boolean   @default(true) @map("is_active")
+  deletedAt    DateTime? @map("deleted_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  @@index([isActive])
+  @@index([displayOrder])
+  @@index([deletedAt])
+  @@map("section_type_definitions")
+}
+
+// ============================================
+// Client Portal (Phase 2.1)
+// ============================================
+
+/// Client - external customer who receives surveys/bookings
+/// Clients authenticate via magic links (passwordless)
+model Client {
+  id        String   @id @default(uuid()) @db.Uuid
+  email     String   @unique @db.VarChar(255)
+  firstName String?  @map("first_name") @db.VarChar(100)
+  lastName  String?  @map("last_name") @db.VarChar(100)
+  phone     String?  @db.VarChar(50)
+  company   String?  @db.VarChar(255)
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  bookings              Booking[]
+  surveys               Survey[]
+  magicLinks            ClientMagicLink[]
+  refreshTokens         ClientRefreshToken[]
+  invoices              Invoice[]
+  bookingRequests       BookingRequest[]
+  bookingChangeRequests BookingChangeRequest[]
+
+  @@index([email])
+  @@index([isActive])
+  @@map("clients")
+}
+
+/// ClientMagicLink - secure tokens for passwordless client authentication
+/// Tokens are stored as SHA-256 hashes for security
+model ClientMagicLink {
+  id        String    @id @default(uuid()) @db.Uuid
+  clientId  String    @map("client_id") @db.Uuid
+  tokenHash String    @map("token_hash") @db.VarChar(255)
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@index([tokenHash])
+  @@index([clientId])
+  @@index([expiresAt])
+  @@map("client_magic_links")
+}
+
+/// ClientRefreshToken - refresh tokens for client JWT authentication
+/// Tokens are stored as SHA-256 hashes for security
+model ClientRefreshToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  clientId  String    @map("client_id") @db.Uuid
+  tokenHash String    @map("token_hash") @db.VarChar(255)
+  expiresAt DateTime  @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@index([clientId])
+  @@index([tokenHash])
+  @@map("client_refresh_tokens")
+}
+
+// ============================================
+// Scheduling System (Phase 1)
+// ============================================
+
+/// SurveyorAvailability - weekly recurring availability for surveyors
+/// Stores day-of-week based availability (not date-specific)
+model SurveyorAvailability {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  dayOfWeek Int      @map("day_of_week") // 0=Sunday, 1=Monday, ..., 6=Saturday
+  startTime String   @map("start_time") @db.VarChar(5) // "HH:MM" format (24h)
+  endTime   String   @map("end_time") @db.VarChar(5) // "HH:MM" format (24h)
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, dayOfWeek]) // One availability entry per day per surveyor
+  @@index([userId])
+  @@index([dayOfWeek])
+  @@index([isActive])
+  @@map("surveyor_availability")
+}
+
+/// AvailabilityException - date-specific overrides (days off, special hours)
+model AvailabilityException {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @map("user_id") @db.Uuid
+  date        DateTime @db.Date // Specific date (no time component)
+  isAvailable Boolean  @default(false) @map("is_available") // false = day off
+  startTime   String?  @map("start_time") @db.VarChar(5) // Override hours if available
+  endTime     String?  @map("end_time") @db.VarChar(5)
+  reason      String?  @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date]) // One exception per date per surveyor
+  @@index([userId])
+  @@index([date])
+  @@map("availability_exceptions")
+}
+
+/// BookingStatus - status of a booking/appointment
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+/// Booking - appointment/booking for a surveyor
+model Booking {
+  id              String        @id @default(uuid()) @db.Uuid
+  surveyorId      String        @map("surveyor_id") @db.Uuid
+  date            DateTime      @db.Date
+  startTime       String        @map("start_time") @db.VarChar(5) // "HH:MM"
+  endTime         String        @map("end_time") @db.VarChar(5) // "HH:MM"
+  status          BookingStatus @default(PENDING)
+  // Client reference (Phase 2.1) - optional FK for backward compatibility
+  clientId        String?       @map("client_id") @db.Uuid
+  // Legacy client fields - kept for backward compatibility
+  clientName      String?       @map("client_name") @db.VarChar(255)
+  clientPhone     String?       @map("client_phone") @db.VarChar(50)
+  clientEmail     String?       @map("client_email") @db.VarChar(255)
+  propertyAddress String?       @map("property_address") @db.VarChar(500)
+  notes           String?       @db.Text
+  createdById     String        @map("created_by_id") @db.Uuid
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  surveyor       User                   @relation("BookingSurveyor", fields: [surveyorId], references: [id], onDelete: Cascade)
+  createdBy      User                   @relation("BookingCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  client         Client?                @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  changeRequests BookingChangeRequest[]
+
+  // Prevent double-booking: same surveyor cannot have two bookings starting at the same time
+  // This is a database-level safety net for the application-level overlap check
+  @@unique([surveyorId, date, startTime], name: "bookings_no_double_booking")
+  @@index([surveyorId])
+  @@index([date])
+  @@index([status])
+  @@index([createdById])
+  @@index([clientId])
+  @@index([surveyorId, date]) // Composite for efficient slot queries
+  @@map("bookings")
+}
+
+// ============================================
+// Notifications System (Phase 2.2)
+// ============================================
+
+/// NotificationType - types of notifications triggered by events
+enum NotificationType {
+  BOOKING_CREATED
+  BOOKING_CONFIRMED
+  BOOKING_CANCELLED
+  BOOKING_COMPLETED
+  INVOICE_ISSUED
+  INVOICE_PAID
+  // Phase 3.1: Client self-service booking requests
+  BOOKING_REQUEST_CREATED
+  BOOKING_REQUEST_APPROVED
+  BOOKING_REQUEST_REJECTED
+  // Phase 3.2: Client reschedule/cancel requests
+  BOOKING_CHANGE_REQUEST_CREATED
+  BOOKING_CHANGE_REQUEST_APPROVED
+  BOOKING_CHANGE_REQUEST_REJECTED
+  // Report email delivery
+  REPORT_SENT
+}
+
+/// RecipientType - distinguishes between staff users and clients
+enum RecipientType {
+  CLIENT
+  USER
+}
+
+/// Notification - in-app notification storage
+/// Supports both Client Portal and Staff App notifications
+model Notification {
+  id                     String           @id @default(uuid()) @db.Uuid
+  type                   NotificationType
+  recipientType          RecipientType    @map("recipient_type")
+  recipientId            String           @map("recipient_id") @db.Uuid
+  title                  String           @db.VarChar(255)
+  body                   String           @db.Text
+  bookingId              String?          @map("booking_id") @db.Uuid
+  invoiceId              String?          @map("invoice_id") @db.Uuid
+  bookingRequestId       String?          @map("booking_request_id") @db.Uuid
+  bookingChangeRequestId String?          @map("booking_change_request_id") @db.Uuid
+  isRead                 Boolean          @default(false) @map("is_read")
+  readAt                 DateTime?        @map("read_at")
+  createdAt              DateTime         @default(now()) @map("created_at")
+  updatedAt              DateTime         @updatedAt @map("updated_at")
+
+  // Note: No FK constraint on recipientId to allow flexibility
+  // between User and Client references. Application layer enforces integrity.
+
+  @@index([recipientType, recipientId])
+  @@index([recipientId, isRead])
+  @@index([bookingId])
+  @@index([invoiceId])
+  @@index([bookingRequestId])
+  @@index([bookingChangeRequestId])
+  @@index([createdAt])
+  @@map("notifications")
+}
+
+/// NotificationEmailLog - audit trail for sent notification emails
+model NotificationEmailLog {
+  id               String           @id @default(uuid()) @db.Uuid
+  notificationType NotificationType @map("notification_type")
+  recipientEmail   String           @map("recipient_email") @db.VarChar(255)
+  recipientType    RecipientType    @map("recipient_type")
+  recipientId      String?          @map("recipient_id") @db.Uuid
+  bookingId        String?          @map("booking_id") @db.Uuid
+  invoiceId        String?          @map("invoice_id") @db.Uuid
+  subject          String           @db.VarChar(255)
+  sentAt           DateTime         @default(now()) @map("sent_at")
+
+  // Note: No FK constraint on recipientId — polymorphic reference
+  // that may point to either a User or Client. Application layer enforces integrity.
+  status       String  @db.VarChar(50) // 'SENT', 'FAILED'
+  errorMessage String? @map("error_message") @db.Text
+
+  @@index([recipientEmail])
+  @@index([bookingId])
+  @@index([invoiceId])
+  @@index([sentAt])
+  @@index([status])
+  @@map("notification_email_logs")
+}
+
+// ============================================
+// Billing & Invoicing System (Phase 2.3)
+// ============================================
+
+/// Invoice status enum
+enum InvoiceStatus {
+  DRAFT
+  ISSUED
+  PAID
+  CANCELLED
+}
+
+/// Invoice - billing document for clients
+model Invoice {
+  id            String @id @default(uuid()) @db.Uuid
+  invoiceNumber String @unique @map("invoice_number") @db.VarChar(50)
+
+  // Client reference (required)
+  clientId String @map("client_id") @db.Uuid
+
+  // Optional booking reference
+  bookingId String? @map("booking_id") @db.Uuid
+
+  // Status and dates
+  status             InvoiceStatus @default(DRAFT)
+  issueDate          DateTime?     @map("issue_date") @db.Date
+  dueDate            DateTime?     @map("due_date") @db.Date
+  paidDate           DateTime?     @map("paid_date") @db.Date
+  cancelledDate      DateTime?     @map("cancelled_date")
+  cancellationReason String?       @map("cancellation_reason") @db.VarChar(500)
+
+  // Amounts (stored in smallest currency unit - pence)
+  subtotal  Int     @default(0)
+  taxRate   Decimal @default(20) @map("tax_rate") @db.Decimal(5, 2)
+  taxAmount Int     @default(0) @map("tax_amount")
+  total     Int     @default(0)
+
+  // Additional info
+  notes        String? @db.Text
+  paymentTerms String? @map("payment_terms") @db.VarChar(255)
+
+  // Audit fields
+  createdById String   @map("created_by_id") @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  client    Client        @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  createdBy User          @relation("InvoiceCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  items     InvoiceItem[]
+
+  @@index([clientId])
+  @@index([bookingId])
+  @@index([status])
+  @@index([invoiceNumber])
+  @@index([issueDate])
+  @@index([dueDate])
+  @@map("invoices")
+}
+
+/// InvoiceItem - line item on an invoice
+model InvoiceItem {
+  id        String @id @default(uuid()) @db.Uuid
+  invoiceId String @map("invoice_id") @db.Uuid
+
+  description String @db.VarChar(500)
+  quantity    Int    @default(1)
+  unitPrice   Int    @map("unit_price")
+  amount      Int
+
+  // Optional: for tracking what this line item represents
+  itemType String? @map("item_type") @db.VarChar(50)
+
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@unique([invoiceId, sortOrder]) // M6 fix: prevent duplicate sort orders within an invoice
+  @@index([invoiceId])
+  @@map("invoice_items")
+}
+
+// ============================================
+// Client Self-Service Booking Requests (Phase 3.1)
+// ============================================
+
+/// BookingRequestStatus - status of a client booking request
+enum BookingRequestStatus {
+  REQUESTED
+  APPROVED
+  REJECTED
+}
+
+/// BookingRequest - client-submitted booking request pending staff review
+/// Clients can request bookings; staff (ADMIN/MANAGER) review and approve/reject
+model BookingRequest {
+  id                 String               @id @default(uuid()) @db.Uuid
+  clientId           String               @map("client_id") @db.Uuid
+  propertyAddress    String               @map("property_address") @db.VarChar(500)
+  preferredStartDate DateTime             @map("preferred_start_date") @db.Date
+  preferredEndDate   DateTime             @map("preferred_end_date") @db.Date
+  notes              String?              @db.Text
+  status             BookingRequestStatus @default(REQUESTED)
+  createdAt          DateTime             @default(now()) @map("created_at")
+  updatedAt          DateTime             @updatedAt @map("updated_at")
+  reviewedAt         DateTime?            @map("reviewed_at")
+  reviewedById       String?              @map("reviewed_by_id") @db.Uuid
+
+  // Relations
+  client     Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  reviewedBy User?  @relation("BookingRequestReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  @@index([clientId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([reviewedById])
+  @@map("booking_requests")
+}
+
+// ============================================
+// Client Reschedule & Cancel Requests (Phase 3.2)
+// ============================================
+
+/// BookingChangeRequestType - type of change request
+enum BookingChangeRequestType {
+  RESCHEDULE
+  CANCEL
+}
+
+/// BookingChangeRequestStatus - status of a change request
+enum BookingChangeRequestStatus {
+  REQUESTED
+  APPROVED
+  REJECTED
+}
+
+/// BookingChangeRequest - client-submitted request to reschedule or cancel a booking
+/// Clients submit requests; staff (ADMIN/MANAGER) review and approve/reject
+/// On approval: RESCHEDULE updates booking date/time, CANCEL sets booking to CANCELLED
+model BookingChangeRequest {
+  id                String                     @id @default(uuid()) @db.Uuid
+  bookingId         String                     @map("booking_id") @db.Uuid
+  clientId          String                     @map("client_id") @db.Uuid
+  type              BookingChangeRequestType
+  // For RESCHEDULE requests - proposed new date/time
+  proposedDate      DateTime?                  @map("proposed_date") @db.Date
+  proposedStartTime String?                    @map("proposed_start_time") @db.VarChar(5)
+  proposedEndTime   String?                    @map("proposed_end_time") @db.VarChar(5)
+  // Reason for change (required for CANCEL, optional for RESCHEDULE)
+  reason            String?                    @db.Text
+  status            BookingChangeRequestStatus @default(REQUESTED)
+  createdAt         DateTime                   @default(now()) @map("created_at")
+  updatedAt         DateTime                   @updatedAt @map("updated_at")
+  reviewedAt        DateTime?                  @map("reviewed_at")
+  reviewedById      String?                    @map("reviewed_by_id") @db.Uuid
+
+  // Relations
+  booking    Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  client     Client  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  reviewedBy User?   @relation("BookingChangeRequestReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  @@index([bookingId])
+  @@index([clientId])
+  @@index([type])
+  @@index([status])
+  @@index([createdAt])
+  @@index([reviewedById])
+  @@map("booking_change_requests")
+}
+
+// ============================================
+// Audit Logging (Phase 3.3)
+// ============================================
+
+/// ActorType - who performed the action
+enum ActorType {
+  STAFF
+  CLIENT
+  SYSTEM
+}
+
+/// EntityType - what entity was affected
+enum AuditEntityType {
+  BOOKING
+  BOOKING_REQUEST
+  BOOKING_CHANGE_REQUEST
+  INVOICE
+  SURVEY
+  REPORT_PDF
+  AUTH
+  WEBHOOK
+}
+
+/// AuditLog - security and compliance audit trail
+/// Records all significant actions in the system for security monitoring
+model AuditLog {
+  id         String          @id @default(uuid()) @db.Uuid
+  actorType  ActorType       @map("actor_type")
+  actorId    String?         @map("actor_id") @db.Uuid
+  action     String          @db.VarChar(100)
+  entityType AuditEntityType @map("entity_type")
+  entityId   String?         @map("entity_id") @db.Uuid
+  metadata   Json?           @db.JsonB
+  ip         String?         @db.VarChar(45)
+  userAgent  String?         @map("user_agent") @db.VarChar(500)
+  createdAt  DateTime        @default(now()) @map("created_at")
+
+  // Note: No FK constraints on actorId/entityId for flexibility
+  // Application layer ensures data integrity
+
+  @@index([actorType, actorId])
+  @@index([entityType, entityId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// ============================================
+// Webhooks System (Phase 3.4.1)
+// ============================================
+
+/// WebhookEventType - events that can trigger webhooks
+enum WebhookEventType {
+  BOOKING_CREATED
+  BOOKING_UPDATED
+  BOOKING_CANCELLED
+  BOOKING_REQUEST_CREATED
+  BOOKING_REQUEST_APPROVED
+  BOOKING_CHANGE_APPROVED
+  INVOICE_ISSUED
+  INVOICE_PAID
+  REPORT_APPROVED
+}
+
+/// WebhookDeliveryStatus - outcome of webhook delivery attempt
+enum WebhookDeliveryStatus {
+  SUCCESS
+  FAILED
+}
+
+/// Webhook - registered webhook endpoint for external integrations
+/// Secret is stored as SHA-256 hash for security
+model Webhook {
+  id         String             @id @default(uuid()) @db.Uuid
+  url        String             @db.VarChar(2000)
+  secretHash String             @map("secret_hash") @db.VarChar(255)
+  isActive   Boolean            @default(true) @map("is_active")
+  events     WebhookEventType[]
+  createdAt  DateTime           @default(now()) @map("created_at")
+  updatedAt  DateTime           @updatedAt @map("updated_at")
+
+  // Relations
+  deliveries WebhookDelivery[]
+
+  @@unique([url])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("webhooks")
+}
+
+/// WebhookDelivery - log of webhook delivery attempts
+/// Tracks each attempt to deliver an event to a webhook endpoint
+model WebhookDelivery {
+  id                 String                @id @default(uuid()) @db.Uuid
+  webhookId          String                @map("webhook_id") @db.Uuid
+  event              WebhookEventType
+  eventId            String?               @map("event_id") @db.VarChar(100) // Unique event ID (evt_<uuid>)
+  payload            Json                  @db.JsonB
+  status             WebhookDeliveryStatus
+  responseStatusCode Int?                  @map("response_status_code")
+  responseBody       String?               @map("response_body") @db.Text
+  attempts           Int                   @default(1)
+  lastAttemptAt      DateTime?             @map("last_attempt_at")
+  nextAttemptAt      DateTime?             @map("next_attempt_at")
+  lastError          String?               @map("last_error") @db.VarChar(500)
+  isTest             Boolean               @default(false) @map("is_test")
+  createdAt          DateTime              @default(now()) @map("created_at")
+  updatedAt          DateTime              @updatedAt @map("updated_at")
+
+  // Relations
+  webhook Webhook @relation(fields: [webhookId], references: [id], onDelete: Cascade)
+
+  @@index([webhookId])
+  @@index([event])
+  @@index([status])
+  @@index([createdAt])
+  @@index([nextAttemptAt])
+  @@map("webhook_deliveries")
+}
+
+// ============================================
+// AI Module Tables
+// ============================================
+
+/// AI feature types for prompt routing and usage tracking
+enum AiFeatureType {
+  REPORT
+  PHOTO_TAGS
+  RECOMMENDATIONS
+  RISK_SUMMARY
+  CONSISTENCY_CHECK
+}
+
+/// Cached AI responses to reduce API costs and latency
+model AiResponseCache {
+  id            String        @id @default(uuid()) @db.Uuid
+  cacheKey      String        @unique @map("cache_key") @db.VarChar(255)
+  featureType   AiFeatureType @map("feature_type")
+  surveyId      String?       @map("survey_id") @db.Uuid
+  promptVersion String        @map("prompt_version") @db.VarChar(20)
+  inputHash     String        @map("input_hash") @db.VarChar(64)
+  response      Json          @db.JsonB
+  inputTokens   Int           @default(0) @map("input_tokens")
+  outputTokens  Int           @default(0) @map("output_tokens")
+  latencyMs     Int           @default(0) @map("latency_ms")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  expiresAt     DateTime      @map("expires_at")
+
+  @@index([featureType])
+  @@index([surveyId])
+  @@index([expiresAt])
+  @@map("ai_response_cache")
+}
+
+/// Versioned AI prompt templates
+model AiPromptTemplate {
+  id                 String        @id @default(uuid()) @db.Uuid
+  featureType        AiFeatureType @map("feature_type")
+  version            String        @db.VarChar(20)
+  systemPrompt       String        @map("system_prompt") @db.Text
+  userPromptTemplate String        @map("user_prompt_template") @db.Text
+  outputSchema       Json?         @map("output_schema") @db.JsonB
+  model              String        @default("DYNAMIC_FROM_CONFIG") @db.VarChar(50)
+  maxTokens          Int           @default(4000) @map("max_tokens")
+  temperature        Decimal       @default(0.3) @db.Decimal(3, 2)
+  isActive           Boolean       @default(false) @map("is_active")
+  notes              String?       @db.Text
+  createdAt          DateTime      @default(now()) @map("created_at")
+  updatedAt          DateTime      @updatedAt @map("updated_at")
+
+  @@unique([featureType, version])
+  @@index([isActive])
+  @@map("ai_prompt_templates")
+}
+
+/// AI usage tracking per user/organization for quota management
+model AiUsageLog {
+  id            String        @id @default(uuid()) @db.Uuid
+  userId        String        @map("user_id") @db.Uuid
+  organization  String?       @db.VarChar(255)
+  featureType   AiFeatureType @map("feature_type")
+  surveyId      String?       @map("survey_id") @db.Uuid
+  promptVersion String        @map("prompt_version") @db.VarChar(20)
+  inputTokens   Int           @default(0) @map("input_tokens")
+  outputTokens  Int           @default(0) @map("output_tokens")
+  latencyMs     Int           @default(0) @map("latency_ms")
+  cacheHit      Boolean       @default(false) @map("cache_hit")
+  status        String        @db.VarChar(20)
+  errorMessage  String?       @map("error_message") @db.Text
+  createdAt     DateTime      @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([organization])
+  @@index([featureType])
+  @@index([createdAt])
+  @@map("ai_usage_logs")
+}
+
+/// Daily token usage per organization for quota enforcement
+model AiDailyQuota {
+  id            String   @id @default(uuid()) @db.Uuid
+  organization  String   @db.VarChar(255)
+  date          DateTime @db.Date
+  tokensUsed    Int      @default(0) @map("tokens_used")
+  requestsCount Int      @default(0) @map("requests_count")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@unique([organization, date])
+  @@index([date])
+  @@map("ai_daily_quotas")
+}
+
+// ============================================
+// V2 Tree Versioning
+// ============================================
+
+/// Stores published V2 inspection/valuation tree snapshots.
+/// Each publish creates an immutable version record for audit trail.
+model V2TreeVersion {
+  id          String   @id @default(uuid()) @db.Uuid
+  treeType    String   @map("tree_type") @db.VarChar(50) // 'inspection_v2' | 'valuation_v2'
+  version     Int      @default(1)
+  treeData    Json     @map("tree_data") @db.JsonB
+  sizeBytes   Int      @map("size_bytes")
+  checksum    String?  @db.VarChar(64) // SHA-256 hex digest
+  publishedBy String   @map("published_by") @db.Uuid
+  publishedAt DateTime @default(now()) @map("published_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  publisher User @relation(fields: [publishedBy], references: [id], onDelete: Restrict)
+
+  @@unique([treeType, version])
+  @@index([treeType])
+  @@index([publishedAt])
+  @@map("v2_tree_versions")
+}

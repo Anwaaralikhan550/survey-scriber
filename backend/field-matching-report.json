@@ -1,0 +1,1699 @@
+{
+  "perfectMatches": [],
+  "partialMatches": [],
+  "noMatches": [
+    {
+      "appKey": "property_type",
+      "appLabel": "Property Type",
+      "excelField": "Property Type",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Detached House",
+        "Semi-Detached House",
+        "Terraced House",
+        "End Terrace",
+        "Bungalow",
+        "Flat/Apartment",
+        "Maisonette",
+        "Cottage",
+        "Commercial",
+        "Industrial",
+        "Other"
+      ],
+      "excelOptions": [
+        "House",
+        "Flat"
+      ]
+    },
+    {
+      "appKey": "tenure",
+      "appLabel": "Tenure",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "num_floors",
+      "appLabel": "Number of Floors",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "num_bedrooms",
+      "appLabel": "Number of Bedrooms",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "info_source",
+      "appLabel": "Information Source",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "flat_floor_level",
+      "appLabel": "Floor Level",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 7
+    },
+    {
+      "appKey": "flat_total_floors",
+      "appLabel": "Total Floors in Building",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 7
+    },
+    {
+      "appKey": "flat_access_type",
+      "appLabel": "Access Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "flat_access_elevation",
+      "appLabel": "Access Elevation",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "construction_type",
+      "appLabel": "Construction",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "listed_building",
+      "appLabel": "Listed Building",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "listed_grade",
+      "appLabel": "Listed Grade",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "energy_rating",
+      "appLabel": "Energy Rating (EPC)",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 8
+    },
+    {
+      "appKey": "ground_type",
+      "appLabel": "Ground Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "property_location",
+      "appLabel": "Property Location",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "local_environment",
+      "appLabel": "Local Environment",
+      "excelField": "Local environment",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Residential - Quiet",
+        "Residential - Busy",
+        "Mixed Use",
+        "Commercial Area",
+        "Industrial Area",
+        "Near Main Road",
+        "Near Railway",
+        "Near Airport"
+      ],
+      "excelOptions": [
+        "No Adverse",
+        "Flooding",
+        "EMF"
+      ]
+    },
+    {
+      "appKey": "private_road",
+      "appLabel": "Private Road Access",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "noisy_area",
+      "appLabel": "Located in Noisy Area",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "other_service_type",
+      "appLabel": "Other Service Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "facilities",
+      "appLabel": "Nearby Facilities",
+      "excelField": "Facilities",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Schools",
+        "Shops",
+        "Public Transport",
+        "Medical Facilities",
+        "Parks/Green Spaces",
+        "Restaurants/Cafes",
+        "Sports/Leisure"
+      ],
+      "excelOptions": [
+        "Accessible",
+        "Remote"
+      ]
+    },
+    {
+      "appKey": "wall_construction",
+      "appLabel": "Wall Construction",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 7
+    },
+    {
+      "appKey": "foundation_type",
+      "appLabel": "Foundation Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "damp_proof_course",
+      "appLabel": "Damp Proof Course",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "external_wall_built_of",
+      "appLabel": "External Wall Built Of",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "wall_rendered",
+      "appLabel": "Wall Rendered",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "wall_finishes",
+      "appLabel": "Wall Finishes",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "cladding_present",
+      "appLabel": "Cladding Present",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "cladding_material",
+      "appLabel": "Cladding Material",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 8
+    },
+    {
+      "appKey": "internal_wall_type",
+      "appLabel": "Internal Wall Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "removed_wall",
+      "appLabel": "Removed Wall",
+      "excelField": "Removed Wall",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Yes",
+        "No",
+        "Unknown"
+      ],
+      "excelOptions": [
+        "Location",
+        "Defects noted",
+        "OK",
+        "Repair"
+      ]
+    },
+    {
+      "appKey": "removed_wall_location",
+      "appLabel": "Removed Wall Location",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "wall_defects_noted",
+      "appLabel": "Wall Defects Noted",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "floor_build_type",
+      "appLabel": "Floor Build Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "window_replacement",
+      "appLabel": "Window Replacement",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "window_type",
+      "appLabel": "Window Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 8
+    },
+    {
+      "appKey": "window_glazing",
+      "appLabel": "Window Glazing",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "window_sealing",
+      "appLabel": "Window Sealing",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "nearby_trees",
+      "appLabel": "Nearby Trees",
+      "excelField": "Nearby Trees",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Yes",
+        "No"
+      ],
+      "excelOptions": [
+        "size",
+        "Add Phrase F/M",
+        "OK",
+        "Problems",
+        "Standard text",
+        "INSERT HERE"
+      ]
+    },
+    {
+      "appKey": "tree_size",
+      "appLabel": "Tree Size",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "roof_type",
+      "appLabel": "Roof Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "roof_covering",
+      "appLabel": "Roof Covering",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "roof_lining",
+      "appLabel": "Roof Lining",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "exterior_condition",
+      "appLabel": "Overall Exterior Condition",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "external_walls",
+      "appLabel": "External Walls Condition",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "windows",
+      "appLabel": "Windows Type",
+      "excelField": "Windows",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Double Glazed uPVC",
+        "Double Glazed Wood",
+        "Single Glazed",
+        "Secondary Glazing"
+      ],
+      "excelOptions": [
+        "Mainly/Mixture"
+      ]
+    },
+    {
+      "appKey": "doors_condition",
+      "appLabel": "External Doors Condition",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "interior_condition",
+      "appLabel": "Overall Interior Condition",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "flooring",
+      "appLabel": "Main Flooring Types",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "decoration",
+      "appLabel": "Decoration Standard",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "damp_signs",
+      "appLabel": "Signs of Damp",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "num_bedrooms",
+      "appLabel": "Number of Bedrooms",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "num_bathrooms",
+      "appLabel": "Number of Bathrooms",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "num_reception",
+      "appLabel": "Number of Reception Rooms",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "kitchen_type",
+      "appLabel": "Kitchen Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "other_rooms",
+      "appLabel": "Other Rooms/Features",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "consumer_unit_type",
+      "appLabel": "Consumer Unit Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "last_electrical_test",
+      "appLabel": "Last Electrical Test",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "mains_gas",
+      "appLabel": "Mains Gas Connected",
+      "excelField": "Mains Gas",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Yes",
+        "No",
+        "Unknown"
+      ],
+      "excelOptions": [
+        "Ok",
+        "Not Inspected",
+        "Gas smell",
+        "Capped"
+      ]
+    },
+    {
+      "appKey": "mains_water",
+      "appLabel": "Mains Water Connected",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "heating_type",
+      "appLabel": "Primary Heating Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 10
+    },
+    {
+      "appKey": "boiler_age",
+      "appLabel": "Boiler Age (years)",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "boiler_location",
+      "appLabel": "Boiler Location",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "water_heater_type",
+      "appLabel": "Water Heater Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 7
+    },
+    {
+      "appKey": "water_heater_location",
+      "appLabel": "Water Heater Location",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "mains_drainage",
+      "appLabel": "Mains Drainage Connected",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "common_services_present",
+      "appLabel": "Common Services Present",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "market_conditions",
+      "appLabel": "Current Market Conditions",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "demand_level",
+      "appLabel": "Local Demand Level",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "time_on_market",
+      "appLabel": "Expected Time on Market",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "party_instructing",
+      "appLabel": "Party Instructing",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "weather_conditions",
+      "appLabel": "Weather Conditions",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "previous_weather",
+      "appLabel": "Previous Weather",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "occupancy_status",
+      "appLabel": "Occupancy Status",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "furnishing_status",
+      "appLabel": "Furnishing Status",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "floor_covering",
+      "appLabel": "Floor Covering",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 7
+    },
+    {
+      "appKey": "property_facing",
+      "appLabel": "Property Facing",
+      "excelField": "Property Facing",
+      "reason": "Options do not match",
+      "appOptions": [
+        "North",
+        "North-East",
+        "East",
+        "South-East",
+        "South",
+        "South-West",
+        "West",
+        "North-West"
+      ],
+      "excelOptions": [
+        "Orientation"
+      ]
+    },
+    {
+      "appKey": "number_of_floors",
+      "appLabel": "Number of Floors",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "garage_present",
+      "appLabel": "Garage/Outbuilding Present",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "garage_wall_type",
+      "appLabel": "Garage Wall Construction",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "garage_roof_type",
+      "appLabel": "Garage Roof Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 8
+    },
+    {
+      "appKey": "garage_door_type",
+      "appLabel": "Garage Door Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "garage_electrics",
+      "appLabel": "Garage Electrics",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "garage_size",
+      "appLabel": "Garage Size",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "driveway_type",
+      "appLabel": "Driveway Surface",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 7
+    },
+    {
+      "appKey": "parking_spaces",
+      "appLabel": "Off-Street Parking Spaces",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "garden_aspect",
+      "appLabel": "Main Garden Aspect",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "boundary_types",
+      "appLabel": "Boundary Types",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 7
+    },
+    {
+      "appKey": "loft_accessed",
+      "appLabel": "Loft Space Accessed",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "roof_type_structure",
+      "appLabel": "Roof Structure Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "insulation_type",
+      "appLabel": "Loft Insulation Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "ventilation_adequate",
+      "appLabel": "Roof Space Ventilation",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "loft_converted",
+      "appLabel": "Loft Converted",
+      "excelField": "Loft Converted",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Yes - Full",
+        "Yes - Partial",
+        "No"
+      ],
+      "excelOptions": [
+        "Ok",
+        "Defects"
+      ]
+    },
+    {
+      "appKey": "water_tank_material",
+      "appLabel": "Water Tank Material",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "water_tank_location",
+      "appLabel": "Water Tank Location",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "water_tank_condition",
+      "appLabel": "Water Tank Condition",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "insect_infestation",
+      "appLabel": "Insect Infestation",
+      "excelField": "Insect infestation",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Yes",
+        "No",
+        "Suspected"
+      ],
+      "excelOptions": [
+        "None",
+        "Minor",
+        "Severe"
+      ]
+    },
+    {
+      "appKey": "timber_rot",
+      "appLabel": "Timber Rot",
+      "excelField": "Timber rot",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Yes",
+        "No",
+        "Suspected"
+      ],
+      "excelOptions": [
+        "Minor",
+        "Severe"
+      ]
+    },
+    {
+      "appKey": "undersize_timber",
+      "appLabel": "Undersize Timber",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "roof_spreading",
+      "appLabel": "Roof Spreading",
+      "excelField": "Roof Spreading",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Yes",
+        "No",
+        "Unknown"
+      ],
+      "excelOptions": [
+        "Roof slope location",
+        "Ok",
+        "Repair soon",
+        "Repair now",
+        "Poor Roof Condition"
+      ]
+    },
+    {
+      "appKey": "heavy_roof",
+      "appLabel": "Heavy Roof",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "removed_chimney_breast",
+      "appLabel": "Removed Chimney Breast",
+      "excelField": "Removed Chimney Breast",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Yes - Supported",
+        "Yes - Unsupported",
+        "No"
+      ],
+      "excelOptions": [
+        "Not inspected"
+      ]
+    },
+    {
+      "appKey": "party_wall_problem",
+      "appLabel": "Party Wall Problem",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "flues_not_inspected",
+      "appLabel": "Flues Not Inspected",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "fireplace_types",
+      "appLabel": "Fireplace Types",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "worktop_surface",
+      "appLabel": "Worktop Surface",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "wall_cabinet_material",
+      "appLabel": "Wall Cabinet Material",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "woodwork_checklist",
+      "appLabel": "Woodwork Checklist",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 7
+    },
+    {
+      "appKey": "fitted_cupboards",
+      "appLabel": "Fitted Cupboards",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "damaged_locks",
+      "appLabel": "Damaged Locks",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "bathroom_checklist",
+      "appLabel": "Bathroom Checklist",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 6
+    },
+    {
+      "appKey": "communal_area",
+      "appLabel": "Communal Area",
+      "excelField": "Communal Area",
+      "reason": "Options do not match",
+      "appOptions": [
+        "Yes",
+        "No",
+        "N/A"
+      ],
+      "excelOptions": [
+        "Not Inspected",
+        "Inspected",
+        "OK",
+        "Condition              OK"
+      ]
+    },
+    {
+      "appKey": "cellar_present",
+      "appLabel": "Cellar Present",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "basement_present",
+      "appLabel": "Basement Present",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "damp_meter_used",
+      "appLabel": "Damp Meter Used",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "damp_locations",
+      "appLabel": "Damp Detected Locations",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 7
+    },
+    {
+      "appKey": "damp_type",
+      "appLabel": "Suspected Damp Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "safety_risks",
+      "appLabel": "Safety Risks Present?",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "legal_risks",
+      "appLabel": "Legal/Compliance Risks?",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "structural_risks",
+      "appLabel": "Structural Risks?",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "moisture_risks",
+      "appLabel": "Moisture/Damp Risks?",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "fire_risks",
+      "appLabel": "Fire Safety Risks?",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 2
+    },
+    {
+      "appKey": "overall_risk_assessment",
+      "appLabel": "Overall Risk Assessment",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "valuation_purpose",
+      "appLabel": "Purpose of Valuation",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 8
+    },
+    {
+      "appKey": "valuation_type",
+      "appLabel": "Valuation Type",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "instructing_party",
+      "appLabel": "Instructing Party",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "basis_of_valuation",
+      "appLabel": "Basis of Valuation",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "valuation_approach",
+      "appLabel": "Valuation Approach",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 4
+    },
+    {
+      "appKey": "confidence_level",
+      "appLabel": "Confidence Level",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 3
+    },
+    {
+      "appKey": "access_limitations",
+      "appLabel": "Access Limitations",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 5
+    },
+    {
+      "appKey": "include_disclaimer",
+      "appLabel": "Include Standard Professional Disclaimer",
+      "excelField": null,
+      "reason": "No Excel field found",
+      "appOptions": 1
+    }
+  ],
+  "excelOnly": [
+    {
+      "excelKey": "party_disclosures",
+      "excelField": "Party Disclosures",
+      "options": 2
+    },
+    {
+      "excelKey": "weather",
+      "excelField": "Weather",
+      "options": 1
+    },
+    {
+      "excelKey": "property_status",
+      "excelField": "Property Status",
+      "options": 1
+    },
+    {
+      "excelKey": "overall_opinion",
+      "excelField": "Overall Opinion",
+      "options": 2
+    },
+    {
+      "excelKey": "year_built",
+      "excelField": "Year Built",
+      "options": 2
+    },
+    {
+      "excelKey": "year_extended",
+      "excelField": "Year extended",
+      "options": 3
+    },
+    {
+      "excelKey": "year_converted",
+      "excelField": "Year converted",
+      "options": 3
+    },
+    {
+      "excelKey": "construction",
+      "excelField": "Construction",
+      "options": 8
+    },
+    {
+      "excelKey": "energy",
+      "excelField": "Energy",
+      "options": 2
+    },
+    {
+      "excelKey": "other_services",
+      "excelField": "Other Services",
+      "options": 3
+    },
+    {
+      "excelKey": "grounds",
+      "excelField": "Grounds",
+      "options": 11
+    },
+    {
+      "excelKey": "location",
+      "excelField": "Location",
+      "options": 4
+    },
+    {
+      "excelKey": "limitations",
+      "excelField": "Limitations",
+      "options": 15
+    },
+    {
+      "excelKey": "not_inspected",
+      "excelField": "Not inspected",
+      "options": 2
+    },
+    {
+      "excelKey": "stacks",
+      "excelField": "Stacks",
+      "options": 5
+    },
+    {
+      "excelKey": "condition",
+      "excelField": "Condition",
+      "options": 2
+    },
+    {
+      "excelKey": "leaning_chimney",
+      "excelField": "Leaning Chimney",
+      "options": 7
+    },
+    {
+      "excelKey": "repair",
+      "excelField": "Repair",
+      "options": 36
+    },
+    {
+      "excelKey": "flashing_repair_soon",
+      "excelField": "Flashing                      Repair soon",
+      "options": 1
+    },
+    {
+      "excelKey": "repair_now",
+      "excelField": "Repair now",
+      "options": 2
+    },
+    {
+      "excelKey": "flaunching_repair_soon",
+      "excelField": "Flaunching                      Repair soon",
+      "options": 1
+    },
+    {
+      "excelKey": "chimney_pots_repair_soon",
+      "excelField": "Chimney Pots                      Repair soon",
+      "options": 1
+    },
+    {
+      "excelKey": "safety_hazard",
+      "excelField": "Safety hazard",
+      "options": 1
+    },
+    {
+      "excelKey": "re_pointing_repair_soon",
+      "excelField": "Re-pointing                       Repair soon",
+      "options": 1
+    },
+    {
+      "excelKey": "chimney_in_disrepair_repair_soon",
+      "excelField": "Chimney in Disrepair                Repair soon",
+      "options": 1
+    },
+    {
+      "excelKey": "ariel_dish_repair_soon",
+      "excelField": "Ariel/Dish                       Repair soon",
+      "options": 1
+    },
+    {
+      "excelKey": "add_notes",
+      "excelField": "Add Notes",
+      "options": 19
+    },
+    {
+      "excelKey": "weather_condition",
+      "excelField": "Weather Condition",
+      "options": 3
+    },
+    {
+      "excelKey": "roofs",
+      "excelField": "Roofs",
+      "options": 1
+    },
+    {
+      "excelKey": "inspected",
+      "excelField": "Inspected",
+      "options": 5
+    },
+    {
+      "excelKey": "weathered",
+      "excelField": "Weathered",
+      "options": 1
+    },
+    {
+      "excelKey": "flashing",
+      "excelField": "Flashing",
+      "options": 1
+    },
+    {
+      "excelKey": "ridge_tiles",
+      "excelField": "Ridge tiles",
+      "options": 1
+    },
+    {
+      "excelKey": "hip_tiles",
+      "excelField": "Hip Tiles",
+      "options": 1
+    },
+    {
+      "excelKey": "parapet_wall",
+      "excelField": "Parapet wall",
+      "options": 1
+    },
+    {
+      "excelKey": "deflection",
+      "excelField": "Deflection",
+      "options": 5
+    },
+    {
+      "excelKey": "flat_roof_repair",
+      "excelField": "Flat Roof Repair",
+      "options": 2
+    },
+    {
+      "excelKey": "parapet_wall_repair",
+      "excelField": "Parapet Wall Repair",
+      "options": 2
+    },
+    {
+      "excelKey": "verge_repair",
+      "excelField": "Verge Repair",
+      "options": 2
+    },
+    {
+      "excelKey": "valley_gutters_repair",
+      "excelField": "Valley Gutters Repair",
+      "options": 2
+    },
+    {
+      "excelKey": "rwg",
+      "excelField": "RWG",
+      "options": 1
+    },
+    {
+      "excelKey": "standard_text",
+      "excelField": "Standard text",
+      "options": 1
+    },
+    {
+      "excelKey": "walls",
+      "excelField": "Walls",
+      "options": 5
+    },
+    {
+      "excelKey": "dpc",
+      "excelField": "DPC",
+      "options": 2
+    },
+    {
+      "excelKey": "damp",
+      "excelField": "Damp",
+      "options": 2
+    },
+    {
+      "excelKey": "cause",
+      "excelField": "Cause",
+      "options": 7
+    },
+    {
+      "excelKey": "movements",
+      "excelField": "Movements",
+      "options": 7
+    },
+    {
+      "excelKey": "spalling",
+      "excelField": "Spalling",
+      "options": 2
+    },
+    {
+      "excelKey": "causing_damp",
+      "excelField": "Causing Damp",
+      "options": 1
+    },
+    {
+      "excelKey": "render",
+      "excelField": "Render",
+      "options": 2
+    },
+    {
+      "excelKey": "hazard",
+      "excelField": "Hazard",
+      "options": 1
+    },
+    {
+      "excelKey": "pointing",
+      "excelField": "Pointing",
+      "options": 1
+    },
+    {
+      "excelKey": "lintel",
+      "excelField": "Lintel",
+      "options": 3
+    },
+    {
+      "excelKey": "window_sills",
+      "excelField": "Window Sills",
+      "options": 2
+    },
+    {
+      "excelKey": "safety_glass_rating",
+      "excelField": "Safety Glass Rating",
+      "options": 5
+    },
+    {
+      "excelKey": "velux_window",
+      "excelField": "Velux Window",
+      "options": 2
+    },
+    {
+      "excelKey": "failed_glazing_location",
+      "excelField": "Failed Glazing Location",
+      "options": 1
+    },
+    {
+      "excelKey": "no_fire_escape_risk",
+      "excelField": "No Fire Escape Risk",
+      "options": 1
+    },
+    {
+      "excelKey": "doors",
+      "excelField": "Doors",
+      "options": 1
+    },
+    {
+      "excelKey": "conservatory_porch",
+      "excelField": "Conservatory   Porch",
+      "options": 5
+    },
+    {
+      "excelKey": "joinery",
+      "excelField": "Joinery",
+      "options": 2
+    },
+    {
+      "excelKey": "external_features",
+      "excelField": "External features",
+      "options": 6
+    },
+    {
+      "excelKey": "juliet_balcony",
+      "excelField": "Juliet Balcony",
+      "options": 1
+    },
+    {
+      "excelKey": "roof_structure",
+      "excelField": "Roof structure",
+      "options": 1
+    },
+    {
+      "excelKey": "underlining",
+      "excelField": "Underlining",
+      "options": 3
+    },
+    {
+      "excelKey": "insulation",
+      "excelField": "Insulation",
+      "options": 4
+    },
+    {
+      "excelKey": "ventilation",
+      "excelField": "Ventilation",
+      "options": 2
+    },
+    {
+      "excelKey": "water_tank",
+      "excelField": "Water tank",
+      "options": 4
+    },
+    {
+      "excelKey": "insulated",
+      "excelField": "Insulated",
+      "options": 1
+    },
+    {
+      "excelKey": "not_insulated",
+      "excelField": "Not insulated",
+      "options": 4
+    },
+    {
+      "excelKey": "party_walls",
+      "excelField": "Party Walls",
+      "options": 2
+    },
+    {
+      "excelKey": "ceilings",
+      "excelField": "Ceilings",
+      "options": 3
+    },
+    {
+      "excelKey": "cracks",
+      "excelField": "Cracks",
+      "options": 1
+    },
+    {
+      "excelKey": "ornamental_plaster",
+      "excelField": "Ornamental Plaster",
+      "options": 1
+    },
+    {
+      "excelKey": "dampness",
+      "excelField": "Dampness",
+      "options": 6
+    },
+    {
+      "excelKey": "movement_cracks",
+      "excelField": "Movement Cracks",
+      "options": 3
+    },
+    {
+      "excelKey": "condensation",
+      "excelField": "Condensation",
+      "options": 2
+    },
+    {
+      "excelKey": "floors",
+      "excelField": "Floors",
+      "options": 5
+    },
+    {
+      "excelKey": "creaking",
+      "excelField": "Creaking",
+      "options": 2
+    },
+    {
+      "excelKey": "tiles",
+      "excelField": "Tiles",
+      "options": 2
+    },
+    {
+      "excelKey": "timber_decay",
+      "excelField": "Timber Decay",
+      "options": 2
+    },
+    {
+      "excelKey": "timber_infestation",
+      "excelField": "Timber Infestation",
+      "options": 2
+    },
+    {
+      "excelKey": "floor_ventilation",
+      "excelField": "Floor ventilation",
+      "options": 3
+    },
+    {
+      "excelKey": "laminate_wood_floor",
+      "excelField": "Laminate/Wood Floor",
+      "options": 1
+    },
+    {
+      "excelKey": "floor_vibration",
+      "excelField": "Floor Vibration",
+      "options": 1
+    },
+    {
+      "excelKey": "sloping_floor",
+      "excelField": "Sloping Floor",
+      "options": 2
+    },
+    {
+      "excelKey": "uneven_floor",
+      "excelField": "Uneven Floor",
+      "options": 2
+    },
+    {
+      "excelKey": "blocked_fireplace",
+      "excelField": "Blocked Fireplace",
+      "options": 2
+    },
+    {
+      "excelKey": "removed_cb",
+      "excelField": "Removed CB",
+      "options": 2
+    },
+    {
+      "excelKey": "boiler_flue",
+      "excelField": "Boiler Flue",
+      "options": 2
+    },
+    {
+      "excelKey": "sealants",
+      "excelField": "Sealants",
+      "options": 3
+    },
+    {
+      "excelKey": "door_sampling",
+      "excelField": "Door Sampling",
+      "options": 2
+    },
+    {
+      "excelKey": "out_of_square_doors",
+      "excelField": "Out of Square Doors",
+      "options": 1
+    },
+    {
+      "excelKey": "glazed_internal_doors",
+      "excelField": "Glazed Internal Doors",
+      "options": 1
+    },
+    {
+      "excelKey": "creaking_stairs",
+      "excelField": "Creaking Stairs",
+      "options": 1
+    },
+    {
+      "excelKey": "open_threads",
+      "excelField": "Open Threads",
+      "options": 2
+    },
+    {
+      "excelKey": "balusters",
+      "excelField": "Balusters",
+      "options": 1
+    },
+    {
+      "excelKey": "infestation",
+      "excelField": "Infestation",
+      "options": 2
+    },
+    {
+      "excelKey": "extractor_fan",
+      "excelField": "Extractor fan",
+      "options": 2
+    },
+    {
+      "excelKey": "none",
+      "excelField": "None",
+      "options": 2
+    },
+    {
+      "excelKey": "leaking",
+      "excelField": "Leaking",
+      "options": 4
+    },
+    {
+      "excelKey": "cubicle_safety_glass_rating",
+      "excelField": "Cubicle Safety Glass Rating",
+      "options": 1
+    },
+    {
+      "excelKey": "cellar",
+      "excelField": "Cellar",
+      "options": 9
+    },
+    {
+      "excelKey": "basement",
+      "excelField": "Basement",
+      "options": 9
+    },
+    {
+      "excelKey": "mains_electricity",
+      "excelField": "Mains Electricity",
+      "options": 2
+    },
+    {
+      "excelKey": "fuse",
+      "excelField": "Fuse",
+      "options": 2
+    },
+    {
+      "excelKey": "solar_power",
+      "excelField": "Solar Power",
+      "options": 2
+    },
+    {
+      "excelKey": "oil",
+      "excelField": "Oil",
+      "options": 2
+    },
+    {
+      "excelKey": "old_tank",
+      "excelField": "Old tank",
+      "options": 1
+    },
+    {
+      "excelKey": "main_water",
+      "excelField": "Main Water",
+      "options": 3
+    },
+    {
+      "excelKey": "cover",
+      "excelField": "Cover",
+      "options": 4
+    },
+    {
+      "excelKey": "gas_heating",
+      "excelField": "Gas Heating",
+      "options": 6
+    },
+    {
+      "excelKey": "radiators",
+      "excelField": "Radiators",
+      "options": 1
+    },
+    {
+      "excelKey": "electric_heating",
+      "excelField": "Electric Heating",
+      "options": 2
+    },
+    {
+      "excelKey": "cylinder",
+      "excelField": "Cylinder",
+      "options": 1
+    },
+    {
+      "excelKey": "public_system",
+      "excelField": "Public System",
+      "options": 1
+    },
+    {
+      "excelKey": "chamber_lids",
+      "excelField": "Chamber Lids",
+      "options": 3
+    },
+    {
+      "excelKey": "soil_vent",
+      "excelField": "Soil & Vent",
+      "options": 3
+    },
+    {
+      "excelKey": "garden",
+      "excelField": "Garden",
+      "options": 11
+    },
+    {
+      "excelKey": "knotweed",
+      "excelField": "knotweed",
+      "options": 2
+    },
+    {
+      "excelKey": "conversion",
+      "excelField": "Conversion",
+      "options": 2
+    },
+    {
+      "excelKey": "conservation",
+      "excelField": "Conservation",
+      "options": 1
+    },
+    {
+      "excelKey": "tenanted",
+      "excelField": "Tenanted",
+      "options": 1
+    },
+    {
+      "excelKey": "subsidence",
+      "excelField": "Subsidence",
+      "options": 3
+    },
+    {
+      "excelKey": "timber_defect",
+      "excelField": "Timber Defect",
+      "options": 1
+    },
+    {
+      "excelKey": "proximity",
+      "excelField": "Proximity",
+      "options": 4
+    },
+    {
+      "excelKey": "repair_improve",
+      "excelField": "Repair/Improve",
+      "options": 2
+    }
+  ]
+}

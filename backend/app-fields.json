@@ -1,0 +1,1618 @@
+[
+  {
+    "options": [
+      "Detached House",
+      "Semi-Detached House",
+      "Terraced House",
+      "End Terrace",
+      "Bungalow",
+      "Flat/Apartment",
+      "Maisonette",
+      "Cottage",
+      "Commercial",
+      "Industrial",
+      "Other"
+    ],
+    "key": "property_type",
+    "label": "Property Type",
+    "type": "dropdown",
+    "group": "Property Type"
+  },
+  {
+    "options": [
+      "Freehold",
+      "Leasehold",
+      "Commonhold",
+      "Unknown"
+    ],
+    "key": "tenure",
+    "label": "Tenure",
+    "type": "dropdown",
+    "group": "Property Type"
+  },
+  {
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5+"
+    ],
+    "key": "num_floors",
+    "label": "Number of Floors",
+    "type": "dropdown",
+    "group": "Property Type"
+  },
+  {
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6+"
+    ],
+    "key": "num_bedrooms",
+    "label": "Number of Bedrooms",
+    "type": "dropdown",
+    "group": "Property Type"
+  },
+  {
+    "options": [
+      "Client",
+      "Estate Agent",
+      "Land Registry",
+      "Visual Assessment",
+      "Other"
+    ],
+    "key": "info_source",
+    "label": "Information Source",
+    "type": "dropdown",
+    "group": "Property Built"
+  },
+  {
+    "options": [
+      "N/A",
+      "Basement",
+      "Ground",
+      "First",
+      "Second",
+      "Third",
+      "Fourth+"
+    ],
+    "key": "flat_floor_level",
+    "label": "Floor Level",
+    "type": "dropdown",
+    "group": "Flat / Maisonettes"
+  },
+  {
+    "options": [
+      "N/A",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6+"
+    ],
+    "key": "flat_total_floors",
+    "label": "Total Floors in Building",
+    "type": "dropdown",
+    "group": "Flat / Maisonettes"
+  },
+  {
+    "options": [
+      "N/A",
+      "Own entrance",
+      "Communal entrance",
+      "Other"
+    ],
+    "key": "flat_access_type",
+    "label": "Access Type",
+    "type": "dropdown",
+    "group": "Flat / Maisonettes"
+  },
+  {
+    "options": [
+      "N/A",
+      "Level",
+      "Stepped",
+      "Ramped",
+      "Lift",
+      "Other"
+    ],
+    "key": "flat_access_elevation",
+    "label": "Access Elevation",
+    "type": "dropdown",
+    "group": "Flat / Maisonettes"
+  },
+  {
+    "options": [
+      "Traditional",
+      "Non-Traditional",
+      "Modern",
+      "Mixed",
+      "Unknown"
+    ],
+    "key": "construction_type",
+    "label": "Construction",
+    "type": "dropdown",
+    "group": "Construction"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "listed_building",
+    "label": "Listed Building",
+    "type": "radio",
+    "group": "Listed Building"
+  },
+  {
+    "options": [
+      "Grade I",
+      "Grade II*",
+      "Grade II",
+      "Locally Listed"
+    ],
+    "key": "listed_grade",
+    "label": "Listed Grade",
+    "type": "dropdown",
+    "group": "Listed Building"
+  },
+  {
+    "options": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "Unknown"
+    ],
+    "key": "energy_rating",
+    "label": "Energy Rating (EPC)",
+    "type": "dropdown",
+    "group": "Energy"
+  },
+  {
+    "options": [
+      "Clay",
+      "Sandy",
+      "Chalk",
+      "Rock",
+      "Peat",
+      "Mixed/Unknown"
+    ],
+    "key": "ground_type",
+    "label": "Ground Type",
+    "type": "dropdown",
+    "group": "Energy"
+  },
+  {
+    "options": [
+      "Urban - City Centre",
+      "Urban - Suburban",
+      "Semi-Rural",
+      "Rural",
+      "Coastal",
+      "Other"
+    ],
+    "key": "property_location",
+    "label": "Property Location",
+    "type": "dropdown",
+    "group": "Location"
+  },
+  {
+    "options": [
+      "Residential - Quiet",
+      "Residential - Busy",
+      "Mixed Use",
+      "Commercial Area",
+      "Industrial Area",
+      "Near Main Road",
+      "Near Railway",
+      "Near Airport"
+    ],
+    "key": "local_environment",
+    "label": "Local Environment",
+    "type": "dropdown",
+    "group": "Location"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "private_road",
+    "label": "Private Road Access",
+    "type": "radio",
+    "group": "Location"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "noisy_area",
+    "label": "Located in Noisy Area",
+    "type": "radio",
+    "group": "Location"
+  },
+  {
+    "options": [
+      "Shared Access",
+      "Shared Drive",
+      "Shared Drain",
+      "Party Wall",
+      "Flying Freehold",
+      "Other"
+    ],
+    "key": "other_service_type",
+    "label": "Other Service Type",
+    "type": "checkbox",
+    "group": "Other Service"
+  },
+  {
+    "options": [
+      "Schools",
+      "Shops",
+      "Public Transport",
+      "Medical Facilities",
+      "Parks/Green Spaces",
+      "Restaurants/Cafes",
+      "Sports/Leisure"
+    ],
+    "key": "facilities",
+    "label": "Nearby Facilities",
+    "type": "checkbox",
+    "group": "Facilities"
+  },
+  {
+    "options": [
+      "Brick/Block Cavity",
+      "Solid Brick",
+      "Stone",
+      "Timber Frame",
+      "Steel Frame",
+      "Concrete",
+      "Other"
+    ],
+    "key": "wall_construction",
+    "label": "Wall Construction",
+    "type": "dropdown",
+    "group": "External Wall"
+  },
+  {
+    "options": [
+      "Strip",
+      "Raft",
+      "Pile",
+      "Unknown"
+    ],
+    "key": "foundation_type",
+    "label": "Foundation Type",
+    "type": "dropdown",
+    "group": "External Wall"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "damp_proof_course",
+    "label": "Damp Proof Course",
+    "type": "dropdown",
+    "group": "External Wall"
+  },
+  {
+    "options": [
+      "Cavity wall",
+      "Cavity brick wall",
+      "Solid wall",
+      "Solid bonded brick wall",
+      "Stud wall",
+      "Other"
+    ],
+    "key": "external_wall_built_of",
+    "label": "External Wall Built Of",
+    "type": "checkbox",
+    "group": "External Wall"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Partial"
+    ],
+    "key": "wall_rendered",
+    "label": "Wall Rendered",
+    "type": "radio",
+    "group": "External Wall"
+  },
+  {
+    "options": [
+      "Painted",
+      "Pebble dash",
+      "Mock Tudor",
+      "Weathered wall",
+      "Other"
+    ],
+    "key": "wall_finishes",
+    "label": "Wall Finishes",
+    "type": "checkbox",
+    "group": "External Wall"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "cladding_present",
+    "label": "Cladding Present",
+    "type": "radio",
+    "group": "Cladding"
+  },
+  {
+    "options": [
+      "Clay tiles",
+      "Timber",
+      "Weathered boards",
+      "Profile sheets",
+      "Shingle plates",
+      "Compressed flat panels",
+      "Insulated cladding",
+      "Other"
+    ],
+    "key": "cladding_material",
+    "label": "Cladding Material",
+    "type": "checkbox",
+    "group": "Cladding"
+  },
+  {
+    "options": [
+      "Stud",
+      "Solid",
+      "Lath and plaster",
+      "Other"
+    ],
+    "key": "internal_wall_type",
+    "label": "Internal Wall Type",
+    "type": "checkbox",
+    "group": "Internal Wall"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "removed_wall",
+    "label": "Removed Wall",
+    "type": "radio",
+    "group": "Internal Wall"
+  },
+  {
+    "options": [
+      "Lounge",
+      "Kitchen",
+      "Bedroom",
+      "Other"
+    ],
+    "key": "removed_wall_location",
+    "label": "Removed Wall Location",
+    "type": "checkbox",
+    "group": "Internal Wall"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "wall_defects_noted",
+    "label": "Wall Defects Noted",
+    "type": "radio",
+    "group": "Internal Wall"
+  },
+  {
+    "options": [
+      "Suspended timber",
+      "Solid",
+      "Suspended beam and block",
+      "In situ-concrete",
+      "Other"
+    ],
+    "key": "floor_build_type",
+    "label": "Floor Build Type",
+    "type": "checkbox",
+    "group": "Floor Construction"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Partial"
+    ],
+    "key": "window_replacement",
+    "label": "Window Replacement",
+    "type": "radio",
+    "group": "Window"
+  },
+  {
+    "options": [
+      "PVC",
+      "Timber",
+      "Steel",
+      "Modern PVC sash",
+      "Modern timber sash",
+      "Aluminium",
+      "Old style timber sash",
+      "Other"
+    ],
+    "key": "window_type",
+    "label": "Window Type",
+    "type": "checkbox",
+    "group": "Window"
+  },
+  {
+    "options": [
+      "Single glazed",
+      "Double glazed",
+      "Triple glazed",
+      "Secondary glazing",
+      "Mixed"
+    ],
+    "key": "window_glazing",
+    "label": "Window Glazing",
+    "type": "dropdown",
+    "group": "Window"
+  },
+  {
+    "options": [
+      "Good",
+      "Fair",
+      "Poor",
+      "Not Visible"
+    ],
+    "key": "window_sealing",
+    "label": "Window Sealing",
+    "type": "dropdown",
+    "group": "Window"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "nearby_trees",
+    "label": "Nearby Trees",
+    "type": "radio",
+    "group": "Near By Trees"
+  },
+  {
+    "options": [
+      "Small",
+      "Medium",
+      "Medium to large"
+    ],
+    "key": "tree_size",
+    "label": "Tree Size",
+    "type": "checkbox",
+    "group": "Near By Trees"
+  },
+  {
+    "options": [
+      "Pitched",
+      "Flat",
+      "Mixed",
+      "Other"
+    ],
+    "key": "roof_type",
+    "label": "Roof Type",
+    "type": "dropdown",
+    "group": "Roof"
+  },
+  {
+    "options": [
+      "Tiles",
+      "Slate",
+      "Felt",
+      "Metal",
+      "Thatch",
+      "Other"
+    ],
+    "key": "roof_covering",
+    "label": "Roof Covering",
+    "type": "dropdown",
+    "group": "Roof"
+  },
+  {
+    "options": [
+      "Felt",
+      "Membrane",
+      "None Visible",
+      "Unknown"
+    ],
+    "key": "roof_lining",
+    "label": "Roof Lining",
+    "type": "dropdown",
+    "group": "Roof"
+  },
+  {
+    "options": [
+      "Excellent",
+      "Good",
+      "Fair",
+      "Poor",
+      "Very Poor"
+    ],
+    "key": "exterior_condition",
+    "label": "Overall Exterior Condition",
+    "type": "radio"
+  },
+  {
+    "options": [
+      "Good",
+      "Minor Issues",
+      "Needs Repair",
+      "Major Issues"
+    ],
+    "key": "external_walls",
+    "label": "External Walls Condition",
+    "type": "radio"
+  },
+  {
+    "options": [
+      "Double Glazed uPVC",
+      "Double Glazed Wood",
+      "Single Glazed",
+      "Secondary Glazing"
+    ],
+    "key": "windows",
+    "label": "Windows Type",
+    "type": "dropdown"
+  },
+  {
+    "options": [
+      "Good",
+      "Fair",
+      "Poor"
+    ],
+    "key": "doors_condition",
+    "label": "External Doors Condition",
+    "type": "radio"
+  },
+  {
+    "options": [
+      "Excellent",
+      "Good",
+      "Fair",
+      "Poor",
+      "Very Poor"
+    ],
+    "key": "interior_condition",
+    "label": "Overall Interior Condition",
+    "type": "radio"
+  },
+  {
+    "options": [
+      "Carpet",
+      "Hardwood",
+      "Laminate",
+      "Tile",
+      "Vinyl",
+      "Concrete"
+    ],
+    "key": "flooring",
+    "label": "Main Flooring Types",
+    "type": "checkbox"
+  },
+  {
+    "options": [
+      "Modern/Updated",
+      "Average",
+      "Dated",
+      "Needs Complete Refurbishment"
+    ],
+    "key": "decoration",
+    "label": "Decoration Standard",
+    "type": "radio"
+  },
+  {
+    "options": [
+      "None Visible",
+      "Minor Signs",
+      "Moderate",
+      "Significant"
+    ],
+    "key": "damp_signs",
+    "label": "Signs of Damp",
+    "type": "radio"
+  },
+  {
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6+"
+    ],
+    "key": "num_bedrooms",
+    "label": "Number of Bedrooms",
+    "type": "dropdown"
+  },
+  {
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4+"
+    ],
+    "key": "num_bathrooms",
+    "label": "Number of Bathrooms",
+    "type": "dropdown"
+  },
+  {
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4+"
+    ],
+    "key": "num_reception",
+    "label": "Number of Reception Rooms",
+    "type": "dropdown"
+  },
+  {
+    "options": [
+      "Fitted Modern",
+      "Fitted Traditional",
+      "Basic",
+      "Open Plan"
+    ],
+    "key": "kitchen_type",
+    "label": "Kitchen Type",
+    "type": "dropdown"
+  },
+  {
+    "options": [
+      "Utility Room",
+      "Conservatory",
+      "Garage",
+      "Cellar",
+      "Loft Conversion",
+      "Home Office"
+    ],
+    "key": "other_rooms",
+    "label": "Other Rooms/Features",
+    "type": "checkbox"
+  },
+  {
+    "options": [
+      "Modern RCD Protected",
+      "Older MCB Type",
+      "Fuse Board",
+      "Unknown"
+    ],
+    "key": "consumer_unit_type",
+    "label": "Consumer Unit Type",
+    "type": "dropdown",
+    "group": "G1 Electricity"
+  },
+  {
+    "options": [
+      "Within 5 years",
+      "5-10 years ago",
+      "Over 10 years ago",
+      "Unknown/Never"
+    ],
+    "key": "last_electrical_test",
+    "label": "Last Electrical Test",
+    "type": "dropdown",
+    "group": "G1 Electricity"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "mains_gas",
+    "label": "Mains Gas Connected",
+    "type": "radio",
+    "group": "G2 Gas"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "mains_water",
+    "label": "Mains Water Connected",
+    "type": "radio",
+    "group": "G3 Water"
+  },
+  {
+    "options": [
+      "Gas Central Heating",
+      "Oil Central Heating",
+      "Electric Central Heating",
+      "LPG Central Heating",
+      "Heat Pump - Air Source",
+      "Heat Pump - Ground Source",
+      "Solid Fuel",
+      "Underfloor Heating",
+      "Storage Heaters",
+      "None/Unknown"
+    ],
+    "key": "heating_type",
+    "label": "Primary Heating Type",
+    "type": "dropdown",
+    "group": "G4 Heating"
+  },
+  {
+    "options": [
+      "< 5 years",
+      "5-10 years",
+      "10-15 years",
+      "15+ years",
+      "Unknown"
+    ],
+    "key": "boiler_age",
+    "label": "Boiler Age (years)",
+    "type": "dropdown",
+    "group": "G4 Heating"
+  },
+  {
+    "options": [
+      "Kitchen",
+      "Utility Room",
+      "Garage",
+      "Airing Cupboard",
+      "Loft",
+      "Other"
+    ],
+    "key": "boiler_location",
+    "label": "Boiler Location",
+    "type": "dropdown",
+    "group": "G4 Heating"
+  },
+  {
+    "options": [
+      "Combi Boiler",
+      "System Boiler",
+      "Immersion Heater",
+      "Unvented Cylinder",
+      "Vented Cylinder",
+      "Instantaneous",
+      "Unknown"
+    ],
+    "key": "water_heater_type",
+    "label": "Water Heater Type",
+    "type": "dropdown",
+    "group": "G5 Water Heater"
+  },
+  {
+    "options": [
+      "Kitchen",
+      "Utility Room",
+      "Airing Cupboard",
+      "Bathroom",
+      "Loft",
+      "Other"
+    ],
+    "key": "water_heater_location",
+    "label": "Water Heater Location",
+    "type": "dropdown",
+    "group": "G5 Water Heater"
+  },
+  {
+    "options": [
+      "Yes",
+      "No - Septic Tank",
+      "No - Cesspit",
+      "Unknown"
+    ],
+    "key": "mains_drainage",
+    "label": "Mains Drainage Connected",
+    "type": "radio",
+    "group": "G6 Drainage"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "N/A"
+    ],
+    "key": "common_services_present",
+    "label": "Common Services Present",
+    "type": "radio",
+    "group": "G7 Common Services"
+  },
+  {
+    "options": [
+      "Strong/Rising",
+      "Stable",
+      "Weak/Falling",
+      "Uncertain"
+    ],
+    "key": "market_conditions",
+    "label": "Current Market Conditions",
+    "type": "dropdown"
+  },
+  {
+    "options": [
+      "High",
+      "Moderate",
+      "Low"
+    ],
+    "key": "demand_level",
+    "label": "Local Demand Level",
+    "type": "radio"
+  },
+  {
+    "options": [
+      "< 1 month",
+      "1-3 months",
+      "3-6 months",
+      "6+ months"
+    ],
+    "key": "time_on_market",
+    "label": "Expected Time on Market",
+    "type": "dropdown"
+  },
+  {
+    "options": [
+      "Buyer",
+      "Seller",
+      "Lender",
+      "Solicitor",
+      "Estate Agent",
+      "Other"
+    ],
+    "key": "party_instructing",
+    "label": "Party Instructing",
+    "type": "dropdown",
+    "group": "Inspection Details"
+  },
+  {
+    "options": [
+      "Sunny",
+      "Cloudy",
+      "Rainy",
+      "Windy",
+      "Overcast",
+      "Other"
+    ],
+    "key": "weather_conditions",
+    "label": "Weather Conditions",
+    "type": "radio",
+    "group": "Conditions"
+  },
+  {
+    "options": [
+      "Dry",
+      "Damp",
+      "Wet",
+      "Freezing",
+      "Snowy",
+      "Other"
+    ],
+    "key": "previous_weather",
+    "label": "Previous Weather",
+    "type": "dropdown",
+    "group": "Conditions"
+  },
+  {
+    "options": [
+      "Occupied by Owner",
+      "Occupied by Tenant",
+      "Vacant",
+      "Under Renovation",
+      "Partially Furnished",
+      "Other"
+    ],
+    "key": "occupancy_status",
+    "label": "Occupancy Status",
+    "type": "dropdown",
+    "group": "Property Status"
+  },
+  {
+    "options": [
+      "Fully Furnished",
+      "Partially Furnished",
+      "Unfurnished"
+    ],
+    "key": "furnishing_status",
+    "label": "Furnishing Status",
+    "type": "dropdown",
+    "group": "Property Status"
+  },
+  {
+    "options": [
+      "Carpet",
+      "Laminate",
+      "Hardwood",
+      "Tile",
+      "Vinyl",
+      "Mixed",
+      "None Visible"
+    ],
+    "key": "floor_covering",
+    "label": "Floor Covering",
+    "type": "dropdown",
+    "group": "Property Status"
+  },
+  {
+    "options": [
+      "North",
+      "North-East",
+      "East",
+      "South-East",
+      "South",
+      "South-West",
+      "West",
+      "North-West"
+    ],
+    "key": "property_facing",
+    "label": "Property Facing",
+    "type": "dropdown",
+    "group": "Property Status"
+  },
+  {
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5+"
+    ],
+    "key": "number_of_floors",
+    "label": "Number of Floors",
+    "type": "dropdown",
+    "group": "Property Structure"
+  },
+  {
+    "options": [
+      "Yes - Attached",
+      "Yes - Detached",
+      "Yes - Integral",
+      "No",
+      "Carport Only"
+    ],
+    "key": "garage_present",
+    "label": "Garage/Outbuilding Present",
+    "type": "radio",
+    "group": "Garage/Outbuilding Details"
+  },
+  {
+    "options": [
+      "Brick",
+      "Block",
+      "Timber Frame",
+      "Metal/Steel",
+      "Concrete",
+      "Pre-fabricated"
+    ],
+    "key": "garage_wall_type",
+    "label": "Garage Wall Construction",
+    "type": "checkbox",
+    "group": "Garage/Outbuilding Details"
+  },
+  {
+    "options": [
+      "Pitched - Tiles",
+      "Pitched - Slate",
+      "Flat - Felt",
+      "Flat - EPDM/Rubber",
+      "Flat - GRP",
+      "Metal Sheeting",
+      "Corrugated",
+      "Other"
+    ],
+    "key": "garage_roof_type",
+    "label": "Garage Roof Type",
+    "type": "dropdown",
+    "group": "Garage/Outbuilding Details"
+  },
+  {
+    "options": [
+      "Up and Over - Metal",
+      "Up and Over - Timber",
+      "Roller Shutter",
+      "Side Hinged",
+      "Sectional",
+      "None/Open"
+    ],
+    "key": "garage_door_type",
+    "label": "Garage Door Type",
+    "type": "dropdown",
+    "group": "Garage/Outbuilding Details"
+  },
+  {
+    "options": [
+      "Yes - Full",
+      "Yes - Light Only",
+      "No"
+    ],
+    "key": "garage_electrics",
+    "label": "Garage Electrics",
+    "type": "radio",
+    "group": "Garage/Outbuilding Details"
+  },
+  {
+    "options": [
+      "Single",
+      "Double",
+      "Triple+",
+      "Oversized Single",
+      "Unknown"
+    ],
+    "key": "garage_size",
+    "label": "Garage Size",
+    "type": "dropdown",
+    "group": "Garage/Outbuilding Details"
+  },
+  {
+    "options": [
+      "Block Paving",
+      "Tarmac/Asphalt",
+      "Gravel",
+      "Concrete",
+      "Resin Bound",
+      "Mixed",
+      "None"
+    ],
+    "key": "driveway_type",
+    "label": "Driveway Surface",
+    "type": "dropdown",
+    "group": "Boundaries & Grounds"
+  },
+  {
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4+"
+    ],
+    "key": "parking_spaces",
+    "label": "Off-Street Parking Spaces",
+    "type": "dropdown",
+    "group": "Boundaries & Grounds"
+  },
+  {
+    "options": [
+      "North Facing",
+      "South Facing",
+      "East Facing",
+      "West Facing",
+      "Mixed/Unknown",
+      "No Garden"
+    ],
+    "key": "garden_aspect",
+    "label": "Main Garden Aspect",
+    "type": "dropdown",
+    "group": "Boundaries & Grounds"
+  },
+  {
+    "options": [
+      "Close Board Fence",
+      "Panel Fence",
+      "Brick Wall",
+      "Stone Wall",
+      "Hedge",
+      "Metal Railings",
+      "None/Open"
+    ],
+    "key": "boundary_types",
+    "label": "Boundary Types",
+    "type": "checkbox",
+    "group": "Boundaries & Grounds"
+  },
+  {
+    "options": [
+      "Yes - Full Access",
+      "Yes - Limited Access",
+      "No - Not Accessible"
+    ],
+    "key": "loft_accessed",
+    "label": "Loft Space Accessed",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Traditional Cut Roof",
+      "Trussed Rafters",
+      "Flat Roof",
+      "Mixed",
+      "Unknown/Not Visible"
+    ],
+    "key": "roof_type_structure",
+    "label": "Roof Structure Type",
+    "type": "dropdown",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Mineral Wool - Adequate (270mm+)",
+      "Mineral Wool - Inadequate (<100mm)",
+      "Spray Foam",
+      "Rigid Board",
+      "None/Minimal",
+      "Not Visible"
+    ],
+    "key": "insulation_type",
+    "label": "Loft Insulation Type",
+    "type": "dropdown",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Adequate",
+      "Inadequate",
+      "Not Visible"
+    ],
+    "key": "ventilation_adequate",
+    "label": "Roof Space Ventilation",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Yes - Full",
+      "Yes - Partial",
+      "No"
+    ],
+    "key": "loft_converted",
+    "label": "Loft Converted",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Plastic",
+      "Galvanised metal",
+      "Asbestos",
+      "Other",
+      "Not Inspected"
+    ],
+    "key": "water_tank_material",
+    "label": "Water Tank Material",
+    "type": "checkbox",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Roof space",
+      "Airing cupboard",
+      "Kitchen",
+      "Other"
+    ],
+    "key": "water_tank_location",
+    "label": "Water Tank Location",
+    "type": "checkbox",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Missing cover",
+      "Tank Insulation needed",
+      "Disused Water Tank"
+    ],
+    "key": "water_tank_condition",
+    "label": "Water Tank Condition",
+    "type": "checkbox",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Suspected"
+    ],
+    "key": "insect_infestation",
+    "label": "Insect Infestation",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Suspected"
+    ],
+    "key": "timber_rot",
+    "label": "Timber Rot",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "undersize_timber",
+    "label": "Undersize Timber",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "roof_spreading",
+    "label": "Roof Spreading",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "heavy_roof",
+    "label": "Heavy Roof",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Yes - Supported",
+      "Yes - Unsupported",
+      "No"
+    ],
+    "key": "removed_chimney_breast",
+    "label": "Removed Chimney Breast",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "Unknown"
+    ],
+    "key": "party_wall_problem",
+    "label": "Party Wall Problem",
+    "type": "radio",
+    "group": "Roof Structure Details"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "flues_not_inspected",
+    "label": "Flues Not Inspected",
+    "type": "radio",
+    "group": "Fireplaces & Chimneys"
+  },
+  {
+    "options": [
+      "An open fire",
+      "Gas fire",
+      "Imitation system",
+      "Wood burning stove",
+      "Electric fire",
+      "Other"
+    ],
+    "key": "fireplace_types",
+    "label": "Fireplace Types",
+    "type": "checkbox",
+    "group": "Fireplaces & Chimneys"
+  },
+  {
+    "options": [
+      "Timber",
+      "Granite",
+      "Marble",
+      "Glass",
+      "Metal",
+      "Other"
+    ],
+    "key": "worktop_surface",
+    "label": "Worktop Surface",
+    "type": "checkbox",
+    "group": "Built In Fittings"
+  },
+  {
+    "options": [
+      "Timber",
+      "Other"
+    ],
+    "key": "wall_cabinet_material",
+    "label": "Wall Cabinet Material",
+    "type": "checkbox",
+    "group": "Built In Fittings"
+  },
+  {
+    "options": [
+      "Door Sampling - Ok",
+      "Out of Square Doors",
+      "Glazed Internal Doors",
+      "Creaking Stairs",
+      "Rocking stair handrails",
+      "No Stairs Handrails",
+      "Open stair threads"
+    ],
+    "key": "woodwork_checklist",
+    "label": "Woodwork Checklist",
+    "type": "checkbox",
+    "group": "Woodwork"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "fitted_cupboards",
+    "label": "Fitted Cupboards",
+    "type": "radio",
+    "group": "Woodwork"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "damaged_locks",
+    "label": "Damaged Locks",
+    "type": "radio",
+    "group": "Woodwork"
+  },
+  {
+    "options": [
+      "Extractor fan present",
+      "Leaking sealants causing damp",
+      "Sealant condition poor",
+      "Moulding present",
+      "Wood rot present",
+      "No Cubicle Safety Glass Rating"
+    ],
+    "key": "bathroom_checklist",
+    "label": "Bathroom Checklist",
+    "type": "checkbox",
+    "group": "Bathroom Fittings"
+  },
+  {
+    "options": [
+      "Yes",
+      "No",
+      "N/A"
+    ],
+    "key": "communal_area",
+    "label": "Communal Area",
+    "type": "radio",
+    "group": "Other Internal"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "cellar_present",
+    "label": "Cellar Present",
+    "type": "radio",
+    "group": "Other Internal"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "basement_present",
+    "label": "Basement Present",
+    "type": "radio",
+    "group": "Other Internal"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "damp_meter_used",
+    "label": "Damp Meter Used",
+    "type": "radio",
+    "group": "Damp & Moisture Assessment"
+  },
+  {
+    "options": [
+      "Ground Floor Walls",
+      "Upper Floor Walls",
+      "Window Reveals",
+      "Chimney Breast",
+      "Bathroom Areas",
+      "Kitchen Areas",
+      "None Detected"
+    ],
+    "key": "damp_locations",
+    "label": "Damp Detected Locations",
+    "type": "checkbox",
+    "group": "Damp & Moisture Assessment"
+  },
+  {
+    "options": [
+      "Rising Damp",
+      "Penetrating Damp",
+      "Condensation",
+      "Plumbing Leak",
+      "Unknown Source"
+    ],
+    "key": "damp_type",
+    "label": "Suspected Damp Type",
+    "type": "checkbox",
+    "group": "Damp & Moisture Assessment"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "safety_risks",
+    "label": "Safety Risks Present?",
+    "type": "radio",
+    "group": "Risk Summary"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "legal_risks",
+    "label": "Legal/Compliance Risks?",
+    "type": "radio",
+    "group": "Risk Summary"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "structural_risks",
+    "label": "Structural Risks?",
+    "type": "radio",
+    "group": "Risk Summary"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "moisture_risks",
+    "label": "Moisture/Damp Risks?",
+    "type": "radio",
+    "group": "Risk Summary"
+  },
+  {
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "key": "fire_risks",
+    "label": "Fire Safety Risks?",
+    "type": "radio",
+    "group": "Risk Summary"
+  },
+  {
+    "options": [
+      "Low",
+      "Medium",
+      "High"
+    ],
+    "key": "overall_risk_assessment",
+    "label": "Overall Risk Assessment",
+    "type": "radio",
+    "group": "Risk Summary"
+  },
+  {
+    "options": [
+      "Mortgage/Lending",
+      "Sale/Purchase",
+      "Insurance",
+      "Probate",
+      "Matrimonial",
+      "Asset Valuation",
+      "Development",
+      "Other"
+    ],
+    "key": "valuation_purpose",
+    "label": "Purpose of Valuation",
+    "type": "radio",
+    "group": "Valuation Context"
+  },
+  {
+    "options": [
+      "Full Inspection",
+      "Drive-by/External",
+      "Desktop",
+      "Re-valuation"
+    ],
+    "key": "valuation_type",
+    "label": "Valuation Type",
+    "type": "dropdown",
+    "group": "Valuation Context"
+  },
+  {
+    "options": [
+      "Lender",
+      "Buyer",
+      "Seller",
+      "Solicitor",
+      "Other"
+    ],
+    "key": "instructing_party",
+    "label": "Instructing Party",
+    "type": "dropdown",
+    "group": "Client Details"
+  },
+  {
+    "options": [
+      "Market Value (RICS Red Book)",
+      "Fair Value",
+      "Investment Value",
+      "Existing Use Value"
+    ],
+    "key": "basis_of_valuation",
+    "label": "Basis of Valuation",
+    "type": "dropdown",
+    "group": "Valuation Approach"
+  },
+  {
+    "options": [
+      "Comparable Method",
+      "Income Method",
+      "Cost Method",
+      "Residual Method"
+    ],
+    "key": "valuation_approach",
+    "label": "Valuation Approach",
+    "type": "dropdown",
+    "group": "Valuation Approach"
+  },
+  {
+    "options": [
+      "High ±5%",
+      "Medium ±10%",
+      "Low ±15%"
+    ],
+    "key": "confidence_level",
+    "label": "Confidence Level",
+    "type": "radio",
+    "group": "Value Range"
+  },
+  {
+    "options": [
+      "Loft not accessible",
+      "Garage not inspected",
+      "Outbuildings not inspected",
+      "Furniture prevented full inspection",
+      "Other"
+    ],
+    "key": "access_limitations",
+    "label": "Access Limitations",
+    "type": "checkbox",
+    "group": "Limitations"
+  },
+  {
+    "options": [
+      "Yes"
+    ],
+    "key": "include_disclaimer",
+    "label": "Include Standard Professional Disclaimer",
+    "type": "checkbox",
+    "group": "Disclaimers"
+  }
+]

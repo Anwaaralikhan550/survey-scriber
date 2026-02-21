@@ -1,0 +1,133 @@
+/**
+ * Import ALL Excel phrases into the database as phrase categories
+ * Then we can manually map them to field definitions
+ *
+ * Run with: npx ts-node backend/scripts/import-all-excel-phrases.ts
+ */
+import { PrismaClient } from '@prisma/client';
+import * as fs from 'fs';
+import * as path from 'path';
+
+const prisma = new PrismaClient();
+
+// Load Excel mapping
+const excelMapping = JSON.parse(
+  fs.readFileSync(path.join(__dirname, '..', 'excel-field-mapping.json'), 'utf-8')
+);
+
+// Helper: Convert field name to slug
+function toSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+
+async function importAllExcelPhrases() {
+  console.log('Starting Excel phrase import...\n');
+  console.log(`Total Excel fields to import: ${Object.keys(excelMapping).length}\n`);
+
+  let imported = 0;
+  let skipped = 0;
+  let updated = 0;
+
+  for (const [excelFieldName, excelData] of Object.entries(excelMapping)) {
+    const options = (excelData as any).options;
+
+    // Skip if no options
+    if (!options || Object.keys(options).length === 0) {
+      skipped++;
+      continue;
+    }
+
+    const slug = `excel_${toSlug(excelFieldName)}`;
+
+    console.log(`\n${'='.repeat(80)}`);
+    console.log(`Processing: ${excelFieldName}`);
+    console.log(`Slug: ${slug}`);
+    console.log(`Options: ${Object.keys(options).length}`);
+    console.log('='.repeat(80));
+
+    // Find or create category
+    let category = await prisma.phraseCategory.findUnique({
+      where: { slug },
+      include: { phrases: true },
+    });
+
+    if (!category) {
+      console.log(`  ➕ Creating new category...`);
+      category = await prisma.phraseCategory.create({
+        data: {
+          slug,
+          displayName: excelFieldName,
+          description: `Imported from Excel - Row ${(excelData as any).row}`,
+          isSystem: false,
+          isActive: true,
+          displayOrder: (excelData as any).row || 1000,
+        },
+        include: { phrases: true },
+      });
+      imported++;
+    } else {
+      console.log(`  ✏️  Category exists, updating...`);
+      updated++;
+    }
+
+    // Import each option with its phrase
+    let phraseIndex = 0;
+    for (const [optionValue, phraseText] of Object.entries(options)) {
+      // Check if phrase already exists
+      let phrase = category.phrases.find(p => p.value === optionValue);
+
+      if (!phrase) {
+        console.log(`    ➕ Adding phrase: "${optionValue}"`);
+        await prisma.phrase.create({
+          data: {
+            categoryId: category.id,
+            value: optionValue,
+            displayOrder: phraseIndex++,
+            isActive: true,
+            isDefault: phraseIndex === 1, // First option is default
+            metadata: {
+              excelPhrase: phraseText,
+              source: 'excel_import',
+              excelFieldName,
+            },
+          },
+        });
+      } else {
+        console.log(`    ✏️  Updating phrase: "${optionValue}"`);
+        await prisma.phrase.update({
+          where: { id: phrase.id },
+          data: {
+            metadata: {
+              ...(phrase.metadata as object || {}),
+              excelPhrase: phraseText,
+              source: 'excel_import',
+              excelFieldName,
+            },
+          },
+        });
+      }
+
+      console.log(`       → ${(phraseText as string).substring(0, 100)}...`);
+    }
+  }
+
+  console.log(`\n\n${'='.repeat(80)}`);
+  console.log('✅ IMPORT COMPLETE');
+  console.log('='.repeat(80));
+  console.log(`  New categories created: ${imported}`);
+  console.log(`  Existing categories updated: ${updated}`);
+  console.log(`  Fields skipped (no options): ${skipped}`);
+  console.log('='.repeat(80));
+
+  await prisma.$disconnect();
+}
+
+// Run
+importAllExcelPhrases().catch((error) => {
+  console.error('❌ Error:', error);
+  prisma.$disconnect();
+  process.exit(1);
+});

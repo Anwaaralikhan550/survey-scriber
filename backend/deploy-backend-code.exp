@@ -1,0 +1,64 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+set password "asdasd123"
+set vps "ubuntu@148.113.203.250"
+set path "surveyscriber"
+
+puts "🚀 Deploying Backend Services to VPS..."
+puts "========================================"
+
+# 1. Create services directory on VPS
+puts "\n📁 Creating services directory..."
+spawn ssh $vps "mkdir -p $path/src/services"
+expect "password:"
+send "$password\r"
+expect eof
+
+# 2. Upload all service files
+puts "\n📤 Uploading service files..."
+
+set service_files {
+  "excel-phrase-generator.service.ts"
+  "enhanced-report.service.ts"
+  "template-matcher.service.ts"
+  "template-parser.service.ts"
+  "template-renderer.service.ts"
+  "mapped-phrase-lookup.service.ts"
+  "phrase-lookup.service.ts"
+}
+
+foreach file $service_files {
+  puts "  → $file"
+  spawn scp src/services/$file $vps:$path/src/services/
+  expect "password:"
+  send "$password\r"
+  expect eof
+}
+
+# 3. Update ai.module.ts
+puts "\n📤 Updating ai.module.ts..."
+spawn scp src/modules/ai/ai.module.ts $vps:$path/src/modules/ai/
+expect "password:"
+send "$password\r"
+expect eof
+
+# 4. Rebuild backend
+puts "\n🔨 Rebuilding backend on VPS..."
+spawn ssh $vps "cd $path && npm run build"
+expect {
+  "password:" { send "$password\r"; exp_continue }
+  "Successfully compiled" { puts "\n✅ Build successful!" }
+  timeout { puts "\n⏰ Build taking longer..." }
+}
+expect eof
+
+# 5. Restart services
+puts "\n🔄 Restarting backend..."
+spawn ssh $vps "cd $path && pm2 restart all"
+expect "password:"
+send "$password\r"
+expect eof
+
+puts "\n✅ BACKEND CODE DEPLOYMENT COMPLETE!"
+puts "========================================"

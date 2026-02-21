@@ -1,0 +1,1022 @@
+{
+  "timestamp": "2026-02-01T22:11:12.264Z",
+  "summary": {
+    "totalAppFields": 130,
+    "mappedFields": 170,
+    "coverage": "130.8%",
+    "totalMappingEntries": 170
+  },
+  "issues": {
+    "unmappedFields": [],
+    "invalidExcelFields": [],
+    "invalidOptions": [],
+    "incompleteMappings": [
+      {
+        "field": "tenure",
+        "label": "Tenure",
+        "unmappedOptions": [
+          "Commonhold"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "num_floors",
+        "label": "Number of Floors",
+        "unmappedOptions": [
+          "4",
+          "5+"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "info_source",
+        "label": "Information Source",
+        "unmappedOptions": [
+          "Client",
+          "Estate Agent",
+          "Land Registry",
+          "Visual Assessment",
+          "Other"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "flat_access_elevation",
+        "label": "Access Elevation",
+        "unmappedOptions": [
+          "N/A",
+          "Level",
+          "Stepped",
+          "Ramped",
+          "Lift",
+          "Other"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "construction_type",
+        "label": "Construction",
+        "unmappedOptions": [
+          "Traditional",
+          "Non-Traditional",
+          "Modern",
+          "Mixed",
+          "Unknown"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "ground_type",
+        "label": "Ground Type",
+        "unmappedOptions": [
+          "Rock",
+          "Mixed/Unknown"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "property_location",
+        "label": "Property Location",
+        "unmappedOptions": [
+          "Coastal",
+          "Other"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "other_service_type",
+        "label": "Other Service Type",
+        "unmappedOptions": [
+          "Party Wall",
+          "Flying Freehold"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "foundation_type",
+        "label": "Foundation Type",
+        "unmappedOptions": [
+          "Pile"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "external_wall_built_of",
+        "label": "External Wall Built Of",
+        "unmappedOptions": [
+          "Cavity wall",
+          "Cavity brick wall",
+          "Solid wall",
+          "Solid bonded brick wall",
+          "Stud wall"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "wall_finishes",
+        "label": "Wall Finishes",
+        "unmappedOptions": [
+          "Painted",
+          "Pebble dash",
+          "Mock Tudor",
+          "Weathered wall"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "cladding_material",
+        "label": "Cladding Material",
+        "unmappedOptions": [
+          "Clay tiles",
+          "Weathered boards",
+          "Profile sheets",
+          "Shingle plates",
+          "Compressed flat panels",
+          "Insulated cladding"
+        ],
+        "totalOptions": 8
+      },
+      {
+        "field": "internal_wall_type",
+        "label": "Internal Wall Type",
+        "unmappedOptions": [
+          "Stud",
+          "Solid",
+          "Lath and plaster"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "removed_wall",
+        "label": "Removed Wall",
+        "unmappedOptions": [
+          "Yes",
+          "No",
+          "Unknown"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "removed_wall_location",
+        "label": "Removed Wall Location",
+        "unmappedOptions": [
+          "Lounge",
+          "Kitchen",
+          "Bedroom",
+          "Other"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "wall_defects_noted",
+        "label": "Wall Defects Noted",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 2
+      },
+      {
+        "field": "floor_build_type",
+        "label": "Floor Build Type",
+        "unmappedOptions": [
+          "Suspended timber",
+          "Suspended beam and block",
+          "In situ-concrete",
+          "Other"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "window_replacement",
+        "label": "Window Replacement",
+        "unmappedOptions": [
+          "Yes",
+          "No",
+          "Partial"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "window_type",
+        "label": "Window Type",
+        "unmappedOptions": [
+          "PVC",
+          "Timber",
+          "Steel",
+          "Modern PVC sash",
+          "Modern timber sash",
+          "Aluminium",
+          "Old style timber sash",
+          "Other"
+        ],
+        "totalOptions": 8
+      },
+      {
+        "field": "window_glazing",
+        "label": "Window Glazing",
+        "unmappedOptions": [
+          "Single glazed",
+          "Double glazed",
+          "Triple glazed",
+          "Secondary glazing"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "window_sealing",
+        "label": "Window Sealing",
+        "unmappedOptions": [
+          "Not Visible"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "nearby_trees",
+        "label": "Nearby Trees",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 2
+      },
+      {
+        "field": "tree_size",
+        "label": "Tree Size",
+        "unmappedOptions": [
+          "Medium to large"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "roof_covering",
+        "label": "Roof Covering",
+        "unmappedOptions": [
+          "Tiles",
+          "Felt",
+          "Thatch"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "roof_lining",
+        "label": "Roof Lining",
+        "unmappedOptions": [
+          "Membrane",
+          "None Visible",
+          "Unknown"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "external_walls",
+        "label": "External Walls Condition",
+        "unmappedOptions": [
+          "Minor Issues",
+          "Needs Repair",
+          "Major Issues"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "windows",
+        "label": "Windows Type",
+        "unmappedOptions": [
+          "Double Glazed uPVC",
+          "Double Glazed Wood",
+          "Single Glazed",
+          "Secondary Glazing"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "flooring",
+        "label": "Main Flooring Types",
+        "unmappedOptions": [
+          "Hardwood",
+          "Vinyl",
+          "Concrete"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "decoration",
+        "label": "Decoration Standard",
+        "unmappedOptions": [
+          "Modern/Updated",
+          "Average",
+          "Dated",
+          "Needs Complete Refurbishment"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "damp_signs",
+        "label": "Signs of Damp",
+        "unmappedOptions": [
+          "None Visible",
+          "Minor Signs",
+          "Moderate",
+          "Significant"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "kitchen_type",
+        "label": "Kitchen Type",
+        "unmappedOptions": [
+          "Fitted Modern",
+          "Fitted Traditional",
+          "Basic",
+          "Open Plan"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "other_rooms",
+        "label": "Other Rooms/Features",
+        "unmappedOptions": [
+          "Utility Room",
+          "Garage",
+          "Cellar",
+          "Loft Conversion",
+          "Home Office"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "consumer_unit_type",
+        "label": "Consumer Unit Type",
+        "unmappedOptions": [
+          "Modern RCD Protected",
+          "Older MCB Type",
+          "Fuse Board"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "last_electrical_test",
+        "label": "Last Electrical Test",
+        "unmappedOptions": [
+          "Within 5 years",
+          "5-10 years ago",
+          "Over 10 years ago",
+          "Unknown/Never"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "heating_type",
+        "label": "Primary Heating Type",
+        "unmappedOptions": [
+          "Gas Central Heating",
+          "Oil Central Heating",
+          "Electric Central Heating",
+          "LPG Central Heating",
+          "Heat Pump - Air Source",
+          "Heat Pump - Ground Source",
+          "Underfloor Heating",
+          "Storage Heaters",
+          "None/Unknown"
+        ],
+        "totalOptions": 10
+      },
+      {
+        "field": "boiler_age",
+        "label": "Boiler Age (years)",
+        "unmappedOptions": [
+          "< 5 years"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "boiler_location",
+        "label": "Boiler Location",
+        "unmappedOptions": [
+          "Airing Cupboard"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "water_heater_type",
+        "label": "Water Heater Type",
+        "unmappedOptions": [
+          "Immersion Heater",
+          "Unvented Cylinder",
+          "Vented Cylinder",
+          "Instantaneous",
+          "Unknown"
+        ],
+        "totalOptions": 7
+      },
+      {
+        "field": "water_heater_location",
+        "label": "Water Heater Location",
+        "unmappedOptions": [
+          "Utility Room"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "mains_drainage",
+        "label": "Mains Drainage Connected",
+        "unmappedOptions": [
+          "No - Septic Tank",
+          "No - Cesspit"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "common_services_present",
+        "label": "Common Services Present",
+        "unmappedOptions": [
+          "Yes",
+          "No",
+          "N/A"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "market_conditions",
+        "label": "Current Market Conditions",
+        "unmappedOptions": [
+          "Strong/Rising",
+          "Stable",
+          "Weak/Falling",
+          "Uncertain"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "demand_level",
+        "label": "Local Demand Level",
+        "unmappedOptions": [
+          "Moderate"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "time_on_market",
+        "label": "Expected Time on Market",
+        "unmappedOptions": [
+          "< 1 month"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "party_instructing",
+        "label": "Party Instructing",
+        "unmappedOptions": [
+          "Lender",
+          "Solicitor",
+          "Estate Agent"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "weather_conditions",
+        "label": "Weather Conditions",
+        "unmappedOptions": [
+          "Sunny",
+          "Cloudy",
+          "Rainy",
+          "Windy",
+          "Other"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "previous_weather",
+        "label": "Previous Weather",
+        "unmappedOptions": [
+          "Damp",
+          "Freezing",
+          "Other"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "occupancy_status",
+        "label": "Occupancy Status",
+        "unmappedOptions": [
+          "Occupied by Owner",
+          "Occupied by Tenant",
+          "Under Renovation",
+          "Partially Furnished",
+          "Other"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "furnishing_status",
+        "label": "Furnishing Status",
+        "unmappedOptions": [
+          "Fully Furnished",
+          "Partially Furnished"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "floor_covering",
+        "label": "Floor Covering",
+        "unmappedOptions": [
+          "Hardwood",
+          "Vinyl",
+          "None Visible"
+        ],
+        "totalOptions": 7
+      },
+      {
+        "field": "number_of_floors",
+        "label": "Number of Floors",
+        "unmappedOptions": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5+"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "garage_present",
+        "label": "Garage/Outbuilding Present",
+        "unmappedOptions": [
+          "Yes - Attached",
+          "Yes - Detached",
+          "Yes - Integral",
+          "Carport Only"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "garage_wall_type",
+        "label": "Garage Wall Construction",
+        "unmappedOptions": [
+          "Timber Frame",
+          "Metal/Steel",
+          "Pre-fabricated"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "garage_roof_type",
+        "label": "Garage Roof Type",
+        "unmappedOptions": [
+          "Pitched - Tiles",
+          "Pitched - Slate",
+          "Flat - Felt",
+          "Flat - EPDM/Rubber",
+          "Flat - GRP",
+          "Metal Sheeting",
+          "Corrugated"
+        ],
+        "totalOptions": 8
+      },
+      {
+        "field": "garage_door_type",
+        "label": "Garage Door Type",
+        "unmappedOptions": [
+          "Up and Over - Metal",
+          "Up and Over - Timber",
+          "Roller Shutter",
+          "None/Open"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "garage_electrics",
+        "label": "Garage Electrics",
+        "unmappedOptions": [
+          "Yes - Full",
+          "Yes - Light Only"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "garage_size",
+        "label": "Garage Size",
+        "unmappedOptions": [
+          "Triple+",
+          "Oversized Single"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "driveway_type",
+        "label": "Driveway Surface",
+        "unmappedOptions": [
+          "Tarmac/Asphalt",
+          "Resin Bound",
+          "Mixed"
+        ],
+        "totalOptions": 7
+      },
+      {
+        "field": "parking_spaces",
+        "label": "Off-Street Parking Spaces",
+        "unmappedOptions": [
+          "0",
+          "3",
+          "4+"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "garden_aspect",
+        "label": "Main Garden Aspect",
+        "unmappedOptions": [
+          "North Facing",
+          "South Facing",
+          "East Facing",
+          "West Facing",
+          "Mixed/Unknown",
+          "No Garden"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "boundary_types",
+        "label": "Boundary Types",
+        "unmappedOptions": [
+          "Close Board Fence",
+          "Panel Fence",
+          "Brick Wall",
+          "Stone Wall",
+          "Metal Railings",
+          "None/Open"
+        ],
+        "totalOptions": 7
+      },
+      {
+        "field": "loft_accessed",
+        "label": "Loft Space Accessed",
+        "unmappedOptions": [
+          "Yes - Full Access",
+          "Yes - Limited Access",
+          "No - Not Accessible"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "roof_type_structure",
+        "label": "Roof Structure Type",
+        "unmappedOptions": [
+          "Traditional Cut Roof",
+          "Trussed Rafters",
+          "Flat Roof",
+          "Mixed",
+          "Unknown/Not Visible"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "insulation_type",
+        "label": "Loft Insulation Type",
+        "unmappedOptions": [
+          "Mineral Wool - Adequate (270mm+)",
+          "Mineral Wool - Inadequate (<100mm)",
+          "Spray Foam",
+          "Rigid Board",
+          "None/Minimal",
+          "Not Visible"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "loft_converted",
+        "label": "Loft Converted",
+        "unmappedOptions": [
+          "Yes - Full",
+          "Yes - Partial"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "water_tank_material",
+        "label": "Water Tank Material",
+        "unmappedOptions": [
+          "Galvanised metal",
+          "Not Inspected"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "water_tank_location",
+        "label": "Water Tank Location",
+        "unmappedOptions": [
+          "Roof space",
+          "Airing cupboard",
+          "Kitchen"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "water_tank_condition",
+        "label": "Water Tank Condition",
+        "unmappedOptions": [
+          "Missing cover",
+          "Tank Insulation needed",
+          "Disused Water Tank"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "insect_infestation",
+        "label": "Insect Infestation",
+        "unmappedOptions": [
+          "Yes",
+          "No",
+          "Suspected"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "timber_rot",
+        "label": "Timber Rot",
+        "unmappedOptions": [
+          "Yes",
+          "No",
+          "Suspected"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "undersize_timber",
+        "label": "Undersize Timber",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "roof_spreading",
+        "label": "Roof Spreading",
+        "unmappedOptions": [
+          "Yes",
+          "No",
+          "Unknown"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "heavy_roof",
+        "label": "Heavy Roof",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "removed_chimney_breast",
+        "label": "Removed Chimney Breast",
+        "unmappedOptions": [
+          "Yes - Supported",
+          "Yes - Unsupported",
+          "No"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "party_wall_problem",
+        "label": "Party Wall Problem",
+        "unmappedOptions": [
+          "Yes",
+          "No",
+          "Unknown"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "fireplace_types",
+        "label": "Fireplace Types",
+        "unmappedOptions": [
+          "An open fire",
+          "Gas fire",
+          "Imitation system",
+          "Wood burning stove",
+          "Electric fire"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "worktop_surface",
+        "label": "Worktop Surface",
+        "unmappedOptions": [
+          "Timber",
+          "Marble",
+          "Glass",
+          "Metal"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "wall_cabinet_material",
+        "label": "Wall Cabinet Material",
+        "unmappedOptions": [
+          "Timber"
+        ],
+        "totalOptions": 2
+      },
+      {
+        "field": "woodwork_checklist",
+        "label": "Woodwork Checklist",
+        "unmappedOptions": [
+          "Door Sampling - Ok",
+          "Out of Square Doors",
+          "Glazed Internal Doors",
+          "Creaking Stairs",
+          "Rocking stair handrails",
+          "No Stairs Handrails",
+          "Open stair threads"
+        ],
+        "totalOptions": 7
+      },
+      {
+        "field": "damaged_locks",
+        "label": "Damaged Locks",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 2
+      },
+      {
+        "field": "bathroom_checklist",
+        "label": "Bathroom Checklist",
+        "unmappedOptions": [
+          "Extractor fan present",
+          "Leaking sealants causing damp",
+          "Sealant condition poor",
+          "Moulding present",
+          "Wood rot present",
+          "No Cubicle Safety Glass Rating"
+        ],
+        "totalOptions": 6
+      },
+      {
+        "field": "communal_area",
+        "label": "Communal Area",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "damp_locations",
+        "label": "Damp Detected Locations",
+        "unmappedOptions": [
+          "Ground Floor Walls",
+          "Upper Floor Walls",
+          "Window Reveals",
+          "Chimney Breast",
+          "Bathroom Areas",
+          "Kitchen Areas",
+          "None Detected"
+        ],
+        "totalOptions": 7
+      },
+      {
+        "field": "damp_type",
+        "label": "Suspected Damp Type",
+        "unmappedOptions": [
+          "Plumbing Leak",
+          "Unknown Source"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "safety_risks",
+        "label": "Safety Risks Present?",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 2
+      },
+      {
+        "field": "legal_risks",
+        "label": "Legal/Compliance Risks?",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 2
+      },
+      {
+        "field": "structural_risks",
+        "label": "Structural Risks?",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 2
+      },
+      {
+        "field": "moisture_risks",
+        "label": "Moisture/Damp Risks?",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 2
+      },
+      {
+        "field": "fire_risks",
+        "label": "Fire Safety Risks?",
+        "unmappedOptions": [
+          "Yes",
+          "No"
+        ],
+        "totalOptions": 2
+      },
+      {
+        "field": "valuation_purpose",
+        "label": "Purpose of Valuation",
+        "unmappedOptions": [
+          "Mortgage/Lending",
+          "Sale/Purchase",
+          "Insurance",
+          "Probate",
+          "Matrimonial",
+          "Asset Valuation",
+          "Development"
+        ],
+        "totalOptions": 8
+      },
+      {
+        "field": "valuation_type",
+        "label": "Valuation Type",
+        "unmappedOptions": [
+          "Full Inspection",
+          "Drive-by/External",
+          "Desktop",
+          "Re-valuation"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "instructing_party",
+        "label": "Instructing Party",
+        "unmappedOptions": [
+          "Solicitor"
+        ],
+        "totalOptions": 5
+      },
+      {
+        "field": "basis_of_valuation",
+        "label": "Basis of Valuation",
+        "unmappedOptions": [
+          "Market Value (RICS Red Book)",
+          "Fair Value",
+          "Investment Value",
+          "Existing Use Value"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "valuation_approach",
+        "label": "Valuation Approach",
+        "unmappedOptions": [
+          "Comparable Method",
+          "Income Method",
+          "Cost Method",
+          "Residual Method"
+        ],
+        "totalOptions": 4
+      },
+      {
+        "field": "confidence_level",
+        "label": "Confidence Level",
+        "unmappedOptions": [
+          "High ±5%",
+          "Medium ±10%",
+          "Low ±15%"
+        ],
+        "totalOptions": 3
+      },
+      {
+        "field": "access_limitations",
+        "label": "Access Limitations",
+        "unmappedOptions": [
+          "Loft not accessible",
+          "Garage not inspected",
+          "Outbuildings not inspected",
+          "Furniture prevented full inspection",
+          "Other"
+        ],
+        "totalOptions": 5
+      }
+    ],
+    "duplicateMappings": []
+  },
+  "quality": {
+    "high": 128,
+    "medium": 42,
+    "low": 0,
+    "unknown": 0
+  }
+}

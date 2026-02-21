@@ -1,0 +1,85 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+set password "asdasd123"
+set vps "ubuntu@148.113.203.250"
+set path "surveyscriber"
+
+puts "╔════════════════════════════════════════════════════════════════╗"
+puts "║     COMPREHENSIVE VPS DEPLOYMENT VERIFICATION                  ║"
+puts "╚════════════════════════════════════════════════════════════════╝"
+
+# 1. Check configuration files exist
+puts "\n\\[1/10\\] 📄 Checking configuration files..."
+spawn ssh $vps "cd $path && ls -lh field-mapping-config.json excel-phrase-library.json app-fields.json tsconfig.json 2>&1"
+expect "password:"
+send "$password\r"
+expect eof
+
+# 2. Check services directory
+puts "\n\[2/10\] 📁 Checking services directory..."
+spawn ssh $vps "cd $path && ls -lh src/services/ 2>&1"
+expect "password:"
+send "$password\r"
+expect eof
+
+# 3. Verify mapping file integrity
+puts "\n\[3/10\] 🔍 Verifying field mapping integrity..."
+spawn ssh $vps "cd $path && node -e \"const m = require('./field-mapping-config.json'); const total = Object.keys(m).length - 1; const low = Object.values(m).filter(v => v.confidence === 'low').length; const high = Object.values(m).filter(v => v.confidence === 'high').length; console.log('Total mappings:', total); console.log('High confidence:', high, '(' + (high/total*100).toFixed(1) + '%)'); console.log('Low confidence:', low, '(' + (low/total*100).toFixed(1) + '%)'); process.exit(low > 0 ? 1 : 0);\""
+expect "password:"
+send "$password\r"
+expect eof
+
+# 4. Check Docker container status
+puts "\n\[4/10\] 🐳 Checking Docker container status..."
+spawn ssh $vps "sudo docker ps --filter name=surveyscriber_backend --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
+expect "password:"
+send "$password\r"
+expect eof
+
+# 5. Check container health
+puts "\n\[5/10\] 💚 Checking container health..."
+spawn ssh $vps "sudo docker inspect surveyscriber_backend --format='{{.State.Status}}' 2>&1"
+expect "password:"
+send "$password\r"
+expect eof
+
+# 6. Check recent logs for errors
+puts "\n\[6/10\] 📋 Checking recent logs (looking for errors)..."
+spawn ssh $vps "sudo docker logs surveyscriber_backend --tail 50 2>&1 | grep -i 'error\\|fail\\|exception' || echo '✓ No errors found in logs'"
+expect "password:"
+send "$password\r"
+expect eof
+
+# 7. Test API health endpoint
+puts "\n\[7/10\] 🏥 Testing API health endpoint..."
+spawn ssh $vps "curl -s http://localhost:3000/api/health | head -100"
+expect "password:"
+send "$password\r"
+expect eof
+
+# 8. Verify ai.module.ts includes new services
+puts "\n\[8/10\] 🔧 Verifying ai.module.ts includes ExcelPhraseGeneratorService..."
+spawn ssh $vps "cd $path && grep -E 'ExcelPhraseGeneratorService|EnhancedReportService' src/modules/ai/ai.module.ts || echo '❌ Services not found in module'"
+expect "password:"
+send "$password\r"
+expect eof
+
+# 9. Check if Excel phrase library is readable
+puts "\n\[9/10\] 📚 Testing Excel phrase library readability..."
+spawn ssh $vps "cd $path && node -e \"const lib = require('./excel-phrase-library.json'); const fields = Object.keys(lib); console.log('Excel fields available:', fields.length); console.log('Sample fields:', fields.slice(0, 5).join(', ')); process.exit(fields.length > 0 ? 0 : 1);\""
+expect "password:"
+send "$password\r"
+expect eof
+
+# 10. Verify tsconfig has resolveJsonModule
+puts "\n\[10/10\] ⚙️  Verifying tsconfig.json configuration..."
+spawn ssh $vps "cd $path && grep resolveJsonModule tsconfig.json || echo '❌ resolveJsonModule not found'"
+expect "password:"
+send "$password\r"
+expect eof
+
+puts "\n"
+puts "╔════════════════════════════════════════════════════════════════╗"
+puts "║     VERIFICATION COMPLETE                                      ║"
+puts "╚════════════════════════════════════════════════════════════════╝"
