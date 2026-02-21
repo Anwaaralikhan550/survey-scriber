@@ -1023,12 +1023,38 @@ class SyncManager {
           } on NotFoundException {
             // UPSERT: Server doesn't have this survey (DB reset, data loss).
             // Auto-create via POST so dependents (sections, answers) can sync.
+            //
+            // CRITICAL: Do NOT reuse payload — UPDATE payloads may only
+            // contain mutated fields and be missing required CREATE fields
+            // (title, propertyAddress, status, type). Fetch the complete
+            // entity from local DB to build a valid CREATE payload.
             AppLogger.w('SyncManager',
               'Survey $entityId not found on server (404 on UPDATE). '
-              'Auto-creating via POST (upsert).',
+              'Fetching full entity from local DB for upsert.',
             );
-            final createPayload = {'id': entityId, ...payload};
-            await apiClient.post('surveys', data: createPayload);
+
+            final survey = await surveysDao.getSurveyById(entityId);
+            if (survey == null) {
+              AppLogger.e('SyncManager',
+                'Cannot upsert survey $entityId: not found in local DB either.',
+              );
+              return false;
+            }
+
+            final fullCreatePayload = {
+              'id': entityId,
+              'title': survey.title,
+              'propertyAddress': survey.address ?? '',
+              'status': survey.status.toBackendString(),
+              'type': survey.type.toBackendString(),
+              if (survey.jobRef != null) 'jobRef': survey.jobRef,
+              if (survey.clientName != null) 'clientName': survey.clientName,
+              if (survey.parentSurveyId != null) 'parentSurveyId': survey.parentSurveyId,
+              // Merge any extra fields from the original update payload
+              // so they're not lost.
+              ...payload,
+            };
+            await apiClient.post('surveys', data: fullCreatePayload);
           }
         case SyncAction.delete:
           try {
@@ -1143,21 +1169,41 @@ class SyncManager {
           } on NotFoundException {
             // UPSERT: Server doesn't have this section (DB reset, data loss).
             // Auto-create via POST so dependents (answers) can sync.
+            //
+            // CRITICAL: Do NOT reuse bodyPayload — UPDATE payloads only contain
+            // mutated fields (e.g. phraseOutput, userNotes) and are missing
+            // required CREATE fields (title, order, sectionTypeKey). Fetch the
+            // complete entity from local DB to build a valid CREATE payload.
             AppLogger.w('SyncManager',
               'Section $entityId not found on server (404 on UPDATE). '
-              'Auto-creating via POST (upsert).',
+              'Fetching full entity from local DB for upsert.',
             );
-            final createPayload = {'id': entityId, ...bodyPayload};
+
+            final section = await sectionsDao.getSectionById(entityId);
+            if (section == null) {
+              AppLogger.e('SyncManager',
+                'Cannot upsert section $entityId: not found in local DB either.',
+              );
+              return false;
+            }
+
+            final resolvedSurveyId = surveyId ?? section.surveyId;
+            final fullCreatePayload = {
+              'id': entityId,
+              'title': section.title,
+              'order': section.order,
+              'sectionTypeKey': section.sectionType.apiSectionType,
+              // Merge any extra fields from the original update payload
+              // (e.g. phraseOutput, userNotes) so they're not lost.
+              ...bodyPayload,
+            };
+
             try {
-              await apiClient.post('surveys/$surveyId/sections', data: createPayload);
+              await apiClient.post('surveys/$resolvedSurveyId/sections', data: fullCreatePayload);
             } on NotFoundException {
               // Parent survey also missing — ensure it exists first
-              if (surveyId != null) {
-                await _ensureSurveyExists(surveyId);
-                await apiClient.post('surveys/$surveyId/sections', data: createPayload);
-              } else {
-                rethrow;
-              }
+              await _ensureSurveyExists(resolvedSurveyId);
+              await apiClient.post('surveys/$resolvedSurveyId/sections', data: fullCreatePayload);
             }
           }
         case SyncAction.delete:
@@ -1237,21 +1283,40 @@ class SyncManager {
           } on NotFoundException {
             // UPSERT: Server doesn't have this answer (DB reset, data loss).
             // Auto-create via POST.
+            //
+            // CRITICAL: Do NOT reuse bodyPayload — UPDATE payloads may only
+            // contain mutated fields (e.g. just 'value') and be missing
+            // required CREATE fields (questionKey). Fetch the complete
+            // entity from local DB to build a valid CREATE payload.
             AppLogger.w('SyncManager',
               'Answer $entityId not found on server (404 on UPDATE). '
-              'Auto-creating via POST (upsert).',
+              'Fetching full entity from local DB for upsert.',
             );
-            final createPayload = {'id': entityId, ...bodyPayload};
+
+            final answer = await answersDao.getAnswerById(entityId);
+            if (answer == null) {
+              AppLogger.e('SyncManager',
+                'Cannot upsert answer $entityId: not found in local DB either.',
+              );
+              return false;
+            }
+
+            final resolvedSectionId = sectionId ?? answer.sectionId;
+            final fullCreatePayload = {
+              'id': entityId,
+              'questionKey': answer.fieldKey,
+              'value': answer.value ?? '',
+              // Merge any extra fields from the original update payload
+              // so they're not lost.
+              ...bodyPayload,
+            };
+
             try {
-              await apiClient.post('sections/$sectionId/answers', data: createPayload);
+              await apiClient.post('sections/$resolvedSectionId/answers', data: fullCreatePayload);
             } on NotFoundException {
               // Parent section also missing — ensure it exists first
-              if (sectionId != null) {
-                await _ensureSectionExists(sectionId);
-                await apiClient.post('sections/$sectionId/answers', data: createPayload);
-              } else {
-                rethrow;
-              }
+              await _ensureSectionExists(resolvedSectionId);
+              await apiClient.post('sections/$resolvedSectionId/answers', data: fullCreatePayload);
             }
           }
         case SyncAction.delete:

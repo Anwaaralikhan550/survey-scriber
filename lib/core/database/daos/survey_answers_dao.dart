@@ -27,6 +27,14 @@ class SurveyAnswersDao extends DatabaseAccessor<AppDatabase>
     return results.map(_mapToAnswer).toList();
   }
 
+  /// Get answer by ID
+  Future<entities.SurveyAnswer?> getAnswerById(String id) async {
+    final result = await (select(surveyAnswers)
+          ..where((a) => a.id.equals(id)))
+        .getSingleOrNull();
+    return result != null ? _mapToAnswer(result) : null;
+  }
+
   /// Get answer by survey, section, and field key
   Future<entities.SurveyAnswer?> getAnswer(
     String surveyId,
