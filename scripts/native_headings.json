@@ -1,0 +1,1656 @@
+{
+  "activity_about_inspection": [
+    "Party Disclosure",
+    "Weather",
+    "Property Status",
+    "Property Facing",
+    "OverAll Opinion"
+  ],
+  "activity_about_property": [
+    "Property Type",
+    "Property Built",
+    "Year Extended",
+    "Year Converted",
+    "Flat Maisonettes",
+    "Construction",
+    "Listed Building",
+    "Energy",
+    "Other Service",
+    "Ground",
+    "Property Location density",
+    "Facilities",
+    "Local Environment",
+    "Private Road",
+    "Noisy Area"
+  ],
+  "activity_accommodation_summary": [
+    "Number of Rooms"
+  ],
+  "activity_communal_garden": [
+    "Type",
+    "Boundary Fencing"
+  ],
+  "activity_construction": [
+    "Property",
+    "Roof",
+    "External Wall",
+    "Internal Wall",
+    "Floor",
+    "Window",
+    "Listed Building"
+  ],
+  "activity_construction_floor": [
+    "Built With"
+  ],
+  "activity_construction_window": [
+    "Glazzed Type",
+    "Window Material"
+  ],
+  "activity_details": [
+    "Property Details",
+    "Date:",
+    "123",
+    "Time:",
+    "123",
+    "Client Name:",
+    "123",
+    "Phone No:",
+    "123",
+    "Property Type:",
+    "123",
+    "Year Built:",
+    "1994",
+    "Address:",
+    "123",
+    "Country:",
+    "1994",
+    "City:",
+    "Direct",
+    "Postcode:",
+    "Direct",
+    "Postcode:",
+    "@string/view_on_map",
+    "Client Notes:",
+    "Special Instruction:",
+    "Access Type:",
+    "Agent Details",
+    "Phone No:",
+    "Name",
+    "Name:",
+    "Name",
+    "Address:",
+    "123",
+    "Country:",
+    "1994",
+    "City:",
+    "Direct",
+    "pinCode:",
+    "Direct",
+    "Postcode:",
+    "@string/view_on_map",
+    "Agent Notes:",
+    "Name"
+  ],
+  "activity_edit_ivf": [
+    "Client Note",
+    "Special Instruction",
+    "Agent Note"
+  ],
+  "activity_edit_valuation": [
+    "Client Note",
+    "Special Instruction",
+    "Agent Note"
+  ],
+  "activity_energy_effiency": [
+    "Efficiency"
+  ],
+  "activity_energy_environment_impect": [
+    "Environmental Impact"
+  ],
+  "activity_extended_wall": [
+    "Built Of",
+    "Finishes",
+    "Cladding Finishes"
+  ],
+  "activity_front_garden": [
+    "Type",
+    "Boundary Fencing"
+  ],
+  "activity_garden": [
+    "Front Garden",
+    "Rear Garden",
+    "Communal Garden"
+  ],
+  "activity_ground": [
+    "Area",
+    "Topography",
+    "Front Garden",
+    "Rear Garden",
+    "Communal Garden",
+    "Parking",
+    "Gated Community",
+    "Estated Location"
+  ],
+  "activity_grounds": [
+    "Limitations",
+    "Inspection Area",
+    "@string/grounds_garage_b",
+    "@string/other_b",
+    "@string/grounds_other_area_b"
+  ],
+  "activity_grounds_garage": [
+    "Type",
+    "Wall",
+    "Roof Type",
+    "Roof Covered With"
+  ],
+  "activity_grounds_garage_main_screen": [
+    "Garage",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_grounds_garage_repair_main_screen": [
+    "Garage",
+    "Roof Timber",
+    "Safety Hazard"
+  ],
+  "activity_grounds_garage_roof_timber_repair": [
+    "Defect"
+  ],
+  "activity_grounds_other": [
+    "Grounds",
+    "Front Garden",
+    "Rear Garden",
+    "Side Garden",
+    "Other Garden",
+    "Communal Garden",
+    "Large Outbuilding"
+  ],
+  "activity_grounds_other_area": [
+    "Right of Way",
+    "Knotweed",
+    "Common Garden",
+    "Lifts",
+    "Flooding",
+    "EMF"
+  ],
+  "activity_grounds_other_area_emf": [
+    "EMF Area"
+  ],
+  "activity_grounds_other_area_flooding": [
+    "Flooding Area"
+  ],
+  "activity_grounds_other_area_knotweed": [
+    "Japanese knotweed is growing at Location"
+  ],
+  "activity_grounds_other_area_main_screen": [
+    "Other Area",
+    "Not Inspected"
+  ],
+  "activity_grounds_other_area_right_of_way": [
+    "Property Includes"
+  ],
+  "activity_grounds_other_communal_garden": [
+    "The garden is"
+  ],
+  "activity_grounds_other_front_garden": [
+    "The garden is"
+  ],
+  "activity_grounds_other_large_outbuildings": [
+    "Construction",
+    "Building type",
+    "Location",
+    "Roof Type",
+    "Roof Covered With"
+  ],
+  "activity_grounds_other_main_screen": [
+    "Other",
+    "Shared Access",
+    "Private Road",
+    "Legal Issues",
+    "Shrinkable Clay",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_grounds_other_other_garden": [
+    "The garden is"
+  ],
+  "activity_grounds_other_rear_garden": [
+    "The garden is"
+  ],
+  "activity_grounds_other_repair_fence": [
+    "Garden",
+    "Defect"
+  ],
+  "activity_grounds_other_repair_main_screen": [
+    "Fence",
+    "Shed",
+    "Outbuilding",
+    "Retaining Walls",
+    "Nearby Trees"
+  ],
+  "activity_grounds_other_repair_shed": [
+    "Shed Type",
+    "Defect"
+  ],
+  "activity_grounds_other_side_garden": [
+    "The garden is"
+  ],
+  "activity_inside_property": [
+    "Limitations",
+    "Inspection Area:",
+    "@string/roof_structure_main",
+    "@string/ceilings_main",
+    "@string/walls_and_partitions_main",
+    "@string/floors_main",
+    "@string/fireplaces_and_chimneys_main",
+    "@string/built_in_fittings_main",
+    "@string/woodwork_main",
+    "@string/bathroom_fittings_main",
+    "Other Joinery finishes",
+    "@string/other_main"
+  ],
+  "activity_inside_property_about_roof_structure": [
+    "Material",
+    "Defect"
+  ],
+  "activity_inside_property_bathroom_fittings_main_screen": [
+    "Bathroom Fitting",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_inside_property_built_in_fittings_main_screen": [
+    "Built In Fittings",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_inside_property_ceilings": [
+    "About Ceilings",
+    "Cracks",
+    "Contains asbestos",
+    "Polystyrene",
+    "Heavy Paper Lining"
+  ],
+  "activity_inside_property_ceilings_contains_asbestos": [
+    "Celling may contain Asbestos"
+  ],
+  "activity_inside_property_ceilings_cracks": [
+    "Cracks Noted to"
+  ],
+  "activity_inside_property_ceilings_main_screen": [
+    "Ceilings",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_inside_property_ceilings_repairs": [
+    "Repair Ceilings",
+    "Ornamental Plaster"
+  ],
+  "activity_inside_property_ceilings_repairs_ceilings": [
+    "Ceilings Location",
+    "Defect",
+    "Ceilings Location",
+    "Defect"
+  ],
+  "activity_inside_property_ceilings_repairs_ornamental_plaster": [
+    "Defect"
+  ],
+  "activity_inside_property_fireplaces_main_screen": [
+    "Fire Places",
+    "Blocked Fireplace",
+    "Removed CB",
+    "Boiler Flue",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_inside_property_floors_main_screen": [
+    "Floors",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_inside_property_limitation": [
+    "Reason"
+  ],
+  "activity_inside_property_loft_converted": [
+    "Defects noted to the conversion"
+  ],
+  "activity_inside_property_other_basement_main_screen": [
+    "No access",
+    "Not In Use",
+    "Used as",
+    "Not Habitable",
+    "Flooded",
+    "Serious Damp",
+    "Joists Decay"
+  ],
+  "activity_inside_property_other_celler_main_screen": [
+    "No access",
+    "Not In Use",
+    "Used as",
+    "Not Habitable",
+    "Flooded",
+    "Serious Damp",
+    "Joists Decay"
+  ],
+  "activity_inside_property_other_celler_not_habitable": [
+    "Should Not Use Because Of"
+  ],
+  "activity_inside_property_other_celler_no_access": [
+    "No Access Because Of"
+  ],
+  "activity_inside_property_other_fittings_main_screen": [
+    "Other",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_inside_property_repair": [
+    "Repair Tank",
+    "Repair Timber Structure"
+  ],
+  "activity_inside_property_repair_removed_chimney_breast": [
+    "Condition"
+  ],
+  "activity_inside_property_repair_tank": [
+    "Water Tank"
+  ],
+  "activity_inside_property_repair_timber_structure": [
+    "Defects",
+    "Defects"
+  ],
+  "activity_inside_property_roof_structure": [
+    "Weather Condition",
+    "Loft Converted",
+    "About Roof structure",
+    "Water tank",
+    "Insect infestation",
+    "Timber rot",
+    "Undersize timber",
+    "Roof spreading",
+    "Heavy roof",
+    "Removed Chimney Breast",
+    "Party Wall Problem"
+  ],
+  "activity_inside_property_roof_structure_main_screen": [
+    "Roof Structure",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_inside_property_walls_and_partitions": [
+    "Walls",
+    "Condensation",
+    "Dampness",
+    "Movement Cracks",
+    "Removed Wall"
+  ],
+  "activity_inside_property_walls_and_partitions_main_screen": [
+    "Walls and Partitions",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_inside_property_wap_walls": [
+    "Construction Type",
+    "Finishes Type"
+  ],
+  "activity_inside_property_water_tank": [
+    "Water Tank Material",
+    "Location",
+    "Water Tank Material",
+    "Location"
+  ],
+  "activity_inside_property_wood_work_main_screen": [
+    "Wood Work",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_inspection_dashboard": [
+    "Start Inspection",
+    "Pause Inspection",
+    "Reset Inspection",
+    "Generate Report"
+  ],
+  "activity_internal_wall": [
+    "Partition Type"
+  ],
+  "activity_in_side_property_bathroom_fittings": [
+    "Bathroom Fittings",
+    "Extractor fan",
+    "Leaking sealants causing damp",
+    "Sealant condition",
+    "Moulding",
+    "Wood Rot",
+    "No Cubicle Safety Glass Rating"
+  ],
+  "activity_in_side_property_bathroom_fittings_extractor_fan": [
+    "Fan Location",
+    "Fan Location",
+    "Fan Location",
+    "Tested",
+    "Defect",
+    "Fan Location"
+  ],
+  "activity_in_side_property_bathroom_fittings_leaking": [
+    "Location: leaking causing dampness"
+  ],
+  "activity_in_side_property_bathroom_fittings_mould": [
+    "Moulding noted around"
+  ],
+  "activity_in_side_property_bathroom_fittings_repair": [
+    "Location",
+    "Defect",
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_bathroom_fittings_sealant": [
+    "Sealants around",
+    "Defect"
+  ],
+  "activity_in_side_property_bathroom_fittings_second": [
+    "Location",
+    "Made up of",
+    "Fittings"
+  ],
+  "activity_in_side_property_bathroom_fittings_wood_rot": [
+    "Item",
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_built_in_fittings": [
+    "Location",
+    "Worktops",
+    "Wall Cabinet/Bases"
+  ],
+  "activity_in_side_property_built_in_fittings_repair": [
+    "Repair Fitting",
+    "Defective Sealants",
+    "Moulding noted",
+    "Water Seepage"
+  ],
+  "activity_in_side_property_built_in_fittings_repair_defective_sealants": [
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_built_in_fittings_repair_fittings": [
+    "Location",
+    "Defect",
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_built_in_fittings_repair_moulding_noted": [
+    "Location"
+  ],
+  "activity_in_side_property_built_in_fittings_repair_water_seepage": [
+    "Location"
+  ],
+  "activity_in_side_property_cubicle_safety_glass_rating": [
+    "No safety glass mark noted"
+  ],
+  "activity_in_side_property_extractor_fan_diffrent": [
+    "Extractor Fan Installed",
+    "No Extractor Fan Installed"
+  ],
+  "activity_in_side_property_fire_places": [
+    "Location",
+    "Type"
+  ],
+  "activity_in_side_property_fire_places_diffrent": [
+    "An open fire",
+    "Gas fire",
+    "Imitation system",
+    "Wood burning stove",
+    "Electric fire",
+    "Other"
+  ],
+  "activity_in_side_property_fire_places_repair": [
+    "Repair Fireplaces",
+    "Damaged grate",
+    "Damaged Surround",
+    "Blocked Fireplace",
+    "Removed CB",
+    "Boiler Flue"
+  ],
+  "activity_in_side_property_fire_places_repair_blocked_fireplace": [
+    "Floor Location",
+    "Fireplace Location",
+    "Floor Location",
+    "Fireplace Location"
+  ],
+  "activity_in_side_property_fire_places_repair_boiler_flue": [
+    "Boiler Location"
+  ],
+  "activity_in_side_property_fire_places_repair_damage_grate": [
+    "Floor Location",
+    "Fireplace Location"
+  ],
+  "activity_in_side_property_fire_places_repair_damage_surround": [
+    "Floor Location",
+    "Fireplace Location"
+  ],
+  "activity_in_side_property_fire_places_repair_fire_place": [
+    "Floor Location",
+    "Fireplace Location",
+    "Defect",
+    "Floor Location",
+    "Fireplace Location",
+    "Defect"
+  ],
+  "activity_in_side_property_fire_places_repair_removed_cb": [
+    "Floor Location",
+    "Chimney Location",
+    "Floor Location",
+    "Chimney Location",
+    "Adjacent construction defects"
+  ],
+  "activity_in_side_property_floors": [
+    "About Floors",
+    "Creaking",
+    "Tiles",
+    "Loose Floorboards",
+    "Timber Decay",
+    "Timber Infestation",
+    "Dampness",
+    "Floor ventilation"
+  ],
+  "activity_in_side_property_floors_about_floor": [
+    "Covering",
+    "Floor Covering Includes"
+  ],
+  "activity_in_side_property_floors_dampness": [
+    "Location",
+    "Caused By"
+  ],
+  "activity_in_side_property_floors_repair": [
+    "Floor Repair",
+    "Laminate / Wood flooring",
+    "Floor Vibration",
+    "Sloping Floor",
+    "Uneven Floor"
+  ],
+  "activity_in_side_property_floors_repair_floor_laminate_wood_floor": [
+    "Material",
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_floors_repair_floor_repair": [
+    "Location",
+    "Defect",
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_floors_repair_sloping_floor": [
+    "Location"
+  ],
+  "activity_in_side_property_floors_repair_uneven_floor": [
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_floors_tiles": [
+    "Location",
+    "Location"
+  ],
+  "activity_in_side_property_floors_timber_decay": [
+    "Location"
+  ],
+  "activity_in_side_property_floors_timber_infection": [
+    "Location"
+  ],
+  "activity_in_side_property_other": [
+    "Communal Area",
+    "Cellar",
+    "Basement"
+  ],
+  "activity_in_side_property_other_basement": [
+    "No Access Because Of",
+    "Dampness noted"
+  ],
+  "activity_in_side_property_other_cellar": [
+    "No Access Because Of",
+    "Dampness noted"
+  ],
+  "activity_in_side_property_other_communal_area": [
+    "Not Inspected Because Of",
+    "Property comprise of",
+    "Defect Noted"
+  ],
+  "activity_in_side_property_other_repair": [
+    "Defect",
+    "Defect"
+  ],
+  "activity_in_side_property_wap_dampness": [
+    "e.g. lower walls in the kitchen",
+    "Cause",
+    "Caused By"
+  ],
+  "activity_in_side_property_wap_removed_wall": [
+    "Defect"
+  ],
+  "activity_in_side_property_wap_repair": [
+    "Wall Repair",
+    "Repair sealants",
+    "Removed Wall"
+  ],
+  "activity_in_side_property_wap_repair_condensation": [
+    "Location"
+  ],
+  "activity_in_side_property_wap_repair_removed_wall": [
+    "Defect"
+  ],
+  "activity_in_side_property_wap_repair_sealants": [
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_wap_repair_wall_repair": [
+    "Location",
+    "Defect",
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_wood_work": [
+    "Woodwork",
+    "Fitted/Builtin Cupboards",
+    "Damaged Lock"
+  ],
+  "activity_in_side_property_wood_work_damaged_lock": [
+    "Damaged lock in the",
+    "Defect"
+  ],
+  "activity_in_side_property_wood_work_door_sampling": [
+    "Door location(s)",
+    "Defect"
+  ],
+  "activity_in_side_property_wood_work_repair": [
+    "Door Repair",
+    "WoodWork Repair",
+    "Balusters",
+    "Infestation",
+    "Damp timber",
+    "Damaged Lock"
+  ],
+  "activity_in_side_property_wood_work_repair_balusters": [
+    "Defect"
+  ],
+  "activity_in_side_property_wood_work_repair_damp_timber": [
+    "Component",
+    "Location",
+    "Defect"
+  ],
+  "activity_in_side_property_wood_work_repair_infestation": [
+    "Infestation in Part Of",
+    "Location"
+  ],
+  "activity_in_side_property_wood_work_second": [
+    "Made up of"
+  ],
+  "activity_in_side_property_ww_wood_work_repair": [
+    "Location",
+    "Defect",
+    "Location",
+    "Defect"
+  ],
+  "activity_issues": [
+    "I1 Regulation",
+    "I2 Guarantees",
+    "I3 Other Matters"
+  ],
+  "activity_issues_glazed_sections": [
+    "Glazed Sections"
+  ],
+  "activity_issues_other_matters": [
+    "Shared Stacks and RWG"
+  ],
+  "activity_issues_regulation": [
+    "Building Regulation",
+    "Planning permission",
+    "Glazed Sections"
+  ],
+  "activity_location_amenities_e": [
+    "Property Close To",
+    "Environment"
+  ],
+  "activity_login": [
+    "Forgot Password?",
+    "New user? Sign up"
+  ],
+  "activity_no_of_room_on_each_floor": [
+    "Lower Ground",
+    "Ground",
+    "First",
+    "Second",
+    "Third",
+    "Other",
+    "Roof Space",
+    "@string/e7_conservatory_porches",
+    "@string/e8_other_joinery_finishes",
+    "@string/e9_other"
+  ],
+  "activity_op_flat_roof": [
+    "Flat Roof"
+  ],
+  "activity_other_repair_legal_issues": [
+    "Shared Area"
+  ],
+  "activity_other_repair_outbuilding": [
+    "Type",
+    "Defect"
+  ],
+  "activity_other_repair_retaining_walls": [
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property": [
+    "Limitations",
+    "Inspection Area:",
+    "@string/e1_chimney",
+    "@string/e2_roof_covering",
+    "@string/e3_rain_water_goods",
+    "@string/e4_main_walls",
+    "@string/e5_windows",
+    "@string/e6_outside_doors",
+    "@string/e7_conservatory_porches",
+    "@string/e8_other_joinery_finishes",
+    "@string/e9_other"
+  ],
+  "activity_outside_property_chimney": [
+    "Stacks",
+    "Location",
+    "Rendering",
+    "Waterproofing",
+    "Condition",
+    "Shared Chimney",
+    "Leaning Chimney",
+    "Partial View",
+    "Removed Chimney Stack",
+    "Removed Pots"
+  ],
+  "activity_outside_property_chimney_main_screen": [
+    "Chimney",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_outside_property_chimney_not_inspected": [
+    "Removed chimney stack location",
+    "Removed pots location"
+  ],
+  "activity_outside_property_chimney_partial_view": [
+    "Removed chimney stack location",
+    "Removed pots location"
+  ],
+  "activity_outside_property_chimney_removed_chimney_stack": [
+    "Removed chimney stack location",
+    "Removed pots location"
+  ],
+  "activity_outside_property_chimney_removed_pots": [
+    "Removed chimney stack location",
+    "Removed pots location"
+  ],
+  "activity_outside_property_chimney_repair_flaunching": [
+    "Chimney Stack",
+    "Defect",
+    "Chimney Stack",
+    "Defect"
+  ],
+  "activity_outside_property_conservatory_porch": [
+    "Location and construction",
+    "Roof",
+    "Doors",
+    "Windows",
+    "Floor",
+    "Condition",
+    "Safety glass rating",
+    "Open to building",
+    "Roof Flashing With Wall",
+    "Poor condition"
+  ],
+  "activity_outside_property_conservatory_porch_doors": [
+    "Incorporates",
+    "Glazzing"
+  ],
+  "activity_outside_property_conservatory_porch_floor": [
+    "Floor covered in"
+  ],
+  "activity_outside_property_conservatory_porch_location_construction": [
+    "Porch Type",
+    "Construction"
+  ],
+  "activity_outside_property_conservatory_porch_main_screen": [
+    "Conservatory and Porch",
+    "Repairs",
+    "Not inspected"
+  ],
+  "activity_outside_property_conservatory_porch_repairs": [
+    "Defect",
+    "Defect"
+  ],
+  "activity_outside_property_conservatory_porch_roof": [
+    "Material"
+  ],
+  "activity_outside_property_conservatory_porch_windows": [
+    "Incorporates",
+    "Glazzing"
+  ],
+  "activity_outside_property_external_features": [
+    "Construction",
+    "Roof",
+    "Wall Construction",
+    "Floor",
+    "Handrails",
+    "Drains",
+    "Overloaded",
+    "No safety glass",
+    "Condition"
+  ],
+  "activity_outside_property_leaning_chimney": [
+    "Location"
+  ],
+  "activity_outside_property_limitation": [
+    "Limitations"
+  ],
+  "activity_outside_property_location": [
+    "Status"
+  ],
+  "activity_outside_property_main_walls": [
+    "About The Wall",
+    "Cladding",
+    "DAMP",
+    "DPC",
+    "Removed Walls",
+    "Movements",
+    "Thin|slim Wall",
+    "Cavity Wall Insulation",
+    "Nearby Tree"
+  ],
+  "activity_outside_property_main_walls_about_wall": [
+    "Wall",
+    "Construction",
+    "Finishes type"
+  ],
+  "activity_outside_property_main_walls_cladding": [
+    "Cladded with"
+  ],
+  "activity_outside_property_main_walls_damp": [
+    "e.g. Lower walls in the lounge..",
+    "Damp cause",
+    "Caused By",
+    "Caused By"
+  ],
+  "activity_outside_property_main_walls_dpc": [
+    "DPC consist of",
+    "DPC consist of"
+  ],
+  "activity_outside_property_main_walls_main_screen": [
+    "Main Walls",
+    "Repairs",
+    "Main walls not inspected"
+  ],
+  "activity_outside_property_main_walls_movements": [
+    "Wall",
+    "Location",
+    "Cracks potentially arising",
+    "Wall",
+    "Location"
+  ],
+  "activity_outside_property_main_walls_removed_wall": [
+    "Walled removed location",
+    "Describe defect"
+  ],
+  "activity_outside_property_main_wall_repairs": [
+    "Spalling",
+    "Causing damp",
+    "Render",
+    "Pointing",
+    "Wall Tie Repair",
+    "Lintel",
+    "Windows Sills"
+  ],
+  "activity_outside_property_main_wall_repairs_lintel": [
+    "Walls",
+    "Location",
+    "Defect",
+    "Walls",
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_main_wall_repairs_near_by_tress": [
+    "Size Of tree"
+  ],
+  "activity_outside_property_main_wall_repairs_pointing": [
+    "Select repair now if defect is causing damp.",
+    "Walls",
+    "Location",
+    "Defect",
+    "Walls",
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_main_wall_repairs_render": [
+    "Select repair now if defect is causing damp.",
+    "Walls",
+    "Location",
+    "Defect",
+    "Walls",
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_main_wall_repairs_spalling": [
+    "Select repair now if defect is causing damp.",
+    "Walls",
+    "Location",
+    "Walls",
+    "Location"
+  ],
+  "activity_outside_property_main_wall_repairs_thin_slim_wall": [
+    "Walls",
+    "Location",
+    "Walls",
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_main_wall_repairs_wall_the_repair": [
+    "Walls"
+  ],
+  "activity_outside_property_main_wall_repairs_window_sills": [
+    "Walls",
+    "Location",
+    "Defect",
+    "Walls",
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_other": [
+    "Communal Area",
+    "Other External Area",
+    "Overloaded",
+    "No safety glass",
+    "Wall sealing",
+    "Movements"
+  ],
+  "activity_outside_property_other_about_joinery_and_finishes": [
+    "External Work Includes",
+    "Material"
+  ],
+  "activity_outside_property_other_communal_area": [
+    "External communal parts",
+    "Because Of"
+  ],
+  "activity_outside_property_other_drains": [
+    "Laid with"
+  ],
+  "activity_outside_property_other_floors": [
+    "The floors are"
+  ],
+  "activity_outside_property_other_handrails": [
+    "Type"
+  ],
+  "activity_outside_property_other_joinery_and_finishes": [
+    "About Other Joinery",
+    "Condition",
+    "Asbestos",
+    "Sill projection",
+    "Wall sealing",
+    "Movements"
+  ],
+  "activity_outside_property_other_joinery_and_finishes_main_screen": [
+    "Other Joinery and Finishes",
+    "Repairs",
+    "Not inspected"
+  ],
+  "activity_outside_property_other_joinery_and_finishes_repairs": [
+    "Item",
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_other_main_screen": [
+    "Other Area",
+    "Repairs",
+    "Not inspected"
+  ],
+  "activity_outside_property_other_other_external": [
+    "Construction"
+  ],
+  "activity_outside_property_other_other_wall": [
+    "Construction"
+  ],
+  "activity_outside_property_other_repairs": [
+    "Wall",
+    "Roof",
+    "Floor",
+    "Drains",
+    "Steps landing",
+    "Perished Decorations",
+    "Hand rails"
+  ],
+  "activity_outside_property_other_repairs_decorations": [
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_other_repairs_drains": [
+    "Defect"
+  ],
+  "activity_outside_property_other_repairs_floor": [
+    "Defect"
+  ],
+  "activity_outside_property_other_repairs_hand_rails": [
+    "Handrail defect",
+    "Handrail to balcony"
+  ],
+  "activity_outside_property_other_repairs_roof": [
+    "Defect"
+  ],
+  "activity_outside_property_other_repairs_steps_landing": [
+    "Defect"
+  ],
+  "activity_outside_property_other_repairs_wall": [
+    "Defect"
+  ],
+  "activity_outside_property_outside_door": [
+    "About outSide doors",
+    "Safety glass rating",
+    "Security Offered",
+    "Sill projection",
+    "Wall sealing",
+    "Movements"
+  ],
+  "activity_outside_property_outside_doors_main_screen": [
+    "Outside doors",
+    "Repairs"
+  ],
+  "activity_outside_property_out_side_doors_about_doors": [
+    "Door location",
+    "Type",
+    "Glazzing"
+  ],
+  "activity_outside_property_out_side_doors_repairs": [
+    "Repair outSide doors",
+    "Failed glazing location",
+    "Inadequate lock location"
+  ],
+  "activity_outside_property_out_side_doors_repairs_failed_glazing_location": [
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_out_side_doors_repairs_inadequate_lock_location": [
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_rainwater_goods": [
+    "Weather Condition",
+    "About RWG",
+    "Blocked RWG",
+    "Blocked Gullies",
+    "Open Runoffs"
+  ],
+  "activity_outside_property_rainwater_goods_main_screen": [
+    "Rainwater Goods",
+    "Repairs",
+    "Not inspected",
+    "Location could not be viewed from ground level are"
+  ],
+  "activity_outside_property_repair": [
+    "Flashing",
+    "Flaunching",
+    "Chimney Pots",
+    "Re-pointing",
+    "Chimney in Disrepair",
+    "Ariel/Dish"
+  ],
+  "activity_outside_property_repair_chimney_dish_aerial": [
+    "Defect",
+    "Defect"
+  ],
+  "activity_outside_property_repair_chimney_disrepair": [
+    "Condition",
+    "Chimney Stack Location"
+  ],
+  "activity_outside_property_repair_chimney_pots": [
+    "Chimney Stack",
+    "Defect",
+    "Chimney Stack",
+    "Defect"
+  ],
+  "activity_outside_property_repair_chimney_repointing": [
+    "Chimney Stack",
+    "Defect",
+    "Chimney Stack",
+    "Defect"
+  ],
+  "activity_outside_property_repair_flashing": [
+    "Chimney",
+    "Defect",
+    "Chimney",
+    "Defect"
+  ],
+  "activity_outside_property_roof_covering": [
+    "Weather",
+    "About the Roof",
+    "Condition",
+    "Roof Flashing With Wall",
+    "Ridge Tiles",
+    "Hip Tiles",
+    "Parapet Wall",
+    "Deflection",
+    "Contain Asbestos",
+    "Undulating/Uneven Roof"
+  ],
+  "activity_outside_property_roof_covering_main_screen": [
+    "Roof Covering",
+    "Repairs",
+    "Location could not be viewed from ground level are",
+    "Not Inspected"
+  ],
+  "activity_outside_property_roof_not_inspected": [
+    "Location"
+  ],
+  "activity_outside_property_roof_repairs": [
+    "Repair Tiles",
+    "Poor Roof Condition",
+    "Roof Spreading",
+    "Flat Roof Repair",
+    "Parapet Wall Repair",
+    "Verge Repair",
+    "Valley Gutter Repair"
+  ],
+  "activity_outside_property_roof_repair_parapet_wall": [
+    "Defective part",
+    "Location",
+    "Defect",
+    "Defective part",
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_roof_repair_tiles": [
+    "Type Of Tiles",
+    "Defects - Many tiles",
+    "Type Of Tiles",
+    "Defects - Many tiles"
+  ],
+  "activity_outside_property_roof_repair_valley_gutters": [
+    "Location",
+    "Status",
+    "Defect"
+  ],
+  "activity_outside_property_roof_repair_verge": [
+    "Defective part",
+    "Defect",
+    "Particular",
+    "Defect"
+  ],
+  "activity_outside_property_roof_spreading_repair": [
+    "Does the roof timber structure require strengthening?"
+  ],
+  "activity_outside_property_rwg_about": [
+    "Type"
+  ],
+  "activity_outside_property_rwg__repair_pipes_gutters": [
+    "Item",
+    "Defect",
+    "Item",
+    "Defect"
+  ],
+  "activity_outside_property_shared_chimney": [
+    "Location"
+  ],
+  "activity_outside_property_water_proofing": [
+    "Flashing",
+    "Flaunching"
+  ],
+  "activity_outside_property_windows": [
+    "About windows",
+    "Safety glass rating",
+    "Velux window",
+    "Sill Projection/Wall Sealing",
+    "Wall sealing",
+    "Movements"
+  ],
+  "activity_outside_property_windows_aboutwindow": [
+    "Type",
+    "Glazing"
+  ],
+  "activity_outside_property_windows_main_screen": [
+    "Windows",
+    "Repairs",
+    "Not inspected"
+  ],
+  "activity_outside_property_windows_repairs": [
+    "Repair window",
+    "Failed glazing location",
+    "No fire escape window"
+  ],
+  "activity_outside_property_windows_repairs_failed_glazing_location": [
+    "Location",
+    "Select property for many failed glazing"
+  ],
+  "activity_outside_property_windows_repairs_no_fire_escape_risk": [
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_windows_repairs_repair_window": [
+    "How Many",
+    "Location",
+    "Defect"
+  ],
+  "activity_outside_property_windows_velux_window": [
+    "Location",
+    "Type",
+    "Glazzing",
+    "No.Of velux windows",
+    "Location",
+    "Type",
+    "Glazzing"
+  ],
+  "activity_out_side_property_about_the_door_diffrent": [
+    "Pitched",
+    "Flat",
+    "Mansard",
+    "Other"
+  ],
+  "activity_out_side_property_conservatory_and_porch_diffrent": [
+    "Conservatory",
+    "Porches"
+  ],
+  "activity_out_side_property_main_wall_about_the_wall_diffrent": [
+    "Solid brick wall",
+    "Cavity brick wall",
+    "Cavity block wall",
+    "Cavity stud wall",
+    "Other"
+  ],
+  "activity_out_side_property_main_wall_lintel_diffrent": [
+    "Windows",
+    "Door",
+    "Cavity block wall",
+    "Cavity stud wall",
+    "Other"
+  ],
+  "activity_out_side_property_other_diffrent": [
+    "Carport",
+    "Porch Canopy",
+    "Roof Terrace",
+    "Balcony",
+    "Juliet Balcony",
+    "External Stairs",
+    "Other"
+  ],
+  "activity_out_side_property_other_repair_diffrent": [
+    "Carport",
+    "Porch Canopy",
+    "Roof Terrace",
+    "Balcony",
+    "Juliet Balcony",
+    "External Stairs",
+    "Other"
+  ],
+  "activity_out_side_property_out_side_door_diffrent": [
+    "PVC",
+    "Timber",
+    "Steel",
+    "Aluminium",
+    "Other"
+  ],
+  "activity_out_side_property_out_side_door_repair_diffrent": [
+    "Main Door",
+    "Rear Door",
+    "Side Door",
+    "Patio Door",
+    "Garage Door",
+    "Other Door"
+  ],
+  "activity_out_side_property_repair_chimney_aerial_dish_diffrent": [
+    "Aerial",
+    "Satellite"
+  ],
+  "activity_over_all_openion": [
+    "Reasonable proposition for purchase at a price"
+  ],
+  "activity_parking": [
+    "Type"
+  ],
+  "activity_pid_ceilings": [
+    "Ceilings"
+  ],
+  "activity_pid_chimney_breasts": [
+    "Chimney Breasts"
+  ],
+  "activity_pid_chimney_stacks": [
+    "Chimney Stacks"
+  ],
+  "activity_pid_decorations": [
+    "Decorations"
+  ],
+  "activity_pid_decorations_ext": [
+    "Decorations Ext"
+  ],
+  "activity_pid_drainage": [
+    "Drainage"
+  ],
+  "activity_pid_elctric": [
+    "Material",
+    "Age"
+  ],
+  "activity_pid_external_joinery": [
+    "External Joinery"
+  ],
+  "activity_pid_flashings": [
+    "Flashings"
+  ],
+  "activity_pid_ground_floor_inc_carpet": [
+    "Ground floor",
+    "Upper floor"
+  ],
+  "activity_pid_hot_water": [
+    "Hot Water and Central Heating"
+  ],
+  "activity_pid_internal_fittings": [
+    "Internal Fittings"
+  ],
+  "activity_pid_pitched_roof": [
+    "Pitched Roof"
+  ],
+  "activity_pid_rainwater_goods": [
+    "Rain Water Goods"
+  ],
+  "activity_pid_roof": [
+    "Material",
+    "Limitations"
+  ],
+  "activity_pid_timber_defects": [
+    "Timber Defects"
+  ],
+  "activity_pid_upper_floor_inc_carpet": [
+    "Ground Floor Inc Carpet"
+  ],
+  "activity_pid_walls_internal": [
+    "Walls"
+  ],
+  "activity_pid_wall_type_external": [
+    "Wall Type External"
+  ],
+  "activity_property_extended": [
+    "Ex.Location"
+  ],
+  "activity_property_ground_area": [
+    "Area"
+  ],
+  "activity_property_istablish_in": [
+    "Garden",
+    "Parking"
+  ],
+  "activity_property_is_noisy_area": [
+    "Status"
+  ],
+  "activity_property_local_environment": [
+    "Flooding",
+    "EMF"
+  ],
+  "activity_property_location": [
+    "Established Area",
+    "Location Density"
+  ],
+  "activity_property_roof": [
+    "Roof Type",
+    "Built With",
+    "Roof Material",
+    "Cover Type"
+  ],
+  "activity_public_instruction": [
+    "Special Instructions"
+  ],
+  "activity_rear_garden": [
+    "Type",
+    "Boundary Fencing"
+  ],
+  "activity_registration": [
+    "Login Here"
+  ],
+  "activity_risks_": [
+    "J1 Risk To Building",
+    "J4 Other"
+  ],
+  "activity_risks_other_": [
+    "Proximity"
+  ],
+  "activity_risks_risk_to_building_": [
+    "Movements",
+    "Subsidence",
+    "Location",
+    "Dampness",
+    "Timber Defect"
+  ],
+  "activity_road": [
+    "Type"
+  ],
+  "activity_services_drainage": [
+    "Drainage chamber inspection",
+    "Soil and Vent",
+    "Location",
+    "Visible Only",
+    "Made Of"
+  ],
+  "activity_services_drainage_main_screen": [
+    "Drainage",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_services_drainage_repair_chamber_pipes": [
+    "Defect"
+  ],
+  "activity_services_drainage_repair_chamber_walls": [
+    "Defect"
+  ],
+  "activity_services_drainage_repair_gullies": [
+    "Defect"
+  ],
+  "activity_services_drainage_repair_main_screen": [
+    "Chamber Cover",
+    "Chamber Walls",
+    "Chamber Pipes",
+    "Soil and Vent",
+    "Roots In Chamber",
+    "Gullies",
+    "Defects causing dampness"
+  ],
+  "activity_services_drainage_repair_soil_and_vent": [
+    "Defect"
+  ],
+  "activity_services_electricity": [
+    "Mains Electricity",
+    "Solar Power"
+  ],
+  "activity_services_electricity_main_screen": [
+    "Electricity",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_services_electricity_repair_electrical_hazard": [
+    "Electrical system is below current standards because of"
+  ],
+  "activity_services_electricity_repair_main_screen": [
+    "Loose solar panels",
+    "Electrical Hazard"
+  ],
+  "activity_services_gas_oil": [
+    "Mains Gas",
+    "Oil"
+  ],
+  "activity_services_gas_oil_main_screen": [
+    "Gas and Oil",
+    "Repairs",
+    "No.of pots",
+    "Rendering",
+    "Waterproofing",
+    "Condition",
+    "Shared Chimney",
+    "Leaning Chimney",
+    "Other Joinery finishes",
+    "Other",
+    "Not Inspected"
+  ],
+  "activity_services_gas_oil_repair_gas_meter": [
+    "Defect"
+  ],
+  "activity_services_gas_oil_repair_main_screen": [
+    "Gas Meter Repair",
+    "Oil Storage Tank and Pipework Repair"
+  ],
+  "activity_services_gas_oil_repair_storage_tank_pipework": [
+    "Item",
+    "Defect"
+  ],
+  "activity_services_heating_about_heating": [
+    "Other Heating",
+    "Property heated by",
+    "Boiler Flue Connected To"
+  ],
+  "activity_services_heating_main_screen": [
+    "Heating",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_services_heating_other_heating": [
+    "Heaters"
+  ],
+  "activity_services_heating_repair_main_screen": [
+    "Item",
+    "Location"
+  ],
+  "activity_services_main_gas": [
+    "Mains Gas Meter and Control valve location"
+  ],
+  "activity_services_other_services_main_screen": [
+    "Common Services",
+    "Not Inspected"
+  ],
+  "activity_services_shared_services": [
+    "Common Services"
+  ],
+  "activity_services_solar_power": [
+    "Photovoltaic Panels Installed Location",
+    "Battery Location"
+  ],
+  "activity_services_solar_power_main_screen": [
+    "Door",
+    "Windows",
+    "Door Glazing",
+    "Window Glazing",
+    "Roof Glazing",
+    "Floor",
+    "Walls",
+    "Rainwater Goods"
+  ],
+  "activity_services_water": [
+    "Main Water",
+    "Disused water tank",
+    "Water Tank",
+    "Insulation"
+  ],
+  "activity_services_water_heating": [
+    "Communal Hot Water",
+    "Gas water heating",
+    "Electric water heating",
+    "Solar water heating",
+    "Cylinder insulation"
+  ],
+  "activity_services_water_heating_electric_heating": [
+    "Electric immersion heater cylinder location"
+  ],
+  "activity_services_water_heating_gas_heating": [
+    "Water Storage Cylinder Located In"
+  ],
+  "activity_services_water_heating_main_screen": [
+    "Water Heating",
+    "Repairs",
+    "Not Inspected"
+  ],
+  "activity_services_water_heating_repair_main_screen": [
+    "Leaking Cylinder",
+    "Loose solar panels"
+  ],
+  "activity_services_water_main_screen": [
+    "Water",
+    "Not Inspected"
+  ],
+  "activity_services_water_repair_asbestos": [
+    "Defect"
+  ],
+  "activity_services_water_repair_cover_screen": [
+    "Defect"
+  ],
+  "activity_services_water_repair_main_screen": [
+    "Water Tank Defects"
+  ],
+  "activity_services_water_repair_water_tank_screen": [
+    "Defect"
+  ],
+  "activity_services_water_water_tank": [
+    "Cold Water Tank Location",
+    "Cold Water Tank Material"
+  ],
+  "activity_service_about_electricity": [
+    "Main Electricity",
+    "Meter Location",
+    "Fuse",
+    "Fuse Box Location",
+    "Defect"
+  ],
+  "activity_valuation_inspection_dashboard": [
+    "Start Inspection",
+    "Pause Inspection",
+    "Reset Inspection",
+    "Generate Report"
+  ],
+  "activity_valuation_in_side_property": [
+    "Internal Walls",
+    "Windows",
+    "Ceilings",
+    "Upper floors Inc Carpet",
+    "Chimney Breasts",
+    "Internal Fittings",
+    "Internal Decorations",
+    "Damp",
+    "Timber Defects",
+    "Electricity",
+    "Chimney Stack",
+    "Flashing",
+    "Rain Water Goods",
+    "Main Walls",
+    "Wall Tie Corrosion",
+    "Damp Proof Course",
+    "Sub Floor Vents",
+    "External Decorations",
+    "Garage",
+    "Outbuildings",
+    "Site/Boundries",
+    "Gas Supply",
+    "Water Supply",
+    "Hot Water / Central Heating",
+    "Drainage",
+    "Smoke Detectors"
+  ],
+  "activity_valuation_out_side_property": [
+    "Flashing",
+    "Rain Water Goods",
+    "Chimney Stack",
+    "Main Walls",
+    "Wall Tie Corrosion",
+    "Ceilings",
+    "Internal Walls",
+    "Floor",
+    "Damp Proof Course",
+    "Upper floors Inc Carpet",
+    "Chimney Breasts",
+    "Damp",
+    "Timber Defects",
+    "Internal Fittings",
+    "Internal Decorations",
+    "Sub Floor Vents",
+    "Windows",
+    "External Decorations",
+    "Garage",
+    "Outbuildings",
+    "Site/Boundries",
+    "Electricity",
+    "Water Supply",
+    "Gas Supply",
+    "Hot Water / Central Heating",
+    "Drainage",
+    "Smoke Detectors"
+  ]
+}

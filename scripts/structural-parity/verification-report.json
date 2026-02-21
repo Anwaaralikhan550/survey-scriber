@@ -1,0 +1,53 @@
+{
+  "timestamp": "2026-02-14T05:07:48.263Z",
+  "passed": true,
+  "summary": {
+    "totalDiscrepancies": 1184,
+    "autoFixable": 0,
+    "manualReview": 1184,
+    "matchedScreens": 311,
+    "nativeOnlyScreens": 88,
+    "v2OnlyScreens": 184
+  },
+  "checkBreakdown": {
+    "Field count mismatch": {
+      "total": 225,
+      "autoFixable": 0
+    },
+    "Field order mismatch": {
+      "total": 0,
+      "autoFixable": 0
+    },
+    "Missing section headings": {
+      "total": 0,
+      "autoFixable": 0
+    },
+    "Label text mismatch": {
+      "total": 0,
+      "autoFixable": 0
+    },
+    "Dropdown option mismatch": {
+      "total": 0,
+      "autoFixable": 0
+    },
+    "Missing/wrong conditionals": {
+      "total": 288,
+      "autoFixable": 0
+    },
+    "Missing/extra field IDs": {
+      "total": 671,
+      "autoFixable": 0
+    }
+  },
+  "sectionBreakdown": {
+    "D": 166,
+    "H": 78,
+    "F": 322,
+    "I": 11,
+    "R": 2,
+    "E": 474,
+    "A": 7,
+    "J": 9,
+    "G": 115
+  }
+}

@@ -15,7 +15,7 @@ echo "=========================================="
 echo ""
 
 # Configuration
-PRODUCTION_API_URL="http://192.95.33.150:3000/api/v1"
+PRODUCTION_API_URL="http://148.113.203.250:3000/api/v1"
 
 echo "🔧 Configuration:"
 echo "  API URL: $PRODUCTION_API_URL"

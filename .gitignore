@@ -1,0 +1,93 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio build artifacts
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Android release signing (SECURITY - never commit these!)
+android/key.properties
+android/*.keystore
+android/*.jks
+*.keystore
+*.jks
+
+# Backend environment files (SECURITY - never commit actual secrets!)
+backend/.env
+backend/.env.local
+backend/.env.production
+
+# Claude Code / AI tooling
+.claude/
+.mcp.json
+
+# Playwright MCP / test output
+.playwright-mcp/
+playwright-report/
+test-results/
+
+# Generated web worker files
+web/drift_worker.dart.js
+web/drift_worker.dart.js.deps
+web/drift_worker.dart.js.map
+
+# Windows artifacts
+NUL
+
+# Temporary analysis / audit files (root level only)
+/POST
+/PROJECT_CONTEXT.md
+/discrepancy-report.json
+/discrepancy-report.md
+/parity_audit_*.json
+/parity_patch_log*.json
+/inspection_v2_*.json
+/inspection_d_*.json
+/inspection_d_*.txt
+/admin_v2_*.md
+/admin_v2_*.json
+/d_section_screens.txt
+/push-to-github.sh
+/test_api.ps1
+/seed.spec.ts
+
+# Backend (separate git repo — add as submodule later if needed)
+backend/
+
+# Node modules (for scripts/)
+node_modules/

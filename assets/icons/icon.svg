@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SurveyScriber App Icon - Optimized for launcher use -->
+<!-- Square format with proper safe zone padding for adaptive icons -->
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Background (for non-adaptive icon use) -->
+  <rect width="1024" height="1024" fill="white"/>
+
+  <!-- Safe zone content (centered within 66% of the icon area) -->
+  <g transform="translate(170, 140)">
+
+    <!-- Clipboard Body -->
+    <rect x="96" y="80" width="280" height="352" rx="24" ry="24" fill="#1976D2"/>
+
+    <!-- Subtle gradient overlay -->
+    <defs>
+      <linearGradient id="clipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#1E88E5;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#1565C0;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <rect x="96" y="80" width="280" height="352" rx="24" ry="24" fill="url(#clipGrad)"/>
+
+    <!-- Clipboard Clip Holder -->
+    <rect x="176" y="56" width="120" height="48" rx="8" ry="8" fill="#0D47A1"/>
+
+    <!-- Clipboard Clip Inner -->
+    <rect x="192" y="72" width="88" height="24" rx="6" ry="6" fill="#BBDEFB"/>
+
+    <!-- Survey Lines -->
+    <rect x="136" y="160" width="200" height="16" rx="8" fill="#BBDEFB" fill-opacity="0.9"/>
+    <rect x="136" y="200" width="160" height="16" rx="8" fill="#BBDEFB" fill-opacity="0.7"/>
+    <rect x="136" y="240" width="180" height="16" rx="8" fill="#BBDEFB" fill-opacity="0.5"/>
+
+    <!-- Checkmark Circle -->
+    <circle cx="200" cy="340" r="48" fill="#4CAF50"/>
+
+    <!-- Checkmark -->
+    <path d="M176 340 L192 356 L224 324" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- Pen Element -->
+    <g transform="rotate(-45, 380, 320)">
+      <!-- Pen body -->
+      <rect x="340" y="200" width="40" height="180" rx="6" fill="#42A5F5"/>
+      <!-- Pen tip -->
+      <polygon points="340,380 380,380 360,420" fill="#0D47A1"/>
+      <!-- Pen grip rings -->
+      <rect x="340" y="260" width="40" height="6" rx="2" fill="#0D47A1" fill-opacity="0.3"/>
+      <rect x="340" y="280" width="40" height="6" rx="2" fill="#0D47A1" fill-opacity="0.3"/>
+      <!-- Pen top -->
+      <rect x="340" y="200" width="40" height="20" rx="6" fill="#0D47A1"/>
+    </g>
+
+  </g>
+</svg>

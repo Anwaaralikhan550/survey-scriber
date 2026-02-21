@@ -1,0 +1,902 @@
+[
+  {
+    "screenId": "activity_over_all_openion",
+    "section": "A",
+    "fieldId": "android_material_design_spinner2",
+    "type": "text",
+    "label": "Potential",
+    "options": null,
+    "insertedAt": 2,
+    "conditional": null,
+    "nativeEvidence": "activity_over_all_openion.xml:132"
+  },
+  {
+    "screenId": "activity_construction_floor",
+    "section": "D",
+    "fieldId": "android_material_design_spinner2",
+    "type": "dropdown",
+    "label": "Build With",
+    "options": [
+      "Mainly of",
+      "Of a mixture of"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_construction_floor.xml:71"
+  },
+  {
+    "screenId": "activity_estate_location",
+    "section": "D",
+    "fieldId": "android_material_design_spinner2",
+    "type": "dropdown",
+    "label": "Boundry Fencing",
+    "options": [
+      "Private",
+      "Local authority"
+    ],
+    "insertedAt": 2,
+    "conditional": null,
+    "nativeEvidence": "activity_estate_location.xml:99"
+  },
+  {
+    "screenId": "activity_estate_location",
+    "section": "D",
+    "fieldId": "android_material_design_spinner3",
+    "type": "dropdown",
+    "label": "Type",
+    "options": [
+      "Private",
+      "Local authority"
+    ],
+    "insertedAt": 4,
+    "conditional": null,
+    "nativeEvidence": "activity_estate_location.xml:144"
+  },
+  {
+    "screenId": "activity_estate_location",
+    "section": "D",
+    "fieldId": "android_material_design_spinner4",
+    "type": "dropdown",
+    "label": "Boundry Fencing",
+    "options": [
+      "Private",
+      "Local authority"
+    ],
+    "insertedAt": 6,
+    "conditional": null,
+    "nativeEvidence": "activity_estate_location.xml:177"
+  },
+  {
+    "screenId": "activity_estate_location",
+    "section": "D",
+    "fieldId": "android_material_design_spinner5",
+    "type": "dropdown",
+    "label": "Type",
+    "options": [
+      "Private",
+      "Local authority"
+    ],
+    "insertedAt": 8,
+    "conditional": null,
+    "nativeEvidence": "activity_estate_location.xml:220"
+  },
+  {
+    "screenId": "activity_estate_location",
+    "section": "D",
+    "fieldId": "android_material_design_spinner6",
+    "type": "dropdown",
+    "label": "Boundry Fencing",
+    "options": [
+      "Private",
+      "Local authority"
+    ],
+    "insertedAt": 10,
+    "conditional": null,
+    "nativeEvidence": "activity_estate_location.xml:253"
+  },
+  {
+    "screenId": "activity_gated_community",
+    "section": "D",
+    "fieldId": "android_material_design_spinner",
+    "type": "dropdown",
+    "label": "Type",
+    "options": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "insertedAt": 7,
+    "conditional": null,
+    "nativeEvidence": "activity_gated_community.xml:56"
+  },
+  {
+    "screenId": "activity_gated_community",
+    "section": "D",
+    "fieldId": "android_material_design_spinner2",
+    "type": "dropdown",
+    "label": "Boundry Fencing",
+    "options": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_gated_community.xml:91"
+  },
+  {
+    "screenId": "activity_gated_community",
+    "section": "D",
+    "fieldId": "android_material_design_spinner4",
+    "type": "dropdown",
+    "label": "Boundry Fencing",
+    "options": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "insertedAt": 5,
+    "conditional": null,
+    "nativeEvidence": "activity_gated_community.xml:178"
+  },
+  {
+    "screenId": "activity_gated_community",
+    "section": "D",
+    "fieldId": "android_material_design_spinner5",
+    "type": "dropdown",
+    "label": "Type",
+    "options": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "insertedAt": 7,
+    "conditional": null,
+    "nativeEvidence": "activity_gated_community.xml:221"
+  },
+  {
+    "screenId": "activity_gated_community",
+    "section": "D",
+    "fieldId": "android_material_design_spinner6",
+    "type": "dropdown",
+    "label": "Boundry Fencing",
+    "options": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "insertedAt": 9,
+    "conditional": null,
+    "nativeEvidence": "activity_gated_community.xml:254"
+  },
+  {
+    "screenId": "activity_internal_wall",
+    "section": "D",
+    "fieldId": "android_material_design_spinner",
+    "type": "dropdown",
+    "label": "Partition Type",
+    "options": [
+      "Stud",
+      "Solid",
+      "Lath and plaster",
+      "Other"
+    ],
+    "insertedAt": 6,
+    "conditional": null,
+    "nativeEvidence": "activity_internal_wall.xml:203"
+  },
+  {
+    "screenId": "activity_property_construction",
+    "section": "D",
+    "fieldId": "android_material_design_spinner",
+    "type": "dropdown",
+    "label": "Property Type",
+    "options": [
+      "House",
+      "Flat",
+      "Bungalow",
+      "Other"
+    ],
+    "insertedAt": 10,
+    "conditional": null,
+    "nativeEvidence": "activity_property_construction.xml:252"
+  },
+  {
+    "screenId": "activity_property_roof",
+    "section": "D",
+    "fieldId": "android_material_design_spinner4",
+    "type": "dropdown",
+    "label": "Covered With",
+    "options": [
+      "Factory made trusses",
+      "Traditional cut timber construction",
+      "Other"
+    ],
+    "insertedAt": 23,
+    "conditional": null,
+    "nativeEvidence": "activity_property_roof.xml:787"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "etFrontTypeOther",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:75"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "android_material_design_spinner2",
+    "type": "dropdown",
+    "label": "Boundry Fencing",
+    "options": [
+      "Level",
+      "Sloppy",
+      "Hilly",
+      "Other"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:99"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "etFrontFencingOther",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:110"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "android_material_design_spinner3",
+    "type": "dropdown",
+    "label": "Type",
+    "options": [
+      "Level",
+      "Sloppy",
+      "Hilly",
+      "Other"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:144"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "etRearTypeOther",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:154"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "android_material_design_spinner4",
+    "type": "dropdown",
+    "label": "Boundry Fencing",
+    "options": [
+      "Level",
+      "Sloppy",
+      "Hilly",
+      "Other"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:177"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "etRearFencingOther",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:187"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "android_material_design_spinner5",
+    "type": "dropdown",
+    "label": "Type",
+    "options": [
+      "Level",
+      "Sloppy",
+      "Hilly",
+      "Other"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:220"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "etCommunalTypeOther",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:230"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "android_material_design_spinner6",
+    "type": "dropdown",
+    "label": "Boundry Fencing",
+    "options": [
+      "Level",
+      "Sloppy",
+      "Hilly",
+      "Other"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:253"
+  },
+  {
+    "screenId": "activity_topography",
+    "section": "D",
+    "fieldId": "etCommunalFencingOther",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_topography.xml:264"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_not_inspected",
+    "section": "E",
+    "fieldId": "actv_not_inspected_reason",
+    "type": "dropdown",
+    "label": "Not inspected reason",
+    "options": [
+      "Not applicable",
+      "Partial view",
+      "Removed chimney stack(s)",
+      "Removed pots"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_chimney_not_inspected.xml:250"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_not_inspected",
+    "section": "E",
+    "fieldId": "cb_other_326",
+    "type": "checkbox",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_chimney_not_inspected.xml:366"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_partial_view",
+    "section": "E",
+    "fieldId": "actv_not_inspected_reason",
+    "type": "dropdown",
+    "label": "Not inspected reason",
+    "options": [
+      "Not applicable",
+      "Partial view",
+      "Removed chimney stack(s)",
+      "Removed pots"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_chimney_partial_view.xml:250"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_partial_view",
+    "section": "E",
+    "fieldId": "cb_other_326",
+    "type": "checkbox",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_chimney_partial_view.xml:366"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_removed_chimney_stack",
+    "section": "E",
+    "fieldId": "actv_not_inspected_reason",
+    "type": "dropdown",
+    "label": "Not inspected reason",
+    "options": [
+      "Not applicable",
+      "Partial view",
+      "Removed chimney stack(s)",
+      "Removed pots"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_chimney_removed_chimney_stack.xml:250"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_removed_chimney_stack",
+    "section": "E",
+    "fieldId": "cb_other_326",
+    "type": "checkbox",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_chimney_removed_chimney_stack.xml:366"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_removed_pots",
+    "section": "E",
+    "fieldId": "actv_not_inspected_reason",
+    "type": "dropdown",
+    "label": "Not inspected reason",
+    "options": [
+      "Not applicable",
+      "Partial view",
+      "Removed chimney stack(s)",
+      "Removed pots"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_chimney_removed_pots.xml:250"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_removed_pots",
+    "section": "E",
+    "fieldId": "cb_other_326",
+    "type": "checkbox",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_chimney_removed_pots.xml:366"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_not_inspected",
+    "section": "E",
+    "fieldId": "actv_assumed_type",
+    "type": "text",
+    "label": "Assumed Type",
+    "options": null,
+    "insertedAt": 4,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_conservatory_porch_not_inspected.xml:122"
+  },
+  {
+    "screenId": "activity_outside_property_other_about_joinery_and_finishes",
+    "section": "E",
+    "fieldId": "actv_condition",
+    "type": "dropdown",
+    "label": "Condition",
+    "options": [
+      "Reasonable",
+      "Satisfactory",
+      "Unsatisfactory and Poor"
+    ],
+    "insertedAt": 11,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_other_about_joinery_and_finishes.xml:276"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_finishes_not_inspected",
+    "section": "E",
+    "fieldId": "actv_assumed_type",
+    "type": "text",
+    "label": "Assumed Type",
+    "options": null,
+    "insertedAt": 3,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_other_joinery_finishes_not_inspected.xml:100"
+  },
+  {
+    "screenId": "activity_outside_property_other_not_inspected",
+    "section": "E",
+    "fieldId": "cb_other_601",
+    "type": "checkbox",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 2,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_other_not_inspected.xml:169"
+  },
+  {
+    "screenId": "activity_outside_property_other_not_inspected",
+    "section": "E",
+    "fieldId": "actv_assumed_type",
+    "type": "text",
+    "label": "Assumed Type",
+    "options": null,
+    "insertedAt": 4,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_other_not_inspected.xml:190"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "section": "E",
+    "fieldId": "cb_other_601",
+    "type": "checkbox",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_rainwater_goods_main_screen.xml:339"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "section": "E",
+    "fieldId": "actv_assumed_type",
+    "type": "text",
+    "label": "Assumed Type",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_rainwater_goods_main_screen.xml:360"
+  },
+  {
+    "screenId": "activity_outside_property_repair_chimney_dish_aerial",
+    "section": "E",
+    "fieldId": "actv_type",
+    "type": "dropdown",
+    "label": "Type",
+    "options": [
+      "Aerial",
+      "Satellite"
+    ],
+    "insertedAt": 12,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_repair_chimney_dish_aerial.xml:37"
+  },
+  {
+    "screenId": "activity_outside_property_windows_safety_glass_rating",
+    "section": "E",
+    "fieldId": "actv_condition",
+    "type": "dropdown",
+    "label": "Condition",
+    "options": [
+      "Noted",
+      "No SG Rating"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_outside_property_windows_safety_glass_rating.xml:53"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "section": "F",
+    "fieldId": "actv_status_new",
+    "type": "dropdown",
+    "label": "Condensation found?",
+    "options": [
+      "Condensation noted",
+      "No condensation"
+    ],
+    "insertedAt": 18,
+    "conditional": null,
+    "nativeEvidence": "activity_in_side_property_bathroom_fittings_extractor_fan.xml:237"
+  },
+  {
+    "screenId": "activity_in_side_property_built_in_fittings_repair_moulding_noted",
+    "section": "F",
+    "fieldId": "actv_location",
+    "type": "dropdown",
+    "label": "Location",
+    "options": [
+      "kitchen sink",
+      "other"
+    ],
+    "insertedAt": 4,
+    "conditional": null,
+    "nativeEvidence": "activity_in_side_property_built_in_fittings_repair_moulding_noted.xml:35"
+  },
+  {
+    "screenId": "activity_in_side_property_built_in_fittings_repair_water_seepage",
+    "section": "F",
+    "fieldId": "actv_location",
+    "type": "dropdown",
+    "label": "Location",
+    "options": [
+      "kitchen sink",
+      "other"
+    ],
+    "insertedAt": 5,
+    "conditional": null,
+    "nativeEvidence": "activity_in_side_property_built_in_fittings_repair_water_seepage.xml:35"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places",
+    "section": "F",
+    "fieldId": "other",
+    "type": "text",
+    "label": "Other Type",
+    "options": null,
+    "insertedAt": 8,
+    "conditional": null,
+    "nativeEvidence": "activity_in_side_property_fire_places.xml:33"
+  },
+  {
+    "screenId": "activity_in_side_property_floors_tiles",
+    "section": "F",
+    "fieldId": "actv_status",
+    "type": "dropdown",
+    "label": "Status",
+    "options": [
+      "Ok",
+      "Cracked"
+    ],
+    "insertedAt": 8,
+    "conditional": null,
+    "nativeEvidence": "activity_in_side_property_floors_tiles.xml:227"
+  },
+  {
+    "screenId": "activity_in_side_property_wap_dampness",
+    "section": "F",
+    "fieldId": "cb_Property",
+    "type": "checkbox",
+    "label": "Status",
+    "options": null,
+    "insertedAt": 10,
+    "conditional": null,
+    "nativeEvidence": "activity_in_side_property_wap_dampness.xml:44"
+  },
+  {
+    "screenId": "activity_in_side_property_wap_dampness",
+    "section": "F",
+    "fieldId": "actv_status",
+    "type": "dropdown",
+    "label": "Status",
+    "options": [
+      "None",
+      "Present"
+    ],
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_in_side_property_wap_dampness.xml:73"
+  },
+  {
+    "screenId": "activity_in_side_property_wood_work_door_sampling",
+    "section": "F",
+    "fieldId": "actv_condition",
+    "type": "dropdown",
+    "label": "Condition",
+    "options": [
+      "Reasonable",
+      "Satisfactory",
+      "Unsatisfactory and Poor"
+    ],
+    "insertedAt": 13,
+    "conditional": null,
+    "nativeEvidence": "activity_in_side_property_wood_work_door_sampling.xml:35"
+  },
+  {
+    "screenId": "activity_in_side_property_wood_work_second",
+    "section": "F",
+    "fieldId": "actv_condition",
+    "type": "dropdown",
+    "label": "Condition",
+    "options": [
+      "Reasonable",
+      "Satisfactory",
+      "Unsatisfactory and Poor"
+    ],
+    "insertedAt": 10,
+    "conditional": null,
+    "nativeEvidence": "activity_in_side_property_wood_work_second.xml:270"
+  },
+  {
+    "screenId": "activity_inside_property_about_roof_structure",
+    "section": "F",
+    "fieldId": "actv_cause",
+    "type": "dropdown",
+    "label": "Damp Cause",
+    "options": [
+      "Reasonable",
+      "Satisfactory",
+      "Unsatisfactory and Poor"
+    ],
+    "insertedAt": 20,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_about_roof_structure.xml:535"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_heavy_paper_lining",
+    "section": "F",
+    "fieldId": "et_other_691",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_ceilings_heavy_paper_lining.xml:189"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_heavy_paper_lining",
+    "section": "F",
+    "fieldId": "actv_assumed_type",
+    "type": "text",
+    "label": "Assumed Type",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_ceilings_heavy_paper_lining.xml:202"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_not_inspected",
+    "section": "F",
+    "fieldId": "et_other_691",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_ceilings_not_inspected.xml:189"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_not_inspected",
+    "section": "F",
+    "fieldId": "actv_assumed_type",
+    "type": "text",
+    "label": "Assumed Type",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_ceilings_not_inspected.xml:202"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_polystyrene",
+    "section": "F",
+    "fieldId": "cb_other_601",
+    "type": "checkbox",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_ceilings_polystyrene.xml:175"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_polystyrene",
+    "section": "F",
+    "fieldId": "actv_assumed_type",
+    "type": "text",
+    "label": "Assumed Type",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_ceilings_polystyrene.xml:197"
+  },
+  {
+    "screenId": "activity_inside_property_limitation",
+    "section": "F",
+    "fieldId": "etGroundTypeOther",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 6,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_limitation.xml:335"
+  },
+  {
+    "screenId": "activity_inside_property_other_celler_not_habitable",
+    "section": "F",
+    "fieldId": "actv_should_not_use_because_of",
+    "type": "dropdown",
+    "label": "Should Not Use Because Of",
+    "options": [
+      "the ceiling is too low",
+      "it is damp",
+      "access is difficult",
+      "of poor ventilation",
+      "Other"
+    ],
+    "insertedAt": 6,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_other_celler_not_habitable.xml:35"
+  },
+  {
+    "screenId": "activity_inside_property_other_not_inspected",
+    "section": "F",
+    "fieldId": "et_other_691",
+    "type": "text",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_other_not_inspected.xml:95"
+  },
+  {
+    "screenId": "activity_inside_property_other_not_inspected",
+    "section": "F",
+    "fieldId": "actv_assumed_type",
+    "type": "text",
+    "label": "Assumed Type",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_other_not_inspected.xml:108"
+  },
+  {
+    "screenId": "activity_inside_property_wap_not_inspected",
+    "section": "F",
+    "fieldId": "cb_other_601",
+    "type": "checkbox",
+    "label": "Other",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_wap_not_inspected.xml:175"
+  },
+  {
+    "screenId": "activity_inside_property_wap_not_inspected",
+    "section": "F",
+    "fieldId": "actv_assumed_type",
+    "type": "text",
+    "label": "Assumed Type",
+    "options": null,
+    "insertedAt": 1,
+    "conditional": null,
+    "nativeEvidence": "activity_inside_property_wap_not_inspected.xml:197"
+  },
+  {
+    "screenId": "activity_issues_glazed_sections",
+    "section": "I",
+    "fieldId": "actv_condition",
+    "type": "dropdown",
+    "label": "Condition",
+    "options": [
+      "Satisfactory",
+      "Poor"
+    ],
+    "insertedAt": 8,
+    "conditional": null,
+    "nativeEvidence": "activity_issues_glazed_sections.xml:252"
+  },
+  {
+    "screenId": "activity_no_of_rooms",
+    "section": "R",
+    "fieldId": "ar_etAddressLine2",
+    "type": "text",
+    "label": "Address Line 2",
+    "options": null,
+    "insertedAt": 3,
+    "conditional": null,
+    "nativeEvidence": "activity_no_of_rooms.xml:88"
+  }
+]

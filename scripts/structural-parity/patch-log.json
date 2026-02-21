@@ -1,0 +1,554 @@
+[
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_gated_community",
+    "oldOrder": [
+      "etFrontTypeOther",
+      "android_material_design_spinner2",
+      "etFrontFencingOther",
+      "android_material_design_spinner3",
+      "etRearTypeOther",
+      "android_material_design_spinner4",
+      "etRearFencingOther",
+      "android_material_design_spinner5",
+      "etCommunalTypeOther",
+      "android_material_design_spinner6",
+      "etCommunalFencingOther",
+      "android_material_design_spinner"
+    ],
+    "newOrder": [
+      "android_material_design_spinner",
+      "etFrontTypeOther",
+      "android_material_design_spinner2",
+      "etFrontFencingOther",
+      "android_material_design_spinner3",
+      "etRearTypeOther",
+      "android_material_design_spinner4",
+      "etRearFencingOther",
+      "android_material_design_spinner5",
+      "etCommunalTypeOther",
+      "android_material_design_spinner6",
+      "etCommunalFencingOther"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_inside_property_ceilings_heavy_paper_lining",
+    "oldOrder": [
+      "cb_not_inspected",
+      "actv_assumed_type",
+      "et_other_691"
+    ],
+    "newOrder": [
+      "cb_not_inspected",
+      "et_other_691",
+      "actv_assumed_type"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_inside_property_ceilings_not_inspected",
+    "oldOrder": [
+      "cb_not_inspected",
+      "actv_assumed_type",
+      "et_other_691"
+    ],
+    "newOrder": [
+      "cb_not_inspected",
+      "et_other_691",
+      "actv_assumed_type"
+    ]
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_inside_property_ceilings_polystyrene",
+    "fieldId": "actv_assumed_type",
+    "oldLabel": "Assumed Type",
+    "newLabel": "Other"
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_inside_property_ceilings_polystyrene",
+    "oldOrder": [
+      "cb_not_inspected",
+      "actv_assumed_type",
+      "cb_other_601"
+    ],
+    "newOrder": [
+      "cb_not_inspected",
+      "cb_other_601",
+      "actv_assumed_type"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_inside_property_other_celler_not_habitable",
+    "oldOrder": [
+      "cb_plastic",
+      "cb_cast_iron",
+      "cb_asbestos_cement",
+      "cb_concrete",
+      "cb_other_697",
+      "et_other_427",
+      "actv_should_not_use_because_of"
+    ],
+    "newOrder": [
+      "actv_should_not_use_because_of",
+      "cb_plastic",
+      "cb_cast_iron",
+      "cb_asbestos_cement",
+      "cb_concrete",
+      "cb_other_697",
+      "et_other_427"
+    ]
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_inside_property_other_not_inspected",
+    "fieldId": "actv_assumed_type",
+    "oldLabel": "Assumed Type",
+    "newLabel": "Other"
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_inside_property_other_not_inspected",
+    "oldOrder": [
+      "cb_not_inspected",
+      "actv_assumed_type",
+      "et_other_691"
+    ],
+    "newOrder": [
+      "cb_not_inspected",
+      "et_other_691",
+      "actv_assumed_type"
+    ]
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_inside_property_wap_not_inspected",
+    "fieldId": "actv_assumed_type",
+    "oldLabel": "Assumed Type",
+    "newLabel": "Other"
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_inside_property_wap_not_inspected",
+    "oldOrder": [
+      "cb_not_inspected",
+      "actv_assumed_type",
+      "cb_other_601"
+    ],
+    "newOrder": [
+      "cb_not_inspected",
+      "cb_other_601",
+      "actv_assumed_type"
+    ]
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "fieldId": "actv_status_new",
+    "oldLabel": "Condensation found?",
+    "newLabel": "Other"
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "oldOrder": [
+      "actv_status",
+      "cb_bathroom_56",
+      "cb_shower_room_100",
+      "cb_en_suite_bathroom_101",
+      "cb_en_suite_shower_room_81",
+      "cb_separate_toilet_99",
+      "cb_other_725",
+      "et_other_631",
+      "cb_was_switched_on_and_it_was_35",
+      "cb_were_switched_on_and_were_64",
+      "cb_other_1068",
+      "et_other_297",
+      "cb_was_not_working",
+      "cb_has_blocked_vent",
+      "cb_is_too_small",
+      "cb_has_weak_suction",
+      "cb_other_987",
+      "et_other_368",
+      "actv_status_new"
+    ],
+    "newOrder": [
+      "actv_status_new",
+      "actv_status",
+      "cb_bathroom_56",
+      "cb_shower_room_100",
+      "cb_en_suite_bathroom_101",
+      "cb_en_suite_shower_room_81",
+      "cb_separate_toilet_99",
+      "cb_other_725",
+      "et_other_631",
+      "cb_was_switched_on_and_it_was_35",
+      "cb_were_switched_on_and_were_64",
+      "cb_other_1068",
+      "et_other_297",
+      "cb_was_not_working",
+      "cb_has_blocked_vent",
+      "cb_is_too_small",
+      "cb_has_weak_suction",
+      "cb_other_987",
+      "et_other_368"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_in_side_property_built_in_fittings_repair_moulding_noted",
+    "oldOrder": [
+      "cb_kitchen_sink",
+      "cb_Utility_room_sink",
+      "cb_other_717",
+      "et_other_916",
+      "actv_location"
+    ],
+    "newOrder": [
+      "actv_location",
+      "cb_kitchen_sink",
+      "cb_Utility_room_sink",
+      "cb_other_717",
+      "et_other_916"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_in_side_property_built_in_fittings_repair_water_seepage",
+    "oldOrder": [
+      "cb_kitchen_sink",
+      "cb_Utility_room_sink",
+      "cb_Hidden_parts",
+      "cb_other_717",
+      "et_other_916",
+      "actv_location"
+    ],
+    "newOrder": [
+      "actv_location",
+      "cb_kitchen_sink",
+      "cb_Utility_room_sink",
+      "cb_Hidden_parts",
+      "cb_other_717",
+      "et_other_916"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_in_side_property_fire_places",
+    "oldOrder": [
+      "cb_lounge",
+      "cb_reception",
+      "cb_dining_room",
+      "cb_kitchen",
+      "cb_bedroom",
+      "cb_other_1073",
+      "et_other_405",
+      "actv_condition",
+      "other"
+    ],
+    "newOrder": [
+      "other",
+      "cb_lounge",
+      "cb_reception",
+      "cb_dining_room",
+      "cb_kitchen",
+      "cb_bedroom",
+      "cb_other_1073",
+      "et_other_405",
+      "actv_condition"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_in_side_property_wap_dampness",
+    "oldOrder": [
+      "damp_status",
+      "actv_status",
+      "et_location",
+      "actv_status_91",
+      "cb_blocked_gullies",
+      "cb_leaking_pipes",
+      "cb_defective_rainwater_goods",
+      "cb_bridged_damp_proof_course",
+      "cb_rising_damp",
+      "cb_other",
+      "et_other_839",
+      "cb_Property"
+    ],
+    "newOrder": [
+      "damp_status",
+      "cb_Property",
+      "actv_status",
+      "et_location",
+      "actv_status_91",
+      "cb_blocked_gullies",
+      "cb_leaking_pipes",
+      "cb_defective_rainwater_goods",
+      "cb_bridged_damp_proof_course",
+      "cb_rising_damp",
+      "cb_other",
+      "et_other_839"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_in_side_property_wood_work_door_sampling",
+    "oldOrder": [
+      "cb_lounge",
+      "cb_bedroom",
+      "cb_dining",
+      "cb_kitchen",
+      "cb_other_905",
+      "et_other_689",
+      "cb_damage_29",
+      "cb_poorly_fitted_50",
+      "cb_not_closing_well_53",
+      "cb_poorly_secured_28",
+      "cb_other_443",
+      "et_other_362",
+      "cb_door_not_closing_well",
+      "actv_condition"
+    ],
+    "newOrder": [
+      "actv_condition",
+      "cb_lounge",
+      "cb_bedroom",
+      "cb_dining",
+      "cb_kitchen",
+      "cb_other_905",
+      "et_other_689",
+      "cb_damage_29",
+      "cb_poorly_fitted_50",
+      "cb_not_closing_well_53",
+      "cb_poorly_secured_28",
+      "cb_other_443",
+      "et_other_362",
+      "cb_door_not_closing_well"
+    ]
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_in_side_property_wood_work_second",
+    "fieldId": "actv_condition",
+    "oldLabel": "Condition",
+    "newLabel": "Other"
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_outside_property_chimney_not_inspected",
+    "oldOrder": [
+      "cb_Not_applicable",
+      "cb_other_326",
+      "actv_not_inspected_reason"
+    ],
+    "newOrder": [
+      "cb_Not_applicable",
+      "actv_not_inspected_reason",
+      "cb_other_326"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_outside_property_chimney_partial_view",
+    "oldOrder": [
+      "cb_Partial_view",
+      "cb_other_326",
+      "actv_not_inspected_reason"
+    ],
+    "newOrder": [
+      "cb_Partial_view",
+      "actv_not_inspected_reason",
+      "cb_other_326"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_outside_property_chimney_removed_chimney_stack",
+    "oldOrder": [
+      "cb_Removed_chimney_stack",
+      "cb_other_326",
+      "actv_not_inspected_reason"
+    ],
+    "newOrder": [
+      "cb_Removed_chimney_stack",
+      "actv_not_inspected_reason",
+      "cb_other_326"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_outside_property_chimney_removed_pots",
+    "oldOrder": [
+      "cb_Removed_pots",
+      "cb_other_326",
+      "actv_not_inspected_reason"
+    ],
+    "newOrder": [
+      "cb_Removed_pots",
+      "actv_not_inspected_reason",
+      "cb_other_326"
+    ]
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_outside_property_conservatory_porch_not_inspected",
+    "fieldId": "actv_assumed_type",
+    "oldLabel": "Assumed Type",
+    "newLabel": "Other"
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_outside_property_other_about_joinery_and_finishes",
+    "fieldId": "actv_condition",
+    "oldLabel": "Condition",
+    "newLabel": "Other"
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_outside_property_other_joinery_finishes_not_inspected",
+    "fieldId": "actv_assumed_type",
+    "oldLabel": "Assumed Type",
+    "newLabel": "Other"
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_outside_property_other_not_inspected",
+    "fieldId": "actv_assumed_type",
+    "oldLabel": "Assumed Type",
+    "newLabel": "Other"
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "fieldId": "actv_assumed_type",
+    "oldLabel": "Assumed Type",
+    "newLabel": "Other"
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "oldOrder": [
+      "actv_condition_rating",
+      "actv_assumed_type",
+      "cb_other_601",
+      "ar_etNote"
+    ],
+    "newOrder": [
+      "actv_condition_rating",
+      "cb_other_601",
+      "actv_assumed_type",
+      "ar_etNote"
+    ]
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_outside_property_repair_chimney_dish_aerial",
+    "oldOrder": [
+      "actv_condition",
+      "label_soon_defect",
+      "cb_loose",
+      "cb_rusted",
+      "cb_other_920",
+      "et_other_193",
+      "label_now_defect",
+      "cb_very_loose",
+      "cb_badly_rusted",
+      "cb_other_698",
+      "et_other_633",
+      "cb_is_safety_hazard",
+      "actv_type"
+    ],
+    "newOrder": [
+      "actv_type",
+      "actv_condition",
+      "label_soon_defect",
+      "cb_loose",
+      "cb_rusted",
+      "cb_other_920",
+      "et_other_193",
+      "label_now_defect",
+      "cb_very_loose",
+      "cb_badly_rusted",
+      "cb_other_698",
+      "et_other_633",
+      "cb_is_safety_hazard"
+    ]
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_topography",
+    "fieldId": "etFrontTypeOther",
+    "oldLabel": "Other",
+    "newLabel": "Topography"
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_topography",
+    "fieldId": "etFrontFencingOther",
+    "oldLabel": "Other",
+    "newLabel": "Boundry Fencing"
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_topography",
+    "fieldId": "etRearTypeOther",
+    "oldLabel": "Other",
+    "newLabel": "Type"
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_topography",
+    "fieldId": "etRearFencingOther",
+    "oldLabel": "Other",
+    "newLabel": "Boundry Fencing"
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_topography",
+    "fieldId": "etCommunalTypeOther",
+    "oldLabel": "Other",
+    "newLabel": "Type"
+  },
+  {
+    "type": "fix_label_text",
+    "screenId": "activity_topography",
+    "fieldId": "etCommunalFencingOther",
+    "oldLabel": "Other",
+    "newLabel": "Boundry Fencing"
+  },
+  {
+    "type": "reorder_fields",
+    "screenId": "activity_topography",
+    "oldOrder": [
+      "android_material_design_spinner",
+      "etCommunalFencingOther",
+      "android_material_design_spinner6",
+      "etCommunalTypeOther",
+      "android_material_design_spinner5",
+      "etRearFencingOther",
+      "android_material_design_spinner4",
+      "etRearTypeOther",
+      "android_material_design_spinner3",
+      "etFrontFencingOther",
+      "android_material_design_spinner2",
+      "etFrontTypeOther"
+    ],
+    "newOrder": [
+      "android_material_design_spinner",
+      "etFrontTypeOther",
+      "android_material_design_spinner2",
+      "etFrontFencingOther",
+      "android_material_design_spinner3",
+      "etRearTypeOther",
+      "android_material_design_spinner4",
+      "etRearFencingOther",
+      "android_material_design_spinner5",
+      "etCommunalTypeOther",
+      "android_material_design_spinner6",
+      "etCommunalFencingOther"
+    ]
+  }
+]

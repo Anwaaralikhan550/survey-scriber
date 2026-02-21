@@ -1,0 +1,3426 @@
+[
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "screenTitle": "Extractor Fan Installed",
+    "labelId": "label_fan_location_4",
+    "labelText": "Fan Location",
+    "insertPosition": 36,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_extractor_fan"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "screenTitle": "Extractor Fan Installed",
+    "labelId": "label_fan_location_2",
+    "labelText": "Fan Location",
+    "insertPosition": 29,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_extractor_fan"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "screenTitle": "Extractor Fan Installed",
+    "labelId": "label_fan_location",
+    "labelText": "Fan Location",
+    "insertPosition": 21,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_extractor_fan"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "screenTitle": "Extractor Fan Installed",
+    "labelId": "label_defect_70",
+    "labelText": "Defect",
+    "insertPosition": 13,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_extractor_fan"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "screenTitle": "Extractor Fan Installed",
+    "labelId": "label_tested",
+    "labelText": "Tested",
+    "insertPosition": 9,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_extractor_fan"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "screenTitle": "Extractor Fan Installed",
+    "labelId": "label_fan_location_3",
+    "labelText": "Fan Location",
+    "insertPosition": 2,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_extractor_fan"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_repair",
+    "screenTitle": "Repairs",
+    "labelId": "label_location_50",
+    "labelText": "Location",
+    "insertPosition": 21,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_repair"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_repair",
+    "screenTitle": "Repairs",
+    "labelId": "label_location_49",
+    "labelText": "Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_repair"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_repair_fire_place",
+    "screenTitle": "Repair Fireplaces",
+    "labelId": "label_floor_location_4",
+    "labelText": "Floor Location",
+    "insertPosition": 21,
+    "nativeLayout": "activity_in_side_property_fire_places_repair_fire_place"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_repair_fire_place",
+    "screenTitle": "Repair Fireplaces",
+    "labelId": "label_floor_location_3",
+    "labelText": "Floor Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_fire_places_repair_fire_place"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_window_sills",
+    "screenTitle": "Windows Sills",
+    "labelId": "label_walls_6",
+    "labelText": "Walls",
+    "insertPosition": 18,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_window_sills"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_window_sills",
+    "screenTitle": "Windows Sills",
+    "labelId": "label_walls_5",
+    "labelText": "Walls",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_window_sills"
+  },
+  {
+    "screenId": "activity_outside_property_windows_velux_window",
+    "screenTitle": "Velux window",
+    "labelId": "label_noof_velux_windows",
+    "labelText": "No.Of velux windows",
+    "insertPosition": 14,
+    "nativeLayout": "activity_outside_property_windows_velux_window"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_lintel__door",
+    "screenTitle": "Door",
+    "labelId": "label_defect_72",
+    "labelText": "Defect",
+    "insertPosition": 23,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_lintel"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_lintel__door",
+    "screenTitle": "Door",
+    "labelId": "label_location_52",
+    "labelText": "Location",
+    "insertPosition": 18,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_lintel"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_lintel__door",
+    "screenTitle": "Door",
+    "labelId": "label_walls_8",
+    "labelText": "Walls",
+    "insertPosition": 14,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_lintel"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_lintel__door",
+    "screenTitle": "Door",
+    "labelId": "label_defect_71",
+    "labelText": "Defect",
+    "insertPosition": 9,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_lintel"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_lintel__door",
+    "screenTitle": "Door",
+    "labelId": "label_location_51",
+    "labelText": "Location",
+    "insertPosition": 4,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_lintel"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_lintel__door",
+    "screenTitle": "Door",
+    "labelId": "label_walls_7",
+    "labelText": "Walls",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_lintel"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_render",
+    "screenTitle": "Render",
+    "labelId": "label_walls_10",
+    "labelText": "Walls",
+    "insertPosition": 17,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_render"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_render",
+    "screenTitle": "Render",
+    "labelId": "label_walls_9",
+    "labelText": "Walls",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_render"
+  },
+  {
+    "screenId": "activity_in_side_property_other_repair",
+    "screenTitle": "Repairs",
+    "labelId": "label_the_entry_at_2",
+    "labelText": "The Entry at",
+    "insertPosition": 20,
+    "nativeLayout": "activity_in_side_property_other_repair"
+  },
+  {
+    "screenId": "activity_in_side_property_other_repair",
+    "screenTitle": "Repairs",
+    "labelId": "label_the_entry_at",
+    "labelText": "The Entry at",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_other_repair"
+  },
+  {
+    "screenId": "activity_inside_property_water_tank",
+    "screenTitle": "Water tank",
+    "labelId": "label_remove_defects",
+    "labelText": "Remove Defects",
+    "insertPosition": 16,
+    "nativeLayout": "activity_inside_property_water_tank"
+  },
+  {
+    "screenId": "activity_in_side_property_floors_repair_floor_repair",
+    "screenTitle": "Floor Repair",
+    "labelId": "label_location_54",
+    "labelText": "Location",
+    "insertPosition": 19,
+    "nativeLayout": "activity_in_side_property_floors_repair_floor_repair"
+  },
+  {
+    "screenId": "activity_in_side_property_floors_repair_floor_repair",
+    "screenTitle": "Floor Repair",
+    "labelId": "label_location_53",
+    "labelText": "Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors_repair_floor_repair"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_repair_removed_cb",
+    "screenTitle": "Removed CB",
+    "labelId": "label_floor_location_6",
+    "labelText": "Floor Location",
+    "insertPosition": 14,
+    "nativeLayout": "activity_in_side_property_fire_places_repair_removed_cb"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_repair_removed_cb",
+    "screenTitle": "Removed CB",
+    "labelId": "label_floor_location_5",
+    "labelText": "Floor Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_fire_places_repair_removed_cb"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_pointing",
+    "screenTitle": "Pointing",
+    "labelId": "label_walls_12",
+    "labelText": "Walls",
+    "insertPosition": 16,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_pointing"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_pointing",
+    "screenTitle": "Pointing",
+    "labelId": "label_walls_11",
+    "labelText": "Walls",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_pointing"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_repairs_ceilings",
+    "screenTitle": "Repair Ceilings",
+    "labelId": "label_ceilings_location_2",
+    "labelText": "Ceilings Location",
+    "insertPosition": 16,
+    "nativeLayout": "activity_inside_property_ceilings_repairs_ceilings"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_repairs_ceilings",
+    "screenTitle": "Repair Ceilings",
+    "labelId": "label_ceilings_location",
+    "labelText": "Ceilings Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_ceilings_repairs_ceilings"
+  },
+  {
+    "screenId": "activity_in_side_property_wap_repair_wall_repair",
+    "screenTitle": "Wall Repair",
+    "labelId": "label_location_56",
+    "labelText": "Location",
+    "insertPosition": 16,
+    "nativeLayout": "activity_in_side_property_wap_repair_wall_repair"
+  },
+  {
+    "screenId": "activity_in_side_property_wap_repair_wall_repair",
+    "screenTitle": "Wall Repair",
+    "labelId": "label_location_55",
+    "labelText": "Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_wap_repair_wall_repair"
+  },
+  {
+    "screenId": "activity_grounds_other_front_garden__rear_garden",
+    "screenTitle": "Rear Garden",
+    "labelId": "label_the_garden_is_6",
+    "labelText": "The garden is",
+    "insertPosition": 0,
+    "nativeLayout": "activity_grounds_other_front_garden"
+  },
+  {
+    "screenId": "activity_grounds_other_front_garden__side_garden",
+    "screenTitle": "Side Garden",
+    "labelId": "label_the_garden_is_7",
+    "labelText": "The garden is",
+    "insertPosition": 0,
+    "nativeLayout": "activity_grounds_other_front_garden"
+  },
+  {
+    "screenId": "activity_grounds_other_front_garden__other_garden",
+    "screenTitle": "Other Garden",
+    "labelId": "label_the_garden_is_8",
+    "labelText": "The garden is",
+    "insertPosition": 0,
+    "nativeLayout": "activity_grounds_other_front_garden"
+  },
+  {
+    "screenId": "activity_grounds_other_front_garden__communal_garden",
+    "screenTitle": "Communal Garden",
+    "labelId": "label_the_garden_is_9",
+    "labelText": "The garden is",
+    "insertPosition": 0,
+    "nativeLayout": "activity_grounds_other_front_garden"
+  },
+  {
+    "screenId": "activity_in_side_property_ww_wood_work_repair",
+    "screenTitle": "WoodWork Repair",
+    "labelId": "label_location_58",
+    "labelText": "Location",
+    "insertPosition": 16,
+    "nativeLayout": "activity_in_side_property_ww_wood_work_repair"
+  },
+  {
+    "screenId": "activity_in_side_property_ww_wood_work_repair",
+    "screenTitle": "WoodWork Repair",
+    "labelId": "label_location_57",
+    "labelText": "Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_ww_wood_work_repair"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_movements",
+    "screenTitle": "Movements",
+    "labelId": "label_wall_4",
+    "labelText": "Wall",
+    "insertPosition": 17,
+    "nativeLayout": "activity_outside_property_main_walls_movements"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_movements",
+    "screenTitle": "Movements",
+    "labelId": "label_wall_3",
+    "labelText": "Wall",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_walls_movements"
+  },
+  {
+    "screenId": "activity_outside_property_repair_flashing",
+    "screenTitle": "Flashing",
+    "labelId": "label_defect_74",
+    "labelText": "Defect",
+    "insertPosition": 22,
+    "nativeLayout": "activity_outside_property_repair_flashing"
+  },
+  {
+    "screenId": "activity_outside_property_repair_flashing",
+    "screenTitle": "Flashing",
+    "labelId": "label_defect_73",
+    "labelText": "Defect",
+    "insertPosition": 9,
+    "nativeLayout": "activity_outside_property_repair_flashing"
+  },
+  {
+    "screenId": "activity_outside_property_repair_flashing",
+    "screenTitle": "Flashing",
+    "labelId": "label_flashing_2",
+    "labelText": "Flashing",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_repair_flashing"
+  },
+  {
+    "screenId": "activity_front_garden",
+    "screenTitle": "Front Garden",
+    "labelId": "label_communal_garden_2",
+    "labelText": "Communal Garden",
+    "insertPosition": 25,
+    "nativeLayout": "activity_front_garden"
+  },
+  {
+    "screenId": "activity_front_garden",
+    "screenTitle": "Front Garden",
+    "labelId": "label_rear_garden_2",
+    "labelText": "Rear Garden",
+    "insertPosition": 23,
+    "nativeLayout": "activity_front_garden"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_repair_blocked_fireplace",
+    "screenTitle": "Blocked Fireplace",
+    "labelId": "label_floor_location_8",
+    "labelText": "Floor Location",
+    "insertPosition": 13,
+    "nativeLayout": "activity_in_side_property_fire_places_repair_blocked_fireplace"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_repair_blocked_fireplace",
+    "screenTitle": "Blocked Fireplace",
+    "labelId": "label_floor_location_7",
+    "labelText": "Floor Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places_repair_blocked_fireplace"
+  },
+  {
+    "screenId": "activity_property_roof",
+    "screenTitle": "Roof",
+    "labelId": "label_built_with_2",
+    "labelText": "Built With",
+    "insertPosition": 4,
+    "nativeLayout": "activity_property_roof"
+  },
+  {
+    "screenId": "activity_property_roof",
+    "screenTitle": "Roof",
+    "labelId": "label_roof_type_3",
+    "labelText": "Roof Type",
+    "insertPosition": 2,
+    "nativeLayout": "activity_property_roof"
+  },
+  {
+    "screenId": "activity_communal_garden",
+    "screenTitle": "Communal Garden",
+    "labelId": "label_rear_garden_3",
+    "labelText": "Rear Garden",
+    "insertPosition": 2,
+    "nativeLayout": "activity_communal_garden"
+  },
+  {
+    "screenId": "activity_communal_garden",
+    "screenTitle": "Communal Garden",
+    "labelId": "label_front_garden_2",
+    "labelText": "Front Garden",
+    "insertPosition": 0,
+    "nativeLayout": "activity_communal_garden"
+  },
+  {
+    "screenId": "activity_outside_property_roof_repair_tiles",
+    "screenTitle": "Repair Tiles",
+    "labelId": "label_type_of_tiles_2",
+    "labelText": "Type Of Tiles",
+    "insertPosition": 13,
+    "nativeLayout": "activity_outside_property_roof_repair_tiles"
+  },
+  {
+    "screenId": "activity_outside_property_roof_repair_tiles",
+    "screenTitle": "Repair Tiles",
+    "labelId": "label_type_of_tiles",
+    "labelText": "Type Of Tiles",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_roof_repair_tiles"
+  },
+  {
+    "screenId": "activity_outside_property_roof_repair_verge",
+    "screenTitle": "Verge Repair",
+    "labelId": "label_particular",
+    "labelText": "Particular",
+    "insertPosition": 13,
+    "nativeLayout": "activity_outside_property_roof_repair_verge"
+  },
+  {
+    "screenId": "activity_rear_garden",
+    "screenTitle": "Rear Garden",
+    "labelId": "label_communal_garden_3",
+    "labelText": "Communal Garden",
+    "insertPosition": 23,
+    "nativeLayout": "activity_rear_garden"
+  },
+  {
+    "screenId": "activity_rear_garden",
+    "screenTitle": "Rear Garden",
+    "labelId": "label_front_garden_3",
+    "labelText": "Front Garden",
+    "insertPosition": 0,
+    "nativeLayout": "activity_rear_garden"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout",
+    "screenTitle": "Pitched",
+    "labelId": "label_shape_of_covering_material",
+    "labelText": "Shape of covering material",
+    "insertPosition": 18,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout",
+    "screenTitle": "Pitched",
+    "labelId": "label_material_4",
+    "labelText": "Material",
+    "insertPosition": 6,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout",
+    "screenTitle": "Pitched",
+    "labelId": "label_location_59",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout__flat",
+    "screenTitle": "Flat",
+    "labelId": "label_shape_of_covering_material_2",
+    "labelText": "Shape of covering material",
+    "insertPosition": 18,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout__flat",
+    "screenTitle": "Flat",
+    "labelId": "label_material_5",
+    "labelText": "Material",
+    "insertPosition": 6,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout__flat",
+    "screenTitle": "Flat",
+    "labelId": "label_location_60",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout__mansard",
+    "screenTitle": "Mansard",
+    "labelId": "label_shape_of_covering_material_3",
+    "labelText": "Shape of covering material",
+    "insertPosition": 18,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout__mansard",
+    "screenTitle": "Mansard",
+    "labelId": "label_material_6",
+    "labelText": "Material",
+    "insertPosition": 6,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout__mansard",
+    "screenTitle": "Mansard",
+    "labelId": "label_location_61",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout__other",
+    "screenTitle": "Other",
+    "labelId": "label_shape_of_covering_material_4",
+    "labelText": "Shape of covering material",
+    "insertPosition": 18,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout__other",
+    "screenTitle": "Other",
+    "labelId": "label_material_7",
+    "labelText": "Material",
+    "insertPosition": 6,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "outside_property_about_roof_layout__other",
+    "screenTitle": "Other",
+    "labelId": "label_location_62",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_about_roof_layout"
+  },
+  {
+    "screenId": "activity_in_side_property_built_in_fittings_repair_fittings",
+    "screenTitle": "Repair Fitting",
+    "labelId": "label_location_64",
+    "labelText": "Location",
+    "insertPosition": 11,
+    "nativeLayout": "activity_in_side_property_built_in_fittings_repair_fittings"
+  },
+  {
+    "screenId": "activity_in_side_property_built_in_fittings_repair_fittings",
+    "screenTitle": "Repair Fitting",
+    "labelId": "label_location_63",
+    "labelText": "Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_built_in_fittings_repair_fittings"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall",
+    "screenTitle": "Solid brick wall",
+    "labelId": "label_construction_5",
+    "labelText": "Construction",
+    "insertPosition": 8,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_inside_property_about_roof_structure",
+    "screenTitle": "About Roof structure",
+    "labelId": "label_ventilation",
+    "labelText": "Ventilation",
+    "insertPosition": 18,
+    "nativeLayout": "activity_inside_property_about_roof_structure"
+  },
+  {
+    "screenId": "activity_inside_property_about_roof_structure",
+    "screenTitle": "About Roof structure",
+    "labelId": "label_material_8",
+    "labelText": "Material",
+    "insertPosition": 2,
+    "nativeLayout": "activity_inside_property_about_roof_structure"
+  },
+  {
+    "screenId": "activity_in_side_property_other_communal_area",
+    "screenTitle": "Communal Area",
+    "labelId": "label_property_comprise_of",
+    "labelText": "Property comprise of",
+    "insertPosition": 6,
+    "nativeLayout": "activity_in_side_property_other_communal_area"
+  },
+  {
+    "screenId": "activity_in_side_property_other_communal_area",
+    "screenTitle": "Communal Area",
+    "labelId": "label_not_inspected_because_of",
+    "labelText": "Not Inspected Because Of",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_other_communal_area"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_spalling",
+    "screenTitle": "Spalling",
+    "labelId": "label_walls_14",
+    "labelText": "Walls",
+    "insertPosition": 11,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_spalling"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_spalling",
+    "screenTitle": "Spalling",
+    "labelId": "label_walls_13",
+    "labelText": "Walls",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_spalling"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors",
+    "screenTitle": "PVC",
+    "labelId": "label_type_11",
+    "labelText": "Type",
+    "insertPosition": 10,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_rwg__repair_pipes_gutters",
+    "screenTitle": "Repairs",
+    "labelId": "label_item_4",
+    "labelText": "Item",
+    "insertPosition": 12,
+    "nativeLayout": "activity_outside_property_rwg__repair_pipes_gutters"
+  },
+  {
+    "screenId": "activity_outside_property_rwg__repair_pipes_gutters",
+    "screenTitle": "Repairs",
+    "labelId": "label_item_3",
+    "labelText": "Item",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_rwg__repair_pipes_gutters"
+  },
+  {
+    "screenId": "activity_in_side_property_floors_about_floor",
+    "screenTitle": "About Floors",
+    "labelId": "label_a_mixture_of",
+    "labelText": "A mixture of",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors_about_floor"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__cavity_brick_wall",
+    "screenTitle": "Cavity brick wall",
+    "labelId": "label_finishes_type_3",
+    "labelText": "Finishes type",
+    "insertPosition": 9,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__cavity_brick_wall",
+    "screenTitle": "Cavity brick wall",
+    "labelId": "label_construction_6",
+    "labelText": "Construction",
+    "insertPosition": 4,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__cavity_brick_wall",
+    "screenTitle": "Cavity brick wall",
+    "labelId": "label_wall_5",
+    "labelText": "Wall",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__cavity_block_wall",
+    "screenTitle": "Cavity block wall",
+    "labelId": "label_finishes_type_4",
+    "labelText": "Finishes type",
+    "insertPosition": 9,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__cavity_block_wall",
+    "screenTitle": "Cavity block wall",
+    "labelId": "label_construction_7",
+    "labelText": "Construction",
+    "insertPosition": 4,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__cavity_block_wall",
+    "screenTitle": "Cavity block wall",
+    "labelId": "label_wall_6",
+    "labelText": "Wall",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__cavity_stud_wall",
+    "screenTitle": "Cavity stud wall",
+    "labelId": "label_finishes_type_5",
+    "labelText": "Finishes type",
+    "insertPosition": 9,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__cavity_stud_wall",
+    "screenTitle": "Cavity stud wall",
+    "labelId": "label_construction_8",
+    "labelText": "Construction",
+    "insertPosition": 4,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__cavity_stud_wall",
+    "screenTitle": "Cavity stud wall",
+    "labelId": "label_wall_7",
+    "labelText": "Wall",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__other",
+    "screenTitle": "Other",
+    "labelId": "label_finishes_type_6",
+    "labelText": "Finishes type",
+    "insertPosition": 9,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__other",
+    "screenTitle": "Other",
+    "labelId": "label_construction_9",
+    "labelText": "Construction",
+    "insertPosition": 4,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall__other",
+    "screenTitle": "Other",
+    "labelId": "label_wall_8",
+    "labelText": "Wall",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_walls_about_wall"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_damp",
+    "screenTitle": "DAMP",
+    "labelId": "label_caused_by_3",
+    "labelText": "Caused By",
+    "insertPosition": 12,
+    "nativeLayout": "activity_outside_property_main_walls_damp"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_damp",
+    "screenTitle": "DAMP",
+    "labelId": "label_caused_by_2",
+    "labelText": "Caused By",
+    "insertPosition": 4,
+    "nativeLayout": "activity_outside_property_main_walls_damp"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_repairs__repairs",
+    "screenTitle": "Repairs",
+    "labelId": "label_defect_75",
+    "labelText": "Defect",
+    "insertPosition": 12,
+    "nativeLayout": "activity_outside_property_other_joinery_and_finishes_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_repairs__repairs",
+    "screenTitle": "Repairs",
+    "labelId": "label_location_65",
+    "labelText": "Location",
+    "insertPosition": 6,
+    "nativeLayout": "activity_outside_property_other_joinery_and_finishes_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_repairs__repairs",
+    "screenTitle": "Repairs",
+    "labelId": "label_item_5",
+    "labelText": "Item",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_joinery_and_finishes_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__timber",
+    "screenTitle": "Timber",
+    "labelId": "label_glazzing_6",
+    "labelText": "Glazzing",
+    "insertPosition": 12,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__timber",
+    "screenTitle": "Timber",
+    "labelId": "label_type_12",
+    "labelText": "Type",
+    "insertPosition": 7,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__timber",
+    "screenTitle": "Timber",
+    "labelId": "label_door_location_2",
+    "labelText": "Door location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__steel",
+    "screenTitle": "Steel",
+    "labelId": "label_glazzing_7",
+    "labelText": "Glazzing",
+    "insertPosition": 12,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__steel",
+    "screenTitle": "Steel",
+    "labelId": "label_type_13",
+    "labelText": "Type",
+    "insertPosition": 7,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__steel",
+    "screenTitle": "Steel",
+    "labelId": "label_door_location_3",
+    "labelText": "Door location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__aluminium",
+    "screenTitle": "Aluminium",
+    "labelId": "label_glazzing_8",
+    "labelText": "Glazzing",
+    "insertPosition": 12,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__aluminium",
+    "screenTitle": "Aluminium",
+    "labelId": "label_type_14",
+    "labelText": "Type",
+    "insertPosition": 7,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__aluminium",
+    "screenTitle": "Aluminium",
+    "labelId": "label_door_location_4",
+    "labelText": "Door location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__other",
+    "screenTitle": "Other",
+    "labelId": "label_glazzing_9",
+    "labelText": "Glazzing",
+    "insertPosition": 12,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__other",
+    "screenTitle": "Other",
+    "labelId": "label_type_15",
+    "labelText": "Type",
+    "insertPosition": 7,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors__other",
+    "screenTitle": "Other",
+    "labelId": "label_door_location_5",
+    "labelText": "Door location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_out_side_doors_about_doors"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_spalling__causing_damp",
+    "screenTitle": "Causing damp",
+    "labelId": "label_location_67",
+    "labelText": "Location",
+    "insertPosition": 11,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_spalling"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_spalling__causing_damp",
+    "screenTitle": "Causing damp",
+    "labelId": "label_walls_16",
+    "labelText": "Walls",
+    "insertPosition": 8,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_spalling"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_spalling__causing_damp",
+    "screenTitle": "Causing damp",
+    "labelId": "label_location_66",
+    "labelText": "Location",
+    "insertPosition": 3,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_spalling"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_spalling__causing_damp",
+    "screenTitle": "Causing damp",
+    "labelId": "label_select_repair_now_if_defect_is_causing_damp_4",
+    "labelText": "Select repair now if defect is causing damp.",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_spalling"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_spalling__causing_damp",
+    "screenTitle": "Causing damp",
+    "labelId": "label_walls_15",
+    "labelText": "Walls",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_spalling"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__windows",
+    "screenTitle": "Windows",
+    "labelId": "label_defect_77",
+    "labelText": "Defect",
+    "insertPosition": 8,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__windows",
+    "screenTitle": "Windows",
+    "labelId": "label_defect_76",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__door_glazing",
+    "screenTitle": "Door Glazing",
+    "labelId": "label_defect_79",
+    "labelText": "Defect",
+    "insertPosition": 8,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__door_glazing",
+    "screenTitle": "Door Glazing",
+    "labelId": "label_defect_78",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__window_glazing",
+    "screenTitle": "Window Glazing",
+    "labelId": "label_defect_81",
+    "labelText": "Defect",
+    "insertPosition": 8,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__window_glazing",
+    "screenTitle": "Window Glazing",
+    "labelId": "label_defect_80",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__roof_glazing",
+    "screenTitle": "Roof Glazing",
+    "labelId": "label_defect_83",
+    "labelText": "Defect",
+    "insertPosition": 8,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__roof_glazing",
+    "screenTitle": "Roof Glazing",
+    "labelId": "label_defect_82",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__floor",
+    "screenTitle": "Floor",
+    "labelId": "label_defect_85",
+    "labelText": "Defect",
+    "insertPosition": 8,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__floor",
+    "screenTitle": "Floor",
+    "labelId": "label_defect_84",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__walls",
+    "screenTitle": "Walls",
+    "labelId": "label_defect_87",
+    "labelText": "Defect",
+    "insertPosition": 8,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__walls",
+    "screenTitle": "Walls",
+    "labelId": "label_defect_86",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__rainwater_goods",
+    "screenTitle": "Rainwater Goods",
+    "labelId": "label_defect_89",
+    "labelText": "Defect",
+    "insertPosition": 8,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_repairs__rainwater_goods",
+    "screenTitle": "Rainwater Goods",
+    "labelId": "label_defect_88",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_repairs"
+  },
+  {
+    "screenId": "activity_outside_property_other_communal_area",
+    "screenTitle": "Communal Area",
+    "labelId": "label_because_of",
+    "labelText": "Because Of",
+    "insertPosition": 13,
+    "nativeLayout": "activity_outside_property_other_communal_area"
+  },
+  {
+    "screenId": "activity_in_side_property_floors_repair_uneven_floor",
+    "screenTitle": "Uneven Floor",
+    "labelId": "label_location_68",
+    "labelText": "Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors_repair_uneven_floor"
+  },
+  {
+    "screenId": "activity_outside_property_windows_repairs_failed_glazing_location",
+    "screenTitle": "Failed glazing location",
+    "labelId": "label_defect_90",
+    "labelText": "Defect",
+    "insertPosition": 9,
+    "nativeLayout": "activity_outside_property_windows_repairs_failed_glazing_location"
+  },
+  {
+    "screenId": "activity_in_side_property_wap_dampness",
+    "screenTitle": "Dampness",
+    "labelId": "label_caused_by_4",
+    "labelText": "Caused By",
+    "insertPosition": 10,
+    "nativeLayout": "activity_in_side_property_wap_dampness"
+  },
+  {
+    "screenId": "activity_in_side_property_wap_dampness",
+    "screenTitle": "Dampness",
+    "labelId": "label_cause",
+    "labelText": "Cause",
+    "insertPosition": 9,
+    "nativeLayout": "activity_in_side_property_wap_dampness"
+  },
+  {
+    "screenId": "outside_property_roof_covering_deflection_layout",
+    "screenTitle": "Deflection",
+    "labelId": "label_cause_of_defect",
+    "labelText": "Cause of defect",
+    "insertPosition": 4,
+    "nativeLayout": "outside_property_roof_covering_deflection_layout"
+  },
+  {
+    "screenId": "outside_property_roof_covering_deflection_layout",
+    "screenTitle": "Deflection",
+    "labelId": "label_location_70",
+    "labelText": "Location",
+    "insertPosition": 4,
+    "nativeLayout": "outside_property_roof_covering_deflection_layout"
+  },
+  {
+    "screenId": "outside_property_roof_covering_deflection_layout",
+    "screenTitle": "Deflection",
+    "labelId": "label_location_69",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_roof_covering_deflection_layout"
+  },
+  {
+    "screenId": "inside_property_ceilings_about_ceilings",
+    "screenTitle": "About Ceilings",
+    "labelId": "label_finishes_type_7",
+    "labelText": "Finishes Type",
+    "insertPosition": 7,
+    "nativeLayout": "inside_property_ceilings_about_ceilings"
+  },
+  {
+    "screenId": "inside_property_ceilings_about_ceilings",
+    "screenTitle": "About Ceilings",
+    "labelId": "label_material_9",
+    "labelText": "Material",
+    "insertPosition": 1,
+    "nativeLayout": "inside_property_ceilings_about_ceilings"
+  },
+  {
+    "screenId": "inside_property_ceilings_about_ceilings",
+    "screenTitle": "About Ceilings",
+    "labelId": "label_construction_10",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "inside_property_ceilings_about_ceilings"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_removed_wall",
+    "screenTitle": "Removed Walls",
+    "labelId": "label_describe_defect",
+    "labelText": "Describe defect",
+    "insertPosition": 7,
+    "nativeLayout": "activity_outside_property_main_walls_removed_wall"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "screenTitle": "Rainwater Goods",
+    "labelId": "label_location_could_not_be_viewed_from_ground_level_are",
+    "labelText": "Location could not be viewed from ground level are",
+    "insertPosition": 7,
+    "nativeLayout": "activity_outside_property_rainwater_goods_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "screenTitle": "Rainwater Goods",
+    "labelId": "label_note",
+    "labelText": "Note",
+    "insertPosition": 5,
+    "nativeLayout": "activity_outside_property_rainwater_goods_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "screenTitle": "Rainwater Goods",
+    "labelId": "label_describe",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_rainwater_goods_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "screenTitle": "Rainwater Goods",
+    "labelId": "label_rainwater_goods",
+    "labelText": "Rainwater Goods",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_rainwater_goods_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "screenTitle": "Rainwater Goods",
+    "labelId": "label_condition_rating",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_rainwater_goods_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_roof_covering_main_screen",
+    "screenTitle": "Roof Covering",
+    "labelId": "label_describe_2",
+    "labelText": "Describe:",
+    "insertPosition": 11,
+    "nativeLayout": "activity_outside_property_roof_covering_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_roof_covering_main_screen",
+    "screenTitle": "Roof Covering",
+    "labelId": "label_roof_covering",
+    "labelText": "Roof Covering",
+    "insertPosition": 11,
+    "nativeLayout": "activity_outside_property_roof_covering_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_roof_covering_main_screen",
+    "screenTitle": "Roof Covering",
+    "labelId": "label_condition_rating_2",
+    "labelText": "Condition Rating",
+    "insertPosition": 11,
+    "nativeLayout": "activity_outside_property_roof_covering_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_roof_covering_main_screen",
+    "screenTitle": "Roof Covering",
+    "labelId": "label_note_2",
+    "labelText": "Note",
+    "insertPosition": 9,
+    "nativeLayout": "activity_outside_property_roof_covering_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_roof_covering_main_screen",
+    "screenTitle": "Roof Covering",
+    "labelId": "label_location_could_not_be_viewed_from_ground_level_are_2",
+    "labelText": "Location could not be viewed from ground level are",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_roof_covering_main_screen"
+  },
+  {
+    "screenId": "activity_estate_location",
+    "screenTitle": "Estated Location",
+    "labelId": "label_communal_garden_4",
+    "labelText": "Communal Garden",
+    "insertPosition": 9,
+    "nativeLayout": "activity_estate_location"
+  },
+  {
+    "screenId": "activity_estate_location",
+    "screenTitle": "Estated Location",
+    "labelId": "label_rear_garden_4",
+    "labelText": "Rear Garden",
+    "insertPosition": 5,
+    "nativeLayout": "activity_estate_location"
+  },
+  {
+    "screenId": "activity_estate_location",
+    "screenTitle": "Estated Location",
+    "labelId": "label_front_garden_4",
+    "labelText": "Front Garden",
+    "insertPosition": 0,
+    "nativeLayout": "activity_estate_location"
+  },
+  {
+    "screenId": "activity_gated_community",
+    "screenTitle": "Gated Community",
+    "labelId": "label_communal_garden_5",
+    "labelText": "Communal Garden",
+    "insertPosition": 9,
+    "nativeLayout": "activity_gated_community"
+  },
+  {
+    "screenId": "activity_gated_community",
+    "screenTitle": "Gated Community",
+    "labelId": "label_rear_garden_5",
+    "labelText": "Rear Garden",
+    "insertPosition": 4,
+    "nativeLayout": "activity_gated_community"
+  },
+  {
+    "screenId": "activity_gated_community",
+    "screenTitle": "Gated Community",
+    "labelId": "label_front_garden_5",
+    "labelText": "Front Garden",
+    "insertPosition": 1,
+    "nativeLayout": "activity_gated_community"
+  },
+  {
+    "screenId": "activity_inside_property_roof_structure_not_inspected",
+    "screenTitle": "Not Inspected",
+    "labelId": "label_defect_91",
+    "labelText": "Defect",
+    "insertPosition": 6,
+    "nativeLayout": "activity_inside_property_roof_structure_not_inspected"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_location_construction__location_and_construction",
+    "screenTitle": "Location and construction",
+    "labelId": "label_construction_11",
+    "labelText": "Construction",
+    "insertPosition": 4,
+    "nativeLayout": "activity_outside_property_conservatory_porch_location_construction"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_location_construction__location_and_construction",
+    "screenTitle": "Location and construction",
+    "labelId": "label_porch_type_2",
+    "labelText": "Porch Type",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_location_construction"
+  },
+  {
+    "screenId": "activity_outside_property_other_about_joinery_and_finishes__other_joinery_and_finishes",
+    "screenTitle": "Other Joinery and Finishes",
+    "labelId": "label_material_10",
+    "labelText": "Material",
+    "insertPosition": 5,
+    "nativeLayout": "activity_outside_property_other_about_joinery_and_finishes"
+  },
+  {
+    "screenId": "activity_outside_property_other_about_joinery_and_finishes__other_joinery_and_finishes",
+    "screenTitle": "Other Joinery and Finishes",
+    "labelId": "label_external_work_includes_2",
+    "labelText": "External Work Includes",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_about_joinery_and_finishes"
+  },
+  {
+    "screenId": "activity_property_local_environment",
+    "screenTitle": "Local Environment",
+    "labelId": "label_emf",
+    "labelText": "EMF",
+    "insertPosition": 6,
+    "nativeLayout": "activity_property_local_environment"
+  },
+  {
+    "screenId": "activity_property_local_environment",
+    "screenTitle": "Local Environment",
+    "labelId": "label_flooding",
+    "labelText": "Flooding",
+    "insertPosition": 1,
+    "nativeLayout": "activity_property_local_environment"
+  },
+  {
+    "screenId": "activity_topography",
+    "screenTitle": "Topography",
+    "labelId": "label_communal_garden_6",
+    "labelText": "Communal Garden",
+    "insertPosition": 9,
+    "nativeLayout": "activity_topography"
+  },
+  {
+    "screenId": "activity_topography",
+    "screenTitle": "Topography",
+    "labelId": "label_rear_garden_6",
+    "labelText": "Rear Garden",
+    "insertPosition": 5,
+    "nativeLayout": "activity_topography"
+  },
+  {
+    "screenId": "activity_topography",
+    "screenTitle": "Topography",
+    "labelId": "label_front_garden_6",
+    "labelText": "Front Garden",
+    "insertPosition": 0,
+    "nativeLayout": "activity_topography"
+  },
+  {
+    "screenId": "activity_in_side_property_wood_work_damaged_lock__damaged_lock",
+    "screenTitle": "Damaged Lock",
+    "labelId": "label_defect_92",
+    "labelText": "Defect",
+    "insertPosition": 6,
+    "nativeLayout": "activity_in_side_property_wood_work_damaged_lock"
+  },
+  {
+    "screenId": "activity_in_side_property_wood_work_damaged_lock__damaged_lock",
+    "screenTitle": "Damaged Lock",
+    "labelId": "label_damaged_lock_in_the_2",
+    "labelText": "Damaged lock in the",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_wood_work_damaged_lock"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_roof__roof",
+    "screenTitle": "Roof",
+    "labelId": "label_material_11",
+    "labelText": "Material",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_roof"
+  },
+  {
+    "screenId": "activity_outside_property_rwg_about",
+    "screenTitle": "About RWG",
+    "labelId": "label_condition_3",
+    "labelText": "Condition",
+    "insertPosition": 9,
+    "nativeLayout": "activity_outside_property_rwg_about"
+  },
+  {
+    "screenId": "activity_parking",
+    "screenTitle": "Commercial",
+    "labelId": "label_type_16",
+    "labelText": "Type",
+    "insertPosition": 1,
+    "nativeLayout": "activity_parking"
+  },
+  {
+    "screenId": "activity_parking",
+    "screenTitle": "Commercial",
+    "labelId": "label_parking_2",
+    "labelText": "Parking",
+    "insertPosition": 0,
+    "nativeLayout": "activity_parking"
+  },
+  {
+    "screenId": "activity_parking__parking",
+    "screenTitle": "Parking",
+    "labelId": "label_parking_3",
+    "labelText": "Parking",
+    "insertPosition": 7,
+    "nativeLayout": "activity_parking"
+  },
+  {
+    "screenId": "activity_parking__parking",
+    "screenTitle": "Parking",
+    "labelId": "label_type_17",
+    "labelText": "Type",
+    "insertPosition": 0,
+    "nativeLayout": "activity_parking"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places__other",
+    "screenTitle": "Other",
+    "labelId": "label_location_71",
+    "labelText": "Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_fire_places"
+  },
+  {
+    "screenId": "activity_outside_property_leaning_chimney",
+    "screenTitle": "Leaning Chimney",
+    "labelId": "label_condition_4",
+    "labelText": "Condition",
+    "insertPosition": 7,
+    "nativeLayout": "activity_outside_property_leaning_chimney"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan__no_extractor_fan_installed",
+    "screenTitle": "No Extractor Fan Installed",
+    "labelId": "label_fan_location_5",
+    "labelText": "Fan Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_extractor_fan"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan__no_extractor_fan_installed",
+    "screenTitle": "No Extractor Fan Installed",
+    "labelId": "label_fan_location_6",
+    "labelText": "Fan Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_extractor_fan"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan__no_extractor_fan_installed",
+    "screenTitle": "No Extractor Fan Installed",
+    "labelId": "label_fan_location_7",
+    "labelText": "Fan Location",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_bathroom_fittings_extractor_fan"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places__gas_fire",
+    "screenTitle": "Gas fire",
+    "labelId": "label_location_72",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places__imitation_system",
+    "screenTitle": "Imitation system",
+    "labelId": "label_location_73",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places__wood_burning_stove",
+    "screenTitle": "Wood burning stove",
+    "labelId": "label_location_74",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places__electric_fire",
+    "screenTitle": "Electric fire",
+    "labelId": "label_location_75",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_cavity_wall_insulation",
+    "screenTitle": "Cavity Wall Insulation",
+    "labelId": "label_location_76",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_main_wall_repairs_cavity_wall_insulation"
+  },
+  {
+    "screenId": "activity_outside_property_other_not_inspected",
+    "screenTitle": "Not inspected",
+    "labelId": "label_location_77",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_not_inspected"
+  },
+  {
+    "screenId": "activity_property_extended",
+    "screenTitle": "Year Extended",
+    "labelId": "label_exlocation",
+    "labelText": "Ex.Location",
+    "insertPosition": 3,
+    "nativeLayout": "activity_property_extended"
+  },
+  {
+    "screenId": "outside_property_roof_covering_roof_structure_layout",
+    "screenTitle": "Undulating/Uneven Roof",
+    "labelId": "label_condition_5",
+    "labelText": "Condition",
+    "insertPosition": 7,
+    "nativeLayout": "outside_property_roof_covering_roof_structure_layout"
+  },
+  {
+    "screenId": "outside_property_roof_covering_roof_structure_layout",
+    "screenTitle": "Undulating/Uneven Roof",
+    "labelId": "label_roof_slope",
+    "labelText": "Roof Slope",
+    "insertPosition": 3,
+    "nativeLayout": "outside_property_roof_covering_roof_structure_layout"
+  },
+  {
+    "screenId": "outside_property_roof_covering_roof_structure_layout",
+    "screenTitle": "Undulating/Uneven Roof",
+    "labelId": "label_roof_over_at_location",
+    "labelText": "Roof Over at location",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_roof_covering_roof_structure_layout"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_doors__doors",
+    "screenTitle": "Doors",
+    "labelId": "label_glazzing_10",
+    "labelText": "Glazzing",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_conservatory_porch_doors"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_doors__doors",
+    "screenTitle": "Doors",
+    "labelId": "label_incorporates_3",
+    "labelText": "Incorporates",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_doors"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_windows__windows",
+    "screenTitle": "Windows",
+    "labelId": "label_glazzing_11",
+    "labelText": "Glazzing",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_conservatory_porch_windows"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_windows__windows",
+    "screenTitle": "Windows",
+    "labelId": "label_incorporates_4",
+    "labelText": "Incorporates",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_windows"
+  },
+  {
+    "screenId": "activity_outside_property_other_drains__drains",
+    "screenTitle": "Drains",
+    "labelId": "label_laid_with_2",
+    "labelText": "Laid with",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_drains__drains__2",
+    "screenTitle": "Drains",
+    "labelId": "label_laid_with_3",
+    "labelText": "Laid with",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_drains__drains__3",
+    "screenTitle": "Drains",
+    "labelId": "label_laid_with_4",
+    "labelText": "Laid with",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_drains__drains__4",
+    "screenTitle": "Drains",
+    "labelId": "label_laid_with_5",
+    "labelText": "Laid with",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_drains__drains__5",
+    "screenTitle": "Drains",
+    "labelId": "label_laid_with_6",
+    "labelText": "Laid with",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_drains__drains__6",
+    "screenTitle": "Drains",
+    "labelId": "label_laid_with_7",
+    "labelText": "Laid with",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_wall__wall_construction",
+    "screenTitle": "Wall Construction",
+    "labelId": "label_construction_12",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_wall__wall_construction__2",
+    "screenTitle": "Wall Construction",
+    "labelId": "label_construction_13",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_wall__wall_construction__3",
+    "screenTitle": "Wall Construction",
+    "labelId": "label_construction_14",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_wall__wall_construction__4",
+    "screenTitle": "Wall Construction",
+    "labelId": "label_construction_15",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_wall__wall_construction__5",
+    "screenTitle": "Wall Construction",
+    "labelId": "label_construction_16",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_wall__wall_construction__6",
+    "screenTitle": "Wall Construction",
+    "labelId": "label_construction_17",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_roof__roof",
+    "screenTitle": "Roof",
+    "labelId": "label_defect_93",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_roof"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_roof__roof__2",
+    "screenTitle": "Roof",
+    "labelId": "label_defect_94",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_roof"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_roof__roof__3",
+    "screenTitle": "Roof",
+    "labelId": "label_defect_95",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_roof"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_roof__roof__4",
+    "screenTitle": "Roof",
+    "labelId": "label_defect_96",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_roof"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_roof__roof__5",
+    "screenTitle": "Roof",
+    "labelId": "label_defect_97",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_roof"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_roof__roof__6",
+    "screenTitle": "Roof",
+    "labelId": "label_defect_98",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_roof"
+  },
+  {
+    "screenId": "activity_property_location",
+    "screenTitle": "Property Location density",
+    "labelId": "label_establish_conv_area",
+    "labelText": "Establish Conv. Area?",
+    "insertPosition": 6,
+    "nativeLayout": "activity_property_location"
+  },
+  {
+    "screenId": "activity_property_location",
+    "screenTitle": "Property Location density",
+    "labelId": "label_local_facilities_in_area",
+    "labelText": "Local Facilities in Area?",
+    "insertPosition": 6,
+    "nativeLayout": "activity_property_location"
+  },
+  {
+    "screenId": "activity_property_location",
+    "screenTitle": "Property Location density",
+    "labelId": "label_local_environment",
+    "labelText": "Local Environment",
+    "insertPosition": 6,
+    "nativeLayout": "activity_property_location"
+  },
+  {
+    "screenId": "activity_property_location",
+    "screenTitle": "Property Location density",
+    "labelId": "label_outside_on_private_road",
+    "labelText": "Outside On Private Road?",
+    "insertPosition": 5,
+    "nativeLayout": "activity_property_location"
+  },
+  {
+    "screenId": "activity_property_location",
+    "screenTitle": "Property Location density",
+    "labelId": "label_is_noisy_area",
+    "labelText": "Is Noisy Area?",
+    "insertPosition": 5,
+    "nativeLayout": "activity_property_location"
+  },
+  {
+    "screenId": "outside_property_roof_covering_parapet_wall_layout",
+    "screenTitle": "Parapet Wall",
+    "labelId": "label_built_with_3",
+    "labelText": "Built with",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_roof_covering_parapet_wall_layout"
+  },
+  {
+    "screenId": "activity_inside_property_other_celler_not_habitable__not_habitable",
+    "screenTitle": "Not Habitable",
+    "labelId": "label_should_not_use_because_of_2",
+    "labelText": "Should Not Use Because Of",
+    "insertPosition": 0,
+    "nativeLayout": "activity_inside_property_other_celler_not_habitable"
+  },
+  {
+    "screenId": "activity_other_repair_nearby_trees",
+    "screenTitle": "Nearby Trees",
+    "labelId": "label_trees_causing",
+    "labelText": "Trees causing",
+    "insertPosition": 2,
+    "nativeLayout": "activity_other_repair_nearby_trees"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_external__construction",
+    "screenTitle": "Construction",
+    "labelId": "label_construction_18",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_external"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_external__construction__2",
+    "screenTitle": "Construction",
+    "labelId": "label_construction_19",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_external"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_external__construction__3",
+    "screenTitle": "Construction",
+    "labelId": "label_construction_20",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_external"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_external__construction__4",
+    "screenTitle": "Construction",
+    "labelId": "label_construction_21",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_external"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_external__construction__5",
+    "screenTitle": "Construction",
+    "labelId": "label_construction_22",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_external"
+  },
+  {
+    "screenId": "activity_outside_property_other_other_external__construction__6",
+    "screenTitle": "Construction",
+    "labelId": "label_construction_23",
+    "labelText": "Construction",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_other_external"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_defect_99",
+    "labelText": "Defect",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_location_78",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__2",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_defect_1771578464958",
+    "labelText": "Defect",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__2",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_location_79",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__3",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_defect_1771578464958",
+    "labelText": "Defect",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__3",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_location_80",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__4",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_defect_1771578464959",
+    "labelText": "Defect",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__4",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_location_81",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__5",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_defect_1771578464959",
+    "labelText": "Defect",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__5",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_location_82",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__6",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_defect_1771578464959",
+    "labelText": "Defect",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__6",
+    "screenTitle": "Perished Decorations",
+    "labelId": "label_location_83",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_decorations"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_defect",
+    "labelText": "Handrail defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing",
+    "screenTitle": "Steps landing",
+    "labelId": "label_defect_1771578464959",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_steps_landing"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__2",
+    "screenTitle": "Steps landing",
+    "labelId": "label_defect_1771578464959",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_steps_landing"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__3",
+    "screenTitle": "Steps landing",
+    "labelId": "label_defect_1771578464960",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_steps_landing"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__4",
+    "screenTitle": "Steps landing",
+    "labelId": "label_defect_1771578464960",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_steps_landing"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__5",
+    "screenTitle": "Steps landing",
+    "labelId": "label_defect_1771578464960",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_steps_landing"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__6",
+    "screenTitle": "Steps landing",
+    "labelId": "label_defect_1771578464960",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_steps_landing"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_wall__wall",
+    "screenTitle": "Wall",
+    "labelId": "label_defect_1771578464960",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_wall__wall__2",
+    "screenTitle": "Wall",
+    "labelId": "label_defect_1771578464960",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_wall__wall__3",
+    "screenTitle": "Wall",
+    "labelId": "label_defect_1771578464961",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_wall__wall__4",
+    "screenTitle": "Wall",
+    "labelId": "label_defect_1771578464961",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_wall__wall__5",
+    "screenTitle": "Wall",
+    "labelId": "label_defect_1771578464961",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_wall"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_wall__wall__6",
+    "screenTitle": "Wall",
+    "labelId": "label_defect_1771578464961",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_wall"
+  },
+  {
+    "screenId": "outside_property_roof_covering_hip_tiles_layout",
+    "screenTitle": "Hip Tiles",
+    "labelId": "label_roofs_slopes_tiles_are_assumed_formed_in",
+    "labelText": "Roofs slopes tiles are assumed formed in",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_roof_covering_hip_tiles_layout"
+  },
+  {
+    "screenId": "outside_property_roof_covering_ridge_tiles_layout",
+    "screenTitle": "Ridge Tiles",
+    "labelId": "label_ridge_tiles_are_assumed_formed_in",
+    "labelText": "Ridge tiles are assumed formed in",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_roof_covering_ridge_tiles_layout"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_floor__floor",
+    "screenTitle": "Floor",
+    "labelId": "label_floor_covered_in_2",
+    "labelText": "Floor covered in",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_floor"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_not_inspected",
+    "screenTitle": "Not inspected",
+    "labelId": "label_location_84",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_conservatory_porch_not_inspected"
+  },
+  {
+    "screenId": "activity_outside_property_other_handrails__handrails",
+    "screenTitle": "Handrails",
+    "labelId": "label_type_18",
+    "labelText": "Type",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_handrails"
+  },
+  {
+    "screenId": "activity_outside_property_other_handrails__handrails__2",
+    "screenTitle": "Handrails",
+    "labelId": "label_type_19",
+    "labelText": "Type",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_handrails"
+  },
+  {
+    "screenId": "activity_outside_property_other_handrails__handrails__3",
+    "screenTitle": "Handrails",
+    "labelId": "label_type_20",
+    "labelText": "Type",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_handrails"
+  },
+  {
+    "screenId": "activity_outside_property_other_handrails__handrails__4",
+    "screenTitle": "Handrails",
+    "labelId": "label_type_21",
+    "labelText": "Type",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_handrails"
+  },
+  {
+    "screenId": "activity_outside_property_other_handrails__handrails__5",
+    "screenTitle": "Handrails",
+    "labelId": "label_type_22",
+    "labelText": "Type",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_handrails"
+  },
+  {
+    "screenId": "activity_outside_property_other_handrails__handrails__6",
+    "screenTitle": "Handrails",
+    "labelId": "label_type_23",
+    "labelText": "Type",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_handrails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_to_balcony_2",
+    "labelText": "Handrail to balcony",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_defect_2",
+    "labelText": "Handrail defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__2",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_to_balcony_3",
+    "labelText": "Handrail to balcony",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__2",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_defect_3",
+    "labelText": "Handrail defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__3",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_to_balcony_4",
+    "labelText": "Handrail to balcony",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__3",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_defect_4",
+    "labelText": "Handrail defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__4",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_to_balcony_5",
+    "labelText": "Handrail to balcony",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__4",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_defect_5",
+    "labelText": "Handrail defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__5",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_to_balcony_6",
+    "labelText": "Handrail to balcony",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__5",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_defect_6",
+    "labelText": "Handrail defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__6",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_to_balcony_7",
+    "labelText": "Handrail to balcony",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__6",
+    "screenTitle": "Hand rails",
+    "labelId": "label_handrail_defect_7",
+    "labelText": "Handrail defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_hand_rails"
+  },
+  {
+    "screenId": "activity_services_electricity_main_screen",
+    "screenTitle": "Electricity",
+    "labelId": "label_describe_3",
+    "labelText": "Describe:",
+    "insertPosition": 4,
+    "nativeLayout": "activity_services_electricity_main_screen"
+  },
+  {
+    "screenId": "activity_services_electricity_main_screen",
+    "screenTitle": "Electricity",
+    "labelId": "label_electricity",
+    "labelText": "Electricity",
+    "insertPosition": 4,
+    "nativeLayout": "activity_services_electricity_main_screen"
+  },
+  {
+    "screenId": "activity_services_electricity_main_screen",
+    "screenTitle": "Electricity",
+    "labelId": "label_condition_rating_3",
+    "labelText": "Condition Rating",
+    "insertPosition": 4,
+    "nativeLayout": "activity_services_electricity_main_screen"
+  },
+  {
+    "screenId": "activity_services_electricity_main_screen",
+    "screenTitle": "Electricity",
+    "labelId": "label_note_3",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_services_electricity_main_screen"
+  },
+  {
+    "screenId": "activity_services_main_gas",
+    "screenTitle": "Mains Gas",
+    "labelId": "label_mains_gas_meter_and_control_valve_location",
+    "labelText": "Mains Gas Meter and Control valve location",
+    "insertPosition": 2,
+    "nativeLayout": "activity_services_main_gas"
+  },
+  {
+    "screenId": "outside_property_roof_covering_asbestos_layout",
+    "screenTitle": "Contain Asbestos",
+    "labelId": "label_these_roof_parts_may_contain_asbestos",
+    "labelText": "These roof parts may contain Asbestos",
+    "insertPosition": 0,
+    "nativeLayout": "outside_property_roof_covering_asbestos_layout"
+  },
+  {
+    "screenId": "activity_grounds_garage_main_screen",
+    "screenTitle": "Garage",
+    "labelId": "label_note_4",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_grounds_garage_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_garage_main_screen",
+    "screenTitle": "Garage",
+    "labelId": "label_describe_4",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_garage_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_garage_main_screen",
+    "screenTitle": "Garage",
+    "labelId": "label_garage",
+    "labelText": "Garage",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_garage_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_garage_main_screen",
+    "screenTitle": "Garage",
+    "labelId": "label_condition_rating_4",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_garage_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_area_knotweed",
+    "screenTitle": "Knotweed",
+    "labelId": "label_japanese_knotweed_is_growing_at_location",
+    "labelText": "Japanese knotweed is growing at Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_grounds_other_area_knotweed"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "screenTitle": "Other",
+    "labelId": "label_note_5",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_grounds_other_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "screenTitle": "Other",
+    "labelId": "label_describe_5",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "screenTitle": "Other",
+    "labelId": "label_other_2",
+    "labelText": "Other",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "screenTitle": "Other",
+    "labelId": "label_shared_access",
+    "labelText": "Shared Access",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "screenTitle": "Other",
+    "labelId": "label_private_road",
+    "labelText": "Private Road",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "screenTitle": "Other",
+    "labelId": "label_legal_issues",
+    "labelText": "Legal Issues",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "screenTitle": "Other",
+    "labelId": "label_shrinkable_clay",
+    "labelText": "Shrinkable Clay",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "screenTitle": "Other",
+    "labelId": "label_condition_rating_5",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_bathroom_fittings_main_screen",
+    "screenTitle": "Bathroom Fittings",
+    "labelId": "label_note_6",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_inside_property_bathroom_fittings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_bathroom_fittings_main_screen",
+    "screenTitle": "Bathroom Fittings",
+    "labelId": "label_describe_6",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_bathroom_fittings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_bathroom_fittings_main_screen",
+    "screenTitle": "Bathroom Fittings",
+    "labelId": "label_bathroom_fitting",
+    "labelText": "Bathroom Fitting",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_bathroom_fittings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_bathroom_fittings_main_screen",
+    "screenTitle": "Bathroom Fittings",
+    "labelId": "label_condition_rating_6",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_bathroom_fittings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_built_in_fittings_main_screen",
+    "screenTitle": "Built In Fittings",
+    "labelId": "label_note_7",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_inside_property_built_in_fittings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_built_in_fittings_main_screen",
+    "screenTitle": "Built In Fittings",
+    "labelId": "label_describe_7",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_built_in_fittings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_built_in_fittings_main_screen",
+    "screenTitle": "Built In Fittings",
+    "labelId": "label_built_in_fittings",
+    "labelText": "Built In Fittings",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_built_in_fittings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_built_in_fittings_main_screen",
+    "screenTitle": "Built In Fittings",
+    "labelId": "label_condition_rating_7",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_built_in_fittings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_main_screen",
+    "screenTitle": "Ceilings",
+    "labelId": "label_note_8",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_inside_property_ceilings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_main_screen",
+    "screenTitle": "Ceilings",
+    "labelId": "label_describe_8",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_ceilings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_main_screen",
+    "screenTitle": "Ceilings",
+    "labelId": "label_ceilings",
+    "labelText": "Ceilings",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_ceilings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_main_screen",
+    "screenTitle": "Ceilings",
+    "labelId": "label_condition_rating_8",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_ceilings_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "screenTitle": "Fireplaces and Chimneys",
+    "labelId": "label_note_9",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_inside_property_fireplaces_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "screenTitle": "Fireplaces and Chimneys",
+    "labelId": "label_describe_9",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_fireplaces_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "screenTitle": "Fireplaces and Chimneys",
+    "labelId": "label_fire_places",
+    "labelText": "Fire Places",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_fireplaces_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "screenTitle": "Fireplaces and Chimneys",
+    "labelId": "label_blocked_fireplace",
+    "labelText": "Blocked Fireplace",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_fireplaces_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "screenTitle": "Fireplaces and Chimneys",
+    "labelId": "label_removed_cb",
+    "labelText": "Removed CB",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_fireplaces_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "screenTitle": "Fireplaces and Chimneys",
+    "labelId": "label_boiler_flue_2",
+    "labelText": "Boiler Flue",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_fireplaces_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "screenTitle": "Fireplaces and Chimneys",
+    "labelId": "label_condition_rating_9",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_fireplaces_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_floors_main_screen",
+    "screenTitle": "Floors",
+    "labelId": "label_note_10",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_inside_property_floors_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_floors_main_screen",
+    "screenTitle": "Floors",
+    "labelId": "label_describe_10",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_floors_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_floors_main_screen",
+    "screenTitle": "Floors",
+    "labelId": "label_floors",
+    "labelText": "Floors",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_floors_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_floors_main_screen",
+    "screenTitle": "Floors",
+    "labelId": "label_condition_rating_10",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_floors_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_other_celler_no_access__no_access",
+    "screenTitle": "No access",
+    "labelId": "label_no_access_because_of_2",
+    "labelText": "No Access Because Of",
+    "insertPosition": 0,
+    "nativeLayout": "activity_inside_property_other_celler_no_access"
+  },
+  {
+    "screenId": "activity_inside_property_other_not_inspected",
+    "screenTitle": "Not Inspected",
+    "labelId": "label_location_85",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_inside_property_other_not_inspected"
+  },
+  {
+    "screenId": "activity_inside_property_roof_structure_main_screen",
+    "screenTitle": "Roof Structure",
+    "labelId": "label_note_11",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_inside_property_roof_structure_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_roof_structure_main_screen",
+    "screenTitle": "Roof Structure",
+    "labelId": "label_describe_11",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_roof_structure_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_roof_structure_main_screen",
+    "screenTitle": "Roof Structure",
+    "labelId": "label_roof_structure",
+    "labelText": "Roof Structure",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_roof_structure_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_roof_structure_main_screen",
+    "screenTitle": "Roof Structure",
+    "labelId": "label_condition_rating_11",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_roof_structure_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_walls_and_partitions_main_screen",
+    "screenTitle": "Walls and Partitions",
+    "labelId": "label_note_12",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_inside_property_walls_and_partitions_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_walls_and_partitions_main_screen",
+    "screenTitle": "Walls and Partitions",
+    "labelId": "label_describe_12",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_walls_and_partitions_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_walls_and_partitions_main_screen",
+    "screenTitle": "Walls and Partitions",
+    "labelId": "label_walls_and_partitions",
+    "labelText": "Walls and Partitions",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_walls_and_partitions_main_screen"
+  },
+  {
+    "screenId": "activity_inside_property_walls_and_partitions_main_screen",
+    "screenTitle": "Walls and Partitions",
+    "labelId": "label_condition_rating_12",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_inside_property_walls_and_partitions_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_main_screen",
+    "screenTitle": "Chimney",
+    "labelId": "label_note_13",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_outside_property_chimney_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_main_screen",
+    "screenTitle": "Chimney",
+    "labelId": "label_describe_13",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_chimney_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_main_screen",
+    "screenTitle": "Chimney",
+    "labelId": "label_chimney",
+    "labelText": "Chimney",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_chimney_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_main_screen",
+    "screenTitle": "Chimney",
+    "labelId": "label_condition_rating_13",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_chimney_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_main_screen",
+    "screenTitle": "Conservatory and Porches",
+    "labelId": "label_note_14",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_outside_property_conservatory_porch_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_main_screen",
+    "screenTitle": "Conservatory and Porches",
+    "labelId": "label_describe_14",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_conservatory_porch_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_main_screen",
+    "screenTitle": "Conservatory and Porches",
+    "labelId": "label_conservatory_and_porch",
+    "labelText": "Conservatory and Porch",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_conservatory_porch_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_main_screen",
+    "screenTitle": "Conservatory and Porches",
+    "labelId": "label_condition_rating_14",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_conservatory_porch_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_floors__floor",
+    "screenTitle": "Floor",
+    "labelId": "label_the_floors_are_2",
+    "labelText": "The floors are",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_floors"
+  },
+  {
+    "screenId": "activity_outside_property_other_floors__floor__2",
+    "screenTitle": "Floor",
+    "labelId": "label_the_floors_are_3",
+    "labelText": "The floors are",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_floors"
+  },
+  {
+    "screenId": "activity_outside_property_other_floors__floor__3",
+    "screenTitle": "Floor",
+    "labelId": "label_the_floors_are_4",
+    "labelText": "The floors are",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_floors"
+  },
+  {
+    "screenId": "activity_outside_property_other_floors__floor__4",
+    "screenTitle": "Floor",
+    "labelId": "label_the_floors_are_5",
+    "labelText": "The floors are",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_floors"
+  },
+  {
+    "screenId": "activity_outside_property_other_floors__floor__5",
+    "screenTitle": "Floor",
+    "labelId": "label_the_floors_are_6",
+    "labelText": "The floors are",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_floors"
+  },
+  {
+    "screenId": "activity_outside_property_other_floors__floor__6",
+    "screenTitle": "Floor",
+    "labelId": "label_the_floors_are_7",
+    "labelText": "The floors are",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_floors"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "screenTitle": "Other Joinery and Finishes",
+    "labelId": "label_note_15",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_outside_property_other_joinery_and_finishes_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "screenTitle": "Other Joinery and Finishes",
+    "labelId": "label_describe_15",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_other_joinery_and_finishes_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "screenTitle": "Other Joinery and Finishes",
+    "labelId": "label_other_joinery_and_finishes",
+    "labelText": "Other Joinery and Finishes",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_other_joinery_and_finishes_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "screenTitle": "Other Joinery and Finishes",
+    "labelId": "label_condition_rating_15",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_other_joinery_and_finishes_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_finishes_not_inspected",
+    "screenTitle": "Not inspected",
+    "labelId": "label_location_86",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_joinery_finishes_not_inspected"
+  },
+  {
+    "screenId": "activity_outside_property_other_main_screen",
+    "screenTitle": "Other Area",
+    "labelId": "label_note_16",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_outside_property_other_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_main_screen",
+    "screenTitle": "Other Area",
+    "labelId": "label_describe_16",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_other_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_main_screen",
+    "screenTitle": "Other Area",
+    "labelId": "label_other_area",
+    "labelText": "Other Area",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_other_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_main_screen",
+    "screenTitle": "Other Area",
+    "labelId": "label_condition_rating_16",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_other_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_drains__drains",
+    "screenTitle": "Drains",
+    "labelId": "label_defect_1771578464970",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_drains__drains__2",
+    "screenTitle": "Drains",
+    "labelId": "label_defect_1771578464970",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_drains__drains__3",
+    "screenTitle": "Drains",
+    "labelId": "label_defect_1771578464970",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_drains__drains__4",
+    "screenTitle": "Drains",
+    "labelId": "label_defect_1771578464970",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_drains__drains__5",
+    "screenTitle": "Drains",
+    "labelId": "label_defect_1771578464970",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_drains__drains__6",
+    "screenTitle": "Drains",
+    "labelId": "label_defect_1771578464971",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_drains"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_floor__floor",
+    "screenTitle": "Floor",
+    "labelId": "label_defect_1771578464971",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_floor"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_floor__floor__2",
+    "screenTitle": "Floor",
+    "labelId": "label_defect_1771578464971",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_floor"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_floor__floor__3",
+    "screenTitle": "Floor",
+    "labelId": "label_defect_1771578464971",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_floor"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_floor__floor__4",
+    "screenTitle": "Floor",
+    "labelId": "label_defect_1771578464971",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_floor"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_floor__floor__5",
+    "screenTitle": "Floor",
+    "labelId": "label_defect_1771578464971",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_floor"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_floor__floor__6",
+    "screenTitle": "Floor",
+    "labelId": "label_defect_1771578464972",
+    "labelText": "Defect",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_repairs_floor"
+  },
+  {
+    "screenId": "activity_outside_property_windows_main_screen",
+    "screenTitle": "Windows",
+    "labelId": "label_note_17",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_outside_property_windows_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_windows_main_screen",
+    "screenTitle": "Windows",
+    "labelId": "label_describe_17",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_windows_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_windows_main_screen",
+    "screenTitle": "Windows",
+    "labelId": "label_windows",
+    "labelText": "Windows",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_windows_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_windows_main_screen",
+    "screenTitle": "Windows",
+    "labelId": "label_condition_rating_17",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_windows_main_screen"
+  },
+  {
+    "screenId": "activity_services_drainage_main_screen",
+    "screenTitle": "Drainage",
+    "labelId": "label_note_18",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_services_drainage_main_screen"
+  },
+  {
+    "screenId": "activity_services_drainage_main_screen",
+    "screenTitle": "Drainage",
+    "labelId": "label_describe_18",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_drainage_main_screen"
+  },
+  {
+    "screenId": "activity_services_drainage_main_screen",
+    "screenTitle": "Drainage",
+    "labelId": "label_drainage",
+    "labelText": "Drainage",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_drainage_main_screen"
+  },
+  {
+    "screenId": "activity_services_drainage_main_screen",
+    "screenTitle": "Drainage",
+    "labelId": "label_condition_rating_18",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_drainage_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_note_19",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_describe_19",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_gas_and_oil",
+    "labelText": "Gas and Oil",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_repairs_23",
+    "labelText": "Repairs",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_noof_pots",
+    "labelText": "No.of pots",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_rendering",
+    "labelText": "Rendering",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_waterproofing",
+    "labelText": "Waterproofing",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_condition_6",
+    "labelText": "Condition",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_shared_chimney",
+    "labelText": "Shared Chimney",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_leaning_chimney",
+    "labelText": "Leaning Chimney",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_condition_rating_19",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil_main_screen"
+  },
+  {
+    "screenId": "activity_services_heating_main_screen",
+    "screenTitle": "Heating",
+    "labelId": "label_note_20",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_services_heating_main_screen"
+  },
+  {
+    "screenId": "activity_services_heating_main_screen",
+    "screenTitle": "Heating",
+    "labelId": "label_describe_20",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_heating_main_screen"
+  },
+  {
+    "screenId": "activity_services_heating_main_screen",
+    "screenTitle": "Heating",
+    "labelId": "label_heating",
+    "labelText": "Heating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_heating_main_screen"
+  },
+  {
+    "screenId": "activity_services_heating_main_screen",
+    "screenTitle": "Heating",
+    "labelId": "label_condition_rating_20",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_heating_main_screen"
+  },
+  {
+    "screenId": "activity_services_water_heating_main_screen",
+    "screenTitle": "Water Heating",
+    "labelId": "label_note_21",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_services_water_heating_main_screen"
+  },
+  {
+    "screenId": "activity_services_water_heating_main_screen",
+    "screenTitle": "Water Heating",
+    "labelId": "label_describe_21",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_water_heating_main_screen"
+  },
+  {
+    "screenId": "activity_services_water_heating_main_screen",
+    "screenTitle": "Water Heating",
+    "labelId": "label_water_heating",
+    "labelText": "Water Heating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_water_heating_main_screen"
+  },
+  {
+    "screenId": "activity_services_water_heating_main_screen",
+    "screenTitle": "Water Heating",
+    "labelId": "label_condition_rating_21",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_water_heating_main_screen"
+  },
+  {
+    "screenId": "activity_services_water_main_screen",
+    "screenTitle": "Water",
+    "labelId": "label_note_22",
+    "labelText": "Note",
+    "insertPosition": 3,
+    "nativeLayout": "activity_services_water_main_screen"
+  },
+  {
+    "screenId": "activity_services_water_main_screen",
+    "screenTitle": "Water",
+    "labelId": "label_describe_22",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_water_main_screen"
+  },
+  {
+    "screenId": "activity_services_water_main_screen",
+    "screenTitle": "Water",
+    "labelId": "label_condition_rating_22",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_water_main_screen"
+  },
+  {
+    "screenId": "outside_property_roof_covering_roof_spreading_layout",
+    "screenTitle": "Roof Spreading",
+    "labelId": "label_the_surface_of_the_roof_slope_is_uneven_or_undulating_to_the_location",
+    "labelText": "The surface of the roof slope  is uneven or undulating to the location",
+    "insertPosition": 1,
+    "nativeLayout": "outside_property_roof_covering_roof_spreading_layout"
+  },
+  {
+    "screenId": "activity_grounds_other_area_main_screen",
+    "screenTitle": "Other Area",
+    "labelId": "label_note_23",
+    "labelText": "Note",
+    "insertPosition": 2,
+    "nativeLayout": "activity_grounds_other_area_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_area_main_screen",
+    "screenTitle": "Other Area",
+    "labelId": "label_describe_23",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_area_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_area_main_screen",
+    "screenTitle": "Other Area",
+    "labelId": "label_other_area_2",
+    "labelText": "Other Area",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_area_main_screen"
+  },
+  {
+    "screenId": "activity_grounds_other_area_main_screen",
+    "screenTitle": "Other Area",
+    "labelId": "label_condition_rating_23",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_grounds_other_area_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_main_screen",
+    "screenTitle": "Main Walls",
+    "labelId": "label_main_walls_not_inspected",
+    "labelText": "Main walls not inspected",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_main_walls_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_main_screen",
+    "screenTitle": "Main Walls",
+    "labelId": "label_note_24",
+    "labelText": "Note",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_main_walls_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_main_screen",
+    "screenTitle": "Main Walls",
+    "labelId": "label_describe_24",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_main_walls_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_main_screen",
+    "screenTitle": "Main Walls",
+    "labelId": "label_main_walls",
+    "labelText": "Main Walls",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_main_walls_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_main_screen",
+    "screenTitle": "Main Walls",
+    "labelId": "label_condition_rating_24",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_main_walls_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_finishes_not_inspected__not_inspected",
+    "screenTitle": "Not inspected",
+    "labelId": "label_location_87",
+    "labelText": "Location",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_other_joinery_finishes_not_inspected"
+  },
+  {
+    "screenId": "activity_outside_property_outside_doors_main_screen",
+    "screenTitle": "Outside Doors",
+    "labelId": "label_note_25",
+    "labelText": "Note",
+    "insertPosition": 2,
+    "nativeLayout": "activity_outside_property_outside_doors_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_outside_doors_main_screen",
+    "screenTitle": "Outside Doors",
+    "labelId": "label_describe_25",
+    "labelText": "Describe:",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_outside_doors_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_outside_doors_main_screen",
+    "screenTitle": "Outside Doors",
+    "labelId": "label_outside_doors",
+    "labelText": "Outside doors",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_outside_doors_main_screen"
+  },
+  {
+    "screenId": "activity_outside_property_outside_doors_main_screen",
+    "screenTitle": "Outside Doors",
+    "labelId": "label_condition_rating_25",
+    "labelText": "Condition Rating",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_outside_doors_main_screen"
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "screenTitle": "Floors",
+    "labelId": "label_about_floors",
+    "labelText": "About Floors",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors"
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "screenTitle": "Floors",
+    "labelId": "label_creaking",
+    "labelText": "Creaking",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors"
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "screenTitle": "Floors",
+    "labelId": "label_tiles",
+    "labelText": "Tiles",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors"
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "screenTitle": "Floors",
+    "labelId": "label_loose_floorboards",
+    "labelText": "Loose Floorboards",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors"
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "screenTitle": "Floors",
+    "labelId": "label_timber_decay",
+    "labelText": "Timber Decay",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors"
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "screenTitle": "Floors",
+    "labelId": "label_timber_infestation",
+    "labelText": "Timber Infestation",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors"
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "screenTitle": "Floors",
+    "labelId": "label_dampness_2",
+    "labelText": "Dampness",
+    "insertPosition": 1,
+    "nativeLayout": "activity_in_side_property_floors"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_safety_glass_rating",
+    "screenTitle": "Safety glass rating",
+    "labelId": "label_could_not_confirm_safety_glass_for",
+    "labelText": "Could not confirm safety glass for",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_conservatory_porch_safety_glass_rating"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating",
+    "screenTitle": "Safety glass rating",
+    "labelId": "label_could_not_confirm_safety_glass_for_2",
+    "labelText": "Could not confirm safety glass for",
+    "insertPosition": 1,
+    "nativeLayout": "activity_outside_property_conservatory_porch_safety_glass_rating"
+  },
+  {
+    "screenId": "activity_outside_property_porch_open_to_building",
+    "screenTitle": "Open to building",
+    "labelId": "label_open_to_the_main_part_of_property",
+    "labelText": "Open to the main part of property",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_porch_open_to_building"
+  },
+  {
+    "screenId": "activity_outside_property_porch_open_to_building__open_to_building",
+    "screenTitle": "Open to building",
+    "labelId": "label_open_to_the_main_part_of_property_2",
+    "labelText": "Open to the main part of property",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_porch_open_to_building"
+  },
+  {
+    "screenId": "activity_outside_property_porch_poor_condition",
+    "screenTitle": "Poor condition",
+    "labelId": "label_are_in_poor_condition",
+    "labelText": "Are in poor condition",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_porch_poor_condition"
+  },
+  {
+    "screenId": "activity_outside_property_porch_poor_condition__poor_condition",
+    "screenTitle": "Poor condition",
+    "labelId": "label_are_in_poor_condition_2",
+    "labelText": "Are in poor condition",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_porch_poor_condition"
+  },
+  {
+    "screenId": "activity_outside_property_roof_repair_poor_roof",
+    "screenTitle": "Poor Roof Condition",
+    "labelId": "label_roof_slope_in_poor_condition",
+    "labelText": "Roof slope in poor condition?",
+    "insertPosition": 0,
+    "nativeLayout": "activity_outside_property_roof_repair_poor_roof"
+  },
+  {
+    "screenId": "activity_services_gas_oil",
+    "screenTitle": "Gas and Oil",
+    "labelId": "label_mains_gas",
+    "labelText": "Mains Gas",
+    "insertPosition": 1,
+    "nativeLayout": "activity_services_gas_oil"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "screenTitle": "Flues Not Inspected",
+    "labelId": "label_an_open_fire",
+    "labelText": "An open fire",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places_diffrent"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "screenTitle": "Flues Not Inspected",
+    "labelId": "label_gas_fire",
+    "labelText": "Gas fire",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places_diffrent"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "screenTitle": "Flues Not Inspected",
+    "labelId": "label_imitation_system",
+    "labelText": "Imitation system",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places_diffrent"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "screenTitle": "Flues Not Inspected",
+    "labelId": "label_wood_burning_stove",
+    "labelText": "Wood burning stove",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places_diffrent"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "screenTitle": "Flues Not Inspected",
+    "labelId": "label_electric_fire",
+    "labelText": "Electric fire",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places_diffrent"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "screenTitle": "Flues Not Inspected",
+    "labelId": "label_other_3",
+    "labelText": "Other",
+    "insertPosition": 0,
+    "nativeLayout": "activity_in_side_property_fire_places_diffrent"
+  }
+]

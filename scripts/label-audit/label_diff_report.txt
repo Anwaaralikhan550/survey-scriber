@@ -1,0 +1,1193 @@
+=== LABEL DIFF REPORT ===
+
+Native layouts analyzed: 347
+V2 screens analyzed: 515
+Total native headings: 1239
+Already present in V2: 399
+MISSING from V2: 436
+Screens needing patches: 214
+Layouts not in V2: 94
+Headings ignored (non-section): 12
+
+=== MISSING LABELS BY SCREEN ===
+
+Screen: activity_in_side_property_bathroom_fittings_extractor_fan (Extractor Fan Installed) [42 fields]
+  Native layout: activity_in_side_property_bathroom_fittings_extractor_fan
+  Existing labels: Where is the extractor fan?, Where is there no extractor fan?, Where is fan broken/not working?
+  MISSING: "Fan Location" → insert at position 2
+  MISSING: "Fan Location" → insert at position 2
+  MISSING: "Fan Location" → insert at position 2
+  MISSING: "Tested" → insert at position 9
+  MISSING: "Defect" → insert at position 13
+  MISSING: "Fan Location" → insert at position 29
+
+Screen: activity_in_side_property_bathroom_fittings_repair (Repairs) [40 fields]
+  Native layout: activity_in_side_property_bathroom_fittings_repair
+  Existing labels: Defect, Defect
+  MISSING: "Location" → insert at position 1
+  MISSING: "Location" → insert at position 1
+
+Screen: activity_in_side_property_fire_places_repair_fire_place (Repair Fireplaces) [39 fields]
+  Native layout: activity_in_side_property_fire_places_repair_fire_place
+  Existing labels: Fireplace Location, Defect, Fireplace Location, Defect
+  MISSING: "Floor Location" → insert at position 1
+  MISSING: "Floor Location" → insert at position 1
+
+Screen: activity_outside_property_main_wall_repairs_window_sills (Windows Sills) [39 fields]
+  Native layout: activity_outside_property_main_wall_repairs_window_sills
+  Existing labels: Location, Defect, Location, Defect
+  MISSING: "Walls" → insert at position 0
+  MISSING: "Walls" → insert at position 0
+
+Screen: activity_outside_property_windows_velux_window (Velux window) [38 fields]
+  Native layout: activity_outside_property_windows_velux_window
+  Existing labels: Type, Glazzing, Location, Type, Glazzing
+  MISSING: "No.Of velux windows" → insert at position 14
+
+Screen: activity_outside_property_main_wall_repairs_lintel__door (Door) [37 fields]
+  Native layout: activity_outside_property_main_wall_repairs_lintel
+  MISSING: "Walls" → insert at position 0
+  MISSING: "Location" → insert at position 4
+  MISSING: "Defect" → insert at position 9
+  MISSING: "Walls" → insert at position 0
+  MISSING: "Location" → insert at position 4
+  MISSING: "Defect" → insert at position 9
+
+Screen: activity_outside_property_main_wall_repairs_render (Render) [36 fields]
+  Native layout: activity_outside_property_main_wall_repairs_render
+  Existing labels: Select repair now if defect is causing damp., Location, Defect, Location, Defect
+  MISSING: "Walls" → insert at position 1
+  MISSING: "Walls" → insert at position 1
+
+Screen: activity_in_side_property_other_repair (Repairs) [35 fields]
+  Native layout: activity_in_side_property_other_repair
+  Existing labels: Defect, Defect
+  MISSING: "The Entry at" → insert at position 1
+  MISSING: "The Entry at" → insert at position 1
+
+Screen: activity_inside_property_water_tank (Water tank) [34 fields]
+  Native layout: activity_inside_property_water_tank
+  Existing labels: Water Tank Material, Location, Location
+  MISSING: "Remove Defects" → insert at position 16
+
+Screen: activity_in_side_property_floors_repair_floor_repair (Floor Repair) [34 fields]
+  Native layout: activity_in_side_property_floors_repair_floor_repair
+  Existing labels: Defect, Defect
+  MISSING: "Location" → insert at position 1
+  MISSING: "Location" → insert at position 1
+
+Screen: activity_in_side_property_fire_places_repair_removed_cb (Removed CB) [33 fields]
+  Native layout: activity_in_side_property_fire_places_repair_removed_cb
+  Existing labels: Chimney Location, Chimney Location, Adjacent construction defects
+  MISSING: "Floor Location" → insert at position 1
+  MISSING: "Floor Location" → insert at position 1
+
+Screen: activity_outside_property_main_wall_repairs_pointing (Pointing) [32 fields]
+  Native layout: activity_outside_property_main_wall_repairs_pointing
+  Existing labels: Select repair now if defect is causing damp., Location, Defect, Location, Defect
+  MISSING: "Walls" → insert at position 1
+  MISSING: "Walls" → insert at position 1
+
+Screen: activity_inside_property_ceilings_repairs_ceilings (Repair Ceilings) [31 fields]
+  Native layout: activity_inside_property_ceilings_repairs_ceilings
+  Existing labels: Defect, Defect
+  MISSING: "Ceilings Location" → insert at position 1
+  MISSING: "Ceilings Location" → insert at position 1
+
+Screen: activity_in_side_property_wap_repair_wall_repair (Wall Repair) [31 fields]
+  Native layout: activity_in_side_property_wap_repair_wall_repair
+  Existing labels: Defect, Defect
+  MISSING: "Location" → insert at position 1
+  MISSING: "Location" → insert at position 1
+
+Screen: activity_grounds_other_front_garden__rear_garden (Rear Garden) [30 fields]
+  Native layout: activity_grounds_other_front_garden
+  MISSING: "The garden is" → insert at position 0
+
+Screen: activity_grounds_other_front_garden__side_garden (Side Garden) [30 fields]
+  Native layout: activity_grounds_other_front_garden
+  MISSING: "The garden is" → insert at position 0
+
+Screen: activity_grounds_other_front_garden__other_garden (Other Garden) [30 fields]
+  Native layout: activity_grounds_other_front_garden
+  MISSING: "The garden is" → insert at position 0
+
+Screen: activity_grounds_other_front_garden__communal_garden (Communal Garden) [30 fields]
+  Native layout: activity_grounds_other_front_garden
+  MISSING: "The garden is" → insert at position 0
+
+Screen: activity_in_side_property_ww_wood_work_repair (WoodWork Repair) [30 fields]
+  Native layout: activity_in_side_property_ww_wood_work_repair
+  Existing labels: Defect, Defect
+  MISSING: "Location" → insert at position 1
+  MISSING: "Location" → insert at position 1
+
+Screen: activity_outside_property_main_walls_movements (Movements) [28 fields]
+  Native layout: activity_outside_property_main_walls_movements
+  Existing labels: Location, Cracks potentially arising, Location
+  MISSING: "Wall" → insert at position 0
+  MISSING: "Wall" → insert at position 0
+
+Screen: activity_outside_property_repair_flashing (Flashing) [28 fields]
+  Native layout: activity_outside_property_repair_flashing
+  Existing labels: Chimney, Problem, Chimney, Problem
+  MISSING: "Flashing" → insert at position 0
+  MISSING: "Defect" → insert at position 9
+  MISSING: "Defect" → insert at position 2
+
+Screen: activity_front_garden (Front Garden) [27 fields]
+  Native layout: activity_front_garden
+  Existing labels: Type, Boundary Fencing
+  MISSING: "Rear Garden" → insert at position 23
+  MISSING: "Communal Garden" → insert at position 25
+
+Screen: activity_in_side_property_fire_places_repair_blocked_fireplace (Blocked Fireplace) [27 fields]
+  Native layout: activity_in_side_property_fire_places_repair_blocked_fireplace
+  Existing labels: Fireplace Location, Fireplace Location
+  MISSING: "Floor Location" → insert at position 0
+  MISSING: "Floor Location" → insert at position 0
+
+Screen: activity_property_roof (Roof) [27 fields]
+  Native layout: activity_property_roof
+  Existing labels: Roof Material, Cover Type
+  MISSING: "Roof Type" → insert at position 2
+  MISSING: "Built With" → insert at position 4
+
+Screen: activity_communal_garden (Communal Garden) [26 fields]
+  Native layout: activity_communal_garden
+  Existing labels: Type, Boundary Fencing
+  MISSING: "Front Garden" → insert at position 0
+  MISSING: "Rear Garden" → insert at position 2
+
+Screen: activity_outside_property_roof_repair_tiles (Repair Tiles) [26 fields]
+  Native layout: activity_outside_property_roof_repair_tiles
+  Existing labels: Defects - Many tiles, Defects - Many tiles
+  MISSING: "Type Of Tiles" → insert at position 0
+  MISSING: "Type Of Tiles" → insert at position 13
+
+Screen: activity_outside_property_roof_repair_verge (Verge Repair) [26 fields]
+  Native layout: activity_outside_property_roof_repair_verge
+  Existing labels: Defect, Defect
+  MISSING: "Particular" → insert at position 13
+
+Screen: activity_rear_garden (Rear Garden) [26 fields]
+  Native layout: activity_rear_garden
+  Existing labels: Type, Boundary Fencing
+  MISSING: "Front Garden" → insert at position 0
+  MISSING: "Communal Garden" → insert at position 23
+
+Screen: outside_property_about_roof_layout (Pitched) [26 fields]
+  Native layout: outside_property_about_roof_layout
+  MISSING: "Location" → insert at position 0
+  MISSING: "Material" → insert at position 6
+  MISSING: "Shape of covering material" → insert at position 18
+
+Screen: outside_property_about_roof_layout__flat (Flat) [26 fields]
+  Native layout: outside_property_about_roof_layout
+  MISSING: "Location" → insert at position 0
+  MISSING: "Material" → insert at position 6
+  MISSING: "Shape of covering material" → insert at position 18
+
+Screen: outside_property_about_roof_layout__mansard (Mansard) [26 fields]
+  Native layout: outside_property_about_roof_layout
+  MISSING: "Location" → insert at position 0
+  MISSING: "Material" → insert at position 6
+  MISSING: "Shape of covering material" → insert at position 18
+
+Screen: outside_property_about_roof_layout__other (Other) [26 fields]
+  Native layout: outside_property_about_roof_layout
+  MISSING: "Location" → insert at position 0
+  MISSING: "Material" → insert at position 6
+  MISSING: "Shape of covering material" → insert at position 18
+
+Screen: activity_in_side_property_built_in_fittings_repair_fittings (Repair Fitting) [24 fields]
+  Native layout: activity_in_side_property_built_in_fittings_repair_fittings
+  Existing labels: Defect, Defect
+  MISSING: "Location" → insert at position 1
+  MISSING: "Location" → insert at position 1
+
+Screen: activity_outside_property_main_walls_about_wall (Solid brick wall) [24 fields]
+  Native layout: activity_outside_property_main_walls_about_wall
+  Existing labels: Wall, Finishes type
+  MISSING: "Construction" → insert at position 8
+
+Screen: activity_inside_property_about_roof_structure (About Roof structure) [23 fields]
+  Native layout: activity_inside_property_about_roof_structure
+  Existing labels: Defect
+  MISSING: "Material" → insert at position 2
+  MISSING: "Ventilation" → insert at position 18
+
+Screen: activity_in_side_property_other_communal_area (Communal Area) [23 fields]
+  Native layout: activity_in_side_property_other_communal_area
+  Existing labels: Defect Noted
+  MISSING: "Not Inspected Because Of" → insert at position 1
+  MISSING: "Property comprise of" → insert at position 6
+
+Screen: activity_outside_property_main_wall_repairs_spalling (Spalling) [23 fields]
+  Native layout: activity_outside_property_main_wall_repairs_spalling
+  Existing labels: Select repair now if defect is causing damp., Location, Location
+  MISSING: "Walls" → insert at position 1
+  MISSING: "Walls" → insert at position 1
+
+Screen: activity_outside_property_out_side_doors_about_doors (PVC) [23 fields]
+  Native layout: activity_outside_property_out_side_doors_about_doors
+  Existing labels: Door location, Glazzing
+  MISSING: "Type" → insert at position 10
+
+Screen: activity_outside_property_rwg__repair_pipes_gutters (Repairs) [23 fields]
+  Native layout: activity_outside_property_rwg__repair_pipes_gutters
+  Existing labels: Defect, Defect
+  MISSING: "Item" → insert at position 1
+  MISSING: "Item" → insert at position 12
+
+Screen: activity_in_side_property_floors_about_floor (About Floors) [22 fields]
+  Native layout: activity_in_side_property_floors_about_floor
+  Existing labels: Covering, Floor Covering Includes
+  MISSING: "A mixture of" → insert at position 1
+
+Screen: activity_outside_property_main_walls_about_wall__cavity_brick_wall (Cavity brick wall) [22 fields]
+  Native layout: activity_outside_property_main_walls_about_wall
+  MISSING: "Wall" → insert at position 0
+  MISSING: "Construction" → insert at position 4
+  MISSING: "Finishes type" → insert at position 9
+
+Screen: activity_outside_property_main_walls_about_wall__cavity_block_wall (Cavity block wall) [22 fields]
+  Native layout: activity_outside_property_main_walls_about_wall
+  MISSING: "Wall" → insert at position 0
+  MISSING: "Construction" → insert at position 4
+  MISSING: "Finishes type" → insert at position 9
+
+Screen: activity_outside_property_main_walls_about_wall__cavity_stud_wall (Cavity stud wall) [22 fields]
+  Native layout: activity_outside_property_main_walls_about_wall
+  MISSING: "Wall" → insert at position 0
+  MISSING: "Construction" → insert at position 4
+  MISSING: "Finishes type" → insert at position 9
+
+Screen: activity_outside_property_main_walls_about_wall__other (Other) [22 fields]
+  Native layout: activity_outside_property_main_walls_about_wall
+  MISSING: "Wall" → insert at position 0
+  MISSING: "Construction" → insert at position 4
+  MISSING: "Finishes type" → insert at position 9
+
+Screen: activity_outside_property_main_walls_damp (DAMP) [22 fields]
+  Native layout: activity_outside_property_main_walls_damp
+  Existing labels: Damp cause, e.g. Lower walls in the lounge..
+  MISSING: "Caused By" → insert at position 4
+  MISSING: "Caused By" → insert at position 12
+
+Screen: activity_outside_property_other_joinery_and_finishes_repairs__repairs (Repairs) [21 fields]
+  Native layout: activity_outside_property_other_joinery_and_finishes_repairs
+  MISSING: "Item" → insert at position 0
+  MISSING: "Location" → insert at position 6
+  MISSING: "Defect" → insert at position 12
+
+Screen: activity_outside_property_out_side_doors_about_doors__timber (Timber) [21 fields]
+  Native layout: activity_outside_property_out_side_doors_about_doors
+  MISSING: "Door location" → insert at position 0
+  MISSING: "Type" → insert at position 7
+  MISSING: "Glazzing" → insert at position 12
+
+Screen: activity_outside_property_out_side_doors_about_doors__steel (Steel) [21 fields]
+  Native layout: activity_outside_property_out_side_doors_about_doors
+  MISSING: "Door location" → insert at position 0
+  MISSING: "Type" → insert at position 7
+  MISSING: "Glazzing" → insert at position 12
+
+Screen: activity_outside_property_out_side_doors_about_doors__aluminium (Aluminium) [21 fields]
+  Native layout: activity_outside_property_out_side_doors_about_doors
+  MISSING: "Door location" → insert at position 0
+  MISSING: "Type" → insert at position 7
+  MISSING: "Glazzing" → insert at position 12
+
+Screen: activity_outside_property_out_side_doors_about_doors__other (Other) [21 fields]
+  Native layout: activity_outside_property_out_side_doors_about_doors
+  MISSING: "Door location" → insert at position 0
+  MISSING: "Type" → insert at position 7
+  MISSING: "Glazzing" → insert at position 12
+
+Screen: activity_outside_property_main_wall_repairs_spalling__causing_damp (Causing damp) [20 fields]
+  Native layout: activity_outside_property_main_wall_repairs_spalling
+  MISSING: "Select repair now if defect is causing damp." → insert at position 0
+  MISSING: "Walls" → insert at position 4
+  MISSING: "Location" → insert at position 3
+  MISSING: "Walls" → insert at position 4
+  MISSING: "Location" → insert at position 3
+
+Screen: activity_outside_property_conservatory_porch_repairs__windows (Windows) [19 fields]
+  Native layout: activity_outside_property_conservatory_porch_repairs
+  MISSING: "Defect" → insert at position 0
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_conservatory_porch_repairs__door_glazing (Door Glazing) [19 fields]
+  Native layout: activity_outside_property_conservatory_porch_repairs
+  MISSING: "Defect" → insert at position 0
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_conservatory_porch_repairs__window_glazing (Window Glazing) [19 fields]
+  Native layout: activity_outside_property_conservatory_porch_repairs
+  MISSING: "Defect" → insert at position 0
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_conservatory_porch_repairs__roof_glazing (Roof Glazing) [19 fields]
+  Native layout: activity_outside_property_conservatory_porch_repairs
+  MISSING: "Defect" → insert at position 0
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_conservatory_porch_repairs__floor (Floor) [19 fields]
+  Native layout: activity_outside_property_conservatory_porch_repairs
+  MISSING: "Defect" → insert at position 0
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_conservatory_porch_repairs__walls (Walls) [19 fields]
+  Native layout: activity_outside_property_conservatory_porch_repairs
+  MISSING: "Defect" → insert at position 0
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_conservatory_porch_repairs__rainwater_goods (Rainwater Goods) [19 fields]
+  Native layout: activity_outside_property_conservatory_porch_repairs
+  MISSING: "Defect" → insert at position 0
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_communal_area (Communal Area) [19 fields]
+  Native layout: activity_outside_property_other_communal_area
+  Existing labels: External communal parts
+  MISSING: "Because Of" → insert at position 13
+
+Screen: activity_in_side_property_floors_repair_uneven_floor (Uneven Floor) [18 fields]
+  Native layout: activity_in_side_property_floors_repair_uneven_floor
+  Existing labels: Defect
+  MISSING: "Location" → insert at position 1
+
+Screen: activity_outside_property_windows_repairs_failed_glazing_location (Failed glazing location) [18 fields]
+  Native layout: activity_outside_property_windows_repairs_failed_glazing_location
+  Existing labels: Location, Select property for many failed glazing
+  MISSING: "Defect" → insert at position 9
+
+Screen: activity_in_side_property_wap_dampness (Dampness) [17 fields]
+  Native layout: activity_in_side_property_wap_dampness
+  Existing labels: Damp Meter Reading, e.g. lower walls in the kitchen
+  MISSING: "Cause" → insert at position 6
+  MISSING: "Caused By" → insert at position 10
+
+Screen: outside_property_roof_covering_deflection_layout (Deflection) [17 fields]
+  Native layout: outside_property_roof_covering_deflection_layout
+  MISSING: "Location" → insert at position 0
+  MISSING: "Cause of defect" → insert at position 4
+  MISSING: "Location" → insert at position 4
+
+Screen: inside_property_ceilings_about_ceilings (About Ceilings) [16 fields]
+  Native layout: inside_property_ceilings_about_ceilings
+  MISSING: "Construction" → insert at position 0
+  MISSING: "Material" → insert at position 1
+  MISSING: "Finishes Type" → insert at position 7
+
+Screen: activity_outside_property_main_walls_removed_wall (Removed Walls) [13 fields]
+  Native layout: activity_outside_property_main_walls_removed_wall
+  Existing labels: Walled removed location
+  MISSING: "Describe defect" → insert at position 7
+
+Screen: activity_outside_property_rainwater_goods_main_screen (Rainwater Goods) [13 fields]
+  Native layout: activity_outside_property_rainwater_goods_main_screen
+  Existing labels: Repairs, Not inspected, Location / Area
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Rainwater Goods" → insert at position 1
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Location could not be viewed from ground level are" → insert at position 7
+  MISSING: "Note" → insert at position 5
+
+Screen: activity_outside_property_roof_covering_main_screen (Roof Covering) [13 fields]
+  Native layout: activity_outside_property_roof_covering_main_screen
+  Existing labels: Location / Area, Not Inspected, Repairs
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Roof Covering" → insert at position 1
+  MISSING: "Condition Rating" → insert at position 11
+  MISSING: "Location could not be viewed from ground level are" → insert at position 1
+  MISSING: "Note" → insert at position 9
+
+Screen: activity_estate_location (Estated Location) [12 fields]
+  Native layout: activity_estate_location
+  MISSING: "Front Garden" → insert at position 0
+  MISSING: "Rear Garden" → insert at position 5
+  MISSING: "Communal Garden" → insert at position 9
+
+Screen: activity_gated_community (Gated Community) [12 fields]
+  Native layout: activity_gated_community
+  MISSING: "Front Garden" → insert at position 1
+  MISSING: "Rear Garden" → insert at position 4
+  MISSING: "Communal Garden" → insert at position 9
+
+Screen: activity_inside_property_roof_structure_not_inspected (Not Inspected) [12 fields]
+  Native layout: activity_inside_property_roof_structure_not_inspected
+  MISSING: "Defect" → insert at position 6
+
+Screen: activity_outside_property_conservatory_porch_location_construction__location_and_construction (Location and construction) [12 fields]
+  Native layout: activity_outside_property_conservatory_porch_location_construction
+  MISSING: "Porch Type" → insert at position 0
+  MISSING: "Construction" → insert at position 4
+
+Screen: activity_outside_property_other_about_joinery_and_finishes__other_joinery_and_finishes (Other Joinery and Finishes) [12 fields]
+  Native layout: activity_outside_property_other_about_joinery_and_finishes
+  MISSING: "External Work Includes" → insert at position 0
+  MISSING: "Material" → insert at position 5
+
+Screen: activity_property_local_environment (Local Environment) [12 fields]
+  Native layout: activity_property_local_environment
+  MISSING: "Flooding" → insert at position 1
+  MISSING: "EMF" → insert at position 6
+
+Screen: activity_topography (Topography) [12 fields]
+  Native layout: activity_topography
+  MISSING: "Front Garden" → insert at position 0
+  MISSING: "Rear Garden" → insert at position 5
+  MISSING: "Communal Garden" → insert at position 9
+
+Screen: activity_in_side_property_wood_work_damaged_lock__damaged_lock (Damaged Lock) [11 fields]
+  Native layout: activity_in_side_property_wood_work_damaged_lock
+  MISSING: "Damaged lock in the" → insert at position 0
+  MISSING: "Defect" → insert at position 6
+
+Screen: activity_outside_property_conservatory_porch_roof__roof (Roof) [11 fields]
+  Native layout: activity_outside_property_conservatory_porch_roof
+  MISSING: "Material" → insert at position 0
+
+Screen: activity_outside_property_rwg_about (About RWG) [11 fields]
+  Native layout: activity_outside_property_rwg_about
+  Existing labels: Type
+  MISSING: "Condition" → insert at position 9
+
+Screen: activity_parking (Commercial) [10 fields]
+  Native layout: activity_parking
+  MISSING: "Parking" → insert at position 0
+  MISSING: "Type" → insert at position 1
+
+Screen: activity_parking__parking (Parking) [10 fields]
+  Native layout: activity_parking
+  MISSING: "Parking" → insert at position 7
+  MISSING: "Type" → insert at position 5
+
+Screen: activity_in_side_property_fire_places__other (Other) [9 fields]
+  Native layout: activity_in_side_property_fire_places
+  MISSING: "Location" → insert at position 1
+  MISSING: "Type" → insert at position 4
+
+Screen: activity_outside_property_leaning_chimney (Leaning Chimney) [9 fields]
+  Native layout: activity_outside_property_leaning_chimney
+  Existing labels: Location
+  MISSING: "Condition" → insert at position 7
+
+Screen: activity_in_side_property_bathroom_fittings_extractor_fan__no_extractor_fan_installed (No Extractor Fan Installed) [8 fields]
+  Native layout: activity_in_side_property_bathroom_fittings_extractor_fan
+  MISSING: "Fan Location" → insert at position 1
+  MISSING: "Fan Location" → insert at position 1
+  MISSING: "Fan Location" → insert at position 1
+  MISSING: "Tested" → insert at position 4
+  MISSING: "Defect" → insert at position 5
+  MISSING: "Fan Location" → insert at position 0
+
+Screen: activity_in_side_property_fire_places__gas_fire (Gas fire) [8 fields]
+  Native layout: activity_in_side_property_fire_places
+  MISSING: "Location" → insert at position 0
+  MISSING: "Type" → insert at position 4
+
+Screen: activity_in_side_property_fire_places__imitation_system (Imitation system) [8 fields]
+  Native layout: activity_in_side_property_fire_places
+  MISSING: "Location" → insert at position 0
+  MISSING: "Type" → insert at position 4
+
+Screen: activity_in_side_property_fire_places__wood_burning_stove (Wood burning stove) [8 fields]
+  Native layout: activity_in_side_property_fire_places
+  MISSING: "Location" → insert at position 0
+  MISSING: "Type" → insert at position 4
+
+Screen: activity_in_side_property_fire_places__electric_fire (Electric fire) [8 fields]
+  Native layout: activity_in_side_property_fire_places
+  MISSING: "Location" → insert at position 0
+  MISSING: "Type" → insert at position 4
+
+Screen: activity_outside_property_main_wall_repairs_cavity_wall_insulation (Cavity Wall Insulation) [8 fields]
+  Native layout: activity_outside_property_main_wall_repairs_cavity_wall_insulation
+  MISSING: "Location" → insert at position 0
+
+Screen: activity_outside_property_other_not_inspected (Not inspected) [8 fields]
+  Native layout: activity_outside_property_other_not_inspected
+  MISSING: "Location" → insert at position 0
+
+Screen: activity_property_extended (Year Extended) [8 fields]
+  Native layout: activity_property_extended
+  MISSING: "Ex.Location" → insert at position 3
+
+Screen: outside_property_roof_covering_roof_structure_layout (Undulating/Uneven Roof) [8 fields]
+  Native layout: outside_property_roof_covering_roof_structure_layout
+  MISSING: "Roof Over at location" → insert at position 0
+  MISSING: "Condition" → insert at position 7
+  MISSING: "Roof Slope" → insert at position 3
+
+Screen: activity_outside_property_conservatory_porch_doors__doors (Doors) [7 fields]
+  Native layout: activity_outside_property_conservatory_porch_doors
+  MISSING: "Incorporates" → insert at position 0
+  MISSING: "Glazzing" → insert at position 2
+
+Screen: activity_outside_property_conservatory_porch_windows__windows (Windows) [7 fields]
+  Native layout: activity_outside_property_conservatory_porch_windows
+  MISSING: "Incorporates" → insert at position 0
+  MISSING: "Glazzing" → insert at position 2
+
+Screen: activity_outside_property_other_drains__drains (Drains) [7 fields]
+  Native layout: activity_outside_property_other_drains
+  MISSING: "Laid with" → insert at position 0
+
+Screen: activity_outside_property_other_drains__drains__2 (Drains) [7 fields]
+  Native layout: activity_outside_property_other_drains
+  MISSING: "Laid with" → insert at position 0
+
+Screen: activity_outside_property_other_drains__drains__3 (Drains) [7 fields]
+  Native layout: activity_outside_property_other_drains
+  MISSING: "Laid with" → insert at position 0
+
+Screen: activity_outside_property_other_drains__drains__4 (Drains) [7 fields]
+  Native layout: activity_outside_property_other_drains
+  MISSING: "Laid with" → insert at position 0
+
+Screen: activity_outside_property_other_drains__drains__5 (Drains) [7 fields]
+  Native layout: activity_outside_property_other_drains
+  MISSING: "Laid with" → insert at position 0
+
+Screen: activity_outside_property_other_drains__drains__6 (Drains) [7 fields]
+  Native layout: activity_outside_property_other_drains
+  MISSING: "Laid with" → insert at position 0
+
+Screen: activity_outside_property_other_other_wall__wall_construction (Wall Construction) [7 fields]
+  Native layout: activity_outside_property_other_other_wall
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_wall__wall_construction__2 (Wall Construction) [7 fields]
+  Native layout: activity_outside_property_other_other_wall
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_wall__wall_construction__3 (Wall Construction) [7 fields]
+  Native layout: activity_outside_property_other_other_wall
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_wall__wall_construction__4 (Wall Construction) [7 fields]
+  Native layout: activity_outside_property_other_other_wall
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_wall__wall_construction__5 (Wall Construction) [7 fields]
+  Native layout: activity_outside_property_other_other_wall
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_wall__wall_construction__6 (Wall Construction) [7 fields]
+  Native layout: activity_outside_property_other_other_wall
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_roof__roof (Roof) [7 fields]
+  Native layout: activity_outside_property_other_repairs_roof
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_roof__roof__2 (Roof) [7 fields]
+  Native layout: activity_outside_property_other_repairs_roof
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_roof__roof__3 (Roof) [7 fields]
+  Native layout: activity_outside_property_other_repairs_roof
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_roof__roof__4 (Roof) [7 fields]
+  Native layout: activity_outside_property_other_repairs_roof
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_roof__roof__5 (Roof) [7 fields]
+  Native layout: activity_outside_property_other_repairs_roof
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_roof__roof__6 (Roof) [7 fields]
+  Native layout: activity_outside_property_other_repairs_roof
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_property_location (Property Location density) [7 fields]
+  Native layout: activity_property_location
+  Existing labels: Established Area, Location Density
+  MISSING: "Outside On Private Road?" → insert at position 3
+  MISSING: "Is Noisy Area?" → insert at position 5
+  MISSING: "Establish Conv. Area?" → insert at position 3
+  MISSING: "Local Facilities in Area?" → insert at position 3
+  MISSING: "Local Environment" → insert at position 6
+
+Screen: outside_property_roof_covering_parapet_wall_layout (Parapet Wall) [7 fields]
+  Native layout: outside_property_roof_covering_parapet_wall_layout
+  MISSING: "Built with" → insert at position 0
+
+Screen: activity_inside_property_other_celler_not_habitable__not_habitable (Not Habitable) [6 fields]
+  Native layout: activity_inside_property_other_celler_not_habitable
+  MISSING: "Should Not Use Because Of" → insert at position 0
+
+Screen: activity_other_repair_nearby_trees (Nearby Trees) [6 fields]
+  Native layout: activity_other_repair_nearby_trees
+  MISSING: "Trees causing" → insert at position 2
+
+Screen: activity_outside_property_other_other_external__construction (Construction) [6 fields]
+  Native layout: activity_outside_property_other_other_external
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_external__construction__2 (Construction) [6 fields]
+  Native layout: activity_outside_property_other_other_external
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_external__construction__3 (Construction) [6 fields]
+  Native layout: activity_outside_property_other_other_external
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_external__construction__4 (Construction) [6 fields]
+  Native layout: activity_outside_property_other_other_external
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_external__construction__5 (Construction) [6 fields]
+  Native layout: activity_outside_property_other_other_external
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_other_external__construction__6 (Construction) [6 fields]
+  Native layout: activity_outside_property_other_other_external
+  MISSING: "Construction" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_decorations__perished_decorations (Perished Decorations) [6 fields]
+  Native layout: activity_outside_property_other_repairs_decorations
+  MISSING: "Location" → insert at position 0
+  MISSING: "Defect" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_decorations__perished_decorations__2 (Perished Decorations) [6 fields]
+  Native layout: activity_outside_property_other_repairs_decorations
+  MISSING: "Location" → insert at position 0
+  MISSING: "Defect" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_decorations__perished_decorations__3 (Perished Decorations) [6 fields]
+  Native layout: activity_outside_property_other_repairs_decorations
+  MISSING: "Location" → insert at position 0
+  MISSING: "Defect" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_decorations__perished_decorations__4 (Perished Decorations) [6 fields]
+  Native layout: activity_outside_property_other_repairs_decorations
+  MISSING: "Location" → insert at position 0
+  MISSING: "Defect" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_decorations__perished_decorations__5 (Perished Decorations) [6 fields]
+  Native layout: activity_outside_property_other_repairs_decorations
+  MISSING: "Location" → insert at position 0
+  MISSING: "Defect" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_decorations__perished_decorations__6 (Perished Decorations) [6 fields]
+  Native layout: activity_outside_property_other_repairs_decorations
+  MISSING: "Location" → insert at position 0
+  MISSING: "Defect" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_hand_rails (Hand rails) [6 fields]
+  Native layout: activity_outside_property_other_repairs_hand_rails
+  Existing labels: Handrail to balcony
+  MISSING: "Handrail defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_steps_landing__steps_landing (Steps landing) [6 fields]
+  Native layout: activity_outside_property_other_repairs_steps_landing
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_steps_landing__steps_landing__2 (Steps landing) [6 fields]
+  Native layout: activity_outside_property_other_repairs_steps_landing
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_steps_landing__steps_landing__3 (Steps landing) [6 fields]
+  Native layout: activity_outside_property_other_repairs_steps_landing
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_steps_landing__steps_landing__4 (Steps landing) [6 fields]
+  Native layout: activity_outside_property_other_repairs_steps_landing
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_steps_landing__steps_landing__5 (Steps landing) [6 fields]
+  Native layout: activity_outside_property_other_repairs_steps_landing
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_steps_landing__steps_landing__6 (Steps landing) [6 fields]
+  Native layout: activity_outside_property_other_repairs_steps_landing
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_wall__wall (Wall) [6 fields]
+  Native layout: activity_outside_property_other_repairs_wall
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_wall__wall__2 (Wall) [6 fields]
+  Native layout: activity_outside_property_other_repairs_wall
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_wall__wall__3 (Wall) [6 fields]
+  Native layout: activity_outside_property_other_repairs_wall
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_wall__wall__4 (Wall) [6 fields]
+  Native layout: activity_outside_property_other_repairs_wall
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_wall__wall__5 (Wall) [6 fields]
+  Native layout: activity_outside_property_other_repairs_wall
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_wall__wall__6 (Wall) [6 fields]
+  Native layout: activity_outside_property_other_repairs_wall
+  MISSING: "Defect" → insert at position 0
+
+Screen: outside_property_roof_covering_hip_tiles_layout (Hip Tiles) [6 fields]
+  Native layout: outside_property_roof_covering_hip_tiles_layout
+  MISSING: "Roofs slopes tiles are assumed formed in" → insert at position 0
+
+Screen: outside_property_roof_covering_ridge_tiles_layout (Ridge Tiles) [6 fields]
+  Native layout: outside_property_roof_covering_ridge_tiles_layout
+  MISSING: "Ridge tiles are assumed formed in" → insert at position 0
+
+Screen: activity_outside_property_conservatory_porch_floor__floor (Floor) [5 fields]
+  Native layout: activity_outside_property_conservatory_porch_floor
+  MISSING: "Floor covered in" → insert at position 0
+
+Screen: activity_outside_property_conservatory_porch_not_inspected (Not inspected) [5 fields]
+  Native layout: activity_outside_property_conservatory_porch_not_inspected
+  MISSING: "Location" → insert at position 0
+
+Screen: activity_outside_property_other_handrails__handrails (Handrails) [5 fields]
+  Native layout: activity_outside_property_other_handrails
+  MISSING: "Type" → insert at position 0
+
+Screen: activity_outside_property_other_handrails__handrails__2 (Handrails) [5 fields]
+  Native layout: activity_outside_property_other_handrails
+  MISSING: "Type" → insert at position 0
+
+Screen: activity_outside_property_other_handrails__handrails__3 (Handrails) [5 fields]
+  Native layout: activity_outside_property_other_handrails
+  MISSING: "Type" → insert at position 0
+
+Screen: activity_outside_property_other_handrails__handrails__4 (Handrails) [5 fields]
+  Native layout: activity_outside_property_other_handrails
+  MISSING: "Type" → insert at position 0
+
+Screen: activity_outside_property_other_handrails__handrails__5 (Handrails) [5 fields]
+  Native layout: activity_outside_property_other_handrails
+  MISSING: "Type" → insert at position 0
+
+Screen: activity_outside_property_other_handrails__handrails__6 (Handrails) [5 fields]
+  Native layout: activity_outside_property_other_handrails
+  MISSING: "Type" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_hand_rails__hand_rails (Hand rails) [5 fields]
+  Native layout: activity_outside_property_other_repairs_hand_rails
+  MISSING: "Handrail defect" → insert at position 0
+  MISSING: "Handrail to balcony" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_hand_rails__hand_rails__2 (Hand rails) [5 fields]
+  Native layout: activity_outside_property_other_repairs_hand_rails
+  MISSING: "Handrail defect" → insert at position 0
+  MISSING: "Handrail to balcony" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_hand_rails__hand_rails__3 (Hand rails) [5 fields]
+  Native layout: activity_outside_property_other_repairs_hand_rails
+  MISSING: "Handrail defect" → insert at position 0
+  MISSING: "Handrail to balcony" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_hand_rails__hand_rails__4 (Hand rails) [5 fields]
+  Native layout: activity_outside_property_other_repairs_hand_rails
+  MISSING: "Handrail defect" → insert at position 0
+  MISSING: "Handrail to balcony" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_hand_rails__hand_rails__5 (Hand rails) [5 fields]
+  Native layout: activity_outside_property_other_repairs_hand_rails
+  MISSING: "Handrail defect" → insert at position 0
+  MISSING: "Handrail to balcony" → insert at position 2
+
+Screen: activity_outside_property_other_repairs_hand_rails__hand_rails__6 (Hand rails) [5 fields]
+  Native layout: activity_outside_property_other_repairs_hand_rails
+  MISSING: "Handrail defect" → insert at position 0
+  MISSING: "Handrail to balcony" → insert at position 2
+
+Screen: activity_services_electricity_main_screen (Electricity) [5 fields]
+  Native layout: activity_services_electricity_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Electricity" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 4
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_services_main_gas (Mains Gas) [5 fields]
+  Native layout: activity_services_main_gas
+  Existing labels: Mains gas meter and control valve are located at location
+  MISSING: "Mains Gas Meter and Control valve location" → insert at position 2
+
+Screen: outside_property_roof_covering_asbestos_layout (Contain Asbestos) [5 fields]
+  Native layout: outside_property_roof_covering_asbestos_layout
+  MISSING: "These roof parts may contain Asbestos" → insert at position 0
+
+Screen: activity_grounds_garage_main_screen (Garage) [4 fields]
+  Native layout: activity_grounds_garage_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Garage" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_grounds_other_area_knotweed (Knotweed) [4 fields]
+  Native layout: activity_grounds_other_area_knotweed
+  MISSING: "Japanese knotweed is growing at Location" → insert at position 0
+
+Screen: activity_grounds_other_main_screen (Other) [4 fields]
+  Native layout: activity_grounds_other_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Other" → insert at position 0
+  MISSING: "Shared Access" → insert at position 0
+  MISSING: "Private Road" → insert at position 1
+  MISSING: "Legal Issues" → insert at position 1
+  MISSING: "Shrinkable Clay" → insert at position 2
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_inside_property_bathroom_fittings_main_screen (Bathroom Fittings) [4 fields]
+  Native layout: activity_inside_property_bathroom_fittings_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Bathroom Fitting" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_inside_property_built_in_fittings_main_screen (Built In Fittings) [4 fields]
+  Native layout: activity_inside_property_built_in_fittings_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Built In Fittings" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_inside_property_ceilings_main_screen (Ceilings) [4 fields]
+  Native layout: activity_inside_property_ceilings_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Ceilings" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_inside_property_fireplaces_main_screen (Fireplaces and Chimneys) [4 fields]
+  Native layout: activity_inside_property_fireplaces_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Fire Places" → insert at position 0
+  MISSING: "Blocked Fireplace" → insert at position 0
+  MISSING: "Removed CB" → insert at position 1
+  MISSING: "Boiler Flue" → insert at position 1
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_inside_property_floors_main_screen (Floors) [4 fields]
+  Native layout: activity_inside_property_floors_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Floors" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_inside_property_other_celler_no_access__no_access (No access) [4 fields]
+  Native layout: activity_inside_property_other_celler_no_access
+  MISSING: "No Access Because Of" → insert at position 0
+
+Screen: activity_inside_property_other_not_inspected (Not Inspected) [4 fields]
+  Native layout: activity_inside_property_other_not_inspected
+  MISSING: "Location" → insert at position 0
+
+Screen: activity_inside_property_roof_structure_main_screen (Roof Structure) [4 fields]
+  Native layout: activity_inside_property_roof_structure_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Roof Structure" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_inside_property_walls_and_partitions_main_screen (Walls and Partitions) [4 fields]
+  Native layout: activity_inside_property_walls_and_partitions_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Walls and Partitions" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_outside_property_chimney_main_screen (Chimney) [4 fields]
+  Native layout: activity_outside_property_chimney_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Chimney" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_outside_property_conservatory_porch_main_screen (Conservatory and Porches) [4 fields]
+  Native layout: activity_outside_property_conservatory_porch_main_screen
+  Existing labels: Repairs, Not inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Conservatory and Porch" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_outside_property_other_floors__floor (Floor) [4 fields]
+  Native layout: activity_outside_property_other_floors
+  MISSING: "The floors are" → insert at position 0
+
+Screen: activity_outside_property_other_floors__floor__2 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_floors
+  MISSING: "The floors are" → insert at position 0
+
+Screen: activity_outside_property_other_floors__floor__3 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_floors
+  MISSING: "The floors are" → insert at position 0
+
+Screen: activity_outside_property_other_floors__floor__4 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_floors
+  MISSING: "The floors are" → insert at position 0
+
+Screen: activity_outside_property_other_floors__floor__5 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_floors
+  MISSING: "The floors are" → insert at position 0
+
+Screen: activity_outside_property_other_floors__floor__6 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_floors
+  MISSING: "The floors are" → insert at position 0
+
+Screen: activity_outside_property_other_joinery_and_finishes_main_screen (Other Joinery and Finishes) [4 fields]
+  Native layout: activity_outside_property_other_joinery_and_finishes_main_screen
+  Existing labels: Repairs, Not inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Other Joinery and Finishes" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_outside_property_other_joinery_finishes_not_inspected (Not inspected) [4 fields]
+  Native layout: activity_outside_property_other_joinery_finishes_not_inspected
+  MISSING: "Location" → insert at position 0
+
+Screen: activity_outside_property_other_main_screen (Other Area) [4 fields]
+  Native layout: activity_outside_property_other_main_screen
+  Existing labels: Repairs, Not inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Other Area" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_outside_property_other_repairs_drains__drains (Drains) [4 fields]
+  Native layout: activity_outside_property_other_repairs_drains
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_drains__drains__2 (Drains) [4 fields]
+  Native layout: activity_outside_property_other_repairs_drains
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_drains__drains__3 (Drains) [4 fields]
+  Native layout: activity_outside_property_other_repairs_drains
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_drains__drains__4 (Drains) [4 fields]
+  Native layout: activity_outside_property_other_repairs_drains
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_drains__drains__5 (Drains) [4 fields]
+  Native layout: activity_outside_property_other_repairs_drains
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_drains__drains__6 (Drains) [4 fields]
+  Native layout: activity_outside_property_other_repairs_drains
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_floor__floor (Floor) [4 fields]
+  Native layout: activity_outside_property_other_repairs_floor
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_floor__floor__2 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_repairs_floor
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_floor__floor__3 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_repairs_floor
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_floor__floor__4 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_repairs_floor
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_floor__floor__5 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_repairs_floor
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_other_repairs_floor__floor__6 (Floor) [4 fields]
+  Native layout: activity_outside_property_other_repairs_floor
+  MISSING: "Defect" → insert at position 0
+
+Screen: activity_outside_property_windows_main_screen (Windows) [4 fields]
+  Native layout: activity_outside_property_windows_main_screen
+  Existing labels: Repairs, Not inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Windows" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_services_drainage_main_screen (Drainage) [4 fields]
+  Native layout: activity_services_drainage_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Drainage" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_services_gas_oil_main_screen (Gas and Oil) [4 fields]
+  Native layout: activity_services_gas_oil_main_screen
+  Existing labels: Other, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Gas and Oil" → insert at position 0
+  MISSING: "Repairs" → insert at position 0
+  MISSING: "No.of pots" → insert at position 0
+  MISSING: "Rendering" → insert at position 1
+  MISSING: "Waterproofing" → insert at position 1
+  MISSING: "Condition" → insert at position 1
+  MISSING: "Shared Chimney" → insert at position 2
+  MISSING: "Leaning Chimney" → insert at position 2
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_services_heating_main_screen (Heating) [4 fields]
+  Native layout: activity_services_heating_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Heating" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_services_water_heating_main_screen (Water Heating) [4 fields]
+  Native layout: activity_services_water_heating_main_screen
+  Existing labels: Repairs, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Water Heating" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: activity_services_water_main_screen (Water) [4 fields]
+  Native layout: activity_services_water_main_screen
+  Existing labels: Water, Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 3
+
+Screen: outside_property_roof_covering_roof_spreading_layout (Roof Spreading) [4 fields]
+  Native layout: outside_property_roof_covering_roof_spreading_layout
+  Existing labels: Roof Spreading Location
+  MISSING: "The surface of the roof slope  is uneven or undulating to the location" → insert at position 1
+
+Screen: activity_grounds_other_area_main_screen (Other Area) [3 fields]
+  Native layout: activity_grounds_other_area_main_screen
+  Existing labels: Not Inspected
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Other Area" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 2
+
+Screen: activity_outside_property_main_walls_main_screen (Main Walls) [3 fields]
+  Native layout: activity_outside_property_main_walls_main_screen
+  Existing labels: Repairs
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Main Walls" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Main walls not inspected" → insert at position 1
+  MISSING: "Note" → insert at position 2
+
+Screen: activity_outside_property_other_joinery_finishes_not_inspected__not_inspected (Not inspected) [3 fields]
+  Native layout: activity_outside_property_other_joinery_finishes_not_inspected
+  MISSING: "Location" → insert at position 0
+
+Screen: activity_outside_property_outside_doors_main_screen (Outside Doors) [3 fields]
+  Native layout: activity_outside_property_outside_doors_main_screen
+  Existing labels: Repairs
+  MISSING: "Describe:" → insert at position 0
+  MISSING: "Outside doors" → insert at position 0
+  MISSING: "Condition Rating" → insert at position 1
+  MISSING: "Note" → insert at position 2
+
+Screen: activity_in_side_property_floors (Floors) [2 fields]
+  Native layout: activity_in_side_property_floors
+  Existing labels: Floor ventilation
+  MISSING: "About Floors" → insert at position 0
+  MISSING: "Creaking" → insert at position 0
+  MISSING: "Tiles" → insert at position 0
+  MISSING: "Loose Floorboards" → insert at position 0
+  MISSING: "Timber Decay" → insert at position 1
+  MISSING: "Timber Infestation" → insert at position 1
+  MISSING: "Dampness" → insert at position 1
+
+Screen: activity_outside_property_conservatory_porch_safety_glass_rating (Safety glass rating) [2 fields]
+  Native layout: activity_outside_property_conservatory_porch_safety_glass_rating
+  MISSING: "Could not confirm safety glass for" → insert at position 1
+
+Screen: activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating (Safety glass rating) [2 fields]
+  Native layout: activity_outside_property_conservatory_porch_safety_glass_rating
+  MISSING: "Could not confirm safety glass for" → insert at position 1
+
+Screen: activity_outside_property_porch_open_to_building (Open to building) [2 fields]
+  Native layout: activity_outside_property_porch_open_to_building
+  MISSING: "Open to the main part of property" → insert at position 0
+
+Screen: activity_outside_property_porch_open_to_building__open_to_building (Open to building) [2 fields]
+  Native layout: activity_outside_property_porch_open_to_building
+  MISSING: "Open to the main part of property" → insert at position 0
+
+Screen: activity_outside_property_porch_poor_condition (Poor condition) [2 fields]
+  Native layout: activity_outside_property_porch_poor_condition
+  MISSING: "Are in poor condition" → insert at position 0
+
+Screen: activity_outside_property_porch_poor_condition__poor_condition (Poor condition) [2 fields]
+  Native layout: activity_outside_property_porch_poor_condition
+  MISSING: "Are in poor condition" → insert at position 0
+
+Screen: activity_outside_property_roof_repair_poor_roof (Poor Roof Condition) [2 fields]
+  Native layout: activity_outside_property_roof_repair_poor_roof
+  MISSING: "Roof slope in poor condition?" → insert at position 0
+
+Screen: activity_services_gas_oil (Gas and Oil) [2 fields]
+  Native layout: activity_services_gas_oil
+  Existing labels: Oil
+  MISSING: "Mains Gas" → insert at position 0
+
+Screen: activity_in_side_property_fire_places_diffrent (Flues Not Inspected) [1 fields]
+  Native layout: activity_in_side_property_fire_places_diffrent
+  MISSING: "An open fire" → insert at position 0
+  MISSING: "Gas fire" → insert at position 0
+  MISSING: "Imitation system" → insert at position 0
+  MISSING: "Wood burning stove" → insert at position 0
+  MISSING: "Electric fire" → insert at position 0
+  MISSING: "Other" → insert at position 0
+
+=== NATIVE LAYOUTS NOT IN V2 (first 30) ===
+
+  activity_grounds_garage_repair_main_screen: Garage, Roof Timber, Safety Hazard
+  activity_grounds_other: Grounds, Front Garden, Rear Garden, Side Garden, Other Garden, Communal Garden, Large Outbuilding
+  activity_grounds_other_area: Right of Way, Knotweed, Common Garden, Lifts, Flooding, EMF
+  activity_grounds_other_repair_main_screen: Fence, Shed, Outbuilding, Retaining Walls, Nearby Trees
+  activity_inside_property_ceilings: About Ceilings, Cracks, Contains asbestos, Polystyrene, Heavy Paper Lining
+  activity_inside_property_ceilings_repairs: Repair Ceilings, Ornamental Plaster
+  activity_inside_property_other_basement_main_screen: No access, Not In Use, Used as, Not Habitable, Flooded, Serious Damp, Joists Decay
+  activity_inside_property_other_celler_main_screen: No access, Not In Use, Used as, Not Habitable, Flooded, Serious Damp, Joists Decay
+  activity_inside_property_other_fittings_main_screen: Describe:, Other, Repairs, Condition Rating, Not Inspected, Note
+  activity_inside_property_repair: Repair Tank, Repair Timber Structure
+  activity_inside_property_roof_structure: Weather Condition, Loft Converted, About Roof structure, Water tank, Insect infestation, Timber rot, Undersize timber, Roof spreading, Heavy roof, Removed Chimney Breast, Party Wall Problem
+  activity_inside_property_walls_and_partitions: Walls, Condensation, Dampness, Movement Cracks, Removed Wall
+  activity_inside_property_wood_work_main_screen: Describe:, Wood Work, Repairs, Condition Rating, Not Inspected, Note
+  activity_in_side_property_bathroom_fittings: Bathroom Fittings, Extractor fan, Leaking sealants causing damp, Sealant condition, Moulding, Wood Rot, No Cubicle Safety Glass Rating
+  activity_in_side_property_built_in_fittings_repair: Repair Fitting, Defective Sealants, Moulding noted, Water Seepage
+  activity_in_side_property_extractor_fan_diffrent: Extractor Fan Installed, No Extractor Fan Installed
+  activity_in_side_property_fire_places_repair: Repair Fireplaces, Damaged grate, Damaged Surround, Blocked Fireplace, Removed CB, Boiler Flue
+  activity_in_side_property_floors_repair: Floor Repair, Laminate / Wood flooring, Floor Vibration, Sloping Floor, Uneven Floor
+  activity_in_side_property_other: Communal Area, Cellar, Basement
+  activity_in_side_property_other_basement: No Access Because Of, Dampness noted
+  activity_in_side_property_other_cellar: No Access Because Of, Dampness noted
+  activity_in_side_property_wap_repair: Wall Repair, Repair sealants, Removed Wall
+  activity_in_side_property_wood_work_repair: Door Repair, WoodWork Repair, Balusters, Infestation, Damp timber, Damaged Lock
+  activity_issues: I1 Regulation, I2 Guarantees, I3 Other Matters
+  activity_location_amenities_e: Property Close To, Environment
+  activity_login: Forgot Password?, New user? Sign up
+  activity_no_of_room_on_each_floor: Lower Ground, Inspection Area:, Ground, First, Second, Third, Other, Roof Space, e7_conservatory_porches, e8_other_joinery_finishes, e9_other
+  activity_op_flat_roof: Flat Roof
+  activity_op_other_roof: Pitched Roof, Flat Roof
+  activity_outside_property: Limitations, Inspection Area:, e1_chimney, e2_roof_covering, e3_rain_water_goods, e4_main_walls, e5_windows, e6_outside_doors, e7_conservatory_porches, e8_other_joinery_finishes, e9_other

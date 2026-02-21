@@ -1,0 +1,12 @@
+# ============================================
+# SurveyScriber - Android Release Signing
+# ============================================
+# SECURITY: DO NOT commit your actual key.properties file to git!
+#
+# Copy this file to 'key.properties' and fill in your values.
+# ============================================
+
+storePassword=YOUR_KEYSTORE_PASSWORD
+keyPassword=YOUR_KEY_PASSWORD
+keyAlias=upload
+storeFile=../upload-keystore.jks

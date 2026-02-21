@@ -1,0 +1,576 @@
+[
+  {
+    "screenId": "activity_communal_garden",
+    "action": "INSERTED",
+    "heading": "Boundary Fencing",
+    "atIndex": 14,
+    "labelId": "label_boundary_fencing_2"
+  },
+  {
+    "screenId": "activity_communal_garden",
+    "action": "INSERTED",
+    "heading": "Type",
+    "atIndex": 5,
+    "labelId": "label_type_8"
+  },
+  {
+    "screenId": "activity_construction_floor",
+    "action": "INSERTED",
+    "heading": "Built With",
+    "atIndex": 3,
+    "labelId": "label_built_with"
+  },
+  {
+    "screenId": "activity_construction_window",
+    "action": "INSERTED",
+    "heading": "Window Material",
+    "atIndex": 7,
+    "labelId": "label_window_material"
+  },
+  {
+    "screenId": "activity_construction_window",
+    "action": "INSERTED",
+    "heading": "Glazzed Type",
+    "atIndex": 1,
+    "labelId": "label_glazzed_type"
+  },
+  {
+    "screenId": "activity_energy_effiency",
+    "action": "INSERTED",
+    "heading": "Efficiency",
+    "atIndex": 0,
+    "labelId": "label_efficiency"
+  },
+  {
+    "screenId": "activity_energy_environment_impect",
+    "action": "INSERTED",
+    "heading": "Environmental Impact",
+    "atIndex": 0,
+    "labelId": "label_environmental_impact"
+  },
+  {
+    "screenId": "activity_extended_wall",
+    "action": "INSERTED",
+    "heading": "Cladding Finishes",
+    "atIndex": 18,
+    "labelId": "label_cladding_finishes"
+  },
+  {
+    "screenId": "activity_extended_wall",
+    "action": "INSERTED",
+    "heading": "Finishes",
+    "atIndex": 11,
+    "labelId": "label_finishes"
+  },
+  {
+    "screenId": "activity_extended_wall",
+    "action": "INSERTED",
+    "heading": "Built Of",
+    "atIndex": 0,
+    "labelId": "label_built_of"
+  },
+  {
+    "screenId": "activity_front_garden",
+    "action": "INSERTED",
+    "heading": "Boundary Fencing",
+    "atIndex": 11,
+    "labelId": "label_boundary_fencing_3"
+  },
+  {
+    "screenId": "activity_front_garden",
+    "action": "INSERTED",
+    "heading": "Type",
+    "atIndex": 2,
+    "labelId": "label_type_9"
+  },
+  {
+    "screenId": "activity_grounds_garage_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected"
+  },
+  {
+    "screenId": "activity_grounds_garage_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs"
+  },
+  {
+    "screenId": "activity_grounds_other_area_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 0,
+    "labelId": "label_not_inspected_2"
+  },
+  {
+    "screenId": "activity_grounds_other_communal_garden",
+    "action": "INSERTED",
+    "heading": "The garden is",
+    "atIndex": 1,
+    "labelId": "label_the_garden_is_2"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_3"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_2"
+  },
+  {
+    "screenId": "activity_grounds_other_other_garden",
+    "action": "INSERTED",
+    "heading": "The garden is",
+    "atIndex": 1,
+    "labelId": "label_the_garden_is_3"
+  },
+  {
+    "screenId": "activity_grounds_other_rear_garden",
+    "action": "INSERTED",
+    "heading": "The garden is",
+    "atIndex": 1,
+    "labelId": "label_the_garden_is_4"
+  },
+  {
+    "screenId": "activity_grounds_other_side_garden",
+    "action": "INSERTED",
+    "heading": "The garden is",
+    "atIndex": 1,
+    "labelId": "label_the_garden_is_5"
+  },
+  {
+    "screenId": "activity_inside_property_bathroom_fittings_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_4"
+  },
+  {
+    "screenId": "activity_inside_property_bathroom_fittings_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_3"
+  },
+  {
+    "screenId": "activity_inside_property_built_in_fittings_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_5"
+  },
+  {
+    "screenId": "activity_inside_property_built_in_fittings_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_4"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_6"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_5"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_7"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_6"
+  },
+  {
+    "screenId": "activity_inside_property_floors_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_8"
+  },
+  {
+    "screenId": "activity_inside_property_floors_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_7"
+  },
+  {
+    "screenId": "activity_inside_property_other_celler_no_access",
+    "action": "INSERTED",
+    "heading": "No Access Because Of",
+    "atIndex": 0,
+    "labelId": "label_no_access_because_of"
+  },
+  {
+    "screenId": "activity_inside_property_roof_structure_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_9"
+  },
+  {
+    "screenId": "activity_inside_property_roof_structure_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_8"
+  },
+  {
+    "screenId": "activity_inside_property_walls_and_partitions_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_10"
+  },
+  {
+    "screenId": "activity_inside_property_walls_and_partitions_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_9"
+  },
+  {
+    "screenId": "activity_in_side_property_cubicle_safety_glass_rating",
+    "action": "INSERTED",
+    "heading": "No safety glass mark noted",
+    "atIndex": 0,
+    "labelId": "label_no_safety_glass_mark_noted"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places",
+    "action": "INSERTED",
+    "heading": "Location",
+    "atIndex": 1,
+    "labelId": "label_location_48"
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "action": "INSERTED",
+    "heading": "Floor ventilation",
+    "atIndex": 0,
+    "labelId": "label_floor_ventilation"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_11"
+  },
+  {
+    "screenId": "activity_outside_property_chimney_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_10"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_main_screen",
+    "action": "INSERTED",
+    "heading": "Not inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_12"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_11"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_12"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_near_by_tress",
+    "action": "INSERTED",
+    "heading": "Size Of tree",
+    "atIndex": 0,
+    "labelId": "label_size_of_tree"
+  },
+  {
+    "screenId": "activity_outside_property_other_floors",
+    "action": "INSERTED",
+    "heading": "The floors are",
+    "atIndex": 0,
+    "labelId": "label_the_floors_are"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "action": "INSERTED",
+    "heading": "Not inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_13"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_13"
+  },
+  {
+    "screenId": "activity_outside_property_other_main_screen",
+    "action": "INSERTED",
+    "heading": "Not inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_14"
+  },
+  {
+    "screenId": "activity_outside_property_other_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_14"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_drains",
+    "action": "INSERTED",
+    "heading": "Defect",
+    "atIndex": 0,
+    "labelId": "label_defect_68"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_floor",
+    "action": "INSERTED",
+    "heading": "Defect",
+    "atIndex": 0,
+    "labelId": "label_defect_69"
+  },
+  {
+    "screenId": "activity_outside_property_outside_doors_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_15"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "action": "INSERTED",
+    "heading": "Not inspected",
+    "atIndex": 3,
+    "labelId": "label_not_inspected_15"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_16"
+  },
+  {
+    "screenId": "activity_outside_property_roof_covering_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 9,
+    "labelId": "label_repairs_17"
+  },
+  {
+    "screenId": "activity_outside_property_roof_covering_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 8,
+    "labelId": "label_not_inspected_16"
+  },
+  {
+    "screenId": "activity_outside_property_roof_spreading_repair",
+    "action": "INSERTED",
+    "heading": "Does the roof timber structure require strengthening?",
+    "atIndex": 0,
+    "labelId": "label_does_the_roof_timber_structure_require_strengthening"
+  },
+  {
+    "screenId": "activity_outside_property_windows_main_screen",
+    "action": "INSERTED",
+    "heading": "Not inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_17"
+  },
+  {
+    "screenId": "activity_outside_property_windows_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_18"
+  },
+  {
+    "screenId": "activity_over_all_openion",
+    "action": "INSERTED",
+    "heading": "Reasonable proposition for purchase at a price",
+    "atIndex": 0,
+    "labelId": "label_reasonable_proposition_for_purchase_at_a_price"
+  },
+  {
+    "screenId": "activity_property_ground_area",
+    "action": "INSERTED",
+    "heading": "Area",
+    "atIndex": 0,
+    "labelId": "label_area"
+  },
+  {
+    "screenId": "activity_property_is_noisy_area",
+    "action": "INSERTED",
+    "heading": "Status",
+    "atIndex": 0,
+    "labelId": "label_status_3"
+  },
+  {
+    "screenId": "activity_property_location",
+    "action": "INSERTED",
+    "heading": "Location Density",
+    "atIndex": 1,
+    "labelId": "label_location_density"
+  },
+  {
+    "screenId": "activity_property_location",
+    "action": "INSERTED",
+    "heading": "Established Area",
+    "atIndex": 0,
+    "labelId": "label_established_area"
+  },
+  {
+    "screenId": "activity_property_roof",
+    "action": "INSERTED",
+    "heading": "Cover Type",
+    "atIndex": 18,
+    "labelId": "label_cover_type"
+  },
+  {
+    "screenId": "activity_property_roof",
+    "action": "INSERTED",
+    "heading": "Roof Material",
+    "atIndex": 8,
+    "labelId": "label_roof_material"
+  },
+  {
+    "screenId": "activity_rear_garden",
+    "action": "INSERTED",
+    "heading": "Boundary Fencing",
+    "atIndex": 12,
+    "labelId": "label_boundary_fencing_4"
+  },
+  {
+    "screenId": "activity_rear_garden",
+    "action": "INSERTED",
+    "heading": "Type",
+    "atIndex": 3,
+    "labelId": "label_type_10"
+  },
+  {
+    "screenId": "activity_services_drainage_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_18"
+  },
+  {
+    "screenId": "activity_services_drainage_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_19"
+  },
+  {
+    "screenId": "activity_services_electricity_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_19"
+  },
+  {
+    "screenId": "activity_services_electricity_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_20"
+  },
+  {
+    "screenId": "activity_services_gas_oil",
+    "action": "INSERTED",
+    "heading": "Oil",
+    "atIndex": 0,
+    "labelId": "label_oil"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_20"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "action": "INSERTED",
+    "heading": "Other",
+    "atIndex": 0,
+    "labelId": "label_other"
+  },
+  {
+    "screenId": "activity_services_heating_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_21"
+  },
+  {
+    "screenId": "activity_services_heating_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_21"
+  },
+  {
+    "screenId": "activity_services_water_heating_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_22"
+  },
+  {
+    "screenId": "activity_services_water_heating_main_screen",
+    "action": "INSERTED",
+    "heading": "Repairs",
+    "atIndex": 0,
+    "labelId": "label_repairs_22"
+  },
+  {
+    "screenId": "activity_services_water_main_screen",
+    "action": "INSERTED",
+    "heading": "Not Inspected",
+    "atIndex": 1,
+    "labelId": "label_not_inspected_23"
+  },
+  {
+    "screenId": "activity_services_water_main_screen",
+    "action": "INSERTED",
+    "heading": "Water",
+    "atIndex": 0,
+    "labelId": "label_water"
+  }
+]

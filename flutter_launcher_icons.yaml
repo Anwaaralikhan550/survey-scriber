@@ -1,0 +1,35 @@
+flutter_launcher_icons:
+  # Android configuration
+  android: true
+  ios: true
+
+  # Main icon image path - SurveyScriber branded icon
+  # Logo: Clipboard + Pen + Checkmark design
+  # Generate with: flutter test integration_test/generate_icon_test.dart
+  image_path: "assets/icons/app_icon_1024.png"
+
+  # Background color - white for clean appearance
+  background_color: "#FFFFFF"
+
+  # Android adaptive icon settings (Android 8.0+)
+  # White background with logo foreground
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/icons/icon_foreground.png"
+
+  # Minimum SDK for adaptive icons
+  min_sdk_android: 21
+
+  # iOS settings
+  remove_alpha_ios: true
+
+  # Web favicon (optional)
+  web:
+    generate: false
+
+  # Windows (optional)
+  windows:
+    generate: false
+
+  # macOS (optional)
+  macos:
+    generate: false

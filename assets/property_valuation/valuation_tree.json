@@ -1,0 +1,901 @@
+{
+  "sections": [
+    {
+      "key": "valuation_details",
+      "title": "Valuation Details",
+      "description": "General property details and new build information",
+      "nodes": [
+        {
+          "id": "general_details",
+          "title": "General Details",
+          "type": "screen",
+          "parentId": null,
+          "order": 1,
+          "fields": [
+            { "id": "label_general_property", "label": "General Property Details", "type": "label" },
+            { "id": "actv_status", "label": "Status", "type": "dropdown", "options": ["Occupied", "Vacant", "Tenanted"] },
+            { "id": "actv_finishes", "label": "Finishes", "type": "dropdown", "options": ["Un furnished", "Partially furnished", "Fully furnished"] },
+            { "id": "actv_carpeted", "label": "Carpeted", "type": "dropdown", "options": ["Fully", "Partially"] },
+            { "id": "actv_vl_reason", "label": "Valuation Reason", "type": "dropdown", "options": ["Market Value", "Shared Ownership Buyback", "Right to Buy", "Help to buy", "Compulsory Order Purchase", "Other"] },
+            { "id": "actv_weather", "label": "Weather", "type": "dropdown", "options": ["Dry", "Wet", "Snow"] },
+            { "id": "actv_tenure", "label": "Tenure", "type": "dropdown", "options": ["Freehold", "Feuhold", "Leasehold", "Commonhold"] },
+            { "id": "label_property_type", "label": "Property Type", "type": "label" },
+            { "id": "actv_type", "label": "Property Type", "type": "dropdown", "options": ["Flat", "House", "Bungalow", "Other"] },
+            { "id": "actv_sub_type", "label": "Sub Type", "type": "dropdown", "options": ["Detached", "Semi", "Mid", "End", "Terrace", "Other"] },
+            { "id": "actv_flat_type", "label": "Flat Type", "type": "dropdown", "options": ["Flat", "Maisonette"], "conditionalOn": "actv_type=Flat" },
+            { "id": "actv_build_type", "label": "Build Type", "type": "dropdown", "options": ["Purpose built", "Conversion"], "conditionalOn": "actv_type=Flat" },
+            { "id": "actv_estate_type", "label": "Estate Type", "type": "dropdown", "options": ["Ex Commercial", "Ex Local Authority", "Ex Housing Association"] },
+            { "id": "label_construction", "label": "Construction", "type": "label" },
+            { "id": "cb_non_traditional_construction", "label": "PRC", "type": "checkbox" },
+            { "id": "cb_LPS", "label": "LPS", "type": "checkbox" },
+            { "id": "cb_concrete", "label": "Concrete", "type": "checkbox" },
+            { "id": "cb_steel", "label": "Steel", "type": "checkbox" },
+            { "id": "cb_timber", "label": "Timber", "type": "checkbox" },
+            { "id": "cb_modular", "label": "Modular", "type": "checkbox" },
+            { "id": "et_system_type", "label": "System Type", "type": "text" },
+            { "id": "et_no_of_floors_in_block", "label": "No. of Floors in Block", "type": "number", "conditionalOn": "actv_type=Flat" },
+            { "id": "et_no_of_units_in_block", "label": "No. of Units in Block", "type": "number", "conditionalOn": "actv_type=Flat" },
+            { "id": "et_which_floor_is_flat_on", "label": "Which Floor is Flat On", "type": "number", "conditionalOn": "actv_type=Flat" },
+            { "id": "cb_mixed_use", "label": "Mixed Use", "type": "checkbox", "conditionalOn": "actv_type=Flat" },
+            { "id": "cb_lift", "label": "Lift", "type": "checkbox", "conditionalOn": "actv_type=Flat" },
+            { "id": "et_service_charge", "label": "Service Charge", "type": "text", "conditionalOn": "actv_type=Flat" },
+            { "id": "cb_satisfactory_access", "label": "Satisfactory Access", "type": "checkbox", "conditionalOn": "actv_type=Flat" },
+            { "id": "et_other_comments", "label": "Other Comments", "type": "text", "conditionalOn": "actv_type=Flat" },
+            { "id": "cb_management_satisfactory", "label": "Management Satisfactory", "type": "checkbox", "conditionalOn": "actv_type=Flat" },
+            { "id": "et_ground_rent", "label": "Ground Rent", "type": "text", "conditionalOn": "actv_type=Flat" },
+            { "id": "label_year_built", "label": "Year Built", "type": "label" },
+            { "id": "et_age", "label": "Age (Year Built)", "type": "number" },
+            { "id": "et_age_extension", "label": "Age of Extension", "type": "number" },
+            { "id": "cb_is_listed_building", "label": "Listed Building", "type": "checkbox" }
+          ]
+        },
+        {
+          "id": "new_build_property",
+          "title": "New Build Property",
+          "type": "screen",
+          "parentId": null,
+          "order": 2,
+          "fields": [
+            { "id": "et_builder_name", "label": "Builder Name", "type": "text" },
+            { "id": "actv_work_stage", "label": "Work Stage", "type": "dropdown", "options": ["Complete", "Under construction", "Re-inspection", "Other"] },
+            { "id": "actv_warranty", "label": "Warranty", "type": "dropdown", "options": ["NHBC", "Zurich", "Arch Cert", "Other"] },
+            { "id": "et_incentives", "label": "Incentives", "type": "text" },
+            { "id": "in_date", "label": "Date", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "property_assessment",
+      "title": "Property Assessment",
+      "description": "Accommodation summary, location, and road details",
+      "nodes": [
+        {
+          "id": "no_of_rooms",
+          "title": "Number of Rooms",
+          "type": "screen",
+          "parentId": null,
+          "order": 1,
+          "fields": [
+            { "id": "label_no_of_rooms", "label": "Number of Rooms", "type": "label" },
+            { "id": "et_liv", "label": "Living Rooms", "type": "number" },
+            { "id": "et_kit", "label": "Kitchen", "type": "number" },
+            { "id": "et_bed", "label": "Bed Rooms", "type": "number" },
+            { "id": "et_bath", "label": "Bathroom", "type": "number" },
+            { "id": "et_wc", "label": "Toilet/WC", "type": "number" },
+            { "id": "et_ut", "label": "Utility Room", "type": "number" },
+            { "id": "et_con", "label": "Conservatory", "type": "number" },
+            { "id": "et_other_name", "label": "Name(s) of Other Rooms", "type": "text" },
+            { "id": "et_other", "label": "Number of Other Rooms", "type": "number" }
+          ]
+        },
+        {
+          "id": "accommodation_summary",
+          "title": "Accommodation Summary",
+          "type": "screen",
+          "parentId": null,
+          "order": 2,
+          "fields": [
+            { "id": "label_parking_type", "label": "Parking Type", "type": "label" },
+            { "id": "cb_garage", "label": "Garage", "type": "checkbox" },
+            { "id": "cb_single", "label": "Single", "type": "checkbox" },
+            { "id": "cb_double", "label": "Double", "type": "checkbox" },
+            { "id": "cb_parking_space", "label": "Parking Space", "type": "checkbox" },
+            { "id": "cb_car_port", "label": "Car Port", "type": "checkbox" },
+            { "id": "cb_none", "label": "None", "type": "checkbox" },
+            { "id": "cb_other_720", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_792", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_720" },
+            { "id": "actv_parking_location", "label": "Parking Location", "type": "dropdown", "options": ["Onsite", "Offsite"] },
+            { "id": "label_external_features", "label": "External Features", "type": "label" },
+            { "id": "cb_external_outbuildings", "label": "Outbuildings", "type": "checkbox" },
+            { "id": "et_describe", "label": "Describe", "type": "text", "conditionalOn": "cb_external_outbuildings" },
+            { "id": "cb_external_garden", "label": "Garden", "type": "checkbox" }
+          ]
+        },
+        {
+          "id": "location_amenities",
+          "title": "Location & Amenities",
+          "type": "screen",
+          "parentId": null,
+          "order": 3,
+          "fields": [
+            { "id": "actv_location", "label": "Location", "type": "dropdown", "options": ["City", "Town", "Village", "Suburb", "Residential", "Commercial", "Rural", "Other"] },
+            { "id": "label_property_close_to", "label": "Property Close To", "type": "label" },
+            { "id": "cb_local_amenities", "label": "Local Amenities", "type": "checkbox" },
+            { "id": "cb_conservation_area", "label": "Conservation Area", "type": "checkbox" },
+            { "id": "cb_other_close_to", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_close_to", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_close_to" },
+            { "id": "label_environment", "label": "Environment", "type": "label" },
+            { "id": "cb_pollution", "label": "Pollution", "type": "checkbox" },
+            { "id": "cb_emfs", "label": "EMFs", "type": "checkbox" },
+            { "id": "cb_adverse_neighbouring", "label": "Adverse Neighbouring", "type": "checkbox" },
+            { "id": "et_adverse_describe", "label": "Describe Adverse", "type": "text", "conditionalOn": "cb_adverse_neighbouring" },
+            { "id": "cb_other_env", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_env", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_env" }
+          ]
+        },
+        {
+          "id": "road",
+          "title": "Road",
+          "type": "screen",
+          "parentId": null,
+          "order": 4,
+          "fields": [
+            { "id": "label_road_type", "label": "Road Type", "type": "label" },
+            { "id": "cb_adopted", "label": "Adopted", "type": "checkbox" },
+            { "id": "cb_private", "label": "Private", "type": "checkbox" },
+            { "id": "cb_made", "label": "Made", "type": "checkbox" },
+            { "id": "cb_partly_made", "label": "Partly Made", "type": "checkbox" },
+            { "id": "cb_unmade", "label": "Unmade", "type": "checkbox" },
+            { "id": "et_cost_of_making_up", "label": "Cost of Making Up", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "property_inspection",
+      "title": "Property Inspection",
+      "description": "Outside and inside property inspection details",
+      "nodes": [
+        {
+          "id": "outside_property",
+          "title": "Outside Property",
+          "type": "group",
+          "parentId": null,
+          "order": 1
+        },
+        {
+          "id": "val_roof",
+          "title": "Roof",
+          "type": "group",
+          "parentId": "outside_property",
+          "order": 1
+        },
+        {
+          "id": "val_pitched_roof",
+          "title": "Pitched Roof",
+          "type": "screen",
+          "parentId": "val_roof",
+          "order": 1,
+          "fields": [
+            { "id": "label_pitched_roof", "label": "Pitched Roof", "type": "label" },
+            { "id": "cb_tile", "label": "Tile", "type": "checkbox" },
+            { "id": "cb_natural_slate", "label": "Natural Slate", "type": "checkbox" },
+            { "id": "cb_artificial_slate", "label": "Artificial Slate", "type": "checkbox" },
+            { "id": "cb_stone_pr", "label": "Stone", "type": "checkbox" },
+            { "id": "cb_thatch", "label": "Thatch", "type": "checkbox" },
+            { "id": "cb_original_pr", "label": "Original", "type": "checkbox" },
+            { "id": "cb_replaced_pr", "label": "Replaced", "type": "checkbox" },
+            { "id": "cb_other_909", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_777", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_909" },
+            { "id": "actv_condition_pitched_roof", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_pitched_roof", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_pitched_roof=Unsatisfactory" },
+            { "id": "cb_partial_view_pr", "label": "Partial View", "type": "checkbox" },
+            { "id": "actv_visibility_pr", "label": "Visibility", "type": "dropdown", "options": ["Visible", "Not Visible"] },
+            { "id": "actv_visibility_condition_pr", "label": "Visibility Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_visibility_notes_pr", "label": "Visibility Notes", "type": "text", "conditionalOn": "actv_visibility_condition_pr=Unsatisfactory" },
+            { "id": "actv_roof_ventilation_pr", "label": "Roof Ventilation", "type": "dropdown", "options": ["Sufficient", "Not Sufficient"] },
+            { "id": "et_general_remarks_pitched_roof", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_flat_roof",
+          "title": "Flat Roof",
+          "type": "screen",
+          "parentId": "val_roof",
+          "order": 2,
+          "fields": [
+            { "id": "label_flat_roof", "label": "Flat Roof", "type": "label" },
+            { "id": "cb_felt_fr", "label": "Felt", "type": "checkbox" },
+            { "id": "cb_asphalt_fr", "label": "Asphalt", "type": "checkbox" },
+            { "id": "cb_lead_fr", "label": "Lead", "type": "checkbox" },
+            { "id": "cb_zinc_fr", "label": "Zinc", "type": "checkbox" },
+            { "id": "cb_other_883", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_824", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_883" },
+            { "id": "actv_condition_flat_roof", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_flat_roof", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_flat_roof=Unsatisfactory" },
+            { "id": "cb_partial_view_fr", "label": "Partial View", "type": "checkbox" },
+            { "id": "actv_visibility_condition_fr", "label": "Visibility Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_visibility_notes_fr", "label": "Visibility Notes", "type": "text", "conditionalOn": "actv_visibility_condition_fr=Unsatisfactory" },
+            { "id": "actv_roof_ventilation_fr", "label": "Roof Ventilation", "type": "dropdown", "options": ["Sufficient", "Not Sufficient"] },
+            { "id": "et_general_remarks_flat_roof", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_other_roof",
+          "title": "Other Roof",
+          "type": "screen",
+          "parentId": "val_roof",
+          "order": 3,
+          "fields": [
+            { "id": "label_other_roof", "label": "Other Roof", "type": "label" },
+            { "id": "et_other_roof_name", "label": "Other Roof Name", "type": "text" },
+            { "id": "cb_tile_or", "label": "Tile", "type": "checkbox" },
+            { "id": "cb_natural_slate_or", "label": "Natural Slate", "type": "checkbox" },
+            { "id": "cb_artificial_slate_or", "label": "Artificial Slate", "type": "checkbox" },
+            { "id": "cb_stone_or", "label": "Stone", "type": "checkbox" },
+            { "id": "cb_thatch_or", "label": "Thatch", "type": "checkbox" },
+            { "id": "cb_original_or", "label": "Original", "type": "checkbox" },
+            { "id": "cb_replaced_or", "label": "Replaced", "type": "checkbox" },
+            { "id": "cb_other_909_or", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_777_or", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_909_or" },
+            { "id": "cb_felt_or", "label": "Felt", "type": "checkbox" },
+            { "id": "cb_asphalt_or", "label": "Asphalt", "type": "checkbox" },
+            { "id": "cb_lead_or", "label": "Lead", "type": "checkbox" },
+            { "id": "cb_zinc_or", "label": "Zinc", "type": "checkbox" },
+            { "id": "cb_other_883_or", "label": "Other (Flat)", "type": "checkbox" },
+            { "id": "et_other_824_or", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_883_or" },
+            { "id": "actv_condition_other_roof", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_other_roof", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_other_roof=Unsatisfactory" },
+            { "id": "cb_partial_view_or", "label": "Partial View", "type": "checkbox" },
+            { "id": "actv_visibility_condition_or", "label": "Visibility Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_visibility_notes_or", "label": "Visibility Notes", "type": "text", "conditionalOn": "actv_visibility_condition_or=Unsatisfactory" },
+            { "id": "actv_roof_ventilation_or", "label": "Roof Ventilation", "type": "dropdown", "options": ["Sufficient", "Not Sufficient"] },
+            { "id": "et_general_remarks_other_roof", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_flashings",
+          "title": "Flashings",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 2,
+          "fields": [
+            { "id": "label_flashings", "label": "Flashings", "type": "label" },
+            { "id": "cb_lead_fl", "label": "Lead", "type": "checkbox" },
+            { "id": "cb_zinc_fl", "label": "Zinc", "type": "checkbox" },
+            { "id": "cb_mortar_fl", "label": "Mortar", "type": "checkbox" },
+            { "id": "cb_capped_fl", "label": "Capped", "type": "checkbox" },
+            { "id": "cb_vented_fl", "label": "Vented", "type": "checkbox" },
+            { "id": "cb_other_429", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_222", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_429" },
+            { "id": "actv_condition_flashings", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_flashings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_flashings=Unsatisfactory" },
+            { "id": "et_general_remarks_flashings", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_rainwater_goods",
+          "title": "Rainwater Goods",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 3,
+          "fields": [
+            { "id": "label_rainwater_goods", "label": "Rainwater Goods", "type": "label" },
+            { "id": "cb_cast_iron", "label": "Cast Iron", "type": "checkbox" },
+            { "id": "cb_alum", "label": "Aluminium", "type": "checkbox" },
+            { "id": "cb_upvc_rw", "label": "UPVC", "type": "checkbox" },
+            { "id": "cb_asbestos_rw", "label": "Asbestos", "type": "checkbox" },
+            { "id": "cb_other_723", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_477", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_723" },
+            { "id": "actv_condition_rainwater", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_rainwater", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_rainwater=Unsatisfactory" },
+            { "id": "et_general_remarks_rainwater", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_chimney_stacks",
+          "title": "Chimney Stacks",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 4,
+          "fields": [
+            { "id": "label_chimney_stacks", "label": "Chimney Stacks", "type": "label" },
+            { "id": "cb_brick_cs", "label": "Brick", "type": "checkbox" },
+            { "id": "cb_stone_cs", "label": "Stone", "type": "checkbox" },
+            { "id": "cb_rendered_cs", "label": "Rendered", "type": "checkbox" },
+            { "id": "cb_other_922", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_177", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_922" },
+            { "id": "actv_condition_chimney", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_chimney", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_chimney=Unsatisfactory" },
+            { "id": "et_general_remarks_chimney", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_walls_type",
+          "title": "Main Walls",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 5,
+          "fields": [
+            { "id": "label_walls_type", "label": "Main Walls", "type": "label" },
+            { "id": "cb_solid_wt", "label": "Solid", "type": "checkbox" },
+            { "id": "cb_cavity_wt", "label": "Cavity", "type": "checkbox" },
+            { "id": "cb_timber_frame_wt", "label": "Timber Frame", "type": "checkbox" },
+            { "id": "cb_stone_wt", "label": "Stone", "type": "checkbox" },
+            { "id": "cb_brick_wt", "label": "Brick", "type": "checkbox" },
+            { "id": "cb_single_skin_wt", "label": "Single Skin", "type": "checkbox" },
+            { "id": "cb_render_wt", "label": "Render", "type": "checkbox" },
+            { "id": "cb_other_1009", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_142", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_1009" },
+            { "id": "actv_condition_walls", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_walls", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_walls=Unsatisfactory" },
+            { "id": "et_wall_thickness", "label": "Wall Thickness", "type": "text" },
+            { "id": "actv_building_movement", "label": "Building Movement", "type": "dropdown", "options": ["Structural Movement", "Underpinning", "None"] },
+            { "id": "cb_risk_of_further_movement", "label": "Risk of Further Movement Likely", "type": "checkbox" },
+            { "id": "et_general_remarks_walls", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_wall_tie_corrosion",
+          "title": "Wall Tie Corrosion",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 6,
+          "fields": [
+            { "id": "label_wall_tie", "label": "Wall Tie Corrosion", "type": "label" },
+            { "id": "cb_wall_tie_corrosion", "label": "Wall Tie Corrosion", "type": "checkbox" },
+            { "id": "et_general_remarks_wall_tie", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_floor_ext",
+          "title": "Floor",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 7,
+          "fields": [
+            { "id": "label_ground_floor", "label": "Ground Floor", "type": "label" },
+            { "id": "cb_solid_gf", "label": "Solid", "type": "checkbox" },
+            { "id": "cb_timber_gf", "label": "Timber", "type": "checkbox" },
+            { "id": "cb_other_327", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_469", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_327" },
+            { "id": "actv_condition_floor_ext", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_floor_ext", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_floor_ext=Unsatisfactory" },
+            { "id": "et_general_remarks_floor_ext", "label": "General Remarks", "type": "text" },
+            { "id": "label_upper_floor", "label": "Upper Floor", "type": "label" },
+            { "id": "cb_solid_uf", "label": "Solid", "type": "checkbox" },
+            { "id": "cb_timber_uf", "label": "Timber", "type": "checkbox" },
+            { "id": "cb_other_327_u", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_469_u", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_327_u" },
+            { "id": "actv_condition_upper_floor", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_upper_floor", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_upper_floor=Unsatisfactory" },
+            { "id": "et_general_remarks_upper_floor", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_dpc",
+          "title": "DPC",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 8,
+          "fields": [
+            { "id": "label_dpc", "label": "Damp Proof Course", "type": "label" },
+            { "id": "cb_eng_brick", "label": "Engineering Brick", "type": "checkbox" },
+            { "id": "cb_felt_dpc", "label": "Felt", "type": "checkbox" },
+            { "id": "cb_plastic_dpc", "label": "Plastic", "type": "checkbox" },
+            { "id": "cb_slate_dpc", "label": "Slate", "type": "checkbox" },
+            { "id": "cb_injected_dpc", "label": "Injected", "type": "checkbox" },
+            { "id": "cb_electro_osmotic", "label": "Electro Osmotic", "type": "checkbox" },
+            { "id": "cb_other_457", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_115", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_457" },
+            { "id": "actv_condition_dpc", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_dpc", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_dpc=Unsatisfactory" },
+            { "id": "et_general_remarks_dpc", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_sub_floor_vents",
+          "title": "Sub Floor Vents",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 9,
+          "fields": [
+            { "id": "label_sub_floor_vents", "label": "Sub Floor Vents", "type": "label" },
+            { "id": "actv_sub_floor_vents", "label": "Sub Floor Vents", "type": "dropdown", "options": ["Adequate", "Inadequate Number", "None"] },
+            { "id": "actv_condition_sub_floor", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_sub_floor", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_sub_floor=Unsatisfactory" },
+            { "id": "et_general_remarks_sub_floor", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_decorations_ext",
+          "title": "External Decorations",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 10,
+          "fields": [
+            { "id": "label_decorations_ext", "label": "External Decorations", "type": "label" },
+            { "id": "cb_lead_de", "label": "Lead", "type": "checkbox" },
+            { "id": "cb_paint_de", "label": "Paint", "type": "checkbox" },
+            { "id": "cb_stain_de", "label": "Stain", "type": "checkbox" },
+            { "id": "cb_other_895", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_315", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_895" },
+            { "id": "actv_condition_dec_ext", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_dec_ext", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_dec_ext=Unsatisfactory" },
+            { "id": "et_general_remarks_dec_ext", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_garage",
+          "title": "Garage",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 11,
+          "fields": [
+            { "id": "label_garage", "label": "Garage", "type": "label" },
+            { "id": "actv_garage_type", "label": "Garage Type", "type": "dropdown", "options": ["Integral", "Semi-Detached", "Detached", "Block of Garage"] },
+            { "id": "actv_number_of_garage", "label": "Number of Garages", "type": "dropdown", "options": ["Single", "Double", "Other"] },
+            { "id": "actv_condition_garage", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_garage", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_garage=Unsatisfactory" },
+            { "id": "et_general_remarks_garage", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_outbuildings",
+          "title": "Outbuildings",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 12,
+          "fields": [
+            { "id": "label_outbuildings", "label": "Outbuildings", "type": "label" },
+            { "id": "et_outbuilding_describe", "label": "Describe", "type": "text" },
+            { "id": "actv_condition_outbuildings", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_outbuildings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_outbuildings=Unsatisfactory" },
+            { "id": "et_general_remarks_outbuildings", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_site",
+          "title": "Site / Boundaries",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 13,
+          "fields": [
+            { "id": "label_site", "label": "Site / Boundaries", "type": "label" },
+            { "id": "label_fencing", "label": "Fencing", "type": "label" },
+            { "id": "cb_fences", "label": "Fences", "type": "checkbox" },
+            { "id": "cb_retaining_walls", "label": "Retaining Walls", "type": "checkbox" },
+            { "id": "cb_hedges", "label": "Hedges", "type": "checkbox" },
+            { "id": "cb_walls_site", "label": "Walls", "type": "checkbox" },
+            { "id": "cb_railings", "label": "Railings", "type": "checkbox" },
+            { "id": "cb_none_site", "label": "None", "type": "checkbox" },
+            { "id": "cb_wire_mesh", "label": "Wire Mesh", "type": "checkbox" },
+            { "id": "cb_other_720_site", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_792_site", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_720_site" },
+            { "id": "cb_boundaries_well_defined", "label": "Boundaries Well Defined", "type": "checkbox" },
+            { "id": "cb_trees_within_root", "label": "Trees Within Root Influencing Distance", "type": "checkbox" },
+            { "id": "actv_condition_site", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_site", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_site=Unsatisfactory" },
+            { "id": "et_general_remarks_site", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_drainage",
+          "title": "Drainage",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 14,
+          "fields": [
+            { "id": "label_drainage", "label": "Drainage", "type": "label" },
+            { "id": "cb_mains_dr", "label": "Mains", "type": "checkbox" },
+            { "id": "cb_septic_tank", "label": "Septic Tank", "type": "checkbox" },
+            { "id": "cb_cess_pit", "label": "Cess Pit", "type": "checkbox" },
+            { "id": "cb_private_dr", "label": "Private", "type": "checkbox" },
+            { "id": "cb_shared_dr", "label": "Shared", "type": "checkbox" },
+            { "id": "cb_other_299", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_120", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_299" },
+            { "id": "cb_test_required", "label": "Test Required", "type": "checkbox" },
+            { "id": "actv_condition_drainage", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_drainage", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_drainage=Unsatisfactory" },
+            { "id": "et_general_remarks_drainage", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "inside_property",
+          "title": "Inside Property",
+          "type": "group",
+          "parentId": null,
+          "order": 2
+        },
+        {
+          "id": "val_roof_space",
+          "title": "Roof Space",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 1,
+          "fields": [
+            { "id": "label_roof_space", "label": "Roof Space", "type": "label" },
+            { "id": "label_roof_material", "label": "Material", "type": "label" },
+            { "id": "cb_trussed", "label": "Trussed", "type": "checkbox" },
+            { "id": "cb_rafters", "label": "Rafters", "type": "checkbox" },
+            { "id": "cb_purlins", "label": "Purlins", "type": "checkbox" },
+            { "id": "cb_braced_lined", "label": "Braced / Lined", "type": "checkbox" },
+            { "id": "cb_unlined", "label": "Unlined", "type": "checkbox" },
+            { "id": "cb_no_access_statereason", "label": "No Access (State Reason)", "type": "checkbox" },
+            { "id": "label_roof_limitations", "label": "Limitations", "type": "label" },
+            { "id": "cb_stored_items", "label": "Stored Items", "type": "checkbox" },
+            { "id": "cb_boarded", "label": "Boarded", "type": "checkbox" },
+            { "id": "cb_insulation", "label": "Insulation", "type": "checkbox" },
+            { "id": "cb_other_766", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_580", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_766" },
+            { "id": "actv_condition_roof_space", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_roof_space", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_roof_space=Unsatisfactory" },
+            { "id": "et_general_remarks_roof_space", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_ceilings",
+          "title": "Ceilings",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 2,
+          "fields": [
+            { "id": "label_ceilings", "label": "Ceilings", "type": "label" },
+            { "id": "cb_plasterboard", "label": "Plasterboard", "type": "checkbox" },
+            { "id": "cb_lath", "label": "Lath", "type": "checkbox" },
+            { "id": "cb_asbestos_cl", "label": "Asbestos", "type": "checkbox" },
+            { "id": "cb_fibreboard", "label": "Fibreboard", "type": "checkbox" },
+            { "id": "cb_polystyrene_tiles", "label": "Polystyrene Tiles", "type": "checkbox" },
+            { "id": "cb_other_690", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_571", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_690" },
+            { "id": "actv_condition_ceilings", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_ceilings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_ceilings=Unsatisfactory" },
+            { "id": "et_general_remarks_ceilings", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_walls_internal",
+          "title": "Internal Walls",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 3,
+          "fields": [
+            { "id": "label_walls_internal", "label": "Internal Walls", "type": "label" },
+            { "id": "cb_solid_wi", "label": "Solid", "type": "checkbox" },
+            { "id": "cb_stud", "label": "Stud", "type": "checkbox" },
+            { "id": "cb_dry_lined", "label": "Dry Lined", "type": "checkbox" },
+            { "id": "cb_removed_wi", "label": "Removed", "type": "checkbox" },
+            { "id": "cb_other_914", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_791", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_914" },
+            { "id": "actv_condition_walls_int", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_walls_int", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_walls_int=Unsatisfactory" },
+            { "id": "et_general_remarks_walls_int", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_chimney_breasts",
+          "title": "Chimney Breasts",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 4,
+          "fields": [
+            { "id": "label_chimney_breasts", "label": "Chimney Breasts", "type": "label" },
+            { "id": "cb_used", "label": "Used", "type": "checkbox" },
+            { "id": "cb_sealed", "label": "Sealed", "type": "checkbox" },
+            { "id": "cb_vents", "label": "Vents", "type": "checkbox" },
+            { "id": "cb_no_vents", "label": "No Vents", "type": "checkbox" },
+            { "id": "cb_removed_cb", "label": "Removed", "type": "checkbox" },
+            { "id": "cb_other_1033", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_829", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_1033" },
+            { "id": "actv_condition_chimney_br", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_chimney_br", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_chimney_br=Unsatisfactory" },
+            { "id": "et_general_remarks_chimney_br", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_external_joinery",
+          "title": "Windows",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 5,
+          "fields": [
+            { "id": "label_ext_joinery", "label": "Windows", "type": "label" },
+            { "id": "cb_timber_ej", "label": "Timber", "type": "checkbox" },
+            { "id": "cb_galvanised", "label": "Galvanised", "type": "checkbox" },
+            { "id": "cb_aluminium", "label": "Aluminium", "type": "checkbox" },
+            { "id": "cb_upvc_ej", "label": "UPVC", "type": "checkbox" },
+            { "id": "cb_single_glazed", "label": "Single Glazed", "type": "checkbox" },
+            { "id": "cb_double_glazed", "label": "Double Glazed", "type": "checkbox" },
+            { "id": "cb_triple_glazed", "label": "Triple Glazed", "type": "checkbox" },
+            { "id": "cb_other_948", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_438", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_948" },
+            { "id": "actv_condition_ext_joinery", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_ext_joinery", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_ext_joinery=Unsatisfactory" },
+            { "id": "et_general_remarks_ext_joinery", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_internal_fittings",
+          "title": "Internal Fittings",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 6,
+          "fields": [
+            { "id": "label_int_fittings", "label": "Internal Fittings", "type": "label" },
+            { "id": "cb_kitchen_units", "label": "Kitchen Units", "type": "checkbox" },
+            { "id": "cb_utility", "label": "Utility", "type": "checkbox" },
+            { "id": "cb_bath_fittings", "label": "Bath Fittings", "type": "checkbox" },
+            { "id": "cb_other_673", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_534", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_673" },
+            { "id": "actv_condition_int_fittings", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_int_fittings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_int_fittings=Unsatisfactory" },
+            { "id": "et_general_remarks_int_fittings", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_decorations_int",
+          "title": "Internal Decorations",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 7,
+          "fields": [
+            { "id": "label_decorations_int", "label": "Internal Decorations", "type": "label" },
+            { "id": "cb_artex", "label": "Artex", "type": "checkbox" },
+            { "id": "cb_paint_di", "label": "Paint", "type": "checkbox" },
+            { "id": "cb_wallpaper", "label": "Wallpaper", "type": "checkbox" },
+            { "id": "cb_other_504", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_278", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_504" },
+            { "id": "actv_condition_dec_int", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_dec_int", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_dec_int=Unsatisfactory" },
+            { "id": "et_general_remarks_dec_int", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_damp_meter",
+          "title": "Damp",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 8,
+          "fields": [
+            { "id": "label_damp_meter", "label": "Damp", "type": "label" },
+            { "id": "actv_damp_meter", "label": "Damp Meter", "type": "dropdown", "options": ["Damp Found", "Damp Not Found", "Inspection Limitations"] },
+            { "id": "et_damp_found", "label": "Damp Found Location", "type": "text", "conditionalOn": "actv_damp_meter=Damp Found" },
+            { "id": "actv_condition_damp", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_damp", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_damp=Unsatisfactory" },
+            { "id": "et_general_remarks_damp", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_timber_defects",
+          "title": "Timber Defects",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 9,
+          "fields": [
+            { "id": "label_timber_defects", "label": "Timber Defects", "type": "label" },
+            { "id": "cb_dry_rot", "label": "Dry Rot", "type": "checkbox" },
+            { "id": "cb_wet_rot", "label": "Wet Rot", "type": "checkbox" },
+            { "id": "cb_beetle_infestation", "label": "Beetle Infestation", "type": "checkbox" },
+            { "id": "cb_other_375", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_835", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_375" },
+            { "id": "actv_condition_timber", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_timber", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_timber=Unsatisfactory" },
+            { "id": "et_general_remarks_timber", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_electric_material",
+          "title": "Electricity",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 10,
+          "fields": [
+            { "id": "label_electric", "label": "Electric Material", "type": "label" },
+            { "id": "cb_rubber_cable", "label": "Rubber Cable", "type": "checkbox" },
+            { "id": "cb_upvc_el", "label": "UPVC", "type": "checkbox" },
+            { "id": "cb_mixed_el", "label": "Mixed", "type": "checkbox" },
+            { "id": "cb_other_194", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_423", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_194" },
+            { "id": "actv_condition_electric", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_electric", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_electric=Unsatisfactory" },
+            { "id": "et_general_remarks_electric", "label": "General Remarks", "type": "text" },
+            { "id": "label_electric_age", "label": "Age", "type": "label" },
+            { "id": "cb_modern", "label": "Modern", "type": "checkbox" },
+            { "id": "cb_old", "label": "Old", "type": "checkbox" },
+            { "id": "cb_later_alterations", "label": "Later Alterations", "type": "checkbox" },
+            { "id": "cb_diy", "label": "DIY", "type": "checkbox" },
+            { "id": "cb_other_550", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_199", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_550" },
+            { "id": "actv_age_condition", "label": "Age Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_age_notes", "label": "Age Notes", "type": "text", "conditionalOn": "actv_age_condition=Unsatisfactory" },
+            { "id": "et_generals_remarks_electric_age", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_gas",
+          "title": "Gas Supply",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 11,
+          "fields": [
+            { "id": "label_gas", "label": "Gas Supply", "type": "label" },
+            { "id": "actv_gas_supply", "label": "Gas Supply", "type": "dropdown", "options": ["Mains", "LPG"] },
+            { "id": "actv_condition_gas", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_gas", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_gas=Unsatisfactory" },
+            { "id": "et_general_remarks_gas", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_water",
+          "title": "Water Supply",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 12,
+          "fields": [
+            { "id": "label_water", "label": "Water Supply", "type": "label" },
+            { "id": "actv_water_supply", "label": "Water Supply", "type": "dropdown", "options": ["Mains", "Private"] },
+            { "id": "actv_condition_water", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_water", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_water=Unsatisfactory" },
+            { "id": "et_general_remarks_water", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_hot_water_central_heating",
+          "title": "Hot Water / Central Heating",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 13,
+          "fields": [
+            { "id": "label_hw_ch", "label": "Hot Water / Central Heating", "type": "label" },
+            { "id": "cb_lpg", "label": "LPG", "type": "checkbox" },
+            { "id": "cb_gas_hw", "label": "Gas", "type": "checkbox" },
+            { "id": "cb_electric_hw", "label": "Electric", "type": "checkbox" },
+            { "id": "cb_solid_hw", "label": "Solid", "type": "checkbox" },
+            { "id": "cb_oil", "label": "Oil", "type": "checkbox" },
+            { "id": "cb_radiators", "label": "Radiators", "type": "checkbox" },
+            { "id": "cb_warm_air", "label": "Warm Air", "type": "checkbox" },
+            { "id": "cb_storage", "label": "Storage", "type": "checkbox" },
+            { "id": "cb_full", "label": "Full", "type": "checkbox" },
+            { "id": "cb_part", "label": "Part", "type": "checkbox" },
+            { "id": "cb_none_hw", "label": "None", "type": "checkbox" },
+            { "id": "cb_other_657", "label": "Other", "type": "checkbox" },
+            { "id": "et_other_301", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_657" },
+            { "id": "actv_condition_hw_ch", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
+            { "id": "et_notes_hw_ch", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_hw_ch=Unsatisfactory" },
+            { "id": "et_general_remarks_hw_ch", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
+          "id": "val_smoke_detectors",
+          "title": "Smoke Detectors",
+          "type": "screen",
+          "parentId": "inside_property",
+          "order": 14,
+          "fields": [
+            { "id": "label_smoke_detectors", "label": "Smoke Detectors", "type": "label" },
+            { "id": "cb_mains_powered", "label": "Mains Powered", "type": "checkbox" },
+            { "id": "et_general_remarks_smoke", "label": "General Remarks", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "condition_restrictions",
+      "title": "Condition & Restrictions",
+      "description": "Overall condition and other matters",
+      "nodes": [
+        {
+          "id": "overall_condition",
+          "title": "Overall Condition",
+          "type": "screen",
+          "parentId": null,
+          "order": 1,
+          "fields": [
+            { "id": "actv_overall_condition", "label": "Overall Condition", "type": "dropdown", "options": ["Good", "Average", "Poor"] },
+            { "id": "et_restrictions", "label": "Restrictions", "type": "text" }
+          ]
+        },
+        {
+          "id": "other_matters",
+          "title": "Other Matters",
+          "type": "screen",
+          "parentId": null,
+          "order": 2,
+          "fields": [
+            { "id": "cb_building_regs", "label": "Building Regulations", "type": "checkbox" },
+            { "id": "et_notes_building_regs", "label": "Notes", "type": "text", "conditionalOn": "cb_building_regs" },
+            { "id": "cb_guarantees", "label": "Guarantees", "type": "checkbox" },
+            { "id": "et_notes_guarantees", "label": "Notes", "type": "text", "conditionalOn": "cb_guarantees" },
+            { "id": "cb_rights_of_way", "label": "Rights of Way", "type": "checkbox" },
+            { "id": "et_notes_rights", "label": "Notes", "type": "text", "conditionalOn": "cb_rights_of_way" },
+            { "id": "cb_contamination", "label": "Contamination", "type": "checkbox" },
+            { "id": "et_notes_contamination", "label": "Notes", "type": "text", "conditionalOn": "cb_contamination" },
+            { "id": "cb_flooding", "label": "Flooding", "type": "checkbox" },
+            { "id": "et_notes_flooding", "label": "Notes", "type": "text", "conditionalOn": "cb_flooding" },
+            { "id": "cb_emfs_om", "label": "EMFs", "type": "checkbox" },
+            { "id": "et_notes_emfs", "label": "Notes", "type": "text", "conditionalOn": "cb_emfs_om" },
+            { "id": "cb_mining", "label": "Mining", "type": "checkbox" },
+            { "id": "et_notes_mining", "label": "Notes", "type": "text", "conditionalOn": "cb_mining" },
+            { "id": "cb_flying_freehold", "label": "Flying Freehold", "type": "checkbox" },
+            { "id": "et_notes_flying", "label": "Notes", "type": "text", "conditionalOn": "cb_flying_freehold" },
+            { "id": "cb_radon", "label": "Radon", "type": "checkbox" },
+            { "id": "et_notes_radon", "label": "Notes", "type": "text", "conditionalOn": "cb_radon" }
+          ]
+        },
+        {
+          "id": "energy_performance",
+          "title": "Energy Performance",
+          "type": "screen",
+          "parentId": null,
+          "order": 3,
+          "fields": [
+            { "id": "label_epc", "label": "Energy Performance Certificate (EPC)", "type": "label" },
+            { "id": "actv_epc_current_rating", "label": "Current EPC Rating", "type": "dropdown", "options": ["A", "B", "C", "D", "E", "F", "G"] },
+            { "id": "et_epc_current_score", "label": "Current EPC Score (1-100)", "type": "number" },
+            { "id": "actv_epc_potential_rating", "label": "Potential EPC Rating", "type": "dropdown", "options": ["A", "B", "C", "D", "E", "F", "G"] },
+            { "id": "et_epc_potential_score", "label": "Potential EPC Score (1-100)", "type": "number" },
+            { "id": "label_env_impact", "label": "Environmental Impact", "type": "label" },
+            { "id": "et_env_impact_current", "label": "Current Environmental Impact (1-100)", "type": "number" },
+            { "id": "et_env_impact_potential", "label": "Potential Environmental Impact (1-100)", "type": "number" },
+            { "id": "et_epc_reference", "label": "EPC Certificate Reference", "type": "text" },
+            { "id": "et_epc_notes", "label": "Notes", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "valuation_completion",
+      "title": "Valuation & Completion",
+      "description": "Valuation figures, remarks, and floor plan",
+      "nodes": [
+        {
+          "id": "valuation",
+          "title": "Valuation",
+          "type": "screen",
+          "parentId": null,
+          "order": 1,
+          "fields": [
+            { "id": "label_purchase_info", "label": "Purchase Information", "type": "label" },
+            { "id": "et_purchase_price", "label": "Purchase Price", "type": "text" },
+            { "id": "et_estimated_value", "label": "Estimated Value (Pre-Inspection)", "type": "text" },
+            { "id": "label_valuation_figures", "label": "Valuation Figures", "type": "label" },
+            { "id": "cb_open_market_value", "label": "Open Market Value", "type": "checkbox" },
+            { "id": "et_value_of_share", "label": "Value of Share", "type": "text" },
+            { "id": "et_share", "label": "Share (%)", "type": "number" },
+            { "id": "et_after_works_value", "label": "After Works Value", "type": "text" },
+            { "id": "et_retention", "label": "Retention", "type": "text" },
+            { "id": "cb_suitable_security", "label": "Suitable Security", "type": "checkbox" }
+          ]
+        },
+        {
+          "id": "general_remarks",
+          "title": "General Remarks & Notes",
+          "type": "screen",
+          "parentId": null,
+          "order": 2,
+          "fields": [
+            { "id": "label_general_remarks", "label": "General Remarks", "type": "label" },
+            { "id": "et_general_remarks", "label": "General Remarks", "type": "text" },
+            { "id": "label_client_notes", "label": "Client Notes (Included in Report)", "type": "label" },
+            { "id": "et_client_notes", "label": "Client Notes", "type": "text" },
+            { "id": "label_agent_notes", "label": "Agent Notes (Internal Only)", "type": "label" },
+            { "id": "et_agent_notes", "label": "Agent Notes", "type": "text" },
+            { "id": "label_special_instructions", "label": "Special Instructions (Reference)", "type": "label" },
+            { "id": "et_special_instructions", "label": "Special Instructions", "type": "text" }
+          ]
+        },
+        {
+          "id": "scan_floor_plan",
+          "title": "Scan Floor Plan",
+          "type": "screen",
+          "parentId": null,
+          "order": 3,
+          "fields": [
+            { "id": "label_scan_floor_plan", "label": "Scan Floor Plan", "type": "label" }
+          ]
+        }
+      ]
+    }
+  ]
+}

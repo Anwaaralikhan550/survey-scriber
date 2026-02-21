@@ -1,0 +1,108 @@
+name: survey_scriber
+description: "SurveyScriber - Professional Field Survey & Inspection App"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_compass: ^0.8.0
+
+  # UI & Design
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.2.1
+  flutter_animate: ^4.5.0
+  flutter_svg: ^2.0.10+1
+
+  # State Management (Riverpod - chosen for simplicity & testability)
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # Navigation
+  go_router: ^14.2.7
+
+  # Network
+  dio: ^5.7.0
+  connectivity_plus: ^6.0.5
+
+  # Local Storage (Offline-first)
+  hive_flutter: ^1.1.0
+  drift: ^2.20.0
+  drift_flutter: 0.2.6
+  sqlite3_flutter_libs: ^0.5.25
+  path_provider: ^2.1.4
+  shared_preferences: ^2.3.2
+  flutter_secure_storage: ^9.2.2
+  path: ^1.9.0
+
+  # Data Classes & Serialization
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+  equatable: ^2.0.5
+
+  # Functional Programming
+  fpdart: ^1.1.0
+
+  # Security & Biometrics
+  local_auth: ^2.2.0
+
+  # Screen & System
+  wakelock_plus: ^1.2.8
+
+  # Utilities
+  uuid: ^4.5.1
+  crypto: ^3.0.3  # For SHA-256 certificate fingerprint calculation
+  intl: ^0.19.0
+  logger: ^2.4.0
+  cached_network_image: ^3.4.1  # Image caching for network images
+
+  # Media Capture
+  image_picker: ^1.1.2
+  record: ^6.0.0
+  audioplayers: ^6.1.0
+  video_player: ^2.9.2
+  permission_handler: ^11.3.1
+  speech_to_text: ^7.0.0
+
+  # PDF Generation
+  pdf: ^3.11.1
+  printing: ^5.13.2
+  share_plus: ^10.1.2
+  dynamic_color: ">=1.6.0 <1.7.0"
+
+  # DOCX Generation (pure Dart ZIP encoding)
+  archive: ^4.0.2
+
+  # Open files in native viewer (Word, Docs, etc.)
+  open_filex: ^4.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+  # App Icon Generation
+  flutter_launcher_icons: ^0.14.1
+
+  # Code Generation
+  build_runner: ^2.4.12
+  freezed: ^2.5.7
+  json_serializable: ^6.8.0
+  riverpod_generator: ^2.4.3
+  drift_dev: ^2.20.0
+  go_router_builder: ^2.7.1
+
+  # Testing
+  mocktail: ^1.0.4
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/property_inspection/
+    - assets/property_valuation/

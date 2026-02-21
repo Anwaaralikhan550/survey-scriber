@@ -1,0 +1,44 @@
+{
+  "generated": "2026-02-16T12:51:11.490Z",
+  "inspection": {
+    "totalScreens": 516,
+    "coveredByCase": 402,
+    "coveredByDynamic": 113,
+    "uncoveredCount": 1,
+    "classificationSummary": {
+      "other": 1
+    },
+    "sectionSummary": {
+      "unknown": 1
+    },
+    "uncovered": [
+      {
+        "id": "activity_capture_floor_site_plan_sketches",
+        "title": "Capture floor/site plan sketches",
+        "fields": [],
+        "section": "unknown",
+        "classification": "other"
+      }
+    ]
+  },
+  "valuation": {
+    "totalScreens": 42,
+    "coveredByCase": 41,
+    "uncoveredCount": 1,
+    "uncovered": [
+      {
+        "id": "scan_floor_plan",
+        "title": "Scan Floor Plan",
+        "fields": [
+          {
+            "id": "label_scan_floor_plan",
+            "type": "label",
+            "label": "Scan Floor Plan",
+            "options": []
+          }
+        ],
+        "classification": "other"
+      }
+    ]
+  }
+}

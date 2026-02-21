@@ -1,0 +1,43 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+// Force consistent JVM 17 and compileSdk for ALL library modules
+subprojects { subproject ->
+    subproject.plugins.withId("com.android.library") {
+        subproject.android {
+            if (subproject.android.compileSdkVersion == null) {
+                compileSdk = 35
+            }
+            if (subproject.android.ndkVersion == null || subproject.android.ndkVersion == "") {
+                ndkVersion = "27.0.12077973"
+            }
+            compileOptions {
+                sourceCompatibility = JavaVersion.VERSION_17
+                targetCompatibility = JavaVersion.VERSION_17
+            }
+        }
+    }
+    subproject.plugins.withId("org.jetbrains.kotlin.android") {
+        subproject.android {
+            kotlinOptions {
+                jvmTarget = "17"
+            }
+        }
+    }
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

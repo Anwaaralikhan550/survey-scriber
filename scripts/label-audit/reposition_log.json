@@ -1,0 +1,188 @@
+[
+  {
+    "screenId": "activity_service_about_electricity",
+    "labelId": "label_defect",
+    "labelText": "Defect",
+    "newPosition": 19
+  },
+  {
+    "screenId": "activity_service_about_electricity",
+    "labelId": "label_fuse_box_location",
+    "labelText": "Fuse box location",
+    "newPosition": 10
+  },
+  {
+    "screenId": "activity_service_about_electricity",
+    "labelId": "label_fuse",
+    "labelText": "Fuse",
+    "newPosition": 9
+  },
+  {
+    "screenId": "activity_service_about_electricity",
+    "labelId": "label_meter_location",
+    "labelText": "Meter location",
+    "newPosition": 1
+  },
+  {
+    "screenId": "activity_service_about_electricity",
+    "labelId": "label_main_electricity",
+    "labelText": "Main Electricity",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_services_main_gas",
+    "labelId": "label_mains_gas_meter_and_control_valve_location",
+    "labelText": "Mains Gas Meter and Control valve location",
+    "newPosition": 2
+  },
+  {
+    "screenId": "activity_services_gas_oil",
+    "labelId": "label_oil",
+    "labelText": "Oil",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_services_gas_oil",
+    "labelId": "label_mains_gas",
+    "labelText": "Mains Gas",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_services_water_heating_gas_heating",
+    "labelId": "label_cylinder_location",
+    "labelText": "Water Storage Cylinder Located In",
+    "newPosition": 2
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "labelId": "label_floor_ventilation",
+    "labelText": "Floor ventilation",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "labelId": "label_dampness_2",
+    "labelText": "Dampness",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "labelId": "label_timber_infestation",
+    "labelText": "Timber Infestation",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "labelId": "label_timber_decay",
+    "labelText": "Timber Decay",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "labelId": "label_loose_floorboards",
+    "labelText": "Loose Floorboards",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "labelId": "label_tiles",
+    "labelText": "Tiles",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "labelId": "label_creaking",
+    "labelText": "Creaking",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "labelId": "label_about_floors",
+    "labelText": "About Floors",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "labelId": "label_other_3",
+    "labelText": "Other",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "labelId": "label_electric_fire",
+    "labelText": "Electric fire",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "labelId": "label_wood_burning_stove",
+    "labelText": "Wood burning stove",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "labelId": "label_imitation_system",
+    "labelText": "Imitation system",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "labelId": "label_gas_fire",
+    "labelText": "Gas fire",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "labelId": "label_an_open_fire",
+    "labelText": "An open fire",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan__no_extractor_fan_installed",
+    "labelId": "label_fan_location_7",
+    "labelText": "Fan Location",
+    "newPosition": 1
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan__no_extractor_fan_installed",
+    "labelId": "label_fan_location_6",
+    "labelText": "Fan Location",
+    "newPosition": 1
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan__no_extractor_fan_installed",
+    "labelId": "label_fan_location_5",
+    "labelText": "Fan Location",
+    "newPosition": 1
+  },
+  {
+    "screenId": "activity_in_side_property_wood_work",
+    "labelId": "label_damaged_lock",
+    "labelText": "Damaged Lock",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_wood_work",
+    "labelId": "label_fittedbuiltin_cupboards",
+    "labelText": "Fitted/Builtin Cupboards",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_in_side_property_wood_work",
+    "labelId": "label_woodwork",
+    "labelText": "Woodwork",
+    "newPosition": 0
+  },
+  {
+    "screenId": "activity_outside_property_limitation",
+    "labelId": "label_limitations",
+    "labelText": "Limitations",
+    "newPosition": 1
+  },
+  {
+    "screenId": "outside_property_roof_covering_roof_spreading_layout",
+    "labelId": "label_the_surface_of_the_roof_slope_is_uneven_or_undulating_to_the_location",
+    "labelText": "The surface of the roof slope  is uneven or undulating to the location",
+    "newPosition": 1
+  }
+]

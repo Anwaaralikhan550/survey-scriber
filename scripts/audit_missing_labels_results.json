@@ -1,0 +1,1410 @@
+[
+  {
+    "screenId": "activity_outside_property_chimney_main_screen",
+    "section": "E",
+    "title": "Chimney",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Chimney",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Chimney",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_main_screen",
+    "section": "E",
+    "title": "Conservatory and Porches",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Conservatory and Porch",
+      "Repairs",
+      "Not inspected"
+    ],
+    "missingLabels": [
+      "Conservatory and Porch",
+      "Repairs",
+      "Not inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_near_by_tress",
+    "section": "E",
+    "title": "Nearby Tree",
+    "dataFieldCount": 3,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Size Of tree"
+    ],
+    "missingLabels": [
+      "Size Of tree"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_pointing",
+    "section": "E",
+    "title": "Pointing",
+    "dataFieldCount": 27,
+    "existingLabels": [
+      "Select repair now if defect is causing damp.",
+      "Location",
+      "Defect",
+      "Location",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Select repair now if defect is causing damp.",
+      "Walls",
+      "Location",
+      "Defect",
+      "Walls",
+      "Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Walls",
+      "Walls"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_render",
+    "section": "E",
+    "title": "Render",
+    "dataFieldCount": 31,
+    "existingLabels": [
+      "Select repair now if defect is causing damp.",
+      "Location",
+      "Defect",
+      "Location",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Select repair now if defect is causing damp.",
+      "Walls",
+      "Location",
+      "Defect",
+      "Walls",
+      "Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Walls",
+      "Walls"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_spalling",
+    "section": "E",
+    "title": "Spalling",
+    "dataFieldCount": 20,
+    "existingLabels": [
+      "Select repair now if defect is causing damp.",
+      "Location",
+      "Location"
+    ],
+    "nativeLabels": [
+      "Select repair now if defect is causing damp.",
+      "Walls",
+      "Location",
+      "Walls",
+      "Location"
+    ],
+    "missingLabels": [
+      "Walls",
+      "Walls"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_wall_repairs_window_sills",
+    "section": "E",
+    "title": "Windows Sills",
+    "dataFieldCount": 35,
+    "existingLabels": [
+      "Location",
+      "Defect",
+      "Location",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Walls",
+      "Location",
+      "Defect",
+      "Walls",
+      "Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Walls",
+      "Walls"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_about_wall",
+    "section": "E",
+    "title": "Solid brick wall",
+    "dataFieldCount": 22,
+    "existingLabels": [
+      "Wall",
+      "Finishes type"
+    ],
+    "nativeLabels": [
+      "Wall",
+      "Construction",
+      "Finishes type"
+    ],
+    "missingLabels": [
+      "Construction"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_damp",
+    "section": "E",
+    "title": "DAMP",
+    "dataFieldCount": 20,
+    "existingLabels": [
+      "Damp cause",
+      "e.g. Lower walls in the lounge.."
+    ],
+    "nativeLabels": [
+      "e.g. Lower walls in the lounge..",
+      "Damp cause",
+      "Caused By",
+      "Caused By"
+    ],
+    "missingLabels": [
+      "Caused By",
+      "Caused By"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_main_screen",
+    "section": "E",
+    "title": "Main Walls",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Main Walls",
+      "Repairs",
+      "Main walls not inspected"
+    ],
+    "missingLabels": [
+      "Main Walls",
+      "Repairs",
+      "Main walls not inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_movements",
+    "section": "E",
+    "title": "Movements",
+    "dataFieldCount": 25,
+    "existingLabels": [
+      "Location",
+      "Cracks potentially arising",
+      "Location"
+    ],
+    "nativeLabels": [
+      "Wall",
+      "Location",
+      "Cracks potentially arising",
+      "Wall",
+      "Location"
+    ],
+    "missingLabels": [
+      "Wall",
+      "Wall"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_removed_wall",
+    "section": "E",
+    "title": "Removed Walls",
+    "dataFieldCount": 12,
+    "existingLabels": [
+      "Walled removed location"
+    ],
+    "nativeLabels": [
+      "Walled removed location",
+      "Describe defect"
+    ],
+    "missingLabels": [
+      "Describe defect"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_other_communal_area",
+    "section": "E",
+    "title": "Communal Area",
+    "dataFieldCount": 18,
+    "existingLabels": [
+      "External communal parts"
+    ],
+    "nativeLabels": [
+      "External communal parts",
+      "Because Of"
+    ],
+    "missingLabels": [
+      "Because Of"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_other_floors",
+    "section": "E",
+    "title": "Floor",
+    "dataFieldCount": 4,
+    "existingLabels": [],
+    "nativeLabels": [
+      "The floors are"
+    ],
+    "missingLabels": [
+      "The floors are"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "section": "E",
+    "title": "Other Joinery and Finishes",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Other Joinery and Finishes",
+      "Repairs",
+      "Not inspected"
+    ],
+    "missingLabels": [
+      "Other Joinery and Finishes",
+      "Repairs",
+      "Not inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_other_main_screen",
+    "section": "E",
+    "title": "Other Area",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Other Area",
+      "Repairs",
+      "Not inspected"
+    ],
+    "missingLabels": [
+      "Other Area",
+      "Repairs",
+      "Not inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_drains",
+    "section": "E",
+    "title": "Drains",
+    "dataFieldCount": 4,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Defect"
+    ],
+    "missingLabels": [
+      "Defect"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_floor",
+    "section": "E",
+    "title": "Floor",
+    "dataFieldCount": 4,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Defect"
+    ],
+    "missingLabels": [
+      "Defect"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_other_repairs_hand_rails",
+    "section": "E",
+    "title": "Hand rails",
+    "dataFieldCount": 5,
+    "existingLabels": [
+      "Handrail to balcony"
+    ],
+    "nativeLabels": [
+      "Handrail defect",
+      "Handrail to balcony"
+    ],
+    "missingLabels": [
+      "Handrail defect"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_out_side_doors_about_doors",
+    "section": "E",
+    "title": "PVC",
+    "dataFieldCount": 21,
+    "existingLabels": [
+      "Door location",
+      "Glazzing"
+    ],
+    "nativeLabels": [
+      "Door location",
+      "Type",
+      "Glazzing"
+    ],
+    "missingLabels": [
+      "Type"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_outside_doors_main_screen",
+    "section": "E",
+    "title": "Outside Doors",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Outside doors",
+      "Repairs"
+    ],
+    "missingLabels": [
+      "Outside doors",
+      "Repairs"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "section": "E",
+    "title": "Rainwater Goods",
+    "dataFieldCount": 10,
+    "existingLabels": [
+      "Location / Area"
+    ],
+    "nativeLabels": [
+      "Rainwater Goods",
+      "Repairs",
+      "Not inspected",
+      "Location could not be viewed from ground level are"
+    ],
+    "missingLabels": [
+      "Rainwater Goods",
+      "Repairs",
+      "Not inspected",
+      "Location could not be viewed from ground level are"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_repair_flashing",
+    "section": "E",
+    "title": "Flashing",
+    "dataFieldCount": 24,
+    "existingLabels": [
+      "Chimney",
+      "Problem",
+      "Chimney",
+      "Problem"
+    ],
+    "nativeLabels": [
+      "Chimney",
+      "Defect",
+      "Chimney",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Defect",
+      "Defect"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_roof_covering_main_screen",
+    "section": "E",
+    "title": "Roof Covering",
+    "dataFieldCount": 10,
+    "existingLabels": [
+      "Location / Area"
+    ],
+    "nativeLabels": [
+      "Roof Covering",
+      "Repairs",
+      "Location could not be viewed from ground level are",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Roof Covering",
+      "Repairs",
+      "Location could not be viewed from ground level are",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_roof_repair_tiles",
+    "section": "E",
+    "title": "Repair Tiles",
+    "dataFieldCount": 24,
+    "existingLabels": [
+      "Defects - Many tiles",
+      "Defects - Many tiles"
+    ],
+    "nativeLabels": [
+      "Type Of Tiles",
+      "Defects - Many tiles",
+      "Type Of Tiles",
+      "Defects - Many tiles"
+    ],
+    "missingLabels": [
+      "Type Of Tiles",
+      "Type Of Tiles"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_roof_repair_verge",
+    "section": "E",
+    "title": "Verge Repair",
+    "dataFieldCount": 24,
+    "existingLabels": [
+      "Defect",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Defective part",
+      "Defect",
+      "Particular",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Particular"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_roof_spreading_repair",
+    "section": "E",
+    "title": "Roof Spreading",
+    "dataFieldCount": 1,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Does the roof timber structure require strengthening?"
+    ],
+    "missingLabels": [
+      "Does the roof timber structure require strengthening?"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_rwg__repair_pipes_gutters",
+    "section": "E",
+    "title": "Repairs",
+    "dataFieldCount": 21,
+    "existingLabels": [
+      "Defect",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Item",
+      "Defect",
+      "Item",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Item",
+      "Item"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_windows_main_screen",
+    "section": "E",
+    "title": "Windows",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Windows",
+      "Repairs",
+      "Not inspected"
+    ],
+    "missingLabels": [
+      "Windows",
+      "Repairs",
+      "Not inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_outside_property_windows_velux_window",
+    "section": "E",
+    "title": "Velux window",
+    "dataFieldCount": 33,
+    "existingLabels": [
+      "Type",
+      "Glazzing",
+      "Location",
+      "Type",
+      "Glazzing"
+    ],
+    "nativeLabels": [
+      "Location",
+      "Type",
+      "Glazzing",
+      "No.Of velux windows",
+      "Location",
+      "Type",
+      "Glazzing"
+    ],
+    "missingLabels": [
+      "No.Of velux windows"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
+    "section": "F",
+    "title": "Extractor Fan Installed",
+    "dataFieldCount": 39,
+    "existingLabels": [
+      "Where is the extractor fan?",
+      "Where is there no extractor fan?",
+      "Where is fan broken/not working?"
+    ],
+    "nativeLabels": [
+      "Fan Location",
+      "Fan Location",
+      "Fan Location",
+      "Tested",
+      "Defect",
+      "Fan Location"
+    ],
+    "missingLabels": [
+      "Fan Location",
+      "Fan Location",
+      "Fan Location",
+      "Tested",
+      "Defect",
+      "Fan Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_bathroom_fittings_repair",
+    "section": "F",
+    "title": "Repairs",
+    "dataFieldCount": 38,
+    "existingLabels": [
+      "Defect",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Location",
+      "Defect",
+      "Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Location",
+      "Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_built_in_fittings_repair_fittings",
+    "section": "F",
+    "title": "Repair Fitting",
+    "dataFieldCount": 22,
+    "existingLabels": [
+      "Defect",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Location",
+      "Defect",
+      "Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Location",
+      "Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_cubicle_safety_glass_rating",
+    "section": "F",
+    "title": "No Cubicle Safety Glass Rating",
+    "dataFieldCount": 4,
+    "existingLabels": [],
+    "nativeLabels": [
+      "No safety glass mark noted"
+    ],
+    "missingLabels": [
+      "No safety glass mark noted"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places",
+    "section": "F",
+    "title": "An open fire",
+    "dataFieldCount": 17,
+    "existingLabels": [
+      "Fire Type"
+    ],
+    "nativeLabels": [
+      "Location",
+      "Type"
+    ],
+    "missingLabels": [
+      "Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "section": "F",
+    "title": "Flues Not Inspected",
+    "dataFieldCount": 1,
+    "existingLabels": [],
+    "nativeLabels": [
+      "An open fire",
+      "Gas fire",
+      "Imitation system",
+      "Wood burning stove",
+      "Electric fire",
+      "Other"
+    ],
+    "missingLabels": [
+      "An open fire",
+      "Gas fire",
+      "Imitation system",
+      "Wood burning stove",
+      "Electric fire",
+      "Other"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_repair_blocked_fireplace",
+    "section": "F",
+    "title": "Blocked Fireplace",
+    "dataFieldCount": 25,
+    "existingLabels": [
+      "Fireplace Location",
+      "Fireplace Location"
+    ],
+    "nativeLabels": [
+      "Floor Location",
+      "Fireplace Location",
+      "Floor Location",
+      "Fireplace Location"
+    ],
+    "missingLabels": [
+      "Floor Location",
+      "Floor Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_repair_fire_place",
+    "section": "F",
+    "title": "Repair Fireplaces",
+    "dataFieldCount": 35,
+    "existingLabels": [
+      "Fireplace Location",
+      "Defect",
+      "Fireplace Location",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Floor Location",
+      "Fireplace Location",
+      "Defect",
+      "Floor Location",
+      "Fireplace Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Floor Location",
+      "Floor Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_repair_removed_cb",
+    "section": "F",
+    "title": "Removed CB",
+    "dataFieldCount": 30,
+    "existingLabels": [
+      "Chimney Location",
+      "Chimney Location",
+      "Adjacent construction defects"
+    ],
+    "nativeLabels": [
+      "Floor Location",
+      "Chimney Location",
+      "Floor Location",
+      "Chimney Location",
+      "Adjacent construction defects"
+    ],
+    "missingLabels": [
+      "Floor Location",
+      "Floor Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "section": "F",
+    "title": "Floors",
+    "dataFieldCount": 1,
+    "existingLabels": [],
+    "nativeLabels": [
+      "About Floors",
+      "Creaking",
+      "Tiles",
+      "Loose Floorboards",
+      "Timber Decay",
+      "Timber Infestation",
+      "Dampness",
+      "Floor ventilation"
+    ],
+    "missingLabels": [
+      "About Floors",
+      "Creaking",
+      "Tiles",
+      "Loose Floorboards",
+      "Timber Decay",
+      "Timber Infestation",
+      "Dampness",
+      "Floor ventilation"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_floors_repair_floor_repair",
+    "section": "F",
+    "title": "Floor Repair",
+    "dataFieldCount": 32,
+    "existingLabels": [
+      "Defect",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Location",
+      "Defect",
+      "Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Location",
+      "Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_floors_repair_uneven_floor",
+    "section": "F",
+    "title": "Uneven Floor",
+    "dataFieldCount": 17,
+    "existingLabels": [
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_other_communal_area",
+    "section": "F",
+    "title": "Communal Area",
+    "dataFieldCount": 22,
+    "existingLabels": [
+      "Defect Noted"
+    ],
+    "nativeLabels": [
+      "Not Inspected Because Of",
+      "Property comprise of",
+      "Defect Noted"
+    ],
+    "missingLabels": [
+      "Not Inspected Because Of",
+      "Property comprise of"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_wap_dampness",
+    "section": "F",
+    "title": "Dampness",
+    "dataFieldCount": 12,
+    "existingLabels": [
+      "e.g. lower walls in the kitchen"
+    ],
+    "nativeLabels": [
+      "e.g. lower walls in the kitchen",
+      "Cause",
+      "Caused By"
+    ],
+    "missingLabels": [
+      "Cause",
+      "Caused By"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_wap_repair_wall_repair",
+    "section": "F",
+    "title": "Wall Repair",
+    "dataFieldCount": 29,
+    "existingLabels": [
+      "Defect",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Location",
+      "Defect",
+      "Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Location",
+      "Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_in_side_property_ww_wood_work_repair",
+    "section": "F",
+    "title": "WoodWork Repair",
+    "dataFieldCount": 28,
+    "existingLabels": [
+      "Defect",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Location",
+      "Defect",
+      "Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Location",
+      "Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_about_roof_structure",
+    "section": "F",
+    "title": "About Roof structure",
+    "dataFieldCount": 22,
+    "existingLabels": [
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Material",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Material"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_bathroom_fittings_main_screen",
+    "section": "F",
+    "title": "Bathroom Fittings",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Bathroom Fitting",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Bathroom Fitting",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_built_in_fittings_main_screen",
+    "section": "F",
+    "title": "Built In Fittings",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Built In Fittings",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Built In Fittings",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_main_screen",
+    "section": "F",
+    "title": "Ceilings",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Ceilings",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Ceilings",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_repairs_ceilings",
+    "section": "F",
+    "title": "Repair Ceilings",
+    "dataFieldCount": 29,
+    "existingLabels": [
+      "Defect",
+      "Defect"
+    ],
+    "nativeLabels": [
+      "Ceilings Location",
+      "Defect",
+      "Ceilings Location",
+      "Defect"
+    ],
+    "missingLabels": [
+      "Ceilings Location",
+      "Ceilings Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "section": "F",
+    "title": "Fireplaces and Chimneys",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Fire Places",
+      "Blocked Fireplace",
+      "Removed CB",
+      "Boiler Flue",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Fire Places",
+      "Blocked Fireplace",
+      "Removed CB",
+      "Boiler Flue",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_floors_main_screen",
+    "section": "F",
+    "title": "Floors",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Floors",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Floors",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_other_celler_no_access",
+    "section": "F",
+    "title": "No access",
+    "dataFieldCount": 4,
+    "existingLabels": [],
+    "nativeLabels": [
+      "No Access Because Of"
+    ],
+    "missingLabels": [
+      "No Access Because Of"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_roof_structure_main_screen",
+    "section": "F",
+    "title": "Roof Structure",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Roof Structure",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Roof Structure",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_inside_property_walls_and_partitions_main_screen",
+    "section": "F",
+    "title": "Walls and Partitions",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Walls and Partitions",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Walls and Partitions",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_services_drainage_main_screen",
+    "section": "G",
+    "title": "Drainage",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Drainage",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Drainage",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_services_electricity_main_screen",
+    "section": "G",
+    "title": "Electricity",
+    "dataFieldCount": 3,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Electricity",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Electricity",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_services_gas_oil",
+    "section": "G",
+    "title": "Gas and Oil",
+    "dataFieldCount": 1,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Mains Gas",
+      "Oil"
+    ],
+    "missingLabels": [
+      "Mains Gas",
+      "Oil"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "section": "G",
+    "title": "Gas and Oil",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Gas and Oil",
+      "Repairs",
+      "No.of pots",
+      "Rendering",
+      "Waterproofing",
+      "Condition",
+      "Shared Chimney",
+      "Leaning Chimney",
+      "Other Joinery finishes",
+      "Other",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Gas and Oil",
+      "Repairs",
+      "No.of pots",
+      "Rendering",
+      "Waterproofing",
+      "Condition",
+      "Shared Chimney",
+      "Leaning Chimney",
+      "Other Joinery finishes",
+      "Other",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_services_heating_main_screen",
+    "section": "G",
+    "title": "Heating",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Heating",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Heating",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_services_main_gas",
+    "section": "G",
+    "title": "Mains Gas",
+    "dataFieldCount": 4,
+    "existingLabels": [
+      "Mains gas meter and control valve are located at location"
+    ],
+    "nativeLabels": [
+      "Mains Gas Meter and Control valve location"
+    ],
+    "missingLabels": [
+      "Mains Gas Meter and Control valve location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_services_water_heating_main_screen",
+    "section": "G",
+    "title": "Water Heating",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Water Heating",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Water Heating",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_services_water_main_screen",
+    "section": "G",
+    "title": "Water",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Water",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Water",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_grounds_garage_main_screen",
+    "section": "H",
+    "title": "Garage",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Garage",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Garage",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_grounds_other_area_knotweed",
+    "section": "H",
+    "title": "Knotweed",
+    "dataFieldCount": 4,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Japanese knotweed is growing at Location"
+    ],
+    "missingLabels": [
+      "Japanese knotweed is growing at Location"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_grounds_other_area_main_screen",
+    "section": "H",
+    "title": "Other Area",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Other Area",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Other Area",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_grounds_other_communal_garden",
+    "section": "H",
+    "title": "Communal Garden",
+    "dataFieldCount": 26,
+    "existingLabels": [
+      "Garden Type",
+      "Boundary Fencing",
+      "Outbuildings"
+    ],
+    "nativeLabels": [
+      "The garden is"
+    ],
+    "missingLabels": [
+      "The garden is"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "section": "H",
+    "title": "Other",
+    "dataFieldCount": 2,
+    "existingLabels": [],
+    "nativeLabels": [
+      "Other",
+      "Shared Access",
+      "Private Road",
+      "Legal Issues",
+      "Shrinkable Clay",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "missingLabels": [
+      "Other",
+      "Shared Access",
+      "Private Road",
+      "Legal Issues",
+      "Shrinkable Clay",
+      "Repairs",
+      "Not Inspected"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_grounds_other_other_garden",
+    "section": "H",
+    "title": "Other Garden",
+    "dataFieldCount": 26,
+    "existingLabels": [
+      "Garden Type",
+      "Boundary Fencing",
+      "Outbuildings"
+    ],
+    "nativeLabels": [
+      "The garden is"
+    ],
+    "missingLabels": [
+      "The garden is"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_grounds_other_rear_garden",
+    "section": "H",
+    "title": "Rear Garden",
+    "dataFieldCount": 26,
+    "existingLabels": [
+      "Garden Type",
+      "Boundary Fencing",
+      "Outbuildings"
+    ],
+    "nativeLabels": [
+      "The garden is"
+    ],
+    "missingLabels": [
+      "The garden is"
+    ],
+    "priority": "NORMAL"
+  },
+  {
+    "screenId": "activity_grounds_other_side_garden",
+    "section": "H",
+    "title": "Side Garden",
+    "dataFieldCount": 26,
+    "existingLabels": [
+      "Garden Type",
+      "Boundary Fencing",
+      "Outbuildings"
+    ],
+    "nativeLabels": [
+      "The garden is"
+    ],
+    "missingLabels": [
+      "The garden is"
+    ],
+    "priority": "NORMAL"
+  }
+]

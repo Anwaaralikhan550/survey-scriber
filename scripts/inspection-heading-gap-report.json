@@ -1,0 +1,532 @@
+[
+  {
+    "screenId": "activity_outside_property_chimney_main_screen",
+    "section": "E",
+    "title": "Chimney",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Chimney",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_outside_property_conservatory_porch_main_screen",
+    "section": "E",
+    "title": "Conservatory and Porches",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Conservatory and Porch",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_outside_property_main_walls_main_screen",
+    "section": "E",
+    "title": "Main Walls",
+    "nativeHeadingCount": 2,
+    "v2LabelCount": 1,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Main Walls",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "section": "E",
+    "title": "Other Joinery and Finishes",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Other Joinery and Finishes",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_outside_property_other_main_screen",
+    "section": "E",
+    "title": "Other Area",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Other Area",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_outside_property_outside_doors_main_screen",
+    "section": "E",
+    "title": "Outside Doors",
+    "nativeHeadingCount": 2,
+    "v2LabelCount": 1,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Outside doors",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_outside_property_rainwater_goods_main_screen",
+    "section": "E",
+    "title": "Rainwater Goods",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 3,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Rainwater Goods",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_outside_property_roof_covering_main_screen",
+    "section": "E",
+    "title": "Roof Covering",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 3,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Roof Covering",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_outside_property_windows_main_screen",
+    "section": "E",
+    "title": "Windows",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Windows",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_in_side_property_fire_places_diffrent",
+    "section": "F",
+    "title": "Flues Not Inspected",
+    "nativeHeadingCount": 6,
+    "v2LabelCount": 0,
+    "missingCount": 6,
+    "missingHeadings": [
+      {
+        "headingText": "An open fire",
+        "insertAtIndex": 1,
+        "nativeDomIndex": 1
+      },
+      {
+        "headingText": "Gas fire",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 2
+      },
+      {
+        "headingText": "Imitation system",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 3
+      },
+      {
+        "headingText": "Wood burning stove",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 4
+      },
+      {
+        "headingText": "Electric fire",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 5
+      },
+      {
+        "headingText": "Other",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 6
+      }
+    ]
+  },
+  {
+    "screenId": "activity_in_side_property_floors",
+    "section": "F",
+    "title": "Floors",
+    "nativeHeadingCount": 8,
+    "v2LabelCount": 1,
+    "missingCount": 7,
+    "missingHeadings": [
+      {
+        "headingText": "About Floors",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      },
+      {
+        "headingText": "Creaking",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 1
+      },
+      {
+        "headingText": "Tiles",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 2
+      },
+      {
+        "headingText": "Loose Floorboards",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 3
+      },
+      {
+        "headingText": "Timber Decay",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 4
+      },
+      {
+        "headingText": "Timber Infestation",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 5
+      },
+      {
+        "headingText": "Dampness",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 6
+      }
+    ]
+  },
+  {
+    "screenId": "activity_inside_property_bathroom_fittings_main_screen",
+    "section": "F",
+    "title": "Bathroom Fittings",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Bathroom Fitting",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_inside_property_built_in_fittings_main_screen",
+    "section": "F",
+    "title": "Built In Fittings",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Built In Fittings",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_inside_property_ceilings_main_screen",
+    "section": "F",
+    "title": "Ceilings",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Ceilings",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_inside_property_fireplaces_main_screen",
+    "section": "F",
+    "title": "Fireplaces and Chimneys",
+    "nativeHeadingCount": 6,
+    "v2LabelCount": 2,
+    "missingCount": 4,
+    "missingHeadings": [
+      {
+        "headingText": "Fire Places",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      },
+      {
+        "headingText": "Blocked Fireplace",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 1
+      },
+      {
+        "headingText": "Removed CB",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 2
+      },
+      {
+        "headingText": "Boiler Flue",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 3
+      }
+    ]
+  },
+  {
+    "screenId": "activity_inside_property_floors_main_screen",
+    "section": "F",
+    "title": "Floors",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Floors",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_inside_property_roof_structure_main_screen",
+    "section": "F",
+    "title": "Roof Structure",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Roof Structure",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_inside_property_walls_and_partitions_main_screen",
+    "section": "F",
+    "title": "Walls and Partitions",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Walls and Partitions",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_services_drainage_main_screen",
+    "section": "G",
+    "title": "Drainage",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Drainage",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_services_electricity_main_screen",
+    "section": "G",
+    "title": "Electricity",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Electricity",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_services_gas_oil",
+    "section": "G",
+    "title": "Gas and Oil",
+    "nativeHeadingCount": 2,
+    "v2LabelCount": 1,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Mains Gas",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_services_gas_oil_main_screen",
+    "section": "G",
+    "title": "Gas and Oil",
+    "nativeHeadingCount": 11,
+    "v2LabelCount": 2,
+    "missingCount": 8,
+    "missingHeadings": [
+      {
+        "headingText": "Gas and Oil",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      },
+      {
+        "headingText": "Repairs",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 1
+      },
+      {
+        "headingText": "No.of pots",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 2
+      },
+      {
+        "headingText": "Rendering",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 3
+      },
+      {
+        "headingText": "Waterproofing",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 4
+      },
+      {
+        "headingText": "Condition",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 5
+      },
+      {
+        "headingText": "Shared Chimney",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 6
+      },
+      {
+        "headingText": "Leaning Chimney",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 7
+      }
+    ]
+  },
+  {
+    "screenId": "activity_services_heating_main_screen",
+    "section": "G",
+    "title": "Heating",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Heating",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_services_water_heating_main_screen",
+    "section": "G",
+    "title": "Water Heating",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Water Heating",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_grounds_garage_main_screen",
+    "section": "H",
+    "title": "Garage",
+    "nativeHeadingCount": 3,
+    "v2LabelCount": 2,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Garage",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_grounds_other_area_main_screen",
+    "section": "H",
+    "title": "Other Area",
+    "nativeHeadingCount": 2,
+    "v2LabelCount": 1,
+    "missingCount": 1,
+    "missingHeadings": [
+      {
+        "headingText": "Other Area",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      }
+    ]
+  },
+  {
+    "screenId": "activity_grounds_other_main_screen",
+    "section": "H",
+    "title": "Other",
+    "nativeHeadingCount": 7,
+    "v2LabelCount": 2,
+    "missingCount": 5,
+    "missingHeadings": [
+      {
+        "headingText": "Other",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 0
+      },
+      {
+        "headingText": "Shared Access",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 1
+      },
+      {
+        "headingText": "Private Road",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 2
+      },
+      {
+        "headingText": "Legal Issues",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 3
+      },
+      {
+        "headingText": "Shrinkable Clay",
+        "insertAtIndex": -1,
+        "nativeDomIndex": 4
+      }
+    ]
+  }
+]

@@ -1,0 +1,378 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
+
+import '../../../../core/database/app_database.dart';
+import '../../../../core/database/database_providers.dart';
+import '../../../../core/network/api_client.dart';
+import '../../../../core/sync/sync_manager.dart';
+import '../../../../core/sync/sync_state.dart';
+import '../../../../core/sync/v2_sync_helper.dart';
+import '../../data/inspection_repository.dart';
+import '../../domain/field_phrase_processor.dart';
+import '../../domain/models/inspection_models.dart';
+import '../../domain/inspection_phrase_engine.dart';
+
+final inspectionRepositoryProvider = Provider<InspectionRepository>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final apiClient = ref.watch(apiClientProvider);
+  return InspectionRepository(db, apiClient: apiClient);
+});
+
+/// Increment to force [inspectionNodesProvider] and
+/// [inspectionConditionSummaryProvider] to refetch from the database.
+/// This is bumped after [InspectionScreenNotifier.markComplete] so that
+/// the overview badge counts and section-page checkmarks update.
+final inspectionRefreshProvider = StateProvider<int>((ref) => 0);
+
+final inspectionSectionsProvider = FutureProvider<List<InspectionSectionDefinition>>((ref) async {
+  final repo = ref.watch(inspectionRepositoryProvider);
+  return repo.getSections();
+});
+
+final inspectionNodeMapProvider = FutureProvider<Map<String, InspectionNodeDefinition>>((ref) async {
+  final repo = ref.watch(inspectionRepositoryProvider);
+  final tree = await repo.loadTree();
+  final map = <String, InspectionNodeDefinition>{};
+  for (final section in tree.sections) {
+    for (final node in section.nodes) {
+      map[node.id] = node;
+    }
+  }
+  return map;
+});
+
+final inspectionPhraseTextsProvider = FutureProvider<Map<String, String>>((ref) async {
+  // Check for admin-edited local override first, fall back to bundled asset.
+  String raw;
+  try {
+    final dir = await getApplicationDocumentsDirectory();
+    final localFile = File('${dir.path}/admin/inspection_v2_phrase_texts.json');
+    if (await localFile.exists()) {
+      raw = await localFile.readAsString();
+    } else {
+      raw = await rootBundle.loadString('assets/property_inspection/phrase_texts.json');
+    }
+  } catch (e, stack) {
+    debugPrint('[inspectionPhraseTextsProvider] Failed to load local override, '
+        'falling back to bundled asset: $e\n$stack');
+    raw = await rootBundle.loadString('assets/property_inspection/phrase_texts.json');
+  }
+  final decoded = jsonDecode(raw) as Map<String, dynamic>;
+  return decoded.map((key, value) => MapEntry(key, value?.toString() ?? ''));
+});
+
+final inspectionPhraseEngineProvider = Provider<InspectionPhraseEngine?>((ref) {
+  final texts = ref.watch(inspectionPhraseTextsProvider);
+  return texts.maybeWhen(
+    data: (map) => InspectionPhraseEngine(map),
+    orElse: () => null,
+  );
+});
+
+final inspectionNodesProvider = FutureProvider.family
+    .autoDispose<List<InspectionV2Screen>, ({String surveyId, String sectionKey})>(
+  (ref, params) async {
+    // Re-fetch whenever the refresh counter is bumped (e.g. after markComplete).
+    ref.watch(inspectionRefreshProvider);
+    final repo = ref.watch(inspectionRepositoryProvider);
+    await repo.ensureSurveyInitialized(params.surveyId);
+    return repo.getNodesForSection(params.surveyId, params.sectionKey);
+  },
+);
+
+final inspectionConditionSummaryProvider = FutureProvider.family
+    .autoDispose<Map<String, List<String>>, String>(
+  (ref, surveyId) async {
+    // Re-fetch whenever the refresh counter is bumped (e.g. after markComplete).
+    ref.watch(inspectionRefreshProvider);
+    final repo = ref.watch(inspectionRepositoryProvider);
+    await repo.ensureSurveyInitialized(surveyId);
+    return repo.getConditionRatingsBySection(surveyId);
+  },
+);
+
+final inspectionChildScreensProvider = FutureProvider.family
+    .autoDispose<List<InspectionNodeDefinition>, String>(
+  (ref, parentId) async {
+    final repo = ref.watch(inspectionRepositoryProvider);
+    return repo.getChildScreens(parentId);
+  },
+);
+
+class InspectionScreenState {
+  const InspectionScreenState({
+    this.isLoading = true,
+    this.isSaving = false,
+    this.screenDefinition,
+    this.screenMeta,
+    this.answers = const {},
+    this.errorMessage,
+  });
+
+  final bool isLoading;
+  final bool isSaving;
+  final InspectionNodeDefinition? screenDefinition;
+  final InspectionV2Screen? screenMeta;
+  final Map<String, String> answers;
+  final String? errorMessage;
+
+  InspectionScreenState copyWith({
+    bool? isLoading,
+    bool? isSaving,
+    InspectionNodeDefinition? screenDefinition,
+    InspectionV2Screen? screenMeta,
+    Map<String, String>? answers,
+    String? errorMessage,
+  }) {
+    return InspectionScreenState(
+      isLoading: isLoading ?? this.isLoading,
+      isSaving: isSaving ?? this.isSaving,
+      screenDefinition: screenDefinition ?? this.screenDefinition,
+      screenMeta: screenMeta ?? this.screenMeta,
+      answers: answers ?? this.answers,
+      errorMessage: errorMessage,
+    );
+  }
+}
+
+class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
+  InspectionScreenNotifier(this._repo, this._ref, this._surveyId, this._screenId)
+      : super(const InspectionScreenState()) {
+    _load();
+  }
+
+  final InspectionRepository _repo;
+  final Ref _ref;
+  final String _surveyId;
+  final String _screenId;
+
+  /// Answers loaded from Drift at screen open — used to determine
+  /// CREATE vs UPDATE when queueing answers for sync.
+  Map<String, String> _initialAnswers = {};
+
+  Future<void> _load() async {
+    state = state.copyWith(isLoading: true);
+    try {
+      final isFirstInit = await _repo.ensureSurveyInitialized(_surveyId);
+      final definition = await _repo.getNodeDefinition(_screenId);
+      final screenDefinition =
+          definition != null && definition.type == InspectionNodeType.screen ? definition : null;
+      final meta = await _repo.getScreen(_surveyId, _screenId);
+      final answers = await _repo.getScreenAnswersMap(_surveyId, _screenId);
+
+      _initialAnswers = Map<String, String>.from(answers);
+
+      state = state.copyWith(
+        isLoading: false,
+        screenDefinition: screenDefinition,
+        screenMeta: meta,
+        answers: answers,
+      );
+
+      // Queue V2 section CREATEs on first survey initialization so the
+      // backend has parent Section records before any answers arrive.
+      if (isFirstInit) {
+        await _queueV2SectionsForSync();
+      }
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'Failed to load screen: $e',
+      );
+    }
+  }
+
+  void setAnswer(String fieldKey, String value) {
+    final updated = Map<String, String>.from(state.answers);
+    updated[fieldKey] = value;
+    state = state.copyWith(answers: updated);
+  }
+
+  Future<bool> saveDraft() async {
+    if (state.screenDefinition == null) return false;
+    state = state.copyWith(isSaving: true);
+    try {
+      await _repo.saveScreenAnswers(
+        surveyId: _surveyId,
+        screenId: _screenId,
+        answers: state.answers,
+      );
+      await _persistPhraseOutput();
+      await _queueAnswersForSync();
+      state = state.copyWith(isSaving: false);
+      return true;
+    } catch (e) {
+      state = state.copyWith(isSaving: false, errorMessage: 'Failed to save: $e');
+      return false;
+    }
+  }
+
+  Future<bool> markComplete() async {
+    if (state.screenDefinition == null) return false;
+    state = state.copyWith(isSaving: true);
+    try {
+      await _repo.saveScreenAnswers(
+        surveyId: _surveyId,
+        screenId: _screenId,
+        answers: state.answers,
+      );
+      await _persistPhraseOutput();
+      await _queueAnswersForSync();
+      await _repo.setScreenCompleted(
+        surveyId: _surveyId,
+        screenId: _screenId,
+        isCompleted: true,
+      );
+      state = state.copyWith(isSaving: false);
+
+      // Bump the refresh counter so that inspectionNodesProvider (overview
+      // badge counts + section-page checkmarks) and
+      // inspectionConditionSummaryProvider refetch from the database.
+      _ref.read(inspectionRefreshProvider.notifier).state++;
+
+      return true;
+    } catch (e) {
+      state = state.copyWith(isSaving: false, errorMessage: 'Failed to complete: $e');
+      return false;
+    }
+  }
+
+  // ─── Phrase Persistence ──────────────────────────────────────────
+
+  /// Generate phrase engine output and persist to local Drift + queue
+  /// a section UPDATE for sync so the backend receives the phrases.
+  Future<void> _persistPhraseOutput() async {
+    if (state.screenDefinition == null) return;
+    try {
+      final phraseEngine = _ref.read(inspectionPhraseEngineProvider);
+      final enginePhrases =
+          phraseEngine?.buildPhrases(_screenId, state.answers) ?? const <String>[];
+      final fieldPhrases =
+          FieldPhraseProcessor.buildFieldPhrases(state.screenDefinition!.fields, state.answers);
+      final phrases = [...enginePhrases, ...fieldPhrases];
+
+      final phraseJson = jsonEncode(phrases);
+      await _repo.savePhraseOutput(
+        surveyId: _surveyId,
+        screenId: _screenId,
+        phraseJson: phraseJson,
+      );
+
+      // Queue aggregated section phrase output for sync.
+      await _queuePhraseOutputForSync();
+    } catch (e) {
+      // Non-fatal: phrase persistence should not block screen save.
+      debugPrint('[InspectionSync] Failed to persist phrase output: $e');
+    }
+  }
+
+  /// Queue a section UPDATE with aggregated phraseOutput from all
+  /// screens in this screen's section.
+  Future<void> _queuePhraseOutputForSync() async {
+    try {
+      final syncManager = _ref.read(syncManagerProvider);
+      final sectionKey = await _repo.getSectionKeyForScreen(_surveyId, _screenId);
+      if (sectionKey == null) return;
+
+      final sectionId = V2SyncHelper.sectionSyncId(_surveyId, sectionKey);
+      final aggregatedJson = await _repo.getAggregatedPhraseOutput(_surveyId, sectionKey);
+
+      await syncManager.queueSync(
+        entityType: SyncEntityType.section,
+        entityId: sectionId,
+        action: SyncAction.update,
+        payload: {
+          'phraseOutput': aggregatedJson,
+        },
+      );
+    } catch (e) {
+      debugPrint('[InspectionSync] Failed to queue phrase output: $e');
+    }
+  }
+
+  // ─── Sync Helpers ────────────────────────────────────────────────
+
+  /// Queue V2 section CREATE entries so the backend has parent Section
+  /// records before any answers arrive (TIER 2 → TIER 3 dependency).
+  Future<void> _queueV2SectionsForSync() async {
+    try {
+      final syncManager = _ref.read(syncManagerProvider);
+      final sections = await _repo.getV2SectionMeta();
+
+      for (final section in sections) {
+        final sectionId = V2SyncHelper.sectionSyncId(_surveyId, section.key);
+        await syncManager.queueSync(
+          entityType: SyncEntityType.section,
+          entityId: sectionId,
+          action: SyncAction.create,
+          payload: {
+            'surveyId': _surveyId,
+            'title': section.title,
+            'order': section.order,
+            'sectionTypeKey': section.key,
+          },
+        );
+      }
+      debugPrint('[InspectionSync] Queued ${sections.length} V2 sections for survey $_surveyId');
+    } catch (e) {
+      // Non-fatal: local data is already saved, sync will be retried.
+      debugPrint('[InspectionSync] Failed to queue sections: $e');
+    }
+  }
+
+  /// Queue answer sync entries for changed/new answers on this screen.
+  Future<void> _queueAnswersForSync() async {
+    try {
+      final syncManager = _ref.read(syncManagerProvider);
+
+      // Resolve sectionKey → deterministic section UUID for the FK.
+      final sectionKey = await _repo.getSectionKeyForScreen(_surveyId, _screenId);
+      if (sectionKey == null) return;
+      final sectionId = V2SyncHelper.sectionSyncId(_surveyId, sectionKey);
+
+      for (final entry in state.answers.entries) {
+        final fieldKey = entry.key;
+        final value = entry.value;
+
+        // Skip empty values — backend rejects with @IsNotEmpty().
+        if (value.trim().isEmpty) continue;
+
+        // Skip unchanged answers — no need to re-queue.
+        if (_initialAnswers[fieldKey] == value) continue;
+
+        final isNew = !_initialAnswers.containsKey(fieldKey);
+        final answerId = V2SyncHelper.answerSyncId(_surveyId, _screenId, fieldKey);
+
+        await syncManager.queueSync(
+          entityType: SyncEntityType.answer,
+          entityId: answerId,
+          action: isNew ? SyncAction.create : SyncAction.update,
+          payload: {
+            'sectionId': sectionId,
+            'questionKey': fieldKey,
+            'value': value,
+          },
+        );
+      }
+
+      // Update initial answers so subsequent saves detect the right diff.
+      _initialAnswers = Map<String, String>.from(state.answers);
+    } catch (e) {
+      // Non-fatal: local data is already saved, sync will be retried.
+      debugPrint('[InspectionSync] Failed to queue answers: $e');
+    }
+  }
+}
+
+final inspectionScreenProvider = StateNotifierProvider.autoDispose.family
+    <InspectionScreenNotifier, InspectionScreenState, ({String surveyId, String screenId})>(
+  (ref, params) {
+    final repo = ref.watch(inspectionRepositoryProvider);
+    return InspectionScreenNotifier(repo, ref, params.surveyId, params.screenId);
+  },
+);
