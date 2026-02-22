@@ -10,6 +10,9 @@ class InspectionRepository extends BaseSurveyRepository {
           localOverrideName: 'inspection_v2_tree.json',
           apiClient: apiClient,
           treeType: 'inspection_v2',
+          // Bump this when the bundled JSON is updated so stale OTA
+          // caches are cleared and the new asset takes effect.
+          bundledTreeVersion: 2,
         );
 
   /// Returns condition ratings grouped by section key.

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:drift/drift.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_database.dart';
 import '../network/api_client.dart';
@@ -25,11 +26,13 @@ abstract class BaseSurveyRepository {
     String idPrefix = '',
     ApiClient? apiClient,
     String? treeType,
+    int bundledTreeVersion = 0,
   })  : _treeAsset = treeAsset,
         _localOverrideName = localOverrideName,
         _idPrefix = idPrefix,
         _apiClient = apiClient,
-        _treeType = treeType;
+        _treeType = treeType,
+        _bundledTreeVersion = bundledTreeVersion;
 
   final AppDatabase _db;
   final String _treeAsset;
@@ -37,6 +40,7 @@ abstract class BaseSurveyRepository {
   final String _idPrefix;
   final ApiClient? _apiClient;
   final String? _treeType;
+  final int _bundledTreeVersion;
 
   InspectionTreePayload? _treeCache;
   Map<String, InspectionNodeDefinition>? _nodeCache;
@@ -54,6 +58,11 @@ abstract class BaseSurveyRepository {
     if (_treeCache != null) return _treeCache!;
 
     final dir = await getApplicationDocumentsDirectory();
+
+    // ─── Bundled-tree version gate ───────────────────────────────────
+    // When the bundled asset is updated (version bumped), clear stale
+    // OTA cache and admin overrides so the new bundled tree takes effect.
+    await _clearStaleCachesIfNeeded(dir);
 
     // ─── PRIORITY 1: Admin local override (set by admin panel) ─────
     try {
@@ -101,6 +110,34 @@ abstract class BaseSurveyRepository {
     final raw = await rootBundle.loadString(_treeAsset);
     _treeCache = InspectionTreePayload.fromJson(raw);
     return _treeCache!;
+  }
+
+  /// Clears admin override and OTA cache when bundled tree version is newer.
+  Future<void> _clearStaleCachesIfNeeded(Directory dir) async {
+    if (_bundledTreeVersion <= 0) return;
+    final prefsKey = 'bundled_tree_version_$_localOverrideName';
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final stored = prefs.getInt(prefsKey) ?? 0;
+      if (stored >= _bundledTreeVersion) return;
+
+      debugPrint(
+        '[BaseSurveyRepo] Bundled tree updated ($stored → $_bundledTreeVersion). '
+        'Clearing stale OTA cache and admin override for $_localOverrideName',
+      );
+
+      // Delete admin override
+      final adminFile = File('${dir.path}/admin/$_localOverrideName');
+      if (await adminFile.exists()) await adminFile.delete();
+
+      // Delete OTA cache
+      final cacheFile = File('${dir.path}/cache/ota_$_localOverrideName');
+      if (await cacheFile.exists()) await cacheFile.delete();
+
+      await prefs.setInt(prefsKey, _bundledTreeVersion);
+    } catch (e) {
+      debugPrint('[BaseSurveyRepo] Failed to clear stale caches: $e');
+    }
   }
 
   // ─── OTA Helpers ──────────────────────────────────────────────────

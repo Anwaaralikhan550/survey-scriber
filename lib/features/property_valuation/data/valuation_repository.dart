@@ -9,5 +9,6 @@ class ValuationRepository extends BaseSurveyRepository {
           idPrefix: 'val_',
           apiClient: apiClient,
           treeType: 'valuation_v2',
+          bundledTreeVersion: 2,
         );
 }
