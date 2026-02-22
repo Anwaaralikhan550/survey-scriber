@@ -163,12 +163,19 @@ export class SyncService {
       }),
 
       // 3. Fetch answers via section→survey JOIN (no IN clause needed)
+      // Include parent section's surveyId + sectionTypeKey so the client
+      // can route V2 answers to the correct local table.
       this.prisma.answer.findMany({
         where: {
           section: {
             ...relatedOwnerFilter,
           },
           updatedAt: { gt: since },
+        },
+        include: {
+          section: {
+            select: { surveyId: true, sectionTypeKey: true },
+          },
         },
         orderBy: { updatedAt: 'asc' },
         take: limit,
@@ -224,6 +231,9 @@ export class SyncService {
           surveyId: section.surveyId,
           title: section.title,
           order: section.order,
+          sectionTypeKey: section.sectionTypeKey,
+          phraseOutput: section.phraseOutput,
+          userNotes: section.userNotes,
           createdAt: section.createdAt,
           updatedAt: section.updatedAt,
         },
@@ -239,6 +249,8 @@ export class SyncService {
         data: {
           id: answer.id,
           sectionId: answer.sectionId,
+          surveyId: answer.section.surveyId,
+          sectionTypeKey: answer.section.sectionTypeKey,
           questionKey: answer.questionKey,
           value: answer.value,
           createdAt: answer.createdAt,

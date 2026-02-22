@@ -10,6 +10,12 @@ import '../../features/surveys/presentation/providers/survey_invalidation.dart';
 import '../../shared/domain/entities/survey.dart' as entities;
 import '../../shared/domain/entities/survey_answer.dart' as entities;
 import '../../shared/domain/entities/survey_section.dart' as entities;
+import 'package:drift/drift.dart';
+
+import '../../features/property_inspection/data/inspection_repository.dart';
+import '../../features/property_valuation/data/valuation_repository.dart';
+import '../database/app_database.dart';
+import '../database/base_survey_repository.dart';
 import '../database/daos/media_dao.dart';
 import '../database/daos/survey_answers_dao.dart';
 import '../database/daos/survey_sections_dao.dart';
@@ -22,6 +28,7 @@ import '../storage/storage_service.dart';
 import '../utils/logger.dart';
 import '../../features/config/presentation/helpers/config_aware_fields.dart';
 import 'sync_state.dart';
+import 'v2_sync_helper.dart';
 
 /// F12 FIX: Custom exception for sync conflicts (HTTP 409)
 /// Thrown when server detects a version mismatch during sync
@@ -52,6 +59,7 @@ final syncManagerProvider = Provider<SyncManager>((ref) {
   final sectionsDao = ref.watch(surveySectionsDaoProvider);
   final answersDao = ref.watch(surveyAnswersDaoProvider);
   final mediaDao = ref.watch(mediaDaoProvider);
+  final db = ref.watch(appDatabaseProvider);
   return SyncManager(
     apiClient: apiClient,
     syncQueueDao: syncQueueDao,
@@ -61,6 +69,7 @@ final syncManagerProvider = Provider<SyncManager>((ref) {
     sectionsDao: sectionsDao,
     answersDao: answersDao,
     mediaDao: mediaDao,
+    db: db,
   );
 });
 
@@ -433,6 +442,7 @@ class SyncManager {
     required this.sectionsDao,
     required this.answersDao,
     required this.mediaDao,
+    required this.db,
   });
 
   /// Maximum number of times a dependency-not-found (404) error will be
@@ -451,6 +461,7 @@ class SyncManager {
   final SurveySectionsDao sectionsDao;
   final SurveyAnswersDao answersDao;
   final MediaDao mediaDao;
+  final AppDatabase db;
 
   /// Stream of connectivity changes
   Stream<List<ConnectivityResult>> get connectivityStream =>
@@ -1318,11 +1329,18 @@ class SyncManager {
               'Fetching full entity from local DB for upsert.',
             );
 
+            // Try V1 table first; V2 answers use composite IDs in
+            // inspection_v2_answers so the UUID won't match the V1 PK.
             final answer = await answersDao.getAnswerById(entityId);
-            if (answer == null) {
-              // Stale queue item: answer was removed locally, and server also
-              // doesn't have it. Drop this update item as a no-op so sync
-              // doesn't get stuck forever on an orphaned operation.
+
+            // Build the CREATE payload from whichever source has the data.
+            final String? resolvedQuestionKey =
+                answer?.fieldKey ?? bodyPayload['questionKey'] as String?;
+            final String resolvedValue =
+                answer?.value ?? bodyPayload['value'] as String? ?? '';
+
+            if (resolvedQuestionKey == null || resolvedQuestionKey.isEmpty) {
+              // Truly stale: no data in local DB or sync queue payload.
               AppLogger.w('SyncManager',
                 'Dropping stale answer update $entityId: '
                 'missing in local DB and server (404).',
@@ -1330,11 +1348,11 @@ class SyncManager {
               return true;
             }
 
-            final resolvedSectionId = sectionId ?? answer.sectionId;
+            final resolvedSectionId = sectionId ?? answer?.sectionId ?? '';
             final fullCreatePayload = {
               'id': entityId,
-              'questionKey': answer.fieldKey,
-              'value': answer.value ?? '',
+              'questionKey': resolvedQuestionKey,
+              'value': resolvedValue,
               // Merge any extra fields from the original update payload
               // so they're not lost.
               ...bodyPayload,
@@ -1645,46 +1663,128 @@ class SyncManager {
 
         AppLogger.d('SyncManager', 'Received ${changes.length} changes, hasMore=$hasMore');
 
+        // ── Group changes by entity type for dependency-ordered processing.
+        // V2 answers require their parent sections + screen metadata to exist
+        // before they can be routed to the correct local table.
+        final surveyChanges = <Map<String, dynamic>>[];
+        final sectionChanges = <Map<String, dynamic>>[];
+        final answerChanges = <Map<String, dynamic>>[];
+        final otherChanges = <Map<String, dynamic>>[];
+
         for (final change in changes) {
           final map = change as Map<String, dynamic>;
-          final entityType = map['entityType'] as String?;
-          final entityId = map['entityId'] as String?;
-          final changeType = map['changeType'] as String?;
-          final entityData = map['data'] as Map<String, dynamic>?;
-
-          if (entityType == null || entityId == null || changeType == null) {
-            AppLogger.w('SyncManager', 'Skipping malformed change: $map');
-            totalSkipped++;
-            continue;
+          switch (map['entityType'] as String?) {
+            case 'SURVEY':
+              surveyChanges.add(map);
+            case 'SECTION':
+              sectionChanges.add(map);
+            case 'ANSWER':
+              answerChanges.add(map);
+            default:
+              otherChanges.add(map);
           }
+        }
 
-          // Skip entities that have pending local changes (avoid overwriting)
-          final hasPending = await syncQueueDao.hasPendingSync(entityId);
-          if (hasPending) {
-            AppLogger.d('SyncManager', 'Skipping $entityType $entityId - has pending local changes');
-            totalSkipped++;
-            continue;
-          }
+        // Cache section metadata for V2 answer routing (sectionId → surveyId + sectionTypeKey).
+        final sectionCache = <String, ({String surveyId, String? sectionTypeKey})>{};
+        // Track surveys that have V2 sections so we can initialize screen metadata.
+        final v2SurveyIds = <String>{};
 
-          try {
-            if (changeType == 'DELETE') {
-              await _applyDelete(entityType, entityId);
-            } else if (entityData != null) {
-              await _applyUpsert(entityType, entityId, entityData);
-              // Track affected survey IDs for targeted provider invalidation.
-              if (entityType == 'SECTION') {
-                final surveyId = entityData['surveyId'] as String?;
-                if (surveyId != null && surveyId.isNotEmpty) {
-                  affectedSurveyIds.add(surveyId);
-                }
-              } else if (entityType == 'SURVEY') {
-                affectedSurveyIds.add(entityId);
-              }
+        // ── Phase 1: Process SURVEY and SECTION entities first ──
+        for (final group in [surveyChanges, sectionChanges]) {
+          for (final map in group) {
+            final entityType = map['entityType'] as String?;
+            final entityId = map['entityId'] as String?;
+            final changeType = map['changeType'] as String?;
+            final entityData = map['data'] as Map<String, dynamic>?;
+
+            if (entityType == null || entityId == null || changeType == null) {
+              AppLogger.w('SyncManager', 'Skipping malformed change: $map');
+              totalSkipped++;
+              continue;
             }
-            totalUpserted++;
-          } catch (e) {
-            AppLogger.e('SyncManager', 'Failed to apply $changeType for $entityType $entityId: $e');
-            totalSkipped++;
+
+            final hasPending = await syncQueueDao.hasPendingSync(entityId);
+            if (hasPending) {
+              AppLogger.d('SyncManager', 'Skipping $entityType $entityId - has pending local changes');
+              totalSkipped++;
+              continue;
+            }
+
+            try {
+              if (changeType == 'DELETE') {
+                await _applyDelete(entityType, entityId);
+              } else if (entityData != null) {
+                await _applyUpsert(entityType, entityId, entityData);
+
+                if (entityType == 'SURVEY') {
+                  affectedSurveyIds.add(entityId);
+                } else if (entityType == 'SECTION') {
+                  final surveyId = entityData['surveyId'] as String?;
+                  final sectionTypeKey = entityData['sectionTypeKey'] as String?;
+                  if (surveyId != null && surveyId.isNotEmpty) {
+                    affectedSurveyIds.add(surveyId);
+                    sectionCache[entityId] = (surveyId: surveyId, sectionTypeKey: sectionTypeKey);
+                    if (_isV2SectionKey(sectionTypeKey)) {
+                      v2SurveyIds.add(surveyId);
+                    }
+                  }
+                }
+              }
+              totalUpserted++;
+            } catch (e) {
+              AppLogger.e('SyncManager', 'Failed to apply $changeType for $entityType $entityId: $e');
+              totalSkipped++;
+            }
+          }
+        }
+
+        // ── Phase 2: Initialize V2 screens + apply section-level data ──
+        if (v2SurveyIds.isNotEmpty) {
+          await _initializeV2Screens(v2SurveyIds);
+          await _applyV2SectionData(sectionChanges);
+        }
+
+        // ── Phase 3: Process ANSWER and OTHER entities ──
+        for (final group in [answerChanges, otherChanges]) {
+          for (final map in group) {
+            final entityType = map['entityType'] as String?;
+            final entityId = map['entityId'] as String?;
+            final changeType = map['changeType'] as String?;
+            final entityData = map['data'] as Map<String, dynamic>?;
+
+            if (entityType == null || entityId == null || changeType == null) {
+              AppLogger.w('SyncManager', 'Skipping malformed change: $map');
+              totalSkipped++;
+              continue;
+            }
+
+            final hasPending = await syncQueueDao.hasPendingSync(entityId);
+            if (hasPending) {
+              AppLogger.d('SyncManager', 'Skipping $entityType $entityId - has pending local changes');
+              totalSkipped++;
+              continue;
+            }
+
+            try {
+              if (changeType == 'DELETE') {
+                await _applyDelete(entityType, entityId);
+              } else if (entityData != null) {
+                await _applyUpsert(entityType, entityId, entityData,
+                    sectionCache: sectionCache);
+                // Track affected survey IDs from answers.
+                if (entityType == 'ANSWER') {
+                  final answerSurveyId = entityData['surveyId'] as String?;
+                  if (answerSurveyId != null && answerSurveyId.isNotEmpty) {
+                    affectedSurveyIds.add(answerSurveyId);
+                  }
+                }
+              }
+              totalUpserted++;
+            } catch (e) {
+              AppLogger.e('SyncManager', 'Failed to apply $changeType for $entityType $entityId: $e');
+              totalSkipped++;
+            }
           }
         }
 
@@ -1715,11 +1815,15 @@ class SyncManager {
   }
 
   /// Apply a server-side upsert to the local Drift database.
+  ///
+  /// [sectionCache] is populated during pull processing and maps
+  /// section UUID → (surveyId, sectionTypeKey) for V2 answer routing.
   Future<void> _applyUpsert(
     String entityType,
     String entityId,
-    Map<String, dynamic> data,
-  ) async {
+    Map<String, dynamic> data, {
+    Map<String, ({String surveyId, String? sectionTypeKey})>? sectionCache,
+  }) async {
     switch (entityType) {
       case 'SURVEY':
         final survey = _mapServerSurvey(entityId, data);
@@ -1757,8 +1861,44 @@ class SyncManager {
         }
         await sectionsDao.upsertSection(section);
       case 'ANSWER':
-        final answer = _mapServerAnswer(entityId, data);
-        await answersDao.saveAnswer(answer);
+        // Resolve surveyId and sectionTypeKey for V2 answer routing.
+        // Priority: 1) answer data (enriched backend), 2) section cache, 3) local DB
+        var surveyId = data['surveyId'] as String? ?? '';
+        var sectionTypeKey = data['sectionTypeKey'] as String?;
+        final sectionId = data['sectionId'] as String? ?? '';
+        final questionKey = data['questionKey'] as String? ?? '';
+
+        if ((surveyId.isEmpty || sectionTypeKey == null) && sectionId.isNotEmpty) {
+          final cached = sectionCache?[sectionId];
+          if (cached != null) {
+            if (surveyId.isEmpty) surveyId = cached.surveyId;
+            sectionTypeKey ??= cached.sectionTypeKey;
+          }
+          if (surveyId.isEmpty) {
+            final local = await sectionsDao.getSectionById(sectionId);
+            if (local != null) surveyId = local.surveyId;
+          }
+        }
+
+        if (_isV2SectionKey(sectionTypeKey) && surveyId.isNotEmpty) {
+          await _upsertV2Answer(entityId, surveyId, sectionTypeKey!, questionKey, data);
+        } else {
+          // V1 path (or unresolvable sectionTypeKey): route to legacy table.
+          final answer = _mapServerAnswer(entityId, data);
+          await answersDao.saveAnswer(
+            surveyId.isNotEmpty
+                ? entities.SurveyAnswer(
+                    id: answer.id,
+                    surveyId: surveyId,
+                    sectionId: answer.sectionId,
+                    fieldKey: answer.fieldKey,
+                    value: answer.value,
+                    createdAt: answer.createdAt,
+                    updatedAt: answer.updatedAt,
+                  )
+                : answer,
+          );
+        }
       case 'MEDIA':
         // Media pull only updates metadata - file download is separate
         AppLogger.d('SyncManager', 'Media pull not yet supported for $entityId');
@@ -1872,6 +2012,154 @@ class SyncManager {
     if (value is DateTime) return value;
     if (value is String) return DateTime.tryParse(value);
     return null;
+  }
+
+  // ─── V2 Pull Restore Helpers ─────────────────────────────────────
+
+  /// V2 sectionTypeKeys are 1-2 uppercase letters (e.g., "E", "F", "H").
+  /// V1 keys are longer hyphenated strings (e.g., "external-items").
+  static bool _isV2SectionKey(String? key) =>
+      key != null && key.length <= 2 && RegExp(r'^[A-Z]{1,2}$').hasMatch(key);
+
+  /// Initialize V2 screen metadata for surveys that have V2 sections.
+  ///
+  /// On fresh install, the inspection_v2_screens table is empty.
+  /// This populates it from the bundled tree JSON by reusing
+  /// [BaseSurveyRepository.ensureSurveyInitialized].
+  Future<void> _initializeV2Screens(Set<String> surveyIds) async {
+    for (final surveyId in surveyIds) {
+      try {
+        final survey = await surveysDao.getSurveyById(surveyId);
+        if (survey == null) continue;
+
+        final repo = survey.type.isValuation
+            ? ValuationRepository(db)
+            : InspectionRepository(db);
+        await repo.ensureSurveyInitialized(surveyId);
+        AppLogger.d('SyncManager', 'V2 screens initialized for $surveyId');
+      } on Exception catch (e) {
+        AppLogger.e('SyncManager',
+            'Failed to initialize V2 screens for $surveyId: $e',);
+      }
+    }
+  }
+
+  /// Apply phraseOutput and userNotes from pulled sections to V2 screens.
+  ///
+  /// phraseOutput is stored per-section on the backend as a JSON map:
+  ///   `{ "screenId": [phrase1, phrase2, ...] }`
+  /// userNotes is stored per-section as:
+  ///   `{ "screenId": "note text" }`
+  ///
+  /// This method disaggregates them back to individual screen rows.
+  Future<void> _applyV2SectionData(
+    List<Map<String, dynamic>> sectionChanges,
+  ) async {
+    for (final map in sectionChanges) {
+      final data = map['data'] as Map<String, dynamic>?;
+      if (data == null) continue;
+      final sectionTypeKey = data['sectionTypeKey'] as String?;
+      final surveyId = data['surveyId'] as String? ?? '';
+      if (!_isV2SectionKey(sectionTypeKey) || surveyId.isEmpty) continue;
+
+      // phraseOutput: JSON map { screenId: [phrases...] }
+      final phraseOutput = data['phraseOutput'] as String?;
+      if (phraseOutput != null && phraseOutput.isNotEmpty) {
+        try {
+          final poMap = jsonDecode(phraseOutput) as Map<String, dynamic>;
+          for (final entry in poMap.entries) {
+            await (db.update(db.inspectionV2Screens)
+                  ..where((t) =>
+                      t.surveyId.equals(surveyId) &
+                      t.screenId.equals(entry.key),))
+                .write(InspectionV2ScreensCompanion(
+              phraseOutput: Value(jsonEncode(entry.value)),
+            ),);
+          }
+        } on FormatException catch (e) {
+          AppLogger.w('SyncManager',
+              'Failed to apply phraseOutput for section $sectionTypeKey: $e',);
+        }
+      }
+
+      // userNotes: JSON map { screenId: "note text" }
+      final userNotes = data['userNotes'] as String?;
+      if (userNotes != null && userNotes.isNotEmpty) {
+        try {
+          final notesMap = jsonDecode(userNotes) as Map<String, dynamic>;
+          for (final entry in notesMap.entries) {
+            await (db.update(db.inspectionV2Screens)
+                  ..where((t) =>
+                      t.surveyId.equals(surveyId) &
+                      t.screenId.equals(entry.key),))
+                .write(InspectionV2ScreensCompanion(
+              userNote: Value(entry.value as String),
+            ),);
+          }
+        } on FormatException catch (e) {
+          AppLogger.w('SyncManager',
+              'Failed to apply userNotes for section $sectionTypeKey: $e',);
+        }
+      }
+    }
+  }
+
+  /// Upsert a V2 answer into the inspection_v2_answers table.
+  ///
+  /// Reverse-looks up the screenId by computing
+  /// [V2SyncHelper.answerSyncId] for each screen in the section and
+  /// matching against the pulled entityId (a deterministic UUID v5).
+  Future<void> _upsertV2Answer(
+    String entityId,
+    String surveyId,
+    String sectionTypeKey,
+    String questionKey,
+    Map<String, dynamic> data,
+  ) async {
+    final value = data['value'] as String?;
+    if (value == null || value.trim().isEmpty) return;
+
+    // Query all screens in this section for reverse UUID matching.
+    final screens = await (db.select(db.inspectionV2Screens)
+          ..where((t) =>
+              t.surveyId.equals(surveyId) &
+              t.sectionKey.equals(sectionTypeKey),))
+        .get();
+
+    // Find which screen this answer belongs to by matching deterministic UUIDs.
+    String? screenId;
+    for (final screen in screens) {
+      if (V2SyncHelper.answerSyncId(surveyId, screen.screenId, questionKey) ==
+          entityId) {
+        screenId = screen.screenId;
+        break;
+      }
+    }
+
+    if (screenId == null) {
+      AppLogger.w('SyncManager',
+          'V2 answer $entityId: no screenId match for field=$questionKey '
+          'section=$sectionTypeKey survey=$surveyId '
+          '(${screens.length} screens checked). Data preserved on server.');
+      return;
+    }
+
+    // Determine ID prefix (valuation uses 'val_').
+    final survey = await surveysDao.getSurveyById(surveyId);
+    final prefix = (survey?.type.isValuation ?? false) ? 'val_' : '';
+    final v2Id = '${surveyId}_$prefix${screenId}_$questionKey';
+
+    await db.into(db.inspectionV2Answers).insertOnConflictUpdate(
+      InspectionV2AnswersCompanion(
+        id: Value(v2Id),
+        surveyId: Value(surveyId),
+        screenId: Value(screenId),
+        fieldKey: Value(questionKey),
+        value: Value(value),
+        createdAt: Value(_parseDateTime(data['createdAt']) ?? DateTime.now()),
+        updatedAt: Value(_parseDateTime(data['updatedAt'])),
+      ),
+    );
   }
 
   /// Retry all failed items (1 attempt per manual retry).
