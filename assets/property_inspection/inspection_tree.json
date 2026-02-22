@@ -323,18 +323,6 @@
           "order": 4,
           "fields": [
             {
-              "id": "android_material_design_spinner5",
-              "label": "Roof Types",
-              "type": "dropdown",
-              "options": [
-                "Flat",
-                "Pitched",
-                "Mansard",
-                "Mansard/Other",
-                "Other"
-              ]
-            },
-            {
               "id": "label_roof_type_3",
               "label": "Roof Type",
               "type": "label"
@@ -1090,20 +1078,6 @@
           "order": 6,
           "fields": [
             {
-              "id": "android_material_design_spinner",
-              "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Paved",
-                "Lawned",
-                "Decked",
-                "Laid with gravel",
-                "Laid with stone chippings",
-                "Laid with tile chippings",
-                "Other"
-              ]
-            },
-            {
               "id": "etFrontTypeOther",
               "label": "Type",
               "type": "text"
@@ -1229,20 +1203,6 @@
               "conditionalOn": "ch20",
               "conditionalValue": "false",
               "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner2",
-              "label": "Boundry Fencing",
-              "type": "dropdown",
-              "options": [
-                "Timber",
-                "Brick wall",
-                "Concrete wall",
-                "Wire mesh",
-                "Hedges",
-                "Shrubs",
-                "Other"
-              ]
             },
             {
               "id": "etFrontFencingOther",
@@ -1385,17 +1345,6 @@
               "conditionalOn": "ch4",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner",
-              "label": "Partition Type",
-              "type": "dropdown",
-              "options": [
-                "Stud",
-                "Solid",
-                "Lath and plaster",
-                "Other"
-              ]
             }
           ]
         },
@@ -1420,20 +1369,6 @@
               "id": "etFrontFencingOther",
               "label": "Boundry Fencing",
               "type": "text"
-            },
-            {
-              "id": "android_material_design_spinner",
-              "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Paved",
-                "Lawned",
-                "Decked",
-                "Laid with gravel",
-                "Laid with stone chippings",
-                "Laid with tile chippings",
-                "Other"
-              ]
             },
             {
               "id": "label_type_10",
@@ -1556,20 +1491,6 @@
               "conditionalOn": "ch20",
               "conditionalValue": "false",
               "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner2",
-              "label": "Boundry Fencing",
-              "type": "dropdown",
-              "options": [
-                "Timber",
-                "Brick wall",
-                "Concrete wall",
-                "Wire mesh",
-                "Hedges",
-                "Shrubs",
-                "Other"
-              ]
             },
             {
               "id": "label_communal_garden_3",
@@ -1786,20 +1707,6 @@
               "type": "text"
             },
             {
-              "id": "android_material_design_spinner",
-              "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Paved",
-                "Lawned",
-                "Decked",
-                "Laid with gravel",
-                "Laid with stone chippings",
-                "Laid with tile chippings",
-                "Other"
-              ]
-            },
-            {
               "id": "label_type_8",
               "label": "Type",
               "type": "label"
@@ -1920,20 +1827,6 @@
               "conditionalOn": "ch14",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner2",
-              "label": "Boundry Fencing",
-              "type": "dropdown",
-              "options": [
-                "Timber",
-                "Brick wall",
-                "Concrete wall",
-                "Wire mesh",
-                "Hedges",
-                "Shrubs",
-                "Other"
-              ]
             },
             {
               "id": "other",
@@ -3810,16 +3703,6 @@
           "parentId": "group_repairs_54",
           "order": 4,
           "fields": [
-            {
-              "id": "actv_shed_type",
-              "label": "Shed Type",
-              "type": "dropdown",
-              "options": [
-                "Timber",
-                "Brick",
-                "Other"
-              ]
-            },
             {
               "id": "label_shed_type",
               "label": "Shed Type",
@@ -15128,15 +15011,6 @@
               "type": "checkbox"
             },
             {
-              "id": "actv_status",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Ok",
-                "Cracked"
-              ]
-            },
-            {
               "id": "cb_kitchen_29",
               "label": "Kitchen",
               "type": "checkbox",
@@ -15554,15 +15428,6 @@
           "parentId": "group_repairs_73",
           "order": 6,
           "fields": [
-            {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "kitchen sink",
-                "other"
-              ]
-            },
             {
               "id": "label_location_32",
               "label": "Location",
@@ -16952,18 +16817,6 @@
           "parentId": "group_cellar_83",
           "order": 8,
           "fields": [
-            {
-              "id": "actv_should_not_use_because_of",
-              "label": "Should Not Use Because Of",
-              "type": "dropdown",
-              "options": [
-                "the ceiling is too low",
-                "it is damp",
-                "access is difficult",
-                "of poor ventilation",
-                "Other"
-              ]
-            },
             {
               "id": "label_should_not_use_because_of",
               "label": "Should Not Use Because Of",
@@ -28800,17 +28653,6 @@
               "type": "checkbox"
             },
             {
-              "id": "actv_not_inspected_reason",
-              "label": "Not inspected reason",
-              "type": "dropdown",
-              "options": [
-                "Not applicable",
-                "Partial view",
-                "Removed chimney stack(s)",
-                "Removed pots"
-              ]
-            },
-            {
               "id": "cb_other_326",
               "label": "Other",
               "type": "checkbox"
@@ -36006,17 +35848,6 @@
               "type": "checkbox"
             },
             {
-              "id": "actv_not_inspected_reason",
-              "label": "Not inspected reason",
-              "type": "dropdown",
-              "options": [
-                "Not applicable",
-                "Partial view",
-                "Removed chimney stack(s)",
-                "Removed pots"
-              ]
-            },
-            {
               "id": "cb_other_326",
               "label": "Other",
               "type": "checkbox"
@@ -36661,17 +36492,6 @@
               "id": "cb_Removed_pots",
               "label": "Removed pots",
               "type": "checkbox"
-            },
-            {
-              "id": "actv_not_inspected_reason",
-              "label": "Not inspected reason",
-              "type": "dropdown",
-              "options": [
-                "Not applicable",
-                "Partial view",
-                "Removed chimney stack(s)",
-                "Removed pots"
-              ]
             },
             {
               "id": "cb_other_326",

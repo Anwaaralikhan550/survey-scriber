@@ -1,0 +1,329 @@
+[
+  {
+    "screen": "activity_property_roof",
+    "screenTitle": "Roof",
+    "section": "D",
+    "dropdownId": "android_material_design_spinner5",
+    "dropdownLabel": "Roof Types",
+    "dropdownOptions": [
+      "Flat",
+      "Pitched",
+      "Mansard",
+      "Mansard/Other",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "Flat",
+      "Pitched",
+      "Other"
+    ],
+    "matchRatio": "3/5"
+  },
+  {
+    "screen": "activity_front_garden",
+    "screenTitle": "Front Garden",
+    "section": "D",
+    "dropdownId": "android_material_design_spinner",
+    "dropdownLabel": "Type",
+    "dropdownOptions": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "matchRatio": "7/7"
+  },
+  {
+    "screen": "activity_front_garden",
+    "screenTitle": "Front Garden",
+    "section": "D",
+    "dropdownId": "android_material_design_spinner2",
+    "dropdownLabel": "Boundry Fencing",
+    "dropdownOptions": [
+      "Timber",
+      "Brick wall",
+      "Concrete wall",
+      "Wire mesh",
+      "Hedges",
+      "Shrubs",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "Timber",
+      "Brick wall",
+      "Concrete wall",
+      "Wire mesh",
+      "Hedges",
+      "Shrubs",
+      "Other"
+    ],
+    "matchRatio": "7/7"
+  },
+  {
+    "screen": "activity_internal_wall",
+    "screenTitle": "Internal Wall",
+    "section": "D",
+    "dropdownId": "android_material_design_spinner",
+    "dropdownLabel": "Partition Type",
+    "dropdownOptions": [
+      "Stud",
+      "Solid",
+      "Lath and plaster",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "Stud",
+      "Solid",
+      "Lath and plaster",
+      "Other"
+    ],
+    "matchRatio": "4/4"
+  },
+  {
+    "screen": "activity_rear_garden",
+    "screenTitle": "Rear Garden",
+    "section": "D",
+    "dropdownId": "android_material_design_spinner",
+    "dropdownLabel": "Type",
+    "dropdownOptions": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "matchRatio": "7/7"
+  },
+  {
+    "screen": "activity_rear_garden",
+    "screenTitle": "Rear Garden",
+    "section": "D",
+    "dropdownId": "android_material_design_spinner2",
+    "dropdownLabel": "Boundry Fencing",
+    "dropdownOptions": [
+      "Timber",
+      "Brick wall",
+      "Concrete wall",
+      "Wire mesh",
+      "Hedges",
+      "Shrubs",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "Timber",
+      "Brick wall",
+      "Concrete wall",
+      "Wire mesh",
+      "Hedges",
+      "Shrubs",
+      "Other"
+    ],
+    "matchRatio": "7/7"
+  },
+  {
+    "screen": "activity_communal_garden",
+    "screenTitle": "Communal Garden",
+    "section": "D",
+    "dropdownId": "android_material_design_spinner",
+    "dropdownLabel": "Type",
+    "dropdownOptions": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "Paved",
+      "Lawned",
+      "Decked",
+      "Laid with gravel",
+      "Laid with stone chippings",
+      "Laid with tile chippings",
+      "Other"
+    ],
+    "matchRatio": "7/7"
+  },
+  {
+    "screen": "activity_communal_garden",
+    "screenTitle": "Communal Garden",
+    "section": "D",
+    "dropdownId": "android_material_design_spinner2",
+    "dropdownLabel": "Boundry Fencing",
+    "dropdownOptions": [
+      "Timber",
+      "Brick wall",
+      "Concrete wall",
+      "Wire mesh",
+      "Hedges",
+      "Shrubs",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "Timber",
+      "Brick wall",
+      "Concrete wall",
+      "Wire mesh",
+      "Hedges",
+      "Shrubs",
+      "Other"
+    ],
+    "matchRatio": "7/7"
+  },
+  {
+    "screen": "activity_grounds_other_repair_shed",
+    "screenTitle": "Shed",
+    "section": "H",
+    "dropdownId": "actv_shed_type",
+    "dropdownLabel": "Shed Type",
+    "dropdownOptions": [
+      "Timber",
+      "Brick",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "Timber",
+      "Brick",
+      "Other"
+    ],
+    "matchRatio": "3/3"
+  },
+  {
+    "screen": "activity_in_side_property_floors_tiles",
+    "screenTitle": "Tiles",
+    "section": "F",
+    "dropdownId": "actv_status",
+    "dropdownLabel": "Status",
+    "dropdownOptions": [
+      "Ok",
+      "Cracked"
+    ],
+    "matchingCbLabels": [
+      "Ok",
+      "Cracked"
+    ],
+    "matchRatio": "2/2"
+  },
+  {
+    "screen": "activity_in_side_property_built_in_fittings_repair_moulding_noted",
+    "screenTitle": "Moulding noted",
+    "section": "F",
+    "dropdownId": "actv_location",
+    "dropdownLabel": "Location",
+    "dropdownOptions": [
+      "kitchen sink",
+      "other"
+    ],
+    "matchingCbLabels": [
+      "kitchen sink",
+      "other"
+    ],
+    "matchRatio": "2/2"
+  },
+  {
+    "screen": "activity_inside_property_other_celler_not_habitable",
+    "screenTitle": "Not Habitable",
+    "section": "F",
+    "dropdownId": "actv_should_not_use_because_of",
+    "dropdownLabel": "Should Not Use Because Of",
+    "dropdownOptions": [
+      "the ceiling is too low",
+      "it is damp",
+      "access is difficult",
+      "of poor ventilation",
+      "Other"
+    ],
+    "matchingCbLabels": [
+      "the ceiling is too low",
+      "it is damp",
+      "access is difficult",
+      "of poor ventilation",
+      "Other"
+    ],
+    "matchRatio": "5/5"
+  },
+  {
+    "screen": "activity_outside_property_chimney_not_inspected",
+    "screenTitle": "Not Inspected",
+    "section": "E",
+    "dropdownId": "actv_not_inspected_reason",
+    "dropdownLabel": "Not inspected reason",
+    "dropdownOptions": [
+      "Not applicable",
+      "Partial view",
+      "Removed chimney stack(s)",
+      "Removed pots"
+    ],
+    "matchingCbLabels": [
+      "Not applicable",
+      "Partial view",
+      "Removed chimney stack(s)",
+      "Removed pots"
+    ],
+    "matchRatio": "4/4"
+  },
+  {
+    "screen": "activity_outside_property_chimney_removed_chimney_stack",
+    "screenTitle": "Removed Chimney Stack",
+    "section": "E",
+    "dropdownId": "actv_not_inspected_reason",
+    "dropdownLabel": "Not inspected reason",
+    "dropdownOptions": [
+      "Not applicable",
+      "Partial view",
+      "Removed chimney stack(s)",
+      "Removed pots"
+    ],
+    "matchingCbLabels": [
+      "Not applicable",
+      "Partial view",
+      "Removed pots"
+    ],
+    "matchRatio": "3/4"
+  },
+  {
+    "screen": "activity_outside_property_chimney_removed_pots",
+    "screenTitle": "Removed Pots",
+    "section": "E",
+    "dropdownId": "actv_not_inspected_reason",
+    "dropdownLabel": "Not inspected reason",
+    "dropdownOptions": [
+      "Not applicable",
+      "Partial view",
+      "Removed chimney stack(s)",
+      "Removed pots"
+    ],
+    "matchingCbLabels": [
+      "Not applicable",
+      "Partial view",
+      "Removed chimney stack(s)",
+      "Removed pots"
+    ],
+    "matchRatio": "4/4"
+  }
+]
