@@ -121,11 +121,13 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
 
     // Run independent startup operations in parallel for faster init:
     // - Crash recovery (DB query)
+    // - Failed item recovery (gives 1 retry on app restart)
     // - Connectivity check (network probe)
     // - Stats refresh (3 DB queries, also parallelized internally)
     late final bool isConnected;
     await Future.wait([
       _syncManager.recoverStaleProcessingItems(),
+      _syncManager.resetFailedItemsOnStartup(),
       _syncManager.checkConnectivity().then((c) => isConnected = c),
       _refreshStats(),
     ]);
@@ -2374,6 +2376,17 @@ class SyncManager {
 
   /// Retry all failed items (1 attempt per manual retry).
   Future<void> retryFailed() => syncQueueDao.resetFailedItems();
+
+  /// Reset failed items on app startup so they get one automatic retry.
+  /// Server/network conditions may have changed since the last session.
+  Future<void> resetFailedItemsOnStartup() async {
+    final failedCount = await syncQueueDao.getFailedCount();
+    if (failedCount > 0) {
+      await syncQueueDao.resetFailedItems();
+      AppLogger.d('SyncManager',
+          'Startup: reset $failedCount failed items for retry');
+    }
+  }
 
   /// Permanently clear all failed items from the queue.
   Future<int> clearFailed() => syncQueueDao.clearFailedItems();
