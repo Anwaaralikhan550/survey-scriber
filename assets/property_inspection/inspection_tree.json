@@ -892,24 +892,6 @@
               "conditionalMode": "show"
             },
             {
-              "id": "android_material_design_spinner6",
-              "label": "Wall Types",
-              "type": "dropdown",
-              "options": [
-                "Cavity wall",
-                "Cavity brick wall",
-                "Solid wall",
-                "Solid bounded brick wall",
-                "Stud wall",
-                "Other"
-              ]
-            },
-            {
-              "id": "etWallTypesOther",
-              "label": "Wall Types",
-              "type": "text"
-            },
-            {
               "id": "android_material_design_spinner",
               "label": "Rendered",
               "type": "dropdown",
@@ -959,17 +941,6 @@
               "conditionalOn": "ch10",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner3",
-              "label": "Finishes",
-              "type": "dropdown",
-              "options": [
-                "Painted",
-                "Pebble dash",
-                "Mock tudor",
-                "Other"
-              ]
             },
             {
               "id": "android_material_design_spinner4",
@@ -1032,31 +1003,6 @@
               "conditionalOn": "ch18",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner5",
-              "label": "Cladding Finishes",
-              "type": "dropdown",
-              "options": [
-                "Clay tiles",
-                "Timber",
-                "Weathered board",
-                "Profile sheets",
-                "Shingle plates",
-                "Compressed flat panel",
-                "Insulated cladding",
-                "Other"
-              ]
-            },
-            {
-              "id": "etFinishesOther",
-              "label": "Other",
-              "type": "text"
-            },
-            {
-              "id": "etCladdingFingerOther",
-              "label": "Other",
-              "type": "text"
             }
           ]
         },
@@ -35169,17 +35115,6 @@
               "id": "cb_Partial_view",
               "label": "Partial view",
               "type": "checkbox"
-            },
-            {
-              "id": "actv_not_inspected_reason",
-              "label": "Not inspected reason",
-              "type": "dropdown",
-              "options": [
-                "Not applicable",
-                "Partial view",
-                "Removed chimney stack(s)",
-                "Removed pots"
-              ]
             },
             {
               "id": "cb_other_326",
