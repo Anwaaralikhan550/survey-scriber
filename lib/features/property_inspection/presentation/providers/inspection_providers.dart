@@ -488,6 +488,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
           action: isNew ? SyncAction.create : SyncAction.update,
           payload: {
             'sectionId': sectionId,
+            'surveyId': _surveyId,
             'questionKey': fieldKey,
             'value': value,
           },

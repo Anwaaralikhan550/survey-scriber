@@ -137,6 +137,13 @@ export class SurveysController {
   @Post()
   @Roles(UserRole.ADMIN, UserRole.MANAGER, UserRole.SURVEYOR)
   @HttpCode(HttpStatus.CREATED)
+  // Relaxed rate limits for offline-first sync: multiple surveys may be
+  // created rapidly when the mobile app comes online after extended offline use.
+  @Throttle({
+    short: { limit: 20, ttl: 1000 },
+    medium: { limit: 120, ttl: 10000 },
+    long: { limit: 600, ttl: 60000 },
+  })
   @ApiOperation({ summary: 'Create a new survey with sections and answers' })
   @ApiResponse({
     status: 201,
@@ -203,6 +210,12 @@ export class SurveysController {
 
   @Put(':id')
   @Roles(UserRole.ADMIN, UserRole.MANAGER, UserRole.SURVEYOR)
+  // Relaxed rate limits for offline-first sync.
+  @Throttle({
+    short: { limit: 20, ttl: 1000 },
+    medium: { limit: 120, ttl: 10000 },
+    long: { limit: 600, ttl: 60000 },
+  })
   @ApiOperation({ summary: 'Update a survey with sections and answers' })
   @ApiParam({
     name: 'id',

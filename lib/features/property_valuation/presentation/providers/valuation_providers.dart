@@ -333,6 +333,7 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
           action: isNew ? SyncAction.create : SyncAction.update,
           payload: {
             'sectionId': sectionId,
+            'surveyId': _surveyId,
             'questionKey': fieldKey,
             'value': value,
           },

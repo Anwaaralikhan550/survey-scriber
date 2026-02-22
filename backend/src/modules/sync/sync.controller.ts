@@ -15,6 +15,7 @@ import {
   ApiBearerAuth,
   ApiQuery,
 } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { UserRole } from '@prisma/client';
 import { SyncService } from './sync.service';
 import {
@@ -38,6 +39,14 @@ interface AuthenticatedUser {
 @ApiBearerAuth('JWT-auth')
 @Controller('sync')
 @UseGuards(JwtAuthGuard, RolesGuard)
+// Relaxed rate limits for offline-first sync: the mobile app fires dozens of
+// requests when coming back online. These endpoints are already protected by
+// JWT + role-based access, so abuse risk is low.
+@Throttle({
+  short: { limit: 20, ttl: 1000 },
+  medium: { limit: 120, ttl: 10000 },
+  long: { limit: 600, ttl: 60000 },
+})
 export class SyncController {
   constructor(private readonly syncService: SyncService) {}
 

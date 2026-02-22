@@ -44,7 +44,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 19;
+  int get schemaVersion => 20;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -142,6 +142,16 @@ class AppDatabase extends _$AppDatabase {
           if (from < 19) {
             await _addColumnIfNotExists(m, 'inspection_v2_screens', 'user_note', 'TEXT');
           }
+          // v20: Soft delete + unique constraint alignment with backend
+          if (from < 20) {
+            await _addColumnIfNotExists(m, 'surveys', 'deleted_at', 'INTEGER');
+            // Add unique index on inspection_v2_answers(survey_id, screen_id, field_key)
+            // Using IF NOT EXISTS to be idempotent.
+            await m.issueCustomQuery(
+              'CREATE UNIQUE INDEX IF NOT EXISTS idx_v2_answers_unique '
+              'ON inspection_v2_answers (survey_id, screen_id, field_key)',
+            );
+          }
         },
         beforeOpen: (details) async {
           // Safety check: ensure required columns exist even if schema version is current
@@ -175,6 +185,9 @@ class AppDatabase extends _$AppDatabase {
     }
     if (!surveysColumns.contains('started_at')) {
       await customStatement('ALTER TABLE surveys ADD COLUMN started_at INTEGER');
+    }
+    if (!surveysColumns.contains('deleted_at')) {
+      await customStatement('ALTER TABLE surveys ADD COLUMN deleted_at INTEGER');
     }
 
     // Check sync_queue table columns

@@ -1164,8 +1164,13 @@ class SyncManager {
             }
           }
         case SyncAction.update:
+          // Strip sectionTypeKey — backend UpdateSectionDto does not whitelist
+          // it (section type is immutable after creation) and
+          // forbidNonWhitelisted:true rejects the request with 400.
+          final updatePayload = Map<String, dynamic>.from(bodyPayload)
+            ..remove('sectionTypeKey');
           try {
-            await apiClient.put('sections/$entityId', data: bodyPayload);
+            await apiClient.put('sections/$entityId', data: updatePayload);
           } on NotFoundException {
             // UPSERT: Server doesn't have this section (DB reset, data loss).
             // Auto-create via POST so dependents (answers) can sync.
@@ -1265,11 +1270,14 @@ class SyncManager {
   ) async {
     try {
       final sectionId = payload['sectionId'] as String?;
+      final surveyIdHint = payload['surveyId'] as String?;
       // Strip routing fields before sending to backend —
       // 'sectionId' is used as a URL param, not a body field.
+      // 'surveyId' is carried for _ensureSectionExists V2 fallback only.
       // Backend forbidNonWhitelisted:true rejects unknown fields.
       final bodyPayload = Map<String, dynamic>.from(payload)
-        ..remove('sectionId');
+        ..remove('sectionId')
+        ..remove('surveyId');
       switch (action) {
         case SyncAction.create:
           // Include client-generated UUID so server uses the same ID
@@ -1288,7 +1296,7 @@ class SyncManager {
                 'Parent section $sectionId not found while creating answer '
                 '$entityId. Auto-creating section (ensure-parent).',
               );
-              await _ensureSectionExists(sectionId);
+              await _ensureSectionExists(sectionId, surveyIdHint: surveyIdHint);
               await apiClient.post('sections/$sectionId/answers', data: createPayload);
             } else {
               rethrow;
@@ -1336,7 +1344,7 @@ class SyncManager {
               await apiClient.post('sections/$resolvedSectionId/answers', data: fullCreatePayload);
             } on NotFoundException {
               // Parent section also missing — ensure it exists first
-              await _ensureSectionExists(resolvedSectionId);
+              await _ensureSectionExists(resolvedSectionId, surveyIdHint: surveyIdHint);
               await apiClient.post('sections/$resolvedSectionId/answers', data: fullCreatePayload);
             }
           }
@@ -1435,7 +1443,15 @@ class SyncManager {
   /// surveyId + sectionKey) that never exist in the survey_sections table.
   /// When the V1 table lookup fails, we fall back to the sync queue to find
   /// the section's metadata from a prior CREATE or enriched UPDATE payload.
-  Future<void> _ensureSectionExists(String sectionId) async {
+  ///
+  /// [surveyIdHint] is an optional survey ID extracted from the child answer's
+  /// payload. Used as a 3rd fallback to construct a bare-minimum V2 section
+  /// when both the DB and sync queue have no record of this section (e.g. user
+  /// answered V2 questions but never saved section metadata like phrases/notes).
+  Future<void> _ensureSectionExists(
+    String sectionId, {
+    String? surveyIdHint,
+  }) async {
     // ── Source 1: V1 survey_sections table ──
     final section = await sectionsDao.getSectionById(sectionId);
     if (section != null) {
@@ -1474,9 +1490,28 @@ class SyncManager {
       return;
     }
 
+    // ── Source 3: V2 bare-minimum reconstruction from surveyIdHint ──
+    // If a V2 answer references a section that was never queued (user answered
+    // questions but never saved phrases/notes/section metadata), we construct
+    // a bare-minimum section so the answer sync can succeed.
+    if (surveyIdHint != null) {
+      AppLogger.w('SyncManager',
+        'Constructing bare-minimum V2 section $sectionId from '
+        'surveyIdHint=$surveyIdHint (no DB or queue record found).',
+      );
+      await _ensureSurveyExists(surveyIdHint);
+      final payload = {
+        'id': sectionId,
+        'title': 'Section',
+        'order': 0,
+      };
+      await _postSectionToServer(surveyIdHint, sectionId, payload);
+      return;
+    }
+
     AppLogger.w('SyncManager',
       'Cannot auto-create section $sectionId: '
-      'not found in local DB or sync queue.',
+      'not found in local DB, sync queue, or answer payload.',
     );
   }
 

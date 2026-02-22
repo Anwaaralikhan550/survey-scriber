@@ -17,6 +17,7 @@ import {
   ApiBearerAuth,
   ApiParam,
 } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { UserRole } from '@prisma/client';
 import { AnswersService } from './answers.service';
 import { CreateAnswerDto } from './dto/create-answer.dto';
@@ -37,6 +38,14 @@ interface AuthenticatedUser {
 @ApiBearerAuth('JWT-auth')
 @Controller()
 @UseGuards(JwtAuthGuard, RolesGuard)
+// Relaxed rate limits for offline-first sync: a single survey can have
+// 1000+ answers that all sync when the mobile app comes online. JWT + role
+// guards provide access control; these limits prevent only extreme abuse.
+@Throttle({
+  short: { limit: 20, ttl: 1000 },
+  medium: { limit: 120, ttl: 10000 },
+  long: { limit: 600, ttl: 60000 },
+})
 export class AnswersController {
   constructor(private readonly answersService: AnswersService) {}
 

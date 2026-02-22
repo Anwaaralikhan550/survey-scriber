@@ -13,4 +13,11 @@ class InspectionV2Answers extends Table {
 
   @override
   Set<Column> get primaryKey => {id};
+
+  /// Matches backend @@unique([sectionId, questionKey]) — prevents duplicate
+  /// answers for the same survey+screen+field even if IDs diverge.
+  @override
+  List<Set<Column>> get uniqueKeys => [
+        {surveyId, screenId, fieldKey},
+      ];
 }

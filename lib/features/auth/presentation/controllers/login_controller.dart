@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/sync/sync_manager.dart';
 import '../providers/auth_notifier.dart';
 import '../providers/auth_state.dart';
 
@@ -120,6 +121,17 @@ class LoginController extends StateNotifier<LoginState> {
         status: LoginStatus.success,
         failureType: AuthFailureType.none,
       );
+
+      // Trigger initial pull from server after login.
+      // _ref.read() ensures the provider is initialized (runs _init()),
+      // and pullNow() explicitly starts a pull even if the provider was
+      // already alive from a prior session (where it may have run without
+      // valid auth). The dashboard shows a restoration overlay while
+      // isInitialSyncing is true, then auto-refreshes via afterBulkMutation.
+      try {
+        _ref.read(syncStateProvider.notifier).pullNow();
+      } catch (_) {}
+
       return true;
     } else {
       // Get actual server error message from auth state

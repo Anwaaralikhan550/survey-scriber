@@ -35,6 +35,11 @@ class Surveys extends Table {
   /// AI-generated repair recommendations text (persisted when user accepts)
   TextColumn get repairRecommendations => text().nullable()();
 
+  /// Soft delete timestamp — mirrors backend `deleted_at` field.
+  /// When set, the survey is treated as deleted locally (hidden from UI)
+  /// but preserved for sync consistency.
+  DateTimeColumn get deletedAt => dateTime().nullable()();
+
   @override
   Set<Column> get primaryKey => {id};
 }

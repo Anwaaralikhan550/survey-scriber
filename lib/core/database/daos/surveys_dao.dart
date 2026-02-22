@@ -10,47 +10,50 @@ part 'surveys_dao.g.dart';
 class SurveysDao extends DatabaseAccessor<AppDatabase> with _$SurveysDaoMixin {
   SurveysDao(super.db);
 
-  /// Get all surveys
+  /// Get all active (non-deleted) surveys
   Future<List<entities.Survey>> getAllSurveys() async {
-    final results = await select(surveys).get();
-    return results.map(_mapToSurvey).toList();
-  }
-
-  /// Get surveys by status
-  Future<List<entities.Survey>> getSurveysByStatus(entities.SurveyStatus status) async {
     final results = await (select(surveys)
-          ..where((s) => s.status.equals(status.name)))
+          ..where((s) => s.deletedAt.isNull()))
         .get();
     return results.map(_mapToSurvey).toList();
   }
 
-  /// Get in-progress surveys (draft, inProgress, paused)
+  /// Get surveys by status (excludes soft-deleted)
+  Future<List<entities.Survey>> getSurveysByStatus(entities.SurveyStatus status) async {
+    final results = await (select(surveys)
+          ..where((s) => s.status.equals(status.name) & s.deletedAt.isNull()))
+        .get();
+    return results.map(_mapToSurvey).toList();
+  }
+
+  /// Get in-progress surveys (draft, inProgress, paused) — excludes soft-deleted
   Future<List<entities.Survey>> getInProgressSurveys() async {
     final results = await (select(surveys)
           ..where((s) => s.status.isIn([
                 entities.SurveyStatus.draft.name,
                 entities.SurveyStatus.inProgress.name,
                 entities.SurveyStatus.paused.name,
-              ]),))
+              ]) & s.deletedAt.isNull(),))
         .get();
     return results.map(_mapToSurvey).toList();
   }
 
-  /// Get completed surveys
+  /// Get completed surveys — excludes soft-deleted
   Future<List<entities.Survey>> getCompletedSurveys() async {
     final results = await (select(surveys)
           ..where((s) => s.status.isIn([
                 entities.SurveyStatus.completed.name,
                 entities.SurveyStatus.pendingReview.name,
                 entities.SurveyStatus.approved.name,
-              ]),))
+              ]) & s.deletedAt.isNull(),))
         .get();
     return results.map(_mapToSurvey).toList();
   }
 
-  /// Get recent surveys
+  /// Get recent surveys — excludes soft-deleted
   Future<List<entities.Survey>> getRecentSurveys({int limit = 5}) async {
     final results = await (select(surveys)
+          ..where((s) => s.deletedAt.isNull())
           ..orderBy([(s) => OrderingTerm.desc(s.createdAt)])
           ..limit(limit))
         .get();
@@ -135,15 +138,17 @@ class SurveysDao extends DatabaseAccessor<AppDatabase> with _$SurveysDaoMixin {
     }
   }
 
-  /// Get total survey count
+  /// Get total survey count (excludes soft-deleted)
   Future<int> getTotalSurveyCount() async {
     final count = surveys.id.count();
-    final query = selectOnly(surveys)..addColumns([count]);
+    final query = selectOnly(surveys)
+      ..addColumns([count])
+      ..where(surveys.deletedAt.isNull());
     final result = await query.getSingle();
     return result.read(count) ?? 0;
   }
 
-  /// Get in-progress count
+  /// Get in-progress count (excludes soft-deleted)
   Future<int> getInProgressCount() async {
     final count = surveys.id.count();
     final query = selectOnly(surveys)
@@ -152,12 +157,12 @@ class SurveysDao extends DatabaseAccessor<AppDatabase> with _$SurveysDaoMixin {
         entities.SurveyStatus.draft.name,
         entities.SurveyStatus.inProgress.name,
         entities.SurveyStatus.paused.name,
-      ]),);
+      ]) & surveys.deletedAt.isNull(),);
     final result = await query.getSingle();
     return result.read(count) ?? 0;
   }
 
-  /// Get completed count
+  /// Get completed count (excludes soft-deleted)
   Future<int> getCompletedCount() async {
     final count = surveys.id.count();
     final query = selectOnly(surveys)
@@ -166,7 +171,7 @@ class SurveysDao extends DatabaseAccessor<AppDatabase> with _$SurveysDaoMixin {
         entities.SurveyStatus.completed.name,
         entities.SurveyStatus.pendingReview.name,
         entities.SurveyStatus.approved.name,
-      ]),);
+      ]) & surveys.deletedAt.isNull(),);
     final result = await query.getSingle();
     return result.read(count) ?? 0;
   }
@@ -272,6 +277,7 @@ class SurveysDao extends DatabaseAccessor<AppDatabase> with _$SurveysDaoMixin {
         aiSummary: row.aiSummary,
         riskSummary: row.riskSummary,
         repairRecommendations: row.repairRecommendations,
+        deletedAt: row.deletedAt,
       );
 
   /// Map domain entity to database companion
@@ -297,5 +303,6 @@ class SurveysDao extends DatabaseAccessor<AppDatabase> with _$SurveysDaoMixin {
         aiSummary: Value(survey.aiSummary),
         riskSummary: Value(survey.riskSummary),
         repairRecommendations: Value(survey.repairRecommendations),
+        deletedAt: Value(survey.deletedAt),
       );
 }

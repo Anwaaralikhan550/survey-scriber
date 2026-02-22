@@ -84,6 +84,10 @@ class SyncState extends Equatable {
   /// Whether sync is blocked (offline or has errors)
   bool get isSyncBlocked => isOffline || status == SyncStatus.error;
 
+  /// Whether this is the initial sync (first pull ever on fresh install).
+  /// Used by dashboard to show "Restoring your surveys..." overlay.
+  bool get isInitialSyncing => isPulling && lastPulledAt == null;
+
   /// Whether all data is synced
   bool get isFullySynced =>
       pendingCount == 0 &&

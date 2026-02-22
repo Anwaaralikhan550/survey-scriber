@@ -139,6 +139,7 @@ class Survey extends Equatable {
     this.aiSummary,
     this.riskSummary,
     this.repairRecommendations,
+    this.deletedAt,
   });
 
   final String id;
@@ -172,6 +173,12 @@ class Survey extends Equatable {
 
   /// AI-generated repair recommendations text (persisted when user accepts)
   final String? repairRecommendations;
+
+  /// Soft delete timestamp — null means active, non-null means deleted.
+  final DateTime? deletedAt;
+
+  /// Whether this survey has been soft-deleted.
+  bool get isDeleted => deletedAt != null;
 
   bool get isDraft => status == SurveyStatus.draft;
   bool get isInProgress => status == SurveyStatus.inProgress;
@@ -208,6 +215,7 @@ class Survey extends Equatable {
     String? aiSummary,
     String? riskSummary,
     String? repairRecommendations,
+    DateTime? deletedAt,
   }) =>
       Survey(
         id: id ?? this.id,
@@ -231,6 +239,7 @@ class Survey extends Equatable {
         aiSummary: aiSummary ?? this.aiSummary,
         riskSummary: riskSummary ?? this.riskSummary,
         repairRecommendations: repairRecommendations ?? this.repairRecommendations,
+        deletedAt: deletedAt ?? this.deletedAt,
       );
 
   @override
@@ -256,5 +265,6 @@ class Survey extends Equatable {
         aiSummary,
         riskSummary,
         repairRecommendations,
+        deletedAt,
       ];
 }

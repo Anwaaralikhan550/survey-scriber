@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/routes.dart';
+import '../../../../core/sync/sync_manager.dart';
 import '../../../../shared/presentation/widgets/analytics_cards.dart';
 import '../providers/dashboard_provider.dart';
 import '../widgets/greeting_header.dart';
@@ -15,7 +16,20 @@ class DashboardPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardProvider);
+    final syncState = ref.watch(syncStateProvider);
     final theme = Theme.of(context);
+
+    // Show restoration overlay during initial sync on empty dashboard
+    if (syncState.isInitialSyncing && state.stats.totalSurveys == 0) {
+      return _buildRestorationOverlay(theme);
+    }
+
+    // Show error state if initial pull failed (no data ever pulled)
+    if (syncState.lastPulledAt == null &&
+        syncState.pullError != null &&
+        state.stats.totalSurveys == 0) {
+      return _buildRestorationError(context, ref, theme);
+    }
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -98,6 +112,97 @@ class DashboardPage extends ConsumerWidget {
           ),
         ),
       ),
+      ),
+    );
+  }
+
+  Widget _buildRestorationOverlay(ThemeData theme) {
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: 48,
+                height: 48,
+                child: CircularProgressIndicator(
+                  strokeWidth: 3,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    theme.colorScheme.primary,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Restoring your surveys...',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: theme.colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Downloading your data from the cloud',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRestorationError(
+    BuildContext context,
+    WidgetRef ref,
+    ThemeData theme,
+  ) {
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.cloud_off_rounded,
+                  size: 48,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  'Could not restore your surveys',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Check your internet connection and try again',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                FilledButton.icon(
+                  onPressed: () {
+                    ref.read(syncStateProvider.notifier).pullNow();
+                  },
+                  icon: const Icon(Icons.refresh_rounded, size: 20),
+                  label: const Text('Try Again'),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
