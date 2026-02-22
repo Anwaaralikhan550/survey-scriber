@@ -174,6 +174,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   // Create the refresh notifier that will trigger redirect re-evaluation
   final refreshNotifier = ref.watch(_authRefreshNotifierProvider);
 
+  // CRITICAL: Wire SessionExpiryHandler to AuthNotifier so that token refresh
+  // failures clear auth state and trigger the router redirect to login.
+  // Without this, onSessionExpired is null and the 401 dashboard loop occurs.
+  SessionExpiryHandler.instance.onSessionExpired = () {
+    ref.read(authNotifierProvider.notifier).setUnauthenticated();
+  };
+
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: Routes.dashboard,

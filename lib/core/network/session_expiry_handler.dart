@@ -21,16 +21,18 @@ class SessionExpiryHandler {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   /// Called when token refresh fails.
-  /// Shows a snackbar, navigates to login, and triggers the session expired callback.
+  /// CRITICAL: Clears auth state FIRST so the router sees unauthenticated
+  /// before any navigation. This prevents the "401 dashboard loop" where
+  /// the router redirect sees stale isAuthenticated and bounces back.
   void handleSessionExpired() {
-    // Show snackbar if scaffold messenger is available
+    // 1. Clear auth state FIRST — router redirect will see unauthenticated
+    onSessionExpired?.call();
+
+    // 2. Show snackbar (works on both dashboard and login pages via global key)
     _showSessionExpiredSnackbar();
 
-    // Navigate to login page immediately
+    // 3. Navigate to login — fallback in case refreshListenable hasn't fired yet
     _navigateToLogin();
-
-    // Trigger auth state invalidation
-    onSessionExpired?.call();
   }
 
   void _navigateToLogin() {

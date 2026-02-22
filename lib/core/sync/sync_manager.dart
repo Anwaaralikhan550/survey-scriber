@@ -5,6 +5,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../features/auth/presentation/providers/auth_notifier.dart';
+import '../../features/auth/presentation/providers/auth_state.dart';
 import '../../features/config/presentation/providers/config_providers.dart';
 import '../../features/media/data/services/media_upload_service.dart';
 import '../../features/surveys/presentation/providers/survey_invalidation.dart';
@@ -102,6 +104,21 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
     // Listen to queue stats
     _statsSubscription = _syncManager.watchQueueStats().listen(_onStatsChanged);
 
+    // Listen to auth state — stop syncing when unauthenticated
+    _ref.listen<AuthState>(authNotifierProvider, (prev, next) {
+      if (next.status == AuthStatus.unauthenticated) {
+        AppLogger.d('SyncStateNotifier', 'User unauthenticated — stopping sync');
+        _autoSyncTimer?.cancel();
+        if (state.isSyncing || state.isPulling) {
+          state = state.copyWith(
+            isSyncing: false,
+            isPulling: false,
+            status: SyncStatus.idle,
+          );
+        }
+      }
+    });
+
     // Run independent startup operations in parallel for faster init:
     // - Crash recovery (DB query)
     // - Connectivity check (network probe)
@@ -181,6 +198,10 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
     _autoSyncTimer = Timer.periodic(
       const Duration(seconds: 30),
       (_) {
+        // Skip entirely if user is not authenticated
+        final authState = _ref.read(authNotifierProvider);
+        if (authState.status == AuthStatus.unauthenticated) return;
+
         if (state.isConnected && state.hasPendingChanges && !state.isSyncing) {
           syncNow();
         }
@@ -218,6 +239,10 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
 
   /// Manually trigger sync
   Future<void> syncNow() async {
+    // Don't sync if user is not authenticated — prevents 401 loops after logout
+    final authState = _ref.read(authNotifierProvider);
+    if (authState.status == AuthStatus.unauthenticated) return;
+
     if (!state.isConnected || state.isSyncing) return;
 
     state = state.copyWith(
@@ -304,6 +329,10 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
   /// After a successful pull with changes, invalidates survey list providers
   /// so the UI reflects server-side data.
   Future<void> _pullFromServer() async {
+    // Don't pull if user is not authenticated — prevents 401 loops after logout
+    final authState = _ref.read(authNotifierProvider);
+    if (authState.status == AuthStatus.unauthenticated) return;
+
     if (state.isPulling || !state.isConnected) return;
 
     state = state.copyWith(isPulling: true, clearPullError: true);
@@ -1666,6 +1695,13 @@ class SyncManager {
     var hasMore = true;
     var cursor = StorageService.lastPullTimestamp;
 
+    // CRITICAL: Declare outside the while loop so they persist across pages.
+    // Previously these were reset per page, so sections from page 1 were lost
+    // when processing answers in page 2, causing V2 answers to be routed to
+    // the wrong table (0/N fields after reinstall).
+    final sectionCache = <String, ({String surveyId, String? sectionTypeKey})>{};
+    final v2SurveyIds = <String>{};
+
     try {
       while (hasMore) {
         // Build query parameters
@@ -1712,11 +1748,6 @@ class SyncManager {
               otherChanges.add(map);
           }
         }
-
-        // Cache section metadata for V2 answer routing (sectionId → surveyId + sectionTypeKey).
-        final sectionCache = <String, ({String surveyId, String? sectionTypeKey})>{};
-        // Track surveys that have V2 sections so we can initialize screen metadata.
-        final v2SurveyIds = <String>{};
 
         // ── Phase 1: Process SURVEY and SECTION entities first ──
         for (final group in [surveyChanges, sectionChanges]) {
@@ -1910,22 +1941,29 @@ class SyncManager {
 
         if (_isV2SectionKey(sectionTypeKey) && surveyId.isNotEmpty) {
           await _upsertV2Answer(entityId, surveyId, sectionTypeKey!, questionKey, data);
-        } else {
-          // V1 path (or unresolvable sectionTypeKey): route to legacy table.
-          final answer = _mapServerAnswer(entityId, data);
-          await answersDao.saveAnswer(
-            surveyId.isNotEmpty
-                ? entities.SurveyAnswer(
-                    id: answer.id,
-                    surveyId: surveyId,
-                    sectionId: answer.sectionId,
-                    fieldKey: answer.fieldKey,
-                    value: answer.value,
-                    createdAt: answer.createdAt,
-                    updatedAt: answer.updatedAt,
-                  )
-                : answer,
+        } else if (surveyId.isNotEmpty) {
+          // sectionTypeKey unresolvable — check if this survey has V2 screens.
+          // If yes, try survey-wide reverse UUID matching as a fallback.
+          final v2Matched = await _tryV2AnswerFallback(
+            entityId, surveyId, questionKey, data,
           );
+          if (!v2Matched) {
+            // Confirmed V1 answer — route to legacy table.
+            final answer = _mapServerAnswer(entityId, data);
+            await answersDao.saveAnswer(entities.SurveyAnswer(
+              id: answer.id,
+              surveyId: surveyId,
+              sectionId: answer.sectionId,
+              fieldKey: answer.fieldKey,
+              value: answer.value,
+              createdAt: answer.createdAt,
+              updatedAt: answer.updatedAt,
+            ));
+          }
+        } else {
+          // No surveyId at all — route to legacy table as-is.
+          final answer = _mapServerAnswer(entityId, data);
+          await answersDao.saveAnswer(answer);
         }
       case 'MEDIA':
         // Media pull only updates metadata - file download is separate
@@ -2188,6 +2226,66 @@ class SyncManager {
         updatedAt: Value(_parseDateTime(data['updatedAt'])),
       ),
     );
+  }
+
+  /// Fallback V2 answer routing when sectionTypeKey is unresolvable.
+  ///
+  /// Searches ALL V2 screens for this survey (not scoped to a section) and
+  /// matches via deterministic UUID. Returns true if the answer was matched
+  /// and upserted as V2; false if no V2 screens exist (→ V1 answer).
+  Future<bool> _tryV2AnswerFallback(
+    String entityId,
+    String surveyId,
+    String questionKey,
+    Map<String, dynamic> data,
+  ) async {
+    final value = data['value'] as String?;
+    if (value == null || value.trim().isEmpty) return false;
+
+    // Check if this survey has ANY V2 screens at all.
+    final allScreens = await (db.select(db.inspectionV2Screens)
+          ..where((t) => t.surveyId.equals(surveyId)))
+        .get();
+
+    if (allScreens.isEmpty) return false; // Not a V2 survey
+
+    // Search all screens for a UUID match (broader than section-scoped search).
+    String? screenId;
+    for (final screen in allScreens) {
+      if (V2SyncHelper.answerSyncId(surveyId, screen.screenId, questionKey) ==
+          entityId) {
+        screenId = screen.screenId;
+        break;
+      }
+    }
+
+    if (screenId == null) {
+      AppLogger.w('SyncManager',
+          'V2 fallback: no screenId match for $entityId '
+          'field=$questionKey survey=$surveyId '
+          '(${allScreens.length} screens checked)');
+      return false;
+    }
+
+    final survey = await surveysDao.getSurveyById(surveyId);
+    final prefix = (survey?.type.isValuation ?? false) ? 'val_' : '';
+    final v2Id = '${surveyId}_$prefix${screenId}_$questionKey';
+
+    await db.into(db.inspectionV2Answers).insertOnConflictUpdate(
+      InspectionV2AnswersCompanion(
+        id: Value(v2Id),
+        surveyId: Value(surveyId),
+        screenId: Value(screenId),
+        fieldKey: Value(questionKey),
+        value: Value(value),
+        createdAt: Value(_parseDateTime(data['createdAt']) ?? DateTime.now()),
+        updatedAt: Value(_parseDateTime(data['updatedAt'])),
+      ),
+    );
+
+    AppLogger.d('SyncManager',
+        'V2 fallback: matched answer $entityId → screen=$screenId field=$questionKey');
+    return true;
   }
 
   /// Retry all failed items (1 attempt per manual retry).

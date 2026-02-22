@@ -287,15 +287,18 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  /// Logout - explicitly clear auth state
+  /// Logout - explicitly clear auth state.
+  /// CRITICAL: Sets unauthenticated IMMEDIATELY to prevent router from seeing
+  /// stale hasValidToken during the async logout operation (401 dashboard loop).
   Future<void> logout() async {
-    state = state.copyWith(status: AuthStatus.loading);
-
-    await _logoutUseCase();
-
     state = const AuthState(
       status: AuthStatus.unauthenticated,
     );
+
+    // Server-side logout (clear tokens, revoke session).
+    // State is already unauthenticated so the router redirects to login
+    // regardless of whether this async call succeeds or fails.
+    await _logoutUseCase();
   }
 
   void clearError() {
@@ -304,8 +307,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  /// Explicitly set unauthenticated (e.g., token refresh failed)
+  /// Explicitly set unauthenticated (e.g., token refresh failed).
+  /// Clears cached tokens immediately so AuthInterceptor stops attaching
+  /// stale tokens. Secure storage cleanup is fire-and-forget.
   void setUnauthenticated() {
+    // Sync: sets _cachedAuthToken/_cachedRefreshToken to null immediately.
+    // Async secure storage deletion runs in background — non-critical.
+    StorageService.clearAuthData();
+
     state = const AuthState(
       status: AuthStatus.unauthenticated,
       failureType: AuthFailureType.sessionExpired,

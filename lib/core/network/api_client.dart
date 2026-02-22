@@ -187,6 +187,10 @@ class ApiClient {
       case DioExceptionType.badResponse:
         return _handleResponseError(e.response);
       case DioExceptionType.cancel:
+        // Session-expiry cancels from TokenRefreshInterceptor carry a specific message
+        if (e.error?.toString().contains('Session expired') ?? false) {
+          return const AuthException(message: 'Session expired');
+        }
         return const NetworkException(message: 'Request cancelled');
       default:
         return ServerException(

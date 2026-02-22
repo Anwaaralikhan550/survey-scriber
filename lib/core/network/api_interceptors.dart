@@ -106,8 +106,9 @@ class TokenRefreshInterceptor extends Interceptor {
     final refreshToken = StorageService.refreshToken;
     if (refreshToken == null || refreshToken.isEmpty) {
       _logger.w('No refresh token available - triggering graceful logout');
-      // CRITICAL: No refresh token means user is logged out or session is invalid
-      // Trigger graceful logout instead of throwing error to prevent 401 loops
+      // Clear the stale access token that caused this 401 — prevents
+      // AuthInterceptor from re-attaching it on subsequent requests.
+      await StorageService.setAuthToken(null);
       onTokenRefreshFailed?.call();
       return handler.reject(
         DioException(
