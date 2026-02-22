@@ -1749,6 +1749,13 @@ class SyncManager {
           }
         }
 
+        AppLogger.d('SyncManager',
+            'PULL PAGE: surveys=${surveyChanges.length} '
+            'sections=${sectionChanges.length} '
+            'answers=${answerChanges.length} '
+            'other=${otherChanges.length} '
+            'sectionCache=${sectionCache.length}');
+
         // ── Phase 1: Process SURVEY and SECTION entities first ──
         for (final group in [surveyChanges, sectionChanges]) {
           for (final map in group) {
@@ -1854,6 +1861,14 @@ class SyncManager {
         }
       }
 
+      // ── Post-pull: Mark V2 screens as completed if they have answers ──
+      // The overview page counts screens with isCompleted=true, but
+      // _upsertV2Answer only writes to the answers table. After a reinstall
+      // all screens start with isCompleted=false, so we must reconcile.
+      if (affectedSurveyIds.isNotEmpty) {
+        await _markV2ScreensWithAnswersCompleted(affectedSurveyIds);
+      }
+
       AppLogger.d('SyncManager', 'Pull complete: $totalUpserted upserted, $totalSkipped skipped');
       return SyncPullResult(
         success: true,
@@ -1927,17 +1942,30 @@ class SyncManager {
         final sectionId = data['sectionId'] as String? ?? '';
         final questionKey = data['questionKey'] as String? ?? '';
 
+        AppLogger.d('SyncManager',
+            'ANSWER PULL: entityId=$entityId questionKey=$questionKey '
+            'sectionId=$sectionId surveyId=$surveyId '
+            'sectionTypeKey=$sectionTypeKey value=${(data['value'] as String? ?? '').length} chars');
+
         if ((surveyId.isEmpty || sectionTypeKey == null) && sectionId.isNotEmpty) {
           final cached = sectionCache?[sectionId];
           if (cached != null) {
             if (surveyId.isEmpty) surveyId = cached.surveyId;
             sectionTypeKey ??= cached.sectionTypeKey;
+            AppLogger.d('SyncManager',
+                'ANSWER PULL: resolved from cache → surveyId=$surveyId sectionTypeKey=$sectionTypeKey');
           }
           if (surveyId.isEmpty) {
             final local = await sectionsDao.getSectionById(sectionId);
             if (local != null) surveyId = local.surveyId;
+            AppLogger.d('SyncManager',
+                'ANSWER PULL: resolved from local DB → surveyId=$surveyId');
           }
         }
+
+        AppLogger.d('SyncManager',
+            'ANSWER PULL: final routing → sectionTypeKey=$sectionTypeKey '
+            'isV2=${_isV2SectionKey(sectionTypeKey)} surveyId=$surveyId');
 
         if (_isV2SectionKey(sectionTypeKey) && surveyId.isNotEmpty) {
           await _upsertV2Answer(entityId, surveyId, sectionTypeKey!, questionKey, data);
@@ -2183,7 +2211,11 @@ class SyncManager {
     Map<String, dynamic> data,
   ) async {
     final value = data['value'] as String?;
-    if (value == null || value.trim().isEmpty) return;
+    if (value == null || value.trim().isEmpty) {
+      AppLogger.d('SyncManager',
+          'V2 UPSERT: skipping $entityId — empty value');
+      return;
+    }
 
     // Query all screens in this section for reverse UUID matching.
     final screens = await (db.select(db.inspectionV2Screens)
@@ -2192,21 +2224,28 @@ class SyncManager {
               t.sectionKey.equals(sectionTypeKey),))
         .get();
 
+    AppLogger.d('SyncManager',
+        'V2 UPSERT: entityId=$entityId section=$sectionTypeKey '
+        'survey=$surveyId screens=${screens.length} questionKey=$questionKey');
+
     // Find which screen this answer belongs to by matching deterministic UUIDs.
     String? screenId;
     for (final screen in screens) {
-      if (V2SyncHelper.answerSyncId(surveyId, screen.screenId, questionKey) ==
-          entityId) {
+      final computed = V2SyncHelper.answerSyncId(surveyId, screen.screenId, questionKey);
+      if (computed == entityId) {
         screenId = screen.screenId;
         break;
       }
     }
 
     if (screenId == null) {
+      // Log first few computed IDs for debugging
+      final sample = screens.take(3).map((s) =>
+          '${s.screenId}→${V2SyncHelper.answerSyncId(surveyId, s.screenId, questionKey)}').join(', ');
       AppLogger.w('SyncManager',
-          'V2 answer $entityId: no screenId match for field=$questionKey '
+          'V2 answer $entityId: NO MATCH for field=$questionKey '
           'section=$sectionTypeKey survey=$surveyId '
-          '(${screens.length} screens checked). Data preserved on server.');
+          '(${screens.length} screens). Sample: $sample');
       return;
     }
 
@@ -2286,6 +2325,51 @@ class SyncManager {
     AppLogger.d('SyncManager',
         'V2 fallback: matched answer $entityId → screen=$screenId field=$questionKey');
     return true;
+  }
+
+  /// After pulling V2 answers, mark screens as completed if they have
+  /// at least one answer. This reconciles the `isCompleted` flag on
+  /// `inspection_v2_screens` with the actual answer data in
+  /// `inspection_v2_answers`.
+  ///
+  /// Without this, reinstalling the app leaves all screens at
+  /// `isCompleted = false` even though the answers exist in the DB,
+  /// causing the overview to show "0/N" instead of the correct count.
+  Future<void> _markV2ScreensWithAnswersCompleted(
+    Set<String> surveyIds,
+  ) async {
+    for (final surveyId in surveyIds) {
+      // Find distinct screenIds that have at least one answer for this survey.
+      final answeredScreenIds = await (db.selectOnly(db.inspectionV2Answers,
+              distinct: true)
+            ..addColumns([db.inspectionV2Answers.screenId])
+            ..where(db.inspectionV2Answers.surveyId.equals(surveyId)))
+          .map((row) => row.read(db.inspectionV2Answers.screenId)!)
+          .get();
+
+      if (answeredScreenIds.isEmpty) continue;
+
+      // Batch-update all those screens to isCompleted = true.
+      var marked = 0;
+      for (final screenId in answeredScreenIds) {
+        final updated = await (db.update(db.inspectionV2Screens)
+              ..where((t) =>
+                  t.surveyId.equals(surveyId) &
+                  t.screenId.equals(screenId) &
+                  t.isCompleted.equals(false)))
+            .write(InspectionV2ScreensCompanion(
+          isCompleted: const Value(true),
+          updatedAt: Value(DateTime.now()),
+        ));
+        marked += updated;
+      }
+
+      if (marked > 0) {
+        AppLogger.d('SyncManager',
+            'V2 screen completion: marked $marked screens completed '
+            'for survey $surveyId (${answeredScreenIds.length} with answers)');
+      }
+    }
   }
 
   /// Retry all failed items (1 attempt per manual retry).
