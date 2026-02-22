@@ -219,7 +219,12 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
   /// If so, refresh the config so admin changes propagate to all devices.
   ///
   /// Public so it can be called from lifecycle observers (e.g. on app resume).
+  /// Guarded against concurrent execution to prevent duplicate API calls.
+  bool _isCheckingConfig = false;
+
   Future<void> checkConfigVersion() async {
+    if (_isCheckingConfig) return;
+    _isCheckingConfig = true;
     try {
       final configNotifier = _ref.read(configProvider.notifier);
       final configState = _ref.read(configProvider);
@@ -236,6 +241,8 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
     } catch (e) {
       // Non-critical — silently ignore config check failures
       AppLogger.d('SyncManager', 'Config version check failed: $e');
+    } finally {
+      _isCheckingConfig = false;
     }
   }
 
