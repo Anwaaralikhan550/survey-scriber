@@ -60,9 +60,17 @@ abstract class BaseSurveyRepository {
     final dir = await getApplicationDocumentsDirectory();
 
     // ─── Bundled-tree version gate ───────────────────────────────────
-    // When the bundled asset is updated (version bumped), clear stale
-    // OTA cache and admin overrides so the new bundled tree takes effect.
-    await _clearStaleCachesIfNeeded(dir);
+    // When the bundled asset is updated (version bumped), force-load from
+    // the bundled asset and clear all stale caches. This ensures app
+    // updates always ship the latest tree, regardless of what the server
+    // or local cache has.
+    final useBundled = await _shouldUseBundledTree(dir);
+    if (useBundled) {
+      debugPrint('[BaseSurveyRepo] Bundled tree version bumped — using bundled asset: $_treeAsset');
+      final raw = await rootBundle.loadString(_treeAsset);
+      _treeCache = InspectionTreePayload.fromJson(raw);
+      return _treeCache!;
+    }
 
     // ─── PRIORITY 1: Admin local override (set by admin panel) ─────
     try {
@@ -112,14 +120,16 @@ abstract class BaseSurveyRepository {
     return _treeCache!;
   }
 
-  /// Clears admin override and OTA cache when bundled tree version is newer.
-  Future<void> _clearStaleCachesIfNeeded(Directory dir) async {
-    if (_bundledTreeVersion <= 0) return;
+  /// Returns `true` when the bundled tree has been updated (version bumped)
+  /// since the last time it was acknowledged. Also clears stale caches so
+  /// subsequent loads (after an OTA publish) work normally.
+  Future<bool> _shouldUseBundledTree(Directory dir) async {
+    if (_bundledTreeVersion <= 0) return false;
     final prefsKey = 'bundled_tree_version_$_localOverrideName';
     try {
       final prefs = await SharedPreferences.getInstance();
       final stored = prefs.getInt(prefsKey) ?? 0;
-      if (stored >= _bundledTreeVersion) return;
+      if (stored >= _bundledTreeVersion) return false;
 
       debugPrint(
         '[BaseSurveyRepo] Bundled tree updated ($stored → $_bundledTreeVersion). '
@@ -135,8 +145,10 @@ abstract class BaseSurveyRepository {
       if (await cacheFile.exists()) await cacheFile.delete();
 
       await prefs.setInt(prefsKey, _bundledTreeVersion);
+      return true;
     } catch (e) {
-      debugPrint('[BaseSurveyRepo] Failed to clear stale caches: $e');
+      debugPrint('[BaseSurveyRepo] Failed to check bundled tree version: $e');
+      return false;
     }
   }
 
