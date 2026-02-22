@@ -220,11 +220,6 @@
               "type": "checkbox"
             },
             {
-              "id": "label_modern_construction_techniques",
-              "label": "Modern construction techniques",
-              "type": "label"
-            },
-            {
               "id": "ch2",
               "label": "solid wall",
               "type": "checkbox"
@@ -335,16 +330,7 @@
                 "Flat",
                 "Pitched",
                 "Mansard",
-                "Other"
-              ]
-            },
-            {
-              "id": "android_material_design_spinner6",
-              "label": "Built With",
-              "type": "dropdown",
-              "options": [
-                "Factory made trusses",
-                "Traditional cut timber construction",
+                "Mansard/Other",
                 "Other"
               ]
             },
@@ -362,34 +348,6 @@
               "id": "ch2",
               "label": "Pitched",
               "type": "checkbox"
-            },
-            {
-              "id": "label_built_with_2",
-              "label": "Built With",
-              "type": "label"
-            },
-            {
-              "id": "ch3",
-              "label": "Factory made trusses",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch4",
-              "label": "Traditional cut timber construction",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch5",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "etBuiltWithOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "ch5",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "label_roof_material",
@@ -437,6 +395,21 @@
               "type": "checkbox"
             },
             {
+              "id": "ch_plastic",
+              "label": "Plastic",
+              "type": "checkbox"
+            },
+            {
+              "id": "ch_asphalt",
+              "label": "Asphalt",
+              "type": "checkbox"
+            },
+            {
+              "id": "ch_polycarbonate",
+              "label": "Polycarbonate",
+              "type": "checkbox"
+            },
+            {
               "id": "ch16",
               "label": "Other",
               "type": "checkbox"
@@ -465,6 +438,16 @@
               "type": "checkbox"
             },
             {
+              "id": "ch_slates",
+              "label": "Slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "ch_coatings",
+              "label": "Coatings",
+              "type": "checkbox"
+            },
+            {
               "id": "ch17",
               "label": "Other",
               "type": "checkbox"
@@ -476,26 +459,6 @@
               "conditionalOn": "ch17",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            },
-            {
-              "id": "etBuiltWithOther1",
-              "label": "Built With",
-              "type": "text"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Covered With",
-              "type": "dropdown",
-              "options": [
-                "Factory made trusses",
-                "Traditional cut timber construction",
-                "Other"
-              ]
-            },
-            {
-              "id": "etCoverWithOther",
-              "label": "Covered With",
-              "type": "text"
             }
           ]
         },
@@ -719,7 +682,7 @@
               "type": "dropdown",
               "options": [
                 "Level",
-                "Sloppy",
+                "Sloping",
                 "Hilly",
                 "Other"
               ]
@@ -735,7 +698,7 @@
               "type": "dropdown",
               "options": [
                 "Level",
-                "Sloppy",
+                "Sloping",
                 "Hilly",
                 "Other"
               ]
@@ -751,7 +714,7 @@
               "type": "dropdown",
               "options": [
                 "Level",
-                "Sloppy",
+                "Sloping",
                 "Hilly",
                 "Other"
               ]
@@ -772,7 +735,7 @@
               "type": "dropdown",
               "options": [
                 "Level",
-                "Sloppy",
+                "Sloping",
                 "Hilly",
                 "Other"
               ]
@@ -788,7 +751,7 @@
               "type": "dropdown",
               "options": [
                 "Level",
-                "Sloppy",
+                "Sloping",
                 "Hilly",
                 "Other"
               ]
@@ -809,7 +772,7 @@
               "type": "dropdown",
               "options": [
                 "Level",
-                "Sloppy",
+                "Sloping",
                 "Hilly",
                 "Other"
               ]
@@ -844,18 +807,8 @@
               "type": "text"
             },
             {
-              "id": "android_material_design_spinner3",
-              "label": "Ex.Location",
-              "type": "dropdown",
-              "options": [
-                "Not extended",
-                "Known",
-                "Unknown"
-              ]
-            },
-            {
               "id": "label_exlocation",
-              "label": "Ex.Location",
+              "label": "Location",
               "type": "label"
             },
             {
@@ -1412,7 +1365,10 @@
                 "Not converted",
                 "Known",
                 "Unknown"
-              ]
+              ],
+              "conditionalOn": "android_material_design_spinner",
+              "conditionalValue": "Not converted",
+              "conditionalMode": "hide"
             },
             {
               "id": "android_material_design_spinner3",
@@ -1424,7 +1380,10 @@
                 "End-of-Terrace",
                 "Mid-Terrace",
                 "Other"
-              ]
+              ],
+              "conditionalOn": "android_material_design_spinner",
+              "conditionalValue": "Not converted",
+              "conditionalMode": "hide"
             },
             {
               "id": "etOther",
@@ -1434,7 +1393,10 @@
             {
               "id": "textView3",
               "label": "Year converted",
-              "type": "text"
+              "type": "text",
+              "conditionalOn": "android_material_design_spinner",
+              "conditionalValue": "Known",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -1779,7 +1741,7 @@
           "fields": [
             {
               "id": "android_material_design_spinner",
-              "label": "Build Type",
+              "label": "Composition",
               "type": "dropdown",
               "options": [
                 "Mainly of",
@@ -1802,7 +1764,7 @@
             },
             {
               "id": "label_built_with",
-              "label": "Built With",
+              "label": "Construction",
               "type": "label"
             },
             {
@@ -1817,7 +1779,7 @@
             },
             {
               "id": "ch3",
-              "label": "Suspended bean and block",
+              "label": "Suspended Beam and Block",
               "type": "checkbox"
             },
             {
@@ -2050,7 +2012,7 @@
           "fields": [
             {
               "id": "android_material_design_spinner",
-              "label": "Glazzed With",
+              "label": "Composition",
               "type": "dropdown",
               "options": [
                 "Mainly of",
@@ -2059,7 +2021,7 @@
             },
             {
               "id": "label_glazzed_type",
-              "label": "Glazzed Type",
+              "label": "Glazing",
               "type": "label"
             },
             {
@@ -2097,7 +2059,7 @@
             },
             {
               "id": "label_window_material",
-              "label": "Window Material",
+              "label": "Frames",
               "type": "label"
             },
             {
@@ -2274,11 +2236,6 @@
               ]
             },
             {
-              "id": "label_front_garden_5",
-              "label": "Front Garden",
-              "type": "label"
-            },
-            {
               "id": "etFrontTypeOther",
               "label": "Type",
               "type": "text"
@@ -2301,11 +2258,6 @@
               "id": "etFrontFencingOther",
               "label": "Boundry Fencing",
               "type": "text"
-            },
-            {
-              "id": "label_rear_garden_5",
-              "label": "Rear Garden",
-              "type": "label"
             },
             {
               "id": "android_material_design_spinner3",
@@ -2353,11 +2305,6 @@
                 "Laid with tile chippings",
                 "Other"
               ]
-            },
-            {
-              "id": "label_communal_garden_5",
-              "label": "Communal Garden",
-              "type": "label"
             },
             {
               "id": "etCommunalTypeOther",
@@ -3340,7 +3287,7 @@
               "type": "dropdown",
               "options": [
                 "Relatively level",
-                "Sloppy",
+                "Sloping",
                 "Relatively sloppy",
                 "Hilly",
                 "Uneven",
@@ -20296,7 +20243,7 @@
           "fields": [
             {
               "id": "label_inspection_area",
-              "label": "Inspection Area:",
+              "label": "Limitations:",
               "type": "label"
             },
             {
@@ -28899,7 +28846,7 @@
           "title": "Not Inspected",
           "type": "screen",
           "parentId": "group_e1_chimney_5",
-          "order": 7,
+          "order": 0,
           "fields": [
             {
               "id": "cb_Not_applicable",
@@ -37549,8 +37496,8 @@
           "id": "activity_outside_property_chimney_main_screen",
           "title": "Chimney",
           "type": "screen",
-          "parentId": "group_chimney_6",
-          "order": -1,
+          "parentId": "group_e1_chimney_5",
+          "order": 99,
           "fields": [
             {
               "id": "label_repairs_10",
@@ -37577,6 +37524,7 @@
               "label": "Condition Rating",
               "type": "dropdown",
               "options": [
+                "Not inspected",
                 "1",
                 "2",
                 "3"
@@ -38599,7 +38547,7 @@
                 "West",
                 "North east",
                 "North west",
-                "South east",
+                "Southeast",
                 "South west"
               ]
             }

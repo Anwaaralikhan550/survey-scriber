@@ -357,7 +357,7 @@ class _InspectionDropdownState extends State<_InspectionDropdown>
     const itemHeight = 49.0;
     final contentHeight =
         headerHeight + (widget.options.length * itemHeight) + bottomPadding;
-    final maxHeight = screenHeight * 0.55;
+    final maxHeight = screenHeight * 0.7;
     final sheetHeight =
         contentHeight.clamp(headerHeight + itemHeight, maxHeight);
 

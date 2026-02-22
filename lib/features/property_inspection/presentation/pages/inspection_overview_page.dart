@@ -18,13 +18,65 @@ import '../../domain/models/inspection_models.dart';
 import '../../../../shared/presentation/widgets/survey_duration_timer.dart';
 import '../../../../shared/presentation/widgets/survey_progress_card.dart';
 
-class InspectionOverviewPage extends ConsumerWidget {
+class InspectionOverviewPage extends ConsumerStatefulWidget {
   const InspectionOverviewPage({
     required this.surveyId,
     super.key,
   });
 
   final String surveyId;
+
+  @override
+  ConsumerState<InspectionOverviewPage> createState() =>
+      _InspectionOverviewPageState();
+}
+
+class _InspectionOverviewPageState
+    extends ConsumerState<InspectionOverviewPage> {
+  final _scrollController = ScrollController();
+
+  /// Keys for each section card, keyed by section letter.
+  final _sectionKeys = <String, GlobalKey>{};
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  /// After the frame renders, scroll to the first incomplete section.
+  void _scrollToFirstIncomplete(List<String> orderedKeys) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      for (final key in orderedKeys) {
+        final globalKey = _sectionKeys[key];
+        if (globalKey?.currentContext != null) {
+          // Check completion via provider
+          final nodesAsync = ref.read(
+            inspectionNodesProvider(
+              (surveyId: widget.surveyId, sectionKey: key),
+            ),
+          );
+          final isComplete = nodesAsync.whenOrNull(
+            data: (nodes) {
+              final screens =
+                  nodes.where((n) => n.nodeType == 'screen').toList();
+              return screens.isNotEmpty &&
+                  screens.every((s) => s.isCompleted);
+            },
+          );
+          if (isComplete == false) {
+            Scrollable.ensureVisible(
+              globalKey!.currentContext!,
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeInOut,
+              alignment: 0.3,
+            );
+            break;
+          }
+        }
+      }
+    });
+  }
 
   static const _sectionIcons = <String, IconData>{
     'A': Icons.assignment_outlined,
@@ -40,7 +92,8 @@ class InspectionOverviewPage extends ConsumerWidget {
   };
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final surveyId = widget.surveyId;
     final surveyState = ref.watch(surveyDetailProvider(surveyId));
     final theme = Theme.of(context);
     final sectionsAsync = ref.watch(inspectionSectionsProvider);
@@ -83,6 +136,7 @@ class InspectionOverviewPage extends ConsumerWidget {
       ),
       body: SafeArea(
         child: ListView(
+          controller: _scrollController,
           padding: const EdgeInsets.all(16),
           children: [
             _SurveyHeaderCard(
@@ -116,6 +170,11 @@ class InspectionOverviewPage extends ConsumerWidget {
                   for (final key in orderedKeys)
                     if (sectionMap.containsKey(key)) sectionMap[key]!,
                 ];
+
+                // Auto-scroll to the first incomplete section
+                _scrollToFirstIncomplete(
+                  orderedSections.map((s) => s.key).toList(),
+                );
 
                 final grouped = <String, List<InspectionSectionDefinition>>{
                   'Property Information': [],
@@ -161,6 +220,9 @@ class InspectionOverviewPage extends ConsumerWidget {
                       const SizedBox(height: 12),
                       for (final section in entry.value) ...[
                         _SectionCard(
+                          key: _sectionKeys.putIfAbsent(
+                            section.key, GlobalKey.new,
+                          ),
                           surveyId: surveyId,
                           sectionKey: section.key,
                           title: displayOverride[section.key] ?? section.title,
@@ -345,6 +407,7 @@ class _InfoChip extends StatelessWidget {
 
 class _SectionCard extends ConsumerWidget {
   const _SectionCard({
+    super.key,
     required this.surveyId,
     required this.sectionKey,
     required this.title,

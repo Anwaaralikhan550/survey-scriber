@@ -253,6 +253,19 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       await _persistPhraseOutput();
       await _persistUserNote();
       await _queueAnswersForSync();
+
+      // Auto-mark as completed when there is at least one non-empty answer.
+      // This ensures screens mark as done on Save Draft, not just Mark Complete.
+      final hasData = state.answers.values.any((v) => v.trim().isNotEmpty);
+      if (hasData) {
+        await _repo.setScreenCompleted(
+          surveyId: _surveyId,
+          screenId: _screenId,
+          isCompleted: true,
+        );
+        _ref.read(inspectionRefreshProvider.notifier).state++;
+      }
+
       state = state.copyWith(isSaving: false);
       return true;
     } catch (e) {

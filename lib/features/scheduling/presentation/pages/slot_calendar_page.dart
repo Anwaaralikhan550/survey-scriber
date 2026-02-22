@@ -234,54 +234,134 @@ class _SlotCalendarPageState extends ConsumerState<SlotCalendarPage> {
       ),
     );
 
-    if (!selectedDay.isWorkingDay) {
-      return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.event_busy,
-              size: 64,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Not a working day',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            if (selectedDay.exceptionReason != null) ...[
-              const SizedBox(height: 8),
-              Text(
-                selectedDay.exceptionReason!,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-              ),
-            ],
-          ],
-        ),
-      );
-    }
+    final dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    final dayFormat = DateFormat('d');
+    final colorScheme = Theme.of(context).colorScheme;
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Available Slots',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
+    return Column(
+      children: [
+        // Day navigation strip — lets users pick any day in the loaded range
+        SizedBox(
+          height: 72,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            itemCount: slotsResponse.days.length,
+            itemBuilder: (context, index) {
+              final day = slotsResponse.days[index];
+              final isSelected = day.date.year == _selectedDate.year &&
+                  day.date.month == _selectedDate.month &&
+                  day.date.day == _selectedDate.day;
+              final isWorking = day.isWorkingDay;
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: GestureDetector(
+                  onTap: () => setState(() {
+                    _selectedDate = day.date;
+                    _selectedSlot = null;
+                  }),
+                  child: Container(
+                    width: 48,
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? colorScheme.primary
+                          : isWorking
+                              ? colorScheme.surfaceContainerHighest
+                              : Colors.transparent,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: isSelected
+                            ? colorScheme.primary
+                            : colorScheme.outlineVariant.withOpacity(0.5),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          dayNames[day.date.weekday % 7],
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: isSelected
+                                ? colorScheme.onPrimary
+                                : isWorking
+                                    ? colorScheme.onSurface
+                                    : colorScheme.onSurfaceVariant.withOpacity(0.5),
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          dayFormat.format(day.date),
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: isSelected
+                                ? colorScheme.onPrimary
+                                : isWorking
+                                    ? colorScheme.onSurface
+                                    : colorScheme.onSurfaceVariant.withOpacity(0.5),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
+              );
+            },
           ),
-          const SizedBox(height: 16),
-          SlotGrid(
-            slots: selectedDay.slots,
-            selectedSlot: _selectedSlot,
-            onSlotSelected: _selectSlot,
+        ),
+        const SizedBox(height: 8),
+        // Slots content for selected day
+        if (!selectedDay.isWorkingDay)
+          Expanded(
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.event_busy,
+                    size: 64,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Not a working day',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    selectedDay.exceptionReason ??
+                        'Select a highlighted day above',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        else
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Available Slots',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                  const SizedBox(height: 16),
+                  SlotGrid(
+                    slots: selectedDay.slots,
+                    selectedSlot: _selectedSlot,
+                    onSlotSelected: _selectSlot,
+                  ),
+                ],
+              ),
+            ),
           ),
-        ],
-      ),
+      ],
     );
   }
 }

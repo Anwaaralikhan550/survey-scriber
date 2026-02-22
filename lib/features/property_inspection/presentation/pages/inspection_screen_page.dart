@@ -8,7 +8,7 @@ import '../providers/inspection_providers.dart';
 import '../widgets/inspection_fields.dart';
 import '../../../media/presentation/widgets/photo_grid.dart';
 
-class InspectionScreenPage extends ConsumerWidget {
+class InspectionScreenPage extends ConsumerStatefulWidget {
   const InspectionScreenPage({
     required this.surveyId,
     required this.screenId,
@@ -19,7 +19,17 @@ class InspectionScreenPage extends ConsumerWidget {
   final String screenId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<InspectionScreenPage> createState() =>
+      _InspectionScreenPageState();
+}
+
+class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
+  bool _previewExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final surveyId = widget.surveyId;
+    final screenId = widget.screenId;
     final params = (surveyId: surveyId, screenId: screenId);
     final state = ref.watch(inspectionScreenProvider(params));
     final notifier = ref.read(inspectionScreenProvider(params).notifier);
@@ -146,27 +156,68 @@ class InspectionScreenPage extends ConsumerWidget {
                     ),
             ),
             if (phraseText.isNotEmpty || state.userNote.isNotEmpty)
-              Container(
-                constraints: const BoxConstraints(maxHeight: 280),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  border: Border(
-                    top: BorderSide(
-                      color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Collapsible header bar
+                  GestureDetector(
+                    onTap: () => setState(() => _previewExpanded = !_previewExpanded),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceContainerLow,
+                        border: Border(
+                          top: BorderSide(
+                            color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.preview_outlined,
+                            size: 18,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              'Live Preview',
+                              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            _previewExpanded ? Icons.expand_more : Icons.expand_less,
+                            size: 20,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  child: InspectionPhrasePreview(
-                    phraseText: phraseText,
-                    isEdited: state.hasEditedPhrases,
-                    userNote: state.userNote,
-                    onPhraseTextChanged: (text) => notifier.setEditedPhrases(text),
-                    onRegenerate: () => notifier.resetPhrases(),
-                    onUserNoteChanged: (note) => notifier.setUserNote(note),
-                  ),
-                ),
+                  // Expandable preview content
+                  if (_previewExpanded)
+                    Container(
+                      constraints: const BoxConstraints(maxHeight: 280),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                      ),
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                        child: InspectionPhrasePreview(
+                          phraseText: phraseText,
+                          isEdited: state.hasEditedPhrases,
+                          userNote: state.userNote,
+                          onPhraseTextChanged: (text) => notifier.setEditedPhrases(text),
+                          onRegenerate: () => notifier.resetPhrases(),
+                          onUserNoteChanged: (note) => notifier.setUserNote(note),
+                        ),
+                      ),
+                    ),
+                ],
               ),
             SafeArea(
               top: false,

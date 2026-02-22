@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../../core/utils/number_to_words.dart';
+
 class InspectionPhraseEngine {
   const InspectionPhraseEngine(this._phraseTexts);
 
@@ -10910,7 +10912,13 @@ class InspectionPhraseEngine {
     final value = (answers['android_material_design_spinner7'] ?? '').trim().toLowerCase();
     if (value.isEmpty) return const [];
     if (value == 'accessible') return _resolve('{D_FACILITY_ACCESSIBLE}');
-    if (value == 'remote') return _resolve('{D_FACILITY_REMOTE}');
+    if (value == 'remote') {
+      final resolved = _resolve('{D_FACILITY_REMOTE}');
+      if (resolved.isNotEmpty) return resolved;
+      return const [
+        'The property is located in a remote area and is likely to be far away from some of the usual facilities and amenities. Also, because of the location of the property, it is recommended that you contact the utility company to be certain regarding the nature of the drainage connection.',
+      ];
+    }
     return const [];
   }
 
@@ -11059,7 +11067,10 @@ class InspectionPhraseEngine {
     final status = (answers['android_material_design_spinner'] ?? '').trim();
     if (status.isEmpty) return const [];
     if (status.toLowerCase() == 'yes') {
-      return ['The property is a listed building.'];
+      return [
+        'The property is a listed building.',
+        'Please contact your legal adviser to advise you on the implication of this building status.',
+      ];
     }
     return ['The property is not a listed building.'];
   }
@@ -11419,7 +11430,7 @@ class InspectionPhraseEngine {
       if (template.isNotEmpty) {
         var resolved = _normalize(template);
         if (amount.isNotEmpty) {
-          resolved = resolved.replaceAll('{REPAIR_AMOUNT}', amount);
+          resolved = resolved.replaceAll('{REPAIR_AMOUNT}', formatPriceWithWords(amount));
         }
         if (potential.isNotEmpty) {
           resolved = resolved.replaceAll('{REPAIR_POTENTIAL}', potential.toLowerCase());
@@ -11427,7 +11438,7 @@ class InspectionPhraseEngine {
         return _split(resolved);
       }
       final phrases = <String>['Overall opinion: reasonable with repairs.'];
-      if (amount.isNotEmpty) phrases.add('Estimated repair cost: £$amount.');
+      if (amount.isNotEmpty) phrases.add('Estimated repair cost: ${formatPriceWithWords(amount)}.');
       if (potential.isNotEmpty) phrases.add('Potential: ${potential.toLowerCase()}.');
       return phrases;
     }
