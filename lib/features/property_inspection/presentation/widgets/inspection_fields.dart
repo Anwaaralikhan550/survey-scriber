@@ -526,24 +526,17 @@ class InspectionPhrasePreview extends StatefulWidget {
 class _InspectionPhrasePreviewState extends State<InspectionPhrasePreview> {
   bool _isEditingPhrases = false;
   bool _isEditingNote = false;
-  late final TextEditingController _phraseController;
   late final TextEditingController _noteController;
 
   @override
   void initState() {
     super.initState();
-    _phraseController = TextEditingController(text: widget.phraseText);
     _noteController = TextEditingController(text: widget.userNote);
   }
 
   @override
   void didUpdateWidget(InspectionPhrasePreview oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // Sync phrase controller when auto-generated text changes
-    // (only if user is not currently editing).
-    if (oldWidget.phraseText != widget.phraseText && !_isEditingPhrases) {
-      _phraseController.text = widget.phraseText;
-    }
     // Sync note controller
     if (oldWidget.userNote != widget.userNote && !_isEditingNote) {
       _noteController.text = widget.userNote;
@@ -552,7 +545,6 @@ class _InspectionPhrasePreviewState extends State<InspectionPhrasePreview> {
 
   @override
   void dispose() {
-    _phraseController.dispose();
     _noteController.dispose();
     super.dispose();
   }
@@ -646,37 +638,20 @@ class _InspectionPhrasePreviewState extends State<InspectionPhrasePreview> {
 
           // ── Phrase text area ──
           if (_isEditingPhrases)
-            TextField(
-              controller: _phraseController,
+            VoiceTextFormField(
+              initialValue: widget.phraseText,
               maxLines: null,
               minLines: 3,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
                 height: 1.4,
               ),
-              decoration: InputDecoration(
-                hintText: 'Edit preview text...',
-                hintStyle: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant.withOpacity(0.5),
-                ),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide:
-                      BorderSide(color: theme.colorScheme.outlineVariant),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide:
-                      BorderSide(color: theme.colorScheme.outlineVariant),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: theme.colorScheme.primary),
-                ),
+              hintText: 'Edit preview text...',
+              fieldBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: theme.colorScheme.outlineVariant),
               ),
-              onChanged: widget.onPhraseTextChanged,
+              onChanged: (value) => widget.onPhraseTextChanged?.call(value),
             )
           else
             // Read-only display

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 /// A [TextFormField] with an integrated microphone button for voice-to-text.
@@ -12,17 +13,25 @@ class VoiceTextFormField extends StatefulWidget {
     required this.onChanged,
     this.initialValue,
     this.labelText,
+    this.hintText,
     this.prefixIcon,
     this.fieldBorder,
     this.keyboardType,
+    this.minLines,
+    this.maxLines,
+    this.style,
     super.key,
   });
 
   final String? initialValue;
   final String? labelText;
+  final String? hintText;
   final Widget? prefixIcon;
   final InputBorder? fieldBorder;
   final TextInputType? keyboardType;
+  final int? minLines;
+  final int? maxLines;
+  final TextStyle? style;
   final ValueChanged<String> onChanged;
 
   @override
@@ -35,6 +44,11 @@ class _VoiceTextFormFieldState extends State<VoiceTextFormField>
   final SpeechToText _speech = SpeechToText();
   bool _isListening = false;
   bool _speechAvailable = false;
+  bool _receivedSpeechResult = false;
+  bool _stoppedManually = false;
+  String _baseTextBeforeListen = '';
+  bool _availabilityNoticeShown = false;
+  String? _voiceUnavailableReason;
   late final AnimationController _pulseController;
 
   @override
@@ -52,21 +66,69 @@ class _VoiceTextFormFieldState extends State<VoiceTextFormField>
   Future<void> _initSpeech() async {
     try {
       _speechAvailable = await _speech.initialize(
-        onError: (_) {
+        onError: (error) {
+          final errorMessage = error.errorMsg.trim();
+          if (errorMessage.isNotEmpty) {
+            _voiceUnavailableReason = errorMessage;
+          }
           if (mounted) setState(() => _isListening = false);
           _pulseController.stop();
+          if (!mounted) return;
+          final message = errorMessage.isEmpty
+              ? 'Speech input failed on this device'
+              : 'Speech input failed: $errorMessage';
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(message),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
         },
         onStatus: (status) {
           if (status == 'done' || status == 'notListening') {
             if (mounted) setState(() => _isListening = false);
             _pulseController.stop();
+            if (!mounted) return;
+            if (!_receivedSpeechResult && !_stoppedManually) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('No speech detected. Please try again.'),
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            }
+            _stoppedManually = false;
           }
         },
       );
     } catch (_) {
       _speechAvailable = false;
+      _voiceUnavailableReason = 'Speech service unavailable on this device.';
+    }
+    if (!_speechAvailable && _voiceUnavailableReason == null) {
+      _voiceUnavailableReason = 'Voice typing is not configured on this device.';
     }
     if (mounted) setState(() {});
+    _showAvailabilityNoticeIfNeeded();
+  }
+
+  void _showAvailabilityNoticeIfNeeded() {
+    if (!mounted || _speechAvailable || _availabilityNoticeShown) return;
+    _availabilityNoticeShown = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final reason = _voiceUnavailableReason ?? 'Voice typing is unavailable.';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(reason),
+          behavior: SnackBarBehavior.floating,
+          action: SnackBarAction(
+            label: 'Settings',
+            onPressed: openAppSettings,
+          ),
+        ),
+      );
+    });
   }
 
   void _onTextChanged() {
@@ -75,6 +137,7 @@ class _VoiceTextFormFieldState extends State<VoiceTextFormField>
 
   Future<void> _toggleListening() async {
     if (_isListening) {
+      _stoppedManually = true;
       await _speech.stop();
       setState(() => _isListening = false);
       _pulseController.stop();
@@ -82,43 +145,55 @@ class _VoiceTextFormFieldState extends State<VoiceTextFormField>
     }
 
     if (!_speechAvailable) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Speech recognition not available on this device'),
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-      }
+      _showAvailabilityNoticeIfNeeded();
       return;
     }
 
     setState(() => _isListening = true);
+    _receivedSpeechResult = false;
+    _stoppedManually = false;
+    _baseTextBeforeListen = _controller.text.trim();
     unawaited(_pulseController.repeat(reverse: true));
 
-    await _speech.listen(
-      onResult: (result) {
-        if (!mounted) return;
-        final recognized = result.recognizedWords;
-        if (recognized.isEmpty) return;
+    try {
+      await _speech.listen(
+        onResult: (result) {
+          if (!mounted) return;
+          final recognized = result.recognizedWords.trim();
+          if (recognized.isEmpty) return;
+          _receivedSpeechResult = true;
 
-        // Append to existing text with a space separator
-        final current = _controller.text;
-        final newText = current.isEmpty
-            ? recognized
-            : '$current $recognized';
-        _controller
-          ..text = newText
-          ..selection = TextSelection.fromPosition(
-            TextPosition(offset: newText.length),
-          );
-      },
-      listenFor: const Duration(seconds: 30),
-      pauseFor: const Duration(seconds: 3),
-      listenOptions: SpeechListenOptions(
-        listenMode: ListenMode.dictation,
-      ),
-    );
+          // Keep replacing with latest transcript to avoid duplicate fragments.
+          final newText = _baseTextBeforeListen.isEmpty
+              ? recognized
+              : '$_baseTextBeforeListen $recognized';
+          _controller
+            ..text = newText
+            ..selection = TextSelection.fromPosition(
+              TextPosition(offset: newText.length),
+            );
+        },
+        listenFor: const Duration(seconds: 30),
+        pauseFor: const Duration(seconds: 3),
+        listenOptions: SpeechListenOptions(
+          listenMode: ListenMode.dictation,
+        ),
+      );
+    } catch (_) {
+      if (mounted) {
+        setState(() => _isListening = false);
+      }
+      _pulseController.stop();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Speech service unavailable. Please enable voice typing on device.',
+          ),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   @override
@@ -137,8 +212,12 @@ class _VoiceTextFormFieldState extends State<VoiceTextFormField>
     return TextFormField(
       controller: _controller,
       keyboardType: widget.keyboardType,
+      minLines: widget.minLines,
+      maxLines: widget.maxLines,
+      style: widget.style,
       decoration: InputDecoration(
         labelText: widget.labelText,
+        hintText: widget.hintText,
         prefixIcon: widget.prefixIcon,
         suffixIcon: _speechAvailable
             ? AnimatedBuilder(
@@ -161,7 +240,15 @@ class _VoiceTextFormFieldState extends State<VoiceTextFormField>
                   );
                 },
               )
-            : null,
+            : IconButton(
+                icon: Icon(
+                  Icons.mic_off_outlined,
+                  color: theme.colorScheme.onSurfaceVariant.withOpacity(0.6),
+                  size: 22,
+                ),
+                onPressed: _showAvailabilityNoticeIfNeeded,
+                tooltip: 'Voice input unavailable',
+              ),
         border: widget.fieldBorder,
         enabledBorder: widget.fieldBorder,
       ),
