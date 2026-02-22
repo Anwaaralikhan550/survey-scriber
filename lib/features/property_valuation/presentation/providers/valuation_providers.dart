@@ -231,6 +231,11 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
 
   /// Queue a section UPDATE with aggregated phraseOutput from all
   /// screens in this screen's section.
+  ///
+  /// CRITICAL: Payload includes full section metadata (surveyId, title,
+  /// order, sectionTypeKey) so the upsert fallback in SyncManager can
+  /// create the section if the server returns 404. V2 sections are virtual
+  /// entities that don't exist in the survey_sections table.
   Future<void> _queuePhraseOutputForSync() async {
     try {
       final syncManager = _ref.read(syncManagerProvider);
@@ -239,17 +244,33 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
 
       final sectionId = V2SyncHelper.sectionSyncId(_surveyId, sectionKey);
       final aggregatedJson = await _repo.getAggregatedPhraseOutput(_surveyId, sectionKey);
+      final sectionMeta = await _getSectionMeta(sectionKey);
 
       await syncManager.queueSync(
         entityType: SyncEntityType.section,
         entityId: sectionId,
         action: SyncAction.update,
         payload: {
+          'surveyId': _surveyId,
+          'title': sectionMeta?.title ?? sectionKey,
+          'order': sectionMeta?.order ?? 0,
+          'sectionTypeKey': sectionKey,
           'phraseOutput': aggregatedJson,
         },
       );
     } catch (e) {
       debugPrint('[ValuationSync] Failed to queue phrase output: $e');
+    }
+  }
+
+  /// Look up V2 section metadata (title, order) by sectionKey from the tree.
+  Future<({String title, int order})?> _getSectionMeta(String sectionKey) async {
+    try {
+      final sections = await _repo.getV2SectionMeta();
+      final match = sections.where((s) => s.key == sectionKey).firstOrNull;
+      return match != null ? (title: match.title, order: match.order) : null;
+    } catch (_) {
+      return null;
     }
   }
 

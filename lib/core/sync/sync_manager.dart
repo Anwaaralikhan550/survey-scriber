@@ -1179,26 +1179,39 @@ class SyncManager {
               'Fetching full entity from local DB for upsert.',
             );
 
+            // Try V1 survey_sections table first.
             final section = await sectionsDao.getSectionById(entityId);
-            if (section == null) {
-              // Stale queue item: section was removed locally, and server also
-              // doesn't have it. Drop this update item as a no-op so sync
-              // doesn't get stuck forever on an orphaned operation.
+
+            // Resolve section metadata from either the V1 table or the
+            // enriched payload. V2 sections are virtual (deterministic UUIDs)
+            // and never exist in survey_sections — the payload is the only
+            // source of truth for their metadata.
+            final resolvedSurveyId = surveyId
+                ?? section?.surveyId
+                ?? payload['surveyId'] as String?;
+            final resolvedTitle = section?.title
+                ?? payload['title'] as String?;
+            final resolvedOrder = section?.order
+                ?? payload['order'] as int?
+                ?? 0;
+            final resolvedTypeKey = section?.sectionType.apiSectionType
+                ?? payload['sectionTypeKey'] as String?;
+
+            if (resolvedSurveyId == null || resolvedTitle == null) {
+              // No metadata anywhere — truly stale/orphaned.
               AppLogger.w('SyncManager',
                 'Dropping stale section update $entityId: '
-                'missing in local DB and server (404).',
+                'no metadata in local DB or payload.',
               );
               return true;
             }
 
-            final resolvedSurveyId = surveyId ?? section.surveyId;
             final fullCreatePayload = {
               'id': entityId,
-              'title': section.title,
-              'order': section.order,
-              'sectionTypeKey': section.sectionType.apiSectionType,
-              // Merge any extra fields from the original update payload
-              // (e.g. phraseOutput, userNotes) so they're not lost.
+              'title': resolvedTitle,
+              'order': resolvedOrder,
+              if (resolvedTypeKey != null) 'sectionTypeKey': resolvedTypeKey,
+              // Merge update-specific fields (phraseOutput, userNotes).
               ...bodyPayload,
             };
 
@@ -1417,37 +1430,68 @@ class SyncManager {
   /// is missing (server DB reset, data loss, etc.).
   ///
   /// This also ensures the grandparent survey exists (transitive dependency).
+  ///
+  /// V2 AWARENESS: V2 sections are virtual entities (deterministic UUIDs from
+  /// surveyId + sectionKey) that never exist in the survey_sections table.
+  /// When the V1 table lookup fails, we fall back to the sync queue to find
+  /// the section's metadata from a prior CREATE or enriched UPDATE payload.
   Future<void> _ensureSectionExists(String sectionId) async {
+    // ── Source 1: V1 survey_sections table ──
     final section = await sectionsDao.getSectionById(sectionId);
-    if (section == null) {
-      AppLogger.w('SyncManager',
-        'Cannot auto-create section $sectionId: not found in local DB.',
-      );
+    if (section != null) {
+      await _ensureSurveyExists(section.surveyId);
+      final payload = {
+        'id': sectionId,
+        'title': section.title,
+        'order': section.order,
+        'sectionTypeKey': section.sectionType.apiSectionType,
+      };
+      await _postSectionToServer(section.surveyId, sectionId, payload);
       return;
     }
 
-    // Ensure the grandparent survey exists first (transitive dependency)
-    await _ensureSurveyExists(section.surveyId);
-
-    // Build payload matching CreateSectionDto fields exactly.
-    // 'surveyId' is a URL param, not a body field.
-    final payload = {
-      'id': sectionId,
-      'title': section.title,
-      'order': section.order,
-      'sectionTypeKey': section.sectionType.apiSectionType,
-    };
-
-    try {
-      await apiClient.post(
-        'surveys/${section.surveyId}/sections',
-        data: payload,
+    // ── Source 2: Sync queue (V2 fallback) ──
+    // V2 sections store their metadata in the sync queue payload.
+    final queuePayload = await syncQueueDao.getEntityPayload(
+      sectionId,
+      SyncEntityType.section,
+    );
+    final qSurveyId = queuePayload?['surveyId'] as String?;
+    final qTitle = queuePayload?['title'] as String?;
+    if (qSurveyId != null && qTitle != null) {
+      AppLogger.d('SyncManager',
+        'Reconstructing V2 section $sectionId from sync queue payload.',
       );
+      await _ensureSurveyExists(qSurveyId);
+      final payload = {
+        'id': sectionId,
+        'title': qTitle,
+        'order': queuePayload?['order'] ?? 0,
+        if (queuePayload?['sectionTypeKey'] != null)
+          'sectionTypeKey': queuePayload!['sectionTypeKey'],
+      };
+      await _postSectionToServer(qSurveyId, sectionId, payload);
+      return;
+    }
+
+    AppLogger.w('SyncManager',
+      'Cannot auto-create section $sectionId: '
+      'not found in local DB or sync queue.',
+    );
+  }
+
+  /// POST a section to the server, handling 409 (already exists) gracefully.
+  Future<void> _postSectionToServer(
+    String surveyId,
+    String sectionId,
+    Map<String, dynamic> payload,
+  ) async {
+    try {
+      await apiClient.post('surveys/$surveyId/sections', data: payload);
       AppLogger.d('SyncManager',
         'Auto-created section $sectionId on server (ensure-parent).',
       );
     } catch (e) {
-      // 409 = already exists — that's fine, the section is there now
       if (_isConflictError(e)) {
         AppLogger.d('SyncManager',
           'Section $sectionId already exists on server (409 during ensure-parent).',

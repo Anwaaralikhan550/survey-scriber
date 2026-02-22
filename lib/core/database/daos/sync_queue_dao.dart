@@ -457,6 +457,26 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
     );
   }
 
+  /// Retrieve the merged payload for an entity from the sync queue.
+  ///
+  /// Returns the decoded payload map from the most recent queue item
+  /// for this entity (any status). Used by _ensureSectionExists to
+  /// reconstruct V2 section metadata when the entity isn't in the
+  /// survey_sections table.
+  Future<Map<String, dynamic>?> getEntityPayload(
+    String entityId,
+    SyncEntityType entityType,
+  ) async {
+    final result = await (select(syncQueue)
+          ..where((t) => t.entityId.equals(entityId))
+          ..where((t) => t.entityType.equals(entityType.name))
+          ..orderBy([(t) => OrderingTerm.desc(t.createdAt)])
+          ..limit(1))
+        .getSingleOrNull();
+    if (result == null) return null;
+    return jsonDecode(result.payload) as Map<String, dynamic>;
+  }
+
   /// Convert database row to SyncQueueItem
   SyncQueueItem toSyncQueueItem(SyncQueueData data) => SyncQueueItem(
       id: data.id,
