@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../features/config/presentation/providers/config_providers.dart';
@@ -1611,6 +1612,36 @@ class SyncManager {
   // SYNC PULL - Fetch server changes
   // ========================================
 
+  /// Pull a single page from the server with retry + extended timeout.
+  ///
+  /// Sync pull responses can be large (100 entities with joined data),
+  /// so we use a 90-second receive timeout instead of the default 30s.
+  /// Retries up to 2 times on transient failures (timeout, connection error).
+  Future<Response<Map<String, dynamic>>> _pullWithRetry(
+    Map<String, dynamic> queryParams, {
+    int maxRetries = 2,
+  }) async {
+    for (var attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        return await apiClient.get<Map<String, dynamic>>(
+          'sync/pull',
+          queryParameters: queryParams,
+          options: Options(receiveTimeout: const Duration(seconds: 90)),
+        );
+      } catch (e) {
+        final isRetryable = e is NetworkException &&
+            (e.message == 'Request timed out' ||
+                e.message == 'No internet connection');
+        if (!isRetryable || attempt >= maxRetries) rethrow;
+        final delay = Duration(seconds: 2 * (attempt + 1)); // 2s, 4s
+        AppLogger.w('SyncManager', 'Pull attempt ${attempt + 1} failed: $e — retrying in ${delay.inSeconds}s');
+        await Future<void>.delayed(delay);
+      }
+    }
+    // Unreachable, but satisfies the type system
+    throw const NetworkException(message: 'Pull failed after retries');
+  }
+
   /// Pull changes from server since last pull timestamp.
   ///
   /// Uses cursor-based pagination via the `since` parameter.
@@ -1646,10 +1677,7 @@ class SyncManager {
         }
 
         AppLogger.d('SyncManager', 'Pulling changes since=$cursor');
-        final response = await apiClient.get<Map<String, dynamic>>(
-          'sync/pull',
-          queryParameters: queryParams,
-        );
+        final response = await _pullWithRetry(queryParams);
 
         final data = response.data;
         if (data == null) {
