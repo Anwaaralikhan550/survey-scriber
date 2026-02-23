@@ -38274,7 +38274,7 @@
               "label": "Amount (GBP)",
               "type": "number",
               "conditionalOn": "android_material_design_spinner5",
-              "conditionalValue": "Reasonable",
+              "conditionalValue": "Reasonable with repair",
               "conditionalMode": "show"
             },
             {
