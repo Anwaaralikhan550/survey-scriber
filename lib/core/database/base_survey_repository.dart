@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:drift/drift.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_database.dart';
 import '../network/api_client.dart';
@@ -59,14 +58,13 @@ abstract class BaseSurveyRepository {
 
     final dir = await getApplicationDocumentsDirectory();
 
-    // ─── Bundled-tree version gate ───────────────────────────────────
-    // When the bundled asset is updated (version bumped), force-load from
-    // the bundled asset and clear all stale caches. This ensures app
-    // updates always ship the latest tree, regardless of what the server
-    // or local cache has.
-    final useBundled = await _shouldUseBundledTree(dir);
-    if (useBundled) {
-      debugPrint('[BaseSurveyRepo] Bundled tree version bumped — using bundled asset: $_treeAsset');
+    // ─── Bundled asset override ──────────────────────────────────────
+    // When bundledTreeVersion > 0, ALWAYS use the bundled asset.
+    // This ensures app-shipped tree fixes take effect regardless of
+    // what the server or local caches have. To resume OTA updates,
+    // set bundledTreeVersion back to 0 after publishing to the server.
+    if (_bundledTreeVersion > 0) {
+      debugPrint('[BaseSurveyRepo] Using bundled asset (v$_bundledTreeVersion): $_treeAsset');
       final raw = await rootBundle.loadString(_treeAsset);
       _treeCache = InspectionTreePayload.fromJson(raw);
       return _treeCache!;
@@ -120,37 +118,6 @@ abstract class BaseSurveyRepository {
     return _treeCache!;
   }
 
-  /// Returns `true` when the bundled tree has been updated (version bumped)
-  /// since the last time it was acknowledged. Also clears stale caches so
-  /// subsequent loads (after an OTA publish) work normally.
-  Future<bool> _shouldUseBundledTree(Directory dir) async {
-    if (_bundledTreeVersion <= 0) return false;
-    final prefsKey = 'bundled_tree_version_$_localOverrideName';
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final stored = prefs.getInt(prefsKey) ?? 0;
-      if (stored >= _bundledTreeVersion) return false;
-
-      debugPrint(
-        '[BaseSurveyRepo] Bundled tree updated ($stored → $_bundledTreeVersion). '
-        'Clearing stale OTA cache and admin override for $_localOverrideName',
-      );
-
-      // Delete admin override
-      final adminFile = File('${dir.path}/admin/$_localOverrideName');
-      if (await adminFile.exists()) await adminFile.delete();
-
-      // Delete OTA cache
-      final cacheFile = File('${dir.path}/cache/ota_$_localOverrideName');
-      if (await cacheFile.exists()) await cacheFile.delete();
-
-      await prefs.setInt(prefsKey, _bundledTreeVersion);
-      return true;
-    } catch (e) {
-      debugPrint('[BaseSurveyRepo] Failed to check bundled tree version: $e');
-      return false;
-    }
-  }
 
   // ─── OTA Helpers ──────────────────────────────────────────────────
 
