@@ -3127,7 +3127,7 @@
               "options": [
                 "Relatively level",
                 "Sloping",
-                "Relatively sloppy",
+                "Relatively sloping",
                 "Hilly",
                 "Uneven",
                 "Other"
@@ -38300,10 +38300,10 @@
                 "South",
                 "East",
                 "West",
-                "North east",
-                "North west",
+                "Northeast",
+                "Northwest",
                 "Southeast",
-                "South west"
+                "Southwest"
               ]
             }
           ]
