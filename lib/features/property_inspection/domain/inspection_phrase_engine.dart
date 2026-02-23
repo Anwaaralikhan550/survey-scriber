@@ -11609,8 +11609,16 @@ class InspectionPhraseEngine {
   }
 
   static String _normalize(String text) {
-    final withBreaks = text.replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n');
-    final stripped = withBreaks.replaceAll(RegExp(r'<[^>]+>'), '');
-    return const LineSplitter().convert(stripped).join('\n').trim();
+    // Replace literal \r\n sequences (JSON \\r\\n → Dart \r\n) with newlines
+    var cleaned = text.replaceAll(r'\r\n', '\n');
+    // Replace <br>, <br/>, <br /> tags with newlines
+    cleaned = cleaned.replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n');
+    // Strip remaining HTML tags (<strong>, <span>, etc.)
+    cleaned = cleaned.replaceAll(RegExp(r'<[^>]+>'), '');
+    // Replace non-breaking spaces (\u00a0) with regular spaces
+    cleaned = cleaned.replaceAll('\u00a0', ' ');
+    // Collapse multiple spaces into one
+    cleaned = cleaned.replaceAll(RegExp(r' {2,}'), ' ');
+    return const LineSplitter().convert(cleaned).join('\n').trim();
   }
 }
