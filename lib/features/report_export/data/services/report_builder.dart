@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../../../property_inspection/domain/field_phrase_processor.dart';
 import '../../../property_inspection/domain/inspection_phrase_engine.dart';
 import '../../../property_inspection/domain/models/inspection_models.dart';
+import '../../../property_inspection/domain/narrative_enhancer.dart';
 import '../../../property_inspection/presentation/widgets/inspection_fields.dart'
     show shouldShowInspectionField;
 import '../../../property_valuation/domain/valuation_phrase_engine.dart';
@@ -148,18 +149,28 @@ class ReportBuilder {
           final mergedFields = <ReportField>[];
 
           for (final screen in descendants) {
-            if (config.includePhrases) {
-              mergedPhrases.addAll(
-                  _phrasesForScreen(screen, rawData, isInspection));
-            }
             final note = rawData.persistedUserNotes[screen.id] ?? '';
             if (note.isNotEmpty) mergedNotes.add(note);
 
-            // Collect fields as safety-net fallback in case all
-            // phrase handlers return empty for this group.
             final answers = rawData.allAnswers[screen.id] ?? {};
             final fields = _buildFields(screen, answers);
-            if (fields.any((f) => f.displayValue.isNotEmpty)) {
+
+            if (config.includePhrases) {
+              final screenPhrases =
+                  _phrasesForScreen(screen, rawData, isInspection);
+              if (screenPhrases.isNotEmpty) {
+                mergedPhrases.addAll(screenPhrases);
+              } else {
+                // No phrase handler — convert fields to narrative phrases
+                // so data is not lost when other screens do have phrases.
+                final fallback = _fieldsToPhrases(fields);
+                if (fallback.isNotEmpty) {
+                  mergedPhrases.addAll(fallback);
+                } else if (fields.any((f) => f.displayValue.isNotEmpty)) {
+                  mergedFields.addAll(fields);
+                }
+              }
+            } else if (fields.any((f) => f.displayValue.isNotEmpty)) {
               mergedFields.addAll(fields);
             }
           }
@@ -204,6 +215,32 @@ class ReportBuilder {
 
     if (screens.isEmpty && !config.includeEmptyScreens) return null;
 
+    // Apply NarrativeEnhancer to each screen's phrases
+    if (config.includePhrases) {
+      for (var i = 0; i < screens.length; i++) {
+        final screen = screens[i];
+        if (screen.phrases.isEmpty) continue;
+        final enhanced = NarrativeEnhancer.enhance(
+          screen.phrases,
+          sectionKey: sectionDef.key,
+          screenId: screen.screenId,
+          isFirstScreenInSection: i == 0,
+        );
+        if (enhanced != screen.phrases) {
+          screens[i] = ReportScreen(
+            screenId: screen.screenId,
+            title: screen.title,
+            fields: screen.fields,
+            phrases: enhanced,
+            userNote: screen.userNote,
+            parentId: screen.parentId,
+            isCompleted: screen.isCompleted,
+            isMergedGroup: screen.isMergedGroup,
+          );
+        }
+      }
+    }
+
     return ReportSection(
       key: sectionDef.key,
       title: sectionDef.title,
@@ -223,12 +260,24 @@ class ReportBuilder {
     final answers = rawData.allAnswers[node.id] ?? {};
     final isCompleted = rawData.screenStates[node.id] ?? false;
 
-    final fields = _buildFields(node, answers);
-    final List<String> phrases;
+    var fields = _buildFields(node, answers);
+    List<String> phrases;
     if (!config.includePhrases) {
       phrases = const [];
     } else {
       phrases = _phrasesForScreen(node, rawData, isInspection);
+    }
+
+    // When no engine phrases exist but fields have data, convert fields to
+    // simple narrative phrases so the report avoids raw "Yes/No" tables.
+    if (phrases.isEmpty &&
+        config.includePhrases &&
+        fields.any((f) => f.displayValue.isNotEmpty)) {
+      final fallback = _fieldsToPhrases(fields);
+      if (fallback.isNotEmpty) {
+        phrases = fallback;
+        fields = const []; // Suppress raw table — phrases cover the data.
+      }
     }
 
     final userNote = rawData.persistedUserNotes[node.id] ?? '';
@@ -251,6 +300,10 @@ class ReportBuilder {
 
   /// Get phrases for a screen — prefers persisted DB phrases, falls back to
   /// live engine regeneration.
+  ///
+  /// Returns empty if the user never interacted with this screen (no answers
+  /// in the DB).  This prevents unconditional boilerplate text from the phrase
+  /// engine from pulling unvisited screens into the report.
   List<String> _phrasesForScreen(
     InspectionNodeDefinition node,
     V2RawReportData rawData,
@@ -259,7 +312,10 @@ class ReportBuilder {
     final persisted = rawData.persistedPhrases[node.id];
     if (persisted != null) return persisted;
 
-    final answers = rawData.allAnswers[node.id] ?? {};
+    // No persisted phrases and no user answers — screen was never visited.
+    if (!rawData.allAnswers.containsKey(node.id)) return const [];
+
+    final answers = rawData.allAnswers[node.id]!;
     final enginePhrases = _buildPhrases(node.id, answers, isInspection);
     final fieldPhrases =
         FieldPhraseProcessor.buildFieldPhrases(node.fields, answers);
@@ -304,6 +360,38 @@ class ReportBuilder {
       current = parent;
     }
     return null;
+  }
+
+  /// Convert a list of [ReportField]s into simple narrative phrases as a
+  /// fallback when no phrase engine handler exists for a screen.
+  ///
+  /// - Checked checkboxes are collected and listed in a comma-separated
+  ///   sentence (unchecked items and empty values are omitted).
+  /// - Text / number / dropdown values are included as "Label: value".
+  /// - Returns empty if no meaningful data is present.
+  static List<String> _fieldsToPhrases(List<ReportField> fields) {
+    final checked = <String>[];
+    final entries = <String>[];
+
+    for (final field in fields) {
+      if (field.displayValue.isEmpty) continue;
+
+      if (field.type == ReportFieldType.checkbox) {
+        if (field.displayValue == 'Yes') {
+          checked.add(field.label);
+        }
+        // Skip "No" — unchecked items are not noteworthy.
+      } else {
+        entries.add('${field.label}: ${field.displayValue}');
+      }
+    }
+
+    final phrases = <String>[];
+    if (checked.isNotEmpty) {
+      phrases.add('${checked.join(', ')}.');
+    }
+    phrases.addAll(entries);
+    return phrases;
   }
 
   List<ReportField> _buildFields(

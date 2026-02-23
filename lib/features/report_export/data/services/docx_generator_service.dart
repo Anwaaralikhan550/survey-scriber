@@ -180,7 +180,7 @@ class DocxGeneratorService {
     buf.write('<w:name w:val="heading 2"/>');
     buf.write('<w:pPr><w:spacing w:before="240" w:after="80"/>');
     buf.write('<w:outlineLvl w:val="1"/></w:pPr>');
-    buf.write('<w:rPr><w:b/><w:sz w:val="26"/>');
+    buf.write('<w:rPr><w:b/><w:sz w:val="28"/>');
     buf.write('<w:color w:val="$accentHex"/>');
     buf.write('</w:rPr></w:style>');
 
@@ -189,7 +189,7 @@ class DocxGeneratorService {
     buf.write('<w:name w:val="heading 3"/>');
     buf.write('<w:pPr><w:spacing w:before="200" w:after="60"/>');
     buf.write('<w:outlineLvl w:val="2"/></w:pPr>');
-    buf.write('<w:rPr><w:b/><w:sz w:val="22"/>');
+    buf.write('<w:rPr><w:b/><w:sz w:val="24"/>');
     buf.write('<w:color w:val="$accentHex"/>');
     buf.write('</w:rPr></w:style>');
 
@@ -413,10 +413,10 @@ class DocxGeneratorService {
   void _writeSurveyorNote(StringBuffer buf, String note) {
     buf.write('<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="E3F2FD"/></w:pPr>');
     // Bold prefix
-    buf.write('<w:r><w:rPr><w:b/><w:sz w:val="18"/></w:rPr>');
+    buf.write('<w:r><w:rPr><w:b/><w:sz w:val="20"/></w:rPr>');
     buf.write("<w:t xml:space=\"preserve\">Surveyor's Note: </w:t></w:r>");
     // Italic body
-    buf.write('<w:r><w:rPr><w:i/><w:sz w:val="18"/></w:rPr>');
+    buf.write('<w:r><w:rPr><w:i/><w:sz w:val="20"/></w:rPr>');
     buf.write('<w:t xml:space="preserve">');
     buf.write(_escapeXml(note));
     buf.write('</w:t></w:r></w:p>');

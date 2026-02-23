@@ -296,26 +296,31 @@ class ValuationPhraseEngine {
       case 'satisfactory':
       case 'good':
         return '$prefix is considered ${lc == 'good' ? 'good' : 'satisfactory'}, '
-            'consistent with the property\'s age and type of construction. '
-            'No repair is currently needed. The property must be maintained in the normal way.';
+            'commensurate with the age and type of construction. '
+            'No immediate repair work is considered necessary at this stage. '
+            'Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.';
       case 'reasonable':
-        return '$prefix is considered reasonable for a property of this age and type. '
-            'Routine maintenance should be carried out in the normal way.';
+        return '$prefix is considered reasonable for a property of this age and type of construction. '
+            'No immediate repair work is considered necessary at this stage. '
+            'Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.';
       case 'unsatisfactory':
       case 'poor':
       case 'unsatisfactory and poor':
-        return '$prefix is considered unsatisfactory and repair work is necessary. '
-            'Further investigation by a specialist is recommended.';
+        return '$prefix is considered unsatisfactory and remedial work is necessary. '
+            'It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation '
+            'and to advise on the scope and cost of the necessary remedial works.';
       case '1':
-        return '$prefix has been assessed as Condition Rating 1. No repair is currently needed. '
-            'The property must be maintained in the normal way.';
+        return '$prefix has been assessed as Condition Rating 1. '
+            'No immediate repair work is considered necessary at this stage. '
+            'Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.';
       case '2':
-        return '$prefix has been assessed as Condition Rating 2. Defects that need repairing '
-            'or replacing but are not considered to be either serious or urgent. '
-            'The property must be maintained in the normal way.';
+        return '$prefix has been assessed as Condition Rating 2. '
+            'Defects requiring repair or replacement have been identified, but these are not considered to be serious or urgent at the present time. '
+            'Budget provision should be made for the recommended works.';
       case '3':
-        return '$prefix has been assessed as Condition Rating 3. Defects that are serious '
-            'and/or need to be repaired, replaced, or investigated urgently.';
+        return '$prefix has been assessed as Condition Rating 3. '
+            'Serious defects have been identified that require urgent attention and may pose a risk to the safety or structural integrity of the property. '
+            'Immediate further investigation by a suitably qualified specialist is strongly recommended.';
       default:
         if (condition.isNotEmpty) {
           return '$prefix has been assessed as $condition.';
@@ -410,7 +415,8 @@ class ValuationPhraseEngine {
             .replaceAll('{COMPONENT}', componentName)
             .replaceAll('{MATERIALS}', _toWords(items)));
       } else {
-        phrases.add('$componentArticle $componentName $componentVerb of ${_toWords(items)} construction.');
+        phrases.add('$componentArticle $componentName $componentVerb of ${_toWords(items)} construction, '
+            'which is consistent with the original building specification for a property of this age and type.');
       }
     }
     _addConditionNotes(phrases, answers, conditionKey, notesKey, component: componentName);
@@ -445,12 +451,14 @@ class ValuationPhraseEngine {
 
     final weather = _val(answers, 'actv_weather');
     if (weather.isNotEmpty) {
-      phrases.add('When I inspected the property, the weather conditions were ${weather.toLowerCase()}.');
+      phrases.add('At the time of my inspection, the weather conditions were ${weather.toLowerCase()}. '
+          'It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.');
     }
 
     final tenure = _val(answers, 'actv_tenure');
     if (tenure.isNotEmpty) {
-      phrases.add('The property is held on a ${tenure.toLowerCase()} basis.');
+      phrases.add('The property is held on a ${tenure.toLowerCase()} basis. '
+          'Your legal adviser should confirm the precise terms and any obligations arising from the tenure.');
     }
 
     final type = _val(answers, 'actv_type');
@@ -501,9 +509,9 @@ class ValuationPhraseEngine {
     final age = _val(answers, 'et_age');
     final extAge = _val(answers, 'et_age_extension');
     if (age.isNotEmpty) {
-      var text = 'Based on my knowledge of the area and housing styles, I estimate the property was built circa $age';
-      if (extAge.isNotEmpty) text += ', with an extension added circa $extAge';
-      phrases.add('$text.');
+      var text = 'Based on my professional knowledge of the area, construction methods, and architectural styles, I estimate the property was built circa $age';
+      if (extAge.isNotEmpty) text += ', with an extension or alteration added circa $extAge';
+      phrases.add('$text. This estimate is provided for guidance purposes and should be verified by your legal adviser through title deeds or local authority records where appropriate.');
     }
 
     if (_isChecked(answers['cb_is_listed_building'])) {
@@ -517,22 +525,27 @@ class ValuationPhraseEngine {
     final phrases = <String>[];
     final builder = _val(answers, 'et_builder_name');
     if (builder.isNotEmpty) {
-      phrases.add('The property is a new build development by $builder.');
+      phrases.add('The property is a new build development constructed by $builder.');
     }
 
     final stage = _val(answers, 'actv_work_stage');
     if (stage.isNotEmpty) {
-      phrases.add('At the time of inspection, the construction works were at the ${stage.toLowerCase()} stage.');
+      phrases.add('At the time of my inspection, the construction works were at the ${stage.toLowerCase()} stage. '
+          'The valuation is provided on the basis that the property will be completed to a satisfactory standard '
+          'in accordance with the approved plans and specifications.');
     }
 
     final warranty = _val(answers, 'actv_warranty');
     if (warranty.isNotEmpty) {
-      phrases.add('The property benefits from a $warranty structural warranty. Your legal adviser should confirm the terms and duration of this cover.');
+      phrases.add('The property benefits from a $warranty structural warranty. '
+          'Your legal adviser should confirm the precise terms, duration, and transferability of this warranty cover.');
     }
 
     final incentives = _val(answers, 'et_incentives');
     if (incentives.isNotEmpty) {
-      phrases.add('I am advised that the following incentives are being offered: $incentives. These have been considered in arriving at my valuation figure.');
+      phrases.add('I am advised that the following incentives are being offered by the developer: $incentives. '
+          'These incentives have been taken into consideration in arriving at my valuation figure, '
+          'in accordance with RICS guidance on the treatment of incentives.');
     }
 
     final date = _val(answers, 'in_date');
@@ -574,7 +587,7 @@ class ValuationPhraseEngine {
     }
 
     if (rooms.isNotEmpty) {
-      phrases.add('The accommodation comprises ${_toWords(rooms)}.');
+      phrases.add('The property provides accommodation comprising ${_toWords(rooms)}.');
     }
     return phrases;
   }
@@ -606,13 +619,15 @@ class ValuationPhraseEngine {
     if (_isChecked(answers['cb_external_outbuildings'])) {
       final desc = _val(answers, 'et_describe');
       if (desc.isNotEmpty) {
-        phrases.add('The property includes external outbuildings comprising $desc.');
+        phrases.add('The property includes external outbuildings comprising $desc. '
+            'These were inspected as part of this survey where accessible.');
       } else {
-        phrases.add('The property includes external outbuildings.');
+        phrases.add('The property includes external outbuildings, which were inspected as part of this survey where accessible.');
       }
     }
     if (_isChecked(answers['cb_external_garden'])) {
-      phrases.add('The property benefits from garden areas.');
+      phrases.add('The property benefits from garden areas to the front and/or rear. '
+          'The gardens were inspected as part of this survey.');
     }
 
     return phrases;
@@ -623,7 +638,8 @@ class ValuationPhraseEngine {
 
     final location = _val(answers, 'actv_location');
     if (location.isNotEmpty) {
-      phrases.add('The property is situated within an established ${location.toLowerCase()} area.');
+      phrases.add('The property is situated within an established ${location.toLowerCase()} area, '
+          'which is considered to be a desirable location for properties of this type.');
     }
 
     final closeTo = _checkedLabels(answers, [
@@ -646,7 +662,9 @@ class ValuationPhraseEngine {
     });
     _addOther(env, answers, 'cb_other_env', 'et_other_env');
     if (env.isNotEmpty) {
-      phrases.add('I noted ${_toWords(env)} which may affect the value or desirability of the property. Further enquiries are recommended.');
+      phrases.add('I noted ${_toWords(env)} in the vicinity of the property, '
+          'which may have an adverse effect on the value, saleability, or desirability of the property. '
+          'Further enquiries with the relevant local authority are recommended.');
     }
 
     if (_isChecked(answers['cb_adverse_neighbouring'])) {
@@ -669,11 +687,13 @@ class ValuationPhraseEngine {
       'cb_unmade': 'an unmade road',
     });
     if (types.isNotEmpty) {
-      phrases.add('The property fronts ${_toWords(types)}.');
+      phrases.add('The property fronts onto ${_toWords(types)}.');
     }
     final cost = _val(answers, 'et_cost_of_making_up');
     if (cost.isNotEmpty) {
-      phrases.add('The estimated cost of making up the road is $cost. Your legal adviser should confirm any potential liability for road-making charges.');
+      phrases.add('The estimated cost of making up the road to an adoptable standard is $cost. '
+          'Your legal adviser should confirm any potential liability for road-making charges and '
+          'whether any Section 38 agreement is in place with the highway authority.');
     }
     return phrases;
   }
@@ -698,12 +718,16 @@ class ValuationPhraseEngine {
     });
     _addOther(items, answers, 'cb_other_909', 'et_other_777');
     if (items.isNotEmpty) {
-      phrases.add('The main roof is of pitched construction, covered with ${_toWords(items)} materials.');
+      phrases.add('The main roof is of pitched construction, covered with ${_toWords(items)} materials, '
+          'which is a typical covering for a property of this age and construction type. '
+          'The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_pitched_roof', 'et_notes_pitched_roof', component: 'pitched roof covering');
 
     if (_isChecked(answers['cb_partial_view_pr'])) {
-      phrases.add('Only a partial view of the roof was possible from ground level. A full inspection from a scaffold or elevated platform may reveal additional defects.');
+      phrases.add('Only a partial view of the roof was possible from ground level due to the height and configuration of the building. '
+          'A more detailed inspection from a scaffold or elevated platform may reveal additional defects not visible from the ground. '
+          'A specialist roofing inspection should be considered as part of the property\'s ongoing maintenance regime.');
     }
     final vis = _val(answers, 'actv_visibility_pr');
     if (vis.isNotEmpty) {
@@ -738,12 +762,15 @@ class ValuationPhraseEngine {
     });
     _addOther(items, answers, 'cb_other_883', 'et_other_824');
     if (items.isNotEmpty) {
-      phrases.add('The flat roof covering is of ${_toWords(items)} construction.');
+      phrases.add('The flat roof covering is of ${_toWords(items)} construction. '
+          'Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. '
+          'Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_flat_roof', 'et_notes_flat_roof', component: 'flat roof covering');
 
     if (_isChecked(answers['cb_partial_view_fr'])) {
-      phrases.add('Only a partial view of the flat roof was possible. A full inspection from an elevated position may reveal additional defects.');
+      phrases.add('Only a partial view of the flat roof was possible at the time of inspection. '
+          'A full inspection from an elevated position may reveal additional defects not visible from the ground.');
     }
     final visCond = _val(answers, 'actv_visibility_condition_fr');
     if (visCond.isNotEmpty) {
@@ -793,17 +820,20 @@ class ValuationPhraseEngine {
     final label = roofName.isNotEmpty ? roofName : 'The secondary roof';
     final allItems = [...pitched, ...flat];
     if (allItems.isNotEmpty) {
-      phrases.add('$label is covered with ${_toWords(allItems)} materials.');
+      phrases.add('$label is covered with ${_toWords(allItems)} materials, '
+          'which is consistent with the original building specification for a property of this age and type. '
+          'The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.');
     }
 
     _addConditionNotes(phrases, answers, 'actv_condition_other_roof', 'et_notes_other_roof', component: 'secondary roof covering');
 
     if (_isChecked(answers['cb_partial_view_or'])) {
-      phrases.add('Only a partial view was possible from ground level.');
+      phrases.add('Only a partial view of the secondary roof was possible from ground level due to the height and configuration of the building. '
+          'A more detailed inspection from an elevated position may reveal additional defects not visible from the ground.');
     }
     final visCond = _val(answers, 'actv_visibility_condition_or');
     if (visCond.isNotEmpty) {
-      phrases.add(_conditionPhrase(visCond, component: 'visible portion'));
+      phrases.add(_conditionPhrase(visCond, component: 'visible portion of the secondary roof'));
     }
     if (visCond.toLowerCase() == 'unsatisfactory') {
       final vn = _val(answers, 'et_visibility_notes_or');
@@ -811,7 +841,7 @@ class ValuationPhraseEngine {
     }
     final vent = _val(answers, 'actv_roof_ventilation_or');
     if (vent.isNotEmpty) {
-      phrases.add('Roof ventilation appears ${vent.toLowerCase()}.');
+      phrases.add('Roof ventilation to the secondary roof is provided and appears ${vent.toLowerCase()}.');
     }
 
     _addRemarks(phrases, answers, 'et_general_remarks_other_roof');
@@ -834,7 +864,8 @@ class ValuationPhraseEngine {
     });
     _addOther(items, answers, 'cb_other_1009', 'et_other_142');
     if (items.isNotEmpty) {
-      phrases.add('The external walls are of ${_toWords(items)} construction.');
+      phrases.add('The principal external walls are of ${_toWords(items)} construction, '
+          'which is consistent with the original building specification for a property of this age and type.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_walls', 'et_notes_walls', component: 'external walls');
 
@@ -845,14 +876,17 @@ class ValuationPhraseEngine {
 
     final movement = _val(answers, 'actv_building_movement');
     if (movement.isNotEmpty) {
-      phrases.add('Evidence of building movement was noted: ${movement.toLowerCase()}. '
+      phrases.add('A careful examination was made of all accessible wall surfaces for evidence of structural movement, '
+          'including cracking, distortion, bulging, or displacement of masonry. '
+          'Evidence of building movement was noted: ${movement.toLowerCase()}. '
           'So far as can be seen from this single inspection, the movement appears to be '
           'generally consistent with properties of this age and type of construction.');
     }
 
     if (_isChecked(answers['cb_risk_of_further_movement'])) {
-      phrases.add('There is considered to be a risk of further movement. '
-          'A specialist structural engineer\'s report is recommended before exchange of contracts.');
+      phrases.add('There is considered to be a risk of further progressive movement. '
+          'A specialist structural engineer\'s report is strongly recommended before exchange of contracts '
+          'to assess the significance of the movement and advise on any necessary remedial measures.');
     }
 
     _addRemarks(phrases, answers, 'et_general_remarks_walls');
@@ -862,9 +896,12 @@ class ValuationPhraseEngine {
   List<String> _wallTieCorrosion(Map<String, String> answers) {
     final phrases = <String>[];
     if (_isChecked(answers['cb_wall_tie_corrosion'])) {
-      phrases.add('Evidence of wall tie corrosion was noted during the inspection. '
-          'This is a potentially serious structural defect. A specialist survey by '
-          'a wall tie specialist is strongly recommended before exchange of contracts.');
+      phrases.add('Evidence of wall tie corrosion was noted during the inspection, '
+          'as indicated by horizontal cracking in the mortar bed joints at regular intervals. '
+          'This is a potentially serious structural defect which, if left untreated, '
+          'may compromise the structural integrity of the external wall leaves. '
+          'A specialist survey by a qualified wall tie specialist is strongly recommended '
+          'before exchange of contracts to assess the extent of the corrosion and advise on remedial measures.');
     }
     _addRemarks(phrases, answers, 'et_general_remarks_wall_tie');
     return phrases;
@@ -882,7 +919,9 @@ class ValuationPhraseEngine {
     });
     _addOther(gf, answers, 'cb_other_327', 'et_other_469');
     if (gf.isNotEmpty) {
-      phrases.add('The ground floor is of ${_toWords(gf)} construction.');
+      phrases.add('The ground floor is of ${_toWords(gf)} construction. '
+          'The floor coverings were not lifted during the inspection, and the condition of the floor structure '
+          'could only be assessed from the general feel and level of the floors when walked upon.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_floor_ext', 'et_notes_floor_ext', component: 'ground floor');
     _addRemarks(phrases, answers, 'et_general_remarks_floor_ext');
@@ -896,7 +935,8 @@ class ValuationPhraseEngine {
     });
     _addOther(uf, answers, 'cb_other_327_u', 'et_other_469_u');
     if (uf.isNotEmpty) {
-      phrases.add('The upper floor construction is of ${_toWords(uf)} type.');
+      phrases.add('The upper floors are of ${_toWords(uf)} construction. '
+          'No significant deflection or unevenness was noted when the floors were walked upon during the inspection.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_upper_floor', 'et_notes_upper_floor', component: 'upper floors');
     _addRemarks(phrases, answers, 'et_general_remarks_upper_floor');
@@ -909,9 +949,13 @@ class ValuationPhraseEngine {
     final vents = _val(answers, 'actv_sub_floor_vents');
     if (vents.isNotEmpty) {
       if (vents.toLowerCase() == 'adequate') {
-        phrases.add('Sub-floor ventilation is provided by airbricks and appears adequate for the size of the property.');
+        phrases.add('Sub-floor ventilation is provided by airbricks at appropriate intervals and appears adequate '
+            'for the size and configuration of the property. Adequate ventilation is essential to prevent the '
+            'build-up of moisture beneath the floor, which can lead to timber decay and fungal attack.');
       } else if (vents.toLowerCase() == 'inadequate') {
-        phrases.add('Sub-floor ventilation appears inadequate. Additional airbricks or ventilation should be installed to reduce the risk of timber decay.');
+        phrases.add('Sub-floor ventilation appears inadequate for the size and configuration of the property. '
+            'Additional airbricks or alternative ventilation measures should be installed at the earliest opportunity '
+            'to reduce the risk of timber decay, fungal attack, and dampness to the sub-floor timbers.');
       } else {
         phrases.add('Sub-floor ventilation has been assessed as ${vents.toLowerCase()}.');
       }
@@ -933,7 +977,8 @@ class ValuationPhraseEngine {
         buf.write('a ');
       }
       if (type.isNotEmpty) buf.write('${type.toLowerCase()} ');
-      buf.write(number != '1' && number.isNotEmpty ? 'garages.' : 'garage.');
+      buf.write(number != '1' && number.isNotEmpty ? 'garages' : 'garage');
+      buf.write(', which was inspected as part of this survey.');
       phrases.add(buf.toString());
     }
     _addConditionNotes(phrases, answers, 'actv_condition_garage', 'et_notes_garage', component: 'garage');
@@ -945,7 +990,8 @@ class ValuationPhraseEngine {
     final phrases = <String>[];
     final desc = _val(answers, 'et_outbuilding_describe');
     if (desc.isNotEmpty) {
-      phrases.add('The property includes outbuildings comprising $desc.');
+      phrases.add('The property includes outbuildings comprising $desc. '
+          'The outbuildings were inspected as part of this survey where accessible.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_outbuildings', 'et_notes_outbuildings', component: 'outbuildings');
     _addRemarks(phrases, answers, 'et_general_remarks_outbuildings');
@@ -968,15 +1014,18 @@ class ValuationPhraseEngine {
     });
     _addOther(fencing, answers, 'cb_other_720_site', 'et_other_792_site');
     if (fencing.isNotEmpty) {
-      phrases.add('The site boundaries are defined by ${_toWords(fencing)}.');
+      phrases.add('The site boundaries are defined by ${_toWords(fencing)}. '
+          'The boundaries were inspected from within the site and from adjacent public areas where accessible.');
     }
     if (_isChecked(answers['cb_boundaries_well_defined'])) {
-      phrases.add('The boundaries appear well defined and clearly identifiable.');
+      phrases.add('The boundaries appear well defined and clearly identifiable on the ground. '
+          'Your legal adviser should confirm the precise extent of the boundaries from the title deeds.');
     }
     if (_isChecked(answers['cb_trees_within_root'])) {
       phrases.add('Trees were noted within root influencing distance of the property. '
           'Your legal adviser should confirm whether any Tree Preservation Orders are in place. '
-          'The proximity of the trees may influence the property\'s foundations and drainage.');
+          'The proximity of the trees may influence the property\'s foundations and drainage, '
+          'and specialist arboricultural advice should be obtained if any works to the trees are proposed.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_site', 'et_notes_site', component: 'site boundaries');
     _addRemarks(phrases, answers, 'et_general_remarks_site');
@@ -997,10 +1046,13 @@ class ValuationPhraseEngine {
     });
     _addOther(items, answers, 'cb_other_299', 'et_other_120');
     if (items.isNotEmpty) {
-      phrases.add('The property is served by ${_toWords(items)}.');
+      phrases.add('The property is served by ${_toWords(items)}. '
+          'The drainage system was not tested as part of this inspection.');
     }
     if (_isChecked(answers['cb_test_required'])) {
-      phrases.add('A drainage test is recommended to confirm the condition and functionality of the system. Your legal adviser should confirm any shared drainage responsibilities.');
+      phrases.add('A full drainage survey, including a CCTV inspection of the underground pipework, is recommended '
+          'to confirm the condition, adequacy, and functionality of the system. '
+          'Your legal adviser should confirm any shared drainage responsibilities and associated maintenance obligations.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_drainage', 'et_notes_drainage', component: 'drainage');
     _addRemarks(phrases, answers, 'et_general_remarks_drainage');
@@ -1025,9 +1077,13 @@ class ValuationPhraseEngine {
       'cb_no_access_statereason': 'no access',
     });
     if (material.contains('no access')) {
-      phrases.add('Access to the roof space was not possible at the time of inspection. The condition of the roof timbers, insulation, and any water tanks could not be assessed.');
+      phrases.add('Access to the roof space was not possible at the time of inspection. '
+          'Accordingly, the condition of the roof timbers, insulation, water tanks, and any associated pipework '
+          'could not be assessed. This should be considered a limitation of this inspection.');
     } else if (material.isNotEmpty) {
-      phrases.add('The roof space was inspected and the roof structure is of ${_toWords(material)} construction.');
+      phrases.add('The roof space was entered and inspected where accessible. '
+          'The roof structure is of ${_toWords(material)} construction, '
+          'which is consistent with the original building specification for a property of this age and type.');
     }
 
     final limitations = _checkedLabels(answers, [
@@ -1039,7 +1095,9 @@ class ValuationPhraseEngine {
     });
     _addOther(limitations, answers, 'cb_other_766', 'et_other_580');
     if (limitations.isNotEmpty) {
-      phrases.add('The inspection was limited by ${_toWords(limitations)}, which prevented a full examination of all areas.');
+      phrases.add('The inspection of the roof space was limited by ${_toWords(limitations)}, '
+          'which prevented a full examination of all areas. '
+          'Concealed defects may exist in those areas that could not be inspected.');
     }
 
     _addConditionNotes(phrases, answers, 'actv_condition_roof_space', 'et_notes_roof_space', component: 'roof space');
@@ -1060,12 +1118,16 @@ class ValuationPhraseEngine {
     });
     _addOther(items, answers, 'cb_other_1033', 'et_other_829');
     if (items.isNotEmpty) {
-      phrases.add('The chimney breasts are ${_toWords(items)}.');
+      phrases.add('The chimney breasts within the property are ${_toWords(items)}.');
       if (items.contains('without ventilation')) {
-        phrases.add('Where chimney breasts have been sealed without adequate ventilation, there is a risk of condensation and dampness within the flue. Ventilation should be installed.');
+        phrases.add('Where chimney breasts have been sealed without adequate ventilation, there is a significant risk '
+            'of condensation and dampness accumulating within the redundant flue. '
+            'Appropriate ventilation grilles should be installed to each sealed fireplace opening to ensure adequate air circulation.');
       }
       if (items.contains('removed')) {
-        phrases.add('Where chimney breasts have been removed, your legal adviser should confirm that adequate structural support has been provided to the chimney stack above.');
+        phrases.add('Where chimney breasts have been removed at lower levels, your legal adviser should confirm that '
+            'Building Regulations approval was obtained for the works and that adequate structural support '
+            'has been provided to the remaining chimney stack and breast above.');
       }
     }
     _addConditionNotes(phrases, answers, 'actv_condition_chimney_br', 'et_notes_chimney_br', component: 'chimney breasts');
@@ -1097,14 +1159,14 @@ class ValuationPhraseEngine {
     _addOther(frameMaterials, answers, 'cb_other_948', 'et_other_438');
 
     if (frameMaterials.isNotEmpty || glazingTypes.isNotEmpty) {
-      final buf = StringBuffer('The windows are of ');
+      final buf = StringBuffer('The windows and external joinery are of ');
       if (frameMaterials.isNotEmpty) buf.write('${_toWords(frameMaterials)} frame construction');
       if (frameMaterials.isNotEmpty && glazingTypes.isNotEmpty) buf.write(', ');
       if (glazingTypes.isNotEmpty) buf.write('${_toWords(glazingTypes)}');
-      buf.write('.');
+      buf.write('. The windows were inspected from both the interior and exterior of the property where accessible.');
       phrases.add(buf.toString());
     }
-    _addConditionNotes(phrases, answers, 'actv_condition_ext_joinery', 'et_notes_ext_joinery', component: 'windows');
+    _addConditionNotes(phrases, answers, 'actv_condition_ext_joinery', 'et_notes_ext_joinery', component: 'windows and external joinery');
     _addRemarks(phrases, answers, 'et_general_remarks_ext_joinery');
     return phrases;
   }
@@ -1120,7 +1182,9 @@ class ValuationPhraseEngine {
     });
     _addOther(items, answers, 'cb_other_673', 'et_other_534');
     if (items.isNotEmpty) {
-      phrases.add('The internal fittings include ${_toWords(items)}.');
+      phrases.add('The internal fittings include ${_toWords(items)}. '
+          'These were visually inspected as part of this survey. '
+          'No tests were carried out to the plumbing or waste systems.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_int_fittings', 'et_notes_int_fittings', component: 'internal fittings');
     _addRemarks(phrases, answers, 'et_general_remarks_int_fittings');
@@ -1132,14 +1196,19 @@ class ValuationPhraseEngine {
     final meter = _val(answers, 'actv_damp_meter');
     if (meter.isNotEmpty) {
       if (meter == 'Damp Found') {
-        phrases.add('Damp meter readings were taken and elevated moisture levels were detected.');
+        phrases.add('Moisture readings were taken with a calibrated electronic moisture meter at representative points '
+            'to the internal faces of external walls. Elevated moisture levels were detected.');
         final loc = _val(answers, 'et_damp_found');
         if (loc.isNotEmpty) {
           phrases.add('Elevated readings were noted at $loc. '
-              'Further investigation by a specialist damp surveyor is recommended to establish the cause and extent of the dampness.');
+              'Further investigation by a specialist damp surveyor is recommended to establish the cause, extent, '
+              'and appropriate remedial treatment for the dampness identified.');
         }
       } else if (meter.toLowerCase() == 'no damp') {
-        phrases.add('Damp meter readings were taken at various locations throughout the property. No elevated moisture levels were detected.');
+        phrases.add('Moisture readings were taken with a calibrated electronic moisture meter at representative points '
+            'to the internal faces of external walls at both ground and upper floor levels where accessible. '
+            'At the time of my inspection, the readings obtained were within acceptable parameters, '
+            'and no visible signs of dampness, staining, or efflorescence were observed.');
       } else {
         phrases.add('Damp meter readings indicated: ${meter.toLowerCase()}.');
       }
@@ -1161,7 +1230,9 @@ class ValuationPhraseEngine {
     _addOther(items, answers, 'cb_other_375', 'et_other_835');
     if (items.isNotEmpty) {
       phrases.add('Evidence of ${_toWords(items)} was noted during the inspection. '
-          'A specialist timber and damp report is recommended before exchange of contracts to establish the full extent of the defect and the cost of remedial works.');
+          'This is a potentially serious defect which, if left untreated, may spread and cause significant damage to the building fabric. '
+          'A specialist timber and damp report is strongly recommended before exchange of contracts '
+          'to establish the full extent of the defect, the risk of spread, and the cost of remedial treatment.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_timber', 'et_notes_timber', component: 'timber');
     _addRemarks(phrases, answers, 'et_general_remarks_timber');
@@ -1181,7 +1252,9 @@ class ValuationPhraseEngine {
     });
     _addOther(material, answers, 'cb_other_194', 'et_other_423');
     if (material.isNotEmpty) {
-      phrases.add('The visible electrical wiring is ${_toWords(material)}.');
+      phrases.add('Where visible, the electrical wiring is ${_toWords(material)}. '
+          'Only a limited visual inspection of the electrical installation was possible, '
+          'as the majority of the wiring is concealed within the building fabric.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_electric', 'et_notes_electric', component: 'electrical installation');
     _addRemarks(phrases, answers, 'et_general_remarks_electric');
@@ -1198,7 +1271,8 @@ class ValuationPhraseEngine {
     _addOther(age, answers, 'cb_other_550', 'et_other_199');
     if (age.isNotEmpty) {
       phrases.add('The electrical installation appears ${_toWords(age)}. '
-          'A current Electrical Installation Condition Report (EICR) should be obtained to confirm the safety of the installation.');
+          'A current Electrical Installation Condition Report (EICR), carried out by a competent electrician registered '
+          'with an appropriate Part P scheme, should be obtained to confirm the safety and adequacy of the installation.');
     }
     _addConditionNotes(phrases, answers, 'actv_age_condition', 'et_age_notes', component: 'electrical system age');
     _addRemarks(phrases, answers, 'et_generals_remarks_electric_age');
@@ -1212,12 +1286,14 @@ class ValuationPhraseEngine {
     if (supply.isNotEmpty) {
       if (supply.toLowerCase() == 'mains') {
         phrases.add('The property is connected to mains gas supply. '
-            'A current Gas Safety Certificate should be obtained to confirm the safety of the installation.');
+            'The gas installation was not tested as part of this inspection. '
+            'A current Gas Safety Certificate, issued by a Gas Safe registered engineer, '
+            'should be obtained to confirm the safety and adequacy of the installation.');
       } else if (supply.toLowerCase() == 'none') {
-        phrases.add('The property does not have a gas supply.');
+        phrases.add('The property does not have a gas supply connected at the present time.');
       } else {
         phrases.add('The gas supply is ${supply.toLowerCase()}. '
-            'A current Gas Safety Certificate should be obtained.');
+            'A current Gas Safety Certificate, issued by a Gas Safe registered engineer, should be obtained.');
       }
     }
     _addConditionNotes(phrases, answers, 'actv_condition_gas', 'et_notes_gas', component: 'gas installation');
@@ -1230,12 +1306,15 @@ class ValuationPhraseEngine {
     final supply = _val(answers, 'actv_water_supply');
     if (supply.isNotEmpty) {
       if (supply.toLowerCase() == 'mains') {
-        phrases.add('The property is connected to mains water supply.');
+        phrases.add('The property is connected to mains water supply. '
+            'The water supply system was not tested as part of this inspection.');
       } else if (supply.toLowerCase() == 'private') {
         phrases.add('The property is served by a private water supply. '
-            'Your legal adviser should confirm the adequacy and quality of this supply.');
+            'Your legal adviser should confirm the adequacy, quality, and any regulatory requirements '
+            'associated with the private supply, including water testing and maintenance obligations.');
       } else {
-        phrases.add('The water supply is ${supply.toLowerCase()}.');
+        phrases.add('The water supply is ${supply.toLowerCase()}. '
+            'Your legal adviser should confirm the terms and adequacy of this supply.');
       }
     }
     _addConditionNotes(phrases, answers, 'actv_condition_water', 'et_notes_water', component: 'water supply');
@@ -1278,19 +1357,21 @@ class ValuationPhraseEngine {
       phrases.add('The hot water and central heating system is fuelled by ${_toWords(fuelSources)}.');
     }
     if (heatingTypes.isNotEmpty) {
-      phrases.add('Heat is distributed by ${_toWords(heatingTypes)}.');
+      phrases.add('Heat is distributed throughout the property by ${_toWords(heatingTypes)}.');
     }
     if (coverageTypes.isNotEmpty) {
       final coverage = coverageTypes.first;
       if (coverage == 'none') {
-        phrases.add('No central heating system is installed.');
+        phrases.add('No central heating system is installed within the property at the present time.');
       } else {
-        phrases.add('The system provides $coverage central heating coverage.');
+        phrases.add('The system provides $coverage central heating coverage to the accommodation.');
       }
     }
     if (phrases.isNotEmpty) {
-      phrases.add('I have not tested the heating system and a current service record should be obtained. '
-          'The boiler and system should be regularly serviced in accordance with the manufacturer\'s instructions.');
+      phrases.add('The heating system was not tested as part of this inspection. '
+          'A current service record should be obtained to confirm the system has been regularly maintained. '
+          'The boiler and associated system should be serviced annually by a suitably qualified engineer '
+          'in accordance with the manufacturer\'s instructions and current regulations.');
     }
     _addConditionNotes(phrases, answers, 'actv_condition_hw_ch', 'et_notes_hw_ch', component: 'heating system');
     _addRemarks(phrases, answers, 'et_general_remarks_hw_ch');
@@ -1300,9 +1381,15 @@ class ValuationPhraseEngine {
   List<String> _smokeDetectors(Map<String, String> answers) {
     final phrases = <String>[];
     if (_isChecked(answers['cb_mains_powered'])) {
-      phrases.add('Mains-powered smoke detectors are installed within the property. The detectors should be tested regularly in accordance with the manufacturer\'s guidelines.');
+      phrases.add('Mains-powered smoke detectors were noted to be installed within the property. '
+          'The detectors should be tested regularly in accordance with the manufacturer\'s guidelines '
+          'and replaced in accordance with the recommended service life. '
+          'Carbon monoxide detectors should also be installed where gas or solid fuel appliances are present.');
     } else {
-      phrases.add('I was unable to confirm the presence of mains-powered smoke detectors. It is recommended that appropriate smoke and carbon monoxide detectors are installed on every floor.');
+      phrases.add('I was unable to confirm the presence of mains-powered smoke detectors within the property. '
+          'It is strongly recommended that appropriate smoke detectors are installed on every floor, '
+          'along with carbon monoxide detectors where gas or solid fuel appliances are present, '
+          'in accordance with current Building Regulations and fire safety guidance.');
     }
     _addRemarks(phrases, answers, 'et_general_remarks_smoke');
     return phrases;
@@ -1316,11 +1403,12 @@ class ValuationPhraseEngine {
     final phrases = <String>[];
     final condition = _val(answers, 'actv_overall_condition');
     if (condition.isNotEmpty) {
-      phrases.add('In my opinion, ${_conditionPhrase(condition, component: 'overall condition of the property')}');
+      phrases.add('Having regard to the age, type, and style of the property, and based upon my thorough inspection, '
+          '${_conditionPhrase(condition, component: 'overall condition of the property')}');
     }
     final restrictions = _val(answers, 'et_restrictions');
     if (restrictions.isNotEmpty) {
-      phrases.add('The following restrictions or matters should be noted: $restrictions');
+      phrases.add('The following restrictions or matters that may affect the value or use of the property should be noted: $restrictions');
     }
     return phrases;
   }
@@ -1330,32 +1418,48 @@ class ValuationPhraseEngine {
 
     final _matters = {
       'cb_building_regs': (String notes) => notes.isNotEmpty
-          ? 'Your legal adviser should confirm that Building Regulations approval was obtained for all works. $notes'
-          : 'Your legal adviser should confirm that Building Regulations approval was obtained for all relevant works.',
+          ? 'Your legal adviser should confirm that Building Regulations approval and, where applicable, '
+              'planning permission were obtained for all relevant works carried out to the property. $notes'
+          : 'Your legal adviser should confirm that Building Regulations approval and, where applicable, '
+              'planning permission were obtained for all relevant works carried out to the property.',
       'cb_guarantees': (String notes) => notes.isNotEmpty
-          ? 'The property benefits from guarantees. $notes Your legal adviser should confirm the terms and transferability.'
-          : 'The property benefits from guarantees. Your legal adviser should confirm the terms and transferability.',
+          ? 'The property benefits from guarantees or warranties. $notes '
+              'Your legal adviser should confirm the precise terms, duration, and transferability of these guarantees.'
+          : 'The property benefits from guarantees or warranties. '
+              'Your legal adviser should confirm the precise terms, duration, and transferability of these guarantees.',
       'cb_rights_of_way': (String notes) => notes.isNotEmpty
-          ? 'Rights of way may affect the property. $notes Your legal adviser should confirm any rights of way that may exist.'
-          : 'Rights of way may affect the property. Your legal adviser should confirm any such rights.',
+          ? 'Rights of way or easements may affect the property. $notes '
+              'Your legal adviser should make full enquiries regarding any rights of way, easements, or wayleaves that may exist.'
+          : 'Rights of way or easements may affect the property. '
+              'Your legal adviser should make full enquiries regarding any such rights.',
       'cb_contamination': (String notes) => notes.isNotEmpty
-          ? 'The property may be affected by contamination. $notes An environmental search is recommended.'
-          : 'The property may be affected by contamination. An environmental search is recommended.',
+          ? 'The property may be affected by land contamination. $notes '
+              'An environmental search and, if appropriate, a Phase 1 desktop environmental assessment is recommended.'
+          : 'The property may be affected by land contamination. '
+              'An environmental search and, if appropriate, a Phase 1 desktop environmental assessment is recommended.',
       'cb_flooding': (String notes) => notes.isNotEmpty
-          ? 'The property may be at risk of flooding. $notes A flood risk search is recommended.'
-          : 'The property may be at risk of flooding. A flood risk search is recommended.',
+          ? 'The property may be at risk of flooding from one or more sources. $notes '
+              'A comprehensive flood risk search is recommended and the availability and cost of flood insurance should be confirmed.'
+          : 'The property may be at risk of flooding from one or more sources. '
+              'A comprehensive flood risk search is recommended and the availability and cost of flood insurance should be confirmed.',
       'cb_emfs_om': (String notes) => notes.isNotEmpty
-          ? 'The property may be affected by electromagnetic fields. $notes'
-          : 'The property may be affected by electromagnetic fields from nearby sources.',
+          ? 'The property may be affected by electromagnetic fields from nearby sources such as overhead power lines or substations. $notes'
+          : 'The property may be affected by electromagnetic fields from nearby sources such as overhead power lines or substations.',
       'cb_mining': (String notes) => notes.isNotEmpty
-          ? 'The property may be affected by mining activity. $notes A mining search is recommended.'
-          : 'The property may be affected by mining activity. A mining search is recommended.',
+          ? 'The property may be affected by historical or current mining activity in the area. $notes '
+              'A mining search is recommended to establish the extent of any mining-related risk.'
+          : 'The property may be affected by historical or current mining activity in the area. '
+              'A mining search is recommended to establish the extent of any mining-related risk.',
       'cb_flying_freehold': (String notes) => notes.isNotEmpty
-          ? 'The property includes a flying freehold element. $notes Your legal adviser should confirm the implications.'
-          : 'The property includes a flying freehold element. Your legal adviser should confirm the legal implications.',
+          ? 'The property includes a flying freehold element. $notes '
+              'Your legal adviser should confirm the legal implications, including any indemnity insurance requirements and maintenance obligations.'
+          : 'The property includes a flying freehold element. '
+              'Your legal adviser should confirm the legal implications, including any indemnity insurance requirements and maintenance obligations.',
       'cb_radon': (String notes) => notes.isNotEmpty
-          ? 'The property is in an area that may be affected by radon gas. $notes A radon test is recommended.'
-          : 'The property is in an area that may be affected by radon gas. A radon test is recommended.',
+          ? 'The property is situated in an area identified as being potentially affected by radon gas. $notes '
+              'A radon test is recommended, and appropriate mitigation measures should be considered if elevated levels are detected.'
+          : 'The property is situated in an area identified as being potentially affected by radon gas. '
+              'A radon test is recommended, and appropriate mitigation measures should be considered if elevated levels are detected.',
     };
 
     final _notesKeys = {
@@ -1383,9 +1487,9 @@ class ValuationPhraseEngine {
   List<String> _energyPerformance(Map<String, String> answers) {
     final phrases = <String>[];
 
-    phrases.add('We have not prepared the Energy Performance Certificate (EPC). '
-        'If we have seen the EPC, then we present the ratings below. '
-        'We have not verified these ratings and cannot comment on their accuracy.');
+    phrases.add('We have not prepared the Energy Performance Certificate (EPC) for this property. '
+        'Where an EPC has been made available to us, the ratings are presented below for information purposes only. '
+        'We have not verified these ratings and cannot comment on their accuracy or completeness.');
 
     final currentRating = _val(answers, 'actv_epc_current_rating');
     final currentScore = _val(answers, 'et_epc_current_score');
@@ -1436,40 +1540,46 @@ class ValuationPhraseEngine {
 
     final purchasePrice = _val(answers, 'et_purchase_price');
     if (purchasePrice.isNotEmpty) {
-      phrases.add('I am advised that the agreed purchase price is $purchasePrice.');
+      phrases.add('I am advised that the agreed purchase price for the property is $purchasePrice.');
     }
     final estimatedValue = _val(answers, 'et_estimated_value');
     if (estimatedValue.isNotEmpty) {
-      phrases.add('The pre-inspection estimated value was $estimatedValue.');
+      phrases.add('The pre-inspection estimated value provided to us was $estimatedValue.');
     }
 
     if (_isChecked(answers['cb_open_market_value'])) {
-      phrases.add('In my opinion, the open market value of the property, subject to the assumptions and conditions set out in this report, '
-          'is considered to be adequate security for the proposed mortgage advance.');
+      phrases.add('In my opinion, the open market value of the property, subject to the assumptions, '
+          'special assumptions, and conditions set out in this report, '
+          'is considered to be adequate security for the proposed mortgage advance. '
+          'This valuation has been prepared in accordance with the RICS Valuation — Global Standards.');
     }
 
     final share = _val(answers, 'et_value_of_share');
     if (share.isNotEmpty) {
-      phrases.add('The value attributable to the applicant\'s share is assessed at $share.');
+      phrases.add('The value attributable to the applicant\'s share of the property is assessed at $share.');
     }
 
     final pct = _val(answers, 'et_share');
     if (pct.isNotEmpty) {
-      phrases.add('The applicant\'s share represents $pct% of the whole.');
+      phrases.add('The applicant\'s share represents $pct% of the whole property.');
     }
 
     final afterWorks = _val(answers, 'et_after_works_value');
     if (afterWorks.isNotEmpty) {
-      phrases.add('The estimated value after completion of the recommended works is $afterWorks.');
+      phrases.add('The estimated market value of the property following satisfactory completion '
+          'of the recommended essential repair works is $afterWorks.');
     }
 
     final retention = _val(answers, 'et_retention');
     if (retention.isNotEmpty) {
-      phrases.add('A retention of $retention is recommended to cover the cost of essential repair works identified in this report.');
+      phrases.add('A retention of $retention is recommended to cover the cost of the essential repair works '
+          'identified in this report. The retention should not be released until satisfactory completion '
+          'of the works has been confirmed.');
     }
 
     if (_isChecked(answers['cb_suitable_security'])) {
-      phrases.add('In my opinion, the property provides suitable security for mortgage purposes.');
+      phrases.add('In my opinion, the property provides suitable security for mortgage lending purposes, '
+          'subject to the conditions and recommendations set out in this report.');
     }
 
     return phrases;

@@ -201,9 +201,13 @@ void main() {
         ),
         const ExportConfig(),
       );
-      final fields = doc.sections.first.screens.first.fields;
-      expect(fields, hasLength(1));
-      expect(fields.first.fieldId, 'data_field');
+      final screen = doc.sections.first.screens.first;
+      // With includePhrases, fields are converted to fallback phrases —
+      // the label field should still be skipped (only 'Data' appears).
+      // NarrativeEnhancer may prepend a section preamble, so check any phrase.
+      expect(screen.phrases, isNotEmpty);
+      expect(screen.phrases.any((p) => p.contains('Data')), isTrue);
+      expect(screen.phrases.any((p) => p.contains('Section Heading')), isFalse);
     });
 
     test('formats checkbox values as Yes/No', () {
@@ -231,14 +235,28 @@ void main() {
         ],
       );
 
+      // With includePhrases: false, the raw field table is used.
       final doc = builder.build(
+        _makeRawData(
+          tree: treeWithCheckbox,
+          allAnswers: {'screen1': {'cb_field': 'true'}},
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+      expect(doc.sections.first.screens.first.fields.first.displayValue, 'Yes');
+
+      // With includePhrases: true (default), checkbox is converted to a
+      // fallback phrase listing the checked label.
+      final doc2 = builder.build(
         _makeRawData(
           tree: treeWithCheckbox,
           allAnswers: {'screen1': {'cb_field': 'true'}},
         ),
         const ExportConfig(),
       );
-      expect(doc.sections.first.screens.first.fields.first.displayValue, 'Yes');
+      final screen = doc2.sections.first.screens.first;
+      expect(screen.phrases, contains(contains('Has Damp')));
+      expect(screen.fields, isEmpty);
     });
 
     test('skips group-type nodes', () {
@@ -374,15 +392,30 @@ void main() {
     });
 
     test('totalFields and totalScreens computed correctly', () {
+      // With includePhrases: false, fields stay as raw fields.
       final doc = builder.build(
+        _makeRawData(allAnswers: {
+          'activity_roof': {'field_condition': '2', 'field_notes': 'Notes'},
+          'activity_walls': {'wall_condition': '3'},
+        }),
+        const ExportConfig(includePhrases: false),
+      );
+      expect(doc.totalScreens, 2);
+      expect(doc.totalFields, 3);
+
+      // With includePhrases: true (default), fields are converted to fallback
+      // phrases when no phrase engine handler exists, so totalFields is 0.
+      final doc2 = builder.build(
         _makeRawData(allAnswers: {
           'activity_roof': {'field_condition': '2', 'field_notes': 'Notes'},
           'activity_walls': {'wall_condition': '3'},
         }),
         const ExportConfig(),
       );
-      expect(doc.totalScreens, 2);
-      expect(doc.totalFields, 3);
+      expect(doc2.totalScreens, 2);
+      expect(doc2.totalFields, 0);
+      // Data is now in phrases instead
+      expect(doc2.sections.first.screens.first.phrases, isNotEmpty);
     });
   });
 }

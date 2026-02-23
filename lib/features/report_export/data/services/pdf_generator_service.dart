@@ -331,7 +331,7 @@ class PdfGeneratorService {
             child: pw.Text(section.title,
                 style: pw.TextStyle(
                     fontWeight: pw.FontWeight.bold,
-                    fontSize: 12,
+                    fontSize: 14,
                     color: PdfColors.white)),
           ));
           widgets.add(pw.SizedBox(height: 8));
@@ -355,7 +355,7 @@ class PdfGeneratorService {
                   border: pw.Border(left: pw.BorderSide(color: accent, width: 3)),
                 ),
                 child: pw.Text(screen.title,
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 10)),
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 12)),
               ));
               widgets.add(pw.SizedBox(height: 4));
 
@@ -364,7 +364,7 @@ class PdfGeneratorService {
                   widgets.add(pw.Padding(
                     padding: const pw.EdgeInsets.fromLTRB(8, 2, 8, 2),
                     child: pw.Text(sanitize(phrase),
-                        style: const pw.TextStyle(fontSize: 8.5, lineSpacing: 2)),
+                        style: const pw.TextStyle(fontSize: 11, lineSpacing: 2.5)),
                   ));
                 }
               }
@@ -375,7 +375,7 @@ class PdfGeneratorService {
                 child: pw.Text(screen.title,
                     style: pw.TextStyle(
                         fontWeight: pw.FontWeight.bold,
-                        fontSize: 9,
+                        fontSize: 11,
                         color: PdfSharedUtils.headerDark)),
               ));
 
@@ -387,7 +387,7 @@ class PdfGeneratorService {
                   widgets.add(pw.Padding(
                     padding: const pw.EdgeInsets.fromLTRB(8, 2, 8, 2),
                     child: pw.Text(sanitize(phrase),
-                        style: const pw.TextStyle(fontSize: 8.5, lineSpacing: 2)),
+                        style: const pw.TextStyle(fontSize: 11, lineSpacing: 2.5)),
                   ));
                 }
               } else if (screen.fields.isNotEmpty) {
@@ -410,14 +410,14 @@ class PdfGeneratorService {
                       pw.TextSpan(
                         text: "Surveyor's Note: ",
                         style: pw.TextStyle(
-                          fontSize: 8,
+                          fontSize: 10,
                           fontWeight: pw.FontWeight.bold,
                         ),
                       ),
                       pw.TextSpan(
                         text: sanitize(screen.userNote),
                         style: pw.TextStyle(
-                          fontSize: 8,
+                          fontSize: 10,
                           fontStyle: pw.FontStyle.italic,
                         ),
                       ),
@@ -674,7 +674,7 @@ class PdfGeneratorService {
               pw.Padding(
                 padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 child: pw.Text(sanitize(fields[i].label),
-                    style: pw.TextStyle(fontSize: 9, fontWeight: pw.FontWeight.bold)),
+                    style: pw.TextStyle(fontSize: 10, fontWeight: pw.FontWeight.bold)),
               ),
               pw.Padding(
                 padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 5),
@@ -683,7 +683,7 @@ class PdfGeneratorService {
                       ? '-'
                       : sanitize(fields[i].displayValue),
                   style: pw.TextStyle(
-                    fontSize: 9,
+                    fontSize: 10,
                     color: _fieldValueColor(fields[i]),
                   ),
                 ),
