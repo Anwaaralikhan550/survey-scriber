@@ -2036,7 +2036,7 @@ class SyncManager {
         await surveysDao.deleteSurvey(entityId);
       case 'SECTION':
         await answersDao.deleteAnswersForSection(entityId);
-        await sectionsDao.deleteSectionsForSurvey(entityId);
+        await sectionsDao.deleteSection(entityId);
       case 'ANSWER':
         // No direct delete-by-id on answersDao, use survey-level
         // Answer deletes from server are rare; log and skip for now
