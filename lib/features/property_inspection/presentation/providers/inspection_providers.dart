@@ -224,7 +224,9 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
   void setAnswer(String fieldKey, String value) {
     final updated = Map<String, String>.from(state.answers);
     updated[fieldKey] = value;
-    state = state.copyWith(answers: updated);
+    // Clear previously-loaded phrase text so the live preview regenerates
+    // from the phrase engine with the latest answers (e.g. price-in-words).
+    state = state.copyWith(answers: updated, clearEditedPhraseText: true);
   }
 
   void setUserNote(String note) {
