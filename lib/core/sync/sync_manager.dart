@@ -132,6 +132,8 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
       _refreshStats(),
     ]);
 
+    if (!mounted) return;
+
     state = state.copyWith(isConnected: isConnected);
 
     // Pull server changes on startup (if online) — non-blocking
@@ -200,6 +202,8 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
     _autoSyncTimer = Timer.periodic(
       const Duration(seconds: 30),
       (_) {
+        if (!mounted) return;
+
         // Skip entirely if user is not authenticated
         final authState = _ref.read(authNotifierProvider);
         if (authState.status == AuthStatus.unauthenticated) return;

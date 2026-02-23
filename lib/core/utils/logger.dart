@@ -15,6 +15,10 @@ final appLogger = Logger(
   filter: _DebugOnlyFilter(),
   printer: PrettyPrinter(
     dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
+    // Disable box drawing — each log was 5-6 lines with borders, flooding
+    // the ADB logcat buffer and causing "Lost connection to device" crashes.
+    noBoxingByDefault: true,
+    methodCount: 0,
   ),
   output: ConsoleOutput(),
 );
