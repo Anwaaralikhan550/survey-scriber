@@ -27,6 +27,7 @@ class ConfigRepositoryImpl implements ConfigRepository {
   // In-memory cache for faster access
   FullConfigModel? _cachedConfig;
   int? _cachedVersion;
+  DateTime? _lastRefreshCheck;
 
   @override
   Future<ConfigVersion> getConfigVersion() async => _remoteDataSource.getConfigVersion();
@@ -48,8 +49,22 @@ class ConfigRepositoryImpl implements ConfigRepository {
       );
     }
 
-    // Check if we need to refresh from server
-    final shouldRefresh = forceRefresh || await needsRefresh();
+    // Check if we need to refresh from server.
+    // Skip the API call if we checked recently (< 60s) — prevents
+    // rapid-fire config/version requests from startup + timer + resume.
+    bool shouldRefresh;
+    if (forceRefresh) {
+      shouldRefresh = true;
+    } else {
+      final now = DateTime.now();
+      if (_lastRefreshCheck != null &&
+          now.difference(_lastRefreshCheck!) < const Duration(seconds: 60)) {
+        shouldRefresh = false;
+      } else {
+        _lastRefreshCheck = now;
+        shouldRefresh = await needsRefresh();
+      }
+    }
 
     if (!shouldRefresh) {
       // Try loading from local storage

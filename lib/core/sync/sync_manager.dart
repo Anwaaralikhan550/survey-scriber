@@ -219,11 +219,22 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
   /// If so, refresh the config so admin changes propagate to all devices.
   ///
   /// Public so it can be called from lifecycle observers (e.g. on app resume).
-  /// Guarded against concurrent execution to prevent duplicate API calls.
+  /// Guarded against concurrent execution AND a 90-second cooldown to prevent
+  /// rapid-fire API calls (timer + lifecycle resume can overlap).
   bool _isCheckingConfig = false;
+  DateTime? _lastConfigCheck;
+  static const _configCheckCooldown = Duration(seconds: 90);
 
   Future<void> checkConfigVersion() async {
     if (_isCheckingConfig) return;
+
+    // Cooldown: skip if last check was less than 90 seconds ago
+    final now = DateTime.now();
+    if (_lastConfigCheck != null &&
+        now.difference(_lastConfigCheck!) < _configCheckCooldown) {
+      return;
+    }
+
     _isCheckingConfig = true;
     try {
       final configNotifier = _ref.read(configProvider.notifier);
@@ -233,6 +244,7 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
       // Only check if config was previously loaded
       if (!configState.isLoaded) return;
 
+      _lastConfigCheck = now;
       final needsRefresh = await repo.needsRefresh();
       if (needsRefresh) {
         AppLogger.d('SyncManager', 'Config version changed on server, refreshing...');
