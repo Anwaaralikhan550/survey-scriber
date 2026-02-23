@@ -77,6 +77,34 @@ bool shouldShowInspectionField(
   return mode == 'hide' ? !matched : matched;
 }
 
+/// Removes label fields that have no visible interactive field after them
+/// before the next label (or end of list).
+///
+/// Works on an already-filtered list (post-[shouldShowInspectionField]) so
+/// conditional visibility is already accounted for.
+List<InspectionFieldDefinition> filterLonelyLabels(
+  List<InspectionFieldDefinition> visibleFields,
+) {
+  if (visibleFields.isEmpty) return visibleFields;
+
+  final keep = List<bool>.filled(visibleFields.length, true);
+
+  for (var i = 0; i < visibleFields.length; i++) {
+    if (visibleFields[i].type != InspectionFieldType.label) continue;
+
+    // Keep the label only if the next visible field is interactive (non-label).
+    final next = i + 1 < visibleFields.length ? visibleFields[i + 1] : null;
+    if (next == null || next.type == InspectionFieldType.label) {
+      keep[i] = false;
+    }
+  }
+
+  return [
+    for (var i = 0; i < visibleFields.length; i++)
+      if (keep[i]) visibleFields[i],
+  ];
+}
+
 class InspectionFieldInput extends StatelessWidget {
   const InspectionFieldInput({
     required this.field,

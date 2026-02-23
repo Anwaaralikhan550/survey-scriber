@@ -1,0 +1,953 @@
+{
+  "headerScreens": [
+    {
+      "section": "G",
+      "screen": "activity_services_gas_oil_main_screen",
+      "title": "Gas and Oil",
+      "inlinePosition": "header",
+      "totalFields": 15,
+      "labelCount": 13,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 11,
+      "lonelyLabels": [
+        "Other",
+        "Condition Rating",
+        "Leaning Chimney",
+        "Shared Chimney",
+        "Condition",
+        "Waterproofing",
+        "Rendering",
+        "No.of pots",
+        "Repairs",
+        "Gas and Oil",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "H",
+      "screen": "activity_grounds_other_main_screen",
+      "title": "Other",
+      "inlinePosition": "header",
+      "totalFields": 12,
+      "labelCount": 10,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 8,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Shrinkable Clay",
+        "Legal Issues",
+        "Private Road",
+        "Shared Access",
+        "Other",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_fire_places_diffrent",
+      "title": "Flues Not Inspected",
+      "inlinePosition": "header",
+      "totalFields": 7,
+      "labelCount": 6,
+      "interactiveCount": 1,
+      "lonelyLabelCount": 5,
+      "lonelyLabels": [
+        "An open fire",
+        "Gas fire",
+        "Imitation system",
+        "Wood burning stove",
+        "Electric fire"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_rainwater_goods_main_screen",
+      "title": "Rainwater Goods",
+      "inlinePosition": "header",
+      "totalFields": 18,
+      "labelCount": 8,
+      "interactiveCount": 10,
+      "lonelyLabelCount": 5,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Rainwater Goods",
+        "Not inspected",
+        "Location / Area"
+      ]
+    },
+    {
+      "section": "G",
+      "screen": "activity_services_water_heating_main_screen",
+      "title": "Water Heating",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Water Heating",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_roof_structure_main_screen",
+      "title": "Roof Structure",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Roof Structure",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_ceilings_main_screen",
+      "title": "Ceilings",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Ceilings",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_walls_and_partitions_main_screen",
+      "title": "Walls and Partitions",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Walls and Partitions",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_floors_main_screen",
+      "title": "Floors",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Floors",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_chimney_main_screen",
+      "title": "Chimney",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Chimney",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_main_walls_main_screen",
+      "title": "Main Walls",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Main Walls",
+        "Note"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_windows_main_screen",
+      "title": "Windows",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Windows",
+        "Not inspected"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_other_joinery_and_finishes_main_screen",
+      "title": "Other Joinery and Finishes",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Other Joinery and Finishes",
+        "Not inspected"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_other_main_screen",
+      "title": "Other Area",
+      "inlinePosition": "header",
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Other Area",
+        "Not inspected"
+      ]
+    },
+    {
+      "section": "H",
+      "screen": "activity_grounds_other_area_main_screen",
+      "title": "Other Area",
+      "inlinePosition": "header",
+      "totalFields": 7,
+      "labelCount": 5,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 3,
+      "lonelyLabels": [
+        "Not Inspected",
+        "Condition Rating",
+        "Other Area"
+      ]
+    },
+    {
+      "section": "G",
+      "screen": "activity_services_electricity_main_screen",
+      "title": "Electricity",
+      "inlinePosition": "header",
+      "totalFields": 9,
+      "labelCount": 6,
+      "interactiveCount": 3,
+      "lonelyLabelCount": 3,
+      "lonelyLabels": [
+        "Not Inspected",
+        "Condition Rating",
+        "Electricity"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_wood_work",
+      "title": "Wood Work",
+      "inlinePosition": "header",
+      "totalFields": 11,
+      "labelCount": 3,
+      "interactiveCount": 8,
+      "lonelyLabelCount": 2,
+      "lonelyLabels": [
+        "Woodwork",
+        "Fitted/Builtin Cupboards"
+      ]
+    }
+  ],
+  "normalScreens": [
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_floors",
+      "title": "Floors",
+      "inlinePosition": null,
+      "totalFields": 9,
+      "labelCount": 8,
+      "interactiveCount": 1,
+      "lonelyLabelCount": 7,
+      "lonelyLabels": [
+        "About Floors",
+        "Creaking",
+        "Tiles",
+        "Loose Floorboards",
+        "Timber Decay",
+        "Timber Infestation",
+        "Dampness"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_fireplaces_main_screen",
+      "title": "Fireplaces and Chimneys",
+      "inlinePosition": null,
+      "totalFields": 11,
+      "labelCount": 9,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 7,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Boiler Flue",
+        "Removed CB",
+        "Blocked Fireplace",
+        "Fire Places",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_fire_places_repair_fire_place",
+      "title": "Repair Fireplaces",
+      "inlinePosition": null,
+      "totalFields": 41,
+      "labelCount": 6,
+      "interactiveCount": 35,
+      "lonelyLabelCount": 6,
+      "lonelyLabels": [
+        "Floor Location",
+        "Fireplace Location",
+        "Defect",
+        "Floor Location",
+        "Fireplace Location",
+        "Defect"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_repair_flashing",
+      "title": "Flashing",
+      "inlinePosition": null,
+      "totalFields": 31,
+      "labelCount": 7,
+      "interactiveCount": 24,
+      "lonelyLabelCount": 6,
+      "lonelyLabels": [
+        "Chimney",
+        "Problem",
+        "Defect",
+        "Chimney",
+        "Problem",
+        "Defect"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_bathroom_fittings_extractor_fan",
+      "title": "Extractor Fan Installed",
+      "inlinePosition": null,
+      "totalFields": 48,
+      "labelCount": 9,
+      "interactiveCount": 39,
+      "lonelyLabelCount": 5,
+      "lonelyLabels": [
+        "Fan Location",
+        "Tested",
+        "Defect",
+        "Where is there no extractor fan?",
+        "Where is fan broken/not working?"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_fire_places_repair_removed_cb",
+      "title": "Removed CB",
+      "inlinePosition": null,
+      "totalFields": 35,
+      "labelCount": 5,
+      "interactiveCount": 30,
+      "lonelyLabelCount": 5,
+      "lonelyLabels": [
+        "Floor Location",
+        "Chimney Location",
+        "Floor Location",
+        "Chimney Location",
+        "Adjacent construction defects"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_roof_covering_main_screen",
+      "title": "Roof Covering",
+      "inlinePosition": null,
+      "totalFields": 18,
+      "labelCount": 8,
+      "interactiveCount": 10,
+      "lonelyLabelCount": 5,
+      "lonelyLabels": [
+        "Location / Area",
+        "Not Inspected",
+        "Repairs",
+        "Condition Rating",
+        "Roof Covering"
+      ]
+    },
+    {
+      "section": "H",
+      "screen": "activity_grounds_garage_main_screen",
+      "title": "Garage",
+      "inlinePosition": null,
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Garage",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "G",
+      "screen": "activity_services_drainage",
+      "title": "Drainage",
+      "inlinePosition": null,
+      "totalFields": 26,
+      "labelCount": 5,
+      "interactiveCount": 21,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Drainage chamber inspection",
+        "Location",
+        "Visible Only",
+        "Made Of"
+      ]
+    },
+    {
+      "section": "G",
+      "screen": "activity_services_heating_main_screen",
+      "title": "Heating",
+      "inlinePosition": null,
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Heating",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "G",
+      "screen": "activity_services_drainage_main_screen",
+      "title": "Drainage",
+      "inlinePosition": null,
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Drainage",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_ceilings_repairs_ceilings",
+      "title": "Repair Ceilings",
+      "inlinePosition": null,
+      "totalFields": 33,
+      "labelCount": 4,
+      "interactiveCount": 29,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Ceilings Location",
+        "Defect",
+        "Ceilings Location",
+        "Defect"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_wap_repair_wall_repair",
+      "title": "Wall Repair",
+      "inlinePosition": null,
+      "totalFields": 33,
+      "labelCount": 4,
+      "interactiveCount": 29,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Location",
+        "Defect",
+        "Location",
+        "Defect"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_floors_repair_floor_repair",
+      "title": "Floor Repair",
+      "inlinePosition": null,
+      "totalFields": 36,
+      "labelCount": 4,
+      "interactiveCount": 32,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Location",
+        "Defect",
+        "Location",
+        "Defect"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_built_in_fittings_repair_fittings",
+      "title": "Repair Fitting",
+      "inlinePosition": null,
+      "totalFields": 26,
+      "labelCount": 4,
+      "interactiveCount": 22,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Location",
+        "Defect",
+        "Location",
+        "Defect"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_fire_places_repair_blocked_fireplace",
+      "title": "Blocked Fireplace",
+      "inlinePosition": null,
+      "totalFields": 29,
+      "labelCount": 4,
+      "interactiveCount": 25,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Floor Location",
+        "Fireplace Location",
+        "Floor Location",
+        "Fireplace Location"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_ww_wood_work_repair",
+      "title": "WoodWork Repair",
+      "inlinePosition": null,
+      "totalFields": 32,
+      "labelCount": 4,
+      "interactiveCount": 28,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Location",
+        "Defect",
+        "Location",
+        "Defect"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_bathroom_fittings_repair",
+      "title": "Repairs",
+      "inlinePosition": null,
+      "totalFields": 42,
+      "labelCount": 4,
+      "interactiveCount": 38,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Location",
+        "Defect",
+        "Location",
+        "Defect"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_other_repair",
+      "title": "Repairs",
+      "inlinePosition": null,
+      "totalFields": 37,
+      "labelCount": 4,
+      "interactiveCount": 33,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "The Entry at",
+        "Defect",
+        "The Entry at",
+        "Defect"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_wap_dampness",
+      "title": "Dampness",
+      "inlinePosition": null,
+      "totalFields": 19,
+      "labelCount": 4,
+      "interactiveCount": 15,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Damp Meter Reading",
+        "e.g. lower walls in the kitchen",
+        "Cause",
+        "Caused By"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_water_tank",
+      "title": "Water tank",
+      "inlinePosition": null,
+      "totalFields": 35,
+      "labelCount": 4,
+      "interactiveCount": 31,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Water Tank Material",
+        "Location",
+        "Remove Defects",
+        "Location"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_built_in_fittings_main_screen",
+      "title": "Built In Fittings",
+      "inlinePosition": null,
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Built In Fittings",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_bathroom_fittings_main_screen",
+      "title": "Bathroom Fittings",
+      "inlinePosition": null,
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Bathroom Fitting",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_chimney_repair_flaunching",
+      "title": "Flaunching",
+      "inlinePosition": null,
+      "totalFields": 24,
+      "labelCount": 4,
+      "interactiveCount": 20,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Chimney Stack",
+        "Defect",
+        "Chimney Stack",
+        "Defect"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_rwg__repair_pipes_gutters",
+      "title": "Repairs",
+      "inlinePosition": null,
+      "totalFields": 25,
+      "labelCount": 4,
+      "interactiveCount": 21,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Item",
+        "Defect",
+        "Item",
+        "Defect"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_repair_chimney_pots",
+      "title": "Chimney Pots",
+      "inlinePosition": null,
+      "totalFields": 24,
+      "labelCount": 4,
+      "interactiveCount": 20,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Chimney Stack",
+        "Defect",
+        "Chimney Stack",
+        "Defect"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_repair_chimney_repointing",
+      "title": "Re-pointing",
+      "inlinePosition": null,
+      "totalFields": 23,
+      "labelCount": 4,
+      "interactiveCount": 19,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Chimney Stack",
+        "Defect",
+        "Chimney Stack",
+        "Defect"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_conservatory_porch_main_screen",
+      "title": "Conservatory and Porches",
+      "inlinePosition": null,
+      "totalFields": 8,
+      "labelCount": 6,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 4,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Conservatory and Porch",
+        "Not inspected"
+      ]
+    },
+    {
+      "section": "D",
+      "screen": "activity_property_location",
+      "title": "Property Location density",
+      "inlinePosition": null,
+      "totalFields": 12,
+      "labelCount": 7,
+      "interactiveCount": 5,
+      "lonelyLabelCount": 3,
+      "lonelyLabels": [
+        "Is Noisy Area?",
+        "Local Environment",
+        "Local Facilities in Area?"
+      ]
+    },
+    {
+      "section": "G",
+      "screen": "activity_services_heating_about_heating",
+      "title": "About Heating System",
+      "inlinePosition": null,
+      "totalFields": 18,
+      "labelCount": 3,
+      "interactiveCount": 15,
+      "lonelyLabelCount": 3,
+      "lonelyLabels": [
+        "Other Heating",
+        "Property heated by",
+        "Boiler Flue Connected To"
+      ]
+    },
+    {
+      "section": "G",
+      "screen": "activity_service_about_electricity",
+      "title": "Mains Electricity",
+      "inlinePosition": null,
+      "totalFields": 28,
+      "labelCount": 5,
+      "interactiveCount": 23,
+      "lonelyLabelCount": 3,
+      "lonelyLabels": [
+        "Meter location",
+        "Fuse box location",
+        "Defect"
+      ]
+    },
+    {
+      "section": "G",
+      "screen": "activity_services_water_main_screen",
+      "title": "Water",
+      "inlinePosition": null,
+      "totalFields": 7,
+      "labelCount": 5,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 3,
+      "lonelyLabels": [
+        "Water",
+        "Condition Rating",
+        "Not Inspected"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_other_communal_area",
+      "title": "Communal Area",
+      "inlinePosition": null,
+      "totalFields": 25,
+      "labelCount": 3,
+      "interactiveCount": 22,
+      "lonelyLabelCount": 3,
+      "lonelyLabels": [
+        "Not Inspected Because Of",
+        "Property comprise of",
+        "Defect Noted"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_floors_dampness",
+      "title": "Dampness",
+      "inlinePosition": null,
+      "totalFields": 18,
+      "labelCount": 3,
+      "interactiveCount": 15,
+      "lonelyLabelCount": 3,
+      "lonelyLabels": [
+        "Damp Meter Reading",
+        "Location",
+        "Caused By"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_outside_doors_main_screen",
+      "title": "Outside Doors",
+      "inlinePosition": null,
+      "totalFields": 7,
+      "labelCount": 5,
+      "interactiveCount": 2,
+      "lonelyLabelCount": 3,
+      "lonelyLabels": [
+        "Repairs",
+        "Condition Rating",
+        "Outside doors"
+      ]
+    },
+    {
+      "section": "D",
+      "screen": "activity_property_local_environment",
+      "title": "Local Environment",
+      "inlinePosition": null,
+      "totalFields": 14,
+      "labelCount": 2,
+      "interactiveCount": 12,
+      "lonelyLabelCount": 2,
+      "lonelyLabels": [
+        "Flooding",
+        "EMF"
+      ]
+    },
+    {
+      "section": "G",
+      "screen": "activity_services_main_gas",
+      "title": "Mains Gas",
+      "inlinePosition": null,
+      "totalFields": 6,
+      "labelCount": 2,
+      "interactiveCount": 4,
+      "lonelyLabelCount": 2,
+      "lonelyLabels": [
+        "Mains gas meter and control valve are located at location",
+        "Mains Gas Meter and Control valve location"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_bathroom_fittings_extractor_fan__no_extractor_fan_installed",
+      "title": "No Extractor Fan Installed",
+      "inlinePosition": null,
+      "totalFields": 11,
+      "labelCount": 3,
+      "interactiveCount": 8,
+      "lonelyLabelCount": 2,
+      "lonelyLabels": [
+        "Fan Location",
+        "Fan Location"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_inside_property_about_roof_structure",
+      "title": "About Roof structure",
+      "inlinePosition": null,
+      "totalFields": 25,
+      "labelCount": 3,
+      "interactiveCount": 22,
+      "lonelyLabelCount": 2,
+      "lonelyLabels": [
+        "Material",
+        "Defect"
+      ]
+    },
+    {
+      "section": "F",
+      "screen": "activity_in_side_property_floors_repair_uneven_floor",
+      "title": "Uneven Floor",
+      "inlinePosition": null,
+      "totalFields": 19,
+      "labelCount": 2,
+      "interactiveCount": 17,
+      "lonelyLabelCount": 2,
+      "lonelyLabels": [
+        "Location",
+        "Defect"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_repair_chimney_dish_aerial",
+      "title": "Aerial",
+      "inlinePosition": null,
+      "totalFields": 13,
+      "labelCount": 2,
+      "interactiveCount": 11,
+      "lonelyLabelCount": 2,
+      "lonelyLabels": [
+        "Defect",
+        "Defect"
+      ]
+    },
+    {
+      "section": "E",
+      "screen": "activity_outside_property_repair_chimney_dish_aerial__satellite",
+      "title": "Satellite",
+      "inlinePosition": null,
+      "totalFields": 12,
+      "labelCount": 2,
+      "interactiveCount": 10,
+      "lonelyLabelCount": 2,
+      "lonelyLabels": [
+        "Defect",
+        "Defect"
+      ]
+    }
+  ],
+  "totalLonelyLabels": 265,
+  "totalScreensAffected": 87
+}

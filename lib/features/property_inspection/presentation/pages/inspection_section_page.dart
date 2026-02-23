@@ -677,8 +677,8 @@ class _InlineHeaderForm extends ConsumerWidget {
     }
 
     final answers = state.answers;
-    final visibleFields =
-        screen.fields.where((field) => shouldShowInspectionField(field, answers)).toList();
+    final visibleFields = filterLonelyLabels(
+        screen.fields.where((field) => shouldShowInspectionField(field, answers)).toList());
     final enginePhrases = phraseEngine?.buildPhrases(screen.id, answers) ?? const <String>[];
     final fieldPhrases = FieldPhraseProcessor.buildFieldPhrases(screen.fields, answers);
     final phrases = [...enginePhrases, ...fieldPhrases];

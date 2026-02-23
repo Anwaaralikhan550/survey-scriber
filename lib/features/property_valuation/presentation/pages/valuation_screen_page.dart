@@ -57,8 +57,8 @@ class ValuationScreenPage extends ConsumerWidget {
     }
 
     final screen = state.screenDefinition!;
-    final visibleFields =
-        screen.fields.where((field) => shouldShowInspectionField(field, state.answers)).toList();
+    final visibleFields = filterLonelyLabels(
+        screen.fields.where((field) => shouldShowInspectionField(field, state.answers)).toList());
     final isFloorPlanScan = screenId == 'scan_floor_plan';
     final floorPlanSectionId = 'valuation_v2_floor_plan_$surveyId';
 
