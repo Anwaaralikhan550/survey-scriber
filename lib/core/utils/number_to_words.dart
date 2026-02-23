@@ -43,7 +43,7 @@ String numberToWords(int number) {
     'ninety',
   ];
 
-  const scales = ['', 'thousand', 'million', 'billion'];
+  const scales = ['', 'thousand', 'million', 'billion', 'trillion'];
 
   String twoDigits(int v) {
     if (v < 20) return ones[v];
@@ -67,7 +67,8 @@ String numberToWords(int number) {
     final chunk = n % 1000;
     if (chunk != 0) {
       final words = threeDigits(chunk);
-      final scale = scales[scaleIndex];
+      // Guard against numbers exceeding known scales
+      final scale = scaleIndex < scales.length ? scales[scaleIndex] : '';
       groups.add(scale.isEmpty ? words : '$words $scale');
     }
     n ~/= 1000;
