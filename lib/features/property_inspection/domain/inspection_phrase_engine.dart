@@ -11433,7 +11433,12 @@ class InspectionPhraseEngine {
           resolved = resolved.replaceAll('{OVERALL_OPINION_PURCHASE_PRICE}', commaFormatted);
           resolved = resolved.replaceAll('{OVERALL_OPINION_PURCHASE_PRICE_WORD}', priceFormatted);
         }
-        return _split(resolved);
+        final phrases = _split(resolved);
+        // If template had no price placeholders, append price separately.
+        if (priceFormatted.isNotEmpty && !resolved.contains(priceFormatted)) {
+          phrases.add('Purchase price: $priceFormatted.');
+        }
+        return phrases;
       }
       final phrases = <String>['Overall opinion: reasonable.'];
       if (priceFormatted.isNotEmpty) phrases.add('Purchase price: $priceFormatted.');
@@ -11441,17 +11446,18 @@ class InspectionPhraseEngine {
     }
     if (opinion.toLowerCase().contains('repair')) {
       final template = _phraseTexts['{OVERALL_OPINION_REASONABLE_WITH_REPAIR}'] ?? '';
+      final phrases = <String>[];
       if (template.isNotEmpty) {
         var resolved = _normalize(template);
-        if (amount.isNotEmpty) {
-          resolved = resolved.replaceAll('{REPAIR_AMOUNT}', priceFormatted);
-        }
-        if (potential.isNotEmpty) {
-          resolved = resolved.replaceAll('{REPAIR_POTENTIAL}', potential.toLowerCase());
-        }
-        return _split(resolved);
+        // Try placeholder substitution first
+        resolved = resolved.replaceAll('{REPAIR_AMOUNT}', priceFormatted);
+        resolved = resolved.replaceAll('{REPAIR_POTENTIAL}', potential.isNotEmpty ? potential.toLowerCase() : '');
+        phrases.addAll(_split(resolved));
+      } else {
+        phrases.add('Overall opinion: reasonable with repairs.');
       }
-      final phrases = <String>['Overall opinion: reasonable with repairs.'];
+      // Always append price/potential as separate lines so they show
+      // even when the template has no placeholders for them.
       if (priceFormatted.isNotEmpty) phrases.add('Estimated repair cost: $priceFormatted.');
       if (potential.isNotEmpty) phrases.add('Potential: ${potential.toLowerCase()}.');
       return phrases;
