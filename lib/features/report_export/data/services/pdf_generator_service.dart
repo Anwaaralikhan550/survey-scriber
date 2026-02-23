@@ -344,48 +344,54 @@ class PdfGeneratorService {
           }
 
           for (final screen in section.screens) {
-            // Screen title
-            widgets.add(pw.Container(
-              width: double.infinity,
-              padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: pw.BoxDecoration(
-                color: PdfColor.fromHex('#F5F5F5'),
-                border: pw.Border(left: pw.BorderSide(color: accent, width: 3)),
-              ),
-              child: pw.Text(screen.title,
-                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 9.5)),
-            ));
-            widgets.add(pw.SizedBox(height: 3));
-
-            // Fields table with alternating rows
-            if (screen.fields.isNotEmpty) {
-              widgets.add(_fieldsTable(screen.fields));
-            }
-
-            // Phrases — each in its own Container for page-safe rendering
-            if (screen.phrases.isNotEmpty && _config.includePhrases) {
+            if (screen.isMergedGroup) {
+              // ── Merged group (e.g. "E1 Chimney") — accent sub-header
+              //    with flowing paragraphs ─────────────────────────────
+              widgets.add(pw.Container(
+                width: double.infinity,
+                padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: pw.BoxDecoration(
+                  color: PdfColor.fromHex('#F5F5F5'),
+                  border: pw.Border(left: pw.BorderSide(color: accent, width: 3)),
+                ),
+                child: pw.Text(screen.title,
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 10)),
+              ));
               widgets.add(pw.SizedBox(height: 4));
-              final phraseDecor = pw.BoxDecoration(
-                color: PdfColor.fromHex('#FFFDE7'),
-              );
-              for (var pi = 0; pi < screen.phrases.length; pi++) {
-                widgets.add(pw.Container(
-                  width: double.infinity,
-                  padding: pw.EdgeInsets.fromLTRB(
-                    8, pi == 0 ? 8 : 2, 8, pi == screen.phrases.length - 1 ? 8 : 2,
-                  ),
-                  decoration: phraseDecor,
-                  child: pw.Row(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    children: [
-                      pw.Text('\u2022 ', style: const pw.TextStyle(fontSize: 8)),
-                      pw.Expanded(
-                        child: pw.Text(sanitize(screen.phrases[pi]),
-                            style: const pw.TextStyle(fontSize: 8)),
-                      ),
-                    ],
-                  ),
-                ));
+
+              if (screen.phrases.isNotEmpty && _config.includePhrases) {
+                for (final phrase in screen.phrases) {
+                  widgets.add(pw.Padding(
+                    padding: const pw.EdgeInsets.fromLTRB(8, 2, 8, 2),
+                    child: pw.Text(sanitize(phrase),
+                        style: const pw.TextStyle(fontSize: 8.5, lineSpacing: 2)),
+                  ));
+                }
+              }
+            } else {
+              // ── Individual screen — lighter heading ─────────────────
+              widgets.add(pw.Padding(
+                padding: const pw.EdgeInsets.only(left: 4, top: 4, bottom: 2),
+                child: pw.Text(screen.title,
+                    style: pw.TextStyle(
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 9,
+                        color: PdfSharedUtils.headerDark)),
+              ));
+
+              // Suppress field table when phrases exist — phrases already
+              // express the data in professional surveyor language.
+              if (screen.phrases.isNotEmpty && _config.includePhrases) {
+                widgets.add(pw.SizedBox(height: 2));
+                for (final phrase in screen.phrases) {
+                  widgets.add(pw.Padding(
+                    padding: const pw.EdgeInsets.fromLTRB(8, 2, 8, 2),
+                    child: pw.Text(sanitize(phrase),
+                        style: const pw.TextStyle(fontSize: 8.5, lineSpacing: 2)),
+                  ));
+                }
+              } else if (screen.fields.isNotEmpty) {
+                widgets.add(_fieldsTable(screen.fields));
               }
             }
 

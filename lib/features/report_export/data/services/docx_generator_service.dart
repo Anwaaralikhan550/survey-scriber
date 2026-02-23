@@ -262,17 +262,27 @@ class DocxGeneratorService {
       }
 
       for (final screen in section.screens) {
-        _writeHeading(buf, screen.title, 'Heading2');
+        if (screen.isMergedGroup) {
+          // ── Merged group (e.g. "E1 Chimney") — flowing paragraphs ──
+          _writeHeading(buf, screen.title, 'Heading2');
 
-        // Fields as table
-        if (screen.fields.isNotEmpty) {
-          _writeFieldsTable(buf, screen.fields);
-        }
+          if (screen.phrases.isNotEmpty && _config.includePhrases) {
+            for (final phrase in screen.phrases) {
+              _writeParagraph(buf, phrase);
+            }
+          }
+        } else {
+          // ── Individual screen ──
+          _writeHeading(buf, screen.title, 'Heading3');
 
-        // Phrases
-        if (screen.phrases.isNotEmpty && _config.includePhrases) {
-          for (final phrase in screen.phrases) {
-            _writeBulletParagraph(buf, phrase);
+          // Suppress field table when phrases exist — the phrases already
+          // express the data in professional surveyor language.
+          if (screen.phrases.isNotEmpty && _config.includePhrases) {
+            for (final phrase in screen.phrases) {
+              _writeParagraph(buf, phrase);
+            }
+          } else if (screen.fields.isNotEmpty) {
+            _writeFieldsTable(buf, screen.fields);
           }
         }
 

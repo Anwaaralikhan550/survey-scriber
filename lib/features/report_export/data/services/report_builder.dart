@@ -74,6 +74,10 @@ class ReportBuilder {
     );
   }
 
+  /// Pattern matching numbered sub-section groups like "E1 Chimney",
+  /// "F3 Walls and Partitions", "G6 Drainage", "H2 Other".
+  static final _numberedGroupPattern = RegExp(r'^[A-Z]\d');
+
   ReportSection? _buildSection(
     InspectionSectionDefinition sectionDef,
     V2RawReportData rawData,
@@ -83,49 +87,119 @@ class ReportBuilder {
   ) {
     final screens = <ReportScreen>[];
 
+    // ── Build parent→children map for group hierarchy ──────────────
+    final childrenOf = <String, List<InspectionNodeDefinition>>{};
     for (final node in sectionDef.nodes) {
-      // Skip group nodes — only screen nodes contain field data
-      if (node.type != InspectionNodeType.screen) continue;
+      final pid = node.parentId ?? '_root_';
+      childrenOf.putIfAbsent(pid, () => []).add(node);
+    }
 
-      final answers = rawData.allAnswers[node.id] ?? {};
-      final isCompleted = rawData.screenStates[node.id] ?? false;
+    // ── Identify top-level groups with numbered titles (E1, F2…) ──
+    final topLevelGroups = sectionDef.nodes
+        .where((n) =>
+            n.type == InspectionNodeType.group &&
+            n.parentId == null &&
+            _numberedGroupPattern.hasMatch(n.title))
+        .toList();
 
-      final fields = _buildFields(node, answers);
-      // M1 fix: prefer persisted phrases from the DB (what the user saw
-      // on-screen) over live engine regeneration.  Fall back to live only
-      // when the DB column is null (legacy surveys pre-schema v18).
-      final List<String> phrases;
-      if (!config.includePhrases) {
-        phrases = const [];
-      } else {
-        final persisted = rawData.persistedPhrases[node.id];
-        if (persisted != null) {
-          phrases = persisted;
-        } else {
-          final enginePhrases = _buildPhrases(node.id, answers, isInspection);
-          final fieldPhrases =
-              FieldPhraseProcessor.buildFieldPhrases(node.fields, answers);
-          phrases = [...enginePhrases, ...fieldPhrases];
+    // Track which screens are consumed by merged groups so we don't
+    // duplicate them as standalone entries.
+    final consumedScreenIds = <String>{};
+
+    if (topLevelGroups.isNotEmpty) {
+      // Walk the original node list to preserve tree ordering — we emit
+      // a merged group entry at the position of the first node that
+      // belongs to each top-level group, and standalone screens at their
+      // own positions.
+      final topGroupIds = topLevelGroups.map((g) => g.id).toSet();
+
+      // Pre-compute descendant screen IDs per top-level group.
+      final groupDescendants = <String, List<InspectionNodeDefinition>>{};
+      for (final group in topLevelGroups) {
+        groupDescendants[group.id] =
+            _collectDescendantScreens(group.id, childrenOf);
+        for (final s in groupDescendants[group.id]!) {
+          consumedScreenIds.add(s.id);
         }
       }
 
-      final userNote = rawData.persistedUserNotes[node.id] ?? '';
+      // Track which groups have already been emitted.
+      final emittedGroups = <String>{};
 
-      // Skip screens with no data unless config says otherwise
-      final hasData = fields.any((f) => f.displayValue.isNotEmpty) ||
-          phrases.isNotEmpty ||
-          userNote.isNotEmpty;
-      if (!hasData && !config.includeEmptyScreens) continue;
+      // Pre-build node lookup for parent-chain walking.
+      final nodeMap = <String, InspectionNodeDefinition>{
+        for (final n in sectionDef.nodes) n.id: n,
+      };
 
-      screens.add(ReportScreen(
-        screenId: node.id,
-        title: node.title,
-        fields: fields,
-        phrases: phrases,
-        userNote: userNote,
-        parentId: node.parentId,
-        isCompleted: isCompleted,
-      ));
+      for (final node in sectionDef.nodes) {
+        // ── If this node belongs to a top-level group, emit the merged
+        //    group (once) at the position of the first encountered node.
+        final ownerGroupId = _findOwnerGroup(node, nodeMap, topGroupIds);
+        if (ownerGroupId != null) {
+          if (emittedGroups.contains(ownerGroupId)) continue;
+          emittedGroups.add(ownerGroupId);
+
+          final group =
+              topLevelGroups.firstWhere((g) => g.id == ownerGroupId);
+          final descendants = groupDescendants[ownerGroupId]!;
+
+          final mergedPhrases = <String>[];
+          final mergedNotes = <String>[];
+          final mergedFields = <ReportField>[];
+
+          for (final screen in descendants) {
+            if (config.includePhrases) {
+              mergedPhrases.addAll(
+                  _phrasesForScreen(screen, rawData, isInspection));
+            }
+            final note = rawData.persistedUserNotes[screen.id] ?? '';
+            if (note.isNotEmpty) mergedNotes.add(note);
+
+            // Collect fields as safety-net fallback in case all
+            // phrase handlers return empty for this group.
+            final answers = rawData.allAnswers[screen.id] ?? {};
+            final fields = _buildFields(screen, answers);
+            if (fields.any((f) => f.displayValue.isNotEmpty)) {
+              mergedFields.addAll(fields);
+            }
+          }
+
+          // Skip truly empty groups (no phrases, no fields, no notes)
+          if (mergedPhrases.isEmpty &&
+              mergedFields.isEmpty &&
+              mergedNotes.isEmpty &&
+              !config.includeEmptyScreens) {
+            continue;
+          }
+
+          // When phrases exist, use them (professional style).
+          // When phrases are empty but fields have data, fall back to
+          // field table so no user data is silently dropped.
+          screens.add(ReportScreen(
+            screenId: group.id,
+            title: group.title,
+            fields: mergedPhrases.isNotEmpty ? const [] : mergedFields,
+            phrases: mergedPhrases,
+            userNote: mergedNotes.join('\n'),
+            isMergedGroup: true,
+          ));
+          continue;
+        }
+
+        // ── Standalone screen (not consumed by any group) ─────────
+        if (node.type != InspectionNodeType.screen) continue;
+        if (consumedScreenIds.contains(node.id)) continue;
+
+        final entry = _buildScreenEntry(node, rawData, config, isInspection);
+        if (entry != null) screens.add(entry);
+      }
+    } else {
+      // ── No numbered groups in this section — flat mode (unchanged) ──
+      for (final node in sectionDef.nodes) {
+        if (node.type != InspectionNodeType.screen) continue;
+        final entry = _buildScreenEntry(node, rawData, config, isInspection);
+        if (entry != null) screens.add(entry);
+      }
     }
 
     if (screens.isEmpty && !config.includeEmptyScreens) return null;
@@ -137,6 +211,99 @@ class ReportBuilder {
       screens: screens,
       displayOrder: displayOrder,
     );
+  }
+
+  /// Build a single [ReportScreen] for a standalone (non-grouped) screen node.
+  ReportScreen? _buildScreenEntry(
+    InspectionNodeDefinition node,
+    V2RawReportData rawData,
+    ExportConfig config,
+    bool isInspection,
+  ) {
+    final answers = rawData.allAnswers[node.id] ?? {};
+    final isCompleted = rawData.screenStates[node.id] ?? false;
+
+    final fields = _buildFields(node, answers);
+    final List<String> phrases;
+    if (!config.includePhrases) {
+      phrases = const [];
+    } else {
+      phrases = _phrasesForScreen(node, rawData, isInspection);
+    }
+
+    final userNote = rawData.persistedUserNotes[node.id] ?? '';
+
+    final hasData = fields.any((f) => f.displayValue.isNotEmpty) ||
+        phrases.isNotEmpty ||
+        userNote.isNotEmpty;
+    if (!hasData && !config.includeEmptyScreens) return null;
+
+    return ReportScreen(
+      screenId: node.id,
+      title: node.title,
+      fields: fields,
+      phrases: phrases,
+      userNote: userNote,
+      parentId: node.parentId,
+      isCompleted: isCompleted,
+    );
+  }
+
+  /// Get phrases for a screen — prefers persisted DB phrases, falls back to
+  /// live engine regeneration.
+  List<String> _phrasesForScreen(
+    InspectionNodeDefinition node,
+    V2RawReportData rawData,
+    bool isInspection,
+  ) {
+    final persisted = rawData.persistedPhrases[node.id];
+    if (persisted != null) return persisted;
+
+    final answers = rawData.allAnswers[node.id] ?? {};
+    final enginePhrases = _buildPhrases(node.id, answers, isInspection);
+    final fieldPhrases =
+        FieldPhraseProcessor.buildFieldPhrases(node.fields, answers);
+    return [...enginePhrases, ...fieldPhrases];
+  }
+
+  /// Recursively collect all descendant screen nodes under [groupId].
+  List<InspectionNodeDefinition> _collectDescendantScreens(
+    String groupId,
+    Map<String, List<InspectionNodeDefinition>> childrenOf,
+  ) {
+    final result = <InspectionNodeDefinition>[];
+    final children = childrenOf[groupId] ?? const [];
+    for (final child in children) {
+      if (child.type == InspectionNodeType.screen) {
+        result.add(child);
+      } else if (child.type == InspectionNodeType.group) {
+        result.addAll(_collectDescendantScreens(child.id, childrenOf));
+      }
+    }
+    return result;
+  }
+
+  /// Walk up the parentId chain to find which top-level group (if any) owns
+  /// this node.  Returns the group ID or null if the node is standalone.
+  String? _findOwnerGroup(
+    InspectionNodeDefinition node,
+    Map<String, InspectionNodeDefinition> nodeMap,
+    Set<String> topGroupIds,
+  ) {
+    // Direct match — the node IS a top-level group
+    if (topGroupIds.contains(node.id)) return node.id;
+
+    // Walk up parentId chain
+    var current = node;
+    for (var depth = 0; depth < 10; depth++) {
+      final pid = current.parentId;
+      if (pid == null) return null;
+      if (topGroupIds.contains(pid)) return pid;
+      final parent = nodeMap[pid];
+      if (parent == null) return null;
+      current = parent;
+    }
+    return null;
   }
 
   List<ReportField> _buildFields(

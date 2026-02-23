@@ -140,6 +140,7 @@ class ReportScreen {
     this.userNote = '',
     this.parentId,
     this.isCompleted = false,
+    this.isMergedGroup = false,
   });
 
   final String screenId;
@@ -149,6 +150,12 @@ class ReportScreen {
   final String userNote;
   final String? parentId;
   final bool isCompleted;
+
+  /// True when this entry represents a merged group (e.g. "E1 Chimney") whose
+  /// phrases come from multiple descendant screens.  Renderers use this to
+  /// output flowing paragraphs instead of bullet points and to suppress the
+  /// field data table.
+  final bool isMergedGroup;
 
   bool get hasData =>
       fields.any((f) => f.displayValue.isNotEmpty) ||
