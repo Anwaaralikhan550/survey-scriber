@@ -3309,11 +3309,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_4",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_garage",
               "label": "Garage",
               "type": "label"
@@ -3322,16 +3317,6 @@
               "id": "label_describe_4",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected",
@@ -3347,6 +3332,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_4",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ]
         },
@@ -3861,11 +3861,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_5",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_shrinkable_clay",
               "label": "Shrinkable Clay",
               "type": "label"
@@ -3896,16 +3891,6 @@
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
-            },
-            {
               "id": "label_not_inspected_3",
               "label": "Not Inspected",
               "type": "label"
@@ -3919,6 +3904,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_5",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -4700,11 +4700,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_23",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_other_area_2",
               "label": "Other Area",
               "type": "label"
@@ -4712,6 +4707,21 @@
             {
               "id": "label_describe_23",
               "label": "Describe:",
+              "type": "label"
+            },
+            {
+              "id": "label_note_23",
+              "label": "Note",
+              "type": "label"
+            },
+            {
+              "id": "ar_etNote",
+              "label": "Note",
+              "type": "text"
+            },
+            {
+              "id": "label_condition_rating_23",
+              "label": "Condition Rating",
               "type": "label"
             },
             {
@@ -4723,16 +4733,6 @@
                 "2",
                 "3"
               ]
-            },
-            {
-              "id": "label_note_23",
-              "label": "Note",
-              "type": "label"
-            },
-            {
-              "id": "ar_etNote",
-              "label": "Note",
-              "type": "text"
             }
           ],
           "inlinePosition": "header"
@@ -6848,16 +6848,6 @@
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
-            },
-            {
               "id": "label_not_inspected_19",
               "label": "Not Inspected",
               "type": "label"
@@ -6873,11 +6863,6 @@
               "type": "text"
             },
             {
-              "id": "label_condition_rating_3",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_electricity",
               "label": "Electricity",
               "type": "label"
@@ -6891,6 +6876,21 @@
               "id": "cb_dated_electrical_system",
               "label": "Dated electrical system",
               "type": "checkbox"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
+            },
+            {
+              "id": "label_condition_rating_3",
+              "label": "Condition Rating",
+              "type": "label"
             }
           ],
           "inlinePosition": "header"
@@ -7399,11 +7399,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_19",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_leaning_chimney",
               "label": "Leaning Chimney",
               "type": "label"
@@ -7449,16 +7444,6 @@
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
-            },
-            {
               "id": "label_not_inspected_20",
               "label": "Not Inspected",
               "type": "label"
@@ -7472,6 +7457,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_19",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -7874,24 +7874,9 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_22",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_describe_22",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_23",
@@ -7907,6 +7892,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_22",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ]
         },
@@ -8210,11 +8210,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_20",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_heating",
               "label": "Heating",
               "type": "label"
@@ -8223,16 +8218,6 @@
               "id": "label_describe_20",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_21",
@@ -8248,6 +8233,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_20",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ]
         },
@@ -8409,11 +8409,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_21",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_water_heating",
               "label": "Water Heating",
               "type": "label"
@@ -8422,16 +8417,6 @@
               "id": "label_describe_21",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_22",
@@ -8447,6 +8432,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_21",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -8485,11 +8485,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_18",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_drainage",
               "label": "Drainage",
               "type": "label"
@@ -8498,16 +8493,6 @@
               "id": "label_describe_18",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_18",
@@ -8523,6 +8508,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_18",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ]
         },
@@ -8601,6 +8601,11 @@
           "order": 0,
           "fields": [
             {
+              "id": "ar_etNote",
+              "label": "Notes",
+              "type": "text"
+            },
+            {
               "id": "android_material_design_spinner4",
               "label": "Condition Rating",
               "type": "dropdown",
@@ -8609,11 +8614,6 @@
                 "2",
                 "3"
               ]
-            },
-            {
-              "id": "ar_etNote",
-              "label": "Notes",
-              "type": "text"
             }
           ]
         },
@@ -18528,11 +18528,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_11",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_roof_structure",
               "label": "Roof Structure",
               "type": "label"
@@ -18541,16 +18536,6 @@
               "id": "label_describe_11",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_9",
@@ -18566,6 +18551,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_11",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -18583,11 +18583,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_8",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_ceilings",
               "label": "Ceilings",
               "type": "label"
@@ -18596,16 +18591,6 @@
               "id": "label_describe_8",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_6",
@@ -18621,6 +18606,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_8",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -18638,11 +18638,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_12",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_walls_and_partitions",
               "label": "Walls and Partitions",
               "type": "label"
@@ -18651,16 +18646,6 @@
               "id": "label_describe_12",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_10",
@@ -18676,6 +18661,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_12",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -18693,11 +18693,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_10",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_floors",
               "label": "Floors",
               "type": "label"
@@ -18706,16 +18701,6 @@
               "id": "label_describe_10",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_8",
@@ -18731,6 +18716,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_10",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -18745,11 +18745,6 @@
             {
               "id": "label_repairs_6",
               "label": "Repairs",
-              "type": "label"
-            },
-            {
-              "id": "label_condition_rating_9",
-              "label": "Condition Rating",
               "type": "label"
             },
             {
@@ -18778,16 +18773,6 @@
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
-            },
-            {
               "id": "label_not_inspected_7",
               "label": "Not Inspected",
               "type": "label"
@@ -18801,6 +18786,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_9",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ]
         },
@@ -18817,11 +18817,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_7",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_built_in_fittings",
               "label": "Built In Fittings",
               "type": "label"
@@ -18830,16 +18825,6 @@
               "id": "label_describe_7",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_5",
@@ -18855,6 +18840,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_7",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ]
         },
@@ -18866,6 +18866,11 @@
           "order": 0,
           "fields": [
             {
+              "id": "ar_etNote",
+              "label": "Notes",
+              "type": "text"
+            },
+            {
               "id": "android_material_design_spinner4",
               "label": "Condition Rating",
               "type": "dropdown",
@@ -18874,11 +18879,6 @@
                 "2",
                 "3"
               ]
-            },
-            {
-              "id": "ar_etNote",
-              "label": "Notes",
-              "type": "text"
             }
           ]
         },
@@ -18895,11 +18895,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_6",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_bathroom_fitting",
               "label": "Bathroom Fitting",
               "type": "label"
@@ -18908,16 +18903,6 @@
               "id": "label_describe_6",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_4",
@@ -18933,6 +18918,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_6",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ]
         },
@@ -18944,6 +18944,11 @@
           "order": -1,
           "fields": [
             {
+              "id": "ar_etNote",
+              "label": "Notes",
+              "type": "text"
+            },
+            {
               "id": "android_material_design_spinner4",
               "label": "Condition Rating",
               "type": "dropdown",
@@ -18952,11 +18957,6 @@
                 "2",
                 "3"
               ]
-            },
-            {
-              "id": "ar_etNote",
-              "label": "Notes",
-              "type": "text"
             }
           ],
           "inlinePosition": "header"
@@ -20379,6 +20379,11 @@
           "order": -1,
           "fields": [
             {
+              "id": "ar_etNote",
+              "label": "Notes",
+              "type": "text"
+            },
+            {
               "id": "android_material_design_spinner4",
               "label": "Condition Rating",
               "type": "dropdown",
@@ -20387,11 +20392,6 @@
                 "2",
                 "3"
               ]
-            },
-            {
-              "id": "ar_etNote",
-              "label": "Notes",
-              "type": "text"
             }
           ],
           "inlinePosition": "header"
@@ -37260,11 +37260,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_13",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_chimney",
               "label": "Chimney",
               "type": "label"
@@ -37273,17 +37268,6 @@
               "id": "label_describe_13",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "Not inspected",
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_11",
@@ -37299,6 +37283,22 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_13",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "Not inspected",
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -37421,11 +37421,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_24",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_main_walls",
               "label": "Main Walls",
               "type": "label"
@@ -37434,16 +37429,6 @@
               "id": "label_describe_24",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_note_24",
@@ -37459,6 +37444,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_24",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -37476,11 +37476,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_17",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_windows",
               "label": "Windows",
               "type": "label"
@@ -37489,16 +37484,6 @@
               "id": "label_describe_17",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_17",
@@ -37514,6 +37499,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_17",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -37531,11 +37531,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_25",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_outside_doors",
               "label": "Outside doors",
               "type": "label"
@@ -37543,6 +37538,21 @@
             {
               "id": "label_describe_25",
               "label": "Describe:",
+              "type": "label"
+            },
+            {
+              "id": "label_note_25",
+              "label": "Note",
+              "type": "label"
+            },
+            {
+              "id": "ar_etNote",
+              "label": "Note",
+              "type": "text"
+            },
+            {
+              "id": "label_condition_rating_25",
+              "label": "Condition Rating",
               "type": "label"
             },
             {
@@ -37554,16 +37564,6 @@
                 "2",
                 "3"
               ]
-            },
-            {
-              "id": "label_note_25",
-              "label": "Note",
-              "type": "label"
-            },
-            {
-              "id": "ar_etNote",
-              "label": "Note",
-              "type": "text"
             }
           ]
         },
@@ -37580,11 +37580,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_14",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_conservatory_and_porch",
               "label": "Conservatory and Porch",
               "type": "label"
@@ -37593,16 +37588,6 @@
               "id": "label_describe_14",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_12",
@@ -37618,6 +37603,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_14",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ]
         },
@@ -37634,11 +37634,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_15",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_other_joinery_and_finishes",
               "label": "Other Joinery and Finishes",
               "type": "label"
@@ -37647,16 +37642,6 @@
               "id": "label_describe_15",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_13",
@@ -37672,6 +37657,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_15",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -37689,11 +37689,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_16",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_other_area",
               "label": "Other Area",
               "type": "label"
@@ -37702,16 +37697,6 @@
               "id": "label_describe_16",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
             },
             {
               "id": "label_not_inspected_14",
@@ -37727,6 +37712,21 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "label_condition_rating_16",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
             }
           ],
           "inlinePosition": "header"
@@ -38072,11 +38072,6 @@
               "type": "label"
             },
             {
-              "id": "label_condition_rating_2",
-              "label": "Condition Rating",
-              "type": "label"
-            },
-            {
               "id": "label_roof_covering",
               "label": "Roof Covering",
               "type": "label"
@@ -38087,16 +38082,6 @@
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner4",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
-            },
-            {
               "id": "actv_assumed_type",
               "label": "Assumed Type",
               "type": "dropdown",
@@ -38105,6 +38090,21 @@
                 "Flat",
                 "Mansard",
                 "Other"
+              ]
+            },
+            {
+              "id": "label_condition_rating_2",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
               ]
             }
           ]
