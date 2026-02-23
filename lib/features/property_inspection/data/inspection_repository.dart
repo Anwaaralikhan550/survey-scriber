@@ -12,7 +12,7 @@ class InspectionRepository extends BaseSurveyRepository {
           treeType: 'inspection_v2',
           // Bump this when the bundled JSON is updated so stale OTA
           // caches are cleared and the new asset takes effect.
-          bundledTreeVersion: 6,
+          bundledTreeVersion: 7,
         );
 
   /// Returns condition ratings grouped by section key.

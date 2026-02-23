@@ -11418,19 +11418,33 @@ class InspectionPhraseEngine {
   List<String> _overallOpinion(Map<String, String> answers) {
     final opinion = (answers['android_material_design_spinner5'] ?? '').trim();
     if (opinion.isEmpty) return const [];
+    final amount = (answers['android_material_design_spinner'] ?? '').trim();
+    final potential = (answers['android_material_design_spinner2'] ?? '').trim();
+    final priceFormatted = amount.isNotEmpty ? formatPriceWithWords(amount) : '';
+
     if (opinion.toLowerCase() == 'reasonable') {
       final template = _phraseTexts['{OVERALL_OPINION_REASONABLE}'] ?? '';
-      if (template.isNotEmpty) return _split(_normalize(template));
-      return ['Overall opinion: reasonable.'];
+      if (template.isNotEmpty) {
+        var resolved = _normalize(template);
+        if (amount.isNotEmpty) {
+          final cleaned = amount.replaceAll(RegExp(r'[£,\s]'), '');
+          final parsed = int.tryParse(cleaned);
+          final commaFormatted = parsed != null ? '£${_addCommasHelper(parsed)}' : '£$amount';
+          resolved = resolved.replaceAll('{OVERALL_OPINION_PURCHASE_PRICE}', commaFormatted);
+          resolved = resolved.replaceAll('{OVERALL_OPINION_PURCHASE_PRICE_WORD}', priceFormatted);
+        }
+        return _split(resolved);
+      }
+      final phrases = <String>['Overall opinion: reasonable.'];
+      if (priceFormatted.isNotEmpty) phrases.add('Purchase price: $priceFormatted.');
+      return phrases;
     }
     if (opinion.toLowerCase().contains('repair')) {
-      final amount = (answers['android_material_design_spinner'] ?? '').trim();
-      final potential = (answers['android_material_design_spinner2'] ?? '').trim();
       final template = _phraseTexts['{OVERALL_OPINION_REASONABLE_WITH_REPAIR}'] ?? '';
       if (template.isNotEmpty) {
         var resolved = _normalize(template);
         if (amount.isNotEmpty) {
-          resolved = resolved.replaceAll('{REPAIR_AMOUNT}', formatPriceWithWords(amount));
+          resolved = resolved.replaceAll('{REPAIR_AMOUNT}', priceFormatted);
         }
         if (potential.isNotEmpty) {
           resolved = resolved.replaceAll('{REPAIR_POTENTIAL}', potential.toLowerCase());
@@ -11438,11 +11452,23 @@ class InspectionPhraseEngine {
         return _split(resolved);
       }
       final phrases = <String>['Overall opinion: reasonable with repairs.'];
-      if (amount.isNotEmpty) phrases.add('Estimated repair cost: ${formatPriceWithWords(amount)}.');
+      if (priceFormatted.isNotEmpty) phrases.add('Estimated repair cost: $priceFormatted.');
       if (potential.isNotEmpty) phrases.add('Potential: ${potential.toLowerCase()}.');
       return phrases;
     }
     return ['Overall opinion: ${opinion.toLowerCase()}.'];
+  }
+
+  static String _addCommasHelper(int value) {
+    final digits = value.abs().toString();
+    final buffer = StringBuffer();
+    var count = 0;
+    for (var i = digits.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) buffer.write(',');
+      buffer.write(digits[i]);
+      count++;
+    }
+    return buffer.toString().split('').reversed.join();
   }
 
   List<String>? _matchDynamicSectionE(String screenId, Map<String, String> answers) {
