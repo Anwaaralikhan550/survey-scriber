@@ -199,6 +199,35 @@ class PdfSharedUtils {
     };
   }
 
+  // ── Per-section colors ──────────────────────────────────────────────
+  /// Inspection section key → color for section headers, TOC circles, etc.
+  static const sectionColors = <String, PdfColor>{
+    'D': PdfColor(0.08, 0.40, 0.75), // Blue
+    'E': PdfColor(0.18, 0.49, 0.20), // Green
+    'F': PdfColor(0.61, 0.15, 0.69), // Purple
+    'G': PdfColor(1.0, 0.44, 0.0), // Orange
+    'H': PdfColor(0.0, 0.47, 0.42), // Teal
+    'R': PdfColor(0.40, 0.23, 0.72), // Deep Purple
+    'A': PdfColor(0.22, 0.28, 0.31), // Blue Grey
+    'I': PdfColor(0.76, 0.09, 0.36), // Pink
+    'J': PdfColor(0.83, 0.18, 0.18), // Red
+    'K': PdfColor(0.27, 0.35, 0.39), // Slate
+  };
+
+  /// Valuation section key → color.
+  static const valuationSectionColors = <String, PdfColor>{
+    'valuation_details': PdfColor(0.0, 0.30, 0.25), // Deep Teal
+    'property_assessment': PdfColor(0.08, 0.40, 0.75), // Blue
+    'property_inspection': PdfColor(0.18, 0.49, 0.20), // Green
+    'condition_restrictions': PdfColor(0.83, 0.18, 0.18), // Red
+    'valuation_completion': PdfColor(0.40, 0.23, 0.72), // Deep Purple
+  };
+
+  /// Look up the color for a section key, falling back to [fallback].
+  static PdfColor sectionColor(String key, PdfColor fallback) {
+    return sectionColors[key] ?? valuationSectionColors[key] ?? fallback;
+  }
+
   // ── Safety limits ──────────────────────────────────────────────────
   static const int maxTotalPages = 1000;
   static const int maxFieldTextLength = 50000;

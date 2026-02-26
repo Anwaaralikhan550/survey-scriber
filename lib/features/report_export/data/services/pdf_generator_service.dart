@@ -320,12 +320,14 @@ class PdfGeneratorService {
             widgets.add(pw.SizedBox(height: 10));
           }
 
-          // Section header bar
+          // Section header bar (per-section color)
+          final sectionClr =
+              PdfSharedUtils.sectionColor(section.key, accent);
           widgets.add(pw.Container(
             width: double.infinity,
             padding: const pw.EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: pw.BoxDecoration(
-              color: accent,
+              color: sectionClr,
               borderRadius: pw.BorderRadius.circular(3),
             ),
             child: pw.Text(section.title,
@@ -352,7 +354,7 @@ class PdfGeneratorService {
                 padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: pw.BoxDecoration(
                   color: PdfColor.fromHex('#F5F5F5'),
-                  border: pw.Border(left: pw.BorderSide(color: accent, width: 3)),
+                  border: pw.Border(left: pw.BorderSide(color: sectionClr, width: 3)),
                 ),
                 child: pw.Text(screen.title,
                     style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 12)),
@@ -508,66 +510,151 @@ class PdfGeneratorService {
     PdfColor accent,
   ) {
     final meta = doc.surveyMeta;
-    final reportLabel = doc.reportType == ReportType.inspection
-        ? 'Inspection Report'
+    final isInspection = doc.reportType == ReportType.inspection;
+    final mainTitle = isInspection
+        ? 'RICS HomeBuyer Report'
         : 'Valuation Report';
+    final subtitle = isInspection
+        ? 'Level 2 Home Survey'
+        : 'Mortgage Valuation Report';
+    final ricsLine = isInspection
+        ? 'Prepared in accordance with RICS Home Survey Standard (4th Edition)'
+        : 'Prepared in accordance with RICS Valuation Standards';
+
+    // Build the property details table rows.
+    final tableRows = <_CoverTableEntry>[
+      _CoverTableEntry('Property Address', meta.address ?? meta.title),
+      if (meta.clientName != null)
+        _CoverTableEntry('Client Name', meta.clientName!),
+      if (meta.jobRef != null)
+        _CoverTableEntry('Job Reference', meta.jobRef!),
+      if (meta.inspectionDate != null)
+        _CoverTableEntry(
+            'Inspection Date', dateFormat.format(meta.inspectionDate!)),
+      _CoverTableEntry(
+          'Report Generated', DateFormat('d MMMM yyyy, h:mm a').format(doc.generatedAt)),
+      if (meta.surveyDuration != null)
+        _CoverTableEntry('Survey Duration', _formatDuration(meta.surveyDuration!)),
+    ];
 
     return pw.Page(
       pageFormat: _config.pageFormat,
+      margin: const pw.EdgeInsets.all(40),
       build: (context) {
         return pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          crossAxisAlignment: pw.CrossAxisAlignment.center,
           children: [
+            // ── Full-width accent banner ───────────────────────────
             pw.Container(
               width: double.infinity,
-              height: 8,
-              color: accent,
+              height: 80,
+              decoration: pw.BoxDecoration(
+                color: accent,
+                borderRadius: pw.BorderRadius.circular(4),
+              ),
+              alignment: pw.Alignment.center,
+              child: pw.Column(
+                mainAxisAlignment: pw.MainAxisAlignment.center,
+                children: [
+                  pw.Text(mainTitle,
+                      style: pw.TextStyle(
+                          fontSize: 28,
+                          fontWeight: pw.FontWeight.bold,
+                          color: PdfColors.white)),
+                  pw.SizedBox(height: 4),
+                  pw.Text(subtitle,
+                      style: const pw.TextStyle(
+                          fontSize: 14, color: PdfColors.white)),
+                  pw.SizedBox(height: 4),
+                  pw.Text(ricsLine,
+                      style: pw.TextStyle(
+                          fontSize: 11,
+                          fontWeight: pw.FontWeight.bold,
+                          color: PdfColors.white)),
+                ],
+              ),
             ),
-            pw.SizedBox(height: 60),
-            pw.Text(reportLabel,
-                style: pw.TextStyle(fontSize: 28, fontWeight: pw.FontWeight.bold, color: accent)),
-            pw.SizedBox(height: 12),
-            pw.Text(meta.title, style: const pw.TextStyle(fontSize: 18)),
-            pw.SizedBox(height: 8),
-            if (meta.address != null && meta.address!.isNotEmpty)
+
+            pw.SizedBox(height: 30),
+
+            // ── Property name ──────────────────────────────────────
+            pw.Text(meta.title,
+                textAlign: pw.TextAlign.center,
+                style: pw.TextStyle(
+                    fontSize: 18,
+                    fontWeight: pw.FontWeight.bold,
+                    color: PdfSharedUtils.headerDark)),
+            if (meta.address != null && meta.address != meta.title) ...[
+              pw.SizedBox(height: 6),
               pw.Text(meta.address!,
-                  style: const pw.TextStyle(fontSize: 12, color: PdfSharedUtils.headerDark)),
-            pw.SizedBox(height: 40),
-            pw.Divider(color: accent, thickness: 1),
-            pw.SizedBox(height: 16),
-            _coverInfoRow('Date', dateFormat.format(doc.generatedAt)),
-            if (meta.jobRef != null) _coverInfoRow('Reference', meta.jobRef!),
-            if (meta.clientName != null) _coverInfoRow('Client', meta.clientName!),
-            _coverInfoRow('Prepared by', _config.companyName),
-            if (meta.startedAt != null)
-              _coverInfoRow('Started', DateFormat('d MMM yyyy HH:mm').format(meta.startedAt!)),
-            if (meta.completedAt != null)
-              _coverInfoRow('Completed', DateFormat('d MMM yyyy HH:mm').format(meta.completedAt!)),
-            if (meta.surveyDuration != null)
-              _coverInfoRow('Duration', _formatDuration(meta.surveyDuration!)),
-            pw.Spacer(),
-            pw.Container(
-              width: double.infinity,
-              height: 4,
-              color: accent,
+                  textAlign: pw.TextAlign.center,
+                  style: const pw.TextStyle(
+                      fontSize: 12, color: PdfSharedUtils.grey)),
+            ],
+
+            pw.SizedBox(height: 30),
+
+            // ── Property details table ─────────────────────────────
+            pw.Table(
+              border: pw.TableBorder.all(
+                  color: PdfSharedUtils.lightGrey, width: 0.5),
+              columnWidths: {
+                0: const pw.FlexColumnWidth(2),
+                1: const pw.FlexColumnWidth(3),
+              },
+              children: [
+                for (var i = 0; i < tableRows.length; i++)
+                  pw.TableRow(
+                    decoration: pw.BoxDecoration(
+                      color: i.isEven
+                          ? PdfSharedUtils.lightGrey
+                          : PdfColors.white,
+                    ),
+                    children: [
+                      pw.Padding(
+                        padding: const pw.EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 7),
+                        child: pw.Text(tableRows[i].label,
+                            style: pw.TextStyle(
+                                fontSize: 10,
+                                fontWeight: pw.FontWeight.bold,
+                                color: PdfSharedUtils.grey)),
+                      ),
+                      pw.Padding(
+                        padding: const pw.EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 7),
+                        child: pw.Text(tableRows[i].value,
+                            style: const pw.TextStyle(
+                                fontSize: 10,
+                                color: PdfSharedUtils.textDark)),
+                      ),
+                    ],
+                  ),
+              ],
             ),
+
+            pw.Spacer(),
+
+            // ── Bottom disclaimer ──────────────────────────────────
+            pw.Text(
+              'This report is for the sole use of the named client and should '
+              'not be relied upon by any third party.',
+              textAlign: pw.TextAlign.center,
+              style: pw.TextStyle(
+                  fontSize: 8,
+                  fontStyle: pw.FontStyle.italic,
+                  color: PdfSharedUtils.grey),
+            ),
+            pw.SizedBox(height: 10),
+            pw.Text('SurveyScriber Professional Report',
+                textAlign: pw.TextAlign.center,
+                style: pw.TextStyle(
+                    fontSize: 9,
+                    fontWeight: pw.FontWeight.bold,
+                    color: accent)),
           ],
         );
       },
-    );
-  }
-
-  pw.Widget _coverInfoRow(String label, String value) {
-    return pw.Padding(
-      padding: const pw.EdgeInsets.only(bottom: 6),
-      child: pw.Row(children: [
-        pw.SizedBox(
-          width: 100,
-          child: pw.Text(label,
-              style: pw.TextStyle(fontSize: 10, fontWeight: pw.FontWeight.bold)),
-        ),
-        pw.Text(value, style: const pw.TextStyle(fontSize: 10)),
-      ]),
     );
   }
 
@@ -594,7 +681,8 @@ class PdfGeneratorService {
                   width: 24,
                   height: 24,
                   decoration: pw.BoxDecoration(
-                    color: accent,
+                    color: PdfSharedUtils.sectionColor(
+                        doc.sections[i].key, accent),
                     borderRadius: pw.BorderRadius.circular(12),
                   ),
                   child: pw.Center(
@@ -620,6 +708,9 @@ class PdfGeneratorService {
   }
 
   pw.Widget _pageHeader(ReportDocument doc, PdfColor accent) {
+    final reportLabel = doc.reportType == ReportType.inspection
+        ? 'RICS HomeBuyer Report'
+        : 'RICS Property Valuation';
     return pw.Container(
       margin: const pw.EdgeInsets.only(bottom: 8),
       padding: const pw.EdgeInsets.only(bottom: 4),
@@ -629,10 +720,20 @@ class PdfGeneratorService {
       child: pw.Row(
         mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
         children: [
-          pw.Text(doc.surveyMeta.title,
-              style: const pw.TextStyle(fontSize: 8, color: PdfSharedUtils.headerDark)),
+          pw.Text(reportLabel,
+              style: pw.TextStyle(
+                  fontSize: 8,
+                  fontWeight: pw.FontWeight.bold,
+                  color: accent)),
+          pw.Expanded(
+            child: pw.Text(doc.surveyMeta.title,
+                textAlign: pw.TextAlign.center,
+                style: const pw.TextStyle(
+                    fontSize: 8, color: PdfSharedUtils.headerDark)),
+          ),
           pw.Text(_config.companyName,
-              style: const pw.TextStyle(fontSize: 8, color: PdfSharedUtils.headerDark)),
+              style: const pw.TextStyle(
+                  fontSize: 8, color: PdfSharedUtils.headerDark)),
         ],
       ),
     );
@@ -1031,4 +1132,11 @@ class PdfGeneratorService {
       message: stage,
     ));
   }
+}
+
+/// Label–value pair for the cover page property details table.
+class _CoverTableEntry {
+  const _CoverTableEntry(this.label, this.value);
+  final String label;
+  final String value;
 }
