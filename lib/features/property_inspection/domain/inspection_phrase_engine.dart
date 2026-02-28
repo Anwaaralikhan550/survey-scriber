@@ -10586,38 +10586,41 @@ class InspectionPhraseEngine {
     final types = <String>[];
     if (_isChecked(answers['ch1'])) types.add('flat');
     if (_isChecked(answers['ch2'])) types.add('pitched');
-    final builtWith = <String>[];
-    if (_isChecked(answers['ch3'])) builtWith.add('factory made trusses');
-    if (_isChecked(answers['ch4'])) builtWith.add('traditional cut timber construction');
-    if (_isChecked(answers['ch5'])) {
-      final other = (answers['etBuiltWithOther'] ?? '').trim();
-      builtWith.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    final covering = <String>[];
-    if (_isChecked(answers['ch6'])) covering.add('tiles');
-    if (_isChecked(answers['ch7'])) covering.add('sheets');
-    if (_isChecked(answers['ch8'])) covering.add('concrete');
-    if (_isChecked(answers['ch9'])) covering.add('clay');
-    if (_isChecked(answers['ch10'])) covering.add('natural');
-    if (_isChecked(answers['ch11'])) covering.add('composite');
-    if (_isChecked(answers['ch12'])) covering.add('mineral felt');
-    if (_isChecked(answers['ch13'])) covering.add('rubber');
-    if (_isChecked(answers['ch14'])) covering.add('fiberglass');
-    if (_isChecked(answers['ch15'])) covering.add('single ply membrane');
+    final roofMaterial = <String>[];
+    if (_isChecked(answers['ch8'])) roofMaterial.add('concrete');
+    if (_isChecked(answers['ch9'])) roofMaterial.add('clay');
+    if (_isChecked(answers['ch10'])) roofMaterial.add('natural');
+    if (_isChecked(answers['ch11'])) roofMaterial.add('composite');
+    if (_isChecked(answers['ch12'])) roofMaterial.add('mineral felt');
+    if (_isChecked(answers['ch13'])) roofMaterial.add('rubber');
+    if (_isChecked(answers['ch14'])) roofMaterial.add('fiberglass');
+    if (_isChecked(answers['ch15'])) roofMaterial.add('single ply membrane');
+    if (_isChecked(answers['ch_plastic'])) roofMaterial.add('plastic');
+    if (_isChecked(answers['ch_asphalt'])) roofMaterial.add('asphalt');
+    if (_isChecked(answers['ch_polycarbonate'])) roofMaterial.add('polycarbonate');
     if (_isChecked(answers['ch16'])) {
       final other = (answers['etCoveredWithOther'] ?? '').trim();
-      covering.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      roofMaterial.add(other.isNotEmpty ? other.toLowerCase() : 'other');
     }
-    if (types.isEmpty && builtWith.isEmpty && covering.isEmpty) return const [];
+    final coverType = <String>[];
+    if (_isChecked(answers['ch6'])) coverType.add('tiles');
+    if (_isChecked(answers['ch7'])) coverType.add('sheets');
+    if (_isChecked(answers['ch_slates'])) coverType.add('slates');
+    if (_isChecked(answers['ch_coatings'])) coverType.add('coatings');
+    if (_isChecked(answers['ch17'])) {
+      final other = (answers['etCoveredTypeOther'] ?? '').trim();
+      coverType.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+    }
+    if (types.isEmpty && roofMaterial.isEmpty && coverType.isEmpty) return const [];
     final phrases = <String>[];
     if (types.isNotEmpty) {
       phrases.add('Roof type: ${_toWords(types)}.');
     }
-    if (builtWith.isNotEmpty) {
-      phrases.add('Built with: ${_toWords(builtWith)}.');
+    if (roofMaterial.isNotEmpty) {
+      phrases.add('Roof material: ${_toWords(roofMaterial)}.');
     }
-    if (covering.isNotEmpty) {
-      phrases.add('Covered with: ${_toWords(covering)}.');
+    if (coverType.isNotEmpty) {
+      phrases.add('Cover type: ${_toWords(coverType)}.');
     }
     return phrases;
   }
@@ -10642,7 +10645,17 @@ class InspectionPhraseEngine {
     if (status.contains('not extended')) {
       return _resolve('{D_PRO_EXTENDED_STATUS_NOT_EXTENDED}');
     }
-    final location = (answers['android_material_design_spinner3'] ?? '').trim();
+    final locations = <String>[];
+    if (_isChecked(answers['ch1'])) locations.add('front');
+    if (_isChecked(answers['ch2'])) locations.add('side');
+    if (_isChecked(answers['ch3'])) locations.add('rear');
+    if (_isChecked(answers['ch4'])) {
+      final other = (answers['etFloodingOther'] ?? '').trim();
+      locations.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+    }
+    final location = locations.isNotEmpty
+        ? _toWords(locations)
+        : (answers['android_material_design_spinner3'] ?? '').trim();
     final year = (answers['textView3'] ?? '').trim();
     if (status == 'known') {
       final template = _phraseTexts['{D_PRO_EXTENDED_STATUS_KNOWN}'] ?? '';
@@ -10693,16 +10706,36 @@ class InspectionPhraseEngine {
       final other = (answers['etCladdingFinishesOther'] ?? '').trim();
       cladding.add(other.isNotEmpty ? other.toLowerCase() : 'other');
     }
-    if (wallTypes.isEmpty && finishes.isEmpty && cladding.isEmpty) return const [];
+    final renderedArea = (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
+    final renderedQuality = (answers['android_material_design_spinner2'] ?? '').trim().toLowerCase();
+    final claddingArea = (answers['android_material_design_spinner4'] ?? '').trim().toLowerCase();
+    if (wallTypes.isEmpty &&
+        finishes.isEmpty &&
+        cladding.isEmpty &&
+        renderedArea.isEmpty &&
+        renderedQuality.isEmpty &&
+        claddingArea.isEmpty) {
+      return const [];
+    }
     final phrases = <String>[];
     if (wallTypes.isNotEmpty) {
       phrases.add('Extension walls: ${_toWords(wallTypes)}.');
     }
-    if (finishes.isNotEmpty) {
-      phrases.add('Finishes: ${_toWords(finishes)}.');
+    if (finishes.isNotEmpty || renderedArea.isNotEmpty || renderedQuality.isNotEmpty) {
+      final header = renderedArea.isNotEmpty
+          ? 'Rendered ($renderedArea${renderedQuality.isNotEmpty ? ', $renderedQuality' : ''})'
+          : (renderedQuality.isNotEmpty ? 'Rendered quality: $renderedQuality' : 'Finishes');
+      if (finishes.isNotEmpty) {
+        phrases.add('$header: ${_toWords(finishes)}.');
+      } else {
+        phrases.add('$header.');
+      }
     }
     if (cladding.isNotEmpty) {
-      phrases.add('Cladding: ${_toWords(cladding)}.');
+      final header = claddingArea.isNotEmpty ? 'Cladding ($claddingArea)' : 'Cladding';
+      phrases.add('$header: ${_toWords(cladding)}.');
+    } else if (claddingArea.isNotEmpty) {
+      phrases.add('Cladding area: $claddingArea.');
     }
     return phrases;
   }
@@ -10800,13 +10833,23 @@ class InspectionPhraseEngine {
   }
 
   List<String> _propertyFlatInfo(Map<String, String> answers) {
-    final onFloor = (answers['android_material_design_spinner'] ?? '').trim();
+    String pickValue(String dropdownId, String otherId) {
+      final dropdown = (answers[dropdownId] ?? '').trim();
+      if (dropdown.toLowerCase() == 'other') {
+        final other = (answers[otherId] ?? '').trim();
+        return other.isNotEmpty ? other : dropdown;
+      }
+      if (dropdown.isNotEmpty) return dropdown;
+      return (answers[otherId] ?? '').trim();
+    }
+
+    final onFloor = pickValue('android_material_design_spinner', 'etPropertyOnTheFloor');
     if (onFloor.isEmpty) return const [];
     final template = _phraseTexts['{D_FLAT_INFORMATION}'] ?? '';
     if (template.isEmpty) return const [];
-    final noOfStorey = (answers['android_material_design_spinner2'] ?? '').trim();
-    final accessVia = (answers['android_material_design_spinner3'] ?? '').trim();
-    final accessElevation = (answers['android_material_design_spinner4'] ?? '').trim();
+    final noOfStorey = pickValue('android_material_design_spinner2', 'etNoOFStorey');
+    final accessVia = pickValue('android_material_design_spinner3', 'etAccessVia');
+    final accessElevation = pickValue('android_material_design_spinner4', 'etAccesElevation');
     final resolved = _normalize(template)
         .replaceAll('{FLAT_INFO_PRO_ON_FLOOR}', onFloor.toLowerCase())
         .replaceAll('{FLAT_INFO_PRO_NO_OF_STOREY}', noOfStorey.isNotEmpty ? noOfStorey : '...')
@@ -11051,15 +11094,8 @@ class InspectionPhraseEngine {
       final other = (answers['etCoveredWithOther'] ?? '').trim();
       types.add(other.isNotEmpty ? other.toLowerCase() : 'other');
     }
-    final partition = (answers['android_material_design_spinner'] ?? '').trim();
-    final phrases = <String>[];
-    if (types.isNotEmpty) {
-      phrases.add('Internal walls: ${_toWords(types)}.');
-    }
-    if (partition.isNotEmpty) {
-      phrases.add('Partition type: ${partition.toLowerCase()}.');
-    }
-    return phrases;
+    if (types.isEmpty) return const [];
+    return ['Internal walls: ${_toWords(types)}.'];
   }
 
   // Section D: Listed Building

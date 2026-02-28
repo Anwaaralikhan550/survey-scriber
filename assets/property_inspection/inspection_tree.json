@@ -1538,7 +1538,10 @@
             {
               "id": "etPropertyOnTheFloor",
               "label": "What floor is the property",
-              "type": "text"
+              "type": "text",
+              "conditionalOn": "android_material_design_spinner",
+              "conditionalValue": "Other",
+              "conditionalMode": "show"
             },
             {
               "id": "android_material_design_spinner2",
@@ -1560,7 +1563,10 @@
             {
               "id": "etNoOFStorey",
               "label": "No. of Storey",
-              "type": "text"
+              "type": "text",
+              "conditionalOn": "android_material_design_spinner2",
+              "conditionalValue": "Other",
+              "conditionalMode": "show"
             },
             {
               "id": "android_material_design_spinner3",
@@ -1579,7 +1585,10 @@
             {
               "id": "etAccessVia",
               "label": "Access Via",
-              "type": "text"
+              "type": "text",
+              "conditionalOn": "android_material_design_spinner3",
+              "conditionalValue": "Other",
+              "conditionalMode": "show"
             },
             {
               "id": "android_material_design_spinner4",
@@ -1595,7 +1604,10 @@
             {
               "id": "etAccesElevation",
               "label": "Access Elevation",
-              "type": "text"
+              "type": "text",
+              "conditionalOn": "android_material_design_spinner4",
+              "conditionalValue": "Other",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -1614,20 +1626,6 @@
                 "Mainly of",
                 "Of a mixture of"
               ]
-            },
-            {
-              "id": "android_material_design_spinner2",
-              "label": "Build With",
-              "type": "dropdown",
-              "options": [
-                "Mainly of",
-                "Of a mixture of"
-              ]
-            },
-            {
-              "id": "etBuiltWithOther",
-              "label": "Build With",
-              "type": "text"
             },
             {
               "id": "label_built_with",
@@ -1892,11 +1890,6 @@
               "conditionalMode": "show"
             },
             {
-              "id": "etGlazzedTypeOther",
-              "label": "Other",
-              "type": "text"
-            },
-            {
               "id": "label_window_material",
               "label": "Frames",
               "type": "label"
@@ -1933,11 +1926,6 @@
               "conditionalOn": "ch9",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            },
-            {
-              "id": "etWindowMatirialOther",
-              "label": "Other",
-              "type": "text"
             }
           ]
         },
