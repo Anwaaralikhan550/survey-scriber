@@ -23,6 +23,21 @@ class ReportBuilder {
   final InspectionPhraseEngine? inspectionPhraseEngine;
   final ValuationPhraseEngine? valuationPhraseEngine;
 
+  // Match inspection overview ordering in app UI.
+  static const List<String> _inspectionSectionOrder = <String>[
+    'A',
+    'D',
+    'E',
+    'H',
+    'F',
+    'G',
+    'R',
+    'I',
+    'J',
+    'K',
+    'O',
+  ];
+
   ReportDocument build(
     V2RawReportData rawData,
     ExportConfig config, {
@@ -30,9 +45,14 @@ class ReportBuilder {
   }) {
     final isInspection = rawData.survey.type.isInspection;
 
+    final orderedSectionDefs = _orderedSectionsForReport(
+      rawData.tree.sections,
+      isInspection: isInspection,
+    );
+
     final sections = <ReportSection>[];
-    for (var i = 0; i < rawData.tree.sections.length; i++) {
-      final sectionDef = rawData.tree.sections[i];
+    for (var i = 0; i < orderedSectionDefs.length; i++) {
+      final sectionDef = orderedSectionDefs[i];
       final reportSection = _buildSection(
         sectionDef,
         rawData,
@@ -75,6 +95,34 @@ class ReportBuilder {
     );
   }
 
+  List<InspectionSectionDefinition> _orderedSectionsForReport(
+    List<InspectionSectionDefinition> input, {
+    required bool isInspection,
+  }) {
+    if (!isInspection) return input;
+
+    final indexByKey = <String, int>{
+      for (var i = 0; i < _inspectionSectionOrder.length; i++)
+        _inspectionSectionOrder[i]: i,
+    };
+
+    final known = <InspectionSectionDefinition>[];
+    final unknown = <InspectionSectionDefinition>[];
+    for (final section in input) {
+      if (indexByKey.containsKey(section.key)) {
+        known.add(section);
+      } else {
+        unknown.add(section);
+      }
+    }
+
+    known.sort((a, b) =>
+        indexByKey[a.key]!.compareTo(indexByKey[b.key]!));
+
+    // Keep unknown sections stable by original tree order and append them.
+    return [...known, ...unknown];
+  }
+
   /// Pattern matching numbered sub-section groups like "E1 Chimney",
   /// "F3 Walls and Partitions", "G6 Drainage", "H2 Other".
   static final _numberedGroupPattern = RegExp(r'^[A-Z]\d');
@@ -100,6 +148,17 @@ class ReportBuilder {
         groupId == 'group_construction_2' || groupTitle == 'construction';
 
     return sectionKey == 'D' && isConstructionGroup;
+  }
+
+  bool _isSectionDConstructionGroup(
+    InspectionSectionDefinition sectionDef,
+    InspectionNodeDefinition group,
+  ) {
+    final sectionKey = sectionDef.key.trim().toUpperCase();
+    final groupId = group.id.trim().toLowerCase();
+    final groupTitle = group.title.trim().toLowerCase();
+    return sectionKey == 'D' &&
+        (groupId == 'group_construction_2' || groupTitle == 'construction');
   }
 
   ReportSection? _buildSection(
@@ -157,12 +216,19 @@ class ReportBuilder {
         //    group (once) at the position of the first encountered node.
         final ownerGroupId = _findOwnerGroup(node, nodeMap, topGroupIds);
         if (ownerGroupId != null) {
+          // Emit merged groups at their own node position (same ordering as
+          // the section UI), not at the first descendant screen position.
+          if (node.id != ownerGroupId) {
+            continue;
+          }
           if (emittedGroups.contains(ownerGroupId)) continue;
           emittedGroups.add(ownerGroupId);
 
           final group =
               topLevelGroups.firstWhere((g) => g.id == ownerGroupId);
           final descendants = groupDescendants[ownerGroupId]!;
+          final isLegacyConstructionSummary =
+              _isSectionDConstructionGroup(sectionDef, group);
 
           final mergedPhrases = <String>[];
           final mergedNotes = <String>[];
@@ -179,13 +245,21 @@ class ReportBuilder {
               final screenPhrases =
                   _phrasesForScreen(screen, rawData, isInspection);
               if (screenPhrases.isNotEmpty) {
-                mergedPhrases.addAll(screenPhrases);
+                if (isLegacyConstructionSummary) {
+                  mergedPhrases.add(screenPhrases.first);
+                } else {
+                  mergedPhrases.addAll(screenPhrases);
+                }
               } else {
                 // No phrase handler — convert fields to narrative phrases
                 // so data is not lost when other screens do have phrases.
                 final fallback = _fieldsToPhrases(fields);
                 if (fallback.isNotEmpty) {
-                  mergedPhrases.addAll(fallback);
+                  if (isLegacyConstructionSummary) {
+                    mergedPhrases.add(fallback.first);
+                  } else {
+                    mergedPhrases.addAll(fallback);
+                  }
                 } else if (fields.any((f) => f.displayValue.isNotEmpty)) {
                   mergedFields.addAll(fields);
                 }

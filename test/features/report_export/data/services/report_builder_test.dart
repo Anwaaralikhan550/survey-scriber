@@ -85,6 +85,107 @@ void main() {
   }
 
   group('ReportBuilder.build', () {
+    test('orders inspection sections to match app flow', () {
+      final shuffledTree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'D',
+            title: 'About Property',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'd1',
+                title: 'D1',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'f',
+                    label: 'Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          InspectionSectionDefinition(
+            key: 'A',
+            title: 'About Inspection',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'a1',
+                title: 'A1',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'f',
+                    label: 'Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          InspectionSectionDefinition(
+            key: 'F',
+            title: 'Inside',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'f1',
+                title: 'F1',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'f',
+                    label: 'Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'e1',
+                title: 'E1',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'f',
+                    label: 'Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: shuffledTree,
+          allAnswers: {
+            'd1': {'f': 'd'},
+            'a1': {'f': 'a'},
+            'f1': {'f': 'f'},
+            'e1': {'f': 'e'},
+          },
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+
+      expect(
+        doc.sections.map((s) => s.key).toList(),
+        equals(['A', 'D', 'E', 'F']),
+      );
+    });
+
     test('produces correct report type for inspection surveys', () {
       final doc = builder.build(_makeRawData(), const ExportConfig());
       expect(doc.reportType, ReportType.inspection);
@@ -362,6 +463,175 @@ void main() {
       expect(screens, hasLength(1));
       expect(screens.first.title, 'Construction');
       expect(screens.first.isMergedGroup, isTrue);
+    });
+
+    test('uses concise legacy-style phrases for Section D construction merge', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'D',
+            title: 'About Property',
+            description: 'About property details',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'group_construction_2',
+                title: 'Construction',
+                type: InspectionNodeType.group,
+                fields: const [],
+              ),
+              InspectionNodeDefinition(
+                id: 'screen_roof',
+                title: 'Roof',
+                type: InspectionNodeType.screen,
+                parentId: 'group_construction_2',
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'roof_a',
+                    label: 'Roof A',
+                    type: InspectionFieldType.text,
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'roof_b',
+                    label: 'Roof B',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'screen_window',
+                title: 'Window',
+                type: InspectionNodeType.screen,
+                parentId: 'group_construction_2',
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'window_a',
+                    label: 'Window A',
+                    type: InspectionFieldType.text,
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'window_b',
+                    label: 'Window B',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'screen_roof': {'roof_a': 'Alpha', 'roof_b': 'Beta'},
+            'screen_window': {'window_a': 'Gamma', 'window_b': 'Delta'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final merged = doc.sections.first.screens.first;
+      expect(merged.isMergedGroup, isTrue);
+      expect(merged.phrases, hasLength(2));
+      expect(merged.phrases.first, contains('Alpha'));
+      expect(merged.phrases.first, isNot(contains('Beta')));
+      expect(merged.phrases.last, contains('Gamma'));
+      expect(merged.phrases.last, isNot(contains('Delta')));
+    });
+
+    test('emits merged group at group node position to match app ordering', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'D',
+            title: 'About Property',
+            description: 'About property details',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_property_type',
+                title: 'Property Type',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'type',
+                    label: 'Type',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              // Child screen appears before its group in JSON (real tree pattern)
+              InspectionNodeDefinition(
+                id: 'activity_property_construction',
+                title: 'Property',
+                type: InspectionNodeType.screen,
+                parentId: 'group_construction_2',
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'construction',
+                    label: 'Construction',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_property_built',
+                title: 'Property Built',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'built',
+                    label: 'Built',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'group_construction_2',
+                title: 'Construction',
+                type: InspectionNodeType.group,
+                fields: const [],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_property_extended',
+                title: 'Year Extended',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'extended',
+                    label: 'Extended',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_property_type': {'type': 'House'},
+            'activity_property_construction': {'construction': 'Cavity wall'},
+            'activity_property_built': {'built': '1990'},
+            'activity_property_extended': {'extended': '2005'},
+          },
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+
+      final titles = doc.sections.first.screens.map((s) => s.title).toList();
+      expect(
+        titles,
+        equals([
+          'Property Type',
+          'Property Built',
+          'Construction',
+          'Year Extended',
+        ]),
+      );
     });
 
     test('applies conditional visibility filtering', () {
