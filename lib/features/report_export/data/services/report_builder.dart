@@ -79,6 +79,29 @@ class ReportBuilder {
   /// "F3 Walls and Partitions", "G6 Drainage", "H2 Other".
   static final _numberedGroupPattern = RegExp(r'^[A-Z]\d');
 
+  /// Legacy parity:
+  /// In Section D, "Construction" should render as one consolidated
+  /// heading in the final report (not per-screen headings).
+  bool _shouldMergeTopLevelGroup(
+    InspectionSectionDefinition sectionDef,
+    InspectionNodeDefinition node,
+  ) {
+    if (node.type != InspectionNodeType.group || node.parentId != null) {
+      return false;
+    }
+    if (_numberedGroupPattern.hasMatch(node.title)) {
+      return true;
+    }
+
+    final sectionKey = sectionDef.key.trim().toUpperCase();
+    final groupId = node.id.trim().toLowerCase();
+    final groupTitle = node.title.trim().toLowerCase();
+    final isConstructionGroup =
+        groupId == 'group_construction_2' || groupTitle == 'construction';
+
+    return sectionKey == 'D' && isConstructionGroup;
+  }
+
   ReportSection? _buildSection(
     InspectionSectionDefinition sectionDef,
     V2RawReportData rawData,
@@ -95,12 +118,9 @@ class ReportBuilder {
       childrenOf.putIfAbsent(pid, () => []).add(node);
     }
 
-    // ── Identify top-level groups with numbered titles (E1, F2…) ──
+    // ── Identify top-level groups that should be merged in report output ──
     final topLevelGroups = sectionDef.nodes
-        .where((n) =>
-            n.type == InspectionNodeType.group &&
-            n.parentId == null &&
-            _numberedGroupPattern.hasMatch(n.title))
+        .where((n) => _shouldMergeTopLevelGroup(sectionDef, n))
         .toList();
 
     // Track which screens are consumed by merged groups so we don't

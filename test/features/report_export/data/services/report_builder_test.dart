@@ -302,6 +302,68 @@ void main() {
       expect(doc.sections.first.screens.first.title, 'Roof Detail');
     });
 
+    test('merges Section D construction group into one report heading', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'D',
+            title: 'About Property',
+            description: 'About property details',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'group_construction_2',
+                title: 'Construction',
+                type: InspectionNodeType.group,
+                fields: const [],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_property_roof',
+                title: 'Roof',
+                type: InspectionNodeType.screen,
+                parentId: 'group_construction_2',
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'roof_field',
+                    label: 'Roof Type',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_construction_window',
+                title: 'Window',
+                type: InspectionNodeType.screen,
+                parentId: 'group_construction_2',
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'window_field',
+                    label: 'Window Material',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_property_roof': {'roof_field': 'Pitched'},
+            'activity_construction_window': {'window_field': 'PVC'},
+          },
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+
+      final screens = doc.sections.first.screens;
+      expect(screens, hasLength(1));
+      expect(screens.first.title, 'Construction');
+      expect(screens.first.isMergedGroup, isTrue);
+    });
+
     test('applies conditional visibility filtering', () {
       final treeWithConditional = InspectionTreePayload(
         sections: [
