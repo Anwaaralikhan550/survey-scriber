@@ -41,83 +41,266 @@ class InspectionSectionPage extends ConsumerWidget {
         }
       },
       child: Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          onPressed: () => context.canPop()
-              ? context.pop()
-              : context.go(Routes.surveyDetailPath(surveyId)),
-        ),
-        title: Text(_sectionTitle(sectionKey)),
-      ),
-      body: SafeArea(
-        child: nodesAsync.when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, _) => Center(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Text('Failed to load screens: $error'),
-            ),
+        appBar: AppBar(
+          leading: BackButton(
+            onPressed: () => context.canPop()
+                ? context.pop()
+                : context.go(Routes.surveyDetailPath(surveyId)),
           ),
-          data: (nodes) {
-            final nodeMap = nodeMapAsync.maybeWhen(
-              data: (value) => value,
-              orElse: () => const <String, InspectionNodeDefinition>{},
-            );
-            final visibleNodes = nodes
-                .where((node) {
-                  if (node.parentId != parentNodeId) return false;
-                  if (node.nodeType != 'screen') return true;
-                  final definition = nodeMap[node.screenId];
-                  return definition?.inlinePosition != 'header';
-                })
-                .toList();
+          title: Text(_sectionTitle(sectionKey)),
+        ),
+        body: SafeArea(
+          child: nodesAsync.when(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, _) => Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text('Failed to load screens: $error'),
+              ),
+            ),
+            data: (nodes) {
+              final nodeMap = nodeMapAsync.maybeWhen(
+                data: (value) => value,
+                orElse: () => const <String, InspectionNodeDefinition>{},
+              );
+              final visibleNodes = nodes.where((node) {
+                if (node.parentId != parentNodeId) return false;
+                if (node.nodeType != 'screen') return true;
+                final definition = nodeMap[node.screenId];
+                return definition?.inlinePosition != 'header';
+              }).toList();
 
-            if (visibleNodes.isEmpty) {
-              return const Center(child: Text('No screens yet.'));
-            }
+              // Legacy parity: remove rogue outside-property group from
+              // Inside Property top-level menu.
+              if (sectionKey == 'F' && parentNodeId == null) {
+                visibleNodes.removeWhere((node) =>
+                    node.screenId ==
+                    'group_outside_property_other_joinery_and_finishes_main_screen_80');
+              }
 
-            final showHeaderInline = parentNodeId != null && nodeMap[parentNodeId!]?.type == InspectionNodeType.group;
-            final itemCount = visibleNodes.length + (showHeaderInline ? 1 : 0);
+              // Legacy parity: E9 "Other area" menu should only expose
+              // Repairs + Not inspected, with Note/Condition Rating via
+              // the inline header screen.
+              if (parentNodeId == 'group_e9_other_area_32') {
+                visibleNodes.retainWhere((node) =>
+                    node.screenId == 'group_other_area_33' ||
+                    node.screenId == 'group_repairs_42' ||
+                    node.screenId ==
+                        'activity_outside_property_other_not_inspected');
+              }
+              if (parentNodeId == 'group_other_area_33') {
+                visibleNodes.retainWhere((node) =>
+                    node.screenId ==
+                        'activity_outside_property_other_communal_area' ||
+                    node.screenId == 'group_other_external_area_34');
+              }
+              if (parentNodeId == 'group_carport_35') {
+                // Legacy parity: Carport should show only these screens.
+                const allowed = <String>{
+                  'activity_outside_property_other_other_external', // Construction
+                  'activity_outside_property_other_other_roof', // Roof
+                  'activity_outside_property_other_floors', // Floor
+                  'activity_outside_property_other_drains', // Drains
+                  'activity_out_side_other_external_area_condition', // Condition
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_porch_canopy_36') {
+                // Legacy parity: Porch Canopy should show only these screens.
+                const allowed = <String>{
+                  'activity_outside_property_other_other_external__construction', // Construction
+                  'activity_outside_property_other_other_roof__roof', // Roof
+                  'activity_out_side_other_external_area_condition__condition', // Condition
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_roof_terrace_37') {
+                // Legacy parity: Roof Terrace excludes Wall Construction.
+                const allowed = <String>{
+                  'activity_outside_property_other_other_external__construction__2', // Construction
+                  'activity_outside_property_other_other_roof__roof__2', // Roof
+                  'activity_outside_property_other_floors__floor__2', // Floor
+                  'activity_outside_property_other_handrails__handrails__2', // Handrails
+                  'activity_outside_property_other_drains__drains__2', // Drains
+                  'activity_outside_property_other_overloaded__overloaded__2', // Overloaded
+                  'activity_outside_property_other_no_safety_glass__no_safety_glass__2', // No safety glass
+                  'activity_out_side_other_external_area_condition__condition__2', // Condition
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_balcony_38') {
+                // Legacy parity: Balcony excludes Roof and Wall Construction.
+                const allowed = <String>{
+                  'activity_outside_property_other_other_external__construction__3', // Construction
+                  'activity_outside_property_other_floors__floor__3', // Floor
+                  'activity_outside_property_other_handrails__handrails__3', // Handrails
+                  'activity_outside_property_other_drains__drains__3', // Drains
+                  'activity_outside_property_other_overloaded__overloaded__3', // Overloaded
+                  'activity_outside_property_other_no_safety_glass__no_safety_glass__3', // No safety glass
+                  'activity_out_side_other_external_area_condition__condition__3', // Condition
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_juliet_balcony_39') {
+                // Legacy parity: Juliet Balcony excludes Roof and Wall Construction.
+                const allowed = <String>{
+                  'activity_outside_property_other_other_external__construction__4', // Construction
+                  'activity_outside_property_other_floors__floor__4', // Floor
+                  'activity_outside_property_other_handrails__handrails__4', // Handrails
+                  'activity_outside_property_other_drains__drains__4', // Drains
+                  'activity_outside_property_other_overloaded__overloaded__4', // Overloaded
+                  'activity_outside_property_other_no_safety_glass__no_safety_glass__4', // No safety glass
+                  'activity_out_side_other_external_area_condition__condition__4', // Condition
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_external_stairs_40') {
+                // Legacy parity: External Stairs excludes Drains and Wall Construction.
+                const allowed = <String>{
+                  'activity_outside_property_other_other_external__construction__5', // Construction
+                  'activity_outside_property_other_other_roof__roof__5', // Roof
+                  'activity_outside_property_other_floors__floor__5', // Floor
+                  'activity_outside_property_other_handrails__handrails__5', // Handrails
+                  'activity_outside_property_other_overloaded__overloaded__5', // Overloaded
+                  'activity_outside_property_other_no_safety_glass__no_safety_glass__5', // No safety glass
+                  'activity_out_side_other_external_area_condition__condition__5', // Condition
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_other_41') {
+                // Legacy parity: Other excludes Wall Construction.
+                const allowed = <String>{
+                  'activity_outside_property_other_other_external__construction__6', // Construction
+                  'activity_outside_property_other_other_roof__roof__6', // Roof
+                  'activity_outside_property_other_floors__floor__6', // Floor
+                  'activity_outside_property_other_handrails__handrails__6', // Handrails
+                  'activity_outside_property_other_drains__drains__6', // Drains
+                  'activity_outside_property_other_overloaded__overloaded__6', // Overloaded
+                  'activity_outside_property_other_no_safety_glass__no_safety_glass__6', // No safety glass
+                  'activity_out_side_other_external_area_condition__condition__6', // Condition
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_carport_43') {
+                // Legacy parity: Repairs > Carport shows only Wall, Roof, Floor, Drains.
+                const allowed = <String>{
+                  'activity_outside_property_other_repairs_wall',
+                  'activity_outside_property_other_repairs_roof',
+                  'activity_outside_property_other_repairs_floor',
+                  'activity_outside_property_other_repairs_drains',
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_porch_canopy_44') {
+                // Legacy parity: Repairs > Porch Canopy shows only Roof.
+                const allowed = <String>{
+                  'activity_outside_property_other_repairs_roof__roof',
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_wood_work_75') {
+                // Legacy parity: Wood Work menu exposes only 3 entries.
+                const allowed = <String>{
+                  'activity_in_side_property_wood_work_second',
+                  'activity_in_side_property_cupboards',
+                  'activity_in_side_property_wood_work_damaged_lock',
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_g3_water_91') {
+                // Legacy parity: Services > Water should expose only
+                // Water + Not Inspected at this level.
+                const allowed = <String>{
+                  'activity_services_water_main_screen',
+                  'activity_services_water_not_inspected',
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
+              if (parentNodeId == 'group_g4_heating_92') {
+                // Legacy parity: Services > Heating should expose only
+                // Heating + Not Inspected at this level.
+                const allowed = <String>{
+                  'activity_services_heating_main_screen',
+                  'activity_services_heating_not_inspected',
+                };
+                visibleNodes
+                    .retainWhere((node) => allowed.contains(node.screenId));
+              }
 
-            return ListView.separated(
-              padding: const EdgeInsets.all(16),
-              itemCount: itemCount,
-              separatorBuilder: (_, __) => const SizedBox(height: 12),
-              itemBuilder: (context, index) {
-                if (showHeaderInline && index == 0) {
-                  return _GroupInlineHeader(
-                    surveyId: surveyId,
-                    sectionKey: sectionKey,
-                    parentNodeId: parentNodeId!,
-                  );
-                }
-                final offsetIndex = showHeaderInline ? index - 1 : index;
-                final node = visibleNodes[offsetIndex];
-                if (node.nodeType == 'group') {
-                  return _GroupTile(
-                    title: node.title,
+              if (visibleNodes.isEmpty) {
+                return const Center(child: Text('No screens yet.'));
+              }
+
+              final showHeaderInline = parentNodeId != null &&
+                  nodeMap[parentNodeId!]?.type == InspectionNodeType.group;
+              final itemCount =
+                  visibleNodes.length + (showHeaderInline ? 1 : 0);
+
+              return ListView.separated(
+                padding: const EdgeInsets.all(16),
+                itemCount: itemCount,
+                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                itemBuilder: (context, index) {
+                  if (showHeaderInline && index == 0) {
+                    return _GroupInlineHeader(
+                      surveyId: surveyId,
+                      sectionKey: sectionKey,
+                      parentNodeId: parentNodeId!,
+                    );
+                  }
+                  final offsetIndex = showHeaderInline ? index - 1 : index;
+                  final node = visibleNodes[offsetIndex];
+                  if (node.nodeType == 'group') {
+                    if (node.screenId == 'group_other_area_33') {
+                      return _GroupTile(
+                        title: 'Other area',
+                        sectionColor: sectionColor,
+                        icon: _inspectionIconForTitle(
+                            'Other area', node.screenId),
+                        onTap: () => context.push(
+                          Routes.inspectionNodePath(
+                              surveyId, sectionKey, node.screenId),
+                        ),
+                      );
+                    }
+                    return _GroupTile(
+                      title: _stripLegacyPrefix(node.title),
+                      sectionColor: sectionColor,
+                      icon: _inspectionIconForTitle(node.title, node.screenId),
+                      onTap: () => context.push(
+                        Routes.inspectionNodePath(
+                            surveyId, sectionKey, node.screenId),
+                      ),
+                    );
+                  }
+
+                  final screen = node;
+                  return _ScreenTile(
+                    screen: screen,
                     sectionColor: sectionColor,
-                    icon: _inspectionIconForTitle(node.title, node.screenId),
+                    iconData:
+                        _inspectionIconForTitle(screen.title, screen.screenId),
                     onTap: () => context.push(
-                      Routes.inspectionNodePath(surveyId, sectionKey, node.screenId),
+                      Routes.inspectionScreenPath(
+                          surveyId, sectionKey, screen.screenId),
                     ),
                   );
-                }
-
-                final screen = node;
-                return _ScreenTile(
-                  screen: screen,
-                  sectionColor: sectionColor,
-                  iconData: _inspectionIconForTitle(screen.title, screen.screenId),
-                  onTap: () => context.push(
-                    Routes.inspectionScreenPath(surveyId, sectionKey, screen.screenId),
-                  ),
-                );
-              },
-            );
-          },
+                },
+              );
+            },
+          ),
         ),
-      ),
       ),
     );
   }
@@ -152,6 +335,10 @@ class InspectionSectionPage extends ConsumerWidget {
       };
 }
 
+String _stripLegacyPrefix(String value) {
+  return value.replaceFirst(RegExp(r'^\s*[A-Za-z]\d+\s+'), '');
+}
+
 /// Maps screen / group titles (and optionally screen IDs) to unique,
 /// context-relevant Material 3 icons via keyword matching.
 IconData _inspectionIconForTitle(String title, [String screenId = '']) {
@@ -161,12 +348,16 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   // ── Property & general info ──
   if (t.contains('property type')) return Icons.home_work_outlined;
   if (t.contains('property built')) return Icons.calendar_today_outlined;
-  if (t.contains('year extended') || t.contains('property extended')) return Icons.home_repair_service_outlined;
-  if (t.contains('year converted') || t.contains('property converted')) return Icons.autorenew_outlined;
-  if (t.contains('flat') && (t.contains('maisonette') || id.contains('flate'))) return Icons.apartment_outlined;
+  if (t.contains('year extended') || t.contains('property extended'))
+    return Icons.home_repair_service_outlined;
+  if (t.contains('year converted') || t.contains('property converted'))
+    return Icons.autorenew_outlined;
+  if (t.contains('flat') && (t.contains('maisonette') || id.contains('flate')))
+    return Icons.apartment_outlined;
   if (t.contains('listed building')) return Icons.account_balance_outlined;
   if (t.contains('energy')) return Icons.bolt_outlined;
-  if (t.contains('property location') || t.contains('density')) return Icons.location_on_outlined;
+  if (t.contains('property location') || t.contains('density'))
+    return Icons.location_on_outlined;
   if (t.contains('facilit')) return Icons.store_outlined;
   if (t.contains('local environment')) return Icons.park_outlined;
   if (t.contains('private road')) return Icons.alt_route_outlined;
@@ -175,10 +366,13 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   if (t.contains('party disclosure')) return Icons.people_outlined;
   if (t.contains('weather')) return Icons.cloud_outlined;
   if (t.contains('property status')) return Icons.info_outlined;
-  if (t.contains('overall') || t.contains('over all') || t.contains('opinion')) return Icons.rate_review_outlined;
+  if (t.contains('overall') || t.contains('over all') || t.contains('opinion'))
+    return Icons.rate_review_outlined;
   if (t.contains('property facing')) return Icons.explore_outlined;
-  if (t == 'property' && id.contains('construction')) return Icons.construction_outlined;
-  if (t.contains('estated') || t.contains('estate')) return Icons.location_city_outlined;
+  if (t == 'property' && id.contains('construction'))
+    return Icons.construction_outlined;
+  if (t.contains('estated') || t.contains('estate'))
+    return Icons.location_city_outlined;
   if (t.contains('other service')) return Icons.miscellaneous_services_outlined;
 
   // ── Roof ──
@@ -194,8 +388,10 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   if (t.contains('roof') && t.contains('timber')) return Icons.forest_outlined;
   if (t.contains('about') && t.contains('roof')) return Icons.roofing_outlined;
   if (t.contains('parapet')) return Icons.fence_outlined;
-  if (t.contains('ridge') || t.contains('hip tile')) return Icons.grid_on_outlined;
-  if (t.contains('deflection') || t.contains('undulat')) return Icons.show_chart_outlined;
+  if (t.contains('ridge') || t.contains('hip tile'))
+    return Icons.grid_on_outlined;
+  if (t.contains('deflection') || t.contains('undulat'))
+    return Icons.show_chart_outlined;
   if (t.contains('verge')) return Icons.straight_outlined;
   if (t == 'pitched') return Icons.change_history_outlined;
   if (t == 'flat' && id.contains('roof')) return Icons.horizontal_rule_outlined;
@@ -203,13 +399,20 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   if (t.contains('roof')) return Icons.roofing_outlined;
 
   // ── Chimney ──
-  if (t.contains('chimney') && t.contains('leaning')) return Icons.trending_down_outlined;
-  if (t.contains('chimney') && t.contains('removed')) return Icons.delete_outlined;
-  if (t.contains('chimney') && t.contains('disrepair')) return Icons.warning_outlined;
-  if (t.contains('chimney') && t.contains('shared')) return Icons.groups_outlined;
-  if (t.contains('chimney') && t.contains('partial')) return Icons.visibility_outlined;
-  if (t.contains('chimney') && t.contains('pot')) return Icons.filter_hdr_outlined;
-  if (t.contains('chimney') && t.contains('repoint')) return Icons.construction_outlined;
+  if (t.contains('chimney') && t.contains('leaning'))
+    return Icons.trending_down_outlined;
+  if (t.contains('chimney') && t.contains('removed'))
+    return Icons.delete_outlined;
+  if (t.contains('chimney') && t.contains('disrepair'))
+    return Icons.warning_outlined;
+  if (t.contains('chimney') && t.contains('shared'))
+    return Icons.groups_outlined;
+  if (t.contains('chimney') && t.contains('partial'))
+    return Icons.visibility_outlined;
+  if (t.contains('chimney') && t.contains('pot'))
+    return Icons.filter_hdr_outlined;
+  if (t.contains('chimney') && t.contains('repoint'))
+    return Icons.construction_outlined;
   if (t.contains('chimney')) return Icons.fireplace_outlined;
   if (t.contains('flaunching')) return Icons.construction_outlined;
   if (t.contains('stacks')) return Icons.view_column_outlined;
@@ -222,23 +425,32 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   if (t.contains('cavity brick')) return Icons.view_week_outlined;
   if (t.contains('cavity block')) return Icons.view_module_outlined;
   if (t.contains('cavity stud')) return Icons.view_column_outlined;
-  if (t.contains('cavity') && t.contains('insulation')) return Icons.shield_outlined;
+  if (t.contains('cavity') && t.contains('insulation'))
+    return Icons.shield_outlined;
   if (t.contains('main wall')) return Icons.grid_4x4_outlined;
   if (t.contains('wall tie')) return Icons.link_outlined;
   if (t.contains('wall sealing')) return Icons.format_paint_outlined;
-  if (t.contains('thin') && t.contains('wall')) return Icons.straighten_outlined;
-  if (t.contains('slim') && t.contains('wall')) return Icons.straighten_outlined;
-  if (t.contains('removed wall') || (t.contains('removed') && t.contains('wall'))) return Icons.content_cut_outlined;
+  if (t.contains('thin') && t.contains('wall'))
+    return Icons.straighten_outlined;
+  if (t.contains('slim') && t.contains('wall'))
+    return Icons.straighten_outlined;
+  if (t.contains('removed wall') ||
+      (t.contains('removed') && t.contains('wall')))
+    return Icons.content_cut_outlined;
   if (t.contains('party wall')) return Icons.horizontal_split_outlined;
-  if (t.contains('walls') && t.contains('partition')) return Icons.view_column_outlined;
-  if (t.contains('about') && t.contains('wall')) return Icons.grid_view_outlined;
+  if (t.contains('walls') && t.contains('partition'))
+    return Icons.view_column_outlined;
+  if (t.contains('about') && t.contains('wall'))
+    return Icons.grid_view_outlined;
   if (t.contains('cladding')) return Icons.view_quilt_outlined;
   if (t.contains('dpc')) return Icons.layers_outlined;
   if (t.contains('pointing')) return Icons.touch_app_outlined;
   if (t.contains('render')) return Icons.format_paint_outlined;
   if (t.contains('spalling')) return Icons.broken_image_outlined;
-  if (t.contains('movement') && !t.contains('crack')) return Icons.open_in_full_outlined;
-  if (t.contains('damp') && id.contains('wall')) return Icons.water_damage_outlined;
+  if (t.contains('movement') && !t.contains('crack'))
+    return Icons.open_in_full_outlined;
+  if (t.contains('damp') && id.contains('wall'))
+    return Icons.water_damage_outlined;
   if (t == 'walls' || t == 'wall') return Icons.grid_view_outlined;
 
   // ── Windows & Doors ──
@@ -247,7 +459,9 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   if (t.contains('sill projection')) return Icons.horizontal_rule_outlined;
   if (t.contains('failed glazing')) return Icons.broken_image_outlined;
   if (t.contains('fire escape')) return Icons.warning_outlined;
-  if (t.contains('about window') || t.contains('about') && id.contains('window')) return Icons.window_outlined;
+  if (t.contains('about window') ||
+      t.contains('about') && id.contains('window'))
+    return Icons.window_outlined;
   if (t.contains('window')) return Icons.window_outlined;
   if (t.contains('garage door')) return Icons.garage_outlined;
   if (t.contains('patio door')) return Icons.door_sliding_outlined;
@@ -265,24 +479,31 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
 
   // ── Fireplaces ──
   if (t.contains('blocked fireplace')) return Icons.block_outlined;
-  if (t.contains('damage') && t.contains('grate')) return Icons.broken_image_outlined;
-  if (t.contains('damage') && t.contains('surround')) return Icons.crop_square_outlined;
+  if (t.contains('damage') && t.contains('grate'))
+    return Icons.broken_image_outlined;
+  if (t.contains('damage') && t.contains('surround'))
+    return Icons.crop_square_outlined;
   if (t.contains('wood burning')) return Icons.local_fire_department_outlined;
   if (t.contains('electric fire')) return Icons.electric_bolt_outlined;
   if (t.contains('gas fire')) return Icons.gas_meter_outlined;
   if (t.contains('open fire')) return Icons.fireplace_outlined;
   if (t.contains('imitation')) return Icons.style_outlined;
   if (t.contains('flue')) return Icons.air_outlined;
-  if (t.contains('fireplace') || t.contains('fire place')) return Icons.fireplace_outlined;
-  if (t.contains('removed cb') || t.contains('removed chimney')) return Icons.delete_outlined;
+  if (t.contains('fireplace') || t.contains('fire place'))
+    return Icons.fireplace_outlined;
+  if (t.contains('removed cb') || t.contains('removed chimney'))
+    return Icons.delete_outlined;
 
   // ── Floors ──
-  if (t.contains('capture') && (t.contains('floor') || t.contains('plan'))) return Icons.draw_outlined;
+  if (t.contains('capture') && (t.contains('floor') || t.contains('plan')))
+    return Icons.draw_outlined;
   if (t.contains('loose floorboard')) return Icons.view_day_outlined;
   if (t.contains('sloping')) return Icons.trending_down_outlined;
-  if (t.contains('floor vibration') || t.contains('vibration')) return Icons.vibration_outlined;
+  if (t.contains('floor vibration') || t.contains('vibration'))
+    return Icons.vibration_outlined;
   if (t.contains('floor ventilation')) return Icons.air_outlined;
-  if (t.contains('laminate') || t.contains('wood floor')) return Icons.view_day_outlined;
+  if (t.contains('laminate') || t.contains('wood floor'))
+    return Icons.view_day_outlined;
   if (t.contains('timber decay')) return Icons.forest_outlined;
   if (t.contains('timber infest')) return Icons.pest_control_outlined;
   if (t.contains('creaking')) return Icons.volume_off_outlined;
@@ -293,12 +514,15 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   if (t.contains('floors') || t == 'floor') return Icons.view_agenda_outlined;
 
   // ── Ceilings ──
-  if (t.contains('asbestos') && id.contains('ceiling')) return Icons.warning_amber_outlined;
+  if (t.contains('asbestos') && id.contains('ceiling'))
+    return Icons.warning_amber_outlined;
   if (t.contains('polystyrene')) return Icons.layers_outlined;
   if (t.contains('heavy paper')) return Icons.layers_outlined;
   if (t.contains('ornamental')) return Icons.auto_awesome_outlined;
-  if (t.contains('ceiling') && t.contains('crack')) return Icons.broken_image_outlined;
-  if (t.contains('ceiling') && t.contains('repair')) return Icons.build_outlined;
+  if (t.contains('ceiling') && t.contains('crack'))
+    return Icons.broken_image_outlined;
+  if (t.contains('ceiling') && t.contains('repair'))
+    return Icons.build_outlined;
   if (t.contains('about ceiling')) return Icons.flip_outlined;
   if (t.contains('ceiling')) return Icons.flip_outlined;
 
@@ -307,64 +531,94 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   if (t.contains('front garden')) return Icons.yard_outlined;
   if (t.contains('rear garden')) return Icons.grass_outlined;
   if (t.contains('side garden')) return Icons.fence_outlined;
-  if (t.contains('communal garden') || t.contains('common garden')) return Icons.nature_people_outlined;
-  if (t.contains('garden') || t.contains('residential')) return Icons.yard_outlined;
-  if (t.contains('parking') || t.contains('commercial')) return Icons.local_parking_outlined;
+  if (t.contains('communal garden') || t.contains('common garden'))
+    return Icons.nature_people_outlined;
+  if (t.contains('garden') || t.contains('residential'))
+    return Icons.yard_outlined;
+  if (t.contains('parking') || t.contains('commercial'))
+    return Icons.local_parking_outlined;
   if (t.contains('cellar')) return Icons.foundation_outlined;
   if (t.contains('basement')) return Icons.foundation_outlined;
-  if (t.contains('bathroom') && t.contains('repair')) return Icons.build_outlined;
+  if (t.contains('bathroom') && t.contains('repair'))
+    return Icons.build_outlined;
   if (t.contains('bathroom')) return Icons.bathtub_outlined;
-  if (t.contains('conservatory') && t.contains('porch')) return Icons.deck_outlined;
+  if (t.contains('conservatory') && t.contains('porch'))
+    return Icons.deck_outlined;
   if (t.contains('conservatory')) return Icons.deck_outlined;
-  if (t.contains('porch') && t.contains('canopy')) return Icons.door_sliding_outlined;
+  if (t.contains('porch') && t.contains('canopy'))
+    return Icons.door_sliding_outlined;
   if (t.contains('porch')) return Icons.door_sliding_outlined;
   if (t.contains('communal area')) return Icons.groups_outlined;
   if (t.contains('loft')) return Icons.warehouse_outlined;
   if (t.contains('balcony')) return Icons.balcony_outlined;
   if (t.contains('carport')) return Icons.directions_car_outlined;
-  if (t.contains('external stair') || t.contains('stair')) return Icons.stairs_outlined;
+  if (t.contains('external stair') || t.contains('stair'))
+    return Icons.stairs_outlined;
 
   // ── Services ──
   if (t.contains('solar')) return Icons.solar_power_outlined;
-  if (t.contains('electricity') || t.contains('electrical')) return Icons.electrical_services_outlined;
-  if (t.contains('gas meter') && t.contains('repair')) return Icons.build_outlined;
-  if (t.contains('mains gas') || t.contains('gas and oil') || t.contains('gas') && t.contains('oil')) return Icons.gas_meter_outlined;
-  if (t.contains('gas') && !t.contains('glass') && !t.contains('fire')) return Icons.gas_meter_outlined;
-  if (t.contains('oil') && !t.contains('soil') && !t.contains('boil')) return Icons.oil_barrel_outlined;
-  if (t.contains('water heating') || t.contains('hot water') || t.contains('communal hot')) return Icons.water_drop_outlined;
-  if (t.contains('water tank') || t.contains('disused') && t.contains('tank')) return Icons.storage_outlined;
-  if (t.contains('main water') || (t == 'water' && !id.contains('heating'))) return Icons.water_outlined;
+  if (t.contains('electricity') || t.contains('electrical'))
+    return Icons.electrical_services_outlined;
+  if (t.contains('gas meter') && t.contains('repair'))
+    return Icons.build_outlined;
+  if (t.contains('mains gas') ||
+      t.contains('gas and oil') ||
+      t.contains('gas') && t.contains('oil')) return Icons.gas_meter_outlined;
+  if (t.contains('gas') && !t.contains('glass') && !t.contains('fire'))
+    return Icons.gas_meter_outlined;
+  if (t.contains('oil') && !t.contains('soil') && !t.contains('boil'))
+    return Icons.oil_barrel_outlined;
+  if (t.contains('water heating') ||
+      t.contains('hot water') ||
+      t.contains('communal hot')) return Icons.water_drop_outlined;
+  if (t.contains('water tank') || t.contains('disused') && t.contains('tank'))
+    return Icons.storage_outlined;
+  if (t.contains('main water') || (t == 'water' && !id.contains('heating')))
+    return Icons.water_outlined;
   if (t.contains('old boiler')) return Icons.thermostat_outlined;
-  if (t.contains('about heating') || t.contains('heating system')) return Icons.thermostat_outlined;
-  if (t.contains('radiator') || t.contains('underfloor')) return Icons.thermostat_outlined;
+  if (t.contains('about heating') || t.contains('heating system'))
+    return Icons.thermostat_outlined;
+  if (t.contains('radiator') || t.contains('underfloor'))
+    return Icons.thermostat_outlined;
   if (t.contains('heating')) return Icons.thermostat_outlined;
-  if (t.contains('drainage') || t.contains('drain')) return Icons.plumbing_outlined;
-  if (t.contains('common service') || t.contains('shared service')) return Icons.hub_outlined;
+  if (t.contains('drainage') || t.contains('drain'))
+    return Icons.plumbing_outlined;
+  if (t.contains('common service') || t.contains('shared service'))
+    return Icons.hub_outlined;
   if (t.contains('insulation')) return Icons.shield_outlined;
 
   // ── Issues & Conditions ──
-  if (t.contains('damp') || t.contains('dampness')) return Icons.water_damage_outlined;
+  if (t.contains('damp') || t.contains('dampness'))
+    return Icons.water_damage_outlined;
   if (t.contains('condensation')) return Icons.thermostat_outlined;
-  if (t.contains('movement crack') || t.contains('crack')) return Icons.broken_image_outlined;
-  if (t.contains('timber') && (t.contains('rot') || t.contains('decay'))) return Icons.forest_outlined;
-  if (t.contains('infestation') || t.contains('insect')) return Icons.pest_control_outlined;
+  if (t.contains('movement crack') || t.contains('crack'))
+    return Icons.broken_image_outlined;
+  if (t.contains('timber') && (t.contains('rot') || t.contains('decay')))
+    return Icons.forest_outlined;
+  if (t.contains('infestation') || t.contains('insect'))
+    return Icons.pest_control_outlined;
   if (t.contains('asbestos')) return Icons.warning_amber_outlined;
-  if (t.contains('flooding') || t.contains('flooded')) return Icons.water_damage_outlined;
+  if (t.contains('flooding') || t.contains('flooded'))
+    return Icons.water_damage_outlined;
   if (t.contains('knotweed')) return Icons.spa_outlined;
   if (t.contains('nearby tree')) return Icons.nature_outlined;
   if (t.contains('shrinkable clay')) return Icons.landscape_outlined;
   if (t.contains('safety hazard')) return Icons.health_and_safety_outlined;
   if (t.contains('legal')) return Icons.gavel_outlined;
-  if (t.contains('mould') || t.contains('moulding')) return Icons.cleaning_services_outlined;
-  if (t.contains('leak') || t.contains('seepage')) return Icons.water_damage_outlined;
+  if (t.contains('mould') || t.contains('moulding'))
+    return Icons.cleaning_services_outlined;
+  if (t.contains('leak') || t.contains('seepage'))
+    return Icons.water_damage_outlined;
   if (t.contains('sealant')) return Icons.format_paint_outlined;
   if (t.contains('wood rot')) return Icons.forest_outlined;
-  if (t.contains('joists') && t.contains('decay')) return Icons.broken_image_outlined;
+  if (t.contains('joists') && t.contains('decay'))
+    return Icons.broken_image_outlined;
   if (t.contains('emf')) return Icons.cell_tower_outlined;
 
   // ── Repairs & Status ──
   if (t == 'repairs' || t.contains('repair')) return Icons.build_outlined;
-  if (t.contains('not inspected') || t.contains('no access')) return Icons.visibility_off_outlined;
+  if (t.contains('not inspected') || t.contains('no access'))
+    return Icons.visibility_off_outlined;
   if (t.contains('limitation')) return Icons.block_outlined;
   if (t.contains('not in use')) return Icons.do_not_disturb_outlined;
   if (t.contains('not habitable')) return Icons.dangerous_outlined;
@@ -385,22 +639,35 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   if (t.contains('improve')) return Icons.trending_up_outlined;
 
   // ── Misc ──
-  if (t.contains('built in fitting') || t.contains('built in fittings')) return Icons.kitchen_outlined;
-  if (t.contains('fitting') && t.contains('repair')) return Icons.build_outlined;
+  if (t.contains('built in fitting') || t.contains('built in fittings'))
+    return Icons.kitchen_outlined;
+  if (t.contains('fitting') && t.contains('repair'))
+    return Icons.build_outlined;
   if (t.contains('fitting')) return Icons.kitchen_outlined;
-  if (t.contains('woodwork') || t.contains('wood work')) return Icons.handyman_outlined;
+  if (t.contains('woodwork') || t.contains('wood work'))
+    return Icons.handyman_outlined;
   if (t.contains('cupboard')) return Icons.storage_outlined;
-  if (t.contains('extractor') || t.contains('extractor fan')) return Icons.air_outlined;
-  if (t.contains('joinery') || t.contains('finishes')) return Icons.format_paint_outlined;
+  if (t.contains('extractor') || t.contains('extractor fan'))
+    return Icons.air_outlined;
+  if (t.contains('joinery') || t.contains('finishes'))
+    return Icons.format_paint_outlined;
   if (t.contains('construction')) return Icons.construction_outlined;
-  if (t.contains('rwg') || t.contains('rainwater') || t.contains('gutter')) return Icons.water_outlined;
+  if (t.contains('rwg') || t.contains('rainwater') || t.contains('gutter'))
+    return Icons.water_outlined;
   if (t.contains('blocked')) return Icons.block_outlined;
-  if (t.contains('handrail') || t.contains('hand rail')) return Icons.fence_outlined;
-  if (t.contains('steps') || t.contains('landing')) return Icons.stairs_outlined;
-  if (t.contains('decoration') || t.contains('perished')) return Icons.format_paint_outlined;
+  if (t.contains('handrail') || t.contains('hand rail'))
+    return Icons.fence_outlined;
+  if (t.contains('steps') || t.contains('landing'))
+    return Icons.stairs_outlined;
+  if (t.contains('decoration') || t.contains('perished'))
+    return Icons.format_paint_outlined;
   if (t.contains('overloaded')) return Icons.warning_outlined;
-  if (t.contains('aerial') || t.contains('satellite') || t.contains('dish') || t.contains('ariel')) return Icons.satellite_alt_outlined;
-  if (t.contains('shared') || t.contains('communal')) return Icons.groups_outlined;
+  if (t.contains('aerial') ||
+      t.contains('satellite') ||
+      t.contains('dish') ||
+      t.contains('ariel')) return Icons.satellite_alt_outlined;
+  if (t.contains('shared') || t.contains('communal'))
+    return Icons.groups_outlined;
   if (t.contains('fence')) return Icons.fence_outlined;
   if (t.contains('shed')) return Icons.house_siding_outlined;
   if (t.contains('outbuilding')) return Icons.cottage_outlined;
@@ -421,7 +688,8 @@ IconData _inspectionIconForTitle(String title, [String screenId = '']) {
   if (t.contains('waterproofing')) return Icons.water_outlined;
   if (t.contains('capture')) return Icons.camera_alt_outlined;
   if (t.contains('water')) return Icons.water_outlined;
-  if (t.contains('other area') || t.contains('external area')) return Icons.map_outlined;
+  if (t.contains('other area') || t.contains('external area'))
+    return Icons.map_outlined;
   if (t.contains('area')) return Icons.map_outlined;
   if (t.contains('ground')) return Icons.terrain_outlined;
   if (t.contains('removed')) return Icons.delete_outlined;
@@ -482,7 +750,8 @@ class _ScreenTile extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: isComplete
                             ? sectionColor.withOpacity(0.15)
-                            : theme.colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                            : theme.colorScheme.surfaceContainerHighest
+                                .withOpacity(0.5),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
@@ -523,7 +792,7 @@ class _ScreenTile extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  screen.title,
+                  _stripLegacyPrefix(screen.title),
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -624,14 +893,16 @@ class _GroupInlineHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final childrenAsync = ref.watch(inspectionChildScreensProvider(parentNodeId));
+    final childrenAsync =
+        ref.watch(inspectionChildScreensProvider(parentNodeId));
 
     return childrenAsync.when(
       loading: () => const SizedBox.shrink(),
       error: (_, __) => const SizedBox.shrink(),
       data: (children) {
-        final headerScreens =
-            children.where((child) => child.inlinePosition == 'header').toList();
+        final headerScreens = children
+            .where((child) => child.inlinePosition == 'header')
+            .toList();
         if (headerScreens.isEmpty) return const SizedBox.shrink();
 
         return Column(
@@ -677,10 +948,15 @@ class _InlineHeaderForm extends ConsumerWidget {
     }
 
     final answers = state.answers;
-    final visibleFields = filterLonelyLabels(
-        screen.fields.where((field) => shouldShowInspectionField(field, answers)).toList());
-    final enginePhrases = phraseEngine?.buildPhrases(screen.id, answers) ?? const <String>[];
-    final fieldPhrases = FieldPhraseProcessor.buildFieldPhrases(screen.fields, answers);
+    final normalizedFields =
+        sanitizeInspectionFieldsForScreen(screen.id, screen.fields);
+    final visibleFields = filterLonelyLabels(normalizedFields
+        .where((field) => shouldShowInspectionField(field, answers))
+        .toList());
+    final enginePhrases =
+        phraseEngine?.buildPhrases(screen.id, answers) ?? const <String>[];
+    final fieldPhrases =
+        FieldPhraseProcessor.buildFieldPhrases(normalizedFields, answers);
     final phrases = [...enginePhrases, ...fieldPhrases];
 
     if (visibleFields.isEmpty) {

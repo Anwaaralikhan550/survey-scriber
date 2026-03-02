@@ -38,6 +38,21 @@ class ReportBuilder {
     'O',
   ];
 
+  // Section D has duplicate node IDs for Listed Building across legacy/new
+  // tree variants. Treat them as aliases for report export.
+  static const Set<String> _listedBuildingScreenIds = <String>{
+    'activity_listed_building',
+    'activity_listed_building__listed_building',
+  };
+
+  // Legacy Section D energy output is one consolidated block composed from
+  // three screens.
+  static const List<String> _sectionDEnergyScreenOrder = <String>[
+    'activity_energy_effiency',
+    'activity_energy_environment_impect',
+    'activity_other_service',
+  ];
+
   ReportDocument build(
     V2RawReportData rawData,
     ExportConfig config, {
@@ -116,8 +131,7 @@ class ReportBuilder {
       }
     }
 
-    known.sort((a, b) =>
-        indexByKey[a.key]!.compareTo(indexByKey[b.key]!));
+    known.sort((a, b) => indexByKey[a.key]!.compareTo(indexByKey[b.key]!));
 
     // Keep unknown sections stable by original tree order and append them.
     return [...known, ...unknown];
@@ -159,6 +173,188 @@ class ReportBuilder {
     final groupTitle = group.title.trim().toLowerCase();
     return sectionKey == 'D' &&
         (groupId == 'group_construction_2' || groupTitle == 'construction');
+  }
+
+  bool _isListedBuildingScreenId(String screenId) =>
+      _listedBuildingScreenIds.contains(screenId.trim().toLowerCase());
+
+  List<String> _screenIdCandidates(String screenId) {
+    final id = screenId.trim().toLowerCase();
+    if (id == 'activity_listed_building') {
+      return const <String>[
+        'activity_listed_building',
+        'activity_listed_building__listed_building',
+      ];
+    }
+    if (id == 'activity_listed_building__listed_building') {
+      return const <String>[
+        'activity_listed_building__listed_building',
+        'activity_listed_building',
+      ];
+    }
+    return <String>[screenId];
+  }
+
+  Map<String, String> _answersForScreen(
+      V2RawReportData rawData, String screenId) {
+    for (final candidate in _screenIdCandidates(screenId)) {
+      final answers = rawData.allAnswers[candidate];
+      if (answers != null) return answers;
+    }
+    return const <String, String>{};
+  }
+
+  List<String>? _persistedPhrasesForScreen(
+      V2RawReportData rawData, String screenId) {
+    for (final candidate in _screenIdCandidates(screenId)) {
+      final phrases = rawData.persistedPhrases[candidate];
+      if (phrases != null) return phrases;
+    }
+    return null;
+  }
+
+  String _noteForScreen(V2RawReportData rawData, String screenId) {
+    for (final candidate in _screenIdCandidates(screenId)) {
+      final note = rawData.persistedUserNotes[candidate];
+      if (note != null && note.isNotEmpty) return note;
+    }
+    return '';
+  }
+
+  bool _isSectionDEnergyScreen(
+    InspectionSectionDefinition sectionDef,
+    InspectionNodeDefinition node,
+  ) {
+    if (node.type != InspectionNodeType.screen) return false;
+    if (sectionDef.key.trim().toUpperCase() != 'D') return false;
+    return _sectionDEnergyScreenOrder.contains(node.id.trim().toLowerCase());
+  }
+
+  static bool _isCheckedValue(String? value) {
+    final v = (value ?? '').trim().toLowerCase();
+    return v == 'true' || v == '1' || v == 'yes';
+  }
+
+  List<String> _buildLegacySectionDEnergyPhrases(V2RawReportData rawData) {
+    final energyAnswers =
+        _answersForScreen(rawData, 'activity_energy_effiency');
+    final impactAnswers =
+        _answersForScreen(rawData, 'activity_energy_environment_impect');
+    final otherAnswers = _answersForScreen(rawData, 'activity_other_service');
+
+    final energyCurrent =
+        (energyAnswers['android_material_design_spinner'] ?? '').trim();
+    final energyPotential =
+        (energyAnswers['android_material_design_spinner2'] ?? '').trim();
+    final impactCurrent =
+        (impactAnswers['android_material_design_spinner'] ?? '').trim();
+    final impactPotential =
+        (impactAnswers['android_material_design_spinner2'] ?? '').trim();
+    final hasSolarElectricity = _isCheckedValue(otherAnswers['ch1']);
+    final hasSolarHotWater = _isCheckedValue(otherAnswers['ch2']);
+
+    final hasAnyData = energyCurrent.isNotEmpty ||
+        energyPotential.isNotEmpty ||
+        impactCurrent.isNotEmpty ||
+        impactPotential.isNotEmpty ||
+        hasSolarElectricity ||
+        hasSolarHotWater;
+    if (!hasAnyData) return const [];
+
+    final phrases = <String>[
+      "We have not prepared the Energy Performance Certificate (EPC). If we have seen the EPC, then we will present the ratings here. We have not checked these ratings and so cannot comment on their accuracy. We are advised that the property's current energy performance, as recorded in the EPC, is:",
+      'Energy: Current: ${energyCurrent.isEmpty ? '-' : energyCurrent} Potential: ${energyPotential.isEmpty ? '-' : energyPotential}.',
+      'Environmental Impact: Current: ${impactCurrent.isEmpty ? '-' : impactCurrent} Potential: ${impactPotential.isEmpty ? '-' : impactPotential}.',
+      'Other Services:',
+    ];
+
+    if (!hasSolarElectricity && !hasSolarHotWater) {
+      phrases.add(
+        'Based on the available evidence, it appears that there are no other services or energy sources connected to the property at the time of my inspection.',
+      );
+      return phrases;
+    }
+
+    if (hasSolarElectricity) {
+      phrases.add(
+        'The property has photovoltaic panels designed to produce electricity from sunlight installed on the roof slope(s).',
+      );
+    }
+    if (hasSolarHotWater) {
+      phrases.add(
+        'The property has solar water heating panels installed on the roof slope(s).',
+      );
+    }
+    return phrases;
+  }
+
+  ReportScreen? _buildMergedSectionDEnergyScreen(
+    InspectionSectionDefinition sectionDef,
+    V2RawReportData rawData,
+    ExportConfig config,
+    bool isInspection,
+  ) {
+    final nodesById = <String, InspectionNodeDefinition>{
+      for (final n in sectionDef.nodes) n.id.trim().toLowerCase(): n,
+    };
+    final screens = <InspectionNodeDefinition>[];
+    for (final id in _sectionDEnergyScreenOrder) {
+      final node = nodesById[id];
+      if (node != null) screens.add(node);
+    }
+    if (screens.isEmpty) return null;
+
+    final mergedPhrases = <String>[];
+    final mergedFields = <ReportField>[];
+    final mergedNotes = <String>[];
+
+    if (config.includePhrases) {
+      final legacyPhrases = _buildLegacySectionDEnergyPhrases(rawData);
+      if (legacyPhrases.isNotEmpty) {
+        mergedPhrases.addAll(legacyPhrases);
+      }
+    }
+
+    for (final screen in screens) {
+      final note = _noteForScreen(rawData, screen.id);
+      if (note.isNotEmpty) mergedNotes.add(note);
+
+      final answers = _answersForScreen(rawData, screen.id);
+      final fields = _buildFields(screen, answers);
+
+      if (config.includePhrases && mergedPhrases.isEmpty) {
+        final screenPhrases = _phrasesForScreen(screen, rawData, isInspection);
+        if (screenPhrases.isNotEmpty) {
+          mergedPhrases.addAll(screenPhrases);
+        } else {
+          final fallback = _fieldsToPhrases(fields);
+          if (fallback.isNotEmpty) {
+            mergedPhrases.addAll(fallback);
+          } else if (fields.any((f) => f.displayValue.isNotEmpty)) {
+            mergedFields.addAll(fields);
+          }
+        }
+      } else if (fields.any((f) => f.displayValue.isNotEmpty)) {
+        mergedFields.addAll(fields);
+      }
+    }
+
+    if (mergedPhrases.isEmpty &&
+        mergedFields.isEmpty &&
+        mergedNotes.isEmpty &&
+        !config.includeEmptyScreens) {
+      return null;
+    }
+
+    final title = screens.first.title;
+    return ReportScreen(
+      screenId: 'section_d_energy_merged',
+      title: title,
+      fields: mergedPhrases.isNotEmpty ? const [] : mergedFields,
+      phrases: mergedPhrases,
+      userNote: mergedNotes.join('\n'),
+      isMergedGroup: true,
+    );
   }
 
   ReportSection? _buildSection(
@@ -205,6 +401,7 @@ class ReportBuilder {
 
       // Track which groups have already been emitted.
       final emittedGroups = <String>{};
+      var emittedSectionDEnergy = false;
 
       // Pre-build node lookup for parent-chain walking.
       final nodeMap = <String, InspectionNodeDefinition>{
@@ -224,8 +421,7 @@ class ReportBuilder {
           if (emittedGroups.contains(ownerGroupId)) continue;
           emittedGroups.add(ownerGroupId);
 
-          final group =
-              topLevelGroups.firstWhere((g) => g.id == ownerGroupId);
+          final group = topLevelGroups.firstWhere((g) => g.id == ownerGroupId);
           final descendants = groupDescendants[ownerGroupId]!;
           final isLegacyConstructionSummary =
               _isSectionDConstructionGroup(sectionDef, group);
@@ -235,10 +431,15 @@ class ReportBuilder {
           final mergedFields = <ReportField>[];
 
           for (final screen in descendants) {
+            // Legacy report keeps listed building as a standalone item.
+            if (isLegacyConstructionSummary &&
+                _isListedBuildingScreenId(screen.id)) {
+              continue;
+            }
             final note = rawData.persistedUserNotes[screen.id] ?? '';
             if (note.isNotEmpty) mergedNotes.add(note);
 
-            final answers = rawData.allAnswers[screen.id] ?? {};
+            final answers = _answersForScreen(rawData, screen.id);
             final fields = _buildFields(screen, answers);
 
             if (config.includePhrases) {
@@ -294,14 +495,39 @@ class ReportBuilder {
         // ── Standalone screen (not consumed by any group) ─────────
         if (node.type != InspectionNodeType.screen) continue;
         if (consumedScreenIds.contains(node.id)) continue;
+        if (_isSectionDEnergyScreen(sectionDef, node)) {
+          if (emittedSectionDEnergy) continue;
+          emittedSectionDEnergy = true;
+          final mergedEnergy = _buildMergedSectionDEnergyScreen(
+            sectionDef,
+            rawData,
+            config,
+            isInspection,
+          );
+          if (mergedEnergy != null) screens.add(mergedEnergy);
+          continue;
+        }
 
         final entry = _buildScreenEntry(node, rawData, config, isInspection);
         if (entry != null) screens.add(entry);
       }
     } else {
       // ── No numbered groups in this section — flat mode (unchanged) ──
+      var emittedSectionDEnergy = false;
       for (final node in sectionDef.nodes) {
         if (node.type != InspectionNodeType.screen) continue;
+        if (_isSectionDEnergyScreen(sectionDef, node)) {
+          if (emittedSectionDEnergy) continue;
+          emittedSectionDEnergy = true;
+          final mergedEnergy = _buildMergedSectionDEnergyScreen(
+            sectionDef,
+            rawData,
+            config,
+            isInspection,
+          );
+          if (mergedEnergy != null) screens.add(mergedEnergy);
+          continue;
+        }
         final entry = _buildScreenEntry(node, rawData, config, isInspection);
         if (entry != null) screens.add(entry);
       }
@@ -351,7 +577,7 @@ class ReportBuilder {
     ExportConfig config,
     bool isInspection,
   ) {
-    final answers = rawData.allAnswers[node.id] ?? {};
+    final answers = _answersForScreen(rawData, node.id);
     final isCompleted = rawData.screenStates[node.id] ?? false;
 
     var fields = _buildFields(node, answers);
@@ -374,7 +600,7 @@ class ReportBuilder {
       }
     }
 
-    final userNote = rawData.persistedUserNotes[node.id] ?? '';
+    final userNote = _noteForScreen(rawData, node.id);
 
     final hasData = fields.any((f) => f.displayValue.isNotEmpty) ||
         phrases.isNotEmpty ||
@@ -403,13 +629,13 @@ class ReportBuilder {
     V2RawReportData rawData,
     bool isInspection,
   ) {
-    final persisted = rawData.persistedPhrases[node.id];
+    final persisted = _persistedPhrasesForScreen(rawData, node.id);
     if (persisted != null) return persisted;
 
     // No persisted phrases and no user answers — screen was never visited.
-    if (!rawData.allAnswers.containsKey(node.id)) return const [];
+    final answers = _answersForScreen(rawData, node.id);
+    if (answers.isEmpty) return const [];
 
-    final answers = rawData.allAnswers[node.id]!;
     final enginePhrases = _buildPhrases(node.id, answers, isInspection);
     final fieldPhrases =
         FieldPhraseProcessor.buildFieldPhrases(node.fields, answers);
@@ -557,7 +783,8 @@ class ReportBuilder {
       }
     } catch (e, stack) {
       // Phrase generation is best-effort — don't fail the whole report
-      debugPrint('[ReportBuilder] Phrase generation failed for screen $screenId: $e\n$stack');
+      debugPrint(
+          '[ReportBuilder] Phrase generation failed for screen $screenId: $e\n$stack');
     }
     return [];
   }

@@ -60,8 +60,7 @@ class _InspectionOverviewPageState
             data: (nodes) {
               final screens =
                   nodes.where((n) => n.nodeType == 'screen').toList();
-              return screens.isNotEmpty &&
-                  screens.every((s) => s.isCompleted);
+              return screens.isNotEmpty && screens.every((s) => s.isCompleted);
             },
           );
           if (isComplete == false) {
@@ -127,186 +126,196 @@ class _InspectionOverviewPageState
         }
       },
       child: Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          onPressed: () =>
-              context.canPop() ? context.pop() : context.go(Routes.forms),
+        appBar: AppBar(
+          leading: BackButton(
+            onPressed: () =>
+                context.canPop() ? context.pop() : context.go(Routes.forms),
+          ),
+          title: Text(surveyState.survey?.title ?? 'Inspection'),
         ),
-        title: Text(surveyState.survey?.title ?? 'Inspection'),
-      ),
-      body: SafeArea(
-        child: ListView(
-          controller: _scrollController,
-          padding: const EdgeInsets.all(16),
-          children: [
-            _SurveyHeaderCard(
-              title: surveyState.survey?.title ?? 'Inspection',
-              address: surveyState.survey?.address,
-              jobRef: surveyState.survey?.jobRef,
-              clientName: surveyState.survey?.clientName,
-              surveyId: surveyId,
-            ),
-            const SizedBox(height: 12),
-            if (surveyState.survey != null)
-              SurveyProgressCard(
-                completedSections: surveyState.survey!.completedSections,
-                totalSections: surveyState.survey!.totalSections,
+        body: SafeArea(
+          child: ListView(
+            controller: _scrollController,
+            padding: const EdgeInsets.all(16),
+            children: [
+              _SurveyHeaderCard(
+                title: surveyState.survey?.title ?? 'Inspection',
+                address: surveyState.survey?.address,
+                jobRef: surveyState.survey?.jobRef,
+                clientName: surveyState.survey?.clientName,
+                surveyId: surveyId,
               ),
-            const SizedBox(height: 12),
-            _ConditionSummaryCard(surveyId: surveyId),
-            const SizedBox(height: 20),
-            sectionsAsync.when(
-              loading: () => const Padding(
-                padding: EdgeInsets.symmetric(vertical: 24),
-                child: Center(child: CircularProgressIndicator()),
-              ),
-              error: (error, _) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: Text('Failed to load sections: $error'),
-              ),
-              data: (sections) {
-                final sectionMap = {for (final s in sections) s.key: s};
-                final orderedSections = [
-                  for (final key in orderedKeys)
-                    if (sectionMap.containsKey(key)) sectionMap[key]!,
-                ];
+              const SizedBox(height: 12),
+              if (surveyState.survey != null)
+                SurveyProgressCard(
+                  completedSections: surveyState.survey!.completedSections,
+                  totalSections: surveyState.survey!.totalSections,
+                ),
+              const SizedBox(height: 12),
+              _ConditionSummaryCard(surveyId: surveyId),
+              const SizedBox(height: 20),
+              sectionsAsync.when(
+                loading: () => const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 24),
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                error: (error, _) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: Text('Failed to load sections: $error'),
+                ),
+                data: (sections) {
+                  final sectionMap = {for (final s in sections) s.key: s};
+                  final orderedSections = [
+                    for (final key in orderedKeys)
+                      if (sectionMap.containsKey(key)) sectionMap[key]!,
+                  ];
 
-                // Auto-scroll to the first incomplete section
-                _scrollToFirstIncomplete(
-                  orderedSections.map((s) => s.key).toList(),
-                );
+                  // Auto-scroll to the first incomplete section
+                  _scrollToFirstIncomplete(
+                    orderedSections.map((s) => s.key).toList(),
+                  );
 
-                final grouped = <String, List<InspectionSectionDefinition>>{
-                  'Property Information': [],
-                  'External Inspection': [],
-                  'Internal Inspection': [],
-                  'Assessment & Issues': [],
-                  'Documentation & Completion': [],
-                };
+                  final grouped = <String, List<InspectionSectionDefinition>>{
+                    'Property Information': [],
+                    'External Inspection': [],
+                    'Internal Inspection': [],
+                    'Assessment & Issues': [],
+                    'Documentation & Completion': [],
+                  };
 
-                for (final section in orderedSections) {
-                  switch (section.key) {
-                    case 'A':
-                    case 'D':
-                      grouped['Property Information']!.add(section);
-                      break;
-                    case 'E':
-                    case 'H':
-                      grouped['External Inspection']!.add(section);
-                      break;
-                    case 'F':
-                    case 'G':
-                    case 'R':
-                      grouped['Internal Inspection']!.add(section);
-                      break;
-                    case 'I':
-                    case 'J':
-                      grouped['Assessment & Issues']!.add(section);
-                      break;
+                  for (final section in orderedSections) {
+                    switch (section.key) {
+                      case 'A':
+                      case 'D':
+                        grouped['Property Information']!.add(section);
+                        break;
+                      case 'E':
+                      case 'H':
+                        grouped['External Inspection']!.add(section);
+                        break;
+                      case 'F':
+                      case 'G':
+                      case 'R':
+                        grouped['Internal Inspection']!.add(section);
+                        break;
+                      case 'I':
+                      case 'J':
+                        grouped['Assessment & Issues']!.add(section);
+                        break;
+                    }
                   }
-                }
 
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    for (final entry in grouped.entries) ...[
-                      Text(
-                        entry.key,
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -0.2,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      for (final section in entry.value) ...[
-                        _SectionCard(
-                          key: _sectionKeys.putIfAbsent(
-                            section.key, GlobalKey.new,
-                          ),
-                          surveyId: surveyId,
-                          sectionKey: section.key,
-                          title: displayOverride[section.key] ?? section.title,
-                          description: section.description.isEmpty
-                              ? 'Open ${displayOverride[section.key] ?? section.title}'
-                              : section.description,
-                          color: colorMap[section.key] ?? theme.colorScheme.primary,
-                          icon: _sectionIcons[section.key] ?? Icons.article_outlined,
-                          enabled: true,
-                        ),
-                        const SizedBox(height: 12),
-                      ],
-                      // AI Features — after Assessment & Issues
-                      if (entry.key == 'Assessment & Issues') ...[
-                        const SizedBox(height: 4),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (final entry in grouped.entries) ...[
                         Text(
-                          'AI Analysis',
+                          entry.key,
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w700,
                             letterSpacing: -0.2,
                           ),
                         ),
                         const SizedBox(height: 12),
-                        if (ref.watch(aiFeatureEnabledProvider(AiFeature.consistencyCheck))) ...[
-                          _AiActionCard(
-                            title: 'AI Consistency Check',
-                            description: 'Find contradictions and missing data across all sections.',
-                            icon: Icons.fact_check_outlined,
-                            color: const Color(0xFF6A1B9A),
+                        for (final section in entry.value) ...[
+                          _SectionCard(
+                            key: _sectionKeys.putIfAbsent(
+                              section.key,
+                              GlobalKey.new,
+                            ),
                             surveyId: surveyId,
+                            sectionKey: section.key,
+                            title:
+                                displayOverride[section.key] ?? section.title,
+                            description: section.description.isEmpty
+                                ? 'Open ${displayOverride[section.key] ?? section.title}'
+                                : section.description,
+                            color: colorMap[section.key] ??
+                                theme.colorScheme.primary,
+                            icon: _sectionIcons[section.key] ??
+                                Icons.article_outlined,
+                            enabled: true,
                           ),
                           const SizedBox(height: 12),
                         ],
-                        if (ref.watch(aiFeatureEnabledProvider(AiFeature.riskAssessment))) ...[
-                          _AiActionCard(
-                            title: 'AI Risk Assessment',
-                            description: 'AI-powered analysis of property risks and actions.',
-                            icon: Icons.shield_outlined,
-                            color: const Color(0xFFC62828),
-                            surveyId: surveyId,
-                            isRisk: true,
+                        // AI Features — after Assessment & Issues
+                        if (entry.key == 'Assessment & Issues') ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            'AI Analysis',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: -0.2,
+                            ),
                           ),
                           const SizedBox(height: 12),
-                        ],
-                        if (ref.watch(aiFeatureEnabledProvider(AiFeature.professionalRecommendations))) ...[
-                          _RecommendationActionCard(surveyId: surveyId),
-                          const SizedBox(height: 12),
-                        ],
-                      ],
-                      if (entry.key == 'Documentation & Completion') ...[
-                        _ActionCard(
-                          title: 'Attachments & Signatures',
-                          description: 'Photos, sketches, and party signatures.',
-                          icon: Icons.attachment_rounded,
-                          color: const Color(0xFF00796B),
-                          onTap: () => context.push(
-                            '${Routes.surveyAttachmentsPath(surveyId)}?title=${Uri.encodeComponent(surveyState.survey?.title ?? 'Inspection')}',
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        _ActionCard(
-                          title: 'Export Report',
-                          description: 'Generate PDF or DOCX report.',
-                          color: const Color(0xFF1565C0),
-                          onTap: () {
-                            ExportBottomSheet.show(
-                              context,
+                          if (ref.watch(aiFeatureEnabledProvider(
+                              AiFeature.consistencyCheck))) ...[
+                            _AiActionCard(
+                              title: 'AI Consistency Check',
+                              description:
+                                  'Find contradictions and missing data across all sections.',
+                              icon: Icons.fact_check_outlined,
+                              color: const Color(0xFF6A1B9A),
                               surveyId: surveyId,
-                              surveyTitle:
-                                  surveyState.survey?.title ?? 'Inspection',
-                              reportType: ReportType.inspection,
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 12),
+                            ),
+                            const SizedBox(height: 12),
+                          ],
+                          if (ref.watch(aiFeatureEnabledProvider(
+                              AiFeature.riskAssessment))) ...[
+                            _AiActionCard(
+                              title: 'AI Risk Assessment',
+                              description:
+                                  'AI-powered analysis of property risks and actions.',
+                              icon: Icons.shield_outlined,
+                              color: const Color(0xFFC62828),
+                              surveyId: surveyId,
+                              isRisk: true,
+                            ),
+                            const SizedBox(height: 12),
+                          ],
+                          if (ref.watch(aiFeatureEnabledProvider(
+                              AiFeature.professionalRecommendations))) ...[
+                            _RecommendationActionCard(surveyId: surveyId),
+                            const SizedBox(height: 12),
+                          ],
+                        ],
+                        if (entry.key == 'Documentation & Completion') ...[
+                          _ActionCard(
+                            title: 'Attachments & Signatures',
+                            description:
+                                'Photos, sketches, and party signatures.',
+                            icon: Icons.attachment_rounded,
+                            color: const Color(0xFF00796B),
+                            onTap: () => context.push(
+                              '${Routes.surveyAttachmentsPath(surveyId)}?title=${Uri.encodeComponent(surveyState.survey?.title ?? 'Inspection')}',
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          _ActionCard(
+                            title: 'Export Report',
+                            description: 'Generate PDF or DOCX report.',
+                            color: const Color(0xFF1565C0),
+                            onTap: () {
+                              ExportBottomSheet.show(
+                                context,
+                                surveyId: surveyId,
+                                surveyTitle:
+                                    surveyState.survey?.title ?? 'Inspection',
+                                reportType: ReportType.inspection,
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 12),
+                        ],
                       ],
                     ],
-                  ],
-                );
-              },
-            ),
-          ],
+                  );
+                },
+              ),
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
@@ -430,13 +439,15 @@ class _SectionCard extends ConsumerWidget {
     final theme = Theme.of(context);
 
     final nodesAsync = enabled
-        ? ref.watch(inspectionNodesProvider((surveyId: surveyId, sectionKey: sectionKey)))
+        ? ref.watch(inspectionNodesProvider(
+            (surveyId: surveyId, sectionKey: sectionKey)))
         : null;
 
     final trailing = enabled
         ? nodesAsync!.when(
             data: (nodes) {
-              final screenNodes = nodes.where((n) => n.nodeType == 'screen').toList();
+              final screenNodes =
+                  nodes.where((n) => n.nodeType == 'screen').toList();
               return _ProgressBadge(
                 completed: screenNodes.where((s) => s.isCompleted).length,
                 total: screenNodes.length,
@@ -456,11 +467,14 @@ class _SectionCard extends ConsumerWidget {
         : const _ComingSoonBadge();
 
     return Material(
-      color: enabled ? theme.colorScheme.surface : theme.colorScheme.surfaceContainerLowest,
+      color: enabled
+          ? theme.colorScheme.surface
+          : theme.colorScheme.surfaceContainerLowest,
       borderRadius: BorderRadius.circular(16),
       child: InkWell(
         onTap: enabled
-            ? () => context.push(Routes.inspectionSectionPath(surveyId, sectionKey))
+            ? () =>
+                context.push(Routes.inspectionSectionPath(surveyId, sectionKey))
             : null,
         borderRadius: BorderRadius.circular(16),
         child: Container(

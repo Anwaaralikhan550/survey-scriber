@@ -188,7 +188,27 @@ abstract class BaseSurveyRepository {
           ..where((tbl) => tbl.surveyId.equals(surveyId)))
         .get();
     if (existingRows.isNotEmpty && existingRows.length == expectedCount) {
-      return false;
+      // Reinitialize when tree structure changed (parent/title/type), not just count.
+      final treeById = <String, InspectionNodeDefinition>{};
+      for (final section in tree.sections) {
+        for (final node in section.nodes) {
+          treeById[node.id] = node;
+        }
+      }
+      var structureMatches = true;
+      for (final row in existingRows) {
+        final node = treeById[row.screenId];
+        if (node == null ||
+            row.parentId != node.parentId ||
+            row.title != node.title ||
+            row.nodeType != node.type.name) {
+          structureMatches = false;
+          break;
+        }
+      }
+      if (structureMatches) {
+        return false;
+      }
     }
     final now = DateTime.now();
     final entries = <InspectionV2ScreensCompanion>[];

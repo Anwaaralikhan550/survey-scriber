@@ -51,7 +51,11 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
       final existing = await (select(syncQueue)
             ..where((t) => t.entityId.equals(entityId))
             ..where((t) => t.entityType.equals(entityType.name))
-            ..where((t) => t.status.isIn(['pending', 'failed'])))
+            ..where((t) => t.status.isIn(['pending', 'failed']))
+            // Multiple rows can exist due to prior crashes/races; select one
+            // deterministic row to merge into instead of throwing.
+            ..orderBy([(t) => OrderingTerm.desc(t.createdAt)])
+            ..limit(1))
           .getSingleOrNull();
 
       if (existing != null) {
@@ -61,7 +65,8 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
         );
 
         // Decode existing payload for potential merging
-        final existingPayload = jsonDecode(existing.payload) as Map<String, dynamic>;
+        final existingPayload =
+            jsonDecode(existing.payload) as Map<String, dynamic>;
 
         // ========================================
         // ACTION PRECEDENCE LOGIC
@@ -75,7 +80,8 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
 
         // Case: CREATE + DELETE = Remove from queue entirely
         if (shouldDelete) {
-          await (delete(syncQueue)..where((t) => t.id.equals(existing.id))).go();
+          await (delete(syncQueue)..where((t) => t.id.equals(existing.id)))
+              .go();
           return -1; // Indicate item was removed
         }
 
@@ -88,7 +94,8 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
             retryCount: const Value(0),
             status: const Value('pending'),
             errorMessage: const Value(null),
-            priority: Value(priority < existing.priority ? priority : existing.priority),
+            priority: Value(
+                priority < existing.priority ? priority : existing.priority),
           ),
         );
         return existing.id;
@@ -218,15 +225,19 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
     return merged;
   }
 
-  /// Get all pending items ordered by priority and creation time (FIFO)
-  Future<List<SyncQueueData>> getPendingItems({int limit = 50}) => (select(syncQueue)
-          ..where((t) => t.status.equals('pending'))
-          ..orderBy([
-            (t) => OrderingTerm.asc(t.priority),
-            (t) => OrderingTerm.asc(t.createdAt),
-          ])
-          ..limit(limit))
-        .get();
+  /// Get all pending items ordered by priority and creation time (FIFO).
+  ///
+  /// Keep this cap large enough to include parent+child chains in one cycle.
+  /// Small caps can starve parent entities and cause endless deferrals.
+  Future<List<SyncQueueData>> getPendingItems({int limit = 5000}) =>
+      (select(syncQueue)
+            ..where((t) => t.status.equals('pending'))
+            ..orderBy([
+              (t) => OrderingTerm.asc(t.priority),
+              (t) => OrderingTerm.asc(t.createdAt),
+            ])
+            ..limit(limit))
+          .get();
 
   /// Get count of pending items
   Future<int> getPendingCount() async {
@@ -259,12 +270,13 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
   }
 
   /// Mark item as processing with timestamp for crash recovery
-  Future<void> markAsProcessing(int id) => (update(syncQueue)..where((t) => t.id.equals(id))).write(
-      SyncQueueCompanion(
-        status: const Value('processing'),
-        processedAt: Value(DateTime.now()),
-      ),
-    );
+  Future<void> markAsProcessing(int id) =>
+      (update(syncQueue)..where((t) => t.id.equals(id))).write(
+        SyncQueueCompanion(
+          status: const Value('processing'),
+          processedAt: Value(DateTime.now()),
+        ),
+      );
 
   /// Recover stale processing items (crash recovery - F9 fix)
   ///
@@ -297,12 +309,13 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
 
   /// Get items currently stuck in processing (for diagnostics)
   Future<List<SyncQueueData>> getProcessingItems() => (select(syncQueue)
-          ..where((t) => t.status.equals('processing'))
-          ..orderBy([(t) => OrderingTerm.asc(t.processedAt)]))
-        .get();
+        ..where((t) => t.status.equals('processing'))
+        ..orderBy([(t) => OrderingTerm.asc(t.processedAt)]))
+      .get();
 
   /// Mark item as completed and remove from queue
-  Future<void> markAsCompleted(int id) => (delete(syncQueue)..where((t) => t.id.equals(id))).go();
+  Future<void> markAsCompleted(int id) =>
+      (delete(syncQueue)..where((t) => t.id.equals(id))).go();
 
   /// Mark item as failed with error message
   Future<void> markAsFailed(int id, String errorMessage) async {
@@ -336,24 +349,26 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
       );
 
   /// Mark item as conflict
-  Future<void> markAsConflict(int id, int serverVersion) => (update(syncQueue)..where((t) => t.id.equals(id))).write(
-      SyncQueueCompanion(
-        status: const Value('conflict'),
-        serverVersion: Value(serverVersion),
-      ),
-    );
+  Future<void> markAsConflict(int id, int serverVersion) =>
+      (update(syncQueue)..where((t) => t.id.equals(id))).write(
+        SyncQueueCompanion(
+          status: const Value('conflict'),
+          serverVersion: Value(serverVersion),
+        ),
+      );
 
   /// Reset failed items to pending for ONE more retry attempt.
   ///
   /// Sets retryCount to maxRetries - 1 so each manual "Retry Failed" tap
   /// gives exactly 1 automatic attempt. This prevents infinite retry loops
   /// where items cycle between 'failed' → reset → 3 retries → 'failed' → ...
-  Future<void> resetFailedItems() => (update(syncQueue)..where((t) => t.status.equals('failed'))).write(
-      const SyncQueueCompanion(
-        status: Value('pending'),
-        retryCount: Value(SyncQueueItem.maxRetries - 1),
-      ),
-    );
+  Future<void> resetFailedItems() =>
+      (update(syncQueue)..where((t) => t.status.equals('failed'))).write(
+        const SyncQueueCompanion(
+          status: Value('pending'),
+          retryCount: Value(SyncQueueItem.maxRetries - 1),
+        ),
+      );
 
   /// Permanently remove all failed items from the queue.
   ///
@@ -377,30 +392,31 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
   /// the idempotent-create fix was applied. Since the entity already exists
   /// on the server, these should be treated as successfully synced.
   /// Returns the number of resolved items.
-  Future<int> resolveCreateConflicts() =>
-      (delete(syncQueue)
-            ..where((t) => t.status.equals('conflict'))
-            ..where((t) => t.action.equals('create')))
-          .go();
+  Future<int> resolveCreateConflicts() => (delete(syncQueue)
+        ..where((t) => t.status.equals('conflict'))
+        ..where((t) => t.action.equals('create')))
+      .go();
 
   /// Get items with conflicts
   Future<List<SyncQueueData>> getConflictItems() => (select(syncQueue)
-          ..where((t) => t.status.equals('conflict'))
-          ..orderBy([(t) => OrderingTerm.asc(t.createdAt)]))
-        .get();
+        ..where((t) => t.status.equals('conflict'))
+        ..orderBy([(t) => OrderingTerm.asc(t.createdAt)]))
+      .get();
 
   /// Resolve conflict by keeping local version
-  Future<void> resolveConflictKeepLocal(int id) => (update(syncQueue)..where((t) => t.id.equals(id))).write(
-      const SyncQueueCompanion(
-        status: Value('pending'),
-        retryCount: Value(0),
-        errorMessage: Value(null),
-        serverVersion: Value(null),
-      ),
-    );
+  Future<void> resolveConflictKeepLocal(int id) =>
+      (update(syncQueue)..where((t) => t.id.equals(id))).write(
+        const SyncQueueCompanion(
+          status: Value('pending'),
+          retryCount: Value(0),
+          errorMessage: Value(null),
+          serverVersion: Value(null),
+        ),
+      );
 
   /// Clear all completed items
-  Future<void> clearCompleted() => (delete(syncQueue)..where((t) => t.status.equals('completed'))).go();
+  Future<void> clearCompleted() =>
+      (delete(syncQueue)..where((t) => t.status.equals('completed'))).go();
 
   /// Watch pending count for reactive UI
   Stream<int> watchPendingCount() {
@@ -408,24 +424,29 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
       ..addColumns([syncQueue.id.count()])
       ..where(syncQueue.status.equals('pending'));
 
-    return query.watchSingle().map((row) => row.read(syncQueue.id.count()) ?? 0);
+    return query
+        .watchSingle()
+        .map((row) => row.read(syncQueue.id.count()) ?? 0);
   }
 
   /// Watch all queue stats
-  Stream<({int pending, int failed, int conflict})> watchQueueStats() => customSelect(
-      '''
+  Stream<({int pending, int failed, int conflict})> watchQueueStats() =>
+      customSelect(
+        '''
       SELECT
         SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending,
         SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed,
         SUM(CASE WHEN status = 'conflict' THEN 1 ELSE 0 END) as conflict
       FROM sync_queue
       ''',
-      readsFrom: {syncQueue},
-    ).watchSingle().map((row) => (
-          pending: row.read<int?>('pending') ?? 0,
-          failed: row.read<int?>('failed') ?? 0,
-          conflict: row.read<int?>('conflict') ?? 0,
-        ),);
+        readsFrom: {syncQueue},
+      ).watchSingle().map(
+            (row) => (
+              pending: row.read<int?>('pending') ?? 0,
+              failed: row.read<int?>('failed') ?? 0,
+              conflict: row.read<int?>('conflict') ?? 0,
+            ),
+          );
 
   /// Check if a specific entity has an unsynced queue item.
   ///
@@ -436,7 +457,9 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
   Future<bool> hasPendingSync(String entityId) async {
     final result = await (select(syncQueue)
           ..where((t) => t.entityId.equals(entityId))
-          ..where((t) => t.status.isIn(['pending', 'processing', 'failed', 'conflict'])))
+          ..where((t) =>
+              t.status.isIn(['pending', 'processing', 'failed', 'conflict']))
+          ..limit(1))
         .getSingleOrNull();
     return result != null;
   }
@@ -479,24 +502,24 @@ class SyncQueueDao extends DatabaseAccessor<AppDatabase>
 
   /// Convert database row to SyncQueueItem
   SyncQueueItem toSyncQueueItem(SyncQueueData data) => SyncQueueItem(
-      id: data.id,
-      entityType: SyncEntityType.values.firstWhere(
-        (t) => t.name == data.entityType,
-        orElse: () => SyncEntityType.survey,
-      ),
-      entityId: data.entityId,
-      action: SyncAction.values.firstWhere(
-        (a) => a.name == data.action,
-        orElse: () => SyncAction.update,
-      ),
-      payload: data.payload,
-      createdAt: data.createdAt,
-      retryCount: data.retryCount,
-      status: SyncQueueItemStatus.values.firstWhere(
-        (s) => s.name == data.status,
-        orElse: () => SyncQueueItemStatus.pending,
-      ),
-      errorMessage: data.errorMessage,
-      serverVersion: data.serverVersion,
-    );
+        id: data.id,
+        entityType: SyncEntityType.values.firstWhere(
+          (t) => t.name == data.entityType,
+          orElse: () => SyncEntityType.survey,
+        ),
+        entityId: data.entityId,
+        action: SyncAction.values.firstWhere(
+          (a) => a.name == data.action,
+          orElse: () => SyncAction.update,
+        ),
+        payload: data.payload,
+        createdAt: data.createdAt,
+        retryCount: data.retryCount,
+        status: SyncQueueItemStatus.values.firstWhere(
+          (s) => s.name == data.status,
+          orElse: () => SyncQueueItemStatus.pending,
+        ),
+        errorMessage: data.errorMessage,
+        serverVersion: data.serverVersion,
+      );
 }

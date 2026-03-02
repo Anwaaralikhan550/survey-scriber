@@ -3,6 +3,902 @@ import 'package:flutter/material.dart';
 import '../../../../shared/presentation/widgets/voice_text_field.dart';
 import '../../domain/models/inspection_models.dart';
 
+List<InspectionFieldDefinition> sanitizeInspectionFieldsForScreen(
+  String screenId,
+  List<InspectionFieldDefinition> fields,
+) {
+  if (screenId == 'activity_outside_property_conservatory_porch_roof') {
+    return fields
+        .where((field) =>
+            field.id != 'actv_conservatory_porch' &&
+            field.id != 'cb_floor_above')
+        .toList();
+  }
+  if (screenId == 'activity_outside_property_conservatory_porch_roof__roof') {
+    return fields
+        .where((field) => field.id != 'actv_conservatory_porch')
+        .toList();
+  }
+  if (screenId == 'activity_outside_property_conservatory_porch_doors') {
+    return fields
+        .where((field) => field.id != 'actv_conservatory_porch')
+        .toList();
+  }
+  if (screenId == 'activity_outside_property_conservatory_porch_doors__doors') {
+    return fields
+        .where((field) => field.id != 'actv_conservatory_porch')
+        .toList();
+  }
+  if (screenId == 'activity_outside_property_conservatory_porch_windows') {
+    return fields
+        .where((field) => field.id != 'actv_conservatory_porch')
+        .toList();
+  }
+  if (screenId ==
+      'activity_outside_property_conservatory_porch_windows__windows') {
+    return fields
+        .where((field) => field.id != 'actv_conservatory_porch')
+        .toList();
+  }
+  if (screenId ==
+          'activity_outside_property_conservatory_porch_safety_glass_rating' ||
+      screenId ==
+          'activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating' ||
+      screenId == 'activity_outside_property_porch_open_to_building' ||
+      screenId ==
+          'activity_outside_property_porch_open_to_building__open_to_building' ||
+      screenId == 'activity_outside_property_porch_poor_condition' ||
+      screenId ==
+          'activity_outside_property_porch_poor_condition__poor_condition') {
+    return fields.where((field) => field.id != 'actv_condition').toList();
+  }
+  if (screenId ==
+      'activity_outside_property_conservatory_porch_not_inspected') {
+    return fields
+        .where((field) =>
+            field.id == 'cb_main_building' || field.id == 'cb_back_addition')
+        .toList();
+  }
+  if (screenId == 'activity_outside_property_other_not_inspected') {
+    return fields.where((field) => field.id == 'cb_not_inspected').toList();
+  }
+  if (screenId == 'activity_inside_property_other_not_inspected') {
+    // Legacy parity: only one "Not inspected" checkbox.
+    return fields.where((field) => field.id == 'cb_not_inspected').toList();
+  }
+  if (screenId == 'activity_services_water_main_screen') {
+    // Legacy parity: Water screen should include stopcock/lead controls
+    // plus condition rating and note.
+    final byId = <String, InspectionFieldDefinition>{
+      for (final field in fields) field.id: field,
+    };
+    InspectionFieldDefinition? f(String id) => byId[id];
+
+    return <InspectionFieldDefinition>[
+      f('cb_stopcock_found') ??
+          const InspectionFieldDefinition(
+            id: 'cb_stopcock_found',
+            label: 'Main water stopcock found',
+            type: InspectionFieldType.checkbox,
+          ),
+      f('actv_stopcok_location') ??
+          const InspectionFieldDefinition(
+            id: 'actv_stopcok_location',
+            label: 'Main water stopcock location',
+            type: InspectionFieldType.dropdown,
+            options: <String>[
+              'Front',
+              'Side',
+              'Rear',
+              'Other',
+            ],
+            conditionalOn: 'cb_stopcock_found=true',
+            conditionalValue: '',
+            conditionalMode: 'show',
+          ),
+      f('cb_lead_rising') ??
+          const InspectionFieldDefinition(
+            id: 'cb_lead_rising',
+            label: 'Lead rising main',
+            type: InspectionFieldType.checkbox,
+          ),
+      if (f('android_material_design_spinner4') != null)
+        f('android_material_design_spinner4')!,
+      if (f('ar_etNote') != null) f('ar_etNote')!,
+    ];
+  }
+  if (screenId == 'activity_services_heating_main_screen') {
+    // Legacy parity: collapsed Heating menu keeps the detailed "About Heating"
+    // controls on this screen.
+    final byId = <String, InspectionFieldDefinition>{
+      for (final field in fields) field.id: field,
+    };
+    InspectionFieldDefinition? f(String id) => byId[id];
+
+    return <InspectionFieldDefinition>[
+      const InspectionFieldDefinition(
+        id: 'cb_not_inspected',
+        label: 'Not Inspected',
+        type: InspectionFieldType.checkbox,
+      ),
+      const InspectionFieldDefinition(
+        id: 'cb_no_heating',
+        label: 'No Heating',
+        type: InspectionFieldType.checkbox,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'cb_communal_heating',
+        label: 'Communal Heating',
+        type: InspectionFieldType.checkbox,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'label_other_heating',
+        label: 'Other Heating',
+        type: InspectionFieldType.label,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'cb_oil_filled',
+        label: 'Oil filled',
+        type: InspectionFieldType.checkbox,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'cb_electric_storage',
+        label: 'Electric storage',
+        type: InspectionFieldType.checkbox,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'cb_convector',
+        label: 'Convector',
+        type: InspectionFieldType.checkbox,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'cb_other_923',
+        label: 'Other',
+        type: InspectionFieldType.checkbox,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'et_other_717',
+        label: 'Other',
+        type: InspectionFieldType.text,
+        conditionalOn: 'cb_other_923 & !cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'label_property_heated_by',
+        label: 'Property heated by',
+        type: InspectionFieldType.label,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'actv_boiler',
+        label: 'Boiler',
+        type: InspectionFieldType.dropdown,
+        options: <String>[
+          'Combination boiler',
+          'Conventional boiler',
+          'Condensing boiler',
+          'Conventional boiler combined with tank',
+          'Other',
+        ],
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'actv_location',
+        label: 'Location',
+        type: InspectionFieldType.dropdown,
+        options: <String>[
+          'Kitchen',
+          'Utility',
+          'Bedroom',
+          'Garage',
+          'Lounge',
+          'Chimney breast',
+          'Other',
+        ],
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'label_boiler_flue',
+        label: 'Boiler Flue Connected To',
+        type: InspectionFieldType.label,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'actv_location_new',
+        label: 'Location',
+        type: InspectionFieldType.dropdown,
+        options: <String>[
+          'Sidewall',
+          'Roof covering',
+          'Chimney',
+          'Other',
+        ],
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'actv_condition',
+        label: 'Condition',
+        type: InspectionFieldType.dropdown,
+        options: <String>[
+          'Reasonable',
+          'Satisfactory',
+          'Unsatisfactory and Poor',
+        ],
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'actv_connected_heat',
+        label: 'Connected heat emitters',
+        type: InspectionFieldType.dropdown,
+        options: <String>[
+          'Radiators',
+          'Underfloor pipes',
+          'Other',
+        ],
+        conditionalOn: '!cb_not_inspected',
+      ),
+      const InspectionFieldDefinition(
+        id: 'cb_old_boiler',
+        label: 'Old Boiler',
+        type: InspectionFieldType.checkbox,
+        conditionalOn: '!cb_not_inspected',
+      ),
+      if (f('android_material_design_spinner4') != null)
+        f('android_material_design_spinner4')!,
+      if (f('ar_etNote') != null) f('ar_etNote')!,
+    ];
+  }
+  if (screenId == 'activity_inside_property_ceilings_not_inspected') {
+    // Legacy parity: this screen has only one field ("Not inspected").
+    return fields.where((field) => field.id == 'cb_not_inspected').toList();
+  }
+  if (screenId == 'activity_in_side_property_fire_places') {
+    // Legacy parity: "An open fire" should not include the fire-type list.
+    const blockedIds = <String>{
+      'other',
+      'label_fire_type',
+      'cb_flues_not_inspected',
+      'cb_an_open_fire',
+      'cb_gas_fire',
+      'cb_imitation_system',
+      'cb_wood_burning_stove',
+      'cb_electric_fire',
+      'cb_other_316',
+      'et_other_633',
+    };
+    return fields
+        .where((field) => !blockedIds.contains(field.id))
+        .map((field) => field.id == 'actv_condition'
+            ? field.copyWith(label: 'Condition')
+            : field)
+        .toList();
+  }
+  if (screenId == 'activity_in_side_property_fire_places_repair_boiler_flue') {
+    // Legacy parity: this dropdown label is explicit in legacy app.
+    return fields
+        .map((field) => field.id == 'actv_flue_discharges_through'
+            ? field.copyWith(label: 'Fire discharges through')
+            : field)
+        .toList();
+  }
+  if (screenId == 'activity_in_side_property_bathroom_fittings_second') {
+    // Legacy parity: the quality dropdown label should be "Condition".
+    return fields
+        .map((field) => field.id == 'android_material_design_spinner3'
+            ? field.copyWith(label: 'Condition')
+            : field)
+        .toList();
+  }
+  if (screenId == 'activity_in_side_property_bathroom_fittings_extractor_fan') {
+    // Legacy parity: show only Condition first; reveal rest by OK/Replace.
+    final byId = <String, InspectionFieldDefinition>{
+      for (final field in fields) field.id: field,
+    };
+    InspectionFieldDefinition? f(String id) => byId[id];
+
+    final result = <InspectionFieldDefinition>[
+      if (f('actv_status') != null)
+        f('actv_status')!.copyWith(label: 'Condition'),
+      if (f('label_fan_location_3') != null)
+        f('label_fan_location_3')!.copyWith(
+          conditionalOn: 'actv_status=OK | actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_bathroom_56') != null)
+        f('cb_bathroom_56')!.copyWith(
+          conditionalOn: 'actv_status=OK | actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_shower_room_100') != null)
+        f('cb_shower_room_100')!.copyWith(
+          conditionalOn: 'actv_status=OK | actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_en_suite_bathroom_101') != null)
+        f('cb_en_suite_bathroom_101')!.copyWith(
+          conditionalOn: 'actv_status=OK | actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_en_suite_shower_room_81') != null)
+        f('cb_en_suite_shower_room_81')!.copyWith(
+          conditionalOn: 'actv_status=OK | actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_separate_toilet_99') != null)
+        f('cb_separate_toilet_99')!.copyWith(
+          conditionalOn: 'actv_status=OK | actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_other_725') != null)
+        f('cb_other_725')!.copyWith(
+          conditionalOn: 'actv_status=OK | actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('et_other_631') != null)
+        f('et_other_631')!.copyWith(
+          conditionalOn:
+              'actv_status=OK & cb_other_725 | actv_status=Replace & cb_other_725',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('label_tested') != null)
+        f('label_tested')!.copyWith(
+          conditionalOn: 'actv_status=OK',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_was_switched_on_and_it_was_35') != null)
+        f('cb_was_switched_on_and_it_was_35')!.copyWith(
+          conditionalOn: 'actv_status=OK',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_were_switched_on_and_were_64') != null)
+        f('cb_were_switched_on_and_were_64')!.copyWith(
+          conditionalOn: 'actv_status=OK',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_other_1068') != null)
+        f('cb_other_1068')!.copyWith(
+          conditionalOn: 'actv_status=OK',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('et_other_297') != null)
+        f('et_other_297')!.copyWith(
+          conditionalOn: 'actv_status=OK & cb_other_1068',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('label_defect_70') != null)
+        f('label_defect_70')!.copyWith(
+          conditionalOn: 'actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_was_not_working') != null)
+        f('cb_was_not_working')!.copyWith(
+          conditionalOn: 'actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_has_blocked_vent') != null)
+        f('cb_has_blocked_vent')!.copyWith(
+          conditionalOn: 'actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_is_too_small') != null)
+        f('cb_is_too_small')!.copyWith(
+          conditionalOn: 'actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_has_weak_suction') != null)
+        f('cb_has_weak_suction')!.copyWith(
+          conditionalOn: 'actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_other_987') != null)
+        f('cb_other_987')!.copyWith(
+          conditionalOn: 'actv_status=Replace',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('et_other_368') != null)
+        f('et_other_368')!.copyWith(
+          conditionalOn: 'actv_status=Replace & cb_other_987',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+    ];
+    return result;
+  }
+  if (screenId == 'activity_in_side_property_bathroom_fittings_sealant') {
+    // Legacy parity: keep this defect item as "Damaged" only.
+    return fields
+        .map((field) =>
+            field.id == 'cb_damaged_partly_missing_poorly_applied_76'
+                ? field.copyWith(label: 'Damaged')
+                : field)
+        .toList();
+  }
+  if (screenId == 'activity_in_side_property_other_communal_area') {
+    // Legacy parity: inspected-state dropdown is "Condition".
+    return fields
+        .map((field) => field.id == 'actv_condition'
+            ? field.copyWith(label: 'Condition')
+            : field)
+        .toList();
+  }
+  if (screenId == 'activity_in_side_property_built_in_fittings') {
+    // Legacy parity: quality dropdown should be labeled Condition.
+    return fields
+        .map((field) => field.id == 'android_material_design_spinner3'
+            ? field.copyWith(label: 'Condition')
+            : field)
+        .toList();
+  }
+  if (screenId.contains('activity_in_side_property_wood_work_second')) {
+    // Legacy parity: keep only "made up of" fields and condition.
+    const allowedIds = <String>{
+      'label_made_up_of_2',
+      'cb_doors',
+      'cb_architraves',
+      'cb_stairs',
+      'cb_stairs_threads',
+      'cb_handrails',
+      'cb_balusters',
+      'cb_skirting_boards',
+      'cb_cladding',
+      'cb_other_410',
+      'et_other_800',
+      'actv_condition',
+    };
+    return fields
+        .where((field) => allowedIds.contains(field.id))
+        .map((field) => field.id == 'actv_condition'
+            ? field.copyWith(label: 'Condition')
+            : field)
+        .toList();
+  }
+  if (screenId == 'activity_in_side_property_wood_work' ||
+      screenId.startsWith('activity_in_side_property_wood_work__')) {
+    // Legacy parity: keep only native main wood-work controls.
+    const allowedIds = <String>{
+      'label_woodwork',
+      'label_fittedbuiltin_cupboards',
+      'label_damaged_lock',
+      'cb_Door_sampling',
+      'cb_out_of_square_doors',
+      'cb_glazed_internal_doors',
+      'cb_creaking_stairs',
+      'cb_stairs_handrails',
+      'cb_no_stairs_handrails',
+      'cb_open_threads',
+    };
+    return fields.where((field) => allowedIds.contains(field.id)).toList();
+  }
+  if (screenId.startsWith('activity_inside_property_wap_not_inspected')) {
+    // Legacy parity: walls & partitions not inspected has one checkbox only.
+    return fields.where((field) => field.id == 'cb_not_inspected').toList();
+  }
+  if (screenId.startsWith('activity_inside_property_about_roof_structure')) {
+    // Legacy parity: drop inactive/hidden extras from XML.
+    return fields
+        .where((field) =>
+            field.id != 'cb_underlining' &&
+            field.id != 'actv_cause' &&
+            field.id != 'label_ventilation')
+        .map((field) => field.id == 'actv_roof_structure_condition'
+            ? field.copyWith(label: 'Roof Structure Condition')
+            : field)
+        .toList();
+  }
+  if (screenId.startsWith('activity_inside_property_water_tank')) {
+    // Legacy parity: hide controls marked gone in XML.
+    return fields
+        .where((field) =>
+            field.id != 'label_remove_defects' && field.id != 'cb_defect')
+        .map((field) => field.id == 'actv_tank_condition'
+            ? field.copyWith(label: 'Tank Condition')
+            : field)
+        .toList();
+  }
+  if (screenId.startsWith('activity_inside_property_wap_walls')) {
+    // Legacy parity: the final dropdown is Condition, not Other.
+    return fields
+        .map((field) => field.id == 'actv_condition'
+            ? field.copyWith(label: 'Condition')
+            : field)
+        .toList();
+  }
+  if (screenId.startsWith('activity_in_side_property_wap_dampness')) {
+    // Legacy parity: keep only legacy dampness fields and visibility flow.
+    final byId = <String, InspectionFieldDefinition>{
+      for (final field in fields) field.id: field,
+    };
+
+    InspectionFieldDefinition? f(String id) => byId[id];
+
+    final result = <InspectionFieldDefinition>[
+      if (f('damp_status') != null) f('damp_status')!,
+      if (f('et_location') != null)
+        f('et_location')!.copyWith(
+          conditionalOn: 'damp_status=Present',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('label_eg_lower_walls_in_the_kitchen') != null)
+        f('label_eg_lower_walls_in_the_kitchen')!.copyWith(
+          conditionalOn: 'damp_status=Present',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('label_cause') != null)
+        f('label_cause')!.copyWith(
+          conditionalOn: 'damp_status=Present',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('actv_status_91') != null)
+        f('actv_status_91')!.copyWith(
+          conditionalOn: 'damp_status=Present',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('label_caused_by_4') != null)
+        f('label_caused_by_4')!.copyWith(
+          conditionalOn: 'damp_status=Present & actv_status_91=Known',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_blocked_gullies') != null)
+        f('cb_blocked_gullies')!.copyWith(
+          conditionalOn: 'damp_status=Present & actv_status_91=Known',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_leaking_pipes') != null)
+        f('cb_leaking_pipes')!.copyWith(
+          conditionalOn: 'damp_status=Present & actv_status_91=Known',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_defective_rainwater_goods') != null)
+        f('cb_defective_rainwater_goods')!.copyWith(
+          conditionalOn: 'damp_status=Present & actv_status_91=Known',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_bridged_damp_proof_course') != null)
+        f('cb_bridged_damp_proof_course')!.copyWith(
+          conditionalOn: 'damp_status=Present & actv_status_91=Known',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_rising_damp') != null)
+        f('cb_rising_damp')!.copyWith(
+          conditionalOn: 'damp_status=Present & actv_status_91=Known',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_other') != null)
+        f('cb_other')!.copyWith(
+          conditionalOn: 'damp_status=Present & actv_status_91=Known',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('et_other_839') != null)
+        f('et_other_839')!.copyWith(
+          conditionalOn:
+              'damp_status=Present & actv_status_91=Known & cb_other',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+    ];
+
+    return result;
+  }
+  if (screenId.startsWith('activity_in_side_property_wap_removed_wall')) {
+    // Product decision: non-repair Removed Wall should not have condition split.
+    final byId = <String, InspectionFieldDefinition>{
+      for (final field in fields) field.id: field,
+    };
+    InspectionFieldDefinition? f(String id) => byId[id];
+
+    InspectionFieldDefinition alwaysVisible(String id) {
+      final field = f(id);
+      if (field == null) {
+        return const InspectionFieldDefinition(
+          id: '',
+          label: '',
+          type: InspectionFieldType.text,
+        );
+      }
+      return field.copyWith(
+        conditionalOn: '',
+        conditionalValue: '',
+        conditionalMode: 'show',
+      );
+    }
+
+    final result = <InspectionFieldDefinition>[
+      alwaysVisible('cb_lounge'),
+      alwaysVisible('cb_bedroom'),
+      alwaysVisible('cb_kitchen'),
+      alwaysVisible('cb_bathroom'),
+      alwaysVisible('cb_other_752'),
+      if (f('et_other_666') != null)
+        f('et_other_666')!.copyWith(
+          conditionalOn: 'cb_other_752=true',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+    ].where((field) => field.id.isNotEmpty).toList();
+
+    return result;
+  }
+  if (screenId.startsWith('activity_inside_property_floors_main_screen')) {
+    // Legacy parity: no standalone "Floors" row on this header-style screen.
+    final filtered = fields
+        .where((field) =>
+            field.id != 'label_floors' &&
+            field.label.trim().toLowerCase() != 'floors')
+        .toList();
+    final seen = <String>{};
+    var olderSeen = false;
+    final deduped = <InspectionFieldDefinition>[];
+    for (final field in filtered) {
+      if (field.label.trim().toLowerCase() == 'timber floor older properties') {
+        if (olderSeen) continue;
+        olderSeen = true;
+      }
+      if (!seen.add(field.id)) continue;
+      deduped.add(field);
+    }
+    return deduped;
+  }
+  if (screenId.startsWith('activity_in_side_property_floors_about_floor')) {
+    // Legacy parity: last dropdown is "Condition", not "Other".
+    return fields
+        .map((field) => field.id == 'actv_condition'
+            ? field.copyWith(label: 'Condition')
+            : field)
+        .toList();
+  }
+  if (screenId.contains('floors_dampness')) {
+    // Legacy parity: no damp-meter fields on Floors > Dampness.
+    final byId = <String, InspectionFieldDefinition>{
+      for (final field in fields) field.id: field,
+    };
+    InspectionFieldDefinition? f(String id) => byId[id];
+
+    final result = <InspectionFieldDefinition>[
+      if (f('actv_status') != null) f('actv_status')!,
+      if (f('label_location_34') != null)
+        f('label_location_34')!.copyWith(
+          conditionalOn: 'actv_status=known cause',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_kitchen') != null) f('cb_kitchen')!,
+      if (f('cb_bathroom_s') != null) f('cb_bathroom_s')!,
+      if (f('cb_toilet_s') != null) f('cb_toilet_s')!,
+      if (f('cb_utility_room') != null) f('cb_utility_room')!,
+      if (f('cb_other_240') != null) f('cb_other_240')!,
+      if (f('et_other_392') != null) f('et_other_392')!,
+      if (f('label_caused_by') != null)
+        f('label_caused_by')!.copyWith(
+          conditionalOn: 'actv_status=known cause',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (f('cb_faulty_plumbing') != null) f('cb_faulty_plumbing')!,
+      if (f('cb_bathtub_spillage') != null) f('cb_bathtub_spillage')!,
+      if (f('cb_leaking_sealants') != null) f('cb_leaking_sealants')!,
+      if (f('cb_other_215') != null) f('cb_other_215')!,
+      if (f('et_other_358') != null) f('et_other_358')!,
+    ];
+
+    return result;
+  }
+  if (screenId == 'activity_in_side_property_floors') {
+    // Legacy parity: this screen should not show a standalone "Floors" field.
+    final filtered = fields
+        .where((field) =>
+            field.id != 'label_floors' &&
+            field.label.trim().toLowerCase() != 'floors')
+        .toList();
+    final seen = <String>{};
+    var olderSeen = false;
+    final deduped = <InspectionFieldDefinition>[];
+    for (final field in filtered) {
+      if (field.label.trim().toLowerCase() == 'timber floor older properties') {
+        if (olderSeen) continue;
+        olderSeen = true;
+      }
+      if (!seen.add(field.id)) continue;
+      deduped.add(field);
+    }
+    return deduped;
+  }
+  if (screenId.startsWith('activity_inside_property_ceilings_polystyrene')) {
+    // Legacy parity: only "Parts are covered with polystyrene" checkbox exists.
+    return fields.where((field) => field.id == 'cb_not_inspected').toList();
+  }
+  if (screenId
+      .startsWith('activity_inside_property_ceilings_heavy_paper_lining')) {
+    // Legacy parity: only "Heavy paper lining" checkbox exists.
+    return fields.where((field) => field.id == 'cb_not_inspected').toList();
+  }
+  if (screenId ==
+          'activity_outside_property_other_joinery_finishes_not_inspected' ||
+      screenId ==
+          'activity_outside_property_other_joinery_finishes_not_inspected__not_inspected') {
+    return fields.where((field) => field.id == 'cb_not_inspected').toList();
+  }
+  if (screenId == 'activity_outside_property_other_communal_area') {
+    final byId = <String, InspectionFieldDefinition>{
+      for (final field in fields) field.id: field,
+    };
+
+    InspectionFieldDefinition withInspectedGate(String id) {
+      final field = byId[id];
+      if (field == null) {
+        return const InspectionFieldDefinition(
+          id: '',
+          label: '',
+          type: InspectionFieldType.text,
+        );
+      }
+      return field.copyWith(
+        conditionalOn: 'actv_status=Inspected',
+        conditionalValue: '',
+        conditionalMode: 'show',
+      );
+    }
+
+    InspectionFieldDefinition withNotInspectedGate(String id) {
+      final field = byId[id];
+      if (field == null) {
+        return const InspectionFieldDefinition(
+          id: '',
+          label: '',
+          type: InspectionFieldType.text,
+        );
+      }
+      return field.copyWith(
+        conditionalOn: 'actv_status=Not Inspected',
+        conditionalValue: '',
+        conditionalMode: 'show',
+      );
+    }
+
+    final sanitized = <InspectionFieldDefinition>[
+      if (byId['actv_status'] != null) byId['actv_status']!,
+      withInspectedGate('label_external_communal_parts'),
+      withInspectedGate('cb_automatic_gates'),
+      withInspectedGate('cb_cctv'),
+      withInspectedGate('cb_communal_door'),
+      withInspectedGate('cb_entry_system'),
+      withInspectedGate('cb_drive_access'),
+      withInspectedGate('cb_car_park'),
+      withInspectedGate('cb_walk_paths'),
+      withInspectedGate('cb_gardens'),
+      withInspectedGate('cb_grounds'),
+      withInspectedGate('cb_play_ground'),
+      withInspectedGate('cb_other_1034'),
+      if (byId['et_other_747'] != null)
+        byId['et_other_747']!.copyWith(
+          conditionalOn: 'actv_status=Inspected&cb_other_1034=true',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      if (byId['actv_condition'] != null)
+        byId['actv_condition']!.copyWith(
+          label: 'Condition',
+          conditionalOn: 'actv_status=Inspected',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+      withNotInspectedGate('label_because_of'),
+      withNotInspectedGate('cb_the_area_is_not_accessible'),
+      withNotInspectedGate('cb_of_limited_access'),
+      withNotInspectedGate('cb_other_251'),
+      if (byId['et_other_928'] != null)
+        byId['et_other_928']!.copyWith(
+          conditionalOn: 'actv_status=Not Inspected&cb_other_251=true',
+          conditionalValue: '',
+          conditionalMode: 'show',
+        ),
+    ].where((f) => f.id.isNotEmpty && f.label.isNotEmpty).toList();
+
+    return sanitized;
+  }
+  if (screenId ==
+          'activity_outside_property_other_joinery_and_finishes_main_screen' ||
+      screenId ==
+          'activity_outside_property_other_about_joinery_and_finishes' ||
+      screenId ==
+          'activity_outside_property_other_joinery_finishes_condition' ||
+      screenId ==
+          'activity_outside_property_other_about_joinery_and_finishes__other_joinery_and_finishes') {
+    return fields
+        .map((field) => field.id == 'actv_condition'
+            ? field.copyWith(
+                label: 'Condition Rating',
+                options: const ['1', '2', '3'],
+              )
+            : field)
+        .toList();
+  }
+  if (screenId.startsWith('activity_outside_property_other_other_external')) {
+    // Legacy layout keeps the Area dropdown hidden for these screens.
+    return fields.where((field) => field.id != 'actv_area').toList();
+  }
+  if (screenId.startsWith('activity_outside_property_other_other_wall')) {
+    // Legacy layout keeps wall-location hidden for these screens.
+    return fields.where((field) => field.id != 'actv_area').toList();
+  }
+  if (screenId.startsWith('activity_outside_property_other_floors')) {
+    // Legacy layout keeps wall-location hidden for these screens.
+    return fields.where((field) => field.id != 'actv_area').toList();
+  }
+  if (screenId.startsWith('activity_outside_property_other_drains')) {
+    // Legacy layout keeps drains location and condition hidden.
+    return fields
+        .where((field) =>
+            field.id != 'actv_drains_location' && field.id != 'actv_condition')
+        .toList();
+  }
+  if (screenId.startsWith('activity_outside_property_other_repairs_wall')) {
+    // Legacy layout keeps repair wall location hidden.
+    return fields.where((field) => field.id != 'actv_location').toList();
+  }
+  if (screenId.startsWith('activity_outside_property_other_handrails')) {
+    // Legacy layout keeps wall-location hidden.
+    return fields.where((field) => field.id != 'actv_area').toList();
+  }
+  if (screenId
+      .startsWith('activity_outside_property_other_repairs_hand_rails')) {
+    // Legacy layout hides the first "Handrail defect" block completely.
+    return fields
+        .where((field) =>
+            field.id != 'cb_not_strong_enough' &&
+            field.id != 'cb_inadequately_designed' &&
+            !field.id.startsWith('label_handrail_defect'))
+        .toList();
+  }
+  if (screenId.startsWith('activity_outside_property_other_no_safety_glass')) {
+    // Legacy layout keeps glazing-location hidden.
+    return fields.where((field) => field.id != 'actv_condition').toList();
+  }
+  if (screenId.startsWith('activity_outside_property_other_other_roof')) {
+    // Legacy layout keeps roof location and condition hidden.
+    return fields
+        .where((field) =>
+            field.id != 'actv_roof_location' && field.id != 'actv_condition')
+        .toList();
+  }
+  return fields;
+}
+
 bool shouldShowInspectionField(
   InspectionFieldDefinition field,
   Map<String, String> answers,
@@ -10,9 +906,15 @@ bool shouldShowInspectionField(
   final controller = field.conditionalOn;
   if (controller == null || controller.isEmpty) return true;
 
-  if (controller.contains('&') || controller.contains('|') || controller.contains('!')) {
+  if (controller.contains('&') ||
+      controller.contains('|') ||
+      controller.contains('!')) {
     final expr = controller;
-    final groups = expr.split('|').map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
+    final groups = expr
+        .split('|')
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toList();
     bool evalToken(String token) {
       var key = token.trim();
       var negate = false;
@@ -26,16 +928,23 @@ bool shouldShowInspectionField(
         final fieldKey = parts.first.trim();
         final expected = parts.sublist(1).join('=').trim().toLowerCase();
         final rawValue = (answers[fieldKey] ?? '').trim().toLowerCase();
-        truthy = rawValue == expected;
+        final normalized =
+            rawValue.isEmpty && expected == 'false' ? 'false' : rawValue;
+        truthy = normalized == expected;
       } else {
         final rawValue = answers[key] ?? '';
-        truthy = rawValue.trim().isNotEmpty && rawValue.toLowerCase() != 'false';
+        truthy =
+            rawValue.trim().isNotEmpty && rawValue.toLowerCase() != 'false';
       }
       return negate ? !truthy : truthy;
     }
 
     bool evalGroup(String group) {
-      final tokens = group.split('&').map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
+      final tokens = group
+          .split('&')
+          .map((e) => e.trim())
+          .where((e) => e.isNotEmpty)
+          .toList();
       if (tokens.isEmpty) return true;
       for (final token in tokens) {
         if (!evalToken(token)) return false;
@@ -53,7 +962,9 @@ bool shouldShowInspectionField(
     final fieldKey = parts.first.trim();
     final expected = parts.sublist(1).join('=').trim().toLowerCase();
     final rawValue = (answers[fieldKey] ?? '').trim().toLowerCase();
-    final matched = rawValue == expected;
+    final normalized =
+        rawValue.isEmpty && expected == 'false' ? 'false' : rawValue;
+    final matched = normalized == expected;
     final mode = (field.conditionalMode ?? 'show').toLowerCase();
     return mode == 'hide' ? !matched : matched;
   }
@@ -62,7 +973,8 @@ bool shouldShowInspectionField(
   final expected = field.conditionalValue;
   final mode = (field.conditionalMode ?? 'show').toLowerCase();
   if (expected == null || expected.isEmpty) {
-    final matched = rawValue.trim().isNotEmpty && rawValue.toLowerCase() != 'false';
+    final matched =
+        rawValue.trim().isNotEmpty && rawValue.toLowerCase() != 'false';
     return mode == 'hide' ? !matched : matched;
   }
 
@@ -73,7 +985,10 @@ bool shouldShowInspectionField(
       .where((e) => e.isNotEmpty)
       .toList();
   if (candidates.isEmpty) return true;
-  final matched = candidates.contains(normalizedValue);
+  final effectiveValue = normalizedValue.isEmpty && candidates.contains('false')
+      ? 'false'
+      : normalizedValue;
+  final matched = candidates.contains(effectiveValue);
   return mode == 'hide' ? !matched : matched;
 }
 
@@ -330,8 +1245,7 @@ class _InspectionDropdownState extends State<_InspectionDropdown>
           prefixIcon: Icon(
             Icons.view_list_outlined,
             size: 20,
-            color:
-                _isOpen ? colorScheme.primary : colorScheme.onSurfaceVariant,
+            color: _isOpen ? colorScheme.primary : colorScheme.onSurfaceVariant,
           ),
           suffixIcon: RotationTransition(
             turns: _iconTurns,
@@ -431,8 +1345,7 @@ class _InspectionDropdownState extends State<_InspectionDropdown>
             // Options list
             Expanded(
               child: ListView.separated(
-                padding:
-                    EdgeInsets.fromLTRB(0, 4, 0, bottomPadding + 4),
+                padding: EdgeInsets.fromLTRB(0, 4, 0, bottomPadding + 4),
                 itemCount: widget.options.length,
                 separatorBuilder: (_, __) => Divider(
                   height: 1,
@@ -508,8 +1421,7 @@ class _DropdownOption extends StatelessWidget {
                 child: Text(
                   label,
                   style: theme.textTheme.bodyLarge?.copyWith(
-                    fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w400,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                     color: isSelected
                         ? colorScheme.primary
                         : colorScheme.onSurface,
@@ -548,7 +1460,8 @@ class InspectionPhrasePreview extends StatefulWidget {
   final ValueChanged<String>? onUserNoteChanged;
 
   @override
-  State<InspectionPhrasePreview> createState() => _InspectionPhrasePreviewState();
+  State<InspectionPhrasePreview> createState() =>
+      _InspectionPhrasePreviewState();
 }
 
 class _InspectionPhrasePreviewState extends State<InspectionPhrasePreview> {
@@ -781,8 +1694,7 @@ class _InspectionPhrasePreviewState extends State<InspectionPhrasePreview> {
                     ?.copyWith(color: theme.colorScheme.primary),
               ),
               style: TextButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               ),
             ),
           ],

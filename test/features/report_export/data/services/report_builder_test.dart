@@ -634,6 +634,210 @@ void main() {
       );
     });
 
+    test('keeps listed building separate from construction using alias answers', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'D',
+            title: 'About Property',
+            description: '',
+            nodes: [
+              const InspectionNodeDefinition(
+                id: 'group_construction_2',
+                title: 'Construction',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_construction_roof',
+                title: 'Roof',
+                type: InspectionNodeType.screen,
+                parentId: 'group_construction_2',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'roof_status',
+                    label: 'Status',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Good', 'Poor'],
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_listed_building',
+                title: 'Listed Building',
+                type: InspectionNodeType.screen,
+                parentId: 'group_construction_2',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner',
+                    label: 'Status',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Yes', 'No'],
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_listed_building__listed_building',
+                title: 'Listed Building',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner',
+                    label: 'Status',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Yes', 'No'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_construction_roof': {'roof_status': 'Good'},
+            // Only grouped ID has data; report should still render standalone
+            // listed-building screen via alias fallback.
+            'activity_listed_building': {'android_material_design_spinner': 'Yes'},
+          },
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+
+      final section = doc.sections.single;
+      expect(section.screens.map((s) => s.title).toList(), equals([
+        'Construction',
+        'Listed Building',
+      ]));
+      expect(section.screens.first.fields.any((f) => f.displayValue == 'Yes'), isFalse);
+      expect(section.screens.last.fields.any((f) => f.displayValue == 'Yes'), isTrue);
+    });
+
+    test('merges Section D energy screens into one Energy heading', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'D',
+            title: 'About Property',
+            description: '',
+            nodes: [
+              const InspectionNodeDefinition(
+                id: 'activity_energy_effiency',
+                title: 'Energy',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner',
+                    label: 'Current',
+                    type: InspectionFieldType.text,
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner2',
+                    label: 'Potential',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_energy_environment_impect',
+                title: 'Environmental Impact',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner',
+                    label: 'Current',
+                    type: InspectionFieldType.text,
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner2',
+                    label: 'Potential',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_other_service',
+                title: 'Other Service',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'ch1',
+                    label: 'Solar Electricity',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'ch2',
+                    label: 'Solar Hot Water',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_after_energy',
+                title: 'After Energy',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'f',
+                    label: 'Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_energy_effiency': {
+              'android_material_design_spinner': '61',
+              'android_material_design_spinner2': '78',
+            },
+            'activity_energy_environment_impect': {
+              'android_material_design_spinner': '58',
+              'android_material_design_spinner2': '76',
+            },
+            'activity_other_service': {
+              'ch1': 'true',
+            },
+            'activity_after_energy': {'f': 'ok'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final screens = doc.sections.single.screens;
+      expect(screens.map((s) => s.title).toList(), equals(['Energy', 'After Energy']));
+      expect(screens.first.isMergedGroup, isTrue);
+      expect(
+        screens.first.phrases.any((p) => p.contains('Current: 61')),
+        isTrue,
+      );
+      expect(
+        screens.first.phrases.any((p) => p.contains('Potential: 76')),
+        isTrue,
+      );
+      expect(
+        screens.first.phrases.any(
+          (p) => p.toLowerCase().contains('solar') || p.toLowerCase().contains('photovoltaic'),
+        ),
+        isTrue,
+      );
+    });
+
     test('applies conditional visibility filtering', () {
       final treeWithConditional = InspectionTreePayload(
         sections: [

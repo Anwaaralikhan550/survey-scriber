@@ -729,7 +729,7 @@
           "id": "et_other_424",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_471",
+          "conditionalOn": "cb_other_1066",
           "conditionalValue": "true",
           "conditionalMode": "show"
         }
@@ -740,24 +740,14 @@
       "title": "Location and construction",
       "fields": [
         {
-          "id": "cb_shared",
-          "label": "Shared",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_integral",
-          "label": "Integral",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_open",
-          "label": "Open",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_porch",
-          "label": "Other",
-          "type": "checkbox"
+          "id": "actv_location",
+          "label": "Location",
+          "type": "dropdown",
+          "options": [
+            "Front",
+            "Side",
+            "Rear"
+          ]
         },
         {
           "id": "cb_brick_walls",
@@ -780,40 +770,10 @@
           "type": "checkbox"
         },
         {
-          "id": "actv_porch_type",
-          "label": "Porch type",
-          "type": "dropdown",
-          "options": [
-            "Conservatory",
-            "Porch",
-            "Open Porch",
-            "Integral porch",
-            "Other"
-          ]
-        },
-        {
-          "id": "actv_location",
-          "label": "Location",
-          "type": "dropdown",
-          "options": [
-            "Front",
-            "Side",
-            "Rear"
-          ]
-        },
-        {
-          "id": "et_other_porch",
-          "label": "Other",
-          "type": "text",
-          "conditionalOn": "cb_other_porch",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
           "id": "et_other_249",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_porch",
+          "conditionalOn": "cb_other_925",
           "conditionalValue": "true",
           "conditionalMode": "show"
         }
@@ -824,6 +784,21 @@
       "title": "Location and construction",
       "fields": [
         {
+          "id": "actv_location",
+          "label": "Location",
+          "type": "dropdown",
+          "options": [
+            "Front",
+            "Side",
+            "Rear"
+          ]
+        },
+        {
+          "id": "label_porch_type",
+          "label": "Porch type",
+          "type": "label"
+        },
+        {
           "id": "cb_shared",
           "label": "Shared",
           "type": "checkbox"
@@ -842,6 +817,14 @@
           "id": "cb_other_porch",
           "label": "Other",
           "type": "checkbox"
+        },
+        {
+          "id": "et_other_porch",
+          "label": "Other",
+          "type": "text",
+          "conditionalOn": "cb_other_porch",
+          "conditionalValue": "true",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_brick_walls",
@@ -864,40 +847,10 @@
           "type": "checkbox"
         },
         {
-          "id": "actv_porch_type",
-          "label": "Porch type",
-          "type": "dropdown",
-          "options": [
-            "Conservatory",
-            "Porch",
-            "Open Porch",
-            "Integral porch",
-            "Other"
-          ]
-        },
-        {
-          "id": "actv_location",
-          "label": "Location",
-          "type": "dropdown",
-          "options": [
-            "Front",
-            "Side",
-            "Rear"
-          ]
-        },
-        {
-          "id": "et_other_porch",
-          "label": "Other",
-          "type": "text",
-          "conditionalOn": "cb_other_porch",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
           "id": "et_other_249",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_porch",
+          "conditionalOn": "cb_other_925",
           "conditionalValue": "true",
           "conditionalMode": "show"
         }
@@ -958,11 +911,6 @@
           "type": "checkbox"
         },
         {
-          "id": "cb_open_runoffs",
-          "label": "Contains asbestos",
-          "type": "checkbox"
-        },
-        {
           "id": "et_other_397",
           "label": "Other",
           "type": "text",
@@ -980,12 +928,12 @@
         },
         {
           "id": "actv_condition",
-          "label": "Condition",
+          "label": "Condition Rating",
           "type": "dropdown",
           "options": [
-            "Reasonable",
-            "Satisfactory",
-            "Unsatisfactory and Poor"
+            "1",
+            "2",
+            "3"
           ]
         }
       ]
@@ -1643,31 +1591,6 @@
           "type": "checkbox"
         },
         {
-          "id": "cb_pvc",
-          "label": "PVC",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_timber",
-          "label": "Timber",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_steel",
-          "label": "Steel",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_aluminium",
-          "label": "Aluminium",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_826",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
           "id": "cb_single",
           "label": "Single",
           "type": "checkbox"
@@ -1678,23 +1601,7 @@
           "type": "checkbox"
         },
         {
-          "id": "other",
-          "label": "Other door type",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
           "id": "et_other_179",
-          "label": "Other",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
-          "id": "et_other_152",
           "label": "Other",
           "type": "text",
           "conditionalOn": "cb_other_859",
@@ -1748,62 +1655,86 @@
         {
           "id": "cb_poorly_secured",
           "label": "Poorly Secured",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_inadequate_lock",
           "label": "Inadequate Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotted_frame",
           "label": "Rotted Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_lock",
           "label": "Damaged Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_337",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten",
           "label": "Rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_partly_worn",
           "label": "Partly Worn",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_glazing",
           "label": "Failed Glazing",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_sticks_against_frame",
           "label": "Sticks against Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_poorly_fitted",
           "label": "Poorly Fitted",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_837",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "other",
@@ -1826,8 +1757,7 @@
           "id": "et_other_362",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
           "conditionalMode": "show"
         },
         {
@@ -1838,14 +1768,15 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "et_other_855",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
           "conditionalMode": "show"
         },
         {
@@ -1856,7 +1787,9 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         }
       ]
     },
@@ -1867,82 +1800,100 @@
         {
           "id": "cb_cracked",
           "label": "Cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten",
           "label": "Rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking",
-          "label": "Leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp",
           "label": "Damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_519",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_cracked_51",
           "label": "Badly cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_22",
           "label": "Severely damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten_46",
           "label": "Badly rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking_80",
-          "label": "Severely leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp_25",
           "label": "Causing damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_89",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over_85",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_350",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "actv_condition",
@@ -1957,16 +1908,14 @@
           "id": "et_other_346",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair soon & cb_other_519",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_430",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair now & cb_other_350",
           "conditionalMode": "show"
         }
       ]
@@ -2630,55 +2579,7 @@
           "type": "checkbox"
         },
         {
-          "id": "cb_are_difficult_to_open_15",
-          "label": "Difficult to open",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_are_badly_worn_25",
-          "label": "Badly worn",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_are_rotten_64",
-          "label": "Rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_have_broken_panes_14",
-          "label": "Broken panes",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_have_failed_glazing_40",
-          "label": "Failed glazing",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_are_in_disrepair_33",
-          "label": "In disrepair",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_1066",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_safety_hazard",
-          "label": "Safety Hazard",
-          "type": "checkbox"
-        },
-        {
           "id": "et_other_175",
-          "label": "Other",
-          "type": "text",
-          "conditionalOn": "cb_other_471",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
-          "id": "et_other_424",
           "label": "Other",
           "type": "text",
           "conditionalOn": "cb_other_471",
@@ -2691,11 +2592,6 @@
       "screen_id": "activity_outside_property_conservatory_porch_roof",
       "title": "Roof",
       "fields": [
-        {
-          "id": "cb_floor_above",
-          "label": "Floor above",
-          "type": "checkbox"
-        },
         {
           "id": "cb_pvc_double_glazed_sections",
           "label": "PVC double glazed sections",
@@ -2730,15 +2626,6 @@
           "id": "cb_others_373",
           "label": "Others",
           "type": "checkbox"
-        },
-        {
-          "id": "actv_conservatory_porch",
-          "label": "Conservatory || Porch",
-          "type": "dropdown",
-          "options": [
-            "Conservatory",
-            "Porch"
-          ]
         },
         {
           "id": "actv_roof_type",
@@ -2799,15 +2686,6 @@
           "id": "cb_others_373",
           "label": "Others",
           "type": "checkbox"
-        },
-        {
-          "id": "actv_conservatory_porch",
-          "label": "Conservatory || Porch",
-          "type": "dropdown",
-          "options": [
-            "Conservatory",
-            "Porch"
-          ]
         },
         {
           "id": "actv_roof_type",
@@ -2920,7 +2798,7 @@
           "id": "et_other_928",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_1034",
+          "conditionalOn": "cb_other_251",
           "conditionalValue": "true",
           "conditionalMode": "show"
         },
@@ -4326,31 +4204,6 @@
           "type": "checkbox"
         },
         {
-          "id": "cb_pvc",
-          "label": "PVC",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_timber",
-          "label": "Timber",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_steel",
-          "label": "Steel",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_aluminium",
-          "label": "Aluminium",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_826",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
           "id": "cb_single",
           "label": "Single",
           "type": "checkbox"
@@ -4361,23 +4214,7 @@
           "type": "checkbox"
         },
         {
-          "id": "other",
-          "label": "Other door type",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
           "id": "et_other_179",
-          "label": "Other",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
-          "id": "et_other_152",
           "label": "Other",
           "type": "text",
           "conditionalOn": "cb_other_859",
@@ -4431,62 +4268,86 @@
         {
           "id": "cb_poorly_secured",
           "label": "Poorly Secured",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_inadequate_lock",
           "label": "Inadequate Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotted_frame",
           "label": "Rotted Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_lock",
           "label": "Damaged Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_337",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten",
           "label": "Rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_partly_worn",
           "label": "Partly Worn",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_glazing",
           "label": "Failed Glazing",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_sticks_against_frame",
           "label": "Sticks against Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_poorly_fitted",
           "label": "Poorly Fitted",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_837",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "other",
@@ -4509,8 +4370,7 @@
           "id": "et_other_362",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
           "conditionalMode": "show"
         },
         {
@@ -4521,14 +4381,15 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "et_other_855",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
           "conditionalMode": "show"
         },
         {
@@ -4539,7 +4400,9 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         }
       ]
     },
@@ -4550,82 +4413,100 @@
         {
           "id": "cb_cracked",
           "label": "Cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten",
           "label": "Rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking",
-          "label": "Leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp",
           "label": "Damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_519",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_cracked_51",
           "label": "Badly cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_22",
           "label": "Severely damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten_46",
           "label": "Badly rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking_80",
-          "label": "Severely leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp_25",
           "label": "Causing damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_89",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over_85",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_350",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "actv_condition",
@@ -4640,16 +4521,14 @@
           "id": "et_other_346",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair soon & cb_other_519",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_430",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair now & cb_other_350",
           "conditionalMode": "show"
         }
       ]
@@ -5265,136 +5144,6 @@
       "title": "Velux window",
       "fields": [
         {
-          "id": "cb_loft",
-          "label": "Loft",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_extension",
-          "label": "Extension",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_629",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_pvc",
-          "label": "PVC",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_timber",
-          "label": "Timber",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_steel",
-          "label": "Steel",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_610",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_single",
-          "label": "Single",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_double",
-          "label": "Double",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_secondary",
-          "label": "Secondary",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_one",
-          "label": "One",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_two",
-          "label": "Two",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_three",
-          "label": "Three",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_four",
-          "label": "Four",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_five",
-          "label": "Five",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_814",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_loft_32",
-          "label": "Loft",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_extension_85",
-          "label": "Extension",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_451",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_pvc_24",
-          "label": "PVC",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_timber_44",
-          "label": "Timber",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_steel_91",
-          "label": "Steel",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_975",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_single_48",
-          "label": "Single",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_double_67",
-          "label": "Double",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_secondary_54",
-          "label": "Secondary",
-          "type": "checkbox"
-        },
-        {
           "id": "actv_type",
           "label": "Type",
           "type": "dropdown",
@@ -5404,43 +5153,220 @@
           ]
         },
         {
+          "id": "cb_loft",
+          "label": "Loft",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_extension",
+          "label": "Extension",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_other_629",
+          "label": "Other",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_pvc",
+          "label": "PVC",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_timber",
+          "label": "Timber",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_steel",
+          "label": "Steel",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_other_610",
+          "label": "Other",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_single",
+          "label": "Single",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_double",
+          "label": "Double",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_secondary",
+          "label": "Secondary",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Single",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_one",
+          "label": "One",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_two",
+          "label": "Two",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_three",
+          "label": "Three",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_four",
+          "label": "Four",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_five",
+          "label": "Five",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_other_814",
+          "label": "Other",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_loft_32",
+          "label": "Loft",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_extension_85",
+          "label": "Extension",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_other_451",
+          "label": "Other",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_pvc_24",
+          "label": "PVC",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_timber_44",
+          "label": "Timber",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_steel_91",
+          "label": "Steel",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_other_975",
+          "label": "Other",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_single_48",
+          "label": "Single",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_double_67",
+          "label": "Double",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
+          "id": "cb_secondary_54",
+          "label": "Secondary",
+          "type": "checkbox",
+          "conditionalOn": "actv_type=Multiple",
+          "conditionalMode": "show"
+        },
+        {
           "id": "et_other_290",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_629",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_type=Single & cb_other_629",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_816",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_629",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_type=Single & cb_other_610",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_196",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_629",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_type=Multiple & cb_other_814",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_659",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_629",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_type=Multiple & cb_other_451",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_309",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_629",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_type=Multiple & cb_other_975",
           "conditionalMode": "show"
         },
         {
@@ -6560,31 +6486,6 @@
           "type": "checkbox"
         },
         {
-          "id": "cb_pvc",
-          "label": "PVC",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_timber",
-          "label": "Timber",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_steel",
-          "label": "Steel",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_aluminium",
-          "label": "Aluminium",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_826",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
           "id": "cb_single",
           "label": "Single",
           "type": "checkbox"
@@ -6595,23 +6496,7 @@
           "type": "checkbox"
         },
         {
-          "id": "other",
-          "label": "Other door type",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
           "id": "et_other_179",
-          "label": "Other",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
-          "id": "et_other_152",
           "label": "Other",
           "type": "text",
           "conditionalOn": "cb_other_859",
@@ -6665,62 +6550,86 @@
         {
           "id": "cb_poorly_secured",
           "label": "Poorly Secured",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_inadequate_lock",
           "label": "Inadequate Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotted_frame",
           "label": "Rotted Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_lock",
           "label": "Damaged Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_337",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten",
           "label": "Rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_partly_worn",
           "label": "Partly Worn",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_glazing",
           "label": "Failed Glazing",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_sticks_against_frame",
           "label": "Sticks against Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_poorly_fitted",
           "label": "Poorly Fitted",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_837",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "other",
@@ -6743,8 +6652,7 @@
           "id": "et_other_362",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
           "conditionalMode": "show"
         },
         {
@@ -6755,14 +6663,15 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "et_other_855",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
           "conditionalMode": "show"
         },
         {
@@ -6773,7 +6682,9 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         }
       ]
     },
@@ -6784,82 +6695,72 @@
         {
           "id": "cb_cracked",
           "label": "Cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten",
-          "label": "Rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking",
-          "label": "Leaking",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_damp",
-          "label": "Damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_519",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_cracked_51",
           "label": "Badly cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_22",
           "label": "Severely damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten_46",
-          "label": "Badly rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking_80",
-          "label": "Severely leaking",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_damp_25",
-          "label": "Causing damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_89",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over_85",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_350",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "actv_condition",
@@ -6874,16 +6775,14 @@
           "id": "et_other_346",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair soon & cb_other_519",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_430",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair now & cb_other_350",
           "conditionalMode": "show"
         }
       ]
@@ -7611,7 +7510,7 @@
         },
         {
           "id": "actv_condition",
-          "label": "Sealing Around Windows",
+          "label": "Sealing around windows",
           "type": "dropdown",
           "options": [
             "Properly",
@@ -7741,16 +7640,6 @@
           "id": "cb_back_addition",
           "label": "No Conservatory Or Porch",
           "type": "checkbox"
-        },
-        {
-          "id": "cb_extension",
-          "label": "Extension",
-          "type": "checkbox"
-        },
-        {
-          "id": "et_other_691",
-          "label": "Other",
-          "type": "text"
         }
       ]
     },
@@ -7762,16 +7651,6 @@
           "id": "cb_not_inspected",
           "label": "Not inspected",
           "type": "checkbox"
-        },
-        {
-          "id": "cb_extension",
-          "label": "Extension",
-          "type": "checkbox"
-        },
-        {
-          "id": "et_other_691",
-          "label": "Other",
-          "type": "text"
         }
       ]
     },
@@ -8140,16 +8019,6 @@
           "id": "cb_not_inspected",
           "label": "Not applicable",
           "type": "checkbox"
-        },
-        {
-          "id": "cb_extension",
-          "label": "Extension",
-          "type": "checkbox"
-        },
-        {
-          "id": "et_other_691",
-          "label": "Other",
-          "type": "text"
         }
       ]
     },
@@ -8742,31 +8611,6 @@
           "type": "checkbox"
         },
         {
-          "id": "cb_pvc",
-          "label": "PVC",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_timber",
-          "label": "Timber",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_steel",
-          "label": "Steel",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_aluminium",
-          "label": "Aluminium",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_826",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
           "id": "cb_single",
           "label": "Single",
           "type": "checkbox"
@@ -8777,23 +8621,7 @@
           "type": "checkbox"
         },
         {
-          "id": "other",
-          "label": "Other door type",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
           "id": "et_other_179",
-          "label": "Other",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
-          "id": "et_other_152",
           "label": "Other",
           "type": "text",
           "conditionalOn": "cb_other_859",
@@ -8847,62 +8675,86 @@
         {
           "id": "cb_poorly_secured",
           "label": "Poorly Secured",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_inadequate_lock",
           "label": "Inadequate Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotted_frame",
           "label": "Rotted Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_lock",
           "label": "Damaged Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_337",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten",
           "label": "Rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_partly_worn",
           "label": "Partly Worn",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_glazing",
           "label": "Failed Glazing",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_sticks_against_frame",
           "label": "Sticks against Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_poorly_fitted",
           "label": "Poorly Fitted",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_837",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "other",
@@ -8925,8 +8777,7 @@
           "id": "et_other_362",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
           "conditionalMode": "show"
         },
         {
@@ -8937,14 +8788,15 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "et_other_855",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
           "conditionalMode": "show"
         },
         {
@@ -8955,7 +8807,9 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         }
       ]
     },
@@ -8966,82 +8820,72 @@
         {
           "id": "cb_cracked",
           "label": "Cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten",
-          "label": "Rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking",
-          "label": "Leaking",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_damp",
-          "label": "Damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_519",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_cracked_51",
           "label": "Badly cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_22",
           "label": "Severely damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten_46",
-          "label": "Badly rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking_80",
-          "label": "Severely leaking",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_damp_25",
-          "label": "Causing damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_89",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over_85",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_350",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "actv_condition",
@@ -9056,16 +8900,14 @@
           "id": "et_other_346",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair soon & cb_other_519",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_430",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair now & cb_other_350",
           "conditionalMode": "show"
         }
       ]
@@ -9754,31 +9596,6 @@
           "type": "checkbox"
         },
         {
-          "id": "cb_pvc",
-          "label": "PVC",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_timber",
-          "label": "Timber",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_steel",
-          "label": "Steel",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_aluminium",
-          "label": "Aluminium",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_other_826",
-          "label": "Other",
-          "type": "checkbox"
-        },
-        {
           "id": "cb_single",
           "label": "Single",
           "type": "checkbox"
@@ -9791,21 +9608,10 @@
         {
           "id": "other",
           "label": "Other door type",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
+          "type": "text"
         },
         {
           "id": "et_other_179",
-          "label": "Other",
-          "type": "text",
-          "conditionalOn": "cb_other_859",
-          "conditionalValue": "true",
-          "conditionalMode": "show"
-        },
-        {
-          "id": "et_other_152",
           "label": "Other",
           "type": "text",
           "conditionalOn": "cb_other_859",
@@ -9859,62 +9665,86 @@
         {
           "id": "cb_poorly_secured",
           "label": "Poorly Secured",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_inadequate_lock",
           "label": "Inadequate Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotted_frame",
           "label": "Rotted Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_lock",
           "label": "Damaged Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_337",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten",
           "label": "Rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_partly_worn",
           "label": "Partly Worn",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_glazing",
           "label": "Failed Glazing",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_sticks_against_frame",
           "label": "Sticks against Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_poorly_fitted",
           "label": "Poorly Fitted",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_837",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "other",
@@ -9937,8 +9767,7 @@
           "id": "et_other_362",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
           "conditionalMode": "show"
         },
         {
@@ -9949,14 +9778,15 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "et_other_855",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
           "conditionalMode": "show"
         },
         {
@@ -9967,7 +9797,9 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         }
       ]
     },
@@ -9978,82 +9810,114 @@
         {
           "id": "cb_cracked",
           "label": "Cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten",
           "label": "Rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_leaking",
           "label": "Leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp",
           "label": "Damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_519",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_cracked_51",
           "label": "Badly cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_22",
           "label": "Severely damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten_46",
           "label": "Badly rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_leaking_80",
           "label": "Severely leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp_25",
           "label": "Causing damp",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_89",
           "label": "Failed",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_misted_over_85",
           "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_350",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "actv_condition",
@@ -10068,16 +9932,14 @@
           "id": "et_other_346",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair soon & cb_other_519",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_430",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair now & cb_other_350",
           "conditionalMode": "show"
         }
       ]
@@ -10666,62 +10528,86 @@
         {
           "id": "cb_poorly_secured",
           "label": "Poorly Secured",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_inadequate_lock",
           "label": "Inadequate Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotted_frame",
           "label": "Rotted Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_lock",
           "label": "Damaged Lock",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_337",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_rotten",
           "label": "Rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_partly_worn",
           "label": "Partly Worn",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_failed_glazing",
           "label": "Failed Glazing",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_sticks_against_frame",
           "label": "Sticks against Frame",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_poorly_fitted",
           "label": "Poorly Fitted",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_837",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "other",
@@ -10744,8 +10630,7 @@
           "id": "et_other_362",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
           "conditionalMode": "show"
         },
         {
@@ -10756,14 +10641,15 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "et_other_855",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_337",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
           "conditionalMode": "show"
         },
         {
@@ -10774,7 +10660,9 @@
             "Reasonable",
             "Satisfactory",
             "Unsatisfactory and Poor"
-          ]
+          ],
+          "conditionalOn": "actv_repair_type=Repair now",
+          "conditionalMode": "show"
         }
       ]
     },
@@ -10785,82 +10673,58 @@
         {
           "id": "cb_cracked",
           "label": "Cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten",
-          "label": "Rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking",
-          "label": "Leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp",
           "label": "Damp",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_failed",
-          "label": "Failed",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_misted_over",
-          "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_519",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_cracked_51",
           "label": "Badly cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_22",
           "label": "Severely damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten_46",
-          "label": "Badly rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking_80",
-          "label": "Severely leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp_25",
           "label": "Causing damp",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_failed_89",
-          "label": "Failed",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_misted_over_85",
-          "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_350",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "actv_condition",
@@ -10875,16 +10739,14 @@
           "id": "et_other_346",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair soon & cb_other_519",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_430",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair now & cb_other_350",
           "conditionalMode": "show"
         }
       ]
@@ -11462,7 +11324,9 @@
           "options": [
             "Conservatory",
             "Porch"
-          ]
+          ],
+          "conditionalOn": "actv_status=No SG Rating",
+          "conditionalMode": "show"
         }
       ]
     },
@@ -11487,7 +11351,9 @@
           "options": [
             "Conservatory",
             "Porch"
-          ]
+          ],
+          "conditionalOn": "actv_status=No SG Rating",
+          "conditionalMode": "show"
         }
       ]
     },
@@ -11902,82 +11768,58 @@
         {
           "id": "cb_cracked",
           "label": "Cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten",
-          "label": "Rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking",
-          "label": "Leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp",
           "label": "Damp",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_failed",
-          "label": "Failed",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_misted_over",
-          "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_519",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_cracked_51",
           "label": "Badly cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_22",
           "label": "Severely damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten_46",
-          "label": "Badly rotten",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_leaking_80",
-          "label": "Severely leaking",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damp_25",
           "label": "Causing damp",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_failed_89",
-          "label": "Failed",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_misted_over_85",
-          "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_350",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "actv_condition",
@@ -11992,16 +11834,14 @@
           "id": "et_other_346",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair soon & cb_other_519",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_430",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair now & cb_other_350",
           "conditionalMode": "show"
         }
       ]
@@ -12634,82 +12474,58 @@
         {
           "id": "cb_cracked",
           "label": "Cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged",
           "label": "Damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten",
-          "label": "Rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_leaking",
           "label": "Leaking",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_damp",
-          "label": "Damp",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_failed",
-          "label": "Failed",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_misted_over",
-          "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_519",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair soon",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_cracked_51",
           "label": "Badly cracked",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_damaged_22",
           "label": "Severely damaged",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_rotten_46",
-          "label": "Badly rotten",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_leaking_80",
           "label": "Severely leaking",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_damp_25",
-          "label": "Causing damp",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_failed_89",
-          "label": "Failed",
-          "type": "checkbox"
-        },
-        {
-          "id": "cb_misted_over_85",
-          "label": "Misted over",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "cb_other_350",
           "label": "Other",
-          "type": "checkbox"
+          "type": "checkbox",
+          "conditionalOn": "actv_condition=Repair now",
+          "conditionalMode": "show"
         },
         {
           "id": "actv_condition",
@@ -12724,16 +12540,14 @@
           "id": "et_other_346",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair soon & cb_other_519",
           "conditionalMode": "show"
         },
         {
           "id": "et_other_430",
           "label": "Other",
           "type": "text",
-          "conditionalOn": "cb_other_519",
-          "conditionalValue": "true",
+          "conditionalOn": "actv_condition=Repair now & cb_other_350",
           "conditionalMode": "show"
         }
       ]

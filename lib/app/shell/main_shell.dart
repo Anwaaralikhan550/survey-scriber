@@ -23,6 +23,7 @@ class MainShell extends ConsumerWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final syncState = ref.watch(syncStateProvider);
+    final prefs = ref.watch(preferencesProvider);
 
     // F8 FIX: Check if auth is still resolving (initial or loading state)
     // Show loading overlay to prevent dashboard flash before auth is confirmed
@@ -64,7 +65,8 @@ class MainShell extends ConsumerWidget {
                               vertical: AppSpacing.sm,
                             ),
                             decoration: BoxDecoration(
-                              color: colorScheme.errorContainer.withOpacity(0.9),
+                              color:
+                                  colorScheme.errorContainer.withOpacity(0.9),
                               border: Border(
                                 bottom: BorderSide(
                                   color: colorScheme.error.withOpacity(0.3),
@@ -100,7 +102,8 @@ class MainShell extends ConsumerWidget {
                                     ),
                                     child: Text(
                                       '${syncState.pendingCount} pending',
-                                      style: theme.textTheme.labelSmall?.copyWith(
+                                      style:
+                                          theme.textTheme.labelSmall?.copyWith(
                                         color: colorScheme.onErrorContainer,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -117,6 +120,17 @@ class MainShell extends ConsumerWidget {
                 Expanded(child: navigationShell),
               ],
             ),
+            if (prefs.showSyncStatus &&
+                (!syncState.isFullySynced || syncState.hasPendingChanges))
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).padding.bottom + 72,
+                  ),
+                  child: const SyncStatusIndicator(compact: true),
+                ),
+              ),
           ],
         ),
         floatingActionButton: _buildFAB(context, colorScheme),
@@ -126,7 +140,8 @@ class MainShell extends ConsumerWidget {
     );
   }
 
-  Widget _buildFAB(BuildContext context, ColorScheme colorScheme) => DecoratedBox(
+  Widget _buildFAB(BuildContext context, ColorScheme colorScheme) =>
+      DecoratedBox(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           boxShadow: [
@@ -151,8 +166,6 @@ class MainShell extends ConsumerWidget {
 
   Widget _buildBottomNav(BuildContext context, ThemeData theme, WidgetRef ref) {
     final colorScheme = theme.colorScheme;
-    final syncState = ref.watch(syncStateProvider);
-    final prefs = ref.watch(preferencesProvider);
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -169,17 +182,6 @@ class MainShell extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Sync status row (visible when enabled in preferences and not idle/synced)
-            if (prefs.showSyncStatus &&
-                (!syncState.isFullySynced || syncState.hasPendingChanges))
-              const Padding(
-                padding: EdgeInsets.only(
-                  top: AppSpacing.sm,
-                  left: AppSpacing.md,
-                  right: AppSpacing.md,
-                ),
-                child: SyncStatusIndicator(),
-              ),
             // Navigation items
             Padding(
               padding: const EdgeInsets.only(

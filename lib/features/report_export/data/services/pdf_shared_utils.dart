@@ -68,15 +68,18 @@ class PdfSharedUtils {
 
   /// Load the standard Noto Sans font set + fallback symbols.
   static Future<PdfFontBundle> loadStandardFonts() async {
-    final baseFont = await loadFontCached('NotoSans-Regular', PdfGoogleFonts.notoSansRegular);
-    final boldFont = await loadFontCached('NotoSans-Bold', PdfGoogleFonts.notoSansBold);
-    final italicFont = await loadFontCached('NotoSans-Italic', PdfGoogleFonts.notoSansItalic);
-    final symbolFont =
-        await loadFontCached('NotoSansSymbols-Regular', PdfGoogleFonts.notoSansSymbolsRegular);
-    final symbols2Font =
-        await loadFontCached('NotoSansSymbols2-Regular', PdfGoogleFonts.notoSansSymbols2Regular);
-    final emojiFont =
-        await loadFontCached('NotoEmoji-Regular', PdfGoogleFonts.notoEmojiRegular);
+    final baseFont = await loadFontCached(
+        'NotoSans-Regular', PdfGoogleFonts.notoSansRegular);
+    final boldFont =
+        await loadFontCached('NotoSans-Bold', PdfGoogleFonts.notoSansBold);
+    final italicFont =
+        await loadFontCached('NotoSans-Italic', PdfGoogleFonts.notoSansItalic);
+    final symbolFont = await loadFontCached(
+        'NotoSansSymbols-Regular', PdfGoogleFonts.notoSansSymbolsRegular);
+    final symbols2Font = await loadFontCached(
+        'NotoSansSymbols2-Regular', PdfGoogleFonts.notoSansSymbols2Regular);
+    final emojiFont = await loadFontCached(
+        'NotoEmoji-Regular', PdfGoogleFonts.notoEmojiRegular);
 
     return PdfFontBundle(
       base: baseFont,
@@ -92,15 +95,18 @@ class PdfSharedUtils {
   /// transferable across isolates, while [pw.Font] objects are not
   /// (they capture internal state that can't be serialized).
   static Future<PdfFontDataBundle> loadStandardFontData() async {
-    final baseFont = await loadFontCached('NotoSans-Regular', PdfGoogleFonts.notoSansRegular);
-    final boldFont = await loadFontCached('NotoSans-Bold', PdfGoogleFonts.notoSansBold);
-    final italicFont = await loadFontCached('NotoSans-Italic', PdfGoogleFonts.notoSansItalic);
-    final symbolFont =
-        await loadFontCached('NotoSansSymbols-Regular', PdfGoogleFonts.notoSansSymbolsRegular);
-    final symbols2Font =
-        await loadFontCached('NotoSansSymbols2-Regular', PdfGoogleFonts.notoSansSymbols2Regular);
-    final emojiFont =
-        await loadFontCached('NotoEmoji-Regular', PdfGoogleFonts.notoEmojiRegular);
+    final baseFont = await loadFontCached(
+        'NotoSans-Regular', PdfGoogleFonts.notoSansRegular);
+    final boldFont =
+        await loadFontCached('NotoSans-Bold', PdfGoogleFonts.notoSansBold);
+    final italicFont =
+        await loadFontCached('NotoSans-Italic', PdfGoogleFonts.notoSansItalic);
+    final symbolFont = await loadFontCached(
+        'NotoSansSymbols-Regular', PdfGoogleFonts.notoSansSymbolsRegular);
+    final symbols2Font = await loadFontCached(
+        'NotoSansSymbols2-Regular', PdfGoogleFonts.notoSansSymbols2Regular);
+    final emojiFont = await loadFontCached(
+        'NotoEmoji-Regular', PdfGoogleFonts.notoEmojiRegular);
 
     return PdfFontDataBundle(
       base: _extractFontBytes(baseFont)!,
@@ -143,12 +149,13 @@ class PdfSharedUtils {
     // 2. Strip remaining HTML tags
     s = s.replaceAll(RegExp(r'<[^>]+>'), '');
     // 3. Named HTML entities
-    s = s.replaceAll('&nbsp;', ' ')
-         .replaceAll('&amp;', '&')
-         .replaceAll('&lt;', '<')
-         .replaceAll('&gt;', '>')
-         .replaceAll('&quot;', '"')
-         .replaceAll('&#39;', "'");
+    s = s
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&amp;', '&')
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
+        .replaceAll('&quot;', '"')
+        .replaceAll('&#39;', "'");
     // 4. Numeric HTML entities (L1 fix): &#169; → ©, &#x2014; → —
     s = s.replaceAllMapped(_numericEntityRegex, (m) {
       final radix = m[1] == 'x' ? 16 : 10;
@@ -181,13 +188,13 @@ class PdfSharedUtils {
   // ── Colors ──────────────────────────────────────────────────────────
   static const accentBlue = PdfColor(0.08, 0.38, 0.75);
   static const textDark = PdfColor(0.13, 0.13, 0.13);
-  static const headerDark = PdfColor(0.2, 0.2, 0.2);   // #333333
+  static const headerDark = PdfColor(0.2, 0.2, 0.2); // #333333
   static const grey = PdfColor(0.6, 0.6, 0.6);
   static const lightGrey = PdfColor(0.93, 0.93, 0.93);
   static const mediumGrey = PdfColor(0.8, 0.8, 0.8);
 
   static const conditionGood = PdfColor(0.18, 0.49, 0.20); // #2E7D32
-  static const conditionFair = PdfColor(0.90, 0.32, 0.0);  // #E65100
+  static const conditionFair = PdfColor(0.90, 0.32, 0.0); // #E65100
   static const conditionPoor = PdfColor(0.78, 0.16, 0.16); // #C62828
 
   static PdfColor conditionColor(String rating) {

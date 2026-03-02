@@ -107,7 +107,8 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
     // Listen to auth state — stop syncing when unauthenticated
     _ref.listen<AuthState>(authNotifierProvider, (prev, next) {
       if (next.status == AuthStatus.unauthenticated) {
-        AppLogger.d('SyncStateNotifier', 'User unauthenticated — stopping sync');
+        AppLogger.d(
+            'SyncStateNotifier', 'User unauthenticated — stopping sync');
         _autoSyncTimer?.cancel();
         if (state.isSyncing || state.isPulling) {
           state = state.copyWith(
@@ -146,8 +147,8 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
   }
 
   void _onConnectivityChanged(List<ConnectivityResult> results) {
-    final isConnected = results.isNotEmpty &&
-        !results.contains(ConnectivityResult.none);
+    final isConnected =
+        results.isNotEmpty && !results.contains(ConnectivityResult.none);
 
     final wasOffline = state.isOffline;
     state = state.copyWith(
@@ -251,7 +252,8 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
       _lastConfigCheck = now;
       final needsRefresh = await repo.needsRefresh();
       if (needsRefresh) {
-        AppLogger.d('SyncManager', 'Config version changed on server, refreshing...');
+        AppLogger.d(
+            'SyncManager', 'Config version changed on server, refreshing...');
         await configNotifier.loadConfig(forceRefresh: true);
       }
     } catch (e) {
@@ -266,9 +268,38 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
   Future<void> syncNow() async {
     // Don't sync if user is not authenticated — prevents 401 loops after logout
     final authState = _ref.read(authNotifierProvider);
-    if (authState.status == AuthStatus.unauthenticated) return;
+    if (authState.status == AuthStatus.unauthenticated) {
+      state = state.copyWith(
+        status: SyncStatus.error,
+        errorMessage: 'Session expired. Please login again.',
+      );
+      return;
+    }
 
-    if (!state.isConnected || state.isSyncing) return;
+    if (state.isSyncing) return;
+
+    // Use a fresh connectivity probe for manual sync to avoid stale state.
+    final isConnectedNow = await _syncManager.checkConnectivity();
+    if (!mounted) return;
+
+    if (!isConnectedNow) {
+      state = state.copyWith(
+        isConnected: false,
+        status: SyncStatus.offline,
+        errorMessage: 'No internet connection',
+      );
+      return;
+    }
+
+    // Promote previously failed items back to pending so one manual tap can
+    // recover from transient server issues (no separate "Retry Failed" step).
+    await _syncManager.retryFailed();
+    await _syncManager.recoverStaleProcessingItems(
+      staleThreshold: const Duration(seconds: 30),
+    );
+    await _refreshStats();
+
+    state = state.copyWith(isConnected: true);
 
     state = state.copyWith(
       status: SyncStatus.syncing,
@@ -300,7 +331,8 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
         await Future.delayed(const Duration(seconds: 2));
         if (mounted) {
           state = state.copyWith(
-            status: state.hasPendingChanges ? SyncStatus.pending : SyncStatus.idle,
+            status:
+                state.hasPendingChanges ? SyncStatus.pending : SyncStatus.idle,
           );
         }
       } else {
@@ -418,11 +450,11 @@ class SyncStateNotifier extends StateNotifier<SyncState> {
   }
 
   /// Get failed items with error details for diagnostics UI
-  Future<List<SyncQueueItem>> getFailedItems() =>
-      _syncManager.getFailedItems();
+  Future<List<SyncQueueItem>> getFailedItems() => _syncManager.getFailedItems();
 
   /// Check if entity has pending sync
-  Future<bool> hasPendingSync(String entityId) => _syncManager.hasPendingSync(entityId);
+  Future<bool> hasPendingSync(String entityId) =>
+      _syncManager.hasPendingSync(entityId);
 
   @override
   void dispose() {
@@ -462,6 +494,7 @@ class SyncPullResult {
   final int upsertedCount;
   final int skippedCount;
   final String? errorMessage;
+
   /// Survey IDs that had sections upserted (for targeted provider invalidation).
   final Set<String> affectedSurveyIds;
 }
@@ -476,9 +509,11 @@ class _ItemSyncResult {
   });
 
   final bool success;
+
   /// True if the failure is transient (rate limit, dependency not ready)
   /// and should not count toward the permanent failure total.
   final bool isRetryable;
+
   /// True if the failure is due to expired authentication (401).
   /// Signals the queue processor to abort all remaining items.
   final bool isAuthFailure;
@@ -547,12 +582,13 @@ class SyncManager {
     required String entityId,
     required SyncAction action,
     required Map<String, dynamic> payload,
-  }) => syncQueueDao.addToQueue(
-      entityType: entityType,
-      entityId: entityId,
-      action: action,
-      payload: payload,
-    );
+  }) =>
+      syncQueueDao.addToQueue(
+        entityType: entityType,
+        entityId: entityId,
+        action: action,
+        payload: payload,
+      );
 
   /// Check if entity has pending sync
   Future<bool> hasPendingSync(String entityId) =>
@@ -584,7 +620,7 @@ class SyncManager {
       AppLogger.w(
         'SyncManager',
         'Auto-resolved $resolvedConflicts stuck CREATE-conflict items '
-        '(entities already exist on server)',
+            '(entities already exist on server)',
       );
     }
 
@@ -624,13 +660,16 @@ class SyncManager {
     String? lastError;
 
     // STEP 1: Upload media files FIRST before metadata sync (F14 FIX)
-    AppLogger.d('SyncManager', 'STEP 1: Uploading pending media files first...');
+    AppLogger.d(
+        'SyncManager', 'STEP 1: Uploading pending media files first...');
     try {
       final mediaResult = await mediaUploadService.uploadAllPendingMedia();
-      AppLogger.d('SyncManager', 'Media upload complete: ${mediaResult.success} success, ${mediaResult.failed} failed');
+      AppLogger.d('SyncManager',
+          'Media upload complete: ${mediaResult.success} success, ${mediaResult.failed} failed');
       syncedCount += mediaResult.success;
       if (mediaResult.failed > 0) {
-        AppLogger.w('SyncManager', 'Some media uploads failed (${mediaResult.failed}). Continuing with metadata sync.');
+        AppLogger.w('SyncManager',
+            'Some media uploads failed (${mediaResult.failed}). Continuing with metadata sync.');
         failedCount += mediaResult.failed;
         lastError = 'Some media uploads failed';
       }
@@ -640,9 +679,14 @@ class SyncManager {
     }
 
     // STEP 2: Sync metadata in dependency order (surveys → sections → answers)
-    AppLogger.d('SyncManager', 'STEP 2: Syncing metadata with dependency ordering...');
-    final pendingItems = await syncQueueDao.getPendingItems();
-    AppLogger.d('SyncManager', 'Found ${pendingItems.length} pending sync queue items');
+    AppLogger.d(
+        'SyncManager', 'STEP 2: Syncing metadata with dependency ordering...');
+    // Pull a large enough slice so parent entities (survey/section) are
+    // included with children (answers). Small fixed slices can starve parents
+    // and cause endless deferrals (synced=0, pending unchanged).
+    final pendingItems = await syncQueueDao.getPendingItems(limit: 5000);
+    AppLogger.d(
+        'SyncManager', 'Found ${pendingItems.length} pending sync queue items');
 
     // Group items by entity type for dependency-ordered processing
     final surveyItems = <SyncQueueItem>[];
@@ -664,10 +708,11 @@ class SyncManager {
       }
     }
 
-    AppLogger.d('SyncManager',
+    AppLogger.d(
+      'SyncManager',
       'Dependency groups: ${surveyItems.length} surveys, '
-      '${sectionItems.length} sections, ${answerItems.length} answers, '
-      '${photoItems.length} photos',
+          '${sectionItems.length} sections, ${answerItems.length} answers, '
+          '${photoItems.length} photos',
     );
 
     // Track which survey/section IDs failed so we skip their dependents
@@ -717,7 +762,8 @@ class SyncManager {
 
       // CHECK 1: Parent survey failed in THIS cycle
       if (surveyId != null && failedSurveyIds.contains(surveyId)) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Deferring section ${item.entityId}: parent survey $surveyId failed this cycle',
         );
         await syncQueueDao.resetToPending(item.id);
@@ -729,7 +775,8 @@ class SyncManager {
       if (surveyId != null) {
         final surveyStillUnsynced = await syncQueueDao.hasPendingSync(surveyId);
         if (surveyStillUnsynced) {
-          AppLogger.d('SyncManager',
+          AppLogger.d(
+            'SyncManager',
             'Deferring section ${item.entityId}: parent survey $surveyId still unsynced',
           );
           await syncQueueDao.resetToPending(item.id);
@@ -741,7 +788,8 @@ class SyncManager {
       // (catches the CREATE+UPDATE split where CREATE failed and UPDATE
       // would otherwise proceed with a PUT against a non-existent entity)
       if (failedSectionIds.contains(item.entityId)) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Deferring section ${item.entityId}: duplicate item already failed this cycle',
         );
         await syncQueueDao.resetToPending(item.id);
@@ -751,7 +799,8 @@ class SyncManager {
       // CHECK 4: Another queue item for the same section already processed
       // this cycle (one entity = one sync attempt per cycle)
       if (processedSectionEntityIds.contains(item.entityId)) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Deferring section ${item.entityId}: same entity already processed this cycle',
         );
         await syncQueueDao.resetToPending(item.id);
@@ -787,7 +836,8 @@ class SyncManager {
 
       // CHECK 1: Parent section failed in THIS cycle
       if (sectionId != null && failedSectionIds.contains(sectionId)) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Deferring answer ${item.entityId}: parent section $sectionId failed this cycle',
         );
         await syncQueueDao.resetToPending(item.id);
@@ -798,9 +848,11 @@ class SyncManager {
       // from a PREVIOUS cycle — hasPendingSync now includes 'failed' status,
       // so this transitively blocks: survey(failed) → section(pending) → answer(blocked)
       if (sectionId != null) {
-        final sectionStillUnsynced = await syncQueueDao.hasPendingSync(sectionId);
+        final sectionStillUnsynced =
+            await syncQueueDao.hasPendingSync(sectionId);
         if (sectionStillUnsynced) {
-          AppLogger.d('SyncManager',
+          AppLogger.d(
+            'SyncManager',
             'Deferring answer ${item.entityId}: parent section $sectionId still unsynced',
           );
           await syncQueueDao.resetToPending(item.id);
@@ -810,7 +862,8 @@ class SyncManager {
 
       // CHECK 3: Same answer already processed this cycle (CREATE+UPDATE split)
       if (processedAnswerEntityIds.contains(item.entityId)) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Deferring answer ${item.entityId}: same entity already processed this cycle',
         );
         await syncQueueDao.resetToPending(item.id);
@@ -850,17 +903,18 @@ class SyncManager {
     }
 
     // Structured sync metrics summary
-    AppLogger.d('SyncManager',
+    AppLogger.d(
+      'SyncManager',
       'SYNC COMPLETE | '
-      'synced=$syncedCount | '
-      'failed=$failedCount | '
-      'deferred_surveys=${failedSurveyIds.length} | '
-      'deferred_sections=${failedSectionIds.length} | '
-      'total_queued=$totalItems | '
-      'surveys=${surveyItems.length} | '
-      'sections=${sectionItems.length} | '
-      'answers=${answerItems.length} | '
-      'photos=${photoItems.length}',
+          'synced=$syncedCount | '
+          'failed=$failedCount | '
+          'deferred_surveys=${failedSurveyIds.length} | '
+          'deferred_sections=${failedSectionIds.length} | '
+          'total_queued=$totalItems | '
+          'surveys=${surveyItems.length} | '
+          'sections=${sectionItems.length} | '
+          'answers=${answerItems.length} | '
+          'photos=${photoItems.length}',
     );
     return SyncResult(
       success: failedCount == 0,
@@ -888,18 +942,20 @@ class SyncManager {
         return const _ItemSyncResult(success: true);
       } else {
         const msg = 'Server rejected request (non-retryable)';
-        AppLogger.w('SyncManager',
+        AppLogger.w(
+          'SyncManager',
           'Sync failed for ${item.entityType.name} ${item.entityId}: $msg',
         );
         await syncQueueDao.markAsFailed(item.id, msg);
-        return const _ItemSyncResult(success: false, error: 'Some items failed to sync');
+        return const _ItemSyncResult(
+            success: false, error: 'Some items failed to sync');
       }
     } on RateLimitException catch (e) {
       final waitSeconds = e.retryAfterSeconds ?? 5;
       AppLogger.w(
         'SyncManager',
         'Rate limited (429) syncing ${item.entityType.name} ${item.entityId}. '
-        'Pausing for ${waitSeconds}s.',
+            'Pausing for ${waitSeconds}s.',
       );
       await syncQueueDao.resetToPending(item.id);
       await Future.delayed(Duration(seconds: waitSeconds));
@@ -921,9 +977,10 @@ class SyncManager {
     } on AuthException {
       // Auth failure — token refresh already attempted and failed.
       // Abort this item immediately and signal caller to stop the queue.
-      AppLogger.w('SyncManager',
+      AppLogger.w(
+        'SyncManager',
         'Auth failure syncing ${item.entityType.name} ${item.entityId}. '
-        'Session expired — aborting sync queue.',
+            'Session expired — aborting sync queue.',
       );
       await syncQueueDao.resetToPending(item.id);
       return const _ItemSyncResult(
@@ -933,7 +990,8 @@ class SyncManager {
       );
     } catch (e) {
       final errorMsg = _extractReadableError(e);
-      AppLogger.e('SyncManager',
+      AppLogger.e(
+        'SyncManager',
         'Sync error for ${item.entityType.name} ${item.entityId}: $errorMsg',
       );
 
@@ -942,10 +1000,11 @@ class SyncManager {
       // infinite retries for truly orphaned entities.
       if (_isDependencyNotFoundError(e)) {
         if (item.retryCount < _maxDependencyRetries) {
-          AppLogger.w('SyncManager',
+          AppLogger.w(
+            'SyncManager',
             'Dependency not found for ${item.entityType.name} ${item.entityId} '
-            '(attempt ${item.retryCount + 1}/$_maxDependencyRetries) — '
-            'deferring to next sync cycle',
+                '(attempt ${item.retryCount + 1}/$_maxDependencyRetries) — '
+                'deferring to next sync cycle',
           );
           // Use markAsFailed which increments retryCount but keeps as 'pending'
           // until maxRetries is reached. We pass through to let normal retry
@@ -962,10 +1021,11 @@ class SyncManager {
           );
         } else {
           // Exceeded dependency retry cap — this is likely a true orphan
-          AppLogger.e('SyncManager',
+          AppLogger.e(
+            'SyncManager',
             'ORPHAN DETECTED: ${item.entityType.name} ${item.entityId} failed '
-            'dependency check $_maxDependencyRetries times. Marking as permanently '
-            'failed. Parent entity likely does not exist.',
+                'dependency check $_maxDependencyRetries times. Marking as permanently '
+                'failed. Parent entity likely does not exist.',
           );
           await syncQueueDao.markAsFailed(
             item.id,
@@ -990,8 +1050,8 @@ class SyncManager {
     final errorStr = error.toString().toLowerCase();
     return errorStr.contains('404') &&
         (errorStr.contains('not found') ||
-         errorStr.contains('survey not found') ||
-         errorStr.contains('section not found'));
+            errorStr.contains('survey not found') ||
+            errorStr.contains('section not found'));
   }
 
   /// Calculate exponential backoff delay
@@ -1010,18 +1070,22 @@ class SyncManager {
       final errorStr = error.toString();
 
       // Try to extract structured error from Dio response
-      if (errorStr.contains('DioException') || errorStr.contains('status code')) {
+      if (errorStr.contains('DioException') ||
+          errorStr.contains('status code')) {
         // Look for status code
-        final statusMatch = RegExp(r'status code.*?(\d{3})').firstMatch(errorStr);
+        final statusMatch =
+            RegExp(r'status code.*?(\d{3})').firstMatch(errorStr);
         final status = statusMatch?.group(1) ?? '';
 
         // Look for validation messages in response data
-        final msgMatch = RegExp(r'"message"\s*:\s*\[([^\]]+)\]').firstMatch(errorStr);
+        final msgMatch =
+            RegExp(r'"message"\s*:\s*\[([^\]]+)\]').firstMatch(errorStr);
         if (msgMatch != null) {
           return 'HTTP $status: ${msgMatch.group(1)?.replaceAll('"', '') ?? 'Validation failed'}';
         }
 
-        final singleMsgMatch = RegExp(r'"message"\s*:\s*"([^"]+)"').firstMatch(errorStr);
+        final singleMsgMatch =
+            RegExp(r'"message"\s*:\s*"([^"]+)"').firstMatch(errorStr);
         if (singleMsgMatch != null) {
           return 'HTTP $status: ${singleMsgMatch.group(1)}';
         }
@@ -1048,12 +1112,15 @@ class SyncManager {
   /// Throws on error so the caller can capture the real error message
   /// for diagnostics (stored in sync_queue.errorMessage).
   Future<bool> _syncItem(SyncQueueItem item) async {
-    final payload = jsonDecode(item.payload) as Map<String, dynamic>;
+    final rawPayload = jsonDecode(item.payload) as Map<String, dynamic>;
+    final payload = item.entityType == SyncEntityType.section
+        ? _sanitizeSectionPayload(rawPayload)
+        : rawPayload;
 
     AppLogger.d(
       'SyncManager',
       'Syncing ${item.entityType.name} ${item.entityId} '
-      '(action=${item.action.name}, retry=${item.retryCount})',
+          '(action=${item.action.name}, retry=${item.retryCount})',
     );
 
     switch (item.entityType) {
@@ -1066,6 +1133,12 @@ class SyncManager {
       case SyncEntityType.photo:
         return _syncPhoto(item.action, item.entityId, payload);
     }
+  }
+
+  /// Section sync payloads can include local-only fields from older queue rows.
+  /// Ensure disallowed fields never reach backend DTO validation.
+  Map<String, dynamic> _sanitizeSectionPayload(Map<String, dynamic> payload) {
+    return Map<String, dynamic>.from(payload)..remove('userNotes');
   }
 
   Future<bool> _syncSurvey(
@@ -1094,14 +1167,16 @@ class SyncManager {
             // contain mutated fields and be missing required CREATE fields
             // (title, propertyAddress, status, type). Fetch the complete
             // entity from local DB to build a valid CREATE payload.
-            AppLogger.w('SyncManager',
+            AppLogger.w(
+              'SyncManager',
               'Survey $entityId not found on server (404 on UPDATE). '
-              'Fetching full entity from local DB for upsert.',
+                  'Fetching full entity from local DB for upsert.',
             );
 
             final survey = await surveysDao.getSurveyById(entityId);
             if (survey == null) {
-              AppLogger.e('SyncManager',
+              AppLogger.e(
+                'SyncManager',
                 'Cannot upsert survey $entityId: not found in local DB either.',
               );
               return false;
@@ -1115,7 +1190,8 @@ class SyncManager {
               'type': survey.type.toBackendString(),
               if (survey.jobRef != null) 'jobRef': survey.jobRef,
               if (survey.clientName != null) 'clientName': survey.clientName,
-              if (survey.parentSurveyId != null) 'parentSurveyId': survey.parentSurveyId,
+              if (survey.parentSurveyId != null)
+                'parentSurveyId': survey.parentSurveyId,
               // Merge any extra fields from the original update payload
               // so they're not lost.
               ...payload,
@@ -1127,9 +1203,10 @@ class SyncManager {
             await apiClient.delete('surveys/$entityId');
           } on NotFoundException {
             // Entity already gone — treat as success
-            AppLogger.d('SyncManager',
+            AppLogger.d(
+              'SyncManager',
               'Survey $entityId already deleted on server (404 on DELETE). '
-              'Treating as success.',
+                  'Treating as success.',
             );
           }
       }
@@ -1142,9 +1219,10 @@ class SyncManager {
       // the server with the same client-generated UUID. This prevents the
       // sync queue from getting stuck in "conflict" state forever.
       if (_isConflictError(e) && action == SyncAction.create) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Survey $entityId already exists on server (409). '
-          'Treating CREATE as success (idempotent).',
+              'Treating CREATE as success (idempotent).',
         );
         return true;
       }
@@ -1204,7 +1282,10 @@ class SyncManager {
       // 'surveyId' is used as a URL param, not a body field.
       // Backend forbidNonWhitelisted:true rejects unknown fields.
       final bodyPayload = Map<String, dynamic>.from(payload)
-        ..remove('surveyId');
+        ..remove('surveyId')
+        // Backend UpdateSectionDto does not whitelist userNotes.
+        // Keep notes local; do not send in section sync payloads.
+        ..remove('userNotes');
       switch (action) {
         case SyncAction.create:
           // Include client-generated UUID so server uses the same ID
@@ -1214,17 +1295,20 @@ class SyncManager {
             ...bodyPayload,
           };
           try {
-            await apiClient.post('surveys/$surveyId/sections', data: createPayload);
+            await apiClient.post('surveys/$surveyId/sections',
+                data: createPayload);
           } on NotFoundException {
             // Parent survey not found on server — auto-create it from local
             // DB then retry. Handles server DB reset / data loss gracefully.
             if (surveyId != null) {
-              AppLogger.w('SyncManager',
+              AppLogger.w(
+                'SyncManager',
                 'Parent survey $surveyId not found while creating section '
-                '$entityId. Auto-creating survey (ensure-parent).',
+                    '$entityId. Auto-creating survey (ensure-parent).',
               );
               await _ensureSurveyExists(surveyId);
-              await apiClient.post('surveys/$surveyId/sections', data: createPayload);
+              await apiClient.post('surveys/$surveyId/sections',
+                  data: createPayload);
             } else {
               rethrow;
             }
@@ -1245,9 +1329,10 @@ class SyncManager {
             // mutated fields (e.g. phraseOutput, userNotes) and are missing
             // required CREATE fields (title, order, sectionTypeKey). Fetch the
             // complete entity from local DB to build a valid CREATE payload.
-            AppLogger.w('SyncManager',
+            AppLogger.w(
+              'SyncManager',
               'Section $entityId not found on server (404 on UPDATE). '
-              'Fetching full entity from local DB for upsert.',
+                  'Fetching full entity from local DB for upsert.',
             );
 
             // Try V1 survey_sections table first.
@@ -1257,22 +1342,20 @@ class SyncManager {
             // enriched payload. V2 sections are virtual (deterministic UUIDs)
             // and never exist in survey_sections — the payload is the only
             // source of truth for their metadata.
-            final resolvedSurveyId = surveyId
-                ?? section?.surveyId
-                ?? payload['surveyId'] as String?;
-            final resolvedTitle = section?.title
-                ?? payload['title'] as String?;
-            final resolvedOrder = section?.order
-                ?? payload['order'] as int?
-                ?? 0;
-            final resolvedTypeKey = section?.sectionType.apiSectionType
-                ?? payload['sectionTypeKey'] as String?;
+            final resolvedSurveyId =
+                surveyId ?? section?.surveyId ?? payload['surveyId'] as String?;
+            final resolvedTitle = section?.title ?? payload['title'] as String?;
+            final resolvedOrder =
+                section?.order ?? payload['order'] as int? ?? 0;
+            final resolvedTypeKey = section?.sectionType.apiSectionType ??
+                payload['sectionTypeKey'] as String?;
 
             if (resolvedSurveyId == null || resolvedTitle == null) {
               // No metadata anywhere — truly stale/orphaned.
-              AppLogger.w('SyncManager',
+              AppLogger.w(
+                'SyncManager',
                 'Dropping stale section update $entityId: '
-                'no metadata in local DB or payload.',
+                    'no metadata in local DB or payload.',
               );
               return true;
             }
@@ -1287,11 +1370,13 @@ class SyncManager {
             };
 
             try {
-              await apiClient.post('surveys/$resolvedSurveyId/sections', data: fullCreatePayload);
+              await apiClient.post('surveys/$resolvedSurveyId/sections',
+                  data: fullCreatePayload);
             } on NotFoundException {
               // Parent survey also missing — ensure it exists first
               await _ensureSurveyExists(resolvedSurveyId);
-              await apiClient.post('surveys/$resolvedSurveyId/sections', data: fullCreatePayload);
+              await apiClient.post('surveys/$resolvedSurveyId/sections',
+                  data: fullCreatePayload);
             }
           }
         case SyncAction.delete:
@@ -1299,9 +1384,10 @@ class SyncManager {
             await apiClient.delete('sections/$entityId');
           } on NotFoundException {
             // Entity already gone — treat as success
-            AppLogger.d('SyncManager',
+            AppLogger.d(
+              'SyncManager',
               'Section $entityId already deleted on server (404 on DELETE). '
-              'Treating as success.',
+                  'Treating as success.',
             );
           }
       }
@@ -1311,9 +1397,10 @@ class SyncManager {
       if (e is RateLimitException) rethrow;
       // IDEMPOTENT CREATE: 409 on CREATE means section already exists
       if (_isConflictError(e) && action == SyncAction.create) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Section $entityId already exists on server (409). '
-          'Treating CREATE as success (idempotent).',
+              'Treating CREATE as success (idempotent).',
         );
         return true;
       }
@@ -1353,17 +1440,20 @@ class SyncManager {
             ...bodyPayload,
           };
           try {
-            await apiClient.post('sections/$sectionId/answers', data: createPayload);
+            await apiClient.post('sections/$sectionId/answers',
+                data: createPayload);
           } on NotFoundException {
             // Parent section not found on server — auto-create it from local
             // DB then retry. Handles server DB reset / data loss gracefully.
             if (sectionId != null) {
-              AppLogger.w('SyncManager',
+              AppLogger.w(
+                'SyncManager',
                 'Parent section $sectionId not found while creating answer '
-                '$entityId. Auto-creating section (ensure-parent).',
+                    '$entityId. Auto-creating section (ensure-parent).',
               );
               await _ensureSectionExists(sectionId, surveyIdHint: surveyIdHint);
-              await apiClient.post('sections/$sectionId/answers', data: createPayload);
+              await apiClient.post('sections/$sectionId/answers',
+                  data: createPayload);
             } else {
               rethrow;
             }
@@ -1379,9 +1469,10 @@ class SyncManager {
             // contain mutated fields (e.g. just 'value') and be missing
             // required CREATE fields (questionKey). Fetch the complete
             // entity from local DB to build a valid CREATE payload.
-            AppLogger.w('SyncManager',
+            AppLogger.w(
+              'SyncManager',
               'Answer $entityId not found on server (404 on UPDATE). '
-              'Fetching full entity from local DB for upsert.',
+                  'Fetching full entity from local DB for upsert.',
             );
 
             // Try V1 table first; V2 answers use composite IDs in
@@ -1396,9 +1487,10 @@ class SyncManager {
 
             if (resolvedQuestionKey == null || resolvedQuestionKey.isEmpty) {
               // Truly stale: no data in local DB or sync queue payload.
-              AppLogger.w('SyncManager',
+              AppLogger.w(
+                'SyncManager',
                 'Dropping stale answer update $entityId: '
-                'missing in local DB and server (404).',
+                    'missing in local DB and server (404).',
               );
               return true;
             }
@@ -1414,11 +1506,14 @@ class SyncManager {
             };
 
             try {
-              await apiClient.post('sections/$resolvedSectionId/answers', data: fullCreatePayload);
+              await apiClient.post('sections/$resolvedSectionId/answers',
+                  data: fullCreatePayload);
             } on NotFoundException {
               // Parent section also missing — ensure it exists first
-              await _ensureSectionExists(resolvedSectionId, surveyIdHint: surveyIdHint);
-              await apiClient.post('sections/$resolvedSectionId/answers', data: fullCreatePayload);
+              await _ensureSectionExists(resolvedSectionId,
+                  surveyIdHint: surveyIdHint);
+              await apiClient.post('sections/$resolvedSectionId/answers',
+                  data: fullCreatePayload);
             }
           }
         case SyncAction.delete:
@@ -1426,9 +1521,10 @@ class SyncManager {
             await apiClient.delete('answers/$entityId');
           } on NotFoundException {
             // Entity already gone — treat as success
-            AppLogger.d('SyncManager',
+            AppLogger.d(
+              'SyncManager',
               'Answer $entityId already deleted on server (404 on DELETE). '
-              'Treating as success.',
+                  'Treating as success.',
             );
           }
       }
@@ -1438,9 +1534,10 @@ class SyncManager {
       if (e is RateLimitException) rethrow;
       // IDEMPOTENT CREATE: 409 on CREATE means answer already exists
       if (_isConflictError(e) && action == SyncAction.create) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Answer $entityId already exists on server (409). '
-          'Treating CREATE as success (idempotent).',
+              'Treating CREATE as success (idempotent).',
         );
         return true;
       }
@@ -1465,7 +1562,8 @@ class SyncManager {
   Future<void> _ensureSurveyExists(String surveyId) async {
     final survey = await surveysDao.getSurveyById(surveyId);
     if (survey == null) {
-      AppLogger.w('SyncManager',
+      AppLogger.w(
+        'SyncManager',
         'Cannot auto-create survey $surveyId: not found in local DB.',
       );
       return;
@@ -1481,25 +1579,29 @@ class SyncManager {
       'type': survey.type.toBackendString(),
       if (survey.jobRef != null) 'jobRef': survey.jobRef,
       if (survey.clientName != null) 'clientName': survey.clientName,
-      if (survey.parentSurveyId != null) 'parentSurveyId': survey.parentSurveyId,
+      if (survey.parentSurveyId != null)
+        'parentSurveyId': survey.parentSurveyId,
     };
 
     try {
       await apiClient.post('surveys', data: payload);
-      AppLogger.d('SyncManager',
+      AppLogger.d(
+        'SyncManager',
         'Auto-created survey $surveyId on server (ensure-parent).',
       );
     } catch (e) {
       // 409 = already exists — that's fine, the survey is there now
       if (_isConflictError(e)) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Survey $surveyId already exists on server (409 during ensure-parent).',
         );
         return;
       }
       // Any other error — log and rethrow so the child sync fails with
       // a meaningful error instead of silently losing data.
-      AppLogger.e('SyncManager',
+      AppLogger.e(
+        'SyncManager',
         'Failed to auto-create survey $surveyId: $e',
       );
       rethrow;
@@ -1548,7 +1650,8 @@ class SyncManager {
     final qSurveyId = queuePayload?['surveyId'] as String?;
     final qTitle = queuePayload?['title'] as String?;
     if (qSurveyId != null && qTitle != null) {
-      AppLogger.d('SyncManager',
+      AppLogger.d(
+        'SyncManager',
         'Reconstructing V2 section $sectionId from sync queue payload.',
       );
       await _ensureSurveyExists(qSurveyId);
@@ -1568,9 +1671,10 @@ class SyncManager {
     // questions but never saved phrases/notes/section metadata), we construct
     // a bare-minimum section so the answer sync can succeed.
     if (surveyIdHint != null) {
-      AppLogger.w('SyncManager',
+      AppLogger.w(
+        'SyncManager',
         'Constructing bare-minimum V2 section $sectionId from '
-        'surveyIdHint=$surveyIdHint (no DB or queue record found).',
+            'surveyIdHint=$surveyIdHint (no DB or queue record found).',
       );
       await _ensureSurveyExists(surveyIdHint);
       final payload = {
@@ -1582,9 +1686,10 @@ class SyncManager {
       return;
     }
 
-    AppLogger.w('SyncManager',
+    AppLogger.w(
+      'SyncManager',
       'Cannot auto-create section $sectionId: '
-      'not found in local DB, sync queue, or answer payload.',
+          'not found in local DB, sync queue, or answer payload.',
     );
   }
 
@@ -1595,18 +1700,24 @@ class SyncManager {
     Map<String, dynamic> payload,
   ) async {
     try {
-      await apiClient.post('surveys/$surveyId/sections', data: payload);
-      AppLogger.d('SyncManager',
+      final sanitizedPayload = Map<String, dynamic>.from(payload)
+        ..remove('userNotes');
+      await apiClient.post('surveys/$surveyId/sections',
+          data: sanitizedPayload);
+      AppLogger.d(
+        'SyncManager',
         'Auto-created section $sectionId on server (ensure-parent).',
       );
     } catch (e) {
       if (_isConflictError(e)) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Section $sectionId already exists on server (409 during ensure-parent).',
         );
         return;
       }
-      AppLogger.e('SyncManager',
+      AppLogger.e(
+        'SyncManager',
         'Failed to auto-create section $sectionId: $e',
       );
       rethrow;
@@ -1644,9 +1755,10 @@ class SyncManager {
       if (e is RateLimitException) rethrow;
       // IDEMPOTENT CREATE: 409 on CREATE means photo already exists
       if (_isConflictError(e) && action == SyncAction.create) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+          'SyncManager',
           'Photo $entityId already exists on server (409). '
-          'Treating CREATE as success (idempotent).',
+              'Treating CREATE as success (idempotent).',
         );
         return true;
       }
@@ -1688,7 +1800,8 @@ class SyncManager {
                 e.message == 'No internet connection');
         if (!isRetryable || attempt >= maxRetries) rethrow;
         final delay = Duration(seconds: 2 * (attempt + 1)); // 2s, 4s
-        AppLogger.w('SyncManager', 'Pull attempt ${attempt + 1} failed: $e — retrying in ${delay.inSeconds}s');
+        AppLogger.w('SyncManager',
+            'Pull attempt ${attempt + 1} failed: $e — retrying in ${delay.inSeconds}s');
         await Future<void>.delayed(delay);
       }
     }
@@ -1724,7 +1837,8 @@ class SyncManager {
     // Previously these were reset per page, so sections from page 1 were lost
     // when processing answers in page 2, causing V2 answers to be routed to
     // the wrong table (0/N fields after reinstall).
-    final sectionCache = <String, ({String surveyId, String? sectionTypeKey})>{};
+    final sectionCache =
+        <String, ({String surveyId, String? sectionTypeKey})>{};
     final v2SurveyIds = <String>{};
 
     try {
@@ -1750,7 +1864,8 @@ class SyncManager {
         final serverTimestamp = data['serverTimestamp'] as String?;
         hasMore = (data['hasMore'] as bool?) ?? false;
 
-        AppLogger.d('SyncManager', 'Received ${changes.length} changes, hasMore=$hasMore');
+        AppLogger.d('SyncManager',
+            'Received ${changes.length} changes, hasMore=$hasMore');
 
         // ── Group changes by entity type for dependency-ordered processing.
         // V2 answers require their parent sections + screen metadata to exist
@@ -1774,12 +1889,13 @@ class SyncManager {
           }
         }
 
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+            'SyncManager',
             'PULL PAGE: surveys=${surveyChanges.length} '
-            'sections=${sectionChanges.length} '
-            'answers=${answerChanges.length} '
-            'other=${otherChanges.length} '
-            'sectionCache=${sectionCache.length}');
+                'sections=${sectionChanges.length} '
+                'answers=${answerChanges.length} '
+                'other=${otherChanges.length} '
+                'sectionCache=${sectionCache.length}');
 
         // ── Phase 1: Process SURVEY and SECTION entities first ──
         for (final group in [surveyChanges, sectionChanges]) {
@@ -1797,7 +1913,8 @@ class SyncManager {
 
             final hasPending = await syncQueueDao.hasPendingSync(entityId);
             if (hasPending) {
-              AppLogger.d('SyncManager', 'Skipping $entityType $entityId - has pending local changes');
+              AppLogger.d('SyncManager',
+                  'Skipping $entityType $entityId - has pending local changes');
               totalSkipped++;
               continue;
             }
@@ -1812,10 +1929,12 @@ class SyncManager {
                   affectedSurveyIds.add(entityId);
                 } else if (entityType == 'SECTION') {
                   final surveyId = entityData['surveyId'] as String?;
-                  final sectionTypeKey = entityData['sectionTypeKey'] as String?;
+                  final sectionTypeKey =
+                      entityData['sectionTypeKey'] as String?;
                   if (surveyId != null && surveyId.isNotEmpty) {
                     affectedSurveyIds.add(surveyId);
-                    sectionCache[entityId] = (surveyId: surveyId, sectionTypeKey: sectionTypeKey);
+                    sectionCache[entityId] =
+                        (surveyId: surveyId, sectionTypeKey: sectionTypeKey);
                     if (_isV2SectionKey(sectionTypeKey)) {
                       v2SurveyIds.add(surveyId);
                     }
@@ -1824,7 +1943,8 @@ class SyncManager {
               }
               totalUpserted++;
             } catch (e) {
-              AppLogger.e('SyncManager', 'Failed to apply $changeType for $entityType $entityId: $e');
+              AppLogger.e('SyncManager',
+                  'Failed to apply $changeType for $entityType $entityId: $e');
               totalSkipped++;
             }
           }
@@ -1852,7 +1972,8 @@ class SyncManager {
 
             final hasPending = await syncQueueDao.hasPendingSync(entityId);
             if (hasPending) {
-              AppLogger.d('SyncManager', 'Skipping $entityType $entityId - has pending local changes');
+              AppLogger.d('SyncManager',
+                  'Skipping $entityType $entityId - has pending local changes');
               totalSkipped++;
               continue;
             }
@@ -1873,7 +1994,8 @@ class SyncManager {
               }
               totalUpserted++;
             } catch (e) {
-              AppLogger.e('SyncManager', 'Failed to apply $changeType for $entityType $entityId: $e');
+              AppLogger.e('SyncManager',
+                  'Failed to apply $changeType for $entityType $entityId: $e');
               totalSkipped++;
             }
           }
@@ -1894,7 +2016,8 @@ class SyncManager {
         await _markV2ScreensWithAnswersCompleted(affectedSurveyIds);
       }
 
-      AppLogger.d('SyncManager', 'Pull complete: $totalUpserted upserted, $totalSkipped skipped');
+      AppLogger.d('SyncManager',
+          'Pull complete: $totalUpserted upserted, $totalSkipped skipped');
       return SyncPullResult(
         success: true,
         upsertedCount: totalUpserted,
@@ -1937,7 +2060,8 @@ class SyncManager {
         // since the server doesn't store them — the local DB is the
         // source of truth for these fields.
         if (section.surveyId.isNotEmpty) {
-          final existing = await sectionsDao.getSectionsForSurvey(section.surveyId);
+          final existing =
+              await sectionsDao.getSectionsForSurvey(section.surveyId);
           for (final old in existing) {
             if (old.order == section.order && old.id != section.id) {
               // Preserve local-only fields from the local copy before deleting it.
@@ -1950,11 +2074,13 @@ class SyncManager {
           }
           // Also preserve local-only fields when upserting over an existing
           // row with the same ID (server update of a previously synced section).
-          final existingSameId = existing.where((s) => s.id == section.id).firstOrNull;
+          final existingSameId =
+              existing.where((s) => s.id == section.id).firstOrNull;
           if (existingSameId != null) {
             section = section.copyWith(isCompleted: existingSameId.isCompleted);
             if (existingSameId.sectionType != entities.SectionType.notes) {
-              section = section.copyWith(sectionType: existingSameId.sectionType);
+              section =
+                  section.copyWith(sectionType: existingSameId.sectionType);
             }
           }
         }
@@ -1967,12 +2093,14 @@ class SyncManager {
         final sectionId = data['sectionId'] as String? ?? '';
         final questionKey = data['questionKey'] as String? ?? '';
 
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+            'SyncManager',
             'ANSWER PULL: entityId=$entityId questionKey=$questionKey '
-            'sectionId=$sectionId surveyId=$surveyId '
-            'sectionTypeKey=$sectionTypeKey value=${(data['value'] as String? ?? '').length} chars');
+                'sectionId=$sectionId surveyId=$surveyId '
+                'sectionTypeKey=$sectionTypeKey value=${(data['value'] as String? ?? '').length} chars');
 
-        if ((surveyId.isEmpty || sectionTypeKey == null) && sectionId.isNotEmpty) {
+        if ((surveyId.isEmpty || sectionTypeKey == null) &&
+            sectionId.isNotEmpty) {
           final cached = sectionCache?[sectionId];
           if (cached != null) {
             if (surveyId.isEmpty) surveyId = cached.surveyId;
@@ -1988,17 +2116,22 @@ class SyncManager {
           }
         }
 
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+            'SyncManager',
             'ANSWER PULL: final routing → sectionTypeKey=$sectionTypeKey '
-            'isV2=${_isV2SectionKey(sectionTypeKey)} surveyId=$surveyId');
+                'isV2=${_isV2SectionKey(sectionTypeKey)} surveyId=$surveyId');
 
         if (_isV2SectionKey(sectionTypeKey) && surveyId.isNotEmpty) {
-          await _upsertV2Answer(entityId, surveyId, sectionTypeKey!, questionKey, data);
+          await _upsertV2Answer(
+              entityId, surveyId, sectionTypeKey!, questionKey, data);
         } else if (surveyId.isNotEmpty) {
           // sectionTypeKey unresolvable — check if this survey has V2 screens.
           // If yes, try survey-wide reverse UUID matching as a fallback.
           final v2Matched = await _tryV2AnswerFallback(
-            entityId, surveyId, questionKey, data,
+            entityId,
+            surveyId,
+            questionKey,
+            data,
           );
           if (!v2Matched) {
             // Confirmed V1 answer — route to legacy table.
@@ -2020,9 +2153,11 @@ class SyncManager {
         }
       case 'MEDIA':
         // Media pull only updates metadata - file download is separate
-        AppLogger.d('SyncManager', 'Media pull not yet supported for $entityId');
+        AppLogger.d(
+            'SyncManager', 'Media pull not yet supported for $entityId');
       default:
-        AppLogger.w('SyncManager', 'Unknown entity type for upsert: $entityType');
+        AppLogger.w(
+            'SyncManager', 'Unknown entity type for upsert: $entityType');
     }
   }
 
@@ -2040,41 +2175,46 @@ class SyncManager {
       case 'ANSWER':
         // No direct delete-by-id on answersDao, use survey-level
         // Answer deletes from server are rare; log and skip for now
-        AppLogger.d('SyncManager', 'Answer delete for $entityId - skipping (no single-delete DAO method)');
+        AppLogger.d('SyncManager',
+            'Answer delete for $entityId - skipping (no single-delete DAO method)');
       case 'MEDIA':
         await mediaDao.deleteMedia(entityId);
       default:
-        AppLogger.w('SyncManager', 'Unknown entity type for delete: $entityType');
+        AppLogger.w(
+            'SyncManager', 'Unknown entity type for delete: $entityType');
     }
   }
 
   /// Map server survey JSON to local Survey entity.
-  entities.Survey _mapServerSurvey(String id, Map<String, dynamic> data) => entities.Survey(
-      id: id,
-      title: data['title'] as String? ?? 'Untitled',
-      type: entities.SurveyType.fromBackendString(
-        data['type'] as String? ?? 'OTHER',
-      ),
-      status: entities.SurveyStatus.fromBackendString(
-        data['status'] as String? ?? 'DRAFT',
-      ),
-      createdAt: _parseDateTime(data['createdAt']) ?? DateTime.now(),
-      updatedAt: _parseDateTime(data['updatedAt']),
-      address: data['propertyAddress'] as String?,
-      jobRef: data['jobRef'] as String?,
-      clientName: data['clientName'] as String?,
-      parentSurveyId: data['parentSurveyId'] as String?,
-    );
+  entities.Survey _mapServerSurvey(String id, Map<String, dynamic> data) =>
+      entities.Survey(
+        id: id,
+        title: data['title'] as String? ?? 'Untitled',
+        type: entities.SurveyType.fromBackendString(
+          data['type'] as String? ?? 'OTHER',
+        ),
+        status: entities.SurveyStatus.fromBackendString(
+          data['status'] as String? ?? 'DRAFT',
+        ),
+        createdAt: _parseDateTime(data['createdAt']) ?? DateTime.now(),
+        updatedAt: _parseDateTime(data['updatedAt']),
+        address: data['propertyAddress'] as String?,
+        jobRef: data['jobRef'] as String?,
+        clientName: data['clientName'] as String?,
+        parentSurveyId: data['parentSurveyId'] as String?,
+      );
 
   /// Map server section JSON to local SurveySection entity.
   /// Uses sectionTypeKey from server if available, otherwise falls back to
   /// title-based inference. The sync dedup logic in `_applyUpsert` also
   /// preserves sectionType from the existing local copy when available.
-  entities.SurveySection _mapServerSection(String id, Map<String, dynamic> data) {
+  entities.SurveySection _mapServerSection(
+      String id, Map<String, dynamic> data) {
     final title = data['title'] as String? ?? 'Untitled';
     final serverKey = data['sectionTypeKey'] as String?;
-    final sectionType = (serverKey != null ? sectionTypeFromApiKey(serverKey) : null)
-        ?? _inferSectionTypeFromTitle(title);
+    final sectionType =
+        (serverKey != null ? sectionTypeFromApiKey(serverKey) : null) ??
+            _inferSectionTypeFromTitle(title);
     return entities.SurveySection(
       id: id,
       surveyId: data['surveyId'] as String? ?? '',
@@ -2093,21 +2233,35 @@ class SyncManager {
   static entities.SectionType _inferSectionTypeFromTitle(String title) {
     final lower = title.toLowerCase();
     // Order matters: check more specific patterns first.
-    if (lower.contains('about') && lower.contains('inspection')) return entities.SectionType.aboutInspection;
-    if (lower.contains('about') && lower.contains('valuation')) return entities.SectionType.aboutValuation;
-    if (lower.contains('about') && lower.contains('property')) return entities.SectionType.aboutProperty;
-    if (lower.contains('property') && lower.contains('summary')) return entities.SectionType.propertySummary;
-    if (lower.contains('external') || lower.contains('exterior')) return entities.SectionType.externalItems;
-    if (lower.contains('internal') || lower.contains('interior')) return entities.SectionType.internalItems;
-    if (lower.contains('construction')) return entities.SectionType.construction;
+    if (lower.contains('about') && lower.contains('inspection'))
+      return entities.SectionType.aboutInspection;
+    if (lower.contains('about') && lower.contains('valuation'))
+      return entities.SectionType.aboutValuation;
+    if (lower.contains('about') && lower.contains('property'))
+      return entities.SectionType.aboutProperty;
+    if (lower.contains('property') && lower.contains('summary'))
+      return entities.SectionType.propertySummary;
+    if (lower.contains('external') || lower.contains('exterior'))
+      return entities.SectionType.externalItems;
+    if (lower.contains('internal') || lower.contains('interior'))
+      return entities.SectionType.internalItems;
+    if (lower.contains('construction'))
+      return entities.SectionType.construction;
     if (lower.contains('room')) return entities.SectionType.rooms;
-    if (lower.contains('services') || lower.contains('utilities')) return entities.SectionType.services;
-    if (lower.contains('issues') || lower.contains('risks') || lower.contains('defects')) return entities.SectionType.issuesAndRisks;
-    if (lower.contains('market') && lower.contains('analysis')) return entities.SectionType.marketAnalysis;
+    if (lower.contains('services') || lower.contains('utilities'))
+      return entities.SectionType.services;
+    if (lower.contains('issues') ||
+        lower.contains('risks') ||
+        lower.contains('defects')) return entities.SectionType.issuesAndRisks;
+    if (lower.contains('market') && lower.contains('analysis'))
+      return entities.SectionType.marketAnalysis;
     if (lower.contains('comparable')) return entities.SectionType.comparables;
     if (lower.contains('adjustment')) return entities.SectionType.adjustments;
-    if (lower.contains('valuation') || lower.contains('final valuation')) return entities.SectionType.valuation;
-    if (lower.contains('summary') || lower.contains('conclusion') || lower.contains('assumptions')) return entities.SectionType.summary;
+    if (lower.contains('valuation') || lower.contains('final valuation'))
+      return entities.SectionType.valuation;
+    if (lower.contains('summary') ||
+        lower.contains('conclusion') ||
+        lower.contains('assumptions')) return entities.SectionType.summary;
     if (lower.contains('photo')) return entities.SectionType.photos;
     if (lower.contains('sign')) return entities.SectionType.signature;
     if (lower.contains('note')) return entities.SectionType.notes;
@@ -2115,15 +2269,17 @@ class SyncManager {
   }
 
   /// Map server answer JSON to local SurveyAnswer entity.
-  entities.SurveyAnswer _mapServerAnswer(String id, Map<String, dynamic> data) => entities.SurveyAnswer(
-      id: id,
-      surveyId: '', // Server answers don't include surveyId directly
-      sectionId: data['sectionId'] as String? ?? '',
-      fieldKey: data['questionKey'] as String? ?? '',
-      value: data['value'] as String?,
-      createdAt: _parseDateTime(data['createdAt']),
-      updatedAt: _parseDateTime(data['updatedAt']),
-    );
+  entities.SurveyAnswer _mapServerAnswer(
+          String id, Map<String, dynamic> data) =>
+      entities.SurveyAnswer(
+        id: id,
+        surveyId: '', // Server answers don't include surveyId directly
+        sectionId: data['sectionId'] as String? ?? '',
+        fieldKey: data['questionKey'] as String? ?? '',
+        value: data['value'] as String?,
+        createdAt: _parseDateTime(data['createdAt']),
+        updatedAt: _parseDateTime(data['updatedAt']),
+      );
 
   /// Parse a date string or date value from server response.
   DateTime? _parseDateTime(dynamic value) {
@@ -2157,8 +2313,10 @@ class SyncManager {
         await repo.ensureSurveyInitialized(surveyId);
         AppLogger.d('SyncManager', 'V2 screens initialized for $surveyId');
       } on Exception catch (e) {
-        AppLogger.e('SyncManager',
-            'Failed to initialize V2 screens for $surveyId: $e',);
+        AppLogger.e(
+          'SyncManager',
+          'Failed to initialize V2 screens for $surveyId: $e',
+        );
       }
     }
   }
@@ -2188,16 +2346,22 @@ class SyncManager {
           final poMap = jsonDecode(phraseOutput) as Map<String, dynamic>;
           for (final entry in poMap.entries) {
             await (db.update(db.inspectionV2Screens)
-                  ..where((t) =>
-                      t.surveyId.equals(surveyId) &
-                      t.screenId.equals(entry.key),))
-                .write(InspectionV2ScreensCompanion(
-              phraseOutput: Value(jsonEncode(entry.value)),
-            ),);
+                  ..where(
+                    (t) =>
+                        t.surveyId.equals(surveyId) &
+                        t.screenId.equals(entry.key),
+                  ))
+                .write(
+              InspectionV2ScreensCompanion(
+                phraseOutput: Value(jsonEncode(entry.value)),
+              ),
+            );
           }
         } on FormatException catch (e) {
-          AppLogger.w('SyncManager',
-              'Failed to apply phraseOutput for section $sectionTypeKey: $e',);
+          AppLogger.w(
+            'SyncManager',
+            'Failed to apply phraseOutput for section $sectionTypeKey: $e',
+          );
         }
       }
 
@@ -2208,16 +2372,22 @@ class SyncManager {
           final notesMap = jsonDecode(userNotes) as Map<String, dynamic>;
           for (final entry in notesMap.entries) {
             await (db.update(db.inspectionV2Screens)
-                  ..where((t) =>
-                      t.surveyId.equals(surveyId) &
-                      t.screenId.equals(entry.key),))
-                .write(InspectionV2ScreensCompanion(
-              userNote: Value(entry.value as String),
-            ),);
+                  ..where(
+                    (t) =>
+                        t.surveyId.equals(surveyId) &
+                        t.screenId.equals(entry.key),
+                  ))
+                .write(
+              InspectionV2ScreensCompanion(
+                userNote: Value(entry.value as String),
+              ),
+            );
           }
         } on FormatException catch (e) {
-          AppLogger.w('SyncManager',
-              'Failed to apply userNotes for section $sectionTypeKey: $e',);
+          AppLogger.w(
+            'SyncManager',
+            'Failed to apply userNotes for section $sectionTypeKey: $e',
+          );
         }
       }
     }
@@ -2237,26 +2407,29 @@ class SyncManager {
   ) async {
     final value = data['value'] as String?;
     if (value == null || value.trim().isEmpty) {
-      AppLogger.d('SyncManager',
-          'V2 UPSERT: skipping $entityId — empty value');
+      AppLogger.d('SyncManager', 'V2 UPSERT: skipping $entityId — empty value');
       return;
     }
 
     // Query all screens in this section for reverse UUID matching.
     final screens = await (db.select(db.inspectionV2Screens)
-          ..where((t) =>
-              t.surveyId.equals(surveyId) &
-              t.sectionKey.equals(sectionTypeKey),))
+          ..where(
+            (t) =>
+                t.surveyId.equals(surveyId) &
+                t.sectionKey.equals(sectionTypeKey),
+          ))
         .get();
 
-    AppLogger.d('SyncManager',
+    AppLogger.d(
+        'SyncManager',
         'V2 UPSERT: entityId=$entityId section=$sectionTypeKey '
-        'survey=$surveyId screens=${screens.length} questionKey=$questionKey');
+            'survey=$surveyId screens=${screens.length} questionKey=$questionKey');
 
     // Find which screen this answer belongs to by matching deterministic UUIDs.
     String? screenId;
     for (final screen in screens) {
-      final computed = V2SyncHelper.answerSyncId(surveyId, screen.screenId, questionKey);
+      final computed =
+          V2SyncHelper.answerSyncId(surveyId, screen.screenId, questionKey);
       if (computed == entityId) {
         screenId = screen.screenId;
         break;
@@ -2265,12 +2438,16 @@ class SyncManager {
 
     if (screenId == null) {
       // Log first few computed IDs for debugging
-      final sample = screens.take(3).map((s) =>
-          '${s.screenId}→${V2SyncHelper.answerSyncId(surveyId, s.screenId, questionKey)}').join(', ');
-      AppLogger.w('SyncManager',
+      final sample = screens
+          .take(3)
+          .map((s) =>
+              '${s.screenId}→${V2SyncHelper.answerSyncId(surveyId, s.screenId, questionKey)}')
+          .join(', ');
+      AppLogger.w(
+          'SyncManager',
           'V2 answer $entityId: NO MATCH for field=$questionKey '
-          'section=$sectionTypeKey survey=$surveyId '
-          '(${screens.length} screens). Sample: $sample');
+              'section=$sectionTypeKey survey=$surveyId '
+              '(${screens.length} screens). Sample: $sample');
       return;
     }
 
@@ -2280,16 +2457,17 @@ class SyncManager {
     final v2Id = '${surveyId}_$prefix${screenId}_$questionKey';
 
     await db.into(db.inspectionV2Answers).insertOnConflictUpdate(
-      InspectionV2AnswersCompanion(
-        id: Value(v2Id),
-        surveyId: Value(surveyId),
-        screenId: Value(screenId),
-        fieldKey: Value(questionKey),
-        value: Value(value),
-        createdAt: Value(_parseDateTime(data['createdAt']) ?? DateTime.now()),
-        updatedAt: Value(_parseDateTime(data['updatedAt'])),
-      ),
-    );
+          InspectionV2AnswersCompanion(
+            id: Value(v2Id),
+            surveyId: Value(surveyId),
+            screenId: Value(screenId),
+            fieldKey: Value(questionKey),
+            value: Value(value),
+            createdAt:
+                Value(_parseDateTime(data['createdAt']) ?? DateTime.now()),
+            updatedAt: Value(_parseDateTime(data['updatedAt'])),
+          ),
+        );
   }
 
   /// Fallback V2 answer routing when sectionTypeKey is unresolvable.
@@ -2324,10 +2502,11 @@ class SyncManager {
     }
 
     if (screenId == null) {
-      AppLogger.w('SyncManager',
+      AppLogger.w(
+          'SyncManager',
           'V2 fallback: no screenId match for $entityId '
-          'field=$questionKey survey=$surveyId '
-          '(${allScreens.length} screens checked)');
+              'field=$questionKey survey=$surveyId '
+              '(${allScreens.length} screens checked)');
       return false;
     }
 
@@ -2336,16 +2515,17 @@ class SyncManager {
     final v2Id = '${surveyId}_$prefix${screenId}_$questionKey';
 
     await db.into(db.inspectionV2Answers).insertOnConflictUpdate(
-      InspectionV2AnswersCompanion(
-        id: Value(v2Id),
-        surveyId: Value(surveyId),
-        screenId: Value(screenId),
-        fieldKey: Value(questionKey),
-        value: Value(value),
-        createdAt: Value(_parseDateTime(data['createdAt']) ?? DateTime.now()),
-        updatedAt: Value(_parseDateTime(data['updatedAt'])),
-      ),
-    );
+          InspectionV2AnswersCompanion(
+            id: Value(v2Id),
+            surveyId: Value(surveyId),
+            screenId: Value(screenId),
+            fieldKey: Value(questionKey),
+            value: Value(value),
+            createdAt:
+                Value(_parseDateTime(data['createdAt']) ?? DateTime.now()),
+            updatedAt: Value(_parseDateTime(data['updatedAt'])),
+          ),
+        );
 
     AppLogger.d('SyncManager',
         'V2 fallback: matched answer $entityId → screen=$screenId field=$questionKey');
@@ -2365,12 +2545,12 @@ class SyncManager {
   ) async {
     for (final surveyId in surveyIds) {
       // Find distinct screenIds that have at least one answer for this survey.
-      final answeredScreenIds = await (db.selectOnly(db.inspectionV2Answers,
-              distinct: true)
-            ..addColumns([db.inspectionV2Answers.screenId])
-            ..where(db.inspectionV2Answers.surveyId.equals(surveyId)))
-          .map((row) => row.read(db.inspectionV2Answers.screenId)!)
-          .get();
+      final answeredScreenIds =
+          await (db.selectOnly(db.inspectionV2Answers, distinct: true)
+                ..addColumns([db.inspectionV2Answers.screenId])
+                ..where(db.inspectionV2Answers.surveyId.equals(surveyId)))
+              .map((row) => row.read(db.inspectionV2Answers.screenId)!)
+              .get();
 
       if (answeredScreenIds.isEmpty) continue;
 
@@ -2390,9 +2570,10 @@ class SyncManager {
       }
 
       if (marked > 0) {
-        AppLogger.d('SyncManager',
+        AppLogger.d(
+            'SyncManager',
             'V2 screen completion: marked $marked screens completed '
-            'for survey $surveyId (${answeredScreenIds.length} with answers)');
+                'for survey $surveyId (${answeredScreenIds.length} with answers)');
       }
     }
   }
@@ -2406,8 +2587,8 @@ class SyncManager {
     final failedCount = await syncQueueDao.getFailedCount();
     if (failedCount > 0) {
       await syncQueueDao.resetFailedItems();
-      AppLogger.d('SyncManager',
-          'Startup: reset $failedCount failed items for retry');
+      AppLogger.d(
+          'SyncManager', 'Startup: reset $failedCount failed items for retry');
     }
   }
 
@@ -2470,11 +2651,13 @@ class SyncManager {
       }
     }
 
-    final totalFiltered = surveyItems.length + sectionItems.length + answerItems.length;
-    AppLogger.d('SyncManager',
+    final totalFiltered =
+        surveyItems.length + sectionItems.length + answerItems.length;
+    AppLogger.d(
+      'SyncManager',
       'Scoped sync for $surveyId: ${surveyItems.length} surveys, '
-      '${sectionItems.length} sections, ${answerItems.length} answers '
-      '(filtered from ${pendingItems.length} total pending)',
+          '${sectionItems.length} sections, ${answerItems.length} answers '
+          '(filtered from ${pendingItems.length} total pending)',
     );
 
     if (totalFiltered == 0) {
@@ -2543,7 +2726,8 @@ class SyncManager {
       }
     }
 
-    AppLogger.d('SyncManager',
+    AppLogger.d(
+      'SyncManager',
       'Scoped sync complete for $surveyId: synced=$syncedCount, failed=$failedCount',
     );
 
@@ -2575,7 +2759,8 @@ class SyncManager {
     required String surveyId,
     required Map<String, dynamic>? surveyPayload,
   }) async {
-    AppLogger.d('SyncManager', 'Force re-queuing survey $surveyId with ALL children for sync');
+    AppLogger.d('SyncManager',
+        'Force re-queuing survey $surveyId with ALL children for sync');
 
     try {
       // ========================================
@@ -2583,7 +2768,8 @@ class SyncManager {
       // ========================================
       final survey = await surveysDao.getSurveyById(surveyId);
       if (survey == null) {
-        AppLogger.w('SyncManager', 'Cannot force resync: Survey $surveyId not found in local database');
+        AppLogger.w('SyncManager',
+            'Cannot force resync: Survey $surveyId not found in local database');
         return;
       }
 
@@ -2591,15 +2777,17 @@ class SyncManager {
       // CRITICAL: Only include fields declared in backend CreateSurveyDto.
       // Backend uses forbidNonWhitelisted:true — extra fields cause 400 errors.
       // Use toBackendString() for enums (e.g. 'LEVEL_2' not 'level2').
-      final fullSurveyPayload = surveyPayload ?? {
-        'title': survey.title,
-        'propertyAddress': survey.address ?? '',
-        'status': survey.status.toBackendString(),
-        'type': survey.type.toBackendString(),
-        if (survey.jobRef != null) 'jobRef': survey.jobRef,
-        if (survey.clientName != null) 'clientName': survey.clientName,
-        if (survey.parentSurveyId != null) 'parentSurveyId': survey.parentSurveyId,
-      };
+      final fullSurveyPayload = surveyPayload ??
+          {
+            'title': survey.title,
+            'propertyAddress': survey.address ?? '',
+            'status': survey.status.toBackendString(),
+            'type': survey.type.toBackendString(),
+            if (survey.jobRef != null) 'jobRef': survey.jobRef,
+            if (survey.clientName != null) 'clientName': survey.clientName,
+            if (survey.parentSurveyId != null)
+              'parentSurveyId': survey.parentSurveyId,
+          };
 
       // Queue survey with HIGH priority
       await syncQueueDao.addToQueue(
@@ -2615,7 +2803,8 @@ class SyncManager {
       // STEP 2: Fetch and queue ALL sections
       // ========================================
       final sections = await sectionsDao.getSectionsForSurvey(surveyId);
-      AppLogger.d('SyncManager', 'Found ${sections.length} sections for survey $surveyId');
+      AppLogger.d('SyncManager',
+          'Found ${sections.length} sections for survey $surveyId');
 
       for (final section in sections) {
         // Only include fields declared in backend CreateSectionDto: id, title, order.
@@ -2640,7 +2829,8 @@ class SyncManager {
           priority: -5, // High priority - sections sync after survey
         );
       }
-      AppLogger.d('SyncManager', 'Queued ${sections.length} sections for resync');
+      AppLogger.d(
+          'SyncManager', 'Queued ${sections.length} sections for resync');
 
       // ========================================
       // STEP 3: Fetch and queue ALL answers
@@ -2651,9 +2841,10 @@ class SyncManager {
       final nonEmptyAnswers = answers
           .where((a) => a.value != null && a.value!.trim().isNotEmpty)
           .toList();
-      AppLogger.d('SyncManager',
+      AppLogger.d(
+        'SyncManager',
         'Found ${answers.length} answers for survey $surveyId '
-        '(${nonEmptyAnswers.length} non-empty, ${answers.length - nonEmptyAnswers.length} skipped)',
+            '(${nonEmptyAnswers.length} non-empty, ${answers.length - nonEmptyAnswers.length} skipped)',
       );
 
       for (final answer in nonEmptyAnswers) {
@@ -2675,13 +2866,15 @@ class SyncManager {
           priority: -3, // Medium-high priority - answers sync after sections
         );
       }
-      AppLogger.d('SyncManager', 'Queued ${nonEmptyAnswers.length} answers for resync');
+      AppLogger.d(
+          'SyncManager', 'Queued ${nonEmptyAnswers.length} answers for resync');
 
       // ========================================
       // STEP 4: Fetch and queue ALL media
       // ========================================
       final mediaItems = await mediaDao.getMediaBySurvey(surveyId);
-      AppLogger.d('SyncManager', 'Found ${mediaItems.length} media items for survey $surveyId');
+      AppLogger.d('SyncManager',
+          'Found ${mediaItems.length} media items for survey $surveyId');
 
       for (final media in mediaItems) {
         // Media with local files are handled by MediaUploadService
@@ -2704,15 +2897,17 @@ class SyncManager {
           priority: -1, // Lower priority - media syncs last
         );
       }
-      AppLogger.d('SyncManager', 'Queued ${mediaItems.length} media items for resync');
+      AppLogger.d(
+          'SyncManager', 'Queued ${mediaItems.length} media items for resync');
 
       AppLogger.d(
         'SyncManager',
         'Force resync complete for survey $surveyId: '
-        '1 survey, ${sections.length} sections, ${answers.length} answers, ${mediaItems.length} media',
+            '1 survey, ${sections.length} sections, ${answers.length} answers, ${mediaItems.length} media',
       );
     } catch (e, stackTrace) {
-      AppLogger.e('SyncManager', 'Failed to force resync survey $surveyId: $e\n$stackTrace');
+      AppLogger.e('SyncManager',
+          'Failed to force resync survey $surveyId: $e\n$stackTrace');
       rethrow;
     }
   }
