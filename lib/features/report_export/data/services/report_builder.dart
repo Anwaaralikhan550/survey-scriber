@@ -242,9 +242,10 @@ class ReportBuilder {
     List<InspectionNodeDefinition> descendants,
   ) {
     if (descendants.length <= 1) return false;
-    // Legacy parity: Section E merged groups are paragraph-first and do not
-    // render per-child subheadings (e.g., "Weather", "Roof Covering Summary").
-    if (sectionDef.key.trim().toUpperCase() == 'E') return false;
+    // Legacy parity: merged Section E and F groups are paragraph-first and do
+    // not render per-child subheadings from the Flutter tree.
+    final sectionKey = sectionDef.key.trim().toUpperCase();
+    if (sectionKey == 'E' || sectionKey == 'F') return false;
     if (_isSectionDConstructionGroup(sectionDef, group)) return false;
     return true;
   }

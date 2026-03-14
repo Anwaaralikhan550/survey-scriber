@@ -389,12 +389,14 @@ abstract class BaseSurveyRepository {
     required String surveyId,
     required String screenId,
     required String phraseJson,
+    bool phraseEditedManually = false,
   }) async {
     await (_db.update(_db.inspectionV2Screens)
           ..where((tbl) => tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
         .write(
       InspectionV2ScreensCompanion(
         phraseOutput: Value(phraseJson),
+        phraseEditedManually: Value(phraseEditedManually),
         updatedAt: Value(DateTime.now()),
       ),
     );

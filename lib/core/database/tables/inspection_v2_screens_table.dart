@@ -14,6 +14,8 @@ class InspectionV2Screens extends Table {
   IntColumn get displayOrder => integer()();
   BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
   TextColumn get phraseOutput => text().nullable()();
+  BoolColumn get phraseEditedManually =>
+      boolean().withDefault(const Constant(false))();
   TextColumn get userNote => text().nullable()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime().nullable()();

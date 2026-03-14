@@ -1001,6 +1001,75 @@ void main() {
       );
     });
 
+    test('does not add merged descendant subheadings in Section F', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'F',
+            title: 'Inside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'group_f5_fireplaces_1',
+                title: 'Fireplaces and Chimneys',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_in_side_property_fire_places',
+                title: 'An open fire',
+                type: InspectionNodeType.screen,
+                parentId: 'group_f5_fireplaces_1',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'open_fire_field',
+                    label: 'Open Fire Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_in_side_property_fire_places_repair_blocked_fireplace',
+                title: 'Blocked Fireplace',
+                type: InspectionNodeType.screen,
+                parentId: 'group_f5_fireplaces_1',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'blocked_field',
+                    label: 'Blocked Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_in_side_property_fire_places': {
+              'open_fire_field': 'Open fire',
+            },
+            'activity_in_side_property_fire_places_repair_blocked_fireplace': {
+              'blocked_field': 'Blocked fireplace',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final merged = doc.sections.single.screens.single;
+      expect(merged.isMergedGroup, isTrue);
+      expect(
+        merged.phrases.where((p) => p.startsWith('[[SUBHEADING]] ')),
+        isEmpty,
+      );
+    });
+
     test('cleans merged phrases and removes placeholders', () {
       final tree = InspectionTreePayload(
         sections: [

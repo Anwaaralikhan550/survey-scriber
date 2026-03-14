@@ -44,7 +44,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 20;
+  int get schemaVersion => 21;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -152,6 +152,17 @@ class AppDatabase extends _$AppDatabase {
               'ON inspection_v2_answers (survey_id, screen_id, field_key)',
             );
           }
+          // v21: Distinguish manual live-preview edits from auto-generated
+          // phrase output so stale cached auto phrases do not override fresh
+          // preview text on reopen.
+          if (from < 21) {
+            await _addColumnIfNotExists(
+              m,
+              'inspection_v2_screens',
+              'phrase_edited_manually',
+              'INTEGER NOT NULL DEFAULT 0',
+            );
+          }
         },
         beforeOpen: (details) async {
           // Safety check: ensure required columns exist even if schema version is current
@@ -214,6 +225,12 @@ class AppDatabase extends _$AppDatabase {
     }
     if (!inspectionScreensColumns.contains('phrase_output')) {
       await customStatement('ALTER TABLE inspection_v2_screens ADD COLUMN phrase_output TEXT');
+    }
+    if (!inspectionScreensColumns.contains('phrase_edited_manually')) {
+      await customStatement(
+        'ALTER TABLE inspection_v2_screens '
+        'ADD COLUMN phrase_edited_manually INTEGER NOT NULL DEFAULT 0',
+      );
     }
     if (!inspectionScreensColumns.contains('user_note')) {
       await customStatement('ALTER TABLE inspection_v2_screens ADD COLUMN user_note TEXT');
