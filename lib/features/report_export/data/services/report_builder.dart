@@ -265,26 +265,6 @@ class ReportBuilder {
     return left == right;
   }
 
-  bool _shouldRegenerateStalePersistedPhrases(
-    String screenId,
-    List<String> persisted,
-  ) {
-    if (persisted.isEmpty) return false;
-
-    final normalizedId = screenId.trim().toLowerCase();
-    final joined = persisted.join(' ').toLowerCase();
-
-    // Main Walls phrase templates were aligned back to the legacy backend.
-    // Older saved phrase_output values still use the newer "principal external
-    // walls" wording, so exported reports must regenerate from answers to
-    // reflect the current legacy-parity phrase library.
-    if (normalizedId.startsWith('activity_outside_property_main_walls_')) {
-      return joined.contains('the principal external walls');
-    }
-
-    return false;
-  }
-
   List<String> _sectionDSummaryNarrativeFromAnswers(
     String screenId,
     Map<String, String> answers,
@@ -1334,7 +1314,9 @@ class ReportBuilder {
               } else {
                 // No phrase handler — convert fields to narrative phrases
                 // so data is not lost when other screens do have phrases.
-                final fallback = _fieldsToPhrases(fields);
+                final fallback = _shouldUseRawFieldFallback(screen.id)
+                    ? _fieldsToPhrases(fields)
+                    : const <String>[];
                 if (fallback.isNotEmpty) {
                   if (includeSubheadings &&
                       screenReportTitle.trim().isNotEmpty &&
@@ -1681,7 +1663,9 @@ class ReportBuilder {
     if (phrases.isEmpty &&
         config.includePhrases &&
         fields.any((f) => f.displayValue.isNotEmpty)) {
-      final fallback = _fieldsToPhrases(fields);
+      final fallback = _shouldUseRawFieldFallback(node.id)
+          ? _fieldsToPhrases(fields)
+          : const <String>[];
       final cleanedFallback = _cleanupPhrases(fallback);
       if (cleanedFallback.isNotEmpty) {
         phrases = cleanedFallback;
@@ -1724,15 +1708,13 @@ class ReportBuilder {
     bool isInspection,
   ) {
     final normalizedId = node.id.trim().toLowerCase();
-    final forceRegenerateFromAnswers =
-        _alwaysRegenerateFromAnswersScreenIds.contains(normalizedId);
+    final persistedWasManual =
+        rawData.persistedPhraseManualFlags[node.id] ?? false;
 
     final persisted = _persistedPhrasesForScreen(rawData, node.id);
-    if (persisted != null && !forceRegenerateFromAnswers) {
+    if (persisted != null && persistedWasManual) {
       final cleanedPersisted = _cleanupPhrases(persisted);
-      final shouldRegenerate =
-          _shouldRegenerateStalePersistedPhrases(node.id, cleanedPersisted);
-      if (cleanedPersisted.isNotEmpty && !shouldRegenerate) {
+      if (cleanedPersisted.isNotEmpty) {
         return _condenseIfNeeded(normalizedId, cleanedPersisted);
       }
     }
@@ -1884,6 +1866,22 @@ class ReportBuilder {
     }
     phrases.addAll(entries);
     return phrases;
+  }
+
+  bool _shouldUseRawFieldFallback(String screenId) {
+    final normalizedId = screenId.trim().toLowerCase();
+
+    // Legacy roof-structure insect-infestation output is phrase-driven only.
+    // Raw "Label: value" fallback leaks stale invalid values such as
+    // "Partly missing" into the final report, which the legacy report does
+    // not do.
+    if (normalizedId == 'activity_inside_property_repair_insect_infestation' ||
+        normalizedId == 'activity_in_side_property_wap_movement_cracks' ||
+        normalizedId == 'activity_in_side_property_floors_floor_ventilation') {
+      return false;
+    }
+
+    return true;
   }
 
   List<ReportField> _buildFields(

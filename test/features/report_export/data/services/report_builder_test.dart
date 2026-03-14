@@ -74,6 +74,8 @@ void main() {
     InspectionTreePayload? tree,
     Map<String, Map<String, String>>? allAnswers,
     Map<String, bool>? screenStates,
+    Map<String, List<String>>? persistedPhrases,
+    Map<String, bool>? persistedPhraseManualFlags,
   }) {
     return V2RawReportData(
       survey: survey ?? testSurvey,
@@ -82,6 +84,8 @@ void main() {
       screenStates: screenStates ?? {},
       photoFilePaths: [],
       signatureRows: [],
+      persistedPhrases: persistedPhrases ?? const {},
+      persistedPhraseManualFlags: persistedPhraseManualFlags ?? const {},
     );
   }
 
@@ -1122,6 +1126,10 @@ void main() {
             'Condition rating is 2..',
           ],
         },
+        persistedPhraseManualFlags: const {
+          'screen_cleanup_a': true,
+          'screen_cleanup_b': true,
+        },
       );
 
       final doc = builder.build(withPersisted, const ExportConfig());
@@ -1588,6 +1596,9 @@ void main() {
             'The fireplace in the lounge incorporates a .',
           ],
         },
+        persistedPhraseManualFlags: const {
+          'activity_in_side_property_fire_places__other': false,
+        },
       );
 
       final doc = customBuilder.build(stalePersisted, const ExportConfig());
@@ -1656,6 +1667,9 @@ void main() {
             'These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.',
           ],
         },
+        persistedPhraseManualFlags: const {
+          'activity_in_side_property_fire_places__other': false,
+        },
       );
 
       final doc = customBuilder.build(stalePersisted, const ExportConfig());
@@ -1667,6 +1681,252 @@ void main() {
       expect(
         screen.phrases.join(' '),
         isNot(contains('incorporates a .')),
+      );
+    });
+
+    test('preserves manually edited persisted phrases in reports', () {
+      final phraseEngine = InspectionPhraseEngine(const {
+        '{F_FIREPLACES_AND_CHIMNEYS}::{OTHER_CONDITION}':
+            'These appear in {FAC_FP_OTH_CONDITION} condition. No repair is currently needed. The property must be maintained in the normal way.',
+      });
+      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'F',
+            title: 'Inside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'activity_in_side_property_fire_places__other',
+                title: 'Other',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'actv_condition',
+                    label: 'Condition',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Reasonable', 'Satisfactory'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final rawData = _makeRawData(
+        tree: tree,
+        allAnswers: {
+          'activity_in_side_property_fire_places__other': {
+            'actv_condition': 'Reasonable',
+          },
+        },
+      );
+      final withManualPersisted = V2RawReportData(
+        survey: rawData.survey,
+        tree: rawData.tree,
+        allAnswers: rawData.allAnswers,
+        screenStates: rawData.screenStates,
+        photoFilePaths: rawData.photoFilePaths,
+        signatureRows: rawData.signatureRows,
+        persistedPhrases: {
+          'activity_in_side_property_fire_places__other': [
+            'Manual override sentence.',
+          ],
+        },
+        persistedPhraseManualFlags: const {
+          'activity_in_side_property_fire_places__other': true,
+        },
+      );
+
+      final doc =
+          customBuilder.build(withManualPersisted, const ExportConfig());
+      final screen = doc.sections.single.screens.single;
+      expect(screen.phrases, contains('Manual override sentence.'));
+      expect(
+        screen.phrases.join(' '),
+        isNot(contains('These appear in reasonable condition.')),
+      );
+    });
+
+    test(
+        'does not use raw field fallback for roof structure insect infestation when phrase engine emits nothing',
+        () {
+      final customBuilder = ReportBuilder(
+        inspectionPhraseEngine: const InspectionPhraseEngine({}),
+      );
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'F',
+            title: 'Inside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'group_roof_structure_58',
+                title: 'F1 Roof Structure',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_inside_property_repair_insect_infestation',
+                title: 'Insect infestation',
+                type: InspectionNodeType.screen,
+                parentId: 'group_roof_structure_58',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'actv_insect_infestation',
+                    label: 'Insect infestation',
+                    type: InspectionFieldType.dropdown,
+                    options: ['None', 'Minor', 'Severe'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final rawData = _makeRawData(
+        tree: tree,
+        allAnswers: {
+          'activity_inside_property_repair_insect_infestation': {
+            'actv_insect_infestation': 'Partly missing',
+          },
+        },
+      );
+
+      final doc = customBuilder.build(rawData, const ExportConfig());
+      final screen = doc.sections.single.screens.single;
+      expect(
+        screen.phrases.join(' '),
+        isNot(contains('Insect infestation: Partly missing')),
+      );
+    });
+
+    test(
+        'does not use raw field fallback for movement cracks when saved value is non-legacy',
+        () {
+      final customBuilder = ReportBuilder(
+        inspectionPhraseEngine: const InspectionPhraseEngine({}),
+      );
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'F',
+            title: 'Inside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'group_walls_and_partitions_64',
+                title: 'F3 Walls and Partitions',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_in_side_property_wap_movement_cracks',
+                title: 'Movement Cracks',
+                type: InspectionNodeType.screen,
+                parentId: 'group_walls_and_partitions_64',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner3',
+                    label: 'Condition',
+                    type: InspectionFieldType.dropdown,
+                    options: ['None', 'Normal', 'Multiple locations'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final rawData = _makeRawData(
+        tree: tree,
+        allAnswers: {
+          'activity_in_side_property_wap_movement_cracks': {
+            'android_material_design_spinner3': 'Reasonable',
+          },
+        },
+      );
+
+      final doc = customBuilder.build(rawData, const ExportConfig());
+      final screen = doc.sections.single.screens.single;
+      expect(
+        screen.phrases.join(' '),
+        isNot(contains('Condition: Reasonable')),
+      );
+    });
+
+    test(
+        'does not use raw field fallback for floor ventilation when poor problem detail is missing',
+        () {
+      final customBuilder = ReportBuilder(
+        inspectionPhraseEngine: const InspectionPhraseEngine({}),
+      );
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'F',
+            title: 'Inside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'group_floors_67',
+                title: 'F4 Floors',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_in_side_property_floors_floor_ventilation',
+                title: 'Floor ventilation',
+                type: InspectionNodeType.screen,
+                parentId: 'group_floors_67',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'actv_condition',
+                    label: 'Condition',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Ok', 'Poor'],
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'et_describe_problem',
+                    label: 'Condition',
+                    type: InspectionFieldType.dropdown,
+                    options: [
+                      'condensation',
+                      'moulding',
+                      'timber rot',
+                      'other'
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final rawData = _makeRawData(
+        tree: tree,
+        allAnswers: {
+          'activity_in_side_property_floors_floor_ventilation': {
+            'actv_condition': 'Poor',
+          },
+        },
+      );
+
+      final doc = customBuilder.build(rawData, const ExportConfig());
+      final screen = doc.sections.single.screens.single;
+      expect(
+        screen.phrases.join(' '),
+        isNot(contains('Condition: Poor')),
       );
     });
 
