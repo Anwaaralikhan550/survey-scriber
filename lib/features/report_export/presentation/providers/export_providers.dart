@@ -121,11 +121,16 @@ class ExportNotifier extends StateNotifier<ExportState> {
     ExportConfig config = const ExportConfig(),
   }) async {
     return _export(
-      () => _exportService.exportInspection(
-        surveyId,
-        config,
-        onProgress: (p) => _updateState((s) => s.copyWith(progress: p)),
-      ),
+      () async {
+        // Ensure phrase texts are loaded so report export uses the same
+        // inspection phrase engine as the live preview pipeline.
+        await _ref.read(inspectionPhraseTextsProvider.future);
+        return _exportService.exportInspection(
+          surveyId,
+          config,
+          onProgress: (p) => _updateState((s) => s.copyWith(progress: p)),
+        );
+      },
     );
   }
 
@@ -157,9 +162,10 @@ class ExportNotifier extends StateNotifier<ExportState> {
     } catch (e) {
       AppLogger.e('Export', 'Export failed: $e');
       final hint = e.toString();
-      final message = hint.contains("won't fit") || hint.contains('exceed a page')
+      final message = hint.contains("won't fit") ||
+              hint.contains('exceed a page')
           ? 'Report content too large for a single page. '
-            'Please try reducing AI narrative length or splitting sections.'
+              'Please try reducing AI narrative length or splitting sections.'
           : hint.contains('timeout') || hint.contains('Timeout')
               ? 'Export timed out. Please check your connection and try again.'
               : hint.contains('No space') || hint.contains('storage')

@@ -3,9 +3,8 @@ import 'package:flutter/foundation.dart';
 import '../../../property_inspection/domain/field_phrase_processor.dart';
 import '../../../property_inspection/domain/inspection_phrase_engine.dart';
 import '../../../property_inspection/domain/models/inspection_models.dart';
-import '../../../property_inspection/domain/narrative_enhancer.dart';
 import '../../../property_inspection/presentation/widgets/inspection_fields.dart'
-    show shouldShowInspectionField;
+    show shouldShowInspectionField, sanitizeInspectionFieldsForScreen;
 import '../../../property_valuation/domain/valuation_phrase_engine.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
@@ -52,6 +51,45 @@ class ReportBuilder {
     'activity_energy_environment_impect',
     'activity_other_service',
   ];
+
+  // Section D summary-style screens should render as narrative-only blocks
+  // when phrases exist (legacy-style report output).
+  static const Set<String> _sectionDSummaryNarrativeScreenIds = <String>{
+    'activity_property_location',
+    'activity_property_facelities',
+    'activity_property_local_environment',
+    'activity_property_private_road',
+    'activity_property_is_noisy_area',
+  };
+  static const Set<String> _alwaysRegenerateFromAnswersScreenIds = <String>{
+    ..._sectionDSummaryNarrativeScreenIds,
+    'activity_issues_regulation',
+    'activity_issues_glazed_sections',
+    'activity_issues_other_matters',
+    'activity_risks_risk_to_building_',
+    'activity_risks_other_',
+    'activity_risks_repair_or_improve',
+    'activity_in_side_property_fire_places__other',
+  };
+  static const String _mergedSubheadingPrefix = '[[SUBHEADING]] ';
+
+  static const Set<String> _genericAmbiguousScreenTitles = <String>{
+    'construction',
+    'roof',
+    'wall',
+    'floor',
+    'floors',
+    'flat',
+    'windows',
+    'doors',
+    'door',
+    'location',
+    'other',
+    'condition',
+    'condition rating',
+    'not inspected',
+    'location and construction',
+  };
 
   ReportDocument build(
     V2RawReportData rawData,
@@ -140,6 +178,7 @@ class ReportBuilder {
   /// Pattern matching numbered sub-section groups like "E1 Chimney",
   /// "F3 Walls and Partitions", "G6 Drainage", "H2 Other".
   static final _numberedGroupPattern = RegExp(r'^[A-Z]\d');
+  static final _numberedGroupIdPattern = RegExp(r'^group_[a-z]\d_');
 
   /// Legacy parity:
   /// In Section D, "Construction" should render as one consolidated
@@ -157,11 +196,33 @@ class ReportBuilder {
 
     final sectionKey = sectionDef.key.trim().toUpperCase();
     final groupId = node.id.trim().toLowerCase();
+    if (_numberedGroupIdPattern.hasMatch(groupId)) {
+      return true;
+    }
     final groupTitle = node.title.trim().toLowerCase();
     final isConstructionGroup =
         groupId == 'group_construction_2' || groupTitle == 'construction';
-
     return sectionKey == 'D' && isConstructionGroup;
+  }
+
+  String _reportTitleForNode(
+    String sectionKey,
+    InspectionNodeDefinition node,
+  ) {
+    final key = sectionKey.trim().toUpperCase();
+    final id = node.id.trim().toLowerCase();
+
+    if (key == 'D' && id == 'activity_property_location') {
+      return 'Location';
+    }
+    if (key == 'E' && id == 'group_e1_chimney_5') {
+      return 'Chimney Stacks';
+    }
+    if (key == 'E' && id == 'activity_outside_property_stacks') {
+      return 'Chimney Stacks';
+    }
+
+    return node.title;
   }
 
   bool _isSectionDConstructionGroup(
@@ -173,6 +234,762 @@ class ReportBuilder {
     final groupTitle = group.title.trim().toLowerCase();
     return sectionKey == 'D' &&
         (groupId == 'group_construction_2' || groupTitle == 'construction');
+  }
+
+  bool _shouldShowMergedDescendantSubheadings(
+    InspectionSectionDefinition sectionDef,
+    InspectionNodeDefinition group,
+    List<InspectionNodeDefinition> descendants,
+  ) {
+    if (descendants.length <= 1) return false;
+    // Legacy parity: Section E merged groups are paragraph-first and do not
+    // render per-child subheadings (e.g., "Weather", "Roof Covering Summary").
+    if (sectionDef.key.trim().toUpperCase() == 'E') return false;
+    if (_isSectionDConstructionGroup(sectionDef, group)) return false;
+    return true;
+  }
+
+  bool _startsWithTitle(List<String> phrases, String title) {
+    if (phrases.isEmpty) return false;
+    final first = phrases.first.trim().toLowerCase();
+    final normalizedTitle = title.trim().toLowerCase();
+    if (normalizedTitle.isEmpty) return false;
+    return first == normalizedTitle || first.startsWith('$normalizedTitle:');
+  }
+
+  bool _sameTitle(String a, String b) {
+    final left = a.trim().toLowerCase().replaceAll(RegExp(r'\s+'), ' ');
+    final right = b.trim().toLowerCase().replaceAll(RegExp(r'\s+'), ' ');
+    if (left.isEmpty || right.isEmpty) return false;
+    return left == right;
+  }
+
+  bool _shouldRegenerateStalePersistedPhrases(
+    String screenId,
+    List<String> persisted,
+  ) {
+    if (persisted.isEmpty) return false;
+
+    final normalizedId = screenId.trim().toLowerCase();
+    final joined = persisted.join(' ').toLowerCase();
+
+    // Main Walls phrase templates were aligned back to the legacy backend.
+    // Older saved phrase_output values still use the newer "principal external
+    // walls" wording, so exported reports must regenerate from answers to
+    // reflect the current legacy-parity phrase library.
+    if (normalizedId.startsWith('activity_outside_property_main_walls_')) {
+      return joined.contains('the principal external walls');
+    }
+
+    return false;
+  }
+
+  List<String> _sectionDSummaryNarrativeFromAnswers(
+    String screenId,
+    Map<String, String> answers,
+  ) {
+    final id = screenId.trim().toLowerCase();
+    if (id == 'activity_property_location') {
+      final from = (answers['android_material_design_spinner2'] ?? '').trim();
+      final to = (answers['android_material_design_spinner20'] ?? '').trim();
+      final area = (answers['android_material_design_spinner'] ?? '').trim();
+      if (from.isNotEmpty && to.isNotEmpty) {
+        return [
+          'The property is located in an established area with surrounding density ranging from ${from.toLowerCase()} to ${to.toLowerCase()}.'
+        ];
+      }
+      if (from.isNotEmpty || to.isNotEmpty) {
+        final density = (from.isNotEmpty ? from : to).toLowerCase();
+        return [
+          'The property is located in an established area with surrounding density described as $density.'
+        ];
+      }
+      if (area.isNotEmpty && area.toLowerCase() != 'yes') {
+        return ['The property is located in a ${area.toLowerCase()} area.'];
+      }
+      return const [];
+    }
+    if (id == 'activity_property_facelities') {
+      final value = (answers['android_material_design_spinner7'] ?? '')
+          .trim()
+          .toLowerCase();
+      if (value == 'accessible') {
+        return const [
+          'The local facilities include schools, shops and transport links and appear to be reasonably accessible from the property.'
+        ];
+      }
+      if (value == 'remote') {
+        return const [
+          'The property is located in a more remote setting and some day-to-day facilities may be further away than usual.'
+        ];
+      }
+      return const [];
+    }
+    if (id == 'activity_property_local_environment') {
+      final status = (answers['android_material_design_spinner8'] ?? '')
+          .trim()
+          .toLowerCase();
+      if (status.contains('no adverse')) {
+        return const [
+          'There are no known or apparent adverse local environmental features that are likely to materially affect the property.'
+        ];
+      }
+    }
+    if (id == 'activity_property_private_road') {
+      final status = (answers['android_material_design_spinner3'] ?? '')
+          .trim()
+          .toLowerCase();
+      if (status == 'yes' || status == 'true' || status == 'private') {
+        return const [
+          'The road outside the property is likely to be a private road and maintenance responsibility should be confirmed by your legal adviser.'
+        ];
+      }
+      if (status == 'no' || status == 'false') {
+        return const [
+          'The road outside the property is not understood to be private.'
+        ];
+      }
+    }
+    if (id == 'activity_property_is_noisy_area') {
+      final status = (answers['android_material_design_spinner4'] ?? '')
+          .trim()
+          .toLowerCase();
+      if (status == 'yes' || status == 'true' || status == 'fully') {
+        return const [
+          'The property is in an area where external noise influences may affect day-to-day enjoyment, saleability and value.'
+        ];
+      }
+    }
+    return const [];
+  }
+
+  List<String> _sectionDSummaryNarrativeFromFields(
+    String screenId,
+    List<ReportField> fields,
+  ) {
+    final id = screenId.trim().toLowerCase();
+    String? value(String label) {
+      for (final f in fields) {
+        if (f.label.trim().toLowerCase() == label.toLowerCase() &&
+            f.displayValue.isNotEmpty &&
+            f.displayValue != '-') {
+          return f.displayValue;
+        }
+      }
+      return null;
+    }
+
+    if (id == 'activity_property_location') {
+      final from = value('From');
+      final to = value('To');
+      if (from != null && to != null) {
+        return [
+          'The property is located in an established area with surrounding density ranging from ${from.toLowerCase()} to ${to.toLowerCase()}.'
+        ];
+      }
+      final one = from ?? to;
+      if (one != null) {
+        return [
+          'The property is located in an established area with surrounding density described as ${one.toLowerCase()}.'
+        ];
+      }
+    }
+
+    if (id == 'activity_property_facelities') {
+      final remote = value('Remote');
+      if (remote != null) {
+        final n = remote.toLowerCase();
+        if (n == 'accessible') {
+          return const [
+            'The local facilities include schools, shops and transport links and appear to be reasonably accessible from the property.'
+          ];
+        }
+        return [
+          'Local facilities are recorded as $n for this property location.'
+        ];
+      }
+    }
+
+    if (id == 'activity_property_local_environment') {
+      final flooding = value('Flooding');
+      if (flooding != null && flooding.toLowerCase() == 'no adverse') {
+        return const [
+          'There are no known or apparent adverse local environmental features that are likely to materially affect the property.'
+        ];
+      }
+      if (flooding != null) {
+        return [
+          'Local environmental factors were noted, including flooding risk recorded as ${flooding.toLowerCase()}.'
+        ];
+      }
+    }
+
+    if (id == 'activity_property_private_road') {
+      final status = value('Status');
+      if (status != null) {
+        final s = status.toLowerCase();
+        if (s == 'yes') {
+          return const [
+            'The road outside the property is likely to be a private road and maintenance responsibility should be confirmed by your legal adviser.'
+          ];
+        }
+        if (s == 'no') {
+          return const [
+            'The road outside the property is not understood to be private.'
+          ];
+        }
+      }
+    }
+
+    if (id == 'activity_property_is_noisy_area') {
+      final status = value('Status');
+      if (status != null && status.toLowerCase() != 'no') {
+        return const [
+          'The property is in an area where external noise influences may affect day-to-day enjoyment, saleability and value.'
+        ];
+      }
+    }
+    return const [];
+  }
+
+  List<String> _narrativeFallbackForIssuesRisks(
+    String screenTitle,
+    List<ReportField> fields,
+  ) {
+    final points = <String>[];
+    for (final f in fields) {
+      if (f.displayValue.isEmpty || f.displayValue == '-') continue;
+      if (f.type == ReportFieldType.checkbox) {
+        if (f.displayValue == 'Yes') {
+          points.add(f.label.trim().replaceFirst(RegExp(r'[.,;:!?]+\s*$'), ''));
+        }
+      } else {
+        final label = f.label.trim().replaceFirst(RegExp(r'[.,;:!?]+\s*$'), '');
+        final value =
+            f.displayValue.trim().replaceFirst(RegExp(r'[.,;:!?]+\s*$'), '');
+        points.add('$label: $value');
+      }
+    }
+    if (points.isEmpty) return const [];
+    final body = points.join(', ').replaceFirst(RegExp(r'[.,;:!?]+\s*$'), '');
+    return ['The following matters were identified in $screenTitle: $body.'];
+  }
+
+  List<String> _legacyDerivedSectionFIssueGuarantees(V2RawReportData rawData) {
+    final phrases = <String>[];
+    final cellar = _answersForScreen(
+        rawData, 'activity_inside_property_other_celler_damp');
+    final basement = _answersForScreen(
+        rawData, 'activity_inside_property_other_celler_damp__serious_damp');
+
+    if (_isCheckedValue(cellar['cb_serious_dump'])) {
+      phrases.add(
+          'You should check with your legal adviser to see if the dampness problem repair is covered by any guarantees or warranties.');
+    }
+    if (_isCheckedValue(basement['cb_serious_dump'])) {
+      phrases.add(
+          'You should check with your legal adviser to see if the dampness problem is covered by any guarantees or warranties.');
+    }
+    return _cleanupPhrases(phrases);
+  }
+
+  List<String> _legacyDerivedSectionFRiskToBuilding(V2RawReportData rawData) {
+    final phrases = <String>[];
+
+    final woodMain =
+        _answersForScreen(rawData, 'activity_in_side_property_wood_work');
+    if (_isCheckedValue(woodMain['cb_out_of_square_doors'])) {
+      phrases.add(
+          'Some internal doors and frame are distorted and do not shut properly. This may have been affected by past settlement.');
+    }
+
+    final infestation = _answersForScreen(
+        rawData, 'activity_in_side_property_wood_work_repair_infestation');
+    final severity =
+        (infestation['actv_condition'] ?? infestation['llMainContainer'] ?? '')
+            .trim()
+            .toLowerCase();
+    final infestationParts = _labelsForAnswerMap(
+      infestation,
+      const <String, String>{
+        'cb_staircase': 'staircase',
+        'cb_floorboards': 'floorboards',
+        'cb_skirting': 'skirting',
+        'cb_under_stairs': 'under stairs',
+        'cb_cupboards': 'cupboards',
+        'cb_other_1032': 'other',
+      },
+      otherCheckboxId: 'cb_other_1032',
+      otherTextId: 'et_other_728',
+    );
+    final infestationLocations = _labelsForAnswerMap(
+      infestation,
+      const <String, String>{
+        'cb_plastic': 'lounge',
+        'cb_cast_iron': 'reception',
+        'cb_asbestos_cement': 'dining room',
+        'cb_concrete': 'kitchen',
+        'cb_Bedroom': 'bedroom',
+        'cb_other_697': 'other',
+      },
+      otherCheckboxId: 'cb_other_697',
+      otherTextId: 'et_other_427',
+    );
+    if (severity == 'minor' &&
+        infestationParts.isNotEmpty &&
+        infestationLocations.isNotEmpty) {
+      phrases.add(
+          'I found an active infestation of wood-boring insects in parts of the ${_toLegacyWords(infestationParts)} timber in the ${_toLegacyWords(infestationLocations)}.');
+    } else if (severity == 'major' &&
+        infestationParts.isNotEmpty &&
+        infestationLocations.isNotEmpty) {
+      phrases.add(
+          'I found a large and active infestation of wood-boring insects in parts of the staircase timber.');
+    }
+
+    final dampTimber = _answersForScreen(
+        rawData, 'activity_in_side_property_wood_work_repair_damp_timber');
+    final dampComponents = _labelsForAnswerMap(
+      dampTimber,
+      const <String, String>{
+        'cb_staircase': 'staircase',
+        'cb_floorboards': 'floorboards',
+        'cb_skirting': 'skirting',
+        'cb_under_stairs': 'under stairs',
+        'cb_cupboards': 'cupboards',
+        'cb_other_270': 'other',
+      },
+      otherCheckboxId: 'cb_other_270',
+      otherTextId: 'et_other_516',
+    );
+    final dampLocations = _labelsForAnswerMap(
+      dampTimber,
+      const <String, String>{
+        'cb_lounge_72': 'lounge',
+        'cb_reception_49': 'reception',
+        'cb_dining_room_84': 'dining room',
+        'cb_kitchen_72': 'kitchen',
+        'cb_bedroom_44': 'bedroom',
+        'cb_other_750': 'other',
+      },
+      otherCheckboxId: 'cb_other_750',
+      otherTextId: 'et_other_302',
+    );
+    final dampDefects = _labelsForAnswerMap(
+      dampTimber,
+      const <String, String>{
+        'cb_damp': 'damp',
+        'cb_rotten': 'rotten',
+        'cb_other_498': 'other',
+      },
+      otherCheckboxId: 'cb_other_498',
+      otherTextId: 'et_other_534',
+    );
+    if (dampComponents.isNotEmpty &&
+        dampLocations.isNotEmpty &&
+        dampDefects.isNotEmpty) {
+      phrases.add(
+          'The timber ${_toLegacyWords(dampComponents)} in the ${_toLegacyWords(dampLocations)} is ${_toLegacyWords(dampDefects)}.');
+    }
+
+    final leaking = _answersForScreen(
+        rawData, 'activity_in_side_property_bathroom_fittings_leaking');
+    final leakingLocations = _labelsForAnswerMap(
+      leaking,
+      const <String, String>{
+        'cb_bathtub': 'bathtub',
+        'cb_shower': 'shower',
+        'cb_wc': 'wc',
+        'cb_wash_hand_basin': 'wash hand basin',
+        'cb_urinal': 'urinal',
+        'cb_other_937': 'other',
+      },
+      otherCheckboxId: 'cb_other_937',
+      otherTextId: 'et_other_861',
+    );
+    if (leakingLocations.isNotEmpty) {
+      final locationsText = _toLegacyWords(leakingLocations);
+      phrases.add(
+          'The $locationsText ${_legacyIsAre(leakingLocations)} leaking and causing dampness to nearby elements.');
+    }
+
+    return _cleanupPhrases(phrases);
+  }
+
+  List<String> _legacyDerivedSectionFRiskToPeople(V2RawReportData rawData) {
+    final phrases = <String>[];
+
+    final woodMain =
+        _answersForScreen(rawData, 'activity_in_side_property_wood_work');
+    if (_isCheckedValue(woodMain['cb_glazed_internal_doors'])) {
+      phrases.add(
+          'One or more internal doors are glazed, and it is not possible to confirm whether safety glass has been fitted.');
+    }
+    if (_isCheckedValue(woodMain['cb_no_stairs_handrails'])) {
+      phrases.add(
+          'There are no handrails installed to the staircase, and this is safety hazards as anyone, especially children, can fall off the edge of the stairs.');
+    }
+
+    final balusters = _answersForScreen(
+        rawData, 'activity_in_side_property_wood_work_repair_balusters');
+    final balusterDefects = _labelsForAnswerMap(
+      balusters,
+      const <String, String>{
+        'cb_too_far_apart_93': 'too far apart',
+        'cb_missing_47': 'missing',
+        'cb_broken_89': 'broken',
+        'cb_other_890': 'other',
+      },
+      otherCheckboxId: 'cb_other_890',
+      otherTextId: 'et_other_516',
+    );
+    if (balusterDefects.isNotEmpty) {
+      phrases.add(
+          'The balusters are ${_toLegacyWords(balusterDefects)} and are a safety hazard because they could allow small children to fall through or become trapped.');
+    }
+
+    final noSafetyGlass = _answersForScreen(
+        rawData, 'activity_in_side_property_cubicle_safety_glass_rating');
+    final noSafetyLocations = _labelsForAnswerMap(
+      noSafetyGlass,
+      const <String, String>{
+        'cb_shower_cubicle': 'shower cubicle',
+        'cb_bathtub': 'bathtub screen',
+        'cb_other_1084': 'other',
+      },
+      otherCheckboxId: 'cb_other_1084',
+      otherTextId: 'et_other_843',
+    );
+    if (noSafetyLocations.isNotEmpty) {
+      phrases.add(
+          'I could not find evidence that the glass screen to the ${_toLegacyWords(noSafetyLocations)} is safety glass. Anyone falling against the glass serene may get hurt.');
+    }
+
+    final bathroomRepair = _answersForScreen(
+        rawData, 'activity_in_side_property_bathroom_fittings_repair');
+    final repairType = (bathroomRepair['actv_repair_type'] ??
+            bathroomRepair['llMainContainer'] ??
+            '')
+        .trim()
+        .toLowerCase();
+    final repairLocations = _labelsForAnswerMap(
+      bathroomRepair,
+      const <String, String>{
+        'cb_bathtub_52': 'bathtub',
+        'cb_shower_tray_31': 'shower tray',
+        'cb_shower_glass_cubicle_24': 'shower glass cubicle',
+        'cb_wc_89': 'wc',
+        'cb_wash_hand_basin_60': 'wash hand basin',
+        'cb_urinal_90': 'urinal',
+        'cb_bidet_13': 'bidet',
+        'cb_other_609': 'other',
+      },
+      otherCheckboxId: 'cb_other_609',
+      otherTextId: 'et_other_791',
+    );
+    final repairDefects = _labelsForAnswerMap(
+      bathroomRepair,
+      const <String, String>{
+        'cb_badly_leaking_38': 'badly leaking',
+        'cb_very_loose_28': 'very loose',
+        'cb_badly_cracked_62': 'badly cracked',
+        'cb_not_working_33': 'not working',
+        'cb_not_connected_98': 'not connected',
+        'cb_poorly_secured_48': 'poorly secured',
+        'cb_blocked_34': 'blocked',
+        'cb_other_398': 'other',
+      },
+      otherCheckboxId: 'cb_other_398',
+      otherTextId: 'et_other_824',
+    );
+    final hasRiskDefect =
+        _isCheckedValue(bathroomRepair['cb_badly_cracked_62']) ||
+            _isCheckedValue(bathroomRepair['cb_poorly_secured_48']);
+    if (repairType.contains('now') &&
+        hasRiskDefect &&
+        repairLocations.isNotEmpty &&
+        repairDefects.isNotEmpty) {
+      phrases.add(
+          'The ${_toLegacyWords(repairLocations)} is ${_toLegacyWords(repairDefects)}.');
+    }
+
+    return _cleanupPhrases(phrases);
+  }
+
+  List<String> _labelsForAnswerMap(
+    Map<String, String> answers,
+    Map<String, String> mapping, {
+    String? otherCheckboxId,
+    String? otherTextId,
+  }) {
+    final labels = <String>[];
+    for (final entry in mapping.entries) {
+      if (_isCheckedValue(answers[entry.key])) {
+        labels.add(entry.value);
+      }
+    }
+    if (otherCheckboxId != null &&
+        otherTextId != null &&
+        _isCheckedValue(answers[otherCheckboxId])) {
+      final other = (answers[otherTextId] ?? '').trim();
+      if (other.isNotEmpty) labels.add(other.toLowerCase());
+    }
+    return labels;
+  }
+
+  String _toLegacyWords(List<String> items) {
+    final cleaned = items
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toList(growable: false);
+    if (cleaned.isEmpty) return '';
+    if (cleaned.length == 1) return cleaned.first;
+    if (cleaned.length == 2) return '${cleaned.first} and ${cleaned.last}';
+    return '${cleaned.sublist(0, cleaned.length - 1).join(', ')} and ${cleaned.last}';
+  }
+
+  String _legacyIsAre(List<String> items) => items.length > 1 ? 'are' : 'is';
+
+  String _mergedSubheading(String title) =>
+      '$_mergedSubheadingPrefix${title.trim()}';
+
+  int _sectionDScreenSortRank(ReportScreen screen) {
+    final id = screen.screenId.trim().toLowerCase();
+    if (id == 'activity_property_type') return 10;
+    if (id == 'activity_property_built_year' ||
+        id == 'activity_property_built') {
+      return 20;
+    }
+    if (id == 'activity_property_extended') return 30;
+    if (id == 'activity_property_converted') return 40;
+    if (id == 'activity_property_flate') return 50;
+    if (id == 'group_construction_2') return 60;
+    if (_isListedBuildingScreenId(id)) return 70;
+    if (id == 'section_d_energy_merged') return 80;
+    if (id == 'activity_property_location') return 90;
+    if (id == 'activity_property_facelities') return 100;
+    if (id == 'activity_property_local_environment') return 110;
+    if (id == 'activity_property_private_road') return 120;
+    if (id == 'activity_property_is_noisy_area') return 130;
+    return 1000;
+  }
+
+  List<String> _legacyStyleSectionDConstructionPhrases(List<String> phrases) {
+    if (phrases.isEmpty) return const <String>[];
+
+    final labelValues = <String, String>{};
+    final narrative = <String>[];
+    final labelPattern = RegExp(r'^\s*([^:]+):\s*(.+?)\s*$');
+
+    for (final phrase in phrases) {
+      final m = labelPattern.firstMatch(phrase);
+      if (m == null) {
+        narrative.add(phrase.trim());
+        continue;
+      }
+      final key = (m.group(1) ?? '').trim().toLowerCase();
+      final value = _cleanConstructionValue(m.group(2) ?? '');
+      if (key.isEmpty || value.isEmpty) {
+        narrative.add(phrase.trim());
+        continue;
+      }
+      labelValues[key] = value;
+    }
+
+    // If there are no known construction labels, keep original phrasing.
+    const knownKeys = <String>{
+      'roof type',
+      'roof material',
+      'cover type',
+      'extension walls',
+      'finishes',
+      'internal walls',
+      'floors',
+      'windows',
+      'window material',
+    };
+    if (!labelValues.keys.any(knownKeys.contains)) {
+      return List<String>.from(phrases);
+    }
+
+    final out = <String>[];
+    if (narrative.isNotEmpty) {
+      out.add(narrative.first);
+    }
+
+    final roofType = labelValues['roof type'];
+    final roofMaterial = labelValues['roof material'];
+    final coverType = labelValues['cover type'];
+    if ((roofType ?? '').isNotEmpty ||
+        (roofMaterial ?? '').isNotEmpty ||
+        (coverType ?? '').isNotEmpty) {
+      final bits = <String>[];
+      if ((roofType ?? '').isNotEmpty) bits.add('The roof type is $roofType');
+      if ((roofMaterial ?? '').isNotEmpty) {
+        bits.add('the roof material is $roofMaterial');
+      }
+      if ((coverType ?? '').isNotEmpty)
+        bits.add('the roof cover is $coverType');
+      out.add('${bits.join(', ')}.');
+    }
+
+    final extensionWalls = labelValues['extension walls'];
+    if ((extensionWalls ?? '').isNotEmpty) {
+      out.add('The main external walls are built of $extensionWalls.');
+    }
+
+    final finishes = labelValues['finishes'];
+    if ((finishes ?? '').isNotEmpty) {
+      out.add('The external wall finishes are $finishes.');
+    }
+
+    final internalWalls = labelValues['internal walls'];
+    if ((internalWalls ?? '').isNotEmpty) {
+      out.add('The internal walls are built of $internalWalls.');
+    }
+
+    final floors = labelValues['floors'];
+    if ((floors ?? '').isNotEmpty) {
+      out.add('The floors are built of $floors.');
+    }
+
+    final windows = labelValues['windows'];
+    final windowMaterial = labelValues['window material'];
+    if ((windows ?? '').isNotEmpty || (windowMaterial ?? '').isNotEmpty) {
+      if ((windows ?? '').isNotEmpty && (windowMaterial ?? '').isNotEmpty) {
+        out.add(
+            'The windows are mainly $windows and are formed in $windowMaterial.');
+      } else if ((windows ?? '').isNotEmpty) {
+        out.add('The windows are mainly $windows.');
+      } else {
+        out.add('The windows are formed in $windowMaterial.');
+      }
+    }
+
+    return _cleanupPhrases(out);
+  }
+
+  String _cleanConstructionValue(String raw) {
+    var v = raw.trim();
+    if (v.isEmpty) return '';
+    if (RegExp(r'^\.+$').hasMatch(v)) return '';
+    v = v.replaceAll(RegExp(r'\s+'), ' ');
+    v = v.replaceAll(RegExp(r'\.\.+'), '.');
+    v = v.replaceAll(RegExp(r'^\.+|\.+$'), '');
+    v = v.replaceAll(
+      RegExp(r'\bmainly of mainly of\b', caseSensitive: false),
+      'mainly of',
+    );
+    v = v.replaceAll(
+      RegExp(r'\bmainly mainly\b', caseSensitive: false),
+      'mainly',
+    );
+    return v.trim();
+  }
+
+  List<String> _cleanupPhrases(List<String> phrases) {
+    final out = <String>[];
+    final seen = <String>{};
+    for (final phrase in phrases) {
+      final cleaned = _cleanupPhrase(phrase);
+      if (cleaned.isEmpty) continue;
+      final key = cleaned
+          .toLowerCase()
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .replaceAll(RegExp(r'[^\w\s]'), '')
+          .trim();
+      if (key.isEmpty) continue;
+      if (seen.contains(key)) continue;
+      seen.add(key);
+      out.add(cleaned);
+    }
+    return out;
+  }
+
+  String _cleanupPhrase(String phrase) {
+    var v = phrase.trim();
+    if (v.isEmpty) return '';
+    v = v.replaceAll(RegExp(r'\.\.+'), '.');
+    v = v.replaceAll(RegExp(r'\s+'), ' ');
+    v = v.replaceAll(
+      RegExp(r'\bother\s+and\s+other\b', caseSensitive: false),
+      'other',
+    );
+    v = v.replaceAll(RegExp(r'\s+([,.;:])'), r'$1');
+    v = v.replaceAll(RegExp(r'([,;:])\.'), '.');
+    v = v.replaceAll(RegExp(r'\.\s*\.'), '.');
+    v = v.trim();
+    if (RegExp(r'^not inspected phrase\.?$', caseSensitive: false)
+        .hasMatch(v)) {
+      return '';
+    }
+    if (RegExp(r'^[^:]{1,80}:\s*$').hasMatch(v)) return '';
+    if (RegExp(r'^\.+$').hasMatch(v)) return '';
+    if (_looksLikeRawOptionDump(v)) return '';
+    return v;
+  }
+
+  bool _shouldCondensePhrasesAsParagraph(String normalizedScreenId) =>
+      normalizedScreenId == 'activity_outside_property_stacks';
+
+  List<String> _condenseIfNeeded(
+    String normalizedScreenId,
+    List<String> phrases,
+  ) {
+    if (!_shouldCondensePhrasesAsParagraph(normalizedScreenId)) {
+      return phrases;
+    }
+    if (phrases.length <= 1) return phrases;
+    final paragraph = phrases.join(' ').replaceAll(RegExp(r'\s+'), ' ').trim();
+    return paragraph.isEmpty ? const [] : <String>[paragraph];
+  }
+
+  bool _looksLikeRawOptionDump(String phrase) {
+    final normalized = phrase.trim();
+    if (normalized.isEmpty) return false;
+    final commaCount = ','.allMatches(normalized).length;
+    final lower = normalized.toLowerCase();
+    if (commaCount < 3) return false;
+    if (lower.contains(':')) return false;
+
+    const sentenceStarts = <String>[
+      'the ',
+      'there ',
+      'it ',
+      'this ',
+      'we ',
+      'you ',
+      'i ',
+    ];
+    if (sentenceStarts.any(lower.startsWith)) return false;
+
+    const verbHints = <String>[
+      ' should ',
+      ' recommend',
+      ' because ',
+      ' therefore ',
+      ' however ',
+      ' although ',
+      ' during ',
+      ' where ',
+    ];
+    if (verbHints.any(lower.contains)) return false;
+
+    final stripped = lower.replaceAll(RegExp(r'[.;:]$'), '');
+    final parts = stripped
+        .split(',')
+        .map((s) => s.trim())
+        .where((s) => s.isNotEmpty)
+        .toList();
+    if (parts.length < 4) return false;
+
+    final longPartCount =
+        parts.where((p) => p.split(RegExp(r'\s+')).length > 4).length;
+    final shortPartCount = parts.length - longPartCount;
+    final mostlyShort = shortPartCount / parts.length >= 0.8;
+    if (!mostlyShort) return false;
+
+    return true;
   }
 
   bool _isListedBuildingScreenId(String screenId) =>
@@ -261,16 +1078,41 @@ class ReportBuilder {
         hasSolarHotWater;
     if (!hasAnyData) return const [];
 
+    String ratingSentence({
+      required String label,
+      required String current,
+      required String potential,
+    }) {
+      if (current.isEmpty && potential.isEmpty) {
+        return '$label data was not available from the EPC records at the time of inspection.';
+      }
+      if (current.isEmpty) {
+        return "$label is recorded as potential $potential (current rating not available).";
+      }
+      if (potential.isEmpty) {
+        return "$label is recorded as current $current (potential rating not available).";
+      }
+      return '$label is recorded as current $current and potential $potential.';
+    }
+
     final phrases = <String>[
-      "We have not prepared the Energy Performance Certificate (EPC). If we have seen the EPC, then we will present the ratings here. We have not checked these ratings and so cannot comment on their accuracy. We are advised that the property's current energy performance, as recorded in the EPC, is:",
-      'Energy: Current: ${energyCurrent.isEmpty ? '-' : energyCurrent} Potential: ${energyPotential.isEmpty ? '-' : energyPotential}.',
-      'Environmental Impact: Current: ${impactCurrent.isEmpty ? '-' : impactCurrent} Potential: ${impactPotential.isEmpty ? '-' : impactPotential}.',
-      'Other Services:',
+      "We are advised that the property's current energy performance, as recorded in the EPC, is as follows.",
+      ratingSentence(
+        label: 'Energy performance rating',
+        current: energyCurrent,
+        potential: energyPotential,
+      ),
+      ratingSentence(
+        label: 'Environmental impact rating',
+        current: impactCurrent,
+        potential: impactPotential,
+      ),
+      'Other services:',
     ];
 
     if (!hasSolarElectricity && !hasSolarHotWater) {
       phrases.add(
-        'Based on the available evidence, it appears that there are no other services or energy sources connected to the property at the time of my inspection.',
+        'No other energy-related services were identified at the time of inspection.',
       );
       return phrases;
     }
@@ -368,9 +1210,25 @@ class ReportBuilder {
 
     // ── Build parent→children map for group hierarchy ──────────────
     final childrenOf = <String, List<InspectionNodeDefinition>>{};
+    final nodeIndexById = <String, int>{
+      for (var i = 0; i < sectionDef.nodes.length; i++)
+        sectionDef.nodes[i].id: i,
+    };
     for (final node in sectionDef.nodes) {
       final pid = node.parentId ?? '_root_';
       childrenOf.putIfAbsent(pid, () => []).add(node);
+    }
+    // Preserve tree intent: descendants should follow explicit node.order,
+    // not arbitrary JSON placement. Keep sort stable via source index.
+    for (final list in childrenOf.values) {
+      list.sort((a, b) {
+        final orderA = a.order ?? 9999;
+        final orderB = b.order ?? 9999;
+        if (orderA != orderB) return orderA.compareTo(orderB);
+        final idxA = nodeIndexById[a.id] ?? 0;
+        final idxB = nodeIndexById[b.id] ?? 0;
+        return idxA.compareTo(idxB);
+      });
     }
 
     // ── Identify top-level groups that should be merged in report output ──
@@ -402,6 +1260,7 @@ class ReportBuilder {
       // Track which groups have already been emitted.
       final emittedGroups = <String>{};
       var emittedSectionDEnergy = false;
+      var emittedListedBuilding = false;
 
       // Pre-build node lookup for parent-chain walking.
       final nodeMap = <String, InspectionNodeDefinition>{
@@ -422,9 +1281,19 @@ class ReportBuilder {
           emittedGroups.add(ownerGroupId);
 
           final group = topLevelGroups.firstWhere((g) => g.id == ownerGroupId);
-          final descendants = groupDescendants[ownerGroupId]!;
+          final descendants = _orderedMergedGroupDescendants(
+            sectionDef,
+            group,
+            groupDescendants[ownerGroupId]!,
+          );
           final isLegacyConstructionSummary =
               _isSectionDConstructionGroup(sectionDef, group);
+          final includeSubheadings = _shouldShowMergedDescendantSubheadings(
+            sectionDef,
+            group,
+            descendants,
+          );
+          final groupReportTitle = _reportTitleForNode(sectionDef.key, group);
 
           final mergedPhrases = <String>[];
           final mergedNotes = <String>[];
@@ -445,9 +1314,19 @@ class ReportBuilder {
             if (config.includePhrases) {
               final screenPhrases =
                   _phrasesForScreen(screen, rawData, isInspection);
+              final screenReportTitle = _reportTitleForNode(
+                sectionDef.key,
+                screen,
+              );
               if (screenPhrases.isNotEmpty) {
+                if (includeSubheadings &&
+                    screenReportTitle.trim().isNotEmpty &&
+                    !_sameTitle(screenReportTitle, groupReportTitle) &&
+                    !_startsWithTitle(screenPhrases, screenReportTitle)) {
+                  mergedPhrases.add(_mergedSubheading(screenReportTitle));
+                }
                 if (isLegacyConstructionSummary) {
-                  mergedPhrases.add(screenPhrases.first);
+                  mergedPhrases.addAll(screenPhrases.take(2));
                 } else {
                   mergedPhrases.addAll(screenPhrases);
                 }
@@ -456,8 +1335,14 @@ class ReportBuilder {
                 // so data is not lost when other screens do have phrases.
                 final fallback = _fieldsToPhrases(fields);
                 if (fallback.isNotEmpty) {
+                  if (includeSubheadings &&
+                      screenReportTitle.trim().isNotEmpty &&
+                      !_sameTitle(screenReportTitle, groupReportTitle) &&
+                      !_startsWithTitle(fallback, screenReportTitle)) {
+                    mergedPhrases.add(_mergedSubheading(screenReportTitle));
+                  }
                   if (isLegacyConstructionSummary) {
-                    mergedPhrases.add(fallback.first);
+                    mergedPhrases.addAll(fallback.take(2));
                   } else {
                     mergedPhrases.addAll(fallback);
                   }
@@ -470,10 +1355,44 @@ class ReportBuilder {
             }
           }
 
+          // Safety fallback: if Construction still has no phrases, regenerate
+          // compact narrative directly from saved answers per child screen.
+          if (isLegacyConstructionSummary && mergedPhrases.isEmpty) {
+            for (final screen in descendants) {
+              final answers = _answersForScreen(rawData, screen.id);
+              if (answers.isEmpty) continue;
+              final regenerated =
+                  _buildPhrases(screen.id, answers, isInspection);
+              if (regenerated.isNotEmpty) {
+                mergedPhrases.addAll(regenerated.take(2));
+                continue;
+              }
+              final fallbackFields = _buildFields(screen, answers);
+              final fallbackPhrases = _fieldsToPhrases(fallbackFields);
+              if (fallbackPhrases.isNotEmpty) {
+                mergedPhrases.addAll(fallbackPhrases.take(2));
+              }
+            }
+          }
+
+          if (isLegacyConstructionSummary && mergedPhrases.isNotEmpty) {
+            final rewritten =
+                _legacyStyleSectionDConstructionPhrases(mergedPhrases);
+            mergedPhrases
+              ..clear()
+              ..addAll(rewritten);
+          }
+
+          final cleanedMergedPhrases = _cleanupPhrases(mergedPhrases);
+
           // Skip truly empty groups (no phrases, no fields, no notes)
-          if (mergedPhrases.isEmpty &&
+          // Legacy structural parity: keep About Property's
+          // Construction heading in report flow.
+          final keepEmptySectionDGroup = isLegacyConstructionSummary;
+          if (cleanedMergedPhrases.isEmpty &&
               mergedFields.isEmpty &&
               mergedNotes.isEmpty &&
+              !keepEmptySectionDGroup &&
               !config.includeEmptyScreens) {
             continue;
           }
@@ -483,9 +1402,9 @@ class ReportBuilder {
           // field table so no user data is silently dropped.
           screens.add(ReportScreen(
             screenId: group.id,
-            title: group.title,
-            fields: mergedPhrases.isNotEmpty ? const [] : mergedFields,
-            phrases: mergedPhrases,
+            title: _reportTitleForNode(sectionDef.key, group),
+            fields: cleanedMergedPhrases.isNotEmpty ? const [] : mergedFields,
+            phrases: cleanedMergedPhrases,
             userNote: mergedNotes.join('\n'),
             isMergedGroup: true,
           ));
@@ -495,6 +1414,10 @@ class ReportBuilder {
         // ── Standalone screen (not consumed by any group) ─────────
         if (node.type != InspectionNodeType.screen) continue;
         if (consumedScreenIds.contains(node.id)) continue;
+        if (_isListedBuildingScreenId(node.id)) {
+          if (emittedListedBuilding) continue;
+          emittedListedBuilding = true;
+        }
         if (_isSectionDEnergyScreen(sectionDef, node)) {
           if (emittedSectionDEnergy) continue;
           emittedSectionDEnergy = true;
@@ -508,14 +1431,25 @@ class ReportBuilder {
           continue;
         }
 
-        final entry = _buildScreenEntry(node, rawData, config, isInspection);
+        final entry = _buildScreenEntry(
+          sectionDef.key,
+          node,
+          rawData,
+          config,
+          isInspection,
+        );
         if (entry != null) screens.add(entry);
       }
     } else {
       // ── No numbered groups in this section — flat mode (unchanged) ──
       var emittedSectionDEnergy = false;
+      var emittedListedBuilding = false;
       for (final node in sectionDef.nodes) {
         if (node.type != InspectionNodeType.screen) continue;
+        if (_isListedBuildingScreenId(node.id)) {
+          if (emittedListedBuilding) continue;
+          emittedListedBuilding = true;
+        }
         if (_isSectionDEnergyScreen(sectionDef, node)) {
           if (emittedSectionDEnergy) continue;
           emittedSectionDEnergy = true;
@@ -528,38 +1462,82 @@ class ReportBuilder {
           if (mergedEnergy != null) screens.add(mergedEnergy);
           continue;
         }
-        final entry = _buildScreenEntry(node, rawData, config, isInspection);
+        final entry = _buildScreenEntry(
+          sectionDef.key,
+          node,
+          rawData,
+          config,
+          isInspection,
+        );
         if (entry != null) screens.add(entry);
       }
     }
 
-    if (screens.isEmpty && !config.includeEmptyScreens) return null;
+    if (sectionDef.key.trim().toUpperCase() == 'D') {
+      final indexed = screens.asMap().entries.toList();
+      indexed.sort((a, b) {
+        final ra = _sectionDScreenSortRank(a.value);
+        final rb = _sectionDScreenSortRank(b.value);
+        if (ra != rb) return ra.compareTo(rb);
+        return a.key.compareTo(b.key);
+      });
+      screens
+        ..clear()
+        ..addAll(indexed.map((e) => e.value));
+    }
 
-    // Apply NarrativeEnhancer to each screen's phrases
-    if (config.includePhrases) {
-      for (var i = 0; i < screens.length; i++) {
-        final screen = screens[i];
-        if (screen.phrases.isEmpty) continue;
-        final enhanced = NarrativeEnhancer.enhance(
-          screen.phrases,
-          sectionKey: sectionDef.key,
-          screenId: screen.screenId,
-          isFirstScreenInSection: i == 0,
+    if (sectionDef.key.trim().toUpperCase() == 'J') {
+      final riskToPeople = _legacyDerivedSectionFRiskToPeople(rawData);
+      if (riskToPeople.isNotEmpty) {
+        final j2Screen = ReportScreen(
+          screenId: 'derived_j2_risk_to_people',
+          title: 'J2 Risk To People',
+          fields: const <ReportField>[],
+          phrases: riskToPeople,
         );
-        if (enhanced != screen.phrases) {
-          screens[i] = ReportScreen(
-            screenId: screen.screenId,
-            title: screen.title,
-            fields: screen.fields,
-            phrases: enhanced,
-            userNote: screen.userNote,
-            parentId: screen.parentId,
-            isCompleted: screen.isCompleted,
-            isMergedGroup: screen.isMergedGroup,
-          );
+        final insertAt = screens.indexWhere(
+          (s) => s.screenId.trim().toLowerCase() == 'activity_risks_other_',
+        );
+        if (insertAt >= 0) {
+          screens.insert(insertAt, j2Screen);
+        } else {
+          screens.add(j2Screen);
         }
       }
     }
+
+    _disambiguateGenericScreenTitles(screens, sectionDef.nodes);
+
+    if (screens.isEmpty &&
+        !config.includeEmptyScreens &&
+        isInspection &&
+        sectionDef.key.trim().toUpperCase() == 'K') {
+      return ReportSection(
+        key: 'K',
+        title: 'K – Additional assumption(s)',
+        description: sectionDef.description,
+        displayOrder: displayOrder,
+        screens: const <ReportScreen>[
+          ReportScreen(
+            screenId: 'k_additional_assumptions_default',
+            title: 'K – Additional assumption(s)',
+            fields: <ReportField>[],
+            phrases: <String>[
+              'My opinion has been arrived at largely on the basis of the standard assumptions governing residential valuations. (These are outlined in this section and under market value in the description of the Home Survey Service).',
+              'The purchase price provided is a reflection of current market conditions and the result of shortages of properties with too many buyers in the market and is considered to be the maximum likely to be achieved under present market conditions. Any deterioration in condition or downturn in market activity could lead to this figure not being achieved on early resale.',
+            ],
+          ),
+          ReportScreen(
+            screenId: 'k_other_considerations_default',
+            title: 'K - Other Considerations',
+            fields: <ReportField>[],
+            phrases: <String>['No further comments.'],
+          ),
+        ],
+      );
+    }
+
+    if (screens.isEmpty && !config.includeEmptyScreens) return null;
 
     return ReportSection(
       key: sectionDef.key,
@@ -570,13 +1548,96 @@ class ReportBuilder {
     );
   }
 
+  void _disambiguateGenericScreenTitles(
+    List<ReportScreen> screens,
+    List<InspectionNodeDefinition> sectionNodes,
+  ) {
+    if (screens.isEmpty) return;
+
+    final nodeById = <String, InspectionNodeDefinition>{
+      for (final n in sectionNodes) n.id.trim().toLowerCase(): n,
+    };
+
+    final titleCounts = <String, int>{};
+    for (final screen in screens) {
+      final t = screen.title.trim().toLowerCase();
+      if (t.isEmpty) continue;
+      titleCounts[t] = (titleCounts[t] ?? 0) + 1;
+    }
+
+    for (var i = 0; i < screens.length; i++) {
+      final screen = screens[i];
+      if (screen.isMergedGroup) continue;
+
+      final currentTitle = screen.title.trim();
+      if (currentTitle.isEmpty) continue;
+      final currentTitleLower = currentTitle.toLowerCase();
+      final duplicated = (titleCounts[currentTitleLower] ?? 0) > 1;
+      if (!duplicated) {
+        continue;
+      }
+
+      final node = nodeById[screen.screenId.trim().toLowerCase()];
+      if (node == null) continue;
+
+      final parentTitle = _nearestMeaningfulParentTitle(node, nodeById);
+      if (parentTitle == null) continue;
+
+      final replacement = currentTitleLower == 'construction'
+          ? parentTitle
+          : '$parentTitle $currentTitle';
+      if (currentTitleLower != 'construction' &&
+          currentTitleLower.startsWith(parentTitle.toLowerCase())) {
+        continue;
+      }
+      if (replacement.trim().toLowerCase() == currentTitleLower) continue;
+
+      screens[i] = ReportScreen(
+        screenId: screen.screenId,
+        title: replacement,
+        fields: screen.fields,
+        phrases: screen.phrases,
+        userNote: screen.userNote,
+        parentId: screen.parentId,
+        isCompleted: screen.isCompleted,
+        isMergedGroup: screen.isMergedGroup,
+      );
+    }
+  }
+
+  String? _nearestMeaningfulParentTitle(
+    InspectionNodeDefinition node,
+    Map<String, InspectionNodeDefinition> nodeById,
+  ) {
+    var parentId = node.parentId;
+    for (var depth = 0; depth < 12; depth++) {
+      if (parentId == null || parentId.isEmpty) return null;
+      final parent = nodeById[parentId.trim().toLowerCase()];
+      if (parent == null) return null;
+
+      final title = parent.title.trim();
+      final lower = title.toLowerCase();
+      if (title.isNotEmpty &&
+          !_genericAmbiguousScreenTitles.contains(lower) &&
+          lower != 'repairs' &&
+          lower != 'not inspected') {
+        return title;
+      }
+
+      parentId = parent.parentId;
+    }
+    return null;
+  }
+
   /// Build a single [ReportScreen] for a standalone (non-grouped) screen node.
   ReportScreen? _buildScreenEntry(
+    String _sectionKey,
     InspectionNodeDefinition node,
     V2RawReportData rawData,
     ExportConfig config,
     bool isInspection,
   ) {
+    final normalizedId = node.id.trim().toLowerCase();
     final answers = _answersForScreen(rawData, node.id);
     final isCompleted = rawData.screenStates[node.id] ?? false;
 
@@ -586,6 +1647,19 @@ class ReportBuilder {
       phrases = const [];
     } else {
       phrases = _phrasesForScreen(node, rawData, isInspection);
+      if (_sectionDSummaryNarrativeScreenIds.contains(normalizedId)) {
+        final hardNarrative =
+            _sectionDSummaryNarrativeFromAnswers(node.id, answers);
+        if (hardNarrative.isNotEmpty) {
+          phrases = _cleanupPhrases(hardNarrative);
+        } else {
+          final fromFields =
+              _sectionDSummaryNarrativeFromFields(node.id, fields);
+          if (fromFields.isNotEmpty) {
+            phrases = _cleanupPhrases(fromFields);
+          }
+        }
+      }
     }
 
     // When no engine phrases exist but fields have data, convert fields to
@@ -593,11 +1667,30 @@ class ReportBuilder {
     if (phrases.isEmpty &&
         config.includePhrases &&
         fields.any((f) => f.displayValue.isNotEmpty)) {
+      if (_alwaysRegenerateFromAnswersScreenIds.contains(normalizedId) &&
+          !_sectionDSummaryNarrativeScreenIds.contains(normalizedId)) {
+        final narrative = _narrativeFallbackForIssuesRisks(node.title, fields);
+        if (narrative.isNotEmpty) {
+          phrases = _cleanupPhrases(narrative);
+          fields = const [];
+        }
+      }
+    }
+
+    if (phrases.isEmpty &&
+        config.includePhrases &&
+        fields.any((f) => f.displayValue.isNotEmpty)) {
       final fallback = _fieldsToPhrases(fields);
-      if (fallback.isNotEmpty) {
-        phrases = fallback;
+      final cleanedFallback = _cleanupPhrases(fallback);
+      if (cleanedFallback.isNotEmpty) {
+        phrases = cleanedFallback;
         fields = const []; // Suppress raw table — phrases cover the data.
       }
+    }
+
+    if (phrases.isNotEmpty &&
+        _sectionDSummaryNarrativeScreenIds.contains(normalizedId)) {
+      fields = const [];
     }
 
     final userNote = _noteForScreen(rawData, node.id);
@@ -609,7 +1702,7 @@ class ReportBuilder {
 
     return ReportScreen(
       screenId: node.id,
-      title: node.title,
+      title: _reportTitleForNode(_sectionKey, node),
       fields: fields,
       phrases: phrases,
       userNote: userNote,
@@ -629,17 +1722,60 @@ class ReportBuilder {
     V2RawReportData rawData,
     bool isInspection,
   ) {
+    final normalizedId = node.id.trim().toLowerCase();
+    final forceRegenerateFromAnswers =
+        _alwaysRegenerateFromAnswersScreenIds.contains(normalizedId);
+
     final persisted = _persistedPhrasesForScreen(rawData, node.id);
-    if (persisted != null) return persisted;
+    if (persisted != null && !forceRegenerateFromAnswers) {
+      final cleanedPersisted = _cleanupPhrases(persisted);
+      final shouldRegenerate =
+          _shouldRegenerateStalePersistedPhrases(node.id, cleanedPersisted);
+      if (cleanedPersisted.isNotEmpty && !shouldRegenerate) {
+        return _condenseIfNeeded(normalizedId, cleanedPersisted);
+      }
+    }
 
     // No persisted phrases and no user answers — screen was never visited.
     final answers = _answersForScreen(rawData, node.id);
     if (answers.isEmpty) return const [];
 
     final enginePhrases = _buildPhrases(node.id, answers, isInspection);
+    if (_alwaysRegenerateFromAnswersScreenIds.contains(normalizedId)) {
+      var cleaned = _cleanupPhrases(enginePhrases);
+      if (normalizedId == 'activity_issues_glazed_sections') {
+        cleaned = _cleanupPhrases([
+          ...cleaned,
+          ..._legacyDerivedSectionFIssueGuarantees(rawData),
+        ]);
+      } else if (normalizedId == 'activity_risks_risk_to_building_') {
+        cleaned = _cleanupPhrases([
+          ...cleaned,
+          ..._legacyDerivedSectionFRiskToBuilding(rawData),
+        ]);
+      }
+      if (normalizedId == 'activity_in_side_property_fire_places__other') {
+        final hasConditionPhrase = cleaned.any(
+            (phrase) => phrase.toLowerCase().startsWith('these appear in '));
+        if (!hasConditionPhrase && persisted != null) {
+          final persistedCondition = _cleanupPhrases(persisted).where(
+              (phrase) => phrase.toLowerCase().startsWith('these appear in '));
+          if (persistedCondition.isNotEmpty) {
+            cleaned = _cleanupPhrases([
+              ...cleaned,
+              persistedCondition.first,
+            ]);
+          }
+        }
+      }
+      return _condenseIfNeeded(normalizedId, cleaned);
+    }
+    final normalizedFields =
+        sanitizeInspectionFieldsForScreen(node.id, node.fields);
     final fieldPhrases =
-        FieldPhraseProcessor.buildFieldPhrases(node.fields, answers);
-    return [...enginePhrases, ...fieldPhrases];
+        FieldPhraseProcessor.buildFieldPhrases(normalizedFields, answers);
+    final cleaned = _cleanupPhrases([...enginePhrases, ...fieldPhrases]);
+    return _condenseIfNeeded(normalizedId, cleaned);
   }
 
   /// Recursively collect all descendant screen nodes under [groupId].
@@ -657,6 +1793,41 @@ class ReportBuilder {
       }
     }
     return result;
+  }
+
+  List<InspectionNodeDefinition> _orderedMergedGroupDescendants(
+    InspectionSectionDefinition sectionDef,
+    InspectionNodeDefinition group,
+    List<InspectionNodeDefinition> descendants,
+  ) {
+    final sectionKey = sectionDef.key.trim().toUpperCase();
+    if (sectionKey != 'E') {
+      return descendants;
+    }
+
+    // Legacy parity: in Section E, detailed screens should lead while
+    // aggregate main/summary screens render at the end of each merged group.
+    int rankFor(String screenId) {
+      final id = screenId.trim().toLowerCase();
+      final isSummary = id.contains('_summary');
+      final isMain = id.endsWith('_main') || id.endsWith('_main_screen');
+      if (isMain) {
+        return 1;
+      }
+      if (isSummary) {
+        return 2;
+      }
+      return 0;
+    }
+
+    final indexed = descendants.asMap().entries.toList();
+    indexed.sort((a, b) {
+      final rankA = rankFor(a.value.id);
+      final rankB = rankFor(b.value.id);
+      if (rankA != rankB) return rankA.compareTo(rankB);
+      return a.key.compareTo(b.key);
+    });
+    return indexed.map((e) => e.value).toList(growable: false);
   }
 
   /// Walk up the parentId chain to find which top-level group (if any) owns
@@ -719,8 +1890,10 @@ class ReportBuilder {
     Map<String, String> answers,
   ) {
     final result = <ReportField>[];
+    final normalizedFields =
+        sanitizeInspectionFieldsForScreen(node.id, node.fields);
 
-    for (final field in node.fields) {
+    for (final field in normalizedFields) {
       // Skip label-type fields — they are headings, not data
       if (field.type == InspectionFieldType.label) continue;
 

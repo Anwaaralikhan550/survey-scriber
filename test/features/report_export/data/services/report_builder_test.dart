@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_scriber/features/property_inspection/domain/inspection_phrase_engine.dart';
 import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
 import 'package:survey_scriber/features/report_export/data/services/report_builder.dart';
 import 'package:survey_scriber/features/report_export/data/services/report_data_service.dart';
@@ -220,7 +221,8 @@ void main() {
         const ExportConfig(),
         surveyDuration: const Duration(hours: 2, minutes: 30),
       );
-      expect(doc.surveyMeta.surveyDuration, const Duration(hours: 2, minutes: 30));
+      expect(
+          doc.surveyMeta.surveyDuration, const Duration(hours: 2, minutes: 30));
     });
 
     test('includes sections with answered screens', () {
@@ -298,7 +300,9 @@ void main() {
       final doc = builder.build(
         _makeRawData(
           tree: treeWithLabel,
-          allAnswers: {'screen1': {'data_field': 'value'}},
+          allAnswers: {
+            'screen1': {'data_field': 'value'}
+          },
         ),
         const ExportConfig(),
       );
@@ -340,7 +344,9 @@ void main() {
       final doc = builder.build(
         _makeRawData(
           tree: treeWithCheckbox,
-          allAnswers: {'screen1': {'cb_field': 'true'}},
+          allAnswers: {
+            'screen1': {'cb_field': 'true'}
+          },
         ),
         const ExportConfig(includePhrases: false),
       );
@@ -351,7 +357,9 @@ void main() {
       final doc2 = builder.build(
         _makeRawData(
           tree: treeWithCheckbox,
-          allAnswers: {'screen1': {'cb_field': 'true'}},
+          allAnswers: {
+            'screen1': {'cb_field': 'true'}
+          },
         ),
         const ExportConfig(),
       );
@@ -395,7 +403,9 @@ void main() {
       final doc = builder.build(
         _makeRawData(
           tree: treeWithGroup,
-          allAnswers: {'screen1': {'f1': 'data'}},
+          allAnswers: {
+            'screen1': {'f1': 'data'}
+          },
         ),
         const ExportConfig(),
       );
@@ -465,7 +475,8 @@ void main() {
       expect(screens.first.isMergedGroup, isTrue);
     });
 
-    test('uses concise legacy-style phrases for Section D construction merge', () {
+    test('uses concise legacy-style phrases for Section D construction merge',
+        () {
       final tree = InspectionTreePayload(
         sections: [
           InspectionSectionDefinition(
@@ -533,11 +544,11 @@ void main() {
 
       final merged = doc.sections.first.screens.first;
       expect(merged.isMergedGroup, isTrue);
-      expect(merged.phrases, hasLength(2));
+      expect(merged.phrases, hasLength(4));
       expect(merged.phrases.first, contains('Alpha'));
-      expect(merged.phrases.first, isNot(contains('Beta')));
-      expect(merged.phrases.last, contains('Gamma'));
-      expect(merged.phrases.last, isNot(contains('Delta')));
+      expect(merged.phrases[1], contains('Beta'));
+      expect(merged.phrases[2], contains('Gamma'));
+      expect(merged.phrases.last, contains('Delta'));
     });
 
     test('emits merged group at group node position to match app ordering', () {
@@ -628,13 +639,437 @@ void main() {
         equals([
           'Property Type',
           'Property Built',
-          'Construction',
           'Year Extended',
+          'Construction',
         ]),
       );
     });
 
-    test('keeps listed building separate from construction using alias answers', () {
+    test('keeps roof covering summary/main screens at end of merged E2 group',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: [
+              const InspectionNodeDefinition(
+                id: 'group_e2_roof_covering_9',
+                title: 'Roof Covering',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_outside_property_roof_covering_main',
+                title: 'Roof Covering',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e2_roof_covering_9',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'main_field',
+                    label: 'Main Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'outside_property_roof_covering_weather_layout',
+                title: 'Weather',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e2_roof_covering_9',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'weather_field',
+                    label: 'Weather Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_outside_property_roof_covering_summary',
+                title: 'Roof Covering Summary',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e2_roof_covering_9',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'summary_field',
+                    label: 'Summary Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_outside_property_roof_covering_main': {
+              'main_field': 'main',
+            },
+            'outside_property_roof_covering_weather_layout': {
+              'weather_field': 'weather',
+            },
+            'activity_outside_property_roof_covering_summary': {
+              'summary_field': 'summary',
+            },
+          },
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+
+      final merged = doc.sections.single.screens.single;
+      expect(merged.isMergedGroup, isTrue);
+      expect(
+        merged.fields.map((f) => f.label).toList(),
+        equals(['Weather Field', 'Main Field', 'Summary Field']),
+      );
+    });
+
+    test('keeps rainwater-goods main screen at end of merged E3 group', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: [
+              const InspectionNodeDefinition(
+                id: 'group_e3_rain_water_goods_13',
+                title: 'Rain Water Goods',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              const InspectionNodeDefinition(
+                id: 'group_rainwater_goods_14',
+                title: 'Rainwater Goods',
+                type: InspectionNodeType.group,
+                parentId: 'group_e3_rain_water_goods_13',
+                fields: [],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_outside_property_rainwater_goods_main_screen',
+                title: 'Rain Water Goods',
+                type: InspectionNodeType.screen,
+                parentId: 'group_rainwater_goods_14',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'main_field',
+                    label: 'Main Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_rwg_weather_condition',
+                title: 'Weather',
+                type: InspectionNodeType.screen,
+                parentId: 'group_rainwater_goods_14',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'weather_field',
+                    label: 'Weather Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_outside_property_rwg_about',
+                title: 'About RWG',
+                type: InspectionNodeType.screen,
+                parentId: 'group_rainwater_goods_14',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'about_field',
+                    label: 'About Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_outside_property_rwg__repair_pipes_gutters',
+                title: 'Repairs',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e3_rain_water_goods_13',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'repair_field',
+                    label: 'Repair Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              const InspectionNodeDefinition(
+                id: 'activity_outside_property_rain_water_goods_not_inspected',
+                title: 'Not Inspected',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e3_rain_water_goods_13',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'ni_field',
+                    label: 'NI Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_outside_property_rainwater_goods_main_screen': {
+              'main_field': 'main',
+            },
+            'activity_rwg_weather_condition': {
+              'weather_field': 'weather',
+            },
+            'activity_outside_property_rwg_about': {
+              'about_field': 'about',
+            },
+            'activity_outside_property_rwg__repair_pipes_gutters': {
+              'repair_field': 'repair',
+            },
+            'activity_outside_property_rain_water_goods_not_inspected': {
+              'ni_field': 'ni',
+            },
+          },
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+
+      final merged = doc.sections.single.screens.single;
+      expect(merged.isMergedGroup, isTrue);
+      expect(
+        merged.fields.map((f) => f.label).toList(),
+        equals([
+          'Weather Field',
+          'About Field',
+          'Repair Field',
+          'NI Field',
+          'Main Field',
+        ]),
+      );
+    });
+
+    test(
+        'orders merged descendant screens by node order (not JSON insertion order)',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: [
+              const InspectionNodeDefinition(
+                id: 'group_e1_test_1',
+                title: 'Test Group',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              // Intentionally placed first in JSON, but higher order.
+              const InspectionNodeDefinition(
+                id: 'screen_high',
+                title: 'High',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e1_test_1',
+                order: 10,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'high_field',
+                    label: 'High Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              // Intentionally placed later in JSON, but lower order.
+              const InspectionNodeDefinition(
+                id: 'screen_low',
+                title: 'Low',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e1_test_1',
+                order: 1,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'low_field',
+                    label: 'Low Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'screen_high': {'high_field': 'high'},
+            'screen_low': {'low_field': 'low'},
+          },
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+
+      final merged = doc.sections.single.screens.single;
+      expect(merged.isMergedGroup, isTrue);
+      expect(
+        merged.fields.map((f) => f.label).toList(),
+        equals(['Low Field', 'High Field']),
+      );
+    });
+
+    test('does not add merged descendant subheadings in Section E', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'group_e2_roof_covering_9',
+                title: 'Roof Covering',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'outside_property_roof_covering_weather_layout',
+                title: 'Weather',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e2_roof_covering_9',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'weather_field',
+                    label: 'Weather Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_outside_property_roof_covering_main',
+                title: 'Roof Covering',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e2_roof_covering_9',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'main_field',
+                    label: 'Main Field',
+                    type: InspectionFieldType.text,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'outside_property_roof_covering_weather_layout': {
+              'weather_field': 'Dry',
+            },
+            'activity_outside_property_roof_covering_main': {
+              'main_field': 'Pitched',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final merged = doc.sections.single.screens.single;
+      expect(merged.isMergedGroup, isTrue);
+      expect(
+        merged.phrases.where((p) => p.startsWith('[[SUBHEADING]] ')),
+        isEmpty,
+      );
+    });
+
+    test('cleans merged phrases and removes placeholders', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'group_e1_test_cleanup',
+                title: 'Cleanup Group',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'screen_cleanup_a',
+                title: 'Alpha',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e1_test_cleanup',
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'screen_cleanup_b',
+                title: 'Beta',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e1_test_cleanup',
+                fields: [],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final rawData = _makeRawData(tree: tree);
+      final withPersisted = V2RawReportData(
+        survey: rawData.survey,
+        tree: rawData.tree,
+        allAnswers: rawData.allAnswers,
+        screenStates: rawData.screenStates,
+        photoFilePaths: rawData.photoFilePaths,
+        signatureRows: rawData.signatureRows,
+        persistedPhrases: {
+          'screen_cleanup_a': [
+            'Not inspected phrase.',
+            'The issue is other and other defects.',
+          ],
+          'screen_cleanup_b': [
+            'The issue is other and other defects.',
+            'Condition rating is 2..',
+          ],
+        },
+      );
+
+      final doc = builder.build(withPersisted, const ExportConfig());
+      final merged = doc.sections.single.screens.single;
+      final issuePhrases = merged.phrases
+          .where((p) => p == 'The issue is other defects.')
+          .toList();
+
+      expect(merged.isMergedGroup, isTrue);
+      expect(merged.phrases, isNot(contains('Not inspected phrase.')));
+      expect(merged.phrases, contains('The issue is other defects.'));
+      expect(issuePhrases, hasLength(1));
+      expect(merged.phrases, contains('Condition rating is 2.'));
+    });
+
+    test('keeps listed building separate from construction using alias answers',
+        () {
       final tree = InspectionTreePayload(
         sections: [
           InspectionSectionDefinition(
@@ -703,19 +1138,25 @@ void main() {
             'activity_construction_roof': {'roof_status': 'Good'},
             // Only grouped ID has data; report should still render standalone
             // listed-building screen via alias fallback.
-            'activity_listed_building': {'android_material_design_spinner': 'Yes'},
+            'activity_listed_building': {
+              'android_material_design_spinner': 'Yes'
+            },
           },
         ),
         const ExportConfig(includePhrases: false),
       );
 
       final section = doc.sections.single;
-      expect(section.screens.map((s) => s.title).toList(), equals([
-        'Construction',
-        'Listed Building',
-      ]));
-      expect(section.screens.first.fields.any((f) => f.displayValue == 'Yes'), isFalse);
-      expect(section.screens.last.fields.any((f) => f.displayValue == 'Yes'), isTrue);
+      expect(
+          section.screens.map((s) => s.title).toList(),
+          equals([
+            'Construction',
+            'Listed Building',
+          ]));
+      expect(section.screens.first.fields.any((f) => f.displayValue == 'Yes'),
+          isFalse);
+      expect(section.screens.last.fields.any((f) => f.displayValue == 'Yes'),
+          isTrue);
     });
 
     test('merges Section D energy screens into one Energy heading', () {
@@ -820,21 +1261,419 @@ void main() {
       );
 
       final screens = doc.sections.single.screens;
-      expect(screens.map((s) => s.title).toList(), equals(['Energy', 'After Energy']));
+      expect(screens.map((s) => s.title).toList(),
+          equals(['Energy', 'After Energy']));
       expect(screens.first.isMergedGroup, isTrue);
       expect(
-        screens.first.phrases.any((p) => p.contains('Current: 61')),
+        screens.first.phrases
+            .any((p) => p.toLowerCase().contains('current 61')),
         isTrue,
       );
       expect(
-        screens.first.phrases.any((p) => p.contains('Potential: 76')),
+        screens.first.phrases
+            .any((p) => p.toLowerCase().contains('potential 76')),
         isTrue,
       );
       expect(
         screens.first.phrases.any(
-          (p) => p.toLowerCase().contains('solar') || p.toLowerCase().contains('photovoltaic'),
+          (p) =>
+              p.toLowerCase().contains('solar') ||
+              p.toLowerCase().contains('photovoltaic'),
         ),
         isTrue,
+      );
+    });
+
+    test('merges Section E chimney group into Chimney Stacks heading', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'group_e1_chimney_5',
+                title: 'Chimney',
+                type: InspectionNodeType.group,
+                parentId: null,
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'group_chimney_6',
+                title: 'Chimney',
+                type: InspectionNodeType.group,
+                parentId: 'group_e1_chimney_5',
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_outside_property_stacks',
+                title: 'Stacks',
+                type: InspectionNodeType.screen,
+                parentId: 'group_chimney_6',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner3',
+                    label: 'Stacks',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Single', 'Multiple'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_outside_property_stacks': {
+              'android_material_design_spinner3': 'Single',
+            },
+          },
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+
+      final screens = doc.sections.single.screens;
+      expect(screens, hasLength(1));
+      expect(screens.first.title, 'Chimney Stacks');
+      expect(screens.first.isMergedGroup, isTrue);
+    });
+
+    test(
+        'maps standalone chimney stacks screen title to Chimney Stacks in Section E',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'activity_outside_property_stacks',
+                title: 'Stacks',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner3',
+                    label: 'Stacks',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Single', 'Multiple'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_outside_property_stacks': {
+              'android_material_design_spinner3': 'Single',
+            },
+          },
+        ),
+        const ExportConfig(includePhrases: false),
+      );
+
+      final screen = doc.sections.single.screens.single;
+      expect(screen.title, 'Chimney Stacks');
+      expect(screen.isMergedGroup, isFalse);
+    });
+
+    test('regenerates chimney phrases when persisted phrase list is empty', () {
+      final phraseEngine = InspectionPhraseEngine({
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK}': 'Single-stack narrative.',
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}': 'Pots {CS_POTS}.',
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK_RENDERING}':
+            'Rendered {CS_RENDERING}.',
+      });
+      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'activity_outside_property_stacks',
+                title: 'Stacks',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner3',
+                    label: 'Stacks',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Single', 'Multiple'],
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner2',
+                    label: 'Pots',
+                    type: InspectionFieldType.dropdown,
+                    options: ['1', '2', '3'],
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner4',
+                    label: 'Rendered Stack(s)',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Single', 'Multiple'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final rawData = _makeRawData(
+        tree: tree,
+        allAnswers: {
+          'activity_outside_property_stacks': {
+            'android_material_design_spinner3': 'Single',
+            'android_material_design_spinner2': '2',
+            'android_material_design_spinner4': 'Single',
+          },
+        },
+      );
+      final dataWithEmptyPersistedPhrases = V2RawReportData(
+        survey: rawData.survey,
+        tree: rawData.tree,
+        allAnswers: rawData.allAnswers,
+        screenStates: rawData.screenStates,
+        photoFilePaths: rawData.photoFilePaths,
+        signatureRows: rawData.signatureRows,
+        persistedPhrases: {
+          'activity_outside_property_stacks': ['...', ''],
+        },
+      );
+
+      final doc = customBuilder.build(
+          dataWithEmptyPersistedPhrases, const ExportConfig());
+      final screen = doc.sections.single.screens.single;
+      expect(screen.phrases, isNotEmpty);
+      expect(screen.phrases.join(' '), contains('Single-stack narrative.'));
+      expect(screen.phrases.join(' '), isNot(contains('Stacks:')));
+    });
+
+    test(
+        'regenerates fireplaces other condition from answers when persisted phrase is stale',
+        () {
+      final phraseEngine = InspectionPhraseEngine({
+        '{F_FIREPLACES_AND_CHIMNEYS}::{OTHER_CONDITION}':
+            'These appear in {FAC_FP_OTH_CONDITION} condition. No repair is currently needed. The property must be maintained in the normal way.',
+      });
+      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'F',
+            title: 'Inside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'activity_in_side_property_fire_places__other',
+                title: 'Other',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'actv_condition',
+                    label: 'Condition',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Reasonable', 'Satisfactory'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final rawData = _makeRawData(
+        tree: tree,
+        allAnswers: {
+          'activity_in_side_property_fire_places__other': {
+            'actv_condition': 'Reasonable',
+          },
+        },
+      );
+      final stalePersisted = V2RawReportData(
+        survey: rawData.survey,
+        tree: rawData.tree,
+        allAnswers: rawData.allAnswers,
+        screenStates: rawData.screenStates,
+        photoFilePaths: rawData.photoFilePaths,
+        signatureRows: rawData.signatureRows,
+        persistedPhrases: {
+          'activity_in_side_property_fire_places__other': [
+            'The fireplace in the lounge incorporates a .',
+          ],
+        },
+      );
+
+      final doc = customBuilder.build(stalePersisted, const ExportConfig());
+      final screen = doc.sections.single.screens.single;
+      expect(
+        screen.phrases.join(' '),
+        contains('These appear in reasonable condition.'),
+      );
+      expect(
+        screen.phrases.join(' '),
+        isNot(contains('incorporates a .')),
+      );
+    });
+
+    test(
+        'keeps persisted fireplace condition when forced regeneration misses it',
+        () {
+      final phraseEngine = InspectionPhraseEngine(const {
+        // Simulate the live failure mode where regeneration drops the condition.
+      });
+      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'F',
+            title: 'Inside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'activity_in_side_property_fire_places__other',
+                title: 'Other',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'actv_condition',
+                    label: 'Condition',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Reasonable', 'Satisfactory'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final rawData = _makeRawData(
+        tree: tree,
+        allAnswers: {
+          'activity_in_side_property_fire_places__other': {
+            'actv_condition': 'Reasonable',
+          },
+        },
+      );
+      final stalePersisted = V2RawReportData(
+        survey: rawData.survey,
+        tree: rawData.tree,
+        allAnswers: rawData.allAnswers,
+        screenStates: rawData.screenStates,
+        photoFilePaths: rawData.photoFilePaths,
+        signatureRows: rawData.signatureRows,
+        persistedPhrases: {
+          'activity_in_side_property_fire_places__other': [
+            'The fireplace in the lounge incorporates a .',
+            'These appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.',
+          ],
+        },
+      );
+
+      final doc = customBuilder.build(stalePersisted, const ExportConfig());
+      final screen = doc.sections.single.screens.single;
+      expect(
+        screen.phrases.join(' '),
+        contains('These appear in reasonable condition.'),
+      );
+      expect(
+        screen.phrases.join(' '),
+        isNot(contains('incorporates a .')),
+      );
+    });
+
+    test('condenses chimney stacks phrases into one paragraph', () {
+      final phraseEngine = InspectionPhraseEngine({
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK}':
+            'The property has one chimney stack.',
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}':
+            'The chimney stack is fitted with 4 pot(s).',
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK_RENDERING}':
+            'The outer faces of the chimney stack is single rendered.',
+      });
+      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'activity_outside_property_stacks',
+                title: 'Stacks',
+                type: InspectionNodeType.screen,
+                parentId: null,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner3',
+                    label: 'Stacks',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Single', 'Multiple'],
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner2',
+                    label: 'Pots',
+                    type: InspectionFieldType.dropdown,
+                    options: ['1', '2', '3', '4'],
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner4',
+                    label: 'Rendered Stack(s)',
+                    type: InspectionFieldType.dropdown,
+                    options: ['Single', 'Multiple'],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = customBuilder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_outside_property_stacks': {
+              'android_material_design_spinner3': 'Single',
+              'android_material_design_spinner2': '4',
+              'android_material_design_spinner4': 'Single',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final screen = doc.sections.single.screens.single;
+      expect(screen.phrases, hasLength(1));
+      expect(screen.phrases.single,
+          contains('The property has one chimney stack.'));
+      expect(
+        screen.phrases.single,
+        contains('The chimney stack is fitted with 4 pot(s).'),
+      );
+      expect(
+        screen.phrases.single,
+        contains('The outer faces of the chimney stack is single rendered.'),
       );
     });
 
@@ -875,7 +1714,9 @@ void main() {
       final doc = builder.build(
         _makeRawData(
           tree: treeWithConditional,
-          allAnswers: {'screen1': {'trigger': 'No', 'detail': 'should be hidden'}},
+          allAnswers: {
+            'screen1': {'trigger': 'No', 'detail': 'should be hidden'}
+          },
         ),
         const ExportConfig(),
       );
@@ -886,7 +1727,9 @@ void main() {
     test('marks isCompleted on report screens from screenStates', () {
       final doc = builder.build(
         _makeRawData(
-          allAnswers: {'activity_roof': {'field_condition': '1'}},
+          allAnswers: {
+            'activity_roof': {'field_condition': '1'}
+          },
           screenStates: {'activity_roof': true},
         ),
         const ExportConfig(),
@@ -898,12 +1741,15 @@ void main() {
       final rawData = V2RawReportData(
         survey: testSurvey,
         tree: minimalTree,
-        allAnswers: {'activity_roof': {'field_condition': '1'}},
+        allAnswers: {
+          'activity_roof': {'field_condition': '1'}
+        },
         screenStates: {},
         photoFilePaths: ['/path/to/photo.jpg'],
         signatureRows: [],
       );
-      final doc = builder.build(rawData, const ExportConfig(includePhotos: false));
+      final doc =
+          builder.build(rawData, const ExportConfig(includePhotos: false));
       expect(doc.photoFilePaths, isEmpty);
     });
 
@@ -911,7 +1757,9 @@ void main() {
       final rawData = V2RawReportData(
         survey: testSurvey,
         tree: minimalTree,
-        allAnswers: {'activity_roof': {'field_condition': '1'}},
+        allAnswers: {
+          'activity_roof': {'field_condition': '1'}
+        },
         screenStates: {},
         photoFilePaths: [],
         signatureRows: [
@@ -923,7 +1771,8 @@ void main() {
           ),
         ],
       );
-      final doc = builder.build(rawData, const ExportConfig(includeSignatures: false));
+      final doc =
+          builder.build(rawData, const ExportConfig(includeSignatures: false));
       expect(doc.signatures, isEmpty);
     });
 
@@ -952,6 +1801,133 @@ void main() {
       expect(doc2.totalFields, 0);
       // Data is now in phrases instead
       expect(doc2.sections.first.screens.first.phrases, isNotEmpty);
+    });
+
+    test(
+        'injects legacy Section F building risk phrases into J1 and creates J2',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_risk_to_building_',
+                title: 'J1 Risk To Building',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'actv_movement_status',
+                    label: 'Movement status',
+                    type: InspectionFieldType.dropdown,
+                    options: ['None', 'Noted'],
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_risks_risk_to_building_': {
+              'actv_movement_status': 'None',
+            },
+            'activity_in_side_property_wood_work': {
+              'cb_out_of_square_doors': 'true',
+              'cb_glazed_internal_doors': 'true',
+            },
+            'activity_in_side_property_bathroom_fittings_leaking': {
+              'cb_bathtub': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j1 = section.screens
+          .firstWhere((s) => s.screenId == 'activity_risks_risk_to_building_');
+      expect(
+        j1.phrases.join(' ').toLowerCase(),
+        contains('some internal doors and frame are distorted'),
+      );
+      expect(
+        j1.phrases.join(' ').toLowerCase(),
+        contains('the bathtub is leaking and causing dampness'),
+      );
+
+      final j2 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j2_risk_to_people');
+      expect(j2.title, 'J2 Risk To People');
+      expect(
+        j2.phrases.join(' ').toLowerCase(),
+        contains('one or more internal doors are glazed'),
+      );
+    });
+
+    test('injects legacy Section F guarantee phrase into I2', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+            'activity_inside_property_other_celler_damp': {
+              'cb_serious_dump': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final screen = doc.sections.first.screens.first;
+      expect(
+        screen.phrases.join(' ').toLowerCase(),
+        contains('dampness problem repair is covered by any guarantees'),
+      );
     });
   });
 }

@@ -563,6 +563,13 @@ class _SuccessDialogState extends State<_SuccessDialog> {
   /// Open file with system viewer.
   Future<void> _onPreview(BuildContext context) async {
     if (!_verifyFileExists(context)) return;
+    if (_isPdf) {
+      if (Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
+      GoRouter.of(context).push(Routes.reportPreviewPath(result.reportId));
+      return;
+    }
     await OpenFilex.open(result.outputPath);
   }
 

@@ -30,6 +30,7 @@ import '../network/api_client.dart';
 import '../storage/storage_service.dart';
 import '../utils/logger.dart';
 import '../../features/config/presentation/helpers/config_aware_fields.dart';
+import 'legacy_main_walls_sync_mapping.dart';
 import 'sync_state.dart';
 import 'v2_sync_helper.dart';
 
@@ -2411,6 +2412,22 @@ class SyncManager {
       return;
     }
 
+    final legacyDecoded =
+        LegacyMainWallsSyncMapping.decodeRemoteAnswer(questionKey, value);
+    if (legacyDecoded != null) {
+      await _upsertDecodedLegacyMainWallsAnswer(
+        surveyId: surveyId,
+        data: data,
+        decoded: legacyDecoded,
+      );
+      AppLogger.d(
+        'SyncManager',
+        'V2 UPSERT: decoded legacy main walls answer '
+            '$questionKey → ${legacyDecoded.screenId}',
+      );
+      return;
+    }
+
     // Query all screens in this section for reverse UUID matching.
     final screens = await (db.select(db.inspectionV2Screens)
           ..where(
@@ -2484,6 +2501,22 @@ class SyncManager {
     final value = data['value'] as String?;
     if (value == null || value.trim().isEmpty) return false;
 
+    final legacyDecoded =
+        LegacyMainWallsSyncMapping.decodeRemoteAnswer(questionKey, value);
+    if (legacyDecoded != null) {
+      await _upsertDecodedLegacyMainWallsAnswer(
+        surveyId: surveyId,
+        data: data,
+        decoded: legacyDecoded,
+      );
+      AppLogger.d(
+        'SyncManager',
+        'V2 fallback: decoded legacy main walls answer '
+            '$questionKey → ${legacyDecoded.screenId}',
+      );
+      return true;
+    }
+
     // Check if this survey has ANY V2 screens at all.
     final allScreens = await (db.select(db.inspectionV2Screens)
           ..where((t) => t.surveyId.equals(surveyId)))
@@ -2530,6 +2563,32 @@ class SyncManager {
     AppLogger.d('SyncManager',
         'V2 fallback: matched answer $entityId → screen=$screenId field=$questionKey');
     return true;
+  }
+
+  Future<void> _upsertDecodedLegacyMainWallsAnswer({
+    required String surveyId,
+    required Map<String, dynamic> data,
+    required LegacyMainWallsDecodedAnswer decoded,
+  }) async {
+    final survey = await surveysDao.getSurveyById(surveyId);
+    final prefix = (survey?.type.isValuation ?? false) ? 'val_' : '';
+    final createdAt = _parseDateTime(data['createdAt']) ?? DateTime.now();
+    final updatedAt = _parseDateTime(data['updatedAt']);
+
+    for (final entry in decoded.localAnswers.entries) {
+      final v2Id = '${surveyId}_$prefix${decoded.screenId}_${entry.key}';
+      await db.into(db.inspectionV2Answers).insertOnConflictUpdate(
+            InspectionV2AnswersCompanion(
+              id: Value(v2Id),
+              surveyId: Value(surveyId),
+              screenId: Value(decoded.screenId),
+              fieldKey: Value(entry.key),
+              value: Value(entry.value),
+              createdAt: Value(createdAt),
+              updatedAt: Value(updatedAt),
+            ),
+          );
+    }
   }
 
   /// After pulling V2 answers, mark screens as completed if they have

@@ -31,7 +31,8 @@ class NarrativeEnhancer {
     final result = <String>[];
 
     // 1. Section preamble (only for the first screen in a section)
-    if (isFirstScreenInSection) {
+    final isLimitationsScreen = screenId.toLowerCase().contains('limitation');
+    if (isFirstScreenInSection && !isLimitationsScreen) {
       final preamble = _sectionPreambles[sectionKey];
       if (preamble != null) {
         result.add(preamble);
@@ -126,8 +127,10 @@ class NarrativeEnhancer {
     return _ratingContextMap[rating];
   }
 
-  static final _conditionRatingPattern =
-      RegExp(r'[Cc]ondition [Rr]ating\s*(?:is)?:?\s*(\d)', caseSensitive: false);
+  static final _conditionRatingPattern = RegExp(
+    r'[Cc]ondition [Rr]ating\s*(?:is)?:?\s*(\d)',
+    caseSensitive: false,
+  );
 
   static const _ratingContextMap = <String, String>{
     '1': 'This rating reflects that the element is in a satisfactory condition '

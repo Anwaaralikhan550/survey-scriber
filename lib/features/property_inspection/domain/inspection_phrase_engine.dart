@@ -21,30 +21,35 @@ class InspectionPhraseEngine {
         return _propertyFacing(answers);
       case 'activity_outside_property_limitation':
         return _outsidePropertyLimitations(answers);
+      case 'activity_outside_property_roof_covering':
+        return _roofCoveringSummary(answers);
+      case 'activity_outside_property_rainwater_goods':
+        return [
+          ..._rainwaterGoodsMainScreen(answers),
+          ..._rwgBlocked(answers),
+          ..._rwgBlockedGullies(answers),
+          ..._rwgOpenRunoffs(answers),
+        ];
+      case 'activity_outside_property_windows':
+        return _windowsMainScreen(answers);
       case 'activity_outside_property_chimney_main_screen':
-        return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+        return _outsideChimneyMainScreen(answers);
       case 'activity_outside_property_roof_covering_main':
-        return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+        return _outsideRoofCoveringMainScreen(answers);
       case 'activity_outside_property_rainwater_goods_main_screen':
         return _rainwaterGoodsMainScreen(answers);
       case 'activity_outside_property_main_walls_main_screen':
-        return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+        return _outsideMainWallsMainScreen(answers);
       case 'activity_outside_property_windows_main_screen':
         return _windowsMainScreen(answers);
       case 'activity_outside_property_outside_doors_main_screen':
-        return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+        return _outsideDoorsMainScreen(answers);
       case 'activity_outside_property_conservatory_porch_main_screen':
-        return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+        return _outsideConservatoryPorchMainScreen(answers);
       case 'activity_outside_property_other_joinery_and_finishes_main_screen':
         return _otherJoineryAbout(answers);
       case 'activity_outside_property_other_main_screen':
-        return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+        return _outsideOtherMainScreen(answers);
       case 'activity_grounds_garage_main_screen':
         return _conditionRatingNotes(answers,
             ratingKey: 'android_material_design_spinner4');
@@ -319,6 +324,7 @@ class InspectionPhraseEngine {
       case 'activity_in_side_property_fire_places_not_inspected':
         return _fireplacesNotInspected(answers);
       case 'activity_inside_property_built_in_fittings_main_screen':
+      case 'activity_inside_property_other_fittings_main_screen':
         return _builtInFittingsMain(answers);
       case 'activity_in_side_property_built_in_fittings':
         return _builtInFittings(answers);
@@ -333,6 +339,7 @@ class InspectionPhraseEngine {
       case 'activity_in_side_property_built_in_fittings_not_inspected':
         return _builtInNotInspected(answers);
       case 'activity_inside_property_woodwork_main_screen':
+      case 'activity_inside_property_wood_work_main_screen':
         return _woodWorkMainScreen(answers);
       case 'activity_in_side_property_wood_work':
         return _woodWorkMain(answers);
@@ -381,6 +388,10 @@ class InspectionPhraseEngine {
         return _insideOtherMainScreen(answers);
       case 'activity_in_side_property_other_communal_area':
         return _insideOtherCommunalArea(answers);
+      case 'activity_in_side_property_other_basement':
+        return _insideOtherLegacyCombined(answers, isBasement: true);
+      case 'activity_in_side_property_other_cellar':
+        return _insideOtherLegacyCombined(answers, isBasement: false);
       case 'activity_inside_property_other_celler_no_access':
         return _insideOtherNoAccess(answers, isBasement: false);
       case 'activity_inside_property_other_celler_no_access__no_access':
@@ -560,7 +571,7 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_windows_aboutwindow':
         return _windowsAbout(answers);
       case 'activity_outside_property_windows_safety_glass_rating':
-        return _windowsSafetyGlassRating(answers);
+        return const [];
       case 'activity_outside_property_windows_wall_sealing':
         return _windowsWallSealing(answers);
       case 'activity_outside_property_windows_sill_projection':
@@ -602,7 +613,7 @@ class InspectionPhraseEngine {
         return _cpDoors(screenId, answers);
       case 'activity_outside_property_conservatory_porch_floor':
       case 'activity_outside_property_conservatory_porch_floor__floor':
-        return _cpFloor(answers);
+        return _cpFloor(screenId, answers);
       case 'activity_outside_property_conservatory_porch_safety_glass_rating':
       case 'activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating':
         return _cpSafetyGlassRating(screenId, answers);
@@ -614,7 +625,7 @@ class InspectionPhraseEngine {
         return _cpOpenToBuilding(screenId, answers);
       case 'activity_outside_property_porch_condition':
       case 'activity_outside_property_porch_condition__condition':
-        return _cpPorchCondition(answers);
+        return _cpPorchCondition(screenId, answers);
       case 'activity_outside_property_porch_poor_condition':
       case 'activity_outside_property_porch_poor_condition__poor_condition':
         return _cpPoorCondition(screenId, answers);
@@ -632,6 +643,7 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_other_about_joinery_and_finishes':
         return _otherJoineryAbout(answers);
       case 'activity_outside_property_other_joinery_finishes_condition':
+      case 'activity_outside_property_other_joinery_fininshes_condition':
         return _otherJoineryCondition(answers);
       case 'activity_outside_property_other_joinery_and_finishes_repairs':
         return _otherJoineryRepairs(answers);
@@ -763,19 +775,23 @@ class InspectionPhraseEngine {
 
       // ── Section F: woodwork sub-screens ──
       case 'activity_in_side_property_wood_work_creaking_stairs':
-        return _woodWorkSimpleCheckbox(
-            answers, 'cb_is_creaking_stairs', 'Creaking stairs noted.');
+        return _woodWorkLegacyCheckbox(
+            answers, 'cb_is_creaking_stairs', '{CREAKING_STAIRS}');
       case 'activity_in_side_property_wood_work_glazed_internal_doors':
-        return _woodWorkSimpleCheckbox(answers, 'cb_no_safety_glass_rating',
-            'Glazed internal doors: no safety glass rating observed.');
+        return _woodWorkLegacyCheckbox(
+            answers, 'cb_no_safety_glass_rating', '{GLAZED_INTERNAL_DOORS}');
       case 'activity_in_side_property_wood_work_open_threads':
-        return _woodWorkSimpleCheckbox(
-            answers, 'cb_open_threads', 'Open stair threads noted.');
+        return _woodWorkLegacyCheckbox(
+            answers, 'cb_open_threads', '{OPEN_STAIR_THREADS}');
       case 'activity_in_side_property_wood_work_out_of_square_doors':
-        return _woodWorkSimpleCheckbox(
-            answers, 'cb_out_of_square_doors', 'Out of square doors noted.');
+        return _woodWorkLegacyCheckbox(
+            answers, 'cb_out_of_square_doors', '{OUT_OF_SQUARE_DOORS}');
       case 'activity_in_side_property_wood_work_rocking_handrails':
-        return _woodWorkRockingHandrails(answers);
+        return _woodWorkLegacyStatus(
+          answers,
+          selectedValue: 'rocking handrails present',
+          phraseSubCode: '{ROCKING_STAIR_HANDRAILS}',
+        );
 
       // ── Section F: joinery variant screens ──
       case 'activity_outside_property_other_about_joinery_and_finishes__other_joinery_and_finishes':
@@ -807,9 +823,13 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_roof_covering_main_screen':
         return _roofCoveringMainScreen(answers);
       case 'activity_outside_property_out_side_doors_repairs_failed_glazing_location':
-        return _outsideDoorsRepairLocation(answers, 'Failed glazing');
+        return const [];
       case 'activity_outside_property_out_side_doors_repairs_inadequate_lock_location':
-        return _outsideDoorsRepairLocation(answers, 'Inadequate lock');
+        return const [];
+      case 'activity_outside_property_out_side_safety_glass_rating':
+        return _outsideDoorsSafetyGlassRating(answers);
+      case 'activity_outside_property_out_side_doors_wall_sealing':
+        return _outsideDoorsWallSealing(answers);
 
       // ── Section A: overall opinion ──
       case 'activity_over_all_openion':
@@ -843,9 +863,18 @@ class InspectionPhraseEngine {
   }
 
   List<String> _rainwaterGoodsMainScreen(Map<String, String> answers) {
-    final phrases =
-        _conditionRatingNotes(answers, ratingKey: 'actv_condition_rating');
-    if (_isChecked(answers['cb_shared_rwg'])) {
+    final phrases = _legacySectionRatingNotes(
+      answers: answers,
+      ratingKey: 'actv_condition_rating',
+      phraseCodeForRating: '{E_RAINWATER_GOODS_ABOUT}',
+      ratingSubCode: '{RWG_CONDITION_RATING}',
+      ratingPlaceholder: '{RWG_CONDITION_RATING}',
+      phraseCodeForNotes: '{E_RAINWATER_GOODS_ABOUT}',
+      notesSubCode: '{RWG_NOTES}',
+      notesPlaceholder: '{RWG_NOTES}',
+    );
+    if (_isChecked(answers['cb_shared_rwg']) ||
+        _isChecked(answers['cb_Shared_RWG'])) {
       final shared =
           _sub('{E_RAINWATER_GOODS_ABOUT}', '{RAINWATER_GOODS_SHARED}');
       if (shared.isNotEmpty) {
@@ -856,13 +885,137 @@ class InspectionPhraseEngine {
   }
 
   List<String> _windowsMainScreen(Map<String, String> answers) {
-    final phrases = _conditionRatingNotes(answers,
-        ratingKey: 'android_material_design_spinner4');
+    final phrases = _legacySectionRatingNotes(
+      answers: answers,
+      ratingKey: 'android_material_design_spinner4',
+      phraseCodeForRating: '{E_WINDOWS_REPAIR}',
+      ratingSubCode: '{WINDOW_CONDITION_RATING}',
+      ratingPlaceholder: '{WINDOW_CONDITION_RATING}',
+      phraseCodeForNotes: '{E_WINDOWS_REPAIR}',
+      notesSubCode: '{WINDOW_NOTES}',
+      notesPlaceholder: '{WINDOW_NOTES}',
+    );
     if (_isChecked(answers['cb_window_random_sampling'])) {
-      phrases.add('Windows random sampling.');
+      final text = _sub('{E_WINDOWS}', '{WINDOWS_RANDOM_SAMPLING}');
+      if (text.isNotEmpty) {
+        phrases.addAll(_split(_normalize(text)));
+      }
     }
     if (_isChecked(answers['cb_window_in_poor_condition'])) {
-      phrases.add('Window in Poor Condition.');
+      final text = _sub('{E_WINDOWS}', '{WINDOWS_IN_POOR_CONDITION}');
+      if (text.isNotEmpty) {
+        phrases.addAll(_split(_normalize(text)));
+      }
+    }
+    return phrases;
+  }
+
+  List<String> _outsideChimneyMainScreen(Map<String, String> answers) {
+    return _legacySectionRatingNotes(
+      answers: answers,
+      ratingKey: 'android_material_design_spinner4',
+      phraseCodeForRating: '{E_CHIMNEY_REPAIR_CONDITION_RATING}',
+      ratingSubCode: '{CONDITION_RATING}',
+      ratingPlaceholder: '{CS_CONDITION_RATING}',
+      phraseCodeForNotes: '{E_CHIMNEY_REPAIR_NOTES}',
+      notesSubCode: '{NOTES}',
+      notesPlaceholder: '{CS_INSPECTION_NOTES}',
+    );
+  }
+
+  List<String> _outsideRoofCoveringMainScreen(Map<String, String> answers) {
+    return _legacySectionRatingNotes(
+      answers: answers,
+      ratingKey: 'android_material_design_spinner4',
+      phraseCodeForRating: '{E_ROOF_COVERING_REPAIR}',
+      ratingSubCode: '{E_RC_CONDITION_RATING}',
+      ratingPlaceholder: '{RC_CONDITION_RATING}',
+      phraseCodeForNotes: '{E_ROOF_COVERING_REPAIR}',
+      notesSubCode: '{E_RC_NOTES}',
+      notesPlaceholder: '{RC_NOTES}',
+    );
+  }
+
+  List<String> _outsideMainWallsMainScreen(Map<String, String> answers) {
+    return _legacySectionRatingNotes(
+      answers: answers,
+      ratingKey: 'android_material_design_spinner4',
+      phraseCodeForRating: '{E_MAIN_WALLS_REPAIR}',
+      ratingSubCode: '{WALLS_CONDITION_RATING}',
+      ratingPlaceholder: '{MAIN_WALL_CONDITION_RATING}',
+      phraseCodeForNotes: '{E_MAIN_WALLS_REPAIR}',
+      notesSubCode: '{MAIN_WALL_NOTES}',
+      notesPlaceholder: '{MAIN_WALL_NOTES}',
+    );
+  }
+
+  List<String> _outsideDoorsMainScreen(Map<String, String> answers) {
+    return _legacySectionRatingNotes(
+      answers: answers,
+      ratingKey: 'android_material_design_spinner4',
+      phraseCodeForRating: '{E_OUTSIDE_DOORS}',
+      ratingSubCode: '{CONDITION_RATING}',
+      ratingPlaceholder: '{OSD_CONDITION_RATING}',
+      phraseCodeForNotes: '{E_OUTSIDE_DOORS}',
+      notesSubCode: '{NOTES}',
+      notesPlaceholder: '{OSD_NOTES}',
+    );
+  }
+
+  List<String> _outsideConservatoryPorchMainScreen(
+      Map<String, String> answers) {
+    return _legacySectionRatingNotes(
+      answers: answers,
+      ratingKey: 'android_material_design_spinner4',
+      phraseCodeForRating: '{E_CONSERVATORY_PORCHES}',
+      ratingSubCode: '{CP_CONDITION_RATING}',
+      ratingPlaceholder: '{CP_CONDITION_RATING}',
+      phraseCodeForNotes: '{E_CONSERVATORY_PORCHES}',
+      notesSubCode: '{CP_NOTES}',
+      notesPlaceholder: '{CP_NOTES}',
+    );
+  }
+
+  List<String> _outsideOtherMainScreen(Map<String, String> answers) {
+    return _legacySectionRatingNotes(
+      answers: answers,
+      ratingKey: 'android_material_design_spinner4',
+      phraseCodeForRating: '{E_OTHER}',
+      ratingSubCode: '{OTHER_CONDITION_RATING}',
+      ratingPlaceholder: '{OTHER_CONDITION_RATING}',
+      phraseCodeForNotes: '{E_OTHER}',
+      notesSubCode: '{OTHER_NOTES}',
+      notesPlaceholder: '{OTHER_NOTES}',
+    );
+  }
+
+  List<String> _legacySectionRatingNotes({
+    required Map<String, String> answers,
+    required String ratingKey,
+    String notesKey = 'ar_etNote',
+    required String phraseCodeForRating,
+    required String ratingSubCode,
+    required String ratingPlaceholder,
+    required String phraseCodeForNotes,
+    required String notesSubCode,
+    required String notesPlaceholder,
+  }) {
+    final phrases = <String>[];
+    final rating = (answers[ratingKey] ?? '').trim();
+    if (rating.isNotEmpty) {
+      var template = _sub(phraseCodeForRating, ratingSubCode);
+      if (template.isNotEmpty) {
+        template = template.replaceAll(ratingPlaceholder, rating);
+        phrases.addAll(_split(_normalize(template)));
+      }
+    }
+    final notes = (answers[notesKey] ?? '').trim();
+    if (notes.isNotEmpty) {
+      var template = _sub(phraseCodeForNotes, notesSubCode);
+      if (template.isNotEmpty) {
+        template = template.replaceAll(notesPlaceholder, notes);
+        phrases.addAll(_split(_normalize(template)));
+      }
     }
     return phrases;
   }
@@ -965,7 +1118,7 @@ class InspectionPhraseEngine {
   }
 
   List<String> _chimneyStacks(Map<String, String> answers) {
-    final stackType = _cleanLower(answers['android_material_design_spinner3']);
+    final stackType = _chimneyStackTypeFromAnswers(answers);
     if (stackType.isEmpty) return const [];
     final isMulti = stackType.contains('multiple');
     final phraseCode = _chimneyPhraseCode(isMulti);
@@ -983,7 +1136,8 @@ class InspectionPhraseEngine {
 
     final pots = _cleanLower(answers['android_material_design_spinner2']);
     var potsTemplate = _sub(phraseCode, '{STACK_POTS}');
-    if (potsTemplate.isNotEmpty && pots.isNotEmpty) {
+    final shouldEmitPots = isMulti || pots.isNotEmpty;
+    if (potsTemplate.isNotEmpty && shouldEmitPots) {
       if (!isMulti) {
         potsTemplate = potsTemplate.replaceAll('{CS_POTS}', pots);
       }
@@ -1026,7 +1180,10 @@ class InspectionPhraseEngine {
     _addOther(answers, 'ch5', 'etGroundTypeOther', locations);
     if (locations.isEmpty) return const [];
 
-    final phraseCode = _chimneyPhraseCode(locations.length > 1);
+    final phraseCode = _chimneyPhraseCodeFromAnswers(
+      answers,
+      fallbackIsMulti: locations.length > 1,
+    );
     var template = _sub(phraseCode, '{STACK_LOCATION}');
     if (template.isEmpty) return const [];
     final locationText = _toWords(locations).toLowerCase();
@@ -1037,7 +1194,11 @@ class InspectionPhraseEngine {
   List<String> _chimneyRendering(Map<String, String> answers) {
     final rendering = _cleanLower(answers['android_material_design_spinner3']);
     if (rendering.isEmpty) return const [];
-    var template = _sub('{E_CHIMNEY_SINGLE_STACK}', '{STACK_RENDERING}');
+    final phraseCode = _chimneyPhraseCodeFromAnswers(
+      answers,
+      fallbackIsMulti: false,
+    );
+    var template = _sub(phraseCode, '{STACK_RENDERING}');
     if (template.isEmpty) return const [];
     template = template
         .replaceAll('{CS_RENDERING}', rendering)
@@ -1047,40 +1208,49 @@ class InspectionPhraseEngine {
 
   List<String> _chimneyWaterProofing(Map<String, String> answers) {
     final flashing = _labelsFor(
-      ['ch1', 'ch2', 'ch3', 'ch4', 'ch5'],
+      ['ch1', 'ch2', 'ch3', 'ch4'],
       answers,
       {
         'ch1': 'Lead',
         'ch2': 'Mortar',
         'ch3': 'Lead and mortar',
         'ch4': 'Tiles',
-        'ch5': 'Other',
       },
     );
-    _addOther(answers, 'ch5', 'etGroundTypeOther', flashing);
+    if (_isChecked(answers['ch5'])) {
+      final otherFlashing = (answers['etGroundTypeOther'] ?? '').trim();
+      if (otherFlashing.isNotEmpty) {
+        flashing.add(otherFlashing);
+      }
+    }
 
     final flaunching = _labelsFor(
-      ['ch6', 'ch7', 'ch8', 'ch9', 'ch10'],
+      ['ch6', 'ch7', 'ch8', 'ch9'],
       answers,
       {
         'ch6': 'Lead',
         'ch7': 'Mortar',
         'ch8': 'Lead and mortar',
         'ch9': 'Tiles',
-        'ch10': 'Other',
       },
     );
-    _addOther(answers, 'ch10', 'etFlaunchingOther', flaunching);
+    if (_isChecked(answers['ch10'])) {
+      final otherFlaunching = (answers['etFlaunchingOther'] ?? '').trim();
+      if (otherFlaunching.isNotEmpty) {
+        flaunching.add(otherFlaunching);
+      }
+    }
 
-    if (flashing.isEmpty && flaunching.isEmpty) return const [];
+    if (flashing.isEmpty || flaunching.isEmpty) return const [];
 
-    var template = _sub('{E_CHIMNEY_SINGLE_STACK}', '{WATERPROOFING}');
+    final phraseCode = _chimneyPhraseCodeFromAnswers(
+      answers,
+      fallbackIsMulti: false,
+    );
+    var template = _sub(phraseCode, '{WATERPROOFING}');
     if (template.isEmpty) return const [];
-    final flashingText =
-        flashing.isEmpty ? 'not specified' : _toWords(flashing).toLowerCase();
-    final flaunchingText = flaunching.isEmpty
-        ? 'not specified'
-        : _toWords(flaunching).toLowerCase();
+    final flashingText = _toWords(flashing).toLowerCase();
+    final flaunchingText = _toWords(flaunching).toLowerCase();
     template = template
         .replaceAll('{CS_WATERPROOFING_FLASHING_FORMED_IN}', flashingText)
         .replaceAll('{CS_WATERPROOFING_FLAUNCHING_FORMED_IN}', flaunchingText);
@@ -1090,7 +1260,11 @@ class InspectionPhraseEngine {
   List<String> _chimneyCondition(Map<String, String> answers) {
     final condition = _cleanLower(answers['android_material_design_spinner3']);
     if (condition.isEmpty) return const [];
-    var template = _sub('{E_CHIMNEY_SINGLE_STACK}', '{CONDITION}');
+    final phraseCode = _chimneyPhraseCodeFromAnswers(
+      answers,
+      fallbackIsMulti: false,
+    );
+    var template = _sub(phraseCode, '{CONDITION}');
     if (template.isEmpty) return const [];
     template = template.replaceAll('{CS_CONDITION}', condition);
     return _split(_normalize(template));
@@ -1111,7 +1285,10 @@ class InspectionPhraseEngine {
     _addOther(answers, 'cb_other_608', 'et_other_752', locations);
     if (locations.isEmpty) return const [];
 
-    final phraseCode = _chimneyPhraseCode(locations.length > 1);
+    final phraseCode = _chimneyPhraseCodeFromAnswers(
+      answers,
+      fallbackIsMulti: locations.length > 1,
+    );
     var template = _sub(phraseCode, '{SHARED_CHIMNEY}');
     if (template.isEmpty) return const [];
     final locationText = _toWords(locations).toLowerCase();
@@ -1136,7 +1313,10 @@ class InspectionPhraseEngine {
     _addOther(answers, 'cb_other_608', 'et_other_752', locations);
     if (locations.isEmpty) return const [];
 
-    final phraseCode = _chimneyPhraseCode(locations.length > 1);
+    final phraseCode = _chimneyPhraseCodeFromAnswers(
+      answers,
+      fallbackIsMulti: locations.length > 1,
+    );
     final phrases = <String>[];
     var leaningTemplate = _sub(phraseCode, '{LEANING_CHIMNEY}');
     if (leaningTemplate.isNotEmpty) {
@@ -1198,9 +1378,6 @@ class InspectionPhraseEngine {
       );
       _addOther(answers, 'cb_other_326', 'et_other_782', locations);
       var locationText = _toWords(locations).toLowerCase();
-      if (locationText.isEmpty) {
-        locationText = 'property';
-      }
       var template = _sub(phraseCode, '{REMOVED_CHIMNEY_STACK}');
       if (template.isNotEmpty) {
         template = template.replaceAll(
@@ -1222,9 +1399,6 @@ class InspectionPhraseEngine {
       );
       _addOther(answers, 'cb_other_326', 'et_other_782', locations);
       var locationText = _toWords(locations).toLowerCase();
-      if (locationText.isEmpty) {
-        locationText = 'property';
-      }
       var template = _sub(phraseCode, '{REMOVED_POTS}');
       if (template.isNotEmpty) {
         template = template.replaceAll(
@@ -1237,7 +1411,16 @@ class InspectionPhraseEngine {
   }
 
   List<String> _chimneyRepairFlashing(Map<String, String> answers) {
-    final condition = _cleanLower(answers['android_material_design_spinner4']);
+    final condition = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const [
+          'android_material_design_spinner4',
+          'actv_condition',
+          'llMainContainer'
+        ],
+      ),
+    );
     if (condition.isEmpty) return const [];
     final isSoon = condition.contains('soon');
 
@@ -1301,7 +1484,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _chimneyRepairFlaunching(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final isSoon = condition.contains('soon');
 
@@ -1370,7 +1555,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _chimneyRepairPots(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final isSoon = condition.contains('soon');
 
@@ -1437,7 +1624,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _chimneyRepairRepointing(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final isSoon = condition.contains('soon');
 
@@ -1538,14 +1727,19 @@ class InspectionPhraseEngine {
 
   List<String> _chimneyRepairDishAerial(Map<String, String> answers,
       {String? screenId}) {
-    final condition = _cleanLower(answers['actv_condition']);
-    var type = _cleanLower(answers['actv_type']);
-    if (type.isEmpty && screenId != null) {
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
+    String type = '';
+    if (screenId != null) {
       if (screenId.contains('satellite')) {
         type = 'satellite';
-      } else if (screenId.contains('aerial')) {
+      } else if (screenId.contains('dish_aerial')) {
         type = 'aerial';
       }
+    }
+    if (type.isEmpty) {
+      type = _cleanLower(answers['actv_type']);
     }
     if (condition.isEmpty || type.isEmpty) return const [];
     final isSoon = condition.contains('soon');
@@ -1595,7 +1789,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _rwgRepairPipesGutters(Map<String, String> answers) {
-    final condition = (answers['actv_condition'] ?? '').toLowerCase();
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
 
     final isSoon = condition.contains('soon');
@@ -1610,7 +1806,6 @@ class InspectionPhraseEngine {
             'cb_are_blocked_101',
             'cb_are_rusted_26',
             'cb_do_not_have_sufficient_slope_53',
-            'cb_other_458',
           ]
         : [
             'cb_are_leaking_89',
@@ -1619,7 +1814,6 @@ class InspectionPhraseEngine {
             'cb_are_blocked_52',
             'cb_are_rusted_18',
             'cb_do_not_have_sufficient_slope_65',
-            'cb_other_4581',
           ];
 
     final items = _labelsFor(itemIds, answers, {
@@ -1630,21 +1824,27 @@ class InspectionPhraseEngine {
     });
 
     final defects = _labelsFor(defectIds, answers, {
-      'cb_are_leaking_78': 'Leaking',
-      'cb_are_loose_39': 'Loose',
-      'cb_are_incomplete_52': 'Incomplete',
-      'cb_are_blocked_101': 'Blocked',
-      'cb_are_rusted_26': 'Rusted',
+      'cb_are_leaking_78': 'leaking',
+      'cb_are_loose_39': 'loose',
+      'cb_are_incomplete_52': 'incomplete',
+      'cb_are_blocked_101': 'blocked',
+      'cb_are_rusted_26': 'rusted',
       'cb_do_not_have_sufficient_slope_53': 'Do not have sufficient slope',
-      'cb_other_458': 'Other',
-      'cb_are_leaking_89': 'Leaking',
-      'cb_are_loose_91': 'Loose',
-      'cb_are_incomplete_94': 'Incomplete',
-      'cb_are_blocked_52': 'Blocked',
-      'cb_are_rusted_18': 'Rusted',
+      'cb_are_leaking_89': 'leaking',
+      'cb_are_loose_91': 'loose',
+      'cb_are_incomplete_94': 'incomplete',
+      'cb_are_blocked_52': 'blocked',
+      'cb_are_rusted_18': 'rusted',
       'cb_do_not_have_sufficient_slope_65': 'Do not have sufficient slope',
-      'cb_other_4581': 'Other',
     });
+    final otherDefectCheckbox = isSoon ? 'cb_other_458' : 'cb_other_4581';
+    final otherDefectTextId = isSoon ? 'et_other_423' : 'et_other_4231';
+    if (_isChecked(answers[otherDefectCheckbox])) {
+      final otherDefect = (answers[otherDefectTextId] ?? '').trim();
+      if (otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
+    }
 
     if (items.isEmpty || defects.isEmpty) return const [];
 
@@ -1653,9 +1853,11 @@ class InspectionPhraseEngine {
     var template = _sub(phraseCode, subCode);
     if (template.isEmpty) return const [];
 
-    final itemsText = _toWords(items);
-    final defectsText = _toWords(defects);
-    final isAre = _isAre(defects);
+    final uniqueItems = _dedupeInsensitive(items);
+    final uniqueDefects = _dedupeInsensitive(defects);
+    final itemsText = _toWords(uniqueItems);
+    final defectsText = _toWords(uniqueDefects);
+    final isAre = _isAre(uniqueItems);
 
     if (isSoon) {
       template = template
@@ -1670,7 +1872,7 @@ class InspectionPhraseEngine {
     }
 
     final phrases = _split(_normalize(template)).toList();
-    if (defects.any((d) => d.toLowerCase().contains('slope'))) {
+    if (uniqueDefects.any((d) => d.toLowerCase().contains('slope'))) {
       final extra = _sub(phraseCode, '{RWG_IF_TYPE_IF_INSUFFICIENT_SLOPE}');
       if (extra.isNotEmpty) {
         phrases.addAll(_split(_normalize(extra)));
@@ -1683,7 +1885,12 @@ class InspectionPhraseEngine {
     final phrases = <String>[];
     final phraseCode = '{E_RAINWATER_GOODS_ABOUT}';
 
-    final madeUp = _cleanLower(answers['actv_rainwater_goods_are_made_up']);
+    final madeUp = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_rainwater_goods_are_made_up', 'llMainContainer'],
+      ),
+    );
     final types = _labelsFor(
       [
         'cb_plastic',
@@ -1691,7 +1898,6 @@ class InspectionPhraseEngine {
         'cb_asbestos_cement',
         'cb_concrete',
         'cb_metal',
-        'cb_other_697'
       ],
       answers,
       {
@@ -1700,19 +1906,28 @@ class InspectionPhraseEngine {
         'cb_asbestos_cement': 'Asbestos cement',
         'cb_concrete': 'Concrete',
         'cb_metal': 'Metal',
-        'cb_other_697': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_697', 'et_other_427', types);
+    if (_isChecked(answers['cb_other_697'])) {
+      final otherType = (answers['et_other_427'] ?? '').trim();
+      if (otherType.isNotEmpty) {
+        types.add(otherType);
+      }
+    }
 
     if (types.isNotEmpty) {
       var template = _sub(phraseCode, '{RWG_ABOUT_TYPE}');
       if (template.isNotEmpty) {
-        final madeUpValue = madeUp.isNotEmpty ? madeUp : 'mainly of';
-        template = template
-            .replaceAll('{RWG_MADE_UP}', madeUpValue)
-            .replaceAll('{RWG_TYPE}', _toWords(types).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
+        if (madeUp.isEmpty) {
+          template = '';
+        } else {
+          template = template
+              .replaceAll('{RWG_MADE_UP}', madeUp)
+              .replaceAll('{RWG_TYPE}', _toWords(types).toLowerCase());
+        }
+        if (template.isNotEmpty) {
+          phrases.addAll(_split(_normalize(template)));
+        }
       }
     }
 
@@ -1748,7 +1963,10 @@ class InspectionPhraseEngine {
   }
 
   List<String> _rwgWeatherCondition(Map<String, String> answers) {
-    final weather = _cleanLower(answers['actv_weather_condition']);
+    final weather = _cleanLower(
+      _firstNonEmpty(
+          answers, const ['actv_weather_condition', 'llMainContainer']),
+    );
     if (weather.isEmpty) return const [];
     final phraseCode = '{E_RAINWATER_GOODS_WEATHER_CONDITION}';
     final subCode = weather.contains('wet')
@@ -1877,25 +2095,21 @@ class InspectionPhraseEngine {
     );
 
     if (roofType.isNotEmpty &&
-        (locations.isNotEmpty || materials.isNotEmpty || shapes.isNotEmpty)) {
+        locations.isNotEmpty &&
+        materials.isNotEmpty &&
+        shapes.isNotEmpty) {
       var template = _sub(phraseCode, '{RC_ABOUT_TYPE}');
       if (template.isNotEmpty) {
         final oldRoof = _isChecked(answers['cb_old_roof_covering'])
             ? _sub(phraseCode, '{OLD_ROOF_COVERING}')
             : '';
-        final locationText = locations.isNotEmpty
-            ? _toWords(locations).toLowerCase()
-            : 'property';
-        final materialText = materials.isNotEmpty
-            ? _toWords(materials).toLowerCase()
-            : 'covering material';
-        final shapeText =
-            shapes.isNotEmpty ? _toWords(shapes).toLowerCase() : 'covering';
+        final locationText = _toWords(locations).toLowerCase();
+        final materialText = _toWords(materials).toLowerCase();
+        final shapeText = _toWords(shapes).toLowerCase();
         template = template
             .replaceAll('{RC_TYPE}', roofType)
             .replaceAll('{RC_LOCATION}', locationText)
-            .replaceAll(
-                '{IS_ARE}', locations.isNotEmpty ? _isAre(locations) : 'is')
+            .replaceAll('{IS_ARE}', _isAre(locations))
             .replaceAll('{RC_MATERIAL}', materialText)
             .replaceAll('{RC_COV_MATERIAL_SHAPE}', shapeText)
             .replaceAll('{OLD_ROOF_COVERING}', oldRoof);
@@ -1903,7 +2117,16 @@ class InspectionPhraseEngine {
       }
     }
 
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const [
+          'actv_condition',
+          'llMainContainer',
+          'android_material_design_spinner3'
+        ],
+      ),
+    );
     if (condition.isNotEmpty) {
       var template = _sub(phraseCode, '{RC_ABOUT_TYPE_CONDITION}');
       if (template.isNotEmpty) {
@@ -1938,7 +2161,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _roofWeather(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_status']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final phraseCode = '{E_RC_WEATHER_CONDITION}';
     final subCode =
@@ -1979,7 +2204,9 @@ class InspectionPhraseEngine {
       phrases.addAll(_split(_normalize(template)));
     }
 
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isNotEmpty) {
       var conditionTemplate =
           _sub('{E_ROOF_COVERING}', '{E_RC_FLASHING_CONDITION}');
@@ -2012,7 +2239,9 @@ class InspectionPhraseEngine {
           '{RC_RIDGE_TILES}', _toWords(items).toLowerCase());
       phrases.addAll(_split(_normalize(template)));
     }
-    final condition = _cleanLower(answers['actv_formed_in']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_formed_in', 'llMainContainer']),
+    );
     if (condition.isNotEmpty) {
       var conditionTemplate =
           _sub('{E_ROOF_COVERING}', '{E_RC_RIDGE_TILES_CONDITION}');
@@ -2045,7 +2274,9 @@ class InspectionPhraseEngine {
           template.replaceAll('{RC_HIP_TILES}', _toWords(items).toLowerCase());
       phrases.addAll(_split(_normalize(template)));
     }
-    final condition = _cleanLower(answers['actv_formed_in']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_formed_in', 'llMainContainer']),
+    );
     if (condition.isNotEmpty) {
       var conditionTemplate =
           _sub('{E_ROOF_COVERING}', '{E_RC_HIP_TILES_CONDITION}');
@@ -2084,7 +2315,16 @@ class InspectionPhraseEngine {
       phrases.addAll(_split(_normalize(template)));
     }
 
-    final condition = _cleanLower(answers['android_material_design_spinner3']);
+    final condition = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const [
+          'android_material_design_spinner3',
+          'actv_condition',
+          'llMainContainer'
+        ],
+      ),
+    );
     if (condition.isNotEmpty) {
       var conditionTemplate =
           _sub('{E_ROOF_COVERING}', '{E_RC_PARAPET_WALL_CONDITION}');
@@ -2100,32 +2340,46 @@ class InspectionPhraseEngine {
 
   List<String> _roofDeflection(Map<String, String> answers) {
     final phrases = <String>[];
-    final status = _cleanLower(answers['actv_status']);
-    List<String> statusLocations = const [];
-    if (status.isNotEmpty) {
-      statusLocations = _labelsFor(
-        ['cb_front_45', 'cb_side_41', 'cb_rear_47', 'cb_other_207'],
-        answers,
-        {
-          'cb_front_45': 'Front',
-          'cb_side_41': 'Side',
-          'cb_rear_47': 'Rear',
-          'cb_other_207': 'Other',
-        },
-      );
-      _addOther(answers, 'cb_other_207', 'et_other_822', statusLocations);
-      if (statusLocations.isNotEmpty) {
-        final subCode = status.contains('significant')
-            ? '{DEFLECTION_SIGNIFICANT}'
-            : '{DEFLECTION_MINOR}';
-        var template = _sub('{E_RC_DEFLECTION_STATUS}', subCode);
-        if (template.isNotEmpty) {
-          template = template.replaceAll('{RC_DEFLECTION_STATUS_LOCATION}',
-              _toWords(statusLocations).toLowerCase());
-          phrases.addAll(_split(_normalize(template)));
-        }
+    final statusLocations = _labelsFor(
+      ['cb_front_45', 'cb_side_41', 'cb_rear_47', 'cb_other_207'],
+      answers,
+      {
+        'cb_front_45': 'Front',
+        'cb_side_41': 'Side',
+        'cb_rear_47': 'Rear',
+        'cb_other_207': 'Other',
+      },
+    );
+    _addOther(answers, 'cb_other_207', 'et_other_822', statusLocations);
+
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
+    if (status.isNotEmpty && statusLocations.isNotEmpty) {
+      final subCode = status.contains('significant')
+          ? '{DEFLECTION_SIGNIFICANT}'
+          : '{DEFLECTION_MINOR}';
+      var template = _sub('{E_RC_DEFLECTION_STATUS}', subCode);
+      if (template.isNotEmpty) {
+        template = template.replaceAll('{RC_DEFLECTION_STATUS_LOCATION}',
+            _toWords(statusLocations).toLowerCase());
+        phrases.addAll(_split(_normalize(template)));
       }
     }
+
+    final causedByLocations = _labelsFor(
+      ['cb_front_77', 'cb_side_14', 'cb_rear_27', 'cb_other_1028'],
+      answers,
+      {
+        'cb_front_77': 'Front',
+        'cb_side_14': 'Side',
+        'cb_rear_27': 'Rear',
+        'cb_other_1028': 'Other',
+      },
+    );
+    _addOther(answers, 'cb_other_1028', 'et_other_179', causedByLocations);
+    final locationForCause =
+        causedByLocations.isNotEmpty ? causedByLocations : statusLocations;
 
     final reasons = _labelsFor(
       [
@@ -2141,12 +2395,12 @@ class InspectionPhraseEngine {
       },
     );
     _addOther(answers, 'cb_other_897', 'et_other_410', reasons);
-    if (statusLocations.isNotEmpty && reasons.isNotEmpty) {
+    if (locationForCause.isNotEmpty && reasons.isNotEmpty) {
       var template = _sub('{E_ROOF_COVERING}', '{E_RC_DEFLECTION_CAUSED_BY}');
       if (template.isNotEmpty) {
         template = template
             .replaceAll('{RC_DEFLECTION_CAUSED_BY_LOCATION}',
-                _toWords(statusLocations).toLowerCase())
+                _toWords(locationForCause).toLowerCase())
             .replaceAll('{RC_DEFLECTION_CAUSED_BY_REASON}',
                 _toWords(reasons).toLowerCase());
         phrases.addAll(_split(_normalize(template)));
@@ -2210,7 +2464,9 @@ class InspectionPhraseEngine {
       }
     }
 
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isNotEmpty) {
       if (status.contains('investigate')) {
         final investigateLocations = _labelsFor(
@@ -2261,7 +2517,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _roofRepairTiles(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final isSoon = condition.contains('soon');
 
@@ -2345,7 +2603,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _roofSpreadingRepair(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('yes')) {
       final template = _sub('{E_ROOF_COVERING_REPAIR}', '{RC_ROOF_SPREADING}');
@@ -2358,7 +2618,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _roofRepairFlatRoof(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final isSoon = condition.contains('soon');
     final issues = _labelsFor(
@@ -2410,7 +2672,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _roofRepairParapetWall(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final isSoon = condition.contains('soon');
     final subject = _labelsFor(
@@ -2515,7 +2779,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _roofRepairVerge(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final isSoon = condition.contains('soon');
     final items = _labelsFor(
@@ -2690,6 +2956,7 @@ class InspectionPhraseEngine {
   }
 
   List<String> _roofCoveringWeathered(Map<String, String> answers) {
+    if (!_isChecked(answers['cb_weathered'])) return const [];
     final condition = _cleanLower(answers['actv_condition']);
     if (condition.isEmpty) return const [];
     final template = _sub('{E_ROOF_COVERING}', '{RC_ABOUT_TYPE_CONDITION}');
@@ -2699,7 +2966,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _windowsAbout(Map<String, String> answers) {
-    final madeUp = _cleanLower(answers['actv_made_up_of']);
+    final madeUp = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_made_up_of', 'llMainContainer']),
+    );
     final replacement =
         _isChecked(answers['cb_is_replacement']) ? 'replacement' : '';
     final types = _labelsFor(
@@ -2711,7 +2980,6 @@ class InspectionPhraseEngine {
         'cb_modern_timber_sash',
         'cb_aluminium',
         'cb_old_style_timber_sash',
-        'cb_other_895',
       ],
       answers,
       {
@@ -2722,10 +2990,14 @@ class InspectionPhraseEngine {
         'cb_modern_timber_sash': 'Modern timber sash',
         'cb_aluminium': 'Aluminium',
         'cb_old_style_timber_sash': 'Old style timber sash',
-        'cb_other_895': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_895', 'et_other_220', types);
+    if (_isChecked(answers['cb_other_895'])) {
+      final otherType = (answers['et_other_220'] ?? '').trim();
+      if (otherType.isNotEmpty) {
+        types.add(otherType);
+      }
+    }
     final glazing = _labelsFor(
       ['cb_single', 'cb_double', 'cb_secondary'],
       answers,
@@ -2751,6 +3023,27 @@ class InspectionPhraseEngine {
       }
     }
 
+    final status = _cleanLower(answers['actv_status']);
+    if (status.isNotEmpty) {
+      var template = _sub(
+          '{WINDOWS_SAFETY_GLASS_RATING_STATUS}',
+          status.contains('noted')
+              ? '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED}'
+              : '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NO_SG_RATING}');
+      if (template.isNotEmpty) {
+        final condition = _cleanLower(answers['actv_condition']);
+        final conditionPhrase = status.contains('noted') && condition.isNotEmpty
+            ? _sub('{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED}',
+                    '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED_CONDITION}')
+                .replaceAll('{WINDOW_SAFETY_STATUS_NOTED_CONDITION}', condition)
+            : '';
+        template = template.replaceAll(
+            '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED_CONDITION}',
+            conditionPhrase);
+        phrases.addAll(_split(_normalize(template)));
+      }
+    }
+
     if (_isChecked(answers['cb_is_replacement'])) {
       phrases.addAll(_split(_normalize(_sub(
           '{E_WINDOWS}', '{WINDOWS_SAFETY_GLASS_RATING_IF_REPLACEMENT}'))));
@@ -2772,13 +3065,23 @@ class InspectionPhraseEngine {
             ? '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED}'
             : '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NO_SG_RATING}');
     if (template.isEmpty) return const [];
+    final condition = _cleanLower(answers['actv_condition']);
+    final conditionPhrase = status.contains('noted') && condition.isNotEmpty
+        ? _sub('{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED}',
+                '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED_CONDITION}')
+            .replaceAll('{WINDOW_SAFETY_STATUS_NOTED_CONDITION}', condition)
+        : '';
     template = template.replaceAll(
-        '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED_CONDITION}', '');
+      '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED_CONDITION}',
+      conditionPhrase,
+    );
     return _split(_normalize(template));
   }
 
   List<String> _windowsWallSealing(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     var template = _sub('{E_WINDOWS}', '{WINDOW_WALL_SEALING}');
     if (template.isEmpty) return const [];
@@ -2787,7 +3090,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _windowsSillProjection(Map<String, String> answers) {
-    final projection = _cleanLower(answers['actv_projection_type']);
+    final projection = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_projection_type', 'llMainContainer'],
+      ),
+    );
     final condition = _cleanLower(answers['actv_condition']);
     if (projection.isEmpty || condition.isEmpty) return const [];
     var template = _sub('{E_WINDOWS}', '{WINDOW_SILL_PROJECTION}');
@@ -2799,7 +3107,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _windowsVelux(Map<String, String> answers) {
-    final type = _cleanLower(answers['actv_type']);
+    final type = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_type', 'llMainContainer']),
+    );
     if (type.isEmpty) return const [];
     final isMultiple = type.contains('multiple');
 
@@ -2811,16 +3121,16 @@ class InspectionPhraseEngine {
       {
         'cb_loft': 'Loft',
         'cb_extension': 'Extension',
-        'cb_other_629': 'Other',
         'cb_loft_32': 'Loft',
         'cb_extension_85': 'Extension',
-        'cb_other_451': 'Other',
       },
     );
-    if (isMultiple) {
-      _addOther(answers, 'cb_other_451', 'et_other_659', locations);
-    } else {
-      _addOther(answers, 'cb_other_629', 'et_other_290', locations);
+    if (_isChecked(answers[isMultiple ? 'cb_other_451' : 'cb_other_629'])) {
+      final locationOther =
+          (answers[isMultiple ? 'et_other_659' : 'et_other_290'] ?? '').trim();
+      if (locationOther.isNotEmpty) {
+        locations.add(locationOther);
+      }
     }
 
     final materials = _labelsFor(
@@ -2832,17 +3142,17 @@ class InspectionPhraseEngine {
         'cb_pvc': 'PVC',
         'cb_timber': 'Timber',
         'cb_steel': 'Steel',
-        'cb_other_610': 'Other',
         'cb_pvc_24': 'PVC',
         'cb_timber_44': 'Timber',
         'cb_steel_91': 'Steel',
-        'cb_other_975': 'Other',
       },
     );
-    if (isMultiple) {
-      _addOther(answers, 'cb_other_975', 'et_other_309', materials);
-    } else {
-      _addOther(answers, 'cb_other_610', 'et_other_816', materials);
+    if (_isChecked(answers[isMultiple ? 'cb_other_975' : 'cb_other_610'])) {
+      final materialOther =
+          (answers[isMultiple ? 'et_other_309' : 'et_other_816'] ?? '').trim();
+      if (materialOther.isNotEmpty) {
+        materials.add(materialOther);
+      }
     }
 
     final glazing = _labelsFor(
@@ -2911,13 +3221,6 @@ class InspectionPhraseEngine {
         'cb_ch3': 'Many',
       },
     );
-    if (howMany.isNotEmpty) {
-      phrases.add('How many: ${_toWords(howMany).toLowerCase()}.');
-    }
-    if (_isChecked(answers['cb_safety_hazard'])) {
-      phrases.add('Safety hazard.');
-    }
-
     final locations = _labelsFor(
       [
         'cb_lounge_791',
@@ -2932,10 +3235,14 @@ class InspectionPhraseEngine {
         'cb_lounge_79': 'Lounge',
         'cb_bedroom_35': 'Bedroom',
         'cb_kitchen_80': 'Kitchen',
-        'cb_other_471': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_471', 'et_other_175', locations);
+    if (_isChecked(answers['cb_other_471'])) {
+      final otherLocation = (answers['et_other_175'] ?? '').trim();
+      if (otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
+    }
     final defects = _labelsFor(
       [
         'cb_have_damaged_locks_63',
@@ -2956,10 +3263,14 @@ class InspectionPhraseEngine {
         'cb_have_broken_panes_14': 'Have broken panes',
         'cb_have_failed_glazing_40': 'Have failed glazing',
         'cb_are_in_disrepair_33': 'Are in disrepair',
-        'cb_other_1066': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_1066', 'et_other_424', defects);
+    if (_isChecked(answers['cb_other_1066'])) {
+      final otherDefect = (answers['et_other_424'] ?? '').trim();
+      if (otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
+    }
     if (locations.isEmpty || defects.isEmpty) return phrases;
     var template = _sub('{E_WINDOWS_REPAIR}', '{WINDOWS_REPAIR}');
     if (template.isEmpty) return phrases;
@@ -2972,6 +3283,26 @@ class InspectionPhraseEngine {
     if (defects.any((d) => d.toLowerCase().contains('disrepair'))) {
       phrases.addAll(_split(_normalize(
           _sub('{E_WINDOWS_REPAIR}', '{WINDOWS_DEFECT_IF_IN_DISREPAIR}'))));
+    }
+    if (_isChecked(answers['cb_safety_hazard']) &&
+        howMany.isNotEmpty &&
+        defects.isNotEmpty) {
+      var risk = _sub('{RISK_TO_PEOPLE}', '{E_WINDOWS_REPAIR_SAFETY_HAZARD}');
+      if (risk.isNotEmpty) {
+        final howManyText = _toWords(howMany);
+        final isAre =
+            howMany.length == 1 && howMany.first.trim().toLowerCase() == 'one'
+                ? 'is'
+                : 'are';
+        risk = risk
+            .replaceAll('{WINDOWS_REPAIR_WINDOW_HOW_MANY}', howManyText)
+            .replaceAll(
+              '{WINDOWS_REPAIR_WINDOW_DEFECT}',
+              _toWords(defects).toLowerCase(),
+            )
+            .replaceAll('{IS_ARE}', isAre);
+        phrases.addAll(_split(_normalize(risk)));
+      }
     }
     return phrases;
   }
@@ -2993,10 +3324,14 @@ class InspectionPhraseEngine {
         'cb_bedroom_35': 'Bedroom',
         'cb_kitchen_80': 'Kitchen',
         'cb_have_damaged_locks_63': 'Bathroom',
-        'cb_other_471': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_471', 'et_other_175', locations);
+    if (_isChecked(answers['cb_other_471'])) {
+      final otherLocation = (answers['et_other_175'] ?? '').trim();
+      if (otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
+    }
     if (locations.isEmpty) return const [];
     var template =
         _sub('{E_WINDOWS_REPAIR}', '{WINDOWS_REPAIR_FAILED_GLAZING_LOCATION}');
@@ -3014,10 +3349,14 @@ class InspectionPhraseEngine {
         'cb_lounge_84': 'Lounge',
         'cb_bedroom_43': 'Bedroom',
         'cb_study_61': 'Study',
-        'cb_other_175': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_175', 'et_other_308', locations);
+    if (_isChecked(answers['cb_other_175'])) {
+      final otherLocation = (answers['et_other_308'] ?? '').trim();
+      if (otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
+    }
     final defects = _labelsFor(
       ['cb_no_opening_63', 'cb_is_too_small_23', 'cb_is_too_small_23_no'],
       answers,
@@ -3048,7 +3387,7 @@ class InspectionPhraseEngine {
         'cb_side',
         'cb_patio',
         'cb_garage',
-        'cb_other_859'
+        'cb_other_859',
       ],
       answers,
       {
@@ -3057,42 +3396,17 @@ class InspectionPhraseEngine {
         'cb_side': 'Side',
         'cb_patio': 'Patio',
         'cb_garage': 'Garage',
-        'cb_other_859': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_859', 'et_other_179', locations);
-
-    final materials = _labelsFor(
-      ['cb_pvc', 'cb_timber', 'cb_steel', 'cb_aluminium', 'cb_other_826'],
-      answers,
-      {
-        'cb_pvc': 'PVC',
-        'cb_timber': 'Timber',
-        'cb_steel': 'Steel',
-        'cb_aluminium': 'Aluminium',
-        'cb_other_826': 'Other',
-      },
-    );
-    if (_isChecked(answers['cb_other_826'])) {
-      final otherMaterial =
-          _firstNonEmpty(answers, ['et_other_152', 'et_other_179', 'other']);
-      materials.add(otherMaterial.isEmpty ? 'Other' : otherMaterial);
-    }
-    if (materials.isEmpty) {
-      if (screenId == 'activity_outside_property_out_side_doors_about_doors') {
-        materials.add('PVC');
-      } else if (screenId.endsWith('__timber')) {
-        materials.add('Timber');
-      } else if (screenId.endsWith('__steel')) {
-        materials.add('Steel');
-      } else if (screenId.endsWith('__aluminium')) {
-        materials.add('Aluminium');
-      } else if (screenId.endsWith('__other')) {
-        final otherMaterial =
-            _firstNonEmpty(answers, ['other', 'et_other_152']);
-        materials.add(otherMaterial.isEmpty ? 'Other' : otherMaterial);
+    if (_isChecked(answers['cb_other_859'])) {
+      final otherLocation = (answers['et_other_179'] ?? '').trim();
+      if (otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
       }
     }
+
+    final material = _doorMaterialFromScreen(screenId, answers);
+    final materialCode = _doorMaterialCodeFromScreen(screenId);
 
     final glazing = _labelsFor(
       ['cb_single', 'cb_double'],
@@ -3109,71 +3423,69 @@ class InspectionPhraseEngine {
     final condition = _cleanLower(answers['actv_condition']);
     final sealing = _cleanLower(answers['actv_status_security']);
     final security = _cleanLower(answers['actv_seciruty_offered']);
+    final hasAnyData = locations.isNotEmpty ||
+        replacement.isNotEmpty ||
+        glazing.isNotEmpty ||
+        safetyStatus.isNotEmpty ||
+        condition.isNotEmpty ||
+        sealing.isNotEmpty ||
+        security.isNotEmpty;
+    if (!hasAnyData) return const [];
 
-    final phrases = <String>[];
-    for (final material in materials) {
-      final code = _doorMaterialCode(material);
-      var template = _sub('{E_OUTSIDE_DOORS}', code);
-      if (template.isEmpty) continue;
+    var template = _sub('{E_OUTSIDE_DOORS}', materialCode);
+    if (template.isEmpty) return const [];
 
-      var doorLocation = _sub('{E_OUTSIDE_DOORS}', '{DOOR_LOCATION}');
-      if (doorLocation.isNotEmpty &&
-          locations.isNotEmpty &&
-          glazing.isNotEmpty) {
-        doorLocation = doorLocation
-            .replaceAll('{DOOR_LOCATION}', _toWords(locations).toLowerCase())
-            .replaceAll('{REPLACEMENT}', replacement)
-            .replaceAll('{DOOR_MATERIAL}', material.toLowerCase())
-            .replaceAll('{DOOR_GLAZZING}', _toWords(glazing).toLowerCase());
-      }
-
-      var sgText = '';
-      if (safetyStatus.isNotEmpty) {
-        sgText = _sub(
-            '{E_OUTSIDE_DOORS}',
-            safetyStatus.contains('noted')
-                ? '{DOOR_SG_RATING_NOTED}'
-                : '{DOOR_SG_RATING_NO_SG_RATING}');
-      }
-
-      var conditionText = '';
-      if (condition.isNotEmpty) {
-        conditionText = _sub('{E_OUTSIDE_DOORS}', '{DOOR_CONDITION}')
-            .replaceAll('{DOOR_CONDITION}', condition);
-      }
-
-      var sealingText = '';
-      if (sealing.isNotEmpty && security.isNotEmpty) {
-        sealingText = _sub('{E_OUTSIDE_DOORS}', '{WALL_SEALING}')
-            .replaceAll('{DOOR_SEALING_CONDITION}', sealing)
-            .replaceAll('{SECURITY_OFFERED}', security);
-      }
-
-      template = template
-          .replaceAll('{DOOR_LOCATION}', doorLocation)
-          .replaceAll('{DOOR_SG_RATING_STATUS}', sgText)
-          .replaceAll('{DOOR_CONDITION}', conditionText)
-          .replaceAll('{WALL_SEALING}', sealingText);
-      phrases.addAll(_split(_normalize(template)));
+    var doorLocation = '';
+    final doorLocationTemplate = _sub('{E_OUTSIDE_DOORS}', '{DOOR_LOCATION}');
+    if (doorLocationTemplate.isNotEmpty &&
+        (locations.isNotEmpty || glazing.isNotEmpty)) {
+      doorLocation = doorLocationTemplate
+          .replaceAll('{IS_ARE}', _isAre(locations))
+          .replaceAll('{DOOR_LOCATION}', _toWords(locations).toLowerCase())
+          .replaceAll('{REPLACEMENT}', replacement)
+          .replaceAll('{DOOR_MATERIAL}', material.toLowerCase())
+          .replaceAll('{DOOR_GLAZZING}', _toWords(glazing).toLowerCase());
     }
+    if (doorLocation.isNotEmpty) {
+      doorLocation = doorLocation
+          .replaceAll(RegExp(r'\{[^}]+\}'), '')
+          .replaceAll(RegExp(r'\s{2,}'), ' ')
+          .trim();
+    }
+
+    var sgText = '';
+    if (safetyStatus.isNotEmpty) {
+      sgText = _sub(
+          '{E_OUTSIDE_DOORS}',
+          safetyStatus.contains('noted')
+              ? '{DOOR_SG_RATING_NOTED}'
+              : '{DOOR_SG_RATING_NO_SG_RATING}');
+    }
+
+    var conditionText = '';
+    if (condition.isNotEmpty) {
+      conditionText = _sub('{E_OUTSIDE_DOORS}', '{DOOR_CONDITION}')
+          .replaceAll('{DOOR_CONDITION}', condition);
+    }
+
+    var sealingText = '';
+    if (sealing.isNotEmpty && security.isNotEmpty) {
+      sealingText = _sub('{E_OUTSIDE_DOORS}', '{WALL_SEALING}')
+          .replaceAll('{DOOR_SEALING_CONDITION}', sealing)
+          .replaceAll('{SECURITY_OFFERED}', security);
+    }
+
+    template = template
+        .replaceAll('{DOOR_LOCATION}', doorLocation)
+        .replaceAll('{DOOR_SG_RATING_STATUS}', sgText)
+        .replaceAll('{DOOR_CONDITION}', conditionText)
+        .replaceAll('{WALL_SEALING}', sealingText);
+
+    final phrases = _split(_normalize(template)).toList();
 
     if (_isChecked(answers['cb_replacement'])) {
       phrases.addAll(
           _split(_normalize(_sub('{E_OUTSIDE_DOORS}', '{IF_REPLACEMENT}'))));
-    }
-
-    // Fallbacks so individually selected fields still show in live preview.
-    if (locations.isNotEmpty && glazing.isEmpty) {
-      phrases.add('Door location: ${_toWords(locations).toLowerCase()}.');
-    }
-    if (glazing.isNotEmpty && locations.isEmpty) {
-      phrases.add('Door glazing: ${_toWords(glazing).toLowerCase()}.');
-    }
-    if (sealing.isNotEmpty && security.isEmpty) {
-      phrases.add('Door sealing condition: $sealing.');
-    }
-    if (security.isNotEmpty && sealing.isEmpty) {
-      phrases.add('Security offered: $security.');
     }
 
     return phrases;
@@ -3181,7 +3493,9 @@ class InspectionPhraseEngine {
 
   List<String> _outsideDoorsRepair(
       String screenId, Map<String, String> answers) {
-    final repairType = _cleanLower(answers['actv_repair_type']);
+    final repairType = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_repair_type', 'llMainContainer']),
+    );
     if (repairType.isEmpty) return const [];
     final isNow = repairType.contains('now');
 
@@ -3194,14 +3508,12 @@ class InspectionPhraseEngine {
               'cb_failed_glazing',
               'cb_sticks_against_frame',
               'cb_poorly_fitted',
-              'cb_other_837'
             ]
           : [
               'cb_poorly_secured',
               'cb_inadequate_lock',
               'cb_rotted_frame',
               'cb_damaged_lock',
-              'cb_other_337'
             ],
       answers,
       {
@@ -3209,24 +3521,28 @@ class InspectionPhraseEngine {
         'cb_inadequate_lock': 'Inadequate lock',
         'cb_rotted_frame': 'Rotted frame',
         'cb_damaged_lock': 'Damaged lock',
-        'cb_other_337': 'Other',
         'cb_damaged': 'Damaged',
         'cb_rotten': 'Rotten',
         'cb_partly_worn': 'Partly worn',
         'cb_failed_glazing': 'Failed glazing',
         'cb_sticks_against_frame': 'Sticks against frame',
         'cb_poorly_fitted': 'Poorly fitted',
-        'cb_other_837': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_837', 'et_other_855', defects);
+      final otherDefect = (answers['et_other_855'] ?? '').trim();
+      if (_isChecked(answers['cb_other_837']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     } else {
-      _addOther(answers, 'cb_other_337', 'et_other_362', defects);
+      final otherDefect = _firstNonEmpty(answers, ['et_other_362', 'other']);
+      if (_isChecked(answers['cb_other_337']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     }
     if (defects.isEmpty) return const [];
 
-    final doorLocation = _doorLocationFromScreen(screenId);
+    final doorLocation = _doorLocationFromScreen(screenId, answers);
     final repairCode = _doorRepairSection(screenId);
     var wrapper = _sub('{E_OUTSIDE_DOORS}', repairCode);
     if (wrapper.isEmpty) return const [];
@@ -3251,7 +3567,6 @@ class InspectionPhraseEngine {
 
   List<String> _cpLocationConstruction(
       String screenId, Map<String, String> answers) {
-    final type = _cleanLower(answers['actv_porch_type']);
     final location = _cleanLower(answers['actv_location']);
     final construction = _labelsFor(
       [
@@ -3265,15 +3580,20 @@ class InspectionPhraseEngine {
         'cb_brick_walls': 'Brick walls',
         'cb_pvc_double_glazed_sections': 'PVC double glazed sections',
         'cb_timber_double_glazed_sections': 'Timber double glazed sections',
-        'cb_other_925': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_925', 'et_other_249', construction);
+    if (_isChecked(answers['cb_other_925'])) {
+      final otherConstruction = (answers['et_other_249'] ?? '').trim();
+      if (otherConstruction.isNotEmpty) {
+        construction.add(otherConstruction);
+      }
+    }
     if (location.isEmpty || construction.isEmpty) return const [];
 
-    final isPorch = type.isEmpty
-        ? screenId.endsWith('__location_and_construction')
-        : (type.contains('porch') && !type.contains('conservatory'));
+    final isPorch = _isPorchScreenVariant(
+      screenId,
+      porchSuffix: '__location_and_construction',
+    );
     var template = _sub('{E_CONSERVATORY_PORCHES}',
         isPorch ? '{PORCH_LOCATION_CONSTRUCTION}' : '{LOCATION_CONSTRUCTION}');
     if (template.isEmpty) return const [];
@@ -3286,28 +3606,10 @@ class InspectionPhraseEngine {
       template = template.replaceAll('{CP_LC_LOCATION}', location).replaceAll(
           '{CP_LC_CONSTRUCTION}', _toWords(construction).toLowerCase());
     }
-    final phrases = _split(_normalize(template)).toList();
-    if (isPorch) {
-      final porchTypes = _labelsFor(
-        ['cb_shared', 'cb_integral', 'cb_open', 'cb_other_porch'],
-        answers,
-        {
-          'cb_shared': 'Shared',
-          'cb_integral': 'Integral',
-          'cb_open': 'Open',
-          'cb_other_porch': 'Other',
-        },
-      );
-      _addOther(answers, 'cb_other_porch', 'et_other_porch', porchTypes);
-      if (porchTypes.isNotEmpty) {
-        phrases.add('The porch type is ${_toWords(porchTypes).toLowerCase()}.');
-      }
-    }
-    return phrases;
+    return _split(_normalize(template));
   }
 
   List<String> _cpRoof(String screenId, Map<String, String> answers) {
-    final type = _cleanLower(answers['actv_conservatory_porch']);
     final roofType = _cleanLower(answers['actv_roof_type']);
     final materials = _labelsFor(
       [
@@ -3329,22 +3631,19 @@ class InspectionPhraseEngine {
         'cb_clay_tiles': 'Clay tiles',
         'cb_mineral_felt': 'Mineral felt',
         'cb_lead': 'Lead',
-        'cb_others_373': 'Others',
       },
     );
     if (_isChecked(answers['cb_others_373'])) {
       final other = (answers['et_other_403'] ?? '').trim();
-      materials.add(other.isEmpty ? 'Other' : other);
+      if (other.isNotEmpty) {
+        materials.add(other);
+      }
     }
-    if (materials.isEmpty) return const [];
-    final isPorch =
-        type.isEmpty ? screenId.endsWith('__roof') : type.contains('porch');
-    if (roofType.isEmpty) {
-      final short = isPorch
-          ? 'The roof over the porch is covered in ${_toWords(materials).toLowerCase()}.'
-          : 'The roof over the conservatory is covered in ${_toWords(materials).toLowerCase()}.';
-      return _split(_normalize(short));
-    }
+    if (roofType.isEmpty || materials.isEmpty) return const [];
+    final isPorch = _isPorchScreenVariant(
+      screenId,
+      porchSuffix: '__roof',
+    );
     var template = _sub(
       '{E_CONSERVATORY_PORCHES}',
       isPorch ? '{PORCH_ROOF}' : '{CP_ROOF}',
@@ -3364,7 +3663,6 @@ class InspectionPhraseEngine {
   }
 
   List<String> _cpWindows(String screenId, Map<String, String> answers) {
-    final type = _cleanLower(answers['actv_conservatory_porch']);
     final glazing = _labelsFor(
       ['cb_single', 'cb_double'],
       answers,
@@ -3379,13 +3677,19 @@ class InspectionPhraseEngine {
       {
         'cb_pvc': 'PVC',
         'cb_timber': 'Timber',
-        'cb_other_1047': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_1047', 'et_other_632', materials);
+    if (_isChecked(answers['cb_other_1047'])) {
+      final otherMaterial = (answers['et_other_632'] ?? '').trim();
+      if (otherMaterial.isNotEmpty) {
+        materials.add(otherMaterial);
+      }
+    }
     if (glazing.isEmpty || materials.isEmpty) return const [];
-    final isPorch =
-        type.isEmpty ? screenId.endsWith('__windows') : type.contains('porch');
+    final isPorch = _isPorchScreenVariant(
+      screenId,
+      porchSuffix: '__windows',
+    );
     var template = _sub('{E_CONSERVATORY_PORCHES}',
         isPorch ? '{PORCH_WINDOWS}' : '{CP_WINDOWS}');
     if (template.isEmpty) return const [];
@@ -3406,7 +3710,6 @@ class InspectionPhraseEngine {
   }
 
   List<String> _cpDoors(String screenId, Map<String, String> answers) {
-    final type = _cleanLower(answers['actv_conservatory_porch']);
     final glazing = _labelsFor(
       ['cb_single', 'cb_double'],
       answers,
@@ -3421,13 +3724,19 @@ class InspectionPhraseEngine {
       {
         'cb_pvc': 'PVC',
         'cb_timber': 'Timber',
-        'cb_other_1047': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_1047', 'et_other_632', materials);
+    if (_isChecked(answers['cb_other_1047'])) {
+      final otherMaterial = (answers['et_other_632'] ?? '').trim();
+      if (otherMaterial.isNotEmpty) {
+        materials.add(otherMaterial);
+      }
+    }
     if (glazing.isEmpty || materials.isEmpty) return const [];
-    final isPorch =
-        type.isEmpty ? screenId.endsWith('__doors') : type.contains('porch');
+    final isPorch = _isPorchScreenVariant(
+      screenId,
+      porchSuffix: '__doors',
+    );
     var template = _sub(
         '{E_CONSERVATORY_PORCHES}', isPorch ? '{PORCH_DOORS}' : '{CP_DOORS}');
     if (template.isEmpty) return const [];
@@ -3457,7 +3766,7 @@ class InspectionPhraseEngine {
     return phrases;
   }
 
-  List<String> _cpFloor(Map<String, String> answers) {
+  List<String> _cpFloor(String screenId, Map<String, String> answers) {
     final coverings = _labelsFor(
       ['cb_tiles', 'cb_laminate_flooring', 'cb_carpets', 'cb_other_743'],
       answers,
@@ -3465,33 +3774,52 @@ class InspectionPhraseEngine {
         'cb_tiles': 'Tiles',
         'cb_laminate_flooring': 'Laminate flooring',
         'cb_carpets': 'Carpets',
-        'cb_other_743': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_743', 'et_other_886', coverings);
+    if (_isChecked(answers['cb_other_743'])) {
+      final otherCovering = (answers['et_other_886'] ?? '').trim();
+      if (otherCovering.isNotEmpty) {
+        coverings.add(otherCovering);
+      }
+    }
     if (coverings.isEmpty) return const [];
-    var template = _sub('{E_CONSERVATORY_PORCHES}', '{CP_FLOOR}');
+    final isPorch = _isPorchScreenVariant(
+      screenId,
+      porchSuffix: '__floor',
+    );
+    var template = _sub(
+      '{E_CONSERVATORY_PORCHES}',
+      isPorch ? '{PORCH_FLOOR}' : '{CP_FLOOR}',
+    );
     if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{CP_FLOOR_COVERED_IN}', _toWords(coverings).toLowerCase());
+    template = isPorch
+        ? template.replaceAll(
+            '{CP_FLOOR_COVERED_IN_PORCH}', _toWords(coverings).toLowerCase())
+        : template.replaceAll(
+            '{CP_FLOOR_COVERED_IN}', _toWords(coverings).toLowerCase());
     return _split(_normalize(template));
   }
 
   List<String> _cpSafetyGlassRating(
       String screenId, Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
+    final isPorch = _isPorchScreenVariant(
+      screenId,
+      porchSuffix: '__safety_glass_rating',
+    );
     if (status.contains('noted')) {
-      final noted =
-          _sub('{E_CONSERVATORY_PORCHES}', '{CP_SAFETY_GLASS_RATING_NOTED}');
+      final noted = _sub(
+          '{E_CONSERVATORY_PORCHES}',
+          isPorch
+              ? '{PORCH_SAFETY_GLASS_RATING_NOTED}'
+              : '{CP_SAFETY_GLASS_RATING_NOTED}');
       if (noted.isEmpty) return const [];
       return _split(_normalize(noted));
     }
 
-    final type = _cleanLower(answers['actv_condition']);
-    final isPorch = type.isEmpty
-        ? screenId.endsWith('__safety_glass_rating')
-        : type.contains('porch');
     final code = isPorch
         ? '{PORCH_SAFETY_GLASS_RATING_NO_SG_RATING}'
         : '{CP_SAFETY_GLASS_RATING_NO_SG_RATING}';
@@ -3508,17 +3836,16 @@ class InspectionPhraseEngine {
         'cb_lead': 'Lead',
         'cb_mortar': 'Mortar',
         'cb_tiles': 'Tiles',
-        'cb_other_33': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_33', 'et_other_87', materials);
-    final condition = _cleanLower(answers['actv_condition']);
-    if (materials.isEmpty) return const [];
-    if (condition.isEmpty) {
-      final short =
-          'The waterproofing at the junction of the roof covering and wall appears to be formed in ${_toWords(materials).toLowerCase()}.';
-      return _split(_normalize(short));
+    if (_isChecked(answers['cb_other_33'])) {
+      final otherFlashing = (answers['et_other_87'] ?? '').trim();
+      if (otherFlashing.isNotEmpty) {
+        materials.add(otherFlashing);
+      }
     }
+    final condition = _cleanLower(answers['actv_condition']);
+    if (materials.isEmpty || condition.isEmpty) return const [];
     var template =
         _sub('{E_CONSERVATORY_PORCHES}', '{ROOF_FLASHING_WITH_WALL}');
     if (template.isEmpty) return const [];
@@ -3530,31 +3857,39 @@ class InspectionPhraseEngine {
 
   List<String> _cpOpenToBuilding(String screenId, Map<String, String> answers) {
     if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    final type = _cleanLower(answers['actv_condition']);
-    final isPorch = type.isEmpty
-        ? screenId.endsWith('__open_to_building')
-        : type.contains('porch');
+    final isPorch = _isPorchScreenVariant(
+      screenId,
+      porchSuffix: '__open_to_building',
+    );
     final template = _sub('{E_CONSERVATORY_PORCHES}',
         isPorch ? '{PORCH_OPEN_TO_BUILDING}' : '{CP_OPEN_TO_BUILDING}');
     if (template.isEmpty) return const [];
     return _split(_normalize(template));
   }
 
-  List<String> _cpPorchCondition(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+  List<String> _cpPorchCondition(String screenId, Map<String, String> answers) {
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
-    var template = _sub('{E_CONSERVATORY_PORCHES}', '{PORCH_CONDITION}');
+    final isPorch = _isPorchScreenVariant(
+      screenId,
+      porchSuffix: '__condition',
+    );
+    var template = _sub('{E_CONSERVATORY_PORCHES}',
+        isPorch ? '{PORCH_CONDITION}' : '{CP_CONDITION}');
     if (template.isEmpty) return const [];
-    template = template.replaceAll('{CP_CONDITION_PORCH}', condition);
+    template = template.replaceAll(
+        isPorch ? '{CP_CONDITION_PORCH}' : '{CP_CONDITION}', condition);
     return _split(_normalize(template));
   }
 
   List<String> _cpPoorCondition(String screenId, Map<String, String> answers) {
     if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    final type = _cleanLower(answers['actv_condition']);
-    final isPorch = type.isEmpty
-        ? screenId.endsWith('__poor_condition')
-        : type.contains('porch');
+    final isPorch = _isPorchScreenVariant(
+      screenId,
+      porchSuffix: '__poor_condition',
+    );
     final template = _sub('{E_CONSERVATORY_PORCHES}',
         isPorch ? '{PORCH_POOR_CONDITION}' : '{CP_POOR_CONDITION}');
     if (template.isEmpty) return const [];
@@ -3562,19 +3897,27 @@ class InspectionPhraseEngine {
   }
 
   List<String> _cpNotInspected(Map<String, String> answers) {
+    final phrases = <String>[];
     if (_isChecked(answers['cb_main_building'])) {
-      return _split(_normalize(
-          _sub('{E_CONSERVATORY_PORCHES}', '{NOT_INSPECTED_NOT_APPLICABLE}')));
+      final text =
+          _sub('{E_CONSERVATORY_PORCHES}', '{NOT_INSPECTED_NOT_APPLICABLE}');
+      if (text.isNotEmpty) {
+        phrases.addAll(_split(_normalize(text)));
+      }
     }
     if (_isChecked(answers['cb_back_addition'])) {
-      return _split(
-          _normalize(_sub('{E_CONSERVATORY_PORCHES}', '{NOT_INSPECTED_NONE}')));
+      final text = _sub('{E_CONSERVATORY_PORCHES}', '{NOT_INSPECTED_NONE}');
+      if (text.isNotEmpty) {
+        phrases.addAll(_split(_normalize(text)));
+      }
     }
-    return const [];
+    return phrases;
   }
 
   List<String> _cpRepairs(String screenId, Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final isNow = condition.contains('now');
     final defects = _labelsFor(
@@ -3608,7 +3951,6 @@ class InspectionPhraseEngine {
         'cb_damp': 'Damp',
         'cb_failed': 'Failed',
         'cb_misted_over': 'Misted over',
-        'cb_other_519': 'Other',
         'cb_cracked_51': 'Badly cracked',
         'cb_damaged_22': 'Severely damaged',
         'cb_rotten_46': 'Badly rotten',
@@ -3616,13 +3958,18 @@ class InspectionPhraseEngine {
         'cb_damp_25': 'Causing damp',
         'cb_failed_89': 'Failed',
         'cb_misted_over_85': 'Misted over',
-        'cb_other_350': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_350', 'et_other_430', defects);
+      final otherNow = (answers['et_other_430'] ?? '').trim();
+      if (_isChecked(answers['cb_other_350']) && otherNow.isNotEmpty) {
+        defects.add(otherNow);
+      }
     } else {
-      _addOther(answers, 'cb_other_519', 'et_other_346', defects);
+      final otherSoon = (answers['et_other_346'] ?? '').trim();
+      if (_isChecked(answers['cb_other_519']) && otherSoon.isNotEmpty) {
+        defects.add(otherSoon);
+      }
     }
     if (defects.isEmpty) return const [];
 
@@ -3632,7 +3979,7 @@ class InspectionPhraseEngine {
     if (repair.isEmpty) return const [];
     repair = repair
         .replaceAll('{CP_LOCATION}', location)
-        .replaceAll('{IS_ARE}', 'are')
+        .replaceAll('{IS_ARE}', _isAreForSubject(location))
         .replaceAll('{CP_DEFECT_SOON}', _toWords(defects).toLowerCase())
         .replaceAll('{CP_DEFECT_NOW}', _toWords(defects).toLowerCase());
 
@@ -3647,34 +3994,36 @@ class InspectionPhraseEngine {
 
   List<String> _otherJoineryAbout(Map<String, String> answers) {
     final items = _labelsFor(
-      [
-        'cb_facias',
-        'cb_soffits',
-        'cb_bargeboards',
-        'cb_verge_clips',
-        'cb_other_326'
-      ],
+      ['cb_facias', 'cb_soffits', 'cb_bargeboards', 'cb_verge_clips'],
       answers,
       {
         'cb_facias': 'Facias',
         'cb_soffits': 'Soffits',
         'cb_bargeboards': 'Bargeboards',
         'cb_verge_clips': 'Verge clips',
-        'cb_other_326': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_326', 'et_other_393', items);
+    _addOtherText(
+      answers,
+      'cb_other_326',
+      ['et_other_397', 'et_other_393'],
+      items,
+    );
     final materials = _labelsFor(
-      ['cb_timber', 'cb_pvc', 'cb_slates', 'cb_other_397'],
+      ['cb_timber', 'cb_pvc', 'cb_slates'],
       answers,
       {
         'cb_timber': 'Timber',
         'cb_pvc': 'PVC',
         'cb_slates': 'Slates',
-        'cb_other_397': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_397', 'et_other_397', materials);
+    _addOtherText(
+      answers,
+      'cb_other_397',
+      ['et_other_393', 'et_other_397'],
+      materials,
+    );
     if (items.isEmpty || materials.isEmpty) return const [];
     var template = _sub(
         '{E_OTHER_JOINERY_AND_FINISHES}', '{ABOUT_OTHER_JOINERY_AND_FINISHES}');
@@ -3689,7 +4038,8 @@ class InspectionPhraseEngine {
       phrases.addAll(_split(_normalize(
           _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{REPAIR_REDECORATE}'))));
     }
-    if (_isChecked(answers['cb_open_runoffs'])) {
+    if (_isChecked(answers['cb_open_runoffs']) ||
+        _isChecked(answers['cb_Is_Contain_Asbestos'])) {
       final asbestos =
           _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{CONTAIN_ASBESTOS}');
       if (asbestos.isNotEmpty) {
@@ -3700,7 +4050,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _otherJoineryCondition(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     var template = _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{CONDITION}');
     if (template.isEmpty) return const [];
@@ -3709,7 +4061,10 @@ class InspectionPhraseEngine {
   }
 
   List<String> _otherJoineryAsbestos(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_open_runoffs'])) return const [];
+    if (!_isChecked(answers['cb_open_runoffs']) &&
+        !_isChecked(answers['cb_Is_Contain_Asbestos'])) {
+      return const [];
+    }
     final template =
         _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{CONTAIN_ASBESTOS}');
     if (template.isEmpty) return const [];
@@ -3723,8 +4078,7 @@ class InspectionPhraseEngine {
         'cb_soffits',
         'cb_barge_boards',
         'cb_verge_clips',
-        'cb_timber_cladding',
-        'cb_other_289'
+        'cb_timber_cladding'
       ],
       answers,
       {
@@ -3733,18 +4087,16 @@ class InspectionPhraseEngine {
         'cb_barge_boards': 'Barge boards',
         'cb_verge_clips': 'Verge clips',
         'cb_timber_cladding': 'Timber cladding',
-        'cb_other_289': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_289', 'et_other_178', items);
+    _addOtherText(answers, 'cb_other_289', ['et_other_178'], items);
     final locations = _labelsFor(
       [
         'cb_main_building_86',
         'cb_back_addition_47',
         'cb_extension_25',
         'cb_bay_window_61',
-        'cb_garage_21',
-        'cb_other_269'
+        'cb_garage_21'
       ],
       answers,
       {
@@ -3753,26 +4105,20 @@ class InspectionPhraseEngine {
         'cb_extension_25': 'Extension',
         'cb_bay_window_61': 'Bay window',
         'cb_garage_21': 'Garage',
-        'cb_other_269': 'Other',
       },
     );
+    _addOtherText(answers, 'cb_other_269', ['et_other_567'], locations);
     final defects = _labelsFor(
-      [
-        'cb_rotted',
-        'cb_damaged',
-        'cb_poorly_secured',
-        'cb_incomplete',
-        'cb_other_777'
-      ],
+      ['cb_rotted', 'cb_damaged', 'cb_poorly_secured', 'cb_incomplete'],
       answers,
       {
         'cb_rotted': 'Rotted',
         'cb_damaged': 'Damaged',
         'cb_poorly_secured': 'Poorly secured',
         'cb_incomplete': 'Incomplete',
-        'cb_other_777': 'Other',
       },
     );
+    _addOtherText(answers, 'cb_other_777', ['et_other_473'], defects);
     if (items.isEmpty || locations.isEmpty || defects.isEmpty) return const [];
     var template = _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{REPAIR_SOON}');
     if (template.isEmpty) return const [];
@@ -3795,10 +4141,14 @@ class InspectionPhraseEngine {
   }
 
   List<String> _otherCommunalArea(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     final phrases = <String>[];
-    if (status.contains('inspected')) {
+    final isInspected = status == 'inspected' ||
+        (status.contains('inspected') && !status.contains('not'));
+    if (isInspected) {
       final items = _labelsFor(
         [
           'cb_automatic_gates',
@@ -3811,7 +4161,6 @@ class InspectionPhraseEngine {
           'cb_gardens',
           'cb_grounds',
           'cb_play_ground',
-          'cb_other_1034',
         ],
         answers,
         {
@@ -3825,10 +4174,9 @@ class InspectionPhraseEngine {
           'cb_gardens': 'Gardens',
           'cb_grounds': 'Grounds',
           'cb_play_ground': 'Play ground',
-          'cb_other_1034': 'Other',
         },
       );
-      _addOther(answers, 'cb_other_1034', 'et_other_747', items);
+      _addOtherText(answers, 'cb_other_1034', ['et_other_747'], items);
       if (items.isNotEmpty) {
         var template = _sub('{E_OTHER}', '{COMMUNAL_AREA_INSPECTED}');
         template = template.replaceAll(
@@ -3845,18 +4193,14 @@ class InspectionPhraseEngine {
       }
     } else {
       final reasons = _labelsFor(
-        [
-          'cb_the_area_is_not_accessible',
-          'cb_of_limited_access',
-          'cb_other_251'
-        ],
+        ['cb_the_area_is_not_accessible', 'cb_of_limited_access'],
         answers,
         {
           'cb_the_area_is_not_accessible': 'The area is not accessible',
           'cb_of_limited_access': 'Of limited access',
-          'cb_other_251': 'Other',
         },
       );
+      _addOtherText(answers, 'cb_other_251', ['et_other_928'], reasons);
       if (reasons.isNotEmpty) {
         var template = _sub('{E_OTHER}', '{COMMUNAL_AREA_NOT_INSPECTED}');
         template = template.replaceAll(
@@ -3885,7 +4229,7 @@ class InspectionPhraseEngine {
         screenId.contains('__condition')) {
       return 'porch canopy';
     }
-    return 'carport canopy';
+    return 'carport';
   }
 
   String _otherRepairAreaFromScreen(String screenId) {
@@ -3895,7 +4239,7 @@ class InspectionPhraseEngine {
     if (screenId.contains('__3')) return 'balcony';
     if (screenId.contains('__2')) return 'roof terrace';
     if (screenId.contains('__')) return 'porch canopy';
-    return 'carport canopy';
+    return 'carport';
   }
 
   List<String> _otherConstruction(String screenId, Map<String, String> answers,
@@ -3905,15 +4249,34 @@ class InspectionPhraseEngine {
         ? answerArea
         : _otherExternalAreaFromScreen(screenId);
     if (area.isEmpty) return const [];
+    final isWallConstruction =
+        screenId.startsWith('activity_outside_property_other_other_wall');
     final materials = _labelsFor(
-      ['cb_timber', 'cb_concrete', 'cb_steel', 'cb_other_472'],
+      isWallConstruction
+          ? [
+              'cb_timber',
+              'cb_bricks',
+              'cb_concrete',
+              'cb_steel',
+              'cb_other_472'
+            ]
+          : ['cb_timber', 'cb_concrete', 'cb_steel', 'cb_other_472'],
       answers,
-      {
-        'cb_timber': 'Timber',
-        'cb_concrete': 'Concrete',
-        'cb_steel': 'Steel',
-        'cb_other_472': 'Other',
-      },
+      isWallConstruction
+          ? {
+              // Legacy XML field IDs are reused with different labels on wall screens.
+              'cb_timber': 'Bricks',
+              'cb_bricks': 'Timber',
+              'cb_concrete': 'Concrete',
+              'cb_steel': 'Glazed section',
+              'cb_other_472': 'Other',
+            }
+          : {
+              'cb_timber': 'Timber',
+              'cb_concrete': 'Concrete',
+              'cb_steel': 'Steel',
+              'cb_other_472': 'Other',
+            },
     );
     _addOther(answers, 'cb_other_472', otherTextKey, materials);
     if (materials.isEmpty) return const [];
@@ -3930,7 +4293,9 @@ class InspectionPhraseEngine {
     final area = answerArea.isNotEmpty
         ? answerArea
         : _otherExternalAreaFromScreen(screenId);
-    final roofType = _cleanLower(answers['actv_roof_type']);
+    final roofType = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_roof_type', 'llMainContainer']),
+    );
     final covered = _cleanLower(answers['actv_covered_in']);
     if (area.isEmpty || roofType.isEmpty || covered.isEmpty) return const [];
     var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_ROOF}');
@@ -3943,7 +4308,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _otherFloor(String screenId, Map<String, String> answers) {
-    final answerArea = _cleanLower(answers['actv_area']);
+    final answerArea = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_area', 'llMainContainer']),
+    );
     final area = answerArea.isNotEmpty
         ? answerArea
         : _otherExternalAreaFromScreen(screenId);
@@ -3993,7 +4360,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _otherHandrails(String screenId, Map<String, String> answers) {
-    final answerArea = _cleanLower(answers['actv_area']);
+    final answerArea = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_area', 'llMainContainer']),
+    );
     final area = answerArea.isNotEmpty
         ? answerArea
         : _otherExternalAreaFromScreen(screenId);
@@ -4008,20 +4377,22 @@ class InspectionPhraseEngine {
       },
     );
     _addOther(answers, 'cb_other_472', 'et_other_99', materials);
-    if (materials.isEmpty) return const [];
+    final uniqueMaterials = _dedupeInsensitive(materials);
+    if (uniqueMaterials.isEmpty) return const [];
     var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_HANDRAILS}');
     if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
-        .replaceAll('{HANDRAILS_TYPE}', _toWords(materials).toLowerCase());
+    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area).replaceAll(
+        '{HANDRAILS_TYPE}', _toWords(uniqueMaterials).toLowerCase());
     return _split(_normalize(template));
   }
 
-  List<String> _otherOverloaded(Map<String, String> answers) {
+  List<String> _otherOverloaded(String screenId, Map<String, String> answers) {
     if (!_isChecked(answers['is_overloaded_structure'])) return const [];
+    final area = _otherExternalAreaFromScreen(screenId);
+    if (area.isEmpty) return const [];
     var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_OVERLOADED}');
     if (template.isEmpty) return const [];
-    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', 'external area');
+    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area);
     return _split(_normalize(template));
   }
 
@@ -4034,13 +4405,18 @@ class InspectionPhraseEngine {
         : _otherExternalAreaFromScreen(screenId);
     var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_NO_SAFETY_GLASS}');
     if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{OTHER_EXTERNAL_AREA}', area.isEmpty ? 'external area' : area);
+    if (area.isEmpty) return const [];
+    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area);
     return _split(_normalize(template));
   }
 
   List<String> _otherCondition(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_weather_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_weather_condition', 'llMainContainer'],
+      ),
+    );
     if (condition.isEmpty) return const [];
     var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_CONDITION}');
     if (template.isEmpty) return const [];
@@ -4073,7 +4449,9 @@ class InspectionPhraseEngine {
     return _split(_normalize(template));
   }
 
-  List<String> _otherRepairRoof(Map<String, String> answers) {
+  List<String> _otherRepairRoof(String screenId, Map<String, String> answers) {
+    final area = _otherRepairAreaFromScreen(screenId);
+    if (area.isEmpty) return const [];
     final defects = _labelsFor(
       [
         'cb_has_missing_tiles',
@@ -4086,26 +4464,26 @@ class InspectionPhraseEngine {
       ],
       answers,
       {
-        'cb_has_missing_tiles': 'Missing tiles',
-        'cb_has_slipped_tiles': 'Slipped tiles',
-        'cb_is_in_disrepair': 'In disrepair',
-        'cb_is_leaking': 'Leaking',
-        'cb_is_dilapidated': 'Dilapidated',
-        'cb_has_damaged_flashing': 'Damaged flashing',
-        'cb_is_poorly_secured': 'Poorly secured',
+        'cb_has_missing_tiles': 'missing tiles',
+        'cb_has_slipped_tiles': 'slipped tiles',
+        'cb_is_in_disrepair': 'is in disrepair',
+        'cb_is_leaking': 'is leaking',
+        'cb_is_dilapidated': 'is dilapidated',
+        'cb_has_damaged_flashing': 'damaged flashing',
+        'cb_is_poorly_secured': 'is poorly secured',
       },
     );
     if (defects.isEmpty) return const [];
     var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_ROOF}');
     if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', 'external area')
-        .replaceAll(
-            '{OTHER_REPAIR_ROOF_DEFECT}', _toWords(defects).toLowerCase());
+    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area).replaceAll(
+        '{OTHER_REPAIR_ROOF_DEFECT}', _toWords(defects).toLowerCase());
     return _split(_normalize(template));
   }
 
-  List<String> _otherRepairFloor(Map<String, String> answers) {
+  List<String> _otherRepairFloor(String screenId, Map<String, String> answers) {
+    final area = _otherRepairAreaFromScreen(screenId);
+    if (area.isEmpty) return const [];
     final defects = _labelsFor(
       ['cb_split', 'cb_cracked', 'cb_other_642'],
       answers,
@@ -4120,69 +4498,88 @@ class InspectionPhraseEngine {
     var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_FLOOR}');
     if (template.isEmpty) return const [];
     template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', 'external area')
+        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
         .replaceAll('{FLOOR_DEFECT}', _toWords(defects).toLowerCase());
     return _split(_normalize(template));
   }
 
-  List<String> _otherRepairDrains(Map<String, String> answers) {
+  List<String> _otherRepairDrains(
+      String screenId, Map<String, String> answers) {
+    final area = _otherRepairAreaFromScreen(screenId);
+    if (area.isEmpty) return const [];
     final defects = _labelsFor(
-      ['cb_split', 'cb_cracked', 'cb_other_642'],
+      ['cb_split', 'cb_cracked'],
       answers,
       {
         'cb_split': 'Too small',
         'cb_cracked': 'Blocked',
-        'cb_other_642': 'Poorly drained',
       },
     );
+    if (_isChecked(answers['cb_other_642'])) {
+      final other = (answers['et_other_442'] ?? '').trim();
+      if (other.isNotEmpty) {
+        defects.add(other);
+      } else {
+        defects.add('Poorly drained');
+      }
+    }
     if (defects.isEmpty) return const [];
     var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_DRAINS}');
     if (template.isEmpty) return const [];
     template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', 'external area')
+        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
         .replaceAll('{DRAINS_DEFECT}', _toWords(defects).toLowerCase());
     return _split(_normalize(template));
   }
 
-  List<String> _otherRepairHandrails(Map<String, String> answers) {
+  List<String> _otherRepairHandrails(
+      String screenId, Map<String, String> answers) {
+    final area = _otherRepairAreaFromScreen(screenId);
+    if (area.isEmpty) return const [];
     final defects = _labelsFor(
       [
-        'cb_not_strong_enough',
-        'cb_inadequately_designed',
         'cb_partly_rotten_65',
         'cb_not_strong_enough_51',
-        'cb_inadequately_designed_43'
+        'cb_inadequately_designed_43',
       ],
       answers,
       {
-        'cb_not_strong_enough': 'Not strong enough',
-        'cb_inadequately_designed': 'Inadequately designed',
         'cb_partly_rotten_65': 'Partly rotten',
         'cb_not_strong_enough_51': 'Not strong enough',
         'cb_inadequately_designed_43': 'Inadequately designed',
       },
     );
-    if (defects.isEmpty) return const [];
+    final uniqueDefects = _dedupeInsensitive(defects);
+    if (uniqueDefects.isEmpty) return const [];
     var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_HANDRAILS}');
     if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', 'external area')
-        .replaceAll('{HANDRAILS_DEFECT}', _toWords(defects).toLowerCase());
+    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area).replaceAll(
+        '{HANDRAILS_DEFECT}', _toWords(uniqueDefects).toLowerCase());
     return _split(_normalize(template));
   }
 
-  List<String> _otherRepairStepsLanding(Map<String, String> answers) {
-    final location = _cleanLower(answers['actv_location']);
+  List<String> _otherRepairStepsLanding(
+      String screenId, Map<String, String> answers) {
+    final location = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_location', 'llMainContainer']),
+    );
     final defects = _labelsFor(
-      ['cb_cracked', 'cb_damaged', 'cb_eroded', 'cb_other_1046'],
+      ['cb_cracked', 'cb_damaged', 'cb_eroded'],
       answers,
       {
         'cb_cracked': 'Split',
         'cb_damaged': 'Cracked',
         'cb_eroded': 'Partly rotted',
-        'cb_other_1046': 'Rusted',
       },
     );
+    if (_isChecked(answers['cb_other_1046'])) {
+      final other = (answers['et_other_402'] ?? '').trim();
+      if (other.isNotEmpty) {
+        defects.add(other);
+      } else {
+        defects.add('Rusted');
+      }
+    }
     if (location.isEmpty || defects.isEmpty) return const [];
     var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_STEPS_LANDING}');
     if (template.isEmpty) return const [];
@@ -4194,15 +4591,13 @@ class InspectionPhraseEngine {
 
   List<String> _otherRepairDecorations(Map<String, String> answers) {
     final locations = _labelsFor(
-      ['cb_stairway', 'cb_fire_escape', 'cb_other_344'],
+      ['cb_stairway', 'cb_fire_escape'],
       answers,
       {
         'cb_stairway': 'Stairway',
         'cb_fire_escape': 'Fire escape',
-        'cb_other_344': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_344', 'et_other_639', locations);
     final defects = _labelsFor(
       ['cb_perished', 'cb_flaking', 'cb_other_344'],
       answers,
@@ -4212,6 +4607,7 @@ class InspectionPhraseEngine {
         'cb_other_344': 'Other',
       },
     );
+    _addOther(answers, 'cb_other_344', 'et_other_639', defects);
     if (locations.isEmpty || defects.isEmpty) return const [];
     var template =
         _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_PERISHED_DECORATIONS}');
@@ -4226,68 +4622,64 @@ class InspectionPhraseEngine {
 
   List<String> _mainWallsAbout(String screenId, Map<String, String> answers) {
     final wallTypes = <String>[];
-    if (_isChecked(answers['cb_solid_bounded_brick_wall']))
-      wallTypes.add('solid brick wall');
-    if (_isChecked(answers['cb_cavity_brick_wall']))
-      wallTypes.add('cavity brick wall');
-    if (_isChecked(answers['cb_cavity_block_wall']))
-      wallTypes.add('cavity block wall');
-    if (_isChecked(answers['cb_cavity_stud_wall']))
-      wallTypes.add('cavity stud wall');
-    if (_isChecked(answers['cb_other_394'])) {
-      final otherWall = _firstNonEmpty(
-          answers, ['other', 'et_other_124', 'et_other_133', 'et_other_444']);
-      wallTypes.add(otherWall.isEmpty ? 'other wall' : otherWall.toLowerCase());
-    }
-
-    if (wallTypes.isEmpty) {
-      if (screenId.contains('__cavity_brick_wall')) {
-        wallTypes.add('cavity brick wall');
-      } else if (screenId.contains('__cavity_block_wall')) {
-        wallTypes.add('cavity block wall');
-      } else if (screenId.contains('__cavity_stud_wall')) {
-        wallTypes.add('cavity stud wall');
-      } else if (screenId.contains('__other')) {
-        final otherWall = _firstNonEmpty(
-            answers, ['other', 'et_other_124', 'et_other_133', 'et_other_444']);
-        wallTypes
-            .add(otherWall.isEmpty ? 'other wall' : otherWall.toLowerCase());
-      } else {
+    final routedWallType = _mainWallTypeFromScreen(screenId, answers);
+    if (routedWallType != null) {
+      wallTypes.add(routedWallType);
+    } else {
+      // Backward compatibility for legacy datasets where wall type was
+      // persisted as checkbox values on the same screen.
+      if (_isChecked(answers['cb_solid_bounded_brick_wall'])) {
         wallTypes.add('solid brick wall');
       }
+      if (_isChecked(answers['cb_cavity_brick_wall'])) {
+        wallTypes.add('cavity brick wall');
+      }
+      if (_isChecked(answers['cb_cavity_block_wall'])) {
+        wallTypes.add('cavity block wall');
+      }
+      if (_isChecked(answers['cb_cavity_stud_wall'])) {
+        wallTypes.add('cavity stud wall');
+      }
+      if (_isChecked(answers['cb_other_394'])) {
+        final otherWall = _firstNonEmpty(answers, ['other', 'et_other_124']);
+        if (otherWall.trim().isNotEmpty) {
+          wallTypes.add(otherWall.trim().toLowerCase());
+        }
+      }
     }
+    if (wallTypes.isEmpty) return const [];
 
     final locations = _labelsFor(
-      ['cb_main_building', 'cb_back_addition', 'cb_extension', 'cb_other_832'],
+      ['cb_main_building', 'cb_back_addition', 'cb_extension'],
       answers,
       {
         'cb_main_building': 'Main building',
         'cb_back_addition': 'Back addition',
         'cb_extension': 'Extension',
-        'cb_other_832': 'Other',
       },
     );
     if (_isChecked(answers['cb_other_832'])) {
-      final otherLocation = _firstNonEmpty(
-          answers, ['et_other_133', 'et_other_124', 'et_other_444', 'other']);
-      locations.add(otherLocation.isEmpty ? 'Other' : otherLocation);
+      final otherLocation = (answers['et_other_133'] ?? '').trim();
+      if (otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     }
 
     final thickness = (answers['et_thickness'] ?? '').trim();
     final finishes = _labelsFor(
-      ['cb_painted', 'cb_pebble_dash', 'cb_mock_tudor', 'cb_other_327'],
+      ['cb_painted', 'cb_pebble_dash', 'cb_mock_tudor'],
       answers,
       {
         'cb_painted': 'Painted',
         'cb_pebble_dash': 'Pebble dash',
         'cb_mock_tudor': 'Mock Tudor wall',
-        'cb_other_327': 'Other',
       },
     );
     if (_isChecked(answers['cb_other_327'])) {
-      final otherFinish = _firstNonEmpty(
-          answers, ['et_other_444', 'et_other_124', 'et_other_133']);
-      finishes.add(otherFinish.isEmpty ? 'Other' : otherFinish);
+      final otherFinish = (answers['et_other_444'] ?? '').trim();
+      if (otherFinish.isNotEmpty) {
+        finishes.add(otherFinish);
+      }
     }
 
     final finishesAmount = _cleanLower(answers['actv_finishes']);
@@ -4303,48 +4695,32 @@ class InspectionPhraseEngine {
 
     final phrases = <String>[];
     for (final wallType in wallTypes) {
-      var wallText = '';
+      String wallText = '';
       if (wallPhraseBase.isNotEmpty &&
-          locations.isNotEmpty &&
-          thickness.isNotEmpty) {
+          (locations.isNotEmpty || thickness.isNotEmpty)) {
         wallText = wallPhraseBase
             .replaceAll('{WALL_LOCATION}', _toWords(locations).toLowerCase())
             .replaceAll('{WALL_THICKNESS}', thickness)
             .replaceAll('{WALL}', wallType);
-      } else if (locations.isNotEmpty) {
-        wallText =
-            'The principal external walls to the ${_toWords(locations).toLowerCase()} are of $wallType construction.';
       }
 
-      var finishText = '';
-      if (finishesPhraseBase.isNotEmpty &&
-          finishesAmount.isNotEmpty &&
-          rendered.isNotEmpty &&
-          finishes.isNotEmpty) {
-        finishText = finishesPhraseBase
-            .replaceAll('{WALL_FINISHES}', finishesAmount)
-            .replaceAll('{WALL_RENDERED}', rendered)
-            .replaceAll(
-                '{WALL_FINISHES_TYPE}', _toWords(finishes).toLowerCase());
-      } else if (finishesAmount.isNotEmpty ||
-          rendered.isNotEmpty ||
-          finishes.isNotEmpty) {
-        final amountText = finishesAmount.isEmpty ? '' : '$finishesAmount ';
-        final renderedText = rendered.isEmpty ? '' : '$rendered';
-        final finishTypesText = finishes.isEmpty
-            ? ''
-            : ' with ${_toWords(finishes).toLowerCase()} finishes';
-        finishText =
-            'The outer faces of the external walls are ${amountText}rendered $renderedText$finishTypesText.'
-                .replaceAll(RegExp(r'\s+'), ' ')
-                .trim();
-      }
+      final finishText = finishesPhraseBase.isNotEmpty &&
+              (finishesAmount.isNotEmpty ||
+                  rendered.isNotEmpty ||
+                  finishes.isNotEmpty)
+          ? finishesPhraseBase
+              .replaceAll('{WALL_FINISHES}', finishesAmount)
+              .replaceAll('{WALL_RENDERED}', rendered)
+              .replaceAll(
+                '{WALL_FINISHES_TYPE}',
+                _toWords(finishes).toLowerCase(),
+              )
+          : '';
 
-      var conditionText = '';
-      if (conditionPhraseBase.isNotEmpty && condition.isNotEmpty) {
-        conditionText =
-            conditionPhraseBase.replaceAll('{CONDITION}', condition);
-      }
+      final conditionText =
+          conditionPhraseBase.isNotEmpty && condition.isNotEmpty
+              ? conditionPhraseBase.replaceAll('{CONDITION}', condition)
+              : '';
 
       final typeCode = _mainWallTypeCode(wallType);
       var base = _sub('{E_MAIN_WALLS}', typeCode);
@@ -4362,7 +4738,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _mainWallsCladding(Map<String, String> answers) {
-    final type = _cleanLower(answers['actv_cladding']);
+    final type = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_cladding', 'llMainContainer']),
+    );
     final materials = _labelsFor(
       [
         'cb_clay_tiles',
@@ -4372,7 +4750,6 @@ class InspectionPhraseEngine {
         'cb_shingle_plates',
         'cb_compressed_flat_panels',
         'cb_insulated_cladding',
-        'cb_other_927',
       ],
       answers,
       {
@@ -4383,25 +4760,25 @@ class InspectionPhraseEngine {
         'cb_shingle_plates': 'Shingle plates',
         'cb_compressed_flat_panels': 'Compressed flat panels',
         'cb_insulated_cladding': 'Insulated cladding',
-        'cb_other_927': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_927', 'et_other_709', materials);
+    if (_isChecked(answers['cb_other_927'])) {
+      final other = (answers['et_other_709'] ?? '').trim();
+      if (other.isNotEmpty) {
+        materials.add(other);
+      }
+    }
 
     final phrases = <String>[];
-    if (materials.isNotEmpty) {
-      var claddingText = '';
-      final template = _sub('{E_MAIN_WALLS}', '{WALLS_CLADDING}');
-      if (template.isNotEmpty && type.isNotEmpty) {
-        claddingText = template
+    if (materials.isNotEmpty && type.isNotEmpty) {
+      var template = _sub('{E_MAIN_WALLS}', '{WALLS_CLADDING}');
+      if (template.isNotEmpty) {
+        template = template
             .replaceAll('{MAIN_WALL_CLADDING_TYPE}', type)
             .replaceAll('{MAIN_WALL_CLADDING_CLADDED_WITH}',
                 _toWords(materials).toLowerCase());
-      } else {
-        claddingText =
-            'The external walls are cladded with ${_toWords(materials).toLowerCase()}.';
+        phrases.addAll(_split(_normalize(template)));
       }
-      phrases.addAll(_split(_normalize(claddingText)));
     }
 
     final condition = _cleanLower(answers['actv_condition']);
@@ -4418,7 +4795,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _mainWallsDpc(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
 
     if (status.contains('visible')) {
@@ -4428,7 +4807,6 @@ class InspectionPhraseEngine {
           'cb_felt',
           'cb_slates',
           'cb_engineering_bricks',
-          'cb_other_259'
         ],
         answers,
         {
@@ -4436,10 +4814,9 @@ class InspectionPhraseEngine {
           'cb_felt': 'Felt',
           'cb_slates': 'Slates',
           'cb_engineering_bricks': 'Engineering bricks',
-          'cb_other_259': 'Other',
         },
       );
-      _addOther(answers, 'cb_other_259', 'et_other_105', materials);
+      _addOtherText(answers, 'cb_other_259', ['et_other_105'], materials);
       if (materials.isEmpty) return const [];
       var template = _sub('{E_MAIN_WALLS}', '{WALLS_DPC_VISIBLE}');
       if (template.isEmpty) return const [];
@@ -4455,7 +4832,6 @@ class InspectionPhraseEngine {
         'cb_felt_73',
         'cb_slates_45',
         'cb_engineering_bricks_41',
-        'cb_other_312'
       ],
       answers,
       {
@@ -4463,10 +4839,9 @@ class InspectionPhraseEngine {
         'cb_felt_73': 'Felt',
         'cb_slates_45': 'Slates',
         'cb_engineering_bricks_41': 'Engineering bricks',
-        'cb_other_312': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_312', 'et_other_637', materials);
+    _addOtherText(answers, 'cb_other_312', ['et_other_637'], materials);
     if (reasons.isEmpty || materials.isEmpty) return const [];
     var template = _sub('{E_MAIN_WALLS}', '{WALLS_DPC_NOT_VISIBLE}');
     if (template.isEmpty) return const [];
@@ -4478,7 +4853,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _mainWallsDamp(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('none')) {
       return _split(
@@ -4503,7 +4880,6 @@ class InspectionPhraseEngine {
           'cb_leaking_downpipe',
           'cb_bridged_dpc',
           'cb_blocked_gully',
-          'cb_other_380',
         ],
         answers,
         {
@@ -4512,10 +4888,9 @@ class InspectionPhraseEngine {
           'cb_leaking_downpipe': 'Leaking down pipe',
           'cb_bridged_dpc': 'Bridged DPC',
           'cb_blocked_gully': 'Blocked gully',
-          'cb_other_380': 'Other',
         },
       );
-      _addOther(answers, 'cb_other_380', 'et_other_184', causes);
+      _addOtherText(answers, 'cb_other_380', ['et_other_184'], causes);
       if (causes.isNotEmpty) {
         penetratingPhrase = _sub('{WALLS_DAMP_TYPE_PRESENT}',
                 '{WALLS_DAMP_TYPE_PRESENT_PENETRATING}')
@@ -4532,7 +4907,6 @@ class InspectionPhraseEngine {
           'cb_old_and_brittle_dpc',
           'cb_bridged_dpcSecond',
           'cb_defective_drainage',
-          'cb_other_1030',
         ],
         answers,
         {
@@ -4540,10 +4914,9 @@ class InspectionPhraseEngine {
           'cb_old_and_brittle_dpc': 'Old and brittle DPC',
           'cb_bridged_dpcSecond': 'Bridged DPC',
           'cb_defective_drainage': 'Defective drainage',
-          'cb_other_1030': 'Other',
         },
       );
-      _addOther(answers, 'cb_other_1030', 'et_other_722', causes);
+      _addOtherText(answers, 'cb_other_1030', ['et_other_722'], causes);
       if (causes.isNotEmpty) {
         risingPhrase = _sub(
                 '{WALLS_DAMP_TYPE_PRESENT}', '{WALLS_DAMP_TYPE_PRESENT_RISING}')
@@ -4580,45 +4953,48 @@ class InspectionPhraseEngine {
 
   List<String> _mainWallsRemovedWall(Map<String, String> answers) {
     final locations = _labelsFor(
-      ['cb_lounge', 'cb_kitchen', 'cb_bedroom', 'cb_other_1020'],
+      ['cb_lounge', 'cb_kitchen', 'cb_bedroom'],
       answers,
       {
         'cb_lounge': 'Lounge',
         'cb_kitchen': 'Kitchen',
         'cb_bedroom': 'Bedroom',
-        'cb_other_1020': 'Other',
       },
     );
     if (_isChecked(answers['cb_other_1020'])) {
-      final otherLocation = _firstNonEmpty(
-          answers, ['et_other_522', 'et_other_491', 'EtDescribeDefect']);
-      locations.add(otherLocation.isEmpty ? 'Other' : otherLocation);
+      final otherLocation = (answers['et_other_522'] ?? '').trim();
+      if (otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     }
     if (locations.isEmpty) return const [];
     final locationText = _toWords(locations).toLowerCase();
 
     if (_isChecked(answers['cb_defects_noted'])) {
       final defects = _labelsFor(
-        ['cb_distorted', 'cb_cracked', 'cb_poorly_supported', 'cb_other_518'],
+        ['cb_distorted', 'cb_cracked', 'cb_poorly_supported'],
         answers,
         {
           'cb_distorted': 'Distorted',
           'cb_cracked': 'Cracked',
           'cb_poorly_supported': 'Poorly supported walls',
-          'cb_other_518': 'Other',
         },
       );
-      _addOther(answers, 'cb_other_518', 'et_other_491', defects);
-      final describe = (answers['EtDescribeDefect'] ?? '').trim();
-      if (describe.isNotEmpty) defects.add(describe);
-      if (defects.isEmpty) return const [];
-      var template = _sub('{E_MAIN_WALLS}', '{WALLLS_REMOVED_WALL_DEFECTS}');
-      if (template.isEmpty) return const [];
-      template = template
-          .replaceAll('{MAIN_WALL_REMOVED_LOCATION}', locationText)
-          .replaceAll(
-              '{MAIN_WALL_REMOVED_DEFECT}', _toWords(defects).toLowerCase());
-      return _split(_normalize(template));
+      if (_isChecked(answers['cb_other_518'])) {
+        final otherDefect = (answers['et_other_491'] ?? '').trim();
+        if (otherDefect.isNotEmpty) {
+          defects.add(otherDefect);
+        }
+      }
+      if (defects.isNotEmpty) {
+        var template = _sub('{E_MAIN_WALLS}', '{WALLLS_REMOVED_WALL_DEFECTS}');
+        if (template.isEmpty) return const [];
+        template = template
+            .replaceAll('{MAIN_WALL_REMOVED_LOCATION}', locationText)
+            .replaceAll(
+                '{MAIN_WALL_REMOVED_DEFECT}', _toWords(defects).toLowerCase());
+        return _split(_normalize(template));
+      }
     }
 
     var template = _sub('{E_MAIN_WALLS}', '{REMOVED_WALL_LOCATION}');
@@ -4629,7 +5005,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _mainWallsMovements(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_movement_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_movement_status', 'llMainContainer', 'actv_status'],
+      ),
+    );
     if (status.isEmpty) return const [];
 
     if (status.contains('none')) {
@@ -4664,8 +5045,7 @@ class InspectionPhraseEngine {
           'cb_main_building',
           'cb_back_addition',
           'cb_extension',
-          'cb_bay_window',
-          'cb_other_501'
+          'cb_bay_window'
         ],
         answers,
         {
@@ -4673,17 +5053,20 @@ class InspectionPhraseEngine {
           'cb_back_addition': 'Back addition',
           'cb_extension': 'Extension',
           'cb_bay_window': 'Bay window',
-          'cb_other_501': 'Other',
         },
       );
-      _addOther(answers, 'cb_other_501', 'et_other_406', locations);
+      if (_isChecked(answers['cb_other_501'])) {
+        final otherLocation = (answers['et_other_406'] ?? '').trim();
+        if (otherLocation.isNotEmpty) {
+          locations.add(otherLocation);
+        }
+      }
       final causes = _labelsFor(
         [
           'cb_settlement',
           'cb_subsidence',
           'cb_point_loading',
-          'cb_wall_tie_rust',
-          'cb_other_682'
+          'cb_wall_tie_rust'
         ],
         answers,
         {
@@ -4691,10 +5074,14 @@ class InspectionPhraseEngine {
           'cb_subsidence': 'Subsidence',
           'cb_point_loading': 'Point loading',
           'cb_wall_tie_rust': 'Wall tie rust',
-          'cb_other_682': 'Other',
         },
       );
-      _addOther(answers, 'cb_other_682', 'et_other_884', causes);
+      if (_isChecked(answers['cb_other_682'])) {
+        final otherCause = (answers['et_other_884'] ?? '').trim();
+        if (otherCause.isNotEmpty) {
+          causes.add(otherCause);
+        }
+      }
       if (walls.isEmpty || locations.isEmpty || causes.isEmpty) return const [];
       var template = _sub(
           '{MAIN_WALL_MOVEMENTS_TYPE}', '{MAIN_WALL_MOVEMENTS_TYPE_RECENT}');
@@ -4724,8 +5111,7 @@ class InspectionPhraseEngine {
           'cb_main_building_92',
           'cb_back_addition_19',
           'cb_extension_45',
-          'cb_bay_window_35',
-          'cb_other_694'
+          'cb_bay_window_35'
         ],
         answers,
         {
@@ -4733,10 +5119,14 @@ class InspectionPhraseEngine {
           'cb_back_addition_19': 'Back addition',
           'cb_extension_45': 'Extension',
           'cb_bay_window_35': 'Bay window',
-          'cb_other_694': 'Other',
         },
       );
-      _addOther(answers, 'cb_other_694', 'et_other_425', locations);
+      if (_isChecked(answers['cb_other_694'])) {
+        final otherLocation = (answers['et_other_425'] ?? '').trim();
+        if (otherLocation.isNotEmpty) {
+          locations.add(otherLocation);
+        }
+      }
       if (walls.isEmpty || locations.isEmpty) return const [];
       var template = _sub(
           '{MAIN_WALL_MOVEMENTS_TYPE}', '{MAIN_WALL_MOVEMENTS_TYPE_RECURRENT}');
@@ -4754,34 +5144,36 @@ class InspectionPhraseEngine {
 
   List<String> _mainWallRepairThinSlim(Map<String, String> answers) {
     final walls = _labelsFor(
-      ['cb_front', 'cb_side', 'cb_rear', 'cb_other_608'],
+      ['cb_front', 'cb_side', 'cb_rear'],
       answers,
       {
         'cb_front': 'Front',
         'cb_side': 'Side',
         'cb_rear': 'Rear',
-        'cb_other_608': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_608', 'et_other_752', walls);
+    if (_isChecked(answers['cb_other_608'])) {
+      final otherWall = (answers['et_other_752'] ?? '').trim();
+      if (otherWall.isNotEmpty) {
+        walls.add(otherWall);
+      }
+    }
     final locations = _labelsFor(
-      [
-        'cb_main_building',
-        'cb_back_addition',
-        'cb_extension',
-        'cb_bay_window',
-        'cb_other_423'
-      ],
+      ['cb_main_building', 'cb_back_addition', 'cb_extension', 'cb_bay_window'],
       answers,
       {
         'cb_main_building': 'Main building',
         'cb_back_addition': 'Back addition',
         'cb_extension': 'Extension',
         'cb_bay_window': 'Bay window',
-        'cb_other_423': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_423', 'et_other_883', locations);
+    if (_isChecked(answers['cb_other_423'])) {
+      final otherLocation = (answers['et_other_883'] ?? '').trim();
+      if (otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
+    }
     if (walls.isEmpty || locations.isEmpty) return const [];
     var template = _sub('{E_MAIN_WALL_REPAIR}', '{WALL_THIN_SLIM_WALL}');
     if (template.isEmpty) return const [];
@@ -4820,9 +5212,10 @@ class InspectionPhraseEngine {
   }
 
   List<String> _mainWallRepairSpalling(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
-    final isNow =
-        condition.contains('now') || _isChecked(answers['cb_causing_damp']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
+    final isNow = condition.contains('now');
 
     final walls = _labelsFor(
       isNow
@@ -4844,15 +5237,13 @@ class InspectionPhraseEngine {
               'cb_main_building_47',
               'cb_back_addition_21',
               'cb_extension_36',
-              'cb_bay_window_50',
-              'cb_other_299'
+              'cb_bay_window_50'
             ]
           : [
               'cb_main_building',
               'cb_back_addition',
               'cb_extension',
-              'cb_bay_window',
-              'cb_other_344'
+              'cb_bay_window'
             ],
       answers,
       {
@@ -4860,18 +5251,22 @@ class InspectionPhraseEngine {
         'cb_back_addition': 'Back addition',
         'cb_extension': 'Extension',
         'cb_bay_window': 'Bay window',
-        'cb_other_344': 'Other',
         'cb_main_building_47': 'Main building',
         'cb_back_addition_21': 'Back addition',
         'cb_extension_36': 'Extension',
         'cb_bay_window_50': 'Bay window',
-        'cb_other_299': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_299', 'et_other_455', locations);
+      final otherLocation = (answers['et_other_455'] ?? '').trim();
+      if (_isChecked(answers['cb_other_299']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     } else {
-      _addOther(answers, 'cb_other_344', 'et_other_651', locations);
+      final otherLocation = (answers['et_other_651'] ?? '').trim();
+      if (_isChecked(answers['cb_other_344']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     }
 
     if (walls.isEmpty || locations.isEmpty) return const [];
@@ -4889,9 +5284,10 @@ class InspectionPhraseEngine {
   }
 
   List<String> _mainWallRepairRender(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
-    final isNow =
-        condition.contains('now') || _isChecked(answers['cb_causing_damp']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
+    final isNow = condition.contains('now');
 
     final walls = _labelsFor(
       isNow
@@ -4913,15 +5309,13 @@ class InspectionPhraseEngine {
               'cb_main_building_87',
               'cb_back_addition_36',
               'cb_extension_15',
-              'cb_bay_window_24',
-              'cb_other_632'
+              'cb_bay_window_24'
             ]
           : [
               'cb_main_building',
               'cb_back_addition',
               'cb_extension',
-              'cb_bay_window',
-              'cb_other_312'
+              'cb_bay_window'
             ],
       answers,
       {
@@ -4929,50 +5323,48 @@ class InspectionPhraseEngine {
         'cb_back_addition': 'Back addition',
         'cb_extension': 'Extension',
         'cb_bay_window': 'Bay window',
-        'cb_other_312': 'Other',
         'cb_main_building_87': 'Main building',
         'cb_back_addition_36': 'Back addition',
         'cb_extension_15': 'Extension',
         'cb_bay_window_24': 'Bay window',
-        'cb_other_632': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_632', 'et_other_430', locations);
+      final otherLocation = (answers['et_other_430'] ?? '').trim();
+      if (_isChecked(answers['cb_other_632']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     } else {
-      _addOther(answers, 'cb_other_312', 'et_other_575', locations);
+      final otherLocation = (answers['et_other_575'] ?? '').trim();
+      if (_isChecked(answers['cb_other_312']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     }
 
     final defects = _labelsFor(
       isNow
-          ? [
-              'cb_cracked_101',
-              'cb_loose_28',
-              'cb_missing_in_places_44',
-              'cb_other_415'
-            ]
-          : [
-              'cb_cracked_96',
-              'cb_loose_91',
-              'cb_missing_in_places_63',
-              'cb_other_868'
-            ],
+          ? ['cb_cracked_101', 'cb_loose_28', 'cb_missing_in_places_44']
+          : ['cb_cracked_96', 'cb_loose_91', 'cb_missing_in_places_63'],
       answers,
       {
         'cb_cracked_96': 'Cracked',
         'cb_loose_91': 'Loose',
         'cb_missing_in_places_63': 'Missing in places',
-        'cb_other_868': 'Other',
         'cb_cracked_101': 'Cracked',
         'cb_loose_28': 'Loose',
         'cb_missing_in_places_44': 'Missing in places',
-        'cb_other_415': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_415', 'et_other_264', defects);
+      final otherDefect = (answers['et_other_264'] ?? '').trim();
+      if (_isChecked(answers['cb_other_415']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     } else {
-      _addOther(answers, 'cb_other_868', 'et_other_857', defects);
+      final otherDefect = (answers['et_other_857'] ?? '').trim();
+      if (_isChecked(answers['cb_other_868']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     }
 
     if (walls.isEmpty || locations.isEmpty || defects.isEmpty) return const [];
@@ -5001,7 +5393,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _mainWallRepairPointing(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     final isNow = condition.contains('now');
 
     final walls = _labelsFor(
@@ -5024,15 +5418,13 @@ class InspectionPhraseEngine {
               'cb_main_building_67',
               'cb_back_addition_32',
               'cb_extension_63',
-              'cb_bay_window_86',
-              'cb_other_318'
+              'cb_bay_window_86'
             ]
           : [
               'cb_main_building',
               'cb_back_addition',
               'cb_extension',
-              'cb_bay_window',
-              'cb_other_423'
+              'cb_bay_window'
             ],
       answers,
       {
@@ -5040,38 +5432,44 @@ class InspectionPhraseEngine {
         'cb_back_addition': 'Back addition',
         'cb_extension': 'Extension',
         'cb_bay_window': 'Bay window',
-        'cb_other_423': 'Other',
         'cb_main_building_67': 'Main building',
         'cb_back_addition_32': 'Back addition',
         'cb_extension_63': 'Extension',
         'cb_bay_window_86': 'Bay window',
-        'cb_other_318': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_318', 'et_other_806', locations);
+      final otherLocation = (answers['et_other_806'] ?? '').trim();
+      if (_isChecked(answers['cb_other_318']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     } else {
-      _addOther(answers, 'cb_other_423', 'et_other_883', locations);
+      final otherLocation = (answers['et_other_883'] ?? '').trim();
+      if (_isChecked(answers['cb_other_423']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     }
 
     final defects = _labelsFor(
-      isNow
-          ? ['cb_eroded_49', 'cb_loosened_83', 'cb_other_now']
-          : ['cb_eroded', 'cb_loosened', 'cb_other_soon'],
+      isNow ? ['cb_eroded_49', 'cb_loosened_83'] : ['cb_eroded', 'cb_loosened'],
       answers,
       {
         'cb_eroded': 'Eroded',
         'cb_loosened': 'Loosened',
-        'cb_other_soon': 'Other',
         'cb_eroded_49': 'Eroded',
         'cb_loosened_83': 'Loosened',
-        'cb_other_now': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_now', 'et_other_now', defects);
+      final otherDefect = (answers['et_other_now'] ?? '').trim();
+      if (_isChecked(answers['cb_other_now']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     } else {
-      _addOther(answers, 'cb_other_soon', 'et_other_soon', defects);
+      final otherDefect = (answers['et_other_soon'] ?? '').trim();
+      if (_isChecked(answers['cb_other_soon']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     }
 
     if (walls.isEmpty || locations.isEmpty || defects.isEmpty) return const [];
@@ -5093,29 +5491,35 @@ class InspectionPhraseEngine {
 
   List<String> _mainWallRepairLintel(
       String screenId, Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     final isNow = condition.contains('now');
 
     final walls = _labelsFor(
       isNow
-          ? ['cb_front_27', 'cb_side_17', 'cb_rear_30', 'cb_other_6082']
-          : ['cb_front', 'cb_side', 'cb_rear', 'cb_other_608'],
+          ? ['cb_front_27', 'cb_side_17', 'cb_rear_30']
+          : ['cb_front', 'cb_side', 'cb_rear'],
       answers,
       {
         'cb_front': 'Front',
         'cb_side': 'Side',
         'cb_rear': 'Rear',
-        'cb_other_608': 'Other',
         'cb_front_27': 'Front',
         'cb_side_17': 'Side',
         'cb_rear_30': 'Rear',
-        'cb_other_6082': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_6082', 'et_other_7522', walls);
+      final otherWall = (answers['et_other_7522'] ?? '').trim();
+      if (_isChecked(answers['cb_other_6082']) && otherWall.isNotEmpty) {
+        walls.add(otherWall);
+      }
     } else {
-      _addOther(answers, 'cb_other_608', 'et_other_752', walls);
+      final otherWall = (answers['et_other_752'] ?? '').trim();
+      if (_isChecked(answers['cb_other_608']) && otherWall.isNotEmpty) {
+        walls.add(otherWall);
+      }
     }
 
     final locations = _labelsFor(
@@ -5124,15 +5528,13 @@ class InspectionPhraseEngine {
               'cb_main_building_67',
               'cb_back_addition_32',
               'cb_extension_63',
-              'cb_bay_window_86',
-              'cb_other_318'
+              'cb_bay_window_86'
             ]
           : [
               'cb_main_building',
               'cb_back_addition',
               'cb_extension',
-              'cb_bay_window',
-              'cb_other_423'
+              'cb_bay_window'
             ],
       answers,
       {
@@ -5140,18 +5542,22 @@ class InspectionPhraseEngine {
         'cb_back_addition': 'Back addition',
         'cb_extension': 'Extension',
         'cb_bay_window': 'Bay window',
-        'cb_other_423': 'Other',
         'cb_main_building_67': 'Main building',
         'cb_back_addition_32': 'Back addition',
         'cb_extension_63': 'Extension',
         'cb_bay_window_86': 'Bay window',
-        'cb_other_318': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_318', 'et_other_806', locations);
+      final otherLocation = (answers['et_other_806'] ?? '').trim();
+      if (_isChecked(answers['cb_other_318']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     } else {
-      _addOther(answers, 'cb_other_423', 'et_other_883', locations);
+      final otherLocation = (answers['et_other_883'] ?? '').trim();
+      if (_isChecked(answers['cb_other_423']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     }
 
     final defects = _labelsFor(
@@ -5160,40 +5566,37 @@ class InspectionPhraseEngine {
               'cb_eroded_49',
               'cb_loosened_83',
               'cb_distorted_now',
-              'cb_bulging_now',
-              'cb_other_6083'
+              'cb_bulging_now'
             ]
-          : [
-              'cb_eroded',
-              'cb_loosened',
-              'cb_distorted',
-              'cb_bulging',
-              'cb_other_6081'
-            ],
+          : ['cb_eroded', 'cb_loosened', 'cb_distorted', 'cb_bulging'],
       answers,
       {
         'cb_eroded': 'Damaged',
         'cb_loosened': 'Cracked',
         'cb_distorted': 'Distorted',
         'cb_bulging': 'Bulging',
-        'cb_other_6081': 'Other',
         'cb_eroded_49': 'Badly damaged',
         'cb_loosened_83': 'Badly cracked',
         'cb_distorted_now': 'Very distorted',
         'cb_bulging_now': 'Allowing dampness',
-        'cb_other_6083': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_6083', 'et_other_7523', defects);
+      final otherDefect = (answers['et_other_7523'] ?? '').trim();
+      if (_isChecked(answers['cb_other_6083']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     } else {
-      _addOther(answers, 'cb_other_6081', 'et_other_7521', defects);
+      final otherDefect = (answers['et_other_7521'] ?? '').trim();
+      if (_isChecked(answers['cb_other_6081']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     }
 
     var opening = _cleanLower(answers[
         isNow ? 'actv_condition_opening_now' : 'actv_condition_opening_soon']);
     if (opening.isEmpty) {
-      opening = screenId.contains('__door') ? 'door' : 'windows';
+      opening = screenId.contains('__door') ? 'door' : 'window';
     }
     if (walls.isEmpty || locations.isEmpty || defects.isEmpty) return const [];
     var template = _sub('{E_MAIN_WALL_REPAIR}', '{WALL_LINTEL_REPAIR}');
@@ -5213,29 +5616,35 @@ class InspectionPhraseEngine {
   }
 
   List<String> _mainWallRepairWindowSills(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     final isNow = condition.contains('now');
 
     final walls = _labelsFor(
       isNow
-          ? ['cb_front_27', 'cb_side_17', 'cb_rear_30', 'cb_other_6082']
-          : ['cb_front', 'cb_side', 'cb_rear', 'cb_other_608'],
+          ? ['cb_front_27', 'cb_side_17', 'cb_rear_30']
+          : ['cb_front', 'cb_side', 'cb_rear'],
       answers,
       {
         'cb_front': 'Front',
         'cb_side': 'Side',
         'cb_rear': 'Rear',
-        'cb_other_608': 'Other',
         'cb_front_27': 'Front',
         'cb_side_17': 'Side',
         'cb_rear_30': 'Rear',
-        'cb_other_6082': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_6082', 'et_other_7522', walls);
+      final otherWall = (answers['et_other_7522'] ?? '').trim();
+      if (_isChecked(answers['cb_other_6082']) && otherWall.isNotEmpty) {
+        walls.add(otherWall);
+      }
     } else {
-      _addOther(answers, 'cb_other_608', 'et_other_752', walls);
+      final otherWall = (answers['et_other_752'] ?? '').trim();
+      if (_isChecked(answers['cb_other_608']) && otherWall.isNotEmpty) {
+        walls.add(otherWall);
+      }
     }
 
     final locations = _labelsFor(
@@ -5244,15 +5653,13 @@ class InspectionPhraseEngine {
               'cb_main_building_67',
               'cb_back_addition_32',
               'cb_extension_63',
-              'cb_bay_window_86',
-              'cb_other_318'
+              'cb_bay_window_86'
             ]
           : [
               'cb_main_building',
               'cb_back_addition',
               'cb_extension',
-              'cb_bay_window',
-              'cb_other_423'
+              'cb_bay_window'
             ],
       answers,
       {
@@ -5260,18 +5667,22 @@ class InspectionPhraseEngine {
         'cb_back_addition': 'Back addition',
         'cb_extension': 'Extension',
         'cb_bay_window': 'Bay window',
-        'cb_other_423': 'Other',
         'cb_main_building_67': 'Main building',
         'cb_back_addition_32': 'Back addition',
         'cb_extension_63': 'Extension',
         'cb_bay_window_86': 'Bay window',
-        'cb_other_318': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_318', 'et_other_806', locations);
+      final otherLocation = (answers['et_other_806'] ?? '').trim();
+      if (_isChecked(answers['cb_other_318']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     } else {
-      _addOther(answers, 'cb_other_423', 'et_other_883', locations);
+      final otherLocation = (answers['et_other_883'] ?? '').trim();
+      if (_isChecked(answers['cb_other_423']) && otherLocation.isNotEmpty) {
+        locations.add(otherLocation);
+      }
     }
 
     final defects = _labelsFor(
@@ -5280,27 +5691,30 @@ class InspectionPhraseEngine {
               'cb_eroded_49',
               'cb_loosened_83',
               'cb_very_distorted_now',
-              'cb_allowing_dampness_now',
-              'cb_other_6083'
+              'cb_allowing_dampness_now'
             ]
-          : ['cb_loosened', 'cb_cracked_soon', 'cb_eroded', 'cb_other_6081'],
+          : ['cb_loosened', 'cb_cracked_soon', 'cb_eroded'],
       answers,
       {
         'cb_loosened': 'Damaged',
         'cb_cracked_soon': 'Cracked',
         'cb_eroded': 'Eroded',
-        'cb_other_6081': 'Other',
         'cb_eroded_49': 'Damaged',
         'cb_loosened_83': 'Unstable',
         'cb_very_distorted_now': 'Very distorted',
         'cb_allowing_dampness_now': 'Allowing dampness',
-        'cb_other_6083': 'Other',
       },
     );
     if (isNow) {
-      _addOther(answers, 'cb_other_6083', 'et_other_7523', defects);
+      final otherDefect = (answers['et_other_7523'] ?? '').trim();
+      if (_isChecked(answers['cb_other_6083']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     } else {
-      _addOther(answers, 'cb_other_6081', 'et_other_7521', defects);
+      final otherDefect = (answers['et_other_7521'] ?? '').trim();
+      if (_isChecked(answers['cb_other_6081']) && otherDefect.isNotEmpty) {
+        defects.add(otherDefect);
+      }
     }
 
     if (walls.isEmpty || locations.isEmpty || defects.isEmpty) return const [];
@@ -7449,26 +7863,33 @@ class InspectionPhraseEngine {
           'cb_floors_not_safe_to_walk_on',
           'cb_some_or_all_of_the_floors_are_boarded',
           'cb_excessive_storage_of_personal_goods',
+          'ch3',
+          'ch4',
+          'ch5',
+          'ch6',
         ],
         answers,
         {
-          'cb_statuslimited_roof_height': 'limited roof height',
-          'cb_floors_not_safe_to_walk_on': 'floors not safe to walk on',
+          'cb_statuslimited_roof_height': 'Limited roof height',
+          'cb_floors_not_safe_to_walk_on': 'The floors are not safe to walk on',
           'cb_some_or_all_of_the_floors_are_boarded':
-              'some or all of the floors are boarded',
+              'Some or all of the floors are boarded',
           'cb_excessive_storage_of_personal_goods':
-              'excessive storage of personal goods',
+              'Excessive storage of personal goods',
+          'ch3': 'No rear access',
+          'ch4': 'Airport',
+          'ch5': 'Motor way',
+          'ch6': 'Other',
         },
       );
+      _addOther(answers, 'ch6', 'etGroundTypeOther', reasons);
 
       var roof = _sub('{F_INSIDE_THE_PROPERTY}',
           '{LIMITATIONS_ROOF_TIMBER_NOT_FULLY_INSPECTED}');
-      if (roof.isNotEmpty) {
+      if (roof.isNotEmpty && reasons.isNotEmpty) {
         roof = roof.replaceAll(
           '{LIM_RT_NOT_FULLY_INSPECTED_REASON}',
-          reasons.isEmpty
-              ? 'access restrictions'
-              : _toWords(reasons).toLowerCase(),
+          _toWords(reasons),
         );
         phrases.addAll(_split(_normalize(roof)));
       }
@@ -7486,7 +7907,12 @@ class InspectionPhraseEngine {
 
   List<String> _insideRoofWeatherCondition(Map<String, String> answers) {
     final phrases = <String>[];
-    final weather = _cleanLower(answers['actv_weather_condition']);
+    final weather = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_weather_condition', 'llMainContainer'],
+      ),
+    );
     if (weather.contains('wet')) {
       final template = _sub('{F_ROOF_STRUCTURE}', '{WEATHER_CONDITION_WET}');
       if (template.isNotEmpty) {
@@ -7543,7 +7969,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _insideRoofAbout(Map<String, String> answers) {
-    final constructionValue = (answers['actv_construction'] ?? '').trim();
+    final constructionValue =
+        _firstNonEmpty(answers, const ['actv_construction', 'llMainContainer'])
+            .trim();
     final underliningValue = _cleanLower(answers['actv_underlining']);
     final insulationValue = _cleanLower(answers['actv_insulation']);
     final conditionValue =
@@ -7560,10 +7988,10 @@ class InspectionPhraseEngine {
 
     String underliningText = '';
     if (underliningValue.isNotEmpty) {
-      if (underliningValue.contains('no')) {
+      if (underliningValue == 'no underlining') {
         underliningText = _sub(
             '{F_ABOUT_ROOF_STRUCTURE}', '{UNDERLINING_STATUS_NO_UNDERLINING}');
-      } else if (underliningValue.contains('underlining')) {
+      } else if (underliningValue == 'underlining') {
         var template = _sub(
             '{F_ABOUT_ROOF_STRUCTURE}', '{UNDERLINING_STATUS_UNDERLINING_OK}');
         if (template.isNotEmpty) {
@@ -7637,10 +8065,10 @@ class InspectionPhraseEngine {
     }
 
     String insulationText = '';
-    if (insulationValue.contains('adequate')) {
+    if (insulationValue == 'adequate') {
       insulationText =
           _sub('{F_ABOUT_ROOF_STRUCTURE}', '{INSULATION_ADEQUATE}');
-    } else if (insulationValue.contains('inadequate')) {
+    } else if (insulationValue == 'inadequate') {
       insulationText =
           _sub('{F_ABOUT_ROOF_STRUCTURE}', '{INSULATION_INADEQUATE}');
     }
@@ -7739,8 +8167,8 @@ class InspectionPhraseEngine {
     final tankCondition = (answers['actv_tank_condition'] ?? '').trim();
 
     String materialLocationText = '';
-    if (materials.isNotEmpty &&
-        locations.isNotEmpty &&
+    if (materials.isNotEmpty ||
+        locations.isNotEmpty ||
         tankCondition.isNotEmpty) {
       var template = _sub(
           '{F_ROOF_STRUCTURE_WATER_TANK}', '{WATERL_TANK_MATERIAL_LOCATION}');
@@ -7753,7 +8181,8 @@ class InspectionPhraseEngine {
     }
 
     String insulationOkText = '';
-    if (_isChecked(answers['cb_insulation'])) {
+    if (_isChecked(answers['cb_not_insulated']) &&
+        _isChecked(answers['cb_insulation'])) {
       insulationOkText =
           _sub('{F_ROOF_STRUCTURE_WATER_TANK}', '{INSULATION_STATUS_OK}');
     }
@@ -7770,13 +8199,15 @@ class InspectionPhraseEngine {
     }
 
     String noInsulationText = '';
-    if (_isChecked(answers['cb_not_insulation'])) {
+    if (_isChecked(answers['cb_not_insulated']) &&
+        _isChecked(answers['cb_not_insulation'])) {
       noInsulationText = _sub(
           '{F_ROOF_STRUCTURE_WATER_TANK}', '{INSULATION_STATUS_NO_INSULATION}');
     }
 
     String notAdequatelyInsulatedText = '';
-    if (_isChecked(answers['cb_not_adequately_insulated'])) {
+    if (_isChecked(answers['cb_not_insulated']) &&
+        _isChecked(answers['cb_not_adequately_insulated'])) {
       notAdequatelyInsulatedText = _sub('{F_ROOF_STRUCTURE_WATER_TANK}',
           '{INSULATION_STATUS_NOT_ADEQUATELY_INSULATED}');
     }
@@ -7813,7 +8244,7 @@ class InspectionPhraseEngine {
       );
       _addOther(answers, 'cb_other_1057', 'et_other_141', disusedLocations);
 
-      if (disusedMaterials.isNotEmpty && disusedLocations.isNotEmpty) {
+      if (disusedMaterials.isNotEmpty || disusedLocations.isNotEmpty) {
         var template =
             _sub('{F_ROOF_STRUCTURE_WATER_TANK}', '{DISUSED_WATER_TANK}');
         if (template.isNotEmpty) {
@@ -7864,7 +8295,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _insideRoofRepairTimberStructure(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
 
     if (status.contains('soon')) {
@@ -7942,7 +8375,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _insideRoofRepairInsectInfestation(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_insect_infestation']);
+    final status = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_insect_infestation', 'llMainContainer'],
+      ),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('none')) {
       return _split(_normalize(_sub(
@@ -7960,7 +8398,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _insideRoofRepairTimberRot(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_insect_infestation']);
+    final status = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_insect_infestation', 'llMainContainer'],
+      ),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('minor')) {
       return _split(_normalize(
@@ -7993,7 +8436,9 @@ class InspectionPhraseEngine {
 
   List<String> _insideRoofRepairRemovedChimneyBreast(
       Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('not')) {
       return _split(_normalize(_sub('{F_ABOUT_ROOF_STRUCTURE}',
@@ -8037,7 +8482,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _insideRoofRepairPartyWalls(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_insect_infestation']);
+    final condition = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_insect_infestation', 'llMainContainer'],
+      ),
+    );
     if (condition.isEmpty) return const [];
     if (condition.contains('partly')) {
       return _split(_normalize(_sub('{F_ABOUT_ROOF_STRUCTURE}',
@@ -8289,7 +8739,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _ceilingsRepairCeilings(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
 
     if (status.contains('now')) {
@@ -8443,7 +8895,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _floorsAbout(Map<String, String> answers) {
-    final construction = _cleanLower(answers['actv_construction']);
+    final construction = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_construction', 'llMainContainer']),
+    );
     String constructionText = '';
     if (construction.contains('all solid')) {
       constructionText = _sub('{F_FLOORS}', '{FLOOR_CONSTRUCTION_ALL_SOLID}');
@@ -8569,7 +9023,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _floorsCreaking(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('none')) {
       final template = _sub('{F_FLOORS}', '{CREAKING_NONE}');
@@ -8665,7 +9121,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _floorsTimberDecay(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('none')) {
       final template = _sub('{F_FLOORS}', '{TIMBER_DECAY_NONE}');
@@ -8700,7 +9158,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _floorsTimberInfestation(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('none')) {
       final template = _sub('{F_FLOORS}', '{TIMBER_INFESTAION_NONE}');
@@ -8735,7 +9195,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _floorsDampness(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('known')) {
       final locations = _labelsFor(
@@ -8789,7 +9251,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _floorsVentilation(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     if (condition.contains('ok')) {
       final template = _sub('{F_FLOORS}', '{FLOOR_VENTILATION_OK}');
@@ -8809,7 +9273,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _floorsRepairFloorRepair(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_repair_type']);
+    final status = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_repair_type', 'llMainContainer'],
+      ),
+    );
     if (status.isEmpty) return const [];
 
     if (status.contains('now')) {
@@ -8985,7 +9454,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _floorsRepairSloping(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('no issue')) {
       final locations = _labelsFor(
@@ -9026,7 +9497,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _floorsRepairUneven(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('minor')) {
       final template = _sub('{F_FLOORS}', '{REPAIR_UNEVEN_FLOOR_MINOR}');
@@ -9172,8 +9645,9 @@ class InspectionPhraseEngine {
   List<String> _fireplacesOther(Map<String, String> answers) {
     final phrases = <String>[];
     final locations = _fireplacesLocations(answers);
-    final name = (answers['other'] ?? '').trim();
-    if (locations.isNotEmpty) {
+    final name = _firstNonEmpty(
+        answers, const ['et_other_405', 'other', 'llMainContainer']).trim();
+    if (locations.isNotEmpty && name.isNotEmpty) {
       var template = _sub('{F_FIREPLACES_AND_CHIMNEYS}', '{OTHER_LOCATION}');
       if (template.isNotEmpty) {
         template = template
@@ -9195,7 +9669,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _fireplacesRepairFireplaces(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('repair soon')) {
       final floorLocation = _labelsFor(
@@ -9405,7 +9881,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _fireplacesBlockedFireplace(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
     if (status.contains('unvented')) {
       final floorLocation = _labelsFor(
@@ -9497,7 +9975,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _fireplacesRemovedCb(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     if (condition.contains('ok')) {
       final floorLocation = _labelsFor(
@@ -9602,7 +10082,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _fireplacesBoilerFlue(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     final locations = _labelsFor(
       ['cb_ground', 'cb_first', 'cb_second', 'cb_garage', 'cb_other_1010'],
       answers,
@@ -9785,7 +10267,10 @@ class InspectionPhraseEngine {
     _addOther(answers, 'cb_other_343', 'et_other_745', cabinets);
 
     final condition = _cleanLower(answers['android_material_design_spinner3']);
-    if (locations.isEmpty || worktops.isEmpty || cabinets.isEmpty) {
+    if (locations.isEmpty ||
+        worktops.isEmpty ||
+        cabinets.isEmpty ||
+        condition.isEmpty) {
       return const [];
     }
 
@@ -9795,15 +10280,66 @@ class InspectionPhraseEngine {
         .replaceAll('{BIF_LOCATION}', _toWords(locations).toLowerCase())
         .replaceAll('{BIF_WORKTOPS}', _toWords(worktops).toLowerCase())
         .replaceAll('{BIF_WALL_CABINET}', _toWords(cabinets).toLowerCase())
-        .replaceAll(
-            '{BIF_CONDITION}', condition.isNotEmpty ? condition : '...');
+        .replaceAll('{BIF_CONDITION}', condition);
     return _split(_normalize(template));
   }
 
   List<String> _builtInRepairFittings(Map<String, String> answers) {
-    final repairType = _cleanLower(answers['actv_repair_type']);
+    final repairType = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_repair_type', 'llMainContainer'],
+      ),
+    );
     if (repairType.isEmpty) return const [];
     if (repairType.contains('repair now')) {
+      final locations = _labelsFor(
+        ['cb_kitchen', 'cb_utility_room', 'cb_other_672'],
+        answers,
+        {
+          'cb_kitchen': 'kitchen',
+          'cb_utility_room': 'utility room',
+          'cb_other_672': 'other',
+        },
+      );
+      _addOther(answers, 'cb_other_672', 'et_other_361', locations);
+      final defects = _labelsFor(
+        [
+          'cb_badly_worn_16',
+          'cb_badly_damaged_94',
+          'cb_damp_95',
+          'cb_partly_rotted_19',
+          'cb_insect_infested_26'
+        ],
+        answers,
+        {
+          'cb_badly_worn_16': 'badly worn',
+          'cb_badly_damaged_94': 'badly damaged',
+          'cb_damp_95': 'damp',
+          'cb_partly_rotted_19': 'partly rotted',
+          'cb_insect_infested_26': 'insect infested',
+        },
+      );
+      if (locations.isEmpty || defects.isEmpty) return const [];
+      var template = _sub('{F_BUILT_IN_FITTINGS}', '{REPAIR_FITTING_NOW}');
+      if (template.isEmpty) return const [];
+      template = template
+          .replaceAll(
+              '{BIFR_RF_NOW_LOCATION}', _toWords(locations).toLowerCase())
+          .replaceAll('{BIFR_RF_NOW_DEFECT}', _toWords(defects).toLowerCase());
+      final phrases = _split(_normalize(template));
+      if (defects
+          .any((defect) => defect.toLowerCase().contains('partly rotted'))) {
+        final rotAdvice =
+            _sub('{F_BUILT_IN_FITTINGS}', '{IF_PARTLY_ROTTED_IS_SELECTED}');
+        if (rotAdvice.isNotEmpty) {
+          phrases.addAll(_split(_normalize(rotAdvice)));
+        }
+      }
+      return phrases;
+    }
+
+    if (repairType.contains('repair soon')) {
       final locations = _labelsFor(
         ['cb_kitchen_51', 'cb_utility_room_15', 'cb_other_332'],
         answers,
@@ -9834,53 +10370,6 @@ class InspectionPhraseEngine {
         },
       );
       _addOther(answers, 'cb_other_818', 'et_other_180', defects);
-      if (locations.isEmpty || defects.isEmpty) return const [];
-      var template = _sub('{F_BUILT_IN_FITTINGS}', '{REPAIR_FITTING_NOW}');
-      if (template.isEmpty) return const [];
-      template = template
-          .replaceAll(
-              '{BIFR_RF_NOW_LOCATION}', _toWords(locations).toLowerCase())
-          .replaceAll('{BIFR_RF_NOW_DEFECT}', _toWords(defects).toLowerCase());
-      final phrases = _split(_normalize(template));
-      if (defects
-          .any((defect) => defect.toLowerCase().contains('partly rotted'))) {
-        final rotAdvice =
-            _sub('{F_BUILT_IN_FITTINGS}', '{IF_PARTLY_ROTTED_IS_SELECTED}');
-        if (rotAdvice.isNotEmpty) {
-          phrases.addAll(_split(_normalize(rotAdvice)));
-        }
-      }
-      return phrases;
-    }
-
-    if (repairType.contains('repair soon')) {
-      final locations = _labelsFor(
-        ['cb_kitchen', 'cb_utility_room', 'cb_other_672'],
-        answers,
-        {
-          'cb_kitchen': 'kitchen',
-          'cb_utility_room': 'utility room',
-          'cb_other_672': 'other',
-        },
-      );
-      _addOther(answers, 'cb_other_672', 'et_other_361', locations);
-      final defects = _labelsFor(
-        [
-          'cb_badly_worn_16',
-          'cb_badly_damaged_94',
-          'cb_damp_95',
-          'cb_partly_rotted_19',
-          'cb_insect_infested_26'
-        ],
-        answers,
-        {
-          'cb_badly_worn_16': 'badly worn',
-          'cb_badly_damaged_94': 'badly damaged',
-          'cb_damp_95': 'damp',
-          'cb_partly_rotted_19': 'partly rotted',
-          'cb_insect_infested_26': 'insect infested',
-        },
-      );
       if (locations.isEmpty || defects.isEmpty) return const [];
       var template = _sub('{F_BUILT_IN_FITTINGS}', '{REPAIR_FITTING_SOON}');
       if (template.isEmpty) return const [];
@@ -10023,7 +10512,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _insideOtherCommunalArea(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
 
     if (status.contains('not')) {
@@ -10096,7 +10587,9 @@ class InspectionPhraseEngine {
     _addOther(answers, 'cb_other_570', 'et_other_904', defects);
 
     final condition = _cleanLower(answers['actv_condition']);
-    if (property.isEmpty || defects.isEmpty) return const [];
+    if (property.isEmpty || defects.isEmpty || condition.isEmpty) {
+      return const [];
+    }
 
     var template = _sub('{F_OTHER}', '{COMMUNAL_AREA_INSPECTED}');
     if (template.isEmpty) return const [];
@@ -10105,9 +10598,92 @@ class InspectionPhraseEngine {
             '{OTH_CA_INSPECTED_PROPERTY}', _toWords(property).toLowerCase())
         .replaceAll(
             '{OTH_CA_INSPECTED_DEFECT}', _toWords(defects).toLowerCase())
-        .replaceAll('{OTH_CA_INSPECTED_CONDITION}',
-            condition.isNotEmpty ? condition : '...');
+        .replaceAll('{OTH_CA_INSPECTED_CONDITION}', condition);
     return _split(_normalize(template));
+  }
+
+  List<String> _insideOtherLegacyCombined(
+    Map<String, String> answers, {
+    required bool isBasement,
+  }) {
+    final normalized = _normalizeLegacyInsideOtherAnswers(answers);
+    final phrases = <String>[
+      ..._insideOtherNoAccess(normalized, isBasement: isBasement),
+      ..._insideOtherNotInUse(normalized, isBasement: isBasement),
+      ..._insideOtherUsedAs(normalized, isBasement: isBasement),
+      ..._insideOtherFlooded(normalized, isBasement: isBasement),
+      ..._insideOtherDamp(normalized, isBasement: isBasement),
+      ..._insideOtherJoistsDecay(normalized, isBasement: isBasement),
+    ];
+
+    final legacyNotHabitableReason =
+        _cleanLower(normalized['actv_area_should_not_use_because_of_61']);
+    if (legacyNotHabitableReason.isNotEmpty) {
+      final subCode =
+          isBasement ? '{BASEMENT_NOT_HABITABLE}' : '{CELLAR_NOT_HABITABLE}';
+      final token =
+          isBasement ? '{OTH_BASEMENT_NH_BECAUSE}' : '{OTH_CELLAR_NH_BECAUSE}';
+      var template = _sub('{F_OTHER}', subCode);
+      if (template.isNotEmpty) {
+        template = template.replaceAll(token, legacyNotHabitableReason);
+        phrases.addAll(_split(_normalize(template)));
+      }
+    } else {
+      phrases
+          .addAll(_insideOtherNotHabitable(normalized, isBasement: isBasement));
+    }
+
+    return phrases;
+  }
+
+  Map<String, String> _normalizeLegacyInsideOtherAnswers(
+      Map<String, String> answers) {
+    final normalized = Map<String, String>.from(answers);
+
+    final noAccessOther = (normalized['et_other_117'] ?? '').trim();
+    if (_isChecked(normalized['cb_other_858']) || noAccessOther.isNotEmpty) {
+      normalized['cb_other_704'] = 'true';
+    }
+    if (noAccessOther.isNotEmpty) {
+      normalized['et_other_412'] = noAccessOther;
+    }
+
+    if (_isChecked(normalized['cb_to_the_lower_walls_of_24'])) {
+      normalized['cb_to_the_lower_walls_of'] = 'true';
+    }
+    if (_isChecked(normalized['cb_to_the_upper_walls_of_82'])) {
+      normalized['cb_to_the_upper_walls_of'] = 'true';
+    }
+    if (_isChecked(normalized['cb_throughout_66'])) {
+      normalized['cb_throughout'] = 'true';
+    }
+    if (_isChecked(normalized['cb_to_exposed_floor_joists_in_65'])) {
+      normalized['cb_to_exposed_floor_joists_in'] = 'true';
+    }
+
+    final dampOther = (normalized['et_other_889'] ?? '').trim();
+    if (_isChecked(normalized['cb_others_1073']) || dampOther.isNotEmpty) {
+      normalized['cb_others_389'] = 'true';
+    }
+    if (dampOther.isNotEmpty) {
+      normalized['et_others_471'] = dampOther;
+    }
+
+    if (_isChecked(normalized['cb_is_serious_damp'])) {
+      normalized['cb_serious_dump'] = 'true';
+    }
+    if (_isChecked(normalized['cb_is_joists_decay'])) {
+      normalized['cb_joists_decay'] = 'true';
+    }
+
+    final legacyStatus = _cleanLower(
+      _firstNonEmpty(normalized, const ['actv_status', 'llMainContainer']),
+    );
+    if (legacyStatus.contains('not') && legacyStatus.contains('use')) {
+      normalized['cb_not_in_use'] = 'true';
+    }
+
+    return normalized;
   }
 
   List<String> _insideOtherNoAccess(Map<String, String> answers,
@@ -10145,7 +10721,9 @@ class InspectionPhraseEngine {
 
   List<String> _insideOtherUsedAs(Map<String, String> answers,
       {required bool isBasement}) {
-    final usedAs = _cleanLower(answers['actv_used_as']);
+    final usedAs = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_used_as', 'llMainContainer']),
+    );
     final condition = _cleanLower(answers['actv_condition']);
     if (usedAs.isEmpty || condition.isEmpty) return const [];
     final subCode = isBasement ? '{BASEMENT_IN_USE}' : '{CELLAR_IN_USE}';
@@ -10196,7 +10774,12 @@ class InspectionPhraseEngine {
 
   List<String> _insideOtherFlooded(Map<String, String> answers,
       {required bool isBasement}) {
-    final flooded = _cleanLower(answers['actv_possible_flooded']);
+    final flooded = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_possible_flooded', 'llMainContainer'],
+      ),
+    );
     if (flooded.isEmpty) return const [];
     final subCode = isBasement ? '{BASEMENT_FLOODED}' : '{CELLAR_FLOODED}';
     var template = _sub('{F_OTHER}', subCode);
@@ -10262,7 +10845,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _insideOtherRepair(Map<String, String> answers) {
-    final repairType = _cleanLower(answers['actv_repair_type']);
+    final repairType = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_repair_type', 'llMainContainer'],
+      ),
+    );
     if (repairType.isEmpty) return const [];
 
     if (repairType.contains('soon')) {
@@ -10448,7 +11036,7 @@ class InspectionPhraseEngine {
     );
     _addOther(answers, 'cb_other_410', 'et_other_800', items);
     final condition = _cleanLower(answers['actv_condition']);
-    if (items.isEmpty) return const [];
+    if (items.isEmpty || condition.isEmpty) return const [];
     final phrases = <String>[];
     final template = _sub('{F_WOOD_WORK}', '{WOOD_WORK}');
     if (template.isNotEmpty) {
@@ -10457,8 +11045,7 @@ class InspectionPhraseEngine {
           _normalize(
             template
                 .replaceAll('{WW_WW_MADE_UP}', _toWords(items).toLowerCase())
-                .replaceAll('{WW_WW_CONDITION}',
-                    condition.isNotEmpty ? condition : '...'),
+                .replaceAll('{WW_WW_CONDITION}', condition),
           ),
         ),
       );
@@ -10467,7 +11054,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _woodWorkCupboards(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
+    final condition = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     if (condition.isEmpty) return const [];
     final phrases = <String>[];
     final template = _sub('{F_WOOD_WORK}', '{FITTED_BUILTIN_CUPBOARDS}');
@@ -10573,7 +11162,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _woodWorkRepair(Map<String, String> answers) {
-    final repairType = _cleanLower(answers['actv_repair_type']);
+    final repairType = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_repair_type', 'llMainContainer'],
+      ),
+    );
     if (repairType.isEmpty) return const [];
     if (repairType.contains('repair soon')) {
       final locations = _labelsFor(
@@ -10699,7 +11293,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _woodWorkRepairInfestation(Map<String, String> answers) {
-    final severity = _cleanLower(answers['actv_condition']);
+    final severity = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
+    );
     final parts = _labelsFor(
       [
         'cb_staircase',
@@ -10740,11 +11336,13 @@ class InspectionPhraseEngine {
       },
     );
     _addOther(answers, 'cb_other_697', 'et_other_427', locations);
-    if (parts.isEmpty || locations.isEmpty) return const [];
-    // Legacy parity: don't block phrase generation when severity is not chosen.
-    final code = severity.contains('major')
+    if (parts.isEmpty || locations.isEmpty || severity.isEmpty) return const [];
+    final code = severity == 'major'
         ? '{REPAIR_INFESTATION_MAJOR}'
-        : '{REPAIR_INFESTATION_MINOR}';
+        : severity == 'minor'
+            ? '{REPAIR_INFESTATION_MINOR}'
+            : '';
+    if (code.isEmpty) return const [];
     var template = _sub('{F_WOOD_WORK}', code);
     if (template.isEmpty) return const [];
     template = template
@@ -10911,7 +11509,10 @@ class InspectionPhraseEngine {
     _addOther(answers, 'cb_other_922', 'et_other_351', fittings);
 
     final condition = _cleanLower(answers['android_material_design_spinner3']);
-    if (locations.isEmpty || madeUp.isEmpty || fittings.isEmpty) {
+    if (locations.isEmpty ||
+        madeUp.isEmpty ||
+        fittings.isEmpty ||
+        condition.isEmpty) {
       return const [];
     }
 
@@ -10921,8 +11522,7 @@ class InspectionPhraseEngine {
         .replaceAll('{BF_BF_LOCATION}', _toWords(locations).toLowerCase())
         .replaceAll('{BF_BF_MADE_UP}', _toWords(madeUp).toLowerCase())
         .replaceAll('{BF_BF_FITTINGS}', _toWords(fittings).toLowerCase())
-        .replaceAll(
-            '{BF_BF_CONDITION}', condition.isNotEmpty ? condition : '...');
+        .replaceAll('{BF_BF_CONDITION}', condition);
     return _split(_normalize(template));
   }
 
@@ -10950,9 +11550,8 @@ class InspectionPhraseEngine {
       },
     );
     _addOther(answers, 'cb_other_725', 'et_other_631', locations);
-    if (locations.isEmpty) return const [];
 
-    if (status.contains('ok')) {
+    if (status == 'ok') {
       final tested = _labelsFor(
         [
           'cb_was_switched_on_and_it_was_35',
@@ -10967,7 +11566,7 @@ class InspectionPhraseEngine {
         },
       );
       _addOther(answers, 'cb_other_1068', 'et_other_297', tested);
-      if (tested.isEmpty) return const [];
+      if (locations.isEmpty && tested.isEmpty) return const [];
       var template =
           _sub('{F_BATHROOM_FITTINGS}', '{EXTRACTOR_FAN_INSTALLED_OK}');
       if (template.isEmpty) return const [];
@@ -10978,7 +11577,7 @@ class InspectionPhraseEngine {
       return _split(_normalize(template));
     }
 
-    if (status.contains('replace')) {
+    if (status == 'replace') {
       final defects = _labelsFor(
         [
           'cb_was_not_working',
@@ -10997,7 +11596,7 @@ class InspectionPhraseEngine {
         },
       );
       _addOther(answers, 'cb_other_987', 'et_other_368', defects);
-      if (defects.isEmpty) return const [];
+      if (locations.isEmpty || defects.isEmpty) return const [];
       var template =
           _sub('{F_BATHROOM_FITTINGS}', '{EXTRACTOR_FAN_INSTALLED_REPLACE}');
       if (template.isEmpty) return const [];
@@ -11035,9 +11634,12 @@ class InspectionPhraseEngine {
     _addOther(answers, 'cb_other_725_wef', 'et_other_631_wef', locations);
     if (locations.isEmpty || condensation.isEmpty) return const [];
 
-    final code = condensation.contains('noted')
+    final code = condensation == 'condensation noted'
         ? '{EXTRACTOR_FAN_CONDENSATION_NOTED}'
-        : '{EXTRACTOR_FAN_NO_INSTALLED}';
+        : condensation == 'no condensation'
+            ? '{EXTRACTOR_FAN_NO_INSTALLED}'
+            : '';
+    if (code.isEmpty) return const [];
     var template = _sub('{F_BATHROOM_FITTINGS}', code);
     if (template.isEmpty) return const [];
     template = template.replaceAll(
@@ -11199,7 +11801,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _bathroomFittingsRepair(Map<String, String> answers) {
-    final repairType = _cleanLower(answers['actv_repair_type']);
+    final repairType = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_repair_type', 'llMainContainer'],
+      ),
+    );
     if (repairType.isEmpty) return const [];
 
     if (repairType.contains('soon')) {
@@ -11474,7 +12081,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _wallsAndPartitionsCondensation(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
     if (status.isEmpty) return const [];
 
     if (status.contains('none')) {
@@ -11541,7 +12150,7 @@ class InspectionPhraseEngine {
       }
 
       final causeStatus = _cleanLower(answers['actv_status_91']);
-      if (causeStatus.contains('known')) {
+      if (causeStatus == 'known') {
         final causes = _labelsFor(
           [
             'cb_blocked_gullies',
@@ -11571,7 +12180,7 @@ class InspectionPhraseEngine {
             phrases.addAll(_split(_normalize(causesTemplate)));
           }
         }
-      } else if (causeStatus.contains('unknown')) {
+      } else if (causeStatus == 'unknown') {
         final causesTemplate =
             _sub('{F_WALLS_AND_PARTITIONS}', '{CAUSES_UNKNOWN}');
         if (causesTemplate.isNotEmpty) {
@@ -11608,7 +12217,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _wallsAndPartitionsWallRepair(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_repair_type']);
+    final status = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_repair_type', 'llMainContainer'],
+      ),
+    );
     if (status.isEmpty) return const [];
 
     final phrases = <String>[];
@@ -11809,8 +12423,27 @@ class InspectionPhraseEngine {
     Map<String, String> answers, {
     bool forceOk = false,
   }) {
-    final status = _cleanLower(answers['actv_condition']);
-    if (status.isEmpty && !forceOk) return const [];
+    var status = _cleanLower(answers['actv_condition']);
+    if (status.isEmpty && !forceOk) {
+      final hasRepairLocations = [
+        'cb_lounge_31',
+        'cb_bedroom_13',
+        'cb_kitchen_64',
+        'cb_bathroom_85',
+        'cb_other_251',
+      ].any((key) => _isChecked(answers[key]));
+      final hasRepairDefects = [
+        'cb_distorted',
+        'cb_cracked',
+        'cb_poorly_supported',
+        'cb_other_518',
+      ].any((key) => _isChecked(answers[key]));
+      if (hasRepairLocations || hasRepairDefects) {
+        status = 'repair';
+      } else {
+        return const [];
+      }
+    }
 
     if (forceOk || status.contains('ok')) {
       final locations = _labelsFor(
@@ -11896,16 +12529,20 @@ class InspectionPhraseEngine {
 
   List<String> _mainWallRepairWallTie(Map<String, String> answers) {
     final walls = _labelsFor(
-      ['cb_front', 'cb_side', 'cb_rear', 'cb_other_608'],
+      ['cb_front', 'cb_side', 'cb_rear'],
       answers,
       {
         'cb_front': 'Front',
         'cb_side': 'Side',
         'cb_rear': 'Rear',
-        'cb_other_608': 'Other',
       },
     );
-    _addOther(answers, 'cb_other_608', 'et_other_752', walls);
+    if (_isChecked(answers['cb_other_608'])) {
+      final otherWall = (answers['et_other_752'] ?? '').trim();
+      if (otherWall.isNotEmpty) {
+        walls.add(otherWall);
+      }
+    }
     if (walls.isEmpty) return const [];
     var template = _sub('{E_MAIN_WALL_REPAIR}', '{WALL_TIE_REPAIR}');
     if (template.isEmpty) return const [];
@@ -11934,7 +12571,8 @@ class InspectionPhraseEngine {
     );
     _addOther(answers, 'cb_other_638', 'et_other_332', buildingRegulation);
     if (buildingRegulation.isNotEmpty) {
-      phrases.add('Building Regulation: ${_toWords(buildingRegulation)}.');
+      phrases.add(
+          'Your legal adviser should confirm that the necessary building regulation approvals are in place for ${_toWords(buildingRegulation).toLowerCase()}.');
     }
 
     final planningPermission = _labelsFor(
@@ -11954,7 +12592,8 @@ class InspectionPhraseEngine {
     );
     _addOther(answers, 'cb_other_459', 'et_other_575', planningPermission);
     if (planningPermission.isNotEmpty) {
-      phrases.add('Planning permission: ${_toWords(planningPermission)}.');
+      phrases.add(
+          'Planning permission should be verified for ${_toWords(planningPermission).toLowerCase()}.');
     }
 
     final glazedSections = _labelsFor(
@@ -11976,31 +12615,36 @@ class InspectionPhraseEngine {
     );
     _addOther(answers, 'cb_other_952', 'et_other_154', glazedSections);
     if (glazedSections.isNotEmpty) {
-      phrases.add('Glazed Sections: ${_toWords(glazedSections)}.');
+      phrases.add(
+          'Appropriate certification should be obtained for glazed sections including ${_toWords(glazedSections).toLowerCase()}.');
     }
 
     if (_isChecked(answers['cb_new_build'])) {
-      phrases.add('New build.');
+      phrases.add(
+          'The property includes new build elements and relevant statutory approvals should be checked.');
     }
 
     if (_isChecked(answers['cb_converted_building'])) {
-      phrases.add('Converted building.');
+      phrases.add(
+          'The property includes converted building elements and formal approvals should be confirmed.');
       final status = (answers['actv_conversion_status'] ?? '').trim();
       if (status.isNotEmpty) {
-        phrases.add('Conversion status: $status.');
+        phrases.add('The conversion status has been recorded as $status.');
       }
       final builtAs = (answers['actv_before_built_as'] ?? '').trim();
       if (builtAs.isNotEmpty) {
-        phrases.add('Originally built as $builtAs.');
+        phrases.add('The building was originally constructed as $builtAs.');
       }
     }
 
     if (_isChecked(answers['cb_conservation'])) {
-      phrases.add('Conservation area.');
+      phrases.add(
+          'The property appears to be within a conservation area and this may affect future alterations.');
     }
 
     if (_isChecked(answers['cb_listed_building'])) {
-      phrases.add('Listed building.');
+      phrases.add(
+          'The property appears to be listed and specialist legal advice is required before any material alterations.');
     }
 
     return phrases;
@@ -12028,17 +12672,21 @@ class InspectionPhraseEngine {
     );
     _addOther(answers, 'cb_other_471', 'et_other_433', glazedSections);
     if (glazedSections.isNotEmpty) {
-      phrases.add('Glazed Sections: ${_toWords(glazedSections)}.');
+      phrases.add(
+          'Guarantees should be requested for glazed sections including ${_toWords(glazedSections).toLowerCase()}.');
     }
 
     if (_isChecked(answers['cb_private_road'])) {
-      phrases.add('DPC Treatment.');
+      phrases.add(
+          'A transferable guarantee should be obtained for any damp-proof course treatment.');
     }
     if (_isChecked(answers['cb_party_walls'])) {
-      phrases.add('Removed Wall.');
+      phrases.add(
+          'Evidence and warranties should be requested for removed wall structural works.');
     }
     if (_isChecked(answers['cb_tenanted'])) {
-      phrases.add('Building Work.');
+      phrases.add(
+          'Documentation should be obtained for relevant building works and associated guarantees.');
     }
 
     return phrases;
@@ -12048,13 +12696,15 @@ class InspectionPhraseEngine {
     final phrases = <String>[];
 
     if (_isChecked(answers['cb_freehold'])) {
-      phrases.add('Freehold.');
+      phrases.add(
+          'The legal tenure is stated as freehold and should be confirmed.');
     }
     if (_isChecked(answers['cb_leasehold'])) {
-      phrases.add('Leasehold.');
+      phrases.add(
+          'The legal tenure is stated as leasehold and should be confirmed.');
     }
     if (_isChecked(answers['cb_right_of_way'])) {
-      phrases.add('Right of Way.');
+      phrases.add('Rights of way affecting the property should be verified.');
     }
 
     final sharedStacks = _labelsFor(
@@ -12068,23 +12718,27 @@ class InspectionPhraseEngine {
     );
     _addOther(answers, 'cb_other_471', 'et_other_433', sharedStacks);
     if (sharedStacks.isNotEmpty) {
-      phrases.add('Shared Stacks and RWG: ${_toWords(sharedStacks)}.');
+      phrases.add(
+          'Shared service responsibilities should be clarified for ${_toWords(sharedStacks).toLowerCase()}.');
     }
 
     if (_isChecked(answers['cb_private_road'])) {
       final condition = (answers['actv_condition'] ?? '').trim();
       if (condition.isNotEmpty) {
-        phrases.add('Private Road: $condition.');
+        phrases.add(
+            'The access road appears to be private and is recorded in $condition condition; legal maintenance responsibility should be confirmed.');
       } else {
-        phrases.add('Private Road.');
+        phrases.add(
+            'The access road appears to be private and legal maintenance responsibility should be confirmed.');
       }
     }
 
     if (_isChecked(answers['cb_party_walls'])) {
-      phrases.add('Party Walls.');
+      phrases.add('Party wall rights and responsibilities should be verified.');
     }
     if (_isChecked(answers['cb_tenanted'])) {
-      phrases.add('Tenanted.');
+      phrases.add(
+          'Tenancy-related legal matters should be confirmed before commitment.');
     }
 
     return phrases;
@@ -12095,12 +12749,12 @@ class InspectionPhraseEngine {
 
     final movement = (answers['actv_movement_status'] ?? '').trim();
     if (movement.isNotEmpty) {
-      phrases.add('Movement status: $movement.');
+      phrases.add('The movement status is recorded as $movement.');
     }
 
     final subsidence = (answers['actv_subsidence_status'] ?? '').trim();
     if (subsidence.isNotEmpty) {
-      phrases.add('Subsidence status: $subsidence.');
+      phrases.add('The subsidence risk status is recorded as $subsidence.');
     }
 
     if (subsidence.isNotEmpty && subsidence.toLowerCase() != 'none') {
@@ -12121,22 +12775,24 @@ class InspectionPhraseEngine {
       );
       _addOther(answers, 'cb_other_619', 'et_other_604', locations);
       if (locations.isNotEmpty) {
-        phrases.add('Subsidence location: ${_toWords(locations)}.');
+        phrases.add(
+            'Potential subsidence indicators were noted around ${_toWords(locations).toLowerCase()}.');
       }
     }
 
     final dampness = (answers['actv_dampness_status'] ?? '').trim();
     if (dampness.isNotEmpty) {
-      phrases.add('Dampness status: $dampness.');
+      phrases.add('The dampness status is recorded as $dampness.');
     }
 
     final timber = (answers['actv_timber_sefect_status'] ?? '').trim();
     if (timber.isNotEmpty) {
-      phrases.add('Timber defect status: $timber.');
+      phrases.add('The timber defect status is recorded as $timber.');
     }
 
     if (_isChecked(answers['cb_near_by_tree'])) {
-      phrases.add('Nearby trees.');
+      phrases.add(
+          'Nearby trees were noted and may influence the building over time depending on species, distance and subsoil.');
     }
 
     return phrases;
@@ -12145,7 +12801,7 @@ class InspectionPhraseEngine {
   List<String> _risksOther(Map<String, String> answers) {
     final phrases = <String>[];
     if (_isChecked(answers['cb_not_applicable'])) {
-      phrases.add('Not Applicable.');
+      phrases.add('No additional risk items were identified in this section.');
       return phrases;
     }
 
@@ -12168,7 +12824,8 @@ class InspectionPhraseEngine {
     );
     _addOther(answers, 'cb_other_741', 'et_other_775', proximity);
     if (proximity.isNotEmpty) {
-      phrases.add('Proximity: ${_toWords(proximity)}.');
+      phrases.add(
+          'The property is located close to ${_toWords(proximity).toLowerCase()}, and associated operation may affect the enjoyment of the property, its saleability and value.');
     }
 
     return phrases;
@@ -12194,7 +12851,11 @@ class InspectionPhraseEngine {
     final result = <String>[];
     for (final id in ids) {
       if (_isChecked(answers[id])) {
-        result.add(labels[id] ?? id);
+        final label = (labels[id] ?? id).trim();
+        // Legacy saveCheckboxValue() never persists the literal "Other" token;
+        // it only stores typed other-text when provided.
+        if (label.toLowerCase() == 'other') continue;
+        result.add(label);
       }
     }
     return result;
@@ -12205,11 +12866,29 @@ class InspectionPhraseEngine {
     String checkboxId,
     String textId,
     List<String> items, {
-    String fallback = 'Other',
+    String fallback = '',
   }) {
     if (_isChecked(answers[checkboxId])) {
       final text = (answers[textId] ?? '').trim();
-      items.add(text.isEmpty ? fallback : text);
+      if (text.isNotEmpty) {
+        items.add(text);
+      } else if (fallback.trim().isNotEmpty) {
+        items.add(fallback.trim());
+      }
+    }
+  }
+
+  static void _addOtherText(
+    Map<String, String> answers,
+    String checkboxId,
+    List<String> textIds,
+    List<String> items,
+  ) {
+    if (_isChecked(answers[checkboxId])) {
+      final text = _firstNonEmpty(answers, textIds).trim();
+      if (text.isNotEmpty) {
+        items.add(text);
+      }
     }
   }
 
@@ -12221,14 +12900,62 @@ class InspectionPhraseEngine {
     return isMulti ? '{E_CHIMNEY_MULTI_STACK}' : '{E_CHIMNEY_SINGLE_STACK}';
   }
 
+  static String _chimneyPhraseCodeFromAnswers(
+    Map<String, String> answers, {
+    required bool fallbackIsMulti,
+  }) {
+    final stackType = _chimneyStackTypeFromAnswers(answers);
+    if (stackType.contains('multiple')) return '{E_CHIMNEY_MULTI_STACK}';
+    if (stackType.contains('single')) return '{E_CHIMNEY_SINGLE_STACK}';
+    return _chimneyPhraseCode(fallbackIsMulti);
+  }
+
+  static String _chimneyStackTypeFromAnswers(Map<String, String> answers) {
+    // Legacy/native and migrated trees use different spinner ids for stack type.
+    return _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const [
+          'android_material_design_spinner3',
+          'android_material_design_spinner',
+        ],
+      ),
+    );
+  }
+
   static String _toWords(List<String> items) {
     if (items.isEmpty) return '';
     if (items.length == 1) return items.first;
     return '${items.sublist(0, items.length - 1).join(', ')} and ${items.last}';
   }
 
+  static List<String> _dedupeInsensitive(List<String> items) {
+    final seen = <String>{};
+    final unique = <String>[];
+    for (final item in items) {
+      final normalized = item.trim().toLowerCase();
+      if (normalized.isEmpty || seen.contains(normalized)) continue;
+      seen.add(normalized);
+      unique.add(item.trim());
+    }
+    return unique;
+  }
+
   static String _isAre(List<String> items) {
     return items.length > 1 ? 'are' : 'is';
+  }
+
+  static String _isAreForSubject(String subject) {
+    final value = subject.trim().toLowerCase();
+    if (value.isEmpty) return 'is';
+    if (value.contains(' and ') || value.contains(',')) return 'are';
+    const pluralSubjects = <String>{
+      'doors',
+      'windows',
+      'walls',
+      'rainwater goods',
+    };
+    return pluralSubjects.contains(value) ? 'are' : 'is';
   }
 
   static String _firstNonEmpty(Map<String, String> answers, List<String> ids) {
@@ -12712,9 +13439,12 @@ class InspectionPhraseEngine {
     final to = (answers['android_material_design_spinner20'] ?? '').trim();
     if (wellNewly.isEmpty && from.isEmpty && to.isEmpty) return const [];
     final phrases = <String>[];
-    if (wellNewly.isNotEmpty) {
+    final normalizedArea = wellNewly.toLowerCase();
+    if (wellNewly.isNotEmpty &&
+        normalizedArea != 'yes' &&
+        normalizedArea != 'no') {
       phrases.add(
-        'The property is located in a ${wellNewly.toLowerCase()} established area.',
+        'The property is located in a ${normalizedArea} established area.',
       );
     }
     if (from.isNotEmpty && to.isNotEmpty) {
@@ -12736,7 +13466,13 @@ class InspectionPhraseEngine {
         .trim()
         .toLowerCase();
     if (value.isEmpty) return const [];
-    if (value == 'accessible') return _resolve('{D_FACILITY_ACCESSIBLE}');
+    if (value == 'accessible') {
+      final resolved = _resolve('{D_FACILITY_ACCESSIBLE}');
+      if (resolved.isNotEmpty) return resolved;
+      return const [
+        'The local facilities include schools, shops and transport links and appear to be reasonably accessible from the property.',
+      ];
+    }
     if (value == 'remote') {
       final resolved = _resolve('{D_FACILITY_REMOTE}');
       if (resolved.isNotEmpty) return resolved;
@@ -12753,7 +13489,11 @@ class InspectionPhraseEngine {
         .toLowerCase();
     if (status.isEmpty) return const [];
     if (status.contains('no adverse')) {
-      return _resolve('{D_LOCAL_ENVIRONMENT_NO_ADVERSE}');
+      final resolved = _resolve('{D_LOCAL_ENVIRONMENT_NO_ADVERSE}');
+      if (resolved.isNotEmpty) return resolved;
+      return const [
+        'There are no known or apparent adverse local environmental features that are likely to materially affect the property.',
+      ];
     }
     final phrases = <String>[];
     final floodSources = <String>[];
@@ -12770,6 +13510,10 @@ class InspectionPhraseEngine {
         final resolved = _normalize(template).replaceAll(
             '{LOCAL_ENVIRONMENT_CLOSED_TO}', _toWords(floodSources));
         phrases.addAll(_split(resolved));
+      } else {
+        phrases.add(
+          'The property is close to ${_toWords(floodSources)}, which may present a flooding or dampness risk depending on local conditions.',
+        );
       }
     }
     final emfSources = <String>[];
@@ -12785,7 +13529,16 @@ class InspectionPhraseEngine {
         final resolved = _normalize(template)
             .replaceAll('{LOCAL_ENVIRONMENT_CLOSED_TO}', _toWords(emfSources));
         phrases.addAll(_split(resolved));
+      } else {
+        phrases.add(
+          'Potential electromagnetic influences were noted nearby, including ${_toWords(emfSources)}.',
+        );
       }
+    }
+    if (phrases.isEmpty) {
+      phrases.add(
+        'Local environmental factors were noted but no specific adverse source was identified in the inspection data.',
+      );
     }
     return phrases;
   }
@@ -12794,20 +13547,31 @@ class InspectionPhraseEngine {
     final status = (answers['android_material_design_spinner3'] ?? '')
         .trim()
         .toLowerCase();
-    if (status != 'yes') return const [];
-    final text =
-        _phraseTexts['{D_LOCATION}::{LOCATION_PRIVATE_PROPERTY_AREA}'] ?? '';
-    if (text.isNotEmpty) return _split(_normalize(text));
-    return const [
-      'The road outside the property is likely to be a private road.'
-    ];
+    if (status.isEmpty) return const [];
+    final yesLike = <String>{'yes', 'true', 'private', 'likely private'};
+    final noLike = <String>{'no', 'false', 'not private'};
+
+    if (yesLike.contains(status)) {
+      final text =
+          _phraseTexts['{D_LOCATION}::{LOCATION_PRIVATE_PROPERTY_AREA}'] ?? '';
+      if (text.isNotEmpty) return _split(_normalize(text));
+      return const [
+        'The road outside the property is likely to be a private road.'
+      ];
+    }
+    if (noLike.contains(status)) {
+      return const [
+        'The road outside the property is not understood to be a private road.'
+      ];
+    }
+    return ['Road status recorded as $status.'];
   }
 
   List<String> _propertyNoisyArea(Map<String, String> answers) {
     final status = (answers['android_material_design_spinner4'] ?? '')
         .trim()
         .toLowerCase();
-    if (status != 'yes') return const [];
+    if (status.isEmpty) return const [];
     final sources = <String>[];
     if (_isChecked(answers['ch1'])) sources.add('busy road');
     if (_isChecked(answers['ch2'])) sources.add('train line');
@@ -12818,6 +13582,11 @@ class InspectionPhraseEngine {
       final other = (answers['etGroundTypeOther'] ?? '').trim();
       sources.add(other.isNotEmpty ? other.toLowerCase() : 'other');
     }
+    final yesLike = <String>{'yes', 'true', 'fully', 'present', 'adverse'};
+    final noLike = <String>{'no', 'false', 'none', 'not present'};
+    final noisy = yesLike.contains(status) ||
+        (sources.isNotEmpty && !noLike.contains(status));
+    if (!noisy) return const [];
     if (sources.isEmpty) {
       return const ['The property is in a noisy area.'];
     }
@@ -12993,23 +13762,14 @@ class InspectionPhraseEngine {
   List<String> _servicesWaterDisusedTank(Map<String, String> answers) {
     final location = _cleanLower(answers['actv_disused_tank_location']);
     final material = _cleanLower(answers['actv_tank_formed_in']);
-    if (location.isEmpty && material.isEmpty) return const [];
-    final template =
-        _phraseTexts['{F_ROOF_STRUCTURE_WATER_TANK}::{DISUSED_WATER_TANK}'] ??
-            '';
-    if (template.isNotEmpty) {
-      final resolved = _normalize(template)
-          .replaceAll('{RS_WT_DISUSED_LOCATION}',
-              location.isNotEmpty ? location : '...')
-          .replaceAll('{RS_WT_DISUSED_MATERIAL}',
-              material.isNotEmpty ? material : '...');
-      return _split(resolved);
-    }
-    final phrases = <String>[];
-    if (location.isNotEmpty)
-      phrases.add('Disused water tank location: $location.');
-    if (material.isNotEmpty) phrases.add('Tank material: $material.');
-    return phrases;
+    if (location.isEmpty || material.isEmpty) return const [];
+    var template =
+        _sub('{F_ROOF_STRUCTURE_WATER_TANK}', '{DISUSED_WATER_TANK}');
+    if (template.isEmpty) return const [];
+    template = template
+        .replaceAll('{RS_WT_DISUSED_WATER_TANK_LOCATION}', location)
+        .replaceAll('{RS_WT_DISUSED_WATER_TANK_MATERIAL}', material);
+    return _split(_normalize(template));
   }
 
   // Section G: Services - water tank
@@ -13021,7 +13781,9 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_kitchen'])) locations.add('kitchen');
     if (_isChecked(answers['cb_other_289'])) {
       final other = (answers['et_other_442'] ?? '').trim();
-      locations.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) {
+        locations.add(other.toLowerCase());
+      }
     }
     final materials = <String>[];
     if (_isChecked(answers['cb_plastic'])) materials.add('plastic');
@@ -13030,23 +13792,22 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_asbestos'])) materials.add('asbestos');
     if (_isChecked(answers['cb_other_640'])) {
       final other = (answers['et_other_643'] ?? '').trim();
-      materials.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) {
+        materials.add(other.toLowerCase());
+      }
     }
     final condition = _cleanLower(answers['actv_condition']);
-    if (locations.isEmpty && materials.isEmpty && condition.isEmpty)
+    if (locations.isEmpty || materials.isEmpty || condition.isEmpty) {
       return const [];
-    final phrases = <String>[];
-    if (locations.isNotEmpty && materials.isNotEmpty) {
-      phrases.add(
-          'Water tank in ${_toWords(locations)}, formed in ${_toWords(materials)}.');
-    } else {
-      if (locations.isNotEmpty)
-        phrases.add('Water tank location: ${_toWords(locations)}.');
-      if (materials.isNotEmpty)
-        phrases.add('Water tank material: ${_toWords(materials)}.');
     }
-    if (condition.isNotEmpty) phrases.add('Condition: $condition.');
-    return phrases;
+    var template = _sub(
+        '{F_ROOF_STRUCTURE_WATER_TANK}', '{WATERL_TANK_MATERIAL_LOCATION}');
+    if (template.isEmpty) return const [];
+    template = template
+        .replaceAll('{RS_WT_LOCATION}', _toWords(locations).toLowerCase())
+        .replaceAll('{RS_WT_MATERIAL}', _toWords(materials).toLowerCase())
+        .replaceAll('{RS_WT_CONDITION}', condition);
+    return _split(_normalize(template));
   }
 
   // Section G: Services - water insulation
@@ -13058,46 +13819,60 @@ class InspectionPhraseEngine {
               '{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_OK}'] ??
           '';
       if (template.isNotEmpty) return _split(_normalize(template));
-      return ['Water insulation status: $status.'];
+      return const [];
     }
     if (status.contains('inadequate') || status == 'poor') {
       final template = _phraseTexts[
               '{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_NOT_ADEQUATELY_INSULATED}'] ??
           '';
       if (template.isNotEmpty) return _split(_normalize(template));
-      return ['Water insulation: $status.'];
+      return const [];
     }
-    return ['Water insulation status: $status.'];
+    return const [];
   }
 
   // Section G: Services - heating radiators
   List<String> _servicesHeatingRadiators(Map<String, String> answers) {
     final type = _cleanLower(answers['actv_radiators_and_clandad_floor_pipes']);
     if (type.isEmpty) return const [];
-    return ['Heating distribution: $type.'];
+    var template = _sub(
+      '{G_HEATING}',
+      '{ABOUT_CONNECTED_TO_RADIATOR_UNDERFLOOR_PIPES}',
+    );
+    if (template.isEmpty) return const [];
+    template = template.replaceAll('{HEAT_CONNECTED_TO}', type);
+    return _split(_normalize(template));
   }
 
   // Section G: Services - other heating
   List<String> _servicesHeatingOtherHeating(Map<String, String> answers) {
-    final items = <String>[];
-    if (_isChecked(answers['cb_oil_filled'])) items.add('oil filled');
-    if (_isChecked(answers['cb_electric_storage']))
-      items.add('electric storage');
-    if (_isChecked(answers['cb_convector'])) items.add('convector');
-    if (_isChecked(answers['cb_other_923'])) {
-      final other = (answers['et_other_717'] ?? '').trim();
-      items.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
+    final items = _labelsFor(
+      ['cb_oil_filled', 'cb_electric_storage', 'cb_convector', 'cb_other_923'],
+      answers,
+      {
+        'cb_oil_filled': 'Oil filled',
+        'cb_electric_storage': 'Electric storage',
+        'cb_convector': 'Convector',
+        'cb_other_923': 'Other',
+      },
+    );
+    _addOther(answers, 'cb_other_923', 'et_other_717', items);
     if (items.isEmpty) return const [];
-    return ['Other heating types: ${_toWords(items)}.'];
+    var template = _sub('{G_HEATING}', '{ABOUT_OTHER_HEATING}');
+    if (template.isEmpty) return const [];
+    template = template.replaceAll(
+      '{HEAT_OTHER_HEATING}',
+      _toWords(items).toLowerCase(),
+    );
+    return _split(_normalize(template));
   }
 
   // Section G: Services - old boiler
   List<String> _servicesHeatingOldBoiler(Map<String, String> answers) {
-    if (_isChecked(answers['cb_old_boiler'])) {
-      return ['The boiler is old and may need replacing.'];
-    }
-    return const [];
+    if (!_isChecked(answers['cb_old_boiler'])) return const [];
+    final template = _sub('{G_HEATING}', '{ABOUT_OLD_BOILER}');
+    if (template.isEmpty) return const [];
+    return _split(_normalize(template));
   }
 
   // Section G: Services - water repair main
@@ -13110,7 +13885,9 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_overflowing'])) defects.add('overflowing');
     if (_isChecked(answers['cb_other_850'])) {
       final other = (answers['et_other_567'] ?? '').trim();
-      defects.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) {
+        defects.add(other.toLowerCase());
+      }
     }
     if (_isChecked(answers['cb_no_lid_over_tank']))
       defects.add('no lid over tank');
@@ -13119,7 +13896,13 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_asbestos_material']))
       defects.add('asbestos material');
     if (defects.isEmpty) return const [];
-    return ['Water tank defects: ${_toWords(defects)}. Repair needed.'];
+    var template = _sub('{F_ABOUT_ROOF_STRUCTURE}', '{REPAIR_TANK}');
+    if (template.isEmpty) return const [];
+    template = template.replaceAll(
+      '{RSR_RT_WATER_TANK}',
+      _toWords(defects).toLowerCase(),
+    );
+    return _split(_normalize(template));
   }
 
   // Section G: Services - water repair (asbestos/cover/tank variants)
@@ -13129,6 +13912,7 @@ class InspectionPhraseEngine {
     String otherCbId,
     String otherEtId,
   ) {
+    if (repairType.isEmpty) return const [];
     final defects = <String>[];
     if (_isChecked(answers['cb_damaged'])) defects.add('damaged');
     if (_isChecked(answers['cb_not_properly_supported']))
@@ -13137,55 +13921,88 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_overflowing'])) defects.add('overflowing');
     if (_isChecked(answers[otherCbId])) {
       final other = (answers[otherEtId] ?? '').trim();
-      defects.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) {
+        defects.add(other.toLowerCase());
+      }
     }
     if (defects.isEmpty) return const [];
-    return ['$repairType: ${_toWords(defects)}. Repair needed.'];
+    var template = _sub('{F_ABOUT_ROOF_STRUCTURE}', '{REPAIR_TANK}');
+    if (template.isEmpty) return const [];
+    template = template.replaceAll(
+      '{RSR_RT_WATER_TANK}',
+      _toWords(defects).toLowerCase(),
+    );
+    return _split(_normalize(template));
   }
 
   // Section G: Services - drainage chamber lids
   List<String> _servicesDrainageChamberLids(Map<String, String> answers) {
     final phrases = <String>[];
-    if (_isChecked(answers['cb_inspected']))
-      phrases.add('Chamber lids inspected.');
-    if (_isChecked(answers['cb_shared']))
-      phrases.add('Drainage system is shared.');
+    if (_isChecked(answers['cb_inspected'])) {
+      final template =
+          _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM_INSPECTED_LIFTED_TICKBOX}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_split(_normalize(template)));
+      }
+    }
+    if (_isChecked(answers['cb_shared'])) {
+      final template = _sub('{G_DRAINAGE}', '{DRAINAGE_SHARED}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_split(_normalize(template)));
+      }
+    }
     final defect = _cleanLower(answers['actv_defect']);
-    if (defect.isNotEmpty) phrases.add('Chamber lid defect: $defect.');
+    if (defect.isNotEmpty) {
+      var template = _sub('{G_DRAINAGE}', '{REPAIR_CHAMBER_COVER}');
+      if (template.isNotEmpty) {
+        template =
+            template.replaceAll('{DRA_REP_CHAMBER_COVER_DEFECT}', defect);
+        phrases.addAll(_split(_normalize(template)));
+      }
+    }
     return phrases;
   }
 
   // Section G: Services - drainage public system
   List<String> _servicesDrainagePublicSystem(Map<String, String> answers) {
-    if (_isChecked(answers['cb_property_connected_to_public_sewer'])) {
-      return ['The property is connected to the public sewer system.'];
+    if (!_isChecked(answers['cb_property_connected_to_public_sewer'])) {
+      return const [];
     }
-    return const [];
+    final template = _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM}');
+    if (template.isEmpty) return const [];
+    return _split(_normalize(template));
   }
 
   // Section G: Services - water heating cylinder
   List<String> _servicesWaterHeatingCylinder(Map<String, String> answers) {
-    if (_isChecked(answers['cb_poor_insulation'])) {
-      return ['The hot water cylinder has poor insulation.'];
-    }
-    return const [];
+    if (!_isChecked(answers['cb_poor_insulation'])) return const [];
+    final template = _sub('{G_WATER_HEATING}', '{POOR_CYLINDER_CONDITION}');
+    if (template.isEmpty) return const [];
+    return _split(_normalize(template));
   }
 
-  // Section F: woodwork simple checkbox
-  List<String> _woodWorkSimpleCheckbox(
+  // Section F: woodwork legacy phrase passthrough
+  List<String> _woodWorkLegacyCheckbox(
     Map<String, String> answers,
     String cbId,
-    String phrase,
+    String phraseSubCode,
   ) {
-    if (_isChecked(answers[cbId])) return [phrase];
-    return const [];
+    if (!_isChecked(answers[cbId])) return const [];
+    final template = _sub('{F_WOOD_WORK}', phraseSubCode);
+    if (template.isEmpty) return const [];
+    return _split(_normalize(template));
   }
 
-  // Section F: woodwork rocking handrails
-  List<String> _woodWorkRockingHandrails(Map<String, String> answers) {
+  List<String> _woodWorkLegacyStatus(
+    Map<String, String> answers, {
+    required String selectedValue,
+    required String phraseSubCode,
+  }) {
     final status = _cleanLower(answers['actv_status']);
-    if (status.isEmpty || status == 'none') return const [];
-    return ['Rocking handrails present.'];
+    if (status != selectedValue) return const [];
+    final template = _sub('{F_WOOD_WORK}', phraseSubCode);
+    if (template.isEmpty) return const [];
+    return _split(_normalize(template));
   }
 
   // Section R: room counts
@@ -13219,10 +14036,16 @@ class InspectionPhraseEngine {
   List<String> _roofCoveringSummary(Map<String, String> answers) {
     final phrases = <String>[];
     if (_isChecked(answers['cb_roof_fit_for_pupose'])) {
-      phrases.add('The roof covering is fit for purpose.');
+      final text = _sub('{E_ROOF_COVERING_REPAIR}', '{ROOF_FIT_FOR_PURPOSE}');
+      if (text.isNotEmpty) {
+        phrases.addAll(_split(_normalize(text)));
+      }
     }
     if (_isChecked(answers['cb_end_of_useful_life'])) {
-      phrases.add('The roof covering is reaching the end of its useful life.');
+      final text = _sub('{E_ROOF_COVERING_REPAIR}', '{END_OF_USEFUL_LIFE}');
+      if (text.isNotEmpty) {
+        phrases.addAll(_split(_normalize(text)));
+      }
     }
     return phrases;
   }
@@ -13237,23 +14060,36 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_dormer_window'])) locations.add('dormer window');
     if (_isChecked(answers['cb_other_601'])) {
       final other = (answers['et_other_691'] ?? '').trim();
-      locations.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) {
+        locations.add(other.toLowerCase());
+      }
     }
     final rating = (answers['android_material_design_spinner4'] ?? '').trim();
     final assumedType = _cleanLower(answers['actv_assumed_type']);
     final notes = (answers['ar_etNote'] ?? '').trim();
     final phrases = <String>[];
-    if (locations.isNotEmpty) {
-      phrases.add('Roof covering on: ${_toWords(locations)}.');
+    if (locations.isNotEmpty && assumedType.isNotEmpty) {
+      var template = _sub('{E_ROOF_COVERING}', '{E_RC_NOT_INSPECTED}');
+      if (template.isNotEmpty) {
+        template = template
+            .replaceAll('{RC_NOT_INSPECTED_LOCATION}',
+                _toWords(locations).toLowerCase())
+            .replaceAll('{RC_NOT_INSPECTED_ASSUMED_TYPE}', assumedType);
+        phrases.addAll(_split(_normalize(template)));
+      }
     }
-    if (assumedType.isNotEmpty) {
-      phrases.add('Assumed roof type: $assumedType.');
-    }
-    if (rating.isNotEmpty) {
-      phrases.add('Condition rating: $rating.');
-    }
-    if (notes.isNotEmpty) {
-      phrases.add('Notes: $notes');
+    if (rating.isNotEmpty || notes.isNotEmpty) {
+      final summary = _legacySectionRatingNotes(
+        answers: answers,
+        ratingKey: 'android_material_design_spinner4',
+        phraseCodeForRating: '{E_ROOF_COVERING_REPAIR}',
+        ratingSubCode: '{E_RC_CONDITION_RATING}',
+        ratingPlaceholder: '{RC_CONDITION_RATING}',
+        phraseCodeForNotes: '{E_ROOF_COVERING_REPAIR}',
+        notesSubCode: '{E_RC_NOTES}',
+        notesPlaceholder: '{RC_NOTES}',
+      );
+      phrases.addAll(summary);
     }
     return phrases;
   }
@@ -13269,7 +14105,9 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_garage_95'])) locations.add('garage');
     if (_isChecked(answers['cb_other_791'])) {
       final other = (answers['et_other_129'] ?? '').trim();
-      locations.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) {
+        locations.add(other.toLowerCase());
+      }
     }
     final defects = <String>[];
     if (_isChecked(answers['cb_is_damaged_25'])) defects.add('damaged');
@@ -13291,17 +14129,68 @@ class InspectionPhraseEngine {
       defects.add('poorly fitted');
     if (_isChecked(answers['cb_other_641'])) {
       final other = (answers['et_other_288'] ?? '').trim();
-      defects.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) {
+        defects.add(other.toLowerCase());
+      }
     }
-    if (locations.isEmpty && defects.isEmpty) return const [];
-    final phrases = <String>[];
-    if (locations.isNotEmpty) {
-      phrases.add('$repairType location: ${_toWords(locations)} door(s).');
+    if (repairType.toLowerCase().contains('inadequate')) {
+      if (locations.isEmpty) return const [];
+      var template = _sub('{E_OUTSIDE_DOORS}', '{DAMAGED_STOCK_LOCK_SELECTED}');
+      if (template.isEmpty) return const [];
+      template = template.replaceAll(
+          '{DOOR_LOCATION}', _toWords(locations).toLowerCase());
+      return _split(_normalize(template));
     }
-    if (defects.isNotEmpty) {
-      phrases.add('Defects: ${_toWords(defects)}.');
+    if (repairType.toLowerCase().contains('failed')) {
+      if (locations.isEmpty) return const [];
+      var template = _sub('{E_OUTSIDE_DOORS}', '{DOOR_REPAIR_SOON}');
+      if (template.isEmpty) return const [];
+      template = template
+          .replaceAll('{DOOR_LOCATION}', _toWords(locations).toLowerCase())
+          .replaceAll('{DOOR_DEFECT}', 'failed glazing');
+      return _split(_normalize(template));
     }
-    return phrases;
+    if (locations.isEmpty || defects.isEmpty) return const [];
+    var template = _sub('{E_OUTSIDE_DOORS}', '{DOOR_REPAIR_SOON}');
+    if (template.isEmpty) return const [];
+    template = template
+        .replaceAll('{DOOR_LOCATION}', _toWords(locations).toLowerCase())
+        .replaceAll('{DOOR_DEFECT}', _toWords(defects).toLowerCase());
+    return _split(_normalize(template));
+  }
+
+  // Section E: legacy outside doors safety glass status screen
+  List<String> _outsideDoorsSafetyGlassRating(Map<String, String> answers) {
+    final status = _cleanLower(
+      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
+    );
+    if (status.isEmpty) return const [];
+    final template = _sub(
+      '{E_OUTSIDE_DOORS}',
+      status.contains('noted')
+          ? '{DOOR_SG_RATING_NOTED}'
+          : '{DOOR_SG_RATING_NO_SG_RATING}',
+    );
+    if (template.isEmpty) return const [];
+    return _split(_normalize(template));
+  }
+
+  // Section E: legacy outside doors wall sealing screen
+  List<String> _outsideDoorsWallSealing(Map<String, String> answers) {
+    final sealing = _cleanLower(
+      _firstNonEmpty(
+        answers,
+        const ['actv_status_security', 'llMainContainer'],
+      ),
+    );
+    final security = _cleanLower(answers['actv_seciruty_offered']);
+    if (sealing.isEmpty || security.isEmpty) return const [];
+    var template = _sub('{E_OUTSIDE_DOORS}', '{WALL_SEALING}');
+    if (template.isEmpty) return const [];
+    template = template
+        .replaceAll('{DOOR_SEALING_CONDITION}', sealing)
+        .replaceAll('{SECURITY_OFFERED}', security);
+    return _split(_normalize(template));
   }
 
   // Section A: overall opinion
@@ -13398,7 +14287,7 @@ class InspectionPhraseEngine {
       return _otherHandrails(screenId, answers);
     }
     if (screenId.startsWith('activity_outside_property_other_overloaded')) {
-      return _otherOverloaded(answers);
+      return _otherOverloaded(screenId, answers);
     }
     if (screenId
         .startsWith('activity_outside_property_other_no_safety_glass')) {
@@ -13412,21 +14301,21 @@ class InspectionPhraseEngine {
       return _otherRepairWall(screenId, answers);
     }
     if (screenId.startsWith('activity_outside_property_other_repairs_roof')) {
-      return _otherRepairRoof(answers);
+      return _otherRepairRoof(screenId, answers);
     }
     if (screenId.startsWith('activity_outside_property_other_repairs_floor')) {
-      return _otherRepairFloor(answers);
+      return _otherRepairFloor(screenId, answers);
     }
     if (screenId.startsWith('activity_outside_property_other_repairs_drains')) {
-      return _otherRepairDrains(answers);
+      return _otherRepairDrains(screenId, answers);
     }
     if (screenId
         .startsWith('activity_outside_property_other_repairs_hand_rails')) {
-      return _otherRepairHandrails(answers);
+      return _otherRepairHandrails(screenId, answers);
     }
     if (screenId
         .startsWith('activity_outside_property_other_repairs_steps_landing')) {
-      return _otherRepairStepsLanding(answers);
+      return _otherRepairStepsLanding(screenId, answers);
     }
     if (screenId
         .startsWith('activity_outside_property_other_repairs_decorations')) {
@@ -13435,12 +14324,16 @@ class InspectionPhraseEngine {
     return null;
   }
 
-  static String _doorLocationFromScreen(String screenId) {
+  static String _doorLocationFromScreen(
+      String screenId, Map<String, String> answers) {
     if (screenId.contains('__rear_door')) return 'rear';
     if (screenId.contains('__side_door')) return 'side';
     if (screenId.contains('__patio_door')) return 'patio';
     if (screenId.contains('__garage_door')) return 'garage';
-    if (screenId.contains('__other_door')) return 'other';
+    if (screenId.contains('__other_door')) {
+      final typed = _firstNonEmpty(answers, ['other']).trim();
+      return typed.isNotEmpty ? typed.toLowerCase() : 'other';
+    }
     return 'main';
   }
 
@@ -13453,13 +14346,33 @@ class InspectionPhraseEngine {
     return '{MAIN_DOOR_REPAIR}';
   }
 
-  static String _doorMaterialCode(String material) {
-    final value = material.toLowerCase();
-    if (value.contains('pvc')) return '{PVC}';
-    if (value.contains('timber')) return '{TIMBER}';
-    if (value.contains('steel')) return '{STEEL}';
-    if (value.contains('aluminium')) return '{ALUMINIUM}';
-    return '{OTHER}';
+  static String _doorMaterialFromScreen(
+      String screenId, Map<String, String> answers) {
+    if (screenId.contains('__timber')) return 'Timber';
+    if (screenId.contains('__steel')) return 'Steel';
+    if (screenId.contains('__aluminium')) return 'Aluminium';
+    if (screenId.contains('__other')) {
+      final typed = _firstNonEmpty(answers, ['other', 'et_other_152']).trim();
+      return typed.isNotEmpty ? typed : 'other';
+    }
+    return 'PVC';
+  }
+
+  static String _doorMaterialCodeFromScreen(String screenId) {
+    if (screenId.contains('__timber')) return '{TIMBER}';
+    if (screenId.contains('__steel')) return '{STEEL}';
+    if (screenId.contains('__aluminium')) return '{ALUMINIUM}';
+    if (screenId.contains('__other')) return '{OTHER}';
+    return '{PVC}';
+  }
+
+  static bool _isPorchScreenVariant(
+    String screenId, {
+    required String porchSuffix,
+  }) {
+    if (screenId.endsWith(porchSuffix)) return true;
+    // CP screens are paired by route ID; unsuffixed route is conservatory.
+    return false;
   }
 
   static String _cpRepairWrapper(String screenId) {
@@ -13492,8 +14405,7 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_four'])) return 'four';
     if (_isChecked(answers['cb_five'])) return 'five';
     if (_isChecked(answers['cb_other_814'])) {
-      final text = _firstNonEmpty(answers,
-          ['et_other_309', 'et_other_816', 'et_other_196', 'et_other_659']);
+      final text = _firstNonEmpty(answers, ['et_other_196']);
       if (text.isNotEmpty) return text.toLowerCase();
     }
     return 'multiple';
@@ -13506,6 +14418,23 @@ class InspectionPhraseEngine {
     if (value.contains('cavity stud')) return '{CAVITY_STUD_WALL}';
     if (value.contains('solid')) return '{SOLID_BOUNDED_BRICK_WALL}';
     return '{OTHER_WALL}';
+  }
+
+  static String? _mainWallTypeFromScreen(
+    String screenId,
+    Map<String, String> answers,
+  ) {
+    if (screenId.contains('__cavity_brick_wall')) return 'cavity brick wall';
+    if (screenId.contains('__cavity_block_wall')) return 'cavity block wall';
+    if (screenId.contains('__cavity_stud_wall')) return 'cavity stud wall';
+    if (screenId.endsWith('__other')) {
+      final typed = _firstNonEmpty(answers, ['other', 'et_other_124']).trim();
+      return typed.isNotEmpty ? typed.toLowerCase() : null;
+    }
+    if (screenId == 'activity_outside_property_main_walls_about_wall') {
+      return 'solid brick wall';
+    }
+    return null;
   }
 
   static List<String> _split(String text) {

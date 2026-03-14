@@ -104,6 +104,7 @@ class InspectionNodeDefinition {
     required this.type,
     this.parentId,
     this.inlinePosition,
+    this.order,
   });
 
   factory InspectionNodeDefinition.fromJson(Map<String, dynamic> json) {
@@ -125,6 +126,7 @@ class InspectionNodeDefinition {
       type: type,
       parentId: json['parentId'] as String?,
       inlinePosition: json['inlinePosition'] as String?,
+      order: (json['order'] as num?)?.toInt(),
     );
   }
 
@@ -134,6 +136,7 @@ class InspectionNodeDefinition {
   final InspectionNodeType type;
   final String? parentId;
   final String? inlinePosition;
+  final int? order;
 
   Map<String, dynamic> toJson() {
     final m = <String, dynamic>{
@@ -143,6 +146,7 @@ class InspectionNodeDefinition {
     };
     if (parentId != null) m['parentId'] = parentId;
     if (inlinePosition != null) m['inlinePosition'] = inlinePosition;
+    if (order != null) m['order'] = order;
     if (fields.isNotEmpty) m['fields'] = fields.map((f) => f.toJson()).toList();
     return m;
   }
@@ -154,6 +158,7 @@ class InspectionNodeDefinition {
     InspectionNodeType? type,
     String? parentId,
     String? inlinePosition,
+    int? order,
   }) =>
       InspectionNodeDefinition(
         id: id ?? this.id,
@@ -162,6 +167,7 @@ class InspectionNodeDefinition {
         type: type ?? this.type,
         parentId: parentId ?? this.parentId,
         inlinePosition: inlinePosition ?? this.inlinePosition,
+        order: order ?? this.order,
       );
 
   static String _humanizeId(String value) {
