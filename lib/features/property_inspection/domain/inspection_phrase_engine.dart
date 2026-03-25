@@ -1032,6 +1032,14 @@ class InspectionPhraseEngine {
     return const [];
   }
 
+  List<String> buildStaticSubPhrases(String phraseCode, String subCode) {
+    final template = subCode.isEmpty
+        ? (_phraseTexts[phraseCode] ?? '')
+        : _sub(phraseCode, subCode);
+    if (template.isEmpty) return const [];
+    return _split(_normalize(template));
+  }
+
   List<String> _propertyWeather(Map<String, String> answers) {
     final now = (answers['android_material_design_spinner'] ?? '').trim();
     final before = (answers['android_material_design_spinner2'] ?? '').trim();
@@ -6715,7 +6723,7 @@ class InspectionPhraseEngine {
         ],
         answers,
         {
-          'cb_in_an_outside_box_54': 'Under the stairs',
+          'cb_in_an_outside_box_54': 'In an outside box',
           'cb_in_the_entrance_hall_83': 'In the entrance hall',
           'cb_in_the_kitchen_73': 'In the kitchen',
           'cb_in_the_garage_66': 'In the garage',
@@ -6738,44 +6746,6 @@ class InspectionPhraseEngine {
       final template = _sub('{G_ELECTRICITY}', '{DATED_ELECTRICAL_SYSTEM}');
       if (template.isNotEmpty) {
         phrases.addAll(_split(_normalize(template)));
-      }
-    }
-    if (_isChecked(answers['cb_dated_electrical_system_electrical_hazard'])) {
-      final template =
-          _sub('{G_ELECTRICITY}', '{DATED_ELECTRICAL_SYSTEM_SAFETY_HAZARD}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-
-      final hazardDefects = _labelsFor(
-        [
-          'cb_dated_electrical_system_exposed_wires',
-          'cb_dated_electrical_system_damaged_fittings',
-          'cb_dated_electrical_system_other',
-        ],
-        answers,
-        {
-          'cb_dated_electrical_system_exposed_wires': 'Exposed wires',
-          'cb_dated_electrical_system_damaged_fittings': 'Damaged fittings',
-          'cb_dated_electrical_system_other': 'Other',
-        },
-      );
-      _addOther(
-        answers,
-        'cb_dated_electrical_system_other',
-        'et_other_dated_system',
-        hazardDefects,
-      );
-      if (hazardDefects.isNotEmpty) {
-        var hazardTemplate =
-            _sub('{G_ELECTRICITY}', '{REPAIR_ELECTRICAL_HAZARD}');
-        if (hazardTemplate.isNotEmpty) {
-          hazardTemplate = hazardTemplate.replaceAll(
-            '{ELE_REP_ELE_HZRD_BECAUSE_OF}',
-            _toWords(hazardDefects).toLowerCase(),
-          );
-          phrases.addAll(_split(_normalize(hazardTemplate)));
-        }
       }
     }
 
@@ -6917,9 +6887,10 @@ class InspectionPhraseEngine {
     final condition = _cleanLower(answers['actv_condition']);
 
     if (condition == 'ok') {
+      final location = _cleanLower(answers['actv_location']);
+      if (location.isEmpty) return const [];
       var template = _sub('{G_GAS_AND_OIL}', '{MAINS_GAS_CONDITION_OK}');
       if (template.isNotEmpty) {
-        final location = _cleanLower(answers['actv_location']);
         final smellOk = !_isChecked(answers['cb_gas_smell_noted'])
             ? _sub('{G_GAS_AND_OIL}', '{CONDITION_OK_GAS_SMELL}')
             : '';
@@ -6961,10 +6932,11 @@ class InspectionPhraseEngine {
   List<String> _servicesOil(Map<String, String> answers) {
     final status = _cleanLower(answers['actv_oil_tank_status']);
     if (status != 'inspected') return const [];
-    var template = _sub('{G_GAS_AND_OIL}', '{OIL_TANK_INSPECTED}');
-    if (template.isEmpty) return const [];
     final location = _cleanLower(answers['actv_location']);
     final material = _cleanLower(answers['actv_oil_tank_made_up_of']);
+    if (location.isEmpty || material.isEmpty) return const [];
+    var template = _sub('{G_GAS_AND_OIL}', '{OIL_TANK_INSPECTED}');
+    if (template.isEmpty) return const [];
     template = template
         .replaceAll('{GAO_O_LOCATION}', location)
         .replaceAll('{GAO_O_OIL_ANK_MADE_OF}', material);
@@ -7048,10 +7020,12 @@ class InspectionPhraseEngine {
     // In Flutter they are shown on Water main screen, so generate here too.
     if (_isChecked(answers['cb_stopcock_found'])) {
       final location = _cleanLower(answers['actv_stopcok_location']);
-      var template = _sub('{G_WATER}', '{STOPCOCK_FOUND}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WATER_STOPCOCK_LOCATION}', location);
-        phrases.addAll(_split(_normalize(template)));
+      if (location.isNotEmpty) {
+        var template = _sub('{G_WATER}', '{STOPCOCK_FOUND}');
+        if (template.isNotEmpty) {
+          template = template.replaceAll('{WATER_STOPCOCK_LOCATION}', location);
+          phrases.addAll(_split(_normalize(template)));
+        }
       }
     } else if (answers.containsKey('cb_stopcock_found')) {
       final template = _sub('{G_WATER}', '{STOPCOCK_NOT_FOUND}');
@@ -7092,10 +7066,12 @@ class InspectionPhraseEngine {
     final phrases = <String>[];
     if (_isChecked(answers['cb_stopcock_found'])) {
       final location = _cleanLower(answers['actv_stopcok_location']);
-      var template = _sub('{G_WATER}', '{STOPCOCK_FOUND}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WATER_STOPCOCK_LOCATION}', location);
-        phrases.addAll(_split(_normalize(template)));
+      if (location.isNotEmpty) {
+        var template = _sub('{G_WATER}', '{STOPCOCK_FOUND}');
+        if (template.isNotEmpty) {
+          template = template.replaceAll('{WATER_STOPCOCK_LOCATION}', location);
+          phrases.addAll(_split(_normalize(template)));
+        }
       }
     } else {
       final template = _sub('{G_WATER}', '{STOPCOCK_NOT_FOUND}');

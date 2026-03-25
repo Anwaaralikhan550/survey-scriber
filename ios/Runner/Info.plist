@@ -48,6 +48,8 @@
 	<!-- Required for Face ID biometric authentication -->
 	<key>NSFaceIDUsageDescription</key>
 	<string>SurveyScriber uses Face ID to secure your app and protect your survey data.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>SurveyScriber needs camera access to capture dishes with Apple's native object capture session.</string>
 	<!-- Required for voice-to-text on survey text fields -->
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>SurveyScriber uses speech recognition to let you dictate survey notes hands-free.</string>

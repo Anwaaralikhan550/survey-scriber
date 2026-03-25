@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'app_database.dart';
 import '../network/api_client.dart';
 import '../../features/property_inspection/domain/models/inspection_models.dart';
+import '../../features/property_inspection/domain/field_phrase_processor.dart';
 
 /// Shared base class for InspectionRepository and ValuationRepository.
 ///
@@ -64,7 +65,8 @@ abstract class BaseSurveyRepository {
     // what the server or local caches have. To resume OTA updates,
     // set bundledTreeVersion back to 0 after publishing to the server.
     if (_bundledTreeVersion > 0) {
-      debugPrint('[BaseSurveyRepo] Using bundled asset (v$_bundledTreeVersion): $_treeAsset');
+      debugPrint(
+          '[BaseSurveyRepo] Using bundled asset (v$_bundledTreeVersion): $_treeAsset');
       final raw = await rootBundle.loadString(_treeAsset);
       _treeCache = InspectionTreePayload.fromJson(raw);
       return _treeCache!;
@@ -76,7 +78,8 @@ abstract class BaseSurveyRepository {
       if (await adminFile.exists()) {
         final raw = await adminFile.readAsString();
         _treeCache = InspectionTreePayload.fromJson(raw);
-        debugPrint('[BaseSurveyRepo] Loaded from admin override: $_localOverrideName');
+        debugPrint(
+            '[BaseSurveyRepo] Loaded from admin override: $_localOverrideName');
         return _treeCache!;
       }
     } catch (e) {
@@ -104,7 +107,8 @@ abstract class BaseSurveyRepository {
       if (await cacheFile.exists()) {
         final raw = await cacheFile.readAsString();
         _treeCache = InspectionTreePayload.fromJson(raw);
-        debugPrint('[BaseSurveyRepo] Loaded from OTA cache: $_localOverrideName');
+        debugPrint(
+            '[BaseSurveyRepo] Loaded from OTA cache: $_localOverrideName');
         return _treeCache!;
       }
     } catch (e) {
@@ -117,7 +121,6 @@ abstract class BaseSurveyRepository {
     _treeCache = InspectionTreePayload.fromJson(raw);
     return _treeCache!;
   }
-
 
   // ─── OTA Helpers ──────────────────────────────────────────────────
 
@@ -181,8 +184,8 @@ abstract class BaseSurveyRepository {
   /// to decide whether V2 sections need to be queued for sync.
   Future<bool> ensureSurveyInitialized(String surveyId) async {
     final tree = await loadTree();
-    final expectedCount =
-        tree.sections.fold<int>(0, (sum, section) => sum + section.nodes.length);
+    final expectedCount = tree.sections
+        .fold<int>(0, (sum, section) => sum + section.nodes.length);
 
     final existingRows = await (_db.select(_db.inspectionV2Screens)
           ..where((tbl) => tbl.surveyId.equals(surveyId)))
@@ -241,7 +244,8 @@ abstract class BaseSurveyRepository {
       });
     });
 
-    final totalScreens = entries.where((e) => e.nodeType.value == 'screen').length;
+    final totalScreens =
+        entries.where((e) => e.nodeType.value == 'screen').length;
     await updateSurveyProgress(surveyId, totalOverride: totalScreens);
 
     return true;
@@ -252,7 +256,8 @@ abstract class BaseSurveyRepository {
     String sectionKey,
   ) async {
     final query = _db.select(_db.inspectionV2Screens)
-      ..where((tbl) => tbl.surveyId.equals(surveyId) & tbl.sectionKey.equals(sectionKey))
+      ..where((tbl) =>
+          tbl.surveyId.equals(surveyId) & tbl.sectionKey.equals(sectionKey))
       ..orderBy([(tbl) => OrderingTerm.asc(tbl.displayOrder)]);
     return query.get();
   }
@@ -264,7 +269,8 @@ abstract class BaseSurveyRepository {
     final screens = <InspectionNodeDefinition>[];
     for (final section in tree.sections) {
       for (final node in section.nodes) {
-        if (node.type == InspectionNodeType.screen && node.parentId == parentId) {
+        if (node.type == InspectionNodeType.screen &&
+            node.parentId == parentId) {
           screens.add(node);
         }
       }
@@ -277,7 +283,8 @@ abstract class BaseSurveyRepository {
     String screenId,
   ) async {
     return (_db.select(_db.inspectionV2Screens)
-          ..where((tbl) => tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId))
+          ..where((tbl) =>
+              tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId))
           ..limit(1))
         .getSingleOrNull();
   }
@@ -295,7 +302,8 @@ abstract class BaseSurveyRepository {
         .get();
     final result = <String, Map<String, String>>{};
     for (final row in rows) {
-      result.putIfAbsent(row.screenId, () => {})[row.fieldKey] = row.value ?? '';
+      result.putIfAbsent(row.screenId, () => {})[row.fieldKey] =
+          row.value ?? '';
     }
     return result;
   }
@@ -314,7 +322,8 @@ abstract class BaseSurveyRepository {
     String screenId,
   ) async {
     final rows = await (_db.select(_db.inspectionV2Answers)
-          ..where((tbl) => tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
+          ..where((tbl) =>
+              tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
         .get();
     return {
       for (final row in rows) row.fieldKey: row.value ?? '',
@@ -351,7 +360,8 @@ abstract class BaseSurveyRepository {
     required bool isCompleted,
   }) async {
     await (_db.update(_db.inspectionV2Screens)
-          ..where((tbl) => tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
+          ..where((tbl) =>
+              tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
         .write(
       InspectionV2ScreensCompanion(
         isCompleted: Value(isCompleted),
@@ -362,7 +372,8 @@ abstract class BaseSurveyRepository {
     await updateSurveyProgress(surveyId);
   }
 
-  Future<void> updateSurveyProgress(String surveyId, {int? totalOverride}) async {
+  Future<void> updateSurveyProgress(String surveyId,
+      {int? totalOverride}) async {
     final screens = await (_db.select(_db.inspectionV2Screens)
           ..where((tbl) => tbl.surveyId.equals(surveyId)))
         .get();
@@ -372,7 +383,8 @@ abstract class BaseSurveyRepository {
     final completed = screenRows.where((s) => s.isCompleted).length;
     final progress = total == 0 ? 0.0 : completed / total;
 
-    await (_db.update(_db.surveys)..where((tbl) => tbl.id.equals(surveyId))).write(
+    await (_db.update(_db.surveys)..where((tbl) => tbl.id.equals(surveyId)))
+        .write(
       SurveysCompanion(
         totalSections: Value(total),
         completedSections: Value(completed),
@@ -392,7 +404,8 @@ abstract class BaseSurveyRepository {
     bool phraseEditedManually = false,
   }) async {
     await (_db.update(_db.inspectionV2Screens)
-          ..where((tbl) => tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
+          ..where((tbl) =>
+              tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
         .write(
       InspectionV2ScreensCompanion(
         phraseOutput: Value(phraseJson),
@@ -406,13 +419,36 @@ abstract class BaseSurveyRepository {
   ///
   /// Result is a JSON map: `{ screenId: [phrase1, phrase2, ...] }`.
   /// Screens with no phrases are omitted.
-  Future<String> getAggregatedPhraseOutput(
-    String surveyId,
-    String sectionKey,
-  ) async {
+  Future<String> getAggregatedPhraseOutput(String surveyId, String sectionKey,
+      {List<String> Function(String screenId, Map<String, String> answers)?
+          buildEnginePhrases}) async {
     final screens = await getNodesForSection(surveyId, sectionKey);
+    final nodeMap = buildEnginePhrases != null ? await loadNodeMap() : null;
     final map = <String, dynamic>{};
     for (final screen in screens) {
+      if (screen.phraseEditedManually &&
+          screen.phraseOutput != null &&
+          screen.phraseOutput!.isNotEmpty) {
+        map[screen.screenId] = jsonDecode(screen.phraseOutput!);
+        continue;
+      }
+
+      if (buildEnginePhrases != null) {
+        final answers = await getScreenAnswersMap(surveyId, screen.screenId);
+        if (answers.isEmpty) continue;
+        final enginePhrases = buildEnginePhrases(screen.screenId, answers);
+        final fields = nodeMap?[screen.screenId]?.fields ?? const [];
+        final fieldPhrases = FieldPhraseProcessor.buildFieldPhrases(
+          fields,
+          answers,
+        );
+        final phrases = [...enginePhrases, ...fieldPhrases];
+        if (phrases.isNotEmpty) {
+          map[screen.screenId] = phrases;
+        }
+        continue;
+      }
+
       if (screen.phraseOutput != null && screen.phraseOutput!.isNotEmpty) {
         map[screen.screenId] = jsonDecode(screen.phraseOutput!);
       }
@@ -429,7 +465,8 @@ abstract class BaseSurveyRepository {
     required String note,
   }) async {
     await (_db.update(_db.inspectionV2Screens)
-          ..where((tbl) => tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
+          ..where((tbl) =>
+              tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
         .write(
       InspectionV2ScreensCompanion(
         userNote: Value(note),

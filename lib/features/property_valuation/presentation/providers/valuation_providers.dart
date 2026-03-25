@@ -24,12 +24,14 @@ final valuationRepositoryProvider = Provider<ValuationRepository>((ref) {
 /// Bumped after [ValuationScreenNotifier.markComplete].
 final valuationRefreshProvider = StateProvider<int>((ref) => 0);
 
-final valuationSectionsProvider = FutureProvider<List<InspectionSectionDefinition>>((ref) async {
+final valuationSectionsProvider =
+    FutureProvider<List<InspectionSectionDefinition>>((ref) async {
   final repo = ref.watch(valuationRepositoryProvider);
   return repo.getSections();
 });
 
-final valuationNodeMapProvider = FutureProvider<Map<String, InspectionNodeDefinition>>((ref) async {
+final valuationNodeMapProvider =
+    FutureProvider<Map<String, InspectionNodeDefinition>>((ref) async {
   final repo = ref.watch(valuationRepositoryProvider);
   final tree = await repo.loadTree();
   final map = <String, InspectionNodeDefinition>{};
@@ -41,8 +43,8 @@ final valuationNodeMapProvider = FutureProvider<Map<String, InspectionNodeDefini
   return map;
 });
 
-final valuationNodesProvider = FutureProvider.family
-    .autoDispose<List<InspectionV2Screen>, ({String surveyId, String sectionKey})>(
+final valuationNodesProvider = FutureProvider.family.autoDispose<
+    List<InspectionV2Screen>, ({String surveyId, String sectionKey})>(
   (ref, params) async {
     // Re-fetch whenever the refresh counter is bumped (e.g. after markComplete).
     ref.watch(valuationRefreshProvider);
@@ -52,8 +54,8 @@ final valuationNodesProvider = FutureProvider.family
   },
 );
 
-final valuationChildScreensProvider = FutureProvider.family
-    .autoDispose<List<InspectionNodeDefinition>, String>(
+final valuationChildScreensProvider =
+    FutureProvider.family.autoDispose<List<InspectionNodeDefinition>, String>(
   (ref, parentId) async {
     final repo = ref.watch(valuationRepositoryProvider);
     return repo.getChildScreens(parentId);
@@ -121,7 +123,9 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
       final isFirstInit = await _repo.ensureSurveyInitialized(_surveyId);
       final definition = await _repo.getNodeDefinition(_screenId);
       final screenDefinition =
-          definition != null && definition.type == InspectionNodeType.screen ? definition : null;
+          definition != null && definition.type == InspectionNodeType.screen
+              ? definition
+              : null;
       final meta = await _repo.getScreen(_surveyId, _screenId);
       final answers = await _repo.getScreenAnswersMap(_surveyId, _screenId);
 
@@ -167,7 +171,8 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
       state = state.copyWith(isSaving: false);
       return true;
     } catch (e) {
-      state = state.copyWith(isSaving: false, errorMessage: 'Failed to save: $e');
+      state =
+          state.copyWith(isSaving: false, errorMessage: 'Failed to save: $e');
       return false;
     }
   }
@@ -196,7 +201,8 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
 
       return true;
     } catch (e) {
-      state = state.copyWith(isSaving: false, errorMessage: 'Failed to complete: $e');
+      state = state.copyWith(
+          isSaving: false, errorMessage: 'Failed to complete: $e');
       return false;
     }
   }
@@ -210,8 +216,8 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
     try {
       final phraseEngine = _ref.read(valuationPhraseEngineProvider);
       final enginePhrases = phraseEngine.buildPhrases(_screenId, state.answers);
-      final fieldPhrases =
-          FieldPhraseProcessor.buildFieldPhrases(state.screenDefinition!.fields, state.answers);
+      final fieldPhrases = FieldPhraseProcessor.buildFieldPhrases(
+          state.screenDefinition!.fields, state.answers);
       final phrases = [...enginePhrases, ...fieldPhrases];
 
       final phraseJson = jsonEncode(phrases);
@@ -239,11 +245,18 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
   Future<void> _queuePhraseOutputForSync() async {
     try {
       final syncManager = _ref.read(syncManagerProvider);
-      final sectionKey = await _repo.getSectionKeyForScreen(_surveyId, _screenId);
+      final sectionKey =
+          await _repo.getSectionKeyForScreen(_surveyId, _screenId);
       if (sectionKey == null) return;
 
       final sectionId = V2SyncHelper.sectionSyncId(_surveyId, sectionKey);
-      final aggregatedJson = await _repo.getAggregatedPhraseOutput(_surveyId, sectionKey);
+      final phraseEngine = _ref.read(valuationPhraseEngineProvider);
+      final aggregatedJson = await _repo.getAggregatedPhraseOutput(
+        _surveyId,
+        sectionKey,
+        buildEnginePhrases: (screenId, answers) =>
+            phraseEngine.buildPhrases(screenId, answers),
+      );
       final sectionMeta = await _getSectionMeta(sectionKey);
 
       await syncManager.queueSync(
@@ -264,7 +277,8 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
   }
 
   /// Look up V2 section metadata (title, order) by sectionKey from the tree.
-  Future<({String title, int order})?> _getSectionMeta(String sectionKey) async {
+  Future<({String title, int order})?> _getSectionMeta(
+      String sectionKey) async {
     try {
       final sections = await _repo.getV2SectionMeta();
       final match = sections.where((s) => s.key == sectionKey).firstOrNull;
@@ -297,7 +311,8 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
           },
         );
       }
-      debugPrint('[ValuationSync] Queued ${sections.length} V2 sections for survey $_surveyId');
+      debugPrint(
+          '[ValuationSync] Queued ${sections.length} V2 sections for survey $_surveyId');
     } catch (e) {
       // Non-fatal: local data is already saved, sync will be retried.
       debugPrint('[ValuationSync] Failed to queue sections: $e');
@@ -310,7 +325,8 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
       final syncManager = _ref.read(syncManagerProvider);
 
       // Resolve sectionKey → deterministic section UUID for the FK.
-      final sectionKey = await _repo.getSectionKeyForScreen(_surveyId, _screenId);
+      final sectionKey =
+          await _repo.getSectionKeyForScreen(_surveyId, _screenId);
       if (sectionKey == null) return;
       final sectionId = V2SyncHelper.sectionSyncId(_surveyId, sectionKey);
 
@@ -325,7 +341,8 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
         if (_initialAnswers[fieldKey] == value) continue;
 
         final isNew = !_initialAnswers.containsKey(fieldKey);
-        final answerId = V2SyncHelper.answerSyncId(_surveyId, _screenId, fieldKey);
+        final answerId =
+            V2SyncHelper.answerSyncId(_surveyId, _screenId, fieldKey);
 
         await syncManager.queueSync(
           entityType: SyncEntityType.answer,
@@ -349,8 +366,10 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
   }
 }
 
-final valuationScreenProvider = StateNotifierProvider.autoDispose.family
-    <ValuationScreenNotifier, ValuationScreenState, ({String surveyId, String screenId})>(
+final valuationScreenProvider = StateNotifierProvider.autoDispose.family<
+    ValuationScreenNotifier,
+    ValuationScreenState,
+    ({String surveyId, String screenId})>(
   (ref, params) {
     final repo = ref.watch(valuationRepositoryProvider);
     return ValuationScreenNotifier(repo, ref, params.surveyId, params.screenId);

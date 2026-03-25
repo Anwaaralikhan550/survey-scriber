@@ -15,16 +15,22 @@ abstract final class Routes {
   static const String surveyOverview = '/survey/:id/overview';
   static const String surveyReport = '/survey/:id/report';
   static const String inspectionDetail = '/survey/:id/inspection';
-  static const String inspectionSection = '/survey/:id/inspection/section/:sectionId';
-  static const String inspectionNode = '/survey/:id/inspection/section/:sectionId/node/:nodeId';
-  static const String inspectionScreen = '/survey/:id/inspection/section/:sectionId/screen/:screenId';
+  static const String inspectionSection =
+      '/survey/:id/inspection/section/:sectionId';
+  static const String inspectionNode =
+      '/survey/:id/inspection/section/:sectionId/node/:nodeId';
+  static const String inspectionScreen =
+      '/survey/:id/inspection/section/:sectionId/screen/:screenId';
   static const String inspectionCompass = '/survey/:id/inspection/compass';
 
   // Valuation routes
   static const String valuationDetail = '/survey/:id/valuation';
-  static const String valuationSection = '/survey/:id/valuation/section/:sectionId';
-  static const String valuationNode = '/survey/:id/valuation/section/:sectionId/node/:nodeId';
-  static const String valuationScreen = '/survey/:id/valuation/section/:sectionId/screen/:screenId';
+  static const String valuationSection =
+      '/survey/:id/valuation/section/:sectionId';
+  static const String valuationNode =
+      '/survey/:id/valuation/section/:sectionId/node/:nodeId';
+  static const String valuationScreen =
+      '/survey/:id/valuation/section/:sectionId/screen/:screenId';
 
   static const String surveyMedia = '/survey/:id/media';
   static const String surveySignatures = '/survey/:id/signatures';
@@ -83,17 +89,20 @@ abstract final class Routes {
   static const String clientBookingRequests = '/client/booking-requests';
   static const String clientBookingRequestNew = '/client/booking-requests/new';
   static const String clientChangeRequests = '/client/change-requests';
-  static const String clientRequestChange = '/client/bookings/:id/request-change';
+  static const String clientRequestChange =
+      '/client/bookings/:id/request-change';
 
   // PDF History
   static const String pdfHistory = '/pdf-history';
 
   // Report Preview
   static const String reportPreview = '/report-preview/:reportId';
-  static String reportPreviewPath(String reportId) => '/report-preview/$reportId';
+  static String reportPreviewPath(String reportId) =>
+      '/report-preview/$reportId';
 
   // Notifications
   static const String notifications = '/notifications';
+  static const String foodCapturePrototype = '/prototypes/food-capture';
 
   // Helper methods for dynamic routes
   static String surveyDetailPath(String id) => '/survey/$id';
@@ -102,11 +111,14 @@ abstract final class Routes {
   static String inspectionDetailPath(String id) => '/survey/$id/inspection';
   static String inspectionSectionPath(String id, String sectionId) =>
       '/survey/$id/inspection/section/$sectionId';
-  static String inspectionNodePath(String id, String sectionId, String nodeId) =>
+  static String inspectionNodePath(
+          String id, String sectionId, String nodeId) =>
       '/survey/$id/inspection/section/$sectionId/node/$nodeId';
-  static String inspectionScreenPath(String id, String sectionId, String screenId) =>
+  static String inspectionScreenPath(
+          String id, String sectionId, String screenId) =>
       '/survey/$id/inspection/section/$sectionId/screen/$screenId';
-  static String inspectionCompassPath(String id) => '/survey/$id/inspection/compass';
+  static String inspectionCompassPath(String id) =>
+      '/survey/$id/inspection/compass';
 
   // Valuation path helpers
   static String valuationDetailPath(String id) => '/survey/$id/valuation';
@@ -114,14 +126,17 @@ abstract final class Routes {
       '/survey/$id/valuation/section/$sectionId';
   static String valuationNodePath(String id, String sectionId, String nodeId) =>
       '/survey/$id/valuation/section/$sectionId/node/$nodeId';
-  static String valuationScreenPath(String id, String sectionId, String screenId) =>
+  static String valuationScreenPath(
+          String id, String sectionId, String screenId) =>
       '/survey/$id/valuation/section/$sectionId/screen/$screenId';
 
   static String surveyMediaPath(String id) => '/survey/$id/media';
   static String surveySignaturesPath(String id) => '/survey/$id/signatures';
   static String surveyAttachmentsPath(String id) => '/survey/$id/attachments';
-  static String signatureCapturePath(String id) => '/survey/$id/signature/capture';
-  static String reinspectionOverviewPath(String id) => '/survey/$id/reinspection';
+  static String signatureCapturePath(String id) =>
+      '/survey/$id/signature/capture';
+  static String reinspectionOverviewPath(String id) =>
+      '/survey/$id/reinspection';
   static String clientRequestChangePath(String bookingId) =>
       '/client/bookings/$bookingId/request-change';
   static String bookingDetailPath(String id) => '/scheduling/bookings/$id';

@@ -5799,7 +5799,7 @@
     },
     {
       "key": "G",
-      "title": "G Service",
+      "title": "G Services",
       "nodes": [
         {
           "id": "group_electricity_86",
@@ -6524,49 +6524,9 @@
               "conditionalMode": "show"
             },
             {
-              "id": "cb_dated_electrical_system_electrical_hazard",
-              "label": "Electric Hazard",
-              "type": "checkbox"
-            },
-            {
               "id": "cb_dated_electrical_system",
               "label": "Dated electrical system",
               "type": "checkbox"
-            },
-            {
-              "id": "label_defect",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "cb_dated_electrical_system_electrical_hazard",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_dated_electrical_system_exposed_wires",
-              "label": "Exposed wires",
-              "type": "checkbox",
-              "conditionalOn": "cb_dated_electrical_system_electrical_hazard",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_dated_electrical_system_damaged_fittings",
-              "label": "Damaged fittings",
-              "type": "checkbox",
-              "conditionalOn": "cb_dated_electrical_system_electrical_hazard",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_dated_electrical_system_other",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_dated_electrical_system_electrical_hazard",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_dated_system",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_dated_electrical_system_other & cb_dated_electrical_system_electrical_hazard",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -7013,7 +6973,7 @@
             },
             {
               "id": "actv_oil_tank_made_up_of",
-              "label": "Location",
+              "label": "Oil Tank Made Up of",
               "type": "dropdown",
               "options": [
                 "Plastic",

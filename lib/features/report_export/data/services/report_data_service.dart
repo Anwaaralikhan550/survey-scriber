@@ -25,6 +25,7 @@ class V2RawReportData {
     required this.photoFilePaths,
     required this.signatureRows,
     this.persistedPhrases = const {},
+    this.persistedPhraseManualFlags = const {},
     this.persistedUserNotes = const {},
   });
 
@@ -49,6 +50,12 @@ class V2RawReportData {
   ///
   /// Empty map for legacy surveys that predate schema v18.
   final Map<String, List<String>> persistedPhrases;
+
+  /// screenId → whether the persisted phrases came from a manual preview edit.
+  ///
+  /// Non-manual persisted phrases are treated as cache only and may be
+  /// regenerated from answers by the builder to avoid stale auto-output.
+  final Map<String, bool> persistedPhraseManualFlags;
 
   /// screenId → surveyor's custom note from the `user_note` DB column.
   ///
@@ -110,13 +117,17 @@ class ReportDataService {
 
     final screenStates = _buildScreenStatesMap(allScreenRows);
     final persistedPhrases = _buildPersistedPhrasesMap(allScreenRows);
+    final persistedPhraseManualFlags =
+        _buildPersistedPhraseManualFlagsMap(allScreenRows);
     final persistedUserNotes = _buildPersistedUserNotesMap(allScreenRows);
 
-    AppLogger.d('ReportData',
+    AppLogger.d(
+        'ReportData',
         'Loaded inspection data: ${allAnswers.length} screens, '
-        '${photos.length} photos, ${sigs.length} signatures, '
-        '${persistedPhrases.length} screens with persisted phrases, '
-        '${persistedUserNotes.length} screens with user notes');
+            '${photos.length} photos, ${sigs.length} signatures, '
+            '${persistedPhrases.length} screens with persisted phrases, '
+            '${persistedPhraseManualFlags.length} screens with phrase flags, '
+            '${persistedUserNotes.length} screens with user notes');
 
     return V2RawReportData(
       survey: survey,
@@ -126,6 +137,7 @@ class ReportDataService {
       photoFilePaths: photos,
       signatureRows: sigs,
       persistedPhrases: persistedPhrases,
+      persistedPhraseManualFlags: persistedPhraseManualFlags,
       persistedUserNotes: persistedUserNotes,
     );
   }
@@ -152,13 +164,17 @@ class ReportDataService {
 
     final screenStates = _buildScreenStatesMap(allScreenRows);
     final persistedPhrases = _buildPersistedPhrasesMap(allScreenRows);
+    final persistedPhraseManualFlags =
+        _buildPersistedPhraseManualFlagsMap(allScreenRows);
     final persistedUserNotes = _buildPersistedUserNotesMap(allScreenRows);
 
-    AppLogger.d('ReportData',
+    AppLogger.d(
+        'ReportData',
         'Loaded valuation data: ${allAnswers.length} screens, '
-        '${photos.length} photos, ${sigs.length} signatures, '
-        '${persistedPhrases.length} screens with persisted phrases, '
-        '${persistedUserNotes.length} screens with user notes');
+            '${photos.length} photos, ${sigs.length} signatures, '
+            '${persistedPhrases.length} screens with persisted phrases, '
+            '${persistedPhraseManualFlags.length} screens with phrase flags, '
+            '${persistedUserNotes.length} screens with user notes');
 
     return V2RawReportData(
       survey: survey,
@@ -168,6 +184,7 @@ class ReportDataService {
       photoFilePaths: photos,
       signatureRows: sigs,
       persistedPhrases: persistedPhrases,
+      persistedPhraseManualFlags: persistedPhraseManualFlags,
       persistedUserNotes: persistedUserNotes,
     );
   }
@@ -187,7 +204,9 @@ class ReportDataService {
   ) {
     final result = <String, List<String>>{};
     for (final row in rows) {
-      if (row.phraseOutput != null && row.phraseOutput!.isNotEmpty) {
+      if (row.phraseEditedManually &&
+          row.phraseOutput != null &&
+          row.phraseOutput!.isNotEmpty) {
         try {
           final decoded = jsonDecode(row.phraseOutput!) as List<dynamic>;
           result[row.screenId] = decoded.cast<String>();
@@ -197,6 +216,16 @@ class ReportDataService {
       }
     }
     return result;
+  }
+
+  Map<String, bool> _buildPersistedPhraseManualFlagsMap(
+    List<InspectionV2Screen> rows,
+  ) {
+    return {
+      for (final row in rows)
+        if (row.phraseOutput != null && row.phraseOutput!.isNotEmpty)
+          row.screenId: row.phraseEditedManually,
+    };
   }
 
   /// Extract surveyor custom notes from pre-fetched screen rows.
@@ -253,8 +282,8 @@ class ReportDataService {
               // Persist so we don't regenerate next time
               await signatureDao.updatePreviewPath(item.id, filePath);
             } catch (e) {
-              AppLogger.w('ReportData',
-                  'Failed to generate signature preview: $e');
+              AppLogger.w(
+                  'ReportData', 'Failed to generate signature preview: $e');
             }
           }
         }

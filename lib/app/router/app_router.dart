@@ -49,6 +49,7 @@ import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/forms/presentation/pages/forms_page.dart';
 import '../../features/invoices/presentation/pages/invoice_detail_page.dart';
 import '../../features/invoices/presentation/pages/invoices_list_page.dart';
+import '../../features/prototypes/food_capture/presentation/pages/food_capture_prototype_page.dart';
 import '../../features/property_inspection/presentation/pages/inspection_overview_page.dart';
 import '../../features/property_inspection/presentation/pages/inspection_compass_page.dart';
 import '../../features/property_inspection/presentation/pages/inspection_screen_page.dart';
@@ -87,7 +88,8 @@ final _rootNavigatorKey = SessionExpiryHandler.instance.navigatorKey;
 
 /// F2 FIX: Navigator keys for each shell branch.
 /// Each branch needs its own key to properly manage back-stack and prevent memory leaks.
-final _dashboardNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'dashboard');
+final _dashboardNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'dashboard');
 final _formsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'forms');
 final _reportsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'reports');
 final _searchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'search');
@@ -100,7 +102,8 @@ final _searchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'search');
 String? _safeParam(GoRouterState state, String key) {
   final value = state.pathParameters[key];
   if (value == null || value.isEmpty) {
-    AppLogger.e('Router', 'Missing required path parameter: $key for ${state.matchedLocation}');
+    AppLogger.e('Router',
+        'Missing required path parameter: $key for ${state.matchedLocation}');
     return null;
   }
   return value;
@@ -141,7 +144,8 @@ Widget _buildWithTwoParams({
   final param1 = _safeParam(state, param1Key);
   final param2 = _safeParam(state, param2Key);
   if (param1 == null || param2 == null) {
-    return _MissingParamErrorPage(paramKey: param1 == null ? param1Key : param2Key);
+    return _MissingParamErrorPage(
+        paramKey: param1 == null ? param1Key : param2Key);
   }
   return builder(param1, param2);
 }
@@ -152,8 +156,10 @@ class _AuthRefreshNotifier extends ChangeNotifier {
   _AuthRefreshNotifier(Ref ref) {
     // Listen to staff auth state changes
     ref.listen<AuthState>(authNotifierProvider, (previous, next) {
-      AppLogger.d('Router',
-          'Auth state changed: ${previous?.status} -> ${next.status}',);
+      AppLogger.d(
+        'Router',
+        'Auth state changed: ${previous?.status} -> ${next.status}',
+      );
       notifyListeners();
     });
     // Listen to client auth state changes
@@ -196,8 +202,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       final isClientAuthenticated = clientAuthState.isAuthenticated;
       final location = state.matchedLocation;
 
-      AppLogger.d('Router',
-          'Redirect check: location=$location, isAuthenticated=$isAuthenticated, status=${authState.status}',);
+      AppLogger.d(
+        'Router',
+        'Redirect check: location=$location, isAuthenticated=$isAuthenticated, status=${authState.status}',
+      );
 
       // F1 FIX: Auth routes with exact matching to prevent auth bypass
       // Using exact route matching instead of startsWith to prevent
@@ -255,8 +263,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       // Handle staff/admin routes
       // If on auth route and authenticated, redirect to dashboard
       if (isAuthRoute && isAuthenticated) {
-        AppLogger.d('Router',
-            'On auth route but authenticated, redirecting to dashboard',);
+        AppLogger.d(
+          'Router',
+          'On auth route but authenticated, redirecting to dashboard',
+        );
         return Routes.dashboard;
       }
 
@@ -286,7 +296,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           authState.user?.role,
         );
         if (permissionRedirect != null) {
-          AppLogger.d('Router', 'Permission denied for $location, redirecting to $permissionRedirect');
+          AppLogger.d('Router',
+              'Permission denied for $location, redirecting to $permissionRedirect');
           return permissionRedirect;
         }
       }
@@ -405,6 +416,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           );
         },
       ),
+      GoRoute(
+        path: Routes.foodCapturePrototype,
+        builder: (context, state) => const FoodCapturePrototypePage(),
+      ),
 
       // ==================== Main App Shell ====================
       StatefulShellRoute.indexedStack(
@@ -504,7 +519,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           final sectionId = _safeParam(state, 'sectionId');
           final nodeId = _safeParam(state, 'nodeId');
           if (surveyId == null || sectionId == null || nodeId == null) {
-            return const _MissingParamErrorPage(paramKey: 'id/sectionId/nodeId');
+            return const _MissingParamErrorPage(
+                paramKey: 'id/sectionId/nodeId');
           }
           return InspectionSectionPage(
             surveyId: surveyId,
@@ -561,7 +577,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           final sectionId = _safeParam(state, 'sectionId');
           final nodeId = _safeParam(state, 'nodeId');
           if (surveyId == null || sectionId == null || nodeId == null) {
-            return const _MissingParamErrorPage(paramKey: 'id/sectionId/nodeId');
+            return const _MissingParamErrorPage(
+                paramKey: 'id/sectionId/nodeId');
           }
           return ValuationSectionPage(
             surveyId: surveyId,
@@ -639,7 +656,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           // Redirect to survey overview which has proper PDF export functionality
           final id = state.pathParameters['id'];
           if (id == null || id.isEmpty) {
-            AppLogger.e('Router', 'Missing id parameter for surveyReport redirect');
+            AppLogger.e(
+                'Router', 'Missing id parameter for surveyReport redirect');
             return Routes.dashboard;
           }
           return Routes.surveyOverviewPath(id);

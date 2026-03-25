@@ -91,6 +91,11 @@ class ReportBuilder {
     'location and construction',
   };
 
+  static const List<String> _legacyGLimitationsPhrases = <String>[
+    'I have not carried out any testing of any of the service or installations, and my assessment is based on a visual inspection only.',
+    'Condition ratings assume that current compliance certificates are available for all services and should be verified. In the absence of appropriate certification, condition ratings would by default reduce to the lowest level, which is condition rating 3.',
+  ];
+
   ReportDocument build(
     V2RawReportData rawData,
     ExportConfig config, {
@@ -236,18 +241,462 @@ class ReportBuilder {
         (groupId == 'group_construction_2' || groupTitle == 'construction');
   }
 
+  bool _isSectionGLegacyGroup(
+    InspectionSectionDefinition sectionDef,
+    InspectionNodeDefinition group,
+  ) {
+    final sectionKey = sectionDef.key.trim().toUpperCase();
+    final groupId = group.id.trim().toLowerCase();
+    return sectionKey == 'G' &&
+        group.parentId == null &&
+        group.type == InspectionNodeType.group &&
+        groupId.startsWith('group_g');
+  }
+
   bool _shouldShowMergedDescendantSubheadings(
     InspectionSectionDefinition sectionDef,
     InspectionNodeDefinition group,
     List<InspectionNodeDefinition> descendants,
   ) {
     if (descendants.length <= 1) return false;
-    // Legacy parity: merged Section E and F groups are paragraph-first and do
+    // Legacy parity: merged Section E, F and G groups are paragraph-first and do
     // not render per-child subheadings from the Flutter tree.
     final sectionKey = sectionDef.key.trim().toUpperCase();
-    if (sectionKey == 'E' || sectionKey == 'F') return false;
+    if (sectionKey == 'E' || sectionKey == 'F' || sectionKey == 'G') {
+      return false;
+    }
     if (_isSectionDConstructionGroup(sectionDef, group)) return false;
     return true;
+  }
+
+  ReportScreen _legacyGLimitationsScreen() {
+    final phraseEngine = inspectionPhraseEngine;
+    if (phraseEngine != null) {
+      final phrases = phraseEngine.buildStaticSubPhrases(
+          '{G_LIMITATIONS_STANDARD_TEXT}', '');
+      if (phrases.isNotEmpty) {
+        return ReportScreen(
+          screenId: 'derived_g_limitations',
+          title: 'Limitations',
+          fields: const <ReportField>[],
+          phrases: phrases,
+        );
+      }
+    }
+    return const ReportScreen(
+      screenId: 'derived_g_limitations',
+      title: 'Limitations',
+      fields: <ReportField>[],
+      phrases: _legacyGLimitationsPhrases,
+    );
+  }
+
+  ({List<String> body, List<String> rating, List<String> notes})
+      _splitMainScreenPhrases(List<String> phrases) {
+    final body = <String>[];
+    final rating = <String>[];
+    final notes = <String>[];
+    for (final phrase in phrases) {
+      final lower = phrase.trim().toLowerCase();
+      if (lower.startsWith('condition rating is:')) {
+        rating.add(phrase);
+      } else if (lower.startsWith('note:') || lower.startsWith('notes:')) {
+        notes.add(phrase);
+      } else {
+        body.add(phrase);
+      }
+    }
+    return (body: body, rating: rating, notes: notes);
+  }
+
+  List<String> _dedupeOrderedPhrases(List<String> phrases) {
+    final seen = <String>{};
+    final result = <String>[];
+    for (final phrase in phrases) {
+      final key = phrase
+          .trim()
+          .toLowerCase()
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .replaceAll(RegExp(r'[^\w\s]'), '')
+          .trim();
+      if (key.isEmpty || seen.contains(key)) continue;
+      seen.add(key);
+      result.add(phrase);
+    }
+    return result;
+  }
+
+  List<String> _withoutMatchingPhrases(
+    List<String> source,
+    List<String> removal,
+  ) {
+    if (source.isEmpty || removal.isEmpty) return source;
+    final removalKeys = removal
+        .map((p) => p.trim().toLowerCase().replaceAll(RegExp(r'\s+'), ' '))
+        .toSet();
+    return source
+        .where((phrase) => !removalKeys.contains(
+            phrase.trim().toLowerCase().replaceAll(RegExp(r'\s+'), ' ')))
+        .toList();
+  }
+
+  List<String> _buildPhrasesForScreenId(
+    V2RawReportData rawData,
+    String screenId,
+    bool isInspection,
+  ) {
+    final answers = _answersForScreen(rawData, screenId);
+    return _buildPhrases(screenId, answers, isInspection);
+  }
+
+  List<String> _legacySectionGGroupPhrases(
+    InspectionNodeDefinition group,
+    V2RawReportData rawData,
+    bool isInspection,
+  ) {
+    if (!isInspection || inspectionPhraseEngine == null) return const [];
+
+    final engine = inspectionPhraseEngine!;
+    final groupId = group.id.trim().toLowerCase();
+
+    List<String> withRepairHeading(String heading, List<String> phrases) {
+      if (phrases.isEmpty) return const [];
+      return <String>[_mergedSubheading(heading), ...phrases];
+    }
+
+    switch (groupId) {
+      case 'group_g1_electricity_85':
+        final notInspected = _buildPhrasesForScreenId(
+          rawData,
+          'activity_services_electricity_not_inspected',
+          isInspection,
+        );
+        if (notInspected.isNotEmpty) return notInspected;
+
+        final main = _splitMainScreenPhrases(_buildPhrasesForScreenId(
+          rawData,
+          'activity_services_electricity_main_screen',
+          isInspection,
+        ));
+        final standard2 = engine.buildStaticSubPhrases(
+            '{G_ELECTRICITY}', '{STANDARD_TEXT_2}');
+        final repairs = <String>[
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_electricity_repair_loose_panels',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_electricity_repair_electrical_hazard',
+            isInspection,
+          ),
+        ];
+        return _dedupeOrderedPhrases([
+          ...main.body,
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_service_about_electricity',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_solar_power',
+            isInspection,
+          ),
+          ...withRepairHeading('Electricity Repair', repairs),
+          ...standard2,
+          ...main.rating,
+          ...main.notes,
+        ]);
+
+      case 'group_g2_gas_and_oil_88':
+        final notInspected = _buildPhrasesForScreenId(
+          rawData,
+          'activity_services_gas_oil_not_inspected',
+          isInspection,
+        );
+        if (notInspected.isNotEmpty) return notInspected;
+
+        final main = _splitMainScreenPhrases(_buildPhrasesForScreenId(
+          rawData,
+          'activity_services_gas_oil_main_screen',
+          isInspection,
+        ));
+        final repairs = <String>[
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_gas_oil_repair_gas_meter',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_gas_oil_repair_storage_tank_pipework',
+            isInspection,
+          ),
+        ];
+        return _dedupeOrderedPhrases([
+          ...main.body,
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_main_gas',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_oil',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_gas_oil',
+            isInspection,
+          ),
+          ...withRepairHeading('Gas and Oil Repair', repairs),
+          ...main.rating,
+          ...main.notes,
+        ]);
+
+      case 'group_g3_water_91':
+        final notInspected = _buildPhrasesForScreenId(
+          rawData,
+          'activity_services_water_not_inspected',
+          isInspection,
+        );
+        if (notInspected.isNotEmpty) return notInspected;
+
+        final main = _splitMainScreenPhrases(_buildPhrasesForScreenId(
+          rawData,
+          'activity_services_water_main_screen',
+          isInspection,
+        ));
+        final standard2 =
+            engine.buildStaticSubPhrases('{G_WATER}', '{STANDARD_TEXT_2}');
+        final body = _withoutMatchingPhrases(main.body, standard2);
+        return _dedupeOrderedPhrases([
+          ...body,
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_water_main_water',
+            isInspection,
+          ),
+          ...standard2,
+          ...main.rating,
+          ...main.notes,
+        ]);
+
+      case 'group_g4_heating_92':
+        final notInspected = _buildPhrasesForScreenId(
+          rawData,
+          'activity_services_heating_not_inspected',
+          isInspection,
+        );
+        if (notInspected.isNotEmpty) return notInspected;
+
+        final main = _splitMainScreenPhrases(_buildPhrasesForScreenId(
+          rawData,
+          'activity_services_heating_main_screen',
+          isInspection,
+        ));
+        final standard2 =
+            engine.buildStaticSubPhrases('{G_HEATING}', '{STANDARD_TEXT_2}');
+        final repairs = _buildPhrasesForScreenId(
+          rawData,
+          'activity_services_heating_repair_main_screen',
+          isInspection,
+        );
+        return _dedupeOrderedPhrases([
+          ...main.body,
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_heating_about_heating',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_heating_radiators',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_heating_other_heating',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_heating_old_boiler',
+            isInspection,
+          ),
+          ...withRepairHeading('Heating Repair', repairs),
+          ...standard2,
+          ...main.rating,
+          ...main.notes,
+        ]);
+
+      case 'group_g5_water_heating_93':
+        final notInspected = _buildPhrasesForScreenId(
+          rawData,
+          'activity_services_water_heating_not_inspected',
+          isInspection,
+        );
+        if (notInspected.isNotEmpty) return notInspected;
+
+        final main = _splitMainScreenPhrases(_buildPhrasesForScreenId(
+          rawData,
+          'activity_services_water_heating_main_screen',
+          isInspection,
+        ));
+        final standard2 = engine.buildStaticSubPhrases(
+          '{G_WATER_HEATING}',
+          '{STANDARD_TEXT_2}',
+        );
+        final body = _withoutMatchingPhrases(main.body, standard2);
+        final repairs = <String>[
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_water_heating_repair_leaking_cylinder',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_water_heating_repair_loose_panels',
+            isInspection,
+          ),
+        ];
+        return _dedupeOrderedPhrases([
+          ...body,
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_water_heating_communal_hot_water',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_water_heating_gas_heating',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_water_heating_electric_heating',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_water_heating_cylinder',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_water_heating_solar_power',
+            isInspection,
+          ),
+          ...withRepairHeading('Water Heating Repair', repairs),
+          ...standard2,
+          ...main.rating,
+          ...main.notes,
+        ]);
+
+      case 'group_g6_drainage_96':
+        final notInspected = _buildPhrasesForScreenId(
+          rawData,
+          'activity_services_drainage_not_inspected',
+          isInspection,
+        );
+        if (notInspected.isNotEmpty) return notInspected;
+
+        final main = _splitMainScreenPhrases(_buildPhrasesForScreenId(
+          rawData,
+          'activity_services_drainage_main_screen',
+          isInspection,
+        ));
+        final standard2 =
+            engine.buildStaticSubPhrases('{G_DRAINAGE}', '{STANDARD_TEXT_2}');
+        final body = _withoutMatchingPhrases(main.body, standard2);
+        final repairs = <String>[
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage_repair_chamber_cover',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage_repair_chamber_walls',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage_repair_chamber_pipes',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage_repair_soil_and_vent',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage_repair_roots_in_chamber',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage_repair_gullies',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage_repair_defect_dampness',
+            isInspection,
+          ),
+        ];
+        return _dedupeOrderedPhrases([
+          ...body,
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage_chamber_lids',
+            isInspection,
+          ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_drainage_public_system',
+            isInspection,
+          ),
+          ...withRepairHeading('Drainage Repair', repairs),
+          ...standard2,
+          ...main.rating,
+          ...main.notes,
+        ]);
+
+      case 'group_g7_common_services_98':
+        final notInspected = _buildPhrasesForScreenId(
+          rawData,
+          'activity_services_shared_services_not_inspected',
+          isInspection,
+        );
+        if (notInspected.isNotEmpty) return notInspected;
+
+        final main = _splitMainScreenPhrases(_buildPhrasesForScreenId(
+          rawData,
+          'activity_services_common_services_main_screen',
+          isInspection,
+        ));
+        return _dedupeOrderedPhrases([
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_shared_services',
+            isInspection,
+          ),
+          ...main.rating,
+          ...main.notes,
+        ]);
+    }
+
+    return const [];
   }
 
   bool _startsWithTitle(List<String> phrases, String title) {
@@ -1269,6 +1718,11 @@ class ReportBuilder {
           );
           final isLegacyConstructionSummary =
               _isSectionDConstructionGroup(sectionDef, group);
+          final isLegacySectionGSummary =
+              _isSectionGLegacyGroup(sectionDef, group);
+          final useLegacySectionGComposite = config.includePhrases &&
+              isLegacySectionGSummary &&
+              inspectionPhraseEngine != null;
           final includeSubheadings = _shouldShowMergedDescendantSubheadings(
             sectionDef,
             group,
@@ -1280,7 +1734,18 @@ class ReportBuilder {
           final mergedNotes = <String>[];
           final mergedFields = <ReportField>[];
 
+          if (useLegacySectionGComposite) {
+            mergedPhrases.addAll(
+              _legacySectionGGroupPhrases(group, rawData, isInspection),
+            );
+          }
+
           for (final screen in descendants) {
+            if (useLegacySectionGComposite) {
+              final note = rawData.persistedUserNotes[screen.id] ?? '';
+              if (note.isNotEmpty) mergedNotes.add(note);
+              continue;
+            }
             // Legacy report keeps listed building as a standalone item.
             if (isLegacyConstructionSummary &&
                 _isListedBuildingScreenId(screen.id)) {
@@ -1469,7 +1934,13 @@ class ReportBuilder {
         ..addAll(indexed.map((e) => e.value));
     }
 
-    if (sectionDef.key.trim().toUpperCase() == 'J') {
+    final sectionKey = sectionDef.key.trim().toUpperCase();
+
+    if (isInspection && sectionKey == 'G') {
+      screens.insert(0, _legacyGLimitationsScreen());
+    }
+
+    if (sectionKey == 'J') {
       final riskToPeople = _legacyDerivedSectionFRiskToPeople(rawData);
       if (riskToPeople.isNotEmpty) {
         final j2Screen = ReportScreen(

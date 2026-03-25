@@ -282,6 +282,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
 
     return false;
   }
+
   static const String _rwgOpenRunoffsScreenId =
       'activity_outside_property_rwg_open_runoffs';
   static const String _rwgRepairsScreenId =
@@ -1787,6 +1788,47 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
         return 'Enter Other location text or uncheck Other.';
       }
     }
+    if (_screenId == 'activity_services_main_gas') {
+      final condition = (state.answers['actv_condition'] ?? '').trim();
+      if (condition.isEmpty) {
+        return 'Condition is required.';
+      }
+      if (condition.toLowerCase() == 'ok') {
+        final location = (state.answers['actv_location'] ?? '').trim();
+        if (location.isEmpty) {
+          return 'Gas meter and valve control location is required.';
+        }
+      }
+    }
+    if (_screenId == 'activity_services_oil') {
+      final status = (state.answers['actv_oil_tank_status'] ?? '').trim();
+      if (status.isEmpty) {
+        return 'Oil tank status is required.';
+      }
+      if (status.toLowerCase() == 'inspected') {
+        final location = (state.answers['actv_location'] ?? '').trim();
+        if (location.isEmpty) {
+          return 'Location is required.';
+        }
+        final madeUpOf =
+            (state.answers['actv_oil_tank_made_up_of'] ?? '').trim();
+        if (madeUpOf.isEmpty) {
+          return 'Oil tank made up of is required.';
+        }
+      }
+    }
+    if (_screenId == 'activity_services_water_main_screen' ||
+        _screenId == 'activity_services_water_main_water') {
+      final stopcockFound =
+          (state.answers['cb_stopcock_found'] ?? '').trim().toLowerCase() ==
+              'true';
+      if (stopcockFound) {
+        final location = (state.answers['actv_stopcok_location'] ?? '').trim();
+        if (location.isEmpty) {
+          return 'Main water stopcock location is required.';
+        }
+      }
+    }
     if (_screenId == _chimneyWaterproofingScreenId) {
       final flashingOtherChecked =
           (state.answers['ch5'] ?? '').trim().toLowerCase() == 'true';
@@ -2587,8 +2629,17 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       if (sectionKey == null) return;
 
       final sectionId = V2SyncHelper.sectionSyncId(_surveyId, sectionKey);
-      final aggregatedJson =
-          await _repo.getAggregatedPhraseOutput(_surveyId, sectionKey);
+      final phraseEngine = _ref.read(inspectionPhraseEngineProvider);
+      final aggregatedJson = await _repo.getAggregatedPhraseOutput(
+        _surveyId,
+        sectionKey,
+        buildEnginePhrases: phraseEngine == null
+            ? null
+            : (screenId, answers) => phraseEngine.buildPhrases(
+                  screenId,
+                  answers,
+                ),
+      );
       final sectionMeta = await _getSectionMeta(sectionKey);
 
       await syncManager.queueSync(
