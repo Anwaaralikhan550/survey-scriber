@@ -1345,10 +1345,23 @@ class ReportBuilder {
       RegExp(r'\bother\s+and\s+other\b', caseSensitive: false),
       'other',
     );
-    v = v.replaceAll(RegExp(r'\s+([,.;:])'), r'$1');
+    v = v.replaceAllMapped(
+      RegExp(r'\s+([,.;:])'),
+      (match) => match.group(1) ?? '',
+    );
     v = v.replaceAll(RegExp(r'([,;:])\.'), '.');
     v = v.replaceAll(RegExp(r'\.\s*\.'), '.');
+    v = v.replaceAll(
+      RegExp(r'\bbuilt of\s+mm\s+', caseSensitive: false),
+      'built of ',
+    );
     v = v.trim();
+    if (RegExp(
+      r'^(ceilings repair|walls and partitions repair|floors repair|repair)\.?$',
+      caseSensitive: false,
+    ).hasMatch(v)) {
+      return '';
+    }
     if (RegExp(r'^not inspected phrase\.?$', caseSensitive: false)
         .hasMatch(v)) {
       return '';
@@ -1359,8 +1372,12 @@ class ReportBuilder {
     return v;
   }
 
-  bool _shouldCondensePhrasesAsParagraph(String normalizedScreenId) =>
-      normalizedScreenId == 'activity_outside_property_stacks';
+  bool _shouldCondensePhrasesAsParagraph(String normalizedScreenId) {
+    if (normalizedScreenId == 'activity_outside_property_stacks') return true;
+    return normalizedScreenId.contains('outside_property_main_walls') ||
+        normalizedScreenId.contains('outside_property_windows') ||
+        normalizedScreenId.contains('outside_property_doors');
+  }
 
   List<String> _condenseIfNeeded(
     String normalizedScreenId,

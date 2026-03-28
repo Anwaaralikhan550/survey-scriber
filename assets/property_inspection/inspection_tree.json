@@ -8450,6 +8450,9 @@
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
+          ],
+          "reportDefaults": [
+            "Inspection limitations apply where access, visibility, or safety constraints prevented a complete assessment of all elements."
           ]
         },
         {
@@ -14052,6 +14055,9 @@
               "conditionalOn": "actv_status_91=Known & cb_other",
               "conditionalMode": "show"
             }
+          ],
+          "reportDefaults": [
+            "Moisture and dampness observations are based on visible surfaces and meter readings at inspection time only; concealed conditions may still exist."
           ]
         },
         {
@@ -34277,7 +34283,7 @@
         },
         {
           "id": "group_e8_other_joinery_and_finishes_31",
-          "title": "Other Joinery and Finishes",
+          "title": "E8 Other Joinery and Finishes",
           "type": "group",
           "parentId": null,
           "order": 18
@@ -34965,7 +34971,7 @@
         },
         {
           "id": "group_e9_other_area_32",
-          "title": "Other Area",
+          "title": "E9 Other Outside Property",
           "type": "group",
           "parentId": null,
           "order": 20
@@ -35781,7 +35787,7 @@
         },
         {
           "id": "activity_outside_property_other_joinery_and_finishes_main_screen",
-          "title": "Other Joinery and Finishes",
+          "title": "E8 Other Joinery and Finishes",
           "type": "screen",
           "parentId": "group_e8_other_joinery_and_finishes_31",
           "order": -1,
@@ -35881,7 +35887,7 @@
         },
         {
           "id": "activity_outside_property_other_main_screen",
-          "title": "Other Area",
+          "title": "E9 Other Outside Property",
           "type": "screen",
           "parentId": "group_e9_other_area_32",
           "order": -1,

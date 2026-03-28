@@ -34,6 +34,7 @@ class InspectionOverviewPage extends ConsumerStatefulWidget {
 class _InspectionOverviewPageState
     extends ConsumerState<InspectionOverviewPage> {
   final _scrollController = ScrollController();
+  bool _hasAutoScrolledToIncomplete = false;
 
   /// Keys for each section card, keyed by section letter.
   final _sectionKeys = <String, GlobalKey>{};
@@ -46,7 +47,9 @@ class _InspectionOverviewPageState
 
   /// After the frame renders, scroll to the first incomplete section.
   void _scrollToFirstIncomplete(List<String> orderedKeys) {
+    if (_hasAutoScrolledToIncomplete) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || _hasAutoScrolledToIncomplete) return;
       for (final key in orderedKeys) {
         final globalKey = _sectionKeys[key];
         if (globalKey?.currentContext != null) {
@@ -64,6 +67,7 @@ class _InspectionOverviewPageState
             },
           );
           if (isComplete == false) {
+            _hasAutoScrolledToIncomplete = true;
             Scrollable.ensureVisible(
               globalKey!.currentContext!,
               duration: const Duration(milliseconds: 400),
@@ -135,6 +139,9 @@ class _InspectionOverviewPageState
         ),
         body: SafeArea(
           child: ListView(
+            key: PageStorageKey<String>(
+              'inspection-overview-${widget.surveyId}',
+            ),
             controller: _scrollController,
             padding: const EdgeInsets.all(16),
             children: [

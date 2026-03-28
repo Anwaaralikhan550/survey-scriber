@@ -4,11 +4,12 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/routes.dart';
 import '../../../property_inspection/domain/field_phrase_processor.dart';
+import '../../../property_inspection/domain/models/inspection_models.dart';
 import '../../../property_inspection/presentation/widgets/inspection_fields.dart';
 import '../../../media/presentation/widgets/photo_grid.dart';
 import '../providers/valuation_providers.dart';
 
-class ValuationScreenPage extends ConsumerWidget {
+class ValuationScreenPage extends ConsumerStatefulWidget {
   const ValuationScreenPage({
     required this.surveyId,
     required this.screenId,
@@ -19,7 +20,52 @@ class ValuationScreenPage extends ConsumerWidget {
   final String screenId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ValuationScreenPage> createState() =>
+      _ValuationScreenPageState();
+}
+
+class _ValuationScreenPageState extends ConsumerState<ValuationScreenPage> {
+  final Map<String, GlobalKey> _fieldKeys = <String, GlobalKey>{};
+
+  GlobalKey _keyForField(String fieldId) =>
+      _fieldKeys.putIfAbsent(fieldId, GlobalKey.new);
+
+  String? _nextInteractiveFieldId(
+    List<InspectionFieldDefinition> visibleFields,
+    int currentIndex,
+  ) {
+    for (var i = currentIndex + 1; i < visibleFields.length; i++) {
+      final candidate = visibleFields[i];
+      if (candidate.type == InspectionFieldType.label) continue;
+      return candidate.id;
+    }
+    return null;
+  }
+
+  void _scrollToField(String fieldId, {Duration delay = Duration.zero}) {
+    Future<void>(() async {
+      if (delay > Duration.zero) {
+        await Future<void>.delayed(delay);
+      }
+      if (!mounted) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        final context = _keyForField(fieldId).currentContext;
+        if (context == null) return;
+        Scrollable.ensureVisible(
+          context,
+          duration: const Duration(milliseconds: 260),
+          curve: Curves.easeOutCubic,
+          alignment: 0.12,
+        );
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final surveyId = widget.surveyId;
+    final screenId = widget.screenId;
     final params = (surveyId: surveyId, screenId: screenId);
     final state = ref.watch(valuationScreenProvider(params));
     final notifier = ref.read(valuationScreenProvider(params).notifier);
@@ -126,10 +172,24 @@ class ValuationScreenPage extends ConsumerWidget {
                           separatorBuilder: (_, __) => const SizedBox(height: 12),
                           itemBuilder: (context, index) {
                             final field = visibleFields[index];
-                            return InspectionFieldInput(
-                              field: field,
-                              value: state.answers[field.id] ?? '',
-                              onChanged: (next) => notifier.setAnswer(field.id, next),
+                            final nextFieldId =
+                                _nextInteractiveFieldId(visibleFields, index);
+                            return KeyedSubtree(
+                              key: _keyForField(field.id),
+                              child: InspectionFieldInput(
+                                field: field,
+                                value: state.answers[field.id] ?? '',
+                                onChanged: (next) =>
+                                    notifier.setAnswer(field.id, next),
+                                onDiscreteSelection: () {
+                                  if (nextFieldId == null) return;
+                                  final delay =
+                                      field.type == InspectionFieldType.dropdown
+                                          ? const Duration(milliseconds: 260)
+                                          : Duration.zero;
+                                  _scrollToField(nextFieldId, delay: delay);
+                                },
+                              ),
                             );
                           },
                         ),

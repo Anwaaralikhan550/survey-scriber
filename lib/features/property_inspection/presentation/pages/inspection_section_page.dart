@@ -9,7 +9,7 @@ import '../../domain/field_phrase_processor.dart';
 import '../providers/inspection_providers.dart';
 import '../widgets/inspection_fields.dart';
 
-class InspectionSectionPage extends ConsumerWidget {
+class InspectionSectionPage extends ConsumerStatefulWidget {
   const InspectionSectionPage({
     required this.surveyId,
     required this.sectionKey,
@@ -22,7 +22,82 @@ class InspectionSectionPage extends ConsumerWidget {
   final String? parentNodeId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<InspectionSectionPage> createState() =>
+      _InspectionSectionPageState();
+}
+
+class _InspectionSectionPageState extends ConsumerState<InspectionSectionPage> {
+  final ScrollController _scrollController = ScrollController();
+  final Map<String, GlobalKey> _nodeKeys = <String, GlobalKey>{};
+
+  GlobalKey _keyForNode(String nodeId) =>
+      _nodeKeys.putIfAbsent(nodeId, GlobalKey.new);
+
+  void _scrollToNode(String nodeId, {Duration delay = Duration.zero}) {
+    Future<void>(() async {
+      if (delay > Duration.zero) {
+        await Future<void>.delayed(delay);
+      }
+      if (!mounted) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        final context = _keyForNode(nodeId).currentContext;
+        if (context == null) return;
+        Scrollable.ensureVisible(
+          context,
+          duration: const Duration(milliseconds: 280),
+          curve: Curves.easeOutCubic,
+          alignment: 0.16,
+        );
+      });
+    });
+  }
+
+  Future<void> _openNode(
+    BuildContext context,
+    InspectionV2Screen node,
+    List<InspectionV2Screen> visibleNodes,
+  ) async {
+    final currentIndex = visibleNodes.indexWhere((item) => item.id == node.id);
+    final nextNodeId = currentIndex >= 0 && currentIndex + 1 < visibleNodes.length
+        ? visibleNodes[currentIndex + 1].screenId
+        : node.screenId;
+
+    if (node.nodeType == 'group') {
+      await context.push(
+        Routes.inspectionNodePath(
+          widget.surveyId,
+          widget.sectionKey,
+          node.screenId,
+        ),
+      );
+      if (!mounted) return;
+      _scrollToNode(node.screenId);
+      return;
+    }
+
+    await context.push(
+      Routes.inspectionScreenPath(
+        widget.surveyId,
+        widget.sectionKey,
+        node.screenId,
+      ),
+    );
+    if (!mounted) return;
+    _scrollToNode(nextNodeId, delay: const Duration(milliseconds: 80));
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final surveyId = widget.surveyId;
+    final sectionKey = widget.sectionKey;
+    final parentNodeId = widget.parentNodeId;
     final theme = Theme.of(context);
     final nodesAsync = ref.watch(
       inspectionNodesProvider((surveyId: surveyId, sectionKey: sectionKey)),
@@ -248,6 +323,10 @@ class InspectionSectionPage extends ConsumerWidget {
                   visibleNodes.length + (showHeaderInline ? 1 : 0);
 
               return ListView.separated(
+                key: PageStorageKey<String>(
+                  'inspection-section-$surveyId-$sectionKey-${parentNodeId ?? 'root'}',
+                ),
+                controller: _scrollController,
                 padding: const EdgeInsets.all(16),
                 itemCount: itemCount,
                 separatorBuilder: (_, __) => const SizedBox(height: 12),
@@ -263,37 +342,39 @@ class InspectionSectionPage extends ConsumerWidget {
                   final node = visibleNodes[offsetIndex];
                   if (node.nodeType == 'group') {
                     if (node.screenId == 'group_other_area_33') {
-                      return _GroupTile(
-                        title: 'Other area',
-                        sectionColor: sectionColor,
-                        icon: _inspectionIconForTitle(
-                            'Other area', node.screenId),
-                        onTap: () => context.push(
-                          Routes.inspectionNodePath(
-                              surveyId, sectionKey, node.screenId),
+                      return KeyedSubtree(
+                        key: _keyForNode(node.screenId),
+                        child: _GroupTile(
+                          title: 'Other area',
+                          sectionColor: sectionColor,
+                          icon: _inspectionIconForTitle(
+                              'Other area', node.screenId),
+                          onTap: () => _openNode(context, node, visibleNodes),
                         ),
                       );
                     }
-                    return _GroupTile(
-                      title: _stripLegacyPrefix(node.title),
-                      sectionColor: sectionColor,
-                      icon: _inspectionIconForTitle(node.title, node.screenId),
-                      onTap: () => context.push(
-                        Routes.inspectionNodePath(
-                            surveyId, sectionKey, node.screenId),
+                    return KeyedSubtree(
+                      key: _keyForNode(node.screenId),
+                      child: _GroupTile(
+                        title: _stripLegacyPrefix(node.title),
+                        sectionColor: sectionColor,
+                        icon: _inspectionIconForTitle(node.title, node.screenId),
+                        onTap: () => _openNode(context, node, visibleNodes),
                       ),
                     );
                   }
 
                   final screen = node;
-                  return _ScreenTile(
-                    screen: screen,
-                    sectionColor: sectionColor,
-                    iconData:
-                        _inspectionIconForTitle(screen.title, screen.screenId),
-                    onTap: () => context.push(
-                      Routes.inspectionScreenPath(
-                          surveyId, sectionKey, screen.screenId),
+                  return KeyedSubtree(
+                    key: _keyForNode(screen.screenId),
+                    child: _ScreenTile(
+                      screen: screen,
+                      sectionColor: sectionColor,
+                      iconData: _inspectionIconForTitle(
+                        screen.title,
+                        screen.screenId,
+                      ),
+                      onTap: () => _openNode(context, screen, visibleNodes),
                     ),
                   );
                 },

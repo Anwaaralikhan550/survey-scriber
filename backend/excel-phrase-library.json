@@ -59,7 +59,7 @@
     "options": {
       "Reasonable": {
         "value": "Reasonable",
-        "phrase": "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of £545,000.00 [(Five Hundred and Forty Five) Thousand Pounds Only]. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions.",
+        "phrase": "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of five hundred and forty five thousand pounds only. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions.",
         "phraseLength": 341
       },
       "Reasonable with Repair": {
@@ -81,7 +81,7 @@
       },
       "Flat": {
         "value": "Flat",
-        "phrase": "The property is a (purpose built/conversion/other) flat with (one/two/three/four/other) bedroom. The property is on the (lower ground/ground/first/second/third/fourth/other) floor(s) of a (one/two/three/four/other) storey building with (Two/Four/Six/Eight/other) flats.",
+        "phrase": "The property is a (purpose built/conversion/other) flat with (one/two/three/four/other) bedroom. The property is on the (lower ground/ground/first/second/third/fourth/other) floor of a (one/two/three/four/other)-story building containing (Two/Four/Six/Eight/other) flats.",
         "phraseLength": 269
       }
     }
@@ -1626,8 +1626,8 @@
     "options": {
       "Location": {
         "value": "Location",
-        "phrase": "The design of the window(s) does not allow people to escape from a fire. The affected window is in the (lounge/bedroom/study/other) has (no opening/is too small). This is a safety hazard (see section J3 Risks). No repair is currently needed. The property must be maintained in the normal way. To reduce this hazard, you should ask an appropriately qualified person for advice.",
-        "phraseLength": 376
+        "phrase": "The design of the window(s) in the (lounge/bedroom/study/other) does not allow people to escape from a fire. The affected window(s) (has no opening/is too small). This is a safety hazard (see section J3 Risks). To reduce this hazard, you should contact an appropriately qualified person for further inspection and advice.",
+        "phraseLength": 321
       }
     }
   },
@@ -3126,8 +3126,8 @@
     "options": {
       "Flat text": {
         "value": "Flat text",
-        "phrase": "The Lease still has a considerable term to run, and no action needs to be taken immediately. The value of leasehold properties will diminish as the lease gets progressively shorter. Once the lease is 80 years or less; it will have a significant impact on the valuation of the property, and you should, therefore, consider extending the lease under the terms of the Leasehold Reform, Housing and Urban Development Act 1993 well before this stage.",
-        "phraseLength": 445
+        "phrase": "My opinion has been arrived at largely by the standard assumptions governing residential valuations. (These are outlined in this section and under market value on the description of the Home Buyer service). However, one additional assumption has been made: this is that the property has a Lease with an unexpired term of approximately 90 years.\r\n\r\nThe Lease still has a considerable term to run, and no action needs to be taken immediately. The value of leasehold properties will diminish as the lease gets progressively shorter. Once the lease is 80 years or less; it will have a significant impact on the valuation of the property, and you should, therefore, consider extending the lease under the terms of the Leasehold Reform, Housing and Urban Development Act 1993 well before this stage.",
+        "phraseLength": 797
       },
       "Standard text": {
         "value": "Standard text",
@@ -3137,3 +3137,4 @@
     }
   }
 }
+

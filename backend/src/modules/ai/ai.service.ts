@@ -150,7 +150,14 @@ export class AiService {
     // STEP 1: Enrich with Excel Phrases
     // ========================================
     const enrichedSections = this.enhancedReport.enrichSectionsWithPhrases(dto.sections);
-    const { sectionsWithPhrases, stats } = this.enhancedReport.buildReportWithExcelPhrases(enrichedSections);
+    const { ast, sectionsWithPhrases, stats } = this.enhancedReport.buildReportWithExcelPhrases(
+      enrichedSections,
+      {
+        surveyId: dto.surveyId,
+        propertyAddress: dto.propertyAddress,
+        propertyType: dto.propertyType,
+      },
+    );
 
     this.logger.log(
       `Excel phrase coverage: ${stats.excelPhraseCount}/${stats.totalFields} ` +
@@ -178,6 +185,7 @@ export class AiService {
         promptVersion: `excel-${prompt.version}`,
         executiveSummary,
         sections: sectionNarratives,
+        ast,
         fromCache: false,
         disclaimer: 'This report uses professional, pre-written phrases from industry-standard templates.',
         usage: {
@@ -296,6 +304,7 @@ export class AiService {
         promptVersion: `hybrid-excel-ai-${prompt.version}`,
         executiveSummary,
         sections: mergedSections,
+        ast,
         fromCache: false,
         disclaimer: `This report uses ${stats.coveragePercent}% professional pre-written phrases from industry templates, with AI-generated content for remaining fields. ${AI_DISCLAIMERS.REPORT}`,
         usage: {

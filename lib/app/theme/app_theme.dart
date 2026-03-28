@@ -84,7 +84,7 @@ abstract final class AppTheme {
         elevation: 2,
         shape: const CircleBorder(),
       ),
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -244,7 +244,7 @@ abstract final class AppTheme {
         elevation: 2,
         shape: const CircleBorder(),
       ),
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),

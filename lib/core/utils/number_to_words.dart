@@ -94,6 +94,16 @@ String formatPriceWithWords(String amount) {
   return '£$prefix$formatted ($words pounds)';
 }
 
+String formatPriceAsWordsOnly(String amount) {
+  final cleaned = amount.replaceAll(RegExp(r'[£,\s]'), '');
+  if (cleaned.isEmpty) return amount.trim();
+
+  final parsed = int.tryParse(cleaned) ?? double.tryParse(cleaned)?.round();
+  if (parsed == null) return amount.trim();
+
+  return '${numberToWords(parsed)} pounds';
+}
+
 String _addCommas(String digits) {
   final buffer = StringBuffer();
   var count = 0;

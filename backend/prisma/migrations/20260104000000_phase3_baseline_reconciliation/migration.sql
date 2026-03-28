@@ -37,21 +37,57 @@ CREATE INDEX IF NOT EXISTS "notification_email_logs_invoice_id_idx" ON "notifica
 -- Add booking request notification types
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_enum WHERE enumlabel = 'BOOKING_REQUEST_CREATED' AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'NotificationType')) THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_enum
+        WHERE enumlabel = 'BOOKING_REQUEST_CREATED'
+          AND enumtypid = (
+              SELECT t.oid
+              FROM pg_type t
+              JOIN pg_namespace n ON n.oid = t.typnamespace
+              WHERE t.typname = 'NotificationType'
+                AND n.nspname = current_schema()
+              LIMIT 1
+          )
+    ) THEN
         ALTER TYPE "NotificationType" ADD VALUE 'BOOKING_REQUEST_CREATED';
     END IF;
 END$$;
 
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_enum WHERE enumlabel = 'BOOKING_REQUEST_APPROVED' AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'NotificationType')) THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_enum
+        WHERE enumlabel = 'BOOKING_REQUEST_APPROVED'
+          AND enumtypid = (
+              SELECT t.oid
+              FROM pg_type t
+              JOIN pg_namespace n ON n.oid = t.typnamespace
+              WHERE t.typname = 'NotificationType'
+                AND n.nspname = current_schema()
+              LIMIT 1
+          )
+    ) THEN
         ALTER TYPE "NotificationType" ADD VALUE 'BOOKING_REQUEST_APPROVED';
     END IF;
 END$$;
 
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_enum WHERE enumlabel = 'BOOKING_REQUEST_REJECTED' AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'NotificationType')) THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_enum
+        WHERE enumlabel = 'BOOKING_REQUEST_REJECTED'
+          AND enumtypid = (
+              SELECT t.oid
+              FROM pg_type t
+              JOIN pg_namespace n ON n.oid = t.typnamespace
+              WHERE t.typname = 'NotificationType'
+                AND n.nspname = current_schema()
+              LIMIT 1
+          )
+    ) THEN
         ALTER TYPE "NotificationType" ADD VALUE 'BOOKING_REQUEST_REJECTED';
     END IF;
 END$$;
@@ -59,21 +95,57 @@ END$$;
 -- Add booking change request notification types
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_enum WHERE enumlabel = 'BOOKING_CHANGE_REQUEST_CREATED' AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'NotificationType')) THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_enum
+        WHERE enumlabel = 'BOOKING_CHANGE_REQUEST_CREATED'
+          AND enumtypid = (
+              SELECT t.oid
+              FROM pg_type t
+              JOIN pg_namespace n ON n.oid = t.typnamespace
+              WHERE t.typname = 'NotificationType'
+                AND n.nspname = current_schema()
+              LIMIT 1
+          )
+    ) THEN
         ALTER TYPE "NotificationType" ADD VALUE 'BOOKING_CHANGE_REQUEST_CREATED';
     END IF;
 END$$;
 
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_enum WHERE enumlabel = 'BOOKING_CHANGE_REQUEST_APPROVED' AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'NotificationType')) THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_enum
+        WHERE enumlabel = 'BOOKING_CHANGE_REQUEST_APPROVED'
+          AND enumtypid = (
+              SELECT t.oid
+              FROM pg_type t
+              JOIN pg_namespace n ON n.oid = t.typnamespace
+              WHERE t.typname = 'NotificationType'
+                AND n.nspname = current_schema()
+              LIMIT 1
+          )
+    ) THEN
         ALTER TYPE "NotificationType" ADD VALUE 'BOOKING_CHANGE_REQUEST_APPROVED';
     END IF;
 END$$;
 
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_enum WHERE enumlabel = 'BOOKING_CHANGE_REQUEST_REJECTED' AND enumtypid = (SELECT oid FROM pg_type WHERE typname = 'NotificationType')) THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_enum
+        WHERE enumlabel = 'BOOKING_CHANGE_REQUEST_REJECTED'
+          AND enumtypid = (
+              SELECT t.oid
+              FROM pg_type t
+              JOIN pg_namespace n ON n.oid = t.typnamespace
+              WHERE t.typname = 'NotificationType'
+                AND n.nspname = current_schema()
+              LIMIT 1
+          )
+    ) THEN
         ALTER TYPE "NotificationType" ADD VALUE 'BOOKING_CHANGE_REQUEST_REJECTED';
     END IF;
 END$$;
@@ -85,7 +157,13 @@ END$$;
 -- CreateEnum: BookingRequestStatus
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'BookingRequestStatus') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_type t
+        JOIN pg_namespace n ON n.oid = t.typnamespace
+        WHERE t.typname = 'BookingRequestStatus'
+          AND n.nspname = current_schema()
+    ) THEN
         CREATE TYPE "BookingRequestStatus" AS ENUM ('REQUESTED', 'APPROVED', 'REJECTED');
     END IF;
 END$$;
@@ -115,7 +193,14 @@ CREATE INDEX IF NOT EXISTS "booking_requests_reviewed_by_id_idx" ON "booking_req
 -- AddForeignKeys for booking_requests (with IF NOT EXISTS check)
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'booking_requests_client_id_fkey') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_constraint c
+        JOIN pg_class r ON r.oid = c.conrelid
+        JOIN pg_namespace n ON n.oid = r.relnamespace
+        WHERE c.conname = 'booking_requests_client_id_fkey'
+          AND n.nspname = current_schema()
+    ) THEN
         ALTER TABLE "booking_requests" ADD CONSTRAINT "booking_requests_client_id_fkey"
             FOREIGN KEY ("client_id") REFERENCES "clients"("id") ON DELETE CASCADE ON UPDATE CASCADE;
     END IF;
@@ -123,7 +208,14 @@ END$$;
 
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'booking_requests_reviewed_by_id_fkey') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_constraint c
+        JOIN pg_class r ON r.oid = c.conrelid
+        JOIN pg_namespace n ON n.oid = r.relnamespace
+        WHERE c.conname = 'booking_requests_reviewed_by_id_fkey'
+          AND n.nspname = current_schema()
+    ) THEN
         ALTER TABLE "booking_requests" ADD CONSTRAINT "booking_requests_reviewed_by_id_fkey"
             FOREIGN KEY ("reviewed_by_id") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
     END IF;
@@ -136,7 +228,13 @@ END$$;
 -- CreateEnum: BookingChangeRequestType
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'BookingChangeRequestType') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_type t
+        JOIN pg_namespace n ON n.oid = t.typnamespace
+        WHERE t.typname = 'BookingChangeRequestType'
+          AND n.nspname = current_schema()
+    ) THEN
         CREATE TYPE "BookingChangeRequestType" AS ENUM ('RESCHEDULE', 'CANCEL');
     END IF;
 END$$;
@@ -144,7 +242,13 @@ END$$;
 -- CreateEnum: BookingChangeRequestStatus
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'BookingChangeRequestStatus') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_type t
+        JOIN pg_namespace n ON n.oid = t.typnamespace
+        WHERE t.typname = 'BookingChangeRequestStatus'
+          AND n.nspname = current_schema()
+    ) THEN
         CREATE TYPE "BookingChangeRequestStatus" AS ENUM ('REQUESTED', 'APPROVED', 'REJECTED');
     END IF;
 END$$;
@@ -178,7 +282,14 @@ CREATE INDEX IF NOT EXISTS "booking_change_requests_reviewed_by_id_idx" ON "book
 -- AddForeignKeys for booking_change_requests
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'booking_change_requests_booking_id_fkey') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_constraint c
+        JOIN pg_class r ON r.oid = c.conrelid
+        JOIN pg_namespace n ON n.oid = r.relnamespace
+        WHERE c.conname = 'booking_change_requests_booking_id_fkey'
+          AND n.nspname = current_schema()
+    ) THEN
         ALTER TABLE "booking_change_requests" ADD CONSTRAINT "booking_change_requests_booking_id_fkey"
             FOREIGN KEY ("booking_id") REFERENCES "bookings"("id") ON DELETE CASCADE ON UPDATE CASCADE;
     END IF;
@@ -186,7 +297,14 @@ END$$;
 
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'booking_change_requests_client_id_fkey') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_constraint c
+        JOIN pg_class r ON r.oid = c.conrelid
+        JOIN pg_namespace n ON n.oid = r.relnamespace
+        WHERE c.conname = 'booking_change_requests_client_id_fkey'
+          AND n.nspname = current_schema()
+    ) THEN
         ALTER TABLE "booking_change_requests" ADD CONSTRAINT "booking_change_requests_client_id_fkey"
             FOREIGN KEY ("client_id") REFERENCES "clients"("id") ON DELETE CASCADE ON UPDATE CASCADE;
     END IF;
@@ -194,7 +312,14 @@ END$$;
 
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'booking_change_requests_reviewed_by_id_fkey') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_constraint c
+        JOIN pg_class r ON r.oid = c.conrelid
+        JOIN pg_namespace n ON n.oid = r.relnamespace
+        WHERE c.conname = 'booking_change_requests_reviewed_by_id_fkey'
+          AND n.nspname = current_schema()
+    ) THEN
         ALTER TABLE "booking_change_requests" ADD CONSTRAINT "booking_change_requests_reviewed_by_id_fkey"
             FOREIGN KEY ("reviewed_by_id") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
     END IF;
@@ -207,7 +332,13 @@ END$$;
 -- CreateEnum: ActorType
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'ActorType') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_type t
+        JOIN pg_namespace n ON n.oid = t.typnamespace
+        WHERE t.typname = 'ActorType'
+          AND n.nspname = current_schema()
+    ) THEN
         CREATE TYPE "ActorType" AS ENUM ('STAFF', 'CLIENT', 'SYSTEM');
     END IF;
 END$$;
@@ -215,7 +346,13 @@ END$$;
 -- CreateEnum: AuditEntityType
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'AuditEntityType') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_type t
+        JOIN pg_namespace n ON n.oid = t.typnamespace
+        WHERE t.typname = 'AuditEntityType'
+          AND n.nspname = current_schema()
+    ) THEN
         CREATE TYPE "AuditEntityType" AS ENUM ('BOOKING', 'BOOKING_REQUEST', 'BOOKING_CHANGE_REQUEST', 'INVOICE', 'SURVEY', 'REPORT_PDF', 'AUTH', 'WEBHOOK');
     END IF;
 END$$;
@@ -249,7 +386,13 @@ CREATE INDEX IF NOT EXISTS "audit_logs_created_at_idx" ON "audit_logs"("created_
 -- CreateEnum: WebhookEventType
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'WebhookEventType') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_type t
+        JOIN pg_namespace n ON n.oid = t.typnamespace
+        WHERE t.typname = 'WebhookEventType'
+          AND n.nspname = current_schema()
+    ) THEN
         CREATE TYPE "WebhookEventType" AS ENUM ('BOOKING_CREATED', 'BOOKING_UPDATED', 'BOOKING_CANCELLED', 'BOOKING_REQUEST_CREATED', 'BOOKING_REQUEST_APPROVED', 'BOOKING_CHANGE_APPROVED', 'INVOICE_ISSUED', 'INVOICE_PAID', 'REPORT_APPROVED');
     END IF;
 END$$;
@@ -257,7 +400,13 @@ END$$;
 -- CreateEnum: WebhookDeliveryStatus
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'WebhookDeliveryStatus') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_type t
+        JOIN pg_namespace n ON n.oid = t.typnamespace
+        WHERE t.typname = 'WebhookDeliveryStatus'
+          AND n.nspname = current_schema()
+    ) THEN
         CREATE TYPE "WebhookDeliveryStatus" AS ENUM ('SUCCESS', 'FAILED');
     END IF;
 END$$;
@@ -309,7 +458,14 @@ CREATE INDEX IF NOT EXISTS "webhook_deliveries_next_attempt_at_idx" ON "webhook_
 -- AddForeignKey for webhook_deliveries
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'webhook_deliveries_webhook_id_fkey') THEN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM pg_constraint c
+        JOIN pg_class r ON r.oid = c.conrelid
+        JOIN pg_namespace n ON n.oid = r.relnamespace
+        WHERE c.conname = 'webhook_deliveries_webhook_id_fkey'
+          AND n.nspname = current_schema()
+    ) THEN
         ALTER TABLE "webhook_deliveries" ADD CONSTRAINT "webhook_deliveries_webhook_id_fkey"
             FOREIGN KEY ("webhook_id") REFERENCES "webhooks"("id") ON DELETE CASCADE ON UPDATE CASCADE;
     END IF;

@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ReportAstPayloadDto } from './report-ast.dto';
 
 // ============================================
 // Request DTOs
@@ -272,6 +273,12 @@ export class AiReportResponseDto {
     inputTokens: number;
     outputTokens: number;
   };
+
+  @ApiPropertyOptional({
+    description: 'Structured report AST payload for native rendering pipelines',
+    type: ReportAstPayloadDto,
+  })
+  ast?: ReportAstPayloadDto;
 }
 
 export class RecommendationDto {

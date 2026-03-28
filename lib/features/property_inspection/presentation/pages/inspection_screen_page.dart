@@ -30,6 +30,7 @@ class InspectionScreenPage extends ConsumerStatefulWidget {
 
 class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
   bool _previewExpanded = false;
+  final Map<String, GlobalKey> _fieldKeys = <String, GlobalKey>{};
   static const String _environmentImpactScreenId =
       'activity_energy_environment_impect';
   static const String _otherServiceScreenId = 'activity_other_service';
@@ -41,6 +42,41 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
     'ch1': 'activity_garden', // Residential -> Garden
     'ch2': 'activity_parking', // Commercial -> Parking
   };
+
+  GlobalKey _keyForField(String fieldId) =>
+      _fieldKeys.putIfAbsent(fieldId, GlobalKey.new);
+
+  String? _nextInteractiveFieldId(
+    List<InspectionFieldDefinition> visibleFields,
+    int currentIndex,
+  ) {
+    for (var i = currentIndex + 1; i < visibleFields.length; i++) {
+      final candidate = visibleFields[i];
+      if (candidate.type == InspectionFieldType.label) continue;
+      return candidate.id;
+    }
+    return null;
+  }
+
+  void _scrollToField(String fieldId, {Duration delay = Duration.zero}) {
+    Future<void>(() async {
+      if (delay > Duration.zero) {
+        await Future<void>.delayed(delay);
+      }
+      if (!mounted) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        final context = _keyForField(fieldId).currentContext;
+        if (context == null) return;
+        Scrollable.ensureVisible(
+          context,
+          duration: const Duration(milliseconds: 260),
+          curve: Curves.easeOutCubic,
+          alignment: 0.12,
+        );
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -238,29 +274,61 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
                                   showCompass ? index - 1 : index;
                               final field = visibleFields[fieldIndex];
                               final value = state.answers[field.id] ?? '';
-                              return InspectionFieldInput(
-                                field: field,
-                                value: value,
-                                onChanged: (next) {
-                                  notifier.setAnswer(field.id, next);
-                                  if (screenId != _groundAreaScreenId ||
-                                      field.type !=
-                                          InspectionFieldType.checkbox ||
-                                      next.toLowerCase() != 'true' ||
-                                      sectionKey == null) {
-                                    return;
-                                  }
-                                  final targetScreenId =
-                                      _groundAreaCheckboxToScreenId[field.id];
-                                  if (targetScreenId == null) return;
-                                  context.push(
-                                    Routes.inspectionScreenPath(
-                                      surveyId,
-                                      sectionKey,
-                                      targetScreenId,
-                                    ),
-                                  );
-                                },
+                              final nextFieldId = _nextInteractiveFieldId(
+                                visibleFields,
+                                fieldIndex,
+                              );
+                              return KeyedSubtree(
+                                key: _keyForField(field.id),
+                                child: InspectionFieldInput(
+                                  field: field,
+                                  value: value,
+                                  onChanged: (next) {
+                                    notifier.setAnswer(field.id, next);
+                                    if (screenId != _groundAreaScreenId ||
+                                        field.type !=
+                                            InspectionFieldType.checkbox ||
+                                        next.toLowerCase() != 'true' ||
+                                        sectionKey == null) {
+                                      return;
+                                    }
+                                    final targetScreenId =
+                                        _groundAreaCheckboxToScreenId[field.id];
+                                    if (targetScreenId == null) return;
+                                    context.push(
+                                      Routes.inspectionScreenPath(
+                                        surveyId,
+                                        sectionKey,
+                                        targetScreenId,
+                                      ),
+                                    );
+                                  },
+                                  onDiscreteSelection: () {
+                                    final shouldNavigate =
+                                        screenId == _groundAreaScreenId &&
+                                            field.type ==
+                                                InspectionFieldType.checkbox &&
+                                            (state.answers[field.id] ?? '')
+                                                    .toLowerCase() !=
+                                                'true' &&
+                                            sectionKey != null &&
+                                            _groundAreaCheckboxToScreenId[
+                                                    field.id] !=
+                                                null;
+                                    if (shouldNavigate || nextFieldId == null) {
+                                      return;
+                                    }
+
+                                    final delay = field.type ==
+                                            InspectionFieldType.dropdown
+                                        ? const Duration(milliseconds: 260)
+                                        : Duration.zero;
+                                    _scrollToField(
+                                      nextFieldId,
+                                      delay: delay,
+                                    );
+                                  },
+                                ),
                               );
                             },
                           ),

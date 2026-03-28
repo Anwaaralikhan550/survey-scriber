@@ -344,7 +344,7 @@ class DocxGeneratorService {
   void _writeHeader(StringBuffer buf, ReportDocument doc, DateFormat fmt) {
     final meta = doc.surveyMeta;
     final reportLabel = doc.reportType == ReportType.inspection
-        ? 'Inspection Report'
+        ? 'Home Survey Inspection Report'
         : 'Valuation Report';
     final accentHex = _pdfColorToHex(_config.accentColor);
 

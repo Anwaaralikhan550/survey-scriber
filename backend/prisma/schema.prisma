@@ -9,6 +9,9 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // Use a dedicated shadow schema/DB in development when CREATE DATABASE
+  // permission is not available for the application user.
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 // ============================================

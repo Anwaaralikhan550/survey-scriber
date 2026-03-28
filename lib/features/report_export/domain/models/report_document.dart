@@ -8,6 +8,62 @@ enum ReportFieldType { text, number, checkbox, dropdown, label }
 
 enum ReportType { inspection, valuation }
 
+class ReportAstPayload {
+  const ReportAstPayload({
+    this.title,
+    this.sectionTitle,
+    this.sections = const [],
+  });
+
+  final String? title;
+  final String? sectionTitle;
+  final List<ReportAstSection> sections;
+
+  ReportAstSection? sectionFor(String sectionKey) {
+    final normalized = sectionKey.trim().toUpperCase();
+    for (final section in sections) {
+      if (section.sectionId.trim().toUpperCase() == normalized) {
+        return section;
+      }
+    }
+    return null;
+  }
+}
+
+class ReportAstSection {
+  const ReportAstSection({
+    required this.sectionId,
+    required this.title,
+    this.conditionRating,
+    this.limitations = const [],
+    this.defaultParagraphs = const [],
+    this.dynamicPhrases = const [],
+    this.remarks = const [],
+  });
+
+  final String sectionId;
+  final String title;
+  final String? conditionRating;
+  final List<String> limitations;
+  final List<String> defaultParagraphs;
+  final List<String> dynamicPhrases;
+  final List<String> remarks;
+
+  bool get hasAnyContent =>
+      (conditionRating?.trim().isNotEmpty ?? false) ||
+      limitations.isNotEmpty ||
+      defaultParagraphs.isNotEmpty ||
+      dynamicPhrases.isNotEmpty ||
+      remarks.isNotEmpty;
+
+  List<String> get orderedParagraphs => [
+        ...limitations,
+        ...defaultParagraphs,
+        ...dynamicPhrases,
+        ...remarks,
+      ];
+}
+
 class ReportDocument {
   const ReportDocument({
     required this.reportType,
@@ -19,6 +75,7 @@ class ReportDocument {
     this.photoFilePaths = const [],
     this.aiExecutiveSummary,
     this.aiSectionNarratives = const {},
+    this.aiAstPayload,
     this.aiDisclaimer,
     this.recommendationItems = const [],
   });
@@ -37,6 +94,9 @@ class ReportDocument {
   /// AI-generated narratives per section key (e.g. 'E' → narrative text).
   final Map<String, String> aiSectionNarratives;
 
+  /// Structured AI payload for AST-native rendering.
+  final ReportAstPayload? aiAstPayload;
+
   /// AI disclaimer text (e.g. "AI-generated content — verify independently").
   final String? aiDisclaimer;
 
@@ -44,7 +104,9 @@ class ReportDocument {
   final List<ReportRecommendationItem> recommendationItems;
 
   bool get hasAiContent =>
-      aiExecutiveSummary != null || aiSectionNarratives.isNotEmpty;
+      aiExecutiveSummary != null ||
+      aiSectionNarratives.isNotEmpty ||
+      (aiAstPayload?.sections.isNotEmpty ?? false);
 
   bool get hasRecommendations => recommendationItems.isNotEmpty;
 
@@ -64,6 +126,7 @@ class ReportDocument {
     List<String>? photoFilePaths,
     String? aiExecutiveSummary,
     Map<String, String>? aiSectionNarratives,
+    ReportAstPayload? aiAstPayload,
     String? aiDisclaimer,
     List<ReportRecommendationItem>? recommendationItems,
   }) {
@@ -77,6 +140,7 @@ class ReportDocument {
       photoFilePaths: photoFilePaths ?? this.photoFilePaths,
       aiExecutiveSummary: aiExecutiveSummary ?? this.aiExecutiveSummary,
       aiSectionNarratives: aiSectionNarratives ?? this.aiSectionNarratives,
+      aiAstPayload: aiAstPayload ?? this.aiAstPayload,
       aiDisclaimer: aiDisclaimer ?? this.aiDisclaimer,
       recommendationItems: recommendationItems ?? this.recommendationItems,
     );

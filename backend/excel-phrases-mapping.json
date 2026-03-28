@@ -1,4 +1,4 @@
-{
+﻿{
   "Sheet1": {
     "Form Sections": [
       "Form Fields"
@@ -74,13 +74,13 @@
       "When I inspected the property, the weather was (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain)  following a period of (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain) weather.",
       "When I inspected the property, it was (occupied/unoccupied) and (fully furnished/partly furnished). The floors were (fully /partially) covered with a mixture of fixed and fitted covering.\r\n\r\nThe front of the property is approximately facing (N/S/E/W/NE/NW/SE/SW). All directions given in this report supposes that the reader is standing in front of the building looking towards the rear of the property.",
       "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
-      "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of £545,000.00 [(Five Hundred and Forty Five) Thousand Pounds Only]. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions."
+      "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of five hundred and forty five thousand pounds only. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions."
     ],
     "County - Post Code": [
       "When I inspected the property, the weather was (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain)  following a period of (dry/wet/snowy/changeable with occasional rain/overcast with persistent rain) weather.",
       "When I inspected the property, it was (occupied/unoccupied) and (fully furnished/partly furnished). The floors were (fully /partially) covered with a mixture of fixed and fitted covering.\r\n\r\nThe front of the property is approximately facing (N/S/E/W/NE/NW/SE/SW). All directions given in this report supposes that the reader is standing in front of the building looking towards the rear of the property.",
       "The front of the subject property faces approximately (N/S/E/W/NE/NW/SE/SW) facing. All directions given in this report assume the reader is standing in front of the building and looking towards the rear.",
-      "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of £545,000.00 [(Five Hundred and Forty Five) Thousand Pounds Only]. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions.",
+      "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of five hundred and forty five thousand pounds only. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions.",
       "This property is believed to be a reasonable proposition for purchase, given that you are prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported. These defects are considered normal in properties of this age and construction. Provided that the works are carried out to a good standard, I cannot foresee any problems regarding a future resale of the property in normal market conditions."
     ],
     "Weather": [
@@ -118,7 +118,7 @@
     "Reasonable": [
       "Reasonable with Repair",
       "Vendor Told Me",
-      "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of £545,000.00 [(Five Hundred and Forty Five) Thousand Pounds Only]. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions."
+      "I am pleased to advise you, that my opinion is that this property is a reasonable proposition for purchase at a price of five hundred and forty five thousand pounds only. I found no evidence of any significant problem. Also, I cannot foresee any problems regarding a future resale of the property in normal market conditions."
     ],
     "Reasonable with Repair": [
       "Vendor Told Me",
@@ -136,7 +136,7 @@
     "Flat": [
       "Vendor Told Me",
       "Not extended",
-      "The property is a (purpose built/conversion/other) flat with (one/two/three/four/other) bedroom. The property is on the (lower ground/ground/first/second/third/fourth/other) floor(s) of a (one/two/three/four/other) storey building with (Two/Four/Six/Eight/other) flats."
+      "The property is a (purpose built/conversion/other) flat with (one/two/three/four/other) bedroom. The property is on the (lower ground/ground/first/second/third/fourth/other) floor of a (one/two/three/four/other)-story building containing (Two/Four/Six/Eight/other) flats."
     ],
     "Year Built": [
       "Year extended",
@@ -553,7 +553,7 @@
       "An external wall has been removed from (lounge/kitchen/bedroom/other) and this work should have been carried out with building regulation approval and should have included support for the remaining structure. Due to the nature of internal floor and ceiling finishes, I am unable to confirm that the necessary support has been provided and strongly recommend that your legal advisors seek confirmation that the necessary building regulation approval was obtained for this work. In the absence of any consent or proper supervision, there is a risk that further support may be required, incurring additional expense and disturbance.",
       "Repair soon",
       "The double glazing units to the (lounge/bedroom/kitchen/bathroom/other) have failed, and the space between the glass panes has ‘misted’ over. This is not a serious defect but is unsightly and can reduce the thermal efficiency of the double glazing. You should replace these soon.\r\n\r\nWhere some double glazed panels have failed, the remainder could suffer similar problems, and you should plan to replace more in the future. It can be difficult to replace just the double glazed units on some older windows. In these cases, you may have to plan to replace the whole window.",
-      "The design of the window(s) does not allow people to escape from a fire. The affected window is in the (lounge/bedroom/study/other) has (no opening/is too small). This is a safety hazard (see section J3 Risks). No repair is currently needed. The property must be maintained in the normal way. To reduce this hazard, you should ask an appropriately qualified person for advice.",
+      "The design of the window(s) in the (lounge/bedroom/study/other) does not allow people to escape from a fire. The affected window(s) (has no opening/is too small). This is a safety hazard (see section J3 Risks). To reduce this hazard, you should contact an appropriately qualified person for further inspection and advice.",
       "If rotten is selected",
       "The double glazing to the (main/rear/side/patio/garage/other) door has failed, and the space between the glass panes has ‘misted’ over. This is not a serious defect but is unsightly and can reduce the thermal efficiency of the double glazing. You should replace this soon.\r\n\r\nWhere some double glazed panels have failed, the remainder could suffer similar problems, and you should plan to replace more in the future. It can be difficult to replace just the double glazed units on some older windows. In these cases, you may have to plan to replace the whole window"
     ],
@@ -1065,7 +1065,7 @@
       "Windows that are in poor condition will require comprehensive repair. In some cases, it may be economical to replace the windows entirely.",
       "Add text to: Section J1 - Risk to building",
       "E5: Part(s) of the timber window frame is rotten. This should be repaired to avoid further deterioration.",
-      "E5: The design of the window(s) does not allow people to escape from a fire. The affected window is in the (lounge/bedroom/study/other) has (no opening/is too small).",
+      "E5: The design of the window(s) in the (lounge/bedroom/study/other) does not allow people to escape from a fire. The affected window(s) (has no opening/is too small).",
       "Notes. Please type in your text in the box provided below…",
       "E6: The lock to the (main/rear/side/patio/garage/other) door should be repaired or replaced now as the security of the property may be compromised.",
       "The double glazing to the (main/rear/side/patio/garage/other) door has failed, and the space between the glass panes has ‘misted’ over. This is not a serious defect but is unsightly and can reduce the thermal efficiency of the double glazing. You should replace this soon.\r\n\r\nWhere some double glazed panels have failed, the remainder could suffer similar problems, and you should plan to replace more in the future. It can be difficult to replace just the double glazed units on some older windows. In these cases, you may have to plan to replace the whole window",
@@ -1147,9 +1147,9 @@
       "There are (small/medium/medium to large) sized trees close to the property. There are no obvious signs to suggest that these have caused any significant damage to the property, but it would be appropriate to draw up a programme of management for these trees. Trees can cause problems to structures and services on shrinkable subsoil.",
       "You should ask the management company whether any repairs have been undertaken in the past or proposed for the external walls.",
       "E5: Part(s) of the timber window frame is rotten. This should be repaired to avoid further deterioration.",
-      "The design of the window(s) does not allow people to escape from a fire. The affected window is in the (lounge/bedroom/study/other) has (no opening/is too small). This is a safety hazard (see section J3 Risks). No repair is currently needed. The property must be maintained in the normal way. To reduce this hazard, you should ask an appropriately qualified person for advice.",
+      "The design of the window(s) in the (lounge/bedroom/study/other) does not allow people to escape from a fire. The affected window(s) (has no opening/is too small). This is a safety hazard (see section J3 Risks). To reduce this hazard, you should contact an appropriately qualified person for further inspection and advice.",
       "Add text to: Section J3 - Risk to people",
-      "E5: The design of the window(s) does not allow people to escape from a fire. The affected window is in the (lounge/bedroom/study/other) has (no opening/is too small).",
+      "E5: The design of the window(s) in the (lounge/bedroom/study/other) does not allow people to escape from a fire. The affected window(s) (has no opening/is too small).",
       "E6: Part(s) of the timber door or frame is rotten. This should be repaired to avoid further deterioration.",
       "Drop down (NI, 1, 2, 3)",
       "Notes. Please type in your text in the box provided below…",

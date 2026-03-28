@@ -2143,6 +2143,13 @@ class InspectionPhraseEngine {
       }
     }
 
+    if (_isChecked(answers['cb_mineral_felt'])) {
+      final felt =
+          _sub('{E_ROOF_COVERING_MATERIAL}', '{FLAT_MATERIAL_MINERAL_FELT}');
+      if (felt.isNotEmpty) {
+        phrases.addAll(_split(_normalize(felt)));
+      }
+    }
     if (_isChecked(answers['cb_replacement'])) {
       final replacement =
           _sub('{E_ROOF_COVERING_MATERIAL}', '{MATERIAL_REPLACEMENT}');
@@ -2155,13 +2162,6 @@ class InspectionPhraseEngine {
           _sub('{E_ROOF_COVERING_MATERIAL}', '{MATERIAL_COMPOSITE}');
       if (composite.isNotEmpty) {
         phrases.addAll(_split(_normalize(composite)));
-      }
-    }
-    if (_isChecked(answers['cb_mineral_felt'])) {
-      final felt =
-          _sub('{E_ROOF_COVERING_MATERIAL}', '{FLAT_MATERIAL_MINERAL_FELT}');
-      if (felt.isNotEmpty) {
-        phrases.addAll(_split(_normalize(felt)));
       }
     }
 
@@ -4706,7 +4706,10 @@ class InspectionPhraseEngine {
       String wallText = '';
       if (wallPhraseBase.isNotEmpty &&
           (locations.isNotEmpty || thickness.isNotEmpty)) {
-        wallText = wallPhraseBase
+        final wallTemplate = thickness.isEmpty
+            ? wallPhraseBase.replaceAll('{WALL_THICKNESS} mm ', '')
+            : wallPhraseBase;
+        wallText = wallTemplate
             .replaceAll('{WALL_LOCATION}', _toWords(locations).toLowerCase())
             .replaceAll('{WALL_THICKNESS}', thickness)
             .replaceAll('{WALL}', wallType);
@@ -14176,33 +14179,29 @@ class InspectionPhraseEngine {
     final amount = (answers['android_material_design_spinner'] ?? '').trim();
     final potential =
         (answers['android_material_design_spinner2'] ?? '').trim();
-    final priceFormatted =
-        amount.isNotEmpty ? formatPriceWithWords(amount) : '';
+    final priceInWords =
+        amount.isNotEmpty ? formatPriceAsWordsOnly(amount) : '';
 
     if (opinion.toLowerCase() == 'reasonable') {
       final template = _phraseTexts['{OVERALL_OPINION_REASONABLE}'] ?? '';
       if (template.isNotEmpty) {
         var resolved = _normalize(template);
         if (amount.isNotEmpty) {
-          final cleaned = amount.replaceAll(RegExp(r'[£,\s]'), '');
-          final parsed = int.tryParse(cleaned);
-          final commaFormatted =
-              parsed != null ? '£${_addCommasHelper(parsed)}' : '£$amount';
           resolved = resolved.replaceAll(
-              '{OVERALL_OPINION_PURCHASE_PRICE}', commaFormatted);
+              '{OVERALL_OPINION_PURCHASE_PRICE}', priceInWords);
           resolved = resolved.replaceAll(
-              '{OVERALL_OPINION_PURCHASE_PRICE_WORD}', priceFormatted);
+              '{OVERALL_OPINION_PURCHASE_PRICE_WORD}', priceInWords);
         }
         final phrases = _split(resolved);
         // If template had no price placeholders, append price separately.
-        if (priceFormatted.isNotEmpty && !resolved.contains(priceFormatted)) {
-          phrases.add('Purchase price: $priceFormatted.');
+        if (priceInWords.isNotEmpty && !resolved.contains(priceInWords)) {
+          phrases.add('Purchase price: $priceInWords.');
         }
         return phrases;
       }
       final phrases = <String>['Overall opinion: reasonable.'];
-      if (priceFormatted.isNotEmpty)
-        phrases.add('Purchase price: $priceFormatted.');
+      if (priceInWords.isNotEmpty)
+        phrases.add('Purchase price: $priceInWords.');
       return phrases;
     }
     if (opinion.toLowerCase().contains('repair')) {
@@ -14212,7 +14211,7 @@ class InspectionPhraseEngine {
       if (template.isNotEmpty) {
         var resolved = _normalize(template);
         // Try placeholder substitution first
-        resolved = resolved.replaceAll('{REPAIR_AMOUNT}', priceFormatted);
+        resolved = resolved.replaceAll('{REPAIR_AMOUNT}', priceInWords);
         resolved = resolved.replaceAll('{REPAIR_POTENTIAL}',
             potential.isNotEmpty ? potential.toLowerCase() : '');
         phrases.addAll(_split(resolved));
@@ -14221,8 +14220,8 @@ class InspectionPhraseEngine {
       }
       // Always append price/potential as separate lines so they show
       // even when the template has no placeholders for them.
-      if (priceFormatted.isNotEmpty)
-        phrases.add('Estimated repair cost: $priceFormatted.');
+      if (priceInWords.isNotEmpty)
+        phrases.add('Estimated repair cost: $priceInWords.');
       if (potential.isNotEmpty)
         phrases.add('Potential: ${potential.toLowerCase()}.');
       return phrases;
@@ -14431,6 +14430,7 @@ class InspectionPhraseEngine {
     cleaned = cleaned.replaceAll(RegExp(r'<[^>]+>'), '');
     // Replace non-breaking spaces (\u00a0) with regular spaces
     cleaned = cleaned.replaceAll('\u00a0', ' ');
+    cleaned = cleaned.replaceAll(RegExp(r'\bPVC\b'), 'uPVC');
     // Collapse multiple spaces into one
     cleaned = cleaned.replaceAll(RegExp(r' {2,}'), ' ');
     return const LineSplitter().convert(cleaned).join('\n').trim();

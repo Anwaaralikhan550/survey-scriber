@@ -1025,12 +1025,14 @@ class InspectionFieldInput extends StatelessWidget {
     required this.field,
     required this.value,
     required this.onChanged,
+    this.onDiscreteSelection,
     super.key,
   });
 
   final InspectionFieldDefinition field;
   final String value;
   final ValueChanged<String> onChanged;
+  final VoidCallback? onDiscreteSelection;
 
   @override
   Widget build(BuildContext context) {
@@ -1077,13 +1079,17 @@ class InspectionFieldInput extends StatelessWidget {
         );
       case InspectionFieldType.checkbox:
         final checked = value.toLowerCase() == 'true' || value == '1';
+        void commitCheckboxChange(String nextValue) {
+          onChanged(nextValue);
+          onDiscreteSelection?.call();
+        }
         return Material(
           color: checked
               ? theme.colorScheme.primaryContainer.withOpacity(0.15)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           child: InkWell(
-            onTap: () => onChanged(checked ? 'false' : 'true'),
+            onTap: () => commitCheckboxChange(checked ? 'false' : 'true'),
             borderRadius: BorderRadius.circular(12),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
@@ -1105,7 +1111,7 @@ class InspectionFieldInput extends StatelessWidget {
                     child: Checkbox(
                       value: checked,
                       onChanged: (next) =>
-                          onChanged(next == true ? 'true' : 'false'),
+                          commitCheckboxChange(next == true ? 'true' : 'false'),
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       visualDensity: VisualDensity.compact,
                       shape: RoundedRectangleBorder(
@@ -1151,6 +1157,7 @@ class InspectionFieldInput extends StatelessWidget {
           value: value,
           options: options,
           onChanged: onChanged,
+          onOptionCommitted: onDiscreteSelection,
         );
       case InspectionFieldType.number:
         return TextFormField(
@@ -1192,12 +1199,14 @@ class _InspectionDropdown extends StatefulWidget {
     required this.value,
     required this.options,
     required this.onChanged,
+    this.onOptionCommitted,
   });
 
   final String label;
   final String value;
   final List<String> options;
   final ValueChanged<String> onChanged;
+  final VoidCallback? onOptionCommitted;
 
   @override
   State<_InspectionDropdown> createState() => _InspectionDropdownState();
@@ -1362,6 +1371,7 @@ class _InspectionDropdownState extends State<_InspectionDropdown>
                     isSelected: isSelected,
                     onTap: () {
                       widget.onChanged(option);
+                      widget.onOptionCommitted?.call();
                       Navigator.pop(sheetContext, option);
                     },
                   );

@@ -79,6 +79,7 @@ class PdfGeneratorService {
 
   final ExportConfig _config;
   static const String _mergedSubheadingPrefix = '[[SUBHEADING]] ';
+  static const double _astParagraphGap = 10;
   late PdfFontBundle _fonts;
 
   /// Pre-loaded image bytes keyed by file path.
@@ -156,9 +157,55 @@ class PdfGeneratorService {
   String _normalizeRenderedPhrase(String phrase) {
     var v = phrase.trim();
     if (v.isEmpty) return '';
-    v = v.replaceAll(RegExp(r'\s+([,.;:!?])'), r'$1');
+    if (RegExp(
+      r'^(ceilings repair|walls and partitions repair|floors repair|repair)\.?$',
+      caseSensitive: false,
+    ).hasMatch(v)) {
+      return '';
+    }
+    v = v.replaceAll(
+      RegExp(r'\bbuilt of\s+mm\s+', caseSensitive: false),
+      'built of ',
+    );
+    v = v.replaceAll(
+      RegExp(
+        r'No repair is currently needed\.\s*The property must be maintained in the normal way\.\s*(?=To reduce this hazard)',
+        caseSensitive: false,
+      ),
+      '',
+    );
+    v = v.replaceAll(
+      RegExp(r'outer faces of the chimney stack is', caseSensitive: false),
+      'outer faces of the chimney stack are',
+    );
+    v = v.replaceAll(
+      RegExp(r'window\(s\)\s+were', caseSensitive: false),
+      'window(s) was',
+    );
+    v = v.replaceAll(
+      RegExp(r'door\(s\)\s+were', caseSensitive: false),
+      'door(s) was',
+    );
+    v = v.replaceAll(
+      RegExp(
+        r'the opening in the walls in which they are fitted are',
+        caseSensitive: false,
+      ),
+      'the opening in the walls in which it is fitted is',
+    );
+    v = v.replaceAll(
+      RegExp(r'security offered by the door\(s\) are', caseSensitive: false),
+      'security offered by the door(s) is',
+    );
+    v = v.replaceAllMapped(
+      RegExp(r'\s+([,.;:!?])'),
+      (match) => match.group(1) ?? '',
+    );
     v = v.replaceAll(RegExp(r'\.{2,}(?=\s*$)'), '.');
-    v = v.replaceAll(RegExp(r'([.!?])[.!?]+(?=\s*$)'), r'$1');
+    v = v.replaceAllMapped(
+      RegExp(r'([.!?])[.!?]+(?=\s*$)'),
+      (match) => match.group(1) ?? '',
+    );
     return v.trim();
   }
 
@@ -880,11 +927,17 @@ class PdfGeneratorService {
           ));
           widgets.add(pw.SizedBox(height: 8));
 
-          // AI section narrative
-          final aiNarrative = doc.aiSectionNarratives[section.key];
-          if (aiNarrative != null && aiNarrative.isNotEmpty) {
-            widgets.addAll(_aiNarrative(aiNarrative, accent));
+          // AI section payload (AST preferred, legacy narrative fallback)
+          final astSection = doc.aiAstPayload?.sectionFor(section.key);
+          if (astSection != null && astSection.hasAnyContent) {
+            widgets.addAll(_aiAstSection(astSection, accent));
             widgets.add(pw.SizedBox(height: 8));
+          } else {
+            final aiNarrative = doc.aiSectionNarratives[section.key];
+            if (aiNarrative != null && aiNarrative.isNotEmpty) {
+              widgets.addAll(_aiNarrative(aiNarrative, accent));
+              widgets.add(pw.SizedBox(height: 8));
+            }
           }
 
           for (final screen in section.screens) {
@@ -1072,8 +1125,9 @@ class PdfGeneratorService {
   ) {
     final meta = doc.surveyMeta;
     final isInspection = doc.reportType == ReportType.inspection;
-    final mainTitle =
-        isInspection ? 'RICS HomeBuyer Report' : 'Valuation Report';
+    final mainTitle = isInspection
+        ? _inspectionReportLabel(doc)
+        : 'Valuation Report';
     final subtitle =
         isInspection ? 'Level 2 Home Survey' : 'Mortgage Valuation Report';
     final ricsLine = isInspection
@@ -1267,7 +1321,7 @@ class PdfGeneratorService {
 
   pw.Widget _pageHeader(ReportDocument doc, PdfColor accent) {
     final reportLabel = doc.reportType == ReportType.inspection
-        ? 'RICS HomeBuyer Report'
+        ? _inspectionReportLabel(doc)
         : 'RICS Property Valuation';
     return pw.Container(
       margin: const pw.EdgeInsets.only(bottom: 8),
@@ -1385,6 +1439,77 @@ class PdfGeneratorService {
   }
 
   // ── AI Widgets ──────────────────────────────────────────────────────
+
+  String _inspectionReportLabel(ReportDocument doc) {
+    final astTitle = doc.aiAstPayload?.title?.trim() ?? '';
+    if (astTitle.isNotEmpty) return astTitle;
+    return 'Home Survey Inspection Report';
+  }
+
+  List<pw.Widget> _aiAstSection(ReportAstSection section, PdfColor accent) {
+    final widgets = <pw.Widget>[];
+    final bodyDecor = pw.BoxDecoration(
+      color: PdfColor.fromHex('#F8F9FA'),
+      border: pw.Border(left: pw.BorderSide(color: accent, width: 2)),
+    );
+    const bodyStyle = pw.TextStyle(fontSize: 8, lineSpacing: 2.5);
+
+    widgets.add(
+      pw.Container(
+        width: double.infinity,
+        padding: const pw.EdgeInsets.fromLTRB(10, 10, 10, 2),
+        decoration: bodyDecor,
+        child: pw.Text(
+          _astSectionTitle(section),
+          style: pw.TextStyle(
+            fontSize: 8,
+            fontWeight: pw.FontWeight.bold,
+            color: accent,
+          ),
+        ),
+      ),
+    );
+
+    final paragraphBlocks = <String>[];
+    final normalizedRating = sanitize(section.conditionRating ?? '').trim();
+    if (normalizedRating.isNotEmpty) {
+      paragraphBlocks.add('Condition Rating: $normalizedRating');
+    }
+    paragraphBlocks.addAll(section.orderedParagraphs
+        .map((value) => sanitize(value).trim())
+        .where((value) => value.isNotEmpty));
+
+    for (var i = 0; i < paragraphBlocks.length; i++) {
+      widgets.add(
+        pw.Container(
+          width: double.infinity,
+          padding: const pw.EdgeInsets.symmetric(horizontal: 10),
+          decoration: bodyDecor,
+          child: pw.Text(paragraphBlocks[i], style: bodyStyle),
+        ),
+      );
+      if (i < paragraphBlocks.length - 1) {
+        widgets.add(pw.SizedBox(height: _astParagraphGap));
+      }
+    }
+
+    widgets.add(
+      pw.Container(
+        width: double.infinity,
+        padding: const pw.EdgeInsets.fromLTRB(10, 2, 10, 10),
+        decoration: bodyDecor,
+        child: pw.SizedBox(height: 0),
+      ),
+    );
+
+    return widgets;
+  }
+
+  String _astSectionTitle(ReportAstSection section) {
+    final title = sanitize(section.title).trim();
+    if (title.isEmpty) return 'AI Narrative';
+    return title;
+  }
 
   List<pw.Widget> _aiSummary(String summary, PdfColor accent) {
     final cleanText = sanitize(summary);

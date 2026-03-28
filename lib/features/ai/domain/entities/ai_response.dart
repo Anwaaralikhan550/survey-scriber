@@ -82,6 +82,88 @@ class SectionNarrative extends Equatable {
   List<Object?> get props => [sectionId, sectionType, narrative, confidence];
 }
 
+/// Structured section payload for AST-native report rendering.
+class AiReportAstSection extends Equatable {
+  const AiReportAstSection({
+    required this.sectionId,
+    required this.title,
+    this.conditionRating,
+    this.limitations = const [],
+    this.defaultParagraphs = const [],
+    this.dynamicPhrases = const [],
+    this.remarks = const [],
+  });
+
+  factory AiReportAstSection.fromJson(Map<String, dynamic> json) =>
+      AiReportAstSection(
+        sectionId: json['sectionId'] as String? ?? '',
+        title: json['title'] as String? ?? '',
+        conditionRating: json['conditionRating'] as String?,
+        limitations: (json['limitations'] as List<dynamic>? ?? const [])
+            .map((e) => e.toString())
+            .toList(),
+        defaultParagraphs:
+            (json['defaultParagraphs'] as List<dynamic>? ?? const [])
+                .map((e) => e.toString())
+                .toList(),
+        dynamicPhrases: (json['dynamicPhrases'] as List<dynamic>? ?? const [])
+            .map((e) => e.toString())
+            .toList(),
+        remarks: (json['remarks'] as List<dynamic>? ?? const [])
+            .map((e) => e.toString())
+            .toList(),
+      );
+
+  final String sectionId;
+  final String title;
+  final String? conditionRating;
+  final List<String> limitations;
+  final List<String> defaultParagraphs;
+  final List<String> dynamicPhrases;
+  final List<String> remarks;
+
+  @override
+  List<Object?> get props => [
+        sectionId,
+        title,
+        conditionRating,
+        limitations,
+        defaultParagraphs,
+        dynamicPhrases,
+        remarks,
+      ];
+}
+
+/// Root AST payload emitted by backend phrase engine.
+class AiReportAstPayload extends Equatable {
+  const AiReportAstPayload({
+    this.title,
+    this.sectionTitle,
+    this.sections = const [],
+  });
+
+  factory AiReportAstPayload.fromJson(Map<String, dynamic> json) {
+    final metadata = json['metadata'] as Map<String, dynamic>? ?? const {};
+    return AiReportAstPayload(
+      title: json['title'] as String? ??
+          metadata['title'] as String? ??
+          metadata['reportTitle'] as String?,
+      sectionTitle: json['sectionTitle'] as String? ??
+          metadata['sectionTitle'] as String?,
+      sections: (json['sections'] as List<dynamic>? ?? const [])
+          .map((e) => AiReportAstSection.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+  }
+
+  final String? title;
+  final String? sectionTitle;
+  final List<AiReportAstSection> sections;
+
+  @override
+  List<Object?> get props => [title, sectionTitle, sections];
+}
+
 /// AI-generated report response
 class AiReportResponse extends Equatable {
   const AiReportResponse({
@@ -92,6 +174,7 @@ class AiReportResponse extends Equatable {
     required this.fromCache,
     required this.disclaimer,
     required this.usage,
+    this.ast,
   });
 
   factory AiReportResponse.fromJson(Map<String, dynamic> json) =>
@@ -108,6 +191,11 @@ class AiReportResponse extends Equatable {
         disclaimer: json['disclaimer'] as String? ?? '',
         usage: TokenUsage.fromJson(
             json['usage'] as Map<String, dynamic>? ?? {},),
+        ast: json['ast'] is Map<String, dynamic>
+            ? AiReportAstPayload.fromJson(
+                json['ast'] as Map<String, dynamic>,
+              )
+            : null,
       );
 
   final String surveyId;
@@ -117,6 +205,7 @@ class AiReportResponse extends Equatable {
   final bool fromCache;
   final String disclaimer;
   final TokenUsage usage;
+  final AiReportAstPayload? ast;
 
   /// Get narrative for a specific section
   SectionNarrative? getNarrativeForSection(String sectionId) {
@@ -136,6 +225,7 @@ class AiReportResponse extends Equatable {
         fromCache,
         disclaimer,
         usage,
+        ast,
       ];
 }
 

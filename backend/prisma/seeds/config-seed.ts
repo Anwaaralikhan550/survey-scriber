@@ -167,6 +167,18 @@ const phraseCategories: PhraseCategorySeed[] = [
     displayOrder: 42,
     phrases: ['None Visible', 'Minor Signs', 'Moderate', 'Significant'],
   },
+  {
+    slug: 'report_default_paragraphs',
+    displayName: 'Report Default Paragraphs',
+    description: 'System default narrative paragraphs used by AST compiler rules',
+    isSystem: true,
+    displayOrder: 43,
+    phrases: [
+      'Inspection limitations apply where access, visibility, or safety constraints prevented a complete assessment of all elements.',
+      'Moisture and dampness observations are based on visible surfaces and meter readings at inspection time only; concealed conditions may still exist.',
+      'As the property type is Flat, it is assumed to be leasehold unless confirmed otherwise by legal title documents.',
+    ],
+  },
 
   // Rooms
   {
@@ -357,6 +369,8 @@ const fieldDefinitions: FieldDefinitionSeed[] = [
   { sectionType: 'interior', fieldKey: 'decoration', fieldType: 'RADIO', label: 'Decoration Standard', isRequired: false, displayOrder: 3, phraseCategorySlug: 'decoration_standard' },
   { sectionType: 'interior', fieldKey: 'damp_signs', fieldType: 'RADIO', label: 'Signs of Damp', isRequired: false, displayOrder: 4, phraseCategorySlug: 'damp_signs' },
   { sectionType: 'interior', fieldKey: 'interior_notes', fieldType: 'TEXTAREA', label: 'Interior Notes', hint: 'Additional observations', isRequired: false, displayOrder: 5, maxLines: 3 },
+  { sectionType: 'interior', fieldKey: 'inspection_limitations_default', fieldType: 'TEXTAREA', label: 'Inspection Limitations (Default)', isRequired: false, displayOrder: 6, phraseCategorySlug: 'report_default_paragraphs', maxLines: 3 },
+  { sectionType: 'interior', fieldKey: 'moisture_dampness_default', fieldType: 'TEXTAREA', label: 'Moisture and Dampness (Default)', isRequired: false, displayOrder: 7, phraseCategorySlug: 'report_default_paragraphs', maxLines: 3 },
 
   // Rooms
   { sectionType: 'rooms', fieldKey: 'num_bedrooms', fieldType: 'DROPDOWN', label: 'Number of Bedrooms', isRequired: false, displayOrder: 1, phraseCategorySlug: 'num_bedrooms' },
@@ -371,6 +385,12 @@ const fieldDefinitions: FieldDefinitionSeed[] = [
   { sectionType: 'services', fieldKey: 'electrics', fieldType: 'RADIO', label: 'Electrical Installation', isRequired: false, displayOrder: 3, phraseCategorySlug: 'electrical_condition' },
   { sectionType: 'services', fieldKey: 'plumbing', fieldType: 'RADIO', label: 'Plumbing Condition', isRequired: false, displayOrder: 4, phraseCategorySlug: 'plumbing_condition' },
   { sectionType: 'services', fieldKey: 'drainage', fieldType: 'DROPDOWN', label: 'Drainage', isRequired: false, displayOrder: 5, phraseCategorySlug: 'drainage_types' },
+
+  // Inspection - E8 / E9 alignment for report payload coverage
+  { sectionType: 'e8-other-joinery-and-finishes', fieldKey: 'condition_rating', fieldType: 'DROPDOWN', label: 'Condition Rating', isRequired: false, displayOrder: 1, phraseCategorySlug: 'condition_3_scale' },
+  { sectionType: 'e8-other-joinery-and-finishes', fieldKey: 'e8_notes', fieldType: 'TEXTAREA', label: 'E8 Notes', isRequired: false, displayOrder: 2, maxLines: 3 },
+  { sectionType: 'e9-other-outside-property', fieldKey: 'condition_rating', fieldType: 'DROPDOWN', label: 'Condition Rating', isRequired: false, displayOrder: 1, phraseCategorySlug: 'condition_3_scale' },
+  { sectionType: 'e9-other-outside-property', fieldKey: 'e9_notes', fieldType: 'TEXTAREA', label: 'E9 Notes', isRequired: false, displayOrder: 2, maxLines: 3 },
 
   // Photos
   { sectionType: 'photos', fieldKey: 'front_exterior', fieldType: 'TEXT', label: 'Front Exterior Photo', hint: 'Photo reference or notes', isRequired: false, displayOrder: 1 },

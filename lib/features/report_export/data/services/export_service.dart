@@ -14,6 +14,7 @@ import '../../../../core/database/daos/survey_recommendations_dao.dart';
 import '../../../../core/sync/sync_manager.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../shared/presentation/widgets/survey_duration_timer.dart';
+import '../../../ai/domain/entities/ai_response.dart';
 import '../../../ai/domain/services/ai_client.dart';
 import '../../../../../../../shared/services/pdf_upload_service.dart';
 import '../../domain/models/export_config.dart';
@@ -174,6 +175,8 @@ class ExportService {
           );
         }
 
+        final astPayload = _mapAstPayload(response.ast, redactor, mapping);
+
         onProgress?.call(const ExportProgress(
           stage: 'AI', percent: 0.45, message: 'AI narrative complete'));
 
@@ -181,6 +184,7 @@ class ExportService {
         return document.copyWith(
           aiExecutiveSummary: executiveSummary,
           aiSectionNarratives: sectionNarratives,
+          aiAstPayload: astPayload,
           aiDisclaimer: response.disclaimer,
         );
       } catch (e) {
@@ -213,6 +217,55 @@ class ExportService {
     // Should not be reached but ensures compilation.
     return document;
   }
+
+  ReportAstPayload? _mapAstPayload(
+    AiReportAstPayload? payload,
+    PiiRedactor redactor,
+    Map<String, String> mapping,
+  ) {
+    if (payload == null) return null;
+
+    final sections = payload.sections
+        .map((section) => ReportAstSection(
+              sectionId: section.sectionId,
+              title: redactor.unredact(section.title, mapping),
+              conditionRating: section.conditionRating == null
+                  ? null
+                  : redactor.unredact(section.conditionRating!, mapping),
+              limitations: _unredactList(section.limitations, redactor, mapping),
+              defaultParagraphs: _unredactList(
+                section.defaultParagraphs,
+                redactor,
+                mapping,
+              ),
+              dynamicPhrases:
+                  _unredactList(section.dynamicPhrases, redactor, mapping),
+              remarks: _unredactList(section.remarks, redactor, mapping),
+            ))
+        .where((section) =>
+            section.sectionId.trim().isNotEmpty && section.hasAnyContent)
+        .toList();
+
+    return ReportAstPayload(
+      title: payload.title == null
+          ? null
+          : redactor.unredact(payload.title!, mapping),
+      sectionTitle: payload.sectionTitle == null
+          ? null
+          : redactor.unredact(payload.sectionTitle!, mapping),
+      sections: sections,
+    );
+  }
+
+  List<String> _unredactList(
+    List<String> source,
+    PiiRedactor redactor,
+    Map<String, String> mapping,
+  ) =>
+      source
+          .map((value) => redactor.unredact(value, mapping).trim())
+          .where((value) => value.isNotEmpty)
+          .toList();
 
   /// Load accepted professional recommendations and attach to document.
   Future<ReportDocument> _attachRecommendations(
