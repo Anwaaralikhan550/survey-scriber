@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/database/app_database.dart';
 import '../../../../core/database/database_providers.dart';
@@ -10,8 +13,9 @@ import '../../../../core/sync/sync_manager.dart';
 import '../../../../core/sync/sync_state.dart';
 import '../../../../core/sync/v2_sync_helper.dart';
 import '../../data/valuation_repository.dart';
+import '../../domain/valuation_answer_validator.dart';
+import '../../domain/valuation_phrase_catalog.dart';
 import '../../domain/valuation_phrase_engine.dart';
-import '../../../property_inspection/domain/field_phrase_processor.dart';
 import '../../../property_inspection/domain/models/inspection_models.dart';
 
 final valuationRepositoryProvider = Provider<ValuationRepository>((ref) {
@@ -62,8 +66,53 @@ final valuationChildScreensProvider =
   },
 );
 
+final valuationPhraseCatalogProvider =
+    FutureProvider<ValuationPhraseCatalog>((ref) async {
+  // A draft override is useful for review/preview, but a release build must
+  // not silently activate it. Only an approved local catalog can replace the
+  // bundled bank in production.
+  String raw;
+  var loadedLocalOverride = false;
+  try {
+    final dir = await getApplicationDocumentsDirectory();
+    final localFile = File('${dir.path}/admin/valuation_v2_phrase_texts.json');
+    if (await localFile.exists()) {
+      raw = await localFile.readAsString();
+      loadedLocalOverride = true;
+    } else {
+      raw = await rootBundle
+          .loadString('assets/property_valuation/phrase_texts.json');
+    }
+  } catch (e, stack) {
+    debugPrint('[valuationPhraseTextsProvider] Failed to load local override, '
+        'falling back to bundled asset: $e\n$stack');
+    raw = await rootBundle
+        .loadString('assets/property_valuation/phrase_texts.json');
+  }
+  final catalog = ValuationPhraseCatalog.fromRawJson(raw);
+  if (loadedLocalOverride && kReleaseMode && !catalog.isApproved) {
+    debugPrint('[valuationPhraseCatalogProvider] Ignoring unapproved local '
+        'phrase bank in release mode.');
+    final bundled = await rootBundle
+        .loadString('assets/property_valuation/phrase_texts.json');
+    return ValuationPhraseCatalog.fromRawJson(bundled);
+  }
+  return catalog;
+});
+
+/// Compatibility view for code that reads valuation bank text directly.
+final valuationPhraseTextsProvider =
+    FutureProvider<Map<String, String>>((ref) async {
+  final catalog = await ref.watch(valuationPhraseCatalogProvider.future);
+  return catalog.texts;
+});
+
 final valuationPhraseEngineProvider = Provider<ValuationPhraseEngine>((ref) {
-  return const ValuationPhraseEngine();
+  final catalog = ref.watch(valuationPhraseCatalogProvider);
+  return catalog.maybeWhen(
+    data: ValuationPhraseEngine.catalog,
+    orElse: ValuationPhraseEngine.new,
+  );
 });
 
 class ValuationScreenState {
@@ -179,6 +228,15 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
 
   Future<bool> markComplete() async {
     if (state.screenDefinition == null) return false;
+    final validationErrors =
+        ValuationAnswerValidator.validateScreen(_screenId, state.answers);
+    if (validationErrors.isNotEmpty) {
+      state = state.copyWith(
+        isSaving: false,
+        errorMessage: validationErrors.join('\n'),
+      );
+      return false;
+    }
     state = state.copyWith(isSaving: true);
     try {
       await _repo.saveScreenAnswers(
@@ -215,10 +273,7 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
     if (state.screenDefinition == null) return;
     try {
       final phraseEngine = _ref.read(valuationPhraseEngineProvider);
-      final enginePhrases = phraseEngine.buildPhrases(_screenId, state.answers);
-      final fieldPhrases = FieldPhraseProcessor.buildFieldPhrases(
-          state.screenDefinition!.fields, state.answers);
-      final phrases = [...enginePhrases, ...fieldPhrases];
+      final phrases = phraseEngine.buildPhrases(_screenId, state.answers);
 
       final phraseJson = jsonEncode(phrases);
       await _repo.savePhraseOutput(

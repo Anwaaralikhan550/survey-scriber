@@ -1,0 +1,1547 @@
+{
+ "mastersWithMultiSentenceParagraphs": 33,
+ "fragmentedMasters": 29,
+ "whitelistedMasters": 4,
+ "findings": [
+  {
+   "masterCode": "{D_CONSTRUCTION}",
+   "paragraphGroups": [
+    [
+     "{CONSTRUCTION_TYPE_AREA}",
+     "{CONSTRUCTION_ROOF_AREA}",
+     "{CONSTRUCTION_EXT_WALL_AREA}",
+     "{CONSTRUCTION_EXT_WALL_FINISHES}",
+     "{CONSTRUCTION_EXT_WALL_CLADDING}",
+     "{CONSTRUCTION_INT_WALL_AREA}",
+     "{CONSTRUCTION_FLOOR_AREA}",
+     "{CONSTRUCTION_WINDOWS_AREA}"
+    ],
+    [
+     "{CONDITION_TYPE_OF_CONSTRUCTION}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{CONSTRUCTION_TYPE_AREA}",
+     "{CONSTRUCTION_ROOF_AREA}",
+     "{CONSTRUCTION_EXT_WALL_AREA}",
+     "{CONSTRUCTION_EXT_WALL_FINISHES}",
+     "{CONSTRUCTION_EXT_WALL_CLADDING}",
+     "{CONSTRUCTION_INT_WALL_AREA}",
+     "{CONSTRUCTION_FLOOR_AREA}",
+     "{CONSTRUCTION_WINDOWS_AREA}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_ENERGY}",
+   "paragraphGroups": [
+    [
+     "{ENERGY_EFFICIENCY_CURRENT_VALUE}",
+     "{ENERGY_EFFICIENCY_POTENTIAL_VALUE}"
+    ],
+    [
+     "{ENVIRONMENT_IMPACT_CURRENT_VALUE}",
+     "{ENVIRONMENT_IMPACT_POTENTIAL_VALUE}"
+    ],
+    [
+     "{D_ENERGY_OTHER_SERVICES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{ENERGY_EFFICIENCY_CURRENT_VALUE}",
+     "{ENERGY_EFFICIENCY_POTENTIAL_VALUE}"
+    ],
+    [
+     "{ENVIRONMENT_IMPACT_CURRENT_VALUE}",
+     "{ENVIRONMENT_IMPACT_POTENTIAL_VALUE}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_FLAT_INFORMATION}",
+   "paragraphGroups": [
+    [
+     "{FLAT_INFO_PRO_ON_FLOOR}",
+     "{FLAT_INFO_PRO_NO_OF_STOREY}",
+     "{FLAT_INFO_PRO_ACCESS_VIA}",
+     "{FLAT_INFO_PRO_ACCESS_ELEVATION}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{FLAT_INFO_PRO_ON_FLOOR}",
+     "{FLAT_INFO_PRO_NO_OF_STOREY}",
+     "{FLAT_INFO_PRO_ACCESS_VIA}",
+     "{FLAT_INFO_PRO_ACCESS_ELEVATION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_GROUND}",
+   "paragraphGroups": [
+    [
+     "{GROUND_PROPERTY_AREA}",
+     "{GROUND_TOPOGRAPHY}",
+     "{GROUND_FRONT_GARDEN}",
+     "{GROUND_REAR_GARDEN}",
+     "{GROUND_COMMUNAL_GARDEN}",
+     "{D_GROUND_PARKING_AREA}",
+     "{GATED_COMMUNITY}",
+     "{GROUND_ESTATE_LOCATION}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{GROUND_PROPERTY_AREA}",
+     "{GROUND_TOPOGRAPHY}",
+     "{GROUND_FRONT_GARDEN}",
+     "{GROUND_REAR_GARDEN}",
+     "{GROUND_COMMUNAL_GARDEN}",
+     "{D_GROUND_PARKING_AREA}",
+     "{GATED_COMMUNITY}",
+     "{GROUND_ESTATE_LOCATION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_LOCATION}",
+   "paragraphGroups": [
+    [
+     "{LOCATION_AREA}",
+     "{LOCATION_PRIVATE_PROPERTY_AREA}",
+     "{D_LOCATION_NEAR_NOISY_AREA}",
+     "{D_LOCATION_CONVERSATION_AREA}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{LOCATION_AREA}",
+     "{LOCATION_PRIVATE_PROPERTY_AREA}",
+     "{D_LOCATION_NEAR_NOISY_AREA}",
+     "{D_LOCATION_CONVERSATION_AREA}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_PROPERTY_STATUS}",
+   "paragraphGroups": [
+    [
+     "{PROPERTY_STATUS_OCCUPANCY}",
+     "{PROPERTY_STATUS_FURNISHING}",
+     "{PROPERTY_STATUS_FLOOR_COVERING}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{PROPERTY_STATUS_OCCUPANCY}",
+     "{PROPERTY_STATUS_FURNISHING}",
+     "{PROPERTY_STATUS_FLOOR_COVERING}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_PROPERTY_TYPE_FLAT}",
+   "paragraphGroups": [
+    [
+     "{FLAT_NO_OF_BEDROOMS}",
+     "{FLAT_TYPE}",
+     "{FLAT_FLOOR_LOCATION}",
+     "{FLAT_NO_OF_STOREY}",
+     "{FLAT_TOTAL_FLATS}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{FLAT_NO_OF_BEDROOMS}",
+     "{FLAT_TYPE}",
+     "{FLAT_FLOOR_LOCATION}",
+     "{FLAT_NO_OF_STOREY}",
+     "{FLAT_TOTAL_FLATS}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_PROPERTY_TYPE_HOUSE}",
+   "paragraphGroups": [
+    [
+     "{HOUSE_SUB_TYPE}",
+     "{HOUSE_TYPE}",
+     "{HOUSE_NO_OF_BEDROOMS}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{HOUSE_SUB_TYPE}",
+     "{HOUSE_TYPE}",
+     "{HOUSE_NO_OF_BEDROOMS}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_PRO_CONVERSION_STATUS_KNOWN}",
+   "paragraphGroups": [
+    [
+     "{PRO_CONVERSION_PRO_SUB_TYPE}",
+     "{PRO_CONVERSION_PRO_TYPE}",
+     "{PRO_CONVERSION_DATE}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{PRO_CONVERSION_PRO_SUB_TYPE}",
+     "{PRO_CONVERSION_PRO_TYPE}",
+     "{PRO_CONVERSION_DATE}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_PRO_CONVERSION_STATUS_UNKNOWN}",
+   "paragraphGroups": [
+    [
+     "{PRO_CONVERSION_PRO_SUB_TYPE}",
+     "{PRO_CONVERSION_PRO_TYPE}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{PRO_CONVERSION_PRO_SUB_TYPE}",
+     "{PRO_CONVERSION_PRO_TYPE}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_PRO_EXTENDED_STATUS_KNOWN}",
+   "paragraphGroups": [
+    [
+     "{PRO_EXTENDED_LOCATION}",
+     "{PRO_EXTENDED_DATE}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{PRO_EXTENDED_LOCATION}",
+     "{PRO_EXTENDED_DATE}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{D_WEATHER}",
+   "paragraphGroups": [
+    [
+     "{WEATHER_NOW}",
+     "{WEATHER_BEFORE}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{WEATHER_NOW}",
+     "{WEATHER_BEFORE}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{E_CHIMNEY_MULTI_STACK}",
+   "paragraphGroups": [
+    [
+     "{STACK}",
+     "{STACK_LOCATION}",
+     "{STACK_POTS}"
+    ],
+    [
+     "{STACK_RENDERING}",
+     "{WATERPROOFING}",
+     "{CONDITION}"
+    ],
+    [
+     "{SHARED_CHIMNEY}"
+    ],
+    [
+     "{LEANING_CHIMNEY}",
+     "{LEANING_CHIMNEY_CONDITION}"
+    ],
+    [
+     "{PARTIAL_VIEW}"
+    ],
+    [
+     "{REMOVED_CHIMNEY_STACK}"
+    ],
+    [
+     "{REMOVED_POTS}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{STACK}",
+     "{STACK_LOCATION}",
+     "{STACK_POTS}"
+    ],
+    [
+     "{STACK_RENDERING}",
+     "{WATERPROOFING}",
+     "{CONDITION}"
+    ],
+    [
+     "{LEANING_CHIMNEY}",
+     "{LEANING_CHIMNEY_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": true,
+   "verdict": "OK (whitelisted)"
+  },
+  {
+   "masterCode": "{E_CHIMNEY_REPAIR}",
+   "paragraphGroups": [
+    [
+     "{E_CHIMNEY_FLASHING_REPAIR_SOON}"
+    ],
+    [
+     "{E_CHIMNEY_FLASHING_REPAIR_NOW}"
+    ],
+    [
+     "{E_CHIMNEY_FLAUNCHING_REPAIR_SOON}"
+    ],
+    [
+     "{E_CHIMNEY_FLAUNCHING_REPAIR_NOW}",
+     "{FLAUNCHING_REPAIR_NOW_CAUSING_DUMP}"
+    ],
+    [
+     "{E_CHIMNEY_POTS_REPAIR_SOON}"
+    ],
+    [
+     "{E_CHIMNEY_POTS_REPAIR_NOW}",
+     "{CHIMNEY_POTS_REPAIR_NOW_SAFETY_HAZARD}"
+    ],
+    [
+     "{E_CHIMNEY_REPOINTING_REPAIR_SOON}"
+    ],
+    [
+     "{E_CHIMNEY_REPOINTING_REPAIR_NOW}",
+     "{CHIMNEY_REPOINTING_REPAIR_NOW_CAUSING_DUMP}"
+    ],
+    [
+     "{E_CHIMNEY_DISREPAIR_REPAIR}"
+    ],
+    [
+     "{E_CHIMNEY_AERIAL_REPAIR_SOON}"
+    ],
+    [
+     "{E_CHIMNEY_AERIAL_REPAIR_NOW}",
+     "{AERIAL_REPAIR_NOW_SAFETY_HAZARD}"
+    ],
+    [
+     "{E_CHIMNEY_SATELLITE_REPAIR_SOON}"
+    ],
+    [
+     "{E_CHIMNEY_SATELLITE_REPAIR_NOW}",
+     "{SATELLITE_REPAIR_NOW_SAFETY_HAZARD}"
+    ],
+    [
+     "{E_CHIMNEY_REPAIR_DEFAULT_TEXT}"
+    ],
+    [
+     "{E_CHIMNEY_REPAIR_CONDITION_RATING}"
+    ],
+    [
+     "{E_CHIMNEY_REPAIR_NOTES}"
+    ],
+    [
+     "{STANDARD_TEXT}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{E_CHIMNEY_FLAUNCHING_REPAIR_NOW}",
+     "{FLAUNCHING_REPAIR_NOW_CAUSING_DUMP}"
+    ],
+    [
+     "{E_CHIMNEY_POTS_REPAIR_NOW}",
+     "{CHIMNEY_POTS_REPAIR_NOW_SAFETY_HAZARD}"
+    ],
+    [
+     "{E_CHIMNEY_REPOINTING_REPAIR_NOW}",
+     "{CHIMNEY_REPOINTING_REPAIR_NOW_CAUSING_DUMP}"
+    ],
+    [
+     "{E_CHIMNEY_AERIAL_REPAIR_NOW}",
+     "{AERIAL_REPAIR_NOW_SAFETY_HAZARD}"
+    ],
+    [
+     "{E_CHIMNEY_SATELLITE_REPAIR_NOW}",
+     "{SATELLITE_REPAIR_NOW_SAFETY_HAZARD}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{E_CHIMNEY_SINGLE_STACK}",
+   "paragraphGroups": [
+    [
+     "{STACK}",
+     "{STACK_LOCATION}",
+     "{STACK_POTS}"
+    ],
+    [
+     "{STACK_RENDERING}",
+     "{WATERPROOFING}",
+     "{CONDITION}"
+    ],
+    [
+     "{SHARED_CHIMNEY}"
+    ],
+    [
+     "{LEANING_CHIMNEY}",
+     "{LEANING_CHIMNEY_CONDITION}"
+    ],
+    [
+     "{PARTIAL_VIEW}"
+    ],
+    [
+     "{REMOVED_CHIMNEY_STACK}"
+    ],
+    [
+     "{REMOVED_POTS}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{STACK}",
+     "{STACK_LOCATION}",
+     "{STACK_POTS}"
+    ],
+    [
+     "{STACK_RENDERING}",
+     "{WATERPROOFING}",
+     "{CONDITION}"
+    ],
+    [
+     "{LEANING_CHIMNEY}",
+     "{LEANING_CHIMNEY_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": true,
+   "verdict": "OK (whitelisted)"
+  },
+  {
+   "masterCode": "{E_CONSERVATORY_PORCHES}",
+   "paragraphGroups": [
+    [
+     "{STANDARD_TEXT}"
+    ],
+    [
+     "{LOCATION_CONSTRUCTION}",
+     "{CP_SAFETY_GLASS_RATING}"
+    ],
+    [
+     "{CP_ROOF}",
+     "{CP_DOORS}",
+     "{CP_WINDOWS}",
+     "{CP_FLOOR}",
+     "{CP_CONDITION}",
+     "{CP_DOORS_INCORPORATES_IF_DOUBLE_SELECTED}"
+    ],
+    [
+     "{CP_OPEN_TO_BUILDING}"
+    ],
+    [
+     "{CONSERVATORY_ROOF_FLASHING_WITH_WALL}"
+    ],
+    [
+     "{CP_POOR_CONDITION}"
+    ],
+    [
+     "{PORCH_LOCATION_CONSTRUCTION}",
+     "{PORCH_SAFETY_GLASS_RATING}"
+    ],
+    [
+     "{PORCH_ROOF}",
+     "{PORCH_DOORS}",
+     "{PORCH_WINDOWS}",
+     "{PORCH_FLOOR}",
+     "{PORCH_CONDITION}",
+     "{PORCH_DOORS_INCORPORATES_IF_DOUBLE_SELECTED}"
+    ],
+    [
+     "{PORCH_OPEN_TO_BUILDING}"
+    ],
+    [
+     "{PORCH_ROOF_FLASHING_WITH_WALL}"
+    ],
+    [
+     "{PORCH_POOR_CONDITION}"
+    ],
+    [
+     "{DOOR_REPAIR}"
+    ],
+    [
+     "{WINDOWS_REPAIR}"
+    ],
+    [
+     "{DOOR_GLAZING_REPAIR}"
+    ],
+    [
+     "{WINDOW_GLAZING_REPAIR}"
+    ],
+    [
+     "{ROOF_GLAZING_REPAIR}"
+    ],
+    [
+     "{FLOOR_REPAIR}"
+    ],
+    [
+     "{WALLS_REPAIR}"
+    ],
+    [
+     "{RAINWATER_GOODS_REPAIR}"
+    ],
+    [
+     "{CP_CONDITION_RATING}"
+    ],
+    [
+     "{CP_NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{LOCATION_CONSTRUCTION}",
+     "{CP_SAFETY_GLASS_RATING}"
+    ],
+    [
+     "{CP_ROOF}",
+     "{CP_DOORS}",
+     "{CP_WINDOWS}",
+     "{CP_FLOOR}",
+     "{CP_CONDITION}",
+     "{CP_DOORS_INCORPORATES_IF_DOUBLE_SELECTED}"
+    ],
+    [
+     "{PORCH_LOCATION_CONSTRUCTION}",
+     "{PORCH_SAFETY_GLASS_RATING}"
+    ],
+    [
+     "{PORCH_ROOF}",
+     "{PORCH_DOORS}",
+     "{PORCH_WINDOWS}",
+     "{PORCH_FLOOR}",
+     "{PORCH_CONDITION}",
+     "{PORCH_DOORS_INCORPORATES_IF_DOUBLE_SELECTED}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{E_MAIN_WALLS}",
+   "paragraphGroups": [
+    [
+     "{STANDARD_TEXT}"
+    ],
+    [
+     "{SOLID_BOUNDED_BRICK_WALL}"
+    ],
+    [
+     "{CAVITY_BRICK_WALL}"
+    ],
+    [
+     "{CAVITY_BLOCK_WALL}"
+    ],
+    [
+     "{CAVITY_STUD_WALL}"
+    ],
+    [
+     "{OTHER_WALL}"
+    ],
+    [
+     "{WALLS_CLADDING}",
+     "{WALLS_CONDITION}"
+    ],
+    [
+     "{WALLS_DPC_STATUS_VISIBLE_OR_NOT_VISIBLE}"
+    ],
+    [
+     "{WALLS_DAMP_TYPE_NONE_OR_PRESENT}"
+    ],
+    [
+     "{WALLS_REMOVED_WALL}"
+    ],
+    [
+     "{MAIN_WALL_MOVEMENTS_TYPE}"
+    ],
+    [
+     "{WALL_THIN_SLIM_WALL}"
+    ],
+    [
+     "{WALL_REPAIR_CAVITY_WALL_INSULATION}"
+    ],
+    [
+     "{WALL_REPAIR_NEARBY_TREES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{WALLS_CLADDING}",
+     "{WALLS_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": true,
+   "verdict": "OK (whitelisted)"
+  },
+  {
+   "masterCode": "{E_OTHER_JOINERY_AND_FINISHES}",
+   "paragraphGroups": [
+    [
+     "{ABOUT_OTHER_JOINERY_AND_FINISHES}",
+     "{CONDITION}"
+    ],
+    [
+     "{CONTAIN_ASBESTOS}"
+    ],
+    [
+     "{REPAIR_SOON}"
+    ],
+    [
+     "{REPAIR_SAFETY_HAZARD}"
+    ],
+    [
+     "{REPAIR_REDECORATE}"
+    ],
+    [
+     "{STANDARD_TEXT}"
+    ],
+    [
+     "{IF_PROPERTY_FLAT_IS_SELECTED}"
+    ],
+    [
+     "{CONDITION_RATING}"
+    ],
+    [
+     "{NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{ABOUT_OTHER_JOINERY_AND_FINISHES}",
+     "{CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{E_OTHER}",
+   "paragraphGroups": [
+    [
+     "{COMMUNAL_AREA}",
+     "{COMMUNAL_AREA_CONDITION}"
+    ],
+    [
+     "{OTHER_CARPORT_CANOPY}"
+    ],
+    [
+     "{OTHER_PORCH_CANOPY}"
+    ],
+    [
+     "{OTHER_ROOF_TERRACE}"
+    ],
+    [
+     "{OTHER_BALCONY}"
+    ],
+    [
+     "{OTHER_JULIET_BALCONY}"
+    ],
+    [
+     "{OTHER_EXTERNAL_STAIRS}"
+    ],
+    [
+     "{OTHER_OTHER}"
+    ],
+    [
+     "{OTHER_REPAIR_CARPORT_CANOPY}"
+    ],
+    [
+     "{OTHER_REPAIR_PORCH_CANOPY}"
+    ],
+    [
+     "{OTHER_REPAIR_ROOF_TERRACE}"
+    ],
+    [
+     "{OTHER_REPAIR_BALCONY}"
+    ],
+    [
+     "{OTHER_REPAIR_JULIET_BALCONY}"
+    ],
+    [
+     "{OTHER_REPAIR_EXTERNAL_STAIRS}"
+    ],
+    [
+     "{OTHER_REPAIR_OTHER}"
+    ],
+    [
+     "{OTHER_CONDITION_RATING}"
+    ],
+    [
+     "{OTHER_NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{COMMUNAL_AREA}",
+     "{COMMUNAL_AREA_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{E_RAINWATER_GOODS_RWG}",
+   "paragraphGroups": [
+    [
+     "{WEATHER_CONDITION_WET}",
+     "{WEATHER_CONDITION_DRY}",
+     "{WEATHER_CONDITION_LEAKES_NOTES}"
+    ],
+    [
+     "{RWG_ABOUT_TYPE}",
+     "{RWG_ABOUT_CONDITION}"
+    ],
+    [
+     "{RWG_BLOCKED}"
+    ],
+    [
+     "{RWG_BLOCKED_GULLIES}"
+    ],
+    [
+     "{RWG_OPEN_RUNOFFS}"
+    ],
+    [
+     "{RAINWATER_GOODS_SHARED}"
+    ],
+    [
+     "{RWG_REPAIR_SOON}"
+    ],
+    [
+     "{RWG_REPAIR_NOW}"
+    ],
+    [
+     "{RWG_IF_TYPE_ASBESTOS_CEMENT}"
+    ],
+    [
+     "{RWG_IF_TYPE_IF_INSUFFICIENT_SLOPE}"
+    ],
+    [
+     "{RWG_STANDARD_TEXT}"
+    ],
+    [
+     "{RWG_IF_PROPERTY_FLAT_SELECTED}"
+    ],
+    [
+     "{RWG_CONDITION_RATING}"
+    ],
+    [
+     "{RWG_NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{WEATHER_CONDITION_WET}",
+     "{WEATHER_CONDITION_DRY}",
+     "{WEATHER_CONDITION_LEAKES_NOTES}"
+    ],
+    [
+     "{RWG_ABOUT_TYPE}",
+     "{RWG_ABOUT_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{E_ROOF_COVERING}",
+   "paragraphGroups": [
+    [
+     "{E_RC_NOT_INSPECTED}"
+    ],
+    [
+     "{E_RC_WEATHER_CONDITION}",
+     "{E_RC_WEATHER_CONDITION_LEAKS_NOTED}"
+    ],
+    [
+     "{RC_ABOUT_TYPE_PITCHED}",
+     "{RC_ABOUT_TYPE_PITCHED_CONDITION}"
+    ],
+    [
+     "{RC_ABOUT_TYPE_FLAT}",
+     "{RC_ABOUT_TYPE_FLAT_CONDITION}"
+    ],
+    [
+     "{RC_ABOUT_TYPE_MANSARD}",
+     "{RC_ABOUT_TYPE_MANSARD_CONDITION}"
+    ],
+    [
+     "{RC_ABOUT_TYPE_OTHER}",
+     "{RC_ABOUT_TYPE_OTHER_CONDITION}"
+    ],
+    [
+     "{E_RC_FLASHING}",
+     "{E_RC_FLASHING_CONDITION}"
+    ],
+    [
+     "{E_RC_RIDGE_TILES}"
+    ],
+    [
+     "{E_RC_HIP_TILES}"
+    ],
+    [
+     "{E_RC_PARAPET_WALL}",
+     "{E_RC_PARAPET_WALL_CONDITION}"
+    ],
+    [
+     "{E_RC_DEFLECTION_STATUS}",
+     "{E_RC_DEFLECTION_CAUSED_BY}"
+    ],
+    [
+     "{E_RC_DEFLECTION_OTHER}"
+    ],
+    [
+     "{FLAT_MATERIAL_MINERAL_FELT}"
+    ],
+    [
+     "{MATERIAL_REPLACEMENT}"
+    ],
+    [
+     "{MATERIAL_COMPOSITE}"
+    ],
+    [
+     "{RC_CONTAINS_ASBESTOS}"
+    ],
+    [
+     "{RC_ROOF}"
+    ],
+    [
+     "{E_ROOF_COVERING_ROOF_CONDITION}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{E_RC_WEATHER_CONDITION}",
+     "{E_RC_WEATHER_CONDITION_LEAKS_NOTED}"
+    ],
+    [
+     "{RC_ABOUT_TYPE_PITCHED}",
+     "{RC_ABOUT_TYPE_PITCHED_CONDITION}"
+    ],
+    [
+     "{RC_ABOUT_TYPE_FLAT}",
+     "{RC_ABOUT_TYPE_FLAT_CONDITION}"
+    ],
+    [
+     "{RC_ABOUT_TYPE_MANSARD}",
+     "{RC_ABOUT_TYPE_MANSARD_CONDITION}"
+    ],
+    [
+     "{RC_ABOUT_TYPE_OTHER}",
+     "{RC_ABOUT_TYPE_OTHER_CONDITION}"
+    ],
+    [
+     "{E_RC_FLASHING}",
+     "{E_RC_FLASHING_CONDITION}"
+    ],
+    [
+     "{E_RC_PARAPET_WALL}",
+     "{E_RC_PARAPET_WALL_CONDITION}"
+    ],
+    [
+     "{E_RC_DEFLECTION_STATUS}",
+     "{E_RC_DEFLECTION_CAUSED_BY}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{E_WINDOWS}",
+   "paragraphGroups": [
+    [
+     "{WINDOWS_STANDARD_TEXT}"
+    ],
+    [
+     "{WINDOWS_ABOUT}",
+     "{WINDOWS_SAFETY_GLASS_RATING_STATUS}"
+    ],
+    [
+     "{WINDOWS_SAFETY_GLASS_RATING_IF_REPLACEMENT}"
+    ],
+    [
+     "{WINDOWS_SAFETY_GLASS_RATING_IF_OLD_STYLE_TIMBER_SASH}"
+    ],
+    [
+     "{WINDOW_VELUX_TYPE}",
+     "{WINDOW_VELUX_CONDITION}"
+    ],
+    [
+     "{WINDOW_SILL_PROJECTION}"
+    ],
+    [
+     "{WINDOW_WALL_SEALING}"
+    ],
+    [
+     "{WINDOWS_IN_POOR_CONDITION}"
+    ],
+    [
+     "{WINDOWS_RANDOM_SAMPLING}"
+    ],
+    [
+     "{WINDOWS_REPAIR}"
+    ],
+    [
+     "{WINDOWS_REPAIR_FAILED_GLAZING_LOCATION}"
+    ],
+    [
+     "{WINDOWS_DEFECT_IF_IN_DISREPAIR}"
+    ],
+    [
+     "{WINDOWS_REPAIR_NO_FIRE_ESCAPE_RISK}"
+    ],
+    [
+     "{WINDOW_CONDITION_RATING}"
+    ],
+    [
+     "{WINDOW_NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{WINDOWS_ABOUT}",
+     "{WINDOWS_SAFETY_GLASS_RATING_STATUS}"
+    ],
+    [
+     "{WINDOW_VELUX_TYPE}",
+     "{WINDOW_VELUX_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": true,
+   "verdict": "OK (whitelisted)"
+  },
+  {
+   "masterCode": "{F7_DAMAGED_LOCK}",
+   "paragraphGroups": [
+    [
+     "{DOOR_LOCKED_REPAIR_LOCATION}",
+     "{DOOR_LOCKED_REPAIR_DEFECT}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{DOOR_LOCKED_REPAIR_LOCATION}",
+     "{DOOR_LOCKED_REPAIR_DEFECT}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{F7_DOOR_SAMPLING}",
+   "paragraphGroups": [
+    [
+     "{DOORSAMPLING_REPAIR_LOCATION}",
+     "{DOORSAMPLING_REPAIR_DEFECT}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{DOORSAMPLING_REPAIR_LOCATION}",
+     "{DOORSAMPLING_REPAIR_DEFECT}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{F_BATHROOM_FITTINGS}",
+   "paragraphGroups": [
+    [
+     "{STANDARD_TEXT}"
+    ],
+    [
+     "{BATHROOM_FITTINGS}"
+    ],
+    [
+     "{EXTRACTOR_FAN_INSTALLED}"
+    ],
+    [
+     "{EXTRACTOR_FAN_NO_INSTALLED}"
+    ],
+    [
+     "{LEAKING_SEALANTS}"
+    ],
+    [
+     "{SEALANT_CONDITION}"
+    ],
+    [
+     "{MOULDING}"
+    ],
+    [
+     "{WOOD_ROT}"
+    ],
+    [
+     "{NO_CUBICAL_SG_RATING}"
+    ],
+    [
+     "{STANDARD_TEXT_2}"
+    ],
+    [
+     "{BATHROOM_FITTINGS_REPAIR_SOON}"
+    ],
+    [
+     "{BATHROOM_FITTINGS_REPAIR_NOW}",
+     "{IF_CRACKED_OR_POORLY_SECURED_IS_SELECTED}"
+    ],
+    [
+     "{CONDITION_RATING}"
+    ],
+    [
+     "{NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{BATHROOM_FITTINGS_REPAIR_NOW}",
+     "{IF_CRACKED_OR_POORLY_SECURED_IS_SELECTED}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{F_CEILINGS}",
+   "paragraphGroups": [
+    [
+     "{STANDARD_TEXT}"
+    ],
+    [
+     "{ABOUT_CONSTRUCTION}",
+     "{ABOUT_FINISHES}",
+     "{ABOUT_CONDITION}"
+    ],
+    [
+     "{CRACKS}"
+    ],
+    [
+     "{CONTAINS_ASBESTOS}"
+    ],
+    [
+     "{POLYSTYRENE}"
+    ],
+    [
+     "{HEAVY_PAPER_LINING}"
+    ],
+    [
+     "{REPAIRS_CELLINGS_SOON}"
+    ],
+    [
+     "{REPAIRS_CELLINGS_NOW}"
+    ],
+    [
+     "{IF_LATH_AND_PLASTER_IS_SELECTED}"
+    ],
+    [
+     "{IF_TEXTURED_IS_SELECTED}"
+    ],
+    [
+     "{ORNAMENTAL_PLASTER}"
+    ],
+    [
+     "{CONDITION_RATING}"
+    ],
+    [
+     "{NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{ABOUT_CONSTRUCTION}",
+     "{ABOUT_FINISHES}",
+     "{ABOUT_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{F_FIREPLACES_AND_CHIMNEYS}",
+   "paragraphGroups": [
+    [
+     "{NOT_APPLICABLE}"
+    ],
+    [
+     "{NO_STACK_FIRE_PLACE}"
+    ],
+    [
+     "{AN_OPEN_FIRE_LOCATION}",
+     "{AN_OPEN_FIRE_CONDITION}"
+    ],
+    [
+     "{GAS_FIRE_LOCATION}",
+     "{GAS_FIRE_CONDITION}"
+    ],
+    [
+     "{IMITATION_SYSTEM_LOCATION}",
+     "{IMITATION_SYSTEM_CONDITION}"
+    ],
+    [
+     "{WOOD_BURNING_STOVE_LOCATION}",
+     "{WOOD_BURNING_STOVE_CONDITION}"
+    ],
+    [
+     "{ELECTRIC_FIRE_LOCATION}",
+     "{ELECTRIC_FIRE_CONDITION}"
+    ],
+    [
+     "{OTHER_LOCATION}",
+     "{OTHER_CONDITION}"
+    ],
+    [
+     "{FLUES_NOT_INSPECTED}"
+    ],
+    [
+     "{BLOCKED_FIREPLACE}"
+    ],
+    [
+     "{REMOVED_CB}"
+    ],
+    [
+     "{BOILER_FLUE}"
+    ],
+    [
+     "{REPAIR_FIREPLACES_SOON}"
+    ],
+    [
+     "{REPAIR_FIREPLACES_NOW}"
+    ],
+    [
+     "{DAMAGED_GATE}"
+    ],
+    [
+     "{DAMAGED_SURROUND}"
+    ],
+    [
+     "{CONDITION_RATING}"
+    ],
+    [
+     "{NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{AN_OPEN_FIRE_LOCATION}",
+     "{AN_OPEN_FIRE_CONDITION}"
+    ],
+    [
+     "{GAS_FIRE_LOCATION}",
+     "{GAS_FIRE_CONDITION}"
+    ],
+    [
+     "{IMITATION_SYSTEM_LOCATION}",
+     "{IMITATION_SYSTEM_CONDITION}"
+    ],
+    [
+     "{WOOD_BURNING_STOVE_LOCATION}",
+     "{WOOD_BURNING_STOVE_CONDITION}"
+    ],
+    [
+     "{ELECTRIC_FIRE_LOCATION}",
+     "{ELECTRIC_FIRE_CONDITION}"
+    ],
+    [
+     "{OTHER_LOCATION}",
+     "{OTHER_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{F_FLOORS}",
+   "paragraphGroups": [
+    [
+     "{STANDARD_TEXT}"
+    ],
+    [
+     "{FLOOR_CONSTRUCTION}",
+     "{FLOOR_COVERING}",
+     "{FLOOR_CONDITION}"
+    ],
+    [
+     "{CREAKING}"
+    ],
+    [
+     "{TILES_CONDITION_OK}"
+    ],
+    [
+     "{TILES_CONDITION_CRACKED}"
+    ],
+    [
+     "{LOOSE_FLOORBOARDS}"
+    ],
+    [
+     "{TIMBER_DECAY}"
+    ],
+    [
+     "{TIMBER_INFESTAION}"
+    ],
+    [
+     "{DAMPNESS}"
+    ],
+    [
+     "{FLOOR_VENTILATION}"
+    ],
+    [
+     "{TIMBER_FLOOR_OLDER_PROPERTIES}"
+    ],
+    [
+     "{FLOOR_REPAIR_SOON}"
+    ],
+    [
+     "{FLOOR_REPAIR_NOW}"
+    ],
+    [
+     "{REPAIR_LAMINATE}"
+    ],
+    [
+     "{REPAIR_FLOOR_VIBRATION}"
+    ],
+    [
+     "{REPAIR_SLOPING_FLOOR}"
+    ],
+    [
+     "{REPAIR_UNEVEN_FLOOR}"
+    ],
+    [
+     "{STANDARD_TEXT_2}"
+    ],
+    [
+     "{CONDITION_RATING}"
+    ],
+    [
+     "{NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{FLOOR_CONSTRUCTION}",
+     "{FLOOR_COVERING}",
+     "{FLOOR_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{F_ROOF_STRUCTURE}",
+   "paragraphGroups": [
+    [
+     "{WEATHER_CONDITION}",
+     "{LEAKES_NOTED}"
+    ],
+    [
+     "{LOFT_CONVERTED}"
+    ],
+    [
+     "{ABOUT_ROOF_STRUCTURE}"
+    ],
+    [
+     "{ROOF_STRUCTURE_WATER_TANK}"
+    ],
+    [
+     "{REPAIR_TANK}"
+    ],
+    [
+     "{REPAIR_TIMBER_STRUCTURE_SOON}"
+    ],
+    [
+     "{REPAIR_TIMBER_STRUCTURE_NOW}"
+    ],
+    [
+     "{REPAIR_INSECT_INFESTATION}"
+    ],
+    [
+     "{REPAIR_TIMBER_ROT}"
+    ],
+    [
+     "{REPAIR_UNDERSIZE_TIMBER}"
+    ],
+    [
+     "{REPAIR_ROOF_SPREADING}"
+    ],
+    [
+     "{REPAIR_HEAVY_ROOF}"
+    ],
+    [
+     "{REPAIR_REMOVED_CHIMNEY_BREAST}"
+    ],
+    [
+     "{REPAIR_PARTY_WALL_PROBLEM}"
+    ],
+    [
+     "{DEFAULT_TEXT_IF_FLAT}"
+    ],
+    [
+     "{NO_INSECT_INFESTATION_FOUND}"
+    ],
+    [
+     "{CONDITION_RATING}"
+    ],
+    [
+     "{NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{WEATHER_CONDITION}",
+     "{LEAKES_NOTED}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{F_WALLS_AND_PARTITIONS}",
+   "paragraphGroups": [
+    [
+     "{STANDARD_TEXT}"
+    ],
+    [
+     "{WALL_TYPE}",
+     "{WALL_FINISHES}",
+     "{WALL_CONDITION}"
+    ],
+    [
+     "{REPAIRS_CONDENSATION}"
+    ],
+    [
+     "{DAMPNESS_NOTED}"
+    ],
+    [
+     "{DAMPNESS_CAUSES}"
+    ],
+    [
+     "{MOVEMENT_CRACKS}"
+    ],
+    [
+     "{REPAIRS_WALL_REPAIR_SOON}"
+    ],
+    [
+     "{REPAIRS_WALL_REPAIR_NOW}"
+    ],
+    [
+     "{IF_HOLLOW_IS_SELECTED}"
+    ],
+    [
+     "{IF_LATH_AND_PLASTER_IS_SELECTED}"
+    ],
+    [
+     "{IF_HOLLOW_OVER_LARGE_AREA_IS_SELECTED}"
+    ],
+    [
+     "{IF_STUD_WALL_AND_CRACKED_OR_BADLY_CRACKED_IS_SELECTED}"
+    ],
+    [
+     "{REPAIRS_SEALANTS}"
+    ],
+    [
+     "{REPAIRS_REMOVED_WALL}"
+    ],
+    [
+     "{IF_TEXTURED_IS_SELECTED}"
+    ],
+    [
+     "{IF_TILED_IS_SELECTED}"
+    ],
+    [
+     "{CONDITION_RATING}"
+    ],
+    [
+     "{NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{WALL_TYPE}",
+     "{WALL_FINISHES}",
+     "{WALL_CONDITION}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{H_GARAGE}",
+   "paragraphGroups": [
+    [
+     "{ABOUT_GARAGE_TYPE}",
+     "{ABOUT_GARAGE_WALLS}",
+     "{ABOUT_GARAGE_ROOF}"
+    ],
+    [
+     "{IF_SINGLE_BRICK_SKIN_IS_SELECTED}"
+    ],
+    [
+     "{IF_MINERAL_FELT_IS_SELECTED}"
+    ],
+    [
+     "{IF_ASBESTOS_IS_SELECTED}"
+    ],
+    [
+     "{ABOUT_GARAGE_CONVERTED}"
+    ],
+    [
+     "{ABOUT_GARAGE_SHARED_ACCESS}"
+    ],
+    [
+     "{REPAIR_GARAGE_REPAIR_SOON}"
+    ],
+    [
+     "{REPAIR_GARAGE_REPAIR_NOW}"
+    ],
+    [
+     "{REPAIR_ROOF_TIMBER}"
+    ],
+    [
+     "{REPAIR_SAFETY_HAZARD}"
+    ],
+    [
+     "{CONDITION_RATING}"
+    ],
+    [
+     "{NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{ABOUT_GARAGE_TYPE}",
+     "{ABOUT_GARAGE_WALLS}",
+     "{ABOUT_GARAGE_ROOF}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{H_OTHER}",
+   "paragraphGroups": [
+    [
+     "{OTHER_GROUNDS}",
+     "{OTHER_FRONT_GARDEN}"
+    ],
+    [
+     "{OTHER_REAR_GARDEN}"
+    ],
+    [
+     "{OTHER_SIDE_GARDEN}"
+    ],
+    [
+     "{OTHER_OTHER_GARDEN}"
+    ],
+    [
+     "{OTHER_COMMUNAL_GARDEN}"
+    ],
+    [
+     "{SHARED_ACCESS}"
+    ],
+    [
+     "{LARGE_OUTBUILDING}"
+    ],
+    [
+     "{PRIVATE_ROAD}"
+    ],
+    [
+     "{LEGAL_ISSUES}"
+    ],
+    [
+     "{REPAIR_SHRINKABLE_CLAY}"
+    ],
+    [
+     "{REPAIR_FENCE}"
+    ],
+    [
+     "{REPAIR_SHED}"
+    ],
+    [
+     "{REPAIR_OUTBUILDING}"
+    ],
+    [
+     "{REPAIR_RETAINING_WALLS}"
+    ],
+    [
+     "{REPAIR_NEARBY_TREES}"
+    ],
+    [
+     "{STANDARD_TEXT_2}"
+    ],
+    [
+     "{CONDITION_RATING}"
+    ],
+    [
+     "{NOTES}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{OTHER_GROUNDS}",
+     "{OTHER_FRONT_GARDEN}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  },
+  {
+   "masterCode": "{PROPERTY_ADDRESS}",
+   "paragraphGroups": [
+    [
+     "{PROPERTY_ADDRESS_LINES}"
+    ],
+    [
+     "{PROPERTY_ADDRESS_CITY}"
+    ],
+    [
+     "{PROPERTY_ADDRESS_COUNTRY}",
+     "{PROPERTY_ADDRESS_POSTCODE}"
+    ]
+   ],
+   "multiSentenceGroups": [
+    [
+     "{PROPERTY_ADDRESS_COUNTRY}",
+     "{PROPERTY_ADDRESS_POSTCODE}"
+    ]
+   ],
+   "coveredByCondenseWhitelist": false,
+   "verdict": "FRAGMENTED (renderer emits one sentence per paragraph)"
+  }
+ ]
+}

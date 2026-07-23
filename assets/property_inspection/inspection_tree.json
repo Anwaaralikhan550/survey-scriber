@@ -3782,6 +3782,18 @@
               "type": "checkbox"
             },
             {
+              "id": "actv_access_keys_not_provided_by",
+              "label": "Access keys not provided by",
+              "type": "dropdown",
+              "options": [
+                "Vendor",
+                "Estate agent"
+              ],
+              "conditionalOn": "cb_not_inspected",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "cb_not_inspected_no_garage",
               "label": "No garage(s)",
               "type": "checkbox",
@@ -6980,6 +6992,13 @@
                 "Metal",
                 "Other"
               ],
+              "conditionalOn": "actv_oil_tank_status=Inspected",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_nearby_watercourse",
+              "label": "Stream, river or open drain nearby",
+              "type": "checkbox",
               "conditionalOn": "actv_oil_tank_status=Inspected",
               "conditionalMode": "show"
             }
@@ -15288,6 +15307,13 @@
               "conditionalMode": "show"
             },
             {
+              "id": "cb_poor_fitting_cover",
+              "label": "Poor-fitting cover",
+              "type": "checkbox",
+              "conditionalOn": "!cb_not_inspected",
+              "conditionalMode": "show"
+            },
+            {
               "id": "cb_not_insulated",
               "label": "Tank Insulation",
               "type": "checkbox",
@@ -19227,6 +19253,13 @@
               "type": "text",
               "conditionalOn": "android_material_design_spinner4=Repair soon&ch14",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_is_causing_dump",
+              "label": "Is Causing Damp",
+              "type": "checkbox",
+              "conditionalOn": "android_material_design_spinner4=Repair now",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -21655,7 +21688,8 @@
               "type": "dropdown",
               "options": [
                 "Yes",
-                "No"
+                "No",
+                "Previously strengthened"
               ]
             }
           ]
@@ -27333,6 +27367,16 @@
             {
               "id": "cb_Not_applicable",
               "label": "Not applicable",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_not_inspected_access",
+              "label": "Not inspected (access restricted)",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_dummy_chimney_breast",
+              "label": "Dummy chimney breast",
               "type": "checkbox"
             }
           ]
@@ -35677,7 +35721,33 @@
           "type": "screen",
           "parentId": "group_main_walls_16",
           "order": -1,
-          "fields": [],
+          "fields": [
+            {
+              "id": "label_condition_rating_main_walls",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
+            },
+            {
+              "id": "label_note_main_walls",
+              "label": "Note",
+              "type": "label"
+            },
+            {
+              "id": "ar_etNote",
+              "label": "Note",
+              "type": "text"
+            }
+          ],
           "inlinePosition": "header"
         },
         {
@@ -35696,6 +35766,31 @@
               "id": "cb_window_in_poor_condition",
               "label": "Window in Poor Condition",
               "type": "checkbox"
+            },
+            {
+              "id": "label_condition_rating_windows",
+              "label": "Condition Rating",
+              "type": "label"
+            },
+            {
+              "id": "android_material_design_spinner4",
+              "label": "Condition Rating",
+              "type": "dropdown",
+              "options": [
+                "1",
+                "2",
+                "3"
+              ]
+            },
+            {
+              "id": "label_note_windows",
+              "label": "Note",
+              "type": "label"
+            },
+            {
+              "id": "ar_etNote",
+              "label": "Note",
+              "type": "text"
             }
           ],
           "inlinePosition": "header"

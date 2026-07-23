@@ -34,6 +34,11 @@ void main() {
       );
       expect(missingLocation, isEmpty);
 
+      // Phase 4d fix: tree dropdown options are pre-worded as full clauses
+      // ("is under the stairs") but the bank template already supplies
+      // "located in the {LOCATION}" - the handler now strips a redundant
+      // leading "is " so the two don't combine into "located in the is
+      // under the stairs".
       final valid = engine.buildPhrases(
         'activity_services_main_gas',
         const <String, String>{
@@ -41,7 +46,7 @@ void main() {
           'actv_location': 'is under the stairs',
         },
       );
-      expect(valid.join(' '), contains('main-gas=is under the stairs'));
+      expect(valid.join(' '), contains('main-gas=under the stairs'));
     });
 
     test('oil requires inspected status plus location and made-up-of', () {

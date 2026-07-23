@@ -8,7 +8,9 @@ void main() {
           'about={WINDOW_ABOUT_WINDOW_MADE_UP}/{WINDOW_ABOUT_WINDOW_TYPE}/{WINDOW_ABOUT_WINDOW_GLAZING}',
       '{E_WINDOWS}::{WINDOW_WALL_SEALING}': 'wall-sealing={WINDOW_WALL_SEALING}',
       '{E_WINDOWS}::{WINDOW_SILL_PROJECTION}':
-          'sill={WINDOW_SILL_PROJECTION_TYPE}/{WINDOW_SILL_PROJECTION_CONDITION}',
+          'sill={WINDOW_SILL_PROJECTION_CONDITION}',
+      '{E_WINDOWS}::{WINDOW_SILL_DEFECT}': 'sill-defect',
+      '{E_WINDOWS}::{WINDOWS_CONDITION}': 'windows-condition={WINDOW_CONDITION}',
       '{WINDOW_VELUX_TYPE}::{WINDOW_VELUX_TYPE_SINGLE}':
           'velux-single={WINDOW_VELUX_LOCATION}/{WINDOW_VELUX_STATUS_TYPE}/{WINDOW_VELUX_GLAZZING}',
       '{WINDOW_VELUX_TYPE}::{WINDOW_VELUX_CONDITION}':
@@ -41,7 +43,8 @@ void main() {
 
       expect(phrases, isNotEmpty);
       expect(phrases.join(' ').toLowerCase(), contains('sg_noted'));
-      expect(phrases.join(' ').toLowerCase(), contains('condition=reasonable'));
+      expect(phrases.join(' ').toLowerCase(),
+          contains('windows-condition=reasonable'));
     });
 
     test('about window accepts legacy llMainContainer as made-up value', () {
@@ -80,7 +83,19 @@ void main() {
       );
 
       expect(phrases, isNotEmpty);
-      expect(phrases.join(' ').toLowerCase(), contains('sill=projecting/good'));
+      expect(phrases.join(' ').toLowerCase(), contains('sill=good'));
+    });
+
+    test('sill projection routes Inadequate to the sill-defect template', () {
+      final phrases = engine.buildPhrases(
+        'activity_outside_property_windows_sill_projection',
+        <String, String>{
+          'actv_projection_type': 'Inadequate',
+        },
+      );
+
+      expect(phrases, isNotEmpty);
+      expect(phrases.join(' ').toLowerCase(), contains('sill-defect'));
     });
 
     test('velux accepts legacy llMainContainer type', () {

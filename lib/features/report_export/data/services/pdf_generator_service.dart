@@ -940,7 +940,30 @@ class PdfGeneratorService {
             }
           }
 
+          var accommodationWritten = false;
+          if (doc.reportType == ReportType.valuation &&
+              section.key.trim().toLowerCase() == 'property_assessment' &&
+              doc.accommodationSchedule.isNotEmpty) {
+            widgets.addAll(
+                _accommodationSchedule(doc.accommodationSchedule, accent));
+            accommodationWritten = true;
+          }
           for (final screen in section.screens) {
+            // The valuation room-count node keeps the Property Assessment
+            // section present in the document model; the structured schedule
+            // above is its sole client-facing representation.
+            if (doc.reportType == ReportType.valuation &&
+                screen.screenId == 'no_of_rooms') {
+              continue;
+            }
+            if (section.key.trim().toUpperCase() == 'D' &&
+                !accommodationWritten &&
+                screen.screenId == 'group_construction_2' &&
+                doc.accommodationSchedule.isNotEmpty) {
+              widgets.addAll(
+                  _accommodationSchedule(doc.accommodationSchedule, accent));
+              accommodationWritten = true;
+            }
             final hideScreenTitle = screen.title.trim().toLowerCase() ==
                     section.title.trim().toLowerCase() ||
                 _titleMatchesFirstPhrase(screen.title, screen.phrases);
@@ -1044,6 +1067,12 @@ class PdfGeneratorService {
             }
             widgets.add(pw.SizedBox(height: 6));
           }
+          if (section.key.trim().toUpperCase() == 'D' &&
+              !accommodationWritten &&
+              doc.accommodationSchedule.isNotEmpty) {
+            widgets.addAll(
+                _accommodationSchedule(doc.accommodationSchedule, accent));
+          }
         }
 
         // AI Disclaimer
@@ -1125,14 +1154,13 @@ class PdfGeneratorService {
   ) {
     final meta = doc.surveyMeta;
     final isInspection = doc.reportType == ReportType.inspection;
-    final mainTitle = isInspection
-        ? _inspectionReportLabel(doc)
-        : 'Valuation Report';
+    final mainTitle =
+        isInspection ? _inspectionReportLabel(doc) : 'Valuation Report';
     final subtitle =
         isInspection ? 'Level 2 Home Survey' : 'Mortgage Valuation Report';
     final ricsLine = isInspection
-        ? 'Prepared in accordance with RICS Home Survey Standard (4th Edition)'
-        : 'Prepared in accordance with RICS Valuation Standards';
+        ? 'Prepared with reference to the RICS Home Survey Standard, 1st edition'
+        : 'Professional property valuation report';
 
     // Build the property details table rows.
     final tableRows = <_CoverTableEntry>[
@@ -1322,7 +1350,7 @@ class PdfGeneratorService {
   pw.Widget _pageHeader(ReportDocument doc, PdfColor accent) {
     final reportLabel = doc.reportType == ReportType.inspection
         ? _inspectionReportLabel(doc)
-        : 'RICS Property Valuation';
+        : 'Property Valuation Report';
     return pw.Container(
       margin: const pw.EdgeInsets.only(bottom: 8),
       padding: const pw.EdgeInsets.only(bottom: 4),
@@ -1408,6 +1436,97 @@ class PdfGeneratorService {
           ),
       ],
     );
+  }
+
+  List<pw.Widget> _accommodationSchedule(
+    List<AccommodationScheduleRow> rows,
+    PdfColor accent,
+  ) {
+    if (rows.isEmpty) return const <pw.Widget>[];
+    const headers = <String>[
+      'Floor',
+      'Living',
+      'Beds',
+      'Bath / shower',
+      'WC',
+      'Kitchen',
+      'Utility',
+      'Conserv.',
+      'Other',
+    ];
+
+    pw.Widget cell(String value, {bool header = false, bool floor = false}) {
+      return pw.Container(
+        alignment: pw.Alignment.center,
+        padding: const pw.EdgeInsets.symmetric(horizontal: 3, vertical: 5),
+        child: pw.Text(
+          sanitize(value.isEmpty ? '-' : value),
+          textAlign: pw.TextAlign.center,
+          style: pw.TextStyle(
+            fontSize: header ? 7 : 7.5,
+            fontWeight:
+                header || floor ? pw.FontWeight.bold : pw.FontWeight.normal,
+            color: header ? PdfColors.white : PdfSharedUtils.headerDark,
+          ),
+        ),
+      );
+    }
+
+    return <pw.Widget>[
+      pw.Padding(
+        padding: const pw.EdgeInsets.only(left: 4, top: 4, bottom: 4),
+        child: pw.Text(
+          'Accommodation',
+          style: pw.TextStyle(
+            fontWeight: pw.FontWeight.bold,
+            fontSize: 11,
+            color: PdfSharedUtils.headerDark,
+          ),
+        ),
+      ),
+      pw.Table(
+        border: pw.TableBorder.all(
+          color: PdfSharedUtils.lightGrey,
+          width: 0.5,
+        ),
+        columnWidths: const <int, pw.TableColumnWidth>{
+          0: pw.FlexColumnWidth(1.5),
+          1: pw.FlexColumnWidth(0.85),
+          2: pw.FlexColumnWidth(0.75),
+          3: pw.FlexColumnWidth(1.0),
+          4: pw.FlexColumnWidth(0.65),
+          5: pw.FlexColumnWidth(0.85),
+          6: pw.FlexColumnWidth(0.8),
+          7: pw.FlexColumnWidth(0.95),
+          8: pw.FlexColumnWidth(1.65),
+        },
+        children: <pw.TableRow>[
+          pw.TableRow(
+            decoration: pw.BoxDecoration(color: accent),
+            children:
+                headers.map((value) => cell(value, header: true)).toList(),
+          ),
+          for (var i = 0; i < rows.length; i++)
+            pw.TableRow(
+              decoration: pw.BoxDecoration(
+                color: i.isEven ? PdfColors.white : PdfColor.fromHex('#F7F9FB'),
+              ),
+              children: <pw.Widget>[
+                cell(rows[i].floor, floor: true),
+                cell(rows[i].livingRooms),
+                cell(rows[i].bedrooms),
+                cell(rows[i].bathOrShowerRooms),
+                cell(rows[i].separateToilets),
+                cell(rows[i].kitchens),
+                cell(rows[i].utilityRooms),
+                cell(rows[i].conservatories),
+                cell(rows[i].otherRooms),
+              ],
+            ),
+        ],
+      ),
+      pw.SizedBox(height: 8),
+    ];
   }
 
   pw.Widget _signatureCard(ReportSignature sig, PdfColor accent) {

@@ -1,0 +1,166 @@
+{
+  "note": "Manually-reviewed engine phrases that legitimately derive from an approved bank template by removing an optional clause when its data is absent, but whose reduced form the automated placeholder-regex matcher cannot recognise (the removed clause is literal text, not just a placeholder). Each entry is a template segment (with the clause already stripped) reviewed against the approved bank and confirmed correct. Add here only after checking the source handler; never use this file to silently suppress a genuine defect.",
+  "variants": [
+    {
+      "master": "{E_MAIN_WALLS}",
+      "subCode": "{WALL}",
+      "reviewedIn": "inspection_phrase_engine.dart _mainWallsAbout",
+      "reason": "RICS L2 rewrite (Phase 2B, E4). Approved template is now 'Description: The external walls of the {WALL_LOCATION} are constructed of {WALL_THICKNESS} mm {WALL} construction.'; when wall thickness is not captured, _mainWallsAbout strips '{WALL_THICKNESS} mm ' rather than emit an empty-slot fragment like 'constructed of  mm brick construction.' Superseded the pre-L2 'main external walls...built of' wording this entry used to cover.",
+      "template": "Description: The external walls of the {WALL_LOCATION} are constructed of {WALL} construction."
+    },
+    {
+      "master": "{E_CHIMNEY_REPAIR_CONDITION_RATING}",
+      "subCode": "{CONDITION_RATING}",
+      "reviewedIn": "inspection_phrase_engine.dart _outsideChimneyMainScreen via _legacySectionRatingNotes",
+      "reason": "Condition-rating label, normalized (2026-07-08) to the report-wide canonical format 'Condition rating is: {X}.' - previously this key read 'Condition Rating: {X}' (capital R, no 'is', no period), one of three divergent bank formats the client flagged as inconsistent. Now matches the 27 other rating keys. Kept as a verified variant belt-and-braces since the emitted text is short.",
+      "template": "Condition rating is: {CS_CONDITION_RATING}."
+    },
+    {
+      "master": "{E_ROOF_COVERING_REPAIR}",
+      "subCode": "{E_RC_CONDITION_RATING}",
+      "reviewedIn": "inspection_phrase_engine.dart _outsideRoofCoveringMainScreen via _legacySectionRatingNotes",
+      "reason": "Same as the chimney condition-rating entry above - normalized (2026-07-08) from the old 'Condition Rating: {X}' form to the canonical 'Condition rating is: {X}.' shared by all 28 rating keys.",
+      "template": "Condition rating is: {RC_CONDITION_RATING}."
+    },
+    {
+      "master": "{G_GAS_AND_OIL}",
+      "subCode": "{MAINS_GAS_CONDITION_OK}",
+      "reviewedIn": "inspection_phrase_engine.dart _servicesMainsGas (Phase 4d fix, smell-noted branch)",
+      "reason": "Approved template reads 'located in the {GAO_MG_METER_LOCATION}. {CONDITION_OK_GAS_SMELL} and no other defects...'. Two verified reductions apply when the gas-smell checkbox IS checked (so the optional smell-clause sub-phrase is empty): (1) the location dropdown options are pre-worded full predicates that already supply their own preposition ('under the stairs', 'in an outside box') - combining both would read 'located in the under the stairs', so the handler strips the template's fixed 'in the '; (2) with the smell clause empty, the template would leave a dangling lowercase 'and' right after the location sentence's full stop ('...stairs. and no other defects...') - the handler turns this into its own capitalised sentence ('...stairs. No other defects...'), replacing the literal word 'and' with 'No' rather than emitting a fragment.",
+      "template": "There is mains gas supply connected to the property, and the meter and control valve are located {GAO_MG_METER_LOCATION}. No other defects were noted that require urgent or significant repairs to the installation. The property must be maintained in the normal way."
+    },
+    {
+      "master": "{G_GAS_AND_OIL}",
+      "subCode": "{MAINS_GAS_CONDITION_OK}",
+      "reviewedIn": "inspection_phrase_engine.dart _servicesMainsGas (Phase 4d fix, smell-not-noted branch)",
+      "reason": "Same 'in the' preposition-clash reduction as the sibling entry above, but for the branch where the gas-smell checkbox is NOT checked, so the approved '{CONDITION_OK_GAS_SMELL}' sub-phrase ('and no smell of gas was detected during my inspection,') is substituted in full rather than stripped. Also capitalises the sub-phrase's leading 'and' to 'And' since it immediately follows the location sentence's full stop (same fix class as the sibling branch's dangling-'and' cleanup - found and fixed during Phase 4e while reviewing this cluster).",
+      "template": "There is mains gas supply connected to the property, and the meter and control valve are located {GAO_MG_METER_LOCATION}. And no smell of gas was detected during my inspection, and no other defects were noted that require urgent or significant repairs to the installation. The property must be maintained in the normal way."
+    },
+    {
+      "master": "{E_ROOF_COVERING}",
+      "subCode": "{RC_CONTAINS_ASBESTOS}",
+      "reviewedIn": "inspection_phrase_engine.dart _roofAsbestos",
+      "reason": "Harness compiler bug, not an app defect: the approved bank text for this key is TWO sentences joined by a single '\\r\\n' (no '<br/><br/>' double-break). The app's own _split() only breaks phrases on double-newline/'<br/><br/>' boundaries, so it correctly keeps both sentences as ONE phrase entry (matching the bank's own single-vs-double-break convention). But loadApprovedBank()'s compile() step splits templates on ANY '\\r\\n'/'<br/>' occurrence (single included) to get fine-grained matchers for other multi-line masters, which shreds this specific template into two independently-anchored regexes that can never match the combined single-string output. Verified by reading the raw phrase_texts.json value directly (both sentences present, single '\\r\\n' separator) - the app is emitting the bank text byte-for-byte. Fixing the general splitter would risk breaking match granularity elsewhere (already ruled out reworking it once in Phase 4b), so this specific combined form is captured as its own variant instead.",
+      "template": "Asbestos: Parts of the {RC_CONTAINS_ASBESTOS} may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded or drilled, without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out."
+    },
+    {
+      "master": "{E_ROOF_COVERING}",
+      "subCode": "{E_RC_PARAPET_WALL}",
+      "reviewedIn": "inspection_phrase_engine.dart _roofParapetWall (existing Phase 4d empty-slot suppression)",
+      "reason": "RICS L2 rewrite (Phase 2B). When actv_rendered is not captured, _roofParapetWall strips the trailing ' and are {RENDERED}' clause from the approved template ('Parapet walls: The parapet wall(s) are constructed of {BUILT_WITH} and are {RENDERED}.') rather than emit an empty-slot fragment like '...of bricks and are .' - the same empty-slot suppression technique used throughout this bank (see E_MAIN_WALLS entry above).",
+      "template": "Parapet walls: The parapet wall(s) {IS_ARE} constructed of {RC_PARAPET_WALL_BUILT_WITH}."
+    },
+    {
+      "master": "{RISK_TO_OTHER}",
+      "subCode": "{OTHER_REPAIR_IMPROVE}",
+      "reviewedIn": "inspection_phrase_engine.dart _risksRepairOrImprove",
+      "reason": "Same class as the asbestos entry above but a different anomaly: the approved bank text separates its two paragraphs with '<br /> <br />' (a stray SPACE between the two br tags, not the usual back-to-back '<br/><br/>'). The app's _normalize()/_split() only treats back-to-back double-newlines as a hard paragraph break, so this space-separated pair stays one phrase entry (matches the bank's own intent - two sentences of one continuous piece of advice). loadApprovedBank()'s compiler splits on every individual '<br/>' regardless of surrounding whitespace, shredding this into two unmatchable halves. Verified against the raw phrase_texts.json value directly.",
+      "template": "As regards wants of repair, you are most strongly advised to obtain competitive quotations from reputable contractors before you exchange contracts. As soon as you receive the quotations and reports and also the responses from your legal adviser, I will be pleased to advise whether or not these would cause us to change the advice or valuation which I give in this report. Only when you have all this information before you will you be fully equipped to make a reasoned and informed judgement on whether or not to proceed with the purchase. Remedial works could be costly, and quotations are required to determine this. I must advise you however that if you decided to exchange contracts without obtaining this information, you would have to accept the risk that adverse factors might come to light in the future."
+    },
+    {
+      "master": "{F_FLOORS}",
+      "subCode": "{TIMBER_FLOOR_OLDER_PROPERTIES}",
+      "reviewedIn": "inspection_phrase_engine.dart _floorsOlderProperties (Phase 4d typo fix)",
+      "reason": "The raw legacy bank text has a data-entry typo: \"...to be categoric'. regarding condition.\" (stray apostrophe+period breaking the word 'categorical' mid-sentence). Phase 4d fixed this at point-of-use in the handler (never edits the imported bank asset itself, per project convention) so the report reads '...to be categorical regarding condition.' The harness's raw-bank regex still expects the uncorrected typo text, so the corrected output needs its own verified-variant entry.",
+      "template": "In a property of this age, some degree of infestation to concealed areas would not be entirely unexpected. Further exposure and investigation would be necessary and is recommended prior to purchase commitment to be categorical regarding condition."
+    },
+    {
+      "master": "{D_CONSTRUCTION}",
+      "subCode": "{CONSTRUCTION_EXT_WALL_FINISHES}",
+      "reviewedIn": "inspection_phrase_engine.dart _extendedWall",
+      "reason": "Approved template reads 'Externally, the main walls are {AREA} rendered {TYPE} with {FINISHES} finishes.'. When no finish checkboxes are selected, the handler strips the trailing 'with {FINISHES} finishes' clause entirely (established empty-slot-suppression technique) and the {TYPE} placeholder resolves to an empty string when the render-quality dropdown is unanswered, tidied by _splitResolved() into a clean single sentence rather than a fragment.",
+      "template": "Externally, the main walls are {CONSTRUCTION_EXT_WALL_RENDERED_AREA} rendered."
+    },
+    {
+      "master": "{D_LOCATION}",
+      "subCode": "{LOCATION_AREA}",
+      "reviewedIn": "inspection_phrase_engine.dart _propertyLocationDensity (Phase 4b fix)",
+      "reason": "RICS L2 rewrite (Phase 2A). Approved template reads '...residential area, and the surrounding development is considered {FROM} to {TO} density.'; when neither density value is captured, _propertyLocationDensity strips the trailing density clause, leaving the bare area sentence.",
+      "template": "The property is situated within a {LOCATION_ESTABLISHED_AREA_TYPE} established residential area."
+    },
+    {
+      "master": "{ISSUE_REGULATIONS}",
+      "subCode": "{REGULATIONS_NEW_BUILD}",
+      "reviewedIn": "inspection_phrase_engine.dart _issuesRegulation (cb_new_build branch)",
+      "reason": "Same space-separated '<br /> <br />' anomaly as the {RISK_TO_OTHER}::{OTHER_REPAIR_IMPROVE} entry above - the approved bank text joins its two sentences with a br-space-br sequence rather than back-to-back tags, so the app keeps them as one phrase entry while the harness compiler splits on every individual br regardless of surrounding whitespace. Verified against the raw phrase_texts.json value directly.",
+      "template": "You should ask your legal adviser to confirm whether the property has a warranty certificate, what portion of these remains and the implications. The property has recently been built, double glazing installed and your legal advisers should verify whether all local authority consents and approvals have been obtained."
+    },
+    {
+      "master": "{ISSUE_OTHER_MATTERS}",
+      "subCode": "{OTHER_MATTERS_FREEHOLD}",
+      "reviewedIn": "inspection_phrase_engine.dart _issuesOtherMatters (freehold branch)",
+      "reason": "Same '<br /> <br />' space-anomaly harness-splitter gap as the other entries in this file - verified against the raw phrase_texts.json value directly.",
+      "template": "Your legal adviser should be asked to verify the legal position and advice upon the implications of boundaries and adoption status of roads, rights of way and the precise maintenance and repairing responsibilities in respect of shared drains, sewers, fences, etc. I understand that this property is being sold on a freehold basis. Your Legal Adviser should confirm this. I assume that vacant possession will be available on sale, legal advisers should confirm."
+    },
+    {
+      "master": "{ISSUE_OTHER_MATTERS}",
+      "subCode": "{OTHER_MATTERS_LEASEHOLD}",
+      "reviewedIn": "inspection_phrase_engine.dart _issuesOtherMatters (leasehold branch)",
+      "reason": "Same '<br /> <br />' space-anomaly harness-splitter gap, this template has 3 such breaks joining 4 sentences into one bank paragraph - verified against the raw phrase_texts.json value directly.",
+      "template": "I understand that this property is being sold on a leasehold basis, your Legal Adviser should confirm this. I assume that vacant possession will be available on sale, legal advisers should confirm. I have not been provided with lease details, and I assume that the unexpired term is not less than 90 years. Your legal adviser should confirm the amount of service charge and ground rent that applies to the subject property and advice on you on its reasonableness. It is assumed that there are no onerous covenants or restrictions within the lease. Confirmation should be obtained that effective management and insurance is in place, in respect of the whole building of which the proposed security forms a part, and that service charges are not excessive or onerous. Enquiries of the management company would be recommended to ascertain whether there are any outstanding service charges, repairs or proposed works and associated costs."
+    },
+    {
+      "master": "{ISSUE_OTHER_MATTERS}",
+      "subCode": "{OTHER_MATTERS_PRIVATE_ROAD}",
+      "reviewedIn": "inspection_phrase_engine.dart _issuesOtherMatters (private road branch)",
+      "reason": "Approved template reads '...local council. This is in {OM_PRIVATE_ROAD_CONDITION} condition. Your legal adviser...'. When the condition field is unanswered, the handler strips the whole ' This is in {OM_PRIVATE_ROAD_CONDITION} condition.' sentence rather than emit an empty-slot fragment - established empty-slot-suppression technique.",
+      "template": "Access to the property is through a private road that is not maintained by the local council. Your legal adviser should confirm this and advise you about the implications. The responsibility for private roads is usually shared among the people that use it."
+    },
+    {
+      "master": "{RISK_TO_BUILDING}",
+      "subCode": "{BUILDING_SUBSIDENCE_STATUS_NOTED}",
+      "reviewedIn": "inspection_phrase_engine.dart _risksRiskToBuilding (subsidence noted branch)",
+      "reason": "Approved template reads '...stepped cracking around {RTB_SUBSIDENCE_INVESTIGATE_LOCATION}. This appears...'. When the location field is unanswered, the handler strips ' around {RTB_SUBSIDENCE_INVESTIGATE_LOCATION}' entirely rather than emit an empty-slot fragment - established empty-slot-suppression technique.",
+      "template": "There are signs that the property appears to be affected by minor subsidence as evidenced by stepped cracking. This appears to be within acceptable tolerance, however, should the movement continue, I would recommend that you seek further advice from a qualified person."
+    },
+    {
+      "master": "{RISK_TO_BUILDING}",
+      "subCode": "{BUILDING_SUBSIDENCE_STATUS_INVESTIGATE}",
+      "reviewedIn": "inspection_phrase_engine.dart _risksRiskToBuilding (subsidence investigate branch)",
+      "reason": "Same empty-slot suppression as the sibling entry above, for the 'requires investigation' variant of the subsidence template.",
+      "template": "There are signs that the property appears to be affected by subsidence as evidenced by stepped cracking. This does not appear to be within acceptable tolerance. I recommend that you contact a qualified person for further investigation and advice."
+    },
+    {
+      "master": "{OVERALL_OPINION_REASONABLE}",
+      "subCode": "",
+      "reviewedIn": "inspection_phrase_engine.dart _overallOpinion (reasonable branch, existing Phase 4c PLACEHOLDER_LEAK fix)",
+      "reason": "RICS L2 rewrite (Phase 2A). Approved template has 'at a price of {WORD}'; when no purchase price is captured _overallOpinion strips that clause, giving this reduced form.",
+      "template": "I am pleased to advise you that this property is believed to be a reasonable proposition for purchase. In my opinion, the property represents a reasonable proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction and level of ongoing maintenance."
+    },
+    {
+      "master": "{E_OUTSIDE_DOORS}",
+      "subCode": "{DOOR_SG_RATING_NO_SG_RATING}",
+      "reviewedIn": "inspection_phrase_engine.dart _outsideDoorsAbout",
+      "reason": "The approved '{DOOR_SG_RATING_NO_SG_RATING}' template is itself two sentences joined by a '<br/>\\r\\n<br/>\\r\\n' break (verified in phrase_texts.json: first sentence 'No Visible British Standard Marks...normal way.', second sentence starting 'You should ask your legal adviser...FENSA...Guarantees).'). The handler correctly emits the first sentence as its own approved list entry, but appends the condition-rating sub-phrase ({DOOR_CONDITION}) directly after the second sentence with only a single space (no further paragraph break), so _split() keeps 'FENSA sentence + condition sentence' together as one merged entry - same non-defect nested/merged-composition class as the F-section and main-walls-about-wall clusters, both halves are genuine approved bank text.",
+      "template": "You should ask your legal adviser to check whether the doors have been installed by a contractor registered with FENSA to confirm that safety glazing has been installed. It is recommended that enquiries should be made regarding guarantees to the double glazed doors (See Section I2 - Guarantees). The door appears in {DOOR_CONDITION} condition. No repair is currently needed. The property must be maintained in the normal way."
+    },
+    {
+      "master": "{D_PROPERTY_TYPE_HOUSE}",
+      "subCode": "",
+      "reviewedIn": "inspection_phrase_engine.dart _propertyType (house branch)",
+      "reason": "Approved template reads 'The property is a {SUB_TYPE} {TYPE} providing {BEDROOMS} bedrooms.' - fixed plural regardless of count, producing '1 bedrooms' for a single-bedroom property. Fixed a real grammar bug by singularising to 'bedroom' when the count is exactly '1', which the matcher's plural-literal regex can no longer recognise.",
+      "template": "The property is a {HOUSE_SUB_TYPE} {HOUSE_TYPE} providing {HOUSE_NO_OF_BEDROOMS} bedroom."
+    },
+    {
+      "master": "{E_ROOF_COVERING}",
+      "subCode": "{E_RC_PARAPET_WALL}",
+      "reviewedIn": "inspection_phrase_engine.dart _roofParapetWall (Phase 2B, E2 rewrite)",
+      "reason": "RICS L2 rewrite (Phase 2B). When actv_rendered is not captured, _roofParapetWall strips the trailing ' and are {RENDERED}' clause from the approved template ('Parapet walls: The parapet wall(s) are constructed of {BUILT_WITH} and are {RENDERED}.') rather than emit an empty-slot fragment like '...of bricks and are .' - the same empty-slot suppression technique used throughout this bank (see E_MAIN_WALLS entry above).",
+      "template": "Parapet walls: The parapet wall(s) {IS_ARE} constructed of {RC_PARAPET_WALL_BUILT_WITH}."
+    },
+    {
+      "master": "{E_MAIN_WALLS}",
+      "subCode": "{WALL}",
+      "reviewedIn": "inspection_phrase_engine.dart _mainWallsAbout (Phase 2B, E4 rewrite)",
+      "reason": "Non-defect merged-composition class (same as the E_OUTSIDE_DOORS and D_CONSTRUCTION entries elsewhere in this file): _mainWallsAbout joins the Description ({WALL}), Cladding ({FINISHES}), optional Weathered ({WEATHERED_WALL}) and Condition ({WALL_CONDITION}) sub-phrases with single spaces, not <br/>, so _split() keeps them as one phrase entry when all four sub-answers are present (e.g. the 'other' wall-type screen permutation) - each half is genuine approved bank text, just composed together.",
+      "template": "Description: The external walls of the {WALL_LOCATION} are constructed of {WALL} construction. Cladding: The external wall finish comprises {FINISHES_AMOUNT} rendered {RENDERED_TYPE} with {FINISHES} finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in {CONDITION} condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing its functions. Routine maintenance appropriate to the age of the roof covering should be expected."
+    },
+    {
+      "master": "{WALLS_DAMP_TYPE_PRESENT}",
+      "subCode": "{WALLS_DAMP_TYPE_PRESENT_AREA}",
+      "reviewedIn": "inspection_phrase_engine.dart _mainWallsDamp (Phase 2B, E4 rewrite)",
+      "reason": "Same merged-composition class as the sibling E_MAIN_WALLS::{WALL} entry above: the outer {E_MAIN_WALLS}::{WALLS_DAMP_TYPE_PRESENT} wrapper joins the AREA and PENETRATING sub-phrases with a single space (only the RISING/gutters/unknown-cause/DPC-treatment sub-phrases that follow are <br/>-separated), so when both the area-location and penetrating-damp checkboxes are answered on the same permutation, _split() keeps both sub-phrases as one entry - both halves are genuine approved bank text.",
+      "template": "Damp and moisture readings: Random moisture readings were taken to accessible internal wall surfaces using a hand-held electronic moisture meter. Damp found: Elevated moisture readings were recorded to sections of the internal wall surfaces the include {MAIN_WALL_DAMP_LOCATION} (see section J1 - Risk to Building; see section J3 - Risk to people). Penetrating damp: This may have been affected by penetrating damp probably caused by {MAIN_WALL_PENETRATING_DAMP_CAUSED_BY}. When the problem has been resolved, the wall may need to be repaired. Repair options: The source of the moisture should be identified and remedied as a priority. Once the source of moisture has been eliminated and the affected walls have been allowed sufficient time to dry naturally, any damaged plaster, decorations or other finishes should be repaired or replaced as necessary. The affected area should then be monitored to ensure that the dampness does not recur."
+    }
+  ]
+}

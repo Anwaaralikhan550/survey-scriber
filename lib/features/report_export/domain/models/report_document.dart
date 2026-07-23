@@ -78,6 +78,7 @@ class ReportDocument {
     this.aiAstPayload,
     this.aiDisclaimer,
     this.recommendationItems = const [],
+    this.accommodationSchedule = const [],
   });
 
   final ReportType reportType;
@@ -102,6 +103,10 @@ class ReportDocument {
 
   /// Accepted professional recommendations to include in the report.
   final List<ReportRecommendationItem> recommendationItems;
+
+  /// Structured accommodation data rendered as a table in inspection
+  /// reports. Room counts are data, not narrative phrases.
+  final List<AccommodationScheduleRow> accommodationSchedule;
 
   bool get hasAiContent =>
       aiExecutiveSummary != null ||
@@ -129,6 +134,7 @@ class ReportDocument {
     ReportAstPayload? aiAstPayload,
     String? aiDisclaimer,
     List<ReportRecommendationItem>? recommendationItems,
+    List<AccommodationScheduleRow>? accommodationSchedule,
   }) {
     return ReportDocument(
       reportType: reportType ?? this.reportType,
@@ -143,8 +149,47 @@ class ReportDocument {
       aiAstPayload: aiAstPayload ?? this.aiAstPayload,
       aiDisclaimer: aiDisclaimer ?? this.aiDisclaimer,
       recommendationItems: recommendationItems ?? this.recommendationItems,
+      accommodationSchedule:
+          accommodationSchedule ?? this.accommodationSchedule,
     );
   }
+}
+
+class AccommodationScheduleRow {
+  const AccommodationScheduleRow({
+    required this.floor,
+    this.livingRooms = '',
+    this.bedrooms = '',
+    this.bathOrShowerRooms = '',
+    this.separateToilets = '',
+    this.kitchens = '',
+    this.utilityRooms = '',
+    this.conservatories = '',
+    this.otherRooms = '',
+  });
+
+  final String floor;
+  final String livingRooms;
+  final String bedrooms;
+  final String bathOrShowerRooms;
+  final String separateToilets;
+  final String kitchens;
+  final String utilityRooms;
+  final String conservatories;
+
+  /// Count and description combined, for example `1 Study`.
+  final String otherRooms;
+
+  bool get hasAnyRooms => <String>[
+        livingRooms,
+        bedrooms,
+        bathOrShowerRooms,
+        separateToilets,
+        kitchens,
+        utilityRooms,
+        conservatories,
+        otherRooms,
+      ].any((value) => value.trim().isNotEmpty && value.trim() != '0');
 }
 
 class SurveyMeta {

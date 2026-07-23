@@ -7,7 +7,23 @@ class InspectionPhraseEngine {
 
   final Map<String, String> _phraseTexts;
 
+  /// Read-only view of the approved phrase bank backing this engine.
+  /// Consumed by the report layer to derive paragraph composition from the
+  /// master templates (see ParagraphComposer).
+  Map<String, String> get phraseTexts => Map.unmodifiable(_phraseTexts);
+
   List<String> buildPhrases(String screenId, Map<String, String> answers) {
+    return _refinePhrases(
+      screenId,
+      answers,
+      _buildPhrasesRaw(screenId, answers),
+    );
+  }
+
+  List<String> _buildPhrasesRaw(
+    String screenId,
+    Map<String, String> answers,
+  ) {
     final dynamicMatch = _matchDynamicSectionE(screenId, answers);
     if (dynamicMatch != null) return dynamicMatch;
     switch (screenId) {
@@ -52,13 +68,16 @@ class InspectionPhraseEngine {
         return _outsideOtherMainScreen(answers);
       case 'activity_grounds_garage_main_screen':
         return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+            ratingKey: 'android_material_design_spinner4',
+            master: '{H_GARAGE}');
       case 'activity_grounds_other_main_screen':
         return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+            ratingKey: 'android_material_design_spinner4',
+            master: '{H_OTHER}');
       case 'activity_grounds_other_area_main_screen':
         return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+            ratingKey: 'android_material_design_spinner4',
+            master: '{H_OTHER_AREA}');
       case 'activity_grounds_limitations':
         return _groundsLimitations(answers);
       case 'activity_grounds_garage':
@@ -209,7 +228,8 @@ class InspectionPhraseEngine {
         return _insidePropertyLimitations(answers);
       case 'activity_inside_property_roof_structure_main_screen':
         return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+            ratingKey: 'android_material_design_spinner4',
+            master: '{F_ABOUT_ROOF_STRUCTURE}');
       case 'activity_inside_property_weather_condition':
         return _insideRoofWeatherCondition(answers);
       case 'activity_inside_property_loft_converted':
@@ -240,7 +260,8 @@ class InspectionPhraseEngine {
         return _insideRoofNotInspected(answers);
       case 'activity_inside_property_ceilings_main_screen':
         return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+            ratingKey: 'android_material_design_spinner4',
+            master: '{F_CEILINGS}');
       case 'inside_property_ceilings_about_ceilings':
         return _ceilingsAbout(answers);
       case 'activity_inside_property_ceilings_cracks':
@@ -260,7 +281,8 @@ class InspectionPhraseEngine {
       case 'activity_inside_property_floors_main_screen':
         return [
           ..._conditionRatingNotes(answers,
-              ratingKey: 'android_material_design_spinner4'),
+              ratingKey: 'android_material_design_spinner4',
+              master: '{F_FLOORS}'),
           ..._floorsOlderProperties(answers),
         ];
       case 'activity_in_side_property_floors':
@@ -426,7 +448,8 @@ class InspectionPhraseEngine {
         return _insideOtherNotInspected(answers);
       case 'activity_inside_property_walls_and_partitions_main_screen':
         return _conditionRatingNotes(answers,
-            ratingKey: 'android_material_design_spinner4');
+            ratingKey: 'android_material_design_spinner4',
+            master: '{F_WALLS_AND_PARTITIONS}');
       case 'activity_inside_property_wap_walls':
         return _wallsAndPartitionsAbout(answers);
       case 'activity_in_side_property_wap_repair_condensation':
@@ -571,6 +594,11 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_windows_aboutwindow':
         return _windowsAbout(answers);
       case 'activity_outside_property_windows_safety_glass_rating':
+        // Legacy no-op (intentional, locked by test suite): this screen's
+        // fields (actv_status/actv_condition) are the SAME ones already
+        // consumed by the windows "about" screen's safety-glass clause.
+        // Wiring it here would duplicate that sentence in the assembled
+        // report, not fill a gap.
         return const [];
       case 'activity_outside_property_windows_wall_sealing':
         return _windowsWallSealing(answers);
@@ -823,8 +851,13 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_roof_covering_main_screen':
         return _roofCoveringMainScreen(answers);
       case 'activity_outside_property_out_side_doors_repairs_failed_glazing_location':
-        return const [];
       case 'activity_outside_property_out_side_doors_repairs_inadequate_lock_location':
+        // Legacy no-op (intentional, locked by test suite): these screens
+        // share checkbox fields (cb_has_failed_glazing_45,
+        // cb_has_inadequate_lock_89, location checkboxes) with the main
+        // "repair_out_side_doors" repair screen, which already narrates
+        // them. Wiring a second handler here would duplicate that repair
+        // sentence in the assembled report, not fill a gap.
         return const [];
       case 'activity_outside_property_out_side_safety_glass_rating':
         return _outsideDoorsSafetyGlassRating(answers);
@@ -837,27 +870,123 @@ class InspectionPhraseEngine {
 
       // ── Section K: floor/site plan sketches ──
       case 'activity_capture_floor_site_plan_sketches':
-        return const [
-          'Floor/site plan sketches captured during the inspection.'
-        ];
+        return _resolve('{K_FLOOR_SITE_PLAN_SKETCHES}');
       default:
         return const [];
     }
   }
 
+  List<String> _refinePhrases(
+    String screenId,
+    Map<String, String> answers,
+    List<String> phrases,
+  ) {
+    if (screenId.startsWith('activity_no_of_rooms')) {
+      // Accommodation is structured report data and is rendered as a table.
+      return const [];
+    }
+
+    final condition = _cleanLower(answers['actv_condition']);
+    final poorCondition = condition.contains('poor') ||
+        condition.contains('unsatisfactory') ||
+        condition.contains('defective');
+    final thickness = (answers['et_thickness'] ?? '').trim();
+    final validThickness = RegExp(r'^\d+(?:\.\d+)?$').hasMatch(thickness);
+    final result = <String>[];
+
+    for (final original in phrases) {
+      var phrase = original.trim();
+      if (phrase.isEmpty ||
+          RegExp(r'^status\s*:\s*(?:yes|no|true|false)\.?$',
+                  caseSensitive: false)
+              .hasMatch(phrase)) {
+        continue;
+      }
+      if (!validThickness && thickness.isNotEmpty) {
+        phrase = phrase.replaceAll('$thickness mm ', '');
+      }
+      phrase = phrase
+          .replaceAll('factory made trusses construction',
+              'factory-made roof truss construction')
+          .replaceAll('made of steel construction', 'formed in steel')
+          .replaceAll('is other construction', 'is of other construction')
+          .replaceAll('timber cladded', 'timber-clad')
+          .replaceAll('weathered board', 'weatherboarding');
+      phrase = phrase.replaceAll(
+        'The underside of the roof slope has no felt underlining or timber boarding installed. The absence of such undercover could result in water leakage, lower internal temperatures, higher heating costs, condensation, and mould growth. No repair is currently needed. I will recommend that you contact a qualified person to inspect the roof covering to ascertain its water tightness. The property must be maintained in the normal way.',
+        'No roofing underlay or timber boarding was visible beneath the roof covering. This reduces the secondary protection available against wind-driven rain and may increase the risk of water penetration, condensation and heat loss. No immediate repair is required solely because an underlay is absent, but a competent roofing contractor should confirm the watertightness of the covering and advise on any work required.',
+      );
+
+      if (poorCondition &&
+          (screenId == 'inside_property_ceilings_about_ceilings' ||
+              screenId == 'activity_inside_property_wap_walls' ||
+              screenId == 'activity_in_side_property_floors_about_floor')) {
+        phrase = phrase.replaceAll(
+          RegExp(
+            r'These appear(?: to be generally)? in (?:unsatisfactory and poor|poor|unsatisfactory) condition,? and no appreciable defects were noted at the time of my inspection\. No repair is currently needed\. The property must be maintained in the normal way\.',
+            caseSensitive: false,
+          ),
+          'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
+        );
+        phrase = phrase.replaceAll(
+          RegExp(
+            r'These appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition\. No repair is currently needed\. The property must be maintained in the normal way\.',
+            caseSensitive: false,
+          ),
+          'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
+        );
+      }
+      if (poorCondition &&
+          screenId.startsWith(
+              'activity_outside_property_main_walls_about_wall')) {
+        phrase = phrase.replaceAll(
+          RegExp(
+            r'These appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition\. No repair is currently needed\. The property must be maintained in the normal way\.',
+            caseSensitive: false,
+          ),
+          'The walls are in an unsatisfactory condition. Appropriate repairs should be specified after the nature and extent of the defects have been established.',
+        );
+      }
+
+      phrase = phrase.replaceAll(RegExp(r'\s+'), ' ').trim();
+      if (phrase.isNotEmpty) result.add(phrase);
+    }
+    return result;
+  }
+
+  /// Generic "main screen" condition-rating + notes emitter shared by
+  /// several unrelated sections. [master] selects that screen's approved
+  /// bank family (e.g. `{H_GARAGE}`, `{F_CEILINGS}`) so the rating/notes
+  /// sentences match the approved wording instead of a bare hardcoded
+  /// "Condition rating: X." fallback.
   List<String> _conditionRatingNotes(
     Map<String, String> answers, {
     required String ratingKey,
     String notesKey = 'ar_etNote',
+    String? master,
   }) {
     final rating = (answers[ratingKey] ?? '').trim();
     final notes = (answers[notesKey] ?? '').trim();
     final phrases = <String>[];
     if (rating.isNotEmpty) {
-      phrases.add('Condition rating: $rating.');
+      final template = master == null ? '' : _sub(master, '{CONDITION_RATING}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_splitResolved(
+          template.replaceAll(RegExp(r'\{[A-Z0-9_]+\}'), rating),
+        ));
+      } else {
+        phrases.add('Condition rating: $rating.');
+      }
     }
     if (notes.isNotEmpty) {
-      phrases.add('Notes: $notes');
+      final template = master == null ? '' : _sub(master, '{NOTES}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_splitResolved(
+          template.replaceAll(RegExp(r'\{[A-Z0-9_]+\}'), notes),
+        ));
+      } else {
+        phrases.add('Notes: $notes');
+      }
     }
     return phrases;
   }
@@ -898,7 +1027,10 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_window_random_sampling'])) {
       final text = _sub('{E_WINDOWS}', '{WINDOWS_RANDOM_SAMPLING}');
       if (text.isNotEmpty) {
-        phrases.addAll(_split(_normalize(text)));
+        // Source bank text starts lowercase ("some of the windows...");
+        // capitalise at point of use rather than editing the imported bank
+        // content, so the asset stays a faithful copy of the approved text.
+        phrases.addAll(_split(_capitalizeFirst(_normalize(text))));
       }
     }
     if (_isChecked(answers['cb_window_in_poor_condition'])) {
@@ -1008,6 +1140,16 @@ class InspectionPhraseEngine {
         template = template.replaceAll(ratingPlaceholder, rating);
         phrases.addAll(_split(_normalize(template)));
       }
+      // RICS L2 numeric rating definition (Condition rating 1/2/3): a fixed
+      // explanatory sentence per rating value, shared by every section that
+      // migrates its bank to include `{CONDITION_RATING_1|2|3}`. Resolves to
+      // nothing (backward compatible) for sections not yet migrated.
+      if (RegExp(r'^[123]$').hasMatch(rating)) {
+        final ratingDef = _sub(phraseCodeForRating, '{CONDITION_RATING_$rating}');
+        if (ratingDef.isNotEmpty) {
+          phrases.addAll(_split(_normalize(ratingDef)));
+        }
+      }
     }
     final notes = (answers[notesKey] ?? '').trim();
     if (notes.isNotEmpty) {
@@ -1046,6 +1188,10 @@ class InspectionPhraseEngine {
     if (now.isEmpty && before.isEmpty) {
       return const ['Not inspected'];
     }
+    // Both values are required to complete this sentence; a double space
+    // where an empty value was substituted is not acceptable in a
+    // finalised client report, so wait until both are answered.
+    if (now.isEmpty || before.isEmpty) return const [];
     final template = _phraseTexts['{D_WEATHER}'] ?? '';
     if (template.isEmpty) return const [];
     final resolved = _normalize(template)
@@ -1062,8 +1208,26 @@ class InspectionPhraseEngine {
     if (occupancy.isEmpty && furnishing.isEmpty && flooring.isEmpty) {
       return const ['Not inspected'];
     }
-    final template = _phraseTexts['{D_PROPERTY_STATUS}'] ?? '';
+    // All three values are required to complete this sentence; a double
+    // space or dangling "and ." where an empty value was substituted is
+    // not acceptable in a finalised client report, so wait until the
+    // surveyor has answered them all.
+    if (occupancy.isEmpty || furnishing.isEmpty || flooring.isEmpty) {
+      return const [];
+    }
+    var template = _phraseTexts['{D_PROPERTY_STATUS}'] ?? '';
     if (template.isEmpty) return const [];
+    // The floor-covering options already end in "covered" ("Fully
+    // covered", "Partially covered"), but the template has its own fixed
+    // trailing "covered" word - doubling up to "fully covered covered"
+    // when substituted verbatim. Drop the template's redundant word when
+    // the option already supplies it.
+    if (flooring.toLowerCase().contains('covered')) {
+      template = template.replaceAll(
+        '{PROPERTY_STATUS_FLOOR_COVERING} covered',
+        '{PROPERTY_STATUS_FLOOR_COVERING}',
+      );
+    }
     final resolved = _normalize(template)
         .replaceAll('{PROPERTY_STATUS_OCCUPANCY}', occupancy.toLowerCase())
         .replaceAll('{PROPERTY_STATUS_FURNISHING}', furnishing.toLowerCase())
@@ -1090,6 +1254,109 @@ class InspectionPhraseEngine {
 
   String _sub(String phraseCode, String subCode) {
     return _phraseTexts['$phraseCode::$subCode'] ?? '';
+  }
+
+  // ── RICS Level 2 rebuild — reusable machinery (additive) ──────────────
+  // These helpers implement the new Master Phrase Library's cross-cutting
+  // conventions. They are wired per element during the section-by-section
+  // L2 migration; unused until a section is migrated.
+
+  /// RICS L2 dual condition rating. The new library specifies BOTH a
+  /// per-element **descriptive** grade (good / reasonable / fair / poor /
+  /// very poor, captured on `actv_condition`) AND a per-section **numeric**
+  /// rating 1/2/3 (captured on `android_material_design_spinner4`) that
+  /// carries a fixed RICS definition sentence.
+  ///
+  /// Both are emitted from the element's approved bank family [master]:
+  ///  - `{master}::{CONDITION_DESCRIPTIVE}` — "Where visible, the {ELEMENT}
+  ///    appears in {DESC} condition." (`{L2_DESC}` slot filled from the
+  ///    descriptive dropdown);
+  ///  - `{master}::{CONDITION_RATING_1|2|3}` — the numeric rating's fixed
+  ///    RICS definition paragraph.
+  /// Missing answers are skipped (no empty-slot fragments). Falls back to
+  /// nothing when the bank has no L2 templates yet, so it is safe to wire
+  /// before a section's phrase text has been migrated.
+  List<String> _l2ConditionRating(
+    Map<String, String> answers, {
+    required String master,
+    String descriptiveKey = 'actv_condition',
+    String numericKey = 'android_material_design_spinner4',
+  }) {
+    final phrases = <String>[];
+    final desc = _cleanLower(answers[descriptiveKey]);
+    if (desc.isNotEmpty) {
+      final template = _sub(master, '{CONDITION_DESCRIPTIVE}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_splitResolved(template.replaceAll('{L2_DESC}', desc)));
+      }
+    }
+    final numeric = (answers[numericKey] ?? '').trim();
+    if (numeric.isNotEmpty && RegExp(r'^[123]$').hasMatch(numeric)) {
+      final def = _sub(master, '{CONDITION_RATING_$numeric}');
+      if (def.isNotEmpty) {
+        phrases.addAll(_splitResolved(def));
+      }
+    }
+    return phrases;
+  }
+
+  /// RICS L2 element-narrative composer. Each L2 element is authored in the
+  /// bank as an ordered set of sub-templates that follow a fixed skeleton
+  /// (Description → Inspection Limitations → labelled sub-topics → Defects →
+  /// General Maintenance). This resolves [subCodes] in order from [master],
+  /// fills each sub-template's option-slots from [answers] via [slotFields]
+  /// (placeholder token → answer field id, value lower-cased), and drops any
+  /// sub-template that is empty in the bank or whose *required* slot is
+  /// unanswered — so no empty-slot fragment ever reaches the report.
+  ///
+  /// A sub-code prefixed with `?` is optional: emitted only when at least one
+  /// of its slot fields is answered (used for the "or"-branch / defect
+  /// sub-topics that only appear when the surveyor recorded something).
+  List<String> _composeL2Element(
+    Map<String, String> answers, {
+    required String master,
+    required List<String> subCodes,
+    Map<String, String> slotFields = const {},
+  }) {
+    final out = <String>[];
+    for (final rawCode in subCodes) {
+      final optional = rawCode.startsWith('?');
+      final code = optional ? rawCode.substring(1) : rawCode;
+      var template = _sub(master, code);
+      if (template.isEmpty) continue;
+
+      // Substitute this sub-template's placeholders from the answer slots.
+      var missingRequired = false;
+      var anySlotAnswered = false;
+      final tokens = RegExp(r'\{[A-Z0-9_]+\}')
+          .allMatches(template)
+          .map((m) => m.group(0)!)
+          .toSet();
+      for (final token in tokens) {
+        final field = slotFields[token];
+        if (field == null) continue; // not a data slot (structural placeholder)
+        final v = _cleanLower(answers[field]);
+        if (v.isEmpty) {
+          missingRequired = true;
+        } else {
+          anySlotAnswered = true;
+          template = template.replaceAll(token, v);
+        }
+      }
+      if (optional && !anySlotAnswered) continue;
+      if (!optional && missingRequired) continue;
+      out.addAll(_splitResolved(template));
+    }
+    return out;
+  }
+
+  /// Normalises + splits a resolved template, and tidies gaps left by
+  /// intentionally blank slots (e.g. " ." -> "." and " ," -> ",").
+  List<String> _splitResolved(String resolved) {
+    final tidied = _normalize(resolved)
+        .replaceAllMapped(RegExp(r'\s+([.,;:])'), (m) => m.group(1)!)
+        .replaceAll(RegExp(r' {2,}'), ' ');
+    return _split(tidied);
   }
 
   List<String> _outsidePropertyLimitations(Map<String, String> answers) {
@@ -1358,6 +1625,17 @@ class InspectionPhraseEngine {
       return phrases;
     }
 
+    if (_isChecked(answers['cb_not_inspected_access'])) {
+      phrases
+          .addAll(_split(_normalize(_sub(phraseCode, '{NOT_INSPECTED_ACCESS}'))));
+      return phrases;
+    }
+
+    if (_isChecked(answers['cb_dummy_chimney_breast'])) {
+      phrases.addAll(
+          _split(_normalize(_sub(phraseCode, '{DUMMY_CHIMNEY_BREAST}'))));
+    }
+
     if (_isChecked(answers['cb_Partial_view']) ||
         _isChecked(answers['cbPartial_view'])) {
       final template = _sub(phraseCode, '{PARTIAL_VIEW}');
@@ -1488,7 +1766,15 @@ class InspectionPhraseEngine {
         .replaceAll(
             '{CS_FLASHING_REPAIR_ISSUE}', _toWords(issues).toLowerCase())
         .replaceAll('{IS_ARE}', _isAre(stacks));
-    return _split(_normalize(template));
+    final phrases = _split(_normalize(template)).toList();
+
+    if (!isSoon && _isChecked(answers['cb_is_causing_dump'])) {
+      final extra = _sub(phraseCode, '{FLASHING_REPAIR_NOW_CAUSING_DUMP}');
+      if (extra.isNotEmpty) {
+        phrases.addAll(_split(_normalize(extra)));
+      }
+    }
+    return phrases;
   }
 
   List<String> _chimneyRepairFlaunching(Map<String, String> answers) {
@@ -1778,7 +2064,11 @@ class InspectionPhraseEngine {
 
     final isAerial = type.contains('aerial');
     final aerialOrDish = isAerial ? 'aerial' : 'satellite dish';
-    final aAn = isAerial ? 'an' : 'a';
+    // {A_AN} is the first word of this sentence in the bank template
+    // ("{A_AN} {AERIAL_OR_DISH} attached to the chimney is..."), so the
+    // article must be capitalized here rather than left lowercase like a
+    // normal mid-sentence substitution.
+    final aAn = isAerial ? 'An' : 'A';
 
     template = template
         .replaceAll('{AERIAL_OR_DISH}', aerialOrDish)
@@ -2314,11 +2604,18 @@ class InspectionPhraseEngine {
     final phrases = <String>[];
     var template = _sub('{E_ROOF_COVERING}', '{E_RC_PARAPET_WALL}');
     if (template.isNotEmpty) {
+      final rendered = _cleanLower(answers['actv_rendered']);
+      // Rendered status is optional; a literal "and are ." fragment is not
+      // acceptable in a finalised client report, so drop the clause
+      // entirely when it hasn't been answered.
+      if (rendered.isEmpty) {
+        template = template.replaceAll(' and are {RC_PARAPET_WALL_RENDERED}', '');
+      } else {
+        template = template.replaceAll('{RC_PARAPET_WALL_RENDERED}', rendered);
+      }
       template = template
           .replaceAll(
               '{RC_PARAPET_WALL_BUILT_WITH}', _toWords(builtWith).toLowerCase())
-          .replaceAll('{RC_PARAPET_WALL_RENDERED}',
-              _cleanLower(answers['actv_rendered']))
           .replaceAll('{IS_ARE}', _isAre(builtWith));
       phrases.addAll(_split(_normalize(template)));
     }
@@ -2615,6 +2912,12 @@ class InspectionPhraseEngine {
       _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
     );
     if (status.isEmpty) return const [];
+    if (status.contains('previously strengthened')) {
+      final template = _sub('{E_ROOF_COVERING_REPAIR}',
+          '{RC_ROOF_SPREADING_PREVIOUSLY_STRENGTHENED}');
+      if (template.isEmpty) return const [];
+      return _split(_normalize(template));
+    }
     if (status.contains('yes')) {
       final template = _sub('{E_ROOF_COVERING_REPAIR}', '{RC_ROOF_SPREADING}');
       if (template.isEmpty) return const [];
@@ -2974,9 +3277,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _windowsAbout(Map<String, String> answers) {
-    final madeUp = _cleanLower(
+    final madeUpValue = _cleanLower(
       _firstNonEmpty(answers, const ['actv_made_up_of', 'llMainContainer']),
     );
+    // "Mixture" needs its article ("formed a mixture of..."); "mainly"
+    // reads fine as-is ("formed mainly of...").
+    final madeUp = madeUpValue == 'mixture' ? 'a mixture' : madeUpValue;
     final replacement =
         _isChecked(answers['cb_is_replacement']) ? 'replacement' : '';
     final types = _labelsFor(
@@ -3031,23 +3337,31 @@ class InspectionPhraseEngine {
       }
     }
 
+    // RICS L2 rewrite (Phase 2B, E5): the general "Condition:"/"No defects
+    // noted:" sentence was previously only surfaced as a sub-clause nested
+    // inside the BS-EN-noted branch below (so it silently disappeared
+    // whenever no safety-glass marks were found). The spec treats it as
+    // its own always-present sentence, so it now reads the same
+    // actv_condition field directly rather than being folded into the
+    // safety-glass status text.
+    final condition = _cleanLower(answers['actv_condition']);
+    if (condition.isNotEmpty) {
+      var conditionTemplate = _sub('{E_WINDOWS}', '{WINDOWS_CONDITION}');
+      if (conditionTemplate.isNotEmpty) {
+        conditionTemplate =
+            conditionTemplate.replaceAll('{WINDOW_CONDITION}', condition);
+        phrases.addAll(_split(_normalize(conditionTemplate)));
+      }
+    }
+
     final status = _cleanLower(answers['actv_status']);
     if (status.isNotEmpty) {
-      var template = _sub(
+      final template = _sub(
           '{WINDOWS_SAFETY_GLASS_RATING_STATUS}',
           status.contains('noted')
               ? '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED}'
               : '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NO_SG_RATING}');
       if (template.isNotEmpty) {
-        final condition = _cleanLower(answers['actv_condition']);
-        final conditionPhrase = status.contains('noted') && condition.isNotEmpty
-            ? _sub('{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED}',
-                    '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED_CONDITION}')
-                .replaceAll('{WINDOW_SAFETY_STATUS_NOTED_CONDITION}', condition)
-            : '';
-        template = template.replaceAll(
-            '{WINDOWS_SAFETY_GLASS_RATING_STATUS_NOTED_CONDITION}',
-            conditionPhrase);
         phrases.addAll(_split(_normalize(template)));
       }
     }
@@ -3104,13 +3418,21 @@ class InspectionPhraseEngine {
         const ['actv_projection_type', 'llMainContainer'],
       ),
     );
+    if (projection.isEmpty) return const [];
+    // RICS L2 rewrite (Phase 2B, E5): the dropdown already had an
+    // "Inadequate" option, but the handler never branched on it - every
+    // selection (adequate or not) was substituted into the same
+    // adequate-framed sentence. The spec's "Sill defect:" paragraph is a
+    // fully different sentence, not a word substitution.
+    if (projection.contains('inadequate')) {
+      return _split(_normalize(_sub('{E_WINDOWS}', '{WINDOW_SILL_DEFECT}')));
+    }
     final condition = _cleanLower(answers['actv_condition']);
-    if (projection.isEmpty || condition.isEmpty) return const [];
+    if (condition.isEmpty) return const [];
     var template = _sub('{E_WINDOWS}', '{WINDOW_SILL_PROJECTION}');
     if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{WINDOW_SILL_PROJECTION_TYPE}', projection)
-        .replaceAll('{WINDOW_SILL_PROJECTION_CONDITION}', condition);
+    template =
+        template.replaceAll('{WINDOW_SILL_PROJECTION_CONDITION}', condition);
     return _split(_normalize(template));
   }
 
@@ -3122,9 +3444,10 @@ class InspectionPhraseEngine {
     final isMultiple = type.contains('multiple');
 
     final locations = _labelsFor(
-      isMultiple
-          ? ['cb_loft_32', 'cb_extension_85', 'cb_other_451']
-          : ['cb_loft', 'cb_extension', 'cb_other_629'],
+      // cb_other_451/cb_other_629 (the "Other" checkboxes) are deliberately
+      // excluded here: they have no label of their own and are already
+      // handled explicitly below via their free-text value.
+      isMultiple ? ['cb_loft_32', 'cb_extension_85'] : ['cb_loft', 'cb_extension'],
       answers,
       {
         'cb_loft': 'Loft',
@@ -3142,9 +3465,12 @@ class InspectionPhraseEngine {
     }
 
     final materials = _labelsFor(
+      // cb_other_975/cb_other_610 (the "Other" checkboxes) are deliberately
+      // excluded here: they have no label of their own and are already
+      // handled explicitly below via their free-text value.
       isMultiple
-          ? ['cb_pvc_24', 'cb_timber_44', 'cb_steel_91', 'cb_other_975']
-          : ['cb_pvc', 'cb_timber', 'cb_steel', 'cb_other_610'],
+          ? ['cb_pvc_24', 'cb_timber_44', 'cb_steel_91']
+          : ['cb_pvc', 'cb_timber', 'cb_steel'],
       answers,
       {
         'cb_pvc': 'PVC',
@@ -3230,12 +3556,14 @@ class InspectionPhraseEngine {
       },
     );
     final locations = _labelsFor(
+      // cb_other_471 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
       [
         'cb_lounge_791',
         'cb_lounge_79',
         'cb_bedroom_35',
         'cb_kitchen_80',
-        'cb_other_471'
       ],
       answers,
       {
@@ -3252,6 +3580,9 @@ class InspectionPhraseEngine {
       }
     }
     final defects = _labelsFor(
+      // cb_other_1066 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
       [
         'cb_have_damaged_locks_63',
         'cb_are_difficult_to_open_15',
@@ -3260,7 +3591,6 @@ class InspectionPhraseEngine {
         'cb_have_broken_panes_14',
         'cb_have_failed_glazing_40',
         'cb_are_in_disrepair_33',
-        'cb_other_1066',
       ],
       answers,
       {
@@ -3317,13 +3647,15 @@ class InspectionPhraseEngine {
 
   List<String> _windowsRepairFailedGlazing(Map<String, String> answers) {
     final locations = _labelsFor(
+      // cb_other_471 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
       [
         'cb__property',
         'cb_lounge_79',
         'cb_bedroom_35',
         'cb_kitchen_80',
         'cb_have_damaged_locks_63',
-        'cb_other_471'
       ],
       answers,
       {
@@ -3351,7 +3683,10 @@ class InspectionPhraseEngine {
 
   List<String> _windowsRepairNoFireEscapeRisk(Map<String, String> answers) {
     final locations = _labelsFor(
-      ['cb_lounge_84', 'cb_bedroom_43', 'cb_study_61', 'cb_other_175'],
+      // cb_other_175 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
+      ['cb_lounge_84', 'cb_bedroom_43', 'cb_study_61'],
       answers,
       {
         'cb_lounge_84': 'Lounge',
@@ -3389,13 +3724,15 @@ class InspectionPhraseEngine {
   List<String> _outsideDoorsAbout(
       String screenId, Map<String, String> answers) {
     final locations = _labelsFor(
+      // cb_other_859 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
       [
         'cb_main',
         'cb_rear',
         'cb_side',
         'cb_patio',
         'cb_garage',
-        'cb_other_859',
       ],
       answers,
       {
@@ -3458,6 +3795,10 @@ class InspectionPhraseEngine {
       doorLocation = doorLocation
           .replaceAll(RegExp(r'\{[^}]+\}'), '')
           .replaceAll(RegExp(r'\s{2,}'), ' ')
+          // A single empty slot right before punctuation (e.g. an empty
+          // {DOOR_GLAZZING}) leaves exactly one space before the full stop,
+          // which the \s{2,} collapse above doesn't catch.
+          .replaceAllMapped(RegExp(r'\s+([.,;:])'), (m) => m.group(1)!)
           .trim();
     }
 
@@ -3570,6 +3911,11 @@ class InspectionPhraseEngine {
           .replaceAll('{DOOR_LOCATION}', doorLocation);
       phrases.addAll(_split(_normalize(lock)));
     }
+    if (_isChecked(answers['cb_inadequate_lock'])) {
+      final lock = _sub('{E_OUTSIDE_DOORS}', '{INADEQUATE_LOCK_SELECTED}')
+          .replaceAll('{DOOR_LOCATION}', doorLocation);
+      phrases.addAll(_split(_normalize(lock)));
+    }
     return phrases;
   }
 
@@ -3577,11 +3923,13 @@ class InspectionPhraseEngine {
       String screenId, Map<String, String> answers) {
     final location = _cleanLower(answers['actv_location']);
     final construction = _labelsFor(
+      // cb_other_925 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
       [
         'cb_brick_walls',
         'cb_pvc_double_glazed_sections',
         'cb_timber_double_glazed_sections',
-        'cb_other_925'
       ],
       answers,
       {
@@ -3619,20 +3967,22 @@ class InspectionPhraseEngine {
 
   List<String> _cpRoof(String screenId, Map<String, String> answers) {
     final roofType = _cleanLower(answers['actv_roof_type']);
+    final hasFloorAbove = _isChecked(answers['cb_floor_above']);
     final materials = _labelsFor(
       [
-        'cb_floor_above',
         'cb_pvc_double_glazed_sections',
         'cb_polycarbonate_sheets',
         'cb_concrete_tiles',
         'cb_clay_tiles',
         'cb_mineral_felt',
         'cb_lead',
-        'cb_others_373',
+        // cb_others_373 (the "Other" checkbox) is deliberately excluded
+        // here: it has no label of its own (falls back to the raw field
+        // id, e.g. "cb_others_373", leaking into the report text) and is
+        // already handled explicitly below via its free-text value.
       ],
       answers,
       {
-        'cb_floor_above': 'Floor above',
         'cb_pvc_double_glazed_sections': 'PVC double glazed sections',
         'cb_polycarbonate_sheets': 'Polycarbonate sheets',
         'cb_concrete_tiles': 'Concrete tiles',
@@ -3647,11 +3997,17 @@ class InspectionPhraseEngine {
         materials.add(other);
       }
     }
-    if (roofType.isEmpty || materials.isEmpty) return const [];
     final isPorch = _isPorchScreenVariant(
       screenId,
       porchSuffix: '__roof',
     );
+    if (hasFloorAbove && materials.isEmpty) {
+      return _split(_normalize(_sub(
+        '{E_CONSERVATORY_PORCHES}',
+        isPorch ? '{PORCH_ROOF_FLOOR_ABOVE}' : '{CP_ROOF_FLOOR_ABOVE}',
+      )));
+    }
+    if (roofType.isEmpty || materials.isEmpty) return const [];
     var template = _sub(
       '{E_CONSERVATORY_PORCHES}',
       isPorch ? '{PORCH_ROOF}' : '{CP_ROOF}',
@@ -3680,7 +4036,10 @@ class InspectionPhraseEngine {
       },
     );
     final materials = _labelsFor(
-      ['cb_pvc', 'cb_timber', 'cb_other_1047'],
+      // cb_other_1047 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
+      ['cb_pvc', 'cb_timber'],
       answers,
       {
         'cb_pvc': 'PVC',
@@ -3727,7 +4086,10 @@ class InspectionPhraseEngine {
       },
     );
     final materials = _labelsFor(
-      ['cb_pvc', 'cb_timber', 'cb_other_1047'],
+      // cb_other_1047 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
+      ['cb_pvc', 'cb_timber'],
       answers,
       {
         'cb_pvc': 'PVC',
@@ -3776,7 +4138,10 @@ class InspectionPhraseEngine {
 
   List<String> _cpFloor(String screenId, Map<String, String> answers) {
     final coverings = _labelsFor(
-      ['cb_tiles', 'cb_laminate_flooring', 'cb_carpets', 'cb_other_743'],
+      // cb_other_743 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
+      ['cb_tiles', 'cb_laminate_flooring', 'cb_carpets'],
       answers,
       {
         'cb_tiles': 'Tiles',
@@ -3838,7 +4203,10 @@ class InspectionPhraseEngine {
 
   List<String> _cpFlashing(Map<String, String> answers) {
     final materials = _labelsFor(
-      ['cb_lead', 'cb_mortar', 'cb_tiles', 'cb_other_33'],
+      // cb_other_33 (the "Other" checkbox) is deliberately excluded here:
+      // it has no label of its own and is already handled explicitly below
+      // via its free-text value.
+      ['cb_lead', 'cb_mortar', 'cb_tiles'],
       answers,
       {
         'cb_lead': 'Lead',
@@ -3929,6 +4297,9 @@ class InspectionPhraseEngine {
     if (condition.isEmpty) return const [];
     final isNow = condition.contains('now');
     final defects = _labelsFor(
+      // cb_other_350/cb_other_519 (the "Other" checkboxes) are deliberately
+      // excluded here: they have no label of their own and are already
+      // handled explicitly below via their free-text value.
       isNow
           ? [
               'cb_cracked_51',
@@ -3938,7 +4309,6 @@ class InspectionPhraseEngine {
               'cb_damp_25',
               'cb_failed_89',
               'cb_misted_over_85',
-              'cb_other_350'
             ]
           : [
               'cb_cracked',
@@ -3948,7 +4318,6 @@ class InspectionPhraseEngine {
               'cb_damp',
               'cb_failed',
               'cb_misted_over',
-              'cb_other_519'
             ],
       answers,
       {
@@ -4811,7 +5180,12 @@ class InspectionPhraseEngine {
     );
     if (status.isEmpty) return const [];
 
-    if (status.contains('visible')) {
+    // `status.contains('visible')` used to match here, but "not visible"
+    // also contains the substring "visible" - every Not Visible selection
+    // was silently misrouted into this Visible branch, which reads
+    // different checkbox ids and so always produced empty materials and
+    // an empty phrase list. Exact-match avoids the false substring hit.
+    if (status == 'visible') {
       final materials = _labelsFor(
         [
           'cb_plastic',
@@ -4948,6 +5322,18 @@ class InspectionPhraseEngine {
         ? _sub('{WALLS_DAMP_TYPE_PRESENT}',
             '{WALLS_DAMP_TYPE_PRESENT_DPC_TREATMENT_NOTED}')
         : '';
+
+    // If none of the sub-clauses have any content, every placeholder in the
+    // template resolves empty and only the bare "Dampness:" heading would
+    // remain - not acceptable as a standalone line in a finalised report.
+    if (areaPhrase.isEmpty &&
+        penetratingPhrase.isEmpty &&
+        risingPhrase.isEmpty &&
+        installGutters.isEmpty &&
+        unknownCause.isEmpty &&
+        dpcTreatment.isEmpty) {
+      return const [];
+    }
 
     template = template
         .replaceAll('{WALLS_DAMP_TYPE_PRESENT_AREA}', areaPhrase)
@@ -5381,8 +5767,13 @@ class InspectionPhraseEngine {
     if (walls.isEmpty || locations.isEmpty || defects.isEmpty) return const [];
     var template = _sub('{E_MAIN_WALL_REPAIR}', '{WALL_RENDER_REPAIR_WALLS}');
     if (template.isEmpty) return const [];
-    final repair = _sub('{WALL_RENDER_REPAIR_WALLS}',
+    var repair = _sub('{WALL_RENDER_REPAIR_WALLS}',
         isNow ? '{WALL_RENDER_REPAIR_NOW}' : '{WALL_RENDER_REPAIR_SOON}');
+    // {WALL_RENDER_REPAIR_NOW} carries its own {HAZARD} slot; the hazard
+    // sentence is only emitted (below) when cb_hazard is checked, so this
+    // inline placeholder must be cleared here or it leaks into the report
+    // verbatim on every "repair now" case regardless of the checkbox.
+    repair = repair.replaceAll(' {HAZARD}', '').replaceAll('{HAZARD}', '');
     template = template
         .replaceAll(
             '{MAIN_WALL_REPAIR_RENDER_WALLS}', _toWords(walls).toLowerCase())
@@ -5610,10 +6001,15 @@ class InspectionPhraseEngine {
       opening = screenId.contains('__door') ? 'door' : 'window';
     }
     if (walls.isEmpty || locations.isEmpty || defects.isEmpty) return const [];
-    var template = _sub('{E_MAIN_WALL_REPAIR}', '{WALL_LINTEL_REPAIR}');
-    if (template.isEmpty) return const [];
-    final repair = _sub('{WALL_LINTEL_REPAIR}',
+    // The "Repair lintels soon:"/"Repair lintels now:" label text differs
+    // per branch (unlike spalling/pointing/render, whose label is the same
+    // for both), so the whole paragraph - label, descriptive clause and
+    // advice - lives in one variant-specific key instead of being split
+    // across a shared outer wrapper and an inner advice fragment; the old
+    // split placed the label mid-paragraph, after the descriptive clause.
+    var template = _sub('{E_MAIN_WALL_REPAIR}',
         isNow ? '{WALL_LINTEL_REPAIR_NOW}' : '{WALL_LINTEL_REPAIR_SOON}');
+    if (template.isEmpty) return const [];
     template = template
         .replaceAll('{MAIN_WALL_REPAIR_LINTEL_OPENING_TO}', opening)
         .replaceAll(
@@ -5621,8 +6017,7 @@ class InspectionPhraseEngine {
         .replaceAll('{MAIN_WALL_REPAIR_LINTEL_LOCATION}',
             _toWords(locations).toLowerCase())
         .replaceAll(
-            '{MAIN_WALL_REPAIR_LINTEL_DEFECT}', _toWords(defects).toLowerCase())
-        .replaceAll('{REPAIR_SOON_NOW}', repair);
+            '{MAIN_WALL_REPAIR_LINTEL_DEFECT}', _toWords(defects).toLowerCase());
     return _split(_normalize(template));
   }
 
@@ -5777,14 +6172,15 @@ class InspectionPhraseEngine {
 
     final garageNo = _cleanLower(answers['actv_no_of_garage']);
     final garageType = _cleanLower(answers['actv_type']);
-    if (garageNo.isNotEmpty || garageType.isNotEmpty) {
+    // Both details are required to complete this sentence; a literal "..."
+    // placeholder is not acceptable in a finalised client report, so wait
+    // until the surveyor has answered both.
+    if (garageNo.isNotEmpty && garageType.isNotEmpty) {
       var template = _sub('{H_GARAGE}', '{ABOUT_GARAGE_TYPE}');
       if (template.isNotEmpty) {
         template = template
-            .replaceAll(
-                '{GAR_NO_OF_GAR}', garageNo.isNotEmpty ? garageNo : '...')
-            .replaceAll(
-                '{GAR_TYPE}', garageType.isNotEmpty ? garageType : '...');
+            .replaceAll('{GAR_NO_OF_GAR}', garageNo)
+            .replaceAll('{GAR_TYPE}', garageType);
         phrases.addAll(_split(_normalize(template)));
       }
     }
@@ -5849,22 +6245,16 @@ class InspectionPhraseEngine {
     );
     _addOther(answers, 'cb_other_376', 'et_other_634', roofCovers);
     final roofCond = _cleanLower(answers['actv_condition']);
-    if (roofTypes.isNotEmpty || roofCovers.isNotEmpty) {
+    // All three details are required to complete this sentence; a literal
+    // "..." placeholder is not acceptable in a finalised client report, so
+    // wait until the surveyor has answered them all.
+    if (roofTypes.isNotEmpty && roofCovers.isNotEmpty && roofCond.isNotEmpty) {
       var template = _sub('{H_GARAGE}', '{ABOUT_GARAGE_ROOF}');
       if (template.isNotEmpty) {
         template = template
-            .replaceAll(
-                '{GAR_ROOF_TYPE}',
-                roofTypes.isNotEmpty
-                    ? _toWords(roofTypes).toLowerCase()
-                    : '...')
-            .replaceAll(
-                '{GAR_ROOF_COVER}',
-                roofCovers.isNotEmpty
-                    ? _toWords(roofCovers).toLowerCase()
-                    : '...')
-            .replaceAll('{GAR_ROOF_COVER_COND}',
-                roofCond.isNotEmpty ? roofCond : '...');
+            .replaceAll('{GAR_ROOF_TYPE}', _toWords(roofTypes).toLowerCase())
+            .replaceAll('{GAR_ROOF_COVER}', _toWords(roofCovers).toLowerCase())
+            .replaceAll('{GAR_ROOF_COVER_COND}', roofCond);
         phrases.addAll(_split(_normalize(template)));
       }
     }
@@ -5902,6 +6292,13 @@ class InspectionPhraseEngine {
   List<String> _groundsGarageNotInspected(Map<String, String> answers) {
     if (_isChecked(answers['cb_not_inspected_no_garage']) ||
         _isChecked(answers['cb_not_inspected'])) {
+      final source = _cleanLower(answers['actv_access_keys_not_provided_by']);
+      if (source.isNotEmpty &&
+          !_isChecked(answers['cb_not_inspected_no_garage'])) {
+        final template = _sub('{H_GARAGE}', '{NOT_INSPECTED_ACCESS_KEYS}')
+            .replaceAll('{GARAGE_KEY_SOURCE}', source);
+        if (template.isNotEmpty) return _split(_normalize(template));
+      }
       return _split(_normalize(_sub('{H_GARAGE}', '{NOT_INSPECTED}')));
     }
     return const [];
@@ -6252,16 +6649,30 @@ class InspectionPhraseEngine {
     _addOther(answers, 'cb_other_279', 'et_other_875', roofCovers);
 
     final condition = _cleanLower(answers['actv_condition']);
-    if (constructions.isEmpty &&
-        types.isEmpty &&
-        locations.isEmpty &&
-        roofTypes.isEmpty &&
-        roofCovers.isEmpty &&
-        condition.isEmpty) {
-      return const [];
-    }
+    // Location + building type anchor the sentence structure ("There is a
+    // ... to the {location} of the property underneath a ... roof"); without
+    // both, any assembled sentence would contain an empty-slot fragment
+    // (client-reported defect class from Phase 3). Require both.
+    if (locations.isEmpty || types.isEmpty) return const [];
+
     var template = _sub('{H_OTHER}', '{LARGE_OUTBUILDING}');
     if (template.isEmpty) return const [];
+    if (constructions.isEmpty) {
+      template = template.replaceAll('{LOB_CONST} ', '');
+    }
+    if (roofTypes.isEmpty || roofCovers.isEmpty) {
+      template = template.replaceAll(
+        ' underneath a {LOB_ROOF_TYPE} roof covered in {LOB_ROOF_COVER}.',
+        '.',
+      );
+    }
+    if (condition.isEmpty) {
+      template = template.replaceAll(
+        ' This appears in {LOB_CONDITION} condition. No repair is currently '
+            'needed. The property must be maintained in the normal way.',
+        '',
+      );
+    }
     template = template
         .replaceAll('{LOB_CONST}', _toWords(constructions).toLowerCase())
         .replaceAll('{LOB_BUIL_TYPE}', _toWords(types).toLowerCase())
@@ -6269,7 +6680,7 @@ class InspectionPhraseEngine {
         .replaceAll('{LOB_ROOF_TYPE}', _toWords(roofTypes).toLowerCase())
         .replaceAll('{LOB_ROOF_COVER}', _toWords(roofCovers).toLowerCase())
         .replaceAll('{LOB_CONDITION}', condition);
-    return _split(_normalize(template));
+    return _splitResolved(template);
   }
 
   List<String> _groundsPrivateRoad(Map<String, String> answers) {
@@ -6890,17 +7301,48 @@ class InspectionPhraseEngine {
     final condition = _cleanLower(answers['actv_condition']);
 
     if (condition == 'ok') {
-      final location = _cleanLower(answers['actv_location']);
+      // Dropdown options are pre-worded as full predicates including their
+      // own preposition ("is under the stairs", "is in the kitchen") but
+      // the bank template already supplies "located in the {LOCATION}".
+      // Strip the leading "is " and, since the option supplies whichever
+      // preposition actually fits ("under"/"in"), also drop the template's
+      // fixed "in the" so the two don't combine into "located in the under
+      // the stairs".
+      final location = _cleanLower(answers['actv_location'])
+          .replaceFirst(RegExp(r'^is\s+'), '');
       if (location.isEmpty) return const [];
       var template = _sub('{G_GAS_AND_OIL}', '{MAINS_GAS_CONDITION_OK}');
       if (template.isNotEmpty) {
-        final smellOk = !_isChecked(answers['cb_gas_smell_noted'])
-            ? _sub('{G_GAS_AND_OIL}', '{CONDITION_OK_GAS_SMELL}')
+        // Strip the template's own fixed "in the" before substitution: the
+        // option text already supplies whichever preposition actually fits
+        // ("under the stairs", "in an outside box"), so keeping both would
+        // combine into "located in the under the stairs".
+        template =
+            template.replaceFirst('in the {GAO_MG_METER_LOCATION}', '{GAO_MG_METER_LOCATION}');
+        final smellNoted = _isChecked(answers['cb_gas_smell_noted']);
+        // The smell clause immediately follows the location sentence's full
+        // stop, so it starts a new sentence in the assembled text even
+        // though the bank template writes it lowercase mid-template.
+        final smellOk = !smellNoted
+            ? _capitalizeFirst(_sub('{G_GAS_AND_OIL}', '{CONDITION_OK_GAS_SMELL}'))
             : '';
         template = template
             .replaceAll('{GAO_MG_METER_LOCATION}', location)
             .replaceAll('{CONDITION_OK_GAS_SMELL}', smellOk);
-        phrases.addAll(_split(_normalize(template)));
+        // Normalize first: the template separates the smell clause from
+        // the location sentence with a non-breaking space (\xa0), which
+        // _normalize() converts to a regular space - the dangling-"and"
+        // cleanup below must run after that conversion or it won't match.
+        final normalized = _normalize(template);
+        final cleaned = smellNoted
+            // The smell clause is the only text between the location
+            // sentence and "and no other defects..."; when it's skipped,
+            // the template leaves a lowercase "and" dangling right after
+            // the full stop. Turn it into its own capitalised sentence.
+            ? normalized.replaceAll(
+                '. and no other defects', '. No other defects')
+            : normalized;
+        phrases.addAll(_split(cleaned));
       }
     } else if (condition == 'not inspected') {
       final template =
@@ -6943,7 +7385,15 @@ class InspectionPhraseEngine {
     template = template
         .replaceAll('{GAO_O_LOCATION}', location)
         .replaceAll('{GAO_O_OIL_ANK_MADE_OF}', material);
-    return _split(_normalize(template));
+    final phrases = _split(_normalize(template)).toList();
+    if (_isChecked(answers['cb_nearby_watercourse'])) {
+      final watercourse =
+          _sub('{G_GAS_AND_OIL}', '{OIL_TANK_NEAR_WATERCOURSE}');
+      if (watercourse.isNotEmpty) {
+        phrases.addAll(_split(_normalize(watercourse)));
+      }
+    }
+    return phrases;
   }
 
   List<String> _servicesGasOilRepairGasMeter(Map<String, String> answers) {
@@ -7582,7 +8032,10 @@ class InspectionPhraseEngine {
       answers,
       {
         'cb_partly_blocked': 'Partly blocked',
-        'cb_are_damaged': 'Are damaged',
+        // Bank template already supplies the verb ("The gullies are
+        // {DEFECT}."); the option label must be a bare adjective, not
+        // repeat "are" (was producing "The gullies are are damaged.").
+        'cb_are_damaged': 'Damaged',
         'cb_do_not_have_a_cover': 'Do not have a cover',
         'cb_completely_blocked': 'Completely blocked',
         'cb_other_229': 'Other',
@@ -7609,7 +8062,10 @@ class InspectionPhraseEngine {
     if (!_isChecked(answers['cb_not_inspected'])) return const [];
     final template = _sub('{G_DRAINAGE}', '{NOT_INSPECTED}');
     if (template.isEmpty) return const [];
-    return _split(_normalize(template));
+    // Source bank text starts lowercase ("drainage is not inspected.");
+    // capitalise at point of use rather than editing the imported bank
+    // content, so the asset stays a faithful copy of the approved text.
+    return _split(_capitalizeFirst(_normalize(template)));
   }
 
   List<String> _servicesCommonServicesMain(Map<String, String> answers) {
@@ -7662,8 +8118,13 @@ class InspectionPhraseEngine {
       },
     );
     _addOther(answers, 'cb_other_268', 'et_other_783', selections);
-    final commonServicesText =
-        selections.isEmpty ? '' : _toWords(selections).toLowerCase();
+    // Both bank templates that consume this value place it at the start of
+    // a sentence ("{CS_COMM_SERVICES}, which are..." and directly after a
+    // full stop with no separating space), so it must be capitalized here
+    // rather than left lowercase like a normal mid-sentence substitution.
+    final commonServicesText = selections.isEmpty
+        ? ''
+        : _capitalizeFirst(_toWords(selections).toLowerCase());
 
     if (_isChecked(answers['cb_not_applicable'])) {
       var template = _sub('{G_COMMON_SERVICES}', '{NOT_APPLICABLE}');
@@ -7731,14 +8192,17 @@ class InspectionPhraseEngine {
     final phrases = <String>[];
     final type = _cleanLower(answers['actv_type']);
     final location = _cleanLower(answers['actv_location']);
-    if (type.contains('combi')) {
+    // Location is required to complete these sentences ("...located in the
+    // {LOCATION}."); a literal "the ." fragment is not acceptable in a
+    // finalised client report, so wait until the surveyor has answered it.
+    if (type.contains('combi') && location.isNotEmpty) {
       var template =
           _sub('{G_WATER_HEATING}', '{GAS_WATER_HEATING_COMBI_BOILER}');
       if (template.isNotEmpty) {
         template = template.replaceAll('{WH_GWH_CYLI_LOCATION}', location);
         phrases.addAll(_split(_normalize(template)));
       }
-    } else if (type.contains('conventional')) {
+    } else if (type.contains('conventional') && location.isNotEmpty) {
       var template =
           _sub('{G_WATER_HEATING}', '{GAS_WATER_HEATING_CONVENTIONAL}');
       if (template.isNotEmpty) {
@@ -7760,14 +8224,15 @@ class InspectionPhraseEngine {
   List<String> _servicesWaterHeatingElectric(Map<String, String> answers) {
     final phrases = <String>[];
     final type = _cleanLower(answers['actv_type']);
-    if (type.contains('immersion')) {
+    final location = _cleanLower(answers['actv_location']);
+    // Location is required to complete this sentence ("...located in the
+    // {LOCATION}."); a literal "the ." fragment is not acceptable in a
+    // finalised client report, so wait until the surveyor has answered it.
+    if (type.contains('immersion') && location.isNotEmpty) {
       var template =
           _sub('{G_WATER_HEATING}', '{ELECTRIC_WATER_HEATING_IMMERSION}');
       if (template.isNotEmpty) {
-        template = template.replaceAll(
-          '{WH_EWH_CYLI_LOCATION}',
-          _cleanLower(answers['actv_location']),
-        );
+        template = template.replaceAll('{WH_EWH_CYLI_LOCATION}', location);
         phrases.addAll(_split(_normalize(template)));
       }
     } else if (type.contains('point-of-use') || type.contains('point of use')) {
@@ -8177,6 +8642,12 @@ class InspectionPhraseEngine {
       }
     }
 
+    String poorCoverText = '';
+    if (_isChecked(answers['cb_poor_fitting_cover'])) {
+      poorCoverText =
+          _sub('{F_ABOUT_ROOF_STRUCTURE}', '{REPAIR_TANK_POOR_COVER}');
+    }
+
     String noInsulationText = '';
     if (_isChecked(answers['cb_not_insulated']) &&
         _isChecked(answers['cb_not_insulation'])) {
@@ -8243,12 +8714,21 @@ class InspectionPhraseEngine {
         .replaceAll('{WATERL_TANK_MATERIAL_LOCATION}', materialLocationText)
         .replaceAll('{INSULATION_STATUS_OK}', insulationOkText)
         .replaceAll('{REPAIR_TANK_MISSING_COVER}', missingCoverText)
+        .replaceAll('{REPAIR_TANK_POOR_COVER}', poorCoverText)
         .replaceAll('{INSULATION_STATUS_NO_INSULATION}', noInsulationText)
         .replaceAll('{INSULATION_STATUS_NOT_ADEQUATELY_INSULATED}',
             notAdequatelyInsulatedText)
         .replaceAll('{TANK_STOPCOCK}', '')
         .replaceAll('{DISUSED_WATER_TANK}', disusedText);
-    return _split(_normalize(result));
+    final phrases = _split(_normalize(result)).toList();
+    if (materials.contains('Asbestos')) {
+      final asbestosText =
+          _sub('{F_ROOF_STRUCTURE_WATER_TANK}', '{ASBESTOS_TANK_MATERIAL}');
+      if (asbestosText.isNotEmpty) {
+        phrases.addAll(_split(_normalize(asbestosText)));
+      }
+    }
+    return phrases;
   }
 
   List<String> _insideRoofRepairTank(Map<String, String> answers) {
@@ -8868,8 +9348,16 @@ class InspectionPhraseEngine {
 
   List<String> _floorsOlderProperties(Map<String, String> answers) {
     if (!_isChecked(answers['cb_floor_older_properties'])) return const [];
-    final template = _sub('{F_FLOORS}', '{TIMBER_FLOOR_OLDER_PROPERTIES}');
+    var template = _sub('{F_FLOORS}', '{TIMBER_FLOOR_OLDER_PROPERTIES}');
     if (template.isEmpty) return const [];
+    // Source bank text has a truncation/typo ("categoric'. regarding
+    // condition."); correct at point of use rather than editing the
+    // imported bank content, so the asset stays a faithful copy of the
+    // approved text.
+    template = template.replaceAll(
+      "categoric'. regarding condition",
+      'categorical regarding condition',
+    );
     return _split(_normalize(template));
   }
 
@@ -9582,13 +10070,19 @@ class InspectionPhraseEngine {
   }
 
   List<String> _fireplacesGasFire(Map<String, String> answers) {
-    return _fireplacesType(
+    final phrases = _fireplacesType(
       answers,
       locationKey: '{GAS_FIRE_LOCATION}',
       conditionKey: '{GAS_FIRE_CONDITION}',
       locationToken: '{FAC_FP_GF_LOCATION}',
       conditionToken: '{FAC_FP_GF_CONDITION}',
     );
+    if (phrases.isEmpty) return phrases;
+    final notTested = _sub('{F_FIREPLACES_AND_CHIMNEYS}', '{GAS_FIRE_NOT_TESTED}');
+    if (notTested.isNotEmpty) {
+      return [...phrases, ..._split(_normalize(notTested))];
+    }
+    return phrases;
   }
 
   List<String> _fireplacesImitationSystem(Map<String, String> answers) {
@@ -12531,6 +13025,9 @@ class InspectionPhraseEngine {
   }
 
   List<String> _issuesRegulation(Map<String, String> answers) {
+    // Section I (Legal Issues) - approved bank imported in Phase 4 from the
+    // legacy tbl_issue_phrase/tbl_sub_issue_phrase tables (never ported by
+    // the original migration; see tool/phrase_audit/import_issue_risk_bank.py).
     final phrases = <String>[];
 
     final buildingRegulation = _labelsFor(
@@ -12542,16 +13039,26 @@ class InspectionPhraseEngine {
       ],
       answers,
       {
-        'cb_removed_wall': 'Removed wall',
-        'cb_replacement_roof_covering': 'Replacement roof covering',
-        'cb_conservatory': 'Conservatory',
-        'cb_other_638': 'Other',
+        // The approved template already supplies a fixed "the removed"
+        // prefix ("...confirm whether the removed {ITEMS} received..."),
+        // so this option must not repeat the word itself or it doubles
+        // ("the removed removed wall").
+        'cb_removed_wall': 'wall',
+        'cb_replacement_roof_covering': 'replacement roof covering',
+        'cb_conservatory': 'conservatory',
+        'cb_other_638': 'other',
       },
     );
     _addOther(answers, 'cb_other_638', 'et_other_332', buildingRegulation);
     if (buildingRegulation.isNotEmpty) {
-      phrases.add(
-          'Your legal adviser should confirm that the necessary building regulation approvals are in place for ${_toWords(buildingRegulation).toLowerCase()}.');
+      var template =
+          _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_BUILDING_REGULATION}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_splitResolved(template.replaceAll(
+          '{BUILDING_REGULATION}',
+          _toWords(buildingRegulation).toLowerCase(),
+        )));
+      }
     }
 
     final planningPermission = _labelsFor(
@@ -12563,16 +13070,22 @@ class InspectionPhraseEngine {
       ],
       answers,
       {
-        'cb_kitchen_extension': 'Kitchen extension',
-        'cb_rear_extension': 'Rear extension',
-        'cb_loft_conversion': 'Loft conversion',
-        'cb_other_459': 'Other',
+        'cb_kitchen_extension': 'kitchen extension',
+        'cb_rear_extension': 'rear extension',
+        'cb_loft_conversion': 'loft conversion',
+        'cb_other_459': 'other',
       },
     );
     _addOther(answers, 'cb_other_459', 'et_other_575', planningPermission);
     if (planningPermission.isNotEmpty) {
-      phrases.add(
-          'Planning permission should be verified for ${_toWords(planningPermission).toLowerCase()}.');
+      var template =
+          _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_PLANNING_PERMISSION}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_splitResolved(template.replaceAll(
+          '{PLANNING_PERMISSION}',
+          _toWords(planningPermission).toLowerCase(),
+        )));
+      }
     }
 
     final glazedSections = _labelsFor(
@@ -12585,51 +13098,65 @@ class InspectionPhraseEngine {
       ],
       answers,
       {
-        'cb_windows': 'Windows',
-        'cb_doors': 'Doors',
-        'cb_conservatory_glazed': 'Conservatory',
-        'cb_porch': 'Porch',
-        'cb_other_952': 'Other',
+        'cb_windows': 'windows',
+        'cb_doors': 'doors',
+        'cb_conservatory_glazed': 'conservatory',
+        'cb_porch': 'porch',
+        'cb_other_952': 'other',
       },
     );
     _addOther(answers, 'cb_other_952', 'et_other_154', glazedSections);
     if (glazedSections.isNotEmpty) {
-      phrases.add(
-          'Appropriate certification should be obtained for glazed sections including ${_toWords(glazedSections).toLowerCase()}.');
+      var template =
+          _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_GLAZED_SECTIONS}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_splitResolved(template.replaceAll(
+          '{GLAZED_SECTIONS}',
+          _toWords(glazedSections).toLowerCase(),
+        )));
+      }
     }
 
     if (_isChecked(answers['cb_new_build'])) {
-      phrases.add(
-          'The property includes new build elements and relevant statutory approvals should be checked.');
+      final template = _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_NEW_BUILD}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     if (_isChecked(answers['cb_converted_building'])) {
-      phrases.add(
-          'The property includes converted building elements and formal approvals should be confirmed.');
-      final status = (answers['actv_conversion_status'] ?? '').trim();
-      if (status.isNotEmpty) {
-        phrases.add('The conversion status has been recorded as $status.');
-      }
       final builtAs = (answers['actv_before_built_as'] ?? '').trim();
-      if (builtAs.isNotEmpty) {
-        phrases.add('The building was originally constructed as $builtAs.');
+      // The approved KNOWN/UNKNOWN templates already narrate the
+      // known-vs-unknown distinction in bank wording via which sub-code is
+      // selected; an extra ad-hoc "recorded as known/unknown" sentence
+      // would just restate the same fact outside the approved bank.
+      final subCode = builtAs.isNotEmpty
+          ? '{REGULATIONS_CONVERSION_STATUS_KNOW}'
+          : '{REGULATIONS_CONVERSION_STATUS_UNKNOW}';
+      var template = _sub('{ISSUE_REGULATIONS}', subCode);
+      if (template.isNotEmpty) {
+        template = template.replaceAll(
+          '{REG_CONV_STATUS_KNOWN_ORI_BUILT}',
+          builtAs.toLowerCase(),
+        );
+        phrases.addAll(_splitResolved(template));
       }
     }
 
     if (_isChecked(answers['cb_conservation'])) {
-      phrases.add(
-          'The property appears to be within a conservation area and this may affect future alterations.');
+      final template = _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_CONSERVATION}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     if (_isChecked(answers['cb_listed_building'])) {
-      phrases.add(
-          'The property appears to be listed and specialist legal advice is required before any material alterations.');
+      final template =
+          _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_LISTED_BUILDING}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     return phrases;
   }
 
   List<String> _issuesGuarantees(Map<String, String> answers) {
+    // Section I2 (Guarantees) - approved bank imported in Phase 4.
     final phrases = <String>[];
 
     final glazedSections = _labelsFor(
@@ -12651,170 +13178,225 @@ class InspectionPhraseEngine {
     );
     _addOther(answers, 'cb_other_471', 'et_other_433', glazedSections);
     if (glazedSections.isNotEmpty) {
-      phrases.add(
-          'Guarantees should be requested for glazed sections including ${_toWords(glazedSections).toLowerCase()}.');
+      var template = _sub('{ISSUE_GUARANTEES}', '{GUARANTEES_GLAZED_SECTION}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_splitResolved(template.replaceAll(
+          '{ISSUE_GLAZED_SECTION}',
+          _toWords(glazedSections).toLowerCase(),
+        )));
+      }
     }
 
     if (_isChecked(answers['cb_private_road'])) {
-      phrases.add(
-          'A transferable guarantee should be obtained for any damp-proof course treatment.');
+      final template = _sub('{ISSUE_GUARANTEES}', '{GUARANTEES_DPC_TREATMENT}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
     if (_isChecked(answers['cb_party_walls'])) {
-      phrases.add(
-          'Evidence and warranties should be requested for removed wall structural works.');
+      final template = _sub('{ISSUE_GUARANTEES}', '{GUARANTEES_REMOVED_WALL}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
     if (_isChecked(answers['cb_tenanted'])) {
-      phrases.add(
-          'Documentation should be obtained for relevant building works and associated guarantees.');
+      final template = _sub('{ISSUE_GUARANTEES}', '{GUARANTEES_BUILDING_WORK}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     return phrases;
   }
 
   List<String> _issuesOtherMatters(Map<String, String> answers) {
+    // Section I3 (Other Matters) - approved bank imported in Phase 4.
     final phrases = <String>[];
 
     if (_isChecked(answers['cb_freehold'])) {
-      phrases.add(
-          'The legal tenure is stated as freehold and should be confirmed.');
+      final template = _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_FREEHOLD}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
     if (_isChecked(answers['cb_leasehold'])) {
-      phrases.add(
-          'The legal tenure is stated as leasehold and should be confirmed.');
+      final template =
+          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_LEASEHOLD}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
     if (_isChecked(answers['cb_right_of_way'])) {
-      phrases.add('Rights of way affecting the property should be verified.');
+      final template =
+          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_RIGHT_OF_WAY}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     final sharedStacks = _labelsFor(
       ['cb_chimney_stack', 'cb_rainwater_goods', 'cb_other_471'],
       answers,
       {
-        'cb_chimney_stack': 'Chimney stack(s)',
-        'cb_rainwater_goods': 'Rainwater goods',
-        'cb_other_471': 'Other',
+        'cb_chimney_stack': 'chimney stack(s)',
+        'cb_rainwater_goods': 'rainwater goods',
+        'cb_other_471': 'other',
       },
     );
     _addOther(answers, 'cb_other_471', 'et_other_433', sharedStacks);
     if (sharedStacks.isNotEmpty) {
-      phrases.add(
-          'Shared service responsibilities should be clarified for ${_toWords(sharedStacks).toLowerCase()}.');
+      var template =
+          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_SHARED_STACKS_AND_RWG}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_splitResolved(template.replaceAll(
+          '{SHARED_STACKS_AND_RWG}',
+          _toWords(sharedStacks).toLowerCase(),
+        )));
+      }
     }
 
     if (_isChecked(answers['cb_private_road'])) {
-      final condition = (answers['actv_condition'] ?? '').trim();
-      if (condition.isNotEmpty) {
-        phrases.add(
-            'The access road appears to be private and is recorded in $condition condition; legal maintenance responsibility should be confirmed.');
-      } else {
-        phrases.add(
-            'The access road appears to be private and legal maintenance responsibility should be confirmed.');
+      final condition = (answers['actv_condition'] ?? '').trim().toLowerCase();
+      var template =
+          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_PRIVATE_ROAD}');
+      if (template.isNotEmpty) {
+        template = condition.isEmpty
+            ? template.replaceAll(' This is in {OM_PRIVATE_ROAD_CONDITION} condition.', '')
+            : template.replaceAll('{OM_PRIVATE_ROAD_CONDITION}', condition);
+        phrases.addAll(_splitResolved(template));
       }
     }
 
     if (_isChecked(answers['cb_party_walls'])) {
-      phrases.add('Party wall rights and responsibilities should be verified.');
+      final template =
+          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_PARTY_WALLS}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
     if (_isChecked(answers['cb_tenanted'])) {
-      phrases.add(
-          'Tenancy-related legal matters should be confirmed before commitment.');
+      final template = _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_TENANTED}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     return phrases;
   }
 
+  /// Maps a status dropdown value (none/noted/investigate family) to the
+  /// approved-bank sub-code suffix. Section J status fields all follow the
+  /// same three-tier legacy vocabulary.
+  String? _riskStatusSubCode(String status, {required String prefix}) {
+    final s = status.trim().toLowerCase();
+    if (s.isEmpty) return null;
+    if (s == 'none' || s == 'not noted' || s == 'no') return '${prefix}_NONE';
+    if (s.contains('investigate') || s == 'severe' || s == 'poor') {
+      return '${prefix}_INVESTIGATE';
+    }
+    return '${prefix}_NOTED';
+  }
+
   List<String> _risksRiskToBuilding(Map<String, String> answers) {
+    // Section J1 (Risk to Building) - approved bank imported in Phase 4.
     final phrases = <String>[];
 
     final movement = (answers['actv_movement_status'] ?? '').trim();
-    if (movement.isNotEmpty) {
-      phrases.add('The movement status is recorded as $movement.');
+    final movementSub =
+        _riskStatusSubCode(movement, prefix: '{BUILDING_MOVEMENTS_STATUS');
+    if (movementSub != null) {
+      final template = _sub('{RISK_TO_BUILDING}', '$movementSub}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     final subsidence = (answers['actv_subsidence_status'] ?? '').trim();
-    if (subsidence.isNotEmpty) {
-      phrases.add('The subsidence risk status is recorded as $subsidence.');
-    }
-
-    if (subsidence.isNotEmpty && subsidence.toLowerCase() != 'none') {
-      final locations = _labelsFor(
-        [
-          'cb_window_and_door_lintel',
-          'cb_extension_joints',
-          'cb_bay_windows',
-          'cb_other_619'
-        ],
-        answers,
-        {
-          'cb_window_and_door_lintel': 'Window and door lintel',
-          'cb_extension_joints': 'Extension joints',
-          'cb_bay_windows': 'Bay windows',
-          'cb_other_619': 'Other',
-        },
-      );
-      _addOther(answers, 'cb_other_619', 'et_other_604', locations);
-      if (locations.isNotEmpty) {
-        phrases.add(
-            'Potential subsidence indicators were noted around ${_toWords(locations).toLowerCase()}.');
+    final subsidenceSub =
+        _riskStatusSubCode(subsidence, prefix: '{BUILDING_SUBSIDENCE_STATUS');
+    if (subsidenceSub != null) {
+      var template = _sub('{RISK_TO_BUILDING}', '$subsidenceSub}');
+      if (template.isNotEmpty) {
+        final locations = _labelsFor(
+          [
+            'cb_window_and_door_lintel',
+            'cb_extension_joints',
+            'cb_bay_windows',
+            'cb_other_619'
+          ],
+          answers,
+          {
+            'cb_window_and_door_lintel': 'window and door lintel',
+            'cb_extension_joints': 'extension joints',
+            'cb_bay_windows': 'bay windows',
+            'cb_other_619': 'other',
+          },
+        );
+        _addOther(answers, 'cb_other_619', 'et_other_604', locations);
+        template = locations.isEmpty
+            ? template.replaceAll(' around {RTB_SUBSIDENCE_INVESTIGATE_LOCATION}', '')
+            : template.replaceAll(
+                '{RTB_SUBSIDENCE_INVESTIGATE_LOCATION}',
+                _toWords(locations).toLowerCase(),
+              );
+        phrases.addAll(_splitResolved(template));
       }
     }
 
     final dampness = (answers['actv_dampness_status'] ?? '').trim();
-    if (dampness.isNotEmpty) {
-      phrases.add('The dampness status is recorded as $dampness.');
+    final dampnessSub =
+        _riskStatusSubCode(dampness, prefix: '{BUILDING_DAMPNESS_STATUS');
+    if (dampnessSub != null) {
+      // Legacy dampness has 3 states: NONE / IMPLEMENT_ACTION / INVESTIGATE.
+      final key = dampnessSub == '{BUILDING_DAMPNESS_STATUS_NOTED'
+          ? '{BUILDING_DAMPNESS_STATUS_IMPLEMENT_ACTION}'
+          : '$dampnessSub}';
+      final template = _sub('{RISK_TO_BUILDING}', key);
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     final timber = (answers['actv_timber_sefect_status'] ?? '').trim();
-    if (timber.isNotEmpty) {
-      phrases.add('The timber defect status is recorded as $timber.');
+    final timberSub =
+        _riskStatusSubCode(timber, prefix: '{BUILDING_TIMBER_DEFECT_STATUS');
+    if (timberSub != null) {
+      // Legacy timber defect bank only has NONE / NOTED (no INVESTIGATE tier).
+      final key = timberSub == '{BUILDING_TIMBER_DEFECT_STATUS_INVESTIGATE'
+          ? '{BUILDING_TIMBER_DEFECT_STATUS_NOTED}'
+          : '$timberSub}';
+      final template = _sub('{RISK_TO_BUILDING}', key);
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     if (_isChecked(answers['cb_near_by_tree'])) {
-      phrases.add(
-          'Nearby trees were noted and may influence the building over time depending on species, distance and subsoil.');
+      final template = _sub('{RISK_TO_BUILDING}', '{BUILDING_NEAR_BY_TREES}');
+      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
     }
 
     return phrases;
   }
 
   List<String> _risksOther(Map<String, String> answers) {
-    final phrases = <String>[];
+    // Section J3 (Risk to Other) - approved bank imported in Phase 4.
     if (_isChecked(answers['cb_not_applicable'])) {
-      phrases.add('No additional risk items were identified in this section.');
-      return phrases;
+      final template = _sub('{RISK_TO_OTHER}', '{OTHER_NO_APPLICABLE}');
+      return template.isEmpty ? const [] : _splitResolved(template);
     }
 
-    final proximity = _labelsFor(
-      [
-        'cb_airport',
-        'cb_train_station',
-        'cb_train_line',
-        'cb_motorway',
-        'cb_other_741'
-      ],
-      answers,
-      {
-        'cb_airport': 'Airport',
-        'cb_train_station': 'Train Station',
-        'cb_train_line': 'Train Line',
-        'cb_motorway': 'Motorway',
-        'cb_other_741': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_741', 'et_other_775', proximity);
-    if (proximity.isNotEmpty) {
-      phrases.add(
-          'The property is located close to ${_toWords(proximity).toLowerCase()}, and associated operation may affect the enjoyment of the property, its saleability and value.');
+    const proximitySubCodes = <String, String>{
+      'cb_airport': '{OTHER_PROXIMITY_AIRPORT}',
+      'cb_train_station': '{OTHER_PROXIMITY_TRAIN_STATION}',
+      'cb_train_line': '{OTHER_PROXIMITY_TRAIN_LINE}',
+      'cb_motorway': '{OTHER_PROXIMITY_MOTORWAY}',
+    };
+    final phrases = <String>[];
+    proximitySubCodes.forEach((checkbox, subCode) {
+      if (_isChecked(answers[checkbox])) {
+        final template = _sub('{RISK_TO_OTHER}', subCode);
+        if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
+      }
+    });
+    if (_isChecked(answers['cb_other_741'])) {
+      final other = (answers['et_other_775'] ?? '').trim();
+      if (other.isNotEmpty) {
+        var template = _sub('{RISK_TO_OTHER}', '{OTHER_PROXIMITY_OTHER}');
+        if (template.isNotEmpty) {
+          phrases.addAll(_splitResolved(
+            template.replaceAll('{OTHER_NAME}', other.toLowerCase()),
+          ));
+        }
+      }
     }
 
     return phrases;
   }
 
   List<String> _risksRepairOrImprove(Map<String, String> answers) {
-    if (_isChecked(answers['cb_repair_or_improve'])) {
-      return const ['Repair or improve the property.'];
-    }
-    return const [];
+    if (!_isChecked(answers['cb_repair_or_improve'])) return const [];
+    final template = _sub('{RISK_TO_OTHER}', '{OTHER_REPAIR_IMPROVE}');
+    if (template.isEmpty) return const ['Repair or improve the property.'];
+    return _splitResolved(template);
   }
 
   static bool _isChecked(String? value) {
@@ -12873,6 +13455,16 @@ class InspectionPhraseEngine {
 
   static String _cleanLower(String? value) {
     return (value ?? '').trim().toLowerCase();
+  }
+
+  /// Capitalises the first letter of a value that will start a sentence
+  /// (e.g. a checked-item list substituted as the sentence subject). Most
+  /// substitution values in this engine are deliberately lowercased for
+  /// mid-sentence use; this is only for the minority of templates where the
+  /// substituted value is itself the first word of the sentence.
+  static String _capitalizeFirst(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1);
   }
 
   static String _chimneyPhraseCode(bool isMulti) {
@@ -12964,17 +13556,22 @@ class InspectionPhraseEngine {
           (answers['android_material_design_spinner6'] ?? '').trim();
       final totalFlats =
           (answers['android_material_design_spinner9'] ?? '').trim();
+      // All five details are required to complete this sentence; a literal
+      // "..." placeholder for any missing one is not acceptable in a
+      // finalised client report, so wait until every field is answered.
+      if (bedrooms.isEmpty ||
+          flatStyle.isEmpty ||
+          floorLocation.isEmpty ||
+          noOfStorey.isEmpty ||
+          totalFlats.isEmpty) {
+        return const [];
+      }
       final resolved = _normalize(template)
-          .replaceAll(
-              '{FLAT_NO_OF_BEDROOMS}', bedrooms.isNotEmpty ? bedrooms : '...')
-          .replaceAll('{FLAT_TYPE}',
-              flatStyle.isNotEmpty ? flatStyle.toLowerCase() : '...')
-          .replaceAll('{FLAT_FLOOR_LOCATION}',
-              floorLocation.isNotEmpty ? floorLocation.toLowerCase() : '...')
-          .replaceAll('{FLAT_NO_OF_STOREY}',
-              noOfStorey.isNotEmpty ? noOfStorey.toLowerCase() : '...')
-          .replaceAll('{FLAT_TOTAL_FLATS}',
-              totalFlats.isNotEmpty ? totalFlats.toLowerCase() : '...');
+          .replaceAll('{FLAT_NO_OF_BEDROOMS}', bedrooms)
+          .replaceAll('{FLAT_TYPE}', flatStyle.toLowerCase())
+          .replaceAll('{FLAT_FLOOR_LOCATION}', floorLocation.toLowerCase())
+          .replaceAll('{FLAT_NO_OF_STOREY}', noOfStorey.toLowerCase())
+          .replaceAll('{FLAT_TOTAL_FLATS}', totalFlats.toLowerCase());
       return _split(resolved);
     }
 
@@ -12982,12 +13579,16 @@ class InspectionPhraseEngine {
     if (template.isEmpty) return const [];
     final subType = (answers['android_material_design_spinner3'] ?? '').trim();
     final bedrooms = (answers['android_material_design_spinner4'] ?? '').trim();
-    final resolved = _normalize(template)
-        .replaceAll('{HOUSE_SUB_TYPE}',
-            subType.isNotEmpty ? subType.toLowerCase() : '...')
+    if (subType.isEmpty || bedrooms.isEmpty) return const [];
+    var resolved = _normalize(template)
+        .replaceAll('{HOUSE_SUB_TYPE}', subType.toLowerCase())
         .replaceAll('{HOUSE_TYPE}', type.toLowerCase())
-        .replaceAll(
-            '{HOUSE_NO_OF_BEDROOMS}', bedrooms.isNotEmpty ? bedrooms : '...');
+        .replaceAll('{HOUSE_NO_OF_BEDROOMS}', bedrooms);
+    // The template's trailing "bedrooms" is fixed plural; singularise it
+    // when the count is 1 ("1 bedrooms" -> "1 bedroom").
+    if (bedrooms.trim() == '1') {
+      resolved = resolved.replaceFirst('1 bedrooms', '1 bedroom');
+    }
     return _split(resolved);
   }
 
@@ -13005,7 +13606,17 @@ class InspectionPhraseEngine {
       items.add(other.isNotEmpty ? other.toLowerCase() : 'other');
     }
     if (items.isEmpty) return const [];
-    return ['The property is of ${_toWords(items)} construction.'];
+    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_TYPE_AREA}
+    final template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_TYPE_AREA}');
+    if (template.isEmpty) {
+      return [
+        'The property is believed to be built using ${_toWords(items)} '
+            'construction.',
+      ];
+    }
+    return _split(_normalize(
+      template.replaceAll('{CONSTRUCTION_TYPE}', _toWords(items)),
+    ));
   }
 
   List<String> _propertyBuiltYear(Map<String, String> answers) {
@@ -13053,19 +13664,59 @@ class InspectionPhraseEngine {
       final other = (answers['etCoveredTypeOther'] ?? '').trim();
       coverType.add(other.isNotEmpty ? other.toLowerCase() : 'other');
     }
-    if (types.isEmpty && roofMaterial.isEmpty && coverType.isEmpty)
+    if (types.isEmpty && roofMaterial.isEmpty && coverType.isEmpty) {
       return const [];
-    final phrases = <String>[];
-    if (types.isNotEmpty) {
-      phrases.add('Roof type: ${_toWords(types)}.');
     }
-    if (roofMaterial.isNotEmpty) {
-      phrases.add('Roof material: ${_toWords(roofMaterial)}.');
+    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_ROOF_AREA}. Emit only
+    // when the sentence can be completed - partial data would otherwise
+    // produce fragments like "covered in ." (client-reported defect class).
+    if (types.isEmpty || (roofMaterial.isEmpty && coverType.isEmpty)) {
+      return const [];
     }
-    if (coverType.isNotEmpty) {
-      phrases.add('Cover type: ${_toWords(coverType)}.');
+    if (types.length > 1 || roofMaterial.length > 1 || coverType.length > 1) {
+      final forms = types.length == 1
+          ? 'a ${types.single} roof form'
+          : 'a combination of ${_toWords(types)} roof forms';
+      final hasCoverings = roofMaterial.isNotEmpty;
+      final hasFinishes = coverType.isNotEmpty;
+      final key = hasCoverings && hasFinishes
+          ? '{D_CONSTRUCTION}::{CONSTRUCTION_ROOF_COMPOSITE}'
+          : hasCoverings
+              ? '{D_CONSTRUCTION}::{CONSTRUCTION_ROOF_COMPOSITE_COVERING}'
+              : '{D_CONSTRUCTION}::{CONSTRUCTION_ROOF_COMPOSITE_FINISH}';
+      final fallback = hasCoverings && hasFinishes
+          ? 'The main building has {ROOF_FORMS}. The roof coverings comprise '
+              '{ROOF_COVERINGS}, finished in {ROOF_FINISHES}.'
+          : hasCoverings
+              ? 'The main building has {ROOF_FORMS}. The roof coverings '
+                  'comprise {ROOF_COVERINGS}.'
+              : 'The main building has {ROOF_FORMS}. The roof coverings are '
+                  'formed in {ROOF_FINISHES}.';
+      var composite = _phraseTexts[key] ?? fallback;
+      composite = composite
+          .replaceAll('{ROOF_FORMS}', forms)
+          .replaceAll('{ROOF_COVERINGS}', _toWords(roofMaterial))
+          .replaceAll('{ROOF_FINISHES}', _toWords(coverType));
+      return _splitResolved(composite);
     }
-    return phrases;
+    var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_ROOF_AREA}');
+    if (template.isEmpty) {
+      template = 'The main roof is of {CONTSTRUCTION_ROOF_TYPE} construction '
+          'formed with {CONTSTRUCTION_ROOF_BUILT_WITH} structural members. '
+          'The roof covering is formed in {CONSTRUCTION_ROOF_COVERED_WITH} '
+          '{CONTSTRUCTION_ROOF_MATERIAL}.';
+    }
+    // This screen does not capture the roof structure build-up; drop that
+    // clause rather than leaving an empty slot (RICS L2 wording).
+    template = template.replaceAll(
+      ' formed with {CONTSTRUCTION_ROOF_BUILT_WITH} structural members',
+      '',
+    );
+    template = template
+        .replaceAll('{CONTSTRUCTION_ROOF_TYPE}', _toWords(types))
+        .replaceAll('{CONSTRUCTION_ROOF_COVERED_WITH}', _toWords(roofMaterial))
+        .replaceAll('{CONTSTRUCTION_ROOF_MATERIAL}', _toWords(coverType));
+    return _splitResolved(template);
   }
 
   List<String> _propertyGroundArea(Map<String, String> answers) {
@@ -13076,10 +13727,19 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['ch4'])) items.add('conservation');
     if (_isChecked(answers['ch5'])) {
       final other = (answers['etCoveredWithOther'] ?? '').trim();
-      items.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) items.add(other.toLowerCase());
     }
     if (items.isEmpty) return const [];
-    return ['The property is in a ${_toWords(items)} area.'];
+    final key = items.length == 1
+        ? '{D_GROUND_AREA_SINGLE}'
+        : '{D_GROUND_AREA_MIXED}';
+    final fallback = items.length == 1
+        ? 'The property is situated in a predominantly {AREA_TYPE} area.'
+        : 'The surrounding area has a mixed {AREA_TYPE} character.';
+    final template = _phraseTexts[key] ?? fallback;
+    return _splitResolved(
+      template.replaceAll('{AREA_TYPE}', _toWords(items)),
+    );
   }
 
   List<String> _propertyExtended(Map<String, String> answers) {
@@ -13101,21 +13761,24 @@ class InspectionPhraseEngine {
         ? _toWords(locations)
         : (answers['android_material_design_spinner3'] ?? '').trim();
     final year = (answers['textView3'] ?? '').trim();
+    // Both details are required to complete this sentence; a literal "..."
+    // placeholder is not acceptable in a finalised client report, so wait
+    // until the surveyor has answered both.
     if (status == 'known') {
+      if (location.isEmpty || year.isEmpty) return const [];
       final template = _phraseTexts['{D_PRO_EXTENDED_STATUS_KNOWN}'] ?? '';
       if (template.isEmpty) return const [];
       final resolved = _normalize(template)
-          .replaceAll('{PRO_EXTENDED_LOCATION}',
-              location.isNotEmpty ? location.toLowerCase() : '...')
-          .replaceAll('{PRO_EXTENDED_DATE}', year.isNotEmpty ? year : '...');
+          .replaceAll('{PRO_EXTENDED_LOCATION}', location.toLowerCase())
+          .replaceAll('{PRO_EXTENDED_DATE}', year);
       return _split(resolved);
     }
     if (status == 'unknown') {
+      if (location.isEmpty) return const [];
       final template = _phraseTexts['{D_PRO_EXTENDED_STATUS_UNKNOWN}'] ?? '';
       if (template.isEmpty) return const [];
-      final resolved = _normalize(template).replaceAll(
-          '{PRO_EXTENDED_LOCATION}',
-          location.isNotEmpty ? location.toLowerCase() : '...');
+      final resolved = _normalize(template)
+          .replaceAll('{PRO_EXTENDED_LOCATION}', location.toLowerCase());
       return _split(resolved);
     }
     return const [];
@@ -13168,30 +13831,67 @@ class InspectionPhraseEngine {
         claddingArea.isEmpty) {
       return const [];
     }
+    // Approved bank: {D_CONSTRUCTION} external wall sentences. This screen
+    // (id `activity_extended_wall`, tree title "External Wall") is the
+    // Construction group's External Walls / Finishes / Cladding element.
     final phrases = <String>[];
     if (wallTypes.isNotEmpty) {
-      phrases.add('Extension walls: ${_toWords(wallTypes)}.');
-    }
-    if (finishes.isNotEmpty ||
-        renderedArea.isNotEmpty ||
-        renderedQuality.isNotEmpty) {
-      final header = renderedArea.isNotEmpty
-          ? 'Rendered ($renderedArea${renderedQuality.isNotEmpty ? ', $renderedQuality' : ''})'
-          : (renderedQuality.isNotEmpty
-              ? 'Rendered quality: $renderedQuality'
-              : 'Finishes');
-      if (finishes.isNotEmpty) {
-        phrases.add('$header: ${_toWords(finishes)}.');
-      } else {
-        phrases.add('$header.');
+      var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_EXT_WALL_AREA}');
+      if (template.isEmpty) {
+        template = 'The main external walls are built of '
+            '{CONSTRUCTION_EXT_WALL_TYPE} construction.';
       }
+      phrases.addAll(_splitResolved(
+        template.replaceAll(
+          '{CONSTRUCTION_EXT_WALL_TYPE}',
+          _toWords(wallTypes),
+        ),
+      ));
+    }
+    if (finishes.isNotEmpty || renderedArea.isNotEmpty) {
+      var template =
+          _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_EXT_WALL_FINISHES}');
+      if (template.isEmpty) {
+        template = 'Externally, the main walls are '
+            '{CONSTRUCTION_EXT_WALL_RENDERED_AREA} rendered '
+            '{CONSTRUCTION_EXT_WALL_RENDERED_TYPE} with '
+            '{CONSTRUCTION_EXT_WALL_RENDERED_FINISHES} finishes.';
+      }
+      if (finishes.isEmpty) {
+        template = template.replaceAll(
+          'with {CONSTRUCTION_EXT_WALL_RENDERED_FINISHES} finishes',
+          '',
+        );
+      }
+      phrases.addAll(_splitResolved(
+        template
+            .replaceAll('{CONSTRUCTION_EXT_WALL_RENDERED_AREA}', renderedArea)
+            .replaceAll(
+              '{CONSTRUCTION_EXT_WALL_RENDERED_TYPE}',
+              renderedQuality,
+            )
+            .replaceAll(
+              '{CONSTRUCTION_EXT_WALL_RENDERED_FINISHES}',
+              _toWords(finishes),
+            ),
+      ));
     }
     if (cladding.isNotEmpty) {
-      final header =
-          claddingArea.isNotEmpty ? 'Cladding ($claddingArea)' : 'Cladding';
-      phrases.add('$header: ${_toWords(cladding)}.');
-    } else if (claddingArea.isNotEmpty) {
-      phrases.add('Cladding area: $claddingArea.');
+      var template =
+          _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_EXT_WALL_CLADDING}');
+      if (template.isEmpty) {
+        template = 'The main walls are {CONSTRUCTION_EXT_WALL_CLADDING_AREA} '
+            'cladded with {CONSTRUCTION_EXT_WALL_CLADDING_FINISHES} '
+            'finishing.';
+      }
+      phrases.addAll(_splitResolved(
+        template
+            .replaceAll('{CONSTRUCTION_EXT_WALL_CLADDING_AREA}', claddingArea)
+            .replaceAll(
+              '{CONSTRUCTION_EXT_WALL_CLADDING_FINISHES}',
+              _toWords(cladding),
+            ),
+      ));
     }
     return phrases;
   }
@@ -13213,7 +13913,12 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['ch5'])) types.add('pay and display');
     if (_isChecked(answers['ch6'])) types.add('residential parking');
     if (types.isEmpty) return const ['The property comes with parking.'];
-    return ['The property comes with ${_toWords(types)} parking.'];
+    // "Residential parking" already ends in the word this sentence
+    // appends as a suffix; skip the suffix when the last selected type
+    // already supplies it, to avoid "residential parking parking".
+    final wordsText = _toWords(types);
+    final suffix = wordsText.toLowerCase().endsWith('parking') ? '' : ' parking';
+    return ['The property comes with $wordsText$suffix.'];
   }
 
   List<String> _sectionDGarden(Map<String, String> answers, String gardenName) {
@@ -13245,17 +13950,56 @@ class InspectionPhraseEngine {
       }
     }
     if (surfaceTypes.isEmpty && !noBoundary && fencing.isEmpty) return const [];
-    final phrases = <String>[];
-    final label = '${gardenName[0].toUpperCase()}${gardenName.substring(1)}';
-    if (surfaceTypes.isNotEmpty) {
-      phrases.add('$label garden: ${_toWords(surfaceTypes)}.');
-    }
+    return _approvedGardenPhrases(
+      gardenName,
+      _toWords(surfaceTypes),
+      noBoundary: noBoundary,
+      fencingText: _toWords(fencing),
+    );
+  }
+
+  /// Builds the approved-bank garden narrative for front/rear/communal
+  /// gardens: {D_GROUND}::{GROUND_X_GARDEN} with the fence sentence from
+  /// {GROUND_GARDEN}::{GARDEN_BOUNDRY_FENCES} / {GARDEN_NO_BOUNDRY_FENCES}.
+  List<String> _approvedGardenPhrases(
+    String gardenName,
+    String surfaceText, {
+    required bool noBoundary,
+    required String fencingText,
+  }) {
+    final area = gardenName.toLowerCase();
+    final subCode = '{GROUND_${area.toUpperCase()}_GARDEN}';
+    final typeToken = '{GROUND_${area.toUpperCase()}_GARDEN_TYPE}';
+
+    String fenceSentence = '';
     if (noBoundary) {
-      phrases.add('No boundary fencing.');
-    } else if (fencing.isNotEmpty) {
-      phrases.add('Boundary fencing: ${_toWords(fencing)}.');
+      fenceSentence = _sub('{GROUND_GARDEN}', '{GARDEN_NO_BOUNDRY_FENCES}');
+      if (fenceSentence.isEmpty) {
+        fenceSentence = 'There are no boundary fences installed.';
+      }
+    } else if (fencingText.isNotEmpty) {
+      var fenceTemplate = _sub('{GROUND_GARDEN}', '{GARDEN_BOUNDRY_FENCES}');
+      if (fenceTemplate.isEmpty) {
+        fenceTemplate =
+            'The boundary fences are formed in {GARDEN_BOUNDRY_FENCES}.';
+      }
+      fenceSentence =
+          fenceTemplate.replaceAll('{GARDEN_BOUNDRY_FENCES}', fencingText);
     }
-    return phrases;
+
+    if (surfaceText.isEmpty) {
+      return fenceSentence.isEmpty ? const [] : _splitResolved(fenceSentence);
+    }
+
+    var template = _sub('{D_GROUND}', subCode);
+    if (template.isEmpty) {
+      template = 'The $area garden of the property is $typeToken. '
+          '{GARDEN_BOUNDRY_FENCES}';
+    }
+    template = template
+        .replaceAll(typeToken, surfaceText)
+        .replaceAll('{GARDEN_BOUNDRY_FENCES}', fenceSentence);
+    return _splitResolved(template);
   }
 
   List<String> _propertyConverted(Map<String, String> answers) {
@@ -13268,25 +14012,26 @@ class InspectionPhraseEngine {
     final proType = (answers['android_material_design_spinner2'] ?? '').trim();
     final subType = (answers['android_material_design_spinner3'] ?? '').trim();
     final year = (answers['textView3'] ?? '').trim();
+    // All details are required to complete these sentences; a literal "..."
+    // placeholder is not acceptable in a finalised client report, so wait
+    // until the surveyor has answered them.
     if (status == 'known') {
+      if (subType.isEmpty || proType.isEmpty || year.isEmpty) return const [];
       final template = _phraseTexts['{D_PRO_CONVERSION_STATUS_KNOWN}'] ?? '';
       if (template.isEmpty) return const [];
       final resolved = _normalize(template)
-          .replaceAll('{PRO_CONVERSION_PRO_SUB_TYPE}',
-              subType.isNotEmpty ? subType.toLowerCase() : '...')
-          .replaceAll('{PRO_CONVERSION_PRO_TYPE}',
-              proType.isNotEmpty ? proType.toLowerCase() : '...')
-          .replaceAll('{PRO_CONVERSION_DATE}', year.isNotEmpty ? year : '...');
+          .replaceAll('{PRO_CONVERSION_PRO_SUB_TYPE}', subType.toLowerCase())
+          .replaceAll('{PRO_CONVERSION_PRO_TYPE}', proType.toLowerCase())
+          .replaceAll('{PRO_CONVERSION_DATE}', year);
       return _split(resolved);
     }
     if (status == 'unknown') {
+      if (subType.isEmpty || proType.isEmpty) return const [];
       final template = _phraseTexts['{D_PRO_CONVERSION_STATUS_UNKNOWN}'] ?? '';
       if (template.isEmpty) return const [];
       final resolved = _normalize(template)
-          .replaceAll('{PRO_CONVERSION_PRO_SUB_TYPE}',
-              subType.isNotEmpty ? subType.toLowerCase() : '...')
-          .replaceAll('{PRO_CONVERSION_PRO_TYPE}',
-              proType.isNotEmpty ? proType.toLowerCase() : '...');
+          .replaceAll('{PRO_CONVERSION_PRO_SUB_TYPE}', subType.toLowerCase())
+          .replaceAll('{PRO_CONVERSION_PRO_TYPE}', proType.toLowerCase());
       return _split(resolved);
     }
     return const [];
@@ -13314,14 +14059,18 @@ class InspectionPhraseEngine {
         pickValue('android_material_design_spinner3', 'etAccessVia');
     final accessElevation =
         pickValue('android_material_design_spinner4', 'etAccesElevation');
+    // All four details are required to complete this sentence; a literal
+    // "..." placeholder is not acceptable in a finalised client report, so
+    // wait until the surveyor has answered them all.
+    if (noOfStorey.isEmpty || accessVia.isEmpty || accessElevation.isEmpty) {
+      return const [];
+    }
     final resolved = _normalize(template)
         .replaceAll('{FLAT_INFO_PRO_ON_FLOOR}', onFloor.toLowerCase())
-        .replaceAll('{FLAT_INFO_PRO_NO_OF_STOREY}',
-            noOfStorey.isNotEmpty ? noOfStorey : '...')
-        .replaceAll('{FLAT_INFO_PRO_ACCESS_VIA}',
-            accessVia.isNotEmpty ? accessVia.toLowerCase() : '...')
-        .replaceAll('{FLAT_INFO_PRO_ACCESS_ELEVATION}',
-            accessElevation.isNotEmpty ? accessElevation.toLowerCase() : '...');
+        .replaceAll('{FLAT_INFO_PRO_NO_OF_STOREY}', noOfStorey)
+        .replaceAll('{FLAT_INFO_PRO_ACCESS_VIA}', accessVia.toLowerCase())
+        .replaceAll(
+            '{FLAT_INFO_PRO_ACCESS_ELEVATION}', accessElevation.toLowerCase());
     return _split(resolved);
   }
 
@@ -13338,8 +14087,20 @@ class InspectionPhraseEngine {
     if (items.isEmpty) return const [];
     final buildType =
         (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
-    final prefix = buildType.contains('mixture') ? 'a mixture of' : 'mainly of';
-    return ['Floors: $prefix ${_toWords(items)} construction.'];
+    final prefix =
+        buildType.contains('mixture') ? 'of a mixture of' : 'mainly of';
+    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_FLOOR_AREA}
+    var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_FLOOR_AREA}');
+    if (template.isEmpty) {
+      template = 'The floors of the property are built '
+          '{CONSTRUCTION_FLOOR_BUILT_TYPE} {CONSTRUCTION_FLOOR_BUILT_WITH} '
+          'floor construction.';
+    }
+    return _splitResolved(
+      template
+          .replaceAll('{CONSTRUCTION_FLOOR_BUILT_TYPE}', prefix)
+          .replaceAll('{CONSTRUCTION_FLOOR_BUILT_WITH}', _toWords(items)),
+    );
   }
 
   List<String> _constructionWindow(Map<String, String> answers) {
@@ -13360,18 +14121,23 @@ class InspectionPhraseEngine {
       final other = (answers['etWindowMaterialOther'] ?? '').trim();
       materials.add(other.isNotEmpty ? other : 'other');
     }
-    if (glazing.isEmpty && materials.isEmpty) return const [];
-    final phrases = <String>[];
+    if (glazing.isEmpty) return const [];
     final mixType =
         (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
     final prefix = mixType.contains('mixture') ? 'a mixture of' : 'mainly of';
-    if (glazing.isNotEmpty) {
-      phrases.add('Windows: $prefix ${_toWords(glazing)} glazing.');
+    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_WINDOWS_AREA}
+    var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_WINDOWS_AREA}');
+    if (template.isEmpty) {
+      template = 'The windows are {CONSTUCTION_GLAZED_WITH} '
+          '{CONSTRUCTION_GLAZED_TYPE} glazed {CONSTRUCTION_WINDOW_MATERIAL} '
+          'units.';
     }
-    if (materials.isNotEmpty) {
-      phrases.add('Window material: ${_toWords(materials)}.');
-    }
-    return phrases;
+    return _splitResolved(
+      template
+          .replaceAll('{CONSTUCTION_GLAZED_WITH}', prefix)
+          .replaceAll('{CONSTRUCTION_GLAZED_TYPE}', _toWords(glazing))
+          .replaceAll('{CONSTRUCTION_WINDOW_MATERIAL}', _toWords(materials)),
+    );
   }
 
   List<String> _gatedCommunity(Map<String, String> answers) {
@@ -13385,31 +14151,72 @@ class InspectionPhraseEngine {
   }
 
   List<String> _energyEfficiency(Map<String, String> answers) {
+    // Approved bank: {D_ENERGY} embeds both efficiency and environmental
+    // impact ratings in one paragraph; this screen only captures the
+    // efficiency half, so substitute just that pair and leave the impact
+    // placeholders for _energyEnvironmentalImpact() to fill on its screen.
     final current = (answers['android_material_design_spinner'] ?? '').trim();
     final potential =
         (answers['android_material_design_spinner2'] ?? '').trim();
-    if (current.isEmpty && potential.isEmpty) return const [];
-    final parts = <String>[];
-    if (current.isNotEmpty) parts.add('Current $current');
-    if (potential.isNotEmpty) parts.add('Potential $potential');
-    return ['Energy Efficiency: ${parts.join(', ')}.'];
+    // Both values are required to complete this sentence; a literal "..."
+    // placeholder is not acceptable in a finalised client report, so wait
+    // until the surveyor has answered both.
+    if (current.isEmpty || potential.isEmpty) return const [];
+    var template = _phraseTexts['{D_ENERGY}'] ?? '';
+    if (template.isEmpty) {
+      return ['Energy Efficiency: Current $current, Potential $potential.'];
+    }
+    template = template
+        .replaceAll('{ENERGY_EFFICIENCY_CURRENT_VALUE}', current)
+        .replaceAll('{ENERGY_EFFICIENCY_POTENTIAL_VALUE}', potential)
+        // Environmental impact half is answered on its own screen; keep
+        // this screen's output scoped to the energy-efficiency line only.
+        .replaceAll(
+          RegExp(r'<strong>Environmental Impact:<\/strong>[\s\S]*'),
+          '',
+        );
+    return _splitResolved(template);
   }
 
   List<String> _energyEnvironmentalImpact(Map<String, String> answers) {
+    // Approved bank: {D_ENERGY} - environmental-impact half (see
+    // _energyEfficiency above for the paired efficiency half).
     final current = (answers['android_material_design_spinner'] ?? '').trim();
     final potential =
         (answers['android_material_design_spinner2'] ?? '').trim();
-    if (current.isEmpty && potential.isEmpty) return const [];
-    final parts = <String>[];
-    if (current.isNotEmpty) parts.add('Current $current');
-    if (potential.isNotEmpty) parts.add('Potential $potential');
-    return ['Environmental Impact: ${parts.join(', ')}.'];
+    // Both values are required to complete this sentence; a literal "..."
+    // placeholder is not acceptable in a finalised client report, so wait
+    // until the surveyor has answered both.
+    if (current.isEmpty || potential.isEmpty) return const [];
+    var template = _phraseTexts['{D_ENERGY}'] ?? '';
+    if (template.isEmpty) {
+      return [
+        'Environmental Impact: Current $current, Potential $potential.',
+      ];
+    }
+    final match =
+        RegExp(r'<strong>Environmental Impact:<\/strong>[^<]*').firstMatch(
+      template,
+    );
+    if (match == null) return const [];
+    template = match
+        .group(0)!
+        .replaceAll('{ENVIRONMENT_IMPACT_CURRENT_VALUE}', current)
+        .replaceAll('{ENVIRONMENT_IMPACT_POTENTIAL_VALUE}', potential);
+    return _splitResolved(template);
   }
 
   List<String> _estateLocation(Map<String, String> answers) {
     final location = (answers['android_material_design_spinner'] ?? '').trim();
     if (location.isEmpty) return const [];
-    return ['The property is on a ${location.toLowerCase()} estate.'];
+    // Approved bank: {D_GROUND}::{GROUND_ESTATE_LOCATION}
+    var template = _sub('{D_GROUND}', '{GROUND_ESTATE_LOCATION}');
+    if (template.isEmpty) {
+      return ['The property is on a ${location.toLowerCase()} estate.'];
+    }
+    return _splitResolved(
+      template.replaceAll('{ESTATE_LOCATION}', location.toLowerCase()),
+    );
   }
 
   List<String> _propertyLocationDensity(Map<String, String> answers) {
@@ -13422,20 +14229,52 @@ class InspectionPhraseEngine {
     if (wellNewly.isNotEmpty &&
         normalizedArea != 'yes' &&
         normalizedArea != 'no') {
-      phrases.add(
-        'The property is located in a ${normalizedArea} established area.',
-      );
-    }
-    if (from.isNotEmpty && to.isNotEmpty) {
-      phrases.add(
-        'The surrounding property density ranges from ${from.toLowerCase()} to ${to.toLowerCase()}.',
-      );
-      return phrases;
-    }
-    final density = from.isNotEmpty ? from : to;
-    if (density.isNotEmpty) {
-      phrases
-          .add('The surrounding property density is ${density.toLowerCase()}.');
+      final density = from.isNotEmpty
+          ? from
+          : (to.isNotEmpty ? to : '');
+      // Approved bank: {D_LOCATION}::{LOCATION_AREA}
+      var template = _sub('{D_LOCATION}', '{LOCATION_AREA}');
+      if (template.isEmpty) {
+        phrases.add(
+          'The property is located in a $normalizedArea established area.',
+        );
+      } else {
+        if (density.isEmpty) {
+          // RICS L2 wording: strip the optional density clause when neither
+          // density value is captured, leaving the bare area sentence.
+          template = template.replaceAll(
+            ', and the surrounding development is considered '
+                '{LOCATION_SURROUNDING_PROPERTY_DENSITY_FROM} to '
+                '{LOCATION_SURROUNDING_PROPERTY_DENSITY_TO} density',
+            '',
+          );
+        } else if (from.isNotEmpty && to.isNotEmpty) {
+          if (from.toLowerCase() == to.toLowerCase()) {
+            final equalDensity = _phraseTexts[
+                    '{D_LOCATION}::{LOCATION_EQUAL_DENSITY}'] ??
+                'The property is located in an established '
+                    '{LOCATION_DENSITY}-density area.';
+            phrases.addAll(_splitResolved(equalDensity.replaceAll(
+                '{LOCATION_DENSITY}', from.toLowerCase())));
+            return phrases;
+          }
+          template = template
+              .replaceAll('{LOCATION_SURROUNDING_PROPERTY_DENSITY_FROM}',
+                  from.toLowerCase())
+              .replaceAll(
+                  '{LOCATION_SURROUNDING_PROPERTY_DENSITY_TO}', to.toLowerCase());
+        } else {
+          template = template
+              .replaceAll(
+                  ' to {LOCATION_SURROUNDING_PROPERTY_DENSITY_TO}', '')
+              .replaceAll(
+                  '{LOCATION_SURROUNDING_PROPERTY_DENSITY_FROM}',
+                  density.toLowerCase());
+        }
+        phrases.addAll(_splitResolved(
+          template.replaceAll('{LOCATION_ESTABLISHED_AREA_TYPE}', normalizedArea),
+        ));
+      }
     }
     return phrases;
   }
@@ -13481,7 +14320,7 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['ch3'])) floodSources.add('a canal');
     if (_isChecked(answers['ch4'])) {
       final other = (answers['etFloodingOther'] ?? '').trim();
-      floodSources.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) floodSources.add(other.toLowerCase());
     }
     if (floodSources.isNotEmpty) {
       final template = _phraseTexts['{D_LOCAL_ENVIRONMENT_FLOODING}'] ?? '';
@@ -13500,7 +14339,7 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['ch6'])) emfSources.add('pylons');
     if (_isChecked(answers['ch7'])) {
       final other = (answers['etEMFOther'] ?? '').trim();
-      emfSources.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) emfSources.add(other.toLowerCase());
     }
     if (emfSources.isNotEmpty) {
       final template = _phraseTexts['{D_LOCAL_ENVIRONMENT_EMF}'] ?? '';
@@ -13513,11 +14352,6 @@ class InspectionPhraseEngine {
           'Potential electromagnetic influences were noted nearby, including ${_toWords(emfSources)}.',
         );
       }
-    }
-    if (phrases.isEmpty) {
-      phrases.add(
-        'Local environmental factors were noted but no specific adverse source was identified in the inspection data.',
-      );
     }
     return phrases;
   }
@@ -13539,11 +14373,14 @@ class InspectionPhraseEngine {
       ];
     }
     if (noLike.contains(status)) {
-      return const [
-        'The road outside the property is not understood to be a private road.'
-      ];
+      final text =
+          _phraseTexts['{D_LOCATION}::{LOCATION_NOT_PRIVATE_ROAD}'] ??
+              'The road serving the property is understood to be maintained '
+                  'at public expense; your legal adviser should confirm its '
+                  'adoption status.';
+      return _splitResolved(text);
     }
-    return ['Road status recorded as $status.'];
+    return const [];
   }
 
   List<String> _propertyNoisyArea(Map<String, String> answers) {
@@ -13559,7 +14396,7 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['ch5'])) sources.add('motor way');
     if (_isChecked(answers['ch6'])) {
       final other = (answers['etGroundTypeOther'] ?? '').trim();
-      sources.add(other.isNotEmpty ? other.toLowerCase() : 'other');
+      if (other.isNotEmpty) sources.add(other.toLowerCase());
     }
     final yesLike = <String>{'yes', 'true', 'fully', 'present', 'adverse'};
     final noLike = <String>{'no', 'false', 'none', 'not present'};
@@ -13567,9 +14404,22 @@ class InspectionPhraseEngine {
         (sources.isNotEmpty && !noLike.contains(status));
     if (!noisy) return const [];
     if (sources.isEmpty) {
-      return const ['The property is in a noisy area.'];
+      final text =
+          _phraseTexts['{D_LOCATION}::{D_LOCATION_NOISE_UNSPECIFIED}'] ??
+              'External noise was apparent at the time of inspection. Its '
+                  'effect on amenity and value will depend on frequency and '
+                  'intensity, and you should revisit the area at different '
+                  'times before purchase.';
+      return _splitResolved(text);
     }
-    return ['The property is in a noisy area near ${_toWords(sources)}.'];
+    final template = _sub('{D_LOCATION}', '{D_LOCATION_NEAR_NOISY_AREA}');
+    if (template.isEmpty) {
+      return ['The property is in a noisy area near ${_toWords(sources)}.'];
+    }
+    return _split(_normalize(
+      template.replaceAll(
+          '{LOCATION_NOISY_AREA_TYPE}', _toWords(sources).toLowerCase()),
+    ));
   }
 
   // ── New methods for uncovered screens ──────────────────────────
@@ -13601,20 +14451,18 @@ class InspectionPhraseEngine {
       final gardenType = (answers[entry.value[0]] ?? '').trim();
       final fencing = (answers[entry.value[2]] ?? '').trim();
       if (gardenType.isEmpty && fencing.isEmpty) continue;
-      final parts = <String>[];
-      if (gardenType.isNotEmpty) {
-        final typeText = gardenType.toLowerCase() == 'other'
-            ? (answers[entry.value[1]] ?? 'other').trim().toLowerCase()
-            : gardenType.toLowerCase();
-        parts.add('type: $typeText');
-      }
-      if (fencing.isNotEmpty) {
-        final fenceText = fencing.toLowerCase() == 'other'
-            ? (answers[entry.value[3]] ?? 'other').trim().toLowerCase()
-            : fencing.toLowerCase();
-        parts.add('boundary fencing: $fenceText');
-      }
-      phrases.add('${entry.key} garden: ${parts.join(', ')}.');
+      final typeText = gardenType.toLowerCase() == 'other'
+          ? (answers[entry.value[1]] ?? 'other').trim().toLowerCase()
+          : gardenType.toLowerCase();
+      final fenceText = fencing.toLowerCase() == 'other'
+          ? (answers[entry.value[3]] ?? 'other').trim().toLowerCase()
+          : fencing.toLowerCase();
+      phrases.addAll(_approvedGardenPhrases(
+        entry.key,
+        gardenType.isEmpty ? '' : typeText,
+        noBoundary: false,
+        fencingText: fencing.isEmpty ? '' : fenceText,
+      ));
     }
     return phrases;
   }
@@ -13627,7 +14475,13 @@ class InspectionPhraseEngine {
     final text = topography.toLowerCase() == 'other'
         ? (answers['etFrontTypeOther'] ?? 'other').trim().toLowerCase()
         : topography.toLowerCase();
-    return ['Topography: $text.'];
+    // Approved bank: {D_GROUND}::{GROUND_TOPOGRAPHY}
+    var template = _sub('{D_GROUND}', '{GROUND_TOPOGRAPHY}');
+    if (template.isEmpty) {
+      template = 'The property occupies a relatively {GROUND_TOPOGRAPHY} '
+          'ground.';
+    }
+    return _splitResolved(template.replaceAll('{GROUND_TOPOGRAPHY}', text));
   }
 
   // Section D: Internal Wall
@@ -13641,7 +14495,18 @@ class InspectionPhraseEngine {
       types.add(other.isNotEmpty ? other.toLowerCase() : 'other');
     }
     if (types.isEmpty) return const [];
-    return ['Internal walls: ${_toWords(types)}.'];
+    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_INT_WALL_AREA}
+    var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_INT_WALL_AREA}');
+    if (template.isEmpty) {
+      template = 'The internal walls are built of '
+          '{CONSTRUCTION_INT_WALL_PARTITION_TYPE} partitions.';
+    }
+    return _splitResolved(
+      template.replaceAll(
+        '{CONSTRUCTION_INT_WALL_PARTITION_TYPE}',
+        _toWords(types),
+      ),
+    );
   }
 
   // Section D: Listed Building
@@ -13649,12 +14514,17 @@ class InspectionPhraseEngine {
     final status = (answers['android_material_design_spinner'] ?? '').trim();
     if (status.isEmpty) return const [];
     if (status.toLowerCase() == 'yes') {
+      // Approved bank: {D_LISTED_BUILDING} (single paragraph, no <br/>).
+      final template = _phraseTexts['{D_LISTED_BUILDING}'] ?? '';
+      if (template.isNotEmpty) return _splitResolved(template);
       return [
         'The property is a listed building.',
         'Please contact your legal adviser to advise you on the implication of this building status.',
       ];
     }
-    return ['The property is not a listed building.'];
+    final template = _phraseTexts['{D_LISTED_BUILDING_NOT_LISTED}'] ??
+        'The property is not understood to be a listed building.';
+    return _splitResolved(template);
   }
 
   // Section D: Other Service
@@ -13739,7 +14609,13 @@ class InspectionPhraseEngine {
 
   // Section G: Services - water disused tank
   List<String> _servicesWaterDisusedTank(Map<String, String> answers) {
-    final location = _cleanLower(answers['actv_disused_tank_location']);
+    // The dropdown option "The roof space" carries its own leading article,
+    // but the bank template already supplies "within the {LOCATION}" -
+    // substituting the option as-is doubles the article ("within the the
+    // roof space"). Strip a redundant leading "the " from the answer so
+    // only the template's own article remains.
+    final location = _cleanLower(answers['actv_disused_tank_location'])
+        .replaceFirst(RegExp(r'^the\s+'), '');
     final material = _cleanLower(answers['actv_tank_formed_in']);
     if (location.isEmpty || material.isEmpty) return const [];
     var template =
@@ -14187,17 +15063,22 @@ class InspectionPhraseEngine {
       if (template.isNotEmpty) {
         var resolved = _normalize(template);
         if (amount.isNotEmpty) {
-          resolved = resolved.replaceAll(
-              '{OVERALL_OPINION_PURCHASE_PRICE}', priceInWords);
-          resolved = resolved.replaceAll(
-              '{OVERALL_OPINION_PURCHASE_PRICE_WORD}', priceInWords);
+          resolved = resolved
+              .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE}', priceInWords)
+              .replaceAll(
+                  '{OVERALL_OPINION_PURCHASE_PRICE_WORD}', priceInWords);
+        } else {
+          // No purchase price captured - drop the price clause entirely
+          // rather than leave the placeholder token in the report.
+          resolved = resolved
+              .replaceAll(
+                  ' at a price of {OVERALL_OPINION_PURCHASE_PRICE_WORD}', '')
+              .replaceAll(
+                  ' at a price of {OVERALL_OPINION_PURCHASE_PRICE}', '')
+              .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE_WORD}', '')
+              .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE}', '');
         }
-        final phrases = _split(resolved);
-        // If template had no price placeholders, append price separately.
-        if (priceInWords.isNotEmpty && !resolved.contains(priceInWords)) {
-          phrases.add('Purchase price: $priceInWords.');
-        }
-        return phrases;
+        return _split(resolved);
       }
       final phrases = <String>['Overall opinion: reasonable.'];
       if (priceInWords.isNotEmpty)
@@ -14218,15 +15099,26 @@ class InspectionPhraseEngine {
       } else {
         phrases.add('Overall opinion: reasonable with repairs.');
       }
-      // Always append price/potential as separate lines so they show
-      // even when the template has no placeholders for them.
-      if (priceInWords.isNotEmpty)
-        phrases.add('Estimated repair cost: $priceInWords.');
-      if (potential.isNotEmpty)
-        phrases.add('Potential: ${potential.toLowerCase()}.');
+      if (priceInWords.isNotEmpty || potential.isNotEmpty) {
+        var allowance = _phraseTexts['{OVERALL_OPINION_REPAIR_ALLOWANCE}'] ??
+            'A provisional repair allowance of {REPAIR_AMOUNT} should be '
+                'considered. The anticipated scope is {REPAIR_SCOPE}.';
+        allowance = allowance
+            .replaceAll(
+              '{REPAIR_AMOUNT}',
+              priceInWords.isEmpty ? 'an amount to be confirmed' : priceInWords,
+            )
+            .replaceAll(
+              '{REPAIR_SCOPE}',
+              potential.isEmpty
+                  ? 'subject to further investigation and contractor quotations'
+                  : potential.toLowerCase(),
+            );
+        phrases.addAll(_splitResolved(allowance));
+      }
       return phrases;
     }
-    return ['Overall opinion: ${opinion.toLowerCase()}.'];
+    return const [];
   }
 
   static String _addCommasHelper(int value) {

@@ -15,6 +15,7 @@ import '../../../../core/sync/sync_manager.dart';
 import '../../../../core/utils/logger.dart';
 import '../../../../shared/presentation/widgets/survey_duration_timer.dart';
 import '../../../ai/domain/entities/ai_response.dart';
+import '../../../property_valuation/domain/valuation_answer_validator.dart';
 import '../../../ai/domain/services/ai_client.dart';
 import '../../../../../../../shared/services/pdf_upload_service.dart';
 import '../../domain/models/export_config.dart';
@@ -23,6 +24,7 @@ import 'docx_generator_service.dart';
 import 'pdf_generator_service.dart';
 import 'report_builder.dart';
 import 'report_data_service.dart';
+import 'report_narrative_policy.dart';
 
 /// Orchestrates the full V2 export pipeline:
 /// load data -> build document -> render (PDF/DOCX) -> save record -> upload.
@@ -62,12 +64,12 @@ class ExportService {
     _lastAiWarning = null;
 
     onProgress?.call(const ExportProgress(
-      stage: 'Loading', percent: 0.05, message: 'Loading survey data...'));
+        stage: 'Loading', percent: 0.05, message: 'Loading survey data...'));
 
     final rawData = await dataService.loadInspectionData(surveyId);
 
     onProgress?.call(const ExportProgress(
-      stage: 'Building', percent: 0.20, message: 'Building report...'));
+        stage: 'Building', percent: 0.20, message: 'Building report...'));
 
     final duration = await _readTimerDuration(surveyId);
     var document = builder.build(rawData, config, surveyDuration: duration);
@@ -92,12 +94,17 @@ class ExportService {
     _lastAiWarning = null;
 
     onProgress?.call(const ExportProgress(
-      stage: 'Loading', percent: 0.05, message: 'Loading survey data...'));
+        stage: 'Loading', percent: 0.05, message: 'Loading survey data...'));
 
     final rawData = await dataService.loadValuationData(surveyId);
+    final validationErrors =
+        ValuationAnswerValidator.validateSurvey(rawData.allAnswers);
+    if (validationErrors.isNotEmpty) {
+      throw ValuationReportValidationException(validationErrors);
+    }
 
     onProgress?.call(const ExportProgress(
-      stage: 'Building', percent: 0.20, message: 'Building report...'));
+        stage: 'Building', percent: 0.20, message: 'Building report...'));
 
     final duration = await _readTimerDuration(surveyId);
     var document = builder.build(rawData, config, surveyDuration: duration);
@@ -158,13 +165,15 @@ class ExportService {
         final mapping = result.redactionMapping;
 
         onProgress?.call(const ExportProgress(
-          stage: 'AI', percent: 0.40, message: 'Processing AI response...'));
+            stage: 'AI', percent: 0.40, message: 'Processing AI response...'));
 
         // Un-redact AI text so the exported report contains real names/addresses.
         final redactor = piiRedactor ?? PiiRedactor();
-        final executiveSummary = redactor.unredact(
-          response.executiveSummary,
-          mapping,
+        final executiveSummary = ReportNarrativePolicy.conciseExecutiveSummary(
+          redactor.unredact(
+            response.executiveSummary,
+            mapping,
+          ),
         );
 
         final sectionNarratives = <String, String>{};
@@ -178,7 +187,7 @@ class ExportService {
         final astPayload = _mapAstPayload(response.ast, redactor, mapping);
 
         onProgress?.call(const ExportProgress(
-          stage: 'AI', percent: 0.45, message: 'AI narrative complete'));
+            stage: 'AI', percent: 0.45, message: 'AI narrative complete'));
 
         _lastAiWarning = null;
         return document.copyWith(
@@ -232,7 +241,8 @@ class ExportService {
               conditionRating: section.conditionRating == null
                   ? null
                   : redactor.unredact(section.conditionRating!, mapping),
-              limitations: _unredactList(section.limitations, redactor, mapping),
+              limitations:
+                  _unredactList(section.limitations, redactor, mapping),
               defaultParagraphs: _unredactList(
                 section.defaultParagraphs,
                 redactor,
@@ -324,7 +334,8 @@ class ExportService {
   Future<Duration?> _readTimerDuration(String surveyId) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final seconds = prefs.getInt(SurveyDurationTimer.accumulatedSecondsKey(surveyId));
+      final seconds =
+          prefs.getInt(SurveyDurationTimer.accumulatedSecondsKey(surveyId));
       if (seconds != null && seconds > 0) return Duration(seconds: seconds);
     } catch (_) {
       // Timer data is optional — don't block export
@@ -393,14 +404,16 @@ class ExportService {
     String? uploadWarning;
     if (config.format == ExportFormat.pdf) {
       onProgress?.call(const ExportProgress(
-        stage: 'Uploading', percent: 0.85, message: 'Syncing survey data...'));
+          stage: 'Uploading',
+          percent: 0.85,
+          message: 'Syncing survey data...'));
 
       try {
         // Ensure the survey is fully synced to the server before uploading
         await _ensureSurveySynced(surveyId, onProgress);
 
         onProgress?.call(const ExportProgress(
-          stage: 'Uploading', percent: 0.92, message: 'Uploading PDF...'));
+            stage: 'Uploading', percent: 0.92, message: 'Uploading PDF...'));
 
         uploaded = await uploadService.uploadReportPdf(
           surveyId: surveyId,
@@ -408,12 +421,15 @@ class ExportService {
         );
       } on SurveyNotFoundOnServerException {
         // Survey still not on server after sync attempt — force resync and retry once
-        AppLogger.w('Export',
-          'Survey $surveyId not found on server after initial sync. '
-          'Force-resyncing and retrying upload...');
+        AppLogger.w(
+            'Export',
+            'Survey $surveyId not found on server after initial sync. '
+                'Force-resyncing and retrying upload...');
 
         onProgress?.call(const ExportProgress(
-          stage: 'Uploading', percent: 0.90, message: 'Syncing survey to server...'));
+            stage: 'Uploading',
+            percent: 0.90,
+            message: 'Syncing survey to server...'));
 
         try {
           await syncManager.forceResyncSurvey(
@@ -423,8 +439,10 @@ class ExportService {
           // S1+S2 fix: use scoped sync (only this survey's items)
           final syncResult = await syncManager.processQueueForSurvey(surveyId);
           if (!syncResult.success) {
-            AppLogger.w('Export', 'Force resync failed: ${syncResult.errorMessage}');
-            uploadWarning = 'Survey sync failed. Please sync the survey and try uploading again.';
+            AppLogger.w(
+                'Export', 'Force resync failed: ${syncResult.errorMessage}');
+            uploadWarning =
+                'Survey sync failed. Please sync the survey and try uploading again.';
           } else {
             // S1 fix: verify no items remain pending before retrying upload.
             // processQueueForSurvey returning success means zero failures,
@@ -432,13 +450,17 @@ class ExportService {
             // A hasPendingSync check confirms the full tree is on the server.
             final stillPending = await syncManager.hasPendingSync(surveyId);
             if (stillPending) {
-              AppLogger.w('Export',
-                'Survey $surveyId still has pending sync items after force resync. '
-                'Skipping upload retry.');
-              uploadWarning = 'Survey partially synced. Please sync fully and retry upload from report history.';
+              AppLogger.w(
+                  'Export',
+                  'Survey $surveyId still has pending sync items after force resync. '
+                      'Skipping upload retry.');
+              uploadWarning =
+                  'Survey partially synced. Please sync fully and retry upload from report history.';
             } else {
               onProgress?.call(const ExportProgress(
-                stage: 'Uploading', percent: 0.95, message: 'Retrying upload...'));
+                  stage: 'Uploading',
+                  percent: 0.95,
+                  message: 'Retrying upload...'));
 
               uploaded = await uploadService.uploadReportPdf(
                 surveyId: surveyId,
@@ -447,13 +469,16 @@ class ExportService {
             }
           }
         } catch (retryError) {
-          AppLogger.w('Export', 'Retry upload after force resync failed: $retryError');
-          uploadWarning = 'Could not upload report. Please sync the survey first.';
+          AppLogger.w(
+              'Export', 'Retry upload after force resync failed: $retryError');
+          uploadWarning =
+              'Could not upload report. Please sync the survey first.';
         }
       } catch (e) {
         // S3 fix: surface the warning to the user instead of silently swallowing
         AppLogger.w('Export', 'Upload failed (non-fatal): $e');
-        uploadWarning = 'Report saved locally but upload failed. You can retry from report history.';
+        uploadWarning =
+            'Report saved locally but upload failed. You can retry from report history.';
       }
 
       if (uploaded) {
@@ -470,11 +495,12 @@ class ExportService {
     }
 
     onProgress?.call(const ExportProgress(
-      stage: 'Complete', percent: 1.0, message: 'Export complete'));
+        stage: 'Complete', percent: 1.0, message: 'Export complete'));
 
-    AppLogger.d('Export',
+    AppLogger.d(
+        'Export',
         'Export complete: ${config.format.name}, '
-        '${document.totalScreens} screens, uploaded=$uploaded');
+            '${document.totalScreens} screens, uploaded=$uploaded');
 
     // Merge AI warning and upload warning into a single message.
     final warnings = [
@@ -508,17 +534,20 @@ class ExportService {
     final hasPending = await syncManager.hasPendingSync(surveyId);
     if (!hasPending) return;
 
-    AppLogger.d('Export', 'Survey $surveyId has pending sync items — syncing before upload');
+    AppLogger.d('Export',
+        'Survey $surveyId has pending sync items — syncing before upload');
     onProgress?.call(const ExportProgress(
-      stage: 'Uploading', percent: 0.87, message: 'Syncing survey data...'));
+        stage: 'Uploading', percent: 0.87, message: 'Syncing survey data...'));
 
     final result = await syncManager.processQueueForSurvey(surveyId);
     if (result.success) {
-      AppLogger.d('Export', 'Pre-upload sync complete: ${result.syncedCount} items synced');
+      AppLogger.d('Export',
+          'Pre-upload sync complete: ${result.syncedCount} items synced');
     } else {
-      AppLogger.w('Export',
-        'Pre-upload sync had failures (${result.failedCount} failed). '
-        'Upload will proceed — server may still have the survey from a prior sync.');
+      AppLogger.w(
+          'Export',
+          'Pre-upload sync had failures (${result.failedCount} failed). '
+              'Upload will proceed — server may still have the survey from a prior sync.');
     }
   }
 }

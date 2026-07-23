@@ -14,7 +14,7 @@
           "fields": [
             { "id": "label_general_property", "label": "General Property Details", "type": "label" },
             { "id": "actv_status", "label": "Status", "type": "dropdown", "options": ["Occupied", "Vacant", "Tenanted"] },
-            { "id": "actv_finishes", "label": "Finishes", "type": "dropdown", "options": ["Un furnished", "Partially furnished", "Fully furnished"] },
+            { "id": "actv_finishes", "label": "Finishes", "type": "dropdown", "options": ["Unfurnished", "Partially furnished", "Fully furnished"] },
             { "id": "actv_carpeted", "label": "Carpeted", "type": "dropdown", "options": ["Fully", "Partially"] },
             { "id": "actv_vl_reason", "label": "Valuation Reason", "type": "dropdown", "options": ["Market Value", "Shared Ownership Buyback", "Right to Buy", "Help to buy", "Compulsory Order Purchase", "Other"] },
             { "id": "actv_weather", "label": "Weather", "type": "dropdown", "options": ["Dry", "Wet", "Snow"] },

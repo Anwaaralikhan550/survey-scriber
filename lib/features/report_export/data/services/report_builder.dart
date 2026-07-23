@@ -8,6 +8,7 @@ import '../../../property_inspection/presentation/widgets/inspection_fields.dart
 import '../../../property_valuation/domain/valuation_phrase_engine.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
+import 'paragraph_composer.dart';
 import 'report_data_service.dart';
 
 /// Transforms [V2RawReportData] into a format-agnostic [ReportDocument]
@@ -21,6 +22,21 @@ class ReportBuilder {
 
   final InspectionPhraseEngine? inspectionPhraseEngine;
   final ValuationPhraseEngine? valuationPhraseEngine;
+
+  /// Groups adjacent phrases into paragraphs according to the approved
+  /// master-template structure (client fix: sentences belonging to the same
+  /// element must render as one paragraph, not one sentence per line).
+  late final ParagraphComposer? _paragraphComposer = () {
+    final texts = inspectionPhraseEngine?.phraseTexts;
+    if (texts == null || texts.isEmpty) return null;
+    return ParagraphComposer(texts);
+  }();
+
+  List<String> _composeParagraphs(List<String> phrases) {
+    final composer = _paragraphComposer;
+    if (composer == null || phrases.length < 2) return phrases;
+    return composer.compose(phrases);
+  }
 
   // Match inspection overview ordering in app UI.
   static const List<String> _inspectionSectionOrder = <String>[
@@ -111,6 +127,11 @@ class ReportBuilder {
     final sections = <ReportSection>[];
     for (var i = 0; i < orderedSectionDefs.length; i++) {
       final sectionDef = orderedSectionDefs[i];
+      // Section R captures structured room counts. It is exported through
+      // [ReportDocument.accommodationSchedule], never as temporary prose.
+      if (isInspection && sectionDef.key.trim().toUpperCase() == 'R') {
+        continue;
+      }
       final reportSection = _buildSection(
         sectionDef,
         rawData,
@@ -150,7 +171,86 @@ class ReportBuilder {
       sections: sections,
       signatures: config.includeSignatures ? signatures : [],
       photoFilePaths: config.includePhotos ? rawData.photoFilePaths : [],
+      accommodationSchedule: isInspection
+          ? _buildAccommodationSchedule(rawData)
+          : _buildValuationAccommodationSchedule(rawData),
     );
+  }
+
+  List<AccommodationScheduleRow> _buildAccommodationSchedule(
+    V2RawReportData rawData,
+  ) {
+    const floorScreens = <(String, String)>[
+      ('activity_no_of_rooms', 'Lower ground'),
+      ('activity_no_of_rooms__ground', 'Ground'),
+      ('activity_no_of_rooms__first', 'First'),
+      ('activity_no_of_rooms__second', 'Second'),
+      ('activity_no_of_rooms__third', 'Third'),
+      ('activity_no_of_rooms__other', 'Other'),
+      ('activity_no_of_rooms__roof_space', 'Roof space'),
+    ];
+
+    String count(Map<String, String> answers, String key) {
+      final value = (answers[key] ?? '').trim();
+      return value == '0' ? '' : value;
+    }
+
+    final rows = <AccommodationScheduleRow>[];
+    for (final entry in floorScreens) {
+      final answers = _answersForScreen(rawData, entry.$1);
+      if (answers.isEmpty) continue;
+      final otherCount = count(answers, 'etNoOfRoomsOther');
+      final otherName = (answers['ar_etNote'] ?? '').trim();
+      final other = otherCount.isEmpty
+          ? ''
+          : otherName.isEmpty
+              ? otherCount
+              : '$otherCount $otherName';
+      final row = AccommodationScheduleRow(
+        floor: entry.$2,
+        livingRooms: count(answers, 'ar_etFirstName'),
+        bedrooms: count(answers, 'ar_etLastName'),
+        bathOrShowerRooms: count(answers, 'ar_etAddressLine1'),
+        separateToilets: count(answers, 'ar_etCity'),
+        kitchens: count(answers, 'ar_etPinCode'),
+        utilityRooms: count(answers, 'ar_etCountry'),
+        conservatories: count(answers, 'ar_etConservatory'),
+        otherRooms: other,
+      );
+      if (row.hasAnyRooms) rows.add(row);
+    }
+    return rows;
+  }
+
+  List<AccommodationScheduleRow> _buildValuationAccommodationSchedule(
+    V2RawReportData rawData,
+  ) {
+    final answers = _answersForScreen(rawData, 'no_of_rooms');
+    if (answers.isEmpty) return const [];
+
+    String count(String key) {
+      final value = (answers[key] ?? '').trim();
+      return value == '0' ? '' : value;
+    }
+
+    final otherCount = count('et_other');
+    final otherName = (answers['et_other_name'] ?? '').trim();
+    final row = AccommodationScheduleRow(
+      floor: 'Property total',
+      livingRooms: count('et_liv'),
+      bedrooms: count('et_bed'),
+      bathOrShowerRooms: count('et_bath'),
+      separateToilets: count('et_wc'),
+      kitchens: count('et_kit'),
+      utilityRooms: count('et_ut'),
+      conservatories: count('et_con'),
+      otherRooms: otherCount.isEmpty
+          ? ''
+          : otherName.isEmpty
+              ? otherCount
+              : '$otherCount $otherName',
+    );
+    return row.hasAnyRooms ? [row] : const [];
   }
 
   List<InspectionSectionDefinition> _orderedSectionsForReport(
@@ -724,8 +824,13 @@ class ReportBuilder {
       final to = (answers['android_material_design_spinner20'] ?? '').trim();
       final area = (answers['android_material_design_spinner'] ?? '').trim();
       if (from.isNotEmpty && to.isNotEmpty) {
+        if (from.toLowerCase() == to.toLowerCase()) {
+          return [
+            'The property is located in an established ${from.toLowerCase()}-density area.'
+          ];
+        }
         return [
-          'The property is located in an established area with surrounding density ranging from ${from.toLowerCase()} to ${to.toLowerCase()}.'
+          'The property is located in an established area where surrounding development ranges from ${from.toLowerCase()} to ${to.toLowerCase()} density.'
         ];
       }
       if (from.isNotEmpty || to.isNotEmpty) {
@@ -813,8 +918,13 @@ class ReportBuilder {
       final from = value('From');
       final to = value('To');
       if (from != null && to != null) {
+        if (from.toLowerCase() == to.toLowerCase()) {
+          return [
+            'The property is located in an established ${from.toLowerCase()}-density area.'
+          ];
+        }
         return [
-          'The property is located in an established area with surrounding density ranging from ${from.toLowerCase()} to ${to.toLowerCase()}.'
+          'The property is located in an established area where surrounding development ranges from ${from.toLowerCase()} to ${to.toLowerCase()} density.'
         ];
       }
       final one = from ?? to;
@@ -1043,6 +1153,156 @@ class ReportBuilder {
           'The $locationsText ${_legacyIsAre(leakingLocations)} leaking and causing dampness to nearby elements.');
     }
 
+    // RICS L2 cross-injections from Section E1 Chimney stacks (Phase 2B):
+    // all 4 spec-required E1 -> J1 injections (flashing-causing-damp,
+    // flaunching-causing-damp, repointing-causing-damp, significant-
+    // leaning, poor-condition/safety-hazard).
+    final flashing = _answersForScreen(
+        rawData, 'activity_outside_property_repair_flashing');
+    if (_isCheckedValue(flashing['cb_is_causing_dump']) &&
+        (flashing['android_material_design_spinner4'] ?? '')
+            .toLowerCase()
+            .contains('now')) {
+      phrases.add(
+          'The waterproofing between the chimney stack and the roof covering is damaged or defective and is causing damp penetration to the adjoining building elements (see section E1 - Chimney Stacks).');
+    }
+
+    final flaunching = _answersForScreen(
+        rawData, 'activity_outside_property_chimney_repair_flaunching');
+    if (_isCheckedValue(flaunching['cb_is_causing_dump']) &&
+        (flaunching['actv_condition'] ?? '').toLowerCase().contains('now')) {
+      phrases.add(
+          'The cement bedding around the base of the chimney pot (called flaunching) is damaged or defective and is causing damp penetration to the adjoining building elements (see section E1 - Chimney Stacks).');
+    }
+
+    final repointing = _answersForScreen(
+        rawData, 'activity_outside_property_repair_chimney_repointing');
+    if (_isCheckedValue(repointing['cb_is_causing_dump']) &&
+        (repointing['actv_condition'] ?? '').toLowerCase().contains('now')) {
+      phrases.add(
+          'Some of the mortar between the bricks or stonework (called pointing) to the chimney stack is damaged or defective and is causing damp penetration to the adjoining building elements (see section E1 - Chimney Stacks).');
+    }
+
+    final leaning = _answersForScreen(
+        rawData, 'activity_outside_property_leaning_chimney');
+    if ((leaning['android_material_design_spinner4'] ?? '')
+        .toLowerCase()
+        .contains('repair')) {
+      phrases.add(
+          'The chimney stack appears leaning and the movement appears significant, and action is required now (see section E1 - Chimney Stacks).');
+    }
+
+    final disrepair = _answersForScreen(
+        rawData, 'activity_outside_property_repair_chimney_disrepair');
+    if (_isCheckedValue(disrepair['cb_repair_soon_70'])) {
+      phrases.add(
+          'The chimney stack(s) on the building are in poor condition. This is a safety hazard (see section E1 - Chimney Stacks).');
+    }
+
+    // RICS L2 cross-injections from Section E2 Roof Coverings (Phase 2B):
+    // 6 of E2's 7 spec-required E2 -> J1 injections that this data model
+    // captures (tile defects, significant deflection, ridge tiles damaged,
+    // hip tiles damaged, flat-roof damp, roof spreading). The 7th
+    // (flashing-at-junction damaged) has no repair-soon/now screen in the
+    // current tree - `outside_property_roof_covering_flashing_layout` only
+    // captures the description/condition, not a repair branch - so it is
+    // intentionally not wired here rather than guessed (same class of gap
+    // as E1's chimney-flashing "causing damp" checkbox before that was
+    // added; this one still needs its own new field).
+    final roofRepairTiles =
+        _answersForScreen(rawData, 'activity_outside_property_roof_repair_tiles');
+    final roofTilesCondition =
+        (roofRepairTiles['actv_condition'] ?? '').toLowerCase();
+    if (roofTilesCondition.contains('now')) {
+      if (_isCheckedValue(roofRepairTiles['cb_roof_40'])) {
+        phrases.add(
+            'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
+      }
+      if (_isCheckedValue(roofRepairTiles['cb_ridge_16'])) {
+        phrases.add(
+            'The covering along the top of the roof structure (called the ridge tiles) is damaged or defective (see section E2 - Roof Coverings).');
+      }
+      if (_isCheckedValue(roofRepairTiles['cb_hip_42'])) {
+        phrases.add(
+            'The covering along the slope of the roof structure (called the hip tiles) is damaged or defective (see section E2 - Roof Coverings).');
+      }
+    }
+
+    final roofStructure = _answersForScreen(
+        rawData, 'outside_property_roof_covering_roof_structure_layout');
+    if ((roofStructure['actv_status'] ?? '').toLowerCase().contains('investigate')) {
+      phrases.add(
+          'The surface of the roof slope(s) of the building is significantly distorted, uneven or undulating (see section E2 - Roof Coverings).');
+    }
+
+    final flatRoofRepair = _answersForScreen(
+        rawData, 'activity_outside_property_roof_repair_flat_roof');
+    if ((flatRoofRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
+      phrases.add(
+          'The flat roof covering is weathered, blistered, split, torn, worn, ponding, or defective (see section E2 - Roof Coverings).');
+    }
+
+    final roofSpreadingRepair = _answersForScreen(
+        rawData, 'activity_outside_property_roof_spreading_repair');
+    if ((roofSpreadingRepair['actv_status'] ?? '').toLowerCase() == 'yes') {
+      phrases.add(
+          'The roof slopes appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards (see section E2 - Roof Coverings).');
+    }
+
+    // RICS L2 cross-injection from Section E3 Rainwater Goods (Phase 2B):
+    // the spec's single E3 -> J1 injection, fired for the "now" (causing
+    // damp) repair branch.
+    final rwgRepair = _answersForScreen(
+        rawData, 'activity_outside_property_rwg__repair_pipes_gutters');
+    if ((rwgRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
+      phrases.add(
+          'One or more defects affecting the rainwater gutters, downpipes, associated fittings and drainage arrangements were noted (see section E3 - Rainwater Goods).');
+    }
+
+    // RICS L2 cross-injections from Section E4 Main Walls (Phase 2B): 4 of
+    // the spec's 5 wall -> J1 injections that this data model captures
+    // (damp-moisture-readings, drainage-guttering, lintel-repair-now,
+    // windowsill-repair-now). The 5th (trees showing defects) has no
+    // "defects noted" field on the nearby-trees screen in the current
+    // tree - only tree size is captured - so it is intentionally not
+    // wired here rather than guessed (same class of gap as E2's
+    // flashing-at-junction injection above; this one still needs its own
+    // new field).
+    final mainWallsDamp = _answersForScreen(
+        rawData, 'activity_outside_property_main_walls_damp');
+    final mainWallsDampLocation =
+        (mainWallsDamp['et_location_677'] ?? '').trim();
+    if (mainWallsDampLocation.isNotEmpty) {
+      phrases.add(
+          'Elevated moisture readings were recorded to sections of the internal wall surfaces the include ${mainWallsDampLocation.toLowerCase()} (see section E4 - Main Walls).');
+    }
+    if (_isCheckedValue(mainWallsDamp['cb_install_french_gutters'])) {
+      phrases.add(
+          'The external ground levels are high in relation to the building, the damp-proof course (DPC) may be bridged in places, allowing moisture to penetrate the walls (see section E4 - Main Walls).');
+    }
+
+    final lintelRepair = _answersForScreen(
+        rawData, 'activity_outside_property_main_wall_repairs_lintel');
+    if ((lintelRepair['actv_condition'] ??
+            lintelRepair['llMainContainer'] ??
+            '')
+        .toLowerCase()
+        .contains('now')) {
+      phrases.add(
+          'The small beam that spans across the top of the window or door opening including brick arch (called a lintel) is damaged, cracked, distorted (see section E4 - Main Walls).');
+    }
+
+    final windowSillRepair = _answersForScreen(
+        rawData, 'activity_outside_property_main_wall_repairs_window_sills');
+    if ((windowSillRepair['actv_condition'] ??
+            windowSillRepair['llMainContainer'] ??
+            '')
+        .toLowerCase()
+        .contains('now')) {
+      phrases.add(
+          'The small beam that spans across the bottom of the window opening (called a windowsill) is damaged, cracked, distorted (see section E4 - Main Walls).');
+    }
+
     return _cleanupPhrases(phrases);
   }
 
@@ -1092,7 +1352,7 @@ class ReportBuilder {
     );
     if (noSafetyLocations.isNotEmpty) {
       phrases.add(
-          'I could not find evidence that the glass screen to the ${_toLegacyWords(noSafetyLocations)} is safety glass. Anyone falling against the glass serene may get hurt.');
+          'I could not find evidence that the glass screen to the ${_toLegacyWords(noSafetyLocations)} is safety glass. Anyone falling against the glass screen may get hurt.');
     }
 
     final bathroomRepair = _answersForScreen(
@@ -1141,6 +1401,115 @@ class ReportBuilder {
         repairDefects.isNotEmpty) {
       phrases.add(
           'The ${_toLegacyWords(repairLocations)} is ${_toLegacyWords(repairDefects)}.');
+    }
+
+    // RICS L2 cross-injections from Section E1 Chimney stacks (Phase 2B):
+    // 2 of E1's spec-required E1 -> J3 (Risk to People) injections.
+    final potsRepair = _answersForScreen(
+        rawData, 'activity_outside_property_repair_chimney_pots');
+    if (_isCheckedValue(potsRepair['cb_is_safety_hazard']) &&
+        (potsRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
+      phrases.add(
+          'One or several pots that are fitted to the main building chimney stack are broken and partly missing (see section E1 - Chimney Stacks).');
+    }
+
+    for (final screenId in const [
+      'activity_outside_property_repair_chimney_dish_aerial',
+      'activity_outside_property_repair_chimney_dish_aerial__satellite',
+    ]) {
+      final aerial = _answersForScreen(rawData, screenId);
+      if (_isCheckedValue(aerial['cb_is_safety_hazard']) &&
+          (aerial['actv_condition'] ?? '').toLowerCase().contains('now')) {
+        final isSatellite = screenId.contains('satellite');
+        phrases.add(
+            'An ${isSatellite ? 'satellite dish' : 'aerial'} attached to the property is loose, rusted, damaged, dangling, other (see section E1 - Chimney Stacks).');
+      }
+    }
+
+    // RICS L2 cross-injections from Section E2 Roof Coverings (Phase 2B):
+    // 2 of E2's 7 spec-required E2 -> J3 (Risk to People) injections.
+    final roofRepairTilesForPeople = _answersForScreen(
+        rawData, 'activity_outside_property_roof_repair_tiles');
+    if ((roofRepairTilesForPeople['actv_condition'] ?? '')
+            .toLowerCase()
+            .contains('now') &&
+        _isCheckedValue(roofRepairTilesForPeople['cb_roof_40'])) {
+      phrases.add(
+          'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
+    }
+
+    final parapetRepair = _answersForScreen(
+        rawData, 'activity_outside_property_roof_repair_parapet_wall');
+    if (_isCheckedValue(parapetRepair['cb_safety_hazard']) &&
+        (parapetRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
+      phrases.add(
+          'The rendering, copping, flashing, other of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured, other (see section E2 - Roof Coverings).');
+    }
+
+    // RICS L2 cross-injections from Section E4 Main Walls (Phase 2B): the
+    // spec's 2 wall -> J3 (Risk to People) injections (damp-moisture-
+    // readings is a dual J1+J3 target, shared with the J1 method above;
+    // render-hazard fires alongside the render "now" hazard sentence,
+    // since both describe the same falling-render danger to people).
+    final mainWallsDampForPeople = _answersForScreen(
+        rawData, 'activity_outside_property_main_walls_damp');
+    final mainWallsDampLocationForPeople =
+        (mainWallsDampForPeople['et_location_677'] ?? '').trim();
+    if (mainWallsDampLocationForPeople.isNotEmpty) {
+      phrases.add(
+          'Elevated moisture readings were recorded to sections of the internal wall surfaces the include ${mainWallsDampLocationForPeople.toLowerCase()} (see section E4 - Main Walls).');
+    }
+
+    final renderRepair = _answersForScreen(
+        rawData, 'activity_outside_property_main_wall_repairs_render');
+    if ((renderRepair['actv_condition'] ??
+            renderRepair['llMainContainer'] ??
+            '')
+            .toLowerCase()
+            .contains('now') &&
+        _isCheckedValue(renderRepair['cb_hazard'])) {
+      phrases.add(
+          'Parts of the render coating to the building is eroded, loose, missing, damaged, other (see section E4 - Main Walls).');
+    }
+
+    // RICS L2 cross-injections from Section E5 Windows (Phase 2B): 2 of
+    // the spec's 3 window -> J3 (Risk to People) injections (repair
+    // safety-hazard, fire-trap-risk). The 3rd targets "Section J2
+    // Guarantees" per the spec's own text, but J2 in this app's section
+    // order is Risks to the Grounds, not Guarantees - "Guarantees" is I2
+    // everywhere else in the library, so this is almost certainly a typo
+    // in the client's document. Treated as an I2 target and deferred to
+    // Phase 2F like every other I-target injection in this file, rather
+    // than wired to the wrong section by mistake.
+    final windowsRepairForPeople = _answersForScreen(
+        rawData, 'activity_outside_property_windows_repairs_repair_window');
+    final windowsRepairHowMany = _labelsForAnswerMap(
+      windowsRepairForPeople,
+      const <String, String>{
+        'cb_ch1': 'one',
+        'cb_ch2': 'some',
+        'cb_ch3': 'many',
+      },
+    );
+    if (_isCheckedValue(windowsRepairForPeople['cb_safety_hazard']) &&
+        windowsRepairHowMany.isNotEmpty) {
+      phrases.add(
+          'One or more windows have been affected by single or multiple defects, and this is health and safety hazard (see section E5 - Windows).');
+    }
+
+    final fireEscapeRisk = _answersForScreen(rawData,
+        'activity_outside_property_windows_repairs_no_fire_escape_risk');
+    final fireEscapeLocations = _labelsForAnswerMap(
+      fireEscapeRisk,
+      const <String, String>{
+        'cb_lounge_84': 'lounge',
+        'cb_bedroom_43': 'bedroom',
+        'cb_study_61': 'study',
+      },
+    );
+    if (fireEscapeLocations.isNotEmpty) {
+      phrases.add(
+          'The design of the window(s) does not provide a suitable means of escape in the event of a fire (see section E5 - Windows).');
     }
 
     return _cleanupPhrases(phrases);
@@ -1209,12 +1578,18 @@ class ReportBuilder {
 
     final labelValues = <String, String>{};
     final narrative = <String>[];
+    var removedIsolatedOption = false;
     final labelPattern = RegExp(r'^\s*([^:]+):\s*(.+?)\s*$');
 
     for (final phrase in phrases) {
       final m = labelPattern.firstMatch(phrase);
       if (m == null) {
-        narrative.add(phrase.trim());
+        final value = phrase.trim();
+        if (!_isIsolatedConstructionOption(value)) {
+          narrative.add(value);
+        } else {
+          removedIsolatedOption = true;
+        }
         continue;
       }
       final key = (m.group(1) ?? '').trim().toLowerCase();
@@ -1239,6 +1614,10 @@ class ReportBuilder {
       'window material',
     };
     if (!labelValues.keys.any(knownKeys.contains)) {
+      if (removedIsolatedOption) {
+        final cleaned = _cleanupPhrases(narrative);
+        return cleaned.isEmpty ? const <String>[] : <String>[cleaned.join(' ')];
+      }
       return List<String>.from(phrases);
     }
 
@@ -1258,8 +1637,9 @@ class ReportBuilder {
       if ((roofMaterial ?? '').isNotEmpty) {
         bits.add('the roof material is $roofMaterial');
       }
-      if ((coverType ?? '').isNotEmpty)
+      if ((coverType ?? '').isNotEmpty) {
         bits.add('the roof cover is $coverType');
+      }
       out.add('${bits.join(', ')}.');
     }
 
@@ -1296,7 +1676,34 @@ class ReportBuilder {
       }
     }
 
-    return _cleanupPhrases(out);
+    final cleaned = _cleanupPhrases(out);
+    if (cleaned.isEmpty) return const <String>[];
+    // Construction is one logical element. Keep its component sentences in
+    // one flowing paragraph rather than exposing isolated option fragments.
+    return <String>[cleaned.join(' ')];
+  }
+
+  bool _isIsolatedConstructionOption(String phrase) {
+    final value =
+        phrase.trim().toLowerCase().replaceAll(RegExp(r'[.]+$'), '').trim();
+    const rawOptions = <String>{
+      'flat',
+      'pitched',
+      'solid',
+      'cavity',
+      'timber frame',
+      'steel frame',
+      'concrete frame',
+      'tiles',
+      'sheets',
+      'slates',
+      'coatings',
+      'pvc',
+      'timber',
+      'aluminium',
+      'steel',
+    };
+    return rawOptions.contains(value);
   }
 
   String _cleanConstructionValue(String raw) {
@@ -1384,7 +1791,9 @@ class ReportBuilder {
     List<String> phrases,
   ) {
     if (!_shouldCondensePhrasesAsParagraph(normalizedScreenId)) {
-      return phrases;
+      // Approved-bank paragraph grammar: join sentences that the master
+      // templates place in the same paragraph group.
+      return _composeParagraphs(phrases);
     }
     if (phrases.length <= 1) return phrases;
     final paragraph = phrases.join(' ').replaceAll(RegExp(r'\s+'), ' ').trim();
@@ -1499,82 +1908,37 @@ class ReportBuilder {
     return v == 'true' || v == '1' || v == 'yes';
   }
 
+  /// RICS L2 fix (Gate 3, Phase 2A): this used to hardcode its own English
+  /// for the merged D-Energy group instead of reading `phrase_texts.json`,
+  /// so a bank rewrite (e.g. {D_ENERGY}, {ENERGY_OTHER_SERVICES}) never
+  /// reached the real report - a class of defect a phrase-level probe can't
+  /// catch, only a real-app render can. Now routes through the same
+  /// phrase-engine handlers used everywhere else so this group can't drift
+  /// from the approved bank again.
   List<String> _buildLegacySectionDEnergyPhrases(V2RawReportData rawData) {
+    final engine = inspectionPhraseEngine;
+    if (engine == null) return const [];
+
     final energyAnswers =
         _answersForScreen(rawData, 'activity_energy_effiency');
     final impactAnswers =
         _answersForScreen(rawData, 'activity_energy_environment_impect');
     final otherAnswers = _answersForScreen(rawData, 'activity_other_service');
 
-    final energyCurrent =
-        (energyAnswers['android_material_design_spinner'] ?? '').trim();
-    final energyPotential =
-        (energyAnswers['android_material_design_spinner2'] ?? '').trim();
-    final impactCurrent =
-        (impactAnswers['android_material_design_spinner'] ?? '').trim();
-    final impactPotential =
-        (impactAnswers['android_material_design_spinner2'] ?? '').trim();
-    final hasSolarElectricity = _isCheckedValue(otherAnswers['ch1']);
-    final hasSolarHotWater = _isCheckedValue(otherAnswers['ch2']);
-
-    final hasAnyData = energyCurrent.isNotEmpty ||
-        energyPotential.isNotEmpty ||
-        impactCurrent.isNotEmpty ||
-        impactPotential.isNotEmpty ||
-        hasSolarElectricity ||
-        hasSolarHotWater;
-    if (!hasAnyData) return const [];
-
-    String ratingSentence({
-      required String label,
-      required String current,
-      required String potential,
-    }) {
-      if (current.isEmpty && potential.isEmpty) {
-        return '$label data was not available from the EPC records at the time of inspection.';
-      }
-      if (current.isEmpty) {
-        return "$label is recorded as potential $potential (current rating not available).";
-      }
-      if (potential.isEmpty) {
-        return "$label is recorded as current $current (potential rating not available).";
-      }
-      return '$label is recorded as current $current and potential $potential.';
+    // This merged group only appears in the report when the surveyor
+    // actually opened at least one of its three screens.
+    if (energyAnswers.isEmpty &&
+        impactAnswers.isEmpty &&
+        otherAnswers.isEmpty) {
+      return const [];
     }
 
-    final phrases = <String>[
-      "We are advised that the property's current energy performance, as recorded in the EPC, is as follows.",
-      ratingSentence(
-        label: 'Energy performance rating',
-        current: energyCurrent,
-        potential: energyPotential,
-      ),
-      ratingSentence(
-        label: 'Environmental impact rating',
-        current: impactCurrent,
-        potential: impactPotential,
-      ),
-      'Other services:',
+    return <String>[
+      ...engine.buildPhrases('activity_energy_effiency', energyAnswers),
+      ...engine.buildPhrases(
+          'activity_energy_environment_impect', impactAnswers),
+      ...engine.buildPhrases('activity_other_service', otherAnswers),
     ];
-
-    if (!hasSolarElectricity && !hasSolarHotWater) {
-      phrases.add(
-        'No other energy-related services were identified at the time of inspection.',
-      );
-      return phrases;
-    }
-
-    if (hasSolarElectricity) {
-      phrases.add(
-        'The property has photovoltaic panels designed to produce electricity from sunlight installed on the roof slope(s).',
-      );
-    }
-    if (hasSolarHotWater) {
-      phrases.add(
-        'The property has solar water heating panels installed on the roof slope(s).',
-      );
-    }
-    return phrases;
   }
 
   ReportScreen? _buildMergedSectionDEnergyScreen(
@@ -1609,7 +1973,9 @@ class ReportBuilder {
       if (note.isNotEmpty) mergedNotes.add(note);
 
       final answers = _answersForScreen(rawData, screen.id);
-      final fields = _buildFields(screen, answers);
+      final fields = config.includePhrases
+          ? _withoutRawBooleanStatuses(_buildFields(screen, answers))
+          : _buildFields(screen, answers);
 
       if (config.includePhrases && mergedPhrases.isEmpty) {
         final screenPhrases = _phrasesForScreen(screen, rawData, isInspection);
@@ -1636,14 +2002,77 @@ class ReportBuilder {
     }
 
     final title = screens.first.title;
+    final composedEnergyPhrases = _composeParagraphs(mergedPhrases);
     return ReportScreen(
       screenId: 'section_d_energy_merged',
       title: title,
-      fields: mergedPhrases.isNotEmpty ? const [] : mergedFields,
-      phrases: mergedPhrases,
+      fields: composedEnergyPhrases.isNotEmpty ? const [] : mergedFields,
+      phrases: composedEnergyPhrases,
       userNote: mergedNotes.join('\n'),
       isMergedGroup: true,
     );
+  }
+
+  ({List<String> phrases, Set<String> consumedScreenIds})
+      _mainWallConflictSynthesis(
+    List<InspectionNodeDefinition> descendants,
+    V2RawReportData rawData,
+  ) {
+    const typeByScreen = <String, String>{
+      'activity_outside_property_main_walls_about_wall': 'solid brick wall',
+      'activity_outside_property_main_walls_about_wall__cavity_brick_wall':
+          'cavity brick wall',
+      'activity_outside_property_main_walls_about_wall__cavity_block_wall':
+          'cavity block wall',
+      'activity_outside_property_main_walls_about_wall__cavity_stud_wall':
+          'cavity stud wall',
+    };
+    const locationFields = <String, String>{
+      'cb_main_building': 'main building',
+      'cb_back_addition': 'back addition',
+      'cb_extension': 'extension',
+    };
+
+    final entriesByLocation = <String, List<(String, String)>>{};
+    for (final node in descendants) {
+      final id = node.id.trim().toLowerCase();
+      var type = typeByScreen[id];
+      final answers = _answersForScreen(rawData, node.id);
+      if (type == null && id.endsWith('__other')) {
+        type = (answers['other'] ?? answers['et_other_124'] ?? '').trim();
+      }
+      if (type == null || type.isEmpty || answers.isEmpty) continue;
+
+      final locations = <String>[
+        for (final entry in locationFields.entries)
+          if (_isCheckedValue(answers[entry.key])) entry.value,
+      ];
+      if (_isCheckedValue(answers['cb_other_832'])) {
+        final other = (answers['et_other_133'] ?? '').trim().toLowerCase();
+        if (other.isNotEmpty) locations.add(other);
+      }
+      if (locations.isEmpty) continue;
+      final key = locations.map((value) => value.toLowerCase()).join('|');
+      entriesByLocation
+          .putIfAbsent(key, () => <(String, String)>[])
+          .add((node.id, type.toLowerCase()));
+    }
+
+    final phrases = <String>[];
+    final consumed = <String>{};
+    for (final entry in entriesByLocation.entries) {
+      final types = entry.value.map((value) => value.$2).toSet().toList();
+      if (types.length < 2) continue;
+      consumed.addAll(entry.value.map((value) => value.$1));
+      final locations = entry.key.split('|');
+      phrases.add(
+        'The external walls to ${_toLegacyWords(locations)} comprise a '
+        'mixture of ${_toLegacyWords(types)} construction. The different '
+        'wall types should be considered separately when planning future '
+        'maintenance or alterations.',
+      );
+    }
+    return (phrases: phrases, consumedScreenIds: consumed);
   }
 
   ReportSection? _buildSection(
@@ -1750,6 +2179,11 @@ class ReportBuilder {
           final mergedPhrases = <String>[];
           final mergedNotes = <String>[];
           final mergedFields = <ReportField>[];
+          final wallSynthesis = config.includePhrases &&
+                  groupReportTitle.trim().toLowerCase().contains('main walls')
+              ? _mainWallConflictSynthesis(descendants, rawData)
+              : (phrases: const <String>[], consumedScreenIds: <String>{});
+          mergedPhrases.addAll(wallSynthesis.phrases);
 
           if (useLegacySectionGComposite) {
             mergedPhrases.addAll(
@@ -1770,9 +2204,14 @@ class ReportBuilder {
             }
             final note = rawData.persistedUserNotes[screen.id] ?? '';
             if (note.isNotEmpty) mergedNotes.add(note);
+            if (wallSynthesis.consumedScreenIds.contains(screen.id)) {
+              continue;
+            }
 
             final answers = _answersForScreen(rawData, screen.id);
-            final fields = _buildFields(screen, answers);
+            final fields = config.includePhrases
+                ? _withoutRawBooleanStatuses(_buildFields(screen, answers))
+                : _buildFields(screen, answers);
 
             if (config.includePhrases) {
               final screenPhrases =
@@ -1848,7 +2287,8 @@ class ReportBuilder {
               ..addAll(rewritten);
           }
 
-          final cleanedMergedPhrases = _cleanupPhrases(mergedPhrases);
+          final cleanedMergedPhrases =
+              _composeParagraphs(_cleanupPhrases(mergedPhrases));
 
           // Skip truly empty groups (no phrases, no fields, no notes)
           // Legacy structural parity: keep About Property's
@@ -1973,6 +2413,33 @@ class ReportBuilder {
           screens.insert(insertAt, j2Screen);
         } else {
           screens.add(j2Screen);
+        }
+      }
+
+      // Cross-injected Risk-to-Building content (from E1 chimney and other
+      // source screens) only reaches the report via `_phrasesForScreen`'s
+      // enrichment of the NATIVE `activity_risks_risk_to_building_` screen -
+      // which only runs when that screen has its own answers. If the
+      // surveyor never touched J1's own screen, cross-injected content was
+      // silently dropped even though the underlying defects exist elsewhere
+      // (found via Phase 2B Gate 3 verification). Mirror the J2 pattern
+      // above: when J1's native screen produced nothing but there is
+      // cross-injected content, insert it as its own synthesized entry.
+      final hasNativeJ1 = screens.any(
+        (s) => s.screenId.trim().toLowerCase() == 'activity_risks_risk_to_building_',
+      );
+      if (!hasNativeJ1) {
+        final riskToBuilding = _legacyDerivedSectionFRiskToBuilding(rawData);
+        if (riskToBuilding.isNotEmpty) {
+          screens.insert(
+            0,
+            ReportScreen(
+              screenId: 'derived_j1_risk_to_building',
+              title: 'J1 Risk To Building',
+              fields: const <ReportField>[],
+              phrases: riskToBuilding,
+            ),
+          );
         }
       }
     }
@@ -2113,6 +2580,9 @@ class ReportBuilder {
     final isCompleted = rawData.screenStates[node.id] ?? false;
 
     var fields = _buildFields(node, answers);
+    if (config.includePhrases) {
+      fields = _withoutRawBooleanStatuses(fields);
+    }
     List<String> phrases;
     if (!config.includePhrases) {
       phrases = const [];
@@ -2135,7 +2605,8 @@ class ReportBuilder {
 
     // When no engine phrases exist but fields have data, convert fields to
     // simple narrative phrases so the report avoids raw "Yes/No" tables.
-    if (phrases.isEmpty &&
+    if (isInspection &&
+        phrases.isEmpty &&
         config.includePhrases &&
         fields.any((f) => f.displayValue.isNotEmpty)) {
       if (_alwaysRegenerateFromAnswersScreenIds.contains(normalizedId) &&
@@ -2148,7 +2619,8 @@ class ReportBuilder {
       }
     }
 
-    if (phrases.isEmpty &&
+    if (isInspection &&
+        phrases.isEmpty &&
         config.includePhrases &&
         fields.any((f) => f.displayValue.isNotEmpty)) {
       final fallback = _shouldUseRawFieldFallback(node.id)
@@ -2164,6 +2636,12 @@ class ReportBuilder {
     if (phrases.isNotEmpty &&
         _sectionDSummaryNarrativeScreenIds.contains(normalizedId)) {
       fields = const [];
+    }
+
+    // Valuation room counts are structured accommodation data. Rendering the
+    // temporary count prose beside the table is redundant and less readable.
+    if (!isInspection && normalizedId == 'no_of_rooms') {
+      phrases = const [];
     }
 
     final userNote = _noteForScreen(rawData, node.id);
@@ -2243,8 +2721,9 @@ class ReportBuilder {
     }
     final normalizedFields =
         sanitizeInspectionFieldsForScreen(node.id, node.fields);
-    final fieldPhrases =
-        FieldPhraseProcessor.buildFieldPhrases(normalizedFields, answers);
+    final fieldPhrases = isInspection
+        ? FieldPhraseProcessor.buildFieldPhrases(normalizedFields, answers)
+        : const <String>[];
     final cleaned = _cleanupPhrases([...enginePhrases, ...fieldPhrases]);
     return _condenseIfNeeded(normalizedId, cleaned);
   }
@@ -2402,6 +2881,26 @@ class ReportBuilder {
     }
 
     return result;
+  }
+
+  bool _isRawBooleanStatus(String label, String rawValue) {
+    if (label.trim().toLowerCase() != 'status') return false;
+    final value = rawValue.trim().toLowerCase();
+    return value == 'yes' ||
+        value == 'no' ||
+        value == 'true' ||
+        value == 'false' ||
+        value == '1' ||
+        value == '0';
+  }
+
+  List<ReportField> _withoutRawBooleanStatuses(List<ReportField> fields) {
+    return fields
+        .where((field) => !_isRawBooleanStatus(
+              field.label,
+              field.rawValue ?? field.displayValue,
+            ))
+        .toList(growable: false);
   }
 
   String _formatDisplayValue(String rawValue, InspectionFieldType type) {

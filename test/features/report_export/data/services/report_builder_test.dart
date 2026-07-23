@@ -90,6 +90,278 @@ void main() {
   }
 
   group('ReportBuilder.build', () {
+    test('collapses equal density boundaries into professional prose', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'D',
+            title: 'About Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'activity_property_location',
+                title: 'Location',
+                type: InspectionNodeType.screen,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner2',
+                    label: 'From',
+                    type: InspectionFieldType.dropdown,
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner20',
+                    label: 'To',
+                    type: InspectionFieldType.dropdown,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_property_location': {
+              'android_material_design_spinner2': 'Low',
+              'android_material_design_spinner20': 'Low',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      expect(doc.sections.single.screens.single.phrases.single,
+          'The property is located in an established low-density area.');
+      expect(doc.sections.single.screens.single.phrases.single,
+          isNot(contains('low to low')));
+    });
+
+    test('suppresses raw boolean status fields when no narrative applies', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'D',
+            title: 'About Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'activity_property_is_noisy_area',
+                title: 'Noisy Area',
+                type: InspectionNodeType.screen,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'android_material_design_spinner4',
+                    label: 'Status',
+                    type: InspectionFieldType.dropdown,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_property_is_noisy_area': {
+              'android_material_design_spinner4': 'No',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      expect(doc.sections, isEmpty);
+    });
+
+    test('removes isolated construction options and emits one paragraph', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'D',
+            title: 'About Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'group_construction_2',
+                title: 'Construction',
+                type: InspectionNodeType.group,
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_property_roof',
+                title: 'Roof',
+                type: InspectionNodeType.screen,
+                parentId: 'group_construction_2',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'ch1',
+                    label: 'Flat',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_property_roof': {'ch1': 'true'},
+          },
+          persistedPhrases: {
+            'activity_property_roof': [
+              'Flat.',
+              'The main building has a flat roof form.',
+            ],
+          },
+          persistedPhraseManualFlags: {
+            'activity_property_roof': true,
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final phrases = doc.sections.single.screens.single.phrases;
+      expect(phrases, hasLength(1));
+      expect(phrases.single, 'The main building has a flat roof form.');
+    });
+
+    test('synthesises conflicting wall types assigned to the same location',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'E',
+            title: 'Outside Property',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'group_e4_main_walls',
+                title: 'E4 Main Walls',
+                type: InspectionNodeType.group,
+                fields: [],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_outside_property_main_walls_about_wall',
+                title: 'Solid wall',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e4_main_walls',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'cb_main_building',
+                    label: 'Main building',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+                title: 'Cavity wall',
+                type: InspectionNodeType.screen,
+                parentId: 'group_e4_main_walls',
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'cb_main_building',
+                    label: 'Main building',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_outside_property_main_walls_about_wall': {
+              'cb_main_building': 'true',
+            },
+            'activity_outside_property_main_walls_about_wall__cavity_brick_wall': {
+              'cb_main_building': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final phrases = doc.sections.single.screens.single.phrases;
+      expect(phrases, hasLength(1));
+      expect(phrases.single, contains('mixture of solid brick wall and cavity brick wall'));
+      expect(phrases.single, contains('main building'));
+    });
+
+    test('exports room counts as structured accommodation rows, not section R',
+        () {
+      final roomTree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'R',
+            title: 'No.Of Room On Each Floors',
+            description: '',
+            nodes: const [
+              InspectionNodeDefinition(
+                id: 'activity_no_of_rooms__ground',
+                title: 'Ground',
+                type: InspectionNodeType.screen,
+                fields: [
+                  InspectionFieldDefinition(
+                    id: 'ar_etFirstName',
+                    label: 'Living rooms',
+                    type: InspectionFieldType.number,
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'ar_etPinCode',
+                    label: 'Kitchens',
+                    type: InspectionFieldType.number,
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'ar_etNote',
+                    label: 'Other room',
+                    type: InspectionFieldType.text,
+                  ),
+                  InspectionFieldDefinition(
+                    id: 'etNoOfRoomsOther',
+                    label: 'Other count',
+                    type: InspectionFieldType.number,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: roomTree,
+          allAnswers: {
+            'activity_no_of_rooms__ground': {
+              'ar_etFirstName': '2',
+              'ar_etPinCode': '1',
+              'ar_etNote': 'Study',
+              'etNoOfRoomsOther': '1',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      expect(doc.sections.where((section) => section.key == 'R'), isEmpty);
+      expect(doc.accommodationSchedule, hasLength(1));
+      expect(doc.accommodationSchedule.single.floor, 'Ground');
+      expect(doc.accommodationSchedule.single.livingRooms, '2');
+      expect(doc.accommodationSchedule.single.kitchens, '1');
+      expect(doc.accommodationSchedule.single.otherRooms, '1 Study');
+    });
+
     test('orders inspection sections to match app flow', () {
       final shuffledTree = InspectionTreePayload(
         sections: [
@@ -1237,6 +1509,23 @@ void main() {
     });
 
     test('merges Section D energy screens into one Energy heading', () {
+      // RICS L2 wording (Gate 3 fix): the merged D-Energy group now routes
+      // through the phrase engine instead of hardcoding its own English, so
+      // this test needs a phrase-engine fixture to produce any content.
+      final phraseEngine = InspectionPhraseEngine({
+        '{D_ENERGY}':
+            'According to the available Energy Performance Certificate: '
+                'Energy Efficiency Rating: {ENERGY_EFFICIENCY_CURRENT_VALUE}. '
+                'Potential Rating: {ENERGY_EFFICIENCY_POTENTIAL_VALUE}. This '
+                'information has not been independently verified.<br />\r\n'
+                '<strong>Environmental Impact:</strong> Current '
+                '{ENVIRONMENT_IMPACT_CURRENT_VALUE} Potential '
+                '{ENVIRONMENT_IMPACT_POTENTIAL_VALUE}.',
+        '{ENERGY_OTHER_SERVICES}::{ENERGY_OTHER_SERVICES_SOLAR_ELECTRICITY}':
+            'The property has photovoltaic panels designed to produce '
+                'electricity from sunlight installed on the roof slope(s).',
+      });
+      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
       final tree = InspectionTreePayload(
         sections: [
           InspectionSectionDefinition(
@@ -1316,7 +1605,7 @@ void main() {
         ],
       );
 
-      final doc = builder.build(
+      final doc = customBuilder.build(
         _makeRawData(
           tree: tree,
           allAnswers: {
@@ -1343,12 +1632,17 @@ void main() {
       expect(screens.first.isMergedGroup, isTrue);
       expect(
         screens.first.phrases
-            .any((p) => p.toLowerCase().contains('current 61')),
+            .any((p) => p.toLowerCase().contains('energy efficiency rating: 61')),
         isTrue,
       );
       expect(
         screens.first.phrases
-            .any((p) => p.toLowerCase().contains('potential 76')),
+            .any((p) => p.toLowerCase().contains('potential rating: 78')),
+        isTrue,
+      );
+      expect(
+        screens.first.phrases
+            .any((p) => p.toLowerCase().contains('current 58')),
         isTrue,
       );
       expect(

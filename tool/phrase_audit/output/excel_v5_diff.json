@@ -1,0 +1,391 @@
+{
+ "v5PhraseRows": 769,
+ "matchedInBank": 705,
+ "missingFromBank": 64,
+ "missing": [
+  {
+   "section": "",
+   "field": "Year extended",
+   "option": "",
+   "phrase": "Based on the available evidence, I believe that the property has not been extended."
+  },
+  {
+   "section": "",
+   "field": "Year converted",
+   "option": "Not extended",
+   "phrase": "Based on the available evidence, I believe that the property has not been converted."
+  },
+  {
+   "section": "",
+   "field": "Energy",
+   "option": "Efficiency",
+   "phrase": "Current: (Type text)               Potential:  (Type text)."
+  },
+  {
+   "section": "",
+   "field": "Energy",
+   "option": "Environmental Impact",
+   "phrase": "Current: (Type text)               Potential:  (Type text)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Weathered",
+   "option": "Yes",
+   "phrase": "The roof covering is weathered to age and type."
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Condition",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Deflection",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Deflection",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Roof Spreading",
+   "option": "Ok",
+   "phrase": "There is evidence to that appears to suggest that the roof timber structure may have required strengthening previously due to the additional weight of the replacement roof covering. The roof timber has now been strengthened as observed within the roof space. No repair is currently required. The property must be maintained as normal."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Roof Spreading",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Roof Spreading",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Roof Spreading",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Flat Roof Repair",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Flat Roof Repair",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Verge Repair",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Valley Gutters Repair",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Valley Gutters Repair",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "E3: Rainwater Goods RWG",
+   "field": "Weather Condition",
+   "option": "",
+   "phrase": "Paragraph (Skip line in output)."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Inadequate Lock Location",
+   "option": "",
+   "phrase": "The locking arrangement to the (main/rear/side/patio/garage/other) door(s) are not up to current standards and is a security risk. This should be improved soon."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Repair",
+   "option": "Repair soon",
+   "phrase": "The (door/windows/door glazing/window glazing/roof glazing/floor/walls/rainwater goods/other)  (is/are/has/have) (cracked/damaged/rotten/leaking/damp/failed/misted over/other. These should be repaired soon."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Water tank",
+   "option": "Inspected",
+   "phrase": "The water tank(s) found within the roof space are formed in (plastic/galvanised metal/asbestos/other)."
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Not insulated",
+   "option": "Defects",
+   "phrase": "The cold water and accompanying pipework are (not insulation/not adequately insulated). The absence of insulation could result in condensation which can cause dampness to nearby elements (See Section J1 – Risks)."
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Not insulated",
+   "option": "",
+   "phrase": "F1: The cold water and accompanying pipework are (not insulation/not adequately insulated). The absence of insulation could result in condensation which can cause dampness to nearby elements."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Add Notes",
+   "option": "If gas fire is selected",
+   "phrase": "The gas fire has not been tested. An appropriately qualified person should be called in before purchase commitment to determine fully the condition of this and all other gas appliances/pipework within the property to ensure their compliance with all regulations and requirements and the adequacy of flues to accommodate exhaust emission arrangements.\n\nIf you plan to use the fireplace, it is recommended that you contact a qualified person to check the condition of the flue lining to avoid leakage of harmful gases. The chimney should be sweep to ensure adequate ventilation when you start using it. No repair is currently needed. The property must be maintained in the normal way."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Repair",
+   "option": "Repair soon",
+   "phrase": "The fireplace in the (ground/first/second/other) floor (lounge/reception/dining room/kitchen/bedroom/other) is (damaged/ incomplete/missing part(s)/ obstructed/other). This should be repaired soon."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Leaking",
+   "option": "",
+   "phrase": "F8: The (bath tub/shower/WC/wash hand basin/urinal) is (badly leaking/very loose/ badly cracked/not working/ not connected/poorly secured/ blocked) and causing dampness."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Oil",
+   "option": "Standard text",
+   "phrase": "An appropriately qualified person registered with the Oil Firing Technical Association (OFTEC) should install and maintain oil fired heating and hot water appliances, associated equipment, and oil storage tanks. OFTEC recommend that a registered technician should inspect oil installations annually.\n\nWhere a stream, river, or an open drain is close by, the tank may need ‘secondary containment’ to prevent any oil spillage from getting into the water system. Usually called a‘bund’, this safety feature will catch all oil that could spill out of a leaking tank."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Cover",
+   "option": "None",
+   "phrase": "The water tank does not have a lid, and this could allow debris to fall into the water. You should fit an appropriate lid soon."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Cover",
+   "option": "Poor lid",
+   "phrase": "The water tank does not have a close-fitting lid, and this could allow debris to fall into the water. You should fit an appropriate lid soon."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Cover",
+   "option": "Asbestos tank",
+   "phrase": "The tank is made of a cement material that may contain asbestos fibres. In good condition, this is not a health risk. However, you should not disturb the tank without first getting advice from a licensed asbestos specialist or a contractor experienced in this type of work."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD Element function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "H1: Garage",
+   "field": "Limitations",
+   "option": "Not Inspected",
+   "phrase": "Because access keys were not provided by the (vendor/estate agent), I am unable to inspect the garage(s) and therefore unable to comment about the internal condition of the garage and roof timber."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Repair",
+   "option": "Repair soon",
+   "phrase": "The garage (roof is leaking/walls are cracked/window frame(s) are rotten/window glazing is cracked/door(s) is (damaged/ floor is cracked/other). This should be repaired soon."
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "Use ADD repair function",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "H3: Other",
+   "field": "Add Notes",
+   "option": "",
+   "phrase": "Notes. Please type in your text in the box provided below…"
+  },
+  {
+   "section": "I1: Regulations",
+   "field": "Standard text",
+   "option": "INSERT HERE",
+   "phrase": "AUTOMATIC APPLICABLE PHRASE INSERTION FROM ALL SECTIONS"
+  },
+  {
+   "section": "I2: Guarantees",
+   "field": "Listed Building",
+   "option": "INSERT HERE",
+   "phrase": "AUTOMATIC APPLICABLE PHRASE INSERTION FROM ALL SECTIONS"
+  },
+  {
+   "section": "J1: Risk to building",
+   "field": "Tenanted",
+   "option": "INSERT HERE",
+   "phrase": "AUTOMATIC APPLICABLE PHRASE INSERTION FROM ALL SECTIONS"
+  },
+  {
+   "section": "J3: Risk to People",
+   "field": "Nearby Trees",
+   "option": "INSERT HERE",
+   "phrase": "AUTOMATIC APPLICABLE PHRASE INSERTION FROM ALL SECTIONS"
+  }
+ ]
+}

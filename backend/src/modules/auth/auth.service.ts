@@ -20,11 +20,7 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
-import {
-  LoginResponseDto,
-  RegisterResponseDto,
-  UserResponseDto,
-} from './dto/auth-response.dto';
+import { LoginResponseDto, RegisterResponseDto, UserResponseDto } from './dto/auth-response.dto';
 import { EmailService } from './email.service';
 import { JwtPayload } from './strategies/jwt.strategy';
 import { StorageService, STORAGE_SERVICE } from '../media/storage/storage.interface';
@@ -47,6 +43,7 @@ export class AuthService {
 
   // OWASP A7: Account lockout thresholds (brute-force protection)
   private readonly MAX_FAILED_ATTEMPTS = 5;
+  private readonly FAILED_ATTEMPT_WINDOW_MINUTES = 15;
   private readonly LOCKOUT_DURATION_MINUTES = 15;
 
   constructor(
@@ -122,33 +119,63 @@ export class AuthService {
       throw new UnauthorizedException('User account is deactivated');
     }
 
-    // OWASP A7: Check if account is currently locked out
-    if (user.lockedUntil && new Date() < user.lockedUntil) {
-      const remainingMinutes = Math.ceil(
-        (user.lockedUntil.getTime() - Date.now()) / 60000,
-      );
+    const now = new Date();
+
+    // OWASP A7: Check only an active lock. An expired lock is cleared below
+    // before another failed attempt is considered.
+    if (user.lockedUntil && now < user.lockedUntil) {
+      const remainingMinutes = Math.ceil((user.lockedUntil.getTime() - now.getTime()) / 60000);
       this.logger.warn(`Login blocked for locked account: ${user.id}`);
       throw new UnauthorizedException(
         `Account is temporarily locked. Try again in ${remainingMinutes} minute(s).`,
       );
     }
 
+    // Counts are valid only inside one bounded window. The old implementation
+    // retained a count forever, so one later typo could lock an account again.
+    const windowExpired =
+      user.failedLoginWindowStartedAt &&
+      now.getTime() - user.failedLoginWindowStartedAt.getTime() >=
+        this.FAILED_ATTEMPT_WINDOW_MINUTES * 60 * 1000;
+    const staleLegacyState =
+      (user.failedLoginAttempts ?? 0) > 0 && !user.failedLoginWindowStartedAt;
+    const expiredLock = user.lockedUntil && now >= user.lockedUntil;
+
+    let failedLoginAttempts = user.failedLoginAttempts ?? 0;
+    let failedLoginWindowStartedAt = user.failedLoginWindowStartedAt;
+    if (windowExpired || staleLegacyState || expiredLock) {
+      await this.prisma.user.update({
+        where: { id: user.id },
+        data: {
+          failedLoginAttempts: 0,
+          failedLoginWindowStartedAt: null,
+          lockedUntil: null,
+        },
+      });
+      failedLoginAttempts = 0;
+      failedLoginWindowStartedAt = null;
+    }
+
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
 
     if (!isPasswordValid) {
-      // Increment failed attempts and lock if threshold exceeded
-      const attempts = (user.failedLoginAttempts ?? 0) + 1;
-      const lockData: { failedLoginAttempts: number; lockedUntil?: Date } = {
+      // Count only consecutive failures inside the active observation window.
+      const startsNewWindow = failedLoginAttempts === 0 || !failedLoginWindowStartedAt;
+      const attempts = startsNewWindow ? 1 : failedLoginAttempts + 1;
+      const lockData: {
+        failedLoginAttempts: number;
+        failedLoginWindowStartedAt: Date;
+        lockedUntil?: Date;
+      } = {
         failedLoginAttempts: attempts,
+        failedLoginWindowStartedAt: startsNewWindow ? now : (failedLoginWindowStartedAt ?? now),
       };
 
       if (attempts >= this.MAX_FAILED_ATTEMPTS) {
         const lockUntil = new Date();
         lockUntil.setMinutes(lockUntil.getMinutes() + this.LOCKOUT_DURATION_MINUTES);
         lockData.lockedUntil = lockUntil;
-        this.logger.warn(
-          `Account locked after ${attempts} failed attempts: ${user.id}`,
-        );
+        this.logger.warn(`Account locked after ${attempts} failed attempts: ${user.id}`);
       }
 
       await this.prisma.user.update({
@@ -165,6 +192,7 @@ export class AuthService {
       data: {
         lastLoginAt: new Date(),
         failedLoginAttempts: 0,
+        failedLoginWindowStartedAt: null,
         lockedUntil: null,
       },
     });

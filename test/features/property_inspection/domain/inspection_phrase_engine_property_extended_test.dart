@@ -70,14 +70,22 @@ void main() {
         'etCoveredTypeOther': 'felt shingles',
       });
 
-      expect(phrases, hasLength(3));
-      expect(phrases[0].toLowerCase(), contains('roof type: flat'));
-      expect(phrases[1].toLowerCase(), contains('concrete'));
-      expect(phrases[1].toLowerCase(), contains('plastic'));
-      expect(phrases[1].toLowerCase(), contains('zinc'));
-      expect(phrases[2].toLowerCase(), contains('tiles'));
-      expect(phrases[2].toLowerCase(), contains('slates'));
-      expect(phrases[2].toLowerCase(), contains('felt shingles'));
+      // Phase 3: single approved-bank sentence
+      // ({D_CONSTRUCTION}::{CONSTRUCTION_ROOF_AREA}) instead of the legacy
+      // "Roof type:" label output.
+      expect(phrases, hasLength(1));
+      final sentence = phrases.single.toLowerCase();
+      expect(
+        sentence,
+        startsWith('the flat roof construction over the main building'),
+      );
+      expect(sentence, contains('covered in'));
+      expect(sentence, contains('concrete'));
+      expect(sentence, contains('plastic'));
+      expect(sentence, contains('zinc'));
+      expect(sentence, contains('tiles'));
+      expect(sentence, contains('slates'));
+      expect(sentence, contains('felt shingles'));
     });
   });
 
@@ -95,12 +103,22 @@ void main() {
         'ch11': 'true',
       });
 
+      // Phase 3: approved-bank external wall / finishes / cladding sentences
+      // instead of the legacy "Extension walls:" label output.
       expect(phrases, hasLength(3));
-      expect(phrases[0].toLowerCase(), contains('extension walls'));
-      expect(phrases[1].toLowerCase(), contains('rendered (fully, smooth)'));
-      expect(phrases[1].toLowerCase(), contains('painted'));
-      expect(phrases[2].toLowerCase(), contains('cladding (partially)'));
-      expect(phrases[2].toLowerCase(), contains('tiles'));
+      expect(
+        phrases[0],
+        'The main external walls are built of cavity wall construction.',
+      );
+      expect(
+        phrases[1],
+        'Externally, the main walls are fully rendered smooth with painted '
+        'finishes.',
+      );
+      expect(
+        phrases[2],
+        'The main walls are partially cladded with tiles finishing.',
+      );
     });
   });
 
@@ -116,10 +134,15 @@ void main() {
         'etCoveredWithOther': 'resin',
       });
 
+      // Phase 3: approved-bank floor sentence
+      // ({D_CONSTRUCTION}::{CONSTRUCTION_FLOOR_AREA}).
       expect(phrases, hasLength(1));
-      expect(phrases.first.toLowerCase(), contains('floors: a mixture of'));
-      expect(phrases.first.toLowerCase(), contains('suspended timber'));
-      expect(phrases.first.toLowerCase(), contains('resin'));
+      expect(
+        phrases.single,
+        'The floors of the property are built of a mixture of suspended '
+        'timber and resin floor construction.',
+      );
+      expect(phrases.single, isNot(contains('of mainly of')));
     });
   });
 
@@ -138,13 +161,17 @@ void main() {
         'etWindowMaterialOther': 'composite',
       });
 
-      expect(phrases, hasLength(2));
-      expect(phrases[0].toLowerCase(), contains('windows: a mixture of'));
-      expect(phrases[0].toLowerCase(), contains('double'));
-      expect(phrases[0].toLowerCase(), contains('triple'));
-      expect(phrases[1].toLowerCase(), contains('window material:'));
-      expect(phrases[1], contains('PVC'));
-      expect(phrases[1].toLowerCase(), contains('composite'));
+      // Phase 3: single approved-bank window sentence
+      // ({D_CONSTRUCTION}::{CONSTRUCTION_WINDOWS_AREA}).
+      expect(phrases, hasLength(1));
+      final sentence = phrases.single;
+      expect(sentence.toLowerCase(), startsWith('the windows are'));
+      expect(sentence.toLowerCase(), contains('a mixture of'));
+      expect(sentence.toLowerCase(), contains('double'));
+      expect(sentence.toLowerCase(), contains('triple'));
+      expect(sentence, contains('uPVC'));
+      expect(sentence.toLowerCase(), contains('composite'));
+      expect(sentence.toLowerCase(), endsWith('units.'));
     });
   });
 }

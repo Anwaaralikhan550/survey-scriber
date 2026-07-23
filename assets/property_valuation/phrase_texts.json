@@ -1,0 +1,2691 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "bankVersion": "1.0.0-draft",
+    "reviewStatus": "draft",
+    "profile": "RICS-style professional valuation draft",
+    "approvalRequired": "Client or RICS-qualified reviewer sign-off before approved production activation"
+  },
+  "templates": {
+    "VAL_DRAFT_0001": {
+      "screenId": "*",
+      "text": "A careful examination was made of all accessible wall surfaces for evidence of structural movement, including cracking, distortion, bulging, or displacement of masonry. Evidence of building movement was noted: none. So far as can be seen from this single inspection, the movement appears to be generally consistent with properties of this age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0002": {
+      "screenId": "*",
+      "text": "A careful examination was made of all accessible wall surfaces for evidence of structural movement, including cracking, distortion, bulging, or displacement of masonry. Evidence of building movement was noted: structural movement. So far as can be seen from this single inspection, the movement appears to be generally consistent with properties of this age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0003": {
+      "screenId": "*",
+      "text": "A careful examination was made of all accessible wall surfaces for evidence of structural movement, including cracking, distortion, bulging, or displacement of masonry. Evidence of building movement was noted: underpinning. So far as can be seen from this single inspection, the movement appears to be generally consistent with properties of this age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0004": {
+      "screenId": "*",
+      "text": "A full drainage survey, including a CCTV inspection of the underground pipework, is recommended to confirm the condition, adequacy, and functionality of the system. Your legal adviser should confirm any shared drainage responsibilities and associated maintenance obligations.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0005": {
+      "screenId": "*",
+      "text": "A retention of [free text] is recommended to cover the cost of the essential repair works identified in this report. The retention should not be released until satisfactory completion of the works has been confirmed.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0006": {
+      "screenId": "*",
+      "text": "Access to the roof space was not possible at the time of inspection. Accordingly, the condition of the roof timbers, insulation, water tanks, and any associated pipework could not be assessed. This should be considered a limitation of this inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0007": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property had fully furnished finishes.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0008": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property had partially furnished finishes.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0009": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property had unfurnished finishes.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0010": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was fully carpeted throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0011": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was occupied and had fully furnished finishes.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0012": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was occupied, had fully furnished finishes and was fully carpeted throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0013": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was occupied, had partially furnished finishes and was fully carpeted throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0014": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was occupied, had unfurnished finishes and was fully carpeted throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0015": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was occupied.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0016": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was partially carpeted throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0017": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was tenanted, had unfurnished finishes and was fully carpeted throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0018": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was tenanted.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0019": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was vacant, had unfurnished finishes and was fully carpeted throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0020": {
+      "screenId": "*",
+      "text": "At the time of inspection, the property was vacant.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0021": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the construction works were at the re-inspection stage. The valuation is provided on the basis that the property will be completed to a satisfactory standard in accordance with the approved plans and specifications.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0022": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the construction works were at the under construction stage. The valuation is provided on the basis that the property will be completed to a satisfactory standard in accordance with the approved plans and specifications.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0023": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the construction works were complete. The valuation is provided on the basis that the completed works have been carried out to a satisfactory standard in accordance with the approved plans and specifications.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0024": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the weather conditions were dry. It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0025": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the weather conditions were snowy. It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0026": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the weather conditions were wet. It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0027": {
+      "screenId": "*",
+      "text": "Based on my professional knowledge of the area, construction methods, and architectural styles, I estimate the property was built circa [number], with an extension or alteration added circa [number]. This estimate is provided for guidance purposes and should be verified by your legal adviser through title deeds or local authority records where appropriate.",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0028": {
+      "screenId": "*",
+      "text": "Based on my professional knowledge of the area, construction methods, and architectural styles, I estimate the property was built circa [number]. This estimate is provided for guidance purposes and should be verified by your legal adviser through title deeds or local authority records where appropriate.",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0029": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band A, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0030": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band A.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0031": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band B, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0032": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band B.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0033": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band C, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0034": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band C.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0035": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band D, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0036": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band D.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0037": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band E, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0038": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band E.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0039": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band F, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0040": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band F.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0041": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band G, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0042": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Band G.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0043": {
+      "screenId": "*",
+      "text": "Current Energy Performance: Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0044": {
+      "screenId": "*",
+      "text": "Damp meter readings indicated: damp not found.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0045": {
+      "screenId": "*",
+      "text": "Damp meter readings indicated: inspection limitations.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0046": {
+      "screenId": "*",
+      "text": "EPC Reference: [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0047": {
+      "screenId": "*",
+      "text": "Elevated readings were noted at [free text]. Further investigation by a specialist damp surveyor is recommended to establish the cause, extent, and appropriate remedial treatment for the dampness identified.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0048": {
+      "screenId": "*",
+      "text": "Environmental Impact: Current [number], Potential [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0049": {
+      "screenId": "*",
+      "text": "Environmental Impact: Current [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0050": {
+      "screenId": "*",
+      "text": "Environmental Impact: Potential [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0051": {
+      "screenId": "*",
+      "text": "Evidence of beetle infestation was noted during the inspection. This is a potentially serious defect which, if left untreated, may spread and cause significant damage to the building fabric. A specialist timber and damp report is strongly recommended before exchange of contracts to establish the full extent of the defect, the risk of spread, and the cost of remedial treatment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0052": {
+      "screenId": "*",
+      "text": "Evidence of dry rot was noted during the inspection. This is a potentially serious defect which, if left untreated, may spread and cause significant damage to the building fabric. A specialist timber and damp report is strongly recommended before exchange of contracts to establish the full extent of the defect, the risk of spread, and the cost of remedial treatment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0053": {
+      "screenId": "*",
+      "text": "Evidence of dry rot, wet rot, beetle infestation and [free text] was noted during the inspection. This is a potentially serious defect which, if left untreated, may spread and cause significant damage to the building fabric. A specialist timber and damp report is strongly recommended before exchange of contracts to establish the full extent of the defect, the risk of spread, and the cost of remedial treatment.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0054": {
+      "screenId": "*",
+      "text": "Evidence of other was noted during the inspection. This is a potentially serious defect which, if left untreated, may spread and cause significant damage to the building fabric. A specialist timber and damp report is strongly recommended before exchange of contracts to establish the full extent of the defect, the risk of spread, and the cost of remedial treatment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0055": {
+      "screenId": "*",
+      "text": "Evidence of wall tie corrosion was noted during the inspection, as indicated by horizontal cracking in the mortar bed joints at regular intervals. This is a potentially serious structural defect which, if left untreated, may compromise the structural integrity of the external wall leaves. A specialist survey by a qualified wall tie specialist is strongly recommended before exchange of contracts to assess the extent of the corrosion and advise on remedial measures.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0056": {
+      "screenId": "*",
+      "text": "Evidence of wet rot was noted during the inspection. This is a potentially serious defect which, if left untreated, may spread and cause significant damage to the building fabric. A specialist timber and damp report is strongly recommended before exchange of contracts to establish the full extent of the defect, the risk of spread, and the cost of remedial treatment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0057": {
+      "screenId": "*",
+      "text": "Floor plan scanned during the valuation inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0058": {
+      "screenId": "*",
+      "text": "Having regard to the age, type, and style of the property, and based upon my thorough inspection, The overall condition of the property has been assessed as Average.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0059": {
+      "screenId": "*",
+      "text": "Having regard to the age, type, and style of the property, and based upon my thorough inspection, The overall condition of the property is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0060": {
+      "screenId": "*",
+      "text": "Having regard to the age, type, and style of the property, and based upon my thorough inspection, The overall condition of the property is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0061": {
+      "screenId": "*",
+      "text": "Heat is distributed throughout the property by radiators, warm air and storage heaters.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0062": {
+      "screenId": "*",
+      "text": "Heat is distributed throughout the property by radiators.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0063": {
+      "screenId": "*",
+      "text": "Heat is distributed throughout the property by storage heaters.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0064": {
+      "screenId": "*",
+      "text": "Heat is distributed throughout the property by warm air.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0065": {
+      "screenId": "*",
+      "text": "I am advised that the agreed purchase price for the property is [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0066": {
+      "screenId": "*",
+      "text": "I am advised that the following incentives are being offered by the developer: [free text]. These incentives have been taken into consideration in arriving at my valuation figure, in accordance with RICS guidance on the treatment of incentives.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0067": {
+      "screenId": "*",
+      "text": "I noted adverse neighbouring uses in the vicinity of the property, which may have an adverse effect on the value, saleability, or desirability of the property. Further enquiries with the relevant local authority are recommended.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0068": {
+      "screenId": "*",
+      "text": "I noted electromagnetic field sources in the vicinity of the property, which may have an adverse effect on the value, saleability, or desirability of the property. Further enquiries with the relevant local authority are recommended.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0069": {
+      "screenId": "*",
+      "text": "I noted other in the vicinity of the property, which may have an adverse effect on the value, saleability, or desirability of the property. Further enquiries with the relevant local authority are recommended.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0070": {
+      "screenId": "*",
+      "text": "I noted potential pollution sources in the vicinity of the property, which may have an adverse effect on the value, saleability, or desirability of the property. Further enquiries with the relevant local authority are recommended.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0071": {
+      "screenId": "*",
+      "text": "I noted potential pollution sources, electromagnetic field sources, adverse neighbouring uses and [free text] in the vicinity of the property, which may have an adverse effect on the value, saleability, or desirability of the property. Further enquiries with the relevant local authority are recommended.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0072": {
+      "screenId": "*",
+      "text": "I was unable to confirm the presence of mains-powered smoke detectors within the property. It is strongly recommended that appropriate smoke detectors are installed on every floor, along with carbon monoxide detectors where gas or solid fuel appliances are present, in accordance with current Building Regulations and fire safety guidance.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0073": {
+      "screenId": "*",
+      "text": "In my opinion, the open market value of the property, subject to the assumptions, special assumptions, and conditions set out in this report, is considered to be adequate security for the proposed mortgage advance. This valuation has been prepared in accordance with the RICS Valuation — Global Standards.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0074": {
+      "screenId": "*",
+      "text": "In my opinion, the property provides suitable security for mortgage lending purposes, subject to the conditions and recommendations set out in this report.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0075": {
+      "screenId": "*",
+      "text": "Mains-powered smoke detectors were noted to be installed within the property. The detectors should be tested regularly in accordance with the manufacturer's guidelines and replaced in accordance with the recommended service life. Carbon monoxide detectors should also be installed where gas or solid fuel appliances are present.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0076": {
+      "screenId": "*",
+      "text": "Moisture readings were taken with a calibrated electronic moisture meter at representative points to the internal faces of external walls. Elevated moisture levels were detected.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0077": {
+      "screenId": "*",
+      "text": "No central heating system is installed within the property at the present time.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0078": {
+      "screenId": "*",
+      "text": "Off-street parking is provided by way of a car port.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0079": {
+      "screenId": "*",
+      "text": "Off-street parking is provided by way of a double garage.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0080": {
+      "screenId": "*",
+      "text": "Off-street parking is provided by way of a garage, a single garage, a double garage, an allocated parking space, a car port, no dedicated parking and [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0081": {
+      "screenId": "*",
+      "text": "Off-street parking is provided by way of a garage.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0082": {
+      "screenId": "*",
+      "text": "Off-street parking is provided by way of a single garage.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0083": {
+      "screenId": "*",
+      "text": "Off-street parking is provided by way of an allocated parking space.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0084": {
+      "screenId": "*",
+      "text": "Off-street parking is provided by way of no dedicated parking.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0085": {
+      "screenId": "*",
+      "text": "Off-street parking is provided by way of other.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0086": {
+      "screenId": "*",
+      "text": "Only a partial view of the flat roof was possible at the time of inspection. A full inspection from an elevated position may reveal additional defects not visible from the ground.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0087": {
+      "screenId": "*",
+      "text": "Only a partial view of the roof was possible from ground level due to the height and configuration of the building. A more detailed inspection from a scaffold or elevated platform may reveal additional defects not visible from the ground. A specialist roofing inspection should be considered as part of the property's ongoing maintenance regime.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0088": {
+      "screenId": "*",
+      "text": "Only a partial view of the secondary roof was possible from ground level due to the height and configuration of the building. A more detailed inspection from an elevated position may reveal additional defects not visible from the ground.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0089": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band A, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0090": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band A.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0091": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band B, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0092": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band B.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0093": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band C, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0094": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band C.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0095": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band D, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0096": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band D.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0097": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band E, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0098": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band E.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0099": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band F, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0100": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band F.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0101": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band G, Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0102": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Band G.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0103": {
+      "screenId": "*",
+      "text": "Potential Energy Performance: Score [number].",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0104": {
+      "screenId": "*",
+      "text": "Rights of way or easements may affect the property. Sample text Your legal adviser should make full enquiries regarding any rights of way, easements, or wayleaves that may exist.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0105": {
+      "screenId": "*",
+      "text": "Rights of way or easements may affect the property. Your legal adviser should make full enquiries regarding any such rights.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0106": {
+      "screenId": "*",
+      "text": "Roof ventilation is provided and appears not sufficient.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0107": {
+      "screenId": "*",
+      "text": "Roof ventilation is provided and appears sufficient.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0108": {
+      "screenId": "*",
+      "text": "Roof ventilation to the secondary roof is provided and appears not sufficient.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0109": {
+      "screenId": "*",
+      "text": "Roof ventilation to the secondary roof is provided and appears sufficient.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0110": {
+      "screenId": "*",
+      "text": "Sample text",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0111": {
+      "screenId": "*",
+      "text": "Sample text is covered with tile, natural slate, artificial slate, stone, thatch, original, replacement, [free text], mineral felt, asphalt, lead, zinc and [free text] materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0112": {
+      "screenId": "*",
+      "text": "Sub-floor ventilation has been assessed as inadequate number.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0113": {
+      "screenId": "*",
+      "text": "Sub-floor ventilation has been assessed as none.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0114": {
+      "screenId": "*",
+      "text": "Sub-floor ventilation is provided by airbricks at appropriate intervals and appears adequate for the size and configuration of the property. Adequate ventilation is essential to prevent the build-up of moisture beneath the floor, which can lead to timber decay and fungal attack.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0115": {
+      "screenId": "*",
+      "text": "The applicant's share represents [number]% of the whole property.",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_DRAFT_0116": {
+      "screenId": "*",
+      "text": "The boundaries appear well defined and clearly identifiable on the ground. Your legal adviser should confirm the precise extent of the boundaries from the title deeds.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0117": {
+      "screenId": "*",
+      "text": "The ceilings are of asbestos construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0118": {
+      "screenId": "*",
+      "text": "The ceilings are of fibreboard construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0119": {
+      "screenId": "*",
+      "text": "The ceilings are of lath and plaster construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0120": {
+      "screenId": "*",
+      "text": "The ceilings are of other construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0121": {
+      "screenId": "*",
+      "text": "The ceilings are of plasterboard construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0122": {
+      "screenId": "*",
+      "text": "The ceilings are of plasterboard, lath and plaster, asbestos, fibreboard, polystyrene tile and [free text] construction.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0123": {
+      "screenId": "*",
+      "text": "The ceilings are of polystyrene tile construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0124": {
+      "screenId": "*",
+      "text": "The ceilings is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0125": {
+      "screenId": "*",
+      "text": "The ceilings is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0126": {
+      "screenId": "*",
+      "text": "The chimney breasts is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0127": {
+      "screenId": "*",
+      "text": "The chimney breasts is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0128": {
+      "screenId": "*",
+      "text": "The chimney breasts within the property are fitted with ventilation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0129": {
+      "screenId": "*",
+      "text": "The chimney breasts within the property are in use, sealed, fitted with ventilation, without ventilation, removed and [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0130": {
+      "screenId": "*",
+      "text": "The chimney breasts within the property are in use.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0131": {
+      "screenId": "*",
+      "text": "The chimney breasts within the property are other.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0132": {
+      "screenId": "*",
+      "text": "The chimney breasts within the property are removed.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0133": {
+      "screenId": "*",
+      "text": "The chimney breasts within the property are sealed.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0134": {
+      "screenId": "*",
+      "text": "The chimney breasts within the property are without ventilation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0135": {
+      "screenId": "*",
+      "text": "The chimney stacks are of brick construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0136": {
+      "screenId": "*",
+      "text": "The chimney stacks are of brick, stone, rendered and [free text] construction.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0137": {
+      "screenId": "*",
+      "text": "The chimney stacks are of other construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0138": {
+      "screenId": "*",
+      "text": "The chimney stacks are of rendered construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0139": {
+      "screenId": "*",
+      "text": "The chimney stacks are of stone construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0140": {
+      "screenId": "*",
+      "text": "The chimney stacks is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0141": {
+      "screenId": "*",
+      "text": "The chimney stacks is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0142": {
+      "screenId": "*",
+      "text": "The damp proof course is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0143": {
+      "screenId": "*",
+      "text": "The damp proof course is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0144": {
+      "screenId": "*",
+      "text": "The damp proof course is of electro-osmotic type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0145": {
+      "screenId": "*",
+      "text": "The damp proof course is of engineering brick type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0146": {
+      "screenId": "*",
+      "text": "The damp proof course is of engineering brick, felt, plastic, slate, injected, electro-osmotic and [free text] type.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0147": {
+      "screenId": "*",
+      "text": "The damp proof course is of felt type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0148": {
+      "screenId": "*",
+      "text": "The damp proof course is of injected type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0149": {
+      "screenId": "*",
+      "text": "The damp proof course is of other type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0150": {
+      "screenId": "*",
+      "text": "The damp proof course is of plastic type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0151": {
+      "screenId": "*",
+      "text": "The damp proof course is of slate type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0152": {
+      "screenId": "*",
+      "text": "The dampness is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0153": {
+      "screenId": "*",
+      "text": "The dampness is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0154": {
+      "screenId": "*",
+      "text": "The drainage is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0155": {
+      "screenId": "*",
+      "text": "The drainage is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0156": {
+      "screenId": "*",
+      "text": "The electrical installation appears dated. A current Electrical Installation Condition Report (EICR), carried out by a competent electrician registered with an appropriate Part P scheme, should be obtained to confirm the safety and adequacy of the installation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0157": {
+      "screenId": "*",
+      "text": "The electrical installation appears modern, dated, with later alterations, with evidence of DIY work and [free text]. A current Electrical Installation Condition Report (EICR), carried out by a competent electrician registered with an appropriate Part P scheme, should be obtained to confirm the safety and adequacy of the installation.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0158": {
+      "screenId": "*",
+      "text": "The electrical installation appears modern. A current Electrical Installation Condition Report (EICR), carried out by a competent electrician registered with an appropriate Part P scheme, should be obtained to confirm the safety and adequacy of the installation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0159": {
+      "screenId": "*",
+      "text": "The electrical installation appears other. A current Electrical Installation Condition Report (EICR), carried out by a competent electrician registered with an appropriate Part P scheme, should be obtained to confirm the safety and adequacy of the installation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0160": {
+      "screenId": "*",
+      "text": "The electrical installation appears with evidence of DIY work. A current Electrical Installation Condition Report (EICR), carried out by a competent electrician registered with an appropriate Part P scheme, should be obtained to confirm the safety and adequacy of the installation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0161": {
+      "screenId": "*",
+      "text": "The electrical installation appears with later alterations. A current Electrical Installation Condition Report (EICR), carried out by a competent electrician registered with an appropriate Part P scheme, should be obtained to confirm the safety and adequacy of the installation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0162": {
+      "screenId": "*",
+      "text": "The electrical installation is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0163": {
+      "screenId": "*",
+      "text": "The electrical installation is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0164": {
+      "screenId": "*",
+      "text": "The electrical system age is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0165": {
+      "screenId": "*",
+      "text": "The electrical system age is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0166": {
+      "screenId": "*",
+      "text": "The estimated cost of making up the road to an adoptable standard is [free text]. Your legal adviser should confirm any potential liability for road-making charges and whether any Section 38 agreement is in place with the highway authority.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0167": {
+      "screenId": "*",
+      "text": "The estimated market value of the property following satisfactory completion of the recommended essential repair works is [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0168": {
+      "screenId": "*",
+      "text": "The external decorations comprise lead finishes.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0169": {
+      "screenId": "*",
+      "text": "The external decorations comprise lead, paint, stain and [free text] finishes.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0170": {
+      "screenId": "*",
+      "text": "The external decorations comprise other finishes.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0171": {
+      "screenId": "*",
+      "text": "The external decorations comprise paint finishes.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0172": {
+      "screenId": "*",
+      "text": "The external decorations comprise stain finishes.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0173": {
+      "screenId": "*",
+      "text": "The external decorations is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0174": {
+      "screenId": "*",
+      "text": "The external decorations is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0175": {
+      "screenId": "*",
+      "text": "The external walls is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0176": {
+      "screenId": "*",
+      "text": "The external walls is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0177": {
+      "screenId": "*",
+      "text": "The flashings are of capped construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0178": {
+      "screenId": "*",
+      "text": "The flashings are of lead construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0179": {
+      "screenId": "*",
+      "text": "The flashings are of lead, zinc, mortar, capped, vented and [free text] construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0180": {
+      "screenId": "*",
+      "text": "The flashings are of mortar construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0181": {
+      "screenId": "*",
+      "text": "The flashings are of other construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0182": {
+      "screenId": "*",
+      "text": "The flashings are of vented construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0183": {
+      "screenId": "*",
+      "text": "The flashings are of zinc construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0184": {
+      "screenId": "*",
+      "text": "The flashings is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0185": {
+      "screenId": "*",
+      "text": "The flashings is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0186": {
+      "screenId": "*",
+      "text": "The flat is configured as a maisonette within a conversion building.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0187": {
+      "screenId": "*",
+      "text": "The flat is configured as a maisonette within a purpose built building.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0188": {
+      "screenId": "*",
+      "text": "The flat is configured as a maisonette.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0189": {
+      "screenId": "*",
+      "text": "The flat is of maisonette type within a purpose built building.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0190": {
+      "screenId": "*",
+      "text": "The flat is within a conversion building.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0191": {
+      "screenId": "*",
+      "text": "The flat is within a purpose built building.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0192": {
+      "screenId": "*",
+      "text": "The flat roof covering is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0193": {
+      "screenId": "*",
+      "text": "The flat roof covering is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0194": {
+      "screenId": "*",
+      "text": "The flat roof covering is of asphalt construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0195": {
+      "screenId": "*",
+      "text": "The flat roof covering is of lead construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0196": {
+      "screenId": "*",
+      "text": "The flat roof covering is of mineral felt construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0197": {
+      "screenId": "*",
+      "text": "The flat roof covering is of mineral felt, asphalt, lead, zinc and [free text] construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0198": {
+      "screenId": "*",
+      "text": "The flat roof covering is of other construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0199": {
+      "screenId": "*",
+      "text": "The flat roof covering is of zinc construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0200": {
+      "screenId": "*",
+      "text": "The following restrictions or matters that may affect the value or use of the property should be noted: [free text]",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0201": {
+      "screenId": "*",
+      "text": "The garage is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0202": {
+      "screenId": "*",
+      "text": "The garage is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0203": {
+      "screenId": "*",
+      "text": "The gas installation is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0204": {
+      "screenId": "*",
+      "text": "The gas installation is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0205": {
+      "screenId": "*",
+      "text": "The gas supply is lpg. A current Gas Safety Certificate, issued by a Gas Safe registered engineer, should be obtained.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0206": {
+      "screenId": "*",
+      "text": "The ground floor is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0207": {
+      "screenId": "*",
+      "text": "The ground floor is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0208": {
+      "screenId": "*",
+      "text": "The ground floor is of other construction. The floor coverings were not lifted during the inspection, and the condition of the floor structure could only be assessed from the general feel and level of the floors when walked upon.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0209": {
+      "screenId": "*",
+      "text": "The ground floor is of solid concrete construction. The floor coverings were not lifted during the inspection, and the condition of the floor structure could only be assessed from the general feel and level of the floors when walked upon.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0210": {
+      "screenId": "*",
+      "text": "The ground floor is of solid concrete, suspended timber and [free text] construction. The floor coverings were not lifted during the inspection, and the condition of the floor structure could only be assessed from the general feel and level of the floors when walked upon.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0211": {
+      "screenId": "*",
+      "text": "The ground floor is of suspended timber construction. The floor coverings were not lifted during the inspection, and the condition of the floor structure could only be assessed from the general feel and level of the floors when walked upon.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0212": {
+      "screenId": "*",
+      "text": "The heating system is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0213": {
+      "screenId": "*",
+      "text": "The heating system is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0214": {
+      "screenId": "*",
+      "text": "The heating system was not tested as part of this inspection. A current service record should be obtained to confirm the system has been regularly maintained. The boiler and associated system should be serviced annually by a suitably qualified engineer in accordance with the manufacturer's instructions and current regulations.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0215": {
+      "screenId": "*",
+      "text": "The hot water and central heating system is fuelled by LPG, gas, electric, solid fuel, oil and [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0216": {
+      "screenId": "*",
+      "text": "The hot water and central heating system is fuelled by LPG.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0217": {
+      "screenId": "*",
+      "text": "The hot water and central heating system is fuelled by electric.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0218": {
+      "screenId": "*",
+      "text": "The hot water and central heating system is fuelled by gas.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0219": {
+      "screenId": "*",
+      "text": "The hot water and central heating system is fuelled by oil.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0220": {
+      "screenId": "*",
+      "text": "The hot water and central heating system is fuelled by other.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0221": {
+      "screenId": "*",
+      "text": "The hot water and central heating system is fuelled by solid fuel.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0222": {
+      "screenId": "*",
+      "text": "The inspection of the roof space was limited by boarding over the joists, which prevented a full examination of all areas. Concealed defects may exist in those areas that could not be inspected.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0223": {
+      "screenId": "*",
+      "text": "The inspection of the roof space was limited by insulation between the joists, which prevented a full examination of all areas. Concealed defects may exist in those areas that could not be inspected.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0224": {
+      "screenId": "*",
+      "text": "The inspection of the roof space was limited by other, which prevented a full examination of all areas. Concealed defects may exist in those areas that could not be inspected.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0225": {
+      "screenId": "*",
+      "text": "The inspection of the roof space was limited by stored items restricting access, boarding over the joists, insulation between the joists and [free text], which prevented a full examination of all areas. Concealed defects may exist in those areas that could not be inspected.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0226": {
+      "screenId": "*",
+      "text": "The inspection of the roof space was limited by stored items restricting access, which prevented a full examination of all areas. Concealed defects may exist in those areas that could not be inspected.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0227": {
+      "screenId": "*",
+      "text": "The inspection was carried out on [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0228": {
+      "screenId": "*",
+      "text": "The internal decorations comprise artex textured finishes throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0229": {
+      "screenId": "*",
+      "text": "The internal decorations comprise artex textured, painted, wallpapered and [free text] finishes throughout.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0230": {
+      "screenId": "*",
+      "text": "The internal decorations comprise other finishes throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0231": {
+      "screenId": "*",
+      "text": "The internal decorations comprise painted finishes throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0232": {
+      "screenId": "*",
+      "text": "The internal decorations comprise wallpapered finishes throughout.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0233": {
+      "screenId": "*",
+      "text": "The internal decorations is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0234": {
+      "screenId": "*",
+      "text": "The internal decorations is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0235": {
+      "screenId": "*",
+      "text": "The internal fittings include bathroom and sanitary fittings. These were visually inspected as part of this survey. No tests were carried out to the plumbing or waste systems.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0236": {
+      "screenId": "*",
+      "text": "The internal fittings include kitchen units and worktops, utility room fittings, bathroom and sanitary fittings and [free text]. These were visually inspected as part of this survey. No tests were carried out to the plumbing or waste systems.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0237": {
+      "screenId": "*",
+      "text": "The internal fittings include kitchen units and worktops. These were visually inspected as part of this survey. No tests were carried out to the plumbing or waste systems.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0238": {
+      "screenId": "*",
+      "text": "The internal fittings include other. These were visually inspected as part of this survey. No tests were carried out to the plumbing or waste systems.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0239": {
+      "screenId": "*",
+      "text": "The internal fittings include utility room fittings. These were visually inspected as part of this survey. No tests were carried out to the plumbing or waste systems.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0240": {
+      "screenId": "*",
+      "text": "The internal fittings is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0241": {
+      "screenId": "*",
+      "text": "The internal fittings is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0242": {
+      "screenId": "*",
+      "text": "The internal walls and partitions are of dry-lined construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0243": {
+      "screenId": "*",
+      "text": "The internal walls and partitions are of other construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0244": {
+      "screenId": "*",
+      "text": "The internal walls and partitions are of removed section construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0245": {
+      "screenId": "*",
+      "text": "The internal walls and partitions are of solid construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0246": {
+      "screenId": "*",
+      "text": "The internal walls and partitions are of solid, stud partition, dry-lined, removed section and [free text] construction.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0247": {
+      "screenId": "*",
+      "text": "The internal walls and partitions are of stud partition construction.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0248": {
+      "screenId": "*",
+      "text": "The internal walls and partitions is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0249": {
+      "screenId": "*",
+      "text": "The internal walls and partitions is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0250": {
+      "screenId": "*",
+      "text": "The main roof is of pitched construction, covered with artificial slate materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0251": {
+      "screenId": "*",
+      "text": "The main roof is of pitched construction, covered with natural slate materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0252": {
+      "screenId": "*",
+      "text": "The main roof is of pitched construction, covered with original materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0253": {
+      "screenId": "*",
+      "text": "The main roof is of pitched construction, covered with other materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0254": {
+      "screenId": "*",
+      "text": "The main roof is of pitched construction, covered with replacement materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0255": {
+      "screenId": "*",
+      "text": "The main roof is of pitched construction, covered with stone materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0256": {
+      "screenId": "*",
+      "text": "The main roof is of pitched construction, covered with thatch materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0257": {
+      "screenId": "*",
+      "text": "The main roof is of pitched construction, covered with tile materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0258": {
+      "screenId": "*",
+      "text": "The main roof is of pitched construction, covered with tile, natural slate, artificial slate, stone, thatch, original, replacement and [free text] materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0259": {
+      "screenId": "*",
+      "text": "The measured wall thickness is approximately [free text], which is consistent with the identified construction type.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0260": {
+      "screenId": "*",
+      "text": "The outbuildings is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0261": {
+      "screenId": "*",
+      "text": "The outbuildings is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0262": {
+      "screenId": "*",
+      "text": "The parking is located to the offsite of the property.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0263": {
+      "screenId": "*",
+      "text": "The parking is located to the onsite of the property.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0264": {
+      "screenId": "*",
+      "text": "The pitched roof covering is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0265": {
+      "screenId": "*",
+      "text": "The pitched roof covering is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0266": {
+      "screenId": "*",
+      "text": "The pre-inspection estimated value provided to us was [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0267": {
+      "screenId": "*",
+      "text": "The principal external walls are of brick construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0268": {
+      "screenId": "*",
+      "text": "The principal external walls are of cavity construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0269": {
+      "screenId": "*",
+      "text": "The principal external walls are of other construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0270": {
+      "screenId": "*",
+      "text": "The principal external walls are of rendered construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0271": {
+      "screenId": "*",
+      "text": "The principal external walls are of single skin construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0272": {
+      "screenId": "*",
+      "text": "The principal external walls are of solid construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0273": {
+      "screenId": "*",
+      "text": "The principal external walls are of solid, cavity, timber frame, stone, brick, single skin, rendered and [free text] construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0274": {
+      "screenId": "*",
+      "text": "The principal external walls are of stone construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0275": {
+      "screenId": "*",
+      "text": "The principal external walls are of timber frame construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0276": {
+      "screenId": "*",
+      "text": "The property benefits from a NHBC structural warranty. Your legal adviser should confirm the precise terms, duration, and transferability of this warranty cover.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0277": {
+      "screenId": "*",
+      "text": "The property benefits from a Zurich structural warranty. Your legal adviser should confirm the precise terms, duration, and transferability of this warranty cover.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0278": {
+      "screenId": "*",
+      "text": "The property benefits from an Arch Cert structural warranty. Your legal adviser should confirm the precise terms, duration, and transferability of this warranty cover.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0279": {
+      "screenId": "*",
+      "text": "The property benefits from garden areas to the front and/or rear. The gardens were inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0280": {
+      "screenId": "*",
+      "text": "The property benefits from guarantees or warranties. Sample text Your legal adviser should confirm the precise terms, duration, and transferability of these guarantees.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0281": {
+      "screenId": "*",
+      "text": "The property benefits from guarantees or warranties. Your legal adviser should confirm the precise terms, duration, and transferability of these guarantees.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0282": {
+      "screenId": "*",
+      "text": "The property fronts onto a made-up road.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0283": {
+      "screenId": "*",
+      "text": "The property fronts onto a partly made-up road.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0284": {
+      "screenId": "*",
+      "text": "The property fronts onto a private road.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0285": {
+      "screenId": "*",
+      "text": "The property fronts onto an adopted highway maintained at public expense, a private road, a made-up road, a partly made-up road and an unmade road.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0286": {
+      "screenId": "*",
+      "text": "The property fronts onto an adopted highway maintained at public expense.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0287": {
+      "screenId": "*",
+      "text": "The property fronts onto an unmade road.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0288": {
+      "screenId": "*",
+      "text": "The property includes Double garages, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0289": {
+      "screenId": "*",
+      "text": "The property includes Double integral garages, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0290": {
+      "screenId": "*",
+      "text": "The property includes Other garages, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0291": {
+      "screenId": "*",
+      "text": "The property includes Other integral garages, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0292": {
+      "screenId": "*",
+      "text": "The property includes Single block of garage, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0293": {
+      "screenId": "*",
+      "text": "The property includes Single detached garages, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0294": {
+      "screenId": "*",
+      "text": "The property includes Single garages, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0295": {
+      "screenId": "*",
+      "text": "The property includes Single integral garages, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0296": {
+      "screenId": "*",
+      "text": "The property includes Single semi-detached garages, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0297": {
+      "screenId": "*",
+      "text": "The property includes a block of garage, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0298": {
+      "screenId": "*",
+      "text": "The property includes a detached garage, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0299": {
+      "screenId": "*",
+      "text": "The property includes a flying freehold element. Sample text Your legal adviser should confirm the legal implications, including any indemnity insurance requirements and maintenance obligations.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0300": {
+      "screenId": "*",
+      "text": "The property includes a flying freehold element. Your legal adviser should confirm the legal implications, including any indemnity insurance requirements and maintenance obligations.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0301": {
+      "screenId": "*",
+      "text": "The property includes a semi-detached garage, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0302": {
+      "screenId": "*",
+      "text": "The property includes an integral garage, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0303": {
+      "screenId": "*",
+      "text": "The property includes external outbuildings comprising [free text]. These were inspected as part of this survey where accessible.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0304": {
+      "screenId": "*",
+      "text": "The property includes external outbuildings, which were inspected as part of this survey where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0305": {
+      "screenId": "*",
+      "text": "The property includes outbuildings comprising [free text]. The outbuildings were inspected as part of this survey where accessible.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0306": {
+      "screenId": "*",
+      "text": "The property is a bungalow.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0307": {
+      "screenId": "*",
+      "text": "The property is a detached bungalow.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0308": {
+      "screenId": "*",
+      "text": "The property is a detached house.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0309": {
+      "screenId": "*",
+      "text": "The property is a flat.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0310": {
+      "screenId": "*",
+      "text": "The property is a house.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0311": {
+      "screenId": "*",
+      "text": "The property is a listed building. Your legal adviser should advise on the implications of this building status, including restrictions on alterations and maintenance obligations.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0312": {
+      "screenId": "*",
+      "text": "The property is a new build development constructed by [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0313": {
+      "screenId": "*",
+      "text": "The property is connected to mains gas supply. The gas installation was not tested as part of this inspection. A current Gas Safety Certificate, issued by a Gas Safe registered engineer, should be obtained to confirm the safety and adequacy of the installation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0314": {
+      "screenId": "*",
+      "text": "The property is connected to mains water supply. The water supply system was not tested as part of this inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0315": {
+      "screenId": "*",
+      "text": "The property is conveniently located close to a designated conservation area.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0316": {
+      "screenId": "*",
+      "text": "The property is conveniently located close to local amenities including schools, shops, and transport links, a designated conservation area and [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0317": {
+      "screenId": "*",
+      "text": "The property is conveniently located close to local amenities including schools, shops, and transport links.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0318": {
+      "screenId": "*",
+      "text": "The property is conveniently located close to other.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0319": {
+      "screenId": "*",
+      "text": "The property is held on a commonhold basis. Your legal adviser should confirm the precise terms and any obligations arising from the tenure.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0320": {
+      "screenId": "*",
+      "text": "The property is held on a feuhold basis. Your legal adviser should confirm the precise terms and any obligations arising from the tenure.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0321": {
+      "screenId": "*",
+      "text": "The property is held on a freehold basis. Your legal adviser should confirm the precise terms and any obligations arising from the tenure.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0322": {
+      "screenId": "*",
+      "text": "The property is held on a leasehold basis. Your legal adviser should confirm the precise terms and any obligations arising from the tenure.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0323": {
+      "screenId": "*",
+      "text": "The property is of non-traditional concrete construction. Your legal adviser should confirm whether a structural certificate or warranty is available.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0324": {
+      "screenId": "*",
+      "text": "The property is of non-traditional large panel system construction. Your legal adviser should confirm whether a structural certificate or warranty is available.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0325": {
+      "screenId": "*",
+      "text": "The property is of non-traditional modular construction. Your legal adviser should confirm whether a structural certificate or warranty is available.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0326": {
+      "screenId": "*",
+      "text": "The property is of non-traditional pre-cast reinforced concrete (PRC) construction. Your legal adviser should confirm whether a structural certificate or warranty is available.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0327": {
+      "screenId": "*",
+      "text": "The property is of non-traditional pre-cast reinforced concrete (PRC), large panel system, concrete, steel frame, timber frame and modular construction, identified as the [free text] system. Your legal adviser should confirm whether a structural certificate or warranty is available.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0328": {
+      "screenId": "*",
+      "text": "The property is of non-traditional steel frame construction. Your legal adviser should confirm whether a structural certificate or warranty is available.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0329": {
+      "screenId": "*",
+      "text": "The property is of non-traditional timber frame construction. Your legal adviser should confirm whether a structural certificate or warranty is available.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0330": {
+      "screenId": "*",
+      "text": "The property is served by a cess pit. The drainage system was not tested as part of this inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0331": {
+      "screenId": "*",
+      "text": "The property is served by a private system. The drainage system was not tested as part of this inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0332": {
+      "screenId": "*",
+      "text": "The property is served by a private water supply. Your legal adviser should confirm the adequacy, quality, and any regulatory requirements associated with the private supply, including water testing and maintenance obligations.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0333": {
+      "screenId": "*",
+      "text": "The property is served by a septic tank. The drainage system was not tested as part of this inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0334": {
+      "screenId": "*",
+      "text": "The property is served by a shared system. The drainage system was not tested as part of this inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0335": {
+      "screenId": "*",
+      "text": "The property is served by mains drainage, a septic tank, a cess pit, a private system, a shared system and [free text]. The drainage system was not tested as part of this inspection.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0336": {
+      "screenId": "*",
+      "text": "The property is served by mains drainage. The drainage system was not tested as part of this inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0337": {
+      "screenId": "*",
+      "text": "The property is served by other. The drainage system was not tested as part of this inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0338": {
+      "screenId": "*",
+      "text": "The property is situated in an area identified as being potentially affected by radon gas. A radon test is recommended, and appropriate mitigation measures should be considered if elevated levels are detected.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0339": {
+      "screenId": "*",
+      "text": "The property is situated in an area identified as being potentially affected by radon gas. Sample text A radon test is recommended, and appropriate mitigation measures should be considered if elevated levels are detected.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0340": {
+      "screenId": "*",
+      "text": "The property is situated on an ex commercial estate.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0341": {
+      "screenId": "*",
+      "text": "The property is situated on an ex housing association estate.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0342": {
+      "screenId": "*",
+      "text": "The property is situated on an ex local authority estate.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0343": {
+      "screenId": "*",
+      "text": "The property is situated within an established city area, which is considered to be a desirable location for properties of this type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0344": {
+      "screenId": "*",
+      "text": "The property is situated within an established commercial area, which is considered to be a desirable location for properties of this type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0345": {
+      "screenId": "*",
+      "text": "The property is situated within an established other area, which is considered to be a desirable location for properties of this type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0346": {
+      "screenId": "*",
+      "text": "The property is situated within an established residential area, which is considered to be a desirable location for properties of this type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0347": {
+      "screenId": "*",
+      "text": "The property is situated within an established rural area, which is considered to be a desirable location for properties of this type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0348": {
+      "screenId": "*",
+      "text": "The property is situated within an established suburb area, which is considered to be a desirable location for properties of this type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0349": {
+      "screenId": "*",
+      "text": "The property is situated within an established town area, which is considered to be a desirable location for properties of this type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0350": {
+      "screenId": "*",
+      "text": "The property is situated within an established village area, which is considered to be a desirable location for properties of this type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0351": {
+      "screenId": "*",
+      "text": "The property may be affected by electromagnetic fields from nearby sources such as overhead power lines or substations.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0352": {
+      "screenId": "*",
+      "text": "The property may be affected by electromagnetic fields from nearby sources such as overhead power lines or substations. Sample text",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0353": {
+      "screenId": "*",
+      "text": "The property may be affected by historical or current mining activity in the area. A mining search is recommended to establish the extent of any mining-related risk.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0354": {
+      "screenId": "*",
+      "text": "The property may be affected by historical or current mining activity in the area. Sample text A mining search is recommended to establish the extent of any mining-related risk.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0355": {
+      "screenId": "*",
+      "text": "The property may be affected by land contamination. An environmental search and, if appropriate, a Phase 1 desktop environmental assessment is recommended.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0356": {
+      "screenId": "*",
+      "text": "The property may be affected by land contamination. Sample text An environmental search and, if appropriate, a Phase 1 desktop environmental assessment is recommended.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0357": {
+      "screenId": "*",
+      "text": "The property may be at risk of flooding from one or more sources. A comprehensive flood risk search is recommended and the availability and cost of flood insurance should be confirmed.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0358": {
+      "screenId": "*",
+      "text": "The property may be at risk of flooding from one or more sources. Sample text A comprehensive flood risk search is recommended and the availability and cost of flood insurance should be confirmed.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0359": {
+      "screenId": "*",
+      "text": "The property provides accommodation comprising five WCs.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0360": {
+      "screenId": "*",
+      "text": "The property provides accommodation comprising five bathrooms.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0361": {
+      "screenId": "*",
+      "text": "The property provides accommodation comprising five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0362": {
+      "screenId": "*",
+      "text": "The property provides accommodation comprising five conservatories.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0363": {
+      "screenId": "*",
+      "text": "The property provides accommodation comprising five kitchens.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0364": {
+      "screenId": "*",
+      "text": "The property provides accommodation comprising five other rooms.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0365": {
+      "screenId": "*",
+      "text": "The property provides accommodation comprising five reception rooms, five kitchens, five bedrooms, five bathrooms, five WCs, five utility rooms, five conservatories and five [free text]s.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0366": {
+      "screenId": "*",
+      "text": "The property provides accommodation comprising five reception rooms.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0367": {
+      "screenId": "*",
+      "text": "The property provides accommodation comprising five utility rooms.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0368": {
+      "screenId": "*",
+      "text": "The purpose of this valuation is for Compulsory Order Purchase.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0369": {
+      "screenId": "*",
+      "text": "The purpose of this valuation is for Help to buy.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0370": {
+      "screenId": "*",
+      "text": "The purpose of this valuation is for Market Value.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0371": {
+      "screenId": "*",
+      "text": "The purpose of this valuation is for Right to Buy.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0372": {
+      "screenId": "*",
+      "text": "The purpose of this valuation is for Shared Ownership Buyback.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0373": {
+      "screenId": "*",
+      "text": "The rainwater goods are of UPVC construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0374": {
+      "screenId": "*",
+      "text": "The rainwater goods are of aluminium construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0375": {
+      "screenId": "*",
+      "text": "The rainwater goods are of asbestos cement construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0376": {
+      "screenId": "*",
+      "text": "The rainwater goods are of cast iron construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0377": {
+      "screenId": "*",
+      "text": "The rainwater goods are of cast iron, aluminium, UPVC, asbestos cement and [free text] construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0378": {
+      "screenId": "*",
+      "text": "The rainwater goods are of other construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0379": {
+      "screenId": "*",
+      "text": "The rainwater goods is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0380": {
+      "screenId": "*",
+      "text": "The rainwater goods is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0381": {
+      "screenId": "*",
+      "text": "The roof space is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0382": {
+      "screenId": "*",
+      "text": "The roof space is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0383": {
+      "screenId": "*",
+      "text": "The roof space was entered and inspected where accessible. The roof structure is of braced and lined construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0384": {
+      "screenId": "*",
+      "text": "The roof space was entered and inspected where accessible. The roof structure is of purlin construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0385": {
+      "screenId": "*",
+      "text": "The roof space was entered and inspected where accessible. The roof structure is of traditional rafter and purlin construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0386": {
+      "screenId": "*",
+      "text": "The roof space was entered and inspected where accessible. The roof structure is of trussed rafter construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0387": {
+      "screenId": "*",
+      "text": "The roof space was entered and inspected where accessible. The roof structure is of unlined construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0388": {
+      "screenId": "*",
+      "text": "The secondary roof covering is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0389": {
+      "screenId": "*",
+      "text": "The secondary roof covering is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0390": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with artificial slate materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0391": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with asphalt materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0392": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with lead materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0393": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with mineral felt materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0394": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with natural slate materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0395": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with original materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0396": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with other materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0397": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with replacement materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0398": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with stone materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0399": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with thatch materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0400": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with tile materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0401": {
+      "screenId": "*",
+      "text": "The secondary roof is covered with zinc materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0402": {
+      "screenId": "*",
+      "text": "The site boundaries are defined by fences, retaining walls, hedges, walls, railings, no defined boundaries, wire mesh fencing and [free text]. The boundaries were inspected from within the site and from adjacent public areas where accessible.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0403": {
+      "screenId": "*",
+      "text": "The site boundaries are defined by fences. The boundaries were inspected from within the site and from adjacent public areas where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0404": {
+      "screenId": "*",
+      "text": "The site boundaries are defined by hedges. The boundaries were inspected from within the site and from adjacent public areas where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0405": {
+      "screenId": "*",
+      "text": "The site boundaries are defined by no defined boundaries. The boundaries were inspected from within the site and from adjacent public areas where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0406": {
+      "screenId": "*",
+      "text": "The site boundaries are defined by other. The boundaries were inspected from within the site and from adjacent public areas where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0407": {
+      "screenId": "*",
+      "text": "The site boundaries are defined by railings. The boundaries were inspected from within the site and from adjacent public areas where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0408": {
+      "screenId": "*",
+      "text": "The site boundaries are defined by retaining walls. The boundaries were inspected from within the site and from adjacent public areas where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0409": {
+      "screenId": "*",
+      "text": "The site boundaries are defined by walls. The boundaries were inspected from within the site and from adjacent public areas where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0410": {
+      "screenId": "*",
+      "text": "The site boundaries are defined by wire mesh fencing. The boundaries were inspected from within the site and from adjacent public areas where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0411": {
+      "screenId": "*",
+      "text": "The site boundaries is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0412": {
+      "screenId": "*",
+      "text": "The site boundaries is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0413": {
+      "screenId": "*",
+      "text": "The sub-floor ventilation is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0414": {
+      "screenId": "*",
+      "text": "The sub-floor ventilation is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0415": {
+      "screenId": "*",
+      "text": "The system provides full central heating coverage to the accommodation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0416": {
+      "screenId": "*",
+      "text": "The system provides partial central heating coverage to the accommodation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0417": {
+      "screenId": "*",
+      "text": "The timber is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0418": {
+      "screenId": "*",
+      "text": "The timber is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0419": {
+      "screenId": "*",
+      "text": "The upper floors are of other construction. No significant deflection or unevenness was noted when the floors were walked upon during the inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0420": {
+      "screenId": "*",
+      "text": "The upper floors are of solid concrete construction. No significant deflection or unevenness was noted when the floors were walked upon during the inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0421": {
+      "screenId": "*",
+      "text": "The upper floors are of solid concrete, suspended timber and [free text] construction. No significant deflection or unevenness was noted when the floors were walked upon during the inspection.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0422": {
+      "screenId": "*",
+      "text": "The upper floors are of suspended timber construction. No significant deflection or unevenness was noted when the floors were walked upon during the inspection.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0423": {
+      "screenId": "*",
+      "text": "The upper floors is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0424": {
+      "screenId": "*",
+      "text": "The upper floors is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0425": {
+      "screenId": "*",
+      "text": "The value attributable to the applicant's share of the property is assessed at [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0426": {
+      "screenId": "*",
+      "text": "The visibility from ground level was not visible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0427": {
+      "screenId": "*",
+      "text": "The visibility from ground level was visible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0428": {
+      "screenId": "*",
+      "text": "The visible portion of the flat roof is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0429": {
+      "screenId": "*",
+      "text": "The visible portion of the flat roof is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0430": {
+      "screenId": "*",
+      "text": "The visible portion of the roof is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0431": {
+      "screenId": "*",
+      "text": "The visible portion of the roof is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0432": {
+      "screenId": "*",
+      "text": "The visible portion of the secondary roof is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0433": {
+      "screenId": "*",
+      "text": "The visible portion of the secondary roof is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0434": {
+      "screenId": "*",
+      "text": "The water supply is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0435": {
+      "screenId": "*",
+      "text": "The water supply is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0436": {
+      "screenId": "*",
+      "text": "The windows and external joinery are of UPVC frame construction. The windows were inspected from both the interior and exterior of the property where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0437": {
+      "screenId": "*",
+      "text": "The windows and external joinery are of aluminium frame construction. The windows were inspected from both the interior and exterior of the property where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0438": {
+      "screenId": "*",
+      "text": "The windows and external joinery are of double glazed. The windows were inspected from both the interior and exterior of the property where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0439": {
+      "screenId": "*",
+      "text": "The windows and external joinery are of galvanised steel frame construction. The windows were inspected from both the interior and exterior of the property where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0440": {
+      "screenId": "*",
+      "text": "The windows and external joinery are of other frame construction. The windows were inspected from both the interior and exterior of the property where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0441": {
+      "screenId": "*",
+      "text": "The windows and external joinery are of single glazed. The windows were inspected from both the interior and exterior of the property where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0442": {
+      "screenId": "*",
+      "text": "The windows and external joinery are of timber frame construction. The windows were inspected from both the interior and exterior of the property where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0443": {
+      "screenId": "*",
+      "text": "The windows and external joinery are of timber, galvanised steel, aluminium, UPVC and [free text] frame construction, single glazed, double glazed and triple glazed. The windows were inspected from both the interior and exterior of the property where accessible.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0444": {
+      "screenId": "*",
+      "text": "The windows and external joinery are of triple glazed. The windows were inspected from both the interior and exterior of the property where accessible.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0445": {
+      "screenId": "*",
+      "text": "The windows and external joinery is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0446": {
+      "screenId": "*",
+      "text": "The windows and external joinery is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0447": {
+      "screenId": "*",
+      "text": "There is considered to be a risk of further progressive movement. A specialist structural engineer's report is strongly recommended before exchange of contracts to assess the significance of the movement and advise on any necessary remedial measures.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0448": {
+      "screenId": "*",
+      "text": "Trees were noted within root influencing distance of the property. Your legal adviser should confirm whether any Tree Preservation Orders are in place. The proximity of the trees may influence the property's foundations and drainage, and specialist arboricultural advice should be obtained if any works to the trees are proposed.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0449": {
+      "screenId": "*",
+      "text": "We have not prepared the Energy Performance Certificate (EPC) for this property. Where an EPC has been made available to us, the ratings are presented below for information purposes only. We have not verified these ratings and cannot comment on their accuracy or completeness.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0450": {
+      "screenId": "*",
+      "text": "Where chimney breasts have been removed at lower levels, your legal adviser should confirm that Building Regulations approval was obtained for the works and that adequate structural support has been provided to the remaining chimney stack and breast above.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0451": {
+      "screenId": "*",
+      "text": "Where chimney breasts have been sealed without adequate ventilation, there is a significant risk of condensation and dampness accumulating within the redundant flue. Appropriate ventilation grilles should be installed to each sealed fireplace opening to ensure adequate air circulation.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0452": {
+      "screenId": "*",
+      "text": "Where visible, the electrical wiring is a mixture of old and new wiring. Only a limited visual inspection of the electrical installation was possible, as the majority of the wiring is concealed within the building fabric.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0453": {
+      "screenId": "*",
+      "text": "Where visible, the electrical wiring is modern PVC sheathed cable. Only a limited visual inspection of the electrical installation was possible, as the majority of the wiring is concealed within the building fabric.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0454": {
+      "screenId": "*",
+      "text": "Where visible, the electrical wiring is other. Only a limited visual inspection of the electrical installation was possible, as the majority of the wiring is concealed within the building fabric.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0455": {
+      "screenId": "*",
+      "text": "Where visible, the electrical wiring is rubber sheathed cable, modern PVC sheathed cable, a mixture of old and new wiring and [free text]. Only a limited visual inspection of the electrical installation was possible, as the majority of the wiring is concealed within the building fabric.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_DRAFT_0456": {
+      "screenId": "*",
+      "text": "Where visible, the electrical wiring is rubber sheathed cable. Only a limited visual inspection of the electrical installation was possible, as the majority of the wiring is concealed within the building fabric.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0457": {
+      "screenId": "*",
+      "text": "Your legal adviser should confirm that Building Regulations approval and, where applicable, planning permission were obtained for all relevant works carried out to the property.",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0458": {
+      "screenId": "*",
+      "text": "Your legal adviser should confirm that Building Regulations approval and, where applicable, planning permission were obtained for all relevant works carried out to the property. Sample text",
+      "allowedTokens": []
+    },
+    "VAL_DRAFT_0459": {
+      "screenId": "*",
+      "text": "[free text]",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_PRO_EPC_CURRENT": {
+      "screenId": "energy_performance",
+      "text": "The EPC records a current energy efficiency rating of {CURRENT}.",
+      "allowedTokens": [
+        "CURRENT"
+      ]
+    },
+    "VAL_PRO_EPC_POTENTIAL": {
+      "screenId": "energy_performance",
+      "text": "The EPC records a potential energy efficiency rating of {POTENTIAL}.",
+      "allowedTokens": [
+        "POTENTIAL"
+      ]
+    },
+    "VAL_PRO_EPC_CURRENT_POTENTIAL": {
+      "screenId": "energy_performance",
+      "text": "The EPC records a current energy efficiency rating of {CURRENT} and a potential rating of {POTENTIAL}.",
+      "allowedTokens": [
+        "CURRENT",
+        "POTENTIAL"
+      ]
+    },
+    "VAL_PRO_ENV_CURRENT": {
+      "screenId": "energy_performance",
+      "text": "The current Environmental Impact rating is recorded as {CURRENT}.",
+      "allowedTokens": [
+        "CURRENT"
+      ]
+    },
+    "VAL_PRO_ENV_POTENTIAL": {
+      "screenId": "energy_performance",
+      "text": "The potential Environmental Impact rating is recorded as {POTENTIAL}.",
+      "allowedTokens": [
+        "POTENTIAL"
+      ]
+    },
+    "VAL_PRO_ENV_CURRENT_POTENTIAL": {
+      "screenId": "energy_performance",
+      "text": "The Environmental Impact rating is recorded as {CURRENT} currently and {POTENTIAL} potentially.",
+      "allowedTokens": [
+        "CURRENT",
+        "POTENTIAL"
+      ]
+    },
+    "VAL_PRO_EPC_REFERENCE": {
+      "screenId": "energy_performance",
+      "text": "The EPC certificate reference recorded for the property is {REFERENCE}.",
+      "allowedTokens": [
+        "REFERENCE"
+      ]
+    },
+    "VAL_PRO_NON_TRADITIONAL": {
+      "screenId": "general_details",
+      "text": "The property incorporates non-traditional construction including {CONSTRUCTION}. Your legal adviser should confirm whether a structural certificate or warranty is available.",
+      "allowedTokens": [
+        "CONSTRUCTION"
+      ]
+    },
+    "VAL_PRO_WALLS": {
+      "screenId": "val_walls_type",
+      "text": "The principal external walls comprise {CONSTRUCTION} construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": [
+        "CONSTRUCTION"
+      ]
+    },
+    "VAL_PRO_PITCHED_MIXED": {
+      "screenId": "val_pitched_roof",
+      "text": "The main roof is of pitched construction, covered with {MATERIALS} materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": [
+        "MATERIALS"
+      ]
+    },
+    "VAL_PRO_FLAT_MIXED": {
+      "screenId": "val_flat_roof",
+      "text": "The flat roof covering is of {MATERIALS} construction. Flat roof coverings have a comparatively limited serviceable lifespan and require regular maintenance checks. Even where the general condition may appear satisfactory, repairs or replacement should be anticipated in the future.",
+      "allowedTokens": [
+        "MATERIALS"
+      ]
+    },
+    "VAL_PRO_OTHER_ROOF_MIXED": {
+      "screenId": "val_other_roof",
+      "text": "{ROOF} is covered with {MATERIALS} materials, which is consistent with the original building specification for a property of this age and type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
+      "allowedTokens": [
+        "ROOF",
+        "MATERIALS"
+      ]
+    },
+    "VAL_PRO_STANDARD_PID_ARE_MIXED": {
+      "screenId": "*",
+      "text": "The {COMPONENT} are of {MATERIALS} construction, which is consistent with the original building specification for a property of this age and type.",
+      "allowedTokens": [
+        "COMPONENT",
+        "MATERIALS"
+      ]
+    },
+    "VAL_PRO_STANDARD_PID_IS_MIXED": {
+      "screenId": "*",
+      "text": "The {COMPONENT} is of {MATERIALS} type.",
+      "allowedTokens": [
+        "COMPONENT",
+        "MATERIALS"
+      ]
+    },
+    "VAL_PRO_STANDARD_PID_FINISHES_MIXED": {
+      "screenId": "*",
+      "text": "The {COMPONENT} comprise {MATERIALS} finishes.",
+      "allowedTokens": [
+        "COMPONENT",
+        "MATERIALS"
+      ]
+    },
+    "VAL_PRO_CONDITION_SATISFACTORY_SINGULAR": {
+      "screenId": "*",
+      "text": "The {COMPONENT} is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": [
+        "COMPONENT"
+      ]
+    },
+    "VAL_PRO_CONDITION_SATISFACTORY_PLURAL": {
+      "screenId": "*",
+      "text": "The {COMPONENT} are considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": [
+        "COMPONENT"
+      ]
+    },
+    "VAL_PRO_CONDITION_UNSATISFACTORY_SINGULAR": {
+      "screenId": "*",
+      "text": "The {COMPONENT} is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": [
+        "COMPONENT"
+      ]
+    },
+    "VAL_PRO_CONDITION_UNSATISFACTORY_PLURAL": {
+      "screenId": "*",
+      "text": "The {COMPONENT} are considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works.",
+      "allowedTokens": [
+        "COMPONENT"
+      ]
+    },
+    "VAL_PRO_PARKING_NONE": {
+      "screenId": "accommodation_summary",
+      "text": "No dedicated off-street parking was noted at the property.",
+      "allowedTokens": []
+    },
+    "VAL_PRO_PARKING_ONSITE": {
+      "screenId": "accommodation_summary",
+      "text": "The parking provision is located on site.",
+      "allowedTokens": []
+    },
+    "VAL_PRO_PARKING_OFFSITE": {
+      "screenId": "accommodation_summary",
+      "text": "The parking provision is located off site.",
+      "allowedTokens": []
+    },
+    "VAL_PRO_OTHER_MATTER_BUILDING_REGS_NOTE": {
+      "screenId": "other_matters",
+      "text": "Your legal adviser should confirm that Building Regulations approval and, where applicable, planning permission were obtained for all relevant works carried out to the property. {NOTE}",
+      "allowedTokens": [
+        "NOTE"
+      ]
+    },
+    "VAL_PRO_OTHER_MATTER_GUARANTEES_NOTE": {
+      "screenId": "other_matters",
+      "text": "The property benefits from guarantees or warranties. {NOTE} Your legal adviser should confirm the precise terms, duration, and transferability of these guarantees.",
+      "allowedTokens": [
+        "NOTE"
+      ]
+    },
+    "VAL_PRO_OTHER_MATTER_RIGHTS_NOTE": {
+      "screenId": "other_matters",
+      "text": "Rights of way or easements may affect the property. {NOTE} Your legal adviser should make full enquiries regarding any rights of way, easements, or wayleaves that may exist.",
+      "allowedTokens": [
+        "NOTE"
+      ]
+    },
+    "VAL_PRO_OTHER_MATTER_CONTAMINATION_NOTE": {
+      "screenId": "other_matters",
+      "text": "The property may be affected by land contamination. {NOTE} An environmental search and, if appropriate, a Phase 1 desktop environmental assessment is recommended.",
+      "allowedTokens": [
+        "NOTE"
+      ]
+    },
+    "VAL_PRO_OTHER_MATTER_FLOODING_NOTE": {
+      "screenId": "other_matters",
+      "text": "The property may be at risk of flooding from one or more sources. {NOTE} A comprehensive flood risk search is recommended and the availability and cost of flood insurance should be confirmed.",
+      "allowedTokens": [
+        "NOTE"
+      ]
+    },
+    "VAL_PRO_OTHER_MATTER_EMFS_NOTE": {
+      "screenId": "other_matters",
+      "text": "The property may be affected by electromagnetic fields from nearby sources such as overhead power lines or substations. {NOTE}",
+      "allowedTokens": [
+        "NOTE"
+      ]
+    },
+    "VAL_PRO_OTHER_MATTER_MINING_NOTE": {
+      "screenId": "other_matters",
+      "text": "The property may be affected by historical or current mining activity in the area. {NOTE} A mining search is recommended to establish the extent of any mining-related risk.",
+      "allowedTokens": [
+        "NOTE"
+      ]
+    },
+    "VAL_PRO_OTHER_MATTER_FLYING_FREEHOLD_NOTE": {
+      "screenId": "other_matters",
+      "text": "The property includes a flying freehold element. {NOTE} Your legal adviser should confirm the legal implications, including any indemnity insurance requirements and maintenance obligations.",
+      "allowedTokens": [
+        "NOTE"
+      ]
+    },
+    "VAL_PRO_OTHER_MATTER_RADON_NOTE": {
+      "screenId": "other_matters",
+      "text": "The property is situated in an area identified as being potentially affected by radon gas. {NOTE} A radon test is recommended, and appropriate mitigation measures should be considered if elevated levels are detected.",
+      "allowedTokens": [
+        "NOTE"
+      ]
+    },
+    "VAL_PRO_STANDARD_PID_ARE_SIMPLE": {
+      "screenId": "*",
+      "text": "The {COMPONENT} are of {MATERIALS} construction.",
+      "allowedTokens": [
+        "COMPONENT",
+        "MATERIALS"
+      ]
+    },
+    "VAL_PRO_STANDARD_PID_FINISHES_THROUGHOUT": {
+      "screenId": "*",
+      "text": "The {COMPONENT} comprise {MATERIALS} finishes throughout.",
+      "allowedTokens": [
+        "COMPONENT",
+        "MATERIALS"
+      ]
+    },
+    "VAL_PRO_GARAGE": {
+      "screenId": "val_garage",
+      "text": "The property includes {COUNT} {TYPE} garage, which was inspected as part of this survey.",
+      "allowedTokens": [
+        "COUNT",
+        "TYPE"
+      ]
+    },
+    "VAL_PRO_GARAGE_BLOCK": {
+      "screenId": "val_garage",
+      "text": "The property includes a block of garages, which was inspected as part of this survey.",
+      "allowedTokens": []
+    },
+    "VAL_PRO_OPEN_MARKET_VALUE": {
+      "screenId": "valuation",
+      "text": "In my opinion, the open market value of the property, subject to the assumptions, special assumptions, and conditions set out in this report, is considered to be adequate security for the proposed mortgage advance. The valuation opinion is provided for the stated purpose and remains subject to the assumptions, special assumptions, and limiting conditions in this report.",
+      "allowedTokens": []
+    }
+  }
+}

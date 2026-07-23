@@ -85,6 +85,24 @@ describe('AiService', () => {
     service = module.get<AiService>(AiService);
   });
 
+  describe('executive summary policy', () => {
+    it('limits summaries to 180 words and three paragraphs', () => {
+      const paragraph = Array.from({ length: 80 }, (_, i) => `word${i}`).join(' ');
+      const summary = [paragraph, paragraph, paragraph, paragraph].join('\n\n');
+
+      const result = (service as any).conciseExecutiveSummary(summary);
+
+      expect(result.split(/\s+/)).toHaveLength(180);
+      expect(result.split(/\n\s*\n/).length).toBeLessThanOrEqual(3);
+    });
+
+    it('preserves a concise summary', () => {
+      const summary = 'The property requires routine maintenance only.';
+
+      expect((service as any).conciseExecutiveSummary(summary)).toBe(summary);
+    });
+  });
+
   // ============================================================
   // getDailyQuota: null-safe guard
   // ============================================================

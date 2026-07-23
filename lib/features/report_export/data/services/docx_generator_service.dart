@@ -55,7 +55,8 @@ class DocxGeneratorService {
 
     // Extract archive entries into isolate-safe format and encode off main thread
     final entries = archive.files
-        .map((f) => _ArchiveEntry(f.name, f.size, Uint8List.fromList(f.content as List<int>)))
+        .map((f) => _ArchiveEntry(
+            f.name, f.size, Uint8List.fromList(f.content as List<int>)))
         .toList();
     final zipBytes = await compute(_encodeZipIsolate, entries);
 
@@ -76,8 +77,10 @@ class DocxGeneratorService {
   void _addContentTypes(Archive archive, _DocxImageBundle images) {
     final buf = StringBuffer()
       ..write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>')
-      ..write('<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">')
-      ..write('<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>')
+      ..write(
+          '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">')
+      ..write(
+          '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>')
       ..write('<Default Extension="xml" ContentType="application/xml"/>');
     if (images.hasPng) {
       buf.write('<Default Extension="png" ContentType="image/png"/>');
@@ -86,8 +89,10 @@ class DocxGeneratorService {
       buf.write('<Default Extension="jpeg" ContentType="image/jpeg"/>');
     }
     buf
-      ..write('<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>')
-      ..write('<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>')
+      ..write(
+          '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>')
+      ..write(
+          '<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>')
       ..write('</Types>');
 
     final xml = buf.toString();
@@ -114,8 +119,10 @@ class DocxGeneratorService {
   void _addDocumentRels(Archive archive, _DocxImageBundle images) {
     final buf = StringBuffer()
       ..write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>')
-      ..write('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">')
-      ..write('<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>');
+      ..write(
+          '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">')
+      ..write(
+          '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>');
     for (final ref in images.allImages) {
       buf.write('<Relationship Id="${ref.relId}" '
           'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" '
@@ -152,7 +159,8 @@ class DocxGeneratorService {
 
     final buf = StringBuffer();
     buf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>');
-    buf.write('<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">');
+    buf.write(
+        '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">');
 
     // Default style
     buf.write('<w:docDefaults><w:rPrDefault><w:rPr>');
@@ -200,10 +208,14 @@ class DocxGeneratorService {
     buf.write('<w:tblBorders>');
     buf.write('<w:top w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
     buf.write('<w:left w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
-    buf.write('<w:bottom w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
-    buf.write('<w:right w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
-    buf.write('<w:insideH w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
-    buf.write('<w:insideV w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
+    buf.write(
+        '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
+    buf.write(
+        '<w:right w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
+    buf.write(
+        '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
+    buf.write(
+        '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="CCCCCC"/>');
     buf.write('</w:tblBorders>');
     // Cell padding: 8pt horizontal (160 twips), 5pt vertical (100 twips)
     buf.write('<w:tblCellMar>');
@@ -228,7 +240,8 @@ class DocxGeneratorService {
   //  DOCUMENT BODY
   // ═══════════════════════════════════════════════════════════════════
 
-  void _addDocumentXml(Archive archive, ReportDocument doc, _DocxImageBundle images) {
+  void _addDocumentXml(
+      Archive archive, ReportDocument doc, _DocxImageBundle images) {
     final buf = StringBuffer();
     buf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>');
     buf.write('<w:document'
@@ -245,8 +258,7 @@ class DocxGeneratorService {
     _writeHeader(buf, doc, dateFormat);
 
     // AI Executive Summary (if present)
-    if (doc.aiExecutiveSummary != null &&
-        doc.aiExecutiveSummary!.isNotEmpty) {
+    if (doc.aiExecutiveSummary != null && doc.aiExecutiveSummary!.isNotEmpty) {
       _writeHeading(buf, 'Executive Summary', 'Heading1');
       _writeAiNarrativeParagraph(buf, doc.aiExecutiveSummary!);
     }
@@ -254,6 +266,13 @@ class DocxGeneratorService {
     // Sections
     for (final section in doc.sections) {
       _writeHeading(buf, section.title, 'Heading1');
+      var accommodationWritten = false;
+      if (doc.reportType == ReportType.valuation &&
+          section.key.trim().toLowerCase() == 'property_assessment' &&
+          doc.accommodationSchedule.isNotEmpty) {
+        _writeAccommodationSchedule(buf, doc.accommodationSchedule);
+        accommodationWritten = true;
+      }
 
       // AI section narrative (if present)
       final aiNarrative = doc.aiSectionNarratives[section.key];
@@ -262,6 +281,19 @@ class DocxGeneratorService {
       }
 
       for (final screen in section.screens) {
+        // See PDF renderer: valuation room counts are rendered only in the
+        // structured accommodation schedule, never as a raw field table.
+        if (doc.reportType == ReportType.valuation &&
+            screen.screenId == 'no_of_rooms') {
+          continue;
+        }
+        if (section.key.trim().toUpperCase() == 'D' &&
+            !accommodationWritten &&
+            screen.screenId == 'group_construction_2' &&
+            doc.accommodationSchedule.isNotEmpty) {
+          _writeAccommodationSchedule(buf, doc.accommodationSchedule);
+          accommodationWritten = true;
+        }
         if (screen.isMergedGroup) {
           // ── Merged group (e.g. "E1 Chimney") — flowing paragraphs ──
           _writeHeading(buf, screen.title, 'Heading2');
@@ -290,6 +322,11 @@ class DocxGeneratorService {
         if (screen.userNote.isNotEmpty) {
           _writeSurveyorNote(buf, screen.userNote);
         }
+      }
+      if (section.key.trim().toUpperCase() == 'D' &&
+          !accommodationWritten &&
+          doc.accommodationSchedule.isNotEmpty) {
+        _writeAccommodationSchedule(buf, doc.accommodationSchedule);
       }
     }
 
@@ -348,24 +385,29 @@ class DocxGeneratorService {
         : 'Valuation Report';
     final accentHex = _pdfColorToHex(_config.accentColor);
 
-    _writeStyledParagraph(buf, reportLabel, fontSize: 36, bold: true, color: accentHex);
+    _writeStyledParagraph(buf, reportLabel,
+        fontSize: 36, bold: true, color: accentHex);
     _writeStyledParagraph(buf, meta.title, fontSize: 24);
     if (meta.address != null && meta.address!.isNotEmpty) {
       _writeStyledParagraph(buf, meta.address!, fontSize: 18, color: '888888');
     }
     buf.write('<w:p/>'); // blank line
     if (meta.jobRef != null) _writeParagraph(buf, 'Reference: ${meta.jobRef}');
-    if (meta.clientName != null) _writeParagraph(buf, 'Client: ${meta.clientName}');
+    if (meta.clientName != null)
+      _writeParagraph(buf, 'Client: ${meta.clientName}');
     _writeParagraph(buf, 'Date: ${fmt.format(doc.generatedAt)}');
     _writeParagraph(buf, 'Prepared by: ${_config.companyName}');
     if (meta.startedAt != null) {
-      _writeParagraph(buf, 'Started: ${DateFormat('d MMM yyyy HH:mm').format(meta.startedAt!)}');
+      _writeParagraph(buf,
+          'Started: ${DateFormat('d MMM yyyy HH:mm').format(meta.startedAt!)}');
     }
     if (meta.completedAt != null) {
-      _writeParagraph(buf, 'Completed: ${DateFormat('d MMM yyyy HH:mm').format(meta.completedAt!)}');
+      _writeParagraph(buf,
+          'Completed: ${DateFormat('d MMM yyyy HH:mm').format(meta.completedAt!)}');
     }
     if (meta.surveyDuration != null) {
-      _writeParagraph(buf, 'Duration: ${PdfSharedUtils.formatDuration(meta.surveyDuration!)}');
+      _writeParagraph(buf,
+          'Duration: ${PdfSharedUtils.formatDuration(meta.surveyDuration!)}');
     }
     // Page break
     buf.write('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');
@@ -411,7 +453,8 @@ class DocxGeneratorService {
 
   /// Write a surveyor's custom note with bold prefix and italic body.
   void _writeSurveyorNote(StringBuffer buf, String note) {
-    buf.write('<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="E3F2FD"/></w:pPr>');
+    buf.write(
+        '<w:p><w:pPr><w:shd w:val="clear" w:color="auto" w:fill="E3F2FD"/></w:pPr>');
     // Bold prefix
     buf.write('<w:r><w:rPr><w:b/><w:sz w:val="20"/></w:rPr>');
     buf.write("<w:t xml:space=\"preserve\">Surveyor's Note: </w:t></w:r>");
@@ -435,7 +478,8 @@ class DocxGeneratorService {
     buf.write('<a:graphicFrameLocks noChangeAspect="1"/>');
     buf.write('</wp:cNvGraphicFramePr>');
     buf.write('<a:graphic>');
-    buf.write('<a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">');
+    buf.write(
+        '<a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">');
     buf.write('<pic:pic>');
     buf.write('<pic:nvPicPr>');
     buf.write('<pic:cNvPr id="$docPrId" name="Image $docPrId"/>');
@@ -470,7 +514,8 @@ class DocxGeneratorService {
     buf.write('<w:sz w:val="16"/>');
     buf.write('<w:i/>');
     buf.write('<w:color w:val="$accentHex"/>');
-    buf.write('</w:rPr><w:t xml:space="preserve">AI-Generated Narrative</w:t></w:r></w:p>');
+    buf.write(
+        '</w:rPr><w:t xml:space="preserve">AI-Generated Narrative</w:t></w:r></w:p>');
 
     // Narrative text — split by newlines for proper paragraphing
     final paragraphs = narrative.split('\n').where((p) => p.trim().isNotEmpty);
@@ -491,7 +536,8 @@ class DocxGeneratorService {
     StringBuffer buf,
     List<ReportRecommendationItem> items,
   ) {
-    _writeHeading(buf, 'Professional Observations & Recommendations', 'Heading1');
+    _writeHeading(
+        buf, 'Professional Observations & Recommendations', 'Heading1');
 
     // Group by category
     final grouped = <String, List<ReportRecommendationItem>>{};
@@ -529,7 +575,8 @@ class DocxGeneratorService {
         final item = entry.value[i];
         final rowShading = i.isOdd ? 'F5F5F5' : null;
         buf.write('<w:tr>');
-        _writeRecommendationSeverityCell(buf, item.severity, shading: rowShading);
+        _writeRecommendationSeverityCell(buf, item.severity,
+            shading: rowShading);
         _writeTableCell(buf, item.screenTitle, shading: rowShading);
         _writeTableCell(buf, item.reason, shading: rowShading);
         _writeTableCell(buf, item.suggestedText, shading: rowShading);
@@ -541,8 +588,7 @@ class DocxGeneratorService {
     }
 
     // Footer
-    _writeStyledParagraph(buf,
-        'Based on RICS Home Survey Standard guidelines.',
+    _writeStyledParagraph(buf, 'Based on RICS Home Survey Standard guidelines.',
         fontSize: 16, color: '888888');
   }
 
@@ -558,7 +604,8 @@ class DocxGeneratorService {
     };
     buf.write('<w:tc>');
     if (shading != null) {
-      buf.write('<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="$shading"/></w:tcPr>');
+      buf.write(
+          '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="$shading"/></w:tcPr>');
     }
     buf.write('<w:p><w:r><w:rPr><w:b/><w:color w:val="$color"/></w:rPr>');
     buf.write('<w:t xml:space="preserve">');
@@ -603,6 +650,98 @@ class DocxGeneratorService {
     buf.write('<w:p/>');
   }
 
+  void _writeAccommodationSchedule(
+    StringBuffer buf,
+    List<AccommodationScheduleRow> rows,
+  ) {
+    if (rows.isEmpty) return;
+    _writeHeading(buf, 'Accommodation', 'Heading2');
+
+    const widths = <int>[1500, 850, 750, 1000, 650, 850, 800, 950, 1650];
+    const headers = <String>[
+      'Floor',
+      'Living',
+      'Beds',
+      'Bath / shower',
+      'WC',
+      'Kitchen',
+      'Utility',
+      'Conservatory',
+      'Other',
+    ];
+
+    buf.write('<w:tbl>');
+    buf.write('<w:tblPr>');
+    buf.write('<w:tblStyle w:val="ReportTable"/>');
+    buf.write('<w:tblW w:w="9000" w:type="dxa"/>');
+    buf.write('<w:tblLayout w:type="fixed"/>');
+    buf.write('</w:tblPr>');
+    buf.write('<w:tblGrid>');
+    for (final width in widths) {
+      buf.write('<w:gridCol w:w="$width"/>');
+    }
+    buf.write('</w:tblGrid>');
+
+    buf.write('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
+    for (var i = 0; i < headers.length; i++) {
+      _writeAccommodationCell(
+        buf,
+        headers[i],
+        widths[i],
+        bold: true,
+        shading: 'E3F2FD',
+      );
+    }
+    buf.write('</w:tr>');
+
+    for (var rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+      final row = rows[rowIndex];
+      final values = <String>[
+        row.floor,
+        row.livingRooms,
+        row.bedrooms,
+        row.bathOrShowerRooms,
+        row.separateToilets,
+        row.kitchens,
+        row.utilityRooms,
+        row.conservatories,
+        row.otherRooms,
+      ];
+      final shading = rowIndex.isOdd ? 'F7F9FB' : null;
+      buf.write('<w:tr>');
+      for (var i = 0; i < values.length; i++) {
+        _writeAccommodationCell(
+          buf,
+          values[i].isEmpty ? '-' : values[i],
+          widths[i],
+          bold: i == 0,
+          shading: shading,
+        );
+      }
+      buf.write('</w:tr>');
+    }
+    buf.write('</w:tbl><w:p/>');
+  }
+
+  void _writeAccommodationCell(
+    StringBuffer buf,
+    String text,
+    int width, {
+    bool bold = false,
+    String? shading,
+  }) {
+    buf.write('<w:tc><w:tcPr><w:tcW w:w="$width" w:type="dxa"/>');
+    if (shading != null) {
+      buf.write('<w:shd w:val="clear" w:color="auto" w:fill="$shading"/>');
+    }
+    buf.write('<w:vAlign w:val="center"/></w:tcPr>');
+    buf.write('<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr>');
+    if (bold) buf.write('<w:b/>');
+    buf.write('<w:sz w:val="16"/></w:rPr><w:t xml:space="preserve">');
+    buf.write(_escapeXml(text));
+    buf.write('</w:t></w:r></w:p></w:tc>');
+  }
+
   void _writeTableCell(
     StringBuffer buf,
     String text, {
@@ -611,7 +750,8 @@ class DocxGeneratorService {
   }) {
     buf.write('<w:tc>');
     if (shading != null) {
-      buf.write('<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="$shading"/></w:tcPr>');
+      buf.write(
+          '<w:tcPr><w:shd w:val="clear" w:color="auto" w:fill="$shading"/></w:tcPr>');
     }
     buf.write('<w:p><w:r>');
     if (bold) buf.write('<w:rPr><w:b/></w:rPr>');
@@ -705,9 +845,10 @@ class DocxGeneratorService {
       }
     }
 
-    AppLogger.d('DocxGen',
+    AppLogger.d(
+        'DocxGen',
         'Pre-loaded ${allImages.length} images '
-        '(${sigLookup.length} signatures, ${photoImages.length} photos)');
+            '(${sigLookup.length} signatures, ${photoImages.length} photos)');
 
     return _DocxImageBundle(
       allImages: allImages,
@@ -853,13 +994,5 @@ List<int> _encodeZipIsolate(List<_ArchiveEntry> entries) {
   for (final entry in entries) {
     archive.addFile(ArchiveFile(entry.name, entry.size, entry.content));
   }
-  final encoded = ZipEncoder().encode(archive);
-  if (encoded == null) {
-    throw StateError(
-      'DOCX ZIP encoding failed: ZipEncoder returned null '
-      '(${entries.length} entries, '
-      '${entries.fold<int>(0, (sum, e) => sum + e.size)} bytes total)',
-    );
-  }
-  return encoded;
+  return ZipEncoder().encode(archive);
 }

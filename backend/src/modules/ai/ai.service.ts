@@ -178,7 +178,9 @@ export class AiService {
         confidence: 1.0, // Excel phrases have 100% confidence
       }));
 
-      const executiveSummary = this.buildExecutiveSummaryFromPhrases(sectionsWithPhrases);
+      const executiveSummary = this.conciseExecutiveSummary(
+        this.buildExecutiveSummaryFromPhrases(sectionsWithPhrases),
+      );
 
       return {
         surveyId: dto.surveyId,
@@ -217,8 +219,12 @@ export class AiService {
       const cached = await this.cache.get(cacheKey);
       if (cached) {
         await this.logUsage(user, featureType, dto.surveyId, prompt.version, cached.inputTokens, cached.outputTokens, true);
+        const cachedResponse = cached.response as AiReportResponseDto;
         return {
-          ...(cached.response as AiReportResponseDto),
+          ...cachedResponse,
+          executiveSummary: this.conciseExecutiveSummary(
+            cachedResponse.executiveSummary,
+          ),
           fromCache: true,
         };
       }
@@ -258,7 +264,9 @@ export class AiService {
       const latencyMs = Date.now() - startTime;
       const parsedResponse = this.parseJsonResponse(result.text);
 
-      const aiExecutiveSummary = (parsedResponse.executiveSummary as string) ?? '';
+      const aiExecutiveSummary = this.conciseExecutiveSummary(
+        (parsedResponse.executiveSummary as string) ?? '',
+      );
       const aiSectionNarratives = (parsedResponse.sections as SectionNarrativeDto[]) ?? [];
 
       this.logger.log(
@@ -295,9 +303,9 @@ export class AiService {
 
       // Build executive summary (Excel summary + AI summary)
       const excelSummary = this.buildExecutiveSummaryFromPhrases(sectionsWithPhrases);
-      const executiveSummary = [excelSummary, aiExecutiveSummary]
-        .filter(Boolean)
-        .join('\n\n');
+      const executiveSummary = this.conciseExecutiveSummary(
+        [excelSummary, aiExecutiveSummary].filter(Boolean).join('\n\n'),
+      );
 
       const response: AiReportResponseDto = {
         surveyId: dto.surveyId,
@@ -1308,5 +1316,29 @@ export class AiService {
     }
 
     return `**Property Survey Summary**\n\n${summaryParts.join('\n\n')}`;
+  }
+
+  private conciseExecutiveSummary(summary: string, maxWords = 180): string {
+    const paragraphs = summary
+      .split(/\n\s*\n/)
+      .map(paragraph => paragraph.replace(/\s+/g, ' ').trim())
+      .filter(Boolean)
+      .slice(0, 3);
+    const normalized = paragraphs.join('\n\n');
+    const words = normalized.split(/\s+/).filter(Boolean);
+    if (words.length <= maxWords) {
+      return normalized;
+    }
+
+    const clipped = words.slice(0, maxWords).join(' ');
+    const sentenceEnd = Math.max(
+      clipped.lastIndexOf('.'),
+      clipped.lastIndexOf('!'),
+      clipped.lastIndexOf('?'),
+    );
+    if (sentenceEnd >= Math.floor(clipped.length * 0.6)) {
+      return clipped.substring(0, sentenceEnd + 1).trim();
+    }
+    return `${clipped.trimEnd()}...`;
   }
 }

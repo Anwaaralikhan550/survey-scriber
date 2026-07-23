@@ -117,6 +117,18 @@ void main() {
 
       expect(doc.totalScreens, 3);
     });
+
+    test('accommodation rows expose only meaningful room data', () {
+      const empty = AccommodationScheduleRow(floor: 'Second');
+      const occupied = AccommodationScheduleRow(
+        floor: 'Ground',
+        livingRooms: '2',
+        otherRooms: '1 Study',
+      );
+
+      expect(empty.hasAnyRooms, isFalse);
+      expect(occupied.hasAnyRooms, isTrue);
+    });
   });
 
   group('ReportScreen', () {

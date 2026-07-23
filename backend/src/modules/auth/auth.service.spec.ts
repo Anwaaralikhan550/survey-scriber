@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { ConflictException, UnauthorizedException } from '@nestjs/common';
-import { UserRole } from '@prisma/client';
+import { UnauthorizedException } from '@nestjs/common';
+import { User, UserRole } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from './auth.service';
 import { PrismaService } from '../prisma/prisma.service';
@@ -33,6 +33,11 @@ describe('AuthService', () => {
     createdAt: new Date('2024-01-01'),
     updatedAt: new Date('2024-01-01'),
     lastLoginAt: null,
+    resetPasswordToken: null,
+    resetPasswordExpiresAt: null,
+    failedLoginAttempts: 0,
+    failedLoginWindowStartedAt: null,
+    lockedUntil: null,
   };
 
   const mockPrismaService = {
@@ -129,7 +134,7 @@ describe('AuthService', () => {
       expect(mockPrismaService.user.create).toHaveBeenCalled();
     });
 
-    it('should throw ConflictException if email already registered', async () => {
+    it('returns the existing registration response without creating a duplicate user', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
 
       await expect(
@@ -139,7 +144,12 @@ describe('AuthService', () => {
           firstName: 'Test',
           lastName: 'User',
         }),
-      ).rejects.toThrow(ConflictException);
+      ).resolves.toEqual({
+        id: mockUser.id,
+        email: mockUser.email,
+        role: mockUser.role,
+      });
+      expect(mockPrismaService.user.create).not.toHaveBeenCalled();
     });
   });
 
@@ -173,13 +183,103 @@ describe('AuthService', () => {
       expect(result).toBeNull();
     });
 
+    it('starts a fresh attempt window after legacy lockout state has expired', async () => {
+      const expiredLockUser = {
+        ...mockUser,
+        failedLoginAttempts: 9,
+        failedLoginWindowStartedAt: null,
+        lockedUntil: new Date(Date.now() - 60_000),
+      };
+      mockPrismaService.user.findUnique.mockResolvedValue(expiredLockUser);
+      mockPrismaService.user.update.mockResolvedValue(mockUser);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(false);
+
+      await expect(service.validateUser('test@example.com', 'wrongpassword')).resolves.toBeNull();
+
+      expect(mockPrismaService.user.update).toHaveBeenNthCalledWith(1, {
+        where: { id: mockUser.id },
+        data: {
+          failedLoginAttempts: 0,
+          failedLoginWindowStartedAt: null,
+          lockedUntil: null,
+        },
+      });
+      expect(mockPrismaService.user.update).toHaveBeenNthCalledWith(2, {
+        where: { id: mockUser.id },
+        data: expect.objectContaining({
+          failedLoginAttempts: 1,
+        }),
+      });
+    });
+
+    it('resets failures that fall outside the bounded attempt window', async () => {
+      const oldWindowUser = {
+        ...mockUser,
+        failedLoginAttempts: 4,
+        failedLoginWindowStartedAt: new Date(Date.now() - 16 * 60_000),
+      };
+      mockPrismaService.user.findUnique.mockResolvedValue(oldWindowUser);
+      mockPrismaService.user.update.mockResolvedValue(mockUser);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(false);
+
+      await service.validateUser('test@example.com', 'wrongpassword');
+
+      expect(mockPrismaService.user.update).toHaveBeenLastCalledWith({
+        where: { id: mockUser.id },
+        data: expect.objectContaining({ failedLoginAttempts: 1 }),
+      });
+    });
+
+    it('locks only after five failures in the active attempt window', async () => {
+      const activeWindowUser = {
+        ...mockUser,
+        failedLoginAttempts: 4,
+        failedLoginWindowStartedAt: new Date(Date.now() - 60_000),
+      };
+      mockPrismaService.user.findUnique.mockResolvedValue(activeWindowUser);
+      mockPrismaService.user.update.mockResolvedValue(mockUser);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(false);
+
+      await service.validateUser('test@example.com', 'wrongpassword');
+
+      expect(mockPrismaService.user.update).toHaveBeenCalledWith({
+        where: { id: mockUser.id },
+        data: expect.objectContaining({
+          failedLoginAttempts: 5,
+          lockedUntil: expect.any(Date),
+        }),
+      });
+    });
+
+    it('clears failed-login tracking after a successful login', async () => {
+      const userWithAttempts = {
+        ...mockUser,
+        failedLoginAttempts: 2,
+        failedLoginWindowStartedAt: new Date(),
+      };
+      mockPrismaService.user.findUnique.mockResolvedValue(userWithAttempts);
+      mockPrismaService.user.update.mockResolvedValue(mockUser);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+
+      await service.validateUser('test@example.com', 'password123');
+
+      expect(mockPrismaService.user.update).toHaveBeenCalledWith({
+        where: { id: mockUser.id },
+        data: expect.objectContaining({
+          failedLoginAttempts: 0,
+          failedLoginWindowStartedAt: null,
+          lockedUntil: null,
+        }),
+      });
+    });
+
     it('should throw UnauthorizedException if user is deactivated', async () => {
       const inactiveUser = { ...mockUser, isActive: false };
       mockPrismaService.user.findUnique.mockResolvedValue(inactiveUser);
 
-      await expect(
-        service.validateUser('test@example.com', 'password123'),
-      ).rejects.toThrow(UnauthorizedException);
+      await expect(service.validateUser('test@example.com', 'password123')).rejects.toThrow(
+        UnauthorizedException,
+      );
     });
   });
 
@@ -199,7 +299,7 @@ describe('AuthService', () => {
       });
       mockPrismaService.refreshToken.deleteMany.mockResolvedValue({ count: 0 });
 
-      const result = await service.login(userWithoutPassword as any);
+      const result = await service.login(userWithoutPassword as Omit<User, 'passwordHash'>);
 
       expect(result).toHaveProperty('accessToken', 'access-token');
       expect(result).toHaveProperty('refreshToken');
@@ -247,9 +347,7 @@ describe('AuthService', () => {
     it('should throw UnauthorizedException if token not found', async () => {
       mockPrismaService.refreshToken.findFirst.mockResolvedValue(null);
 
-      await expect(service.refreshTokens('invalid-token')).rejects.toThrow(
-        UnauthorizedException,
-      );
+      await expect(service.refreshTokens('invalid-token')).rejects.toThrow(UnauthorizedException);
     });
 
     it('should throw UnauthorizedException if token is revoked', async () => {
@@ -266,9 +364,7 @@ describe('AuthService', () => {
       mockPrismaService.refreshToken.findFirst.mockResolvedValue(revokedToken);
       mockPrismaService.refreshToken.updateMany.mockResolvedValue({ count: 1 });
 
-      await expect(service.refreshTokens('revoked-token')).rejects.toThrow(
-        UnauthorizedException,
-      );
+      await expect(service.refreshTokens('revoked-token')).rejects.toThrow(UnauthorizedException);
     });
 
     it('should throw UnauthorizedException if token is expired', async () => {
@@ -288,9 +384,7 @@ describe('AuthService', () => {
         revokedAt: new Date(),
       });
 
-      await expect(service.refreshTokens('expired-token')).rejects.toThrow(
-        UnauthorizedException,
-      );
+      await expect(service.refreshTokens('expired-token')).rejects.toThrow(UnauthorizedException);
     });
   });
 

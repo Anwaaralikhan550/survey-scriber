@@ -1,0 +1,272 @@
+{
+ "legacySectionsRequiringRating": 26,
+ "treeScreensWithRatingField": 29,
+ "findings": [
+  {
+   "legacySection": "{E_CONSERVATORY_PORCHES}",
+   "expectedRating": true,
+   "matchedScreens": 30,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_outside_property_conservatory_porch_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{E_MAIN_WALLS_REPAIR}",
+   "expectedRating": true,
+   "matchedScreens": 11,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_outside_property_main_walls_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{E_OTHER_JOINERY_AND_FINISHES}",
+   "expectedRating": true,
+   "matchedScreens": 7,
+   "screensWithRating": 2,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "activity_outside_property_other_joinery_finishes_condition"
+   ]
+  },
+  {
+   "legacySection": "{E_OTHER}",
+   "expectedRating": true,
+   "matchedScreens": 117,
+   "screensWithRating": 3,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "activity_outside_property_other_main_screen",
+    "activity_outside_property_other_joinery_finishes_condition"
+   ]
+  },
+  {
+   "legacySection": "{E_OUTSIDE_DOORS}",
+   "expectedRating": true,
+   "matchedScreens": 14,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_outside_property_outside_doors_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{E_RAINWATER_GOODS_ABOUT}",
+   "expectedRating": true,
+   "matchedScreens": 2,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_outside_property_rainwater_goods_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{E_WINDOWS_REPAIR}",
+   "expectedRating": true,
+   "matchedScreens": 10,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_outside_property_windows_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{F_ABOUT_ROOF_STRUCTURE}",
+   "expectedRating": true,
+   "matchedScreens": 4,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_inside_property_roof_structure_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{F_BATHROOM_FITTINGS}",
+   "expectedRating": true,
+   "matchedScreens": 9,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_inside_property_bathroom_fittings_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{F_BUILT_IN_FITTINGS}",
+   "expectedRating": true,
+   "matchedScreens": 7,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_inside_property_built_in_fittings_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{F_CEILINGS}",
+   "expectedRating": true,
+   "matchedScreens": 9,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_inside_property_ceilings_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{F_FIREPLACES_AND_CHIMNEYS}",
+   "expectedRating": true,
+   "matchedScreens": 2,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_inside_property_fireplaces_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{F_FLOORS}",
+   "expectedRating": true,
+   "matchedScreens": 16,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_inside_property_floors_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{F_OTHER}",
+   "expectedRating": true,
+   "matchedScreens": 18,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_inside_property_other_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{F_WALLS_AND_PARTITIONS}",
+   "expectedRating": true,
+   "matchedScreens": 10,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_inside_property_walls_and_partitions_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{F_WOOD_WORK}",
+   "expectedRating": true,
+   "matchedScreens": 1,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_inside_property_woodwork_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{G_COMMON_SERVICES}",
+   "expectedRating": true,
+   "matchedScreens": 1,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_services_common_services_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{G_DRAINAGE}",
+   "expectedRating": true,
+   "matchedScreens": 12,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_services_drainage_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{G_ELECTRICITY}",
+   "expectedRating": true,
+   "matchedScreens": 5,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_services_electricity_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{G_GAS_AND_OIL}",
+   "expectedRating": true,
+   "matchedScreens": 6,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_services_gas_oil_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{G_HEATING}",
+   "expectedRating": true,
+   "matchedScreens": 7,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_services_heating_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{G_WATER_HEATING}",
+   "expectedRating": true,
+   "matchedScreens": 9,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_services_water_heating_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{G_WATER}",
+   "expectedRating": true,
+   "matchedScreens": 19,
+   "screensWithRating": 2,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_services_water_main_screen",
+    "activity_services_water_heating_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{H_GARAGE}",
+   "expectedRating": true,
+   "matchedScreens": 7,
+   "screensWithRating": 1,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_grounds_garage_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{H_OTHER_AREA}",
+   "expectedRating": true,
+   "matchedScreens": 24,
+   "screensWithRating": 2,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_grounds_other_main_screen",
+    "activity_grounds_other_area_main_screen"
+   ]
+  },
+  {
+   "legacySection": "{H_OTHER}",
+   "expectedRating": true,
+   "matchedScreens": 24,
+   "screensWithRating": 2,
+   "status": "OK",
+   "ratingScreens": [
+    "activity_grounds_other_main_screen",
+    "activity_grounds_other_area_main_screen"
+   ]
+  }
+ ]
+}

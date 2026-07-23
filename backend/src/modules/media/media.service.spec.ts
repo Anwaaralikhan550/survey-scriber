@@ -82,7 +82,7 @@ describe('MediaService', () => {
       originalname: 'test-photo.jpg',
       mimetype: 'image/jpeg',
       size: 1024,
-      buffer: Buffer.from('test'),
+      buffer: Buffer.from([0xff, 0xd8, 0xff, 0xe0]),
     };
 
     it('should upload a photo successfully', async () => {
@@ -93,12 +93,7 @@ describe('MediaService', () => {
         id: 'new-id',
       });
 
-      const result = await service.upload(
-        mockSurvey.id,
-        MediaType.PHOTO,
-        mockFile,
-        mockUser,
-      );
+      const result = await service.upload(mockSurvey.id, MediaType.PHOTO, mockFile, mockUser);
 
       expect(result).toBeDefined();
       expect(result.type).toBe(MediaType.PHOTO);
@@ -128,12 +123,7 @@ describe('MediaService', () => {
       mockStorageService.store.mockResolvedValue('survey-123/new-id.jpg');
       mockPrismaService.media.create.mockResolvedValue(mockMedia);
 
-      const result = await service.upload(
-        mockSurvey.id,
-        MediaType.PHOTO,
-        mockFile,
-        mockAdminUser,
-      );
+      const result = await service.upload(mockSurvey.id, MediaType.PHOTO, mockFile, mockAdminUser);
 
       expect(result).toBeDefined();
     });
@@ -182,6 +172,18 @@ describe('MediaService', () => {
         service.upload(mockSurvey.id, MediaType.PHOTO, invalidFile, mockUser),
       ).rejects.toThrow(BadRequestException);
     });
+
+    it('should reject a spoofed JPEG content type', async () => {
+      mockPrismaService.survey.findUnique.mockResolvedValue(mockSurvey);
+      const spoofedFile = {
+        ...mockFile,
+        buffer: Buffer.from('not-a-jpeg'),
+      };
+
+      await expect(
+        service.upload(mockSurvey.id, MediaType.PHOTO, spoofedFile, mockUser),
+      ).rejects.toThrow('File content does not match the declared file type');
+    });
   });
 
   describe('findOne', () => {
@@ -211,17 +213,13 @@ describe('MediaService', () => {
         survey: { ...mockSurvey, userId: 'other-user' },
       });
 
-      await expect(service.findOne(mockMedia.id, mockUser)).rejects.toThrow(
-        ForbiddenException,
-      );
+      await expect(service.findOne(mockMedia.id, mockUser)).rejects.toThrow(ForbiddenException);
     });
 
     it('should throw NotFoundException for non-existent media', async () => {
       mockPrismaService.media.findUnique.mockResolvedValue(null);
 
-      await expect(service.findOne('non-existent', mockUser)).rejects.toThrow(
-        NotFoundException,
-      );
+      await expect(service.findOne('non-existent', mockUser)).rejects.toThrow(NotFoundException);
     });
 
     it('should throw NotFoundException for deleted media', async () => {
@@ -230,9 +228,7 @@ describe('MediaService', () => {
         deletedAt: new Date(),
       });
 
-      await expect(service.findOne(mockMedia.id, mockUser)).rejects.toThrow(
-        NotFoundException,
-      );
+      await expect(service.findOne(mockMedia.id, mockUser)).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -268,9 +264,7 @@ describe('MediaService', () => {
         survey: { ...mockSurvey, userId: 'other-user' },
       });
 
-      await expect(service.delete(mockMedia.id, mockUser)).rejects.toThrow(
-        ForbiddenException,
-      );
+      await expect(service.delete(mockMedia.id, mockUser)).rejects.toThrow(ForbiddenException);
     });
   });
 });

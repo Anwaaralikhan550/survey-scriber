@@ -1,0 +1,593 @@
+{
+  "purpose": "Progress meter: % of the RICS L2 target library already present in the live phrase bank.",
+  "matchThreshold": 0.82,
+  "totalSpecSentences": 1394,
+  "totalCovered": 203,
+  "overallCoveragePct": 14.6,
+  "perEntry": [
+    {
+      "specKey": "Party conflict disclosure",
+      "specTitle": "Party conflict disclosure",
+      "sentences": 4,
+      "covered": 4,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Property address",
+      "specTitle": "Property address",
+      "sentences": 0,
+      "covered": 0,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Weather",
+      "specTitle": "Weather",
+      "sentences": 2,
+      "covered": 2,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Status",
+      "specTitle": "Status",
+      "sentences": 2,
+      "covered": 1,
+      "coveragePct": 50.0,
+      "uncoveredSamples": [
+        "The property was fully furnished, partly furnished, or unfurnished, and floor surfaces were fully co"
+      ]
+    },
+    {
+      "specKey": "Orientation",
+      "specTitle": "Orientation",
+      "sentences": 2,
+      "covered": 2,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Overall opinion",
+      "specTitle": "Overall opinion",
+      "sentences": 6,
+      "covered": 5,
+      "coveragePct": 83.3,
+      "uncoveredSamples": [
+        "Reasonable: I am pleased to advise you that this property is believed to be a reasonable proposition"
+      ]
+    },
+    {
+      "specKey": "Property type",
+      "specTitle": "Property type",
+      "sentences": 1,
+      "covered": 1,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Year built",
+      "specTitle": "Year built",
+      "sentences": 2,
+      "covered": 2,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Extensions",
+      "specTitle": "Extensions",
+      "sentences": 4,
+      "covered": 4,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Conversion",
+      "specTitle": "Conversion",
+      "sentences": 7,
+      "covered": 5,
+      "coveragePct": 71.4,
+      "uncoveredSamples": [
+        "The property was a detached house, semi-detached house, mid-terrace terrace, end-terrace house, othe",
+        "Known Date: The date of conversion is dd/mm/yyyy."
+      ]
+    },
+    {
+      "specKey": "Flat information",
+      "specTitle": "Flat information",
+      "sentences": 2,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "The property is located on the lower ground floor, ground floor, first floor, second floor, third fl",
+        "The property is accessed via a private door, communal door, communal door with entry system, other t"
+      ]
+    },
+    {
+      "specKey": "Accommodation summary",
+      "specTitle": "Accommodation summary",
+      "sentences": 1,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "The accommodation comprises: Ground Floor First Floor Second Floor Third Floor Loft Basement Cellar "
+      ]
+    },
+    {
+      "specKey": "Construction",
+      "specTitle": "Construction",
+      "sentences": 16,
+      "covered": 8,
+      "coveragePct": 50.0,
+      "uncoveredSamples": [
+        "Type: The property is believed to be constructed using traditional masonry, timber frame, steel fram",
+        "Roof type: The main roof is of pitched, flat, or mansard construction formed with traditional cut ti",
+        "Roof cover: The roof covering is formed in clay tiles, concrete tiles, natural slate, artificial sla"
+      ]
+    },
+    {
+      "specKey": "Listed building",
+      "specTitle": "Listed building",
+      "sentences": 2,
+      "covered": 2,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Energy performance",
+      "specTitle": "Energy performance",
+      "sentences": 3,
+      "covered": 3,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Other services",
+      "specTitle": "Other services",
+      "sentences": 2,
+      "covered": 1,
+      "coveragePct": 50.0,
+      "uncoveredSamples": [
+        "The property is fitted with photovoltaic (solar PV) panels, solar water heating panels, inverter, ba"
+      ]
+    },
+    {
+      "specKey": "Grounds",
+      "specTitle": "Grounds",
+      "sentences": 5,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "Topology: The property occupies a level, gently sloping, moderately sloping, or steeply sloping site",
+        "Front garden: The front garden is laid to lawn, artificial lawn, paving, gravel, stones, hardstandin",
+        "Rear garden: The rear garden is laid to lawn, artificial lawn, paving, gravel, stones, decking, plan"
+      ]
+    },
+    {
+      "specKey": "Parking",
+      "specTitle": "Parking",
+      "sentences": 4,
+      "covered": 3,
+      "coveragePct": 75.0,
+      "uncoveredSamples": [
+        "Type: The property comes with residential, private, allocated, communal, off street, other parking."
+      ]
+    },
+    {
+      "specKey": "Location",
+      "specTitle": "Location",
+      "sentences": 8,
+      "covered": 2,
+      "coveragePct": 25.0,
+      "uncoveredSamples": [
+        "Type: The property is situated within a well-established residential area, modern residential develo",
+        "Density: The surrounding development is considered low, medium, or high density.",
+        "Road: The property is located on an adopted public highway, private road, cul-de-sac, or unmade road"
+      ]
+    },
+    {
+      "specKey": "Facilities",
+      "specTitle": "Facilities",
+      "sentences": 4,
+      "covered": 4,
+      "coveragePct": 100.0,
+      "uncoveredSamples": []
+    },
+    {
+      "specKey": "Local environment",
+      "specTitle": "Local environment",
+      "sentences": 11,
+      "covered": 6,
+      "coveragePct": 54.5,
+      "uncoveredSamples": [
+        "or I observed the following environmental feature(s) that may influence your enjoyment of the proper",
+        "If electricity substation or overhead power lines is selected, Add text below The property is in a l",
+        "If susceptible to flooding is selected, Add text below The property is situated close to the sea, ri"
+      ]
+    },
+    {
+      "specKey": "E1",
+      "specTitle": "Chimney stacks",
+      "sentences": 89,
+      "covered": 26,
+      "coveragePct": 29.2,
+      "uncoveredSamples": [
+        "Not Applicable: The property does not incorporate the element(s) referred to in this section.",
+        "Consequently, I am unable to comment on their composition or condition.",
+        "As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary "
+      ]
+    },
+    {
+      "specKey": "E2",
+      "specTitle": "Roof Coverings",
+      "sentences": 120,
+      "covered": 38,
+      "coveragePct": 31.7,
+      "uncoveredSamples": [
+        "Not Inspected: The roof covering(s) could not be inspected due to access restrictions and the height",
+        "Consequently, I am unable to comment on their composition or condition.",
+        "As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary "
+      ]
+    },
+    {
+      "specKey": "E3",
+      "specTitle": "Rainwater Goods",
+      "sentences": 42,
+      "covered": 6,
+      "coveragePct": 14.3,
+      "uncoveredSamples": [
+        "Consequently, I am unable to comment on their composition or condition.",
+        "As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary ",
+        "Description The rainwater goods comprise PVC, cast iron, aluminium, steel, concrete, asbestos cement"
+      ]
+    },
+    {
+      "specKey": "E4",
+      "specTitle": "Main Walls",
+      "sentences": 133,
+      "covered": 26,
+      "coveragePct": 19.5,
+      "uncoveredSamples": [
+        "The external walls have been inspected visually and by touch from the outside and internally where e",
+        "No opening up or destructive investigation has been undertaken.",
+        "Description The external walls of the main building, extension(s), other, are constructed of 000 mm "
+      ]
+    },
+    {
+      "specKey": "E5",
+      "specTitle": "Windows",
+      "sentences": 64,
+      "covered": 5,
+      "coveragePct": 7.8,
+      "uncoveredSamples": [
+        "The inspection was limited to those parts that were readily accessible without causing damage or mov",
+        "Only a representative sample of accessible windows was opened and closed during the inspection.",
+        "Windows obscured by curtains, blinds, shutters, furniture, stored items, or fitted security devices "
+      ]
+    },
+    {
+      "specKey": "E6",
+      "specTitle": "Outside Doors (Including Patio Doors)",
+      "sentences": 51,
+      "covered": 3,
+      "coveragePct": 5.9,
+      "uncoveredSamples": [
+        "Only a representative sample of accessible doors was opened and closed during the inspection.",
+        "Doors obstructed by security devices, stored items, furniture, or other restrictions could not be fu",
+        "The operation and performance of locks, alarms and security systems were not tested."
+      ]
+    },
+    {
+      "specKey": "E7",
+      "specTitle": "Conservatories and Porches",
+      "sentences": 67,
+      "covered": 2,
+      "coveragePct": 3.0,
+      "uncoveredSamples": [
+        "Not Applicable: The property does not incorporate the element(s) referred to in this section.",
+        "This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom,",
+        "Where no conservatory or porch is present, this section is not applicable."
+      ]
+    },
+    {
+      "specKey": "E8",
+      "specTitle": "Other Joinery and Finishes",
+      "sentences": 37,
+      "covered": 2,
+      "coveragePct": 5.4,
+      "uncoveredSamples": [
+        "Consequently, I am unable to comment on their condition.",
+        "These elements are typically formed in timber and should be regularly inspected, maintained, and red",
+        "Inspection was carried out from ground level and other reasonably accessible positions."
+      ]
+    },
+    {
+      "specKey": "E9",
+      "specTitle": "Other",
+      "sentences": 98,
+      "covered": 3,
+      "coveragePct": 3.1,
+      "uncoveredSamples": [
+        "The inspection was limited to those parts that were safely accessible at the time of inspection.",
+        "No opening up, testing or dismantling of concealed elements was undertaken.",
+        "Comments relate only to the visible condition of the structures inspected."
+      ]
+    },
+    {
+      "specKey": "F1",
+      "specTitle": "Roof Structure",
+      "sentences": 55,
+      "covered": 3,
+      "coveragePct": 5.5,
+      "uncoveredSamples": [
+        "Description The roof structure was inspected from the roof access hatch where available and from tho",
+        "The roof structure is formed in traditional cut timber, prefabricated trussed rafters, steel, or a c",
+        "Where visible, the roof structure appears in good, reasonable, fair, poor, or very poor condition, c"
+      ]
+    },
+    {
+      "specKey": "F2",
+      "specTitle": "Ceilings",
+      "sentences": 43,
+      "covered": 2,
+      "coveragePct": 4.7,
+      "uncoveredSamples": [
+        "Description The ceilings have been inspected from within the rooms only.",
+        "No opening up or destructive investigation has been undertaken.",
+        "The ceilings are formed in plaster, plasterboard, lath and plaster, or a combination of ceiling type"
+      ]
+    },
+    {
+      "specKey": "F3",
+      "specTitle": "Walls and Partitions",
+      "sentences": 47,
+      "covered": 2,
+      "coveragePct": 4.3,
+      "uncoveredSamples": [
+        "Description The internal walls and partitions have been inspected from within the rooms only.",
+        "No opening up or destructive investigation has been undertaken.",
+        "The walls are formed in solid masonry, timber stud partitions, plasterboard partitions, or a combina"
+      ]
+    },
+    {
+      "specKey": "F4",
+      "specTitle": "Floors",
+      "sentences": 50,
+      "covered": 1,
+      "coveragePct": 2.0,
+      "uncoveredSamples": [
+        "Description The floor construction has been inspected from within the property only.",
+        "Floor coverings were not lifted, and no opening up or destructive investigation was undertaken.",
+        "The floors are formed in solid concrete, suspended timber, beam and block, or a combination of const"
+      ]
+    },
+    {
+      "specKey": "F5",
+      "specTitle": "Fireplaces, Chimney Breasts and Flues",
+      "sentences": 44,
+      "covered": 2,
+      "coveragePct": 4.5,
+      "uncoveredSamples": [
+        "Description This section relates to visible fireplaces, chimney breasts and associated flues within ",
+        "The inspection was limited to a visual assessment only.",
+        "Fireplaces, flues and appliances were not tested, dismantled or operated unless otherwise stated."
+      ]
+    },
+    {
+      "specKey": "F6",
+      "specTitle": "Built-in Fittings (Including Kitchen)",
+      "sentences": 45,
+      "covered": 5,
+      "coveragePct": 11.1,
+      "uncoveredSamples": [
+        "Description This section relates to the visible condition of the built-in fittings, including the ki",
+        "The inspection was limited to a visual assessment only.",
+        "Built-in fittings were not dismantled and concealed areas behind units, appliances and fixed furnitu"
+      ]
+    },
+    {
+      "specKey": "F7",
+      "specTitle": "Woodwork",
+      "sentences": 55,
+      "covered": 5,
+      "coveragePct": 9.1,
+      "uncoveredSamples": [
+        "Description This section relates to the visible internal woodwork, including internal doors, door fr",
+        "The inspection was limited to a visual assessment only.",
+        "No dismantling, opening up or testing of concealed timber was undertaken."
+      ]
+    },
+    {
+      "specKey": "F8",
+      "specTitle": "Bathroom Fittings",
+      "sentences": 46,
+      "covered": 4,
+      "coveragePct": 8.7,
+      "uncoveredSamples": [
+        "Description This section relates to the visible condition of the bathroom fittings, including baths,",
+        "The inspection was limited to a visual assessment only.",
+        "Sanitary fittings, plumbing installations and drainage systems were not dismantled or pressure teste"
+      ]
+    },
+    {
+      "specKey": "F9",
+      "specTitle": "Other",
+      "sentences": 50,
+      "covered": 5,
+      "coveragePct": 10.0,
+      "uncoveredSamples": [
+        "Description This section relates to internal elements not covered elsewhere within this report, incl",
+        "Only those areas that were readily visible and safely accessible at the time of the inspection have ",
+        "Where visible, these elements appear in good, reasonable, fair, poor, or very poor condition, consis"
+      ]
+    },
+    {
+      "specKey": "G1",
+      "specTitle": "Electricity",
+      "sentences": 21,
+      "covered": 1,
+      "coveragePct": 4.8,
+      "uncoveredSamples": [
+        "Description The electrical installation was inspected visually only.",
+        "Visible components include the consumer unit, switchgear, socket outlets, lighting points, and expos",
+        "The installation appears to comprise modern, older, or a combination of electrical components."
+      ]
+    },
+    {
+      "specKey": "G2",
+      "specTitle": "Gas",
+      "sentences": 12,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "Description The property is supplied with mains gas, LPG, or no gas supply.",
+        "Visible gas pipework and associated fittings were inspected where accessible.",
+        "Gas installations and appliances were not tested."
+      ]
+    },
+    {
+      "specKey": "G3",
+      "specTitle": "Water",
+      "sentences": 10,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "Description The property appears to be supplied with mains water, private water supply, or other sup",
+        "Visible pipework and fittings were inspected where accessible.",
+        "The water installation was not pressure tested."
+      ]
+    },
+    {
+      "specKey": "G4",
+      "specTitle": "Heating",
+      "sentences": 13,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "Description The property is heated by gas-fired central heating, oil-fired central heating, electric",
+        "The installation was inspected visually only.",
+        "No operational testing or assessment of efficiency was undertaken."
+      ]
+    },
+    {
+      "specKey": "H1",
+      "specTitle": "Garage",
+      "sentences": 13,
+      "covered": 1,
+      "coveragePct": 7.7,
+      "uncoveredSamples": [
+        "Description The property incorporates a detached, attached, integral, undercroft, or no garage.",
+        "The garage is constructed of brick, blockwork, timber, steel, prefabricated concrete, or a combinati",
+        "The roof is of pitched, flat, or lean-to construction and is covered with clay tiles, concrete tiles"
+      ]
+    },
+    {
+      "specKey": "H2",
+      "specTitle": "Permanent Outbuildings and Other Structures",
+      "sentences": 8,
+      "covered": 1,
+      "coveragePct": 12.5,
+      "uncoveredSamples": [
+        "Description The property incorporates shed, workshop, summer house, studio, store, greenhouse, stabl",
+        "The structure is formed in brick, blockwork, timber, steel, prefabricated concrete, or a combination",
+        "Inspection Limitations The inspection was restricted to a visual assessment only."
+      ]
+    },
+    {
+      "specKey": "H3",
+      "specTitle": "Outside Areas",
+      "sentences": 16,
+      "covered": 3,
+      "coveragePct": 18.8,
+      "uncoveredSamples": [
+        "Description The outside areas comprise front garden, rear garden, side garden, courtyard, terrace, p",
+        "The surfaces comprise lawn, block paving, concrete, gravel, tarmac, timber decking, stone paving, or",
+        "Paths and Hardstandings The paths and hardstandings appear level, reasonably level, or exhibit minor"
+      ]
+    },
+    {
+      "specKey": "H4",
+      "specTitle": "Boundaries",
+      "sentences": 5,
+      "covered": 1,
+      "coveragePct": 20.0,
+      "uncoveredSamples": [
+        "Description The boundaries are formed in timber fencing, brick walls, stone walls, hedging, wire fen",
+        "Ownership Boundary ownership cannot be confirmed during a visual inspection.",
+        "Your legal adviser should confirm ownership and maintenance responsibilities from the title document"
+      ]
+    },
+    {
+      "specKey": "H5",
+      "specTitle": "Shared Areas",
+      "sentences": 5,
+      "covered": 1,
+      "coveragePct": 20.0,
+      "uncoveredSamples": [
+        "Description The property benefits from shared driveway, shared access, communal parking, communal ga",
+        "Legal Matters Your legal adviser should confirm: ownership of the shared areas; rights of access; ma",
+        "General Condition No significant defects were observed unless otherwise stated."
+      ]
+    },
+    {
+      "specKey": "J1",
+      "specTitle": "Risks to the Building",
+      "sentences": 19,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "Structural Movement No visible evidence of significant structural movement was observed at the time ",
+        "or Evidence of historic, localised, or progressive structural movement was observed.",
+        "Where movement appears progressive or structurally significant, further investigation by an appropri"
+      ]
+    },
+    {
+      "specKey": "J2",
+      "specTitle": "Risks to the Grounds",
+      "sentences": 11,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "Trees The property is not affected by nearby trees likely to present an immediate risk.",
+        "or There are small, medium, or large trees within influencing distance of the property.",
+        "Although no evidence of damage was observed during the inspection, trees may influence buildings dep"
+      ]
+    },
+    {
+      "specKey": "J3",
+      "specTitle": "Risks to People",
+      "sentences": 13,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "Trip Hazards No significant trip hazards were observed.",
+        "or Potential trip hazards were identified including: uneven paving damaged steps raised thresholds u",
+        "Staircases The staircase appears safe, reasonably safe, or requires minor repair based upon a visual"
+      ]
+    },
+    {
+      "specKey": "J4",
+      "specTitle": "Risks to Health",
+      "sentences": 12,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "Asbestos No materials suspected of containing asbestos were identified during the inspection.",
+        "or Materials that may contain asbestos were observed.",
+        "Where these materials remain in good condition and are left undisturbed, they do not normally presen"
+      ]
+    },
+    {
+      "specKey": "J5",
+      "specTitle": "Risks to the Security of the Property",
+      "sentences": 12,
+      "covered": 0,
+      "coveragePct": 0.0,
+      "uncoveredSamples": [
+        "External Doors The accessible external doors appear to provide reasonable, adequate, or limited secu",
+        "The effectiveness of locks has not been tested.",
+        "Windows Accessible windows appear capable of being secured."
+      ]
+    }
+  ]
+}
