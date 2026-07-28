@@ -34,6 +34,8 @@ void main() {
           'Joinery condition={OJAF_CONDITION}.',
       '{E_OTHER_JOINERY_AND_FINISHES}::{CONTAIN_ASBESTOS}':
           'Contains asbestos.',
+      '{E_OTHER_JOINERY_AND_FINISHES}::{CONDITION_RATING}':
+          'Rating={OJAF_CONDITION_RATING}.',
     };
 
     const engine = InspectionPhraseEngine(phraseTexts);
@@ -123,7 +125,7 @@ void main() {
       expect(legacyOnly.first.toLowerCase(), contains('not strong enough'));
     });
 
-    test('roof defect wording keeps legacy "is ..." tokens', () {
+    test('roof defect wording emits the disrepair defect label', () {
       final phrases = engine.buildPhrases(
         'activity_outside_property_other_repairs_roof',
         {
@@ -132,7 +134,7 @@ void main() {
       );
 
       expect(phrases, hasLength(1));
-      expect(phrases.first.toLowerCase(), contains('is in disrepair'));
+      expect(phrases.first.toLowerCase(), contains('in disrepair'));
     });
 
     test('communal area treats "Not inspected" as not inspected', () {
@@ -262,7 +264,12 @@ void main() {
       expect(phrases[1].toLowerCase(), contains('contains asbestos'));
     });
 
-    test('joinery condition accepts legacy llMainContainer value', () {
+    test(
+        'joinery condition accepts legacy llMainContainer value (Phase 2G-mini fix)',
+        () {
+      // Routed to the numeric-rating handler now (Phase 2G-mini) instead
+      // of the descriptive handler this screen never actually matched -
+      // the llMainContainer fallback is preserved for old persisted data.
       final phrases = engine.buildPhrases(
         'activity_outside_property_other_joinery_finishes_condition',
         {
@@ -271,7 +278,7 @@ void main() {
       );
 
       expect(phrases, hasLength(1));
-      expect(phrases.first.toLowerCase(), contains('joinery condition=good'));
+      expect(phrases.first.toLowerCase(), contains('rating=good'));
     });
 
     test('joinery condition typo screen id is also supported', () {
@@ -283,7 +290,7 @@ void main() {
       );
 
       expect(phrases, hasLength(1));
-      expect(phrases.first.toLowerCase(), contains('joinery condition=good'));
+      expect(phrases.first.toLowerCase(), contains('rating=good'));
     });
   });
 }

@@ -145,8 +145,8 @@ void main() {
       },
     ).single;
 
-    expect(phrase, contains('factory-made roof truss construction'));
-    expect(phrase, isNot(contains('trusses construction')));
+    expect(phrase, contains('factory-made roof truss'));
+    expect(phrase, isNot(contains('trusses')));
   });
 
   test('non-numeric wall thickness is suppressed', () {

@@ -196,6 +196,15 @@ final Map<String, Map<String, String>> _curatedIssues = {
   'activity_outside_property_condition': {
     'android_material_design_spinner3': 'Reasonable',
   },
+  // Numeric condition rating is a standalone surveyor-entered field, not
+  // computed from the defect checkboxes curated above - without an
+  // explicit value here the generic auto-fill picks the dropdown's first
+  // option ('1') regardless of the severe Repair-Now/safety-hazard defects
+  // curated elsewhere on this element, producing an internally
+  // inconsistent demo report. Set to match the curated severity.
+  'activity_outside_property_chimney_main_screen': {
+    'android_material_design_spinner4': '3',
+  },
 
   // ── E2 Roof covering ──
   'outside_property_about_roof_layout': {
@@ -203,8 +212,12 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'cb_original': 'true', 'cb_clay': 'true', 'cb_tiles': 'true',
     'actv_condition': 'Reasonable',
   },
+  // Bumped to '3': the curated parapet-repair defect below carries
+  // cb_safety_hazard (fires the J3 cross-inject) - a safety hazard is
+  // urgent by RICS rating definition, so '2' ("not urgent") contradicted
+  // its own content. Same class of fix as the E1 chimney rating.
   'activity_outside_property_roof_covering_main': {
-    'android_material_design_spinner4': '2',
+    'android_material_design_spinner4': '3',
   },
 
   // ── E3 Rainwater goods ──
@@ -221,8 +234,12 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'cb_gutters_59': 'true',
     'cb_are_rusted_18': 'true',
   },
+  // '2': the curated repair defect above is conditional ("if causing
+  // damp"), not an explicit safety-hazard checkbox - keep varied vs. the
+  // hazard-flagged elements' '3', so the report doesn't read as every
+  // single element being rated the worst possible score.
   'activity_outside_property_rainwater_goods_main_screen': {
-    'actv_condition_rating': '3',
+    'actv_condition_rating': '2',
     'ar_etNote':
         'Overflowing rainwater from the slipped ridge tile over the bay window is causing dampness to part of the tile cladding and clay tile windowsill underneath including peeled plinth rendering.',
   },
@@ -260,8 +277,11 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'cb_causing_damp': 'true',
     'cb_hazard': 'true',
   },
+  // Bumped to '3': the curated render-repair defect above carries
+  // cb_hazard (fires the J3 cross-inject) - same rating-vs-content fix as
+  // the E1 chimney rating.
   'activity_outside_property_main_walls_main_screen': {
-    'android_material_design_spinner4': '2',
+    'android_material_design_spinner4': '3',
   },
 
   // ── E5 Windows ──
@@ -289,13 +309,17 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'cb_bedroom_43': 'true',
     'cb_no_opening_63': 'true',
   },
+  // Bumped to '3': the curated repair-window defect above carries
+  // cb_safety_hazard (fires the J3 cross-inject) - same rating-vs-content
+  // fix as the E1 chimney rating.
   'activity_outside_property_windows_main_screen': {
-    'android_material_design_spinner4': '2',
+    'android_material_design_spinner4': '3',
   },
 
   // ── E6 Outside doors ──
   'activity_outside_property_out_side_doors_about_doors__timber': {
     'cb_main': 'true',
+    'cb_patio': 'true',
     'cb_replacement': 'true',
     'cb_double': 'true',
     'actv_status': 'Noted',
@@ -303,7 +327,77 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'actv_status_security': 'Properly',
     'actv_seciruty_offered': 'Reasonable',
   },
+  'activity_outside_property_out_side_doors_repairs_repair_out_side_doors': {
+    'actv_repair_type': 'Repair now',
+    'cb_damaged': 'true',
+  },
+  // '2': damaged/Repair-Now but no explicit safety-hazard checkbox on this
+  // screen - varied vs. the hazard-flagged elements' '3' (see E3 note).
   'activity_outside_property_outside_doors_main_screen': {
+    'android_material_design_spinner4': '2',
+  },
+
+  // ── E7 Conservatory and Porches ──
+  // Phase 2B Gate 3: exercise the new defects-noted junction branch and
+  // the Repair-Now disrepair addendum.
+  'outside_property_conservatory_porch_flashing_layout': {
+    'cb_lead': 'true',
+    'actv_condition': 'Unsatisfactory and Poor',
+  },
+  'activity_outside_property_conservatory_porch_repairs': {
+    'actv_condition': 'Repair now',
+    'cb_damaged_22': 'true',
+  },
+  // '2': damaged/Repair-Now and an unsatisfactory junction, but no explicit
+  // safety-hazard checkbox on this screen - varied vs. the hazard-flagged
+  // elements' '3' (see E3 note).
+  'activity_outside_property_conservatory_porch_main_screen': {
+    'android_material_design_spinner4': '2',
+  },
+
+  // ── E8 Other Joinery and Finishes ──
+  // Phase 2B Gate 3: exercise the newly-wired condition rating (previously
+  // dead - see engine comment on
+  // activity_outside_property_other_joinery_and_finishes_main_screen) and
+  // the new J1 cross-inject (gated on the repair screen's "Rotted"
+  // checkbox).
+  'activity_outside_property_other_joinery_and_finishes_repairs': {
+    'cb_facias': 'true',
+    'cb_main_building_86': 'true',
+    'cb_rotted': 'true',
+    'cb_safety_hazard': 'true',
+  },
+  'activity_outside_property_other_joinery_and_finishes_main_screen': {
+    'cb_facias': 'true',
+    'cb_soffits': 'true',
+    'cb_timber': 'true',
+    'actv_condition': '3',
+  },
+  // Pre-existing tree/engine bug (not part of this phase, flagged in the
+  // E8 sign-off packet): this separate "Condition Rating" screen has the
+  // SAME numeric 1/2/3 field as the main screen above, but its answer
+  // feeds {CONDITION}'s DESCRIPTIVE "...appears in {X} condition"
+  // sentence, producing nonsense like "appears in 1 condition" for ANY
+  // value a real surveyor could pick. Left unanswered here rather than
+  // showcase a defect this pass didn't introduce and isn't in scope to
+  // silently redesign.
+  'activity_outside_property_other_joinery_finishes_condition': <String, String>{},
+
+  // ── E9 Other (external structures) ──
+  // Phase 2B Gate 3: exercise a repair defect (roof terrace) and the new
+  // J3 handrail cross-inject (balcony).
+  'activity_outside_property_other_repairs_roof__roof__2': {
+    'cb_is_leaking': 'true',
+  },
+  'activity_outside_property_other_repairs_hand_rails__hand_rails__3': {
+    'cb_partly_rotten_65': 'true',
+  },
+  // '2': a leak on one of six areas (roof terrace) and a partly-rotten
+  // handrail on another (balcony) - real defects, but confined to 2 of 6
+  // areas rather than the whole element, and no explicit safety-hazard
+  // checkbox on this screen - varied vs. the hazard-flagged elements' '3'
+  // (see E3 note).
+  'activity_outside_property_other_main_screen': {
     'android_material_design_spinner4': '2',
   },
 
@@ -322,6 +416,10 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'actv_insulation': 'Adequate',
     'actv_roof_structure_condition': 'Reasonable',
   },
+  'activity_inside_property_repair_timber_structure': {
+    'actv_status': 'Repair soon',
+    'cb_distorted': 'true',
+  },
   'activity_inside_property_roof_structure_main_screen': {
     'android_material_design_spinner4': '2',
   },
@@ -331,12 +429,18 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'cb_painted': 'true',
     'actv_condition': 'Reasonable',
   },
+  'activity_inside_property_ceilings_cracks': {
+    'cb_ceiling_junction_with_walls': 'true',
+  },
   'activity_inside_property_ceilings_main_screen': {
     'android_material_design_spinner4': '1',
   },
   'activity_inside_property_wap_walls': {
     'cb_solid': 'true', 'cb_stud': 'true',
     'actv_condition': 'Reasonable',
+  },
+  'activity_in_side_property_wap_movement_cracks': {
+    'android_material_design_spinner3': 'Multiple elevations',
   },
   'activity_inside_property_walls_and_partitions_main_screen': {
     'android_material_design_spinner4': '1',
@@ -347,6 +451,10 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'cb_carpets': 'true', 'cb_wood_flooring': 'true', 'cb_ceramic_tiles': 'true',
     'actv_condition': 'Reasonable',
   },
+  'activity_in_side_property_floors_tiles': {
+    'cb_cracked': 'true',
+    'cb_kitchen_29': 'true',
+  },
   'activity_inside_property_floors_main_screen': {
     'android_material_design_spinner4': '1',
   },
@@ -354,16 +462,47 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'cb_lounge': 'true',
     'actv_condition': 'Reasonable',
   },
+  'activity_in_side_property_fire_places_repair_removed_cb': {
+    'actv_condition': 'OK',
+    'cb_ground': 'true',
+    'cb_dining_room': 'true',
+  },
   'activity_in_side_property_built_in_fittings': {
     'cb_kitchen': 'true',
     'cb_timber_83': 'true',
     'cb_timber': 'true',
     'android_material_design_spinner3': 'Reasonable',
   },
+  'activity_in_side_property_built_in_fittings_repair_moulding_noted': {
+    'cb_kitchen_sink': 'true',
+  },
   'activity_inside_property_built_in_fittings_main_screen': {
     'android_material_design_spinner4': '2',
   },
+  'activity_in_side_property_bathroom_fittings_second': {
+    'cb_bathroom': 'true',
+    'cb_modern_72': 'true',
+    'cb_bathtub_32': 'true',
+    'cb_wash_hand_basin_91': 'true',
+    'cb_wc_23': 'true',
+    'android_material_design_spinner3': 'Reasonable',
+  },
+  'activity_in_side_property_bathroom_fittings_sealant': {
+    'cb_bathtub': 'true',
+    'cb_partly_missing': 'true',
+  },
   'activity_inside_property_bathroom_fittings_main_screen': {
+    'android_material_design_spinner4': '2',
+  },
+  'activity_in_side_property_wood_work': {
+    'cb_stairs_handrails': 'true',
+  },
+  'activity_in_side_property_wood_work_second': {
+    'cb_doors': 'true',
+    'cb_skirting_boards': 'true',
+    'actv_condition': 'Reasonable',
+  },
+  'activity_inside_property_wood_work_main_screen': {
     'android_material_design_spinner4': '2',
   },
 
@@ -383,6 +522,10 @@ final Map<String, Map<String, String>> _curatedIssues = {
   },
   'activity_services_water_main_screen': {'android_material_design_spinner4': '1'},
   'activity_services_heating_main_screen': {'android_material_design_spinner4': '3'},
+  'activity_services_water_heating_gas_heating': {
+    'actv_type': 'Other',
+    'actv_location': 'Airing cupboard',
+  },
   'activity_services_water_heating_main_screen': {
     'android_material_design_spinner4': '3',
   },
@@ -426,7 +569,13 @@ String _textValueFor(InspectionFieldDefinition field) {
   }
   if (label.contains('location')) return 'Kitchen';
   if (label.contains('date')) return '2015';
-  if (label.contains('other')) return 'N/A';
+  // Leave "Other: ___" free-text fields blank rather than typing a
+  // placeholder into them. A real surveyor only fills these in when they
+  // have something specific to say; handlers that read them already guard
+  // on non-empty text (mirroring the paired-checkbox guard above), so an
+  // empty value is correctly treated as "nothing to add" instead of
+  // leaking "N/A"/"n/a" into composed sentences.
+  if (label.contains('other')) return '';
   return 'sample detail';
 }
 
@@ -435,6 +584,15 @@ Map<String, String> _answersFor(InspectionNodeDefinition screen) {
   for (final field in screen.fields) {
     switch (field.type) {
       case InspectionFieldType.checkbox:
+        // Don't auto-check "Other"/"Others" toggles: a real surveyor only
+        // ticks these when they have something specific to type into the
+        // paired free-text field, and _textValueFor's placeholder "N/A" for
+        // that field would otherwise leak into the composed sentence (e.g.
+        // "...front, side, rear and n/a") wherever this checkbox is left
+        // unchecked - misread as a phrase-engine bug when it's actually
+        // this demo harness over-filling every checkbox indiscriminately.
+        final label = field.label.trim().toLowerCase();
+        if (label == 'other' || label == 'others') continue;
         answers[field.id] = 'true';
       case InspectionFieldType.dropdown:
         final v = _pickDropdownValue(field);
@@ -480,7 +638,9 @@ void main() {
       for (final node in section.nodes) {
         if (node.type != InspectionNodeType.screen) continue;
         final id = node.id;
-        if (_repeatSlotSuffix.hasMatch(id)) continue;
+        if (_repeatSlotSuffix.hasMatch(id) && !_curatedIssues.containsKey(id)) {
+          continue;
+        }
         if (id.contains('__')) {
           final base = id.split('__').first;
           if (skipBases.contains(base) && !allowedVariant.contains(id)) {

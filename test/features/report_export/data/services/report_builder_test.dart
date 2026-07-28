@@ -2427,7 +2427,7 @@ void main() {
     });
 
     test(
-        'injects legacy Section F building risk phrases into J1 and creates J2',
+        'injects legacy Section F building risk phrases into J1 and creates J3',
         () {
       final tree = InspectionTreePayload(
         sections: [
@@ -2497,13 +2497,488 @@ void main() {
         contains('the bathtub is leaking and causing dampness'),
       );
 
-      final j2 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j2_risk_to_people');
-      expect(j2.title, 'J2 Risk To People');
+      final j3 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
+      expect(j3.title, 'J3 Risk To People');
       expect(
-        j2.phrases.join(' ').toLowerCase(),
+        j3.phrases.join(' ').toLowerCase(),
         contains('one or more internal doors are glazed'),
       );
+    });
+
+    test(
+        'J3 Risk To People grammar fixes: articles and subject-verb agreement (Phase 2F)',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_risks_other_': {'cb_not_applicable': 'true'},
+            'activity_in_side_property_wood_work': {
+              'cb_no_stairs_handrails': 'true',
+            },
+            'activity_in_side_property_bathroom_fittings_repair': {
+              'actv_repair_type': 'Repair now',
+              'cb_bathtub_52': 'true',
+              'cb_wc_89': 'true',
+              'cb_badly_cracked_62': 'true',
+            },
+            'activity_outside_property_main_walls_damp': {
+              'et_location_677': 'the lounge and hallway',
+            },
+            'activity_outside_property_main_wall_repairs_render': {
+              'actv_condition': 'Repair now',
+              'cb_hazard': 'true',
+            },
+            'activity_outside_property_windows_repairs_repair_window': {
+              'cb_safety_hazard': 'true',
+              'cb_ch1': 'true',
+            },
+            'activity_outside_property_out_side_doors_repairs_repair_out_side_doors':
+                {
+              'actv_repair_type': 'Repair now',
+              'cb_damaged': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j3Text = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people')
+          .phrases
+          .join(' ')
+          .toLowerCase();
+
+      expect(j3Text, contains('this is a safety hazard as anyone'));
+      expect(j3Text, isNot(contains('this is safety hazards')));
+
+      expect(j3Text, contains('bathtub and wc are badly cracked'));
+
+      expect(
+        j3Text,
+        contains('internal wall surfaces that include the lounge and hallway'),
+      );
+      expect(j3Text, isNot(contains('surfaces the include')));
+
+      expect(j3Text, contains('render coating to the building are eroded'));
+      expect(j3Text, isNot(contains('render coating to the building is')));
+
+      expect(
+        j3Text,
+        contains(
+            'affected by single or multiple defects, and this is a health and safety hazard (see section e5'),
+      );
+      expect(
+        j3Text,
+        contains(
+            'affected by single or multiple defects, and this is a health and safety hazard (see section e6'),
+      );
+      expect(j3Text, isNot(contains('this is health and safety hazard')));
+    });
+
+    test(
+        'synthesises J2 Risk To Grounds from H-section trees/retaining-walls/slope/fence data, ordered before J3',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_risk_to_building_',
+                title: 'J1 Risk To Building',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'actv_movement_status',
+                    label: 'Movement status',
+                    type: InspectionFieldType.dropdown,
+                    options: ['None', 'Noted'],
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_risks_risk_to_building_': {
+              'actv_movement_status': 'None',
+            },
+            'activity_grounds_other_grounds': {
+              'actv_type': 'Sloping',
+            },
+            'activity_other_repair_nearby_trees': {
+              'actv_condition': 'Problems',
+              'actv_proximity_of_adjacent_tree': 'Several',
+              'cb_significant_cracks': 'true',
+            },
+            'activity_other_repair_retaining_walls': {
+              'cb_rear': 'true',
+              'cb_cracked': 'true',
+            },
+            'activity_grounds_other_repair_fence': {
+              'cb_front': 'true',
+              'cb_leaning': 'true',
+            },
+            'activity_risks_other_': {
+              'cb_not_applicable': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j2 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j2_risk_to_grounds');
+      expect(j2.title, 'J2 Risk To Grounds');
+      final j2Text = j2.phrases.join(' ').toLowerCase();
+      expect(j2Text, contains('the property occupies a sloping site'));
+      expect(
+        j2Text,
+        contains(
+            'several trees within influencing distance of the property, and these appear to be causing cracks to the property'),
+      );
+      expect(
+        j2Text,
+        contains(
+            'the retaining wall(s) to the rear of the property show signs of being cracked'),
+      );
+      expect(
+        j2Text,
+        contains(
+            'parts of the boundary fencing to the front garden are leaning'),
+      );
+
+      final j1Index = section.screens
+          .indexWhere((s) => s.screenId == 'activity_risks_risk_to_building_');
+      final j2Index =
+          section.screens.indexWhere((s) => s.screenId == 'derived_j2_risk_to_grounds');
+      final j4Index =
+          section.screens.indexWhere((s) => s.screenId == 'activity_risks_other_');
+      expect(j1Index, lessThan(j2Index));
+      expect(j2Index, lessThan(j4Index));
+    });
+
+    test('does not synthesise J2 when none of the source screens show a risk',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_grounds_other_grounds': {
+              'actv_type': 'Relatively level',
+            },
+            'activity_other_repair_nearby_trees': {
+              'actv_condition': 'OK',
+            },
+            'activity_risks_other_': {
+              'cb_not_applicable': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      expect(
+        section.screens.any((s) => s.screenId == 'derived_j2_risk_to_grounds'),
+        isFalse,
+      );
+    });
+
+    test(
+        'synthesises J4 Risk To Health: always fires, positive/negative branches, ordered after J3',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_grounds_garage': {
+              'cb_corrugated_asbestos_sheets': 'true',
+            },
+            'activity_in_side_property_bathroom_fittings_mould': {
+              'cb_bathtub': 'true',
+            },
+            'activity_risks_other_': {
+              'cb_not_applicable': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j4 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j4_risk_to_health');
+      expect(j4.title, 'J4 Risk To Health');
+      final j4Text = j4.phrases.join(' ').toLowerCase();
+      expect(j4Text, contains('materials that may contain asbestos were observed'));
+      expect(j4Text, isNot(contains('no materials suspected of containing asbestos')));
+      expect(j4Text, contains('older properties may contain lead pipework'));
+      expect(j4Text, contains('localised mould growth associated with condensation'));
+      expect(j4Text, isNot(contains('no significant mould growth')));
+      expect(j4Text, contains('presence of radon gas cannot be determined'));
+
+      final j4Index = section.screens
+          .indexWhere((s) => s.screenId == 'derived_j4_risk_to_health');
+      final otherIndex =
+          section.screens.indexWhere((s) => s.screenId == 'activity_risks_other_');
+      expect(j4Index, lessThan(otherIndex));
+    });
+
+    test('J4 Risk To Health negative branches when no asbestos/mould signal is present',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_risks_other_': {
+              'cb_not_applicable': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j4 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j4_risk_to_health');
+      final j4Text = j4.phrases.join(' ').toLowerCase();
+      expect(j4Text, contains('no materials suspected of containing asbestos'));
+      expect(j4Text, contains('no significant mould growth'));
+      expect(j4Text, contains('older properties may contain lead pipework'));
+      expect(j4Text, contains('presence of radon gas cannot be determined'));
+    });
+
+    test(
+        'synthesises J5 Risk To Security: door security + communal security system, ordered after J4',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_outside_property_out_side_doors_about_doors': {
+              'actv_seciruty_offered': 'Inadequate',
+            },
+            'activity_outside_property_other_communal_area': {
+              'cb_cctv': 'true',
+            },
+            'activity_risks_other_': {
+              'cb_not_applicable': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j5 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j5_risk_to_security');
+      expect(j5.title, 'J5 Risk To Security');
+      final j5Text = j5.phrases.join(' ').toLowerCase();
+      expect(j5Text, contains('external doors appear to offer limited security'));
+      expect(j5Text, isNot(contains('reasonable security')));
+      expect(j5Text, contains('incorporates a visible security system to the communal areas'));
+      expect(j5Text, contains('buildings require regular inspection and maintenance'));
+
+      final j4Index = section.screens
+          .indexWhere((s) => s.screenId == 'activity_risks_other_');
+      final j5Index = section.screens
+          .indexWhere((s) => s.screenId == 'derived_j5_risk_to_security');
+      expect(j5Index, lessThan(j4Index));
+    });
+
+    test(
+        'J5 Risk To Security: reasonable-door branch, no-communal-screen means Security Systems is silent, General Advice always present',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_outside_property_out_side_doors_about_doors': {
+              'actv_seciruty_offered': 'Reasonable',
+            },
+            'activity_risks_other_': {
+              'cb_not_applicable': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j5 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j5_risk_to_security');
+      final j5Text = j5.phrases.join(' ').toLowerCase();
+      expect(j5Text, contains('external doors appear to provide reasonable security'));
+      expect(j5Text, isNot(contains('security system')));
+      expect(j5Text, contains('buildings require regular inspection and maintenance'));
     });
 
     test('injects legacy Section F guarantee phrase into I2', () {
@@ -2551,6 +3026,212 @@ void main() {
         screen.phrases.join(' ').toLowerCase(),
         contains('dampness problem repair is covered by any guarantees'),
       );
+    });
+
+    test(
+        'injects RICS L2 E5/E6 PVC-replacement guarantee cross-inject into I2',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+            'activity_outside_property_windows_aboutwindow': {
+              'cb_is_replacement': 'true',
+              'cb_pvc': 'true',
+            },
+            'activity_outside_property_out_side_doors_about_doors': {
+              'cb_replacement': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(
+        all,
+        contains(
+          'confirm whether the pvc glazed sections to the windows were installed by a contractor registered with fensa',
+        ),
+      );
+      expect(
+        all,
+        contains(
+          'confirm whether the pvc glazed sections to the doors were installed by a contractor registered with fensa',
+        ),
+      );
+    });
+
+    test(
+        'does not inject the PVC-replacement cross-inject when windows are not PVC or not replacement',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+            // Replacement, but not PVC - should not fire.
+            'activity_outside_property_windows_aboutwindow': {
+              'cb_is_replacement': 'true',
+              'cb_timber': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(all, isNot(contains('pvc glazed sections to the windows')));
+      expect(all, isNot(contains('pvc glazed sections to the doors')));
+    });
+
+    test('injects E1 shared-chimney RICS L2 cross-inject into I3 (Phase 2G-mini)',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_other_matters',
+                title: 'I3 Other Matters',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_freehold',
+                    label: 'Freehold',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_other_matters': {
+              'cb_freehold': 'true',
+            },
+            'activity_outside_property_shared_chimney': {
+              'ch1': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(
+        all,
+        contains(
+          'the rainwater goods and chimney stack(s) are shared',
+        ),
+      );
+    });
+
+    test('does not inject the shared-chimney cross-inject when no shared chimney is recorded',
+        () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_other_matters',
+                title: 'I3 Other Matters',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_freehold',
+                    label: 'Freehold',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_other_matters': {
+              'cb_freehold': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(all, isNot(contains('rainwater goods and chimney stack(s) are shared')));
     });
 
     test(

@@ -82,7 +82,7 @@ void main() {
       },
     );
 
-    expect(phrases.single, contains('covered in concrete tiles'));
+    expect(phrases.single, contains('formed in concrete tiles'));
     expect(phrases.single, isNot(contains('floor above')));
   });
 }

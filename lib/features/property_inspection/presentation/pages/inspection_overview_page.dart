@@ -92,6 +92,7 @@ class _InspectionOverviewPageState
     'I': Icons.gavel_outlined,
     'J': Icons.shield_outlined,
     'O': Icons.summarize_outlined,
+    'K': Icons.architecture_outlined,
   };
 
   @override
@@ -100,7 +101,18 @@ class _InspectionOverviewPageState
     final surveyState = ref.watch(surveyDetailProvider(surveyId));
     final theme = Theme.of(context);
     final sectionsAsync = ref.watch(inspectionSectionsProvider);
-    final orderedKeys = <String>['A', 'D', 'E', 'H', 'F', 'G', 'R', 'I', 'J'];
+    final orderedKeys = <String>[
+      'A',
+      'D',
+      'E',
+      'H',
+      'F',
+      'G',
+      'R',
+      'I',
+      'J',
+      'K',
+    ];
     final colorMap = <String, Color>{
       'A': theme.colorScheme.primary,
       'D': theme.colorScheme.primary,
@@ -111,6 +123,7 @@ class _InspectionOverviewPageState
       'I': const Color(0xFFE65100),
       'J': theme.colorScheme.error,
       'R': theme.colorScheme.secondary,
+      'K': const Color(0xFF5E35B1),
     };
     final displayOverride = <String, String>{
       'R': 'Room Details',
@@ -120,6 +133,7 @@ class _InspectionOverviewPageState
       'H': 'Grounds',
       'I': 'Issues for Legal Advisers',
       'J': 'Risks',
+      'K': 'Floor & Site Plan Sketches',
     };
 
     return PopScope(
@@ -208,6 +222,9 @@ class _InspectionOverviewPageState
                       case 'I':
                       case 'J':
                         grouped['Assessment & Issues']!.add(section);
+                        break;
+                      case 'K':
+                        grouped['Documentation & Completion']!.add(section);
                         break;
                     }
                   }

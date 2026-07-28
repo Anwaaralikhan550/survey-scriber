@@ -20,14 +20,20 @@ void main() {
     test('porch element sentences merge into a single paragraph', () {
       // Exact sentences from the client's Home Survey report feedback:
       // "This should be a paragraph and not separate sentences as they
-      //  belong to the same element."
+      //  belong to the same element." Updated (Phase 2B, E7) to the RICS
+      // L2 wording that replaced the original pre-migration sentences.
       final input = <String>[
-        'There is a porch to the front of the property, and this is built '
-            'of brick walls and timber double glazed sections.',
-        'The roof over the porch is pitched and covered in concrete tiles.',
-        'The porch incorporates double glazed pvc door(s).',
-        'Also, the porch incorporates double glazed pvc windows(s).',
-        'The floors are covered in tiles and laminate flooring.',
+        'Description: The porch is located to the front of the building. '
+            'The walls comprise brick walls and timber double glazed '
+            'sections. The porch appears to be a later addition to the '
+            'property. Your legal adviser should confirm whether any '
+            'necessary Building Regulation approval or exemption applies, '
+            'together with any guarantees or warranties available.',
+        'Roof: The roof over the porch is formed in concrete tiles.',
+        'Doors and Windows: The porch comprises double glazed pvc framed '
+            'door(s).',
+        'The porch also comprises double glazed pvc framed window(s).',
+        'Floor: The porch floor is covered with tiles and laminate flooring.',
       ];
 
       final output = composer.compose(input);
@@ -41,16 +47,17 @@ void main() {
       expect(output.length, lessThan(input.length),
           reason: 'same-element sentences must merge');
       final roofParagraph =
-          output.firstWhere((p) => p.contains('The roof over the porch'));
+          output.firstWhere((p) => p.contains('Roof: The roof over the porch'));
       expect(roofParagraph, contains('door(s)'));
-      expect(roofParagraph, contains('windows(s)'));
-      expect(roofParagraph, contains('floors are covered in'));
+      expect(roofParagraph, contains('window(s)'));
+      expect(roofParagraph, contains('Floor: The porch floor is covered with'));
     });
 
     test('open-to-building stays its own paragraph', () {
       final input = <String>[
-        'The roof over the porch is pitched and covered in concrete tiles.',
-        'The porch incorporates double glazed pvc door(s).',
+        'Roof: The roof over the porch is formed in concrete tiles.',
+        'Doors and Windows: The porch comprises double glazed pvc framed '
+            'door(s).',
         'The porch is open to the main part of the property, and this will '
             'result in a high rate of heat loss from the property. A '
             'separating door should be fitted between them soon.',
@@ -95,8 +102,9 @@ void main() {
     test('subheadings, ratings and notes never merge', () {
       final input = <String>[
         '[[SUBHEADING]] Porch',
-        'The roof over the porch is pitched and covered in concrete tiles.',
-        'The porch incorporates double glazed pvc door(s).',
+        'Roof: The roof over the porch is formed in concrete tiles.',
+        'Doors and Windows: The porch comprises double glazed pvc framed '
+            'door(s).',
         'Condition rating is: 2.',
         'Notes: check flashing next visit.',
       ];
@@ -126,7 +134,7 @@ void main() {
 
     test('sentences from different masters do not merge', () {
       final input = <String>[
-        'The roof over the porch is pitched and covered in concrete tiles.',
+        'Roof: The roof over the porch is formed in concrete tiles.',
         'The internal walls are built of stud partitions.',
       ];
 

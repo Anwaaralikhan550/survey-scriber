@@ -1015,6 +1015,24 @@ class ReportBuilder {
     return ['The following matters were identified in $screenTitle: $body.'];
   }
 
+  // E1's spec text has a cross-inject Phase 2B correctly identified but left
+  // unwired at the time ("Add highlighted below text to: Section I3" - I
+  // hadn't been rebuilt yet). Section I is now fully migrated (Phase 2F),
+  // so this closes that gap: when the surveyor records a shared chimney on
+  // E1's dedicated screen, the same spec-mandated sentence about shared
+  // rainwater goods and chimney stacks is injected into I3.
+  List<String> _legacyDerivedSectionFIssueOtherMattersSharedChimney(
+      V2RawReportData rawData) {
+    final sharedChimney =
+        _answersForScreen(rawData, 'activity_outside_property_shared_chimney');
+    final hasSharedChimney = ['ch1', 'ch2', 'ch3', 'ch4', 'cb_other_608']
+        .any((id) => _isCheckedValue(sharedChimney[id]));
+    if (!hasSharedChimney) return const [];
+    return [
+      'The rainwater goods and chimney stack(s) are shared. The owner of the neighbouring property or properties may have some legal rights over these shared building parts. You should check with your legal adviser before any work is done.'
+    ];
+  }
+
   List<String> _legacyDerivedSectionFIssueGuarantees(V2RawReportData rawData) {
     final phrases = <String>[];
     final cellar = _answersForScreen(
@@ -1030,6 +1048,34 @@ class ReportBuilder {
       phrases.add(
           'You should check with your legal adviser to see if the dampness problem is covered by any guarantees or warranties.');
     }
+
+    // RICS L2 cross-injections from Section E5 Windows and E6 Outside
+    // Doors (Phase 2B): each section's spec text says "Add text to:
+    // Section J2 Guarantees" for a PVC-glazed-replacement scenario - "J2"
+    // is almost certainly a typo for "I2" (Guarantees is I2 everywhere
+    // else in the library; the app has no J2 content at all). Deferred at
+    // the time to whoever did I2's own rewrite; wired here (Phase 2F) now
+    // that I2 is the active element.
+    final windowsAbout = _answersForScreen(
+        rawData, 'activity_outside_property_windows_aboutwindow');
+    if (_isCheckedValue(windowsAbout['cb_is_replacement']) &&
+        _isCheckedValue(windowsAbout['cb_pvc'])) {
+      phrases.add(
+          'You should ask your legal adviser to confirm whether the PVC glazed sections to the windows were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
+    }
+
+    // The "PVC" outside-doors screen is its own dedicated material
+    // variant (separate from the timber/steel/aluminium/other door
+    // screens), so its own "Replacement" checkbox alone is the PVC +
+    // replacement signal - no separate material checkbox to combine it
+    // with, unlike the combined windows screen above.
+    final doorsAboutPvc = _answersForScreen(
+        rawData, 'activity_outside_property_out_side_doors_about_doors');
+    if (_isCheckedValue(doorsAboutPvc['cb_replacement'])) {
+      phrases.add(
+          'You should ask your legal adviser to confirm whether the PVC glazed sections to the doors were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
+    }
+
     return _cleanupPhrases(phrases);
   }
 
@@ -1274,7 +1320,7 @@ class ReportBuilder {
         (mainWallsDamp['et_location_677'] ?? '').trim();
     if (mainWallsDampLocation.isNotEmpty) {
       phrases.add(
-          'Elevated moisture readings were recorded to sections of the internal wall surfaces the include ${mainWallsDampLocation.toLowerCase()} (see section E4 - Main Walls).');
+          'Elevated moisture readings were recorded to sections of the internal wall surfaces that include ${mainWallsDampLocation.toLowerCase()} (see section E4 - Main Walls).');
     }
     if (_isCheckedValue(mainWallsDamp['cb_install_french_gutters'])) {
       phrases.add(
@@ -1303,6 +1349,145 @@ class ReportBuilder {
           'The small beam that spans across the bottom of the window opening (called a windowsill) is damaged, cracked, distorted (see section E4 - Main Walls).');
     }
 
+    // RICS L2 cross-injection from Section E8 Other Joinery and Finishes
+    // (Phase 2B): the spec's single E8 -> J1 injection, gated on the
+    // repair screen's own "Rotted" defect checkbox - a direct 1:1 mapping
+    // (the spec's cross-inject text is literally "...is rotted"), unlike
+    // E6/E7's Repair-Now-tier derivation where no matching checkbox exists.
+    for (final screenId in const [
+      'activity_outside_property_other_joinery_and_finishes_repairs',
+      'activity_outside_property_other_joinery_and_finishes_repairs__repairs',
+    ]) {
+      final joineryRepair = _answersForScreen(rawData, screenId);
+      if (_isCheckedValue(joineryRepair['cb_rotted'])) {
+        phrases.add(
+            'Parts of the usual work at the eaves level is rotted. This should be repaired to avoid further deterioration (see section E8 - Other Joinery and Finishes).');
+      }
+    }
+
+    return _cleanupPhrases(phrases);
+  }
+
+  /// RICS L2 J2 "Risks to the Grounds" (Phase 2F): the app has no
+  /// dedicated J2 screen at all - spec's 4 sub-topics (Trees, Retaining
+  /// Walls, Sloping Ground, Boundary Structures) are synthesised from
+  /// existing H-section grounds screens, the same "derive from other
+  /// sections' data" pattern already used for J3 Risk to People above.
+  /// Only emits when a genuine risk-worthy condition exists in the source
+  /// data (a defect was logged, or the ground genuinely isn't level) -
+  /// mirrors J1/J3's existing behaviour of never fabricating a "no risk
+  /// found" default sentence for a sub-topic with no matching screen.
+  List<String> _legacyDerivedSectionFRiskToGrounds(V2RawReportData rawData) {
+    final phrases = <String>[];
+
+    // Sloping Ground: H2's grounds-topography screen.
+    final groundsTopo =
+        _answersForScreen(rawData, 'activity_grounds_other_grounds');
+    final topoType = (groundsTopo['actv_type'] ?? '').trim().toLowerCase();
+    if (topoType.isNotEmpty && topoType != 'relatively level') {
+      phrases.add(
+          'The property occupies a $topoType site. Although no evidence of instability was observed during the inspection, sloping ground can influence drainage and foundations, and should be considered as part of routine maintenance.');
+    }
+
+    // Trees: H2's nearby-trees repair screen.
+    final nearbyTrees =
+        _answersForScreen(rawData, 'activity_other_repair_nearby_trees');
+    final treeCondition =
+        (nearbyTrees['actv_condition'] ?? '').trim().toLowerCase();
+    if (treeCondition == 'problems') {
+      final proximity =
+          (nearbyTrees['actv_proximity_of_adjacent_tree'] ?? '')
+              .trim()
+              .toLowerCase();
+      final proximityText = proximity.isEmpty ? 'trees' : '$proximity trees';
+      final treeIssues = _labelsForAnswerMap(
+        nearbyTrees,
+        const <String, String>{
+          'cb_significant_cracks': 'cracks to the property',
+          'cb_subsidence_movement': 'subsidence movement',
+          'cb_other_619': 'other issues',
+        },
+        otherCheckboxId: 'cb_other_619',
+        otherTextId: 'et_other_197',
+      );
+      if (treeIssues.isNotEmpty) {
+        phrases.add(
+            'There are $proximityText within influencing distance of the property, and these appear to be causing ${_toLegacyWords(treeIssues)}. Further investigation by an appropriately qualified person is recommended before legal commitment.');
+      } else {
+        phrases.add(
+            'There are $proximityText within influencing distance of the property. Although no evidence of damage was observed during the inspection, trees may influence buildings depending upon soil type, species and proximity. Routine management should be maintained where appropriate.');
+      }
+    }
+
+    // Retaining Walls: H2's retaining-walls repair screen.
+    final retainingWalls =
+        _answersForScreen(rawData, 'activity_other_repair_retaining_walls');
+    final retainingWallLocations = _labelsForAnswerMap(
+      retainingWalls,
+      const <String, String>{
+        'cb_front': 'front',
+        'cb_side': 'side',
+        'cb_rear': 'rear',
+        'cb_other_411': 'other',
+      },
+      otherCheckboxId: 'cb_other_411',
+      otherTextId: 'et_other_384',
+    );
+    final retainingWallDefects = _labelsForAnswerMap(
+      retainingWalls,
+      const <String, String>{
+        'cb_cracked': 'cracked',
+        'cb_distorted': 'distorted',
+        'cb_unstable': 'unstable',
+        'cb_damaged': 'damaged',
+        'cb_other_394': 'other',
+      },
+      otherCheckboxId: 'cb_other_394',
+      otherTextId: 'et_other_410',
+    );
+    if (retainingWallLocations.isNotEmpty && retainingWallDefects.isNotEmpty) {
+      phrases.add(
+          'The retaining wall(s) to the ${_toLegacyWords(retainingWallLocations)} of the property show signs of being ${_toLegacyWords(retainingWallDefects)}. Further investigation should be undertaken where structural stability appears affected.');
+    }
+
+    // Boundary Structures: H4's fence-repair screen (already used as the
+    // Ownership/Defects source for H4's own element - reused here for
+    // J2's Boundary Structures sub-topic, same underlying defect data,
+    // different narrative framing).
+    final fenceRepair =
+        _answersForScreen(rawData, 'activity_grounds_other_repair_fence');
+    final fenceGardens = _labelsForAnswerMap(
+      fenceRepair,
+      const <String, String>{
+        'cb_front': 'front',
+        'cb_rear': 'rear',
+        'cb_side': 'side',
+        'cb_communal': 'communal',
+        'cb_other_271': 'other',
+      },
+      otherCheckboxId: 'cb_other_271',
+      otherTextId: 'et_other_341',
+    );
+    final fenceDefects = _labelsForAnswerMap(
+      fenceRepair,
+      const <String, String>{
+        'cb_broken': 'broken',
+        'cb_unstable': 'unstable',
+        'cb_leaning': 'leaning',
+        'cb_loose_in_places': 'loose in places',
+        'cb_badly_damaged': 'badly damaged',
+        'cb_rotted_in_places': 'rotted in places',
+        'cb_missing_in_places': 'missing in places',
+        'cb_other_938': 'other',
+      },
+      otherCheckboxId: 'cb_other_938',
+      otherTextId: 'et_other_276',
+    );
+    if (fenceGardens.isNotEmpty && fenceDefects.isNotEmpty) {
+      phrases.add(
+          'Parts of the boundary fencing to the ${_toLegacyWords(fenceGardens)} garden are ${_toLegacyWords(fenceDefects)}. Defective boundary structures should be repaired where deterioration affects stability or security.');
+    }
+
     return _cleanupPhrases(phrases);
   }
 
@@ -1317,7 +1502,7 @@ class ReportBuilder {
     }
     if (_isCheckedValue(woodMain['cb_no_stairs_handrails'])) {
       phrases.add(
-          'There are no handrails installed to the staircase, and this is safety hazards as anyone, especially children, can fall off the edge of the stairs.');
+          'There are no handrails installed to the staircase, and this is a safety hazard as anyone, especially children, can fall off the edge of the stairs.');
     }
 
     final balusters = _answersForScreen(
@@ -1400,7 +1585,7 @@ class ReportBuilder {
         repairLocations.isNotEmpty &&
         repairDefects.isNotEmpty) {
       phrases.add(
-          'The ${_toLegacyWords(repairLocations)} is ${_toLegacyWords(repairDefects)}.');
+          'The ${_toLegacyWords(repairLocations)} ${_legacyIsAre(repairLocations)} ${_toLegacyWords(repairDefects)}.');
     }
 
     // RICS L2 cross-injections from Section E1 Chimney stacks (Phase 2B):
@@ -1457,7 +1642,7 @@ class ReportBuilder {
         (mainWallsDampForPeople['et_location_677'] ?? '').trim();
     if (mainWallsDampLocationForPeople.isNotEmpty) {
       phrases.add(
-          'Elevated moisture readings were recorded to sections of the internal wall surfaces the include ${mainWallsDampLocationForPeople.toLowerCase()} (see section E4 - Main Walls).');
+          'Elevated moisture readings were recorded to sections of the internal wall surfaces that include ${mainWallsDampLocationForPeople.toLowerCase()} (see section E4 - Main Walls).');
     }
 
     final renderRepair = _answersForScreen(
@@ -1469,18 +1654,20 @@ class ReportBuilder {
             .contains('now') &&
         _isCheckedValue(renderRepair['cb_hazard'])) {
       phrases.add(
-          'Parts of the render coating to the building is eroded, loose, missing, damaged, other (see section E4 - Main Walls).');
+          'Parts of the render coating to the building are eroded, loose, missing, damaged, other (see section E4 - Main Walls).');
     }
 
     // RICS L2 cross-injections from Section E5 Windows (Phase 2B): 2 of
     // the spec's 3 window -> J3 (Risk to People) injections (repair
     // safety-hazard, fire-trap-risk). The 3rd targets "Section J2
-    // Guarantees" per the spec's own text, but J2 in this app's section
-    // order is Risks to the Grounds, not Guarantees - "Guarantees" is I2
-    // everywhere else in the library, so this is almost certainly a typo
-    // in the client's document. Treated as an I2 target and deferred to
-    // Phase 2F like every other I-target injection in this file, rather
-    // than wired to the wrong section by mistake.
+    // Guarantees" per the spec's own text, but this app has no J2 content
+    // at all (J1=Building, J3=Risk to People [renamed from a pre-existing
+    // mislabelled "J2" - see report_builder's derived_j3_risk_to_people
+    // fix], J4=Other) and "Guarantees" is I2 everywhere else in the
+    // library, so this is almost certainly a typo in the client's
+    // document. Wired as an I2 target (Phase 2F) in
+    // _legacyDerivedSectionFIssueGuarantees above, rather than to the
+    // wrong section.
     final windowsRepairForPeople = _answersForScreen(
         rawData, 'activity_outside_property_windows_repairs_repair_window');
     final windowsRepairHowMany = _labelsForAnswerMap(
@@ -1494,7 +1681,7 @@ class ReportBuilder {
     if (_isCheckedValue(windowsRepairForPeople['cb_safety_hazard']) &&
         windowsRepairHowMany.isNotEmpty) {
       phrases.add(
-          'One or more windows have been affected by single or multiple defects, and this is health and safety hazard (see section E5 - Windows).');
+          'One or more windows have been affected by single or multiple defects, and this is a health and safety hazard (see section E5 - Windows).');
     }
 
     final fireEscapeRisk = _answersForScreen(rawData,
@@ -1511,6 +1698,297 @@ class ReportBuilder {
       phrases.add(
           'The design of the window(s) does not provide a suitable means of escape in the event of a fire (see section E5 - Windows).');
     }
+
+    // RICS L2 cross-injections from Section E6 Outside Doors (Phase 2B):
+    // 1 of the spec's 2 door -> J3 (Risk to People) injections. The 2nd
+    // targets "Section J2 Guarantees" per the spec's own text - the same
+    // likely typo documented for E5 above (Guarantees is I2 everywhere
+    // else in the library) - wired as an I2 target (Phase 2F) in
+    // _legacyDerivedSectionFIssueGuarantees above, rather than to the
+    // wrong section.
+    //
+    // The door repair screens have no dedicated safety-hazard/disrepair
+    // checkbox (unlike the windows repair screen's cb_safety_hazard), so
+    // this fires whenever any door location's repair is in the "Repair
+    // now" tier with at least one defect selected - the same signal the
+    // engine's own DOORS_DEFECT_IF_IN_DISREPAIR addendum uses.
+    for (final screenId in const [
+      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors',
+      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__rear_door',
+      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__side_door',
+      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__patio_door',
+      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__garage_door',
+      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__other_door',
+    ]) {
+      final doorRepair = _answersForScreen(rawData, screenId);
+      final repairType = (doorRepair['actv_repair_type'] ??
+              doorRepair['llMainContainer'] ??
+              '')
+          .trim()
+          .toLowerCase();
+      if (!repairType.contains('now')) continue;
+      final nowDefects = _labelsForAnswerMap(
+        doorRepair,
+        const <String, String>{
+          'cb_damaged': 'damaged',
+          'cb_rotten': 'rotten',
+          'cb_partly_worn': 'partly worn',
+          'cb_failed_glazing': 'failed glazing',
+          'cb_sticks_against_frame': 'sticks against frame',
+          'cb_poorly_fitted': 'poorly fitted',
+          'cb_other_837': 'other',
+        },
+        otherCheckboxId: 'cb_other_837',
+        otherTextId: 'et_other_855',
+      );
+      if (nowDefects.isNotEmpty) {
+        phrases.add(
+            'One or more doors have been affected by single or multiple defects, and this is a health and safety hazard (see section E6 - Outside Doors).');
+        break;
+      }
+    }
+
+    // RICS L2 cross-injection from Section E9 Other (Phase 2B): the
+    // spec's one E9 -> J3 injection (handrail defects). Not present in
+    // the digitised library's crossInjects list for this element (a
+    // digitiser gap - the raw spec text uses "Add text to J3" without the
+    // "Section" wording every other injection in the library uses, which
+    // the extraction pattern didn't catch), but confirmed present in the
+    // raw spec text and wired here regardless. Checked across the 5
+    // numbered handrail-repair screen variants that actually reference
+    // {OTHER_REPAIR_HANDRAILS} in their wrapper (roof terrace, balcony,
+    // Juliet balcony, external stairs, other - carport and porch canopy
+    // have no handrails in the spec or this app's screens).
+    for (final screenId in const [
+      'activity_outside_property_other_repairs_hand_rails__hand_rails__2',
+      'activity_outside_property_other_repairs_hand_rails__hand_rails__3',
+      'activity_outside_property_other_repairs_hand_rails__hand_rails__4',
+      'activity_outside_property_other_repairs_hand_rails__hand_rails__5',
+      'activity_outside_property_other_repairs_hand_rails__hand_rails__6',
+    ]) {
+      final handrailRepair = _answersForScreen(rawData, screenId);
+      final handrailDefects = _labelsForAnswerMap(
+        handrailRepair,
+        const <String, String>{
+          'cb_partly_rotten_65': 'partly rotten',
+          'cb_not_strong_enough_51': 'not strong enough',
+          'cb_inadequately_designed_43': 'inadequately designed',
+        },
+      );
+      if (handrailDefects.isNotEmpty) {
+        phrases.add(
+            'The handrail(s) are damaged, inadequate or poorly designed and this presents a safety risk (see section E9 - Other).');
+        break;
+      }
+    }
+
+    return _cleanupPhrases(phrases);
+  }
+
+  // J4 Risks to Health (Phase 2F): a brand-new spec element with no
+  // dedicated screen. Unlike J1-J3 (silent when no risk is present),
+  // spec's own J4 sub-topics are each written as an always-appearing
+  // "positive or negative" disclosure (Asbestos/Mould) or an unconditional
+  // advisory with no "or" branch at all (Lead/Radon - RICS L2's own text
+  // has no alternate wording, because these genuinely cannot be ruled out
+  // by visual inspection). So this function always returns 4 phrases,
+  // never stays empty, matching spec's structure rather than J1-J3's
+  // risk-triggered philosophy.
+  List<String> _legacyDerivedSectionFRiskToHealth(V2RawReportData rawData) {
+    final phrases = <String>[];
+
+    // Asbestos: RICS L2 treats this as one property-wide finding, not a
+    // per-location list, so this checks every screen across Sections E, F,
+    // G and H that records an asbestos-containing material and only
+    // distinguishes observed-vs-not-observed, matching spec's own
+    // two-branch wording exactly. Each of these screens already narrates
+    // its own specific asbestos content in place (E2 roof covering, F
+    // ceilings/walls, G water/drainage, H garage) - this is a property-wide
+    // summary in addition to that detail, the same "component narrates
+    // locally, J adds a risk-level summary" pattern J1-J3 already use.
+    const asbestosCheckboxSites = <String, List<String>>{
+      'activity_grounds_garage': ['cb_corrugated_asbestos_sheets'],
+      'activity_services_drainage': ['cb_material_asbestos_cement'],
+      'activity_services_water_water_tank': ['cb_asbestos'],
+      'activity_services_water_repair_main_screen': ['cb_asbestos_material'],
+      'activity_inside_property_ceilings_repairs_ceilings': [
+        'cb_contain_asbestos_material'
+      ],
+      'inside_property_ceilings_about_ceilings': ['cb_textured'],
+      'activity_inside_property_water_tank': ['cb_asbestos', 'cb_asbestos_disused'],
+      'activity_inside_property_wap_walls': ['cb_textured'],
+      'activity_outside_property_rwg_about': ['cb_asbestos_cement'],
+      'activity_outside_property_other_joinery_and_finishes_main_screen': [
+        'cb_open_runoffs'
+      ],
+      'outside_property_about_roof_layout': ['cb_composite'],
+      'outside_property_about_roof_layout__flat': ['cb_composite'],
+      'outside_property_about_roof_layout__mansard': ['cb_composite'],
+      'outside_property_about_roof_layout__other': ['cb_composite'],
+      'activity_inside_property_ceilings_contains_asbestos': [
+        'cb_lounge',
+        'cb_bedroom',
+        'cb_kitchen',
+        'cb_bathroom',
+        'cb_Property',
+      ],
+      'outside_property_roof_covering_asbestos_layout': [
+        'cb_roof_covering',
+        'cb_verge',
+        'cb_soffits',
+        'cb_other_654',
+      ],
+    };
+    var asbestosObserved = false;
+    for (final entry in asbestosCheckboxSites.entries) {
+      final answers = _answersForScreen(rawData, entry.key);
+      if (answers.isEmpty) continue;
+      if (entry.value.any((id) => _isCheckedValue(answers[id]))) {
+        asbestosObserved = true;
+        break;
+      }
+    }
+    if (!asbestosObserved) {
+      final disusedTank =
+          _answersForScreen(rawData, 'activity_services_water_disused_tank');
+      if ((disusedTank['actv_tank_formed_in'] ?? '').trim().toLowerCase() ==
+          'asbestos') {
+        asbestosObserved = true;
+      }
+    }
+    if (asbestosObserved) {
+      phrases.add(
+          'Materials that may contain asbestos were observed during the inspection. Where these materials remain in good condition and are left undisturbed, they do not normally present a significant health risk. Specialist advice should be obtained before disturbance or removal.');
+    } else {
+      phrases.add(
+          'No materials suspected of containing asbestos were identified during the inspection.');
+    }
+
+    // Lead: spec's own text has no "or" branch - it is a single
+    // unconditional advisory about older properties in general, not
+    // triggered by any specific answer.
+    phrases.add(
+        'Older properties may contain lead pipework, lead flashings, or lead-based paint. No testing has been undertaken during this inspection. Further advice should be obtained where refurbishment is proposed.');
+
+    // Mould Growth: F-section bathroom fittings and built-in fittings
+    // moulding screens.
+    var mouldObserved = false;
+    final builtInMoulding = _answersForScreen(
+        rawData,
+        'activity_in_side_property_built_in_fittings_repair_moulding_noted');
+    for (final id in const [
+      'cb_kitchen_sink',
+      'cb_Utility_room_sink',
+      'cb_other_717'
+    ]) {
+      if (_isCheckedValue(builtInMoulding[id])) {
+        mouldObserved = true;
+        break;
+      }
+    }
+    if (!mouldObserved) {
+      final bathroomMoulding = _answersForScreen(
+          rawData, 'activity_in_side_property_bathroom_fittings_mould');
+      for (final id in const [
+        'cb_bathtub',
+        'cb_wash_hand_basin',
+        'cb_shower_tray',
+        'cb_other_1061'
+      ]) {
+        if (_isCheckedValue(bathroomMoulding[id])) {
+          mouldObserved = true;
+          break;
+        }
+      }
+    }
+    if (mouldObserved) {
+      phrases.add(
+          'Localised mould growth associated with condensation was observed. Maintaining adequate heating and ventilation should assist in reducing further mould growth.');
+    } else {
+      phrases.add('No significant mould growth was observed.');
+    }
+
+    // Radon: cannot be determined by visual inspection - unconditional per
+    // spec, always fires the same as Lead above.
+    phrases.add(
+        'The presence of radon gas cannot be determined during a visual inspection. Where appropriate, your legal adviser should obtain environmental search information.');
+
+    return _cleanupPhrases(phrases);
+  }
+
+  // J5 Risks to the Security of the Property (Phase 2F): another brand-new
+  // spec element with no dedicated screen. Spec has 6 sub-topics (External
+  // Doors, Windows, External Lighting, Security Systems, Overall Risk
+  // Assessment, General Advice). Unlike J4's Asbestos/Mould, a door's or
+  // security-system's security LEVEL cannot be safely defaulted to a
+  // negative claim when the surveyor never actually recorded it - "no
+  // materials suspected of containing asbestos" is a true fact regardless
+  // of which checkbox fired, but "the doors provide reasonable security"
+  // is not a safe default when no door screen was ever touched. So Doors
+  // and Security Systems only fire when real data exists (J1-J3's
+  // silence-when-absent philosophy), while General Advice is genuine
+  // unconditional spec boilerplate (J4's Lead/Radon philosophy) and always
+  // fires. Windows, External Lighting and Overall Risk Assessment have no
+  // safe source to derive from at all - see the sign-off packet for why
+  // each is a flagged content gap rather than fabricated.
+  List<String> _legacyDerivedSectionFRiskToSecurity(V2RawReportData rawData) {
+    final phrases = <String>[];
+
+    // External Doors: E6's existing actv_seciruty_offered dropdown, already
+    // narrated per-door in Section E6 itself - this is a property-wide
+    // summary, same "component narrates locally, J adds a summary"
+    // pattern as J4's Asbestos/Mould. Checked across all 5 door-material
+    // screen variants; if any door is Inadequate, that is the more
+    // safety-relevant fact and takes priority over a Reasonable finding
+    // elsewhere on the property.
+    const doorScreens = <String>[
+      'activity_outside_property_out_side_doors_about_doors',
+      'activity_outside_property_out_side_doors_about_doors__timber',
+      'activity_outside_property_out_side_doors_about_doors__steel',
+      'activity_outside_property_out_side_doors_about_doors__aluminium',
+      'activity_outside_property_out_side_doors_about_doors__other',
+    ];
+    var doorSecurityFound = false;
+    var doorSecurityInadequate = false;
+    for (final screenId in doorScreens) {
+      final answers = _answersForScreen(rawData, screenId);
+      final security =
+          (answers['actv_seciruty_offered'] ?? '').trim().toLowerCase();
+      if (security.isEmpty) continue;
+      doorSecurityFound = true;
+      if (security.contains('inadequate')) {
+        doorSecurityInadequate = true;
+        break;
+      }
+    }
+    if (doorSecurityFound) {
+      phrases.add(doorSecurityInadequate
+          ? 'The accessible external doors appear to offer limited security based upon a visual inspection. The effectiveness of the locks has not been tested.'
+          : 'The accessible external doors appear to provide reasonable security based upon a visual inspection. The effectiveness of the locks has not been tested.');
+    }
+
+    // Security Systems: the Communal Area screen's amenity checkboxes
+    // (CCTV, automatic gates, entry system) are the only security-system
+    // data the tree captures anywhere - scoped to properties with a
+    // communal area (mainly flats/shared buildings), so this only fires
+    // when that screen was genuinely answered, same reasoning as Doors
+    // above.
+    final communalArea =
+        _answersForScreen(rawData, 'activity_outside_property_other_communal_area');
+    if (communalArea.isNotEmpty) {
+      final hasSecuritySystem = _isCheckedValue(communalArea['cb_cctv']) ||
+          _isCheckedValue(communalArea['cb_automatic_gates']) ||
+          _isCheckedValue(communalArea['cb_entry_system']);
+      phrases.add(hasSecuritySystem
+          ? 'The property incorporates a visible security system to the communal areas. These installations were not tested.'
+          : 'No visible security system was noted to the communal areas. These installations were not tested.');
+    }
+
+    // General Advice: spec's own text has no "or" branch, so this always
+    // fires the same wording regardless of any answer, same reasoning as
+    // J4's Lead/Radon.
+    phrases.add(
+        'Buildings require regular inspection and maintenance throughout their service life. Prompt attention to isolated defects will normally reduce the likelihood of more extensive deterioration and costly future repairs. Where specialist inspections have been recommended within this report, these should be obtained before legal commitment where practicable.');
 
     return _cleanupPhrases(phrases);
   }
@@ -2398,11 +2876,33 @@ class ReportBuilder {
     }
 
     if (sectionKey == 'J') {
+      // J2 Risks to the Grounds (Phase 2F): the app has no dedicated J2
+      // screen at all, so this is always a synthesized entry, inserted
+      // ahead of J3's insertion point (same anchor, computed fresh) so
+      // the report reads J1, J2, J3 in spec order.
+      final riskToGrounds = _legacyDerivedSectionFRiskToGrounds(rawData);
+      if (riskToGrounds.isNotEmpty) {
+        final j2Screen = ReportScreen(
+          screenId: 'derived_j2_risk_to_grounds',
+          title: 'J2 Risk To Grounds',
+          fields: const <ReportField>[],
+          phrases: riskToGrounds,
+        );
+        final j2InsertAt = screens.indexWhere(
+          (s) => s.screenId.trim().toLowerCase() == 'activity_risks_other_',
+        );
+        if (j2InsertAt >= 0) {
+          screens.insert(j2InsertAt, j2Screen);
+        } else {
+          screens.add(j2Screen);
+        }
+      }
+
       final riskToPeople = _legacyDerivedSectionFRiskToPeople(rawData);
       if (riskToPeople.isNotEmpty) {
-        final j2Screen = ReportScreen(
-          screenId: 'derived_j2_risk_to_people',
-          title: 'J2 Risk To People',
+        final j3Screen = ReportScreen(
+          screenId: 'derived_j3_risk_to_people',
+          title: 'J3 Risk To People',
           fields: const <ReportField>[],
           phrases: riskToPeople,
         );
@@ -2410,9 +2910,54 @@ class ReportBuilder {
           (s) => s.screenId.trim().toLowerCase() == 'activity_risks_other_',
         );
         if (insertAt >= 0) {
-          screens.insert(insertAt, j2Screen);
+          screens.insert(insertAt, j3Screen);
         } else {
-          screens.add(j2Screen);
+          screens.add(j3Screen);
+        }
+      }
+
+      // J4 Risks to Health (Phase 2F): also a synthesized entry (no
+      // dedicated screen), inserted after J2/J3 at the same anchor so it
+      // lands right before the anchor screen itself, giving J1, J2, J3, J4
+      // order. Unlike J2/J3 this always fires (see the function's own
+      // doc comment for why), so no isNotEmpty guard is strictly needed,
+      // but kept for defensive consistency with the other two.
+      final riskToHealth = _legacyDerivedSectionFRiskToHealth(rawData);
+      if (riskToHealth.isNotEmpty) {
+        final j4Screen = ReportScreen(
+          screenId: 'derived_j4_risk_to_health',
+          title: 'J4 Risk To Health',
+          fields: const <ReportField>[],
+          phrases: riskToHealth,
+        );
+        final j4InsertAt = screens.indexWhere(
+          (s) => s.screenId.trim().toLowerCase() == 'activity_risks_other_',
+        );
+        if (j4InsertAt >= 0) {
+          screens.insert(j4InsertAt, j4Screen);
+        } else {
+          screens.add(j4Screen);
+        }
+      }
+
+      // J5 Risks to the Security of the Property (Phase 2F): also a
+      // synthesized entry, inserted after J4 at the same anchor so it lands
+      // right before the anchor screen, giving J1, J2, J3, J4, J5 order.
+      final riskToSecurity = _legacyDerivedSectionFRiskToSecurity(rawData);
+      if (riskToSecurity.isNotEmpty) {
+        final j5Screen = ReportScreen(
+          screenId: 'derived_j5_risk_to_security',
+          title: 'J5 Risk To Security',
+          fields: const <ReportField>[],
+          phrases: riskToSecurity,
+        );
+        final j5InsertAt = screens.indexWhere(
+          (s) => s.screenId.trim().toLowerCase() == 'activity_risks_other_',
+        );
+        if (j5InsertAt >= 0) {
+          screens.insert(j5InsertAt, j5Screen);
+        } else {
+          screens.add(j5Screen);
         }
       }
 
@@ -2422,7 +2967,7 @@ class ReportBuilder {
       // which only runs when that screen has its own answers. If the
       // surveyor never touched J1's own screen, cross-injected content was
       // silently dropped even though the underlying defects exist elsewhere
-      // (found via Phase 2B Gate 3 verification). Mirror the J2 pattern
+      // (found via Phase 2B Gate 3 verification). Mirror the J3 pattern
       // above: when J1's native screen produced nothing but there is
       // cross-injected content, insert it as its own synthesized entry.
       final hasNativeJ1 = screens.any(
@@ -2696,6 +3241,11 @@ class ReportBuilder {
         cleaned = _cleanupPhrases([
           ...cleaned,
           ..._legacyDerivedSectionFIssueGuarantees(rawData),
+        ]);
+      } else if (normalizedId == 'activity_issues_other_matters') {
+        cleaned = _cleanupPhrases([
+          ...cleaned,
+          ..._legacyDerivedSectionFIssueOtherMattersSharedChimney(rawData),
         ]);
       } else if (normalizedId == 'activity_risks_risk_to_building_') {
         cleaned = _cleanupPhrases([

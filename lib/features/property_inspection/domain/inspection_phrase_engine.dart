@@ -63,7 +63,15 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_conservatory_porch_main_screen':
         return _outsideConservatoryPorchMainScreen(answers);
       case 'activity_outside_property_other_joinery_and_finishes_main_screen':
-        return _otherJoineryAbout(answers);
+        // RICS L2 rewrite (Phase 2B, E8): this screen's own
+        // "Condition Rating" dropdown (1/2/3) was never read - the case
+        // routed only to the About content, so {CONDITION_RATING} was
+        // dead regardless of what the surveyor selected. Real gap, not
+        // guessed: the tree screen has the field, nothing consumed it.
+        return [
+          ..._otherJoineryAbout(answers),
+          ..._otherJoineryConditionRating(answers),
+        ];
       case 'activity_outside_property_other_main_screen':
         return _outsideOtherMainScreen(answers);
       case 'activity_grounds_garage_main_screen':
@@ -672,7 +680,16 @@ class InspectionPhraseEngine {
         return _otherJoineryAbout(answers);
       case 'activity_outside_property_other_joinery_finishes_condition':
       case 'activity_outside_property_other_joinery_fininshes_condition':
-        return _otherJoineryCondition(answers);
+        // This screen's `actv_condition` field is a numeric 1/2/3 dropdown
+        // (see inspection_tree.json), not the descriptive good/reasonable/
+        // fair/poor value _otherJoineryCondition expects - routing it there
+        // produced nonsense like "appear in 1 condition". Route to the
+        // numeric-rating handler instead (same one the main E8 screen
+        // correctly uses), which this screen's field actually matches.
+        // The two screens duplicating the same rating concept is a
+        // separate, larger tree-structure question, flagged for a product
+        // decision rather than resolved here.
+        return _otherJoineryConditionRating(answers);
       case 'activity_outside_property_other_joinery_and_finishes_repairs':
         return _otherJoineryRepairs(answers);
       case 'activity_outside_property_other_joinery_finishes_not_inspected':
@@ -906,9 +923,7 @@ class InspectionPhraseEngine {
         phrase = phrase.replaceAll('$thickness mm ', '');
       }
       phrase = phrase
-          .replaceAll('factory made trusses construction',
-              'factory-made roof truss construction')
-          .replaceAll('made of steel construction', 'formed in steel')
+          .replaceAll('factory made trusses', 'factory-made roof truss')
           .replaceAll('is other construction', 'is of other construction')
           .replaceAll('timber cladded', 'timber-clad')
           .replaceAll('weathered board', 'weatherboarding');
@@ -931,6 +946,13 @@ class InspectionPhraseEngine {
         phrase = phrase.replaceAll(
           RegExp(
             r'These appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition\. No repair is currently needed\. The property must be maintained in the normal way\.',
+            caseSensitive: false,
+          ),
+          'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
+        );
+        phrase = phrase.replaceAll(
+          RegExp(
+            r'Where visible, these appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition\. No significant defects requiring immediate attention were identified unless otherwise stated below\. No repair is currently needed\. The property must be maintained in the normal way\.',
             caseSensitive: false,
           ),
           'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
@@ -3782,24 +3804,36 @@ class InspectionPhraseEngine {
 
     var doorLocation = '';
     final doorLocationTemplate = _sub('{E_OUTSIDE_DOORS}', '{DOOR_LOCATION}');
-    if (doorLocationTemplate.isNotEmpty &&
-        (locations.isNotEmpty || glazing.isNotEmpty)) {
+    if (doorLocationTemplate.isNotEmpty && locations.isNotEmpty) {
       doorLocation = doorLocationTemplate
-          .replaceAll('{IS_ARE}', _isAre(locations))
           .replaceAll('{DOOR_LOCATION}', _toWords(locations).toLowerCase())
           .replaceAll('{REPLACEMENT}', replacement)
-          .replaceAll('{DOOR_MATERIAL}', material.toLowerCase())
-          .replaceAll('{DOOR_GLAZZING}', _toWords(glazing).toLowerCase());
+          .replaceAll('{DOOR_MATERIAL}', material.toLowerCase());
     }
     if (doorLocation.isNotEmpty) {
       doorLocation = doorLocation
           .replaceAll(RegExp(r'\{[^}]+\}'), '')
           .replaceAll(RegExp(r'\s{2,}'), ' ')
           // A single empty slot right before punctuation (e.g. an empty
-          // {DOOR_GLAZZING}) leaves exactly one space before the full stop,
-          // which the \s{2,} collapse above doesn't catch.
+          // {REPLACEMENT}) leaves exactly one space before the following
+          // word, which the \s{2,} collapse above doesn't catch.
           .replaceAllMapped(RegExp(r'\s+([.,;:])'), (m) => m.group(1)!)
           .trim();
+    }
+
+    // RICS L2 rewrite (Phase 2B, E6): Glazing is now its own labelled
+    // sentence (spec's "Glazing:" paragraph) instead of being folded into
+    // the Description sentence, mirroring E5's WINDOWS_ABOUT/DOOR_GLAZING
+    // split.
+    var glazingText = '';
+    if (glazing.isNotEmpty) {
+      glazingText = _sub('{E_OUTSIDE_DOORS}', '{DOOR_GLAZING}')
+          .replaceAll('{DOOR_GLAZZING}', _toWords(glazing).toLowerCase());
+    }
+    if (doorLocation.isNotEmpty && glazingText.isNotEmpty) {
+      doorLocation = '$doorLocation $glazingText';
+    } else if (glazingText.isNotEmpty) {
+      doorLocation = glazingText;
     }
 
     var sgText = '';
@@ -3817,11 +3851,29 @@ class InspectionPhraseEngine {
           .replaceAll('{DOOR_CONDITION}', condition);
     }
 
+    // RICS L2 rewrite (Phase 2B, E6): the spec pairs "Security:" with an
+    // "Inadequate Lock:" follow-up sentence whenever the overall security
+    // level is assessed as inadequate. The door repair screens have no
+    // dedicated safety-hazard checkbox to key this off (unlike windows),
+    // so this reuses the existing actv_seciruty_offered dropdown that
+    // already feeds {SECURITY_OFFERED} - the same field, not a new one.
     var sealingText = '';
     if (sealing.isNotEmpty && security.isNotEmpty) {
       sealingText = _sub('{E_OUTSIDE_DOORS}', '{WALL_SEALING}')
           .replaceAll('{DOOR_SEALING_CONDITION}', sealing)
           .replaceAll('{SECURITY_OFFERED}', security);
+      if (security.contains('inadequate')) {
+        final lockText = _sub('{E_OUTSIDE_DOORS}', '{INADEQUATE_LOCK_SELECTED}')
+            .replaceAll(
+              '{DOOR_LOCATION}',
+              locations.isNotEmpty
+                  ? _toWords(locations).toLowerCase()
+                  : 'door',
+            );
+        if (lockText.isNotEmpty) {
+          sealingText = '$sealingText<br />\r\n<br />\r\n$lockText';
+        }
+      }
     }
 
     template = template
@@ -3835,6 +3887,20 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['cb_replacement'])) {
       phrases.addAll(
           _split(_normalize(_sub('{E_OUTSIDE_DOORS}', '{IF_REPLACEMENT}'))));
+    }
+
+    // RICS L2 rewrite (Phase 2B, E6): "Timber Doors" note, gated on the
+    // material screen variant actually being timber.
+    if (materialCode == '{TIMBER}') {
+      phrases.addAll(_split(
+          _normalize(_sub('{E_OUTSIDE_DOORS}', '{TIMBER_DOORS_NOTE}'))));
+    }
+
+    // RICS L2 rewrite (Phase 2B, E6): "Patio and French Doors" note,
+    // gated on the existing "Patio" location checkbox.
+    if (locations.any((l) => l.toLowerCase() == 'patio')) {
+      phrases.addAll(_split(_normalize(
+          _sub('{E_OUTSIDE_DOORS}', '{PATIO_FRENCH_DOORS_NOTE}'))));
     }
 
     return phrases;
@@ -3915,6 +3981,16 @@ class InspectionPhraseEngine {
       final lock = _sub('{E_OUTSIDE_DOORS}', '{INADEQUATE_LOCK_SELECTED}')
           .replaceAll('{DOOR_LOCATION}', doorLocation);
       phrases.addAll(_split(_normalize(lock)));
+    }
+    // RICS L2 rewrite (Phase 2B, E6): the door repair screens have no
+    // dedicated "in disrepair"/"severely damaged" checkbox (unlike the
+    // windows repair screen's cb_are_in_disrepair_33), so the spec's
+    // "if very poor is selected, add this" comprehensive-repair addendum
+    // is derived from the existing Repair Now tier itself - any door
+    // selected for the urgent repair bucket gets this addendum.
+    if (isNow) {
+      phrases.addAll(_split(_normalize(
+          _sub('{E_OUTSIDE_DOORS}', '{DOORS_DEFECT_IF_IN_DISREPAIR}'))));
     }
     return phrases;
   }
@@ -4222,8 +4298,17 @@ class InspectionPhraseEngine {
     }
     final condition = _cleanLower(answers['actv_condition']);
     if (materials.isEmpty || condition.isEmpty) return const [];
-    var template =
-        _sub('{E_CONSERVATORY_PORCHES}', '{ROOF_FLASHING_WITH_WALL}');
+    // RICS L2 rewrite (Phase 2B, E7): spec frames "Main building junctions"
+    // as a binary No defects/Defects noted branch. This screen only has
+    // the standard 3-point condition dropdown (no dedicated defects
+    // checkbox), so the branch is derived from it, same as other
+    // 3-option-dropdown-driven branches across E1-E6.
+    var template = _sub(
+      '{E_CONSERVATORY_PORCHES}',
+      condition.contains('unsatisfactory') || condition.contains('poor')
+          ? '{MAIN_BUILDING_JUNCTIONS_DEFECTS}'
+          : '{ROOF_FLASHING_WITH_WALL}',
+    );
     if (template.isEmpty) return const [];
     template = template
         .replaceAll('{ROOF_FLASHING}', _toWords(materials).toLowerCase())
@@ -4362,11 +4447,21 @@ class InspectionPhraseEngine {
 
     final wrapper =
         _sub('{E_CONSERVATORY_PORCHES}', _cpRepairWrapper(screenId));
-    if (wrapper.isEmpty) return _split(_normalize(repair));
-    final result = wrapper
-        .replaceAll('{CP_REPAIR_SOON}', isNow ? '' : repair)
-        .replaceAll('{CP_REPAIR_NOW}', isNow ? repair : '');
-    return _split(_normalize(result));
+    final result = wrapper.isEmpty
+        ? repair
+        : wrapper
+            .replaceAll('{CP_REPAIR_SOON}', isNow ? '' : repair)
+            .replaceAll('{CP_REPAIR_NOW}', isNow ? repair : '');
+    final phrases = _split(_normalize(result)).toList();
+    // RICS L2 rewrite (Phase 2B, E7): same judgment call as E6 - these
+    // repair screens have no dedicated "in disrepair"/"safety hazard"
+    // checkbox, so the spec's "if very poor is selected" comprehensive-
+    // repair addendum is derived from the existing Repair Now tier itself.
+    if (isNow) {
+      phrases.addAll(_split(_normalize(
+          _sub('{E_CONSERVATORY_PORCHES}', '{CP_DEFECT_IF_IN_DISREPAIR}'))));
+    }
+    return phrases;
   }
 
   List<String> _otherJoineryAbout(Map<String, String> answers) {
@@ -4424,17 +4519,6 @@ class InspectionPhraseEngine {
       }
     }
     return phrases;
-  }
-
-  List<String> _otherJoineryCondition(Map<String, String> answers) {
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
-    );
-    if (condition.isEmpty) return const [];
-    var template = _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{CONDITION}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{OJAF_CONDITION}', condition);
-    return _split(_normalize(template));
   }
 
   List<String> _otherJoineryAsbestos(Map<String, String> answers) {
@@ -4515,6 +4599,16 @@ class InspectionPhraseEngine {
     if (!_isChecked(answers['cb_not_inspected'])) return const [];
     return _split(
         _normalize(_sub('{E_OTHER_JOINERY_AND_FINISHES}', '{NOT_INSPECTED}')));
+  }
+
+  List<String> _otherJoineryConditionRating(Map<String, String> answers) {
+    final rating = _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']);
+    if (rating.isEmpty) return const [];
+    final template =
+        _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{CONDITION_RATING}');
+    if (template.isEmpty) return const [];
+    return _split(_normalize(
+        template.replaceAll('{OJAF_CONDITION_RATING}', rating)));
   }
 
   List<String> _otherCommunalArea(Map<String, String> answers) {
@@ -4843,11 +4937,11 @@ class InspectionPhraseEngine {
       {
         'cb_has_missing_tiles': 'missing tiles',
         'cb_has_slipped_tiles': 'slipped tiles',
-        'cb_is_in_disrepair': 'is in disrepair',
-        'cb_is_leaking': 'is leaking',
-        'cb_is_dilapidated': 'is dilapidated',
+        'cb_is_in_disrepair': 'in disrepair',
+        'cb_is_leaking': 'leaking',
+        'cb_is_dilapidated': 'dilapidated',
         'cb_has_damaged_flashing': 'damaged flashing',
-        'cb_is_poorly_secured': 'is poorly secured',
+        'cb_is_poorly_secured': 'poorly secured',
       },
     );
     if (defects.isEmpty) return const [];
@@ -6290,11 +6384,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> _groundsGarageNotInspected(Map<String, String> answers) {
-    if (_isChecked(answers['cb_not_inspected_no_garage']) ||
-        _isChecked(answers['cb_not_inspected'])) {
+    if (_isChecked(answers['cb_not_inspected_no_garage'])) {
+      return _split(_normalize(_sub('{H_GARAGE}', '{NO_GARAGE}')));
+    }
+    if (_isChecked(answers['cb_not_inspected'])) {
       final source = _cleanLower(answers['actv_access_keys_not_provided_by']);
-      if (source.isNotEmpty &&
-          !_isChecked(answers['cb_not_inspected_no_garage'])) {
+      if (source.isNotEmpty) {
         final template = _sub('{H_GARAGE}', '{NOT_INSPECTED_ACCESS_KEYS}')
             .replaceAll('{GARAGE_KEY_SOURCE}', source);
         if (template.isNotEmpty) return _split(_normalize(template));
@@ -7336,11 +7431,12 @@ class InspectionPhraseEngine {
         final normalized = _normalize(template);
         final cleaned = smellNoted
             // The smell clause is the only text between the location
-            // sentence and "and no other defects..."; when it's skipped,
-            // the template leaves a lowercase "and" dangling right after
-            // the full stop. Turn it into its own capitalised sentence.
+            // sentence and "and no visible evidence of leakage..."; when
+            // it's skipped, the template leaves a lowercase "and" dangling
+            // right after the full stop. Turn it into its own capitalised
+            // sentence.
             ? normalized.replaceAll(
-                '. and no other defects', '. No other defects')
+                '. and no visible evidence', '. No visible evidence')
             : normalized;
         phrases.addAll(_split(cleaned));
       }
@@ -8209,6 +8305,12 @@ class InspectionPhraseEngine {
         template = template.replaceAll('{WH_GWH_CYLI_LOCATION}', location);
         phrases.addAll(_split(_normalize(template)));
       }
+    } else if (type.contains('other') && location.isNotEmpty) {
+      var template = _sub('{G_WATER_HEATING}', '{GAS_WATER_HEATING_OTHER}');
+      if (template.isNotEmpty) {
+        template = template.replaceAll('{WH_GWH_CYLI_LOCATION}', location);
+        phrases.addAll(_split(_normalize(template)));
+      }
     }
 
     if (_isChecked(answers['cb_poor_cylinder_condition'])) {
@@ -8238,6 +8340,12 @@ class InspectionPhraseEngine {
     } else if (type.contains('point-of-use') || type.contains('point of use')) {
       final template =
           _sub('{G_WATER_HEATING}', '{ELECTRIC_WATER_HEATING_POINT_OF_USE}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_split(_normalize(template)));
+      }
+    } else if (type.contains('other')) {
+      final template =
+          _sub('{G_WATER_HEATING}', '{ELECTRIC_WATER_HEATING_OTHER}');
       if (template.isNotEmpty) {
         phrases.addAll(_split(_normalize(template)));
       }
@@ -8499,11 +8607,16 @@ class InspectionPhraseEngine {
             }
           }
 
-          template = template
-              .replaceAll('{UNDERLINING_MATERIAL}', materialText)
-              .replaceAll('{ROOF_STRUCTURE_CONDITION}', conditionText)
-              .replaceAll('{UNDERLINING_DEFECT}', defectText);
-          underliningText = template;
+          if ([materialText, conditionText, defectText]
+              .every((value) => value.isEmpty)) {
+            underliningText = '';
+          } else {
+            template = template
+                .replaceAll('{UNDERLINING_MATERIAL}', materialText)
+                .replaceAll('{ROOF_STRUCTURE_CONDITION}', conditionText)
+                .replaceAll('{UNDERLINING_DEFECT}', defectText);
+            underliningText = template;
+          }
         }
       }
     }
@@ -8541,8 +8654,7 @@ class InspectionPhraseEngine {
       if (_isChecked(answers['cb_none'])) {
         ventilationNoText = _sub(
             '{F_ABOUT_ROOF_STRUCTURE}', '{VENTILATION_DAMP_NO_VENTILATION}');
-      }
-      if (_isChecked(answers['cb_damp_noted_ventilation'])) {
+      } else if (_isChecked(answers['cb_damp_noted_ventilation'])) {
         ventilationInsufficientText = _sub('{F_ABOUT_ROOF_STRUCTURE}',
             '{VENTILATION_DAMP_IN_SUFFICIENT_VENTILATION}');
       }

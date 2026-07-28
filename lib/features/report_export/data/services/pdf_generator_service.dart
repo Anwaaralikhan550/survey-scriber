@@ -138,17 +138,56 @@ class PdfGeneratorService {
         continue;
       }
 
+      final bodyStyle = pw.TextStyle(
+        fontSize: 11,
+        lineSpacing: 2.5,
+        font: _fonts.base,
+        fontFallback: _fonts.fallback,
+      );
       widgets.add(
         pw.Padding(
           padding: const pw.EdgeInsets.fromLTRB(8, 2, 8, 6),
-          child: pw.Text(
-            sanitize(phrase),
-            style: const pw.TextStyle(fontSize: 11, lineSpacing: 2.5),
+          child: pw.RichText(
+            text: _boldSectionLetterSpans(sanitize(phrase), bodyStyle),
           ),
         ),
       );
     }
     return widgets;
+  }
+
+  /// Bolds "I1"-"I5" section-reference tokens (e.g. "see section I3",
+  /// "Section I2 - Guarantees") so capital I is visually distinguishable
+  /// from the digit 1 in the report's sans-serif body font, where a bare
+  /// "I" and "1" render as near-identical vertical strokes at body-text
+  /// size.
+  static final RegExp _sectionLetterRefPattern = RegExp(r'\bI[1-5]\b');
+
+  pw.TextSpan _boldSectionLetterSpans(String text, pw.TextStyle baseStyle) {
+    final matches = _sectionLetterRefPattern.allMatches(text).toList();
+    if (matches.isEmpty) {
+      return pw.TextSpan(text: text, style: baseStyle);
+    }
+    final boldStyle = baseStyle.copyWith(
+      fontWeight: pw.FontWeight.bold,
+      font: _fonts.bold,
+    );
+    final children = <pw.TextSpan>[];
+    var cursor = 0;
+    for (final match in matches) {
+      if (match.start > cursor) {
+        children.add(pw.TextSpan(
+          text: text.substring(cursor, match.start),
+          style: baseStyle,
+        ));
+      }
+      children.add(pw.TextSpan(text: match.group(0), style: boldStyle));
+      cursor = match.end;
+    }
+    if (cursor < text.length) {
+      children.add(pw.TextSpan(text: text.substring(cursor), style: baseStyle));
+    }
+    return pw.TextSpan(children: children);
   }
 
   /// Final punctuation cleanup before rendering:
@@ -379,9 +418,15 @@ class PdfGeneratorService {
     if (leadingLabel != null) {
       final label = (leadingLabel.group(1) ?? '').trim();
       final body = (leadingLabel.group(2) ?? '').trim();
-      final split =
-          RegExp(r'\b(It is|This\b)', caseSensitive: false).firstMatch(body);
-      if (split != null && split.start > 0) {
+      // Only treat "It is"/"This" as the start of a NEW sentence when it
+      // immediately follows a short raw value ("Condition: reasonable This
+      // should be repaired" - the old dump style this was built for). A
+      // capitalised "This" and a short lead-in are both required; without
+      // them, an everyday lowercase "this" deep inside an already-complete
+      // L2 sentence ("...has not been tested as part of this inspection")
+      // would otherwise get a spurious period spliced in front of it.
+      final split = RegExp(r'\b(It is|This)\b').firstMatch(body);
+      if (split != null && split.start > 0 && split.start <= 40) {
         final first = _trimTrailingPunctuation(body.substring(0, split.start));
         final tail = body.substring(split.start).trim();
         if (first.isNotEmpty) {
@@ -414,13 +459,36 @@ class PdfGeneratorService {
     if (inlineMatches.isNotEmpty) {
       final buf = StringBuffer();
       var last = 0;
+      // A leading word or two immediately before the very first match (e.g.
+      // "Repair" before "flashing:", "Poor chimney" before "condition:") is
+      // the start of the SAME multi-word compound label the L2 rewrite uses
+      // throughout ("Repair flashing:", "Poor chimney condition:"), not a
+      // dangling legacy value that needs a sentence break inserted before
+      // it. Only a short, capitalised lead-in gets folded into the label
+      // this way; a genuine legacy "value Label:" run (lowercase-led, or
+      // appearing after an earlier pair has already been emitted) still
+      // gets the sentence-break treatment below.
+      final leadInMatch = inlineMatches.first;
+      final leadIn = p.substring(0, leadInMatch.start).trim();
+      final isLabelContinuation = leadIn.isNotEmpty &&
+          RegExp(r'^[A-Z][a-zA-Z]*(\s+[A-Za-z]+){0,2}$').hasMatch(leadIn);
       for (final m in inlineMatches) {
         if (m.start > last) {
           final prefix = p.substring(last, m.start).trim();
           if (prefix.isNotEmpty) {
-            buf.write(prefix);
-            if (!prefix.endsWith('.') && !prefix.endsWith(':')) buf.write('. ');
-            if (prefix.endsWith(':')) buf.write(' ');
+            if (last == 0 && isLabelContinuation) {
+              buf.write('$prefix ');
+            } else {
+              buf.write(prefix);
+              // Whatever the prefix ends with, the next label must not be
+              // glued straight onto it ("...tiles.Condition:") - a
+              // complete sentence just needs the separating space, an
+              // unpunctuated dangling value still needs the full stop too.
+              if (!prefix.endsWith('.') && !prefix.endsWith(':')) {
+                buf.write('.');
+              }
+              buf.write(' ');
+            }
           }
         }
         final label = (m.group(1) ?? '').trim();
@@ -432,8 +500,10 @@ class PdfGeneratorService {
 
         // If a compact option value is followed by narrative tail ("It is...",
         // "This ..."), convert just the compact option and keep tail as-is.
-        final tailMatch =
-            RegExp(r'\b(It is|This\b)', caseSensitive: false).firstMatch(value);
+        // Case-sensitive: a genuine new sentence starts with capitalised
+        // "This"; a lowercase "this" is just an everyday word inside an
+        // already-complete clause and must not be split on.
+        final tailMatch = RegExp(r'\b(It is|This)\b').firstMatch(value);
         if (tailMatch != null && tailMatch.start > 0) {
           final firstPart = value.substring(0, tailMatch.start).trim();
           final firstWords =
@@ -507,6 +577,18 @@ class PdfGeneratorService {
 
   String _labelValueSentence(String label, String value) {
     final l = label.trim().toLowerCase();
+    // A value that already reads as a clause ("Where visible, the covering
+    // appears in reasonable condition") rather than a short raw dropdown
+    // value ("reasonable") should stay attached to its label with a colon,
+    // not be forced through "Label is <value>." - that reading was built
+    // for the old raw-dump bank and mangles the L2 rewrite's full-sentence
+    // wording (e.g. "Condition is where visible, the covering appears...").
+    if (RegExp(
+      r'^(where|when|while|if|unless|as|since|because|although|the|this|these|those|no|all|some)\b',
+      caseSensitive: false,
+    ).hasMatch(value.trim())) {
+      return '${label.trim()}: $value.';
+    }
     if (l == 'roof type') return 'Roof type is ${value.toLowerCase()}.';
     if (l == 'condition rating')
       return 'Condition rating is ${value.toLowerCase()}.';
@@ -960,8 +1042,9 @@ class PdfGeneratorService {
                 !accommodationWritten &&
                 screen.screenId == 'group_construction_2' &&
                 doc.accommodationSchedule.isNotEmpty) {
-              widgets.addAll(
-                  _accommodationSchedule(doc.accommodationSchedule, accent));
+              widgets.addAll(_accommodationSchedule(
+                  doc.accommodationSchedule, accent,
+                  includeL2Intro: true));
               accommodationWritten = true;
             }
             final hideScreenTitle = screen.title.trim().toLowerCase() ==
@@ -1070,8 +1153,9 @@ class PdfGeneratorService {
           if (section.key.trim().toUpperCase() == 'D' &&
               !accommodationWritten &&
               doc.accommodationSchedule.isNotEmpty) {
-            widgets.addAll(
-                _accommodationSchedule(doc.accommodationSchedule, accent));
+            widgets.addAll(_accommodationSchedule(
+                doc.accommodationSchedule, accent,
+                includeL2Intro: true));
           }
         }
 
@@ -1440,8 +1524,9 @@ class PdfGeneratorService {
 
   List<pw.Widget> _accommodationSchedule(
     List<AccommodationScheduleRow> rows,
-    PdfColor accent,
-  ) {
+    PdfColor accent, {
+    bool includeL2Intro = false,
+  }) {
     if (rows.isEmpty) return const <pw.Widget>[];
     const headers = <String>[
       'Floor',
@@ -1472,6 +1557,19 @@ class PdfGeneratorService {
       );
     }
 
+    var floorList = '';
+    if (includeL2Intro) {
+      final floors = rows.map((r) => r.floor).toList();
+      if (floors.length == 1) {
+        floorList = floors.first;
+      } else if (floors.length == 2) {
+        floorList = '${floors[0]} and ${floors[1]}';
+      } else {
+        floorList =
+            '${floors.sublist(0, floors.length - 1).join(', ')} and ${floors.last}';
+      }
+    }
+
     return <pw.Widget>[
       pw.Padding(
         padding: const pw.EdgeInsets.only(left: 4, top: 4, bottom: 4),
@@ -1484,6 +1582,14 @@ class PdfGeneratorService {
           ),
         ),
       ),
+      if (includeL2Intro)
+        pw.Padding(
+          padding: const pw.EdgeInsets.only(left: 4, bottom: 6),
+          child: pw.Text(
+            'The accommodation comprises: $floorList. The accommodation schedule contained within this report is provided for identification purposes only.',
+            style: const pw.TextStyle(fontSize: 9),
+          ),
+        ),
       pw.Table(
         border: pw.TableBorder.all(
           color: PdfSharedUtils.lightGrey,

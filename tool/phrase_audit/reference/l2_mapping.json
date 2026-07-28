@@ -3,7 +3,7 @@
   "specSource": "Surveyscriber Phrase Bank.pdf - Francis Blackstone Surveyors RICS Home Survey Level 2",
   "rowCount": 59,
   "byStatus": {
-    "pending": 59
+    "done": 59
   },
   "rows": [
     {
@@ -36,7 +36,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 616,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -82,7 +82,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 32,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -115,7 +115,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 298,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -148,7 +148,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 268,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -181,7 +181,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 243,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -214,7 +214,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 988,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -260,7 +260,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 203,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -295,7 +295,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 304,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -328,7 +328,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 378,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -361,7 +361,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 599,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -396,7 +396,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 342,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -429,8 +429,8 @@
       ],
       "crossInjects": [],
       "specCharLen": 224,
-      "migrationStatus": "pending",
-      "notes": ""
+      "migrationStatus": "done",
+      "notes": "Phase 2G-mini (2026-07-27): added spec intro/disclaimer sentence to the rendered accommodation table (pdf_generator_service.dart). Table itself kept as real, useful structured data - spec's simple floor-list framing added as an intro line, not a replacement."
     },
     {
       "specKey": "Construction",
@@ -466,7 +466,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 2136,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -502,7 +502,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 196,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -538,7 +538,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 207,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -573,7 +573,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 327,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -606,7 +606,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 668,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -642,7 +642,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 348,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -678,7 +678,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1020,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -711,7 +711,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 584,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -747,8 +747,8 @@
       ],
       "crossInjects": [],
       "specCharLen": 2002,
-      "migrationStatus": "pending",
-      "notes": ""
+      "migrationStatus": "done",
+      "notes": "Phase 2A covered the main activity_property_local_environment screen (flooding/EMF). Phase 2G-mini (2026-07-27) migrated the other 2 screens spec's checklist maps to: activity_property_is_noisy_area (busy road/rail/airport/motorway) and activity_risks_other_ (the tree's \"J4 Other\" screen - its real spec home is here, not Section J). Commercial premises/Industrial premises/Public house/School checklist items still have no field anywhere - open gap for the product-decisions doc."
     },
     {
       "specKey": "E",
@@ -793,7 +793,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1348,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -864,8 +864,8 @@
         }
       ],
       "specCharLen": 11024,
-      "migrationStatus": "pending",
-      "notes": ""
+      "migrationStatus": "done",
+      "notes": "Phase 2B closed content. Phase 2G-mini (2026-07-27) wired the previously-deferred \"Add highlighted below text to: Section I3\" shared-chimney cross-inject, now that Section I is fully migrated."
     },
     {
       "specKey": "E2",
@@ -947,7 +947,7 @@
         }
       ],
       "specCharLen": 15047,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -989,7 +989,7 @@
         }
       ],
       "specCharLen": 4917,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1080,7 +1080,7 @@
         }
       ],
       "specCharLen": 18975,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1139,7 +1139,7 @@
         }
       ],
       "specCharLen": 7869,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1194,7 +1194,7 @@
         }
       ],
       "specCharLen": 6122,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1236,7 +1236,7 @@
         }
       ],
       "specCharLen": 7887,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1287,8 +1287,8 @@
         }
       ],
       "specCharLen": 5141,
-      "migrationStatus": "pending",
-      "notes": ""
+      "migrationStatus": "done",
+      "notes": "Phase 2B closed content. Phase 2G-mini (2026-07-27) fixed a duplicate-screen bug: activity_outside_property_other_joinery_finishes_condition's numeric 1/2/3 field was routed to the descriptive condition handler, producing \"appear in 1 condition\" nonsense - now routed to the correct numeric-rating handler. The underlying duplicate-screen redundancy (two screens for one rating concept) remains an open product question."
     },
     {
       "specKey": "E9",
@@ -1333,7 +1333,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 12387,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1375,7 +1375,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 2418,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1411,7 +1411,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 6022,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1450,7 +1450,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 4170,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1483,7 +1483,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 5065,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1525,7 +1525,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 5195,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1557,7 +1557,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 4910,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1599,7 +1599,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 4767,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1630,7 +1630,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 5650,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1672,7 +1672,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 4841,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1714,7 +1714,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 5291,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1748,7 +1748,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1025,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1775,7 +1775,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 2255,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1796,7 +1796,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1063,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1830,7 +1830,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 830,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1864,7 +1864,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1250,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1895,7 +1895,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 325,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1920,7 +1920,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1286,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1951,7 +1951,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1008,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1969,7 +1969,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1422,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -1987,7 +1987,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 731,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -2007,7 +2007,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 627,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -2027,8 +2027,8 @@
       ],
       "crossInjects": [],
       "specCharLen": 7354,
-      "migrationStatus": "pending",
-      "notes": ""
+      "migrationStatus": "done",
+      "notes": "~20 of spec's ~26 named sub-topics (Electrical/Gas/Heating records, Renewable Energy, Damp-Proofing, Timber Treatment, Asbestos, Flood Risk, Trees, Rights of Way, Shared Facilities, Private Roads, Leasehold/Freehold specifics, General Legal Enquiries, etc.) have no matching field anywhere in I1-I3. Mapped/existing content (I1 Regulation, I2 Guarantees, I3 Other Matters) is migrated to L2 wording. Largest content-gap cluster of the whole migration - flagged for a dedicated product conversation."
     },
     {
       "specKey": "J",
@@ -2046,7 +2046,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 423,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -2065,7 +2065,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1866,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -2084,7 +2084,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1006,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -2103,7 +2103,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1329,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -2122,7 +2122,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 954,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     },
     {
@@ -2141,7 +2141,7 @@
       ],
       "crossInjects": [],
       "specCharLen": 1348,
-      "migrationStatus": "pending",
+      "migrationStatus": "done",
       "notes": ""
     }
   ]

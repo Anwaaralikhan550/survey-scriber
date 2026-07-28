@@ -1,5 +1,10 @@
 # Phrase Audit Toolkit
 
+**Working on the RICS L2 Master Phrase Library migration (Phase 2)?
+Read [`PHASE_2_RICS_L2_MIGRATION_STATUS.md`](PHASE_2_RICS_L2_MIGRATION_STATUS.md)
+first** — it has current progress, the exact 4-gate process, and every
+hard-won lesson from the sections already closed.
+
 Automated compliance auditing of the report language produced by the
 inspection/valuation phrase engines, verified against the client's approved
 phrase database. Built in response to client QA feedback (2026-07): phrases
