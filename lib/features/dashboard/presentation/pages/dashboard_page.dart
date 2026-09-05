@@ -9,6 +9,7 @@ import '../providers/dashboard_provider.dart';
 import '../widgets/greeting_header.dart';
 import '../widgets/recent_surveys_section.dart';
 import '../widgets/stats_cards.dart';
+import 'jobs_list_page.dart';
 
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
@@ -20,14 +21,14 @@ class DashboardPage extends ConsumerWidget {
     final theme = Theme.of(context);
 
     // Show restoration overlay during initial sync on empty dashboard
-    if (syncState.isInitialSyncing && state.stats.totalSurveys == 0) {
+    if (syncState.isInitialSyncing && state.totalAllSurveys == 0) {
       return _buildRestorationOverlay(theme);
     }
 
     // Show error state if initial pull failed (no data ever pulled)
     if (syncState.lastPulledAt == null &&
         syncState.pullError != null &&
-        state.stats.totalSurveys == 0) {
+        state.totalAllSurveys == 0) {
       return _buildRestorationError(context, ref, theme);
     }
 
@@ -54,6 +55,23 @@ class DashboardPage extends ConsumerWidget {
                     child: GreetingHeader(),
                   ),
                 ),
+                // Home Surveys / Valuations segment toggle — every metric
+                // below is computed for the selected segment only.
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      bottom: 16,
+                    ),
+                    child: _SegmentToggle(
+                      selected: state.segment,
+                      onChanged: (segment) => ref
+                          .read(dashboardProvider.notifier)
+                          .setSegment(segment),
+                    ),
+                  ),
+                ),
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -63,16 +81,24 @@ class DashboardPage extends ConsumerWidget {
                     child: StatsCards(
                       stats: state.stats,
                       isLoading: state.isLoading,
+                      onTotalTap: () =>
+                          _openJobs(context, state.segment, JobFilter.live),
+                      onInProgressTap: () => _openJobs(
+                          context, state.segment, JobFilter.inProgress),
+                      onCompletedTap: () => _openJobs(
+                          context, state.segment, JobFilter.completed),
                     ),
                   ),
                 ),
-                // Analytics section
+                // Analytics section — only the clickable "This week" card
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 24),
                     child: AnalyticsSection(
                       data: state.analytics,
                       isLoading: state.isLoading,
+                      onTap: () =>
+                          _openJobs(context, state.segment, JobFilter.thisWeek),
                     ),
                   ),
                 ),
@@ -112,6 +138,14 @@ class DashboardPage extends ConsumerWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _openJobs(BuildContext context, HomeSegment segment, JobFilter filter) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => JobsListPage(segment: segment, filter: filter),
       ),
     );
   }
@@ -273,6 +307,41 @@ class DashboardPage extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Home Surveys / Valuations top-level segment toggle.
+/// Uses Material 3's [SegmentedButton] so it inherits the app theme with no
+/// custom styling — a native, cohesive control.
+class _SegmentToggle extends StatelessWidget {
+  const _SegmentToggle({
+    required this.selected,
+    required this.onChanged,
+  });
+
+  final HomeSegment selected;
+  final ValueChanged<HomeSegment> onChanged;
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+        width: double.infinity,
+        child: SegmentedButton<HomeSegment>(
+          segments: const [
+            ButtonSegment<HomeSegment>(
+              value: HomeSegment.homeSurveys,
+              label: Text('Home Surveys'),
+              icon: Icon(Icons.home_work_outlined),
+            ),
+            ButtonSegment<HomeSegment>(
+              value: HomeSegment.valuations,
+              label: Text('Valuations'),
+              icon: Icon(Icons.request_quote_outlined),
+            ),
+          ],
+          selected: {selected},
+          showSelectedIcon: false,
+          onSelectionChanged: (selection) => onChanged(selection.first),
+        ),
+      );
 }
 
 /// Quick action card for accessing the Scheduling feature
