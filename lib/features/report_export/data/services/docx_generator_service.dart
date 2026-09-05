@@ -291,7 +291,8 @@ class DocxGeneratorService {
             !accommodationWritten &&
             screen.screenId == 'group_construction_2' &&
             doc.accommodationSchedule.isNotEmpty) {
-          _writeAccommodationSchedule(buf, doc.accommodationSchedule);
+          _writeAccommodationSchedule(buf, doc.accommodationSchedule,
+              includeL2Intro: true);
           accommodationWritten = true;
         }
         if (screen.isMergedGroup) {
@@ -326,7 +327,8 @@ class DocxGeneratorService {
       if (section.key.trim().toUpperCase() == 'D' &&
           !accommodationWritten &&
           doc.accommodationSchedule.isNotEmpty) {
-        _writeAccommodationSchedule(buf, doc.accommodationSchedule);
+        _writeAccommodationSchedule(buf, doc.accommodationSchedule,
+            includeL2Intro: true);
       }
     }
 
@@ -652,10 +654,34 @@ class DocxGeneratorService {
 
   void _writeAccommodationSchedule(
     StringBuffer buf,
-    List<AccommodationScheduleRow> rows,
-  ) {
+    List<AccommodationScheduleRow> rows, {
+    bool includeL2Intro = false,
+  }) {
     if (rows.isEmpty) return;
     _writeHeading(buf, 'Accommodation', 'Heading2');
+
+    // RICS L2 spec (Accommodation summary): the intro/outro sentence must
+    // accompany the schedule table in the inspection report. Mirrors the PDF
+    // renderer's `includeL2Intro` branch byte-for-byte; only the inspection
+    // (Section D) call sites pass true, valuation stays table-only.
+    if (includeL2Intro) {
+      final floors = rows.map((r) => r.floor).toList();
+      final String floorList;
+      if (floors.length == 1) {
+        floorList = floors.first;
+      } else if (floors.length == 2) {
+        floorList = '${floors[0]} and ${floors[1]}';
+      } else {
+        floorList =
+            '${floors.sublist(0, floors.length - 1).join(', ')} and ${floors.last}';
+      }
+      _writeParagraph(
+        buf,
+        'The accommodation comprises: $floorList. The accommodation schedule '
+        'contained within this report is provided for identification purposes '
+        'only.',
+      );
+    }
 
     const widths = <int>[1500, 850, 750, 1000, 650, 850, 800, 950, 1650];
     const headers = <String>[
