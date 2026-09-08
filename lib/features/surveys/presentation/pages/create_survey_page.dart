@@ -7,11 +7,31 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../shared/domain/entities/survey.dart';
 import '../providers/create_survey_provider.dart';
 
-class CreateSurveyPage extends ConsumerWidget {
+class CreateSurveyPage extends ConsumerStatefulWidget {
   const CreateSurveyPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CreateSurveyPage> createState() => _CreateSurveyPageState();
+}
+
+class _CreateSurveyPageState extends ConsumerState<CreateSurveyPage> {
+  @override
+  void initState() {
+    super.initState();
+    // The separate "Select Survey Type" step is retired (App-Edit brief:
+    // "not select survey type as this is now cancelled"). The big-plus FAB
+    // opens the create form directly, defaulting to a Home Survey. Valuations
+    // are created from a booking whose survey type is Valuation.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (ref.read(createSurveyProvider).step == CreateSurveyStep.selectType) {
+        ref.read(createSurveyProvider.notifier).selectType(SurveyType.inspection);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(createSurveyProvider);
     final theme = Theme.of(context);
 
@@ -305,48 +325,6 @@ class _BasicInfoViewState extends ConsumerState<_BasicInfoView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Back to type selection
-                  InkWell(
-                    onTap: notifier.goBackToTypeSelection,
-                    borderRadius: BorderRadius.circular(12),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 32,
-                            height: 32,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: theme.colorScheme.shadow.withOpacity(0.12),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Icon(
-                              Icons.arrow_back_rounded,
-                              size: 18,
-                              color: theme.colorScheme.onSurface,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            'Change type',
-                            style: theme.textTheme.labelLarge?.copyWith(
-                              color: theme.colorScheme.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
                   Text(
                     'Survey Information',
                     style: theme.textTheme.titleLarge?.copyWith(
