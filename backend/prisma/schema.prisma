@@ -522,6 +522,21 @@ model Booking {
   clientEmail     String?       @map("client_email") @db.VarChar(255)
   propertyAddress String?       @map("property_address") @db.VarChar(500)
   notes           String?       @db.Text
+  // Combined Create-Booking fields (App-Edit brief)
+  surveyType         String  @default("home_survey") @map("survey_type") @db.VarChar(20)
+  jobRef             String? @map("job_ref") @db.VarChar(100)
+  propertyType       String? @map("property_type") @db.VarChar(50)
+  yearBuilt          String? @map("year_built") @db.VarChar(20)
+  addressLine        String? @map("address_line") @db.VarChar(255)
+  city               String? @db.VarChar(120)
+  town               String? @db.VarChar(120)
+  postcode           String? @db.VarChar(20)
+  county             String? @db.VarChar(120)
+  accessType         String? @map("access_type") @db.VarChar(20)
+  estateAgentName    String? @map("estate_agent_name") @db.VarChar(255)
+  estateAgentPhone   String? @map("estate_agent_phone") @db.VarChar(50)
+  estateAgentAddress String? @map("estate_agent_address") @db.VarChar(500)
+  estateAgentNotes   String? @map("estate_agent_notes") @db.Text
   createdById     String        @map("created_by_id") @db.Uuid
   createdAt       DateTime      @default(now()) @map("created_at")
   updatedAt       DateTime      @updatedAt @map("updated_at")
