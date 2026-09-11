@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phrase Bank Editor · SurveyScriber</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <div>
+        <div class="title">Phrase Bank Editor</div>
+        <div class="sub">RICS L2 sentence templates · SurveyScriber</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <label class="bank-select">
+        Bank
+        <select id="bankSelect">
+          <option value="inspection">Home Survey (inspection)</option>
+          <option value="valuation">Valuation</option>
+        </select>
+      </label>
+      <span id="counts" class="counts"></span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="list-pane">
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Search key or sentence…" autocomplete="off">
+      </div>
+      <div id="list" class="list" role="listbox" aria-label="Phrase keys"></div>
+    </aside>
+
+    <section class="editor-pane" id="editorPane">
+      <div id="empty" class="empty">
+        <p>Select a phrase on the left to edit it.</p>
+        <p class="hint">Every <code>{TOKEN}</code> is a locked parameter the report fills in. Removing or renaming one is blocked, to protect the sentence logic.</p>
+      </div>
+
+      <div id="editor" class="editor" hidden>
+        <div class="editor-head">
+          <code id="editKey" class="editkey"></code>
+          <span id="dirtyBadge" class="dirty-badge" hidden>unsaved</span>
+        </div>
+
+        <div class="tokens-row">
+          <span class="tokens-label">Required tokens</span>
+          <div id="tokenChips" class="chips"></div>
+        </div>
+
+        <textarea id="editValue" class="value-area" spellcheck="true"
+          aria-label="Phrase sentence"></textarea>
+
+        <div id="validation" class="validation" hidden></div>
+
+        <div class="editor-actions">
+          <button id="revertBtn" class="btn ghost" type="button">Revert</button>
+          <label class="override">
+            <input type="checkbox" id="overrideChk"> Override token lock
+          </label>
+          <button id="saveBtn" class="btn primary" type="button">Save</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
