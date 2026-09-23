@@ -2,6 +2,42 @@ import 'package:equatable/equatable.dart';
 
 import 'booking_status.dart';
 
+/// The survey type a booking is for. Chosen on the combined Create-Booking
+/// screen (App-Edit brief: "Create Booking – 1. Home Surveys 2. Valuations"),
+/// replacing the separate "Select Survey Type" step.
+enum BookingSurveyType {
+  homeSurvey,
+  valuation;
+
+  String get wireValue => this == BookingSurveyType.valuation
+      ? 'valuation'
+      : 'home_survey';
+
+  String get label =>
+      this == BookingSurveyType.valuation ? 'Valuation' : 'Home Survey';
+
+  static BookingSurveyType fromWire(String? v) =>
+      v == 'valuation' ? BookingSurveyType.valuation : BookingSurveyType.homeSurvey;
+}
+
+/// How the surveyor gains access to the property.
+enum BookingAccessType {
+  directAccess,
+  collectKeys;
+
+  String get wireValue =>
+      this == BookingAccessType.collectKeys ? 'collect_keys' : 'direct';
+
+  String get label =>
+      this == BookingAccessType.collectKeys ? 'Collect Keys' : 'Direct Access';
+
+  static BookingAccessType? fromWire(String? v) {
+    if (v == 'collect_keys') return BookingAccessType.collectKeys;
+    if (v == 'direct') return BookingAccessType.directAccess;
+    return null;
+  }
+}
+
 /// Surveyor info embedded in booking
 class SurveyorInfo extends Equatable {
   const SurveyorInfo({
@@ -31,11 +67,25 @@ class Booking extends Equatable {
     required this.startTime,
     required this.endTime,
     required this.status,
+    this.surveyType = BookingSurveyType.homeSurvey,
+    this.jobRef,
     this.clientName,
     this.clientPhone,
     this.clientEmail,
+    this.propertyType,
+    this.yearBuilt,
     this.propertyAddress,
+    this.addressLine,
+    this.city,
+    this.town,
+    this.postcode,
+    this.county,
     this.notes,
+    this.accessType,
+    this.estateAgentName,
+    this.estateAgentPhone,
+    this.estateAgentAddress,
+    this.estateAgentNotes,
     required this.createdById,
     required this.createdAt,
     required this.updatedAt,
@@ -48,11 +98,35 @@ class Booking extends Equatable {
   final String startTime; // "HH:MM" format
   final String endTime; // "HH:MM" format
   final BookingStatus status;
+
+  /// Which survey this booking is for (Home Survey or Valuation).
+  final BookingSurveyType surveyType;
+  final String? jobRef;
   final String? clientName;
   final String? clientPhone;
   final String? clientEmail;
+  final String? propertyType; // House / Flat / Bungalow / Other
+  final String? yearBuilt;
+
+  /// Legacy single-line address, kept for back-compat. New bookings also
+  /// populate the structured fields below.
   final String? propertyAddress;
+  final String? addressLine;
+  final String? city;
+  final String? town;
+  final String? postcode;
+  final String? county;
+
+  /// Client's notes about the property/appointment.
   final String? notes;
+
+  /// Access arrangement; the estate-agent block applies when [collectKeys].
+  final BookingAccessType? accessType;
+  final String? estateAgentName;
+  final String? estateAgentPhone;
+  final String? estateAgentAddress;
+  final String? estateAgentNotes;
+
   final String createdById;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -98,11 +172,25 @@ class Booking extends Equatable {
     String? startTime,
     String? endTime,
     BookingStatus? status,
+    BookingSurveyType? surveyType,
+    String? jobRef,
     String? clientName,
     String? clientPhone,
     String? clientEmail,
+    String? propertyType,
+    String? yearBuilt,
     String? propertyAddress,
+    String? addressLine,
+    String? city,
+    String? town,
+    String? postcode,
+    String? county,
     String? notes,
+    BookingAccessType? accessType,
+    String? estateAgentName,
+    String? estateAgentPhone,
+    String? estateAgentAddress,
+    String? estateAgentNotes,
     String? createdById,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -115,11 +203,25 @@ class Booking extends Equatable {
         startTime: startTime ?? this.startTime,
         endTime: endTime ?? this.endTime,
         status: status ?? this.status,
+        surveyType: surveyType ?? this.surveyType,
+        jobRef: jobRef ?? this.jobRef,
         clientName: clientName ?? this.clientName,
         clientPhone: clientPhone ?? this.clientPhone,
         clientEmail: clientEmail ?? this.clientEmail,
+        propertyType: propertyType ?? this.propertyType,
+        yearBuilt: yearBuilt ?? this.yearBuilt,
         propertyAddress: propertyAddress ?? this.propertyAddress,
+        addressLine: addressLine ?? this.addressLine,
+        city: city ?? this.city,
+        town: town ?? this.town,
+        postcode: postcode ?? this.postcode,
+        county: county ?? this.county,
         notes: notes ?? this.notes,
+        accessType: accessType ?? this.accessType,
+        estateAgentName: estateAgentName ?? this.estateAgentName,
+        estateAgentPhone: estateAgentPhone ?? this.estateAgentPhone,
+        estateAgentAddress: estateAgentAddress ?? this.estateAgentAddress,
+        estateAgentNotes: estateAgentNotes ?? this.estateAgentNotes,
         createdById: createdById ?? this.createdById,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
@@ -134,11 +236,25 @@ class Booking extends Equatable {
         startTime,
         endTime,
         status,
+        surveyType,
+        jobRef,
         clientName,
         clientPhone,
         clientEmail,
+        propertyType,
+        yearBuilt,
         propertyAddress,
+        addressLine,
+        city,
+        town,
+        postcode,
+        county,
         notes,
+        accessType,
+        estateAgentName,
+        estateAgentPhone,
+        estateAgentAddress,
+        estateAgentNotes,
         createdById,
         createdAt,
         updatedAt,

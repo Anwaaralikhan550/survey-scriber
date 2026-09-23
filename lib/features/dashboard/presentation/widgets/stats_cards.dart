@@ -7,11 +7,20 @@ class StatsCards extends StatelessWidget {
   const StatsCards({
     required this.stats,
     this.isLoading = false,
+    this.onTotalTap,
+    this.onInProgressTap,
+    this.onCompletedTap,
     super.key,
   });
 
   final DashboardStats stats;
   final bool isLoading;
+
+  /// Tapping a metric opens the matching filtered jobs list. "Total" shows
+  /// live bookings (new instructions not yet started) per the client brief.
+  final VoidCallback? onTotalTap;
+  final VoidCallback? onInProgressTap;
+  final VoidCallback? onCompletedTap;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -21,10 +30,11 @@ class StatsCards extends StatelessWidget {
             Expanded(
               child: _StatCard(
                 title: 'Total',
-                value: stats.totalSurveys,
+                value: stats.live,
                 icon: Icons.folder_rounded,
                 color: AppColors.primary,
                 isLoading: isLoading,
+                onTap: onTotalTap,
               ),
             ),
             const SizedBox(width: 12),
@@ -35,6 +45,7 @@ class StatsCards extends StatelessWidget {
                 icon: Icons.pending_actions_rounded,
                 color: AppColors.statusInProgress,
                 isLoading: isLoading,
+                onTap: onInProgressTap,
               ),
             ),
             const SizedBox(width: 12),
@@ -45,6 +56,7 @@ class StatsCards extends StatelessWidget {
                 icon: Icons.check_circle_rounded,
                 color: AppColors.statusCompleted,
                 isLoading: isLoading,
+                onTap: onCompletedTap,
               ),
             ),
           ],
@@ -59,6 +71,7 @@ class _StatCard extends StatelessWidget {
     required this.icon,
     required this.color,
     this.isLoading = false,
+    this.onTap,
   });
 
   final String title;
@@ -66,72 +79,81 @@ class _StatCard extends StatelessWidget {
   final IconData icon;
   final Color color;
   final bool isLoading;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(14),
+      child: InkWell(
+        onTap: onTap,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: theme.colorScheme.outlineVariant.withOpacity(0.4),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: theme.colorScheme.shadow.withOpacity(0.05),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 38,
-            height: 38,
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.12),
-              borderRadius: BorderRadius.circular(10),
+        child: Ink(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: theme.colorScheme.outlineVariant.withOpacity(0.4),
             ),
-            child: Icon(
-              icon,
-              size: 20,
-              color: color,
-            ),
-          ),
-          const SizedBox(height: 14),
-          if (isLoading)
-            _AnimatedShimmer(
-              width: 40,
-              height: 28,
-              theme: theme,
-            )
-          else
-            Text(
-              value.toString(),
-              style: theme.textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.w700,
-                color: theme.colorScheme.onSurface,
-                letterSpacing: -0.5,
-                height: 1.1,
+            boxShadow: [
+              BoxShadow(
+                color: theme.colorScheme.shadow.withOpacity(0.05),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
               ),
-            ),
-          const SizedBox(height: 4),
-          Text(
-            title,
-            style: theme.textTheme.labelMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-              fontWeight: FontWeight.w500,
-              letterSpacing: 0.1,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+            ],
           ),
-        ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 38,
+                height: 38,
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  icon,
+                  size: 20,
+                  color: color,
+                ),
+              ),
+              const SizedBox(height: 14),
+              if (isLoading)
+                _AnimatedShimmer(
+                  width: 40,
+                  height: 28,
+                  theme: theme,
+                )
+              else
+                Text(
+                  value.toString(),
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: theme.colorScheme.onSurface,
+                    letterSpacing: -0.5,
+                    height: 1.1,
+                  ),
+                ),
+              const SizedBox(height: 4),
+              Text(
+                title,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.1,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

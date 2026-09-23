@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_client.dart';
 import '../../domain/entities/availability.dart';
+import '../../domain/entities/booking.dart';
 import '../../domain/entities/booking_status.dart';
 import '../models/availability_model.dart';
 import '../models/booking_model.dart';
@@ -245,11 +246,25 @@ class SchedulingRemoteDataSource {
     required DateTime date,
     required String startTime,
     required String endTime,
+    BookingSurveyType surveyType = BookingSurveyType.homeSurvey,
+    String? jobRef,
     String? clientName,
     String? clientPhone,
     String? clientEmail,
+    String? propertyType,
+    String? yearBuilt,
     String? propertyAddress,
+    String? addressLine,
+    String? city,
+    String? town,
+    String? postcode,
+    String? county,
     String? notes,
+    BookingAccessType? accessType,
+    String? estateAgentName,
+    String? estateAgentPhone,
+    String? estateAgentAddress,
+    String? estateAgentNotes,
   }) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       '$_basePath/bookings',
@@ -258,11 +273,25 @@ class SchedulingRemoteDataSource {
         'date': _dateFormat.format(date),
         'startTime': startTime,
         'endTime': endTime,
+        'surveyType': surveyType.wireValue,
+        if (jobRef != null) 'jobRef': jobRef,
         if (clientName != null) 'clientName': clientName,
         if (clientPhone != null) 'clientPhone': clientPhone,
         if (clientEmail != null) 'clientEmail': clientEmail,
+        if (propertyType != null) 'propertyType': propertyType,
+        if (yearBuilt != null) 'yearBuilt': yearBuilt,
         if (propertyAddress != null) 'propertyAddress': propertyAddress,
+        if (addressLine != null) 'addressLine': addressLine,
+        if (city != null) 'city': city,
+        if (town != null) 'town': town,
+        if (postcode != null) 'postcode': postcode,
+        if (county != null) 'county': county,
         if (notes != null) 'notes': notes,
+        if (accessType != null) 'accessType': accessType.wireValue,
+        if (estateAgentName != null) 'estateAgentName': estateAgentName,
+        if (estateAgentPhone != null) 'estateAgentPhone': estateAgentPhone,
+        if (estateAgentAddress != null) 'estateAgentAddress': estateAgentAddress,
+        if (estateAgentNotes != null) 'estateAgentNotes': estateAgentNotes,
       },
     );
     return BookingModel.fromJson(response.data!);
