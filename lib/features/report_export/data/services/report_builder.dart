@@ -1076,6 +1076,24 @@ class ReportBuilder {
           'You should ask your legal adviser to confirm whether the PVC glazed sections to the doors were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
     }
 
+    // RICS L2 cross-injections from Section E4 Main Walls structural
+    // movement (Phase 3): the spec's "Recent" and "Recurrent" movement
+    // branches each carry an "Add text to: Section I2 - Guarantees"
+    // directive. Gated on the movement-status dropdown that drives the
+    // E4 source sentence in `_mainWallsMovements`.
+    final mainWallsMovements = _answersForScreen(
+        rawData, 'activity_outside_property_main_walls_movements');
+    final movementStatus =
+        (mainWallsMovements['actv_movement_status'] ?? '').trim().toLowerCase();
+    if (movementStatus == 'recent') {
+      phrases.add(
+          'The front, side, rear walls of the main building, back addition, extension, bay window, porch, other have been damaged by movement cracks potentially arising from settlement, subsidence, nearby vegetation, point loading, wall tie damage, other and this is structurally serious (see section E4 - Main Walls).');
+    }
+    if (movementStatus == 'recurrent') {
+      phrases.add(
+          'Recent cracking suggests that movement may have recurred. This may indicate that the previous repairs have not been fully effective. You should ask your legal adviser to establish whether any guarantees, warranties or insurance-backed schemes are available in relation to these repairs (see section E4 - Main Walls).');
+    }
+
     return _cleanupPhrases(phrases);
   }
 

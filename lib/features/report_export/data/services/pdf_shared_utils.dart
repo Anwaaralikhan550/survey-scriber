@@ -109,14 +109,14 @@ class PdfSharedUtils {
         'NotoEmoji-Regular', PdfGoogleFonts.notoEmojiRegular);
 
     return PdfFontDataBundle(
-      base: _extractFontBytes(baseFont)!,
-      bold: _extractFontBytes(boldFont)!,
-      italic: _extractFontBytes(italicFont)!,
-      fallbacks: [
-        _extractFontBytes(symbolFont)!,
-        _extractFontBytes(symbols2Font)!,
-        _extractFontBytes(emojiFont)!,
-      ],
+      base: _extractFontBytes(baseFont),
+      bold: _extractFontBytes(boldFont),
+      italic: _extractFontBytes(italicFont),
+      fallbacks: <ByteData?>[
+        _extractFontBytes(symbolFont),
+        _extractFontBytes(symbols2Font),
+        _extractFontBytes(emojiFont),
+      ].whereType<ByteData>().toList(),
     );
   }
 
@@ -299,18 +299,26 @@ class PdfFontDataBundle {
     required this.fallbacks,
   });
 
-  final ByteData base;
-  final ByteData bold;
-  final ByteData italic;
+  final ByteData? base;
+  final ByteData? bold;
+  final ByteData? italic;
   final List<ByteData> fallbacks;
 
   /// Reconstruct [pw.Font] objects from raw bytes.  Call this inside the
   /// target isolate — [pw.Font.ttf] is a pure Dart constructor that works
   /// without the Flutter engine.
+  ///
+  /// When a font's TTF bytes are unavailable — e.g. the Google Fonts download
+  /// failed with no network and the loader returned a built-in Type1 Helvetica
+  /// fallback (which has no extractable TTF data) — degrade to the matching
+  /// standard Helvetica face so PDF generation still succeeds instead of
+  /// throwing on a null TTF. Report text is Latin, so Helvetica renders it
+  /// faithfully; only decorative symbol/emoji glyphs are lost in that path.
   PdfFontBundle toFontBundle() => PdfFontBundle(
-        base: pw.Font.ttf(base),
-        bold: pw.Font.ttf(bold),
-        italic: pw.Font.ttf(italic),
+        base: base != null ? pw.Font.ttf(base!) : pw.Font.helvetica(),
+        bold: bold != null ? pw.Font.ttf(bold!) : pw.Font.helveticaBold(),
+        italic:
+            italic != null ? pw.Font.ttf(italic!) : pw.Font.helveticaOblique(),
         fallback: fallbacks.map((b) => pw.Font.ttf(b)).toList(),
       );
 }

@@ -263,7 +263,47 @@ emoji every time — this is a series, don't change it).
 | **Phase 2F** | **Sections I + J, Legal Issues + Risks (incl. new J4/J5)** | **✅ Done — Section I (I1–I3) and Section J (J1–J5) both fully migrated.** |
 | **Phase 2G-mini** | **Deep-audit fixes: Accommodation Summary, Local Environment (2 orphan screens), E1→I3 cross-inject, E8 bug, Section K UI bug** | **✅ Done (2026-07-27) — see "Deep-audit findings" section below** |
 | Phase 2G (remainder) | Open Decisions Register — client review of 28 remaining content gaps | ✅ **Drafted and published (2026-07-27)** — https://claude.ai/code/artifact/e33dac76-7079-4018-87f0-6386f460c30d — awaiting client decisions |
-| Phase 3 | End-to-end validation + final sign-off | ⬜ Not started |
+| **Phase 2G (Section K / Overall Opinion / Accommodation)** | **Overall Opinion + Accommodation summary + Section K** | **✅ Done (2026-09-03) — see "Phase 2G closure" below** |
+| **Phase 3** | **End-to-end validation + final sign-off** | **🟡 In progress (2026-09-03) — permutation audit + cross-inject integrity done; see "Phase 3 progress" below** |
+
+## Phase 3 progress (2026-09-03)
+
+**1. Tree-wide permutation audit — PASS.** `flutter test test/phrase_audit` on the current tree: inspection 510 screens + valuation 42 screens, **0 GAP / 0 UNAPPROVED / 0 GRAMMAR / 0 PLACEHOLDER_LEAK / 0 ENGINE_ERROR**; 3016 distinct phrases, 0 engine-invented. (`tool/phrase_audit/output/audit_summary.md`.)
+
+**2. Cross-injection integrity — DONE, with 2 real fixes + 3 parked gaps.** The spec declares exactly 35 "Add text to: Section X" directives (`crossInjectCount: 35`). New durable test `test/features/report_export/data/services/cross_inject_integrity_test.dart` loads all 35 from `rics_l2_library.json` and checks each against the `report_builder.dart` derivation functions (target→fn map: J1→RiskToBuilding, J3→RiskToPeople, I2 + spec's typo'd "J2"→IssueGuarantees). Result: **32 wired-and-verified, 3 parked content-gaps.**
+
+- **2 real wiring gaps FIXED** — E4 Main Walls structural movement had spec "Add text to: Section I2 – Guarantees" directives for both the **Recent** and **Recurrent** movement branches that were never wired. Added to `_legacyDerivedSectionFIssueGuarantees` (gated on `activity_outside_property_main_walls_movements`'s `actv_movement_status`), with the exact spec sentences + the established "(see section E4 - Main Walls)" cross-reference suffix. The function is spread into the I2 screen (`activity_issues_glazed_sections`) at assembly, so the injects reach the report end-to-end.
+- **3 parked content-gaps** (no source input field exists → new UI = client decision, added to the Open Decisions Register, NOT fabricated):
+  1. **E4 → I1** "external alterations" — no E4 alterations field; I1 Regulations is populated by its own dedicated `activity_issues_regulation` screen.
+  2. **E2 → J1** roof-to-wall flashing junction — the app has only the chimney-flashing screen (`activity_outside_property_repair_flashing`), no dedicated roof-covering flashing screen.
+  3. **E4 → J1** tree **defects** noted — the `Nearby Tree` screen captures tree *size* only and always emits the "no obvious signs of damage" variant; the spec's J1 inject is the "I noted defects associated with their influence" variant, which has no matching field.
+
+  (The integrity test asserts these 3 signatures are ABSENT from the derivation code so the exceptions stay explicit and audited. Two originally-suspected gaps — E1→J3 aerial and E2→J1 roof-spreading — turned out to be wired with reworded/conditional text; the test carries wording-overrides for them.)
+
+Verification: `flutter analyze` 0 errors; integrity test 4/4 green; full regression `test/features/property_inspection test/features/report_export test/phrase_audit` = **533 passing, exactly the 5 known pre-existing failures, zero regressions.**
+
+**3. Real-app PDF render + regex sweep (Gate 3) — PASS.** The real-app harness (`test/_scratch_real_app_pdf.dart`) could not run in the offline sandbox: `PdfSharedUtils.loadStandardFontData` hard-asserted (`!`) TTF bytes that are unavailable when the Google-Fonts download fails with no network, throwing a null-check error before any content rendered. Fixed in `pdf_shared_utils.dart` — `PdfFontDataBundle`'s font-byte fields are now nullable and `toFontBundle()` degrades to the built-in Helvetica faces when TTF bytes are absent (report text is Latin, so it renders faithfully; only decorative symbol/emoji glyphs are lost on that path). This is a production hardening too: PDF generation no longer crashes offline / before the font cache is warm.
+
+With that, the harness generates a real 37-page inspection PDF. Regex sweep across the whole document (raw `{TOKEN}` leak, `cb_/et_/actv_` field-id leak, doubled word, double space, glued-period, `n/a` leak, raw slash-alternative, dangling ". and") = **0 real defects** (the only case-insensitive ". And" match is a legitimate sentence start, not a defect). Verified live: the A1 accommodation intro/outro sentence ("…identification purposes only") renders in the PDF, and — via a temporary curated movement=Recent entry (reverted after) — the new E4 movement → I2 Guarantees inject ("…damaged by movement cracks potentially arising…") renders in the report. `flutter analyze` on the font change = 0 errors.
+
+**Remaining Phase 3:** the final human RICS-assessor sign-off (deliver the validated package; the sign-off itself is not something this agent can grant). The 28+3 Open Decisions Register items still await client decisions.
+
+## Phase 2G closure (2026-09-03) — Overall Opinion + Accommodation + Section K
+
+Verified all three against the client PDF + `rics_l2_library.json` before touching anything (per the no-needless-rewrite rule). Outcome: **1 real cross-format defect fixed, 0 forced wording rewrites, 2 items routed to the Open Decisions Register.**
+
+**Overall Opinion (`_overallOpinion`, `activity_over_all_openion`)** — already RICS-L2-aligned, no rewrite:
+- `{OVERALL_OPINION_REASONABLE_WITH_REPAIR}` = byte-exact spec match.
+- `{OVERALL_OPINION_REASONABLE}` sentences 1 & 3 match; sentence 2 says "reasonable proposition" where spec offers "reasonable, **good, or poor**". The screen's `Opinion` dropdown only has `Reasonable` / `Reasonable with repair` — no good/poor field — and the reasonable template only fires in the pure-reasonable branch, so the current wording is correct for the only case it renders. The missing good/poor rating axis = **content gap → Open Decisions Register (parked)**, not fabricated.
+- `{OVERALL_OPINION_REPAIR_ALLOWANCE}` (driven by the `Potential` field) has **no spec equivalent** — extra app content → **Open Decisions Register (parked)**, left untouched.
+
+**Accommodation summary** — spec's intro/outro sentence ("The accommodation comprises: <floors>. The accommodation schedule contained within this report is provided for identification purposes only.") was already emitted by the PDF renderer (`pdf_generator_service.dart` `includeL2Intro` branch) but **missing from the DOCX renderer** — a genuine cross-format parity defect. Fixed by adding an `includeL2Intro` param to `_writeAccommodationSchedule` in `docx_generator_service.dart`, building the floor list with the identical single / "A and B" / "A, B and C" logic as the PDF, and wiring `includeL2Intro: true` on both inspection Section-D call sites (`group_construction_2` + the Section-D fallback). Valuation's `property_assessment` call site deliberately stays table-only, mirroring the PDF. The dead, tree-unreferenced `_accommodationSchedule` handler (screen `activity_accommodation_schedule`, 0 occurrences in `inspection_tree.json`) was confirmed dead and left alone.
+
+**Section K** (`activity_capture_floor_site_plan_sketches`) — spec has no Section K (library ends at J5); the app's K is a documentation/attachment-capture screen with no legacy or L2 phrase equivalent. Nav bug already fixed in Phase 2G-mini. No phrase migration applicable → non-defect.
+
+New test: `test/features/report_export/data/services/docx_accommodation_intro_test.dart` (4 cases — intro+outro present for inspection, multi-floor "A, B and C", single-floor, and valuation table-without-intro) — all green. Full regression `flutter test test/features/property_inspection test/features/report_export test/phrase_audit` = **529 passing, exactly the 5 known pre-existing failures (4 email_compose_sheet + 1 property_extended), zero regressions**; `phrase_audit` clean (0 GAP/UNAPPROVED/GRAMMAR/LEAK). `flutter analyze` on the changed file = 0 errors.
+
+**Sections A/D/E/F/G/H/I/J + Phase 2G are now all migrated. Only Phase 3 (end-to-end validation + final human sign-off) remains.**
 
 ## Deep-audit findings (2026-07-27) — verified directly against the client's raw PDF
 
