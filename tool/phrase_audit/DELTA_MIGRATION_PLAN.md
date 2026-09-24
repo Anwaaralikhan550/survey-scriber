@@ -325,3 +325,13 @@ pass, not net-new sections.
   (low risk if undisturbed; specialist advice before disturbance; may affect
   future marketability). Gate 2 = audit All passed; regression = only the 5
   known failures; analyzer 0.
+
+- 2026-09-24 — H2 Outbuildings & Other Structures COMPLETE (bank-only reword).
+  REPAIR_SHRINKABLE_CLAY reworded to the v2 subsoil wording (exact nature not
+  investigated; shrinkable clay susceptible to seasonal moisture changes;
+  shrink/expand) — also fixes the odd "Subsoil's" apostrophe. PRIVATE_ROAD
+  reworded to the v2 wording (private / not maintained at public expense; legal
+  adviser to confirm status, access rights, maintenance responsibilities and
+  liabilities); I1 pointer preserved. (Retaining-wall key already carried the
+  fuller v2 advisory with J3/I3 pointers.) Gate 2 = audit All passed; regression
+  = only the 5 known failures; analyzer 0.

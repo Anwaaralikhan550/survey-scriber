@@ -12,8 +12,8 @@
   },
   "phrases": {
    "distinctEmitted": 2588,
-   "approvedLegacyBank": 681,
-   "approvedCurrentBankOnly": 1880,
+   "approvedLegacyBank": 679,
+   "approvedCurrentBankOnly": 1882,
    "unapproved": 0
   }
  },
@@ -839,10 +839,13 @@
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Private Road: The road serving the property appears to be private and may not be maintained at public expense. Your legal adviser should confirm its status, together with any rights of access, maintenance responsibilities, and associated liabilities (see section I1 - Regulation)."
+   ]
   },
   {
    "sectionKey": "H",
@@ -992,10 +995,13 @@
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Subsoil: The exact nature of the subsoil has not been investigated as part of this survey. However, the subsoil in the area may include shrinkable clay. Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions."
+   ]
   },
   {
    "sectionKey": "H",
