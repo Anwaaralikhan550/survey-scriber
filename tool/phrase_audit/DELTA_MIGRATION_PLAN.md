@@ -242,3 +242,10 @@ Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
   {WW_WW_MADE_UP}/{WW_WW_CONDITION} preserved). OUT_OF_SQUARE_DOORS and
   CREAKING_STAIRS reworded to the fuller v2 wording. Gate 2 = audit All passed;
   regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — F8 Bathroom Fittings COMPLETE (bank-only reword). BATHROOM_FITTINGS
+  main description reworded (drops false "No repair is currently needed"; adds
+  "consistent with their age and use" + routine-maintenance tail; 4 tokens
+  preserved). EXTRACTOR_FAN_INSTALLED_OK gains the v2 ventilation advice
+  (clean regularly, run-on function, open windows). Gate 2 = audit All passed;
+  regression = only the 5 known failures; analyzer 0.
