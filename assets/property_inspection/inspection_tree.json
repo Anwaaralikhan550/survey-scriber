@@ -241,7 +241,17 @@
             },
             {
               "id": "ch6",
-              "label": "concrete frame",
+              "label": "concrete wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "ch8",
+              "label": "precast concrete panels",
+              "type": "checkbox"
+            },
+            {
+              "id": "ch9",
+              "label": "system-built",
               "type": "checkbox"
             },
             {
@@ -36412,6 +36422,9 @@
               "type": "dropdown",
               "options": [
                 "Reasonable",
+                "Good",
+                "Fair",
+                "Poor",
                 "Reasonable with repair"
               ]
             },

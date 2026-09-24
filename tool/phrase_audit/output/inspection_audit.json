@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2579,
+   "distinctEmitted": 2587,
    "approvedLegacyBank": 713,
-   "approvedCurrentBankOnly": 1839,
+   "approvedCurrentBankOnly": 1847,
    "unapproved": 0
   }
  },
@@ -41,13 +41,13 @@
    "sectionKey": "D",
    "screenId": "activity_property_construction",
    "title": "Property",
-   "dataFieldCount": 10,
-   "permutationCount": 18,
+   "dataFieldCount": 12,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -70,7 +70,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is understood to have been constructed in approximately sample detail. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
+    "The property is understood to have been constructed in approximately sample detail. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
     "The vendor informed me during my inspection that the property was constructed in approximately sample detail."
    ]
   },
@@ -8932,18 +8932,18 @@
    "screenId": "activity_over_all_openion",
    "title": "OverAll Opinion",
    "dataFieldCount": 3,
-   "permutationCount": 7,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 7,
     "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
     "I am pleased to advise you that this property is believed to be a reasonable proposition for purchase. In my opinion, the property represents a reasonable proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction and level of ongoing maintenance.",
-    "I am pleased to advise you that this property is believed to be a reasonable proposition for purchase at a price of five pounds. In my opinion, the property represents a reasonable proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction and level of ongoing maintenance.",
-    "A provisional repair allowance of five pounds should be considered. The anticipated scope is sample detail."
+    "In my opinion, the property represents a good proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction and level of ongoing maintenance.",
+    "In my opinion, the property represents a fair proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction and level of ongoing maintenance."
    ]
   },
   {

@@ -13712,7 +13712,9 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['ch3'])) items.add('cavity wall');
     if (_isChecked(answers['ch4'])) items.add('timber frame');
     if (_isChecked(answers['ch5'])) items.add('steel frame');
-    if (_isChecked(answers['ch6'])) items.add('concrete frame');
+    if (_isChecked(answers['ch6'])) items.add('concrete wall');
+    if (_isChecked(answers['ch8'])) items.add('precast concrete panels');
+    if (_isChecked(answers['ch9'])) items.add('system-built');
     if (_isChecked(answers['ch7'])) {
       final other = (answers['etPropertyTypeOther'] ?? '').trim();
       items.add(other.isNotEmpty ? other.toLowerCase() : 'other');
@@ -13731,12 +13733,18 @@ class InspectionPhraseEngine {
         template.replaceAll('{CONSTRUCTION_TYPE}', _toWords(items)),
       )));
     }
+    // Spec conditional — "If timber or steel frame is selected, add this":
+    // the Modern Building Design advisory (approved bank sub-key).
+    if (_isChecked(answers['ch4']) || _isChecked(answers['ch5'])) {
+      final modern =
+          _sub('{D_CONSTRUCTION}', '{CONDITION_TYPE_OF_CONSTRUCTION}');
+      if (modern.isNotEmpty) result.addAll(_split(_normalize(modern)));
+    }
     // Spec conditional — "If concrete wall or precast concrete panels are
     // selected, add this": the mortgage-lending advisory (approved bank
-    // sub-key). The form currently exposes a single concrete construction
-    // checkbox (ch6); precast/system-built as distinct options is a form
-    // parity item tracked separately.
-    if (_isChecked(answers['ch6'])) {
+    // sub-key). Fires for concrete wall (ch6) or precast concrete panels
+    // (ch8); system-built (ch9) is not covered by the spec's advisory.
+    if (_isChecked(answers['ch6']) || _isChecked(answers['ch8'])) {
       final concrete =
           _sub('{D_CONSTRUCTION}', '{CONCRETE_CONSTRUCTION_ADVISORY}');
       if (concrete.isNotEmpty) result.addAll(_split(_normalize(concrete)));
@@ -15183,8 +15191,18 @@ class InspectionPhraseEngine {
     final priceInWords =
         amount.isNotEmpty ? formatPriceAsWordsOnly(amount) : '';
 
-    if (opinion.toLowerCase() == 'reasonable') {
-      final template = _phraseTexts['{OVERALL_OPINION_REASONABLE}'] ?? '';
+    final ratingLower = opinion.toLowerCase();
+    // Revised spec: the overall verdict may be reasonable, good, fair or poor
+    // (the "reasonable with repair" variant is handled separately below).
+    // A "reasonable" verdict keeps the favourable opener; good/fair/poor use
+    // the neutral approved statement (no favourable opener, no fabricated
+    // wording), with the chosen adjective substituted for {OVERALL_OPINION_RATING}.
+    const qualityRatings = ['reasonable', 'good', 'fair', 'poor'];
+    if (qualityRatings.contains(ratingLower)) {
+      final key = ratingLower == 'reasonable'
+          ? '{OVERALL_OPINION_REASONABLE}'
+          : '{OVERALL_OPINION_QUALITY}';
+      final template = _phraseTexts[key] ?? '';
       if (template.isNotEmpty) {
         var resolved = _normalize(template);
         if (amount.isNotEmpty) {
@@ -15203,9 +15221,11 @@ class InspectionPhraseEngine {
               .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE_WORD}', '')
               .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE}', '');
         }
+        // Substitute the chosen quality adjective into the approved sentence.
+        resolved = resolved.replaceAll('{OVERALL_OPINION_RATING}', ratingLower);
         return _split(resolved);
       }
-      final phrases = <String>['Overall opinion: reasonable.'];
+      final phrases = <String>['Overall opinion: $ratingLower.'];
       if (priceInWords.isNotEmpty)
         phrases.add('Purchase price: $priceInWords.');
       return phrases;

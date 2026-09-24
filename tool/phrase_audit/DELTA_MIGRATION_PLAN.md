@@ -47,7 +47,7 @@ version already implemented in Stream B — no delta there.
 | Phase | Scope | Status |
 |---|---|---|
 | 0 | Foundation: clean per-element spec extraction, diff tooling, baseline audit | 🟡 In progress |
-| 1 | Part 1 (Overall-opinion "fair" decision, Extensions, residual) | ⬜ |
+| 1 | Part 1 (Year-built, Construction conditionals, Overall-opinion ratings, form parity) | ✅ |
 | 2 | Section F (F1–F9) | ⬜ |
 | 3 | Section G (G1–G7, incl. new G5/G6/G7) | ⬜ |
 | 4 | Section H (H1–H3) | ⬜ |
@@ -111,3 +111,29 @@ version already implemented in Stream B — no delta there.
   underground parking / "train lines or a station" / "adopted public road")
   are NOT Part-1; each belongs to its own element and is verified in that
   element's phase (walls→E/F, windows→F, grounds→E, parking→D, etc.).
+
+- 2026-09-24 — Phase 1 COMPLETE (client decisions confirmed: full re-migration
+  for F–J; Part-1 = wire timber/steel advisory, fair-rating option-only,
+  precast/system-built checkboxes). Applied:
+  * Timber/steel Modern Building Design advisory now emitted when timber (ch4)
+    or steel (ch5) frame is selected. Golden test updated to expect it.
+  * Construction form parity: `concrete frame`→`concrete wall` (ch6, spec
+    value), + new checkboxes ch8 `precast concrete panels`, ch9 `system-built`.
+    Concrete/precast advisory now fires on ch6 OR ch8 (spec: "concrete wall or
+    precast concrete panels"); system-built (ch9) is not covered by the spec
+    advisory. Proof tests added for precast + system-built.
+  * Overall-opinion rating: dropdown gains Good / Fair / Poor. The rating
+    adjective is tokenised as {OVERALL_OPINION_RATING}. "Reasonable" keeps the
+    favourable opener ({OVERALL_OPINION_REASONABLE}); good/fair/poor emit the
+    neutral approved statement (new key {OVERALL_OPINION_QUALITY}, lifted
+    verbatim from the approved reasonable text — no fabricated wording, no
+    contradictory "pleased to advise … poor"). Audit-clean (every emitted
+    phrase is a verbatim approved-bank entry). Tests cover all four ratings +
+    no token leak + repair variant still routes correctly.
+  Gate 2 = permutation audit All passed (0 UNAPPROVED); feature regression =
+  only the 5 known pre-existing failures; flutter analyze = 0 errors.
+
+  Residual Part-1 note (not a client item, flagged): construction checkbox
+  ch1 emits "traditional materials and techniques" but the spec (v1 and v2)
+  says "traditional masonry". Left unchanged to avoid an unrequested output
+  change; can be corrected if desired.

@@ -19,34 +19,7 @@ void main() {
   });
 
   group('D-Construction: approved templates', () {
-    test('property construction uses CONSTRUCTION_TYPE_AREA', () {
-      final phrases = engine.buildPhrases(
-        'activity_property_construction',
-        {'ch3': 'true', 'ch4': 'true'},
-      );
-      expect(phrases, hasLength(1));
-      expect(
-        phrases.single,
-        'The property is believed to be constructed using cavity wall and '
-        'timber frame construction.',
-      );
-    });
-
-    test(
-        'concrete construction appends the mortgage-lending advisory '
-        '(revised spec)', () {
-      final phrases = engine.buildPhrases(
-        'activity_property_construction',
-        {'ch6': 'true'},
-      );
-      expect(phrases, hasLength(2));
-      expect(
-        phrases.first,
-        'The property is believed to be constructed using concrete frame '
-        'construction.',
-      );
-      expect(
-        phrases[1],
+    const concreteAdvisory =
         'Where the property is of concrete or precast concrete panel '
         'construction, some lenders may regard this as a non-standard form of '
         'construction. As a result, the availability of mortgage finance may be '
@@ -57,7 +30,74 @@ void main() {
         'schemes have been carried out. You should make enquiries with your '
         'proposed lender or an independent mortgage broker at an early stage to '
         'confirm that satisfactory mortgage finance will be available before '
-        'committing to the purchase.',
+        'committing to the purchase.';
+
+    test('property construction uses CONSTRUCTION_TYPE_AREA', () {
+      final phrases = engine.buildPhrases(
+        'activity_property_construction',
+        {'ch3': 'true', 'ch4': 'true'},
+      );
+      // Type sentence from the approved template …
+      expect(
+        phrases.first,
+        'The property is believed to be constructed using cavity wall and '
+        'timber frame construction.',
+      );
+      // … then the timber/steel Modern Building Design advisory (revised spec).
+      expect(
+        phrases.any((p) => p.startsWith('Modern Building Design:')),
+        isTrue,
+      );
+      expect(
+        phrases.any((p) =>
+            p.contains('framed externally with timber, steel, or other')),
+        isTrue,
+      );
+    });
+
+    test(
+        'concrete wall construction appends the mortgage-lending advisory '
+        '(revised spec)', () {
+      final phrases = engine.buildPhrases(
+        'activity_property_construction',
+        {'ch6': 'true'},
+      );
+      expect(phrases, hasLength(2));
+      expect(
+        phrases.first,
+        'The property is believed to be constructed using concrete wall '
+        'construction.',
+      );
+      expect(phrases[1], concreteAdvisory);
+    });
+
+    test(
+        'precast concrete panels also trigger the mortgage-lending advisory '
+        '(revised spec)', () {
+      final phrases = engine.buildPhrases(
+        'activity_property_construction',
+        {'ch8': 'true'},
+      );
+      expect(phrases, hasLength(2));
+      expect(
+        phrases.first,
+        'The property is believed to be constructed using precast concrete '
+        'panels construction.',
+      );
+      expect(phrases[1], concreteAdvisory);
+    });
+
+    test('system-built construction emits only the type sentence (no advisory)',
+        () {
+      final phrases = engine.buildPhrases(
+        'activity_property_construction',
+        {'ch9': 'true'},
+      );
+      expect(phrases, hasLength(1));
+      expect(
+        phrases.single,
+        'The property is believed to be constructed using system-built '
+        'construction.',
       );
     });
 
@@ -236,6 +276,57 @@ void main() {
       expect(phrases, contains('Condition rating is: 3.'));
       expect(phrases, contains('Notes:'));
       expect(phrases, contains('Obtain quotations before exchange.'));
+    });
+  });
+
+  group('Overall opinion: revised-spec rating (reasonable/good/fair/poor)', () {
+    List<String> opinion(String rating) => engine.buildPhrases(
+          'activity_over_all_openion',
+          {'android_material_design_spinner5': rating},
+        );
+
+    test('reasonable keeps the favourable opener and reads "reasonable"', () {
+      final phrases = opinion('Reasonable');
+      expect(phrases, hasLength(1));
+      final text = phrases.single;
+      expect(text, contains('I am pleased to advise'));
+      expect(text,
+          contains('the property represents a reasonable proposition'));
+      expect(text, isNot(contains('{')));
+    });
+
+    test('good/fair/poor substitute the adjective and drop the opener', () {
+      for (final rating in ['Good', 'Fair', 'Poor']) {
+        final phrases = opinion(rating);
+        expect(phrases, isNotEmpty, reason: '$rating should emit text');
+        final text = phrases.join(' ');
+        expect(
+          text,
+          contains(
+              'the property represents a ${rating.toLowerCase()} proposition'),
+          reason: '$rating adjective must be substituted',
+        );
+        // The favourable "pleased to advise" opener is only for a reasonable
+        // verdict — never shown for good/fair/poor.
+        expect(text, isNot(contains('I am pleased to advise')),
+            reason: '$rating must not carry the favourable opener');
+        expect(text, startsWith('In my opinion,'));
+        // No placeholder or rating token leaks into the report.
+        expect(text, isNot(contains('{')), reason: '$rating: no token leak');
+      }
+    });
+
+    test('"reasonable with repair" still routes to the repair narrative', () {
+      final phrases = engine.buildPhrases(
+        'activity_over_all_openion',
+        {
+          'android_material_design_spinner5': 'Reasonable with repair',
+          'android_material_design_spinner': '1500',
+          'android_material_design_spinner2': 'Roof repairs',
+        },
+      );
+      expect(phrases, contains(contains('provisional repair allowance')));
+      expect(phrases.join(' '), isNot(contains('{')));
     });
   });
 }
