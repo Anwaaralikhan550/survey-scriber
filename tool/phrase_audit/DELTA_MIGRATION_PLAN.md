@@ -343,3 +343,12 @@ pass, not net-new sections.
   adviser to confirm inspection/maintenance/servicing arrangements). SECTION H
   COMPLETE. Gate 2 = audit All passed; regression = only the 5 known failures;
   analyzer 0.
+
+## Phase 5 — Section I (in progress)
+- 2026-09-24 — I1 Issues for Legal Adviser (Regulations) COMPLETE (bank-only
+  reword). REGULATIONS_NEW_BUILD reworded to the v2 new-home-warranty wording
+  (NHBC / LABC / Premier Guarantee or equivalent; remaining cover; completion
+  certificates and warranty documentation). REGULATIONS_LISTED_BUILDING reworded
+  to the v2 wording (confirm listed status and grade; Listed Building Consent;
+  traditional materials/specialist contractors increasing maintenance costs).
+  Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.

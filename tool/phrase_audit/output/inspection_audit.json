@@ -12,8 +12,8 @@
   },
   "phrases": {
    "distinctEmitted": 2588,
-   "approvedLegacyBank": 673,
-   "approvedCurrentBankOnly": 1888,
+   "approvedLegacyBank": 672,
+   "approvedCurrentBankOnly": 1889,
    "unapproved": 0
   }
  },
@@ -4328,8 +4328,8 @@
    "severities": [],
    "phraseStats": {
     "total": 22,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 21,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 22,
     "unapproved": 0
    },
    "editedBankSamples": [
