@@ -235,3 +235,10 @@ Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
   Built-in Appliances ("have not been assessed") and Extractor Fan blocks — the
   current form has no sink/appliance/extractor capture fields. Gate 2 = audit
   All passed; regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — F7 Woodwork COMPLETE (bank-only reword). WOOD_WORK main
+  description reworded (drops false "No repair is currently needed"; adds
+  "Routine adjustment and maintenance appropriate to their age and construction";
+  {WW_WW_MADE_UP}/{WW_WW_CONDITION} preserved). OUT_OF_SQUARE_DOORS and
+  CREAKING_STAIRS reworded to the fuller v2 wording. Gate 2 = audit All passed;
+  regression = only the 5 known failures; analyzer 0.
