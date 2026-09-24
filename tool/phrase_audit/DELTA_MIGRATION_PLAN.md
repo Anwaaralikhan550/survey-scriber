@@ -285,3 +285,12 @@ pass, not net-new sections.
   replacing" the lead pipework. The J4/J3 pointer difference is deferred to the
   Phase 7 cross-inject re-map. Gate 2 = audit All passed; regression = only the
   5 known failures; analyzer 0.
+
+- 2026-09-24 — G4 Heating COMPLETE (bank-only reword). ABOUT_NO_HEATING reworded
+  to the v2 wording (no fixed heating → cold rooms/condensation/mould, adverse
+  EPC and marketability, consider installing heating; drops blanket "No repair
+  is currently needed"). ABOUT_OLD_BOILER reworded (older boiler less efficient
+  / anticipate replacement). DEFERRED (new appliance types needing form options
+  + keys): Air Source Heat Pump, Ground Source Heat Pump, Forced Air Heating —
+  currently the "other heating" path is generic. Gate 2 = audit All passed;
+  regression = only the 5 known failures; analyzer 0.
