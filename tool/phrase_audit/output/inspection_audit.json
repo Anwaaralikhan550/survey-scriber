@@ -12,8 +12,8 @@
   },
   "phrases": {
    "distinctEmitted": 2589,
-   "approvedLegacyBank": 708,
-   "approvedCurrentBankOnly": 1854,
+   "approvedLegacyBank": 702,
+   "approvedCurrentBankOnly": 1860,
    "unapproved": 0
   }
  },
@@ -1431,12 +1431,14 @@
    "severities": [],
    "phraseStats": {
     "total": 7,
-    "approvedLegacy": 6,
-    "approvedCurrentBankOnly": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Where a stream, river or open drain is nearby, the oil storage tank may require secondary containment to prevent a spill entering the water system. This is commonly called a bund and should be assessed by an OFTEC-registered technician."
+    "There is a fuel oil storage tank in the front garden made up of plastic. No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended. Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer. Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak. Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment.",
+    "Where a stream, river or open drain is nearby, the oil storage tank may require secondary containment to prevent a spill entering the water system. This is commonly called a bund and should be assessed by an OFTEC-registered technician.",
+    "There is a fuel oil storage tank in the rear garden made up of plastic. No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended. Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer. Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak. Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment."
    ]
   },
   {

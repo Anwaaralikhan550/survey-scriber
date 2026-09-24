@@ -270,3 +270,10 @@ pass, not net-new sections.
   maintenance … manufacturer's recommendations" tail ({ELE_SO_PV_INST_LOC}
   preserved). Gate 2 = audit All passed; regression = only the 5 known failures;
   analyzer 0.
+
+- 2026-09-24 — G2 Gas COMPLETE (bank-only reword). OIL_TANK_INSPECTED reworded:
+  drops the false "No repair is currently needed"; adds the v2 detail (annual
+  OFTEC servicing, secondary containment/bund near watercourses, OFTEC
+  inspection where any doubt). {GAO_O_LOCATION}/{GAO_O_OIL_ANK_MADE_OF}
+  preserved. (STANDARD_TEXT already carried Gas Safe/OFTEC wording.) Gate 2 =
+  audit All passed; regression = only the 5 known failures; analyzer 0.
