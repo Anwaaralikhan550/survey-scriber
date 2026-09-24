@@ -12,8 +12,8 @@
   },
   "phrases": {
    "distinctEmitted": 2589,
-   "approvedLegacyBank": 710,
-   "approvedCurrentBankOnly": 1852,
+   "approvedLegacyBank": 708,
+   "approvedCurrentBankOnly": 1854,
    "unapproved": 0
   }
  },
@@ -2225,8 +2225,8 @@
    "severities": [],
    "phraseStats": {
     "total": 13,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 11,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -2577,8 +2577,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "General Performance: I walked on the suspended floor surfaces and found them generally to be firm and even to the tread, with no signs of excessive springiness or distortion.",
-    "General Performance: I walked on the suspended floor surfaces and found them to be generally firm; however, I noted creaking to parts of the floors, stairs and minor floor unevenness. Minor creaking to suspended timber floors is common in properties of this age and type and does not necessarily indicate a structural defect. No signs of excessive springiness or distortion were noted."
+    "General Performance: I walked over the accessible suspended floor surfaces and found them to be firm and level underfoot, with no evidence of excessive springiness or distortion. This is based on a visual inspection only, and the condition of concealed floor timbers cannot be confirmed without opening up the structure.",
+    "General Performance: I walked over the accessible suspended floor surfaces and found them to be firm underfoot. Localised creaking and minor unevenness were noted to parts of the floors, stairs and minor floor unevenness. These are not uncommon in properties of this age, and, at the time of inspection, there was no evidence of excessive springiness or significant distortion suggestive of structural failure. This is associated with normal shrinkage or movement between floorboards and joists. Repairs may be undertaken as part of routine maintenance."
    ]
   },
   {

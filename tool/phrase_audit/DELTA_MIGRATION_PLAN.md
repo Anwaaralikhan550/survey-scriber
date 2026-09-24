@@ -207,3 +207,12 @@ Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
   the reworded tail (idx 24 = poor override, unchanged). Any future reword of a
   key that sits inside a space-joined composite must update its verified variant.
   Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — F4 Floors COMPLETE (rewording pass). Token-preserving v2
+  rewordings: FLOOR_CONDITION (keeps {FL_AF_CONDITION}; "consistent with their
+  age and construction" + routine-maintenance tail; drops blanket "No repair is
+  currently needed"), CREAKING_NONE (visual-inspection caveat), CREAKING_NOTED
+  (keeps {FL_CR_STATUS_NOTED}; v2 wording). Engine: added poor-floor override
+  pattern for the reworded FLOOR_CONDITION. Audit needed no verified-variant
+  change. Gate 2 = audit All passed; regression = only the 5 known failures;
+  analyzer 0.
