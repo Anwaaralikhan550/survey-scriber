@@ -393,3 +393,16 @@ the app's own risk-status statements.
   J2 screen/handler and routing the existing H2 tree/retaining-wall risks into it
   is Phase 7 structural work.
   Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — J3 Risks to People COMPLETE (content added; routing deferred).
+  CONTENT GAP: the app's J3 held only two cross-inject destinations (window /
+  outside-door safety hazards). The revised spec defines seven categories.
+  Added as approved keys under {RISK_TO_PEOPLE}: {PEOPLE_TRIP_HAZARDS},
+  {PEOPLE_DAMAGED_STAIRS}, {PEOPLE_ELECTRICAL_SAFETY}, {PEOPLE_GAS_SAFETY},
+  {PEOPLE_ASBESTOS} (the substantial advisory — pre-2000 ACMs, licensed survey,
+  HSE guidance, Control of Asbestos Regulations 2012, cost implications, legal
+  adviser enquiries), {PEOPLE_MOULD_GROWTH} and {PEOPLE_GENERAL_ADVICE}.
+  The spec's markdown bold around the regulations was stripped so no literal
+  asterisks can leak into a report. No tokens invented. Keys are not yet emitted;
+  routing them from the relevant screens is Phase 7.
+  Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
