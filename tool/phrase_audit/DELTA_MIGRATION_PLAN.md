@@ -379,3 +379,17 @@ the app's own risk-status statements.
   wording. Any future reword of a key whose token can resolve empty must check
   the empty-token permutation too.
   Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — J2 Risks to the Grounds COMPLETE (content added; routing deferred).
+  STRUCTURAL FINDING: the app has NO "Risks to the Grounds" section. The tree
+  only contains J1 Risk To Building, J4 Other and "Repair or improve"; J3 content
+  is cross-injected from other sections. The v2 J2 subjects currently live
+  scattered in H2 ({H_OTHER} nearby-trees / retaining-wall keys).
+  Added the three v2 J2 statements as approved keys under a new
+  {RISK_TO_GROUNDS} master: {GROUNDS_INFLUENCING_TREES},
+  {GROUNDS_RETAINING_WALLS}, {GROUNDS_SLOPING_GROUND}. No tokens were invented
+  (the v2 inline option lists have no backing form fields yet), so the wording is
+  generalised rather than tokenised. These keys are not yet emitted — creating the
+  J2 screen/handler and routing the existing H2 tree/retaining-wall risks into it
+  is Phase 7 structural work.
+  Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
