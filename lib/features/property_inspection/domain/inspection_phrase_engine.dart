@@ -13720,15 +13720,28 @@ class InspectionPhraseEngine {
     if (items.isEmpty) return const [];
     // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_TYPE_AREA}
     final template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_TYPE_AREA}');
+    final result = <String>[];
     if (template.isEmpty) {
-      return [
+      result.add(
         'The property is believed to be built using ${_toWords(items)} '
             'construction.',
-      ];
+      );
+    } else {
+      result.addAll(_split(_normalize(
+        template.replaceAll('{CONSTRUCTION_TYPE}', _toWords(items)),
+      )));
     }
-    return _split(_normalize(
-      template.replaceAll('{CONSTRUCTION_TYPE}', _toWords(items)),
-    ));
+    // Spec conditional — "If concrete wall or precast concrete panels are
+    // selected, add this": the mortgage-lending advisory (approved bank
+    // sub-key). The form currently exposes a single concrete construction
+    // checkbox (ch6); precast/system-built as distinct options is a form
+    // parity item tracked separately.
+    if (_isChecked(answers['ch6'])) {
+      final concrete =
+          _sub('{D_CONSTRUCTION}', '{CONCRETE_CONSTRUCTION_ADVISORY}');
+      if (concrete.isNotEmpty) result.addAll(_split(_normalize(concrete)));
+    }
+    return result;
   }
 
   List<String> _propertyBuiltYear(Map<String, String> answers) {

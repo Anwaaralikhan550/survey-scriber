@@ -32,6 +32,49 @@ void main() {
       );
     });
 
+    test(
+        'concrete construction appends the mortgage-lending advisory '
+        '(revised spec)', () {
+      final phrases = engine.buildPhrases(
+        'activity_property_construction',
+        {'ch6': 'true'},
+      );
+      expect(phrases, hasLength(2));
+      expect(
+        phrases.first,
+        'The property is believed to be constructed using concrete frame '
+        'construction.',
+      );
+      expect(
+        phrases[1],
+        'Where the property is of concrete or precast concrete panel '
+        'construction, some lenders may regard this as a non-standard form of '
+        'construction. As a result, the availability of mortgage finance may be '
+        'more limited than for traditionally constructed properties, and some '
+        'lenders may decline to lend altogether. Lending criteria vary between '
+        'mortgage providers and may depend on the specific construction type, '
+        'its condition, and whether any approved repair or certification '
+        'schemes have been carried out. You should make enquiries with your '
+        'proposed lender or an independent mortgage broker at an early stage to '
+        'confirm that satisfactory mortgage finance will be available before '
+        'committing to the purchase.',
+      );
+    });
+
+    test('non-concrete construction emits only the type sentence (no advisory)',
+        () {
+      final phrases = engine.buildPhrases(
+        'activity_property_construction',
+        {'ch3': 'true'},
+      );
+      expect(phrases, hasLength(1));
+      expect(
+        phrases.single,
+        'The property is believed to be constructed using cavity wall '
+        'construction.',
+      );
+    });
+
     test('roof uses CONSTRUCTION_ROOF_AREA without built-with clause', () {
       final phrases = engine.buildPhrases(
         'activity_property_roof',

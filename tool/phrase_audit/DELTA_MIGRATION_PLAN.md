@@ -72,8 +72,42 @@ version already implemented in Stream B — no delta there.
   information…" / "Unless documentary evidence is available…"), token
   `{PRO_BUILT_YEAR}` preserved, single-line diff. Gate 2 audit = All tests
   passed (0 defect).
-  Still open in Part-1: concrete/precast construction paragraph (new key +
-  new construction option + wiring), the tree dropdown-option additions
-  (steel frame / lath and plaster / secondary glazing / timber decking /
-  underground parking / "train lines or a station" / "adopted public road"),
-  and the Overall-opinion "fair" rating (per user: add as spec-mandated).
+- 2026-09-24 — Phase 1 apply (2/4): Construction conditional paragraphs.
+  * NEW bank key `{D_CONSTRUCTION}::{CONCRETE_CONSTRUCTION_ADVISORY}` — the
+    revised spec's mortgage-lending advisory (verbatim, token-free), wired in
+    `_propertyConstruction` to fire when the concrete construction checkbox
+    (ch6) is selected. Two proof tests added (concrete → type sentence +
+    advisory; non-concrete → type sentence only).
+  * `{D_CONSTRUCTION}::{CONDITION_TYPE_OF_CONSTRUCTION}` (Modern Building
+    Design) reworded to the revised spec: "of a modern design", "framed
+    externally", "steel, or other", "sides by cladding", "Please be aware",
+    "require specialist advice". Text-only; HTML/`\r\n` wrappers preserved.
+  Gate 2 = only the 5 known pre-existing failures; permutation audit passed;
+  0 analyzer errors.
+
+  DISCOVERED SPEC-GAP (parked for decision, not silently changed): the spec
+  says "If timber or steel frame is selected, add this Modern Building
+  Design…", but that paragraph is currently NEVER emitted by the engine (the
+  key is referenced only inside the unused `{D_CONSTRUCTION}` parent template).
+  Wiring it changes existing report output and requires updating a golden
+  test, so it is deferred to the Overall-opinion decision batch rather than
+  piggy-backed here.
+
+  Still open in Part-1 (client/scope decision — see stop-gate):
+  * Overall-opinion rating: app dropdown is a 2-mode model
+    (Reasonable / Reasonable with repair) and the engine emits text ONLY for
+    those two; the revised spec's "reasonable, good, fair, poor proposition"
+    is a different (quality) axis with NO source paragraph text for
+    good/fair/poor. Adding "fair" as a bare option would yield empty report
+    text (a latent bug), so the model reconciliation needs a decision.
+  * Whether to add "precast concrete panels" / "system-built" as distinct
+    construction checkboxes (form parity) — today only one concrete checkbox
+    exists; the advisory already fires from it.
+  * Whether to wire the timber/steel Modern Building Design conditional
+    (discovered gap above).
+
+  NOTE — corrected earlier scope error: the tree dropdown-option additions
+  (steel frame / lath & plaster / secondary glazing / timber decking /
+  underground parking / "train lines or a station" / "adopted public road")
+  are NOT Part-1; each belongs to its own element and is verified in that
+  element's phase (walls→E/F, windows→F, grounds→E, parking→D, etc.).
