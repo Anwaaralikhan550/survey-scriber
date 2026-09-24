@@ -12,8 +12,8 @@
   },
   "phrases": {
    "distinctEmitted": 2588,
-   "approvedLegacyBank": 679,
-   "approvedCurrentBankOnly": 1882,
+   "approvedLegacyBank": 673,
+   "approvedCurrentBankOnly": 1888,
    "unapproved": 0
   }
  },
@@ -962,10 +962,13 @@
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The building is served by one or more passenger lifts. These are specialist installations and were not inspected or assessed as part of this survey. Your legal adviser should confirm that appropriate inspection, maintenance, and servicing arrangements are in place."
+   ]
   },
   {
    "sectionKey": "H",
@@ -1026,10 +1029,15 @@
    "severities": [],
    "phraseStats": {
     "total": 5,
-    "approvedLegacy": 5,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The property is in an area that may be at risk of flooding because it is in a low lying area. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report.",
+    "The property is in an area that may be at risk of flooding because it is next to a river. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report.",
+    "The property is in an area that may be at risk of flooding because it is next to a canal. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report."
+   ]
   },
   {
    "sectionKey": "H",

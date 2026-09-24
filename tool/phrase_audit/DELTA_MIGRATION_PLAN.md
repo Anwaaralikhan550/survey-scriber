@@ -50,7 +50,7 @@ version already implemented in Stream B — no delta there.
 | 1 | Part 1 (Year-built, Construction conditionals, Overall-opinion ratings, form parity) | ✅ |
 | 2 | Section F (F1–F9) | ✅ |
 | 3 | Section G (G1–G7; G5/G6/G7 already existed) | ✅ |
-| 4 | Section H (H1–H3) | ⬜ |
+| 4 | Section H (H1–H3) | ✅ |
 | 5 | Section I (I1–I3) | ⬜ |
 | 6 | Section J (J1–J4) | ⬜ |
 | 7 | Cross-injection re-map + integrity test | ⬜ |
@@ -335,3 +335,11 @@ pass, not net-new sections.
   liabilities); I1 pointer preserved. (Retaining-wall key already carried the
   fuller v2 advisory with J3/I3 pointers.) Gate 2 = audit All passed; regression
   = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — H3 Other COMPLETE (bank-only reword). FLOODING reworded to the v2
+  wording ("may be at risk of flooding"; legal adviser to make enquiries / obtain
+  an environmental or flood risk report; {OA_FLOODING_AREA} preserved). LIFTS
+  reworded (passenger lifts are specialist installations, not assessed; legal
+  adviser to confirm inspection/maintenance/servicing arrangements). SECTION H
+  COMPLETE. Gate 2 = audit All passed; regression = only the 5 known failures;
+  analyzer 0.
