@@ -225,3 +225,13 @@ Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
   preserved). BLOCKED_FIREPLACE_UNVENTED reworded to the v2 moisture-risk
   advisory (tokens preserved). Gate 2 = audit All passed; regression = only the
   5 known failures; analyzer 0; no verified-variant change needed.
+
+- 2026-09-24 — F6 Built-in Fittings (incl. Kitchen) COMPLETE (bank-only reword).
+  BUILT_IN_FITTINGS main description reworded: drops the false "No repair is
+  currently needed. The property must be maintained in the normal way." and adds
+  the v2 "Routine adjustment and maintenance should be expected with normal use"
+  tail. All 4 tokens preserved. DEFERRED (new content needing new form fields on
+  the built-in-fittings screen, tracked for a later pass): the v2 Kitchen Sink,
+  Built-in Appliances ("have not been assessed") and Extractor Fan blocks — the
+  current form has no sink/appliance/extractor capture fields. Gate 2 = audit
+  All passed; regression = only the 5 known failures; analyzer 0.
