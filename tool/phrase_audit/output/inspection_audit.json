@@ -4409,9 +4409,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is located close to the airport and associated flight paths. This is an environmental feature that may influence your enjoyment of the property, its future marketability, or materially affect the property. Where environmental concerns exist, you should make your own enquiries before legal commitment.",
-    "The property is located close to a train station. This is an environmental feature that may influence your enjoyment of the property, its future marketability, or materially affect the property. Where environmental concerns exist, you should make your own enquiries before legal commitment.",
-    "The property is located close to a train line. This is an environmental feature that may influence your enjoyment of the property, its future marketability, or materially affect the property. Where environmental concerns exist, you should make your own enquiries before legal commitment."
+    "The property is located close to an airport and/or flight path. Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",
+    "The property is located close to a railway station. Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",
+    "The property is located close to a railway line. Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property."
    ]
   },
   {
@@ -4428,7 +4428,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "As regards wants of repair, you are most strongly advised to obtain competitive quotations from reputable contractors before you exchange contracts. As soon as you receive the quotations and reports and also the responses from your legal adviser, I will be pleased to advise whether or not these would cause us to change the advice or valuation which I give in this report. Only when you have all this information before you will you be fully equipped to make a reasoned and informed judgement on whether or not to proceed with the purchase. Remedial works could be costly, and quotations are required to determine this. I must advise you however that if you decided to exchange contracts without obtaining this information, you would have to accept the risk that adverse factors might come to light in the future."
+    "Further Investigations and Repairs: Where repairs or further investigations are recommended, you should obtain quotations from suitably qualified and reputable contractors before exchanging contracts. The results of these investigations, together with advice from your legal adviser, may influence your decision to proceed or the price you are prepared to pay. Until these enquiries have been completed, the extent and cost of any necessary remedial works cannot be confirmed. Proceeding with the purchase before obtaining this information means accepting the risk that additional defects or costs may become apparent after completion."
    ]
   },
   {

@@ -52,7 +52,7 @@ version already implemented in Stream B — no delta there.
 | 3 | Section G (G1–G7; G5/G6/G7 already existed) | ✅ |
 | 4 | Section H (H1–H3) | ✅ |
 | 5 | Section I (I1–I3) | ✅ |
-| 6 | Section J (J1–J4) | ⬜ |
+| 6 | Section J (J1–J4) | ✅ |
 | 7 | Cross-injection re-map + integrity test | ⬜ |
 | 8 | End-to-end validation + updated client dossier + sign-off | ⬜ |
 
@@ -406,3 +406,17 @@ the app's own risk-status statements.
   asterisks can leak into a report. No tokens invented. Keys are not yet emitted;
   routing them from the relevant screens is Phase 7.
   Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — J4 Other risks COMPLETE (bank-only reword). The app used ONE
+  generic "environmental feature" sentence for every proximity; the revised spec
+  gives category-specific reasons, now applied: OTHER_PROXIMITY_AIRPORT
+  (aircraft operations → noise/disturbance), OTHER_PROXIMITY_TRAIN_STATION (rail
+  operations, passenger activity, traffic, noise), OTHER_PROXIMITY_TRAIN_LINE
+  (passing trains → noise and vibration), OTHER_PROXIMITY_MOTORWAY (traffic
+  noise, air quality). OTHER_REPAIR_IMPROVE replaced with the v2 "Further
+  Investigations and Repairs" wording (obtain quotations before exchange; results
+  may influence decision/price; proceeding early accepts the risk of further
+  defects/costs) — this also removes the first-person "I will be pleased to
+  advise" offer. OTHER_PROXIMITY_OTHER keeps its {OTHER_NAME} token.
+  SECTION J COMPLETE. Gate 2 = audit All passed; regression = only the 5 known
+  failures; analyzer 0.
