@@ -137,3 +137,29 @@ version already implemented in Stream B — no delta there.
   ch1 emits "traditional materials and techniques" but the spec (v1 and v2)
   says "traditional masonry". Left unchanged to avoid an unrequested output
   change; can be corrected if desired.
+
+## Phase 2 — Section F (in progress)
+
+### F1 Roof Structure — analysis (v1↔v2 vs current bank)
+The current bank is already a comprehensive L2 migration and covers most F1
+sub-blocks. Genuine v2 work items for F1:
+- NEW content blocks (no bank key today; each needs a form trigger field +
+  engine wiring + bank key):
+  * Spray-foam insulation advisory (mortgageability / insurability / removal).
+  * Capped soil-vent-pipe terminating in the roof space.
+  * Evidence of water penetration (staining/dampness on timbers/underlay).
+- EXPANDED: chimney-breast alterations — adequate / poor / risk-of-collapse
+  ratings, carrying NEW cross-injects to J1 (risk to building) and I1
+  (regulation). Current bank has a partial composite
+  ({REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED} with INSPECTED_OK / POOR_SUPPORT /
+  RISK_TO_COLLAPSE / DAMP_CHIMNEY) — reconcile wording + wire the cross-injects.
+- REWORDINGS on existing keys (verify each against v2 text before applying).
+- NOT bank edits (token/option lists → tree/form): condition-rating adjective
+  lists (good/reasonable/fair/poor/very poor), underlay material lists
+  (traditional bituminous felt / breathable membrane / timber boards / other),
+  ventilation adjective lists. Handle these as option-parity in the form.
+
+Execution order for F1: (a) rewordings on existing keys [low risk] →
+(b) chimney-breast reconciliation + J1/I1 cross-injects → (c) new content
+blocks (spray foam, capped SVP, water penetration) with their form triggers.
+Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
