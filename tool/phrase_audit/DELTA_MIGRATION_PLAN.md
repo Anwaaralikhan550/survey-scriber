@@ -46,7 +46,7 @@ version already implemented in Stream B — no delta there.
 ## Phases
 | Phase | Scope | Status |
 |---|---|---|
-| 0 | Foundation: clean per-element spec extraction, diff tooling, baseline audit | 🟡 In progress |
+| 0 | Foundation: clean per-element spec extraction, diff tooling, baseline audit | ✅ |
 | 1 | Part 1 (Year-built, Construction conditionals, Overall-opinion ratings, form parity) | ✅ |
 | 2 | Section F (F1–F9) | ⬜ |
 | 3 | Section G (G1–G7, incl. new G5/G6/G7) | ⬜ |
