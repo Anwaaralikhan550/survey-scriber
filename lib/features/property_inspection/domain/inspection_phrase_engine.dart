@@ -957,6 +957,16 @@ class InspectionPhraseEngine {
           ),
           'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
         );
+        // Revised-spec ABOUT_CONDITION wording (F2 delta): "the ceilings
+        // appear in <rating> condition, consistent with their age and
+        // construction. … Routine maintenance … should be expected."
+        phrase = phrase.replaceAll(
+          RegExp(
+            r'Where visible, the ceilings appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition, consistent with their age and construction\. No significant defects requiring immediate attention were identified unless otherwise stated below\. Routine maintenance appropriate to the ceiling material should be expected\.',
+            caseSensitive: false,
+          ),
+          'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
+        );
       }
       if (poorCondition &&
           screenId.startsWith(

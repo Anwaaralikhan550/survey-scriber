@@ -180,3 +180,17 @@ Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
     ventilation adjective lists are {TOKEN}-backed dropdown options.
   Gate 2 = permutation audit All passed; feature regression = only the 5 known
   pre-existing failures; analyzer 0 errors; both asset JSONs valid.
+
+- 2026-09-24 — F2 Ceilings COMPLETE (rewording pass — bank already had every
+  sub-block, so no new keys/screens). Token-preserving rewordings to v2:
+  ABOUT_CONDITION (adds "consistent with their age and construction"; drops the
+  blanket "No repair is currently needed"), IF_LATH_AND_PLASTER_IS_SELECTED
+  (pre-1940s lath detail), IF_TEXTURED_IS_SELECTED (asbestos-containing
+  materials), POLYSTYRENE (full fire-safety advisory), HEAVY_PAPER_LINING,
+  ORNAMENTAL_PLASTER (keeps {CER_OP_DEFECT} + J3 pointer), CRACKS (keeps
+  {CE_CR_NOTED}; "shrinkage or settlement"). Section pointers (J1/J3) preserved.
+  Engine: added a poor-condition override pattern for the reworded ABOUT_CONDITION
+  so a poor ceiling still reads "unsatisfactory condition … repairs or renewal"
+  (regression caught by the professional-cleanup test and fixed).
+  Gate 2 = permutation audit All passed; feature regression = only the 5 known
+  pre-existing failures; analyzer 0 errors; 7 keys changed, 0 tokens lost.

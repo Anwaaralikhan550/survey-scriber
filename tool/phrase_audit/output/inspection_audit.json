@@ -2504,9 +2504,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Cracking: Minor shrinkage cracking was observed to the ceiling junction with walls. Such cracking is common in properties of this age and type and is not generally considered structurally significant. The cracks may be filled and redecorated during routine maintenance.",
-    "Cracking: Minor shrinkage cracking was observed to the plasterboard joints. Such cracking is common in properties of this age and type and is not generally considered structurally significant. The cracks may be filled and redecorated during routine maintenance.",
-    "Cracking: Minor shrinkage cracking was observed to the ceiling surfaces. Such cracking is common in properties of this age and type and is not generally considered structurally significant. The cracks may be filled and redecorated during routine maintenance."
+    "Cracking: Minor shrinkage or settlement cracking was observed to the ceiling junction with walls. Such cracking is common in properties of this age and type and is not considered structurally significant. The cracks may be adequately filled with appropriate material and redecorated during routine maintenance.",
+    "Cracking: Minor shrinkage or settlement cracking was observed to the plasterboard joints. Such cracking is common in properties of this age and type and is not considered structurally significant. The cracks may be adequately filled with appropriate material and redecorated during routine maintenance.",
+    "Cracking: Minor shrinkage or settlement cracking was observed to the ceiling surfaces. Such cracking is common in properties of this age and type and is not considered structurally significant. The cracks may be adequately filled with appropriate material and redecorated during routine maintenance."
    ]
   },
   {
@@ -2523,9 +2523,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The ceiling includes ornamental plaster features. This is very loose (See Section J3 - Risks). This should be repaired now. Although some damage may be superficial, ornamental plasterwork can be heavy, and its loss of fixing presents a falling hazard.",
-    "The ceiling includes ornamental plaster features. This is badly cracked (See Section J3 - Risks). This should be repaired now. Although some damage may be superficial, ornamental plasterwork can be heavy, and its loss of fixing presents a falling hazard.",
-    "The ceiling includes ornamental plaster features. This is partly missing (See Section J3 - Risks). This should be repaired now. Although some damage may be superficial, ornamental plasterwork can be heavy, and its loss of fixing presents a falling hazard."
+    "Ornamental Plaster: The ceiling incorporates ornamental plaster features, some of which were found to be very loose (See Section J3 - Risks). These defects present a safety hazard, as sections may become detached and fall. A suitably qualified plastering contractor should inspect the affected areas and carry out appropriate repairs or replacement without delay. Localised repairs may be possible; however, where deterioration is extensive, complete replacement of the affected ornamental plasterwork may be necessary, resulting in more extensive and costly remedial works.",
+    "Ornamental Plaster: The ceiling incorporates ornamental plaster features, some of which were found to be badly cracked (See Section J3 - Risks). These defects present a safety hazard, as sections may become detached and fall. A suitably qualified plastering contractor should inspect the affected areas and carry out appropriate repairs or replacement without delay. Localised repairs may be possible; however, where deterioration is extensive, complete replacement of the affected ornamental plasterwork may be necessary, resulting in more extensive and costly remedial works.",
+    "Ornamental Plaster: The ceiling incorporates ornamental plaster features, some of which were found to be partly missing (See Section J3 - Risks). These defects present a safety hazard, as sections may become detached and fall. A suitably qualified plastering contractor should inspect the affected areas and carry out appropriate repairs or replacement without delay. Localised repairs may be possible; however, where deterioration is extensive, complete replacement of the affected ornamental plasterwork may be necessary, resulting in more extensive and costly remedial works."
    ]
   },
   {
@@ -3271,7 +3271,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Polystyrene Ceiling Tiles: The ceilings incorporate polystyrene ceiling tiles. These should be regarded as a potential fire hazard, and replacement should be considered during future refurbishment (See Section J3 - Risks)."
+    "Polystyrene Ceiling Tiles: Parts of the ceilings are covered with polystyrene tiles, which present a fire safety risk. Polystyrene is highly flammable and, if ignited, can contribute to the rapid spread of fire while releasing dense, toxic smoke and harmful fumes that can significantly increase the risk to occupants. Although these tiles may have been acceptable when installed, they no longer meet modern fire safety expectations. They should be removed as soon as practicable by a competent contractor. Be aware that removal may damage the underlying ceiling, particularly if the tiles have been firmly bonded, and repairs or complete replacement of the ceiling finish may be required (See Section J3 - Risks)."
    ]
   },
   {
@@ -3492,7 +3492,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Heavy Decorative Finishes: The ceilings are covered with lining paper, decorative coverings, or other applied finishes. Although I could see no problems now, these finishes may conceal minor defects and may require local repairs when removed during future redecoration."
+    "Heavy Decorative Finishes: The ceilings are covered with heavy lining paper, decorative finishes, or similar coverings. No significant defects were evident at the time of inspection; however, these finishes can conceal minor cracking or other imperfections. Their removal during future redecoration may damage the underlying plaster, and you should allow for localised repairs or re-plastering."
    ]
   },
   {
