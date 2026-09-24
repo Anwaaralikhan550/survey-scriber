@@ -277,3 +277,11 @@ pass, not net-new sections.
   inspection where any doubt). {GAO_O_LOCATION}/{GAO_O_OIL_ANK_MADE_OF}
   preserved. (STANDARD_TEXT already carried Gas Safe/OFTEC wording.) Gate 2 =
   audit All passed; regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — G3 Water COMPLETE (bank-only, minimal). G3 was already
+  substantively v2-aligned (stopcock/standard-text match; the revised water-tank
+  blocks map to F1 roof-structure water-tank keys). One genuine v2 addition:
+  LEAD_RISING gains "obtain advice from your water supplier and consider
+  replacing" the lead pipework. The J4/J3 pointer difference is deferred to the
+  Phase 7 cross-inject re-map. Gate 2 = audit All passed; regression = only the
+  5 known failures; analyzer 0.
