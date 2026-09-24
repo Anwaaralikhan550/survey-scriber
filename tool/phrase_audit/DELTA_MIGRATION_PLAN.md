@@ -216,3 +216,12 @@ Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
   pattern for the reworded FLOOR_CONDITION. Audit needed no verified-variant
   change. Gate 2 = audit All passed; regression = only the 5 known failures;
   analyzer 0.
+
+- 2026-09-24 — F5 Fireplaces, Chimney Breasts & Flues COMPLETE (rewording pass,
+  bank-only). All six appliance condition keys (open fire / gas / electric /
+  imitation / wood-burning / other) reworded to drop the false "No repair is
+  currently needed" tail and add "consistent with their age and construction"
+  (fixes the poor-condition-says-no-repair complaint for fireplaces; tokens
+  preserved). BLOCKED_FIREPLACE_UNVENTED reworded to the v2 moisture-risk
+  advisory (tokens preserved). Gate 2 = audit All passed; regression = only the
+  5 known failures; analyzer 0; no verified-variant change needed.

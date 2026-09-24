@@ -2610,7 +2610,7 @@
    },
    "editedBankSamples": [
     "Fireplace Openings: The fireplace in the ground, first, second and sample detail floor lounge, reception(s), dining room, kitchen, bedroom(s) and sample detail is blocked and vented. Where fireplaces have been blocked or sealed, adequate ventilation should be maintained where appropriate.",
-    "Fireplace Openings: The fireplace in the ground, first, second and sample detail floor lounge, reception(s), dining room, kitchen, bedroom(s) and sample detail is blocked and unvented. When a fireplace in an external chimney breast is taken out, and the opening blocked up, the disused flue needs additional ventilation. If none has been installed, the disused flue should be fitted with ventilating air bricks to the outside air. This should be done soon."
+    "Fireplace Openings: The fireplace in the ground, first, second and sample detail floor lounge, reception(s), dining room, kitchen, bedroom(s) and sample detail has been sealed, but no ventilation to the redundant flue was evident. Unventilated flues can trap moisture, increasing the risk of dampness, condensation, and deterioration of the chimney structure. A suitably qualified contractor should inspect the flue and install appropriate permanent ventilation, such as ventilating air bricks or flue vents, where required. This work should be carried out soon to reduce the risk of moisture-related defects."
    ]
   },
   {
@@ -3761,9 +3761,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Where visible, these appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Where visible, these appear in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Where visible, these appear in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
+    "Where visible, these appear in reasonable condition, consistent with their age and construction.",
+    "Where visible, these appear in satisfactory condition, consistent with their age and construction.",
+    "Where visible, these appear in unsatisfactory and poor condition, consistent with their age and construction."
    ]
   },
   {
