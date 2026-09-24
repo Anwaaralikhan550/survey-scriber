@@ -692,7 +692,7 @@
   "{G_WATER_HEATING}::{CONDITION_RATING}": "Condition rating is: {WH_COND_RATING}.",
   "{G_WATER_HEATING}::{NOTES}": "<strong>Note:<br />\\r\\n{WH_NOTES}</strong>",
   "{G_COMMON_SERVICES}::{NOT_APPLICABLE}": "Other than the possibility of the drainage system being shared, there are no other common services to this property.{COMMON_SERVICES}",
-  "{G_COMMON_SERVICES}::{COMMON_SERVICES}": "{CS_COMM_SERVICES}, which are specialist installations shared with neighbouring property or properties. These services will be subject to appropriate maintenance contracts. Your legal advisers should verify that appropriate maintenance contracts are in place. These services have not been specifically tested.",
+  "{G_COMMON_SERVICES}::{COMMON_SERVICES}": "{CS_COMM_SERVICES}, which are specialist installations shared with neighbouring property or properties. These installations are normally subject to maintenance contracts. Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs. These services have not been specifically tested.",
   "{G_COMMON_SERVICES}::{CONDITION_RATING}": "Condition rating is: {CS_COND_RATIING}.",
   "{G_COMMON_SERVICES}::{NOTES}": "<strong>Note:<br />\\r\\n{CS_NOTES}</strong>",
   "{G_COMMON_SERVICES}::{NOT_INSPECTED}": "Other than the possibility of the drainage system being shared, there are no other common services to this property.",

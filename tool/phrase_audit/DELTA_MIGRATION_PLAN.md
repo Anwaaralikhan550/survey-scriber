@@ -49,7 +49,7 @@ version already implemented in Stream B — no delta there.
 | 0 | Foundation: clean per-element spec extraction, diff tooling, baseline audit | ✅ |
 | 1 | Part 1 (Year-built, Construction conditionals, Overall-opinion ratings, form parity) | ✅ |
 | 2 | Section F (F1–F9) | ✅ |
-| 3 | Section G (G1–G7, incl. new G5/G6/G7) | ⬜ |
+| 3 | Section G (G1–G7; G5/G6/G7 already existed) | ✅ |
 | 4 | Section H (H1–H3) | ⬜ |
 | 5 | Section I (I1–I3) | ⬜ |
 | 6 | Section J (J1–J4) | ⬜ |
@@ -309,3 +309,10 @@ pass, not net-new sections.
   legal adviser to confirm ownership, maintenance responsibilities, permits/
   exemptions and compliance / records of emptying). Gate 2 = audit All passed;
   regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — G7 Common Services COMPLETE (bank-only reword; G7 already existed
+  from the original migration). COMMON_SERVICES reworded to the v2 wording and
+  gains "establish your responsibilities for any associated service charges or
+  future repair costs" ({CS_COMM_SERVICES} preserved). SECTION G COMPLETE — all
+  of G was a rewording pass; G5/G6/G7 were NOT net-new (already migrated). Gate 2
+  = audit All passed; regression = only the 5 known failures; analyzer 0.

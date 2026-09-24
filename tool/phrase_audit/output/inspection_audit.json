@@ -12,8 +12,8 @@
   },
   "phrases": {
    "distinctEmitted": 2588,
-   "approvedLegacyBank": 694,
-   "approvedCurrentBankOnly": 1867,
+   "approvedLegacyBank": 685,
+   "approvedCurrentBankOnly": 1876,
    "unapproved": 0
   }
  },
@@ -1231,10 +1231,15 @@
    "severities": [],
    "phraseStats": {
     "total": 11,
-    "approvedLegacy": 11,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 2,
+    "approvedCurrentBankOnly": 9,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Communal drain, which are specialist installations shared with neighbouring property or properties. These installations are normally subject to maintenance contracts. Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs. These services have not been specifically tested.",
+    "Grounds maintenance, which are specialist installations shared with neighbouring property or properties. These installations are normally subject to maintenance contracts. Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs. These services have not been specifically tested.",
+    "Cleaning, which are specialist installations shared with neighbouring property or properties. These installations are normally subject to maintenance contracts. Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs. These services have not been specifically tested."
+   ]
   },
   {
    "sectionKey": "G",
