@@ -51,7 +51,7 @@ version already implemented in Stream B — no delta there.
 | 2 | Section F (F1–F9) | ✅ |
 | 3 | Section G (G1–G7; G5/G6/G7 already existed) | ✅ |
 | 4 | Section H (H1–H3) | ✅ |
-| 5 | Section I (I1–I3) | ⬜ |
+| 5 | Section I (I1–I3) | ✅ |
 | 6 | Section J (J1–J4) | ⬜ |
 | 7 | Cross-injection re-map + integrity test | ⬜ |
 | 8 | End-to-end validation + updated client dossier + sign-off | ⬜ |
@@ -352,3 +352,11 @@ pass, not net-new sections.
   to the v2 wording (confirm listed status and grade; Listed Building Consent;
   traditional materials/specialist contractors increasing maintenance costs).
   Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — I3 Other Matters COMPLETE (bank-only reword). OTHER_MATTERS_PARTY_WALLS
+  reworded to the v2 wording (shares walls/structural elements; legal implications
+  including the Party Wall etc. Act 1996 where applicable). OTHER_MATTERS_FREEHOLD
+  reworded to the fuller v2 wording (tenure, vacant possession, restrictive
+  covenants/easements/rights of way, estate rent charges/management obligations,
+  managed-estate enquiries). SECTION I COMPLETE. Gate 2 = audit All passed;
+  regression = only the 5 known failures; analyzer 0.
