@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2590,
-   "approvedLegacyBank": 713,
-   "approvedCurrentBankOnly": 1850,
+   "distinctEmitted": 2589,
+   "approvedLegacyBank": 710,
+   "approvedCurrentBankOnly": 1852,
    "unapproved": 0
   }
  },
@@ -2170,9 +2170,9 @@
    "permutationCount": 23,
    "severities": [],
    "phraseStats": {
-    "total": 22,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 19,
+    "total": 21,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 21,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -2195,7 +2195,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Hollow Plaster: Localised hollow-sounding plaster was identified when tapped. This commonly indicates a loss of adhesion between the plaster and the background surface. Repairs may be required where affected areas become loose or detached, and this can be difficult to repair as large areas of plaster can be dislodged by the repair work itself.",
+    "Hollow Plaster: Localised areas of hollow-sounding plaster were noted. This usually indicates that the plaster has lost adhesion to the underlying surface. Although stable at the time of inspection, affected areas may become loose or detached over time. Localised repairs may be possible; however, where deterioration is more extensive, or the plaster becomes unstable, it may be more practical and cost-effective to remove and replace the affected section. Repairs can be undertaken as part of routine maintenance or redecoration, as necessary.",
     "Hollow Plaster: Large areas of hollow-sounding plaster were identified when tapped, indicating a loss of adhesion between the plaster and the background surface over a wide area. This will be difficult to repair, as large areas of plaster will be dislodged by the repair work itself. It may be economical to replace the whole of the plaster."
    ]
   },

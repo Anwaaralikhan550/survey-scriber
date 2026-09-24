@@ -194,3 +194,16 @@ Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
   (regression caught by the professional-cleanup test and fixed).
   Gate 2 = permutation audit All passed; feature regression = only the 5 known
   pre-existing failures; analyzer 0 errors; 7 keys changed, 0 tokens lost.
+
+- 2026-09-24 — F3 Walls & Partitions COMPLETE (rewording pass). Token-preserving
+  v2 rewordings: WALL_CONDITION (keeps {WAP_WALLS_CONDITION}; "consistent with
+  their age and construction" + routine-maintenance tail, drops blanket "No
+  repair is currently needed"), IF_LATH_AND_PLASTER_IS_SELECTED,
+  IF_TEXTURED_IS_SELECTED (+J4 pointer preserved), IF_HOLLOW_IS_SELECTED.
+  Engine: added poor-wall override pattern for the reworded WALL_CONDITION.
+  IMPORTANT LESSON: WALL_CONDITION is space-joined into the wap-walls composite,
+  which the audit matches via a full-composite entry in
+  tool/phrase_audit/reference/verified_variants.json — updated variant idx 23 to
+  the reworded tail (idx 24 = poor override, unchanged). Any future reword of a
+  key that sits inside a space-joined composite must update its verified variant.
+  Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
