@@ -294,3 +294,11 @@ pass, not net-new sections.
   + keys): Air Source Heat Pump, Ground Source Heat Pump, Forced Air Heating —
   currently the "other heating" path is generic. Gate 2 = audit All passed;
   regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — G5 Water Heating COMPLETE (bank-only reword; G5 already existed
+  from the original migration). SOLAR_WATER_HEATING reworded to the v2 solar-
+  thermal wording (supplements domestic hot water; visual only; routine
+  maintenance per manufacturer; legal adviser to verify Building Regs approval /
+  commissioning / warranties). I1 pointer preserved; removed the mismatched
+  "National Grid" reference (that belongs to PV electricity, not solar thermal).
+  Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.

@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2589,
-   "approvedLegacyBank": 699,
-   "approvedCurrentBankOnly": 1863,
+   "distinctEmitted": 2588,
+   "approvedLegacyBank": 696,
+   "approvedCurrentBankOnly": 1865,
    "unapproved": 0
   }
  },
@@ -1784,11 +1784,15 @@
    "permutationCount": 3,
    "severities": [],
    "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 0,
+    "total": 2,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Solar Water Heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply. The installation was inspected visually only, and no operational testing or assessment of performance was undertaken. Routine maintenance should be carried out in accordance with the manufacturer’s recommendations.",
+    "The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection. Your legal adviser should verify that any required Building Regulations approval, commissioning documentation and any available warranties or guarantees are provided (See Section I1 - Regulations)."
+   ]
   },
   {
    "sectionKey": "G",
