@@ -257,3 +257,16 @@ Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
   preserved. (Communal-area keys already carried the v2 "consistent with their
   age, construction and use" wording and I1/I3 pointers.) SECTION F COMPLETE.
   Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
+
+## Phase 3 — Section G (in progress)
+NOTE: G5/G6/G7 already exist in the bank ({G_WATER_HEATING}, {G_DRAINAGE},
+{G_COMMON_SERVICES}) from the original migration, so Section G is a rewording
+pass, not net-new sections.
+
+- 2026-09-24 — G1 Electricity COMPLETE (bank-only reword). STANDARD_TEXT_2
+  reworded to the revised EICR wording (intervals not exceeding ten years /
+  change of ownership; NICEIC or NAPIT registered contractor; EICR terminology).
+  SOLAR_POWER_INSTALLED_LOCATION gains the v2 "No significant defects … Routine
+  maintenance … manufacturer's recommendations" tail ({ELE_SO_PV_INST_LOC}
+  preserved). Gate 2 = audit All passed; regression = only the 5 known failures;
+  analyzer 0.
