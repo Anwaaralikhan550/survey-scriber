@@ -175,6 +175,13 @@
       "reviewedIn": "inspection_phrase_engine.dart _wallsAndPartitionsAbout, transformed by the poor-condition safeguard in the professional-cleanup pass",
       "reason": "Same merged-composition class as the sibling entry above, for the branch where condition is Poor/Unsatisfactory: the professional-cleanup pass rewrites the WALL_CONDITION clause into the unsatisfactory-condition sentence (see PROFESSIONAL_CONDITION::WALLS_UNSATISFACTORY), which then stays merged with the WALL_TYPE and WALL_FINISHES sentences ahead of it for the same single-space-join reason.",
       "template": "Wall Construction: The internal walls and partitions of the building are of {WAP_WALLS_TYPE} partitions. Wall Finishes: These have {WAP_WALLS_FINISHES} {WAP_WALLS_FINISHES_TYPE} finishes. Routine redecoration appropriate to the age and condition of the property should be expected. These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established."
+    },
+    {
+      "master": "{RISK_TO_BUILDING}",
+      "subCode": "{BUILDING_SUBSIDENCE_STATUS_INVESTIGATE}",
+      "reviewedIn": "J1-delta-2026-09",
+      "reason": "Empty subsidence-location permutation: handler drops \"around <loc>\", leaving \"stepped cracking.\"; approved variant of the revised (structural-engineer/before-exchange) wording.",
+      "template": "There are signs that the property appears to be affected by subsidence as evidenced by stepped cracking. This does not appear to be within acceptable tolerance. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts."
     }
   ]
 }

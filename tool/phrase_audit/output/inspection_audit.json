@@ -12,8 +12,8 @@
   },
   "phrases": {
    "distinctEmitted": 2588,
-   "approvedLegacyBank": 671,
-   "approvedCurrentBankOnly": 1890,
+   "approvedLegacyBank": 669,
+   "approvedCurrentBankOnly": 1892,
    "unapproved": 0
   }
  },
@@ -4385,14 +4385,14 @@
    "severities": [],
    "phraseStats": {
     "total": 14,
-    "approvedLegacy": 10,
-    "approvedCurrentBankOnly": 4,
+    "approvedLegacy": 8,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
+    "There are signs that the property has been affected by structural movement as evidenced by cracking and general distortion to walls and around openings. This does not appear to be within acceptable tolerance. Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",
     "There are signs that the property appears to be affected by minor subsidence as evidenced by stepped cracking. This appears to be within acceptable tolerance, however, should the movement continue, I would recommend that you seek further advice from a qualified person.",
-    "There are signs that the property appears to be affected by subsidence as evidenced by stepped cracking. This does not appear to be within acceptable tolerance. I recommend that you contact a qualified person for further investigation and advice.",
-    "Evidence of timber decay or wood-boring insect activity was observed within the property. Further investigation is required on all timbers to be categorical regarding its extent. Reports and quotations should be obtained from an appropriately qualified person before purchase commitment."
+    "There are signs that the property appears to be affected by subsidence as evidenced by stepped cracking. This does not appear to be within acceptable tolerance. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts."
    ]
   },
   {

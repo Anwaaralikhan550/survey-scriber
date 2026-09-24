@@ -360,3 +360,22 @@ pass, not net-new sections.
   covenants/easements/rights of way, estate rent charges/management obligations,
   managed-estate enquiries). SECTION I COMPLETE. Gate 2 = audit All passed;
   regression = only the 5 known failures; analyzer 0.
+
+## Phase 6 — Section J (in progress)
+NOTE: J is largely populated by cross-injects from other sections, so the bulk
+of the J work is the Phase 7 cross-inject re-map. Per-element passes here cover
+the app's own risk-status statements.
+
+- 2026-09-24 — J1 Risks to the Building COMPLETE (bank-only reword).
+  BUILDING_MOVEMENTS_STATUS_INVESTIGATE and BUILDING_SUBSIDENCE_STATUS_INVESTIGATE
+  strengthened to the v2 wording (appropriately qualified STRUCTURAL ENGINEER;
+  "before legal commitment" / "investigate the cause, extent and current activity
+  of the movement before you exchange contracts"). Subsidence location token
+  preserved.
+  AUDIT LESSON: when the subsidence-location token resolves empty the handler
+  drops "around <loc>", producing "…stepped cracking." which the template
+  (requiring "around {TOKEN}") cannot match; the old wording had matched via the
+  LEGACY bank. Added a verified variant for the empty-location form of the new
+  wording. Any future reword of a key whose token can resolve empty must check
+  the empty-token permutation too.
+  Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
