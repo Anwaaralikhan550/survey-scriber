@@ -163,3 +163,20 @@ Execution order for F1: (a) rewordings on existing keys [low risk] →
 (b) chimney-breast reconciliation + J1/I1 cross-injects → (c) new content
 blocks (spray foam, capped SVP, water penetration) with their form triggers.
 Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
+
+- 2026-09-24 — F1 Roof Structure COMPLETE.
+  * NEW approved keys + checkbox triggers on About Roof Structure screen:
+    {SPRAY_FOAM_INSULATION} (cb_spray_foam), {EVIDENCE_WATER_PENETRATION}
+    (cb_water_penetration), {CAPPED_SOIL_VENT_PIPE} (cb_capped_soil_vent_pipe),
+    all verbatim v2. Engine `_insideRoofAbout` appends each after the composite
+    (and now emits even when only an advisory is selected). 5 proof tests.
+  * Party-wall keys (partly/largely missing) reworded to v2 (Party Wall etc.
+    Act 1996 citation + "fire-stopped" wording); existing inline section
+    pointers (I1 / J3) preserved so report cross-references don't regress.
+  * Chimney-breast keys already carry the v2 adequate/poor/risk-of-collapse
+    ratings + J1/J3 pointers; the v2 "Building Regulations approval" refinement
+    and the extra I1 cross-inject are deferred to Phase 7 (cross-inject re-map).
+  * Not bank edits (deferred to form-parity): roof condition / underlay /
+    ventilation adjective lists are {TOKEN}-backed dropdown options.
+  Gate 2 = permutation audit All passed; feature regression = only the 5 known
+  pre-existing failures; analyzer 0 errors; both asset JSONs valid.

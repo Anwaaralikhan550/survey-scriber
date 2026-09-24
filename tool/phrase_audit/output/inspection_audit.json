@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2587,
+   "distinctEmitted": 2590,
    "approvedLegacyBank": 713,
-   "approvedCurrentBankOnly": 1847,
+   "approvedCurrentBankOnly": 1850,
    "unapproved": 0
   }
  },
@@ -2814,13 +2814,13 @@
    "sectionKey": "F",
    "screenId": "activity_inside_property_about_roof_structure",
    "title": "About Roof structure",
-   "dataFieldCount": 20,
-   "permutationCount": 36,
+   "dataFieldCount": 23,
+   "permutationCount": 39,
    "severities": [],
    "phraseStats": {
-    "total": 17,
+    "total": 20,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 17,
+    "approvedCurrentBankOnly": 20,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -3955,8 +3955,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Party Wall: Gaps were observed within the party wall (the wall between this and the neighbouring dwelling) within the roof space - it is partly missing, which could allow fire to pass from one property to another. Repairs should be undertaken to maintain fire separation and reduce the risk of fire spread between adjoining properties - the wall should be built up and any gaps to the underside of the roof covering sealed soon. The owner of the neighbouring property has some legal rights over this party wall. You should check with your legal adviser before you organise any work (See Section I1 - Regulations).",
-    "Party Wall: Significant gaps were observed within the party wall (the wall between this and the neighbouring dwelling) within the roof space - it is largely missing, and will allow fire to pass from one property to another (see section J3 - Risks) as well as present a security risk. Repairs should be undertaken to maintain fire separation and reduce the risk of fire spread between adjoining properties - you should organise the repair of the wall and the sealing of any gaps to the underside of the roof covering now. The owner of the neighbouring property has some legal rights over this party wall. You should check with your legal adviser before you organise any work (See Section I1 - Regulations)."
+    "Party Wall: The party wall within the roof space is incomplete, leaving gaps that could allow fire to spread between this and the neighbouring property. The wall should be extended to the underside of the roof covering and all gaps suitably fire-stopped as soon as possible. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property (See Section I1 - Regulations).",
+    "Party Wall: The party wall within the roof space is missing, creating a risk of fire spread between this and the neighbouring property (see section J3 - Risks) and reducing security between the properties. The wall should be rebuilt to the underside of the roof covering and all gaps appropriately fire-stopped without delay. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property (See Section I1 - Regulations)."
    ]
   },
   {

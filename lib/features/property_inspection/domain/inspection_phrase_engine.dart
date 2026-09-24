@@ -8660,28 +8660,41 @@ class InspectionPhraseEngine {
       }
     }
 
+    final phrases = <String>[];
     final template = _sub('{F_ROOF_STRUCTURE}', '{F_ABOUT_ROOF_STRUCTURE}');
-    if (template.isEmpty) return const [];
-    if ([
+    final hasComposite = ![
       constructionText,
       underliningText,
       insulationText,
       insulationDampText,
       ventilationNoText,
       ventilationInsufficientText
-    ].every((value) => value.isEmpty)) {
-      return const [];
+    ].every((value) => value.isEmpty);
+    if (template.isNotEmpty && hasComposite) {
+      final result = template
+          .replaceAll('{CONSTRUCTION}', constructionText)
+          .replaceAll('{UNDERLINING_STATUS}', underliningText)
+          .replaceAll('{INSULATION_STATUS}', insulationText)
+          .replaceAll('{INSULATION_DAMP}', insulationDampText)
+          .replaceAll('{VENTILATION_DAMP_NO_VENTILATION}', ventilationNoText)
+          .replaceAll('{VENTILATION_DAMP_IN_SUFFICIENT_VENTILATION}',
+              ventilationInsufficientText);
+      phrases.addAll(_split(_normalize(result)));
     }
 
-    final result = template
-        .replaceAll('{CONSTRUCTION}', constructionText)
-        .replaceAll('{UNDERLINING_STATUS}', underliningText)
-        .replaceAll('{INSULATION_STATUS}', insulationText)
-        .replaceAll('{INSULATION_DAMP}', insulationDampText)
-        .replaceAll('{VENTILATION_DAMP_NO_VENTILATION}', ventilationNoText)
-        .replaceAll('{VENTILATION_DAMP_IN_SUFFICIENT_VENTILATION}',
-            ventilationInsufficientText);
-    return _split(_normalize(result));
+    // Revised-spec additions — each is an approved sub-key triggered by its
+    // own checkbox on the About Roof Structure screen.
+    void appendIf(String checkbox, String subKey) {
+      if (_isChecked(answers[checkbox])) {
+        final t = _sub('{F_ABOUT_ROOF_STRUCTURE}', subKey);
+        if (t.isNotEmpty) phrases.addAll(_split(_normalize(t)));
+      }
+    }
+
+    appendIf('cb_spray_foam', '{SPRAY_FOAM_INSULATION}');
+    appendIf('cb_water_penetration', '{EVIDENCE_WATER_PENETRATION}');
+    appendIf('cb_capped_soil_vent_pipe', '{CAPPED_SOIL_VENT_PIPE}');
+    return phrases;
   }
 
   List<String> _insideRoofWaterTank(Map<String, String> answers) {

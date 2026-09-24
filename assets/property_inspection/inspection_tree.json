@@ -13912,6 +13912,21 @@
               "conditionalOn": "cb_ventilation_related_damp",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_spray_foam",
+              "label": "Spray foam insulation",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_water_penetration",
+              "label": "Evidence of water penetration",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_capped_soil_vent_pipe",
+              "label": "Capped soil and vent pipe",
+              "type": "checkbox"
             }
           ]
         },

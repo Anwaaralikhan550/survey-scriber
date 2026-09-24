@@ -329,4 +329,52 @@ void main() {
       expect(phrases.join(' '), isNot(contains('{')));
     });
   });
+
+  group('F1 Roof Structure: revised-spec additions', () {
+    List<String> about(Map<String, String> answers) =>
+        engine.buildPhrases('activity_inside_property_about_roof_structure',
+            answers);
+
+    test('spray foam checkbox emits the spray-foam advisory', () {
+      final phrases = about({'cb_spray_foam': 'true'});
+      expect(phrases, hasLength(1));
+      expect(phrases.single, startsWith('Spray Foam Insulation:'));
+      expect(phrases.single, contains('mortgageability, insurability'));
+      expect(phrases.single, isNot(contains('{')));
+    });
+
+    test('water-penetration checkbox emits the water-penetration advisory', () {
+      final phrases = about({'cb_water_penetration': 'true'});
+      expect(phrases, hasLength(1));
+      expect(phrases.single, startsWith('Evidence of Water Penetration:'));
+      expect(phrases.single, contains('Water staining or dampness'));
+    });
+
+    test('capped soil-vent-pipe checkbox emits its advisory', () {
+      final phrases = about({'cb_capped_soil_vent_pipe': 'true'});
+      expect(phrases, hasLength(1));
+      expect(phrases.single, startsWith('Capped Soil Vent Pipe:'));
+      expect(phrases.single, contains('terminating within the roof space'));
+    });
+
+    test('the three advisories can combine with the construction sentence', () {
+      final phrases = about({
+        'actv_construction': 'Built of traditional cut timber',
+        'cb_spray_foam': 'true',
+        'cb_water_penetration': 'true',
+        'cb_capped_soil_vent_pipe': 'true',
+      });
+      expect(phrases.any((p) => p.startsWith('Roof Structure:')), isTrue);
+      expect(phrases.any((p) => p.startsWith('Spray Foam Insulation:')), isTrue);
+      expect(
+          phrases.any((p) => p.startsWith('Evidence of Water Penetration:')),
+          isTrue);
+      expect(phrases.any((p) => p.startsWith('Capped Soil Vent Pipe:')), isTrue);
+      expect(phrases.join(' '), isNot(contains('{')));
+    });
+
+    test('no roof-structure advisory when nothing is selected', () {
+      expect(about(const {}), isEmpty);
+    });
+  });
 }
