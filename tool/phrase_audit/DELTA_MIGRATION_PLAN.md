@@ -302,3 +302,10 @@ pass, not net-new sections.
   commissioning / warranties). I1 pointer preserved; removed the mismatched
   "National Grid" reference (that belongs to PV electricity, not solar thermal).
   Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — G6 Drainage COMPLETE (bank-only reword; G6 already existed from
+  the original migration). PRIVATE_SYSTEM_SEPTIC_TANK and PRIVATE_SYSTEM_CESS_PIT
+  reworded to the fuller v2 wording (visual-only; regular maintenance/emptying;
+  legal adviser to confirm ownership, maintenance responsibilities, permits/
+  exemptions and compliance / records of emptying). Gate 2 = audit All passed;
+  regression = only the 5 known failures; analyzer 0.

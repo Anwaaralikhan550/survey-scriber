@@ -12,8 +12,8 @@
   },
   "phrases": {
    "distinctEmitted": 2588,
-   "approvedLegacyBank": 696,
-   "approvedCurrentBankOnly": 1865,
+   "approvedLegacyBank": 694,
+   "approvedCurrentBankOnly": 1867,
    "unapproved": 0
   }
  },
@@ -1212,12 +1212,14 @@
    "severities": [],
    "phraseStats": {
     "total": 11,
-    "approvedLegacy": 10,
-    "approvedCurrentBankOnly": 1,
+    "approvedLegacy": 8,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The rainwater gutters and pipes are shared with a neighbouring property or properties. You should check with your legal adviser about your rights and obligations (See Section I3)."
+    "The rainwater gutters and pipes are shared with a neighbouring property or properties. You should check with your legal adviser about your rights and obligations (See Section I3).",
+    "The property is connected to a septic tank. This is a private drainage system that treats foul waste before discharging the effluent to a drainage field or other approved outfall. The installation was inspected visually only, and no assessment of its operation or compliance with current environmental regulations was undertaken. The system should be regularly maintained and emptied as recommended. Your legal adviser should confirm ownership, maintenance responsibilities, any permits or exemptions, and compliance with current regulations.",
+    "The property is connected to a cesspit (cesspool), which is an underground storage tank that collects foul waste and requires regular emptying by a licensed waste contractor. The installation was inspected visually only, and no assessment of its condition or capacity was undertaken. Your legal adviser should confirm ownership, maintenance responsibilities, and any records of regular emptying."
    ]
   },
   {
