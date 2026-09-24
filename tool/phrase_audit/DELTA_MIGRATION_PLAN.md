@@ -48,7 +48,7 @@ version already implemented in Stream B — no delta there.
 |---|---|---|
 | 0 | Foundation: clean per-element spec extraction, diff tooling, baseline audit | ✅ |
 | 1 | Part 1 (Year-built, Construction conditionals, Overall-opinion ratings, form parity) | ✅ |
-| 2 | Section F (F1–F9) | ⬜ |
+| 2 | Section F (F1–F9) | ✅ |
 | 3 | Section G (G1–G7, incl. new G5/G6/G7) | ⬜ |
 | 4 | Section H (H1–H3) | ⬜ |
 | 5 | Section I (I1–I3) | ⬜ |
@@ -249,3 +249,11 @@ Each step: 4-Gate (audit clean, only 5 known failures, 0 analyzer errors).
   preserved). EXTRACTOR_FAN_INSTALLED_OK gains the v2 ventilation advice
   (clean regularly, run-on function, open windows). Gate 2 = audit All passed;
   regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-24 — F9 Other (communal areas / cellar / basement) COMPLETE
+  (bank-only reword). CELLAR_IN_USE and BASEMENT_IN_USE reworded: drop the false
+  "No repair is currently needed. The property must be maintained in the normal
+  way." and adopt the v2 "Routine maintenance is recommended." tail; tokens
+  preserved. (Communal-area keys already carried the v2 "consistent with their
+  age, construction and use" wording and I1/I3 pointers.) SECTION F COMPLETE.
+  Gate 2 = audit All passed; regression = only the 5 known failures; analyzer 0.
