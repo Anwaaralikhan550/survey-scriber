@@ -316,3 +316,12 @@ pass, not net-new sections.
   future repair costs" ({CS_COMM_SERVICES} preserved). SECTION G COMPLETE — all
   of G was a rewording pass; G5/G6/G7 were NOT net-new (already migrated). Gate 2
   = audit All passed; regression = only the 5 known failures; analyzer 0.
+
+## Phase 4 — Section H (in progress)
+- 2026-09-24 — H1 Garage COMPLETE (bank-only reword). ABOUT_GARAGE_CONVERTED
+  reworded to the v2 legal-adviser wording (visual only; planning permission /
+  Building Regs / completion certificates / warranties; {GAR_COND_CONV_TO}
+  preserved). IF_ASBESTOS_IS_SELECTED reworded to the v2 asbestos wording
+  (low risk if undisturbed; specialist advice before disturbance; may affect
+  future marketability). Gate 2 = audit All passed; regression = only the 5
+  known failures; analyzer 0.
