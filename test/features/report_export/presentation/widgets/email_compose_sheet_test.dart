@@ -87,7 +87,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Tap Send without entering email
-      await tester.tap(find.text('Send'));
+      await tester.tap(find.text('Send Email'));
       await tester.pumpAndSettle();
 
       expect(find.text('Email address is required'), findsOneWidget);
@@ -103,7 +103,7 @@ void main() {
         find.widgetWithText(TextFormField, 'Recipient email'),
         'not-an-email',
       );
-      await tester.tap(find.text('Send'));
+      await tester.tap(find.text('Send Email'));
       await tester.pumpAndSettle();
 
       expect(find.text('Enter a valid email address'), findsOneWidget);
@@ -119,7 +119,7 @@ void main() {
         find.widgetWithText(TextFormField, 'Recipient email'),
         'test@example.com',
       );
-      await tester.tap(find.text('Send'));
+      await tester.tap(find.text('Send Email'));
       // Use pump() instead of pumpAndSettle() because Send triggers
       // async loading state with a CircularProgressIndicator
       await tester.pump();
@@ -134,7 +134,7 @@ void main() {
       await tester.tap(find.text('Open'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Send'), findsOneWidget);
+      expect(find.text('Send Email'), findsOneWidget);
       expect(find.byIcon(Icons.send_rounded), findsOneWidget);
     });
   });

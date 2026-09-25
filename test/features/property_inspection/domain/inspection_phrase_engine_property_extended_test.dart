@@ -77,9 +77,10 @@ void main() {
       final sentence = phrases.single.toLowerCase();
       expect(
         sentence,
-        startsWith('the flat roof construction over the main building'),
+        startsWith('the main building has a flat roof form'),
       );
-      expect(sentence, contains('covered in'));
+      expect(sentence, contains('the roof coverings comprise'));
+      expect(sentence, contains('finished in'));
       expect(sentence, contains('concrete'));
       expect(sentence, contains('plastic'));
       expect(sentence, contains('zinc'));
