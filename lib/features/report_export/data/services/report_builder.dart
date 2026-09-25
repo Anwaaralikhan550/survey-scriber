@@ -1076,6 +1076,20 @@ class ReportBuilder {
           'You should ask your legal adviser to confirm whether the PVC glazed sections to the doors were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
     }
 
+    // Revised-spec cross-injection (Phase 7): where the F1 Roof Structure
+    // spray-foam advisory fires (cb_spray_foam on the About Roof Structure
+    // screen), the revised I2 Guarantees checklist adds a spray-foam guarantee
+    // enquiry. Text mirrors the approved bank key
+    // {ISSUE_GUARANTEES}::{GUARANTEES_SPRAY_FOAM}.
+    final aboutRoof = _answersForScreen(
+        rawData, 'activity_inside_property_about_roof_structure');
+    if (_isCheckedValue(aboutRoof['cb_spray_foam'])) {
+      phrases.add(
+          'You should ask your legal adviser to obtain the spray foam '
+          'insulation installation details, guarantees and warranties, together '
+          'with confirmation of any lender requirements.');
+    }
+
     return _cleanupPhrases(phrases);
   }
 

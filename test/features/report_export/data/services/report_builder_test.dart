@@ -3091,6 +3091,103 @@ void main() {
     });
 
     test(
+        'injects the revised-spec spray-foam guarantee cross-inject into I2 when '
+        'the F1 spray-foam advisory fires', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+            'activity_inside_property_about_roof_structure': {
+              'cb_spray_foam': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(
+        all,
+        contains(
+          'obtain the spray foam insulation installation details, guarantees '
+          'and warranties, together with confirmation of any lender requirements',
+        ),
+      );
+    });
+
+    test(
+        'does not inject the spray-foam guarantee cross-inject when spray foam '
+        'is not selected', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(all, isNot(contains('spray foam insulation installation details')));
+    });
+
+    test(
         'does not inject the PVC-replacement cross-inject when windows are not PVC or not replacement',
         () {
       final tree = InspectionTreePayload(
