@@ -5897,6 +5897,27 @@
               "conditionalMode": "show"
             },
             {
+              "id": "cb_air_source_heat_pump",
+              "label": "Air source heat pump",
+              "type": "checkbox",
+              "conditionalOn": "!cb_not_inspected",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_ground_source_heat_pump",
+              "label": "Ground source heat pump",
+              "type": "checkbox",
+              "conditionalOn": "!cb_not_inspected",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_forced_air",
+              "label": "Forced air heating",
+              "type": "checkbox",
+              "conditionalOn": "!cb_not_inspected",
+              "conditionalMode": "show"
+            },
+            {
               "id": "label_other_heating",
               "label": "Other Heating",
               "type": "label",

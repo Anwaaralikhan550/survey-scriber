@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2588,
+   "distinctEmitted": 2591,
    "approvedLegacyBank": 669,
-   "approvedCurrentBankOnly": 1892,
+   "approvedCurrentBankOnly": 1895,
    "unapproved": 0
   }
  },
@@ -1202,19 +1202,19 @@
    "sectionKey": "G",
    "screenId": "activity_services_heating_about_heating",
    "title": "About Heating System",
-   "dataFieldCount": 15,
-   "permutationCount": 51,
+   "dataFieldCount": 18,
+   "permutationCount": 54,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 13,
     "approvedLegacy": 7,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
     "The property is heated by a central boiler. I was unable to inspect the boiler unit due to restricted access or because it could not be located, and I cannot comment on its type or condition.",
     "The property does not have a fixed heating system. Although no repair is currently required, the absence of fixed heating may result in cold rooms, condensation, and mould growth. It is also likely to adversely affect the property’s Energy Performance Certificate (EPC) rating and may impact its marketability. You should consider installing a suitable fixed heating system.",
-    "Although no significant defects were apparent from the limited visual inspection, the boiler is older. Older boilers are less efficient and may become increasingly unreliable and costly to maintain. You should anticipate replacement as the boiler approaches the end of its serviceable life."
+    "The property is heated by an air source heat pump. The installation was inspected visually only, and no operational testing or assessment of performance, efficiency or controls was undertaken."
    ]
   },
   {

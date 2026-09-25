@@ -279,6 +279,41 @@ void main() {
     });
   });
 
+  group('G4 Heating: revised-spec heat-pump / forced-air types', () {
+    List<String> heating(Map<String, String> answers) =>
+        engine.buildPhrases('activity_services_heating_about_heating', answers);
+
+    test('air source heat pump emits its advisory', () {
+      final phrases = heating({'cb_air_source_heat_pump': 'true'});
+      final t = phrases.join(' ');
+      expect(t, contains('heated by an air source heat pump'));
+      expect(t, contains('no operational testing or assessment of performance'));
+      expect(t, isNot(contains('{')));
+    });
+
+    test('ground source heat pump emits its advisory', () {
+      final phrases = heating({'cb_ground_source_heat_pump': 'true'});
+      final t = phrases.join(' ');
+      expect(t, contains('heated by a ground source heat pump'));
+      expect(t, contains('ground collectors or boreholes are below ground'));
+    });
+
+    test('forced air heating emits its advisory', () {
+      final phrases = heating({'cb_forced_air': 'true'});
+      final t = phrases.join(' ');
+      expect(t, contains('forced air heating system'));
+      expect(t, contains('warm air distributed throughout the property'));
+    });
+
+    test('no heat-pump advisory when none is selected', () {
+      final phrases = heating({'cb_no_heating': 'true'});
+      final t = phrases.join(' ');
+      expect(t, isNot(contains('air source heat pump')));
+      expect(t, isNot(contains('ground source heat pump')));
+      expect(t, isNot(contains('forced air heating system')));
+    });
+  });
+
   group('Overall opinion: revised-spec rating (reasonable/good/fair/poor)', () {
     List<String> opinion(String rating) => engine.buildPhrases(
           'activity_over_all_openion',

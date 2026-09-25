@@ -7787,7 +7787,22 @@ class InspectionPhraseEngine {
         .replaceAll('{ABOUT_BOILER_FLUE_CONNECTED_TO}', flueText)
         .replaceAll('{ABOUT_CONNECTED_TO_RADIATOR_UNDERFLOOR_PIPES}', connected)
         .replaceAll('{ABOUT_OLD_BOILER}', oldBoiler);
-    return _split(_normalize(wrapper));
+    final phrases = _split(_normalize(wrapper));
+
+    // Revised-spec heating types (each its own approved advisory, triggered by
+    // its own checkbox on the About Heating screen).
+    void appendHeatingType(String checkbox, String subKey) {
+      if (_isChecked(answers[checkbox])) {
+        final t = _sub('{G_HEATING}', subKey);
+        if (t.isNotEmpty) phrases.addAll(_split(_normalize(t)));
+      }
+    }
+
+    appendHeatingType('cb_air_source_heat_pump', '{ABOUT_AIR_SOURCE_HEAT_PUMP}');
+    appendHeatingType(
+        'cb_ground_source_heat_pump', '{ABOUT_GROUND_SOURCE_HEAT_PUMP}');
+    appendHeatingType('cb_forced_air', '{ABOUT_FORCED_AIR}');
+    return phrases;
   }
 
   List<String> _servicesHeatingRepair(Map<String, String> answers) {

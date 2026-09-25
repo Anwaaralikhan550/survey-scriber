@@ -492,3 +492,12 @@ Security->Other) is a separate, high-risk step (rewrites assembly + ~58 tests).
   "J3 - Risks to People" (health folded into J3). No other old J4/J5 pointers
   remain in the bank. Gate: audit All passed; regression = only the 5 known
   failures.
+
+- 2026-09-25 — 7.6a G4 heat-pump / forced-air heating types BUILT. Added three
+  checkboxes to the About Heating screen (cb_air_source_heat_pump,
+  cb_ground_source_heat_pump, cb_forced_air), three approved bank keys
+  ({G_HEATING}::{ABOUT_AIR_SOURCE_HEAT_PUMP}, {ABOUT_GROUND_SOURCE_HEAT_PUMP},
+  {ABOUT_FORCED_AIR}) with the revised-spec advisories (generalised for location
+  — no location field exists — so no invented tokens), and appended each in
+  _servicesHeatingAbout when its checkbox is set. Four proof tests. Gate: audit
+  All passed; regression = only the 5 known failures; analyzer 0; tree valid.
