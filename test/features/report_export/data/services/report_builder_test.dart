@@ -3188,6 +3188,103 @@ void main() {
     });
 
     test(
+        'injects the revised-spec renewable-energy guarantee cross-inject into I2 '
+        'when a solar installation is present', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+            'activity_services_solar_power': {
+              'cb_front': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(
+        all,
+        contains(
+          'renewable energy installations, including solar pv, solar thermal, '
+          'battery storage, air source heat pumps and ground source heat pumps',
+        ),
+      );
+    });
+
+    test(
+        'does not inject the renewable-energy guarantee cross-inject when no '
+        'renewable installation is present', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(all, isNot(contains('renewable energy installations')));
+    });
+
+    test(
         'does not inject the PVC-replacement cross-inject when windows are not PVC or not replacement',
         () {
       final tree = InspectionTreePayload(

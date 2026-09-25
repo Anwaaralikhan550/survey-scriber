@@ -1090,6 +1090,33 @@ class ReportBuilder {
           'with confirmation of any lender requirements.');
     }
 
+    // Revised-spec cross-injection (Phase 7): where a renewable-energy
+    // installation is present - solar PV (activity_services_solar_power),
+    // solar thermal (activity_services_water_heating_solar_power) or the
+    // Section D other-services solar flags - the revised I2 Guarantees
+    // checklist adds a renewable-energy guarantee enquiry. Text mirrors the
+    // approved bank key {ISSUE_GUARANTEES}::{GUARANTEES_RENEWABLE_ENERGY}.
+    final solarPv = _answersForScreen(rawData, 'activity_services_solar_power');
+    final solarThermal = _answersForScreen(
+        rawData, 'activity_services_water_heating_solar_power');
+    final otherServices =
+        _answersForScreen(rawData, 'activity_other_service');
+    final hasRenewable = _isCheckedValue(solarPv['cb_front']) ||
+        _isCheckedValue(solarPv['cb_side']) ||
+        _isCheckedValue(solarPv['cb_rear']) ||
+        _isCheckedValue(solarPv['cb_other_783']) ||
+        _isCheckedValue(solarThermal['cb_solar_power']) ||
+        _isCheckedValue(otherServices['ch1']) ||
+        _isCheckedValue(otherServices['ch2']);
+    if (hasRenewable) {
+      phrases.add(
+          'You should ask your legal adviser to obtain the installation '
+          'certificates, ownership details, maintenance agreements, warranties '
+          'and any lease or finance agreements for renewable energy '
+          'installations, including solar PV, solar thermal, battery storage, '
+          'air source heat pumps and ground source heat pumps.');
+    }
+
     return _cleanupPhrases(phrases);
   }
 

@@ -436,3 +436,12 @@ Security->Other) is a separate, high-risk step (rewrites assembly + ~58 tests).
   Structure) is set; text mirrors {ISSUE_GUARANTEES}::{GUARANTEES_SPRAY_FOAM}.
   Two report_builder tests added (fires / does-not-fire). Gate: 60 report_builder
   tests pass; regression = only the 5 known failures; analyzer 0.
+
+- 2026-09-25 — 7.2 Renewable-energy guarantee cross-inject wired. Added a block
+  in _legacyDerivedSectionFIssueGuarantees firing when a renewable installation
+  is present: solar PV (activity_services_solar_power location checkboxes), solar
+  thermal (activity_services_water_heating_solar_power/cb_solar_power), or the
+  Section D other-services solar flags (activity_other_service ch1/ch2). Text
+  mirrors {ISSUE_GUARANTEES}::{GUARANTEES_RENEWABLE_ENERGY}. Two report_builder
+  tests added. Gate: 62 report_builder tests pass; regression = only the 5 known
+  failures; analyzer 0.
