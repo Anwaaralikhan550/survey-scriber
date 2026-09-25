@@ -279,6 +279,34 @@ void main() {
     });
   });
 
+  group('F6 Built-in Fittings: revised-spec sink / appliances / extractor', () {
+    List<String> fittings(Map<String, String> answers) => engine.buildPhrases(
+        'activity_in_side_property_built_in_fittings', answers);
+
+    test('kitchen sink checkbox emits its advisory', () {
+      final t = fittings({'cb_kitchen_sink': 'true'}).join(' ');
+      expect(t, contains('Kitchen Sink:'));
+      expect(t, contains('not assessed for leakage or drainage performance'));
+      expect(t, isNot(contains('{')));
+    });
+
+    test('built-in appliances checkbox emits its advisory', () {
+      final t = fittings({'cb_built_in_appliances': 'true'}).join(' ');
+      expect(t, contains('Built-in Appliances:'));
+      expect(t, contains('have not been assessed'));
+    });
+
+    test('extractor fan checkbox emits its advisory', () {
+      final t = fittings({'cb_extractor_fan': 'true'}).join(' ');
+      expect(t, contains('Extractor Fan:'));
+      expect(t, contains('grease filters and vents'));
+    });
+
+    test('no built-in-fittings advisory when nothing is selected', () {
+      expect(fittings(const {}), isEmpty);
+    });
+  });
+
   group('G4 Heating: revised-spec heat-pump / forced-air types', () {
     List<String> heating(Map<String, String> answers) =>
         engine.buildPhrases('activity_services_heating_about_heating', answers);

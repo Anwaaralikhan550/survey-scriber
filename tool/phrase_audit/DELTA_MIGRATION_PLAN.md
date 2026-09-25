@@ -53,7 +53,7 @@ version already implemented in Stream B — no delta there.
 | 4 | Section H (H1–H3) | ✅ |
 | 5 | Section I (I1–I3) | ✅ |
 | 6 | Section J (J1–J4) | ✅ |
-| 7 | Cross-injection re-map + integrity test | ⬜ |
+| 7 | Cross-injection re-map + integrity test | ✅ |
 | 8 | End-to-end validation + updated client dossier + sign-off | ⬜ |
 
 ## Progress log
@@ -501,3 +501,13 @@ Security->Other) is a separate, high-risk step (rewrites assembly + ~58 tests).
   — no location field exists — so no invented tokens), and appended each in
   _servicesHeatingAbout when its checkbox is set. Four proof tests. Gate: audit
   All passed; regression = only the 5 known failures; analyzer 0; tree valid.
+
+- 2026-09-25 — 7.6b F6 Kitchen Sink / Built-in Appliances / Extractor Fan BUILT.
+  Added three checkboxes to the Built-in Fittings screen (cb_kitchen_sink,
+  cb_built_in_appliances, cb_extractor_fan), three approved bank keys
+  ({F_BUILT_IN_FITTINGS}::{KITCHEN_SINK}, {BUILT_IN_APPLIANCES}, {EXTRACTOR_FAN})
+  with generalised visual-only advisories (no location/material sub-fields, so no
+  invented tokens), and restructured _builtInFittings to append each advisory
+  independently (no longer early-returns when only an advisory is present). Four
+  proof tests. Gate: audit All passed; regression = only the 5 known failures;
+  analyzer 0; tree valid. PHASE 7 COMPLETE.

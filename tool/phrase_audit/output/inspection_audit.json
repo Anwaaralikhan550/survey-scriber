@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2591,
+   "distinctEmitted": 2594,
    "approvedLegacyBank": 669,
-   "approvedCurrentBankOnly": 1895,
+   "approvedCurrentBankOnly": 1898,
    "unapproved": 0
   }
  },
@@ -2091,19 +2091,19 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_built_in_fittings",
    "title": "Built In Fittings",
-   "dataFieldCount": 16,
-   "permutationCount": 22,
+   "dataFieldCount": 19,
+   "permutationCount": 25,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Kitchen Units, Worktops: The fittings in the kitchen, utility room and sample detail are made up of particle board, timber, granite, marble, glass, metal and sample detail worktop along with timber and sample detail bases and wall units. Where visible, the fittings are of reasonable quality and condition. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine adjustment and maintenance should be expected with normal use.",
-    "Kitchen Units, Worktops: The fittings in the kitchen, utility room and sample detail are made up of particle board, timber, granite, marble, glass, metal and sample detail worktop along with timber and sample detail bases and wall units. Where visible, the fittings are of satisfactory quality and condition. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine adjustment and maintenance should be expected with normal use.",
-    "Kitchen Units, Worktops: The fittings in the kitchen, utility room and sample detail are made up of particle board, timber, granite, marble, glass, metal and sample detail worktop along with timber and sample detail bases and wall units. Where visible, the fittings are of unsatisfactory and poor quality and condition. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine adjustment and maintenance should be expected with normal use."
+    "Kitchen Sink: A sink is fitted within the kitchen. The sink was inspected visually only and was not assessed for leakage or drainage performance.",
+    "Built-in Appliances: The property incorporates built-in appliances. These appliances have not been assessed; their condition, safety and serviceability are outside the scope of this inspection.",
+    "Extractor Fan: A kitchen extractor fan is fitted. Its effectiveness cannot be confirmed without the kitchen being in normal use. Regular cleaning of grease filters and vents should be undertaken to maintain efficient operation."
    ]
   },
   {

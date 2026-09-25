@@ -10906,21 +10906,34 @@ class InspectionPhraseEngine {
     _addOther(answers, 'cb_other_343', 'et_other_745', cabinets);
 
     final condition = _cleanLower(answers['android_material_design_spinner3']);
-    if (locations.isEmpty ||
-        worktops.isEmpty ||
-        cabinets.isEmpty ||
-        condition.isEmpty) {
-      return const [];
+    final phrases = <String>[];
+    if (locations.isNotEmpty &&
+        worktops.isNotEmpty &&
+        cabinets.isNotEmpty &&
+        condition.isNotEmpty) {
+      final template = _sub('{F_BUILT_IN_FITTINGS}', '{BUILT_IN_FITTINGS}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_split(_normalize(template
+            .replaceAll('{BIF_LOCATION}', _toWords(locations).toLowerCase())
+            .replaceAll('{BIF_WORKTOPS}', _toWords(worktops).toLowerCase())
+            .replaceAll('{BIF_WALL_CABINET}', _toWords(cabinets).toLowerCase())
+            .replaceAll('{BIF_CONDITION}', condition))));
+      }
     }
 
-    var template = _sub('{F_BUILT_IN_FITTINGS}', '{BUILT_IN_FITTINGS}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{BIF_LOCATION}', _toWords(locations).toLowerCase())
-        .replaceAll('{BIF_WORKTOPS}', _toWords(worktops).toLowerCase())
-        .replaceAll('{BIF_WALL_CABINET}', _toWords(cabinets).toLowerCase())
-        .replaceAll('{BIF_CONDITION}', condition);
-    return _split(_normalize(template));
+    // Revised-spec additions (each an approved sub-key triggered by its own
+    // checkbox on the Built-in Fittings screen).
+    void appendIf(String checkbox, String subKey) {
+      if (_isChecked(answers[checkbox])) {
+        final t = _sub('{F_BUILT_IN_FITTINGS}', subKey);
+        if (t.isNotEmpty) phrases.addAll(_split(_normalize(t)));
+      }
+    }
+
+    appendIf('cb_kitchen_sink', '{KITCHEN_SINK}');
+    appendIf('cb_built_in_appliances', '{BUILT_IN_APPLIANCES}');
+    appendIf('cb_extractor_fan', '{EXTRACTOR_FAN}');
+    return phrases;
   }
 
   List<String> _builtInRepairFittings(Map<String, String> answers) {

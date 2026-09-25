@@ -8652,6 +8652,21 @@
                 "Satisfactory",
                 "Unsatisfactory and Poor"
               ]
+            },
+            {
+              "id": "cb_kitchen_sink",
+              "label": "Kitchen sink",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_built_in_appliances",
+              "label": "Built-in appliances",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_extractor_fan",
+              "label": "Extractor fan",
+              "type": "checkbox"
             }
           ]
         },
