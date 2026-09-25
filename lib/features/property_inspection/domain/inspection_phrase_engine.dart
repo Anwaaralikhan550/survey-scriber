@@ -957,6 +957,32 @@ class InspectionPhraseEngine {
           ),
           'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
         );
+        // Revised-spec ABOUT_CONDITION wording (F2 delta): "the ceilings
+        // appear in <rating> condition, consistent with their age and
+        // construction. … Routine maintenance … should be expected."
+        phrase = phrase.replaceAll(
+          RegExp(
+            r'Where visible, the ceilings appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition, consistent with their age and construction\. No significant defects requiring immediate attention were identified unless otherwise stated below\. Routine maintenance appropriate to the ceiling material should be expected\.',
+            caseSensitive: false,
+          ),
+          'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
+        );
+        // Revised-spec WALL_CONDITION wording (F3 delta).
+        phrase = phrase.replaceAll(
+          RegExp(
+            r'Where visible, the walls and partitions appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition, consistent with their age and construction\. No significant defects requiring immediate attention were identified unless otherwise stated below\. Routine maintenance appropriate to the wall material should be expected\.',
+            caseSensitive: false,
+          ),
+          'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
+        );
+        // Revised-spec FLOOR_CONDITION wording (F4 delta).
+        phrase = phrase.replaceAll(
+          RegExp(
+            r'Where visible, the floors appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition, consistent with their age and construction\. No significant defects requiring immediate attention were identified unless otherwise stated below\. Routine maintenance appropriate to the flooring material should be expected\.',
+            caseSensitive: false,
+          ),
+          'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',
+        );
       }
       if (poorCondition &&
           screenId.startsWith(
@@ -7761,7 +7787,22 @@ class InspectionPhraseEngine {
         .replaceAll('{ABOUT_BOILER_FLUE_CONNECTED_TO}', flueText)
         .replaceAll('{ABOUT_CONNECTED_TO_RADIATOR_UNDERFLOOR_PIPES}', connected)
         .replaceAll('{ABOUT_OLD_BOILER}', oldBoiler);
-    return _split(_normalize(wrapper));
+    final phrases = _split(_normalize(wrapper));
+
+    // Revised-spec heating types (each its own approved advisory, triggered by
+    // its own checkbox on the About Heating screen).
+    void appendHeatingType(String checkbox, String subKey) {
+      if (_isChecked(answers[checkbox])) {
+        final t = _sub('{G_HEATING}', subKey);
+        if (t.isNotEmpty) phrases.addAll(_split(_normalize(t)));
+      }
+    }
+
+    appendHeatingType('cb_air_source_heat_pump', '{ABOUT_AIR_SOURCE_HEAT_PUMP}');
+    appendHeatingType(
+        'cb_ground_source_heat_pump', '{ABOUT_GROUND_SOURCE_HEAT_PUMP}');
+    appendHeatingType('cb_forced_air', '{ABOUT_FORCED_AIR}');
+    return phrases;
   }
 
   List<String> _servicesHeatingRepair(Map<String, String> answers) {
@@ -8660,28 +8701,41 @@ class InspectionPhraseEngine {
       }
     }
 
+    final phrases = <String>[];
     final template = _sub('{F_ROOF_STRUCTURE}', '{F_ABOUT_ROOF_STRUCTURE}');
-    if (template.isEmpty) return const [];
-    if ([
+    final hasComposite = ![
       constructionText,
       underliningText,
       insulationText,
       insulationDampText,
       ventilationNoText,
       ventilationInsufficientText
-    ].every((value) => value.isEmpty)) {
-      return const [];
+    ].every((value) => value.isEmpty);
+    if (template.isNotEmpty && hasComposite) {
+      final result = template
+          .replaceAll('{CONSTRUCTION}', constructionText)
+          .replaceAll('{UNDERLINING_STATUS}', underliningText)
+          .replaceAll('{INSULATION_STATUS}', insulationText)
+          .replaceAll('{INSULATION_DAMP}', insulationDampText)
+          .replaceAll('{VENTILATION_DAMP_NO_VENTILATION}', ventilationNoText)
+          .replaceAll('{VENTILATION_DAMP_IN_SUFFICIENT_VENTILATION}',
+              ventilationInsufficientText);
+      phrases.addAll(_split(_normalize(result)));
     }
 
-    final result = template
-        .replaceAll('{CONSTRUCTION}', constructionText)
-        .replaceAll('{UNDERLINING_STATUS}', underliningText)
-        .replaceAll('{INSULATION_STATUS}', insulationText)
-        .replaceAll('{INSULATION_DAMP}', insulationDampText)
-        .replaceAll('{VENTILATION_DAMP_NO_VENTILATION}', ventilationNoText)
-        .replaceAll('{VENTILATION_DAMP_IN_SUFFICIENT_VENTILATION}',
-            ventilationInsufficientText);
-    return _split(_normalize(result));
+    // Revised-spec additions — each is an approved sub-key triggered by its
+    // own checkbox on the About Roof Structure screen.
+    void appendIf(String checkbox, String subKey) {
+      if (_isChecked(answers[checkbox])) {
+        final t = _sub('{F_ABOUT_ROOF_STRUCTURE}', subKey);
+        if (t.isNotEmpty) phrases.addAll(_split(_normalize(t)));
+      }
+    }
+
+    appendIf('cb_spray_foam', '{SPRAY_FOAM_INSULATION}');
+    appendIf('cb_water_penetration', '{EVIDENCE_WATER_PENETRATION}');
+    appendIf('cb_capped_soil_vent_pipe', '{CAPPED_SOIL_VENT_PIPE}');
+    return phrases;
   }
 
   List<String> _insideRoofWaterTank(Map<String, String> answers) {
@@ -10852,21 +10906,34 @@ class InspectionPhraseEngine {
     _addOther(answers, 'cb_other_343', 'et_other_745', cabinets);
 
     final condition = _cleanLower(answers['android_material_design_spinner3']);
-    if (locations.isEmpty ||
-        worktops.isEmpty ||
-        cabinets.isEmpty ||
-        condition.isEmpty) {
-      return const [];
+    final phrases = <String>[];
+    if (locations.isNotEmpty &&
+        worktops.isNotEmpty &&
+        cabinets.isNotEmpty &&
+        condition.isNotEmpty) {
+      final template = _sub('{F_BUILT_IN_FITTINGS}', '{BUILT_IN_FITTINGS}');
+      if (template.isNotEmpty) {
+        phrases.addAll(_split(_normalize(template
+            .replaceAll('{BIF_LOCATION}', _toWords(locations).toLowerCase())
+            .replaceAll('{BIF_WORKTOPS}', _toWords(worktops).toLowerCase())
+            .replaceAll('{BIF_WALL_CABINET}', _toWords(cabinets).toLowerCase())
+            .replaceAll('{BIF_CONDITION}', condition))));
+      }
     }
 
-    var template = _sub('{F_BUILT_IN_FITTINGS}', '{BUILT_IN_FITTINGS}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{BIF_LOCATION}', _toWords(locations).toLowerCase())
-        .replaceAll('{BIF_WORKTOPS}', _toWords(worktops).toLowerCase())
-        .replaceAll('{BIF_WALL_CABINET}', _toWords(cabinets).toLowerCase())
-        .replaceAll('{BIF_CONDITION}', condition);
-    return _split(_normalize(template));
+    // Revised-spec additions (each an approved sub-key triggered by its own
+    // checkbox on the Built-in Fittings screen).
+    void appendIf(String checkbox, String subKey) {
+      if (_isChecked(answers[checkbox])) {
+        final t = _sub('{F_BUILT_IN_FITTINGS}', subKey);
+        if (t.isNotEmpty) phrases.addAll(_split(_normalize(t)));
+      }
+    }
+
+    appendIf('cb_kitchen_sink', '{KITCHEN_SINK}');
+    appendIf('cb_built_in_appliances', '{BUILT_IN_APPLIANCES}');
+    appendIf('cb_extractor_fan', '{EXTRACTOR_FAN}');
+    return phrases;
   }
 
   List<String> _builtInRepairFittings(Map<String, String> answers) {
@@ -13712,7 +13779,9 @@ class InspectionPhraseEngine {
     if (_isChecked(answers['ch3'])) items.add('cavity wall');
     if (_isChecked(answers['ch4'])) items.add('timber frame');
     if (_isChecked(answers['ch5'])) items.add('steel frame');
-    if (_isChecked(answers['ch6'])) items.add('concrete frame');
+    if (_isChecked(answers['ch6'])) items.add('concrete wall');
+    if (_isChecked(answers['ch8'])) items.add('precast concrete panels');
+    if (_isChecked(answers['ch9'])) items.add('system-built');
     if (_isChecked(answers['ch7'])) {
       final other = (answers['etPropertyTypeOther'] ?? '').trim();
       items.add(other.isNotEmpty ? other.toLowerCase() : 'other');
@@ -13720,15 +13789,34 @@ class InspectionPhraseEngine {
     if (items.isEmpty) return const [];
     // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_TYPE_AREA}
     final template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_TYPE_AREA}');
+    final result = <String>[];
     if (template.isEmpty) {
-      return [
+      result.add(
         'The property is believed to be built using ${_toWords(items)} '
             'construction.',
-      ];
+      );
+    } else {
+      result.addAll(_split(_normalize(
+        template.replaceAll('{CONSTRUCTION_TYPE}', _toWords(items)),
+      )));
     }
-    return _split(_normalize(
-      template.replaceAll('{CONSTRUCTION_TYPE}', _toWords(items)),
-    ));
+    // Spec conditional — "If timber or steel frame is selected, add this":
+    // the Modern Building Design advisory (approved bank sub-key).
+    if (_isChecked(answers['ch4']) || _isChecked(answers['ch5'])) {
+      final modern =
+          _sub('{D_CONSTRUCTION}', '{CONDITION_TYPE_OF_CONSTRUCTION}');
+      if (modern.isNotEmpty) result.addAll(_split(_normalize(modern)));
+    }
+    // Spec conditional — "If concrete wall or precast concrete panels are
+    // selected, add this": the mortgage-lending advisory (approved bank
+    // sub-key). Fires for concrete wall (ch6) or precast concrete panels
+    // (ch8); system-built (ch9) is not covered by the spec's advisory.
+    if (_isChecked(answers['ch6']) || _isChecked(answers['ch8'])) {
+      final concrete =
+          _sub('{D_CONSTRUCTION}', '{CONCRETE_CONSTRUCTION_ADVISORY}');
+      if (concrete.isNotEmpty) result.addAll(_split(_normalize(concrete)));
+    }
+    return result;
   }
 
   List<String> _propertyBuiltYear(Map<String, String> answers) {
@@ -15170,8 +15258,18 @@ class InspectionPhraseEngine {
     final priceInWords =
         amount.isNotEmpty ? formatPriceAsWordsOnly(amount) : '';
 
-    if (opinion.toLowerCase() == 'reasonable') {
-      final template = _phraseTexts['{OVERALL_OPINION_REASONABLE}'] ?? '';
+    final ratingLower = opinion.toLowerCase();
+    // Revised spec: the overall verdict may be reasonable, good, fair or poor
+    // (the "reasonable with repair" variant is handled separately below).
+    // A "reasonable" verdict keeps the favourable opener; good/fair/poor use
+    // the neutral approved statement (no favourable opener, no fabricated
+    // wording), with the chosen adjective substituted for {OVERALL_OPINION_RATING}.
+    const qualityRatings = ['reasonable', 'good', 'fair', 'poor'];
+    if (qualityRatings.contains(ratingLower)) {
+      final key = ratingLower == 'reasonable'
+          ? '{OVERALL_OPINION_REASONABLE}'
+          : '{OVERALL_OPINION_QUALITY}';
+      final template = _phraseTexts[key] ?? '';
       if (template.isNotEmpty) {
         var resolved = _normalize(template);
         if (amount.isNotEmpty) {
@@ -15190,9 +15288,11 @@ class InspectionPhraseEngine {
               .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE_WORD}', '')
               .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE}', '');
         }
+        // Substitute the chosen quality adjective into the approved sentence.
+        resolved = resolved.replaceAll('{OVERALL_OPINION_RATING}', ratingLower);
         return _split(resolved);
       }
-      final phrases = <String>['Overall opinion: reasonable.'];
+      final phrases = <String>['Overall opinion: $ratingLower.'];
       if (priceInWords.isNotEmpty)
         phrases.add('Purchase price: $priceInWords.');
       return phrases;

@@ -1076,6 +1076,47 @@ class ReportBuilder {
           'You should ask your legal adviser to confirm whether the PVC glazed sections to the doors were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
     }
 
+    // Revised-spec cross-injection (Phase 7): where the F1 Roof Structure
+    // spray-foam advisory fires (cb_spray_foam on the About Roof Structure
+    // screen), the revised I2 Guarantees checklist adds a spray-foam guarantee
+    // enquiry. Text mirrors the approved bank key
+    // {ISSUE_GUARANTEES}::{GUARANTEES_SPRAY_FOAM}.
+    final aboutRoof = _answersForScreen(
+        rawData, 'activity_inside_property_about_roof_structure');
+    if (_isCheckedValue(aboutRoof['cb_spray_foam'])) {
+      phrases.add(
+          'You should ask your legal adviser to obtain the spray foam '
+          'insulation installation details, guarantees and warranties, together '
+          'with confirmation of any lender requirements.');
+    }
+
+    // Revised-spec cross-injection (Phase 7): where a renewable-energy
+    // installation is present - solar PV (activity_services_solar_power),
+    // solar thermal (activity_services_water_heating_solar_power) or the
+    // Section D other-services solar flags - the revised I2 Guarantees
+    // checklist adds a renewable-energy guarantee enquiry. Text mirrors the
+    // approved bank key {ISSUE_GUARANTEES}::{GUARANTEES_RENEWABLE_ENERGY}.
+    final solarPv = _answersForScreen(rawData, 'activity_services_solar_power');
+    final solarThermal = _answersForScreen(
+        rawData, 'activity_services_water_heating_solar_power');
+    final otherServices =
+        _answersForScreen(rawData, 'activity_other_service');
+    final hasRenewable = _isCheckedValue(solarPv['cb_front']) ||
+        _isCheckedValue(solarPv['cb_side']) ||
+        _isCheckedValue(solarPv['cb_rear']) ||
+        _isCheckedValue(solarPv['cb_other_783']) ||
+        _isCheckedValue(solarThermal['cb_solar_power']) ||
+        _isCheckedValue(otherServices['ch1']) ||
+        _isCheckedValue(otherServices['ch2']);
+    if (hasRenewable) {
+      phrases.add(
+          'You should ask your legal adviser to obtain the installation '
+          'certificates, ownership details, maintenance agreements, warranties '
+          'and any lease or finance agreements for renewable energy '
+          'installations, including solar PV, solar thermal, battery storage, '
+          'air source heat pumps and ground source heat pumps.');
+    }
+
     return _cleanupPhrases(phrases);
   }
 
@@ -1984,14 +2025,22 @@ class ReportBuilder {
           : 'No visible security system was noted to the communal areas. These installations were not tested.');
     }
 
-    // General Advice: spec's own text has no "or" branch, so this always
-    // fires the same wording regardless of any answer, same reasoning as
-    // J4's Lead/Radon.
-    phrases.add(
-        'Buildings require regular inspection and maintenance throughout their service life. Prompt attention to isolated defects will normally reduce the likelihood of more extensive deterioration and costly future repairs. Where specialist inspections have been recommended within this report, these should be obtained before legal commitment where practicable.');
+    // (General Advice moved: the revised spec places the general-maintenance
+    // advisory at the end of J3 Risks to People, not with the security risks.
+    // See _riskGeneralMaintenanceAdvice, added to J3 in the section assembly.)
 
     return _cleanupPhrases(phrases);
   }
+
+  // Revised-spec general-maintenance advisory. Under the revised structure this
+  // closes J3 Risks to People (previously it closed the app's J5 Security).
+  static const String _riskGeneralMaintenanceAdvice =
+      'Buildings require regular inspection and maintenance throughout their '
+      'service life. Prompt attention to isolated defects will normally reduce '
+      'the likelihood of more extensive deterioration and costly future '
+      'repairs. Where specialist inspections have been recommended within this '
+      'report, these should be obtained before legal commitment where '
+      'practicable.';
 
   List<String> _labelsForAnswerMap(
     Map<String, String> answers,
@@ -2876,20 +2925,30 @@ class ReportBuilder {
     }
 
     if (sectionKey == 'J') {
-      // J2 Risks to the Grounds (Phase 2F): the app has no dedicated J2
-      // screen at all, so this is always a synthesized entry, inserted
-      // ahead of J3's insertion point (same anchor, computed fresh) so
-      // the report reads J1, J2, J3 in spec order.
+      // Revised spec (Phase 7): the Risks section is exactly four subsections -
+      // J1 Risks to the Building, J2 Risks to the Grounds, J3 Risks to People,
+      // J4 Other risks. The app previously produced five (a separate J4 Risks
+      // to Health and J5 Risks to Security). To match the revised spec:
+      //  - the former Health risks (asbestos/mould/lead/radon) fold into J3
+      //    Risks to People, followed by the general-maintenance advisory;
+      //  - the former Security risks (external doors / communal security
+      //    systems) fold into J4 Other risks (the native activity_risks_other_
+      //    screen, which already carries the proximity risks).
+      // Observed content is preserved (folded, not dropped); only the section
+      // grouping changes to the revised four-subsection layout.
+      const anchorId = 'activity_risks_other_';
+
+      // J2 Risks to the Grounds (synthesized; no native screen).
       final riskToGrounds = _legacyDerivedSectionFRiskToGrounds(rawData);
       if (riskToGrounds.isNotEmpty) {
+        final j2InsertAt = screens.indexWhere(
+          (s) => s.screenId.trim().toLowerCase() == anchorId,
+        );
         final j2Screen = ReportScreen(
           screenId: 'derived_j2_risk_to_grounds',
           title: 'J2 Risk To Grounds',
           fields: const <ReportField>[],
           phrases: riskToGrounds,
-        );
-        final j2InsertAt = screens.indexWhere(
-          (s) => s.screenId.trim().toLowerCase() == 'activity_risks_other_',
         );
         if (j2InsertAt >= 0) {
           screens.insert(j2InsertAt, j2Screen);
@@ -2898,16 +2957,24 @@ class ReportBuilder {
         }
       }
 
-      final riskToPeople = _legacyDerivedSectionFRiskToPeople(rawData);
-      if (riskToPeople.isNotEmpty) {
+      // J3 Risks to People (synthesized): people-safety risks, then the former
+      // health risks (asbestos/mould/lead/radon), then the general-maintenance
+      // advisory - matching the revised J3 structure. Health always fires, so
+      // J3 is always present.
+      final j3People = _cleanupPhrases(<String>[
+        ..._legacyDerivedSectionFRiskToPeople(rawData),
+        ..._legacyDerivedSectionFRiskToHealth(rawData),
+        _riskGeneralMaintenanceAdvice,
+      ]);
+      if (j3People.isNotEmpty) {
+        final insertAt = screens.indexWhere(
+          (s) => s.screenId.trim().toLowerCase() == anchorId,
+        );
         final j3Screen = ReportScreen(
           screenId: 'derived_j3_risk_to_people',
           title: 'J3 Risk To People',
           fields: const <ReportField>[],
-          phrases: riskToPeople,
-        );
-        final insertAt = screens.indexWhere(
-          (s) => s.screenId.trim().toLowerCase() == 'activity_risks_other_',
+          phrases: j3People,
         );
         if (insertAt >= 0) {
           screens.insert(insertAt, j3Screen);
@@ -2916,60 +2983,43 @@ class ReportBuilder {
         }
       }
 
-      // J4 Risks to Health (Phase 2F): also a synthesized entry (no
-      // dedicated screen), inserted after J2/J3 at the same anchor so it
-      // lands right before the anchor screen itself, giving J1, J2, J3, J4
-      // order. Unlike J2/J3 this always fires (see the function's own
-      // doc comment for why), so no isNotEmpty guard is strictly needed,
-      // but kept for defensive consistency with the other two.
-      final riskToHealth = _legacyDerivedSectionFRiskToHealth(rawData);
-      if (riskToHealth.isNotEmpty) {
-        final j4Screen = ReportScreen(
-          screenId: 'derived_j4_risk_to_health',
-          title: 'J4 Risk To Health',
-          fields: const <ReportField>[],
-          phrases: riskToHealth,
-        );
-        final j4InsertAt = screens.indexWhere(
-          (s) => s.screenId.trim().toLowerCase() == 'activity_risks_other_',
-        );
-        if (j4InsertAt >= 0) {
-          screens.insert(j4InsertAt, j4Screen);
-        } else {
-          screens.add(j4Screen);
-        }
-      }
-
-      // J5 Risks to the Security of the Property (Phase 2F): also a
-      // synthesized entry, inserted after J4 at the same anchor so it lands
-      // right before the anchor screen, giving J1, J2, J3, J4, J5 order.
+      // J4 Other risks: enrich the native activity_risks_other_ screen (which
+      // carries the proximity risks) with the former J5 security risks. If the
+      // native screen is absent, synthesize a J4 entry so the security content
+      // is never dropped.
       final riskToSecurity = _legacyDerivedSectionFRiskToSecurity(rawData);
       if (riskToSecurity.isNotEmpty) {
-        final j5Screen = ReportScreen(
-          screenId: 'derived_j5_risk_to_security',
-          title: 'J5 Risk To Security',
-          fields: const <ReportField>[],
-          phrases: riskToSecurity,
+        final j4Index = screens.indexWhere(
+          (s) => s.screenId.trim().toLowerCase() == anchorId,
         );
-        final j5InsertAt = screens.indexWhere(
-          (s) => s.screenId.trim().toLowerCase() == 'activity_risks_other_',
-        );
-        if (j5InsertAt >= 0) {
-          screens.insert(j5InsertAt, j5Screen);
+        if (j4Index >= 0) {
+          final existing = screens[j4Index];
+          screens[j4Index] = ReportScreen(
+            screenId: existing.screenId,
+            title: existing.title,
+            fields: existing.fields,
+            phrases: <String>[...existing.phrases, ...riskToSecurity],
+            userNote: existing.userNote,
+            parentId: existing.parentId,
+            isCompleted: existing.isCompleted,
+            isMergedGroup: existing.isMergedGroup,
+          );
         } else {
-          screens.add(j5Screen);
+          screens.add(ReportScreen(
+            screenId: 'derived_j4_other_risks',
+            title: 'J4 Other Risks',
+            fields: const <ReportField>[],
+            phrases: riskToSecurity,
+          ));
         }
       }
 
       // Cross-injected Risk-to-Building content (from E1 chimney and other
       // source screens) only reaches the report via `_phrasesForScreen`'s
       // enrichment of the NATIVE `activity_risks_risk_to_building_` screen -
-      // which only runs when that screen has its own answers. If the
-      // surveyor never touched J1's own screen, cross-injected content was
-      // silently dropped even though the underlying defects exist elsewhere
-      // (found via Phase 2B Gate 3 verification). Mirror the J3 pattern
-      // above: when J1's native screen produced nothing but there is
-      // cross-injected content, insert it as its own synthesized entry.
+      // which only runs when that screen has its own answers. When J1's own
+      // screen produced nothing but cross-injected content exists, insert it
+      // as its own synthesized J1 entry so it is not silently dropped.
       final hasNativeJ1 = screens.any(
         (s) => s.screenId.trim().toLowerCase() == 'activity_risks_risk_to_building_',
       );

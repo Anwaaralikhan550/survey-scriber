@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2579,
-   "approvedLegacyBank": 713,
-   "approvedCurrentBankOnly": 1839,
+   "distinctEmitted": 2594,
+   "approvedLegacyBank": 669,
+   "approvedCurrentBankOnly": 1898,
    "unapproved": 0
   }
  },
@@ -41,13 +41,13 @@
    "sectionKey": "D",
    "screenId": "activity_property_construction",
    "title": "Property",
-   "dataFieldCount": 10,
-   "permutationCount": 18,
+   "dataFieldCount": 12,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -70,7 +70,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is understood to have been constructed in approximately sample detail. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
+    "The property is understood to have been constructed in approximately sample detail. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
     "The vendor informed me during my inspection that the property was constructed in approximately sample detail."
    ]
   },
@@ -592,8 +592,8 @@
    "severities": [],
    "phraseStats": {
     "total": 24,
-    "approvedLegacy": 7,
-    "approvedCurrentBankOnly": 17,
+    "approvedLegacy": 3,
+    "approvedCurrentBankOnly": 21,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -839,10 +839,13 @@
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Private Road: The road serving the property appears to be private and may not be maintained at public expense. Your legal adviser should confirm its status, together with any rights of access, maintenance responsibilities, and associated liabilities (see section I1 - Regulation)."
+   ]
   },
   {
    "sectionKey": "H",
@@ -959,10 +962,13 @@
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The building is served by one or more passenger lifts. These are specialist installations and were not inspected or assessed as part of this survey. Your legal adviser should confirm that appropriate inspection, maintenance, and servicing arrangements are in place."
+   ]
   },
   {
    "sectionKey": "H",
@@ -992,10 +998,13 @@
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Subsoil: The exact nature of the subsoil has not been investigated as part of this survey. However, the subsoil in the area may include shrinkable clay. Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions."
+   ]
   },
   {
    "sectionKey": "H",
@@ -1020,10 +1029,15 @@
    "severities": [],
    "phraseStats": {
     "total": 5,
-    "approvedLegacy": 5,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The property is in an area that may be at risk of flooding because it is in a low lying area. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report.",
+    "The property is in an area that may be at risk of flooding because it is next to a river. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report.",
+    "The property is in an area that may be at risk of flooding because it is next to a canal. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report."
+   ]
   },
   {
    "sectionKey": "H",
@@ -1180,7 +1194,7 @@
    },
    "editedBankSamples": [
     "The main internal stopcock could not be identified during my inspection. You should ask the vendor to confirm its location, as this is important for you to know. The property must be maintained in the normal way.",
-    "The external water supply pipe rising is made of lead, and this may be a health hazard (see section J4 - Risks to Health). Before 1970, many water supply pipes were made of lead and research has shown that small quantities can pass into the water. This can be a problem in areas that have ‘soft’ water. If you want to remove this potential health risk completely, you should replace all the lead piping on the property soon. For further advice, visit the Drinking Water Inspectorate at www.dwi.gov.uk.",
+    "The external water supply pipe rising is made of lead, and this may be a health hazard (see section J3 - Risks to People). Before 1970, many water supply pipes were made of lead and research has shown that small quantities can pass into the water. This can be a problem in areas that have ‘soft’ water. You should obtain advice from your water supplier and consider replacing all the lead piping on the property to eliminate this potential health risk. For further advice, visit the Drinking Water Inspectorate at www.dwi.gov.uk.",
     "The main internal stopcock was identified and is located under the kitchen sink. The property must be maintained in the normal way."
    ]
   },
@@ -1188,17 +1202,19 @@
    "sectionKey": "G",
    "screenId": "activity_services_heating_about_heating",
    "title": "About Heating System",
-   "dataFieldCount": 15,
-   "permutationCount": 51,
+   "dataFieldCount": 18,
+   "permutationCount": 54,
    "severities": [],
    "phraseStats": {
-    "total": 10,
-    "approvedLegacy": 9,
-    "approvedCurrentBankOnly": 1,
+    "total": 13,
+    "approvedLegacy": 7,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is heated by a central boiler. I was unable to inspect the boiler unit due to restricted access or because it could not be located, and I cannot comment on its type or condition."
+    "The property is heated by a central boiler. I was unable to inspect the boiler unit due to restricted access or because it could not be located, and I cannot comment on its type or condition.",
+    "The property does not have a fixed heating system. Although no repair is currently required, the absence of fixed heating may result in cold rooms, condensation, and mould growth. It is also likely to adversely affect the property’s Energy Performance Certificate (EPC) rating and may impact its marketability. You should consider installing a suitable fixed heating system.",
+    "The property is heated by an air source heat pump. The installation was inspected visually only, and no operational testing or assessment of performance, efficiency or controls was undertaken."
    ]
   },
   {
@@ -1210,12 +1226,14 @@
    "severities": [],
    "phraseStats": {
     "total": 11,
-    "approvedLegacy": 10,
-    "approvedCurrentBankOnly": 1,
+    "approvedLegacy": 8,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The rainwater gutters and pipes are shared with a neighbouring property or properties. You should check with your legal adviser about your rights and obligations (See Section I3)."
+    "The rainwater gutters and pipes are shared with a neighbouring property or properties. You should check with your legal adviser about your rights and obligations (See Section I3).",
+    "The property is connected to a septic tank. This is a private drainage system that treats foul waste before discharging the effluent to a drainage field or other approved outfall. The installation was inspected visually only, and no assessment of its operation or compliance with current environmental regulations was undertaken. The system should be regularly maintained and emptied as recommended. Your legal adviser should confirm ownership, maintenance responsibilities, any permits or exemptions, and compliance with current regulations.",
+    "The property is connected to a cesspit (cesspool), which is an underground storage tank that collects foul waste and requires regular emptying by a licensed waste contractor. The installation was inspected visually only, and no assessment of its condition or capacity was undertaken. Your legal adviser should confirm ownership, maintenance responsibilities, and any records of regular emptying."
    ]
   },
   {
@@ -1227,10 +1245,15 @@
    "severities": [],
    "phraseStats": {
     "total": 11,
-    "approvedLegacy": 11,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 2,
+    "approvedCurrentBankOnly": 9,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Communal drain, which are specialist installations shared with neighbouring property or properties. These installations are normally subject to maintenance contracts. Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs. These services have not been specifically tested.",
+    "Grounds maintenance, which are specialist installations shared with neighbouring property or properties. These installations are normally subject to maintenance contracts. Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs. These services have not been specifically tested.",
+    "Cleaning, which are specialist installations shared with neighbouring property or properties. These installations are normally subject to maintenance contracts. Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs. These services have not been specifically tested."
+   ]
   },
   {
    "sectionKey": "G",
@@ -1371,9 +1394,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Solar Electricity: The electrical supply is supplemented by photovoltaic panels installed on the front roof slope(s). This feature uses sunlight to generate electricity for the property, with any surplus exported to the National Grid. The property must be maintained in the normal way.",
+    "Solar Electricity: The electrical supply is supplemented by photovoltaic panels installed on the front roof slope(s). This feature uses sunlight to generate electricity for the property, with any surplus potentially exported to the National Grid. No significant defects were apparent from the limited visual inspection. Routine maintenance should be carried out in accordance with the manufacturer’s recommendations.",
     "I did not see any evidence as proof that the system has been installed by an appropriately qualified person, however my inspection did not reveal any concerns. You should ask your legal adviser to confirm whether the installation has appropriate planning and building regulation approvals from the local council (See Section I1 - Regulations). If not, the council may require it to be altered or removed completely. Also, check if any warranty/guarantee exists for the installation.",
-    "Solar Electricity: The electrical supply is supplemented by photovoltaic panels installed on the side roof slope(s). This feature uses sunlight to generate electricity for the property, with any surplus exported to the National Grid. The property must be maintained in the normal way."
+    "Solar Electricity: The electrical supply is supplemented by photovoltaic panels installed on the side roof slope(s). This feature uses sunlight to generate electricity for the property, with any surplus potentially exported to the National Grid. No significant defects were apparent from the limited visual inspection. Routine maintenance should be carried out in accordance with the manufacturer’s recommendations."
    ]
   },
   {
@@ -1431,12 +1454,14 @@
    "severities": [],
    "phraseStats": {
     "total": 7,
-    "approvedLegacy": 6,
-    "approvedCurrentBankOnly": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Where a stream, river or open drain is nearby, the oil storage tank may require secondary containment to prevent a spill entering the water system. This is commonly called a bund and should be assessed by an OFTEC-registered technician."
+    "There is a fuel oil storage tank in the front garden made up of plastic. No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended. Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer. Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak. Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment.",
+    "Where a stream, river or open drain is nearby, the oil storage tank may require secondary containment to prevent a spill entering the water system. This is commonly called a bund and should be assessed by an OFTEC-registered technician.",
+    "There is a fuel oil storage tank in the rear garden made up of plastic. No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended. Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer. Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak. Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment."
    ]
   },
   {
@@ -1764,10 +1789,13 @@
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Although no significant defects were apparent from the limited visual inspection, the boiler is older. Older boilers are less efficient and may become increasingly unreliable and costly to maintain. You should anticipate replacement as the boiler approaches the end of its serviceable life."
+   ]
   },
   {
    "sectionKey": "G",
@@ -1777,11 +1805,15 @@
    "permutationCount": 3,
    "severities": [],
    "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 0,
+    "total": 2,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Solar Water Heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply. The installation was inspected visually only, and no operational testing or assessment of performance was undertaken. Routine maintenance should be carried out in accordance with the manufacturer’s recommendations.",
+    "The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection. Your legal adviser should verify that any required Building Regulations approval, commissioning documentation and any available warranties or guarantees are provided (See Section I1 - Regulations)."
+   ]
   },
   {
    "sectionKey": "G",
@@ -2059,19 +2091,19 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_built_in_fittings",
    "title": "Built In Fittings",
-   "dataFieldCount": 16,
-   "permutationCount": 22,
+   "dataFieldCount": 19,
+   "permutationCount": 25,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Kitchen Units, Worktops: The fittings in the kitchen, utility room and sample detail are made up of particle board, timber, granite, marble, glass, metal and sample detail worktop along with timber and sample detail bases and wall units. Where visible, the fittings are of reasonable quality and condition. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "Kitchen Units, Worktops: The fittings in the kitchen, utility room and sample detail are made up of particle board, timber, granite, marble, glass, metal and sample detail worktop along with timber and sample detail bases and wall units. Where visible, the fittings are of satisfactory quality and condition. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "Kitchen Units, Worktops: The fittings in the kitchen, utility room and sample detail are made up of particle board, timber, granite, marble, glass, metal and sample detail worktop along with timber and sample detail bases and wall units. Where visible, the fittings are of unsatisfactory and poor quality and condition. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way."
+    "Kitchen Sink: A sink is fitted within the kitchen. The sink was inspected visually only and was not assessed for leakage or drainage performance.",
+    "Built-in Appliances: The property incorporates built-in appliances. These appliances have not been assessed; their condition, safety and serviceability are outside the scope of this inspection.",
+    "Extractor Fan: A kitchen extractor fan is fitted. Its effectiveness cannot be confirmed without the kitchen being in normal use. Regular cleaning of grease filters and vents should be undertaken to maintain efficient operation."
    ]
   },
   {
@@ -2170,9 +2202,9 @@
    "permutationCount": 23,
    "severities": [],
    "phraseStats": {
-    "total": 22,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 19,
+    "total": 21,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 21,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -2195,7 +2227,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Hollow Plaster: Localised hollow-sounding plaster was identified when tapped. This commonly indicates a loss of adhesion between the plaster and the background surface. Repairs may be required where affected areas become loose or detached, and this can be difficult to repair as large areas of plaster can be dislodged by the repair work itself.",
+    "Hollow Plaster: Localised areas of hollow-sounding plaster were noted. This usually indicates that the plaster has lost adhesion to the underlying surface. Although stable at the time of inspection, affected areas may become loose or detached over time. Localised repairs may be possible; however, where deterioration is more extensive, or the plaster becomes unstable, it may be more practical and cost-effective to remove and replace the affected section. Repairs can be undertaken as part of routine maintenance or redecoration, as necessary.",
     "Hollow Plaster: Large areas of hollow-sounding plaster were identified when tapped, indicating a loss of adhesion between the plaster and the background surface over a wide area. This will be difficult to repair, as large areas of plaster will be dislodged by the repair work itself. It may be economical to replace the whole of the plaster."
    ]
   },
@@ -2225,8 +2257,8 @@
    "severities": [],
    "phraseStats": {
     "total": 13,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 11,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -2300,9 +2332,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Internal Doors, Door Frames: The joinery items are made up of doors, architraves, stairs, stairs threads, handrails, balusters, skirting boards, cladding and sample detail, and these are formed in timber. Where visible, they appear in reasonable condition. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "Internal Doors, Door Frames: The joinery items are made up of doors, architraves, stairs, stairs threads, handrails, balusters, skirting boards, cladding and sample detail, and these are formed in timber. Where visible, they appear in satisfactory condition. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "Internal Doors, Door Frames: The joinery items are made up of doors, architraves, stairs, stairs threads, handrails, balusters, skirting boards, cladding and sample detail, and these are formed in timber. Where visible, they appear in unsatisfactory and poor condition. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way."
+    "Internal Doors, Door Frames: The joinery items are made up of doors, architraves, stairs, stairs threads, handrails, balusters, skirting boards, cladding and sample detail, and these are formed in timber. Where visible, they appear in reasonable condition. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine adjustment and maintenance appropriate to their age and construction should be expected.",
+    "Internal Doors, Door Frames: The joinery items are made up of doors, architraves, stairs, stairs threads, handrails, balusters, skirting boards, cladding and sample detail, and these are formed in timber. Where visible, they appear in satisfactory condition. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine adjustment and maintenance appropriate to their age and construction should be expected.",
+    "Internal Doors, Door Frames: The joinery items are made up of doors, architraves, stairs, stairs threads, handrails, balusters, skirting boards, cladding and sample detail, and these are formed in timber. Where visible, they appear in unsatisfactory and poor condition. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine adjustment and maintenance appropriate to their age and construction should be expected."
    ]
   },
   {
@@ -2337,9 +2369,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Bath, Shower, Wash Hand Basin, WC, Sanitary Ware: The fittings and appliances in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail are made up of old style, fairly basic, dated, modern and sample detail bathtub, shower unit, overhead shower, wc, wash hand basin, urinal, bidet and sample detail. Where visible, the fittings are of reasonable condition and quality. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "Bath, Shower, Wash Hand Basin, WC, Sanitary Ware: The fittings and appliances in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail are made up of old style, fairly basic, dated, modern and sample detail bathtub, shower unit, overhead shower, wc, wash hand basin, urinal, bidet and sample detail. Where visible, the fittings are of satisfactory condition and quality. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "Bath, Shower, Wash Hand Basin, WC, Sanitary Ware: The fittings and appliances in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail are made up of old style, fairly basic, dated, modern and sample detail bathtub, shower unit, overhead shower, wc, wash hand basin, urinal, bidet and sample detail. Where visible, the fittings are of unsatisfactory and poor condition and quality. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way."
+    "Bath, Shower, Wash Hand Basin, WC, Sanitary Ware: The fittings and appliances in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail are made up of old style, fairly basic, dated, modern and sample detail bathtub, shower unit, overhead shower, wc, wash hand basin, urinal, bidet and sample detail. Where visible, the fittings are of reasonable condition and quality, consistent with their age and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the fittings should be expected.",
+    "Bath, Shower, Wash Hand Basin, WC, Sanitary Ware: The fittings and appliances in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail are made up of old style, fairly basic, dated, modern and sample detail bathtub, shower unit, overhead shower, wc, wash hand basin, urinal, bidet and sample detail. Where visible, the fittings are of satisfactory condition and quality, consistent with their age and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the fittings should be expected.",
+    "Bath, Shower, Wash Hand Basin, WC, Sanitary Ware: The fittings and appliances in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail are made up of old style, fairly basic, dated, modern and sample detail bathtub, shower unit, overhead shower, wc, wash hand basin, urinal, bidet and sample detail. Where visible, the fittings are of unsatisfactory and poor condition and quality, consistent with their age and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the fittings should be expected."
    ]
   },
   {
@@ -2356,7 +2388,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Extractor Fan: The extractor in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail switch was on and was working, switch on - not working and sample detail at the time of my inspection, but I cannot confirm its effectiveness as the bathroom was not in normal use.",
+    "Extractor Fan: The extractor in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail switch was on and was working, switch on - not working and sample detail at the time of my inspection. The effectiveness of the fan cannot be confirmed without the bathroom being in normal use. Where condensation or mould growth is evident, the fan should be cleaned regularly and set to continue operating after use, where this function is available, and window(s) opened regularly if one is available, to improve air circulation and ventilation.",
     "Extractor Fan: The extractor fan in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail was not working, has blocked vent, is too small, has weak suction and sample detail at the time of my inspection. Where condensation or mould growth is evident, the fan should be cleaned regularly and set to continue operating after use, where this function is available, to improve ventilation. You should repair or clean this soon."
    ]
   },
@@ -2504,9 +2536,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Cracking: Minor shrinkage cracking was observed to the ceiling junction with walls. Such cracking is common in properties of this age and type and is not generally considered structurally significant. The cracks may be filled and redecorated during routine maintenance.",
-    "Cracking: Minor shrinkage cracking was observed to the plasterboard joints. Such cracking is common in properties of this age and type and is not generally considered structurally significant. The cracks may be filled and redecorated during routine maintenance.",
-    "Cracking: Minor shrinkage cracking was observed to the ceiling surfaces. Such cracking is common in properties of this age and type and is not generally considered structurally significant. The cracks may be filled and redecorated during routine maintenance."
+    "Cracking: Minor shrinkage or settlement cracking was observed to the ceiling junction with walls. Such cracking is common in properties of this age and type and is not considered structurally significant. The cracks may be adequately filled with appropriate material and redecorated during routine maintenance.",
+    "Cracking: Minor shrinkage or settlement cracking was observed to the plasterboard joints. Such cracking is common in properties of this age and type and is not considered structurally significant. The cracks may be adequately filled with appropriate material and redecorated during routine maintenance.",
+    "Cracking: Minor shrinkage or settlement cracking was observed to the ceiling surfaces. Such cracking is common in properties of this age and type and is not considered structurally significant. The cracks may be adequately filled with appropriate material and redecorated during routine maintenance."
    ]
   },
   {
@@ -2523,9 +2555,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The ceiling includes ornamental plaster features. This is very loose (See Section J3 - Risks). This should be repaired now. Although some damage may be superficial, ornamental plasterwork can be heavy, and its loss of fixing presents a falling hazard.",
-    "The ceiling includes ornamental plaster features. This is badly cracked (See Section J3 - Risks). This should be repaired now. Although some damage may be superficial, ornamental plasterwork can be heavy, and its loss of fixing presents a falling hazard.",
-    "The ceiling includes ornamental plaster features. This is partly missing (See Section J3 - Risks). This should be repaired now. Although some damage may be superficial, ornamental plasterwork can be heavy, and its loss of fixing presents a falling hazard."
+    "Ornamental Plaster: The ceiling incorporates ornamental plaster features, some of which were found to be very loose (See Section J3 - Risks). These defects present a safety hazard, as sections may become detached and fall. A suitably qualified plastering contractor should inspect the affected areas and carry out appropriate repairs or replacement without delay. Localised repairs may be possible; however, where deterioration is extensive, complete replacement of the affected ornamental plasterwork may be necessary, resulting in more extensive and costly remedial works.",
+    "Ornamental Plaster: The ceiling incorporates ornamental plaster features, some of which were found to be badly cracked (See Section J3 - Risks). These defects present a safety hazard, as sections may become detached and fall. A suitably qualified plastering contractor should inspect the affected areas and carry out appropriate repairs or replacement without delay. Localised repairs may be possible; however, where deterioration is extensive, complete replacement of the affected ornamental plasterwork may be necessary, resulting in more extensive and costly remedial works.",
+    "Ornamental Plaster: The ceiling incorporates ornamental plaster features, some of which were found to be partly missing (See Section J3 - Risks). These defects present a safety hazard, as sections may become detached and fall. A suitably qualified plastering contractor should inspect the affected areas and carry out appropriate repairs or replacement without delay. Localised repairs may be possible; however, where deterioration is extensive, complete replacement of the affected ornamental plasterwork may be necessary, resulting in more extensive and costly remedial works."
    ]
   },
   {
@@ -2577,8 +2609,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "General Performance: I walked on the suspended floor surfaces and found them generally to be firm and even to the tread, with no signs of excessive springiness or distortion.",
-    "General Performance: I walked on the suspended floor surfaces and found them to be generally firm; however, I noted creaking to parts of the floors, stairs and minor floor unevenness. Minor creaking to suspended timber floors is common in properties of this age and type and does not necessarily indicate a structural defect. No signs of excessive springiness or distortion were noted."
+    "General Performance: I walked over the accessible suspended floor surfaces and found them to be firm and level underfoot, with no evidence of excessive springiness or distortion. This is based on a visual inspection only, and the condition of concealed floor timbers cannot be confirmed without opening up the structure.",
+    "General Performance: I walked over the accessible suspended floor surfaces and found them to be firm underfoot. Localised creaking and minor unevenness were noted to parts of the floors, stairs and minor floor unevenness. These are not uncommon in properties of this age, and, at the time of inspection, there was no evidence of excessive springiness or significant distortion suggestive of structural failure. This is associated with normal shrinkage or movement between floorboards and joists. Repairs may be undertaken as part of routine maintenance."
    ]
   },
   {
@@ -2610,7 +2642,7 @@
    },
    "editedBankSamples": [
     "Fireplace Openings: The fireplace in the ground, first, second and sample detail floor lounge, reception(s), dining room, kitchen, bedroom(s) and sample detail is blocked and vented. Where fireplaces have been blocked or sealed, adequate ventilation should be maintained where appropriate.",
-    "Fireplace Openings: The fireplace in the ground, first, second and sample detail floor lounge, reception(s), dining room, kitchen, bedroom(s) and sample detail is blocked and unvented. When a fireplace in an external chimney breast is taken out, and the opening blocked up, the disused flue needs additional ventilation. If none has been installed, the disused flue should be fitted with ventilating air bricks to the outside air. This should be done soon."
+    "Fireplace Openings: The fireplace in the ground, first, second and sample detail floor lounge, reception(s), dining room, kitchen, bedroom(s) and sample detail has been sealed, but no ventilation to the redundant flue was evident. Unventilated flues can trap moisture, increasing the risk of dampness, condensation, and deterioration of the chimney structure. A suitably qualified contractor should inspect the flue and install appropriate permanent ventilation, such as ventilating air bricks or flue vents, where required. This work should be carried out soon to reduce the risk of moisture-related defects."
    ]
   },
   {
@@ -2814,13 +2846,13 @@
    "sectionKey": "F",
    "screenId": "activity_inside_property_about_roof_structure",
    "title": "About Roof structure",
-   "dataFieldCount": 20,
-   "permutationCount": 36,
+   "dataFieldCount": 23,
+   "permutationCount": 39,
    "severities": [],
    "phraseStats": {
-    "total": 17,
+    "total": 20,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 17,
+    "approvedCurrentBankOnly": 20,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -3044,9 +3076,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Cellar: The cellar has been improved and is currently used as storage. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "Cellar: The cellar has been improved and is currently used as games room. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "Cellar: The cellar has been improved and is currently used as other. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way."
+    "Cellar: The cellar has been improved and is currently used as storage. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance is recommended.",
+    "Cellar: The cellar has been improved and is currently used as games room. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance is recommended.",
+    "Cellar: The cellar has been improved and is currently used as other. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance is recommended."
    ]
   },
   {
@@ -3063,9 +3095,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Basement: The basement has been improved and is currently used as storage. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant structural concerns were observed unless otherwise stated. No repair is currently needed. The property must be maintained in the normal way.",
-    "Basement: The basement has been improved and is currently used as games room. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant structural concerns were observed unless otherwise stated. No repair is currently needed. The property must be maintained in the normal way.",
-    "Basement: The basement has been improved and is currently used as other. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant structural concerns were observed unless otherwise stated. No repair is currently needed. The property must be maintained in the normal way."
+    "Basement: The basement has been improved and is currently used as storage. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant structural concerns were observed unless otherwise stated. Routine maintenance is recommended.",
+    "Basement: The basement has been improved and is currently used as games room. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant structural concerns were observed unless otherwise stated. Routine maintenance is recommended.",
+    "Basement: The basement has been improved and is currently used as other. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant structural concerns were observed unless otherwise stated. Routine maintenance is recommended."
    ]
   },
   {
@@ -3271,7 +3303,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Polystyrene Ceiling Tiles: The ceilings incorporate polystyrene ceiling tiles. These should be regarded as a potential fire hazard, and replacement should be considered during future refurbishment (See Section J3 - Risks)."
+    "Polystyrene Ceiling Tiles: Parts of the ceilings are covered with polystyrene tiles, which present a fire safety risk. Polystyrene is highly flammable and, if ignited, can contribute to the rapid spread of fire while releasing dense, toxic smoke and harmful fumes that can significantly increase the risk to occupants. Although these tiles may have been acceptable when installed, they no longer meet modern fire safety expectations. They should be removed as soon as practicable by a competent contractor. Be aware that removal may damage the underlying ceiling, particularly if the tiles have been firmly bonded, and repairs or complete replacement of the ceiling finish may be required (See Section J3 - Risks)."
    ]
   },
   {
@@ -3492,7 +3524,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Heavy Decorative Finishes: The ceilings are covered with lining paper, decorative coverings, or other applied finishes. Although I could see no problems now, these finishes may conceal minor defects and may require local repairs when removed during future redecoration."
+    "Heavy Decorative Finishes: The ceilings are covered with heavy lining paper, decorative finishes, or similar coverings. No significant defects were evident at the time of inspection; however, these finishes can conceal minor cracking or other imperfections. Their removal during future redecoration may damage the underlying plaster, and you should allow for localised repairs or re-plastering."
    ]
   },
   {
@@ -3761,9 +3793,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Where visible, these appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Where visible, these appear in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Where visible, these appear in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
+    "Where visible, these appear in reasonable condition, consistent with their age and construction.",
+    "Where visible, these appear in satisfactory condition, consistent with their age and construction.",
+    "Where visible, these appear in unsatisfactory and poor condition, consistent with their age and construction."
    ]
   },
   {
@@ -3955,8 +3987,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Party Wall: Gaps were observed within the party wall (the wall between this and the neighbouring dwelling) within the roof space - it is partly missing, which could allow fire to pass from one property to another. Repairs should be undertaken to maintain fire separation and reduce the risk of fire spread between adjoining properties - the wall should be built up and any gaps to the underside of the roof covering sealed soon. The owner of the neighbouring property has some legal rights over this party wall. You should check with your legal adviser before you organise any work (See Section I1 - Regulations).",
-    "Party Wall: Significant gaps were observed within the party wall (the wall between this and the neighbouring dwelling) within the roof space - it is largely missing, and will allow fire to pass from one property to another (see section J3 - Risks) as well as present a security risk. Repairs should be undertaken to maintain fire separation and reduce the risk of fire spread between adjoining properties - you should organise the repair of the wall and the sealing of any gaps to the underside of the roof covering now. The owner of the neighbouring property has some legal rights over this party wall. You should check with your legal adviser before you organise any work (See Section I1 - Regulations)."
+    "Party Wall: The party wall within the roof space is incomplete, leaving gaps that could allow fire to spread between this and the neighbouring property. The wall should be extended to the underside of the roof covering and all gaps suitably fire-stopped as soon as possible. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property (See Section I1 - Regulations).",
+    "Party Wall: The party wall within the roof space is missing, creating a risk of fire spread between this and the neighbouring property (see section J3 - Risks) and reducing security between the properties. The wall should be rebuilt to the underside of the roof covering and all gaps appropriately fire-stopped without delay. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property (See Section I1 - Regulations)."
    ]
   },
   {
@@ -4099,9 +4131,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Some internal doors and frames are distorted and do not shut properly. This may have been affected by past settlement. So far as can be seen, from this single inspection the movement appears to be longstanding and are considered acceptable.",
+    "Some internal doors and frames are distorted, and the door(s) do not shut properly. This may have been affected by past settlement. As far as can be seen from this single inspection, the movement appears to be longstanding and is consistent with properties of this age and type of construction. I did not note any signs of current or ongoing movement that warrant any further investigation or structural repairs. The door(s) and their frames should be adjusted, repaired, refitted so that it closes properly.",
     "One or more internal doors are glazed, and it is not possible to confirm whether safety glass has been fitted. If the doors are not fitted with safety glasses, any breakages could result in injury to nearby persons. You should ask your legal adviser to check whether safety glass has been installed.",
-    "Stair Treads: Over time, the wood to staircases can shrink and split, loosening the various joints and causing the stairs to creak when used. Localised creaking or minor movement is commonly associated with normal use and ageing. This is not a safety hazard, but you should overhaul and repair the stairs during routine maintenance."
+    "Stair Treads: The staircase creaks when walked on. This is commonly caused by the natural shrinkage and movement of timber over time, which can loosen joints and fixings. In the absence of other signs of structural weakness, this is not normally a safety concern. However, the staircase should be overhauled, with loose joints and fixings repaired as part of routine maintenance to reduce movement and prevent further deterioration."
    ]
   },
   {
@@ -4118,7 +4150,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Stair Treads: Over time, the wood to staircases can shrink and split, loosening the various joints and causing the stairs to creak when used. Localised creaking or minor movement is commonly associated with normal use and ageing. This is not a safety hazard, but you should overhaul and repair the stairs during routine maintenance."
+    "Stair Treads: The staircase creaks when walked on. This is commonly caused by the natural shrinkage and movement of timber over time, which can loosen joints and fixings. In the absence of other signs of structural weakness, this is not normally a safety concern. However, the staircase should be overhauled, with loose joints and fixings repaired as part of routine maintenance to reduce movement and prevent further deterioration."
    ]
   },
   {
@@ -4169,7 +4201,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Some internal doors and frames are distorted and do not shut properly. This may have been affected by past settlement. So far as can be seen, from this single inspection the movement appears to be longstanding and are considered acceptable."
+    "Some internal doors and frames are distorted, and the door(s) do not shut properly. This may have been affected by past settlement. As far as can be seen from this single inspection, the movement appears to be longstanding and is consistent with properties of this age and type of construction. I did not note any signs of current or ongoing movement that warrant any further investigation or structural repairs. The door(s) and their frames should be adjusted, repaired, refitted so that it closes properly."
    ]
   },
   {
@@ -4296,8 +4328,8 @@
    "severities": [],
    "phraseStats": {
     "total": 22,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 21,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 22,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -4334,12 +4366,12 @@
    "severities": [],
    "phraseStats": {
     "total": 11,
-    "approvedLegacy": 8,
-    "approvedCurrentBankOnly": 3,
+    "approvedLegacy": 7,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Your legal adviser should be asked to verify the legal position and advise upon the implications of boundaries and adoption status of roads, rights of way and the precise maintenance and repairing responsibilities in respect of shared drains, sewers, fences, etc. I understand that this property is being sold on a freehold basis. Your Legal Adviser should confirm this. I assume that vacant possession will be available on sale, legal advisers should confirm.",
+    "The property is understood to be held on a freehold basis. Your legal adviser should confirm the tenure, that vacant possession will be available on completion, and whether the title is subject to any restrictive covenants, easements, rights of way, or other matters that could affect the use, enjoyment, marketability, or value of the property. Your legal adviser should also confirm whether there are any estate rent charges, maintenance contributions, management company obligations, or other ongoing financial liabilities associated with the property. Where the property forms part of a managed estate or private development, enquiries should be made regarding the management arrangements, service or estate charges, planned maintenance works, and any outstanding financial liabilities or disputes.",
     "I understand that this property is being sold on a leasehold basis, your Legal Adviser should confirm this. I assume that vacant possession will be available on sale, legal advisers should confirm. I have not been provided with lease details, and I assume that the unexpired term is not less than 90 years. Your legal adviser should confirm the amount of service charge and ground rent that applies to the subject property and advise on its reasonableness. It is assumed that there are no onerous covenants or restrictions within the lease. Confirmation should be obtained that effective management and insurance is in place, in respect of the whole building of which the proposed security forms a part, and that service charges are not excessive or onerous. Enquiries of the management company would be recommended to ascertain whether there are any outstanding service charges, repairs or proposed works and associated costs.",
     "Access to the property is through a private road that is not maintained by the local council. Your legal adviser should confirm this and advise you about the implications. The responsibility for private roads is usually shared among the people that use it."
    ]
@@ -4353,14 +4385,14 @@
    "severities": [],
    "phraseStats": {
     "total": 14,
-    "approvedLegacy": 10,
-    "approvedCurrentBankOnly": 4,
+    "approvedLegacy": 8,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
+    "There are signs that the property has been affected by structural movement as evidenced by cracking and general distortion to walls and around openings. This does not appear to be within acceptable tolerance. Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",
     "There are signs that the property appears to be affected by minor subsidence as evidenced by stepped cracking. This appears to be within acceptable tolerance, however, should the movement continue, I would recommend that you seek further advice from a qualified person.",
-    "There are signs that the property appears to be affected by subsidence as evidenced by stepped cracking. This does not appear to be within acceptable tolerance. I recommend that you contact a qualified person for further investigation and advice.",
-    "Evidence of timber decay or wood-boring insect activity was observed within the property. Further investigation is required on all timbers to be categorical regarding its extent. Reports and quotations should be obtained from an appropriately qualified person before purchase commitment."
+    "There are signs that the property appears to be affected by subsidence as evidenced by stepped cracking. This does not appear to be within acceptable tolerance. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts."
    ]
   },
   {
@@ -4377,9 +4409,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is located close to the airport and associated flight paths. This is an environmental feature that may influence your enjoyment of the property, its future marketability, or materially affect the property. Where environmental concerns exist, you should make your own enquiries before legal commitment.",
-    "The property is located close to a train station. This is an environmental feature that may influence your enjoyment of the property, its future marketability, or materially affect the property. Where environmental concerns exist, you should make your own enquiries before legal commitment.",
-    "The property is located close to a train line. This is an environmental feature that may influence your enjoyment of the property, its future marketability, or materially affect the property. Where environmental concerns exist, you should make your own enquiries before legal commitment."
+    "The property is located close to an airport and/or flight path. Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",
+    "The property is located close to a railway station. Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",
+    "The property is located close to a railway line. Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property."
    ]
   },
   {
@@ -4396,7 +4428,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "As regards wants of repair, you are most strongly advised to obtain competitive quotations from reputable contractors before you exchange contracts. As soon as you receive the quotations and reports and also the responses from your legal adviser, I will be pleased to advise whether or not these would cause us to change the advice or valuation which I give in this report. Only when you have all this information before you will you be fully equipped to make a reasoned and informed judgement on whether or not to proceed with the purchase. Remedial works could be costly, and quotations are required to determine this. I must advise you however that if you decided to exchange contracts without obtaining this information, you would have to accept the risk that adverse factors might come to light in the future."
+    "Further Investigations and Repairs: Where repairs or further investigations are recommended, you should obtain quotations from suitably qualified and reputable contractors before exchanging contracts. The results of these investigations, together with advice from your legal adviser, may influence your decision to proceed or the price you are prepared to pay. Until these enquiries have been completed, the extent and cost of any necessary remedial works cannot be confirmed. Proceeding with the purchase before obtaining this information means accepting the risk that additional defects or costs may become apparent after completion."
    ]
   },
   {
@@ -8932,18 +8964,18 @@
    "screenId": "activity_over_all_openion",
    "title": "OverAll Opinion",
    "dataFieldCount": 3,
-   "permutationCount": 7,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 7,
     "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
     "I am pleased to advise you that this property is believed to be a reasonable proposition for purchase. In my opinion, the property represents a reasonable proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction and level of ongoing maintenance.",
-    "I am pleased to advise you that this property is believed to be a reasonable proposition for purchase at a price of five pounds. In my opinion, the property represents a reasonable proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction and level of ongoing maintenance.",
-    "A provisional repair allowance of five pounds should be considered. The anticipated scope is sample detail."
+    "In my opinion, the property represents a good proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction and level of ongoing maintenance.",
+    "In my opinion, the property represents a fair proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction and level of ongoing maintenance."
    ]
   },
   {

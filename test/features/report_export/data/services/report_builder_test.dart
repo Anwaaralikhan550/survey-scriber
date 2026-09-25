@@ -2757,8 +2757,8 @@ void main() {
     });
 
     test(
-        'synthesises J4 Risk To Health: always fires, positive/negative branches, ordered after J3',
-        () {
+        'folds the former Health risks (asbestos/mould/lead/radon) into J3 '
+        'Risks to People, ending with the general-maintenance advisory', () {
       final tree = InspectionTreePayload(
         sections: [
           InspectionSectionDefinition(
@@ -2802,26 +2802,37 @@ void main() {
       );
 
       final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j4 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j4_risk_to_health');
-      expect(j4.title, 'J4 Risk To Health');
-      final j4Text = j4.phrases.join(' ').toLowerCase();
-      expect(j4Text, contains('materials that may contain asbestos were observed'));
-      expect(j4Text, isNot(contains('no materials suspected of containing asbestos')));
-      expect(j4Text, contains('older properties may contain lead pipework'));
-      expect(j4Text, contains('localised mould growth associated with condensation'));
-      expect(j4Text, isNot(contains('no significant mould growth')));
-      expect(j4Text, contains('presence of radon gas cannot be determined'));
+      // Revised spec: no separate J4 Risk To Health screen any more.
+      expect(
+        section.screens.any((s) => s.screenId == 'derived_j4_risk_to_health'),
+        isFalse,
+      );
+      final j3 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
+      expect(j3.title, 'J3 Risk To People');
+      final j3Text = j3.phrases.join(' ').toLowerCase();
+      expect(j3Text, contains('materials that may contain asbestos were observed'));
+      expect(j3Text,
+          isNot(contains('no materials suspected of containing asbestos')));
+      expect(j3Text, contains('older properties may contain lead pipework'));
+      expect(j3Text,
+          contains('localised mould growth associated with condensation'));
+      expect(j3Text, isNot(contains('no significant mould growth')));
+      expect(j3Text, contains('presence of radon gas cannot be determined'));
+      // The general-maintenance advisory now closes J3.
+      expect(
+          j3Text, contains('buildings require regular inspection and maintenance'));
 
-      final j4Index = section.screens
-          .indexWhere((s) => s.screenId == 'derived_j4_risk_to_health');
+      final j3Index = section.screens
+          .indexWhere((s) => s.screenId == 'derived_j3_risk_to_people');
       final otherIndex =
           section.screens.indexWhere((s) => s.screenId == 'activity_risks_other_');
-      expect(j4Index, lessThan(otherIndex));
+      expect(j3Index, lessThan(otherIndex));
     });
 
-    test('J4 Risk To Health negative branches when no asbestos/mould signal is present',
-        () {
+    test(
+        'J3 Risks to People: health negative branches when no asbestos/mould '
+        'signal is present', () {
       final tree = InspectionTreePayload(
         sections: [
           InspectionSectionDefinition(
@@ -2859,18 +2870,18 @@ void main() {
       );
 
       final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j4 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j4_risk_to_health');
-      final j4Text = j4.phrases.join(' ').toLowerCase();
-      expect(j4Text, contains('no materials suspected of containing asbestos'));
-      expect(j4Text, contains('no significant mould growth'));
-      expect(j4Text, contains('older properties may contain lead pipework'));
-      expect(j4Text, contains('presence of radon gas cannot be determined'));
+      final j3 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
+      final j3Text = j3.phrases.join(' ').toLowerCase();
+      expect(j3Text, contains('no materials suspected of containing asbestos'));
+      expect(j3Text, contains('no significant mould growth'));
+      expect(j3Text, contains('older properties may contain lead pipework'));
+      expect(j3Text, contains('presence of radon gas cannot be determined'));
     });
 
     test(
-        'synthesises J5 Risk To Security: door security + communal security system, ordered after J4',
-        () {
+        'folds the former Security risks (external doors + communal security '
+        'systems) into J4 Other risks', () {
       final tree = InspectionTreePayload(
         sections: [
           InspectionSectionDefinition(
@@ -2914,25 +2925,33 @@ void main() {
       );
 
       final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j5 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j5_risk_to_security');
-      expect(j5.title, 'J5 Risk To Security');
-      final j5Text = j5.phrases.join(' ').toLowerCase();
-      expect(j5Text, contains('external doors appear to offer limited security'));
-      expect(j5Text, isNot(contains('reasonable security')));
-      expect(j5Text, contains('incorporates a visible security system to the communal areas'));
-      expect(j5Text, contains('buildings require regular inspection and maintenance'));
-
-      final j4Index = section.screens
-          .indexWhere((s) => s.screenId == 'activity_risks_other_');
-      final j5Index = section.screens
-          .indexWhere((s) => s.screenId == 'derived_j5_risk_to_security');
-      expect(j5Index, lessThan(j4Index));
+      // Revised spec: no separate J5 Risk To Security screen any more; the
+      // security risks fold into the native J4 Other risks screen.
+      expect(
+        section.screens.any((s) => s.screenId == 'derived_j5_risk_to_security'),
+        isFalse,
+      );
+      final j4 = section.screens
+          .firstWhere((s) => s.screenId == 'activity_risks_other_');
+      final j4Text = j4.phrases.join(' ').toLowerCase();
+      expect(j4Text, contains('external doors appear to offer limited security'));
+      expect(j4Text, isNot(contains('reasonable security')));
+      expect(j4Text,
+          contains('incorporates a visible security system to the communal areas'));
+      // The general-maintenance advisory now lives in J3, not J4.
+      expect(j4Text,
+          isNot(contains('buildings require regular inspection and maintenance')));
+      final j3 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
+      expect(
+        j3.phrases.join(' ').toLowerCase(),
+        contains('buildings require regular inspection and maintenance'),
+      );
     });
 
     test(
-        'J5 Risk To Security: reasonable-door branch, no-communal-screen means Security Systems is silent, General Advice always present',
-        () {
+        'J4 Other risks: reasonable-door branch; no communal screen means the '
+        'security-system line is silent', () {
       final tree = InspectionTreePayload(
         sections: [
           InspectionSectionDefinition(
@@ -2973,12 +2992,12 @@ void main() {
       );
 
       final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j5 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j5_risk_to_security');
-      final j5Text = j5.phrases.join(' ').toLowerCase();
-      expect(j5Text, contains('external doors appear to provide reasonable security'));
-      expect(j5Text, isNot(contains('security system')));
-      expect(j5Text, contains('buildings require regular inspection and maintenance'));
+      final j4 = section.screens
+          .firstWhere((s) => s.screenId == 'activity_risks_other_');
+      final j4Text = j4.phrases.join(' ').toLowerCase();
+      expect(
+          j4Text, contains('external doors appear to provide reasonable security'));
+      expect(j4Text, isNot(contains('security system')));
     });
 
     test('injects legacy Section F guarantee phrase into I2', () {
@@ -3088,6 +3107,200 @@ void main() {
           'confirm whether the pvc glazed sections to the doors were installed by a contractor registered with fensa',
         ),
       );
+    });
+
+    test(
+        'injects the revised-spec spray-foam guarantee cross-inject into I2 when '
+        'the F1 spray-foam advisory fires', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+            'activity_inside_property_about_roof_structure': {
+              'cb_spray_foam': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(
+        all,
+        contains(
+          'obtain the spray foam insulation installation details, guarantees '
+          'and warranties, together with confirmation of any lender requirements',
+        ),
+      );
+    });
+
+    test(
+        'does not inject the spray-foam guarantee cross-inject when spray foam '
+        'is not selected', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(all, isNot(contains('spray foam insulation installation details')));
+    });
+
+    test(
+        'injects the revised-spec renewable-energy guarantee cross-inject into I2 '
+        'when a solar installation is present', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+            'activity_services_solar_power': {
+              'cb_front': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(
+        all,
+        contains(
+          'renewable energy installations, including solar pv, solar thermal, '
+          'battery storage, air source heat pumps and ground source heat pumps',
+        ),
+      );
+    });
+
+    test(
+        'does not inject the renewable-energy guarantee cross-inject when no '
+        'renewable installation is present', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'I',
+            title: 'I Issues',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_issues_glazed_sections',
+                title: 'I2 Guarantees',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_chimney_stack',
+                    label: 'windows',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = builder.build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_issues_glazed_sections': {
+              'cb_chimney_stack': 'true',
+            },
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final all =
+          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      expect(all, isNot(contains('renewable energy installations')));
     });
 
     test(

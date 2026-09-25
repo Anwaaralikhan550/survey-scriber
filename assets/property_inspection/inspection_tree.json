@@ -241,7 +241,17 @@
             },
             {
               "id": "ch6",
-              "label": "concrete frame",
+              "label": "concrete wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "ch8",
+              "label": "precast concrete panels",
+              "type": "checkbox"
+            },
+            {
+              "id": "ch9",
+              "label": "system-built",
               "type": "checkbox"
             },
             {
@@ -5887,6 +5897,27 @@
               "conditionalMode": "show"
             },
             {
+              "id": "cb_air_source_heat_pump",
+              "label": "Air source heat pump",
+              "type": "checkbox",
+              "conditionalOn": "!cb_not_inspected",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_ground_source_heat_pump",
+              "label": "Ground source heat pump",
+              "type": "checkbox",
+              "conditionalOn": "!cb_not_inspected",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_forced_air",
+              "label": "Forced air heating",
+              "type": "checkbox",
+              "conditionalOn": "!cb_not_inspected",
+              "conditionalMode": "show"
+            },
+            {
               "id": "label_other_heating",
               "label": "Other Heating",
               "type": "label",
@@ -8621,6 +8652,21 @@
                 "Satisfactory",
                 "Unsatisfactory and Poor"
               ]
+            },
+            {
+              "id": "cb_kitchen_sink",
+              "label": "Kitchen sink",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_built_in_appliances",
+              "label": "Built-in appliances",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_extractor_fan",
+              "label": "Extractor fan",
+              "type": "checkbox"
             }
           ]
         },
@@ -13902,6 +13948,21 @@
               "conditionalOn": "cb_ventilation_related_damp",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_spray_foam",
+              "label": "Spray foam insulation",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_water_penetration",
+              "label": "Evidence of water penetration",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_capped_soil_vent_pipe",
+              "label": "Capped soil and vent pipe",
+              "type": "checkbox"
             }
           ]
         },
@@ -36412,6 +36473,9 @@
               "type": "dropdown",
               "options": [
                 "Reasonable",
+                "Good",
+                "Fair",
+                "Poor",
                 "Reasonable with repair"
               ]
             },
