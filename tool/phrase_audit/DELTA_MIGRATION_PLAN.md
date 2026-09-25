@@ -54,7 +54,7 @@ version already implemented in Stream B — no delta there.
 | 5 | Section I (I1–I3) | ✅ |
 | 6 | Section J (J1–J4) | ✅ |
 | 7 | Cross-injection re-map + integrity test | ✅ |
-| 8 | End-to-end validation + updated client dossier + sign-off | ⬜ |
+| 8 | End-to-end validation + updated client dossier + sign-off | ✅ |
 
 ## Progress log
 - 2026-09-23 — Phase 0 started. Revised spec digitised to v2; verified change
@@ -511,3 +511,15 @@ Security->Other) is a separate, high-risk step (rewrites assembly + ~58 tests).
   independently (no longer early-returns when only an advisory is present). Four
   proof tests. Gate: audit All passed; regression = only the 5 known failures;
   analyzer 0; tree valid. PHASE 7 COMPLETE.
+
+- 2026-09-25 — PHASE 8 COMPLETE (end-to-end validation + sign-off).
+  * Full suite: flutter test = 1429 passed / 5 failed — the 5 are the documented
+    pre-existing failures (4 email_compose_sheet + 1 property_extended); zero new
+    regressions across 1434 tests.
+  * Permutation audit (510 screens): GAP/UNAPPROVED/GRAMMAR/PLACEHOLDER_LEAK/
+    ENGINE_ERROR all 0.
+  * flutter analyze lib = 0 errors.
+  * Bank integrity sweep (911 keys): 0 doubled words / double-spaces / stale
+    J4-J5 pointers / markdown leaks / empty values.
+  * Sign-off dossier written: tool/phrase_audit/DELTA_SIGNOFF.md.
+  ALL PHASES (0-8) COMPLETE.
