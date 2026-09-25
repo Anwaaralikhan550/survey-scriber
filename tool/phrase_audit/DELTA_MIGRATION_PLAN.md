@@ -466,3 +466,22 @@ Security->Other) is a separate, high-risk step (rewrites assembly + ~58 tests).
   * Form-field additions (new UI): G4 Air/Ground Source Heat Pump + Forced Air
     heating options; F6 Kitchen Sink / Built-in Appliances / Extractor Fan
     capture fields. Each needs new tree fields + engine wiring + bank keys.
+
+- 2026-09-25 — 7.4 J structural renumber COMPLETE (match PDF: J1-J4).
+  report_builder now assembles exactly four Risks subsections:
+   * J1 Risks to the Building (unchanged).
+   * J2 Risks to the Grounds (unchanged, synthesized).
+   * J3 Risks to People = people-safety risks + the former Health risks
+     (asbestos/mould/lead/radon) + the general-maintenance advisory
+     (_riskGeneralMaintenanceAdvice, moved out of Security). Health always
+     fires, so J3 is always present.
+   * J4 Other risks = the native activity_risks_other_ screen (proximity)
+     ENRICHED with the former Security risks (external doors / communal
+     security systems). If the native screen is absent, a derived_j4_other_risks
+     entry carries the security content.
+  Removed the separate derived_j4_risk_to_health and derived_j5_risk_to_security
+  screens. Observed content preserved (folded, not dropped). RiskToSecurity no
+  longer emits the general-advice boilerplate (moved to J3). Four report_builder
+  tests rewritten (health-in-J3 positive/negative; security-in-J4; no
+  general-advice-in-J4). Gate: 62 report_builder tests pass; regression = only
+  the 5 known failures; analyzer 0.
