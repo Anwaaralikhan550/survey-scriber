@@ -2902,6 +2902,61 @@ void main() {
     });
 
     test(
+        'J3 emits the revised-spec approved-bank wording verbatim (asbestos / '
+        'mould / general advice) when the phrase bank is available', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = makeBankBackedBuilder().build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_grounds_garage': {
+              'cb_corrugated_asbestos_sheets': 'true',
+            },
+            'activity_in_side_property_bathroom_fittings_mould': {
+              'cb_bathtub': 'true',
+            },
+            'activity_risks_other_': {'cb_not_applicable': 'true'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j3 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
+      final j3Text = j3.phrases.join('\n');
+      // Verbatim revised-spec wording from the approved {RISK_TO_PEOPLE}::* keys.
+      expect(j3Text, contains('Control of Asbestos Regulations 2012'));
+      expect(j3Text, contains('asbestos-containing materials (ACMs)'));
+      expect(j3Text, contains('Mould Growth: Localised mould growth'));
+      expect(j3Text,
+          contains('General Advice: The inspection identified matters requiring'));
+    });
+
+    test(
         'J3 Risks to People: health negative branches when no asbestos/mould '
         'signal is present', () {
       final tree = InspectionTreePayload(

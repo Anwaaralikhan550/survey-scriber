@@ -1917,7 +1917,8 @@ class ReportBuilder {
     }
     if (asbestosObserved) {
       phrases.add(
-          'Materials that may contain asbestos were observed during the inspection. Where these materials remain in good condition and are left undisturbed, they do not normally present a significant health risk. Specialist advice should be obtained before disturbance or removal.');
+          _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS}') ??
+              'Materials that may contain asbestos were observed during the inspection. Where these materials remain in good condition and are left undisturbed, they do not normally present a significant health risk. Specialist advice should be obtained before disturbance or removal.');
     } else {
       phrases.add(
           'No materials suspected of containing asbestos were identified during the inspection.');
@@ -1962,7 +1963,8 @@ class ReportBuilder {
     }
     if (mouldObserved) {
       phrases.add(
-          'Localised mould growth associated with condensation was observed. Maintaining adequate heating and ventilation should assist in reducing further mould growth.');
+          _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_MOULD_GROWTH}') ??
+              'Localised mould growth associated with condensation was observed. Maintaining adequate heating and ventilation should assist in reducing further mould growth.');
     } else {
       phrases.add('No significant mould growth was observed.');
     }
@@ -2982,7 +2984,8 @@ class ReportBuilder {
       final j3People = _cleanupPhrases(<String>[
         ..._legacyDerivedSectionFRiskToPeople(rawData),
         ..._legacyDerivedSectionFRiskToHealth(rawData),
-        _riskGeneralMaintenanceAdvice,
+        _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_GENERAL_ADVICE}') ??
+            _riskGeneralMaintenanceAdvice,
       ]);
       if (j3People.isNotEmpty) {
         final insertAt = screens.indexWhere(
