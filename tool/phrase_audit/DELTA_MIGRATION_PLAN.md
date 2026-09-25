@@ -445,3 +445,24 @@ Security->Other) is a separate, high-risk step (rewrites assembly + ~58 tests).
   mirrors {ISSUE_GUARANTEES}::{GUARANTEES_RENEWABLE_ENERGY}. Two report_builder
   tests added. Gate: 62 report_builder tests pass; regression = only the 5 known
   failures; analyzer 0.
+
+- 2026-09-25 — 7.3 Chimney-breast I1 cross-reference: VERIFIED already satisfied.
+  The app cross-references chimney-breast risk-of-collapse to I1 (and J1/J3) via
+  INLINE POINTERS in the bank keys ("(See Section I1 - Regulations)",
+  "(See Section J1 - Risks)") which the F1 pass preserved/added. report_builder
+  has no programmatic I1-Regulations injection subsystem (only Guarantees /
+  OtherMatters / Risk-to-* derived functions), so full injection into I1 is not
+  part of the architecture — the inline pointer is the app's cross-reference
+  mechanism and matches how every other I1 reference works. No code change needed.
+
+- REMAINING Phase 7 items (assessed, higher risk):
+  * J structural renumber: app produces J1 Building / J2 Grounds / J3 People /
+    J4 Health / J5 Security; v2 is J1 Building / J2 Grounds / J3 People / J4
+    Other risks. Aligning means folding J4 Health -> J3 People (asbestos/mould)
+    and J5 Security + proximity ({RISK_TO_OTHER}) -> J4 Other. This rewrites the
+    report_builder J-assembly AND ~58 report_builder tests, and changes the
+    client-facing report's section count. HELD for explicit go-ahead on the
+    target structure (see chat).
+  * Form-field additions (new UI): G4 Air/Ground Source Heat Pump + Forced Air
+    heating options; F6 Kitchen Sink / Built-in Appliances / Extractor Fan
+    capture fields. Each needs new tree fields + engine wiring + bank keys.
