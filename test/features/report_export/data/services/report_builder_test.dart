@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_scriber/features/property_inspection/domain/inspection_phrase_engine.dart';
 import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
@@ -11,6 +14,17 @@ void main() {
   late ReportBuilder builder;
   late Survey testSurvey;
   late InspectionTreePayload minimalTree;
+
+  // Builds a ReportBuilder wired with the REAL approved phrase bank, so tests
+  // can verify that the revised-spec J2/J3 wording surfaces verbatim from the
+  // bank in generated reports (production always passes the phrase engine).
+  ReportBuilder makeBankBackedBuilder() {
+    final texts = (jsonDecode(
+      File('assets/property_inspection/phrase_texts.json').readAsStringSync(),
+    ) as Map<String, dynamic>)
+        .map((k, v) => MapEntry(k, v.toString()));
+    return ReportBuilder(inspectionPhraseEngine: InspectionPhraseEngine(texts));
+  }
 
   setUp(() {
     builder = ReportBuilder();
@@ -2703,6 +2717,63 @@ void main() {
           section.screens.indexWhere((s) => s.screenId == 'activity_risks_other_');
       expect(j1Index, lessThan(j2Index));
       expect(j2Index, lessThan(j4Index));
+    });
+
+    test(
+        'J2 emits the revised-spec approved-bank wording verbatim when the phrase '
+        'bank is available', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = makeBankBackedBuilder().build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_grounds_other_grounds': {'actv_type': 'Sloping'},
+            'activity_other_repair_nearby_trees': {
+              'actv_condition': 'Problems',
+              'actv_proximity_of_adjacent_tree': 'Several',
+              'cb_significant_cracks': 'true',
+            },
+            'activity_other_repair_retaining_walls': {
+              'cb_rear': 'true',
+              'cb_cracked': 'true',
+            },
+            'activity_risks_other_': {'cb_not_applicable': 'true'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j2 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j2_risk_to_grounds');
+      final j2Text = j2.phrases.join('\n');
+      // Verbatim revised-spec wording, straight from the approved bank keys.
+      expect(j2Text, contains('Sloping Ground: The property may be situated on sloping ground.'));
+      expect(j2Text, contains('Influencing Trees: There are trees within influencing distance of the property.'));
+      expect(j2Text, contains('Retaining Walls: Evidence of movement, bulging, cracking or deterioration was observed.'));
     });
 
     test('does not synthesise J2 when none of the source screens show a risk',

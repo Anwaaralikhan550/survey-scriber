@@ -1418,6 +1418,18 @@ class ReportBuilder {
   /// data (a defect was logged, or the ground genuinely isn't level) -
   /// mirrors J1/J3's existing behaviour of never fabricating a "no risk
   /// found" default sentence for a sub-topic with no matching screen.
+  /// Resolves an approved phrase-bank entry ("{MASTER}::{SUB}") from the
+  /// inspection phrase bank, or null when the bank is unavailable (e.g. a
+  /// builder constructed without a phrase engine). J2/J3 emit the revised-spec
+  /// wording verbatim from the approved bank via this, falling back to their
+  /// legacy hardcoded wording only when the bank is not loaded.
+  String? _approvedBankPhrase(String key) {
+    final texts = inspectionPhraseEngine?.phraseTexts;
+    final v = texts == null ? null : texts[key];
+    if (v == null || v.trim().isEmpty) return null;
+    return v.trim();
+  }
+
   List<String> _legacyDerivedSectionFRiskToGrounds(V2RawReportData rawData) {
     final phrases = <String>[];
 
@@ -1427,7 +1439,8 @@ class ReportBuilder {
     final topoType = (groundsTopo['actv_type'] ?? '').trim().toLowerCase();
     if (topoType.isNotEmpty && topoType != 'relatively level') {
       phrases.add(
-          'The property occupies a $topoType site. Although no evidence of instability was observed during the inspection, sloping ground can influence drainage and foundations, and should be considered as part of routine maintenance.');
+          _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND}') ??
+              'The property occupies a $topoType site. Although no evidence of instability was observed during the inspection, sloping ground can influence drainage and foundations, and should be considered as part of routine maintenance.');
     }
 
     // Trees: H2's nearby-trees repair screen.
@@ -1451,7 +1464,11 @@ class ReportBuilder {
         otherCheckboxId: 'cb_other_619',
         otherTextId: 'et_other_197',
       );
-      if (treeIssues.isNotEmpty) {
+      final v2Trees =
+          _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES}');
+      if (v2Trees != null) {
+        phrases.add(v2Trees);
+      } else if (treeIssues.isNotEmpty) {
         phrases.add(
             'There are $proximityText within influencing distance of the property, and these appear to be causing ${_toLegacyWords(treeIssues)}. Further investigation by an appropriately qualified person is recommended before legal commitment.');
       } else {
@@ -1488,7 +1505,8 @@ class ReportBuilder {
     );
     if (retainingWallLocations.isNotEmpty && retainingWallDefects.isNotEmpty) {
       phrases.add(
-          'The retaining wall(s) to the ${_toLegacyWords(retainingWallLocations)} of the property show signs of being ${_toLegacyWords(retainingWallDefects)}. Further investigation should be undertaken where structural stability appears affected.');
+          _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_RETAINING_WALLS}') ??
+              'The retaining wall(s) to the ${_toLegacyWords(retainingWallLocations)} of the property show signs of being ${_toLegacyWords(retainingWallDefects)}. Further investigation should be undertaken where structural stability appears affected.');
     }
 
     // Boundary Structures: H4's fence-repair screen (already used as the
