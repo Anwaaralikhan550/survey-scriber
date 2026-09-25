@@ -485,3 +485,10 @@ Security->Other) is a separate, high-risk step (rewrites assembly + ~58 tests).
   tests rewritten (health-in-J3 positive/negative; security-in-J4; no
   general-advice-in-J4). Gate: 62 report_builder tests pass; regression = only
   the 5 known failures; analyzer 0.
+
+- 2026-09-25 — 7.5 Inline J-pointer reconciliation. After the J1-J4 renumber,
+  the two bank pointers that referenced the old "J4 - Risks to Health"
+  (F3 {IF_TEXTURED_IS_SELECTED} asbestos; G3 {LEAD_RISING} lead) now point to
+  "J3 - Risks to People" (health folded into J3). No other old J4/J5 pointers
+  remain in the bank. Gate: audit All passed; regression = only the 5 known
+  failures.
