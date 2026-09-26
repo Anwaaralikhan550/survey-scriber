@@ -25,12 +25,14 @@ enum HomeSegment {
 /// Status filters used by the metric cards and the "This week" card when they
 /// open the jobs list screen.
 enum JobFilter {
+  all,
   live,
   inProgress,
   completed,
   thisWeek;
 
   String get title => switch (this) {
+        JobFilter.all => 'All',
         JobFilter.live => 'Live Bookings',
         JobFilter.inProgress => 'In Progress',
         JobFilter.completed => 'Completed',
@@ -40,6 +42,11 @@ enum JobFilter {
   /// Whether a survey matches this status filter.
   bool matches(Survey s) {
     switch (this) {
+      // "All" — every survey in the segment, no status restriction (client's
+      // App-Edit brief: the Survey Folder "View all" offers All / Live / In
+      // Progress / Completed).
+      case JobFilter.all:
+        return true;
       // "Live bookings" = new instructions not yet started: anything that is
       // neither in progress nor completed (client's definition).
       case JobFilter.live:
@@ -82,6 +89,8 @@ class DashboardState {
     this.recentSurveys = const [],
     this.analytics = const AnalyticsData(),
     this.totalAllSurveys = 0,
+    this.homeSurveysCount = 0,
+    this.valuationsCount = 0,
     this.errorMessage,
   });
 
@@ -94,6 +103,11 @@ class DashboardState {
   /// Total across BOTH segments — used only for the "restore/empty" gate,
   /// which should not depend on the selected segment.
   final int totalAllSurveys;
+
+  /// Survey Folder card counts — per category, independent of the selected
+  /// segment (the folder always shows both).
+  final int homeSurveysCount;
+  final int valuationsCount;
   final String? errorMessage;
 
   bool get hasError => errorMessage != null;
@@ -105,6 +119,8 @@ class DashboardState {
     List<Survey>? recentSurveys,
     AnalyticsData? analytics,
     int? totalAllSurveys,
+    int? homeSurveysCount,
+    int? valuationsCount,
     String? errorMessage,
   }) =>
       DashboardState(
@@ -114,6 +130,8 @@ class DashboardState {
         recentSurveys: recentSurveys ?? this.recentSurveys,
         analytics: analytics ?? this.analytics,
         totalAllSurveys: totalAllSurveys ?? this.totalAllSurveys,
+        homeSurveysCount: homeSurveysCount ?? this.homeSurveysCount,
+        valuationsCount: valuationsCount ?? this.valuationsCount,
         errorMessage: errorMessage,
       );
 }
@@ -175,6 +193,10 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       recentSurveys: recent.take(5).toList(),
       analytics: _computeAnalytics(scoped),
       totalAllSurveys: _allSurveys.length,
+      homeSurveysCount:
+          _allSurveys.where(HomeSegment.homeSurveys.matches).length,
+      valuationsCount:
+          _allSurveys.where(HomeSegment.valuations.matches).length,
     );
   }
 

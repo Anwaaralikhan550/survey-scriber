@@ -7,8 +7,8 @@ import '../../../../core/sync/sync_manager.dart';
 import '../../../../shared/presentation/widgets/analytics_cards.dart';
 import '../providers/dashboard_provider.dart';
 import '../widgets/greeting_header.dart';
-import '../widgets/recent_surveys_section.dart';
 import '../widgets/stats_cards.dart';
+import '../widgets/survey_folder_section.dart';
 import 'jobs_list_page.dart';
 
 class DashboardPage extends ConsumerWidget {
@@ -121,13 +121,10 @@ class DashboardPage extends ConsumerWidget {
                   )
                 else
                   SliverToBoxAdapter(
-                    child: RecentSurveysSection(
-                      surveys: state.recentSurveys,
-                      isLoading: state.isLoading,
-                      onSurveyTap: (survey) {
-                        context.push(Routes.surveyDetailPath(survey.id));
-                      },
-                      onViewAll: () => context.go(Routes.forms),
+                    child: SurveyFolderSection(
+                      homeSurveysCount: state.homeSurveysCount,
+                      valuationsCount: state.valuationsCount,
+                      onOpenFolder: (segment) => _openFolder(context, segment),
                     ),
                   ),
                 // Bottom padding for FAB
@@ -145,7 +142,21 @@ class DashboardPage extends ConsumerWidget {
   void _openJobs(BuildContext context, HomeSegment segment, JobFilter filter) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (_) => JobsListPage(segment: segment, filter: filter),
+        builder: (_) => JobsListPage(segment: segment, initialFilter: filter),
+      ),
+    );
+  }
+
+  /// Opens a Survey Folder category (Home Surveys / Valuations) as a list with
+  /// the All / Live / In Progress / Completed "View all" filter.
+  void _openFolder(BuildContext context, HomeSegment segment) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => JobsListPage(
+          segment: segment,
+          initialFilter: JobFilter.all,
+          showFilterBar: true,
+        ),
       ),
     );
   }
