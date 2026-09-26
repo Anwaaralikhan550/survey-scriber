@@ -12,8 +12,8 @@
   },
   "phrases": {
    "distinctEmitted": 2600,
-   "approvedLegacyBank": 669,
-   "approvedCurrentBankOnly": 1904,
+   "approvedLegacyBank": 666,
+   "approvedCurrentBankOnly": 1907,
    "unapproved": 0
   }
  },
@@ -1207,14 +1207,14 @@
    "severities": [],
    "phraseStats": {
     "total": 13,
-    "approvedLegacy": 7,
-    "approvedCurrentBankOnly": 6,
+    "approvedLegacy": 6,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
     "The property is heated by a central boiler. I was unable to inspect the boiler unit due to restricted access or because it could not be located, and I cannot comment on its type or condition.",
     "The property does not have a fixed heating system. Although no repair is currently required, the absence of fixed heating may result in cold rooms, condensation, and mould growth. It is also likely to adversely affect the property’s Energy Performance Certificate (EPC) rating and may impact its marketability. You should consider installing a suitable fixed heating system.",
-    "The property is heated by an air source heat pump. The installation was inspected visually only, and no operational testing or assessment of performance, efficiency or controls was undertaken."
+    "The property is heated centrally by a communal heating system. I could not inspect the boiler unit and cannot comment on the type and condition."
    ]
   },
   {
@@ -1487,10 +1487,13 @@
    "severities": [],
    "phraseStats": {
     "total": 2,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 1,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The radiator, pipework and sample detail in the lounge, bedroom, bathroom and sample detail are leaking. Although this is not yet serious, the problem can quickly get worse and damage other parts of the property. You should ask an appropriately qualified person to check this now and promptly resolve the situation."
+   ]
   },
   {
    "sectionKey": "G",
@@ -2263,7 +2266,7 @@
    },
    "editedBankSamples": [
     "Inspection Limitations: The floor construction has been inspected from within the property only. Floor coverings were not lifted, and no opening up or destructive investigation was undertaken. The condition of concealed floor timbers, floor voids, joists, sleeper walls and foundations cannot be confirmed without lifting floor finishes or opening up the structure.",
-    "Concealed Defects: Because floor coverings were not lifted, concealed defects may exist that could not reasonably be identified during a visual inspection. No comment can therefore be made regarding the condition of concealed floor timbers or supporting construction. You must accept the risk of defects being present, including insect infestation and dry rot, until floor coverings are lifted for a full inspection.",
+    "Concealed Defects: Because floor coverings were not lifted, concealed defects may exist that could not be identified during a visual inspection. No comment can therefore be made regarding the condition of concealed floor timbers or supporting construction. You must accept the risk of defects being present, including insect infestation and dry rot, until floor coverings are lifted for a full inspection.",
     "Floor Construction: The floor(s) in the property are mainly of solid construction. No opening up was undertaken to confirm the exact construction."
    ]
   },
@@ -2610,7 +2613,7 @@
    },
    "editedBankSamples": [
     "General Performance: I walked over the accessible suspended floor surfaces and found them to be firm and level underfoot, with no evidence of excessive springiness or distortion. This is based on a visual inspection only, and the condition of concealed floor timbers cannot be confirmed without opening up the structure.",
-    "General Performance: I walked over the accessible suspended floor surfaces and found them to be firm underfoot. Localised creaking and minor unevenness were noted to parts of the floors, stairs and minor floor unevenness. These are not uncommon in properties of this age, and, at the time of inspection, there was no evidence of excessive springiness or significant distortion suggestive of structural failure. This is associated with normal shrinkage or movement between floorboards and joists. Repairs may be undertaken as part of routine maintenance."
+    "General Performance: I walked over the accessible suspended floor surfaces and found them to be firm underfoot. Localised creaking and minor unevenness were noted to parts of the floors, stairs and minor floor unevenness. These are not uncommon in properties of this age, and, at the time of inspection, there was no evidence of excessive springiness or significant distortion suggestive of structural failure. This is associated with normal shrinkage or movement between floorboards and joists. Repairs should be undertaken as part of routine maintenance."
    ]
   },
   {
@@ -3375,9 +3378,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Boiler Flues: Central heating boiler in the kitchen, bedroom(s), airing cupboard, garage and sample detail has a flue which discharges through an external wall. The visible flue terminal appears secure, adequately positioned, and free from obvious obstruction, and should be kept so always. The installation has not been tested.",
-    "Boiler Flues: Central heating boiler in the kitchen, bedroom(s), airing cupboard, garage and sample detail has a flue which discharges through an external wall. The flue appears obstructed, and this should be made clear now and kept so always. The installation has not been tested.",
-    "Boiler Flues: Central heating boiler in the kitchen, bedroom(s), airing cupboard, garage and sample detail has a flue which discharges through the roof. The visible flue terminal appears secure, adequately positioned, and free from obvious obstruction, and should be kept so always. The installation has not been tested."
+    "Boiler Flues: Central heating boiler in the kitchen, bedroom(s), airing cupboard, garage and sample detail has a flue which discharges through an external wall. The visible flue terminal appears secure, adequately positioned, and free from obvious obstruction, and should be kept so always. The installation has not been assessed.",
+    "Boiler Flues: Central heating boiler in the kitchen, bedroom(s), airing cupboard, garage and sample detail has a flue which discharges through an external wall. The flue appears obstructed, and this should be made clear now and kept so always. The installation has not been assessed.",
+    "Boiler Flues: Central heating boiler in the kitchen, bedroom(s), airing cupboard, garage and sample detail has a flue which discharges through the roof. The visible flue terminal appears secure, adequately positioned, and free from obvious obstruction, and should be kept so always. The installation has not been assessed."
    ]
   },
   {
@@ -3707,7 +3710,7 @@
    },
    "editedBankSamples": [
     "Wood-Boring Insects: No visible evidence of active wood-boring insect infestation was observed to the accessible timber floors. Historic flight holes may be present and are not necessarily indicative of active infestation.",
-    "Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed to staircase timber, roof timber to garage, floor joists in the basement and sample detail. Further inspection by an appropriately qualified timber specialist is recommended, as activity appears active or widespread. Reports and quotations should be obtained from an appropriately qualified specialist."
+    "Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed to staircase timber, roof timber to garage, floor joists in the basement and sample detail. Further inspection by an appropriately qualified timber specialist is recommended where activity appears active or widespread. Reports and quotations should be obtained from an appropriately qualified specialist."
    ]
   },
   {
@@ -4478,9 +4481,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair flashing: The waterproofing between the chimney stack and the roof covering to the main building, front, side, rear and sample detail chimney stack are very loose, largely missing, badly cracked and sample detail. This should be repaired now. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",
+    "Repair flashing: The waterproofing between the chimney stack and the roof covering to the main building, front, side, rear and sample detail chimney stack are very loose, largely missing, badly cracked and sample detail. This should be repaired now. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the extent of the work.",
     "Causing damp: This is causing damp penetration to the adjoining building elements (see section J1 - Risk to Building).",
-    "Repair flashing: The waterproofing between the chimney stack and the roof covering to the main building, front, side, rear and sample detail chimney stack(s) are loose, incomplete, split, lifted and sample detail. This should be repaired soon. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done."
+    "Repair flashing: The waterproofing between the chimney stack and the roof covering to the main building, front, side, rear and sample detail chimney stack(s) are loose, incomplete, split, lifted and sample detail. This should be repaired soon. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the extent of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done."
    ]
   },
   {
@@ -5292,8 +5295,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair Flat roof: The flat roof covering is torn, split, damaged, blistered, holding water, covered with moss and sample detail. Repairs or replacement should be undertaken before deterioration results in water penetration. To replace the covering, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work.",
-    "Repair Flat roof: The flat roof covering is torn, split, damaged, blistered, ponding and sample detail. Causing damp: This is causing damp penetration to the building below. The flat roof covering needs repair or replacing now. To do this, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work (see section J1 - Risk to Building)."
+    "Repair Flat roof: The flat roof covering is torn, split, damaged, blistered, holding water, covered with moss and sample detail. Repairs or replacement should be undertaken before further deterioration results in water penetration. To replace the covering, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work.",
+    "Repair Flat roof: The flat roof covering is torn, split, damaged, blistered, ponding and sample detail. Causing damp: This is causing damp penetration to the building below. The flat roof covering needs repair or replacement now. To do this, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work (see section J1 - Risk to Building)."
    ]
   },
   {
@@ -5481,7 +5484,7 @@
    "editedBankSamples": [
     "Repair render: Parts of the render coating to the front, side and rear wall(s) of the main building, back addition, extension, bay window and sample detail are cracked, loose, missing in places and sample detail. The defective pointing should be renewed using a mortar appropriate to the age, type and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration.",
     "Repair render: Parts of the render coating to the front, side and rear wall(s) of the main building, back addition, extension, bay window and sample detail are cracked, loose, missing in places and sample detail. The defective pointing should be renewed using a mortar appropriate to the age, type and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration. Causing damp: This is allowing damp to get into the building (see section J1 - Risk to Building). These should be repaired now.",
-    "Hazard: Rendering pieces are likely to fall and cause harm to people that may be nearby. This is a hazard and this repair should be carried out urgently (see section J3 - Risk to people)."
+    "Hazard: Rendering pieces are likely to fall and cause harm to people who may be nearby. This is a hazard and this repair should be carried out urgently (see section J3 - Risk to people)."
    ]
   },
   {
@@ -6734,7 +6737,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Poor chimney condition: The chimney stack(s) on the main building, front, side, rear and sample detail of the building are poor condition. This is a safety hazard (see section J1 - Risk to Building). Although this can be repaired, it may be economic to rebuild the whole of the stack. This should be done now. If the chimney is no longer used by heating appliances below, it may be economic to reduce the chimney height to below the level of the roof and extend the covering over."
+    "Poor chimney condition: The chimney stack(s) on the main building, front, side, rear and sample detail of the building are poor condition. This is a safety hazard (see section J1 - Risk to Building). Although this can be repaired, it may be economical to rebuild the whole stack. This should be done now. If the chimney is no longer used by heating appliances below, it may be economical to reduce the chimney height to below roof level and extend the roof covering over it."
    ]
   },
   {
@@ -6770,9 +6773,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The external walls of the main building, back addition, extension and sample detail are constructed of sample detail construction. Cladding: The external wall finish comprises fully rendered smooth with painted, pebble dash, mock tudor wall and sample detail finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing its functions. Routine maintenance appropriate to the age of the roof covering should be expected.",
-    "Description: The external walls of the main building, back addition, extension and sample detail are constructed of sample detail construction. Cladding: The external wall finish comprises partially rendered smooth with painted, pebble dash, mock tudor wall and sample detail finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing its functions. Routine maintenance appropriate to the age of the roof covering should be expected.",
-    "Description: The external walls of the main building, back addition, extension and sample detail are constructed of sample detail construction. Cladding: The external wall finish comprises fully rendered roughcast with painted, pebble dash, mock tudor wall and sample detail finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing its functions. Routine maintenance appropriate to the age of the roof covering should be expected."
+    "Description: The external walls of the main building, back addition, extension and sample detail are constructed of sample detail construction. Cladding: The external wall finish comprises fully rendered smooth with painted, pebble dash, mock tudor wall and sample detail finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age of the roof covering should be expected.",
+    "Description: The external walls of the main building, back addition, extension and sample detail are constructed of sample detail construction. Cladding: The external wall finish comprises partially rendered smooth with painted, pebble dash, mock tudor wall and sample detail finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age of the roof covering should be expected.",
+    "Description: The external walls of the main building, back addition, extension and sample detail are constructed of sample detail construction. Cladding: The external wall finish comprises fully rendered roughcast with painted, pebble dash, mock tudor wall and sample detail finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age of the roof covering should be expected."
    ]
   },
   {
@@ -7771,14 +7774,14 @@
    "severities": [],
    "phraseStats": {
     "total": 5,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 3,
+    "approvedLegacy": 1,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
+    "You should contact a qualified person to replace damaged timber or strengthen any weakened or undersized timber so that the roof structure can adequately bear the weight of the roof covering.",
     "Minor deflection was noted to the roof front, side, rear and sample detail slope(s). This degree of deflection is not considered to be structurally significant and is not unusual for a building of this age, where some degree of settlement and timber movement is to be expected over the lifespan of the roof structure. No remedial action is considered necessary at this stage.",
-    "This is likely to be caused by damaged roof timber, heavy replacement covering and sample detail.",
-    "Significant deflection was noted to the front, side, rear and sample detail roof slope(s). This level of deflection is beyond what would normally be expected for a property of this age and construction type and warrants further investigation to establish the cause and structural implications."
+    "This is likely to be caused by damaged roof timber, heavy replacement covering and sample detail."
    ]
   },
   {
@@ -8304,8 +8307,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "No repair required: No repair is currently needed, and this is not considered to be structurally significant. The timber used in older roofs can gradually change shape or distort during normal use. Also, heavier replacement tile can cause minor defection to the roof line in some instances. This does not currently appear to be a problem and is considered normal for this type of roof. Should further deflection occur, you should arrange for inspection by a qualified person.",
-    "Repair required: Defect found: The surface of the front, side and rear roof slope(s) of the building is significantly distorted, uneven or undulating. You should contact a qualified roofing contractor to replace damaged timber or strengthened any weakened or small timber so that the roof structure can adequately bear the weight of the roof covering. Further investigation and remedial work should be carried out before legal commitment (see section J1 - Risk to Building)."
+    "No repair required: No repair is currently needed, and this is not considered to be structurally significant. The timber used in older roofs can gradually change shape or distort during normal use. Also, heavier replacement tile can cause minor defection to the roof line in some instances. This does not currently appear to be a problem and is considered normal for this type of roof. Should further deflection or distortion occur, you should arrange for inspection by a qualified person.",
+    "Repair required: Defect found: The surface of the front, side and rear roof slope(s) of the building is significantly distorted, uneven or undulating. You should contact a qualified roofing contractor to replace damaged timber or strengthen any weakened or undersized timber so that the roof structure can adequately bear the weight of the roof covering. Further investigation and remedial work should be carried out before legal commitment (see section J1 - Risk to Building)."
    ]
   },
   {
@@ -8918,7 +8921,7 @@
    },
    "editedBankSamples": [
     "I am not aware of any conflict of interest in this instruction as defined by the current RICS Valuations Professional Standards incorporating the RICS Valuation - Global Professional Standards and the RICS Rules of Conduct. Should any conflict become apparent before completion of the inspection or report, you will be informed immediately.",
-    "I suspect that a conflict-of-interest issue may exist in this transaction as defined by current RICS Valuation Standards and the RICS Rules of Conduct. I am known to the one or more person connected to the property owner or the interest in the property."
+    "I suspect that a conflict-of-interest issue may exist in this transaction as defined by current RICS Valuation Standards and the RICS Rules of Conduct. I am known to one or more persons connected to the property owner or to an interest in the property."
    ]
   },
   {
