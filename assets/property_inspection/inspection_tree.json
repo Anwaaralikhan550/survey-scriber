@@ -8659,9 +8659,104 @@
               "type": "checkbox"
             },
             {
+              "id": "actv_sink_material",
+              "label": "Sink material",
+              "type": "dropdown",
+              "options": [
+                "Stainless steel",
+                "Ceramic",
+                "Composite",
+                "Stone",
+                "Other"
+              ],
+              "conditionalOn": "cb_kitchen_sink",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "cb_built_in_appliances",
               "label": "Built-in appliances",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_appliance_oven",
+              "label": "Oven",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_appliance_hob",
+              "label": "Hob",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_appliance_extractor_hood",
+              "label": "Extractor hood",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_appliance_microwave",
+              "label": "Microwave",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_appliance_dishwasher",
+              "label": "Dishwasher",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_appliance_refrigerator",
+              "label": "Refrigerator",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_appliance_freezer",
+              "label": "Freezer",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_appliance_washing_machine",
+              "label": "Washing machine",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_appliance_tumble_dryer",
+              "label": "Tumble dryer",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_appliance_other",
+              "label": "Other",
+              "type": "checkbox",
+              "conditionalOn": "cb_built_in_appliances",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             },
             {
               "id": "cb_extractor_fan",

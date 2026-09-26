@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2594,
+   "distinctEmitted": 2600,
    "approvedLegacyBank": 669,
-   "approvedCurrentBankOnly": 1898,
+   "approvedCurrentBankOnly": 1904,
    "unapproved": 0
   }
  },
@@ -2091,18 +2091,18 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_built_in_fittings",
    "title": "Built In Fittings",
-   "dataFieldCount": 19,
-   "permutationCount": 25,
+   "dataFieldCount": 30,
+   "permutationCount": 44,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 12,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 12,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Kitchen Sink: A sink is fitted within the kitchen. The sink was inspected visually only and was not assessed for leakage or drainage performance.",
-    "Built-in Appliances: The property incorporates built-in appliances. These appliances have not been assessed; their condition, safety and serviceability are outside the scope of this inspection.",
+    "Kitchen Sink: The sink is formed in the material observed. The sink was inspected visually only and was not assessed for leakage or drainage performance.",
+    "Built-in Appliances: The property incorporates built-in appliances. These appliances have not been assessed. Their condition, safety and serviceability are outside the scope of this inspection.",
     "Extractor Fan: A kitchen extractor fan is fitted. Its effectiveness cannot be confirmed without the kitchen being in normal use. Regular cleaning of grease filters and vents should be undertaken to maintain efficient operation."
    ]
   },

@@ -10930,8 +10930,59 @@ class InspectionPhraseEngine {
       }
     }
 
-    appendIf('cb_kitchen_sink', '{KITCHEN_SINK}');
-    appendIf('cb_built_in_appliances', '{BUILT_IN_APPLIANCES}');
+    // Kitchen sink — the revised spec captures the sink material.
+    if (_isChecked(answers['cb_kitchen_sink'])) {
+      final t = _sub('{F_BUILT_IN_FITTINGS}', '{KITCHEN_SINK}');
+      if (t.isNotEmpty) {
+        final material = _cleanLower(answers['actv_sink_material']);
+        phrases.addAll(_split(_normalize(t.replaceAll(
+          '{BIF_SINK_MATERIAL}',
+          material.isNotEmpty ? material : 'the material observed',
+        ))));
+      }
+    }
+
+    // Built-in appliances — the revised spec lists which appliances are present.
+    if (_isChecked(answers['cb_built_in_appliances'])) {
+      final t = _sub('{F_BUILT_IN_FITTINGS}', '{BUILT_IN_APPLIANCES}');
+      if (t.isNotEmpty) {
+        final appliances = _labelsFor(
+          [
+            'cb_appliance_oven',
+            'cb_appliance_hob',
+            'cb_appliance_extractor_hood',
+            'cb_appliance_microwave',
+            'cb_appliance_dishwasher',
+            'cb_appliance_refrigerator',
+            'cb_appliance_freezer',
+            'cb_appliance_washing_machine',
+            'cb_appliance_tumble_dryer',
+            'cb_appliance_other',
+          ],
+          answers,
+          {
+            'cb_appliance_oven': 'oven',
+            'cb_appliance_hob': 'hob',
+            'cb_appliance_extractor_hood': 'extractor hood',
+            'cb_appliance_microwave': 'microwave',
+            'cb_appliance_dishwasher': 'dishwasher',
+            'cb_appliance_refrigerator': 'refrigerator',
+            'cb_appliance_freezer': 'freezer',
+            'cb_appliance_washing_machine': 'washing machine',
+            'cb_appliance_tumble_dryer': 'tumble dryer',
+            'cb_appliance_other': 'other',
+          },
+        );
+        // "The property incorporates {list} built-in appliances." When no
+        // specific appliance is ticked, drop the empty slot so the sentence
+        // still reads correctly.
+        final resolved = appliances.isEmpty
+            ? t.replaceAll('{BIF_APPLIANCES} ', '')
+            : t.replaceAll('{BIF_APPLIANCES}', _toWords(appliances).toLowerCase());
+        phrases.addAll(_split(_normalize(resolved)));
+      }
+    }
+
     appendIf('cb_extractor_fan', '{EXTRACTOR_FAN}');
     return phrases;
   }

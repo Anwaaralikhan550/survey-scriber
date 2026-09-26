@@ -283,17 +283,38 @@ void main() {
     List<String> fittings(Map<String, String> answers) => engine.buildPhrases(
         'activity_in_side_property_built_in_fittings', answers);
 
-    test('kitchen sink checkbox emits its advisory', () {
-      final t = fittings({'cb_kitchen_sink': 'true'}).join(' ');
-      expect(t, contains('Kitchen Sink:'));
+    test('kitchen sink advisory captures the selected material', () {
+      final t = fittings({
+        'cb_kitchen_sink': 'true',
+        'actv_sink_material': 'Stainless steel',
+      }).join(' ');
+      expect(t, contains('Kitchen Sink: The sink is formed in stainless steel.'));
       expect(t, contains('not assessed for leakage or drainage performance'));
       expect(t, isNot(contains('{')));
     });
 
-    test('built-in appliances checkbox emits its advisory', () {
-      final t = fittings({'cb_built_in_appliances': 'true'}).join(' ');
-      expect(t, contains('Built-in Appliances:'));
+    test('kitchen sink advisory reads correctly when no material is picked', () {
+      final t = fittings({'cb_kitchen_sink': 'true'}).join(' ');
+      expect(t, contains('Kitchen Sink: The sink is formed in'));
+      expect(t, isNot(contains('{')));
+    });
+
+    test('built-in appliances advisory lists the selected appliances', () {
+      final t = fittings({
+        'cb_built_in_appliances': 'true',
+        'cb_appliance_oven': 'true',
+        'cb_appliance_dishwasher': 'true',
+      }).join(' ');
+      expect(t,
+          contains('The property incorporates oven and dishwasher built-in appliances.'));
       expect(t, contains('have not been assessed'));
+      expect(t, isNot(contains('{')));
+    });
+
+    test('built-in appliances advisory reads correctly with none itemised', () {
+      final t = fittings({'cb_built_in_appliances': 'true'}).join(' ');
+      expect(t, contains('The property incorporates built-in appliances.'));
+      expect(t, isNot(contains('{')));
     });
 
     test('extractor fan checkbox emits its advisory', () {
