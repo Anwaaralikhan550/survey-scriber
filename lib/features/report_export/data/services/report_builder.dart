@@ -1841,6 +1841,46 @@ class ReportBuilder {
       }
     }
 
+    // Revised-spec J3 topic statements (verbatim from the approved bank),
+    // surfaced when their category is relevant so J3 matches the revised
+    // Risks-to-People structure. Skipped when the bank is unavailable.
+
+    // Trip Hazards — uneven floors recorded on the floor uneven-repair screen.
+    final unevenFloor = _answersForScreen(
+        rawData, 'activity_in_side_property_floors_repair_uneven_floor');
+    const unevenLocations = <String>[
+      'cb_lounge',
+      'cb_bedrooms',
+      'cb_kitchen',
+      'cb_bathroom',
+      'cb_hall',
+      'cb_utility_room',
+      'cb_other_839',
+    ];
+    if (unevenLocations.any((id) => _isCheckedValue(unevenFloor[id]))) {
+      final v = _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_TRIP_HAZARDS}');
+      if (v != null) phrases.add(v);
+    }
+
+    // Electrical Safety — visible electrical defects on the hazard screen.
+    final elecHazard = _answersForScreen(
+        rawData, 'activity_services_electricity_repair_electrical_hazard');
+    if (_isCheckedValue(elecHazard['cb_exposed_wires']) ||
+        _isCheckedValue(elecHazard['cb_damaged_fittings']) ||
+        _isCheckedValue(elecHazard['cb_other_685'])) {
+      final v =
+          _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_ELECTRICAL_SAFETY}');
+      if (v != null) phrases.add(v);
+    }
+
+    // Gas Safety — a mains gas installation is present (general precaution per
+    // the revised spec: gas appliances were not assessed).
+    final mainsGas = _answersForScreen(rawData, 'activity_services_main_gas');
+    if ((mainsGas['actv_condition'] ?? '').trim().toLowerCase() == 'ok') {
+      final v = _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_GAS_SAFETY}');
+      if (v != null) phrases.add(v);
+    }
+
     return _cleanupPhrases(phrases);
   }
 

@@ -2957,6 +2957,108 @@ void main() {
     });
 
     test(
+        'J3 surfaces the revised Trip Hazards / Electrical Safety / Gas Safety '
+        'topics verbatim when their category is triggered', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = makeBankBackedBuilder().build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_in_side_property_floors_repair_uneven_floor': {
+              'cb_lounge': 'true',
+            },
+            'activity_services_electricity_repair_electrical_hazard': {
+              'cb_exposed_wires': 'true',
+            },
+            'activity_services_main_gas': {'actv_condition': 'ok'},
+            'activity_risks_other_': {'cb_not_applicable': 'true'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j3Text = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people')
+          .phrases
+          .join('\n');
+      expect(j3Text, contains('Trip Hazards: Potential trip hazards were identified'));
+      expect(j3Text, contains('Electrical Safety: Visible defects were identified'));
+      expect(j3Text,
+          contains('Gas Safety: Gas appliances and installations were not assessed'));
+    });
+
+    test(
+        'J3 does not surface Trip / Electrical / Gas topics when their category '
+        'is absent', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = makeBankBackedBuilder().build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_risks_other_': {'cb_not_applicable': 'true'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final j3Text = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people')
+          .phrases
+          .join('\n');
+      expect(j3Text, isNot(contains('Trip Hazards:')));
+      expect(j3Text, isNot(contains('Electrical Safety:')));
+      expect(j3Text, isNot(contains('Gas Safety:')));
+    });
+
+    test(
         'J3 Risks to People: health negative branches when no asbestos/mould '
         'signal is present', () {
       final tree = InspectionTreePayload(
