@@ -5904,10 +5904,37 @@
               "conditionalMode": "show"
             },
             {
+              "id": "actv_ashp_internal_location",
+              "label": "ASHP internal unit location",
+              "type": "dropdown",
+              "options": ["Kitchen", "Utility room", "Garage", "Other"],
+              "conditionalOn": "cb_air_source_heat_pump",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_ashp_external_location",
+              "label": "ASHP external unit location",
+              "type": "dropdown",
+              "options": ["Front", "Side", "Rear", "Other"],
+              "conditionalOn": "cb_air_source_heat_pump",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "cb_ground_source_heat_pump",
               "label": "Ground source heat pump",
               "type": "checkbox",
               "conditionalOn": "!cb_not_inspected",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_gshp_internal_location",
+              "label": "GSHP internal unit location",
+              "type": "dropdown",
+              "options": ["Kitchen", "Utility room", "Garage", "Other"],
+              "conditionalOn": "cb_ground_source_heat_pump",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {

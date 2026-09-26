@@ -7798,9 +7798,40 @@ class InspectionPhraseEngine {
       }
     }
 
-    appendHeatingType('cb_air_source_heat_pump', '{ABOUT_AIR_SOURCE_HEAT_PUMP}');
-    appendHeatingType(
-        'cb_ground_source_heat_pump', '{ABOUT_GROUND_SOURCE_HEAT_PUMP}');
+    // Air source heat pump — capture internal + external unit locations when
+    // both are recorded (revised spec); otherwise the plain advisory.
+    if (_isChecked(answers['cb_air_source_heat_pump'])) {
+      final intLoc = _cleanLower(answers['actv_ashp_internal_location']);
+      final extLoc = _cleanLower(answers['actv_ashp_external_location']);
+      if (intLoc.isNotEmpty && extLoc.isNotEmpty) {
+        final t = _sub('{G_HEATING}', '{ABOUT_AIR_SOURCE_HEAT_PUMP_LOCATED}');
+        if (t.isNotEmpty) {
+          phrases.addAll(_split(_normalize(t
+              .replaceAll('{HEAT_ASHP_INTERNAL_LOC}', intLoc)
+              .replaceAll('{HEAT_ASHP_EXTERNAL_LOC}', extLoc))));
+        }
+      } else {
+        appendHeatingType(
+            'cb_air_source_heat_pump', '{ABOUT_AIR_SOURCE_HEAT_PUMP}');
+      }
+    }
+
+    // Ground source heat pump — capture the internal unit location when
+    // recorded; otherwise the plain advisory.
+    if (_isChecked(answers['cb_ground_source_heat_pump'])) {
+      final intLoc = _cleanLower(answers['actv_gshp_internal_location']);
+      if (intLoc.isNotEmpty) {
+        final t = _sub('{G_HEATING}', '{ABOUT_GROUND_SOURCE_HEAT_PUMP_LOCATED}');
+        if (t.isNotEmpty) {
+          phrases.addAll(_split(_normalize(
+              t.replaceAll('{HEAT_GSHP_INTERNAL_LOC}', intLoc))));
+        }
+      } else {
+        appendHeatingType(
+            'cb_ground_source_heat_pump', '{ABOUT_GROUND_SOURCE_HEAT_PUMP}');
+      }
+    }
+
     appendHeatingType('cb_forced_air', '{ABOUT_FORCED_AIR}');
     return phrases;
   }

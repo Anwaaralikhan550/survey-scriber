@@ -1202,8 +1202,8 @@
    "sectionKey": "G",
    "screenId": "activity_services_heating_about_heating",
    "title": "About Heating System",
-   "dataFieldCount": 18,
-   "permutationCount": 54,
+   "dataFieldCount": 21,
+   "permutationCount": 75,
    "severities": [],
    "phraseStats": {
     "total": 13,

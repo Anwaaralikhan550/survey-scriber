@@ -340,11 +340,33 @@ void main() {
       expect(t, isNot(contains('{')));
     });
 
+    test('air source heat pump captures internal + external unit locations', () {
+      final t = heating({
+        'cb_air_source_heat_pump': 'true',
+        'actv_ashp_internal_location': 'Utility room',
+        'actv_ashp_external_location': 'Rear',
+      }).join(' ');
+      expect(
+          t,
+          contains(
+              'the internal unit located in the utility room and the external unit located to the rear of the property'));
+      expect(t, isNot(contains('{')));
+    });
+
     test('ground source heat pump emits its advisory', () {
       final phrases = heating({'cb_ground_source_heat_pump': 'true'});
       final t = phrases.join(' ');
       expect(t, contains('heated by a ground source heat pump'));
       expect(t, contains('ground collectors or boreholes are below ground'));
+    });
+
+    test('ground source heat pump captures the internal unit location', () {
+      final t = heating({
+        'cb_ground_source_heat_pump': 'true',
+        'actv_gshp_internal_location': 'Garage',
+      }).join(' ');
+      expect(t, contains('the internal unit located in the garage'));
+      expect(t, isNot(contains('{')));
     });
 
     test('forced air heating emits its advisory', () {
