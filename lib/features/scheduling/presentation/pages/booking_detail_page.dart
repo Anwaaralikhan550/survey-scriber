@@ -164,6 +164,22 @@ class _BookingDetailContent extends ConsumerWidget {
                 ),
                 const SizedBox(height: 16),
                 _DetailRow(
+                  icon: booking.surveyType == BookingSurveyType.valuation
+                      ? Icons.request_quote_outlined
+                      : Icons.home_work_outlined,
+                  label: 'Survey Type',
+                  value: booking.surveyType.label,
+                ),
+                if (booking.jobRef != null) ...[
+                  const SizedBox(height: 12),
+                  _DetailRow(
+                    icon: Icons.tag,
+                    label: 'Job Ref',
+                    value: booking.jobRef!,
+                  ),
+                ],
+                const SizedBox(height: 12),
+                _DetailRow(
                   icon: Icons.calendar_month,
                   label: 'Date',
                   value: dateFormat.format(booking.date),
@@ -224,7 +240,69 @@ class _BookingDetailContent extends ConsumerWidget {
             ),
           ),
 
-        if (booking.propertyAddress != null) ...[
+        if (booking.propertyType != null ||
+            booking.yearBuilt != null ||
+            booking.propertyAddress != null ||
+            booking.addressLine != null) ...[
+          const SizedBox(height: 16),
+          Builder(
+            builder: (context) {
+              final structured = [
+                booking.addressLine,
+                booking.city,
+                booking.town,
+                booking.postcode,
+                booking.county,
+              ]
+                  .whereType<String>()
+                  .where((s) => s.trim().isNotEmpty)
+                  .join(', ');
+              final address =
+                  structured.isNotEmpty ? structured : booking.propertyAddress;
+              return Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Property',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      if (booking.propertyType != null)
+                        _DetailRow(
+                          icon: Icons.house_outlined,
+                          label: 'Type',
+                          value: booking.propertyType!,
+                        ),
+                      if (booking.yearBuilt != null) ...[
+                        const SizedBox(height: 12),
+                        _DetailRow(
+                          icon: Icons.event,
+                          label: 'Year Built',
+                          value: booking.yearBuilt!,
+                        ),
+                      ],
+                      if (address != null && address.isNotEmpty) ...[
+                        const SizedBox(height: 12),
+                        _DetailRow(
+                          icon: Icons.location_on,
+                          label: 'Address',
+                          value: address,
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+
+        if (booking.accessType != null) ...[
           const SizedBox(height: 16),
           Card(
             child: Padding(
@@ -233,17 +311,53 @@ class _BookingDetailContent extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Property',
+                    'Access',
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: 16),
                   _DetailRow(
-                    icon: Icons.location_on,
-                    label: 'Address',
-                    value: booking.propertyAddress!,
+                    icon: booking.accessType == BookingAccessType.collectKeys
+                        ? Icons.vpn_key_outlined
+                        : Icons.meeting_room_outlined,
+                    label: 'Access',
+                    value: booking.accessType!.label,
                   ),
+                  if (booking.accessType == BookingAccessType.collectKeys) ...[
+                    if (booking.estateAgentName != null) ...[
+                      const SizedBox(height: 12),
+                      _DetailRow(
+                        icon: Icons.business,
+                        label: 'Estate Agent',
+                        value: booking.estateAgentName!,
+                      ),
+                    ],
+                    if (booking.estateAgentPhone != null) ...[
+                      const SizedBox(height: 12),
+                      _DetailRow(
+                        icon: Icons.phone,
+                        label: 'Agent Phone',
+                        value: booking.estateAgentPhone!,
+                      ),
+                    ],
+                    if (booking.estateAgentAddress != null) ...[
+                      const SizedBox(height: 12),
+                      _DetailRow(
+                        icon: Icons.location_on,
+                        label: 'Agent Address',
+                        value: booking.estateAgentAddress!,
+                      ),
+                    ],
+                    if (booking.estateAgentNotes != null) ...[
+                      const SizedBox(height: 12),
+                      _DetailRow(
+                        icon: Icons.notes,
+                        label: "Agent's Notes",
+                        value: booking.estateAgentNotes!,
+                      ),
+                    ],
+                  ],
                 ],
               ),
             ),
@@ -259,7 +373,7 @@ class _BookingDetailContent extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Notes',
+                    "Client's Notes",
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),

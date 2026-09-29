@@ -46,7 +46,6 @@ import '../../features/client_portal/presentation/pages/magic_link_sent_page.dar
 import '../../features/client_portal/presentation/providers/client_portal_providers.dart'
     show clientAuthNotifierProvider;
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
-import '../../features/forms/presentation/pages/forms_page.dart';
 import '../../features/invoices/presentation/pages/invoice_detail_page.dart';
 import '../../features/invoices/presentation/pages/invoices_list_page.dart';
 import '../../features/prototypes/food_capture/presentation/pages/food_capture_prototype_page.dart';
@@ -276,6 +275,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         return Routes.login;
       }
 
+      // The Forms tab has been retired (App-Edit brief). Its bottom-nav slot
+      // is now Live Bookings; the surveys list lives on the dashboard. Any
+      // lingering navigation to /forms lands there instead of a dead route.
+      if (location == Routes.forms) {
+        return Routes.dashboard;
+      }
+
       // RBAC: Admin routes require admin or manager role
       final isAdminRoute = location.startsWith('/admin');
       if (isAdminRoute && isAuthenticated) {
@@ -438,13 +444,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-          // Forms branch
+          // Live Bookings branch (replaces the retired Forms tab —
+          // App-Edit brief: "Forms … is duplication and not required.
+          // You can replace Forms with Live Booking").
           StatefulShellBranch(
             navigatorKey: _formsNavigatorKey,
             routes: [
               GoRoute(
-                path: Routes.forms,
-                builder: (context, state) => const FormsPage(),
+                path: Routes.liveBookings,
+                builder: (context, state) => const BookingsListPage(),
               ),
             ],
           ),

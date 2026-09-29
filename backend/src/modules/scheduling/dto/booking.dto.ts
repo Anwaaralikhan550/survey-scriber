@@ -101,6 +101,89 @@ export class CreateBookingDto {
   @IsString()
   @MaxLength(2000)
   notes?: string;
+
+  // ── Combined Create-Booking fields (App-Edit brief) ──
+  @ApiPropertyOptional({ description: 'Survey type', example: 'home_survey' })
+  @IsOptional()
+  @IsString()
+  surveyType?: string;
+
+  @ApiPropertyOptional({ description: 'Job reference number' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
+  jobRef?: string;
+
+  @ApiPropertyOptional({ description: 'Property type (House/Flat/Bungalow/Other)' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(50)
+  propertyType?: string;
+
+  @ApiPropertyOptional({ description: 'Year built' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(20)
+  yearBuilt?: string;
+
+  @ApiPropertyOptional({ description: 'Property address line' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  addressLine?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  city?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  town?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @MaxLength(20)
+  postcode?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  county?: string;
+
+  @ApiPropertyOptional({ description: 'Access type (direct/collect_keys)' })
+  @IsOptional()
+  @IsString()
+  accessType?: string;
+
+  @ApiPropertyOptional({ description: 'Estate agent name' })
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  estateAgentName?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @MaxLength(50)
+  estateAgentPhone?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @MaxLength(500)
+  estateAgentAddress?: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @MaxLength(2000)
+  estateAgentNotes?: string;
 }
 
 /**
@@ -296,6 +379,49 @@ export class BookingResponseDto {
 
   @ApiPropertyOptional({ example: 'Please park in the driveway' })
   notes?: string;
+
+  // ── Combined Create-Booking fields (App-Edit brief) ──
+  @ApiPropertyOptional({ example: 'home_survey' })
+  surveyType?: string;
+
+  @ApiPropertyOptional()
+  jobRef?: string;
+
+  @ApiPropertyOptional()
+  propertyType?: string;
+
+  @ApiPropertyOptional()
+  yearBuilt?: string;
+
+  @ApiPropertyOptional()
+  addressLine?: string;
+
+  @ApiPropertyOptional()
+  city?: string;
+
+  @ApiPropertyOptional()
+  town?: string;
+
+  @ApiPropertyOptional()
+  postcode?: string;
+
+  @ApiPropertyOptional()
+  county?: string;
+
+  @ApiPropertyOptional()
+  accessType?: string;
+
+  @ApiPropertyOptional()
+  estateAgentName?: string;
+
+  @ApiPropertyOptional()
+  estateAgentPhone?: string;
+
+  @ApiPropertyOptional()
+  estateAgentAddress?: string;
+
+  @ApiPropertyOptional()
+  estateAgentNotes?: string;
 
   @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
   createdById: string;

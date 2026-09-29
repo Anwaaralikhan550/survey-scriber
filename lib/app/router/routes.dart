@@ -8,6 +8,8 @@ abstract final class Routes {
   // Main app routes
   static const String dashboard = '/';
   static const String forms = '/forms';
+  // Live Bookings replaces the retired Forms tab in the bottom navigation.
+  static const String liveBookings = '/live-bookings';
   static const String reports = '/reports';
   static const String search = '/search';
   static const String newSurvey = '/new-survey';

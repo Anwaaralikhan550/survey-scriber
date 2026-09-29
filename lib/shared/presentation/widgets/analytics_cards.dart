@@ -35,6 +35,7 @@ class AnalyticsSection extends StatelessWidget {
     required this.data,
     this.isLoading = false,
     this.onViewDetails,
+    this.onTap,
     super.key,
   });
 
@@ -42,69 +43,33 @@ class AnalyticsSection extends StatelessWidget {
   final bool isLoading;
   final VoidCallback? onViewDetails;
 
+  /// Tapping the "This week" card opens the current-week jobs list.
+  final VoidCallback? onTap;
+
+  // Per the client's App-Edit brief: the completion "Insight" card and the
+  // "Status Distribution" card are not required on the dashboard. Only the
+  // "This week" weekly-activity card is retained. Its own native styling is
+  // reused unchanged for full UI consistency.
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
+    final card = WeeklyProgressCard(
+      progressData: data.weeklyProgress,
+      totalThisWeek: data.surveysThisWeek,
+      isLoading: isLoading,
+    );
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header
-          Row(
-            children: [
-              Text(
-                'Insights',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: -0.3,
-                ),
+      child: onTap == null
+          ? card
+          : Material(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+              child: InkWell(
+                onTap: onTap,
+                borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                child: card,
               ),
-              const Spacer(),
-              if (onViewDetails != null)
-                TextButton(
-                  onPressed: onViewDetails,
-                  child: Text(
-                    'View all',
-                    style: TextStyle(
-                      color: theme.colorScheme.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-            ],
-          ),
-          AppSpacing.gapVerticalMd,
-          // Cards row
-          Row(
-            children: [
-              Expanded(
-                child: CompletionRateCard(
-                  rate: data.completionRate,
-                  weeklyChange: data.weeklyChangePercent,
-                  isPositive: data.isPositiveChange,
-                  isLoading: isLoading,
-                ),
-              ),
-              AppSpacing.gapHorizontalMd,
-              Expanded(
-                child: WeeklyProgressCard(
-                  progressData: data.weeklyProgress,
-                  totalThisWeek: data.surveysThisWeek,
-                  isLoading: isLoading,
-                ),
-              ),
-            ],
-          ),
-          AppSpacing.gapVerticalMd,
-          // Status distribution card (full width)
-          StatusDistributionCard(
-            distribution: data.statusDistribution,
-            isLoading: isLoading,
-          ),
-        ],
-      ),
+            ),
     );
   }
 }
@@ -188,7 +153,8 @@ class CompletionRateCard extends StatelessWidget {
                       Text(
                         '${weeklyChange.abs().toStringAsFixed(0)}%',
                         style: theme.textTheme.labelSmall?.copyWith(
-                          color: isPositive ? AppColors.success : AppColors.error,
+                          color:
+                              isPositive ? AppColors.success : AppColors.error,
                           fontWeight: FontWeight.w600,
                           fontSize: 10,
                         ),
@@ -307,9 +273,8 @@ class WeeklyProgressCard extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: List.generate(7, (index) {
-                  final value = index < progressData.length
-                      ? progressData[index]
-                      : 0.0;
+                  final value =
+                      index < progressData.length ? progressData[index] : 0.0;
                   return Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 2),
@@ -484,10 +449,12 @@ class StatusDistributionCard extends StatelessWidget {
                   child: CustomPaint(
                     painter: _MiniDonutPainter(
                       entries: entries
-                          .map((e) => (
-                                e.value / total,
-                                _statusColors[e.key] ?? AppColors.statusDraft,
-                              ),)
+                          .map(
+                            (e) => (
+                              e.value / total,
+                              _statusColors[e.key] ?? AppColors.statusDraft,
+                            ),
+                          )
                           .toList(),
                       backgroundColor:
                           theme.colorScheme.surfaceContainerHighest,
@@ -512,8 +479,7 @@ class StatusDistributionCard extends StatelessWidget {
                     children: entries.take(4).map((entry) {
                       final color =
                           _statusColors[entry.key] ?? AppColors.statusDraft;
-                      final label =
-                          _statusLabels[entry.key] ?? entry.key;
+                      final label = _statusLabels[entry.key] ?? entry.key;
                       return _LegendItem(
                         color: color,
                         label: label,

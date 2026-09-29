@@ -202,9 +202,9 @@ class MainShell extends ConsumerWidget {
                   ),
                   Expanded(
                     child: _NavItem(
-                      icon: Icons.assignment_outlined,
-                      selectedIcon: Icons.assignment_rounded,
-                      label: 'Forms',
+                      icon: Icons.event_note_outlined,
+                      selectedIcon: Icons.event_note_rounded,
+                      label: 'Live Bookings',
                       isSelected: navigationShell.currentIndex == 1,
                       onTap: () => _onNavTap(context, 1),
                     ),
