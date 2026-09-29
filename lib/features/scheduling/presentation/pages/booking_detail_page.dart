@@ -247,12 +247,14 @@ class _BookingDetailContent extends ConsumerWidget {
           const SizedBox(height: 16),
           Builder(
             builder: (context) {
+              // Display order follows the App-Edit PDF: Address Line, City,
+              // Town, County, Postcode.
               final structured = [
                 booking.addressLine,
                 booking.city,
                 booking.town,
-                booking.postcode,
                 booking.county,
+                booking.postcode,
               ]
                   .whereType<String>()
                   .where((s) => s.trim().isNotEmpty)

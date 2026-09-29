@@ -104,12 +104,14 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
 
     // Compose the legacy single-line address from the structured parts so the
     // rest of the app that still reads propertyAddress keeps working.
+    // Compose in the App-Edit PDF display order: Address Line, City, Town,
+    // County, Postcode.
     final composedAddress = [
       _trim(_addressLineController),
       _trim(_cityController),
       _trim(_townController),
-      _trim(_postcodeController),
       _trim(_countyController),
+      _trim(_postcodeController),
     ].whereType<String>().join(', ');
 
     try {

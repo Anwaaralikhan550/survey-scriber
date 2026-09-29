@@ -13,6 +13,8 @@ void main() {
     String? estateAgentName,
     String? addressLine,
     String? city,
+    String? town,
+    String? county,
     String? postcode,
     String? propertyAddress,
   }) =>
@@ -30,6 +32,8 @@ void main() {
         estateAgentName: estateAgentName,
         addressLine: addressLine,
         city: city,
+        town: town,
+        county: county,
         postcode: postcode,
         propertyAddress: propertyAddress,
         createdById: 'u1',
@@ -67,17 +71,21 @@ void main() {
       expect(find.text('Jane Doe'), findsOneWidget);
     });
 
-    testWidgets('composes the structured address from its parts',
-        (tester) async {
+    testWidgets(
+        'composes the structured address in App-Edit PDF order '
+        '(Address Line, City, Town, County, Postcode)', (tester) async {
       bigScreen(tester);
       await tester.pumpWidget(host(booking(
-        addressLine: '12 High Street',
-        city: 'Bristol',
-        postcode: 'BS1 4ST',
+        addressLine: '29 Taylor Drive',
+        city: 'Chelmsford',
+        county: 'Essex',
+        postcode: 'IG4 5DD',
       )));
       await tester.pumpAndSettle();
 
-      expect(find.text('12 High Street, Bristol, BS1 4ST'), findsOneWidget);
+      // County must precede Postcode (per the PDF): Essex before IG4 5DD.
+      expect(find.text('29 Taylor Drive, Chelmsford, Essex, IG4 5DD'),
+          findsOneWidget);
     });
 
     testWidgets('falls back to the legacy single-line address', (tester) async {
