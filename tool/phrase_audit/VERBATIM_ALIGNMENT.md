@@ -59,13 +59,51 @@ Word choice (PDF preference):
 All fixes are pure-prose (no token change). Verified: permutation audit
 `All tests passed!`, engine + report golden suites green, JSON valid.
 
-## Remaining (needs same per-item treatment, not yet done)
+## Phase 2 — whole-key alignment (rapidfuzz), all sections
 
-- **Per-element "Routine maintenance appropriate to the {element} material"**: the
-  bank pasted "roof covering" / "frame material" / "flooring material" across many
-  element keys; the PDF customises per element (guttering, wall, door,
-  conservatory, porch, joinery, balcony, staircase, …). Each needs its correct
-  per-element word confirmed against that element's PDF block before editing.
-- **A? / M tier**: lower-similarity gaps that are either genuinely-absent PDF prose
-  (would need adding to the right key) or false pairings — each requires manual
-  source-of-truth confirmation.
+Replaced the sentence-nearest-neighbour method with **whole-key alignment**: each
+bank key is scoped to its own PDF section (by vote), aligned to the best PDF
+window (rapidfuzz partial-ratio), and word-diffed. Token/option-list chunks and
+window-edge fragments are auto-suppressed. This removed the false-pairing risk of
+Phase 1 (it even caught a Phase-1 error: `{F_FLOORS}::{CREAKING_NOTED}` had been
+changed may→should off a false pairing; PDF says "may", now reverted).
+
+Applied verbatim across **E1–E9, F, G, J2/J3, Construction, Overall opinion,
+Parking** (~90 further fixed-prose corrections): section headings
+(No repair:, No defects noted:, Creaking floor noted:, No Creaking floor:,
+Minor cracking:, Heavy decorative covering:, Largely missing:, Party Wall
+Partially missing:, Creaking stairs:, Moisture metre readings:, Install drain
+guttering:, Wall Ties defects:, Out of square door/frames:); per-element
+maintenance wording (door/conservatory/porch/joinery/window material;
+wall→building; guttering; rainwater goods); grammar/word choice
+(economical, extent, undersized, assessed/evaluated, older, roofing contractor,
+their function, who); Oxford commas (age/type/construction, alterations/repairs,
+age/construction/level); punctuation and reworded sentences (out-of-square doors,
+retaining walls, trip hazards, damaged stairs).
+
+Engine: widened the poor-ceiling override regex to accept the new
+"No defects noted:" heading. Test: updated one report_builder J2 expectation.
+verified_variants.json composites synced (external-walls, asbestos,
+overall-opinion, moisture-readings).
+
+Commits: c8a2803 (per-element walls/rainwater), e853482 (Section E),
+dbad7e0 (F/G/J + Construction/Overall/Parking), plus the final micro-batch.
+All gated green each time: permutation audit `All tests passed!`, engine +
+report golden suites pass.
+
+## Remaining (by design — NOT defects)
+
+A final full-key sweep shows the residual bank↔PDF differences are all
+**by-design**, not verbatim misses:
+- **Tokenised option lists**: where the PDF spells out choices
+  (`slipped, cracked, broken, other`) the bank carries a `{TOKEN}` the engine
+  fills from the surveyor's selection. Matching the PDF literally would dump the
+  whole option menu into every report.
+- **Intentional cross-references** the bank adds (`(see section I2/J1/J3)`) that
+  the PDF omits — kept, because removing them downgrades the report.
+- **Generic shared keys** (e.g. `{OTHER_EXTERNAL_AREA}` used for
+  carport/balcony/roof-terrace/staircase) where the PDF customises per structure
+  but one bank key serves all; left generic ("frame material") pending optional
+  tokenisation if the client wants per-structure wording.
+- A handful of PDF extraction artifacts (markdown bold markers, line-break
+  hyphenation).
