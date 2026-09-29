@@ -2773,7 +2773,7 @@ void main() {
       // Verbatim revised-spec wording, straight from the approved bank keys.
       expect(j2Text, contains('Sloping Ground: The property may be situated on sloping ground.'));
       expect(j2Text, contains('Influencing Trees: There are trees within influencing distance of the property.'));
-      expect(j2Text, contains('Retaining Walls: Evidence of movement, bulging, cracking or deterioration was observed.'));
+      expect(j2Text, contains('Retaining Walls: Evidence of movement, bulging, cracking, deterioration was observed.'));
     });
 
     test('does not synthesise J2 when none of the source screens show a risk',
