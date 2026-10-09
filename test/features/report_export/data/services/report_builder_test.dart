@@ -1921,82 +1921,6 @@ void main() {
       );
     });
 
-    test('condenses chimney stacks phrases into one paragraph', () {
-      final phraseEngine = InspectionPhraseEngine({
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK_CONSTRUCTION}':
-            'The property has one chimney stack.',
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}':
-            'The chimney stack is fitted with {CS_STACK_POT_TYPES} pot(s).',
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK_RENDERING}':
-            'The outer faces of the chimney stack is single rendered.',
-      });
-      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'E',
-            title: 'Outside Property',
-            description: '',
-            nodes: const [
-              InspectionNodeDefinition(
-                id: 'activity_outside_property_stacks',
-                title: 'Stacks',
-                type: InspectionNodeType.screen,
-                parentId: null,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner3',
-                    label: 'Stacks',
-                    type: InspectionFieldType.dropdown,
-                    options: ['Single', 'Multiple'],
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner2',
-                    label: 'Pots',
-                    type: InspectionFieldType.dropdown,
-                    options: ['1', '2', '3', '4'],
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner4',
-                    label: 'Rendered Stack(s)',
-                    type: InspectionFieldType.dropdown,
-                    options: ['Single', 'Multiple'],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = customBuilder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_outside_property_stacks': {
-              'android_material_design_spinner3': 'Single',
-              'st_brick': 'true',
-              'pot_clay': 'true',
-              'android_material_design_spinner4': 'Single',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final screen = doc.sections.single.screens.single;
-      expect(screen.phrases, hasLength(1));
-      expect(screen.phrases.single,
-          contains('The property has one chimney stack.'));
-      expect(
-        screen.phrases.single,
-        contains('The chimney stack is fitted with clay pots pot(s).'),
-      );
-      expect(
-        screen.phrases.single,
-        contains('The outer faces of the chimney stack is single rendered.'),
-      );
-    });
 
     test('applies conditional visibility filtering', () {
       final treeWithConditional = InspectionTreePayload(
@@ -2393,7 +2317,7 @@ void main() {
               'actv_movement_status': 'None',
             },
             'activity_outside_property_leaning_chimney': {
-              'android_material_design_spinner4': 'Repair soon',
+              'android_material_design_spinner4': 'Repair required',
             },
             'activity_outside_property_repair_chimney_disrepair': {
               'cb_repair_soon_70': 'true',

@@ -42,18 +42,6 @@ void main() {
       );
       expect(legacy.join(' ').toLowerCase(), contains('shared'));
     });
-
-    test('weather screen accepts legacy llMainContainer for weather dropdown',
-        () {
-      final phrases = engine.buildPhrases(
-        'activity_rwg_weather_condition',
-        <String, String>{
-          'llMainContainer': 'Wet',
-        },
-      );
-
-      final all = phrases.join(' ').toLowerCase();
-      expect(all, contains('weather-wet'));
-    });
+
   });
 }

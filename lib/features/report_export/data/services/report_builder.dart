@@ -919,9 +919,8 @@ class ReportBuilder {
 
     final leaning = _answersForScreen(
         rawData, 'activity_outside_property_leaning_chimney');
-    if ((leaning['android_material_design_spinner4'] ?? '')
-        .toLowerCase()
-        .contains('repair')) {
+    if ((leaning['android_material_design_spinner4'] ?? '').toLowerCase() ==
+        'repair required') {
       phrases.add(_approvedBankPhrase(
               '{RISK_TO_BUILDING}::{CHIMNEY_LEANING_SIGNIFICANT}') ??
           'The chimney stack(s) is leaning and the movement appears significant, and immediate action is required (see section E1 - Chimney Stacks).');

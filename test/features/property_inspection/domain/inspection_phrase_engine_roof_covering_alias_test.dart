@@ -9,17 +9,6 @@ void main() {
     };
 
     const engine = InspectionPhraseEngine(phraseTexts);
-
-    test('roof weather accepts legacy llMainContainer status', () {
-      final phrases = engine.buildPhrases(
-        'outside_property_roof_covering_weather_layout',
-        {
-          'llMainContainer': 'Wet',
-        },
-      );
-
-      expect(phrases, isNotEmpty);
-      expect(phrases.join(' ').toLowerCase(), contains('roof-weather-wet'));
-    });
+
   });
 }

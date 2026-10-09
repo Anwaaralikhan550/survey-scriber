@@ -12370,6 +12370,537 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_a4_lenv',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'e1l_number',
+    'activity_outside_property_stacks',
+    '{E_CHIMNEY}',
+    '{E1L_NUMBER}',
+    [
+      VerbatimToken(
+        '{CS_NUMBER}',
+        dropdown: 'actv_stack_number',
+        dropdownOptions: ['One', 'Two', 'Three', 'Multiple'],
+        lower: true,
+        pdfOptions: ['one', 'two', 'three', 'multiple'],
+      ),
+    ],
+    pdf:
+        'Number: The property has one, two, three, multiple stacks(s).',
+    whenField: 'actv_stack_number',
+    whenValue: 'One',
+    whenAny: [['actv_stack_number', 'Two'], ['actv_stack_number', 'Three'], ['actv_stack_number', 'Multiple']],
+  ),
+  VerbatimRule(
+    'e1l_condition',
+    'activity_outside_property_condition',
+    '{E_CHIMNEY}',
+    '{E1L_STACK_CONDITION}',
+    [
+      VerbatimToken(
+        '{CS_STACK_CONDITION}',
+        dropdown: 'android_material_design_spinner3',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the chimney stack(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'Good',
+    whenAny: [['android_material_design_spinner3', 'Reasonable'], ['android_material_design_spinner3', 'Fair'], ['android_material_design_spinner3', 'Poor'], ['android_material_design_spinner3', 'Very poor']],
+  ),
+  VerbatimRule(
+    'e1l_norepair',
+    'activity_outside_property_condition',
+    '{E_CHIMNEY}',
+    '{E1L_NO_REPAIR}',
+    [
+    ],
+    whenField: 'cb_e1l_norepair',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_shared',
+    'activity_outside_property_shared_chimney',
+    '{E_CHIMNEY}',
+    '{E1L_SHARED}',
+    [
+    ],
+    whenField: 'cb_e1l_shared',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_lean_ok',
+    'activity_outside_property_leaning_chimney',
+    '{E_CHIMNEY}',
+    '{E1L_LEAN_NO_REPAIR}',
+    [
+    ],
+    whenField: 'android_material_design_spinner4',
+    whenValue: 'No repair required',
+  ),
+  VerbatimRule(
+    'e1l_lean_repair',
+    'activity_outside_property_leaning_chimney',
+    '{E_CHIMNEY}',
+    '{E1L_LEAN_REPAIR}',
+    [
+    ],
+    whenField: 'android_material_design_spinner4',
+    whenValue: 'Repair required',
+  ),
+  VerbatimRule(
+    'e1l_removed',
+    'activity_outside_property_chimney_removed_pots',
+    '{E_CHIMNEY}',
+    '{E1L_REMOVED}',
+    [
+      VerbatimToken(
+        '{CS_REMOVED_LOCATIONS}',
+        options: {
+          'e1l_rm_front': 'front',
+          'e1l_rm_rear': 'rear',
+          'e1l_rm_side': 'side',
+          'e1l_rm_centre': 'centre',
+        },
+        pdfOptions: ['front', 'rear', 'side', 'centre'],
+      ),
+      VerbatimToken(
+        '{CS_REMOVED_WHAT}',
+        options: {
+          'e1l_rw_removed': 'removed',
+          'e1l_rw_altered': 'altered',
+          'e1l_rw_covered_over_with_roofing': 'covered over with roofing',
+        },
+        pdfOptions: ['removed', 'altered', 'covered over with roofing'],
+      ),
+    ],
+    pdf:
+        'Removed chimney or pots: The chimney stack(s) or pots to the front, rear, side, centre have been removed, altered, covered over with roofing.',
+    whenField: 'cb_Removed_pots',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_na',
+    'activity_outside_property_chimney_not_inspected',
+    '{E_CHIMNEY}',
+    '{E1L_NOT_APPLICABLE}',
+    [
+    ],
+    whenField: 'cb_Not_applicable',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_ni',
+    'activity_outside_property_chimney_not_inspected',
+    '{E_CHIMNEY}',
+    '{E1L_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'cb_not_inspected_access',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_dummy',
+    'activity_outside_property_chimney_not_inspected',
+    '{E_CHIMNEY}',
+    '{E1L_DUMMY_BREAST}',
+    [
+    ],
+    whenField: 'cb_dummy_chimney_breast',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_rflash',
+    'activity_outside_property_repair_flashing',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_FLASHING}',
+    [
+      VerbatimToken(
+        '{CS_URGENCY_E1L_RFLASH}',
+        dropdown: 'android_material_design_spinner4',
+        dropdownOptions: ['Repaired soon', 'Repaired now'],
+        lower: true,
+        pdfOptions: ['repaired soon', 'repaired now'],
+      ),
+    ],
+    pdf:
+        'This should be repaired soon, repaired now, depending on the severity of the defect.',
+    whenField: 'android_material_design_spinner4',
+    whenValue: 'Repaired soon',
+    whenAny: [['android_material_design_spinner4', 'Repaired now']],
+  ),
+  VerbatimRule(
+    'e1l_rflash_damp',
+    'activity_outside_property_repair_flashing',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_FLASHING_DAMP}',
+    [
+    ],
+    whenField: 'cb_is_causing_dump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_rflaunch',
+    'activity_outside_property_chimney_repair_flaunching',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_FLAUNCHING}',
+    [
+      VerbatimToken(
+        '{CS_URGENCY_E1L_RFLAUNCH}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Repaired soon', 'Repaired now'],
+        lower: true,
+        pdfOptions: ['repaired soon', 'repaired now'],
+      ),
+    ],
+    pdf:
+        'This should be repaired soon, repaired now.',
+    whenField: 'actv_condition',
+    whenValue: 'Repaired soon',
+    whenAny: [['actv_condition', 'Repaired now']],
+  ),
+  VerbatimRule(
+    'e1l_rflaunch_damp',
+    'activity_outside_property_chimney_repair_flaunching',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_FLAUNCHING_DAMP}',
+    [
+    ],
+    whenField: 'cb_is_causing_dump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_rpoint',
+    'activity_outside_property_repair_chimney_repointing',
+    '{E_CHIMNEY}',
+    '{E1L_REPOINTING}',
+    [
+      VerbatimToken(
+        '{CS_URGENCY_E1L_RPOINT}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Repaired soon', 'Repaired now'],
+        lower: true,
+        pdfOptions: ['repaired soon', 'repaired now'],
+      ),
+    ],
+    pdf:
+        'This should be repaired soon, repaired now.',
+    whenField: 'actv_condition',
+    whenValue: 'Repaired soon',
+    whenAny: [['actv_condition', 'Repaired now']],
+  ),
+  VerbatimRule(
+    'e1l_rpot',
+    'activity_outside_property_repair_chimney_pots',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_POT}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+    whenAny: [['actv_condition', 'Repair now']],
+  ),
+  VerbatimRule(
+    'e1l_poor',
+    'activity_outside_property_repair_chimney_disrepair',
+    '{E_CHIMNEY}',
+    '{E1L_POOR_CHIMNEY}',
+    [
+      VerbatimToken(
+        '{CS_POOR_LOCATIONS}',
+        options: {
+          'e1l_pc_front': 'front',
+          'e1l_pc_rear': 'rear',
+          'e1l_pc_side': 'side',
+          'e1l_pc_centre': 'centre',
+        },
+        pdfOptions: ['front', 'rear', 'side', 'centre'],
+      ),
+    ],
+    pdf:
+        'Poor chimney condition: The chimney stack(s) on the front, rear, side, centre of the building are in poor condition.',
+    whenField: 'cb_repair_soon_70',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_ae_soon',
+    'activity_outside_property_repair_chimney_dish_aerial',
+    '{E_CHIMNEY}',
+    '{E1L_AERIAL_SOON}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e1l_ae_now',
+    'activity_outside_property_repair_chimney_dish_aerial',
+    '{E_CHIMNEY}',
+    '{E1L_AERIAL_NOW}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e1l_sa_soon',
+    'activity_outside_property_repair_chimney_dish_aerial__satellite',
+    '{E_CHIMNEY}',
+    '{E1L_AERIAL_SOON}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e1l_sa_now',
+    'activity_outside_property_repair_chimney_dish_aerial__satellite',
+    '{E_CHIMNEY}',
+    '{E1L_AERIAL_NOW}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e1l_location',
+    'activity_outside_property_location',
+    '{E_CHIMNEY}',
+    '{E1L_LOCATION}',
+    [
+      VerbatimToken(
+        '{CS_LOCATIONS}',
+        options: {
+          'e1l_loc_front': 'front',
+          'e1l_loc_rear': 'rear',
+          'e1l_loc_side': 'side',
+          'e1l_loc_centre': 'centre',
+        },
+        otherCheckbox: 'e1l_loc_other',
+        otherText: 'e1l_loc_other_text',
+        pdfOptions: ['front', 'rear', 'side', 'centre'],
+      ),
+    ],
+    pdf:
+        'Location: The chimney stack(s) are located to the front, rear, side, centre, other locations.',
+    whenField: 'cb_e1l_location',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_ae_def',
+    'activity_outside_property_repair_chimney_dish_aerial',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_AERIAL_E1L_AE}',
+    [
+      VerbatimToken(
+        '{CS_AERIAL_DEFECTS}',
+        options: {
+          'e1l_ae_d_loose': 'loose',
+          'e1l_ae_d_rusted': 'rusted',
+          'e1l_ae_d_damaged': 'damaged',
+          'e1l_ae_d_dangling': 'dangling',
+        },
+        otherCheckbox: 'e1l_ae_d_other',
+        otherText: 'e1l_ae_d_other_text',
+        pdfOptions: ['loose', 'rusted', 'damaged', 'dangling'],
+      ),
+    ],
+    pdf:
+        'Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling, other.',
+    whenField: 'cb_e1l_ae_def',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_sa_def',
+    'activity_outside_property_repair_chimney_dish_aerial__satellite',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_AERIAL_E1L_SA}',
+    [
+      VerbatimToken(
+        '{CS_AERIAL_DEFECTS}',
+        options: {
+          'e1l_sa_d_loose': 'loose',
+          'e1l_sa_d_rusted': 'rusted',
+          'e1l_sa_d_damaged': 'damaged',
+          'e1l_sa_d_dangling': 'dangling',
+        },
+        otherCheckbox: 'e1l_sa_d_other',
+        otherText: 'e1l_sa_d_other_text',
+        pdfOptions: ['loose', 'rusted', 'damaged', 'dangling'],
+      ),
+    ],
+    pdf:
+        'Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling, other.',
+    whenField: 'cb_e1l_sa_def',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_ground',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_GROUND_LEVEL}',
+    [
+    ],
+    whenField: 'cb_e0_ground',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_vantage',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_VANTAGE_POINTS}',
+    [
+    ],
+    whenField: 'cb_e0_vantage',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_limited',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_LIMITED_BY}',
+    [
+      VerbatimToken(
+        '{E0_LIMITS}',
+        options: {
+          'e0l_height': 'height',
+          'e0l_restricted_access': 'restricted access',
+          'e0l_nearby_buildings': 'nearby buildings',
+          'e0l_vegetation': 'vegetation',
+          'e0l_weather_conditions': 'weather conditions',
+          'e0l_roof_configuration': 'roof configuration',
+          'e0l_health_and_safety_considerations': 'health and safety considerations',
+        },
+        pdfOptions: ['height', 'restricted access', 'nearby buildings', 'vegetation', 'weather conditions', 'roof configuration', 'health and safety considerations'],
+      ),
+    ],
+    pdf:
+        'Limitations: The inspection was limited by height, restricted access, nearby buildings, vegetation, weather conditions, roof configuration, health and safety considerations.',
+    whenField: 'cb_e0_limited',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_restricted',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_RESTRICTED_ACCESS}',
+    [
+    ],
+    whenField: 'cb_e0_restricted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_binoculars',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_BINOCULARS}',
+    [
+    ],
+    whenField: 'cb_e0_binoculars',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0w_roof_wet',
+    'outside_property_roof_covering_weather_layout',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_WET}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Wet weather',
+  ),
+  VerbatimRule(
+    'e0w_roof_dry',
+    'outside_property_roof_covering_weather_layout',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_DRY}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Dry weather',
+  ),
+  VerbatimRule(
+    'e0w_roof_snowfall',
+    'outside_property_roof_covering_weather_layout',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_SNOWFALL}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Snowfall',
+  ),
+  VerbatimRule(
+    'e0w_rwg_wet',
+    'activity_rwg_weather_condition',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_WET}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Wet weather',
+  ),
+  VerbatimRule(
+    'e0w_rwg_dry',
+    'activity_rwg_weather_condition',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_DRY}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Dry weather',
+  ),
+  VerbatimRule(
+    'e0w_rwg_snowfall',
+    'activity_rwg_weather_condition',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_SNOWFALL}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Snowfall',
+  ),
+  VerbatimRule(
+    'e0_roof_ni',
+    'activity_outside_property_roof_not_inspected',
+    '{E_ROOF_COVERING}',
+    '{E0_NOT_INSPECTED_E2}',
+    [
+    ],
+    whenField: 'cb_e0_roof_ni',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_rwg_ni',
+    'activity_outside_property_rain_water_goods_not_inspected',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{E0_NOT_INSPECTED_E3}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_rwg_blocked',
+    'activity_outside_property_rwg_blocked_rwg',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{E0_BLOCKED_GUTTERS}',
+    [
+    ],
+    whenField: 'cb_blocked_rwg',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_rwg_runoffs',
+    'activity_outside_property_rwg_open_runoffs',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{E0_RUNOFFS}',
+    [
+    ],
+    whenField: 'cb_open_runoffs',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

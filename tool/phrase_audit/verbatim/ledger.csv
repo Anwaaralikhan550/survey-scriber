@@ -94,53 +94,53 @@ afccf3b392,Parking,The possible effects of electromagnetic fields have been the 
 0b73225820,Parking,"If susceptible to flooding is selected, add text below: The property is situated close to the sea, river, a canal, reservoir, or in a low-lying area, and may be susceptible to occasional or seasonal flooding.",MENU,,0,UNVERIFIED
 7841d9e366,Parking,Your legal adviser should make further enquiries and advise you whether the building has been flooded in the past or is at risk of flooding.,EXACT,{D_LOCATION}::{A4_FLOODING},100,DONE
 a4a8539a79,Parking,Enquiries should also be made to the Environment Agency.,EXACT,{D_LOCATION}::{A4_FLOODING},100,DONE
-ea89b0cb26,Parking,E - Outside the Property Limitations My inspection of the exterior was carried out from ground level and other reasonably accessible positions.,ADD,{D_LOCATION}::{LOCATION_PRIVATE_PROPERTY_AREA},54,OPEN
-c719c77a59,Parking,"My inspection was restricted by the surrounding elements, including the layout of the area, and available vantage points from which I was able to view the property.",EXACT,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{STANDARD_TEXT},100,DONE
-3e371a0ad1,Parking,"Limitations: The inspection was limited by height, restricted access, nearby buildings, vegetation, weather conditions, roof configuration, health and safety considerations.",MENU,,0,UNVERIFIED
-0b639efd03,Parking,Restricted Access: There was no direct access to the rear of the building.,EXACT,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},100,DONE
+ea89b0cb26,Parking,E - Outside the Property Limitations My inspection of the exterior was carried out from ground level and other reasonably accessible positions.,ACCEPT,{E_LIMITATIONS}::{E0_GROUND_LEVEL},87,DONE
+c719c77a59,Parking,"My inspection was restricted by the surrounding elements, including the layout of the area, and available vantage points from which I was able to view the property.",EXACT,{E_LIMITATIONS}::{E0_VANTAGE_POINTS},100,DONE
+3e371a0ad1,Parking,"Limitations: The inspection was limited by height, restricted access, nearby buildings, vegetation, weather conditions, roof configuration, health and safety considerations.",MENU,,0,VERIFIED
+0b639efd03,Parking,Restricted Access: There was no direct access to the rear of the building.,EXACT,{E_LIMITATIONS}::{E0_RESTRICTED_ACCESS},100,DONE
 7dcd46c328,Parking,"For this reason, I cannot make any detailed comments regarding the condition of the uninspected walls, roof slopes, rainwater goods, etc.",MENU,,0,UNVERIFIED
-76d1d3a398,Parking,You should accept the risk that some defects may exist in these unseen areas.,EXACT,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},100,DONE
-a2b4b52491,Parking,"Roof coverings, chimney stacks, and high-level elements were inspected using binoculars where appropriate.",UNRESOLVED,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},45,OPEN
-6733d360de,Parking,"No parts of the building were opened up, dismantled, or assessed.",UNRESOLVED,{D_LOCATION}::{A4_DENSITY},48,OPEN
-bf8bd59d69,Parking,"Where elements were concealed or inaccessible, no comment can be made regarding their condition.",ADD,{D_LOCATION}::{A4_LOCAL_ENVIRONMENT},48,OPEN
-13c81ad5df,Parking,Weather condition Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.,EXACT,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_WET},100,DONE
-b9b21ae5d4,Parking,"Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",UNRESOLVED,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_DRY},84,OPEN
-6e2a2b738f,Parking,"Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection.",ADD,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_WET},59,OPEN
+76d1d3a398,Parking,You should accept the risk that some defects may exist in these unseen areas.,EXACT,{E_LIMITATIONS}::{E0_RESTRICTED_ACCESS},100,DONE
+a2b4b52491,Parking,"Roof coverings, chimney stacks, and high-level elements were inspected using binoculars where appropriate.",EXACT,{E_LIMITATIONS}::{E0_BINOCULARS},100,DONE
+6733d360de,Parking,"No parts of the building were opened up, dismantled, or assessed.",EXACT,{E_LIMITATIONS}::{E0_BINOCULARS},100,DONE
+bf8bd59d69,Parking,"Where elements were concealed or inaccessible, no comment can be made regarding their condition.",EXACT,{E_LIMITATIONS}::{E0_BINOCULARS},100,DONE
+13c81ad5df,Parking,Weather condition Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.,EXACT,{E_LIMITATIONS}::{E0_WEATHER_WET},100,DONE
+b9b21ae5d4,Parking,"Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",EXACT,{E_LIMITATIONS}::{E0_WEATHER_DRY},100,DONE
+6e2a2b738f,Parking,"Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection.",EXACT,{E_LIMITATIONS}::{E0_WEATHER_SNOWFALL},100,DONE
 f36fbdf7ec,Parking,"Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds.",MENU,,0,UNVERIFIED
-dca1eae90c,Parking,Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.,ADD,{D_LOCATION}::{A4_EMF},51,OPEN
-5c7b77ea42,E1,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
-8bf9989e51,E1,No further comments are necessary.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
-dfe0986fce,E1,Not Inspected: The chimney stack(s) could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
-c26ccb0979,E1,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
-9d48f7b446,E1,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
-9b0b46b54c,E1,Shared chimney: The chimney stack is believed to be shared with the neighbouring property or properties.,TOKENISED,{E_CHIMNEY_MULTI_STACK}::{SHARED_CHIMNEY},93,DONE
+dca1eae90c,Parking,Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.,EXACT,{E_LIMITATIONS}::{E0_WEATHER_SNOWFALL},100,DONE
+5c7b77ea42,E1,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CHIMNEY}::{E1L_NOT_APPLICABLE},100,DONE
+8bf9989e51,E1,No further comments are necessary.,EXACT,{E_CHIMNEY}::{E1L_NOT_APPLICABLE},100,DONE
+dfe0986fce,E1,Not Inspected: The chimney stack(s) could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_CHIMNEY}::{E1L_NOT_INSPECTED},100,DONE
+c26ccb0979,E1,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CHIMNEY}::{E1L_NOT_INSPECTED},100,DONE
+9d48f7b446,E1,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CHIMNEY}::{E1L_NOT_INSPECTED},100,DONE
+9b0b46b54c,E1,Shared chimney: The chimney stack is believed to be shared with the neighbouring property or properties.,EXACT,{E_CHIMNEY}::{E1L_SHARED},100,DONE
 9c63383e6b,E1,The owner of the neighbouring property or properties may have some legal rights over this shared chimney.,EXACT,{E_CHIMNEY_MULTI_STACK}::{SHARED_CHIMNEY},100,DONE
 a911154711,E1,"Your legal adviser should confirm ownership, maintenance responsibilities and any legal rights affecting the shared structure.",EXACT,{E_CHIMNEY_MULTI_STACK}::{SHARED_CHIMNEY},100,DONE
 08b0f2e09c,E1,"Not fully inspected: The chimney stack(s) could not be fully inspected because of height, restricted access, adjacent buildings, roof configuration, health and safety restrictions.",MENU,,0,VERIFIED
 6dc0096886,E1,I cannot fully comment on their condition.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{PARTIAL_VIEW},100,DONE
 eb9ede2757,E1,Comments are limited to those areas visible from accessible inspection positions.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{PARTIAL_VIEW},100,DONE
-8933dfcc6a,E1,Dummy chimney breast: The property is installed with false or dummy chimney(s) with no internal brick breast.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{DUMMY_CHIMNEY_BREAST},100,DONE
-f77e8ee03f,E1,"These are hollow, non-structural features usually built using timber or metal framing and covered with plasterboard or brick slips to mimic a traditional chimney stack.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{DUMMY_CHIMNEY_BREAST},100,DONE
+8933dfcc6a,E1,Dummy chimney breast: The property is installed with false or dummy chimney(s) with no internal brick breast.,EXACT,{E_CHIMNEY}::{E1L_DUMMY_BREAST},100,DONE
+f77e8ee03f,E1,"These are hollow, non-structural features usually built using timber or metal framing and covered with plasterboard or brick slips to mimic a traditional chimney stack.",EXACT,{E_CHIMNEY}::{E1L_DUMMY_BREAST},100,DONE
 e5cda31a07,E1,"Description: The chimney stack(s) are constructed of brick, stone, rendered masonry, other construction.",MENU,,0,VERIFIED
 2fe7b860aa,E1,"The chimney stack(s) appear original, replaced, rebuilt.",MENU,,0,VERIFIED
-1e3422712b,E1,"Number: The property has one, two, three, multiple stacks(s).",MENU,,0,UNVERIFIED
-d445f70e8a,E1,"Location: The chimney stack(s) are located to the front, rear, side, centre, other locations.",MENU,,0,UNVERIFIED
+1e3422712b,E1,"Number: The property has one, two, three, multiple stacks(s).",MENU,,0,VERIFIED
+d445f70e8a,E1,"Location: The chimney stack(s) are located to the front, rear, side, centre, other locations.",MENU,,0,VERIFIED
 8fb1b1a096,E1,"Pots: The chimney stack(s) are fitted with clay pots, terracotta pots, metal flues, cowls, caps, other pot(s).",MENU,,0,VERIFIED
-2bb3fba9ae,E1,"Condition: Where visible, the chimney stack(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,UNVERIFIED
+2bb3fba9ae,E1,"Condition: Where visible, the chimney stack(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
 318b31ff53,E1,No repair: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 4eb9d1a7a9,E1,Routine inspection and maintenance should be expected as part of normal property ownership.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 6efba7639f,E1,"Flashings: The waterproofing between the chimney stack and the roof covering (called the flashing) appears to be formed in lead, lead substitute, mortar, bricks, tiles, other material.",MENU,,0,VERIFIED
 676a77b58f,E1,"Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 c070ca5c30,E1,Defective flashings may allow water penetration and should be repaired by an appropriately qualified roofing contractor.,EXACT,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLASHING_CONDITION},100,DONE
-99383af1b7,E1,Repair flashing: The waterproofing between the chimney stack and the roof covering is damaged or defective.,TOKENISED,{E_CHIMNEY_FLASHING_REPAIR}::{FLASHING_REPAIR_NOW},81,DONE
-b84ef56477,E1,"This should be repaired soon, repaired now, depending on the severity of the defect.",MENU,,0,UNVERIFIED
+99383af1b7,E1,Repair flashing: The waterproofing between the chimney stack and the roof covering is damaged or defective.,EXACT,{E_CHIMNEY}::{E1L_REPAIR_FLASHING},100,DONE
+b84ef56477,E1,"This should be repaired soon, repaired now, depending on the severity of the defect.",MENU,,0,VERIFIED
 e48bc8b35f,E1,"The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the extent of the work.",EXACT,{E_CHIMNEY_FLASHING_REPAIR}::{FLASHING_REPAIR_NOW},100,DONE
 d018aaf5d5,E1,Causing damp: This is causing damp penetration to the adjoining building elements.,EXACT,{E_CHIMNEY_FLASHING_REPAIR}::{FLASHING_REPAIR_NOW_CAUSING_DUMP},100,DONE
 d8427bf8c0,E1,"Flaunching: The cement bedding around the base of the chimney pot (called flaunching) appears to be formed in mortar, bricks, concrete, tiles, other material.",MENU,,0,VERIFIED
 c145e061e5,E1,"Condition: Where visible, the flaunching appears in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 1159245f77,E1,Defective flaunching may permit water penetration and reduce the stability of chimney pots.,EXACT,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLAUNCHING_CONDITION},100,DONE
 dd0fbe38b9,E1,Repairs should be undertaken as part of routine maintenance or sooner where deterioration is significant.,EXACT,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLAUNCHING_CONDITION},100,DONE
-1992b38339,E1,Repair flaunching: The cement bedding around the base of the chimney pot (called flaunching) is damaged or defective.,TOKENISED,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLAUNCHING},85,DONE
+1992b38339,E1,Repair flaunching: The cement bedding around the base of the chimney pot (called flaunching) is damaged or defective.,EXACT,{E_CHIMNEY}::{E1L_REPAIR_FLAUNCHING},100,DONE
 5c0eb02340,E1,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
 7c0ddd9e3e,E1,"The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 4d87fb9831,E1,The owner of the neighbouring property may have some legal rights over the shared chimney.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
@@ -148,12 +148,12 @@ dd0fbe38b9,E1,Repairs should be undertaken as part of routine maintenance or soo
 d018aaf5d5,E1,Causing damp: This is causing damp penetration to the adjoining building elements.,EXACT,{E_CHIMNEY_FLASHING_REPAIR}::{FLASHING_REPAIR_NOW_CAUSING_DUMP},100,DONE
 244b190ae3,E1,"Pointing Condition: The mortar joints to the chimney stack appear in good, reasonable, weathered, eroded, poor, other condition(s).",MENU,,0,VERIFIED
 e2acfb1733,E1,Weathered or eroded pointing should be renewed to reduce further deterioration and water penetration.,EXACT,{E_CHIMNEY_MULTI_STACK}::{POINTING_CONDITION},100,DONE
-5cc16d2d82,E1,Repointing: Some of the mortar between the bricks or stonework (called pointing) is damaged or defective.,TOKENISED,{E_CHIMNEY_REPOINTING_REPAIR}::{CHIMNEY_REPOINTING_REPAIR_SOON},82,DONE
+5cc16d2d82,E1,Repointing: Some of the mortar between the bricks or stonework (called pointing) is damaged or defective.,EXACT,{E_CHIMNEY}::{E1L_REPOINTING},100,DONE
 5c0eb02340,E1,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
 7c0ddd9e3e,E1,"The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 ed5d1fee7e,E1,"Damaged chimney pots: The chimney pots appear secure, weathered, cracked, damaged, missing, other.",MENU,,0,VERIFIED
 d2dffaaf9a,E1,Damaged or insecure chimney pots should be repaired or replaced to maintain weather resistance and safety.,EXACT,{E_CHIMNEY_MULTI_STACK}::{POTS_CONDITION},100,DONE
-9b617ac8f2,E1,Repair pot: One or several pots fitted to the main building chimney stack are broken and partly missing.,TOKENISED,{E_CHIMNEY_POTS_REPAIR}::{CHIMNEY_POTS_REPAIR_NOW},69,DONE
+9b617ac8f2,E1,Repair pot: One or several pots fitted to the main building chimney stack are broken and partly missing.,EXACT,{E_CHIMNEY}::{E1L_REPAIR_POT},100,DONE
 1c8b1b0314,E1,"To replace the pot, you will have to renew the cement bedding around the base, called the flaunching, which holds the pot in place.",EXACT,{E_CHIMNEY_POTS_REPAIR}::{CHIMNEY_POTS_REPAIR_NOW},100,DONE
 e0d2226049,E1,"The chimney pot may also be connected to a chimney flue that serves a heating appliance below, and a suitable replacement must be used.",EXACT,{E_CHIMNEY_POTS_REPAIR}::{CHIMNEY_POTS_REPAIR_NOW},100,DONE
 bb8a2996d8,E1,"Leaning chimney: The chimney stack appears slightly leaning, significantly leaning.",MENU,,0,VERIFIED
@@ -168,9 +168,9 @@ d1cff76ab1,E1,"At present, this movement is small, and no action is required now
 4a806dd815,E1,"Repair required: At present, the observed chimney movement appears significant, and action is required now.",EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_REPAIR_SOON},100,DONE
 f19b64b87f,E1,"You should contact a qualified person to inspect the chimney and recommend remedial action, which may involve rebuilding the chimney.",EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_REPAIR_SOON},100,DONE
 3c4ee76d17,E1,"Add text to: Section J1 - Risk to Building - The chimney stack(s) is leaning and the movement appears significant, and immediate action is required.",EXACT,{RISK_TO_BUILDING}::{CHIMNEY_LEANING_SIGNIFICANT},100,DONE
-a8291e1d2d,E1,"Removed chimney or pots: The chimney stack(s) or pots to the front, rear, side, centre have been removed, altered, covered over with roofing.",UNRESOLVED,{E_CS_CHIMNEY_INSPECTION_STATUS}::{REMOVED_CHIMNEY_STACK},83,OPEN
-38b3535373,E1,You should ask your legal adviser to confirm whether the removed chimney stack(s) received appropriate statutory approvals where required from the local council and advise on the implications.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{REMOVED_CHIMNEY_STACK},100,DONE
-a8244538ce,E1,"Poor chimney condition: The chimney stack(s) on the front, rear, side, centre of the building are in poor condition.",UNRESOLVED,{E_CHIMNEY_DISREPAIR_REPAIR}::{CHIMNEY_DISREPAIR_REPAIR_SOON},84,OPEN
+a8291e1d2d,E1,"Removed chimney or pots: The chimney stack(s) or pots to the front, rear, side, centre have been removed, altered, covered over with roofing.",MENU,,0,VERIFIED
+38b3535373,E1,You should ask your legal adviser to confirm whether the removed chimney stack(s) received appropriate statutory approvals where required from the local council and advise on the implications.,EXACT,{E_CHIMNEY}::{E1L_REMOVED},100,DONE
+a8244538ce,E1,"Poor chimney condition: The chimney stack(s) on the front, rear, side, centre of the building are in poor condition.",MENU,,0,VERIFIED
 43c913e7b9,E1,"Although this can be repaired, it may be economical to rebuild the whole stack.",EXACT,{E_CHIMNEY_DISREPAIR_REPAIR}::{CHIMNEY_DISREPAIR_REPAIR_SOON},100,DONE
 1b4e9664e4,E1,"If the chimney is no longer used by heating appliances below, it may be economical to reduce the chimney height to below roof level and extend the roof covering over it.",EXACT,{E_CHIMNEY_DISREPAIR_REPAIR}::{CHIMNEY_DISREPAIR_REPAIR_SOON},100,DONE
 dabc766aea,E1,Add text to: Section J1 - Risk to Building - One or more chimney stack(s) is in poor condition.,EXACT,{RISK_TO_BUILDING}::{CHIMNEY_POOR_CONDITION},100,DONE
@@ -178,9 +178,9 @@ dabc766aea,E1,Add text to: Section J1 - Risk to Building - One or more chimney s
 1d08e2264c,E1,"Chimney Defects: One or more chimney defects were observed, including: • Loose flashings • Missing flashings • Cracked flaunching • Missing mortar • Spalled bricks • Damaged pointing • Loose chimney pots • Broken chimney pots • Vegetation growth • Open flues • Loose aerial fixings • Loose satellite dish fixings Repairs should be undertaken by an appropriately qualified roofing contractor to prevent further deterioration and water penetration.",MENU,,0,VERIFIED
 b6cd16ce83,E1,"Aerials and satellite dishes: An aerial, a satellite dish is attached to the chimney stack.",MENU,,0,VERIFIED
 6797775a92,E1,"Where secure, no action is currently required.",EXACT,{E_CHIMNEY_MULTI_STACK}::{AERIALS_ATTACHED},100,DONE
-4002e08e00,E1,"Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling, other.",MENU,,0,UNVERIFIED
+4002e08e00,E1,"Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling, other.",MENU,,0,VERIFIED
 ac120aa681,E1,Repair soon: This should be repaired soon.,EXACT,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_SOON},100,DONE
-b8080a8dae,E1,"Repair now: This is a safety hazard, and the aerial/satellite dish may fall to the ground or on people.",TOKENISED,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_NOW_SAFETY_HAZARD},86,DONE
+b8080a8dae,E1,"Repair now: This is a safety hazard, and the aerial/satellite dish may fall to the ground or on people.",EXACT,{E_CHIMNEY}::{E1L_AERIAL_NOW},100,DONE
 00478e4cc5,E1,"Where loose or inadequately fixed, repairs should be carried out promptly to prevent damage during adverse weather.",EXACT,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_NOW_SAFETY_HAZARD},100,DONE
 33e9cb13d6,E1,"General notes: Routine maintenance works should be carried out to prevent water penetration and thereafter as and when due, to keep the stacks in good condition.",EXACT,{E_CHIMNEY_REPAIR}::{STANDARD_TEXT},100,DONE
 f05d3992dc,E1,"It would also be wise to check the condition of the chimney pots, flaunching, and flashing, during routine maintenance and carry out all necessary works to ensure weather tightness of the stacks.",EXACT,{E_CHIMNEY_REPAIR}::{STANDARD_TEXT},100,DONE
@@ -194,9 +194,9 @@ fa813b899b,E1,"Although these are not considered urgent, repairs should be carri
 a61014b0f0,E1,Condition rating 3 Significant defects requiring urgent repair or further investigation were identified.,EXACT,{E_CHIMNEY_REPAIR_CONDITION_RATING}::{CONDITION_RATING_3},100,DONE
 c1b89d1645,E1,Appropriate remedial works should be undertaken without delay.,EXACT,{E_CHIMNEY_REPAIR_CONDITION_RATING}::{CONDITION_RATING_3},100,DONE
 2fdaa5c7e6,E1,"Where the extent of the defect cannot be determined during a visual inspection, further investigation by an appropriately qualified person is recommended before legal commitment.",EXACT,{E_CHIMNEY_REPAIR_CONDITION_RATING}::{CONDITION_RATING_3},100,DONE
-39e03e4f7a,E2,Not Inspected: The roof covering(s) could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_ROOF_COVERING}::{E_RC_NOT_INSPECTED},100,DONE
-4fdc996341,E2,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
-e747bfcd4a,E2,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
+39e03e4f7a,E2,Not Inspected: The roof covering(s) could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_ROOF_COVERING}::{E0_NOT_INSPECTED_E2},100,DONE
+4fdc996341,E2,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CHIMNEY}::{E1L_NOT_INSPECTED},100,DONE
+e747bfcd4a,E2,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CHIMNEY}::{E1L_NOT_INSPECTED},100,DONE
 01d4a9e23d,E2,"Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material.",MENU,,0,VERIFIED
 e7b5a53452,E2,"Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
@@ -318,9 +318,9 @@ fb07222ec5,E2,"Add text to: Section J1 - Risk to Building - The roof slopes to t
 1ddd6a9e13,E2,"If the Property is a Flat, add this: You should ask the management company whether any repairs to the roof covering have been carried out previously or are currently proposed.",EXACT,{E_ROOF_COVERING_REPAIR}::{E_RC_REPAIR_DEFAULT_TEXT},100,DONE
 bb05cf79ba,E2,"Your legal adviser should confirm responsibility for repairs to the roof covering with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_ROOF_COVERING_REPAIR}::{E_RC_DEFAULT_TEXT_IF_FLAT_ROOF},100,DONE
 de0455e805,E2,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
-ff1f75406d,E3,Not Inspected: The rainwater goods could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_NOT_INSPECTED},100,DONE
-6826165716,E3,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
-80bcf455a3,E3,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
+ff1f75406d,E3,Not Inspected: The rainwater goods could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{E0_NOT_INSPECTED_E3},100,DONE
+6826165716,E3,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CHIMNEY}::{E1L_NOT_INSPECTED},100,DONE
+80bcf455a3,E3,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CHIMNEY}::{E1L_NOT_INSPECTED},100,DONE
 9bdfe80f05,E3,"Description: The rainwater goods comprise PVC, cast iron, aluminium, steel, concrete, asbestos cement, other, gutters, downpipes, hoppers, and associated fittings.",MENU,,0,VERIFIED
 01d5d549f7,E3,"Condition: Where visible, the rainwater goods appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 0aa13fdde9,E3,No parts of the rainwater installation were dismantled or tested.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},100,DONE
@@ -328,9 +328,9 @@ ff1f75406d,E3,Not Inspected: The rainwater goods could not be inspected due to a
 1cc47eeecf,E3,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 113e2c7e23,E3,The rainwater goods appear to be adequately performing their function.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},100,DONE
 fb19cc7862,E3,Routine maintenance appropriate to the age and type of the rainwater goods should be expected.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},100,DONE
-032cf159a9,E3,Rainwater runoffs: Some rainwater pipes have not been connected to gullies or extended sufficiently away from the building and allowed to drain directly to the ground.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_OPEN_RUNOFFS},100,DONE
-3ddfde933f,E3,"Rainwater can penetrate nearby structures and potentially cause internal dampness, timber rot, or erosion around the building.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_OPEN_RUNOFFS},100,DONE
-988a191a0d,E3,The discharge arrangement should be reviewed and improved where appropriate.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_OPEN_RUNOFFS},100,DONE
+032cf159a9,E3,Rainwater runoffs: Some rainwater pipes have not been connected to gullies or extended sufficiently away from the building and allowed to drain directly to the ground.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{E0_RUNOFFS},100,DONE
+3ddfde933f,E3,"Rainwater can penetrate nearby structures and potentially cause internal dampness, timber rot, or erosion around the building.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{E0_RUNOFFS},100,DONE
+988a191a0d,E3,The discharge arrangement should be reviewed and improved where appropriate.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{E0_RUNOFFS},100,DONE
 6ad0e54745,E3,Shared Rainwater Goods: The rainwater goods are believed to be shared with the adjoining property.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RAINWATER_GOODS_SHARED},100,DONE
 e399bf812c,E3,"Your legal adviser should confirm ownership, maintenance responsibilities and any rights or obligations affecting the shared installation.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RAINWATER_GOODS_SHARED},100,DONE
 653bcf0a78,E3,"If asbestos cement is selected, add: The rainwater goods contain asbestos cement.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_TYPE_ASBESTOS_CEMENT},100,DONE
@@ -347,7 +347,7 @@ ca3371805e,E3,Leakage: Staining to fittings and adjoining elements and localised
 de603c083b,E3,"The affected sections should be checked for watertightness and repaired soon or repaired now, depending on the severity of the defect.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_LEAKAGE},100,DONE
 d2b67c1ab2,E3,Repairs should be undertaken to prevent further deterioration of adjacent building elements.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_LEAKAGE},100,DONE
 fe0d7cf576,E3,"Blocked Gutters: Vegetation, moss, leaves, or other debris were observed within sections of the guttering.",MENU,,0,VERIFIED
-9d872c3349,E3,The gutters should be cleared as part of routine maintenance to maintain effective rainwater disposal.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_BLOCKED},100,DONE
+9d872c3349,E3,The gutters should be cleared as part of routine maintenance to maintain effective rainwater disposal.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{E0_BLOCKED_GUTTERS},100,DONE
 aafe24f968,E3,"Blocked Gullies: One or more drainage gullies serving the rainwater system appear partially blocked, fully blocked.",MENU,,0,VERIFIED
 a211b57920,E3,Blocked gullies may result in localised flooding and water penetration to adjacent building elements.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_BLOCKED_GULLIES},100,DONE
 927e597224,E3,The gullies should be cleared and maintained regularly.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_BLOCKED_GULLIES},100,DONE
@@ -650,8 +650,8 @@ b0227e39d3,E6,General Maintenance: External doors should be inspected and mainta
 d7754938e2,E6,"Moving parts, hinges, locks, handles, and seals should be cleaned, lubricated, and adjusted where necessary.",MENU,,0,VERIFIED
 a243f3f367,E6,Timber doors should be redecorated periodically to maintain protection against weathering.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
 1cef5b3463,E6,Flexible sealants should be inspected and renewed where deterioration becomes evident.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
-6f1e83ec96,E7,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
-1b49094a40,E7,No further comments are necessary.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
+6f1e83ec96,E7,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CHIMNEY}::{E1L_NOT_APPLICABLE},100,DONE
+1b49094a40,E7,No further comments are necessary.,EXACT,{E_CHIMNEY}::{E1L_NOT_APPLICABLE},100,DONE
 068020f5cc,E7,"This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom, other similar structures.",MENU,,0,DONE
 1e09e3bfb6,E7,"Where no conservatory or porch is present, this section is not applicable.",EXACT,{E_CONSERVATORY_PORCHES}::{STANDARD_TEXT},100,DONE
 0bcf4fe1a3,E7,"Conservatory: The conservatory(s) is located to the front, side, rear, other of the building.",MENU,,0,VERIFIED

@@ -1,0 +1,436 @@
+[
+  {
+    "remove_screens": [
+      "activity_outside_property_roof_repair_poor_roof",
+      "activity_outside_property_windows_not_inspected",
+      "outside_property_roof_covering_roof_spreading_layout"
+    ]
+  },
+  {
+    "screen": "activity_outside_property_limitation",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e0_ground",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_GROUND_LEVEL}",
+        "text": "My inspection of the exterior was carried out from ground level and other reasonably accessible positions.",
+        "tokens": [],
+        "when": [
+          "cb_e0_ground",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e0_ground",
+            "label": "Inspected from ground level",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e0_vantage",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_VANTAGE_POINTS}",
+        "text": "My inspection was restricted by the surrounding elements, including the layout of the area, and available vantage points from which I was able to view the property.",
+        "tokens": [],
+        "when": [
+          "cb_e0_vantage",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e0_vantage",
+            "label": "Restricted by surrounding elements",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e0_limited",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_LIMITED_BY}",
+        "text": "Limitations: The inspection was limited by {E0_LIMITS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{E0_LIMITS}",
+            "options": [
+              [
+                "e0l_height",
+                "height"
+              ],
+              [
+                "e0l_restricted_access",
+                "restricted access"
+              ],
+              [
+                "e0l_nearby_buildings",
+                "nearby buildings"
+              ],
+              [
+                "e0l_vegetation",
+                "vegetation"
+              ],
+              [
+                "e0l_weather_conditions",
+                "weather conditions"
+              ],
+              [
+                "e0l_roof_configuration",
+                "roof configuration"
+              ],
+              [
+                "e0l_health_and_safety_considerations",
+                "health and safety considerations"
+              ]
+            ],
+            "pdf_options": [
+              "height",
+              "restricted access",
+              "nearby buildings",
+              "vegetation",
+              "weather conditions",
+              "roof configuration",
+              "health and safety considerations"
+            ],
+            "label": "Limited by"
+          }
+        ],
+        "pdf": [
+          "Limitations: The inspection was limited by height, restricted access, nearby buildings, vegetation, weather conditions, roof configuration, health and safety considerations."
+        ],
+        "when": [
+          "cb_e0_limited",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e0_limited",
+            "label": "Inspection limited by",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e0_restricted",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_RESTRICTED_ACCESS}",
+        "text": "Restricted Access: There was no direct access to the rear of the building. For this reason, I cannot make any detailed comments regarding the condition of the uninspected walls, roof slopes, rainwater goods, etc. You should accept the risk that some defects may exist in these unseen areas.",
+        "tokens": [],
+        "when": [
+          "cb_e0_restricted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e0_restricted",
+            "label": "No direct access to the rear",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e0_binoculars",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_BINOCULARS}",
+        "text": "Roof coverings, chimney stacks, and high-level elements were inspected using binoculars where appropriate. No parts of the building were opened up, dismantled, or assessed. Where elements were concealed or inaccessible, no comment can be made regarding their condition.",
+        "tokens": [],
+        "when": [
+          "cb_e0_binoculars",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e0_binoculars",
+            "label": "Binoculars / nothing opened up",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_roof_covering_weather_layout",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e0w_roof_wet",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_WEATHER_WET}",
+        "text": "Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Wet weather"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Weather condition",
+            "type": "dropdown",
+            "options": [
+              "Wet weather",
+              "Dry weather",
+              "Snowfall"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e0w_roof_dry",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_WEATHER_DRY}",
+        "text": "Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Dry weather"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Weather condition",
+            "type": "dropdown",
+            "options": [
+              "Wet weather",
+              "Dry weather",
+              "Snowfall"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e0w_roof_snowfall",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_WEATHER_SNOWFALL}",
+        "text": "Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection. Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds. Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Snowfall"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Weather condition",
+            "type": "dropdown",
+            "options": [
+              "Wet weather",
+              "Dry weather",
+              "Snowfall"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_rwg_weather_condition",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e0w_rwg_wet",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_WEATHER_WET}",
+        "text": "Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Wet weather"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Weather condition",
+            "type": "dropdown",
+            "options": [
+              "Wet weather",
+              "Dry weather",
+              "Snowfall"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e0w_rwg_dry",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_WEATHER_DRY}",
+        "text": "Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Dry weather"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Weather condition",
+            "type": "dropdown",
+            "options": [
+              "Wet weather",
+              "Dry weather",
+              "Snowfall"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e0w_rwg_snowfall",
+        "masters": [
+          "{E_LIMITATIONS}"
+        ],
+        "sub": "{E0_WEATHER_SNOWFALL}",
+        "text": "Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection. Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds. Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Snowfall"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Weather condition",
+            "type": "dropdown",
+            "options": [
+              "Wet weather",
+              "Dry weather",
+              "Snowfall"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_not_inspected",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e0_roof_ni",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E0_NOT_INSPECTED_E2}",
+        "text": "Not Inspected: The roof covering(s) could not be inspected due to access restrictions and the height and configuration of the building. Consequently, I am unable to comment on their composition or condition. As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",
+        "tokens": [],
+        "when": [
+          "cb_e0_roof_ni",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e0_roof_ni",
+            "label": "Not inspected",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_rain_water_goods_not_inspected",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e0_rwg_ni",
+        "masters": [
+          "{E_RAINWATER_GOODS_ABOUT}"
+        ],
+        "sub": "{E0_NOT_INSPECTED_E3}",
+        "text": "Not Inspected: The rainwater goods could not be inspected due to access restrictions and the height and configuration of the building. Consequently, I am unable to comment on their composition or condition. As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Not inspected",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_rwg_blocked_rwg",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e0_rwg_blocked",
+        "masters": [
+          "{E_RAINWATER_GOODS_ABOUT}"
+        ],
+        "sub": "{E0_BLOCKED_GUTTERS}",
+        "text": "Blocked Gutters: Vegetation, moss, leaves, or other debris were observed within sections of the guttering. The gutters should be cleared as part of routine maintenance to maintain effective rainwater disposal.",
+        "tokens": [],
+        "when": [
+          "cb_blocked_rwg",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_blocked_rwg",
+            "label": "Blocked gutters",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_rwg_open_runoffs",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e0_rwg_runoffs",
+        "masters": [
+          "{E_RAINWATER_GOODS_ABOUT}"
+        ],
+        "sub": "{E0_RUNOFFS}",
+        "text": "Rainwater runoffs: Some rainwater pipes have not been connected to gullies or extended sufficiently away from the building and allowed to drain directly to the ground. Rainwater can penetrate nearby structures and potentially cause internal dampness, timber rot, or erosion around the building. The discharge arrangement should be reviewed and improved where appropriate.",
+        "tokens": [],
+        "when": [
+          "cb_open_runoffs",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_open_runoffs",
+            "label": "Open rainwater runoffs",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

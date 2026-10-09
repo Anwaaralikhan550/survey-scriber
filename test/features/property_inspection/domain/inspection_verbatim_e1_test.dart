@@ -181,7 +181,7 @@ void main() {
     test('Repair required keeps the PDF wording', () {
       final out = lean({
         'actv_leaning_degree': 'significantly leaning',
-        'android_material_design_spinner4': 'Repair soon',
+        'android_material_design_spinner4': 'Repair required',
       });
       expect(
         out,

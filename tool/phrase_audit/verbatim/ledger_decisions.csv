@@ -589,3 +589,4 @@ e028281c9b,TOKENISED,PDF option list "small, medium or large" is the {J2_TREE_SI
 6278ba8965,TOKENISED,PDF option list "gently, moderately, steeply" is the {J2_SLOPE} token (gen_j2); sentence otherwise identical
 b3cdc1b162,QUERY,PDF shows **bold markers** around "Control of Asbestos Regulations 2012" (CLIENT_QUERIES #11); bank prints the text without markers until the client answers
 516f6d9e1d,ACCEPT,identical to PDF: the pointer "(see Section J3 – Risks)" uses an en dash (bank equals the PDF); only the ledger compare differs
+ea89b0cb26,ACCEPT,"PDF row carries the section heading ""E - Outside the Property Limitations""; sentence printed by rule e0_ground"

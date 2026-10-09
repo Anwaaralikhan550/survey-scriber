@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 346,
+  "screensAudited": 342,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1782,
-   "approvedLegacyBank": 130,
-   "approvedCurrentBankOnly": 1625,
+   "distinctEmitted": 1765,
+   "approvedLegacyBank": 123,
+   "approvedCurrentBankOnly": 1615,
    "unapproved": 0
   }
  },
@@ -3002,27 +3002,32 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_limitation",
    "title": "Limitations",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
+   "dataFieldCount": 12,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "total": 5,
+    "approvedLegacy": 1,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "My inspection of the exterior was carried out from ground level and other reasonably accessible positions.",
+    "Restricted Access: There was no direct access to the rear of the building. For this reason, I cannot make any detailed comments regarding the condition of the uninspected walls, roof slopes, rainwater goods, etc. You should accept the risk that some defects may exist in these unseen areas.",
+    "Roof coverings, chimney stacks, and high-level elements were inspected using binoculars where appropriate. No parts of the building were opened up, dismantled, or assessed. Where elements were concealed or inaccessible, no comment can be made regarding their condition."
+   ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_stacks",
    "title": "Stacks",
-   "dataFieldCount": 17,
-   "permutationCount": 29,
+   "dataFieldCount": 14,
+   "permutationCount": 26,
    "severities": [],
    "phraseStats": {
-    "total": 16,
+    "total": 17,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 16,
+    "approvedCurrentBankOnly": 17,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -3035,8 +3040,8 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_repair_flashing",
    "title": "Flashing",
-   "dataFieldCount": 25,
-   "permutationCount": 29,
+   "dataFieldCount": 2,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
     "total": 3,
@@ -3045,9 +3050,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair flashing: The waterproofing between the chimney stack and the roof covering to the main building, front, side, rear and sample detail chimney stack are very loose, largely missing, badly cracked and sample detail. This should be repaired now. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the extent of the work.",
-    "Causing damp: This is causing damp penetration to the adjoining building elements (see section J1 - Risk to Building).",
-    "Repair flashing: The waterproofing between the chimney stack and the roof covering to the main building, front, side, rear and sample detail chimney stack(s) are loose, incomplete, split, lifted and sample detail. This should be repaired soon. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the extent of the work."
+    "Repair flashing: The waterproofing between the chimney stack and the roof covering is damaged or defective. This should be repaired soon, depending on the severity of the defect. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the extent of the work.",
+    "Repair flashing: The waterproofing between the chimney stack and the roof covering is damaged or defective. This should be repaired now, depending on the severity of the defect. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the extent of the work.",
+    "Causing damp: This is causing damp penetration to the adjoining building elements."
    ]
   },
   {
@@ -3073,8 +3078,8 @@
    "sectionKey": "E",
    "screenId": "outside_property_roof_covering_weather_layout",
    "title": "Weather",
-   "dataFieldCount": 2,
-   "permutationCount": 6,
+   "dataFieldCount": 1,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
     "total": 3,
@@ -3083,9 +3088,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The inspection of the roof covering was undertaken during a period of rainfall. It should be noted that certain defects, particularly those relating to water penetration, are more readily identifiable during or following periods of rainfall, and accordingly the conditions were favourable for the detection of active leaks.",
-    "The inspection of the roof covering was undertaken in dry weather conditions. It should be noted that certain defects, particularly those relating to water penetration, are more readily identifiable during or following periods of rainfall. Notwithstanding this limitation, a thorough visual examination was carried out from ground level and from all accessible vantage points. No evidence of active water ingress, staining to ceilings or upper walls, or other indicators of roof leakage were observed at the time of inspection.",
-    "At the time of my inspection, there were visible signs to suggest that the roof may be suffering from active water penetration. Evidence of staining, dampness, or moisture ingress was noted, and further investigation by a specialist roofing contractor is recommended to identify and remedy the source of the leakage."
+    "Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.",
+    "Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",
+    "Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection. Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds. Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise."
    ]
   },
   {
@@ -3111,15 +3116,20 @@
    "sectionKey": "E",
    "screenId": "activity_rwg_weather_condition",
    "title": "Weather Condition",
-   "dataFieldCount": 2,
-   "permutationCount": 6,
+   "dataFieldCount": 1,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
     "total": 3,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.",
+    "Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",
+    "Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection. Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds. Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise."
+   ]
   },
   {
    "sectionKey": "E",
@@ -3216,8 +3226,8 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_repair_chimney_dish_aerial",
    "title": "Aerial",
-   "dataFieldCount": 11,
-   "permutationCount": 17,
+   "dataFieldCount": 9,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
     "total": 3,
@@ -3226,9 +3236,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair aerials and satellite dishes: An aerial attached to the property is loose, rusted and sample detail. Repair soon: This should be repaired soon.",
-    "Repair aerials and satellite dishes: An aerial attached to the property is very loose, badly rusted and sample detail. Repair now: This should be repaired now.",
-    "This is a safety hazard, and the aerial may fall to the ground or on people. Where loose or inadequately fixed, repairs should be carried out promptly to prevent damage during adverse weather (see section J3 - Risk to People)."
+    "Repair soon: This should be repaired soon.",
+    "Repair now: This is a safety hazard, and the aerial/satellite dish may fall to the ground or on people. Where loose or inadequately fixed, repairs should be carried out promptly to prevent damage during adverse weather.",
+    "Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling and sample detail."
    ]
   },
   {
@@ -3248,23 +3258,6 @@
     "Asbestos: Parts of the roof covering and verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
     "Condition: Where visible, the covering appears in good condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
     "Condition: Where visible, the covering appears in reasonable condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_roof_repair_poor_roof",
-   "title": "Poor Roof Condition",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The sloping roof covering is in poor condition, and you should replace this now. This work may need building regulation approval from the local authority. To meet current standards, you may have to carry out additional work (for example strengthening of the roof structure, improving thermal insulation, etc.). This may increase the amount of repair work."
    ]
   },
   {
@@ -3760,27 +3753,25 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_location",
    "title": "Location",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
+   "dataFieldCount": 7,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Location: The chimney stack is located to the centre.",
-    "Location: The chimney stack is located to the front.",
-    "Location: The chimney stack is located to the side."
+    "Location: The chimney stack(s) are located to the front, rear, side, centre and sample detail."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_chimney_repair_flaunching",
    "title": "Flaunching",
-   "dataFieldCount": 20,
-   "permutationCount": 24,
+   "dataFieldCount": 2,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
     "total": 3,
@@ -3789,17 +3780,17 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair flaunching: The cement bedding around the base of the chimney pot (called flaunching) to the main building, front, side and rear chimney stack(s) are cracked, loose, partly missing and sample detail. This should be repaired soon. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
-    "Repair flaunching: The cement bedding around the base of the chimney pot (called flaunching) to the main building, front, side and rear chimney stack(s) are badly cracked, very loose, largely missing and sample detail. This should be repaired now. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
-    "Causing damp: This is causing damp penetration to the adjoining building elements (see section J1 - Risk to Building)."
+    "Repair flaunching: The cement bedding around the base of the chimney pot (called flaunching) is damaged or defective. This should be repaired soon. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+    "Repair flaunching: The cement bedding around the base of the chimney pot (called flaunching) is damaged or defective. This should be repaired now. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+    "Causing damp: This is causing damp penetration to the adjoining building elements."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_repair_chimney_dish_aerial__satellite",
    "title": "Satellite",
-   "dataFieldCount": 10,
-   "permutationCount": 14,
+   "dataFieldCount": 9,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
     "total": 3,
@@ -3808,9 +3799,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair aerials and satellite dishes: A satellite dish attached to the property is loose, rusted and sample detail. Repair soon: This should be repaired soon.",
-    "Repair aerials and satellite dishes: A satellite dish attached to the property is very loose, badly rusted and sample detail. Repair now: This should be repaired now.",
-    "This is a safety hazard, and the satellite dish may fall to the ground or on people. Where loose or inadequately fixed, repairs should be carried out promptly to prevent damage during adverse weather (see section J3 - Risk to People)."
+    "Repair soon: This should be repaired soon.",
+    "Repair now: This is a safety hazard, and the aerial/satellite dish may fall to the ground or on people. Where loose or inadequately fixed, repairs should be carried out promptly to prevent damage during adverse weather.",
+    "Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling and sample detail."
    ]
   },
   {
@@ -4371,19 +4362,17 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_repair_chimney_pots",
    "title": "Chimney Pots",
-   "dataFieldCount": 20,
-   "permutationCount": 24,
+   "dataFieldCount": 2,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair pot: One or several pots that are fitted to the main building, front, side and rear chimney stack are cracked, broken, partly missing and sample detail. This should be repaired soon. To replace the pot, you will have to renew the cement bedding around the base, called the flaunching, which holds the pot in place. The chimney pot may also be connected to a chimney flue that serves a heating appliance below, and a suitable replacement must be used.",
-    "Repair pot: One or several pots that are fitted to the main building, front, side and rear chimney stack are badly cracked, badly broken, largely missing and sample detail. This should be repaired now. To replace the pot, you will have to renew the cement bedding around the base, called the flaunching, which holds the pot in place. The chimney pot may also be connected to a chimney flue that serves a heating appliance below, and a suitable replacement must be used.",
-    "This is a safety hazard (see section J3 - Risk to People)."
+    "Repair pot: One or several pots fitted to the main building chimney stack are broken and partly missing. To replace the pot, you will have to renew the cement bedding around the base, called the flaunching, which holds the pot in place. The chimney pot may also be connected to a chimney flue that serves a heating appliance below, and a suitable replacement must be used."
    ]
   },
   {
@@ -4664,23 +4653,6 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_windows_not_inspected",
-   "title": "Not inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The windows could not be inspected due to access restrictions and obstructions such as curtains, blinds, shutters, furniture, stored items, or fitted security devices. Consequently, I am unable to comment on their composition or condition. Windows should be inspected regularly and maintained as necessary to identify and address any defects at an early stage."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_not_inspected",
    "title": "Not inspected",
    "dataFieldCount": 1,
@@ -4793,19 +4765,18 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_repair_chimney_repointing",
    "title": "Re-pointing",
-   "dataFieldCount": 19,
-   "permutationCount": 23,
+   "dataFieldCount": 2,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repointing: Some of the mortar between the bricks or stonework (called pointing) to the main building, front, side and rear chimney stack has eroded, is partly missing, is loose and sample detail. This should be repaired soon. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",
-    "Repointing: Some of the mortar between the bricks or stonework (called pointing) to the main building, front, side and rear chimney stack is badly eroded, largely missing and sample detail. This should be repaired now. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",
-    "Causing damp: This is causing damp penetration to the adjoining building elements (see section J1 - Risk to Building)."
+    "Repointing: Some of the mortar between the bricks or stonework (called pointing) is damaged or defective. This should be repaired soon. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",
+    "Repointing: Some of the mortar between the bricks or stonework (called pointing) is damaged or defective. This should be repaired now. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work."
    ]
   },
   {
@@ -4993,27 +4964,27 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_condition",
    "title": "Condition",
-   "dataFieldCount": 1,
-   "permutationCount": 7,
+   "dataFieldCount": 2,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible, the chimney stack appears in reasonable condition, consistent with its age and construction. No repair: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine inspection and maintenance should be expected as part of normal property ownership.",
-    "Condition: Where visible, the chimney stack appears in satisfactory condition, consistent with its age and construction. No repair: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine inspection and maintenance should be expected as part of normal property ownership.",
-    "Condition: Where visible, the chimney stack appears in unsatisfactory and poor condition, consistent with its age and construction. No repair: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine inspection and maintenance should be expected as part of normal property ownership."
+    "Condition: Where visible, the chimney stack(s) appear in good condition, consistent with their age and construction.",
+    "Condition: Where visible, the chimney stack(s) appear in reasonable condition, consistent with their age and construction.",
+    "Condition: Where visible, the chimney stack(s) appear in fair condition, consistent with their age and construction."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_repair_chimney_disrepair",
    "title": "Chimney in Disrepair",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
     "total": 1,
@@ -5022,7 +4993,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Poor chimney condition: The chimney stack(s) on the main building, front, side, rear and sample detail of the building are in poor condition. This is a safety hazard (see section J1 - Risk to Building). Although this can be repaired, it may be economical to rebuild the whole stack. This should be done now. If the chimney is no longer used by heating appliances below, it may be economical to reduce the chimney height to below roof level and extend the roof covering over it."
+    "Poor chimney condition: The chimney stack(s) on the front, rear, side and centre of the building are in poor condition. This is a safety hazard. Although this can be repaired, it may be economical to rebuild the whole stack. This should be done now. If the chimney is no longer used by heating appliances below, it may be economical to reduce the chimney height to below roof level and extend the roof covering over it."
    ]
   },
   {
@@ -5237,19 +5208,17 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_shared_chimney",
    "title": "Shared Chimney",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Shared chimney: The chimney stack to the main building is believed to be shared with the neighbouring property or properties. The owner of the neighbouring property or properties may have some legal rights over this shared chimney. Your legal adviser should confirm ownership, maintenance responsibilities and any legal rights affecting the shared structure (see section I3).",
-    "Shared chimney: The chimney stack to the front is believed to be shared with the neighbouring property or properties. The owner of the neighbouring property or properties may have some legal rights over this shared chimney. Your legal adviser should confirm ownership, maintenance responsibilities and any legal rights affecting the shared structure (see section I3).",
-    "Shared chimney: The chimney stack to the side is believed to be shared with the neighbouring property or properties. The owner of the neighbouring property or properties may have some legal rights over this shared chimney. Your legal adviser should confirm ownership, maintenance responsibilities and any legal rights affecting the shared structure (see section I3)."
+    "Shared chimney: The chimney stack is believed to be shared with the neighbouring property or properties. The owner of the neighbouring property or properties may have some legal rights over this shared chimney. Your legal adviser should confirm ownership, maintenance responsibilities and any legal rights affecting the shared structure."
    ]
   },
   {
@@ -5419,8 +5388,8 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_leaning_chimney",
    "title": "Leaning Chimney",
-   "dataFieldCount": 8,
-   "permutationCount": 14,
+   "dataFieldCount": 2,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
     "total": 4,
@@ -5457,8 +5426,8 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_roof_not_inspected",
    "title": "Not Inspected",
-   "dataFieldCount": 8,
-   "permutationCount": 16,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
     "total": 1,
@@ -5632,43 +5601,6 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_chimney_removed_chimney_stack",
-   "title": "Removed Chimney Stack",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Removed chimney or pots: The chimney stack(s) to the have been removed, altered, covered over with roofing. You should ask your legal adviser to confirm whether the removed chimney stack(s) received appropriate statutory approvals where required from the local council and advise on the implications.",
-    "Removed chimney or pots: The chimney stack(s) to the main building, front, rear and side have been removed, altered, covered over with roofing. You should ask your legal adviser to confirm whether the removed chimney stack(s) received appropriate statutory approvals where required from the local council and advise on the implications."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "outside_property_roof_covering_asbestos_layout",
-   "title": "Contain Asbestos",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Asbestos: Parts of the roof covering may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
-    "Asbestos: Parts of the verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
-    "Asbestos: Parts of the soffits may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_other_repairs_decorations",
    "title": "Perished Decorations",
    "dataFieldCount": 5,
@@ -5724,18 +5656,17 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_chimney_removed_pots",
    "title": "Removed Pots",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
+   "dataFieldCount": 8,
+   "permutationCount": 10,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Removed chimney or pots: The pots to the chimney stack(s) have been removed and covered over. You should ask your legal adviser to confirm whether the removed chimney pots received appropriate statutory approvals where required from the local council and advise on the implications.",
-    "Removed chimney or pots: The pots to the front, side, rear and sample detail chimney stack(s) have been removed and covered over. You should ask your legal adviser to confirm whether the removed chimney pots received appropriate statutory approvals where required from the local council and advise on the implications."
+    "Removed chimney or pots: The chimney stack(s) or pots to the front, rear, side and centre have been removed, altered and covered over with roofing. You should ask your legal adviser to confirm whether the removed chimney stack(s) received appropriate statutory approvals where required from the local council and advise on the implications."
    ]
   },
   {
@@ -5802,13 +5733,12 @@
    "permutationCount": 5,
    "severities": [],
    "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 2,
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Old roof covering: The roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon. If re-covered in heavier materials the timbers may need to be strengthened to comply with current Building Regulations. Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life.",
     "General maintenance: Roof coverings should be inspected periodically, particularly following severe weather. Routine maintenance, including replacement of isolated defective coverings, clearance of debris and localised repairs, should be expected throughout the life of the roof."
    ]
   },
