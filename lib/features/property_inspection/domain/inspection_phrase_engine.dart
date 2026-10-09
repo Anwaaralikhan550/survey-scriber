@@ -970,7 +970,7 @@ class InspectionPhraseEngine {
         // Revised-spec WALL_CONDITION wording (F3 delta).
         phrase = phrase.replaceAll(
           RegExp(
-            r'Where visible, the walls and partitions appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition, consistent with their age and construction\. No significant defects requiring immediate attention were identified unless otherwise stated below\. Routine maintenance appropriate to the wall material should be expected\.',
+            r'Where visible, the walls and partitions appear in (?:unsatisfactory and poor|poor|unsatisfactory) condition, consistent with their age and construction\. (?:No defects noted: )?No significant defects requiring immediate attention were identified unless otherwise stated below\. Routine maintenance appropriate to the (?:wall|building) material should be expected\.',
             caseSensitive: false,
           ),
           'These finishes are in an unsatisfactory condition. Appropriate repairs or renewal should be undertaken after the extent and cause of the deterioration have been established.',

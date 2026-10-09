@@ -595,7 +595,7 @@ f9cb576084,E5,The damage should be promptly repaired by a qualified professional
 3731c4eb2b,E5,"Condensation is influenced by occupancy, heating and ventilation and does not necessarily indicate a defect with the windows.",ADD,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},55,OPEN
 f2c01529b6,E5,Fire Trap Risk: The design of the window(s) does not provide a suitable means of escape in the event of a fire.,TOKENISED,{E_WINDOWS_REPAIR}::{WINDOWS_REPAIR_NO_FIRE_ESCAPE_RISK},95,DONE
 0349653ab9,E5,"The affected window(s) in the lounge, dining room, bedroom, study, other room have no opening, a small opening, creating a potential safety hazard.",MENU,,0,DONE
-61e1023b92,E5,"To reduce this hazard, you should seek advice from an appropriately qualified person regarding suitable remedial measures.",FIX,{E_WINDOWS_REPAIR}::{WINDOWS_REPAIR_NO_FIRE_ESCAPE_RISK},96,OPEN
+61e1023b92,E5,"To reduce this hazard, you should seek advice from an appropriately qualified person regarding suitable remedial measures.",EXACT,{E_WINDOWS_REPAIR}::{WINDOWS_REPAIR_NO_FIRE_ESCAPE_RISK},100,DONE
 7de143fff0,E5,Add text to: Section J3 Risk to people - The design of one or more windows does not provide a suitable means of escape for occupants in the event of a fire.,TOKENISED,{E_WINDOWS_REPAIR}::{WINDOWS_REPAIR_NO_FIRE_ESCAPE_RISK},83,DONE
 64a0d6b461,E6,Only a representative sample of accessible doors was opened and closed during the inspection.,EXACT,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},100,DONE
 038199f817,E6,"Doors obstructed by security devices, stored items, furniture, or other restrictions could not be fully inspected.",MENU,,0,DONE
@@ -845,19 +845,19 @@ c55b37b7e9,E9,"Decorations: The decorations to the stairway are peeling, flaking
 ee10214bca,E9,General Maintenance: External ancillary structures should be inspected periodically as part of routine property maintenance.,ADD,{OTHER_REPAIR}::{OTHER_REPAIR_PERISHED_DECORATIONS},49,OPEN
 2cf1141064,E9,"Rainwater disposal, structural stability, guarding, fixings, waterproofing and external finishes should be maintained to reduce the risk of deterioration and ensure continued safe use.",MENU,,0,DONE
 9b30dd14a1,E9,"If the property is a flat, add the following.",MENU,,0,DONE
-bd164b5c81,E9,It is assumed that the common parts are maintained under appropriate maintenance contracts and are the responsibility of the management company.,FIX,{E_OTHER}::{COMMUNAL_AREA_CONDITION},86,OPEN
+bd164b5c81,E9,It is assumed that the common parts are maintained under appropriate maintenance contracts and are the responsibility of the management company.,EXACT,{E_OTHER}::{COMMUNAL_AREA_CONDITION},100,DONE
 e6776721e7,E9,Your legal adviser should obtain full details and refer to Section I3 - Issues for Your Legal Adviser.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},62,OPEN
-fde54f0b2f,E9,Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos.,FIX,{E_OTHER}::{COMMUNAL_AREA_CONDITION},80,OPEN
+fde54f0b2f,E9,Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos.,EXACT,{E_OTHER}::{COMMUNAL_AREA_CONDITION},100,DONE
 6c8993a6a3,E9,"Where communal facilities are provided, your legal adviser should confirm: the identity of the management company, responsibility for maintenance and repairs, current service charges and reserve fund contributions, any planned major works, and any outstanding maintenance liabilities.",MENU,,0,DONE
 b355940e56,E9,"Condition rating 123 F Inside the Property Inspection Limitations It was not practical to inspect parts of the property that were covered, concealed or otherwise inaccessible without causing damage or disturbance, such as lifting carpets or removing fixed fittings.",MENU,,0,DONE
 2d09d59be0,E9,"Consequently, no assurance can be given regarding the condition of these concealed areas.",ADD,{E_OTHER}::{COMMUNAL_AREA_NOT_INSPECTED},46,OPEN
-0095050343,E9,This report relates only to those parts of the property that were reasonably accessible at the time of the inspection.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},48,OPEN
+0095050343,E9,This report relates only to those parts of the property that were reasonably accessible at the time of the inspection.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},47,OPEN
 4c5e35bb31,E9,"Where the roof space is inaccessible due to the absence of a suitable access hatch or the presence of other obstructions, I am unable to assess the type, presence, adequacy or condition of the insulation or concealed roof timbers.",MENU,,0,DONE
 f4ba93b30c,E9,"Where available, the Energy Performance Certificate (EPC) may provide additional information regarding the insulation within the roof space.",ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},50,OPEN
-b4ca7848d1,E9,Moisture readings represent the condition of the property only at the time of the inspection and cannot provide absolute assurance that concealed surfaces or structural elements are free from moisture-related defects.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},46,OPEN
+b4ca7848d1,E9,Moisture readings represent the condition of the property only at the time of the inspection and cannot provide absolute assurance that concealed surfaces or structural elements are free from moisture-related defects.,ADD,{OTHER_REPAIR}::{OTHER_REPAIR_FLOOR},45,OPEN
 ff06b3f8f8,E9,"Weather conditions, temperature, and humidity can all influence moisture levels and the observations made during an inspection.",MENU,,0,DONE
 3f872adc58,E9,"Where my findings are inconclusive regarding the extent or cause of dampness, I recommend that you arrange a further investigation by a suitably qualified independent specialist.",ADD,{OTHER_REPAIR}::{OTHER_REPAIR_STEPS_LANDING},46,OPEN
-5ede340939,E9,"The inspection should be carried out in accordance with the Joint Position Statement (JPS) 2022, Investigation of Moisture and its Effects on Traditional Buildings, and should be undertaken independently of any contractor providing quotations for remedial work.",ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},46,OPEN
+5ede340939,E9,"The inspection should be carried out in accordance with the Joint Position Statement (JPS) 2022, Investigation of Moisture and its Effects on Traditional Buildings, and should be undertaken independently of any contractor providing quotations for remedial work.",ADD,{OTHER_REPAIR}::{OTHER_REPAIR_FLOOR},44,OPEN
 e1f394acfb,E9,The inspection was visual and non-invasive.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},52,OPEN
 02cd9de095,E9,"Floor coverings were not lifted, furniture and stored items were not moved, and no opening up or destructive investigation was undertaken.",MENU,,0,DONE
 1e94130118,E9,Comments relate only to the condition observed at the time of the inspection.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},48,OPEN
@@ -880,7 +880,7 @@ e22c980456,F1,"Roof Underlay No Underlay: The absence of a roof underlay could r
 81a97c978c,F1,I recommend that you contact a qualified person to inspect the roof covering and confirm its watertightness.,FIX,{F_ABOUT_ROOF_STRUCTURE}::{UNDERLINING_STATUS_NO_UNDERLINING},89,OPEN
 c74bb81e77,F1,"Underlay present: The underside of the roof covering incorporates traditional bituminous felt, breathable membrane, timber boards, other, which should provide a secondary barrier to driving rain and snow, where visible.",MENU,,0,DONE
 97c5d64f4c,F1,"Where visible, the underlay appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,DONE
-905c01b7e3,F1,"Where no underlay is present, this is likely to reflect the age and type of construction and is not necessarily a defect.",FIX,{F_ABOUT_ROOF_STRUCTURE}::{UNDERLINING_STATUS_NO_UNDERLINING},74,OPEN
+905c01b7e3,F1,"Where no underlay is present, this is likely to reflect the age and type of construction and is not necessarily a defect.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{UNDERLINING_STATUS_NO_UNDERLINING},100,DONE
 cb672ee9b3,F1,"However, installing a suitable breathable underlay when the roof covering is next renewed would improve weather protection and thermal performance.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_LARGELY_MISSING},50,OPEN
 ebcdc800ff,F1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 5844aaa6c4,F1,Routine maintenance appropriate to the underlay material should be expected.,ADD,{F_OTHER}::{BASEMENT_IN_USE},52,OPEN
@@ -906,7 +906,7 @@ b6b00f77e4,F1,Reference should also be made to the Energy Performance Certificat
 b896748bbe,F1,"I recommend upgrading the insulation to current standards, ensuring roof ventilation is not obstructed.",ADD,{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_NOT_ADEQUATELY_INSULATED},54,OPEN
 a4a369a752,F1,"Water Storage Tanks: The roof space contains plastic, galvanised steel, asbestos cement, fibreglass, other cold water storage tanks.",MENU,,0,DONE
 000c57ac38,F1,"Condition: Where visible, the tank appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,DONE
-36859a0ad9,F1,No defects noted: No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated.,FIX,{F_ROOF_STRUCTURE_WATER_TANK}::{WATERL_TANK_MATERIAL_LOCATION},86,OPEN
+36859a0ad9,F1,No defects noted: No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated.,EXACT,{F_ROOF_STRUCTURE_WATER_TANK}::{WATERL_TANK_MATERIAL_LOCATION},100,DONE
 12ae0e1688,F1,Routine maintenance appropriate to the tank material should be expected.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TANK_POOR_COVER},55,OPEN
 0ea5773f72,F1,Leaking: The water tank is leaking or in disrepair.,TOKENISED,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TANK},61,DONE
 e1f6964975,F1,You should repair or replace this promptly to prevent further dampness and damage to nearby elements.,ADD,{F_OTHER}::{BASEMENT_SERIOUS_DAMP},55,OPEN
@@ -921,8 +921,8 @@ c2295e51ba,F1,"Timber defects: Localised distortion, splitting, cracking, notchi
 39a725290e,F1,Repairs or further investigation should be undertaken where structural adequacy is uncertain.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TIMBER_STRUCTURE_SOON},100,DONE
 6fdbe470c0,F1,"Timber Decay: Evidence of wet rot, dry rot, fungal decay, other timber decay was observed.",MENU,,0,DONE
 daa587f6fb,F1,The source of moisture should be identified and promptly rectified before repairs are undertaken.,ADD,{F_OTHER}::{BASEMENT_DAMP},68,OPEN
-ee3f5415ac,F1,Ventilation to the roof space should be maintained to prevent conditions favourable to rot.,FIX,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_NONE},87,OPEN
-3587bbf05b,F1,"Thin Timbers: Parts of the original timber structure are too small, and this could affect the stability of the roof structure.",FIX,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_UNDERSIZE_TIMBER},90,OPEN
+ee3f5415ac,F1,Ventilation to the roof space should be maintained to prevent conditions favourable to rot.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_NONE},100,DONE
+3587bbf05b,F1,"Thin Timbers: Parts of the original timber structure are too small, and this could affect the stability of the roof structure.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_UNDERSIZE_TIMBER},100,DONE
 b5f401fbdc,F1,You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_HEAVY_ROOF},100,DONE
 85bfa33d60,F1,"Heavy tiles sagging: The roof covering is too heavy and has caused the roof structure to distort, sag, or cause nearby walls to crack.",MENU,,0,DONE
 cdd1558fd1,F1,You should ask an appropriately qualified person or roofing specialist to inspect the roof to determine the extent of the problem and specify any necessary remedial works.,ADD,{F_OTHER}::{BASEMENT_DAMP},65,OPEN
@@ -934,38 +934,38 @@ e1714cb2cd,F1,"Spray foam can restrict ventilation, trap moisture, and increase 
 77c19adcec,F1,Instruct an independent specialist to carry out an intrusive inspection and advise whether the spray foam should be removed.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
 8ab963a73f,F1,"Ensure that necessary remedial works or removal are completed, or that the cost is reflected in the purchase price.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
 a0ebccefa5,F1,"No opinion can be given on the condition of the concealed roof structure, and I cannot accept responsibility for defects hidden by the spray foam insulation.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
-1f8b8f4455,F1,No Wood-boring: No visible evidence of active wood-boring insect infestation was observed in the accessible roof timbers.,FIX,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_NONE},98,OPEN
-84d86956cc,F1,"Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation.",FIX,{F_ABOUT_ROOF_STRUCTURE}::{NO_INSECT_INFESTATION_FOUND},98,OPEN
+1f8b8f4455,F1,No Wood-boring: No visible evidence of active wood-boring insect infestation was observed in the accessible roof timbers.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_NONE},100,DONE
+84d86956cc,F1,"Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{NO_INSECT_INFESTATION_FOUND},100,DONE
 30244f2fd7,F1,Historic flight holes may be present and are not necessarily indicative of active infestation.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_NONE},100,DONE
 eb0d8bbe20,F1,"Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{NO_INSECT_INFESTATION_FOUND},70,OPEN
-edab239b48,F1,Further inspection by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,EXACT,{F_FLOORS}::{TIMBER_INFESTAION_INVESTIGATE},100,DONE
+edab239b48,F1,Further inspection by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,UNRESOLVED,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_MINOR},66,OPEN
 eb517e7a1a,F1,"Otherwise, for historic activity, further enquiries should be made to the vendor regarding its history, treatment work, and guarantee certificates.",MENU,,0,DONE
 3b55d2da82,F1,"Roof Movement: Evidence of deflection, sagging, spread, other was observed.",MENU,,0,DONE
 6e94a76470,F1,"Observed roof movement is normal, minor, significant, severe, presents a hazard, other.",MENU,,0,DONE
 ffd6d0deb8,F1,Further investigation by an appropriately qualified roofing contractor is recommended where movement appears significant or presents a hazard.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_ROOF_SPREADING},69,OPEN
 88d8bdb360,F1,"Structural Alterations: Evidence of structural alterations to the roof space was observed, including loft conversion, altered roof members, removed struts, trimmed rafters, replacement supports, additional timber supports, other alterations.",MENU,,0,DONE
 b9f8acf2aa,F1,The adequacy of structural support cannot be confirmed during a visual inspection.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},100,DONE
-3cfe3a0527,F1,Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.,FIX,{F_ROOF_STRUCTURE}::{LOFT_CONVERTED},86,OPEN
+3cfe3a0527,F1,Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.,EXACT,{F_ROOF_STRUCTURE}::{LOFT_CONVERTED},100,DONE
 4de8f6fd44,F1,"Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed, partially removed, altered, rendered, other within the roof space.",MENU,,0,DONE
-00ba46237c,F1,Not inspected: Part of the chimney breast within the roof space has been removed.,ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{DAMP_CHIMNEY},57,OPEN
+00ba46237c,F1,Not inspected: Part of the chimney breast within the roof space has been removed.,ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},62,OPEN
 04b27668a9,F1,I could not confirm whether the remaining masonry is adequately supported due to limited visibility.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{INSULATION_ADEQUATE},49,OPEN
 16e474d2b9,F1,Inadequate support can compromise the building's structural stability.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},53,OPEN
 db4983744d,F1,Your legal adviser should confirm that the necessary Building Regulations approval was obtained.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},69,OPEN
 c1af2d11eb,F1,"If this cannot be confirmed, or there is any doubt about the adequacy of the support, you should instruct a suitably qualified professional to inspect the remaining structure and provide recommendations before committing to the purchase.",MENU,,0,DONE
-8c1b027c3b,F1,"Adequate support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure appears to be properly supported.",ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{INSPECTED_OK},69,OPEN
+8c1b027c3b,F1,"Adequate support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure appears to be properly supported.",ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},81,OPEN
 5789da242f,F1,Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},68,OPEN
-624ca718d8,F1,"If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},70,OPEN
-377aa79ed3,F1,"Poor support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported.",ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{POOR_SUPPORT},70,OPEN
+624ca718d8,F1,"If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},92,OPEN
+377aa79ed3,F1,"Poor support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported.",ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},80,OPEN
 5789da242f,F1,Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},68,OPEN
-624ca718d8,F1,"If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},70,OPEN
-4673fe85c2,F1,"Add text to: Section J1 - Risk to building - Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported.",ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{POOR_SUPPORT},70,OPEN
-2672b803fd,F1,"Risk of collapse: Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",FIX,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},73,OPEN
+624ca718d8,F1,"If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},92,OPEN
+4673fe85c2,F1,"Add text to: Section J1 - Risk to building - Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported.",ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},80,OPEN
+2672b803fd,F1,"Risk of collapse: Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},100,DONE
 cc4fd1071f,F1,You should ask your legal adviser to check if the local authority gave permission for this work.,ADD,{F_OTHER}::{BASEMENT_SERIOUS_DAMP},61,OPEN
-9809a74c55,F1,"Further, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",FIX,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},73,OPEN
-17b3840da2,F1,"Add text to: Section J1 - Risk to building - Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",FIX,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},73,OPEN
-cb8195c405,F1,"Add text to: Section I1 - Regulation - Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",FIX,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},73,OPEN
+9809a74c55,F1,"Further, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},100,DONE
+17b3840da2,F1,"Add text to: Section J1 - Risk to building - Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},100,DONE
+cb8195c405,F1,"Add text to: Section I1 - Regulation - Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},100,DONE
 8f82c6696a,F1,Minor Chimney Damp: Minor dampness from water penetration was noted to the rendered chimney breast within the roof space.,EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{DAMP_CHIMNEY},100,DONE
-f318513d4d,F1,"This is not uncommon in a property of this age and construction, as a damp-proof course would not normally have been provided to the chimney.",FIX,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{DAMP_CHIMNEY},75,OPEN
+f318513d4d,F1,"This is not uncommon in a property of this age and construction, as a damp-proof course would not normally have been provided to the chimney.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{DAMP_CHIMNEY},100,DONE
 43e1e7790b,F1,The moisture is likely to have been exacerbated by defects in the flashing where the roof abuts the chimney stack.,ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{DAMP_CHIMNEY},64,OPEN
 50b6a2f1a8,F1,"This is not considered a significant concern at present, but the flashing should be inspected and repaired if necessary, during routine roof maintenance or when the roof covering is next renewed.",MENU,,0,DONE
 9305d49bb0,F1,"Party Wall Partially missing: The party wall within the roof space is incomplete, leaving gaps that could allow fire to spread between this and the neighbouring property.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_PARTLY_MISSING},100,DONE
@@ -1044,7 +1044,7 @@ c50e44f24a,F3,"Description: The walls are formed in solid masonry, timber stud p
 e19589b9f3,F3,"Condition: Where visible, the walls and partitions appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,DONE
 9453533e6b,F3,Routine redecoration appropriate to the age and condition of the property should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{WALL_FINISHES},100,DONE
 444ee8a699,F3,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-54ae15774f,F3,Routine maintenance appropriate to the wall material should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{WALL_CONDITION},100,DONE
+54ae15774f,F3,Routine maintenance appropriate to the wall material should be expected.,UNRESOLVED,{F_WALLS_AND_PARTITIONS}::{WALL_CONDITION},93,OPEN
 e77621e54d,F3,"If lath and plaster is selected, add this - The walls are fully or partially made of older plaster supported on thin wooden strips, called lath and plaster, typical of properties built before the 1940s.",MENU,,0,DONE
 9413100427,F3,"While no significant defects were noted at the time of inspection, these walls can deteriorate with age as the plaster loses its bond with the timber laths.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_LATH_AND_PLASTER_IS_SELECTED},100,DONE
 121c787bff,F3,"If textured coating is selected, add this - Some internal walls have a textured decorative coating, which may contain small amounts of asbestos.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_TEXTURED_IS_SELECTED},100,DONE
@@ -1084,9 +1084,9 @@ a547f5a3ff,F3,"If dampness persists after these repairs, further investigation b
 a045ed6b68,F3,"Where fitted units, such as kitchen cabinets, conceal wall surfaces, the extent of dampness cannot be fully assessed, and any necessary remedial works may be more extensive and costly.",MENU,,0,DONE
 c1dcfdf363,F3,I recommend further investigation by a suitably qualified damp specialist to confirm the cause and advise on any necessary repairs.,ADD,{RISK_TO_BUILDING}::{BUILDING_SUBSIDENCE_STATUS_INVESTIGATE},57,OPEN
 f6202283cd,F3,"Internal Alterations: Evidence was observed that an internal wall has been removed, partially removed, altered, new opening created, has been formed.",MENU,,0,DONE
-5bf2a90138,F3,"Where an internal wall has been removed or altered, other parts of the property must be properly supported.",FIX,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},87,OPEN
+5bf2a90138,F3,"Where an internal wall has been removed or altered, other parts of the property must be properly supported.",EXACT,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},100,DONE
 444ee8a699,F3,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-88b17e901a,F3,Routine maintenance appropriate to the building material should be expected.,FIX,{F_WALLS_AND_PARTITIONS}::{WALL_CONDITION},93,OPEN
+88b17e901a,F3,Routine maintenance appropriate to the building material should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{WALL_CONDITION},100,DONE
 bb79b43c15,F3,Defects noted: An original internal wall has been removed to form an opening at (type in location).,ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},59,OPEN
 98f3a42186,F3,"Distortion, cracking, inadequate support, other issues were noted around the altered area.",MENU,,0,DONE
 488a15c703,F3,"While no significant progressive movement was evident at the time of inspection, the structural adequacy of the alteration cannot be confirmed during a visual inspection.",ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_REPAIR},60,OPEN
@@ -1118,27 +1118,27 @@ dcbb7cb79b,F4,"This is common with floors of this age and construction, and thes
 d80983e0e9,F4,"However, where the defect is significant, repair must be carried out promptly by a qualified professional.",MENU,,0,DONE
 103a059cb9,F4,"No Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,DONE
 39bc540978,F4,"Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection.",MENU,,0,DONE
-58e9030aff,F4,No repairs are currently required.,FIX,{F_FLOORS}::{REPAIR_SLOPING_FLOOR_NO_ISSUE},78,OPEN
+58e9030aff,F4,No repairs are currently required.,EXACT,{F_FLOORS}::{REPAIR_SLOPING_FLOOR_NO_ISSUE},100,DONE
 c45e780b68,F4,Routine maintenance only is recommended.,ADD,{F_FLOORS}::{FLOOR_CONDITION},53,OPEN
 f4813cf0b6,F4,"Cracked Tiles: Localised cracked, loose, damaged floor tiles to the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas were observed.",MENU,,0,DONE
 9619d878be,F4,Repairs should be undertaken to maintain the floor finish and reduce the risk of further deterioration.,FIX,{F_FLOORS}::{TILES_CONDITION_CRACKED},87,OPEN
 c4fab3d8c7,F4,Loose Floorboards: Loose and creaking floor finishes were noted and will require local repair or renewal.,ADD,{F_FLOORS}::{LOOSE_FLOORBOARDS},62,OPEN
 091b3538b3,F4,Removal of floor coverings may reveal additional defects requiring attention.,ADD,{F_FLOORS}::{STANDARD_TEXT_2},51,OPEN
 4c45d114b0,F4,"Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed in the property, lounge, bedrooms, bathrooms, kitchens, other areas.",MENU,,0,DONE
-973f46855a,F4,Further inspection of active activity by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,FIX,{F_FLOORS}::{TIMBER_INFESTAION_INVESTIGATE},93,OPEN
+973f46855a,F4,Further inspection of active activity by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,EXACT,{F_FLOORS}::{TIMBER_INFESTAION_INVESTIGATE},100,DONE
 7ae45c7c94,F4,"Otherwise, for historic activity, further enquiries should be made to the vendor regarding history, treatment work, and guarantee certificates.",MENU,,0,DONE
 855302915a,F4,"Timber decay noted: Decay was noted to the floor timbers, staircase timbers, bathroom floor, kitchen floor, basement floor joists, other areas.",MENU,,0,DONE
 9608dd2d7c,F4,"The full extent of the decay could not be determined during this visual inspection, and additional concealed defects may be present.",ADD,{F_FLOORS}::{DAMPNESS_UNKNOWN_CAUSE},63,OPEN
-f35fb59572,F4,"Further investigation by a suitably qualified timber specialist is recommended, and you should obtain a report and quotations for any necessary remedial works before committing to the purchase.",ADD,{F_FLOORS}::{TIMBER_INFESTAION_INVESTIGATE},60,OPEN
+f35fb59572,F4,"Further investigation by a suitably qualified timber specialist is recommended, and you should obtain a report and quotations for any necessary remedial works before committing to the purchase.",ADD,{F_FLOORS}::{TIMBER_INFESTAION_INVESTIGATE},57,OPEN
 6203b37499,F4,"Dampness noted: Although I could not see the full extent of the dampness problem in the lounge, bedroom, kitchen, bathroom, utility room, other areas, I suspect the dampness is caused by faulty plumbing, bathtub spillage, leaking sealants, other.",MENU,,0,DONE
-0f221f1cff,F4,You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems.,FIX,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},100,OPEN
+0f221f1cff,F4,You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems.,EXACT,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},100,DONE
 77bc63e9e3,F4,"Unknown damp cause: Although I could not see the full extent of the damp problem, I suspect more serious defects exist in hidden areas.",TOKENISED,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},77,DONE
-0f221f1cff,F4,You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems.,FIX,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},100,OPEN
+0f221f1cff,F4,You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems.,EXACT,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},100,DONE
 b08f9ac17f,F4,"Underfloor Ventilation: Where applicable, the suspended timber floor is provided with adequate, limited, or restricted underfloor ventilation.",MENU,,0,DONE
 6693327005,F4,Adequate ventilation is important in reducing the risk of condensation and timber decay.,EXACT,{F_FLOORS}::{FLOOR_VENTILATION_OK},100,DONE
-ba8aed4852,F4,"Where ventilation appears restricted or limited, improvements should be considered during future maintenance works.",FIX,{F_FLOORS}::{FLOOR_VENTILATION_POOR},73,OPEN
+ba8aed4852,F4,"Where ventilation appears restricted or limited, improvements should be considered during future maintenance works.",EXACT,{F_FLOORS}::{FLOOR_VENTILATION_POOR},100,DONE
 029e62822a,F4,"Laminate/Wood floor defects: The laminate or wood flooring to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other areas are worn, damaged, poorly fitted, incomplete, cracked, lifted, other.",MENU,,0,DONE
-90a2bc7bec,F4,These should be repaired or replaced soon.,FIX,{F_FLOORS}::{REPAIR_LAMINATE},83,OPEN
+90a2bc7bec,F4,These should be repaired or replaced soon.,EXACT,{F_FLOORS}::{REPAIR_LAMINATE},100,DONE
 e55e476387,F4,"Excessive floor vibration: The floor was found to vibrate excessively underfoot, suggesting inadequate support and/or deterioration of the timber structure, such as fungal decay or wood-boring insect attack.",MENU,,0,DONE
 a0a51e88a6,F4,The exact cause could not be confirmed within the scope of this inspection.,ADD,{F_FLOORS}::{TILES_CONDITION_CRACKED},52,OPEN
 62d9d088de,F4,"You should instruct a suitably qualified contractor to inspect the floor structure, including the underfloor void where accessible, determine the cause, and carry out any necessary repairs before purchase commitment.",MENU,,0,DONE
@@ -1160,7 +1160,7 @@ a205b28725,F5,"The internal condition of chimney flues, liners and concealed str
 afe35f74a4,F5,The adequacy of ventilation has not been assessed during this inspection.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},64,OPEN
 60a01aa206,F5,"Description: The property incorporates open fireplaces, gas fires, electric fires, solid fuel stoves, wood-burning stoves, multi-fuel stoves, decorative fireplaces.",MENU,,0,DONE
 52bde0c6a1,F5,"Condition: Where visible, the fireplace(s) and chimney breast(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,DONE
-9f1bfb68be,F5,"If the flues are to be used, they should be inspected and assessed by an appropriately qualified chimney specialist before use.",FIX,{F_FIREPLACES_AND_CHIMNEYS}::{FLUES_NOT_INSPECTED},98,OPEN
+9f1bfb68be,F5,"If the flues are to be used, they should be inspected and assessed by an appropriately qualified chimney specialist before use.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{FLUES_NOT_INSPECTED},100,DONE
 5cfa1c1815,F5,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 a992d05ca6,F5,"Routine maintenance appropriate to the fireplaces, chimney breasts and flues material should be expected.",ADD,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},46,OPEN
 026d33278c,F5,"Vented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other are vented.",MENU,,0,DONE
@@ -1185,7 +1185,7 @@ cd5c3e450c,F5,"If you plan to use the fireplace again, you should ask an appropr
 aad16dcf13,F5,You should not use the fireplace until this has been done.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{DAMAGED_GATE},100,DONE
 27b339c032,F5,Dampness: Localised damp staining was observed on the chimney breast.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{AN_OPEN_FIRE_LOCATION},48,OPEN
 7ed3760535,F5,"This may be associated with condensation, defective flashings, unused flues, or moisture penetration.",MENU,,0,DONE
-60ed21089a,F5,The source should be identified and repaired before internal redecoration is undertaken.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{FLUES_NOT_INSPECTED},51,OPEN
+60ed21089a,F5,The source should be identified and repaired before internal redecoration is undertaken.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{AN_OPEN_FIRE_LOCATION},50,OPEN
 6b436c89e4,F5,"General Maintenance: Fireplaces, flues, and combustion appliances should be inspected and serviced regularly by appropriately qualified contractors.",MENU,,0,DONE
 4c80d062bf,F5,Unused flues should be adequately ventilated to reduce the risk of condensation and dampness.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{BLOCKED_FIREPLACE_UNVENTED},59,OPEN
 f9d543b487,F5,"Where fireplaces are no longer required, appropriate capping and ventilation should be maintained.",ADD,{F_FIREPLACES_AND_CHIMNEYS}::{BLOCKED_FIREPLACE_VENTED},69,OPEN
@@ -1208,7 +1208,7 @@ c08abc90c7,F6,Defective sealant should be renewed to reduce the risk of water pe
 c8b1f2c50a,F6,These appliances have not been assessed.,EXACT,{F_BUILT_IN_FITTINGS}::{BUILT_IN_APPLIANCES},100,DONE
 1e9a7bf221,F6,"Their condition, safety and serviceability are outside the scope of this inspection.",EXACT,{F_BUILT_IN_FITTINGS}::{BUILT_IN_APPLIANCES},100,DONE
 db56c0a4ad,F6,"Extractor Fan: The kitchen extractor fan was operating, not operating at the time of inspection.",ADD,{F_BUILT_IN_FITTINGS}::{BUILT_IN_APPLIANCES},55,OPEN
-8eeb4386e0,F6,Its effectiveness cannot be confirmed without normal use.,FIX,{F_BUILT_IN_FITTINGS}::{EXTRACTOR_FAN},84,OPEN
+8eeb4386e0,F6,Its effectiveness cannot be confirmed without normal use.,EXACT,{F_BUILT_IN_FITTINGS}::{EXTRACTOR_FAN},100,DONE
 fdb19ba167,F6,Regular cleaning of grease filters and vents should be undertaken to maintain efficient operation.,EXACT,{F_BUILT_IN_FITTINGS}::{EXTRACTOR_FAN},100,DONE
 79a8401152,F6,Defects: One or more of the following defects were observed: • damaged cupboard doors • loose hinges • damaged worktops • worn finishes • defective sealant • cracked wall tiles • damaged plinths • water-damaged units • misaligned drawers • loose handles Repairs should be undertaken as part of normal maintenance.,ADD,{F_BUILT_IN_FITTINGS}::{STANDARD_TEXT_2},42,OPEN
 90c9ff7c9c,F6,General Maintenance: Built-in fittings should be maintained as part of normal property ownership.,ADD,{F_BUILT_IN_FITTINGS}::{REPAIR_FITTING_NOW},59,OPEN
@@ -1276,7 +1276,7 @@ dcd4b29097,F8,Routine maintenance appropriate to the fittings should be expected
 eca8ee0ffb,F8,"Sealants: Sealant around the bath, shower tray, basin, and sanitary fittings appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,DONE
 50911c5a61,F8,Defective or deteriorated sealant should be renewed to reduce the risk of water penetration into concealed areas.,ADD,{F_BATHROOM_FITTINGS}::{SEALANT_CONDITION},66,OPEN
 7e29aa4f4d,F8,"Working extractor fan: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were working at the time of inspection.",MENU,,0,DONE
-e5ec4cf6ba,F8,The effectiveness of the fan(s) cannot be confirmed without the bathroom being in normal use.,FIX,{F_BATHROOM_FITTINGS}::{EXTRACTOR_FAN_INSTALLED_OK},98,OPEN
+e5ec4cf6ba,F8,The effectiveness of the fan(s) cannot be confirmed without the bathroom being in normal use.,EXACT,{F_BATHROOM_FITTINGS}::{EXTRACTOR_FAN_INSTALLED_OK},100,DONE
 2e302168cf,F8,"Where condensation or mould growth is evident, the fan should be cleaned regularly and set to continue operating after use, where this function is available, and window(s) opened regularly if one is available, to improve air circulation and ventilation.",MENU,,0,DONE
 7ea6595802,F8,"Fan not working: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were not working at the time of inspection.",MENU,,0,DONE
 8c24538b01,F8,"This can lead to poor ventilation, excessive condensation, mould growth, and deterioration of internal finishes.",MENU,,0,DONE
@@ -1403,9 +1403,9 @@ e906f4a3a4,G3,Not found: There is an independent mains water supply to the prope
 e170a5f29b,G3,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 957861a151,G3,Lead rising: The visible incoming water supply pipe is lead.,ADD,{G_WATER}::{LEAD_RISING},49,OPEN
 516f6d9e1d,G3,"Lead pipework was commonly used before 1970 and may allow small amounts of lead to enter the drinking water, particularly in soft water areas, presenting a potential health risk (see Section J3 - Risks).",MENU,,0,DONE
-4711076657,G3,You should obtain advice from your water supplier and consider replacing the lead pipework to eliminate this risk.,FIX,{G_WATER}::{LEAD_RISING},85,OPEN
+4711076657,G3,You should obtain advice from your water supplier and consider replacing the lead pipework to eliminate this risk.,EXACT,{G_WATER}::{LEAD_RISING},100,DONE
 1285ef2344,G3,Further information is available from the Drinking Water Inspectorate.,ADD,{G_WATER}::{LEAD_RISING},64,OPEN
-490d46b8d3,G3,You should obtain advice from your water supplier and arrange for replacement of the lead pipework where appropriate.,ADD,{G_WATER}::{LEAD_RISING},71,OPEN
+490d46b8d3,G3,You should obtain advice from your water supplier and arrange for replacement of the lead pipework where appropriate.,ADD,{G_WATER}::{LEAD_RISING},78,OPEN
 da5adbc571,G3,Further guidance is available from the Drinking Water Inspectorate.,ADD,{G_WATER}::{LEAD_RISING},67,OPEN
 e274175de9,G3,"Water tank: A cold-water storage tank located in the roof space, airing cupboard, kitchen, other and is constructed of plastic, galvanised steel, asbestos cement, other.",MENU,,0,DONE
 6db725717a,G3,"It appeared to be in reasonable, fair, poor condition.",MENU,,0,DONE
@@ -1418,7 +1418,7 @@ a8b1c45521,G3,This increases the risk of freezing during cold weather and may re
 bfd8edf885,G3,"Missing lid: The cold-water storage tank(s) has no lid, or the lid is not properly fitted, which may allow contamination of the stored water.",MENU,,0,DONE
 e69e800e40,G3,A suitable close-fitting lid should be installed as soon as possible.,ADD,{G_WATER}::{STANDARD_TEXT},47,OPEN
 3922735c7f,G3,Asbestos cement tank: The cold-water storage tank is constructed of asbestos cement.,ADD,{G_WATER}::{NOT_INSPECTED},54,OPEN
-2f088b8ca5,G3,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",ADD,{G_WATER}::{LEAD_RISING},45,OPEN
+2f088b8ca5,G3,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",ADD,{G_WATER}::{LEAD_RISING},44,OPEN
 e511290e50,G3,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,DONE
 ee251b97c2,G3,The visible water supply pipework comprises plastic and/or copper.,ADD,{G_WATER}::{LEAD_RISING},51,OPEN
 ffb22bb82f,G3,"Much of the plumbing is concealed within the structure, and the routing, support, joints, and condition of hidden pipework could not be assessed during this visual inspection.",MENU,,0,DONE
@@ -1430,15 +1430,15 @@ ffb22bb82f,G3,"Much of the plumbing is concealed within the structure, and the r
 dfc3c82067,G4,Heating not found: I was unable to locate the boiler or heating system.,ADD,{G_HEATING}::{ABOUT_NO_HEATING},57,OPEN
 648625652a,G4,"Please ask the vendor about the location of the boiler or heating system, as you must know where it is located.",ADD,{G_HEATING}::{ABOUT_FORCED_AIR},46,OPEN
 7a1f6e4d73,G4,Communal heating: The property is heated centrally by a communal heating system.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
-0d62aac814,G4,I could not inspect the system due to access restrictions and cannot comment on the type and condition.,FIX,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},82,OPEN
+0d62aac814,G4,I could not inspect the system due to access restrictions and cannot comment on the type and condition.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
 18c124f06d,G4,"Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other.",MENU,,0,DONE
-ee210c04aa,G4,The installation was inspected visually only.,FIX,{G_HEATING}::{STANDARD_TEXT},83,OPEN
+ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
 35f425e183,G4,No operational testing or assessment of efficiency was undertaken.,FIX,{G_HEATING}::{ABOUT_FORCED_AIR},73,OPEN
 5c9cccde43,G4,"Heat emitters: The boiler is connected to radiators, underfloor heating pipes, ceiling vents, wall vents, other as heat emitters; their capacity, efficiency, and lifespan are not readily ascertained.",MENU,,0,DONE
 357a27088e,G4,"I recommend these are serviced and demonstrated to yourselves, so you are satisfied with their performance under variable operational requirements.",EXACT,{G_HEATING}::{ABOUT_CONNECTED_TO_RADIATOR_UNDERFLOOR_PIPES},100,DONE
 a984c735bd,G4,"Room heaters: The property is heated by oil-filled, electric storage, individual room electric, other heaters.",MENU,,0,DONE
 601c9e2554,G4,These appear in reasonable condition.,EXACT,{G_HEATING}::{ABOUT_OTHER_HEATING},100,DONE
-c84e6c6555,G4,"However, I cannot comment on their serviceability as the system was not operating at the time of my inspection and I have no evidence of any service history.",FIX,{G_HEATING}::{ABOUT_BOILER_FLUE_CONNECTED_TO},98,OPEN
+c84e6c6555,G4,"However, I cannot comment on their serviceability as the system was not operating at the time of my inspection and I have no evidence of any service history.",EXACT,{G_HEATING}::{ABOUT_BOILER_FLUE_CONNECTED_TO},100,DONE
 7763876cac,G4,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 3e8f153430,G4,"Any inspection, servicing or repair of the heating installation should be carried out by a Gas Safe registered engineer (or an OFTEC registered engineer for oil-fired systems).",ADD,{G_HEATING}::{NOT_INSPECTED},45,OPEN
 b87e38de4a,G4,"Appropriate servicing or commissioning records should be provided for the boiler, heating system, and any fixed heating appliances.",MENU,,0,DONE
@@ -1456,29 +1456,29 @@ f09d4b6351,G4,"Forced Air Heating: The property is heated by a forced air heatin
 b650c39595,G4,"The installation was inspected visually only, and no operational testing or assessment of efficiency was undertaken.",EXACT,{G_HEATING}::{ABOUT_FORCED_AIR},100,DONE
 7763876cac,G4,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 9303cd1e46,G4,"Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property.",MENU,,0,DONE
-ee210c04aa,G4,The installation was inspected visually only.,FIX,{G_HEATING}::{STANDARD_TEXT},83,OPEN
+ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
 c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency or controls was undertaken.",FIX,{G_HEATING}::{ABOUT_AIR_SOURCE_HEAT_PUMP_LOCATED},78,OPEN
 66a388d659,G4,"Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other.",MENU,,0,DONE
 f867415b7f,G4,The associated ground collectors or boreholes are below ground and could not be inspected.,EXACT,{G_HEATING}::{ABOUT_GROUND_SOURCE_HEAT_PUMP_LOCATED},100,DONE
-ee210c04aa,G4,The installation was inspected visually only.,FIX,{G_HEATING}::{STANDARD_TEXT},83,OPEN
+ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
 c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency or controls was undertaken.",FIX,{G_HEATING}::{ABOUT_AIR_SOURCE_HEAT_PUMP_LOCATED},78,OPEN
 f6403e6eca,G5,I was unable to locate the water heating system.,ADD,{G_WATER_HEATING}::{ELECTRIC_WATER_HEATING_OTHER},60,OPEN
 fcaa35b461,G5,"Please ask the vendor about the location of the water heating system, as it is important that you know where it is located.",ADD,{G_WATER_HEATING}::{GAS_WATER_HEATING_COMBI_BOILER},49,OPEN
 0b1e713e79,G5,"Communal water heating: The property has hot water centrally by a communal water heating system, gas-powered.",ADD,{G_WATER_HEATING}::{ELECTRIC_WATER_HEATING_OTHER},60,OPEN
 33f4e43372,G5,It is likely to be metered or supplied as part of combined services.,ADD,{G_WATER_HEATING}::{REPAIR_LOOSE_SOLAR_PANELS},44,OPEN
-1d8f6a31a5,G5,I could not inspect the system due to access restrictions and cannot comment on the type and condition.,FIX,{G_WATER_HEATING}::{COMMUNAL_HOT_WATER},80,OPEN
+1d8f6a31a5,G5,I could not inspect the system due to access restrictions and cannot comment on the type and condition.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
 18a496d0c4,G5,"Water heating: The hot water is provided by the combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other installed in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,DONE
 1ebbeb0848,G5,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 c0aeff24d7,G5,"Electric Immersion: The hot water is provided by an insulated cylinder located in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,DONE
-2d75632dfc,G5,The installation was inspected visually only.,ADD,{G_WATER_HEATING}::{NOT_INSPECTED},57,OPEN
+2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
 fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,ADD,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},66,OPEN
 6e090c60c6,G5,Poor cylinder insulation: The hot water cylinder is not properly insulated.,EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 0693c2d809,G5,"Hot water tanks store water for long periods, and there will be a waste of energy if these tanks and the adjacent pipes are not properly insulated.",EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 8ccd8e73de,G5,This should be insulated soon.,EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 9dbbc2cc23,G5,Point-of-use: Hot water is provided by individual electric point-of-use water heaters serving individual outlets or appliances.,ADD,{G_WATER_HEATING}::{ELECTRIC_WATER_HEATING_OTHER},61,OPEN
-2d75632dfc,G5,The installation was inspected visually only.,ADD,{G_WATER_HEATING}::{NOT_INSPECTED},57,OPEN
+2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
 eff2aa202a,G5,"No operational testing or assessment of performance, efficiency or remaining service life was undertaken.",ADD,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},60,OPEN
-2d75632dfc,G5,The installation was inspected visually only.,ADD,{G_WATER_HEATING}::{NOT_INSPECTED},57,OPEN
+2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
 fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,ADD,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},66,OPEN
 ed0829e79e,G5,Solar water heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply.,EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
 bf277d4115,G5,"The installation was inspected visually only, and no operational testing or assessment of performance was undertaken.",EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
@@ -1549,7 +1549,7 @@ e53eb0f349,H1,"Your legal adviser should verify that any necessary planning perm
 5645ff9d7a,H1,"Shared Garage Access: Your legal adviser should confirm the rights of access, maintenance responsibilities and any liabilities relating to the shared garage access.",ADD,{H_GARAGE}::{ABOUT_GARAGE_SHARED_ACCESS},71,OPEN
 0802b6d64f,H1,"Description: The property incorporates a garage in a block of garages, an attached, a detached, an integral, garage, undercroft, other garage(s).",MENU,,0,DONE
 6ae77d6251,H1,"Walls: The garage is constructed of single skin brick, cavity brick, block, prefabricated concrete, timber frame, steel frame, other wall(s).",MENU,,0,DONE
-4bb0c3709a,H1,"Where the garage comprises single skin brick walls, it should be noted that these are susceptible to dampness because they are not usually insulated.",FIX,{H_GARAGE}::{IF_SINGLE_BRICK_SKIN_IS_SELECTED},76,OPEN
+4bb0c3709a,H1,"Where the garage comprises single skin brick walls, it should be noted that these are susceptible to dampness because they are not usually insulated.",EXACT,{H_GARAGE}::{IF_SINGLE_BRICK_SKIN_IS_SELECTED},100,DONE
 3823e20397,H1,"Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt sheets, asbestos sheets, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, metal sheets, plastic sheets, other material.",MENU,,0,DONE
 078f6df732,H1,"Garage Floor: The garage floor is constructed of concrete, stone, other material.",MENU,,0,DONE
 5cfdfbafad,H1,Minor cracking and surface wear are common and do not necessarily indicate structural movement.,ADD,{H_GARAGE}::{ABOUT_GARAGE_ROOF},45,OPEN
@@ -1572,10 +1572,10 @@ e18d025d35,H1,The roof covering material appears to contain asbestos.,EXACT,{H_G
 feb66f5b56,H1,"Significant defects: Serious defects were noted in the garage, including a badly leaking roof, badly cracked or unstable walls, beetle infestation, damaged glazing, a badly cracked floor, door(s) in disrepair, other significant defects.",MENU,,0,DONE
 f8fd4b53cc,H1,Prompt investigation and repair are required to address the defects and prevent further deterioration or safety risks.,ADD,{H_GARAGE}::{ABOUT_GARAGE_ROOF},45,OPEN
 2ff26daf57,H1,Safety hazard: The current condition of some of the elements of the garage is a safety hazard.,EXACT,{H_GARAGE}::{REPAIR_SAFETY_HAZARD},100,DONE
-5d0865ec4a,H1,You should resolve observed issues now.,FIX,{H_GARAGE}::{REPAIR_SAFETY_HAZARD},88,OPEN
+5d0865ec4a,H1,You should resolve observed issues now.,EXACT,{H_GARAGE}::{REPAIR_SAFETY_HAZARD},100,DONE
 2492bf6da1,H2,"Grounds: The subject property is set within level, sloping, hilly, undulating grounds.",MENU,,0,DONE
 e00c98aef8,H2,Shared Garden: The communal/shared garden is shared with neighbouring property or properties.,TOKENISED,{H_OTHER}::{SHARED_ACCESS_KNOWN},73,DONE
-1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",FIX,{H_OTHER}::{PRIVATE_ROAD},77,OPEN
+1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",EXACT,{H_OTHER}::{PRIVATE_ROAD},100,DONE
 84f651e2b9,H2,"Grounds: The communal/shared garden is paved, lawned, decked, artificially lawned, laid with stones, laid with tile chippings, other.",MENU,,0,DONE
 6dd65085eb,H2,"Fence: The boundary fences are formed in timber, brick, concrete, wire mesh, hedges, shrubs, other.",MENU,,0,DONE
 66a683a5bf,H2,No Fencing: The communal/shared garden of the property does not have fencing.,ADD,{H_OTHER}::{NOT_INSPECTED},56,OPEN
@@ -1586,7 +1586,7 @@ e00c98aef8,H2,Shared Garden: The communal/shared garden is shared with neighbour
 9c6172d45f,H2,"Where decking is installed, it should be inspected regularly as deterioration may create a safety hazard.",ADD,{H_OTHER}::{NOT_INSPECTED},53,OPEN
 eb0028f79e,H2,"Fence: The boundaries comprise timber fencing, brick walls, hedging, stone walls, concrete sections, wire, metal railings, other.",MENU,,0,DONE
 4edae09342,H2,Boundary ownership cannot be confirmed during a visual inspection.,ADD,{E_RC_DEFLECTION_OTHER}::{DEFLECTION_INVESTIGATE},46,OPEN
-60bffeffa4,H2,Your legal adviser should confirm ownership and maintenance responsibilities from the title documentation and the vendor(s).,FIX,{H_OTHER}::{REPAIR_FENCE},82,OPEN
+60bffeffa4,H2,Your legal adviser should confirm ownership and maintenance responsibilities from the title documentation and the vendor(s).,EXACT,{H_OTHER}::{REPAIR_FENCE},100,DONE
 8f27724315,H2,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,DONE
 278a560e78,H2,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE
 d0cb3abd7f,H2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
@@ -1604,7 +1604,7 @@ f7d52d372d,H2,Minor settlement is common and may be addressed during routine mai
 cfac22e7d4,H2,"Shared Areas: The property benefits from a shared driveway, shared garden, communal parking, communal gardens, shared pathways, other access.",MENU,,0,DONE
 b4ac3b85eb,H2,"Condition: Where visible, the shared areas appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,DONE
 f3a1699966,H2,Routine maintenance appropriate to the age and construction should be expected.,EXACT,{E_CHIMNEY_REPAIR_CONDITION_RATING}::{CONDITION_RATING_1},100,DONE
-1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",FIX,{H_OTHER}::{PRIVATE_ROAD},77,OPEN
+1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",EXACT,{H_OTHER}::{PRIVATE_ROAD},100,DONE
 aa2e2ec16d,H2,Private road: The road serving the property appears to be private and may not be maintained at public expense.,EXACT,{H_OTHER}::{PRIVATE_ROAD},100,DONE
 32ade209d3,H2,"Your legal adviser should confirm its status, together with any rights of access, maintenance responsibilities, and associated liabilities.",MENU,,0,DONE
 0aa56abd30,H2,"Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).",MENU,,0,DONE
@@ -1624,14 +1624,14 @@ d1c3e28e49,H2,"Repair outbuilding: Parts of the shed, workshop, annex, summer ho
 b38dee8da7,H2,"Retaining Wall: The retaining wall(s) is cracked, leaning, distorted, unstable, weak, damaged, in poor condition and may present a potential safety hazard.",MENU,,0,DONE
 a4466f701b,H2,"As retaining walls support significant ground loads, failure could result in substantial damage and costly repairs.",ADD,{H_OTHER}::{REPAIR_RETAINING_WALLS},49,OPEN
 d19068ec8c,H2,An appropriately qualified specialist should inspect the wall without delay and recommend any necessary remedial works.,ADD,{H_OTHER}::{REPAIR_RETAINING_WALLS},62,OPEN
-259780da55,H2,"If the retaining wall is shared with the neighbouring property owner, they may have some rights.",FIX,{H_OTHER}::{REPAIR_RETAINING_WALLS},80,OPEN
+259780da55,H2,"If the retaining wall is shared with the neighbouring property owner, they may have some rights.",EXACT,{H_OTHER}::{REPAIR_RETAINING_WALLS},100,DONE
 768e83ba2e,H2,"Before any work is done, you should ask your legal adviser to investigate this matter and explain the implications.",EXACT,{H_OTHER}::{REPAIR_RETAINING_WALLS},100,DONE
 64efb18473,H2,Nearby Trees: One or more trees are located close to the property.,ADD,{RISK_TO_BUILDING}::{BUILDING_NEAR_BY_TREES},58,OPEN
 9008ccdca8,H2,"Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",MENU,,0,DONE
-83265d5c46,H2,"No defects: No significant detrimental effects on the property were noted to date, although the trees should be regularly pruned to restrict future growth and minimise the risk of defects occurring.",FIX,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},100,OPEN
+83265d5c46,H2,"No defects: No significant detrimental effects on the property were noted to date, although the trees should be regularly pruned to restrict future growth and minimise the risk of defects occurring.",EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},100,DONE
 4cdfcebc2c,H2,Defects noted: One or more trees are located close to the property.,ADD,{RISK_TO_BUILDING}::{BUILDING_NEAR_BY_TREES},58,OPEN
 9008ccdca8,H2,"Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",MENU,,0,DONE
-c6a3d9406c,H2,"With groups of trees, the risk is usually greatest during prolonged dry spells.",FIX,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},84,OPEN
+c6a3d9406c,H2,"With groups of trees, the risk is usually greatest during prolonged dry spells.",EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},100,DONE
 490d6d6ab9,H2,"Detrimental effects on the property, fencing, finished grounds, outbuilding, other were noted that include significant cracks, subsidence movement.",MENU,,0,DONE
 76d636c593,H2,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_PROBLEM},100,DONE
 e823d63ef4,H2,"Also, the trees should be regularly pruned to restrict future growth and minimise the risk of further defects occurring.",EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_PROBLEM},100,DONE
@@ -1651,7 +1651,7 @@ b8ca97d7fa,H3,"Electromagnetic Fields (EMF): Electromagnetic Fields: The propert
 b205ed2cd5,H3,Further information can be obtained from the electricity network operator or the UK Health Security Agency (formerly the Health Protection Agency).,ADD,{H_OTHER_AREA}::{EMF},56,OPEN
 ae33d378f5,H3,The property is located close to electricity infrastructure that may give rise to concerns regarding electromagnetic fields.,ADD,{H_OTHER_AREA}::{FLOODING},55,OPEN
 c448b0ee32,H3,Japanese Knotweed Not Inspected: Japanese Knotweed: Dense vegetation or restricted access prevented a full inspection of the grounds.,ADD,{H_OTHER_AREA}::{LIFTS},49,OPEN
-54d4e3071e,H3,"Consequently, I cannot confirm whether Japanese knotweed or other invasive plants are present.",FIX,{H_OTHER_AREA}::{KNOTWEED_RESTRICTED_VIEW},78,OPEN
+54d4e3071e,H3,"Consequently, I cannot confirm whether Japanese knotweed or other invasive plants are present.",EXACT,{H_OTHER_AREA}::{KNOTWEED_RESTRICTED_VIEW},100,DONE
 04fa9a06d8,H3,Further investigation by a suitably qualified specialist is recommended if required.,ADD,{H_OTHER_AREA}::{KNOTWEED_NOTED},65,OPEN
 d64b797b74,H3,Not Found: No evidence of Japanese knotweed was observed within the areas inspected.,ADD,{H_OTHER_AREA}::{KNOTWEED_NOTED},57,OPEN
 fe1dd4e4cb,H3,"However, the inspection was limited to those areas that were visible and reasonably accessible at the time of the survey, and its absence cannot be guaranteed.",MENU,,0,DONE
