@@ -64,4 +64,13 @@ void main() {
       expect(out, contains('This is commonly caused by normal wear and tear, minor distortion, settlement, or worn hinges, latches, or other ironmongery.'));
     });
   });
+
+  group('F8 Bathroom fittings', () {
+    test('intro prints once a condition rating is chosen', () {
+      expect(
+        intro('activity_inside_property_bathroom_fittings_main_screen'),
+        contains('The inspection was limited by stored items, fixed furniture, bath panels, boxed-in pipework, restricted access, or sealed fittings.'),
+      );
+    });
+  });
 }

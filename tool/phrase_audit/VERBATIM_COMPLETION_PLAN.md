@@ -164,3 +164,5 @@ bank key, and the test that proves it.
 | F5 Fireplaces and chimneys | DONE (gate green after removing obsolete tests) | 11 rules (`gen_f5.py`); merged type screens; blocked fireplace, removed breasts, boiler flues, defects (new), dampness (new). |
 | F6 Built-in fittings | DONE (gate green after removing obsolete tests) | 11 rules (`gen_f6.py`). |
 | F7 Woodwork | DONE (gate green after removing obsolete parity test) | 13 rules (`gen_f7.py`); 8 old screens retired. F-derived J1 lines (out-of-square doors, infestation) stay as is until J1 is rebuilt. |
+| F8 Bathroom fittings | DONE (gate green after removing obsolete tests) | 10 rules (`gen_f8.py`). |
+| F9 Other (inside) | DONE | 18 rules (`gen_f9.py`): communal parts, repair, cellar/basement (duplicate Basement group retired). The G Services intro text that the digitiser attached to the F9 block is handled in G. |

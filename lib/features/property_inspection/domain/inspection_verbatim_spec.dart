@@ -7724,6 +7724,525 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_general_maintenance',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'f8_desc',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{BATH_ROOMS}',
+        options: {
+          'f8r_family_bathroom_s': 'family bathroom(s)',
+          'f8r_shower_room_s': 'shower room(s)',
+          'f8r_ensuite_shower_room_s': 'ensuite shower room(s)',
+          'f8r_ensuite_bathroom_s': 'ensuite bathroom(s)',
+          'f8r_separate_toilet_s': 'separate toilet(s)',
+          'f8r_utility_room': 'utility room',
+        },
+        otherCheckbox: 'cb_other_653',
+        otherText: 'et_other_836',
+        pdfOptions: ['family bathroom(s)', 'shower room(s)', 'ensuite shower room(s)', 'ensuite bathroom(s)', 'separate toilet(s)', 'utility room'],
+      ),
+    ],
+    pdf:
+        'Description: The property incorporates a family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room, other.',
+  ),
+  VerbatimRule(
+    'f8_sanitary',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_SANITARY_WARE}',
+    [
+      VerbatimToken(
+        '{SANITARY_WARE}',
+        options: {
+          'f8s_bathtub_s': 'bathtub(s)',
+          'f8s_shower_s': 'shower(s)',
+          'f8s_wash_hand_basin_s': 'wash hand basin(s)',
+          'f8s_wcs': 'WCs',
+          'f8s_bidet_s': 'bidet(s)',
+          'f8s_mains_pressure_shower': 'mains pressure shower',
+          'f8s_electric_shower': 'electric shower',
+          'f8s_thermostatic_shower': 'thermostatic shower',
+          'f8s_shower_enclosure': 'shower enclosure',
+          'f8s_wet_room': 'wet room',
+        },
+        otherCheckbox: 'f8s_other',
+        otherText: 'f8s_other_text',
+        pdfOptions: ['bathtub(s)', 'shower(s)', 'wash hand basin(s)', 'WCs', 'bidet(s)', 'mains pressure shower', 'electric shower', 'thermostatic shower', 'shower enclosure', 'wet room'],
+      ),
+    ],
+    pdf:
+        'Sanitary ware: These are fitted with a combination of sanitaryware including a bathtub(s), shower(s), wash hand basin(s), WCs, bidet(s), mains pressure shower, electric shower, thermostatic shower, shower enclosure, wet room, other installation.',
+  ),
+  VerbatimRule(
+    'f8_walls',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_WALL_FINISHES}',
+    [
+      VerbatimToken(
+        '{BATH_WALL_FINISHES}',
+        options: {
+          'f8w_ceramic_tiles': 'ceramic tiles',
+          'f8w_stone_tiles': 'stone tiles',
+          'f8w_water_resistant_wall_panels': 'water-resistant wall panels',
+          'f8w_painted_plaster': 'painted plaster',
+        },
+        otherCheckbox: 'f8w_other',
+        otherText: 'f8w_other_text',
+        pdfOptions: ['ceramic tiles', 'stone tiles', 'water-resistant wall panels', 'painted plaster'],
+      ),
+    ],
+    pdf:
+        'Wall finishes: Wall finishes comprise ceramic tiles, stone tiles, water-resistant wall panels, painted plaster, other finishes.',
+  ),
+  VerbatimRule(
+    'f8_cond',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_CONDITION}',
+    [
+      VerbatimToken(
+        '{BATH_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the bathroom fittings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.',
+  ),
+  VerbatimRule(
+    'f8_general',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f8_sealants',
+    'activity_in_side_property_bathroom_fittings_sealant',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_SEALANTS}',
+    [
+      VerbatimToken(
+        '{SEALANT_CONDITION}',
+        dropdown: 'actv_sealant_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Sealants: Sealant around the bath, shower tray, basin, and sanitary fittings appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f8_fan_ok',
+    'activity_in_side_property_bathroom_fittings_extractor_fan',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_FAN_WORKING}',
+    [
+      VerbatimToken(
+        '{FAN_ROOMS}',
+        options: {
+          'f8f_family_bathroom_s': 'family bathroom(s)',
+          'f8f_shower_room_s': 'shower room(s)',
+          'f8f_ensuite_shower_room_s': 'ensuite shower room(s)',
+          'f8f_ensuite_bathroom_s': 'ensuite bathroom(s)',
+          'f8f_separate_toilet_s': 'separate toilet(s)',
+          'f8f_utility_room': 'utility room',
+        },
+        pdfOptions: ['family bathroom(s)', 'shower room(s)', 'ensuite shower room(s)', 'ensuite bathroom(s)', 'separate toilet(s)', 'utility room'],
+      ),
+    ],
+    pdf:
+        'Working extractor fan: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were working at the time of inspection.',
+    whenField: 'actv_status',
+    whenValue: 'Working extractor fan',
+  ),
+  VerbatimRule(
+    'f8_fan_bad',
+    'activity_in_side_property_bathroom_fittings_extractor_fan',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_FAN_NOT_WORKING}',
+    [
+      VerbatimToken(
+        '{FAN_ROOMS}',
+        options: {
+          'f8f_family_bathroom_s': 'family bathroom(s)',
+          'f8f_shower_room_s': 'shower room(s)',
+          'f8f_ensuite_shower_room_s': 'ensuite shower room(s)',
+          'f8f_ensuite_bathroom_s': 'ensuite bathroom(s)',
+          'f8f_separate_toilet_s': 'separate toilet(s)',
+          'f8f_utility_room': 'utility room',
+        },
+        pdfOptions: ['family bathroom(s)', 'shower room(s)', 'ensuite shower room(s)', 'ensuite bathroom(s)', 'separate toilet(s)', 'utility room'],
+      ),
+    ],
+    pdf:
+        'Fan not working: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were not working at the time of inspection.',
+    whenField: 'actv_status',
+    whenValue: 'Fan not working',
+  ),
+  VerbatimRule(
+    'f8_defects',
+    'activity_in_side_property_bathroom_fittings_repair',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_DEFECTS_LIST}',
+    [
+      VerbatimToken(
+        '{BATH_DEFECT_LIST}',
+        options: {
+          'f8dl_defective_sealant': 'defective sealant',
+          'f8dl_cracked_sanitary_ware': 'cracked sanitary ware',
+          'f8dl_damaged_wall_tiles': 'damaged wall tiles',
+          'f8dl_damaged_cubicle_screen': 'damaged cubicle/screen',
+          'f8dl_loose_floor_tiles': 'loose floor tiles',
+          'f8dl_poor_ventilation': 'poor ventilation',
+          'f8dl_condensation': 'condensation',
+          'f8dl_mould_growth': 'mould growth',
+          'f8dl_water_staining': 'water staining',
+          'f8dl_damaged_fittings': 'damaged fittings',
+          'f8dl_damaged_bathtub_panel': 'damaged bathtub panel',
+          'f8dl_minor_plumbing_leaks': 'minor plumbing leaks',
+        },
+        pdfOptions: ['defective sealant', 'cracked sanitary ware', 'damaged wall tiles', 'damaged cubicle/screen', 'loose floor tiles', 'poor ventilation', 'condensation', 'mould growth', 'water staining', 'damaged fittings', 'damaged bathtub panel', 'minor plumbing leaks'],
+      ),
+    ],
+    pdf:
+        'Defects: One or more of the following defects were observed: • defective sealant • cracked sanitary ware • damaged wall tiles • damaged cubicle/screen • loose floor tiles • poor ventilation • condensation • mould growth • water staining • damaged fittings • damaged bathtub panel • minor plumbing leaks Repairs should be undertaken as part of normal property maintenance.',
+  ),
+  VerbatimRule(
+    'f8_intro',
+    'activity_inside_property_bathroom_fittings_main_screen',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f9_ca_ni',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Not inspected',
+  ),
+  VerbatimRule(
+    'f9_ca_desc',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{COMMUNAL_PARTS}',
+        options: {
+          'f9c_entrance_lobby': 'entrance lobby',
+          'f9c_hallway': 'hallway',
+          'f9c_landing': 'landing',
+          'f9c_staircases': 'staircases',
+          'f9c_lift_lobby': 'lift lobby',
+          'f9c_fire_lobby': 'fire lobby',
+          'f9c_balcony': 'balcony',
+          'f9c_communal_storage': 'communal storage',
+          'f9c_common_room': 'common room',
+        },
+        otherCheckbox: 'f9c_other',
+        otherText: 'f9c_other_text',
+        pdfOptions: ['entrance lobby', 'hallway', 'landing', 'staircases', 'lift lobby', 'fire lobby', 'balcony', 'communal storage', 'common room'],
+      ),
+    ],
+    pdf:
+        'Description: Internal communal parts to the property comprise entrance lobby, hallway, landing, staircases, lift lobby, fire lobby, balcony, communal storage, common room, other internal areas.',
+  ),
+  VerbatimRule(
+    'f9_ca_ok',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No defects noted',
+  ),
+  VerbatimRule(
+    'f9_ca_wear',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_WEAR}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Wear and tear noted',
+  ),
+  VerbatimRule(
+    'f9_ca_poor',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_POOR}',
+    [
+      VerbatimToken(
+        '{COMMUNAL_REMEDIAL}',
+        options: {
+          'f9p_repairs': 'repairs',
+          'f9p_general_maintenance': 'general maintenance',
+          'f9p_redecoration': 'redecoration',
+          'f9p_refurbishment': 'refurbishment',
+        },
+        otherCheckbox: 'f9p_other',
+        otherText: 'f9p_other_text',
+        pdfOptions: ['repairs', 'general maintenance', 'redecoration', 'refurbishment'],
+      ),
+    ],
+    pdf:
+        'Poor condition: The internal communal areas are in poor condition and require repairs, general maintenance, redecoration, refurbishment, other remedial works.',
+    whenField: 'actv_status',
+    whenValue: 'Poor condition',
+  ),
+  VerbatimRule(
+    'f9_repair',
+    'activity_in_side_property_other_repair',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_REPAIR}',
+    [
+      VerbatimToken(
+        '{REPAIR_AREAS}',
+        options: {
+          'f9ra_entry_stairs': 'entry stairs',
+          'f9ra_landing': 'landing',
+          'f9ra_balcony': 'balcony',
+          'f9ra_hallway': 'hallway',
+          'f9ra_shared_lobby': 'shared lobby',
+          'f9ra_fire_lobby': 'fire lobby',
+          'f9ra_common_room': 'common room',
+        },
+        otherCheckbox: 'et_other_609_cb',
+        otherText: 'et_other_609',
+        pdfOptions: ['entry stairs', 'landing', 'balcony', 'hallway', 'shared lobby', 'fire lobby', 'common room'],
+      ),
+      VerbatimToken(
+        '{REPAIR_DEFECTS}',
+        options: {
+          'f9rd_worn': 'worn',
+          'f9rd_damaged': 'damaged',
+          'f9rd_creaking': 'creaking',
+          'f9rd_badly_cracked': 'badly cracked',
+          'f9rd_sloping': 'sloping',
+          'f9rd_missing_in_places': 'missing in places',
+          'f9rd_in_disrepair': 'in disrepair',
+        },
+        otherCheckbox: 'f9rd_other',
+        otherText: 'f9rd_other_text',
+        pdfOptions: ['worn', 'damaged', 'creaking', 'badly cracked', 'sloping', 'missing in places', 'in disrepair'],
+      ),
+    ],
+    pdf:
+        'Repair: The entry stairs, landing, balcony, hallway, shared lobby, fire lobby, common room, other areas are worn, damaged, creaking, badly cracked, sloping, missing in places, in disrepair, other.',
+  ),
+  VerbatimRule(
+    'f9_cellar_ni',
+    'activity_inside_property_other_celler_no_access',
+    '{F_OTHER}',
+    '{F9_CELLAR_NOT_INSPECTED}',
+    [
+      VerbatimToken(
+        '{CELLAR_ACCESS}',
+        options: {
+          'f9na_restricted_access': 'restricted access',
+          'f9na_no_access': 'no access',
+        },
+        otherCheckbox: 'cb_other_704',
+        otherText: 'et_other_412',
+        pdfOptions: ['restricted access', 'no access'],
+      ),
+    ],
+    pdf:
+        'Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to restricted access, no access, other.',
+  ),
+  VerbatimRule(
+    'f9_cellar_walls',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_WALLS}',
+    [
+      VerbatimToken(
+        '{CELLAR_WALLS}',
+        options: {
+          'f9cw_bricks': 'bricks',
+          'f9cw_stone': 'stone',
+          'f9cw_loose_soil': 'loose soil',
+          'f9cw_concrete': 'concrete',
+        },
+        otherCheckbox: 'f9cw_other',
+        otherText: 'f9cw_other_text',
+        pdfOptions: ['bricks', 'stone', 'loose soil', 'concrete'],
+      ),
+    ],
+    pdf:
+        'Walls: The property incorporates a cellar, basement and the walls are formed in bricks, stone, loose soil, concrete, other materials.',
+  ),
+  VerbatimRule(
+    'f9_cellar_floor',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_FLOOR}',
+    [
+      VerbatimToken(
+        '{CELLAR_FLOOR}',
+        options: {
+          'f9cf_solid_concrete': 'solid concrete',
+          'f9cf_timber': 'timber',
+          'f9cf_stone': 'stone',
+          'f9cf_loose_soil': 'loose soil',
+        },
+        otherCheckbox: 'f9cf_other',
+        otherText: 'f9cf_other_text',
+        pdfOptions: ['solid concrete', 'timber', 'stone', 'loose soil'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of solid concrete, timber, stone, loose soil, other.',
+  ),
+  VerbatimRule(
+    'f9_cellar_cond',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_CONDITION}',
+    [
+      VerbatimToken(
+        '{CELLAR_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the cellar appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f9_cellar_unused',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_NOT_IN_USE}',
+    [
+    ],
+    whenField: 'actv_used_as',
+    whenValue: 'Not in use',
+  ),
+  VerbatimRule(
+    'f9_cellar_used',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_IN_USE}',
+    [
+    ],
+    whenField: 'actv_used_as',
+    whenValue: 'In use',
+  ),
+  VerbatimRule(
+    'f9_cellar_unsuitable',
+    'activity_inside_property_other_celler_not_habitable',
+    '{F_OTHER}',
+    '{F9_CELLAR_UNSUITABLE}',
+    [
+      VerbatimToken(
+        '{CELLAR_LIMITATIONS}',
+        options: {
+          'f9un_low_headroom': 'low headroom',
+          'f9un_dampness': 'dampness',
+          'f9un_difficult_access': 'difficult access',
+          'f9un_poor_ventilation': 'poor ventilation',
+        },
+        otherCheckbox: 'cb_other_697',
+        otherText: 'et_other_427',
+        pdfOptions: ['low headroom', 'dampness', 'difficult access', 'poor ventilation'],
+      ),
+    ],
+    pdf:
+        'Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to low headroom, dampness, difficult access, poor ventilation, other limitations.',
+  ),
+  VerbatimRule(
+    'f9_cellar_flooded',
+    'activity_inside_property_other_celler_flooded',
+    '{F_OTHER}',
+    '{F9_CELLAR_FLOODED}',
+    [
+      VerbatimToken(
+        '{CELLAR_FLOOD_DEGREE}',
+        dropdown: 'actv_possible_flooded',
+        dropdownOptions: ['Partially', 'Significantly'],
+        lower: true,
+        pdfOptions: ['partially', 'significantly'],
+      ),
+    ],
+    pdf:
+        'Flooded: The cellar or basement was partially, significantly flooded due to defective drainage or groundwater ingress.',
+  ),
+  VerbatimRule(
+    'f9_cellar_damp',
+    'activity_inside_property_other_celler_damp',
+    '{F_OTHER}',
+    '{F9_CELLAR_DAMP}',
+    [
+      VerbatimToken(
+        '{CELLAR_DAMP_AREAS}',
+        options: {
+          'f9dm_lower_walls': 'lower walls',
+          'f9dm_upper_walls': 'upper walls',
+          'f9dm_throughout_the_cellar': 'throughout the cellar',
+          'f9dm_exposed_floor_joists': 'exposed floor joists',
+        },
+        otherCheckbox: 'cb_others_389',
+        otherText: 'et_others_471',
+        pdfOptions: ['lower walls', 'upper walls', 'throughout the cellar', 'exposed floor joists'],
+      ),
+    ],
+    pdf:
+        'Damp: Dampness was noted on the lower walls, upper walls, throughout the cellar, exposed floor joists, other areas.',
+  ),
+  VerbatimRule(
+    'f9_cellar_waterproofing',
+    'activity_inside_property_other_celler_damp',
+    '{F_OTHER}',
+    '{F9_CELLAR_WATERPROOFING}',
+    [
+    ],
+    whenField: 'cb_serious_dump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f9_cellar_decay',
+    'activity_inside_property_other_celler_joists_decay',
+    '{F_OTHER}',
+    '{F9_CELLAR_TIMBER_DECAY}',
+    [
+    ],
+    whenField: 'cb_joists_decay',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f9_general',
+    'activity_inside_property_other_main_screen',
+    '{F_OTHER}',
+    '{F9_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

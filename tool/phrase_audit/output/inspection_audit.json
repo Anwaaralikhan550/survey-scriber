@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 411,
+  "screensAudited": 396,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2330,
-   "approvedLegacyBank": 588,
-   "approvedCurrentBankOnly": 1715,
+   "distinctEmitted": 2346,
+   "approvedLegacyBank": 581,
+   "approvedCurrentBankOnly": 1738,
    "unapproved": 0
   }
  },
@@ -2271,27 +2271,27 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_bathroom_fittings_second",
    "title": "Bathroom Fittings",
-   "dataFieldCount": 23,
-   "permutationCount": 29,
+   "dataFieldCount": 28,
+   "permutationCount": 38,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 29,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 29,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Bath, Shower, Wash Hand Basin, WC, Sanitary Ware: The fittings and appliances in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail are made up of old style, fairly basic, dated, modern and sample detail bathtub, shower unit, overhead shower, wc, wash hand basin, urinal, bidet and sample detail. Where visible, the fittings are of reasonable condition and quality, consistent with their age and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the fittings should be expected.",
-    "Bath, Shower, Wash Hand Basin, WC, Sanitary Ware: The fittings and appliances in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail are made up of old style, fairly basic, dated, modern and sample detail bathtub, shower unit, overhead shower, wc, wash hand basin, urinal, bidet and sample detail. Where visible, the fittings are of satisfactory condition and quality, consistent with their age and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the fittings should be expected.",
-    "Bath, Shower, Wash Hand Basin, WC, Sanitary Ware: The fittings and appliances in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail are made up of old style, fairly basic, dated, modern and sample detail bathtub, shower unit, overhead shower, wc, wash hand basin, urinal, bidet and sample detail. Where visible, the fittings are of unsatisfactory and poor condition and quality, consistent with their age and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the fittings should be expected."
+    "Description: The property incorporates a family bathroom(s).",
+    "Description: The property incorporates a shower room(s).",
+    "Description: The property incorporates a ensuite shower room(s)."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan",
    "title": "Extractor Fan Installed",
-   "dataFieldCount": 18,
-   "permutationCount": 22,
+   "dataFieldCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
     "total": 2,
@@ -2300,27 +2300,27 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Extractor Fan: The extractor in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail switch was on and was working, switch on - not working and sample detail at the time of my inspection. The effectiveness of the fan(s) cannot be confirmed without the bathroom being in normal use. Where condensation or mould growth is evident, the fan should be cleaned regularly and set to continue operating after use, where this function is available, and window(s) opened regularly if one is available, to improve air circulation and ventilation.",
-    "Extractor Fan: The extractor fan in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail was not working, has blocked vent, is too small, has weak suction and sample detail at the time of my inspection. Where condensation or mould growth is evident, the fan should be cleaned regularly and set to continue operating after use, where this function is available, to improve ventilation. You should repair or clean this soon."
+    "Working extractor fan: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s) and utility room were working at the time of inspection. The effectiveness of the fan(s) cannot be confirmed without the bathroom being in normal use. Where condensation or mould growth is evident, the fan should be cleaned regularly and set to continue operating after use, where this function is available, and window(s) opened regularly if one is available, to improve air circulation and ventilation.",
+    "Fan not working: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s) and utility room were not working at the time of inspection. This can lead to poor ventilation, excessive condensation, mould growth, and deterioration of internal finishes. The defective fan(s) should be repaired or replaced as soon as practicable to ensure adequate ventilation and help prevent further moisture-related defects."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_other_communal_area",
    "title": "Communal Area",
-   "dataFieldCount": 22,
-   "permutationCount": 30,
+   "dataFieldCount": 18,
+   "permutationCount": 26,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 4,
+    "total": 14,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 14,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "I noted usual wear and tear, decoration discolouration, shrinkage cracks, movement cracks and sample detail but generally appear in reasonable condition, consistent with their age, construction and use. Based upon a visual examination, communal areas appear serviceable and adequately maintained.",
-    "Inspection Limitations: I was unable to inspect the communal areas, and so a condition rating has not been allocated. This was because the door is locked, the area is not accessible, of limited access and sample detail.",
-    "I noted usual wear and tear, decoration discolouration, shrinkage cracks, movement cracks and sample detail but generally appear in satisfactory condition, consistent with their age, construction and use. Based upon a visual examination, communal areas appear serviceable and adequately maintained."
+    "Not inspected: Access to the communal areas was not available at the time of inspection. Consequently, I was unable to inspect these areas and cannot comment on their condition.",
+    "No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the installations should be expected.",
+    "Wear and tear noted: I noted normal wear and tear, or decorative discolouration, or shrinkage cracks or minor movement cracks. Subject to these observations, the communal areas appear to be in reasonable condition based on a visual inspection and appear to have been adequately maintained."
    ]
   },
   {
@@ -2337,28 +2337,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Cellar: The property has a cellar, but I could not inspect it because of restricted access. No comments can be made regarding its condition.",
-    "Cellar: The property has a cellar, but I could not inspect it because of no access. No comments can be made regarding its condition.",
-    "Cellar: The property has a cellar, but I could not inspect it because of restricted access, no access and sample detail. No comments can be made regarding its condition."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_other_celler_no_access__no_access",
-   "title": "No access",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Basement: The property has a basement, but I could not inspect it because of restricted access. No comments can be made regarding its condition.",
-    "Basement: The property has a basement, but I could not inspect it because of no access. No comments can be made regarding its condition.",
-    "Basement: The property has a basement, but I could not inspect it because of restricted access, no access and sample detail. No comments can be made regarding its condition."
+    "Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to restricted access. No comment can therefore be made on its condition.",
+    "Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to no access. No comment can therefore be made on its condition.",
+    "Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to restricted access, no access and sample detail. No comment can therefore be made on its condition."
    ]
   },
   {
@@ -2599,91 +2580,38 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_bathroom_fittings_extractor_fan__no_extractor_fan_installed",
-   "title": "No Extractor Fan Installed",
-   "dataFieldCount": 8,
-   "permutationCount": 12,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Ventilation: No extractor has been installed in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail. However, there are signs of condensation within the bathroom, and mould patches are visible on the walls. Adequate ventilation is important in reducing condensation and mould growth. I would advise that you install an extractor fan in the bathroom to improve air circulation and ventilation. This should be done now.",
-    "Ventilation: No extractor fan has been installed in the bathroom, shower room, en suite bathroom, en suite shower room, separate toilet and sample detail. Although no signs of condensation within the bathroom and mould patches are visible on the walls, adequate ventilation is important in reducing condensation and mould growth, and it may be necessary to install an extractor fan in the bathroom in the future to improve air circulation and ventilation."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_in_side_property_bathroom_fittings_repair",
    "title": "Repairs",
-   "dataFieldCount": 38,
-   "permutationCount": 42,
+   "dataFieldCount": 12,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Defects: The bathtub, shower tray, shower glass cubicle, wc, wash hand basin, urinal, bidet and sample detail are cracked, loose, slightly leaking, worn, stained, broken, damaged, partially blocked and sample detail. Repairs should be undertaken as part of normal property maintenance. This should be repaired soon.",
-    "Defects: The bathtub, shower tray, shower glass cubicle, wc, wash hand basin, urinal, bidet and sample detail are badly leaking, very loose, badly cracked, not working, not connected, poorly secured, blocked and sample detail. Repairs should be undertaken as part of normal property maintenance. You should repair this now.",
-    "This is a safety hazard (See Section J3 - Risks)."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_other_celler_not_in_use",
-   "title": "Not In Use",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Cellar: The property has a cellar that is currently not being used."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_other_celler_not_in_use__not_in_use",
-   "title": "Not In Use",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Basement: The property has a basement that is currently not being used."
+    "Defects: One or more of the following defects were observed: defective sealant. Repairs should be undertaken as part of normal property maintenance.",
+    "Defects: One or more of the following defects were observed: cracked sanitary ware. Repairs should be undertaken as part of normal property maintenance.",
+    "Defects: One or more of the following defects were observed: damaged wall tiles. Repairs should be undertaken as part of normal property maintenance."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_other_repair",
    "title": "Repairs",
-   "dataFieldCount": 33,
-   "permutationCount": 37,
+   "dataFieldCount": 18,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Defects: The entry stairs, landing, balcony, hallway, shared lobby, fire lobby, common room and sample detail are worn, damaged, creaking, cracked, sloping, missing in places, in disrepair and sample detail. Repairs should be undertaken as part of normal property maintenance. This should be repaired soon.",
-    "Defects: The entry stairs, landing, balcony, hallway, shared lobby, fire lobby, common room and sample detail are severely damaged, badly cracked, in complete disrepair and sample detail. Repairs should be undertaken as part of normal property maintenance. This should be repaired now."
+    "Repair: The entry stairs, landing, balcony, hallway, shared lobby, fire lobby, common room and sample detail areas are worn, damaged, creaking, badly cracked, sloping, missing in places, in disrepair and sample detail. These should be repaired soon, and if the defect is considered significant, it should be promptly investigated by a qualified person and repaired."
    ]
   },
   {
@@ -2857,59 +2785,21 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_bathroom_fittings_leaking",
-   "title": "Leaking sealants causing damp",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Plumbing Leaks: The bathtub is leaking and causing dampness to nearby elements (See Section J1 - Risks). Repairs should be undertaken to prevent further deterioration. You should repair this now.",
-    "Plumbing Leaks: The shower is leaking and causing dampness to nearby elements (See Section J1 - Risks). Repairs should be undertaken to prevent further deterioration. You should repair this now.",
-    "Plumbing Leaks: The wc is leaking and causing dampness to nearby elements (See Section J1 - Risks). Repairs should be undertaken to prevent further deterioration. You should repair this now."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_other_celler_inspected",
    "title": "Used as",
-   "dataFieldCount": 2,
-   "permutationCount": 12,
+   "dataFieldCount": 14,
+   "permutationCount": 26,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 17,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 17,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Cellar: The cellar has been improved and is currently used as storage. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance is recommended.",
-    "Cellar: The cellar has been improved and is currently used as games room. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance is recommended.",
-    "Cellar: The cellar has been improved and is currently used as other. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance is recommended."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_other_celler_inspected__used_as",
-   "title": "Used as",
-   "dataFieldCount": 2,
-   "permutationCount": 12,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Basement: The basement has been improved and is currently used as storage. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant structural concerns were observed unless otherwise stated. Routine maintenance is recommended.",
-    "Basement: The basement has been improved and is currently used as games room. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant structural concerns were observed unless otherwise stated. Routine maintenance is recommended.",
-    "Basement: The basement has been improved and is currently used as other. Where visible, it appears in reasonable condition, consistent with its age, construction and use. No significant structural concerns were observed unless otherwise stated. Routine maintenance is recommended."
+    "Walls: The property incorporates a cellar, basement and the walls are formed in bricks materials.",
+    "Walls: The property incorporates a cellar, basement and the walls are formed in stone materials.",
+    "Walls: The property incorporates a cellar, basement and the walls are formed in loose soil materials."
    ]
   },
   {
@@ -2930,37 +2820,6 @@
     "Roof Not Fully Inspected: I could not fully inspect the roof timber because of the floor was not safe to walk on at the time of my inspection. No comments can be made regarding unseen elements.",
     "Roof Not Fully Inspected: I could not fully inspect the roof timber because of floor was boarded at the time of my inspection. No comments can be made regarding unseen elements."
    ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_bathroom_fitting_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The bathroom fittings could not be inspected. As they are not accessible, they should be inspected and maintained as necessary to identify and address any defects at an early stage."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_other_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
   },
   {
    "sectionKey": "F",
@@ -3143,17 +3002,19 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_bathroom_fittings_sealant",
    "title": "Sealant condition",
-   "dataFieldCount": 10,
-   "permutationCount": 12,
+   "dataFieldCount": 1,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Sealants: The sealant around the edges of the bathtub, shower tray, wash hand basin and sample detail is damaged, partly missing, poorly applied and sample detail and is allowing excess water to seep behind the fitting, affecting the adjacent surfaces and hidden parts (See Section J1 - Risks). Defective or deteriorated sealant should be renewed to reduce the risk of water penetration into concealed areas - the junction between the wall tiles and fitting(s) must be sealed to prevent further damage to the adjacent surfaces. This should be repaired now."
+    "Sealants: Sealant around the bath, shower tray, basin, and sanitary fittings appears in good condition. Defective or deteriorated sealant should be renewed to reduce the risk of water penetration into concealed areas.",
+    "Sealants: Sealant around the bath, shower tray, basin, and sanitary fittings appears in reasonable condition. Defective or deteriorated sealant should be renewed to reduce the risk of water penetration into concealed areas.",
+    "Sealants: Sealant around the bath, shower tray, basin, and sanitary fittings appears in fair condition. Defective or deteriorated sealant should be renewed to reduce the risk of water penetration into concealed areas."
    ]
   },
   {
@@ -3170,28 +3031,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Cellar: The property has a cellar. This area should not be used because the ceiling is too low. Although I did not see any significant problem, you should not use this cellar for habitable purposes. The property must be maintained in the normal way.",
-    "Cellar: The property has a cellar. This area should not be used because it is damp. Although I did not see any significant problem, you should not use this cellar for habitable purposes. The property must be maintained in the normal way.",
-    "Cellar: The property has a cellar. This area should not be used because access is difficult. Although I did not see any significant problem, you should not use this cellar for habitable purposes. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_other_celler_not_habitable__not_habitable",
-   "title": "Not Habitable",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Basement: The property has a basement. This area should not be used because the ceiling is too low. Although I did not see any significant problem, you should not use this basement for habitable purposes. The property must be maintained in the normal way.",
-    "Basement: The property has a basement. This area should not be used because it is damp. Although I did not see any significant problem, you should not use this basement for habitable purposes. The property must be maintained in the normal way.",
-    "Basement: The property has a basement. This area should not be used because access is difficult. Although I did not see any significant problem, you should not use this basement for habitable purposes. The property must be maintained in the normal way."
+    "Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to low headroom. It should only be used as ancillary storage space.",
+    "Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to dampness. It should only be used as ancillary storage space.",
+    "Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to difficult access. It should only be used as ancillary storage space."
    ]
   },
   {
@@ -3269,25 +3111,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_bathroom_fittings_mould",
-   "title": "Moulding",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Wall Finishes: Some moulding was noted to flexible sealants around the bathtub. Localised cracked or loose tiles should be repaired as part of routine maintenance - the moulding sealants should be removed, the area cleaned up and new sealants reapplied to avoid further leakages. It should be maintained and checked regularly, as even slight damage may allow water penetration to enclosed areas beneath, which may cause rot and decay to the timber floor structure. This should be repaired now.",
-    "Wall Finishes: Some moulding was noted to flexible sealants around the wash hand basin. Localised cracked or loose tiles should be repaired as part of routine maintenance - the moulding sealants should be removed, the area cleaned up and new sealants reapplied to avoid further leakages. It should be maintained and checked regularly, as even slight damage may allow water penetration to enclosed areas beneath, which may cause rot and decay to the timber floor structure. This should be repaired now.",
-    "Wall Finishes: Some moulding was noted to flexible sealants around the shower tray. Localised cracked or loose tiles should be repaired as part of routine maintenance - the moulding sealants should be removed, the area cleaned up and new sealants reapplied to avoid further leakages. It should be maintained and checked regularly, as even slight damage may allow water penetration to enclosed areas beneath, which may cause rot and decay to the timber floor structure. This should be repaired now."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_other_celler_flooded",
    "title": "Flooded",
    "dataFieldCount": 1,
@@ -3300,26 +3123,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Cellar: The cellar of the property is partially flooded, possibly from water from adjacent broken drains or natural groundwater flowing past the property. You should ask an appropriately qualified person to inspect the problem and recommend repairs.",
-    "Cellar: The cellar of the property is significantly flooded, possibly from water from adjacent broken drains or natural groundwater flowing past the property. You should ask an appropriately qualified person to inspect the problem and recommend repairs."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_other_celler_flooded__flooded",
-   "title": "Flooded",
-   "dataFieldCount": 1,
-   "permutationCount": 5,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Basement: The basement of the property is partially flooded, possibly from water from adjacent broken drains or natural groundwater flowing past the property. You should ask an appropriately qualified person to inspect the problem and recommend repairs.",
-    "Basement: The basement of the property is significantly flooded, possibly from water from adjacent broken drains or natural groundwater flowing past the property. You should ask an appropriately qualified person to inspect the problem and recommend repairs."
+    "Flooded: The cellar or basement was partially flooded due to defective drainage or groundwater ingress. An appropriately qualified drainage or building specialist should investigate the cause and recommend remedial works.",
+    "Flooded: The cellar or basement was significantly flooded due to defective drainage or groundwater ingress. An appropriately qualified drainage or building specialist should investigate the cause and recommend remedial works."
    ]
   },
   {
@@ -3360,54 +3165,21 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_bathroom_fittings_wood_rot",
-   "title": "Wood Rot",
-   "dataFieldCount": 13,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_other_celler_damp",
    "title": "Damp",
    "dataFieldCount": 7,
    "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 1,
+    "total": 6,
+    "approvedLegacy": 0,
     "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Internal Dampness: Evidence of localised dampness was observed to the lower walls of the cellar. Minor dampness may be expected in older cellars below ground level and does not necessarily indicate a defect. The source should be identified and repaired before affected finishes are renewed. You should ask an appropriately qualified person to inspect the problem and recommend repairs.",
-    "Internal Dampness: Evidence of localised dampness was observed to the upper walls of the cellar. Minor dampness may be expected in older cellars below ground level and does not necessarily indicate a defect. The source should be identified and repaired before affected finishes are renewed. You should ask an appropriately qualified person to inspect the problem and recommend repairs.",
-    "Internal Dampness: Evidence of localised dampness was observed throughout the cellar. Minor dampness may be expected in older cellars below ground level and does not necessarily indicate a defect. The source should be identified and repaired before affected finishes are renewed. You should ask an appropriately qualified person to inspect the problem and recommend repairs."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_other_celler_damp__serious_damp",
-   "title": "Damp",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Internal Dampness: Evidence of localised dampness was observed to the lower walls of the basement. The source should be identified and repaired before affected finishes are renewed. You should ask an appropriately qualified person to inspect the problem and recommend repairs.",
-    "Internal Dampness: Evidence of localised dampness was observed to the upper walls of the basement. The source should be identified and repaired before affected finishes are renewed. You should ask an appropriately qualified person to inspect the problem and recommend repairs.",
-    "Internal Dampness: Evidence of localised dampness was observed throughout the basement. The source should be identified and repaired before affected finishes are renewed. You should ask an appropriately qualified person to inspect the problem and recommend repairs."
+    "Damp: Dampness was noted on the lower walls. Further investigation by a suitably qualified damp and timber specialist is recommended to establish the cause and specify appropriate repairs.",
+    "Damp: Dampness was noted on the upper walls. Further investigation by a suitably qualified damp and timber specialist is recommended to establish the cause and specify appropriate repairs.",
+    "Damp: Dampness was noted on the throughout the cellar. Further investigation by a suitably qualified damp and timber specialist is recommended to establish the cause and specify appropriate repairs."
    ]
   },
   {
@@ -3447,25 +3219,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_cubicle_safety_glass_rating",
-   "title": "No Cubicle Safety Glass Rating",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Defects: I could not find evidence that the glass screen to the shower cubicle is safety glass. If it is not, it could present a safety hazard to anyone that falls against it (See Section J3 - Risks). You should ask an appropriately qualified person to inspect this and recommend repairs to make it safe.",
-    "Defects: I could not find evidence that the glass screen to the bathtub screen is safety glass. If it is not, it could present a safety hazard to anyone that falls against it (See Section J3 - Risks). You should ask an appropriately qualified person to inspect this and recommend repairs to make it safe.",
-    "Defects: I could not find evidence that the glass screen to the shower cubicle, bathtub screen and sample detail is safety glass. If it is not, it could present a safety hazard to anyone that falls against it (See Section J3 - Risks). You should ask an appropriately qualified person to inspect this and recommend repairs to make it safe."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_other_celler_joists_decay",
    "title": "Joists Decay",
    "dataFieldCount": 1,
@@ -3478,24 +3231,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Defects: Some decay was noted to some of the exposed floor joists in the cellar. This is a serious problem and can affect the floor above, putting the whole building at risk (See Section J1 - Risks). You should ask an appropriately qualified person, such as a timber and damp expert, to inspect the problem and recommend repairs."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_other_celler_joists_decay__joists_decay",
-   "title": "Joists Decay",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Defects: Some decay was noted to some of the exposed floor joists in the basement. This is a serious problem and can affect the floor above, putting the whole building at risk (See Section J1 - Risks). You should ask an appropriately qualified person, such as a timber and damp expert, to inspect the problem and recommend repairs."
+    "Timber decay: Decay was noted in exposed floor joists within the cellar. This is a serious defect that may affect the structural integrity of the floor above. A suitably qualified timber and damp specialist should inspect the affected timbers and recommend appropriate repairs."
    ]
   },
   {
@@ -3735,25 +3471,31 @@
    "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 6,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The inspection was limited by stored items, fixed furniture, bath panels, boxed-in pipework, restricted access, or sealed fittings. Concealed plumbing, waste pipework, and waterproofing systems could not be inspected. No comment can therefore be made regarding concealed defects. The inspection was limited to a visual assessment only. Sanitary fittings, plumbing installations, and drainage systems were not dismantled or pressure assessed."
+   ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_inside_property_other_main_screen",
    "title": "Other",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
+   "dataFieldCount": 3,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 6,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "General Maintenance: Ancillary internal areas should be inspected periodically as part of routine property maintenance. Adequate heating and ventilation should be maintained to minimise condensation. Minor decorative defects and isolated repairs should be addressed before deterioration becomes more extensive. Stored items should not obstruct inspection hatches, ventilation openings, or access to services."
+   ]
   },
   {
    "sectionKey": "F",

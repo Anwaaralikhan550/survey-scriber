@@ -1,0 +1,738 @@
+[
+  {
+    "screen": "activity_in_side_property_other_communal_area",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f9_ca_ni",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_COMMUNAL_NOT_INSPECTED}",
+        "text": "Not inspected: Access to the communal areas was not available at the time of inspection. Consequently, I was unable to inspect these areas and cannot comment on their condition.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Not inspected"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Communal areas",
+            "type": "dropdown",
+            "options": [
+              "Not inspected",
+              "No defects noted",
+              "Wear and tear noted",
+              "Poor condition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f9_ca_desc",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_COMMUNAL_DESCRIPTION}",
+        "text": "Description: Internal communal parts to the property comprise {COMMUNAL_PARTS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{COMMUNAL_PARTS}",
+            "options": [
+              [
+                "f9c_entrance_lobby",
+                "entrance lobby"
+              ],
+              [
+                "f9c_hallway",
+                "hallway"
+              ],
+              [
+                "f9c_landing",
+                "landing"
+              ],
+              [
+                "f9c_staircases",
+                "staircases"
+              ],
+              [
+                "f9c_lift_lobby",
+                "lift lobby"
+              ],
+              [
+                "f9c_fire_lobby",
+                "fire lobby"
+              ],
+              [
+                "f9c_balcony",
+                "balcony"
+              ],
+              [
+                "f9c_communal_storage",
+                "communal storage"
+              ],
+              [
+                "f9c_common_room",
+                "common room"
+              ]
+            ],
+            "pdf_options": [
+              "entrance lobby",
+              "hallway",
+              "landing",
+              "staircases",
+              "lift lobby",
+              "fire lobby",
+              "balcony",
+              "communal storage",
+              "common room"
+            ],
+            "label": "Internal communal parts comprise",
+            "other": [
+              "f9c_other",
+              "f9c_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: Internal communal parts to the property comprise entrance lobby, hallway, landing, staircases, lift lobby, fire lobby, balcony, communal storage, common room, other internal areas."
+        ]
+      },
+      {
+        "id": "f9_ca_ok",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_COMMUNAL_NO_DEFECTS}",
+        "text": "No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the installations should be expected.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "No defects noted"
+        ]
+      },
+      {
+        "id": "f9_ca_wear",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_COMMUNAL_WEAR}",
+        "text": "Wear and tear noted: I noted normal wear and tear, or decorative discolouration, or shrinkage cracks or minor movement cracks. Subject to these observations, the communal areas appear to be in reasonable condition based on a visual inspection and appear to have been adequately maintained.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Wear and tear noted"
+        ]
+      },
+      {
+        "id": "f9_ca_poor",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_COMMUNAL_POOR}",
+        "text": "Poor condition: The internal communal areas are in poor condition and require {COMMUNAL_REMEDIAL}. These defects may result in increased service charges or one-off contributions from leaseholders. Your legal adviser should confirm with the person responsible for managing the building whether these works are planned, how they will be funded, and whether any major expenditure is anticipated. I have assumed that the communal areas are subject to appropriate maintenance arrangements and are the responsibility of the management company or other responsible party. Your legal adviser should confirm the maintenance responsibilities, arrangements, and any associated service charge obligations. Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos management.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{COMMUNAL_REMEDIAL}",
+            "options": [
+              [
+                "f9p_repairs",
+                "repairs"
+              ],
+              [
+                "f9p_general_maintenance",
+                "general maintenance"
+              ],
+              [
+                "f9p_redecoration",
+                "redecoration"
+              ],
+              [
+                "f9p_refurbishment",
+                "refurbishment"
+              ]
+            ],
+            "pdf_options": [
+              "repairs",
+              "general maintenance",
+              "redecoration",
+              "refurbishment"
+            ],
+            "label": "Areas require",
+            "other": [
+              "f9p_other",
+              "f9p_other_text"
+            ],
+            "cond": "actv_status=Poor condition"
+          }
+        ],
+        "pdf": [
+          "Poor condition: The internal communal areas are in poor condition and require repairs, general maintenance, redecoration, refurbishment, other remedial works."
+        ],
+        "when": [
+          "actv_status",
+          "Poor condition"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_other_repair",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f9_repair",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_COMMUNAL_REPAIR}",
+        "text": "Repair: The {REPAIR_AREAS} areas are {REPAIR_DEFECTS}. These should be repaired soon, and if the defect is considered significant, it should be promptly investigated by a qualified person and repaired.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{REPAIR_AREAS}",
+            "options": [
+              [
+                "f9ra_entry_stairs",
+                "entry stairs"
+              ],
+              [
+                "f9ra_landing",
+                "landing"
+              ],
+              [
+                "f9ra_balcony",
+                "balcony"
+              ],
+              [
+                "f9ra_hallway",
+                "hallway"
+              ],
+              [
+                "f9ra_shared_lobby",
+                "shared lobby"
+              ],
+              [
+                "f9ra_fire_lobby",
+                "fire lobby"
+              ],
+              [
+                "f9ra_common_room",
+                "common room"
+              ]
+            ],
+            "pdf_options": [
+              "entry stairs",
+              "landing",
+              "balcony",
+              "hallway",
+              "shared lobby",
+              "fire lobby",
+              "common room"
+            ],
+            "label": "Areas",
+            "other": [
+              "et_other_609_cb",
+              "et_other_609"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{REPAIR_DEFECTS}",
+            "options": [
+              [
+                "f9rd_worn",
+                "worn"
+              ],
+              [
+                "f9rd_damaged",
+                "damaged"
+              ],
+              [
+                "f9rd_creaking",
+                "creaking"
+              ],
+              [
+                "f9rd_badly_cracked",
+                "badly cracked"
+              ],
+              [
+                "f9rd_sloping",
+                "sloping"
+              ],
+              [
+                "f9rd_missing_in_places",
+                "missing in places"
+              ],
+              [
+                "f9rd_in_disrepair",
+                "in disrepair"
+              ]
+            ],
+            "pdf_options": [
+              "worn",
+              "damaged",
+              "creaking",
+              "badly cracked",
+              "sloping",
+              "missing in places",
+              "in disrepair"
+            ],
+            "label": "Defects",
+            "other": [
+              "f9rd_other",
+              "f9rd_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Repair: The entry stairs, landing, balcony, hallway, shared lobby, fire lobby, common room, other areas are worn, damaged, creaking, badly cracked, sloping, missing in places, in disrepair, other."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_other_celler_no_access",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f9_cellar_ni",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_NOT_INSPECTED}",
+        "text": "Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to {CELLAR_ACCESS}. No comment can therefore be made on its condition.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CELLAR_ACCESS}",
+            "options": [
+              [
+                "f9na_restricted_access",
+                "restricted access"
+              ],
+              [
+                "f9na_no_access",
+                "no access"
+              ]
+            ],
+            "pdf_options": [
+              "restricted access",
+              "no access"
+            ],
+            "label": "Could not be inspected due to",
+            "other": [
+              "cb_other_704",
+              "et_other_412"
+            ]
+          }
+        ],
+        "pdf": [
+          "Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to restricted access, no access, other."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_other_celler_inspected",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f9_cellar_walls",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_WALLS}",
+        "text": "Walls: The property incorporates a cellar, basement and the walls are formed in {CELLAR_WALLS} materials.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CELLAR_WALLS}",
+            "options": [
+              [
+                "f9cw_bricks",
+                "bricks"
+              ],
+              [
+                "f9cw_stone",
+                "stone"
+              ],
+              [
+                "f9cw_loose_soil",
+                "loose soil"
+              ],
+              [
+                "f9cw_concrete",
+                "concrete"
+              ]
+            ],
+            "pdf_options": [
+              "bricks",
+              "stone",
+              "loose soil",
+              "concrete"
+            ],
+            "label": "Walls formed in",
+            "other": [
+              "f9cw_other",
+              "f9cw_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Walls: The property incorporates a cellar, basement and the walls are formed in bricks, stone, loose soil, concrete, other materials."
+        ]
+      },
+      {
+        "id": "f9_cellar_floor",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_FLOOR}",
+        "text": "Floor: The floor is constructed of {CELLAR_FLOOR}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CELLAR_FLOOR}",
+            "options": [
+              [
+                "f9cf_solid_concrete",
+                "solid concrete"
+              ],
+              [
+                "f9cf_timber",
+                "timber"
+              ],
+              [
+                "f9cf_stone",
+                "stone"
+              ],
+              [
+                "f9cf_loose_soil",
+                "loose soil"
+              ]
+            ],
+            "pdf_options": [
+              "solid concrete",
+              "timber",
+              "stone",
+              "loose soil"
+            ],
+            "label": "Floor constructed of",
+            "other": [
+              "f9cf_other",
+              "f9cf_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Floor: The floor is constructed of solid concrete, timber, stone, loose soil, other."
+        ]
+      },
+      {
+        "id": "f9_cellar_cond",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_CONDITION}",
+        "text": "Condition: Where visible, the cellar appears in {CELLAR_CONDITION} condition. Minor dampness may be expected in older cellars below ground level and does not necessarily indicate a defect. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance is recommended.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CELLAR_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the cellar appears in good, reasonable, fair, poor, very poor condition."
+        ]
+      },
+      {
+        "id": "f9_cellar_unused",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_NOT_IN_USE}",
+        "text": "Not in use: The property has a cellar which is currently unused. No significant defects were apparent from the limited inspection. Routine maintenance is recommended.",
+        "tokens": [],
+        "when": [
+          "actv_used_as",
+          "Not in use"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_used_as",
+            "label": "Use of cellar",
+            "type": "dropdown",
+            "options": [
+              "Not in use",
+              "In use"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f9_cellar_used",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_IN_USE}",
+        "text": "In use: The cellar or basement has been adapted for use as storage or other uses. It appeared to be in reasonable condition at the time of inspection. Continue normal maintenance.",
+        "tokens": [],
+        "when": [
+          "actv_used_as",
+          "In use"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_other_celler_not_habitable",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f9_cellar_unsuitable",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_UNSUITABLE}",
+        "text": "Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to {CELLAR_LIMITATIONS}. It should only be used as ancillary storage space.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CELLAR_LIMITATIONS}",
+            "options": [
+              [
+                "f9un_low_headroom",
+                "low headroom"
+              ],
+              [
+                "f9un_dampness",
+                "dampness"
+              ],
+              [
+                "f9un_difficult_access",
+                "difficult access"
+              ],
+              [
+                "f9un_poor_ventilation",
+                "poor ventilation"
+              ]
+            ],
+            "pdf_options": [
+              "low headroom",
+              "dampness",
+              "difficult access",
+              "poor ventilation"
+            ],
+            "label": "Should not be regarded as habitable due to",
+            "other": [
+              "cb_other_697",
+              "et_other_427"
+            ]
+          }
+        ],
+        "pdf": [
+          "Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to low headroom, dampness, difficult access, poor ventilation, other limitations."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_other_celler_flooded",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f9_cellar_flooded",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_FLOODED}",
+        "text": "Flooded: The cellar or basement was {CELLAR_FLOOD_DEGREE} flooded due to defective drainage or groundwater ingress. An appropriately qualified drainage or building specialist should investigate the cause and recommend remedial works.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CELLAR_FLOOD_DEGREE}",
+            "dropdown": "actv_possible_flooded",
+            "field_label": "Flooded",
+            "dropdown_options": [
+              "Partially",
+              "Significantly"
+            ],
+            "pdf_options": [
+              "partially",
+              "significantly"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Flooded: The cellar or basement was partially, significantly flooded due to defective drainage or groundwater ingress."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_other_celler_damp",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f9_cellar_damp",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_DAMP}",
+        "text": "Damp: Dampness was noted on the {CELLAR_DAMP_AREAS}. Further investigation by a suitably qualified damp and timber specialist is recommended to establish the cause and specify appropriate repairs.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CELLAR_DAMP_AREAS}",
+            "options": [
+              [
+                "f9dm_lower_walls",
+                "lower walls"
+              ],
+              [
+                "f9dm_upper_walls",
+                "upper walls"
+              ],
+              [
+                "f9dm_throughout_the_cellar",
+                "throughout the cellar"
+              ],
+              [
+                "f9dm_exposed_floor_joists",
+                "exposed floor joists"
+              ]
+            ],
+            "pdf_options": [
+              "lower walls",
+              "upper walls",
+              "throughout the cellar",
+              "exposed floor joists"
+            ],
+            "label": "Dampness noted on",
+            "other": [
+              "cb_others_389",
+              "et_others_471"
+            ]
+          }
+        ],
+        "pdf": [
+          "Damp: Dampness was noted on the lower walls, upper walls, throughout the cellar, exposed floor joists, other areas."
+        ]
+      },
+      {
+        "id": "f9_cellar_waterproofing",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_WATERPROOFING}",
+        "text": "Waterproofing failure: The extent of dampness suggests failure or absence of an effective waterproofing system. Remedial works are likely to be disruptive and potentially costly. You should ask a suitably qualified specialist to investigate and provide recommendations. Your legal adviser should also confirm whether any waterproofing guarantees or warranties remain in force.",
+        "tokens": [],
+        "when": [
+          "cb_serious_dump",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_serious_dump",
+            "label": "Waterproofing failure",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_other_celler_joists_decay",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f9_cellar_decay",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_CELLAR_TIMBER_DECAY}",
+        "text": "Timber decay: Decay was noted in exposed floor joists within the cellar. This is a serious defect that may affect the structural integrity of the floor above. A suitably qualified timber and damp specialist should inspect the affected timbers and recommend appropriate repairs.",
+        "tokens": [],
+        "when": [
+          "cb_joists_decay",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_joists_decay",
+            "label": "Timber decay",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_other_main_screen",
+    "rules": [
+      {
+        "id": "f9_general",
+        "masters": [
+          "{F_OTHER}"
+        ],
+        "sub": "{F9_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: Ancillary internal areas should be inspected periodically as part of routine property maintenance. Adequate heating and ventilation should be maintained to minimise condensation. Minor decorative defects and isolated repairs should be addressed before deterioration becomes more extensive. Stored items should not obstruct inspection hatches, ventilation openings, or access to services.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_inside_property_other_celler_no_access__no_access",
+      "activity_inside_property_other_celler_not_in_use",
+      "activity_inside_property_other_celler_not_in_use__not_in_use",
+      "activity_inside_property_other_celler_inspected__used_as",
+      "activity_inside_property_other_celler_not_habitable__not_habitable",
+      "activity_inside_property_other_celler_flooded__flooded",
+      "activity_inside_property_other_celler_damp__serious_damp",
+      "activity_inside_property_other_celler_joists_decay__joists_decay",
+      "activity_inside_property_other_not_inspected"
+    ]
+  }
+]

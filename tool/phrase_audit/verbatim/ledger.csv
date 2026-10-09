@@ -1152,7 +1152,7 @@ b11f61f89a,F4,"Floors should be inspected periodically for signs of movement, da
 46b6705fcc,F4,"Prompt repair of plumbing leaks, water penetration and defective ventilation will reduce the risk of damage to concealed floor timbers.",EXACT,{F_FLOORS}::{F4_GENERAL_MAINTENANCE},100,DONE
 949fcdd2c2,F4,Floor finishes should be repaired or replaced as part of normal property maintenance when they reach the end of their service life.,EXACT,{F_FLOORS}::{F4_GENERAL_MAINTENANCE},100,DONE
 3899a4bdc7,F5,"This section relates to visible fireplaces, chimney breasts, and associated flues within the property.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
-90e9b8e730,F5,The inspection was limited to a visual assessment only.,EXACT,{F_BATHROOM_FITTINGS}::{STANDARD_TEXT},100,DONE
+90e9b8e730,F5,The inspection was limited to a visual assessment only.,EXACT,{F_BATHROOM_FITTINGS}::{F8_INTRO},100,DONE
 af522aa618,F5,"Fireplaces, flues, and appliances were not assessed, dismantled, or operated unless otherwise stated.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
 a205b28725,F5,"The internal condition of chimney flues, liners and concealed structural elements cannot be confirmed during a visual inspection.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
 8816944e44,F5,"No smoke testing, CCTV survey or opening up was undertaken.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
@@ -1226,9 +1226,9 @@ dadd8d9203,F7,"Defect noted: One or more internal joinery elements, including do
 a96d4e886b,F7,"Door operation: The internal doors selected for operation opened and closed freely, with resistance, with difficulty.",MENU,,0,VERIFIED
 3cbc7545c1,F7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 921f086110,F7,Routine maintenance appropriate to the timber joinery material should be expected.,EXACT,{F_WOODWORK}::{F7_DOOR_OPERATION},100,DONE
-fbc1e22a06,F7,"If with minor resistance, or with difficulty is selected, add this.",MENU,,0,UNVERIFIED
+fbc1e22a06,F7,"If with minor resistance, or with difficulty is selected, add this.",MENU,,0,DONE
 fdb06ea33e,F7,One or more internal doors do not close properly or operate with resistance.,EXACT,{F_WOODWORK}::{F7_DOOR_OPERATION_ADDON},100,DONE
-c820d52b8b,F7,"This is commonly caused by normal wear and tear, minor distortion, settlement, or worn hinges, latches, or other ironmongery.",MENU,,0,UNVERIFIED
+c820d52b8b,F7,"This is commonly caused by normal wear and tear, minor distortion, settlement, or worn hinges, latches, or other ironmongery.",MENU,,0,VERIFIED
 c7a329efbc,F7,"In most cases, adjustment or minor repairs will restore satisfactory operation.",EXACT,{F_WOODWORK}::{F7_DOOR_OPERATION_ADDON},100,DONE
 493ad11a24,F7,"Where defects are more severe or the door is damaged, replacement may be required.",EXACT,{F_WOODWORK}::{F7_DOOR_OPERATION_ADDON},100,DONE
 016d10a6cc,F7,Repairs should be undertaken as part of routine maintenance.,EXACT,{F_WOODWORK}::{F7_DOOR_OPERATION_ADDON},100,DONE
@@ -1263,83 +1263,83 @@ b3cac61195,F7,"Where active infestation is suspected, or significant timber dete
 b7da278bf0,F7,Timber should be redecorated periodically to protect exposed surfaces.,EXACT,{F_WOODWORK}::{F7_GENERAL_MAINTENANCE},100,DONE
 bdfce26677,F7,Any source of moisture should be addressed promptly to minimise the risk of timber deterioration.,EXACT,{F_WOODWORK}::{F7_GENERAL_MAINTENANCE},100,DONE
 cdf6ebd40f,F8,"The inspection was limited by stored items, fixed furniture, bath panels, boxed-in pipework, restricted access, or sealed fittings.",MENU,,0,UNVERIFIED
-1f36a094f5,F8,"Concealed plumbing, waste pipework, and waterproofing systems could not be inspected.",UNRESOLVED,{F_BATHROOM_FITTINGS}::{STANDARD_TEXT},71,OPEN
-ed87f964e5,F8,No comment can therefore be made regarding concealed defects.,ADD,{F_BATHROOM_FITTINGS}::{STANDARD_TEXT},58,OPEN
-981f75da93,F8,The inspection was limited to a visual assessment only.,EXACT,{F_BATHROOM_FITTINGS}::{STANDARD_TEXT},100,DONE
-b3331f4588,F8,"Sanitary fittings, plumbing installations, and drainage systems were not dismantled or pressure assessed.",NEAR,{F_BATHROOM_FITTINGS}::{STANDARD_TEXT},97,OPEN
-d91cacc5ae,F8,"Description: The property incorporates a family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room, other.",MENU,,0,UNVERIFIED
-50937cd3d5,F8,"Sanitary ware: These are fitted with a combination of sanitaryware including a bathtub(s), shower(s), wash hand basin(s), WCs, bidet(s), mains pressure shower, electric shower, thermostatic shower, shower enclosure, wet room, other installation.",MENU,,0,UNVERIFIED
-afe7ce255e,F8,"Wall finishes: Wall finishes comprise ceramic tiles, stone tiles, water-resistant wall panels, painted plaster, other finishes.",MENU,,0,UNVERIFIED
-0c4b893fdd,F8,"Condition: Where visible, the bathroom fittings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.",MENU,,0,UNVERIFIED
+1f36a094f5,F8,"Concealed plumbing, waste pipework, and waterproofing systems could not be inspected.",EXACT,{F_BATHROOM_FITTINGS}::{F8_INTRO},100,DONE
+ed87f964e5,F8,No comment can therefore be made regarding concealed defects.,EXACT,{F_BATHROOM_FITTINGS}::{F8_INTRO},100,DONE
+981f75da93,F8,The inspection was limited to a visual assessment only.,EXACT,{F_BATHROOM_FITTINGS}::{F8_INTRO},100,DONE
+b3331f4588,F8,"Sanitary fittings, plumbing installations, and drainage systems were not dismantled or pressure assessed.",EXACT,{F_BATHROOM_FITTINGS}::{F8_INTRO},100,DONE
+d91cacc5ae,F8,"Description: The property incorporates a family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room, other.",MENU,,0,VERIFIED
+50937cd3d5,F8,"Sanitary ware: These are fitted with a combination of sanitaryware including a bathtub(s), shower(s), wash hand basin(s), WCs, bidet(s), mains pressure shower, electric shower, thermostatic shower, shower enclosure, wet room, other installation.",MENU,,0,VERIFIED
+afe7ce255e,F8,"Wall finishes: Wall finishes comprise ceramic tiles, stone tiles, water-resistant wall panels, painted plaster, other finishes.",MENU,,0,VERIFIED
+0c4b893fdd,F8,"Condition: Where visible, the bathroom fittings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.",MENU,,0,VERIFIED
 554263c85b,F8,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 dcd4b29097,F8,Routine maintenance appropriate to the fittings should be expected.,EXACT,{F_BATHROOM_FITTINGS}::{BATHROOM_FITTINGS},100,DONE
-eca8ee0ffb,F8,"Sealants: Sealant around the bath, shower tray, basin, and sanitary fittings appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-50911c5a61,F8,Defective or deteriorated sealant should be renewed to reduce the risk of water penetration into concealed areas.,ADD,{F_BATHROOM_FITTINGS}::{SEALANT_CONDITION},66,OPEN
-7e29aa4f4d,F8,"Working extractor fan: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were working at the time of inspection.",MENU,,0,UNVERIFIED
+eca8ee0ffb,F8,"Sealants: Sealant around the bath, shower tray, basin, and sanitary fittings appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+50911c5a61,F8,Defective or deteriorated sealant should be renewed to reduce the risk of water penetration into concealed areas.,EXACT,{F_BATHROOM_FITTINGS}::{F8_SEALANTS},100,DONE
+7e29aa4f4d,F8,"Working extractor fan: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were working at the time of inspection.",MENU,,0,VERIFIED
 e5ec4cf6ba,F8,The effectiveness of the fan(s) cannot be confirmed without the bathroom being in normal use.,EXACT,{F_BATHROOM_FITTINGS}::{EXTRACTOR_FAN_INSTALLED_OK},100,DONE
 2e302168cf,F8,"Where condensation or mould growth is evident, the fan should be cleaned regularly and set to continue operating after use, where this function is available, and window(s) opened regularly if one is available, to improve air circulation and ventilation.",EXACT,{F_BATHROOM_FITTINGS}::{EXTRACTOR_FAN_INSTALLED_OK},100,DONE
-7ea6595802,F8,"Fan not working: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were not working at the time of inspection.",MENU,,0,UNVERIFIED
-8c24538b01,F8,"This can lead to poor ventilation, excessive condensation, mould growth, and deterioration of internal finishes.",UNRESOLVED,{F_BATHROOM_FITTINGS}::{EXTRACTOR_FAN_CONDENSATION_NOTED},50,OPEN
-46a92faea2,F8,The defective fan(s) should be repaired or replaced as soon as practicable to ensure adequate ventilation and help prevent further moisture-related defects.,ADD,{F_BATHROOM_FITTINGS}::{SEALANT_CONDITION},52,OPEN
-9cb65f41dc,F8,Defects: One or more of the following defects were observed: • defective sealant • cracked sanitary ware • damaged wall tiles • damaged cubicle/screen • loose floor tiles • poor ventilation • condensation • mould growth • water staining • damaged fittings • damaged bathtub panel • minor plumbing leaks Repairs should be undertaken as part of normal property maintenance.,MENU,,0,UNVERIFIED
-6efd16f438,F8,General Maintenance: Bathroom fittings should be maintained as part of normal property ownership.,ADD,{F_BATHROOM_FITTINGS}::{BATHROOM_FITTINGS_REPAIR_NOW},68,OPEN
-d272e53253,F8,Sealants should be inspected regularly and renewed where deterioration becomes evident.,ADD,{F_BATHROOM_FITTINGS}::{LEAKING_SEALANTS},58,OPEN
-ddd821c8d5,F8,Adequate heating and ventilation should be maintained to reduce condensation and mould growth.,FIX,{F_BATHROOM_FITTINGS}::{EXTRACTOR_FAN_CONDENSATION_NOTED},78,OPEN
-04be99cf53,F8,Plumbing leaks should be repaired promptly to minimise water damage to adjoining finishes and concealed building elements.,ADD,{F_BATHROOM_FITTINGS}::{STANDARD_TEXT},46,OPEN
-e598cd4d6a,F9,Not inspected: Access to the communal areas was not available at the time of inspection.,ADD,,0,OPEN
-5349e59716,F9,"Consequently, I was unable to inspect these areas and cannot comment on their condition.",ADD,,0,OPEN
-76b957a9c5,F9,"Description: Internal communal parts to the property comprise entrance lobby, hallway, landing, staircases, lift lobby, fire lobby, balcony, communal storage, common room, other internal areas.",MENU,,0,UNVERIFIED
+7ea6595802,F8,"Fan not working: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were not working at the time of inspection.",MENU,,0,VERIFIED
+8c24538b01,F8,"This can lead to poor ventilation, excessive condensation, mould growth, and deterioration of internal finishes.",EXACT,{F_BATHROOM_FITTINGS}::{F8_FAN_NOT_WORKING},100,DONE
+46a92faea2,F8,The defective fan(s) should be repaired or replaced as soon as practicable to ensure adequate ventilation and help prevent further moisture-related defects.,EXACT,{F_BATHROOM_FITTINGS}::{F8_FAN_NOT_WORKING},100,DONE
+9cb65f41dc,F8,Defects: One or more of the following defects were observed: • defective sealant • cracked sanitary ware • damaged wall tiles • damaged cubicle/screen • loose floor tiles • poor ventilation • condensation • mould growth • water staining • damaged fittings • damaged bathtub panel • minor plumbing leaks Repairs should be undertaken as part of normal property maintenance.,MENU,,0,VERIFIED
+6efd16f438,F8,General Maintenance: Bathroom fittings should be maintained as part of normal property ownership.,EXACT,{F_BATHROOM_FITTINGS}::{F8_GENERAL_MAINTENANCE},100,DONE
+d272e53253,F8,Sealants should be inspected regularly and renewed where deterioration becomes evident.,EXACT,{F_BATHROOM_FITTINGS}::{F8_GENERAL_MAINTENANCE},100,DONE
+ddd821c8d5,F8,Adequate heating and ventilation should be maintained to reduce condensation and mould growth.,EXACT,{F_BATHROOM_FITTINGS}::{F8_GENERAL_MAINTENANCE},100,DONE
+04be99cf53,F8,Plumbing leaks should be repaired promptly to minimise water damage to adjoining finishes and concealed building elements.,EXACT,{F_BATHROOM_FITTINGS}::{F8_GENERAL_MAINTENANCE},100,DONE
+e598cd4d6a,F9,Not inspected: Access to the communal areas was not available at the time of inspection.,EXACT,{F_OTHER}::{F9_COMMUNAL_NOT_INSPECTED},100,DONE
+5349e59716,F9,"Consequently, I was unable to inspect these areas and cannot comment on their condition.",EXACT,{F_OTHER}::{F9_COMMUNAL_NOT_INSPECTED},100,DONE
+76b957a9c5,F9,"Description: Internal communal parts to the property comprise entrance lobby, hallway, landing, staircases, lift lobby, fire lobby, balcony, communal storage, common room, other internal areas.",MENU,,0,VERIFIED
 a5d55ac6da,F9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-1fe5a35d4f,F9,Routine maintenance appropriate to the installations should be expected.,ADD,,0,OPEN
-b111049731,F9,"Wear and tear noted: I noted normal wear and tear, or decorative discolouration, or shrinkage cracks or minor movement cracks.",UNRESOLVED,,0,OPEN
-6d9d61e979,F9,"Subject to these observations, the communal areas appear to be in reasonable condition based on a visual inspection and appear to have been adequately maintained.",ADD,,0,OPEN
-e3b63a344e,F9,"Poor condition: The internal communal areas are in poor condition and require repairs, general maintenance, redecoration, refurbishment, other remedial works.",MENU,,0,UNVERIFIED
-c87083943f,F9,These defects may result in increased service charges or one-off contributions from leaseholders.,ADD,,0,OPEN
-d5d75f686e,F9,"Your legal adviser should confirm with the person responsible for managing the building whether these works are planned, how they will be funded, and whether any major expenditure is anticipated.",UNRESOLVED,,0,OPEN
-3f476cd9e2,F9,I have assumed that the communal areas are subject to appropriate maintenance arrangements and are the responsibility of the management company or other responsible party.,ADD,,0,OPEN
-01a09b0572,F9,"Your legal adviser should confirm the maintenance responsibilities, arrangements, and any associated service charge obligations.",UNRESOLVED,,0,OPEN
-da00a55951,F9,Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos management.,ADD,,0,OPEN
-6eaa190ff1,F9,"Repair: The entry stairs, landing, balcony, hallway, shared lobby, fire lobby, common room, other areas are worn, damaged, creaking, badly cracked, sloping, missing in places, in disrepair, other.",MENU,,0,UNVERIFIED
-11062570a8,F9,"These should be repaired soon, and if the defect is considered significant, it should be promptly investigated by a qualified person and repaired.",UNRESOLVED,,0,OPEN
-3b07af6f40,F9,"Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to restricted access, no access, other.",UNRESOLVED,,0,OPEN
-e17770774f,F9,No comment can therefore be made on its condition.,ADD,,0,OPEN
-c2df02b7b9,F9,"Walls: The property incorporates a cellar, basement and the walls are formed in bricks, stone, loose soil, concrete, other materials.",MENU,,0,UNVERIFIED
-d32a2ed9d9,F9,"Floor: The floor is constructed of solid concrete, timber, stone, loose soil, other.",MENU,,0,UNVERIFIED
-b68b6c2578,F9,"Condition: Where visible, the cellar appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+1fe5a35d4f,F9,Routine maintenance appropriate to the installations should be expected.,EXACT,{F_OTHER}::{F9_COMMUNAL_NO_DEFECTS},100,DONE
+b111049731,F9,"Wear and tear noted: I noted normal wear and tear, or decorative discolouration, or shrinkage cracks or minor movement cracks.",EXACT,{F_OTHER}::{F9_COMMUNAL_WEAR},100,DONE
+6d9d61e979,F9,"Subject to these observations, the communal areas appear to be in reasonable condition based on a visual inspection and appear to have been adequately maintained.",EXACT,{F_OTHER}::{F9_COMMUNAL_WEAR},100,DONE
+e3b63a344e,F9,"Poor condition: The internal communal areas are in poor condition and require repairs, general maintenance, redecoration, refurbishment, other remedial works.",MENU,,0,VERIFIED
+c87083943f,F9,These defects may result in increased service charges or one-off contributions from leaseholders.,EXACT,{F_OTHER}::{F9_COMMUNAL_POOR},100,DONE
+d5d75f686e,F9,"Your legal adviser should confirm with the person responsible for managing the building whether these works are planned, how they will be funded, and whether any major expenditure is anticipated.",EXACT,{F_OTHER}::{F9_COMMUNAL_POOR},100,DONE
+3f476cd9e2,F9,I have assumed that the communal areas are subject to appropriate maintenance arrangements and are the responsibility of the management company or other responsible party.,EXACT,{F_OTHER}::{F9_COMMUNAL_POOR},100,DONE
+01a09b0572,F9,"Your legal adviser should confirm the maintenance responsibilities, arrangements, and any associated service charge obligations.",EXACT,{F_OTHER}::{F9_COMMUNAL_POOR},100,DONE
+da00a55951,F9,Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos management.,EXACT,{F_OTHER}::{F9_COMMUNAL_POOR},100,DONE
+6eaa190ff1,F9,"Repair: The entry stairs, landing, balcony, hallway, shared lobby, fire lobby, common room, other areas are worn, damaged, creaking, badly cracked, sloping, missing in places, in disrepair, other.",MENU,,0,VERIFIED
+11062570a8,F9,"These should be repaired soon, and if the defect is considered significant, it should be promptly investigated by a qualified person and repaired.",EXACT,{F_OTHER}::{F9_COMMUNAL_REPAIR},100,DONE
+3b07af6f40,F9,"Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to restricted access, no access, other.",MENU,,0,VERIFIED
+e17770774f,F9,No comment can therefore be made on its condition.,EXACT,{F_OTHER}::{F9_CELLAR_NOT_INSPECTED},100,DONE
+c2df02b7b9,F9,"Walls: The property incorporates a cellar, basement and the walls are formed in bricks, stone, loose soil, concrete, other materials.",MENU,,0,VERIFIED
+d32a2ed9d9,F9,"Floor: The floor is constructed of solid concrete, timber, stone, loose soil, other.",MENU,,0,VERIFIED
+b68b6c2578,F9,"Condition: Where visible, the cellar appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 091d4ada89,F9,Minor dampness may be expected in older cellars below ground level and does not necessarily indicate a defect.,EXACT,{F_OTHER}::{CELLAR_DAMP},100,DONE
 a5d55ac6da,F9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
-68b3c4492f,F9,Not in use: The property has a cellar which is currently unused.,ADD,,0,OPEN
-d298c8a592,F9,No significant defects were apparent from the limited inspection.,ADD,,0,OPEN
+68b3c4492f,F9,Not in use: The property has a cellar which is currently unused.,EXACT,{F_OTHER}::{F9_CELLAR_NOT_IN_USE},100,DONE
+d298c8a592,F9,No significant defects were apparent from the limited inspection.,EXACT,{F_OTHER}::{F9_CELLAR_NOT_IN_USE},100,DONE
 fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
-54b855ccdf,F9,In use: The cellar or basement has been adapted for use as storage or other uses.,ADD,,0,OPEN
-ce85c8196a,F9,It appeared to be in reasonable condition at the time of inspection.,ADD,,0,OPEN
-7345ca08f5,F9,Continue normal maintenance.,ADD,,0,OPEN
-db26f47efc,F9,"Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to low headroom, dampness, difficult access, poor ventilation, other limitations.",MENU,,0,UNVERIFIED
-6dbfa88b10,F9,It should only be used as ancillary storage space.,ADD,,0,OPEN
-0e97d05740,F9,"Flooded: The cellar or basement was partially, significantly flooded due to defective drainage or groundwater ingress.",ADD,,0,OPEN
-90beaa7cbc,F9,An appropriately qualified drainage or building specialist should investigate the cause and recommend remedial works.,ADD,,0,OPEN
-d6728720dc,F9,"Damp: Dampness was noted on the lower walls, upper walls, throughout the cellar, exposed floor joists, other areas.",MENU,,0,UNVERIFIED
-f17c5ef034,F9,Further investigation by a suitably qualified damp and timber specialist is recommended to establish the cause and specify appropriate repairs.,ADD,,0,OPEN
-fb71a63bad,F9,Waterproofing failure: The extent of dampness suggests failure or absence of an effective waterproofing system.,ADD,,0,OPEN
-a56715f9bd,F9,Remedial works are likely to be disruptive and potentially costly.,ADD,,0,OPEN
-30a5de5a5a,F9,You should ask a suitably qualified specialist to investigate and provide recommendations.,ADD,,0,OPEN
-0bafcc6d89,F9,Your legal adviser should also confirm whether any waterproofing guarantees or warranties remain in force.,ADD,,0,OPEN
-917254b484,F9,Timber decay: Decay was noted in exposed floor joists within the cellar.,ADD,,0,OPEN
-00bf2f287e,F9,This is a serious defect that may affect the structural integrity of the floor above.,ADD,,0,OPEN
-6b56812da0,F9,A suitably qualified timber and damp specialist should inspect the affected timbers and recommend appropriate repairs.,ADD,,0,OPEN
-347a242086,F9,General Maintenance: Ancillary internal areas should be inspected periodically as part of routine property maintenance.,ADD,,0,OPEN
-07dc0e6218,F9,Adequate heating and ventilation should be maintained to minimise condensation.,ADD,,0,OPEN
-ca25f24f55,F9,Minor decorative defects and isolated repairs should be addressed before deterioration becomes more extensive.,ADD,,0,OPEN
-fc2f5e6efc,F9,"Stored items should not obstruct inspection hatches, ventilation openings, or access to services.",UNRESOLVED,,0,OPEN
-1d6de9e793,F9,Condition rating 123 G Services Services are concealed within the structure and cannot be fully inspected during a Home Survey.,ADD,,0,OPEN
+54b855ccdf,F9,In use: The cellar or basement has been adapted for use as storage or other uses.,EXACT,{F_OTHER}::{F9_CELLAR_IN_USE},100,DONE
+ce85c8196a,F9,It appeared to be in reasonable condition at the time of inspection.,EXACT,{F_OTHER}::{F9_CELLAR_IN_USE},100,DONE
+7345ca08f5,F9,Continue normal maintenance.,EXACT,{F_OTHER}::{F9_CELLAR_IN_USE},100,DONE
+db26f47efc,F9,"Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to low headroom, dampness, difficult access, poor ventilation, other limitations.",MENU,,0,VERIFIED
+6dbfa88b10,F9,It should only be used as ancillary storage space.,EXACT,{F_OTHER}::{F9_CELLAR_UNSUITABLE},100,DONE
+0e97d05740,F9,"Flooded: The cellar or basement was partially, significantly flooded due to defective drainage or groundwater ingress.",MENU,,0,VERIFIED
+90beaa7cbc,F9,An appropriately qualified drainage or building specialist should investigate the cause and recommend remedial works.,EXACT,{F_OTHER}::{F9_CELLAR_FLOODED},100,DONE
+d6728720dc,F9,"Damp: Dampness was noted on the lower walls, upper walls, throughout the cellar, exposed floor joists, other areas.",MENU,,0,VERIFIED
+f17c5ef034,F9,Further investigation by a suitably qualified damp and timber specialist is recommended to establish the cause and specify appropriate repairs.,EXACT,{F_OTHER}::{F9_CELLAR_DAMP},100,DONE
+fb71a63bad,F9,Waterproofing failure: The extent of dampness suggests failure or absence of an effective waterproofing system.,EXACT,{F_OTHER}::{F9_CELLAR_WATERPROOFING},100,DONE
+a56715f9bd,F9,Remedial works are likely to be disruptive and potentially costly.,EXACT,{F_OTHER}::{F9_CELLAR_WATERPROOFING},100,DONE
+30a5de5a5a,F9,You should ask a suitably qualified specialist to investigate and provide recommendations.,EXACT,{F_OTHER}::{F9_CELLAR_WATERPROOFING},100,DONE
+0bafcc6d89,F9,Your legal adviser should also confirm whether any waterproofing guarantees or warranties remain in force.,EXACT,{F_OTHER}::{F9_CELLAR_WATERPROOFING},100,DONE
+917254b484,F9,Timber decay: Decay was noted in exposed floor joists within the cellar.,EXACT,{F_OTHER}::{F9_CELLAR_TIMBER_DECAY},100,DONE
+00bf2f287e,F9,This is a serious defect that may affect the structural integrity of the floor above.,EXACT,{F_OTHER}::{F9_CELLAR_TIMBER_DECAY},100,DONE
+6b56812da0,F9,A suitably qualified timber and damp specialist should inspect the affected timbers and recommend appropriate repairs.,EXACT,{F_OTHER}::{F9_CELLAR_TIMBER_DECAY},100,DONE
+347a242086,F9,General Maintenance: Ancillary internal areas should be inspected periodically as part of routine property maintenance.,EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
+07dc0e6218,F9,Adequate heating and ventilation should be maintained to minimise condensation.,EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
+ca25f24f55,F9,Minor decorative defects and isolated repairs should be addressed before deterioration becomes more extensive.,EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
+fc2f5e6efc,F9,"Stored items should not obstruct inspection hatches, ventilation openings, or access to services.",EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
+1d6de9e793,F9,Condition rating 123 G Services Services are concealed within the structure and cannot be fully inspected during a Home Survey.,ADD,{F_OTHER}::{F9_CELLAR_TIMBER_DECAY},48,OPEN
 2b1f15138d,F9,"The inspection is visual only, and services are not assessed for safety, operation, efficiency, capacity, compliance with current regulations, or remaining service life.",MENU,,0,UNVERIFIED
-bdc7de0a87,F9,Comments are limited to the visible parts of the installation.,ADD,,0,OPEN
-f576d24a46,F9,"Unless otherwise stated, services should be assumed to require routine maintenance appropriate to their age and use.",ADD,,0,OPEN
-92ee5faf85,F9,"Where there is any doubt about the condition or safe operation of a service installation, further inspection by an appropriately qualified specialist should be obtained before legal purchase commitment.",ADD,,0,OPEN
-cf755a0c0f,F9,"It has been assumed that the necessary statutory compliance certificates, inspection records, and approvals are available where required.",UNRESOLVED,,0,OPEN
-5969abb368,F9,These documents have not been inspected as part of this survey and should be verified by your legal adviser before exchange of contracts.,ADD,,0,OPEN
-c714ee067b,F9,"Where the condition or safety of a service installation cannot be assessed from a visual inspection, I may recommend further investigation by an appropriately qualified specialist and apply an appropriate Condition Rating.",ADD,,0,OPEN
+bdc7de0a87,F9,Comments are limited to the visible parts of the installation.,ADD,{F_OTHER}::{F9_CELLAR_NOT_INSPECTED},54,OPEN
+f576d24a46,F9,"Unless otherwise stated, services should be assumed to require routine maintenance appropriate to their age and use.",ADD,{F_OTHER}::{F9_GENERAL_MAINTENANCE},50,OPEN
+92ee5faf85,F9,"Where there is any doubt about the condition or safe operation of a service installation, further inspection by an appropriately qualified specialist should be obtained before legal purchase commitment.",ADD,{F_OTHER}::{F9_COMMUNAL_REPAIR},47,OPEN
+cf755a0c0f,F9,"It has been assumed that the necessary statutory compliance certificates, inspection records, and approvals are available where required.",UNRESOLVED,{F_OTHER}::{F9_COMMUNAL_POOR},49,OPEN
+5969abb368,F9,These documents have not been inspected as part of this survey and should be verified by your legal adviser before exchange of contracts.,ADD,{F_OTHER}::{F9_COMMUNAL_REPAIR},49,OPEN
+c714ee067b,F9,"Where the condition or safety of a service installation cannot be assessed from a visual inspection, I may recommend further investigation by an appropriately qualified specialist and apply an appropriate Condition Rating.",ADD,{F_OTHER}::{F9_CELLAR_DAMP},49,OPEN
 bcb2c1e8c8,F9,"The inspection was limited by one or more of the following access restrictions, boxed-in services, stored items, fixed fittings, locked cupboards, floor coverings, or health and safety considerations.",MENU,,0,UNVERIFIED
 0bd467dc01,F9,"Concealed pipework, wiring, ductwork, and underground services could not be inspected.",MENU,,0,UNVERIFIED
 2629352c93,G1,"Metre: There is a mains electricity supply connected to the property, and the meter unit is located under the stairs, in an outside box, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.",UNRESOLVED,{OTHER_EXTERNAL_AREA}::{OTHER_OVERLOADED},47,OPEN
