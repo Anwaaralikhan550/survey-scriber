@@ -9686,6 +9686,701 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_is_safety_hazard',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'h2_topo',
+    'activity_grounds_other_grounds',
+    '{H_OTHER}',
+    '{H2_GROUNDS_TOPOGRAPHY}',
+    [
+      VerbatimToken(
+        '{H2_TOPOGRAPHY}',
+        dropdown: 'actv_type',
+        dropdownOptions: ['Level', 'Sloping', 'Hilly', 'Undulating'],
+        lower: true,
+        pdfOptions: ['level', 'sloping', 'hilly', 'undulating'],
+      ),
+    ],
+    pdf:
+        'Grounds: The subject property is set within level, sloping, hilly, undulating grounds.',
+    whenField: 'actv_type',
+    whenValue: 'Level',
+    whenAny: [['actv_type', 'Sloping'], ['actv_type', 'Hilly'], ['actv_type', 'Undulating']],
+  ),
+  VerbatimRule(
+    'h2_shared_garden',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_SHARED_GARDEN}',
+    [
+    ],
+    whenField: 'cb_h2_h2_shared_garden',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_comm_surface',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_COMMUNAL_GROUNDS}',
+    [
+      VerbatimToken(
+        '{H2_COMM_SURFACE}',
+        options: {
+          'h2_comm_surface_0_paved': 'paved',
+          'h2_comm_surface_0_lawned': 'lawned',
+          'h2_comm_surface_0_decked': 'decked',
+          'h2_comm_surface_0_artificially_lawned': 'artificially lawned',
+          'h2_comm_surface_0_laid_with_stones': 'laid with stones',
+          'h2_comm_surface_0_laid_with_tile_chippings': 'laid with tile chippings',
+        },
+        otherCheckbox: 'h2_comm_surface_0_other',
+        otherText: 'h2_comm_surface_0_other_text',
+        pdfOptions: ['paved', 'lawned', 'decked', 'artificially lawned', 'laid with stones', 'laid with tile chippings'],
+      ),
+    ],
+    pdf:
+        'Grounds: The communal/shared garden is paved, lawned, decked, artificially lawned, laid with stones, laid with tile chippings, other.',
+    whenField: 'cb_h2_h2_comm_surface',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_comm_fence',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_COMMUNAL_FENCE}',
+    [
+      VerbatimToken(
+        '{H2_COMM_FENCE}',
+        options: {
+          'h2_comm_fence_0_timber': 'timber',
+          'h2_comm_fence_0_brick': 'brick',
+          'h2_comm_fence_0_concrete': 'concrete',
+          'h2_comm_fence_0_wire_mesh': 'wire mesh',
+          'h2_comm_fence_0_hedges': 'hedges',
+          'h2_comm_fence_0_shrubs': 'shrubs',
+        },
+        otherCheckbox: 'h2_comm_fence_0_other',
+        otherText: 'h2_comm_fence_0_other_text',
+        pdfOptions: ['timber', 'brick', 'concrete', 'wire mesh', 'hedges', 'shrubs'],
+      ),
+    ],
+    pdf:
+        'Fence: The boundary fences are formed in timber, brick, concrete, wire mesh, hedges, shrubs, other.',
+    whenField: 'cb_h2_h2_comm_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_comm_no_fence',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_NO_FENCING}',
+    [
+    ],
+    whenField: 'cb_h2_h2_comm_no_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_comm_cond',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_COMMUNAL_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_COMMUNAL_CONDITION_COND}',
+        dropdown: 'actv_h2_comm_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_comm_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_comm_cond', 'Reasonable'], ['actv_h2_comm_cond', 'Fair'], ['actv_h2_comm_cond', 'Poor'], ['actv_h2_comm_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_shared_areas',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_SHARED_AREAS}',
+    [
+      VerbatimToken(
+        '{H2_SHARED_AREAS}',
+        options: {
+          'h2_shared_areas_0_shared_driveway': 'shared driveway',
+          'h2_shared_areas_0_shared_garden': 'shared garden',
+          'h2_shared_areas_0_communal_parking': 'communal parking',
+          'h2_shared_areas_0_communal_gardens': 'communal gardens',
+          'h2_shared_areas_0_shared_pathways': 'shared pathways',
+        },
+        otherCheckbox: 'h2_shared_areas_0_other',
+        otherText: 'h2_shared_areas_0_other_text',
+        pdfOptions: ['shared driveway', 'shared garden', 'communal parking', 'communal gardens', 'shared pathways'],
+      ),
+    ],
+    pdf:
+        'Shared Areas: The property benefits from a shared driveway, shared garden, communal parking, communal gardens, shared pathways, other access.',
+    whenField: 'cb_h2_h2_shared_areas',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_shared_cond',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_SHARED_AREAS_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_SHARED_AREAS_CONDITION_COND}',
+        dropdown: 'actv_h2_shared_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the shared areas appear in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_shared_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_shared_cond', 'Reasonable'], ['actv_h2_shared_cond', 'Fair'], ['actv_h2_shared_cond', 'Poor'], ['actv_h2_shared_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_outside',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_OUTSIDE_AREAS}',
+    [
+      VerbatimToken(
+        '{H2_OUTSIDE_AREAS}',
+        options: {
+          'h2_outside_0_front_garden': 'front garden',
+          'h2_outside_0_rear_garden': 'rear garden',
+          'h2_outside_0_side_garden': 'side garden',
+          'h2_outside_0_courtyard_garden': 'courtyard garden',
+          'h2_outside_0_terrace': 'terrace',
+          'h2_outside_0_patio': 'patio',
+        },
+        otherCheckbox: 'h2_outside_0_other',
+        otherText: 'h2_outside_0_other_text',
+        pdfOptions: ['front garden', 'rear garden', 'side garden', 'courtyard garden', 'terrace', 'patio'],
+      ),
+    ],
+    pdf:
+        'Description: The outside areas comprise front garden, rear garden, side garden, courtyard garden, terrace, patio, other.',
+    whenField: 'cb_h2_h2_outside',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_surfaces',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_SURFACES}',
+    [
+      VerbatimToken(
+        '{H2_SURFACES}',
+        options: {
+          'h2_surfaces_0_lawn': 'lawn',
+          'h2_surfaces_0_block_paving': 'block paving',
+          'h2_surfaces_0_concrete': 'concrete',
+          'h2_surfaces_0_gravel': 'gravel',
+          'h2_surfaces_0_tarmac': 'tarmac',
+          'h2_surfaces_0_timber_decking': 'timber decking',
+          'h2_surfaces_0_composite_decking': 'composite decking',
+          'h2_surfaces_0_stone_paving': 'stone paving',
+        },
+        otherCheckbox: 'h2_surfaces_0_other',
+        otherText: 'h2_surfaces_0_other_text',
+        pdfOptions: ['lawn', 'block paving', 'concrete', 'gravel', 'tarmac', 'timber decking', 'composite decking', 'stone paving'],
+      ),
+    ],
+    pdf:
+        'Grounds: The surfaces comprise lawn, block paving, concrete, gravel, tarmac, timber decking, composite decking, stone paving, other finishes.',
+    whenField: 'cb_h2_h2_surfaces',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_boundaries',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_BOUNDARIES}',
+    [
+      VerbatimToken(
+        '{H2_BOUNDARIES}',
+        options: {
+          'h2_boundaries_0_timber_fencing': 'timber fencing',
+          'h2_boundaries_0_brick_walls': 'brick walls',
+          'h2_boundaries_0_hedging': 'hedging',
+          'h2_boundaries_0_stone_walls': 'stone walls',
+          'h2_boundaries_0_concrete_sections': 'concrete sections',
+          'h2_boundaries_0_wire': 'wire',
+          'h2_boundaries_0_metal_railings': 'metal railings',
+        },
+        otherCheckbox: 'h2_boundaries_0_other',
+        otherText: 'h2_boundaries_0_other_text',
+        pdfOptions: ['timber fencing', 'brick walls', 'hedging', 'stone walls', 'concrete sections', 'wire', 'metal railings'],
+      ),
+    ],
+    pdf:
+        'Fence: The boundaries comprise timber fencing, brick walls, hedging, stone walls, concrete sections, wire, metal railings, other.',
+    whenField: 'cb_h2_h2_boundaries',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_garden_cond',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_GARDEN_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_GARDEN_CONDITION_COND}',
+        dropdown: 'actv_h2_garden_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_garden_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_garden_cond', 'Reasonable'], ['actv_h2_garden_cond', 'Fair'], ['actv_h2_garden_cond', 'Poor'], ['actv_h2_garden_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_garden_no_defects',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_GARDEN_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_garden_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_hardstanding',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_HARDSTANDING}',
+    [
+      VerbatimToken(
+        '{H2_HARD_LEVEL}',
+        options: {
+          'h2_hardstanding_0_level': 'level',
+          'h2_hardstanding_0_reasonably_level': 'reasonably level',
+        },
+        pdfOptions: ['level', 'reasonably level'],
+      ),
+      VerbatimToken(
+        '{H2_HARD_UNEVEN}',
+        options: {
+          'h2_hardstanding_1_no_unevenness': 'no unevenness',
+          'h2_hardstanding_1_minor_unevenness': 'minor unevenness',
+        },
+        pdfOptions: ['no unevenness', 'minor unevenness'],
+      ),
+    ],
+    pdf:
+        'Hardstanding areas: The paths and hardstanding area appear level, reasonably level, and exhibit no unevenness, minor unevenness.',
+    whenField: 'cb_h2_h2_hardstanding',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_repair_fence',
+    'activity_grounds_other_repair_fence',
+    '{H_OTHER}',
+    '{H2_REPAIR_FENCE}',
+    [
+      VerbatimToken(
+        '{H2_FENCE_DEFECTS}',
+        options: {
+          'h2fd_cracked': 'cracked',
+          'cb_broken': 'broken',
+          'cb_unstable': 'unstable',
+          'cb_leaning': 'leaning',
+          'cb_loose_in_places': 'loose in places',
+          'cb_badly_damaged': 'severely damaged',
+          'cb_rotted_in_places': 'rotten',
+          'cb_missing_in_places': 'missing in places',
+        },
+        otherCheckbox: 'h2_repair_fence_0_other',
+        otherText: 'h2_repair_fence_0_other_text',
+        pdfOptions: ['cracked', 'broken', 'unstable', 'leaning', 'loose in places', 'severely damaged', 'rotten', 'missing in places'],
+      ),
+    ],
+    pdf:
+        'Repair fence: Parts of the boundary fencing are cracked, broken, unstable, leaning, loose in places, severely damaged, rotten, missing in places, other.',
+    whenField: 'cb_h2_h2_repair_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_sheds',
+    'activity_grounds_other_repair_shed',
+    '{H_OTHER}',
+    '{H2_SHEDS}',
+    [
+      VerbatimToken(
+        '{H2_SHED_MATERIAL}',
+        options: {
+          'h2_sheds_0_timber': 'timber',
+          'h2_sheds_0_brick': 'brick',
+          'h2_sheds_0_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'h2_sheds_0_other',
+        otherText: 'h2_sheds_0_other_text',
+        pdfOptions: ['timber', 'brick', 'aluminium'],
+      ),
+      VerbatimToken(
+        '{H2_SHED_ROOF}',
+        options: {
+          'h2_sheds_1_pitched': 'pitched',
+          'h2_sheds_1_flat': 'flat',
+        },
+        otherCheckbox: 'h2_sheds_1_other',
+        otherText: 'h2_sheds_1_other_text',
+        pdfOptions: ['pitched', 'flat'],
+      ),
+      VerbatimToken(
+        '{H2_SHED_COVER}',
+        options: {
+          'h2_sheds_2_felt': 'felt',
+          'h2_sheds_2_tiles': 'tiles',
+          'h2_sheds_2_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_sheds_2_other',
+        otherText: 'h2_sheds_2_other_text',
+        pdfOptions: ['felt', 'tiles', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Sheds: There is timber, brick, aluminium, other shed(s) located within the grounds of the property.',
+    pdfMore: [
+      'The roof(s) are pitched, flat, other, and covered with felt, tiles, metal sheets, other materials.',
+    ],
+    whenField: 'cb_h2_h2_sheds',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_shed_cond',
+    'activity_grounds_other_repair_shed',
+    '{H_OTHER}',
+    '{H2_SHED_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_SHED_CONDITION_COND}',
+        dropdown: 'actv_h2_shed_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the shed(s) appear in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_shed_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_shed_cond', 'Reasonable'], ['actv_h2_shed_cond', 'Fair'], ['actv_h2_shed_cond', 'Poor'], ['actv_h2_shed_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_OB_TYPE}',
+        options: {
+          'h2_ob_0_large_shed': 'large shed',
+          'h2_ob_0_workshop': 'workshop',
+          'h2_ob_0_annex': 'annex',
+          'h2_ob_0_summer_house': 'summer house',
+          'h2_ob_0_office': 'office',
+          'h2_ob_0_studio': 'studio',
+        },
+        otherCheckbox: 'h2_ob_0_other',
+        otherText: 'h2_ob_0_other_text',
+        pdfOptions: ['large shed', 'workshop', 'annex', 'summer house', 'office', 'studio'],
+      ),
+    ],
+    pdf:
+        'Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).',
+    whenField: 'cb_h2_h2_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cons',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_CONSTRUCTION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONSTRUCTION}',
+        options: {
+          'h2_ob_cons_0_bricks': 'bricks',
+          'h2_ob_cons_0_blocks': 'blocks',
+          'h2_ob_cons_0_timber': 'timber',
+          'h2_ob_cons_0_steel': 'steel',
+          'h2_ob_cons_0_prefabricated_concrete': 'prefabricated concrete',
+          'h2_ob_cons_0_aluminium': 'aluminium',
+          'h2_ob_cons_0_composite_boards': 'composite boards',
+        },
+        otherCheckbox: 'h2_ob_cons_0_other',
+        otherText: 'h2_ob_cons_0_other_text',
+        pdfOptions: ['bricks', 'blocks', 'timber', 'steel', 'prefabricated concrete', 'aluminium', 'composite boards'],
+      ),
+    ],
+    pdf:
+        'Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.',
+    whenField: 'cb_h2_h2_ob_cons',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_roof',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_ROOF}',
+    [
+      VerbatimToken(
+        '{H2_OB_ROOF}',
+        options: {
+          'h2_ob_roof_0_pitched': 'pitched',
+          'h2_ob_roof_0_flat': 'flat',
+          'h2_ob_roof_0_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h2_ob_roof_0_other',
+        otherText: 'h2_ob_roof_0_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H2_OB_COVER}',
+        options: {
+          'h2_ob_roof_1_clay_tiles': 'clay tiles',
+          'h2_ob_roof_1_concrete_tiles': 'concrete tiles',
+          'h2_ob_roof_1_slates': 'slates',
+          'h2_ob_roof_1_felt': 'felt',
+          'h2_ob_roof_1_rubber_membrane': 'rubber membrane',
+          'h2_ob_roof_1_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_ob_roof_1_other',
+        otherText: 'h2_ob_roof_1_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt', 'rubber membrane', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.',
+    whenField: 'cb_h2_h2_ob_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_floor',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_FLOOR}',
+    [
+      VerbatimToken(
+        '{H2_OB_FLOOR}',
+        options: {
+          'h2_ob_floor_0_concrete': 'concrete',
+          'h2_ob_floor_0_suspended_timber': 'suspended timber',
+          'h2_ob_floor_0_engineered_timber': 'engineered timber',
+          'h2_ob_floor_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'h2_ob_floor_0_other',
+        otherText: 'h2_ob_floor_0_other_text',
+        pdfOptions: ['concrete', 'suspended timber', 'engineered timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.',
+    whenField: 'cb_h2_h2_ob_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_doors',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_DOORS}',
+    [
+      VerbatimToken(
+        '{H2_OB_DOORS}',
+        options: {
+          'h2_ob_doors_0_timber_upvc': 'timber uPVC',
+          'h2_ob_doors_0_aluminium': 'aluminium',
+          'h2_ob_doors_0_metal': 'metal',
+        },
+        otherCheckbox: 'h2_ob_doors_0_other',
+        otherText: 'h2_ob_doors_0_other_text',
+        pdfOptions: ['timber uPVC', 'aluminium', 'metal'],
+      ),
+    ],
+    pdf:
+        'Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.',
+    whenField: 'cb_h2_h2_ob_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cond',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONDITION_COND}',
+        dropdown: 'actv_h2_ob_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_ob_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_ob_cond', 'Reasonable'], ['actv_h2_ob_cond', 'Fair'], ['actv_h2_ob_cond', 'Poor'], ['actv_h2_ob_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob_no_defects',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_ob_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_repair_ob',
+    'activity_other_repair_outbuilding',
+    '{H_OTHER}',
+    '{H2_REPAIR_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_ROB_TYPE}',
+        options: {
+          'h2_repair_ob_0_shed': 'shed',
+          'h2_repair_ob_0_workshop': 'workshop',
+          'h2_repair_ob_0_annex': 'annex',
+          'h2_repair_ob_0_summer_house': 'summer house',
+          'h2_repair_ob_0_office': 'office',
+          'h2_repair_ob_0_studio': 'studio',
+        },
+        otherCheckbox: 'h2_repair_ob_0_other',
+        otherText: 'h2_repair_ob_0_other_text',
+        pdfOptions: ['shed', 'workshop', 'annex', 'summer house', 'office', 'studio'],
+      ),
+      VerbatimToken(
+        '{H2_ROB_DEFECTS}',
+        options: {
+          'h2_repair_ob_1_damaged': 'damaged',
+          'h2_repair_ob_1_have_broken_parts': 'have broken parts',
+          'h2_repair_ob_1_is_unstable': 'is unstable',
+          'h2_repair_ob_1_is_rotted_in_places': 'is rotted in places',
+          'h2_repair_ob_1_have_missing_sections': 'have missing sections',
+        },
+        otherCheckbox: 'h2_repair_ob_1_other',
+        otherText: 'h2_repair_ob_1_other_text',
+        pdfOptions: ['damaged', 'have broken parts', 'is unstable', 'is rotted in places', 'have missing sections'],
+      ),
+    ],
+    pdf:
+        'Repair outbuilding: Parts of the shed, workshop, annex, summer house, office, studio, other permanent outbuilding are damaged, have broken parts, is unstable, is rotted in places, have missing sections, other.',
+    whenField: 'cb_h2_h2_repair_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_rw',
+    'activity_other_repair_retaining_walls',
+    '{H_OTHER}',
+    '{H2_RETAINING_WALL}',
+    [
+      VerbatimToken(
+        '{H2_RW_DEFECTS}',
+        options: {
+          'cb_cracked': 'cracked',
+          'h2rw_leaning': 'leaning',
+          'cb_distorted': 'distorted',
+          'cb_unstable': 'unstable',
+          'h2rw_weak': 'weak',
+          'cb_damaged': 'damaged',
+          'h2rw_in_poor_condition': 'in poor condition',
+        },
+        pdfOptions: ['cracked', 'leaning', 'distorted', 'unstable', 'weak', 'damaged', 'in poor condition'],
+      ),
+    ],
+    pdf:
+        'Retaining Wall: The retaining wall(s) is cracked, leaning, distorted, unstable, weak, damaged, in poor condition and may present a potential safety hazard.',
+    whenField: 'cb_h2_h2_rw',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_trees',
+    'activity_other_repair_nearby_trees',
+    '{H_OTHER}',
+    '{H2_NEARBY_TREES}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'No defects',
+    whenAny: [['actv_condition', 'Defects noted']],
+  ),
+  VerbatimRule(
+    'h2_trees_none',
+    'activity_other_repair_nearby_trees',
+    '{H_OTHER}',
+    '{H2_TREES_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'No defects',
+  ),
+  VerbatimRule(
+    'h2_trees_defects',
+    'activity_other_repair_nearby_trees',
+    '{H_OTHER}',
+    '{H2_TREES_DEFECTS}',
+    [
+      VerbatimToken(
+        '{H2_TREE_AFFECTED}',
+        options: {
+          'h2ta_property': 'property',
+          'h2ta_fencing': 'fencing',
+          'h2ta_finished_grounds': 'finished grounds',
+          'h2ta_outbuilding': 'outbuilding',
+        },
+        otherCheckbox: 'h2ta_other',
+        otherText: 'h2ta_other_text',
+        pdfOptions: ['property', 'fencing', 'finished grounds', 'outbuilding'],
+      ),
+      VerbatimToken(
+        '{H2_TREE_DEFECT}',
+        options: {
+          'cb_significant_cracks': 'significant cracks',
+          'cb_subsidence_movement': 'subsidence movement',
+        },
+        pdfOptions: ['significant cracks', 'subsidence movement'],
+      ),
+    ],
+    pdf:
+        'Detrimental effects on the property, fencing, finished grounds, outbuilding, other were noted that include significant cracks, subsidence movement.',
+    whenField: 'actv_condition',
+    whenValue: 'Defects noted',
+  ),
+  VerbatimRule(
+    'h2_subsoil',
+    'activity_other_repair_shrinkable_clay',
+    '{H_OTHER}',
+    '{H2_SUBSOIL}',
+    [
+    ],
+    whenField: 'cb_shrinkable_clay',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_private',
+    'activity_grounds_other_private_road',
+    '{H_OTHER}',
+    '{H2_PRIVATE_ROAD}',
+    [
+    ],
+    whenField: 'cb_private_road',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

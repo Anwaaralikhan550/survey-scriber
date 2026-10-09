@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 360,
+  "screensAudited": 350,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2186,
-   "approvedLegacyBank": 459,
-   "approvedCurrentBankOnly": 1700,
+   "distinctEmitted": 1963,
+   "approvedLegacyBank": 225,
+   "approvedCurrentBankOnly": 1711,
    "unapproved": 0
   }
  },
@@ -648,14 +648,19 @@
    "screenId": "activity_grounds_other_grounds",
    "title": "Grounds",
    "dataFieldCount": 1,
-   "permutationCount": 13,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 6,
-    "approvedCurrentBankOnly": 0,
+    "total": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Grounds: The subject property is set within level grounds.",
+    "Grounds: The subject property is set within sloping grounds.",
+    "Grounds: The subject property is set within hilly grounds."
+   ]
   },
   {
    "sectionKey": "H",
@@ -671,7 +676,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Parts of the boundary fencing to the front, rear, side, communal and sample detail garden are broken, unstable, leaning, loose in places, badly damaged, rotted in places, missing in places and sample detail. This should be repaired soon, as deterioration affecting stability or security should not be left unresolved. Your legal adviser should confirm ownership and maintenance responsibilities from the title documentation and the vendor(s)."
+    "Repair fence: Parts of the boundary fencing are cracked, broken, unstable, leaning, loose in places, severely damaged, rotten, missing in places and sample detail. You should arrange to repair or replace the affected fencing soon. However. if the damage is significant, repair should be carried out promptly and may be expensive."
    ]
   },
   {
@@ -705,28 +710,47 @@
   {
    "sectionKey": "H",
    "screenId": "activity_grounds_other_front_garden",
-   "title": "Front Garden",
-   "dataFieldCount": 30,
-   "permutationCount": 64,
+   "title": "Gardens",
+   "dataFieldCount": 37,
+   "permutationCount": 47,
    "severities": [],
    "phraseStats": {
-    "total": 33,
-    "approvedLegacy": 30,
-    "approvedCurrentBankOnly": 3,
+    "total": 10,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 10,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Pond: The front garden incorporates a pond, and this appears in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The front garden incorporates a pond, and this appears in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The front garden incorporates a pond, and this appears in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
+    "Condition: Where visible, the garage appears in good condition. Routine maintenance appropriate to the age and construction of the garage should be expected.",
+    "Condition: Where visible, the garage appears in reasonable condition. Routine maintenance appropriate to the age and construction of the garage should be expected.",
+    "Condition: Where visible, the garage appears in fair condition. Routine maintenance appropriate to the age and construction of the garage should be expected."
    ]
   },
   {
    "sectionKey": "H",
    "screenId": "activity_grounds_shared_access",
    "title": "Shared Access",
-   "dataFieldCount": 7,
-   "permutationCount": 11,
+   "dataFieldCount": 30,
+   "permutationCount": 48,
+   "severities": [],
+   "phraseStats": {
+    "total": 15,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 15,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Shared Garden: The communal/shared garden is shared with neighbouring property or properties. Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",
+    "No Fencing: The communal/shared garden of the property does not have fencing.",
+    "Condition: Where visible, the garage appears in good condition. Routine maintenance appropriate to the age and construction of the garage should be expected."
+   ]
+  },
+  {
+   "sectionKey": "H",
+   "screenId": "activity_grounds_other_repair_shed",
+   "title": "Shed",
+   "dataFieldCount": 16,
+   "permutationCount": 26,
    "severities": [],
    "phraseStats": {
     "total": 6,
@@ -735,24 +759,10 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The front garden(s) on the property appear to be shared with neighbouring property or properties. Your legal adviser should confirm ownership of the shared areas, rights of access, maintenance responsibilities, service charge liabilities, and any restrictions affecting their use.",
-    "The rear garden(s) on the property appear to be shared with neighbouring property or properties. Your legal adviser should confirm ownership of the shared areas, rights of access, maintenance responsibilities, service charge liabilities, and any restrictions affecting their use.",
-    "The side garden(s) on the property appear to be shared with neighbouring property or properties. Your legal adviser should confirm ownership of the shared areas, rights of access, maintenance responsibilities, service charge liabilities, and any restrictions affecting their use."
+    "Condition: Where visible, the shed(s) appear in good condition. Routine maintenance appropriate to the age and construction of the shed should be expected. However, where the shed is in poor condition, you should arrange to repair or replace the shed.",
+    "Condition: Where visible, the shed(s) appear in reasonable condition. Routine maintenance appropriate to the age and construction of the shed should be expected. However, where the shed is in poor condition, you should arrange to repair or replace the shed.",
+    "Condition: Where visible, the shed(s) appear in fair condition. Routine maintenance appropriate to the age and construction of the shed should be expected. However, where the shed is in poor condition, you should arrange to repair or replace the shed."
    ]
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_grounds_other_repair_shed",
-   "title": "Shed",
-   "dataFieldCount": 9,
-   "permutationCount": 11,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
   },
   {
    "sectionKey": "H",
@@ -801,25 +811,6 @@
   },
   {
    "sectionKey": "H",
-   "screenId": "activity_grounds_other_front_garden__rear_garden",
-   "title": "Rear Garden",
-   "dataFieldCount": 30,
-   "permutationCount": 64,
-   "severities": [],
-   "phraseStats": {
-    "total": 33,
-    "approvedLegacy": 30,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Pond: The rear garden incorporates a pond, and this appears in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The rear garden incorporates a pond, and this appears in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The rear garden incorporates a pond, and this appears in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "H",
    "screenId": "activity_grounds_other_private_road",
    "title": "Private Road",
    "dataFieldCount": 1,
@@ -832,22 +823,25 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Private Road: The road serving the property appears to be private and may not be maintained at public expense. Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions (see section I1 - Regulation)."
+    "Private road: The road serving the property appears to be private and may not be maintained at public expense. Your legal adviser should confirm its status, together with any rights of access, maintenance responsibilities, and associated liabilities."
    ]
   },
   {
    "sectionKey": "H",
    "screenId": "activity_other_repair_outbuilding",
    "title": "Outbuilding",
-   "dataFieldCount": 15,
-   "permutationCount": 17,
+   "dataFieldCount": 16,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Repair outbuilding: Parts of the shed, workshop, annex, summer house, office, studio and sample detail permanent outbuilding are damaged, have broken parts, is unstable, is rotted in places, have missing sections and sample detail. This should be repaired soon, and if the defects are significant or present a hazard, it should be promptly repaired."
+   ]
   },
   {
    "sectionKey": "H",
@@ -865,52 +859,19 @@
   },
   {
    "sectionKey": "H",
-   "screenId": "activity_grounds_other_front_garden__side_garden",
-   "title": "Side Garden",
-   "dataFieldCount": 30,
-   "permutationCount": 64,
-   "severities": [],
-   "phraseStats": {
-    "total": 33,
-    "approvedLegacy": 30,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Pond: The side garden incorporates a pond, and this appears in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The side garden incorporates a pond, and this appears in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The side garden incorporates a pond, and this appears in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_other_repair_legal_issues",
-   "title": "Legal Issues",
-   "dataFieldCount": 8,
-   "permutationCount": 10,
-   "severities": [],
-   "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 7,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "H",
    "screenId": "activity_other_repair_retaining_walls",
    "title": "Retaining Walls",
    "dataFieldCount": 11,
    "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 1,
+    "total": 1,
+    "approvedLegacy": 0,
     "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Retaining walls have to support the considerable weight of the soil behind them. This wall is in poor condition and the replacement costs can be high because the new construction will have to be very strong. You should ask an appropriately qualified person to inspect this wall now and provide you with recommendations. If the retaining wall is shared with the neighbouring property owner, they may have some rights. Before any work is done, you should ask your legal adviser to investigate this matter and explain the implications (see section I3)."
+    "Retaining Wall: The retaining wall(s) is cracked, leaning, distorted, unstable, weak, damaged and in poor condition and may present a potential safety hazard. As retaining walls support significant ground loads, failure could result in substantial damage and costly repairs. An appropriately qualified specialist should inspect the wall without delay and recommend any necessary remedial works. If the retaining wall is shared with the neighbouring property owner, they may have some rights. Before any work is done, you should ask your legal adviser to investigate this matter and explain the implications."
    ]
   },
   {
@@ -946,25 +907,6 @@
   },
   {
    "sectionKey": "H",
-   "screenId": "activity_grounds_other_front_garden__other_garden",
-   "title": "Other Garden",
-   "dataFieldCount": 30,
-   "permutationCount": 64,
-   "severities": [],
-   "phraseStats": {
-    "total": 33,
-    "approvedLegacy": 30,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Pond: The other garden incorporates a pond, and this appears in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The other garden incorporates a pond, and this appears in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The other garden incorporates a pond, and this appears in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "H",
    "screenId": "activity_other_repair_shrinkable_clay",
    "title": "Shrinkable Clay",
    "dataFieldCount": 1,
@@ -977,26 +919,26 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Subsoil: The exact nature of the subsoil has not been investigated as part of this survey. However, the subsoil in the area may include shrinkable clay. Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions."
+    "Subsoil: The exact nature of the subsoil has not been investigated as part of this survey. However, the subsoil in the area may include shrinkable clay. Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions. Your legal adviser should confirm, where applicable, ownership of the shared areas, rights of access, maintenance responsibilities, service charge liabilities, and any restrictions affecting their use."
    ]
   },
   {
    "sectionKey": "H",
    "screenId": "activity_other_repair_nearby_trees",
    "title": "Nearby Trees",
-   "dataFieldCount": 6,
-   "permutationCount": 14,
+   "dataFieldCount": 9,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 5,
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "I would draw your attention to the proximity of adjacent tree(s). In principle, the roots of any single tree closer to a property than one and a half times its height at maturity can, under certain circumstances, have a detrimental disturbance effect on the foundations. With groups of trees, the relevant \"safe\" distance increases. With groups of trees, the risk is usually greatest during prolonged dry spells.",
-    "No significant detrimental effects on the property were noted to date, although the trees should be regularly pruned to restrict future growth and minimise the risk of defects occurring.",
-    "I would draw your attention to the proximity of one adjacent tree(s). In principle, the roots of any single tree closer to a property than one and a half times its height at maturity can, under certain circumstances, have a detrimental disturbance effect on the foundations. With groups of trees, the relevant \"safe\" distance increases. With groups of trees, the risk is usually greatest during prolonged dry spells."
+    "Nearby Trees: One or more trees are located close to the property. Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",
+    "No defects: No significant detrimental effects on the property were noted to date, although the trees should be regularly pruned to restrict future growth and minimise the risk of defects occurring.",
+    "Defects noted: One or more trees are located close to the property. Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods. With groups of trees, the risk is usually greatest during prolonged dry spells. Detrimental effects on the property, fencing, finished grounds, outbuilding and sample detail were noted that include significant cracks and subsidence movement. You should contact a qualified person for further investigation and advice. Also, the trees should be regularly pruned to restrict future growth and minimise the risk of further defects occurring."
    ]
   },
   {
@@ -1020,25 +962,6 @@
   },
   {
    "sectionKey": "H",
-   "screenId": "activity_grounds_other_front_garden__communal_garden",
-   "title": "Communal Garden",
-   "dataFieldCount": 30,
-   "permutationCount": 64,
-   "severities": [],
-   "phraseStats": {
-    "total": 33,
-    "approvedLegacy": 30,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Pond: The communal garden incorporates a pond, and this appears in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The communal garden incorporates a pond, and this appears in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The communal garden incorporates a pond, and this appears in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "H",
    "screenId": "activity_grounds_other_area_emf",
    "title": "EMF",
    "dataFieldCount": 5,
@@ -1055,107 +978,19 @@
    "sectionKey": "H",
    "screenId": "activity_grounds_other_large_outbuildings",
    "title": "Large Outbuilding",
-   "dataFieldCount": 27,
-   "permutationCount": 33,
+   "dataFieldCount": 48,
+   "permutationCount": 58,
    "severities": [],
    "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_grounds_other_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
+    "total": 11,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 11,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Not Inspected: The outbuildings and other structures on the property could not be inspected. As they are not accessible, they should be inspected and assessed by an appropriately qualified person when access can be arranged."
-   ]
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_grounds_other_communal_garden",
-   "title": "Communal Garden",
-   "dataFieldCount": 26,
-   "permutationCount": 44,
-   "severities": [],
-   "phraseStats": {
-    "total": 19,
-    "approvedLegacy": 16,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Pond: The communal garden incorporates a pond, and this appears in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The communal garden incorporates a pond, and this appears in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The communal garden incorporates a pond, and this appears in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_grounds_other_other_garden",
-   "title": "Other Garden",
-   "dataFieldCount": 26,
-   "permutationCount": 44,
-   "severities": [],
-   "phraseStats": {
-    "total": 19,
-    "approvedLegacy": 16,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Pond: The other garden incorporates a pond, and this appears in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The other garden incorporates a pond, and this appears in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The other garden incorporates a pond, and this appears in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_grounds_other_rear_garden",
-   "title": "Rear Garden",
-   "dataFieldCount": 26,
-   "permutationCount": 44,
-   "severities": [],
-   "phraseStats": {
-    "total": 19,
-    "approvedLegacy": 16,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Pond: The rear garden incorporates a pond, and this appears in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The rear garden incorporates a pond, and this appears in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The rear garden incorporates a pond, and this appears in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_grounds_other_side_garden",
-   "title": "Side Garden",
-   "dataFieldCount": 26,
-   "permutationCount": 44,
-   "severities": [],
-   "phraseStats": {
-    "total": 19,
-    "approvedLegacy": 16,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Pond: The side garden incorporates a pond, and this appears in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The side garden incorporates a pond, and this appears in satisfactory condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Pond: The side garden incorporates a pond, and this appears in unsatisfactory and poor condition. No repair is currently needed. The property must be maintained in the normal way."
+    "Condition: Where visible, the building appears in good condition. Routine maintenance appropriate to the age and construction of the outbuilding should be expected.",
+    "Condition: Where visible, the building appears in reasonable condition. Routine maintenance appropriate to the age and construction of the outbuilding should be expected.",
+    "Condition: Where visible, the building appears in fair condition. Routine maintenance appropriate to the age and construction of the outbuilding should be expected."
    ]
   },
   {

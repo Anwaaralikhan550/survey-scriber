@@ -1402,7 +1402,7 @@ class ReportBuilder {
     final groundsTopo =
         _answersForScreen(rawData, 'activity_grounds_other_grounds');
     final topoType = (groundsTopo['actv_type'] ?? '').trim().toLowerCase();
-    if (topoType.isNotEmpty && topoType != 'relatively level') {
+    if (topoType.isNotEmpty && topoType != 'level') {
       phrases.add(
           _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND}') ??
               'The property occupies a $topoType site. Although no evidence of instability was observed during the inspection, sloping ground can influence drainage and foundations, and should be considered as part of routine maintenance.');
@@ -1413,7 +1413,7 @@ class ReportBuilder {
         _answersForScreen(rawData, 'activity_other_repair_nearby_trees');
     final treeCondition =
         (nearbyTrees['actv_condition'] ?? '').trim().toLowerCase();
-    if (treeCondition == 'problems') {
+    if (treeCondition == 'defects noted') {
       final proximity =
           (nearbyTrees['actv_proximity_of_adjacent_tree'] ?? '')
               .trim()

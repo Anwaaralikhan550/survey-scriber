@@ -2564,7 +2564,7 @@ void main() {
               'actv_type': 'Sloping',
             },
             'activity_other_repair_nearby_trees': {
-              'actv_condition': 'Problems',
+              'actv_condition': 'Defects noted',
               'actv_proximity_of_adjacent_tree': 'Several',
               'cb_significant_cracks': 'true',
             },
@@ -2649,7 +2649,7 @@ void main() {
           allAnswers: {
             'activity_grounds_other_grounds': {'actv_type': 'Sloping'},
             'activity_other_repair_nearby_trees': {
-              'actv_condition': 'Problems',
+              'actv_condition': 'Defects noted',
               'actv_proximity_of_adjacent_tree': 'Several',
               'cb_significant_cracks': 'true',
             },
@@ -2889,10 +2889,10 @@ void main() {
           tree: tree,
           allAnswers: {
             'activity_grounds_other_grounds': {
-              'actv_type': 'Relatively level',
+              'actv_type': 'Level',
             },
             'activity_other_repair_nearby_trees': {
-              'actv_condition': 'OK',
+              'actv_condition': 'No defects',
             },
             'activity_risks_other_': {
               'cb_not_applicable': 'true',

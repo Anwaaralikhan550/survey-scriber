@@ -1573,71 +1573,71 @@ feb66f5b56,H1,"Significant defects: Serious defects were noted in the garage, in
 f8fd4b53cc,H1,Prompt investigation and repair are required to address the defects and prevent further deterioration or safety risks.,EXACT,{H_GARAGE}::{H1_SIGNIFICANT_DEFECTS},100,DONE
 2ff26daf57,H1,Safety hazard: The current condition of some of the elements of the garage is a safety hazard.,EXACT,{H_GARAGE}::{H1_SAFETY_HAZARD},100,DONE
 5d0865ec4a,H1,You should resolve observed issues now.,EXACT,{H_GARAGE}::{H1_SAFETY_HAZARD},100,DONE
-2492bf6da1,H2,"Grounds: The subject property is set within level, sloping, hilly, undulating grounds.",MENU,,0,UNVERIFIED
-e00c98aef8,H2,Shared Garden: The communal/shared garden is shared with neighbouring property or properties.,TOKENISED,{H_OTHER}::{SHARED_ACCESS_KNOWN},73,DONE
-1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",EXACT,{H_OTHER}::{PRIVATE_ROAD},100,DONE
-84f651e2b9,H2,"Grounds: The communal/shared garden is paved, lawned, decked, artificially lawned, laid with stones, laid with tile chippings, other.",MENU,,0,UNVERIFIED
-6dd65085eb,H2,"Fence: The boundary fences are formed in timber, brick, concrete, wire mesh, hedges, shrubs, other.",MENU,,0,UNVERIFIED
-66a683a5bf,H2,No Fencing: The communal/shared garden of the property does not have fencing.,ADD,{H_OTHER}::{NOT_INSPECTED},56,OPEN
+2492bf6da1,H2,"Grounds: The subject property is set within level, sloping, hilly, undulating grounds.",MENU,,0,VERIFIED
+e00c98aef8,H2,Shared Garden: The communal/shared garden is shared with neighbouring property or properties.,EXACT,{H_OTHER}::{H2_SHARED_GARDEN},100,DONE
+1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",EXACT,{H_OTHER}::{H2_SHARED_AREAS_CONDITION},100,DONE
+84f651e2b9,H2,"Grounds: The communal/shared garden is paved, lawned, decked, artificially lawned, laid with stones, laid with tile chippings, other.",MENU,,0,VERIFIED
+6dd65085eb,H2,"Fence: The boundary fences are formed in timber, brick, concrete, wire mesh, hedges, shrubs, other.",MENU,,0,VERIFIED
+66a683a5bf,H2,No Fencing: The communal/shared garden of the property does not have fencing.,EXACT,{H_OTHER}::{H2_NO_FENCING},100,DONE
 8f27724315,H2,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 278a560e78,H2,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE
-6892abc416,H2,"Description: The outside areas comprise front garden, rear garden, side garden, courtyard garden, terrace, patio, other.",MENU,,0,UNVERIFIED
-03925dee50,H2,"Grounds: The surfaces comprise lawn, block paving, concrete, gravel, tarmac, timber decking, composite decking, stone paving, other finishes.",MENU,,0,UNVERIFIED
-9c6172d45f,H2,"Where decking is installed, it should be inspected regularly as deterioration may create a safety hazard.",ADD,{H_OTHER}::{NOT_INSPECTED},53,OPEN
-eb0028f79e,H2,"Fence: The boundaries comprise timber fencing, brick walls, hedging, stone walls, concrete sections, wire, metal railings, other.",MENU,,0,UNVERIFIED
-4edae09342,H2,Boundary ownership cannot be confirmed during a visual inspection.,ADD,{E_RC_DEFLECTION_OTHER}::{DEFLECTION_INVESTIGATE},46,OPEN
-60bffeffa4,H2,Your legal adviser should confirm ownership and maintenance responsibilities from the title documentation and the vendor(s).,EXACT,{H_OTHER}::{REPAIR_FENCE},100,DONE
+6892abc416,H2,"Description: The outside areas comprise front garden, rear garden, side garden, courtyard garden, terrace, patio, other.",MENU,,0,VERIFIED
+03925dee50,H2,"Grounds: The surfaces comprise lawn, block paving, concrete, gravel, tarmac, timber decking, composite decking, stone paving, other finishes.",MENU,,0,VERIFIED
+9c6172d45f,H2,"Where decking is installed, it should be inspected regularly as deterioration may create a safety hazard.",EXACT,{H_OTHER}::{H2_SURFACES},100,DONE
+eb0028f79e,H2,"Fence: The boundaries comprise timber fencing, brick walls, hedging, stone walls, concrete sections, wire, metal railings, other.",MENU,,0,VERIFIED
+4edae09342,H2,Boundary ownership cannot be confirmed during a visual inspection.,EXACT,{H_OTHER}::{H2_BOUNDARIES},100,DONE
+60bffeffa4,H2,Your legal adviser should confirm ownership and maintenance responsibilities from the title documentation and the vendor(s).,EXACT,{H_OTHER}::{H2_BOUNDARIES},100,DONE
 8f27724315,H2,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 278a560e78,H2,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE
 d0cb3abd7f,H2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-aa41b9bc88,H2,"Repair fence: Parts of the boundary fencing are cracked, broken, unstable, leaning, loose in places, severely damaged, rotten, missing in places, other.",MENU,,0,UNVERIFIED
-02de263680,H2,You should arrange to repair or replace the affected fencing soon.,ADD,{H_OTHER}::{REPAIR_SHED},64,OPEN
-aa5bfa9d15,H2,"if the damage is significant, repair should be carried out promptly and may be expensive.",ADD,{H_OTHER}::{PRIVATE_ROAD},52,OPEN
-d053710ae6,H2,"Sheds: There is timber, brick, aluminium, other shed(s) located within the grounds of the property.",MENU,,0,UNVERIFIED
-9c539593e4,H2,"The roof(s) are pitched, flat, other, and covered with felt, tiles, metal sheets, other materials.",MENU,,0,UNVERIFIED
-bee8646203,H2,"Condition: Where visible, the shed(s) appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-49a8b48d4a,H2,Routine maintenance appropriate to the age and construction of the shed should be expected.,ADD,{H_OTHER}::{NOT_INSPECTED},52,OPEN
-288c207157,H2,"However, where the shed is in poor condition, you should arrange to repair or replace the shed.",UNRESOLVED,{H_OTHER}::{REPAIR_SHED},50,OPEN
-d9588a9ab7,H2,"Hardstanding areas: The paths and hardstanding area appear level, reasonably level, and exhibit no unevenness, minor unevenness.",MENU,,0,UNVERIFIED
-f7d52d372d,H2,Minor settlement is common and may be addressed during routine maintenance.,ADD,{H_OTHER}::{PRIVATE_ROAD},44,OPEN
-6a11d70127,H2,"Where areas of uneven paving, trip hazards, or surface deterioration are present, adequate repairs and removal of damaged sections should be undertaken where necessary to maintain safe use.",UNRESOLVED,{H_OTHER}::{REPAIR_FENCE},45,OPEN
-cfac22e7d4,H2,"Shared Areas: The property benefits from a shared driveway, shared garden, communal parking, communal gardens, shared pathways, other access.",MENU,,0,UNVERIFIED
-b4ac3b85eb,H2,"Condition: Where visible, the shared areas appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+aa41b9bc88,H2,"Repair fence: Parts of the boundary fencing are cracked, broken, unstable, leaning, loose in places, severely damaged, rotten, missing in places, other.",MENU,,0,VERIFIED
+02de263680,H2,You should arrange to repair or replace the affected fencing soon.,EXACT,{H_OTHER}::{H2_REPAIR_FENCE},100,DONE
+aa5bfa9d15,H2,"if the damage is significant, repair should be carried out promptly and may be expensive.",EXACT,{H_OTHER}::{H2_REPAIR_FENCE},100,DONE
+d053710ae6,H2,"Sheds: There is timber, brick, aluminium, other shed(s) located within the grounds of the property.",MENU,,0,VERIFIED
+9c539593e4,H2,"The roof(s) are pitched, flat, other, and covered with felt, tiles, metal sheets, other materials.",MENU,,0,VERIFIED
+bee8646203,H2,"Condition: Where visible, the shed(s) appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+49a8b48d4a,H2,Routine maintenance appropriate to the age and construction of the shed should be expected.,EXACT,{H_OTHER}::{H2_SHED_CONDITION},100,DONE
+288c207157,H2,"However, where the shed is in poor condition, you should arrange to repair or replace the shed.",EXACT,{H_OTHER}::{H2_SHED_CONDITION},100,DONE
+d9588a9ab7,H2,"Hardstanding areas: The paths and hardstanding area appear level, reasonably level, and exhibit no unevenness, minor unevenness.",MENU,,0,VERIFIED
+f7d52d372d,H2,Minor settlement is common and may be addressed during routine maintenance.,EXACT,{H_OTHER}::{H2_HARDSTANDING},100,DONE
+6a11d70127,H2,"Where areas of uneven paving, trip hazards, or surface deterioration are present, adequate repairs and removal of damaged sections should be undertaken where necessary to maintain safe use.",EXACT,{H_OTHER}::{H2_HARDSTANDING},100,DONE
+cfac22e7d4,H2,"Shared Areas: The property benefits from a shared driveway, shared garden, communal parking, communal gardens, shared pathways, other access.",MENU,,0,VERIFIED
+b4ac3b85eb,H2,"Condition: Where visible, the shared areas appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 f3a1699966,H2,Routine maintenance appropriate to the age and construction should be expected.,EXACT,{E_CHIMNEY_REPAIR_CONDITION_RATING}::{CONDITION_RATING_1},100,DONE
-1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",EXACT,{H_OTHER}::{PRIVATE_ROAD},100,DONE
-aa2e2ec16d,H2,Private road: The road serving the property appears to be private and may not be maintained at public expense.,EXACT,{H_OTHER}::{PRIVATE_ROAD},100,DONE
-32ade209d3,H2,"Your legal adviser should confirm its status, together with any rights of access, maintenance responsibilities, and associated liabilities.",UNRESOLVED,{H_OTHER}::{PRIVATE_ROAD},77,OPEN
-0aa56abd30,H2,"Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).",MENU,,0,UNVERIFIED
-c369f4ed37,H2,"Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.",MENU,,0,UNVERIFIED
-03fcf9de93,H2,"Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.",MENU,,0,UNVERIFIED
-467cd311ab,H2,"Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.",MENU,,0,UNVERIFIED
-ea17e5df13,H2,"Minor cracking, shrinkage, and surface wear to concrete floors are not uncommon and do not necessarily indicate structural movement.",UNRESOLVED,{H_OTHER}::{PRIVATE_ROAD},46,OPEN
-3ee9267e87,H2,"The floor was inspected visually only, and concealed areas beneath floor coverings or finishes could not be examined.",ADD,{H_OTHER}::{NOT_INSPECTED},49,OPEN
-9ec6c9b4fe,H2,"Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.",MENU,,0,UNVERIFIED
-1b71ce7387,H2,These appeared serviceable at the time of my inspection.,ADD,{H_OTHER}::{LARGE_OUTBUILDING},50,OPEN
+1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",EXACT,{H_OTHER}::{H2_SHARED_AREAS_CONDITION},100,DONE
+aa2e2ec16d,H2,Private road: The road serving the property appears to be private and may not be maintained at public expense.,EXACT,{H_OTHER}::{H2_PRIVATE_ROAD},100,DONE
+32ade209d3,H2,"Your legal adviser should confirm its status, together with any rights of access, maintenance responsibilities, and associated liabilities.",EXACT,{H_OTHER}::{H2_PRIVATE_ROAD},100,DONE
+0aa56abd30,H2,"Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).",MENU,,0,VERIFIED
+c369f4ed37,H2,"Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.",MENU,,0,VERIFIED
+03fcf9de93,H2,"Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.",MENU,,0,VERIFIED
+467cd311ab,H2,"Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.",MENU,,0,VERIFIED
+ea17e5df13,H2,"Minor cracking, shrinkage, and surface wear to concrete floors are not uncommon and do not necessarily indicate structural movement.",EXACT,{H_OTHER}::{H2_OB_FLOOR},100,DONE
+3ee9267e87,H2,"The floor was inspected visually only, and concealed areas beneath floor coverings or finishes could not be examined.",EXACT,{H_OTHER}::{H2_OB_FLOOR},100,DONE
+9ec6c9b4fe,H2,"Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.",MENU,,0,VERIFIED
+1b71ce7387,H2,These appeared serviceable at the time of my inspection.,EXACT,{H_OTHER}::{H2_OB_DOORS},100,DONE
 4c5eb18bf3,H2,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
-da7c8dddb5,H2,"Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-7eb48cc8ec,H2,Routine maintenance appropriate to the age and construction of the outbuilding should be expected.,ADD,{H_OTHER}::{NOT_INSPECTED},51,OPEN
+da7c8dddb5,H2,"Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+7eb48cc8ec,H2,Routine maintenance appropriate to the age and construction of the outbuilding should be expected.,EXACT,{H_OTHER}::{H2_OB_CONDITION},100,DONE
 d0cb3abd7f,H2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-d1c3e28e49,H2,"Repair outbuilding: Parts of the shed, workshop, annex, summer house, office, studio, other permanent outbuilding are damaged, have broken parts, is unstable, is rotted in places, have missing sections, other.",MENU,,0,UNVERIFIED
-6c81972f5e,H2,"This should be repaired soon, and if the defects are significant or present a hazard, it should be promptly repaired.",UNRESOLVED,{H_OTHER}::{REPAIR_FENCE},63,OPEN
-b38dee8da7,H2,"Retaining Wall: The retaining wall(s) is cracked, leaning, distorted, unstable, weak, damaged, in poor condition and may present a potential safety hazard.",MENU,,0,UNVERIFIED
-a4466f701b,H2,"As retaining walls support significant ground loads, failure could result in substantial damage and costly repairs.",ADD,{H_OTHER}::{REPAIR_RETAINING_WALLS},49,OPEN
-d19068ec8c,H2,An appropriately qualified specialist should inspect the wall without delay and recommend any necessary remedial works.,ADD,{H_OTHER}::{REPAIR_RETAINING_WALLS},62,OPEN
-259780da55,H2,"If the retaining wall is shared with the neighbouring property owner, they may have some rights.",EXACT,{H_OTHER}::{REPAIR_RETAINING_WALLS},100,DONE
-768e83ba2e,H2,"Before any work is done, you should ask your legal adviser to investigate this matter and explain the implications.",EXACT,{H_OTHER}::{REPAIR_RETAINING_WALLS},100,DONE
-64efb18473,H2,Nearby Trees: One or more trees are located close to the property.,ADD,{H_OTHER}::{SHARED_ACCESS_UNKNOWN},49,OPEN
-9008ccdca8,H2,"Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",UNRESOLVED,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},48,OPEN
-83265d5c46,H2,"No defects: No significant detrimental effects on the property were noted to date, although the trees should be regularly pruned to restrict future growth and minimise the risk of defects occurring.",EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},100,DONE
-4cdfcebc2c,H2,Defects noted: One or more trees are located close to the property.,ADD,{H_OTHER}::{SHARED_ACCESS_UNKNOWN},49,OPEN
-9008ccdca8,H2,"Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",UNRESOLVED,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},48,OPEN
-c6a3d9406c,H2,"With groups of trees, the risk is usually greatest during prolonged dry spells.",EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},100,DONE
-490d6d6ab9,H2,"Detrimental effects on the property, fencing, finished grounds, outbuilding, other were noted that include significant cracks, subsidence movement.",MENU,,0,UNVERIFIED
-76d636c593,H2,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_PROBLEM},100,DONE
-e823d63ef4,H2,"Also, the trees should be regularly pruned to restrict future growth and minimise the risk of further defects occurring.",EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_PROBLEM},100,DONE
-d082d5d4ac,H2,Subsoil: The exact nature of the subsoil has not been investigated as part of this survey.,EXACT,{H_OTHER}::{REPAIR_SHRINKABLE_CLAY},100,DONE
-fa55f27465,H2,"However, the subsoil in the area may include shrinkable clay.",EXACT,{H_OTHER}::{REPAIR_SHRINKABLE_CLAY},100,DONE
-78283f4074,H2,"Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions.",EXACT,{H_OTHER}::{REPAIR_SHRINKABLE_CLAY},100,DONE
+d1c3e28e49,H2,"Repair outbuilding: Parts of the shed, workshop, annex, summer house, office, studio, other permanent outbuilding are damaged, have broken parts, is unstable, is rotted in places, have missing sections, other.",MENU,,0,VERIFIED
+6c81972f5e,H2,"This should be repaired soon, and if the defects are significant or present a hazard, it should be promptly repaired.",EXACT,{H_OTHER}::{H2_REPAIR_OUTBUILDING},100,DONE
+b38dee8da7,H2,"Retaining Wall: The retaining wall(s) is cracked, leaning, distorted, unstable, weak, damaged, in poor condition and may present a potential safety hazard.",MENU,,0,VERIFIED
+a4466f701b,H2,"As retaining walls support significant ground loads, failure could result in substantial damage and costly repairs.",EXACT,{H_OTHER}::{H2_RETAINING_WALL},100,DONE
+d19068ec8c,H2,An appropriately qualified specialist should inspect the wall without delay and recommend any necessary remedial works.,EXACT,{H_OTHER}::{H2_RETAINING_WALL},100,DONE
+259780da55,H2,"If the retaining wall is shared with the neighbouring property owner, they may have some rights.",EXACT,{H_OTHER}::{H2_RETAINING_WALL},100,DONE
+768e83ba2e,H2,"Before any work is done, you should ask your legal adviser to investigate this matter and explain the implications.",EXACT,{H_OTHER}::{H2_RETAINING_WALL},100,DONE
+64efb18473,H2,Nearby Trees: One or more trees are located close to the property.,EXACT,{H_OTHER}::{H2_NEARBY_TREES},100,DONE
+9008ccdca8,H2,"Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",EXACT,{H_OTHER}::{H2_NEARBY_TREES},100,DONE
+83265d5c46,H2,"No defects: No significant detrimental effects on the property were noted to date, although the trees should be regularly pruned to restrict future growth and minimise the risk of defects occurring.",EXACT,{H_OTHER}::{H2_TREES_NO_DEFECTS},100,DONE
+4cdfcebc2c,H2,Defects noted: One or more trees are located close to the property.,EXACT,{H_OTHER}::{H2_NEARBY_TREES},100,DONE
+9008ccdca8,H2,"Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",EXACT,{H_OTHER}::{H2_NEARBY_TREES},100,DONE
+c6a3d9406c,H2,"With groups of trees, the risk is usually greatest during prolonged dry spells.",EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
+490d6d6ab9,H2,"Detrimental effects on the property, fencing, finished grounds, outbuilding, other were noted that include significant cracks, subsidence movement.",MENU,,0,VERIFIED
+76d636c593,H2,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
+e823d63ef4,H2,"Also, the trees should be regularly pruned to restrict future growth and minimise the risk of further defects occurring.",EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
+d082d5d4ac,H2,Subsoil: The exact nature of the subsoil has not been investigated as part of this survey.,EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
+fa55f27465,H2,"However, the subsoil in the area may include shrinkable clay.",EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
+78283f4074,H2,"Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions.",EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
 6b44066d78,H2,"Your legal adviser should confirm, where applicable, ownership of the shared areas, rights of access, maintenance responsibilities, service charge liabilities, and any restrictions affecting their use.",MENU,,0,UNVERIFIED
 0d6d3bf905,H3,"Right of Way: The property benefits from and/or is subject to shared rights of way over a private road, driveway, footpath, entrance lobby, or other shared access.",MENU,,0,UNVERIFIED
 90810e07cd,H3,"Your legal adviser should confirm the rights of access, maintenance responsibilities and any associated.",ADD,{H_OTHER_AREA}::{LIFTS},65,OPEN
@@ -1746,9 +1746,9 @@ efffe04bce,J1,The source of moisture should be identified and repaired before re
 b20870b1ce,J1,"Significant subsidence: Significant cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls.",UNRESOLVED,,0,OPEN
 e663fa7d19,J1,"I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive.",UNRESOLVED,,0,OPEN
 79d0562fd9,J1,"I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts.",EXACT,{E_MAIN_WALLS}::{E4_MOVE_1},100,DONE
-3f01e7e42a,J1,Tree defects: One or more trees are located close to the property.,ADD,,0,OPEN
+3f01e7e42a,J1,Tree defects: One or more trees are located close to the property.,EXACT,{H_OTHER}::{H2_NEARBY_TREES},100,DONE
 750d3e78cf,J1,Detrimental effects on the property were noted.,ADD,,0,OPEN
-da58607b1c,J1,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_PROBLEM},100,DONE
+da58607b1c,J1,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
 e028281c9b,J2,"Influencing trees: There are small, medium or large trees within influencing distance of the property.",FIX,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},84,OPEN
 003846ae76,J2,"Where no evidence of damage was observed, no further action is required.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE
 9a30c52b3e,J2,"However, where damage is evident, further investigation should be undertaken by a qualified tree specialist.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE

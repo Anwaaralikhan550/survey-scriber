@@ -2839,12 +2839,10 @@
               "label": "The property is set within",
               "type": "dropdown",
               "options": [
-                "Relatively level",
+                "Level",
                 "Sloping",
-                "Relatively sloping",
                 "Hilly",
-                "Uneven",
-                "Other"
+                "Undulating"
               ]
             }
           ]
@@ -2857,9 +2855,9 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_garden",
-              "label": "Garden",
-              "type": "label"
+              "id": "cb_h2_h2_repair_fence",
+              "label": "Repair fence",
+              "type": "checkbox"
             },
             {
               "id": "cb_front",
@@ -2882,67 +2880,61 @@
               "type": "checkbox"
             },
             {
-              "id": "cb_other_271",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_341",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_271",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_64",
-              "label": "Defect",
+              "id": "label_h2_fence_defects",
+              "label": "Boundary fencing is",
               "type": "label"
             },
             {
+              "id": "h2fd_cracked",
+              "label": "cracked",
+              "type": "checkbox"
+            },
+            {
               "id": "cb_broken",
-              "label": "Broken",
+              "label": "broken",
               "type": "checkbox"
             },
             {
               "id": "cb_unstable",
-              "label": "Unstable",
+              "label": "unstable",
               "type": "checkbox"
             },
             {
               "id": "cb_leaning",
-              "label": "Leaning",
+              "label": "leaning",
               "type": "checkbox"
             },
             {
               "id": "cb_loose_in_places",
-              "label": "Loose in places",
+              "label": "loose in places",
               "type": "checkbox"
             },
             {
               "id": "cb_badly_damaged",
-              "label": "Badly damaged",
+              "label": "severely damaged",
               "type": "checkbox"
             },
             {
               "id": "cb_rotted_in_places",
-              "label": "Rotted in places",
+              "label": "rotten",
               "type": "checkbox"
             },
             {
               "id": "cb_missing_in_places",
-              "label": "Missing in places",
+              "label": "missing in places",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_938",
+              "id": "h2_repair_fence_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_276",
+              "id": "h2_repair_fence_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_938",
+              "conditionalOn": "h2_repair_fence_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -3073,239 +3065,236 @@
         },
         {
           "id": "activity_grounds_other_front_garden",
-          "title": "Front Garden",
+          "title": "Gardens",
           "type": "screen",
           "parentId": "group_other_53",
           "order": 4,
           "fields": [
             {
-              "id": "label_the_garden_is",
-              "label": "The garden is",
+              "id": "cb_h2_h2_outside",
+              "label": "Outside areas",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_outside_areas",
+              "label": "Outside areas comprise",
               "type": "label"
             },
             {
-              "id": "cb_paved",
-              "label": "Paved",
+              "id": "h2_outside_0_front_garden",
+              "label": "front garden",
               "type": "checkbox"
             },
             {
-              "id": "cb_part_paved",
-              "label": "Part paved",
+              "id": "h2_outside_0_rear_garden",
+              "label": "rear garden",
               "type": "checkbox"
             },
             {
-              "id": "cb_lawned",
-              "label": "Lawned",
+              "id": "h2_outside_0_side_garden",
+              "label": "side garden",
               "type": "checkbox"
             },
             {
-              "id": "cb_decked",
-              "label": "Decked",
+              "id": "h2_outside_0_courtyard_garden",
+              "label": "courtyard garden",
               "type": "checkbox"
             },
             {
-              "id": "cb_artificial_lawned",
-              "label": "Artificial lawned",
+              "id": "h2_outside_0_terrace",
+              "label": "terrace",
               "type": "checkbox"
             },
             {
-              "id": "cb_laid_with_gravel",
-              "label": "Laid with gravel",
+              "id": "h2_outside_0_patio",
+              "label": "patio",
               "type": "checkbox"
             },
             {
-              "id": "cb_laid_with_tile_chippings",
-              "label": "Laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_stone_chippings",
-              "label": "Laid with stone chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_277",
+              "id": "h2_outside_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_912",
+              "id": "h2_outside_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_277",
+              "conditionalOn": "h2_outside_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "ch20",
-              "label": "No Boundary Fencing",
+              "id": "cb_h2_h2_surfaces",
+              "label": "Garden surfaces",
               "type": "checkbox"
             },
             {
-              "id": "cb_fence_formed_in_timber",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
+              "id": "label_h2_surfaces",
+              "label": "Surfaces comprise",
+              "type": "label"
             },
             {
-              "id": "cb_fence_formed_in_brick_walls",
-              "label": "Brick walls",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
+              "id": "h2_surfaces_0_lawn",
+              "label": "lawn",
+              "type": "checkbox"
             },
             {
-              "id": "cb_fence_formed_in_concrete_sections",
-              "label": "Concrete sections",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
+              "id": "h2_surfaces_0_block_paving",
+              "label": "block paving",
+              "type": "checkbox"
             },
             {
-              "id": "cb_fence_formed_in_wire_mash",
-              "label": "Wire mesh",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
+              "id": "h2_surfaces_0_concrete",
+              "label": "concrete",
+              "type": "checkbox"
             },
             {
-              "id": "cb_fence_formed_in_hedges",
-              "label": "Hedges",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
+              "id": "h2_surfaces_0_gravel",
+              "label": "gravel",
+              "type": "checkbox"
             },
             {
-              "id": "cb_fence_formed_in_shrubs",
-              "label": "Shrubs",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
+              "id": "h2_surfaces_0_tarmac",
+              "label": "tarmac",
+              "type": "checkbox"
             },
             {
-              "id": "cb_fence_formed_in_other",
+              "id": "h2_surfaces_0_timber_decking",
+              "label": "timber decking",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_surfaces_0_composite_decking",
+              "label": "composite decking",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_surfaces_0_stone_paving",
+              "label": "stone paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_surfaces_0_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_912_fence_formed_in",
+              "id": "h2_surfaces_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_fence_formed_in_other",
+              "conditionalOn": "h2_surfaces_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "actv_fencing_condition",
+              "id": "cb_h2_h2_boundaries",
+              "label": "Boundaries",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_boundaries",
+              "label": "Boundaries comprise",
+              "type": "label"
+            },
+            {
+              "id": "h2_boundaries_0_timber_fencing",
+              "label": "timber fencing",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_boundaries_0_brick_walls",
+              "label": "brick walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_boundaries_0_hedging",
+              "label": "hedging",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_boundaries_0_stone_walls",
+              "label": "stone walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_boundaries_0_concrete_sections",
+              "label": "concrete sections",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_boundaries_0_wire",
+              "label": "wire",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_boundaries_0_metal_railings",
+              "label": "metal railings",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_boundaries_0_other",
               "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_boundaries_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_boundaries_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_garden_cond",
+              "label": "Garden condition",
               "type": "dropdown",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             },
             {
-              "id": "cb_pond",
-              "label": "Pond",
+              "id": "cb_h2_h2_garden_no_defects",
+              "label": "Garden: no defects noted",
               "type": "checkbox"
             },
             {
-              "id": "actv_pond_condition",
-              "label": "Pond Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_pond",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_brick_sheds",
-              "label": "Brick Sheds",
+              "id": "cb_h2_h2_hardstanding",
+              "label": "Hardstanding areas",
               "type": "checkbox"
             },
             {
-              "id": "actv_roof_covered_in_brick",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
+              "id": "label_h2_hard_level",
+              "label": "Paths and hardstanding appear",
+              "type": "label"
             },
             {
-              "id": "actv_brick_sheds_condition",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_timber_sheds",
-              "label": "Timber Sheds",
+              "id": "h2_hardstanding_0_level",
+              "label": "level",
               "type": "checkbox"
             },
             {
-              "id": "actv_roof_covered_in_timber",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
+              "id": "h2_hardstanding_0_reasonably_level",
+              "label": "reasonably level",
+              "type": "checkbox"
             },
             {
-              "id": "actv_timber_sheds_condition",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
+              "id": "label_h2_hard_uneven",
+              "label": "and exhibit",
+              "type": "label"
             },
             {
-              "id": "actv_roof_type_brick",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
+              "id": "h2_hardstanding_1_no_unevenness",
+              "label": "no unevenness",
+              "type": "checkbox"
             },
             {
-              "id": "actv_roof_type_timber",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
+              "id": "h2_hardstanding_1_minor_unevenness",
+              "label": "minor unevenness",
+              "type": "checkbox"
             }
           ]
         },
@@ -3317,45 +3306,192 @@
           "order": 4,
           "fields": [
             {
-              "id": "cb_front",
-              "label": "Front",
+              "id": "cb_h2_h2_shared_garden",
+              "label": "Shared garden",
               "type": "checkbox"
             },
             {
-              "id": "cb_rear",
-              "label": "Rear",
+              "id": "cb_h2_h2_comm_surface",
+              "label": "Communal garden surfaces",
               "type": "checkbox"
             },
             {
-              "id": "cb_side",
-              "label": "Side",
+              "id": "label_h2_comm_surface",
+              "label": "Communal garden is",
+              "type": "label"
+            },
+            {
+              "id": "h2_comm_surface_0_paved",
+              "label": "paved",
               "type": "checkbox"
             },
             {
-              "id": "cb_communal",
-              "label": "Communal",
+              "id": "h2_comm_surface_0_lawned",
+              "label": "lawned",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_190",
+              "id": "h2_comm_surface_0_decked",
+              "label": "decked",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_surface_0_artificially_lawned",
+              "label": "artificially lawned",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_surface_0_laid_with_stones",
+              "label": "laid with stones",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_surface_0_laid_with_tile_chippings",
+              "label": "laid with tile chippings",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_surface_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_shared_status",
-              "label": "Shared Status",
+              "id": "h2_comm_surface_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_comm_surface_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_comm_fence",
+              "label": "Communal garden fences",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_comm_fence",
+              "label": "Boundary fences formed in",
+              "type": "label"
+            },
+            {
+              "id": "h2_comm_fence_0_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_fence_0_brick",
+              "label": "brick",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_fence_0_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_fence_0_wire_mesh",
+              "label": "wire mesh",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_fence_0_hedges",
+              "label": "hedges",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_fence_0_shrubs",
+              "label": "shrubs",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_fence_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_comm_fence_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_comm_fence_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h2_h2_comm_no_fence",
+              "label": "No fencing",
+              "type": "checkbox"
+            },
+            {
+              "id": "actv_h2_comm_cond",
+              "label": "Communal garden condition",
               "type": "dropdown",
               "options": [
-                "Shared Access",
-                "Unknown Access Status"
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             },
             {
-              "id": "et_other_935",
+              "id": "cb_h2_h2_shared_areas",
+              "label": "Shared areas",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_shared_areas",
+              "label": "Property benefits from a",
+              "type": "label"
+            },
+            {
+              "id": "h2_shared_areas_0_shared_driveway",
+              "label": "shared driveway",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_shared_areas_0_shared_garden",
+              "label": "shared garden",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_shared_areas_0_communal_parking",
+              "label": "communal parking",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_shared_areas_0_communal_gardens",
+              "label": "communal gardens",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_shared_areas_0_shared_pathways",
+              "label": "shared pathways",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_shared_areas_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_shared_areas_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_190",
+              "conditionalOn": "h2_shared_areas_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_shared_cond",
+              "label": "Shared areas condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
             }
           ]
         },
@@ -3367,63 +3503,115 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_shed_type",
-              "label": "Shed Type",
+              "id": "cb_h2_h2_sheds",
+              "label": "Sheds",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_shed_material",
+              "label": "Shed(s) of",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "h2_sheds_0_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_brick",
-              "label": "Brick",
+              "id": "h2_sheds_0_brick",
+              "label": "brick",
               "type": "checkbox"
             },
             {
-              "id": "cb_other",
+              "id": "h2_sheds_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other",
+              "id": "h2_sheds_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other",
+              "conditionalOn": "h2_sheds_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_defect_65",
-              "label": "Defect",
+              "id": "label_h2_shed_roof",
+              "label": "Roof(s) are",
               "type": "label"
             },
             {
-              "id": "cb_is_damaged",
-              "label": "Is damaged",
+              "id": "h2_sheds_1_pitched",
+              "label": "pitched",
               "type": "checkbox"
             },
             {
-              "id": "cb_in_disrepair",
-              "label": "In disrepair",
+              "id": "h2_sheds_1_flat",
+              "label": "flat",
               "type": "checkbox"
             },
             {
-              "id": "cb_is_unstable",
-              "label": "Is unstable",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_998",
+              "id": "h2_sheds_1_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_472",
+              "id": "h2_sheds_1_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_998",
+              "conditionalOn": "h2_sheds_1_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_shed_cover",
+              "label": "Covered with",
+              "type": "label"
+            },
+            {
+              "id": "h2_sheds_2_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_2_tiles",
+              "label": "tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_2_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_2_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_2_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_sheds_2_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_shed_cond",
+              "label": "Shed condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
             }
           ]
         },
@@ -3573,244 +3761,6 @@
           "inlinePosition": "header"
         },
         {
-          "id": "activity_grounds_other_front_garden__rear_garden",
-          "title": "Rear Garden",
-          "type": "screen",
-          "parentId": "group_other_53",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_the_garden_is_6",
-              "label": "The garden is",
-              "type": "label"
-            },
-            {
-              "id": "cb_paved",
-              "label": "Paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_part_paved",
-              "label": "Part paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lawned",
-              "label": "Lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_decked",
-              "label": "Decked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_artificial_lawned",
-              "label": "Artificial lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_gravel",
-              "label": "Laid with gravel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_tile_chippings",
-              "label": "Laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_stone_chippings",
-              "label": "Laid with stone chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_277",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch20",
-              "label": "No Boundary Fencing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_timber",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_brick_walls",
-              "label": "Brick walls",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_concrete_sections",
-              "label": "Concrete sections",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_wire_mash",
-              "label": "Wire mesh",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_hedges",
-              "label": "Hedges",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_shrubs",
-              "label": "Shrubs",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_other",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_pond",
-              "label": "Pond",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_brick_sheds",
-              "label": "Brick Sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_timber_sheds",
-              "label": "Timber Sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_277",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_912_fence_formed_in",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_fence_formed_in_other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_fencing_condition",
-              "label": "Fencing Condition",
-              "type": "dropdown",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_pond_condition",
-              "label": "Pond Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_pond",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_type_brick",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_covered_in_brick",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_brick_sheds_condition",
-              "label": "Brick Sheds Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_type_timber",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_covered_in_timber",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_timber_sheds_condition",
-              "label": "Timber Sheds Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_grounds_other_private_road",
           "title": "Private Road",
           "type": "screen",
@@ -3819,7 +3769,7 @@
           "fields": [
             {
               "id": "cb_private_road",
-              "label": "Private Road",
+              "label": "Private road",
               "type": "checkbox"
             }
           ]
@@ -3832,92 +3782,99 @@
           "order": 6,
           "fields": [
             {
-              "id": "label_type_7",
-              "label": "Type",
+              "id": "cb_h2_h2_repair_ob",
+              "label": "Repair outbuilding",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_rob_type",
+              "label": "Parts of the",
               "type": "label"
             },
             {
-              "id": "cb_shed",
-              "label": "Shed",
+              "id": "h2_repair_ob_0_shed",
+              "label": "shed",
               "type": "checkbox"
             },
             {
-              "id": "cb_summer_house",
-              "label": "Summer house",
+              "id": "h2_repair_ob_0_workshop",
+              "label": "workshop",
               "type": "checkbox"
             },
             {
-              "id": "cb_workshop",
-              "label": "Workshop",
+              "id": "h2_repair_ob_0_annex",
+              "label": "annex",
               "type": "checkbox"
             },
             {
-              "id": "cb_office",
-              "label": "Office",
+              "id": "h2_repair_ob_0_summer_house",
+              "label": "summer house",
               "type": "checkbox"
             },
             {
-              "id": "cb_green_house",
-              "label": "Green house",
+              "id": "h2_repair_ob_0_office",
+              "label": "office",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_894",
+              "id": "h2_repair_ob_0_studio",
+              "label": "studio",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_repair_ob_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_98",
+              "id": "h2_repair_ob_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_894",
+              "conditionalOn": "h2_repair_ob_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_defect_66",
-              "label": "Defect",
+              "id": "label_h2_rob_defects",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_damaged",
-              "label": "Damaged",
+              "id": "h2_repair_ob_1_damaged",
+              "label": "damaged",
               "type": "checkbox"
             },
             {
-              "id": "cb_broken",
-              "label": "Broken",
+              "id": "h2_repair_ob_1_have_broken_parts",
+              "label": "have broken parts",
               "type": "checkbox"
             },
             {
-              "id": "cb_unstable",
-              "label": "Unstable",
+              "id": "h2_repair_ob_1_is_unstable",
+              "label": "is unstable",
               "type": "checkbox"
             },
             {
-              "id": "cb_badly_damaged",
-              "label": "Badly damaged",
+              "id": "h2_repair_ob_1_is_rotted_in_places",
+              "label": "is rotted in places",
               "type": "checkbox"
             },
             {
-              "id": "cb_rotted_in_places",
-              "label": "Rotted in places",
+              "id": "h2_repair_ob_1_have_missing_sections",
+              "label": "have missing sections",
               "type": "checkbox"
             },
             {
-              "id": "cb_missing_sections",
-              "label": "Missing sections",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_440",
+              "id": "h2_repair_ob_1_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_923",
+              "id": "h2_repair_ob_1_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_440",
+              "conditionalOn": "h2_repair_ob_1_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -3937,300 +3894,6 @@
           ]
         },
         {
-          "id": "activity_grounds_other_front_garden__side_garden",
-          "title": "Side Garden",
-          "type": "screen",
-          "parentId": "group_other_53",
-          "order": 8,
-          "fields": [
-            {
-              "id": "label_the_garden_is_7",
-              "label": "The garden is",
-              "type": "label"
-            },
-            {
-              "id": "cb_paved",
-              "label": "Paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_part_paved",
-              "label": "Part paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lawned",
-              "label": "Lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_decked",
-              "label": "Decked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_artificial_lawned",
-              "label": "Artificial lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_gravel",
-              "label": "Laid with gravel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_tile_chippings",
-              "label": "Laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_stone_chippings",
-              "label": "Laid with stone chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_277",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch20",
-              "label": "No Boundary Fencing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_timber",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_brick_walls",
-              "label": "Brick walls",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_concrete_sections",
-              "label": "Concrete sections",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_wire_mash",
-              "label": "Wire mesh",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_hedges",
-              "label": "Hedges",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_shrubs",
-              "label": "Shrubs",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_other",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_pond",
-              "label": "Pond",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_brick_sheds",
-              "label": "Brick Sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_timber_sheds",
-              "label": "Timber Sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_277",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_912_fence_formed_in",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_fence_formed_in_other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_fencing_condition",
-              "label": "Fencing Condition",
-              "type": "dropdown",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_pond_condition",
-              "label": "Pond Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_pond",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_type_brick",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_covered_in_brick",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_brick_sheds_condition",
-              "label": "Brick Sheds Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_type_timber",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_covered_in_timber",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_timber_sheds_condition",
-              "label": "Timber Sheds Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_other_repair_legal_issues",
-          "title": "Legal Issues",
-          "type": "screen",
-          "parentId": "group_h2_other_52",
-          "order": 8,
-          "fields": [
-            {
-              "id": "label_shared_area",
-              "label": "Shared Area",
-              "type": "label"
-            },
-            {
-              "id": "cb_drains",
-              "label": "Drains",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_sewers",
-              "label": "Sewers",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rainwater_goods",
-              "label": "Rainwater goods",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_private_road",
-              "label": "Private road",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_access",
-              "label": "Access",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_paths",
-              "label": "Paths",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_742",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_541",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_742",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_other_repair_retaining_walls",
           "title": "Retaining Walls",
           "type": "screen",
@@ -4238,9 +3901,9 @@
           "order": 8,
           "fields": [
             {
-              "id": "label_location_47",
-              "label": "Location",
-              "type": "label"
+              "id": "cb_h2_h2_rw",
+              "label": "Retaining wall",
+              "type": "checkbox"
             },
             {
               "id": "cb_front",
@@ -4258,53 +3921,44 @@
               "type": "checkbox"
             },
             {
-              "id": "cb_other_411",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_384",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_411",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_67",
-              "label": "Defect",
+              "id": "label_h2_rw_defects",
+              "label": "Retaining wall is",
               "type": "label"
             },
             {
               "id": "cb_cracked",
-              "label": "Cracked",
+              "label": "cracked",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2rw_leaning",
+              "label": "leaning",
               "type": "checkbox"
             },
             {
               "id": "cb_distorted",
-              "label": "Distorted",
+              "label": "distorted",
               "type": "checkbox"
             },
             {
               "id": "cb_unstable",
-              "label": "Unstable",
+              "label": "unstable",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2rw_weak",
+              "label": "weak",
               "type": "checkbox"
             },
             {
               "id": "cb_damaged",
-              "label": "Damaged",
+              "label": "damaged",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_394",
-              "label": "Other",
+              "id": "h2rw_in_poor_condition",
+              "label": "in poor condition",
               "type": "checkbox"
-            },
-            {
-              "id": "et_other_410",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_394",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -4380,244 +4034,6 @@
           ]
         },
         {
-          "id": "activity_grounds_other_front_garden__other_garden",
-          "title": "Other Garden",
-          "type": "screen",
-          "parentId": "group_other_53",
-          "order": 10,
-          "fields": [
-            {
-              "id": "label_the_garden_is_8",
-              "label": "The garden is",
-              "type": "label"
-            },
-            {
-              "id": "cb_paved",
-              "label": "Paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_part_paved",
-              "label": "Part paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lawned",
-              "label": "Lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_decked",
-              "label": "Decked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_artificial_lawned",
-              "label": "Artificial lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_gravel",
-              "label": "Laid with gravel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_tile_chippings",
-              "label": "Laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_stone_chippings",
-              "label": "Laid with stone chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_277",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch20",
-              "label": "No Boundary Fencing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_timber",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_brick_walls",
-              "label": "Brick walls",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_concrete_sections",
-              "label": "Concrete sections",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_wire_mash",
-              "label": "Wire mesh",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_hedges",
-              "label": "Hedges",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_shrubs",
-              "label": "Shrubs",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_other",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_pond",
-              "label": "Pond",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_brick_sheds",
-              "label": "Brick Sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_timber_sheds",
-              "label": "Timber Sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_277",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_912_fence_formed_in",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_fence_formed_in_other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_fencing_condition",
-              "label": "Fencing Condition",
-              "type": "dropdown",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_pond_condition",
-              "label": "Pond Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_pond",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_type_brick",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_covered_in_brick",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_brick_sheds_condition",
-              "label": "Brick Sheds Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_type_timber",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_covered_in_timber",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_timber_sheds_condition",
-              "label": "Timber Sheds Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_other_repair_shrinkable_clay",
           "title": "Shrinkable Clay",
           "type": "screen",
@@ -4626,7 +4042,7 @@
           "fields": [
             {
               "id": "cb_shrinkable_clay",
-              "label": "Shrinkable Clay",
+              "label": "Subsoil",
               "type": "checkbox"
             }
           ]
@@ -4640,58 +4056,65 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Nearby trees",
               "type": "dropdown",
               "options": [
-                "OK",
-                "Problems"
+                "No defects",
+                "Defects noted"
               ]
             },
             {
-              "id": "actv_proximity_of_adjacent_tree",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "One",
-                "A few",
-                "Several"
-              ]
+              "id": "label_h2_tree_affected",
+              "label": "Detrimental effects on the",
+              "type": "label"
             },
             {
-              "id": "label_trees_causing",
-              "label": "Trees causing",
+              "id": "h2ta_property",
+              "label": "property",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2ta_fencing",
+              "label": "fencing",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2ta_finished_grounds",
+              "label": "finished grounds",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2ta_outbuilding",
+              "label": "outbuilding",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2ta_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2ta_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2ta_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_tree_defect",
+              "label": "Defects include",
               "type": "label"
             },
             {
               "id": "cb_significant_cracks",
-              "label": "Cracks to the property",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Problems",
-              "conditionalMode": "show"
+              "label": "significant cracks",
+              "type": "checkbox"
             },
             {
               "id": "cb_subsidence_movement",
-              "label": "Subsidence movement",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Problems",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_619",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Problems",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_197",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_619",
-              "conditionalMode": "show"
+              "label": "subsidence movement",
+              "type": "checkbox"
             }
           ]
         },
@@ -4737,244 +4160,6 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_535",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_other_front_garden__communal_garden",
-          "title": "Communal Garden",
-          "type": "screen",
-          "parentId": "group_other_53",
-          "order": 12,
-          "fields": [
-            {
-              "id": "label_the_garden_is_9",
-              "label": "The garden is",
-              "type": "label"
-            },
-            {
-              "id": "cb_paved",
-              "label": "Paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_part_paved",
-              "label": "Part paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lawned",
-              "label": "Lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_decked",
-              "label": "Decked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_artificial_lawned",
-              "label": "Artificial lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_gravel",
-              "label": "Laid with gravel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_tile_chippings",
-              "label": "Laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_stone_chippings",
-              "label": "Laid with stone chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_277",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch20",
-              "label": "No Boundary Fencing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_timber",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_brick_walls",
-              "label": "Brick walls",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_concrete_sections",
-              "label": "Concrete sections",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_wire_mash",
-              "label": "Wire mesh",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_hedges",
-              "label": "Hedges",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_shrubs",
-              "label": "Shrubs",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_fence_formed_in_other",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_pond",
-              "label": "Pond",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_brick_sheds",
-              "label": "Brick Sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_timber_sheds",
-              "label": "Timber Sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_277",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_912_fence_formed_in",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_fence_formed_in_other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_fencing_condition",
-              "label": "Fencing Condition",
-              "type": "dropdown",
-              "conditionalOn": "!ch20",
-              "conditionalMode": "show",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_pond_condition",
-              "label": "Pond Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_pond",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_type_brick",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_covered_in_brick",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_brick_sheds_condition",
-              "label": "Brick Sheds Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_brick_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_type_timber",
-              "label": "Roof Type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_roof_covered_in_timber",
-              "label": "Roof Covered In",
-              "type": "dropdown",
-              "options": [
-                "Mineral felt",
-                "Tiles",
-                "Other"
-              ],
-              "conditionalOn": "cb_timber_sheds",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_timber_sheds_condition",
-              "label": "Timber Sheds Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_timber_sheds",
               "conditionalMode": "show"
             }
           ]
@@ -5035,909 +4220,299 @@
           "order": 14,
           "fields": [
             {
-              "id": "label_construction_4",
-              "label": "Construction",
+              "id": "cb_h2_h2_ob",
+              "label": "Outbuilding",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_type",
+              "label": "Property incorporates a",
               "type": "label"
             },
             {
-              "id": "cb_brick",
-              "label": "Brick",
+              "id": "h2_ob_0_large_shed",
+              "label": "large shed",
               "type": "checkbox"
             },
             {
-              "id": "cb_block",
-              "label": "Block",
+              "id": "h2_ob_0_workshop",
+              "label": "workshop",
               "type": "checkbox"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "h2_ob_0_annex",
+              "label": "annex",
               "type": "checkbox"
             },
             {
-              "id": "cb_glass",
-              "label": "Glass",
+              "id": "h2_ob_0_summer_house",
+              "label": "summer house",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_1072",
+              "id": "h2_ob_0_office",
+              "label": "office",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_0_studio",
+              "label": "studio",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_761",
+              "id": "h2_ob_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_1072",
+              "conditionalOn": "h2_ob_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_building_type",
-              "label": "Building type",
+              "id": "cb_h2_h2_ob_cons",
+              "label": "Outbuilding construction",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_construction",
+              "label": "Structure formed of",
               "type": "label"
             },
             {
-              "id": "cb_shed",
-              "label": "Shed",
+              "id": "h2_ob_cons_0_bricks",
+              "label": "bricks",
               "type": "checkbox"
             },
             {
-              "id": "cb_summer_house",
-              "label": "Summer house",
+              "id": "h2_ob_cons_0_blocks",
+              "label": "blocks",
               "type": "checkbox"
             },
             {
-              "id": "cb_workshop",
-              "label": "Workshop",
+              "id": "h2_ob_cons_0_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_office",
-              "label": "Office",
+              "id": "h2_ob_cons_0_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_greenhouse",
-              "label": "Greenhouse",
+              "id": "h2_ob_cons_0_prefabricated_concrete",
+              "label": "prefabricated concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_458",
+              "id": "h2_ob_cons_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_composite_boards",
+              "label": "composite boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_cons_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_443",
+              "id": "h2_ob_cons_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_458",
+              "conditionalOn": "h2_ob_cons_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_location_46",
-              "label": "Location",
+              "id": "cb_h2_h2_ob_roof",
+              "label": "Outbuilding roof",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_roof",
+              "label": "Roof construction",
               "type": "label"
             },
             {
-              "id": "cb_front",
-              "label": "Front",
+              "id": "h2_ob_roof_0_pitched",
+              "label": "pitched",
               "type": "checkbox"
             },
             {
-              "id": "cb_side",
-              "label": "Side",
+              "id": "h2_ob_roof_0_flat",
+              "label": "flat",
               "type": "checkbox"
             },
             {
-              "id": "cb_rear",
-              "label": "Rear",
+              "id": "h2_ob_roof_0_lean_to",
+              "label": "lean-to",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_222",
+              "id": "h2_ob_roof_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_198",
+              "id": "h2_ob_roof_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_222",
+              "conditionalOn": "h2_ob_roof_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_roof_type_2",
-              "label": "Roof Type",
+              "id": "label_h2_ob_cover",
+              "label": "Roof covered with",
               "type": "label"
             },
             {
-              "id": "cb_pitched",
-              "label": "Pitched",
+              "id": "h2_ob_roof_1_clay_tiles",
+              "label": "clay tiles",
               "type": "checkbox"
             },
             {
-              "id": "cb_flat",
-              "label": "Flat",
+              "id": "h2_ob_roof_1_concrete_tiles",
+              "label": "concrete tiles",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_243",
+              "id": "h2_ob_roof_1_slates",
+              "label": "slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_rubber_membrane",
+              "label": "rubber membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_roof_1_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_585",
+              "id": "h2_ob_roof_1_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_243",
+              "conditionalOn": "h2_ob_roof_1_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_roof_covered_with_2",
-              "label": "Roof Covered With",
+              "id": "cb_h2_h2_ob_floor",
+              "label": "Outbuilding floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_ob_floor",
+              "label": "Floor constructed of",
               "type": "label"
             },
             {
-              "id": "cb_mineral_felt",
-              "label": "Mineral felt",
+              "id": "h2_ob_floor_0_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_tiles",
-              "label": "Tiles",
+              "id": "h2_ob_floor_0_suspended_timber",
+              "label": "suspended timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_279",
+              "id": "h2_ob_floor_0_engineered_timber",
+              "label": "engineered timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_beam_and_block",
+              "label": "beam and block",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_ob_floor_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_875",
+              "id": "h2_ob_floor_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_279",
+              "conditionalOn": "h2_ob_floor_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_other_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_h2_other_52",
-          "order": 15,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
+              "id": "cb_h2_h2_ob_doors",
+              "label": "Outbuilding doors and windows",
               "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_other_communal_garden",
-          "title": "Communal Garden",
-          "type": "screen",
-          "parentId": "activity_grounds_other",
-          "order": 400,
-          "fields": [
+            },
             {
-              "id": "label_garden_type",
-              "label": "Garden Type",
+              "id": "label_h2_ob_doors",
+              "label": "Doors / windows formed of",
               "type": "label"
             },
             {
-              "id": "label_the_garden_is_2",
-              "label": "The garden is",
-              "type": "label"
-            },
-            {
-              "id": "cb_paved",
-              "label": "Paved",
+              "id": "h2_ob_doors_0_timber_upvc",
+              "label": "timber uPVC",
               "type": "checkbox"
             },
             {
-              "id": "cb_part_paved",
-              "label": "Part paved",
+              "id": "h2_ob_doors_0_aluminium",
+              "label": "aluminium",
               "type": "checkbox"
             },
             {
-              "id": "cb_lawned",
-              "label": "Lawned",
+              "id": "h2_ob_doors_0_metal",
+              "label": "metal",
               "type": "checkbox"
             },
             {
-              "id": "cb_decked",
-              "label": "Decked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_artificial_lawned",
-              "label": "Artificial lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_gravel",
-              "label": "Laid with gravel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_tile_chippings",
-              "label": "Laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_stone_chippings",
-              "label": "Laid with stone chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_277",
+              "id": "h2_ob_doors_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_912",
-              "label": "Other (specify)",
-              "type": "text"
-            },
-            {
-              "id": "ch20",
-              "label": "Communal",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_boundary_fencing",
-              "label": "Boundary Fencing",
-              "type": "label"
-            },
-            {
-              "id": "cb_fence_formed_in_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_brick_walls",
-              "label": "Brick walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_concrete_sections",
-              "label": "Concrete sections",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_wire_mash",
-              "label": "Wire mesh",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_hedges",
-              "label": "Hedges",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_shrubs",
-              "label": "Shrubs",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_other",
+              "id": "h2_ob_doors_0_other_text",
               "label": "Other",
-              "type": "checkbox"
+              "type": "text",
+              "conditionalOn": "h2_ob_doors_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             },
             {
-              "id": "et_other_912_fence_formed_in",
-              "label": "Other fencing (specify)",
-              "type": "text"
-            },
-            {
-              "id": "label_outbuildings",
-              "label": "Outbuildings",
-              "type": "label"
-            },
-            {
-              "id": "cb_pond",
-              "label": "Pond",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_brick_sheds",
-              "label": "Brick sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_timber_sheds",
-              "label": "Timber sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_fencing_condition",
-              "label": "Fencing condition",
+              "id": "actv_h2_ob_cond",
+              "label": "Outbuilding condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             },
             {
-              "id": "actv_pond_condition",
-              "label": "Pond condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_brick_sheds_condition",
-              "label": "Brick sheds condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_timber_sheds_condition",
-              "label": "Timber sheds condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_other_other_garden",
-          "title": "Other Garden",
-          "type": "screen",
-          "parentId": "activity_grounds_other",
-          "order": 400,
-          "fields": [
-            {
-              "id": "label_garden_type",
-              "label": "Garden Type",
-              "type": "label"
-            },
-            {
-              "id": "label_the_garden_is_3",
-              "label": "The garden is",
-              "type": "label"
-            },
-            {
-              "id": "cb_paved",
-              "label": "Paved",
+              "id": "cb_h2_h2_ob_no_defects",
+              "label": "Outbuilding: no defects noted",
               "type": "checkbox"
-            },
-            {
-              "id": "cb_part_paved",
-              "label": "Part paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lawned",
-              "label": "Lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_decked",
-              "label": "Decked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_artificial_lawned",
-              "label": "Artificial lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_gravel",
-              "label": "Laid with gravel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_tile_chippings",
-              "label": "Laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_stone_chippings",
-              "label": "Laid with stone chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_277",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912",
-              "label": "Other (specify)",
-              "type": "text"
-            },
-            {
-              "id": "ch20",
-              "label": "Communal",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_boundary_fencing",
-              "label": "Boundary Fencing",
-              "type": "label"
-            },
-            {
-              "id": "cb_fence_formed_in_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_brick_walls",
-              "label": "Brick walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_concrete_sections",
-              "label": "Concrete sections",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_wire_mash",
-              "label": "Wire mesh",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_hedges",
-              "label": "Hedges",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_shrubs",
-              "label": "Shrubs",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912_fence_formed_in",
-              "label": "Other fencing (specify)",
-              "type": "text"
-            },
-            {
-              "id": "label_outbuildings",
-              "label": "Outbuildings",
-              "type": "label"
-            },
-            {
-              "id": "cb_pond",
-              "label": "Pond",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_brick_sheds",
-              "label": "Brick sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_timber_sheds",
-              "label": "Timber sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_fencing_condition",
-              "label": "Fencing condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_pond_condition",
-              "label": "Pond condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_brick_sheds_condition",
-              "label": "Brick sheds condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_timber_sheds_condition",
-              "label": "Timber sheds condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_other_rear_garden",
-          "title": "Rear Garden",
-          "type": "screen",
-          "parentId": "activity_grounds_other",
-          "order": 400,
-          "fields": [
-            {
-              "id": "label_garden_type",
-              "label": "Garden Type",
-              "type": "label"
-            },
-            {
-              "id": "label_the_garden_is_4",
-              "label": "The garden is",
-              "type": "label"
-            },
-            {
-              "id": "cb_paved",
-              "label": "Paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_part_paved",
-              "label": "Part paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lawned",
-              "label": "Lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_decked",
-              "label": "Decked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_artificial_lawned",
-              "label": "Artificial lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_gravel",
-              "label": "Laid with gravel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_tile_chippings",
-              "label": "Laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_stone_chippings",
-              "label": "Laid with stone chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_277",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912",
-              "label": "Other (specify)",
-              "type": "text"
-            },
-            {
-              "id": "ch20",
-              "label": "Communal",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_boundary_fencing",
-              "label": "Boundary Fencing",
-              "type": "label"
-            },
-            {
-              "id": "cb_fence_formed_in_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_brick_walls",
-              "label": "Brick walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_concrete_sections",
-              "label": "Concrete sections",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_wire_mash",
-              "label": "Wire mesh",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_hedges",
-              "label": "Hedges",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_shrubs",
-              "label": "Shrubs",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912_fence_formed_in",
-              "label": "Other fencing (specify)",
-              "type": "text"
-            },
-            {
-              "id": "label_outbuildings",
-              "label": "Outbuildings",
-              "type": "label"
-            },
-            {
-              "id": "cb_pond",
-              "label": "Pond",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_brick_sheds",
-              "label": "Brick sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_timber_sheds",
-              "label": "Timber sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_fencing_condition",
-              "label": "Fencing condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_pond_condition",
-              "label": "Pond condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_brick_sheds_condition",
-              "label": "Brick sheds condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_timber_sheds_condition",
-              "label": "Timber sheds condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_other_side_garden",
-          "title": "Side Garden",
-          "type": "screen",
-          "parentId": "activity_grounds_other",
-          "order": 400,
-          "fields": [
-            {
-              "id": "label_garden_type",
-              "label": "Garden Type",
-              "type": "label"
-            },
-            {
-              "id": "label_the_garden_is_5",
-              "label": "The garden is",
-              "type": "label"
-            },
-            {
-              "id": "cb_paved",
-              "label": "Paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_part_paved",
-              "label": "Part paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lawned",
-              "label": "Lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_decked",
-              "label": "Decked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_artificial_lawned",
-              "label": "Artificial lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_gravel",
-              "label": "Laid with gravel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_tile_chippings",
-              "label": "Laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_laid_with_stone_chippings",
-              "label": "Laid with stone chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_277",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912",
-              "label": "Other (specify)",
-              "type": "text"
-            },
-            {
-              "id": "ch20",
-              "label": "Communal",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_boundary_fencing",
-              "label": "Boundary Fencing",
-              "type": "label"
-            },
-            {
-              "id": "cb_fence_formed_in_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_brick_walls",
-              "label": "Brick walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_concrete_sections",
-              "label": "Concrete sections",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_wire_mash",
-              "label": "Wire mesh",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_hedges",
-              "label": "Hedges",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_shrubs",
-              "label": "Shrubs",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fence_formed_in_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_912_fence_formed_in",
-              "label": "Other fencing (specify)",
-              "type": "text"
-            },
-            {
-              "id": "label_outbuildings",
-              "label": "Outbuildings",
-              "type": "label"
-            },
-            {
-              "id": "cb_pond",
-              "label": "Pond",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_brick_sheds",
-              "label": "Brick sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_timber_sheds",
-              "label": "Timber sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_fencing_condition",
-              "label": "Fencing condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_pond_condition",
-              "label": "Pond condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_brick_sheds_condition",
-              "label": "Brick sheds condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_timber_sheds_condition",
-              "label": "Timber sheds condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
             }
           ]
         }

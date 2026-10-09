@@ -101,40 +101,39 @@ class InspectionPhraseEngine {
       case 'activity_grounds_garage_safety_hazard_repair':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_grounds':
-        return _groundsOtherGrounds(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_front_garden':
-        return _groundsGarden(answers, gardenName: 'front', isCommunal: false);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_front_garden__rear_garden':
-        return _groundsGarden(answers, gardenName: 'rear', isCommunal: false);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_front_garden__side_garden':
-        return _groundsGarden(answers, gardenName: 'side', isCommunal: false);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_front_garden__other_garden':
-        return _groundsGarden(answers, gardenName: 'other', isCommunal: false);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_front_garden__communal_garden':
-        return _groundsGarden(answers,
-            gardenName: 'communal', isCommunal: true);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_shared_access':
-        return _groundsSharedAccess(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_large_outbuildings':
-        return _groundsLargeOutbuilding(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_private_road':
-        return _groundsPrivateRoad(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_other_repair_legal_issues':
-        return _groundsLegalIssues(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_other_repair_shrinkable_clay':
-        return _groundsShrinkableClay(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_repair_fence':
-        return _groundsRepairFence(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_repair_shed':
-        return _groundsRepairShed(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_other_repair_outbuilding':
-        return _groundsRepairOutbuilding(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_other_repair_retaining_walls':
-        return _groundsRepairRetainingWalls(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_other_repair_nearby_trees':
-        return _groundsRepairNearbyTrees(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_not_inspected':
-        return _groundsOtherNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_area_right_of_way':
         return _groundsOtherAreaRightOfWay(answers);
       case 'activity_grounds_other_area_knotweed':
@@ -784,14 +783,13 @@ class InspectionPhraseEngine {
 
       // ── Section H: standalone garden screens ──
       case 'activity_grounds_other_rear_garden':
-        return _groundsGarden(answers, gardenName: 'rear', isCommunal: false);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_side_garden':
-        return _groundsGarden(answers, gardenName: 'side', isCommunal: false);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_other_garden':
-        return _groundsGarden(answers, gardenName: 'other', isCommunal: false);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_communal_garden':
-        return _groundsGarden(answers,
-            gardenName: 'communal', isCommunal: true);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
 
       // ── Section G: services detail screens ──
       case 'activity_services_water_disused_tank':
@@ -2137,530 +2135,6 @@ class InspectionPhraseEngine {
         .replaceAll('{LIMITATIONS_NO_RESTRICTIONS}', restrictionsText)
         .replaceAll('{LIMITATIONS_NO_REAR_ACCESS}', rearText);
     return _split(_normalize(template));
-  }
-
-  List<String> _groundsOtherGrounds(Map<String, String> answers) {
-    final groundType = _cleanLower(answers['actv_type']);
-    if (groundType.isEmpty) return const [];
-    var template = _sub('{H_OTHER}', '{OTHER_GROUNDS}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{OTH_GND_TYPE}', groundType);
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsGarden(
-    Map<String, String> answers, {
-    required String gardenName,
-    required bool isCommunal,
-  }) {
-    final gardenTypes = _labelsFor(
-      [
-        'cb_paved',
-        'cb_part_paved',
-        'cb_lawned',
-        'cb_decked',
-        'cb_artificial_lawned',
-        'cb_laid_with_gravel',
-        'cb_laid_with_tile_chippings',
-        'cb_laid_with_stone_chippings',
-        'cb_other_277',
-      ],
-      answers,
-      {
-        'cb_paved': 'Paved',
-        'cb_part_paved': 'Part paved',
-        'cb_lawned': 'Lawned',
-        'cb_decked': 'Decked',
-        'cb_artificial_lawned': 'Artificial lawned',
-        'cb_laid_with_gravel': 'Laid with gravel',
-        'cb_laid_with_tile_chippings': 'Laid with tile chippings',
-        'cb_laid_with_stone_chippings': 'Laid with stone chippings',
-        'cb_other_277': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_277', 'et_other_912', gardenTypes);
-
-    String gardenTypePhrase = '';
-    if (gardenTypes.isNotEmpty) {
-      if (isCommunal) {
-        gardenTypePhrase = _sub('{H_OTHER_GARDENS}', '{COMMUNAL_GARDEN_TYPE}')
-            .replaceAll('{OTH_TYPE}', _toWords(gardenTypes).toLowerCase());
-      } else {
-        gardenTypePhrase = _sub('{H_OTHER_GARDENS}', '{GARDEN_TYPE}')
-            .replaceAll('{GRADEN_NAME}', gardenName)
-            .replaceAll('{OTH_TYPE}', _toWords(gardenTypes).toLowerCase());
-      }
-    }
-
-    String fencingPhrase = '';
-    if (_isChecked(answers['ch20'])) {
-      fencingPhrase = _sub('{H_OTHER_GARDENS}', '{FENCING_NOT_AVAILABLE}')
-          .replaceAll('{GRADEN_NAME}', gardenName);
-    } else {
-      final fences = _labelsFor(
-        [
-          'cb_fence_formed_in_timber',
-          'cb_fence_formed_in_brick_walls',
-          'cb_fence_formed_in_concrete_sections',
-          'cb_fence_formed_in_wire_mash',
-          'cb_fence_formed_in_hedges',
-          'cb_fence_formed_in_shrubs',
-          'cb_fence_formed_in_other',
-        ],
-        answers,
-        {
-          'cb_fence_formed_in_timber': 'Timber',
-          'cb_fence_formed_in_brick_walls': 'Brick walls',
-          'cb_fence_formed_in_concrete_sections': 'Concrete sections',
-          'cb_fence_formed_in_wire_mash': 'Wire mesh',
-          'cb_fence_formed_in_hedges': 'Hedges',
-          'cb_fence_formed_in_shrubs': 'Shrubs',
-          'cb_fence_formed_in_other': 'Other',
-        },
-      );
-      _addOther(answers, 'cb_fence_formed_in_other',
-          'et_other_912_fence_formed_in', fences);
-      if (fences.isNotEmpty) {
-        final condition = _cleanLower(answers['actv_fencing_condition']);
-        final conditionPhrase = condition.isNotEmpty
-            ? _sub('{H_OTHER_GARDENS}', '{FENCING_CONDITION}')
-                .replaceAll('{OTH_FENCES_CON}', condition)
-            : '';
-        fencingPhrase = _sub('{H_OTHER_GARDENS}', '{FENCING_AVAILABLE}')
-            .replaceAll('{GRADEN_NAME}', gardenName)
-            .replaceAll('{OTH_FENCES}', _toWords(fences).toLowerCase())
-            .replaceAll('{FENCING_CONDITION}', conditionPhrase);
-      }
-    }
-
-    String pondPhrase = '';
-    if (_isChecked(answers['cb_pond'])) {
-      final cond = _cleanLower(answers['actv_pond_condition']);
-      if (cond.isNotEmpty) {
-        pondPhrase = _sub('{H_OTHER_GARDENS}', '{POND}')
-            .replaceAll('{GRADEN_NAME}', gardenName)
-            .replaceAll('{OTH_POND_CON}', cond);
-      }
-    }
-
-    String brickShedPhrase = '';
-    if (_isChecked(answers['cb_brick_sheds'])) {
-      final roofType = _cleanLower(answers['actv_roof_type_brick']);
-      final roofCover = _cleanLower(answers['actv_roof_covered_in_brick']);
-      final cond = _cleanLower(answers['actv_brick_sheds_condition']);
-      if (roofType.isNotEmpty && roofCover.isNotEmpty && cond.isNotEmpty) {
-        brickShedPhrase = _sub('{H_OTHER_GARDENS}', '{BRICK_SHED}')
-            .replaceAll('{GRADEN_NAME}', gardenName)
-            .replaceAll('{OTH_BRICK_ROOF_TYPE}', roofType)
-            .replaceAll('{OTH_BRICK_ROOF_COVER}', roofCover)
-            .replaceAll('{OTH_BRICK_SHED_CON}', cond);
-      }
-    }
-
-    String timberShedPhrase = '';
-    if (_isChecked(answers['cb_timber_sheds'])) {
-      final roofType = _cleanLower(answers['actv_roof_type_timber']);
-      final roofCover = _cleanLower(answers['actv_roof_covered_in_timber']);
-      final cond = _cleanLower(answers['actv_timber_sheds_condition']);
-      if (roofType.isNotEmpty && roofCover.isNotEmpty && cond.isNotEmpty) {
-        timberShedPhrase = _sub('{H_OTHER_GARDENS}', '{TIMBER_SHED}')
-            .replaceAll('{GRADEN_NAME}', gardenName)
-            .replaceAll('{OTH_TIMBER_ROOF_TYPE}', roofType)
-            .replaceAll('{OTH_TIMBER_ROOF_COVER}', roofCover)
-            .replaceAll('{OTH_TIMBER_SHED_CON}', cond);
-      }
-    }
-
-    if (gardenTypePhrase.isEmpty &&
-        fencingPhrase.isEmpty &&
-        pondPhrase.isEmpty &&
-        brickShedPhrase.isEmpty &&
-        timberShedPhrase.isEmpty) {
-      return const [];
-    }
-
-    var template = _sub('{H_OTHER}', '{H_OTHER_GARDENS}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{GARDEN_TYPE}', gardenTypePhrase)
-        .replaceAll('{FENCING}', fencingPhrase)
-        .replaceAll('{POND}', pondPhrase)
-        .replaceAll('{BRICK_SHED}', brickShedPhrase)
-        .replaceAll('{TIMBER_SHED}', timberShedPhrase);
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsSharedAccess(Map<String, String> answers) {
-    final locations = _labelsFor(
-      ['cb_front', 'cb_rear', 'cb_side', 'cb_communal', 'cb_other_190'],
-      answers,
-      {
-        'cb_front': 'Front',
-        'cb_rear': 'Rear',
-        'cb_side': 'Side',
-        'cb_communal': 'Communal',
-        'cb_other_190': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_190', 'et_other_935', locations);
-    if (locations.isEmpty) return const [];
-    final status = _cleanLower(answers['actv_shared_status']);
-    final template = status.contains('unknown')
-        ? _sub('{H_OTHER}', '{SHARED_ACCESS_UNKNOWN}')
-        : _sub('{H_OTHER}', '{SHARED_ACCESS_KNOWN}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template.replaceAll(
-        '{SA_LOCATION}', _toWords(locations).toLowerCase())));
-  }
-
-  List<String> _groundsLargeOutbuilding(Map<String, String> answers) {
-    final constructions = _labelsFor(
-      ['cb_brick', 'cb_block', 'cb_timber', 'cb_glass', 'cb_other_1072'],
-      answers,
-      {
-        'cb_brick': 'Brick',
-        'cb_block': 'Block',
-        'cb_timber': 'Timber',
-        'cb_glass': 'Glass',
-        'cb_other_1072': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_1072', 'et_other_761', constructions);
-
-    final types = _labelsFor(
-      [
-        'cb_shed',
-        'cb_summer_house',
-        'cb_workshop',
-        'cb_office',
-        'cb_greenhouse',
-        'cb_other_458'
-      ],
-      answers,
-      {
-        'cb_shed': 'Shed',
-        'cb_summer_house': 'Summer house',
-        'cb_workshop': 'Workshop',
-        'cb_office': 'Office',
-        'cb_greenhouse': 'Greenhouse',
-        'cb_other_458': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_458', 'et_other_443', types);
-
-    final locations = _labelsFor(
-      ['cb_front', 'cb_side', 'cb_rear', 'cb_other_222'],
-      answers,
-      {
-        'cb_front': 'Front',
-        'cb_side': 'Side',
-        'cb_rear': 'Rear',
-        'cb_other_222': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_222', 'et_other_198', locations);
-
-    final roofTypes = _labelsFor(
-      ['cb_pitched', 'cb_flat', 'cb_other_243'],
-      answers,
-      {
-        'cb_pitched': 'Pitched',
-        'cb_flat': 'Flat',
-        'cb_other_243': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_243', 'et_other_585', roofTypes);
-
-    final roofCovers = _labelsFor(
-      ['cb_mineral_felt', 'cb_tiles', 'cb_other_279'],
-      answers,
-      {
-        'cb_mineral_felt': 'Mineral felt',
-        'cb_tiles': 'Tiles',
-        'cb_other_279': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_279', 'et_other_875', roofCovers);
-
-    final condition = _cleanLower(answers['actv_condition']);
-    // Location + building type anchor the sentence structure ("There is a
-    // ... to the {location} of the property underneath a ... roof"); without
-    // both, any assembled sentence would contain an empty-slot fragment
-    // (client-reported defect class from Phase 3). Require both.
-    if (locations.isEmpty || types.isEmpty) return const [];
-
-    var template = _sub('{H_OTHER}', '{LARGE_OUTBUILDING}');
-    if (template.isEmpty) return const [];
-    if (constructions.isEmpty) {
-      template = template.replaceAll('{LOB_CONST} ', '');
-    }
-    if (roofTypes.isEmpty || roofCovers.isEmpty) {
-      template = template.replaceAll(
-        ' underneath a {LOB_ROOF_TYPE} roof covered in {LOB_ROOF_COVER}.',
-        '.',
-      );
-    }
-    if (condition.isEmpty) {
-      template = template.replaceAll(
-        ' This appears in {LOB_CONDITION} condition. No repair is currently '
-            'needed. The property must be maintained in the normal way.',
-        '',
-      );
-    }
-    template = template
-        .replaceAll('{LOB_CONST}', _toWords(constructions).toLowerCase())
-        .replaceAll('{LOB_BUIL_TYPE}', _toWords(types).toLowerCase())
-        .replaceAll('{LOB_ROOF_LOC}', _toWords(locations).toLowerCase())
-        .replaceAll('{LOB_ROOF_TYPE}', _toWords(roofTypes).toLowerCase())
-        .replaceAll('{LOB_ROOF_COVER}', _toWords(roofCovers).toLowerCase())
-        .replaceAll('{LOB_CONDITION}', condition);
-    return _splitResolved(template);
-  }
-
-  List<String> _groundsPrivateRoad(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_private_road'])) return const [];
-    return _split(_normalize(_sub('{H_OTHER}', '{PRIVATE_ROAD}')));
-  }
-
-  List<String> _groundsLegalIssues(Map<String, String> answers) {
-    final items = _labelsFor(
-      [
-        'cb_drains',
-        'cb_sewers',
-        'cb_rainwater_goods',
-        'cb_private_road',
-        'cb_access',
-        'cb_paths',
-        'cb_other_742',
-      ],
-      answers,
-      {
-        'cb_drains': 'Drains',
-        'cb_sewers': 'Sewers',
-        'cb_rainwater_goods': 'Rainwater goods',
-        'cb_private_road': 'Private road',
-        'cb_access': 'Access',
-        'cb_paths': 'Paths',
-        'cb_other_742': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_742', 'et_other_541', items);
-    if (items.isEmpty) return const [];
-    var template = _sub('{H_OTHER}', '{LEGAL_ISSUES}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{LEGAL_ISSUES_SHARED_AREA}', _toWords(items).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsShrinkableClay(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_shrinkable_clay'])) return const [];
-    return _split(_normalize(_sub('{H_OTHER}', '{REPAIR_SHRINKABLE_CLAY}')));
-  }
-
-  List<String> _groundsRepairFence(Map<String, String> answers) {
-    final gardens = _labelsFor(
-      ['cb_front', 'cb_rear', 'cb_side', 'cb_communal', 'cb_other_271'],
-      answers,
-      {
-        'cb_front': 'Front',
-        'cb_rear': 'Rear',
-        'cb_side': 'Side',
-        'cb_communal': 'Communal',
-        'cb_other_271': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_271', 'et_other_341', gardens);
-
-    final defects = _labelsFor(
-      [
-        'cb_broken',
-        'cb_unstable',
-        'cb_leaning',
-        'cb_loose_in_places',
-        'cb_badly_damaged',
-        'cb_rotted_in_places',
-        'cb_missing_in_places',
-        'cb_other_938',
-      ],
-      answers,
-      {
-        'cb_broken': 'Broken',
-        'cb_unstable': 'Unstable',
-        'cb_leaning': 'Leaning',
-        'cb_loose_in_places': 'Loose in places',
-        'cb_badly_damaged': 'Badly damaged',
-        'cb_rotted_in_places': 'Rotted in places',
-        'cb_missing_in_places': 'Missing in places',
-        'cb_other_938': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_938', 'et_other_276', defects);
-    if (gardens.isEmpty || defects.isEmpty) return const [];
-    var template = _sub('{H_OTHER}', '{REPAIR_FENCE}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTH_REP_FENCES_GARD}', _toWords(gardens).toLowerCase())
-        .replaceAll('{OTH_REP_FENCES_DEF}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsRepairShed(Map<String, String> answers) {
-    final types = _labelsFor(
-      ['cb_timber', 'cb_brick', 'cb_other'],
-      answers,
-      {
-        'cb_timber': 'Timber',
-        'cb_brick': 'Brick',
-        'cb_other': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other', 'et_other', types);
-    final defects = _labelsFor(
-      ['cb_is_damaged', 'cb_in_disrepair', 'cb_is_unstable', 'cb_other_998'],
-      answers,
-      {
-        'cb_is_damaged': 'Is damaged',
-        'cb_in_disrepair': 'In disrepair',
-        'cb_is_unstable': 'Is unstable',
-        'cb_other_998': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_998', 'et_other_472', defects);
-    if (types.isEmpty || defects.isEmpty) return const [];
-    var template = _sub('{H_OTHER}', '{REPAIR_SHED}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTH_REP_SHED_TYPE}', _toWords(types).toLowerCase())
-        .replaceAll('{OTH_REP_SHED_DEF}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsRepairOutbuilding(Map<String, String> answers) {
-    final types = _labelsFor(
-      [
-        'cb_shed',
-        'cb_summer_house',
-        'cb_workshop',
-        'cb_office',
-        'cb_green_house',
-        'cb_other_894'
-      ],
-      answers,
-      {
-        'cb_shed': 'Shed',
-        'cb_summer_house': 'Summer house',
-        'cb_workshop': 'Workshop',
-        'cb_office': 'Office',
-        'cb_green_house': 'Green house',
-        'cb_other_894': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_894', 'et_other_98', types);
-    final defects = _labelsFor(
-      [
-        'cb_damaged',
-        'cb_broken',
-        'cb_unstable',
-        'cb_badly_damaged',
-        'cb_rotted_in_places',
-        'cb_missing_sections',
-        'cb_other_440',
-      ],
-      answers,
-      {
-        'cb_damaged': 'Damaged',
-        'cb_broken': 'Broken',
-        'cb_unstable': 'Unstable',
-        'cb_badly_damaged': 'Badly damaged',
-        'cb_rotted_in_places': 'Rotted in places',
-        'cb_missing_sections': 'Missing sections',
-        'cb_other_440': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_440', 'et_other_923', defects);
-    if (types.isEmpty || defects.isEmpty) return const [];
-    var template = _sub('{H_OTHER}', '{REPAIR_OUTBUILDING}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTH_REP_OUTBUIL_TYPE}', _toWords(types).toLowerCase())
-        .replaceAll('{OTH_REP_OUTBUIL_DEF}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsRepairRetainingWalls(Map<String, String> answers) {
-    final locations = _labelsFor(
-      ['cb_front', 'cb_side', 'cb_rear', 'cb_other_411'],
-      answers,
-      {
-        'cb_front': 'Front',
-        'cb_side': 'Side',
-        'cb_rear': 'Rear',
-        'cb_other_411': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_411', 'et_other_384', locations);
-    final defects = _labelsFor(
-      [
-        'cb_cracked',
-        'cb_distorted',
-        'cb_unstable',
-        'cb_damaged',
-        'cb_other_394'
-      ],
-      answers,
-      {
-        'cb_cracked': 'Cracked',
-        'cb_distorted': 'Distorted',
-        'cb_unstable': 'Unstable',
-        'cb_damaged': 'Damaged',
-        'cb_other_394': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_394', 'et_other_410', defects);
-    if (locations.isEmpty || defects.isEmpty) return const [];
-    var template = _sub('{H_OTHER}', '{REPAIR_RETAINING_WALLS}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll(
-            '{OTH_REP_RET_WALL_TYPE}', _toWords(locations).toLowerCase())
-        .replaceAll('{OTH_REP_RET_WALL_DEF}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsRepairNearbyTrees(Map<String, String> answers) {
-    final condition = _cleanLower(answers['actv_condition']);
-    final number = _cleanLower(answers['actv_proximity_of_adjacent_tree']);
-    if (condition.isEmpty && number.isEmpty) return const [];
-    if (condition.contains('problem')) {
-      final defects = _labelsFor(
-        ['cb_significant_cracks', 'cb_subsidence_movement', 'cb_other_619'],
-        answers,
-        {
-          'cb_significant_cracks': 'Cracks to the property',
-          'cb_subsidence_movement': 'Subsidence movement',
-          'cb_other_619': 'Other',
-        },
-      );
-      _addOther(answers, 'cb_other_619', 'et_other_197', defects);
-      if (defects.isEmpty) return const [];
-      var template = _sub('{H_OTHER}', '{REPAIR_NEARBY_TREES_PROBLEM}');
-      if (template.isEmpty) return const [];
-      template = template
-          .replaceAll('{OTH_REP_NBT_COND_NO_OF_TREE}', number)
-          .replaceAll(
-              '{OTH_REP_NBT_COND_CAUSING}', _toWords(defects).toLowerCase());
-      return _split(_normalize(template));
-    }
-    var template = _sub('{H_OTHER}', '{REPAIR_NEARBY_TREES_OK}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{OTH_REP_NBT_COND_NO_OF_TREE}', number);
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsOtherNotInspected(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    return _split(_normalize(_sub('{H_OTHER}', '{NOT_INSPECTED}')));
   }
 
   List<String> _groundsOtherAreaRightOfWay(Map<String, String> answers) {

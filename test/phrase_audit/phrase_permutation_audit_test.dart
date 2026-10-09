@@ -319,7 +319,9 @@ String _maskAbbreviations(String text) {
   return text
       .replaceAll(RegExp(r'\be\.g\.', caseSensitive: false), 'eg')
       .replaceAll(RegExp(r'\bi\.e\.', caseSensitive: false), 'ie')
-      .replaceAll(RegExp(r'\betc\.', caseSensitive: false), 'etc');
+      .replaceAll(RegExp(r'\betc\.', caseSensitive: false), 'etc')
+      // PDF typo copied verbatim (CLIENT_QUERIES #87): "However. if the damage is significant".
+      .replaceAll('However. if the damage', 'However, if the damage');
 }
 
 List<String> grammarIssues(String phrase) {
