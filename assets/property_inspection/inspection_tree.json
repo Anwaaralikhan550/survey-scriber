@@ -21208,51 +21208,29 @@
           "order": 2,
           "fields": [
             {
-              "id": "actv_area",
-              "label": "Area",
-              "type": "dropdown",
-              "options": [
-                "Carport canopy",
-                "Porch canopy",
-                "Roof terrace",
-                "Balcony",
-                "Juliet balcony",
-                "External stairs",
-                "Other"
-              ]
-            },
-            {
-              "id": "label_construction_2",
-              "label": "Construction",
+              "id": "label_e9_carport_types",
+              "label": "Carport",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e90c_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e90c_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Steel",
+              "id": "e90c_aluminium",
+              "label": "aluminium",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
-              "label": "Other",
+              "id": "e90c_masonry",
+              "label": "masonry",
               "type": "checkbox"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -21264,49 +21242,40 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_construction_18",
-              "label": "Construction",
+              "id": "label_e9_porch_materials",
+              "label": "Canopy constructed of",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e91c_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e91c_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Steel",
+              "id": "e91c_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e91c_plastic",
+              "label": "plastic",
+              "type": "checkbox"
+            },
+            {
+              "id": "e91c_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Area",
-              "type": "dropdown",
-              "options": [
-                "Carport canopy",
-                "Porch canopy",
-                "Roof terrace",
-                "Balcony",
-                "Juliet balcony",
-                "External stairs",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
+              "id": "e91c_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e91c_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -21320,49 +21289,35 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_construction_19",
-              "label": "Construction",
+              "id": "label_e9_terrace_materials",
+              "label": "Structure formed in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e92c_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e92c_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Steel",
+              "id": "e92c_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e92c_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Area",
-              "type": "dropdown",
-              "options": [
-                "Carport canopy",
-                "Porch canopy",
-                "Roof terrace",
-                "Balcony",
-                "Juliet balcony",
-                "External stairs",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
+              "id": "e92c_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e92c_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -21376,51 +21331,29 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_construction_20",
-              "label": "Construction",
+              "id": "label_e9_balcony_types",
+              "label": "Balcony",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e93c_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e93c_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Steel",
+              "id": "e93c_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
-              "label": "Other",
+              "id": "e93c_cantilevered",
+              "label": "cantilevered",
               "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Area",
-              "type": "dropdown",
-              "options": [
-                "Carport canopy",
-                "Porch canopy",
-                "Roof terrace",
-                "Balcony",
-                "Juliet balcony",
-                "External stairs",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -21432,49 +21365,35 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_construction_21",
-              "label": "Construction",
+              "id": "label_e9_juliet_materials",
+              "label": "Juliet balcony formed in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e94c_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e94c_aluminium",
+              "label": "aluminium",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Steel",
+              "id": "e94c_glass",
+              "label": "glass",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e94c_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Area",
-              "type": "dropdown",
-              "options": [
-                "Carport canopy",
-                "Porch canopy",
-                "Roof terrace",
-                "Balcony",
-                "Juliet balcony",
-                "External stairs",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
+              "id": "e94c_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e94c_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -21488,49 +21407,40 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_construction_22",
-              "label": "Construction",
+              "id": "label_e9_stair_materials",
+              "label": "Staircase constructed of",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e95c_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e95c_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Steel",
+              "id": "e95c_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e95c_brick",
+              "label": "brick",
+              "type": "checkbox"
+            },
+            {
+              "id": "e95c_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Area",
-              "type": "dropdown",
-              "options": [
-                "Carport canopy",
-                "Porch canopy",
-                "Roof terrace",
-                "Balcony",
-                "Juliet balcony",
-                "External stairs",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
+              "id": "e95c_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e95c_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -21544,49 +21454,55 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_construction_23",
-              "label": "Construction",
+              "id": "label_e9_other_structures",
+              "label": "Other external structures include",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e96c_bin_stores",
+              "label": "bin stores",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e96c_cycle_stores",
+              "label": "cycle stores",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Steel",
+              "id": "e96c_garden_walls",
+              "label": "garden walls",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e96c_pergolas",
+              "label": "pergolas",
+              "type": "checkbox"
+            },
+            {
+              "id": "e96c_gazebos",
+              "label": "gazebos",
+              "type": "checkbox"
+            },
+            {
+              "id": "e96c_covered_walkways",
+              "label": "covered walkways",
+              "type": "checkbox"
+            },
+            {
+              "id": "e96c_storage_compounds",
+              "label": "storage compounds",
+              "type": "checkbox"
+            },
+            {
+              "id": "e96c_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Area",
-              "type": "dropdown",
-              "options": [
-                "Carport canopy",
-                "Porch canopy",
-                "Roof terrace",
-                "Balcony",
-                "Juliet balcony",
-                "External stairs",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
+              "id": "e96c_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e96c_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -21594,7 +21510,7 @@
         },
         {
           "id": "group_carport_43",
-          "title": "Carport",
+          "title": "External structures",
           "type": "group",
           "parentId": "group_repairs_42",
           "order": 2
@@ -21990,98 +21906,75 @@
           "order": 3,
           "fields": [
             {
-              "id": "label_external_communal_parts",
-              "label": "External communal parts",
+              "id": "label_e9_communal",
+              "label": "External communal areas",
               "type": "label"
             },
             {
-              "id": "cb_automatic_gates",
-              "label": "Automatic gates",
+              "id": "e9ca_communal_entrances",
+              "label": "communal entrances",
               "type": "checkbox"
             },
             {
-              "id": "cb_cctv",
+              "id": "e9ca_access_roads",
+              "label": "access roads",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9ca_parking_areas",
+              "label": "parking areas",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9ca_footpaths",
+              "label": "footpaths",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9ca_landscaped_areas",
+              "label": "landscaped areas",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9ca_boundary_structures",
+              "label": "boundary structures",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9ca_security_gates",
+              "label": "security gates",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9ca_cctv",
               "label": "CCTV",
               "type": "checkbox"
             },
             {
-              "id": "cb_communal_door",
-              "label": "Communal door",
+              "id": "e9ca_lighting",
+              "label": "lighting",
               "type": "checkbox"
             },
             {
-              "id": "cb_entry_system",
-              "label": "Entry system",
+              "id": "e9ca_bin_stores",
+              "label": "bin stores",
               "type": "checkbox"
             },
             {
-              "id": "cb_drive_access",
-              "label": "Drive access",
+              "id": "e9ca_cycle_stores",
+              "label": "cycle stores",
               "type": "checkbox"
             },
             {
-              "id": "cb_car_park",
-              "label": "Car park",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_walk_paths",
-              "label": "Walk paths",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_gardens",
-              "label": "Gardens",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_grounds",
-              "label": "Grounds",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_play_ground",
-              "label": "Play ground",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1034",
+              "id": "e9ca_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_747",
+              "id": "e9ca_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_1034",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_because_of",
-              "label": "Because Of",
-              "type": "label"
-            },
-            {
-              "id": "cb_the_area_is_not_accessible",
-              "label": "The area is not accessible",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_of_limited_access",
-              "label": "Of limited access",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_251",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_928",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_251",
+              "conditionalOn": "e9ca_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
@@ -22090,18 +21983,11 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_status",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Inspected",
-                "Not Inspected"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -22114,371 +22000,78 @@
           "order": 3,
           "fields": [
             {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "label_defect_16",
-              "label": "Defect",
+              "id": "label_e9_r_structures",
+              "label": "Wall(s) of",
               "type": "label"
             },
             {
-              "id": "cb_cracked",
-              "label": "Cracked",
+              "id": "e9rw_s_balcony",
+              "label": "balcony",
               "type": "checkbox"
             },
             {
-              "id": "cb_damaged",
-              "label": "Damaged",
+              "id": "e9rw_s_carport",
+              "label": "carport",
               "type": "checkbox"
             },
             {
-              "id": "cb_eroded",
-              "label": "Eroded",
+              "id": "e9rw_s_roof_terrace",
+              "label": "roof terrace",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_1046",
+              "id": "e9rw_s_staircase",
+              "label": "staircase",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rw_s_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_402",
+              "id": "e9rw_s_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_1046",
+              "conditionalOn": "e9rw_s_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_wall__wall",
-          "title": "Wall",
-          "type": "screen",
-          "parentId": "group_porch_canopy_44",
-          "order": 3,
-          "fields": [
+            },
             {
-              "id": "label_defect_1771578464960",
-              "label": "Defect",
+              "id": "label_e9_r_defects",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_cracked",
-              "label": "Cracked",
+              "id": "e9rw_d_are_cracked",
+              "label": "are cracked",
               "type": "checkbox"
             },
             {
-              "id": "cb_damaged",
-              "label": "Damaged",
+              "id": "e9rw_d_are_damaged",
+              "label": "are damaged",
               "type": "checkbox"
             },
             {
-              "id": "cb_eroded",
-              "label": "Eroded",
+              "id": "e9rw_d_are_unstable",
+              "label": "are unstable",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_1046",
+              "id": "e9rw_d_have_eroded_render",
+              "label": "have eroded render",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rw_d_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_402",
+              "id": "e9rw_d_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_1046",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_wall__wall__2",
-          "title": "Wall",
-          "type": "screen",
-          "parentId": "group_roof_terrace_45",
-          "order": 3,
-          "fields": [
-            {
-              "id": "label_defect_1771578464960",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Eroded",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_1046",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_wall__wall__3",
-          "title": "Wall",
-          "type": "screen",
-          "parentId": "group_balcony_46",
-          "order": 3,
-          "fields": [
-            {
-              "id": "label_defect_1771578464961",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Eroded",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_1046",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_wall__wall__4",
-          "title": "Wall",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_47",
-          "order": 3,
-          "fields": [
-            {
-              "id": "label_defect_1771578464961",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Eroded",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_1046",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_wall__wall__5",
-          "title": "Wall",
-          "type": "screen",
-          "parentId": "group_external_stairs_48",
-          "order": 3,
-          "fields": [
-            {
-              "id": "label_defect_1771578464961",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Eroded",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_1046",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_wall__wall__6",
-          "title": "Wall",
-          "type": "screen",
-          "parentId": "group_other_49",
-          "order": 3,
-          "fields": [
-            {
-              "id": "label_defect_1771578464961",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Eroded",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_1046",
+              "conditionalOn": "e9rw_d_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -24443,45 +24036,67 @@
           "order": 5,
           "fields": [
             {
-              "id": "actv_roof_type",
-              "label": "Roof type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat"
-              ]
+              "id": "label_e9_roof_shape",
+              "label": "Roof construction",
+              "type": "label"
             },
             {
-              "id": "actv_roof_location",
-              "label": "Roof location",
-              "type": "dropdown",
-              "options": [
-                "Carport",
-                "Porch canopy",
-                "External stairs",
-                "Other"
-              ]
+              "id": "e90rs_pitched",
+              "label": "pitched",
+              "type": "checkbox"
             },
             {
-              "id": "actv_covered_in",
-              "label": "Roof location",
-              "type": "dropdown",
-              "options": [
-                "Tile",
-                "Felt",
-                "Lead",
-                "Other"
-              ]
+              "id": "e90rs_flat",
+              "label": "flat",
+              "type": "checkbox"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
+              "id": "e90rs_lean_to",
+              "label": "lean-to",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_e9_roof_covering",
+              "label": "Covered with",
+              "type": "label"
+            },
+            {
+              "id": "e90rc_tiles",
+              "label": "tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90rc_slates",
+              "label": "slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90rc_felt_sheet",
+              "label": "felt sheet",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90rc_polycarbonate_sheet",
+              "label": "polycarbonate sheet",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90rc_metal_sheeting",
+              "label": "metal sheeting",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90rc_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90rc_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e90rc_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -24493,45 +24108,47 @@
           "order": 5,
           "fields": [
             {
-              "id": "actv_roof_type",
-              "label": "Roof type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat"
-              ]
+              "id": "label_e9_roof_covering",
+              "label": "Roof covering comprises",
+              "type": "label"
             },
             {
-              "id": "actv_roof_location",
-              "label": "Roof location",
-              "type": "dropdown",
-              "options": [
-                "Carport",
-                "Porch canopy",
-                "External stairs",
-                "Other"
-              ]
+              "id": "e91r_tiles",
+              "label": "tiles",
+              "type": "checkbox"
             },
             {
-              "id": "actv_covered_in",
-              "label": "Covered in",
-              "type": "dropdown",
-              "options": [
-                "Tile",
-                "Felt",
-                "Lead",
-                "Other"
-              ]
+              "id": "e91r_slates",
+              "label": "slates",
+              "type": "checkbox"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
+              "id": "e91r_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "e91r_polycarbonate",
+              "label": "polycarbonate",
+              "type": "checkbox"
+            },
+            {
+              "id": "e91r_plastic",
+              "label": "plastic",
+              "type": "checkbox"
+            },
+            {
+              "id": "e91r_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e91r_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e91r_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -24543,245 +24160,67 @@
           "order": 5,
           "fields": [
             {
-              "id": "actv_roof_type",
-              "label": "Roof type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat"
-              ]
+              "id": "label_e9_roof_shape",
+              "label": "Roof construction",
+              "type": "label"
             },
             {
-              "id": "actv_roof_location",
-              "label": "Roof location",
-              "type": "dropdown",
-              "options": [
-                "Carport",
-                "Porch canopy",
-                "External stairs",
-                "Other"
-              ]
+              "id": "e92rs_pitched",
+              "label": "pitched",
+              "type": "checkbox"
             },
             {
-              "id": "actv_covered_in",
-              "label": "Covered in",
-              "type": "dropdown",
-              "options": [
-                "Tile",
-                "Felt",
-                "Lead",
-                "Other"
-              ]
+              "id": "e92rs_flat",
+              "label": "flat",
+              "type": "checkbox"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_other_roof__roof__3",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_balcony_38",
-          "order": 5,
-          "fields": [
-            {
-              "id": "actv_roof_type",
-              "label": "Roof type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat"
-              ]
+              "id": "e92rs_lean_to",
+              "label": "lean-to",
+              "type": "checkbox"
             },
             {
-              "id": "actv_roof_location",
-              "label": "Roof location",
-              "type": "dropdown",
-              "options": [
-                "Carport",
-                "Porch canopy",
-                "External stairs",
-                "Other"
-              ]
+              "id": "label_e9_roof_covering",
+              "label": "Covered with",
+              "type": "label"
             },
             {
-              "id": "actv_covered_in",
-              "label": "Covered in",
-              "type": "dropdown",
-              "options": [
-                "Tile",
-                "Felt",
-                "Lead",
-                "Other"
-              ]
+              "id": "e92rc_tiles",
+              "label": "tiles",
+              "type": "checkbox"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_other_roof__roof__4",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_39",
-          "order": 5,
-          "fields": [
-            {
-              "id": "actv_roof_type",
-              "label": "Roof type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat"
-              ]
+              "id": "e92rc_slates",
+              "label": "slates",
+              "type": "checkbox"
             },
             {
-              "id": "actv_roof_location",
-              "label": "Roof location",
-              "type": "dropdown",
-              "options": [
-                "Carport",
-                "Porch canopy",
-                "External stairs",
-                "Other"
-              ]
+              "id": "e92rc_felt",
+              "label": "felt",
+              "type": "checkbox"
             },
             {
-              "id": "actv_covered_in",
-              "label": "Covered in",
-              "type": "dropdown",
-              "options": [
-                "Tile",
-                "Felt",
-                "Lead",
-                "Other"
-              ]
+              "id": "e92rc_polycarbonate",
+              "label": "polycarbonate",
+              "type": "checkbox"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_other_roof__roof__5",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_external_stairs_40",
-          "order": 5,
-          "fields": [
-            {
-              "id": "actv_roof_type",
-              "label": "Roof type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat"
-              ]
+              "id": "e92rc_metal_sheeting",
+              "label": "metal sheeting",
+              "type": "checkbox"
             },
             {
-              "id": "actv_roof_location",
-              "label": "Roof location",
-              "type": "dropdown",
-              "options": [
-                "Carport",
-                "Porch canopy",
-                "External stairs",
-                "Other"
-              ]
+              "id": "e92rc_other",
+              "label": "Other",
+              "type": "checkbox"
             },
             {
-              "id": "actv_covered_in",
-              "label": "Covered in",
-              "type": "dropdown",
-              "options": [
-                "Tile",
-                "Felt",
-                "Lead",
-                "Other"
-              ]
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_other_roof__roof__6",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_other_41",
-          "order": 5,
-          "fields": [
-            {
-              "id": "actv_roof_type",
-              "label": "Roof type",
-              "type": "dropdown",
-              "options": [
-                "Pitched",
-                "Flat"
-              ]
-            },
-            {
-              "id": "actv_roof_location",
-              "label": "Roof location",
-              "type": "dropdown",
-              "options": [
-                "Carport",
-                "Porch canopy",
-                "External stairs",
-                "Other"
-              ]
-            },
-            {
-              "id": "actv_covered_in",
-              "label": "Covered in",
-              "type": "dropdown",
-              "options": [
-                "Tile",
-                "Felt",
-                "Lead",
-                "Other"
-              ]
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
+              "id": "e92rc_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e92rc_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -25290,93 +24729,100 @@
           "order": 6,
           "fields": [
             {
-              "id": "label_defect_14",
-              "label": "Defect",
+              "id": "label_e9_r_structures",
+              "label": "Roof over",
               "type": "label"
             },
             {
-              "id": "cb_has_missing_tiles",
-              "label": "Missing tiles",
+              "id": "e9rr_s_carport",
+              "label": "carport",
               "type": "checkbox"
             },
             {
-              "id": "cb_has_slipped_tiles",
-              "label": "Slipped tiles",
+              "id": "e9rr_s_balcony",
+              "label": "balcony",
               "type": "checkbox"
             },
             {
-              "id": "cb_is_in_disrepair",
-              "label": "In disrepair",
+              "id": "e9rr_s_canopy",
+              "label": "canopy",
               "type": "checkbox"
             },
             {
-              "id": "cb_is_leaking",
-              "label": "Leaking",
+              "id": "e9rr_s_other",
+              "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "cb_is_dilapidated",
-              "label": "Dilapidated",
-              "type": "checkbox"
+              "id": "e9rr_s_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e9rr_s_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             },
             {
-              "id": "cb_has_damaged_flashing",
-              "label": "Damaged flashing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_secured",
-              "label": "Poorly secured",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_roof__roof",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_porch_canopy_44",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_defect_93",
-              "label": "Defect",
+              "id": "label_e9_r_defects",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_has_missing_tiles",
-              "label": "Missing tiles",
+              "id": "e9rr_d_missing",
+              "label": "missing",
               "type": "checkbox"
             },
             {
-              "id": "cb_has_slipped_tiles",
-              "label": "Slipped tiles",
+              "id": "e9rr_d_slipped",
+              "label": "slipped",
               "type": "checkbox"
             },
             {
-              "id": "cb_is_in_disrepair",
-              "label": "In disrepair",
+              "id": "e9rr_d_cracked",
+              "label": "cracked",
               "type": "checkbox"
             },
             {
-              "id": "cb_is_leaking",
-              "label": "Leaking",
+              "id": "e9rr_d_lifted",
+              "label": "lifted",
               "type": "checkbox"
             },
             {
-              "id": "cb_is_dilapidated",
-              "label": "Dilapidated",
+              "id": "e9rr_d_in_disrepair",
+              "label": "in disrepair",
               "type": "checkbox"
             },
             {
-              "id": "cb_has_damaged_flashing",
-              "label": "Damaged flashing",
+              "id": "e9rr_d_leaking",
+              "label": "leaking",
               "type": "checkbox"
             },
             {
-              "id": "cb_is_poorly_secured",
-              "label": "Poorly secured",
+              "id": "e9rr_d_damaged",
+              "label": "damaged",
               "type": "checkbox"
+            },
+            {
+              "id": "e9rr_d_poorly_secured",
+              "label": "poorly secured",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rr_d_dilapidated",
+              "label": "dilapidated",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rr_d_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rr_d_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e9rr_d_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -25386,251 +24832,6 @@
           "type": "group",
           "parentId": "group_repairs_42",
           "order": 6
-        },
-        {
-          "id": "activity_outside_property_other_repairs_roof__roof__2",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_roof_terrace_45",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_defect_94",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_has_missing_tiles",
-              "label": "Missing tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_slipped_tiles",
-              "label": "Slipped tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_in_disrepair",
-              "label": "In disrepair",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_dilapidated",
-              "label": "Dilapidated",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_damaged_flashing",
-              "label": "Damaged flashing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_secured",
-              "label": "Poorly secured",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_roof__roof__3",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_balcony_46",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_defect_95",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_has_missing_tiles",
-              "label": "Missing tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_slipped_tiles",
-              "label": "Slipped tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_in_disrepair",
-              "label": "In disrepair",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_dilapidated",
-              "label": "Dilapidated",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_damaged_flashing",
-              "label": "Damaged flashing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_secured",
-              "label": "Poorly secured",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_roof__roof__4",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_47",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_defect_96",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_has_missing_tiles",
-              "label": "Missing tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_slipped_tiles",
-              "label": "Slipped tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_in_disrepair",
-              "label": "In disrepair",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_dilapidated",
-              "label": "Dilapidated",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_damaged_flashing",
-              "label": "Damaged flashing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_secured",
-              "label": "Poorly secured",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_roof__roof__5",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_external_stairs_48",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_defect_97",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_has_missing_tiles",
-              "label": "Missing tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_slipped_tiles",
-              "label": "Slipped tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_in_disrepair",
-              "label": "In disrepair",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_dilapidated",
-              "label": "Dilapidated",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_damaged_flashing",
-              "label": "Damaged flashing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_secured",
-              "label": "Poorly secured",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_roof__roof__6",
-          "title": "Roof",
-          "type": "screen",
-          "parentId": "group_other_49",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_defect_98",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_has_missing_tiles",
-              "label": "Missing tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_slipped_tiles",
-              "label": "Slipped tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_in_disrepair",
-              "label": "In disrepair",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_dilapidated",
-              "label": "Dilapidated",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_damaged_flashing",
-              "label": "Damaged flashing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_secured",
-              "label": "Poorly secured",
-              "type": "checkbox"
-            }
-          ]
         },
         {
           "id": "activity_outside_property_chimney_not_inspected",
@@ -26070,111 +25271,45 @@
           "order": 7,
           "fields": [
             {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "label_construction_3",
-              "label": "Construction",
+              "id": "label_e9_wall_materials",
+              "label": "Walls or balustrades formed in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Bricks",
+              "id": "e90w_bricks",
+              "label": "bricks",
               "type": "checkbox"
             },
             {
-              "id": "cb_bricks",
-              "label": "Timber",
+              "id": "e90w_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e90w_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Glazed section",
+              "id": "e90w_glass",
+              "label": "glass",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e90w_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90w_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_other_wall__wall_construction",
-          "title": "Wall Construction",
-          "type": "screen",
-          "parentId": "group_porch_canopy_36",
-          "order": 7,
-          "fields": [
-            {
-              "id": "label_construction_12",
-              "label": "Construction",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Bricks",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_steel",
-              "label": "Glazed section",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
+              "id": "e90w_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e90w_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -26188,52 +25323,45 @@
           "order": 7,
           "fields": [
             {
-              "id": "label_construction_13",
-              "label": "Construction",
+              "id": "label_e9_wall_materials",
+              "label": "Walls or balustrades formed in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Bricks",
+              "id": "e92w_bricks",
+              "label": "bricks",
               "type": "checkbox"
             },
             {
-              "id": "cb_bricks",
-              "label": "Timber",
+              "id": "e92w_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e92w_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Glazed section",
+              "id": "e92w_glass",
+              "label": "glass",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e92w_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "e92w_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
+              "id": "e92w_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e92w_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -26247,245 +25375,47 @@
           "order": 7,
           "fields": [
             {
-              "id": "label_construction_14",
-              "label": "Construction",
+              "id": "label_e9_wall_materials",
+              "label": "Walls or balustrades formed in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Bricks",
+              "id": "e93w_bricks",
+              "label": "bricks",
               "type": "checkbox"
             },
             {
-              "id": "cb_bricks",
-              "label": "Timber",
+              "id": "e93w_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_concrete",
-              "label": "Concrete",
+              "id": "e93w_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Glazed section",
+              "id": "e93w_glass",
+              "label": "glass",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e93w_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "e93w_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
+              "id": "e93w_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e93w_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_other_wall__wall_construction__4",
-          "title": "Wall Construction",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_39",
-          "order": 7,
-          "fields": [
-            {
-              "id": "label_construction_15",
-              "label": "Construction",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Bricks",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_steel",
-              "label": "Glazed section",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_other_wall__wall_construction__5",
-          "title": "Wall Construction",
-          "type": "screen",
-          "parentId": "group_external_stairs_40",
-          "order": 7,
-          "fields": [
-            {
-              "id": "label_construction_16",
-              "label": "Construction",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Bricks",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_steel",
-              "label": "Glazed section",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_other_wall__wall_construction__6",
-          "title": "Wall Construction",
-          "type": "screen",
-          "parentId": "group_other_41",
-          "order": 7,
-          "fields": [
-            {
-              "id": "label_construction_17",
-              "label": "Construction",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Bricks",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_steel",
-              "label": "Glazed section",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_not_inspected",
-          "title": "Not inspected",
-          "type": "screen",
-          "parentId": "group_e9_other_area_32",
-          "order": 7,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not applicable",
-              "type": "checkbox"
             }
           ]
         },
@@ -27454,20 +26384,6 @@
           ]
         },
         {
-          "id": "activity_outside_property_other_overloaded__overloaded__7",
-          "title": "Overloaded",
-          "type": "screen",
-          "parentId": "group_e9_other_area_32",
-          "order": 9,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "Is the structure overloaded?",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
           "id": "activity_outside_property_other_repairs_floor",
           "title": "Floor",
           "type": "screen",
@@ -27475,252 +26391,55 @@
           "order": 9,
           "fields": [
             {
-              "id": "label_defect_69",
-              "label": "Defect",
+              "id": "label_e9_r_structures",
+              "label": "Floor of",
               "type": "label"
             },
             {
-              "id": "cb_split",
-              "label": "Split",
+              "id": "e9rf_s_balcony",
+              "label": "balcony",
               "type": "checkbox"
             },
             {
-              "id": "cb_cracked",
-              "label": "Cracked",
+              "id": "e9rf_s_carport",
+              "label": "carport",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_642",
-              "label": "Other",
+              "id": "e9rf_s_roof_terrace",
+              "label": "roof terrace",
               "type": "checkbox"
             },
             {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_642",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_floor__floor",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_porch_canopy_44",
-          "order": 9,
-          "fields": [
+              "id": "e9rf_s_staircase_floor",
+              "label": "staircase floor",
+              "type": "checkbox"
+            },
             {
-              "id": "label_defect_1771578464971",
-              "label": "Defect",
+              "id": "label_e9_r_defects",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_split",
-              "label": "Split",
+              "id": "e9rf_d_split",
+              "label": "split",
               "type": "checkbox"
             },
             {
-              "id": "cb_cracked",
-              "label": "Cracked",
+              "id": "e9rf_d_cracked",
+              "label": "cracked",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_642",
+              "id": "e9rf_d_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_642",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_floor__floor__2",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_roof_terrace_45",
-          "order": 9,
-          "fields": [
-            {
-              "id": "label_defect_1771578464971",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
+              "id": "e9rf_d_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_642",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_floor__floor__3",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_balcony_46",
-          "order": 9,
-          "fields": [
-            {
-              "id": "label_defect_1771578464971",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_642",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_floor__floor__4",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_47",
-          "order": 9,
-          "fields": [
-            {
-              "id": "label_defect_1771578464971",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_642",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_floor__floor__5",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_external_stairs_48",
-          "order": 9,
-          "fields": [
-            {
-              "id": "label_defect_1771578464971",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_642",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_floor__floor__6",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_other_49",
-          "order": 9,
-          "fields": [
-            {
-              "id": "label_defect_1771578464972",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_642",
+              "conditionalOn": "e9rf_d_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -28047,83 +26766,40 @@
           "order": 10,
           "fields": [
             {
-              "id": "label_the_floors_are",
-              "label": "The floors are",
+              "id": "label_e9_floor_finish",
+              "label": "Floor formed in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Formed in concrete",
+              "id": "e90f_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e90f_block_paving",
+              "label": "block paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90f_tarmac",
+              "label": "tarmac",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90f_gravel",
+              "label": "gravel",
+              "type": "checkbox"
+            },
+            {
+              "id": "e90f_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_floors__floor",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_porch_canopy_36",
-          "order": 10,
-          "fields": [
-            {
-              "id": "label_the_floors_are_2",
-              "label": "The floors are",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Formed in concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
+              "id": "e90f_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e90f_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -28137,38 +26813,40 @@
           "order": 10,
           "fields": [
             {
-              "id": "label_the_floors_are_3",
-              "label": "The floors are",
+              "id": "label_e9_floor_finish",
+              "label": "Floor formed in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Formed in concrete",
+              "id": "e92f_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e92f_block_paving",
+              "label": "block paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "e92f_tarmac",
+              "label": "tarmac",
+              "type": "checkbox"
+            },
+            {
+              "id": "e92f_gravel",
+              "label": "gravel",
+              "type": "checkbox"
+            },
+            {
+              "id": "e92f_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
+              "id": "e92f_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e92f_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -28182,38 +26860,40 @@
           "order": 10,
           "fields": [
             {
-              "id": "label_the_floors_are_4",
-              "label": "The floors are",
+              "id": "label_e9_floor_finish",
+              "label": "Floor formed in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Formed in concrete",
+              "id": "e93f_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e93f_block_paving",
+              "label": "block paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "e93f_tarmac",
+              "label": "tarmac",
+              "type": "checkbox"
+            },
+            {
+              "id": "e93f_gravel",
+              "label": "gravel",
+              "type": "checkbox"
+            },
+            {
+              "id": "e93f_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
+              "id": "e93f_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e93f_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -28225,141 +26905,6 @@
           "type": "group",
           "parentId": "group_other_external_area_34",
           "order": 10
-        },
-        {
-          "id": "activity_outside_property_other_floors__floor__4",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_39",
-          "order": 10,
-          "fields": [
-            {
-              "id": "label_the_floors_are_5",
-              "label": "The floors are",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Formed in concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_floors__floor__5",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_external_stairs_40",
-          "order": 10,
-          "fields": [
-            {
-              "id": "label_the_floors_are_6",
-              "label": "The floors are",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Formed in concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_floors__floor__6",
-          "title": "Floor",
-          "type": "screen",
-          "parentId": "group_other_41",
-          "order": 10,
-          "fields": [
-            {
-              "id": "label_the_floors_are_7",
-              "label": "The floors are",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Formed in concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
         },
         {
           "id": "group_juliet_balcony_47",
@@ -28820,30 +27365,6 @@
           "order": 12
         },
         {
-          "id": "activity_outside_property_other_no_safety_glass__no_safety_glass__7",
-          "title": "No safety glass",
-          "type": "screen",
-          "parentId": "group_e9_other_area_32",
-          "order": 12,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "No Safety Glass Rating",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Glazing to the location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
           "id": "activity_outside_property_other_repairs_drains",
           "title": "Drains",
           "type": "screen",
@@ -28851,165 +27372,80 @@
           "order": 12,
           "fields": [
             {
-              "id": "label_defect_68",
-              "label": "Defect",
+              "id": "label_e9_r_structures",
+              "label": "Drains of",
               "type": "label"
             },
             {
-              "id": "cb_split",
-              "label": "Too small",
+              "id": "e9rd_s_balcony",
+              "label": "balcony",
               "type": "checkbox"
             },
             {
-              "id": "cb_cracked",
-              "label": "Blocked",
+              "id": "e9rd_s_carport",
+              "label": "carport",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_642",
+              "id": "e9rd_s_roof_terrace",
+              "label": "roof terrace",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rd_s_staircase",
+              "label": "staircase",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rd_s_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_442",
+              "id": "e9rd_s_other_text",
               "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_drains__drains",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_porch_canopy_44",
-          "order": 12,
-          "fields": [
+              "type": "text",
+              "conditionalOn": "e9rd_s_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
             {
-              "id": "label_defect_1771578464970",
-              "label": "Defect",
+              "id": "label_e9_r_defects",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_split",
-              "label": "Too small",
+              "id": "e9rd_d_too_small",
+              "label": "too small",
               "type": "checkbox"
             },
             {
-              "id": "cb_cracked",
-              "label": "Blocked",
+              "id": "e9rd_d_blocked",
+              "label": "blocked",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_642",
-              "label": "Poorly drained",
+              "id": "e9rd_d_poorly_drained",
+              "label": "poorly drained",
               "type": "checkbox"
             },
             {
-              "id": "et_other_442",
+              "id": "e9rd_d_damaged",
+              "label": "damaged",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rd_d_other",
               "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_drains__drains__2",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_roof_terrace_45",
-          "order": 12,
-          "fields": [
-            {
-              "id": "label_defect_1771578464970",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Too small",
               "type": "checkbox"
             },
             {
-              "id": "cb_cracked",
-              "label": "Blocked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Poorly drained",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
+              "id": "e9rd_d_other_text",
               "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_drains__drains__3",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_balcony_46",
-          "order": 12,
-          "fields": [
-            {
-              "id": "label_defect_1771578464970",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Too small",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Blocked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Poorly drained",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_drains__drains__4",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_47",
-          "order": 12,
-          "fields": [
-            {
-              "id": "label_defect_1771578464970",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Too small",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Blocked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Poorly drained",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text"
+              "type": "text",
+              "conditionalOn": "e9rd_d_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -29019,74 +27455,6 @@
           "type": "group",
           "parentId": "group_repairs_42",
           "order": 12
-        },
-        {
-          "id": "activity_outside_property_other_repairs_drains__drains__5",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_external_stairs_48",
-          "order": 12,
-          "fields": [
-            {
-              "id": "label_defect_1771578464970",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Too small",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Blocked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Poorly drained",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_drains__drains__6",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_other_49",
-          "order": 12,
-          "fields": [
-            {
-              "id": "label_defect_1771578464971",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_split",
-              "label": "Too small",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Blocked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_642",
-              "label": "Poorly drained",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_442",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
         },
         {
           "id": "activity_outside_property_rwg_open_runoffs",
@@ -29323,266 +27691,6 @@
           ]
         },
         {
-          "id": "activity_outside_property_other_handrails",
-          "title": "Handrails",
-          "type": "screen",
-          "parentId": "group_carport_35",
-          "order": 13,
-          "fields": [
-            {
-              "id": "label_type",
-              "label": "Type",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Steel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_steel",
-              "label": "Steel",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_handrails__handrails",
-          "title": "Handrails",
-          "type": "screen",
-          "parentId": "group_porch_canopy_36",
-          "order": 13,
-          "fields": [
-            {
-              "id": "label_type_18",
-              "label": "Type",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Steel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_handrails__handrails__2",
-          "title": "Handrails",
-          "type": "screen",
-          "parentId": "group_roof_terrace_37",
-          "order": 13,
-          "fields": [
-            {
-              "id": "label_type_19",
-              "label": "Type",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Steel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_handrails__handrails__3",
-          "title": "Handrails",
-          "type": "screen",
-          "parentId": "group_balcony_38",
-          "order": 13,
-          "fields": [
-            {
-              "id": "label_type_20",
-              "label": "Type",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Steel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_handrails__handrails__4",
-          "title": "Handrails",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_39",
-          "order": 13,
-          "fields": [
-            {
-              "id": "label_type_21",
-              "label": "Type",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Steel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_outside_property_other_handrails__handrails__5",
           "title": "Handrails",
           "type": "screen",
@@ -29590,93 +27698,35 @@
           "order": 13,
           "fields": [
             {
-              "id": "label_type_22",
-              "label": "Type",
+              "id": "label_e9_stair_element_materials",
+              "label": "Handrails, landing and steps formed in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e95e_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
-              "id": "cb_bricks",
-              "label": "Steel",
+              "id": "e95e_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_472",
+              "id": "e95e_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "e95e_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
+              "id": "e95e_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_472",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_handrails__handrails__6",
-          "title": "Handrails",
-          "type": "screen",
-          "parentId": "group_other_41",
-          "order": 13,
-          "fields": [
-            {
-              "id": "label_type_23",
-              "label": "Type",
-              "type": "label"
-            },
-            {
-              "id": "cb_timber",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bricks",
-              "label": "Steel",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_472",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_area",
-              "label": "Wall location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Carport",
-                "Roof terrace",
-                "Staircase",
-                "Other"
-              ],
-              "optionsSource": "out_side_doors_other_wall"
-            },
-            {
-              "id": "et_other_99",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_472",
+              "conditionalOn": "e95e_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -29988,331 +28038,34 @@
           "order": 15,
           "fields": [
             {
-              "id": "label_defect_15",
-              "label": "Defect",
+              "id": "label_e9_r_defects",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_cracked",
-              "label": "Split",
+              "id": "e9rs_d_split",
+              "label": "split",
               "type": "checkbox"
             },
             {
-              "id": "cb_damaged",
-              "label": "Cracked",
+              "id": "e9rs_d_cracked",
+              "label": "cracked",
               "type": "checkbox"
             },
             {
-              "id": "cb_eroded",
-              "label": "Partly rotted",
+              "id": "e9rs_d_partly_rotted",
+              "label": "partly rotted",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_1046",
-              "label": "Other",
+              "id": "e9rs_d_rusted",
+              "label": "rusted",
               "type": "checkbox"
             },
             {
-              "id": "actv_location",
-              "label": "Steps/Landing",
-              "type": "dropdown",
-              "options": [
-                "Steps",
-                "Landing"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_steps_landing__steps_landing",
-          "title": "Steps landing",
-          "type": "screen",
-          "parentId": "group_porch_canopy_44",
-          "order": 15,
-          "fields": [
-            {
-              "id": "label_defect_1771578464959",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Split",
+              "id": "e9rs_d_defective",
+              "label": "defective",
               "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Partly rotted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Rusted",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Steps/Landing",
-              "type": "dropdown",
-              "options": [
-                "Steps",
-                "Landing"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_steps_landing__steps_landing__2",
-          "title": "Steps landing",
-          "type": "screen",
-          "parentId": "group_roof_terrace_45",
-          "order": 15,
-          "fields": [
-            {
-              "id": "label_defect_1771578464959",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Partly rotted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Rusted",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Steps/Landing",
-              "type": "dropdown",
-              "options": [
-                "Steps",
-                "Landing"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_steps_landing__steps_landing__3",
-          "title": "Steps landing",
-          "type": "screen",
-          "parentId": "group_balcony_46",
-          "order": 15,
-          "fields": [
-            {
-              "id": "label_defect_1771578464960",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Partly rotted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Rusted",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Steps/Landing",
-              "type": "dropdown",
-              "options": [
-                "Steps",
-                "Landing"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_steps_landing__steps_landing__4",
-          "title": "Steps landing",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_47",
-          "order": 15,
-          "fields": [
-            {
-              "id": "label_defect_1771578464960",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Partly rotted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Rusted",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Steps/Landing",
-              "type": "dropdown",
-              "options": [
-                "Steps",
-                "Landing"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_steps_landing__steps_landing__5",
-          "title": "Steps landing",
-          "type": "screen",
-          "parentId": "group_external_stairs_48",
-          "order": 15,
-          "fields": [
-            {
-              "id": "label_defect_1771578464960",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Partly rotted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Rusted",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Steps/Landing",
-              "type": "dropdown",
-              "options": [
-                "Steps",
-                "Landing"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_steps_landing__steps_landing__6",
-          "title": "Steps landing",
-          "type": "screen",
-          "parentId": "group_other_49",
-          "order": 15,
-          "fields": [
-            {
-              "id": "label_defect_1771578464960",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Split",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Partly rotted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1046",
-              "label": "Rusted",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_location",
-              "label": "Steps/Landing",
-              "type": "dropdown",
-              "options": [
-                "Steps",
-                "Landing"
-              ]
-            },
-            {
-              "id": "et_other_402",
-              "label": "Other",
-              "type": "text"
             }
           ]
         },
@@ -30392,130 +28145,6 @@
           "order": 16
         },
         {
-          "id": "activity_outside_property_other_drains",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_carport_35",
-          "order": 16,
-          "fields": [
-            {
-              "id": "actv_drains_location",
-              "label": "Drains Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            },
-            {
-              "id": "label_laid_with",
-              "label": "Laid with",
-              "type": "label"
-            },
-            {
-              "id": "cb_lead",
-              "label": "Lead",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mortar",
-              "label": "Mortar",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bitumen",
-              "label": "Bitumen",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_782",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_171",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_782",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Other",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_drains__drains",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_porch_canopy_36",
-          "order": 16,
-          "fields": [
-            {
-              "id": "label_laid_with_2",
-              "label": "Laid with",
-              "type": "label"
-            },
-            {
-              "id": "cb_lead",
-              "label": "Lead",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mortar",
-              "label": "Mortar",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bitumen",
-              "label": "Bitumen",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_782",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_drains_location",
-              "label": "Drains Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_171",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_782",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
           "id": "activity_outside_property_other_drains__drains__2",
           "title": "Drains",
           "type": "screen",
@@ -30523,57 +28152,62 @@
           "order": 16,
           "fields": [
             {
-              "id": "label_laid_with_3",
-              "label": "Laid with",
+              "id": "label_e9_drain_materials",
+              "label": "Drains laid with",
               "type": "label"
             },
             {
-              "id": "cb_lead",
-              "label": "Lead",
+              "id": "e92d_bitumen",
+              "label": "bitumen",
               "type": "checkbox"
             },
             {
-              "id": "cb_mortar",
-              "label": "Mortar",
+              "id": "e92d_felt",
+              "label": "felt",
               "type": "checkbox"
             },
             {
-              "id": "cb_bitumen",
-              "label": "Bitumen",
+              "id": "e92d_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_782",
+              "id": "e92d_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_drains_location",
-              "label": "Drains Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_171",
+              "id": "e92d_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_782",
+              "conditionalOn": "e92d_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
+              "id": "label_e9_drain_state",
+              "label": "Drains appear",
+              "type": "label"
+            },
+            {
+              "id": "e92s_well_drained",
+              "label": "well drained",
+              "type": "checkbox"
+            },
+            {
+              "id": "e92s_poorly_drained",
+              "label": "poorly drained",
+              "type": "checkbox"
+            },
+            {
+              "id": "e92s_unobstructed",
+              "label": "unobstructed",
+              "type": "checkbox"
+            },
+            {
+              "id": "e92s_obstructed",
+              "label": "obstructed",
+              "type": "checkbox"
             }
           ]
         },
@@ -30585,243 +28219,62 @@
           "order": 16,
           "fields": [
             {
-              "id": "label_laid_with_4",
-              "label": "Laid with",
+              "id": "label_e9_drain_materials",
+              "label": "Drains laid with",
               "type": "label"
             },
             {
-              "id": "cb_lead",
-              "label": "Lead",
+              "id": "e93d_bitumen",
+              "label": "bitumen",
               "type": "checkbox"
             },
             {
-              "id": "cb_mortar",
-              "label": "Mortar",
+              "id": "e93d_felt",
+              "label": "felt",
               "type": "checkbox"
             },
             {
-              "id": "cb_bitumen",
-              "label": "Bitumen",
+              "id": "e93d_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_782",
+              "id": "e93d_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "actv_drains_location",
-              "label": "Drains Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_171",
+              "id": "e93d_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_782",
+              "conditionalOn": "e93d_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_drains__drains__4",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_39",
-          "order": 16,
-          "fields": [
-            {
-              "id": "label_laid_with_5",
-              "label": "Laid with",
+              "id": "label_e9_drain_state",
+              "label": "Drains appear",
               "type": "label"
             },
             {
-              "id": "cb_lead",
-              "label": "Lead",
+              "id": "e93s_well_drained",
+              "label": "well drained",
               "type": "checkbox"
             },
             {
-              "id": "cb_mortar",
-              "label": "Mortar",
+              "id": "e93s_poorly_drained",
+              "label": "poorly drained",
               "type": "checkbox"
             },
             {
-              "id": "cb_bitumen",
-              "label": "Bitumen",
+              "id": "e93s_unobstructed",
+              "label": "unobstructed",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_782",
-              "label": "Other",
+              "id": "e93s_obstructed",
+              "label": "obstructed",
               "type": "checkbox"
-            },
-            {
-              "id": "actv_drains_location",
-              "label": "Drains Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_171",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_782",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_drains__drains__5",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_external_stairs_40",
-          "order": 16,
-          "fields": [
-            {
-              "id": "label_laid_with_6",
-              "label": "Laid with",
-              "type": "label"
-            },
-            {
-              "id": "cb_lead",
-              "label": "Lead",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mortar",
-              "label": "Mortar",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bitumen",
-              "label": "Bitumen",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_782",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_drains_location",
-              "label": "Drains Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_171",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_782",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_drains__drains__6",
-          "title": "Drains",
-          "type": "screen",
-          "parentId": "group_other_41",
-          "order": 16,
-          "fields": [
-            {
-              "id": "label_laid_with_7",
-              "label": "Laid with",
-              "type": "label"
-            },
-            {
-              "id": "cb_lead",
-              "label": "Lead",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mortar",
-              "label": "Mortar",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bitumen",
-              "label": "Bitumen",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_782",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_drains_location",
-              "label": "Drains Location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            },
-            {
-              "id": "et_other_171",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_782",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
             }
           ]
         },
@@ -30996,357 +28449,35 @@
           "order": 18,
           "fields": [
             {
-              "id": "label_location_18",
-              "label": "Location",
+              "id": "label_e9_r_defects",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_stairway",
-              "label": "Stairway",
+              "id": "e9rn_d_peeling",
+              "label": "peeling",
               "type": "checkbox"
             },
             {
-              "id": "cb_fire_escape",
-              "label": "Fire escape",
+              "id": "e9rn_d_flaking",
+              "label": "flaking",
               "type": "checkbox"
             },
             {
-              "id": "label_defect_13",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_perished",
-              "label": "Perished",
+              "id": "e9rn_d_damaged",
+              "label": "damaged",
               "type": "checkbox"
             },
             {
-              "id": "cb_flaking",
-              "label": "Flaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_344",
+              "id": "e9rn_d_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_639",
+              "id": "e9rn_d_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_344",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_decorations__perished_decorations",
-          "title": "Perished Decorations",
-          "type": "screen",
-          "parentId": "group_porch_canopy_44",
-          "order": 18,
-          "fields": [
-            {
-              "id": "label_location_78",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_stairway",
-              "label": "Stairway",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fire_escape",
-              "label": "Fire escape",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_defect_99",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_perished",
-              "label": "Perished",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_flaking",
-              "label": "Flaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_344",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_639",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_344",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_decorations__perished_decorations__2",
-          "title": "Perished Decorations",
-          "type": "screen",
-          "parentId": "group_roof_terrace_45",
-          "order": 18,
-          "fields": [
-            {
-              "id": "label_location_79",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_stairway",
-              "label": "Stairway",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fire_escape",
-              "label": "Fire escape",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_defect_1771578464958",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_perished",
-              "label": "Perished",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_flaking",
-              "label": "Flaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_344",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_639",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_344",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_decorations__perished_decorations__3",
-          "title": "Perished Decorations",
-          "type": "screen",
-          "parentId": "group_balcony_46",
-          "order": 18,
-          "fields": [
-            {
-              "id": "label_location_80",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_stairway",
-              "label": "Stairway",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fire_escape",
-              "label": "Fire escape",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_defect_1771578464958",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_perished",
-              "label": "Perished",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_flaking",
-              "label": "Flaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_344",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_639",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_344",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_decorations__perished_decorations__4",
-          "title": "Perished Decorations",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_47",
-          "order": 18,
-          "fields": [
-            {
-              "id": "label_location_81",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_stairway",
-              "label": "Stairway",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fire_escape",
-              "label": "Fire escape",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_defect_1771578464959",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_perished",
-              "label": "Perished",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_flaking",
-              "label": "Flaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_344",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_639",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_344",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_decorations__perished_decorations__5",
-          "title": "Perished Decorations",
-          "type": "screen",
-          "parentId": "group_external_stairs_48",
-          "order": 18,
-          "fields": [
-            {
-              "id": "label_location_82",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_stairway",
-              "label": "Stairway",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fire_escape",
-              "label": "Fire escape",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_defect_1771578464959",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_perished",
-              "label": "Perished",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_flaking",
-              "label": "Flaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_344",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_639",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_344",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_decorations__perished_decorations__6",
-          "title": "Perished Decorations",
-          "type": "screen",
-          "parentId": "group_other_49",
-          "order": 18,
-          "fields": [
-            {
-              "id": "label_location_83",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_stairway",
-              "label": "Stairway",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fire_escape",
-              "label": "Fire escape",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_defect_1771578464959",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_perished",
-              "label": "Perished",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_flaking",
-              "label": "Flaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_344",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_639",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_344",
+              "conditionalOn": "e9rn_d_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -31376,104 +28507,6 @@
             {
               "id": "cb_not_inspected",
               "label": "Unstable structure",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_overloaded",
-          "title": "Overloaded",
-          "type": "screen",
-          "parentId": "group_carport_35",
-          "order": 19,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "Is the structure overloaded?",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_overloaded__overloaded",
-          "title": "Overloaded",
-          "type": "screen",
-          "parentId": "group_porch_canopy_36",
-          "order": 19,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "Is the structure overloaded?",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_overloaded__overloaded__2",
-          "title": "Overloaded",
-          "type": "screen",
-          "parentId": "group_roof_terrace_37",
-          "order": 19,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "Is the structure overloaded?",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_overloaded__overloaded__3",
-          "title": "Overloaded",
-          "type": "screen",
-          "parentId": "group_balcony_38",
-          "order": 19,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "Is the structure overloaded?",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_overloaded__overloaded__4",
-          "title": "Overloaded",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_39",
-          "order": 19,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "Is the structure overloaded?",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_overloaded__overloaded__5",
-          "title": "Overloaded",
-          "type": "screen",
-          "parentId": "group_external_stairs_40",
-          "order": 19,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "Is the structure overloaded?",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_overloaded__overloaded__6",
-          "title": "Overloaded",
-          "type": "screen",
-          "parentId": "group_other_41",
-          "order": 19,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "Is the structure overloaded?",
               "type": "checkbox"
             }
           ]
@@ -31712,471 +28745,95 @@
           "order": 21,
           "fields": [
             {
-              "id": "label_handrail_defect",
-              "label": "Handrail defect",
+              "id": "label_e9_r_structures",
+              "label": "Handrail(s) of",
               "type": "label"
             },
             {
-              "id": "cb_not_strong_enough",
-              "label": "Not strong enough",
+              "id": "e9rh_s_balcony",
+              "label": "balcony",
               "type": "checkbox"
             },
             {
-              "id": "cb_inadequately_designed",
-              "label": "Inadequately designed",
+              "id": "e9rh_s_juliet_balcony",
+              "label": "Juliet balcony",
               "type": "checkbox"
             },
             {
-              "id": "label_handrail_to_balcony",
-              "label": "Handrail to balcony",
+              "id": "e9rh_s_terrace",
+              "label": "terrace",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rh_s_stairs",
+              "label": "stairs",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rh_s_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rh_s_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e9rh_s_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_e9_r_defects",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_not_strong_enough_51",
-              "label": "Not strong enough",
+              "id": "e9rh_d_inadequate",
+              "label": "inadequate",
               "type": "checkbox"
             },
             {
-              "id": "cb_partly_rotten_65",
-              "label": "Partly rotten",
+              "id": "e9rh_d_poorly_secured",
+              "label": "poorly secured",
               "type": "checkbox"
             },
             {
-              "id": "cb_inadequately_designed_43",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_hand_rails__hand_rails",
-          "title": "Hand rails",
-          "type": "screen",
-          "parentId": "group_porch_canopy_44",
-          "order": 21,
-          "fields": [
-            {
-              "id": "label_handrail_defect_2",
-              "label": "Handrail defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough",
-              "label": "Not strong enough",
+              "id": "e9rh_d_incomplete",
+              "label": "incomplete",
               "type": "checkbox"
             },
             {
-              "id": "cb_inadequately_designed",
-              "label": "Inadequately designed",
+              "id": "e9rh_d_loose",
+              "label": "loose",
               "type": "checkbox"
             },
             {
-              "id": "label_handrail_to_balcony_2",
-              "label": "Handrail to balcony",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough_51",
-              "label": "Not strong enough",
+              "id": "e9rh_d_corroded",
+              "label": "corroded",
               "type": "checkbox"
             },
             {
-              "id": "cb_partly_rotten_65",
-              "label": "Partly rotten",
+              "id": "e9rh_d_rotten",
+              "label": "rotten",
               "type": "checkbox"
             },
             {
-              "id": "cb_inadequately_designed_43",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_hand_rails__hand_rails__2",
-          "title": "Hand rails",
-          "type": "screen",
-          "parentId": "group_roof_terrace_45",
-          "order": 21,
-          "fields": [
-            {
-              "id": "label_handrail_defect_3",
-              "label": "Handrail defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough",
-              "label": "Not strong enough",
+              "id": "e9rh_d_damaged",
+              "label": "damaged",
               "type": "checkbox"
             },
             {
-              "id": "cb_inadequately_designed",
-              "label": "Inadequately designed",
+              "id": "e9rh_d_other",
+              "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "label_handrail_to_balcony_3",
-              "label": "Handrail to balcony",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough_51",
-              "label": "Not strong enough",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_partly_rotten_65",
-              "label": "Partly rotten",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_inadequately_designed_43",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_hand_rails__hand_rails__3",
-          "title": "Hand rails",
-          "type": "screen",
-          "parentId": "group_balcony_46",
-          "order": 21,
-          "fields": [
-            {
-              "id": "label_handrail_defect_4",
-              "label": "Handrail defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough",
-              "label": "Not strong enough",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_inadequately_designed",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_handrail_to_balcony_4",
-              "label": "Handrail to balcony",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough_51",
-              "label": "Not strong enough",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_partly_rotten_65",
-              "label": "Partly rotten",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_inadequately_designed_43",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_hand_rails__hand_rails__4",
-          "title": "Hand rails",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_47",
-          "order": 21,
-          "fields": [
-            {
-              "id": "label_handrail_defect_5",
-              "label": "Handrail defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough",
-              "label": "Not strong enough",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_inadequately_designed",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_handrail_to_balcony_5",
-              "label": "Handrail to balcony",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough_51",
-              "label": "Not strong enough",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_partly_rotten_65",
-              "label": "Partly rotten",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_inadequately_designed_43",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_hand_rails__hand_rails__5",
-          "title": "Hand rails",
-          "type": "screen",
-          "parentId": "group_external_stairs_48",
-          "order": 21,
-          "fields": [
-            {
-              "id": "label_handrail_defect_6",
-              "label": "Handrail defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough",
-              "label": "Not strong enough",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_inadequately_designed",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_handrail_to_balcony_6",
-              "label": "Handrail to balcony",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough_51",
-              "label": "Not strong enough",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_partly_rotten_65",
-              "label": "Partly rotten",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_inadequately_designed_43",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_repairs_hand_rails__hand_rails__6",
-          "title": "Hand rails",
-          "type": "screen",
-          "parentId": "group_other_49",
-          "order": 21,
-          "fields": [
-            {
-              "id": "label_handrail_defect_7",
-              "label": "Handrail defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough",
-              "label": "Not strong enough",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_inadequately_designed",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_handrail_to_balcony_7",
-              "label": "Handrail to balcony",
-              "type": "label"
-            },
-            {
-              "id": "cb_not_strong_enough_51",
-              "label": "Not strong enough",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_partly_rotten_65",
-              "label": "Partly rotten",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_inadequately_designed_43",
-              "label": "Inadequately designed",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_no_safety_glass",
-          "title": "No safety glass",
-          "type": "screen",
-          "parentId": "group_carport_35",
-          "order": 22,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "No Safety Glass Rating",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Glazing to the location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_no_safety_glass__no_safety_glass",
-          "title": "No safety glass",
-          "type": "screen",
-          "parentId": "group_porch_canopy_36",
-          "order": 22,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "No Safety Glass Rating",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Glazing to the location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_no_safety_glass__no_safety_glass__2",
-          "title": "No safety glass",
-          "type": "screen",
-          "parentId": "group_roof_terrace_37",
-          "order": 22,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "No Safety Glass Rating",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Glazing to the location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_no_safety_glass__no_safety_glass__3",
-          "title": "No safety glass",
-          "type": "screen",
-          "parentId": "group_balcony_38",
-          "order": 22,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "No Safety Glass Rating",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Glazing to the location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_no_safety_glass__no_safety_glass__4",
-          "title": "No safety glass",
-          "type": "screen",
-          "parentId": "group_juliet_balcony_39",
-          "order": 22,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "No Safety Glass Rating",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Glazing to the location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_no_safety_glass__no_safety_glass__5",
-          "title": "No safety glass",
-          "type": "screen",
-          "parentId": "group_external_stairs_40",
-          "order": 22,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "No Safety Glass Rating",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Glazing to the location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_other_no_safety_glass__no_safety_glass__6",
-          "title": "No safety glass",
-          "type": "screen",
-          "parentId": "group_other_41",
-          "order": 22,
-          "fields": [
-            {
-              "id": "is_overloaded_structure",
-              "label": "No Safety Glass Rating",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Glazing to the location",
-              "type": "dropdown",
-              "options": [
-                "Balcony",
-                "Roof terrace",
-                "Other"
-              ]
+              "id": "e9rh_d_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e9rh_d_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -32192,9 +28849,11 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -32211,9 +28870,11 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -32230,9 +28891,11 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -32249,9 +28912,11 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -32268,9 +28933,11 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -32287,9 +28954,11 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -32306,10 +28975,110 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_other_retaining_walls",
+          "title": "Retaining walls",
+          "type": "screen",
+          "parentId": "group_other_41",
+          "order": 30,
+          "fields": [
+            {
+              "id": "label_e9_rw_materials",
+              "label": "Retaining walls",
+              "type": "label"
+            },
+            {
+              "id": "e9rw_brick",
+              "label": "brick",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rw_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rw_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rw_gabion",
+              "label": "gabion",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rw_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "actv_weather_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_other_retaining_walls_defects",
+          "title": "Retaining walls defects",
+          "type": "screen",
+          "parentId": "group_other_41",
+          "order": 31,
+          "fields": [
+            {
+              "id": "label_e9_rw_defects",
+              "label": "Evidence of",
+              "type": "label"
+            },
+            {
+              "id": "e9rd_movement",
+              "label": "movement",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rd_bulging",
+              "label": "bulging",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rd_instability",
+              "label": "instability",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rd_damage",
+              "label": "damage",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rd_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e9rd_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e9rd_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -32716,6 +29485,11 @@
                 "2",
                 "3"
               ]
+            },
+            {
+              "id": "cb_general_maintenance",
+              "label": "General maintenance",
+              "type": "checkbox"
             }
           ],
           "inlinePosition": "header"

@@ -698,9 +698,9 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_other_joinery_finishes_not_inspected':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_communal_area':
-        return _otherCommunalArea(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_not_inspected':
-        return _otherNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_issues_regulation':
         return _issuesRegulation(answers);
       case 'activity_issues_glazed_sections':
@@ -2196,486 +2196,6 @@ class InspectionPhraseEngine {
     if (template.isEmpty) return const [];
     return _split(_normalize(
         template.replaceAll('{OJAF_CONDITION_RATING}', rating)));
-  }
-
-  List<String> _otherCommunalArea(Map<String, String> answers) {
-    final status = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
-    );
-    if (status.isEmpty) return const [];
-    final phrases = <String>[];
-    final isInspected = status == 'inspected' ||
-        (status.contains('inspected') && !status.contains('not'));
-    if (isInspected) {
-      final items = _labelsFor(
-        [
-          'cb_automatic_gates',
-          'cb_cctv',
-          'cb_communal_door',
-          'cb_entry_system',
-          'cb_drive_access',
-          'cb_car_park',
-          'cb_walk_paths',
-          'cb_gardens',
-          'cb_grounds',
-          'cb_play_ground',
-        ],
-        answers,
-        {
-          'cb_automatic_gates': 'Automatic gates',
-          'cb_cctv': 'CCTV',
-          'cb_communal_door': 'Communal door',
-          'cb_entry_system': 'Entry system',
-          'cb_drive_access': 'Drive access',
-          'cb_car_park': 'Car park',
-          'cb_walk_paths': 'Walk paths',
-          'cb_gardens': 'Gardens',
-          'cb_grounds': 'Grounds',
-          'cb_play_ground': 'Play ground',
-        },
-      );
-      _addOtherText(answers, 'cb_other_1034', ['et_other_747'], items);
-      if (items.isNotEmpty) {
-        var template = _sub('{E_OTHER}', '{COMMUNAL_AREA_INSPECTED}');
-        template = template.replaceAll(
-            '{OTHER_COMMUNAL_AREA_EXTERNAL}', _toWords(items).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-
-      final condition = _cleanLower(answers['actv_condition']);
-      if (condition.isNotEmpty) {
-        var template = _sub('{E_OTHER}', '{COMMUNAL_AREA_CONDITION}');
-        template =
-            template.replaceAll('{OTHER_COMMUNAL_AREA_CONDITION}', condition);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    } else {
-      final reasons = _labelsFor(
-        ['cb_the_area_is_not_accessible', 'cb_of_limited_access'],
-        answers,
-        {
-          'cb_the_area_is_not_accessible': 'The area is not accessible',
-          'cb_of_limited_access': 'Of limited access',
-        },
-      );
-      _addOtherText(answers, 'cb_other_251', ['et_other_928'], reasons);
-      if (reasons.isNotEmpty) {
-        var template = _sub('{E_OTHER}', '{COMMUNAL_AREA_NOT_INSPECTED}');
-        template = template.replaceAll(
-            '{OTHER_COMMUNAL_AREA_BECAUSE}', _toWords(reasons).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _otherNotInspected(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    return _split(_normalize(_sub('{E_OTHER}', '{OTHER_NOT_APPLICABLE}')));
-  }
-
-  String _otherExternalAreaFromScreen(String screenId) {
-    if (screenId.contains('__6')) return 'other';
-    if (screenId.contains('__5')) return 'external stairs';
-    if (screenId.contains('__4')) return 'juliet balcony';
-    if (screenId.contains('__3')) return 'balcony';
-    if (screenId.contains('__2')) return 'roof terrace';
-    if (screenId.contains('__construction') ||
-        screenId.contains('__roof') ||
-        screenId.contains('__floor') ||
-        screenId.contains('__drains') ||
-        screenId.contains('__condition')) {
-      return 'porch canopy';
-    }
-    return 'carport';
-  }
-
-  String _otherRepairAreaFromScreen(String screenId) {
-    if (screenId.contains('__6')) return 'other';
-    if (screenId.contains('__5')) return 'external stairs';
-    if (screenId.contains('__4')) return 'juliet balcony';
-    if (screenId.contains('__3')) return 'balcony';
-    if (screenId.contains('__2')) return 'roof terrace';
-    if (screenId.contains('__')) return 'porch canopy';
-    return 'carport';
-  }
-
-  List<String> _otherConstruction(String screenId, Map<String, String> answers,
-      String areaKey, String otherTextKey) {
-    final answerArea = _cleanLower(answers[areaKey]);
-    final area = answerArea.isNotEmpty
-        ? answerArea
-        : _otherExternalAreaFromScreen(screenId);
-    if (area.isEmpty) return const [];
-    final isWallConstruction =
-        screenId.startsWith('activity_outside_property_other_other_wall');
-    final materials = _labelsFor(
-      isWallConstruction
-          ? [
-              'cb_timber',
-              'cb_bricks',
-              'cb_concrete',
-              'cb_steel',
-              'cb_other_472'
-            ]
-          : ['cb_timber', 'cb_concrete', 'cb_steel', 'cb_other_472'],
-      answers,
-      isWallConstruction
-          ? {
-              // Legacy XML field IDs are reused with different labels on wall screens.
-              'cb_timber': 'Bricks',
-              'cb_bricks': 'Timber',
-              'cb_concrete': 'Concrete',
-              'cb_steel': 'Glazed section',
-              'cb_other_472': 'Other',
-            }
-          : {
-              'cb_timber': 'Timber',
-              'cb_concrete': 'Concrete',
-              'cb_steel': 'Steel',
-              'cb_other_472': 'Other',
-            },
-    );
-    _addOther(answers, 'cb_other_472', otherTextKey, materials);
-    if (materials.isEmpty) return const [];
-    var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_CONSTRUCTION}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
-        .replaceAll('{CONSTRUCTION}', _toWords(materials).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherRoof(String screenId, Map<String, String> answers) {
-    final answerArea = _cleanLower(answers['actv_roof_location']);
-    final area = answerArea.isNotEmpty
-        ? answerArea
-        : _otherExternalAreaFromScreen(screenId);
-    final roofType = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_roof_type', 'llMainContainer']),
-    );
-    final covered = _cleanLower(answers['actv_covered_in']);
-    if (area.isEmpty || roofType.isEmpty || covered.isEmpty) return const [];
-    var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_ROOF}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
-        .replaceAll('{ROOF_TYPE}', roofType)
-        .replaceAll('{ROOF_COVERED_IN}', covered);
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherFloor(String screenId, Map<String, String> answers) {
-    final answerArea = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_area', 'llMainContainer']),
-    );
-    final area = answerArea.isNotEmpty
-        ? answerArea
-        : _otherExternalAreaFromScreen(screenId);
-    if (area.isEmpty) return const [];
-    final materials = _labelsFor(
-      ['cb_timber', 'cb_other_472'],
-      answers,
-      {
-        'cb_timber': 'Concrete',
-        'cb_other_472': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_472', 'et_other_99', materials);
-    if (materials.isEmpty) return const [];
-    var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_FLOOR}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
-        .replaceAll('{FLOORS}', _toWords(materials).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherDrains(String screenId, Map<String, String> answers) {
-    final answerArea = _cleanLower(answers['actv_drains_location']);
-    final area = answerArea.isNotEmpty
-        ? answerArea
-        : _otherExternalAreaFromScreen(screenId);
-    if (area.isEmpty) return const [];
-    final materials = _labelsFor(
-      ['cb_lead', 'cb_mortar', 'cb_bitumen', 'cb_other_782'],
-      answers,
-      {
-        'cb_lead': 'Lead',
-        'cb_mortar': 'Mortar',
-        'cb_bitumen': 'Bitumen',
-        'cb_other_782': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_782', 'et_other_171', materials);
-    if (materials.isEmpty) return const [];
-    var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_DRAINS}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
-        .replaceAll('{DRAINS_LAID_WITH}', _toWords(materials).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherHandrails(String screenId, Map<String, String> answers) {
-    final answerArea = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_area', 'llMainContainer']),
-    );
-    final area = answerArea.isNotEmpty
-        ? answerArea
-        : _otherExternalAreaFromScreen(screenId);
-    if (area.isEmpty) return const [];
-    final materials = _labelsFor(
-      ['cb_timber', 'cb_bricks', 'cb_other_472'],
-      answers,
-      {
-        'cb_timber': 'Timber',
-        'cb_bricks': 'Steel',
-        'cb_other_472': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_472', 'et_other_99', materials);
-    final uniqueMaterials = _dedupeInsensitive(materials);
-    if (uniqueMaterials.isEmpty) return const [];
-    var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_HANDRAILS}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area).replaceAll(
-        '{HANDRAILS_TYPE}', _toWords(uniqueMaterials).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherOverloaded(String screenId, Map<String, String> answers) {
-    if (!_isChecked(answers['is_overloaded_structure'])) return const [];
-    final area = _otherExternalAreaFromScreen(screenId);
-    if (area.isEmpty) return const [];
-    var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_OVERLOADED}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area);
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherNoSafetyGlass(
-      String screenId, Map<String, String> answers) {
-    if (!_isChecked(answers['is_overloaded_structure'])) return const [];
-    final answerArea = _cleanLower(answers['actv_condition']);
-    final area = answerArea.isNotEmpty
-        ? answerArea
-        : _otherExternalAreaFromScreen(screenId);
-    var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_NO_SAFETY_GLASS}');
-    if (template.isEmpty) return const [];
-    if (area.isEmpty) return const [];
-    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area);
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherCondition(Map<String, String> answers) {
-    final condition = _cleanLower(
-      _firstNonEmpty(
-        answers,
-        const ['actv_weather_condition', 'llMainContainer'],
-      ),
-    );
-    if (condition.isEmpty) return const [];
-    var template = _sub('{OTHER_EXTERNAL_AREA}', '{OTHER_CONDITION}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{OTHER_CONDITION}', condition);
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherRepairWall(String screenId, Map<String, String> answers) {
-    final answerArea = _cleanLower(answers['actv_location']);
-    final area = answerArea.isNotEmpty
-        ? answerArea
-        : _otherRepairAreaFromScreen(screenId);
-    final defects = _labelsFor(
-      ['cb_cracked', 'cb_damaged', 'cb_eroded', 'cb_other_1046'],
-      answers,
-      {
-        'cb_cracked': 'Cracked',
-        'cb_damaged': 'Damaged',
-        'cb_eroded': 'Eroded',
-        'cb_other_1046': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_1046', 'et_other_402', defects);
-    if (defects.isEmpty) return const [];
-    var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_WALL}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
-        .replaceAll('{WALL_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherRepairRoof(String screenId, Map<String, String> answers) {
-    final area = _otherRepairAreaFromScreen(screenId);
-    if (area.isEmpty) return const [];
-    final defects = _labelsFor(
-      [
-        'cb_has_missing_tiles',
-        'cb_has_slipped_tiles',
-        'cb_is_in_disrepair',
-        'cb_is_leaking',
-        'cb_is_dilapidated',
-        'cb_has_damaged_flashing',
-        'cb_is_poorly_secured',
-      ],
-      answers,
-      {
-        'cb_has_missing_tiles': 'missing tiles',
-        'cb_has_slipped_tiles': 'slipped tiles',
-        'cb_is_in_disrepair': 'in disrepair',
-        'cb_is_leaking': 'leaking',
-        'cb_is_dilapidated': 'dilapidated',
-        'cb_has_damaged_flashing': 'damaged flashing',
-        'cb_is_poorly_secured': 'poorly secured',
-      },
-    );
-    if (defects.isEmpty) return const [];
-    var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_ROOF}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area).replaceAll(
-        '{OTHER_REPAIR_ROOF_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherRepairFloor(String screenId, Map<String, String> answers) {
-    final area = _otherRepairAreaFromScreen(screenId);
-    if (area.isEmpty) return const [];
-    final defects = _labelsFor(
-      ['cb_split', 'cb_cracked', 'cb_other_642'],
-      answers,
-      {
-        'cb_split': 'Split',
-        'cb_cracked': 'Cracked',
-        'cb_other_642': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_642', 'et_other_442', defects);
-    if (defects.isEmpty) return const [];
-    var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_FLOOR}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
-        .replaceAll('{FLOOR_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherRepairDrains(
-      String screenId, Map<String, String> answers) {
-    final area = _otherRepairAreaFromScreen(screenId);
-    if (area.isEmpty) return const [];
-    final defects = _labelsFor(
-      ['cb_split', 'cb_cracked'],
-      answers,
-      {
-        'cb_split': 'Too small',
-        'cb_cracked': 'Blocked',
-      },
-    );
-    if (_isChecked(answers['cb_other_642'])) {
-      final other = (answers['et_other_442'] ?? '').trim();
-      if (other.isNotEmpty) {
-        defects.add(other);
-      } else {
-        defects.add('Poorly drained');
-      }
-    }
-    if (defects.isEmpty) return const [];
-    var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_DRAINS}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OTHER_EXTERNAL_AREA}', area)
-        .replaceAll('{DRAINS_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherRepairHandrails(
-      String screenId, Map<String, String> answers) {
-    final area = _otherRepairAreaFromScreen(screenId);
-    if (area.isEmpty) return const [];
-    final defects = _labelsFor(
-      [
-        'cb_partly_rotten_65',
-        'cb_not_strong_enough_51',
-        'cb_inadequately_designed_43',
-      ],
-      answers,
-      {
-        'cb_partly_rotten_65': 'Partly rotten',
-        'cb_not_strong_enough_51': 'Not strong enough',
-        'cb_inadequately_designed_43': 'Inadequately designed',
-      },
-    );
-    final uniqueDefects = _dedupeInsensitive(defects);
-    if (uniqueDefects.isEmpty) return const [];
-    var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_HANDRAILS}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{OTHER_EXTERNAL_AREA}', area).replaceAll(
-        '{HANDRAILS_DEFECT}', _toWords(uniqueDefects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherRepairStepsLanding(
-      String screenId, Map<String, String> answers) {
-    final location = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_location', 'llMainContainer']),
-    );
-    final defects = _labelsFor(
-      ['cb_cracked', 'cb_damaged', 'cb_eroded'],
-      answers,
-      {
-        'cb_cracked': 'Split',
-        'cb_damaged': 'Cracked',
-        'cb_eroded': 'Partly rotted',
-      },
-    );
-    if (_isChecked(answers['cb_other_1046'])) {
-      final other = (answers['et_other_402'] ?? '').trim();
-      if (other.isNotEmpty) {
-        defects.add(other);
-      } else {
-        defects.add('Rusted');
-      }
-    }
-    if (location.isEmpty || defects.isEmpty) return const [];
-    var template = _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_STEPS_LANDING}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{STEPS_LANDING}', location)
-        .replaceAll('{STEPS_LANDING_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherRepairDecorations(Map<String, String> answers) {
-    final locations = _labelsFor(
-      ['cb_stairway', 'cb_fire_escape'],
-      answers,
-      {
-        'cb_stairway': 'Stairway',
-        'cb_fire_escape': 'Fire escape',
-      },
-    );
-    final defects = _labelsFor(
-      ['cb_perished', 'cb_flaking', 'cb_other_344'],
-      answers,
-      {
-        'cb_perished': 'Perished',
-        'cb_flaking': 'Flaking',
-        'cb_other_344': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_344', 'et_other_639', defects);
-    if (locations.isEmpty || defects.isEmpty) return const [];
-    var template =
-        _sub('{OTHER_REPAIR}', '{OTHER_REPAIR_PERISHED_DECORATIONS}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{PERISHED_DECORATIONS_LOCATION}',
-            _toWords(locations).toLowerCase())
-        .replaceAll(
-            '{PERISHED_DECORATIONS_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
   }
 
   List<String> _groundsLimitations(Map<String, String> answers) {
@@ -11718,57 +11238,57 @@ class InspectionPhraseEngine {
   List<String>? _matchDynamicSectionE(
       String screenId, Map<String, String> answers) {
     if (screenId.startsWith('activity_outside_property_other_other_external')) {
-      return _otherConstruction(screenId, answers, 'actv_area', 'et_other_99');
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_other_wall')) {
-      return _otherConstruction(screenId, answers, 'actv_area', 'et_other_99');
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_other_roof')) {
-      return _otherRoof(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_floors')) {
-      return _otherFloor(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_drains')) {
-      return _otherDrains(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_handrails')) {
-      return _otherHandrails(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_overloaded')) {
-      return _otherOverloaded(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId
         .startsWith('activity_outside_property_other_no_safety_glass')) {
-      return _otherNoSafetyGlass(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId
         .startsWith('activity_out_side_other_external_area_condition')) {
-      return _otherCondition(answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_repairs_wall')) {
-      return _otherRepairWall(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_repairs_roof')) {
-      return _otherRepairRoof(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_repairs_floor')) {
-      return _otherRepairFloor(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId.startsWith('activity_outside_property_other_repairs_drains')) {
-      return _otherRepairDrains(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId
         .startsWith('activity_outside_property_other_repairs_hand_rails')) {
-      return _otherRepairHandrails(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId
         .startsWith('activity_outside_property_other_repairs_steps_landing')) {
-      return _otherRepairStepsLanding(screenId, answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     if (screenId
         .startsWith('activity_outside_property_other_repairs_decorations')) {
-      return _otherRepairDecorations(answers);
+      return const [];  // verbatim rules (inspection_verbatim_spec.dart)
     }
     return null;
   }

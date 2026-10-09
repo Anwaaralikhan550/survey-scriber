@@ -570,3 +570,6 @@ d7754938e2,TESTED,inspection_verbatim_e6_test: fixed prose wrongly detected as o
 3f5125f13f,TESTED,inspection_verbatim_e7_test: fixed prose wrongly detected as option list
 f7148334f2,TESTED,inspection_verbatim_e8_test: intro prose wrongly detected as option list
 ec10c53080,HEADING,directive: flat-property paragraph (cross-cutting item F1 in the plan)
+1502ba09c9,TESTED,inspection_verbatim_e9_test
+2cf1141064,TESTED,inspection_verbatim_e9_test
+9b30dd14a1,HEADING,directive: flat-property paragraph (cross-cutting)

@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 514,
+  "screensAudited": 434,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2710,
-   "approvedLegacyBank": 608,
-   "approvedCurrentBankOnly": 2075,
+   "distinctEmitted": 2336,
+   "approvedLegacyBank": 598,
+   "approvedCurrentBankOnly": 1711,
    "unapproved": 0
   }
  },
@@ -4891,19 +4891,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_other_external",
    "title": "Construction",
-   "dataFieldCount": 6,
-   "permutationCount": 20,
+   "dataFieldCount": 4,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a carport formed in timber.",
-    "The property incorporates a carport formed in concrete.",
-    "The property incorporates a carport formed in steel."
+    "Carport: The property incorporates a timber carport.",
+    "Carport: The property incorporates a steel carport.",
+    "Carport: The property incorporates a aluminium carport."
    ]
   },
   {
@@ -4911,75 +4911,75 @@
    "screenId": "activity_outside_property_other_other_external__construction",
    "title": "Construction",
    "dataFieldCount": 6,
-   "permutationCount": 20,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a porch canopy formed in timber.",
-    "The property incorporates a porch canopy formed in concrete.",
-    "The property incorporates a porch canopy formed in steel."
+    "Porch Canopy: The property incorporates a porch canopy constructed of timber material.",
+    "Porch Canopy: The property incorporates a porch canopy constructed of steel material.",
+    "Porch Canopy: The property incorporates a porch canopy constructed of concrete material."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_other_external__construction__2",
    "title": "Construction",
-   "dataFieldCount": 6,
-   "permutationCount": 20,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a roof terrace formed in timber.",
-    "The property incorporates a roof terrace formed in concrete.",
-    "The property incorporates a roof terrace formed in steel."
+    "Roof Terrace: The property incorporates a roof terrace. The structure is formed in timber materials.",
+    "Roof Terrace: The property incorporates a roof terrace. The structure is formed in concrete materials.",
+    "Roof Terrace: The property incorporates a roof terrace. The structure is formed in steel materials."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_other_external__construction__3",
    "title": "Construction",
-   "dataFieldCount": 6,
-   "permutationCount": 20,
+   "dataFieldCount": 4,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a balcony formed in timber.",
-    "The property incorporates a balcony formed in concrete.",
-    "The property incorporates a balcony formed in steel."
+    "Balcony: The property incorporates Juliet balcony(s) formed in steel, aluminium, glass, other materials. Condition: Where visible, it appears in good, reasonable, fair, poor, very poor condition. Guarding should remain securely fixed and free from significant corrosion or damage. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the Juliet balcony material should be expected. Balcony: The property incorporates a timber balcony(s).",
+    "Balcony: The property incorporates Juliet balcony(s) formed in steel, aluminium, glass, other materials. Condition: Where visible, it appears in good, reasonable, fair, poor, very poor condition. Guarding should remain securely fixed and free from significant corrosion or damage. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the Juliet balcony material should be expected. Balcony: The property incorporates a steel balcony(s).",
+    "Balcony: The property incorporates Juliet balcony(s) formed in steel, aluminium, glass, other materials. Condition: Where visible, it appears in good, reasonable, fair, poor, very poor condition. Guarding should remain securely fixed and free from significant corrosion or damage. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the Juliet balcony material should be expected. Balcony: The property incorporates a concrete balcony(s)."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_other_external__construction__4",
    "title": "Construction",
-   "dataFieldCount": 6,
-   "permutationCount": 20,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a juliet balcony formed in timber.",
-    "The property incorporates a juliet balcony formed in concrete.",
-    "The property incorporates a juliet balcony formed in steel."
+    "Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel materials.",
+    "Juliet Balcony: The property incorporates Juliet balcony(s) formed in aluminium materials.",
+    "Juliet Balcony: The property incorporates Juliet balcony(s) formed in glass materials."
    ]
   },
   {
@@ -4987,37 +4987,37 @@
    "screenId": "activity_outside_property_other_other_external__construction__5",
    "title": "Construction",
    "dataFieldCount": 6,
-   "permutationCount": 20,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a external stairs formed in timber.",
-    "The property incorporates a external stairs formed in concrete.",
-    "The property incorporates a external stairs formed in steel."
+    "External Staircase: The property incorporates an external staircase constructed of concrete materials.",
+    "External Staircase: The property incorporates an external staircase constructed of steel materials.",
+    "External Staircase: The property incorporates an external staircase constructed of timber materials."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_other_external__construction__6",
    "title": "Construction",
-   "dataFieldCount": 6,
-   "permutationCount": 20,
+   "dataFieldCount": 9,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 8,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a other formed in timber.",
-    "The property incorporates a other formed in concrete.",
-    "The property incorporates a other formed in steel."
+    "Other External Structures: Other external structures include bin stores ancillary structures.",
+    "Other External Structures: Other external structures include cycle stores ancillary structures.",
+    "Other External Structures: Other external structures include garden walls ancillary structures."
    ]
   },
   {
@@ -5138,152 +5138,36 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_communal_area",
    "title": "Communal Area",
-   "dataFieldCount": 18,
-   "permutationCount": 26,
+   "dataFieldCount": 14,
+   "permutationCount": 24,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 6,
+    "total": 17,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 17,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: Where applicable, the external communal areas comprise automatic gates, cctv, communal door, entry system, drive access, car park, walk paths, gardens, grounds, play ground and sample detail.",
-    "Condition: Where visible, these appear in reasonable condition, consistent with their age and use. General wear associated with normal use was observed where appropriate.",
-    "It is assumed that the common parts are maintained under appropriate maintenance contracts and are the responsibility of the management company. Your legal adviser should obtain full details. See Section I3 Issues for your legal advisers."
+    "Description: Where applicable, the external communal areas comprise communal entrances.",
+    "Description: Where applicable, the external communal areas comprise access roads.",
+    "Description: Where applicable, the external communal areas comprise parking areas."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_repairs_wall",
    "title": "Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 16,
+   "dataFieldCount": 12,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Walls: The carport walls are cracked. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The carport walls are damaged. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The carport walls are eroded. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_wall__wall",
-   "title": "Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 16,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Walls: The porch canopy walls are cracked. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The porch canopy walls are damaged. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The porch canopy walls are eroded. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_wall__wall__2",
-   "title": "Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 16,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Walls: The roof terrace walls are cracked. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The roof terrace walls are damaged. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The roof terrace walls are eroded. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_wall__wall__3",
-   "title": "Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 16,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Walls: The balcony walls are cracked. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The balcony walls are damaged. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The balcony walls are eroded. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_wall__wall__4",
-   "title": "Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 16,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Walls: The juliet balcony walls are cracked. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The juliet balcony walls are damaged. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The juliet balcony walls are eroded. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_wall__wall__5",
-   "title": "Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 16,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Walls: The external stairs walls are cracked. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The external stairs walls are damaged. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The external stairs walls are eroded. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_wall__wall__6",
-   "title": "Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 16,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Walls: The other walls are cracked. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The other walls are damaged. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.",
-    "Walls: The other walls are eroded. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity."
+    "Walls: The balcony, carport, roof terrace, staircase and sample detail wall(s) are cracked, are damaged, are unstable, have eroded render and sample detail. Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity. Any movement-related cracking should be investigated if considered progressive."
    ]
   },
   {
@@ -5848,133 +5732,53 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_other_roof",
    "title": "Roof",
-   "dataFieldCount": 4,
-   "permutationCount": 24,
+   "dataFieldCount": 10,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof: The pitched roof over the carport is covered in tile.",
-    "Roof: The flat roof over the carport is covered in tile.",
-    "Roof: The pitched roof over the porch canopy is covered in tile."
+    "Roof: The roof is of pitched, flat and lean-to construction and covered with tiles, slates, felt sheet, polycarbonate sheet, metal sheeting and sample detail material."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_other_roof__roof",
    "title": "Roof",
-   "dataFieldCount": 4,
-   "permutationCount": 24,
+   "dataFieldCount": 7,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof: The pitched roof over the carport is covered in tile.",
-    "Roof: The flat roof over the carport is covered in tile.",
-    "Roof: The pitched roof over the porch canopy is covered in tile."
+    "Roof: The roof covering comprises tiles material.",
+    "Roof: The roof covering comprises slates material.",
+    "Roof: The roof covering comprises felt material."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_other_roof__roof__2",
    "title": "Roof",
-   "dataFieldCount": 4,
-   "permutationCount": 24,
+   "dataFieldCount": 10,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof: The pitched roof over the carport is covered in tile.",
-    "Roof: The flat roof over the carport is covered in tile.",
-    "Roof: The pitched roof over the porch canopy is covered in tile."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_other_roof__roof__3",
-   "title": "Roof",
-   "dataFieldCount": 4,
-   "permutationCount": 24,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The pitched roof over the carport is covered in tile.",
-    "Roof: The flat roof over the carport is covered in tile.",
-    "Roof: The pitched roof over the porch canopy is covered in tile."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_other_roof__roof__4",
-   "title": "Roof",
-   "dataFieldCount": 4,
-   "permutationCount": 24,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The pitched roof over the carport is covered in tile.",
-    "Roof: The flat roof over the carport is covered in tile.",
-    "Roof: The pitched roof over the porch canopy is covered in tile."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_other_roof__roof__5",
-   "title": "Roof",
-   "dataFieldCount": 4,
-   "permutationCount": 24,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The pitched roof over the carport is covered in tile.",
-    "Roof: The flat roof over the carport is covered in tile.",
-    "Roof: The pitched roof over the porch canopy is covered in tile."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_other_roof__roof__6",
-   "title": "Roof",
-   "dataFieldCount": 4,
-   "permutationCount": 24,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The pitched roof over the carport is covered in tile.",
-    "Roof: The flat roof over the carport is covered in tile.",
-    "Roof: The pitched roof over the porch canopy is covered in tile."
+    "Roof: The roof is of pitched, flat and lean-to construction and covered with tiles, slates, felt, polycarbonate, metal sheeting and sample detail materials."
    ]
   },
   {
@@ -6074,133 +5878,17 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_repairs_roof",
    "title": "Roof",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
+   "dataFieldCount": 16,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof: The roof cover over the carport is missing tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the carport is slipped tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the carport is in disrepair. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_roof__roof",
-   "title": "Roof",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The roof cover over the porch canopy is missing tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the porch canopy is slipped tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the porch canopy is in disrepair. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_roof__roof__2",
-   "title": "Roof",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The roof cover over the roof terrace is missing tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the roof terrace is slipped tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the roof terrace is in disrepair. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_roof__roof__3",
-   "title": "Roof",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The roof cover over the balcony is missing tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the balcony is slipped tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the balcony is in disrepair. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_roof__roof__4",
-   "title": "Roof",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The roof cover over the juliet balcony is missing tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the juliet balcony is slipped tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the juliet balcony is in disrepair. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_roof__roof__5",
-   "title": "Roof",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The roof cover over the external stairs is missing tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the external stairs is slipped tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the external stairs is in disrepair. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_roof__roof__6",
-   "title": "Roof",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof: The roof cover over the other is missing tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the other is slipped tiles. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",
-    "Roof: The roof cover over the other is in disrepair. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged."
+    "Repairs Roof: The flashing, roof tile, sheet, or slate covering of the roof over the carport, balcony, canopy and sample detail is missing, slipped, cracked, lifted, in disrepair, leaking, damaged, poorly secured, dilapidated and sample detail. Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged."
    ]
   },
   {
@@ -6444,37 +6132,18 @@
    "screenId": "activity_outside_property_other_other_wall",
    "title": "Wall Construction",
    "dataFieldCount": 7,
-   "permutationCount": 17,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a carport formed in bricks.",
-    "The property incorporates a carport formed in timber.",
-    "The property incorporates a carport formed in concrete."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_other_wall__wall_construction",
-   "title": "Wall Construction",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 9,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The property incorporates a carport formed in bricks.",
-    "The property incorporates a carport formed in timber.",
-    "The property incorporates a carport formed in concrete."
+    "Walls: The walls or balustrades are formed in bricks materials.",
+    "Walls: The walls or balustrades are formed in timber materials.",
+    "Walls: The walls or balustrades are formed in steel materials."
    ]
   },
   {
@@ -6482,18 +6151,18 @@
    "screenId": "activity_outside_property_other_other_wall__wall_construction__2",
    "title": "Wall Construction",
    "dataFieldCount": 7,
-   "permutationCount": 17,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a roof terrace formed in bricks.",
-    "The property incorporates a roof terrace formed in timber.",
-    "The property incorporates a roof terrace formed in concrete."
+    "Walls: The walls or balustrades are formed in bricks materials.",
+    "Walls: The walls or balustrades are formed in timber materials.",
+    "Walls: The walls or balustrades are formed in steel materials."
    ]
   },
   {
@@ -6501,90 +6170,19 @@
    "screenId": "activity_outside_property_other_other_wall__wall_construction__3",
    "title": "Wall Construction",
    "dataFieldCount": 7,
-   "permutationCount": 17,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property incorporates a balcony formed in bricks.",
-    "The property incorporates a balcony formed in timber.",
-    "The property incorporates a balcony formed in concrete."
+    "Walls: The walls or balustrades are formed in bricks materials.",
+    "Walls: The walls or balustrades are formed in timber materials.",
+    "Walls: The walls or balustrades are formed in steel materials."
    ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_other_wall__wall_construction__4",
-   "title": "Wall Construction",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 9,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The property incorporates a juliet balcony formed in bricks.",
-    "The property incorporates a juliet balcony formed in timber.",
-    "The property incorporates a juliet balcony formed in concrete."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_other_wall__wall_construction__5",
-   "title": "Wall Construction",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 9,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The property incorporates a external stairs formed in bricks.",
-    "The property incorporates a external stairs formed in timber.",
-    "The property incorporates a external stairs formed in concrete."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_other_wall__wall_construction__6",
-   "title": "Wall Construction",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 9,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The property incorporates a other formed in bricks.",
-    "The property incorporates a other formed in timber.",
-    "The property incorporates a other formed in concrete."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_not_inspected",
-   "title": "Not inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
   },
   {
    "sectionKey": "E",
@@ -6790,149 +6388,19 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_other_overloaded__overloaded__7",
-   "title": "Overloaded",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
+   "screenId": "activity_outside_property_other_repairs_floor",
+   "title": "Floor",
+   "dataFieldCount": 8,
+   "permutationCount": 10,
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_floor",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Floor: The surface of the carport floor is split. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the carport floor is cracked. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the carport floor is split, cracked and sample detail. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_floor__floor",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The surface of the porch canopy floor is split. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the porch canopy floor is cracked. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the porch canopy floor is split, cracked and sample detail. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_floor__floor__2",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The surface of the roof terrace floor is split. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the roof terrace floor is cracked. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the roof terrace floor is split, cracked and sample detail. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_floor__floor__3",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The surface of the balcony floor is split. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the balcony floor is cracked. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the balcony floor is split, cracked and sample detail. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_floor__floor__4",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The surface of the juliet balcony floor is split. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the juliet balcony floor is cracked. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the juliet balcony floor is split, cracked and sample detail. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_floor__floor__5",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The surface of the external stairs floor is split. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the external stairs floor is cracked. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the external stairs floor is split, cracked and sample detail. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_floor__floor__6",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The surface of the other floor is split. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the other floor is cracked. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",
-    "Floor: The surface of the other floor is split, cracked and sample detail. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards."
+    "Floor: The floor surface, timbers, or decking of the balcony, carport, roof terrace and staircase floor is split, cracked and sample detail. The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards."
    ]
   },
   {
@@ -7051,126 +6519,57 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_floors",
    "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 14,
+   "dataFieldCount": 6,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Floor: The floor is formed in concrete.",
-    "Floor: The floor is formed in concrete and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_floors__floor",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The floor is formed in concrete.",
-    "Floor: The floor is formed in concrete and sample detail."
+    "Floor: The floor is formed in concrete finish.",
+    "Floor: The floor is formed in block paving finish.",
+    "Floor: The floor is formed in tarmac finish."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_floors__floor__2",
    "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 14,
+   "dataFieldCount": 6,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Floor: The floor is formed in concrete.",
-    "Floor: The floor is formed in concrete and sample detail."
+    "Floor: The floor is formed in concrete finish.",
+    "Floor: The floor is formed in block paving finish.",
+    "Floor: The floor is formed in tarmac finish."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_floors__floor__3",
    "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 14,
+   "dataFieldCount": 6,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Floor: The floor is formed in concrete.",
-    "Floor: The floor is formed in concrete and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_floors__floor__4",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The floor is formed in concrete.",
-    "Floor: The floor is formed in concrete and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_floors__floor__5",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The floor is formed in concrete.",
-    "Floor: The floor is formed in concrete and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_floors__floor__6",
-   "title": "Floor",
-   "dataFieldCount": 4,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor: The floor is formed in concrete.",
-    "Floor: The floor is formed in concrete and sample detail."
+    "Floor: The floor is formed in concrete finish.",
+    "Floor: The floor is formed in block paving finish.",
+    "Floor: The floor is formed in tarmac finish."
    ]
   },
   {
@@ -7307,154 +6706,19 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_other_no_safety_glass__no_safety_glass__7",
-   "title": "No safety glass",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "I could not tell if the glazing to the carport screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the balcony screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the roof terrace screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_other_repairs_drains",
    "title": "Drains",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
+   "dataFieldCount": 12,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Drains: The carport drains are too small, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The carport drains are blocked, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The carport drains are poorly drained, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_drains__drains",
-   "title": "Drains",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The porch canopy drains are too small, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The porch canopy drains are blocked, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The porch canopy drains are poorly drained, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_drains__drains__2",
-   "title": "Drains",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The roof terrace drains are too small, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The roof terrace drains are blocked, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The roof terrace drains are poorly drained, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_drains__drains__3",
-   "title": "Drains",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The balcony drains are too small, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The balcony drains are blocked, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The balcony drains are poorly drained, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_drains__drains__4",
-   "title": "Drains",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The juliet balcony drains are too small, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The juliet balcony drains are blocked, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The juliet balcony drains are poorly drained, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_drains__drains__5",
-   "title": "Drains",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The external stairs drains are too small, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The external stairs drains are blocked, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The external stairs drains are poorly drained, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_drains__drains__6",
-   "title": "Drains",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The other drains are too small, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The other drains are blocked, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",
-    "Drains: The other drains are poorly drained, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly."
+    "Drains: The balcony, carport, roof terrace, staircase and sample detail drains are too small, blocked, poorly drained, damaged and sample detail, resulting in rainwater ponding. Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building. The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly."
    ]
   },
   {
@@ -7548,135 +6812,21 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_other_handrails",
-   "title": "Handrails",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Elements: The handrails are formed in timber.",
-    "Elements: The handrails are formed in steel.",
-    "Elements: The handrails are formed in timber, steel and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_handrails__handrails",
-   "title": "Handrails",
-   "dataFieldCount": 5,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Elements: The handrails are formed in timber.",
-    "Elements: The handrails are formed in steel.",
-    "Elements: The handrails are formed in timber, steel and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_handrails__handrails__2",
-   "title": "Handrails",
-   "dataFieldCount": 5,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Elements: The handrails are formed in timber.",
-    "Elements: The handrails are formed in steel.",
-    "Elements: The handrails are formed in timber, steel and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_handrails__handrails__3",
-   "title": "Handrails",
-   "dataFieldCount": 5,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Elements: The handrails are formed in timber.",
-    "Elements: The handrails are formed in steel.",
-    "Elements: The handrails are formed in timber, steel and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_handrails__handrails__4",
-   "title": "Handrails",
-   "dataFieldCount": 5,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Elements: The handrails are formed in timber.",
-    "Elements: The handrails are formed in steel.",
-    "Elements: The handrails are formed in timber, steel and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_other_handrails__handrails__5",
    "title": "Handrails",
    "dataFieldCount": 5,
-   "permutationCount": 15,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Elements: The handrails are formed in timber.",
-    "Elements: The handrails are formed in steel.",
-    "Elements: The handrails are formed in timber, steel and sample detail."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_handrails__handrails__6",
-   "title": "Handrails",
-   "dataFieldCount": 5,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Elements: The handrails are formed in timber.",
-    "Elements: The handrails are formed in steel.",
-    "Elements: The handrails are formed in timber, steel and sample detail."
+    "Element (s): The handrails, landing, and steps are formed in steel materials.",
+    "Element (s): The handrails, landing, and steps are formed in timber materials.",
+    "Element (s): The handrails, landing, and steps are formed in aluminium materials."
    ]
   },
   {
@@ -7789,126 +6939,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_repairs_steps_landing",
    "title": "Steps landing",
-   "dataFieldCount": 6,
-   "permutationCount": 10,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Metal Stairs: The surface of the steps is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",
-    "Metal Stairs: The surface of the landing is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing",
-   "title": "Steps landing",
-   "dataFieldCount": 6,
-   "permutationCount": 10,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Metal Stairs: The surface of the steps is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",
-    "Metal Stairs: The surface of the landing is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__2",
-   "title": "Steps landing",
-   "dataFieldCount": 6,
-   "permutationCount": 10,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Metal Stairs: The surface of the steps is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",
-    "Metal Stairs: The surface of the landing is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__3",
-   "title": "Steps landing",
-   "dataFieldCount": 6,
-   "permutationCount": 10,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Metal Stairs: The surface of the steps is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",
-    "Metal Stairs: The surface of the landing is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__4",
-   "title": "Steps landing",
-   "dataFieldCount": 6,
-   "permutationCount": 10,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Metal Stairs: The surface of the steps is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",
-    "Metal Stairs: The surface of the landing is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__5",
-   "title": "Steps landing",
-   "dataFieldCount": 6,
-   "permutationCount": 10,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Metal Stairs: The surface of the steps is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",
-    "Metal Stairs: The surface of the landing is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_steps_landing__steps_landing__6",
-   "title": "Steps landing",
-   "dataFieldCount": 6,
-   "permutationCount": 10,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Metal Stairs: The surface of the steps is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",
-    "Metal Stairs: The surface of the landing is split, cracked, partly rotted and sample detail. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access."
+    "Metal Stairs: The surfaces of the steps or landing are split. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",
+    "Metal Stairs: The surfaces of the steps or landing are cracked. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",
+    "Metal Stairs: The surfaces of the steps or landing are partly rotted. Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access."
    ]
   },
   {
@@ -7951,135 +6994,36 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_other_drains",
-   "title": "Drains",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The carport drains are laid with lead and appear well drained and unobstructed.",
-    "Drains: The carport drains are laid with mortar and appear well drained and unobstructed.",
-    "Drains: The carport drains are laid with bitumen and appear well drained and unobstructed."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_drains__drains",
-   "title": "Drains",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The porch canopy drains are laid with lead and appear well drained and unobstructed.",
-    "Drains: The porch canopy drains are laid with mortar and appear well drained and unobstructed.",
-    "Drains: The porch canopy drains are laid with bitumen and appear well drained and unobstructed."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_other_drains__drains__2",
    "title": "Drains",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
+   "dataFieldCount": 9,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Drains: The roof terrace drains are laid with lead and appear well drained and unobstructed.",
-    "Drains: The roof terrace drains are laid with mortar and appear well drained and unobstructed.",
-    "Drains: The roof terrace drains are laid with bitumen and appear well drained and unobstructed."
+    "Drains: The drains are laid with bitumen, felt, concrete and sample detail, other appear well drained, poorly drained, unobstructed and obstructed. Poorly drained or obstructed drainage channels can allow rainwater to pond or overflow, resulting in water penetration into adjacent building elements, deterioration of finishes, and an increased risk of slips. Any defective, blocked, or damaged drainage channels should be cleared and repaired promptly to ensure they continue to function effectively."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_drains__drains__3",
    "title": "Drains",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
+   "dataFieldCount": 9,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Drains: The balcony drains are laid with lead and appear well drained and unobstructed.",
-    "Drains: The balcony drains are laid with mortar and appear well drained and unobstructed.",
-    "Drains: The balcony drains are laid with bitumen and appear well drained and unobstructed."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_drains__drains__4",
-   "title": "Drains",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The juliet balcony drains are laid with lead and appear well drained and unobstructed.",
-    "Drains: The juliet balcony drains are laid with mortar and appear well drained and unobstructed.",
-    "Drains: The juliet balcony drains are laid with bitumen and appear well drained and unobstructed."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_drains__drains__5",
-   "title": "Drains",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The external stairs drains are laid with lead and appear well drained and unobstructed.",
-    "Drains: The external stairs drains are laid with mortar and appear well drained and unobstructed.",
-    "Drains: The external stairs drains are laid with bitumen and appear well drained and unobstructed."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_drains__drains__6",
-   "title": "Drains",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Drains: The other drains are laid with lead and appear well drained and unobstructed.",
-    "Drains: The other drains are laid with mortar and appear well drained and unobstructed.",
-    "Drains: The other drains are laid with bitumen and appear well drained and unobstructed."
+    "Drains: The drains are laid with bitumen, felt, concrete and sample detail materials, other appear well drained, poorly drained, unobstructed and obstructed. Poorly drained or obstructed drainage channels can allow rainwater to pond or overflow, resulting in water penetration into adjacent building elements, deterioration of finishes, and an increased risk of slips. Any defective, blocked, or damaged drainage channels should be cleared and repaired promptly to ensure they continue to function effectively."
    ]
   },
   {
@@ -8141,119 +7085,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_repairs_decorations",
    "title": "Perished Decorations",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Decorations: The decorations to the stairway and fire escape are perished, flaking and sample detail. The affected surfaces should be properly prepared and redecorated as soon as practicable."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations",
-   "title": "Perished Decorations",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Decorations: The decorations to the stairway and fire escape are perished, flaking and sample detail. The affected surfaces should be properly prepared and redecorated as soon as practicable."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__2",
-   "title": "Perished Decorations",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Decorations: The decorations to the stairway and fire escape are perished, flaking and sample detail. The affected surfaces should be properly prepared and redecorated as soon as practicable."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__3",
-   "title": "Perished Decorations",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Decorations: The decorations to the stairway and fire escape are perished, flaking and sample detail. The affected surfaces should be properly prepared and redecorated as soon as practicable."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__4",
-   "title": "Perished Decorations",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Decorations: The decorations to the stairway and fire escape are perished, flaking and sample detail. The affected surfaces should be properly prepared and redecorated as soon as practicable."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__5",
-   "title": "Perished Decorations",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Decorations: The decorations to the stairway and fire escape are perished, flaking and sample detail. The affected surfaces should be properly prepared and redecorated as soon as practicable."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_decorations__perished_decorations__6",
-   "title": "Perished Decorations",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Decorations: The decorations to the stairway and fire escape are perished, flaking and sample detail. The affected surfaces should be properly prepared and redecorated as soon as practicable."
+    "Decorations: The decorations to the stairway are peeling. The affected surfaces should be properly prepared and redecorated as soon as practicable. Where corrosion or timber decay is present, the underlying defects should be treated or repaired before redecoration.",
+    "Decorations: The decorations to the stairway are flaking. The affected surfaces should be properly prepared and redecorated as soon as practicable. Where corrosion or timber decay is present, the underlying defects should be treated or repaired before redecoration.",
+    "Decorations: The decorations to the stairway are damaged. The affected surfaces should be properly prepared and redecorated as soon as practicable. Where corrosion or timber decay is present, the underlying defects should be treated or repaired before redecoration."
    ]
   },
   {
@@ -8289,104 +7133,6 @@
    "editedBankSamples": [
     "Unstable Structure: Evidence of movement, distortion, deflection was observed. Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant."
    ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_overloaded",
-   "title": "Overloaded",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_overloaded__overloaded",
-   "title": "Overloaded",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_overloaded__overloaded__2",
-   "title": "Overloaded",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_overloaded__overloaded__3",
-   "title": "Overloaded",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_overloaded__overloaded__4",
-   "title": "Overloaded",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_overloaded__overloaded__5",
-   "title": "Overloaded",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_overloaded__overloaded__6",
-   "title": "Overloaded",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
   },
   {
    "sectionKey": "E",
@@ -8484,266 +7230,17 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_repairs_hand_rails",
    "title": "Hand rails",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
+   "dataFieldCount": 15,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Handrails: The handrail to the carport is not strong enough and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the carport is partly rotten and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the carport is inadequately designed and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People)."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails",
-   "title": "Hand rails",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Handrails: The handrail to the porch canopy is not strong enough and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the porch canopy is partly rotten and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the porch canopy is inadequately designed and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People)."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__2",
-   "title": "Hand rails",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Handrails: The handrail to the roof terrace is not strong enough and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the roof terrace is partly rotten and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the roof terrace is inadequately designed and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People)."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__3",
-   "title": "Hand rails",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Handrails: The handrail to the balcony is not strong enough and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the balcony is partly rotten and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the balcony is inadequately designed and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People)."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__4",
-   "title": "Hand rails",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Handrails: The handrail to the juliet balcony is not strong enough and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the juliet balcony is partly rotten and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the juliet balcony is inadequately designed and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People)."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__5",
-   "title": "Hand rails",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Handrails: The handrail to the external stairs is not strong enough and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the external stairs is partly rotten and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the external stairs is inadequately designed and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People)."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_repairs_hand_rails__hand_rails__6",
-   "title": "Hand rails",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Handrails: The handrail to the other is not strong enough and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the other is partly rotten and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People).",
-    "Handrails: The handrail to the other is inadequately designed and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired or replaced with a suitably designed and securely fixed handrail that complies with current safety standards (see section J3 - Risk to People)."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_no_safety_glass",
-   "title": "No safety glass",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "I could not tell if the glazing to the carport screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the balcony screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the roof terrace screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_no_safety_glass__no_safety_glass",
-   "title": "No safety glass",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "I could not tell if the glazing to the carport screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the balcony screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the roof terrace screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_no_safety_glass__no_safety_glass__2",
-   "title": "No safety glass",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "I could not tell if the glazing to the roof terrace screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the balcony screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the other screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_no_safety_glass__no_safety_glass__3",
-   "title": "No safety glass",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "I could not tell if the glazing to the balcony screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the roof terrace screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the other screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_no_safety_glass__no_safety_glass__4",
-   "title": "No safety glass",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "I could not tell if the glazing to the juliet balcony screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the balcony screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the roof terrace screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_no_safety_glass__no_safety_glass__5",
-   "title": "No safety glass",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "I could not tell if the glazing to the external stairs screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the balcony screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the roof terrace screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_other_no_safety_glass__no_safety_glass__6",
-   "title": "No safety glass",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "I could not tell if the glazing to the other screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the balcony screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements.",
-    "I could not tell if the glazing to the roof terrace screens is safety glass and this is a hazard (see section J3 Risks). You should ask an appropriately qualified person to inspect the glass and carry out any repair or replacements."
+    "Handrails: The handrail(s) of the balcony, Juliet balcony, terrace, stairs and sample detail are inadequate, poorly secured, incomplete, loose, corroded, rotten, damaged and sample detail and may not provide adequate protection against falls. This presents a safety risk. The defective handrail(s) should be repaired, replaced, or redecorated with a suitably designed and securely fixed handrail that complies with current safety standards."
    ]
   },
   {
@@ -8751,18 +7248,18 @@
    "screenId": "activity_out_side_other_external_area_condition",
    "title": "Condition",
    "dataFieldCount": 1,
-   "permutationCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in satisfactory condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in unsatisfactory and poor condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected."
+    "Condition: Where visible, the structure appears in good condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the carport material should be expected.",
+    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the carport material should be expected.",
+    "Condition: Where visible, the structure appears in fair condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the carport material should be expected."
    ]
   },
   {
@@ -8770,18 +7267,18 @@
    "screenId": "activity_out_side_other_external_area_condition__condition",
    "title": "Condition",
    "dataFieldCount": 1,
-   "permutationCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in satisfactory condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in unsatisfactory and poor condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected."
+    "Condition: Where visible, the canopy appears in good condition. Repairs should be undertaken where deterioration affects structural stability or weather resistance. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch canopy material should be expected.",
+    "Condition: Where visible, the canopy appears in reasonable condition. Repairs should be undertaken where deterioration affects structural stability or weather resistance. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch canopy material should be expected.",
+    "Condition: Where visible, the canopy appears in fair condition. Repairs should be undertaken where deterioration affects structural stability or weather resistance. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch canopy material should be expected."
    ]
   },
   {
@@ -8789,18 +7286,18 @@
    "screenId": "activity_out_side_other_external_area_condition__condition__2",
    "title": "Condition",
    "dataFieldCount": 1,
-   "permutationCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in satisfactory condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in unsatisfactory and poor condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected."
+    "Condition: Where visible, the structure appears in good condition. Routine maintenance appropriate to its age and construction of the roof terrace should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the roof terrace material should be expected.",
+    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction of the roof terrace should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the roof terrace material should be expected.",
+    "Condition: Where visible, the structure appears in fair condition. Routine maintenance appropriate to its age and construction of the roof terrace should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the roof terrace material should be expected."
    ]
   },
   {
@@ -8808,18 +7305,18 @@
    "screenId": "activity_out_side_other_external_area_condition__condition__3",
    "title": "Condition",
    "dataFieldCount": 1,
-   "permutationCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in satisfactory condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in unsatisfactory and poor condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected."
+    "Condition: Where visible, the structure appears in good condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the balcony material should be expected.",
+    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the balcony material should be expected.",
+    "Condition: Where visible, the structure appears in fair condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the balcony material should be expected."
    ]
   },
   {
@@ -8827,18 +7324,18 @@
    "screenId": "activity_out_side_other_external_area_condition__condition__4",
    "title": "Condition",
    "dataFieldCount": 1,
-   "permutationCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in satisfactory condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in unsatisfactory and poor condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected."
+    "Condition: Where visible, it appears in good condition. Guarding should remain securely fixed and free from significant corrosion or damage. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the Juliet balcony material should be expected.",
+    "Condition: Where visible, it appears in reasonable condition. Guarding should remain securely fixed and free from significant corrosion or damage. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the Juliet balcony material should be expected.",
+    "Condition: Where visible, it appears in fair condition. Guarding should remain securely fixed and free from significant corrosion or damage. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the Juliet balcony material should be expected."
    ]
   },
   {
@@ -8846,18 +7343,18 @@
    "screenId": "activity_out_side_other_external_area_condition__condition__5",
    "title": "Condition",
    "dataFieldCount": 1,
-   "permutationCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in satisfactory condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in unsatisfactory and poor condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected."
+    "Condition: Where visible, the staircase appears in good condition. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the staircase material should be expected.",
+    "Condition: Where visible, the staircase appears in reasonable condition. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the staircase material should be expected.",
+    "Condition: Where visible, the staircase appears in fair condition. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the staircase material should be expected."
    ]
   },
   {
@@ -8865,18 +7362,56 @@
    "screenId": "activity_out_side_other_external_area_condition__condition__6",
    "title": "Condition",
    "dataFieldCount": 1,
-   "permutationCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible, the structure appears in reasonable condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in satisfactory condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
-    "Condition: Where visible, the structure appears in unsatisfactory and poor condition. Routine maintenance appropriate to its age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected."
+    "Condition: Where visible, these appear in good condition. Routine maintenance appropriate to their age and construction installation should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the installation material should be expected.",
+    "Condition: Where visible, these appear in reasonable condition. Routine maintenance appropriate to their age and construction installation should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the installation material should be expected.",
+    "Condition: Where visible, these appear in fair condition. Routine maintenance appropriate to their age and construction installation should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the installation material should be expected."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_other_retaining_walls",
+   "title": "Retaining walls",
+   "dataFieldCount": 6,
+   "permutationCount": 16,
+   "severities": [],
+   "phraseStats": {
+    "total": 11,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 11,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Retaining Walls: The property incorporates brick retaining walls.",
+    "Retaining Walls: The property incorporates stone retaining walls.",
+    "Retaining Walls: The property incorporates concrete retaining walls."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_other_retaining_walls_defects",
+   "title": "Retaining walls defects",
+   "dataFieldCount": 6,
+   "permutationCount": 8,
+   "severities": [],
+   "phraseStats": {
+    "total": 5,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Defects noted: Evidence of movement was noted to parts or all retaining walls. You should arrange for further investigation by an appropriately qualified person. Retaining walls are designed to support the considerable weight of the ground behind them. Where the retaining wall is in poor condition, it may no longer be performing its intended function effectively. Repairs or replacement can be costly, as any new retaining wall must be designed and constructed to adequately resist the retained ground. You should instruct an appropriately qualified structural specialist to inspect the wall without delay and provide recommendations for any necessary remedial works. Where the retaining wall is shared with, or forms a boundary with, a neighbouring property, responsibility for repair and maintenance may be shared or otherwise affected by legal rights and obligations. Before any work is undertaken, your legal adviser should investigate ownership, maintenance responsibilities and any associated rights or liabilities, and explain the implications to you.",
+    "Defects noted: Evidence of bulging was noted to parts or all retaining walls. You should arrange for further investigation by an appropriately qualified person. Retaining walls are designed to support the considerable weight of the ground behind them. Where the retaining wall is in poor condition, it may no longer be performing its intended function effectively. Repairs or replacement can be costly, as any new retaining wall must be designed and constructed to adequately resist the retained ground. You should instruct an appropriately qualified structural specialist to inspect the wall without delay and provide recommendations for any necessary remedial works. Where the retaining wall is shared with, or forms a boundary with, a neighbouring property, responsibility for repair and maintenance may be shared or otherwise affected by legal rights and obligations. Before any work is undertaken, your legal adviser should investigate ownership, maintenance responsibilities and any associated rights or liabilities, and explain the implications to you.",
+    "Defects noted: Evidence of instability was noted to parts or all retaining walls. You should arrange for further investigation by an appropriately qualified person. Retaining walls are designed to support the considerable weight of the ground behind them. Where the retaining wall is in poor condition, it may no longer be performing its intended function effectively. Repairs or replacement can be costly, as any new retaining wall must be designed and constructed to adequately resist the retained ground. You should instruct an appropriately qualified structural specialist to inspect the wall without delay and provide recommendations for any necessary remedial works. Where the retaining wall is shared with, or forms a boundary with, a neighbouring property, responsibility for repair and maintenance may be shared or otherwise affected by legal rights and obligations. Before any work is undertaken, your legal adviser should investigate ownership, maintenance responsibilities and any associated rights or liabilities, and explain the implications to you."
    ]
   },
   {
@@ -9006,15 +7541,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_other_main_screen",
    "title": "E9 Other Outside Property",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
+   "dataFieldCount": 3,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 7,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The inspection was limited to those parts that were safely accessible at the time of inspection. No opening up, testing or dismantling of concealed elements was undertaken. Comments relate only to the visible condition of the structures inspected. This section relates to external features not reported elsewhere within this report, including carports, porches, balconies, Juliet balconies, roof terraces, external staircases, retaining walls, communal areas, and other ancillary external structures. Only those elements that were readily visible and safely accessible at the time of inspection have been assessed.",
+    "General Maintenance: External ancillary structures should be inspected periodically as part of routine property maintenance. Rainwater disposal, structural stability, guarding, fixings, waterproofing and external finishes should be maintained to reduce the risk of deterioration and ensure continued safe use."
+   ]
   },
   {
    "sectionKey": "E",

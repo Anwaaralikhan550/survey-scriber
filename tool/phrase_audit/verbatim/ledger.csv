@@ -721,7 +721,7 @@ b01f186d67,E8,Inspected: Inspection was carried out from ground level and other 
 18145792a8,E8,High-level joinery was inspected using binoculars where appropriate.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
 068c47ab35,E8,"Concealed sections behind gutters, roof coverings or other finishes could not be inspected.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
 1bee6e7472,E8,No opening up or dismantling of components was undertaken.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
-f7148334f2,E8,"This section relates to external joinery and finishes not covered elsewhere within this report, including fascias, soffits, bargeboards, eaves joinery, verge clips, cladding, decorative timberwork, or other associated external finishes.",MENU,,0,UNVERIFIED
+f7148334f2,E8,"This section relates to external joinery and finishes not covered elsewhere within this report, including fascias, soffits, bargeboards, eaves joinery, verge clips, cladding, decorative timberwork, or other associated external finishes.",MENU,,0,VERIFIED
 567ee3f942,E8,Only those areas that were readily visible and safely accessible at the time of inspection have been assessed.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
 b968a2405e,E8,Redecoration should be undertaken periodically in accordance with the manufacturer's recommendations and the exposure of the property.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
 d915771371,E8,"Description: The external eaves-level joinery comprises timber, PVCu, aluminium, asbestos board, cement board, fibre cement, slates, other materials.",MENU,,0,VERIFIED
@@ -746,128 +746,128 @@ b7eb6cdee0,E8,"Otherwise, where decay is advanced, localised repair or replaceme
 0c639f4ff1,E8,"Where these remain in good condition and are left undisturbed, they do not normally present a significant health risk.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{CONTAIN_ASBESTOS},100,DONE
 3c551c0555,E8,"Before carrying out repairs, alterations or removal, specialist advice should be obtained.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{CONTAIN_ASBESTOS},100,DONE
 2e1bd3d44b,E8,"Defective Joinery One or more defects were observed, including: • Loose fascias • Loose soffits • Damaged bargeboards • Open joints • Defective fixings • Weathered decoration • Localised timber decay • Distorted joinery • Minor impact damage Repairs should be undertaken to prevent further deterioration and maintain weather resistance.",MENU,,0,VERIFIED
-ec10c53080,E8,"If the property is a flat, add the following.",MENU,,0,UNVERIFIED
+ec10c53080,E8,"If the property is a flat, add the following.",MENU,,0,DONE
 5064c3290d,E8,"As this is a leasehold property, your legal adviser should confirm, before the exchange of contracts, the provisions within the lease relating to the maintenance and external redecoration of the building, including when such works are due to be carried out and who is responsible for the cost.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{IF_PROPERTY_FLAT_IS_SELECTED},100,DONE
 400cef4c65,E8,"You should also ask the management company whether any repairs or external redecoration works have been undertaken previously, whether any are currently planned, and whether any associated costs are likely to be payable by leaseholders.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{IF_PROPERTY_FLAT_IS_SELECTED},100,DONE
 9f04a5217a,E8,General Maintenance: External joinery should be inspected periodically as part of routine property maintenance.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
 e851565807,E8,Timber components should be redecorated at appropriate intervals to maintain protection against weathering.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
 2ac9755826,E8,"Sealants, fixings, and joints should be inspected regularly and renewed where deterioration becomes evident.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
 679b09566c,E8,Prompt attention to isolated defects will help prevent more extensive repairs.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
-fb645affab,E9,The inspection was limited to those parts that were safely accessible at the time of inspection.,ADD,{E_OTHER}::{OTHER_NOT_APPLICABLE},48,OPEN
-479aef5807,E9,"No opening up, testing or dismantling of concealed elements was undertaken.",ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},43,OPEN
-eb098a6c16,E9,Comments relate only to the visible condition of the structures inspected.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},51,OPEN
+fb645affab,E9,The inspection was limited to those parts that were safely accessible at the time of inspection.,EXACT,{E_OTHER_AREA}::{E9_INTRO},100,DONE
+479aef5807,E9,"No opening up, testing or dismantling of concealed elements was undertaken.",EXACT,{E_OTHER_AREA}::{E9_INTRO},100,DONE
+eb098a6c16,E9,Comments relate only to the visible condition of the structures inspected.,EXACT,{E_OTHER_AREA}::{E9_INTRO},100,DONE
 1502ba09c9,E9,"This section relates to external features not reported elsewhere within this report, including carports, porches, balconies, Juliet balconies, roof terraces, external staircases, retaining walls, communal areas, and other ancillary external structures.",MENU,,0,UNVERIFIED
-33bd78c5b8,E9,Only those elements that were readily visible and safely accessible at the time of inspection have been assessed.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_NO_SAFETY_GLASS},46,OPEN
-af920f4c5a,E9,"Description: Where applicable, the external communal areas comprise communal entrances, access roads, parking areas, footpaths, landscaped areas, boundary structures, security gates, CCTV, lighting, bin stores, cycle stores, other facilities.",MENU,,0,UNVERIFIED
-0a78bce367,E9,"Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.",MENU,,0,UNVERIFIED
-d28abf6837,E9,General wear associated with normal use was observed where appropriate.,EXACT,{E_OTHER}::{COMMUNAL_AREA_CONDITION},100,DONE
-2ad9ae4f15,E9,"Carport: The property incorporates a timber, steel, aluminium, masonry carport.",MENU,,0,UNVERIFIED
-ca2aedd809,E9,"Roof: The roof is of pitched, flat, lean-to construction and covered with tiles, slates, felt sheet, polycarbonate sheet, metal sheeting, other material.",MENU,,0,UNVERIFIED
-3ca4736875,E9,"Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.",MENU,,0,UNVERIFIED
-25d2f44e89,E9,"Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.",MENU,,0,UNVERIFIED
-6314b578ba,E9,"Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-7a055bb249,E9,Routine maintenance appropriate to its age and construction should be expected.,EXACT,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},100,DONE
+33bd78c5b8,E9,Only those elements that were readily visible and safely accessible at the time of inspection have been assessed.,EXACT,{E_OTHER_AREA}::{E9_INTRO},100,DONE
+af920f4c5a,E9,"Description: Where applicable, the external communal areas comprise communal entrances, access roads, parking areas, footpaths, landscaped areas, boundary structures, security gates, CCTV, lighting, bin stores, cycle stores, other facilities.",MENU,,0,VERIFIED
+0a78bce367,E9,"Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.",MENU,,0,VERIFIED
+d28abf6837,E9,General wear associated with normal use was observed where appropriate.,EXACT,{E_OTHER_AREA}::{E9_COMMUNAL_CONDITION},100,DONE
+2ad9ae4f15,E9,"Carport: The property incorporates a timber, steel, aluminium, masonry carport.",MENU,,0,VERIFIED
+ca2aedd809,E9,"Roof: The roof is of pitched, flat, lean-to construction and covered with tiles, slates, felt sheet, polycarbonate sheet, metal sheeting, other material.",MENU,,0,VERIFIED
+3ca4736875,E9,"Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.",MENU,,0,VERIFIED
+25d2f44e89,E9,"Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.",MENU,,0,VERIFIED
+6314b578ba,E9,"Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+7a055bb249,E9,Routine maintenance appropriate to its age and construction should be expected.,EXACT,{E_OTHER_AREA}::{E9_BALCONY_CONDITION},100,DONE
 1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-22f36033e4,E9,Routine maintenance appropriate to the carport material should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},93,OPEN
-c669aa77d6,E9,"Porch Canopy: The property incorporates a porch canopy constructed of timber, steel, concrete, plastic, other material.",MENU,,0,UNVERIFIED
-9fab2ac635,E9,"Roof: The roof covering comprises tiles, slates, felt, polycarbonate, plastic, other material.",MENU,,0,UNVERIFIED
-6c4d589018,E9,"Condition: Where visible, the canopy appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-e46e750375,E9,Repairs should be undertaken where deterioration affects structural stability or weather resistance.,ADD,{OTHER_REPAIR}::{OTHER_REPAIR_WALL},58,OPEN
+22f36033e4,E9,Routine maintenance appropriate to the carport material should be expected.,EXACT,{E_OTHER_AREA}::{E9_CARPORT_CONDITION},100,DONE
+c669aa77d6,E9,"Porch Canopy: The property incorporates a porch canopy constructed of timber, steel, concrete, plastic, other material.",MENU,,0,VERIFIED
+9fab2ac635,E9,"Roof: The roof covering comprises tiles, slates, felt, polycarbonate, plastic, other material.",MENU,,0,VERIFIED
+6c4d589018,E9,"Condition: Where visible, the canopy appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+e46e750375,E9,Repairs should be undertaken where deterioration affects structural stability or weather resistance.,EXACT,{E_OTHER_AREA}::{E9_PORCH_CONDITION},100,DONE
 1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-7a333addc2,E9,Routine maintenance appropriate to the porch canopy material should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},92,OPEN
-edf39ce771,E9,"Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel, aluminium, glass, other materials.",MENU,,0,UNVERIFIED
-98b09980c1,E9,"Condition: Where visible, it appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-485616b6a5,E9,Guarding should remain securely fixed and free from significant corrosion or damage.,ADD,{OTHER_REPAIR}::{OTHER_REPAIR_PERISHED_DECORATIONS},46,OPEN
+7a333addc2,E9,Routine maintenance appropriate to the porch canopy material should be expected.,EXACT,{E_OTHER_AREA}::{E9_PORCH_CONDITION},100,DONE
+edf39ce771,E9,"Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel, aluminium, glass, other materials.",MENU,,0,VERIFIED
+98b09980c1,E9,"Condition: Where visible, it appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+485616b6a5,E9,Guarding should remain securely fixed and free from significant corrosion or damage.,EXACT,{E_OTHER_AREA}::{E9_BALCONY},100,DONE
 1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-aa7f281f92,E9,Routine maintenance appropriate to the Juliet balcony material should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},89,OPEN
-eeb66e1eea,E9,"Balcony: The property incorporates a timber, steel, concrete, cantilevered balcony(s).",MENU,,0,UNVERIFIED
-3ca4736875,E9,"Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.",MENU,,0,UNVERIFIED
-25d2f44e89,E9,"Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.",MENU,,0,UNVERIFIED
-cc35c315c8,E9,"Drains: The drains are laid with bitumen, felt, concrete, other materials, other appear well drained, poorly drained, unobstructed, obstructed.",MENU,,0,UNVERIFIED
-33fb69b43b,E9,"Poorly drained or obstructed drainage channels can allow rainwater to pond or overflow, resulting in water penetration into adjacent building elements, deterioration of finishes, and an increased risk of slips.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_FLOOR},49,OPEN
-c406a49ec0,E9,"Any defective, blocked, or damaged drainage channels should be cleared and repaired promptly to ensure they continue to function effectively.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_DRAINS},52,OPEN
-6314b578ba,E9,"Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-7a055bb249,E9,Routine maintenance appropriate to its age and construction should be expected.,EXACT,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},100,DONE
+aa7f281f92,E9,Routine maintenance appropriate to the Juliet balcony material should be expected.,EXACT,{E_OTHER_AREA}::{E9_BALCONY},100,DONE
+eeb66e1eea,E9,"Balcony: The property incorporates a timber, steel, concrete, cantilevered balcony(s).",MENU,,0,VERIFIED
+3ca4736875,E9,"Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.",MENU,,0,VERIFIED
+25d2f44e89,E9,"Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.",MENU,,0,VERIFIED
+cc35c315c8,E9,"Drains: The drains are laid with bitumen, felt, concrete, other materials, other appear well drained, poorly drained, unobstructed, obstructed.",MENU,,0,VERIFIED
+33fb69b43b,E9,"Poorly drained or obstructed drainage channels can allow rainwater to pond or overflow, resulting in water penetration into adjacent building elements, deterioration of finishes, and an increased risk of slips.",EXACT,{E_OTHER_AREA}::{E9_BALCONY_DRAINS},100,DONE
+c406a49ec0,E9,"Any defective, blocked, or damaged drainage channels should be cleared and repaired promptly to ensure they continue to function effectively.",EXACT,{E_OTHER_AREA}::{E9_BALCONY_DRAINS},100,DONE
+6314b578ba,E9,"Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+7a055bb249,E9,Routine maintenance appropriate to its age and construction should be expected.,EXACT,{E_OTHER_AREA}::{E9_BALCONY_CONDITION},100,DONE
 1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-38d8d5a64e,E9,Routine maintenance appropriate to the balcony material should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},93,OPEN
-43d843cb81,E9,Roof Terrace: The property incorporates a roof terrace.,TOKENISED,{OTHER_EXTERNAL_AREA}::{OTHER_CONSTRUCTION},77,DONE
-250ee97641,E9,"The structure is formed in timber, concrete, steel, other materials.",MENU,,0,UNVERIFIED
-010b089a47,E9,"Roof: The roof is of pitched, flat, lean-to construction and covered with tiles, slates, felt, polycarbonate, metal sheeting, other materials.",MENU,,0,UNVERIFIED
-3ca4736875,E9,"Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.",MENU,,0,UNVERIFIED
-25d2f44e89,E9,"Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.",MENU,,0,UNVERIFIED
-bc359f8b89,E9,"Drains: The drains are laid with bitumen, felt, concrete or other suitable materials, other appear well drained, poorly drained, unobstructed, obstructed.",MENU,,0,UNVERIFIED
-33fb69b43b,E9,"Poorly drained or obstructed drainage channels can allow rainwater to pond or overflow, resulting in water penetration into adjacent building elements, deterioration of finishes, and an increased risk of slips.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_FLOOR},49,OPEN
-c406a49ec0,E9,"Any defective, blocked, or damaged drainage channels should be cleared and repaired promptly to ensure they continue to function effectively.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_DRAINS},52,OPEN
-6314b578ba,E9,"Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-4ec0af77c6,E9,Routine maintenance appropriate to its age and construction of the roof terrace should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},89,OPEN
+38d8d5a64e,E9,Routine maintenance appropriate to the balcony material should be expected.,EXACT,{E_OTHER_AREA}::{E9_BALCONY_CONDITION},100,DONE
+43d843cb81,E9,Roof Terrace: The property incorporates a roof terrace.,EXACT,{E_OTHER_AREA}::{E9_TERRACE},100,DONE
+250ee97641,E9,"The structure is formed in timber, concrete, steel, other materials.",MENU,,0,VERIFIED
+010b089a47,E9,"Roof: The roof is of pitched, flat, lean-to construction and covered with tiles, slates, felt, polycarbonate, metal sheeting, other materials.",MENU,,0,VERIFIED
+3ca4736875,E9,"Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.",MENU,,0,VERIFIED
+25d2f44e89,E9,"Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.",MENU,,0,VERIFIED
+bc359f8b89,E9,"Drains: The drains are laid with bitumen, felt, concrete or other suitable materials, other appear well drained, poorly drained, unobstructed, obstructed.",MENU,,0,VERIFIED
+33fb69b43b,E9,"Poorly drained or obstructed drainage channels can allow rainwater to pond or overflow, resulting in water penetration into adjacent building elements, deterioration of finishes, and an increased risk of slips.",EXACT,{E_OTHER_AREA}::{E9_BALCONY_DRAINS},100,DONE
+c406a49ec0,E9,"Any defective, blocked, or damaged drainage channels should be cleared and repaired promptly to ensure they continue to function effectively.",EXACT,{E_OTHER_AREA}::{E9_BALCONY_DRAINS},100,DONE
+6314b578ba,E9,"Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+4ec0af77c6,E9,Routine maintenance appropriate to its age and construction of the roof terrace should be expected.,EXACT,{E_OTHER_AREA}::{E9_TERRACE_CONDITION},100,DONE
 1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-616baffbbe,E9,Routine maintenance appropriate to the roof terrace material should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},94,OPEN
-2a9fb0fbd0,E9,"External Staircase: The property incorporates an external staircase constructed of concrete, steel, timber, brick, other materials.",MENU,,0,UNVERIFIED
-ab3ed1e86a,E9,"Element (s): The handrails, landing, and steps are formed in steel, timber, aluminium, other materials.",MENU,,0,UNVERIFIED
-bfa1c98246,E9,"Condition: Where visible, the staircase appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+616baffbbe,E9,Routine maintenance appropriate to the roof terrace material should be expected.,EXACT,{E_OTHER_AREA}::{E9_TERRACE_CONDITION},100,DONE
+2a9fb0fbd0,E9,"External Staircase: The property incorporates an external staircase constructed of concrete, steel, timber, brick, other materials.",MENU,,0,VERIFIED
+ab3ed1e86a,E9,"Element (s): The handrails, landing, and steps are formed in steel, timber, aluminium, other materials.",MENU,,0,VERIFIED
+bfa1c98246,E9,"Condition: Where visible, the staircase appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-44f12adf54,E9,Routine maintenance appropriate to the staircase material should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},95,OPEN
-38804091e1,E9,"Retaining Walls: The property incorporates brick, stone, concrete, gabion, timber retaining walls.",MENU,,0,UNVERIFIED
-bea711cf4c,E9,"Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+44f12adf54,E9,Routine maintenance appropriate to the staircase material should be expected.,EXACT,{E_OTHER_AREA}::{E9_STAIRS_CONDITION},100,DONE
+38804091e1,E9,"Retaining Walls: The property incorporates brick, stone, concrete, gabion, timber retaining walls.",MENU,,0,VERIFIED
+bea711cf4c,E9,"Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-1eb10152c6,E9,Routine maintenance appropriate to the retaining wall material should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},90,OPEN
-c40331abe6,E9,"Defects noted: Evidence of movement, bulging, instability, damage, other was noted to parts or all retaining walls.",MENU,,0,UNVERIFIED
-4f7d433b6d,E9,You should arrange for further investigation by an appropriately qualified person.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_NO_SAFETY_GLASS},50,OPEN
-ce1111ce35,E9,Retaining walls are designed to support the considerable weight of the ground behind them.,ADD,{OTHER_REPAIR}::{OTHER_REPAIR_DRAINS},49,OPEN
-6d88031535,E9,"Where the retaining wall is in poor condition, it may no longer be performing its intended function effectively.",ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},46,OPEN
-b6136a5381,E9,"Repairs or replacement can be costly, as any new retaining wall must be designed and constructed to adequately resist the retained ground.",ADD,{OTHER_REPAIR}::{OTHER_REPAIR_WALL},48,OPEN
-160618848a,E9,You should instruct an appropriately qualified structural specialist to inspect the wall without delay and provide recommendations for any necessary remedial works.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_NO_SAFETY_GLASS},62,OPEN
-c74ff6b761,E9,"Where the retaining wall is shared with, or forms a boundary with, a neighbouring property, responsibility for repair and maintenance may be shared or otherwise affected by legal rights and obligations.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_DRAINS},47,OPEN
-627ab67876,E9,"Before any work is undertaken, your legal adviser should investigate ownership, maintenance responsibilities and any associated rights or liabilities, and explain the implications to you.",UNRESOLVED,{E_OTHER}::{COMMUNAL_AREA_CONDITION},50,OPEN
-bd54e61187,E9,"Other External Structures: Other external structures include bin stores, cycle stores, garden walls, pergolas, gazebos, covered walkways, storage compounds, other ancillary structures.",MENU,,0,UNVERIFIED
-bea711cf4c,E9,"Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-62cc321eb3,E9,Routine maintenance appropriate to their age and construction installation should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},89,OPEN
+1eb10152c6,E9,Routine maintenance appropriate to the retaining wall material should be expected.,EXACT,{E_OTHER_AREA}::{E9_RETAINING_CONDITION},100,DONE
+c40331abe6,E9,"Defects noted: Evidence of movement, bulging, instability, damage, other was noted to parts or all retaining walls.",MENU,,0,VERIFIED
+4f7d433b6d,E9,You should arrange for further investigation by an appropriately qualified person.,EXACT,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},100,DONE
+ce1111ce35,E9,Retaining walls are designed to support the considerable weight of the ground behind them.,EXACT,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},100,DONE
+6d88031535,E9,"Where the retaining wall is in poor condition, it may no longer be performing its intended function effectively.",EXACT,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},100,DONE
+b6136a5381,E9,"Repairs or replacement can be costly, as any new retaining wall must be designed and constructed to adequately resist the retained ground.",EXACT,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},100,DONE
+160618848a,E9,You should instruct an appropriately qualified structural specialist to inspect the wall without delay and provide recommendations for any necessary remedial works.,EXACT,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},100,DONE
+c74ff6b761,E9,"Where the retaining wall is shared with, or forms a boundary with, a neighbouring property, responsibility for repair and maintenance may be shared or otherwise affected by legal rights and obligations.",EXACT,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},100,DONE
+627ab67876,E9,"Before any work is undertaken, your legal adviser should investigate ownership, maintenance responsibilities and any associated rights or liabilities, and explain the implications to you.",EXACT,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},100,DONE
+bd54e61187,E9,"Other External Structures: Other external structures include bin stores, cycle stores, garden walls, pergolas, gazebos, covered walkways, storage compounds, other ancillary structures.",MENU,,0,VERIFIED
+bea711cf4c,E9,"Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+62cc321eb3,E9,Routine maintenance appropriate to their age and construction installation should be expected.,EXACT,{E_OTHER_AREA}::{E9_OTHER_CONDITION},100,DONE
 1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-37ee9fd9b0,E9,Routine maintenance appropriate to the installation material should be expected.,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},90,OPEN
-beab227157,E9,"Repairs Roof: The flashing, roof tile, sheet, or slate covering of the roof over the carport, balcony, canopy, other is missing, slipped, cracked, lifted, in disrepair, leaking, damaged, poorly secured, dilapidated, other.",MENU,,0,UNVERIFIED
-72962196da,E9,"Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",EXACT,{OTHER_REPAIR}::{OTHER_REPAIR_ROOF},100,DONE
-2c65ff7f11,E9,"Walls: The balcony, carport, roof terrace, staircase, other wall(s) are cracked, are damaged, are unstable, have eroded render, other.",MENU,,0,UNVERIFIED
-b68664c07a,E9,Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.,EXACT,{OTHER_REPAIR}::{OTHER_REPAIR_WALL},100,DONE
-89b4927fbc,E9,Any movement-related cracking should be investigated if considered progressive.,ADD,{OTHER_REPAIR}::{OTHER_REPAIR_PERISHED_DECORATIONS},46,OPEN
-0402efeccd,E9,"Floor: The floor surface, timbers, or decking of the balcony, carport, roof terrace, staircase floor is split, cracked, other.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_PERISHED_DECORATIONS},47,OPEN
-9f004960c3,E9,"The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",EXACT,{OTHER_REPAIR}::{OTHER_REPAIR_FLOOR},100,DONE
-2dadcdd609,E9,"Drains: The balcony, carport, roof terrace, staircase, other drains are too small, blocked, poorly drained, damaged, other, resulting in rainwater ponding.",MENU,,0,UNVERIFIED
-8dd9bad1ea,E9,Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building.,EXACT,{OTHER_REPAIR}::{OTHER_REPAIR_DRAINS},100,DONE
-f679e6fc50,E9,"The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",EXACT,{OTHER_REPAIR}::{OTHER_REPAIR_DRAINS},100,DONE
-56d0c128bc,E9,"Handrails: The handrail(s) of the balcony, Juliet balcony, terrace, stairs, other are inadequate, poorly secured, incomplete, loose, corroded, rotten, damaged, other and may not provide adequate protection against falls.",MENU,,0,UNVERIFIED
-e8dfec06be,E9,This presents a safety risk.,EXACT,{OTHER_REPAIR}::{OTHER_REPAIR_HANDRAILS},100,DONE
-a0aba2e416,E9,"The defective handrail(s) should be repaired, replaced, or redecorated with a suitably designed and securely fixed handrail that complies with current safety standards.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_HANDRAILS},94,OPEN
-3974010186,E9,"Metal Stairs: The surfaces of the steps or landing are split, cracked, partly rotted, rusted, defective.",MENU,,0,UNVERIFIED
-9b26698f69,E9,"Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",EXACT,{OTHER_REPAIR}::{OTHER_REPAIR_STEPS_LANDING},100,DONE
-c55b37b7e9,E9,"Decorations: The decorations to the stairway are peeling, flaking, damaged, other.",MENU,,0,UNVERIFIED
-916f20511c,E9,The affected surfaces should be properly prepared and redecorated as soon as practicable.,EXACT,{OTHER_REPAIR}::{OTHER_REPAIR_PERISHED_DECORATIONS},100,DONE
-58da398fa9,E9,"Where corrosion or timber decay is present, the underlying defects should be treated or repaired before redecoration.",ADD,{OTHER_REPAIR}::{OTHER_REPAIR_PERISHED_DECORATIONS},49,OPEN
-ee10214bca,E9,General Maintenance: External ancillary structures should be inspected periodically as part of routine property maintenance.,ADD,{OTHER_REPAIR}::{OTHER_REPAIR_PERISHED_DECORATIONS},49,OPEN
+37ee9fd9b0,E9,Routine maintenance appropriate to the installation material should be expected.,EXACT,{E_OTHER_AREA}::{E9_OTHER_CONDITION},100,DONE
+beab227157,E9,"Repairs Roof: The flashing, roof tile, sheet, or slate covering of the roof over the carport, balcony, canopy, other is missing, slipped, cracked, lifted, in disrepair, leaking, damaged, poorly secured, dilapidated, other.",MENU,,0,VERIFIED
+72962196da,E9,"Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",EXACT,{E_OTHER_AREA}::{E9_E9_R_ROOF},100,DONE
+2c65ff7f11,E9,"Walls: The balcony, carport, roof terrace, staircase, other wall(s) are cracked, are damaged, are unstable, have eroded render, other.",MENU,,0,VERIFIED
+b68664c07a,E9,Repairs should be carried out as soon as practicable to prevent further deterioration and maintain their structural integrity.,EXACT,{E_OTHER_AREA}::{E9_E9_R_WALL},100,DONE
+89b4927fbc,E9,Any movement-related cracking should be investigated if considered progressive.,EXACT,{E_OTHER_AREA}::{E9_E9_R_WALL},100,DONE
+0402efeccd,E9,"Floor: The floor surface, timbers, or decking of the balcony, carport, roof terrace, staircase floor is split, cracked, other.",MENU,,0,VERIFIED
+9f004960c3,E9,"The defective areas should be repaired promptly to maintain a weatherproof surface, prevent water penetration into the structure below, and reduce the risk of trip hazards.",EXACT,{E_OTHER_AREA}::{E9_E9_R_FLOOR},100,DONE
+2dadcdd609,E9,"Drains: The balcony, carport, roof terrace, staircase, other drains are too small, blocked, poorly drained, damaged, other, resulting in rainwater ponding.",MENU,,0,VERIFIED
+8dd9bad1ea,E9,Standing water can accelerate deterioration of the waterproof covering and increase the risk of water penetration into the building.,EXACT,{E_OTHER_AREA}::{E9_E9_R_DRAINS},100,DONE
+f679e6fc50,E9,"The drainage outlets should be cleared, repaired, or upgraded as necessary to ensure efficient disposal of rainwater, and thereafter maintained regularly.",EXACT,{E_OTHER_AREA}::{E9_E9_R_DRAINS},100,DONE
+56d0c128bc,E9,"Handrails: The handrail(s) of the balcony, Juliet balcony, terrace, stairs, other are inadequate, poorly secured, incomplete, loose, corroded, rotten, damaged, other and may not provide adequate protection against falls.",MENU,,0,VERIFIED
+e8dfec06be,E9,This presents a safety risk.,EXACT,{E_OTHER_AREA}::{E9_E9_R_RAILS},100,DONE
+a0aba2e416,E9,"The defective handrail(s) should be repaired, replaced, or redecorated with a suitably designed and securely fixed handrail that complies with current safety standards.",EXACT,{E_OTHER_AREA}::{E9_E9_R_RAILS},100,DONE
+3974010186,E9,"Metal Stairs: The surfaces of the steps or landing are split, cracked, partly rotted, rusted, defective.",MENU,,0,VERIFIED
+9b26698f69,E9,"Repairs should be carried out as soon as practicable to remove the safety hazard, prevent further deterioration, and maintain safe access.",EXACT,{E_OTHER_AREA}::{E9_E9_R_STEPS},100,DONE
+c55b37b7e9,E9,"Decorations: The decorations to the stairway are peeling, flaking, damaged, other.",MENU,,0,VERIFIED
+916f20511c,E9,The affected surfaces should be properly prepared and redecorated as soon as practicable.,EXACT,{E_OTHER_AREA}::{E9_E9_R_DECOR},100,DONE
+58da398fa9,E9,"Where corrosion or timber decay is present, the underlying defects should be treated or repaired before redecoration.",EXACT,{E_OTHER_AREA}::{E9_E9_R_DECOR},100,DONE
+ee10214bca,E9,General Maintenance: External ancillary structures should be inspected periodically as part of routine property maintenance.,EXACT,{E_OTHER_AREA}::{E9_GENERAL_MAINTENANCE},100,DONE
 2cf1141064,E9,"Rainwater disposal, structural stability, guarding, fixings, waterproofing and external finishes should be maintained to reduce the risk of deterioration and ensure continued safe use.",MENU,,0,UNVERIFIED
 9b30dd14a1,E9,"If the property is a flat, add the following.",MENU,,0,UNVERIFIED
 bd164b5c81,E9,It is assumed that the common parts are maintained under appropriate maintenance contracts and are the responsibility of the management company.,EXACT,{E_OTHER}::{COMMUNAL_AREA_CONDITION},100,DONE
 e6776721e7,E9,Your legal adviser should obtain full details and refer to Section I3 - Issues for Your Legal Adviser.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},62,OPEN
 fde54f0b2f,E9,Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos.,EXACT,{E_OTHER}::{COMMUNAL_AREA_CONDITION},100,DONE
-6c8993a6a3,E9,"Where communal facilities are provided, your legal adviser should confirm: the identity of the management company, responsibility for maintenance and repairs, current service charges and reserve fund contributions, any planned major works, and any outstanding maintenance liabilities.",UNRESOLVED,{E_OTHER}::{COMMUNAL_AREA_CONDITION},48,OPEN
-b355940e56,E9,"Condition rating 123 F Inside the Property Inspection Limitations It was not practical to inspect parts of the property that were covered, concealed or otherwise inaccessible without causing damage or disturbance, such as lifting carpets or removing fixed fittings.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_ROOF},43,OPEN
-2d09d59be0,E9,"Consequently, no assurance can be given regarding the condition of these concealed areas.",ADD,{E_OTHER}::{COMMUNAL_AREA_NOT_INSPECTED},46,OPEN
-0095050343,E9,This report relates only to those parts of the property that were reasonably accessible at the time of the inspection.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},47,OPEN
-4c5e35bb31,E9,"Where the roof space is inaccessible due to the absence of a suitable access hatch or the presence of other obstructions, I am unable to assess the type, presence, adequacy or condition of the insulation or concealed roof timbers.",UNRESOLVED,{OTHER_EXTERNAL_AREA}::{OTHER_OVERLOADED},44,OPEN
-f4ba93b30c,E9,"Where available, the Energy Performance Certificate (EPC) may provide additional information regarding the insulation within the roof space.",ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},50,OPEN
-b4ca7848d1,E9,Moisture readings represent the condition of the property only at the time of the inspection and cannot provide absolute assurance that concealed surfaces or structural elements are free from moisture-related defects.,ADD,{OTHER_REPAIR}::{OTHER_REPAIR_FLOOR},45,OPEN
-ff06b3f8f8,E9,"Weather conditions, temperature, and humidity can all influence moisture levels and the observations made during an inspection.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_WALL},47,OPEN
-3f872adc58,E9,"Where my findings are inconclusive regarding the extent or cause of dampness, I recommend that you arrange a further investigation by a suitably qualified independent specialist.",ADD,{OTHER_REPAIR}::{OTHER_REPAIR_STEPS_LANDING},46,OPEN
-5ede340939,E9,"The inspection should be carried out in accordance with the Joint Position Statement (JPS) 2022, Investigation of Moisture and its Effects on Traditional Buildings, and should be undertaken independently of any contractor providing quotations for remedial work.",ADD,{OTHER_REPAIR}::{OTHER_REPAIR_FLOOR},44,OPEN
+6c8993a6a3,E9,"Where communal facilities are provided, your legal adviser should confirm: the identity of the management company, responsibility for maintenance and repairs, current service charges and reserve fund contributions, any planned major works, and any outstanding maintenance liabilities.",UNRESOLVED,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},50,OPEN
+b355940e56,E9,"Condition rating 123 F Inside the Property Inspection Limitations It was not practical to inspect parts of the property that were covered, concealed or otherwise inaccessible without causing damage or disturbance, such as lifting carpets or removing fixed fittings.",UNRESOLVED,{E_OTHER_AREA}::{E9_E9_R_ROOF},43,OPEN
+2d09d59be0,E9,"Consequently, no assurance can be given regarding the condition of these concealed areas.",ADD,{E_OTHER_AREA}::{E9_INTRO},52,OPEN
+0095050343,E9,This report relates only to those parts of the property that were reasonably accessible at the time of the inspection.,ADD,{E_OTHER_AREA}::{E9_INTRO},74,OPEN
+4c5e35bb31,E9,"Where the roof space is inaccessible due to the absence of a suitable access hatch or the presence of other obstructions, I am unable to assess the type, presence, adequacy or condition of the insulation or concealed roof timbers.",UNRESOLVED,{E_OTHER_AREA}::{E9_BALCONY_DRAINS},45,OPEN
+f4ba93b30c,E9,"Where available, the Energy Performance Certificate (EPC) may provide additional information regarding the insulation within the roof space.",ADD,{E_OTHER_AREA}::{E9_COMMUNAL_CONDITION},50,OPEN
+b4ca7848d1,E9,Moisture readings represent the condition of the property only at the time of the inspection and cannot provide absolute assurance that concealed surfaces or structural elements are free from moisture-related defects.,ADD,{E_OTHER_AREA}::{E9_E9_R_FLOOR},45,OPEN
+ff06b3f8f8,E9,"Weather conditions, temperature, and humidity can all influence moisture levels and the observations made during an inspection.",UNRESOLVED,{E_OTHER_AREA}::{E9_INTRO},48,OPEN
+3f872adc58,E9,"Where my findings are inconclusive regarding the extent or cause of dampness, I recommend that you arrange a further investigation by a suitably qualified independent specialist.",ADD,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},49,OPEN
+5ede340939,E9,"The inspection should be carried out in accordance with the Joint Position Statement (JPS) 2022, Investigation of Moisture and its Effects on Traditional Buildings, and should be undertaken independently of any contractor providing quotations for remedial work.",ADD,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},45,OPEN
 e1f394acfb,E9,The inspection was visual and non-invasive.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},52,OPEN
-02cd9de095,E9,"Floor coverings were not lifted, furniture and stored items were not moved, and no opening up or destructive investigation was undertaken.",UNRESOLVED,{OTHER_REPAIR}::{OTHER_REPAIR_DRAINS},46,OPEN
-1e94130118,E9,Comments relate only to the condition observed at the time of the inspection.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},48,OPEN
+02cd9de095,E9,"Floor coverings were not lifted, furniture and stored items were not moved, and no opening up or destructive investigation was undertaken.",UNRESOLVED,{E_OTHER_AREA}::{E9_OTHER_CONDITION},47,OPEN
+1e94130118,E9,Comments relate only to the condition observed at the time of the inspection.,ADD,{E_OTHER_AREA}::{E9_INTRO},74,OPEN
 0d3aeff9f1,E9,"Limitations: The inspection of the internal accommodation was limited by fitted floor coverings, furniture, stored items, fixed fittings, restricted access, locked rooms, limited roof access, limited lighting, health, and safety considerations.",MENU,,0,UNVERIFIED
-2f9dfda515,E9,"Where roof space access was available, only those areas that could be inspected safely from the access hatch and boarded areas were examined.",ADD,{OTHER_EXTERNAL_AREA}::{OTHER_NO_SAFETY_GLASS},47,OPEN
+2f9dfda515,E9,"Where roof space access was available, only those areas that could be inspected safely from the access hatch and boarded areas were examined.",ADD,{E_OTHER_AREA}::{E9_INTRO},51,OPEN
 8847c566b0,E9,"Insulation, stored items, roof timbers, and restricted headroom may have limited the inspection.",MENU,,0,UNVERIFIED
-66b447311f,E9,Inaccessible areas have not been inspected.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},46,OPEN
+66b447311f,E9,Inaccessible areas have not been inspected.,ADD,{E_OTHER_AREA}::{E9_INTRO},48,OPEN
 298074df6b,E9,"Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection.",MENU,,0,UNVERIFIED
-6770dd48a9,E9,No comments can be made regarding unseen elements.,ADD,{E_OTHER}::{COMMUNAL_AREA_NOT_INSPECTED},43,OPEN
-0fa99d0641,E9,Unsafe floor: I could not fully inspect the roof timbers because the floor was unsafe to walk on at the time of my inspection.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_NO_SAFETY_GLASS},49,OPEN
+6770dd48a9,E9,No comments can be made regarding unseen elements.,ADD,{E_OTHER_AREA}::{E9_INTRO},48,OPEN
+0fa99d0641,E9,Unsafe floor: I could not fully inspect the roof timbers because the floor was unsafe to walk on at the time of my inspection.,ADD,{E_OTHER_AREA}::{E9_INTRO},58,OPEN
 9a09f764b8,F1,"Loft converted: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view.",EXACT,{F_ROOF_STRUCTURE}::{LOFT_CONVERTED_DEFECT},100,DONE
 f6262defc5,F1,"Consequently, I am unable to comment on the condition of the concealed areas.",EXACT,{F_ROOF_STRUCTURE}::{LOFT_CONVERTED_DEFECT},100,DONE
 042a991d29,F1,"Your legal advisers must verify that all necessary planning permissions, Building Regulations approvals, and required interim and final inspections were obtained for the conversion before you commit to the purchase.",UNRESOLVED,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{INSPECTED_OK},57,OPEN
@@ -1200,7 +1200,7 @@ e886c9c4be,F6,Routine adjustment and maintenance should be expected with normal 
 3678b1703f,F6,Routine maintenance appropriate to the built-in fittings should be expected.,ADD,{F_BUILT_IN_FITTINGS}::{NOT_INSPECTED},61,OPEN
 bed1873edd,F6,"Fittings defects: One or more cupboard doors or drawers require adjustment, repair, replacement due to wear or damage.",UNRESOLVED,{F_BUILT_IN_FITTINGS}::{STANDARD_TEXT_2},50,OPEN
 9ec64c4112,F6,"Kitchen Sink: The kitchen, utility room, other sink(s) is formed in stainless steel, ceramic, composite, stone, other material.",MENU,,0,UNVERIFIED
-25632a4c28,F6,"Where visible, it appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+25632a4c28,F6,"Where visible, it appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 59211c653c,F6,The sink was inspected visually only and was not assessed for leakage or drainage performance.,EXACT,{F_BUILT_IN_FITTINGS}::{KITCHEN_SINK},100,DONE
 911d1f0518,F6,"Sealant defects: The sealant around the sink or at the wall joints with the worktop is cracked, damaged, moulded, worn, missing.",MENU,,0,UNVERIFIED
 c08abc90c7,F6,Defective sealant should be renewed to reduce the risk of water penetration into adjacent units.,EXACT,{F_BUILT_IN_FITTINGS}::{DEFECTIVE_SEALANTS},100,DONE

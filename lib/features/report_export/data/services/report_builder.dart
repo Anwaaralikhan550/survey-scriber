@@ -1639,40 +1639,6 @@ class ReportBuilder {
           'The design of one or more windows does not provide a suitable means of escape for occupants in the event of a fire (see section E5 - Windows).');
     }
 
-    // RICS L2 cross-injection from Section E9 Other (Phase 2B): the
-    // spec's one E9 -> J3 injection (handrail defects). Not present in
-    // the digitised library's crossInjects list for this element (a
-    // digitiser gap - the raw spec text uses "Add text to J3" without the
-    // "Section" wording every other injection in the library uses, which
-    // the extraction pattern didn't catch), but confirmed present in the
-    // raw spec text and wired here regardless. Checked across the 5
-    // numbered handrail-repair screen variants that actually reference
-    // {OTHER_REPAIR_HANDRAILS} in their wrapper (roof terrace, balcony,
-    // Juliet balcony, external stairs, other - carport and porch canopy
-    // have no handrails in the spec or this app's screens).
-    for (final screenId in const [
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__2',
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__3',
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__4',
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__5',
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__6',
-    ]) {
-      final handrailRepair = _answersForScreen(rawData, screenId);
-      final handrailDefects = _labelsForAnswerMap(
-        handrailRepair,
-        const <String, String>{
-          'cb_partly_rotten_65': 'partly rotten',
-          'cb_not_strong_enough_51': 'not strong enough',
-          'cb_inadequately_designed_43': 'inadequately designed',
-        },
-      );
-      if (handrailDefects.isNotEmpty) {
-        phrases.add(
-            'The handrail(s) are damaged, inadequate or poorly designed and this presents a safety risk (see section E9 - Other).');
-        break;
-      }
-    }
-
     // Revised-spec J3 topic statements (verbatim from the approved bank),
     // surfaced when their category is relevant so J3 matches the revised
     // Risks-to-People structure. Skipped when the bank is unavailable.

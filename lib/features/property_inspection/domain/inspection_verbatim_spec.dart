@@ -4447,6 +4447,924 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     pdf:
         'Defective Joinery One or more defects were observed, including: • Loose fascias • Loose soffits • Damaged bargeboards • Open joints • Defective fixings • Weathered decoration • Localised timber decay • Distorted joinery • Minor impact damage Repairs should be undertaken to prevent further deterioration and maintain weather resistance.',
   ),
+  VerbatimRule(
+    'e9_carport',
+    'activity_outside_property_other_other_external',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT}',
+    [
+      VerbatimToken(
+        '{E9_CARPORT_TYPES}',
+        options: {
+          'e90c_timber': 'timber',
+          'e90c_steel': 'steel',
+          'e90c_aluminium': 'aluminium',
+          'e90c_masonry': 'masonry',
+        },
+        pdfOptions: ['timber', 'steel', 'aluminium', 'masonry'],
+      ),
+    ],
+    pdf:
+        'Carport: The property incorporates a timber, steel, aluminium, masonry carport.',
+  ),
+  VerbatimRule(
+    'e9_carport_roof',
+    'activity_outside_property_other_other_roof',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT_ROOF}',
+    [
+      VerbatimToken(
+        '{E9_ROOF_SHAPE}',
+        options: {
+          'e90rs_pitched': 'pitched',
+          'e90rs_flat': 'flat',
+          'e90rs_lean_to': 'lean-to',
+        },
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{E9_ROOF_COVERING}',
+        options: {
+          'e90rc_tiles': 'tiles',
+          'e90rc_slates': 'slates',
+          'e90rc_felt_sheet': 'felt sheet',
+          'e90rc_polycarbonate_sheet': 'polycarbonate sheet',
+          'e90rc_metal_sheeting': 'metal sheeting',
+        },
+        otherCheckbox: 'e90rc_other',
+        otherText: 'e90rc_other_text',
+        pdfOptions: ['tiles', 'slates', 'felt sheet', 'polycarbonate sheet', 'metal sheeting'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to construction and covered with tiles, slates, felt sheet, polycarbonate sheet, metal sheeting, other material.',
+  ),
+  VerbatimRule(
+    'e9_carport_walls',
+    'activity_outside_property_other_other_wall',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT_WALLS}',
+    [
+      VerbatimToken(
+        '{E9_WALL_MATERIALS}',
+        options: {
+          'e90w_bricks': 'bricks',
+          'e90w_timber': 'timber',
+          'e90w_steel': 'steel',
+          'e90w_glass': 'glass',
+          'e90w_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'e90w_other',
+        otherText: 'e90w_other_text',
+        pdfOptions: ['bricks', 'timber', 'steel', 'glass', 'aluminium'],
+      ),
+    ],
+    pdf:
+        'Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.',
+  ),
+  VerbatimRule(
+    'e9_carport_floor',
+    'activity_outside_property_other_floors',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT_FLOOR}',
+    [
+      VerbatimToken(
+        '{E9_FLOOR_FINISH}',
+        options: {
+          'e90f_concrete': 'concrete',
+          'e90f_block_paving': 'block paving',
+          'e90f_tarmac': 'tarmac',
+          'e90f_gravel': 'gravel',
+        },
+        otherCheckbox: 'e90f_other',
+        otherText: 'e90f_other_text',
+        pdfOptions: ['concrete', 'block paving', 'tarmac', 'gravel'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.',
+  ),
+  VerbatimRule(
+    'e9_carport_cond',
+    'activity_out_side_other_external_area_condition',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_porch',
+    'activity_outside_property_other_other_external__construction',
+    '{E_OTHER_AREA}',
+    '{E9_PORCH}',
+    [
+      VerbatimToken(
+        '{E9_PORCH_MATERIALS}',
+        options: {
+          'e91c_timber': 'timber',
+          'e91c_steel': 'steel',
+          'e91c_concrete': 'concrete',
+          'e91c_plastic': 'plastic',
+        },
+        otherCheckbox: 'e91c_other',
+        otherText: 'e91c_other_text',
+        pdfOptions: ['timber', 'steel', 'concrete', 'plastic'],
+      ),
+    ],
+    pdf:
+        'Porch Canopy: The property incorporates a porch canopy constructed of timber, steel, concrete, plastic, other material.',
+  ),
+  VerbatimRule(
+    'e9_porch_roof',
+    'activity_outside_property_other_other_roof__roof',
+    '{E_OTHER_AREA}',
+    '{E9_PORCH_ROOF}',
+    [
+      VerbatimToken(
+        '{E9_ROOF_COVERING}',
+        options: {
+          'e91r_tiles': 'tiles',
+          'e91r_slates': 'slates',
+          'e91r_felt': 'felt',
+          'e91r_polycarbonate': 'polycarbonate',
+          'e91r_plastic': 'plastic',
+        },
+        otherCheckbox: 'e91r_other',
+        otherText: 'e91r_other_text',
+        pdfOptions: ['tiles', 'slates', 'felt', 'polycarbonate', 'plastic'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof covering comprises tiles, slates, felt, polycarbonate, plastic, other material.',
+  ),
+  VerbatimRule(
+    'e9_porch_cond',
+    'activity_out_side_other_external_area_condition__condition',
+    '{E_OTHER_AREA}',
+    '{E9_PORCH_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the canopy appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_terrace',
+    'activity_outside_property_other_other_external__construction__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE}',
+    [
+      VerbatimToken(
+        '{E9_TERRACE_MATERIALS}',
+        options: {
+          'e92c_timber': 'timber',
+          'e92c_concrete': 'concrete',
+          'e92c_steel': 'steel',
+        },
+        otherCheckbox: 'e92c_other',
+        otherText: 'e92c_other_text',
+        pdfOptions: ['timber', 'concrete', 'steel'],
+      ),
+    ],
+    pdf:
+        'The structure is formed in timber, concrete, steel, other materials.',
+  ),
+  VerbatimRule(
+    'e9_terrace_roof',
+    'activity_outside_property_other_other_roof__roof__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_ROOF}',
+    [
+      VerbatimToken(
+        '{E9_ROOF_SHAPE}',
+        options: {
+          'e92rs_pitched': 'pitched',
+          'e92rs_flat': 'flat',
+          'e92rs_lean_to': 'lean-to',
+        },
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{E9_ROOF_COVERING}',
+        options: {
+          'e92rc_tiles': 'tiles',
+          'e92rc_slates': 'slates',
+          'e92rc_felt': 'felt',
+          'e92rc_polycarbonate': 'polycarbonate',
+          'e92rc_metal_sheeting': 'metal sheeting',
+        },
+        otherCheckbox: 'e92rc_other',
+        otherText: 'e92rc_other_text',
+        pdfOptions: ['tiles', 'slates', 'felt', 'polycarbonate', 'metal sheeting'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to construction and covered with tiles, slates, felt, polycarbonate, metal sheeting, other materials.',
+  ),
+  VerbatimRule(
+    'e9_terrace_walls',
+    'activity_outside_property_other_other_wall__wall_construction__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_WALLS}',
+    [
+      VerbatimToken(
+        '{E9_WALL_MATERIALS}',
+        options: {
+          'e92w_bricks': 'bricks',
+          'e92w_timber': 'timber',
+          'e92w_steel': 'steel',
+          'e92w_glass': 'glass',
+          'e92w_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'e92w_other',
+        otherText: 'e92w_other_text',
+        pdfOptions: ['bricks', 'timber', 'steel', 'glass', 'aluminium'],
+      ),
+    ],
+    pdf:
+        'Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.',
+  ),
+  VerbatimRule(
+    'e9_terrace_floor',
+    'activity_outside_property_other_floors__floor__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_FLOOR}',
+    [
+      VerbatimToken(
+        '{E9_FLOOR_FINISH}',
+        options: {
+          'e92f_concrete': 'concrete',
+          'e92f_block_paving': 'block paving',
+          'e92f_tarmac': 'tarmac',
+          'e92f_gravel': 'gravel',
+        },
+        otherCheckbox: 'e92f_other',
+        otherText: 'e92f_other_text',
+        pdfOptions: ['concrete', 'block paving', 'tarmac', 'gravel'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.',
+  ),
+  VerbatimRule(
+    'e9_terrace_drains',
+    'activity_outside_property_other_drains__drains__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_DRAINS}',
+    [
+      VerbatimToken(
+        '{E9_DRAIN_MATERIALS}',
+        options: {
+          'e92d_bitumen': 'bitumen',
+          'e92d_felt': 'felt',
+          'e92d_concrete': 'concrete',
+        },
+        otherCheckbox: 'e92d_other',
+        otherText: 'e92d_other_text',
+        pdfOptions: ['bitumen', 'felt', 'concrete'],
+      ),
+      VerbatimToken(
+        '{E9_DRAIN_STATE}',
+        options: {
+          'e92s_well_drained': 'well drained',
+          'e92s_poorly_drained': 'poorly drained',
+          'e92s_unobstructed': 'unobstructed',
+          'e92s_obstructed': 'obstructed',
+        },
+        pdfOptions: ['well drained', 'poorly drained', 'unobstructed', 'obstructed'],
+      ),
+    ],
+    pdf:
+        'Drains: The drains are laid with bitumen, felt, concrete or other suitable materials, other appear well drained, poorly drained, unobstructed, obstructed.',
+  ),
+  VerbatimRule(
+    'e9_terrace_cond',
+    'activity_out_side_other_external_area_condition__condition__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_balcony',
+    'activity_outside_property_other_other_external__construction__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY}',
+    [
+      VerbatimToken(
+        '{E9_BALCONY_TYPES}',
+        options: {
+          'e93c_timber': 'timber',
+          'e93c_steel': 'steel',
+          'e93c_concrete': 'concrete',
+          'e93c_cantilevered': 'cantilevered',
+        },
+        pdfOptions: ['timber', 'steel', 'concrete', 'cantilevered'],
+      ),
+    ],
+    pdf:
+        'Balcony: The property incorporates a timber, steel, concrete, cantilevered balcony(s).',
+  ),
+  VerbatimRule(
+    'e9_balcony_walls',
+    'activity_outside_property_other_other_wall__wall_construction__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY_WALLS}',
+    [
+      VerbatimToken(
+        '{E9_WALL_MATERIALS}',
+        options: {
+          'e93w_bricks': 'bricks',
+          'e93w_timber': 'timber',
+          'e93w_steel': 'steel',
+          'e93w_glass': 'glass',
+          'e93w_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'e93w_other',
+        otherText: 'e93w_other_text',
+        pdfOptions: ['bricks', 'timber', 'steel', 'glass', 'aluminium'],
+      ),
+    ],
+    pdf:
+        'Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.',
+  ),
+  VerbatimRule(
+    'e9_balcony_floor',
+    'activity_outside_property_other_floors__floor__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY_FLOOR}',
+    [
+      VerbatimToken(
+        '{E9_FLOOR_FINISH}',
+        options: {
+          'e93f_concrete': 'concrete',
+          'e93f_block_paving': 'block paving',
+          'e93f_tarmac': 'tarmac',
+          'e93f_gravel': 'gravel',
+        },
+        otherCheckbox: 'e93f_other',
+        otherText: 'e93f_other_text',
+        pdfOptions: ['concrete', 'block paving', 'tarmac', 'gravel'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.',
+  ),
+  VerbatimRule(
+    'e9_balcony_drains',
+    'activity_outside_property_other_drains__drains__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY_DRAINS}',
+    [
+      VerbatimToken(
+        '{E9_DRAIN_MATERIALS}',
+        options: {
+          'e93d_bitumen': 'bitumen',
+          'e93d_felt': 'felt',
+          'e93d_concrete': 'concrete',
+        },
+        otherCheckbox: 'e93d_other',
+        otherText: 'e93d_other_text',
+        pdfOptions: ['bitumen', 'felt', 'concrete'],
+      ),
+      VerbatimToken(
+        '{E9_DRAIN_STATE}',
+        options: {
+          'e93s_well_drained': 'well drained',
+          'e93s_poorly_drained': 'poorly drained',
+          'e93s_unobstructed': 'unobstructed',
+          'e93s_obstructed': 'obstructed',
+        },
+        pdfOptions: ['well drained', 'poorly drained', 'unobstructed', 'obstructed'],
+      ),
+    ],
+    pdf:
+        'Drains: The drains are laid with bitumen, felt, concrete, other materials, other appear well drained, poorly drained, unobstructed, obstructed.',
+  ),
+  VerbatimRule(
+    'e9_balcony_cond',
+    'activity_out_side_other_external_area_condition__condition__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_juliet',
+    'activity_outside_property_other_other_external__construction__4',
+    '{E_OTHER_AREA}',
+    '{E9_JULIET}',
+    [
+      VerbatimToken(
+        '{E9_JULIET_MATERIALS}',
+        options: {
+          'e94c_steel': 'steel',
+          'e94c_aluminium': 'aluminium',
+          'e94c_glass': 'glass',
+        },
+        otherCheckbox: 'e94c_other',
+        otherText: 'e94c_other_text',
+        pdfOptions: ['steel', 'aluminium', 'glass'],
+      ),
+    ],
+    pdf:
+        'Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel, aluminium, glass, other materials.',
+  ),
+  VerbatimRule(
+    'e9_juliet_cond',
+    'activity_out_side_other_external_area_condition__condition__4',
+    '{E_OTHER_AREA}',
+    '{E9_JULIET_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, it appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_stairs',
+    'activity_outside_property_other_other_external__construction__5',
+    '{E_OTHER_AREA}',
+    '{E9_STAIRS}',
+    [
+      VerbatimToken(
+        '{E9_STAIR_MATERIALS}',
+        options: {
+          'e95c_concrete': 'concrete',
+          'e95c_steel': 'steel',
+          'e95c_timber': 'timber',
+          'e95c_brick': 'brick',
+        },
+        otherCheckbox: 'e95c_other',
+        otherText: 'e95c_other_text',
+        pdfOptions: ['concrete', 'steel', 'timber', 'brick'],
+      ),
+    ],
+    pdf:
+        'External Staircase: The property incorporates an external staircase constructed of concrete, steel, timber, brick, other materials.',
+  ),
+  VerbatimRule(
+    'e9_stairs_elements',
+    'activity_outside_property_other_handrails__handrails__5',
+    '{E_OTHER_AREA}',
+    '{E9_STAIRS_ELEMENTS}',
+    [
+      VerbatimToken(
+        '{E9_STAIR_ELEMENT_MATERIALS}',
+        options: {
+          'e95e_steel': 'steel',
+          'e95e_timber': 'timber',
+          'e95e_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'e95e_other',
+        otherText: 'e95e_other_text',
+        pdfOptions: ['steel', 'timber', 'aluminium'],
+      ),
+    ],
+    pdf:
+        'Element (s): The handrails, landing, and steps are formed in steel, timber, aluminium, other materials.',
+  ),
+  VerbatimRule(
+    'e9_stairs_cond',
+    'activity_out_side_other_external_area_condition__condition__5',
+    '{E_OTHER_AREA}',
+    '{E9_STAIRS_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the staircase appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_other',
+    'activity_outside_property_other_other_external__construction__6',
+    '{E_OTHER_AREA}',
+    '{E9_OTHER}',
+    [
+      VerbatimToken(
+        '{E9_OTHER_STRUCTURES}',
+        options: {
+          'e96c_bin_stores': 'bin stores',
+          'e96c_cycle_stores': 'cycle stores',
+          'e96c_garden_walls': 'garden walls',
+          'e96c_pergolas': 'pergolas',
+          'e96c_gazebos': 'gazebos',
+          'e96c_covered_walkways': 'covered walkways',
+          'e96c_storage_compounds': 'storage compounds',
+        },
+        otherCheckbox: 'e96c_other',
+        otherText: 'e96c_other_text',
+        pdfOptions: ['bin stores', 'cycle stores', 'garden walls', 'pergolas', 'gazebos', 'covered walkways', 'storage compounds'],
+      ),
+    ],
+    pdf:
+        'Other External Structures: Other external structures include bin stores, cycle stores, garden walls, pergolas, gazebos, covered walkways, storage compounds, other ancillary structures.',
+  ),
+  VerbatimRule(
+    'e9_other_cond',
+    'activity_out_side_other_external_area_condition__condition__6',
+    '{E_OTHER_AREA}',
+    '{E9_OTHER_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_rw',
+    'activity_outside_property_other_retaining_walls',
+    '{E_OTHER_AREA}',
+    '{E9_RETAINING}',
+    [
+      VerbatimToken(
+        '{E9_RW_MATERIALS}',
+        options: {
+          'e9rw_brick': 'brick',
+          'e9rw_stone': 'stone',
+          'e9rw_concrete': 'concrete',
+          'e9rw_gabion': 'gabion',
+          'e9rw_timber': 'timber',
+        },
+        pdfOptions: ['brick', 'stone', 'concrete', 'gabion', 'timber'],
+      ),
+    ],
+    pdf:
+        'Retaining Walls: The property incorporates brick, stone, concrete, gabion, timber retaining walls.',
+  ),
+  VerbatimRule(
+    'e9_rw_cond',
+    'activity_outside_property_other_retaining_walls',
+    '{E_OTHER_AREA}',
+    '{E9_RETAINING_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_rw_defects',
+    'activity_outside_property_other_retaining_walls_defects',
+    '{E_OTHER_AREA}',
+    '{E9_RETAINING_DEFECTS}',
+    [
+      VerbatimToken(
+        '{E9_RW_DEFECTS}',
+        options: {
+          'e9rd_movement': 'movement',
+          'e9rd_bulging': 'bulging',
+          'e9rd_instability': 'instability',
+          'e9rd_damage': 'damage',
+        },
+        otherCheckbox: 'e9rd_other',
+        otherText: 'e9rd_other_text',
+        pdfOptions: ['movement', 'bulging', 'instability', 'damage'],
+      ),
+    ],
+    pdf:
+        'Defects noted: Evidence of movement, bulging, instability, damage, other was noted to parts or all retaining walls.',
+  ),
+  VerbatimRule(
+    'e9_communal',
+    'activity_outside_property_other_communal_area',
+    '{E_OTHER_AREA}',
+    '{E9_COMMUNAL}',
+    [
+      VerbatimToken(
+        '{E9_COMMUNAL}',
+        options: {
+          'e9ca_communal_entrances': 'communal entrances',
+          'e9ca_access_roads': 'access roads',
+          'e9ca_parking_areas': 'parking areas',
+          'e9ca_footpaths': 'footpaths',
+          'e9ca_landscaped_areas': 'landscaped areas',
+          'e9ca_boundary_structures': 'boundary structures',
+          'e9ca_security_gates': 'security gates',
+          'e9ca_cctv': 'CCTV',
+          'e9ca_lighting': 'lighting',
+          'e9ca_bin_stores': 'bin stores',
+          'e9ca_cycle_stores': 'cycle stores',
+        },
+        otherCheckbox: 'e9ca_other',
+        otherText: 'e9ca_other_text',
+        pdfOptions: ['communal entrances', 'access roads', 'parking areas', 'footpaths', 'landscaped areas', 'boundary structures', 'security gates', 'CCTV', 'lighting', 'bin stores', 'cycle stores'],
+      ),
+    ],
+    pdf:
+        'Description: Where applicable, the external communal areas comprise communal entrances, access roads, parking areas, footpaths, landscaped areas, boundary structures, security gates, CCTV, lighting, bin stores, cycle stores, other facilities.',
+  ),
+  VerbatimRule(
+    'e9_communal_cond',
+    'activity_outside_property_other_communal_area',
+    '{E_OTHER_AREA}',
+    '{E9_COMMUNAL_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.',
+  ),
+  VerbatimRule(
+    'e9_r_roof',
+    'activity_outside_property_other_repairs_roof',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_ROOF}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rr_s_carport': 'carport',
+          'e9rr_s_balcony': 'balcony',
+          'e9rr_s_canopy': 'canopy',
+        },
+        otherCheckbox: 'e9rr_s_other',
+        otherText: 'e9rr_s_other_text',
+        pdfOptions: ['carport', 'balcony', 'canopy'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rr_d_missing': 'missing',
+          'e9rr_d_slipped': 'slipped',
+          'e9rr_d_cracked': 'cracked',
+          'e9rr_d_lifted': 'lifted',
+          'e9rr_d_in_disrepair': 'in disrepair',
+          'e9rr_d_leaking': 'leaking',
+          'e9rr_d_damaged': 'damaged',
+          'e9rr_d_poorly_secured': 'poorly secured',
+          'e9rr_d_dilapidated': 'dilapidated',
+        },
+        otherCheckbox: 'e9rr_d_other',
+        otherText: 'e9rr_d_other_text',
+        pdfOptions: ['missing', 'slipped', 'cracked', 'lifted', 'in disrepair', 'leaking', 'damaged', 'poorly secured', 'dilapidated'],
+      ),
+    ],
+    pdf:
+        'Repairs Roof: The flashing, roof tile, sheet, or slate covering of the roof over the carport, balcony, canopy, other is missing, slipped, cracked, lifted, in disrepair, leaking, damaged, poorly secured, dilapidated, other.',
+  ),
+  VerbatimRule(
+    'e9_r_wall',
+    'activity_outside_property_other_repairs_wall',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_WALL}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rw_s_balcony': 'balcony',
+          'e9rw_s_carport': 'carport',
+          'e9rw_s_roof_terrace': 'roof terrace',
+          'e9rw_s_staircase': 'staircase',
+        },
+        otherCheckbox: 'e9rw_s_other',
+        otherText: 'e9rw_s_other_text',
+        pdfOptions: ['balcony', 'carport', 'roof terrace', 'staircase'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rw_d_are_cracked': 'are cracked',
+          'e9rw_d_are_damaged': 'are damaged',
+          'e9rw_d_are_unstable': 'are unstable',
+          'e9rw_d_have_eroded_render': 'have eroded render',
+        },
+        otherCheckbox: 'e9rw_d_other',
+        otherText: 'e9rw_d_other_text',
+        pdfOptions: ['are cracked', 'are damaged', 'are unstable', 'have eroded render'],
+      ),
+    ],
+    pdf:
+        'Walls: The balcony, carport, roof terrace, staircase, other wall(s) are cracked, are damaged, are unstable, have eroded render, other.',
+  ),
+  VerbatimRule(
+    'e9_r_floor',
+    'activity_outside_property_other_repairs_floor',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_FLOOR}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rf_s_balcony': 'balcony',
+          'e9rf_s_carport': 'carport',
+          'e9rf_s_roof_terrace': 'roof terrace',
+          'e9rf_s_staircase_floor': 'staircase floor',
+        },
+        pdfOptions: ['balcony', 'carport', 'roof terrace', 'staircase floor'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rf_d_split': 'split',
+          'e9rf_d_cracked': 'cracked',
+        },
+        otherCheckbox: 'e9rf_d_other',
+        otherText: 'e9rf_d_other_text',
+        pdfOptions: ['split', 'cracked'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor surface, timbers, or decking of the balcony, carport, roof terrace, staircase floor is split, cracked, other.',
+  ),
+  VerbatimRule(
+    'e9_r_drains',
+    'activity_outside_property_other_repairs_drains',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_DRAINS}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rd_s_balcony': 'balcony',
+          'e9rd_s_carport': 'carport',
+          'e9rd_s_roof_terrace': 'roof terrace',
+          'e9rd_s_staircase': 'staircase',
+        },
+        otherCheckbox: 'e9rd_s_other',
+        otherText: 'e9rd_s_other_text',
+        pdfOptions: ['balcony', 'carport', 'roof terrace', 'staircase'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rd_d_too_small': 'too small',
+          'e9rd_d_blocked': 'blocked',
+          'e9rd_d_poorly_drained': 'poorly drained',
+          'e9rd_d_damaged': 'damaged',
+        },
+        otherCheckbox: 'e9rd_d_other',
+        otherText: 'e9rd_d_other_text',
+        pdfOptions: ['too small', 'blocked', 'poorly drained', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Drains: The balcony, carport, roof terrace, staircase, other drains are too small, blocked, poorly drained, damaged, other, resulting in rainwater ponding.',
+  ),
+  VerbatimRule(
+    'e9_r_rails',
+    'activity_outside_property_other_repairs_hand_rails',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_RAILS}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rh_s_balcony': 'balcony',
+          'e9rh_s_juliet_balcony': 'Juliet balcony',
+          'e9rh_s_terrace': 'terrace',
+          'e9rh_s_stairs': 'stairs',
+        },
+        otherCheckbox: 'e9rh_s_other',
+        otherText: 'e9rh_s_other_text',
+        pdfOptions: ['balcony', 'Juliet balcony', 'terrace', 'stairs'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rh_d_inadequate': 'inadequate',
+          'e9rh_d_poorly_secured': 'poorly secured',
+          'e9rh_d_incomplete': 'incomplete',
+          'e9rh_d_loose': 'loose',
+          'e9rh_d_corroded': 'corroded',
+          'e9rh_d_rotten': 'rotten',
+          'e9rh_d_damaged': 'damaged',
+        },
+        otherCheckbox: 'e9rh_d_other',
+        otherText: 'e9rh_d_other_text',
+        pdfOptions: ['inadequate', 'poorly secured', 'incomplete', 'loose', 'corroded', 'rotten', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Handrails: The handrail(s) of the balcony, Juliet balcony, terrace, stairs, other are inadequate, poorly secured, incomplete, loose, corroded, rotten, damaged, other and may not provide adequate protection against falls.',
+  ),
+  VerbatimRule(
+    'e9_r_steps',
+    'activity_outside_property_other_repairs_steps_landing',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_STEPS}',
+    [
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rs_d_split': 'split',
+          'e9rs_d_cracked': 'cracked',
+          'e9rs_d_partly_rotted': 'partly rotted',
+          'e9rs_d_rusted': 'rusted',
+          'e9rs_d_defective': 'defective',
+        },
+        pdfOptions: ['split', 'cracked', 'partly rotted', 'rusted', 'defective'],
+      ),
+    ],
+    pdf:
+        'Metal Stairs: The surfaces of the steps or landing are split, cracked, partly rotted, rusted, defective.',
+  ),
+  VerbatimRule(
+    'e9_r_decor',
+    'activity_outside_property_other_repairs_decorations',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_DECOR}',
+    [
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rn_d_peeling': 'peeling',
+          'e9rn_d_flaking': 'flaking',
+          'e9rn_d_damaged': 'damaged',
+        },
+        otherCheckbox: 'e9rn_d_other',
+        otherText: 'e9rn_d_other_text',
+        pdfOptions: ['peeling', 'flaking', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Decorations: The decorations to the stairway are peeling, flaking, damaged, other.',
+  ),
+  VerbatimRule(
+    'e9_intro',
+    'activity_outside_property_other_main_screen',
+    '{E_OTHER_AREA}',
+    '{E9_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'e9_general',
+    'activity_outside_property_other_main_screen',
+    '{E_OTHER_AREA}',
+    '{E9_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 
