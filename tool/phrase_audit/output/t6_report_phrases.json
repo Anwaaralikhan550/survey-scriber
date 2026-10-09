@@ -982,6 +982,13 @@
   },
   {
    "section": "J",
+   "screen": "derived_j_intro",
+   "phrases": [
+    "This section highlights risks identified during the visual inspection that may affect the property, its occupants or future maintenance. The comments are based solely on the condition observed at the time of the inspection. The Home Survey is a visual inspection only and cannot identify every potential risk. Where appropriate, further investigation by an appropriately qualified person is recommended."
+   ]
+  },
+  {
+   "section": "J",
    "screen": "activity_risks_risk_to_building_",
    "phrases": [
     "Structural Movement: Evidence of historic, localised, recurring and progressive movement, including possible structural was observed. Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",

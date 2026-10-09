@@ -590,3 +590,10 @@ e028281c9b,TOKENISED,PDF option list "small, medium or large" is the {J2_TREE_SI
 b3cdc1b162,QUERY,PDF shows **bold markers** around "Control of Asbestos Regulations 2012" (CLIENT_QUERIES #11); bank prints the text without markers until the client answers
 516f6d9e1d,ACCEPT,identical to PDF: the pointer "(see Section J3 – Risks)" uses an en dash (bank equals the PDF); only the ledger compare differs
 ea89b0cb26,ACCEPT,"PDF row carries the section heading ""E - Outside the Property Limitations""; sentence printed by rule e0_ground"
+49b05e1c1b,ACCEPT,"PDF row carries the heading word ""Regulations"" glued to the sentence; sentence printed by rule i1_intro"
+c71ae9998b,ACCEPT,"PDF row joins the list intro with the first list item; both printed (rules i1_intro + i1_alterations)"
+45dc342e4a,ACCEPT,"PDF row joins the list intro with the first list item; both printed (rules i2_intro + i2_windows)"
+1d6de9e793,ACCEPT,"PDF row carries the heading words ""Condition rating 123 G Services"" glued to the sentence; bank text equals the PDF"
+5b27a93105,ACCEPT,"PDF row carries the heading ""J Risks"" glued to the sentence; printed by the J intro (bank key J_INTRO)"
+ab1448e42f,ACCEPT,"PDF row carries the heading words ""Condition rating 123 H Grounds"" glued to the sentence; bank text equals the PDF"
+b355940e56,ACCEPT,"PDF row carries the page heading ""F Inside the Property Inspection Limitations"" glued to the first sentence; printed by rule f0_concealed"

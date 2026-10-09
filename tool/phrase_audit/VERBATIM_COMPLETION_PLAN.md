@@ -190,3 +190,4 @@ bank key, and the test that proves it.
 | F Inside limitations | DONE (gate green, +3737) | `gen_f0.py`: 8 rules on `activity_inside_property_limitation`; old handler and its validation removed (CLIENT_QUERIES #120) |
 | J4 + K1 | DONE (gate green) | `gen_j4k1.py`: 4 proximity rules + further investigations + new K1 screen (3 rules); J4 security fold-in and K default text removed (CLIENT_QUERIES #121–#122) |
 | J4 + K1 | DONE (gate green) | `gen_j4k1.py`: 4 proximity rules + further investigations + new K1 screen (3 rules); J4 security fold-in and K default text removed (CLIENT_QUERIES #121–#122) |
+| I1/I2/I3 intros + J intro | DONE (gate green, +3775) | I1/I2 intro rules already printed the PDF text (open rows were list/heading glue, recorded in ledger_decisions.csv); new static J intro (`{J_INTRO}`) printed at the top of J by report_builder (CLIENT_QUERIES #123) |

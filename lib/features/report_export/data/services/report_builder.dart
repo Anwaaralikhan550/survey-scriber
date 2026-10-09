@@ -2228,6 +2228,20 @@ class ReportBuilder {
     }
 
     if (sectionKey == 'J') {
+      // PDF J intro paragraph (end of the I3 page), printed once at the top of J.
+      final jIntro = inspectionPhraseEngine?.buildStaticSubPhrases('{J_INTRO}', '') ??
+          const <String>[];
+      if (jIntro.isNotEmpty) {
+        screens.insert(
+          0,
+          ReportScreen(
+            screenId: 'derived_j_intro',
+            title: 'Risks',
+            fields: const <ReportField>[],
+            phrases: jIntro,
+          ),
+        );
+      }
       // Revised spec (Phase 7): the Risks section is exactly four subsections -
       // J1 Risks to the Building, J2 Risks to the Grounds, J3 Risks to People,
       // J4 Other risks. The app previously produced five (a separate J4 Risks
