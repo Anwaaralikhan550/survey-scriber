@@ -15,14 +15,6 @@ void main() {
     engine = InspectionPhraseEngine(texts);
   });
 
-  test('poor-fitting water tank lid has a dedicated repair narrative', () {
-    final phrases = engine.buildPhrases(
-      'activity_inside_property_water_tank',
-      {'cb_poor_fitting_cover': 'true'},
-    );
-
-    expect(phrases, contains(contains('close-fitting lid')));
-  });
 
   test('oil tank near a watercourse explains secondary containment', () {
     final phrases = engine.buildPhrases(

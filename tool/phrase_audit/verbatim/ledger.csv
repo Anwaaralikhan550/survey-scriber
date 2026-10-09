@@ -756,7 +756,7 @@ e851565807,E8,Timber components should be redecorated at appropriate intervals t
 fb645affab,E9,The inspection was limited to those parts that were safely accessible at the time of inspection.,EXACT,{E_OTHER_AREA}::{E9_INTRO},100,DONE
 479aef5807,E9,"No opening up, testing or dismantling of concealed elements was undertaken.",EXACT,{E_OTHER_AREA}::{E9_INTRO},100,DONE
 eb098a6c16,E9,Comments relate only to the visible condition of the structures inspected.,EXACT,{E_OTHER_AREA}::{E9_INTRO},100,DONE
-1502ba09c9,E9,"This section relates to external features not reported elsewhere within this report, including carports, porches, balconies, Juliet balconies, roof terraces, external staircases, retaining walls, communal areas, and other ancillary external structures.",MENU,,0,UNVERIFIED
+1502ba09c9,E9,"This section relates to external features not reported elsewhere within this report, including carports, porches, balconies, Juliet balconies, roof terraces, external staircases, retaining walls, communal areas, and other ancillary external structures.",MENU,,0,VERIFIED
 33bd78c5b8,E9,Only those elements that were readily visible and safely accessible at the time of inspection have been assessed.,EXACT,{E_OTHER_AREA}::{E9_INTRO},100,DONE
 af920f4c5a,E9,"Description: Where applicable, the external communal areas comprise communal entrances, access roads, parking areas, footpaths, landscaped areas, boundary structures, security gates, CCTV, lighting, bin stores, cycle stores, other facilities.",MENU,,0,VERIFIED
 0a78bce367,E9,"Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.",MENU,,0,VERIFIED
@@ -843,8 +843,8 @@ c55b37b7e9,E9,"Decorations: The decorations to the stairway are peeling, flaking
 916f20511c,E9,The affected surfaces should be properly prepared and redecorated as soon as practicable.,EXACT,{E_OTHER_AREA}::{E9_E9_R_DECOR},100,DONE
 58da398fa9,E9,"Where corrosion or timber decay is present, the underlying defects should be treated or repaired before redecoration.",EXACT,{E_OTHER_AREA}::{E9_E9_R_DECOR},100,DONE
 ee10214bca,E9,General Maintenance: External ancillary structures should be inspected periodically as part of routine property maintenance.,EXACT,{E_OTHER_AREA}::{E9_GENERAL_MAINTENANCE},100,DONE
-2cf1141064,E9,"Rainwater disposal, structural stability, guarding, fixings, waterproofing and external finishes should be maintained to reduce the risk of deterioration and ensure continued safe use.",MENU,,0,UNVERIFIED
-9b30dd14a1,E9,"If the property is a flat, add the following.",MENU,,0,UNVERIFIED
+2cf1141064,E9,"Rainwater disposal, structural stability, guarding, fixings, waterproofing and external finishes should be maintained to reduce the risk of deterioration and ensure continued safe use.",MENU,,0,VERIFIED
+9b30dd14a1,E9,"If the property is a flat, add the following.",MENU,,0,DONE
 bd164b5c81,E9,It is assumed that the common parts are maintained under appropriate maintenance contracts and are the responsibility of the management company.,EXACT,{E_OTHER}::{COMMUNAL_AREA_CONDITION},100,DONE
 e6776721e7,E9,Your legal adviser should obtain full details and refer to Section I3 - Issues for Your Legal Adviser.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},62,OPEN
 fde54f0b2f,E9,Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos.,EXACT,{E_OTHER}::{COMMUNAL_AREA_CONDITION},100,DONE
@@ -865,117 +865,117 @@ e1f394acfb,E9,The inspection was visual and non-invasive.,ADD,{E_OTHER}::{COMMUN
 2f9dfda515,E9,"Where roof space access was available, only those areas that could be inspected safely from the access hatch and boarded areas were examined.",ADD,{E_OTHER_AREA}::{E9_INTRO},51,OPEN
 8847c566b0,E9,"Insulation, stored items, roof timbers, and restricted headroom may have limited the inspection.",MENU,,0,UNVERIFIED
 66b447311f,E9,Inaccessible areas have not been inspected.,ADD,{E_OTHER_AREA}::{E9_INTRO},48,OPEN
-298074df6b,E9,"Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection.",MENU,,0,UNVERIFIED
-6770dd48a9,E9,No comments can be made regarding unseen elements.,ADD,{E_OTHER_AREA}::{E9_INTRO},48,OPEN
-0fa99d0641,E9,Unsafe floor: I could not fully inspect the roof timbers because the floor was unsafe to walk on at the time of my inspection.,ADD,{E_OTHER_AREA}::{E9_INTRO},58,OPEN
-9a09f764b8,F1,"Loft converted: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view.",EXACT,{F_ROOF_STRUCTURE}::{LOFT_CONVERTED_DEFECT},100,DONE
-f6262defc5,F1,"Consequently, I am unable to comment on the condition of the concealed areas.",EXACT,{F_ROOF_STRUCTURE}::{LOFT_CONVERTED_DEFECT},100,DONE
-042a991d29,F1,"Your legal advisers must verify that all necessary planning permissions, Building Regulations approvals, and required interim and final inspections were obtained for the conversion before you commit to the purchase.",UNRESOLVED,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{INSPECTED_OK},57,OPEN
-c521fa4bff,F1,The roof structure was inspected from the roof access hatch where available and from those areas that were safely accessible at the time of the inspection.,ADD,{F_OTHER}::{COMMUNAL_AREA_INSPECTED},59,OPEN
-e7b2859ec4,F1,"Description: The roof structure is formed in traditional cut timber, prefabricated trussed rafters, steel, other construction.",MENU,,0,UNVERIFIED
-17483d6529,F1,"Condition: Where visible, the roof structure appears in good, reasonable, fair, poor, very poor condition, consistent with its age and construction.",MENU,,0,UNVERIFIED
+298074df6b,E9,"Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection.",MENU,,0,VERIFIED
+6770dd48a9,E9,No comments can be made regarding unseen elements.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_ROOF_NOT_FULLY_INSPECTED},100,DONE
+0fa99d0641,E9,Unsafe floor: I could not fully inspect the roof timbers because the floor was unsafe to walk on at the time of my inspection.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNSAFE_FLOOR},100,DONE
+9a09f764b8,F1,"Loft converted: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_LOFT_CONVERTED},100,DONE
+f6262defc5,F1,"Consequently, I am unable to comment on the condition of the concealed areas.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_LOFT_CONVERTED},100,DONE
+042a991d29,F1,"Your legal advisers must verify that all necessary planning permissions, Building Regulations approvals, and required interim and final inspections were obtained for the conversion before you commit to the purchase.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_LOFT_CONVERTED},100,DONE
+c521fa4bff,F1,The roof structure was inspected from the roof access hatch where available and from those areas that were safely accessible at the time of the inspection.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INTRO},100,DONE
+e7b2859ec4,F1,"Description: The roof structure is formed in traditional cut timber, prefabricated trussed rafters, steel, other construction.",MENU,,0,VERIFIED
+17483d6529,F1,"Condition: Where visible, the roof structure appears in good, reasonable, fair, poor, very poor condition, consistent with its age and construction.",MENU,,0,VERIFIED
 ebcdc800ff,F1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-340bc86497,F1,Routine maintenance appropriate to the roof structure material should be expected.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TANK_POOR_COVER},53,OPEN
+340bc86497,F1,Routine maintenance appropriate to the roof structure material should be expected.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CONDITION},100,DONE
 e22c980456,F1,"Roof Underlay No Underlay: The absence of a roof underlay could result in water leakage, lower internal temperatures, higher heating costs, condensation, and mould growth.",MENU,,0,UNVERIFIED
-81a97c978c,F1,I recommend that you contact a qualified person to inspect the roof covering and confirm its watertightness.,FIX,{F_ABOUT_ROOF_STRUCTURE}::{UNDERLINING_STATUS_NO_UNDERLINING},89,OPEN
-c74bb81e77,F1,"Underlay present: The underside of the roof covering incorporates traditional bituminous felt, breathable membrane, timber boards, other, which should provide a secondary barrier to driving rain and snow, where visible.",MENU,,0,UNVERIFIED
-97c5d64f4c,F1,"Where visible, the underlay appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-905c01b7e3,F1,"Where no underlay is present, this is likely to reflect the age and type of construction and is not necessarily a defect.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{UNDERLINING_STATUS_NO_UNDERLINING},100,DONE
-cb672ee9b3,F1,"However, installing a suitable breathable underlay when the roof covering is next renewed would improve weather protection and thermal performance.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_LARGELY_MISSING},50,OPEN
+81a97c978c,F1,I recommend that you contact a qualified person to inspect the roof covering and confirm its watertightness.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_UNDERLAY},100,DONE
+c74bb81e77,F1,"Underlay present: The underside of the roof covering incorporates traditional bituminous felt, breathable membrane, timber boards, other, which should provide a secondary barrier to driving rain and snow, where visible.",MENU,,0,VERIFIED
+97c5d64f4c,F1,"Where visible, the underlay appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+905c01b7e3,F1,"Where no underlay is present, this is likely to reflect the age and type of construction and is not necessarily a defect.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNDERLAY_PRESENT},100,DONE
+cb672ee9b3,F1,"However, installing a suitable breathable underlay when the roof covering is next renewed would improve weather protection and thermal performance.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNDERLAY_PRESENT},100,DONE
 ebcdc800ff,F1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-5844aaa6c4,F1,Routine maintenance appropriate to the underlay material should be expected.,ADD,{F_OTHER}::{BASEMENT_IN_USE},52,OPEN
-883ff79fd1,F1,"Defects noted: The roof underlay is worn, torn, missing, damaged in places, reducing its effectiveness as a secondary barrier against wind-driven rain and dust.",MENU,,0,UNVERIFIED
-4e98ab36a0,F1,I recommend that a qualified roofing contractor inspect the roof covering to confirm its weathertightness and carry out any necessary repairs.,FIX,{F_ABOUT_ROOF_STRUCTURE}::{UNDERLINING_STATUS_NO_UNDERLINING},75,OPEN
-ef23501f0c,F1,Ongoing routine maintenance appropriate to the roof covering should be expected.,ADD,{F_OTHER}::{BASEMENT_IN_USE},54,OPEN
-0e88e00dda,F1,Roof Ventilation No ventilation: No ventilation has been provided in the roof space.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{VENTILATION_COMPOSITE_PROFESSIONAL},100,DONE
-e8107c4edd,F1,The roof space must be ventilated to the outside air to prevent dampness.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{INSULATION_ADEQUATE},56,OPEN
-d6cafd29c5,F1,"When installing insulation, the ventilation must not be obstructed.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{VENTILATION_DAMP_IN_SUFFICIENT_VENTILATION},51,OPEN
-1fb7ac46a3,F1,"Ventilation noted: The roof space appears to have adequate, limited, restricted ventilation.",UNRESOLVED,{F_ABOUT_ROOF_STRUCTURE}::{VENTILATION_DAMP_NO_VENTILATION},74,OPEN
-f572c50219,F1,Adequate roof space ventilation assists in reducing the risk of condensation and timber decay.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{VENTILATION_DAMP_IN_SUFFICIENT_VENTILATION},100,DONE
-51e4d59fb4,F1,"Where ventilation is limited, improvements should be considered when future roofing works are undertaken.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{NO_INSECT_INFESTATION_FOUND},66,OPEN
-87e62297dc,F1,"Condensation noted: The roof space has no or insufficient ventilation, resulting in condensation and mould growth on some of the timbers or roof underlay.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{VENTILATION_DAMP_IN_SUFFICIENT_VENTILATION},63,OPEN
-8013541fdb,F1,"Additional ventilation should be provided to improve air circulation, reduce condensation, and help maintain the condition of the roof timbers.",UNRESOLVED,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_NONE},52,OPEN
-e835c34040,F1,Significantly damaged or rotted timbers should be replaced.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TIMBER_STRUCTURE_NOW},53,OPEN
-7ebac515c9,F1,"Thermal Insulation: The roof space floor insulation appears adequate, limited, insufficient, poorly fitted, other based upon the visible areas only.",MENU,,0,UNVERIFIED
-9aa91b374d,F1,The thickness and continuity of insulation cannot be confirmed without disturbing the insulation.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{INSULATION_ADEQUATE},100,DONE
-b6b00f77e4,F1,Reference should also be made to the Energy Performance Certificate where available.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{INSULATION_ADEQUATE},100,DONE
-183abd2959,F1,Adequate insulation: The insulation to the loft floor appears adequate where visible.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{UNDERLINING_STATUS_NO_UNDERLINING},61,OPEN
-518ffab3a5,F1,"Where insulation is inadequate or absent, you should upgrade it to a depth of 270-300 mm to meet current recommended standards, taking care not to obstruct roof ventilation.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},48,OPEN
-604e1b4406,F1,Inadequate/no insulation: The loft insulation is below the current recommended standard of 270-300 mm or is absent.,ADD,{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_NOT_ADEQUATELY_INSULATED},69,OPEN
-8d885fe056,F1,"This can lead to heat loss, higher heating costs, and an increased risk of condensation and mould.",UNRESOLVED,{F_ABOUT_ROOF_STRUCTURE}::{INSULATION_DAMP},59,OPEN
-b896748bbe,F1,"I recommend upgrading the insulation to current standards, ensuring roof ventilation is not obstructed.",ADD,{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_NOT_ADEQUATELY_INSULATED},54,OPEN
-a4a369a752,F1,"Water Storage Tanks: The roof space contains plastic, galvanised steel, asbestos cement, fibreglass, other cold water storage tanks.",MENU,,0,UNVERIFIED
-000c57ac38,F1,"Condition: Where visible, the tank appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-36859a0ad9,F1,No defects noted: No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated.,EXACT,{F_ROOF_STRUCTURE_WATER_TANK}::{WATERL_TANK_MATERIAL_LOCATION},100,DONE
-12ae0e1688,F1,Routine maintenance appropriate to the tank material should be expected.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TANK_POOR_COVER},55,OPEN
-0ea5773f72,F1,Leaking: The water tank is leaking or in disrepair.,TOKENISED,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TANK},61,DONE
-e1f6964975,F1,You should repair or replace this promptly to prevent further dampness and damage to nearby elements.,ADD,{F_OTHER}::{BASEMENT_SERIOUS_DAMP},55,OPEN
-6195a07366,F1,"Water Tank Insulation: The water tank and associated pipework appear adequately insulated, partially insulated, uninsulated.",UNRESOLVED,{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_NOT_ADEQUATELY_INSULATED},79,OPEN
-95d4444b0a,F1,Improving insulation may reduce the risk of freezing and heat loss.,EXACT,{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_NOT_ADEQUATELY_INSULATED},100,DONE
-fa8063ab96,F1,"The absence of, or inadequate, insulation could result in condensation, dampness or leakage to the ceiling or surrounding areas.",UNRESOLVED,{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_NO_INSULATION},75,OPEN
-af63e49447,F1,"Missing or Inadequate tank cover: The plastic, galvanised metal, asbestos, other cold water tank cover(s) are missing or inadequate.",MENU,,0,UNVERIFIED
-ba3ea0223c,F1,This should be replaced soon.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TANK_MISSING_COVER},100,DONE
-c90ff3c6b8,F1,"Disused Water Tank: Plastic, galvanised steel, asbestos cement, other disused water storage tank(s) remain within the roof space.",MENU,,0,UNVERIFIED
-4fbf64dbae,F1,Removal may be considered during future maintenance where it is no longer required.,EXACT,{F_ROOF_STRUCTURE_WATER_TANK}::{DISUSED_WATER_TANK},100,DONE
-c2295e51ba,F1,"Timber defects: Localised distortion, splitting, cracking, notching, alterations, other were observed.",MENU,,0,UNVERIFIED
-39a725290e,F1,Repairs or further investigation should be undertaken where structural adequacy is uncertain.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TIMBER_STRUCTURE_SOON},100,DONE
-6fdbe470c0,F1,"Timber Decay: Evidence of wet rot, dry rot, fungal decay, other timber decay was observed.",UNRESOLVED,{F_ABOUT_ROOF_STRUCTURE}::{NO_INSECT_INFESTATION_FOUND},52,OPEN
-daa587f6fb,F1,The source of moisture should be identified and promptly rectified before repairs are undertaken.,ADD,{F_OTHER}::{BASEMENT_DAMP},68,OPEN
-ee3f5415ac,F1,Ventilation to the roof space should be maintained to prevent conditions favourable to rot.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_NONE},100,DONE
-3587bbf05b,F1,"Thin Timbers: Parts of the original timber structure are too small, and this could affect the stability of the roof structure.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_UNDERSIZE_TIMBER},100,DONE
-b5f401fbdc,F1,You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_HEAVY_ROOF},100,DONE
-85bfa33d60,F1,"Heavy tiles sagging: The roof covering is too heavy and has caused the roof structure to distort, sag, or cause nearby walls to crack.",UNRESOLVED,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_ROOF_SPREADING},72,OPEN
-cdd1558fd1,F1,You should ask an appropriately qualified person or roofing specialist to inspect the roof to determine the extent of the problem and specify any necessary remedial works.,ADD,{F_OTHER}::{BASEMENT_DAMP},65,OPEN
-02c5210187,F1,"Spray foam insulation: Spray foam insulation has been applied to the underside of the roof, fully or partially concealing the roof structure and preventing a full inspection of the roof covering and timbers.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
-72696848d0,F1,"Consequently, I am unable to assess the condition of the concealed elements, and defects such as timber decay, wet rot, insect attack, or roof leaks may be hidden.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
-e1714cb2cd,F1,"Spray foam can restrict ventilation, trap moisture, and increase the risk of timber deterioration.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
-440bec4eb9,F1,"It may also adversely affect the property's mortgageability, insurability and future saleability, as many lenders and insurers require specialist reports or removal of the insulation before accepting the property.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
-2bc64484dd,F1,"Before committing to the purchase, you should: Obtain written confirmation from your mortgage lender and insurer that the property is acceptable.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
-77c19adcec,F1,Instruct an independent specialist to carry out an intrusive inspection and advise whether the spray foam should be removed.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
-8ab963a73f,F1,"Ensure that necessary remedial works or removal are completed, or that the cost is reflected in the purchase price.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
-a0ebccefa5,F1,"No opinion can be given on the condition of the concealed roof structure, and I cannot accept responsibility for defects hidden by the spray foam insulation.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{SPRAY_FOAM_INSULATION},100,DONE
-1f8b8f4455,F1,No Wood-boring: No visible evidence of active wood-boring insect infestation was observed in the accessible roof timbers.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_NONE},100,DONE
-84d86956cc,F1,"Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{NO_INSECT_INFESTATION_FOUND},100,DONE
-30244f2fd7,F1,Historic flight holes may be present and are not necessarily indicative of active infestation.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_NONE},100,DONE
-eb0d8bbe20,F1,"Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed.",ADD,{F_ABOUT_ROOF_STRUCTURE}::{NO_INSECT_INFESTATION_FOUND},70,OPEN
-edab239b48,F1,Further inspection by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,UNRESOLVED,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_INSECT_INFESTATION_MINOR},66,OPEN
-eb517e7a1a,F1,"Otherwise, for historic activity, further enquiries should be made to the vendor regarding its history, treatment work, and guarantee certificates.",UNRESOLVED,{F_ABOUT_ROOF_STRUCTURE}::{INSULATION_ADEQUATE},49,OPEN
-3b55d2da82,F1,"Roof Movement: Evidence of deflection, sagging, spread, other was observed.",MENU,,0,UNVERIFIED
-6e94a76470,F1,"Observed roof movement is normal, minor, significant, severe, presents a hazard, other.",MENU,,0,UNVERIFIED
-ffd6d0deb8,F1,Further investigation by an appropriately qualified roofing contractor is recommended where movement appears significant or presents a hazard.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_ROOF_SPREADING},69,OPEN
-88d8bdb360,F1,"Structural Alterations: Evidence of structural alterations to the roof space was observed, including loft conversion, altered roof members, removed struts, trimmed rafters, replacement supports, additional timber supports, other alterations.",MENU,,0,UNVERIFIED
-b9f8acf2aa,F1,The adequacy of structural support cannot be confirmed during a visual inspection.,EXACT,{F_ROOF_STRUCTURE}::{LOFT_CONVERTED_DEFECT},100,DONE
-3cfe3a0527,F1,Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.,EXACT,{F_ROOF_STRUCTURE}::{LOFT_CONVERTED},100,DONE
-4de8f6fd44,F1,"Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed, partially removed, altered, rendered, other within the roof space.",MENU,,0,UNVERIFIED
-00ba46237c,F1,Not inspected: Part of the chimney breast within the roof space has been removed.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},100,DONE
-04b27668a9,F1,I could not confirm whether the remaining masonry is adequately supported due to limited visibility.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},100,DONE
-16e474d2b9,F1,Inadequate support can compromise the building's structural stability.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},100,DONE
-db4983744d,F1,Your legal adviser should confirm that the necessary Building Regulations approval was obtained.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},100,DONE
-c1af2d11eb,F1,"If this cannot be confirmed, or there is any doubt about the adequacy of the support, you should instruct a suitably qualified professional to inspect the remaining structure and provide recommendations before committing to the purchase.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_REMOVED_CHIMNEY_BREAST_NOT_INSPECTED},100,DONE
-8c1b027c3b,F1,"Adequate support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure appears to be properly supported.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{INSPECTED_OK},100,DONE
-5789da242f,F1,Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work.,EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{INSPECTED_OK},100,DONE
-624ca718d8,F1,"If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{INSPECTED_OK},100,DONE
-377aa79ed3,F1,"Poor support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{POOR_SUPPORT},100,DONE
-5789da242f,F1,Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work.,EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{INSPECTED_OK},100,DONE
-624ca718d8,F1,"If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{INSPECTED_OK},100,DONE
-4673fe85c2,F1,"Add text to: Section J1 - Risk to building - Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{POOR_SUPPORT},100,DONE
-2672b803fd,F1,"Risk of collapse: Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},100,DONE
-cc4fd1071f,F1,You should ask your legal adviser to check if the local authority gave permission for this work.,EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},100,DONE
-9809a74c55,F1,"Further, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},100,DONE
-17b3840da2,F1,"Add text to: Section J1 - Risk to building - Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},100,DONE
-cb8195c405,F1,"Add text to: Section I1 - Regulation - Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{RISK_TO_COLLAPSE},100,DONE
-8f82c6696a,F1,Minor Chimney Damp: Minor dampness from water penetration was noted to the rendered chimney breast within the roof space.,EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{DAMP_CHIMNEY},100,DONE
-f318513d4d,F1,"This is not uncommon in a property of this age and construction, as a damp-proof course would not normally have been provided to the chimney.",EXACT,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{DAMP_CHIMNEY},100,DONE
-43e1e7790b,F1,The moisture is likely to have been exacerbated by defects in the flashing where the roof abuts the chimney stack.,ADD,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{DAMP_CHIMNEY},64,OPEN
-50b6a2f1a8,F1,"This is not considered a significant concern at present, but the flashing should be inspected and repaired if necessary, during routine roof maintenance or when the roof covering is next renewed.",UNRESOLVED,{F_REPAIR_REMOVED_CHIMNEY_BREAST_INSPECTED}::{DAMP_CHIMNEY},52,OPEN
-9305d49bb0,F1,"Party Wall Partially missing: The party wall within the roof space is incomplete, leaving gaps that could allow fire to spread between this and the neighbouring property.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_PARTLY_MISSING},100,DONE
-285926026a,F1,The wall should be extended to the underside of the roof covering and all gaps suitably fire-stopped as soon as possible.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_PARTLY_MISSING},100,DONE
-0265fe094c,F1,As the party wall may be subject to legal rights and obligations under the Party Wall etc.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_LARGELY_MISSING},100,DONE
-756796faff,F1,"Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_LARGELY_MISSING},100,DONE
-2fb47d46a7,F1,"Largely missing: The party wall within the roof space is missing, creating a risk of fire spread between this and the neighbouring property and reducing security between the properties.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_LARGELY_MISSING},100,DONE
-30887ed484,F1,The wall should be rebuilt to the underside of the roof covering and all gaps appropriately fire-stopped without delay.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_LARGELY_MISSING},100,DONE
-0265fe094c,F1,As the party wall may be subject to legal rights and obligations under the Party Wall etc.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_LARGELY_MISSING},100,DONE
-756796faff,F1,"Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_PARTY_WALL_PROBLEM_LARGELY_MISSING},100,DONE
+5844aaa6c4,F1,Routine maintenance appropriate to the underlay material should be expected.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNDERLAY_PRESENT},100,DONE
+883ff79fd1,F1,"Defects noted: The roof underlay is worn, torn, missing, damaged in places, reducing its effectiveness as a secondary barrier against wind-driven rain and dust.",MENU,,0,VERIFIED
+4e98ab36a0,F1,I recommend that a qualified roofing contractor inspect the roof covering to confirm its weathertightness and carry out any necessary repairs.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNDERLAY_DEFECTS},100,DONE
+ef23501f0c,F1,Ongoing routine maintenance appropriate to the roof covering should be expected.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNDERLAY_DEFECTS},100,DONE
+0e88e00dda,F1,Roof Ventilation No ventilation: No ventilation has been provided in the roof space.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_VENTILATION},100,DONE
+e8107c4edd,F1,The roof space must be ventilated to the outside air to prevent dampness.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_VENTILATION},100,DONE
+d6cafd29c5,F1,"When installing insulation, the ventilation must not be obstructed.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_VENTILATION},100,DONE
+1fb7ac46a3,F1,"Ventilation noted: The roof space appears to have adequate, limited, restricted ventilation.",MENU,,0,VERIFIED
+f572c50219,F1,Adequate roof space ventilation assists in reducing the risk of condensation and timber decay.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_VENTILATION_NOTED},100,DONE
+51e4d59fb4,F1,"Where ventilation is limited, improvements should be considered when future roofing works are undertaken.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_VENTILATION_NOTED},100,DONE
+87e62297dc,F1,"Condensation noted: The roof space has no or insufficient ventilation, resulting in condensation and mould growth on some of the timbers or roof underlay.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CONDENSATION_NOTED},100,DONE
+8013541fdb,F1,"Additional ventilation should be provided to improve air circulation, reduce condensation, and help maintain the condition of the roof timbers.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CONDENSATION_NOTED},100,DONE
+e835c34040,F1,Significantly damaged or rotted timbers should be replaced.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CONDENSATION_NOTED},100,DONE
+7ebac515c9,F1,"Thermal Insulation: The roof space floor insulation appears adequate, limited, insufficient, poorly fitted, other based upon the visible areas only.",MENU,,0,VERIFIED
+9aa91b374d,F1,The thickness and continuity of insulation cannot be confirmed without disturbing the insulation.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_THERMAL_INSULATION},100,DONE
+b6b00f77e4,F1,Reference should also be made to the Energy Performance Certificate where available.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_THERMAL_INSULATION},100,DONE
+183abd2959,F1,Adequate insulation: The insulation to the loft floor appears adequate where visible.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_ADEQUATE},100,DONE
+518ffab3a5,F1,"Where insulation is inadequate or absent, you should upgrade it to a depth of 270-300 mm to meet current recommended standards, taking care not to obstruct roof ventilation.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_ADEQUATE},100,DONE
+604e1b4406,F1,Inadequate/no insulation: The loft insulation is below the current recommended standard of 270-300 mm or is absent.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_INADEQUATE},100,DONE
+8d885fe056,F1,"This can lead to heat loss, higher heating costs, and an increased risk of condensation and mould.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_INADEQUATE},100,DONE
+b896748bbe,F1,"I recommend upgrading the insulation to current standards, ensuring roof ventilation is not obstructed.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_INADEQUATE},100,DONE
+a4a369a752,F1,"Water Storage Tanks: The roof space contains plastic, galvanised steel, asbestos cement, fibreglass, other cold water storage tanks.",MENU,,0,VERIFIED
+000c57ac38,F1,"Condition: Where visible, the tank appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+36859a0ad9,F1,No defects noted: No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_CONDITION},100,DONE
+12ae0e1688,F1,Routine maintenance appropriate to the tank material should be expected.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_CONDITION},100,DONE
+0ea5773f72,F1,Leaking: The water tank is leaking or in disrepair.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_LEAKING},100,DONE
+e1f6964975,F1,You should repair or replace this promptly to prevent further dampness and damage to nearby elements.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_LEAKING},100,DONE
+6195a07366,F1,"Water Tank Insulation: The water tank and associated pipework appear adequately insulated, partially insulated, uninsulated.",MENU,,0,VERIFIED
+95d4444b0a,F1,Improving insulation may reduce the risk of freezing and heat loss.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_INSULATION},100,DONE
+fa8063ab96,F1,"The absence of, or inadequate, insulation could result in condensation, dampness or leakage to the ceiling or surrounding areas.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_INSULATION},100,DONE
+af63e49447,F1,"Missing or Inadequate tank cover: The plastic, galvanised metal, asbestos, other cold water tank cover(s) are missing or inadequate.",MENU,,0,VERIFIED
+ba3ea0223c,F1,This should be replaced soon.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_COVER},100,DONE
+c90ff3c6b8,F1,"Disused Water Tank: Plastic, galvanised steel, asbestos cement, other disused water storage tank(s) remain within the roof space.",MENU,,0,VERIFIED
+4fbf64dbae,F1,Removal may be considered during future maintenance where it is no longer required.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_DISUSED},100,DONE
+c2295e51ba,F1,"Timber defects: Localised distortion, splitting, cracking, notching, alterations, other were observed.",MENU,,0,VERIFIED
+39a725290e,F1,Repairs or further investigation should be undertaken where structural adequacy is uncertain.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TIMBER_DEFECTS},100,DONE
+6fdbe470c0,F1,"Timber Decay: Evidence of wet rot, dry rot, fungal decay, other timber decay was observed.",MENU,,0,VERIFIED
+daa587f6fb,F1,The source of moisture should be identified and promptly rectified before repairs are undertaken.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TIMBER_DECAY},100,DONE
+ee3f5415ac,F1,Ventilation to the roof space should be maintained to prevent conditions favourable to rot.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TIMBER_DECAY},100,DONE
+3587bbf05b,F1,"Thin Timbers: Parts of the original timber structure are too small, and this could affect the stability of the roof structure.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_THIN_TIMBERS},100,DONE
+b5f401fbdc,F1,You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_THIN_TIMBERS},100,DONE
+85bfa33d60,F1,"Heavy tiles sagging: The roof covering is too heavy and has caused the roof structure to distort, sag, or cause nearby walls to crack.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_HEAVY_TILES},100,DONE
+cdd1558fd1,F1,You should ask an appropriately qualified person or roofing specialist to inspect the roof to determine the extent of the problem and specify any necessary remedial works.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_HEAVY_TILES},100,DONE
+02c5210187,F1,"Spray foam insulation: Spray foam insulation has been applied to the underside of the roof, fully or partially concealing the roof structure and preventing a full inspection of the roof covering and timbers.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_SPRAY_FOAM},100,DONE
+72696848d0,F1,"Consequently, I am unable to assess the condition of the concealed elements, and defects such as timber decay, wet rot, insect attack, or roof leaks may be hidden.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_SPRAY_FOAM},100,DONE
+e1714cb2cd,F1,"Spray foam can restrict ventilation, trap moisture, and increase the risk of timber deterioration.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_SPRAY_FOAM},100,DONE
+440bec4eb9,F1,"It may also adversely affect the property's mortgageability, insurability and future saleability, as many lenders and insurers require specialist reports or removal of the insulation before accepting the property.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_SPRAY_FOAM},100,DONE
+2bc64484dd,F1,"Before committing to the purchase, you should: Obtain written confirmation from your mortgage lender and insurer that the property is acceptable.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_SPRAY_FOAM},100,DONE
+77c19adcec,F1,Instruct an independent specialist to carry out an intrusive inspection and advise whether the spray foam should be removed.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_SPRAY_FOAM},100,DONE
+8ab963a73f,F1,"Ensure that necessary remedial works or removal are completed, or that the cost is reflected in the purchase price.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_SPRAY_FOAM},100,DONE
+a0ebccefa5,F1,"No opinion can be given on the condition of the concealed roof structure, and I cannot accept responsibility for defects hidden by the spray foam insulation.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_SPRAY_FOAM},100,DONE
+1f8b8f4455,F1,No Wood-boring: No visible evidence of active wood-boring insect infestation was observed in the accessible roof timbers.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_WOOD_BORING},100,DONE
+84d86956cc,F1,"Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_WOOD_BORING},100,DONE
+30244f2fd7,F1,Historic flight holes may be present and are not necessarily indicative of active infestation.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_WOOD_BORING},100,DONE
+eb0d8bbe20,F1,"Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed.",MENU,,0,VERIFIED
+edab239b48,F1,Further inspection by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_WOOD_BORING_NOTED},100,DONE
+eb517e7a1a,F1,"Otherwise, for historic activity, further enquiries should be made to the vendor regarding its history, treatment work, and guarantee certificates.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_WOOD_BORING_NOTED},100,DONE
+3b55d2da82,F1,"Roof Movement: Evidence of deflection, sagging, spread, other was observed.",MENU,,0,VERIFIED
+6e94a76470,F1,"Observed roof movement is normal, minor, significant, severe, presents a hazard, other.",MENU,,0,VERIFIED
+ffd6d0deb8,F1,Further investigation by an appropriately qualified roofing contractor is recommended where movement appears significant or presents a hazard.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_ROOF_MOVEMENT},100,DONE
+88d8bdb360,F1,"Structural Alterations: Evidence of structural alterations to the roof space was observed, including loft conversion, altered roof members, removed struts, trimmed rafters, replacement supports, additional timber supports, other alterations.",MENU,,0,VERIFIED
+b9f8acf2aa,F1,The adequacy of structural support cannot be confirmed during a visual inspection.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_STRUCTURAL_ALTERATIONS},100,DONE
+3cfe3a0527,F1,Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_STRUCTURAL_ALTERATIONS},100,DONE
+4de8f6fd44,F1,"Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed, partially removed, altered, rendered, other within the roof space.",MENU,,0,VERIFIED
+00ba46237c,F1,Not inspected: Part of the chimney breast within the roof space has been removed.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_NOT_INSPECTED},100,DONE
+04b27668a9,F1,I could not confirm whether the remaining masonry is adequately supported due to limited visibility.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_NOT_INSPECTED},100,DONE
+16e474d2b9,F1,Inadequate support can compromise the building's structural stability.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_NOT_INSPECTED},100,DONE
+db4983744d,F1,Your legal adviser should confirm that the necessary Building Regulations approval was obtained.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_NOT_INSPECTED},100,DONE
+c1af2d11eb,F1,"If this cannot be confirmed, or there is any doubt about the adequacy of the support, you should instruct a suitably qualified professional to inspect the remaining structure and provide recommendations before committing to the purchase.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_NOT_INSPECTED},100,DONE
+8c1b027c3b,F1,"Adequate support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure appears to be properly supported.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_ADEQUATE},100,DONE
+5789da242f,F1,Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_ADEQUATE},100,DONE
+624ca718d8,F1,"If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_ADEQUATE},100,DONE
+377aa79ed3,F1,"Poor support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_POOR},100,DONE
+5789da242f,F1,Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_ADEQUATE},100,DONE
+624ca718d8,F1,"If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_ADEQUATE},100,DONE
+4673fe85c2,F1,"Add text to: Section J1 - Risk to building - Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_POOR},100,DONE
+2672b803fd,F1,"Risk of collapse: Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_COLLAPSE},100,DONE
+cc4fd1071f,F1,You should ask your legal adviser to check if the local authority gave permission for this work.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_COLLAPSE},100,DONE
+9809a74c55,F1,"Further, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_COLLAPSE},100,DONE
+17b3840da2,F1,"Add text to: Section J1 - Risk to building - Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_COLLAPSE},100,DONE
+cb8195c405,F1,"Add text to: Section I1 - Regulation - Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_COLLAPSE},100,DONE
+8f82c6696a,F1,Minor Chimney Damp: Minor dampness from water penetration was noted to the rendered chimney breast within the roof space.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_DAMP},100,DONE
+f318513d4d,F1,"This is not uncommon in a property of this age and construction, as a damp-proof course would not normally have been provided to the chimney.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_DAMP},100,DONE
+43e1e7790b,F1,The moisture is likely to have been exacerbated by defects in the flashing where the roof abuts the chimney stack.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_DAMP},100,DONE
+50b6a2f1a8,F1,"This is not considered a significant concern at present, but the flashing should be inspected and repaired if necessary, during routine roof maintenance or when the roof covering is next renewed.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CHIMNEY_DAMP},100,DONE
+9305d49bb0,F1,"Party Wall Partially missing: The party wall within the roof space is incomplete, leaving gaps that could allow fire to spread between this and the neighbouring property.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_PARTY_WALL_PARTIAL},100,DONE
+285926026a,F1,The wall should be extended to the underside of the roof covering and all gaps suitably fire-stopped as soon as possible.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_PARTY_WALL_PARTIAL},100,DONE
+0265fe094c,F1,As the party wall may be subject to legal rights and obligations under the Party Wall etc.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_PARTY_WALL_LARGE},100,DONE
+756796faff,F1,"Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_PARTY_WALL_LARGE},100,DONE
+2fb47d46a7,F1,"Largely missing: The party wall within the roof space is missing, creating a risk of fire spread between this and the neighbouring property and reducing security between the properties.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_PARTY_WALL_LARGE},100,DONE
+30887ed484,F1,The wall should be rebuilt to the underside of the roof covering and all gaps appropriately fire-stopped without delay.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_PARTY_WALL_LARGE},100,DONE
+0265fe094c,F1,As the party wall may be subject to legal rights and obligations under the Party Wall etc.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_PARTY_WALL_LARGE},100,DONE
+756796faff,F1,"Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_PARTY_WALL_LARGE},100,DONE
 1a5aa6365d,F1,"Evidence of Water Penetration: Water staining or dampness was observed on roof timbers, underlay, or adjacent structural elements.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{EVIDENCE_WATER_PENETRATION},100,DONE
 d983e8c85c,F1,The source should be identified and repaired to prevent further deterioration.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{EVIDENCE_WATER_PENETRATION},100,DONE
 1bc0458786,F1,Capped Soil Vent Pipe: A capped soil and vent pipe was noted terminating within the roof space.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{CAPPED_SOIL_VENT_PIPE},100,DONE
@@ -984,8 +984,8 @@ b3f524b94e,F1,The pipe should be inspected by a suitably qualified plumber to es
 1177bcd90f,F1,"Where it forms part of the drainage ventilation system, it should be appropriately extended and terminated to the outside air in accordance with current requirements.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{CAPPED_SOIL_VENT_PIPE},100,DONE
 544ec94811,F1,Any redundant pipework should be removed or suitably sealed.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{CAPPED_SOIL_VENT_PIPE},100,DONE
 92d1002e22,F1,General Maintenance: Roof spaces should remain adequately ventilated and free from unnecessary stored items that may restrict inspection or ventilation.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{DEFAULT_TEXT_IF_FLAT},100,DONE
-0db4d9bee4,F1,Roof timbers should be inspected whenever significant roofing works are undertaken.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{NO_INSECT_INFESTATION_FOUND},100,DONE
-93f0549eae,F1,Prompt attention to water penetration will reduce the risk of timber decay and associated structural deterioration.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{NO_INSECT_INFESTATION_FOUND},65,OPEN
+0db4d9bee4,F1,Roof timbers should be inspected whenever significant roofing works are undertaken.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_GENERAL_MAINTENANCE},100,DONE
+93f0549eae,F1,Prompt attention to water penetration will reduce the risk of timber decay and associated structural deterioration.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_GENERAL_MAINTENANCE},100,DONE
 04a5b8beac,F1,"If the Property is a Flat, add this.",MENU,,0,UNVERIFIED
 502ad9fbbc,F1,You should ask the management company whether any repairs to the roof structure have been carried out previously or are currently proposed.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{DEFAULT_TEXT_IF_FLAT},69,OPEN
 965d19b3ce,F1,"Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_PROPERTY_FLAT_SELECTED},100,DONE

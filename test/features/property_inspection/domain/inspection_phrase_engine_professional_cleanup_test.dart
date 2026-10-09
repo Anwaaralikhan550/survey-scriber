@@ -134,20 +134,6 @@ void main() {
     expect(phrase, isNot(contains('No repair is currently needed')));
   });
 
-  test('roof structure grammar is normalised', () {
-    final phrase = engine.buildPhrases(
-      'activity_inside_property_about_roof_structure',
-      {
-        'actv_construction': 'Factory made trusses',
-        'actv_underlining': 'Underlining',
-        'cb_sacking_felt': 'true',
-        'actv_roof_structure_condition': 'Reasonable',
-      },
-    ).single;
-
-    expect(phrase, contains('factory-made roof truss'));
-    expect(phrase, isNot(contains('trusses')));
-  });
 
   test('non-numeric wall thickness is suppressed', () {
     final phrase = engine.buildPhrases(

@@ -2819,7 +2819,7 @@ void main() {
     });
 
     test(
-        'adds the PDF Add-text-to J1/J3 injections for E2-E5 from the bank'
+        'adds the PDF Add-text-to J1/J3 injections for E2-E5 and F1 from the bank'
         'approved bank', () {
       final tree = InspectionTreePayload(
         sections: [
@@ -2888,6 +2888,9 @@ void main() {
             'activity_outside_property_windows_repairs_no_fire_escape_risk': {
               'e5fl_lounge': 'true',
             },
+            'activity_inside_property_repair_removed_chimney_breast': {
+              'actv_status': 'Risk of collapse',
+            },
             'activity_outside_property_roof_spreading_repair': {
               'rc_rs_front': 'true',
             },
@@ -2902,6 +2905,7 @@ void main() {
       expect(all, contains('One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted'));
       expect(all, contains('suggesting the presence of rising damp. Further investigation by a suitably qualified damp and timber specialist is recommended to determine the cause and extent of the problem'));
       expect(all, contains('One or more small beams that span across the top of the window or door opening, including brick arch (called a lintel), is damaged, cracked, distorted'));
+      expect(all, contains('Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse'));
       for (final sentence in const [
         'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing',
         'The surface of the roof slope(s) of the building is significantly distorted, uneven or undulating',

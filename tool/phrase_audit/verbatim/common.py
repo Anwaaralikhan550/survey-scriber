@@ -37,7 +37,7 @@ def clean(t):
     t = re.sub(r'<[^>]+>', ' ', t)
     t = (t.replace(' ', ' ').replace('‘', "'").replace('’', "'")
           .replace('“', '"').replace('”', '"').replace('–', '-')
-          .replace('—', '-'))
+          .replace('—', '-').replace('�', '-'))
     t = re.sub(r'(\w)- (\w)', r'\1-\2', t)  # PDF line-break hyphenation
     return re.sub(r'\s+', ' ', t).strip()
 

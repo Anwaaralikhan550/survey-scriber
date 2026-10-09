@@ -50,42 +50,6 @@ void main() {
 
     const engine = InspectionPhraseEngine(phraseTexts);
 
-    test('roof weather uses llMainContainer', () {
-      final phrases = engine.buildPhrases(
-        'activity_inside_property_weather_condition',
-        <String, String>{'llMainContainer': 'Wet'},
-      );
-      expect(phrases.join(' ').toLowerCase(), contains('roof-weather-wet'));
-    });
-
-    test('roof timber repair uses llMainContainer status', () {
-      final phrases = engine.buildPhrases(
-        'activity_inside_property_repair_timber_structure',
-        <String, String>{
-          'llMainContainer': 'Now',
-          'cb_badly_distorted': 'true',
-        },
-      );
-      expect(phrases.join(' ').toLowerCase(), contains('roof-timber-now='));
-    });
-
-    test('roof insect infestation uses llMainContainer', () {
-      final phrases = engine.buildPhrases(
-        'activity_inside_property_repair_insect_infestation',
-        <String, String>{'llMainContainer': 'Minor'},
-      );
-      expect(phrases.join(' ').toLowerCase(), contains('roof-insect-minor'));
-    });
-
-    test('removed chimney breast uses llMainContainer status', () {
-      final phrases = engine.buildPhrases(
-        'activity_inside_property_repair_removed_chimney_breast',
-        <String, String>{'llMainContainer': 'Not inspected'},
-      );
-      expect(phrases.join(' ').toLowerCase(),
-          contains('removed-cb-not-inspected'));
-    });
-
     test('ceilings repairs uses llMainContainer status', () {
       final phrases = engine.buildPhrases(
         'activity_inside_property_ceilings_repairs_ceilings',

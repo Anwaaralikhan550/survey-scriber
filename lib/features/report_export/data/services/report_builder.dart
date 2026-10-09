@@ -1335,6 +1335,21 @@ class ReportBuilder {
           'One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted (see section E3 - Rainwater Goods).');
     }
 
+    // PDF "Add text to: Section J1" lines of F1 Roof structure (bank-first).
+    final chimneyBreast = _answersForScreen(
+        rawData, 'activity_inside_property_repair_removed_chimney_breast');
+    final chimneyBreastStatus =
+        (chimneyBreast['actv_status'] ?? '').toLowerCase();
+    if (chimneyBreastStatus == 'poor support') {
+      phrases.add(
+          _approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_CHIMNEY_POOR_SUPPORT}') ??
+              'Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported (see section F1 - Roof Structure).');
+    } else if (chimneyBreastStatus == 'risk of collapse') {
+      phrases.add(
+          _approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_CHIMNEY_COLLAPSE}') ??
+              'Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse (see section F1 - Roof Structure).');
+    }
+
     // PDF "Add text to: Section J1" lines of E4 Main walls (bank-first).
     final mainWallsDamp = _answersForScreen(
         rawData, 'activity_outside_property_main_walls_damp');

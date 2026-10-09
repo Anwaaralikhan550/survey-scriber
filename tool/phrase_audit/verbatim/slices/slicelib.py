@@ -60,7 +60,7 @@ _BLOCKS = {}
 def block(section):
     if not _BLOCKS:
         for e in json.load(open(_REF, encoding='utf-8'))['entries']:
-            _BLOCKS[e['key']] = _re.sub(r'(?<=\w)- (?=[a-z])', '-', _re.sub(r'\s+', ' ', e['rawBlock']))
+            _BLOCKS[e['key']] = _re.sub(r'(?<=\w)- (?=[a-z])', '-', _re.sub(r'\s+', ' ', e['rawBlock'])).replace('�', '–')
     return _BLOCKS[section]
 
 

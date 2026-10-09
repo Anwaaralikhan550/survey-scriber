@@ -5365,6 +5365,640 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_general_maintenance',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'f1_loft',
+    'activity_inside_property_loft_converted',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_LOFT_CONVERTED}',
+    [
+    ],
+    whenField: 'cb_loft_converted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_desc',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{RS_CONSTRUCTION}',
+        options: {
+          'f1d_traditional_cut_timber': 'traditional cut timber',
+          'f1d_prefabricated_trussed_rafters': 'prefabricated trussed rafters',
+          'f1d_steel': 'steel',
+        },
+        otherCheckbox: 'f1d_other',
+        otherText: 'f1d_other_text',
+        pdfOptions: ['traditional cut timber', 'prefabricated trussed rafters', 'steel'],
+      ),
+    ],
+    pdf:
+        'Description: The roof structure is formed in traditional cut timber, prefabricated trussed rafters, steel, other construction.',
+  ),
+  VerbatimRule(
+    'f1_cond',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CONDITION}',
+    [
+      VerbatimToken(
+        '{RS_CONDITION}',
+        dropdown: 'actv_roof_structure_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the roof structure appears in good, reasonable, fair, poor, very poor condition, consistent with its age and construction.',
+  ),
+  VerbatimRule(
+    'f1_spray',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_SPRAY_FOAM}',
+    [
+    ],
+    whenField: 'cb_spray_foam',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_water',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_WATER_PENETRATION}',
+    [
+    ],
+    whenField: 'cb_water_penetration',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_soilpipe',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CAPPED_SOIL_PIPE}',
+    [
+    ],
+    whenField: 'cb_capped_soil_vent_pipe',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_general',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_ul_no',
+    'activity_inside_property_roof_underlay',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_NO_UNDERLAY}',
+    [
+    ],
+    whenField: 'actv_underlay',
+    whenValue: 'No underlay',
+  ),
+  VerbatimRule(
+    'f1_ul_present',
+    'activity_inside_property_roof_underlay',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_UNDERLAY_PRESENT}',
+    [
+      VerbatimToken(
+        '{UL_MATERIALS}',
+        options: {
+          'f1u_traditional_bituminous_felt': 'traditional bituminous felt',
+          'f1u_breathable_membrane': 'breathable membrane',
+          'f1u_timber_boards': 'timber boards',
+        },
+        otherCheckbox: 'f1u_other',
+        otherText: 'f1u_other_text',
+        pdfOptions: ['traditional bituminous felt', 'breathable membrane', 'timber boards'],
+      ),
+      VerbatimToken(
+        '{UL_CONDITION}',
+        dropdown: 'actv_ul_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Underlay present: The underside of the roof covering incorporates traditional bituminous felt, breathable membrane, timber boards, other, which should provide a secondary barrier to driving rain and snow, where visible.',
+    pdfMore: [
+      'Where visible, the underlay appears in good, reasonable, fair, poor, very poor condition.',
+    ],
+    whenField: 'actv_underlay',
+    whenValue: 'Underlay present',
+  ),
+  VerbatimRule(
+    'f1_ul_defects',
+    'activity_inside_property_roof_underlay',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_UNDERLAY_DEFECTS}',
+    [
+      VerbatimToken(
+        '{UL_DEFECTS}',
+        options: {
+          'f1ud_worn': 'worn',
+          'f1ud_torn': 'torn',
+          'f1ud_missing': 'missing',
+          'f1ud_damaged': 'damaged',
+        },
+        pdfOptions: ['worn', 'torn', 'missing', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Defects noted: The roof underlay is worn, torn, missing, damaged in places, reducing its effectiveness as a secondary barrier against wind-driven rain and dust.',
+  ),
+  VerbatimRule(
+    'f1_ve_no',
+    'activity_inside_property_roof_ventilation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_NO_VENTILATION}',
+    [
+    ],
+    whenField: 'actv_ventilation',
+    whenValue: 'No ventilation',
+  ),
+  VerbatimRule(
+    'f1_ve_noted',
+    'activity_inside_property_roof_ventilation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_VENTILATION_NOTED}',
+    [
+      VerbatimToken(
+        '{VENT_LEVEL}',
+        dropdown: 'actv_vent_level',
+        dropdownOptions: ['Adequate', 'Limited', 'Restricted'],
+        lower: true,
+        pdfOptions: ['adequate', 'limited', 'restricted'],
+      ),
+    ],
+    pdf:
+        'Ventilation noted: The roof space appears to have adequate, limited, restricted ventilation.',
+    whenField: 'actv_ventilation',
+    whenValue: 'Ventilation noted',
+  ),
+  VerbatimRule(
+    'f1_ve_cond',
+    'activity_inside_property_roof_ventilation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CONDENSATION_NOTED}',
+    [
+    ],
+    whenField: 'actv_ventilation',
+    whenValue: 'Condensation noted',
+  ),
+  VerbatimRule(
+    'f1_in',
+    'activity_inside_property_roof_insulation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_THERMAL_INSULATION}',
+    [
+      VerbatimToken(
+        '{INSULATION_STATE}',
+        options: {
+          'f1i_adequate': 'adequate',
+          'f1i_limited': 'limited',
+          'f1i_insufficient': 'insufficient',
+          'f1i_poorly_fitted': 'poorly fitted',
+        },
+        otherCheckbox: 'f1i_other',
+        otherText: 'f1i_other_text',
+        pdfOptions: ['adequate', 'limited', 'insufficient', 'poorly fitted'],
+      ),
+    ],
+    pdf:
+        'Thermal Insulation: The roof space floor insulation appears adequate, limited, insufficient, poorly fitted, other based upon the visible areas only.',
+  ),
+  VerbatimRule(
+    'f1_in_ok',
+    'activity_inside_property_roof_insulation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_INSULATION_ADEQUATE}',
+    [
+    ],
+    whenField: 'actv_insulation_outcome',
+    whenValue: 'Adequate insulation',
+  ),
+  VerbatimRule(
+    'f1_in_bad',
+    'activity_inside_property_roof_insulation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_INSULATION_INADEQUATE}',
+    [
+    ],
+    whenField: 'actv_insulation_outcome',
+    whenValue: 'Inadequate/no insulation',
+  ),
+  VerbatimRule(
+    'f1_tank',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_WATER_TANKS}',
+    [
+      VerbatimToken(
+        '{TANK_MATERIALS}',
+        options: {
+          'f1t_plastic': 'plastic',
+          'f1t_galvanised_steel': 'galvanised steel',
+          'f1t_asbestos_cement': 'asbestos cement',
+          'f1t_fibreglass': 'fibreglass',
+        },
+        otherCheckbox: 'f1t_other',
+        otherText: 'f1t_other_text',
+        pdfOptions: ['plastic', 'galvanised steel', 'asbestos cement', 'fibreglass'],
+      ),
+    ],
+    pdf:
+        'Water Storage Tanks: The roof space contains plastic, galvanised steel, asbestos cement, fibreglass, other cold water storage tanks.',
+  ),
+  VerbatimRule(
+    'f1_tank_cond',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_CONDITION}',
+    [
+      VerbatimToken(
+        '{TANK_CONDITION}',
+        dropdown: 'actv_tank_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the tank appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f1_tank_leak',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_LEAKING}',
+    [
+    ],
+    whenField: 'cb_tank_leaking',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_tank_ins',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_INSULATION}',
+    [
+      VerbatimToken(
+        '{TANK_INSULATION}',
+        dropdown: 'actv_tank_insulation',
+        dropdownOptions: ['Adequately insulated', 'Partially insulated', 'Uninsulated'],
+        lower: true,
+        pdfOptions: ['adequately insulated', 'partially insulated', 'uninsulated'],
+      ),
+    ],
+    pdf:
+        'Water Tank Insulation: The water tank and associated pipework appear adequately insulated, partially insulated, uninsulated.',
+  ),
+  VerbatimRule(
+    'f1_tank_cover',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_COVER}',
+    [
+      VerbatimToken(
+        '{TANK_COVER_MATERIALS}',
+        options: {
+          'f1c_plastic': 'plastic',
+          'f1c_galvanised_metal': 'galvanised metal',
+          'f1c_asbestos': 'asbestos',
+        },
+        otherCheckbox: 'f1c_other',
+        otherText: 'f1c_other_text',
+        pdfOptions: ['plastic', 'galvanised metal', 'asbestos'],
+      ),
+    ],
+    pdf:
+        'Missing or Inadequate tank cover: The plastic, galvanised metal, asbestos, other cold water tank cover(s) are missing or inadequate.',
+  ),
+  VerbatimRule(
+    'f1_tank_disused',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_DISUSED}',
+    [
+      VerbatimToken(
+        '{DISUSED_TANKS}',
+        options: {
+          'f1x_plastic': 'plastic',
+          'f1x_galvanised_steel': 'galvanised steel',
+          'f1x_asbestos_cement': 'asbestos cement',
+        },
+        otherCheckbox: 'f1x_other',
+        otherText: 'f1x_other_text',
+        cap: true,
+        pdfOptions: ['plastic', 'galvanised steel', 'asbestos cement'],
+      ),
+    ],
+    pdf:
+        'Disused Water Tank: Plastic, galvanised steel, asbestos cement, other disused water storage tank(s) remain within the roof space.',
+  ),
+  VerbatimRule(
+    'f1_tdef',
+    'activity_inside_property_repair_timber_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TIMBER_DEFECTS}',
+    [
+      VerbatimToken(
+        '{TIMBER_DEFECTS}',
+        options: {
+          'f1td_distortion': 'distortion',
+          'f1td_splitting': 'splitting',
+          'f1td_cracking': 'cracking',
+          'f1td_notching': 'notching',
+          'f1td_alterations': 'alterations',
+        },
+        otherCheckbox: 'f1td_other',
+        otherText: 'f1td_other_text',
+        pdfOptions: ['distortion', 'splitting', 'cracking', 'notching', 'alterations'],
+      ),
+    ],
+    pdf:
+        'Timber defects: Localised distortion, splitting, cracking, notching, alterations, other were observed.',
+  ),
+  VerbatimRule(
+    'f1_rot',
+    'activity_inside_property_repair_timber_rot',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TIMBER_DECAY}',
+    [
+      VerbatimToken(
+        '{TIMBER_DECAY}',
+        options: {
+          'f1r_wet_rot': 'wet rot',
+          'f1r_dry_rot': 'dry rot',
+          'f1r_fungal_decay': 'fungal decay',
+        },
+        otherCheckbox: 'f1r_other',
+        otherText: 'f1r_other_text',
+        pdfOptions: ['wet rot', 'dry rot', 'fungal decay'],
+      ),
+    ],
+    pdf:
+        'Timber Decay: Evidence of wet rot, dry rot, fungal decay, other timber decay was observed.',
+  ),
+  VerbatimRule(
+    'f1_thin',
+    'activity_inside_property_repair_under_size_timber',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_THIN_TIMBERS}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_heavy',
+    'activity_inside_property_repair_heavy_roof',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_HEAVY_TILES}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_wb_no',
+    'activity_inside_property_repair_insect_infestation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_NO_WOOD_BORING}',
+    [
+    ],
+    whenField: 'actv_insect_infestation',
+    whenValue: 'No wood-boring',
+  ),
+  VerbatimRule(
+    'f1_wb_yes',
+    'activity_inside_property_repair_insect_infestation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_WOOD_BORING_NOTED}',
+    [
+      VerbatimToken(
+        '{WB_ACTIVITY}',
+        options: {
+          'f1w_active': 'active',
+          'f1w_historic': 'historic',
+        },
+        pdfOptions: ['active', 'historic'],
+      ),
+    ],
+    pdf:
+        'Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed.',
+    whenField: 'actv_insect_infestation',
+    whenValue: 'Wood boring noted',
+  ),
+  VerbatimRule(
+    'f1_move',
+    'activity_inside_property_roof_movement',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_ROOF_MOVEMENT}',
+    [
+      VerbatimToken(
+        '{RM_EVIDENCE}',
+        options: {
+          'f1m_deflection': 'deflection',
+          'f1m_sagging': 'sagging',
+          'f1m_spread': 'spread',
+        },
+        otherCheckbox: 'f1m_other',
+        otherText: 'f1m_other_text',
+        pdfOptions: ['deflection', 'sagging', 'spread'],
+      ),
+      VerbatimToken(
+        '{RM_LEVEL}',
+        options: {
+          'f1ml_normal': 'normal',
+          'f1ml_minor': 'minor',
+          'f1ml_significant': 'significant',
+          'f1ml_severe': 'severe',
+          'f1ml_presents_a_hazard': 'presents a hazard',
+        },
+        otherCheckbox: 'f1ml_other',
+        otherText: 'f1ml_other_text',
+        pdfOptions: ['normal', 'minor', 'significant', 'severe', 'presents a hazard'],
+      ),
+    ],
+    pdf:
+        'Roof Movement: Evidence of deflection, sagging, spread, other was observed.',
+    pdfMore: [
+      'Observed roof movement is normal, minor, significant, severe, presents a hazard, other.',
+    ],
+  ),
+  VerbatimRule(
+    'f1_alter',
+    'activity_inside_property_structural_alterations',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_STRUCTURAL_ALTERATIONS}',
+    [
+      VerbatimToken(
+        '{RS_ALTERATIONS}',
+        options: {
+          'f1a_loft_conversion': 'loft conversion',
+          'f1a_altered_roof_members': 'altered roof members',
+          'f1a_removed_struts': 'removed struts',
+          'f1a_trimmed_rafters': 'trimmed rafters',
+          'f1a_replacement_supports': 'replacement supports',
+          'f1a_additional_timber_supports': 'additional timber supports',
+        },
+        otherCheckbox: 'f1a_other',
+        otherText: 'f1a_other_text',
+        pdfOptions: ['loft conversion', 'altered roof members', 'removed struts', 'trimmed rafters', 'replacement supports', 'additional timber supports'],
+      ),
+    ],
+    pdf:
+        'Structural Alterations: Evidence of structural alterations to the roof space was observed, including loft conversion, altered roof members, removed struts, trimmed rafters, replacement supports, additional timber supports, other alterations.',
+  ),
+  VerbatimRule(
+    'f1_cb',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_BREAST}',
+    [
+      VerbatimToken(
+        '{CB_STATE}',
+        options: {
+          'f1cb_removed': 'removed',
+          'f1cb_partially_removed': 'partially removed',
+          'f1cb_altered': 'altered',
+          'f1cb_rendered': 'rendered',
+        },
+        otherCheckbox: 'f1cb_other',
+        otherText: 'f1cb_other_text',
+        pdfOptions: ['removed', 'partially removed', 'altered', 'rendered'],
+      ),
+    ],
+    pdf:
+        'Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed, partially removed, altered, rendered, other within the roof space.',
+  ),
+  VerbatimRule(
+    'f1_cb_ni',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Not inspected',
+  ),
+  VerbatimRule(
+    'f1_cb_ok',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_ADEQUATE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Adequate support',
+  ),
+  VerbatimRule(
+    'f1_cb_poor',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_POOR}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Poor support',
+  ),
+  VerbatimRule(
+    'f1_cb_risk',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_COLLAPSE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Risk of collapse',
+  ),
+  VerbatimRule(
+    'f1_cb_damp',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_DAMP}',
+    [
+    ],
+    whenField: 'cb_damp_chimney',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_pw_part',
+    'activity_inside_property_repair_party_walls',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_PARTY_WALL_PARTIAL}',
+    [
+    ],
+    whenField: 'actv_party_wall',
+    whenValue: 'Partially missing',
+  ),
+  VerbatimRule(
+    'f1_pw_large',
+    'activity_inside_property_repair_party_walls',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_PARTY_WALL_LARGE}',
+    [
+    ],
+    whenField: 'actv_party_wall',
+    whenValue: 'Largely missing',
+  ),
+  VerbatimRule(
+    'f1_not_full',
+    'activity_inside_property_roof_structure_not_inspected',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_ROOF_NOT_FULLY_INSPECTED}',
+    [
+      VerbatimToken(
+        '{RS_LIMITS}',
+        options: {
+          'f1n_limited_roof_height': 'limited roof height',
+          'f1n_the_floor_was_not_safe_to_walk_on': 'the floor was not safe to walk on',
+          'f1n_floor_was_boarded': 'floor was boarded',
+          'f1n_excessive_storage': 'excessive storage',
+          'f1n_insulation': 'insulation',
+          'f1n_underlining': 'underlining',
+        },
+        otherCheckbox: 'f1n_other',
+        otherText: 'f1n_other_text',
+        pdfOptions: ['limited roof height', 'the floor was not safe to walk on', 'floor was boarded', 'excessive storage', 'insulation', 'underlining'],
+      ),
+    ],
+    pdf:
+        'Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection.',
+  ),
+  VerbatimRule(
+    'f1_unsafe',
+    'activity_inside_property_roof_structure_not_inspected',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_UNSAFE_FLOOR}',
+    [
+    ],
+    whenField: 'cb_unsafe_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_intro',
+    'activity_inside_property_roof_structure_main_screen',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
   // <<verbatim-rules-end>>
 ];
 

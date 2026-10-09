@@ -8814,76 +8814,6 @@
           "order": 1
         },
         {
-          "id": "activity_inside_property_weather_condition",
-          "title": "Weather Condition",
-          "type": "screen",
-          "parentId": "group_roof_structure_58",
-          "order": 2,
-          "fields": [
-            {
-              "id": "actv_weather_condition",
-              "label": "Weather Condition",
-              "type": "dropdown",
-              "options": [
-                "Wet",
-                "Dry"
-              ]
-            },
-            {
-              "id": "cb_not_inspected",
-              "label": "Leaks Noted",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_inside_property_repair_tank",
-          "title": "Repair Tank",
-          "type": "screen",
-          "parentId": "group_repairs_59",
-          "order": 2,
-          "fields": [
-            {
-              "id": "label_water_tank",
-              "label": "Water Tank",
-              "type": "label"
-            },
-            {
-              "id": "cb_old",
-              "label": "Old",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_in_disrepair",
-              "label": "In disrepair",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_696",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_584",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_696",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "inside_property_ceilings_about_ceilings",
           "title": "About Ceilings",
           "type": "screen",
@@ -11558,39 +11488,6 @@
               "id": "cb_loft_converted",
               "label": "Loft converted",
               "type": "checkbox"
-            },
-            {
-              "id": "label_defects_noted_to_the_conversion",
-              "label": "Defects noted to the conversion",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked_walls",
-              "label": "Cracked walls",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_sagging_ceiling",
-              "label": "Sagging ceiling",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_out_of_square_door",
-              "label": "Out of square door",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_608",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_752",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_608",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -11609,168 +11506,45 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_defects_2",
-              "label": "Defects",
+              "id": "label_timber_defects",
+              "label": "Localised",
               "type": "label"
             },
             {
-              "id": "actv_status",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
+              "id": "f1td_distortion",
+              "label": "distortion",
+              "type": "checkbox"
             },
             {
-              "id": "cb_distorted",
-              "label": "Distorted",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f1td_splitting",
+              "label": "splitting",
+              "type": "checkbox"
             },
             {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f1td_cracking",
+              "label": "cracking",
+              "type": "checkbox"
             },
             {
-              "id": "cb_affected_by_wood_boring_insect",
-              "label": "Affected by wood boring insect",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f1td_notching",
+              "label": "notching",
+              "type": "checkbox"
             },
             {
-              "id": "cb_rotten",
-              "label": "Rotten",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f1td_alterations",
+              "label": "alterations",
+              "type": "checkbox"
             },
             {
-              "id": "cb_split",
-              "label": "Split",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_missing",
-              "label": "Missing",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_inadequate",
-              "label": "Inadequate",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_not_strong_enough",
-              "label": "Not strong enough",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_904",
+              "id": "f1td_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_707",
+              "id": "f1td_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_904",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_badly_distorted",
-              "label": "Badly distorted",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extensively_damaged",
-              "label": "Extensively damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extensively_affected_by_wood_boring_insect",
-              "label": "Extensively affected by wood boring insect",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_badly_rotted",
-              "label": "Badly rotted",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_badly_split",
-              "label": "Badly split",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_largely_missing",
-              "label": "Largely missing",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_very_inadequate",
-              "label": "Very inadequate",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_445",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_351",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_445",
+              "conditionalOn": "f1td_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -13674,179 +13448,49 @@
           "order": 6,
           "fields": [
             {
-              "id": "actv_construction",
-              "label": "Construction",
-              "type": "dropdown",
-              "options": [
-                "Built of traditional cut timber",
-                "Made up of factory made trusses",
-                "Made of steel",
-                "Other"
-              ]
+              "id": "label_rs_construction",
+              "label": "Roof structure formed in",
+              "type": "label"
             },
             {
-              "id": "actv_underlining",
-              "label": "Underlining",
-              "type": "dropdown",
-              "options": [
-                "Underlining",
-                "No underlining"
-              ]
+              "id": "f1d_traditional_cut_timber",
+              "label": "traditional cut timber",
+              "type": "checkbox"
             },
             {
-              "id": "label_material_8",
-              "label": "Material",
-              "type": "label",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
+              "id": "f1d_prefabricated_trussed_rafters",
+              "label": "prefabricated trussed rafters",
+              "type": "checkbox"
             },
             {
-              "id": "cb_sacking_felt",
-              "label": "Sacking felt",
-              "type": "checkbox",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
+              "id": "f1d_steel",
+              "label": "steel",
+              "type": "checkbox"
             },
             {
-              "id": "cb_plastic",
-              "label": "Plastic",
-              "type": "checkbox",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_timber_boarding",
-              "label": "Timber boarding",
-              "type": "checkbox",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_696",
+              "id": "f1d_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_666",
+              "id": "f1d_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_underlining=Underlining & cb_other_696",
+              "conditionalOn": "f1d_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_52",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_torn",
-              "label": "Torn",
-              "type": "checkbox",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_missing_in_places",
-              "label": "Missing in places",
-              "type": "checkbox",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_286",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_underlining",
-              "conditionalValue": "Underlining",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_746",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_underlining=Underlining & cb_other_286",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_insulation",
-              "label": "Insulation",
-              "type": "dropdown",
-              "options": [
-                "Adequate",
-                "Inadequate"
-              ]
             },
             {
               "id": "actv_roof_structure_condition",
-              "label": "Roof Structure Condition",
+              "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
-            },
-            {
-              "id": "cb_damp_noted",
-              "label": "Insulation related damp",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_floorboards_are_not_insulated",
-              "label": "Floorboards are not insulated",
-              "type": "checkbox",
-              "conditionalOn": "cb_damp_noted",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_floorboards_are_not_adequately_insulated",
-              "label": "Floorboards are not adequately insulated",
-              "type": "checkbox",
-              "conditionalOn": "cb_damp_noted",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_ventilation_related_damp",
-              "label": "Ventilation related damp",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_none",
-              "label": "No ventilation",
-              "type": "checkbox",
-              "conditionalOn": "cb_ventilation_related_damp",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damp_noted_ventilation",
-              "label": "Insufficient ventilation",
-              "type": "checkbox",
-              "conditionalOn": "cb_ventilation_related_damp",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "cb_spray_foam",
@@ -13862,6 +13506,207 @@
               "id": "cb_capped_soil_vent_pipe",
               "label": "Capped soil and vent pipe",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_general_maintenance",
+              "label": "General maintenance",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_roof_underlay",
+          "title": "Roof underlay",
+          "type": "screen",
+          "parentId": "group_roof_structure_58",
+          "order": 24,
+          "fields": [
+            {
+              "id": "actv_underlay",
+              "label": "Roof underlay",
+              "type": "dropdown",
+              "options": [
+                "No underlay",
+                "Underlay present"
+              ]
+            },
+            {
+              "id": "label_ul_materials",
+              "label": "Underside incorporates",
+              "type": "label",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1u_traditional_bituminous_felt",
+              "label": "traditional bituminous felt",
+              "type": "checkbox",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1u_breathable_membrane",
+              "label": "breathable membrane",
+              "type": "checkbox",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1u_timber_boards",
+              "label": "timber boards",
+              "type": "checkbox",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1u_other",
+              "label": "Other",
+              "type": "checkbox",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1u_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "actv_underlay=Underlay present&f1u_other",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_ul_condition",
+              "label": "Underlay condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ],
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_ul_defects",
+              "label": "Underlay is",
+              "type": "label",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1ud_worn",
+              "label": "worn",
+              "type": "checkbox",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1ud_torn",
+              "label": "torn",
+              "type": "checkbox",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1ud_missing",
+              "label": "missing",
+              "type": "checkbox",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1ud_damaged",
+              "label": "damaged",
+              "type": "checkbox",
+              "conditionalOn": "actv_underlay=Underlay present",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_roof_ventilation",
+          "title": "Roof ventilation",
+          "type": "screen",
+          "parentId": "group_roof_structure_58",
+          "order": 26,
+          "fields": [
+            {
+              "id": "actv_ventilation",
+              "label": "Roof ventilation",
+              "type": "dropdown",
+              "options": [
+                "No ventilation",
+                "Ventilation noted",
+                "Condensation noted"
+              ]
+            },
+            {
+              "id": "actv_vent_level",
+              "label": "Ventilation appears",
+              "type": "dropdown",
+              "options": [
+                "Adequate",
+                "Limited",
+                "Restricted"
+              ],
+              "conditionalOn": "actv_ventilation=Ventilation noted",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_roof_insulation",
+          "title": "Roof insulation",
+          "type": "screen",
+          "parentId": "group_roof_structure_58",
+          "order": 28,
+          "fields": [
+            {
+              "id": "label_insulation_state",
+              "label": "Insulation appears",
+              "type": "label"
+            },
+            {
+              "id": "f1i_adequate",
+              "label": "adequate",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1i_limited",
+              "label": "limited",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1i_insufficient",
+              "label": "insufficient",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1i_poorly_fitted",
+              "label": "poorly fitted",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1i_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1i_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f1i_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_insulation_outcome",
+              "label": "Insulation outcome",
+              "type": "dropdown",
+              "options": [
+                "Adequate insulation",
+                "Inadequate/no insulation"
+              ]
             }
           ]
         },
@@ -14881,100 +14726,57 @@
           "order": 7,
           "fields": [
             {
-              "id": "cb_roof_space_not_inspected",
-              "label": "Roof space not inspected",
+              "id": "label_rs_limits",
+              "label": "Could not fully inspect the roof timber because",
+              "type": "label"
+            },
+            {
+              "id": "f1n_limited_roof_height",
+              "label": "limited roof height",
               "type": "checkbox"
             },
             {
-              "id": "cb_from_the_outside",
-              "label": "From the outside",
-              "type": "checkbox",
-              "conditionalOn": "cb_roof_space_not_inspected",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_or_to_the_ceiling_below_the_roof_space",
-              "label": "Or to the ceiling below the roof space",
-              "type": "checkbox",
-              "conditionalOn": "cb_roof_space_not_inspected",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_637",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_roof_space_not_inspected",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_838",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_roof_space_not_inspected & cb_other_637",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_roof_space_not_inspected_defect",
-              "label": "Defects noted to the roof",
+              "id": "f1n_the_floor_was_not_safe_to_walk_on",
+              "label": "the floor was not safe to walk on",
               "type": "checkbox"
             },
             {
-              "id": "label_defect_91",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "cb_roof_space_not_inspected_defect",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f1n_floor_was_boarded",
+              "label": "floor was boarded",
+              "type": "checkbox"
             },
             {
-              "id": "cb_sagging_roof",
-              "label": "Sagging roof",
-              "type": "checkbox",
-              "conditionalOn": "cb_roof_space_not_inspected_defect",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f1n_excessive_storage",
+              "label": "excessive storage",
+              "type": "checkbox"
             },
             {
-              "id": "cb_undulating_roof",
-              "label": "Undulating roof",
-              "type": "checkbox",
-              "conditionalOn": "cb_roof_space_not_inspected_defect",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f1n_insulation",
+              "label": "insulation",
+              "type": "checkbox"
             },
             {
-              "id": "cb_roof_spreading",
-              "label": "Roof spreading",
-              "type": "checkbox",
-              "conditionalOn": "cb_roof_space_not_inspected_defect",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f1n_underlining",
+              "label": "underlining",
+              "type": "checkbox"
             },
             {
-              "id": "cb_sagging_ceiling",
-              "label": "Sagging ceiling",
-              "type": "checkbox",
-              "conditionalOn": "cb_roof_space_not_inspected_defect",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_783",
+              "id": "f1n_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_roof_space_not_inspected_defect",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_724",
+              "id": "f1n_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_roof_space_not_inspected_defect & cb_other_783",
+              "conditionalOn": "f1n_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_unsafe_floor",
+              "label": "Unsafe floor",
+              "type": "checkbox"
             }
           ]
         },
@@ -15145,255 +14947,134 @@
           "order": 8,
           "fields": [
             {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
+              "id": "label_tank_materials",
+              "label": "Cold water storage tanks",
+              "type": "label"
+            },
+            {
+              "id": "f1t_plastic",
+              "label": "plastic",
               "type": "checkbox"
             },
             {
-              "id": "label_water_tank_material_2",
-              "label": "Water Tank Material",
-              "type": "label",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
+              "id": "f1t_galvanised_steel",
+              "label": "galvanised steel",
+              "type": "checkbox"
             },
             {
-              "id": "cb_plastic",
-              "label": "Plastic",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
+              "id": "f1t_asbestos_cement",
+              "label": "asbestos cement",
+              "type": "checkbox"
             },
             {
-              "id": "cb_galvanised_metal",
-              "label": "Galvanised metal",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
+              "id": "f1t_fibreglass",
+              "label": "fibreglass",
+              "type": "checkbox"
             },
             {
-              "id": "cb_asbestos",
-              "label": "Asbestos",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_245",
+              "id": "f1t_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_358",
+              "id": "f1t_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "!cb_not_inspected & cb_other_245",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_45",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_roof_space_used",
-              "label": "Roof space",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_airing_cupboard_used",
-              "label": "Airing cupboard",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_kitchen_used",
-              "label": "Kitchen",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_1057_used",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_141_used",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "!cb_not_inspected & cb_other_1057_used",
+              "conditionalOn": "f1t_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "actv_tank_condition",
-              "label": "Tank Condition",
+              "label": "Tank condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
             },
             {
-              "id": "cb_missing_cover",
-              "label": "Missing cover",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poor_fitting_cover",
-              "label": "Poor-fitting cover",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_not_insulated",
-              "label": "Tank Insulation",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_insulation",
-              "label": "Insulated / Ok",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_insulated",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_not_insulation",
-              "label": "No insulation",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_insulated",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_not_adequately_insulated",
-              "label": "Not adequately insulated",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_insulated",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_658",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_insulated",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_893",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "!cb_not_inspected & cb_not_insulated & cb_other_658",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_disused_water_tank",
-              "label": "Disused Water Tank",
+              "id": "cb_tank_leaking",
+              "label": "Leaking",
               "type": "checkbox"
             },
             {
-              "id": "cb_plastic_disused",
-              "label": "Plastic",
-              "type": "checkbox",
-              "conditionalOn": "cb_disused_water_tank",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "actv_tank_insulation",
+              "label": "Tank insulation",
+              "type": "dropdown",
+              "options": [
+                "Adequately insulated",
+                "Partially insulated",
+                "Uninsulated"
+              ]
             },
             {
-              "id": "cb_galvanised_metal_disused",
-              "label": "Galvanised metal",
-              "type": "checkbox",
-              "conditionalOn": "cb_disused_water_tank",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "label_tank_cover_materials",
+              "label": "Tank cover missing or inadequate",
+              "type": "label"
             },
             {
-              "id": "cb_asbestos_disused",
-              "label": "Asbestos",
-              "type": "checkbox",
-              "conditionalOn": "cb_disused_water_tank",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f1c_plastic",
+              "label": "plastic",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_245_disused",
+              "id": "f1c_galvanised_metal",
+              "label": "galvanised metal",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1c_asbestos",
+              "label": "asbestos",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1c_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_disused_water_tank",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_358_disused",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_disused_water_tank & cb_other_245_disused",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_44",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "cb_disused_water_tank",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_roof_space",
-              "label": "Roof space",
-              "type": "checkbox",
-              "conditionalOn": "cb_disused_water_tank",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_airing_cupboard",
-              "label": "Airing cupboard",
-              "type": "checkbox",
-              "conditionalOn": "cb_disused_water_tank",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_kitchen",
-              "label": "Kitchen",
-              "type": "checkbox",
-              "conditionalOn": "cb_disused_water_tank",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_1057",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_disused_water_tank",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_141",
+              "id": "f1c_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_disused_water_tank & cb_other_1057",
+              "conditionalOn": "f1c_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_disused_tanks",
+              "label": "Disused tanks",
+              "type": "label"
+            },
+            {
+              "id": "f1x_plastic",
+              "label": "plastic",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1x_galvanised_steel",
+              "label": "galvanised steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1x_asbestos_cement",
+              "label": "asbestos cement",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1x_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1x_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f1x_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -15982,13 +15663,33 @@
           "fields": [
             {
               "id": "actv_insect_infestation",
-              "label": "Insect infestation",
+              "label": "Wood-boring insects",
               "type": "dropdown",
               "options": [
-                "None",
-                "Minor",
-                "Severe"
+                "No wood-boring",
+                "Wood boring noted"
               ]
+            },
+            {
+              "id": "label_wb_activity",
+              "label": "Activity observed",
+              "type": "label",
+              "conditionalOn": "actv_insect_infestation=Wood boring noted",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1w_active",
+              "label": "active",
+              "type": "checkbox",
+              "conditionalOn": "actv_insect_infestation=Wood boring noted",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "f1w_historic",
+              "label": "historic",
+              "type": "checkbox",
+              "conditionalOn": "actv_insect_infestation=Wood boring noted",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -16543,13 +16244,37 @@
           "order": 12,
           "fields": [
             {
-              "id": "actv_insect_infestation",
-              "label": "Timber rot",
-              "type": "dropdown",
-              "options": [
-                "Minor",
-                "Severe"
-              ]
+              "id": "label_timber_decay",
+              "label": "Evidence of",
+              "type": "label"
+            },
+            {
+              "id": "f1r_wet_rot",
+              "label": "wet rot",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1r_dry_rot",
+              "label": "dry rot",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1r_fungal_decay",
+              "label": "fungal decay",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1r_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1r_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f1r_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -16981,7 +16706,7 @@
           "fields": [
             {
               "id": "cb_not_inspected",
-              "label": "Undersize timber",
+              "label": "Thin timbers",
               "type": "checkbox"
             }
           ]
@@ -17178,20 +16903,6 @@
           ]
         },
         {
-          "id": "activity_inside_property_repair_roof_spreading",
-          "title": "Roof spreading",
-          "type": "screen",
-          "parentId": "group_roof_structure_58",
-          "order": 16,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Roof spreading",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
           "id": "activity_in_side_property_floors_floor_ventilation",
           "title": "Floor ventilation",
           "type": "screen",
@@ -17239,8 +16950,150 @@
           "fields": [
             {
               "id": "cb_not_inspected",
-              "label": "Heavy roof",
+              "label": "Heavy tiles sagging",
               "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_roof_movement",
+          "title": "Roof movement",
+          "type": "screen",
+          "parentId": "group_roof_structure_58",
+          "order": 30,
+          "fields": [
+            {
+              "id": "label_rm_evidence",
+              "label": "Evidence of",
+              "type": "label"
+            },
+            {
+              "id": "f1m_deflection",
+              "label": "deflection",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1m_sagging",
+              "label": "sagging",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1m_spread",
+              "label": "spread",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1m_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1m_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f1m_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_rm_level",
+              "label": "Observed movement is",
+              "type": "label"
+            },
+            {
+              "id": "f1ml_normal",
+              "label": "normal",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1ml_minor",
+              "label": "minor",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1ml_significant",
+              "label": "significant",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1ml_severe",
+              "label": "severe",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1ml_presents_a_hazard",
+              "label": "presents a hazard",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1ml_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1ml_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f1ml_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_structural_alterations",
+          "title": "Structural alterations",
+          "type": "screen",
+          "parentId": "group_roof_structure_58",
+          "order": 32,
+          "fields": [
+            {
+              "id": "label_rs_alterations",
+              "label": "Alterations include",
+              "type": "label"
+            },
+            {
+              "id": "f1a_loft_conversion",
+              "label": "loft conversion",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1a_altered_roof_members",
+              "label": "altered roof members",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1a_removed_struts",
+              "label": "removed struts",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1a_trimmed_rafters",
+              "label": "trimmed rafters",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1a_replacement_supports",
+              "label": "replacement supports",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1a_additional_timber_supports",
+              "label": "additional timber supports",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1a_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1a_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f1a_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -17259,50 +17112,58 @@
           "order": 20,
           "fields": [
             {
-              "id": "label_condition_2",
-              "label": "Condition",
+              "id": "label_cb_state",
+              "label": "Chimney breast has been",
               "type": "label"
             },
             {
+              "id": "f1cb_removed",
+              "label": "removed",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1cb_partially_removed",
+              "label": "partially removed",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1cb_altered",
+              "label": "altered",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1cb_rendered",
+              "label": "rendered",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1cb_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f1cb_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f1cb_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "actv_status",
-              "label": "Status",
+              "label": "Support to remaining structure",
               "type": "dropdown",
               "options": [
-                "Inspected",
-                "Not Inspected"
+                "Not inspected",
+                "Adequate support",
+                "Poor support",
+                "Risk of collapse"
               ]
             },
             {
-              "id": "cb_ok",
-              "label": "Ok",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poor_support",
-              "label": "Poor support",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_risk_of_collapse",
-              "label": "Risk of collapse",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Inspected",
-              "conditionalMode": "show"
-            },
-            {
               "id": "cb_damp_chimney",
-              "label": "Damp chimney",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Inspected",
-              "conditionalMode": "show"
+              "label": "Minor chimney damp",
+              "type": "checkbox"
             }
           ]
         },
@@ -17321,11 +17182,11 @@
           "order": 22,
           "fields": [
             {
-              "id": "actv_insect_infestation",
-              "label": "Condition",
+              "id": "actv_party_wall",
+              "label": "Party wall",
               "type": "dropdown",
               "options": [
-                "Partly missing",
+                "Partially missing",
                 "Largely missing"
               ]
             }

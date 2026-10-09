@@ -444,7 +444,7 @@ void main() {
     test('spray foam checkbox emits the spray-foam advisory', () {
       final phrases = about({'cb_spray_foam': 'true'});
       expect(phrases, hasLength(1));
-      expect(phrases.single, startsWith('Spray Foam Insulation:'));
+      expect(phrases.single, startsWith('Spray foam insulation:'));
       expect(phrases.single, contains('mortgageability, insurability'));
       expect(phrases.single, isNot(contains('{')));
     });
@@ -465,13 +465,13 @@ void main() {
 
     test('the three advisories can combine with the construction sentence', () {
       final phrases = about({
-        'actv_construction': 'Built of traditional cut timber',
+        'f1d_traditional_cut_timber': 'true',
         'cb_spray_foam': 'true',
         'cb_water_penetration': 'true',
         'cb_capped_soil_vent_pipe': 'true',
       });
-      expect(phrases.any((p) => p.startsWith('Roof Structure:')), isTrue);
-      expect(phrases.any((p) => p.startsWith('Spray Foam Insulation:')), isTrue);
+      expect(phrases.any((p) => p.startsWith('Description:')), isTrue);
+      expect(phrases.any((p) => p.startsWith('Spray foam insulation:')), isTrue);
       expect(
           phrases.any((p) => p.startsWith('Evidence of Water Penetration:')),
           isTrue);

@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 434,
+  "screensAudited": 436,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2336,
-   "approvedLegacyBank": 598,
-   "approvedCurrentBankOnly": 1711,
+   "distinctEmitted": 2367,
+   "approvedLegacyBank": 597,
+   "approvedCurrentBankOnly": 1743,
    "unapproved": 0
   }
  },
@@ -2139,43 +2139,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_inside_property_weather_condition",
-   "title": "Weather Condition",
-   "dataFieldCount": 2,
-   "permutationCount": 6,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "It was raining at the time of inspection; leaks and defects to the roof structure are more likely to be detected when it is raining.",
-    "It was more difficult to detect leakages to the roof structure because it was not raining at the time of my inspection. However, no signs were present to suggest that the roof may be leaking."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_inside_property_repair_tank",
-   "title": "Repair Tank",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The water tank is old. This should be repaired or replaced now.",
-    "The water tank is leaking. This should be repaired or replaced now.",
-    "The water tank is in disrepair. This should be repaired or replaced now."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "inside_property_ceilings_about_ceilings",
    "title": "About Ceilings",
    "dataFieldCount": 16,
@@ -2502,37 +2465,36 @@
    "sectionKey": "F",
    "screenId": "activity_inside_property_loft_converted",
    "title": "Loft Converted",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Structural Alterations: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view. Consequently, I am unable to comment on the condition of the concealed areas. Externally I noted no severe loss of line or pitch to the roof coverings, which would suggest it is currently serving its designed function. Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.",
-    "Structural Alterations: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view. Consequently, I am unable to comment on the condition of the concealed areas. During my inspection I observed cracked walls. The adequacy of structural support cannot be confirmed during a visual inspection. Further investigation by an appropriately qualified structural engineer is recommended, and your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained for these works before purchase commitment.",
-    "Structural Alterations: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view. Consequently, I am unable to comment on the condition of the concealed areas. During my inspection I observed sagging ceiling. The adequacy of structural support cannot be confirmed during a visual inspection. Further investigation by an appropriately qualified structural engineer is recommended, and your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained for these works before purchase commitment."
+    "Loft converted: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view. Consequently, I am unable to comment on the condition of the concealed areas. Your legal advisers must verify that all necessary planning permissions, Building Regulations approvals, and required interim and final inspections were obtained for the conversion before you commit to the purchase."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_inside_property_repair_timber_structure",
    "title": "Repair Timber Structure",
-   "dataFieldCount": 20,
-   "permutationCount": 24,
+   "dataFieldCount": 7,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof Timbers: Localised distortion was observed to parts of the roof timber structure - distorted, damaged, affected by wood boring insect, rotten, split, missing, inadequate, not strong enough and sample detail. Repairs or further investigation should be undertaken where structural adequacy is uncertain. This should be repaired soon.",
-    "Roof Timbers: Significant distortion was observed to parts of the roof timber structure - badly distorted, extensively damaged, extensively affected by wood boring insect, badly rotted, badly split, largely missing, very inadequate and sample detail (See Section J1 - Risks). This is a safety hazard (See Section J3 - Risks). Further investigation by an appropriately qualified structural engineer is recommended. This should be repaired now."
+    "Timber defects: Localised distortion were observed. Repairs or further investigation should be undertaken where structural adequacy is uncertain.",
+    "Timber defects: Localised splitting were observed. Repairs or further investigation should be undertaken where structural adequacy is uncertain.",
+    "Timber defects: Localised cracking were observed. Repairs or further investigation should be undertaken where structural adequacy is uncertain."
    ]
   },
   {
@@ -2844,19 +2806,76 @@
    "sectionKey": "F",
    "screenId": "activity_inside_property_about_roof_structure",
    "title": "About Roof structure",
-   "dataFieldCount": 23,
-   "permutationCount": 39,
+   "dataFieldCount": 10,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 20,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 20,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof Structure: The roof structure is built of traditional cut timber.",
-    "Roof Structure: The roof structure is made up of factory-made roof truss.",
-    "Roof Structure: The roof structure is made of steel."
+    "Description: The roof structure is formed in traditional cut timber construction.",
+    "Description: The roof structure is formed in prefabricated trussed rafters construction.",
+    "Description: The roof structure is formed in steel construction."
+   ]
+  },
+  {
+   "sectionKey": "F",
+   "screenId": "activity_inside_property_roof_underlay",
+   "title": "Roof underlay",
+   "dataFieldCount": 11,
+   "permutationCount": 23,
+   "severities": [],
+   "phraseStats": {
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "No Underlay: The absence of a roof underlay could result in water leakage, lower internal temperatures, higher heating costs, condensation, and mould growth. I recommend that you contact a qualified person to inspect the roof covering and confirm its watertightness.",
+    "Defects noted: The roof underlay is worn in places, reducing its effectiveness as a secondary barrier against wind-driven rain and dust. I recommend that a qualified roofing contractor inspect the roof covering to confirm its weathertightness and carry out any necessary repairs. Ongoing routine maintenance appropriate to the roof covering should be expected.",
+    "Defects noted: The roof underlay is torn in places, reducing its effectiveness as a secondary barrier against wind-driven rain and dust. I recommend that a qualified roofing contractor inspect the roof covering to confirm its weathertightness and carry out any necessary repairs. Ongoing routine maintenance appropriate to the roof covering should be expected."
+   ]
+  },
+  {
+   "sectionKey": "F",
+   "screenId": "activity_inside_property_roof_ventilation",
+   "title": "Roof ventilation",
+   "dataFieldCount": 2,
+   "permutationCount": 12,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "No ventilation: No ventilation has been provided in the roof space. The roof space must be ventilated to the outside air to prevent dampness. When installing insulation, the ventilation must not be obstructed.",
+    "Condensation noted: The roof space has no or insufficient ventilation, resulting in condensation and mould growth on some of the timbers or roof underlay. Additional ventilation should be provided to improve air circulation, reduce condensation, and help maintain the condition of the roof timbers. Significantly damaged or rotted timbers should be replaced.",
+    "Ventilation noted: The roof space appears to have adequate ventilation. Adequate roof space ventilation assists in reducing the risk of condensation and timber decay. Where ventilation is limited, improvements should be considered when future roofing works are undertaken."
+   ]
+  },
+  {
+   "sectionKey": "F",
+   "screenId": "activity_inside_property_roof_insulation",
+   "title": "Roof insulation",
+   "dataFieldCount": 7,
+   "permutationCount": 11,
+   "severities": [],
+   "phraseStats": {
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Thermal Insulation: The roof space floor insulation appears adequate based upon the visible areas only. The thickness and continuity of insulation cannot be confirmed without disturbing the insulation. Reference should also be made to the Energy Performance Certificate where available.",
+    "Thermal Insulation: The roof space floor insulation appears limited based upon the visible areas only. The thickness and continuity of insulation cannot be confirmed without disturbing the insulation. Reference should also be made to the Energy Performance Certificate where available.",
+    "Thermal Insulation: The roof space floor insulation appears insufficient based upon the visible areas only. The thickness and continuity of insulation cannot be confirmed without disturbing the insulation. Reference should also be made to the Energy Performance Certificate where available."
    ]
   },
   {
@@ -3102,18 +3121,19 @@
    "sectionKey": "F",
    "screenId": "activity_inside_property_roof_structure_not_inspected",
    "title": "Not Inspected",
-   "dataFieldCount": 12,
-   "permutationCount": 14,
+   "dataFieldCount": 9,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 8,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Not Inspected: Although I could not inspect the roof space, I did not see a problem from the outside, or to the ceiling below the roof space and sample detail. However, one could remain out of sight. No repair is currently needed. As the roof space is not accessible, it should be inspected and maintained as necessary to identify and address any defects at an early stage. The property owner should provide suitable access to allow an appropriately qualified person to carry out a full inspection if you want to be certain.",
-    "Not Inspected: Although I could not inspect the roof space, I noticed some potential problems such as sagging roof, undulating roof, roof spreading, sagging ceiling and sample detail. The risk of a defect remaining out of sight is high. You should ask the owner to give access to the roof space and ask an appropriately qualified person to carry out a full inspection now."
+    "Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height at the time of my inspection. No comments can be made regarding unseen elements.",
+    "Roof Not Fully Inspected: I could not fully inspect the roof timber because of the floor was not safe to walk on at the time of my inspection. No comments can be made regarding unseen elements.",
+    "Roof Not Fully Inspected: I could not fully inspect the roof timber because of floor was boarded at the time of my inspection. No comments can be made regarding unseen elements."
    ]
   },
   {
@@ -3255,19 +3275,19 @@
    "sectionKey": "F",
    "screenId": "activity_inside_property_water_tank",
    "title": "Water Tank",
-   "dataFieldCount": 31,
-   "permutationCount": 37,
+   "dataFieldCount": 19,
+   "permutationCount": 33,
    "severities": [],
    "phraseStats": {
-    "total": 12,
+    "total": 22,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 12,
+    "approvedCurrentBankOnly": 22,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Water Storage Tanks: No comment could be made regarding the condition of the tank and pipework because my inspection was limited by stored personal goods.",
-    "Water Storage Tanks: The cold water tank(s) within the are formed in plastic and, where visible, appear in condition. No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated.",
-    "Water Storage Tanks: The cold water tank(s) within the are formed in galvanised metal and, where visible, appear in condition. No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated."
+    "Water Storage Tanks: The roof space contains plastic cold water storage tanks.",
+    "Water Storage Tanks: The roof space contains galvanised steel cold water storage tanks.",
+    "Water Storage Tanks: The roof space contains asbestos cement cold water storage tanks."
    ]
   },
   {
@@ -3476,19 +3496,18 @@
    "sectionKey": "F",
    "screenId": "activity_inside_property_repair_insect_infestation",
    "title": "Insect infestation",
-   "dataFieldCount": 1,
+   "dataFieldCount": 3,
    "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Wood-Boring Insects: No visible evidence of active wood-boring insect infestation was observed in the accessible roof timbers. Historic flight holes may be present and are not necessarily indicative of active infestation. Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation. Ventilation to the roof space should be maintained to prevent conditions favourable to rot.",
-    "Wood-Boring Insects: Evidence of a limited wood-boring insect infestation was observed, which usually results in limited treatment and repair. Although active infestations can be serious, further inspection by an appropriately qualified timber specialist is recommended soon.",
-    "Wood-Boring Insects: Evidence of an active and extensive wood-boring insect infestation was observed to parts of the roof structure. This is serious, and you should ask an appropriately qualified timber specialist to investigate and repair this problem now."
+    "No Wood-boring: No visible evidence of active wood-boring insect infestation was observed in the accessible roof timbers. Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation. Historic flight holes may be present and are not necessarily indicative of active infestation.",
+    "Wood Boring Noted: Evidence of active and historic wood-boring insect activity was observed. Further inspection by an appropriately qualified timber specialist is recommended where activity appears active or widespread. Otherwise, for historic activity, further enquiries should be made to the vendor regarding its history, treatment work, and guarantee certificates."
    ]
   },
   {
@@ -3659,18 +3678,19 @@
    "sectionKey": "F",
    "screenId": "activity_inside_property_repair_timber_rot",
    "title": "Timber rot",
-   "dataFieldCount": 1,
-   "permutationCount": 5,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Timber Decay: A limited outbreak of wood rot was observed to the accessible roof timbers. Although large growths of active decay can be serious, in this case only a limited outbreak was noted. The source of moisture should be identified and rectified, and you should ask an appropriately qualified person to repair this soon.",
-    "Timber Decay: An extensive outbreak of wood rot was observed to parts of the roof structure. This is serious, and you should ask an appropriately qualified person to identify and rectify the source of moisture and repair this problem now."
+    "Timber Decay: Evidence of wet rot timber decay was observed. The source of moisture should be identified and promptly rectified before repairs are undertaken. Ventilation to the roof space should be maintained to prevent conditions favourable to rot.",
+    "Timber Decay: Evidence of dry rot timber decay was observed. The source of moisture should be identified and promptly rectified before repairs are undertaken. Ventilation to the roof space should be maintained to prevent conditions favourable to rot.",
+    "Timber Decay: Evidence of fungal decay timber decay was observed. The source of moisture should be identified and promptly rectified before repairs are undertaken. Ventilation to the roof space should be maintained to prevent conditions favourable to rot."
    ]
   },
   {
@@ -3810,7 +3830,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof Loading: Parts of the original timber structure are too small, and this could affect the stability of the roof structure (See Section J1 - Risks). Further assessment should be undertaken where structural adequacy is uncertain. You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme."
+    "Thin Timbers: Parts of the original timber structure are too small, and this could affect the stability of the roof structure. You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme."
    ]
   },
   {
@@ -3885,23 +3905,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_inside_property_repair_roof_spreading",
-   "title": "Roof spreading",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Roof Movement: The roof covering appears heavier than would normally be expected for the original roof structure, and this has caused the roof structure to distort, sag, and caused nearby walls to crack. Further investigation by an appropriately qualified structural engineer or roofing contractor is recommended. You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_in_side_property_floors_floor_ventilation",
    "title": "Floor ventilation",
    "dataFieldCount": 2,
@@ -3932,26 +3935,62 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof Loading: The roof covering appears heavier than would normally be expected for the original roof structure, and this has caused the roof structure to distort and sag. Further assessment should be undertaken where structural adequacy is uncertain. You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme."
+    "Heavy tiles sagging: The roof covering is too heavy and has caused the roof structure to distort, sag, or cause nearby walls to crack. You should ask an appropriately qualified person or roofing specialist to inspect the roof to determine the extent of the problem and specify any necessary remedial works."
+   ]
+  },
+  {
+   "sectionKey": "F",
+   "screenId": "activity_inside_property_roof_movement",
+   "title": "Roof movement",
+   "dataFieldCount": 12,
+   "permutationCount": 14,
+   "severities": [],
+   "phraseStats": {
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Roof Movement: Evidence of deflection, sagging, spread and sample detail was observed. Observed roof movement is normal, minor, significant, severe, presents a hazard and sample detail. Further investigation by an appropriately qualified roofing contractor is recommended where movement appears significant or presents a hazard."
+   ]
+  },
+  {
+   "sectionKey": "F",
+   "screenId": "activity_inside_property_structural_alterations",
+   "title": "Structural alterations",
+   "dataFieldCount": 8,
+   "permutationCount": 10,
+   "severities": [],
+   "phraseStats": {
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Structural Alterations: Evidence of structural alterations to the roof space was observed, including loft conversion alterations. The adequacy of structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.",
+    "Structural Alterations: Evidence of structural alterations to the roof space was observed, including altered roof members alterations. The adequacy of structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.",
+    "Structural Alterations: Evidence of structural alterations to the roof space was observed, including removed struts alterations. The adequacy of structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_inside_property_repair_removed_chimney_breast",
    "title": "Removed Chimney Breast",
-   "dataFieldCount": 5,
-   "permutationCount": 9,
+   "dataFieldCount": 8,
+   "permutationCount": 16,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 10,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 10,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Chimney Breast Alterations: Part of the chimney breast within the roof space has been removed. I could not confirm whether the remaining masonry is adequately supported due to limited visibility. Inadequate support can compromise the building's structural stability (See Section J1 - Risks). Your legal adviser should confirm that the necessary Building Regulations approval was obtained. If this cannot be confirmed, or there is any doubt about the adequacy of the support, you should instruct a suitably qualified professional to inspect the remaining structure and provide recommendations before committing to the purchase (See Section I1 - Regulations).",
-    "Chimney Breast Alterations: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure appears to be properly supported. Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work. If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",
-    "Chimney Breast Alterations: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported. Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work. If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible."
+    "Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed within the roof space.",
+    "Chimney Breast Alterations: Evidence was observed that a chimney breast has been partially removed within the roof space.",
+    "Chimney Breast Alterations: Evidence was observed that a chimney breast has been altered within the roof space."
    ]
   },
   {
@@ -3968,8 +4007,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Party Wall Partially missing: The party wall within the roof space is incomplete, leaving gaps that could allow fire to spread between this and the neighbouring property. The wall should be extended to the underside of the roof covering and all gaps suitably fire-stopped as soon as possible. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property (See Section I1 - Regulations).",
-    "Largely missing: The party wall within the roof space is missing, creating a risk of fire spread between this and the neighbouring property (see section J3 - Risks) and reducing security between the properties. The wall should be rebuilt to the underside of the roof covering and all gaps appropriately fire-stopped without delay. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property (See Section I1 - Regulations)."
+    "Partially missing: The party wall within the roof space is incomplete, leaving gaps that could allow fire to spread between this and the neighbouring property. The wall should be extended to the underside of the roof covering and all gaps suitably fire-stopped as soon as possible. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property.",
+    "Largely missing: The party wall within the roof space is missing, creating a risk of fire spread between this and the neighbouring property and reducing security between the properties. The wall should be rebuilt to the underside of the roof covering and all gaps appropriately fire-stopped without delay. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property."
    ]
   },
   {
@@ -3980,11 +4019,14 @@
    "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 6,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The roof structure was inspected from the roof access hatch where available and from those areas that were safely accessible at the time of the inspection."
+   ]
   },
   {
    "sectionKey": "F",
