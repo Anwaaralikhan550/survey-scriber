@@ -1,0 +1,547 @@
+[
+  {
+    "screen": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "replace_all": true,
+    "keep": [
+      "actv_condition"
+    ],
+    "rules": [
+      {
+        "id": "e8_inspected",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_INSPECTED}",
+        "text": "Inspected: The usual external works at eaves level (the edges of the roof where the guttering is fixed) could not be inspected due to the height and configuration of the building. Consequently, I am unable to comment on their condition. These elements are typically formed in timber and should be regularly inspected, maintained, and redecorated as necessary to protect them from weathering, prevent decay, and prolong their service life. Inspected: Inspection was carried out from ground level and other reasonably accessible positions. High-level joinery was inspected using binoculars where appropriate. Concealed sections behind gutters, roof coverings or other finishes could not be inspected. No opening up or dismantling of components was undertaken. This section relates to external joinery and finishes not covered elsewhere within this report, including fascias, soffits, bargeboards, eaves joinery, verge clips, cladding, decorative timberwork, or other associated external finishes. Only those areas that were readily visible and safely accessible at the time of inspection have been assessed. Redecoration should be undertaken periodically in accordance with the manufacturer's recommendations and the exposure of the property.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "1"
+        ],
+        "when_any": [
+          [
+            "actv_condition",
+            "2"
+          ],
+          [
+            "actv_condition",
+            "3"
+          ]
+        ],
+        "first": true
+      },
+      {
+        "id": "e8_desc",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_DESCRIPTION}",
+        "text": "Description: The external eaves-level joinery comprises {JOINERY_MATERIALS} materials. Localised repairs or redecoration should be undertaken where deterioration is evident. Routine inspection and maintenance appropriate to the material should be expected throughout its service life.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{JOINERY_MATERIALS}",
+            "options": [
+              [
+                "e8m_timber",
+                "timber"
+              ],
+              [
+                "e8m_pvcu",
+                "PVCu"
+              ],
+              [
+                "e8m_aluminium",
+                "aluminium"
+              ],
+              [
+                "e8m_asbestos_board",
+                "asbestos board"
+              ],
+              [
+                "e8m_cement_board",
+                "cement board"
+              ],
+              [
+                "e8m_fibre_cement",
+                "fibre cement"
+              ],
+              [
+                "e8m_slates",
+                "slates"
+              ]
+            ],
+            "pdf_options": [
+              "timber",
+              "PVCu",
+              "aluminium",
+              "asbestos board",
+              "cement board",
+              "fibre cement",
+              "slates"
+            ],
+            "label": "Joinery comprises",
+            "other": [
+              "cb_other_397",
+              "et_other_393"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The external eaves-level joinery comprises timber, PVCu, aluminium, asbestos board, cement board, fibre cement, slates, other materials."
+        ]
+      },
+      {
+        "id": "e8_decorations",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_DECORATIONS}",
+        "text": "Decorations: The external painted or stained finishes appear in {JOINERY_DECORATIONS} condition. External decorations are intended to provide weather protection as well as appearance.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{JOINERY_DECORATIONS}",
+            "dropdown": "actv_decorations",
+            "field_label": "Decorations",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Weathered",
+              "Poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "weathered",
+              "poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Decorations: The external painted or stained finishes appear in good, reasonable, fair, weathered, poor condition."
+        ]
+      },
+      {
+        "id": "e8_condition",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_CONDITION}",
+        "text": "Condition: Where visible, these elements appear in {JOINERY_CONDITION} condition, consistent with their age and construction. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the joinery material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{JOINERY_CONDITION}",
+            "dropdown": "actv_joinery_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, these elements appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction."
+        ]
+      },
+      {
+        "id": "e8_asbestos",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_ASBESTOS_CEMENT}",
+        "text": "Asbestos Cement Components: Some external joinery or soffit components may comprise asbestos cement products. Where these remain in good condition and are left undisturbed, they do not normally present a significant health risk. Before carrying out repairs, alterations or removal, specialist advice should be obtained.",
+        "tokens": [],
+        "when": [
+          "cb_open_runoffs",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_open_runoffs",
+            "label": "Contains asbestos cement components",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e8_general",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: External joinery should be inspected periodically as part of routine property maintenance. Timber components should be redecorated at appropriate intervals to maintain protection against weathering. Sealants, fixings, and joints should be inspected regularly and renewed where deterioration becomes evident. Prompt attention to isolated defects will help prevent more extensive repairs.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_other_joinery_and_finishes_repairs",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e8_repair",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_REPAIR}",
+        "text": "Repair: The {JOINERY_ITEMS} to the {JOINERY_LOCATIONS} are {JOINERY_DEFECTS}. Repairs should be carried out as soon as practicable to restore their integrity and prevent further deterioration, moisture ingress, or the risk of sections becoming detached. Any decayed timber should be cut out and replaced, defective fixings renewed, and all exposed timber surfaces properly prepared, treated, and redecorated to provide long-term protection.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{JOINERY_ITEMS}",
+            "options": [
+              [
+                "e8i_fascias",
+                "fascias"
+              ],
+              [
+                "e8i_soffits",
+                "soffits"
+              ],
+              [
+                "e8i_barge_boards",
+                "barge boards"
+              ],
+              [
+                "e8i_verge_clips",
+                "verge clips"
+              ],
+              [
+                "e8i_timber_cladding",
+                "timber cladding"
+              ]
+            ],
+            "pdf_options": [
+              "fascias",
+              "soffits",
+              "barge boards",
+              "verge clips",
+              "timber cladding"
+            ],
+            "label": "Item",
+            "other": [
+              "cb_other_289",
+              "et_other_178"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{JOINERY_LOCATIONS}",
+            "options": [
+              [
+                "e8l_main_building",
+                "main building"
+              ],
+              [
+                "e8l_back_addition",
+                "back addition"
+              ],
+              [
+                "e8l_extension",
+                "extension"
+              ],
+              [
+                "e8l_bay_window",
+                "bay window"
+              ],
+              [
+                "e8l_garage",
+                "garage"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "back addition",
+              "extension",
+              "bay window",
+              "garage"
+            ],
+            "label": "Location",
+            "other": [
+              "cb_other_269",
+              "et_other_567"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{JOINERY_DEFECTS}",
+            "options": [
+              [
+                "e8d_rotted",
+                "rotted"
+              ],
+              [
+                "e8d_damaged",
+                "damaged"
+              ],
+              [
+                "e8d_poorly_secured",
+                "poorly secured"
+              ],
+              [
+                "e8d_incomplete",
+                "incomplete"
+              ],
+              [
+                "e8d_missing",
+                "missing"
+              ]
+            ],
+            "pdf_options": [
+              "rotted",
+              "damaged",
+              "poorly secured",
+              "incomplete",
+              "missing"
+            ],
+            "label": "Defect",
+            "other": [
+              "cb_other_777",
+              "et_other_473"
+            ]
+          }
+        ],
+        "pdf": [
+          "Repair: The fascias, soffits, barge boards, verge clips, timber cladding, other to the main building, back addition, extension, bay window, garage, other are rotted, damaged, poorly secured, incomplete, missing, other."
+        ]
+      },
+      {
+        "id": "e8_hazard",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_HAZARD}",
+        "text": "Hazards: The above defect is a safety hazard. This should be repaired now.",
+        "tokens": [],
+        "when": [
+          "cb_safety_hazard",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_safety_hazard",
+            "label": "Safety hazard",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_other_joinery_finishes_not_inspected",
+    "rules": [
+      {
+        "id": "e8_not_inspected",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_NOT_INSPECTED}",
+        "text": "Not Inspected: The usual external works at eaves level (the edges of the roof where the guttering is fixed) could not be inspected due to the height and configuration of the building. Consequently, I am unable to comment on their condition. These elements are typically formed in timber and should be regularly inspected, maintained, and redecorated as necessary to protect them from weathering, prevent decay, and prolong their service life.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_other_joinery_and_finishes_timber_weathering",
+    "new_screen": {
+      "id": "activity_outside_property_other_joinery_and_finishes_timber_weathering",
+      "title": "Timber weathering",
+      "parent": "group_e8_other_joinery_and_finishes_31",
+      "order": 8,
+      "after": "activity_outside_property_other_joinery_and_finishes_repairs"
+    },
+    "rules": [
+      {
+        "id": "e8_weathering",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_TIMBER_WEATHERING}",
+        "text": "Timber Weathering: Exposed timber joinery exhibits {WEATHERING_LEVEL} weathering. Where deterioration is limited, routine preparation and redecoration should prevent further decay. Otherwise, where decay is advanced, localised repair or replacement may be necessary.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WEATHERING_LEVEL}",
+            "dropdown": "actv_weathering",
+            "field_label": "Weathering",
+            "dropdown_options": [
+              "Minor",
+              "Moderate",
+              "Significant"
+            ],
+            "pdf_options": [
+              "minor",
+              "moderate",
+              "significant"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Timber Weathering: Exposed timber joinery exhibits minor, moderate, significant weathering."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_other_joinery_and_finishes_timber_decay",
+    "new_screen": {
+      "id": "activity_outside_property_other_joinery_and_finishes_timber_decay",
+      "title": "Timber decay",
+      "parent": "group_e8_other_joinery_and_finishes_31",
+      "order": 10,
+      "after": "activity_outside_property_other_joinery_and_finishes_timber_weathering"
+    },
+    "rules": [
+      {
+        "id": "e8_decay",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_TIMBER_DECAY}",
+        "text": "Timber Decay: {TIMBER_DECAY_SIGNS} was observed. The affected timber should be repaired or replaced, and the source of moisture addressed where necessary.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{TIMBER_DECAY_SIGNS}",
+            "options": [
+              [
+                "e8td_localised_wet_rot",
+                "localised wet rot"
+              ],
+              [
+                "e8td_surface_decay",
+                "surface decay"
+              ],
+              [
+                "e8td_timber_deterioration",
+                "timber deterioration"
+              ]
+            ],
+            "pdf_options": [
+              "localised wet rot",
+              "surface decay",
+              "timber deterioration"
+            ],
+            "label": "Observed",
+            "cap": true
+          }
+        ],
+        "pdf": [
+          "Timber Decay: Localised wet rot, surface decay, timber deterioration was observed."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_other_joinery_and_finishes_defective_joinery",
+    "new_screen": {
+      "id": "activity_outside_property_other_joinery_and_finishes_defective_joinery",
+      "title": "Defective joinery",
+      "parent": "group_e8_other_joinery_and_finishes_31",
+      "order": 12,
+      "after": "activity_outside_property_other_joinery_and_finishes_timber_decay"
+    },
+    "rules": [
+      {
+        "id": "e8_defective",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{E8_DEFECTIVE_JOINERY}",
+        "text": "Defective Joinery One or more defects were observed, including: {JOINERY_DEFECT_LIST} Repairs should be undertaken to prevent further deterioration and maintain weather resistance.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{JOINERY_DEFECT_LIST}",
+            "options": [
+              [
+                "e8dj_loose_fascias",
+                "loose fascias"
+              ],
+              [
+                "e8dj_loose_soffits",
+                "loose soffits"
+              ],
+              [
+                "e8dj_damaged_bargeboards",
+                "damaged bargeboards"
+              ],
+              [
+                "e8dj_open_joints",
+                "open joints"
+              ],
+              [
+                "e8dj_defective_fixings",
+                "defective fixings"
+              ],
+              [
+                "e8dj_weathered_decoration",
+                "weathered decoration"
+              ],
+              [
+                "e8dj_localised_timber_decay",
+                "localised timber decay"
+              ],
+              [
+                "e8dj_distorted_joinery",
+                "distorted joinery"
+              ],
+              [
+                "e8dj_minor_impact_damage",
+                "minor impact damage"
+              ]
+            ],
+            "pdf_options": [
+              "loose fascias",
+              "loose soffits",
+              "damaged bargeboards",
+              "open joints",
+              "defective fixings",
+              "weathered decoration",
+              "localised timber decay",
+              "distorted joinery",
+              "minor impact damage"
+            ],
+            "label": "One or more defects were observed, including"
+          }
+        ],
+        "pdf": [
+          "Defective Joinery One or more defects were observed, including: • Loose fascias • Loose soffits • Damaged bargeboards • Open joints • Defective fixings • Weathered decoration • Localised timber decay • Distorted joinery • Minor impact damage Repairs should be undertaken to prevent further deterioration and maintain weather resistance."
+        ]
+      }
+    ]
+  }
+]

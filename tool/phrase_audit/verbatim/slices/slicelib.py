@@ -79,7 +79,7 @@ def _overlaps(r, old):
     return any(r[i:i + 25] in old for i in range(0, max(1, len(r) - 24), 8))
 
 
-def P(section, start, end=None, subs=None, tail=None, drop=None):
+def P(section, start, end=None, subs=None, tail=None, drop=None, after=None):
     """Paragraph of the PDF block from `start` up to (excluding) `end`.
 
     subs = {exact PDF substring: replacement}; every key must occur. Returns
@@ -88,7 +88,7 @@ def P(section, start, end=None, subs=None, tail=None, drop=None):
     `tail` is appended to the text (e.g. an approved cross-reference pointer).
     """
     b = block(section)
-    s = b.index(start)
+    s = b.index(start, b.index(after) if after else 0)
     e = b.index(end, s + len(start)) if end else len(b)
     para = b[s:e].strip()
     if drop:
@@ -115,7 +115,7 @@ def lst(s):
     return [x.strip() for x in s.split(', ') if x.strip() and not x.strip().startswith('other')]
 
 
-def para_rule(section, rid, masters, sub, start, end, subs=None, tokens=None, tail=None, drop=None, **kw):
+def para_rule(section, rid, masters, sub, start, end, subs=None, tokens=None, tail=None, drop=None, after=None, **kw):
     """Rule whose bank text is cut from the PDF block (see P). `subs` maps PDF substring -> token."""
-    text, rows = P(section, start, end, subs, tail, drop)
+    text, rows = P(section, start, end, subs, tail, drop, after)
     return rule(rid, masters, sub, text, pdf=rows or None, tokens=tokens or [], **kw)

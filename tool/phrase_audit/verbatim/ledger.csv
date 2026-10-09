@@ -108,8 +108,8 @@ b9b21ae5d4,Parking,"Dry weather: It was more difficult to detect leakages to the
 6e2a2b738f,Parking,"Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection.",ADD,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_WET},59,OPEN
 f36fbdf7ec,Parking,"Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds.",MENU,,0,UNVERIFIED
 dca1eae90c,Parking,Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.,ADD,{H_OTHER_AREA}::{EMF},51,OPEN
-5c7b77ea42,E1,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_APPLICABLE},100,DONE
-8bf9989e51,E1,No further comments are necessary.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_APPLICABLE},100,DONE
+5c7b77ea42,E1,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
+8bf9989e51,E1,No further comments are necessary.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
 dfe0986fce,E1,Not Inspected: The chimney stack(s) could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
 c26ccb0979,E1,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
 9d48f7b446,E1,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
@@ -542,10 +542,10 @@ a526050f5b,E5,"Description: The windows are formed of replacement, original, old
 fa6cc7cd82,E5,"Glazing: The glazing comprises single glazing, double glazing, triple glazing, secondary glazing, decorative glazing, other.",MENU,,0,VERIFIED
 2c277561d3,E5,"No BS EN: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
 c752750c88,E5,The absence of visible markings does not necessarily indicate that safety glazing has not been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
-883968ba53,E5,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+883968ba53,E5,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 e32d884b45,E5,"BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
 9687bc4a30,E5,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
-883968ba53,E5,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+883968ba53,E5,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 4bf4ec55e8,E5,"Condition: Where visible and operated during the inspection, the windows appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 b06c220d4f,E5,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 c9c2d74cdb,E5,Routine maintenance appropriate to the age of window material should be expected.,EXACT,{E_WINDOWS}::{E5_CONDITION},100,DONE
@@ -608,15 +608,15 @@ acd8eb5a95,E6,"The external doors are formed of timber, PVCu, composite, alumini
 d93549dc6f,E6,The presence of safety glazing cannot be confirmed by visual inspection unless permanently marked.,EXACT,{E_OUTSIDE_DOORS}::{DOOR_GLAZING},100,DONE
 72d0f17d63,E6,"No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
 8da4a6885d,E6,The absence of visible markings does not necessarily indicate that safety glazing has not been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
-02e3810ae9,E6,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+02e3810ae9,E6,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 2cf4d089e1,E6,"BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
 80ee6e0447,E6,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
-02e3810ae9,E6,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+02e3810ae9,E6,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 170e3dd974,E6,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 1015d63015,E6,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 abf3231871,E6,Routine maintenance appropriate to the door material should be expected.,EXACT,{E_OUTSIDE_DOORS}::{DOOR_CONDITION},100,DONE
 a266a5e3dc,E6,"If very poor is selected, add this: Doors that are in poor condition or in disrepair will require comprehensive repair.",EXACT,{E_OUTSIDE_DOORS}::{DOORS_DEFECT_IF_IN_DISREPAIR},100,DONE
-1aa0418a9c,E6,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_OUTSIDE_DOORS}::{DOORS_DEFECT_IF_IN_DISREPAIR},100,DONE
+1aa0418a9c,E6,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_VERY_POOR},100,DONE
 40ba31a2f9,E6,"This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},100,DONE
 069377096e,E6,Applicable guarantees or warranties should be obtained.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},100,DONE
 0a7aad4a9e,E6,"If replacement door is selected, add this: The doors appear to have been fully replaced or partially replaced.",EXACT,{E_OUTSIDE_DOORS}::{E6_REPLACEMENT},100,DONE
@@ -633,7 +633,7 @@ d2cbb0cd9f,E6,Severely damaged doors should be repaired or replaced immediately.
 e93cd6e1ef,E6,Defective thresholds should be repaired where deterioration affects weather resistance or safe operation.,EXACT,{E_OUTSIDE_DOORS}::{E6_THRESHOLDS},100,DONE
 799e3ab030,E6,"Operation: The doors selected for operation opened and closed freely, with resistance, with difficulty.",MENU,,0,VERIFIED
 4041c8688b,E6,Doors should be inspected and maintained regularly.,EXACT,{E_OUTSIDE_DOORS}::{E6_OPERATION},100,DONE
-9c7b9def04,E6,"Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary.",MENU,,0,UNVERIFIED
+9c7b9def04,E6,"Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary.",MENU,,0,VERIFIED
 a243f3f367,E6,Timber doors should be redecorated periodically to maintain protection against weathering.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
 1a7e89ae92,E6,Sealants should be inspected and renewed where deterioration becomes evident.,EXACT,{E_OUTSIDE_DOORS}::{E6_OPERATION},100,DONE
 40a13daf06,E6,"Security: The doors are fitted with multi-point locking, mortice locks, cylinder locks, night latches, combination of locking systems.",MENU,,0,VERIFIED
@@ -647,112 +647,112 @@ aa4b8bf879,E6,The locks should be upgraded at the earliest opportunity to improv
 0a47eb5440,E6,"Patio and French Doors: The property incorporates sliding patio doors, French doors, bi-fold doors, other similar doors.",MENU,,0,VERIFIED
 9e187c08d1,E6,"The running gear, hinges and locking mechanisms should be inspected and maintained periodically.",EXACT,{E_OUTSIDE_DOORS}::{E6_PATIO_FRENCH},100,DONE
 b0227e39d3,E6,General Maintenance: External doors should be inspected and maintained regularly.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
-d7754938e2,E6,"Moving parts, hinges, locks, handles, and seals should be cleaned, lubricated, and adjusted where necessary.",MENU,,0,UNVERIFIED
+d7754938e2,E6,"Moving parts, hinges, locks, handles, and seals should be cleaned, lubricated, and adjusted where necessary.",MENU,,0,VERIFIED
 a243f3f367,E6,Timber doors should be redecorated periodically to maintain protection against weathering.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
 1cef5b3463,E6,Flexible sealants should be inspected and renewed where deterioration becomes evident.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
-6f1e83ec96,E7,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_APPLICABLE},100,DONE
-1b49094a40,E7,No further comments are necessary.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_APPLICABLE},100,DONE
-068020f5cc,E7,"This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom, other similar structures.",MENU,,0,UNVERIFIED
+6f1e83ec96,E7,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
+1b49094a40,E7,No further comments are necessary.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
+068020f5cc,E7,"This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom, other similar structures.",MENU,,0,DONE
 1e09e3bfb6,E7,"Where no conservatory or porch is present, this section is not applicable.",EXACT,{E_CONSERVATORY_PORCHES}::{STANDARD_TEXT},100,DONE
-0bcf4fe1a3,E7,"Conservatory: The conservatory(s) is located to the front, side, rear, other of the building.",UNRESOLVED,{E_CONSERVATORY_PORCHES}::{LOCATION_CONSTRUCTION},79,OPEN
-a733e1e8c4,E7,"The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections.",MENU,,0,UNVERIFIED
-9a678b16cf,E7,"Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials.",MENU,,0,UNVERIFIED
-3a113c4806,E7,"Doors and Windows: The conservatory comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s).",MENU,,0,UNVERIFIED
-7af427800f,E7,"Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).",MENU,,0,UNVERIFIED
+0bcf4fe1a3,E7,"Conservatory: The conservatory(s) is located to the front, side, rear, other of the building.",MENU,,0,VERIFIED
+a733e1e8c4,E7,"The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections.",MENU,,0,VERIFIED
+9a678b16cf,E7,"Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials.",MENU,,0,VERIFIED
+3a113c4806,E7,"Doors and Windows: The conservatory comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s).",MENU,,0,VERIFIED
+7af427800f,E7,"Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).",MENU,,0,VERIFIED
 4a0a150ed9,E7,"No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
 6a399d2047,E7,The absence of visible markings does not necessarily indicate that safety glazing has not been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
-1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 dcd0c7bd51,E7,"BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
 03522b3f3f,E7,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
-1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 9e7a7d495d,E7,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
-5609d069d0,E7,Conservatories require routine maintenance appropriate to their age and construction.,ADD,{E_CONSERVATORY_PORCHES}::{PORCH_CONDITION},62,OPEN
-762dfb518d,E7,"Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability.",MENU,,0,UNVERIFIED
+5609d069d0,E7,Conservatories require routine maintenance appropriate to their age and construction.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_CONDITION},100,DONE
+762dfb518d,E7,"Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability.",MENU,,0,VERIFIED
 7e49dd84fb,E7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 8f47c5a91e,E7,Routine maintenance appropriate to the conservatory material should be expected.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_CONDITION},100,DONE
-a029db939f,E7,"If very poor condition is selected, add this: Conservatories that are in poor condition or in disrepair will require comprehensive repair.",FIX,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},94,OPEN
-747fd29896,E7,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_OUTSIDE_DOORS}::{DOORS_DEFECT_IF_IN_DISREPAIR},100,DONE
+a029db939f,E7,"If very poor condition is selected, add this: Conservatories that are in poor condition or in disrepair will require comprehensive repair.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_VERY_POOR},100,DONE
+747fd29896,E7,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_VERY_POOR},100,DONE
 5645f69356,E7,"This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},100,DONE
 5b622ae97d,E7,Applicable guarantees or warranties should be obtained.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},100,DONE
-13a0c35a52,E7,"Repair conservatory: The conservatory door(s), window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted, present a safety hazard, other.",MENU,,0,UNVERIFIED
-c12b2192d9,E7,These defects should be repaired in the near future.,FIX,{E_CONSERVATORY_PORCHES}::{CP_REPAIR_NOW},81,OPEN
-ea2709f242,E7,"However, where the defects are severe or extensive, repairs should be carried out immediately.",NEAR,{E_CONSERVATORY_PORCHES}::{CP_REPAIR_NOW},95,OPEN
-9259316bbc,E7,"Unstable Structure: Evidence of movement, distortion, or deflection was observed.",MENU,,0,UNVERIFIED
-9c63f8c78f,E7,Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant.,ADD,{E_CONSERVATORY_PORCHES}::{CP_CONDITION},48,OPEN
-9bafb801e4,E7,Building Joint Defects: Defects were noted to the junction between the conservatory and the main building.,ADD,{E_CONSERVATORY_PORCHES}::{MAIN_BUILDING_JUNCTIONS_DEFECTS},57,OPEN
-162e160eed,E7,"The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects.",ADD,{E_CONSERVATORY_PORCHES}::{MAIN_BUILDING_JUNCTIONS_DEFECTS},56,OPEN
-b5813f45c2,E7,Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration.,ADD,{E_CONSERVATORY_PORCHES}::{MAIN_BUILDING_JUNCTIONS_DEFECTS},64,OPEN
-2ee1f4d717,E7,Building Regulations: The conservatory appears to be a later addition to the property.,EXACT,{E_CONSERVATORY_PORCHES}::{LOCATION_CONSTRUCTION},100,DONE
-e1711fae2e,E7,"Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",EXACT,{E_CONSERVATORY_PORCHES}::{LOCATION_CONSTRUCTION},100,DONE
-7ac54d55aa,E7,"Porch: The porch(s) located to the front, side, rear, other of the building.",UNRESOLVED,{E_CONSERVATORY_PORCHES}::{PORCH_LOCATION_CONSTRUCTION},75,OPEN
-a733e1e8c4,E7,"The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections.",MENU,,0,UNVERIFIED
-9a678b16cf,E7,"Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials.",MENU,,0,UNVERIFIED
-56d8f46b64,E7,"Doors and Windows: The porch comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s).",MENU,,0,UNVERIFIED
-7af427800f,E7,"Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).",MENU,,0,UNVERIFIED
+13a0c35a52,E7,"Repair conservatory: The conservatory door(s), window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted, present a safety hazard, other.",MENU,,0,VERIFIED
+c12b2192d9,E7,These defects should be repaired in the near future.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_REPAIR},100,DONE
+ea2709f242,E7,"However, where the defects are severe or extensive, repairs should be carried out immediately.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_REPAIR},100,DONE
+9259316bbc,E7,"Unstable Structure: Evidence of movement, distortion, or deflection was observed.",MENU,,0,VERIFIED
+9c63f8c78f,E7,Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_UNSTABLE},100,DONE
+9bafb801e4,E7,Building Joint Defects: Defects were noted to the junction between the conservatory and the main building.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_JOINT_DEFECTS},100,DONE
+162e160eed,E7,"The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_JOINT_DEFECTS},100,DONE
+b5813f45c2,E7,Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_JOINT_DEFECTS},100,DONE
+2ee1f4d717,E7,Building Regulations: The conservatory appears to be a later addition to the property.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BUILDING_REGULATIONS},100,DONE
+e1711fae2e,E7,"Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BUILDING_REGULATIONS},100,DONE
+7ac54d55aa,E7,"Porch: The porch(s) located to the front, side, rear, other of the building.",MENU,,0,VERIFIED
+a733e1e8c4,E7,"The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections.",MENU,,0,VERIFIED
+9a678b16cf,E7,"Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials.",MENU,,0,VERIFIED
+56d8f46b64,E7,"Doors and Windows: The porch comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s).",MENU,,0,VERIFIED
+7af427800f,E7,"Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).",MENU,,0,VERIFIED
 4a0a150ed9,E7,"No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
 6a399d2047,E7,The absence of visible markings does not necessarily indicate that safety glazing has not been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
-1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 dcd0c7bd51,E7,"BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
 03522b3f3f,E7,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
-1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 9e7a7d495d,E7,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
-d53974d068,E7,Porches require routine maintenance appropriate to their age and construction.,ADD,{E_CONSERVATORY_PORCHES}::{PORCH_CONDITION},65,OPEN
-762dfb518d,E7,"Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability.",MENU,,0,UNVERIFIED
+d53974d068,E7,Porches require routine maintenance appropriate to their age and construction.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_P_CONDITION},100,DONE
+762dfb518d,E7,"Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability.",MENU,,0,VERIFIED
 7e49dd84fb,E7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-409c92f3cc,E7,Routine maintenance appropriate to the porch material should be expected.,EXACT,{E_CONSERVATORY_PORCHES}::{PORCH_CONDITION},100,DONE
-6cb2658b57,E7,"If very poor is selected, add this: Porches that are in poor condition or in disrepair will require comprehensive repair.",FIX,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},90,OPEN
-747fd29896,E7,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_OUTSIDE_DOORS}::{DOORS_DEFECT_IF_IN_DISREPAIR},100,DONE
+409c92f3cc,E7,Routine maintenance appropriate to the porch material should be expected.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_P_CONDITION},100,DONE
+6cb2658b57,E7,"If very poor is selected, add this: Porches that are in poor condition or in disrepair will require comprehensive repair.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_P_VERY_POOR},100,DONE
+747fd29896,E7,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_VERY_POOR},100,DONE
 5645f69356,E7,"This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},100,DONE
 5b622ae97d,E7,Applicable guarantees or warranties should be obtained.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},100,DONE
-f230258d41,E7,"Repair porch: The porch door, window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted over, present a safety hazard, other.",MENU,,0,UNVERIFIED
-c12b2192d9,E7,These defects should be repaired in the near future.,FIX,{E_CONSERVATORY_PORCHES}::{CP_REPAIR_NOW},81,OPEN
-ea2709f242,E7,"However, where the defects are severe or extensive, repairs should be carried out immediately.",NEAR,{E_CONSERVATORY_PORCHES}::{CP_REPAIR_NOW},95,OPEN
-3f5125f13f,E7,"Unstable Structure: Evidence of movement, distortion, deflection was observed.",MENU,,0,UNVERIFIED
-9c63f8c78f,E7,Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant.,ADD,{E_CONSERVATORY_PORCHES}::{CP_CONDITION},48,OPEN
-9bafb801e4,E7,Building Joint Defects: Defects were noted to the junction between the conservatory and the main building.,ADD,{E_CONSERVATORY_PORCHES}::{MAIN_BUILDING_JUNCTIONS_DEFECTS},57,OPEN
-162e160eed,E7,"The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects.",ADD,{E_CONSERVATORY_PORCHES}::{MAIN_BUILDING_JUNCTIONS_DEFECTS},56,OPEN
-b5813f45c2,E7,Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration.,ADD,{E_CONSERVATORY_PORCHES}::{MAIN_BUILDING_JUNCTIONS_DEFECTS},64,OPEN
-4d08b4e31a,E7,Building Regulations: The porch appears to be a later addition to the property.,EXACT,{E_CONSERVATORY_PORCHES}::{PORCH_LOCATION_CONSTRUCTION},100,DONE
-e1711fae2e,E7,"Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",EXACT,{E_CONSERVATORY_PORCHES}::{LOCATION_CONSTRUCTION},100,DONE
-7c6cbef609,E8,Not Inspected: The usual external works at eaves level (the edges of the roof where the guttering is fixed) could not be inspected due to the height and configuration of the building.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{NOT_INSPECTED},100,DONE
-85ff88a73a,E8,"Consequently, I am unable to comment on their condition.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{NOT_INSPECTED},100,DONE
-b75f27f205,E8,"These elements are typically formed in timber and should be regularly inspected, maintained, and redecorated as necessary to protect them from weathering, prevent decay, and prolong their service life.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{NOT_INSPECTED},100,DONE
-b01f186d67,E8,Inspected: Inspection was carried out from ground level and other reasonably accessible positions.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{STANDARD_TEXT},100,DONE
-18145792a8,E8,High-level joinery was inspected using binoculars where appropriate.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{STANDARD_TEXT},100,DONE
-068c47ab35,E8,"Concealed sections behind gutters, roof coverings or other finishes could not be inspected.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{STANDARD_TEXT},100,DONE
-1bee6e7472,E8,No opening up or dismantling of components was undertaken.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{STANDARD_TEXT},100,DONE
+f230258d41,E7,"Repair porch: The porch door, window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted over, present a safety hazard, other.",MENU,,0,VERIFIED
+c12b2192d9,E7,These defects should be repaired in the near future.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_REPAIR},100,DONE
+ea2709f242,E7,"However, where the defects are severe or extensive, repairs should be carried out immediately.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_REPAIR},100,DONE
+3f5125f13f,E7,"Unstable Structure: Evidence of movement, distortion, deflection was observed.",MENU,,0,VERIFIED
+9c63f8c78f,E7,Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_UNSTABLE},100,DONE
+9bafb801e4,E7,Building Joint Defects: Defects were noted to the junction between the conservatory and the main building.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_JOINT_DEFECTS},100,DONE
+162e160eed,E7,"The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_JOINT_DEFECTS},100,DONE
+b5813f45c2,E7,Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_JOINT_DEFECTS},100,DONE
+4d08b4e31a,E7,Building Regulations: The porch appears to be a later addition to the property.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_P_BUILDING_REGULATIONS},100,DONE
+e1711fae2e,E7,"Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BUILDING_REGULATIONS},100,DONE
+7c6cbef609,E8,Not Inspected: The usual external works at eaves level (the edges of the roof where the guttering is fixed) could not be inspected due to the height and configuration of the building.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+85ff88a73a,E8,"Consequently, I am unable to comment on their condition.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+b75f27f205,E8,"These elements are typically formed in timber and should be regularly inspected, maintained, and redecorated as necessary to protect them from weathering, prevent decay, and prolong their service life.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+b01f186d67,E8,Inspected: Inspection was carried out from ground level and other reasonably accessible positions.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+18145792a8,E8,High-level joinery was inspected using binoculars where appropriate.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+068c47ab35,E8,"Concealed sections behind gutters, roof coverings or other finishes could not be inspected.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+1bee6e7472,E8,No opening up or dismantling of components was undertaken.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
 f7148334f2,E8,"This section relates to external joinery and finishes not covered elsewhere within this report, including fascias, soffits, bargeboards, eaves joinery, verge clips, cladding, decorative timberwork, or other associated external finishes.",MENU,,0,UNVERIFIED
-567ee3f942,E8,Only those areas that were readily visible and safely accessible at the time of inspection have been assessed.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{STANDARD_TEXT},100,DONE
-b968a2405e,E8,Redecoration should be undertaken periodically in accordance with the manufacturer's recommendations and the exposure of the property.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{STANDARD_TEXT},100,DONE
-d915771371,E8,"Description: The external eaves-level joinery comprises timber, PVCu, aluminium, asbestos board, cement board, fibre cement, slates, other materials.",MENU,,0,UNVERIFIED
+567ee3f942,E8,Only those areas that were readily visible and safely accessible at the time of inspection have been assessed.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+b968a2405e,E8,Redecoration should be undertaken periodically in accordance with the manufacturer's recommendations and the exposure of the property.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+d915771371,E8,"Description: The external eaves-level joinery comprises timber, PVCu, aluminium, asbestos board, cement board, fibre cement, slates, other materials.",MENU,,0,VERIFIED
 47325e85fa,E8,Localised repairs or redecoration should be undertaken where deterioration is evident.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{ABOUT_OTHER_JOINERY_AND_FINISHES},100,DONE
 f637ecc6a0,E8,Routine inspection and maintenance appropriate to the material should be expected throughout its service life.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{ABOUT_OTHER_JOINERY_AND_FINISHES},100,DONE
-e5053d2d48,E8,"Decorations: The external painted or stained finishes appear in good, reasonable, fair, weathered, poor condition.",MENU,,0,UNVERIFIED
-232399bed1,E8,External decorations are intended to provide weather protection as well as appearance.,ADD,{E_OTHER_JOINERY_AND_FINISHES}::{ABOUT_OTHER_JOINERY_AND_FINISHES},49,OPEN
-55c5c7a520,E8,"Condition: Where visible, these elements appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,UNVERIFIED
+e5053d2d48,E8,"Decorations: The external painted or stained finishes appear in good, reasonable, fair, weathered, poor condition.",MENU,,0,VERIFIED
+232399bed1,E8,External decorations are intended to provide weather protection as well as appearance.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_DECORATIONS},100,DONE
+55c5c7a520,E8,"Condition: Where visible, these elements appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
 d715372ceb,E8,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 0f5dcf12c8,E8,Routine maintenance appropriate to the joinery material should be expected.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{CONDITION},100,DONE
-eedcda3382,E8,"Repair: The fascias, soffits, barge boards, verge clips, timber cladding, other to the main building, back addition, extension, bay window, garage, other are rotted, damaged, poorly secured, incomplete, missing, other.",MENU,,0,UNVERIFIED
-fc3f987502,E8,"Repairs should be carried out as soon as practicable to restore their integrity and prevent further deterioration, moisture ingress, or the risk of sections becoming detached.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{REPAIR_SOON},100,DONE
-6c838646d2,E8,"Any decayed timber should be cut out and replaced, defective fixings renewed, and all exposed timber surfaces properly prepared, treated, and redecorated to provide long-term protection.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{REPAIR_SOON},100,DONE
-93de66f4d4,E8,Hazards: The above defect is a safety hazard.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{REPAIR_SAFETY_HAZARD},100,DONE
+eedcda3382,E8,"Repair: The fascias, soffits, barge boards, verge clips, timber cladding, other to the main building, back addition, extension, bay window, garage, other are rotted, damaged, poorly secured, incomplete, missing, other.",MENU,,0,VERIFIED
+fc3f987502,E8,"Repairs should be carried out as soon as practicable to restore their integrity and prevent further deterioration, moisture ingress, or the risk of sections becoming detached.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_REPAIR},100,DONE
+6c838646d2,E8,"Any decayed timber should be cut out and replaced, defective fixings renewed, and all exposed timber surfaces properly prepared, treated, and redecorated to provide long-term protection.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_REPAIR},100,DONE
+93de66f4d4,E8,Hazards: The above defect is a safety hazard.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_HAZARD},100,DONE
 800c3f79bc,E8,This should be repaired now.,EXACT,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_NOW},100,DONE
-67111608ee,E8,"Timber Weathering: Exposed timber joinery exhibits minor, moderate, significant weathering.",UNRESOLVED,{E_OTHER_JOINERY_AND_FINISHES}::{REPAIR_REDECORATE},75,OPEN
-debbb05370,E8,"Where deterioration is limited, routine preparation and redecoration should prevent further decay.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{REPAIR_REDECORATE},100,DONE
-b7eb6cdee0,E8,"Otherwise, where decay is advanced, localised repair or replacement may be necessary.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{REPAIR_REDECORATE},100,DONE
-32c12eab5d,E8,"Timber Decay: Localised wet rot, surface decay, timber deterioration was observed.",UNRESOLVED,{E_OTHER_JOINERY_AND_FINISHES}::{ABOUT_OTHER_JOINERY_AND_FINISHES},61,OPEN
-5c3bc1197f,E8,"The affected timber should be repaired or replaced, and the source of moisture addressed where necessary.",ADD,{E_OTHER_JOINERY_AND_FINISHES}::{REPAIR_REDECORATE},53,OPEN
+67111608ee,E8,"Timber Weathering: Exposed timber joinery exhibits minor, moderate, significant weathering.",MENU,,0,VERIFIED
+debbb05370,E8,"Where deterioration is limited, routine preparation and redecoration should prevent further decay.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_TIMBER_WEATHERING},100,DONE
+b7eb6cdee0,E8,"Otherwise, where decay is advanced, localised repair or replacement may be necessary.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_TIMBER_WEATHERING},100,DONE
+32c12eab5d,E8,"Timber Decay: Localised wet rot, surface decay, timber deterioration was observed.",MENU,,0,VERIFIED
+5c3bc1197f,E8,"The affected timber should be repaired or replaced, and the source of moisture addressed where necessary.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_TIMBER_DECAY},100,DONE
 07642c3e55,E8,Asbestos Cement Components: Some external joinery or soffit components may comprise asbestos cement products.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{CONTAIN_ASBESTOS},100,DONE
 0c639f4ff1,E8,"Where these remain in good condition and are left undisturbed, they do not normally present a significant health risk.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{CONTAIN_ASBESTOS},100,DONE
 3c551c0555,E8,"Before carrying out repairs, alterations or removal, specialist advice should be obtained.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{CONTAIN_ASBESTOS},100,DONE
-2e1bd3d44b,E8,"Defective Joinery One or more defects were observed, including: • Loose fascias • Loose soffits • Damaged bargeboards • Open joints • Defective fixings • Weathered decoration • Localised timber decay • Distorted joinery • Minor impact damage Repairs should be undertaken to prevent further deterioration and maintain weather resistance.",MENU,,0,UNVERIFIED
+2e1bd3d44b,E8,"Defective Joinery One or more defects were observed, including: • Loose fascias • Loose soffits • Damaged bargeboards • Open joints • Defective fixings • Weathered decoration • Localised timber decay • Distorted joinery • Minor impact damage Repairs should be undertaken to prevent further deterioration and maintain weather resistance.",MENU,,0,VERIFIED
 ec10c53080,E8,"If the property is a flat, add the following.",MENU,,0,UNVERIFIED
 5064c3290d,E8,"As this is a leasehold property, your legal adviser should confirm, before the exchange of contracts, the provisions within the lease relating to the maintenance and external redecoration of the building, including when such works are due to be carried out and who is responsible for the cost.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{IF_PROPERTY_FLAT_IS_SELECTED},100,DONE
 400cef4c65,E8,"You should also ask the management company whether any repairs or external redecoration works have been undertaken previously, whether any are currently planned, and whether any associated costs are likely to be payable by leaseholders.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{IF_PROPERTY_FLAT_IS_SELECTED},100,DONE
-9f04a5217a,E8,General Maintenance: External joinery should be inspected periodically as part of routine property maintenance.,ADD,{E_OTHER_JOINERY_AND_FINISHES}::{STANDARD_TEXT},54,OPEN
-e851565807,E8,Timber components should be redecorated at appropriate intervals to maintain protection against weathering.,ADD,{E_OTHER_JOINERY_AND_FINISHES}::{STANDARD_TEXT},48,OPEN
-2ac9755826,E8,"Sealants, fixings, and joints should be inspected regularly and renewed where deterioration becomes evident.",UNRESOLVED,{E_OTHER_JOINERY_AND_FINISHES}::{ABOUT_OTHER_JOINERY_AND_FINISHES},62,OPEN
-679b09566c,E8,Prompt attention to isolated defects will help prevent more extensive repairs.,ADD,{E_OTHER_JOINERY_AND_FINISHES}::{REPAIR_REDECORATE},47,OPEN
+9f04a5217a,E8,General Maintenance: External joinery should be inspected periodically as part of routine property maintenance.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
+e851565807,E8,Timber components should be redecorated at appropriate intervals to maintain protection against weathering.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
+2ac9755826,E8,"Sealants, fixings, and joints should be inspected regularly and renewed where deterioration becomes evident.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
+679b09566c,E8,Prompt attention to isolated defects will help prevent more extensive repairs.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
 fb645affab,E9,The inspection was limited to those parts that were safely accessible at the time of inspection.,ADD,{E_OTHER}::{OTHER_NOT_APPLICABLE},48,OPEN
 479aef5807,E9,"No opening up, testing or dismantling of concealed elements was undertaken.",ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},43,OPEN
 eb098a6c16,E9,Comments relate only to the visible condition of the structures inspected.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},51,OPEN

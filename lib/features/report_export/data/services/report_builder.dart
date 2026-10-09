@@ -1356,22 +1356,6 @@ class ReportBuilder {
       }
     }
 
-    // RICS L2 cross-injection from Section E8 Other Joinery and Finishes
-    // (Phase 2B): the spec's single E8 -> J1 injection, gated on the
-    // repair screen's own "Rotted" defect checkbox - a direct 1:1 mapping
-    // (the spec's cross-inject text is literally "...is rotted"), unlike
-    // E6/E7's Repair-Now-tier derivation where no matching checkbox exists.
-    for (final screenId in const [
-      'activity_outside_property_other_joinery_and_finishes_repairs',
-      'activity_outside_property_other_joinery_and_finishes_repairs__repairs',
-    ]) {
-      final joineryRepair = _answersForScreen(rawData, screenId);
-      if (_isCheckedValue(joineryRepair['cb_rotted'])) {
-        phrases.add(
-            'Parts of the usual work at the eaves level is rotted. This should be repaired to avoid further deterioration (see section E8 - Other Joinery and Finishes).');
-      }
-    }
-
     return _cleanupPhrases(phrases);
   }
 

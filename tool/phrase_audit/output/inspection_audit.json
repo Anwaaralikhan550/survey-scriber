@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 525,
+  "screensAudited": 514,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2694,
-   "approvedLegacyBank": 614,
-   "approvedCurrentBankOnly": 2053,
+   "distinctEmitted": 2710,
+   "approvedLegacyBank": 608,
+   "approvedCurrentBankOnly": 2075,
    "unapproved": 0
   }
  },
@@ -2139,24 +2139,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_outside_property_other_about_joinery_and_finishes__other_joinery_and_finishes",
-   "title": "Other Joinery and Finishes",
-   "dataFieldCount": 12,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Description: The external eaves level joinery includes facias, soffits, bargeboards, verge clips and sample detail and comprises timber, pvc, slates and sample detail. Localised repairs or redecoration should be undertaken where deterioration is evident. Routine inspection and maintenance appropriate to the material should be expected throughout its service life.",
-    "Timber Weathering: Exposed timber joinery exhibits weathering. Where deterioration is limited, routine preparation and redecoration should prevent further decay. Otherwise, where decay is advanced, localised repair or replacement may be necessary."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_weather_condition",
    "title": "Weather Condition",
    "dataFieldCount": 2,
@@ -2789,24 +2771,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_outside_property_other_joinery_and_finishes_repairs__repairs",
-   "title": "Repairs",
-   "dataFieldCount": 21,
-   "permutationCount": 23,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Repair: The facias, soffits, barge boards, verge clips, timber cladding and sample detail to the main building, back addition, extension, bay window, garage and sample detail are rotted, damaged, poorly secured, incomplete and sample detail. Repairs should be carried out as soon as practicable to restore their integrity and prevent further deterioration, moisture ingress, or the risk of sections becoming detached. Any decayed timber should be cut out and replaced, defective fixings renewed, and all exposed timber surfaces properly prepared, treated, and redecorated to provide long-term protection.",
-    "Hazards: The above defect is a safety hazard. This should be repaired now."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_other_celler_not_in_use",
    "title": "Not In Use",
    "dataFieldCount": 1,
@@ -3271,23 +3235,6 @@
    },
    "editedBankSamples": [
     "Not Inspected: The bathroom fittings could not be inspected. As they are not accessible, they should be inspected and maintained as necessary to identify and address any defects at an early stage."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_outside_property_other_joinery_finishes_not_inspected__not_inspected",
-   "title": "Not inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The usual external works at eaves level (the edges of the roof where the guttering is fixed) could not be inspected due to the height and configuration of the building. Consequently, I am unable to comment on their condition. These elements are typically formed in timber and should be regularly inspected, maintained, and redecorated as necessary to protect them from weathering, prevent decay, and prolong their service life."
    ]
   },
   {
@@ -4647,38 +4594,36 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_location_construction",
    "title": "Location and construction",
-   "dataFieldCount": 6,
-   "permutationCount": 12,
+   "dataFieldCount": 15,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The conservatory is located to the front of the building. The walls comprise brick walls, pvc double glazed sections, timber double glazed sections and sample detail. The conservatory appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",
-    "Description: The conservatory is located to the side of the building. The walls comprise brick walls, pvc double glazed sections, timber double glazed sections and sample detail. The conservatory appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",
-    "Description: The conservatory is located to the rear of the building. The walls comprise brick walls, pvc double glazed sections, timber double glazed sections and sample detail. The conservatory appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available."
+    "Building Regulations: The conservatory appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",
+    "Conservatory: The conservatory(s) is located to the front, side, rear and sample detail of the building. The walls comprise single-glazed, double-glazed, triple-glazed, uPVC framed, timber framed, aluminium framed, steel framed and sample detail wall sections."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_location_construction__location_and_construction",
    "title": "Location and construction",
-   "dataFieldCount": 11,
+   "dataFieldCount": 15,
    "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The porch is located to the front of the building. The walls comprise brick walls, pvc double glazed sections, timber double glazed sections and sample detail. The porch appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",
-    "Description: The porch is located to the side of the building. The walls comprise brick walls, pvc double glazed sections, timber double glazed sections and sample detail. The porch appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",
-    "Description: The porch is located to the rear of the building. The walls comprise brick walls, pvc double glazed sections, timber double glazed sections and sample detail. The porch appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available."
+    "Building Regulations: The porch appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",
+    "Porch: The porch(s) located to the front, side, rear and sample detail of the building. The walls comprise single-glazed, double-glazed, triple-glazed, uPVC framed, timber framed, aluminium framed, steel framed and sample detail wall sections."
    ]
   },
   {
@@ -4927,20 +4872,19 @@
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_repairs",
-   "title": "Door",
-   "dataFieldCount": 17,
-   "permutationCount": 21,
+   "title": "Repair conservatory or porch",
+   "dataFieldCount": 39,
+   "permutationCount": 43,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The conservatory or porch doors are cracked, damaged, rotten, damp, failed, misted over and sample detail. These defects should be repaired without delay.",
-    "The conservatory or porch doors are badly cracked, severely damaged, badly rotten, causing damp, failed, misted over and sample detail. These defects should be repaired without delay. Where the defects are severe or extensive, repairs should be carried out immediately.",
-    "Conservatories and porches that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the affected elements entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained (see section I2 - Guarantees)."
+    "Repair conservatory: The conservatory door(s), window(s), glazing, roof, floor, wall(s), rainwater goods and sample detail are cracked, damaged, rotten, leaking, damp, have failed, are misted, present a safety hazard and sample detail. These defects should be repaired in the near future. However, where the defects are severe or extensive, repairs should be carried out immediately.",
+    "Repair porch: The porch door, window(s), glazing, roof, floor, wall(s), rainwater goods and sample detail are cracked, damaged, rotten, leaking, damp, have failed, are misted over, present a safety hazard and sample detail. These defects should be repaired in the near future. However, where the defects are severe or extensive, repairs should be carried out immediately."
    ]
   },
   {
@@ -5156,35 +5100,38 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_roof",
    "title": "Roof",
-   "dataFieldCount": 9,
-   "permutationCount": 13,
+   "dataFieldCount": 6,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof: The roof over the conservatory is formed in pvc double glazed sections, polycarbonate sheets, concrete tiles, clay tiles, mineral felt, lead and sample detail."
+    "Roof: The roof is formed in glass materials.",
+    "Roof: The roof is formed in polycarbonate sheets materials.",
+    "Roof: The roof is formed in solid insulated panels materials."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_roof__roof",
    "title": "Roof",
-   "dataFieldCount": 10,
-   "permutationCount": 14,
+   "dataFieldCount": 6,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The roof enclosure over the porch is formed by the floor above.",
-    "Roof: The roof over the porch is formed in pvc double glazed sections, polycarbonate sheets, concrete tiles, clay tiles, mineral felt, lead and sample detail."
+    "Roof: The roof is formed in glass materials.",
+    "Roof: The roof is formed in polycarbonate sheets materials.",
+    "Roof: The roof is formed in solid insulated panels materials."
    ]
   },
   {
@@ -5562,29 +5509,10 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_conservatory_porch_repairs__windows",
-   "title": "Windows",
-   "dataFieldCount": 17,
-   "permutationCount": 21,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The conservatory or porch windows are cracked, damaged, rotten, damp, failed, misted over and sample detail. These defects should be repaired without delay.",
-    "The conservatory or porch windows are badly cracked, severely damaged, badly rotten, causing damp, failed, misted over and sample detail. These defects should be repaired without delay. Where the defects are severe or extensive, repairs should be carried out immediately.",
-    "Conservatories and porches that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the affected elements entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained (see section I2 - Guarantees)."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_other_joinery_and_finishes_repairs",
    "title": "Repairs",
-   "dataFieldCount": 21,
-   "permutationCount": 23,
+   "dataFieldCount": 22,
+   "permutationCount": 24,
    "severities": [],
    "phraseStats": {
     "total": 2,
@@ -5593,8 +5521,65 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair: The facias, soffits, barge boards, verge clips, timber cladding and sample detail to the main building, back addition, extension, bay window, garage and sample detail are rotted, damaged, poorly secured, incomplete and sample detail. Repairs should be carried out as soon as practicable to restore their integrity and prevent further deterioration, moisture ingress, or the risk of sections becoming detached. Any decayed timber should be cut out and replaced, defective fixings renewed, and all exposed timber surfaces properly prepared, treated, and redecorated to provide long-term protection.",
-    "Hazards: The above defect is a safety hazard. This should be repaired now."
+    "Hazards: The above defect is a safety hazard. This should be repaired now.",
+    "Repair: The fascias, soffits, barge boards, verge clips, timber cladding and sample detail to the main building, back addition, extension, bay window, garage and sample detail are rotted, damaged, poorly secured, incomplete, missing and sample detail. Repairs should be carried out as soon as practicable to restore their integrity and prevent further deterioration, moisture ingress, or the risk of sections becoming detached. Any decayed timber should be cut out and replaced, defective fixings renewed, and all exposed timber surfaces properly prepared, treated, and redecorated to provide long-term protection."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_other_joinery_and_finishes_timber_weathering",
+   "title": "Timber weathering",
+   "dataFieldCount": 1,
+   "permutationCount": 7,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Timber Weathering: Exposed timber joinery exhibits minor weathering. Where deterioration is limited, routine preparation and redecoration should prevent further decay. Otherwise, where decay is advanced, localised repair or replacement may be necessary.",
+    "Timber Weathering: Exposed timber joinery exhibits moderate weathering. Where deterioration is limited, routine preparation and redecoration should prevent further decay. Otherwise, where decay is advanced, localised repair or replacement may be necessary.",
+    "Timber Weathering: Exposed timber joinery exhibits significant weathering. Where deterioration is limited, routine preparation and redecoration should prevent further decay. Otherwise, where decay is advanced, localised repair or replacement may be necessary."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_other_joinery_and_finishes_timber_decay",
+   "title": "Timber decay",
+   "dataFieldCount": 3,
+   "permutationCount": 5,
+   "severities": [],
+   "phraseStats": {
+    "total": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 4,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Timber Decay: Localised wet rot was observed. The affected timber should be repaired or replaced, and the source of moisture addressed where necessary.",
+    "Timber Decay: Surface decay was observed. The affected timber should be repaired or replaced, and the source of moisture addressed where necessary.",
+    "Timber Decay: Timber deterioration was observed. The affected timber should be repaired or replaced, and the source of moisture addressed where necessary."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_other_joinery_and_finishes_defective_joinery",
+   "title": "Defective joinery",
+   "dataFieldCount": 9,
+   "permutationCount": 11,
+   "severities": [],
+   "phraseStats": {
+    "total": 10,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 10,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Defective Joinery One or more defects were observed, including: loose fascias Repairs should be undertaken to prevent further deterioration and maintain weather resistance.",
+    "Defective Joinery One or more defects were observed, including: loose soffits Repairs should be undertaken to prevent further deterioration and maintain weather resistance.",
+    "Defective Joinery One or more defects were observed, including: damaged bargeboards Repairs should be undertaken to prevent further deterioration and maintain weather resistance."
    ]
   },
   {
@@ -5826,17 +5811,18 @@
    "screenId": "activity_outside_property_conservatory_porch_doors",
    "title": "Doors",
    "dataFieldCount": 7,
-   "permutationCount": 11,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 8,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Doors and Windows: The conservatory comprises single and double glazed pvc, timber and sample detail framed door(s).",
-    "You should ask your legal adviser to confirm whether the uPVC glazed sections to the conservatory were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing (see section I2 - Guarantees)."
+    "Doors and Windows: The conservatory comprises single-glazed door(s), and window(s).",
+    "Doors and Windows: The conservatory comprises double-glazed door(s), and window(s).",
+    "Doors and Windows: The conservatory comprises triple-glazed door(s), and window(s)."
    ]
   },
   {
@@ -5844,17 +5830,18 @@
    "screenId": "activity_outside_property_conservatory_porch_doors__doors",
    "title": "Doors",
    "dataFieldCount": 7,
-   "permutationCount": 11,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 8,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Doors and Windows: The porch comprises single and double glazed pvc, timber and sample detail framed door(s).",
-    "You should ask your legal adviser to confirm whether the uPVC glazed sections to the porch were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing (see section I2 - Guarantees)."
+    "Doors and Windows: The porch comprises single-glazed door(s), and window(s).",
+    "Doors and Windows: The porch comprises double-glazed door(s), and window(s).",
+    "Doors and Windows: The porch comprises triple-glazed door(s), and window(s)."
    ]
   },
   {
@@ -6081,25 +6068,6 @@
     "Condition: Where visible, the walls appear in good condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
     "Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
     "Condition: Where visible, the walls appear in fair condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_conservatory_porch_repairs__door_glazing",
-   "title": "Door Glazing",
-   "dataFieldCount": 13,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The conservatory or porch door glazing is cracked, damaged, failed, misted over and sample detail. These defects should be repaired without delay.",
-    "The conservatory or porch door glazing is badly cracked, severely damaged, failed, misted over and sample detail. These defects should be repaired without delay. Where the defects are severe or extensive, repairs should be carried out immediately.",
-    "Conservatories and porches that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the affected elements entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained (see section I2 - Guarantees)."
    ]
   },
   {
@@ -6439,51 +6407,20 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_conservatory_porch_windows",
-   "title": "Windows",
-   "dataFieldCount": 7,
-   "permutationCount": 11,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The conservatory also comprises single and double glazed pvc, timber and sample detail framed window(s)."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_conservatory_porch_windows__windows",
-   "title": "Windows",
-   "dataFieldCount": 7,
-   "permutationCount": 11,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The porch also comprises single and double glazed pvc, timber and sample detail framed window(s)."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_not_inspected",
    "title": "Not inspected",
-   "dataFieldCount": 2,
-   "permutationCount": 4,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 0,
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Not Applicable: The property does not incorporate the element(s) referred to in this section. No further comments are necessary."
+   ]
   },
   {
    "sectionKey": "E",
@@ -6746,25 +6683,6 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_conservatory_porch_repairs__window_glazing",
-   "title": "Window Glazing",
-   "dataFieldCount": 13,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The conservatory or porch window glazing is cracked, damaged, failed, misted over and sample detail. These defects should be repaired without delay.",
-    "The conservatory or porch window glazing is badly cracked, severely damaged, failed, misted over and sample detail. These defects should be repaired without delay. Where the defects are severe or extensive, repairs should be carried out immediately.",
-    "Conservatories and porches that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the affected elements entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained (see section I2 - Guarantees)."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_rwg_blocked_rwg",
    "title": "Blocked RWG",
    "dataFieldCount": 1,
@@ -6840,38 +6758,34 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_floor",
    "title": "Floor",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
+   "dataFieldCount": 11,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Floor: The conservatory floor is covered with tiles.",
-    "Floor: The conservatory floor is covered with laminate flooring.",
-    "Floor: The conservatory floor is covered with carpets."
+    "Floor: The floor is of solid concrete, suspended timber and sample detail construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl and sample detail covering(s)."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_floor__floor",
    "title": "Floor",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
+   "dataFieldCount": 11,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Floor: The porch floor is covered with tiles.",
-    "Floor: The porch floor is covered with laminate flooring.",
-    "Floor: The porch floor is covered with carpets."
+    "Floor: The floor is of solid concrete, suspended timber and sample detail construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl and sample detail covering(s)."
    ]
   },
   {
@@ -7135,25 +7049,6 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_conservatory_porch_repairs__roof_glazing",
-   "title": "Roof Glazing",
-   "dataFieldCount": 19,
-   "permutationCount": 23,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The conservatory or porch roof glazing is cracked, damaged, rotten, leaking, damp, failed, misted over and sample detail. These defects should be repaired without delay.",
-    "The conservatory or porch roof glazing is badly cracked, severely damaged, badly rotten, severely leaking, causing damp, failed, misted over and sample detail. These defects should be repaired without delay. Where the defects are severe or extensive, repairs should be carried out immediately.",
-    "Conservatories and porches that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the affected elements entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained (see section I2 - Guarantees)."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_other_floors",
    "title": "Floor",
    "dataFieldCount": 4,
@@ -7320,18 +7215,18 @@
    "screenId": "activity_outside_property_porch_condition",
    "title": "Condition",
    "dataFieldCount": 1,
-   "permutationCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible and operated during the inspection, the conservatory appears in reasonable condition, consistent with its age and type. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the conservatory material should be expected.",
-    "Condition: Where visible and operated during the inspection, the conservatory appears in satisfactory condition, consistent with its age and type. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the conservatory material should be expected.",
-    "Condition: Where visible and operated during the inspection, the conservatory appears in unsatisfactory and poor condition, consistent with its age and type. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the conservatory material should be expected."
+    "Condition: Where visible and operated during the inspection, the doors appear in good condition, consistent with their age and type. Conservatories require routine maintenance appropriate to their age and construction. Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the conservatory material should be expected.",
+    "Condition: Where visible and operated during the inspection, the doors appear in reasonable condition, consistent with their age and type. Conservatories require routine maintenance appropriate to their age and construction. Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the conservatory material should be expected.",
+    "Condition: Where visible and operated during the inspection, the doors appear in fair condition, consistent with their age and type. Conservatories require routine maintenance appropriate to their age and construction. Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the conservatory material should be expected."
    ]
   },
   {
@@ -7339,18 +7234,18 @@
    "screenId": "activity_outside_property_porch_condition__condition",
    "title": "Condition",
    "dataFieldCount": 1,
-   "permutationCount": 7,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible and operated during the inspection, the porch appears in reasonable condition, consistent with its age and type. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch material should be expected.",
-    "Condition: Where visible and operated during the inspection, the porch appears in satisfactory condition, consistent with its age and type. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch material should be expected.",
-    "Condition: Where visible and operated during the inspection, the porch appears in unsatisfactory and poor condition, consistent with its age and type. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch material should be expected."
+    "Condition: Where visible and operated during the inspection, the doors appear in good condition, consistent with their age and type. Porches require routine maintenance appropriate to their age and construction. Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch material should be expected.",
+    "Condition: Where visible and operated during the inspection, the doors appear in reasonable condition, consistent with their age and type. Porches require routine maintenance appropriate to their age and construction. Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch material should be expected.",
+    "Condition: Where visible and operated during the inspection, the doors appear in fair condition, consistent with their age and type. Porches require routine maintenance appropriate to their age and construction. Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch material should be expected."
    ]
   },
   {
@@ -7408,25 +7303,6 @@
     "Valley Gutters: The valley gutters are formed in lead.",
     "Valley Gutters: The valley gutters are formed in mortar.",
     "Condition: Where visible, they appear in good condition. Blocked or defective valley gutters should be cleared, repaired, or replaced as necessary to ensure effective drainage and prevent water penetration into the building. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the guttering should be expected."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_conservatory_porch_repairs__floor",
-   "title": "Floor",
-   "dataFieldCount": 11,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The conservatory or porch floor is cracked, damaged, damp and sample detail. These defects should be repaired without delay.",
-    "The conservatory or porch floor is badly cracked, severely damaged, causing damp and sample detail. These defects should be repaired without delay. Where the defects are severe or extensive, repairs should be carried out immediately.",
-    "Conservatories and porches that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the affected elements entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained (see section I2 - Guarantees)."
    ]
   },
   {
@@ -7638,8 +7514,8 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_safety_glass_rating",
    "title": "Safety glass rating",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
+   "dataFieldCount": 1,
+   "permutationCount": 5,
    "severities": [],
    "phraseStats": {
     "total": 2,
@@ -7648,16 +7524,16 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The presence of visible markings indicates that safety glazing has been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement glazing.",
-    "No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The absence of visible markings does not necessarily indicate that safety glazing has not been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement glazing."
+    "No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The absence of visible markings does not necessarily indicate that safety glazing has not been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+    "BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The presence of visible markings indicates that safety glazing has been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating",
    "title": "Safety glass rating",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
+   "dataFieldCount": 1,
+   "permutationCount": 5,
    "severities": [],
    "phraseStats": {
     "total": 2,
@@ -7666,8 +7542,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The presence of visible markings indicates that safety glazing has been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement glazing.",
-    "No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The absence of visible markings does not necessarily indicate that safety glazing has not been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement glazing."
+    "No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The absence of visible markings does not necessarily indicate that safety glazing has not been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+    "BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The presence of visible markings indicates that safety glazing has been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows."
    ]
   },
   {
@@ -7843,25 +7719,6 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_conservatory_porch_repairs__walls",
-   "title": "Walls",
-   "dataFieldCount": 11,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The conservatory or porch walls are cracked, damaged, damp and sample detail. These defects should be repaired without delay.",
-    "The conservatory or porch walls are badly cracked, severely damaged, causing damp and sample detail. These defects should be repaired without delay. Where the defects are severe or extensive, repairs should be carried out immediately.",
-    "Conservatories and porches that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the affected elements entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained (see section I2 - Guarantees)."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_roof_not_inspected",
    "title": "Not Inspected",
    "dataFieldCount": 8,
@@ -7898,29 +7755,35 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_porch_open_to_building",
    "title": "Open to building",
-   "dataFieldCount": 2,
-   "permutationCount": 6,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Building Joint Defects: Defects were noted to the junction between the conservatory and the main building. The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects. Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration."
+   ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_porch_open_to_building__open_to_building",
    "title": "Open to building",
-   "dataFieldCount": 2,
-   "permutationCount": 6,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Building Joint Defects: Defects were noted to the junction between the conservatory and the main building. The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects. Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration."
+   ]
   },
   {
    "sectionKey": "E",
@@ -8088,25 +7951,6 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_conservatory_porch_repairs__rainwater_goods",
-   "title": "Rainwater Goods",
-   "dataFieldCount": 11,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The conservatory or porch rainwater goods are cracked, damaged, leaking and sample detail. These defects should be repaired without delay.",
-    "The conservatory or porch rainwater goods are badly cracked, severely damaged, severely leaking and sample detail. These defects should be repaired without delay. Where the defects are severe or extensive, repairs should be carried out immediately.",
-    "Conservatories and porches that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the affected elements entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained (see section I2 - Guarantees)."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_other_drains",
    "title": "Drains",
    "dataFieldCount": 7,
@@ -8254,44 +8098,6 @@
    "editedBankSamples": [
     "Trees: There are trees located close to the property. I noted no obvious signs to suggest that they have caused significant damage to the property. However, it would be prudent to implement a programme of management to control their future growth. Trees can affect building foundations and below-ground services, particularly where shrinkable subsoils are present.",
     "Tree defects noted: There are trees located close to the property, and I noted defects that may be associated with their influence, including cracking, distortion, heave and sample detail. Although the cause cannot be confirmed during a visual inspection, further investigation by a suitably qualified structural engineer and, where appropriate, an arboriculturist is recommended to establish whether the trees are contributing to the observed defects and to advise on any necessary remedial works."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "outside_property_conservatory_porch_flashing_layout",
-   "title": "Roof Flashing With Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 12,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Main building junctions: The waterproofing at the junction between the conservatory or porch and the main building (called the flashing) appears to be formed in lead, mortar, tiles and sample detail and is in reasonable condition. No defects: The junction appears adequately weatherproofed.",
-    "Main building junctions: The waterproofing at the junction between the conservatory or porch and the main building (called the flashing) appears to be formed in lead, mortar, tiles and sample detail and is in satisfactory condition. No defects: The junction appears adequately weatherproofed.",
-    "Main building junctions: Defects were noted to flashings, sealants or junction details, formed in lead, mortar, tiles and sample detail and assessed as unsatisfactory and poor condition. Repairs should be undertaken to reduce the risk of water penetration."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "outside_property_conservatory_porch_flashing_layout__roof_flashing_with_wall",
-   "title": "Roof Flashing With Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 12,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Main building junctions: The waterproofing at the junction between the conservatory or porch and the main building (called the flashing) appears to be formed in lead, mortar, tiles and sample detail and is in reasonable condition. No defects: The junction appears adequately weatherproofed.",
-    "Main building junctions: The waterproofing at the junction between the conservatory or porch and the main building (called the flashing) appears to be formed in lead, mortar, tiles and sample detail and is in satisfactory condition. No defects: The junction appears adequately weatherproofed.",
-    "Main building junctions: Defects were noted to flashings, sealants or junction details, formed in lead, mortar, tiles and sample detail and assessed as unsatisfactory and poor condition. Repairs should be undertaken to reduce the risk of water penetration."
    ]
   },
   {
@@ -8454,29 +8260,35 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_porch_poor_condition",
    "title": "Poor condition",
-   "dataFieldCount": 2,
-   "permutationCount": 6,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Unstable Structure: Evidence of movement, distortion, or deflection was observed. Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant."
+   ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_porch_poor_condition__poor_condition",
    "title": "Poor condition",
-   "dataFieldCount": 2,
-   "permutationCount": 6,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
     "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Unstable Structure: Evidence of movement, distortion, deflection was observed. Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant."
+   ]
   },
   {
    "sectionKey": "E",
@@ -9176,18 +8988,18 @@
    "screenId": "activity_outside_property_other_joinery_and_finishes_main_screen",
    "title": "E8 Other Joinery and Finishes",
    "dataFieldCount": 14,
-   "permutationCount": 20,
+   "permutationCount": 36,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 24,
     "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 21,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The external eaves level joinery includes facias, soffits, bargeboards, verge clips and sample detail and comprises timber, pvc, slates and sample detail. Localised repairs or redecoration should be undertaken where deterioration is evident. Routine inspection and maintenance appropriate to the material should be expected throughout its service life.",
-    "Timber Weathering: Exposed timber joinery exhibits weathering. Where deterioration is limited, routine preparation and redecoration should prevent further decay. Otherwise, where decay is advanced, localised repair or replacement may be necessary.",
-    "Asbestos Cement Components: Some external joinery or soffit components may comprise asbestos cement products. Where these remain in good condition and are left undisturbed, they do not normally present a significant health risk. Before carrying out repairs, alterations or removal, specialist advice should be obtained."
+    "Inspected: The usual external works at eaves level (the edges of the roof where the guttering is fixed) could not be inspected due to the height and configuration of the building. Consequently, I am unable to comment on their condition. These elements are typically formed in timber and should be regularly inspected, maintained, and redecorated as necessary to protect them from weathering, prevent decay, and prolong their service life. Inspected: Inspection was carried out from ground level and other reasonably accessible positions. High-level joinery was inspected using binoculars where appropriate. Concealed sections behind gutters, roof coverings or other finishes could not be inspected. No opening up or dismantling of components was undertaken. This section relates to external joinery and finishes not covered elsewhere within this report, including fascias, soffits, bargeboards, eaves joinery, verge clips, cladding, decorative timberwork, or other associated external finishes. Only those areas that were readily visible and safely accessible at the time of inspection have been assessed. Redecoration should be undertaken periodically in accordance with the manufacturer's recommendations and the exposure of the property.",
+    "Description: The external eaves-level joinery comprises timber materials. Localised repairs or redecoration should be undertaken where deterioration is evident. Routine inspection and maintenance appropriate to the material should be expected throughout its service life.",
+    "Description: The external eaves-level joinery comprises PVCu materials. Localised repairs or redecoration should be undertaken where deterioration is evident. Routine inspection and maintenance appropriate to the material should be expected throughout its service life."
    ]
   },
   {

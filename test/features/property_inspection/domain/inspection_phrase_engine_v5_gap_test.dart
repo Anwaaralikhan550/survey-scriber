@@ -52,27 +52,5 @@ void main() {
     expect(phrases.single, contains('unable to inspect the garage'));
   });
 
-  test('porch below accommodation is not described as a roof covering', () {
-    final phrases = engine.buildPhrases(
-      'activity_outside_property_conservatory_porch_roof__roof',
-      {'cb_floor_above': 'true'},
-    );
 
-    expect(phrases.single, contains('formed by the floor above'));
-    expect(phrases.single, isNot(contains('covered in floor above')));
-  });
-
-  test('floor-above conflict is excluded when roof coverings are selected', () {
-    final phrases = engine.buildPhrases(
-      'activity_outside_property_conservatory_porch_roof__roof',
-      {
-        'actv_roof_type': 'Pitched',
-        'cb_floor_above': 'true',
-        'cb_concrete_tiles': 'true',
-      },
-    );
-
-    expect(phrases.single, contains('formed in concrete tiles'));
-    expect(phrases.single, isNot(contains('floor above')));
-  });
 }

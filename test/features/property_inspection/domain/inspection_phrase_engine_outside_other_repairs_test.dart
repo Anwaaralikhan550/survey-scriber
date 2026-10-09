@@ -236,34 +236,6 @@ void main() {
       expect(phrases.first.toLowerCase(), contains('condition=good'));
     });
 
-    test('joinery asbestos phrase supports legacy checkbox id alias', () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_other_about_joinery_and_finishes',
-        {
-          'cb_facias': 'true',
-          'cb_timber': 'true',
-          'cb_Is_Contain_Asbestos': 'true',
-        },
-      );
-
-      expect(phrases, hasLength(2));
-      expect(phrases[1].toLowerCase(), contains('contains asbestos'));
-    });
-
-    test('joinery asbestos phrase supports current checkbox id', () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_other_about_joinery_and_finishes',
-        {
-          'cb_facias': 'true',
-          'cb_timber': 'true',
-          'cb_open_runoffs': 'true',
-        },
-      );
-
-      expect(phrases, hasLength(2));
-      expect(phrases[1].toLowerCase(), contains('contains asbestos'));
-    });
-
     test(
         'joinery condition accepts legacy llMainContainer value (Phase 2G-mini fix)',
         () {

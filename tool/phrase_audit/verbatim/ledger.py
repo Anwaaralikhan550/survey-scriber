@@ -100,6 +100,8 @@ def build():
             # J-layer injection rows are verified by a hand test (report_builder_test).
             if disp == 'MENU' and rid in decisions and decisions[rid]['disposition'] == 'TESTED':
                 status = 'VERIFIED'
+            elif disp == 'MENU' and rid in decisions and decisions[rid]['disposition'] in ('HEADING', 'ACCEPT'):
+                status = 'DONE'  # reviewed by hand (guidance for the surveyor, not report text)
             # A hand decision applies only while the row is not already exact.
             if rid in decisions and disp not in ('EXACT', 'MENU'):
                 d = decisions[rid]

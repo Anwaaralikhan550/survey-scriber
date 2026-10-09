@@ -564,3 +564,9 @@ de3fc2b3c2,TESTED,inspection_verbatim_e4_test: fixed prose wrongly detected as o
 b5f6ebaa83,TESTED,inspection_verbatim_e5_test: intro / fixed prose wrongly detected as option list
 9c7b9def04,TESTED,inspection_verbatim_e6_test: fixed prose wrongly detected as option list
 d7754938e2,TESTED,inspection_verbatim_e6_test: fixed prose wrongly detected as option list
+068020f5cc,HEADING,guidance for the surveyor (when the section applies); not report text. Query #39
+762dfb518d,TESTED,inspection_verbatim_e7_test: fixed prose wrongly detected as option list
+9259316bbc,TESTED,inspection_verbatim_e7_test: fixed prose wrongly detected as option list
+3f5125f13f,TESTED,inspection_verbatim_e7_test: fixed prose wrongly detected as option list
+f7148334f2,TESTED,inspection_verbatim_e8_test: intro prose wrongly detected as option list
+ec10c53080,HEADING,directive: flat-property paragraph (cross-cutting item F1 in the plan)

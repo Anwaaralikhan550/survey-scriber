@@ -3741,6 +3741,712 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_general_maintenance',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'e7c_loc',
+    'activity_outside_property_conservatory_porch_location_construction',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_LOCATION}',
+    [
+      VerbatimToken(
+        '{CP_LOCATIONS}',
+        options: {
+          'e7cl_front': 'front',
+          'e7cl_side': 'side',
+          'e7cl_rear': 'rear',
+        },
+        otherCheckbox: 'e7cl_other',
+        otherText: 'e7cl_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{CP_WALLS}',
+        options: {
+          'e7cw_single_glazed': 'single-glazed',
+          'e7cw_double_glazed': 'double-glazed',
+          'e7cw_triple_glazed': 'triple-glazed',
+          'e7cw_pvc_framed': 'PVC framed',
+          'e7cw_timber_framed': 'timber framed',
+          'e7cw_aluminium_framed': 'aluminium framed',
+          'e7cw_steel_framed': 'steel framed',
+        },
+        otherCheckbox: 'e7cw_other',
+        otherText: 'e7cw_other_text',
+        pdfOptions: ['single-glazed', 'double-glazed', 'triple-glazed', 'PVC framed', 'timber framed', 'aluminium framed', 'steel framed'],
+      ),
+    ],
+    pdf:
+        'Conservatory: The conservatory(s) is located to the front, side, rear, other of the building.',
+    pdfMore: [
+      'The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections.',
+    ],
+  ),
+  VerbatimRule(
+    'e7c_bregs',
+    'activity_outside_property_conservatory_porch_location_construction',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_BUILDING_REGULATIONS}',
+    [
+    ],
+    whenField: 'cb_building_regulations',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7c_roof',
+    'activity_outside_property_conservatory_porch_roof',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_ROOF}',
+    [
+      VerbatimToken(
+        '{CP_ROOF_MATERIALS}',
+        options: {
+          'e7cr_glass': 'glass',
+          'e7cr_polycarbonate_sheets': 'polycarbonate sheets',
+          'e7cr_solid_insulated_panels': 'solid insulated panels',
+          'e7cr_roofing_tiles': 'roofing tiles',
+        },
+        otherCheckbox: 'e7cr_other',
+        otherText: 'e7cr_other_text',
+        pdfOptions: ['glass', 'polycarbonate sheets', 'solid insulated panels', 'roofing tiles'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials.',
+  ),
+  VerbatimRule(
+    'e7c_doors',
+    'activity_outside_property_conservatory_porch_doors',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_DOORS_WINDOWS}',
+    [
+      VerbatimToken(
+        '{CP_DOORS_WINDOWS}',
+        options: {
+          'e7cd_single_glazed': 'single-glazed',
+          'e7cd_double_glazed': 'double-glazed',
+          'e7cd_triple_glazed': 'triple-glazed',
+          'e7cd_pvc': 'PVC',
+          'e7cd_timber': 'timber',
+          'e7cd_aluminium': 'aluminium',
+          'e7cd_steel_framed': 'steel-framed',
+        },
+        pdfOptions: ['single-glazed', 'double-glazed', 'triple-glazed', 'PVC', 'timber', 'aluminium', 'steel-framed'],
+      ),
+    ],
+    pdf:
+        'Doors and Windows: The conservatory comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s).',
+  ),
+  VerbatimRule(
+    'e7c_floor',
+    'activity_outside_property_conservatory_porch_floor',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_FLOOR}',
+    [
+      VerbatimToken(
+        '{CP_FLOOR_CONSTRUCTION}',
+        options: {
+          'e7cfc_solid_concrete': 'solid concrete',
+          'e7cfc_suspended_timber': 'suspended timber',
+        },
+        otherCheckbox: 'e7cfc_other',
+        otherText: 'e7cfc_other_text',
+        pdfOptions: ['solid concrete', 'suspended timber'],
+      ),
+      VerbatimToken(
+        '{CP_FLOOR_COVERING}',
+        options: {
+          'e7cfv_timber': 'timber',
+          'e7cfv_carpet': 'carpet',
+          'e7cfv_tiles': 'tiles',
+          'e7cfv_laminated_flooring': 'laminated flooring',
+          'e7cfv_vinyl': 'vinyl',
+        },
+        otherCheckbox: 'e7cfv_other',
+        otherText: 'e7cfv_other_text',
+        pdfOptions: ['timber', 'carpet', 'tiles', 'laminated flooring', 'vinyl'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).',
+  ),
+  VerbatimRule(
+    'e7c_bs_no',
+    'activity_outside_property_conservatory_porch_safety_glass_rating',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_NO_BS_EN}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No BS EN noted',
+  ),
+  VerbatimRule(
+    'e7c_bs_yes',
+    'activity_outside_property_conservatory_porch_safety_glass_rating',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_BS_EN_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'BS EN noted',
+  ),
+  VerbatimRule(
+    'e7c_cond',
+    'activity_outside_property_porch_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_CONDITION}',
+    [
+      VerbatimToken(
+        '{CP_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.',
+  ),
+  VerbatimRule(
+    'e7c_vpoor',
+    'activity_outside_property_porch_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_VERY_POOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Very poor',
+  ),
+  VerbatimRule(
+    'e7c_unstable',
+    'activity_outside_property_porch_poor_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_UNSTABLE}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7c_joint',
+    'activity_outside_property_porch_open_to_building',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_JOINT_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7p_loc',
+    'activity_outside_property_conservatory_porch_location_construction__location_and_construction',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_LOCATION}',
+    [
+      VerbatimToken(
+        '{CP_LOCATIONS}',
+        options: {
+          'e7pl_front': 'front',
+          'e7pl_side': 'side',
+          'e7pl_rear': 'rear',
+        },
+        otherCheckbox: 'e7pl_other',
+        otherText: 'e7pl_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{CP_WALLS}',
+        options: {
+          'e7pw_single_glazed': 'single-glazed',
+          'e7pw_double_glazed': 'double-glazed',
+          'e7pw_triple_glazed': 'triple-glazed',
+          'e7pw_pvc_framed': 'PVC framed',
+          'e7pw_timber_framed': 'timber framed',
+          'e7pw_aluminium_framed': 'aluminium framed',
+          'e7pw_steel_framed': 'steel framed',
+        },
+        otherCheckbox: 'e7pw_other',
+        otherText: 'e7pw_other_text',
+        pdfOptions: ['single-glazed', 'double-glazed', 'triple-glazed', 'PVC framed', 'timber framed', 'aluminium framed', 'steel framed'],
+      ),
+    ],
+    pdf:
+        'Porch: The porch(s) located to the front, side, rear, other of the building.',
+    pdfMore: [
+      'The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections.',
+    ],
+  ),
+  VerbatimRule(
+    'e7p_bregs',
+    'activity_outside_property_conservatory_porch_location_construction__location_and_construction',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_BUILDING_REGULATIONS}',
+    [
+    ],
+    whenField: 'cb_building_regulations',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7p_roof',
+    'activity_outside_property_conservatory_porch_roof__roof',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_ROOF}',
+    [
+      VerbatimToken(
+        '{CP_ROOF_MATERIALS}',
+        options: {
+          'e7pr_glass': 'glass',
+          'e7pr_polycarbonate_sheets': 'polycarbonate sheets',
+          'e7pr_solid_insulated_panels': 'solid insulated panels',
+          'e7pr_roofing_tiles': 'roofing tiles',
+        },
+        otherCheckbox: 'e7pr_other',
+        otherText: 'e7pr_other_text',
+        pdfOptions: ['glass', 'polycarbonate sheets', 'solid insulated panels', 'roofing tiles'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials.',
+  ),
+  VerbatimRule(
+    'e7p_doors',
+    'activity_outside_property_conservatory_porch_doors__doors',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_DOORS_WINDOWS}',
+    [
+      VerbatimToken(
+        '{CP_DOORS_WINDOWS}',
+        options: {
+          'e7pd_single_glazed': 'single-glazed',
+          'e7pd_double_glazed': 'double-glazed',
+          'e7pd_triple_glazed': 'triple-glazed',
+          'e7pd_pvc': 'PVC',
+          'e7pd_timber': 'timber',
+          'e7pd_aluminium': 'aluminium',
+          'e7pd_steel_framed': 'steel-framed',
+        },
+        pdfOptions: ['single-glazed', 'double-glazed', 'triple-glazed', 'PVC', 'timber', 'aluminium', 'steel-framed'],
+      ),
+    ],
+    pdf:
+        'Doors and Windows: The porch comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s).',
+  ),
+  VerbatimRule(
+    'e7p_floor',
+    'activity_outside_property_conservatory_porch_floor__floor',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_FLOOR}',
+    [
+      VerbatimToken(
+        '{CP_FLOOR_CONSTRUCTION}',
+        options: {
+          'e7pfc_solid_concrete': 'solid concrete',
+          'e7pfc_suspended_timber': 'suspended timber',
+        },
+        otherCheckbox: 'e7pfc_other',
+        otherText: 'e7pfc_other_text',
+        pdfOptions: ['solid concrete', 'suspended timber'],
+      ),
+      VerbatimToken(
+        '{CP_FLOOR_COVERING}',
+        options: {
+          'e7pfv_timber': 'timber',
+          'e7pfv_carpet': 'carpet',
+          'e7pfv_tiles': 'tiles',
+          'e7pfv_laminated_flooring': 'laminated flooring',
+          'e7pfv_vinyl': 'vinyl',
+        },
+        otherCheckbox: 'e7pfv_other',
+        otherText: 'e7pfv_other_text',
+        pdfOptions: ['timber', 'carpet', 'tiles', 'laminated flooring', 'vinyl'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).',
+  ),
+  VerbatimRule(
+    'e7p_bs_no',
+    'activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_NO_BS_EN}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No BS EN noted',
+  ),
+  VerbatimRule(
+    'e7p_bs_yes',
+    'activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_BS_EN_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'BS EN noted',
+  ),
+  VerbatimRule(
+    'e7p_cond',
+    'activity_outside_property_porch_condition__condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_CONDITION}',
+    [
+      VerbatimToken(
+        '{CP_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.',
+  ),
+  VerbatimRule(
+    'e7p_vpoor',
+    'activity_outside_property_porch_condition__condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_VERY_POOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Very poor',
+  ),
+  VerbatimRule(
+    'e7p_unstable',
+    'activity_outside_property_porch_poor_condition__poor_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_UNSTABLE}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7p_joint',
+    'activity_outside_property_porch_open_to_building__open_to_building',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_JOINT_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7c_repair',
+    'activity_outside_property_conservatory_porch_repairs',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_REPAIR}',
+    [
+      VerbatimToken(
+        '{CP_REPAIR_ELEMENTS}',
+        options: {
+          'e7cre_door_s': 'door(s)',
+          'e7cre_window_s': 'window(s)',
+          'e7cre_glazing': 'glazing',
+          'e7cre_roof': 'roof',
+          'e7cre_floor': 'floor',
+          'e7cre_wall_s': 'wall(s)',
+          'e7cre_rainwater_goods': 'rainwater goods',
+        },
+        otherCheckbox: 'e7cre_other',
+        otherText: 'e7cre_other_text',
+        pdfOptions: ['door(s)', 'window(s)', 'glazing', 'roof', 'floor', 'wall(s)', 'rainwater goods'],
+      ),
+      VerbatimToken(
+        '{CP_REPAIR_DEFECTS}',
+        options: {
+          'e7crd_cracked': 'cracked',
+          'e7crd_damaged': 'damaged',
+          'e7crd_rotten': 'rotten',
+          'e7crd_leaking': 'leaking',
+          'e7crd_damp': 'damp',
+          'e7crd_have_failed': 'have failed',
+          'e7crd_are_misted': 'are misted',
+          'e7crd_present_a_safety_hazard': 'present a safety hazard',
+        },
+        otherCheckbox: 'e7crd_other',
+        otherText: 'e7crd_other_text',
+        pdfOptions: ['cracked', 'damaged', 'rotten', 'leaking', 'damp', 'have failed', 'are misted', 'present a safety hazard'],
+      ),
+    ],
+    pdf:
+        'Repair conservatory: The conservatory door(s), window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted, present a safety hazard, other.',
+    whenField: 'actv_cp',
+    whenValue: 'Conservatory',
+  ),
+  VerbatimRule(
+    'e7p_repair',
+    'activity_outside_property_conservatory_porch_repairs',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_REPAIR}',
+    [
+      VerbatimToken(
+        '{CP_REPAIR_ELEMENTS}',
+        options: {
+          'e7pre_door': 'door',
+          'e7pre_window_s': 'window(s)',
+          'e7pre_glazing': 'glazing',
+          'e7pre_roof': 'roof',
+          'e7pre_floor': 'floor',
+          'e7pre_wall_s': 'wall(s)',
+          'e7pre_rainwater_goods': 'rainwater goods',
+        },
+        otherCheckbox: 'e7pre_other',
+        otherText: 'e7pre_other_text',
+        pdfOptions: ['door', 'window(s)', 'glazing', 'roof', 'floor', 'wall(s)', 'rainwater goods'],
+      ),
+      VerbatimToken(
+        '{CP_REPAIR_DEFECTS}',
+        options: {
+          'e7prd_cracked': 'cracked',
+          'e7prd_damaged': 'damaged',
+          'e7prd_rotten': 'rotten',
+          'e7prd_leaking': 'leaking',
+          'e7prd_damp': 'damp',
+          'e7prd_have_failed': 'have failed',
+          'e7prd_are_misted_over': 'are misted over',
+          'e7prd_present_a_safety_hazard': 'present a safety hazard',
+        },
+        otherCheckbox: 'e7prd_other',
+        otherText: 'e7prd_other_text',
+        pdfOptions: ['cracked', 'damaged', 'rotten', 'leaking', 'damp', 'have failed', 'are misted over', 'present a safety hazard'],
+      ),
+    ],
+    pdf:
+        'Repair porch: The porch door, window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted over, present a safety hazard, other.',
+    whenField: 'actv_cp',
+    whenValue: 'Porch',
+  ),
+  VerbatimRule(
+    'e7_not_applicable',
+    'activity_outside_property_conservatory_porch_not_inspected',
+    '{E_CONSERVATORY_PORCHES}',
+    '{NOT_INSPECTED_NOT_APPLICABLE}',
+    [
+    ],
+    whenField: 'cb_not_applicable',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_inspected',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_INSPECTED}',
+    [
+    ],
+    first: true,
+    whenField: 'actv_condition',
+    whenValue: '1',
+    whenAny: [['actv_condition', '2'], ['actv_condition', '3']],
+  ),
+  VerbatimRule(
+    'e8_desc',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{JOINERY_MATERIALS}',
+        options: {
+          'e8m_timber': 'timber',
+          'e8m_pvcu': 'PVCu',
+          'e8m_aluminium': 'aluminium',
+          'e8m_asbestos_board': 'asbestos board',
+          'e8m_cement_board': 'cement board',
+          'e8m_fibre_cement': 'fibre cement',
+          'e8m_slates': 'slates',
+        },
+        otherCheckbox: 'cb_other_397',
+        otherText: 'et_other_393',
+        pdfOptions: ['timber', 'PVCu', 'aluminium', 'asbestos board', 'cement board', 'fibre cement', 'slates'],
+      ),
+    ],
+    pdf:
+        'Description: The external eaves-level joinery comprises timber, PVCu, aluminium, asbestos board, cement board, fibre cement, slates, other materials.',
+  ),
+  VerbatimRule(
+    'e8_decorations',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_DECORATIONS}',
+    [
+      VerbatimToken(
+        '{JOINERY_DECORATIONS}',
+        dropdown: 'actv_decorations',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Weathered', 'Poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'weathered', 'poor'],
+      ),
+    ],
+    pdf:
+        'Decorations: The external painted or stained finishes appear in good, reasonable, fair, weathered, poor condition.',
+  ),
+  VerbatimRule(
+    'e8_condition',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_CONDITION}',
+    [
+      VerbatimToken(
+        '{JOINERY_CONDITION}',
+        dropdown: 'actv_joinery_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, these elements appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'e8_asbestos',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_ASBESTOS_CEMENT}',
+    [
+    ],
+    whenField: 'cb_open_runoffs',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_general',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_repair',
+    'activity_outside_property_other_joinery_and_finishes_repairs',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_REPAIR}',
+    [
+      VerbatimToken(
+        '{JOINERY_ITEMS}',
+        options: {
+          'e8i_fascias': 'fascias',
+          'e8i_soffits': 'soffits',
+          'e8i_barge_boards': 'barge boards',
+          'e8i_verge_clips': 'verge clips',
+          'e8i_timber_cladding': 'timber cladding',
+        },
+        otherCheckbox: 'cb_other_289',
+        otherText: 'et_other_178',
+        pdfOptions: ['fascias', 'soffits', 'barge boards', 'verge clips', 'timber cladding'],
+      ),
+      VerbatimToken(
+        '{JOINERY_LOCATIONS}',
+        options: {
+          'e8l_main_building': 'main building',
+          'e8l_back_addition': 'back addition',
+          'e8l_extension': 'extension',
+          'e8l_bay_window': 'bay window',
+          'e8l_garage': 'garage',
+        },
+        otherCheckbox: 'cb_other_269',
+        otherText: 'et_other_567',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window', 'garage'],
+      ),
+      VerbatimToken(
+        '{JOINERY_DEFECTS}',
+        options: {
+          'e8d_rotted': 'rotted',
+          'e8d_damaged': 'damaged',
+          'e8d_poorly_secured': 'poorly secured',
+          'e8d_incomplete': 'incomplete',
+          'e8d_missing': 'missing',
+        },
+        otherCheckbox: 'cb_other_777',
+        otherText: 'et_other_473',
+        pdfOptions: ['rotted', 'damaged', 'poorly secured', 'incomplete', 'missing'],
+      ),
+    ],
+    pdf:
+        'Repair: The fascias, soffits, barge boards, verge clips, timber cladding, other to the main building, back addition, extension, bay window, garage, other are rotted, damaged, poorly secured, incomplete, missing, other.',
+  ),
+  VerbatimRule(
+    'e8_hazard',
+    'activity_outside_property_other_joinery_and_finishes_repairs',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_HAZARD}',
+    [
+    ],
+    whenField: 'cb_safety_hazard',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_not_inspected',
+    'activity_outside_property_other_joinery_finishes_not_inspected',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_weathering',
+    'activity_outside_property_other_joinery_and_finishes_timber_weathering',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_TIMBER_WEATHERING}',
+    [
+      VerbatimToken(
+        '{WEATHERING_LEVEL}',
+        dropdown: 'actv_weathering',
+        dropdownOptions: ['Minor', 'Moderate', 'Significant'],
+        lower: true,
+        pdfOptions: ['minor', 'moderate', 'significant'],
+      ),
+    ],
+    pdf:
+        'Timber Weathering: Exposed timber joinery exhibits minor, moderate, significant weathering.',
+  ),
+  VerbatimRule(
+    'e8_decay',
+    'activity_outside_property_other_joinery_and_finishes_timber_decay',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_TIMBER_DECAY}',
+    [
+      VerbatimToken(
+        '{TIMBER_DECAY_SIGNS}',
+        options: {
+          'e8td_localised_wet_rot': 'localised wet rot',
+          'e8td_surface_decay': 'surface decay',
+          'e8td_timber_deterioration': 'timber deterioration',
+        },
+        cap: true,
+        pdfOptions: ['localised wet rot', 'surface decay', 'timber deterioration'],
+      ),
+    ],
+    pdf:
+        'Timber Decay: Localised wet rot, surface decay, timber deterioration was observed.',
+  ),
+  VerbatimRule(
+    'e8_defective',
+    'activity_outside_property_other_joinery_and_finishes_defective_joinery',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_DEFECTIVE_JOINERY}',
+    [
+      VerbatimToken(
+        '{JOINERY_DEFECT_LIST}',
+        options: {
+          'e8dj_loose_fascias': 'loose fascias',
+          'e8dj_loose_soffits': 'loose soffits',
+          'e8dj_damaged_bargeboards': 'damaged bargeboards',
+          'e8dj_open_joints': 'open joints',
+          'e8dj_defective_fixings': 'defective fixings',
+          'e8dj_weathered_decoration': 'weathered decoration',
+          'e8dj_localised_timber_decay': 'localised timber decay',
+          'e8dj_distorted_joinery': 'distorted joinery',
+          'e8dj_minor_impact_damage': 'minor impact damage',
+        },
+        pdfOptions: ['loose fascias', 'loose soffits', 'damaged bargeboards', 'open joints', 'defective fixings', 'weathered decoration', 'localised timber decay', 'distorted joinery', 'minor impact damage'],
+      ),
+    ],
+    pdf:
+        'Defective Joinery One or more defects were observed, including: • Loose fascias • Loose soffits • Damaged bargeboards • Open joints • Defective fixings • Weathered decoration • Localised timber decay • Distorted joinery • Minor impact damage Repairs should be undertaken to prevent further deterioration and maintain weather resistance.',
+  ),
   // <<verbatim-rules-end>>
 ];
 

@@ -73,10 +73,7 @@ class InspectionPhraseEngine {
         // routed only to the About content, so {CONDITION_RATING} was
         // dead regardless of what the surveyor selected. Real gap, not
         // guessed: the tree screen has the field, nothing consumed it.
-        return [
-          ..._otherJoineryAbout(answers),
-          ..._otherJoineryConditionRating(answers),
-        ];
+        return _otherJoineryConditionRating(answers);
       case 'activity_outside_property_other_main_screen':
         return _outsideOtherMainScreen(answers);
       case 'activity_grounds_garage_main_screen':
@@ -643,36 +640,36 @@ class InspectionPhraseEngine {
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_conservatory_porch_location_construction':
       case 'activity_outside_property_conservatory_porch_location_construction__location_and_construction':
-        return _cpLocationConstruction(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_conservatory_porch_roof':
       case 'activity_outside_property_conservatory_porch_roof__roof':
-        return _cpRoof(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_conservatory_porch_windows':
       case 'activity_outside_property_conservatory_porch_windows__windows':
-        return _cpWindows(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_conservatory_porch_doors':
       case 'activity_outside_property_conservatory_porch_doors__doors':
-        return _cpDoors(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_conservatory_porch_floor':
       case 'activity_outside_property_conservatory_porch_floor__floor':
-        return _cpFloor(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_conservatory_porch_safety_glass_rating':
       case 'activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating':
-        return _cpSafetyGlassRating(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'outside_property_conservatory_porch_flashing_layout':
       case 'outside_property_conservatory_porch_flashing_layout__roof_flashing_with_wall':
-        return _cpFlashing(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_porch_open_to_building':
       case 'activity_outside_property_porch_open_to_building__open_to_building':
-        return _cpOpenToBuilding(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_porch_condition':
       case 'activity_outside_property_porch_condition__condition':
-        return _cpPorchCondition(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_porch_poor_condition':
       case 'activity_outside_property_porch_poor_condition__poor_condition':
-        return _cpPoorCondition(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_conservatory_porch_not_inspected':
-        return _cpNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_conservatory_porch_repairs':
       case 'activity_outside_property_conservatory_porch_repairs__walls':
       case 'activity_outside_property_conservatory_porch_repairs__windows':
@@ -681,9 +678,9 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_conservatory_porch_repairs__roof_glazing':
       case 'activity_outside_property_conservatory_porch_repairs__floor':
       case 'activity_outside_property_conservatory_porch_repairs__rainwater_goods':
-        return _cpRepairs(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_about_joinery_and_finishes':
-        return _otherJoineryAbout(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_joinery_finishes_condition':
       case 'activity_outside_property_other_joinery_fininshes_condition':
         // This screen's `actv_condition` field is a numeric 1/2/3 dropdown
@@ -697,9 +694,9 @@ class InspectionPhraseEngine {
         // decision rather than resolved here.
         return _otherJoineryConditionRating(answers);
       case 'activity_outside_property_other_joinery_and_finishes_repairs':
-        return _otherJoineryRepairs(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_joinery_finishes_not_inspected':
-        return _otherJoineryNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_communal_area':
         return _otherCommunalArea(answers);
       case 'activity_outside_property_other_not_inspected':
@@ -846,11 +843,11 @@ class InspectionPhraseEngine {
 
       // ── Section F: joinery variant screens ──
       case 'activity_outside_property_other_about_joinery_and_finishes__other_joinery_and_finishes':
-        return _otherJoineryAbout(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_joinery_and_finishes_repairs__repairs':
-        return _otherJoineryRepairs(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_joinery_finishes_not_inspected__not_inspected':
-        return _otherJoineryNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
 
       // ── Section R: room/floor screens ──
       case 'activity_no_of_rooms':
@@ -2189,612 +2186,6 @@ class InspectionPhraseEngine {
   List<String> _windowsNotInspected(Map<String, String> answers) {
     if (!_isChecked(answers['cb_not_inspected'])) return const [];
     return _split(_normalize(_sub('{E_WINDOWS}', '{NOT_INSPECTED}')));
-  }
-
-  List<String> _cpLocationConstruction(
-      String screenId, Map<String, String> answers) {
-    final location = _cleanLower(answers['actv_location']);
-    final construction = _labelsFor(
-      // cb_other_925 (the "Other" checkbox) is deliberately excluded here:
-      // it has no label of its own and is already handled explicitly below
-      // via its free-text value.
-      [
-        'cb_brick_walls',
-        'cb_pvc_double_glazed_sections',
-        'cb_timber_double_glazed_sections',
-      ],
-      answers,
-      {
-        'cb_brick_walls': 'Brick walls',
-        'cb_pvc_double_glazed_sections': 'PVC double glazed sections',
-        'cb_timber_double_glazed_sections': 'Timber double glazed sections',
-      },
-    );
-    if (_isChecked(answers['cb_other_925'])) {
-      final otherConstruction = (answers['et_other_249'] ?? '').trim();
-      if (otherConstruction.isNotEmpty) {
-        construction.add(otherConstruction);
-      }
-    }
-    if (location.isEmpty || construction.isEmpty) return const [];
-
-    final isPorch = _isPorchScreenVariant(
-      screenId,
-      porchSuffix: '__location_and_construction',
-    );
-    var template = _sub('{E_CONSERVATORY_PORCHES}',
-        isPorch ? '{PORCH_LOCATION_CONSTRUCTION}' : '{LOCATION_CONSTRUCTION}');
-    if (template.isEmpty) return const [];
-    if (isPorch) {
-      template = template
-          .replaceAll('{CP_LC_LOCATION_PORCH}', location)
-          .replaceAll('{CP_LC_CONSTRUCTION_PORCH}',
-              _toWords(construction).toLowerCase());
-    } else {
-      template = template.replaceAll('{CP_LC_LOCATION}', location).replaceAll(
-          '{CP_LC_CONSTRUCTION}', _toWords(construction).toLowerCase());
-    }
-    return _split(_normalize(template));
-  }
-
-  List<String> _cpRoof(String screenId, Map<String, String> answers) {
-    final roofType = _cleanLower(answers['actv_roof_type']);
-    final hasFloorAbove = _isChecked(answers['cb_floor_above']);
-    final materials = _labelsFor(
-      [
-        'cb_pvc_double_glazed_sections',
-        'cb_polycarbonate_sheets',
-        'cb_concrete_tiles',
-        'cb_clay_tiles',
-        'cb_mineral_felt',
-        'cb_lead',
-        // cb_others_373 (the "Other" checkbox) is deliberately excluded
-        // here: it has no label of its own (falls back to the raw field
-        // id, e.g. "cb_others_373", leaking into the report text) and is
-        // already handled explicitly below via its free-text value.
-      ],
-      answers,
-      {
-        'cb_pvc_double_glazed_sections': 'PVC double glazed sections',
-        'cb_polycarbonate_sheets': 'Polycarbonate sheets',
-        'cb_concrete_tiles': 'Concrete tiles',
-        'cb_clay_tiles': 'Clay tiles',
-        'cb_mineral_felt': 'Mineral felt',
-        'cb_lead': 'Lead',
-      },
-    );
-    if (_isChecked(answers['cb_others_373'])) {
-      final other = (answers['et_other_403'] ?? '').trim();
-      if (other.isNotEmpty) {
-        materials.add(other);
-      }
-    }
-    final isPorch = _isPorchScreenVariant(
-      screenId,
-      porchSuffix: '__roof',
-    );
-    if (hasFloorAbove && materials.isEmpty) {
-      return _split(_normalize(_sub(
-        '{E_CONSERVATORY_PORCHES}',
-        isPorch ? '{PORCH_ROOF_FLOOR_ABOVE}' : '{CP_ROOF_FLOOR_ABOVE}',
-      )));
-    }
-    if (roofType.isEmpty || materials.isEmpty) return const [];
-    var template = _sub(
-      '{E_CONSERVATORY_PORCHES}',
-      isPorch ? '{PORCH_ROOF}' : '{CP_ROOF}',
-    );
-    if (template.isEmpty) return const [];
-    if (isPorch) {
-      template = template
-          .replaceAll('{CP_ROOF_TYPE_PORCH}', roofType)
-          .replaceAll(
-              '{CP_ROOF_MATERIAL_PORCH}', _toWords(materials).toLowerCase());
-    } else {
-      template = template
-          .replaceAll('{CP_ROOF_TYPE}', roofType)
-          .replaceAll('{CP_ROOF_MATERIAL}', _toWords(materials).toLowerCase());
-    }
-    return _split(_normalize(template));
-  }
-
-  List<String> _cpWindows(String screenId, Map<String, String> answers) {
-    final glazing = _labelsFor(
-      ['cb_single', 'cb_double'],
-      answers,
-      {
-        'cb_single': 'Single',
-        'cb_double': 'Double',
-      },
-    );
-    final materials = _labelsFor(
-      // cb_other_1047 (the "Other" checkbox) is deliberately excluded here:
-      // it has no label of its own and is already handled explicitly below
-      // via its free-text value.
-      ['cb_pvc', 'cb_timber'],
-      answers,
-      {
-        'cb_pvc': 'PVC',
-        'cb_timber': 'Timber',
-      },
-    );
-    if (_isChecked(answers['cb_other_1047'])) {
-      final otherMaterial = (answers['et_other_632'] ?? '').trim();
-      if (otherMaterial.isNotEmpty) {
-        materials.add(otherMaterial);
-      }
-    }
-    if (glazing.isEmpty || materials.isEmpty) return const [];
-    final isPorch = _isPorchScreenVariant(
-      screenId,
-      porchSuffix: '__windows',
-    );
-    var template = _sub('{E_CONSERVATORY_PORCHES}',
-        isPorch ? '{PORCH_WINDOWS}' : '{CP_WINDOWS}');
-    if (template.isEmpty) return const [];
-    if (isPorch) {
-      template = template
-          .replaceAll('{CP_WINDOWS_INCORPORATES_PORCH}',
-              _toWords(glazing).toLowerCase())
-          .replaceAll(
-              '{CP_WINDOWS_GLAZZING_PORCH}', _toWords(materials).toLowerCase());
-    } else {
-      template = template
-          .replaceAll(
-              '{CP_WINDOWS_INCORPORATES}', _toWords(glazing).toLowerCase())
-          .replaceAll(
-              '{CP_WINDOWS_GLAZZING}', _toWords(materials).toLowerCase());
-    }
-    return _split(_normalize(template));
-  }
-
-  List<String> _cpDoors(String screenId, Map<String, String> answers) {
-    final glazing = _labelsFor(
-      ['cb_single', 'cb_double'],
-      answers,
-      {
-        'cb_single': 'Single',
-        'cb_double': 'Double',
-      },
-    );
-    final materials = _labelsFor(
-      // cb_other_1047 (the "Other" checkbox) is deliberately excluded here:
-      // it has no label of its own and is already handled explicitly below
-      // via its free-text value.
-      ['cb_pvc', 'cb_timber'],
-      answers,
-      {
-        'cb_pvc': 'PVC',
-        'cb_timber': 'Timber',
-      },
-    );
-    if (_isChecked(answers['cb_other_1047'])) {
-      final otherMaterial = (answers['et_other_632'] ?? '').trim();
-      if (otherMaterial.isNotEmpty) {
-        materials.add(otherMaterial);
-      }
-    }
-    if (glazing.isEmpty || materials.isEmpty) return const [];
-    final isPorch = _isPorchScreenVariant(
-      screenId,
-      porchSuffix: '__doors',
-    );
-    var template = _sub(
-        '{E_CONSERVATORY_PORCHES}', isPorch ? '{PORCH_DOORS}' : '{CP_DOORS}');
-    if (template.isEmpty) return const [];
-    if (isPorch) {
-      template = template
-          .replaceAll(
-              '{CP_DOORS_INCORPORATES_PORCH}', _toWords(glazing).toLowerCase())
-          .replaceAll(
-              '{CP_DOORS_GLAZZING_PORCH}', _toWords(materials).toLowerCase());
-    } else {
-      template = template
-          .replaceAll(
-              '{CP_DOORS_INCORPORATES}', _toWords(glazing).toLowerCase())
-          .replaceAll('{CP_DOORS_GLAZZING}', _toWords(materials).toLowerCase());
-    }
-    final phrases = _split(_normalize(template)).toList();
-    if (glazing.any((g) => g.toLowerCase().contains('double'))) {
-      final extra = _sub(
-          '{E_CONSERVATORY_PORCHES}',
-          isPorch
-              ? '{PORCH_DOORS_INCORPORATES_IF_DOUBLE_SELECTED}'
-              : '{CP_DOORS_INCORPORATES_IF_DOUBLE_SELECTED}');
-      if (extra.isNotEmpty) {
-        phrases.addAll(_split(_normalize(extra)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _cpFloor(String screenId, Map<String, String> answers) {
-    final coverings = _labelsFor(
-      // cb_other_743 (the "Other" checkbox) is deliberately excluded here:
-      // it has no label of its own and is already handled explicitly below
-      // via its free-text value.
-      ['cb_tiles', 'cb_laminate_flooring', 'cb_carpets'],
-      answers,
-      {
-        'cb_tiles': 'Tiles',
-        'cb_laminate_flooring': 'Laminate flooring',
-        'cb_carpets': 'Carpets',
-      },
-    );
-    if (_isChecked(answers['cb_other_743'])) {
-      final otherCovering = (answers['et_other_886'] ?? '').trim();
-      if (otherCovering.isNotEmpty) {
-        coverings.add(otherCovering);
-      }
-    }
-    if (coverings.isEmpty) return const [];
-    final isPorch = _isPorchScreenVariant(
-      screenId,
-      porchSuffix: '__floor',
-    );
-    var template = _sub(
-      '{E_CONSERVATORY_PORCHES}',
-      isPorch ? '{PORCH_FLOOR}' : '{CP_FLOOR}',
-    );
-    if (template.isEmpty) return const [];
-    template = isPorch
-        ? template.replaceAll(
-            '{CP_FLOOR_COVERED_IN_PORCH}', _toWords(coverings).toLowerCase())
-        : template.replaceAll(
-            '{CP_FLOOR_COVERED_IN}', _toWords(coverings).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _cpSafetyGlassRating(
-      String screenId, Map<String, String> answers) {
-    final status = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
-    );
-    if (status.isEmpty) return const [];
-    final isPorch = _isPorchScreenVariant(
-      screenId,
-      porchSuffix: '__safety_glass_rating',
-    );
-    if (status.contains('noted')) {
-      final noted = _sub(
-          '{E_CONSERVATORY_PORCHES}',
-          isPorch
-              ? '{PORCH_SAFETY_GLASS_RATING_NOTED}'
-              : '{CP_SAFETY_GLASS_RATING_NOTED}');
-      if (noted.isEmpty) return const [];
-      return _split(_normalize(noted));
-    }
-
-    final code = isPorch
-        ? '{PORCH_SAFETY_GLASS_RATING_NO_SG_RATING}'
-        : '{CP_SAFETY_GLASS_RATING_NO_SG_RATING}';
-    final template = _sub('{E_CONSERVATORY_PORCHES}', code);
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  List<String> _cpFlashing(Map<String, String> answers) {
-    final materials = _labelsFor(
-      // cb_other_33 (the "Other" checkbox) is deliberately excluded here:
-      // it has no label of its own and is already handled explicitly below
-      // via its free-text value.
-      ['cb_lead', 'cb_mortar', 'cb_tiles'],
-      answers,
-      {
-        'cb_lead': 'Lead',
-        'cb_mortar': 'Mortar',
-        'cb_tiles': 'Tiles',
-      },
-    );
-    if (_isChecked(answers['cb_other_33'])) {
-      final otherFlashing = (answers['et_other_87'] ?? '').trim();
-      if (otherFlashing.isNotEmpty) {
-        materials.add(otherFlashing);
-      }
-    }
-    final condition = _cleanLower(answers['actv_condition']);
-    if (materials.isEmpty || condition.isEmpty) return const [];
-    // RICS L2 rewrite (Phase 2B, E7): spec frames "Main building junctions"
-    // as a binary No defects/Defects noted branch. This screen only has
-    // the standard 3-point condition dropdown (no dedicated defects
-    // checkbox), so the branch is derived from it, same as other
-    // 3-option-dropdown-driven branches across E1-E6.
-    var template = _sub(
-      '{E_CONSERVATORY_PORCHES}',
-      condition.contains('unsatisfactory') || condition.contains('poor')
-          ? '{MAIN_BUILDING_JUNCTIONS_DEFECTS}'
-          : '{ROOF_FLASHING_WITH_WALL}',
-    );
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{ROOF_FLASHING}', _toWords(materials).toLowerCase())
-        .replaceAll('{CONDITION}', condition);
-    return _split(_normalize(template));
-  }
-
-  List<String> _cpOpenToBuilding(String screenId, Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    final isPorch = _isPorchScreenVariant(
-      screenId,
-      porchSuffix: '__open_to_building',
-    );
-    final template = _sub('{E_CONSERVATORY_PORCHES}',
-        isPorch ? '{PORCH_OPEN_TO_BUILDING}' : '{CP_OPEN_TO_BUILDING}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  List<String> _cpPorchCondition(String screenId, Map<String, String> answers) {
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
-    );
-    if (condition.isEmpty) return const [];
-    final isPorch = _isPorchScreenVariant(
-      screenId,
-      porchSuffix: '__condition',
-    );
-    var template = _sub('{E_CONSERVATORY_PORCHES}',
-        isPorch ? '{PORCH_CONDITION}' : '{CP_CONDITION}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        isPorch ? '{CP_CONDITION_PORCH}' : '{CP_CONDITION}', condition);
-    return _split(_normalize(template));
-  }
-
-  List<String> _cpPoorCondition(String screenId, Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    final isPorch = _isPorchScreenVariant(
-      screenId,
-      porchSuffix: '__poor_condition',
-    );
-    final template = _sub('{E_CONSERVATORY_PORCHES}',
-        isPorch ? '{PORCH_POOR_CONDITION}' : '{CP_POOR_CONDITION}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  List<String> _cpNotInspected(Map<String, String> answers) {
-    final phrases = <String>[];
-    if (_isChecked(answers['cb_main_building'])) {
-      final text =
-          _sub('{E_CONSERVATORY_PORCHES}', '{NOT_INSPECTED_NOT_APPLICABLE}');
-      if (text.isNotEmpty) {
-        phrases.addAll(_split(_normalize(text)));
-      }
-    }
-    if (_isChecked(answers['cb_back_addition'])) {
-      final text = _sub('{E_CONSERVATORY_PORCHES}', '{NOT_INSPECTED_NONE}');
-      if (text.isNotEmpty) {
-        phrases.addAll(_split(_normalize(text)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _cpRepairs(String screenId, Map<String, String> answers) {
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
-    );
-    if (condition.isEmpty) return const [];
-    final isNow = condition.contains('now');
-    final defects = _labelsFor(
-      // cb_other_350/cb_other_519 (the "Other" checkboxes) are deliberately
-      // excluded here: they have no label of their own and are already
-      // handled explicitly below via their free-text value.
-      isNow
-          ? [
-              'cb_cracked_51',
-              'cb_damaged_22',
-              'cb_rotten_46',
-              'cb_leaking_80',
-              'cb_damp_25',
-              'cb_failed_89',
-              'cb_misted_over_85',
-            ]
-          : [
-              'cb_cracked',
-              'cb_damaged',
-              'cb_rotten',
-              'cb_leaking',
-              'cb_damp',
-              'cb_failed',
-              'cb_misted_over',
-            ],
-      answers,
-      {
-        'cb_cracked': 'Cracked',
-        'cb_damaged': 'Damaged',
-        'cb_rotten': 'Rotten',
-        'cb_leaking': 'Leaking',
-        'cb_damp': 'Damp',
-        'cb_failed': 'Failed',
-        'cb_misted_over': 'Misted over',
-        'cb_cracked_51': 'Badly cracked',
-        'cb_damaged_22': 'Severely damaged',
-        'cb_rotten_46': 'Badly rotten',
-        'cb_leaking_80': 'Severely leaking',
-        'cb_damp_25': 'Causing damp',
-        'cb_failed_89': 'Failed',
-        'cb_misted_over_85': 'Misted over',
-      },
-    );
-    if (isNow) {
-      final otherNow = (answers['et_other_430'] ?? '').trim();
-      if (_isChecked(answers['cb_other_350']) && otherNow.isNotEmpty) {
-        defects.add(otherNow);
-      }
-    } else {
-      final otherSoon = (answers['et_other_346'] ?? '').trim();
-      if (_isChecked(answers['cb_other_519']) && otherSoon.isNotEmpty) {
-        defects.add(otherSoon);
-      }
-    }
-    if (defects.isEmpty) return const [];
-
-    final location = _cpRepairLocationFromScreen(screenId);
-    var repair = _sub('{E_CONSERVATORY_PORCHES}',
-        isNow ? '{CP_REPAIR_NOW}' : '{CP_REPAIR_SOON}');
-    if (repair.isEmpty) return const [];
-    repair = repair
-        .replaceAll('{CP_LOCATION}', location)
-        .replaceAll('{IS_ARE}', _isAreForSubject(location))
-        .replaceAll('{CP_DEFECT_SOON}', _toWords(defects).toLowerCase())
-        .replaceAll('{CP_DEFECT_NOW}', _toWords(defects).toLowerCase());
-
-    final wrapper =
-        _sub('{E_CONSERVATORY_PORCHES}', _cpRepairWrapper(screenId));
-    final result = wrapper.isEmpty
-        ? repair
-        : wrapper
-            .replaceAll('{CP_REPAIR_SOON}', isNow ? '' : repair)
-            .replaceAll('{CP_REPAIR_NOW}', isNow ? repair : '');
-    final phrases = _split(_normalize(result)).toList();
-    // RICS L2 rewrite (Phase 2B, E7): same judgment call as E6 - these
-    // repair screens have no dedicated "in disrepair"/"safety hazard"
-    // checkbox, so the spec's "if very poor is selected" comprehensive-
-    // repair addendum is derived from the existing Repair Now tier itself.
-    if (isNow) {
-      phrases.addAll(_split(_normalize(
-          _sub('{E_CONSERVATORY_PORCHES}', '{CP_DEFECT_IF_IN_DISREPAIR}'))));
-    }
-    return phrases;
-  }
-
-  List<String> _otherJoineryAbout(Map<String, String> answers) {
-    final items = _labelsFor(
-      ['cb_facias', 'cb_soffits', 'cb_bargeboards', 'cb_verge_clips'],
-      answers,
-      {
-        'cb_facias': 'Facias',
-        'cb_soffits': 'Soffits',
-        'cb_bargeboards': 'Bargeboards',
-        'cb_verge_clips': 'Verge clips',
-      },
-    );
-    _addOtherText(
-      answers,
-      'cb_other_326',
-      ['et_other_397', 'et_other_393'],
-      items,
-    );
-    final materials = _labelsFor(
-      ['cb_timber', 'cb_pvc', 'cb_slates'],
-      answers,
-      {
-        'cb_timber': 'Timber',
-        'cb_pvc': 'PVC',
-        'cb_slates': 'Slates',
-      },
-    );
-    _addOtherText(
-      answers,
-      'cb_other_397',
-      ['et_other_393', 'et_other_397'],
-      materials,
-    );
-    if (items.isEmpty || materials.isEmpty) return const [];
-    var template = _sub(
-        '{E_OTHER_JOINERY_AND_FINISHES}', '{ABOUT_OTHER_JOINERY_AND_FINISHES}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OJAF_ABOUT_EXTERNAL_WORK_INCLUDES}',
-            _toWords(items).toLowerCase())
-        .replaceAll('{OJAF_ABOUT_MATERIAL}', _toWords(materials).toLowerCase());
-    final phrases = _split(_normalize(template)).toList();
-
-    if (_isChecked(answers['cb_Redecorate'])) {
-      phrases.addAll(_split(_normalize(
-          _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{REPAIR_REDECORATE}'))));
-    }
-    if (_isChecked(answers['cb_open_runoffs']) ||
-        _isChecked(answers['cb_Is_Contain_Asbestos'])) {
-      final asbestos =
-          _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{CONTAIN_ASBESTOS}');
-      if (asbestos.isNotEmpty) {
-        phrases.addAll(_split(_normalize(asbestos)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _otherJoineryAsbestos(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_open_runoffs']) &&
-        !_isChecked(answers['cb_Is_Contain_Asbestos'])) {
-      return const [];
-    }
-    final template =
-        _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{CONTAIN_ASBESTOS}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  List<String> _otherJoineryRepairs(Map<String, String> answers) {
-    final items = _labelsFor(
-      [
-        'cb_facias',
-        'cb_soffits',
-        'cb_barge_boards',
-        'cb_verge_clips',
-        'cb_timber_cladding'
-      ],
-      answers,
-      {
-        'cb_facias': 'Facias',
-        'cb_soffits': 'Soffits',
-        'cb_barge_boards': 'Barge boards',
-        'cb_verge_clips': 'Verge clips',
-        'cb_timber_cladding': 'Timber cladding',
-      },
-    );
-    _addOtherText(answers, 'cb_other_289', ['et_other_178'], items);
-    final locations = _labelsFor(
-      [
-        'cb_main_building_86',
-        'cb_back_addition_47',
-        'cb_extension_25',
-        'cb_bay_window_61',
-        'cb_garage_21'
-      ],
-      answers,
-      {
-        'cb_main_building_86': 'Main building',
-        'cb_back_addition_47': 'Back addition',
-        'cb_extension_25': 'Extension',
-        'cb_bay_window_61': 'Bay window',
-        'cb_garage_21': 'Garage',
-      },
-    );
-    _addOtherText(answers, 'cb_other_269', ['et_other_567'], locations);
-    final defects = _labelsFor(
-      ['cb_rotted', 'cb_damaged', 'cb_poorly_secured', 'cb_incomplete'],
-      answers,
-      {
-        'cb_rotted': 'Rotted',
-        'cb_damaged': 'Damaged',
-        'cb_poorly_secured': 'Poorly secured',
-        'cb_incomplete': 'Incomplete',
-      },
-    );
-    _addOtherText(answers, 'cb_other_777', ['et_other_473'], defects);
-    if (items.isEmpty || locations.isEmpty || defects.isEmpty) return const [];
-    var template = _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{REPAIR_SOON}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{OJAF_REPAIR_ITEM}', _toWords(items).toLowerCase())
-        .replaceAll('{OJAF_REPAIR_LOCATION}', _toWords(locations).toLowerCase())
-        .replaceAll('{OJAF_REPAIR_DEFECT}', _toWords(defects).toLowerCase());
-    final phrases = _split(_normalize(template)).toList();
-    if (_isChecked(answers['cb_safety_hazard'])) {
-      phrases.addAll(_split(_normalize(
-          _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{REPAIR_SAFETY_HAZARD}'))));
-    }
-    return phrases;
-  }
-
-  List<String> _otherJoineryNotInspected(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    return _split(
-        _normalize(_sub('{E_OTHER_JOINERY_AND_FINISHES}', '{NOT_INSPECTED}')));
   }
 
   List<String> _otherJoineryConditionRating(Map<String, String> answers) {
