@@ -11224,6 +11224,215 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'North',
     whenAny: [['android_material_design_spinner', 'North-east'], ['android_material_design_spinner', 'East'], ['android_material_design_spinner', 'South-east'], ['android_material_design_spinner', 'South'], ['android_material_design_spinner', 'South-west'], ['android_material_design_spinner', 'West'], ['android_material_design_spinner', 'North-west']],
   ),
+  VerbatimRule(
+    'a2_type',
+    'activity_property_type',
+    '{D_PROPERTY_TYPE}',
+    '{A2_PROPERTY_TYPE}',
+    [
+      VerbatimToken(
+        '{A2_TYPE}',
+        options: {
+          'a2t_detached': 'detached',
+          'a2t_semi_detached': 'semi-detached',
+          'a2t_end_of_terrace': 'end-of-terrace',
+          'a2t_mid_terrace': 'mid-terrace',
+          'a2t_purpose_built_flat': 'purpose-built flat',
+          'a2t_converted_flat': 'converted flat',
+          'a2t_maisonette': 'maisonette',
+          'a2t_bungalow': 'bungalow',
+          'a2t_cottage': 'cottage',
+        },
+        otherCheckbox: 'a2t_other',
+        otherText: 'a2t_other_text',
+        pdfOptions: ['detached', 'semi-detached', 'end-of-terrace', 'mid-terrace', 'purpose-built flat', 'converted flat', 'maisonette', 'bungalow', 'cottage'],
+      ),
+      VerbatimToken(
+        '{A2_BEDROOMS}',
+        dropdown: 'actv_a2_bedrooms',
+        dropdownOptions: ['One', 'Two', 'Three', 'Four', 'Five', 'Six or more'],
+        lower: true,
+        pdfOptions: ['one', 'two', 'three', 'four', 'five', 'six or more'],
+      ),
+    ],
+    pdf:
+        'Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage, other providing one, two, three, four, five, six or more bedrooms.',
+    whenField: 'cb_a2_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a2_year_exact',
+    'activity_property_built_year',
+    '{D_YEAR_BUILT}',
+    '{A2_YEAR_EXACT}',
+    [
+      VerbatimToken(
+        '{A2_YEAR}',
+        text: 'android_material_design_spinner',
+      ),
+    ],
+    pdf:
+        'Year built: The property is understood to have been built in (enter year), pre-1900, 1900-1929, 1930-1949, 1950-1969, 1970-1989, 1990-2009, 2010 onwards, or the exact construction date is unknown.',
+    whenField: 'cb_a2_year_exact',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a2_year_band',
+    'activity_property_built_year',
+    '{D_YEAR_BUILT}',
+    '{A2_YEAR_BAND}',
+    [
+      VerbatimToken(
+        '{A2_BAND}',
+        dropdown: 'actv_a2_year_band',
+        dropdownOptions: ['pre-1900', '1900– 1929', '1930–1949', '1950–1969', '1970–1989', '1990–2009', '2010 onwards', 'the exact construction date is unknown'],
+        pdfOptions: ['pre-1900', '1900– 1929', '1930–1949', '1950–1969', '1970–1989', '1990–2009', '2010 onwards', 'the exact construction date is unknown'],
+      ),
+    ],
+    pdf:
+        'Year built: The property is understood to have been built in (enter year), pre-1900, 1900-1929, 1930-1949, 1950-1969, 1970-1989, 1990-2009, 2010 onwards, or the exact construction date is unknown.',
+    whenField: 'actv_a2_year_band',
+    whenValue: 'pre-1900',
+    whenAny: [['actv_a2_year_band', '1900– 1929'], ['actv_a2_year_band', '1930–1949'], ['actv_a2_year_band', '1950–1969'], ['actv_a2_year_band', '1970–1989'], ['actv_a2_year_band', '1990–2009'], ['actv_a2_year_band', '2010 onwards'], ['actv_a2_year_band', 'the exact construction date is unknown']],
+  ),
+  VerbatimRule(
+    'a2_not_extended',
+    'activity_property_extended',
+    '{D_EXTENDED}',
+    '{A2_NOT_EXTENDED}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Not extended',
+  ),
+  VerbatimRule(
+    'a2_extended',
+    'activity_property_extended',
+    '{D_EXTENDED}',
+    '{A2_EXTENDED}',
+    [
+      VerbatimToken(
+        '{A2_EXTENSION}',
+        options: {
+          'a2e_side': 'side',
+          'a2e_rear': 'rear',
+          'a2e_front': 'front',
+          'a2e_single_storey': 'single-storey',
+          'a2e_two_storey': 'two-storey',
+          'a2e_roof': 'roof',
+          'a2e_loft': 'loft',
+        },
+        pdfOptions: ['side', 'rear', 'front', 'single-storey', 'two-storey', 'roof', 'loft'],
+      ),
+    ],
+    pdf:
+        'Extended: The property has been extended to provide side, rear, front, single-storey, two-storey, roof, loft accommodation.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Extended',
+  ),
+  VerbatimRule(
+    'a2_not_converted',
+    'activity_property_converted',
+    '{D_CONVERTED}',
+    '{A2_NOT_CONVERTED}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Not converted',
+  ),
+  VerbatimRule(
+    'a2_converted',
+    'activity_property_converted',
+    '{D_CONVERTED}',
+    '{A2_CONVERTED}',
+    [
+      VerbatimToken(
+        '{A2_PRIOR_TYPE}',
+        options: {
+          'a2c_detached_house': 'detached house',
+          'a2c_semi_detached_house': 'semi-detached house',
+          'a2c_mid_terrace_house': 'mid-terrace house',
+          'a2c_end_terrace_house': 'end-terrace house',
+        },
+        otherCheckbox: 'a2c_other',
+        otherText: 'a2c_other_text',
+        pdfOptions: ['detached house', 'semi-detached house', 'mid-terrace house', 'end-terrace house'],
+      ),
+    ],
+    pdf:
+        'The property was a detached house, semi-detached house, mid-terrace house, end-terrace house, other, which has been converted to self-contained units.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Converted',
+  ),
+  VerbatimRule(
+    'a2_known_date',
+    'activity_property_converted',
+    '{D_CONVERTED}',
+    '{A2_KNOWN_DATE}',
+    [
+      VerbatimToken(
+        '{A2_YEAR_CONVERTED}',
+        text: 'textView3',
+      ),
+    ],
+    pdf:
+        'Known date: The year of conversion is (YYYY).',
+    whenField: 'actv_a2_conversion_date',
+    whenValue: 'Known date',
+  ),
+  VerbatimRule(
+    'a2_unknown_date',
+    'activity_property_converted',
+    '{D_CONVERTED}',
+    '{A2_UNKNOWN_DATE}',
+    [
+    ],
+    whenField: 'actv_a2_conversion_date',
+    whenValue: 'Unknown date',
+  ),
+  VerbatimRule(
+    'a2_flat',
+    'activity_property_flate',
+    '{D_FLAT_INFO}',
+    '{A2_FLAT_INFORMATION}',
+    [
+      VerbatimToken(
+        '{A2_FLOOR}',
+        dropdown: 'actv_a2_floor',
+        dropdownOptions: ['Lower ground floor', 'Ground floor', 'First floor', 'Second floor', 'Third floor', 'Fourth floor'],
+        lower: true,
+        pdfOptions: ['lower ground floor', 'ground floor', 'first floor', 'second floor', 'third floor', 'fourth floor'],
+      ),
+      VerbatimToken(
+        '{A2_STOREYS}',
+        dropdown: 'actv_a2_storeys',
+        dropdownOptions: ['One', 'Two', 'Three', 'Four'],
+        lower: true,
+        pdfOptions: ['one', 'two', 'three', 'four'],
+      ),
+      VerbatimToken(
+        '{A2_ACCESS}',
+        dropdown: 'actv_a2_access',
+        dropdownOptions: ['Private door', 'Communal door', 'Communal door with entry system'],
+        lower: true,
+        pdfOptions: ['private door', 'communal door', 'communal door with entry system'],
+      ),
+      VerbatimToken(
+        '{A2_ELEVATION}',
+        dropdown: 'actv_a2_elevation',
+        dropdownOptions: ['Front', 'Side', 'Rear'],
+        lower: true,
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+    ],
+    pdf:
+        'Flat information: The property is located on the lower ground floor, ground floor, first floor, second floor, third floor, fourth floor, other floor of a one, two, three, four, other storey building.',
+    pdfMore: [
+      'The property is accessed via a private door, communal door, communal door with entry system, other to the front, side, rear, elevation of the property.',
+    ],
+    whenField: 'cb_a2_flat',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

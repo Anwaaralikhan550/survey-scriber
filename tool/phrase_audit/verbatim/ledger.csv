@@ -17,24 +17,24 @@ aa5d09f023,Overall opinion,"Reasonable with repair: This property is believed to
 8daadd909f,Overall opinion,These defects are considered normal in properties of this age and construction.,EXACT,{OVERALL_OPINION_REASONABLE_WITH_REPAIR},100,DONE
 1af2a909fc,Overall opinion,"Provided that the works are carried out to a good standard, I cannot foresee any problems regarding a future resale of the property in normal market conditions.",EXACT,{OVERALL_OPINION_REASONABLE_WITH_REPAIR},100,DONE
 dcb9584d6c,Overall opinion,"(Although this appears in this part of the report, the field selection and input are captured at the end of the report to allow the surveyor to provide a comment based on the full post inspection assessment) Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage, other providing one, two, three, four, five, six or more bedrooms.",MENU,,0,UNVERIFIED
-5610692719,Overall opinion,"Year built: The property is understood to have been built in (enter year), pre-1900, 1900-1929, 1930-1949, 1950-1969, 1970-1989, 1990-2009, 2010 onwards, or the exact construction date is unknown.",MENU,,0,UNVERIFIED
+5610692719,Overall opinion,"Year built: The property is understood to have been built in (enter year), pre-1900, 1900-1929, 1930-1949, 1950-1969, 1970-1989, 1990-2009, 2010 onwards, or the exact construction date is unknown.",MENU,,0,VERIFIED
 9492ba2941,Overall opinion,"This assessment is based on available information, the apparent age and style of construction, and a visual inspection only.",EXACT,{D_YEAR_BUILT_I_THINK},100,DONE
 d6a87464df,Overall opinion,"Unless documentary evidence is available, the stated age should be regarded as an approximation.",EXACT,{D_YEAR_BUILT_I_THINK},100,DONE
 5d7e858f5a,Overall opinion,"Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",EXACT,{D_YEAR_BUILT_I_THINK},100,DONE
-91edc36ddb,Overall opinion,"Not Extended: From observable physical evidence, the property does not appear to have been extended.",EXACT,{D_PRO_EXTENDED_STATUS_NOT_EXTENDED},100,DONE
-429298bc94,Overall opinion,"Extended: The property has been extended to provide side, rear, front, single-storey, two-storey, roof, loft accommodation.",MENU,,0,UNVERIFIED
-d6993743e2,Overall opinion,The extension appears compatible with the original building in terms of construction and appearance.,ADD,{D_YEAR_BUILT_I_THINK},54,OPEN
-1a46619dc5,Overall opinion,"This assessment is based on a visual inspection only, and no opening-up or verification of concealed construction was undertaken.",ADD,{D_YEAR_BUILT_I_THINK},59,OPEN
-dacf403f00,Overall opinion,"Your legal adviser should confirm that all necessary statutory approvals, including planning permission, Building Regulations approval, and any completion certificates or guarantees, have been obtained where required.",UNRESOLVED,{D_PRO_CONVERSION_STATUS_UNKNOWN},60,OPEN
-4f507e4df0,Overall opinion,Not converted: The property has not been converted.,EXACT,{D_PRO_CONVERSION_STATUS_NOT_CONVERTED},100,DONE
-eb5eee599f,Overall opinion,Converted: The property has been converted from its original use.,EXACT,{D_PRO_CONVERSION_STATUS_KNOWN},100,DONE
-3e21b477fa,Overall opinion,"The property was a detached house, semi-detached house, mid-terrace house, end-terrace house, other, which has been converted to self-contained units.",MENU,,0,UNVERIFIED
-f09b92895d,Overall opinion,Known date: The year of conversion is (YYYY).,TOKENISED,{D_PRO_CONVERSION_STATUS_KNOWN},79,DONE
-6b3a62019c,Overall opinion,Your legal adviser should confirm that all statutory local authority consents and approvals are in place.,EXACT,{D_PRO_CONVERSION_STATUS_KNOWN},100,DONE
-9dae2647c0,Overall opinion,Unknown date: The date of conversion is unknown.,EXACT,{D_PRO_CONVERSION_STATUS_UNKNOWN},100,DONE
-e2362b310f,Overall opinion,Your legal adviser should verify that all appropriate statutory approvals and completion certificates were obtained.,EXACT,{D_PRO_CONVERSION_STATUS_UNKNOWN},100,DONE
-93be03bf12,Overall opinion,"Flat information: The property is located on the lower ground floor, ground floor, first floor, second floor, third floor, fourth floor, other floor of a one, two, three, four, other storey building.",MENU,,0,UNVERIFIED
-49fcd1770b,Overall opinion,"The property is accessed via a private door, communal door, communal door with entry system, other to the front, side, rear, elevation of the property.",UNRESOLVED,{OVERALL_OPINION_QUALITY},48,OPEN
+91edc36ddb,Overall opinion,"Not Extended: From observable physical evidence, the property does not appear to have been extended.",EXACT,{D_EXTENDED}::{A2_NOT_EXTENDED},100,DONE
+429298bc94,Overall opinion,"Extended: The property has been extended to provide side, rear, front, single-storey, two-storey, roof, loft accommodation.",MENU,,0,VERIFIED
+d6993743e2,Overall opinion,The extension appears compatible with the original building in terms of construction and appearance.,EXACT,{D_EXTENDED}::{A2_EXTENDED},100,DONE
+1a46619dc5,Overall opinion,"This assessment is based on a visual inspection only, and no opening-up or verification of concealed construction was undertaken.",EXACT,{D_EXTENDED}::{A2_EXTENDED},100,DONE
+dacf403f00,Overall opinion,"Your legal adviser should confirm that all necessary statutory approvals, including planning permission, Building Regulations approval, and any completion certificates or guarantees, have been obtained where required.",EXACT,{D_EXTENDED}::{A2_EXTENDED},100,DONE
+4f507e4df0,Overall opinion,Not converted: The property has not been converted.,EXACT,{D_CONVERTED}::{A2_NOT_CONVERTED},100,DONE
+eb5eee599f,Overall opinion,Converted: The property has been converted from its original use.,EXACT,{D_CONVERTED}::{A2_CONVERTED},100,DONE
+3e21b477fa,Overall opinion,"The property was a detached house, semi-detached house, mid-terrace house, end-terrace house, other, which has been converted to self-contained units.",MENU,,0,VERIFIED
+f09b92895d,Overall opinion,Known date: The year of conversion is (YYYY).,MENU,,0,VERIFIED
+6b3a62019c,Overall opinion,Your legal adviser should confirm that all statutory local authority consents and approvals are in place.,EXACT,{D_CONVERTED}::{A2_KNOWN_DATE},100,DONE
+9dae2647c0,Overall opinion,Unknown date: The date of conversion is unknown.,EXACT,{D_CONVERTED}::{A2_UNKNOWN_DATE},100,DONE
+e2362b310f,Overall opinion,Your legal adviser should verify that all appropriate statutory approvals and completion certificates were obtained.,EXACT,{D_CONVERTED}::{A2_UNKNOWN_DATE},100,DONE
+93be03bf12,Overall opinion,"Flat information: The property is located on the lower ground floor, ground floor, first floor, second floor, third floor, fourth floor, other floor of a one, two, three, four, other storey building.",MENU,,0,VERIFIED
+49fcd1770b,Overall opinion,"The property is accessed via a private door, communal door, communal door with entry system, other to the front, side, rear, elevation of the property.",MENU,,0,VERIFIED
 2162ad7cc2,Overall opinion,Accommodation summary: The accommodation comprises: Ground Floor First Floor Second Floor Third Floor Loft Basement / Cellar Outbuildings The accommodation schedule contained within this report is provided for identification purposes only.,ADD,{OVERALL_OPINION_QUALITY},48,OPEN
 c3692ef9c2,Construction,"Type: The property is believed to be constructed using traditional masonry, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels, system-built, other construction.",MENU,,0,UNVERIFIED
 ecc45aae0e,Construction,"Roof type: The main roof is of pitched, flat, mansard construction formed with traditional cut timber, prefabricated trussed rafters, other structural members.",UNRESOLVED,{D_CONSTRUCTION}::{CONSTRUCTION_ROOF_AREA},61,OPEN

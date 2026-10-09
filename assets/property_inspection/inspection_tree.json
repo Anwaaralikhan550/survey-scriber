@@ -12,193 +12,85 @@
           "order": 1,
           "fields": [
             {
-              "id": "label_property_classification",
-              "label": "Property Classification",
+              "id": "cb_a2_type",
+              "label": "Property type",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a2_type",
+              "label": "The property is a",
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner",
-              "label": "Property Type",
-              "type": "dropdown",
-              "options": [
-                "House",
-                "Flat",
-                "Bungalow",
-                "Other "
-              ]
+              "id": "a2t_detached",
+              "label": "detached",
+              "type": "checkbox"
             },
             {
-              "id": "android_material_design_spinner3",
-              "label": "SubType",
-              "type": "dropdown",
-              "options": [
-                "Detached",
-                "Semi-Detached",
-                "End-of-Terrace",
-                "Mid-Terrace",
-                "linked-Coach",
-                "Linked-Semi-Detached",
-                "Other"
-              ],
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Flat",
-              "conditionalMode": "hide"
+              "id": "a2t_semi_detached",
+              "label": "semi-detached",
+              "type": "checkbox"
             },
             {
-              "id": "etOther",
+              "id": "a2t_end_of_terrace",
+              "label": "end-of-terrace",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_mid_terrace",
+              "label": "mid-terrace",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_purpose_built_flat",
+              "label": "purpose-built flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_converted_flat",
+              "label": "converted flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_maisonette",
+              "label": "maisonette",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_bungalow",
+              "label": "bungalow",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_cottage",
+              "label": "cottage",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "android_material_design_spinner3",
-              "conditionalValue": "Other",
+              "conditionalOn": "a2t_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "android_material_design_spinner4",
-              "label": "No.of Bedrooms",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10"
-              ],
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Flat",
-              "conditionalMode": "hide"
-            },
-            {
-              "id": "etHouseNoOfBedroomsOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner5",
-              "label": "Floor Location",
-              "type": "dropdown",
-              "options": [
-                "Lower ground",
-                "Ground",
-                "First",
-                "Second",
-                "Third",
-                "Fourth",
-                "Other"
-              ],
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Flat",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "etFloorLocationOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner5",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner6",
-              "label": "No.of Storey",
+              "id": "actv_a2_bedrooms",
+              "label": "Providing bedrooms",
               "type": "dropdown",
               "options": [
                 "One",
                 "Two",
                 "Three",
                 "Four",
-                "Other"
-              ],
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Flat",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "etNo.ofStoreyOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner6",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner7",
-              "label": "No.of Bedrooms",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10"
-              ],
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Flat",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "etNo.ofBedroomOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner7",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner8",
-              "label": "Flat Style",
-              "type": "dropdown",
-              "options": [
-                "Purpose built",
-                "Conversion",
-                "Other"
-              ],
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Flat",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "etFlatStyleOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner9",
-              "label": "Number of flats in the building",
-              "type": "dropdown",
-              "options": [
-                "Two",
-                "Four",
-                "Six",
-                "Eight",
-                "Other"
-              ],
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Flat",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "etNoOfFlatsOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner9",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
+                "Five",
+                "Six or more"
+              ]
             }
           ]
         },
@@ -300,27 +192,28 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_property_construction_year",
-              "label": "Property Construction Year",
-              "type": "label"
+              "id": "cb_a2_year_exact",
+              "label": "Exact year known",
+              "type": "checkbox"
             },
             {
               "id": "android_material_design_spinner",
-              "label": "Construction Year",
+              "label": "Year built (enter year)",
               "type": "text"
             },
             {
-              "id": "label_information_source",
-              "label": "Information Source",
-              "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner5",
-              "label": "Info. Source",
+              "id": "actv_a2_year_band",
+              "label": "Year built band",
               "type": "dropdown",
               "options": [
-                "I think",
-                "Vendor told me"
+                "pre-1900",
+                "1900– 1929",
+                "1930–1949",
+                "1950–1969",
+                "1970–1989",
+                "1990–2009",
+                "2010 onwards",
+                "the exact construction date is unknown"
               ]
             }
           ]
@@ -699,51 +592,52 @@
           "fields": [
             {
               "id": "android_material_design_spinner",
-              "label": "Status",
+              "label": "Extension",
               "type": "dropdown",
               "options": [
                 "Not extended",
-                "Known",
-                "Unknown"
+                "Extended"
               ]
             },
             {
-              "id": "textView3",
-              "label": "Year extended",
-              "type": "text"
-            },
-            {
-              "id": "label_exlocation",
-              "label": "Location",
+              "id": "label_a2_extension",
+              "label": "Extended to provide",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Front",
+              "id": "a2e_side",
+              "label": "side",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Side",
+              "id": "a2e_rear",
+              "label": "rear",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "Rear",
+              "id": "a2e_front",
+              "label": "front",
               "type": "checkbox"
             },
             {
-              "id": "ch4",
-              "label": "Other",
+              "id": "a2e_single_storey",
+              "label": "single-storey",
               "type": "checkbox"
             },
             {
-              "id": "etFloodingOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "ch4",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "a2e_two_storey",
+              "label": "two-storey",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2e_roof",
+              "label": "roof",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2e_loft",
+              "label": "loft",
+              "type": "checkbox"
             }
           ]
         },
@@ -1130,60 +1024,65 @@
           "order": 8,
           "fields": [
             {
-              "id": "label_property_conversion_status",
-              "label": "Property Conversion Status",
-              "type": "label"
-            },
-            {
               "id": "android_material_design_spinner",
-              "label": "Status",
+              "label": "Conversion",
               "type": "dropdown",
               "options": [
                 "Not converted",
-                "Known",
-                "Unknown"
+                "Converted"
               ]
             },
             {
-              "id": "android_material_design_spinner2",
-              "label": "Property Type",
-              "type": "dropdown",
-              "options": [
-                "Not converted",
-                "Known",
-                "Unknown"
-              ],
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Not converted",
-              "conditionalMode": "hide"
+              "id": "label_a2_prior_type",
+              "label": "The property was a",
+              "type": "label"
             },
             {
-              "id": "android_material_design_spinner3",
-              "label": "Sub Type",
-              "type": "dropdown",
-              "options": [
-                "Detached",
-                "Semi-Detached",
-                "End-of-Terrace",
-                "Mid-Terrace",
-                "Other"
-              ],
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Not converted",
-              "conditionalMode": "hide"
+              "id": "a2c_detached_house",
+              "label": "detached house",
+              "type": "checkbox"
             },
             {
-              "id": "etOther",
+              "id": "a2c_semi_detached_house",
+              "label": "semi-detached house",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2c_mid_terrace_house",
+              "label": "mid-terrace house",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2c_end_terrace_house",
+              "label": "end-terrace house",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2c_other",
               "label": "Other",
-              "type": "text"
+              "type": "checkbox"
+            },
+            {
+              "id": "a2c_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "a2c_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_a2_conversion_date",
+              "label": "Date of conversion",
+              "type": "dropdown",
+              "options": [
+                "Known date",
+                "Unknown date"
+              ]
             },
             {
               "id": "textView3",
-              "label": "Year converted",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Known",
-              "conditionalMode": "show"
+              "label": "Year of conversion",
+              "type": "text"
             }
           ]
         },
@@ -1368,92 +1267,53 @@
           "order": 10,
           "fields": [
             {
-              "id": "android_material_design_spinner",
-              "label": "What floor is the property",
+              "id": "cb_a2_flat",
+              "label": "Flat information",
+              "type": "checkbox"
+            },
+            {
+              "id": "actv_a2_floor",
+              "label": "Located on the",
               "type": "dropdown",
               "options": [
-                "Lower ground",
-                "Ground",
-                "First",
-                "Second",
-                "Third",
-                "Fourth",
-                "Other"
+                "Lower ground floor",
+                "Ground floor",
+                "First floor",
+                "Second floor",
+                "Third floor",
+                "Fourth floor"
               ]
             },
             {
-              "id": "etPropertyOnTheFloor",
-              "label": "What floor is the property",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner2",
-              "label": "No. of Storey",
+              "id": "actv_a2_storeys",
+              "label": "Storeys in the building",
               "type": "dropdown",
               "options": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10"
+                "One",
+                "Two",
+                "Three",
+                "Four"
               ]
             },
             {
-              "id": "etNoOFStorey",
-              "label": "No. of Storey",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner2",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner3",
-              "label": "Access Via",
+              "id": "actv_a2_access",
+              "label": "Accessed via a",
               "type": "dropdown",
               "options": [
-                "Lower ground",
-                "Ground",
-                "First",
-                "Second",
-                "Third",
-                "Fourth",
-                "Other"
+                "Private door",
+                "Communal door",
+                "Communal door with entry system"
               ]
             },
             {
-              "id": "etAccessVia",
-              "label": "Access Via",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner3",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Access Elevation",
+              "id": "actv_a2_elevation",
+              "label": "Elevation",
               "type": "dropdown",
               "options": [
                 "Front",
                 "Side",
-                "Rear",
-                "Other"
+                "Rear"
               ]
-            },
-            {
-              "id": "etAccesElevation",
-              "label": "Access Elevation",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
             }
           ]
         },

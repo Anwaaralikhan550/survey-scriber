@@ -2,57 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_scriber/features/property_inspection/domain/inspection_phrase_engine.dart';
 
 void main() {
-  group('InspectionPhraseEngine - property extended', () {
-    const phraseTexts = <String, String>{
-      '{D_PRO_EXTENDED_STATUS_KNOWN}':
-          '<strong>Known:</strong> The year of the {PRO_EXTENDED_LOCATION} extension is {PRO_EXTENDED_DATE}.',
-      '{D_PRO_EXTENDED_STATUS_UNKNOWN}':
-          '<strong>Unknown:</strong> The year of the {PRO_EXTENDED_LOCATION} extension is not known.',
-      '{D_PRO_EXTENDED_STATUS_NOT_EXTENDED}':
-          '<strong>Not Extended:</strong> The property has not been extended.',
-    };
-
-    test('uses selected location checkboxes for known status', () {
-      const engine = InspectionPhraseEngine(phraseTexts);
-      final phrases = engine.buildPhrases('activity_property_extended', {
-        'android_material_design_spinner': 'Known',
-        'textView3': '2001',
-        'ch1': 'true',
-        'ch3': 'true',
-      });
-
-      expect(phrases, isNotEmpty);
-      expect(phrases.first.toLowerCase(), contains('front and rear extension'));
-      expect(phrases.first, contains('2001'));
-      expect(phrases.first, isNot(contains('...')));
-    });
-  });
-
-  group('InspectionPhraseEngine - flat maisonettes', () {
-    const phraseTexts = <String, String>{
-      '{D_FLAT_INFORMATION}':
-          'Flat info: {FLAT_INFO_PRO_ON_FLOOR}, {FLAT_INFO_PRO_NO_OF_STOREY}, {FLAT_INFO_PRO_ACCESS_VIA}, {FLAT_INFO_PRO_ACCESS_ELEVATION}.',
-    };
-
-    test('uses companion text value when dropdown selection is Other', () {
-      const engine = InspectionPhraseEngine(phraseTexts);
-      final phrases = engine.buildPhrases('activity_property_flate', {
-        'android_material_design_spinner': 'Other',
-        'etPropertyOnTheFloor': 'Mezzanine',
-        'android_material_design_spinner2': '4',
-        'android_material_design_spinner3': 'Other',
-        'etAccessVia': 'private stairs',
-        'android_material_design_spinner4': 'Other',
-        'etAccesElevation': 'north side',
-      });
-
-      expect(phrases, isNotEmpty);
-      expect(phrases.first.toLowerCase(), contains('mezzanine'));
-      expect(phrases.first.toLowerCase(), contains('private stairs'));
-      expect(phrases.first.toLowerCase(), contains('north side'));
-    });
-  });
-
   group('InspectionPhraseEngine - construction roof', () {
     const phraseTexts = <String, String>{};
 

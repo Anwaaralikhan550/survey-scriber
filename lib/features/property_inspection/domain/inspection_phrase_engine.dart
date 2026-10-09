@@ -719,17 +719,17 @@ class InspectionPhraseEngine {
 
       // ── Section D: About the Property ──
       case 'activity_property_type':
-        return _propertyType(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_construction':
         return _propertyConstruction(answers);
       case 'activity_property_built_year':
-        return _propertyBuiltYear(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_roof':
         return _propertyRoof(answers);
       case 'activity_property_ground_area':
         return _propertyGroundArea(answers);
       case 'activity_property_extended':
-        return _propertyExtended(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_extended_wall':
         return _extendedWall(answers);
       case 'activity_parking':
@@ -742,9 +742,9 @@ class InspectionPhraseEngine {
       case 'activity_communal_garden':
         return _sectionDGarden(answers, 'communal');
       case 'activity_property_converted':
-        return _propertyConverted(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_flate':
-        return _propertyFlatInfo(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_construction_floor':
         return _constructionFloor(answers);
       case 'activity_construction_window':
@@ -2553,59 +2553,6 @@ class InspectionPhraseEngine {
 
   // ── Section D: About the Property ──────────────────────────────
 
-  List<String> _propertyType(Map<String, String> answers) {
-    final type = (answers['android_material_design_spinner'] ?? '').trim();
-    if (type.isEmpty) return const [];
-
-    if (type.toLowerCase() == 'flat') {
-      final template = _phraseTexts['{D_PROPERTY_TYPE_FLAT}'] ?? '';
-      if (template.isEmpty) return const [];
-      final bedrooms =
-          (answers['android_material_design_spinner7'] ?? '').trim();
-      final flatStyle =
-          (answers['android_material_design_spinner8'] ?? '').trim();
-      final floorLocation =
-          (answers['android_material_design_spinner5'] ?? '').trim();
-      final noOfStorey =
-          (answers['android_material_design_spinner6'] ?? '').trim();
-      final totalFlats =
-          (answers['android_material_design_spinner9'] ?? '').trim();
-      // All five details are required to complete this sentence; a literal
-      // "..." placeholder for any missing one is not acceptable in a
-      // finalised client report, so wait until every field is answered.
-      if (bedrooms.isEmpty ||
-          flatStyle.isEmpty ||
-          floorLocation.isEmpty ||
-          noOfStorey.isEmpty ||
-          totalFlats.isEmpty) {
-        return const [];
-      }
-      final resolved = _normalize(template)
-          .replaceAll('{FLAT_NO_OF_BEDROOMS}', bedrooms)
-          .replaceAll('{FLAT_TYPE}', flatStyle.toLowerCase())
-          .replaceAll('{FLAT_FLOOR_LOCATION}', floorLocation.toLowerCase())
-          .replaceAll('{FLAT_NO_OF_STOREY}', noOfStorey.toLowerCase())
-          .replaceAll('{FLAT_TOTAL_FLATS}', totalFlats.toLowerCase());
-      return _split(resolved);
-    }
-
-    final template = _phraseTexts['{D_PROPERTY_TYPE_HOUSE}'] ?? '';
-    if (template.isEmpty) return const [];
-    final subType = (answers['android_material_design_spinner3'] ?? '').trim();
-    final bedrooms = (answers['android_material_design_spinner4'] ?? '').trim();
-    if (subType.isEmpty || bedrooms.isEmpty) return const [];
-    var resolved = _normalize(template)
-        .replaceAll('{HOUSE_SUB_TYPE}', subType.toLowerCase())
-        .replaceAll('{HOUSE_TYPE}', type.toLowerCase())
-        .replaceAll('{HOUSE_NO_OF_BEDROOMS}', bedrooms);
-    // The template's trailing "bedrooms" is fixed plural; singularise it
-    // when the count is 1 ("1 bedrooms" -> "1 bedroom").
-    if (bedrooms.trim() == '1') {
-      resolved = resolved.replaceFirst('1 bedrooms', '1 bedroom');
-    }
-    return _split(resolved);
-  }
-
   List<String> _propertyConstruction(Map<String, String> answers) {
     final items = <String>[];
     if (_isChecked(answers['ch1']))
@@ -2652,21 +2599,6 @@ class InspectionPhraseEngine {
       if (concrete.isNotEmpty) result.addAll(_split(_normalize(concrete)));
     }
     return result;
-  }
-
-  List<String> _propertyBuiltYear(Map<String, String> answers) {
-    final year = (answers['android_material_design_spinner'] ?? '').trim();
-    if (year.isEmpty) return const [];
-    final source = (answers['android_material_design_spinner5'] ?? '')
-        .trim()
-        .toLowerCase();
-    final key = source.contains('vendor')
-        ? '{D_YEAR_BUILT_VENDOR_TOLD_ME}'
-        : '{D_YEAR_BUILT_I_THINK}';
-    final template = _phraseTexts[key] ?? '';
-    if (template.isEmpty) return const [];
-    final resolved = _normalize(template).replaceAll('{PRO_BUILT_YEAR}', year);
-    return _split(resolved);
   }
 
   List<String> _propertyRoof(Map<String, String> answers) {
@@ -2775,48 +2707,6 @@ class InspectionPhraseEngine {
     return _splitResolved(
       template.replaceAll('{AREA_TYPE}', _toWords(items)),
     );
-  }
-
-  List<String> _propertyExtended(Map<String, String> answers) {
-    final status =
-        (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
-    if (status.isEmpty) return const [];
-    if (status.contains('not extended')) {
-      return _resolve('{D_PRO_EXTENDED_STATUS_NOT_EXTENDED}');
-    }
-    final locations = <String>[];
-    if (_isChecked(answers['ch1'])) locations.add('front');
-    if (_isChecked(answers['ch2'])) locations.add('side');
-    if (_isChecked(answers['ch3'])) locations.add('rear');
-    if (_isChecked(answers['ch4'])) {
-      final other = (answers['etFloodingOther'] ?? '').trim();
-      locations.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    final location = locations.isNotEmpty
-        ? _toWords(locations)
-        : (answers['android_material_design_spinner3'] ?? '').trim();
-    final year = (answers['textView3'] ?? '').trim();
-    // Both details are required to complete this sentence; a literal "..."
-    // placeholder is not acceptable in a finalised client report, so wait
-    // until the surveyor has answered both.
-    if (status == 'known') {
-      if (location.isEmpty || year.isEmpty) return const [];
-      final template = _phraseTexts['{D_PRO_EXTENDED_STATUS_KNOWN}'] ?? '';
-      if (template.isEmpty) return const [];
-      final resolved = _normalize(template)
-          .replaceAll('{PRO_EXTENDED_LOCATION}', location.toLowerCase())
-          .replaceAll('{PRO_EXTENDED_DATE}', year);
-      return _split(resolved);
-    }
-    if (status == 'unknown') {
-      if (location.isEmpty) return const [];
-      final template = _phraseTexts['{D_PRO_EXTENDED_STATUS_UNKNOWN}'] ?? '';
-      if (template.isEmpty) return const [];
-      final resolved = _normalize(template)
-          .replaceAll('{PRO_EXTENDED_LOCATION}', location.toLowerCase());
-      return _split(resolved);
-    }
-    return const [];
   }
 
   List<String> _extendedWall(Map<String, String> answers) {
@@ -3035,78 +2925,6 @@ class InspectionPhraseEngine {
         .replaceAll(typeToken, surfaceText)
         .replaceAll('{GARDEN_BOUNDRY_FENCES}', fenceSentence);
     return _splitResolved(template);
-  }
-
-  List<String> _propertyConverted(Map<String, String> answers) {
-    final status =
-        (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
-    if (status.isEmpty) return const [];
-    if (status.contains('not converted')) {
-      return _resolve('{D_PRO_CONVERSION_STATUS_NOT_CONVERTED}');
-    }
-    final proType = (answers['android_material_design_spinner2'] ?? '').trim();
-    final subType = (answers['android_material_design_spinner3'] ?? '').trim();
-    final year = (answers['textView3'] ?? '').trim();
-    // All details are required to complete these sentences; a literal "..."
-    // placeholder is not acceptable in a finalised client report, so wait
-    // until the surveyor has answered them.
-    if (status == 'known') {
-      if (subType.isEmpty || proType.isEmpty || year.isEmpty) return const [];
-      final template = _phraseTexts['{D_PRO_CONVERSION_STATUS_KNOWN}'] ?? '';
-      if (template.isEmpty) return const [];
-      final resolved = _normalize(template)
-          .replaceAll('{PRO_CONVERSION_PRO_SUB_TYPE}', subType.toLowerCase())
-          .replaceAll('{PRO_CONVERSION_PRO_TYPE}', proType.toLowerCase())
-          .replaceAll('{PRO_CONVERSION_DATE}', year);
-      return _split(resolved);
-    }
-    if (status == 'unknown') {
-      if (subType.isEmpty || proType.isEmpty) return const [];
-      final template = _phraseTexts['{D_PRO_CONVERSION_STATUS_UNKNOWN}'] ?? '';
-      if (template.isEmpty) return const [];
-      final resolved = _normalize(template)
-          .replaceAll('{PRO_CONVERSION_PRO_SUB_TYPE}', subType.toLowerCase())
-          .replaceAll('{PRO_CONVERSION_PRO_TYPE}', proType.toLowerCase());
-      return _split(resolved);
-    }
-    return const [];
-  }
-
-  List<String> _propertyFlatInfo(Map<String, String> answers) {
-    String pickValue(String dropdownId, String otherId) {
-      final dropdown = (answers[dropdownId] ?? '').trim();
-      if (dropdown.toLowerCase() == 'other') {
-        final other = (answers[otherId] ?? '').trim();
-        return other.isNotEmpty ? other : dropdown;
-      }
-      if (dropdown.isNotEmpty) return dropdown;
-      return (answers[otherId] ?? '').trim();
-    }
-
-    final onFloor =
-        pickValue('android_material_design_spinner', 'etPropertyOnTheFloor');
-    if (onFloor.isEmpty) return const [];
-    final template = _phraseTexts['{D_FLAT_INFORMATION}'] ?? '';
-    if (template.isEmpty) return const [];
-    final noOfStorey =
-        pickValue('android_material_design_spinner2', 'etNoOFStorey');
-    final accessVia =
-        pickValue('android_material_design_spinner3', 'etAccessVia');
-    final accessElevation =
-        pickValue('android_material_design_spinner4', 'etAccesElevation');
-    // All four details are required to complete this sentence; a literal
-    // "..." placeholder is not acceptable in a finalised client report, so
-    // wait until the surveyor has answered them all.
-    if (noOfStorey.isEmpty || accessVia.isEmpty || accessElevation.isEmpty) {
-      return const [];
-    }
-    final resolved = _normalize(template)
-        .replaceAll('{FLAT_INFO_PRO_ON_FLOOR}', onFloor.toLowerCase())
-        .replaceAll('{FLAT_INFO_PRO_NO_OF_STOREY}', noOfStorey)
-        .replaceAll('{FLAT_INFO_PRO_ACCESS_VIA}', accessVia.toLowerCase())
-        .replaceAll(
-            '{FLAT_INFO_PRO_ACCESS_ELEVATION}', accessElevation.toLowerCase());
-    return _split(resolved);
   }
 
   List<String> _constructionFloor(Map<String, String> answers) {

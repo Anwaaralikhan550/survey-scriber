@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1956,
-   "approvedLegacyBank": 191,
-   "approvedCurrentBankOnly": 1738,
+   "distinctEmitted": 1939,
+   "approvedLegacyBank": 192,
+   "approvedCurrentBankOnly": 1720,
    "unapproved": 0
   }
  },
@@ -22,19 +22,19 @@
    "sectionKey": "D",
    "screenId": "activity_property_type",
    "title": "Property Type",
-   "dataFieldCount": 15,
-   "permutationCount": 103,
+   "dataFieldCount": 13,
+   "permutationCount": 25,
    "severities": [],
    "phraseStats": {
-    "total": 19,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 19,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is a detached house providing 1 bedroom.",
-    "The property is a 1 bedroom purpose built flat on the lower ground floor of a one-story building containing two flats.",
-    "The property is a detached bungalow providing 1 bedroom."
+    "Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage and sample detail providing one bedrooms.",
+    "Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage and sample detail providing two bedrooms.",
+    "Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage and sample detail providing three bedrooms."
    ]
   },
   {
@@ -60,18 +60,19 @@
    "sectionKey": "D",
    "screenId": "activity_property_built_year",
    "title": "Property Built",
-   "dataFieldCount": 2,
-   "permutationCount": 6,
+   "dataFieldCount": 3,
+   "permutationCount": 19,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 9,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 9,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is understood to have been constructed in approximately sample detail. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
-    "The vendor informed me during my inspection that the property was constructed in approximately sample detail."
+    "Year built: The property is understood to have been built in pre-1900. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
+    "Year built: The property is understood to have been built in 1900– 1929. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
+    "Year built: The property is understood to have been built in 1930–1949. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction."
    ]
   },
   {
@@ -152,8 +153,8 @@
    "sectionKey": "D",
    "screenId": "activity_property_extended",
    "title": "Year Extended",
-   "dataFieldCount": 7,
-   "permutationCount": 13,
+   "dataFieldCount": 8,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
     "total": 2,
@@ -162,8 +163,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "From observable physical evidence, the property does not appear to have been extended.",
-    "The property has been extended to provide front, side, rear and sample detail accommodation. The extension appears generally compatible with the original building. Confirmation of statutory approvals should be obtained by your legal adviser where appropriate."
+    "Not Extended: From observable physical evidence, the property does not appear to have been extended.",
+    "Extended: The property has been extended to provide side, rear, front, single-storey, two-storey, roof and loft accommodation. The extension appears compatible with the original building in terms of construction and appearance. This assessment is based on a visual inspection only, and no opening-up or verification of concealed construction was undertaken. Your legal adviser should confirm that all necessary statutory approvals, including planning permission, Building Regulations approval, and any completion certificates or guarantees, have been obtained where required."
    ]
   },
   {
@@ -222,19 +223,19 @@
    "sectionKey": "D",
    "screenId": "activity_property_converted",
    "title": "Year Converted",
-   "dataFieldCount": 5,
-   "permutationCount": 23,
+   "dataFieldCount": 9,
+   "permutationCount": 15,
    "severities": [],
    "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
+    "total": 4,
+    "approvedLegacy": 1,
     "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property has not been converted.",
-    "The property has been converted from its original use. The property was a detached not converted which has been converted to self-contained units. The date of conversion is sample detail. Your legal adviser should confirm that all statutory local authority consents and approvals are in place.",
-    "The property has been converted from its original use. The property was a detached not converted which has been converted to self-contained units. The date of conversion is unknown. Your legal adviser should verify that all appropriate statutory approvals and completion certificates were obtained."
+    "Unknown date: The date of conversion is unknown. Your legal adviser should verify that all appropriate statutory approvals and completion certificates were obtained.",
+    "Known date: The year of conversion is sample detail. Your legal adviser should confirm that all statutory local authority consents and approvals are in place.",
+    "Converted: The property has been converted from its original use. The property was a detached house, semi-detached house, mid-terrace house, end-terrace house and sample detail, which has been converted to self-contained units."
    ]
   },
   {
@@ -279,19 +280,19 @@
    "sectionKey": "D",
    "screenId": "activity_property_flate",
    "title": "Flat Maisonettes",
-   "dataFieldCount": 8,
-   "permutationCount": 58,
+   "dataFieldCount": 5,
+   "permutationCount": 31,
    "severities": [],
    "phraseStats": {
-    "total": 25,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 25,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is located on the lower ground floor of a 1-storey building. The property is accessed via a lower ground to the front elevation of the property.",
-    "The property is located on the ground floor of a 1-storey building. The property is accessed via a lower ground to the front elevation of the property.",
-    "The property is located on the first floor of a 1-storey building. The property is accessed via a lower ground to the front elevation of the property."
+    "Flat information: The property is located on the lower ground floor of a one storey building. The property is accessed via a private door to the front elevation of the property.",
+    "Flat information: The property is located on the ground floor of a one storey building. The property is accessed via a private door to the front elevation of the property.",
+    "Flat information: The property is located on the first floor of a one storey building. The property is accessed via a private door to the front elevation of the property."
    ]
   },
   {

@@ -39,35 +39,37 @@
    "section": "D",
    "screen": "activity_property_type",
    "phrases": [
-    "The property is a detached house providing 1 bedroom."
+    "Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow and cottage providing one bedrooms."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_built_year",
    "phrases": [
-    "The property is understood to have been constructed in approximately sample detail. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction."
+    "Year built: The property is understood to have been built in sample detail. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
+    "Year built: The property is understood to have been built in pre-1900. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_extended",
    "phrases": [
-    "From observable physical evidence, the property does not appear to have been extended."
+    "Not Extended: From observable physical evidence, the property does not appear to have been extended."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_converted",
    "phrases": [
-    "The property has not been converted."
+    "Not converted: The property has not been converted.",
+    "Known date: The year of conversion is sample detail. Your legal adviser should confirm that all statutory local authority consents and approvals are in place."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_flate",
    "phrases": [
-    "The property is located on the lower ground floor of a 1-storey building. The property is accessed via a lower ground to the front elevation of the property."
+    "Flat information: The property is located on the lower ground floor of a one storey building. The property is accessed via a private door to the front elevation of the property."
    ]
   },
   {
@@ -1050,7 +1052,7 @@
    "section": "D",
    "screen": "activity_property_type",
    "phrases": [
-    "The property is a detached house providing 1 bedroom."
+    "Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow and cottage providing one bedrooms."
    ]
   },
   {
@@ -1067,7 +1069,8 @@
    "section": "D",
    "screen": "activity_property_built_year",
    "phrases": [
-    "The property is understood to have been constructed in approximately sample detail. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction."
+    "Year built: The property is understood to have been built in sample detail. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
+    "Year built: The property is understood to have been built in pre-1900. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction."
    ]
   },
   {
@@ -1104,7 +1107,7 @@
    "section": "D",
    "screen": "activity_property_extended",
    "phrases": [
-    "From observable physical evidence, the property does not appear to have been extended."
+    "Not Extended: From observable physical evidence, the property does not appear to have been extended."
    ]
   },
   {
@@ -1134,7 +1137,8 @@
    "section": "D",
    "screen": "activity_property_converted",
    "phrases": [
-    "The property has not been converted."
+    "Not converted: The property has not been converted.",
+    "Known date: The year of conversion is sample detail. Your legal adviser should confirm that all statutory local authority consents and approvals are in place."
    ]
   },
   {
@@ -1155,7 +1159,7 @@
    "section": "D",
    "screen": "activity_property_flate",
    "phrases": [
-    "The property is located on the lower ground floor of a 1-storey building. The property is accessed via a lower ground to the front elevation of the property."
+    "Flat information: The property is located on the lower ground floor of a one storey building. The property is accessed via a private door to the front elevation of the property."
    ]
   },
   {
