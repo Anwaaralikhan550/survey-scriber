@@ -13139,6 +13139,92 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_oo_repair',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'j3_trip',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_TRIP_HAZARDS}',
+    [
+      VerbatimToken(
+        '{J3_TRIP_LIST}',
+        options: {
+          'j3t_uneven_paving': 'uneven paving',
+          'j3t_damaged_steps': 'damaged steps',
+          'j3t_raised_thresholds': 'raised thresholds',
+          'j3t_uneven_floor_surfaces': 'uneven floor surfaces',
+          'j3t_loose_floor_coverings': 'loose floor coverings',
+          'j3t_damaged_decking': 'damaged decking',
+        },
+        otherCheckbox: 'j3t_other',
+        otherText: 'j3t_other_text',
+        pdfOptions: ['uneven paving', 'damaged steps', 'raised thresholds', 'uneven floor surfaces', 'loose floor coverings', 'damaged decking'],
+      ),
+    ],
+    pdf:
+        'Trip Hazards: Potential trip hazards were identified, including uneven paving, damaged steps, raised thresholds, uneven floor surfaces, loose floor coverings, damaged decking, other.',
+    whenField: 'cb_j3_trip',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_stairs',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_DAMAGED_STAIRS}',
+    [
+    ],
+    whenField: 'cb_j3_stairs',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_electrical',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_ELECTRICAL_SAFETY}',
+    [
+    ],
+    whenField: 'cb_j3_electrical',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_gas',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_GAS_SAFETY}',
+    [
+    ],
+    whenField: 'cb_j3_gas',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_asbestos',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_ASBESTOS}',
+    [
+    ],
+    whenField: 'cb_j3_asbestos',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_mould',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_MOULD_GROWTH}',
+    [
+    ],
+    whenField: 'cb_j3_mould',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_general',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_GENERAL_ADVICE}',
+    [
+    ],
+    whenField: 'cb_j3_general',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

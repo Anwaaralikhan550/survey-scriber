@@ -12935,6 +12935,98 @@
           ]
         },
         {
+          "id": "activity_risks_risk_to_people_",
+          "title": "J3 Risk To People",
+          "type": "screen",
+          "parentId": null,
+          "order": 3,
+          "fields": [
+            {
+              "id": "cb_j3_trip",
+              "label": "Trip hazards",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_j3_trip_list",
+              "label": "Including",
+              "type": "label"
+            },
+            {
+              "id": "j3t_uneven_paving",
+              "label": "uneven paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "j3t_damaged_steps",
+              "label": "damaged steps",
+              "type": "checkbox"
+            },
+            {
+              "id": "j3t_raised_thresholds",
+              "label": "raised thresholds",
+              "type": "checkbox"
+            },
+            {
+              "id": "j3t_uneven_floor_surfaces",
+              "label": "uneven floor surfaces",
+              "type": "checkbox"
+            },
+            {
+              "id": "j3t_loose_floor_coverings",
+              "label": "loose floor coverings",
+              "type": "checkbox"
+            },
+            {
+              "id": "j3t_damaged_decking",
+              "label": "damaged decking",
+              "type": "checkbox"
+            },
+            {
+              "id": "j3t_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "j3t_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "j3t_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_j3_stairs",
+              "label": "Damaged stairs",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j3_electrical",
+              "label": "Electrical safety",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j3_gas",
+              "label": "Gas safety",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j3_asbestos",
+              "label": "Asbestos",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j3_mould",
+              "label": "Mould growth",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j3_general",
+              "label": "General advice",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
           "id": "activity_risks_other_",
           "title": "J4 Other",
           "type": "screen",

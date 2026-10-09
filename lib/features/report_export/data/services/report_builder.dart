@@ -83,6 +83,7 @@ class ReportBuilder {
     'activity_issues_glazed_sections',
     'activity_issues_other_matters',
     'activity_risks_risk_to_building_',
+    'activity_risks_risk_to_people_',
     'activity_risks_other_',
     'activity_risks_repair_or_improve',
     'activity_in_side_property_fire_places__other',
@@ -1355,154 +1356,6 @@ class ReportBuilder {
   // by visual inspection). So this function always returns 4 phrases,
   // never stays empty, matching spec's structure rather than J1-J3's
   // risk-triggered philosophy.
-  List<String> _legacyDerivedSectionFRiskToHealth(V2RawReportData rawData) {
-    final phrases = <String>[];
-
-    // Asbestos: RICS L2 treats this as one property-wide finding, not a
-    // per-location list, so this checks every screen across Sections E, F,
-    // G and H that records an asbestos-containing material and only
-    // distinguishes observed-vs-not-observed, matching spec's own
-    // two-branch wording exactly. Each of these screens already narrates
-    // its own specific asbestos content in place (E2 roof covering, F
-    // ceilings/walls, G water/drainage, H garage) - this is a property-wide
-    // summary in addition to that detail, the same "component narrates
-    // locally, J adds a risk-level summary" pattern J1-J3 already use.
-    const asbestosCheckboxSites = <String, List<String>>{
-      'activity_grounds_garage': ['cb_corrugated_asbestos_sheets'],
-      'activity_services_drainage': ['cb_material_asbestos_cement'],
-      'activity_services_water_water_tank': ['cb_asbestos'],
-      'activity_services_water_repair_main_screen': ['cb_asbestos_material'],
-      'activity_inside_property_ceilings_repairs_ceilings': [
-        'cb_contain_asbestos_material'
-      ],
-      'inside_property_ceilings_about_ceilings': ['cb_textured'],
-      'activity_inside_property_water_tank': ['cb_asbestos', 'cb_asbestos_disused'],
-      'activity_inside_property_wap_walls': ['cb_textured'],
-      'activity_outside_property_rwg_about': ['cb_asbestos_cement'],
-      'activity_outside_property_other_joinery_and_finishes_main_screen': [
-        'cb_open_runoffs'
-      ],
-      'outside_property_about_roof_layout': ['cb_composite'],
-      'outside_property_about_roof_layout__flat': ['cb_composite'],
-      'outside_property_about_roof_layout__mansard': ['cb_composite'],
-      'outside_property_about_roof_layout__other': ['cb_composite'],
-      'activity_inside_property_ceilings_contains_asbestos': [
-        'cb_lounge',
-        'cb_bedroom',
-        'cb_kitchen',
-        'cb_bathroom',
-        'cb_Property',
-      ],
-      'outside_property_roof_covering_asbestos_layout': [
-        'cb_roof_covering',
-        'cb_verge',
-        'cb_soffits',
-        'cb_other_654',
-      ],
-    };
-    var asbestosObserved = false;
-    for (final entry in asbestosCheckboxSites.entries) {
-      final answers = _answersForScreen(rawData, entry.key);
-      if (answers.isEmpty) continue;
-      if (entry.value.any((id) => _isCheckedValue(answers[id]))) {
-        asbestosObserved = true;
-        break;
-      }
-    }
-    if (!asbestosObserved) {
-      final disusedTank =
-          _answersForScreen(rawData, 'activity_services_water_disused_tank');
-      if ((disusedTank['actv_tank_formed_in'] ?? '').trim().toLowerCase() ==
-          'asbestos') {
-        asbestosObserved = true;
-      }
-    }
-    if (asbestosObserved) {
-      phrases.add(
-          _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS}') ??
-              'Materials that may contain asbestos were observed during the inspection. Where these materials remain in good condition and are left undisturbed, they do not normally present a significant health risk. Specialist advice should be obtained before disturbance or removal.');
-    } else {
-      phrases.add(
-          'No materials suspected of containing asbestos were identified during the inspection.');
-    }
-
-    // Lead: spec's own text has no "or" branch - it is a single
-    // unconditional advisory about older properties in general, not
-    // triggered by any specific answer.
-    phrases.add(
-        'Older properties may contain lead pipework, lead flashings, or lead-based paint. No testing has been undertaken during this inspection. Further advice should be obtained where refurbishment is proposed.');
-
-    // Mould Growth: F-section bathroom fittings and built-in fittings
-    // moulding screens.
-    var mouldObserved = false;
-    final builtInMoulding = _answersForScreen(
-        rawData,
-        'activity_in_side_property_built_in_fittings_repair_moulding_noted');
-    for (final id in const [
-      'cb_kitchen_sink',
-      'cb_Utility_room_sink',
-      'cb_other_717'
-    ]) {
-      if (_isCheckedValue(builtInMoulding[id])) {
-        mouldObserved = true;
-        break;
-      }
-    }
-    if (!mouldObserved) {
-      final bathroomMoulding = _answersForScreen(
-          rawData, 'activity_in_side_property_bathroom_fittings_mould');
-      for (final id in const [
-        'cb_bathtub',
-        'cb_wash_hand_basin',
-        'cb_shower_tray',
-        'cb_other_1061'
-      ]) {
-        if (_isCheckedValue(bathroomMoulding[id])) {
-          mouldObserved = true;
-          break;
-        }
-      }
-    }
-    if (mouldObserved) {
-      phrases.add(
-          _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_MOULD_GROWTH}') ??
-              'Localised mould growth associated with condensation was observed. Maintaining adequate heating and ventilation should assist in reducing further mould growth.');
-    } else {
-      phrases.add('No significant mould growth was observed.');
-    }
-
-    // Radon: cannot be determined by visual inspection - unconditional per
-    // spec, always fires the same as Lead above.
-    phrases.add(
-        'The presence of radon gas cannot be determined during a visual inspection. Where appropriate, your legal adviser should obtain environmental search information.');
-
-    return _cleanupPhrases(phrases);
-  }
-
-  // J5 Risks to the Security of the Property (Phase 2F): another brand-new
-  // spec element with no dedicated screen. Spec has 6 sub-topics (External
-  // Doors, Windows, External Lighting, Security Systems, Overall Risk
-  // Assessment, General Advice). Unlike J4's Asbestos/Mould, a door's or
-  // security-system's security LEVEL cannot be safely defaulted to a
-  // negative claim when the surveyor never actually recorded it - "no
-  // materials suspected of containing asbestos" is a true fact regardless
-  // of which checkbox fired, but "the doors provide reasonable security"
-  // is not a safe default when no door screen was ever touched. So Doors
-  // and Security Systems only fire when real data exists (J1-J3's
-  // silence-when-absent philosophy), while General Advice is genuine
-  // unconditional spec boilerplate (J4's Lead/Radon philosophy) and always
-  // fires. Windows, External Lighting and Overall Risk Assessment have no
-  // safe source to derive from at all - see the sign-off packet for why
-  // each is a flagged content gap rather than fabricated.
-  // Revised-spec general-maintenance advisory. Under the revised structure this
-  // closes J3 Risks to People (previously it closed the app's J5 Security).
-  static const String _riskGeneralMaintenanceAdvice =
-      'Buildings require regular inspection and maintenance throughout their '
-      'service life. Prompt attention to isolated defects will normally reduce '
-      'the likelihood of more extensive deterioration and costly future '
-      'repairs. Where specialist inspections have been recommended within this '
-      'report, these should be obtained before legal commitment where '
-      'practicable.';
 
   List<String> _labelsForAnswerMap(
     Map<String, String> answers,
@@ -2274,16 +2127,14 @@ class ReportBuilder {
         }
       }
 
-      // J3 Risks to People (synthesized): people-safety risks, then the former
-      // health risks (asbestos/mould/lead/radon), then the general-maintenance
-      // advisory - matching the revised J3 structure. Health always fires, so
-      // J3 is always present.
-      final j3People = _cleanupPhrases(<String>[
-        ..._legacyDerivedSectionFRiskToPeople(rawData),
-        ..._legacyDerivedSectionFRiskToHealth(rawData),
-        _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_GENERAL_ADVICE}') ??
-            _riskGeneralMaintenanceAdvice,
-      ]);
+      // J3 Risks to People: the native screen carries the PDF paragraphs and the
+      // cross-injected people-safety lines; only when it has no answers of its own
+      // are the cross-injections shown on a derived screen.
+      final hasNativeJ3 = screens.any((s) =>
+          s.screenId.trim().toLowerCase() == 'activity_risks_risk_to_people_');
+      final j3People = hasNativeJ3
+          ? const <String>[]
+          : _cleanupPhrases(_legacyDerivedSectionFRiskToPeople(rawData));
       if (j3People.isNotEmpty) {
         final insertAt = screens.indexWhere(
           (s) => s.screenId.trim().toLowerCase() == anchorId,
@@ -2541,6 +2392,12 @@ class ReportBuilder {
         cleaned = _cleanupPhrases([
           ...cleaned,
           ..._legacyDerivedSectionFRiskToBuilding(rawData),
+        ]);
+      }
+      if (normalizedId == 'activity_risks_risk_to_people_') {
+        cleaned = _cleanupPhrases([
+          ...cleaned,
+          ..._legacyDerivedSectionFRiskToPeople(rawData),
         ]);
       }
       if (normalizedId == 'activity_in_side_property_fire_places__other') {
