@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 373,
+  "screensAudited": 364,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2252,
-   "approvedLegacyBank": 529,
-   "approvedCurrentBankOnly": 1696,
+   "distinctEmitted": 2222,
+   "approvedLegacyBank": 487,
+   "approvedCurrentBankOnly": 1708,
    "unapproved": 0
   }
  },
@@ -1238,19 +1238,19 @@
    "sectionKey": "G",
    "screenId": "activity_services_drainage",
    "title": "Drainage",
-   "dataFieldCount": 21,
-   "permutationCount": 31,
+   "dataFieldCount": 27,
+   "permutationCount": 29,
    "severities": [],
    "phraseStats": {
-    "total": 11,
-    "approvedLegacy": 8,
-    "approvedCurrentBankOnly": 3,
+    "total": 9,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 9,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The rainwater gutters and pipes are shared with a neighbouring property or properties. You should check with your legal adviser about your rights and obligations (See Section I3).",
-    "The property is connected to a septic tank. This is a private drainage system that treats foul waste before discharging the effluent to a drainage field or other approved outfall. The installation was inspected visually only, and no assessment of its operation or compliance with current environmental regulations was undertaken. The system should be regularly maintained and emptied as recommended. Your legal adviser should confirm ownership, maintenance responsibilities, any permits or exemptions, and compliance with current regulations.",
-    "The property is connected to a cesspit (cesspool), which is an underground storage tank that collects foul waste and requires regular emptying by a licensed waste contractor. The installation was inspected visually only, and no assessment of its condition or capacity was undertaken. Your legal adviser should confirm ownership, maintenance responsibilities, and any records of regular emptying."
+    "Septic Tank: The property is connected to a septic tank. This is a private drainage system that treats foul waste before discharging the effluent to a drainage field or other approved outfall. The installation was inspected visually only, and no assessment of its operation or compliance with current environmental regulations was undertaken. The system should be regularly maintained and emptied as recommended. Your legal adviser should confirm ownership, maintenance responsibilities, any permits or exemptions, and compliance with current regulations.",
+    "Cesspit (Cesspool): The property is connected to a cesspit (cesspool), which is an underground storage tank that collects foul waste and requires regular emptying by a licensed waste contractor. The installation was inspected visually only, and no assessment of its condition or capacity was undertaken. Your legal adviser should confirm ownership, maintenance responsibilities, and any records of regular emptying.",
+    "Public Sewer: The property is connected to the public sewer. The drainage system is either combined (foul and surface water sharing the same pipework) or separate (foul and surface water discharged through separate pipework). Parts of the drainage system may pass through neighbouring properties or surrounding lands."
    ]
   },
   {
@@ -1327,16 +1327,21 @@
   {
    "sectionKey": "G",
    "screenId": "activity_services_drainage_repair_chamber_cover",
-   "title": "Chamber Cover",
-   "dataFieldCount": 1,
-   "permutationCount": 9,
+   "title": "Drainage Repairs",
+   "dataFieldCount": 35,
+   "permutationCount": 37,
    "severities": [],
    "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Tree Root Ingress: Tree roots were noted within the inspection chamber, indicating defects in the underground drainage system. If left untreated, root ingress is likely to worsen and cause recurring blockages. A suitably qualified drainage contractor should investigate and recommend repairs.",
+    "Asbestos Cement Soil Stack: The soil and vent pipe is constructed of asbestos cement. Provided it remains in good condition and is left undisturbed, it presents a low health risk. If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",
+    "Inspection Chamber Cover: The inspection chamber cover(s) are broken, corroded, poorly secured and sample detail and presents a safety hazard. It should be repaired or replaced without delay. The inspection chamber cover presents a safety hazard and should be repaired or replaced."
+   ]
   },
   {
    "sectionKey": "G",
@@ -1450,20 +1455,6 @@
   },
   {
    "sectionKey": "G",
-   "screenId": "activity_services_drainage_repair_chamber_walls",
-   "title": "Chamber Walls",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
    "screenId": "activity_services_shared_services_not_inspected",
    "title": "Not Inspected",
    "dataFieldCount": 1,
@@ -1511,34 +1502,6 @@
   },
   {
    "sectionKey": "G",
-   "screenId": "activity_services_drainage_repair_chamber_pipes",
-   "title": "Chamber Pipes",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_drainage_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
    "screenId": "activity_services_heating_main_screen",
    "title": "Heating",
    "dataFieldCount": 2,
@@ -1570,20 +1533,6 @@
   },
   {
    "sectionKey": "G",
-   "screenId": "activity_services_drainage_repair_soil_and_vent",
-   "title": "Soil and Vent",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 6,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
    "screenId": "activity_services_water_heating_main_screen",
    "title": "Water Heating",
    "dataFieldCount": 2,
@@ -1598,56 +1547,14 @@
   },
   {
    "sectionKey": "G",
-   "screenId": "activity_services_drainage_repair_roots_in_chamber",
-   "title": "Roots In Chamber",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
    "screenId": "activity_services_drainage_main_screen",
    "title": "Drainage",
    "dataFieldCount": 2,
    "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 6,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_drainage_repair_gullies",
-   "title": "Gullies",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
     "total": 5,
-    "approvedLegacy": 5,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_drainage_repair_defect_dampness",
-   "title": "Defects causing dampness",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
+    "approvedLegacy": 4,
     "approvedCurrentBankOnly": 0,
     "unapproved": 0
    }
@@ -1684,37 +1591,6 @@
     "Asbestos cement tank: The cold-water storage tank is constructed of asbestos cement. Provided it remains in good condition and is left undisturbed, it presents a low health risk. If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",
     "Damaged tank: The cold-water storage tank is damaged, not adequately supported, leaking, overflowing and sample detail. Repairs or replacement should be carried out by a suitably qualified plumber without delay."
    ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_drainage_chamber_lids",
-   "title": "Chamber Lids",
-   "dataFieldCount": 3,
-   "permutationCount": 11,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 5,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The rainwater gutters and pipes are shared with a neighbouring property or properties. You should check with your legal adviser about your rights and obligations (See Section I3)."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_drainage_public_system",
-   "title": "Public System",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
   },
   {
    "sectionKey": "F",

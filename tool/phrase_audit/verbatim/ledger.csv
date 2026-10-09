@@ -1418,7 +1418,7 @@ a8b1c45521,G3,This increases the risk of freezing during cold weather and may re
 bfd8edf885,G3,"Missing lid: The cold-water storage tank(s) has no lid, or the lid is not properly fitted, which may allow contamination of the stored water.",EXACT,{G_WATER}::{G3_MISSING_LID},100,DONE
 e69e800e40,G3,A suitable close-fitting lid should be installed as soon as possible.,EXACT,{G_WATER}::{G3_MISSING_LID},100,DONE
 3922735c7f,G3,Asbestos cement tank: The cold-water storage tank is constructed of asbestos cement.,EXACT,{G_WATER}::{G3_ASBESTOS_TANK},100,DONE
-2f088b8ca5,G3,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",EXACT,{G_WATER}::{G3_ASBESTOS_TANK},100,DONE
+2f088b8ca5,G3,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",EXACT,{G_DRAINAGE}::{G6_ASBESTOS_SOIL_STACK},100,DONE
 e511290e50,G3,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,UNVERIFIED
 ee251b97c2,G3,The visible water supply pipework comprises plastic and/or copper.,EXACT,{G_WATER}::{STANDARD_TEXT_2},100,DONE
 ffb22bb82f,G3,"Much of the plumbing is concealed within the structure, and the routing, support, joints, and condition of hidden pipework could not be assessed during this visual inspection.",MENU,,0,UNVERIFIED
@@ -1485,51 +1485,51 @@ bf277d4115,G5,"The installation was inspected visually only, and no operational 
 bd76685055,G5,Routine maintenance should be carried out in accordance with the manufacturer's recommendations.,EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE
 87a45504e2,G5,"The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection.",EXACT,{G_ELECTRICITY}::{G1_SOLAR_THERMAL},100,DONE
 ee8232044e,G5,"Your legal adviser should verify that any required Building Regulations approval, commissioning documentation and any available warranties or guarantees are provided.",EXACT,{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING},100,DONE
-a5596b97d6,G6,Inspection of the accessible inspection chamber(s) cannot confirm the condition of the concealed drainage system.,ADD,{G_DRAINAGE}::{PUBLIC_SYSTEM_STATUS_NOT_INSPECTED},55,OPEN
-f72cbbb4ac,G6,"Hidden defects may still be present and can only be identified by specialist testing, such as a CCTV drain survey.",ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},47,OPEN
-112a6564c2,G6,Septic Tank: The property is connected to a septic tank.,EXACT,{G_DRAINAGE}::{PRIVATE_SYSTEM_SEPTIC_TANK},100,DONE
-964c3f7f5a,G6,This is a private drainage system that treats foul waste before discharging the effluent to a drainage field or other approved outfall.,EXACT,{G_DRAINAGE}::{PRIVATE_SYSTEM_SEPTIC_TANK},100,DONE
-fcafdb0931,G6,"The installation was inspected visually only, and no assessment of its operation or compliance with current environmental regulations was undertaken.",EXACT,{G_DRAINAGE}::{PRIVATE_SYSTEM_SEPTIC_TANK},100,DONE
-b72b7a4312,G6,The system should be regularly maintained and emptied as recommended.,EXACT,{G_DRAINAGE}::{PRIVATE_SYSTEM_SEPTIC_TANK},100,DONE
-e3f3c8ea68,G6,"Your legal adviser should confirm ownership, maintenance responsibilities, any permits or exemptions, and compliance with current regulations.",EXACT,{G_DRAINAGE}::{PRIVATE_SYSTEM_SEPTIC_TANK},100,DONE
-fa0f3d8552,G6,"Cesspit (Cesspool): The property is connected to a cesspit (cesspool), which is an underground storage tank that collects foul waste and requires regular emptying by a licensed waste contractor.",EXACT,{G_DRAINAGE}::{PRIVATE_SYSTEM_CESS_PIT},100,DONE
-51a2e98b91,G6,"The installation was inspected visually only, and no assessment of its condition or capacity was undertaken.",EXACT,{G_DRAINAGE}::{PRIVATE_SYSTEM_CESS_PIT},100,DONE
-78d886e559,G6,"Your legal adviser should confirm ownership, maintenance responsibilities, and any records of regular emptying.",EXACT,{G_DRAINAGE}::{PRIVATE_SYSTEM_CESS_PIT},100,DONE
-fc5c4e8836,G6,Public Sewer: The property is connected to the public sewer.,FIX,{G_DRAINAGE}::{PRIVATE_SYSTEM_SEPTIC_TANK},79,OPEN
-4bdec25a21,G6,The drainage system is either combined (foul and surface water sharing the same pipework) or separate (foul and surface water discharged through separate pipework).,ADD,{G_DRAINAGE}::{PUBLIC_SYSTEM},55,OPEN
-b4889dfb4d,G6,Parts of the drainage system may pass through neighbouring properties or surrounding lands.,ADD,{G_DRAINAGE}::{DRAINAGE_SHARED},59,OPEN
+a5596b97d6,G6,Inspection of the accessible inspection chamber(s) cannot confirm the condition of the concealed drainage system.,EXACT,{G_DRAINAGE}::{STANDARD_TEXT_2},100,DONE
+f72cbbb4ac,G6,"Hidden defects may still be present and can only be identified by specialist testing, such as a CCTV drain survey.",EXACT,{G_DRAINAGE}::{STANDARD_TEXT_2},100,DONE
+112a6564c2,G6,Septic Tank: The property is connected to a septic tank.,EXACT,{G_DRAINAGE}::{G6_SEPTIC_TANK},100,DONE
+964c3f7f5a,G6,This is a private drainage system that treats foul waste before discharging the effluent to a drainage field or other approved outfall.,EXACT,{G_DRAINAGE}::{G6_SEPTIC_TANK},100,DONE
+fcafdb0931,G6,"The installation was inspected visually only, and no assessment of its operation or compliance with current environmental regulations was undertaken.",EXACT,{G_DRAINAGE}::{G6_SEPTIC_TANK},100,DONE
+b72b7a4312,G6,The system should be regularly maintained and emptied as recommended.,EXACT,{G_DRAINAGE}::{G6_SEPTIC_TANK},100,DONE
+e3f3c8ea68,G6,"Your legal adviser should confirm ownership, maintenance responsibilities, any permits or exemptions, and compliance with current regulations.",EXACT,{G_DRAINAGE}::{G6_SEPTIC_TANK},100,DONE
+fa0f3d8552,G6,"Cesspit (Cesspool): The property is connected to a cesspit (cesspool), which is an underground storage tank that collects foul waste and requires regular emptying by a licensed waste contractor.",EXACT,{G_DRAINAGE}::{G6_CESSPIT},100,DONE
+51a2e98b91,G6,"The installation was inspected visually only, and no assessment of its condition or capacity was undertaken.",EXACT,{G_DRAINAGE}::{G6_CESSPIT},100,DONE
+78d886e559,G6,"Your legal adviser should confirm ownership, maintenance responsibilities, and any records of regular emptying.",EXACT,{G_DRAINAGE}::{G6_CESSPIT},100,DONE
+fc5c4e8836,G6,Public Sewer: The property is connected to the public sewer.,EXACT,{G_DRAINAGE}::{G6_PUBLIC_SEWER},100,DONE
+4bdec25a21,G6,The drainage system is either combined (foul and surface water sharing the same pipework) or separate (foul and surface water discharged through separate pipework).,EXACT,{G_DRAINAGE}::{G6_PUBLIC_SEWER},100,DONE
+b4889dfb4d,G6,Parts of the drainage system may pass through neighbouring properties or surrounding lands.,EXACT,{G_DRAINAGE}::{G6_PUBLIC_SEWER},100,DONE
 0c8a705541,G6,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-3e6a685cef,G6,Routine maintenance appropriate to the frame material should be expected.,EXACT,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},100,DONE
-1fefbcd71e,G6,Inspection Chamber: The inspection chamber cover(s) were lifted where possible.,ADD,{G_DRAINAGE}::{PUBLIC_SYSTEM_INSPECTED_LIFTED_TICKBOX},68,OPEN
-59e856afce,G6,"No blockage, recent blockage, significant defect, other was noted.",MENU,,0,UNVERIFIED
-c989f1aa07,G6,The chambers should be inspected periodically to ensure they remain free flowing.,ADD,{G_DRAINAGE}::{PUBLIC_SYSTEM_INSPECTED_CONDITION_OK},57,OPEN
-3994e6937f,G6,"Not Inspected: The inspection chamber cover(s) could not be lifted, and the condition of the underground drainage system could not be assessed.",ADD,{G_DRAINAGE}::{PUBLIC_SYSTEM_STATUS_NOT_INSPECTED},58,OPEN
-a22ef80a2a,G6,Further inspection by a suitably qualified drainage contractor is recommended if required.,ADD,{G_DRAINAGE}::{REPAIR_ROOTS_IN_CHAMBER},52,OPEN
-e228247694,G6,Shared Drainage: It is assumed that parts of the underground drainage system are shared with neighbouring property or properties.,ADD,{G_DRAINAGE}::{DRAINAGE_SHARED},71,OPEN
-27726e0960,G6,Your legal adviser should confirm your rights and responsibilities for maintenance and repair.,ADD,{G_DRAINAGE}::{PRIVATE_SYSTEM_CESS_PIT},69,OPEN
-c69bdd8b2d,G6,Your legal adviser should confirm your responsibilities for the maintenance and repair of any shared drainage system.,ADD,{G_DRAINAGE}::{PRIVATE_SYSTEM_CESS_PIT},65,OPEN
-dfc0cc8abf,G6,"Soil and Vent Pipe: The soil and vent pipe is visible at the front, rear, side, other of the property and is constructed of plastic, cast iron, asbestos cement, other material.",MENU,,0,UNVERIFIED
-a8f41dab43,G6,"Visible/Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space/other.",ADD,{G_DRAINAGE}::{SOIL_VENT_PARTIALLY_INSPECTED},54,OPEN
-db27b41b60,G6,The visible sections appeared satisfactory.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},57,OPEN
-964f88640d,G6,The condition of concealed sections could not be assessed.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},48,OPEN
-ebac583d35,G6,"Defect repairs Inspection Chamber Cover: The inspection chamber cover(s) are broken, corroded, poorly secured, other and presents a safety hazard.",UNRESOLVED,{G_DRAINAGE}::{REPAIR_CHAMBER_COVER},67,OPEN
-2ab00ea5b4,G6,It should be repaired or replaced without delay.,ADD,{G_DRAINAGE}::{REPAIR_GULLIES},62,OPEN
-5cecdd3977,G6,The inspection chamber cover presents a safety hazard and should be repaired or replaced.,TOKENISED,{G_DRAINAGE}::{REPAIR_CHAMBER_COVER},67,DONE
-4eabddcc1b,G6,"Inspection Chamber Walls: The inspection chamber walls are cracked, crumbling, damaged, other.",MENU,,0,UNVERIFIED
-01cd6ad055,G6,Repairs are recommended to prevent debris from entering and obstructing the drainage system.,ADD,{G_DRAINAGE}::{REPAIR_CHAMBER_PIPES},55,OPEN
-076ee743cc,G6,"Drain Channels: The drainage channels within the inspection chamber are cracked, poorly formed, partially blocked, other.",MENU,,0,UNVERIFIED
-d04cbb1a89,G6,Repairs are recommended to prevent further deterioration and reduce the risk of blockages.,ADD,{G_DRAINAGE}::{REPAIR_CHAMBER_PIPES},61,OPEN
-0f8823cfa5,G6,"Soil and Vent Pipe Defects: The soil and vent pipe is cracked, damaged, corroded, leaking, inadequately supported, other.",MENU,,0,UNVERIFIED
-05fd5aedad,G6,"Depending on its condition, replacement with a modern plastic system may be more economical.",ADD,{G_DRAINAGE}::{REPAIR_SOIL_AND_VENT},50,OPEN
-401fb84af9,G6,"Tree Root Ingress: Tree roots were noted within the inspection chamber, indicating defects in the underground drainage system.",ADD,{G_DRAINAGE}::{REPAIR_CHAMBER_PIPES},52,OPEN
-2a71e1c9fc,G6,"If left untreated, root ingress is likely to worsen and cause recurring blockages.",ADD,{G_DRAINAGE}::{REPAIR_ROOTS_IN_CHAMBER},48,OPEN
-54099ae496,G6,A suitably qualified drainage contractor should investigate and recommend repairs.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_NO_SAFETY_GLASS},49,OPEN
-aa6b84d88b,G6,Gullies: The above-ground rainwater and waste pipes discharge into gullies connected to the underground drainage system.,ADD,{G_DRAINAGE}::{REPAIR_GULLIES},66,OPEN
-ff9e9080b7,G6,"The gullies are partly blocked, damaged, uncovered, completely blocked, other.",MENU,,0,UNVERIFIED
-e787682d1a,G6,"They should be cleared and repaired, as necessary.",ADD,{G_DRAINAGE}::{PRIVATE_SYSTEM_SEPTIC_TANK},64,OPEN
-718cc4531e,G6,Blocked gullies can result in overflowing water and dampness to adjacent walls.,ADD,{G_DRAINAGE}::{REPAIR_GULLIES},68,OPEN
-2446dfb38b,G6,Asbestos Cement Soil Stack: The soil and vent pipe is constructed of asbestos cement.,ADD,{G_DRAINAGE}::{IF_ASBESTOS_CEMENT_IS_SELECTED},65,OPEN
-92b38d9020,G6,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",EXACT,{G_WATER}::{G3_ASBESTOS_TANK},100,DONE
+3e6a685cef,G6,Routine maintenance appropriate to the frame material should be expected.,EXACT,{G_DRAINAGE}::{G6_NO_DEFECTS_NOTED},100,DONE
+1fefbcd71e,G6,Inspection Chamber: The inspection chamber cover(s) were lifted where possible.,EXACT,{G_DRAINAGE}::{G6_INSPECTION_CHAMBER},100,DONE
+59e856afce,G6,"No blockage, recent blockage, significant defect, other was noted.",MENU,,0,VERIFIED
+c989f1aa07,G6,The chambers should be inspected periodically to ensure they remain free flowing.,EXACT,{G_DRAINAGE}::{G6_INSPECTION_CHAMBER},100,DONE
+3994e6937f,G6,"Not Inspected: The inspection chamber cover(s) could not be lifted, and the condition of the underground drainage system could not be assessed.",EXACT,{G_DRAINAGE}::{G6_NOT_INSPECTED},100,DONE
+a22ef80a2a,G6,Further inspection by a suitably qualified drainage contractor is recommended if required.,EXACT,{G_DRAINAGE}::{G6_NOT_INSPECTED},100,DONE
+e228247694,G6,Shared Drainage: It is assumed that parts of the underground drainage system are shared with neighbouring property or properties.,EXACT,{G_DRAINAGE}::{G6_SHARED_DRAINAGE},100,DONE
+27726e0960,G6,Your legal adviser should confirm your rights and responsibilities for maintenance and repair.,EXACT,{G_DRAINAGE}::{G6_SHARED_DRAINAGE},100,DONE
+c69bdd8b2d,G6,Your legal adviser should confirm your responsibilities for the maintenance and repair of any shared drainage system.,EXACT,{G_DRAINAGE}::{G6_SHARED_DRAINAGE},100,DONE
+dfc0cc8abf,G6,"Soil and Vent Pipe: The soil and vent pipe is visible at the front, rear, side, other of the property and is constructed of plastic, cast iron, asbestos cement, other material.",MENU,,0,VERIFIED
+a8f41dab43,G6,"Visible/Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space/other.",MENU,,0,VERIFIED
+db27b41b60,G6,The visible sections appeared satisfactory.,EXACT,{G_DRAINAGE}::{G6_SVP_VISIBLE},100,DONE
+964f88640d,G6,The condition of concealed sections could not be assessed.,EXACT,{G_DRAINAGE}::{G6_SVP_VISIBLE},100,DONE
+ebac583d35,G6,"Defect repairs Inspection Chamber Cover: The inspection chamber cover(s) are broken, corroded, poorly secured, other and presents a safety hazard.",MENU,,0,VERIFIED
+2ab00ea5b4,G6,It should be repaired or replaced without delay.,EXACT,{G_DRAINAGE}::{G6_CHAMBER_COVER},100,DONE
+5cecdd3977,G6,The inspection chamber cover presents a safety hazard and should be repaired or replaced.,EXACT,{G_DRAINAGE}::{G6_CHAMBER_COVER},100,DONE
+4eabddcc1b,G6,"Inspection Chamber Walls: The inspection chamber walls are cracked, crumbling, damaged, other.",MENU,,0,VERIFIED
+01cd6ad055,G6,Repairs are recommended to prevent debris from entering and obstructing the drainage system.,EXACT,{G_DRAINAGE}::{G6_CHAMBER_WALLS},100,DONE
+076ee743cc,G6,"Drain Channels: The drainage channels within the inspection chamber are cracked, poorly formed, partially blocked, other.",MENU,,0,VERIFIED
+d04cbb1a89,G6,Repairs are recommended to prevent further deterioration and reduce the risk of blockages.,EXACT,{G_DRAINAGE}::{G6_DRAIN_CHANNELS},100,DONE
+0f8823cfa5,G6,"Soil and Vent Pipe Defects: The soil and vent pipe is cracked, damaged, corroded, leaking, inadequately supported, other.",MENU,,0,VERIFIED
+05fd5aedad,G6,"Depending on its condition, replacement with a modern plastic system may be more economical.",EXACT,{G_DRAINAGE}::{G6_SVP_DEFECTS},100,DONE
+401fb84af9,G6,"Tree Root Ingress: Tree roots were noted within the inspection chamber, indicating defects in the underground drainage system.",EXACT,{G_DRAINAGE}::{G6_TREE_ROOT_INGRESS},100,DONE
+2a71e1c9fc,G6,"If left untreated, root ingress is likely to worsen and cause recurring blockages.",EXACT,{G_DRAINAGE}::{G6_TREE_ROOT_INGRESS},100,DONE
+54099ae496,G6,A suitably qualified drainage contractor should investigate and recommend repairs.,EXACT,{G_DRAINAGE}::{G6_TREE_ROOT_INGRESS},100,DONE
+aa6b84d88b,G6,Gullies: The above-ground rainwater and waste pipes discharge into gullies connected to the underground drainage system.,EXACT,{G_DRAINAGE}::{G6_GULLIES},100,DONE
+ff9e9080b7,G6,"The gullies are partly blocked, damaged, uncovered, completely blocked, other.",MENU,,0,VERIFIED
+e787682d1a,G6,"They should be cleared and repaired, as necessary.",EXACT,{G_DRAINAGE}::{G6_GULLIES},100,DONE
+718cc4531e,G6,Blocked gullies can result in overflowing water and dampness to adjacent walls.,EXACT,{G_DRAINAGE}::{G6_GULLIES},100,DONE
+2446dfb38b,G6,Asbestos Cement Soil Stack: The soil and vent pipe is constructed of asbestos cement.,EXACT,{G_DRAINAGE}::{G6_ASBESTOS_SOIL_STACK},100,DONE
+92b38d9020,G6,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",EXACT,{G_DRAINAGE}::{G6_ASBESTOS_SOIL_STACK},100,DONE
 2eb8e4e1c1,G6,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,UNVERIFIED
 c6bd7e5c9d,G7,"Not applicable: Other than the possibility of the drainage system being shared, there are no other common services to this property.",EXACT,{G_COMMON_SERVICES}::{NOT_INSPECTED},100,DONE
 1fc8407710,G7,"Description: Communal services and installations, including shared drainage, grounds maintenance, cleaning, lifts, communal heating, hot water systems, door entry systems, vehicular access, parking areas, other were not specifically assessed as part of this inspection.",MENU,,0,UNVERIFIED

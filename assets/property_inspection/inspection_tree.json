@@ -6276,184 +6276,171 @@
           "order": 1,
           "fields": [
             {
-              "id": "cb_private_system",
-              "label": "Private System",
-              "type": "checkbox"
-            },
-            {
               "id": "cb_septic_tank",
-              "label": "Septic Tank",
-              "type": "checkbox",
-              "conditionalOn": "cb_private_system",
-              "conditionalMode": "show"
+              "label": "Septic tank",
+              "type": "checkbox"
             },
             {
               "id": "cb_cess_pit",
-              "label": "Cess Pit",
-              "type": "checkbox",
-              "conditionalOn": "cb_private_system",
-              "conditionalMode": "show"
+              "label": "Cesspit (cesspool)",
+              "type": "checkbox"
             },
             {
               "id": "cb_public_system",
-              "label": "Public System",
+              "label": "Public sewer",
               "type": "checkbox"
             },
             {
-              "id": "label_drainage_chamber_inspection",
-              "label": "Drainage chamber inspection",
-              "type": "label",
-              "conditionalOn": "cb_public_system",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_inspection_status",
-              "label": "Inspection Status",
-              "type": "dropdown",
-              "options": [
-                "Inspected",
-                "Not Inspected",
-                "Not found"
-              ],
-              "conditionalOn": "cb_public_system",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_cover_were_lifted",
-              "label": "Cover(s) were lifted",
-              "type": "checkbox",
-              "conditionalOn": "cb_public_system & actv_inspection_status=Inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_condition_ok",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_public_system & actv_inspection_status=Inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_shared",
-              "label": "Shared",
+              "id": "cb_dr_no_defects",
+              "label": "No defects noted",
               "type": "checkbox"
             },
             {
-              "id": "label_soil_and_vent",
-              "label": "Soil and Vent",
+              "id": "cb_dr_chamber",
+              "label": "Inspection chamber",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_drain_chamber_finding",
+              "label": "Chamber finding",
               "type": "label"
             },
             {
-              "id": "actv_ins_status",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Inspected",
-                "Partially Inspected",
-                "Not Inspected"
-              ]
+              "id": "g6cf_blockage",
+              "label": "blockage",
+              "type": "checkbox"
             },
             {
-              "id": "label_soil_vent_location",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_ins_status=Inspected",
-              "conditionalMode": "show"
+              "id": "g6cf_recent_blockage",
+              "label": "recent blockage",
+              "type": "checkbox"
             },
             {
-              "id": "cb_loc_front",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_ins_status=Inspected",
-              "conditionalMode": "show"
+              "id": "g6cf_significant_defect",
+              "label": "significant defect",
+              "type": "checkbox"
             },
             {
-              "id": "cb_loc_rear",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_ins_status=Inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loc_side",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_ins_status=Inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_soil_vent_visible_only",
-              "label": "Visible Only",
-              "type": "label",
-              "conditionalOn": "actv_ins_status=Partially Inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_visible_only_within_roof_space",
-              "label": "Within the roof space",
-              "type": "checkbox",
-              "conditionalOn": "actv_ins_status=Partially Inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_visible_only_other",
+              "id": "g6cf_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_ins_status=Partially Inspected",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_123456000",
+              "id": "g6cf_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_visible_only_other & actv_ins_status=Partially Inspected",
+              "conditionalOn": "g6cf_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_soil_vent_material",
-              "label": "Made Of",
-              "type": "label",
-              "conditionalOn": "actv_ins_status=Inspected | actv_ins_status=Partially Inspected",
+              "id": "cb_dr_not_inspected",
+              "label": "Not inspected",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_shared",
+              "label": "Shared drainage",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_dr_svp",
+              "label": "Soil and vent pipe",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_drain_svp_location",
+              "label": "Visible at the",
+              "type": "label"
+            },
+            {
+              "id": "g6sl_front",
+              "label": "front",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sl_rear",
+              "label": "rear",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sl_side",
+              "label": "side",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sl_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sl_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g6sl_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "label_drain_svp_material",
+              "label": "Constructed of",
+              "type": "label"
             },
             {
               "id": "cb_material_plastic_pipe",
-              "label": "Plastic Pipe",
-              "type": "checkbox",
-              "conditionalOn": "actv_ins_status=Inspected | actv_ins_status=Partially Inspected",
-              "conditionalMode": "show"
+              "label": "plastic",
+              "type": "checkbox"
             },
             {
               "id": "cb_material_cast_iron",
-              "label": "Cast Iron",
-              "type": "checkbox",
-              "conditionalOn": "actv_ins_status=Inspected | actv_ins_status=Partially Inspected",
-              "conditionalMode": "show"
+              "label": "cast iron",
+              "type": "checkbox"
             },
             {
               "id": "cb_material_asbestos_cement",
-              "label": "Asbestos Cement",
-              "type": "checkbox",
-              "conditionalOn": "actv_ins_status=Inspected | actv_ins_status=Partially Inspected",
-              "conditionalMode": "show"
+              "label": "asbestos cement",
+              "type": "checkbox"
             },
             {
-              "id": "cb_material_other",
+              "id": "g6sm_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_ins_status=Inspected | actv_ins_status=Partially Inspected",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_123456",
+              "id": "g6sm_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_material_other & actv_ins_status=Inspected | cb_material_other & actv_ins_status=Partially Inspected",
+              "conditionalOn": "g6sm_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "et_other_373",
+              "id": "cb_dr_svp_visible",
+              "label": "Visible / partially visible",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_drain_svp_visible_in",
+              "label": "Sections visible in the",
+              "type": "label"
+            },
+            {
+              "id": "g6sv_roof_space",
+              "label": "roof space",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sv_other",
               "label": "Other",
-              "type": "text"
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sv_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g6sv_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -6863,21 +6850,225 @@
         },
         {
           "id": "activity_services_drainage_repair_chamber_cover",
-          "title": "Chamber Cover",
+          "title": "Drainage Repairs",
           "type": "screen",
           "parentId": "group_repairs_97",
           "order": 2,
           "fields": [
             {
-              "id": "actv_defect",
-              "label": "Defect",
-              "type": "dropdown",
-              "options": [
-                "Broken",
-                "Corroded",
-                "Poorly fixed",
-                "Other"
-              ]
+              "id": "cb_g6_cover",
+              "label": "Inspection chamber cover",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_drain_cover_defect",
+              "label": "Cover defect",
+              "type": "label"
+            },
+            {
+              "id": "g6cv_broken",
+              "label": "broken",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6cv_corroded",
+              "label": "corroded",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6cv_poorly_secured",
+              "label": "poorly secured",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6cv_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6cv_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g6cv_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_g6_walls",
+              "label": "Inspection chamber walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_drain_wall_defect",
+              "label": "Wall defect",
+              "type": "label"
+            },
+            {
+              "id": "g6cw_cracked",
+              "label": "cracked",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6cw_crumbling",
+              "label": "crumbling",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6cw_damaged",
+              "label": "damaged",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6cw_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6cw_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g6cw_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_g6_channels",
+              "label": "Drain channels",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_drain_channel_defect",
+              "label": "Channel defect",
+              "type": "label"
+            },
+            {
+              "id": "g6dc_cracked",
+              "label": "cracked",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6dc_poorly_formed",
+              "label": "poorly formed",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6dc_partially_blocked",
+              "label": "partially blocked",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6dc_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6dc_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g6dc_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_g6_svp_defects",
+              "label": "Soil and vent pipe defects",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_drain_svp_defect",
+              "label": "Pipe defect",
+              "type": "label"
+            },
+            {
+              "id": "g6sd_cracked",
+              "label": "cracked",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sd_damaged",
+              "label": "damaged",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sd_corroded",
+              "label": "corroded",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sd_leaking",
+              "label": "leaking",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sd_inadequately_supported",
+              "label": "inadequately supported",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sd_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6sd_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g6sd_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_roots_in_chamber",
+              "label": "Tree root ingress",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_g6_gullies",
+              "label": "Gullies",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_drain_gully_defect",
+              "label": "Gully defect",
+              "type": "label"
+            },
+            {
+              "id": "g6gu_partly_blocked",
+              "label": "partly blocked",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6gu_damaged",
+              "label": "damaged",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6gu_uncovered",
+              "label": "uncovered",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6gu_completely_blocked",
+              "label": "completely blocked",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6gu_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g6gu_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g6gu_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_g6_asbestos",
+              "label": "Asbestos cement soil stack",
+              "type": "checkbox"
             }
           ]
         },
@@ -7444,47 +7635,6 @@
           "order": 4
         },
         {
-          "id": "activity_services_drainage_repair_chamber_walls",
-          "title": "Chamber Walls",
-          "type": "screen",
-          "parentId": "group_repairs_97",
-          "order": 4,
-          "fields": [
-            {
-              "id": "label_defect_57",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_badly_broken",
-              "label": "Badly broken",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_crumbling",
-              "label": "Crumbling",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_badly_cracked",
-              "label": "Badly cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_835",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_558",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_835",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_services_shared_services_not_inspected",
           "title": "Not Inspected",
           "type": "screen",
@@ -7649,61 +7799,6 @@
           ]
         },
         {
-          "id": "activity_services_drainage_repair_chamber_pipes",
-          "title": "Chamber Pipes",
-          "type": "screen",
-          "parentId": "group_repairs_97",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_defect_56",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_badly_cracked",
-              "label": "Badly cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_poorly_installed",
-              "label": "Poorly installed",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_partially_blocked",
-              "label": "Partially blocked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_458",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_423",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_458",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_drainage_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_g6_drainage_96",
-          "order": 7,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
           "id": "group_g4_heating_92",
           "title": "G4 Heating",
           "type": "group",
@@ -7779,57 +7874,6 @@
           ]
         },
         {
-          "id": "activity_services_drainage_repair_soil_and_vent",
-          "title": "Soil and Vent",
-          "type": "screen",
-          "parentId": "group_repairs_97",
-          "order": 8,
-          "fields": [
-            {
-              "id": "label_defect_59",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_corroded",
-              "label": "Corroded",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_poorly_fixed",
-              "label": "Poorly fixed",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_1098",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_889",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_1098",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "group_g5_water_heating_93",
           "title": "G5 Water Heating",
           "type": "group",
@@ -7892,20 +7936,6 @@
           "inlinePosition": "header"
         },
         {
-          "id": "activity_services_drainage_repair_roots_in_chamber",
-          "title": "Roots In Chamber",
-          "type": "screen",
-          "parentId": "group_repairs_97",
-          "order": 10,
-          "fields": [
-            {
-              "id": "cb_roots_in_chamber",
-              "label": "Roots In Chamber",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
           "id": "group_g6_drainage_96",
           "title": "G6 Drainage",
           "type": "group",
@@ -7963,66 +7993,6 @@
                 "2",
                 "3"
               ]
-            }
-          ]
-        },
-        {
-          "id": "activity_services_drainage_repair_gullies",
-          "title": "Gullies",
-          "type": "screen",
-          "parentId": "group_repairs_97",
-          "order": 12,
-          "fields": [
-            {
-              "id": "label_defect_58",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_partly_blocked",
-              "label": "Partly blocked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_are_damaged",
-              "label": "Are damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_do_not_have_a_cover",
-              "label": "Do not have a cover",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_completely_blocked",
-              "label": "Completely blocked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_229",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_395",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_229",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_drainage_repair_defect_dampness",
-          "title": "Defects causing dampness",
-          "type": "screen",
-          "parentId": "group_repairs_97",
-          "order": 14,
-          "fields": [
-            {
-              "id": "cb_defects_causing_dampness",
-              "label": "Defects Causing Dampness",
-              "type": "checkbox"
             }
           ]
         },
@@ -8115,50 +8085,6 @@
             {
               "id": "cb_asbestos_material",
               "label": "Asbestos cement tank",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_drainage_chamber_lids",
-          "title": "Chamber Lids",
-          "type": "screen",
-          "parentId": "group_g6_drainage_96",
-          "order": 500,
-          "fields": [
-            {
-              "id": "cb_inspected",
-              "label": "Inspected",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_shared",
-              "label": "Shared",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_defect",
-              "label": "Defect",
-              "type": "dropdown",
-              "options": [
-                "Damaged",
-                "Missing",
-                "Corroded",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_services_drainage_public_system",
-          "title": "Public System",
-          "type": "screen",
-          "parentId": "group_g6_drainage_96",
-          "order": 501,
-          "fields": [
-            {
-              "id": "cb_property_connected_to_public_sewer",
-              "label": "Property connected to public sewer",
               "type": "checkbox"
             }
           ]

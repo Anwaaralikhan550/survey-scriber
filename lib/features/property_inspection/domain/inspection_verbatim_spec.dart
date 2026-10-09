@@ -9052,6 +9052,282 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_wh_solar',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'g6_septic',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_SEPTIC_TANK}',
+    [
+    ],
+    whenField: 'cb_septic_tank',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_cesspit',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_CESSPIT}',
+    [
+    ],
+    whenField: 'cb_cess_pit',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_public',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_PUBLIC_SEWER}',
+    [
+    ],
+    whenField: 'cb_public_system',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_no_defects',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_NO_DEFECTS_NOTED}',
+    [
+    ],
+    whenField: 'cb_dr_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_chamber',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_INSPECTION_CHAMBER}',
+    [
+      VerbatimToken(
+        '{DRAIN_CHAMBER_FINDING}',
+        options: {
+          'g6cf_blockage': 'blockage',
+          'g6cf_recent_blockage': 'recent blockage',
+          'g6cf_significant_defect': 'significant defect',
+        },
+        otherCheckbox: 'g6cf_other',
+        otherText: 'g6cf_other_text',
+        pdfOptions: ['blockage', 'recent blockage', 'significant defect'],
+      ),
+    ],
+    pdf:
+        'No blockage, recent blockage, significant defect, other was noted.',
+    whenField: 'cb_dr_chamber',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_not_inspected',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'cb_dr_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_shared',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_SHARED_DRAINAGE}',
+    [
+    ],
+    whenField: 'cb_shared',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_svp',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_SOIL_AND_VENT_PIPE}',
+    [
+      VerbatimToken(
+        '{DRAIN_SVP_LOCATION}',
+        options: {
+          'g6sl_front': 'front',
+          'g6sl_rear': 'rear',
+          'g6sl_side': 'side',
+        },
+        otherCheckbox: 'g6sl_other',
+        otherText: 'g6sl_other_text',
+        pdfOptions: ['front', 'rear', 'side'],
+      ),
+      VerbatimToken(
+        '{DRAIN_SVP_MATERIAL}',
+        options: {
+          'cb_material_plastic_pipe': 'plastic',
+          'cb_material_cast_iron': 'cast iron',
+          'cb_material_asbestos_cement': 'asbestos cement',
+        },
+        otherCheckbox: 'g6sm_other',
+        otherText: 'g6sm_other_text',
+        pdfOptions: ['plastic', 'cast iron', 'asbestos cement'],
+      ),
+    ],
+    pdf:
+        'Soil and Vent Pipe: The soil and vent pipe is visible at the front, rear, side, other of the property and is constructed of plastic, cast iron, asbestos cement, other material.',
+    whenField: 'cb_dr_svp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_svp_visible',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_SVP_VISIBLE}',
+    [
+      VerbatimToken(
+        '{DRAIN_SVP_VISIBLE_IN}',
+        options: {
+          'g6sv_roof_space': 'roof space',
+        },
+        otherCheckbox: 'g6sv_other',
+        otherText: 'g6sv_other_text',
+        pdfOptions: ['roof space'],
+      ),
+    ],
+    pdf:
+        'Visible/Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space/other.',
+    whenField: 'cb_dr_svp_visible',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_cover',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_CHAMBER_COVER}',
+    [
+      VerbatimToken(
+        '{DRAIN_COVER_DEFECT}',
+        options: {
+          'g6cv_broken': 'broken',
+          'g6cv_corroded': 'corroded',
+          'g6cv_poorly_secured': 'poorly secured',
+        },
+        otherCheckbox: 'g6cv_other',
+        otherText: 'g6cv_other_text',
+        pdfOptions: ['broken', 'corroded', 'poorly secured'],
+      ),
+    ],
+    pdf:
+        'Inspection Chamber Cover: The inspection chamber cover(s) are broken, corroded, poorly secured, other and presents a safety hazard.',
+    whenField: 'cb_g6_cover',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_walls',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_CHAMBER_WALLS}',
+    [
+      VerbatimToken(
+        '{DRAIN_WALL_DEFECT}',
+        options: {
+          'g6cw_cracked': 'cracked',
+          'g6cw_crumbling': 'crumbling',
+          'g6cw_damaged': 'damaged',
+        },
+        otherCheckbox: 'g6cw_other',
+        otherText: 'g6cw_other_text',
+        pdfOptions: ['cracked', 'crumbling', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Inspection Chamber Walls: The inspection chamber walls are cracked, crumbling, damaged, other.',
+    whenField: 'cb_g6_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_channels',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_DRAIN_CHANNELS}',
+    [
+      VerbatimToken(
+        '{DRAIN_CHANNEL_DEFECT}',
+        options: {
+          'g6dc_cracked': 'cracked',
+          'g6dc_poorly_formed': 'poorly formed',
+          'g6dc_partially_blocked': 'partially blocked',
+        },
+        otherCheckbox: 'g6dc_other',
+        otherText: 'g6dc_other_text',
+        pdfOptions: ['cracked', 'poorly formed', 'partially blocked'],
+      ),
+    ],
+    pdf:
+        'Drain Channels: The drainage channels within the inspection chamber are cracked, poorly formed, partially blocked, other.',
+    whenField: 'cb_g6_channels',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_svp_defects',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_SVP_DEFECTS}',
+    [
+      VerbatimToken(
+        '{DRAIN_SVP_DEFECT}',
+        options: {
+          'g6sd_cracked': 'cracked',
+          'g6sd_damaged': 'damaged',
+          'g6sd_corroded': 'corroded',
+          'g6sd_leaking': 'leaking',
+          'g6sd_inadequately_supported': 'inadequately supported',
+        },
+        otherCheckbox: 'g6sd_other',
+        otherText: 'g6sd_other_text',
+        pdfOptions: ['cracked', 'damaged', 'corroded', 'leaking', 'inadequately supported'],
+      ),
+    ],
+    pdf:
+        'Soil and Vent Pipe Defects: The soil and vent pipe is cracked, damaged, corroded, leaking, inadequately supported, other.',
+    whenField: 'cb_g6_svp_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_roots',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_TREE_ROOT_INGRESS}',
+    [
+    ],
+    whenField: 'cb_roots_in_chamber',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_gullies',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_GULLIES}',
+    [
+      VerbatimToken(
+        '{DRAIN_GULLY_DEFECT}',
+        options: {
+          'g6gu_partly_blocked': 'partly blocked',
+          'g6gu_damaged': 'damaged',
+          'g6gu_uncovered': 'uncovered',
+          'g6gu_completely_blocked': 'completely blocked',
+        },
+        otherCheckbox: 'g6gu_other',
+        otherText: 'g6gu_other_text',
+        pdfOptions: ['partly blocked', 'damaged', 'uncovered', 'completely blocked'],
+      ),
+    ],
+    pdf:
+        'The gullies are partly blocked, damaged, uncovered, completely blocked, other.',
+    whenField: 'cb_g6_gullies',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_asbestos',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_ASBESTOS_SOIL_STACK}',
+    [
+    ],
+    whenField: 'cb_g6_asbestos',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

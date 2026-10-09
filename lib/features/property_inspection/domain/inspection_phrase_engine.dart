@@ -194,25 +194,27 @@ class InspectionPhraseEngine {
       case 'activity_services_heating_not_inspected':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_main_screen':
-        return _servicesDrainageMain(answers);
+        return _conditionRatingNotes(answers,
+            ratingKey: 'android_material_design_spinner4',
+            master: '{G_DRAINAGE}');
       case 'activity_services_drainage':
-        return _servicesDrainage(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_repair_chamber_cover':
-        return _servicesDrainageRepairChamberCover(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_repair_chamber_walls':
-        return _servicesDrainageRepairChamberWalls(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_repair_chamber_pipes':
-        return _servicesDrainageRepairChamberPipes(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_repair_soil_and_vent':
-        return _servicesDrainageRepairSoilAndVent(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_repair_roots_in_chamber':
-        return _servicesDrainageRepairRoots(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_repair_gullies':
-        return _servicesDrainageRepairGullies(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_repair_defect_dampness':
-        return _servicesDrainageRepairDefectDampness(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_not_inspected':
-        return _servicesDrainageNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_common_services_main_screen':
         return _servicesCommonServicesMain(answers);
       case 'activity_services_shared_services':
@@ -812,9 +814,9 @@ class InspectionPhraseEngine {
       case 'activity_services_water_repair_water_tank_screen':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_chamber_lids':
-        return _servicesDrainageChamberLids(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_public_system':
-        return _servicesDrainagePublicSystem(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_heating_cylinder':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
 
@@ -3066,358 +3068,6 @@ class InspectionPhraseEngine {
     return phrases;
   }
 
-  List<String> _servicesDrainageMain(Map<String, String> answers) {
-    final phrases = <String>[];
-    final standard = _sub('{G_DRAINAGE}', '{STANDARD_TEXT}');
-    if (standard.isNotEmpty) {
-      phrases.addAll(_split(_normalize(standard)));
-    }
-    final standard2 = _sub('{G_DRAINAGE}', '{STANDARD_TEXT_2}');
-    if (standard2.isNotEmpty) {
-      phrases.addAll(_split(_normalize(standard2)));
-    }
-
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
-    if (rating.isNotEmpty) {
-      var template = _sub('{G_DRAINAGE}', '{CONDITION_RATING}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{DRA_COND_RATING}', rating);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final notes = (answers['ar_etNote'] ?? '').trim();
-    if (notes.isNotEmpty) {
-      var template = _sub('{G_DRAINAGE}', '{NOTES}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{DRA_NOTES}', notes);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesDrainage(Map<String, String> answers) {
-    final phrases = <String>[];
-
-    if (_isChecked(answers['cb_private_system'])) {
-      if (_isChecked(answers['cb_septic_tank'])) {
-        final template = _sub('{G_DRAINAGE}', '{PRIVATE_SYSTEM_SEPTIC_TANK}');
-        if (template.isNotEmpty) {
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-      if (_isChecked(answers['cb_cess_pit'])) {
-        final template = _sub('{G_DRAINAGE}', '{PRIVATE_SYSTEM_CESS_PIT}');
-        if (template.isNotEmpty) {
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    }
-
-    if (_isChecked(answers['cb_public_system'])) {
-      final publicTemplate = _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM}');
-      if (publicTemplate.isNotEmpty) {
-        phrases.addAll(_split(_normalize(publicTemplate)));
-      }
-
-      final status = _cleanLower(answers['actv_inspection_status']);
-      if (status.contains('inspected') && !status.contains('not')) {
-        final cover = _isChecked(answers['cb_cover_were_lifted']);
-        final conditionOk = _isChecked(answers['cb_condition_ok']);
-        if (cover && conditionOk) {
-          final template =
-              _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM_STATUS_INSPECTED}');
-          if (template.isNotEmpty) {
-            phrases.addAll(_split(_normalize(template)));
-          }
-        } else {
-          if (cover) {
-            final template = _sub(
-                '{G_DRAINAGE}', '{PUBLIC_SYSTEM_INSPECTED_LIFTED_TICKBOX}');
-            if (template.isNotEmpty) {
-              phrases.addAll(_split(_normalize(template)));
-            }
-          }
-          if (conditionOk) {
-            final template =
-                _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM_INSPECTED_CONDITION_OK}');
-            if (template.isNotEmpty) {
-              phrases.addAll(_split(_normalize(template)));
-            }
-          }
-        }
-      } else if (status.contains('not inspected')) {
-        final template =
-            _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM_STATUS_NOT_INSPECTED}');
-        if (template.isNotEmpty) {
-          phrases.addAll(_split(_normalize(template)));
-        }
-      } else if (status.contains('not found')) {
-        final template =
-            _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM_STATUS_NOT_FOUND}');
-        if (template.isNotEmpty) {
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    }
-
-    if (_isChecked(answers['cb_shared'])) {
-      final template = _sub('{G_DRAINAGE}', '{DRAINAGE_SHARED}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final soilStatus = _cleanLower(answers['actv_ins_status']);
-    if (soilStatus.contains('partially')) {
-      final visibleOnly = _labelsFor(
-        ['cb_visible_only_within_roof_space', 'cb_visible_only_other'],
-        answers,
-        {
-          'cb_visible_only_within_roof_space': 'Within the roof space',
-          'cb_visible_only_other': 'Other',
-        },
-      );
-      _addOther(
-          answers, 'cb_visible_only_other', 'et_other_123456000', visibleOnly);
-
-      final materials = _labelsFor(
-        [
-          'cb_material_plastic_pipe',
-          'cb_material_cast_iron',
-          'cb_material_asbestos_cement',
-          'cb_material_other'
-        ],
-        answers,
-        {
-          'cb_material_plastic_pipe': 'Plastic pipe',
-          'cb_material_cast_iron': 'Cast iron',
-          'cb_material_asbestos_cement': 'Asbestos cement',
-          'cb_material_other': 'Other',
-        },
-      );
-      _addOther(answers, 'cb_material_other', 'et_other_123456', materials);
-
-      if (visibleOnly.isNotEmpty && materials.isNotEmpty) {
-        var template = _sub('{G_DRAINAGE}', '{SOIL_VENT_PARTIALLY_INSPECTED}');
-        if (template.isNotEmpty) {
-          template = template
-              .replaceAll('{SOIL_VENT_VISIBLE_ONLY}',
-                  _toWords(visibleOnly).toLowerCase())
-              .replaceAll(
-                  '{SOIL_VENT_MATERIAL}', _toWords(materials).toLowerCase());
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-
-      if (materials.any((item) => item.toLowerCase().contains('asbestos'))) {
-        final template =
-            _sub('{G_DRAINAGE}', '{IF_ASBESTOS_CEMENT_IS_SELECTED}');
-        if (template.isNotEmpty) {
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    } else if (soilStatus.contains('inspected') &&
-        !soilStatus.contains('not')) {
-      final locations = _labelsFor(
-        ['cb_loc_front', 'cb_loc_rear', 'cb_loc_side'],
-        answers,
-        {
-          'cb_loc_front': 'Front',
-          'cb_loc_rear': 'Rear',
-          'cb_loc_side': 'Side',
-        },
-      );
-
-      final materials = _labelsFor(
-        [
-          'cb_material_plastic_pipe',
-          'cb_material_cast_iron',
-          'cb_material_asbestos_cement',
-          'cb_material_other'
-        ],
-        answers,
-        {
-          'cb_material_plastic_pipe': 'Plastic pipe',
-          'cb_material_cast_iron': 'Cast iron',
-          'cb_material_asbestos_cement': 'Asbestos cement',
-          'cb_material_other': 'Other',
-        },
-      );
-      _addOther(answers, 'cb_material_other', 'et_other_123456', materials);
-
-      if (locations.isNotEmpty && materials.isNotEmpty) {
-        var template = _sub('{G_DRAINAGE}', '{SOIL_VENT_INSPECTED}');
-        if (template.isNotEmpty) {
-          template = template
-              .replaceAll(
-                  '{SOIL_VENT_LOCATION}', _toWords(locations).toLowerCase())
-              .replaceAll(
-                  '{SOIL_VENT_MATERIAL}', _toWords(materials).toLowerCase());
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-
-      if (materials.any((item) => item.toLowerCase().contains('asbestos'))) {
-        final template =
-            _sub('{G_DRAINAGE}', '{IF_ASBESTOS_CEMENT_IS_SELECTED}');
-        if (template.isNotEmpty) {
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    } else if (soilStatus.contains('not inspected')) {
-      final template = _sub('{G_DRAINAGE}', '{SOIL_VENT_NOT_INSPECTED}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesDrainageRepairChamberCover(
-      Map<String, String> answers) {
-    final defect = _cleanLower(answers['actv_defect']);
-    if (defect.isEmpty) return const [];
-    var template = _sub('{G_DRAINAGE}', '{REPAIR_CHAMBER_COVER}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{DRA_REP_CHAMBER_COVER_DEFECT}', defect);
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesDrainageRepairChamberWalls(
-      Map<String, String> answers) {
-    final defects = _labelsFor(
-      ['cb_badly_broken', 'cb_crumbling', 'cb_badly_cracked', 'cb_other_835'],
-      answers,
-      {
-        'cb_badly_broken': 'Badly broken',
-        'cb_crumbling': 'Crumbling',
-        'cb_badly_cracked': 'Badly cracked',
-        'cb_other_835': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_835', 'et_other_558', defects);
-    if (defects.isEmpty) return const [];
-    var template = _sub('{G_DRAINAGE}', '{REPAIR_CHAMBER_WALLS}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{DRA_REP_CHAMBER_WALLS_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesDrainageRepairChamberPipes(
-      Map<String, String> answers) {
-    final defects = _labelsFor(
-      [
-        'cb_badly_cracked',
-        'cb_poorly_installed',
-        'cb_partially_blocked',
-        'cb_other_458'
-      ],
-      answers,
-      {
-        'cb_badly_cracked': 'Badly cracked',
-        'cb_poorly_installed': 'Poorly installed',
-        'cb_partially_blocked': 'Partially blocked',
-        'cb_other_458': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_458', 'et_other_423', defects);
-    if (defects.isEmpty) return const [];
-    var template = _sub('{G_DRAINAGE}', '{REPAIR_CHAMBER_PIPES}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{DRA_REP_CHAMBER_PIPES_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesDrainageRepairSoilAndVent(Map<String, String> answers) {
-    final defects = _labelsFor(
-      [
-        'cb_cracked',
-        'cb_damaged',
-        'cb_corroded',
-        'cb_leaking',
-        'cb_poorly_fixed',
-        'cb_other_1098'
-      ],
-      answers,
-      {
-        'cb_cracked': 'Cracked',
-        'cb_damaged': 'Damaged',
-        'cb_corroded': 'Corroded',
-        'cb_leaking': 'Leaking',
-        'cb_poorly_fixed': 'Poorly fixed',
-        'cb_other_1098': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_1098', 'et_other_889', defects);
-    if (defects.isEmpty) return const [];
-    var template = _sub('{G_DRAINAGE}', '{REPAIR_SOIL_AND_VENT}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{DRA_REP_SOIL_N_VENT_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesDrainageRepairRoots(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_roots_in_chamber'])) return const [];
-    final template = _sub('{G_DRAINAGE}', '{REPAIR_ROOTS_IN_CHAMBER}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesDrainageRepairGullies(Map<String, String> answers) {
-    final defects = _labelsFor(
-      [
-        'cb_partly_blocked',
-        'cb_are_damaged',
-        'cb_do_not_have_a_cover',
-        'cb_completely_blocked',
-        'cb_other_229'
-      ],
-      answers,
-      {
-        'cb_partly_blocked': 'Partly blocked',
-        // Bank template already supplies the verb ("The gullies are
-        // {DEFECT}."); the option label must be a bare adjective, not
-        // repeat "are" (was producing "The gullies are are damaged.").
-        'cb_are_damaged': 'Damaged',
-        'cb_do_not_have_a_cover': 'Do not have a cover',
-        'cb_completely_blocked': 'Completely blocked',
-        'cb_other_229': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_229', 'et_other_395', defects);
-    if (defects.isEmpty) return const [];
-    var template = _sub('{G_DRAINAGE}', '{REPAIR_GULLIES}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{DRA_REP_GULLIES_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesDrainageRepairDefectDampness(
-      Map<String, String> answers) {
-    if (!_isChecked(answers['cb_defects_causing_dampness'])) return const [];
-    final template = _sub('{G_DRAINAGE}', '{REPAIR_DEFECTS_CAUSING_DAMPNESS}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesDrainageNotInspected(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    final template = _sub('{G_DRAINAGE}', '{NOT_INSPECTED}');
-    if (template.isEmpty) return const [];
-    // Source bank text starts lowercase ("drainage is not inspected.");
-    // capitalise at point of use rather than editing the imported bank
-    // content, so the asset stays a faithful copy of the approved text.
-    return _split(_capitalizeFirst(_normalize(template)));
-  }
-
   List<String> _servicesCommonServicesMain(Map<String, String> answers) {
     final phrases = <String>[];
     final rating = (answers['android_material_design_spinner4'] ?? '').trim();
@@ -5339,44 +4989,6 @@ class InspectionPhraseEngine {
     if (floors.isNotEmpty) phrases.add('Number of floors: $floors.');
 
     return phrases;
-  }
-
-  // Section G: Services - drainage chamber lids
-  List<String> _servicesDrainageChamberLids(Map<String, String> answers) {
-    final phrases = <String>[];
-    if (_isChecked(answers['cb_inspected'])) {
-      final template =
-          _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM_INSPECTED_LIFTED_TICKBOX}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-    if (_isChecked(answers['cb_shared'])) {
-      final template = _sub('{G_DRAINAGE}', '{DRAINAGE_SHARED}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-    final defect = _cleanLower(answers['actv_defect']);
-    if (defect.isNotEmpty) {
-      var template = _sub('{G_DRAINAGE}', '{REPAIR_CHAMBER_COVER}');
-      if (template.isNotEmpty) {
-        template =
-            template.replaceAll('{DRA_REP_CHAMBER_COVER_DEFECT}', defect);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-    return phrases;
-  }
-
-  // Section G: Services - drainage public system
-  List<String> _servicesDrainagePublicSystem(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_property_connected_to_public_sewer'])) {
-      return const [];
-    }
-    final template = _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
   }
 
   // Section F: woodwork legacy phrase passthrough

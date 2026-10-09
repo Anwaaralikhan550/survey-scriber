@@ -1,0 +1,639 @@
+[
+  {
+    "screen": "activity_services_drainage",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g6_septic",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_SEPTIC_TANK}",
+        "text": "Septic Tank: The property is connected to a septic tank. This is a private drainage system that treats foul waste before discharging the effluent to a drainage field or other approved outfall. The installation was inspected visually only, and no assessment of its operation or compliance with current environmental regulations was undertaken. The system should be regularly maintained and emptied as recommended. Your legal adviser should confirm ownership, maintenance responsibilities, any permits or exemptions, and compliance with current regulations.",
+        "tokens": [],
+        "when": [
+          "cb_septic_tank",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_septic_tank",
+            "label": "Septic tank",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_cesspit",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_CESSPIT}",
+        "text": "Cesspit (Cesspool): The property is connected to a cesspit (cesspool), which is an underground storage tank that collects foul waste and requires regular emptying by a licensed waste contractor. The installation was inspected visually only, and no assessment of its condition or capacity was undertaken. Your legal adviser should confirm ownership, maintenance responsibilities, and any records of regular emptying.",
+        "tokens": [],
+        "when": [
+          "cb_cess_pit",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_cess_pit",
+            "label": "Cesspit (cesspool)",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_public",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_PUBLIC_SEWER}",
+        "text": "Public Sewer: The property is connected to the public sewer. The drainage system is either combined (foul and surface water sharing the same pipework) or separate (foul and surface water discharged through separate pipework). Parts of the drainage system may pass through neighbouring properties or surrounding lands.",
+        "tokens": [],
+        "when": [
+          "cb_public_system",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_public_system",
+            "label": "Public sewer",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_no_defects",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_NO_DEFECTS_NOTED}",
+        "text": "No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the frame material should be expected.",
+        "tokens": [],
+        "when": [
+          "cb_dr_no_defects",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_dr_no_defects",
+            "label": "No defects noted",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_chamber",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_INSPECTION_CHAMBER}",
+        "text": "Inspection Chamber: The inspection chamber cover(s) were lifted where possible. No {DRAIN_CHAMBER_FINDING} was noted. The chambers should be inspected periodically to ensure they remain free flowing.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DRAIN_CHAMBER_FINDING}",
+            "options": [
+              [
+                "g6cf_blockage",
+                "blockage"
+              ],
+              [
+                "g6cf_recent_blockage",
+                "recent blockage"
+              ],
+              [
+                "g6cf_significant_defect",
+                "significant defect"
+              ]
+            ],
+            "pdf_options": [
+              "blockage",
+              "recent blockage",
+              "significant defect"
+            ],
+            "label": "Chamber finding",
+            "other": [
+              "g6cf_other",
+              "g6cf_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "No blockage, recent blockage, significant defect, other was noted."
+        ],
+        "when": [
+          "cb_dr_chamber",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_dr_chamber",
+            "label": "Inspection chamber",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_not_inspected",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_NOT_INSPECTED}",
+        "text": "Not Inspected: The inspection chamber cover(s) could not be lifted, and the condition of the underground drainage system could not be assessed. Further inspection by a suitably qualified drainage contractor is recommended if required.",
+        "tokens": [],
+        "when": [
+          "cb_dr_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_dr_not_inspected",
+            "label": "Not inspected",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_shared",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_SHARED_DRAINAGE}",
+        "text": "Shared Drainage: It is assumed that parts of the underground drainage system are shared with neighbouring property or properties. Your legal adviser should confirm your rights and responsibilities for maintenance and repair. Your legal adviser should confirm your responsibilities for the maintenance and repair of any shared drainage system.",
+        "tokens": [],
+        "when": [
+          "cb_shared",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_shared",
+            "label": "Shared drainage",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_svp",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_SOIL_AND_VENT_PIPE}",
+        "text": "Soil and Vent Pipe: The soil and vent pipe is visible at the {DRAIN_SVP_LOCATION} of the property and is constructed of {DRAIN_SVP_MATERIAL} material.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DRAIN_SVP_LOCATION}",
+            "options": [
+              [
+                "g6sl_front",
+                "front"
+              ],
+              [
+                "g6sl_rear",
+                "rear"
+              ],
+              [
+                "g6sl_side",
+                "side"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "rear",
+              "side"
+            ],
+            "label": "Visible at the",
+            "other": [
+              "g6sl_other",
+              "g6sl_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{DRAIN_SVP_MATERIAL}",
+            "options": [
+              [
+                "cb_material_plastic_pipe",
+                "plastic"
+              ],
+              [
+                "cb_material_cast_iron",
+                "cast iron"
+              ],
+              [
+                "cb_material_asbestos_cement",
+                "asbestos cement"
+              ]
+            ],
+            "pdf_options": [
+              "plastic",
+              "cast iron",
+              "asbestos cement"
+            ],
+            "label": "Constructed of",
+            "other": [
+              "g6sm_other",
+              "g6sm_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Soil and Vent Pipe: The soil and vent pipe is visible at the front, rear, side, other of the property and is constructed of plastic, cast iron, asbestos cement, other material."
+        ],
+        "when": [
+          "cb_dr_svp",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_dr_svp",
+            "label": "Soil and vent pipe",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_svp_visible",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_SVP_VISIBLE}",
+        "text": "Visible/Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the {DRAIN_SVP_VISIBLE_IN}. The visible sections appeared satisfactory. The condition of concealed sections could not be assessed.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DRAIN_SVP_VISIBLE_IN}",
+            "options": [
+              [
+                "g6sv_roof_space",
+                "roof space"
+              ]
+            ],
+            "pdf_options": [
+              "roof space"
+            ],
+            "label": "Sections visible in the",
+            "other": [
+              "g6sv_other",
+              "g6sv_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Visible/Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space/other."
+        ],
+        "when": [
+          "cb_dr_svp_visible",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_dr_svp_visible",
+            "label": "Visible / partially visible",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_services_drainage_repair_chamber_cover",
+    "set_title": "Drainage Repairs",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g6_cover",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_CHAMBER_COVER}",
+        "text": "Inspection Chamber Cover: The inspection chamber cover(s) are {DRAIN_COVER_DEFECT} and presents a safety hazard. It should be repaired or replaced without delay. The inspection chamber cover presents a safety hazard and should be repaired or replaced.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DRAIN_COVER_DEFECT}",
+            "options": [
+              [
+                "g6cv_broken",
+                "broken"
+              ],
+              [
+                "g6cv_corroded",
+                "corroded"
+              ],
+              [
+                "g6cv_poorly_secured",
+                "poorly secured"
+              ]
+            ],
+            "pdf_options": [
+              "broken",
+              "corroded",
+              "poorly secured"
+            ],
+            "label": "Cover defect",
+            "other": [
+              "g6cv_other",
+              "g6cv_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Inspection Chamber Cover: The inspection chamber cover(s) are broken, corroded, poorly secured, other and presents a safety hazard."
+        ],
+        "when": [
+          "cb_g6_cover",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_g6_cover",
+            "label": "Inspection chamber cover",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_walls",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_CHAMBER_WALLS}",
+        "text": "Inspection Chamber Walls: The inspection chamber walls are {DRAIN_WALL_DEFECT}. Repairs are recommended to prevent debris from entering and obstructing the drainage system.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DRAIN_WALL_DEFECT}",
+            "options": [
+              [
+                "g6cw_cracked",
+                "cracked"
+              ],
+              [
+                "g6cw_crumbling",
+                "crumbling"
+              ],
+              [
+                "g6cw_damaged",
+                "damaged"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "crumbling",
+              "damaged"
+            ],
+            "label": "Wall defect",
+            "other": [
+              "g6cw_other",
+              "g6cw_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Inspection Chamber Walls: The inspection chamber walls are cracked, crumbling, damaged, other."
+        ],
+        "when": [
+          "cb_g6_walls",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_g6_walls",
+            "label": "Inspection chamber walls",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_channels",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_DRAIN_CHANNELS}",
+        "text": "Drain Channels: The drainage channels within the inspection chamber are {DRAIN_CHANNEL_DEFECT}. Repairs are recommended to prevent further deterioration and reduce the risk of blockages.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DRAIN_CHANNEL_DEFECT}",
+            "options": [
+              [
+                "g6dc_cracked",
+                "cracked"
+              ],
+              [
+                "g6dc_poorly_formed",
+                "poorly formed"
+              ],
+              [
+                "g6dc_partially_blocked",
+                "partially blocked"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "poorly formed",
+              "partially blocked"
+            ],
+            "label": "Channel defect",
+            "other": [
+              "g6dc_other",
+              "g6dc_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Drain Channels: The drainage channels within the inspection chamber are cracked, poorly formed, partially blocked, other."
+        ],
+        "when": [
+          "cb_g6_channels",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_g6_channels",
+            "label": "Drain channels",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_svp_defects",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_SVP_DEFECTS}",
+        "text": "Soil and Vent Pipe Defects: The soil and vent pipe is {DRAIN_SVP_DEFECT}. Repairs are recommended. Depending on its condition, replacement with a modern plastic system may be more economical.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DRAIN_SVP_DEFECT}",
+            "options": [
+              [
+                "g6sd_cracked",
+                "cracked"
+              ],
+              [
+                "g6sd_damaged",
+                "damaged"
+              ],
+              [
+                "g6sd_corroded",
+                "corroded"
+              ],
+              [
+                "g6sd_leaking",
+                "leaking"
+              ],
+              [
+                "g6sd_inadequately_supported",
+                "inadequately supported"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "damaged",
+              "corroded",
+              "leaking",
+              "inadequately supported"
+            ],
+            "label": "Pipe defect",
+            "other": [
+              "g6sd_other",
+              "g6sd_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Soil and Vent Pipe Defects: The soil and vent pipe is cracked, damaged, corroded, leaking, inadequately supported, other."
+        ],
+        "when": [
+          "cb_g6_svp_defects",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_g6_svp_defects",
+            "label": "Soil and vent pipe defects",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_roots",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_TREE_ROOT_INGRESS}",
+        "text": "Tree Root Ingress: Tree roots were noted within the inspection chamber, indicating defects in the underground drainage system. If left untreated, root ingress is likely to worsen and cause recurring blockages. A suitably qualified drainage contractor should investigate and recommend repairs.",
+        "tokens": [],
+        "when": [
+          "cb_roots_in_chamber",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_roots_in_chamber",
+            "label": "Tree root ingress",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_gullies",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_GULLIES}",
+        "text": "Gullies: The above-ground rainwater and waste pipes discharge into gullies connected to the underground drainage system. The gullies are {DRAIN_GULLY_DEFECT}. They should be cleared and repaired, as necessary. Blocked gullies can result in overflowing water and dampness to adjacent walls.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DRAIN_GULLY_DEFECT}",
+            "options": [
+              [
+                "g6gu_partly_blocked",
+                "partly blocked"
+              ],
+              [
+                "g6gu_damaged",
+                "damaged"
+              ],
+              [
+                "g6gu_uncovered",
+                "uncovered"
+              ],
+              [
+                "g6gu_completely_blocked",
+                "completely blocked"
+              ]
+            ],
+            "pdf_options": [
+              "partly blocked",
+              "damaged",
+              "uncovered",
+              "completely blocked"
+            ],
+            "label": "Gully defect",
+            "other": [
+              "g6gu_other",
+              "g6gu_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "The gullies are partly blocked, damaged, uncovered, completely blocked, other."
+        ],
+        "when": [
+          "cb_g6_gullies",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_g6_gullies",
+            "label": "Gullies",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g6_asbestos",
+        "masters": [
+          "{G_DRAINAGE}"
+        ],
+        "sub": "{G6_ASBESTOS_SOIL_STACK}",
+        "text": "Asbestos Cement Soil Stack: The soil and vent pipe is constructed of asbestos cement. Provided it remains in good condition and is left undisturbed, it presents a low health risk. If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",
+        "tokens": [],
+        "when": [
+          "cb_g6_asbestos",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_g6_asbestos",
+            "label": "Asbestos cement soil stack",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_services_drainage_repair_chamber_walls",
+      "activity_services_drainage_repair_chamber_pipes",
+      "activity_services_drainage_repair_soil_and_vent",
+      "activity_services_drainage_repair_roots_in_chamber",
+      "activity_services_drainage_repair_gullies",
+      "activity_services_drainage_repair_defect_dampness",
+      "activity_services_drainage_not_inspected",
+      "activity_services_drainage_chamber_lids",
+      "activity_services_drainage_public_system"
+    ]
+  }
+]
