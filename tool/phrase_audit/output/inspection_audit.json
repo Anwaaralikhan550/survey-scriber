@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 525,
+  "screensAudited": 529,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2715,
-   "approvedLegacyBank": 629,
-   "approvedCurrentBankOnly": 2059,
+   "distinctEmitted": 2764,
+   "approvedLegacyBank": 626,
+   "approvedCurrentBankOnly": 2111,
    "unapproved": 0
   }
  },
@@ -4611,38 +4611,36 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_windows_aboutwindow",
    "title": "About windows",
-   "dataFieldCount": 16,
-   "permutationCount": 26,
+   "dataFieldCount": 22,
+   "permutationCount": 42,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 32,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
+    "approvedCurrentBankOnly": 32,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The windows appear to have been fully replaced or partially replaced. Where replacement windows have been installed, your legal adviser should confirm that the installation was carried out under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable (see section I2 - Guarantees). Any available guarantees or warranties should also be obtained.",
-    "Double-hung sash windows are expensive to maintain and tend to be ill-fitting and allow heat loss. From time to time, it is important to employ a joiner to inspect the sash windows, check the cords, and ease them before redecoration. This is best done in conjunction with the redecoration cycle.",
-    "BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The presence of visible markings indicates that safety glazing has been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows."
+    "Description: The windows are formed of replacement framed units.",
+    "The windows appear to have been fully replaced or partially replaced. Where replacement windows have been installed, your legal adviser should confirm that the installation was carried out under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Any available guarantees or warranties should also be obtained.",
+    "Description: The windows are formed of original framed units."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_windows_repairs_repair_window",
    "title": "Repair window",
-   "dataFieldCount": 19,
-   "permutationCount": 21,
+   "dataFieldCount": 17,
+   "permutationCount": 19,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair windows: The window(s) in the property, lounge, bedroom, kitchen and sample detail have damaged locks, are difficult to open, are badly worn, are rotten, have broken panes, have failed glazing, are in disrepair and sample detail. These should be repaired without delay, as the security of the property may be compromised (see section J3 - Risk to people).",
-    "However, severely or significantly damaged window(s) should be repaired immediately. Windows that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the windows entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable (see section I2 - Guarantees).",
-    "One or more windows have been affected by single or multiple defects, and this is a health and safety hazard. This should be promptly repaired."
+    "Repair windows: The window(s) in the lounge, dining room, bedroom, kitchen and sample detail have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk and have other defects. Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration. Where the defects affect the weather-tightness, security, or safe operation of the windows, repairs should be undertaken without delay. Severely damaged windows should be repaired or replaced immediately."
    ]
   },
   {
@@ -5040,39 +5038,6 @@
     "EWS1 form not required: Based on the visual evidence available during my inspection, the external wall construction appears broadly consistent with a building that may satisfy current EWS1 requirements. However, this inspection did not include an assessment of the external wall system for fire safety compliance, and I am not qualified to certify compliance. Confirmation can only be provided following an assessment by a suitably qualified fire safety professional, where required, and the issue of a valid EWS1 form. Your legal adviser should make further enquiries of the seller or managing agent and obtain a copy of any current EWS1 form, together with details of any planned, ongoing, or completed fire safety or cladding remediation works before you exchange contracts or commit to the purchase. This inspection should not be relied upon as confirmation of compliance with current fire safety legislation or lender requirements. Neither the surveyor nor this practice accepts liability for any loss, costs or delays arising from the fire performance of the external wall system, the absence or content of an EWS1 form, or any current or future remediation works or associated costs.",
     "EWS1 form required: The external wall construction observed during my inspection indicates that a detailed assessment of the external wall system may be required to confirm compliance with current fire safety requirements. My inspection was limited to a visual assessment only and did not include opening up, intrusive investigations or a fire safety appraisal of the cladding system. Where required, confirmation of the fire performance of the external wall system can only be provided by a suitably qualified fire safety professional following a detailed assessment and, where applicable, the issue of a valid EWS1 form. Your legal adviser should make further enquiries of the seller, freeholder or managing agent and obtain copies of any current EWS1 form, fire risk assessments relating to the external wall system, and details of any planned, ongoing or completed remediation works before exchange of contracts or completion of the purchase. Neither the surveyor nor this practice has assessed the external wall system for compliance with fire safety legislation or lender requirements and accepts no liability to you or any third party for any loss, delay, remediation costs or other financial consequences arising directly or indirectly from the fire performance of the external wall system, the requirement for or content of an EWS1 form, or any current or future remedial works.",
     "EWS1 Cladding: The external walls are partially cladded with a brick-slip, brick-effect outer face, rainscreen boards, terracotta tiles, compressed composite boards, aluminium panels, glass reinforced concrete (GRC) panels, glass curtain walling, hanging tiles (including shingle or plain tiles) and aluminium cladding panels, etc. This type of construction typically comprises fixing the cladding materials to a metal support frame secured to the primary structure, with a ventilated cavity and non-combustible mineral wool insulation behind. The inner leaf is commonly formed of concrete, blockwork or a metal framing system incorporating sheathing board and plasterboard lining."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_windows_safety_glass_rating",
-   "title": "Safety glass rating",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 0,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_windows_repairs_failed_glazing_location",
-   "title": "Failed glazing location",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Failed Glazed Units: One or more double-glazed units to the property exhibit internal condensation, misting, or failed seals. Although this does not usually affect structural performance, replacement of the affected glazing units should be anticipated.",
-    "Failed Glazed Units: One or more double-glazed units to the lounge exhibit internal condensation, misting, or failed seals. Although this does not usually affect structural performance, replacement of the affected glazing units should be anticipated.",
-    "Failed Glazed Units: One or more double-glazed units to the bedroom exhibit internal condensation, misting, or failed seals. Although this does not usually affect structural performance, replacement of the affected glazing units should be anticipated."
    ]
   },
   {
@@ -5619,19 +5584,150 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_windows_velux_window",
    "title": "Velux window",
-   "dataFieldCount": 33,
-   "permutationCount": 41,
+   "dataFieldCount": 13,
+   "permutationCount": 23,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof Windows Type: The property incorporates a roof window installed over the loft, extension and sample detail, formed in pvc, timber, steel and sample detail construction with single, double and secondary glazing.",
-    "Condition: Where visible, they appear in reasonable condition. No repair is currently needed. The property must be maintained in the normal way.",
-    "Roof Windows Type: The property incorporates one roof windows installed over the loft, extension and sample detail, formed in pvc, timber, steel and sample detail construction with single, double and secondary glazing."
+    "Condition: Where visible, they appear in good condition.",
+    "Condition: Where visible, they appear in reasonable condition.",
+    "Condition: Where visible, they appear in fair condition."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_windows_windowsills",
+   "title": "Windowsills",
+   "dataFieldCount": 8,
+   "permutationCount": 18,
+   "severities": [],
+   "phraseStats": {
+    "total": 11,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 11,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Windowsills: The windowsills are formed in PVCu material.",
+    "Windowsills: The windowsills are formed in timber material.",
+    "Windowsills: The windowsills are formed in brick material."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_windows_operation",
+   "title": "Operation",
+   "dataFieldCount": 1,
+   "permutationCount": 7,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Operation: The windows selected for operation opened and closed freely. Windows should be inspected and maintained regularly. Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary. Timber windows should be redecorated periodically to maintain protection against weathering. Sealants should be inspected and renewed where deterioration becomes evident.",
+    "Operation: The windows selected for operation opened and closed with minor with resistance. Windows should be inspected and maintained regularly. Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary. Timber windows should be redecorated periodically to maintain protection against weathering. Sealants should be inspected and renewed where deterioration becomes evident.",
+    "Operation: The windows selected for operation opened and closed with difficulty. Windows should be inspected and maintained regularly. Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary. Timber windows should be redecorated periodically to maintain protection against weathering. Sealants should be inspected and renewed where deterioration becomes evident."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_windows_defective_operation",
+   "title": "Defective operation",
+   "dataFieldCount": 7,
+   "permutationCount": 9,
+   "severities": [],
+   "phraseStats": {
+    "total": 8,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 8,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Defective Operation One or more windows were found to: stick during operation. Repairs or adjustment should be undertaken to maintain security and weather resistance.",
+    "Defective Operation One or more windows were found to: fail to close correctly. Repairs or adjustment should be undertaken to maintain security and weather resistance.",
+    "Defective Operation One or more windows were found to: fail to lock securely. Repairs or adjustment should be undertaken to maintain security and weather resistance."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_windows_failed_glazed_units",
+   "title": "Failed glazed units",
+   "dataFieldCount": 3,
+   "permutationCount": 5,
+   "severities": [],
+   "phraseStats": {
+    "total": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 4,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Failed Glazed Units: One or more double-glazed units exhibit internal condensation. Although this does not usually affect structural performance, replacement of the affected glazing units should be anticipated.",
+    "Failed Glazed Units: One or more double-glazed units exhibit misting. Although this does not usually affect structural performance, replacement of the affected glazing units should be anticipated.",
+    "Failed Glazed Units: One or more double-glazed units exhibit failed seals. Although this does not usually affect structural performance, replacement of the affected glazing units should be anticipated."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_windows_damaged_glazing",
+   "title": "Damaged glazing",
+   "dataFieldCount": 5,
+   "permutationCount": 7,
+   "severities": [],
+   "phraseStats": {
+    "total": 6,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 6,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Damaged Glazing: One or more panes are cracked. Damaged glazing should be replaced to maintain safety, security, and weather resistance.",
+    "Damaged Glazing: One or more panes are broken. Damaged glazing should be replaced to maintain safety, security, and weather resistance.",
+    "Damaged Glazing: One or more panes are chipped. Damaged glazing should be replaced to maintain safety, security, and weather resistance."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_windows_timber_windows",
+   "title": "Timber windows",
+   "dataFieldCount": 5,
+   "permutationCount": 7,
+   "severities": [],
+   "phraseStats": {
+    "total": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 4,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Timber Windows: Where timber windows are present, localised weathering issues may occur as part of their normal service life. Regular decoration and maintenance should be undertaken to prolong their lifespan.",
+    "Timber Windows: Where timber windows are present, paint deterioration issues may occur as part of their normal service life. Regular decoration and maintenance should be undertaken to prolong their lifespan.",
+    "Timber Windows: Where timber windows are present, minor decay issues may occur as part of their normal service life. Regular decoration and maintenance should be undertaken to prolong their lifespan."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_windows_condensation",
+   "title": "Condensation",
+   "dataFieldCount": 1,
+   "permutationCount": 3,
+   "severities": [],
+   "phraseStats": {
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Condensation: Some condensation was noted on the glazing at the time of inspection. Condensation is influenced by occupancy, heating and ventilation and does not necessarily indicate a defect with the windows."
    ]
   },
   {
@@ -5648,7 +5744,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Fire Trap Risk: The design of the window(s) in the lounge, bedroom, study and sample detail does not provide a suitable means of escape in the event of a fire. The affected window(s) has no opening, opening too small and no window at all, creating a potential safety hazard (see section J3 - Risk to people). To reduce this hazard, you should seek advice from an appropriately qualified person regarding suitable remedial measures."
+    "Fire Trap Risk: The design of the window(s) does not provide a suitable means of escape in the event of a fire. The affected window(s) in the lounge, dining room, bedroom, study and sample detail have no opening and a small opening, creating a potential safety hazard. To reduce this hazard, you should seek advice from an appropriately qualified person regarding suitable remedial measures."
    ]
   },
   {
@@ -6273,8 +6369,8 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_windows_sill_projection",
    "title": "Sill Projection/Wall Sealing",
-   "dataFieldCount": 2,
-   "permutationCount": 10,
+   "dataFieldCount": 7,
+   "permutationCount": 15,
    "severities": [],
    "phraseStats": {
     "total": 4,
@@ -6283,8 +6379,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Sill defect: The windowsill projection beyond the face of the wall does not appear to be adequate, properly installed, properly drained, cracked, defective. This is allowing water ingress to adjoining walls and may be causing dampness. You should promptly arrange for further investigation and repair by a qualified professional to prevent further damage.",
     "Sill projection: Externally, the windowsills beyond the face of the walls appear to project adequately beyond the face of the walls. The junctions between the window frames and the surrounding wall openings appear to be properly sealed. These seals should be inspected regularly for cracking and repaired as necessary to prevent water ingress.",
+    "Sill defect: The windowsill projection beyond the face of the wall does not appear to be adequate, properly installed, properly drained, cracked and defective. This is allowing water ingress to adjoining walls and may be causing dampness. You should promptly arrange for further investigation and repair by a qualified professional to prevent further damage.",
     "Sill projection: Externally, the windowsills beyond the face of the walls appear to project adequately beyond the face of the walls. The junctions between the window frames and the surrounding wall openings appear to be fairly sealed. These seals should be inspected regularly for cracking and repaired as necessary to prevent water ingress."
    ]
   },
@@ -7257,25 +7353,6 @@
     "Minor subsidence: Diagonally stepped and other similar cracks were noted to the external elevations of the property. Evidence of previous repairs, including localised repointing and repairs to the bay and other wall sections, was also observed. Based on a single visual inspection, it is not possible to confirm whether the movement is historic and stable or whether it is progressive. Although no significant distortion or evidence requiring immediate structural intervention was apparent at the time of inspection, the cause, extent, and current activity of the movement cannot be confirmed without further investigation and monitoring over time. You should ask your legal adviser whether any guarantees, warranties, structural reports, or insurance claims relating to these repairs are available. In the absence of satisfactory documentary evidence, I recommend that the affected areas are inspected by a suitably qualified structural engineer, who can advise whether any further investigation or monitoring is necessary before you commit to the purchase.",
     "Significant subsidence: Significant diagonally stepped and other similar cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls. Where some of these cracks may have or have not been repaired and the time of repair is unknown, I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive. The pattern of cracking is consistent with movement that may be associated with subsidence or foundation movement. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts. Your legal adviser should also establish whether there is any history of subsidence, structural movement, underpinning, monitoring, insurance claims, or structural repairs affecting the property. If you proceed with the purchase without further investigation, you will be accepting the risk that more significant structural defects and associated repair costs may become apparent in the future.",
     "No Structural Movement: Although I did not observe any evidence of significant structural movement during my inspection, I cannot be categorical that none has occurred, as all buildings are subject to some degree of movement, such as normal settlement and seasonal thermal or moisture-related movement. It is also possible that evidence of movement, including cracks, may be concealed by floor coverings, decorations, fitted furniture, or other obstructions."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_windows_wall_sealing",
-   "title": "Wall sealing",
-   "dataFieldCount": 1,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Glazing seals: The external sealant around the window frames appears to be properly maintained. Defective sealant should be renewed to reduce the risk of water penetration.",
-    "Glazing seals: The external sealant around the window frames appears to be fairly maintained. Defective sealant should be renewed to reduce the risk of water penetration.",
-    "Glazing seals: The external sealant around the window frames appears to be poorly maintained. Defective sealant should be renewed to reduce the risk of water penetration."
    ]
   },
   {
@@ -9095,34 +9172,34 @@
    "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 10,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
+    "The external walls have been inspected visually and by touch from the outside and internally where exposed. No opening up or destructive investigation has been undertaken. The composition of the wall material cannot be fully confirmed without causing damage to the walls.",
     "The element(s) are performing their intended function, and no significant defects were observed. Routine maintenance appropriate to the age and construction should be expected.",
-    "Defects requiring repair or maintenance were identified. Although these are not considered urgent, repairs should be carried out to prevent further deterioration.",
-    "Significant defects requiring urgent repair or further investigation were identified. Appropriate remedial works should be undertaken without delay. Where the extent of the defect cannot be determined during a visual inspection, further investigation by an appropriately qualified person is recommended before legal commitment."
+    "Defects requiring repair or maintenance were identified. Although these are not considered urgent, repairs should be carried out to prevent further deterioration."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_windows_main_screen",
    "title": "Windows",
-   "dataFieldCount": 4,
-   "permutationCount": 10,
+   "dataFieldCount": 2,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 10,
-    "approvedLegacy": 6,
-    "approvedCurrentBankOnly": 3,
+    "total": 9,
+    "approvedLegacy": 4,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
+    "Not every part of the windows was inspected in detail. The inspection was limited to those parts that were readily accessible without causing damage or moving furnishings. Only a representative sample of accessible windows was opened and closed during the inspection. Windows obscured by curtains, blinds, shutters, furniture, stored items, or fitted security devices could not be fully inspected. Double-glazed units cannot be assessed for thermal performance during a visual inspection.",
     "The element(s) are performing their intended function, and no significant defects were observed. Routine maintenance appropriate to the age and construction should be expected.",
-    "Defects requiring repair or maintenance were identified. Although these are not considered urgent, repairs should be carried out to prevent further deterioration.",
-    "Significant defects requiring urgent repair or further investigation were identified. Appropriate remedial works should be undertaken without delay. Where the extent of the defect cannot be determined during a visual inspection, further investigation by an appropriately qualified person is recommended before legal commitment."
+    "Defects requiring repair or maintenance were identified. Although these are not considered urgent, repairs should be carried out to prevent further deterioration."
    ]
   },
   {

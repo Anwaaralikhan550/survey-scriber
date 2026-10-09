@@ -2564,10 +2564,6 @@ void main() {
               'cb_wc_89': 'true',
               'cb_badly_cracked_62': 'true',
             },
-            'activity_outside_property_windows_repairs_repair_window': {
-              'cb_safety_hazard': 'true',
-              'cb_ch1': 'true',
-            },
             'activity_outside_property_out_side_doors_repairs_repair_out_side_doors':
                 {
               'actv_repair_type': 'Repair now',
@@ -2590,11 +2586,6 @@ void main() {
 
       expect(j3Text, contains('bathtub and wc are badly cracked'));
 
-      expect(
-        j3Text,
-        contains(
-            'affected by single or multiple defects, and this is a health and safety hazard (see section e5'),
-      );
       expect(
         j3Text,
         contains(
@@ -2838,7 +2829,7 @@ void main() {
     });
 
     test(
-        'adds the PDF Add-text-to J1/J3 injections for E2, E3 and E4 from the bank'
+        'adds the PDF Add-text-to J1/J3 injections for E2-E5 from the bank'
         'approved bank', () {
       final tree = InspectionTreePayload(
         sections: [
@@ -2904,6 +2895,9 @@ void main() {
             'activity_outside_property_main_wall_repairs_lintel': {
               'actv_condition': 'Significant defect',
             },
+            'activity_outside_property_windows_repairs_no_fire_escape_risk': {
+              'e5fl_lounge': 'true',
+            },
             'activity_outside_property_roof_spreading_repair': {
               'rc_rs_front': 'true',
             },
@@ -2934,6 +2928,10 @@ void main() {
         j3,
         contains('One or more tiles, slates, or roof covering sections are '
             'loose, slipped, cracked, broken, or missing'),
+      );
+      expect(
+        j3,
+        contains('The design of one or more windows does not provide a suitable means of escape for occupants in the event of a fire'),
       );
     });
 
@@ -3471,8 +3469,8 @@ void main() {
               'cb_chimney_stack': 'true',
             },
             'activity_outside_property_windows_aboutwindow': {
-              'cb_is_replacement': 'true',
-              'cb_pvc': 'true',
+              'e5t_replacement': 'true',
+              'e5t_pvcu': 'true',
             },
             'activity_outside_property_out_side_doors_about_doors': {
               'cb_replacement': 'true',
@@ -3728,7 +3726,7 @@ void main() {
             },
             // Replacement, but not PVC - should not fire.
             'activity_outside_property_windows_aboutwindow': {
-              'cb_is_replacement': 'true',
+              'e5t_replacement': 'true',
               'cb_timber': 'true',
             },
           },

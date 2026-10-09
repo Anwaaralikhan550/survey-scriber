@@ -1,0 +1,1126 @@
+[
+  {
+    "screen": "activity_outside_property_windows_aboutwindow",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e5_desc",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_DESCRIPTION}",
+        "text": "Description: The windows are formed of {WIN_TYPES} framed units.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WIN_TYPES}",
+            "options": [
+              [
+                "e5t_replacement",
+                "replacement"
+              ],
+              [
+                "e5t_original",
+                "original"
+              ],
+              [
+                "e5t_old",
+                "old"
+              ],
+              [
+                "e5t_pvcu",
+                "PVCu"
+              ],
+              [
+                "e5t_timber",
+                "timber"
+              ],
+              [
+                "e5t_old_style_timber_sash",
+                "old style timber sash"
+              ],
+              [
+                "e5t_modern_pvc_sash",
+                "modern PVC sash"
+              ],
+              [
+                "e5t_modern_timber_sash",
+                "modern timber sash"
+              ],
+              [
+                "e5t_aluminium",
+                "aluminium"
+              ],
+              [
+                "e5t_composite",
+                "composite"
+              ]
+            ],
+            "pdf_options": [
+              "replacement",
+              "original",
+              "old",
+              "PVCu",
+              "timber",
+              "old style timber sash",
+              "modern PVC sash",
+              "modern timber sash",
+              "aluminium",
+              "composite"
+            ],
+            "label": "Windows formed of",
+            "other": [
+              "cb_other_895",
+              "et_other_220"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The windows are formed of replacement, original, old, PVCu, timber, old style timber sash, modern PVC sash, modern timber sash, aluminium, composite, other framed units."
+        ]
+      },
+      {
+        "id": "e5_glazing",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_GLAZING}",
+        "text": "Glazing: The glazing comprises {WIN_GLAZING}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WIN_GLAZING}",
+            "options": [
+              [
+                "e5g_single_glazing",
+                "single glazing"
+              ],
+              [
+                "e5g_double_glazing",
+                "double glazing"
+              ],
+              [
+                "e5g_triple_glazing",
+                "triple glazing"
+              ],
+              [
+                "e5g_secondary_glazing",
+                "secondary glazing"
+              ],
+              [
+                "e5g_decorative_glazing",
+                "decorative glazing"
+              ]
+            ],
+            "pdf_options": [
+              "single glazing",
+              "double glazing",
+              "triple glazing",
+              "secondary glazing",
+              "decorative glazing"
+            ],
+            "label": "Glazing",
+            "other": [
+              "e5g_other",
+              "e5g_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Glazing: The glazing comprises single glazing, double glazing, triple glazing, secondary glazing, decorative glazing, other."
+        ]
+      },
+      {
+        "id": "e5_bs_no",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_NO_BS_EN}",
+        "text": "No BS EN: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The absence of visible markings does not necessarily indicate that safety glazing has not been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "No BS EN"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Safety glass markings",
+            "type": "dropdown",
+            "options": [
+              "No BS EN",
+              "BS EN noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e5_bs_yes",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_BS_EN_NOTED}",
+        "text": "BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The presence of visible markings indicates that safety glazing has been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "BS EN noted"
+        ]
+      },
+      {
+        "id": "e5_condition",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_CONDITION}",
+        "text": "Condition: Where visible and operated during the inspection, the windows appear in {WIN_CONDITION} condition, consistent with their age and type. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of window material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WIN_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible and operated during the inspection, the windows appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type."
+        ]
+      },
+      {
+        "id": "e5_very_poor",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_VERY_POOR}",
+        "text": "Windows that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the windows entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Very poor"
+        ]
+      },
+      {
+        "id": "e5_replacement",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_REPLACEMENT}",
+        "text": "The windows appear to have been fully replaced or partially replaced. Where replacement windows have been installed, your legal adviser should confirm that the installation was carried out under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Any available guarantees or warranties should also be obtained.",
+        "tokens": [],
+        "when": [
+          "e5t_replacement",
+          "true"
+        ]
+      },
+      {
+        "id": "e5_old_sash",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_OLD_SASH}",
+        "text": "Double-hung sash windows are expensive to maintain and tend to be ill-fitting and allow heat loss. From time to time, it is important to employ a joiner to inspect the sash windows, check the cords, and ease them before redecoration. This is best done in conjunction with the redecoration cycle.",
+        "tokens": [],
+        "when": [
+          "e5t_old_style_timber_sash",
+          "true"
+        ]
+      },
+      {
+        "id": "e5_seals",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_GLAZING_SEALS}",
+        "text": "Glazing seals: The external sealant around the window frames appears in {SEAL_CONDITION} condition. Defective sealant should be renewed to reduce the risk of water penetration.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{SEAL_CONDITION}",
+            "dropdown": "actv_seals",
+            "field_label": "Glazing seals condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Glazing seals: The external sealant around the window frames appears in good, reasonable, fair, poor, very poor condition."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_sill_projection",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e5_sill",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_SILL_PROJECTION}",
+        "text": "Sill projection: Externally, the windowsills beyond the face of the walls appear to project adequately beyond the face of the walls. The junctions between the window frames and the surrounding wall openings appear to be {SILL_SEALING} sealed. These seals should be inspected regularly for cracking and repaired as necessary to prevent water ingress.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{SILL_SEALING}",
+            "dropdown": "actv_condition",
+            "field_label": "Sealing around windows",
+            "dropdown_options": [
+              "Properly",
+              "Fairly",
+              "Poorly"
+            ],
+            "pdf_options": [
+              "properly",
+              "fairly",
+              "poorly"
+            ],
+            "lower": true,
+            "cond": "actv_projection_type=Sill projection"
+          }
+        ],
+        "pdf": [
+          "The junctions between the window frames and the surrounding wall openings appear to be properly, fairly, poorly sealed."
+        ],
+        "when": [
+          "actv_projection_type",
+          "Sill projection"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_projection_type",
+            "label": "Sill",
+            "type": "dropdown",
+            "options": [
+              "Sill projection",
+              "Sill defect"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e5_sill_defect",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_SILL_DEFECT}",
+        "text": "Sill defect: The windowsill projection beyond the face of the wall does not appear to be {SILL_DEFECTS}. This is allowing water ingress to adjoining walls and may be causing dampness. You should promptly arrange for further investigation and repair by a qualified professional to prevent further damage.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{SILL_DEFECTS}",
+            "options": [
+              [
+                "e5sd_adequate",
+                "adequate"
+              ],
+              [
+                "e5sd_properly_installed",
+                "properly installed"
+              ],
+              [
+                "e5sd_properly_drained",
+                "properly drained"
+              ],
+              [
+                "e5sd_cracked",
+                "cracked"
+              ],
+              [
+                "e5sd_defective",
+                "defective"
+              ]
+            ],
+            "pdf_options": [
+              "adequate",
+              "properly installed",
+              "properly drained",
+              "cracked",
+              "defective"
+            ],
+            "label": "Windowsill projection",
+            "cond": "actv_projection_type=Sill defect"
+          }
+        ],
+        "pdf": [
+          "Sill defect: The windowsill projection beyond the face of the wall does not appear to be adequate, properly installed, properly drained, cracked, defective."
+        ],
+        "when": [
+          "actv_projection_type",
+          "Sill defect"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_repairs_repair_window",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e5_repair",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_REPAIR_WINDOWS}",
+        "text": "Repair windows: The window(s) in the {REPAIR_LOCATIONS} {REPAIR_DEFECTS}. Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration. Where the defects affect the weather-tightness, security, or safe operation of the windows, repairs should be undertaken without delay. Severely damaged windows should be repaired or replaced immediately.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{REPAIR_LOCATIONS}",
+            "options": [
+              [
+                "e5rl_lounge",
+                "lounge"
+              ],
+              [
+                "e5rl_dining_room",
+                "dining room"
+              ],
+              [
+                "e5rl_bedroom",
+                "bedroom"
+              ],
+              [
+                "e5rl_kitchen",
+                "kitchen"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "dining room",
+              "bedroom",
+              "kitchen"
+            ],
+            "label": "Windows in",
+            "other": [
+              "cb_other_471",
+              "et_other_175"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{REPAIR_DEFECTS}",
+            "options": [
+              [
+                "e5rd_have_damaged_lock_s",
+                "have damaged lock(s)"
+              ],
+              [
+                "e5rd_have_missing_lock_s",
+                "have missing lock(s)"
+              ],
+              [
+                "e5rd_are_difficult_to_open",
+                "are difficult to open"
+              ],
+              [
+                "e5rd_are_badly_worn",
+                "are badly worn"
+              ],
+              [
+                "e5rd_are_rotten",
+                "are rotten"
+              ],
+              [
+                "e5rd_have_broken_glass",
+                "have broken glass"
+              ],
+              [
+                "e5rd_have_failed_glazing",
+                "have failed glazing"
+              ],
+              [
+                "e5rd_are_in_disrepair",
+                "are in disrepair"
+              ],
+              [
+                "e5rd_are_severely_damaged",
+                "are severely damaged"
+              ],
+              [
+                "e5rd_present_a_safety_or_security_risk",
+                "present a safety or security risk"
+              ],
+              [
+                "e5rd_have_other_defects",
+                "have other defects"
+              ]
+            ],
+            "pdf_options": [
+              "have damaged lock(s)",
+              "have missing lock(s)",
+              "are difficult to open",
+              "are badly worn",
+              "are rotten",
+              "have broken glass",
+              "have failed glazing",
+              "are in disrepair",
+              "are severely damaged",
+              "present a safety or security risk",
+              "have other defects"
+            ],
+            "label": "Defects"
+          }
+        ],
+        "pdf": [
+          "Repair windows: The window(s) in the lounge, dining room, bedroom, kitchen, other, have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk, have other defects.",
+          "Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_velux_window",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e5_velux",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_VELUX}",
+        "text": "Roof Velux Windows: Type: The property incorporates {VELUX_TYPES}. These are formed in {VELUX_MATERIALS} construction with {VELUX_GLAZING} glazing.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{VELUX_TYPES}",
+            "options": [
+              [
+                "e5vt_roof_windows",
+                "roof windows"
+              ],
+              [
+                "e5vt_roof_skylights",
+                "roof skylights"
+              ],
+              [
+                "e5vt_velux_roof_windows",
+                "Velux roof windows"
+              ]
+            ],
+            "pdf_options": [
+              "roof windows",
+              "roof skylights",
+              "Velux roof windows"
+            ],
+            "label": "Type",
+            "other": [
+              "cb_other_629",
+              "et_other_290"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{VELUX_MATERIALS}",
+            "options": [
+              [
+                "e5vm_timber",
+                "timber"
+              ],
+              [
+                "e5vm_pvcu",
+                "PVCu"
+              ],
+              [
+                "e5vm_aluminium",
+                "aluminium"
+              ]
+            ],
+            "pdf_options": [
+              "timber",
+              "PVCu",
+              "aluminium"
+            ],
+            "label": "Formed in",
+            "other": [
+              "cb_other_610",
+              "et_other_816"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{VELUX_GLAZING}",
+            "options": [
+              [
+                "e5vg_double",
+                "double"
+              ],
+              [
+                "e5vg_triple",
+                "triple"
+              ]
+            ],
+            "pdf_options": [
+              "double",
+              "triple"
+            ],
+            "label": "Glazing"
+          }
+        ],
+        "pdf": [
+          "Roof Velux Windows: Type: The property incorporates roof windows, roof skylights, Velux roof windows, other.",
+          "These are formed in timber, PVCu, aluminium, other construction with double, triple glazing."
+        ]
+      },
+      {
+        "id": "e5_velux_cond",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_VELUX_CONDITION}",
+        "text": "Condition: Where visible, they appear in {VELUX_CONDITION} condition.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{VELUX_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_windowsills",
+    "new_screen": {
+      "id": "activity_outside_property_windows_windowsills",
+      "title": "Windowsills",
+      "parent": "group_windows_21",
+      "order": 6,
+      "after": "activity_outside_property_windows_velux_window"
+    },
+    "rules": [
+      {
+        "id": "e5_windowsills",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_WINDOWSILLS}",
+        "text": "Windowsills: The windowsills are formed in {SILL_MATERIALS} material.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{SILL_MATERIALS}",
+            "options": [
+              [
+                "e5sm_pvcu",
+                "PVCu"
+              ],
+              [
+                "e5sm_timber",
+                "timber"
+              ],
+              [
+                "e5sm_brick",
+                "brick"
+              ],
+              [
+                "e5sm_tiles",
+                "tiles"
+              ],
+              [
+                "e5sm_concrete",
+                "concrete"
+              ]
+            ],
+            "pdf_options": [
+              "PVCu",
+              "timber",
+              "brick",
+              "tiles",
+              "concrete"
+            ],
+            "label": "Formed in",
+            "other": [
+              "e5sm_other",
+              "e5sm_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Windowsills: The windowsills are formed in PVCu, timber, brick, tiles, concrete, other material."
+        ]
+      },
+      {
+        "id": "e5_windowsills_cond",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_WINDOWSILLS_CONDITION}",
+        "text": "Condition: Where visible, they appear in {SILL_CONDITION} condition. Repairs should be undertaken where deterioration is sufficient to affect weather resistance.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{SILL_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_operation",
+    "new_screen": {
+      "id": "activity_outside_property_windows_operation",
+      "title": "Operation",
+      "parent": "group_windows_21",
+      "order": 8,
+      "after": "activity_outside_property_windows_windowsills"
+    },
+    "rules": [
+      {
+        "id": "e5_operation",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_OPERATION}",
+        "text": "Operation: The windows selected for operation opened and closed {WIN_OPERATION}. Windows should be inspected and maintained regularly. Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary. Timber windows should be redecorated periodically to maintain protection against weathering. Sealants should be inspected and renewed where deterioration becomes evident.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WIN_OPERATION}",
+            "dropdown": "actv_operation",
+            "field_label": "Windows opened and closed",
+            "dropdown_options": [
+              "Freely",
+              "With minor with resistance",
+              "With difficulty"
+            ],
+            "pdf_options": [
+              "freely",
+              "with minor with resistance",
+              "with difficulty"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Operation: The windows selected for operation opened and closed freely, with minor with resistance, with difficulty."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_defective_operation",
+    "new_screen": {
+      "id": "activity_outside_property_windows_defective_operation",
+      "title": "Defective operation",
+      "parent": "group_windows_21",
+      "order": 9,
+      "after": "activity_outside_property_windows_operation"
+    },
+    "rules": [
+      {
+        "id": "e5_defective_op",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_DEFECTIVE_OPERATION}",
+        "text": "Defective Operation One or more windows were found to: {WIN_DEFECTIVE_OPERATION}. Repairs or adjustment should be undertaken to maintain security and weather resistance.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WIN_DEFECTIVE_OPERATION}",
+            "options": [
+              [
+                "e5do_stick_during_operation",
+                "stick during operation"
+              ],
+              [
+                "e5do_fail_to_close_correctly",
+                "fail to close correctly"
+              ],
+              [
+                "e5do_fail_to_lock_securely",
+                "fail to lock securely"
+              ],
+              [
+                "e5do_require_adjustment",
+                "require adjustment"
+              ],
+              [
+                "e5do_have_damaged_hinges",
+                "have damaged hinges"
+              ],
+              [
+                "e5do_have_defective_handles",
+                "have defective handles"
+              ],
+              [
+                "e5do_have_defective_locking_mechanisms",
+                "have defective locking mechanisms"
+              ]
+            ],
+            "pdf_options": [
+              "stick during operation",
+              "fail to close correctly",
+              "fail to lock securely",
+              "require adjustment",
+              "have damaged hinges",
+              "have defective handles",
+              "have defective locking mechanisms"
+            ],
+            "label": "Windows were found to"
+          }
+        ],
+        "pdf": [
+          "Defective Operation One or more windows were found to: • stick during operation • fail to close correctly • fail to lock securely • require adjustment • have damaged hinges • have defective handles • have defective locking mechanisms Repairs or adjustment should be undertaken to maintain security and weather resistance."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_failed_glazed_units",
+    "new_screen": {
+      "id": "activity_outside_property_windows_failed_glazed_units",
+      "title": "Failed glazed units",
+      "parent": "group_windows_21",
+      "order": 10,
+      "after": "activity_outside_property_windows_defective_operation"
+    },
+    "rules": [
+      {
+        "id": "e5_failed_units",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_FAILED_UNITS}",
+        "text": "Failed Glazed Units: One or more double-glazed units exhibit {FAILED_UNIT_SIGNS}. Although this does not usually affect structural performance, replacement of the affected glazing units should be anticipated.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{FAILED_UNIT_SIGNS}",
+            "options": [
+              [
+                "e5fg_internal_condensation",
+                "internal condensation"
+              ],
+              [
+                "e5fg_misting",
+                "misting"
+              ],
+              [
+                "e5fg_failed_seals",
+                "failed seals"
+              ]
+            ],
+            "pdf_options": [
+              "internal condensation",
+              "misting",
+              "failed seals"
+            ],
+            "label": "Units exhibit"
+          }
+        ],
+        "pdf": [
+          "Failed Glazed Units: One or more double-glazed units exhibit internal condensation, misting, failed seals."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_damaged_glazing",
+    "new_screen": {
+      "id": "activity_outside_property_windows_damaged_glazing",
+      "title": "Damaged glazing",
+      "parent": "group_windows_21",
+      "order": 11,
+      "after": "activity_outside_property_windows_failed_glazed_units"
+    },
+    "rules": [
+      {
+        "id": "e5_damaged_glazing",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_DAMAGED_GLAZING}",
+        "text": "Damaged Glazing: One or more panes are {DAMAGED_PANES}. Damaged glazing should be replaced to maintain safety, security, and weather resistance.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DAMAGED_PANES}",
+            "options": [
+              [
+                "e5dg_cracked",
+                "cracked"
+              ],
+              [
+                "e5dg_broken",
+                "broken"
+              ],
+              [
+                "e5dg_chipped",
+                "chipped"
+              ],
+              [
+                "e5dg_damaged",
+                "damaged"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "broken",
+              "chipped",
+              "damaged"
+            ],
+            "label": "Panes are"
+          }
+        ],
+        "pdf": [
+          "Damaged Glazing: One or more panes are cracked, broken, chipped, damaged."
+        ]
+      },
+      {
+        "id": "e5_glazing_hazard",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_GLAZING_HAZARD}",
+        "text": "Hazard: One or more panes are damaged, and this presents a health and safety hazard. The damage should be promptly repaired by a qualified professional.",
+        "tokens": [],
+        "when": [
+          "cb_hazard",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_hazard",
+            "label": "Hazard",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_timber_windows",
+    "new_screen": {
+      "id": "activity_outside_property_windows_timber_windows",
+      "title": "Timber windows",
+      "parent": "group_windows_21",
+      "order": 12,
+      "after": "activity_outside_property_windows_damaged_glazing"
+    },
+    "rules": [
+      {
+        "id": "e5_timber",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_TIMBER_WINDOWS}",
+        "text": "Timber Windows: Where timber windows are present, {TIMBER_ISSUES} issues may occur as part of their normal service life. Regular decoration and maintenance should be undertaken to prolong their lifespan.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{TIMBER_ISSUES}",
+            "options": [
+              [
+                "e5tw_localised_weathering",
+                "localised weathering"
+              ],
+              [
+                "e5tw_paint_deterioration",
+                "paint deterioration"
+              ],
+              [
+                "e5tw_minor_decay",
+                "minor decay"
+              ]
+            ],
+            "pdf_options": [
+              "localised weathering",
+              "paint deterioration",
+              "minor decay"
+            ],
+            "label": "Issues that may occur",
+            "other": [
+              "e5tw_other",
+              "e5tw_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Timber Windows: Where timber windows are present, localised weathering, paint deterioration, minor decay, other issues may occur as part of their normal service life."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_condensation",
+    "new_screen": {
+      "id": "activity_outside_property_windows_condensation",
+      "title": "Condensation",
+      "parent": "group_windows_21",
+      "order": 13,
+      "after": "activity_outside_property_windows_timber_windows"
+    },
+    "rules": [
+      {
+        "id": "e5_condensation",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_CONDENSATION}",
+        "text": "Condensation: Some condensation was noted on the glazing at the time of inspection. Condensation is influenced by occupancy, heating and ventilation and does not necessarily indicate a defect with the windows.",
+        "tokens": [],
+        "when": [
+          "cb_condensation",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_condensation",
+            "label": "Condensation noted",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_repairs_no_fire_escape_risk",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e5_fire_trap",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{E5_FIRE_TRAP}",
+        "text": "Fire Trap Risk: The design of the window(s) does not provide a suitable means of escape in the event of a fire. The affected window(s) in the {FIRE_LOCATIONS} have {FIRE_OPENINGS}, creating a potential safety hazard. To reduce this hazard, you should seek advice from an appropriately qualified person regarding suitable remedial measures.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{FIRE_LOCATIONS}",
+            "options": [
+              [
+                "e5fl_lounge",
+                "lounge"
+              ],
+              [
+                "e5fl_dining_room",
+                "dining room"
+              ],
+              [
+                "e5fl_bedroom",
+                "bedroom"
+              ],
+              [
+                "e5fl_study",
+                "study"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "dining room",
+              "bedroom",
+              "study"
+            ],
+            "label": "Window(s) in",
+            "other": [
+              "cb_other_175",
+              "et_other_308"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{FIRE_OPENINGS}",
+            "options": [
+              [
+                "e5fo_no_opening",
+                "no opening"
+              ],
+              [
+                "e5fo_a_small_opening",
+                "a small opening"
+              ]
+            ],
+            "pdf_options": [
+              "no opening",
+              "a small opening"
+            ],
+            "label": "Windows have"
+          }
+        ],
+        "pdf": [
+          "The affected window(s) in the lounge, dining room, bedroom, study, other room have no opening, a small opening, creating a potential safety hazard."
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_outside_property_windows_repairs_failed_glazing_location"
+    ]
+  }
+]

@@ -1058,8 +1058,8 @@ class ReportBuilder {
     // that I2 is the active element.
     final windowsAbout = _answersForScreen(
         rawData, 'activity_outside_property_windows_aboutwindow');
-    if (_isCheckedValue(windowsAbout['cb_is_replacement']) &&
-        _isCheckedValue(windowsAbout['cb_pvc'])) {
+    if (_isCheckedValue(windowsAbout['e5t_replacement']) &&
+        _isCheckedValue(windowsAbout['e5t_pvcu'])) {
       phrases.add(
           'You should ask your legal adviser to confirm whether the PVC glazed sections to the windows were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
     }
@@ -1644,46 +1644,14 @@ class ReportBuilder {
           'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
     }
 
-    // RICS L2 cross-injections from Section E5 Windows (Phase 2B): 2 of
-    // the spec's 3 window -> J3 (Risk to People) injections (repair
-    // safety-hazard, fire-trap-risk). The 3rd targets "Section J2
-    // Guarantees" per the spec's own text, but this app has no J2 content
-    // at all (J1=Building, J3=Risk to People [renamed from a pre-existing
-    // mislabelled "J2" - see report_builder's derived_j3_risk_to_people
-    // fix], J4=Other) and "Guarantees" is I2 everywhere else in the
-    // library, so this is almost certainly a typo in the client's
-    // document. Wired as an I2 target (Phase 2F) in
-    // _legacyDerivedSectionFIssueGuarantees above, rather than to the
-    // wrong section.
-    final windowsRepairForPeople = _answersForScreen(
-        rawData, 'activity_outside_property_windows_repairs_repair_window');
-    final windowsRepairHowMany = _labelsForAnswerMap(
-      windowsRepairForPeople,
-      const <String, String>{
-        'cb_ch1': 'one',
-        'cb_ch2': 'some',
-        'cb_ch3': 'many',
-      },
-    );
-    if (_isCheckedValue(windowsRepairForPeople['cb_safety_hazard']) &&
-        windowsRepairHowMany.isNotEmpty) {
-      phrases.add(
-          'One or more windows have been affected by single or multiple defects, and this is a health and safety hazard (see section E5 - Windows).');
-    }
-
+    // PDF "Add text to: Section J3" line of E5 Windows (bank-first).
     final fireEscapeRisk = _answersForScreen(rawData,
         'activity_outside_property_windows_repairs_no_fire_escape_risk');
-    final fireEscapeLocations = _labelsForAnswerMap(
-      fireEscapeRisk,
-      const <String, String>{
-        'cb_lounge_84': 'lounge',
-        'cb_bedroom_43': 'bedroom',
-        'cb_study_61': 'study',
-      },
-    );
-    if (fireEscapeLocations.isNotEmpty) {
-      phrases.add(
-          'The design of the window(s) does not provide a suitable means of escape in the event of a fire (see section E5 - Windows).');
+    if (fireEscapeRisk.entries.any((e) =>
+        (e.key.startsWith('e5fl_') || e.key == 'cb_other_175') &&
+        _isCheckedValue(e.value))) {
+      phrases.add(_approvedBankPhrase('{RISK_TO_PEOPLE}::{WINDOWS_FIRE_TRAP}') ??
+          'The design of one or more windows does not provide a suitable means of escape for occupants in the event of a fire (see section E5 - Windows).');
     }
 
     // RICS L2 cross-injections from Section E6 Outside Doors (Phase 2B):

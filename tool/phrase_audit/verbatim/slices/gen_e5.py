@@ -143,8 +143,8 @@ S_DOP = 'activity_outside_property_windows_defective_operation'
 slices.append({
     'screen': S_DOP, 'new_screen': new_screen(S_DOP, 'Defective operation', 9, S_OP),
     'rules': [pr('e5_defective_op', '{E5_DEFECTIVE_OPERATION}', 'Defective Operation', 'Failed Glazed Units:',
-                 subs={'� stick during operation � fail to close correctly � fail to lock securely '
-                       '� require adjustment � have damaged hinges � have defective handles � have '
+                 subs={'• stick during operation • fail to close correctly • fail to lock securely '
+                       '• require adjustment • have damaged hinges • have defective handles • have '
                        'defective locking mechanisms': '{WIN_DEFECTIVE_OPERATION}.'},
                  tokens=[ck('{WIN_DEFECTIVE_OPERATION}', 'Windows were found to', DOP, 'e5do_')])]})
 FG = 'internal condensation, misting, failed seals'

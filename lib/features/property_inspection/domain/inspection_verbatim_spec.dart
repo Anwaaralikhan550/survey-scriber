@@ -2882,6 +2882,499 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_general_maintenance',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'e5_desc',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WIN_TYPES}',
+        options: {
+          'e5t_replacement': 'replacement',
+          'e5t_original': 'original',
+          'e5t_old': 'old',
+          'e5t_pvcu': 'PVCu',
+          'e5t_timber': 'timber',
+          'e5t_old_style_timber_sash': 'old style timber sash',
+          'e5t_modern_pvc_sash': 'modern PVC sash',
+          'e5t_modern_timber_sash': 'modern timber sash',
+          'e5t_aluminium': 'aluminium',
+          'e5t_composite': 'composite',
+        },
+        otherCheckbox: 'cb_other_895',
+        otherText: 'et_other_220',
+        pdfOptions: ['replacement', 'original', 'old', 'PVCu', 'timber', 'old style timber sash', 'modern PVC sash', 'modern timber sash', 'aluminium', 'composite'],
+      ),
+    ],
+    pdf:
+        'Description: The windows are formed of replacement, original, old, PVCu, timber, old style timber sash, modern PVC sash, modern timber sash, aluminium, composite, other framed units.',
+  ),
+  VerbatimRule(
+    'e5_glazing',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_GLAZING}',
+    [
+      VerbatimToken(
+        '{WIN_GLAZING}',
+        options: {
+          'e5g_single_glazing': 'single glazing',
+          'e5g_double_glazing': 'double glazing',
+          'e5g_triple_glazing': 'triple glazing',
+          'e5g_secondary_glazing': 'secondary glazing',
+          'e5g_decorative_glazing': 'decorative glazing',
+        },
+        otherCheckbox: 'e5g_other',
+        otherText: 'e5g_other_text',
+        pdfOptions: ['single glazing', 'double glazing', 'triple glazing', 'secondary glazing', 'decorative glazing'],
+      ),
+    ],
+    pdf:
+        'Glazing: The glazing comprises single glazing, double glazing, triple glazing, secondary glazing, decorative glazing, other.',
+  ),
+  VerbatimRule(
+    'e5_bs_no',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_NO_BS_EN}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No BS EN',
+  ),
+  VerbatimRule(
+    'e5_bs_yes',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_BS_EN_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'BS EN noted',
+  ),
+  VerbatimRule(
+    'e5_condition',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_CONDITION}',
+    [
+      VerbatimToken(
+        '{WIN_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, the windows appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.',
+  ),
+  VerbatimRule(
+    'e5_very_poor',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_VERY_POOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Very poor',
+  ),
+  VerbatimRule(
+    'e5_replacement',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_REPLACEMENT}',
+    [
+    ],
+    whenField: 'e5t_replacement',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e5_old_sash',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_OLD_SASH}',
+    [
+    ],
+    whenField: 'e5t_old_style_timber_sash',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e5_seals',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_GLAZING_SEALS}',
+    [
+      VerbatimToken(
+        '{SEAL_CONDITION}',
+        dropdown: 'actv_seals',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Glazing seals: The external sealant around the window frames appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e5_sill',
+    'activity_outside_property_windows_sill_projection',
+    '{E_WINDOWS}',
+    '{E5_SILL_PROJECTION}',
+    [
+      VerbatimToken(
+        '{SILL_SEALING}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Properly', 'Fairly', 'Poorly'],
+        lower: true,
+        pdfOptions: ['properly', 'fairly', 'poorly'],
+      ),
+    ],
+    pdf:
+        'The junctions between the window frames and the surrounding wall openings appear to be properly, fairly, poorly sealed.',
+    whenField: 'actv_projection_type',
+    whenValue: 'Sill projection',
+  ),
+  VerbatimRule(
+    'e5_sill_defect',
+    'activity_outside_property_windows_sill_projection',
+    '{E_WINDOWS}',
+    '{E5_SILL_DEFECT}',
+    [
+      VerbatimToken(
+        '{SILL_DEFECTS}',
+        options: {
+          'e5sd_adequate': 'adequate',
+          'e5sd_properly_installed': 'properly installed',
+          'e5sd_properly_drained': 'properly drained',
+          'e5sd_cracked': 'cracked',
+          'e5sd_defective': 'defective',
+        },
+        pdfOptions: ['adequate', 'properly installed', 'properly drained', 'cracked', 'defective'],
+      ),
+    ],
+    pdf:
+        'Sill defect: The windowsill projection beyond the face of the wall does not appear to be adequate, properly installed, properly drained, cracked, defective.',
+    whenField: 'actv_projection_type',
+    whenValue: 'Sill defect',
+  ),
+  VerbatimRule(
+    'e5_repair',
+    'activity_outside_property_windows_repairs_repair_window',
+    '{E_WINDOWS}',
+    '{E5_REPAIR_WINDOWS}',
+    [
+      VerbatimToken(
+        '{REPAIR_LOCATIONS}',
+        options: {
+          'e5rl_lounge': 'lounge',
+          'e5rl_dining_room': 'dining room',
+          'e5rl_bedroom': 'bedroom',
+          'e5rl_kitchen': 'kitchen',
+        },
+        otherCheckbox: 'cb_other_471',
+        otherText: 'et_other_175',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen'],
+      ),
+      VerbatimToken(
+        '{REPAIR_DEFECTS}',
+        options: {
+          'e5rd_have_damaged_lock_s': 'have damaged lock(s)',
+          'e5rd_have_missing_lock_s': 'have missing lock(s)',
+          'e5rd_are_difficult_to_open': 'are difficult to open',
+          'e5rd_are_badly_worn': 'are badly worn',
+          'e5rd_are_rotten': 'are rotten',
+          'e5rd_have_broken_glass': 'have broken glass',
+          'e5rd_have_failed_glazing': 'have failed glazing',
+          'e5rd_are_in_disrepair': 'are in disrepair',
+          'e5rd_are_severely_damaged': 'are severely damaged',
+          'e5rd_present_a_safety_or_security_risk': 'present a safety or security risk',
+          'e5rd_have_other_defects': 'have other defects',
+        },
+        pdfOptions: ['have damaged lock(s)', 'have missing lock(s)', 'are difficult to open', 'are badly worn', 'are rotten', 'have broken glass', 'have failed glazing', 'are in disrepair', 'are severely damaged', 'present a safety or security risk', 'have other defects'],
+      ),
+    ],
+    pdf:
+        'Repair windows: The window(s) in the lounge, dining room, bedroom, kitchen, other, have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk, have other defects.',
+    pdfMore: [
+      'Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration.',
+    ],
+  ),
+  VerbatimRule(
+    'e5_velux',
+    'activity_outside_property_windows_velux_window',
+    '{E_WINDOWS}',
+    '{E5_VELUX}',
+    [
+      VerbatimToken(
+        '{VELUX_TYPES}',
+        options: {
+          'e5vt_roof_windows': 'roof windows',
+          'e5vt_roof_skylights': 'roof skylights',
+          'e5vt_velux_roof_windows': 'Velux roof windows',
+        },
+        otherCheckbox: 'cb_other_629',
+        otherText: 'et_other_290',
+        pdfOptions: ['roof windows', 'roof skylights', 'Velux roof windows'],
+      ),
+      VerbatimToken(
+        '{VELUX_MATERIALS}',
+        options: {
+          'e5vm_timber': 'timber',
+          'e5vm_pvcu': 'PVCu',
+          'e5vm_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'cb_other_610',
+        otherText: 'et_other_816',
+        pdfOptions: ['timber', 'PVCu', 'aluminium'],
+      ),
+      VerbatimToken(
+        '{VELUX_GLAZING}',
+        options: {
+          'e5vg_double': 'double',
+          'e5vg_triple': 'triple',
+        },
+        pdfOptions: ['double', 'triple'],
+      ),
+    ],
+    pdf:
+        'Roof Velux Windows: Type: The property incorporates roof windows, roof skylights, Velux roof windows, other.',
+    pdfMore: [
+      'These are formed in timber, PVCu, aluminium, other construction with double, triple glazing.',
+    ],
+  ),
+  VerbatimRule(
+    'e5_velux_cond',
+    'activity_outside_property_windows_velux_window',
+    '{E_WINDOWS}',
+    '{E5_VELUX_CONDITION}',
+    [
+      VerbatimToken(
+        '{VELUX_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e5_windowsills',
+    'activity_outside_property_windows_windowsills',
+    '{E_WINDOWS}',
+    '{E5_WINDOWSILLS}',
+    [
+      VerbatimToken(
+        '{SILL_MATERIALS}',
+        options: {
+          'e5sm_pvcu': 'PVCu',
+          'e5sm_timber': 'timber',
+          'e5sm_brick': 'brick',
+          'e5sm_tiles': 'tiles',
+          'e5sm_concrete': 'concrete',
+        },
+        otherCheckbox: 'e5sm_other',
+        otherText: 'e5sm_other_text',
+        pdfOptions: ['PVCu', 'timber', 'brick', 'tiles', 'concrete'],
+      ),
+    ],
+    pdf:
+        'Windowsills: The windowsills are formed in PVCu, timber, brick, tiles, concrete, other material.',
+  ),
+  VerbatimRule(
+    'e5_windowsills_cond',
+    'activity_outside_property_windows_windowsills',
+    '{E_WINDOWS}',
+    '{E5_WINDOWSILLS_CONDITION}',
+    [
+      VerbatimToken(
+        '{SILL_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e5_operation',
+    'activity_outside_property_windows_operation',
+    '{E_WINDOWS}',
+    '{E5_OPERATION}',
+    [
+      VerbatimToken(
+        '{WIN_OPERATION}',
+        dropdown: 'actv_operation',
+        dropdownOptions: ['Freely', 'With minor with resistance', 'With difficulty'],
+        lower: true,
+        pdfOptions: ['freely', 'with minor with resistance', 'with difficulty'],
+      ),
+    ],
+    pdf:
+        'Operation: The windows selected for operation opened and closed freely, with minor with resistance, with difficulty.',
+  ),
+  VerbatimRule(
+    'e5_defective_op',
+    'activity_outside_property_windows_defective_operation',
+    '{E_WINDOWS}',
+    '{E5_DEFECTIVE_OPERATION}',
+    [
+      VerbatimToken(
+        '{WIN_DEFECTIVE_OPERATION}',
+        options: {
+          'e5do_stick_during_operation': 'stick during operation',
+          'e5do_fail_to_close_correctly': 'fail to close correctly',
+          'e5do_fail_to_lock_securely': 'fail to lock securely',
+          'e5do_require_adjustment': 'require adjustment',
+          'e5do_have_damaged_hinges': 'have damaged hinges',
+          'e5do_have_defective_handles': 'have defective handles',
+          'e5do_have_defective_locking_mechanisms': 'have defective locking mechanisms',
+        },
+        pdfOptions: ['stick during operation', 'fail to close correctly', 'fail to lock securely', 'require adjustment', 'have damaged hinges', 'have defective handles', 'have defective locking mechanisms'],
+      ),
+    ],
+    pdf:
+        'Defective Operation One or more windows were found to: • stick during operation • fail to close correctly • fail to lock securely • require adjustment • have damaged hinges • have defective handles • have defective locking mechanisms Repairs or adjustment should be undertaken to maintain security and weather resistance.',
+  ),
+  VerbatimRule(
+    'e5_failed_units',
+    'activity_outside_property_windows_failed_glazed_units',
+    '{E_WINDOWS}',
+    '{E5_FAILED_UNITS}',
+    [
+      VerbatimToken(
+        '{FAILED_UNIT_SIGNS}',
+        options: {
+          'e5fg_internal_condensation': 'internal condensation',
+          'e5fg_misting': 'misting',
+          'e5fg_failed_seals': 'failed seals',
+        },
+        pdfOptions: ['internal condensation', 'misting', 'failed seals'],
+      ),
+    ],
+    pdf:
+        'Failed Glazed Units: One or more double-glazed units exhibit internal condensation, misting, failed seals.',
+  ),
+  VerbatimRule(
+    'e5_damaged_glazing',
+    'activity_outside_property_windows_damaged_glazing',
+    '{E_WINDOWS}',
+    '{E5_DAMAGED_GLAZING}',
+    [
+      VerbatimToken(
+        '{DAMAGED_PANES}',
+        options: {
+          'e5dg_cracked': 'cracked',
+          'e5dg_broken': 'broken',
+          'e5dg_chipped': 'chipped',
+          'e5dg_damaged': 'damaged',
+        },
+        pdfOptions: ['cracked', 'broken', 'chipped', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Damaged Glazing: One or more panes are cracked, broken, chipped, damaged.',
+  ),
+  VerbatimRule(
+    'e5_glazing_hazard',
+    'activity_outside_property_windows_damaged_glazing',
+    '{E_WINDOWS}',
+    '{E5_GLAZING_HAZARD}',
+    [
+    ],
+    whenField: 'cb_hazard',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e5_timber',
+    'activity_outside_property_windows_timber_windows',
+    '{E_WINDOWS}',
+    '{E5_TIMBER_WINDOWS}',
+    [
+      VerbatimToken(
+        '{TIMBER_ISSUES}',
+        options: {
+          'e5tw_localised_weathering': 'localised weathering',
+          'e5tw_paint_deterioration': 'paint deterioration',
+          'e5tw_minor_decay': 'minor decay',
+        },
+        otherCheckbox: 'e5tw_other',
+        otherText: 'e5tw_other_text',
+        pdfOptions: ['localised weathering', 'paint deterioration', 'minor decay'],
+      ),
+    ],
+    pdf:
+        'Timber Windows: Where timber windows are present, localised weathering, paint deterioration, minor decay, other issues may occur as part of their normal service life.',
+  ),
+  VerbatimRule(
+    'e5_condensation',
+    'activity_outside_property_windows_condensation',
+    '{E_WINDOWS}',
+    '{E5_CONDENSATION}',
+    [
+    ],
+    whenField: 'cb_condensation',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e5_fire_trap',
+    'activity_outside_property_windows_repairs_no_fire_escape_risk',
+    '{E_WINDOWS}',
+    '{E5_FIRE_TRAP}',
+    [
+      VerbatimToken(
+        '{FIRE_LOCATIONS}',
+        options: {
+          'e5fl_lounge': 'lounge',
+          'e5fl_dining_room': 'dining room',
+          'e5fl_bedroom': 'bedroom',
+          'e5fl_study': 'study',
+        },
+        otherCheckbox: 'cb_other_175',
+        otherText: 'et_other_308',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'study'],
+      ),
+      VerbatimToken(
+        '{FIRE_OPENINGS}',
+        options: {
+          'e5fo_no_opening': 'no opening',
+          'e5fo_a_small_opening': 'a small opening',
+        },
+        pdfOptions: ['no opening', 'a small opening'],
+      ),
+    ],
+    pdf:
+        'The affected window(s) in the lounge, dining room, bedroom, study, other room have no opening, a small opening, creating a potential safety hazard.',
+  ),
+  VerbatimRule(
+    'e4_intro',
+    'activity_outside_property_main_walls_main_screen',
+    '{E_MAIN_WALLS}',
+    '{STANDARD_TEXT}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'e5_intro',
+    'activity_outside_property_windows_main_screen',
+    '{E_WINDOWS}',
+    '{WINDOWS_STANDARD_TEXT}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
   // <<verbatim-rules-end>>
 ];
 

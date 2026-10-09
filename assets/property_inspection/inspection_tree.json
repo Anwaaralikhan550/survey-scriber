@@ -19739,57 +19739,58 @@
           "order": 1,
           "fields": [
             {
-              "id": "actv_made_up_of",
-              "label": "Made up of",
-              "type": "dropdown",
-              "options": [
-                "Mainly",
-                "Mixture"
-              ]
-            },
-            {
-              "id": "cb_is_replacement",
-              "label": "Replacement window?",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_type_3",
-              "label": "Type",
+              "id": "label_win_types",
+              "label": "Windows formed of",
               "type": "label"
             },
             {
-              "id": "cb_pvc",
-              "label": "PVC",
+              "id": "e5t_replacement",
+              "label": "replacement",
               "type": "checkbox"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e5t_original",
+              "label": "original",
               "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Steel",
+              "id": "e5t_old",
+              "label": "old",
               "type": "checkbox"
             },
             {
-              "id": "cb_modern_pvc_sash",
-              "label": "Modern PVC sash",
+              "id": "e5t_pvcu",
+              "label": "PVCu",
               "type": "checkbox"
             },
             {
-              "id": "cb_modern_timber_sash",
-              "label": "Modern timber sash",
+              "id": "e5t_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_aluminium",
-              "label": "Aluminium",
+              "id": "e5t_old_style_timber_sash",
+              "label": "old style timber sash",
               "type": "checkbox"
             },
             {
-              "id": "cb_old_style_timber_sash",
-              "label": "Old style timber sash",
+              "id": "e5t_modern_pvc_sash",
+              "label": "modern PVC sash",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5t_modern_timber_sash",
+              "label": "modern timber sash",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5t_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5t_composite",
+              "label": "composite",
               "type": "checkbox"
             },
             {
@@ -19806,32 +19807,55 @@
               "conditionalMode": "show"
             },
             {
-              "id": "label_glazing",
+              "id": "label_win_glazing",
               "label": "Glazing",
               "type": "label"
             },
             {
-              "id": "cb_single",
-              "label": "Single",
+              "id": "e5g_single_glazing",
+              "label": "single glazing",
               "type": "checkbox"
             },
             {
-              "id": "cb_double",
-              "label": "Double",
+              "id": "e5g_double_glazing",
+              "label": "double glazing",
               "type": "checkbox"
             },
             {
-              "id": "cb_secondary",
-              "label": "Secondary",
+              "id": "e5g_triple_glazing",
+              "label": "triple glazing",
               "type": "checkbox"
+            },
+            {
+              "id": "e5g_secondary_glazing",
+              "label": "secondary glazing",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5g_decorative_glazing",
+              "label": "decorative glazing",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5g_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5g_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e5g_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             },
             {
               "id": "actv_status",
-              "label": "Safety Glass Rating Status",
+              "label": "Safety glass markings",
               "type": "dropdown",
               "options": [
-                "Noted",
-                "No SG Rating"
+                "No BS EN",
+                "BS EN noted"
               ]
             },
             {
@@ -19839,9 +19863,23 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            },
+            {
+              "id": "actv_seals",
+              "label": "Glazing seals condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -19854,48 +19892,28 @@
           "order": 1,
           "fields": [
             {
-              "id": "label_how_many",
-              "label": "How Many",
+              "id": "label_repair_locations",
+              "label": "Windows in",
               "type": "label"
             },
             {
-              "id": "cb_ch1",
-              "label": "One",
+              "id": "e5rl_lounge",
+              "label": "lounge",
               "type": "checkbox"
             },
             {
-              "id": "cb_ch2",
-              "label": "Some",
+              "id": "e5rl_dining_room",
+              "label": "dining room",
               "type": "checkbox"
             },
             {
-              "id": "cb_ch3",
-              "label": "Many",
+              "id": "e5rl_bedroom",
+              "label": "bedroom",
               "type": "checkbox"
             },
             {
-              "id": "label_location_26",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_lounge_791",
-              "label": "Property",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lounge_79",
-              "label": "Lounge",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bedroom_35",
-              "label": "Bedroom",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_kitchen_80",
-              "label": "Kitchen",
+              "id": "e5rl_kitchen",
+              "label": "kitchen",
               "type": "checkbox"
             },
             {
@@ -19912,61 +19930,63 @@
               "conditionalMode": "show"
             },
             {
-              "id": "label_defect_25",
-              "label": "Defect",
+              "id": "label_repair_defects",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_have_damaged_locks_63",
-              "label": "Have damaged locks",
+              "id": "e5rd_have_damaged_lock_s",
+              "label": "have damaged lock(s)",
               "type": "checkbox"
             },
             {
-              "id": "cb_are_difficult_to_open_15",
-              "label": "Difficult to open",
+              "id": "e5rd_have_missing_lock_s",
+              "label": "have missing lock(s)",
               "type": "checkbox"
             },
             {
-              "id": "cb_are_badly_worn_25",
-              "label": "Badly worn",
+              "id": "e5rd_are_difficult_to_open",
+              "label": "are difficult to open",
               "type": "checkbox"
             },
             {
-              "id": "cb_are_rotten_64",
-              "label": "Rotten",
+              "id": "e5rd_are_badly_worn",
+              "label": "are badly worn",
               "type": "checkbox"
             },
             {
-              "id": "cb_have_broken_panes_14",
-              "label": "Broken panes",
+              "id": "e5rd_are_rotten",
+              "label": "are rotten",
               "type": "checkbox"
             },
             {
-              "id": "cb_have_failed_glazing_40",
-              "label": "Failed glazing",
+              "id": "e5rd_have_broken_glass",
+              "label": "have broken glass",
               "type": "checkbox"
             },
             {
-              "id": "cb_are_in_disrepair_33",
-              "label": "In disrepair",
+              "id": "e5rd_have_failed_glazing",
+              "label": "have failed glazing",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_1066",
-              "label": "Other",
+              "id": "e5rd_are_in_disrepair",
+              "label": "are in disrepair",
               "type": "checkbox"
             },
             {
-              "id": "et_other_424",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_1066",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "e5rd_are_severely_damaged",
+              "label": "are severely damaged",
+              "type": "checkbox"
             },
             {
-              "id": "cb_safety_hazard",
-              "label": "Safety Hazard",
+              "id": "e5rd_present_a_safety_or_security_risk",
+              "label": "present a safety or security risk",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5rd_have_other_defects",
+              "label": "have other defects",
               "type": "checkbox"
             }
           ]
@@ -21614,91 +21634,6 @@
                 "EWS1 form not required",
                 "EWS1 form required"
               ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_windows_safety_glass_rating",
-          "title": "Safety glass rating",
-          "type": "screen",
-          "parentId": "group_windows_deprecated_21",
-          "order": 3,
-          "fields": [
-            {
-              "id": "actv_status",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Noted",
-                "No SG Rating"
-              ],
-              "optionsSource": "windows_safety_glass_rating_status"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Noted",
-                "No SG Rating"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_windows_repairs_failed_glazing_location",
-          "title": "Failed glazing location",
-          "type": "screen",
-          "parentId": "group_repairs_22",
-          "order": 3,
-          "fields": [
-            {
-              "id": "label_location_24",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb__property",
-              "label": "Property",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_select_property_for_many_failed_glazing",
-              "label": "Select property for many failed glazing",
-              "type": "label"
-            },
-            {
-              "id": "cb_lounge_79",
-              "label": "Lounge",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bedroom_35",
-              "label": "Bedroom",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_kitchen_80",
-              "label": "Kitchen",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_have_damaged_locks_63",
-              "label": "Bathroom",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_471",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_175",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_471",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -24066,271 +24001,148 @@
           "order": 5,
           "fields": [
             {
-              "id": "actv_type",
+              "id": "label_velux_types",
               "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Single",
-                "Multiple"
-              ]
+              "type": "label"
             },
             {
-              "id": "cb_loft",
-              "label": "Loft",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "e5vt_roof_windows",
+              "label": "roof windows",
+              "type": "checkbox"
             },
             {
-              "id": "cb_extension",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "e5vt_roof_skylights",
+              "label": "roof skylights",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5vt_velux_roof_windows",
+              "label": "Velux roof windows",
+              "type": "checkbox"
             },
             {
               "id": "cb_other_629",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
               "id": "et_other_290",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_type=Single & cb_other_629",
+              "conditionalOn": "cb_other_629",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_type_5",
-              "label": "Type",
-              "type": "label",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "label_velux_materials",
+              "label": "Formed in",
+              "type": "label"
             },
             {
-              "id": "cb_pvc",
-              "label": "PVC",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "e5vm_timber",
+              "label": "timber",
+              "type": "checkbox"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "e5vm_pvcu",
+              "label": "PVCu",
+              "type": "checkbox"
             },
             {
-              "id": "cb_steel",
-              "label": "Steel",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "e5vm_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
             },
             {
               "id": "cb_other_610",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
               "id": "et_other_816",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_type=Single & cb_other_610",
+              "conditionalOn": "cb_other_610",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_glazzing_5",
-              "label": "Glazzing",
-              "type": "label",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "label_velux_glazing",
+              "label": "Glazing",
+              "type": "label"
             },
             {
-              "id": "cb_single",
-              "label": "Single",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "e5vg_double",
+              "label": "double",
+              "type": "checkbox"
             },
             {
-              "id": "cb_double",
-              "label": "Double",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "e5vg_triple",
+              "label": "triple",
+              "type": "checkbox"
             },
             {
-              "id": "cb_secondary",
-              "label": "Secondary",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Single",
-              "conditionalMode": "show"
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_windows_windowsills",
+          "title": "Windowsills",
+          "type": "screen",
+          "parentId": "group_windows_21",
+          "order": 6,
+          "fields": [
+            {
+              "id": "label_sill_materials",
+              "label": "Formed in",
+              "type": "label"
             },
             {
-              "id": "label_noof_velux_windows",
-              "label": "No.Of velux windows",
-              "type": "label",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
+              "id": "e5sm_pvcu",
+              "label": "PVCu",
+              "type": "checkbox"
             },
             {
-              "id": "cb_one",
-              "label": "One",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
+              "id": "e5sm_timber",
+              "label": "timber",
+              "type": "checkbox"
             },
             {
-              "id": "cb_two",
-              "label": "Two",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
+              "id": "e5sm_brick",
+              "label": "brick",
+              "type": "checkbox"
             },
             {
-              "id": "cb_three",
-              "label": "Three",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
+              "id": "e5sm_tiles",
+              "label": "tiles",
+              "type": "checkbox"
             },
             {
-              "id": "cb_four",
-              "label": "Four",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
+              "id": "e5sm_concrete",
+              "label": "concrete",
+              "type": "checkbox"
             },
             {
-              "id": "cb_five",
-              "label": "Five",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_814",
+              "id": "e5sm_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_196",
+              "id": "e5sm_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_type=Multiple & cb_other_814",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_27",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loft_32",
-              "label": "Loft",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension_85",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_451",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_659",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_type=Multiple & cb_other_451",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_type_4",
-              "label": "Type",
-              "type": "label",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_pvc_24",
-              "label": "PVC",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_timber_44",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_steel_91",
-              "label": "Steel",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_975",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_309",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_type=Multiple & cb_other_975",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_glazzing_4",
-              "label": "Glazzing",
-              "type": "label",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_single_48",
-              "label": "Single",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_double_67",
-              "label": "Double",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_secondary_54",
-              "label": "Secondary",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Multiple",
+              "conditionalOn": "e5sm_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
@@ -24338,10 +24150,204 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_windows_operation",
+          "title": "Operation",
+          "type": "screen",
+          "parentId": "group_windows_21",
+          "order": 8,
+          "fields": [
+            {
+              "id": "actv_operation",
+              "label": "Windows opened and closed",
+              "type": "dropdown",
+              "options": [
+                "Freely",
+                "With minor with resistance",
+                "With difficulty"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_windows_defective_operation",
+          "title": "Defective operation",
+          "type": "screen",
+          "parentId": "group_windows_21",
+          "order": 9,
+          "fields": [
+            {
+              "id": "label_win_defective_operation",
+              "label": "Windows were found to",
+              "type": "label"
+            },
+            {
+              "id": "e5do_stick_during_operation",
+              "label": "stick during operation",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5do_fail_to_close_correctly",
+              "label": "fail to close correctly",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5do_fail_to_lock_securely",
+              "label": "fail to lock securely",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5do_require_adjustment",
+              "label": "require adjustment",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5do_have_damaged_hinges",
+              "label": "have damaged hinges",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5do_have_defective_handles",
+              "label": "have defective handles",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5do_have_defective_locking_mechanisms",
+              "label": "have defective locking mechanisms",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_windows_failed_glazed_units",
+          "title": "Failed glazed units",
+          "type": "screen",
+          "parentId": "group_windows_21",
+          "order": 10,
+          "fields": [
+            {
+              "id": "label_failed_unit_signs",
+              "label": "Units exhibit",
+              "type": "label"
+            },
+            {
+              "id": "e5fg_internal_condensation",
+              "label": "internal condensation",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5fg_misting",
+              "label": "misting",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5fg_failed_seals",
+              "label": "failed seals",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_windows_damaged_glazing",
+          "title": "Damaged glazing",
+          "type": "screen",
+          "parentId": "group_windows_21",
+          "order": 11,
+          "fields": [
+            {
+              "id": "label_damaged_panes",
+              "label": "Panes are",
+              "type": "label"
+            },
+            {
+              "id": "e5dg_cracked",
+              "label": "cracked",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5dg_broken",
+              "label": "broken",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5dg_chipped",
+              "label": "chipped",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5dg_damaged",
+              "label": "damaged",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_hazard",
+              "label": "Hazard",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_windows_timber_windows",
+          "title": "Timber windows",
+          "type": "screen",
+          "parentId": "group_windows_21",
+          "order": 12,
+          "fields": [
+            {
+              "id": "label_timber_issues",
+              "label": "Issues that may occur",
+              "type": "label"
+            },
+            {
+              "id": "e5tw_localised_weathering",
+              "label": "localised weathering",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5tw_paint_deterioration",
+              "label": "paint deterioration",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5tw_minor_decay",
+              "label": "minor decay",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5tw_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5tw_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e5tw_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_windows_condensation",
+          "title": "Condensation",
+          "type": "screen",
+          "parentId": "group_windows_21",
+          "order": 13,
+          "fields": [
+            {
+              "id": "cb_condensation",
+              "label": "Condensation noted",
+              "type": "checkbox"
             }
           ]
         },
@@ -24353,23 +24359,28 @@
           "order": 5,
           "fields": [
             {
-              "id": "label_location_25",
-              "label": "Location",
+              "id": "label_fire_locations",
+              "label": "Window(s) in",
               "type": "label"
             },
             {
-              "id": "cb_lounge_84",
-              "label": "Lounge",
+              "id": "e5fl_lounge",
+              "label": "lounge",
               "type": "checkbox"
             },
             {
-              "id": "cb_bedroom_43",
-              "label": "Bedroom",
+              "id": "e5fl_dining_room",
+              "label": "dining room",
               "type": "checkbox"
             },
             {
-              "id": "cb_study_61",
-              "label": "Study",
+              "id": "e5fl_bedroom",
+              "label": "bedroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "e5fl_study",
+              "label": "study",
               "type": "checkbox"
             },
             {
@@ -24386,23 +24397,18 @@
               "conditionalMode": "show"
             },
             {
-              "id": "label_defect_24",
-              "label": "Defect",
+              "id": "label_fire_openings",
+              "label": "Windows have",
               "type": "label"
             },
             {
-              "id": "cb_no_opening_63",
-              "label": "No opening",
+              "id": "e5fo_no_opening",
+              "label": "no opening",
               "type": "checkbox"
             },
             {
-              "id": "cb_is_too_small_23",
-              "label": "Opening too small",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_too_small_23_no",
-              "label": "No window at all",
+              "id": "e5fo_a_small_opening",
+              "label": "a small opening",
               "type": "checkbox"
             }
           ]
@@ -26425,11 +26431,11 @@
           "fields": [
             {
               "id": "actv_projection_type",
-              "label": "Projection Type",
+              "label": "Sill",
               "type": "dropdown",
               "options": [
-                "Adequate",
-                "Inadequate"
+                "Sill projection",
+                "Sill defect"
               ]
             },
             {
@@ -26440,7 +26446,51 @@
                 "Properly",
                 "Fairly",
                 "Poorly"
-              ]
+              ],
+              "conditionalOn": "actv_projection_type=Sill projection",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_sill_defects",
+              "label": "Windowsill projection",
+              "type": "label",
+              "conditionalOn": "actv_projection_type=Sill defect",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e5sd_adequate",
+              "label": "adequate",
+              "type": "checkbox",
+              "conditionalOn": "actv_projection_type=Sill defect",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e5sd_properly_installed",
+              "label": "properly installed",
+              "type": "checkbox",
+              "conditionalOn": "actv_projection_type=Sill defect",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e5sd_properly_drained",
+              "label": "properly drained",
+              "type": "checkbox",
+              "conditionalOn": "actv_projection_type=Sill defect",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e5sd_cracked",
+              "label": "cracked",
+              "type": "checkbox",
+              "conditionalOn": "actv_projection_type=Sill defect",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e5sd_defective",
+              "label": "defective",
+              "type": "checkbox",
+              "conditionalOn": "actv_projection_type=Sill defect",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -29882,25 +29932,6 @@
           "type": "group",
           "parentId": "group_repairs_18",
           "order": 11
-        },
-        {
-          "id": "activity_outside_property_windows_wall_sealing",
-          "title": "Wall sealing",
-          "type": "screen",
-          "parentId": "group_windows_deprecated_21",
-          "order": 11,
-          "fields": [
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Properly",
-                "Fairly",
-                "Poorly"
-              ]
-            }
-          ]
         },
         {
           "id": "activity_outside_property_porch_condition",
@@ -34373,16 +34404,6 @@
           "parentId": "group_windows_21",
           "order": -1,
           "fields": [
-            {
-              "id": "cb_window_random_sampling",
-              "label": "Windows random sampling",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_window_in_poor_condition",
-              "label": "Window in Poor Condition",
-              "type": "checkbox"
-            },
             {
               "id": "label_condition_rating_windows",
               "label": "Condition Rating",

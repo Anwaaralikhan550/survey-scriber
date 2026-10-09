@@ -47,19 +47,5 @@ void main() {
       expect(all, contains('rwg-open-runoffs'));
       expect(all, contains('rwg-shared'));
     });
-
-    test('legacy windows screen routes to windows main screen handler', () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_windows',
-        <String, String>{
-          'cb_window_random_sampling': 'true',
-          'cb_window_in_poor_condition': 'true',
-        },
-      );
-
-      final all = phrases.join(' ').toLowerCase();
-      expect(all, contains('windows-random-sampling'));
-      expect(all, contains('windows-poor-condition'));
-    });
   });
 }
