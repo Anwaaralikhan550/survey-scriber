@@ -1036,7 +1036,7 @@ f2897ecc31,F2,"Localised repairs may be possible; however, where deterioration i
 5e24ca9b59,F2,"General Maintenance: Ceilings should be inspected periodically for signs of cracking, distortion, or water penetration.",EXACT,{F_CEILINGS}::{F2_GENERAL_MAINTENANCE},100,DONE
 5d604c1b54,F2,"Prompt repair of roof leaks, plumbing defects and condensation problems will reduce the likelihood of damage to internal ceiling finishes.",EXACT,{F_CEILINGS}::{F2_GENERAL_MAINTENANCE},100,DONE
 cfb7ca7d14,F2,Routine redecoration should be expected throughout the normal life of the property.,EXACT,{F_CEILINGS}::{F2_GENERAL_MAINTENANCE},100,DONE
-a2083eafe5,F3,"My inspection was limited by fixed furniture, kitchen units, bathroom fittings, large appliances, stored items, tiled finishes, decorative wall coverings, and fitted cupboards, which prevented full inspection of the concealed areas.",MENU,,0,UNVERIFIED
+a2083eafe5,F3,"My inspection was limited by fixed furniture, kitchen units, bathroom fittings, large appliances, stored items, tiled finishes, decorative wall coverings, and fitted cupboards, which prevented full inspection of the concealed areas.",MENU,,0,VERIFIED
 a216f2ab7e,F3,"The condition of hidden wall construction, lintels, structural supports, and other concealed elements could not be confirmed without opening the structure, which is outside the scope of a Level 2 Home Survey.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_INTRO},100,DONE
 0c6267491c,F3,"No comment can be made on the condition of these concealed areas, and defects may exist that were not visible at the time of my inspection.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_INTRO},100,DONE
 c50e44f24a,F3,"Description: The walls are formed in solid masonry, timber stud partitions, plasterboard partitions, lath and plaster, other construction.",MENU,,0,VERIFIED
@@ -1063,7 +1063,7 @@ f95f37efc6,F3,"Although stable at the time of inspection, affected areas may bec
 22c324b22c,F3,"Localised repairs may be possible; however, where deterioration is more extensive, or the plaster becomes unstable, it may be more practical and cost-effective to remove and replace the affected section.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
 d398f61866,F3,"Repairs can be undertaken as part of routine maintenance or redecoration, as necessary.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
 cffb83972a,F3,"Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other area(s).",MENU,,0,VERIFIED
-c054c7a162,F3,"Condensation is commonly associated with occupancy patterns, heating, insulation, and ventilation.",MENU,,0,UNVERIFIED
+c054c7a162,F3,"Condensation is commonly associated with occupancy patterns, heating, insulation, and ventilation.",MENU,,0,VERIFIED
 12a8c85c12,F3,Maintaining a suitable balance between heating and ventilation should assist in reducing condensation.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDENSATION},100,DONE
 4fbbacc2ad,F3,"Extractor fans may be installed, and windows opened regularly.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDENSATION},100,DONE
 8b189164b2,F3,No Damp: Random moisture readings were taken to accessible wall surfaces using a hand-held electronic moisture meter.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_NO_DAMP},100,DONE
@@ -1096,99 +1096,99 @@ caf0afc19e,F3,"If satisfactory documentation is unavailable, I recommend further
 e413b6e205,F3,"General Maintenance: Internal walls should be inspected periodically for signs of cracking, dampness, or movement.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_GENERAL_MAINTENANCE},100,DONE
 a8af214a2c,F3,Minor cracking and decorative defects should be repaired during routine maintenance.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_GENERAL_MAINTENANCE},100,DONE
 290a777966,F3,Maintaining adequate heating and ventilation will assist in reducing the risk of condensation and mould growth.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_GENERAL_MAINTENANCE},100,DONE
-99303d03b3,F4,"The condition of concealed floor timbers, floor voids, joists, sleeper walls, and foundations cannot be confirmed without lifting floor finishes or opening the structure.",MENU,,0,UNVERIFIED
-61dae8d3f2,F4,Only the visible performance of the floors was assessed during normal use.,ADD,{F_FLOORS}::{REPAIR_UNEVEN_FLOOR_MINOR},54,OPEN
-12891e1ec0,F4,"The inspection was limited by fitted floor coverings, furniture, stored items, fixed kitchen units, bathroom fittings, or restricted access.",MENU,,0,UNVERIFIED
-8531eb90d7,F4,The floor construction has been inspected from within the property only.,EXACT,{F_FLOORS}::{STANDARD_TEXT},100,DONE
-99081d4ec1,F4,"Floor coverings were not lifted, and no opening up or destructive investigation was undertaken.",EXACT,{F_FLOORS}::{STANDARD_TEXT},100,DONE
-791d28859b,F4,"Description: The floors are formed in solid concrete, suspended timber, beam and block, other construction.",MENU,,0,UNVERIFIED
-ef275b7896,F4,"The floor finishes comprise floorboards, carpet, tiles, ceramic tiles, laminate flooring, wood flooring, vinyl, stone tiles, other finishes.",MENU,,0,UNVERIFIED
-e0a8883db7,F4,"Condition: Where visible, the floors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,UNVERIFIED
+99303d03b3,F4,"The condition of concealed floor timbers, floor voids, joists, sleeper walls, and foundations cannot be confirmed without lifting floor finishes or opening the structure.",MENU,,0,VERIFIED
+61dae8d3f2,F4,Only the visible performance of the floors was assessed during normal use.,EXACT,{F_FLOORS}::{F4_INTRO},100,DONE
+12891e1ec0,F4,"The inspection was limited by fitted floor coverings, furniture, stored items, fixed kitchen units, bathroom fittings, or restricted access.",MENU,,0,VERIFIED
+8531eb90d7,F4,The floor construction has been inspected from within the property only.,EXACT,{F_FLOORS}::{F4_INTRO},100,DONE
+99081d4ec1,F4,"Floor coverings were not lifted, and no opening up or destructive investigation was undertaken.",EXACT,{F_FLOORS}::{F4_INTRO},100,DONE
+791d28859b,F4,"Description: The floors are formed in solid concrete, suspended timber, beam and block, other construction.",MENU,,0,VERIFIED
+ef275b7896,F4,"The floor finishes comprise floorboards, carpet, tiles, ceramic tiles, laminate flooring, wood flooring, vinyl, stone tiles, other finishes.",MENU,,0,VERIFIED
+e0a8883db7,F4,"Condition: Where visible, the floors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
 096e3f741d,F4,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-6a0d7726da,F4,Routine maintenance appropriate to the flooring material should be expected.,EXACT,{F_FLOORS}::{FLOOR_CONDITION},100,DONE
+6a0d7726da,F4,Routine maintenance appropriate to the flooring material should be expected.,EXACT,{F_FLOORS}::{F4_CONDITION},100,DONE
 f023f5a213,F4,"No Creaking floor: I walked over the accessible suspended floor surfaces and found them to be firm and level underfoot, with no evidence of excessive springiness or distortion.",EXACT,{F_FLOORS}::{CREAKING_NONE},100,DONE
 0b1461d5b6,F4,"This is based on a visual inspection only, and the condition of concealed floor timbers cannot be confirmed without opening up the structure.",EXACT,{F_FLOORS}::{CREAKING_NONE},100,DONE
 eed6c2698f,F4,Creaking floor noted: I walked over the accessible suspended floor surfaces and found them to be firm underfoot.,EXACT,{F_FLOORS}::{CREAKING_NOTED},100,DONE
-440ffd3d58,F4,Localised creaking and minor unevenness were noted in parts of the floors and/or stairs.,TOKENISED,{F_FLOORS}::{CREAKING_NOTED},74,DONE
+440ffd3d58,F4,Localised creaking and minor unevenness were noted in parts of the floors and/or stairs.,EXACT,{F_FLOORS}::{F4_CREAKING_NOTED},100,DONE
 ffb1dcbe70,F4,"These are not uncommon in properties of this age, and, at the time of inspection, there was no evidence of excessive springiness or significant distortion suggestive of structural failure.",EXACT,{F_FLOORS}::{CREAKING_NOTED},100,DONE
 cf4b56dbf6,F4,This is associated with normal shrinkage or movement between floorboards and joists.,EXACT,{F_FLOORS}::{CREAKING_NOTED},100,DONE
 109a9bab1e,F4,Repairs may be undertaken as part of routine maintenance.,EXACT,{F_FLOORS}::{CREAKING_NOTED},100,DONE
-6bdf1e0f28,F4,"Repair timber floor: The timber floor to the lounge, bedroom, kitchen, bathroom, hallway, other is broken, poorly supported, uneven, springy, loose, sloping, incomplete, damp, insect infested, rotten, poorly ventilated, others, and the defect(s) is considered minor, significant.",MENU,,0,UNVERIFIED
-dcbb7cb79b,F4,"This is common with floors of this age and construction, and these should be repaired soon.",EXACT,{F_FLOORS}::{FLOOR_REPAIR_SOON},100,DONE
-d80983e0e9,F4,"However, where the defect is significant, repair must be carried out promptly by a qualified professional.",UNRESOLVED,{F_FLOORS}::{TIMBER_DECAY_INVESTIGATE},50,OPEN
-103a059cb9,F4,"No Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-39bc540978,F4,"Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection.",MENU,,0,UNVERIFIED
-58e9030aff,F4,No repairs are currently required.,EXACT,{F_FLOORS}::{REPAIR_SLOPING_FLOOR_NO_ISSUE},100,DONE
-c45e780b68,F4,Routine maintenance only is recommended.,ADD,{F_FLOORS}::{FLOOR_CONDITION},53,OPEN
-f4813cf0b6,F4,"Cracked Tiles: Localised cracked, loose, damaged floor tiles to the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas were observed.",MENU,,0,UNVERIFIED
-9619d878be,F4,Repairs should be undertaken to maintain the floor finish and reduce the risk of further deterioration.,FIX,{F_FLOORS}::{TILES_CONDITION_CRACKED},87,OPEN
-c4fab3d8c7,F4,Loose Floorboards: Loose and creaking floor finishes were noted and will require local repair or renewal.,ADD,{F_FLOORS}::{LOOSE_FLOORBOARDS},62,OPEN
-091b3538b3,F4,Removal of floor coverings may reveal additional defects requiring attention.,ADD,{F_FLOORS}::{STANDARD_TEXT_2},51,OPEN
-4c45d114b0,F4,"Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed in the property, lounge, bedrooms, bathrooms, kitchens, other areas.",MENU,,0,UNVERIFIED
-973f46855a,F4,Further inspection of active activity by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,EXACT,{F_FLOORS}::{TIMBER_INFESTAION_INVESTIGATE},100,DONE
-7ae45c7c94,F4,"Otherwise, for historic activity, further enquiries should be made to the vendor regarding history, treatment work, and guarantee certificates.",UNRESOLVED,{F_FLOORS}::{TIMBER_DECAY_INVESTIGATE},51,OPEN
-855302915a,F4,"Timber decay noted: Decay was noted to the floor timbers, staircase timbers, bathroom floor, kitchen floor, basement floor joists, other areas.",MENU,,0,UNVERIFIED
-9608dd2d7c,F4,"The full extent of the decay could not be determined during this visual inspection, and additional concealed defects may be present.",ADD,{F_FLOORS}::{DAMPNESS_UNKNOWN_CAUSE},63,OPEN
-f35fb59572,F4,"Further investigation by a suitably qualified timber specialist is recommended, and you should obtain a report and quotations for any necessary remedial works before committing to the purchase.",ADD,{F_FLOORS}::{TIMBER_INFESTAION_INVESTIGATE},57,OPEN
-6203b37499,F4,"Dampness noted: Although I could not see the full extent of the dampness problem in the lounge, bedroom, kitchen, bathroom, utility room, other areas, I suspect the dampness is caused by faulty plumbing, bathtub spillage, leaking sealants, other.",MENU,,0,UNVERIFIED
+6bdf1e0f28,F4,"Repair timber floor: The timber floor to the lounge, bedroom, kitchen, bathroom, hallway, other is broken, poorly supported, uneven, springy, loose, sloping, incomplete, damp, insect infested, rotten, poorly ventilated, others, and the defect(s) is considered minor, significant.",MENU,,0,VERIFIED
+dcbb7cb79b,F4,"This is common with floors of this age and construction, and these should be repaired soon.",EXACT,{F_FLOORS}::{F4_REPAIR_TIMBER_FLOOR},100,DONE
+d80983e0e9,F4,"However, where the defect is significant, repair must be carried out promptly by a qualified professional.",EXACT,{F_FLOORS}::{F4_REPAIR_TIMBER_FLOOR},100,DONE
+103a059cb9,F4,"No Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+39bc540978,F4,"Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection.",MENU,,0,VERIFIED
+58e9030aff,F4,No repairs are currently required.,EXACT,{F_FLOORS}::{F4_CRACKED_TILES},100,DONE
+c45e780b68,F4,Routine maintenance only is recommended.,EXACT,{F_FLOORS}::{F4_CRACKED_TILES},100,DONE
+f4813cf0b6,F4,"Cracked Tiles: Localised cracked, loose, damaged floor tiles to the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas were observed.",MENU,,0,VERIFIED
+9619d878be,F4,Repairs should be undertaken to maintain the floor finish and reduce the risk of further deterioration.,EXACT,{F_FLOORS}::{F4_CRACKED_TILES},100,DONE
+c4fab3d8c7,F4,Loose Floorboards: Loose and creaking floor finishes were noted and will require local repair or renewal.,EXACT,{F_FLOORS}::{F4_LOOSE_FLOORBOARDS},100,DONE
+091b3538b3,F4,Removal of floor coverings may reveal additional defects requiring attention.,EXACT,{F_FLOORS}::{F4_LOOSE_FLOORBOARDS},100,DONE
+4c45d114b0,F4,"Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed in the property, lounge, bedrooms, bathrooms, kitchens, other areas.",MENU,,0,VERIFIED
+973f46855a,F4,Further inspection of active activity by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,EXACT,{F_FLOORS}::{F4_WOOD_BORING_NOTED},100,DONE
+7ae45c7c94,F4,"Otherwise, for historic activity, further enquiries should be made to the vendor regarding history, treatment work, and guarantee certificates.",EXACT,{F_FLOORS}::{F4_WOOD_BORING_NOTED},100,DONE
+855302915a,F4,"Timber decay noted: Decay was noted to the floor timbers, staircase timbers, bathroom floor, kitchen floor, basement floor joists, other areas.",MENU,,0,VERIFIED
+9608dd2d7c,F4,"The full extent of the decay could not be determined during this visual inspection, and additional concealed defects may be present.",EXACT,{F_FLOORS}::{F4_TIMBER_DECAY_NOTED},100,DONE
+f35fb59572,F4,"Further investigation by a suitably qualified timber specialist is recommended, and you should obtain a report and quotations for any necessary remedial works before committing to the purchase.",EXACT,{F_FLOORS}::{F4_TIMBER_DECAY_NOTED},100,DONE
+6203b37499,F4,"Dampness noted: Although I could not see the full extent of the dampness problem in the lounge, bedroom, kitchen, bathroom, utility room, other areas, I suspect the dampness is caused by faulty plumbing, bathtub spillage, leaking sealants, other.",MENU,,0,VERIFIED
 0f221f1cff,F4,You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems.,EXACT,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},100,DONE
-77bc63e9e3,F4,"Unknown damp cause: Although I could not see the full extent of the damp problem, I suspect more serious defects exist in hidden areas.",TOKENISED,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},77,DONE
+77bc63e9e3,F4,"Unknown damp cause: Although I could not see the full extent of the damp problem, I suspect more serious defects exist in hidden areas.",EXACT,{F_FLOORS}::{F4_UNKNOWN_DAMP_CAUSE},100,DONE
 0f221f1cff,F4,You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems.,EXACT,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},100,DONE
-b08f9ac17f,F4,"Underfloor Ventilation: Where applicable, the suspended timber floor is provided with adequate, limited, or restricted underfloor ventilation.",UNRESOLVED,{F_FLOORS}::{FLOOR_VENTILATION_POOR},69,OPEN
-6693327005,F4,Adequate ventilation is important in reducing the risk of condensation and timber decay.,EXACT,{F_FLOORS}::{FLOOR_VENTILATION_OK},100,DONE
-ba8aed4852,F4,"Where ventilation appears restricted or limited, improvements should be considered during future maintenance works.",EXACT,{F_FLOORS}::{FLOOR_VENTILATION_POOR},100,DONE
-029e62822a,F4,"Laminate/Wood floor defects: The laminate or wood flooring to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other areas are worn, damaged, poorly fitted, incomplete, cracked, lifted, other.",MENU,,0,UNVERIFIED
-90a2bc7bec,F4,These should be repaired or replaced soon.,EXACT,{F_FLOORS}::{REPAIR_LAMINATE},100,DONE
-e55e476387,F4,"Excessive floor vibration: The floor was found to vibrate excessively underfoot, suggesting inadequate support and/or deterioration of the timber structure, such as fungal decay or wood-boring insect attack.",UNRESOLVED,{F_FLOORS}::{REPAIR_FLOOR_VIBRATION},54,OPEN
-a0a51e88a6,F4,The exact cause could not be confirmed within the scope of this inspection.,ADD,{F_FLOORS}::{TILES_CONDITION_CRACKED},52,OPEN
-62d9d088de,F4,"You should instruct a suitably qualified contractor to inspect the floor structure, including the underfloor void where accessible, determine the cause, and carry out any necessary repairs before purchase commitment.",UNRESOLVED,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},50,OPEN
-f25340b240,F4,"Sloping floor: The floor to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other rooms are slightly, significantly sloping.",MENU,,0,UNVERIFIED
-7a75ef29ac,F4,"This is commonly associated with long-standing settlement, historic movement, or deflection of the floor structure.",UNRESOLVED,{F_FLOORS}::{CREAKING_NOTED},56,OPEN
-ca90a66288,F4,"Where the slope is slight, and there is no evidence of ongoing movement or associated structural defects, it is unlikely to be of structural significance, and no repairs are considered necessary.",UNRESOLVED,{F_FLOORS}::{LOOSE_FLOORBOARDS},48,OPEN
-79d09f47c7,F4,"Where the slope is significant, or accompanied by cracking or distortion, further investigation by a suitably qualified building contractor is recommended to determine the cause and specify any necessary remedial works before purchase commitment.",UNRESOLVED,{F_FLOORS}::{DAMPNESS_KNOWN_CAUSE},47,OPEN
-27fc46811e,F4,"General Maintenance: Because floor coverings were not lifted, concealed defects may exist that could not be identified during a visual inspection.",EXACT,{F_FLOORS}::{STANDARD_TEXT_2},100,DONE
-cb7ada8423,F4,No comment can therefore be made regarding the condition of concealed floor timbers or supporting construction.,EXACT,{F_FLOORS}::{STANDARD_TEXT_2},100,DONE
-b11f61f89a,F4,"Floors should be inspected periodically for signs of movement, dampness, or deterioration.",UNRESOLVED,{F_FLOORS}::{FLOOR_CONSTRUCTION_ALL_SUSPENDED},49,OPEN
-46b6705fcc,F4,"Prompt repair of plumbing leaks, water penetration and defective ventilation will reduce the risk of damage to concealed floor timbers.",ADD,{F_FLOORS}::{FLOOR_VENTILATION_OK},50,OPEN
-949fcdd2c2,F4,Floor finishes should be repaired or replaced as part of normal property maintenance when they reach the end of their service life.,ADD,{F_FLOORS}::{LOOSE_FLOORBOARDS},53,OPEN
-3899a4bdc7,F5,"This section relates to visible fireplaces, chimney breasts, and associated flues within the property.",UNRESOLVED,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},53,OPEN
+b08f9ac17f,F4,"Underfloor Ventilation: Where applicable, the suspended timber floor is provided with adequate, limited, or restricted underfloor ventilation.",MENU,,0,VERIFIED
+6693327005,F4,Adequate ventilation is important in reducing the risk of condensation and timber decay.,EXACT,{F_FLOORS}::{F4_UNDERFLOOR_VENTILATION},100,DONE
+ba8aed4852,F4,"Where ventilation appears restricted or limited, improvements should be considered during future maintenance works.",EXACT,{F_FLOORS}::{F4_UNDERFLOOR_VENTILATION},100,DONE
+029e62822a,F4,"Laminate/Wood floor defects: The laminate or wood flooring to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other areas are worn, damaged, poorly fitted, incomplete, cracked, lifted, other.",MENU,,0,VERIFIED
+90a2bc7bec,F4,These should be repaired or replaced soon.,EXACT,{F_FLOORS}::{F4_LAMINATE_WOOD_DEFECTS},100,DONE
+e55e476387,F4,"Excessive floor vibration: The floor was found to vibrate excessively underfoot, suggesting inadequate support and/or deterioration of the timber structure, such as fungal decay or wood-boring insect attack.",EXACT,{F_FLOORS}::{F4_EXCESSIVE_VIBRATION},100,DONE
+a0a51e88a6,F4,The exact cause could not be confirmed within the scope of this inspection.,EXACT,{F_FLOORS}::{F4_EXCESSIVE_VIBRATION},100,DONE
+62d9d088de,F4,"You should instruct a suitably qualified contractor to inspect the floor structure, including the underfloor void where accessible, determine the cause, and carry out any necessary repairs before purchase commitment.",EXACT,{F_FLOORS}::{F4_EXCESSIVE_VIBRATION},100,DONE
+f25340b240,F4,"Sloping floor: The floor to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other rooms are slightly, significantly sloping.",MENU,,0,VERIFIED
+7a75ef29ac,F4,"This is commonly associated with long-standing settlement, historic movement, or deflection of the floor structure.",EXACT,{F_FLOORS}::{F4_SLOPING_FLOOR},100,DONE
+ca90a66288,F4,"Where the slope is slight, and there is no evidence of ongoing movement or associated structural defects, it is unlikely to be of structural significance, and no repairs are considered necessary.",EXACT,{F_FLOORS}::{F4_SLOPING_FLOOR},100,DONE
+79d09f47c7,F4,"Where the slope is significant, or accompanied by cracking or distortion, further investigation by a suitably qualified building contractor is recommended to determine the cause and specify any necessary remedial works before purchase commitment.",EXACT,{F_FLOORS}::{F4_SLOPING_FLOOR},100,DONE
+27fc46811e,F4,"General Maintenance: Because floor coverings were not lifted, concealed defects may exist that could not be identified during a visual inspection.",EXACT,{F_FLOORS}::{F4_GENERAL_MAINTENANCE},100,DONE
+cb7ada8423,F4,No comment can therefore be made regarding the condition of concealed floor timbers or supporting construction.,EXACT,{F_FLOORS}::{F4_GENERAL_MAINTENANCE},100,DONE
+b11f61f89a,F4,"Floors should be inspected periodically for signs of movement, dampness, or deterioration.",EXACT,{F_FLOORS}::{F4_GENERAL_MAINTENANCE},100,DONE
+46b6705fcc,F4,"Prompt repair of plumbing leaks, water penetration and defective ventilation will reduce the risk of damage to concealed floor timbers.",EXACT,{F_FLOORS}::{F4_GENERAL_MAINTENANCE},100,DONE
+949fcdd2c2,F4,Floor finishes should be repaired or replaced as part of normal property maintenance when they reach the end of their service life.,EXACT,{F_FLOORS}::{F4_GENERAL_MAINTENANCE},100,DONE
+3899a4bdc7,F5,"This section relates to visible fireplaces, chimney breasts, and associated flues within the property.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
 90e9b8e730,F5,The inspection was limited to a visual assessment only.,EXACT,{F_BATHROOM_FITTINGS}::{STANDARD_TEXT},100,DONE
-af522aa618,F5,"Fireplaces, flues, and appliances were not assessed, dismantled, or operated unless otherwise stated.",UNRESOLVED,{F_FIREPLACES_AND_CHIMNEYS}::{GAS_FIRE_LOCATION},53,OPEN
-a205b28725,F5,"The internal condition of chimney flues, liners and concealed structural elements cannot be confirmed during a visual inspection.",FIX,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},73,OPEN
-8816944e44,F5,"No smoke testing, CCTV survey or opening up was undertaken.",ADD,{F_FIREPLACES_AND_CHIMNEYS}::{ELECTRIC_FIRE_LOCATION},62,OPEN
-0c60bdefb1,F5,Combustion appliances should be provided with adequate permanent ventilation in accordance with current standards.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{GAS_FIRE_NOT_TESTED},53,OPEN
-afe35f74a4,F5,The adequacy of ventilation has not been assessed during this inspection.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},64,OPEN
-60a01aa206,F5,"Description: The property incorporates open fireplaces, gas fires, electric fires, solid fuel stoves, wood-burning stoves, multi-fuel stoves, decorative fireplaces.",MENU,,0,UNVERIFIED
-52bde0c6a1,F5,"Condition: Where visible, the fireplace(s) and chimney breast(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,UNVERIFIED
-9f1bfb68be,F5,"If the flues are to be used, they should be inspected and assessed by an appropriately qualified chimney specialist before use.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{FLUES_NOT_INSPECTED},100,DONE
+af522aa618,F5,"Fireplaces, flues, and appliances were not assessed, dismantled, or operated unless otherwise stated.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
+a205b28725,F5,"The internal condition of chimney flues, liners and concealed structural elements cannot be confirmed during a visual inspection.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
+8816944e44,F5,"No smoke testing, CCTV survey or opening up was undertaken.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
+0c60bdefb1,F5,Combustion appliances should be provided with adequate permanent ventilation in accordance with current standards.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
+afe35f74a4,F5,The adequacy of ventilation has not been assessed during this inspection.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_INTRO},100,DONE
+60a01aa206,F5,"Description: The property incorporates open fireplaces, gas fires, electric fires, solid fuel stoves, wood-burning stoves, multi-fuel stoves, decorative fireplaces.",MENU,,0,VERIFIED
+52bde0c6a1,F5,"Condition: Where visible, the fireplace(s) and chimney breast(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
+9f1bfb68be,F5,"If the flues are to be used, they should be inspected and assessed by an appropriately qualified chimney specialist before use.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_CONDITION},100,DONE
 5cfa1c1815,F5,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-a992d05ca6,F5,"Routine maintenance appropriate to the fireplaces, chimney breasts and flues material should be expected.",ADD,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},46,OPEN
-026d33278c,F5,"Vented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other are vented.",MENU,,0,UNVERIFIED
-13a689f525,F5,"Unvented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other have been sealed, but no ventilation to the redundant flue was evident.",MENU,,0,UNVERIFIED
+a992d05ca6,F5,"Routine maintenance appropriate to the fireplaces, chimney breasts and flues material should be expected.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_CONDITION},100,DONE
+026d33278c,F5,"Vented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other are vented.",MENU,,0,VERIFIED
+13a689f525,F5,"Unvented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other have been sealed, but no ventilation to the redundant flue was evident.",MENU,,0,VERIFIED
 549a9900a0,F5,"Unventilated flues can trap moisture, increasing the risk of dampness, condensation, and deterioration of the chimney structure.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{BLOCKED_FIREPLACE_UNVENTED},100,DONE
 c36e9afe5a,F5,"A suitably qualified contractor should inspect the flue and install appropriate permanent ventilation, such as ventilating air bricks or flue vents, where required.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{BLOCKED_FIREPLACE_UNVENTED},100,DONE
 5648c69bcc,F5,This work should be carried out soon to reduce the risk of moisture-related defects.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{BLOCKED_FIREPLACE_UNVENTED},100,DONE
-e73ed91236,F5,"Removed Chimney Breasts: Evidence was observed that a chimney breast has been partially removed, removed.",ADD,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},58,OPEN
-ce72feb4cc,F5,The adequacy of concealed structural support cannot be confirmed during a visual inspection.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},100,DONE
-ed8c65683d,F5,Your legal adviser should confirm that appropriate Building Regulation approval and completion certification were obtained where applicable.,FIX,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},87,OPEN
-acc7b4d479,F5,"Where structural adequacy is uncertain, further investigation by an appropriately qualified structural engineer is recommended.",UNRESOLVED,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_PROBLEM_NOTED},80,OPEN
-4e881647c6,F5,"Defects noted: The chimney breast has been removed from the lounge, bedroom, kitchen, bathroom, utility room, hallway, other.",MENU,,0,UNVERIFIED
-46552478b4,F5,"The adjacent construction is damaged, cracked, distorted, other.",MENU,,0,UNVERIFIED
-24d48ac9f6,F5,I saw evidence that indicates this has not been done properly.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{DAMAGED_GATE},53,OPEN
-166619886c,F5,You should ask an appropriately qualified person to investigate this problem and recommend any repairs.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_PROBLEM_NOTED},100,DONE
-3a5b707a1c,F5,"This may involve removing parts of the floor and wall, and you should discuss this with the property owner.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{REMOVED_CB_OK},100,DONE
-b9aeeea06c,F5,"Boiler Flues: Where a heating appliance discharges through an external wall or roof, the visible flue terminal appears secure, adequately positioned, and free from obvious obstruction.",UNRESOLVED,{F_FIREPLACES_AND_CHIMNEYS}::{BOILER_FLUE_OK},66,OPEN
+e73ed91236,F5,"Removed Chimney Breasts: Evidence was observed that a chimney breast has been partially removed, removed.",MENU,,0,VERIFIED
+ce72feb4cc,F5,The adequacy of concealed structural support cannot be confirmed during a visual inspection.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_REMOVED_CHIMNEY_BREASTS},100,DONE
+ed8c65683d,F5,Your legal adviser should confirm that appropriate Building Regulation approval and completion certification were obtained where applicable.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_REMOVED_CHIMNEY_BREASTS},100,DONE
+acc7b4d479,F5,"Where structural adequacy is uncertain, further investigation by an appropriately qualified structural engineer is recommended.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_REMOVED_CHIMNEY_BREASTS},100,DONE
+4e881647c6,F5,"Defects noted: The chimney breast has been removed from the lounge, bedroom, kitchen, bathroom, utility room, hallway, other.",MENU,,0,VERIFIED
+46552478b4,F5,"The adjacent construction is damaged, cracked, distorted, other.",MENU,,0,VERIFIED
+24d48ac9f6,F5,I saw evidence that indicates this has not been done properly.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_REMOVED_DEFECTS},100,DONE
+166619886c,F5,You should ask an appropriately qualified person to investigate this problem and recommend any repairs.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_REMOVED_DEFECTS},100,DONE
+3a5b707a1c,F5,"This may involve removing parts of the floor and wall, and you should discuss this with the property owner.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_REMOVED_DEFECTS},100,DONE
+b9aeeea06c,F5,"Boiler Flues: Where a heating appliance discharges through an external wall or roof, the visible flue terminal appears secure, adequately positioned, and free from obvious obstruction.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_BOILER_FLUES},100,DONE
 e1493d3235,F5,The installation has not been assessed.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{BOILER_FLUE_OBSTRUCTED},100,DONE
-7030a40f0d,F5,Fireplace defects: One or more of the following defects were observed: • cracked fire surround • damaged hearth • loose fireplace components • cracked chimney breast • distorted fireplace opening • localised damp staining • surface deterioration Repairs should be undertaken where deterioration affects safety or continued use.,MENU,,0,UNVERIFIED
+7030a40f0d,F5,Fireplace defects: One or more of the following defects were observed: • cracked fire surround • damaged hearth • loose fireplace components • cracked chimney breast • distorted fireplace opening • localised damp staining • surface deterioration Repairs should be undertaken where deterioration affects safety or continued use.,MENU,,0,VERIFIED
 cd5c3e450c,F5,"If you plan to use the fireplace again, you should ask an appropriately qualified person to inspect and repair the fireplace.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{DAMAGED_GATE},100,DONE
 30f068d637,F5,"Although I do not know the full extent of the work required, you should plan for complete replacement.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{DAMAGED_GATE},100,DONE
 aad16dcf13,F5,You should not use the fireplace until this has been done.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{DAMAGED_GATE},100,DONE
-27b339c032,F5,Dampness: Localised damp staining was observed on the chimney breast.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{AN_OPEN_FIRE_LOCATION},48,OPEN
+27b339c032,F5,Dampness: Localised damp staining was observed on the chimney breast.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_DAMPNESS},100,DONE
 7ed3760535,F5,"This may be associated with condensation, defective flashings, unused flues, or moisture penetration.",MENU,,0,UNVERIFIED
-60ed21089a,F5,The source should be identified and repaired before internal redecoration is undertaken.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{AN_OPEN_FIRE_LOCATION},50,OPEN
-6b436c89e4,F5,"General Maintenance: Fireplaces, flues, and combustion appliances should be inspected and serviced regularly by appropriately qualified contractors.",UNRESOLVED,{F_FIREPLACES_AND_CHIMNEYS}::{AN_OPEN_FIRE_LOCATION},65,OPEN
-4c80d062bf,F5,Unused flues should be adequately ventilated to reduce the risk of condensation and dampness.,ADD,{F_FIREPLACES_AND_CHIMNEYS}::{BLOCKED_FIREPLACE_UNVENTED},59,OPEN
-f9d543b487,F5,"Where fireplaces are no longer required, appropriate capping and ventilation should be maintained.",ADD,{F_FIREPLACES_AND_CHIMNEYS}::{BLOCKED_FIREPLACE_VENTED},69,OPEN
+60ed21089a,F5,The source should be identified and repaired before internal redecoration is undertaken.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_DAMPNESS},100,DONE
+6b436c89e4,F5,"General Maintenance: Fireplaces, flues, and combustion appliances should be inspected and serviced regularly by appropriately qualified contractors.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_GENERAL_MAINTENANCE},100,DONE
+4c80d062bf,F5,Unused flues should be adequately ventilated to reduce the risk of condensation and dampness.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_GENERAL_MAINTENANCE},100,DONE
+f9d543b487,F5,"Where fireplaces are no longer required, appropriate capping and ventilation should be maintained.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_GENERAL_MAINTENANCE},100,DONE
 94ea0724a9,F6,"The inspection was limited by stored items, fixed appliances, contents of cupboards, restricted access, or locked cupboards.",MENU,,0,UNVERIFIED
 fc72608430,F6,Wall and floor surfaces concealed behind fitted units could not be inspected.,EXACT,{F_BUILT_IN_FITTINGS}::{STANDARD_TEXT_2},100,DONE
 78f8fec9b6,F6,No comment can therefore be made regarding the condition of concealed areas.,EXACT,{F_BUILT_IN_FITTINGS}::{STANDARD_TEXT_2},100,DONE

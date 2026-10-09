@@ -6602,6 +6602,645 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: '1',
     whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
   ),
+  VerbatimRule(
+    'f4_desc',
+    'activity_in_side_property_floors_about_floor',
+    '{F_FLOORS}',
+    '{F4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{FLOOR_CONSTRUCTION}',
+        options: {
+          'f4c_solid_concrete': 'solid concrete',
+          'f4c_suspended_timber': 'suspended timber',
+          'f4c_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'cb_other_989',
+        otherText: 'et_other_424',
+        pdfOptions: ['solid concrete', 'suspended timber', 'beam and block'],
+      ),
+      VerbatimToken(
+        '{FLOOR_FINISHES}',
+        options: {
+          'f4f_floorboards': 'floorboards',
+          'f4f_carpet': 'carpet',
+          'f4f_tiles': 'tiles',
+          'f4f_ceramic_tiles': 'ceramic tiles',
+          'f4f_laminate_flooring': 'laminate flooring',
+          'f4f_wood_flooring': 'wood flooring',
+          'f4f_vinyl': 'vinyl',
+          'f4f_stone_tiles': 'stone tiles',
+        },
+        otherCheckbox: 'cb_other_837',
+        otherText: 'et_other_882',
+        pdfOptions: ['floorboards', 'carpet', 'tiles', 'ceramic tiles', 'laminate flooring', 'wood flooring', 'vinyl', 'stone tiles'],
+      ),
+    ],
+    pdf:
+        'Description: The floors are formed in solid concrete, suspended timber, beam and block, other construction.',
+    pdfMore: [
+      'The floor finishes comprise floorboards, carpet, tiles, ceramic tiles, laminate flooring, wood flooring, vinyl, stone tiles, other finishes.',
+    ],
+  ),
+  VerbatimRule(
+    'f4_cond',
+    'activity_in_side_property_floors_about_floor',
+    '{F_FLOORS}',
+    '{F4_CONDITION}',
+    [
+      VerbatimToken(
+        '{FLOOR_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the floors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'f4_general',
+    'activity_in_side_property_floors_about_floor',
+    '{F_FLOORS}',
+    '{F4_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f4_nocreak',
+    'activity_in_side_property_floors_creaking',
+    '{F_FLOORS}',
+    '{F4_NO_CREAKING}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No Creaking floor',
+  ),
+  VerbatimRule(
+    'f4_creak',
+    'activity_in_side_property_floors_creaking',
+    '{F_FLOORS}',
+    '{F4_CREAKING_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Creaking floor noted',
+  ),
+  VerbatimRule(
+    'f4_repair',
+    'activity_in_side_property_floors_repair_floor_repair',
+    '{F_FLOORS}',
+    '{F4_REPAIR_TIMBER_FLOOR}',
+    [
+      VerbatimToken(
+        '{FLOOR_LOCATIONS}',
+        options: {
+          'f4rl_lounge': 'lounge',
+          'f4rl_bedroom': 'bedroom',
+          'f4rl_kitchen': 'kitchen',
+          'f4rl_bathroom': 'bathroom',
+          'f4rl_hallway': 'hallway',
+        },
+        otherCheckbox: 'cb_other_221',
+        otherText: 'et_other_911',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'hallway'],
+      ),
+      VerbatimToken(
+        '{FLOOR_DEFECTS}',
+        options: {
+          'f4rd_broken': 'broken',
+          'f4rd_poorly_supported': 'poorly supported',
+          'f4rd_uneven': 'uneven',
+          'f4rd_springy': 'springy',
+          'f4rd_loose': 'loose',
+          'f4rd_sloping': 'sloping',
+          'f4rd_incomplete': 'incomplete',
+          'f4rd_damp': 'damp',
+          'f4rd_insect_infested': 'insect infested',
+          'f4rd_rotten': 'rotten',
+          'f4rd_poorly_ventilated': 'poorly ventilated',
+        },
+        otherCheckbox: 'cb_other_565',
+        otherText: 'et_other_232',
+        pdfOptions: ['broken', 'poorly supported', 'uneven', 'springy', 'loose', 'sloping', 'incomplete', 'damp', 'insect infested', 'rotten', 'poorly ventilated'],
+      ),
+      VerbatimToken(
+        '{FLOOR_SEVERITY}',
+        dropdown: 'actv_repair_type',
+        dropdownOptions: ['Minor', 'Significant'],
+        lower: true,
+        pdfOptions: ['minor', 'significant'],
+      ),
+    ],
+    pdf:
+        'Repair timber floor: The timber floor to the lounge, bedroom, kitchen, bathroom, hallway, other is broken, poorly supported, uneven, springy, loose, sloping, incomplete, damp, insect infested, rotten, poorly ventilated, others, and the defect(s) is considered minor, significant.',
+  ),
+  VerbatimRule(
+    'f4_tiles_ok',
+    'activity_in_side_property_floors_tiles',
+    '{F_FLOORS}',
+    '{F4_NO_CRACKED_TILES}',
+    [
+      VerbatimToken(
+        '{TILE_CONDITION}',
+        dropdown: 'actv_tile_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+      VerbatimToken(
+        '{TILE_LOCATIONS}',
+        options: {
+          'f4t_kitchen': 'kitchen',
+          'f4t_utility_room': 'utility room',
+          'f4t_bathroom': 'bathroom',
+          'f4t_toilet': 'toilet',
+          'f4t_conservatory': 'conservatory',
+          'f4t_porch': 'porch',
+        },
+        otherCheckbox: 'cb_other_240',
+        otherText: 'et_other_392',
+        pdfOptions: ['kitchen', 'utility room', 'bathroom', 'toilet', 'conservatory', 'porch'],
+      ),
+    ],
+    pdf:
+        'No Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition.',
+    pdfMore: [
+      'Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection.',
+    ],
+    whenField: 'actv_tiles',
+    whenValue: 'No cracked tiles',
+  ),
+  VerbatimRule(
+    'f4_tiles_bad',
+    'activity_in_side_property_floors_tiles',
+    '{F_FLOORS}',
+    '{F4_CRACKED_TILES}',
+    [
+      VerbatimToken(
+        '{TILE_DEFECTS}',
+        options: {
+          'f4td_cracked': 'cracked',
+          'f4td_loose': 'loose',
+          'f4td_damaged': 'damaged',
+        },
+        pdfOptions: ['cracked', 'loose', 'damaged'],
+      ),
+      VerbatimToken(
+        '{TILE_LOCATIONS}',
+        options: {
+          'f4t_kitchen': 'kitchen',
+          'f4t_utility_room': 'utility room',
+          'f4t_bathroom': 'bathroom',
+          'f4t_toilet': 'toilet',
+          'f4t_conservatory': 'conservatory',
+          'f4t_porch': 'porch',
+        },
+        otherCheckbox: 'cb_other_240',
+        otherText: 'et_other_392',
+        pdfOptions: ['kitchen', 'utility room', 'bathroom', 'toilet', 'conservatory', 'porch'],
+      ),
+    ],
+    pdf:
+        'Cracked Tiles: Localised cracked, loose, damaged floor tiles to the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas were observed.',
+    pdfMore: [
+      'Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection.',
+    ],
+    whenField: 'actv_tiles',
+    whenValue: 'Cracked tiles',
+  ),
+  VerbatimRule(
+    'f4_loose',
+    'activity_in_side_property_floors_loose_floorboards',
+    '{F_FLOORS}',
+    '{F4_LOOSE_FLOORBOARDS}',
+    [
+    ],
+    whenField: 'cb_loose_floorboards',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f4_wb',
+    'activity_in_side_property_floors_timber_infection',
+    '{F_FLOORS}',
+    '{F4_WOOD_BORING_NOTED}',
+    [
+      VerbatimToken(
+        '{WB_ACTIVITY}',
+        options: {
+          'f4wa_active': 'active',
+          'f4wa_historic': 'historic',
+        },
+        pdfOptions: ['active', 'historic'],
+      ),
+      VerbatimToken(
+        '{WB_LOCATIONS}',
+        options: {
+          'f4wl_property': 'property',
+          'f4wl_lounge': 'lounge',
+          'f4wl_bedrooms': 'bedrooms',
+          'f4wl_bathrooms': 'bathrooms',
+          'f4wl_kitchens': 'kitchens',
+        },
+        otherCheckbox: 'cb_other_965',
+        otherText: 'et_other_529',
+        pdfOptions: ['property', 'lounge', 'bedrooms', 'bathrooms', 'kitchens'],
+      ),
+    ],
+    pdf:
+        'Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed in the property, lounge, bedrooms, bathrooms, kitchens, other areas.',
+  ),
+  VerbatimRule(
+    'f4_decay',
+    'activity_in_side_property_floors_timber_decay',
+    '{F_FLOORS}',
+    '{F4_TIMBER_DECAY_NOTED}',
+    [
+      VerbatimToken(
+        '{DECAY_LOCATIONS}',
+        options: {
+          'f4dc_floor_timbers': 'floor timbers',
+          'f4dc_staircase_timbers': 'staircase timbers',
+          'f4dc_bathroom_floor': 'bathroom floor',
+          'f4dc_kitchen_floor': 'kitchen floor',
+          'f4dc_basement_floor_joists': 'basement floor joists',
+        },
+        otherCheckbox: 'cb_other_802',
+        otherText: 'et_other_592',
+        pdfOptions: ['floor timbers', 'staircase timbers', 'bathroom floor', 'kitchen floor', 'basement floor joists'],
+      ),
+    ],
+    pdf:
+        'Timber decay noted: Decay was noted to the floor timbers, staircase timbers, bathroom floor, kitchen floor, basement floor joists, other areas.',
+  ),
+  VerbatimRule(
+    'f4_damp',
+    'activity_in_side_property_floors_dampness',
+    '{F_FLOORS}',
+    '{F4_DAMPNESS_NOTED}',
+    [
+      VerbatimToken(
+        '{DAMP_LOCATIONS}',
+        options: {
+          'f4dl_lounge': 'lounge',
+          'f4dl_bedroom': 'bedroom',
+          'f4dl_kitchen': 'kitchen',
+          'f4dl_bathroom': 'bathroom',
+          'f4dl_utility_room': 'utility room',
+        },
+        otherCheckbox: 'cb_other_240',
+        otherText: 'et_other_392',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'utility room'],
+      ),
+      VerbatimToken(
+        '{DAMP_CAUSES}',
+        options: {
+          'f4dcs_faulty_plumbing': 'faulty plumbing',
+          'f4dcs_bathtub_spillage': 'bathtub spillage',
+          'f4dcs_leaking_sealants': 'leaking sealants',
+        },
+        otherCheckbox: 'cb_other_215',
+        otherText: 'et_other_358',
+        pdfOptions: ['faulty plumbing', 'bathtub spillage', 'leaking sealants'],
+      ),
+    ],
+    pdf:
+        'Dampness noted: Although I could not see the full extent of the dampness problem in the lounge, bedroom, kitchen, bathroom, utility room, other areas, I suspect the dampness is caused by faulty plumbing, bathtub spillage, leaking sealants, other.',
+    whenField: 'actv_status',
+    whenValue: 'Dampness noted',
+  ),
+  VerbatimRule(
+    'f4_damp_unknown',
+    'activity_in_side_property_floors_dampness',
+    '{F_FLOORS}',
+    '{F4_UNKNOWN_DAMP_CAUSE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Unknown damp cause',
+  ),
+  VerbatimRule(
+    'f4_vent',
+    'activity_in_side_property_floors_floor_ventilation',
+    '{F_FLOORS}',
+    '{F4_UNDERFLOOR_VENTILATION}',
+    [
+      VerbatimToken(
+        '{UNDERFLOOR_VENTILATION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Adequate', 'Limited', 'Restricted'],
+        lower: true,
+        pdfOptions: ['adequate', 'limited', 'restricted'],
+      ),
+    ],
+    pdf:
+        'Underfloor Ventilation: Where applicable, the suspended timber floor is provided with adequate, limited, or restricted underfloor ventilation.',
+  ),
+  VerbatimRule(
+    'f4_laminate',
+    'activity_in_side_property_floors_repair_floor_laminate_wood_floor',
+    '{F_FLOORS}',
+    '{F4_LAMINATE_WOOD_DEFECTS}',
+    [
+      VerbatimToken(
+        '{LAMINATE_LOCATIONS}',
+        options: {
+          'f4ll_lounge': 'lounge',
+          'f4ll_bedroom': 'bedroom',
+          'f4ll_kitchen': 'kitchen',
+          'f4ll_bathroom': 'bathroom',
+          'f4ll_utility_room': 'utility room',
+          'f4ll_hallway': 'hallway',
+        },
+        otherCheckbox: 'cb_other_345',
+        otherText: 'et_other_711',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'utility room', 'hallway'],
+      ),
+      VerbatimToken(
+        '{LAMINATE_DEFECTS}',
+        options: {
+          'f4ld_worn': 'worn',
+          'f4ld_damaged': 'damaged',
+          'f4ld_poorly_fitted': 'poorly fitted',
+          'f4ld_incomplete': 'incomplete',
+          'f4ld_cracked': 'cracked',
+          'f4ld_lifted': 'lifted',
+        },
+        otherCheckbox: 'cb_other_1109',
+        otherText: 'et_other_588',
+        pdfOptions: ['worn', 'damaged', 'poorly fitted', 'incomplete', 'cracked', 'lifted'],
+      ),
+    ],
+    pdf:
+        'Laminate/Wood floor defects: The laminate or wood flooring to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other areas are worn, damaged, poorly fitted, incomplete, cracked, lifted, other.',
+  ),
+  VerbatimRule(
+    'f4_vibration',
+    'activity_in_side_property_floors_repair_floor_vibration',
+    '{F_FLOORS}',
+    '{F4_EXCESSIVE_VIBRATION}',
+    [
+    ],
+    whenField: 'cb_floor_vibration_excessive',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f4_sloping',
+    'activity_in_side_property_floors_repair_sloping_floor',
+    '{F_FLOORS}',
+    '{F4_SLOPING_FLOOR}',
+    [
+      VerbatimToken(
+        '{SLOPING_LOCATIONS}',
+        options: {
+          'f4sl_lounge': 'lounge',
+          'f4sl_bedroom': 'bedroom',
+          'f4sl_kitchen': 'kitchen',
+          'f4sl_bathroom': 'bathroom',
+          'f4sl_utility_room': 'utility room',
+          'f4sl_hallway': 'hallway',
+        },
+        otherCheckbox: 'cb_other_856',
+        otherText: 'et_other_113',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'utility room', 'hallway'],
+      ),
+      VerbatimToken(
+        '{SLOPE_DEGREE}',
+        dropdown: 'actv_status',
+        dropdownOptions: ['Slightly', 'Significantly'],
+        lower: true,
+        pdfOptions: ['slightly', 'significantly'],
+      ),
+    ],
+    pdf:
+        'Sloping floor: The floor to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other rooms are slightly, significantly sloping.',
+  ),
+  VerbatimRule(
+    'f4_intro',
+    'activity_inside_property_floors_main_screen',
+    '{F_FLOORS}',
+    '{F4_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f5_desc',
+    'activity_in_side_property_fire_places',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{FIREPLACE_TYPES}',
+        options: {
+          'f5t_open_fireplaces': 'open fireplaces',
+          'f5t_gas_fires': 'gas fires',
+          'f5t_electric_fires': 'electric fires',
+          'f5t_solid_fuel_stoves': 'solid fuel stoves',
+          'f5t_wood_burning_stoves': 'wood-burning stoves',
+          'f5t_multi_fuel_stoves': 'multi-fuel stoves',
+          'f5t_decorative_fireplaces': 'decorative fireplaces',
+        },
+        pdfOptions: ['open fireplaces', 'gas fires', 'electric fires', 'solid fuel stoves', 'wood-burning stoves', 'multi-fuel stoves', 'decorative fireplaces'],
+      ),
+    ],
+    pdf:
+        'Description: The property incorporates open fireplaces, gas fires, electric fires, solid fuel stoves, wood-burning stoves, multi-fuel stoves, decorative fireplaces.',
+  ),
+  VerbatimRule(
+    'f5_cond',
+    'activity_in_side_property_fire_places',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_CONDITION}',
+    [
+      VerbatimToken(
+        '{FIREPLACE_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the fireplace(s) and chimney breast(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'f5_vented',
+    'activity_in_side_property_fire_places_repair_blocked_fireplace',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_VENTED_BLOCKED}',
+    [
+      VerbatimToken(
+        '{BLOCKED_LOCATIONS}',
+        options: {
+          'f5b_lounge': 'lounge',
+          'f5b_dining_room': 'dining room',
+          'f5b_bedroom': 'bedroom',
+          'f5b_kitchen': 'kitchen',
+          'f5b_hallway': 'hallway',
+        },
+        otherCheckbox: 'f5b_other',
+        otherText: 'f5b_other_text',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen', 'hallway'],
+      ),
+    ],
+    pdf:
+        'Vented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other are vented.',
+    whenField: 'actv_status',
+    whenValue: 'Vented',
+  ),
+  VerbatimRule(
+    'f5_unvented',
+    'activity_in_side_property_fire_places_repair_blocked_fireplace',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_UNVENTED_BLOCKED}',
+    [
+      VerbatimToken(
+        '{BLOCKED_LOCATIONS}',
+        options: {
+          'f5b_lounge': 'lounge',
+          'f5b_dining_room': 'dining room',
+          'f5b_bedroom': 'bedroom',
+          'f5b_kitchen': 'kitchen',
+          'f5b_hallway': 'hallway',
+        },
+        otherCheckbox: 'f5b_other',
+        otherText: 'f5b_other_text',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen', 'hallway'],
+      ),
+    ],
+    pdf:
+        'Unvented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other have been sealed, but no ventilation to the redundant flue was evident.',
+    whenField: 'actv_status',
+    whenValue: 'Unvented',
+  ),
+  VerbatimRule(
+    'f5_removed',
+    'activity_in_side_property_fire_places_repair_removed_cb',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_REMOVED_CHIMNEY_BREASTS}',
+    [
+      VerbatimToken(
+        '{RCB_STATE}',
+        options: {
+          'f5r_partially_removed': 'partially removed',
+          'f5r_removed': 'removed',
+        },
+        pdfOptions: ['partially removed', 'removed'],
+      ),
+    ],
+    pdf:
+        'Removed Chimney Breasts: Evidence was observed that a chimney breast has been partially removed, removed.',
+  ),
+  VerbatimRule(
+    'f5_removed_defects',
+    'activity_in_side_property_fire_places_repair_removed_cb',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_REMOVED_DEFECTS}',
+    [
+      VerbatimToken(
+        '{RCB_LOCATIONS}',
+        options: {
+          'f5rl_lounge': 'lounge',
+          'f5rl_bedroom': 'bedroom',
+          'f5rl_kitchen': 'kitchen',
+          'f5rl_bathroom': 'bathroom',
+          'f5rl_utility_room': 'utility room',
+          'f5rl_hallway': 'hallway',
+        },
+        otherCheckbox: 'f5rl_other',
+        otherText: 'f5rl_other_text',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'utility room', 'hallway'],
+      ),
+      VerbatimToken(
+        '{RCB_DEFECTS}',
+        options: {
+          'f5rd_damaged': 'damaged',
+          'f5rd_cracked': 'cracked',
+          'f5rd_distorted': 'distorted',
+        },
+        otherCheckbox: 'f5rd_other',
+        otherText: 'f5rd_other_text',
+        pdfOptions: ['damaged', 'cracked', 'distorted'],
+      ),
+    ],
+    pdf:
+        'Defects noted: The chimney breast has been removed from the lounge, bedroom, kitchen, bathroom, utility room, hallway, other.',
+    pdfMore: [
+      'The adjacent construction is damaged, cracked, distorted, other.',
+    ],
+  ),
+  VerbatimRule(
+    'f5_boiler',
+    'activity_in_side_property_fire_places_repair_boiler_flue',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_BOILER_FLUES}',
+    [
+    ],
+    whenField: 'cb_boiler_flue',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f5_defects',
+    'activity_in_side_property_fire_places_defects',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_FIREPLACE_DEFECTS}',
+    [
+      VerbatimToken(
+        '{FIREPLACE_DEFECT_LIST}',
+        options: {
+          'f5fd_cracked_fire_surround': 'cracked fire surround',
+          'f5fd_damaged_hearth': 'damaged hearth',
+          'f5fd_loose_fireplace_components': 'loose fireplace components',
+          'f5fd_cracked_chimney_breast': 'cracked chimney breast',
+          'f5fd_distorted_fireplace_opening': 'distorted fireplace opening',
+          'f5fd_localised_damp_staining': 'localised damp staining',
+          'f5fd_surface_deterioration': 'surface deterioration',
+        },
+        pdfOptions: ['cracked fire surround', 'damaged hearth', 'loose fireplace components', 'cracked chimney breast', 'distorted fireplace opening', 'localised damp staining', 'surface deterioration'],
+      ),
+    ],
+    pdf:
+        'Fireplace defects: One or more of the following defects were observed: • cracked fire surround • damaged hearth • loose fireplace components • cracked chimney breast • distorted fireplace opening • localised damp staining • surface deterioration Repairs should be undertaken where deterioration affects safety or continued use.',
+  ),
+  VerbatimRule(
+    'f5_damp',
+    'activity_in_side_property_fire_places_dampness',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_DAMPNESS}',
+    [
+    ],
+    whenField: 'cb_dampness',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f5_intro',
+    'activity_inside_property_fireplaces_main_screen',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f5_general',
+    'activity_inside_property_fireplaces_main_screen',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

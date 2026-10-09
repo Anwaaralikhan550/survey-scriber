@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 432,
+  "screensAudited": 421,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2354,
-   "approvedLegacyBank": 593,
-   "approvedCurrentBankOnly": 1734,
+   "distinctEmitted": 2313,
+   "approvedLegacyBank": 588,
+   "approvedCurrentBankOnly": 1698,
    "unapproved": 0
   }
  },
@@ -2177,60 +2177,29 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_floors",
-   "title": "Floors",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "In a property of this age, some degree of infestation to concealed areas would not be entirely unexpected. Further exposure and investigation would be necessary and is recommended prior to purchase commitment to be categorical regarding condition."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_in_side_property_floors_about_floor",
    "title": "About Floor",
-   "dataFieldCount": 20,
-   "permutationCount": 32,
+   "dataFieldCount": 17,
+   "permutationCount": 27,
    "severities": [],
    "phraseStats": {
-    "total": 13,
+    "total": 7,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 13,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Inspection Limitations: The floor construction has been inspected from within the property only. Floor coverings were not lifted, and no opening up or destructive investigation was undertaken. The condition of concealed floor timbers, floor voids, joists, sleeper walls and foundations cannot be confirmed without lifting floor finishes or opening up the structure.",
-    "Concealed Defects: Because floor coverings were not lifted, concealed defects may exist that could not be identified during a visual inspection. No comment can therefore be made regarding the condition of concealed floor timbers or supporting construction. You must accept the risk of defects being present, including insect infestation and dry rot, until floor coverings are lifted for a full inspection.",
-    "Floor Construction: The floor(s) in the property are mainly of solid construction. No opening up was undertaken to confirm the exact construction."
+    "Condition: Where visible, the floors appear in good condition, consistent with their age and construction. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the flooring material should be expected.",
+    "Condition: Where visible, the floors appear in reasonable condition, consistent with their age and construction. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the flooring material should be expected.",
+    "Condition: Where visible, the floors appear in fair condition, consistent with their age and construction. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the flooring material should be expected."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_floors_repair_floor_repair",
    "title": "Floor Repair",
-   "dataFieldCount": 32,
-   "permutationCount": 36,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places_repair_fire_place",
-   "title": "Repair Fireplaces",
-   "dataFieldCount": 35,
-   "permutationCount": 39,
+   "dataFieldCount": 21,
+   "permutationCount": 25,
    "severities": [],
    "phraseStats": {
     "total": 2,
@@ -2239,8 +2208,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Defects: The fireplace in the ground, first, second and sample detail floor lounge, reception, dining room, kitchen, bedroom and sample detail is damaged, incomplete, missing parts, obstructed and sample detail. Repairs should be undertaken where deterioration affects safety or continued use. This should be repaired soon.",
-    "Defects: The fireplace in the ground, first, second and sample detail floor lounge, reception, dining room, kitchen, bedroom and sample detail is badly damaged, a safety hazard and sample detail (See Section J3 - Risks). Repairs should be undertaken where deterioration affects safety or continued use. This should be repaired now."
+    "Repair timber floor: The timber floor to the lounge, bedroom, kitchen, bathroom, hallway and sample detail is broken, poorly supported, uneven, springy, loose, sloping, incomplete, damp, insect infested, rotten, poorly ventilated and sample detail, and the defect(s) is considered minor. This is common with floors of this age and construction, and these should be repaired soon. However, where the defect is significant, repair must be carried out promptly by a qualified professional.",
+    "Repair timber floor: The timber floor to the lounge, bedroom, kitchen, bathroom, hallway and sample detail is broken, poorly supported, uneven, springy, loose, sloping, incomplete, damp, insect infested, rotten, poorly ventilated and sample detail, and the defect(s) is considered significant. This is common with floors of this age and construction, and these should be repaired soon. However, where the defect is significant, repair must be carried out promptly by a qualified professional."
    ]
   },
   {
@@ -2395,38 +2364,21 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places_diffrent",
-   "title": "Flues Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Chimney Flues: The chimney flues were not inspected internally. Their condition, lining and suitability for continued use cannot be confirmed during a visual inspection. If the flues are to be used, they should be inspected and assessed by an appropriately qualified chimney specialist before use."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_in_side_property_fire_places",
-   "title": "An open fire",
+   "title": "Fireplaces",
    "dataFieldCount": 8,
-   "permutationCount": 14,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Open Fireplaces: The fireplace in the lounge incorporates an open fire. No functional testing has been undertaken. If the fireplace is to be used, it should be inspected and tested by an appropriately qualified chimney specialist before use.",
-    "Open Fireplaces: The fireplace in the reception(s) incorporates an open fire. No functional testing has been undertaken. If the fireplace is to be used, it should be inspected and tested by an appropriately qualified chimney specialist before use.",
-    "Open Fireplaces: The fireplace in the dining room incorporates an open fire. No functional testing has been undertaken. If the fireplace is to be used, it should be inspected and tested by an appropriately qualified chimney specialist before use."
+    "Description: The property incorporates open fireplaces.",
+    "Description: The property incorporates gas fires.",
+    "Description: The property incorporates electric fires."
    ]
   },
   {
@@ -2561,8 +2513,8 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_floors_creaking",
    "title": "Creaking",
-   "dataFieldCount": 4,
-   "permutationCount": 8,
+   "dataFieldCount": 1,
+   "permutationCount": 5,
    "severities": [],
    "phraseStats": {
     "total": 2,
@@ -2572,7 +2524,7 @@
    },
    "editedBankSamples": [
     "No Creaking floor: I walked over the accessible suspended floor surfaces and found them to be firm and level underfoot, with no evidence of excessive springiness or distortion. This is based on a visual inspection only, and the condition of concealed floor timbers cannot be confirmed without opening up the structure.",
-    "Creaking floor noted: I walked over the accessible suspended floor surfaces and found them to be firm underfoot. Localised creaking and minor unevenness were noted to parts of the floors, stairs and minor floor unevenness. These are not uncommon in properties of this age, and, at the time of inspection, there was no evidence of excessive springiness or significant distortion suggestive of structural failure. This is associated with normal shrinkage or movement between floorboards and joists. Repairs may be undertaken as part of routine maintenance."
+    "Creaking floor noted: I walked over the accessible suspended floor surfaces and found them to be firm underfoot. Localised creaking and minor unevenness were noted in parts of the floors and/or stairs. These are not uncommon in properties of this age, and, at the time of inspection, there was no evidence of excessive springiness or significant distortion suggestive of structural failure. This is associated with normal shrinkage or movement between floorboards and joists. Repairs may be undertaken as part of routine maintenance."
    ]
   },
   {
@@ -2589,15 +2541,15 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The laminate and wood flooring to the kitchen, bathroom, utility room, bedrooms and sample detail are worn, damaged, badly fitted, incomplete, broken, lifted and sample detail. These should be repaired or replaced soon."
+    "Laminate/Wood floor defects: The laminate or wood flooring to the lounge, bedroom, kitchen, bathroom, utility room, hallway and sample detail areas are worn, damaged, poorly fitted, incomplete, cracked, lifted and sample detail. These should be repaired or replaced soon."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_fire_places_repair_blocked_fireplace",
    "title": "Blocked Fireplace",
-   "dataFieldCount": 25,
-   "permutationCount": 29,
+   "dataFieldCount": 8,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
     "total": 2,
@@ -2606,25 +2558,8 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Fireplace Openings: The fireplace in the ground, first, second and sample detail floor lounge, reception(s), dining room, kitchen, bedroom(s) and sample detail is blocked and vented. Where fireplaces have been blocked or sealed, adequate ventilation should be maintained where appropriate.",
-    "Fireplace Openings: The fireplace in the ground, first, second and sample detail floor lounge, reception(s), dining room, kitchen, bedroom(s) and sample detail has been sealed, but no ventilation to the redundant flue was evident. Unventilated flues can trap moisture, increasing the risk of dampness, condensation, and deterioration of the chimney structure. A suitably qualified contractor should inspect the flue and install appropriate permanent ventilation, such as ventilating air bricks or flue vents, where required. This work should be carried out soon to reduce the risk of moisture-related defects."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places_repair_damage_grate",
-   "title": "Damaged grate",
-   "dataFieldCount": 12,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Defects: The fireplace in the ground, first, second and sample detail floor lounge, reception, dining room, kitchen, bedroom and sample detail has a badly damaged fireback grate. Repairs should be undertaken where deterioration affects safety or continued use."
+    "Vented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway and sample detail are vented.",
+    "Unvented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway and sample detail have been sealed, but no ventilation to the redundant flue was evident. Unventilated flues can trap moisture, increasing the risk of dampness, condensation, and deterioration of the chimney structure. A suitably qualified contractor should inspect the flue and install appropriate permanent ventilation, such as ventilating air bricks or flue vents, where required. This work should be carried out soon to reduce the risk of moisture-related defects."
    ]
   },
   {
@@ -2772,25 +2707,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places__gas_fire",
-   "title": "Gas fire",
-   "dataFieldCount": 8,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 11,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 11,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Gas Fires: The fireplace in the lounge incorporates a gas fire. Gas appliances were not tested during the inspection. Their condition, safety and serviceability should be confirmed by a Gas Safe registered engineer before legal commitment.",
-    "The gas fire has not been tested. An appropriately qualified person should be called in before purchase commitment to determine fully the condition of this and all other gas appliances/pipework within the property to ensure their compliance with all regulations and requirements and the adequacy of flues to accommodate exhaust emission arrangements.",
-    "If you plan to use the fireplace, it is recommended that you contact a qualified person to check the condition of the flue lining to avoid leakage of harmful gases. The chimney should be swept to ensure adequate ventilation when you start using it. No repair is currently needed. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_about_roof_structure",
    "title": "About Roof structure",
    "dataFieldCount": 10,
@@ -2888,18 +2804,19 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_floors_tiles",
    "title": "Tiles",
-   "dataFieldCount": 14,
-   "permutationCount": 16,
+   "dataFieldCount": 13,
+   "permutationCount": 25,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Floor Tiles: Where visible, the floor tiles in the kitchen, bathroom, toilet, utility room and sample detail appear in reasonable condition at the time of my inspection, and no significant defects were observed. No repairs are currently required. The property must be maintained in the normal way.",
-    "Floor Tiles: Localised cracked, loose, or damaged floor tiles were observed in the kitchen, bathroom, toilet, utility room and sample detail at the time of my inspection. Repairs should be undertaken to maintain the floor finish and reduce the risk of further deterioration - this should be repaired soon. The property must be maintained in the normal way."
+    "No Cracked Tiles: The floor tiles appear in good condition. Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch and sample detail areas showed no evidence of cracking at the time of my inspection. No repairs are currently required. Routine maintenance only is recommended.",
+    "Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition. Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch and sample detail areas showed no evidence of cracking at the time of my inspection. No repairs are currently required. Routine maintenance only is recommended. Cracked Tiles: Localised cracked, loose and damaged floor tiles to the kitchen, utility room, bathroom, toilet, conservatory, porch and sample detail areas were observed. Repairs should be undertaken to maintain the floor finish and reduce the risk of further deterioration.",
+    "No Cracked Tiles: The floor tiles appear in reasonable condition. Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch and sample detail areas showed no evidence of cracking at the time of my inspection. No repairs are currently required. Routine maintenance only is recommended."
    ]
   },
   {
@@ -2916,43 +2833,26 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Structural Movement: Given that the floor vibrated or ‘rattled’ excessively underfoot, I suspect the floor is either not supported properly or has been weakened by a timber defect (for example wood rot, wood-boring insect damage, or an undersized member). Further investigation by an appropriately qualified structural engineer is recommended, as structural movement appears significant."
+    "Excessive floor vibration: The floor was found to vibrate excessively underfoot, suggesting inadequate support and/or deterioration of the timber structure, such as fungal decay or wood-boring insect attack. The exact cause could not be confirmed within the scope of this inspection. You should instruct a suitably qualified contractor to inspect the floor structure, including the underfloor void where accessible, determine the cause, and carry out any necessary repairs before purchase commitment."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_fire_places_repair_removed_cb",
    "title": "Removed CB",
-   "dataFieldCount": 30,
-   "permutationCount": 34,
+   "dataFieldCount": 15,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Removed Chimney Breasts: The chimney breast has been removed from the ground, first, second and sample detail floor lounge, reception, dining room, kitchen, bedroom and sample detail. The adequacy of concealed structural support cannot be confirmed during a visual inspection. No repair is currently needed. The property must be maintained in the normal way.",
-    "If the chimney removal has not been done properly, parts of the building may become unstable and, in the worst cases, present a safety hazard. However, I saw no evidence of movement or distortion. Your legal adviser should confirm that appropriate Building Regulation approval and completion certification were obtained where applicable, and agreement from the neighbouring owner (see section I1). If these do not exist, you should ask an appropriately qualified structural engineer to investigate the adequacy of the work. This may involve removing parts of the floor and wall, and you should discuss this with the property owner.",
-    "Removed Chimney Breasts: The chimney breast has been removed from the ground, first, second and sample detail floor lounge, reception, dining room, kitchen, bedroom and sample detail. The adjacent construction is damaged, cracked, distorted and sample detail (See Section J1 & J3 - Risks). Where structural adequacy is uncertain, further investigation by an appropriately qualified structural engineer is recommended - I saw evidence that indicates this has not been done properly. You should ask an appropriately qualified person to investigate this problem and recommend any repairs. This may involve removing parts of the floor and wall, and you should discuss this with the property owner."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places_repair_damage_surround",
-   "title": "Damaged Surround",
-   "dataFieldCount": 12,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Defects: The fireplace in the ground, first, second and sample detail floor lounge, reception, dining room, kitchen, bedroom and sample detail is badly damaged (See Section J3 - Risks). Repairs should be undertaken where deterioration affects safety or continued use. This should be repaired now."
+    "Removed Chimney Breasts: Evidence was observed that a chimney breast has been partially removed. The adequacy of concealed structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate Building Regulation approval and completion certification were obtained where applicable. Where structural adequacy is uncertain, further investigation by an appropriately qualified structural engineer is recommended.",
+    "Removed Chimney Breasts: Evidence was observed that a chimney breast has been removed. The adequacy of concealed structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate Building Regulation approval and completion certification were obtained where applicable. Where structural adequacy is uncertain, further investigation by an appropriately qualified structural engineer is recommended.",
+    "Removed Chimney Breasts: Evidence was observed that a chimney breast has been partially removed and removed. The adequacy of concealed structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate Building Regulation approval and completion certification were obtained where applicable. Where structural adequacy is uncertain, further investigation by an appropriately qualified structural engineer is recommended."
    ]
   },
   {
@@ -3084,42 +2984,6 @@
     "Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height at the time of my inspection. No comments can be made regarding unseen elements.",
     "Roof Not Fully Inspected: I could not fully inspect the roof timber because of the floor was not safe to walk on at the time of my inspection. No comments can be made regarding unseen elements.",
     "Roof Not Fully Inspected: I could not fully inspect the roof timber because of floor was boarded at the time of my inspection. No comments can be made regarding unseen elements."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_floors_repair_not_inspetcted",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The floors could not be inspected. As they are not accessible, they should be inspected and maintained as necessary to identify and address any defects at an early stage."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places__imitation_system",
-   "title": "Imitation system",
-   "dataFieldCount": 8,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 9,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Fireplace Construction: The fireplace in the lounge incorporates an imitation system.",
-    "Fireplace Construction: The fireplace in the reception(s) incorporates an imitation system.",
-    "Fireplace Construction: The fireplace in the dining room incorporates an imitation system."
    ]
   },
   {
@@ -3267,14 +3131,13 @@
    "permutationCount": 3,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Uneven Floors: Some unevenness was noted, but this is within reasonable tolerances and does not appear to be of structural significance.",
-    "Some loose and creaking floorboard finishes were noted, and repairs may be undertaken as part of routine maintenance where considered necessary."
+    "Loose Floorboards: Loose and creaking floor finishes were noted and will require local repair or renewal. Removal of floor coverings may reveal additional defects requiring attention."
    ]
   },
   {
@@ -3291,27 +3154,61 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Further investigation by an appropriately qualified structural engineer is recommended, as structural movement appears significant. I recommend you contact a qualified person for further investigation and remedial advice.",
-    "Structural Movement: The floor to the lounge, hall, kitchen, bathroom, utility room, bedrooms and sample detail is sloping or uneven. This has been caused by longstanding building movement and is no cause for concern. No repairs are currently required. The property must be maintained in the normal way."
+    "Sloping floor: The floor to the lounge, bedroom, kitchen, bathroom, utility room, hallway and sample detail rooms are slightly sloping. This is commonly associated with long-standing settlement, historic movement, or deflection of the floor structure. Where the slope is slight, and there is no evidence of ongoing movement or associated structural defects, it is unlikely to be of structural significance, and no repairs are considered necessary. Where the slope is significant, or accompanied by cracking or distortion, further investigation by a suitably qualified building contractor is recommended to determine the cause and specify any necessary remedial works before purchase commitment.",
+    "Sloping floor: The floor to the lounge, bedroom, kitchen, bathroom, utility room, hallway and sample detail rooms are significantly sloping. This is commonly associated with long-standing settlement, historic movement, or deflection of the floor structure. Where the slope is slight, and there is no evidence of ongoing movement or associated structural defects, it is unlikely to be of structural significance, and no repairs are considered necessary. Where the slope is significant, or accompanied by cracking or distortion, further investigation by a suitably qualified building contractor is recommended to determine the cause and specify any necessary remedial works before purchase commitment."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_fire_places_repair_boiler_flue",
    "title": "Boiler Flue",
-   "dataFieldCount": 8,
-   "permutationCount": 18,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Boiler Flues: Central heating boiler in the kitchen, bedroom(s), airing cupboard, garage and sample detail has a flue which discharges through an external wall. The visible flue terminal appears secure, adequately positioned, and free from obvious obstruction, and should be kept so always. The installation has not been assessed.",
-    "Boiler Flues: Central heating boiler in the kitchen, bedroom(s), airing cupboard, garage and sample detail has a flue which discharges through an external wall. The flue appears obstructed, and this should be made clear now and kept so always. The installation has not been assessed.",
-    "Boiler Flues: Central heating boiler in the kitchen, bedroom(s), airing cupboard, garage and sample detail has a flue which discharges through the roof. The visible flue terminal appears secure, adequately positioned, and free from obvious obstruction, and should be kept so always. The installation has not been assessed."
+    "Boiler Flues: Where a heating appliance discharges through an external wall or roof, the visible flue terminal appears secure, adequately positioned, and free from obvious obstruction. The installation has not been assessed."
+   ]
+  },
+  {
+   "sectionKey": "F",
+   "screenId": "activity_in_side_property_fire_places_defects",
+   "title": "Fireplace defects",
+   "dataFieldCount": 7,
+   "permutationCount": 9,
+   "severities": [],
+   "phraseStats": {
+    "total": 8,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 8,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Fireplace defects: One or more of the following defects were observed: cracked fire surround. Repairs should be undertaken where deterioration affects safety or continued use. If you plan to use the fireplace again, you should ask an appropriately qualified person to inspect and repair the fireplace. Although I do not know the full extent of the work required, you should plan for complete replacement. You should not use the fireplace until this has been done.",
+    "Fireplace defects: One or more of the following defects were observed: damaged hearth. Repairs should be undertaken where deterioration affects safety or continued use. If you plan to use the fireplace again, you should ask an appropriately qualified person to inspect and repair the fireplace. Although I do not know the full extent of the work required, you should plan for complete replacement. You should not use the fireplace until this has been done.",
+    "Fireplace defects: One or more of the following defects were observed: loose fireplace components. Repairs should be undertaken where deterioration affects safety or continued use. If you plan to use the fireplace again, you should ask an appropriately qualified person to inspect and repair the fireplace. Although I do not know the full extent of the work required, you should plan for complete replacement. You should not use the fireplace until this has been done."
+   ]
+  },
+  {
+   "sectionKey": "F",
+   "screenId": "activity_in_side_property_fire_places_dampness",
+   "title": "Dampness",
+   "dataFieldCount": 1,
+   "permutationCount": 3,
+   "severities": [],
+   "phraseStats": {
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Dampness: Localised damp staining was observed on the chimney breast. This may be associated with condensation, defective flashings, unused flues, or moisture penetration. The source should be identified and repaired before internal redecoration is undertaken."
    ]
   },
   {
@@ -3408,25 +3305,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places__wood_burning_stove",
-   "title": "Wood burning stove",
-   "dataFieldCount": 8,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 9,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Wood-Burning or Multi-Fuel Stoves: The fireplace in the lounge incorporates a wood-burning or multi-fuel stove. The appliance was not tested. The installation, flue and associated components should be inspected and serviced in accordance with the manufacturer's recommendations.",
-    "Wood-Burning or Multi-Fuel Stoves: The fireplace in the reception(s) incorporates a wood-burning or multi-fuel stove. The appliance was not tested. The installation, flue and associated components should be inspected and serviced in accordance with the manufacturer's recommendations.",
-    "Wood-Burning or Multi-Fuel Stoves: The fireplace in the dining room incorporates a wood-burning or multi-fuel stove. The appliance was not tested. The installation, flue and associated components should be inspected and serviced in accordance with the manufacturer's recommendations."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_repair_insect_infestation",
    "title": "Insect infestation",
    "dataFieldCount": 3,
@@ -3483,37 +3361,19 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_floors_timber_decay",
    "title": "Timber Decay",
-   "dataFieldCount": 6,
-   "permutationCount": 10,
+   "dataFieldCount": 7,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Timber Decay: I observed no evidence of dry rot, nor did I observe situations favourable for dry rot fungus to develop.",
-    "Concealed timbers adjacent to damp walls could potentially result in fungal decay if the source of moisture is not addressed - the source of moisture should be identified and repaired before remedial timber repairs are undertaken.",
-    "Timber Decay: Evidence of wet rot, dry rot, or timber deterioration was observed to the staircase timber, roof timber to garage, floor joists in the basement and sample detail. Further investigation is required on all timbers to be certain regarding the extent of the problem. The source of moisture should be identified and repaired before remedial timber repairs are undertaken. Reports and quotations should be obtained from an appropriately qualified specialist."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_floors_repair_uneven_floor",
-   "title": "Uneven Floor",
-   "dataFieldCount": 17,
-   "permutationCount": 21,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Uneven Floors: The surface of the solid floor is uneven and ‘dipping’ or ‘dishing’ in some parts. This is not uncommon in properties of this age and does not necessarily indicate structural movement. Consolidation of the material beneath the concrete floor is likely to be the cause, and this is common for buildings of this age and type.",
-    "Uneven Floors: Noticeable unevenness or deflection was observed. Solid floors are usually made of concrete and other materials that are supported by the ground. The solid floor to the lounge, hall, kitchen, bathroom, utility room, bedrooms and sample detail is very uneven, largely dipping/loose, lifting, bowing, sloping, damp and sample detail (see section J1 Risks). Further investigation is recommended where the extent or cause cannot be determined during a visual inspection - consolidation of the material beneath the concrete floor is likely to be the cause."
+    "Timber decay noted: Decay was noted to the floor timbers areas. The full extent of the decay could not be determined during this visual inspection, and additional concealed defects may be present. Further investigation by a suitably qualified timber specialist is recommended, and you should obtain a report and quotations for any necessary remedial works before committing to the purchase.",
+    "Timber decay noted: Decay was noted to the staircase timbers areas. The full extent of the decay could not be determined during this visual inspection, and additional concealed defects may be present. Further investigation by a suitably qualified timber specialist is recommended, and you should obtain a report and quotations for any necessary remedial works before committing to the purchase.",
+    "Timber decay noted: Decay was noted to the bathroom floor areas. The full extent of the decay could not be determined during this visual inspection, and additional concealed defects may be present. Further investigation by a suitably qualified timber specialist is recommended, and you should obtain a report and quotations for any necessary remedial works before committing to the purchase."
    ]
   },
   {
@@ -3590,25 +3450,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places__electric_fire",
-   "title": "Electric fire",
-   "dataFieldCount": 8,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 9,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Electric Fires: The fireplace in the lounge incorporates an electric fire. No operational testing was undertaken. Their serviceability cannot be confirmed during a visual inspection.",
-    "Electric Fires: The fireplace in the reception(s) incorporates an electric fire. No operational testing was undertaken. Their serviceability cannot be confirmed during a visual inspection.",
-    "Electric Fires: The fireplace in the dining room incorporates an electric fire. No operational testing was undertaken. Their serviceability cannot be confirmed during a visual inspection."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_repair_timber_rot",
    "title": "Timber rot",
    "dataFieldCount": 5,
@@ -3630,18 +3471,17 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_floors_timber_infection",
    "title": "Timber Infestation",
-   "dataFieldCount": 6,
-   "permutationCount": 10,
+   "dataFieldCount": 9,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Wood-Boring Insects: No visible evidence of active wood-boring insect infestation was observed to the accessible timber floors. Historic flight holes may be present and are not necessarily indicative of active infestation.",
-    "Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed to staircase timber, roof timber to garage, floor joists in the basement and sample detail. Further inspection of active activity by an appropriately qualified timber specialist is recommended where activity appears active or widespread. Reports and quotations should be obtained from an appropriately qualified specialist."
+    "Wood Boring Noted: Evidence of active and historic wood-boring insect activity was observed in the property, lounge, bedrooms, bathrooms, kitchens and sample detail areas. Further inspection of active activity by an appropriately qualified timber specialist is recommended where activity appears active or widespread. Otherwise, for historic activity, further enquiries should be made to the vendor regarding history, treatment work, and guarantee certificates."
    ]
   },
   {
@@ -3715,42 +3555,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places__other",
-   "title": "Other",
-   "dataFieldCount": 9,
-   "permutationCount": 15,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Where visible, these appear in reasonable condition, consistent with their age and construction.",
-    "Where visible, these appear in satisfactory condition, consistent with their age and construction.",
-    "Where visible, these appear in unsatisfactory and poor condition, consistent with their age and construction."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_fire_places_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 2,
-   "permutationCount": 4,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "There are no chimney stack(s) or fireplace(s) to the property."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_inside_property_repair_under_size_timber",
    "title": "Undersize timber",
    "dataFieldCount": 1,
@@ -3770,17 +3574,18 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_floors_dampness",
    "title": "Dampness",
-   "dataFieldCount": 12,
-   "permutationCount": 16,
+   "dataFieldCount": 13,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Dampness: Evidence of dampness was observed to the kitchen, bathroom, toilet, utility room and sample detail floor(s). Although I could not see the full extent of the dampness problem, I suspect the dampness is caused by faulty plumbing, bathtub spillage, leaking sealants and sample detail. The source of moisture cannot be confirmed during a visual inspection - further investigation should be undertaken where dampness persists. You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems."
+    "Unknown damp cause: Although I could not see the full extent of the damp problem, I suspect more serious defects exist in hidden areas. You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems.",
+    "Dampness noted: Although I could not see the full extent of the dampness problem in the lounge, bedroom, kitchen, bathroom, utility room and sample detail areas, I suspect the dampness is caused by faulty plumbing, bathtub spillage, leaking sealants and sample detail. You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems."
    ]
   },
   {
@@ -3840,18 +3645,19 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_floors_floor_ventilation",
    "title": "Floor ventilation",
-   "dataFieldCount": 2,
-   "permutationCount": 12,
+   "dataFieldCount": 1,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 3,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Underfloor Ventilation: Adequate ventilation to the suspended timber ground floor appears reasonably provided in size, quantity, and location. Adequate ventilation is important in reducing the risk of condensation and timber decay.",
-    "Underfloor Ventilation: The suspended timber floor appears to have restricted underfloor ventilation - condensation. Adequate ventilation is important in reducing the risk of condensation and timber decay. Where ventilation appears restricted or limited, improvements should be considered during future maintenance works. To make sure the ground floor timbers do not rot, it is important to provide ventilation to the underfloor space."
+    "Underfloor Ventilation: Where applicable, the suspended timber floor is provided with adequate underfloor ventilation. Adequate ventilation is important in reducing the risk of condensation and timber decay. Where ventilation appears restricted or limited, improvements should be considered during future maintenance works.",
+    "Underfloor Ventilation: Where applicable, the suspended timber floor is provided with limited underfloor ventilation. Adequate ventilation is important in reducing the risk of condensation and timber decay. Where ventilation appears restricted or limited, improvements should be considered during future maintenance works.",
+    "Underfloor Ventilation: Where applicable, the suspended timber floor is provided with restricted underfloor ventilation. Adequate ventilation is important in reducing the risk of condensation and timber decay. Where ventilation appears restricted or limited, improvements should be considered during future maintenance works."
    ]
   },
   {
@@ -4003,25 +3809,32 @@
    "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 6,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The condition of concealed floor timbers, floor voids, joists, sleeper walls, and foundations cannot be confirmed without lifting floor finishes or opening the structure. Only the visible performance of the floors was assessed during normal use. The inspection was limited by fitted floor coverings, furniture, stored items, fixed kitchen units, bathroom fittings, or restricted access. The floor construction has been inspected from within the property only. Floor coverings were not lifted, and no opening up or destructive investigation was undertaken."
+   ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_inside_property_fireplaces_main_screen",
    "title": "Fireplaces and Chimneys",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
+   "dataFieldCount": 3,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 7,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "This section relates to visible fireplaces, chimney breasts, and associated flues within the property. The inspection was limited to a visual assessment only. Fireplaces, flues, and appliances were not assessed, dismantled, or operated unless otherwise stated. The internal condition of chimney flues, liners and concealed structural elements cannot be confirmed during a visual inspection. No smoke testing, CCTV survey or opening up was undertaken. Combustion appliances should be provided with adequate permanent ventilation in accordance with current standards. The adequacy of ventilation has not been assessed during this inspection.",
+    "General Maintenance: Fireplaces, flues, and combustion appliances should be inspected and serviced regularly by appropriately qualified contractors. Unused flues should be adequately ventilated to reduce the risk of condensation and dampness. Where fireplaces are no longer required, appropriate capping and ventilation should be maintained."
+   ]
   },
   {
    "sectionKey": "F",

@@ -1658,19 +1658,10 @@ class ReportBuilder {
     // surfaced when their category is relevant so J3 matches the revised
     // Risks-to-People structure. Skipped when the bank is unavailable.
 
-    // Trip Hazards — uneven floors recorded on the floor uneven-repair screen.
+    // Trip Hazards - "uneven" ticked on the F4 repair timber floor screen.
     final unevenFloor = _answersForScreen(
-        rawData, 'activity_in_side_property_floors_repair_uneven_floor');
-    const unevenLocations = <String>[
-      'cb_lounge',
-      'cb_bedrooms',
-      'cb_kitchen',
-      'cb_bathroom',
-      'cb_hall',
-      'cb_utility_room',
-      'cb_other_839',
-    ];
-    if (unevenLocations.any((id) => _isCheckedValue(unevenFloor[id]))) {
+        rawData, 'activity_in_side_property_floors_repair_floor_repair');
+    if (_isCheckedValue(unevenFloor['f4rd_uneven'])) {
       final v = _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_TRIP_HAZARDS}');
       if (v != null) phrases.add(v);
     }

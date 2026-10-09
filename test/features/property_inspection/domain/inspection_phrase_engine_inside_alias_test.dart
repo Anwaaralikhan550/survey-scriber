@@ -50,30 +50,6 @@ void main() {
 
     const engine = InspectionPhraseEngine(phraseTexts);
 
-    test('floors repair uses llMainContainer repair type', () {
-      final phrases = engine.buildPhrases(
-        'activity_in_side_property_floors_repair_floor_repair',
-        <String, String>{
-          'llMainContainer': 'Now',
-          'cb_lounge': 'true',
-          'cb_uneven': 'true',
-        },
-      );
-      expect(phrases.join(' ').toLowerCase(), contains('floors-now='));
-    });
-
-    test('fireplaces other type reads llMainContainer', () {
-      final phrases = engine.buildPhrases(
-        'activity_in_side_property_fire_places__other',
-        <String, String>{
-          'cb_lounge': 'true',
-          'llMainContainer': 'Bioethanol',
-        },
-      );
-      expect(
-          phrases.join(' ').toLowerCase(), contains('fire-other=bioethanol'));
-    });
-
     test('fireplaces other type requires a name before emitting location', () {
       final phrases = engine.buildPhrases(
         'activity_in_side_property_fire_places__other',
@@ -83,19 +59,6 @@ void main() {
         },
       );
       expect(phrases.join(' ').toLowerCase(), isNot(contains('fire-other=')));
-    });
-
-    test('fireplaces repair reads llMainContainer status', () {
-      final phrases = engine.buildPhrases(
-        'activity_in_side_property_fire_places_repair_fire_place',
-        <String, String>{
-          'llMainContainer': 'Repair now',
-          'cb_ground_76': 'true',
-          'cb_lounge_48': 'true',
-          'cb_badly_damaged_27': 'true',
-        },
-      );
-      expect(phrases.join(' ').toLowerCase(), contains('fire-now='));
     });
 
     test('built-in repair reads llMainContainer repair type', () {

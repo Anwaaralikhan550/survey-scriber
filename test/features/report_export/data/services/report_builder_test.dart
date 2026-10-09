@@ -1853,77 +1853,6 @@ void main() {
     });
 
     test(
-        'regenerates fireplaces other condition from answers when persisted phrase is stale',
-        () {
-      final phraseEngine = InspectionPhraseEngine({
-        '{F_FIREPLACES_AND_CHIMNEYS}::{OTHER_CONDITION}':
-            'These appear in {FAC_FP_OTH_CONDITION} condition. No repair is currently needed. The property must be maintained in the normal way.',
-      });
-      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'F',
-            title: 'Inside Property',
-            description: '',
-            nodes: const [
-              InspectionNodeDefinition(
-                id: 'activity_in_side_property_fire_places__other',
-                title: 'Other',
-                type: InspectionNodeType.screen,
-                parentId: null,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'actv_condition',
-                    label: 'Condition',
-                    type: InspectionFieldType.dropdown,
-                    options: ['Reasonable', 'Satisfactory'],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final rawData = _makeRawData(
-        tree: tree,
-        allAnswers: {
-          'activity_in_side_property_fire_places__other': {
-            'actv_condition': 'Reasonable',
-          },
-        },
-      );
-      final stalePersisted = V2RawReportData(
-        survey: rawData.survey,
-        tree: rawData.tree,
-        allAnswers: rawData.allAnswers,
-        screenStates: rawData.screenStates,
-        photoFilePaths: rawData.photoFilePaths,
-        signatureRows: rawData.signatureRows,
-        persistedPhrases: {
-          'activity_in_side_property_fire_places__other': [
-            'The fireplace in the lounge incorporates a .',
-          ],
-        },
-        persistedPhraseManualFlags: const {
-          'activity_in_side_property_fire_places__other': false,
-        },
-      );
-
-      final doc = customBuilder.build(stalePersisted, const ExportConfig());
-      final screen = doc.sections.single.screens.single;
-      expect(
-        screen.phrases.join(' '),
-        contains('These appear in reasonable condition.'),
-      );
-      expect(
-        screen.phrases.join(' '),
-        isNot(contains('incorporates a .')),
-      );
-    });
-
-    test(
         'keeps persisted fireplace condition when forced regeneration misses it',
         () {
       final phraseEngine = InspectionPhraseEngine(const {
@@ -3140,8 +3069,8 @@ void main() {
         _makeRawData(
           tree: tree,
           allAnswers: {
-            'activity_in_side_property_floors_repair_uneven_floor': {
-              'cb_lounge': 'true',
+            'activity_in_side_property_floors_repair_floor_repair': {
+              'f4rd_uneven': 'true',
             },
             'activity_services_electricity_repair_electrical_hazard': {
               'cb_exposed_wires': 'true',

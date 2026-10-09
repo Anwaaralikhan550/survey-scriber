@@ -29,4 +29,21 @@ void main() {
       expect(flat, contains('Condensation is commonly associated with occupancy patterns, heating, insulation, and ventilation.'));
     });
   });
+
+  group('F4 Floors', () {
+    test('intro prints once a condition rating is chosen', () {
+      final out = intro('activity_inside_property_floors_main_screen');
+      expect(out, contains('The condition of concealed floor timbers, floor voids, joists, sleeper walls, and foundations cannot be confirmed without lifting floor finishes or opening the structure.'));
+      expect(out, contains('The inspection was limited by fitted floor coverings, furniture, stored items, fixed kitchen units, bathroom fittings, or restricted access.'));
+    });
+  });
+
+  group('F5 Fireplaces', () {
+    test('dampness paragraph', () {
+      final out = engine.buildPhrases(
+          'activity_in_side_property_fire_places_dampness',
+          {'cb_dampness': 'true'}).join(' ');
+      expect(out, contains('This may be associated with condensation, defective flashings, unused flues, or moisture penetration.'));
+    });
+  });
 }
