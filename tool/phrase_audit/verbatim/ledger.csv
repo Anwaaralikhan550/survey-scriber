@@ -86,13 +86,13 @@ fe0553986c,Parking,Remote area - The property is in a remote area and likely to 
 c53e3a597e,Parking,"Also, because of the location of the property, it is recommended that you contact the utility company to be certain regarding the nature of the drainage connection.",EXACT,{D_FACILITY_REMOTE},100,DONE
 bcae44b287,Parking,"Local environment: I observed the following environmental feature(s) that may influence your enjoyment of the property, its future marketability or materially affect the subject property: • Susceptible to flooding • Railway line • Busy road • Commercial premises • Industrial premises • Public house • School • Electricity substation • Overhead power lines • Pylons • Airport flight path • Other Where environmental concerns exist, you should make your own enquiries before legal commitment.",MENU,,0,UNVERIFIED
 6dfc043b4c,Parking,"If an electricity substation or overhead power lines are selected, add text below: The property is in a location that could be affected by electromagnetic fields from an electricity substation or pylons located near the property.",TOKENISED,{D_LOCAL_ENVIRONMENT_EMF},91,DONE
-e3b5d0d1e9,Parking,"In addition to being unsightly, it may cause noise and disturbance, or interference may deter some future buyers, thus limiting saleability.",NEAR,{H_OTHER_AREA}::{EMF},100,OPEN
+e3b5d0d1e9,Parking,"In addition to being unsightly, it may cause noise and disturbance, or interference may deter some future buyers, thus limiting saleability.",UNRESOLVED,{D_FACILITY_REMOTE},46,OPEN
 afccf3b392,Parking,The possible effects of electromagnetic fields have been the subject of media coverage.,EXACT,{H_OTHER_AREA}::{EMF},100,DONE
 38ee5e6aca,Parking,"The Health Protection Agency (HPA), an independent body with responsibility for advising on electromagnetic fields, has advised that following the studies in 2000 and 2001, there may be risks, in specified circumstances, to the health of certain categories of people.",EXACT,{H_OTHER_AREA}::{EMF},100,DONE
 4949ce656b,Parking,"Public perception may, however, affect marketability and future value of the property.",EXACT,{H_OTHER_AREA}::{EMF},100,DONE
 152ca6a48f,Parking,"If required, technical information can be obtained from the HPA or local electricity company.",EXACT,{H_OTHER_AREA}::{EMF},100,DONE
 0b73225820,Parking,"If susceptible to flooding is selected, add text below: The property is situated close to the sea, river, a canal, reservoir, or in a low-lying area, and may be susceptible to occasional or seasonal flooding.",MENU,,0,UNVERIFIED
-7841d9e366,Parking,Your legal adviser should make further enquiries and advise you whether the building has been flooded in the past or is at risk of flooding.,ADD,{H_OTHER_AREA}::{FLOODING},62,OPEN
+7841d9e366,Parking,Your legal adviser should make further enquiries and advise you whether the building has been flooded in the past or is at risk of flooding.,ADD,{D_LOCATION}::{D_LOCATION_CONVERSATION_AREA},58,OPEN
 a4a8539a79,Parking,Enquiries should also be made to the Environment Agency.,ADD,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},49,OPEN
 ea89b0cb26,Parking,E - Outside the Property Limitations My inspection of the exterior was carried out from ground level and other reasonably accessible positions.,ADD,{D_LOCATION}::{LOCATION_PRIVATE_PROPERTY_AREA},54,OPEN
 c719c77a59,Parking,"My inspection was restricted by the surrounding elements, including the layout of the area, and available vantage points from which I was able to view the property.",EXACT,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{STANDARD_TEXT},100,DONE
@@ -100,14 +100,14 @@ c719c77a59,Parking,"My inspection was restricted by the surrounding elements, in
 0b639efd03,Parking,Restricted Access: There was no direct access to the rear of the building.,EXACT,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},100,DONE
 7dcd46c328,Parking,"For this reason, I cannot make any detailed comments regarding the condition of the uninspected walls, roof slopes, rainwater goods, etc.",MENU,,0,UNVERIFIED
 76d1d3a398,Parking,You should accept the risk that some defects may exist in these unseen areas.,EXACT,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},100,DONE
-a2b4b52491,Parking,"Roof coverings, chimney stacks, and high-level elements were inspected using binoculars where appropriate.",UNRESOLVED,{H_OTHER_AREA}::{LIFTS},46,OPEN
-6733d360de,Parking,"No parts of the building were opened up, dismantled, or assessed.",UNRESOLVED,{H_OTHER_AREA}::{LIFTS},54,OPEN
+a2b4b52491,Parking,"Roof coverings, chimney stacks, and high-level elements were inspected using binoculars where appropriate.",UNRESOLVED,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},45,OPEN
+6733d360de,Parking,"No parts of the building were opened up, dismantled, or assessed.",UNRESOLVED,{D_GROUND}::{GATED_COMMUNITY},46,OPEN
 bf8bd59d69,Parking,"Where elements were concealed or inaccessible, no comment can be made regarding their condition.",ADD,{D_LOCATION}::{D_LOCATION_NEAR_NOISY_AREA},48,OPEN
 13c81ad5df,Parking,Weather condition Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.,EXACT,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_WET},100,DONE
 b9b21ae5d4,Parking,"Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",UNRESOLVED,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_DRY},84,OPEN
 6e2a2b738f,Parking,"Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection.",ADD,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_WET},59,OPEN
 f36fbdf7ec,Parking,"Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds.",MENU,,0,UNVERIFIED
-dca1eae90c,Parking,Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.,ADD,{H_OTHER_AREA}::{EMF},51,OPEN
+dca1eae90c,Parking,Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.,ADD,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_LEAKES_NOTES},48,OPEN
 5c7b77ea42,E1,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
 8bf9989e51,E1,No further comments are necessary.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
 dfe0986fce,E1,Not Inspected: The chimney stack(s) could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
@@ -1639,35 +1639,35 @@ d082d5d4ac,H2,Subsoil: The exact nature of the subsoil has not been investigated
 fa55f27465,H2,"However, the subsoil in the area may include shrinkable clay.",EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
 78283f4074,H2,"Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions.",EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
 6b44066d78,H2,"Your legal adviser should confirm, where applicable, ownership of the shared areas, rights of access, maintenance responsibilities, service charge liabilities, and any restrictions affecting their use.",MENU,,0,UNVERIFIED
-0d6d3bf905,H3,"Right of Way: The property benefits from and/or is subject to shared rights of way over a private road, driveway, footpath, entrance lobby, or other shared access.",MENU,,0,UNVERIFIED
-90810e07cd,H3,"Your legal adviser should confirm the rights of access, maintenance responsibilities and any associated.",ADD,{H_OTHER_AREA}::{LIFTS},65,OPEN
-133d22fa50,H3,Lifts: The building is served by one or more passenger lifts.,EXACT,{H_OTHER_AREA}::{LIFTS},100,DONE
-d83fb5429e,H3,These are specialist installations and were not inspected or assessed as part of this survey.,EXACT,{H_OTHER_AREA}::{LIFTS},100,DONE
-5f4feda77f,H3,"Your legal adviser should confirm that appropriate inspection, maintenance, and servicing arrangements are in place.",EXACT,{H_OTHER_AREA}::{LIFTS},100,DONE
-2d2431e9cd,H3,"Flooding: The property is in an area that may be at risk of flooding due to its proximity to a river, canal, the coast, low-lying land, reservoir, other watercourse.",MENU,,0,UNVERIFIED
+0d6d3bf905,H3,"Right of Way: The property benefits from and/or is subject to shared rights of way over a private road, driveway, footpath, entrance lobby, or other shared access.",MENU,,0,VERIFIED
+90810e07cd,H3,"Your legal adviser should confirm the rights of access, maintenance responsibilities and any associated.",EXACT,{H_OTHER_AREA}::{H3_RIGHT_OF_WAY},100,DONE
+133d22fa50,H3,Lifts: The building is served by one or more passenger lifts.,EXACT,{H_OTHER_AREA}::{H3_LIFTS},100,DONE
+d83fb5429e,H3,These are specialist installations and were not inspected or assessed as part of this survey.,EXACT,{H_OTHER_AREA}::{H3_LIFTS},100,DONE
+5f4feda77f,H3,"Your legal adviser should confirm that appropriate inspection, maintenance, and servicing arrangements are in place.",EXACT,{H_OTHER_AREA}::{H3_LIFTS},100,DONE
+2d2431e9cd,H3,"Flooding: The property is in an area that may be at risk of flooding due to its proximity to a river, canal, the coast, low-lying land, reservoir, other watercourse.",MENU,,0,VERIFIED
 1ee72400da,H3,"Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report.",EXACT,{H_OTHER_AREA}::{FLOODING},100,DONE
-b8ca97d7fa,H3,"Electromagnetic Fields (EMF): Electromagnetic Fields: The property is located close to an electricity substation, high-voltage overhead power lines, pylons, other, which may give rise to concerns regarding electromagnetic fields.",UNRESOLVED,{H_OTHER_AREA}::{EMF},45,OPEN
-28c53df40e,H3,Such installations may also generate noise and can affect the property's marketability.,ADD,{H_OTHER_AREA}::{COMMON_GARDEN},50,OPEN
-b205ed2cd5,H3,Further information can be obtained from the electricity network operator or the UK Health Security Agency (formerly the Health Protection Agency).,ADD,{H_OTHER_AREA}::{EMF},56,OPEN
-ae33d378f5,H3,The property is located close to electricity infrastructure that may give rise to concerns regarding electromagnetic fields.,ADD,{H_OTHER_AREA}::{FLOODING},55,OPEN
-c448b0ee32,H3,Japanese Knotweed Not Inspected: Japanese Knotweed: Dense vegetation or restricted access prevented a full inspection of the grounds.,ADD,{H_OTHER_AREA}::{LIFTS},49,OPEN
-54d4e3071e,H3,"Consequently, I cannot confirm whether Japanese knotweed or other invasive plants are present.",EXACT,{H_OTHER_AREA}::{KNOTWEED_RESTRICTED_VIEW},100,DONE
-04fa9a06d8,H3,Further investigation by a suitably qualified specialist is recommended if required.,ADD,{H_OTHER_AREA}::{KNOTWEED_NOTED},65,OPEN
-d64b797b74,H3,Not Found: No evidence of Japanese knotweed was observed within the areas inspected.,ADD,{H_OTHER_AREA}::{KNOTWEED_NOTED},57,OPEN
-fe1dd4e4cb,H3,"However, the inspection was limited to those areas that were visible and reasonably accessible at the time of the survey, and its absence cannot be guaranteed.",UNRESOLVED,{H_OTHER_AREA}::{LIFTS},46,OPEN
-037cb4b6c4,H3,"Recent gardening works, dense vegetation, or other ground cover may conceal evidence of invasive plants and prevent their identification during a visual inspection.",UNRESOLVED,{H_OTHER_AREA}::{EMF},43,OPEN
-3bf7296a1c,H3,Found: Japanese knotweed was identified within or adjacent to the property boundary.,TOKENISED,{H_OTHER_AREA}::{KNOTWEED_NOTED},65,DONE
-50851eb185,H3,"This invasive plant can damage hard landscaping and, in some circumstances, affect structures.",UNRESOLVED,{H_OTHER_AREA}::{KNOTWEED_NOTED},53,OPEN
+b8ca97d7fa,H3,"Electromagnetic Fields (EMF): Electromagnetic Fields: The property is located close to an electricity substation, high-voltage overhead power lines, pylons, other, which may give rise to concerns regarding electromagnetic fields.",MENU,,0,VERIFIED
+28c53df40e,H3,Such installations may also generate noise and can affect the property's marketability.,EXACT,{H_OTHER_AREA}::{H3_EMF},100,DONE
+b205ed2cd5,H3,Further information can be obtained from the electricity network operator or the UK Health Security Agency (formerly the Health Protection Agency).,EXACT,{H_OTHER_AREA}::{H3_EMF},100,DONE
+ae33d378f5,H3,The property is located close to electricity infrastructure that may give rise to concerns regarding electromagnetic fields.,EXACT,{H_OTHER_AREA}::{H3_EMF},100,DONE
+c448b0ee32,H3,Japanese Knotweed Not Inspected: Japanese Knotweed: Dense vegetation or restricted access prevented a full inspection of the grounds.,EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_NOT_INSPECTED},100,DONE
+54d4e3071e,H3,"Consequently, I cannot confirm whether Japanese knotweed or other invasive plants are present.",EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_NOT_INSPECTED},100,DONE
+04fa9a06d8,H3,Further investigation by a suitably qualified specialist is recommended if required.,EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_NOT_INSPECTED},100,DONE
+d64b797b74,H3,Not Found: No evidence of Japanese knotweed was observed within the areas inspected.,EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_NOT_FOUND},100,DONE
+fe1dd4e4cb,H3,"However, the inspection was limited to those areas that were visible and reasonably accessible at the time of the survey, and its absence cannot be guaranteed.",EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_NOT_FOUND},100,DONE
+037cb4b6c4,H3,"Recent gardening works, dense vegetation, or other ground cover may conceal evidence of invasive plants and prevent their identification during a visual inspection.",EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_NOT_FOUND},100,DONE
+3bf7296a1c,H3,Found: Japanese knotweed was identified within or adjacent to the property boundary.,EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_FOUND},100,DONE
+50851eb185,H3,"This invasive plant can damage hard landscaping and, in some circumstances, affect structures.",EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_FOUND},100,DONE
 e0fe2522ea,H3,"It may also affect mortgageability, insurability, marketability, and value.",MENU,,0,UNVERIFIED
-e8df6ebe57,H3,I recommend that you arrange for further inspection by a remediation specialist who is a member of a recognised body so that you can get advice about future management and control and an insurance-backed guarantee.,ADD,{H_OTHER_AREA}::{KNOTWEED_NOTED},42,OPEN
-31fa36836e,H3,Management A: Japanese knotweed is present and has caused damage to building structures and/or boundary features.,ADD,{H_OTHER_AREA}::{KNOTWEED_NOTED},53,OPEN
-a0e81a94e2,H3,A suitably qualified invasive weed specialist should inspect the site without delay and implement an appropriate treatment and remediation programme.,ADD,{H_OTHER_AREA}::{KNOTWEED_NOTED},47,OPEN
-ebcb8ba836,H3,Management B: Japanese knotweed is present and is adversely affecting the use of the property or its amenities.,TOKENISED,{H_OTHER_AREA}::{KNOTWEED_NOTED},60,DONE
-19a64902b5,H3,A specialist treatment and management plan should be implemented.,ADD,{H_OTHER_AREA}::{LIFTS},47,OPEN
-10e6429afd,H3,"Management C: Japanese knotweed is present, but no damage to buildings or boundary structures was evident at the time of inspection.",ADD,{H_OTHER_AREA}::{KNOTWEED_NOTED},55,OPEN
-2e7c745852,H3,A specialist management or treatment programme is nevertheless recommended.,ADD,{H_OTHER_AREA}::{NOT_INSPECTED},50,OPEN
-4a1f46ec17,H3,Management D: Japanese knotweed was observed on neighbouring land within approximately three metres of the property boundary.,ADD,{H_OTHER_AREA}::{KNOTWEED_NOTED},54,OPEN
-cb70f0454d,H3,"Although no damage was evident to the subject property, the infestation should be monitored, and your legal adviser should make appropriate enquiries where necessary.",UNRESOLVED,{H_OTHER_AREA}::{KNOTWEED_NOTED},49,OPEN
+e8df6ebe57,H3,I recommend that you arrange for further inspection by a remediation specialist who is a member of a recognised body so that you can get advice about future management and control and an insurance-backed guarantee.,EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_FOUND},100,DONE
+31fa36836e,H3,Management A: Japanese knotweed is present and has caused damage to building structures and/or boundary features.,EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_A},100,DONE
+a0e81a94e2,H3,A suitably qualified invasive weed specialist should inspect the site without delay and implement an appropriate treatment and remediation programme.,EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_A},100,DONE
+ebcb8ba836,H3,Management B: Japanese knotweed is present and is adversely affecting the use of the property or its amenities.,EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_B},100,DONE
+19a64902b5,H3,A specialist treatment and management plan should be implemented.,EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_B},100,DONE
+10e6429afd,H3,"Management C: Japanese knotweed is present, but no damage to buildings or boundary structures was evident at the time of inspection.",EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_C},100,DONE
+2e7c745852,H3,A specialist management or treatment programme is nevertheless recommended.,EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_C},100,DONE
+4a1f46ec17,H3,Management D: Japanese knotweed was observed on neighbouring land within approximately three metres of the property boundary.,EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_D},100,DONE
+cb70f0454d,H3,"Although no damage was evident to the subject property, the infestation should be monitored, and your legal adviser should make appropriate enquiries where necessary.",EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_D},100,DONE
 49b05e1c1b,I1,Regulations The comments below are based solely on a visual inspection of the property and should not be regarded as legal advice.,ADD,{ISSUE_REGULATIONS}::{REGULATIONS_CONVERSION_STATUS_UNKNOW},45,OPEN
 b7068d63f4,I1,Your legal adviser should make appropriate enquiries and obtain supporting documentation where necessary.,ADD,{ISSUE_REGULATIONS}::{REGULATIONS_LISTED_BUILDING},54,OPEN
 c71ae9998b,I1,"Your legal adviser should investigate and confirm the following, where applicable: Property Alterations - Whether extensions, alterations, conversions, or structural modifications have the necessary Planning Permission, Building Regulation approval, Completion Certificates, and any other statutory consents.",UNRESOLVED,{ISSUE_REGULATIONS}::{REGULATIONS_CONVERSION_STATUS_KNOW},53,OPEN

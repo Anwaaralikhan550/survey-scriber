@@ -1,21 +1,21 @@
 # Phrase Permutation Audit Summary
 
-Generated: 2026-10-09T19:20:40.034999
+Generated: 2026-10-09T19:22:55.018318
 
 ## Inspection tree
 
 | Metric | Value |
 |---|---|
-| Screens audited | 350 |
+| Screens audited | 348 |
 | Screens with findings | 0 |
 | GAP (no phrase generated) | 0 |
 | UNAPPROVED phrases present | 0 |
 | Grammar smells | 0 |
 | Placeholder leaks | 0 |
 | Engine errors | 0 |
-| Distinct phrases emitted | 1963 |
-| Matching legacy approved bank | 225 |
-| Matching current bank only (edited) | 1711 |
+| Distinct phrases emitted | 1951 |
+| Matching legacy approved bank | 209 |
+| Matching current bank only (edited) | 1715 |
 | Unapproved (engine-invented) | 0 |
 
 ### Top findings

@@ -10381,6 +10381,156 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_private_road',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'h3_row',
+    'activity_grounds_other_area_right_of_way',
+    '{H_OTHER_AREA}',
+    '{H3_RIGHT_OF_WAY}',
+    [
+      VerbatimToken(
+        '{H3_RIGHT_OF_WAY_OVER}',
+        options: {
+          'h3r_private_road': 'private road',
+          'h3r_driveway': 'driveway',
+          'h3r_footpath': 'footpath',
+          'h3r_entrance_lobby': 'entrance lobby',
+        },
+        otherCheckbox: 'h3r_other',
+        otherText: 'h3r_other_text',
+        pdfOptions: ['private road', 'driveway', 'footpath', 'entrance lobby'],
+      ),
+    ],
+    pdf:
+        'Right of Way: The property benefits from and/or is subject to shared rights of way over a private road, driveway, footpath, entrance lobby, or other shared access.',
+    whenField: 'cb_h3_row',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h3_lifts',
+    'activity_grounds_other_area_lifts',
+    '{H_OTHER_AREA}',
+    '{H3_LIFTS}',
+    [
+    ],
+    whenField: 'cb_lifts',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h3_flooding',
+    'activity_grounds_other_area_flooding',
+    '{H_OTHER_AREA}',
+    '{H3_FLOODING}',
+    [
+      VerbatimToken(
+        '{H3_FLOOD_PROXIMITY}',
+        options: {
+          'h3f_river': 'river',
+          'h3f_canal': 'canal',
+          'h3f_the_coast': 'the coast',
+          'h3f_low_lying_land': 'low-lying land',
+          'h3f_reservoir': 'reservoir',
+        },
+        pdfOptions: ['river', 'canal', 'the coast', 'low-lying land', 'reservoir'],
+      ),
+    ],
+    pdf:
+        'Flooding: The property is in an area that may be at risk of flooding due to its proximity to a river, canal, the coast, low-lying land, reservoir, other watercourse.',
+    whenField: 'cb_h3_flooding',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h3_emf',
+    'activity_grounds_other_area_emf',
+    '{H_OTHER_AREA}',
+    '{H3_EMF}',
+    [
+      VerbatimToken(
+        '{H3_EMF_SOURCE}',
+        options: {
+          'h3e_electricity_substation': 'electricity substation',
+          'h3e_high_voltage_overhead_power_lines': 'high-voltage overhead power lines',
+          'h3e_pylons': 'pylons',
+        },
+        otherCheckbox: 'h3e_other',
+        otherText: 'h3e_other_text',
+        pdfOptions: ['electricity substation', 'high-voltage overhead power lines', 'pylons'],
+      ),
+    ],
+    pdf:
+        'Electromagnetic Fields (EMF): Electromagnetic Fields: The property is located close to an electricity substation, high-voltage overhead power lines, pylons, other, which may give rise to concerns regarding electromagnetic fields.',
+    whenField: 'cb_h3_emf',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h3_kw_not_inspected',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_KNOTWEED_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Not inspected',
+  ),
+  VerbatimRule(
+    'h3_kw_not_found',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_KNOTWEED_NOT_FOUND}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Not found',
+  ),
+  VerbatimRule(
+    'h3_kw_found',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_KNOTWEED_FOUND}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Found',
+  ),
+  VerbatimRule(
+    'h3_kw_a',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_MANAGEMENT_A}',
+    [
+    ],
+    whenField: 'actv_h3_management',
+    whenValue: 'Management A',
+  ),
+  VerbatimRule(
+    'h3_kw_b',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_MANAGEMENT_B}',
+    [
+    ],
+    whenField: 'actv_h3_management',
+    whenValue: 'Management B',
+  ),
+  VerbatimRule(
+    'h3_kw_c',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_MANAGEMENT_C}',
+    [
+    ],
+    whenField: 'actv_h3_management',
+    whenValue: 'Management C',
+  ),
+  VerbatimRule(
+    'h3_kw_d',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_MANAGEMENT_D}',
+    [
+    ],
+    whenField: 'actv_h3_management',
+    whenValue: 'Management D',
+  ),
   // <<verbatim-rules-end>>
 ];
 

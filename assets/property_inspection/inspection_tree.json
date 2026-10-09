@@ -2947,50 +2947,46 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_property_includes",
-              "label": "Property Includes",
+              "id": "cb_h3_row",
+              "label": "Right of way",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h3_right_of_way_over",
+              "label": "Shared rights of way over",
               "type": "label"
             },
             {
-              "id": "cb_private_road",
-              "label": "Private road",
+              "id": "h3r_private_road",
+              "label": "private road",
               "type": "checkbox"
             },
             {
-              "id": "cb_pedestrian_access",
-              "label": "Pedestrian access",
+              "id": "h3r_driveway",
+              "label": "driveway",
               "type": "checkbox"
             },
             {
-              "id": "cb_drive",
-              "label": "Drive",
+              "id": "h3r_footpath",
+              "label": "footpath",
               "type": "checkbox"
             },
             {
-              "id": "cb_walk_path",
-              "label": "Walk path",
+              "id": "h3r_entrance_lobby",
+              "label": "entrance lobby",
               "type": "checkbox"
             },
             {
-              "id": "cb_entrance_lobby",
-              "label": "Entrance lobby",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_shared_lobby",
-              "label": "Shared lobby",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_325",
+              "id": "h3r_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_752",
+              "id": "h3r_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_325",
+              "conditionalOn": "h3r_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -3623,58 +3619,25 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_japanese_knotweed_is_growing_at_location",
-              "label": "Japanese knotweed is growing at Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_within_the_boundary",
-              "label": "Within the boundary",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Noted",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_just_outside_the_boundary",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Noted",
-              "conditionalMode": "show"
-            },
-            {
               "id": "actv_status",
-              "label": "Status",
+              "label": "Japanese knotweed",
               "type": "dropdown",
               "options": [
-                "Noted",
-                "Restricted View"
+                "Not inspected",
+                "Not found",
+                "Found"
               ]
             },
             {
-              "id": "et_other_732",
-              "label": "Other",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_other_area_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_h3_other_area_55",
-          "order": 4,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_not_inspected_no_garage",
-              "label": "Not inspected (no garage)",
-              "type": "checkbox"
+              "id": "actv_h3_management",
+              "label": "Knotweed management",
+              "type": "dropdown",
+              "options": [
+                "Management A",
+                "Management B",
+                "Management C",
+                "Management D"
+              ]
             }
           ]
         },
@@ -3876,20 +3839,6 @@
               "conditionalOn": "h2_repair_ob_1_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_other_area_common_garden",
-          "title": "Common Garden",
-          "type": "screen",
-          "parentId": "group_other_area_56",
-          "order": 6,
-          "fields": [
-            {
-              "id": "cb_common_garden",
-              "label": "Common Garden",
-              "type": "checkbox"
             }
           ]
         },
@@ -4126,41 +4075,39 @@
           "order": 10,
           "fields": [
             {
-              "id": "label_flooding_area",
-              "label": "Flooding Area",
+              "id": "cb_h3_flooding",
+              "label": "Flooding risk",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h3_flood_proximity",
+              "label": "Close to",
               "type": "label"
             },
             {
-              "id": "cb_in_a_low_lying_area",
-              "label": "In a low lying area",
+              "id": "h3f_river",
+              "label": "river",
               "type": "checkbox"
             },
             {
-              "id": "cb_next_to_a_river",
-              "label": "Next to a river",
+              "id": "h3f_canal",
+              "label": "canal",
               "type": "checkbox"
             },
             {
-              "id": "cb_next_to_a_canal",
-              "label": "Next to a canal",
+              "id": "h3f_the_coast",
+              "label": "the coast",
               "type": "checkbox"
             },
             {
-              "id": "cb_close_to_the_sea",
-              "label": "Close to the sea",
+              "id": "h3f_low_lying_land",
+              "label": "low-lying land",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_535",
-              "label": "Other",
+              "id": "h3f_reservoir",
+              "label": "reservoir",
               "type": "checkbox"
-            },
-            {
-              "id": "et_other_912",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_535",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -4179,35 +4126,41 @@
           "order": 12,
           "fields": [
             {
-              "id": "label_emf_area",
-              "label": "EMF Area",
+              "id": "cb_h3_emf",
+              "label": "Electromagnetic fields",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h3_emf_source",
+              "label": "Located close to",
               "type": "label"
             },
             {
-              "id": "cb_sub_station",
-              "label": "SubStation",
+              "id": "h3e_electricity_substation",
+              "label": "electricity substation",
               "type": "checkbox"
             },
             {
-              "id": "cb_high_voltage_pylons",
-              "label": "High voltage pylons",
+              "id": "h3e_high_voltage_overhead_power_lines",
+              "label": "high-voltage overhead power lines",
               "type": "checkbox"
             },
             {
-              "id": "cb_overhead_cables",
-              "label": "Overhead cables",
+              "id": "h3e_pylons",
+              "label": "pylons",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_495",
+              "id": "h3e_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_222",
+              "id": "h3e_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_495",
+              "conditionalOn": "h3e_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]

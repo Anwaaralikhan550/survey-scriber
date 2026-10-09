@@ -135,19 +135,19 @@ class InspectionPhraseEngine {
       case 'activity_grounds_other_not_inspected':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_area_right_of_way':
-        return _groundsOtherAreaRightOfWay(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_area_knotweed':
-        return _groundsOtherAreaKnotweed(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_area_common_garden':
-        return _groundsOtherAreaCommonGarden(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_area_lifts':
-        return _groundsOtherAreaLifts(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_area_flooding':
-        return _groundsOtherAreaFlooding(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_area_emf':
-        return _groundsOtherAreaEmf(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_area_not_inspected':
-        return _groundsOtherAreaNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_electricity_main_screen':
         return _servicesElectricityMain(answers);
       case 'activity_service_about_electricity':
@@ -2135,127 +2135,6 @@ class InspectionPhraseEngine {
         .replaceAll('{LIMITATIONS_NO_RESTRICTIONS}', restrictionsText)
         .replaceAll('{LIMITATIONS_NO_REAR_ACCESS}', rearText);
     return _split(_normalize(template));
-  }
-
-  List<String> _groundsOtherAreaRightOfWay(Map<String, String> answers) {
-    final items = _labelsFor(
-      [
-        'cb_private_road',
-        'cb_pedestrian_access',
-        'cb_drive',
-        'cb_walk_path',
-        'cb_entrance_lobby',
-        'cb_shared_lobby',
-        'cb_other_325',
-      ],
-      answers,
-      {
-        'cb_private_road': 'Private road',
-        'cb_pedestrian_access': 'Pedestrian access',
-        'cb_drive': 'Drive',
-        'cb_walk_path': 'Walk path',
-        'cb_entrance_lobby': 'Entrance lobby',
-        'cb_shared_lobby': 'Shared lobby',
-        'cb_other_325': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_325', 'et_other_752', items);
-    if (items.isEmpty) return const [];
-    var template = _sub('{H_OTHER_AREA}', '{RIGHT_OF_WAY}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{OA_ROW_PRO_INCLUDES}', _toWords(items).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsOtherAreaKnotweed(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
-    if (status.isEmpty) return const [];
-    final locations = _labelsFor(
-      ['cb_within_the_boundary', 'cb_just_outside_the_boundary'],
-      answers,
-      {
-        'cb_within_the_boundary': 'Within the boundary',
-        'cb_just_outside_the_boundary': 'Just outside the boundary',
-      },
-    );
-    if ((answers['et_other_732'] ?? '').trim().isNotEmpty) {
-      locations.add((answers['et_other_732'] ?? '').trim());
-    }
-    if (locations.isEmpty) return const [];
-    final template = status.contains('restricted')
-        ? _sub('{H_OTHER_AREA}', '{KNOTWEED_RESTRICTED_VIEW}')
-        : _sub('{H_OTHER_AREA}', '{KNOTWEED_NOTED}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template.replaceAll(
-        '{OA_KNOTWEED_LOCATION}', _toWords(locations).toLowerCase())));
-  }
-
-  List<String> _groundsOtherAreaCommonGarden(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_common_garden'])) return const [];
-    return _split(_normalize(_sub('{H_OTHER_AREA}', '{COMMON_GARDEN}')));
-  }
-
-  List<String> _groundsOtherAreaLifts(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_lifts'])) return const [];
-    return _split(_normalize(_sub('{H_OTHER_AREA}', '{LIFTS}')));
-  }
-
-  List<String> _groundsOtherAreaFlooding(Map<String, String> answers) {
-    final items = _labelsFor(
-      [
-        'cb_in_a_low_lying_area',
-        'cb_next_to_a_river',
-        'cb_next_to_a_canal',
-        'cb_close_to_the_sea',
-        'cb_other_535',
-      ],
-      answers,
-      {
-        'cb_in_a_low_lying_area': 'in a low lying area',
-        'cb_next_to_a_river': 'next to a river',
-        'cb_next_to_a_canal': 'next to a canal',
-        'cb_close_to_the_sea': 'close to the sea',
-        'cb_other_535': 'other',
-      },
-    );
-    _addOther(answers, 'cb_other_535', 'et_other_912', items);
-    if (items.isEmpty) return const [];
-    var template = _sub('{H_OTHER_AREA}', '{FLOODING}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{OA_FLOODING_AREA}', _toWords(items).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsOtherAreaEmf(Map<String, String> answers) {
-    final items = _labelsFor(
-      [
-        'cb_high_voltage_pylons',
-        'cb_sub_station',
-        'cb_overhead_cables',
-        'cb_other_495'
-      ],
-      answers,
-      {
-        'cb_high_voltage_pylons': 'High voltage pylons',
-        'cb_sub_station': 'Sub station',
-        'cb_overhead_cables': 'Overhead cables',
-        'cb_other_495': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_495', 'et_other_222', items);
-    if (items.isEmpty) return const [];
-    var template = _sub('{H_OTHER_AREA}', '{EMF}');
-    if (template.isEmpty) return const [];
-    template =
-        template.replaceAll('{OA_EMF_AREA}', _toWords(items).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsOtherAreaNotInspected(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    return _split(_normalize(_sub('{H_OTHER_AREA}', '{NOT_INSPECTED}')));
   }
 
   List<String> _servicesElectricityMain(Map<String, String> answers) {

@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 350,
+  "screensAudited": 348,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1963,
-   "approvedLegacyBank": 225,
-   "approvedCurrentBankOnly": 1711,
+   "distinctEmitted": 1951,
+   "approvedLegacyBank": 209,
+   "approvedCurrentBankOnly": 1715,
    "unapproved": 0
   }
  },
@@ -683,15 +683,18 @@
    "sectionKey": "H",
    "screenId": "activity_grounds_other_area_right_of_way",
    "title": "Right of Way",
-   "dataFieldCount": 8,
-   "permutationCount": 10,
+   "dataFieldCount": 7,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 7,
-    "approvedCurrentBankOnly": 0,
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Right of Way: The property benefits from and/or is subject to shared rights of way over a private road, driveway, footpath, entrance lobby and sample detail. Your legal adviser should confirm the rights of access, maintenance responsibilities and any associated."
+   ]
   },
   {
    "sectionKey": "H",
@@ -768,32 +771,20 @@
    "sectionKey": "H",
    "screenId": "activity_grounds_other_area_knotweed",
    "title": "Knotweed",
-   "dataFieldCount": 4,
-   "permutationCount": 8,
+   "dataFieldCount": 2,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 1,
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The vegetation within your garden and around your property is dense and extensive. Consequently, I cannot confirm whether Japanese knotweed or other invasive plants are present. I will recommend further investigation by a qualified person for your peace of mind."
+    "Japanese Knotweed Not Inspected: Japanese Knotweed: Dense vegetation or restricted access prevented a full inspection of the grounds. Consequently, I cannot confirm whether Japanese knotweed or other invasive plants are present. Further investigation by a suitably qualified specialist is recommended if required.",
+    "Not Found: No evidence of Japanese knotweed was observed within the areas inspected. However, the inspection was limited to those areas that were visible and reasonably accessible at the time of the survey, and its absence cannot be guaranteed. Recent gardening works, dense vegetation, or other ground cover may conceal evidence of invasive plants and prevent their identification during a visual inspection.",
+    "Found: Japanese knotweed was identified within or adjacent to the property boundary. This invasive plant can damage hard landscaping and, in some circumstances, affect structures. It may also affect mortgageability, insurability, marketability, and value. I recommend that you arrange for further inspection by a remediation specialist who is a member of a recognised body so that you can get advice about future management and control and an insurance-backed guarantee."
    ]
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_grounds_other_area_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 2,
-   "permutationCount": 4,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
   },
   {
    "sectionKey": "H",
@@ -845,20 +836,6 @@
   },
   {
    "sectionKey": "H",
-   "screenId": "activity_grounds_other_area_common_garden",
-   "title": "Common Garden",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "H",
    "screenId": "activity_other_repair_retaining_walls",
    "title": "Retaining Walls",
    "dataFieldCount": 11,
@@ -902,7 +879,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The building is served by one or more passenger lifts. These are specialist installations and were not inspected or assessed as part of this survey. Your legal adviser should confirm that appropriate inspection, maintenance, and servicing arrangements are in place."
+    "Lifts: The building is served by one or more passenger lifts. These are specialist installations and were not inspected or assessed as part of this survey. Your legal adviser should confirm that appropriate inspection, maintenance, and servicing arrangements are in place."
    ]
   },
   {
@@ -949,30 +926,31 @@
    "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is in an area that may be at risk of flooding because it is in a low lying area. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report.",
-    "The property is in an area that may be at risk of flooding because it is next to a river. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report.",
-    "The property is in an area that may be at risk of flooding because it is next to a canal. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report."
+    "Flooding: The property is in an area that may be at risk of flooding due to its proximity to a river, canal, the coast, low-lying land and reservoir. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report."
    ]
   },
   {
    "sectionKey": "H",
    "screenId": "activity_grounds_other_area_emf",
    "title": "EMF",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
+   "dataFieldCount": 6,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 5,
-    "approvedCurrentBankOnly": 0,
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Electromagnetic Fields (EMF): Electromagnetic Fields: The property is located close to an electricity substation, high-voltage overhead power lines, pylons and sample detail, which may give rise to concerns regarding electromagnetic fields. Such installations may also generate noise and can affect the property's marketability. Further information can be obtained from the electricity network operator or the UK Health Security Agency (formerly the Health Protection Agency). The property is located close to electricity infrastructure that may give rise to concerns regarding electromagnetic fields."
+   ]
   },
   {
    "sectionKey": "H",
