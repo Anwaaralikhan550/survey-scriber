@@ -49,57 +49,7 @@ void main() {
       expect(phrases, contains('Obtain quotations before exchange.'));
     });
   });
-
-  group('Overall opinion: revised-spec rating (reasonable/good/fair/poor)', () {
-    List<String> opinion(String rating) => engine.buildPhrases(
-          'activity_over_all_openion',
-          {'android_material_design_spinner5': rating},
-        );
-
-    test('reasonable keeps the favourable opener and reads "reasonable"', () {
-      final phrases = opinion('Reasonable');
-      expect(phrases, hasLength(1));
-      final text = phrases.single;
-      expect(text, contains('I am pleased to advise'));
-      expect(text,
-          contains('the property represents a reasonable proposition'));
-      expect(text, isNot(contains('{')));
-    });
-
-    test('good/fair/poor substitute the adjective and drop the opener', () {
-      for (final rating in ['Good', 'Fair', 'Poor']) {
-        final phrases = opinion(rating);
-        expect(phrases, isNotEmpty, reason: '$rating should emit text');
-        final text = phrases.join(' ');
-        expect(
-          text,
-          contains(
-              'the property represents a ${rating.toLowerCase()} proposition'),
-          reason: '$rating adjective must be substituted',
-        );
-        // The favourable "pleased to advise" opener is only for a reasonable
-        // verdict — never shown for good/fair/poor.
-        expect(text, isNot(contains('I am pleased to advise')),
-            reason: '$rating must not carry the favourable opener');
-        expect(text, startsWith('In my opinion,'));
-        // No placeholder or rating token leaks into the report.
-        expect(text, isNot(contains('{')), reason: '$rating: no token leak');
-      }
-    });
-
-    test('"reasonable with repair" still routes to the repair narrative', () {
-      final phrases = engine.buildPhrases(
-        'activity_over_all_openion',
-        {
-          'android_material_design_spinner5': 'Reasonable with repair',
-          'android_material_design_spinner': '1500',
-          'android_material_design_spinner2': 'Roof repairs',
-        },
-      );
-      expect(phrases, contains(contains('provisional repair allowance')));
-      expect(phrases.join(' '), isNot(contains('{')));
-    });
-  });
+
 
   group('F1 Roof Structure: revised-spec additions', () {
     List<String> about(Map<String, String> answers) =>

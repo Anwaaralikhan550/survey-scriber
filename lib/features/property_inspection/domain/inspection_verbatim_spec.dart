@@ -13093,6 +13093,52 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_k1_lease',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'oo_pleased',
+    'activity_over_all_openion',
+    '{OVERALL_OPINION}',
+    '{OO_PLEASED}',
+    [
+      VerbatimToken(
+        '{OO_PRICE}',
+        text: 'android_material_design_spinner',
+      ),
+    ],
+    pdf:
+        'Reasonable: I am pleased to advise you that this property is believed to be a reasonable proposition for purchase at £390,500.00 [Three Hundred Ninety Thousand and five hundred Pounds].',
+    whenField: 'android_material_design_spinner5',
+    whenValue: 'Reasonable',
+  ),
+  VerbatimRule(
+    'oo_opinion',
+    'activity_over_all_openion',
+    '{OVERALL_OPINION}',
+    '{OO_OPINION}',
+    [
+      VerbatimToken(
+        '{OO_RATING}',
+        dropdown: 'android_material_design_spinner5',
+        dropdownOptions: ['Reasonable', 'Good', 'Fair', 'Poor'],
+        lower: true,
+        pdfOptions: ['reasonable', 'good', 'fair', 'poor'],
+      ),
+    ],
+    pdf:
+        'In my opinion, the property represents a reasonable, good, fair, poor proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report.',
+    whenField: 'android_material_design_spinner5',
+    whenValue: 'Reasonable',
+    whenAny: [['android_material_design_spinner5', 'Good'], ['android_material_design_spinner5', 'Fair'], ['android_material_design_spinner5', 'Poor']],
+  ),
+  VerbatimRule(
+    'oo_repair',
+    'activity_over_all_openion',
+    '{OVERALL_OPINION}',
+    '{OO_REASONABLE_WITH_REPAIR}',
+    [
+    ],
+    whenField: 'cb_oo_repair',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

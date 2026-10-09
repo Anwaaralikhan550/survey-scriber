@@ -59,21 +59,6 @@ void main() {
     expect(phrase, contains('constructed of solid brick'));
   });
 
-  test('repair allowance is narrative, not raw labelled output', () {
-    final phrases = engine.buildPhrases(
-      'activity_over_all_openion',
-      {
-        'android_material_design_spinner5': 'Reasonable with repair',
-        'android_material_design_spinner': '1500',
-        'android_material_design_spinner2': 'Roof repairs',
-      },
-    );
-
-    expect(phrases, contains(contains('provisional repair allowance')));
-    expect(phrases.any((value) => value.startsWith('Potential:')), isFalse);
-    expect(phrases.any((value) => value.startsWith('Estimated repair cost:')),
-        isFalse);
-  });
 
   test('floor and site plans carry an indicative-use limitation', () {
     final phrase = engine.buildPhrases(

@@ -22859,9 +22859,9 @@
           "order": 10,
           "fields": [
             {
-              "id": "label_reasonable_proposition_for_purchase_at_a_price",
-              "label": "Reasonable proposition for purchase at a price",
-              "type": "label"
+              "id": "android_material_design_spinner",
+              "label": "Purchase price (GBP, digits)",
+              "type": "text"
             },
             {
               "id": "android_material_design_spinner5",
@@ -22871,22 +22871,13 @@
                 "Reasonable",
                 "Good",
                 "Fair",
-                "Poor",
-                "Reasonable with repair"
+                "Poor"
               ]
             },
             {
-              "id": "android_material_design_spinner",
-              "label": "Amount (GBP)",
-              "type": "number",
-              "conditionalOn": "android_material_design_spinner5",
-              "conditionalValue": "Reasonable|Reasonable with repair",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner2",
-              "label": "Potential",
-              "type": "text"
+              "id": "cb_oo_repair",
+              "label": "Reasonable with repair",
+              "type": "checkbox"
             }
           ]
         },

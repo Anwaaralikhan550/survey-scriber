@@ -11,8 +11,8 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1771,
-   "approvedLegacyBank": 118,
+   "distinctEmitted": 1770,
+   "approvedLegacyBank": 117,
    "approvedCurrentBankOnly": 1626,
    "unapproved": 0
   }
@@ -6190,16 +6190,16 @@
    "screenId": "activity_over_all_openion",
    "title": "OverAll Opinion",
    "dataFieldCount": 3,
-   "permutationCount": 13,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 1,
+    "total": 6,
+    "approvedLegacy": 0,
     "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "I am pleased to advise you that this property is believed to be a reasonable proposition for purchase. In my opinion, the property represents a reasonable proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction, and level of ongoing maintenance.",
+    "In my opinion, the property represents a reasonable proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction, and level of ongoing maintenance.",
     "In my opinion, the property represents a good proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction, and level of ongoing maintenance.",
     "In my opinion, the property represents a fair proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report. Future maintenance and repair should be anticipated in accordance with the property's age, construction, and level of ongoing maintenance."
    ]

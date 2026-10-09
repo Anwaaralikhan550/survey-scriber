@@ -14,7 +14,15 @@ class InspectionPhraseEngine {
   /// master templates (see ParagraphComposer).
   Map<String, String> get phraseTexts => Map.unmodifiable(_phraseTexts);
 
-  List<String> buildPhrases(String screenId, Map<String, String> answers) {
+  List<String> buildPhrases(String screenId, Map<String, String> rawAnswers) {
+    var answers = rawAnswers;
+    if (screenId == 'activity_over_all_openion') {
+      // PDF price format "£390,500.00 [Three Hundred ... Pounds]" is derived from the typed amount.
+      final price = (rawAnswers['android_material_design_spinner'] ?? '').trim();
+      if (price.isNotEmpty) {
+        answers = {...rawAnswers, 'android_material_design_spinner': formatPriceBracketed(price)};
+      }
+    }
     return _refinePhrases(
       screenId,
       answers,
@@ -775,7 +783,7 @@ class InspectionPhraseEngine {
       case 'activity_other_service':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_accommodation_schedule':
-        return _accommodationSchedule(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
 
       // ── Section H: standalone garden screens ──
       case 'activity_grounds_other_rear_garden':
@@ -873,7 +881,7 @@ class InspectionPhraseEngine {
 
       // ── Section A: overall opinion ──
       case 'activity_over_all_openion':
-        return _overallOpinion(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
 
       // ── Section K: floor/site plan sketches ──
       case 'activity_capture_floor_site_plan_sketches':
@@ -1704,53 +1712,7 @@ class InspectionPhraseEngine {
   // Section D: Topography
   // Section D: Internal Wall
   // Section D: Listed Building
-  // Section D: Other Service
-  List<String> _accommodationSchedule(Map<String, String> answers) {
-    final phrases = <String>[];
-    final rooms = <String>[];
-
-    void addRoom(String key, String label) {
-      final v = (answers[key] ?? '').trim();
-      if (v.isNotEmpty && v != '0') rooms.add('$v $label');
-    }
-
-    addRoom('et_num_reception_rooms', 'reception');
-    addRoom('et_num_bedrooms', 'bedroom(s)');
-    addRoom('et_num_bathrooms', 'bathroom(s)');
-    addRoom('et_num_toilets', 'WC');
-    addRoom('et_num_kitchens', 'kitchen(s)');
-    addRoom('et_num_utility', 'utility');
-    addRoom('et_num_conservatory', 'conservatory');
-    addRoom('et_num_other_rooms', 'other');
-
-    if (rooms.isNotEmpty) {
-      phrases.add('Accommodation comprises ${_toWords(rooms)}.');
-    }
-
-    final otherDesc = (answers['et_other_rooms_desc'] ?? '').trim();
-    if (otherDesc.isNotEmpty) phrases.add('Other rooms: $otherDesc.');
-
-    final garage = (answers['actv_garage_type'] ?? '').trim();
-    if (garage.isNotEmpty && garage != 'None') {
-      phrases.add('Garage: $garage.');
-    }
-
-    final parking = (answers['actv_parking_type'] ?? '').trim();
-    if (parking.isNotEmpty && parking != 'None') {
-      phrases.add('Parking: $parking.');
-    }
-
-    final area = (answers['et_approx_floor_area'] ?? '').trim();
-    if (area.isNotEmpty) {
-      phrases.add('Approximate floor area: $area sq m.');
-    }
-
-    final floors = (answers['et_num_floors'] ?? '').trim();
-    if (floors.isNotEmpty) phrases.add('Number of floors: $floors.');
-
-    return phrases;
-  }
-
+  // Section D: Other Service
   // Section F: woodwork legacy phrase passthrough
   // Section R: room counts
   List<String> _roomCounts(Map<String, String> answers, String floorName) {
@@ -1827,91 +1789,7 @@ class InspectionPhraseEngine {
   // Section E: outside door repair location (failed glazing / inadequate lock)
   // Section E: legacy outside doors safety glass status screen
   // Section E: legacy outside doors wall sealing screen
-  // Section A: overall opinion
-  List<String> _overallOpinion(Map<String, String> answers) {
-    final opinion = (answers['android_material_design_spinner5'] ?? '').trim();
-    if (opinion.isEmpty) return const [];
-    final amount = (answers['android_material_design_spinner'] ?? '').trim();
-    final potential =
-        (answers['android_material_design_spinner2'] ?? '').trim();
-    final priceInWords =
-        amount.isNotEmpty ? formatPriceAsWordsOnly(amount) : '';
-
-    final ratingLower = opinion.toLowerCase();
-    // Revised spec: the overall verdict may be reasonable, good, fair or poor
-    // (the "reasonable with repair" variant is handled separately below).
-    // A "reasonable" verdict keeps the favourable opener; good/fair/poor use
-    // the neutral approved statement (no favourable opener, no fabricated
-    // wording), with the chosen adjective substituted for {OVERALL_OPINION_RATING}.
-    const qualityRatings = ['reasonable', 'good', 'fair', 'poor'];
-    if (qualityRatings.contains(ratingLower)) {
-      final key = ratingLower == 'reasonable'
-          ? '{OVERALL_OPINION_REASONABLE}'
-          : '{OVERALL_OPINION_QUALITY}';
-      final template = _phraseTexts[key] ?? '';
-      if (template.isNotEmpty) {
-        var resolved = _normalize(template);
-        if (amount.isNotEmpty) {
-          resolved = resolved
-              .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE}', priceInWords)
-              .replaceAll(
-                  '{OVERALL_OPINION_PURCHASE_PRICE_WORD}', priceInWords);
-        } else {
-          // No purchase price captured - drop the price clause entirely
-          // rather than leave the placeholder token in the report.
-          resolved = resolved
-              .replaceAll(
-                  ' at a price of {OVERALL_OPINION_PURCHASE_PRICE_WORD}', '')
-              .replaceAll(
-                  ' at a price of {OVERALL_OPINION_PURCHASE_PRICE}', '')
-              .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE_WORD}', '')
-              .replaceAll('{OVERALL_OPINION_PURCHASE_PRICE}', '');
-        }
-        // Substitute the chosen quality adjective into the approved sentence.
-        resolved = resolved.replaceAll('{OVERALL_OPINION_RATING}', ratingLower);
-        return _split(resolved);
-      }
-      final phrases = <String>['Overall opinion: $ratingLower.'];
-      if (priceInWords.isNotEmpty)
-        phrases.add('Purchase price: $priceInWords.');
-      return phrases;
-    }
-    if (opinion.toLowerCase().contains('repair')) {
-      final template =
-          _phraseTexts['{OVERALL_OPINION_REASONABLE_WITH_REPAIR}'] ?? '';
-      final phrases = <String>[];
-      if (template.isNotEmpty) {
-        var resolved = _normalize(template);
-        // Try placeholder substitution first
-        resolved = resolved.replaceAll('{REPAIR_AMOUNT}', priceInWords);
-        resolved = resolved.replaceAll('{REPAIR_POTENTIAL}',
-            potential.isNotEmpty ? potential.toLowerCase() : '');
-        phrases.addAll(_split(resolved));
-      } else {
-        phrases.add('Overall opinion: reasonable with repairs.');
-      }
-      if (priceInWords.isNotEmpty || potential.isNotEmpty) {
-        var allowance = _phraseTexts['{OVERALL_OPINION_REPAIR_ALLOWANCE}'] ??
-            'A provisional repair allowance of {REPAIR_AMOUNT} should be '
-                'considered. The anticipated scope is {REPAIR_SCOPE}.';
-        allowance = allowance
-            .replaceAll(
-              '{REPAIR_AMOUNT}',
-              priceInWords.isEmpty ? 'an amount to be confirmed' : priceInWords,
-            )
-            .replaceAll(
-              '{REPAIR_SCOPE}',
-              potential.isEmpty
-                  ? 'subject to further investigation and contractor quotations'
-                  : potential.toLowerCase(),
-            );
-        phrases.addAll(_splitResolved(allowance));
-      }
-      return phrases;
-    }
-    return const [];
-  }
-
+  // Section A: overall opinion
   static String _addCommasHelper(int value) {
     final digits = value.abs().toString();
     final buffer = StringBuffer();

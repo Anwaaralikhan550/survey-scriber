@@ -114,3 +114,16 @@ String _addCommas(String digits) {
   }
   return buffer.toString().split('').reversed.join();
 }
+
+/// PDF overall-opinion price format: "£390,500.00 [Three Hundred and Ninety Thousand Five Hundred Pounds]".
+/// Non-numeric input is returned unchanged.
+String formatPriceBracketed(String amount) {
+  final cleaned = amount.replaceAll(RegExp(r'[£,\s]'), '');
+  final parsed = int.tryParse(cleaned) ?? double.tryParse(cleaned)?.round();
+  if (parsed == null || parsed < 0) return amount.trim();
+  final words = numberToWords(parsed)
+      .split(' ')
+      .map((w) => w == 'and' ? w : '${w[0].toUpperCase()}${w.substring(1)}')
+      .join(' ');
+  return '£${_addCommas(parsed.toString())}.00 [$words Pounds]';
+}

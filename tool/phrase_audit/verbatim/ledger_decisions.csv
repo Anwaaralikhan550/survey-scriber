@@ -597,3 +597,5 @@ c71ae9998b,ACCEPT,"PDF row joins the list intro with the first list item; both p
 5b27a93105,ACCEPT,"PDF row carries the heading ""J Risks"" glued to the sentence; printed by the J intro (bank key J_INTRO)"
 ab1448e42f,ACCEPT,"PDF row carries the heading words ""Condition rating 123 H Grounds"" glued to the sentence; bank text equals the PDF"
 b355940e56,ACCEPT,"PDF row carries the page heading ""F Inside the Property Inspection Limitations"" glued to the first sentence; printed by rule f0_concealed"
+2162ad7cc2,ACCEPT,"Printed by the PDF/DOCX generators around the accommodation table (intro lists the floors that exist, closing sentence verbatim); not a bank phrase"
+9e5a890acf,ACCEPT,"Form labels only (CLIENT_QUERIES #102); no report prose"
