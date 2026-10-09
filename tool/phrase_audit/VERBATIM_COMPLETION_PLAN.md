@@ -1,0 +1,145 @@
+# Phrase Bank — 100% Word-for-Word Completion Plan
+
+Source of truth: `Surveyscriber Phrase Bank (1).pdf` (96 pages), digitised at
+`tool/phrase_audit/reference/rics_l2_library_v2.json`.
+Target: every sentence the PDF defines as report text appears in the app's
+bank/engine **exactly as written in the PDF** (letter, comma, capital, hyphen).
+
+## 1. Honest baseline (measured on `main` 5499c96)
+
+Option-menus and "If X is selected, add this" directives excluded; heading
+labels (`Conflict noted:`) stripped; `(see section …)` pointers ignored.
+
+| Measure | Sentences | % |
+|---|---|---|
+| PDF fixed-prose sentences checked | 1,122 | 100 |
+| Exact word-for-word in bank | 537 | 47.9 |
+| 95%+ (comma/token/heading differences) | 41 | 3.7 |
+| **Unresolved (differ or missing)** | **544** | **48.5** |
+| of which 80–94% (small wording diffs) | 102 | |
+| of which <80% (different, tokenised, or absent) | 442 | |
+
+Proven-missing examples (not in `lib/` or `assets/` at all): EWS1 paragraph,
+"Painted external masonry…", "Only the visible performance of the floors…",
+"Where secure, no action is currently required.", "weathertight seal…",
+"Construction has been identified from visible inspection only…".
+
+The earlier "100% fixed prose" statement was wrong. The permutation audit only
+proves "no invented text", not "same as PDF".
+
+## 2. Definition of Done
+
+Zero **UNRESOLVED** rows in the ledger (section 4), and all gates in section 6
+green on `main`. No percentage target below 100.
+
+## 3. Rules (non-negotiable)
+
+1. **PDF wins.** If the bank, the engine, a test or a person disagrees with the
+   PDF, the PDF is right. Copy character-for-character, including odd choices
+   (`Moisture metre readings`, `Condition: …, consistent with their age`,
+   `Oxford commas`).
+2. **PDF typos are copied, not fixed.** Anything that looks like a PDF error
+   (e.g. "mage" for "manage", "metre") goes on the Client Query list
+   (`CLIENT_QUERIES.md`); we change it only after the client confirms.
+3. **No guessing.** If a sentence's key, trigger or meaning is unclear, stop and
+   add it to Client Queries. Never infer.
+4. **One sentence, one ledger row.** Every PDF sentence gets an ID and exactly
+   one disposition (section 4). Nothing is "mostly fine".
+5. **Heading labels and spec directives are not report text** (`Conflict noted:`,
+   `If very poor is selected, add this:`). They control logic; they are never
+   emitted. Each is still recorded in the ledger as HEADING/DIRECTIVE.
+6. **Tokens only where the PDF lists choices.** `{TOKEN}` replaces an option
+   list (`slipped, cracked, broken, other`). The surveyor's single selection
+   fills it. Never print the whole list. Token text must equal the PDF option
+   text exactly.
+7. **A bank key the engine never emits is not done.** Adding a sentence needs:
+   bank key + engine emission + form field (if the trigger does not exist yet)
+   + a test that the sentence appears in a generated report.
+8. **Cross-reference pointers** (`(see section J1 - …)`): decision D1 = KEEP.
+   Pointers the PDF has stay exactly as written; pointers the bank adds beyond
+   the PDF are kept and listed in the ledger as APPROVED-EXTRA with a reason.
+9. **Per-element wording stays per-element.** If the PDF says "age of the
+   guttering", "ridge tiles", "staircase material", each gets its own text. One
+   generic line for many elements is a defect.
+10. **Sync everything that duplicates text:** `phrase_texts.json`,
+    `verified_variants.json`, engine override regexes, test expectations, the
+    phrase web portal data. A change is not finished until a grep for the *old*
+    wording returns nothing.
+11. **Batch discipline:** one section per batch, ledger updated, all gates green,
+    one commit. Never batch across sections.
+12. **Every bank key must trace to the PDF.** Any text in the bank with no PDF
+    source is listed as APPROVED-EXTRA with a reason, or removed (reverse gate).
+
+## 4. The Ledger (single source of progress)
+
+`tool/phrase_audit/verbatim/ledger.csv`, generated, not hand-typed:
+
+`id, section, pdf_sentence, disposition, bank_key, status`
+
+Dispositions: `EXACT`, `TOKENISED` (option list → token, with the token's
+option list compared to the PDF), `HEADING`, `DIRECTIVE`, `FIX` (bank wording
+differs), `ADD` (missing, needs bank+engine+form), `QUERY` (waiting on client).
+Status moves `OPEN → DONE`. Completion = no `FIX`, `ADD` or `QUERY` left OPEN.
+
+## 5. Phases
+
+| Phase | Work | Output |
+|---|---|---|
+| P0 | Move working scripts from scratchpad into `tool/phrase_audit/verbatim/` (aligner, differ, count-asserted editor). Freeze baseline. | tools + baseline ledger |
+| P1 | Build ledger for all 1,122 + menu/directive rows. Classify the 544 unresolved into FIX / ADD / TOKENISED / HEADING / QUERY, by hand-review, no auto-accept. | ledger with 0 unclassified |
+| P2 | Close all `FIX` (102 small diffs + wording diffs from the 442). Order: A/D, E1–E9, F1–F9, G1–G7, H, I, J, K. | FIX = 0 |
+| P3 | Close all `ADD` (missing prose). Each needs bank key + engine emission + form trigger + report test. | ADD = 0 |
+| P4 | Per-structure keys (E9 carport/balcony/roof terrace/staircase/installation, E2 hip/ridge/guttering, F6/F9 etc.). | rule 9 satisfied |
+| P5 | Client Queries round: send `CLIENT_QUERIES.md`, apply answers. | QUERY = 0 |
+| P6 | End-to-end proof (section 6, T5–T7) and sign-off dossier. | `VERBATIM_SIGNOFF.md` |
+
+Each phase ends with the full gate run and a commit. Progress is reported as
+ledger counts, never as a feeling.
+
+## 6. Test Strategy
+
+| ID | Test | Passes when |
+|---|---|---|
+| T1 | **Forward gate** PDF→bank: every ledger EXACT/TOKENISED row's sentence is found in bank text (normalised only for token placeholders and whitespace) | 0 mismatches |
+| T2 | **Reverse gate** bank→PDF: every bank sentence is PDF-derived or listed APPROVED-EXTRA | 0 unlisted |
+| T3 | Token option check: each token's option list equals the PDF option list exactly (spelling, order not required) | 0 diffs |
+| T4 | Existing permutation audit (`test/phrase_audit`) | `All tests passed!` (0 GAP/UNAPPROVED/GRAMMAR/PLACEHOLDER_LEAK/ENGINE_ERROR) |
+| T5 | **Emission test**: for every ledger row with a form trigger, build the answers, run the engine, assert the exact PDF sentence is in the output | every row emitted |
+| T6 | **End-to-end reports** through the real pipeline (engine → ReportBuilder → PDF): ≥8 scenarios (detached house, flat, bungalow, valuation, poor-condition, subsidence/damp, collect-keys booking, new-build). One option per field. Extract every report sentence and check it is in the PDF ledger. | 0 foreign sentences, 0 placeholders, 0 option-lists, 0 duplicates, 0 property-type conflicts |
+| T7 | **Coverage**: across all scenarios, every reachable ledger sentence appears at least once | unreachable list = empty or explained |
+| T8 | Golden/regression suites: `property_inspection`, `report_export`, `dashboard`, `scheduling` | all green |
+| T9 | Variant sync check: no old wording left in `verified_variants.json`, engine regexes, tests, portal data | grep returns nothing |
+
+Order per batch: edit → T9 → T1/T2/T3 → T5 → T4 → T8. T6/T7 at the end of each
+phase and at sign-off.
+
+## 7. Decisions needed from you (before P2)
+
+- **D1 Cross-references — DECIDED: keep.** The bank adds `(see section
+  I2/J1/J3)` in sentences the PDF does not have; they stay as APPROVED-EXTRA.
+- **D2 Heading labels in output.** Some report text currently starts with a
+  label (`Moisture metre readings:`, `Condition:`), because the PDF shows them
+  inline. Confirm: labels that appear inline in the PDF sentence flow stay;
+  pure layout headings do not.
+- **D3 Generic shared keys.** E9 and F-section keys share one line for many
+  elements. Approve creating separate keys (rule 9).
+- **D4 PDF typos.** Approve sending the Client Query list rather than
+  silently correcting.
+
+## 8. Risks
+
+- Adding missing prose touches the engine and forms, so each ADD needs its own
+  emission test, not just a bank edit.
+- Text lives in four places (bank, variants, engine regexes, tests); rule 10 and
+  T9 exist because earlier batches failed on exactly this.
+- Heading/label stripping in the matcher can hide real diffs; the ledger is
+  reviewed by hand, not auto-accepted.
+- The gate suite is slow on this machine (~4 min); work is batched per section
+  to keep the number of full runs small.
+
+## 9. Deliverables
+
+`ledger.csv`, `CLIENT_QUERIES.md`, `VERBATIM_SIGNOFF.md`, the T1–T9 test files
+in `test/phrase_audit/verbatim/`, sample reports for every T6 scenario (PDF +
+text), and a final ledger summary: every PDF sentence, its disposition, its
+bank key, and the test that proves it.
