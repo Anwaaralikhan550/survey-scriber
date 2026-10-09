@@ -1027,9 +1027,10 @@
    "section": "J",
    "screen": "activity_risks_other_",
    "phrases": [
-    "No further comments.",
-    "The accessible external doors appear to provide reasonable security based upon a visual inspection. The effectiveness of the locks has not been tested.",
-    "No visible security system was noted to the communal areas. These installations were not tested."
+    "Airport: The property is located close to an airport and/or flight path. Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",
+    "Train Station: The property is located close to a railway station. Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",
+    "Railway Line: The property is located close to a railway line. Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property.",
+    "Motorway: The property is located close to a motorway. Traffic noise, air quality, and associated activity may affect the enjoyment, marketability, and value of the property."
    ]
   },
   {
@@ -1041,17 +1042,11 @@
   },
   {
    "section": "K",
-   "screen": "k_additional_assumptions_default",
+   "screen": "activity_k1_valuation_assumptions",
    "phrases": [
-    "My opinion has been arrived at largely on the basis of the standard assumptions governing residential valuations. (These are outlined in this section and under market value in the description of the Home Survey Service).",
-    "The purchase price provided is a reflection of current market conditions and the result of shortages of properties with too many buyers in the market and is considered to be the maximum likely to be achieved under present market conditions. Any deterioration in condition or downturn in market activity could lead to this figure not being achieved on early resale."
-   ]
-  },
-  {
-   "section": "K",
-   "screen": "k_other_considerations_default",
-   "phrases": [
-    "No further comments."
+    "Market Value: The opinion of market value reflects market conditions at the date of inspection and valuation. In some locations, limited housing supply and strong buyer demand may result in competitive bidding and prices above asking levels. Should market conditions change, or the property's condition deteriorate, its resale value may be adversely affected.",
+    "Flats: Unless confirmed otherwise by your legal adviser, the valuation has been prepared on the assumption that the property is held on a lease with an unexpired term of approximately 90 years and that there are no onerous lease terms or unusual liabilities that would adversely affect its value.",
+    "Lease Length: The lease is assumed to have a satisfactory unexpired term, and no immediate action is considered necessary. However, the value and marketability of leasehold properties diminish as the lease term reduces. Once the unexpired term approaches or falls below 80 years, the cost of extending the lease can increase significantly and the property's value and mortgageability may be adversely affected. You should seek advice on extending the lease well before it reaches this point. Your legal adviser should confirm the remaining lease term and advise on any implications before you proceed with the purchase."
    ]
   }
  ],
@@ -1277,6 +1272,15 @@
    "screen": "activity_property_is_noisy_area",
    "phrases": [
     "Noise: The property is located adjacent to, or close to, train lines or a station, major roads, commercial premises, industrial premises, public open space and schools. Such features may influence future enjoyment or marketability and should be considered before purchase."
+   ]
+  },
+  {
+   "section": "K",
+   "screen": "activity_k1_valuation_assumptions",
+   "phrases": [
+    "Market Value: The opinion of market value reflects market conditions at the date of inspection and valuation. In some locations, limited housing supply and strong buyer demand may result in competitive bidding and prices above asking levels. Should market conditions change, or the property's condition deteriorate, its resale value may be adversely affected.",
+    "Flats: Unless confirmed otherwise by your legal adviser, the valuation has been prepared on the assumption that the property is held on a lease with an unexpired term of approximately 90 years and that there are no onerous lease terms or unusual liabilities that would adversely affect its value.",
+    "Lease Length: The lease is assumed to have a satisfactory unexpired term, and no immediate action is considered necessary. However, the value and marketability of leasehold properties diminish as the lease term reduces. Once the unexpired term approaches or falls below 80 years, the cost of extending the lease can increase significantly and the property's value and mortgageability may be adversely affected. You should seek advice on extending the lease well before it reaches this point. Your legal adviser should confirm the remaining lease term and advise on any implications before you proceed with the purchase."
    ]
   },
   {
@@ -2413,7 +2417,10 @@
    "section": "J",
    "screen": "activity_risks_other_",
    "phrases": [
-    "No further comments."
+    "Airport: The property is located close to an airport and/or flight path. Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",
+    "Train Station: The property is located close to a railway station. Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",
+    "Railway Line: The property is located close to a railway line. Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property.",
+    "Motorway: The property is located close to a motorway. Traffic noise, air quality, and associated activity may affect the enjoyment, marketability, and value of the property."
    ]
   },
   {

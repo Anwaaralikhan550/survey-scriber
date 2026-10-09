@@ -2203,6 +2203,30 @@
           "parentId": null,
           "order": 21,
           "fields": []
+        },
+        {
+          "id": "activity_k1_valuation_assumptions",
+          "title": "K1 Valuation assumptions",
+          "type": "screen",
+          "parentId": null,
+          "order": 2,
+          "fields": [
+            {
+              "id": "cb_k1_market",
+              "label": "Market value",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_k1_flats",
+              "label": "Flats (leasehold assumption)",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_k1_lease",
+              "label": "Lease length",
+              "type": "checkbox"
+            }
+          ]
         }
       ]
     },
@@ -12918,64 +12942,24 @@
           "order": 4,
           "fields": [
             {
-              "id": "cb_not_applicable",
-              "label": "Not Applicable",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_proximity",
-              "label": "Proximity",
-              "type": "label",
-              "conditionalOn": "cb_not_applicable",
-              "conditionalValue": "true",
-              "conditionalMode": "hide"
-            },
-            {
               "id": "cb_airport",
               "label": "Airport",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_applicable",
-              "conditionalValue": "true",
-              "conditionalMode": "hide"
+              "type": "checkbox"
             },
             {
               "id": "cb_train_station",
               "label": "Train Station",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_applicable",
-              "conditionalValue": "true",
-              "conditionalMode": "hide"
+              "type": "checkbox"
             },
             {
               "id": "cb_train_line",
-              "label": "Train Line",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_applicable",
-              "conditionalValue": "true",
-              "conditionalMode": "hide"
+              "label": "Railway Line",
+              "type": "checkbox"
             },
             {
               "id": "cb_motorway",
               "label": "Motorway",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_applicable",
-              "conditionalValue": "true",
-              "conditionalMode": "hide"
-            },
-            {
-              "id": "cb_other_741",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_applicable",
-              "conditionalValue": "true",
-              "conditionalMode": "hide"
-            },
-            {
-              "id": "et_other_775",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_741&!cb_not_applicable",
-              "conditionalMode": "show"
+              "type": "checkbox"
             }
           ]
         },
@@ -12988,7 +12972,7 @@
           "fields": [
             {
               "id": "cb_repair_or_improve",
-              "label": "Repair or improve the property",
+              "label": "Further investigations and repairs",
               "type": "checkbox"
             }
           ]

@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 342,
+  "screensAudited": 343,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1769,
-   "approvedLegacyBank": 119,
-   "approvedCurrentBankOnly": 1623,
+   "distinctEmitted": 1771,
+   "approvedLegacyBank": 118,
+   "approvedCurrentBankOnly": 1626,
    "unapproved": 0
   }
  },
@@ -556,6 +556,25 @@
    },
    "editedBankSamples": [
     "Floor and site-plan sketches were recorded during the inspection and should be treated as indicative rather than measured drawings."
+   ]
+  },
+  {
+   "sectionKey": "K",
+   "screenId": "activity_k1_valuation_assumptions",
+   "title": "K1 Valuation assumptions",
+   "dataFieldCount": 3,
+   "permutationCount": 5,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Market Value: The opinion of market value reflects market conditions at the date of inspection and valuation. In some locations, limited housing supply and strong buyer demand may result in competitive bidding and prices above asking levels. Should market conditions change, or the property's condition deteriorate, its resale value may be adversely affected.",
+    "Flats: Unless confirmed otherwise by your legal adviser, the valuation has been prepared on the assumption that the property is held on a lease with an unexpired term of approximately 90 years and that there are no onerous lease terms or unusual liabilities that would adversely affect its value.",
+    "Lease Length: The lease is assumed to have a satisfactory unexpired term, and no immediate action is considered necessary. However, the value and marketability of leasehold properties diminish as the lease term reduces. Once the unexpired term approaches or falls below 80 years, the cost of extending the lease can increase significantly and the property's value and mortgageability may be adversely affected. You should seek advice on extending the lease well before it reaches this point. Your legal adviser should confirm the remaining lease term and advise on any implications before you proceed with the purchase."
    ]
   },
   {
@@ -2971,19 +2990,19 @@
    "sectionKey": "J",
    "screenId": "activity_risks_other_",
    "title": "J4 Other",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
+   "dataFieldCount": 4,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 1,
+    "total": 4,
+    "approvedLegacy": 0,
     "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is located close to an airport and/or flight path. Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",
-    "The property is located close to a railway station. Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",
-    "The property is located close to a railway line. Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property."
+    "Airport: The property is located close to an airport and/or flight path. Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",
+    "Train Station: The property is located close to a railway station. Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",
+    "Railway Line: The property is located close to a railway line. Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property."
    ]
   },
   {

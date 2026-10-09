@@ -13013,6 +13013,86 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_f0_unsafe',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'j4_airport',
+    'activity_risks_other_',
+    '{RISK_TO_OTHER}',
+    '{J4_AIRPORT}',
+    [
+    ],
+    whenField: 'cb_airport',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j4_station',
+    'activity_risks_other_',
+    '{RISK_TO_OTHER}',
+    '{J4_TRAIN_STATION}',
+    [
+    ],
+    whenField: 'cb_train_station',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j4_line',
+    'activity_risks_other_',
+    '{RISK_TO_OTHER}',
+    '{J4_RAILWAY_LINE}',
+    [
+    ],
+    whenField: 'cb_train_line',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j4_motorway',
+    'activity_risks_other_',
+    '{RISK_TO_OTHER}',
+    '{J4_MOTORWAY}',
+    [
+    ],
+    whenField: 'cb_motorway',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j4_further',
+    'activity_risks_repair_or_improve',
+    '{RISK_TO_OTHER}',
+    '{J4_FURTHER_INVESTIGATIONS}',
+    [
+    ],
+    whenField: 'cb_repair_or_improve',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'k1_market',
+    'activity_k1_valuation_assumptions',
+    '{K1_VALUATION}',
+    '{K1_MARKET_VALUE}',
+    [
+    ],
+    whenField: 'cb_k1_market',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'k1_flats',
+    'activity_k1_valuation_assumptions',
+    '{K1_VALUATION}',
+    '{K1_FLATS}',
+    [
+    ],
+    whenField: 'cb_k1_flats',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'k1_lease',
+    'activity_k1_valuation_assumptions',
+    '{K1_VALUATION}',
+    '{K1_LEASE_LENGTH}',
+    [
+    ],
+    whenField: 'cb_k1_lease',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

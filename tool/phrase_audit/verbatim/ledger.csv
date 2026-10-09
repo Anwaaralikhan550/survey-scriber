@@ -1784,24 +1784,24 @@ c6a8049454,J3,"General Advice: The inspection identified matters requiring repai
 935b8898b2,J3,Buildings require regular inspection and maintenance throughout their service life.,EXACT,{RISK_TO_PEOPLE}::{PEOPLE_GENERAL_ADVICE},100,DONE
 00ac92a251,J3,Prompt attention to isolated defects will normally reduce the likelihood of more extensive deterioration and costly future repairs.,EXACT,{RISK_TO_PEOPLE}::{PEOPLE_GENERAL_ADVICE},100,DONE
 525d7a0374,J3,"Where specialist inspections have been recommended within this report, these should be obtained before legal commitment where practicable.",EXACT,{RISK_TO_PEOPLE}::{PEOPLE_GENERAL_ADVICE},100,DONE
-27fc8a5f3e,J4,Airport: The property is located close to an airport and/or flight path.,EXACT,{RISK_TO_OTHER}::{OTHER_PROXIMITY_AIRPORT},100,DONE
-547aa675a4,J4,"Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",EXACT,{RISK_TO_OTHER}::{OTHER_PROXIMITY_AIRPORT},100,DONE
-a8c6106835,J4,Train Station: The property is located close to a railway station.,EXACT,{RISK_TO_OTHER}::{OTHER_PROXIMITY_TRAIN_STATION},100,DONE
+27fc8a5f3e,J4,Airport: The property is located close to an airport and/or flight path.,EXACT,{RISK_TO_OTHER}::{J4_AIRPORT},100,DONE
+547aa675a4,J4,"Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",EXACT,{RISK_TO_OTHER}::{J4_AIRPORT},100,DONE
+a8c6106835,J4,Train Station: The property is located close to a railway station.,EXACT,{RISK_TO_OTHER}::{J4_TRAIN_STATION},100,DONE
 0e28856543,J4,"Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",MENU,,0,UNVERIFIED
-398eab5bc0,J4,Railway Line: The property is located close to a railway line.,EXACT,{RISK_TO_OTHER}::{OTHER_PROXIMITY_TRAIN_LINE},100,DONE
-2db06b9c9a,J4,"Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property.",EXACT,{RISK_TO_OTHER}::{OTHER_PROXIMITY_TRAIN_LINE},100,DONE
-f3faa02e51,J4,Motorway: The property is located close to a motorway.,EXACT,{RISK_TO_OTHER}::{OTHER_PROXIMITY_MOTORWAY},100,DONE
-b01cfed8b5,J4,"Traffic noise, air quality, and associated activity may affect the enjoyment, marketability, and value of the property.",EXACT,{RISK_TO_OTHER}::{OTHER_PROXIMITY_MOTORWAY},100,DONE
-c7f1f30746,J4,"Further Investigations and Repairs: Where repairs or further investigations are recommended, you should obtain quotations from suitably qualified and reputable contractors before exchanging contracts.",EXACT,{RISK_TO_OTHER}::{OTHER_REPAIR_IMPROVE},100,DONE
-192c669c42,J4,"The results of these investigations, together with advice from your legal adviser, may influence your decision to proceed or the price you are prepared to pay.",EXACT,{RISK_TO_OTHER}::{OTHER_REPAIR_IMPROVE},100,DONE
-c9c6baa8f4,J4,"Until these enquiries have been completed, the extent and cost of any necessary remedial works cannot be confirmed.",EXACT,{RISK_TO_OTHER}::{OTHER_REPAIR_IMPROVE},100,DONE
-63aee53008,J4,Proceeding with the purchase before obtaining this information means accepting the risk that additional defects or costs may become apparent after completion.,EXACT,{RISK_TO_OTHER}::{OTHER_REPAIR_IMPROVE},100,DONE
-f43098a8b3,J4,K1 Valuations assumptions Market Value: The opinion of market value reflects market conditions at the date of inspection and valuation.,ADD,{RISK_TO_OTHER}::{OTHER_PROXIMITY_TRAIN_STATION},47,OPEN
-bd9cfaba15,J4,"In some locations, limited housing supply and strong buyer demand may result in competitive bidding and prices above asking levels.",ADD,{RISK_TO_OTHER}::{OTHER_REPAIR_IMPROVE},43,OPEN
-12fbd522a4,J4,"Should market conditions change, or the property's condition deteriorate, its resale value may be adversely affected.",ADD,{RISK_TO_OTHER}::{OTHER_PROXIMITY_OTHER},45,OPEN
-a14ac6a02e,J4,"Flats: Unless confirmed otherwise by your legal adviser, the valuation has been prepared on the assumption that the property is held on a lease with an unexpired term of approximately 90 years and that there are no onerous lease terms or unusual liabilities that would adversely affect its value.",ADD,{RISK_TO_OTHER}::{OTHER_REPAIR_IMPROVE},41,OPEN
-e35ded062b,J4,"Lease Length: The lease is assumed to have a satisfactory unexpired term, and no immediate action is considered necessary.",ADD,{RISK_TO_OTHER}::{OTHER_REPAIR_IMPROVE},44,OPEN
-c49e191030,J4,"However, the value and marketability of leasehold properties diminish as the lease term reduces.",ADD,{RISK_TO_OTHER}::{OTHER_PROXIMITY_OTHER},43,OPEN
-aa6b056c3e,J4,"Once the unexpired term approaches or falls below 80 years, the cost of extending the lease can increase significantly and the property's value and mortgageability may be adversely affected.",ADD,{RISK_TO_OTHER}::{OTHER_PROXIMITY_OTHER},46,OPEN
-06aed1e606,J4,You should seek advice on extending the lease well before it reaches this point.,ADD,{RISK_TO_OTHER}::{OTHER_PROXIMITY_OTHER},43,OPEN
-73ce598594,J4,Your legal adviser should confirm the remaining lease term and advise on any implications before you proceed with the purchase.,ADD,{RISK_TO_OTHER}::{OTHER_REPAIR_IMPROVE},48,OPEN
+398eab5bc0,J4,Railway Line: The property is located close to a railway line.,EXACT,{RISK_TO_OTHER}::{J4_RAILWAY_LINE},100,DONE
+2db06b9c9a,J4,"Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property.",EXACT,{RISK_TO_OTHER}::{J4_RAILWAY_LINE},100,DONE
+f3faa02e51,J4,Motorway: The property is located close to a motorway.,EXACT,{RISK_TO_OTHER}::{J4_MOTORWAY},100,DONE
+b01cfed8b5,J4,"Traffic noise, air quality, and associated activity may affect the enjoyment, marketability, and value of the property.",EXACT,{RISK_TO_OTHER}::{J4_MOTORWAY},100,DONE
+c7f1f30746,J4,"Further Investigations and Repairs: Where repairs or further investigations are recommended, you should obtain quotations from suitably qualified and reputable contractors before exchanging contracts.",EXACT,{RISK_TO_OTHER}::{J4_FURTHER_INVESTIGATIONS},100,DONE
+192c669c42,J4,"The results of these investigations, together with advice from your legal adviser, may influence your decision to proceed or the price you are prepared to pay.",EXACT,{RISK_TO_OTHER}::{J4_FURTHER_INVESTIGATIONS},100,DONE
+c9c6baa8f4,J4,"Until these enquiries have been completed, the extent and cost of any necessary remedial works cannot be confirmed.",EXACT,{RISK_TO_OTHER}::{J4_FURTHER_INVESTIGATIONS},100,DONE
+63aee53008,J4,Proceeding with the purchase before obtaining this information means accepting the risk that additional defects or costs may become apparent after completion.,EXACT,{RISK_TO_OTHER}::{J4_FURTHER_INVESTIGATIONS},100,DONE
+f43098a8b3,J4,K1 Valuations assumptions Market Value: The opinion of market value reflects market conditions at the date of inspection and valuation.,EXACT,{K1_VALUATION}::{K1_MARKET_VALUE},100,DONE
+bd9cfaba15,J4,"In some locations, limited housing supply and strong buyer demand may result in competitive bidding and prices above asking levels.",EXACT,{K1_VALUATION}::{K1_MARKET_VALUE},100,DONE
+12fbd522a4,J4,"Should market conditions change, or the property's condition deteriorate, its resale value may be adversely affected.",EXACT,{K1_VALUATION}::{K1_MARKET_VALUE},100,DONE
+a14ac6a02e,J4,"Flats: Unless confirmed otherwise by your legal adviser, the valuation has been prepared on the assumption that the property is held on a lease with an unexpired term of approximately 90 years and that there are no onerous lease terms or unusual liabilities that would adversely affect its value.",EXACT,{K1_VALUATION}::{K1_FLATS},100,DONE
+e35ded062b,J4,"Lease Length: The lease is assumed to have a satisfactory unexpired term, and no immediate action is considered necessary.",EXACT,{K1_VALUATION}::{K1_LEASE_LENGTH},100,DONE
+c49e191030,J4,"However, the value and marketability of leasehold properties diminish as the lease term reduces.",EXACT,{K1_VALUATION}::{K1_LEASE_LENGTH},100,DONE
+aa6b056c3e,J4,"Once the unexpired term approaches or falls below 80 years, the cost of extending the lease can increase significantly and the property's value and mortgageability may be adversely affected.",EXACT,{K1_VALUATION}::{K1_LEASE_LENGTH},100,DONE
+06aed1e606,J4,You should seek advice on extending the lease well before it reaches this point.,EXACT,{K1_VALUATION}::{K1_LEASE_LENGTH},100,DONE
+73ce598594,J4,Your legal adviser should confirm the remaining lease term and advise on any implications before you proceed with the purchase.,EXACT,{K1_VALUATION}::{K1_LEASE_LENGTH},100,DONE

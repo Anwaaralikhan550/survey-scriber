@@ -1493,63 +1493,7 @@ class ReportBuilder {
   // unconditional spec boilerplate (J4's Lead/Radon philosophy) and always
   // fires. Windows, External Lighting and Overall Risk Assessment have no
   // safe source to derive from at all - see the sign-off packet for why
-  // each is a flagged content gap rather than fabricated.
-  List<String> _legacyDerivedSectionFRiskToSecurity(V2RawReportData rawData) {
-    final phrases = <String>[];
-
-    // External Doors: E6's existing actv_seciruty_offered dropdown, already
-    // narrated per-door in Section E6 itself - this is a property-wide
-    // summary, same "component narrates locally, J adds a summary"
-    // pattern as J4's Asbestos/Mould. Checked across all 5 door-material
-    // screen variants; if any door is Inadequate, that is the more
-    // safety-relevant fact and takes priority over a Reasonable finding
-    // elsewhere on the property.
-    const doorScreens = <String>[
-      'activity_outside_property_out_side_doors_security',
-    ];
-    var doorSecurityFound = false;
-    var doorSecurityInadequate = false;
-    for (final screenId in doorScreens) {
-      final answers = _answersForScreen(rawData, screenId);
-      final security =
-          (answers['actv_seciruty_offered'] ?? '').trim().toLowerCase();
-      if (security.isEmpty) continue;
-      doorSecurityFound = true;
-      if (security.contains('inadequate')) {
-        doorSecurityInadequate = true;
-        break;
-      }
-    }
-    if (doorSecurityFound) {
-      phrases.add(doorSecurityInadequate
-          ? 'The accessible external doors appear to offer limited security based upon a visual inspection. The effectiveness of the locks has not been tested.'
-          : 'The accessible external doors appear to provide reasonable security based upon a visual inspection. The effectiveness of the locks has not been tested.');
-    }
-
-    // Security Systems: the Communal Area screen's amenity checkboxes
-    // (CCTV, automatic gates, entry system) are the only security-system
-    // data the tree captures anywhere - scoped to properties with a
-    // communal area (mainly flats/shared buildings), so this only fires
-    // when that screen was genuinely answered, same reasoning as Doors
-    // above.
-    final communalArea =
-        _answersForScreen(rawData, 'activity_outside_property_other_communal_area');
-    if (communalArea.isNotEmpty) {
-      final hasSecuritySystem = _isCheckedValue(communalArea['cb_cctv']) ||
-          _isCheckedValue(communalArea['cb_automatic_gates']) ||
-          _isCheckedValue(communalArea['cb_entry_system']);
-      phrases.add(hasSecuritySystem
-          ? 'The property incorporates a visible security system to the communal areas. These installations were not tested.'
-          : 'No visible security system was noted to the communal areas. These installations were not tested.');
-    }
-
-    // (General Advice moved: the revised spec places the general-maintenance
-    // advisory at the end of J3 Risks to People, not with the security risks.
-    // See _riskGeneralMaintenanceAdvice, added to J3 in the section assembly.)
-
-    return _cleanupPhrases(phrases);
-  }
-
+  // each is a flagged content gap rather than fabricated.
   // Revised-spec general-maintenance advisory. Under the revised structure this
   // closes J3 Risks to People (previously it closed the app's J5 Security).
   static const String _riskGeneralMaintenanceAdvice =
@@ -2343,37 +2287,6 @@ class ReportBuilder {
         }
       }
 
-      // J4 Other risks: enrich the native activity_risks_other_ screen (which
-      // carries the proximity risks) with the former J5 security risks. If the
-      // native screen is absent, synthesize a J4 entry so the security content
-      // is never dropped.
-      final riskToSecurity = _legacyDerivedSectionFRiskToSecurity(rawData);
-      if (riskToSecurity.isNotEmpty) {
-        final j4Index = screens.indexWhere(
-          (s) => s.screenId.trim().toLowerCase() == anchorId,
-        );
-        if (j4Index >= 0) {
-          final existing = screens[j4Index];
-          screens[j4Index] = ReportScreen(
-            screenId: existing.screenId,
-            title: existing.title,
-            fields: existing.fields,
-            phrases: <String>[...existing.phrases, ...riskToSecurity],
-            userNote: existing.userNote,
-            parentId: existing.parentId,
-            isCompleted: existing.isCompleted,
-            isMergedGroup: existing.isMergedGroup,
-          );
-        } else {
-          screens.add(ReportScreen(
-            screenId: 'derived_j4_other_risks',
-            title: 'J4 Other Risks',
-            fields: const <ReportField>[],
-            phrases: riskToSecurity,
-          ));
-        }
-      }
-
       // Cross-injected Risk-to-Building content (from E1 chimney and other
       // source screens) only reaches the report via `_phrasesForScreen`'s
       // enrichment of the NATIVE `activity_risks_risk_to_building_` screen -
@@ -2400,35 +2313,6 @@ class ReportBuilder {
     }
 
     _disambiguateGenericScreenTitles(screens, sectionDef.nodes);
-
-    if (screens.isEmpty &&
-        !config.includeEmptyScreens &&
-        isInspection &&
-        sectionDef.key.trim().toUpperCase() == 'K') {
-      return ReportSection(
-        key: 'K',
-        title: 'K – Additional assumption(s)',
-        description: sectionDef.description,
-        displayOrder: displayOrder,
-        screens: const <ReportScreen>[
-          ReportScreen(
-            screenId: 'k_additional_assumptions_default',
-            title: 'K – Additional assumption(s)',
-            fields: <ReportField>[],
-            phrases: <String>[
-              'My opinion has been arrived at largely on the basis of the standard assumptions governing residential valuations. (These are outlined in this section and under market value in the description of the Home Survey Service).',
-              'The purchase price provided is a reflection of current market conditions and the result of shortages of properties with too many buyers in the market and is considered to be the maximum likely to be achieved under present market conditions. Any deterioration in condition or downturn in market activity could lead to this figure not being achieved on early resale.',
-            ],
-          ),
-          ReportScreen(
-            screenId: 'k_other_considerations_default',
-            title: 'K - Other Considerations',
-            fields: <ReportField>[],
-            phrases: <String>['No further comments.'],
-          ),
-        ],
-      );
-    }
 
     if (screens.isEmpty && !config.includeEmptyScreens) return null;
 

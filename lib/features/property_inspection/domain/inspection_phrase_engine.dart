@@ -709,9 +709,9 @@ class InspectionPhraseEngine {
       case 'activity_risks_risk_to_building_':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_risks_other_':
-        return _risksOther(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_risks_repair_or_improve':
-        return _risksRepairOrImprove(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
 
       // ── Section D: About the Property ──
       case 'activity_property_type':
@@ -1513,49 +1513,7 @@ class InspectionPhraseEngine {
     }
     return '${prefix}_NOTED';
   }
-
-  List<String> _risksOther(Map<String, String> answers) {
-    // Section J3 (Risk to Other) - approved bank imported in Phase 4.
-    if (_isChecked(answers['cb_not_applicable'])) {
-      final template = _sub('{RISK_TO_OTHER}', '{OTHER_NO_APPLICABLE}');
-      return template.isEmpty ? const [] : _splitResolved(template);
-    }
-
-    const proximitySubCodes = <String, String>{
-      'cb_airport': '{OTHER_PROXIMITY_AIRPORT}',
-      'cb_train_station': '{OTHER_PROXIMITY_TRAIN_STATION}',
-      'cb_train_line': '{OTHER_PROXIMITY_TRAIN_LINE}',
-      'cb_motorway': '{OTHER_PROXIMITY_MOTORWAY}',
-    };
-    final phrases = <String>[];
-    proximitySubCodes.forEach((checkbox, subCode) {
-      if (_isChecked(answers[checkbox])) {
-        final template = _sub('{RISK_TO_OTHER}', subCode);
-        if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-      }
-    });
-    if (_isChecked(answers['cb_other_741'])) {
-      final other = (answers['et_other_775'] ?? '').trim();
-      if (other.isNotEmpty) {
-        var template = _sub('{RISK_TO_OTHER}', '{OTHER_PROXIMITY_OTHER}');
-        if (template.isNotEmpty) {
-          phrases.addAll(_splitResolved(
-            template.replaceAll('{OTHER_NAME}', other.toLowerCase()),
-          ));
-        }
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _risksRepairOrImprove(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_repair_or_improve'])) return const [];
-    final template = _sub('{RISK_TO_OTHER}', '{OTHER_REPAIR_IMPROVE}');
-    if (template.isEmpty) return const ['Repair or improve the property.'];
-    return _splitResolved(template);
-  }
-
+
   static bool _isChecked(String? value) {
     final v = (value ?? '').trim().toLowerCase();
     return v == 'true' || v == '1' || v == 'yes';
