@@ -709,7 +709,7 @@ class InspectionPhraseEngine {
       case 'activity_issues_glazed_sections':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_issues_other_matters':
-        return _issuesOtherMatters(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_risks_risk_to_building_':
         return _risksRiskToBuilding(answers);
       case 'activity_risks_other_':
@@ -2419,71 +2419,6 @@ class InspectionPhraseEngine {
         phrases.addAll(_split(_normalize(template)));
       }
     }
-    return phrases;
-  }
-
-  List<String> _issuesOtherMatters(Map<String, String> answers) {
-    // Section I3 (Other Matters) - approved bank imported in Phase 4.
-    final phrases = <String>[];
-
-    if (_isChecked(answers['cb_freehold'])) {
-      final template = _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_FREEHOLD}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-    if (_isChecked(answers['cb_leasehold'])) {
-      final template =
-          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_LEASEHOLD}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-    if (_isChecked(answers['cb_right_of_way'])) {
-      final template =
-          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_RIGHT_OF_WAY}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
-    final sharedStacks = _labelsFor(
-      ['cb_chimney_stack', 'cb_rainwater_goods', 'cb_other_471'],
-      answers,
-      {
-        'cb_chimney_stack': 'chimney stack(s)',
-        'cb_rainwater_goods': 'rainwater goods',
-        'cb_other_471': 'other',
-      },
-    );
-    _addOther(answers, 'cb_other_471', 'et_other_433', sharedStacks);
-    if (sharedStacks.isNotEmpty) {
-      var template =
-          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_SHARED_STACKS_AND_RWG}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_splitResolved(template.replaceAll(
-          '{SHARED_STACKS_AND_RWG}',
-          _toWords(sharedStacks).toLowerCase(),
-        )));
-      }
-    }
-
-    if (_isChecked(answers['cb_private_road'])) {
-      final condition = (answers['actv_condition'] ?? '').trim().toLowerCase();
-      var template =
-          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_PRIVATE_ROAD}');
-      if (template.isNotEmpty) {
-        template = condition.isEmpty
-            ? template.replaceAll(' This is in {OM_PRIVATE_ROAD_CONDITION} condition.', '')
-            : template.replaceAll('{OM_PRIVATE_ROAD_CONDITION}', condition);
-        phrases.addAll(_splitResolved(template));
-      }
-    }
-
-    if (_isChecked(answers['cb_party_walls'])) {
-      final template =
-          _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_PARTY_WALLS}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-    if (_isChecked(answers['cb_tenanted'])) {
-      final template = _sub('{ISSUE_OTHER_MATTERS}', '{OTHER_MATTERS_TENANTED}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
     return phrases;
   }
 

@@ -10841,6 +10841,96 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_i2_others',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'i3_freehold',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_FREEHOLD}',
+    [
+    ],
+    whenField: 'cb_freehold',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_leasehold',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_LEASEHOLD}',
+    [
+    ],
+    whenField: 'cb_leasehold',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_share',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_SHARE_OF_FREEHOLD}',
+    [
+    ],
+    whenField: 'cb_i3_share',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_flying',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_FLYING_FREEHOLD}',
+    [
+    ],
+    whenField: 'cb_i3_flying',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_road',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_PRIVATE_ROAD}',
+    [
+    ],
+    whenField: 'cb_private_road',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_row',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_RIGHTS_OF_WAY}',
+    [
+    ],
+    whenField: 'cb_right_of_way',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_party',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_PARTY_WALL}',
+    [
+    ],
+    whenField: 'cb_party_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_tenanted',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_TENANTED}',
+    [
+    ],
+    whenField: 'cb_tenanted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_general',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_GENERAL_LEGAL_ENQUIRIES}',
+    [
+    ],
+    whenField: 'cb_i3_general',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

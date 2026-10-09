@@ -1015,24 +1015,6 @@ class ReportBuilder {
     return ['The following matters were identified in $screenTitle: $body.'];
   }
 
-  // E1's spec text has a cross-inject Phase 2B correctly identified but left
-  // unwired at the time ("Add highlighted below text to: Section I3" - I
-  // hadn't been rebuilt yet). Section I is now fully migrated (Phase 2F),
-  // so this closes that gap: when the surveyor records a shared chimney on
-  // E1's dedicated screen, the same spec-mandated sentence about shared
-  // rainwater goods and chimney stacks is injected into I3.
-  List<String> _legacyDerivedSectionFIssueOtherMattersSharedChimney(
-      V2RawReportData rawData) {
-    final sharedChimney =
-        _answersForScreen(rawData, 'activity_outside_property_shared_chimney');
-    final hasSharedChimney = ['ch1', 'ch2', 'ch3', 'ch4', 'cb_other_608']
-        .any((id) => _isCheckedValue(sharedChimney[id]));
-    if (!hasSharedChimney) return const [];
-    return [
-      'The rainwater goods and chimney stack(s) are shared. The owner of the neighbouring property or properties may have some legal rights over these shared building parts. You should check with your legal adviser before any work is done.'
-    ];
-  }
-
   List<String> _legacyDerivedSectionFIssueGuarantees(V2RawReportData rawData) {
     final phrases = <String>[];
 
@@ -3113,11 +3095,6 @@ class ReportBuilder {
         cleaned = _cleanupPhrases([
           ...cleaned,
           ..._legacyDerivedSectionFIssueGuarantees(rawData),
-        ]);
-      } else if (normalizedId == 'activity_issues_other_matters') {
-        cleaned = _cleanupPhrases([
-          ...cleaned,
-          ..._legacyDerivedSectionFIssueOtherMattersSharedChimney(rawData),
         ]);
       } else if (normalizedId == 'activity_risks_risk_to_building_') {
         cleaned = _cleanupPhrases([

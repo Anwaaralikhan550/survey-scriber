@@ -12663,72 +12663,47 @@
           "fields": [
             {
               "id": "cb_freehold",
-              "label": "Freehold",
+              "label": "Freehold property",
               "type": "checkbox"
             },
             {
               "id": "cb_leasehold",
-              "label": "Leasehold",
+              "label": "Leasehold property",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i3_share",
+              "label": "Share of freehold property",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i3_flying",
+              "label": "Flying freehold",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_private_road",
+              "label": "Private road",
               "type": "checkbox"
             },
             {
               "id": "cb_right_of_way",
-              "label": "Right of Way",
+              "label": "Rights of way",
               "type": "checkbox"
-            },
-            {
-              "id": "label_shared_stacks_rwg",
-              "label": "Shared Stacks and RWG",
-              "type": "label"
-            },
-            {
-              "id": "cb_chimney_stack",
-              "label": "Chimney stack(s)",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rainwater_goods",
-              "label": "Rainwater goods",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_471",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_433",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_471",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_private_road",
-              "label": "Private Road",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Satisfactory",
-                "Poor"
-              ],
-              "conditionalOn": "cb_private_road",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "cb_party_walls",
-              "label": "Party Walls",
+              "label": "Party wall",
               "type": "checkbox"
             },
             {
               "id": "cb_tenanted",
-              "label": "Tenanted",
+              "label": "Tenanted property",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i3_general",
+              "label": "General legal enquiries",
               "type": "checkbox"
             }
           ]
