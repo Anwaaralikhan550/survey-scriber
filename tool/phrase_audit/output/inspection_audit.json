@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2627,
+   "distinctEmitted": 2632,
    "approvedLegacyBank": 643,
-   "approvedCurrentBankOnly": 1957,
+   "approvedCurrentBankOnly": 1962,
    "unapproved": 0
   }
  },
@@ -4483,8 +4483,8 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_stacks",
    "title": "Stacks",
-   "dataFieldCount": 5,
-   "permutationCount": 31,
+   "dataFieldCount": 17,
+   "permutationCount": 29,
    "severities": [],
    "phraseStats": {
     "total": 16,
@@ -4493,9 +4493,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The chimney stack(s) are constructed of brick, and this is original construction.",
-    "The chimney stack(s) are constructed of brick, and these are original construction.",
-    "Pots: The chimney stacks are fitted with several pots."
+    "Description: The chimney stack(s) are constructed of brick.",
+    "Description: The chimney stack(s) are constructed of stone.",
+    "Description: The chimney stack(s) are constructed of rendered masonry."
    ]
   },
   {
@@ -7788,17 +7788,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_chimney_partial_view",
    "title": "Partial View",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Not fully inspected: The chimney stack(s) could not be fully inspected. I cannot fully comment on their condition. Comments are limited to those areas visible from accessible inspection positions."
+    "Not fully inspected: The chimney stack(s) could not be fully inspected because of height. I cannot fully comment on their condition. Comments are limited to those areas visible from accessible inspection positions.",
+    "Not fully inspected: The chimney stack(s) could not be fully inspected because of restricted access. I cannot fully comment on their condition. Comments are limited to those areas visible from accessible inspection positions.",
+    "Not fully inspected: The chimney stack(s) could not be fully inspected because of adjacent buildings. I cannot fully comment on their condition. Comments are limited to those areas visible from accessible inspection positions."
    ]
   },
   {

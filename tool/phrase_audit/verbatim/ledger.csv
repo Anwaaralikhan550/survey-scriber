@@ -116,28 +116,28 @@ c26ccb0979,E1,"Consequently, I am unable to comment on their composition or cond
 9b0b46b54c,E1,Shared chimney: The chimney stack is believed to be shared with the neighbouring property or properties.,TOKENISED,{E_CHIMNEY_MULTI_STACK}::{SHARED_CHIMNEY},93,DONE
 9c63383e6b,E1,The owner of the neighbouring property or properties may have some legal rights over this shared chimney.,EXACT,{E_CHIMNEY_MULTI_STACK}::{SHARED_CHIMNEY},100,DONE
 a911154711,E1,"Your legal adviser should confirm ownership, maintenance responsibilities and any legal rights affecting the shared structure.",EXACT,{E_CHIMNEY_MULTI_STACK}::{SHARED_CHIMNEY},100,DONE
-08b0f2e09c,E1,"Not fully inspected: The chimney stack(s) could not be fully inspected because of height, restricted access, adjacent buildings, roof configuration, health and safety restrictions.",MENU,,0,UNVERIFIED
+08b0f2e09c,E1,"Not fully inspected: The chimney stack(s) could not be fully inspected because of height, restricted access, adjacent buildings, roof configuration, health and safety restrictions.",MENU,,0,VERIFIED
 6dc0096886,E1,I cannot fully comment on their condition.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{PARTIAL_VIEW},100,DONE
 eb9ede2757,E1,Comments are limited to those areas visible from accessible inspection positions.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{PARTIAL_VIEW},100,DONE
 8933dfcc6a,E1,Dummy chimney breast: The property is installed with false or dummy chimney(s) with no internal brick breast.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{DUMMY_CHIMNEY_BREAST},100,DONE
 f77e8ee03f,E1,"These are hollow, non-structural features usually built using timber or metal framing and covered with plasterboard or brick slips to mimic a traditional chimney stack.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{DUMMY_CHIMNEY_BREAST},100,DONE
-e5cda31a07,E1,"Description: The chimney stack(s) are constructed of brick, stone, rendered masonry, other construction.",MENU,,0,UNVERIFIED
-2fe7b860aa,E1,"The chimney stack(s) appear original, replaced, rebuilt.",MENU,,0,UNVERIFIED
+e5cda31a07,E1,"Description: The chimney stack(s) are constructed of brick, stone, rendered masonry, other construction.",MENU,,0,VERIFIED
+2fe7b860aa,E1,"The chimney stack(s) appear original, replaced, rebuilt.",MENU,,0,VERIFIED
 1e3422712b,E1,"Number: The property has one, two, three, multiple stacks(s).",MENU,,0,UNVERIFIED
 d445f70e8a,E1,"Location: The chimney stack(s) are located to the front, rear, side, centre, other locations.",MENU,,0,UNVERIFIED
-8fb1b1a096,E1,"Pots: The chimney stack(s) are fitted with clay pots, terracotta pots, metal flues, cowls, caps, other pot(s).",MENU,,0,UNVERIFIED
+8fb1b1a096,E1,"Pots: The chimney stack(s) are fitted with clay pots, terracotta pots, metal flues, cowls, caps, other pot(s).",MENU,,0,VERIFIED
 2bb3fba9ae,E1,"Condition: Where visible, the chimney stack(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,UNVERIFIED
 318b31ff53,E1,No repair: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 4eb9d1a7a9,E1,Routine inspection and maintenance should be expected as part of normal property ownership.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-6efba7639f,E1,"Flashings: The waterproofing between the chimney stack and the roof covering (called the flashing) appears to be formed in lead, lead substitute, mortar, bricks, tiles, other material.",MENU,,0,UNVERIFIED
-676a77b58f,E1,"Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.",MENU,,0,UNVERIFIED
+6efba7639f,E1,"Flashings: The waterproofing between the chimney stack and the roof covering (called the flashing) appears to be formed in lead, lead substitute, mortar, bricks, tiles, other material.",MENU,,0,VERIFIED
+676a77b58f,E1,"Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 c070ca5c30,E1,Defective flashings may allow water penetration and should be repaired by an appropriately qualified roofing contractor.,EXACT,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLASHING_CONDITION},100,DONE
 99383af1b7,E1,Repair flashing: The waterproofing between the chimney stack and the roof covering is damaged or defective.,TOKENISED,{E_CHIMNEY_FLASHING_REPAIR}::{FLASHING_REPAIR_NOW},81,DONE
 b84ef56477,E1,"This should be repaired soon, repaired now, depending on the severity of the defect.",MENU,,0,UNVERIFIED
 e48bc8b35f,E1,"The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the extent of the work.",EXACT,{E_CHIMNEY_FLASHING_REPAIR}::{FLASHING_REPAIR_NOW},100,DONE
 d018aaf5d5,E1,Causing damp: This is causing damp penetration to the adjoining building elements.,EXACT,{E_CHIMNEY_FLASHING_REPAIR}::{FLASHING_REPAIR_NOW_CAUSING_DUMP},100,DONE
-d8427bf8c0,E1,"Flaunching: The cement bedding around the base of the chimney pot (called flaunching) appears to be formed in mortar, bricks, concrete, tiles, other material.",MENU,,0,UNVERIFIED
-c145e061e5,E1,"Condition: Where visible, the flaunching appears in good, reasonable, poor, defective condition.",MENU,,0,UNVERIFIED
+d8427bf8c0,E1,"Flaunching: The cement bedding around the base of the chimney pot (called flaunching) appears to be formed in mortar, bricks, concrete, tiles, other material.",MENU,,0,VERIFIED
+c145e061e5,E1,"Condition: Where visible, the flaunching appears in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 1159245f77,E1,Defective flaunching may permit water penetration and reduce the stability of chimney pots.,EXACT,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLAUNCHING_CONDITION},100,DONE
 dd0fbe38b9,E1,Repairs should be undertaken as part of routine maintenance or sooner where deterioration is significant.,EXACT,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLAUNCHING_CONDITION},100,DONE
 1992b38339,E1,Repair flaunching: The cement bedding around the base of the chimney pot (called flaunching) is damaged or defective.,TOKENISED,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLAUNCHING},85,DONE
@@ -146,17 +146,17 @@ dd0fbe38b9,E1,Repairs should be undertaken as part of routine maintenance or soo
 4d87fb9831,E1,The owner of the neighbouring property may have some legal rights over the shared chimney.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 46929f370b,E1,You should check with your legal adviser before any work is done.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 d018aaf5d5,E1,Causing damp: This is causing damp penetration to the adjoining building elements.,EXACT,{E_CHIMNEY_FLASHING_REPAIR}::{FLASHING_REPAIR_NOW_CAUSING_DUMP},100,DONE
-244b190ae3,E1,"Pointing Condition: The mortar joints to the chimney stack appear in good, reasonable, weathered, eroded, poor, other condition(s).",MENU,,0,UNVERIFIED
+244b190ae3,E1,"Pointing Condition: The mortar joints to the chimney stack appear in good, reasonable, weathered, eroded, poor, other condition(s).",MENU,,0,VERIFIED
 e2acfb1733,E1,Weathered or eroded pointing should be renewed to reduce further deterioration and water penetration.,EXACT,{E_CHIMNEY_MULTI_STACK}::{POINTING_CONDITION},100,DONE
 5cc16d2d82,E1,Repointing: Some of the mortar between the bricks or stonework (called pointing) is damaged or defective.,TOKENISED,{E_CHIMNEY_REPOINTING_REPAIR}::{CHIMNEY_REPOINTING_REPAIR_SOON},82,DONE
 5c0eb02340,E1,"This should be repaired soon, repaired now.",MENU,,0,UNVERIFIED
 7c0ddd9e3e,E1,"The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
-ed5d1fee7e,E1,"Damaged chimney pots: The chimney pots appear secure, weathered, cracked, damaged, missing, other.",MENU,,0,UNVERIFIED
+ed5d1fee7e,E1,"Damaged chimney pots: The chimney pots appear secure, weathered, cracked, damaged, missing, other.",MENU,,0,VERIFIED
 d2dffaaf9a,E1,Damaged or insecure chimney pots should be repaired or replaced to maintain weather resistance and safety.,EXACT,{E_CHIMNEY_MULTI_STACK}::{POTS_CONDITION},100,DONE
 9b617ac8f2,E1,Repair pot: One or several pots fitted to the main building chimney stack are broken and partly missing.,TOKENISED,{E_CHIMNEY_POTS_REPAIR}::{CHIMNEY_POTS_REPAIR_NOW},69,DONE
 1c8b1b0314,E1,"To replace the pot, you will have to renew the cement bedding around the base, called the flaunching, which holds the pot in place.",MENU,,0,UNVERIFIED
 e0d2226049,E1,"The chimney pot may also be connected to a chimney flue that serves a heating appliance below, and a suitable replacement must be used.",EXACT,{E_CHIMNEY_POTS_REPAIR}::{CHIMNEY_POTS_REPAIR_NOW},100,DONE
-bb8a2996d8,E1,"Leaning chimney: The chimney stack appears slightly leaning, significantly leaning.",ADD,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY},57,OPEN
+bb8a2996d8,E1,"Leaning chimney: The chimney stack appears slightly leaning, significantly leaning.",MENU,,0,VERIFIED
 5e33f3de2d,E1,"Where significant movement is evident, further investigation by an appropriately qualified structural engineer or roofing contractor is recommended before legal commitment.",EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 7559b32079,E1,No repair required: No repair is currently needed.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 7e7c386b69,E1,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
@@ -256,7 +256,7 @@ dd44aa6d75,E2,"Because of the possible asbestos content, you should get advice f
 0f0686ea80,E2,"If re-covered in heavier materials, the timbers may need to be strengthened to comply with current Building Regulations.",FIX,{E_ROOF_COVERING_REPAIR}::{END_OF_USEFUL_LIFE},100,OPEN
 588e3f4a38,E2,"Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life.",MENU,,0,UNVERIFIED
 6012072319,E2,"Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in lead, mortar, clay tiles, mineral felt, bitumen tape, lead substitute, other.",MENU,,0,UNVERIFIED
-c07f94654e,E2,"Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.",MENU,,0,UNVERIFIED
+c07f94654e,E2,"Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 cbea8fb9a4,E2,Defective flashings should be repaired to reduce the risk of water penetration.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE
 44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 5bb8c5ad8d,E2,Routine maintenance appropriate to the age of the roof covering should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE

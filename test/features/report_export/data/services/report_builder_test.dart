@@ -1776,8 +1776,9 @@ void main() {
 
     test('regenerates chimney phrases when persisted phrase list is empty', () {
       final phraseEngine = InspectionPhraseEngine({
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK}': 'Single-stack narrative.',
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}': 'Pots {CS_POTS}.',
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK_CONSTRUCTION}':
+            'Single-stack narrative.',
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}': 'Pots {CS_STACK_POT_TYPES}.',
         '{E_CHIMNEY_SINGLE_STACK}::{STACK_RENDERING}':
             'Rendered {CS_RENDERING}.',
       });
@@ -1825,7 +1826,8 @@ void main() {
         allAnswers: {
           'activity_outside_property_stacks': {
             'android_material_design_spinner3': 'Single',
-            'android_material_design_spinner2': '2',
+            'st_brick': 'true',
+            'pot_clay': 'true',
             'android_material_design_spinner4': 'Single',
           },
         },
@@ -2240,10 +2242,10 @@ void main() {
 
     test('condenses chimney stacks phrases into one paragraph', () {
       final phraseEngine = InspectionPhraseEngine({
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK}':
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK_CONSTRUCTION}':
             'The property has one chimney stack.',
         '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}':
-            'The chimney stack is fitted with 4 pot(s).',
+            'The chimney stack is fitted with {CS_STACK_POT_TYPES} pot(s).',
         '{E_CHIMNEY_SINGLE_STACK}::{STACK_RENDERING}':
             'The outer faces of the chimney stack is single rendered.',
       });
@@ -2292,7 +2294,8 @@ void main() {
           allAnswers: {
             'activity_outside_property_stacks': {
               'android_material_design_spinner3': 'Single',
-              'android_material_design_spinner2': '4',
+              'st_brick': 'true',
+              'pot_clay': 'true',
               'android_material_design_spinner4': 'Single',
             },
           },
@@ -2306,7 +2309,7 @@ void main() {
           contains('The property has one chimney stack.'));
       expect(
         screen.phrases.single,
-        contains('The chimney stack is fitted with 4 pot(s).'),
+        contains('The chimney stack is fitted with clay pots pot(s).'),
       );
       expect(
         screen.phrases.single,

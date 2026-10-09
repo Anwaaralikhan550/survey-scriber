@@ -19168,23 +19168,89 @@
               "conditionalMode": "show"
             },
             {
-              "id": "android_material_design_spinner2",
-              "label": "Pots",
+              "id": "label_stack_description",
+              "label": "Description",
+              "type": "label"
+            },
+            {
+              "id": "st_brick",
+              "label": "brick",
+              "type": "checkbox"
+            },
+            {
+              "id": "st_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "st_rendered_masonry",
+              "label": "rendered masonry",
+              "type": "checkbox"
+            },
+            {
+              "id": "st_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_stack_other",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "st_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_stack_appearance",
+              "label": "Appearance",
               "type": "dropdown",
               "options": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10"
-              ],
-              "conditionalOn": "android_material_design_spinner3",
-              "conditionalValue": "Single",
+                "original",
+                "replaced",
+                "rebuilt"
+              ]
+            },
+            {
+              "id": "label_stack_pots",
+              "label": "Pots",
+              "type": "label"
+            },
+            {
+              "id": "pot_clay",
+              "label": "clay pots",
+              "type": "checkbox"
+            },
+            {
+              "id": "pot_terracotta",
+              "label": "terracotta pots",
+              "type": "checkbox"
+            },
+            {
+              "id": "pot_metal_flues",
+              "label": "metal flues",
+              "type": "checkbox"
+            },
+            {
+              "id": "pot_cowls",
+              "label": "cowls",
+              "type": "checkbox"
+            },
+            {
+              "id": "pot_caps",
+              "label": "caps",
+              "type": "checkbox"
+            },
+            {
+              "id": "pot_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_pot_other",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "pot_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
@@ -33773,8 +33839,28 @@
           "order": 16,
           "fields": [
             {
-              "id": "cb_Partial_view",
-              "label": "Partial view",
+              "id": "pv_height",
+              "label": "height",
+              "type": "checkbox"
+            },
+            {
+              "id": "pv_restricted_access",
+              "label": "restricted access",
+              "type": "checkbox"
+            },
+            {
+              "id": "pv_adjacent_buildings",
+              "label": "adjacent buildings",
+              "type": "checkbox"
+            },
+            {
+              "id": "pv_roof_configuration",
+              "label": "roof configuration",
+              "type": "checkbox"
+            },
+            {
+              "id": "pv_health_safety",
+              "label": "health and safety restrictions",
               "type": "checkbox"
             }
           ]

@@ -4,10 +4,10 @@ import 'package:survey_scriber/features/property_inspection/domain/inspection_ph
 void main() {
   group('InspectionPhraseEngine - chimney stack-type parity', () {
     const phraseTexts = <String, String>{
-      '{E_CHIMNEY_SINGLE_STACK}::{STACK}': 'single-stack',
-      '{E_CHIMNEY_MULTI_STACK}::{STACK}': 'multi-stack {CS_STACK_MULTIPLE_NUMBER}',
-      '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}': 'single-pots {CS_POTS}',
-      '{E_CHIMNEY_MULTI_STACK}::{STACK_POTS}': 'multi-pots several pots',
+      '{E_CHIMNEY_SINGLE_STACK}::{STACK_CONSTRUCTION}': 'single-stack',
+      '{E_CHIMNEY_MULTI_STACK}::{STACK_CONSTRUCTION}': 'multi-stack',
+      '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}': 'single-pots {CS_STACK_POT_TYPES}',
+      '{E_CHIMNEY_MULTI_STACK}::{STACK_POTS}': 'multi-pots {CS_STACK_POT_TYPES}',
       '{E_CHIMNEY_SINGLE_STACK}::{STACK_LOCATION}':
           'single-location {CS_LOCATION}',
       '{E_CHIMNEY_MULTI_STACK}::{STACK_LOCATION}':
@@ -39,19 +39,21 @@ void main() {
       expect(phrases.first.toLowerCase(), contains('multi-location'));
     });
 
-    test('multiple stacks still emit pots phrase without pots input', () {
+    test('multiple stacks emit the pots phrase when pot types are chosen', () {
       final phrases = engine.buildPhrases(
         'activity_outside_property_stacks',
         {
           'android_material_design_spinner3': 'Multiple',
           'EtMultipleNumber': 'two',
+          'pot_clay': 'true',
+          'st_brick': 'true',
         },
       );
 
       expect(phrases, isNotEmpty);
       expect(
         phrases.map((p) => p.toLowerCase()).join(' '),
-        contains('multi-pots several pots'),
+        contains('multi-pots clay pots'),
       );
     });
 
@@ -131,6 +133,8 @@ void main() {
         {
           'android_material_design_spinner': 'Multiple',
           'EtMultipleNumber': 'three',
+          'pot_clay': 'true',
+          'st_brick': 'true',
         },
       );
 
@@ -138,7 +142,7 @@ void main() {
       expect(phrases.first.toLowerCase(), contains('multi-stack'));
       expect(
         phrases.map((p) => p.toLowerCase()).join(' '),
-        contains('multi-pots several pots'),
+        contains('multi-pots clay pots'),
       );
     });
   });

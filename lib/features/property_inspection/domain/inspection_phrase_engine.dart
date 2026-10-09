@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import '../../../core/utils/number_to_words.dart';
 
+part 'inspection_verbatim_spec.dart';
+
 class InspectionPhraseEngine {
   const InspectionPhraseEngine(this._phraseTexts);
 
@@ -16,7 +18,11 @@ class InspectionPhraseEngine {
     return _refinePhrases(
       screenId,
       answers,
-      _buildPhrasesRaw(screenId, answers),
+      [
+        ..._verbatimPhrases(screenId, answers, first: true),
+        ..._buildPhrasesRaw(screenId, answers),
+        ..._verbatimPhrases(screenId, answers, first: false),
+      ],
     );
   }
 
@@ -483,7 +489,8 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_rendering':
         return _chimneyRendering(answers);
       case 'activity_outside_property_water_proofing':
-        return _chimneyWaterProofing(answers);
+        // Flashings / flaunching / pointing / pots: PDF-driven rules.
+        return const [];
       case 'activity_outside_property_condition':
         return _chimneyCondition(answers);
       case 'activity_outside_property_shared_chimney':
@@ -1447,25 +1454,8 @@ class InspectionPhraseEngine {
     final phraseCode = _chimneyPhraseCode(isMulti);
     final phrases = <String>[];
 
-    var stackTemplate = _sub(phraseCode, '{STACK}');
-    if (stackTemplate.isNotEmpty) {
-      if (isMulti) {
-        final count = _cleanLower(answers['EtMultipleNumber']);
-        stackTemplate =
-            stackTemplate.replaceAll('{CS_STACK_MULTIPLE_NUMBER}', count);
-      }
-      phrases.addAll(_split(_normalize(stackTemplate)));
-    }
-
-    final pots = _cleanLower(answers['android_material_design_spinner2']);
-    var potsTemplate = _sub(phraseCode, '{STACK_POTS}');
-    final shouldEmitPots = isMulti || pots.isNotEmpty;
-    if (potsTemplate.isNotEmpty && shouldEmitPots) {
-      if (!isMulti) {
-        potsTemplate = potsTemplate.replaceAll('{CS_POTS}', pots);
-      }
-      phrases.addAll(_split(_normalize(potsTemplate)));
-    }
+    // Description (construction / appearance) and Pots are PDF-driven rules
+    // in inspection_verbatim_spec.dart.
 
     final rendering = _cleanLower(answers['android_material_design_spinner4']);
     if (rendering.isNotEmpty) {
@@ -1529,143 +1519,6 @@ class InspectionPhraseEngine {
     return _split(_normalize(template));
   }
 
-  List<String> _chimneyWaterProofing(Map<String, String> answers) {
-    // Flashings and flaunching are independent (PDF E1): each part is emitted
-    // when its own selection exists. Legacy ids (lead and mortar, flaunching
-    // lead) are still read so previously saved surveys keep rendering.
-    final flashing = _labelsFor(
-      [
-        'ch1',
-        'ch_flashing_lead_substitute',
-        'ch2',
-        'ch3',
-        'ch_flashing_bricks',
-        'ch4',
-      ],
-      answers,
-      {
-        'ch1': 'lead',
-        'ch_flashing_lead_substitute': 'lead substitute',
-        'ch2': 'mortar',
-        'ch3': 'lead and mortar',
-        'ch_flashing_bricks': 'bricks',
-        'ch4': 'tiles',
-      },
-    );
-    _addOther(answers, 'ch5', 'etGroundTypeOther', flashing);
-
-    final flaunching = _labelsFor(
-      [
-        'ch6',
-        'ch7',
-        'ch8',
-        'ch_flaunching_bricks',
-        'ch_flaunching_concrete',
-        'ch9',
-      ],
-      answers,
-      {
-        'ch6': 'lead',
-        'ch7': 'mortar',
-        'ch8': 'lead and mortar',
-        'ch_flaunching_bricks': 'bricks',
-        'ch_flaunching_concrete': 'concrete',
-        'ch9': 'tiles',
-      },
-    );
-    _addOther(answers, 'ch10', 'etFlaunchingOther', flaunching);
-
-    final phraseCode = _chimneyPhraseCodeFromAnswers(
-      answers,
-      fallbackIsMulti: false,
-    );
-    final phrases = <String>[];
-
-    String part(String subCode, Map<String, String> tokens) {
-      var template = _sub(phraseCode, subCode);
-      if (template.isEmpty) return '';
-      tokens.forEach((token, value) {
-        template = template.replaceAll(token, value);
-      });
-      return template;
-    }
-
-    if (flashing.isNotEmpty) {
-      phrases.addAll(_split(_normalize(part('{WATERPROOFING_FLASHING}', {
-        '{CS_WATERPROOFING_FLASHING_FORMED_IN}':
-            _toWords(flashing).toLowerCase(),
-      }))));
-      final condition = _cleanLower(answers['actv_flashing_condition']);
-      if (condition.isNotEmpty) {
-        phrases.addAll(
-            _split(_normalize(part('{WATERPROOFING_FLASHING_CONDITION}', {
-          '{CS_WATERPROOFING_FLASHING_CONDITION}': condition,
-        }))));
-      }
-    }
-    if (flaunching.isNotEmpty) {
-      phrases.addAll(_split(_normalize(part('{WATERPROOFING_FLAUNCHING}', {
-        '{CS_WATERPROOFING_FLAUNCHING_FORMED_IN}':
-            _toWords(flaunching).toLowerCase(),
-      }))));
-      final condition = _cleanLower(answers['actv_flaunching_condition']);
-      if (condition.isNotEmpty) {
-        phrases.addAll(
-            _split(_normalize(part('{WATERPROOFING_FLAUNCHING_CONDITION}', {
-          '{CS_WATERPROOFING_FLAUNCHING_CONDITION}': condition,
-        }))));
-      }
-    }
-    final pointing = _labelsFor(
-      const [
-        'pt_good',
-        'pt_reasonable',
-        'pt_weathered',
-        'pt_eroded',
-        'pt_poor',
-      ],
-      answers,
-      const {
-        'pt_good': 'good',
-        'pt_reasonable': 'reasonable',
-        'pt_weathered': 'weathered',
-        'pt_eroded': 'eroded',
-        'pt_poor': 'poor',
-      },
-    );
-    _addOther(answers, 'pt_other', 'et_pointing_other', pointing);
-    if (pointing.isNotEmpty) {
-      phrases.addAll(_split(_normalize(part('{POINTING_CONDITION}', {
-        '{CS_POINTING_CONDITION}': _toWords(pointing).toLowerCase(),
-      }))));
-    }
-
-    final pots = _labelsFor(
-      const [
-        'pc_secure',
-        'pc_weathered',
-        'pc_cracked',
-        'pc_damaged',
-        'pc_missing',
-      ],
-      answers,
-      const {
-        'pc_secure': 'secure',
-        'pc_weathered': 'weathered',
-        'pc_cracked': 'cracked',
-        'pc_damaged': 'damaged',
-        'pc_missing': 'missing',
-      },
-    );
-    _addOther(answers, 'pc_other', 'et_pots_other', pots);
-    if (pots.isNotEmpty) {
-      phrases.addAll(_split(_normalize(part('{POTS_CONDITION}', {
-        '{CS_POTS_CONDITION}': _toWords(pots).toLowerCase(),
-      }))));
-    }
-    return phrases;
-  }
-
   List<String> _chimneyCondition(Map<String, String> answers) {
     final condition = _cleanLower(answers['android_material_design_spinner3']);
     if (condition.isEmpty) return const [];
@@ -1714,19 +1567,12 @@ class InspectionPhraseEngine {
     final condition = _cleanLower(answers['android_material_design_spinner4']);
     if (degree.isEmpty && condition.isEmpty) return const [];
 
+    // The degree sentence is a PDF-driven rule (inspection_verbatim_spec.dart).
     final phraseCode = _chimneyPhraseCodeFromAnswers(
       answers,
       fallbackIsMulti: false,
     );
     final phrases = <String>[];
-    if (degree.isNotEmpty) {
-      var leaningTemplate = _sub(phraseCode, '{LEANING_CHIMNEY}');
-      if (leaningTemplate.isNotEmpty) {
-        leaningTemplate =
-            leaningTemplate.replaceAll('{CS_LEANING_DEGREE}', degree);
-        phrases.addAll(_split(_normalize(leaningTemplate)));
-      }
-    }
 
     if (condition.isNotEmpty) {
       final conditionCode = condition.contains('repair')
@@ -1761,13 +1607,8 @@ class InspectionPhraseEngine {
           _split(_normalize(_sub(phraseCode, '{DUMMY_CHIMNEY_BREAST}'))));
     }
 
-    if (_isChecked(answers['cb_Partial_view']) ||
-        _isChecked(answers['cbPartial_view'])) {
-      final template = _sub(phraseCode, '{PARTIAL_VIEW}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
+    // "Not fully inspected" (with its reasons) is a PDF-driven rule in
+    // inspection_verbatim_spec.dart.
 
     if (_isChecked(answers['cb_Removed_chimney_stack'])) {
       final locations = _labelsFor(

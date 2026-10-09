@@ -1,6 +1,6 @@
 # Phrase Permutation Audit Summary
 
-Generated: 2026-10-09T11:38:43.403622
+Generated: 2026-10-09T11:49:22.374352
 
 ## Inspection tree
 
@@ -13,9 +13,9 @@ Generated: 2026-10-09T11:38:43.403622
 | Grammar smells | 0 |
 | Placeholder leaks | 0 |
 | Engine errors | 0 |
-| Distinct phrases emitted | 2627 |
+| Distinct phrases emitted | 2632 |
 | Matching legacy approved bank | 643 |
-| Matching current bank only (edited) | 1957 |
+| Matching current bank only (edited) | 1962 |
 | Unapproved (engine-invented) | 0 |
 
 ### Top findings

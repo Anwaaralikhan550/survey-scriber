@@ -17,6 +17,7 @@ over the auto proposal.
 import csv
 import hashlib
 import os
+import re
 import sys
 
 from rapidfuzz import fuzz, process
@@ -43,6 +44,24 @@ def load_decisions():
     return out
 
 
+SPEC = 'lib/features/property_inspection/domain/inspection_verbatim_spec.dart'
+BS = chr(92)  # backslash, avoids escaping trouble in the patterns below
+_LIT = re.compile(r"pdf:\s*((?:'(?:[^'" + BS + BS + r"]|" + BS + BS + r".)*'\s*)+),")
+_ONE = re.compile(r"'((?:[^'" + BS + BS + r"]|" + BS + BS + r".)*)'")
+
+
+def spec_pdf_sentences():
+    """PDF option-list sentences declared by verbatim rules (Dart source)."""
+    if not os.path.exists(SPEC):
+        return set()
+    src = open(SPEC, encoding='utf-8').read()
+    out = set()
+    for m in _LIT.finditer(src):
+        text = ''.join(x.replace(BS + "'", "'") for x in _ONE.findall(m.group(1)))
+        out.add(norm(text))
+    return out
+
+
 def build():
     bank = load_bank()
     pdf = load_pdf()
@@ -50,16 +69,21 @@ def build():
     sm = ScopedMatcher(bank, pdf)
     cidx = bank_case_index(bank)
     decisions = load_decisions()
+    ruled = spec_pdf_sentences()
+    seen_pdf = set()
     rows = []
     for e in pdf['entries']:
         for s in sentences(e['rawBlock']):
             n = norm(s)
             rid = row_id(e['key'], s)
             key, score = '', 0
-            if is_menu_or_directive(n):
+            if n in ruled or is_menu_or_directive(n):
                 # option list / directive: its options must be implemented in the
                 # form exactly as the PDF lists them (plan T3). Not verified yet.
                 disp, status = 'MENU', 'UNVERIFIED'
+                if n in ruled:
+                    status = 'VERIFIED'  # implemented by a rule + generated T3/T5 tests
+                    seen_pdf.add(n)
             elif n in idx and any(c[1:] == cnorm(s)[1:] for c in cidx[n]):
                 # exact incl. capitals and punctuation (first letter may differ)
                 disp, status, key, score = 'EXACT', 'DONE', idx[n][0], 100
@@ -75,6 +99,11 @@ def build():
                 disp = d['disposition']
                 status = 'DONE' if disp in DONE_BY_HAND else 'OPEN'
             rows.append([rid, e['key'], s, disp, key, score, status])
+    missing = ruled - seen_pdf
+    if missing:
+        print('WARNING: rule pdf text not found as an option-list row in the PDF:')
+        for m in sorted(missing):
+            print('   ', m[:120])
     return rows
 
 
@@ -92,10 +121,11 @@ def main():
         by[r[3]] = by.get(r[3], 0) + 1
     open_rows = [r for r in rows if r[6] == 'OPEN']
     unverified = [r for r in rows if r[6] == 'UNVERIFIED']
+    verified = [r for r in rows if r[6] == 'VERIFIED']
     print(f'ledger rows: {len(rows)}  (prose {len(prose)}, menu/directive {len(rows)-len(prose)})')
     for k in sorted(by):
         print(f'  {k:11} {by[k]:5}  {by[k]*100/len(prose):5.1f}%')
-    print(f'OPEN prose rows: {len(open_rows)}   |   UNVERIFIED option-list rows (T3): {len(unverified)}')
+    print(f'OPEN prose rows: {len(open_rows)}   |   UNVERIFIED option-list rows (T3): {len(unverified)}  (VERIFIED by rules: {len(verified)})')
     secs = {}
     for r in open_rows:
         secs[r[1]] = secs.get(r[1], 0) + 1
