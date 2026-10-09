@@ -6455,167 +6455,140 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_main_electricity",
-              "label": "Main Electricity",
+              "id": "label_ele_meter_location",
+              "label": "Meter located",
               "type": "label"
             },
             {
-              "id": "cb_electricity_not_inspected",
-              "label": "Electricity Not Inspected",
+              "id": "g1m_under_the_stairs",
+              "label": "under the stairs",
               "type": "checkbox"
             },
             {
-              "id": "label_meter_location",
-              "label": "Meter location",
-              "type": "label",
-              "conditionalOn": "!cb_electricity_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1m_in_an_outside_box",
+              "label": "in an outside box",
+              "type": "checkbox"
             },
             {
-              "id": "cb_under_the_stairs_40",
-              "label": "Under the stairs",
-              "type": "checkbox",
-              "conditionalOn": "!cb_electricity_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1m_in_the_entrance_hall",
+              "label": "in the entrance hall",
+              "type": "checkbox"
             },
             {
-              "id": "cb_in_an_outside_box_21",
-              "label": "In an outside box",
-              "type": "checkbox",
-              "conditionalOn": "!cb_electricity_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1m_in_the_kitchen",
+              "label": "in the kitchen",
+              "type": "checkbox"
             },
             {
-              "id": "cb_in_the_entrance_hall_13",
-              "label": "In the entrance hall",
-              "type": "checkbox",
-              "conditionalOn": "!cb_electricity_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1m_in_the_garage",
+              "label": "in the garage",
+              "type": "checkbox"
             },
             {
-              "id": "cb_in_the_kitchen_29",
-              "label": "In the kitchen",
-              "type": "checkbox",
-              "conditionalOn": "!cb_electricity_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_in_the_garage_49",
-              "label": "In the garage",
-              "type": "checkbox",
-              "conditionalOn": "!cb_electricity_not_inspected",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_in_the_communal_cupboard_21",
-              "label": "In the communal cupboard",
-              "type": "checkbox",
-              "conditionalOn": "!cb_electricity_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1m_in_a_communal_cupboard",
+              "label": "in a communal cupboard",
+              "type": "checkbox"
             },
             {
               "id": "cb_other_387",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!cb_electricity_not_inspected",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
               "id": "et_other_564",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_387 & !cb_electricity_not_inspected",
+              "conditionalOn": "cb_other_387",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_fuse",
-              "label": "Fuse",
-              "type": "label"
-            },
-            {
-              "id": "cb_fuse_not_inspected",
-              "label": "Fuse Not Inspected",
+              "id": "cb_electricity_not_inspected",
+              "label": "Meter not found",
               "type": "checkbox"
             },
             {
-              "id": "label_fuse_box_location",
-              "label": "Fuse box location",
-              "type": "label",
-              "conditionalOn": "!cb_fuse_not_inspected",
-              "conditionalMode": "show"
+              "id": "label_ele_cu_location",
+              "label": "Consumer unit installed",
+              "type": "label"
             },
             {
-              "id": "cb_in_an_outside_box_54",
-              "label": "Under the stairs",
-              "type": "checkbox",
-              "conditionalOn": "!cb_fuse_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1c_under_the_stairs",
+              "label": "under the stairs",
+              "type": "checkbox"
             },
             {
-              "id": "cb_in_the_entrance_hall_83",
-              "label": "In the entrance hall",
-              "type": "checkbox",
-              "conditionalOn": "!cb_fuse_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1c_in_the_entrance_hall",
+              "label": "in the entrance hall",
+              "type": "checkbox"
             },
             {
-              "id": "cb_in_the_kitchen_73",
-              "label": "In the kitchen",
-              "type": "checkbox",
-              "conditionalOn": "!cb_fuse_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1c_in_the_kitchen",
+              "label": "in the kitchen",
+              "type": "checkbox"
             },
             {
-              "id": "cb_in_the_garage_66",
-              "label": "In the garage",
-              "type": "checkbox",
-              "conditionalOn": "!cb_fuse_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1c_in_the_garage",
+              "label": "in the garage",
+              "type": "checkbox"
             },
             {
-              "id": "cb_in_the_communal_cupboard_33",
-              "label": "In the communal cupboard",
-              "type": "checkbox",
-              "conditionalOn": "!cb_fuse_not_inspected",
-              "conditionalMode": "show"
+              "id": "g1c_in_a_communal_cupboard",
+              "label": "in a communal cupboard",
+              "type": "checkbox"
             },
             {
               "id": "cb_other_717",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!cb_fuse_not_inspected",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
               "id": "et_other_618",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_717 & !cb_fuse_not_inspected",
+              "conditionalOn": "cb_other_717",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_dated_electrical_system",
-              "label": "Dated electrical system",
+              "id": "cb_fuse_not_inspected",
+              "label": "Consumer unit not found",
               "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_electricity_repair_loose_panels",
-          "title": "Loose solar panels",
-          "type": "screen",
-          "parentId": "group_repairs_87",
-          "order": 2,
-          "fields": [
+            },
             {
-              "id": "actv_defect",
-              "label": "Defect",
-              "type": "dropdown",
-              "options": [
-                "Not Secure",
-                "Not Properly Fixed",
-                "Other"
-              ]
+              "id": "label_ele_rcd",
+              "label": "The consumer unit incorporates",
+              "type": "label"
+            },
+            {
+              "id": "g1r_rcd_protection",
+              "label": "RCD protection",
+              "type": "checkbox"
+            },
+            {
+              "id": "g1r_rcbo_protection",
+              "label": "RCBO protection",
+              "type": "checkbox"
+            },
+            {
+              "id": "g1r_surge_protection",
+              "label": "surge protection",
+              "type": "checkbox"
+            },
+            {
+              "id": "g1r_no_visible_rcd_protection",
+              "label": "no visible RCD protection",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_dated_electrical_system",
+              "label": "Dated or old installation",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_general_maintenance",
+              "label": "General maintenance",
+              "type": "checkbox"
             }
           ]
         },
@@ -6627,93 +6600,84 @@
           "order": 2,
           "fields": [
             {
-              "id": "actv_condition",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Ok",
-                "Not Inspected",
-                "No Gas Installation"
-              ]
-            },
-            {
-              "id": "label_gas_location",
-              "label": "Mains gas meter and control valve are located at location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Ok",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_mains_gas_meter_and_control_valve_location",
-              "label": "Mains Gas Meter and Control valve location",
-              "type": "label"
-            },
-            {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "is under the stairs",
-                "is in an outside box",
-                "is in the entrance hall",
-                "is in the kitchen",
-                "is in the garage",
-                "is in the communal cupboard",
-                "Other"
-              ],
-              "conditionalOn": "actv_condition=Ok",
-              "conditionalMode": "show"
-            },
-            {
               "id": "cb_gas_smell_noted",
               "label": "Gas smell noted",
               "type": "checkbox"
             },
             {
               "id": "cb_gas_supply_is_capped_off",
-              "label": "Gas supply is capped off",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_gas_oil_repair_gas_meter",
-          "title": "Gas Meter Repair",
-          "type": "screen",
-          "parentId": "group_repairs_90",
-          "order": 2,
-          "fields": [
-            {
-              "id": "label_gas_meter_defect",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_loose",
-              "label": "Loose",
+              "label": "Capped gas",
               "type": "checkbox"
             },
             {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
+              "id": "actv_condition",
+              "label": "Gas meter",
+              "type": "dropdown",
+              "options": [
+                "Metre",
+                "Metre not found"
+              ]
             },
             {
-              "id": "cb_badly_rusted",
-              "label": "Badly rusted",
-              "type": "checkbox"
+              "id": "label_gas_meter_location",
+              "label": "Meter located",
+              "type": "label",
+              "conditionalOn": "actv_condition=Metre",
+              "conditionalMode": "show"
             },
             {
-              "id": "cb_other_309",
+              "id": "g2m_under_the_stairs",
+              "label": "under the stairs",
+              "type": "checkbox",
+              "conditionalOn": "actv_condition=Metre",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g2m_in_an_outside_box",
+              "label": "in an outside box",
+              "type": "checkbox",
+              "conditionalOn": "actv_condition=Metre",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g2m_in_the_kitchen",
+              "label": "in the kitchen",
+              "type": "checkbox",
+              "conditionalOn": "actv_condition=Metre",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g2m_in_the_garage",
+              "label": "in the garage",
+              "type": "checkbox",
+              "conditionalOn": "actv_condition=Metre",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g2m_in_a_communal_cupboard",
+              "label": "in a communal cupboard",
+              "type": "checkbox",
+              "conditionalOn": "actv_condition=Metre",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g2m_other",
               "label": "Other",
-              "type": "checkbox"
+              "type": "checkbox",
+              "conditionalOn": "actv_condition=Metre",
+              "conditionalMode": "show"
             },
             {
-              "id": "et_other_595",
+              "id": "g2m_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_309",
+              "conditionalOn": "actv_condition=Metre&g2m_other",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_dated_gas",
+              "label": "Dated or old",
+              "type": "checkbox"
             }
           ]
         },
@@ -6778,60 +6742,23 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_pv_installed_location",
-              "label": "Photovoltaic panels installed location",
+              "id": "cb_solar_pv",
+              "label": "Solar photovoltaic (PV) system",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_ele_battery_location",
+              "label": "Battery/inverter in",
               "type": "label"
             },
             {
-              "id": "cb_front",
-              "label": "Front",
+              "id": "g1b_loft",
+              "label": "loft",
               "type": "checkbox"
             },
             {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_783",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_506",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_783",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_reasonable_condition",
-              "label": "Reasonable condition",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_battery_location",
-              "label": "Battery location",
-              "type": "label"
-            },
-            {
-              "id": "cb_loft",
-              "label": "Loft",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_garage",
-              "label": "Garage",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bedroom",
-              "label": "Bedroom",
+              "id": "g1b_under_the_stairs",
+              "label": "under the stairs",
               "type": "checkbox"
             },
             {
@@ -6844,6 +6771,7 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_870",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -6863,18 +6791,28 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_electrical_hazard",
-              "label": "Electrical system is below current standards because of",
+              "id": "label_ele_poor_standards",
+              "label": "Electrical system is below current standards because",
               "type": "label"
             },
             {
-              "id": "cb_exposed_wires",
-              "label": "Exposed wires",
+              "id": "g1p_exposed_wires",
+              "label": "exposed wires",
               "type": "checkbox"
             },
             {
-              "id": "cb_damaged_fittings",
-              "label": "Damaged fittings",
+              "id": "g1p_damaged_fittings",
+              "label": "damaged fittings",
+              "type": "checkbox"
+            },
+            {
+              "id": "g1p_cracked_fixtures",
+              "label": "cracked fixtures",
+              "type": "checkbox"
+            },
+            {
+              "id": "g1p_diy_work",
+              "label": "DIY work",
               "type": "checkbox"
             },
             {
@@ -6887,6 +6825,7 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_685",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -6989,30 +6928,6 @@
           "inlinePosition": "header"
         },
         {
-          "id": "activity_services_gas_oil",
-          "title": "Gas and Oil",
-          "type": "screen",
-          "parentId": "group_gas_and_oil_89",
-          "order": 0,
-          "fields": [
-            {
-              "id": "label_mains_gas",
-              "label": "Mains Gas",
-              "type": "label"
-            },
-            {
-              "id": "label_oil",
-              "label": "Oil",
-              "type": "label"
-            },
-            {
-              "id": "cb_old_tank_but_ok",
-              "label": "Old Tank But OK",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
           "id": "activity_services_oil",
           "title": "Oil",
           "type": "screen",
@@ -7020,45 +6935,70 @@
           "order": 4,
           "fields": [
             {
-              "id": "actv_oil_tank_status",
-              "label": "Oil Tank Status",
-              "type": "dropdown",
-              "options": [
-                "Inspected",
-                "Not Inspected"
-              ]
+              "id": "label_oil_tank_type",
+              "label": "Fuel storage tank",
+              "type": "label"
             },
             {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Front garden",
-                "Rear garden",
-                "Side garden",
-                "Other"
-              ],
-              "conditionalOn": "actv_oil_tank_status=Inspected",
+              "id": "g2t_plastic",
+              "label": "plastic",
+              "type": "checkbox"
+            },
+            {
+              "id": "g2t_metal",
+              "label": "metal",
+              "type": "checkbox"
+            },
+            {
+              "id": "g2t_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g2t_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g2t_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "actv_oil_tank_made_up_of",
-              "label": "Oil Tank Made Up of",
-              "type": "dropdown",
-              "options": [
-                "Plastic",
-                "Metal",
-                "Other"
-              ],
-              "conditionalOn": "actv_oil_tank_status=Inspected",
+              "id": "label_oil_tank_location",
+              "label": "Tank located at the",
+              "type": "label"
+            },
+            {
+              "id": "g2l_front_garden",
+              "label": "front garden",
+              "type": "checkbox"
+            },
+            {
+              "id": "g2l_side_garden",
+              "label": "side garden",
+              "type": "checkbox"
+            },
+            {
+              "id": "g2l_rear_garden",
+              "label": "rear garden",
+              "type": "checkbox"
+            },
+            {
+              "id": "g2l_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g2l_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g2l_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_nearby_watercourse",
-              "label": "Stream, river or open drain nearby",
-              "type": "checkbox",
-              "conditionalOn": "actv_oil_tank_status=Inspected",
-              "conditionalMode": "show"
+              "id": "cb_old_tank",
+              "label": "Old tank",
+              "type": "checkbox"
             }
           ]
         },
@@ -7068,79 +7008,6 @@
           "type": "group",
           "parentId": "group_g2_gas_and_oil_88",
           "order": 4
-        },
-        {
-          "id": "activity_services_gas_oil_repair_storage_tank_pipework",
-          "title": "Oil Storage Tank and Pipework Repair",
-          "type": "screen",
-          "parentId": "group_repairs_90",
-          "order": 4,
-          "fields": [
-            {
-              "id": "label_storage_item",
-              "label": "Item",
-              "type": "label"
-            },
-            {
-              "id": "cb_storage_tank",
-              "label": "Tank",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_pipework",
-              "label": "Pipework",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_316",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_537",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_316",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_storage_defect",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_corroded",
-              "label": "Corroded",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_poorly_supported",
-              "label": "Poorly supported",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_961",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_421",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_961",
-              "conditionalMode": "show"
-            }
-          ]
         },
         {
           "id": "activity_services_heating_repair_main_screen",
@@ -7696,20 +7563,6 @@
           ]
         },
         {
-          "id": "activity_services_electricity_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_g1_electricity_85",
-          "order": 8,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
           "id": "group_g4_heating_92",
           "title": "G4 Heating",
           "type": "group",
@@ -7852,7 +7705,7 @@
           "fields": [
             {
               "id": "cb_solar_power",
-              "label": "Solar Power",
+              "label": "Solar thermal (hot water)",
               "type": "checkbox"
             }
           ]
@@ -8133,27 +7986,6 @@
                 "2",
                 "3"
               ]
-            }
-          ]
-        },
-        {
-          "id": "activity_services_gas_oil_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_g2_gas_and_oil_88",
-          "order": 23,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_not_inspected_no_gas",
-              "label": "Not Gas",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_inspected",
-              "conditionalMode": "show"
             }
           ]
         },

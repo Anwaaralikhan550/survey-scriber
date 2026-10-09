@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 396,
+  "screensAudited": 390,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2346,
-   "approvedLegacyBank": 581,
-   "approvedCurrentBankOnly": 1738,
+   "distinctEmitted": 2324,
+   "approvedLegacyBank": 561,
+   "approvedCurrentBankOnly": 1736,
    "unapproved": 0
   }
  },
@@ -1280,80 +1280,49 @@
    "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 5,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 0,
     "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The electrical installation was inspected visually only. Visible components include the consumer unit, switchgear, socket outlets, lighting points and exposed wiring where accessible. The installation was not tested for safety, efficiency, adequacy or compliance with current regulations. I recommend a full test and inspection by an appropriately qualified electrician before legal commitment, and any recommendations arising from that test should be carried out."
-   ]
+   }
   },
   {
    "sectionKey": "G",
    "screenId": "activity_service_about_electricity",
    "title": "Mains Electricity",
-   "dataFieldCount": 18,
-   "permutationCount": 20,
+   "dataFieldCount": 23,
+   "permutationCount": 25,
    "severities": [],
    "phraseStats": {
-    "total": 14,
+    "total": 22,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 14,
+    "approvedCurrentBankOnly": 22,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The mains electricity meter could not be located during my inspection. You should ask the vendor to confirm its location, as this is important for you to know.",
-    "The property is supplied with mains electricity, and the meter is located under the stairs.",
-    "The property is supplied with mains electricity, and the meter is located in an outside box."
+    "Metre: There is a mains electricity supply connected to the property, and the meter unit is located under the stairs.",
+    "Metre: There is a mains electricity supply connected to the property, and the meter unit is located in an outside box.",
+    "Metre: There is a mains electricity supply connected to the property, and the meter unit is located in the entrance hall."
    ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_electricity_repair_loose_panels",
-   "title": "Loose solar panels",
-   "dataFieldCount": 1,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
   },
   {
    "sectionKey": "G",
    "screenId": "activity_services_main_gas",
    "title": "Mains Gas",
-   "dataFieldCount": 4,
-   "permutationCount": 22,
+   "dataFieldCount": 11,
+   "permutationCount": 15,
    "severities": [],
    "phraseStats": {
-    "total": 11,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 9,
+    "total": 5,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The mains gas meter could not be located during my inspection. You should ask the vendor to confirm its location, as this is important for you to know.",
-    "No Gas Supply: The property has no gas supply connected at the time of my inspection.",
-    "The property is supplied with mains gas, and the meter and control valve are located under the stairs. No visible evidence of leakage or other significant defects was noted. The property must be maintained in the normal way."
+    "Gas smell noted: Gas smell was noted during my inspection. This is a serious problem and should be resolved now.",
+    "Capped gas: The gas supply is capped off. You should ask an appropriately qualified person to inspect the gas installation system.",
+    "Metre not found: I did not find the gas meter. Please ask the vendor about the location of the gas meter, as you must know where it is located."
    ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_gas_oil_repair_gas_meter",
-   "title": "Gas Meter Repair",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
   },
   {
    "sectionKey": "G",
@@ -1404,34 +1373,39 @@
    "sectionKey": "G",
    "screenId": "activity_services_solar_power",
    "title": "Solar Power",
-   "dataFieldCount": 11,
-   "permutationCount": 13,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 11,
-    "approvedLegacy": 6,
-    "approvedCurrentBankOnly": 5,
+    "total": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Solar Electricity: The electrical supply is supplemented by photovoltaic panels installed on the front roof slope(s). This feature uses sunlight to generate electricity for the property, with any surplus potentially exported to the National Grid. No significant defects were apparent from the limited visual inspection. Routine maintenance should be carried out in accordance with the manufacturer’s recommendations.",
-    "I did not see any evidence as proof that the system has been installed by an appropriately qualified person, however my inspection did not reveal any concerns. You should ask your legal adviser to confirm whether the installation has appropriate planning and building regulation approvals from the local council (See Section I1 - Regulations). If not, the council may require it to be altered or removed completely. Also, check if any warranty/guarantee exists for the installation.",
-    "Solar Electricity: The electrical supply is supplemented by photovoltaic panels installed on the side roof slope(s). This feature uses sunlight to generate electricity for the property, with any surplus potentially exported to the National Grid. No significant defects were apparent from the limited visual inspection. Routine maintenance should be carried out in accordance with the manufacturer’s recommendations."
+    "Solar photovoltaic (PV) system: The property is fitted with photovoltaic (PV) panels installed on the roof slope(s). These generate electricity for use within the property, with any surplus potentially exported to the National Grid. No significant defects were apparent from the limited visual inspection. Routine maintenance should be carried out in accordance with the manufacturer's recommendations.",
+    "Battery storage/Inverter: A solar battery and/or inverter is in the loft. These components were not assessed, and no comment can be made on their operation, performance, or remaining service life.",
+    "Battery storage/Inverter: A solar battery and/or inverter is in the under the stairs. These components were not assessed, and no comment can be made on their operation, performance, or remaining service life."
    ]
   },
   {
    "sectionKey": "G",
    "screenId": "activity_services_electricity_repair_electrical_hazard",
    "title": "Electrical Hazard",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
+   "dataFieldCount": 6,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "total": 5,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Poor Standards: The electrical system is below current standards because there are exposed wires issues, and this is a safety hazard. You should ask an appropriately qualified person to inspect the electrical system and carry out required repairs or replacement(s). Although I do not know the extent of the repair and improvement works required, you should plan for partial or complete replacement.",
+    "Poor Standards: The electrical system is below current standards because there are damaged fittings issues, and this is a safety hazard. You should ask an appropriately qualified person to inspect the electrical system and carry out required repairs or replacement(s). Although I do not know the extent of the repair and improvement works required, you should plan for partial or complete replacement.",
+    "Poor Standards: The electrical system is below current standards because there are cracked fixtures issues, and this is a safety hazard. You should ask an appropriately qualified person to inspect the electrical system and carry out required repairs or replacement(s). Although I do not know the extent of the repair and improvement works required, you should plan for partial or complete replacement."
+   ]
   },
   {
    "sectionKey": "G",
@@ -1447,59 +1421,27 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property's gas and oil installations were inspected visually only. Visible gas pipework, meters, and associated fittings were inspected where accessible; the oil supply (where present) was inspected in the same way. These installations and their appliances were not tested, and their safety, efficiency and compliance with current regulations cannot be confirmed. A Gas Safe registered engineer (or, for oil, an OFTEC-registered technician) should inspect and test the installation before legal commitment where there is any doubt regarding its age, condition or maintenance history, and all recommendations arising from that inspection should be carried out.",
-    "The engineer should leave appropriate documentation with the homeowner that identifies the type and extent of the work done. This should include all heating systems and appliances, for example, boilers, individual room heaters, all open fires, etc."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_gas_oil",
-   "title": "Gas and Oil",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Although I could see no problems with the existing tank, it is older, has a single skin (modern ones have a double skin) and no secondary containment. If your property is close to a stream or watercourse, when the tank is replaced, you will have to meet the current requirements. If you want to be sure, you should ask an appropriately qualified person to inspect the oil installation system now."
+    "Testing: The gas installation and appliances were not assessed during this inspection. If satisfactory evidence of recent inspection or servicing is unavailable, a Gas Safe (or OFTEC for oil-fired systems) registered engineer should inspect and test the installation before legal purchase commitment and recommend any necessary remedial works.",
+    "Certification: The homeowner should be able to provide appropriate servicing and inspection records for the heating system and associated appliances, including boilers, fires, and other fixed heating appliances. Your legal adviser should verify that these documents are available before exchange of contracts."
    ]
   },
   {
    "sectionKey": "G",
    "screenId": "activity_services_oil",
    "title": "Oil",
-   "dataFieldCount": 4,
-   "permutationCount": 18,
-   "severities": [],
-   "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 7,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "There is a fuel oil storage tank in the front garden made up of plastic. No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended. Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer. Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak. Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment.",
-    "Where a stream, river or open drain is nearby, the oil storage tank may require secondary containment to prevent a spill entering the water system. This is commonly called a bund and should be assessed by an OFTEC-registered technician.",
-    "There is a fuel oil storage tank in the rear garden made up of plastic. No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended. Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer. Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak. Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_gas_oil_repair_storage_tank_pipework",
-   "title": "Oil Storage Tank and Pipework Repair",
    "dataFieldCount": 10,
    "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
+    "total": 2,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Old tank: Although I could see no problems with the existing tank, it is older, has a single skin (modern ones have a double skin) and no secondary containment. If your property is close to a stream or watercourse, when the tank is replaced, you will have to meet the current requirements. If you want to be sure, you should ask an appropriately qualified person to inspect the oil installation system now.",
+    "Oil tank: The property is served by an oil-fired heating system with a plastic, metal and sample detail fuel storage tank located at the front garden, side garden, rear garden and sample detail. No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended. Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer. Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak. Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment."
+   ]
   },
   {
    "sectionKey": "G",
@@ -1746,23 +1688,6 @@
   },
   {
    "sectionKey": "G",
-   "screenId": "activity_services_electricity_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The electrical installation could not be inspected. As it is not accessible, it should be inspected and tested by an appropriately qualified electrician before legal commitment."
-   ]
-  },
-  {
-   "sectionKey": "G",
    "screenId": "activity_services_heating_main_screen",
    "title": "Heating",
    "dataFieldCount": 2,
@@ -1836,14 +1761,13 @@
    "permutationCount": 3,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Solar Water Heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply. The installation was inspected visually only, and no operational testing or assessment of performance was undertaken. Routine maintenance should be carried out in accordance with the manufacturer’s recommendations.",
-    "The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection. Your legal adviser should verify that any required Building Regulations approval, commissioning documentation and any available warranties or guarantees are provided (See Section I1 - Regulations)."
+    "Solar thermal (hot water): The property is fitted with solar thermal panels installed on the roof slope(s). These use solar energy to heat water for the domestic hot water system. No significant defects were apparent from the limited visual inspection. Routine maintenance should be carried out in accordance with the manufacturer's recommendations. The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection. Your legal adviser should verify that appropriate planning permission (where required), Building Regulations approval, commissioning certificates and any applicable MCS certification are available (see Section I1 – Regulations). They should also confirm whether transferable warranties or guarantees exist for the installation (see Section I2 – Guarantees). If the necessary approvals or certification are unavailable, further investigation should be undertaken before legal purchase commitment."
    ]
   },
   {
@@ -1946,23 +1870,6 @@
     "approvedCurrentBankOnly": 0,
     "unapproved": 0
    }
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_gas_oil_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 2,
-   "permutationCount": 4,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The gas and oil installations could not be inspected. As they are not accessible, they should be inspected and tested by an appropriately qualified Gas Safe or OFTEC-registered engineer before legal commitment."
-   ]
   },
   {
    "sectionKey": "G",

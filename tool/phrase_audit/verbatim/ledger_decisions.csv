@@ -583,3 +583,5 @@ c054c7a162,TESTED,inspection_verbatim_f_test: fixed prose wrongly detected as op
 fbc1e22a06,HEADING,directive (door operation add-on); rule f7_door_op_add
 c820d52b8b,TESTED,inspection_verbatim_f_test (F7 door add-on)
 cdf6ebd40f,TESTED,inspection_verbatim_f_test (F8 intro)
+70b429f4c7,ACCEPT,identical to PDF: the pointer (see Section ...) is part of the PDF sentence and is kept in the bank
+e510708c55,ACCEPT,identical to PDF: the pointer (see Section ...) is part of the PDF sentence and is kept in the bank

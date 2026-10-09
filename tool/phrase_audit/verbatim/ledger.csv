@@ -1262,7 +1262,7 @@ b3cac61195,F7,"Where active infestation is suspected, or significant timber dete
 74d4947158,F7,Moving parts should be adjusted and lubricated where necessary.,EXACT,{F_WOODWORK}::{F7_GENERAL_MAINTENANCE},100,DONE
 b7da278bf0,F7,Timber should be redecorated periodically to protect exposed surfaces.,EXACT,{F_WOODWORK}::{F7_GENERAL_MAINTENANCE},100,DONE
 bdfce26677,F7,Any source of moisture should be addressed promptly to minimise the risk of timber deterioration.,EXACT,{F_WOODWORK}::{F7_GENERAL_MAINTENANCE},100,DONE
-cdf6ebd40f,F8,"The inspection was limited by stored items, fixed furniture, bath panels, boxed-in pipework, restricted access, or sealed fittings.",MENU,,0,UNVERIFIED
+cdf6ebd40f,F8,"The inspection was limited by stored items, fixed furniture, bath panels, boxed-in pipework, restricted access, or sealed fittings.",MENU,,0,VERIFIED
 1f36a094f5,F8,"Concealed plumbing, waste pipework, and waterproofing systems could not be inspected.",EXACT,{F_BATHROOM_FITTINGS}::{F8_INTRO},100,DONE
 ed87f964e5,F8,No comment can therefore be made regarding concealed defects.,EXACT,{F_BATHROOM_FITTINGS}::{F8_INTRO},100,DONE
 981f75da93,F8,The inspection was limited to a visual assessment only.,EXACT,{F_BATHROOM_FITTINGS}::{F8_INTRO},100,DONE
@@ -1332,67 +1332,67 @@ a56715f9bd,F9,Remedial works are likely to be disruptive and potentially costly.
 07dc0e6218,F9,Adequate heating and ventilation should be maintained to minimise condensation.,EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
 ca25f24f55,F9,Minor decorative defects and isolated repairs should be addressed before deterioration becomes more extensive.,EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
 fc2f5e6efc,F9,"Stored items should not obstruct inspection hatches, ventilation openings, or access to services.",EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
-1d6de9e793,F9,Condition rating 123 G Services Services are concealed within the structure and cannot be fully inspected during a Home Survey.,ADD,{F_OTHER}::{F9_CELLAR_TIMBER_DECAY},48,OPEN
+1d6de9e793,F9,Condition rating 123 G Services Services are concealed within the structure and cannot be fully inspected during a Home Survey.,ADD,{G_LIMITATIONS_STANDARD_TEXT},86,OPEN
 2b1f15138d,F9,"The inspection is visual only, and services are not assessed for safety, operation, efficiency, capacity, compliance with current regulations, or remaining service life.",MENU,,0,UNVERIFIED
-bdc7de0a87,F9,Comments are limited to the visible parts of the installation.,ADD,{F_OTHER}::{F9_CELLAR_NOT_INSPECTED},54,OPEN
-f576d24a46,F9,"Unless otherwise stated, services should be assumed to require routine maintenance appropriate to their age and use.",ADD,{F_OTHER}::{F9_GENERAL_MAINTENANCE},50,OPEN
-92ee5faf85,F9,"Where there is any doubt about the condition or safe operation of a service installation, further inspection by an appropriately qualified specialist should be obtained before legal purchase commitment.",ADD,{F_OTHER}::{F9_COMMUNAL_REPAIR},47,OPEN
-cf755a0c0f,F9,"It has been assumed that the necessary statutory compliance certificates, inspection records, and approvals are available where required.",UNRESOLVED,{F_OTHER}::{F9_COMMUNAL_POOR},49,OPEN
-5969abb368,F9,These documents have not been inspected as part of this survey and should be verified by your legal adviser before exchange of contracts.,ADD,{F_OTHER}::{F9_COMMUNAL_REPAIR},49,OPEN
-c714ee067b,F9,"Where the condition or safety of a service installation cannot be assessed from a visual inspection, I may recommend further investigation by an appropriately qualified specialist and apply an appropriate Condition Rating.",ADD,{F_OTHER}::{F9_CELLAR_DAMP},49,OPEN
+bdc7de0a87,F9,Comments are limited to the visible parts of the installation.,EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
+f576d24a46,F9,"Unless otherwise stated, services should be assumed to require routine maintenance appropriate to their age and use.",EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
+92ee5faf85,F9,"Where there is any doubt about the condition or safe operation of a service installation, further inspection by an appropriately qualified specialist should be obtained before legal purchase commitment.",EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
+cf755a0c0f,F9,"It has been assumed that the necessary statutory compliance certificates, inspection records, and approvals are available where required.",EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
+5969abb368,F9,These documents have not been inspected as part of this survey and should be verified by your legal adviser before exchange of contracts.,EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
+c714ee067b,F9,"Where the condition or safety of a service installation cannot be assessed from a visual inspection, I may recommend further investigation by an appropriately qualified specialist and apply an appropriate Condition Rating.",EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
 bcb2c1e8c8,F9,"The inspection was limited by one or more of the following access restrictions, boxed-in services, stored items, fixed fittings, locked cupboards, floor coverings, or health and safety considerations.",MENU,,0,UNVERIFIED
 0bd467dc01,F9,"Concealed pipework, wiring, ductwork, and underground services could not be inspected.",MENU,,0,UNVERIFIED
-2629352c93,G1,"Metre: There is a mains electricity supply connected to the property, and the meter unit is located under the stairs, in an outside box, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.",UNRESOLVED,{OTHER_EXTERNAL_AREA}::{OTHER_OVERLOADED},47,OPEN
-a7f27c601e,G1,Metre not found: I did not find the electric meter.,ADD,{G_ELECTRICITY}::{SOLAR_POWER_BATTERIES_LOCATION},48,OPEN
-acf3dbfd55,G1,"Please ask the vendor about the location of the mains electricity meter, as you must know where it is located.",ADD,{G_ELECTRICITY}::{MAINS_ELECTRICITY_INSPECTED},57,OPEN
-2cbe24b300,G1,"Consumer unit: There is a consumer unit(s) installed under the stairs, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.",UNRESOLVED,{G_ELECTRICITY}::{FUSE_INSPECTED},50,OPEN
-dcb3461d81,G1,Not found: I did not find the consumer unit(s).,ADD,{G_ELECTRICITY}::{FUSE_INSPECTED},50,OPEN
-6edd04aa5e,G1,"Please ask the vendor about the location of the fuse box, as you must know where it is located.",ADD,{G_ELECTRICITY}::{FUSE_NOT_INSPECTED},55,OPEN
-707af8247a,G1,"RCD Protection: The consumer unit incorporates RCD protection, RCBO protection, surge protection; no visible RCD protection.",UNRESOLVED,{G_ELECTRICITY}::{FUSE_NOT_INSPECTED},54,OPEN
-0525ca26ad,G1,The operation of protective devices has not been assessed.,ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONSTRUCTION},50,OPEN
-6d71d9843d,G1,Dated or Old: The installation appears to comprise dated or older electrical components and would require upgrading to current standards.,ADD,{G_ELECTRICITY}::{DATED_ELECTRICAL_SYSTEM},69,OPEN
-a2c98d5771,G1,"Poor Standards: The electrical system is below current standards because there are exposed wires, damaged fittings, cracked fixtures, DIY work, other issues, and this is a safety hazard.",MENU,,0,UNVERIFIED
-5f02c9b0f9,G1,You should ask an appropriately qualified person to inspect the electrical system and carry out required repairs or replacement(s).,FIX,{OTHER_EXTERNAL_AREA}::{OTHER_NO_SAFETY_GLASS},88,OPEN
+2629352c93,G1,"Metre: There is a mains electricity supply connected to the property, and the meter unit is located under the stairs, in an outside box, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.",MENU,,0,VERIFIED
+a7f27c601e,G1,Metre not found: I did not find the electric meter.,EXACT,{G_ELECTRICITY}::{G1_METER_NOT_FOUND},100,DONE
+acf3dbfd55,G1,"Please ask the vendor about the location of the mains electricity meter, as you must know where it is located.",EXACT,{G_ELECTRICITY}::{G1_METER_NOT_FOUND},100,DONE
+2cbe24b300,G1,"Consumer unit: There is a consumer unit(s) installed under the stairs, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.",MENU,,0,VERIFIED
+dcb3461d81,G1,Not found: I did not find the consumer unit(s).,EXACT,{G_ELECTRICITY}::{G1_CONSUMER_UNIT_NOT_FOUND},100,DONE
+6edd04aa5e,G1,"Please ask the vendor about the location of the fuse box, as you must know where it is located.",EXACT,{G_ELECTRICITY}::{G1_CONSUMER_UNIT_NOT_FOUND},100,DONE
+707af8247a,G1,"RCD Protection: The consumer unit incorporates RCD protection, RCBO protection, surge protection; no visible RCD protection.",MENU,,0,VERIFIED
+0525ca26ad,G1,The operation of protective devices has not been assessed.,EXACT,{G_ELECTRICITY}::{G1_RCD_PROTECTION},100,DONE
+6d71d9843d,G1,Dated or Old: The installation appears to comprise dated or older electrical components and would require upgrading to current standards.,EXACT,{G_ELECTRICITY}::{G1_DATED_OR_OLD},100,DONE
+a2c98d5771,G1,"Poor Standards: The electrical system is below current standards because there are exposed wires, damaged fittings, cracked fixtures, DIY work, other issues, and this is a safety hazard.",MENU,,0,VERIFIED
+5f02c9b0f9,G1,You should ask an appropriately qualified person to inspect the electrical system and carry out required repairs or replacement(s).,EXACT,{G_ELECTRICITY}::{G1_POOR_STANDARDS},100,DONE
 e91b315cd1,G1,"Although I do not know the extent of the repair and improvement works required, you should plan for partial or complete replacement.",EXACT,{G_ELECTRICITY}::{DATED_ELECTRICAL_SYSTEM_SAFETY_HAZARD},100,DONE
-cffa4307fe,G1,"Risk to people: Add text to: Section J3Risk to People - The electrical system is below current standards because of observed defects, and this is a safety hazard.",TOKENISED,{G_ELECTRICITY}::{REPAIR_ELECTRICAL_HAZARD},64,DONE
-8a8c8ecf48,G1,Solar photovoltaic (PV) system: The property is fitted with photovoltaic (PV) panels installed on the roof slope(s).,TOKENISED,{G_ELECTRICITY}::{SOLAR_POWER_INSTALLED_LOCATION},75,DONE
-e9cf33011a,G1,"These generate electricity for use within the property, with any surplus potentially exported to the National Grid.",FIX,{G_ELECTRICITY}::{SOLAR_POWER_INSTALLED_LOCATION},86,OPEN
-a4d7301037,G1,No significant defects were apparent from the limited visual inspection.,EXACT,{G_ELECTRICITY}::{SOLAR_POWER_INSTALLED_LOCATION},100,DONE
-b172bfb4c0,G1,Routine maintenance should be carried out in accordance with the manufacturer's recommendations.,EXACT,{G_ELECTRICITY}::{SOLAR_POWER_INSTALLED_LOCATION},100,DONE
-88323e858d,G1,"Battery storage/Inverter: A solar battery and/or inverter is in the loft, under the stairs, other.",UNRESOLVED,{G_ELECTRICITY}::{SOLAR_POWER_BATTERIES_LOCATION},49,OPEN
-bf243c58d2,G1,"These components were not assessed, and no comment can be made on their operation, performance, or remaining service life.",UNRESOLVED,{OTHER_EXTERNAL_AREA}::{OTHER_OVERLOADED},48,OPEN
-c5754a0104,G1,Solar thermal (hot water): The property is fitted with solar thermal panels installed on the roof slope(s).,TOKENISED,{G_ELECTRICITY}::{SOLAR_POWER_INSTALLED_LOCATION},68,DONE
-29221eee58,G1,These use solar energy to heat water for the domestic hot water system.,ADD,{G_ELECTRICITY}::{DATED_ELECTRICAL_SYSTEM_SAFETY_HAZARD},47,OPEN
-a4d7301037,G1,No significant defects were apparent from the limited visual inspection.,EXACT,{G_ELECTRICITY}::{SOLAR_POWER_INSTALLED_LOCATION},100,DONE
-b172bfb4c0,G1,Routine maintenance should be carried out in accordance with the manufacturer's recommendations.,EXACT,{G_ELECTRICITY}::{SOLAR_POWER_INSTALLED_LOCATION},100,DONE
-446c83026f,G1,"The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection.",EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
-70b429f4c7,G1,"Your legal adviser should verify that appropriate planning permission (where required), Building Regulations approval, commissioning certificates and any applicable MCS certification are available (see Section I1 - Regulations).",UNRESOLVED,{G_ELECTRICITY}::{IF_SOLAR_POWER_IS_SELECTED},53,OPEN
-e510708c55,G1,They should also confirm whether transferable warranties or guarantees exist for the installation (see Section I2 - Guarantees).,ADD,{G_ELECTRICITY}::{IF_SOLAR_POWER_IS_SELECTED},58,OPEN
-1746f5bbd6,G1,"If the necessary approvals or certification are unavailable, further investigation should be undertaken before legal purchase commitment.",ADD,{G_ELECTRICITY}::{DATED_ELECTRICAL_SYSTEM},54,OPEN
+cffa4307fe,G1,"Risk to people: Add text to: Section J3Risk to People - The electrical system is below current standards because of observed defects, and this is a safety hazard.",TOKENISED,{G_ELECTRICITY}::{G1_POOR_STANDARDS},79,DONE
+8a8c8ecf48,G1,Solar photovoltaic (PV) system: The property is fitted with photovoltaic (PV) panels installed on the roof slope(s).,EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE
+e9cf33011a,G1,"These generate electricity for use within the property, with any surplus potentially exported to the National Grid.",EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE
+a4d7301037,G1,No significant defects were apparent from the limited visual inspection.,EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE
+b172bfb4c0,G1,Routine maintenance should be carried out in accordance with the manufacturer's recommendations.,EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE
+88323e858d,G1,"Battery storage/Inverter: A solar battery and/or inverter is in the loft, under the stairs, other.",MENU,,0,VERIFIED
+bf243c58d2,G1,"These components were not assessed, and no comment can be made on their operation, performance, or remaining service life.",EXACT,{G_ELECTRICITY}::{G1_SOLAR_BATTERY},100,DONE
+c5754a0104,G1,Solar thermal (hot water): The property is fitted with solar thermal panels installed on the roof slope(s).,EXACT,{G_ELECTRICITY}::{G1_SOLAR_THERMAL},100,DONE
+29221eee58,G1,These use solar energy to heat water for the domestic hot water system.,EXACT,{G_ELECTRICITY}::{G1_SOLAR_THERMAL},100,DONE
+a4d7301037,G1,No significant defects were apparent from the limited visual inspection.,EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE
+b172bfb4c0,G1,Routine maintenance should be carried out in accordance with the manufacturer's recommendations.,EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE
+446c83026f,G1,"The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection.",EXACT,{G_ELECTRICITY}::{G1_SOLAR_THERMAL},100,DONE
+70b429f4c7,G1,"Your legal adviser should verify that appropriate planning permission (where required), Building Regulations approval, commissioning certificates and any applicable MCS certification are available (see Section I1 - Regulations).",ACCEPT,{G_ELECTRICITY}::{G1_SOLAR_THERMAL},93,DONE
+e510708c55,G1,They should also confirm whether transferable warranties or guarantees exist for the installation (see Section I2 - Guarantees).,ACCEPT,{G_ELECTRICITY}::{G1_SOLAR_THERMAL},87,DONE
+1746f5bbd6,G1,"If the necessary approvals or certification are unavailable, further investigation should be undertaken before legal purchase commitment.",EXACT,{G_ELECTRICITY}::{G1_SOLAR_THERMAL},100,DONE
 a2065bd6e7,G1,"Electrical installations should be inspected and assessed at intervals not exceeding ten years for owner-occupied properties, or on a change of ownership, in accordance with current guidance.",EXACT,{G_ELECTRICITY}::{STANDARD_TEXT_2},100,DONE
 12950691a7,G1,"If satisfactory evidence of a recent Electrical Installation Condition Report (EICR) is unavailable, you should instruct an appropriately qualified electrician, such as a NICEIC or NAPIT registered contractor, to inspect and test the installation, confirm its condition and safety, and provide a quotation for any necessary remedial works.",EXACT,{G_ELECTRICITY}::{STANDARD_TEXT_2},100,DONE
-499e828169,G1,"General Maintenance: Where the installation appears dated, altered, or poorly maintained, an Electrical Installation Condition Report (EICR) should be obtained before legal commitment.",NEAR,{G_ELECTRICITY}::{DATED_ELECTRICAL_SYSTEM},100,OPEN
-ce8bc760cc,G2,Testing: The gas installation and appliances were not assessed during this inspection.,ADD,{G_GAS_AND_OIL}::{GAS_SMELL_NOTED},61,OPEN
-6032de6cc9,G2,"If satisfactory evidence of recent inspection or servicing is unavailable, a Gas Safe (or OFTEC for oil-fired systems) registered engineer should inspect and test the installation before legal purchase commitment and recommend any necessary remedial works.",ADD,{G_GAS_AND_OIL}::{OIL_TANK_INSPECTED},57,OPEN
-a9b2986430,G2,"Certification: The homeowner should be able to provide appropriate servicing and inspection records for the heating system and associated appliances, including boilers, fires, and other fixed heating appliances.",UNRESOLVED,{G_GAS_AND_OIL}::{STANDARD_TEXT},49,OPEN
-311cc5612e,G2,Your legal adviser should verify that these documents are available before exchange of contracts.,ADD,{G_GAS_AND_OIL}::{STANDARD_TEXT},46,OPEN
-83a004701a,G2,Gas smell noted: Gas smell was noted during my inspection.,EXACT,{G_GAS_AND_OIL}::{GAS_SMELL_NOTED},100,DONE
-713116322b,G2,This is a serious problem and should be resolved now.,EXACT,{G_GAS_AND_OIL}::{GAS_SMELL_NOTED},100,DONE
-1327efb576,G2,Capped gas: The gas supply is capped off.,EXACT,{G_GAS_AND_OIL}::{GAS_SUPPLY_IS_CAPPED_OFF},100,DONE
-082ab1c60b,G2,You should ask an appropriately qualified person to inspect the gas installation system.,EXACT,{G_GAS_AND_OIL}::{GAS_METER_REPAIR},100,DONE
-834da05254,G2,"Metre: There is a mains gas connection to the property, and the meter unit is located under the stairs, in an outside box, in the kitchen, in the garage, in a communal cupboard, other.",UNRESOLVED,{G_GAS_AND_OIL}::{STANDARD_TEXT},49,OPEN
-702f469176,G2,"No smell of gas was detected during my inspection, and no other defects were noted that require urgent or significant repairs to the installation.",ADD,{G_GAS_AND_OIL}::{CONDITION_OK_GAS_SMELL},50,OPEN
-bd2aa512ad,G2,Metre not found: I did not find the gas meter.,ADD,{G_GAS_AND_OIL}::{GAS_METER_REPAIR},58,OPEN
-1b93e0ced6,G2,"Please ask the vendor about the location of the gas meter, as you must know where it is located.",ADD,{G_GAS_AND_OIL}::{MAINS_GAS_CONDITION_NOT_INSPECTED},55,OPEN
-2abbead75f,G2,Dated or Old: The installation appears dated or older and may require upgrading to current standards.,ADD,{G_GAS_AND_OIL}::{STANDARD_TEXT},52,OPEN
-6d3e3b3d8d,G2,"Oil tank: The property is served by an oil-fired heating system with a plastic, metal, other fuel storage tank located at the front garden, side garden, rear garden, other.",MENU,,0,UNVERIFIED
-e1bcd8aad7,G2,"No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended.",EXACT,{G_GAS_AND_OIL}::{OIL_TANK_INSPECTED},100,DONE
-cf20a8d211,G2,"Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer.",EXACT,{G_GAS_AND_OIL}::{OIL_TANK_INSPECTED},100,DONE
-79c91e7c72,G2,"Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak.",EXACT,{G_GAS_AND_OIL}::{OIL_TANK_INSPECTED},100,DONE
-f23beb7186,G2,"Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment.",EXACT,{G_GAS_AND_OIL}::{OIL_TANK_INSPECTED},100,DONE
-c227dbff4b,G2,"Old tank: Although I could see no problems with the existing tank, it is older, has a single skin (modern ones have a double skin) and no secondary containment.",EXACT,{G_GAS_AND_OIL}::{OLD_TANK},100,DONE
-426ec07331,G2,"If your property is close to a stream or watercourse, when the tank is replaced, you will have to meet the current requirements.",EXACT,{G_GAS_AND_OIL}::{OLD_TANK},100,DONE
-acaa3c3201,G2,"If you want to be sure, you should ask an appropriately qualified person to inspect the oil installation system now.",EXACT,{G_GAS_AND_OIL}::{OLD_TANK},100,DONE
+499e828169,G1,"General Maintenance: Where the installation appears dated, altered, or poorly maintained, an Electrical Installation Condition Report (EICR) should be obtained before legal commitment.",EXACT,{G_ELECTRICITY}::{G1_GENERAL_MAINTENANCE},100,DONE
+ce8bc760cc,G2,Testing: The gas installation and appliances were not assessed during this inspection.,EXACT,{G_GAS_AND_OIL}::{G2_TESTING},100,DONE
+6032de6cc9,G2,"If satisfactory evidence of recent inspection or servicing is unavailable, a Gas Safe (or OFTEC for oil-fired systems) registered engineer should inspect and test the installation before legal purchase commitment and recommend any necessary remedial works.",EXACT,{G_GAS_AND_OIL}::{G2_TESTING},100,DONE
+a9b2986430,G2,"Certification: The homeowner should be able to provide appropriate servicing and inspection records for the heating system and associated appliances, including boilers, fires, and other fixed heating appliances.",EXACT,{G_GAS_AND_OIL}::{G2_CERTIFICATION},100,DONE
+311cc5612e,G2,Your legal adviser should verify that these documents are available before exchange of contracts.,EXACT,{G_GAS_AND_OIL}::{G2_CERTIFICATION},100,DONE
+83a004701a,G2,Gas smell noted: Gas smell was noted during my inspection.,EXACT,{G_GAS_AND_OIL}::{G2_GAS_SMELL},100,DONE
+713116322b,G2,This is a serious problem and should be resolved now.,EXACT,{G_GAS_AND_OIL}::{G2_GAS_SMELL},100,DONE
+1327efb576,G2,Capped gas: The gas supply is capped off.,EXACT,{G_GAS_AND_OIL}::{G2_CAPPED_GAS},100,DONE
+082ab1c60b,G2,You should ask an appropriately qualified person to inspect the gas installation system.,EXACT,{G_GAS_AND_OIL}::{G2_CAPPED_GAS},100,DONE
+834da05254,G2,"Metre: There is a mains gas connection to the property, and the meter unit is located under the stairs, in an outside box, in the kitchen, in the garage, in a communal cupboard, other.",MENU,,0,VERIFIED
+702f469176,G2,"No smell of gas was detected during my inspection, and no other defects were noted that require urgent or significant repairs to the installation.",EXACT,{G_GAS_AND_OIL}::{G2_METER},100,DONE
+bd2aa512ad,G2,Metre not found: I did not find the gas meter.,EXACT,{G_GAS_AND_OIL}::{G2_METER_NOT_FOUND},100,DONE
+1b93e0ced6,G2,"Please ask the vendor about the location of the gas meter, as you must know where it is located.",EXACT,{G_GAS_AND_OIL}::{G2_METER_NOT_FOUND},100,DONE
+2abbead75f,G2,Dated or Old: The installation appears dated or older and may require upgrading to current standards.,EXACT,{G_GAS_AND_OIL}::{G2_DATED_OR_OLD},100,DONE
+6d3e3b3d8d,G2,"Oil tank: The property is served by an oil-fired heating system with a plastic, metal, other fuel storage tank located at the front garden, side garden, rear garden, other.",MENU,,0,VERIFIED
+e1bcd8aad7,G2,"No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended.",EXACT,{G_GAS_AND_OIL}::{G2_OIL_TANK},100,DONE
+cf20a8d211,G2,"Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer.",EXACT,{G_GAS_AND_OIL}::{G2_OIL_TANK},100,DONE
+79c91e7c72,G2,"Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak.",EXACT,{G_GAS_AND_OIL}::{G2_OIL_TANK},100,DONE
+f23beb7186,G2,"Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment.",EXACT,{G_GAS_AND_OIL}::{G2_OIL_TANK},100,DONE
+c227dbff4b,G2,"Old tank: Although I could see no problems with the existing tank, it is older, has a single skin (modern ones have a double skin) and no secondary containment.",EXACT,{G_GAS_AND_OIL}::{G2_OLD_TANK},100,DONE
+426ec07331,G2,"If your property is close to a stream or watercourse, when the tank is replaced, you will have to meet the current requirements.",EXACT,{G_GAS_AND_OIL}::{G2_OLD_TANK},100,DONE
+acaa3c3201,G2,"If you want to be sure, you should ask an appropriately qualified person to inspect the oil installation system now.",EXACT,{G_GAS_AND_OIL}::{G2_OLD_TANK},100,DONE
 f0de8ccee8,G3,Stopcock found: There is an independent mains water supply to the property.,ADD,{G_WATER}::{LEAD_RISING},50,OPEN
 8cb9cdf3b3,G3,"The stopcock within the property is located under the stairs, under the kitchen sink, in the bathroom, in the hall, in the garage, other.",MENU,,0,UNVERIFIED
 6857e519c9,G3,Visible pipework and fittings were inspected where accessible.,ADD,{G_WATER}::{STANDARD_TEXT},70,OPEN
@@ -1482,8 +1482,8 @@ eff2aa202a,G5,"No operational testing or assessment of performance, efficiency o
 fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,ADD,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},66,OPEN
 ed0829e79e,G5,Solar water heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply.,EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
 bf277d4115,G5,"The installation was inspected visually only, and no operational testing or assessment of performance was undertaken.",EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
-bd76685055,G5,Routine maintenance should be carried out in accordance with the manufacturer's recommendations.,EXACT,{G_ELECTRICITY}::{SOLAR_POWER_INSTALLED_LOCATION},100,DONE
-87a45504e2,G5,"The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection.",EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
+bd76685055,G5,Routine maintenance should be carried out in accordance with the manufacturer's recommendations.,EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE
+87a45504e2,G5,"The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection.",EXACT,{G_ELECTRICITY}::{G1_SOLAR_THERMAL},100,DONE
 ee8232044e,G5,"Your legal adviser should verify that any required Building Regulations approval, commissioning documentation and any available warranties or guarantees are provided.",EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
 a5596b97d6,G6,Inspection of the accessible inspection chamber(s) cannot confirm the condition of the concealed drainage system.,ADD,{G_DRAINAGE}::{PUBLIC_SYSTEM_STATUS_NOT_INSPECTED},55,OPEN
 f72cbbb4ac,G6,"Hidden defects may still be present and can only be identified by specialist testing, such as a CCTV drain survey.",ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},47,OPEN

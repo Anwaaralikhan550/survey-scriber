@@ -266,20 +266,6 @@ void main() {
       expect(other.join(' ').toLowerCase(), contains('electric-other'));
     });
 
-    test('solar water heating is gated on its checkbox', () {
-      final phrases = engine.buildPhrases(
-        'activity_services_water_heating_solar_power',
-        {'cb_solar_power': 'true'},
-      );
-      expect(phrases.single, 'solar-water-heating');
-
-      final unchecked = engine.buildPhrases(
-        'activity_services_water_heating_solar_power',
-        const <String, String>{},
-      );
-      expect(unchecked, isEmpty);
-    });
-
     test('water heating repair resolves leaking cylinder and loose panels',
         () {
       final cylinder = engine.buildPhrases(

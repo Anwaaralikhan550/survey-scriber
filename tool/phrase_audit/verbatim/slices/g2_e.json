@@ -1,0 +1,301 @@
+[
+  {
+    "screen": "activity_services_main_gas",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g2_smell",
+        "masters": [
+          "{G_GAS_AND_OIL}"
+        ],
+        "sub": "{G2_GAS_SMELL}",
+        "text": "Gas smell noted: Gas smell was noted during my inspection. This is a serious problem and should be resolved now.",
+        "tokens": [],
+        "when": [
+          "cb_gas_smell_noted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_gas_smell_noted",
+            "label": "Gas smell noted",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g2_capped",
+        "masters": [
+          "{G_GAS_AND_OIL}"
+        ],
+        "sub": "{G2_CAPPED_GAS}",
+        "text": "Capped gas: The gas supply is capped off. You should ask an appropriately qualified person to inspect the gas installation system.",
+        "tokens": [],
+        "when": [
+          "cb_gas_supply_is_capped_off",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_gas_supply_is_capped_off",
+            "label": "Capped gas",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g2_meter",
+        "masters": [
+          "{G_GAS_AND_OIL}"
+        ],
+        "sub": "{G2_METER}",
+        "text": "Metre: There is a mains gas connection to the property, and the meter unit is located {GAS_METER_LOCATION}. No smell of gas was detected during my inspection, and no other defects were noted that require urgent or significant repairs to the installation.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{GAS_METER_LOCATION}",
+            "options": [
+              [
+                "g2m_under_the_stairs",
+                "under the stairs"
+              ],
+              [
+                "g2m_in_an_outside_box",
+                "in an outside box"
+              ],
+              [
+                "g2m_in_the_kitchen",
+                "in the kitchen"
+              ],
+              [
+                "g2m_in_the_garage",
+                "in the garage"
+              ],
+              [
+                "g2m_in_a_communal_cupboard",
+                "in a communal cupboard"
+              ]
+            ],
+            "pdf_options": [
+              "under the stairs",
+              "in an outside box",
+              "in the kitchen",
+              "in the garage",
+              "in a communal cupboard"
+            ],
+            "label": "Meter located",
+            "other": [
+              "g2m_other",
+              "g2m_other_text"
+            ],
+            "cond": "actv_condition=Metre"
+          }
+        ],
+        "pdf": [
+          "Metre: There is a mains gas connection to the property, and the meter unit is located under the stairs, in an outside box, in the kitchen, in the garage, in a communal cupboard, other."
+        ],
+        "when": [
+          "actv_condition",
+          "Metre"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Gas meter",
+            "type": "dropdown",
+            "options": [
+              "Metre",
+              "Metre not found"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "g2_meter_nf",
+        "masters": [
+          "{G_GAS_AND_OIL}"
+        ],
+        "sub": "{G2_METER_NOT_FOUND}",
+        "text": "Metre not found: I did not find the gas meter. Please ask the vendor about the location of the gas meter, as you must know where it is located.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Metre not found"
+        ]
+      },
+      {
+        "id": "g2_dated",
+        "masters": [
+          "{G_GAS_AND_OIL}"
+        ],
+        "sub": "{G2_DATED_OR_OLD}",
+        "text": "Dated or Old: The installation appears dated or older and may require upgrading to current standards.",
+        "tokens": [],
+        "when": [
+          "cb_dated_gas",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_dated_gas",
+            "label": "Dated or old",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_services_oil",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g2_oil",
+        "masters": [
+          "{G_GAS_AND_OIL}"
+        ],
+        "sub": "{G2_OIL_TANK}",
+        "text": "Oil tank: The property is served by an oil-fired heating system with a {OIL_TANK_TYPE} fuel storage tank located at the {OIL_TANK_LOCATION}. No significant defects were apparent from the limited visual inspection, and routine maintenance is recommended. Oil-fired appliances, associated equipment and storage tanks should be installed, serviced, and inspected annually by an OFTEC-registered engineer. Where the tank is located close to a watercourse, open drain or environmentally sensitive area, secondary containment (a bund) may be required to reduce the risk of pollution in the event of a leak. Where there is any doubt regarding the condition, installation or compliance of the oil storage tank or associated equipment, an OFTEC-registered engineer should inspect the installation and recommend any necessary remedial works before legal purchase commitment.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{OIL_TANK_TYPE}",
+            "options": [
+              [
+                "g2t_plastic",
+                "plastic"
+              ],
+              [
+                "g2t_metal",
+                "metal"
+              ]
+            ],
+            "pdf_options": [
+              "plastic",
+              "metal"
+            ],
+            "label": "Fuel storage tank",
+            "other": [
+              "g2t_other",
+              "g2t_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{OIL_TANK_LOCATION}",
+            "options": [
+              [
+                "g2l_front_garden",
+                "front garden"
+              ],
+              [
+                "g2l_side_garden",
+                "side garden"
+              ],
+              [
+                "g2l_rear_garden",
+                "rear garden"
+              ]
+            ],
+            "pdf_options": [
+              "front garden",
+              "side garden",
+              "rear garden"
+            ],
+            "label": "Tank located at the",
+            "other": [
+              "g2l_other",
+              "g2l_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Oil tank: The property is served by an oil-fired heating system with a plastic, metal, other fuel storage tank located at the front garden, side garden, rear garden, other."
+        ]
+      },
+      {
+        "id": "g2_old_tank",
+        "masters": [
+          "{G_GAS_AND_OIL}"
+        ],
+        "sub": "{G2_OLD_TANK}",
+        "text": "Old tank: Although I could see no problems with the existing tank, it is older, has a single skin (modern ones have a double skin) and no secondary containment. If your property is close to a stream or watercourse, when the tank is replaced, you will have to meet the current requirements. If you want to be sure, you should ask an appropriately qualified person to inspect the oil installation system now.",
+        "tokens": [],
+        "when": [
+          "cb_old_tank",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_old_tank",
+            "label": "Old tank",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_services_gas_oil_main_screen",
+    "rules": [
+      {
+        "id": "g2_testing",
+        "masters": [
+          "{G_GAS_AND_OIL}"
+        ],
+        "sub": "{G2_TESTING}",
+        "text": "Testing: The gas installation and appliances were not assessed during this inspection. If satisfactory evidence of recent inspection or servicing is unavailable, a Gas Safe (or OFTEC for oil-fired systems) registered engineer should inspect and test the installation before legal purchase commitment and recommend any necessary remedial works.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      },
+      {
+        "id": "g2_certification",
+        "masters": [
+          "{G_GAS_AND_OIL}"
+        ],
+        "sub": "{G2_CERTIFICATION}",
+        "text": "Certification: The homeowner should be able to provide appropriate servicing and inspection records for the heating system and associated appliances, including boilers, fires, and other fixed heating appliances. Your legal adviser should verify that these documents are available before exchange of contracts.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_services_gas_oil",
+      "activity_services_gas_oil_repair_gas_meter",
+      "activity_services_gas_oil_repair_storage_tank_pipework",
+      "activity_services_gas_oil_not_inspected"
+    ]
+  }
+]

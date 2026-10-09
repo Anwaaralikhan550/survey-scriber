@@ -8243,6 +8243,305 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_general_maintenance',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'g1_meter',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_METER}',
+    [
+      VerbatimToken(
+        '{ELE_METER_LOCATION}',
+        options: {
+          'g1m_under_the_stairs': 'under the stairs',
+          'g1m_in_an_outside_box': 'in an outside box',
+          'g1m_in_the_entrance_hall': 'in the entrance hall',
+          'g1m_in_the_kitchen': 'in the kitchen',
+          'g1m_in_the_garage': 'in the garage',
+          'g1m_in_a_communal_cupboard': 'in a communal cupboard',
+        },
+        otherCheckbox: 'cb_other_387',
+        otherText: 'et_other_564',
+        pdfOptions: ['under the stairs', 'in an outside box', 'in the entrance hall', 'in the kitchen', 'in the garage', 'in a communal cupboard'],
+      ),
+    ],
+    pdf:
+        'Metre: There is a mains electricity supply connected to the property, and the meter unit is located under the stairs, in an outside box, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.',
+  ),
+  VerbatimRule(
+    'g1_meter_nf',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_METER_NOT_FOUND}',
+    [
+    ],
+    whenField: 'cb_electricity_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_cu',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_CONSUMER_UNIT}',
+    [
+      VerbatimToken(
+        '{ELE_CU_LOCATION}',
+        options: {
+          'g1c_under_the_stairs': 'under the stairs',
+          'g1c_in_the_entrance_hall': 'in the entrance hall',
+          'g1c_in_the_kitchen': 'in the kitchen',
+          'g1c_in_the_garage': 'in the garage',
+          'g1c_in_a_communal_cupboard': 'in a communal cupboard',
+        },
+        otherCheckbox: 'cb_other_717',
+        otherText: 'et_other_618',
+        pdfOptions: ['under the stairs', 'in the entrance hall', 'in the kitchen', 'in the garage', 'in a communal cupboard'],
+      ),
+    ],
+    pdf:
+        'Consumer unit: There is a consumer unit(s) installed under the stairs, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.',
+  ),
+  VerbatimRule(
+    'g1_cu_nf',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_CONSUMER_UNIT_NOT_FOUND}',
+    [
+    ],
+    whenField: 'cb_fuse_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_rcd',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_RCD_PROTECTION}',
+    [
+      VerbatimToken(
+        '{ELE_RCD}',
+        options: {
+          'g1r_rcd_protection': 'RCD protection',
+          'g1r_rcbo_protection': 'RCBO protection',
+          'g1r_surge_protection': 'surge protection',
+          'g1r_no_visible_rcd_protection': 'no visible RCD protection',
+        },
+        pdfOptions: ['RCD protection', 'RCBO protection', 'surge protection', 'no visible RCD protection'],
+      ),
+    ],
+    pdf:
+        'RCD Protection: The consumer unit incorporates RCD protection, RCBO protection, surge protection; no visible RCD protection.',
+  ),
+  VerbatimRule(
+    'g1_dated',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_DATED_OR_OLD}',
+    [
+    ],
+    whenField: 'cb_dated_electrical_system',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_general',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_poor',
+    'activity_services_electricity_repair_electrical_hazard',
+    '{G_ELECTRICITY}',
+    '{G1_POOR_STANDARDS}',
+    [
+      VerbatimToken(
+        '{ELE_POOR_STANDARDS}',
+        options: {
+          'g1p_exposed_wires': 'exposed wires',
+          'g1p_damaged_fittings': 'damaged fittings',
+          'g1p_cracked_fixtures': 'cracked fixtures',
+          'g1p_diy_work': 'DIY work',
+        },
+        otherCheckbox: 'cb_other_685',
+        otherText: 'et_other_733',
+        pdfOptions: ['exposed wires', 'damaged fittings', 'cracked fixtures', 'DIY work'],
+      ),
+    ],
+    pdf:
+        'Poor Standards: The electrical system is below current standards because there are exposed wires, damaged fittings, cracked fixtures, DIY work, other issues, and this is a safety hazard.',
+  ),
+  VerbatimRule(
+    'g1_pv',
+    'activity_services_solar_power',
+    '{G_ELECTRICITY}',
+    '{G1_SOLAR_PV}',
+    [
+    ],
+    whenField: 'cb_solar_pv',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_battery',
+    'activity_services_solar_power',
+    '{G_ELECTRICITY}',
+    '{G1_SOLAR_BATTERY}',
+    [
+      VerbatimToken(
+        '{ELE_BATTERY_LOCATION}',
+        options: {
+          'g1b_loft': 'loft',
+          'g1b_under_the_stairs': 'under the stairs',
+        },
+        otherCheckbox: 'cb_other_870',
+        otherText: 'et_other_723',
+        pdfOptions: ['loft', 'under the stairs'],
+      ),
+    ],
+    pdf:
+        'Battery storage/Inverter: A solar battery and/or inverter is in the loft, under the stairs, other.',
+  ),
+  VerbatimRule(
+    'g1_thermal',
+    'activity_services_water_heating_solar_power',
+    '{G_ELECTRICITY}',
+    '{G1_SOLAR_THERMAL}',
+    [
+    ],
+    whenField: 'cb_solar_power',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_smell',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_GAS_SMELL}',
+    [
+    ],
+    whenField: 'cb_gas_smell_noted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_capped',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_CAPPED_GAS}',
+    [
+    ],
+    whenField: 'cb_gas_supply_is_capped_off',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_meter',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_METER}',
+    [
+      VerbatimToken(
+        '{GAS_METER_LOCATION}',
+        options: {
+          'g2m_under_the_stairs': 'under the stairs',
+          'g2m_in_an_outside_box': 'in an outside box',
+          'g2m_in_the_kitchen': 'in the kitchen',
+          'g2m_in_the_garage': 'in the garage',
+          'g2m_in_a_communal_cupboard': 'in a communal cupboard',
+        },
+        otherCheckbox: 'g2m_other',
+        otherText: 'g2m_other_text',
+        pdfOptions: ['under the stairs', 'in an outside box', 'in the kitchen', 'in the garage', 'in a communal cupboard'],
+      ),
+    ],
+    pdf:
+        'Metre: There is a mains gas connection to the property, and the meter unit is located under the stairs, in an outside box, in the kitchen, in the garage, in a communal cupboard, other.',
+    whenField: 'actv_condition',
+    whenValue: 'Metre',
+  ),
+  VerbatimRule(
+    'g2_meter_nf',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_METER_NOT_FOUND}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Metre not found',
+  ),
+  VerbatimRule(
+    'g2_dated',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_DATED_OR_OLD}',
+    [
+    ],
+    whenField: 'cb_dated_gas',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_oil',
+    'activity_services_oil',
+    '{G_GAS_AND_OIL}',
+    '{G2_OIL_TANK}',
+    [
+      VerbatimToken(
+        '{OIL_TANK_TYPE}',
+        options: {
+          'g2t_plastic': 'plastic',
+          'g2t_metal': 'metal',
+        },
+        otherCheckbox: 'g2t_other',
+        otherText: 'g2t_other_text',
+        pdfOptions: ['plastic', 'metal'],
+      ),
+      VerbatimToken(
+        '{OIL_TANK_LOCATION}',
+        options: {
+          'g2l_front_garden': 'front garden',
+          'g2l_side_garden': 'side garden',
+          'g2l_rear_garden': 'rear garden',
+        },
+        otherCheckbox: 'g2l_other',
+        otherText: 'g2l_other_text',
+        pdfOptions: ['front garden', 'side garden', 'rear garden'],
+      ),
+    ],
+    pdf:
+        'Oil tank: The property is served by an oil-fired heating system with a plastic, metal, other fuel storage tank located at the front garden, side garden, rear garden, other.',
+  ),
+  VerbatimRule(
+    'g2_old_tank',
+    'activity_services_oil',
+    '{G_GAS_AND_OIL}',
+    '{G2_OLD_TANK}',
+    [
+    ],
+    whenField: 'cb_old_tank',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_testing',
+    'activity_services_gas_oil_main_screen',
+    '{G_GAS_AND_OIL}',
+    '{G2_TESTING}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'g2_certification',
+    'activity_services_gas_oil_main_screen',
+    '{G_GAS_AND_OIL}',
+    '{G2_CERTIFICATION}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
   // <<verbatim-rules-end>>
 ];
 

@@ -152,29 +152,29 @@ class InspectionPhraseEngine {
       case 'activity_services_electricity_main_screen':
         return _servicesElectricityMain(answers);
       case 'activity_service_about_electricity':
-        return _servicesElectricityMains(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_solar_power':
-        return _servicesSolarPower(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_electricity_repair_loose_panels':
-        return _servicesElectricityRepairLoosePanels(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_electricity_repair_electrical_hazard':
-        return _servicesElectricityRepairElectricalHazard(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_electricity_not_inspected':
-        return _servicesElectricityNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_gas_oil_main_screen':
         return _servicesGasOilMain(answers);
       case 'activity_services_gas_oil':
-        return _servicesGasOil(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_main_gas':
-        return _servicesMainsGas(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_oil':
-        return _servicesOil(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_gas_oil_repair_gas_meter':
-        return _servicesGasOilRepairGasMeter(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_gas_oil_repair_storage_tank_pipework':
-        return _servicesGasOilRepairStorage(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_gas_oil_not_inspected':
-        return _servicesGasOilNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_main_screen':
         return _servicesWaterMain(answers);
       case 'activity_services_water_main_water':
@@ -227,7 +227,7 @@ class InspectionPhraseEngine {
       case 'activity_services_water_heating_electric_heating':
         return _servicesWaterHeatingElectric(answers);
       case 'activity_services_water_heating_solar_power':
-        return _servicesWaterHeatingSolar(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_heating_repair_leaking_cylinder':
         return _servicesWaterHeatingRepairLeakingCylinder(answers);
       case 'activity_services_water_heating_repair_loose_panels':
@@ -3022,11 +3022,6 @@ class InspectionPhraseEngine {
 
   List<String> _servicesElectricityMain(Map<String, String> answers) {
     final phrases = <String>[];
-    final standard = _sub('{G_ELECTRICITY}', '{STANDARD_TEXT}');
-    if (standard.isNotEmpty) {
-      phrases.addAll(_split(_normalize(standard)));
-    }
-
     final rating = (answers['android_material_design_spinner4'] ?? '').trim();
     if (rating.isNotEmpty) {
       var template = _sub('{G_ELECTRICITY}', '{CONDITION_RATING}');
@@ -3048,198 +3043,8 @@ class InspectionPhraseEngine {
     return phrases;
   }
 
-  List<String> _servicesElectricityMains(Map<String, String> answers) {
-    final phrases = <String>[];
-
-    if (_isChecked(answers['cb_electricity_not_inspected'])) {
-      final template =
-          _sub('{G_ELECTRICITY}', '{MAINS_ELECTRICITY_NOT_INSPECTED}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    } else {
-      final meterLocations = _labelsFor(
-        [
-          'cb_under_the_stairs_40',
-          'cb_in_an_outside_box_21',
-          'cb_in_the_entrance_hall_13',
-          'cb_in_the_kitchen_29',
-          'cb_in_the_garage_49',
-          'cb_in_the_communal_cupboard_21',
-          'cb_other_387',
-        ],
-        answers,
-        {
-          'cb_under_the_stairs_40': 'Under the stairs',
-          'cb_in_an_outside_box_21': 'In an outside box',
-          'cb_in_the_entrance_hall_13': 'In the entrance hall',
-          'cb_in_the_kitchen_29': 'In the kitchen',
-          'cb_in_the_garage_49': 'In the garage',
-          'cb_in_the_communal_cupboard_21': 'In the communal cupboard',
-          'cb_other_387': 'Other',
-        },
-      );
-      _addOther(answers, 'cb_other_387', 'et_other_564', meterLocations);
-      if (meterLocations.isNotEmpty) {
-        var template = _sub('{G_ELECTRICITY}', '{MAINS_ELECTRICITY_INSPECTED}');
-        if (template.isNotEmpty) {
-          template = template.replaceAll(
-              '{ELE_ME_METER_LOC}', _toWords(meterLocations).toLowerCase());
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    }
-
-    if (_isChecked(answers['cb_fuse_not_inspected'])) {
-      final template = _sub('{G_ELECTRICITY}', '{FUSE_NOT_INSPECTED}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    } else {
-      final fuseLocations = _labelsFor(
-        [
-          'cb_in_an_outside_box_54',
-          'cb_in_the_entrance_hall_83',
-          'cb_in_the_kitchen_73',
-          'cb_in_the_garage_66',
-          'cb_in_the_communal_cupboard_33',
-          'cb_other_717',
-        ],
-        answers,
-        {
-          'cb_in_an_outside_box_54': 'In an outside box',
-          'cb_in_the_entrance_hall_83': 'In the entrance hall',
-          'cb_in_the_kitchen_73': 'In the kitchen',
-          'cb_in_the_garage_66': 'In the garage',
-          'cb_in_the_communal_cupboard_33': 'In the communal cupboard',
-          'cb_other_717': 'Other',
-        },
-      );
-      _addOther(answers, 'cb_other_717', 'et_other_618', fuseLocations);
-      if (fuseLocations.isNotEmpty) {
-        var template = _sub('{G_ELECTRICITY}', '{FUSE_INSPECTED}');
-        if (template.isNotEmpty) {
-          template = template.replaceAll(
-              '{ELE_ME_FUSE_BOX_LOC}', _toWords(fuseLocations).toLowerCase());
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    }
-
-    if (_isChecked(answers['cb_dated_electrical_system'])) {
-      final template = _sub('{G_ELECTRICITY}', '{DATED_ELECTRICAL_SYSTEM}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesSolarPower(Map<String, String> answers) {
-    final phrases = <String>[];
-    final pvLocations = _labelsFor(
-      ['cb_front', 'cb_side', 'cb_rear', 'cb_other_783'],
-      answers,
-      {
-        'cb_front': 'Front',
-        'cb_side': 'Side',
-        'cb_rear': 'Rear',
-        'cb_other_783': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_783', 'et_other_506', pvLocations);
-    if (pvLocations.isNotEmpty) {
-      var template =
-          _sub('{G_ELECTRICITY}', '{SOLAR_POWER_INSTALLED_LOCATION}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll(
-            '{ELE_SO_PV_INST_LOC}', _toWords(pvLocations).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_reasonable_condition'])) {
-      final template =
-          _sub('{G_ELECTRICITY}', '{SOLAR_POWER_RESONABLE_CONDITION}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final batteryLocations = _labelsFor(
-      ['cb_loft', 'cb_garage', 'cb_bedroom', 'cb_other_870'],
-      answers,
-      {
-        'cb_loft': 'Loft',
-        'cb_garage': 'Garage',
-        'cb_bedroom': 'Bedroom',
-        'cb_other_870': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_870', 'et_other_723', batteryLocations);
-    if (batteryLocations.isNotEmpty) {
-      var template =
-          _sub('{G_ELECTRICITY}', '{SOLAR_POWER_BATTERIES_LOCATION}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{ELE_SO_BATTERY_LOCATION}',
-            _toWords(batteryLocations).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (pvLocations.isNotEmpty || batteryLocations.isNotEmpty) {
-      final template = _sub('{G_ELECTRICITY}', '{IF_SOLAR_POWER_IS_SELECTED}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesElectricityRepairLoosePanels(
-      Map<String, String> answers) {
-    final defect = _cleanLower(answers['actv_defect']);
-    if (defect.isEmpty) return const [];
-    var template = _sub('{G_ELECTRICITY}', '{REPAIR_LOOSE_SOLAR_PANELS}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{ELE_REP_LOOS_SOL_PANE_DEFECT}', defect);
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesElectricityRepairElectricalHazard(
-      Map<String, String> answers) {
-    final defects = _labelsFor(
-      ['cb_exposed_wires', 'cb_damaged_fittings', 'cb_other_685'],
-      answers,
-      {
-        'cb_exposed_wires': 'Exposed wires',
-        'cb_damaged_fittings': 'Damaged fittings',
-        'cb_other_685': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_685', 'et_other_733', defects);
-    if (defects.isEmpty) return const [];
-    var template = _sub('{G_ELECTRICITY}', '{REPAIR_ELECTRICAL_HAZARD}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{ELE_REP_ELE_HZRD_BECAUSE_OF}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesElectricityNotInspected(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    return _split(_normalize(_sub('{G_ELECTRICITY}', '{NOT_INSPECTED}')));
-  }
-
   List<String> _servicesGasOilMain(Map<String, String> answers) {
     final phrases = <String>[];
-    final standard = _sub('{G_GAS_AND_OIL}', '{STANDARD_TEXT}');
-    if (standard.isNotEmpty) {
-      phrases.addAll(_split(_normalize(standard)));
-    }
-
     final rating = (answers['android_material_design_spinner4'] ?? '').trim();
     if (rating.isNotEmpty) {
       var template = _sub('{G_GAS_AND_OIL}', '{CONDITION_RATING}');
@@ -3259,178 +3064,6 @@ class InspectionPhraseEngine {
     }
 
     return phrases;
-  }
-
-  List<String> _servicesGasOil(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_old_tank_but_ok'])) return const [];
-    return _split(_normalize(_sub('{G_GAS_AND_OIL}', '{OLD_TANK}')));
-  }
-
-  List<String> _servicesMainsGas(Map<String, String> answers) {
-    final phrases = <String>[];
-    final condition = _cleanLower(answers['actv_condition']);
-
-    if (condition == 'ok') {
-      // Dropdown options are pre-worded as full predicates including their
-      // own preposition ("is under the stairs", "is in the kitchen") but
-      // the bank template already supplies "located in the {LOCATION}".
-      // Strip the leading "is " and, since the option supplies whichever
-      // preposition actually fits ("under"/"in"), also drop the template's
-      // fixed "in the" so the two don't combine into "located in the under
-      // the stairs".
-      final location = _cleanLower(answers['actv_location'])
-          .replaceFirst(RegExp(r'^is\s+'), '');
-      if (location.isEmpty) return const [];
-      var template = _sub('{G_GAS_AND_OIL}', '{MAINS_GAS_CONDITION_OK}');
-      if (template.isNotEmpty) {
-        // Strip the template's own fixed "in the" before substitution: the
-        // option text already supplies whichever preposition actually fits
-        // ("under the stairs", "in an outside box"), so keeping both would
-        // combine into "located in the under the stairs".
-        template =
-            template.replaceFirst('in the {GAO_MG_METER_LOCATION}', '{GAO_MG_METER_LOCATION}');
-        final smellNoted = _isChecked(answers['cb_gas_smell_noted']);
-        // The smell clause immediately follows the location sentence's full
-        // stop, so it starts a new sentence in the assembled text even
-        // though the bank template writes it lowercase mid-template.
-        final smellOk = !smellNoted
-            ? _capitalizeFirst(_sub('{G_GAS_AND_OIL}', '{CONDITION_OK_GAS_SMELL}'))
-            : '';
-        template = template
-            .replaceAll('{GAO_MG_METER_LOCATION}', location)
-            .replaceAll('{CONDITION_OK_GAS_SMELL}', smellOk);
-        // Normalize first: the template separates the smell clause from
-        // the location sentence with a non-breaking space (\xa0), which
-        // _normalize() converts to a regular space - the dangling-"and"
-        // cleanup below must run after that conversion or it won't match.
-        final normalized = _normalize(template);
-        final cleaned = smellNoted
-            // The smell clause is the only text between the location
-            // sentence and "and no visible evidence of leakage..."; when
-            // it's skipped, the template leaves a lowercase "and" dangling
-            // right after the full stop. Turn it into its own capitalised
-            // sentence.
-            ? normalized.replaceAll(
-                '. and no visible evidence', '. No visible evidence')
-            : normalized;
-        phrases.addAll(_split(cleaned));
-      }
-    } else if (condition == 'not inspected') {
-      final template =
-          _sub('{G_GAS_AND_OIL}', '{MAINS_GAS_CONDITION_NOT_INSPECTED}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    } else if (condition == 'no gas installation') {
-      final template =
-          _sub('{G_GAS_AND_OIL}', '{MAINS_GAS_CONDITION_NO_GAS_INSTALLATION}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_gas_smell_noted'])) {
-      final template = _sub('{G_GAS_AND_OIL}', '{GAS_SMELL_NOTED}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-    if (_isChecked(answers['cb_gas_supply_is_capped_off'])) {
-      final template = _sub('{G_GAS_AND_OIL}', '{GAS_SUPPLY_IS_CAPPED_OFF}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesOil(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_oil_tank_status']);
-    if (status != 'inspected') return const [];
-    final location = _cleanLower(answers['actv_location']);
-    final material = _cleanLower(answers['actv_oil_tank_made_up_of']);
-    if (location.isEmpty || material.isEmpty) return const [];
-    var template = _sub('{G_GAS_AND_OIL}', '{OIL_TANK_INSPECTED}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{GAO_O_LOCATION}', location)
-        .replaceAll('{GAO_O_OIL_ANK_MADE_OF}', material);
-    final phrases = _split(_normalize(template)).toList();
-    if (_isChecked(answers['cb_nearby_watercourse'])) {
-      final watercourse =
-          _sub('{G_GAS_AND_OIL}', '{OIL_TANK_NEAR_WATERCOURSE}');
-      if (watercourse.isNotEmpty) {
-        phrases.addAll(_split(_normalize(watercourse)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _servicesGasOilRepairGasMeter(Map<String, String> answers) {
-    final defects = _labelsFor(
-      ['cb_loose', 'cb_damaged', 'cb_badly_rusted', 'cb_other_309'],
-      answers,
-      {
-        'cb_loose': 'Loose',
-        'cb_damaged': 'Damaged',
-        'cb_badly_rusted': 'Badly rusted',
-        'cb_other_309': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_309', 'et_other_595', defects);
-    if (defects.isEmpty) return const [];
-    var template = _sub('{G_GAS_AND_OIL}', '{GAS_METER_REPAIR}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{GAO_REP_GASMETER_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesGasOilRepairStorage(Map<String, String> answers) {
-    final items = _labelsFor(
-      ['cb_storage_tank', 'cb_pipework', 'cb_other_316'],
-      answers,
-      {
-        'cb_storage_tank': 'Tank',
-        'cb_pipework': 'Pipework',
-        'cb_other_316': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_316', 'et_other_537', items);
-    final defects = _labelsFor(
-      [
-        'cb_corroded',
-        'cb_leaking',
-        'cb_damaged',
-        'cb_poorly_supported',
-        'cb_other_961'
-      ],
-      answers,
-      {
-        'cb_corroded': 'Corroded',
-        'cb_leaking': 'Leaking',
-        'cb_damaged': 'Damaged',
-        'cb_poorly_supported': 'Poorly supported',
-        'cb_other_961': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_961', 'et_other_421', defects);
-    if (items.isEmpty || defects.isEmpty) return const [];
-    var template =
-        _sub('{G_GAS_AND_OIL}', '{OIL_STORAGE_TANK_AND_PIPEWORK_REPAIR}');
-    if (template.isEmpty) return const [];
-    final isAre = _isAre(items);
-    template = template
-        .replaceAll('{GAO_REP_OILTANK_ITEM}', _toWords(items).toLowerCase())
-        .replaceAll('{GAO_REP_OILTANK_DEFECT}', _toWords(defects).toLowerCase())
-        .replaceAll('{IS_ARE}', isAre);
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesGasOilNotInspected(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    return _split(_normalize(_sub('{G_GAS_AND_OIL}', '{NOT_INSPECTED}')));
   }
 
   List<String> _servicesWaterMain(Map<String, String> answers) {
@@ -4281,13 +3914,6 @@ class InspectionPhraseEngine {
     }
 
     return phrases;
-  }
-
-  List<String> _servicesWaterHeatingSolar(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_solar_power'])) return const [];
-    final template = _sub('{G_WATER_HEATING}', '{SOLAR_WATER_HEATING}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
   }
 
   List<String> _servicesWaterHeatingRepairLeakingCylinder(

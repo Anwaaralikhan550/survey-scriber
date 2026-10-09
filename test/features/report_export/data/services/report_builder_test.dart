@@ -3073,7 +3073,7 @@ void main() {
               'f4rd_uneven': 'true',
             },
             'activity_services_electricity_repair_electrical_hazard': {
-              'cb_exposed_wires': 'true',
+              'g1p_exposed_wires': 'true',
             },
             'activity_services_main_gas': {'actv_condition': 'ok'},
             'activity_risks_other_': {'cb_not_applicable': 'true'},
@@ -3849,121 +3849,5 @@ void main() {
       );
     });
 
-    test('assembles G1 Electricity in legacy order including standard text 2',
-        () {
-      const phraseTexts = <String, String>{
-        '{G_LIMITATIONS_STANDARD_TEXT}':
-            'g-limit-1<br />\\r\\n<br />\\r\\ng-limit-2',
-        '{G_ELECTRICITY}::{STANDARD_TEXT}': 'g1-standard',
-        '{G_ELECTRICITY}::{MAINS_ELECTRICITY_INSPECTED}':
-            'g1-mains={ELE_ME_METER_LOC}',
-        '{G_ELECTRICITY}::{FUSE_INSPECTED}': 'g1-fuse={ELE_ME_FUSE_BOX_LOC}',
-        '{G_ELECTRICITY}::{DATED_ELECTRICAL_SYSTEM}': 'g1-dated',
-        '{G_ELECTRICITY}::{STANDARD_TEXT_2}': 'g1-standard-2',
-        '{G_ELECTRICITY}::{CONDITION_RATING}':
-            'Condition rating is: {ELE_CON_RT}.',
-      };
-      final gBuilder = ReportBuilder(
-        inspectionPhraseEngine: const InspectionPhraseEngine(phraseTexts),
-      );
-
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'G',
-            title: 'G Services',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'group_g1_electricity_85',
-                title: 'G1 Electricity',
-                type: InspectionNodeType.group,
-                order: 1,
-                fields: const [],
-              ),
-              InspectionNodeDefinition(
-                id: 'group_electricity_86',
-                title: 'Electricity',
-                type: InspectionNodeType.group,
-                parentId: 'group_g1_electricity_85',
-                order: 1,
-                fields: const [],
-              ),
-              InspectionNodeDefinition(
-                id: 'activity_services_electricity_main_screen',
-                title: 'Electricity',
-                type: InspectionNodeType.screen,
-                parentId: 'group_electricity_86',
-                order: -1,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner4',
-                    label: 'Condition Rating',
-                    type: InspectionFieldType.dropdown,
-                    options: ['1', '2', '3'],
-                  ),
-                ],
-              ),
-              InspectionNodeDefinition(
-                id: 'activity_service_about_electricity',
-                title: 'Mains Electricity',
-                type: InspectionNodeType.screen,
-                parentId: 'group_electricity_86',
-                order: 2,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_under_the_stairs_40',
-                    label: 'Under the stairs',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'cb_in_an_outside_box_54',
-                    label: 'Under the stairs',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'cb_dated_electrical_system',
-                    label: 'Dated electrical system',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = gBuilder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_services_electricity_main_screen': {
-              'android_material_design_spinner4': '1',
-            },
-            'activity_service_about_electricity': {
-              'cb_under_the_stairs_40': 'true',
-              'cb_in_an_outside_box_54': 'true',
-              'cb_dated_electrical_system': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final g1 = doc.sections.single.screens.firstWhere(
-        (s) => s.screenId == 'group_g1_electricity_85',
-      );
-      expect(
-        g1.phrases,
-        equals([
-          'g1-standard',
-          'g1-mains=under the stairs',
-          'g1-fuse=in an outside box',
-          'g1-dated',
-          'g1-standard-2',
-          'Condition rating is: 1.',
-        ]),
-      );
-    });
   });
 }

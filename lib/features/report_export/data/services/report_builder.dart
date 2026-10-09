@@ -1669,9 +1669,11 @@ class ReportBuilder {
     // Electrical Safety — visible electrical defects on the hazard screen.
     final elecHazard = _answersForScreen(
         rawData, 'activity_services_electricity_repair_electrical_hazard');
-    if (_isCheckedValue(elecHazard['cb_exposed_wires']) ||
-        _isCheckedValue(elecHazard['cb_damaged_fittings']) ||
-        _isCheckedValue(elecHazard['cb_other_685'])) {
+    if (elecHazard.entries
+        .any((e) => e.key.startsWith('g1p_') && _isCheckedValue(e.value))) {
+      final g1 =
+          _approvedBankPhrase('{RISK_TO_PEOPLE}::{ELECTRICAL_BELOW_STANDARD}');
+      if (g1 != null) phrases.add(g1);
       final v =
           _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_ELECTRICAL_SAFETY}');
       if (v != null) phrases.add(v);

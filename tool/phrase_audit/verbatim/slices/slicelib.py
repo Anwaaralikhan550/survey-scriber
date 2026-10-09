@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Helpers shared by the gen_*.py slice generators."""
 import json
+import sys
 import os
 
 
@@ -119,3 +120,21 @@ def para_rule(section, rid, masters, sub, start, end, subs=None, tokens=None, ta
     """Rule whose bank text is cut from the PDF block (see P). `subs` maps PDF substring -> token."""
     text, rows = P(section, start, end, subs, tail, drop, after)
     return rule(rid, masters, sub, text, pdf=rows or None, tokens=tokens or [], **kw)
+
+
+def set_keys(ops):
+    """Apply bank key ops ({'op': 'set'|'add'|'del', 'key', 'value', 'after'}) via bankkeys.py (line-level, idempotent
+    for 'set'). Used for static texts that are not tied to a form rule (section intros, STANDARD_TEXT_2 ...)."""
+    import subprocess
+    import tempfile
+    p = os.path.join(tempfile.mkdtemp(), 'ops.json')
+    with open(p, 'w', encoding='utf-8') as f:
+        json.dump(ops, f, ensure_ascii=False)
+    subprocess.check_call([sys.executable, os.path.join(os.path.dirname(__file__), '..', 'bankkeys.py'), p])
+
+
+def add_or_set(key, value, after=None):
+    bank = json.load(open('assets/property_inspection/phrase_texts.json', encoding='utf-8'))
+    if key in bank:
+        return {'op': 'set', 'key': key, 'value': value}
+    return {'op': 'add', 'key': key, 'value': value, 'after': after or list(bank)[-1]}

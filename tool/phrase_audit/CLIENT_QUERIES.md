@@ -71,3 +71,6 @@ client's yes/no. Tick `[x]` and record the answer when it arrives.
 | 63 | F7 | Old app screens for cupboards, damaged lock, balusters, damp timber, glazed internal doors and "Not inspected" removed (not in PDF). | Confirm. |
 | 64 | F8 Bathroom | "Sanitary ware: … including a bathtub(s), shower(s), …" (fixed "a" before the list); "Defects: … • damaged cubicle/screen …" | Copied exactly. Old extractor-not-installed, leaking, mould, wood-rot, cubicle-glass and not-inspected screens removed (not in PDF). |
 | 65 | F9 Other (inside) | One "Cellar/Basement" PDF block; old app had duplicate Cellar and Basement groups. | Basement group removed; the Cellar group kept. Old "Not applicable"/"Not inspected" screen removed. |
+| 66 | G1 Electricity | "RCD Protection: The consumer unit incorporates RCD protection, RCBO protection, surge protection**;** no visible RCD protection." | Semicolon before the last item. Implemented as four options. Intended as a separate choice? |
+| 67 | G1 Electricity | "…Section J3Risk to People - The electrical system is below current standards…" (no space/dash) and "…carry out required repairs or **replacement(s)**." | Missing space in the J3 pointer; "(s)" printed literally. Copied exactly. |
+| 68 | G2 Gas and oil | "**Metre:** There is a mains gas connection…" / "**Metre not found:**" | Same "metre" spelling as #4. Keep? |

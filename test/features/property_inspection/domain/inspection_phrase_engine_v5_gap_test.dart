@@ -16,19 +16,17 @@ void main() {
   });
 
 
-  test('oil tank near a watercourse explains secondary containment', () {
+  test('oil tank paragraph carries the PDF secondary-containment and OFTEC wording', () {
     final phrases = engine.buildPhrases(
       'activity_services_oil',
       {
-        'actv_oil_tank_status': 'Inspected',
-        'actv_location': 'Rear garden',
-        'actv_oil_tank_made_up_of': 'Plastic',
-        'cb_nearby_watercourse': 'true',
+        'g2t_plastic': 'true',
+        'g2l_rear_garden': 'true',
       },
     );
 
-    expect(phrases, contains(contains('secondary containment')));
-    expect(phrases, contains(contains('OFTEC-registered technician')));
+    expect(phrases, contains(contains('secondary containment (a bund)')));
+    expect(phrases, contains(contains('OFTEC-registered engineer')));
   });
 
   test('garage access limitation identifies who did not provide keys', () {
