@@ -1065,123 +1065,6 @@ class ReportBuilder {
   List<String> _legacyDerivedSectionFRiskToBuilding(V2RawReportData rawData) {
     final phrases = <String>[];
 
-    final woodMain =
-        _answersForScreen(rawData, 'activity_in_side_property_wood_work');
-    if (_isCheckedValue(woodMain['cb_out_of_square_doors'])) {
-      phrases.add(
-          'Some internal doors and frame are distorted and do not shut properly. This may have been affected by past settlement.');
-    }
-
-    final infestation = _answersForScreen(
-        rawData, 'activity_in_side_property_wood_work_repair_infestation');
-    final severity =
-        (infestation['actv_condition'] ?? infestation['llMainContainer'] ?? '')
-            .trim()
-            .toLowerCase();
-    final infestationParts = _labelsForAnswerMap(
-      infestation,
-      const <String, String>{
-        'cb_staircase': 'staircase',
-        'cb_floorboards': 'floorboards',
-        'cb_skirting': 'skirting',
-        'cb_under_stairs': 'under stairs',
-        'cb_cupboards': 'cupboards',
-        'cb_other_1032': 'other',
-      },
-      otherCheckboxId: 'cb_other_1032',
-      otherTextId: 'et_other_728',
-    );
-    final infestationLocations = _labelsForAnswerMap(
-      infestation,
-      const <String, String>{
-        'cb_plastic': 'lounge',
-        'cb_cast_iron': 'reception',
-        'cb_asbestos_cement': 'dining room',
-        'cb_concrete': 'kitchen',
-        'cb_Bedroom': 'bedroom',
-        'cb_other_697': 'other',
-      },
-      otherCheckboxId: 'cb_other_697',
-      otherTextId: 'et_other_427',
-    );
-    if (severity == 'minor' &&
-        infestationParts.isNotEmpty &&
-        infestationLocations.isNotEmpty) {
-      phrases.add(
-          'I found an active infestation of wood-boring insects in parts of the ${_toLegacyWords(infestationParts)} timber in the ${_toLegacyWords(infestationLocations)}.');
-    } else if (severity == 'major' &&
-        infestationParts.isNotEmpty &&
-        infestationLocations.isNotEmpty) {
-      phrases.add(
-          'I found a large and active infestation of wood-boring insects in parts of the staircase timber.');
-    }
-
-    final dampTimber = _answersForScreen(
-        rawData, 'activity_in_side_property_wood_work_repair_damp_timber');
-    final dampComponents = _labelsForAnswerMap(
-      dampTimber,
-      const <String, String>{
-        'cb_staircase': 'staircase',
-        'cb_floorboards': 'floorboards',
-        'cb_skirting': 'skirting',
-        'cb_under_stairs': 'under stairs',
-        'cb_cupboards': 'cupboards',
-        'cb_other_270': 'other',
-      },
-      otherCheckboxId: 'cb_other_270',
-      otherTextId: 'et_other_516',
-    );
-    final dampLocations = _labelsForAnswerMap(
-      dampTimber,
-      const <String, String>{
-        'cb_lounge_72': 'lounge',
-        'cb_reception_49': 'reception',
-        'cb_dining_room_84': 'dining room',
-        'cb_kitchen_72': 'kitchen',
-        'cb_bedroom_44': 'bedroom',
-        'cb_other_750': 'other',
-      },
-      otherCheckboxId: 'cb_other_750',
-      otherTextId: 'et_other_302',
-    );
-    final dampDefects = _labelsForAnswerMap(
-      dampTimber,
-      const <String, String>{
-        'cb_damp': 'damp',
-        'cb_rotten': 'rotten',
-        'cb_other_498': 'other',
-      },
-      otherCheckboxId: 'cb_other_498',
-      otherTextId: 'et_other_534',
-    );
-    if (dampComponents.isNotEmpty &&
-        dampLocations.isNotEmpty &&
-        dampDefects.isNotEmpty) {
-      phrases.add(
-          'The timber ${_toLegacyWords(dampComponents)} in the ${_toLegacyWords(dampLocations)} is ${_toLegacyWords(dampDefects)}.');
-    }
-
-    final leaking = _answersForScreen(
-        rawData, 'activity_in_side_property_bathroom_fittings_leaking');
-    final leakingLocations = _labelsForAnswerMap(
-      leaking,
-      const <String, String>{
-        'cb_bathtub': 'bathtub',
-        'cb_shower': 'shower',
-        'cb_wc': 'wc',
-        'cb_wash_hand_basin': 'wash hand basin',
-        'cb_urinal': 'urinal',
-        'cb_other_937': 'other',
-      },
-      otherCheckboxId: 'cb_other_937',
-      otherTextId: 'et_other_861',
-    );
-    if (leakingLocations.isNotEmpty) {
-      final locationsText = _toLegacyWords(leakingLocations);
-      phrases.add(
-          'The $locationsText ${_legacyIsAre(leakingLocations)} leaking and causing dampness to nearby elements.');
-    }
-
     // RICS L2 cross-injections from Section E1 Chimney stacks (Phase 2B):
     // all 4 spec-required E1 -> J1 injections (flashing-causing-damp,
     // flaunching-causing-damp, repointing-causing-damp, significant-
@@ -1315,6 +1198,13 @@ class ReportBuilder {
     return _cleanupPhrases(phrases);
   }
 
+  /// Fills a J2 option-list token from an H2 dropdown; when the surveyor chose
+  /// nothing the token and its following word collapse to just that word.
+  String _fillJ2Token(String text, String token, String value, String next) =>
+      value.isEmpty
+          ? text.replaceAll('$token $next', next)
+          : text.replaceAll(token, value);
+
   /// RICS L2 J2 "Risks to the Grounds" (Phase 2F): the app has no
   /// dedicated J2 screen at all - spec's 4 sub-topics (Trees, Retaining
   /// Walls, Sloping Ground, Boundary Structures) are synthesised from
@@ -1344,9 +1234,12 @@ class ReportBuilder {
         _answersForScreen(rawData, 'activity_grounds_other_grounds');
     final topoType = (groundsTopo['actv_type'] ?? '').trim().toLowerCase();
     if (topoType.isNotEmpty && topoType != 'level') {
-      phrases.add(
-          _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND}') ??
-              'The property occupies a $topoType site. Although no evidence of instability was observed during the inspection, sloping ground can influence drainage and foundations, and should be considered as part of routine maintenance.');
+      final slopeBank =
+          _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND}');
+      phrases.add(slopeBank != null
+          ? _fillJ2Token(slopeBank, '{J2_SLOPE}',
+              (groundsTopo['actv_j2_slope'] ?? '').trim().toLowerCase(), 'sloping')
+          : 'The property occupies a $topoType site. Although no evidence of instability was observed during the inspection, sloping ground can influence drainage and foundations, and should be considered as part of routine maintenance.');
     }
 
     // Trees: H2's nearby-trees repair screen.
@@ -1373,7 +1266,8 @@ class ReportBuilder {
       final v2Trees =
           _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES}');
       if (v2Trees != null) {
-        phrases.add(v2Trees);
+        phrases.add(_fillJ2Token(v2Trees, '{J2_TREE_SIZE}',
+            (nearbyTrees['actv_j2_tree_size'] ?? '').trim().toLowerCase(), 'trees'));
       } else if (treeIssues.isNotEmpty) {
         phrases.add(
             'There are $proximityText within influencing distance of the property, and these appear to be causing ${_toLegacyWords(treeIssues)}. Further investigation by an appropriately qualified person is recommended before legal commitment.');

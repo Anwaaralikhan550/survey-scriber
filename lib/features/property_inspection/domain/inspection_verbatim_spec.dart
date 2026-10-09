@@ -10931,6 +10931,145 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_i3_general',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'j1_structural',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_STRUCTURAL_MOVEMENT}',
+    [
+      VerbatimToken(
+        '{J1_MOVEMENT_KIND}',
+        options: {
+          'j1_structural_0_historic': 'historic',
+          'j1_structural_0_localised': 'localised',
+          'j1_structural_0_recurring': 'recurring',
+          'j1_structural_0_progressive': 'progressive',
+        },
+        pdfOptions: ['historic', 'localised', 'recurring', 'progressive'],
+      ),
+    ],
+    pdf:
+        'Structural Movement: Evidence of historic, localised, recurring, progressive movement, including possible structural was observed.',
+    whenField: 'cb_j1_structural',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_water',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_WATER_PENETRATION}',
+    [
+      VerbatimToken(
+        '{J1_WATER_SOURCE}',
+        options: {
+          'j1w_roof_leakage': 'roof leakage',
+          'j1w_penetrating_damp': 'penetrating damp',
+          'j1w_plumbing_leakage': 'plumbing leakage',
+          'j1w_condensation': 'condensation',
+          'j1w_localised_dampness': 'localised dampness',
+        },
+        pdfOptions: ['roof leakage', 'penetrating damp', 'plumbing leakage', 'condensation', 'localised dampness'],
+      ),
+    ],
+    pdf:
+        'Water Penetration: Evidence of roof leakage, penetrating damp, plumbing leakage, condensation, and localised dampness was observed.',
+    whenField: 'cb_j1_water',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_timber',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_TIMBER_DECAY}',
+    [
+      VerbatimToken(
+        '{J1_TIMBER_DECAY_KIND}',
+        options: {
+          'j1_timber_0_wet_rot': 'wet rot',
+          'j1_timber_0_dry_rot': 'dry rot',
+          'j1_timber_0_localised_timber_decay': 'localised timber decay',
+        },
+        pdfOptions: ['wet rot', 'dry rot', 'localised timber decay'],
+      ),
+    ],
+    pdf:
+        'Timber Decay: Evidence of wet rot, dry rot, localised timber decay was observed.',
+    whenField: 'cb_j1_timber',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_woodboring',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_WOOD_BORING_INSECTS}',
+    [
+    ],
+    whenField: 'cb_j1_woodboring',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_condensation',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_CONDENSATION}',
+    [
+      VerbatimToken(
+        '{J1_CONDENSATION_KIND}',
+        options: {
+          'j1_condensation_0_condensation': 'condensation',
+          'j1_condensation_0_surface_mould_growth': 'surface mould growth',
+          'j1_condensation_0_limited_ventilation': 'limited ventilation',
+        },
+        pdfOptions: ['condensation', 'surface mould growth', 'limited ventilation'],
+      ),
+    ],
+    pdf:
+        'Condensation: Evidence of condensation, surface mould growth, limited ventilation was observed.',
+    whenField: 'cb_j1_condensation',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_drainage',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_DRAINAGE}',
+    [
+      VerbatimToken(
+        '{J1_DRAINAGE_KIND}',
+        options: {
+          'j1_drainage_0_blocked_gullies': 'blocked gullies',
+          'j1_drainage_0_standing_water': 'standing water',
+          'j1_drainage_0_poor_surface_drainage': 'poor surface drainage',
+          'j1_drainage_0_localised_ponding': 'localised ponding',
+        },
+        pdfOptions: ['blocked gullies', 'standing water', 'poor surface drainage', 'localised ponding'],
+      ),
+    ],
+    pdf:
+        'Drainage: Evidence of blocked gullies, standing water, poor surface drainage, localised ponding was observed.',
+    whenField: 'cb_j1_drainage',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_subsidence',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_SIGNIFICANT_SUBSIDENCE}',
+    [
+    ],
+    whenField: 'cb_j1_subsidence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_trees',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_TREE_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_j1_trees',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

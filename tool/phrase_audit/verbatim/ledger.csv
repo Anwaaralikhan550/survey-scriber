@@ -1731,23 +1731,23 @@ c0a173545a,I3,Your legal adviser should confirm whether the property will be sol
 20a70c065f,I3,The comments are based solely on the condition observed at the time of the inspection.,ADD,{ISSUE_OTHER_MATTERS}::{OTHER_MATTERS_PRIVATE_ROAD},49,OPEN
 61f7baec30,I3,The Home Survey is a visual inspection only and cannot identify every potential risk.,ADD,{ISSUE_OTHER_MATTERS}::{I3_GENERAL_LEGAL_ENQUIRIES},56,OPEN
 2ff4e42c77,I3,"Where appropriate, further investigation by an appropriately qualified person is recommended.",ADD,{ISSUE_OTHER_MATTERS}::{I3_PRIVATE_ROAD},48,OPEN
-7874f717a5,J1,"Structural Movement: Evidence of historic, localised, recurring, progressive movement, including possible structural was observed.",MENU,,0,UNVERIFIED
+7874f717a5,J1,"Structural Movement: Evidence of historic, localised, recurring, progressive movement, including possible structural was observed.",MENU,,0,VERIFIED
 d7237c1c8d,J1,"Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_STRUCTURAL_MOVEMENT},100,DONE
-5045b3b905,J1,"Water Penetration: Evidence of roof leakage, penetrating damp, plumbing leakage, condensation, and localised dampness was observed.",MENU,,0,UNVERIFIED
+5045b3b905,J1,"Water Penetration: Evidence of roof leakage, penetrating damp, plumbing leakage, condensation, and localised dampness was observed.",MENU,,0,VERIFIED
 4844001d64,J1,The source should be identified and repaired to prevent further deterioration.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{EVIDENCE_WATER_PENETRATION},100,DONE
-a99dc05367,J1,"Timber Decay: Evidence of wet rot, dry rot, localised timber decay was observed.",UNRESOLVED,,0,OPEN
+a99dc05367,J1,"Timber Decay: Evidence of wet rot, dry rot, localised timber decay was observed.",MENU,,0,VERIFIED
 efffe04bce,J1,The source of moisture should be identified and repaired before remedial timber works are undertaken.,EXACT,{F_WOOD_WORK}::{REPAIR_DAMP_TIMBER},100,DONE
-6ed915033e,J1,Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed.,ADD,,0,OPEN
-30f883c6ec,J1,Further investigation by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,ADD,,0,OPEN
-66898ad7c9,J1,"Condensation: Evidence of condensation, surface mould growth, limited ventilation was observed.",UNRESOLVED,,0,OPEN
-99905703ef,J1,Maintaining appropriate heating and ventilation should assist in reducing condensation.,ADD,,0,OPEN
-14fbc14305,J1,"Drainage: Evidence of blocked gullies, standing water, poor surface drainage, localised ponding was observed.",UNRESOLVED,,0,OPEN
-08fb148d21,J1,Maintenance or further investigation should be undertaken where necessary.,ADD,,0,OPEN
-b20870b1ce,J1,"Significant subsidence: Significant cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls.",UNRESOLVED,,0,OPEN
-e663fa7d19,J1,"I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive.",UNRESOLVED,,0,OPEN
+6ed915033e,J1,Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed.,EXACT,{RISK_TO_BUILDING}::{J1_WOOD_BORING_INSECTS},100,DONE
+30f883c6ec,J1,Further investigation by an appropriately qualified timber specialist is recommended where activity appears active or widespread.,EXACT,{RISK_TO_BUILDING}::{J1_WOOD_BORING_INSECTS},100,DONE
+66898ad7c9,J1,"Condensation: Evidence of condensation, surface mould growth, limited ventilation was observed.",MENU,,0,VERIFIED
+99905703ef,J1,Maintaining appropriate heating and ventilation should assist in reducing condensation.,EXACT,{RISK_TO_BUILDING}::{J1_CONDENSATION},100,DONE
+14fbc14305,J1,"Drainage: Evidence of blocked gullies, standing water, poor surface drainage, localised ponding was observed.",MENU,,0,VERIFIED
+08fb148d21,J1,Maintenance or further investigation should be undertaken where necessary.,EXACT,{RISK_TO_BUILDING}::{J1_DRAINAGE},100,DONE
+b20870b1ce,J1,"Significant subsidence: Significant cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls.",EXACT,{RISK_TO_BUILDING}::{J1_SIGNIFICANT_SUBSIDENCE},100,DONE
+e663fa7d19,J1,"I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive.",EXACT,{RISK_TO_BUILDING}::{J1_SIGNIFICANT_SUBSIDENCE},100,DONE
 79d0562fd9,J1,"I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts.",EXACT,{E_MAIN_WALLS}::{E4_MOVE_1},100,DONE
 3f01e7e42a,J1,Tree defects: One or more trees are located close to the property.,EXACT,{H_OTHER}::{H2_NEARBY_TREES},100,DONE
-750d3e78cf,J1,Detrimental effects on the property were noted.,ADD,,0,OPEN
+750d3e78cf,J1,Detrimental effects on the property were noted.,EXACT,{RISK_TO_BUILDING}::{J1_TREE_DEFECTS},100,DONE
 da58607b1c,J1,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
 e028281c9b,J2,"Influencing trees: There are small, medium or large trees within influencing distance of the property.",FIX,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},84,OPEN
 003846ae76,J2,"Where no evidence of damage was observed, no further action is required.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE

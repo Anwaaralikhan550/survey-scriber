@@ -2373,86 +2373,6 @@ void main() {
     });
 
     test(
-        'injects legacy Section F building risk phrases into J1 and creates J3',
-        () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'J',
-            title: 'J Risks',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_risks_risk_to_building_',
-                title: 'J1 Risk To Building',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'actv_movement_status',
-                    label: 'Movement status',
-                    type: InspectionFieldType.dropdown,
-                    options: ['None', 'Noted'],
-                  ),
-                ],
-              ),
-              InspectionNodeDefinition(
-                id: 'activity_risks_other_',
-                title: 'J4 Other',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_not_applicable',
-                    label: 'Not Applicable',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_risks_risk_to_building_': {
-              'actv_movement_status': 'None',
-            },
-            'activity_in_side_property_wood_work': {
-              'cb_out_of_square_doors': 'true',
-              'cb_glazed_internal_doors': 'true',
-            },
-            'activity_in_side_property_bathroom_fittings_leaking': {
-              'cb_bathtub': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j1 = section.screens
-          .firstWhere((s) => s.screenId == 'activity_risks_risk_to_building_');
-      expect(
-        j1.phrases.join(' ').toLowerCase(),
-        contains('some internal doors and frame are distorted'),
-      );
-      expect(
-        j1.phrases.join(' ').toLowerCase(),
-        contains('the bathtub is leaking and causing dampness'),
-      );
-
-      final j3 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
-      expect(j3.title, 'J3 Risk To People');
-      expect(
-        j3.phrases.join(' ').toLowerCase(),
-        contains('one or more internal doors are glazed'),
-      );
-    });
-
-    test(
         'J3 Risk To People grammar fixes: articles and subject-verb agreement (Phase 2F)',
         () {
       final tree = InspectionTreePayload(
@@ -2669,7 +2589,7 @@ void main() {
       final j2Text = j2.phrases.join('\n');
       // Verbatim revised-spec wording, straight from the approved bank keys.
       expect(j2Text, contains('Sloping Ground: The property may be situated on sloping ground.'));
-      expect(j2Text, contains('Influencing Trees: There are trees within influencing distance of the property.'));
+      expect(j2Text, contains('Influencing trees: There are trees within influencing distance of the property.'));
       expect(j2Text, contains('Retaining Walls: Evidence of movement, bulging, cracking, deterioration was observed.'));
     });
 

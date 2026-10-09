@@ -1,0 +1,329 @@
+[
+  {
+    "screen": "activity_risks_risk_to_building_",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "j1_structural",
+        "masters": [
+          "{RISK_TO_BUILDING}"
+        ],
+        "sub": "{J1_STRUCTURAL_MOVEMENT}",
+        "text": "Structural Movement: Evidence of {J1_MOVEMENT_KIND} movement, including possible structural was observed. Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{J1_MOVEMENT_KIND}",
+            "options": [
+              [
+                "j1_structural_0_historic",
+                "historic"
+              ],
+              [
+                "j1_structural_0_localised",
+                "localised"
+              ],
+              [
+                "j1_structural_0_recurring",
+                "recurring"
+              ],
+              [
+                "j1_structural_0_progressive",
+                "progressive"
+              ]
+            ],
+            "pdf_options": [
+              "historic",
+              "localised",
+              "recurring",
+              "progressive"
+            ],
+            "label": "Evidence of"
+          }
+        ],
+        "pdf": [
+          "Structural Movement: Evidence of historic, localised, recurring, progressive movement, including possible structural was observed."
+        ],
+        "when": [
+          "cb_j1_structural",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_j1_structural",
+            "label": "Structural movement",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j1_water",
+        "masters": [
+          "{RISK_TO_BUILDING}"
+        ],
+        "sub": "{J1_WATER_PENETRATION}",
+        "text": "Water Penetration: Evidence of {J1_WATER_SOURCE} was observed. The source should be identified and repaired to prevent further deterioration.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{J1_WATER_SOURCE}",
+            "options": [
+              [
+                "j1w_roof_leakage",
+                "roof leakage"
+              ],
+              [
+                "j1w_penetrating_damp",
+                "penetrating damp"
+              ],
+              [
+                "j1w_plumbing_leakage",
+                "plumbing leakage"
+              ],
+              [
+                "j1w_condensation",
+                "condensation"
+              ],
+              [
+                "j1w_localised_dampness",
+                "localised dampness"
+              ]
+            ],
+            "pdf_options": [
+              "roof leakage",
+              "penetrating damp",
+              "plumbing leakage",
+              "condensation",
+              "localised dampness"
+            ],
+            "label": "Evidence of"
+          }
+        ],
+        "pdf": [
+          "Water Penetration: Evidence of roof leakage, penetrating damp, plumbing leakage, condensation, and localised dampness was observed."
+        ],
+        "when": [
+          "cb_j1_water",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_j1_water",
+            "label": "Water penetration",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j1_timber",
+        "masters": [
+          "{RISK_TO_BUILDING}"
+        ],
+        "sub": "{J1_TIMBER_DECAY}",
+        "text": "Timber Decay: Evidence of {J1_TIMBER_DECAY_KIND} was observed. The source of moisture should be identified and repaired before remedial timber works are undertaken.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{J1_TIMBER_DECAY_KIND}",
+            "options": [
+              [
+                "j1_timber_0_wet_rot",
+                "wet rot"
+              ],
+              [
+                "j1_timber_0_dry_rot",
+                "dry rot"
+              ],
+              [
+                "j1_timber_0_localised_timber_decay",
+                "localised timber decay"
+              ]
+            ],
+            "pdf_options": [
+              "wet rot",
+              "dry rot",
+              "localised timber decay"
+            ],
+            "label": "Evidence of"
+          }
+        ],
+        "pdf": [
+          "Timber Decay: Evidence of wet rot, dry rot, localised timber decay was observed."
+        ],
+        "when": [
+          "cb_j1_timber",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_j1_timber",
+            "label": "Timber decay",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j1_woodboring",
+        "masters": [
+          "{RISK_TO_BUILDING}"
+        ],
+        "sub": "{J1_WOOD_BORING_INSECTS}",
+        "text": "Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed. Further investigation by an appropriately qualified timber specialist is recommended where activity appears active or widespread.",
+        "tokens": [],
+        "when": [
+          "cb_j1_woodboring",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_j1_woodboring",
+            "label": "Wood-boring insects",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j1_condensation",
+        "masters": [
+          "{RISK_TO_BUILDING}"
+        ],
+        "sub": "{J1_CONDENSATION}",
+        "text": "Condensation: Evidence of {J1_CONDENSATION_KIND} was observed. Maintaining appropriate heating and ventilation should assist in reducing condensation.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{J1_CONDENSATION_KIND}",
+            "options": [
+              [
+                "j1_condensation_0_condensation",
+                "condensation"
+              ],
+              [
+                "j1_condensation_0_surface_mould_growth",
+                "surface mould growth"
+              ],
+              [
+                "j1_condensation_0_limited_ventilation",
+                "limited ventilation"
+              ]
+            ],
+            "pdf_options": [
+              "condensation",
+              "surface mould growth",
+              "limited ventilation"
+            ],
+            "label": "Evidence of"
+          }
+        ],
+        "pdf": [
+          "Condensation: Evidence of condensation, surface mould growth, limited ventilation was observed."
+        ],
+        "when": [
+          "cb_j1_condensation",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_j1_condensation",
+            "label": "Condensation",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j1_drainage",
+        "masters": [
+          "{RISK_TO_BUILDING}"
+        ],
+        "sub": "{J1_DRAINAGE}",
+        "text": "Drainage: Evidence of {J1_DRAINAGE_KIND} was observed. Maintenance or further investigation should be undertaken where necessary.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{J1_DRAINAGE_KIND}",
+            "options": [
+              [
+                "j1_drainage_0_blocked_gullies",
+                "blocked gullies"
+              ],
+              [
+                "j1_drainage_0_standing_water",
+                "standing water"
+              ],
+              [
+                "j1_drainage_0_poor_surface_drainage",
+                "poor surface drainage"
+              ],
+              [
+                "j1_drainage_0_localised_ponding",
+                "localised ponding"
+              ]
+            ],
+            "pdf_options": [
+              "blocked gullies",
+              "standing water",
+              "poor surface drainage",
+              "localised ponding"
+            ],
+            "label": "Evidence of"
+          }
+        ],
+        "pdf": [
+          "Drainage: Evidence of blocked gullies, standing water, poor surface drainage, localised ponding was observed."
+        ],
+        "when": [
+          "cb_j1_drainage",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_j1_drainage",
+            "label": "Drainage",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j1_subsidence",
+        "masters": [
+          "{RISK_TO_BUILDING}"
+        ],
+        "sub": "{J1_SIGNIFICANT_SUBSIDENCE}",
+        "text": "Significant subsidence: Significant cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls. I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts.",
+        "tokens": [],
+        "when": [
+          "cb_j1_subsidence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_j1_subsidence",
+            "label": "Significant subsidence",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j1_trees",
+        "masters": [
+          "{RISK_TO_BUILDING}"
+        ],
+        "sub": "{J1_TREE_DEFECTS}",
+        "text": "Tree defects: One or more trees are located close to the property. Detrimental effects on the property were noted. You should contact a qualified person for further investigation and advice.",
+        "tokens": [],
+        "when": [
+          "cb_j1_trees",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_j1_trees",
+            "label": "Tree defects",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

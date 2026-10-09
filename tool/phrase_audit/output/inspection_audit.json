@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1950,
-   "approvedLegacyBank": 201,
-   "approvedCurrentBankOnly": 1722,
+   "distinctEmitted": 1944,
+   "approvedLegacyBank": 193,
+   "approvedCurrentBankOnly": 1724,
    "unapproved": 0
   }
  },
@@ -647,8 +647,8 @@
    "sectionKey": "H",
    "screenId": "activity_grounds_other_grounds",
    "title": "Grounds",
-   "dataFieldCount": 1,
-   "permutationCount": 9,
+   "dataFieldCount": 2,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
     "total": 4,
@@ -903,8 +903,8 @@
    "sectionKey": "H",
    "screenId": "activity_other_repair_nearby_trees",
    "title": "Nearby Trees",
-   "dataFieldCount": 9,
-   "permutationCount": 13,
+   "dataFieldCount": 10,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
     "total": 3,
@@ -2974,19 +2974,19 @@
    "sectionKey": "J",
    "screenId": "activity_risks_risk_to_building_",
    "title": "J1 Risk To Building",
-   "dataFieldCount": 10,
-   "permutationCount": 26,
+   "dataFieldCount": 27,
+   "permutationCount": 29,
    "severities": [],
    "phraseStats": {
-    "total": 14,
-    "approvedLegacy": 8,
-    "approvedCurrentBankOnly": 6,
+    "total": 8,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "There are signs that the property has been affected by structural movement as evidenced by cracking and general distortion to walls and around openings. This does not appear to be within acceptable tolerance. Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",
-    "There are signs that the property appears to be affected by minor subsidence as evidenced by stepped cracking. This appears to be within acceptable tolerance, however, should the movement continue, I would recommend that you seek further advice from a qualified person.",
-    "There are signs that the property appears to be affected by subsidence as evidenced by stepped cracking. This does not appear to be within acceptable tolerance. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts."
+    "Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed. Further investigation by an appropriately qualified timber specialist is recommended where activity appears active or widespread.",
+    "Significant subsidence: Significant cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls. I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts.",
+    "Tree defects: One or more trees are located close to the property. Detrimental effects on the property were noted. You should contact a qualified person for further investigation and advice."
    ]
   },
   {

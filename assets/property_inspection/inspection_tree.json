@@ -2844,6 +2844,16 @@
                 "Hilly",
                 "Undulating"
               ]
+            },
+            {
+              "id": "actv_j2_slope",
+              "label": "Slope (J2 Risk to grounds)",
+              "type": "dropdown",
+              "options": [
+                "Gently",
+                "Moderately",
+                "Steeply"
+              ]
             }
           ]
         },
@@ -4064,6 +4074,16 @@
               "id": "cb_subsidence_movement",
               "label": "subsidence movement",
               "type": "checkbox"
+            },
+            {
+              "id": "actv_j2_tree_size",
+              "label": "Tree size (J2 Risk to grounds)",
+              "type": "dropdown",
+              "options": [
+                "Small",
+                "Medium",
+                "Large"
+              ]
             }
           ]
         },
@@ -12722,109 +12742,163 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_movements",
-              "label": "Movements",
+              "id": "cb_j1_structural",
+              "label": "Structural movement",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_j1_movement_kind",
+              "label": "Evidence of",
               "type": "label"
             },
             {
-              "id": "actv_movement_status",
-              "label": "Movement status",
-              "type": "dropdown",
-              "options": [
-                "None",
-                "Noted",
-                "Investigate"
-              ]
+              "id": "j1_structural_0_historic",
+              "label": "historic",
+              "type": "checkbox"
             },
             {
-              "id": "label_subsidence",
-              "label": "Subsidence",
+              "id": "j1_structural_0_localised",
+              "label": "localised",
+              "type": "checkbox"
+            },
+            {
+              "id": "j1_structural_0_recurring",
+              "label": "recurring",
+              "type": "checkbox"
+            },
+            {
+              "id": "j1_structural_0_progressive",
+              "label": "progressive",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j1_water",
+              "label": "Water penetration",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_j1_water_source",
+              "label": "Evidence of",
               "type": "label"
             },
             {
-              "id": "actv_subsidence_status",
-              "label": "Subsidence status",
-              "type": "dropdown",
-              "options": [
-                "None",
-                "Noted",
-                "Investigate"
-              ]
+              "id": "j1w_roof_leakage",
+              "label": "roof leakage",
+              "type": "checkbox"
             },
             {
-              "id": "label_location",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_subsidence_status=None|!actv_subsidence_status",
-              "conditionalMode": "hide"
+              "id": "j1w_penetrating_damp",
+              "label": "penetrating damp",
+              "type": "checkbox"
             },
             {
-              "id": "cb_window_and_door_lintel",
-              "label": "Window and door lintel",
-              "type": "checkbox",
-              "conditionalOn": "actv_subsidence_status=None|!actv_subsidence_status",
-              "conditionalMode": "hide"
+              "id": "j1w_plumbing_leakage",
+              "label": "plumbing leakage",
+              "type": "checkbox"
             },
             {
-              "id": "cb_extension_joints",
-              "label": "Extension joints",
-              "type": "checkbox",
-              "conditionalOn": "actv_subsidence_status=None|!actv_subsidence_status",
-              "conditionalMode": "hide"
+              "id": "j1w_condensation",
+              "label": "condensation",
+              "type": "checkbox"
             },
             {
-              "id": "cb_bay_windows",
-              "label": "Bay windows",
-              "type": "checkbox",
-              "conditionalOn": "actv_subsidence_status=None|!actv_subsidence_status",
-              "conditionalMode": "hide"
+              "id": "j1w_localised_dampness",
+              "label": "localised dampness",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_619",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_subsidence_status=None|!actv_subsidence_status",
-              "conditionalMode": "hide"
+              "id": "cb_j1_timber",
+              "label": "Timber decay",
+              "type": "checkbox"
             },
             {
-              "id": "et_other_604",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_619&!actv_subsidence_status=None&actv_subsidence_status",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_dampness",
-              "label": "Dampness",
+              "id": "label_j1_timber_decay_kind",
+              "label": "Evidence of",
               "type": "label"
             },
             {
-              "id": "actv_dampness_status",
-              "label": "Dampness status",
-              "type": "dropdown",
-              "options": [
-                "None",
-                "Implement action",
-                "Investigate"
-              ]
+              "id": "j1_timber_0_wet_rot",
+              "label": "wet rot",
+              "type": "checkbox"
             },
             {
-              "id": "label_timber_defect",
-              "label": "Timber Defect",
+              "id": "j1_timber_0_dry_rot",
+              "label": "dry rot",
+              "type": "checkbox"
+            },
+            {
+              "id": "j1_timber_0_localised_timber_decay",
+              "label": "localised timber decay",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j1_woodboring",
+              "label": "Wood-boring insects",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j1_condensation",
+              "label": "Condensation",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_j1_condensation_kind",
+              "label": "Evidence of",
               "type": "label"
             },
             {
-              "id": "actv_timber_sefect_status",
-              "label": "Timber defect status",
-              "type": "dropdown",
-              "options": [
-                "None",
-                "Noted"
-              ]
+              "id": "j1_condensation_0_condensation",
+              "label": "condensation",
+              "type": "checkbox"
             },
             {
-              "id": "cb_near_by_tree",
-              "label": "Nearby trees",
+              "id": "j1_condensation_0_surface_mould_growth",
+              "label": "surface mould growth",
+              "type": "checkbox"
+            },
+            {
+              "id": "j1_condensation_0_limited_ventilation",
+              "label": "limited ventilation",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j1_drainage",
+              "label": "Drainage",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_j1_drainage_kind",
+              "label": "Evidence of",
+              "type": "label"
+            },
+            {
+              "id": "j1_drainage_0_blocked_gullies",
+              "label": "blocked gullies",
+              "type": "checkbox"
+            },
+            {
+              "id": "j1_drainage_0_standing_water",
+              "label": "standing water",
+              "type": "checkbox"
+            },
+            {
+              "id": "j1_drainage_0_poor_surface_drainage",
+              "label": "poor surface drainage",
+              "type": "checkbox"
+            },
+            {
+              "id": "j1_drainage_0_localised_ponding",
+              "label": "localised ponding",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j1_subsidence",
+              "label": "Significant subsidence",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_j1_trees",
+              "label": "Tree defects",
               "type": "checkbox"
             }
           ]

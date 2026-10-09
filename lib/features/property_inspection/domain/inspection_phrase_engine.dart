@@ -711,7 +711,7 @@ class InspectionPhraseEngine {
       case 'activity_issues_other_matters':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_risks_risk_to_building_':
-        return _risksRiskToBuilding(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_risks_other_':
         return _risksOther(answers);
       case 'activity_risks_repair_or_improve':
@@ -2433,82 +2433,6 @@ class InspectionPhraseEngine {
       return '${prefix}_INVESTIGATE';
     }
     return '${prefix}_NOTED';
-  }
-
-  List<String> _risksRiskToBuilding(Map<String, String> answers) {
-    // Section J1 (Risk to Building) - approved bank imported in Phase 4.
-    final phrases = <String>[];
-
-    final movement = (answers['actv_movement_status'] ?? '').trim();
-    final movementSub =
-        _riskStatusSubCode(movement, prefix: '{BUILDING_MOVEMENTS_STATUS');
-    if (movementSub != null) {
-      final template = _sub('{RISK_TO_BUILDING}', '$movementSub}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
-    final subsidence = (answers['actv_subsidence_status'] ?? '').trim();
-    final subsidenceSub =
-        _riskStatusSubCode(subsidence, prefix: '{BUILDING_SUBSIDENCE_STATUS');
-    if (subsidenceSub != null) {
-      var template = _sub('{RISK_TO_BUILDING}', '$subsidenceSub}');
-      if (template.isNotEmpty) {
-        final locations = _labelsFor(
-          [
-            'cb_window_and_door_lintel',
-            'cb_extension_joints',
-            'cb_bay_windows',
-            'cb_other_619'
-          ],
-          answers,
-          {
-            'cb_window_and_door_lintel': 'window and door lintel',
-            'cb_extension_joints': 'extension joints',
-            'cb_bay_windows': 'bay windows',
-            'cb_other_619': 'other',
-          },
-        );
-        _addOther(answers, 'cb_other_619', 'et_other_604', locations);
-        template = locations.isEmpty
-            ? template.replaceAll(' around {RTB_SUBSIDENCE_INVESTIGATE_LOCATION}', '')
-            : template.replaceAll(
-                '{RTB_SUBSIDENCE_INVESTIGATE_LOCATION}',
-                _toWords(locations).toLowerCase(),
-              );
-        phrases.addAll(_splitResolved(template));
-      }
-    }
-
-    final dampness = (answers['actv_dampness_status'] ?? '').trim();
-    final dampnessSub =
-        _riskStatusSubCode(dampness, prefix: '{BUILDING_DAMPNESS_STATUS');
-    if (dampnessSub != null) {
-      // Legacy dampness has 3 states: NONE / IMPLEMENT_ACTION / INVESTIGATE.
-      final key = dampnessSub == '{BUILDING_DAMPNESS_STATUS_NOTED'
-          ? '{BUILDING_DAMPNESS_STATUS_IMPLEMENT_ACTION}'
-          : '$dampnessSub}';
-      final template = _sub('{RISK_TO_BUILDING}', key);
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
-    final timber = (answers['actv_timber_sefect_status'] ?? '').trim();
-    final timberSub =
-        _riskStatusSubCode(timber, prefix: '{BUILDING_TIMBER_DEFECT_STATUS');
-    if (timberSub != null) {
-      // Legacy timber defect bank only has NONE / NOTED (no INVESTIGATE tier).
-      final key = timberSub == '{BUILDING_TIMBER_DEFECT_STATUS_INVESTIGATE'
-          ? '{BUILDING_TIMBER_DEFECT_STATUS_NOTED}'
-          : '$timberSub}';
-      final template = _sub('{RISK_TO_BUILDING}', key);
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
-    if (_isChecked(answers['cb_near_by_tree'])) {
-      final template = _sub('{RISK_TO_BUILDING}', '{BUILDING_NEAR_BY_TREES}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
-    return phrases;
   }
 
   List<String> _risksOther(Map<String, String> answers) {
