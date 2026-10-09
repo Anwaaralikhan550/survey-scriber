@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 383,
+  "screensAudited": 379,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2286,
-   "approvedLegacyBank": 559,
-   "approvedCurrentBankOnly": 1700,
+   "distinctEmitted": 2273,
+   "approvedLegacyBank": 553,
+   "approvedCurrentBankOnly": 1693,
    "unapproved": 0
   }
  },
@@ -1219,19 +1219,19 @@
    "sectionKey": "G",
    "screenId": "activity_services_heating_about_heating",
    "title": "About Heating System",
-   "dataFieldCount": 21,
-   "permutationCount": 75,
+   "dataFieldCount": 55,
+   "permutationCount": 57,
    "severities": [],
    "phraseStats": {
-    "total": 13,
-    "approvedLegacy": 3,
+    "total": 10,
+    "approvedLegacy": 0,
     "approvedCurrentBankOnly": 10,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is heated by a central boiler. I was unable to inspect the boiler unit due to restricted access or because it could not be located, and I cannot comment on its type or condition.",
-    "The property does not have a fixed heating system. Although no repair is currently required, the absence of fixed heating may result in cold rooms, condensation, and mould growth. It is also likely to adversely affect the property’s Energy Performance Certificate (EPC) rating and may impact its marketability. You should consider installing a suitable fixed heating system.",
-    "The property is heated centrally by a communal heating system. I could not inspect the system due to access restrictions and cannot comment on the type and condition."
+    "No heating: The property does not have a fixed heating system. Although no repair is currently required, the absence of fixed heating may result in cold rooms, condensation, and mould growth. It is also likely to adversely affect the property's Energy Performance Certificate (EPC) rating and may impact its marketability. You should consider installing a suitable fixed heating system.",
+    "Heating not found: I was unable to locate the boiler or heating system. Please ask the vendor about the location of the boiler or heating system, as you must know where it is located.",
+    "Communal heating: The property is heated centrally by a communal heating system. I could not inspect the system due to access restrictions and cannot comment on the type and condition."
    ]
   },
   {
@@ -1447,17 +1447,17 @@
    "sectionKey": "G",
    "screenId": "activity_services_heating_repair_main_screen",
    "title": "Repairs",
-   "dataFieldCount": 10,
+   "dataFieldCount": 12,
    "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 1,
+    "total": 1,
+    "approvedLegacy": 0,
     "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The radiator, pipework and sample detail in the lounge, bedroom, bathroom and sample detail are leaking. Although this is not yet serious, the problem can quickly get worse and damage other parts of the property. You should ask an appropriately qualified person to check this now and promptly resolve the situation."
+    "Repair: The radiator(s) and pipework in the lounge, bedroom, bathroom and sample detail areas are leaking, damaged and sample detail and may be causing damp to nearby elements. Although this is not yet serious, the problem can quickly get worse and damage other parts of the property. You should ask an appropriately qualified person to check this now and promptly resolve the situation. Where a significant leak has occurred causing damage to other parts of the property, this may indicate more widespread defects within the installation. A suitably qualified plumber/heating engineer should investigate the cause, carry out any necessary repairs, and inspect the remainder of the system without delay."
    ]
   },
   {
@@ -1582,23 +1582,6 @@
   },
   {
    "sectionKey": "G",
-   "screenId": "activity_services_heating_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 2,
-   "permutationCount": 4,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The heating installation could not be inspected. As it is not accessible, it should be inspected and tested by an appropriately qualified heating engineer before legal commitment."
-   ]
-  },
-  {
-   "sectionKey": "G",
    "screenId": "activity_services_water_heating_not_inspected",
    "title": "Not Inspected",
    "dataFieldCount": 1,
@@ -1636,64 +1619,11 @@
    "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 5,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The installation was inspected visually only. No operational testing or assessment of efficiency was undertaken, and its safety and serviceability cannot be confirmed. I recommend a test before purchase commitment by an appropriately qualified person to be certain regarding its condition under variable operational requirements."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_heating_radiators",
-   "title": "Radiators / Underfloor Pipes",
-   "dataFieldCount": 1,
-   "permutationCount": 5,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 2,
     "approvedCurrentBankOnly": 0,
     "unapproved": 0
    }
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_heating_other_heating",
-   "title": "Other Heating",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The property is heated by oil filled heaters. These appear in reasonable condition. However, I cannot comment on their serviceability as the system was not operating at the time of my inspection and I have no evidence of any service history. The property must be maintained in the normal way.",
-    "The property is heated by electric storage heaters. These appear in reasonable condition. However, I cannot comment on their serviceability as the system was not operating at the time of my inspection and I have no evidence of any service history. The property must be maintained in the normal way.",
-    "The property is heated by convector heaters. These appear in reasonable condition. However, I cannot comment on their serviceability as the system was not operating at the time of my inspection and I have no evidence of any service history. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_heating_old_boiler",
-   "title": "Old Boiler",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Although no significant defects were apparent from the limited visual inspection, the boiler is older. Older boilers are less efficient and may become increasingly unreliable and costly to maintain. You should anticipate replacement as the boiler approaches the end of its serviceable life."
-   ]
   },
   {
    "sectionKey": "G",

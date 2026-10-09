@@ -1427,41 +1427,41 @@ ffb22bb82f,G3,"Much of the plumbing is concealed within the structure, and the r
 443b036477,G4,"Although no repair is currently required, the absence of fixed heating may result in cold rooms, condensation, and mould growth.",EXACT,{G_HEATING}::{ABOUT_NO_HEATING},100,DONE
 1097e9d222,G4,It is also likely to adversely affect the property's Energy Performance Certificate (EPC) rating and may impact its marketability.,EXACT,{G_HEATING}::{ABOUT_NO_HEATING},100,DONE
 723a27047a,G4,You should consider installing a suitable fixed heating system.,EXACT,{G_HEATING}::{ABOUT_NO_HEATING},100,DONE
-dfc3c82067,G4,Heating not found: I was unable to locate the boiler or heating system.,ADD,{G_HEATING}::{ABOUT_NO_HEATING},57,OPEN
-648625652a,G4,"Please ask the vendor about the location of the boiler or heating system, as you must know where it is located.",ADD,{G_HEATING}::{ABOUT_FORCED_AIR},46,OPEN
+dfc3c82067,G4,Heating not found: I was unable to locate the boiler or heating system.,EXACT,{G_HEATING}::{G4_HEATING_NOT_FOUND},100,DONE
+648625652a,G4,"Please ask the vendor about the location of the boiler or heating system, as you must know where it is located.",EXACT,{G_HEATING}::{G4_HEATING_NOT_FOUND},100,DONE
 7a1f6e4d73,G4,Communal heating: The property is heated centrally by a communal heating system.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
 0d62aac814,G4,I could not inspect the system due to access restrictions and cannot comment on the type and condition.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
-18c124f06d,G4,"Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other.",MENU,,0,UNVERIFIED
-ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
-35f425e183,G4,No operational testing or assessment of efficiency was undertaken.,FIX,{G_HEATING}::{ABOUT_FORCED_AIR},73,OPEN
-5c9cccde43,G4,"Heat emitters: The boiler is connected to radiators, underfloor heating pipes, ceiling vents, wall vents, other as heat emitters; their capacity, efficiency, and lifespan are not readily ascertained.",MENU,,0,UNVERIFIED
+18c124f06d,G4,"Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other.",MENU,,0,VERIFIED
+ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+35f425e183,G4,No operational testing or assessment of efficiency was undertaken.,EXACT,{G_HEATING}::{G4_BOILER},100,DONE
+5c9cccde43,G4,"Heat emitters: The boiler is connected to radiators, underfloor heating pipes, ceiling vents, wall vents, other as heat emitters; their capacity, efficiency, and lifespan are not readily ascertained.",MENU,,0,VERIFIED
 357a27088e,G4,"I recommend these are serviced and demonstrated to yourselves, so you are satisfied with their performance under variable operational requirements.",EXACT,{G_HEATING}::{ABOUT_CONNECTED_TO_RADIATOR_UNDERFLOOR_PIPES},100,DONE
-a984c735bd,G4,"Room heaters: The property is heated by oil-filled, electric storage, individual room electric, other heaters.",MENU,,0,UNVERIFIED
+a984c735bd,G4,"Room heaters: The property is heated by oil-filled, electric storage, individual room electric, other heaters.",MENU,,0,VERIFIED
 601c9e2554,G4,These appear in reasonable condition.,EXACT,{G_HEATING}::{ABOUT_OTHER_HEATING},100,DONE
 c84e6c6555,G4,"However, I cannot comment on their serviceability as the system was not operating at the time of my inspection and I have no evidence of any service history.",EXACT,{G_HEATING}::{ABOUT_BOILER_FLUE_CONNECTED_TO},100,DONE
 7763876cac,G4,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
-3e8f153430,G4,"Any inspection, servicing or repair of the heating installation should be carried out by a Gas Safe registered engineer (or an OFTEC registered engineer for oil-fired systems).",ADD,{G_HEATING}::{NOT_INSPECTED},45,OPEN
-b87e38de4a,G4,"Appropriate servicing or commissioning records should be provided for the boiler, heating system, and any fixed heating appliances.",UNRESOLVED,{G_HEATING}::{STANDARD_TEXT_2},46,OPEN
-5e772e21ef,G4,"Your legal adviser should verify that these records, together with any available warranties or guarantees, are available before legal purchase commitment.",UNRESOLVED,{G_HEATING}::{STANDARD_TEXT_2},53,OPEN
+3e8f153430,G4,"Any inspection, servicing or repair of the heating installation should be carried out by a Gas Safe registered engineer (or an OFTEC registered engineer for oil-fired systems).",EXACT,{G_HEATING}::{STANDARD_TEXT_2},100,DONE
+b87e38de4a,G4,"Appropriate servicing or commissioning records should be provided for the boiler, heating system, and any fixed heating appliances.",EXACT,{G_HEATING}::{STANDARD_TEXT_2},100,DONE
+5e772e21ef,G4,"Your legal adviser should verify that these records, together with any available warranties or guarantees, are available before legal purchase commitment.",EXACT,{G_HEATING}::{STANDARD_TEXT_2},100,DONE
 1a1d2f34ae,G4,"Old boiler: Although no significant defects were apparent from the limited visual inspection, the boiler is older.",EXACT,{G_HEATING}::{ABOUT_OLD_BOILER},100,DONE
 74d237c4ce,G4,Older boilers are less efficient and may become increasingly unreliable and costly to maintain.,EXACT,{G_HEATING}::{ABOUT_OLD_BOILER},100,DONE
 23784c86c8,G4,You should anticipate replacement as the boiler approaches the end of its serviceable life.,EXACT,{G_HEATING}::{ABOUT_OLD_BOILER},100,DONE
-1beefe3228,G4,"Repair: The radiator(s), pipework in the lounge, bedroom, bathroom, other areas are leaking, damaged, other and may be causing damp to nearby elements.",UNRESOLVED,{G_HEATING}::{REPAIR_MINOR_LEAKS},46,OPEN
-2608f80397,G4,"Although this is not yet serious, the problem can quickly get worse and damage other parts of the property.",EXACT,{G_HEATING}::{REPAIR_MINOR_LEAKS},100,DONE
-a2a412e3cf,G4,You should ask an appropriately qualified person to check this now and promptly resolve the situation.,EXACT,{G_HEATING}::{REPAIR_MINOR_LEAKS},100,DONE
-5f1da7ceba,G4,"Where a significant leak has occurred causing damage to other parts of the property, this may indicate more widespread defects within the installation.",ADD,{G_HEATING}::{REPAIR_MAJOR_LEAKS},62,OPEN
-e47b99966c,G4,"A suitably qualified plumber/heating engineer should investigate the cause, carry out any necessary repairs, and inspect the remainder of the system without delay.",UNRESOLVED,{G_HEATING}::{REPAIR_MAJOR_LEAKS},48,OPEN
-f09d4b6351,G4,"Forced Air Heating: The property is heated by a forced air heating system with the main unit located in the utility room, loft, garage, cupboard, basement, other.",MENU,,0,UNVERIFIED
-3c97743f96,G4,Warm air is distributed throughout the property via a network of ducts and vents.,FIX,{G_HEATING}::{ABOUT_FORCED_AIR},72,OPEN
+1beefe3228,G4,"Repair: The radiator(s), pipework in the lounge, bedroom, bathroom, other areas are leaking, damaged, other and may be causing damp to nearby elements.",MENU,,0,VERIFIED
+2608f80397,G4,"Although this is not yet serious, the problem can quickly get worse and damage other parts of the property.",EXACT,{G_HEATING}::{G4_REPAIR},100,DONE
+a2a412e3cf,G4,You should ask an appropriately qualified person to check this now and promptly resolve the situation.,EXACT,{G_HEATING}::{G4_REPAIR},100,DONE
+5f1da7ceba,G4,"Where a significant leak has occurred causing damage to other parts of the property, this may indicate more widespread defects within the installation.",EXACT,{G_HEATING}::{G4_REPAIR},100,DONE
+e47b99966c,G4,"A suitably qualified plumber/heating engineer should investigate the cause, carry out any necessary repairs, and inspect the remainder of the system without delay.",EXACT,{G_HEATING}::{G4_REPAIR},100,DONE
+f09d4b6351,G4,"Forced Air Heating: The property is heated by a forced air heating system with the main unit located in the utility room, loft, garage, cupboard, basement, other.",MENU,,0,VERIFIED
+3c97743f96,G4,Warm air is distributed throughout the property via a network of ducts and vents.,EXACT,{G_HEATING}::{G4_FORCED_AIR},100,DONE
 b650c39595,G4,"The installation was inspected visually only, and no operational testing or assessment of efficiency was undertaken.",EXACT,{G_HEATING}::{ABOUT_FORCED_AIR},100,DONE
 7763876cac,G4,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
-9303cd1e46,G4,"Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property.",UNRESOLVED,{G_HEATING}::{ABOUT_AIR_SOURCE_HEAT_PUMP_LOCATED},84,OPEN
-ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
-c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency or controls was undertaken.",FIX,{G_HEATING}::{ABOUT_AIR_SOURCE_HEAT_PUMP_LOCATED},78,OPEN
-66a388d659,G4,"Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other.",MENU,,0,UNVERIFIED
+9303cd1e46,G4,"Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property.",MENU,,0,VERIFIED
+ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency or controls was undertaken.",EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+66a388d659,G4,"Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other.",MENU,,0,VERIFIED
 f867415b7f,G4,The associated ground collectors or boreholes are below ground and could not be inspected.,EXACT,{G_HEATING}::{ABOUT_GROUND_SOURCE_HEAT_PUMP_LOCATED},100,DONE
-ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
-c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency or controls was undertaken.",FIX,{G_HEATING}::{ABOUT_AIR_SOURCE_HEAT_PUMP_LOCATED},78,OPEN
+ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency or controls was undertaken.",EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
 f6403e6eca,G5,I was unable to locate the water heating system.,ADD,{G_WATER_HEATING}::{ELECTRIC_WATER_HEATING_OTHER},60,OPEN
 fcaa35b461,G5,"Please ask the vendor about the location of the water heating system, as it is important that you know where it is located.",ADD,{G_WATER_HEATING}::{GAS_WATER_HEATING_COMBI_BOILER},49,OPEN
 0b1e713e79,G5,"Communal water heating: The property has hot water centrally by a communal water heating system, gas-powered.",ADD,{G_WATER_HEATING}::{ELECTRIC_WATER_HEATING_OTHER},60,OPEN
@@ -1470,16 +1470,16 @@ fcaa35b461,G5,"Please ask the vendor about the location of the water heating sys
 18a496d0c4,G5,"Water heating: The hot water is provided by the combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other installed in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,UNVERIFIED
 1ebbeb0848,G5,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 c0aeff24d7,G5,"Electric Immersion: The hot water is provided by an insulated cylinder located in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,UNVERIFIED
-2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
-fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,ADD,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},66,OPEN
+2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,EXACT,{G_HEATING}::{G4_BOILER},100,DONE
 6e090c60c6,G5,Poor cylinder insulation: The hot water cylinder is not properly insulated.,EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 0693c2d809,G5,"Hot water tanks store water for long periods, and there will be a waste of energy if these tanks and the adjacent pipes are not properly insulated.",EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 8ccd8e73de,G5,This should be insulated soon.,EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 9dbbc2cc23,G5,Point-of-use: Hot water is provided by individual electric point-of-use water heaters serving individual outlets or appliances.,ADD,{G_WATER_HEATING}::{ELECTRIC_WATER_HEATING_OTHER},61,OPEN
-2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
+2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
 eff2aa202a,G5,"No operational testing or assessment of performance, efficiency or remaining service life was undertaken.",ADD,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},60,OPEN
-2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{STANDARD_TEXT},100,DONE
-fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,ADD,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},66,OPEN
+2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,EXACT,{G_HEATING}::{G4_BOILER},100,DONE
 ed0829e79e,G5,Solar water heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply.,EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
 bf277d4115,G5,"The installation was inspected visually only, and no operational testing or assessment of performance was undertaken.",EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
 bd76685055,G5,Routine maintenance should be carried out in accordance with the manufacturer's recommendations.,EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE

@@ -8691,6 +8691,252 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_asbestos_material',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'g4_no_heating',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_NO_HEATING}',
+    [
+    ],
+    whenField: 'cb_no_heating',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_not_found',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_HEATING_NOT_FOUND}',
+    [
+    ],
+    whenField: 'cb_heating_not_found',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_communal',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_COMMUNAL_HEATING}',
+    [
+    ],
+    whenField: 'cb_communal_heating',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_boiler',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_BOILER}',
+    [
+      VerbatimToken(
+        '{HEAT_BOILER_TYPE}',
+        options: {
+          'g4b_combination_boiler': 'combination boiler',
+          'g4b_conventional_boiler': 'conventional boiler',
+          'g4b_sealed_boiler_system': 'sealed boiler system',
+          'g4b_electrical_boiler': 'electrical boiler',
+          'g4b_oil_fired_boiler': 'oil-fired boiler',
+        },
+        otherCheckbox: 'g4b_other',
+        otherText: 'g4b_other_text',
+        pdfOptions: ['combination boiler', 'conventional boiler', 'sealed boiler system', 'electrical boiler', 'oil-fired boiler'],
+      ),
+      VerbatimToken(
+        '{HEAT_BOILER_LOCATION}',
+        options: {
+          'g4l_kitchen': 'kitchen',
+          'g4l_utility_room': 'utility room',
+          'g4l_bedroom': 'bedroom',
+          'g4l_under_the_stairs': 'under the stairs',
+          'g4l_garage': 'garage',
+        },
+        otherCheckbox: 'g4l_other',
+        otherText: 'g4l_other_text',
+        pdfOptions: ['kitchen', 'utility room', 'bedroom', 'under the stairs', 'garage'],
+      ),
+    ],
+    pdf:
+        'Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other.',
+    whenField: 'cb_boiler_present',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_emitters',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_HEAT_EMITTERS}',
+    [
+      VerbatimToken(
+        '{HEAT_EMITTERS}',
+        options: {
+          'g4e_radiators': 'radiators',
+          'g4e_underfloor_heating_pipes': 'underfloor heating pipes',
+          'g4e_ceiling_vents': 'ceiling vents',
+          'g4e_wall_vents': 'wall vents',
+        },
+        otherCheckbox: 'g4e_other',
+        otherText: 'g4e_other_text',
+        pdfOptions: ['radiators', 'underfloor heating pipes', 'ceiling vents', 'wall vents'],
+      ),
+    ],
+    pdf:
+        'Heat emitters: The boiler is connected to radiators, underfloor heating pipes, ceiling vents, wall vents, other as heat emitters; their capacity, efficiency, and lifespan are not readily ascertained.',
+    whenField: 'cb_connected_to_radiator',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_room_heaters',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_ROOM_HEATERS}',
+    [
+      VerbatimToken(
+        '{HEAT_ROOM_HEATERS}',
+        options: {
+          'g4r_oil_filled': 'oil-filled',
+          'g4r_electric_storage': 'electric storage',
+          'g4r_individual_room_electric': 'individual room electric',
+        },
+        otherCheckbox: 'g4r_other',
+        otherText: 'g4r_other_text',
+        pdfOptions: ['oil-filled', 'electric storage', 'individual room electric'],
+      ),
+    ],
+    pdf:
+        'Room heaters: The property is heated by oil-filled, electric storage, individual room electric, other heaters.',
+    whenField: 'cb_room_heaters',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_old_boiler',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_OLD_BOILER}',
+    [
+    ],
+    whenField: 'cb_old_boiler',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_forced_air',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_FORCED_AIR}',
+    [
+      VerbatimToken(
+        '{HEAT_FORCED_AIR_LOCATION}',
+        options: {
+          'g4f_utility_room': 'utility room',
+          'g4f_loft': 'loft',
+          'g4f_garage': 'garage',
+          'g4f_cupboard': 'cupboard',
+          'g4f_basement': 'basement',
+        },
+        otherCheckbox: 'g4f_other',
+        otherText: 'g4f_other_text',
+        pdfOptions: ['utility room', 'loft', 'garage', 'cupboard', 'basement'],
+      ),
+    ],
+    pdf:
+        'Forced Air Heating: The property is heated by a forced air heating system with the main unit located in the utility room, loft, garage, cupboard, basement, other.',
+    whenField: 'cb_forced_air',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_ashp',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_AIR_SOURCE_HEAT_PUMP}',
+    [
+      VerbatimToken(
+        '{HEAT_ASHP_INTERNAL_LOC}',
+        options: {
+          'g4ai_kitchen': 'kitchen',
+          'g4ai_utility_room': 'utility room',
+          'g4ai_garage': 'garage',
+        },
+        otherCheckbox: 'g4ai_other',
+        otherText: 'g4ai_other_text',
+        pdfOptions: ['kitchen', 'utility room', 'garage'],
+      ),
+      VerbatimToken(
+        '{HEAT_ASHP_EXTERNAL_LOC}',
+        options: {
+          'g4ae_front': 'front',
+          'g4ae_side': 'side',
+          'g4ae_rear': 'rear',
+        },
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+    ],
+    pdf:
+        'Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property.',
+    whenField: 'cb_air_source_heat_pump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_gshp',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_GROUND_SOURCE_HEAT_PUMP}',
+    [
+      VerbatimToken(
+        '{HEAT_GSHP_INTERNAL_LOC}',
+        options: {
+          'g4gi_kitchen': 'kitchen',
+          'g4gi_utility_room': 'utility room',
+          'g4gi_garage': 'garage',
+        },
+        otherCheckbox: 'g4gi_other',
+        otherText: 'g4gi_other_text',
+        pdfOptions: ['kitchen', 'utility room', 'garage'],
+      ),
+    ],
+    pdf:
+        'Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other.',
+    whenField: 'cb_ground_source_heat_pump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_repair',
+    'activity_services_heating_repair_main_screen',
+    '{G_HEATING}',
+    '{G4_REPAIR}',
+    [
+      VerbatimToken(
+        '{HEAT_REPAIR_ITEM}',
+        options: {
+          'g4ri_radiator_s': 'radiator(s)',
+          'g4ri_pipework': 'pipework',
+        },
+        pdfOptions: ['radiator(s)', 'pipework'],
+      ),
+      VerbatimToken(
+        '{HEAT_REPAIR_LOCATION}',
+        options: {
+          'g4rl_lounge': 'lounge',
+          'g4rl_bedroom': 'bedroom',
+          'g4rl_bathroom': 'bathroom',
+        },
+        otherCheckbox: 'g4rl_other',
+        otherText: 'g4rl_other_text',
+        pdfOptions: ['lounge', 'bedroom', 'bathroom'],
+      ),
+      VerbatimToken(
+        '{HEAT_REPAIR_DEFECT}',
+        options: {
+          'g4rd_leaking': 'leaking',
+          'g4rd_damaged': 'damaged',
+        },
+        otherCheckbox: 'g4rd_other',
+        otherText: 'g4rd_other_text',
+        pdfOptions: ['leaking', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Repair: The radiator(s), pipework in the lounge, bedroom, bathroom, other areas are leaking, damaged, other and may be causing damp to nearby elements.',
+    whenField: 'cb_g4_repair',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

@@ -184,16 +184,15 @@ class InspectionPhraseEngine {
       case 'activity_services_water_not_inspected':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_heating_main_screen':
-        return [
-          ..._servicesHeatingAbout(answers),
-          ..._servicesHeatingMain(answers),
-        ];
+        return _conditionRatingNotes(answers,
+            ratingKey: 'android_material_design_spinner4',
+            master: '{G_HEATING}');
       case 'activity_services_heating_about_heating':
-        return _servicesHeatingAbout(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_heating_repair_main_screen':
-        return _servicesHeatingRepair(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_heating_not_inspected':
-        return _servicesHeatingNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_main_screen':
         return _servicesDrainageMain(answers);
       case 'activity_services_drainage':
@@ -797,11 +796,11 @@ class InspectionPhraseEngine {
       case 'services_water_insulation':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_heating_radiators':
-        return _servicesHeatingRadiators(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_heating_other_heating':
-        return _servicesHeatingOtherHeating(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_heating_old_boiler':
-        return _servicesHeatingOldBoiler(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_repair_main_screen':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_repair_asbestos':
@@ -3063,215 +3062,6 @@ class InspectionPhraseEngine {
     }
 
     return phrases;
-  }
-
-  List<String> _servicesHeatingMain(Map<String, String> answers) {
-    final phrases = <String>[];
-    final standard = _sub('{G_HEATING}', '{STANDARD_TEXT}');
-    if (standard.isNotEmpty) {
-      phrases.addAll(_split(_normalize(standard)));
-    }
-
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
-    if (rating.isNotEmpty) {
-      var template = _sub('{G_HEATING}', '{CONDITION_RATING}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{HEAT_COND_RATING}', rating);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final notes = (answers['ar_etNote'] ?? '').trim();
-    if (notes.isNotEmpty) {
-      var template = _sub('{G_HEATING}', '{NOTES}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{HEAT_NOTES}', notes);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesHeatingAbout(Map<String, String> answers) {
-    if (_isChecked(answers['cb_not_inspected'])) {
-      final template = _sub('{G_HEATING}', '{ABOUT_HEATING_NOT_INSPECTED}');
-      if (template.isEmpty) return const [];
-      return _split(_normalize(template));
-    }
-
-    final noHeating = _isChecked(answers['cb_no_heating'])
-        ? _sub('{G_HEATING}', '{ABOUT_NO_HEATING}')
-        : '';
-    final communal = _isChecked(answers['cb_communal_heating'])
-        ? _sub('{G_HEATING}', '{ABOUT_COMMUNAL_HEATING}')
-        : '';
-
-    final otherHeatingSelections = _labelsFor(
-      ['cb_oil_filled', 'cb_electric_storage', 'cb_convector', 'cb_other_923'],
-      answers,
-      {
-        'cb_oil_filled': 'Oil filled',
-        'cb_electric_storage': 'Electric storage',
-        'cb_convector': 'Convector',
-        'cb_other_923': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_923', 'et_other_717', otherHeatingSelections);
-    var otherHeating = '';
-    if (otherHeatingSelections.isNotEmpty) {
-      var template = _sub('{G_HEATING}', '{ABOUT_OTHER_HEATING}');
-      if (template.isNotEmpty) {
-        otherHeating = template.replaceAll(
-          '{HEAT_OTHER_HEATING}',
-          _toWords(otherHeatingSelections).toLowerCase(),
-        );
-      }
-    }
-
-    String aboutInspected = '';
-    final heatedBy = _cleanLower(answers['actv_boiler']);
-    final location = _cleanLower(answers['actv_location']);
-    if (heatedBy.isNotEmpty && location.isNotEmpty) {
-      var template = _sub('{G_HEATING}', '{ABOUT_INSPECTED}');
-      if (template.isNotEmpty) {
-        aboutInspected = template
-            .replaceAll('{HEAT_HEATED_BY_BOILER}', heatedBy)
-            .replaceAll('{HEAT_BOILER_LOCATION}', location);
-      }
-    }
-
-    String flueText = '';
-    final flueLocation = _cleanLower(answers['actv_location_new']);
-    final flueCondition = _cleanLower(answers['actv_condition']);
-    if (flueLocation.isNotEmpty && flueCondition.isNotEmpty) {
-      var template = _sub('{G_HEATING}', '{ABOUT_BOILER_FLUE_CONNECTED_TO}');
-      if (template.isNotEmpty) {
-        flueText = template
-            .replaceAll('{HEAT_BOILER_FLUE_CONN_LOC}', flueLocation)
-            .replaceAll('{HEAT_BOILER_FLUE_CONN_COND}', flueCondition);
-      }
-    }
-
-    String connected = '';
-    final connectedTo = _cleanLower(answers['actv_connected_heat']);
-    if (connectedTo.isNotEmpty) {
-      var template =
-          _sub('{G_HEATING}', '{ABOUT_CONNECTED_TO_RADIATOR_UNDERFLOOR_PIPES}');
-      if (template.isNotEmpty) {
-        connected = template.replaceAll('{HEAT_CONNECTED_TO}', connectedTo);
-      }
-    }
-
-    final oldBoiler = _isChecked(answers['cb_old_boiler'])
-        ? _sub('{G_HEATING}', '{ABOUT_OLD_BOILER}')
-        : '';
-
-    var wrapper = _sub('{G_HEATING}', '{ABOUT_HEATING_INSPECTED}');
-    if (wrapper.isEmpty) return const [];
-    wrapper = wrapper
-        .replaceAll('{ABOUT_NO_HEATING}', noHeating)
-        .replaceAll('{ABOUT_COMMUNAL_HEATING}', communal)
-        .replaceAll('{ABOUT_OTHER_HEATING}', otherHeating)
-        .replaceAll('{ABOUT_INSPECTED}', aboutInspected)
-        .replaceAll('{ABOUT_BOILER_FLUE_CONNECTED_TO}', flueText)
-        .replaceAll('{ABOUT_CONNECTED_TO_RADIATOR_UNDERFLOOR_PIPES}', connected)
-        .replaceAll('{ABOUT_OLD_BOILER}', oldBoiler);
-    final phrases = _split(_normalize(wrapper));
-
-    // Revised-spec heating types (each its own approved advisory, triggered by
-    // its own checkbox on the About Heating screen).
-    void appendHeatingType(String checkbox, String subKey) {
-      if (_isChecked(answers[checkbox])) {
-        final t = _sub('{G_HEATING}', subKey);
-        if (t.isNotEmpty) phrases.addAll(_split(_normalize(t)));
-      }
-    }
-
-    // Air source heat pump — capture internal + external unit locations when
-    // both are recorded (revised spec); otherwise the plain advisory.
-    if (_isChecked(answers['cb_air_source_heat_pump'])) {
-      final intLoc = _cleanLower(answers['actv_ashp_internal_location']);
-      final extLoc = _cleanLower(answers['actv_ashp_external_location']);
-      if (intLoc.isNotEmpty && extLoc.isNotEmpty) {
-        final t = _sub('{G_HEATING}', '{ABOUT_AIR_SOURCE_HEAT_PUMP_LOCATED}');
-        if (t.isNotEmpty) {
-          phrases.addAll(_split(_normalize(t
-              .replaceAll('{HEAT_ASHP_INTERNAL_LOC}', intLoc)
-              .replaceAll('{HEAT_ASHP_EXTERNAL_LOC}', extLoc))));
-        }
-      } else {
-        appendHeatingType(
-            'cb_air_source_heat_pump', '{ABOUT_AIR_SOURCE_HEAT_PUMP}');
-      }
-    }
-
-    // Ground source heat pump — capture the internal unit location when
-    // recorded; otherwise the plain advisory.
-    if (_isChecked(answers['cb_ground_source_heat_pump'])) {
-      final intLoc = _cleanLower(answers['actv_gshp_internal_location']);
-      if (intLoc.isNotEmpty) {
-        final t = _sub('{G_HEATING}', '{ABOUT_GROUND_SOURCE_HEAT_PUMP_LOCATED}');
-        if (t.isNotEmpty) {
-          phrases.addAll(_split(_normalize(
-              t.replaceAll('{HEAT_GSHP_INTERNAL_LOC}', intLoc))));
-        }
-      } else {
-        appendHeatingType(
-            'cb_ground_source_heat_pump', '{ABOUT_GROUND_SOURCE_HEAT_PUMP}');
-      }
-    }
-
-    appendHeatingType('cb_forced_air', '{ABOUT_FORCED_AIR}');
-    return phrases;
-  }
-
-  List<String> _servicesHeatingRepair(Map<String, String> answers) {
-    final severity = _cleanLower(answers['actv_leaks']);
-    final items = _labelsFor(
-      ['cb_radiator', 'cb_pipework', 'cb_other_245'],
-      answers,
-      {
-        'cb_radiator': 'Radiator',
-        'cb_pipework': 'Pipework',
-        'cb_other_245': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_245', 'et_other_277', items);
-    final locations = _labelsFor(
-      ['cb_lounge', 'cb_bedroom', 'cb_bathroom', 'cb_other_717'],
-      answers,
-      {
-        'cb_lounge': 'Lounge',
-        'cb_bedroom': 'Bedroom',
-        'cb_bathroom': 'Bathroom',
-        'cb_other_717': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_717', 'et_other_263', locations);
-
-    if (severity.isEmpty || items.isEmpty || locations.isEmpty) return const [];
-    final phraseCode = severity.contains('major')
-        ? '{REPAIR_MAJOR_LEAKS}'
-        : '{REPAIR_MINOR_LEAKS}';
-    var template = _sub('{G_HEATING}', phraseCode);
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{HEAT_REP_ITEM}', _toWords(items).toLowerCase())
-        .replaceAll('{HEAT_REP_LOCATION}', _toWords(locations).toLowerCase())
-        .replaceAll('{IS_ARE}', _isAre(items));
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesHeatingNotInspected(Map<String, String> answers) {
-    if (_isChecked(answers['cb_no_heating']) ||
-        _isChecked(answers['cb_boiler_unit_not_inspected'])) {
-      final template = _sub('{G_HEATING}', '{NOT_INSPECTED}');
-      if (template.isNotEmpty) {
-        return _split(_normalize(template));
-      }
-    }
-    return const [];
   }
 
   List<String> _servicesDrainageMain(Map<String, String> answers) {
@@ -5693,50 +5483,6 @@ class InspectionPhraseEngine {
     if (floors.isNotEmpty) phrases.add('Number of floors: $floors.');
 
     return phrases;
-  }
-
-  // Section G: Services - heating radiators
-  List<String> _servicesHeatingRadiators(Map<String, String> answers) {
-    final type = _cleanLower(answers['actv_radiators_and_clandad_floor_pipes']);
-    if (type.isEmpty) return const [];
-    var template = _sub(
-      '{G_HEATING}',
-      '{ABOUT_CONNECTED_TO_RADIATOR_UNDERFLOOR_PIPES}',
-    );
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{HEAT_CONNECTED_TO}', type);
-    return _split(_normalize(template));
-  }
-
-  // Section G: Services - other heating
-  List<String> _servicesHeatingOtherHeating(Map<String, String> answers) {
-    final items = _labelsFor(
-      ['cb_oil_filled', 'cb_electric_storage', 'cb_convector', 'cb_other_923'],
-      answers,
-      {
-        'cb_oil_filled': 'Oil filled',
-        'cb_electric_storage': 'Electric storage',
-        'cb_convector': 'Convector',
-        'cb_other_923': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_923', 'et_other_717', items);
-    if (items.isEmpty) return const [];
-    var template = _sub('{G_HEATING}', '{ABOUT_OTHER_HEATING}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-      '{HEAT_OTHER_HEATING}',
-      _toWords(items).toLowerCase(),
-    );
-    return _split(_normalize(template));
-  }
-
-  // Section G: Services - old boiler
-  List<String> _servicesHeatingOldBoiler(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_old_boiler'])) return const [];
-    final template = _sub('{G_HEATING}', '{ABOUT_OLD_BOILER}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
   }
 
   // Section G: Services - drainage chamber lids
