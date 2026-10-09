@@ -22,12 +22,13 @@ import sys
 from rapidfuzz import fuzz, process
 
 sys.path.insert(0, os.path.dirname(__file__))
-from common import (bank_sentence_index, is_menu_or_directive, load_bank,  # noqa: E402
-                    load_pdf, norm, sentences, utf8_stdout)
+from common import (ScopedMatcher, bank_case_index, bank_sentence_index,  # noqa: E402
+                    cnorm, is_menu_or_directive, load_bank, load_pdf, norm,
+                    sentences, utf8_stdout)
 
 LEDGER = 'tool/phrase_audit/verbatim/ledger.csv'
 DECISIONS = 'tool/phrase_audit/verbatim/ledger_decisions.csv'
-DONE_BY_HAND = {'ACCEPT', 'HEADING', 'TOKENISED'}  # reviewed + justified
+DONE_BY_HAND = {'ACCEPT', 'HEADING', 'TOKENISED', 'FIXED', 'ADDED'}  # reviewed / applied
 
 
 def row_id(section, sentence):
@@ -46,7 +47,8 @@ def build():
     bank = load_bank()
     pdf = load_pdf()
     idx = bank_sentence_index(bank)
-    norms = list(idx)
+    sm = ScopedMatcher(bank, pdf)
+    cidx = bank_case_index(bank)
     decisions = load_decisions()
     rows = []
     for e in pdf['entries']:
@@ -56,15 +58,17 @@ def build():
             key, score = '', 0
             if is_menu_or_directive(n):
                 disp, status = 'MENU', 'DONE'
-            elif n in idx:
+            elif n in idx and any(c[1:] == cnorm(s)[1:] for c in cidx[n]):
+                # exact incl. capitals and punctuation (first letter may differ)
                 disp, status, key, score = 'EXACT', 'DONE', idx[n][0], 100
+            elif n in idx:
+                disp, status, key, score = 'UNRESOLVED', 'OPEN', idx[n][0], 99  # case/punctuation only
             else:
-                r = process.extractOne(n, norms, scorer=fuzz.ratio)
-                score = round(r[1]) if r else 0
-                key = idx[r[0]][0] if r else ''
+                score, _, key = sm.best(n, e['key'])
                 disp = 'NEAR' if score >= 95 else 'UNRESOLVED'
                 status = 'OPEN'
-            if rid in decisions:
+            # A hand decision applies only while the row is not already exact.
+            if rid in decisions and disp not in ('EXACT', 'MENU'):
                 d = decisions[rid]
                 disp = d['disposition']
                 status = 'DONE' if disp in DONE_BY_HAND else 'OPEN'
