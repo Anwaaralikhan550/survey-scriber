@@ -1,0 +1,269 @@
+[
+  {
+    "screen": "activity_inside_property_limitation",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f0_concealed",
+        "masters": [
+          "{F_INSIDE_THE_PROPERTY}"
+        ],
+        "sub": "{F0_CONCEALED}",
+        "text": "It was not practical to inspect parts of the property that were covered, concealed or otherwise inaccessible without causing damage or disturbance, such as lifting carpets or removing fixed fittings. Consequently, no assurance can be given regarding the condition of these concealed areas. This report relates only to those parts of the property that were reasonably accessible at the time of the inspection.",
+        "tokens": [],
+        "when": [
+          "cb_f0_concealed",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_f0_concealed",
+            "label": "Concealed or inaccessible parts",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f0_roofspace",
+        "masters": [
+          "{F_INSIDE_THE_PROPERTY}"
+        ],
+        "sub": "{F0_ROOF_SPACE_INACCESSIBLE}",
+        "text": "Where the roof space is inaccessible due to the absence of a suitable access hatch or the presence of other obstructions, I am unable to assess the type, presence, adequacy or condition of the insulation or concealed roof timbers. Where available, the Energy Performance Certificate (EPC) may provide additional information regarding the insulation within the roof space.",
+        "tokens": [],
+        "when": [
+          "cb_f0_roofspace",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_f0_roofspace",
+            "label": "Roof space inaccessible",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f0_moisture",
+        "masters": [
+          "{F_INSIDE_THE_PROPERTY}"
+        ],
+        "sub": "{F0_MOISTURE}",
+        "text": "Moisture readings represent the condition of the property only at the time of the inspection and cannot provide absolute assurance that concealed surfaces or structural elements are free from moisture-related defects. Weather conditions, temperature, and humidity can all influence moisture levels and the observations made during an inspection. Where my findings are inconclusive regarding the extent or cause of dampness, I recommend that you arrange a further investigation by a suitably qualified independent specialist. The inspection should be carried out in accordance with the Joint Position Statement (JPS) 2022, Investigation of Moisture and its Effects on Traditional Buildings, and should be undertaken independently of any contractor providing quotations for remedial work.",
+        "tokens": [],
+        "when": [
+          "cb_f0_moisture",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_f0_moisture",
+            "label": "Moisture readings",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f0_visual",
+        "masters": [
+          "{F_INSIDE_THE_PROPERTY}"
+        ],
+        "sub": "{F0_VISUAL}",
+        "text": "The inspection was visual and non-invasive. Floor coverings were not lifted, furniture and stored items were not moved, and no opening up or destructive investigation was undertaken. Comments relate only to the condition observed at the time of the inspection.",
+        "tokens": [],
+        "when": [
+          "cb_f0_visual",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_f0_visual",
+            "label": "Visual and non-invasive inspection",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f0_limited",
+        "masters": [
+          "{F_INSIDE_THE_PROPERTY}"
+        ],
+        "sub": "{F0_LIMITED_BY}",
+        "text": "Limitations: The inspection of the internal accommodation was limited by {F0_LIMITS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{F0_LIMITS}",
+            "options": [
+              [
+                "f0l_fitted_floor_coverings",
+                "fitted floor coverings"
+              ],
+              [
+                "f0l_furniture",
+                "furniture"
+              ],
+              [
+                "f0l_stored_items",
+                "stored items"
+              ],
+              [
+                "f0l_fixed_fittings",
+                "fixed fittings"
+              ],
+              [
+                "f0l_restricted_access",
+                "restricted access"
+              ],
+              [
+                "f0l_locked_rooms",
+                "locked rooms"
+              ],
+              [
+                "f0l_limited_roof_access",
+                "limited roof access"
+              ],
+              [
+                "f0l_limited_lighting",
+                "limited lighting"
+              ],
+              [
+                "f0l_health_and_safety_considerations",
+                "health, and safety considerations"
+              ]
+            ],
+            "pdf_options": [
+              "fitted floor coverings",
+              "furniture",
+              "stored items",
+              "fixed fittings",
+              "restricted access",
+              "locked rooms",
+              "limited roof access",
+              "limited lighting",
+              "health, and safety considerations"
+            ],
+            "label": "Limited by"
+          }
+        ],
+        "pdf": [
+          "Limitations: The inspection of the internal accommodation was limited by fitted floor coverings, furniture, stored items, fixed fittings, restricted access, locked rooms, limited roof access, limited lighting, health, and safety considerations."
+        ],
+        "when": [
+          "cb_f0_limited",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_f0_limited",
+            "label": "Internal accommodation limited by",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f0_roofavail",
+        "masters": [
+          "{F_INSIDE_THE_PROPERTY}"
+        ],
+        "sub": "{F0_ROOF_ACCESS_AVAILABLE}",
+        "text": "Where roof space access was available, only those areas that could be inspected safely from the access hatch and boarded areas were examined. Insulation, stored items, roof timbers, and restricted headroom may have limited the inspection. Inaccessible areas have not been inspected.",
+        "tokens": [],
+        "when": [
+          "cb_f0_roofavail",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_f0_roofavail",
+            "label": "Roof space access available",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f0_rnfi",
+        "masters": [
+          "{F_INSIDE_THE_PROPERTY}"
+        ],
+        "sub": "{F0_ROOF_NOT_FULLY}",
+        "text": "Roof Not Fully Inspected: I could not fully inspect the roof timber because of {F0_RNFI_REASONS} at the time of my inspection. No comments can be made regarding unseen elements.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{F0_RNFI_REASONS}",
+            "options": [
+              [
+                "f0r_limited_roof_height_the_floor_was_not_safe_to_walk_on",
+                "limited roof height; the floor was not safe to walk on"
+              ],
+              [
+                "f0r_floor_was_boarded",
+                "floor was boarded"
+              ],
+              [
+                "f0r_excessive_storage",
+                "excessive storage"
+              ],
+              [
+                "f0r_insulation",
+                "insulation"
+              ],
+              [
+                "f0r_underlining",
+                "underlining"
+              ]
+            ],
+            "pdf_options": [
+              "limited roof height; the floor was not safe to walk on",
+              "floor was boarded",
+              "excessive storage",
+              "insulation",
+              "underlining"
+            ],
+            "label": "Because of",
+            "other": [
+              "f0r_other",
+              "f0r_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection."
+        ],
+        "when": [
+          "cb_f0_rnfi",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_f0_rnfi",
+            "label": "Roof not fully inspected",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f0_unsafe",
+        "masters": [
+          "{F_INSIDE_THE_PROPERTY}"
+        ],
+        "sub": "{F0_UNSAFE_FLOOR}",
+        "text": "Unsafe floor: I could not fully inspect the roof timbers because the floor was unsafe to walk on at the time of my inspection.",
+        "tokens": [],
+        "when": [
+          "cb_f0_unsafe",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_f0_unsafe",
+            "label": "Unsafe floor",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

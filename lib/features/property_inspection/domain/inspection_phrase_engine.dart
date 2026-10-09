@@ -237,7 +237,7 @@ class InspectionPhraseEngine {
       case 'activity_services_water_heating_not_inspected':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_inside_property_limitation':
-        return _insidePropertyLimitations(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_inside_property_roof_structure_main_screen':
         return _conditionRatingNotes(answers,
             ratingKey: 'android_material_design_spinner4',
@@ -1321,67 +1321,7 @@ class InspectionPhraseEngine {
 
     return phrases;
   }
-
-  List<String> _insidePropertyLimitations(Map<String, String> answers) {
-    final phrases = <String>[];
-
-    if (_isChecked(answers['ch1'])) {
-      final chimney = _sub('{F_INSIDE_THE_PROPERTY}',
-          '{LIMITATIONS_CHIMNEY_FLUE_NOT_INSPECTED}');
-      if (chimney.isNotEmpty) {
-        phrases.addAll(_split(_normalize(chimney)));
-      }
-    }
-
-    if (_isChecked(answers['ch2'])) {
-      final reasons = _labelsFor(
-        [
-          'cb_statuslimited_roof_height',
-          'cb_floors_not_safe_to_walk_on',
-          'cb_some_or_all_of_the_floors_are_boarded',
-          'cb_excessive_storage_of_personal_goods',
-          'ch3',
-          'ch4',
-          'ch5',
-          'ch6',
-        ],
-        answers,
-        {
-          'cb_statuslimited_roof_height': 'Limited roof height',
-          'cb_floors_not_safe_to_walk_on': 'The floors are not safe to walk on',
-          'cb_some_or_all_of_the_floors_are_boarded':
-              'Some or all of the floors are boarded',
-          'cb_excessive_storage_of_personal_goods':
-              'Excessive storage of personal goods',
-          'ch3': 'No rear access',
-          'ch4': 'Airport',
-          'ch5': 'Motor way',
-          'ch6': 'Other',
-        },
-      );
-      _addOther(answers, 'ch6', 'etGroundTypeOther', reasons);
-
-      var roof = _sub('{F_INSIDE_THE_PROPERTY}',
-          '{LIMITATIONS_ROOF_TIMBER_NOT_FULLY_INSPECTED}');
-      if (roof.isNotEmpty && reasons.isNotEmpty) {
-        roof = roof.replaceAll(
-          '{LIM_RT_NOT_FULLY_INSPECTED_REASON}',
-          _toWords(reasons),
-        );
-        phrases.addAll(_split(_normalize(roof)));
-      }
-    }
-
-    if (phrases.isNotEmpty) {
-      final standard = _sub('{F_INSIDE_THE_PROPERTY}', '{STANDARD_TEXT}');
-      if (standard.isNotEmpty) {
-        phrases.addAll(_split(_normalize(standard)));
-      }
-    }
-
-    return phrases;
-  }
-
+
   List<String> _fireplacesMain(Map<String, String> answers) {
     final phrases = <String>[];
     final rating = _cleanLower(answers['android_material_design_spinner4']);

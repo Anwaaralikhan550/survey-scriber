@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1765,
-   "approvedLegacyBank": 123,
-   "approvedCurrentBankOnly": 1615,
+   "distinctEmitted": 1769,
+   "approvedLegacyBank": 119,
+   "approvedCurrentBankOnly": 1623,
    "unapproved": 0
   }
  },
@@ -1328,15 +1328,20 @@
    "sectionKey": "F",
    "screenId": "activity_inside_property_limitation",
    "title": "Limitations",
-   "dataFieldCount": 11,
-   "permutationCount": 13,
+   "dataFieldCount": 24,
+   "permutationCount": 26,
    "severities": [],
    "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "total": 8,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "It was not practical to inspect parts of the property that were covered, concealed or otherwise inaccessible without causing damage or disturbance, such as lifting carpets or removing fixed fittings. Consequently, no assurance can be given regarding the condition of these concealed areas. This report relates only to those parts of the property that were reasonably accessible at the time of the inspection.",
+    "Where the roof space is inaccessible due to the absence of a suitable access hatch or the presence of other obstructions, I am unable to assess the type, presence, adequacy or condition of the insulation or concealed roof timbers. Where available, the Energy Performance Certificate (EPC) may provide additional information regarding the insulation within the roof space.",
+    "Moisture readings represent the condition of the property only at the time of the inspection and cannot provide absolute assurance that concealed surfaces or structural elements are free from moisture-related defects. Weather conditions, temperature, and humidity can all influence moisture levels and the observations made during an inspection. Where my findings are inconclusive regarding the extent or cause of dampness, I recommend that you arrange a further investigation by a suitably qualified independent specialist. The inspection should be carried out in accordance with the Joint Position Statement (JPS) 2022, Investigation of Moisture and its Effects on Traditional Buildings, and should be undertaken independently of any contractor providing quotations for remedial work."
+   ]
   },
   {
    "sectionKey": "F",

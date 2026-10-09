@@ -12901,6 +12901,118 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_open_runoffs',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'f0_concealed',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_CONCEALED}',
+    [
+    ],
+    whenField: 'cb_f0_concealed',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_roofspace',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_ROOF_SPACE_INACCESSIBLE}',
+    [
+    ],
+    whenField: 'cb_f0_roofspace',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_moisture',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_MOISTURE}',
+    [
+    ],
+    whenField: 'cb_f0_moisture',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_visual',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_VISUAL}',
+    [
+    ],
+    whenField: 'cb_f0_visual',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_limited',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_LIMITED_BY}',
+    [
+      VerbatimToken(
+        '{F0_LIMITS}',
+        options: {
+          'f0l_fitted_floor_coverings': 'fitted floor coverings',
+          'f0l_furniture': 'furniture',
+          'f0l_stored_items': 'stored items',
+          'f0l_fixed_fittings': 'fixed fittings',
+          'f0l_restricted_access': 'restricted access',
+          'f0l_locked_rooms': 'locked rooms',
+          'f0l_limited_roof_access': 'limited roof access',
+          'f0l_limited_lighting': 'limited lighting',
+          'f0l_health_and_safety_considerations': 'health, and safety considerations',
+        },
+        pdfOptions: ['fitted floor coverings', 'furniture', 'stored items', 'fixed fittings', 'restricted access', 'locked rooms', 'limited roof access', 'limited lighting', 'health, and safety considerations'],
+      ),
+    ],
+    pdf:
+        'Limitations: The inspection of the internal accommodation was limited by fitted floor coverings, furniture, stored items, fixed fittings, restricted access, locked rooms, limited roof access, limited lighting, health, and safety considerations.',
+    whenField: 'cb_f0_limited',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_roofavail',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_ROOF_ACCESS_AVAILABLE}',
+    [
+    ],
+    whenField: 'cb_f0_roofavail',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_rnfi',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_ROOF_NOT_FULLY}',
+    [
+      VerbatimToken(
+        '{F0_RNFI_REASONS}',
+        options: {
+          'f0r_limited_roof_height_the_floor_was_not_safe_to_walk_on': 'limited roof height; the floor was not safe to walk on',
+          'f0r_floor_was_boarded': 'floor was boarded',
+          'f0r_excessive_storage': 'excessive storage',
+          'f0r_insulation': 'insulation',
+          'f0r_underlining': 'underlining',
+        },
+        otherCheckbox: 'f0r_other',
+        otherText: 'f0r_other_text',
+        pdfOptions: ['limited roof height; the floor was not safe to walk on', 'floor was boarded', 'excessive storage', 'insulation', 'underlining'],
+      ),
+    ],
+    pdf:
+        'Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection.',
+    whenField: 'cb_f0_rnfi',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_unsafe',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_UNSAFE_FLOOR}',
+    [
+    ],
+    whenField: 'cb_f0_unsafe',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

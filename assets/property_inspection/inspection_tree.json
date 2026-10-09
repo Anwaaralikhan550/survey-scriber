@@ -6696,91 +6696,137 @@
           "order": 1,
           "fields": [
             {
-              "id": "label_reason",
-              "label": "Reason",
+              "id": "cb_f0_concealed",
+              "label": "Concealed or inaccessible parts",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f0_roofspace",
+              "label": "Roof space inaccessible",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f0_moisture",
+              "label": "Moisture readings",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f0_visual",
+              "label": "Visual and non-invasive inspection",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f0_limited",
+              "label": "Internal accommodation limited by",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_f0_limits",
+              "label": "Limited by",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Chimney Flue Not Inspected",
+              "id": "f0l_fitted_floor_coverings",
+              "label": "fitted floor coverings",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Roof Timber Not fully inspected",
+              "id": "f0l_furniture",
+              "label": "furniture",
               "type": "checkbox"
             },
             {
-              "id": "cb_statuslimited_roof_height",
-              "label": "Limited roof height",
-              "type": "checkbox",
-              "conditionalOn": "ch2",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f0l_stored_items",
+              "label": "stored items",
+              "type": "checkbox"
             },
             {
-              "id": "cb_floors_not_safe_to_walk_on",
-              "label": "The floors are not safe to walk on",
-              "type": "checkbox",
-              "conditionalOn": "ch2",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f0l_fixed_fittings",
+              "label": "fixed fittings",
+              "type": "checkbox"
             },
             {
-              "id": "cb_some_or_all_of_the_floors_are_boarded",
-              "label": "Some or all of the floors are boarded",
-              "type": "checkbox",
-              "conditionalOn": "ch2",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f0l_restricted_access",
+              "label": "restricted access",
+              "type": "checkbox"
             },
             {
-              "id": "cb_excessive_storage_of_personal_goods",
-              "label": "Excessive storage of personal goods",
-              "type": "checkbox",
-              "conditionalOn": "ch2",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f0l_locked_rooms",
+              "label": "locked rooms",
+              "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "No rear access",
-              "type": "checkbox",
-              "conditionalOn": "ch2",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f0l_limited_roof_access",
+              "label": "limited roof access",
+              "type": "checkbox"
             },
             {
-              "id": "ch4",
-              "label": "Airport",
-              "type": "checkbox",
-              "conditionalOn": "ch2",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f0l_limited_lighting",
+              "label": "limited lighting",
+              "type": "checkbox"
             },
             {
-              "id": "ch5",
-              "label": "Motor way",
-              "type": "checkbox",
-              "conditionalOn": "ch2",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f0l_health_and_safety_considerations",
+              "label": "health, and safety considerations",
+              "type": "checkbox"
             },
             {
-              "id": "ch6",
+              "id": "cb_f0_roofavail",
+              "label": "Roof space access available",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f0_rnfi",
+              "label": "Roof not fully inspected",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_f0_rnfi_reasons",
+              "label": "Because of",
+              "type": "label"
+            },
+            {
+              "id": "f0r_limited_roof_height_the_floor_was_not_safe_to_walk_on",
+              "label": "limited roof height; the floor was not safe to walk on",
+              "type": "checkbox"
+            },
+            {
+              "id": "f0r_floor_was_boarded",
+              "label": "floor was boarded",
+              "type": "checkbox"
+            },
+            {
+              "id": "f0r_excessive_storage",
+              "label": "excessive storage",
+              "type": "checkbox"
+            },
+            {
+              "id": "f0r_insulation",
+              "label": "insulation",
+              "type": "checkbox"
+            },
+            {
+              "id": "f0r_underlining",
+              "label": "underlining",
+              "type": "checkbox"
+            },
+            {
+              "id": "f0r_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "ch2",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "etGroundTypeOther",
+              "id": "f0r_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch6",
+              "conditionalOn": "f0r_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_f0_unsafe",
+              "label": "Unsafe floor",
+              "type": "checkbox"
             }
           ],
           "reportDefaults": [

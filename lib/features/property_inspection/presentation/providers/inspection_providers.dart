@@ -1735,30 +1735,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       }
     }
 
-    if (_screenId == 'activity_inside_property_limitation') {
-      bool isChecked(String key) =>
-          (state.answers[key] ?? '').trim().toLowerCase() == 'true';
-      if (isChecked('ch2')) {
-        final reasonKeys = [
-          'cb_statuslimited_roof_height',
-          'cb_floors_not_safe_to_walk_on',
-          'cb_some_or_all_of_the_floors_are_boarded',
-          'cb_excessive_storage_of_personal_goods',
-          'ch3',
-          'ch4',
-          'ch5',
-          'ch6',
-        ];
-        if (!reasonKeys.any(isChecked)) {
-          return 'Select reason.';
-        }
-        final otherText = (state.answers['etGroundTypeOther'] ?? '').trim();
-        if (isChecked('ch6') && otherText.isEmpty) {
-          return 'Enter Other reason text or uncheck Other.';
-        }
-      }
-    }
-
     if (_screenId == _chimneyLocationScreenId) {
       final otherChecked =
           (state.answers['ch5'] ?? '').trim().toLowerCase() == 'true';
