@@ -23781,37 +23781,33 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_current_weather_conditions",
-              "label": "Current Weather Conditions",
-              "type": "label"
-            },
-            {
               "id": "android_material_design_spinner",
-              "label": "Current Weather",
+              "label": "Current weather",
               "type": "dropdown",
               "options": [
                 "Dry",
                 "Wet",
-                "Snowy",
-                "Changeable with occasional rain",
-                "Overcast with persistent rain"
+                "Overcast",
+                "Sunny",
+                "Cold",
+                "Windy",
+                "Rainy",
+                "Snowing"
               ]
             },
             {
-              "id": "label_previous_weather_conditions",
-              "label": "Previous Weather Conditions",
-              "type": "label"
-            },
-            {
               "id": "android_material_design_spinner2",
-              "label": "Previous Weather",
+              "label": "Previous weather",
               "type": "dropdown",
               "options": [
                 "Dry",
                 "Wet",
-                "Snowy",
-                "Changeable with occasional rain",
-                "Overcast with persistent rain"
+                "Overcast",
+                "Sunny",
+                "Cold",
+                "Windy",
+                "Rainy",
+                "Snowing"
               ]
             }
           ]
@@ -23829,7 +23825,8 @@
               "type": "dropdown",
               "options": [
                 "Occupied",
-                "Unoccupied"
+                "Vacant",
+                "Partly occupied"
               ]
             },
             {
@@ -23844,12 +23841,12 @@
             },
             {
               "id": "android_material_design_spinner3",
-              "label": "Floor Covering",
+              "label": "Floor covering",
               "type": "dropdown",
               "options": [
                 "Fully covered",
-                "Partially covered",
-                "No covering"
+                "Partly covered",
+                "Uncovered"
               ]
             }
           ]
@@ -23906,13 +23903,13 @@
               "type": "dropdown",
               "options": [
                 "North",
-                "South",
+                "North-east",
                 "East",
+                "South-east",
+                "South",
+                "South-west",
                 "West",
-                "Northeast",
-                "Northwest",
-                "Southeast",
-                "Southwest"
+                "North-west"
               ]
             }
           ]

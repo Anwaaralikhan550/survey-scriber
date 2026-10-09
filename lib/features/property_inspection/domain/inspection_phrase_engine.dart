@@ -36,11 +36,11 @@ class InspectionPhraseEngine {
       case 'activity_party_disclosure':
         return _partyDisclosure(answers);
       case 'activity_property_weather':
-        return _propertyWeather(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_status':
-        return _propertyStatus(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_facing':
-        return _propertyFacing(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_limitation':
         return _outsidePropertyLimitations(answers);
       case 'activity_outside_property_roof_covering':
@@ -1139,70 +1139,6 @@ class InspectionPhraseEngine {
         : _sub(phraseCode, subCode);
     if (template.isEmpty) return const [];
     return _split(_normalize(template));
-  }
-
-  List<String> _propertyWeather(Map<String, String> answers) {
-    final now = (answers['android_material_design_spinner'] ?? '').trim();
-    final before = (answers['android_material_design_spinner2'] ?? '').trim();
-    if (now.isEmpty && before.isEmpty) {
-      return const ['Not inspected'];
-    }
-    // Both values are required to complete this sentence; a double space
-    // where an empty value was substituted is not acceptable in a
-    // finalised client report, so wait until both are answered.
-    if (now.isEmpty || before.isEmpty) return const [];
-    final template = _phraseTexts['{D_WEATHER}'] ?? '';
-    if (template.isEmpty) return const [];
-    final resolved = _normalize(template)
-        .replaceAll('{WEATHER_NOW}', now.toLowerCase())
-        .replaceAll('{WEATHER_BEFORE}', before.toLowerCase());
-    return _split(resolved);
-  }
-
-  List<String> _propertyStatus(Map<String, String> answers) {
-    final occupancy = (answers['android_material_design_spinner'] ?? '').trim();
-    final furnishing =
-        (answers['android_material_design_spinner2'] ?? '').trim();
-    final flooring = (answers['android_material_design_spinner3'] ?? '').trim();
-    if (occupancy.isEmpty && furnishing.isEmpty && flooring.isEmpty) {
-      return const ['Not inspected'];
-    }
-    // All three values are required to complete this sentence; a double
-    // space or dangling "and ." where an empty value was substituted is
-    // not acceptable in a finalised client report, so wait until the
-    // surveyor has answered them all.
-    if (occupancy.isEmpty || furnishing.isEmpty || flooring.isEmpty) {
-      return const [];
-    }
-    var template = _phraseTexts['{D_PROPERTY_STATUS}'] ?? '';
-    if (template.isEmpty) return const [];
-    // The floor-covering options already end in "covered" ("Fully
-    // covered", "Partially covered"), but the template has its own fixed
-    // trailing "covered" word - doubling up to "fully covered covered"
-    // when substituted verbatim. Drop the template's redundant word when
-    // the option already supplies it.
-    if (flooring.toLowerCase().contains('covered')) {
-      template = template.replaceAll(
-        '{PROPERTY_STATUS_FLOOR_COVERING} covered',
-        '{PROPERTY_STATUS_FLOOR_COVERING}',
-      );
-    }
-    final resolved = _normalize(template)
-        .replaceAll('{PROPERTY_STATUS_OCCUPANCY}', occupancy.toLowerCase())
-        .replaceAll('{PROPERTY_STATUS_FURNISHING}', furnishing.toLowerCase())
-        .replaceAll('{PROPERTY_STATUS_FLOOR_COVERING}', flooring.toLowerCase());
-    return _split(resolved);
-  }
-
-  List<String> _propertyFacing(Map<String, String> answers) {
-    final orientation =
-        (answers['android_material_design_spinner'] ?? '').trim();
-    if (orientation.isEmpty) return const [];
-    final template = _phraseTexts['{D_PROPERTY_FACING}'] ?? '';
-    if (template.isEmpty) return const [];
-    final resolved = _normalize(template)
-        .replaceAll('{PROPERTY_ORIENTATION}', orientation.toLowerCase());
-    return _split(resolved);
   }
 
   List<String> _resolve(String code) {

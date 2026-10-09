@@ -1,0 +1,277 @@
+[
+  {
+    "screen": "activity_property_weather",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a1_weather",
+        "masters": [
+          "{D_WEATHER}"
+        ],
+        "sub": "{A1_WEATHER}",
+        "text": "Weather: At the time of my inspection, the weather was {A1_WEATHER_NOW}, following a period of {A1_WEATHER_BEFORE} weather. Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods, and dampness.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{A1_WEATHER_NOW}",
+            "dropdown": "android_material_design_spinner",
+            "field_label": "Current weather",
+            "dropdown_options": [
+              "Dry",
+              "Wet",
+              "Overcast",
+              "Sunny",
+              "Cold",
+              "Windy",
+              "Rainy",
+              "Snowing"
+            ],
+            "pdf_options": [
+              "dry",
+              "wet",
+              "overcast",
+              "sunny",
+              "cold",
+              "windy",
+              "rainy",
+              "snowing"
+            ],
+            "lower": true
+          },
+          {
+            "kind": "dropdown",
+            "token": "{A1_WEATHER_BEFORE}",
+            "dropdown": "android_material_design_spinner2",
+            "field_label": "Previous weather",
+            "dropdown_options": [
+              "Dry",
+              "Wet",
+              "Overcast",
+              "Sunny",
+              "Cold",
+              "Windy",
+              "Rainy",
+              "Snowing"
+            ],
+            "pdf_options": [
+              "dry",
+              "wet",
+              "overcast",
+              "sunny",
+              "cold",
+              "windy",
+              "rainy",
+              "snowing"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Weather: At the time of my inspection, the weather was dry, wet, overcast, sunny, cold, windy, rainy, snowing, following a period of dry, wet, overcast, sunny, cold, windy, rainy, snowing weather."
+        ],
+        "when": [
+          "android_material_design_spinner",
+          "Dry"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner",
+            "Wet"
+          ],
+          [
+            "android_material_design_spinner",
+            "Overcast"
+          ],
+          [
+            "android_material_design_spinner",
+            "Sunny"
+          ],
+          [
+            "android_material_design_spinner",
+            "Cold"
+          ],
+          [
+            "android_material_design_spinner",
+            "Windy"
+          ],
+          [
+            "android_material_design_spinner",
+            "Rainy"
+          ],
+          [
+            "android_material_design_spinner",
+            "Snowing"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_status",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a1_status",
+        "masters": [
+          "{D_PROPERTY_STATUS}"
+        ],
+        "sub": "{A1_STATUS}",
+        "text": "Status: At the time of my inspection, the property was {A1_OCCUPANCY}. The property was {A1_FURNISHING}, and floor surfaces were {A1_FLOOR_COVERING}, which limited inspection of concealed areas.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{A1_OCCUPANCY}",
+            "dropdown": "android_material_design_spinner",
+            "field_label": "Occupancy",
+            "dropdown_options": [
+              "Occupied",
+              "Vacant",
+              "Partly occupied"
+            ],
+            "pdf_options": [
+              "occupied",
+              "vacant",
+              "partly occupied"
+            ],
+            "lower": true
+          },
+          {
+            "kind": "dropdown",
+            "token": "{A1_FURNISHING}",
+            "dropdown": "android_material_design_spinner2",
+            "field_label": "Furnishing",
+            "dropdown_options": [
+              "Fully furnished",
+              "Partly furnished",
+              "Unfurnished"
+            ],
+            "pdf_options": [
+              "fully furnished",
+              "partly furnished",
+              "unfurnished"
+            ],
+            "lower": true
+          },
+          {
+            "kind": "dropdown",
+            "token": "{A1_FLOOR_COVERING}",
+            "dropdown": "android_material_design_spinner3",
+            "field_label": "Floor covering",
+            "dropdown_options": [
+              "Fully covered",
+              "Partly covered",
+              "Uncovered"
+            ],
+            "pdf_options": [
+              "fully covered",
+              "partly covered",
+              "uncovered"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Status: At the time of my inspection, the property was occupied, vacant, or partly occupied.",
+          "The property was fully furnished, partly furnished, unfurnished, and floor surfaces were fully covered, partly covered, uncovered, which limited inspection of concealed areas."
+        ],
+        "when": [
+          "android_material_design_spinner",
+          "Occupied"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner",
+            "Vacant"
+          ],
+          [
+            "android_material_design_spinner",
+            "Partly occupied"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_facing",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a1_orientation",
+        "masters": [
+          "{D_PROPERTY_FACING}"
+        ],
+        "sub": "{A1_ORIENTATION}",
+        "text": "Orientation: The front elevation of the property faces approximately {A1_FACING}. References to orientation within this report assume the reader is standing facing the front of the property.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{A1_FACING}",
+            "dropdown": "android_material_design_spinner",
+            "field_label": "Orientation",
+            "dropdown_options": [
+              "North",
+              "North-east",
+              "East",
+              "South-east",
+              "South",
+              "South-west",
+              "West",
+              "North-west"
+            ],
+            "pdf_options": [
+              "north",
+              "north-east",
+              "east",
+              "south-east",
+              "south",
+              "south-west",
+              "west",
+              "north-west"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Orientation: The front elevation of the property faces approximately north, north-east, east, south-east, south, south-west, west, north-west."
+        ],
+        "when": [
+          "android_material_design_spinner",
+          "North"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner",
+            "North-east"
+          ],
+          [
+            "android_material_design_spinner",
+            "East"
+          ],
+          [
+            "android_material_design_spinner",
+            "South-east"
+          ],
+          [
+            "android_material_design_spinner",
+            "South"
+          ],
+          [
+            "android_material_design_spinner",
+            "South-west"
+          ],
+          [
+            "android_material_design_spinner",
+            "West"
+          ],
+          [
+            "android_material_design_spinner",
+            "North-west"
+          ]
+        ]
+      }
+    ]
+  }
+]

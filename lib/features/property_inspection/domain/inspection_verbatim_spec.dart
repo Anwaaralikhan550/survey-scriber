@@ -11140,6 +11140,90 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_property_is_flat',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'a1_weather',
+    'activity_property_weather',
+    '{D_WEATHER}',
+    '{A1_WEATHER}',
+    [
+      VerbatimToken(
+        '{A1_WEATHER_NOW}',
+        dropdown: 'android_material_design_spinner',
+        dropdownOptions: ['Dry', 'Wet', 'Overcast', 'Sunny', 'Cold', 'Windy', 'Rainy', 'Snowing'],
+        lower: true,
+        pdfOptions: ['dry', 'wet', 'overcast', 'sunny', 'cold', 'windy', 'rainy', 'snowing'],
+      ),
+      VerbatimToken(
+        '{A1_WEATHER_BEFORE}',
+        dropdown: 'android_material_design_spinner2',
+        dropdownOptions: ['Dry', 'Wet', 'Overcast', 'Sunny', 'Cold', 'Windy', 'Rainy', 'Snowing'],
+        lower: true,
+        pdfOptions: ['dry', 'wet', 'overcast', 'sunny', 'cold', 'windy', 'rainy', 'snowing'],
+      ),
+    ],
+    pdf:
+        'Weather: At the time of my inspection, the weather was dry, wet, overcast, sunny, cold, windy, rainy, snowing, following a period of dry, wet, overcast, sunny, cold, windy, rainy, snowing weather.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Dry',
+    whenAny: [['android_material_design_spinner', 'Wet'], ['android_material_design_spinner', 'Overcast'], ['android_material_design_spinner', 'Sunny'], ['android_material_design_spinner', 'Cold'], ['android_material_design_spinner', 'Windy'], ['android_material_design_spinner', 'Rainy'], ['android_material_design_spinner', 'Snowing']],
+  ),
+  VerbatimRule(
+    'a1_status',
+    'activity_property_status',
+    '{D_PROPERTY_STATUS}',
+    '{A1_STATUS}',
+    [
+      VerbatimToken(
+        '{A1_OCCUPANCY}',
+        dropdown: 'android_material_design_spinner',
+        dropdownOptions: ['Occupied', 'Vacant', 'Partly occupied'],
+        lower: true,
+        pdfOptions: ['occupied', 'vacant', 'partly occupied'],
+      ),
+      VerbatimToken(
+        '{A1_FURNISHING}',
+        dropdown: 'android_material_design_spinner2',
+        dropdownOptions: ['Fully furnished', 'Partly furnished', 'Unfurnished'],
+        lower: true,
+        pdfOptions: ['fully furnished', 'partly furnished', 'unfurnished'],
+      ),
+      VerbatimToken(
+        '{A1_FLOOR_COVERING}',
+        dropdown: 'android_material_design_spinner3',
+        dropdownOptions: ['Fully covered', 'Partly covered', 'Uncovered'],
+        lower: true,
+        pdfOptions: ['fully covered', 'partly covered', 'uncovered'],
+      ),
+    ],
+    pdf:
+        'Status: At the time of my inspection, the property was occupied, vacant, or partly occupied.',
+    pdfMore: [
+      'The property was fully furnished, partly furnished, unfurnished, and floor surfaces were fully covered, partly covered, uncovered, which limited inspection of concealed areas.',
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Occupied',
+    whenAny: [['android_material_design_spinner', 'Vacant'], ['android_material_design_spinner', 'Partly occupied']],
+  ),
+  VerbatimRule(
+    'a1_orientation',
+    'activity_property_facing',
+    '{D_PROPERTY_FACING}',
+    '{A1_ORIENTATION}',
+    [
+      VerbatimToken(
+        '{A1_FACING}',
+        dropdown: 'android_material_design_spinner',
+        dropdownOptions: ['North', 'North-east', 'East', 'South-east', 'South', 'South-west', 'West', 'North-west'],
+        lower: true,
+        pdfOptions: ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'],
+      ),
+    ],
+    pdf:
+        'Orientation: The front elevation of the property faces approximately north, north-east, east, south-east, south, south-west, west, north-west.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'North',
+    whenAny: [['android_material_design_spinner', 'North-east'], ['android_material_design_spinner', 'East'], ['android_material_design_spinner', 'South-east'], ['android_material_design_spinner', 'South'], ['android_material_design_spinner', 'South-west'], ['android_material_design_spinner', 'West'], ['android_material_design_spinner', 'North-west']],
+  ),
   // <<verbatim-rules-end>>
 ];
 

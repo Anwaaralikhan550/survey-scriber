@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1951,
-   "approvedLegacyBank": 193,
-   "approvedCurrentBankOnly": 1731,
+   "distinctEmitted": 1956,
+   "approvedLegacyBank": 191,
+   "approvedCurrentBankOnly": 1738,
    "unapproved": 0
   }
  },
@@ -6226,18 +6226,18 @@
    "screenId": "activity_property_weather",
    "title": "Weather",
    "dataFieldCount": 2,
-   "permutationCount": 20,
+   "permutationCount": 32,
    "severities": [],
    "phraseStats": {
-    "total": 10,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 9,
+    "total": 15,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 15,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "At the time of my inspection, the weather was dry, following a period of dry weather. Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods and dampness.",
-    "At the time of my inspection, the weather was wet, following a period of dry weather. Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods and dampness.",
-    "At the time of my inspection, the weather was snowy, following a period of dry weather. Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods and dampness."
+    "Weather: At the time of my inspection, the weather was dry, following a period of dry weather. Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods, and dampness.",
+    "Weather: At the time of my inspection, the weather was wet, following a period of dry weather. Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods, and dampness.",
+    "Weather: At the time of my inspection, the weather was overcast, following a period of dry weather. Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods, and dampness."
    ]
   },
   {
@@ -6245,18 +6245,18 @@
    "screenId": "activity_property_status",
    "title": "Property Status",
    "dataFieldCount": 3,
-   "permutationCount": 15,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
     "total": 7,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 6,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "At the time of my inspection, the property was occupied. The property was fully furnished, and floor surfaces were fully covered, which limited inspection of concealed areas.",
-    "At the time of my inspection, the property was unoccupied. The property was fully furnished, and floor surfaces were fully covered, which limited inspection of concealed areas.",
-    "At the time of my inspection, the property was occupied. The property was partly furnished, and floor surfaces were fully covered, which limited inspection of concealed areas."
+    "Status: At the time of my inspection, the property was occupied. The property was fully furnished, and floor surfaces were fully covered, which limited inspection of concealed areas.",
+    "Status: At the time of my inspection, the property was vacant. The property was fully furnished, and floor surfaces were fully covered, which limited inspection of concealed areas.",
+    "Status: At the time of my inspection, the property was partly occupied. The property was fully furnished, and floor surfaces were fully covered, which limited inspection of concealed areas."
    ]
   },
   {
@@ -6292,9 +6292,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The front elevation of the property faces approximately north. References to orientation within this report assume the reader is standing facing the front of the property.",
-    "The front elevation of the property faces approximately south. References to orientation within this report assume the reader is standing facing the front of the property.",
-    "The front elevation of the property faces approximately east. References to orientation within this report assume the reader is standing facing the front of the property."
+    "Orientation: The front elevation of the property faces approximately north. References to orientation within this report assume the reader is standing facing the front of the property.",
+    "Orientation: The front elevation of the property faces approximately north-east. References to orientation within this report assume the reader is standing facing the front of the property.",
+    "Orientation: The front elevation of the property faces approximately east. References to orientation within this report assume the reader is standing facing the front of the property."
    ]
   }
  ]
