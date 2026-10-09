@@ -147,16 +147,16 @@ dd0fbe38b9,E1,Repairs should be undertaken as part of routine maintenance or soo
 46929f370b,E1,You should check with your legal adviser before any work is done.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 d018aaf5d5,E1,Causing damp: This is causing damp penetration to the adjoining building elements.,EXACT,{E_CHIMNEY_FLASHING_REPAIR}::{FLASHING_REPAIR_NOW_CAUSING_DUMP},100,DONE
 244b190ae3,E1,"Pointing Condition: The mortar joints to the chimney stack appear in good, reasonable, weathered, eroded, poor, other condition(s).",MENU,,0,UNVERIFIED
-e2acfb1733,E1,Weathered or eroded pointing should be renewed to reduce further deterioration and water penetration.,ADD,{E_CHIMNEY_REPAIR_CONDITION_RATING}::{CONDITION_RATING_2},59,OPEN
+e2acfb1733,E1,Weathered or eroded pointing should be renewed to reduce further deterioration and water penetration.,EXACT,{E_CHIMNEY_MULTI_STACK}::{POINTING_CONDITION},100,DONE
 5cc16d2d82,E1,Repointing: Some of the mortar between the bricks or stonework (called pointing) is damaged or defective.,TOKENISED,{E_CHIMNEY_REPOINTING_REPAIR}::{CHIMNEY_REPOINTING_REPAIR_SOON},82,DONE
 5c0eb02340,E1,"This should be repaired soon, repaired now.",MENU,,0,UNVERIFIED
 7c0ddd9e3e,E1,"The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 ed5d1fee7e,E1,"Damaged chimney pots: The chimney pots appear secure, weathered, cracked, damaged, missing, other.",MENU,,0,UNVERIFIED
-d2dffaaf9a,E1,Damaged or insecure chimney pots should be repaired or replaced to maintain weather resistance and safety.,ADD,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_NOW_SAFETY_HAZARD},52,OPEN
+d2dffaaf9a,E1,Damaged or insecure chimney pots should be repaired or replaced to maintain weather resistance and safety.,EXACT,{E_CHIMNEY_MULTI_STACK}::{POTS_CONDITION},100,DONE
 9b617ac8f2,E1,Repair pot: One or several pots fitted to the main building chimney stack are broken and partly missing.,TOKENISED,{E_CHIMNEY_POTS_REPAIR}::{CHIMNEY_POTS_REPAIR_NOW},69,DONE
 1c8b1b0314,E1,"To replace the pot, you will have to renew the cement bedding around the base, called the flaunching, which holds the pot in place.",MENU,,0,UNVERIFIED
 e0d2226049,E1,"The chimney pot may also be connected to a chimney flue that serves a heating appliance below, and a suitable replacement must be used.",EXACT,{E_CHIMNEY_POTS_REPAIR}::{CHIMNEY_POTS_REPAIR_NOW},100,DONE
-bb8a2996d8,E1,"Leaning chimney: The chimney stack appears slightly leaning, significantly leaning.",ADD,{E_CHIMNEY_SINGLE_STACK}::{LEANING_CHIMNEY},59,OPEN
+bb8a2996d8,E1,"Leaning chimney: The chimney stack appears slightly leaning, significantly leaning.",ADD,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY},57,OPEN
 5e33f3de2d,E1,"Where significant movement is evident, further investigation by an appropriately qualified structural engineer or roofing contractor is recommended before legal commitment.",EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 7559b32079,E1,No repair required: No repair is currently needed.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 7e7c386b69,E1,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
@@ -167,14 +167,14 @@ d1cff76ab1,E1,"At present, this movement is small, and no action is required now
 5e33f3de2d,E1,"Where significant movement is evident, further investigation by an appropriately qualified structural engineer or roofing contractor is recommended before legal commitment.",EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 4a806dd815,E1,"Repair required: At present, the observed chimney movement appears significant, and action is required now.",MENU,,0,UNVERIFIED
 f19b64b87f,E1,"You should contact a qualified person to inspect the chimney and recommend remedial action, which may involve rebuilding the chimney.",EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_REPAIR_SOON},100,DONE
-3c4ee76d17,E1,"Add text to: Section J1 - Risk to Building - The chimney stack(s) is leaning and the movement appears significant, and immediate action is required.",ADD,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_REPAIR_SOON},68,OPEN
+3c4ee76d17,E1,"Add text to: Section J1 - Risk to Building - The chimney stack(s) is leaning and the movement appears significant, and immediate action is required.",EXACT,{RISK_TO_BUILDING}::{CHIMNEY_LEANING_SIGNIFICANT},100,DONE
 a8291e1d2d,E1,"Removed chimney or pots: The chimney stack(s) or pots to the front, rear, side, centre have been removed, altered, covered over with roofing.",MENU,,0,UNVERIFIED
 38b3535373,E1,You should ask your legal adviser to confirm whether the removed chimney stack(s) received appropriate statutory approvals where required from the local council and advise on the implications.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{REMOVED_CHIMNEY_STACK},100,DONE
 a8244538ce,E1,"Poor chimney condition: The chimney stack(s) on the front, rear, side, centre of the building are in poor condition.",MENU,,0,UNVERIFIED
 43c913e7b9,E1,"Although this can be repaired, it may be economical to rebuild the whole stack.",EXACT,{E_CHIMNEY_DISREPAIR_REPAIR}::{CHIMNEY_DISREPAIR_REPAIR_SOON},100,DONE
 1b4e9664e4,E1,"If the chimney is no longer used by heating appliances below, it may be economical to reduce the chimney height to below roof level and extend the roof covering over it.",EXACT,{E_CHIMNEY_DISREPAIR_REPAIR}::{CHIMNEY_DISREPAIR_REPAIR_SOON},100,DONE
-dabc766aea,E1,Add text to: Section J1 - Risk to Building - One or more chimney stack(s) is in poor condition.,TOKENISED,{E_CHIMNEY_DISREPAIR_REPAIR}::{CHIMNEY_DISREPAIR_REPAIR_SOON},66,DONE
-9494f221b2,E1,Further investigation and repair should be arranged immediately.,ADD,{E_WINDOWS_REPAIR}::{WINDOWS_DEFECT_IF_IN_DISREPAIR},59,OPEN
+dabc766aea,E1,Add text to: Section J1 - Risk to Building - One or more chimney stack(s) is in poor condition.,EXACT,{RISK_TO_BUILDING}::{CHIMNEY_POOR_CONDITION},100,DONE
+9494f221b2,E1,Further investigation and repair should be arranged immediately.,EXACT,{RISK_TO_BUILDING}::{CHIMNEY_POOR_CONDITION},100,DONE
 1d08e2264c,E1,"Chimney Defects: One or more chimney defects were observed, including: • Loose flashings • Missing flashings • Cracked flaunching • Missing mortar • Spalled bricks • Damaged pointing • Loose chimney pots • Broken chimney pots • Vegetation growth • Open flues • Loose aerial fixings • Loose satellite dish fixings Repairs should be undertaken by an appropriately qualified roofing contractor to prevent further deterioration and water penetration.",ADD,{G_DRAINAGE}::{STANDARD_TEXT_2},43,OPEN
 b6cd16ce83,E1,"Aerials and satellite dishes: An aerial, a satellite dish is attached to the chimney stack.",TOKENISED,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_NOW},73,DONE
 6797775a92,E1,"Where secure, no action is currently required.",ADD,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},61,OPEN
@@ -381,7 +381,7 @@ ca68824cc9,E4,"Painted external masonry also requires regular maintenance, as th
 1cae6a7212,E4,"When future redecoration is undertaken, breathable masonry paint should be used where appropriate to minimise the risk of moisture becoming trapped.",ADD,{WALLS_DAMP_TYPE_PRESENT}::{WALLS_DAMP_TYPE_PRESENT_INSTALL_FRENCH_GUTTERS},50,OPEN
 30c237a835,E4,"EWS1 Cladding: The external walls are partially or predominantly cladded with a brick-slip, brick-effect outer face, rainscreen boards, terracotta tiles, compressed composite boards, aluminium panels, glass reinforced concrete (GRC) panels, glass curtain walling, hanging tiles (including shingle or plain tiles), aluminium cladding panels, etc.",MENU,,0,UNVERIFIED
 5de6b961c8,E4,"This type of construction typically comprises fixing the cladding materials to a metal support frame secured to the primary structure, with a ventilated cavity and non-combustible mineral wool insulation behind.",ADD,{MAIN_WALL_MOVEMENTS_TYPE}::{MAIN_WALL_MOVEMENTS_TYPE_INVESTIGATE},46,OPEN
-985faa7dea,E4,"The inner leaf is commonly formed of concrete, blockwork or a metal framing system incorporating sheathing board and plasterboard lining.",ADD,{RISK_TO_BUILDING}::{BUILDING_MOVEMENTS_STATUS_NOTED},46,OPEN
+985faa7dea,E4,"The inner leaf is commonly formed of concrete, blockwork or a metal framing system incorporating sheathing board and plasterboard lining.",ADD,{MAIN_WALL_MOVEMENTS_TYPE}::{MAIN_WALL_MOVEMENTS_TYPE_INVESTIGATE},45,OPEN
 c46d1999b4,E4,"EWS1 form not required: Based on the visual evidence available during my inspection, the external wall construction appears broadly consistent with a building that may satisfy current EWS1 requirements.",ADD,{E_MAIN_WALLS}::{REMOVED_WALL_LOCATION},47,OPEN
 777904955f,E4,"However, this inspection did not include an assessment of the external wall system for fire safety compliance, and I am not qualified to certify compliance.",MENU,,0,UNVERIFIED
 77ceeb885b,E4,"Confirmation can only be provided following an assessment by a suitably qualified fire safety professional, where required, and the issue of a valid EWS1 form.",MENU,,0,UNVERIFIED
@@ -393,7 +393,7 @@ a4572ef0d4,E4,"My inspection was limited to a visual assessment only and did not
 c456022343,E4,"Where required, confirmation of the fire performance of the external wall system can only be provided by a suitably qualified fire safety professional following a detailed assessment and, where applicable, the issue of a valid EWS1 form.",MENU,,0,UNVERIFIED
 a302fd5c46,E4,"Your legal adviser should make further enquiries of the seller, freeholder or managing agent and obtain copies of any current EWS1 form, fire risk assessments relating to the external wall system, and details of any planned, ongoing or completed remediation works before exchange of contracts or completion of the purchase.",MENU,,0,UNVERIFIED
 835ad94680,E4,"Neither the surveyor nor this practice has assessed the external wall system for compliance with fire safety legislation or lender requirements and accepts no liability to you or any third party for any loss, delay, remediation costs or other financial consequences arising directly or indirectly from the fire performance of the external wall system, the requirement for or content of an EWS1 form, or any current or future remedial works.",MENU,,0,UNVERIFIED
-3cc6f14e66,E4,Minor subsidence: Diagonally stepped and other similar cracks were noted to the external elevations of the property.,ADD,{RISK_TO_BUILDING}::{BUILDING_MOVEMENTS_STATUS_NONE},57,OPEN
+3cc6f14e66,E4,Minor subsidence: Diagonally stepped and other similar cracks were noted to the external elevations of the property.,ADD,{E_MAIN_WALLS}::{WEATHERED_WALL},50,OPEN
 21280c5c43,E4,"Evidence of previous repairs, including localised repointing and repairs to the bay and other wall sections, was also observed.",MENU,,0,UNVERIFIED
 6d02d81a7d,E4,"Based on a single visual inspection, it is not possible to confirm whether the movement is historic and stable or whether it is progressive.",ADD,{E_MAIN_WALLS}::{REMOVED_WALL_LOCATION},53,OPEN
 9133b8ef83,E4,"Although no significant distortion or evidence requiring immediate structural intervention was apparent at the time of inspection, the cause, extent, and current activity of the movement cannot be confirmed without further investigation and monitoring over time.",MENU,,0,UNVERIFIED
@@ -401,7 +401,7 @@ a302fd5c46,E4,"Your legal adviser should make further enquiries of the seller, f
 ced2d860f9,E4,"In the absence of satisfactory documentary evidence, I recommend that the affected areas are inspected by a suitably qualified structural engineer, who can advise whether any further investigation or monitoring is necessary before you commit to the purchase.",MENU,,0,UNVERIFIED
 fa4abcd269,E4,"Significant subsidence: Significant diagonally stepped and other similar cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls.",MENU,,0,UNVERIFIED
 01efd84651,E4,"Where some of these cracks may have or have not been repaired and the time of repair is unknown, I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive.",MENU,,0,UNVERIFIED
-154cb8b75e,E4,The pattern of cracking is consistent with movement that may be associated with subsidence or foundation movement.,ADD,{RISK_TO_BUILDING}::{BUILDING_SUBSIDENCE_STATUS_INVESTIGATE},48,OPEN
+154cb8b75e,E4,The pattern of cracking is consistent with movement that may be associated with subsidence or foundation movement.,ADD,{E_MAIN_WALLS}::{WALL_CONDITION},48,OPEN
 91ef283273,E4,"I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts.",MENU,,0,UNVERIFIED
 eaf9d4b593,E4,"Your legal adviser should also establish whether there is any history of subsidence, structural movement, underpinning, monitoring, insurance claims, or structural repairs affecting the property.",MENU,,0,UNVERIFIED
 a2df34cb86,E4,"If you proceed with the purchase without further investigation, you will be accepting the risk that more significant structural defects and associated repair costs may become apparent in the future.",ADD,{E_MAIN_WALLS}::{WALLLS_REMOVED_WALL_DEFECTS},52,OPEN
@@ -438,7 +438,7 @@ c80481e837,E4,"Probable causes include a damaged, deteriorated or bridged damp-p
 ba695ea35e,E4,The source of the moisture should be identified and remedied by a suitably qualified contractor.,FIX,{WALLS_DAMP_TYPE_PRESENT}::{WALLS_DAMP_TYPE_PRESENT_PENETRATING},82,OPEN
 6a13791f54,E4,"Once the cause has been addressed, any damaged plaster, decorations or other affected finishes may require repair or replacement.",MENU,,0,UNVERIFIED
 32ce8641e3,E4,"Add text to: Section J1 - Risk to Building - Elevated moisture readings and associated defects to wall finishes were recorded on internal wall surfaces, suggesting the presence of rising damp.",TOKENISED,{WALLS_DAMP_TYPE_PRESENT}::{WALLS_DAMP_TYPE_PRESENT_AREA},61,DONE
-f5cb992880,E4,Further investigation by a suitably qualified damp and timber specialist is recommended to determine the cause and extent of the problem.,ADD,{RISK_TO_BUILDING}::{BUILDING_TIMBER_DEFECT_STATUS_NOTED},55,OPEN
+f5cb992880,E4,Further investigation by a suitably qualified damp and timber specialist is recommended to determine the cause and extent of the problem.,ADD,{E_MAIN_WALL_REPAIR}::{WALL_TIE_REPAIR},50,OPEN
 a44be2b345,E4,"Install drain guttering: Because the external ground levels are high in relation to the building, the damp-proof course (DPC) may be bridged in places, allowing moisture to penetrate the walls.",MENU,,0,UNVERIFIED
 0ee634d552,E4,External ground levels should be reduced where practicable to maintain an appropriate clearance below the damp-proof course.,EXACT,{WALLS_DAMP_TYPE_PRESENT}::{WALLS_DAMP_TYPE_PRESENT_INSTALL_FRENCH_GUTTERS},100,DONE
 b79217cc2b,E4,"Where this is not feasible, suitable drainage measures, such as a French drain or gravel-filled drainage channel, may be appropriate to improve surface water drainage and reduce the risk of moisture penetration.",MENU,,0,UNVERIFIED
@@ -452,7 +452,7 @@ de3fc2b3c2,E4,"This could result in further investigation, remedial works, addit
 10f326d5be,E4,"Defect noted: I noted cracking, distortions, other in the surrounding wall surfaces.",MENU,,0,UNVERIFIED
 02cc2d0ddd,E4,"However, due to the concealed nature of the structure behind the wall and the floor and ceiling finishes, I was unable to confirm whether adequate structural support has been provided.",MENU,,0,UNVERIFIED
 d64404fde6,E4,You should instruct a suitably qualified structural engineer to carry out further investigation and advise on the adequacy of the structural alterations and any remedial works that may be required.,EXACT,{E_MAIN_WALLS}::{WALLLS_REMOVED_WALL_DEFECTS},100,DONE
-bd023e9142,E4,Extensions and alterations: Evidence was noted that external alterations have been carried out to the property.,ADD,{RISK_TO_BUILDING}::{BUILDING_MOVEMENTS_STATUS_NONE},57,OPEN
+bd023e9142,E4,Extensions and alterations: Evidence was noted that external alterations have been carried out to the property.,ADD,{E_MAIN_WALL_REPAIR}::{WALL_REPAIR_NEARBY_TREES},54,OPEN
 cc51c01bac,E4,"These include wall removal, new openings, replacement lintels, structural alterations, building extension works, other alterations.",MENU,,0,UNVERIFIED
 e23ef66b86,E4,Your legal adviser should confirm that all appropriate statutory approvals and completion certificates have been obtained where required.,ADD,{E_MAIN_WALL_REPAIR}::{WALL_TIE_REPAIR},62,OPEN
 c51f756653,E4,"No Structural Movement: Although I did not observe any evidence of significant structural movement during my inspection, I cannot be categorical that none has occurred, as all buildings are subject to some degree of movement, such as normal settlement and seasonal thermal or moisture-related movement.",MENU,,0,UNVERIFIED
@@ -474,7 +474,7 @@ eed4779202,E4,"You should ask your legal adviser to establish whether any guaran
 6d6e746fbd,E4,"If satisfactory information cannot be obtained, you should instruct an appropriately qualified structural engineer to investigate the cause and extent of the movement and recommend an appropriate scheme of repair.",EXACT,{MAIN_WALL_MOVEMENTS_TYPE}::{MAIN_WALL_MOVEMENTS_TYPE_RECURRENT},100,DONE
 7331fb2bd2,E4,"Evidence of previous structural movement, even where satisfactorily resolved, may affect the property's future mortgageability and saleability.",MENU,,0,UNVERIFIED
 33eca0f929,E4,Differential Thermal Movement: Some of the observed cracking is consistent with differential thermal settlement or movement between the replacement windows and doors and the surrounding wall construction.,ADD,{E_MAIN_WALL_REPAIR}::{WALL_REPAIR_CAVITY_WALL_INSULATION},47,OPEN
-e165abc35a,E4,"This occurs because the varied materials expand and contract at varying rates as temperatures change, resulting in minor cracking around openings.",ADD,{RISK_TO_BUILDING}::{BUILDING_MOVEMENTS_STATUS_NOTED},49,OPEN
+e165abc35a,E4,"This occurs because the varied materials expand and contract at varying rates as temperatures change, resulting in minor cracking around openings.",ADD,{MAIN_WALL_MOVEMENTS_TYPE}::{MAIN_WALL_MOVEMENTS_TYPE_ALL_ELEVATIONS},49,OPEN
 cdc1e7f63d,E4,The cracking appears longstanding and is not considered indicative of significant structural movement.,ADD,{MAIN_WALL_MOVEMENTS_TYPE}::{MAIN_WALL_MOVEMENTS_TYPE_ALL_ELEVATIONS},59,OPEN
 9b7d642409,E4,Restraint steel rods: Lateral restraint steel rods have been installed to address previous structural movement.,ADD,{E_MAIN_WALLS}::{REMOVED_WALL_LOCATION},55,OPEN
 3a7764863c,E4,"Based on my visual inspection, the installation appears longstanding, and I noted no evidence of recent or progressive movement associated with the areas inspected.",MENU,,0,UNVERIFIED
@@ -515,9 +515,9 @@ f9acb7cbbe,E4,Defective wall ties can affect the stability of cavity walls if le
 d66443899f,E4,"Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted.",MENU,,0,UNVERIFIED
 25b9c9e82f,E4,Minor defects: The defects observed are limited and do not require significant repair.,ADD,{WALLS_DAMP_TYPE_PRESENT}::{WALLS_DAMP_TYPE_PRESENT_PENETRATING},51,OPEN
 e6da6850c8,E4,"Where appropriate, cracks should be filled, defective pointing repaired, and any localised defects made good to help restore the integrity of the lintel or brick arch.",MENU,,0,UNVERIFIED
-dc7fa2bb78,E4,Repairs should be carried out in the near future to prevent further deterioration.,ADD,{RISK_TO_BUILDING}::{BUILDING_NEAR_BY_TREES},55,OPEN
+dc7fa2bb78,E4,Repairs should be carried out in the near future to prevent further deterioration.,ADD,{WALL_POINTING_REPAIR_LOCATION}::{WALL_POINTING_REPAIR_NOW},55,OPEN
 730489ed64,E4,"Significant defect: The defects observed are significant and have caused, or are likely to cause, movement or damage to the adjoining masonry.",MENU,,0,UNVERIFIED
-d82d0ab73c,E4,Further investigation by a suitably qualified contractor is recommended.,ADD,{RISK_TO_BUILDING}::{BUILDING_TIMBER_DEFECT_STATUS_NOTED},57,OPEN
+d82d0ab73c,E4,Further investigation by a suitably qualified contractor is recommended.,ADD,{WALLS_DAMP_TYPE_PRESENT}::{WALLS_DAMP_TYPE_PRESENT_INSTALL_FRENCH_GUTTERS},51,OPEN
 adac634ba1,E4,"Repairs may include repairing or replacing the lintel or rebuilding the brick arch, together with making good the surrounding masonry.",ADD,{E_MAIN_WALL_REPAIR}::{WALL_REPAIR_CAVITY_WALL_INSULATION},47,OPEN
 7442af5ce0,E4,The extent of the work required may increase once the lintel has been exposed.,ADD,{E_MAIN_WALL_REPAIR}::{WALL_FINISHES_TYPE_PAINTED},58,OPEN
 2918271587,E4,"Add text to: Section J1 - Risk to Building - One or more small beams that span across the top of the window or door opening, including brick arch (called a lintel), is damaged, cracked, distorted.",MENU,,0,UNVERIFIED
@@ -1038,7 +1038,7 @@ f2897ecc31,F2,"Localised repairs may be possible; however, where deterioration i
 cfb7ca7d14,F2,Routine redecoration should be expected throughout the normal life of the property.,ADD,{F_CEILINGS}::{HEAVY_PAPER_LINING},47,OPEN
 a2083eafe5,F3,"My inspection was limited by fixed furniture, kitchen units, bathroom fittings, large appliances, stored items, tiled finishes, decorative wall coverings, and fitted cupboards, which prevented full inspection of the concealed areas.",MENU,,0,UNVERIFIED
 a216f2ab7e,F3,"The condition of hidden wall construction, lintels, structural supports, and other concealed elements could not be confirmed without opening the structure, which is outside the scope of a Level 2 Home Survey.",MENU,,0,UNVERIFIED
-0c6267491c,F3,"No comment can be made on the condition of these concealed areas, and defects may exist that were not visible at the time of my inspection.",ADD,{RISK_TO_BUILDING}::{BUILDING_NEAR_BY_TREES},56,OPEN
+0c6267491c,F3,"No comment can be made on the condition of these concealed areas, and defects may exist that were not visible at the time of my inspection.",ADD,{F_WALLS_AND_PARTITIONS}::{IF_LATH_AND_PLASTER_IS_SELECTED},49,OPEN
 c50e44f24a,F3,"Description: The walls are formed in solid masonry, timber stud partitions, plasterboard partitions, lath and plaster, other construction.",MENU,,0,UNVERIFIED
 2b96c3d542,F3,"The wall finish comprises paint, plaster, wallpaper, tiling, timber panelling, textured coating, decorative panelling, other finishes.",MENU,,0,UNVERIFIED
 e19589b9f3,F3,"Condition: Where visible, the walls and partitions appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,UNVERIFIED
@@ -1054,7 +1054,7 @@ caa31a3f25,F3,Minor cracking: Minor shrinkage or settlement cracking was observe
 a5782458e2,F3,Such cracking is common in properties of this age and type and is not considered structurally significant.,EXACT,{F_CEILINGS}::{CRACKS},100,DONE
 24e42ab96c,F3,The cracks may be adequately filled with appropriate material and redecorated during routine maintenance.,EXACT,{F_CEILINGS}::{CRACKS},100,DONE
 232fc1838b,F3,Significant cracking: Significant cracking was observed on some of the walls.,ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},50,OPEN
-193fc2cd34,F3,Further investigation is recommended where cracking appears progressive or is associated with distortion.,ADD,{RISK_TO_BUILDING}::{BUILDING_TIMBER_DEFECT_STATUS_NOTED},56,OPEN
+193fc2cd34,F3,Further investigation is recommended where cracking appears progressive or is associated with distortion.,ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_CONDENSATION_NOTED},49,OPEN
 c33bcb4ad5,F3,"Structural Movement: Evidence of historic, localised, progressive movement was observed.",MENU,,0,UNVERIFIED
 7e3661a255,F3,"Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",EXACT,{RISK_TO_BUILDING}::{BUILDING_MOVEMENTS_STATUS_INVESTIGATE},100,DONE
 3ec8d5d466,F3,Hollow Plaster: Localised areas of hollow-sounding plaster were noted.,EXACT,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},100,DONE
@@ -1071,18 +1071,18 @@ fcc69efea0,F3,No elevated moisture readings were recorded at the time of inspect
 29dc8424f3,F3,Penetrating damp noted: Elevated moisture readings were recorded to sections of the wall surfaces including the (type wall location).,ADD,{F_WALLS_AND_PARTITIONS}::{IF_TILED_IS_SELECTED},53,OPEN
 02a8e38860,F3,"Where there are built-in fitments such as kitchen fittings, dampness can be difficult to trace but costly and inconvenient to rectify.",EXACT,{F_WALLS_AND_PARTITIONS}::{DAMPNESS_NONE},100,DONE
 7828ef7de4,F3,"Damp source known: Dampness was noted and is likely to result from defective rainwater goods, blocked gullies, leaking pipework, bridged damp-proof course, other.",MENU,,0,UNVERIFIED
-898b061f40,F3,"Where remedial action(s) have not been included in this report, it is recommended that a suitably qualified damp specialist investigates the cause and carries out any necessary repairs.",ADD,{RISK_TO_BUILDING}::{BUILDING_SUBSIDENCE_STATUS_INVESTIGATE},53,OPEN
+898b061f40,F3,"Where remedial action(s) have not been included in this report, it is recommended that a suitably qualified damp specialist investigates the cause and carries out any necessary repairs.",ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_REPAIR},49,OPEN
 0753d60495,F3,"This may require opening concealed areas, with the owner's agreement.",ADD,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_OVER_LARGE_AREA_IS_SELECTED},51,OPEN
 524ec90d70,F3,"Associated remedial works may also be required, including replacing damaged plaster and repairing or renewing decayed timber.",ADD,{F_WALLS_AND_PARTITIONS}::{CAUSES_KNOWN},52,OPEN
 9db3a3494a,F3,"Repair Damp defect: The source of dampness should be addressed by repairing the identified defects, which may include clearing rainwater goods, repairing defective rainwater goods, unblocking gullies, repairing leaking pipework, removing any bridging of the damp-proof course, other as appropriate.",MENU,,0,UNVERIFIED
 f8777c94f2,F3,"Once the source of moisture has been eliminated, any affected internal finishes should be allowed to dry thoroughly before being repaired or replaced.",ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_REPAIR},47,OPEN
-a547f5a3ff,F3,"If dampness persists after these repairs, further investigation by a suitably qualified damp and timber specialist should be undertaken to identify any concealed defects and recommend any additional remedial works.",ADD,{RISK_TO_BUILDING}::{BUILDING_MOVEMENTS_STATUS_INVESTIGATE},50,OPEN
-95208e83c6,F3,These repairs should be carried out promptly to minimise the risk of further deterioration.,ADD,{RISK_TO_BUILDING}::{BUILDING_TIMBER_DEFECT_STATUS_NOTED},51,OPEN
+a547f5a3ff,F3,"If dampness persists after these repairs, further investigation by a suitably qualified damp and timber specialist should be undertaken to identify any concealed defects and recommend any additional remedial works.",ADD,{F_WALLS_AND_PARTITIONS}::{NOT_INSPECTED},46,OPEN
+95208e83c6,F3,These repairs should be carried out promptly to minimise the risk of further deterioration.,ADD,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},48,OPEN
 4e725be305,F3,Unknown damp source: The source of moisture cannot be confirmed during a visual inspection.,EXACT,{F_WALLS_AND_PARTITIONS}::{CAUSES_KNOWN},100,DONE
-4e726daa62,F3,Further investigation should be undertaken where moisture levels remain elevated or visible dampness is present.,ADD,{RISK_TO_BUILDING}::{BUILDING_TIMBER_DEFECT_STATUS_NOTED},56,OPEN
+4e726daa62,F3,Further investigation should be undertaken where moisture levels remain elevated or visible dampness is present.,ADD,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},48,OPEN
 78f332e1dc,F3,"Suspected rising damp: Elevated moisture readings were recorded at the base of the wall(s), consistent with possible rising damp, including the (type wall location).",MENU,,0,UNVERIFIED
 a045ed6b68,F3,"Where fitted units, such as kitchen cabinets, conceal wall surfaces, the extent of dampness cannot be fully assessed, and any necessary remedial works may be more extensive and costly.",MENU,,0,UNVERIFIED
-c1dcfdf363,F3,I recommend further investigation by a suitably qualified damp specialist to confirm the cause and advise on any necessary repairs.,ADD,{RISK_TO_BUILDING}::{BUILDING_SUBSIDENCE_STATUS_INVESTIGATE},57,OPEN
+c1dcfdf363,F3,I recommend further investigation by a suitably qualified damp specialist to confirm the cause and advise on any necessary repairs.,ADD,{F_WALLS_AND_PARTITIONS}::{CAUSES_KNOWN},49,OPEN
 f6202283cd,F3,"Internal Alterations: Evidence was observed that an internal wall has been removed, partially removed, altered, new opening created, has been formed.",MENU,,0,UNVERIFIED
 5bf2a90138,F3,"Where an internal wall has been removed or altered, other parts of the property must be properly supported.",EXACT,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},100,DONE
 444ee8a699,F3,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
@@ -1091,7 +1091,7 @@ bb79b43c15,F3,Defects noted: An original internal wall has been removed to form 
 98f3a42186,F3,"Distortion, cracking, inadequate support, other issues were noted around the altered area.",MENU,,0,UNVERIFIED
 488a15c703,F3,"While no significant progressive movement was evident at the time of inspection, the structural adequacy of the alteration cannot be confirmed during a visual inspection.",ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_REPAIR},60,OPEN
 a4276d9dd1,F3,Your legal adviser should verify that Building Regulations approval and a completion certificate were obtained for the work.,FIX,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_REPAIR},72,OPEN
-caf0afc19e,F3,"If satisfactory documentation is unavailable, I recommend further investigation by a suitably qualified structural engineer.",ADD,{RISK_TO_BUILDING}::{BUILDING_MOVEMENTS_STATUS_INVESTIGATE},56,OPEN
+caf0afc19e,F3,"If satisfactory documentation is unavailable, I recommend further investigation by a suitably qualified structural engineer.",ADD,{F_WALLS_AND_PARTITIONS}::{IF_STUD_WALL_AND_CRACKED_OR_BADLY_CRACKED_IS_SELECTED},48,OPEN
 61f1db4e4b,F3,"This may require opening parts of the structure, with the owner's agreement, to confirm that adequate support has been provided.",ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},49,OPEN
 e413b6e205,F3,"General Maintenance: Internal walls should be inspected periodically for signs of cracking, dampness, or movement.",MENU,,0,UNVERIFIED
 a8af214a2c,F3,Minor cracking and decorative defects should be repaired during routine maintenance.,ADD,{F_WALLS_AND_PARTITIONS}::{IF_STUD_WALL_AND_CRACKED_OR_BADLY_CRACKED_IS_SELECTED},60,OPEN
@@ -1599,7 +1599,7 @@ bee8646203,H2,"Condition: Where visible, the shed(s) appear in good, reasonable,
 49a8b48d4a,H2,Routine maintenance appropriate to the age and construction of the shed should be expected.,ADD,{H_OTHER}::{NOT_INSPECTED},52,OPEN
 288c207157,H2,"However, where the shed is in poor condition, you should arrange to repair or replace the shed.",MENU,,0,UNVERIFIED
 d9588a9ab7,H2,"Hardstanding areas: The paths and hardstanding area appear level, reasonably level, and exhibit no unevenness, minor unevenness.",MENU,,0,UNVERIFIED
-f7d52d372d,H2,Minor settlement is common and may be addressed during routine maintenance.,ADD,{RISK_TO_BUILDING}::{BUILDING_DAMPNESS_STATUS_INVESTIGATE},46,OPEN
+f7d52d372d,H2,Minor settlement is common and may be addressed during routine maintenance.,ADD,{H_OTHER}::{PRIVATE_ROAD},44,OPEN
 6a11d70127,H2,"Where areas of uneven paving, trip hazards, or surface deterioration are present, adequate repairs and removal of damaged sections should be undertaken where necessary to maintain safe use.",MENU,,0,UNVERIFIED
 cfac22e7d4,H2,"Shared Areas: The property benefits from a shared driveway, shared garden, communal parking, communal gardens, shared pathways, other access.",MENU,,0,UNVERIFIED
 b4ac3b85eb,H2,"Condition: Where visible, the shared areas appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
@@ -1614,7 +1614,7 @@ c369f4ed37,H2,"Construction: The structure(s) is formed of bricks, blocks, timbe
 ea17e5df13,H2,"Minor cracking, shrinkage, and surface wear to concrete floors are not uncommon and do not necessarily indicate structural movement.",MENU,,0,UNVERIFIED
 3ee9267e87,H2,"The floor was inspected visually only, and concealed areas beneath floor coverings or finishes could not be examined.",ADD,{H_OTHER}::{NOT_INSPECTED},49,OPEN
 9ec6c9b4fe,H2,"Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.",MENU,,0,UNVERIFIED
-1b71ce7387,H2,These appeared serviceable at the time of my inspection.,ADD,{RISK_TO_BUILDING}::{BUILDING_NEAR_BY_TREES},58,OPEN
+1b71ce7387,H2,These appeared serviceable at the time of my inspection.,ADD,{H_OTHER}::{LARGE_OUTBUILDING},50,OPEN
 4c5eb18bf3,H2,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
 da7c8dddb5,H2,"Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
 7eb48cc8ec,H2,Routine maintenance appropriate to the age and construction of the outbuilding should be expected.,ADD,{H_OTHER}::{NOT_INSPECTED},51,OPEN
@@ -1626,10 +1626,10 @@ a4466f701b,H2,"As retaining walls support significant ground loads, failure coul
 d19068ec8c,H2,An appropriately qualified specialist should inspect the wall without delay and recommend any necessary remedial works.,ADD,{H_OTHER}::{REPAIR_RETAINING_WALLS},62,OPEN
 259780da55,H2,"If the retaining wall is shared with the neighbouring property owner, they may have some rights.",EXACT,{H_OTHER}::{REPAIR_RETAINING_WALLS},100,DONE
 768e83ba2e,H2,"Before any work is done, you should ask your legal adviser to investigate this matter and explain the implications.",EXACT,{H_OTHER}::{REPAIR_RETAINING_WALLS},100,DONE
-64efb18473,H2,Nearby Trees: One or more trees are located close to the property.,ADD,{RISK_TO_BUILDING}::{BUILDING_NEAR_BY_TREES},58,OPEN
+64efb18473,H2,Nearby Trees: One or more trees are located close to the property.,ADD,{H_OTHER}::{SHARED_ACCESS_UNKNOWN},49,OPEN
 9008ccdca8,H2,"Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",MENU,,0,UNVERIFIED
 83265d5c46,H2,"No defects: No significant detrimental effects on the property were noted to date, although the trees should be regularly pruned to restrict future growth and minimise the risk of defects occurring.",EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},100,DONE
-4cdfcebc2c,H2,Defects noted: One or more trees are located close to the property.,ADD,{RISK_TO_BUILDING}::{BUILDING_NEAR_BY_TREES},58,OPEN
+4cdfcebc2c,H2,Defects noted: One or more trees are located close to the property.,ADD,{H_OTHER}::{SHARED_ACCESS_UNKNOWN},49,OPEN
 9008ccdca8,H2,"Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",MENU,,0,UNVERIFIED
 c6a3d9406c,H2,"With groups of trees, the risk is usually greatest during prolonged dry spells.",EXACT,{H_OTHER}::{REPAIR_NEARBY_TREES_OK},100,DONE
 490d6d6ab9,H2,"Detrimental effects on the property, fencing, finished grounds, outbuilding, other were noted that include significant cracks, subsidence movement.",MENU,,0,UNVERIFIED

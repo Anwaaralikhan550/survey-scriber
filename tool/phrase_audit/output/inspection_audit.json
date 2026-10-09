@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2618,
+   "distinctEmitted": 2627,
    "approvedLegacyBank": 643,
-   "approvedCurrentBankOnly": 1948,
+   "approvedCurrentBankOnly": 1957,
    "unapproved": 0
   }
  },
@@ -6352,13 +6352,13 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_water_proofing",
    "title": "Waterproofing",
-   "dataFieldCount": 15,
-   "permutationCount": 29,
+   "dataFieldCount": 29,
+   "permutationCount": 43,
    "severities": [],
    "phraseStats": {
-    "total": 19,
+    "total": 31,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 19,
+    "approvedCurrentBankOnly": 31,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -7543,19 +7543,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_leaning_chimney",
    "title": "Leaning Chimney",
-   "dataFieldCount": 7,
-   "permutationCount": 11,
+   "dataFieldCount": 8,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 7,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 7,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Leaning chimney: The chimney stack on the main building of the property appears leaning.",
-    "Leaning chimney: The chimney stack on the front of the property appears leaning.",
-    "Leaning chimney: The chimney stack on the side of the property appears leaning."
+    "Leaning chimney: The chimney stack appears slightly leaning. Where significant movement is evident, further investigation by an appropriately qualified structural engineer or roofing contractor is recommended before legal commitment.",
+    "Leaning chimney: The chimney stack appears significantly leaning. Where significant movement is evident, further investigation by an appropriately qualified structural engineer or roofing contractor is recommended before legal commitment.",
+    "No repair required: No repair is currently needed. The property must be maintained in the normal way. Over time, brick or stone chimneys can distort and lean over. In the worst cases, the stack can become unstable. At present, this movement is small, and no action is required now. However, this problem can get worse, so the chimney should be periodically inspected, and you should plan to have the chimney rebuilt at a future time if the movement continues. Where significant movement is evident, further investigation by an appropriately qualified structural engineer or roofing contractor is recommended before legal commitment."
    ]
   },
   {

@@ -1616,6 +1616,53 @@ class InspectionPhraseEngine {
         }))));
       }
     }
+    final pointing = _labelsFor(
+      const [
+        'pt_good',
+        'pt_reasonable',
+        'pt_weathered',
+        'pt_eroded',
+        'pt_poor',
+      ],
+      answers,
+      const {
+        'pt_good': 'good',
+        'pt_reasonable': 'reasonable',
+        'pt_weathered': 'weathered',
+        'pt_eroded': 'eroded',
+        'pt_poor': 'poor',
+      },
+    );
+    _addOther(answers, 'pt_other', 'et_pointing_other', pointing);
+    if (pointing.isNotEmpty) {
+      phrases.addAll(_split(_normalize(part('{POINTING_CONDITION}', {
+        '{CS_POINTING_CONDITION}': _toWords(pointing).toLowerCase(),
+      }))));
+    }
+
+    final pots = _labelsFor(
+      const [
+        'pc_secure',
+        'pc_weathered',
+        'pc_cracked',
+        'pc_damaged',
+        'pc_missing',
+      ],
+      answers,
+      const {
+        'pc_secure': 'secure',
+        'pc_weathered': 'weathered',
+        'pc_cracked': 'cracked',
+        'pc_damaged': 'damaged',
+        'pc_missing': 'missing',
+      },
+    );
+    _addOther(answers, 'pc_other', 'et_pots_other', pots);
+    if (pots.isNotEmpty) {
+      phrases.addAll(_split(_normalize(part('{POTS_CONDITION}', {
+        '{CS_POTS_CONDITION}': _toWords(pots).toLowerCase(),
+      }))));
+    }
     return phrases;
   }
 
@@ -1661,35 +1708,26 @@ class InspectionPhraseEngine {
   }
 
   List<String> _chimneyLeaning(Map<String, String> answers) {
-    final locations = _labelsFor(
-      ['ch1', 'ch2', 'ch3', 'ch4', 'cb_other_608'],
-      answers,
-      {
-        'ch1': 'Main building',
-        'ch2': 'Front',
-        'ch3': 'Side',
-        'ch4': 'Rear',
-        'cb_other_608': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_608', 'et_other_752', locations);
-    if (locations.isEmpty) return const [];
+    // PDF E1: "The chimney stack appears slightly leaning, significantly
+    // leaning." - the surveyor picks the degree; no location is printed.
+    final degree = _cleanLower(answers['actv_leaning_degree']);
+    final condition = _cleanLower(answers['android_material_design_spinner4']);
+    if (degree.isEmpty && condition.isEmpty) return const [];
 
     final phraseCode = _chimneyPhraseCodeFromAnswers(
       answers,
-      fallbackIsMulti: locations.length > 1,
+      fallbackIsMulti: false,
     );
     final phrases = <String>[];
-    var leaningTemplate = _sub(phraseCode, '{LEANING_CHIMNEY}');
-    if (leaningTemplate.isNotEmpty) {
-      leaningTemplate = leaningTemplate.replaceAll(
-          '{CS_LEANING_CHIMNEY}', _toWords(locations).toLowerCase());
-      leaningTemplate =
-          leaningTemplate.replaceAll('{IS_ARE}', _isAre(locations));
-      phrases.addAll(_split(_normalize(leaningTemplate)));
+    if (degree.isNotEmpty) {
+      var leaningTemplate = _sub(phraseCode, '{LEANING_CHIMNEY}');
+      if (leaningTemplate.isNotEmpty) {
+        leaningTemplate =
+            leaningTemplate.replaceAll('{CS_LEANING_DEGREE}', degree);
+        phrases.addAll(_split(_normalize(leaningTemplate)));
+      }
     }
 
-    final condition = _cleanLower(answers['android_material_design_spinner4']);
     if (condition.isNotEmpty) {
       final conditionCode = condition.contains('repair')
           ? '{LEANING_CHIMNEY_CONDITION_REPAIR_SOON}'

@@ -1275,15 +1275,17 @@ class ReportBuilder {
     if ((leaning['android_material_design_spinner4'] ?? '')
         .toLowerCase()
         .contains('repair')) {
-      phrases.add(
-          'The chimney stack appears leaning and the movement appears significant, and action is required now (see section E1 - Chimney Stacks).');
+      phrases.add(_approvedBankPhrase(
+              '{RISK_TO_BUILDING}::{CHIMNEY_LEANING_SIGNIFICANT}') ??
+          'The chimney stack(s) is leaning and the movement appears significant, and immediate action is required (see section E1 - Chimney Stacks).');
     }
 
     final disrepair = _answersForScreen(
         rawData, 'activity_outside_property_repair_chimney_disrepair');
     if (_isCheckedValue(disrepair['cb_repair_soon_70'])) {
-      phrases.add(
-          'The chimney stack(s) on the building are in poor condition. This is a safety hazard (see section E1 - Chimney Stacks).');
+      phrases.add(_approvedBankPhrase(
+              '{RISK_TO_BUILDING}::{CHIMNEY_POOR_CONDITION}') ??
+          'One or more chimney stack(s) is in poor condition. This is a safety hazard. Further investigation and repair should be arranged immediately (see section E1 - Chimney Stacks).');
     }
 
     // RICS L2 cross-injections from Section E2 Roof Coverings (Phase 2B):

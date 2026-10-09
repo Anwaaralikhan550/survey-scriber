@@ -120,4 +120,76 @@ void main() {
       expect(run({}), isEmpty);
     });
   });
+
+  group('E1 Pointing condition / Damaged chimney pots', () {
+    test('every PDF pointing option gives the exact PDF sentences', () {
+      for (final o in ['good', 'reasonable', 'weathered', 'eroded', 'poor']) {
+        final out = run({'pt_$o': 'true'});
+        expect(
+          out,
+          contains('The mortar joints to the chimney stack appear in $o '
+              'condition(s). Weathered or eroded pointing should be renewed '
+              'to reduce further deterioration and water penetration.'),
+          reason: o,
+        );
+      }
+    });
+
+    test('every PDF chimney-pot option gives the exact PDF sentences', () {
+      for (final o in ['secure', 'weathered', 'cracked', 'damaged', 'missing']) {
+        final out = run({'pc_$o': 'true'});
+        expect(
+          out,
+          contains('The chimney pots appear $o. Damaged or insecure chimney '
+              'pots should be repaired or replaced to maintain weather '
+              'resistance and safety.'),
+          reason: o,
+        );
+      }
+    });
+
+    test('multi-select joins; Other uses typed text', () {
+      final out = run({
+        'pt_good': 'true',
+        'pt_eroded': 'true',
+        'pt_other': 'true',
+        'et_pointing_other': 'friable',
+      });
+      expect(out, contains('appear in good, eroded and friable condition(s).'));
+    });
+  });
+
+  group('E1 Leaning chimney', () {
+    String lean(Map<String, String> a) => engine
+        .buildPhrases('activity_outside_property_leaning_chimney', a)
+        .join('\n');
+
+    test('PDF leaning sentence for each degree', () {
+      for (final d in ['slightly leaning', 'significantly leaning']) {
+        final out = lean({'actv_leaning_degree': d});
+        expect(
+          out,
+          contains('The chimney stack appears $d. Where significant movement '
+              'is evident, further investigation by an appropriately '
+              'qualified structural engineer or roofing contractor is '
+              'recommended before legal commitment.'),
+          reason: d,
+        );
+      }
+    });
+
+    test('Repair required keeps the PDF wording', () {
+      final out = lean({
+        'actv_leaning_degree': 'significantly leaning',
+        'android_material_design_spinner4': 'Repair soon',
+      });
+      expect(
+        out,
+        contains('At present, the observed chimney movement appears '
+            'significant, and action is required now. You should contact a '
+            'qualified person to inspect the chimney and recommend remedial '
+            'action, which may involve rebuilding the chimney'),
+      );
+    });
+  });
 }

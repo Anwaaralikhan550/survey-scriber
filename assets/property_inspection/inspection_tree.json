@@ -28774,6 +28774,92 @@
                 "Poor",
                 "Defective"
               ]
+            },
+            {
+              "id": "label_pointing",
+              "label": "Pointing condition",
+              "type": "label"
+            },
+            {
+              "id": "pt_good",
+              "label": "good",
+              "type": "checkbox"
+            },
+            {
+              "id": "pt_reasonable",
+              "label": "reasonable",
+              "type": "checkbox"
+            },
+            {
+              "id": "pt_weathered",
+              "label": "weathered",
+              "type": "checkbox"
+            },
+            {
+              "id": "pt_eroded",
+              "label": "eroded",
+              "type": "checkbox"
+            },
+            {
+              "id": "pt_poor",
+              "label": "poor",
+              "type": "checkbox"
+            },
+            {
+              "id": "pt_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_pointing_other",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "pt_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_pots_condition",
+              "label": "Chimney pots condition",
+              "type": "label"
+            },
+            {
+              "id": "pc_secure",
+              "label": "secure",
+              "type": "checkbox"
+            },
+            {
+              "id": "pc_weathered",
+              "label": "weathered",
+              "type": "checkbox"
+            },
+            {
+              "id": "pc_cracked",
+              "label": "cracked",
+              "type": "checkbox"
+            },
+            {
+              "id": "pc_damaged",
+              "label": "damaged",
+              "type": "checkbox"
+            },
+            {
+              "id": "pc_missing",
+              "label": "missing",
+              "type": "checkbox"
+            },
+            {
+              "id": "pc_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_pots_other",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "pc_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -32998,6 +33084,15 @@
               "conditionalOn": "cb_other_608",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "actv_leaning_degree",
+              "label": "Leaning",
+              "type": "dropdown",
+              "options": [
+                "slightly leaning",
+                "significantly leaning"
+              ]
             },
             {
               "id": "label_condition_4",

@@ -17,9 +17,9 @@ void main() {
       '{E_CHIMNEY_MULTI_STACK}::{SHARED_CHIMNEY}':
           'multi-shared {CS_SHARED_CHIMNEY} {IS_ARE}',
       '{E_CHIMNEY_SINGLE_STACK}::{LEANING_CHIMNEY}':
-          'single-leaning {CS_LEANING_CHIMNEY} {IS_ARE}',
+          'single-leaning {CS_LEANING_DEGREE}',
       '{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY}':
-          'multi-leaning {CS_LEANING_CHIMNEY} {IS_ARE}',
+          'multi-leaning {CS_LEANING_DEGREE}',
       '{E_CHIMNEY_SINGLE_STACK}::{LEANING_CHIMNEY_CONDITION_OK}': 'single-ok',
       '{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK}': 'multi-ok',
     };
@@ -115,8 +115,7 @@ void main() {
         'activity_outside_property_leaning_chimney',
         {
           'android_material_design_spinner3': 'Single',
-          'ch1': 'true',
-          'ch2': 'true',
+          'actv_leaning_degree': 'slightly leaning',
           'android_material_design_spinner4': 'OK',
         },
       );

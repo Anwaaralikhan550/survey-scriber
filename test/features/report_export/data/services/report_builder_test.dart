@@ -2776,6 +2776,80 @@ void main() {
       expect(j2Text, contains('Retaining Walls: Evidence of movement, bulging, cracking, deterioration was observed.'));
     });
 
+    test(
+        'J1 emits the PDF chimney cross-inject sentences (E1 -> J1) from the '
+        'approved bank', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_risk_to_building_',
+                title: 'J1 Risk To Building',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'actv_movement_status',
+                    label: 'Movement status',
+                    type: InspectionFieldType.dropdown,
+                    options: ['None', 'Noted'],
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = makeBankBackedBuilder().build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_risks_risk_to_building_': {
+              'actv_movement_status': 'None',
+            },
+            'activity_outside_property_leaning_chimney': {
+              'android_material_design_spinner4': 'Repair soon',
+            },
+            'activity_outside_property_repair_chimney_disrepair': {
+              'cb_repair_soon_70': 'true',
+            },
+            'activity_risks_other_': {'cb_not_applicable': 'true'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final all = section.screens.expand((s) => s.phrases).join('\n');
+      expect(
+        all,
+        contains('The chimney stack(s) is leaning and the movement appears '
+            'significant, and immediate action is required'),
+      );
+      expect(
+        all,
+        contains('One or more chimney stack(s) is in poor condition. This is '
+            'a safety hazard. Further investigation and repair should be '
+            'arranged immediately'),
+      );
+    });
+
     test('does not synthesise J2 when none of the source screens show a risk',
         () {
       final tree = InspectionTreePayload(
