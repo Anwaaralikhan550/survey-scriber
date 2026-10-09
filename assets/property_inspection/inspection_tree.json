@@ -396,150 +396,351 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_front_garden",
-              "label": "Front Garden",
+              "id": "cb_gg_front_type",
+              "label": "Front garden finishes",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_gg_front_finishes",
+              "label": "Front garden laid to",
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner",
-              "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Paved",
-                "Lawned",
-                "Decked",
-                "Laid with gravel",
-                "Laid with stone chippings",
-                "Laid with tile chippings",
-                "Other"
-              ]
+              "id": "gg_front_type_0_lawn",
+              "label": "lawn",
+              "type": "checkbox"
             },
             {
-              "id": "etFrontTypeOther",
-              "label": "Type",
+              "id": "gg_front_type_0_artificial_lawn",
+              "label": "artificial lawn",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_type_0_paving",
+              "label": "paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_type_0_timber_decking",
+              "label": "timber decking",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_type_0_gravel",
+              "label": "gravel",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_type_0_stones",
+              "label": "stones",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_type_0_hardstanding",
+              "label": "hardstanding",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_type_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_type_0_other_text",
+              "label": "Other",
               "type": "text",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Other",
+              "conditionalOn": "gg_front_type_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "android_material_design_spinner2",
-              "label": "Boundry Fencing",
-              "type": "dropdown",
-              "options": [
-                "Timber",
-                "Brick wall",
-                "Concrete wall",
-                "Wire mesh",
-                "Hedges",
-                "Shrubs",
-                "Other"
-              ]
+              "id": "cb_gg_front_fence",
+              "label": "Front garden boundaries",
+              "type": "checkbox"
             },
             {
-              "id": "etFrontFencingOther",
-              "label": "Boundry Fencing",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner2",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_rear_garden",
-              "label": "Rear Garden",
+              "id": "label_a4_gg_front_boundaries",
+              "label": "Front garden boundaries formed by",
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner3",
-              "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Paved",
-                "Lawned",
-                "Decked",
-                "Laid with gravel",
-                "Laid with stone chippings",
-                "Laid with tile chippings",
-                "Other"
-              ]
+              "id": "gg_front_fence_0_timber_fencing",
+              "label": "timber fencing",
+              "type": "checkbox"
             },
             {
-              "id": "etRearTypeOther",
-              "label": "Type",
+              "id": "gg_front_fence_0_brick_wall",
+              "label": "brick wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_fence_0_block_wall",
+              "label": "block wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_fence_0_hedging",
+              "label": "hedging",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_fence_0_wire_mesh",
+              "label": "wire mesh",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_fence_0_concrete_sections",
+              "label": "concrete sections",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_fence_0_metal_railings",
+              "label": "metal railings",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_fence_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_front_fence_0_other_text",
+              "label": "Other",
               "type": "text",
-              "conditionalOn": "android_material_design_spinner3",
-              "conditionalValue": "Other",
+              "conditionalOn": "gg_front_fence_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "android_material_design_spinner4",
-              "label": "Boundry Fencing",
-              "type": "dropdown",
-              "options": [
-                "Timber",
-                "Brick wall",
-                "Concrete wall",
-                "Wire mesh",
-                "Hedges",
-                "Shrubs",
-                "Other"
-              ]
+              "id": "cb_gg_rear_type",
+              "label": "Rear garden finishes",
+              "type": "checkbox"
             },
             {
-              "id": "etRearFencingOther",
-              "label": "Boundry Fencing",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_communal_garden",
-              "label": "Communal Garden",
+              "id": "label_a4_gg_rear_finishes",
+              "label": "Rear garden laid to",
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner5",
-              "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Paved",
-                "Lawned",
-                "Decked",
-                "Laid with gravel",
-                "Laid with stone chippings",
-                "Laid with tile chippings",
-                "Other"
-              ]
+              "id": "gg_rear_type_0_lawn",
+              "label": "lawn",
+              "type": "checkbox"
             },
             {
-              "id": "etCommunalTypeOther",
-              "label": "Type",
+              "id": "gg_rear_type_0_artificial_lawn",
+              "label": "artificial lawn",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_type_0_paving",
+              "label": "paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_type_0_timber_decking",
+              "label": "timber decking",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_type_0_gravel",
+              "label": "gravel",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_type_0_stones",
+              "label": "stones",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_type_0_hardstanding",
+              "label": "hardstanding",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_type_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_type_0_other_text",
+              "label": "Other",
               "type": "text",
-              "conditionalOn": "android_material_design_spinner5",
-              "conditionalValue": "Other",
+              "conditionalOn": "gg_rear_type_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "android_material_design_spinner6",
-              "label": "Boundry Fencing",
-              "type": "dropdown",
-              "options": [
-                "Timber",
-                "Brick wall",
-                "Concrete wall",
-                "Wire mesh",
-                "Hedges",
-                "Shrubs",
-                "Other"
-              ]
+              "id": "cb_gg_rear_fence",
+              "label": "Rear garden boundaries",
+              "type": "checkbox"
             },
             {
-              "id": "etCommunalFencingOther",
-              "label": "Boundry Fencing",
+              "id": "label_a4_gg_rear_boundaries",
+              "label": "Rear garden boundaries formed by",
+              "type": "label"
+            },
+            {
+              "id": "gg_rear_fence_0_timber_fencing",
+              "label": "timber fencing",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_fence_0_brick_wall",
+              "label": "brick wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_fence_0_block_wall",
+              "label": "block wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_fence_0_hedging",
+              "label": "hedging",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_fence_0_wire_mesh",
+              "label": "wire mesh",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_fence_0_concrete_sections",
+              "label": "concrete sections",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_fence_0_metal_railings",
+              "label": "metal railings",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_fence_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_rear_fence_0_other_text",
+              "label": "Other",
               "type": "text",
-              "conditionalOn": "android_material_design_spinner6",
-              "conditionalValue": "Other",
+              "conditionalOn": "gg_rear_fence_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_gg_communal_type",
+              "label": "Communal garden finishes",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_gg_communal_finishes",
+              "label": "Communal garden laid to",
+              "type": "label"
+            },
+            {
+              "id": "gg_communal_type_0_lawn",
+              "label": "lawn",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_type_0_artificial_lawn",
+              "label": "artificial lawn",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_type_0_paving",
+              "label": "paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_type_0_timber_decking",
+              "label": "timber decking",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_type_0_gravel",
+              "label": "gravel",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_type_0_stones",
+              "label": "stones",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_type_0_hardstanding",
+              "label": "hardstanding",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_type_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_type_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "gg_communal_type_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_gg_communal_fence",
+              "label": "Communal garden boundaries",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_gg_communal_boundaries",
+              "label": "Communal garden boundaries formed by",
+              "type": "label"
+            },
+            {
+              "id": "gg_communal_fence_0_timber_fencing",
+              "label": "timber fencing",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_fence_0_brick_wall",
+              "label": "brick wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_fence_0_block_wall",
+              "label": "block wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_fence_0_hedging",
+              "label": "hedging",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_fence_0_wire_mesh",
+              "label": "wire mesh",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_fence_0_concrete_sections",
+              "label": "concrete sections",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_fence_0_metal_railings",
+              "label": "metal railings",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_fence_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "gg_communal_fence_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "gg_communal_fence_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -553,22 +754,14 @@
           "fields": [
             {
               "id": "android_material_design_spinner",
-              "label": "Topography",
+              "label": "Ground",
               "type": "dropdown",
               "options": [
                 "Level",
-                "Sloping",
-                "Hilly",
-                "Other"
+                "Gently sloping",
+                "Moderately sloping",
+                "Steeply sloping"
               ]
-            },
-            {
-              "id": "etFrontTypeOther",
-              "label": "Topography",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Other",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -700,11 +893,6 @@
           "order": 6,
           "fields": [
             {
-              "id": "label_parking_2",
-              "label": "Parking",
-              "type": "label"
-            },
-            {
               "id": "android_material_design_spinner",
               "label": "Status",
               "type": "dropdown",
@@ -714,60 +902,57 @@
               ]
             },
             {
-              "id": "label_type_16",
-              "label": "Type",
-              "type": "label",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
+              "id": "label_a4_parking_kinds",
+              "label": "Comes with",
+              "type": "label"
+            },
+            {
+              "id": "a4_pk_k_residential",
+              "label": "residential",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pk_k_private",
+              "label": "private",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pk_k_allocated",
+              "label": "allocated",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pk_k_communal",
+              "label": "communal",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pk_k_off_street",
+              "label": "off-street",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pk_k_underground_facility",
+              "label": "underground facility",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pk_k_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pk_k_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "a4_pk_k_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "ch1",
-              "label": "Private",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch2",
-              "label": "Allocated",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch3",
-              "label": "Communal",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch4",
-              "label": "Off street",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch5",
-              "label": "Pay and Display",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch6",
-              "label": "Residential Parking",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
+              "id": "cb_a4_pk_paid",
+              "label": "Paid parking in the area",
+              "type": "checkbox"
             }
           ]
         },
@@ -779,124 +964,118 @@
           "order": 6,
           "fields": [
             {
-              "id": "label_type_9",
-              "label": "Type",
+              "id": "cb_front_type",
+              "label": "Front garden finishes",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_front_finishes",
+              "label": "Laid to",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Paved",
+              "id": "front_type_0_lawn",
+              "label": "lawn",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Lawned",
+              "id": "front_type_0_artificial_lawn",
+              "label": "artificial lawn",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "Decked",
+              "id": "front_type_0_paving",
+              "label": "paving",
               "type": "checkbox"
             },
             {
-              "id": "ch4",
-              "label": "Laid with gravel",
+              "id": "front_type_0_timber_decking",
+              "label": "timber decking",
               "type": "checkbox"
             },
             {
-              "id": "ch5",
-              "label": "Laid with stone chippings",
+              "id": "front_type_0_gravel",
+              "label": "gravel",
               "type": "checkbox"
             },
             {
-              "id": "ch6",
-              "label": "Laid with tile chippings",
+              "id": "front_type_0_stones",
+              "label": "stones",
               "type": "checkbox"
             },
             {
-              "id": "ch7",
+              "id": "front_type_0_hardstanding",
+              "label": "hardstanding",
+              "type": "checkbox"
+            },
+            {
+              "id": "front_type_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etGroundTypeOther",
+              "id": "front_type_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch7",
+              "conditionalOn": "front_type_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "ch20",
-              "label": "No Boundary Fencing",
+              "id": "cb_front_fence",
+              "label": "Front garden boundaries",
               "type": "checkbox"
             },
             {
-              "id": "label_boundary_fencing_3",
-              "label": "Boundary Fencing",
+              "id": "label_a4_front_boundaries",
+              "label": "Boundaries formed by",
               "type": "label"
             },
             {
-              "id": "ch8",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "front_fence_0_timber_fencing",
+              "label": "timber fencing",
+              "type": "checkbox"
             },
             {
-              "id": "ch9",
-              "label": "Brick wall",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "front_fence_0_brick_wall",
+              "label": "brick wall",
+              "type": "checkbox"
             },
             {
-              "id": "ch10",
-              "label": "Concrete wall",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "front_fence_0_block_wall",
+              "label": "block wall",
+              "type": "checkbox"
             },
             {
-              "id": "ch11",
-              "label": "Wire mesh",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "front_fence_0_hedging",
+              "label": "hedging",
+              "type": "checkbox"
             },
             {
-              "id": "ch12",
-              "label": "Hedges",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "front_fence_0_wire_mesh",
+              "label": "wire mesh",
+              "type": "checkbox"
             },
             {
-              "id": "ch13",
-              "label": "Shrubs",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "front_fence_0_concrete_sections",
+              "label": "concrete sections",
+              "type": "checkbox"
             },
             {
-              "id": "ch14",
+              "id": "front_fence_0_metal_railings",
+              "label": "metal railings",
+              "type": "checkbox"
+            },
+            {
+              "id": "front_fence_0_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "etGroundBoundryFencingOther",
+              "id": "front_fence_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch14",
+              "conditionalOn": "front_fence_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -1027,124 +1206,118 @@
           "order": 8,
           "fields": [
             {
-              "id": "label_type_10",
-              "label": "Type",
+              "id": "cb_rear_type",
+              "label": "Rear garden finishes",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_rear_finishes",
+              "label": "Laid to",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Paved",
+              "id": "rear_type_0_lawn",
+              "label": "lawn",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Lawned",
+              "id": "rear_type_0_artificial_lawn",
+              "label": "artificial lawn",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "Decked",
+              "id": "rear_type_0_paving",
+              "label": "paving",
               "type": "checkbox"
             },
             {
-              "id": "ch4",
-              "label": "Laid with gravel",
+              "id": "rear_type_0_timber_decking",
+              "label": "timber decking",
               "type": "checkbox"
             },
             {
-              "id": "ch5",
-              "label": "Laid with stone chippings",
+              "id": "rear_type_0_gravel",
+              "label": "gravel",
               "type": "checkbox"
             },
             {
-              "id": "ch6",
-              "label": "Laid with tile chippings",
+              "id": "rear_type_0_stones",
+              "label": "stones",
               "type": "checkbox"
             },
             {
-              "id": "ch7",
+              "id": "rear_type_0_hardstanding",
+              "label": "hardstanding",
+              "type": "checkbox"
+            },
+            {
+              "id": "rear_type_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etGroundTypeOther",
+              "id": "rear_type_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch7",
+              "conditionalOn": "rear_type_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "ch20",
-              "label": "No Boundary Fencing",
+              "id": "cb_rear_fence",
+              "label": "Rear garden boundaries",
               "type": "checkbox"
             },
             {
-              "id": "label_boundary_fencing_4",
-              "label": "Boundary Fencing",
+              "id": "label_a4_rear_boundaries",
+              "label": "Boundaries formed by",
               "type": "label"
             },
             {
-              "id": "ch8",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "rear_fence_0_timber_fencing",
+              "label": "timber fencing",
+              "type": "checkbox"
             },
             {
-              "id": "ch9",
-              "label": "Brick wall",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "rear_fence_0_brick_wall",
+              "label": "brick wall",
+              "type": "checkbox"
             },
             {
-              "id": "ch10",
-              "label": "Concrete wall",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "rear_fence_0_block_wall",
+              "label": "block wall",
+              "type": "checkbox"
             },
             {
-              "id": "ch11",
-              "label": "Wire mesh",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "rear_fence_0_hedging",
+              "label": "hedging",
+              "type": "checkbox"
             },
             {
-              "id": "ch12",
-              "label": "Hedges",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "rear_fence_0_wire_mesh",
+              "label": "wire mesh",
+              "type": "checkbox"
             },
             {
-              "id": "ch13",
-              "label": "Shrubs",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "rear_fence_0_concrete_sections",
+              "label": "concrete sections",
+              "type": "checkbox"
             },
             {
-              "id": "ch14",
+              "id": "rear_fence_0_metal_railings",
+              "label": "metal railings",
+              "type": "checkbox"
+            },
+            {
+              "id": "rear_fence_0_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "etGroundBoundryFencingOther",
+              "id": "rear_fence_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch14",
+              "conditionalOn": "rear_fence_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -1263,124 +1436,118 @@
           "order": 10,
           "fields": [
             {
-              "id": "label_type_8",
-              "label": "Type",
+              "id": "cb_communal_type",
+              "label": "Communal garden finishes",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_communal_finishes",
+              "label": "Laid to",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Paved",
+              "id": "communal_type_0_lawn",
+              "label": "lawn",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Lawned",
+              "id": "communal_type_0_artificial_lawn",
+              "label": "artificial lawn",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "Decked",
+              "id": "communal_type_0_paving",
+              "label": "paving",
               "type": "checkbox"
             },
             {
-              "id": "ch4",
-              "label": "Laid with gravel",
+              "id": "communal_type_0_timber_decking",
+              "label": "timber decking",
               "type": "checkbox"
             },
             {
-              "id": "ch5",
-              "label": "Laid with stone chippings",
+              "id": "communal_type_0_gravel",
+              "label": "gravel",
               "type": "checkbox"
             },
             {
-              "id": "ch6",
-              "label": "Laid with tile chippings",
+              "id": "communal_type_0_stones",
+              "label": "stones",
               "type": "checkbox"
             },
             {
-              "id": "ch7",
+              "id": "communal_type_0_hardstanding",
+              "label": "hardstanding",
+              "type": "checkbox"
+            },
+            {
+              "id": "communal_type_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etGroundTypeOther",
+              "id": "communal_type_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch7",
+              "conditionalOn": "communal_type_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "ch20",
-              "label": "No Boundary Fencing",
+              "id": "cb_communal_fence",
+              "label": "Communal garden boundaries",
               "type": "checkbox"
             },
             {
-              "id": "label_boundary_fencing_2",
-              "label": "Boundary Fencing",
+              "id": "label_a4_communal_boundaries",
+              "label": "Boundaries formed by",
               "type": "label"
             },
             {
-              "id": "ch8",
-              "label": "Timber",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "communal_fence_0_timber_fencing",
+              "label": "timber fencing",
+              "type": "checkbox"
             },
             {
-              "id": "ch9",
-              "label": "Brick wall",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "communal_fence_0_brick_wall",
+              "label": "brick wall",
+              "type": "checkbox"
             },
             {
-              "id": "ch10",
-              "label": "Concrete wall",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "communal_fence_0_block_wall",
+              "label": "block wall",
+              "type": "checkbox"
             },
             {
-              "id": "ch11",
-              "label": "Wire mesh",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "communal_fence_0_hedging",
+              "label": "hedging",
+              "type": "checkbox"
             },
             {
-              "id": "ch12",
-              "label": "Hedges",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "communal_fence_0_wire_mesh",
+              "label": "wire mesh",
+              "type": "checkbox"
             },
             {
-              "id": "ch13",
-              "label": "Shrubs",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "id": "communal_fence_0_concrete_sections",
+              "label": "concrete sections",
+              "type": "checkbox"
             },
             {
-              "id": "ch14",
+              "id": "communal_fence_0_metal_railings",
+              "label": "metal railings",
+              "type": "checkbox"
+            },
+            {
+              "id": "communal_fence_0_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "ch20",
-              "conditionalValue": "false",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "etGroundBoundryFencingOther",
+              "id": "communal_fence_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch14",
+              "conditionalOn": "communal_fence_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -1478,67 +1645,6 @@
           "order": 12,
           "fields": [
             {
-              "id": "label_type_17",
-              "label": "Type",
-              "type": "label",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch1",
-              "label": "Private",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch2",
-              "label": "Allocated",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch3",
-              "label": "Communal",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch4",
-              "label": "Off street",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch5",
-              "label": "Pay and Display",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "ch6",
-              "label": "Residential Parking",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner",
-              "conditionalValue": "Available",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_parking_3",
-              "label": "Parking",
-              "type": "label"
-            },
-            {
               "id": "android_material_design_spinner",
               "label": "Status",
               "type": "dropdown",
@@ -1546,6 +1652,59 @@
                 "Available",
                 "No Parking"
               ]
+            },
+            {
+              "id": "label_a4_parking_kinds",
+              "label": "Comes with",
+              "type": "label"
+            },
+            {
+              "id": "a4_pp_k_residential",
+              "label": "residential",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pp_k_private",
+              "label": "private",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pp_k_allocated",
+              "label": "allocated",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pp_k_communal",
+              "label": "communal",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pp_k_off_street",
+              "label": "off-street",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pp_k_underground_facility",
+              "label": "underground facility",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pp_k_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_pp_k_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "a4_pp_k_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_a4_pp_paid",
+              "label": "Paid parking in the area",
+              "type": "checkbox"
             }
           ]
         },
@@ -1594,7 +1753,7 @@
           "fields": [
             {
               "id": "android_material_design_spinner3",
-              "label": "Status",
+              "label": "Gated development",
               "type": "dropdown",
               "options": [
                 "Yes",
@@ -1636,24 +1795,6 @@
                 "E",
                 "F",
                 "G"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_estate_location",
-          "title": "Estated Location",
-          "type": "screen",
-          "parentId": "group_ground_3",
-          "order": 16,
-          "fields": [
-            {
-              "id": "android_material_design_spinner",
-              "label": "Estate location",
-              "type": "dropdown",
-              "options": [
-                "Private",
-                "Local authority"
               ]
             }
           ]
@@ -1725,37 +1866,53 @@
           "order": 22,
           "fields": [
             {
-              "id": "label_established_area",
-              "label": "Established Area",
+              "id": "cb_a4_location",
+              "label": "Location",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_area",
+              "label": "Situated within a",
               "type": "label"
             },
             {
-              "id": "android_material_design_spinner",
-              "label": "Well/Newly",
-              "type": "dropdown",
-              "options": [
-                "Well",
-                "Newly"
-              ]
+              "id": "a4_location_0_well_established_residential_area",
+              "label": "well-established residential area",
+              "type": "checkbox"
             },
             {
-              "id": "label_location_density",
-              "label": "Location Density",
-              "type": "label"
+              "id": "a4_location_0_modern_residential_development",
+              "label": "modern residential development",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_location_0_mixed_residential_and_commercial_area",
+              "label": "mixed residential and commercial area",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_location_0_rural_location",
+              "label": "rural location",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_location_0_conservation",
+              "label": "conservation",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_location_0_village_setting",
+              "label": "village setting",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_location_0_suburban_location",
+              "label": "suburban location",
+              "type": "checkbox"
             },
             {
               "id": "android_material_design_spinner2",
-              "label": "From",
-              "type": "dropdown",
-              "options": [
-                "Low",
-                "Medium",
-                "High"
-              ]
-            },
-            {
-              "id": "android_material_design_spinner20",
-              "label": "To",
+              "label": "Surrounding development",
               "type": "dropdown",
               "options": [
                 "Low",
@@ -1773,13 +1930,62 @@
           "order": 24,
           "fields": [
             {
-              "id": "android_material_design_spinner7",
-              "label": "Remote",
-              "type": "dropdown",
-              "options": [
-                "Accessible",
-                "Remote"
-              ]
+              "id": "cb_a4_facilities",
+              "label": "Facilities",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_amenities",
+              "label": "Observed",
+              "type": "label"
+            },
+            {
+              "id": "a4_facilities_0_schools",
+              "label": "schools",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_facilities_0_shops",
+              "label": "shops",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_facilities_0_medical_facilities",
+              "label": "medical facilities",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_facilities_0_bus_services",
+              "label": "bus services",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_facilities_0_train_stations",
+              "label": "train stations",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_facilities_0_parks",
+              "label": "parks",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_facilities_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_facilities_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "a4_facilities_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_a4_remote",
+              "label": "Remote area",
+              "type": "checkbox"
             }
           ]
         },
@@ -1791,98 +1997,81 @@
           "order": 26,
           "fields": [
             {
-              "id": "android_material_design_spinner8",
-              "label": "Flooding",
-              "type": "dropdown",
-              "options": [
-                "No Adverse",
-                "Adverse"
-              ]
+              "id": "cb_a4_lenv",
+              "label": "Local environment",
+              "type": "checkbox"
             },
             {
-              "id": "label_flooding",
-              "label": "Flooding",
-              "type": "label",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Adverse",
-              "conditionalMode": "show"
+              "id": "label_a4_features",
+              "label": "Environmental features",
+              "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "The Sea",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Adverse",
-              "conditionalMode": "show"
+              "id": "a4_lenv_0_susceptible_to_flooding",
+              "label": "Susceptible to flooding",
+              "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "A river",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Adverse",
-              "conditionalMode": "show"
+              "id": "a4_lenv_0_railway_line",
+              "label": "Railway line",
+              "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "A canal",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Adverse",
-              "conditionalMode": "show"
+              "id": "a4_lenv_0_busy_road",
+              "label": "Busy road",
+              "type": "checkbox"
             },
             {
-              "id": "ch4",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Adverse",
-              "conditionalMode": "show"
+              "id": "a4_lenv_0_commercial_premises",
+              "label": "Commercial premises",
+              "type": "checkbox"
             },
             {
-              "id": "etFloodingOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "android_material_design_spinner8=Adverse&ch4",
-              "conditionalMode": "show"
+              "id": "a4_lenv_0_industrial_premises",
+              "label": "Industrial premises",
+              "type": "checkbox"
             },
             {
-              "id": "label_emf",
-              "label": "EMF",
-              "type": "label",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Adverse",
-              "conditionalMode": "show"
+              "id": "a4_lenv_0_public_house",
+              "label": "Public house",
+              "type": "checkbox"
             },
             {
-              "id": "ch5",
-              "label": "Substation",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Adverse",
-              "conditionalMode": "show"
+              "id": "a4_lenv_0_school",
+              "label": "School",
+              "type": "checkbox"
             },
             {
-              "id": "ch6",
+              "id": "a4_lenv_0_electricity_substation",
+              "label": "Electricity substation",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_lenv_0_overhead_power_lines",
+              "label": "Overhead power lines",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_lenv_0_pylons",
               "label": "Pylons",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Adverse",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "ch7",
+              "id": "a4_lenv_0_airport_flight_path",
+              "label": "Airport flight path",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_lenv_0_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner8",
-              "conditionalValue": "Adverse",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "etEMFOther",
+              "id": "a4_lenv_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "android_material_design_spinner8=Adverse&ch7",
+              "conditionalOn": "a4_lenv_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -1895,13 +2084,47 @@
           "order": 28,
           "fields": [
             {
-              "id": "android_material_design_spinner3",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Yes",
-                "No"
-              ]
+              "id": "cb_a4_road",
+              "label": "Road",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_road_kind",
+              "label": "Located on a",
+              "type": "label"
+            },
+            {
+              "id": "a4_road_0_adopted_public_road",
+              "label": "adopted public road",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_road_0_private_road",
+              "label": "private road",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_road_0_cul_de_sac",
+              "label": "cul-de-sac",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_road_0_unmade_road",
+              "label": "unmade road",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_road_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_road_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "a4_road_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -1913,75 +2136,56 @@
           "order": 30,
           "fields": [
             {
-              "id": "android_material_design_spinner4",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Yes",
-                "No"
-              ]
+              "id": "cb_a4_noise",
+              "label": "Noise",
+              "type": "checkbox"
             },
             {
-              "id": "label_status_3",
-              "label": "Status",
-              "type": "label",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Yes",
-              "conditionalMode": "show"
+              "id": "label_a4_noise_sources",
+              "label": "Close to",
+              "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Busy road",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Yes",
-              "conditionalMode": "show"
+              "id": "a4_noise_0_train_lines_or_a_station",
+              "label": "train lines or a station",
+              "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Train line",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Yes",
-              "conditionalMode": "show"
+              "id": "a4_noise_0_major_roads",
+              "label": "major roads",
+              "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "Train station",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Yes",
-              "conditionalMode": "show"
+              "id": "a4_noise_0_commercial_premises",
+              "label": "commercial premises",
+              "type": "checkbox"
             },
             {
-              "id": "ch4",
-              "label": "Airport",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Yes",
-              "conditionalMode": "show"
+              "id": "a4_noise_0_industrial_premises",
+              "label": "industrial premises",
+              "type": "checkbox"
             },
             {
-              "id": "ch5",
-              "label": "Motor way",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Yes",
-              "conditionalMode": "show"
+              "id": "a4_noise_0_public_open_space",
+              "label": "public open space",
+              "type": "checkbox"
             },
             {
-              "id": "ch6",
+              "id": "a4_noise_0_schools",
+              "label": "schools",
+              "type": "checkbox"
+            },
+            {
+              "id": "a4_noise_0_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner4",
-              "conditionalValue": "Yes",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "etGroundTypeOther",
+              "id": "a4_noise_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "android_material_design_spinner4=Yes&ch6",
+              "conditionalOn": "a4_noise_0_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]

@@ -104,53 +104,6 @@ void main() {
   }
 
   group('ReportBuilder.build', () {
-    test('collapses equal density boundaries into professional prose', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'D',
-            title: 'About Property',
-            description: '',
-            nodes: const [
-              InspectionNodeDefinition(
-                id: 'activity_property_location',
-                title: 'Location',
-                type: InspectionNodeType.screen,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner2',
-                    label: 'From',
-                    type: InspectionFieldType.dropdown,
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner20',
-                    label: 'To',
-                    type: InspectionFieldType.dropdown,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_property_location': {
-              'android_material_design_spinner2': 'Low',
-              'android_material_design_spinner20': 'Low',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      expect(doc.sections.single.screens.single.phrases.single,
-          'The property is located in an established low-density area.');
-      expect(doc.sections.single.screens.single.phrases.single,
-          isNot(contains('low to low')));
-    });
 
     test('suppresses raw boolean status fields when no narrative applies', () {
       final tree = InspectionTreePayload(
@@ -191,60 +144,6 @@ void main() {
       expect(doc.sections, isEmpty);
     });
 
-    test('removes isolated construction options and emits one paragraph', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'D',
-            title: 'About Property',
-            description: '',
-            nodes: const [
-              InspectionNodeDefinition(
-                id: 'group_construction_2',
-                title: 'Construction',
-                type: InspectionNodeType.group,
-                fields: [],
-              ),
-              InspectionNodeDefinition(
-                id: 'activity_property_roof',
-                title: 'Roof',
-                type: InspectionNodeType.screen,
-                parentId: 'group_construction_2',
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'ch1',
-                    label: 'Flat',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_property_roof': {'ch1': 'true'},
-          },
-          persistedPhrases: {
-            'activity_property_roof': [
-              'Flat.',
-              'The main building has a flat roof form.',
-            ],
-          },
-          persistedPhraseManualFlags: {
-            'activity_property_roof': true,
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final phrases = doc.sections.single.screens.single.phrases;
-      expect(phrases, hasLength(1));
-      expect(phrases.single, 'The main building has a flat roof form.');
-    });
 
     test('synthesises conflicting wall types assigned to the same location',
         () {

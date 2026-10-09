@@ -42,26 +42,7 @@ void main() {
     );
   });
 
-  test('negative private-road status becomes professional legal prose', () {
-    final phrase = engine.buildPhrases(
-      'activity_property_private_road',
-      {'android_material_design_spinner3': 'No'},
-    ).join(' ');
 
-    expect(phrase, contains('maintained at public expense'));
-    expect(phrase, contains('legal adviser'));
-    expect(phrase, isNot(startsWith('Status:')));
-  });
-
-  test('source-less noise status gives proportionate inspection advice', () {
-    final phrase = engine.buildPhrases(
-      'activity_property_is_noisy_area',
-      {'android_material_design_spinner4': 'Yes'},
-    ).join(' ');
-
-    expect(phrase, contains('External noise was apparent'));
-    expect(phrase, contains('revisit the area at different times'));
-  });
 
 
 

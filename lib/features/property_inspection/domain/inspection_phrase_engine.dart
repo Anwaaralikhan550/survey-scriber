@@ -727,20 +727,20 @@ class InspectionPhraseEngine {
       case 'activity_property_roof':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_ground_area':
-        return _propertyGroundArea(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_extended':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_extended_wall':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_parking':
       case 'activity_parking__parking':
-        return _propertyParking(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_front_garden':
-        return _sectionDGarden(answers, 'front');
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_rear_garden':
-        return _sectionDGarden(answers, 'rear');
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_communal_garden':
-        return _sectionDGarden(answers, 'communal');
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_converted':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_flate':
@@ -750,27 +750,27 @@ class InspectionPhraseEngine {
       case 'activity_construction_window':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_gated_community':
-        return _gatedCommunity(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_energy_effiency':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_energy_environment_impect':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_estate_location':
-        return _estateLocation(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_location':
-        return _propertyLocationDensity(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_facelities':
-        return _propertyFacilities(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_local_environment':
-        return _propertyLocalEnvironment(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_private_road':
-        return _propertyPrivateRoad(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_is_noisy_area':
-        return _propertyNoisyArea(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_garden':
-        return _sectionDGardenResidential(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_topography':
-        return _sectionDTopography(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_internal_wall':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_listed_building':
@@ -2552,92 +2552,7 @@ class InspectionPhraseEngine {
   }
 
   // ── Section D: About the Property ──────────────────────────────
-
-  List<String> _propertyGroundArea(Map<String, String> answers) {
-    final items = <String>[];
-    if (_isChecked(answers['ch1'])) items.add('residential');
-    if (_isChecked(answers['ch2'])) items.add('commercial');
-    if (_isChecked(answers['ch3'])) items.add('rural');
-    if (_isChecked(answers['ch4'])) items.add('conservation');
-    if (_isChecked(answers['ch5'])) {
-      final other = (answers['etCoveredWithOther'] ?? '').trim();
-      if (other.isNotEmpty) items.add(other.toLowerCase());
-    }
-    if (items.isEmpty) return const [];
-    final key = items.length == 1
-        ? '{D_GROUND_AREA_SINGLE}'
-        : '{D_GROUND_AREA_MIXED}';
-    final fallback = items.length == 1
-        ? 'The property is situated in a predominantly {AREA_TYPE} area.'
-        : 'The surrounding area has a mixed {AREA_TYPE} character.';
-    final template = _phraseTexts[key] ?? fallback;
-    return _splitResolved(
-      template.replaceAll('{AREA_TYPE}', _toWords(items)),
-    );
-  }
-
-  List<String> _propertyParking(Map<String, String> answers) {
-    final status =
-        (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
-    if (status.isEmpty) return const [];
-    if (status.contains('no parking')) {
-      final text = _phraseTexts['{D_GROUND}::{NO_PARKING}'] ?? '';
-      if (text.isNotEmpty) return _split(_normalize(text));
-      return const ['The property does not come with parking.'];
-    }
-    final types = <String>[];
-    if (_isChecked(answers['ch1'])) types.add('private');
-    if (_isChecked(answers['ch2'])) types.add('allocated');
-    if (_isChecked(answers['ch3'])) types.add('communal');
-    if (_isChecked(answers['ch4'])) types.add('off street');
-    if (_isChecked(answers['ch5'])) types.add('pay and display');
-    if (_isChecked(answers['ch6'])) types.add('residential parking');
-    if (types.isEmpty) return const ['The property comes with parking.'];
-    // "Residential parking" already ends in the word this sentence
-    // appends as a suffix; skip the suffix when the last selected type
-    // already supplies it, to avoid "residential parking parking".
-    final wordsText = _toWords(types);
-    final suffix = wordsText.toLowerCase().endsWith('parking') ? '' : ' parking';
-    return ['The property comes with $wordsText$suffix.'];
-  }
-
-  List<String> _sectionDGarden(Map<String, String> answers, String gardenName) {
-    final surfaceTypes = <String>[];
-    if (_isChecked(answers['ch1'])) surfaceTypes.add('paved');
-    if (_isChecked(answers['ch2'])) surfaceTypes.add('lawned');
-    if (_isChecked(answers['ch3'])) surfaceTypes.add('decked');
-    if (_isChecked(answers['ch4'])) surfaceTypes.add('laid with gravel');
-    if (_isChecked(answers['ch5']))
-      surfaceTypes.add('laid with stone chippings');
-    if (_isChecked(answers['ch6']))
-      surfaceTypes.add('laid with tile chippings');
-    if (_isChecked(answers['ch7'])) {
-      final other = (answers['etGroundTypeOther'] ?? '').trim();
-      surfaceTypes.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    final noBoundary = _isChecked(answers['ch20']);
-    final fencing = <String>[];
-    if (!noBoundary) {
-      if (_isChecked(answers['ch8'])) fencing.add('timber');
-      if (_isChecked(answers['ch9'])) fencing.add('brick wall');
-      if (_isChecked(answers['ch10'])) fencing.add('concrete wall');
-      if (_isChecked(answers['ch11'])) fencing.add('wire mesh');
-      if (_isChecked(answers['ch12'])) fencing.add('hedges');
-      if (_isChecked(answers['ch13'])) fencing.add('shrubs');
-      if (_isChecked(answers['ch14'])) {
-        final other = (answers['etGroundBoundryFencingOther'] ?? '').trim();
-        fencing.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-      }
-    }
-    if (surfaceTypes.isEmpty && !noBoundary && fencing.isEmpty) return const [];
-    return _approvedGardenPhrases(
-      gardenName,
-      _toWords(surfaceTypes),
-      noBoundary: noBoundary,
-      fencingText: _toWords(fencing),
-    );
-  }
-
+
   /// Builds the approved-bank garden narrative for front/rear/communal
   /// gardens: {D_GROUND}::{GROUND_X_GARDEN} with the fence sentence from
   /// {GROUND_GARDEN}::{GARDEN_BOUNDRY_FENCES} / {GARDEN_NO_BOUNDRY_FENCES}.
@@ -2681,295 +2596,11 @@ class InspectionPhraseEngine {
         .replaceAll('{GARDEN_BOUNDRY_FENCES}', fenceSentence);
     return _splitResolved(template);
   }
-
-  List<String> _gatedCommunity(Map<String, String> answers) {
-    final status = (answers['android_material_design_spinner3'] ?? '')
-        .trim()
-        .toLowerCase();
-    if (status != 'yes') return const [];
-    final text = _phraseTexts['{D_GROUND}::{GATED_COMMUNITY}'] ?? '';
-    if (text.isNotEmpty) return _split(_normalize(text));
-    return const ['The property is located within a gated development.'];
-  }
-
-  List<String> _estateLocation(Map<String, String> answers) {
-    final location = (answers['android_material_design_spinner'] ?? '').trim();
-    if (location.isEmpty) return const [];
-    // Approved bank: {D_GROUND}::{GROUND_ESTATE_LOCATION}
-    var template = _sub('{D_GROUND}', '{GROUND_ESTATE_LOCATION}');
-    if (template.isEmpty) {
-      return ['The property is on a ${location.toLowerCase()} estate.'];
-    }
-    return _splitResolved(
-      template.replaceAll('{ESTATE_LOCATION}', location.toLowerCase()),
-    );
-  }
-
-  List<String> _propertyLocationDensity(Map<String, String> answers) {
-    final wellNewly = (answers['android_material_design_spinner'] ?? '').trim();
-    final from = (answers['android_material_design_spinner2'] ?? '').trim();
-    final to = (answers['android_material_design_spinner20'] ?? '').trim();
-    if (wellNewly.isEmpty && from.isEmpty && to.isEmpty) return const [];
-    final phrases = <String>[];
-    final normalizedArea = wellNewly.toLowerCase();
-    if (wellNewly.isNotEmpty &&
-        normalizedArea != 'yes' &&
-        normalizedArea != 'no') {
-      final density = from.isNotEmpty
-          ? from
-          : (to.isNotEmpty ? to : '');
-      // Approved bank: {D_LOCATION}::{LOCATION_AREA}
-      var template = _sub('{D_LOCATION}', '{LOCATION_AREA}');
-      if (template.isEmpty) {
-        phrases.add(
-          'The property is located in a $normalizedArea established area.',
-        );
-      } else {
-        if (density.isEmpty) {
-          // RICS L2 wording: strip the optional density clause when neither
-          // density value is captured, leaving the bare area sentence.
-          template = template.replaceAll(
-            ', and the surrounding development is considered '
-                '{LOCATION_SURROUNDING_PROPERTY_DENSITY_FROM} to '
-                '{LOCATION_SURROUNDING_PROPERTY_DENSITY_TO} density',
-            '',
-          );
-        } else if (from.isNotEmpty && to.isNotEmpty) {
-          if (from.toLowerCase() == to.toLowerCase()) {
-            final equalDensity = _phraseTexts[
-                    '{D_LOCATION}::{LOCATION_EQUAL_DENSITY}'] ??
-                'The property is located in an established '
-                    '{LOCATION_DENSITY}-density area.';
-            phrases.addAll(_splitResolved(equalDensity.replaceAll(
-                '{LOCATION_DENSITY}', from.toLowerCase())));
-            return phrases;
-          }
-          template = template
-              .replaceAll('{LOCATION_SURROUNDING_PROPERTY_DENSITY_FROM}',
-                  from.toLowerCase())
-              .replaceAll(
-                  '{LOCATION_SURROUNDING_PROPERTY_DENSITY_TO}', to.toLowerCase());
-        } else {
-          template = template
-              .replaceAll(
-                  ' to {LOCATION_SURROUNDING_PROPERTY_DENSITY_TO}', '')
-              .replaceAll(
-                  '{LOCATION_SURROUNDING_PROPERTY_DENSITY_FROM}',
-                  density.toLowerCase());
-        }
-        phrases.addAll(_splitResolved(
-          template.replaceAll('{LOCATION_ESTABLISHED_AREA_TYPE}', normalizedArea),
-        ));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _propertyFacilities(Map<String, String> answers) {
-    final value = (answers['android_material_design_spinner7'] ?? '')
-        .trim()
-        .toLowerCase();
-    if (value.isEmpty) return const [];
-    if (value == 'accessible') {
-      final resolved = _resolve('{D_FACILITY_ACCESSIBLE}');
-      if (resolved.isNotEmpty) return resolved;
-      return const [
-        'The local facilities include schools, shops and transport links and appear to be reasonably accessible from the property.',
-      ];
-    }
-    if (value == 'remote') {
-      final resolved = _resolve('{D_FACILITY_REMOTE}');
-      if (resolved.isNotEmpty) return resolved;
-      return const [
-        'The property is located in a remote area and is likely to be far away from some of the usual facilities and amenities. Also, because of the location of the property, it is recommended that you contact the utility company to be certain regarding the nature of the drainage connection.',
-      ];
-    }
-    return const [];
-  }
-
-  List<String> _propertyLocalEnvironment(Map<String, String> answers) {
-    final status = (answers['android_material_design_spinner8'] ?? '')
-        .trim()
-        .toLowerCase();
-    if (status.isEmpty) return const [];
-    if (status.contains('no adverse')) {
-      final resolved = _resolve('{D_LOCAL_ENVIRONMENT_NO_ADVERSE}');
-      if (resolved.isNotEmpty) return resolved;
-      return const [
-        'There are no known or apparent adverse local environmental features that are likely to materially affect the property.',
-      ];
-    }
-    final phrases = <String>[];
-    final floodSources = <String>[];
-    if (_isChecked(answers['ch1'])) floodSources.add('the sea');
-    if (_isChecked(answers['ch2'])) floodSources.add('a river');
-    if (_isChecked(answers['ch3'])) floodSources.add('a canal');
-    if (_isChecked(answers['ch4'])) {
-      final other = (answers['etFloodingOther'] ?? '').trim();
-      if (other.isNotEmpty) floodSources.add(other.toLowerCase());
-    }
-    if (floodSources.isNotEmpty) {
-      final template = _phraseTexts['{D_LOCAL_ENVIRONMENT_FLOODING}'] ?? '';
-      if (template.isNotEmpty) {
-        final resolved = _normalize(template).replaceAll(
-            '{LOCAL_ENVIRONMENT_CLOSED_TO}', _toWords(floodSources));
-        phrases.addAll(_split(resolved));
-      } else {
-        phrases.add(
-          'The property is close to ${_toWords(floodSources)}, which may present a flooding or dampness risk depending on local conditions.',
-        );
-      }
-    }
-    final emfSources = <String>[];
-    if (_isChecked(answers['ch5'])) emfSources.add('substation');
-    if (_isChecked(answers['ch6'])) emfSources.add('pylons');
-    if (_isChecked(answers['ch7'])) {
-      final other = (answers['etEMFOther'] ?? '').trim();
-      if (other.isNotEmpty) emfSources.add(other.toLowerCase());
-    }
-    if (emfSources.isNotEmpty) {
-      final template = _phraseTexts['{D_LOCAL_ENVIRONMENT_EMF}'] ?? '';
-      if (template.isNotEmpty) {
-        final resolved = _normalize(template)
-            .replaceAll('{LOCAL_ENVIRONMENT_CLOSED_TO}', _toWords(emfSources));
-        phrases.addAll(_split(resolved));
-      } else {
-        phrases.add(
-          'Potential electromagnetic influences were noted nearby, including ${_toWords(emfSources)}.',
-        );
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _propertyPrivateRoad(Map<String, String> answers) {
-    final status = (answers['android_material_design_spinner3'] ?? '')
-        .trim()
-        .toLowerCase();
-    if (status.isEmpty) return const [];
-    final yesLike = <String>{'yes', 'true', 'private', 'likely private'};
-    final noLike = <String>{'no', 'false', 'not private'};
-
-    if (yesLike.contains(status)) {
-      final text =
-          _phraseTexts['{D_LOCATION}::{LOCATION_PRIVATE_PROPERTY_AREA}'] ?? '';
-      if (text.isNotEmpty) return _split(_normalize(text));
-      return const [
-        'The road outside the property is likely to be a private road.'
-      ];
-    }
-    if (noLike.contains(status)) {
-      final text =
-          _phraseTexts['{D_LOCATION}::{LOCATION_NOT_PRIVATE_ROAD}'] ??
-              'The road serving the property is understood to be maintained '
-                  'at public expense; your legal adviser should confirm its '
-                  'adoption status.';
-      return _splitResolved(text);
-    }
-    return const [];
-  }
-
-  List<String> _propertyNoisyArea(Map<String, String> answers) {
-    final status = (answers['android_material_design_spinner4'] ?? '')
-        .trim()
-        .toLowerCase();
-    if (status.isEmpty) return const [];
-    final sources = <String>[];
-    if (_isChecked(answers['ch1'])) sources.add('busy road');
-    if (_isChecked(answers['ch2'])) sources.add('train line');
-    if (_isChecked(answers['ch3'])) sources.add('train station');
-    if (_isChecked(answers['ch4'])) sources.add('airport');
-    if (_isChecked(answers['ch5'])) sources.add('motor way');
-    if (_isChecked(answers['ch6'])) {
-      final other = (answers['etGroundTypeOther'] ?? '').trim();
-      if (other.isNotEmpty) sources.add(other.toLowerCase());
-    }
-    final yesLike = <String>{'yes', 'true', 'fully', 'present', 'adverse'};
-    final noLike = <String>{'no', 'false', 'none', 'not present'};
-    final noisy = yesLike.contains(status) ||
-        (sources.isNotEmpty && !noLike.contains(status));
-    if (!noisy) return const [];
-    if (sources.isEmpty) {
-      final text =
-          _phraseTexts['{D_LOCATION}::{D_LOCATION_NOISE_UNSPECIFIED}'] ??
-              'External noise was apparent at the time of inspection. Its '
-                  'effect on amenity and value will depend on frequency and '
-                  'intensity, and you should revisit the area at different '
-                  'times before purchase.';
-      return _splitResolved(text);
-    }
-    final template = _sub('{D_LOCATION}', '{D_LOCATION_NEAR_NOISY_AREA}');
-    if (template.isEmpty) {
-      return ['The property is in a noisy area near ${_toWords(sources)}.'];
-    }
-    return _split(_normalize(
-      template.replaceAll(
-          '{LOCATION_NOISY_AREA_TYPE}', _toWords(sources).toLowerCase()),
-    ));
-  }
-
+
   // ── New methods for uncovered screens ──────────────────────────
 
-  // Section D: Residential garden (combined front/rear/communal)
-  List<String> _sectionDGardenResidential(Map<String, String> answers) {
-    final phrases = <String>[];
-    final areas = <String, List<String>>{
-      'Front': [
-        'android_material_design_spinner',
-        'etFrontTypeOther',
-        'android_material_design_spinner2',
-        'etFrontFencingOther'
-      ],
-      'Rear': [
-        'android_material_design_spinner3',
-        'etRearTypeOther',
-        'android_material_design_spinner4',
-        'etRearFencingOther'
-      ],
-      'Communal': [
-        'android_material_design_spinner5',
-        'etCommunalTypeOther',
-        'android_material_design_spinner6',
-        'etCommunalFencingOther'
-      ],
-    };
-    for (final entry in areas.entries) {
-      final gardenType = (answers[entry.value[0]] ?? '').trim();
-      final fencing = (answers[entry.value[2]] ?? '').trim();
-      if (gardenType.isEmpty && fencing.isEmpty) continue;
-      final typeText = gardenType.toLowerCase() == 'other'
-          ? (answers[entry.value[1]] ?? 'other').trim().toLowerCase()
-          : gardenType.toLowerCase();
-      final fenceText = fencing.toLowerCase() == 'other'
-          ? (answers[entry.value[3]] ?? 'other').trim().toLowerCase()
-          : fencing.toLowerCase();
-      phrases.addAll(_approvedGardenPhrases(
-        entry.key,
-        gardenType.isEmpty ? '' : typeText,
-        noBoundary: false,
-        fencingText: fencing.isEmpty ? '' : fenceText,
-      ));
-    }
-    return phrases;
-  }
-
-  // Section D: Topography
-  List<String> _sectionDTopography(Map<String, String> answers) {
-    final topography =
-        (answers['android_material_design_spinner'] ?? '').trim();
-    if (topography.isEmpty) return const [];
-    final text = topography.toLowerCase() == 'other'
-        ? (answers['etFrontTypeOther'] ?? 'other').trim().toLowerCase()
-        : topography.toLowerCase();
-    // Approved bank: {D_GROUND}::{GROUND_TOPOGRAPHY}
-    var template = _sub('{D_GROUND}', '{GROUND_TOPOGRAPHY}');
-    if (template.isEmpty) {
-      template = 'The property occupies a relatively {GROUND_TOPOGRAPHY} '
-          'ground.';
-    }
-    return _splitResolved(template.replaceAll('{GROUND_TOPOGRAPHY}', text));
-  }
-
+  // Section D: Residential garden (combined front/rear/communal)
+  // Section D: Topography
   // Section D: Internal Wall
   // Section D: Listed Building
   // Section D: Other Service

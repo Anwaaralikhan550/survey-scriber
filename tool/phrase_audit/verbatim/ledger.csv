@@ -63,37 +63,37 @@ d65b69a014,Construction,Listed building: The property is understood to be a list
 1c9839b4d2,Construction,This information has not been independently verified.,EXACT,{D_CONSTRUCTION}::{A3_ENERGY_PERFORMANCE},100,DONE
 7bfdc63cc7,Construction,"Other services: The property is fitted with photovoltaic (solar PV) panels, solar water heating panels, an inverter, battery storage, other renewable energy installations.",MENU,,0,VERIFIED
 8289c3d86d,Construction,"Where renewable energy systems are present, your legal adviser should confirm ownership, maintenance obligations, guarantees and any agreements with electricity providers.",EXACT,{D_CONSTRUCTION}::{A3_OTHER_SERVICES},100,DONE
-37fe3ae9d6,Grounds,"Topology: The property occupies level, gently sloping, moderately sloping, steeply sloping ground.",MENU,,0,UNVERIFIED
-60899c07ef,Grounds,"Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.",MENU,,0,UNVERIFIED
-4ddbe65a4e,Grounds,"Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.",MENU,,0,UNVERIFIED
-e674bb7e92,Grounds,"Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.",MENU,,0,UNVERIFIED
-8038e706f8,Grounds,"Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.",MENU,,0,UNVERIFIED
-8e5760ed88,Parking,No Parking: The property does not come with parking.,EXACT,{D_GROUND}::{NO_PARKING},100,DONE
-311a768db1,Parking,"Type: The property comes with residential, private, allocated, communal, off-street, underground facility, other parking.",MENU,,0,UNVERIFIED
-30b8838fe4,Parking,Paid parking: Pay and display parking operates in the immediate area.,EXACT,{D_GROUND}::{PAY_AND_DISPLAY},100,DONE
-88b47e8607,Parking,Gated: The property is located within a gated development and accessed via security-operated or access-controlled gates.,EXACT,{D_GROUND}::{GATED_COMMUNITY},100,DONE
-3ed4d3a6bc,Parking,"Location: The property is situated within a well-established residential area, modern residential development, mixed residential and commercial area, rural location, conservation, village setting, suburban location.",MENU,,0,UNVERIFIED
-40843aa1e3,Parking,"Density: The surrounding development is considered low, medium, high density.",UNRESOLVED,{D_LOCATION}::{LOCATION_AREA},54,OPEN
-c21f9b9469,Parking,"Road: The property is located on an adopted public road, private road, cul-de-sac, unmade road, other.",MENU,,0,UNVERIFIED
-c4da57598d,Parking,"Where the property is situated on a private road, your legal adviser should confirm maintenance responsibilities and any associated financial liabilities.",ADD,{D_LOCATION}::{LOCATION_NOT_PRIVATE_ROAD},58,OPEN
-45f283b638,Parking,"Noise: The property is located adjacent to, or close to, train lines or a station, major roads, commercial premises, industrial premises, public open space, schools, other.",MENU,,0,UNVERIFIED
-64c4892107,Parking,Such features may influence future enjoyment or marketability and should be considered before purchase.,ADD,{D_LOCATION}::{D_LOCATION_NEAR_NOISY_AREA},53,OPEN
-b07bfff244,Parking,Conservation area: The property is suspected to be in an established conservation area.,EXACT,{D_LOCATION}::{D_LOCATION_CONVERSATION_AREA},100,DONE
-b0c3fe8565,Parking,Your legal adviser should advise you on the implications of the property being situated in this location.,EXACT,{D_LOCATION}::{D_LOCATION_CONVERSATION_AREA},100,DONE
-87b9a27da9,Parking,"Facilities: Local amenities observed within reasonable proximity include schools, shops, medical facilities, bus services, train stations, parks, other facilities.",MENU,,0,UNVERIFIED
+37fe3ae9d6,Grounds,"Topology: The property occupies level, gently sloping, moderately sloping, steeply sloping ground.",MENU,,0,VERIFIED
+60899c07ef,Grounds,"Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.",MENU,,0,VERIFIED
+4ddbe65a4e,Grounds,"Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.",MENU,,0,VERIFIED
+e674bb7e92,Grounds,"Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.",MENU,,0,VERIFIED
+8038e706f8,Grounds,"Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.",MENU,,0,VERIFIED
+8e5760ed88,Parking,No Parking: The property does not come with parking.,EXACT,{D_GROUND}::{A4_NO_PARKING},100,DONE
+311a768db1,Parking,"Type: The property comes with residential, private, allocated, communal, off-street, underground facility, other parking.",MENU,,0,VERIFIED
+30b8838fe4,Parking,Paid parking: Pay and display parking operates in the immediate area.,EXACT,{D_GROUND}::{A4_PAID_PARKING},100,DONE
+88b47e8607,Parking,Gated: The property is located within a gated development and accessed via security-operated or access-controlled gates.,EXACT,{D_GROUND}::{A4_GATED},100,DONE
+3ed4d3a6bc,Parking,"Location: The property is situated within a well-established residential area, modern residential development, mixed residential and commercial area, rural location, conservation, village setting, suburban location.",MENU,,0,VERIFIED
+40843aa1e3,Parking,"Density: The surrounding development is considered low, medium, high density.",MENU,,0,VERIFIED
+c21f9b9469,Parking,"Road: The property is located on an adopted public road, private road, cul-de-sac, unmade road, other.",MENU,,0,VERIFIED
+c4da57598d,Parking,"Where the property is situated on a private road, your legal adviser should confirm maintenance responsibilities and any associated financial liabilities.",EXACT,{D_LOCATION}::{A4_ROAD},100,DONE
+45f283b638,Parking,"Noise: The property is located adjacent to, or close to, train lines or a station, major roads, commercial premises, industrial premises, public open space, schools, other.",MENU,,0,VERIFIED
+64c4892107,Parking,Such features may influence future enjoyment or marketability and should be considered before purchase.,EXACT,{D_LOCATION}::{A4_NOISE},100,DONE
+b07bfff244,Parking,Conservation area: The property is suspected to be in an established conservation area.,EXACT,{D_LOCATION}::{A4_CONSERVATION},100,DONE
+b0c3fe8565,Parking,Your legal adviser should advise you on the implications of the property being situated in this location.,EXACT,{D_LOCATION}::{A4_CONSERVATION},100,DONE
+87b9a27da9,Parking,"Facilities: Local amenities observed within reasonable proximity include schools, shops, medical facilities, bus services, train stations, parks, other facilities.",MENU,,0,VERIFIED
 922fe83423,Parking,"The availability, quality and suitability of local amenities have not been investigated as part of this inspection.",EXACT,{D_FACILITY_ACCESSIBLE},100,DONE
 fe0553986c,Parking,Remote area - The property is in a remote area and likely to be far away from some of the usual facilities and amenities.,EXACT,{D_FACILITY_REMOTE},100,DONE
 c53e3a597e,Parking,"Also, because of the location of the property, it is recommended that you contact the utility company to be certain regarding the nature of the drainage connection.",EXACT,{D_FACILITY_REMOTE},100,DONE
-bcae44b287,Parking,"Local environment: I observed the following environmental feature(s) that may influence your enjoyment of the property, its future marketability or materially affect the subject property: • Susceptible to flooding • Railway line • Busy road • Commercial premises • Industrial premises • Public house • School • Electricity substation • Overhead power lines • Pylons • Airport flight path • Other Where environmental concerns exist, you should make your own enquiries before legal commitment.",MENU,,0,UNVERIFIED
-6dfc043b4c,Parking,"If an electricity substation or overhead power lines are selected, add text below: The property is in a location that could be affected by electromagnetic fields from an electricity substation or pylons located near the property.",TOKENISED,{D_LOCAL_ENVIRONMENT_EMF},91,DONE
-e3b5d0d1e9,Parking,"In addition to being unsightly, it may cause noise and disturbance, or interference may deter some future buyers, thus limiting saleability.",UNRESOLVED,{D_FACILITY_REMOTE},46,OPEN
-afccf3b392,Parking,The possible effects of electromagnetic fields have been the subject of media coverage.,EXACT,{H_OTHER_AREA}::{EMF},100,DONE
-38ee5e6aca,Parking,"The Health Protection Agency (HPA), an independent body with responsibility for advising on electromagnetic fields, has advised that following the studies in 2000 and 2001, there may be risks, in specified circumstances, to the health of certain categories of people.",EXACT,{H_OTHER_AREA}::{EMF},100,DONE
-4949ce656b,Parking,"Public perception may, however, affect marketability and future value of the property.",EXACT,{H_OTHER_AREA}::{EMF},100,DONE
-152ca6a48f,Parking,"If required, technical information can be obtained from the HPA or local electricity company.",EXACT,{H_OTHER_AREA}::{EMF},100,DONE
+bcae44b287,Parking,"Local environment: I observed the following environmental feature(s) that may influence your enjoyment of the property, its future marketability or materially affect the subject property: • Susceptible to flooding • Railway line • Busy road • Commercial premises • Industrial premises • Public house • School • Electricity substation • Overhead power lines • Pylons • Airport flight path • Other Where environmental concerns exist, you should make your own enquiries before legal commitment.",MENU,,0,VERIFIED
+6dfc043b4c,Parking,"If an electricity substation or overhead power lines are selected, add text below: The property is in a location that could be affected by electromagnetic fields from an electricity substation or pylons located near the property.",EXACT,{D_LOCATION}::{A4_EMF},100,DONE
+e3b5d0d1e9,Parking,"In addition to being unsightly, it may cause noise and disturbance, or interference may deter some future buyers, thus limiting saleability.",EXACT,{D_LOCATION}::{A4_EMF},100,DONE
+afccf3b392,Parking,The possible effects of electromagnetic fields have been the subject of media coverage.,EXACT,{D_LOCATION}::{A4_EMF},100,DONE
+38ee5e6aca,Parking,"The Health Protection Agency (HPA), an independent body with responsibility for advising on electromagnetic fields, has advised that following the studies in 2000 and 2001, there may be risks, in specified circumstances, to the health of certain categories of people.",EXACT,{D_LOCATION}::{A4_EMF},100,DONE
+4949ce656b,Parking,"Public perception may, however, affect marketability and future value of the property.",EXACT,{D_LOCATION}::{A4_EMF},100,DONE
+152ca6a48f,Parking,"If required, technical information can be obtained from the HPA or local electricity company.",EXACT,{D_LOCATION}::{A4_EMF},100,DONE
 0b73225820,Parking,"If susceptible to flooding is selected, add text below: The property is situated close to the sea, river, a canal, reservoir, or in a low-lying area, and may be susceptible to occasional or seasonal flooding.",MENU,,0,UNVERIFIED
-7841d9e366,Parking,Your legal adviser should make further enquiries and advise you whether the building has been flooded in the past or is at risk of flooding.,ADD,{D_LOCATION}::{D_LOCATION_CONVERSATION_AREA},58,OPEN
-a4a8539a79,Parking,Enquiries should also be made to the Environment Agency.,ADD,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},49,OPEN
+7841d9e366,Parking,Your legal adviser should make further enquiries and advise you whether the building has been flooded in the past or is at risk of flooding.,EXACT,{D_LOCATION}::{A4_FLOODING},100,DONE
+a4a8539a79,Parking,Enquiries should also be made to the Environment Agency.,EXACT,{D_LOCATION}::{A4_FLOODING},100,DONE
 ea89b0cb26,Parking,E - Outside the Property Limitations My inspection of the exterior was carried out from ground level and other reasonably accessible positions.,ADD,{D_LOCATION}::{LOCATION_PRIVATE_PROPERTY_AREA},54,OPEN
 c719c77a59,Parking,"My inspection was restricted by the surrounding elements, including the layout of the area, and available vantage points from which I was able to view the property.",EXACT,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{STANDARD_TEXT},100,DONE
 3e371a0ad1,Parking,"Limitations: The inspection was limited by height, restricted access, nearby buildings, vegetation, weather conditions, roof configuration, health and safety considerations.",MENU,,0,UNVERIFIED
@@ -101,13 +101,13 @@ c719c77a59,Parking,"My inspection was restricted by the surrounding elements, in
 7dcd46c328,Parking,"For this reason, I cannot make any detailed comments regarding the condition of the uninspected walls, roof slopes, rainwater goods, etc.",MENU,,0,UNVERIFIED
 76d1d3a398,Parking,You should accept the risk that some defects may exist in these unseen areas.,EXACT,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},100,DONE
 a2b4b52491,Parking,"Roof coverings, chimney stacks, and high-level elements were inspected using binoculars where appropriate.",UNRESOLVED,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},45,OPEN
-6733d360de,Parking,"No parts of the building were opened up, dismantled, or assessed.",UNRESOLVED,{D_GROUND}::{GATED_COMMUNITY},46,OPEN
-bf8bd59d69,Parking,"Where elements were concealed or inaccessible, no comment can be made regarding their condition.",ADD,{D_LOCATION}::{D_LOCATION_NEAR_NOISY_AREA},48,OPEN
+6733d360de,Parking,"No parts of the building were opened up, dismantled, or assessed.",UNRESOLVED,{D_LOCATION}::{A4_DENSITY},48,OPEN
+bf8bd59d69,Parking,"Where elements were concealed or inaccessible, no comment can be made regarding their condition.",ADD,{D_LOCATION}::{A4_LOCAL_ENVIRONMENT},48,OPEN
 13c81ad5df,Parking,Weather condition Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.,EXACT,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_WET},100,DONE
 b9b21ae5d4,Parking,"Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",UNRESOLVED,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_DRY},84,OPEN
 6e2a2b738f,Parking,"Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection.",ADD,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_WET},59,OPEN
 f36fbdf7ec,Parking,"Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds.",MENU,,0,UNVERIFIED
-dca1eae90c,Parking,Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.,ADD,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_LEAKES_NOTES},48,OPEN
+dca1eae90c,Parking,Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.,ADD,{D_LOCATION}::{A4_EMF},51,OPEN
 5c7b77ea42,E1,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
 8bf9989e51,E1,No further comments are necessary.,EXACT,{E_CONSERVATORY_PORCHES}::{NOT_INSPECTED_NOT_APPLICABLE},100,DONE
 dfe0986fce,E1,Not Inspected: The chimney stack(s) could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE

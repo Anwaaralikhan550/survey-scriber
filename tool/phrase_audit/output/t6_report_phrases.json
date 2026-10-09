@@ -76,7 +76,14 @@
    "section": "D",
    "screen": "group_construction_2",
    "phrases": [
-    "Construction has been identified from visible inspection only and has not been confirmed by opening concealed elements. The roof type is The main roof is of pitched, flat and mansard construction formed with traditional cut timber and prefabricated trussed rafters structural members. The internal walls are built of Internal walls are formed in solid masonry, timber stud partitions and lath and plaster. The floors are built of Floors are of solid concrete, suspended timber and beam and block construction. The windows are mainly Windows are fitted with timber, PVCu, aluminium and steel frames incorporating single, double, triple glazing and secondary glazing, where applicable."
+    "Type: The property is believed to be constructed using traditional masonry, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels and system-built construction.",
+    "Construction has been identified from visible inspection only and has not been confirmed by opening concealed elements.",
+    "Roof type: The main roof is of pitched, flat and mansard construction formed with traditional cut timber and prefabricated trussed rafters structural members.",
+    "Roof cover: The roof covering is formed in clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, metal sheeting, mineral felt, rubber membrane and single-ply membrane.",
+    "External walls: The external walls are constructed of solid brick, cavity brick, stone, timber frame, steel frame and rendered masonry construction.",
+    "Internal walls: Internal walls are formed in solid masonry, timber stud partitions and lath and plaster.",
+    "Floors: Floors are of solid concrete, suspended timber and beam and block construction.",
+    "Windows: Windows are fitted with timber, PVCu, aluminium and steel frames incorporating single, double, triple glazing and secondary glazing, where applicable."
    ]
   },
   {
@@ -98,105 +105,110 @@
    "section": "D",
    "screen": "activity_property_location",
    "phrases": [
-    "The property is located in an established low-density area."
+    "Location: The property is situated within a well-established residential area, modern residential development, mixed residential and commercial area, rural location, conservation, village setting and suburban location.",
+    "Density: The surrounding development is considered low."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_facelities",
    "phrases": [
-    "The local facilities include schools, shops and transport links and appear to be reasonably accessible from the property."
+    "Facilities: Local amenities observed within reasonable proximity include schools, shops, medical facilities, bus services, train stations and parks. The availability, quality and suitability of local amenities have not been investigated as part of this inspection.",
+    "Remote area - The property is in a remote area and likely to be far away from some of the usual facilities and amenities. Also, because of the location of the property, it is recommended that you contact the utility company to be certain regarding the nature of the drainage connection."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_local_environment",
    "phrases": [
-    "Local environmental factors were noted, including flooding risk recorded as adverse."
+    "The property is in a location that could be affected by electromagnetic fields from an electricity substation or pylons located near the property. In addition to being unsightly, it may cause noise and disturbance, or interference may deter some future buyers, thus limiting saleability. The possible effects of electromagnetic fields have been the subject of media coverage. The Health Protection Agency (HPA), an independent body with responsibility for advising on electromagnetic fields, has advised that following the studies in 2000 and 2001, there may be risks, in specified circumstances, to the health of certain categories of people. Public perception may, however, affect marketability and future value of the property. If required, technical information can be obtained from the HPA or local electricity company.",
+    "The property is situated close to the sea, river, a canal, reservoir, or in a low-lying area, and may be susceptible to occasional or seasonal flooding. Your legal adviser should make further enquiries and advise you whether the building has been flooded in the past or is at risk of flooding. Enquiries should also be made to the Environment Agency.",
+    "Local environment: I observed the following environmental feature(s) that may influence your enjoyment of the property, its future marketability or materially affect the subject property: Susceptible to flooding, Railway line, Busy road, Commercial premises, Industrial premises, Public house, School, Electricity substation, Overhead power lines, Pylons and Airport flight path. Where environmental concerns exist, you should make your own enquiries before legal commitment."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_private_road",
    "phrases": [
-    "The road outside the property is likely to be a private road and maintenance responsibility should be confirmed by your legal adviser."
+    "Road: The property is located on an adopted public road, private road, cul-de-sac and unmade road. Where the property is situated on a private road, your legal adviser should confirm maintenance responsibilities and any associated financial liabilities."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_is_noisy_area",
    "phrases": [
-    "The property is in an area where external noise influences may affect day-to-day enjoyment, saleability and value."
+    "Noise: The property is located adjacent to, or close to, train lines or a station, major roads, commercial premises, industrial premises, public open space and schools. Such features may influence future enjoyment or marketability and should be considered before purchase."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_ground_area",
    "phrases": [
-    "The surrounding area has a mixed residential, commercial, rural and conservation character."
+    "Conservation area: The property is suspected to be in an established conservation area. Your legal adviser should advise you on the implications of the property being situated in this location."
    ]
   },
   {
    "section": "D",
    "screen": "activity_garden",
    "phrases": [
-    "The front garden is laid to paved. The boundary fences are formed in timber. The rear garden is laid to paved. The boundary fences are formed in timber. The communal garden is laid to paved. The boundary fences are formed in timber."
+    "Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings.",
+    "Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding."
    ]
   },
   {
    "section": "D",
    "screen": "activity_topography",
    "phrases": [
-    "The property occupies a level site."
+    "Topology: The property occupies level ground."
    ]
   },
   {
    "section": "D",
    "screen": "activity_parking",
    "phrases": [
-    "The property comes with private, allocated, communal, off street, pay and display and residential parking."
+    "Type: The property comes with residential, private, allocated, communal, off-street and underground facility parking.",
+    "Paid parking: Pay and display parking operates in the immediate area."
    ]
   },
   {
    "section": "D",
    "screen": "activity_front_garden",
    "phrases": [
-    "The front garden is laid to paved, lawned, decked, laid with gravel, laid with stone chippings and laid with tile chippings. There are no boundary fences installed."
+    "Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings."
    ]
   },
   {
    "section": "D",
    "screen": "activity_rear_garden",
    "phrases": [
-    "The rear garden is laid to paved, lawned, decked, laid with gravel, laid with stone chippings and laid with tile chippings. There are no boundary fences installed."
+    "Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings."
    ]
   },
   {
    "section": "D",
    "screen": "activity_communal_garden",
    "phrases": [
-    "The communal garden is laid to paved, lawned, decked, laid with gravel, laid with stone chippings and laid with tile chippings. There are no boundary fences installed."
+    "Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings."
    ]
   },
   {
    "section": "D",
    "screen": "activity_parking__parking",
    "phrases": [
-    "The property comes with private, allocated, communal, off street, pay and display and residential parking."
+    "Type: The property comes with residential, private, allocated, communal, off-street and underground facility parking.",
+    "Paid parking: Pay and display parking operates in the immediate area."
    ]
   },
   {
    "section": "D",
    "screen": "activity_gated_community",
    "phrases": [
-    "The property is located within a gated development and accessed via security-operated or access-controlled gates."
-   ]
-  },
-  {
-   "section": "D",
-   "screen": "activity_estate_location",
-   "phrases": [
-    "The property is located in a private estate."
+    "Gated: The property is located within a gated development and accessed via security-operated or access-controlled gates."
    ]
   },
   {
@@ -1079,23 +1091,26 @@
    "section": "D",
    "screen": "activity_property_ground_area",
    "phrases": [
-    "The surrounding area has a mixed residential, commercial, rural and conservation character."
+    "Conservation area: The property is suspected to be in an established conservation area. Your legal adviser should advise you on the implications of the property being situated in this location."
    ]
   },
   {
    "section": "D",
    "screen": "activity_garden",
    "phrases": [
-    "The front garden is laid to paved. The boundary fences are formed in timber.",
-    "The rear garden is laid to paved. The boundary fences are formed in timber.",
-    "The communal garden is laid to paved. The boundary fences are formed in timber."
+    "Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings.",
+    "Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings.",
+    "Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings."
    ]
   },
   {
    "section": "D",
    "screen": "activity_topography",
    "phrases": [
-    "The property occupies a level site."
+    "Topology: The property occupies level ground."
    ]
   },
   {
@@ -1116,14 +1131,16 @@
    "section": "D",
    "screen": "activity_parking",
    "phrases": [
-    "The property comes with private, allocated, communal, off street, pay and display and residential parking."
+    "Type: The property comes with residential, private, allocated, communal, off-street and underground facility parking.",
+    "Paid parking: Pay and display parking operates in the immediate area."
    ]
   },
   {
    "section": "D",
    "screen": "activity_front_garden",
    "phrases": [
-    "The front garden is laid to paved, lawned, decked, laid with gravel, laid with stone chippings and laid with tile chippings. There are no boundary fences installed."
+    "Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings."
    ]
   },
   {
@@ -1145,7 +1162,8 @@
    "section": "D",
    "screen": "activity_rear_garden",
    "phrases": [
-    "The rear garden is laid to paved, lawned, decked, laid with gravel, laid with stone chippings and laid with tile chippings. There are no boundary fences installed."
+    "Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings."
    ]
   },
   {
@@ -1166,7 +1184,8 @@
    "section": "D",
    "screen": "activity_communal_garden",
    "phrases": [
-    "The communal garden is laid to paved, lawned, decked, laid with gravel, laid with stone chippings and laid with tile chippings. There are no boundary fences installed."
+    "Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones and hardstanding.",
+    "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections and metal railings."
    ]
   },
   {
@@ -1180,7 +1199,8 @@
    "section": "D",
    "screen": "activity_parking__parking",
    "phrases": [
-    "The property comes with private, allocated, communal, off street, pay and display and residential parking."
+    "Type: The property comes with residential, private, allocated, communal, off-street and underground facility parking.",
+    "Paid parking: Pay and display parking operates in the immediate area."
    ]
   },
   {
@@ -1201,7 +1221,7 @@
    "section": "D",
    "screen": "activity_gated_community",
    "phrases": [
-    "The property is located within a gated development and accessed via security-operated or access-controlled gates."
+    "Gated: The property is located within a gated development and accessed via security-operated or access-controlled gates."
    ]
   },
   {
@@ -1209,13 +1229,6 @@
    "screen": "activity_energy_effiency",
    "phrases": [
     "Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: A. Potential Rating: A. This information has not been independently verified."
-   ]
-  },
-  {
-   "section": "D",
-   "screen": "activity_estate_location",
-   "phrases": [
-    "The property is located in a private estate."
    ]
   },
   {
@@ -1229,36 +1242,39 @@
    "section": "D",
    "screen": "activity_property_location",
    "phrases": [
-    "The property is located in an established low-density area."
+    "Location: The property is situated within a well-established residential area, modern residential development, mixed residential and commercial area, rural location, conservation, village setting and suburban location.",
+    "Density: The surrounding development is considered low."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_facelities",
    "phrases": [
-    "Local amenities observed within reasonable proximity include schools, shops, medical facilities, bus services, train stations, parks, other facilities. The availability, quality and suitability of local amenities have not been investigated as part of this inspection."
+    "Facilities: Local amenities observed within reasonable proximity include schools, shops, medical facilities, bus services, train stations and parks. The availability, quality and suitability of local amenities have not been investigated as part of this inspection.",
+    "Remote area - The property is in a remote area and likely to be far away from some of the usual facilities and amenities. Also, because of the location of the property, it is recommended that you contact the utility company to be certain regarding the nature of the drainage connection."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_local_environment",
    "phrases": [
-    "The property is situated close to the sea, a river and a canal and may be susceptible to occasional or seasonal flooding.",
-    "The property is in a location that could be affected by electromagnetic fields from electricity substation and pylons located near the property."
+    "The property is in a location that could be affected by electromagnetic fields from an electricity substation or pylons located near the property. In addition to being unsightly, it may cause noise and disturbance, or interference may deter some future buyers, thus limiting saleability. The possible effects of electromagnetic fields have been the subject of media coverage. The Health Protection Agency (HPA), an independent body with responsibility for advising on electromagnetic fields, has advised that following the studies in 2000 and 2001, there may be risks, in specified circumstances, to the health of certain categories of people. Public perception may, however, affect marketability and future value of the property. If required, technical information can be obtained from the HPA or local electricity company.",
+    "The property is situated close to the sea, river, a canal, reservoir, or in a low-lying area, and may be susceptible to occasional or seasonal flooding. Your legal adviser should make further enquiries and advise you whether the building has been flooded in the past or is at risk of flooding. Enquiries should also be made to the Environment Agency.",
+    "Local environment: I observed the following environmental feature(s) that may influence your enjoyment of the property, its future marketability or materially affect the subject property: Susceptible to flooding, Railway line, Busy road, Commercial premises, Industrial premises, Public house, School, Electricity substation, Overhead power lines, Pylons and Airport flight path. Where environmental concerns exist, you should make your own enquiries before legal commitment."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_private_road",
    "phrases": [
-    "The road outside the property is likely to be a ‘private road’ that the local council will not be responsible for maintaining."
+    "Road: The property is located on an adopted public road, private road, cul-de-sac and unmade road. Where the property is situated on a private road, your legal adviser should confirm maintenance responsibilities and any associated financial liabilities."
    ]
   },
   {
    "section": "D",
    "screen": "activity_property_is_noisy_area",
    "phrases": [
-    "The property is located near a busy road, train line, train station, airport and motor way. This is an environmental feature that may influence your enjoyment of the property, its future marketability, or materially affect the property. Where environmental concerns exist, you should make your own enquiries before legal commitment."
+    "Noise: The property is located adjacent to, or close to, train lines or a station, major roads, commercial premises, industrial premises, public open space and schools. Such features may influence future enjoyment or marketability and should be considered before purchase."
    ]
   },
   {

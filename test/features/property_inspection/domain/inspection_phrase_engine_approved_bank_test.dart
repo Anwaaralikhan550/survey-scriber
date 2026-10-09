@@ -18,64 +18,7 @@ void main() {
     engine = InspectionPhraseEngine(phraseTexts);
   });
 
-
-  group('D-Ground: approved garden templates', () {
-    test('front garden screen uses GROUND_FRONT_GARDEN + fence sentence', () {
-      final phrases = engine.buildPhrases(
-        'activity_front_garden',
-        {'ch1': 'true', 'ch8': 'true'},
-      );
-      expect(phrases, hasLength(1));
-      expect(
-        phrases.single,
-        'The front garden is laid to paved. The boundary fences are '
-        'formed in timber.',
-      );
-    });
-
-    test('no-boundary variant uses GARDEN_NO_BOUNDRY_FENCES', () {
-      final phrases = engine.buildPhrases(
-        'activity_rear_garden',
-        {'ch2': 'true', 'ch20': 'true'},
-      );
-      expect(phrases, hasLength(1));
-      expect(
-        phrases.single,
-        'The rear garden is laid to lawned. There are no boundary '
-        'fences installed.',
-      );
-    });
-
-    test('combined garden screen emits approved sentence per area', () {
-      final phrases = engine.buildPhrases(
-        'activity_garden',
-        {
-          'android_material_design_spinner': 'Paved',
-          'android_material_design_spinner2': 'Timber',
-          'android_material_design_spinner3': 'Lawned',
-        },
-      );
-      expect(phrases, hasLength(2));
-      expect(
-        phrases.first,
-        'The front garden is laid to paved. The boundary fences are '
-        'formed in timber.',
-      );
-      expect(phrases.last, 'The rear garden is laid to lawned.');
-    });
-
-    test('topography uses GROUND_TOPOGRAPHY', () {
-      final phrases = engine.buildPhrases(
-        'activity_topography',
-        {'android_material_design_spinner': 'Level'},
-      );
-      expect(phrases, hasLength(1));
-      expect(
-        phrases.single,
-        'The property occupies a level site.',
-      );
-    });
-  });
+
 
   group('E condition-rating coverage', () {
     test('main walls emits the approved rating and notes wording', () {
