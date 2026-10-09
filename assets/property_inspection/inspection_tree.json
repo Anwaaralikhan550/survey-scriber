@@ -2262,166 +2262,414 @@
           "order": 1,
           "fields": [
             {
-              "id": "label_type_6",
-              "label": "Type",
+              "id": "cb_h1_no_garage",
+              "label": "No garage",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_h1_not_inspected",
+              "label": "Not inspected",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_h1_converted",
+              "label": "Converted garage",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h1_converted_to",
+              "label": "Converted into",
               "type": "label"
             },
             {
-              "id": "actv_no_of_garage",
-              "label": "No.of. Garage",
-              "type": "dropdown",
-              "options": [
-                "Single",
-                "Double",
-                "Other"
-              ]
-            },
-            {
-              "id": "actv_type",
-              "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Detached Garage",
-                "Semi-detached Garage",
-                "Integral Garage",
-                "Garage in a Block of Garages",
-                "Other"
-              ]
-            },
-            {
-              "id": "label_wall_2",
-              "label": "Wall",
-              "type": "label"
-            },
-            {
-              "id": "cb_cavity_brick_wall",
-              "label": "Cavity brick wall",
+              "id": "h1cv_habitable_accommodation",
+              "label": "habitable accommodation",
               "type": "checkbox"
             },
             {
-              "id": "cb_block_work",
-              "label": "Block work",
+              "id": "h1cv_an_office",
+              "label": "an office",
               "type": "checkbox"
             },
             {
-              "id": "cb_precast_concrete_wall",
-              "label": "Precast concrete wall",
+              "id": "h1cv_a_workshop",
+              "label": "a workshop",
               "type": "checkbox"
             },
             {
-              "id": "cb_timber_frame_wall",
-              "label": "Timber frame wall",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_single_skin_brickwork",
-              "label": "Single skin brickwork",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_594",
+              "id": "h1cv_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_471",
+              "id": "h1cv_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_594",
+              "conditionalOn": "h1cv_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_roof_type",
-              "label": "Roof Type",
+              "id": "cb_shared_access",
+              "label": "Shared garage access",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_h1_description",
+              "label": "Garage description",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h1_garage_type",
+              "label": "Garage type",
               "type": "label"
             },
             {
-              "id": "cb_pitched",
-              "label": "Pitched",
+              "id": "h1d_a_garage_in_a_block_of_garages",
+              "label": "a garage in a block of garages",
               "type": "checkbox"
             },
             {
-              "id": "cb_flat",
-              "label": "Flat",
+              "id": "h1d_an_attached",
+              "label": "an attached",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_390",
+              "id": "h1d_a_detached",
+              "label": "a detached",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1d_an_integral",
+              "label": "an integral",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1d_garage",
+              "label": "garage",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1d_undercroft",
+              "label": "undercroft",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1d_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_142",
+              "id": "h1d_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_390",
+              "conditionalOn": "h1d_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_roof_covered_with",
-              "label": "Roof Covered With",
+              "id": "cb_h1_walls",
+              "label": "Garage walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h1_walls",
+              "label": "Walls constructed of",
               "type": "label"
             },
             {
-              "id": "cb_the_floor_above",
-              "label": "The floor above",
+              "id": "h1w_single_skin_brick",
+              "label": "single skin brick",
               "type": "checkbox"
             },
             {
-              "id": "cb_tiles",
-              "label": "Tiles",
+              "id": "h1w_cavity_brick",
+              "label": "cavity brick",
               "type": "checkbox"
             },
             {
-              "id": "cb_slates",
-              "label": "Slates",
+              "id": "h1w_block",
+              "label": "block",
               "type": "checkbox"
             },
             {
-              "id": "cb_mineral_felt",
-              "label": "Mineral felt",
+              "id": "h1w_prefabricated_concrete",
+              "label": "prefabricated concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1w_timber_frame",
+              "label": "timber frame",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1w_steel_frame",
+              "label": "steel frame",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1w_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1w_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h1w_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h1_roof",
+              "label": "Garage roof",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h1_roof_type",
+              "label": "Roof construction",
+              "type": "label"
+            },
+            {
+              "id": "h1rt_pitched",
+              "label": "pitched",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rt_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rt_lean_to",
+              "label": "lean-to",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rt_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rt_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h1rt_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h1_roof_cover",
+              "label": "Roof covered with",
+              "type": "label"
+            },
+            {
+              "id": "h1rc_clay_tiles",
+              "label": "clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rc_concrete_tiles",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rc_slates",
+              "label": "slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rc_felt_sheets",
+              "label": "felt sheets",
               "type": "checkbox"
             },
             {
               "id": "cb_corrugated_asbestos_sheets",
-              "label": "Corrugated asbestos sheets",
+              "label": "asbestos sheets",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_376",
+              "id": "h1rc_rubber_membrane",
+              "label": "rubber membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rc_single_ply_membrane",
+              "label": "single-ply membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rc_grp_fibreglass",
+              "label": "GRP fibreglass",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rc_asphalt",
+              "label": "asphalt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rc_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rc_plastic_sheets",
+              "label": "plastic sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1rc_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_634",
+              "id": "h1rc_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_376",
+              "conditionalOn": "h1rc_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h1_floor",
+              "label": "Garage floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h1_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "h1f_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1f_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1f_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1f_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h1f_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_h1_doors",
+              "label": "Garage doors",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h1_door_type",
+              "label": "Door operation / type",
+              "type": "label"
+            },
+            {
+              "id": "h1do_manually",
+              "label": "manually",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1do_electrically_operated_up_and_over",
+              "label": "electrically operated up-and-over",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1do_roller_shutter",
+              "label": "roller shutter",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1do_side_hinged_door",
+              "label": "side-hinged door",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1do_rear_or_side_door",
+              "label": "rear or side door",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1do_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1do_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h1do_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h1_door_material",
+              "label": "Door material",
+              "type": "label"
+            },
+            {
+              "id": "h1dm_steel",
+              "label": "steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1dm_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1dm_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1dm_upvc",
+              "label": "uPVC",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1dm_grp_fibreglass",
+              "label": "GRP (fibreglass)",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1dm_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1dm_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h1dm_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Garage condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             },
             {
-              "id": "actv_converted_to",
-              "label": "Converted To",
-              "type": "dropdown",
-              "options": [
-                "Habitable space",
-                "Office",
-                "Other"
-              ]
-            },
-            {
-              "id": "cb_shared_access",
-              "label": "Shared Access",
+              "id": "cb_h1_no_defects",
+              "label": "No defects noted",
               "type": "checkbox"
             }
           ]
@@ -2461,147 +2709,121 @@
         },
         {
           "id": "activity_grounds_garage_garage_repair",
-          "title": "Garage",
+          "title": "Garage Defects",
           "type": "screen",
           "parentId": "group_repairs_51",
           "order": 2,
           "fields": [
             {
-              "id": "cb_roof_is_leaking",
-              "label": "Roof is leaking",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "cb_h1_minor",
+              "label": "Minor defects",
+              "type": "checkbox"
             },
             {
-              "id": "cb_walls_are_cracked",
-              "label": "Walls are cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "label_h1_minor_defects",
+              "label": "Minor defects noted",
+              "type": "label"
             },
             {
-              "id": "cb_window_frames_are_rotten",
-              "label": "Window frames are rotten",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "h1mi_a_leaking_roof",
+              "label": "a leaking roof",
+              "type": "checkbox"
             },
             {
-              "id": "cb_window_glazing_is_cracked",
-              "label": "Window glazing is cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "h1mi_cracked_walls",
+              "label": "cracked walls",
+              "type": "checkbox"
             },
             {
-              "id": "cb_door_is_damaged",
-              "label": "Door is damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "h1mi_rotten_window_frame_s",
+              "label": "rotten window frame(s)",
+              "type": "checkbox"
             },
             {
-              "id": "cb_floor_is_cracked",
-              "label": "Floor is cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "h1mi_cracked_glazing",
+              "label": "cracked glazing",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_785",
+              "id": "h1mi_a_cracked_floor",
+              "label": "a cracked floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1mi_damaged_door_s",
+              "label": "damaged door(s)",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1mi_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_703",
+              "id": "h1mi_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_785",
+              "conditionalOn": "h1mi_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_roof_is_badly_leaking",
-              "label": "Roof is badly leaking",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "cb_h1_significant",
+              "label": "Significant defects",
+              "type": "checkbox"
             },
             {
-              "id": "cb_walls_are_badly_cracked",
-              "label": "Walls are badly cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "label_h1_significant_defects",
+              "label": "Significant defects noted",
+              "type": "label"
             },
             {
-              "id": "cb_walls_are_unstable",
-              "label": "Walls are unstable",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "h1si_a_badly_leaking_roof",
+              "label": "a badly leaking roof",
+              "type": "checkbox"
             },
             {
-              "id": "cb_window_glazing_is_smashed",
-              "label": "Window glazing is smashed",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "h1si_badly_cracked_or_unstable_walls",
+              "label": "badly cracked or unstable walls",
+              "type": "checkbox"
             },
             {
-              "id": "cb_floor_is_badly_cracked",
-              "label": "Floor is badly cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "h1si_beetle_infestation",
+              "label": "beetle infestation",
+              "type": "checkbox"
             },
             {
-              "id": "cb_doors_are_in_disrepair",
-              "label": "Doors are in disrepair",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "h1si_damaged_glazing",
+              "label": "damaged glazing",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_528",
+              "id": "h1si_a_badly_cracked_floor",
+              "label": "a badly cracked floor",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1si_door_s_in_disrepair",
+              "label": "door(s) in disrepair",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1si_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "actv_repair_type",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair now",
-                "Repair soon"
-              ]
-            },
-            {
-              "id": "et_other_670",
+              "id": "h1si_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_528",
+              "conditionalOn": "h1si_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_is_safety_hazard",
+              "label": "Safety hazard",
+              "type": "checkbox"
             }
           ]
         },
@@ -2848,57 +3070,6 @@
           "type": "group",
           "parentId": "group_h1_garage_50",
           "order": 4
-        },
-        {
-          "id": "activity_grounds_garage_roof_timber_repair",
-          "title": "Roof Timber",
-          "type": "screen",
-          "parentId": "group_repairs_51",
-          "order": 4,
-          "fields": [
-            {
-              "id": "label_defect_63",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_is_rotten",
-              "label": "Is rotten",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_beetles_infestation",
-              "label": "Has beetle infestation",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_broken",
-              "label": "Is broken",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_badly_cracked",
-              "label": "Is badly cracked",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_badly_damaged",
-              "label": "Is badly damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_795",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_756",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_795",
-              "conditionalMode": "show"
-            }
-          ]
         },
         {
           "id": "activity_grounds_other_front_garden",
@@ -3315,20 +3486,6 @@
             {
               "id": "cb_not_inspected_no_garage",
               "label": "Not inspected (no garage)",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_garage_safety_hazard_repair",
-          "title": "Safety Hazard",
-          "type": "screen",
-          "parentId": "group_repairs_51",
-          "order": 6,
-          "fields": [
-            {
-              "id": "cb_is_safety_hazard",
-              "label": "Is Safety Hazard",
               "type": "checkbox"
             }
           ]
@@ -3776,39 +3933,6 @@
               "id": "cb_common_garden",
               "label": "Common Garden",
               "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_grounds_garage_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_h1_garage_50",
-          "order": 7,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_access_keys_not_provided_by",
-              "label": "Access keys not provided by",
-              "type": "dropdown",
-              "options": [
-                "Vendor",
-                "Estate agent"
-              ],
-              "conditionalOn": "cb_not_inspected",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_not_inspected_no_garage",
-              "label": "No garage(s)",
-              "type": "checkbox",
-              "conditionalOn": "cb_not_inspected",
-              "conditionalMode": "show"
             }
           ]
         },

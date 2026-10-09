@@ -102,7 +102,7 @@ c719c77a59,Parking,"My inspection was restricted by the surrounding elements, in
 76d1d3a398,Parking,You should accept the risk that some defects may exist in these unseen areas.,EXACT,{E_OUTSIDE_PROPERTY_LIMITATIONS}::{NO_REAR_ACCESS},100,DONE
 a2b4b52491,Parking,"Roof coverings, chimney stacks, and high-level elements were inspected using binoculars where appropriate.",UNRESOLVED,{H_OTHER_AREA}::{LIFTS},46,OPEN
 6733d360de,Parking,"No parts of the building were opened up, dismantled, or assessed.",UNRESOLVED,{H_OTHER_AREA}::{LIFTS},54,OPEN
-bf8bd59d69,Parking,"Where elements were concealed or inaccessible, no comment can be made regarding their condition.",ADD,{H_GROUNDS}::{LIMITATIONS_NO_REAR_ACCESS},53,OPEN
+bf8bd59d69,Parking,"Where elements were concealed or inaccessible, no comment can be made regarding their condition.",ADD,{D_LOCATION}::{D_LOCATION_NEAR_NOISY_AREA},48,OPEN
 13c81ad5df,Parking,Weather condition Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.,EXACT,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_WET},100,DONE
 b9b21ae5d4,Parking,"Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",UNRESOLVED,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_DRY},84,OPEN
 6e2a2b738f,Parking,"Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection.",ADD,{E_RAINWATER_GOODS_WEATHER_CONDITION}::{WEATHER_CONDITION_WET},59,OPEN
@@ -1535,51 +1535,51 @@ c6bd7e5c9d,G7,"Not applicable: Other than the possibility of the drainage system
 1fc8407710,G7,"Description: Communal services and installations, including shared drainage, grounds maintenance, cleaning, lifts, communal heating, hot water systems, door entry systems, vehicular access, parking areas, other were not specifically assessed as part of this inspection.",MENU,,0,VERIFIED
 b0a629b82f,G7,These installations are normally subject to maintenance contracts.,EXACT,{G_COMMON_SERVICES}::{COMMON_SERVICES},100,DONE
 48355a35c9,G7,Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs.,EXACT,{G_COMMON_SERVICES}::{COMMON_SERVICES},100,DONE
-ab1448e42f,G7,Condition rating 123 H Grounds The inspection of the grounds was visual only.,ADD,{G_COMMON_SERVICES}::{CONDITION_RATING},42,OPEN
-c32c71f85c,G7,"Underground services, buried structures, and concealed defects could not be inspected or confirmed as part of this inspection.",UNRESOLVED,{G_COMMON_SERVICES}::{G7_DESCRIPTION},59,OPEN
-83432fbdac,G7,No inspection restrictions: There were no unusual restrictions affecting my inspection of the grounds within the apparent ownership of the property.,ADD,{G_COMMON_SERVICES}::{G7_NOT_APPLICABLE},50,OPEN
-ff5b4d8f5a,G7,Restricted access: Access to the rear or external elevations of the property was not available.,ADD,{G_COMMON_SERVICES}::{COMMON_SERVICES},48,OPEN
-2a2547c17b,G7,"Consequently, I was unable to inspect or comment on the condition or composition of the rear grounds.",ADD,{G_COMMON_SERVICES}::{G7_NOT_APPLICABLE},44,OPEN
-ecf3b08039,G7,Comments are limited to those external areas that were visible and accessible at the time of the inspection.,ADD,{G_COMMON_SERVICES}::{G7_DESCRIPTION},52,OPEN
-eaa46daa9e,H1,No garage: There are no garages on the property; no further comments required.,ADD,{H_GARAGE}::{NO_GARAGE},71,OPEN
-ad7afb6ecc,H1,"Not Inspected: Because access keys were not provided by the vendor or estate agent, or the provided keys could not open the garage, I was unable to inspect the garage(s) and therefore unable to comment about the internal condition of the garage(s) and roof timber or structure.",UNRESOLVED,{H_GARAGE}::{NOT_INSPECTED_ACCESS_KEYS},67,OPEN
-6da34f2cb4,H1,"Converted garage: The garage has been converted into habitable accommodation, an office, a workshop, other.",MENU,,0,UNVERIFIED
+ab1448e42f,G7,Condition rating 123 H Grounds The inspection of the grounds was visual only.,ADD,{H_GROUNDS}::{H_LIMITATIONS_STANDARD_TEXT},75,OPEN
+c32c71f85c,G7,"Underground services, buried structures, and concealed defects could not be inspected or confirmed as part of this inspection.",EXACT,{H_GROUNDS}::{H_LIMITATIONS_STANDARD_TEXT},100,DONE
+83432fbdac,G7,No inspection restrictions: There were no unusual restrictions affecting my inspection of the grounds within the apparent ownership of the property.,EXACT,{H_GROUNDS}::{LIMITATIONS_NO_RESTRICTIONS},100,DONE
+ff5b4d8f5a,G7,Restricted access: Access to the rear or external elevations of the property was not available.,EXACT,{H_GROUNDS}::{LIMITATIONS_NO_REAR_ACCESS},100,DONE
+2a2547c17b,G7,"Consequently, I was unable to inspect or comment on the condition or composition of the rear grounds.",EXACT,{H_GROUNDS}::{LIMITATIONS_NO_REAR_ACCESS},100,DONE
+ecf3b08039,G7,Comments are limited to those external areas that were visible and accessible at the time of the inspection.,EXACT,{H_GROUNDS}::{LIMITATIONS_NO_REAR_ACCESS},100,DONE
+eaa46daa9e,H1,No garage: There are no garages on the property; no further comments required.,EXACT,{H_GARAGE}::{H1_NO_GARAGE},100,DONE
+ad7afb6ecc,H1,"Not Inspected: Because access keys were not provided by the vendor or estate agent, or the provided keys could not open the garage, I was unable to inspect the garage(s) and therefore unable to comment about the internal condition of the garage(s) and roof timber or structure.",EXACT,{H_GARAGE}::{H1_NOT_INSPECTED},100,DONE
+6da34f2cb4,H1,"Converted garage: The garage has been converted into habitable accommodation, an office, a workshop, other.",MENU,,0,VERIFIED
 37155daf07,H1,The conversion was inspected visually only.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_CONVERTED},100,DONE
 e53eb0f349,H1,"Your legal adviser should verify that any necessary planning permission (where required), Building Regulations approval and completion certificates are available, together with any relevant warranties or guarantees.",EXACT,{H_GARAGE}::{ABOUT_GARAGE_CONVERTED},100,DONE
-5645ff9d7a,H1,"Shared Garage Access: Your legal adviser should confirm the rights of access, maintenance responsibilities and any liabilities relating to the shared garage access.",ADD,{H_GARAGE}::{ABOUT_GARAGE_SHARED_ACCESS},71,OPEN
-0802b6d64f,H1,"Description: The property incorporates a garage in a block of garages, an attached, a detached, an integral, garage, undercroft, other garage(s).",MENU,,0,UNVERIFIED
-6ae77d6251,H1,"Walls: The garage is constructed of single skin brick, cavity brick, block, prefabricated concrete, timber frame, steel frame, other wall(s).",MENU,,0,UNVERIFIED
-4bb0c3709a,H1,"Where the garage comprises single skin brick walls, it should be noted that these are susceptible to dampness because they are not usually insulated.",EXACT,{H_GARAGE}::{IF_SINGLE_BRICK_SKIN_IS_SELECTED},100,DONE
-3823e20397,H1,"Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt sheets, asbestos sheets, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, metal sheets, plastic sheets, other material.",MENU,,0,UNVERIFIED
-078f6df732,H1,"Garage Floor: The garage floor is constructed of concrete, stone, other material.",UNRESOLVED,{H_GARAGE}::{ABOUT_GARAGE_ROOF},60,OPEN
-5cfdfbafad,H1,Minor cracking and surface wear are common and do not necessarily indicate structural movement.,ADD,{H_GARAGE}::{ABOUT_GARAGE_ROOF},45,OPEN
-9d7b474ff5,H1,"Garage Doors: The garage is fitted with a manually, electrically operated up-and-over, roller shutter, side-hinged door, rear or side door, other constructed of steel, timber, aluminium, uPVC, GRP (fibreglass), other material.",MENU,,0,UNVERIFIED
-5f967fa23f,H1,The door(s) appeared serviceable at the time of my inspection.,ADD,{H_GARAGE}::{IF_ASBESTOS_IS_SELECTED},50,OPEN
+5645ff9d7a,H1,"Shared Garage Access: Your legal adviser should confirm the rights of access, maintenance responsibilities and any liabilities relating to the shared garage access.",EXACT,{H_GARAGE}::{H1_SHARED_ACCESS},100,DONE
+0802b6d64f,H1,"Description: The property incorporates a garage in a block of garages, an attached, a detached, an integral, garage, undercroft, other garage(s).",MENU,,0,VERIFIED
+6ae77d6251,H1,"Walls: The garage is constructed of single skin brick, cavity brick, block, prefabricated concrete, timber frame, steel frame, other wall(s).",MENU,,0,VERIFIED
+4bb0c3709a,H1,"Where the garage comprises single skin brick walls, it should be noted that these are susceptible to dampness because they are not usually insulated.",EXACT,{H_GARAGE}::{H1_WALLS},100,DONE
+3823e20397,H1,"Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt sheets, asbestos sheets, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, metal sheets, plastic sheets, other material.",MENU,,0,VERIFIED
+078f6df732,H1,"Garage Floor: The garage floor is constructed of concrete, stone, other material.",MENU,,0,VERIFIED
+5cfdfbafad,H1,Minor cracking and surface wear are common and do not necessarily indicate structural movement.,EXACT,{H_GARAGE}::{H1_FLOOR},100,DONE
+9d7b474ff5,H1,"Garage Doors: The garage is fitted with a manually, electrically operated up-and-over, roller shutter, side-hinged door, rear or side door, other constructed of steel, timber, aluminium, uPVC, GRP (fibreglass), other material.",MENU,,0,VERIFIED
+5f967fa23f,H1,The door(s) appeared serviceable at the time of my inspection.,EXACT,{H_GARAGE}::{H1_DOORS},100,DONE
 7a1ae5f4ac,H1,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
-ba78e08e2c,H1,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+ba78e08e2c,H1,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 783f809e61,H1,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE
 ade8e3fc1e,H1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 6d6841a17a,H1,"If felt sheets is selected, add this.",MENU,,0,UNVERIFIED
-21639dfd1d,H1,Flat felt roofs have a limited-service life compared with pitched roof coverings and require regular inspection and maintenance.,ADD,{H_GARAGE}::{IF_MINERAL_FELT_IS_SELECTED},60,OPEN
-e7b0cedfad,H1,"Although the covering may appear satisfactory at the time of inspection, repairs or replacement should be anticipated as it approaches the end of its serviceable life.",ADD,{H_GARAGE}::{IF_MINERAL_FELT_IS_SELECTED},59,OPEN
+21639dfd1d,H1,Flat felt roofs have a limited-service life compared with pitched roof coverings and require regular inspection and maintenance.,EXACT,{H_GARAGE}::{H1_FELT_ROOF},100,DONE
+e7b0cedfad,H1,"Although the covering may appear satisfactory at the time of inspection, repairs or replacement should be anticipated as it approaches the end of its serviceable life.",EXACT,{H_GARAGE}::{H1_FELT_ROOF},100,DONE
 55a4eb72d5,H1,"If asbestos sheet is selected, add this.",MENU,,0,UNVERIFIED
-e18d025d35,H1,The roof covering material appears to contain asbestos.,EXACT,{H_GARAGE}::{IF_ASBESTOS_IS_SELECTED},100,DONE
-61a808d1a8,H1,"If left in good condition and undisturbed, it presents a low health risk.",EXACT,{H_GARAGE}::{IF_ASBESTOS_IS_SELECTED},100,DONE
-9d2304073d,H1,"However, any disturbance, repair or removal should only be undertaken following advice from a suitably qualified asbestos specialist.",EXACT,{H_GARAGE}::{IF_ASBESTOS_IS_SELECTED},100,DONE
-4041db4034,H1,The presence of asbestos-containing materials may affect future marketability.,EXACT,{H_GARAGE}::{IF_ASBESTOS_IS_SELECTED},100,DONE
-479d2b69d1,H1,"Minor defects: Defects were noted in the garage, including a leaking roof, cracked walls, rotten window frame(s), cracked glazing, a cracked floor, damaged door(s), other defects.",MENU,,0,UNVERIFIED
-9817b74517,H1,Repairs are recommended in the near future to prevent further deterioration.,ADD,{H_GARAGE}::{IF_ASBESTOS_IS_SELECTED},46,OPEN
-feb66f5b56,H1,"Significant defects: Serious defects were noted in the garage, including a badly leaking roof, badly cracked or unstable walls, beetle infestation, damaged glazing, a badly cracked floor, door(s) in disrepair, other significant defects.",UNRESOLVED,{H_GARAGE}::{NOT_INSPECTED_ACCESS_KEYS},44,OPEN
-f8fd4b53cc,H1,Prompt investigation and repair are required to address the defects and prevent further deterioration or safety risks.,ADD,{H_GARAGE}::{ABOUT_GARAGE_ROOF},45,OPEN
-2ff26daf57,H1,Safety hazard: The current condition of some of the elements of the garage is a safety hazard.,EXACT,{H_GARAGE}::{REPAIR_SAFETY_HAZARD},100,DONE
-5d0865ec4a,H1,You should resolve observed issues now.,EXACT,{H_GARAGE}::{REPAIR_SAFETY_HAZARD},100,DONE
+e18d025d35,H1,The roof covering material appears to contain asbestos.,EXACT,{H_GARAGE}::{H1_ASBESTOS_ROOF},100,DONE
+61a808d1a8,H1,"If left in good condition and undisturbed, it presents a low health risk.",EXACT,{H_GARAGE}::{H1_ASBESTOS_ROOF},100,DONE
+9d2304073d,H1,"However, any disturbance, repair or removal should only be undertaken following advice from a suitably qualified asbestos specialist.",EXACT,{H_GARAGE}::{H1_ASBESTOS_ROOF},100,DONE
+4041db4034,H1,The presence of asbestos-containing materials may affect future marketability.,EXACT,{H_GARAGE}::{H1_ASBESTOS_ROOF},100,DONE
+479d2b69d1,H1,"Minor defects: Defects were noted in the garage, including a leaking roof, cracked walls, rotten window frame(s), cracked glazing, a cracked floor, damaged door(s), other defects.",MENU,,0,VERIFIED
+9817b74517,H1,Repairs are recommended in the near future to prevent further deterioration.,EXACT,{H_GARAGE}::{H1_MINOR_DEFECTS},100,DONE
+feb66f5b56,H1,"Significant defects: Serious defects were noted in the garage, including a badly leaking roof, badly cracked or unstable walls, beetle infestation, damaged glazing, a badly cracked floor, door(s) in disrepair, other significant defects.",MENU,,0,VERIFIED
+f8fd4b53cc,H1,Prompt investigation and repair are required to address the defects and prevent further deterioration or safety risks.,EXACT,{H_GARAGE}::{H1_SIGNIFICANT_DEFECTS},100,DONE
+2ff26daf57,H1,Safety hazard: The current condition of some of the elements of the garage is a safety hazard.,EXACT,{H_GARAGE}::{H1_SAFETY_HAZARD},100,DONE
+5d0865ec4a,H1,You should resolve observed issues now.,EXACT,{H_GARAGE}::{H1_SAFETY_HAZARD},100,DONE
 2492bf6da1,H2,"Grounds: The subject property is set within level, sloping, hilly, undulating grounds.",MENU,,0,UNVERIFIED
 e00c98aef8,H2,Shared Garden: The communal/shared garden is shared with neighbouring property or properties.,TOKENISED,{H_OTHER}::{SHARED_ACCESS_KNOWN},73,DONE
 1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",EXACT,{H_OTHER}::{PRIVATE_ROAD},100,DONE
 84f651e2b9,H2,"Grounds: The communal/shared garden is paved, lawned, decked, artificially lawned, laid with stones, laid with tile chippings, other.",MENU,,0,UNVERIFIED
 6dd65085eb,H2,"Fence: The boundary fences are formed in timber, brick, concrete, wire mesh, hedges, shrubs, other.",MENU,,0,UNVERIFIED
 66a683a5bf,H2,No Fencing: The communal/shared garden of the property does not have fencing.,ADD,{H_OTHER}::{NOT_INSPECTED},56,OPEN
-8f27724315,H2,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+8f27724315,H2,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 278a560e78,H2,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE
 6892abc416,H2,"Description: The outside areas comprise front garden, rear garden, side garden, courtyard garden, terrace, patio, other.",MENU,,0,UNVERIFIED
 03925dee50,H2,"Grounds: The surfaces comprise lawn, block paving, concrete, gravel, tarmac, timber decking, composite decking, stone paving, other finishes.",MENU,,0,UNVERIFIED
@@ -1587,7 +1587,7 @@ e00c98aef8,H2,Shared Garden: The communal/shared garden is shared with neighbour
 eb0028f79e,H2,"Fence: The boundaries comprise timber fencing, brick walls, hedging, stone walls, concrete sections, wire, metal railings, other.",MENU,,0,UNVERIFIED
 4edae09342,H2,Boundary ownership cannot be confirmed during a visual inspection.,ADD,{E_RC_DEFLECTION_OTHER}::{DEFLECTION_INVESTIGATE},46,OPEN
 60bffeffa4,H2,Your legal adviser should confirm ownership and maintenance responsibilities from the title documentation and the vendor(s).,EXACT,{H_OTHER}::{REPAIR_FENCE},100,DONE
-8f27724315,H2,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+8f27724315,H2,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 278a560e78,H2,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE
 d0cb3abd7f,H2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 aa41b9bc88,H2,"Repair fence: Parts of the boundary fencing are cracked, broken, unstable, leaning, loose in places, severely damaged, rotten, missing in places, other.",MENU,,0,UNVERIFIED

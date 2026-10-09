@@ -1,0 +1,793 @@
+[
+  {
+    "screen": "activity_grounds_garage",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h1_no_garage",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_NO_GARAGE}",
+        "text": "No garage: There are no garages on the property; no further comments required.",
+        "tokens": [],
+        "when": [
+          "cb_h1_no_garage",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_no_garage",
+            "label": "No garage",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_not_inspected",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_NOT_INSPECTED}",
+        "text": "Not Inspected: Because access keys were not provided by the vendor or estate agent, or the provided keys could not open the garage, I was unable to inspect the garage(s) and therefore unable to comment about the internal condition of the garage(s) and roof timber or structure.",
+        "tokens": [],
+        "when": [
+          "cb_h1_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_not_inspected",
+            "label": "Not inspected",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_converted",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_CONVERTED}",
+        "text": "Converted garage: The garage has been converted into {H1_CONVERTED_TO}. The conversion was inspected visually only. Your legal adviser should verify that any necessary planning permission (where required), Building Regulations approval and completion certificates are available, together with any relevant warranties or guarantees.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H1_CONVERTED_TO}",
+            "options": [
+              [
+                "h1cv_habitable_accommodation",
+                "habitable accommodation"
+              ],
+              [
+                "h1cv_an_office",
+                "an office"
+              ],
+              [
+                "h1cv_a_workshop",
+                "a workshop"
+              ]
+            ],
+            "pdf_options": [
+              "habitable accommodation",
+              "an office",
+              "a workshop"
+            ],
+            "label": "Converted into",
+            "other": [
+              "h1cv_other",
+              "h1cv_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Converted garage: The garage has been converted into habitable accommodation, an office, a workshop, other."
+        ],
+        "when": [
+          "cb_h1_converted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_converted",
+            "label": "Converted garage",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_shared",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_SHARED_ACCESS}",
+        "text": "Shared Garage Access: Your legal adviser should confirm the rights of access, maintenance responsibilities and any liabilities relating to the shared garage access.",
+        "tokens": [],
+        "when": [
+          "cb_shared_access",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_shared_access",
+            "label": "Shared garage access",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_description",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_DESCRIPTION}",
+        "text": "Description: The property incorporates {H1_GARAGE_TYPE} garage(s).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H1_GARAGE_TYPE}",
+            "options": [
+              [
+                "h1d_a_garage_in_a_block_of_garages",
+                "a garage in a block of garages"
+              ],
+              [
+                "h1d_an_attached",
+                "an attached"
+              ],
+              [
+                "h1d_a_detached",
+                "a detached"
+              ],
+              [
+                "h1d_an_integral",
+                "an integral"
+              ],
+              [
+                "h1d_garage",
+                "garage"
+              ],
+              [
+                "h1d_undercroft",
+                "undercroft"
+              ]
+            ],
+            "pdf_options": [
+              "a garage in a block of garages",
+              "an attached",
+              "a detached",
+              "an integral",
+              "garage",
+              "undercroft"
+            ],
+            "label": "Garage type",
+            "other": [
+              "h1d_other",
+              "h1d_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The property incorporates a garage in a block of garages, an attached, a detached, an integral, garage, undercroft, other garage(s)."
+        ],
+        "when": [
+          "cb_h1_description",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_description",
+            "label": "Garage description",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_walls",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_WALLS}",
+        "text": "Walls: The garage is constructed of {H1_WALLS} wall(s). Where the garage comprises single skin brick walls, it should be noted that these are susceptible to dampness because they are not usually insulated.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H1_WALLS}",
+            "options": [
+              [
+                "h1w_single_skin_brick",
+                "single skin brick"
+              ],
+              [
+                "h1w_cavity_brick",
+                "cavity brick"
+              ],
+              [
+                "h1w_block",
+                "block"
+              ],
+              [
+                "h1w_prefabricated_concrete",
+                "prefabricated concrete"
+              ],
+              [
+                "h1w_timber_frame",
+                "timber frame"
+              ],
+              [
+                "h1w_steel_frame",
+                "steel frame"
+              ]
+            ],
+            "pdf_options": [
+              "single skin brick",
+              "cavity brick",
+              "block",
+              "prefabricated concrete",
+              "timber frame",
+              "steel frame"
+            ],
+            "label": "Walls constructed of",
+            "other": [
+              "h1w_other",
+              "h1w_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Walls: The garage is constructed of single skin brick, cavity brick, block, prefabricated concrete, timber frame, steel frame, other wall(s)."
+        ],
+        "when": [
+          "cb_h1_walls",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_walls",
+            "label": "Garage walls",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_roof",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_ROOF}",
+        "text": "Roof: The roof is of {H1_ROOF_TYPE} construction and is covered with {H1_ROOF_COVER} material.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H1_ROOF_TYPE}",
+            "options": [
+              [
+                "h1rt_pitched",
+                "pitched"
+              ],
+              [
+                "h1rt_flat",
+                "flat"
+              ],
+              [
+                "h1rt_lean_to",
+                "lean-to"
+              ]
+            ],
+            "pdf_options": [
+              "pitched",
+              "flat",
+              "lean-to"
+            ],
+            "label": "Roof construction",
+            "other": [
+              "h1rt_other",
+              "h1rt_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{H1_ROOF_COVER}",
+            "options": [
+              [
+                "h1rc_clay_tiles",
+                "clay tiles"
+              ],
+              [
+                "h1rc_concrete_tiles",
+                "concrete tiles"
+              ],
+              [
+                "h1rc_slates",
+                "slates"
+              ],
+              [
+                "h1rc_felt_sheets",
+                "felt sheets"
+              ],
+              [
+                "cb_corrugated_asbestos_sheets",
+                "asbestos sheets"
+              ],
+              [
+                "h1rc_rubber_membrane",
+                "rubber membrane"
+              ],
+              [
+                "h1rc_single_ply_membrane",
+                "single-ply membrane"
+              ],
+              [
+                "h1rc_grp_fibreglass",
+                "GRP fibreglass"
+              ],
+              [
+                "h1rc_asphalt",
+                "asphalt"
+              ],
+              [
+                "h1rc_metal_sheets",
+                "metal sheets"
+              ],
+              [
+                "h1rc_plastic_sheets",
+                "plastic sheets"
+              ]
+            ],
+            "pdf_options": [
+              "clay tiles",
+              "concrete tiles",
+              "slates",
+              "felt sheets",
+              "asbestos sheets",
+              "rubber membrane",
+              "single-ply membrane",
+              "GRP fibreglass",
+              "asphalt",
+              "metal sheets",
+              "plastic sheets"
+            ],
+            "label": "Roof covered with",
+            "other": [
+              "h1rc_other",
+              "h1rc_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt sheets, asbestos sheets, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, metal sheets, plastic sheets, other material."
+        ],
+        "when": [
+          "cb_h1_roof",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_roof",
+            "label": "Garage roof",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_floor",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_FLOOR}",
+        "text": "Garage Floor: The garage floor is constructed of {H1_FLOOR} material. Minor cracking and surface wear are common and do not necessarily indicate structural movement.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H1_FLOOR}",
+            "options": [
+              [
+                "h1f_concrete",
+                "concrete"
+              ],
+              [
+                "h1f_stone",
+                "stone"
+              ]
+            ],
+            "pdf_options": [
+              "concrete",
+              "stone"
+            ],
+            "label": "Floor constructed of",
+            "other": [
+              "h1f_other",
+              "h1f_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Garage Floor: The garage floor is constructed of concrete, stone, other material."
+        ],
+        "when": [
+          "cb_h1_floor",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_floor",
+            "label": "Garage floor",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_doors",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_DOORS}",
+        "text": "Garage Doors: The garage is fitted with a {H1_DOOR_TYPE} constructed of {H1_DOOR_MATERIAL} material. The door(s) appeared serviceable at the time of my inspection. Routine maintenance is recommended.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H1_DOOR_TYPE}",
+            "options": [
+              [
+                "h1do_manually",
+                "manually"
+              ],
+              [
+                "h1do_electrically_operated_up_and_over",
+                "electrically operated up-and-over"
+              ],
+              [
+                "h1do_roller_shutter",
+                "roller shutter"
+              ],
+              [
+                "h1do_side_hinged_door",
+                "side-hinged door"
+              ],
+              [
+                "h1do_rear_or_side_door",
+                "rear or side door"
+              ]
+            ],
+            "pdf_options": [
+              "manually",
+              "electrically operated up-and-over",
+              "roller shutter",
+              "side-hinged door",
+              "rear or side door"
+            ],
+            "label": "Door operation / type",
+            "other": [
+              "h1do_other",
+              "h1do_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{H1_DOOR_MATERIAL}",
+            "options": [
+              [
+                "h1dm_steel",
+                "steel"
+              ],
+              [
+                "h1dm_timber",
+                "timber"
+              ],
+              [
+                "h1dm_aluminium",
+                "aluminium"
+              ],
+              [
+                "h1dm_upvc",
+                "uPVC"
+              ],
+              [
+                "h1dm_grp_fibreglass",
+                "GRP (fibreglass)"
+              ]
+            ],
+            "pdf_options": [
+              "steel",
+              "timber",
+              "aluminium",
+              "uPVC",
+              "GRP (fibreglass)"
+            ],
+            "label": "Door material",
+            "other": [
+              "h1dm_other",
+              "h1dm_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Garage Doors: The garage is fitted with a manually, electrically operated up-and-over, roller shutter, side-hinged door, rear or side door, other constructed of steel, timber, aluminium, uPVC, GRP (fibreglass), other material."
+        ],
+        "when": [
+          "cb_h1_doors",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_doors",
+            "label": "Garage doors",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_condition",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_CONDITION}",
+        "text": "Condition: Where visible, the garage appears in {H1_CONDITION} condition. Routine maintenance appropriate to the age and construction of the garage should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{H1_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Garage condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition."
+        ],
+        "when": [
+          "actv_condition",
+          "Good"
+        ],
+        "when_any": [
+          [
+            "actv_condition",
+            "Reasonable"
+          ],
+          [
+            "actv_condition",
+            "Fair"
+          ],
+          [
+            "actv_condition",
+            "Poor"
+          ],
+          [
+            "actv_condition",
+            "Very poor"
+          ]
+        ]
+      },
+      {
+        "id": "h1_no_defects",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_NO_DEFECTS_NOTED}",
+        "text": "No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.",
+        "tokens": [],
+        "when": [
+          "cb_h1_no_defects",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_no_defects",
+            "label": "No defects noted",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_felt",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_FELT_ROOF}",
+        "text": "Flat felt roofs have a limited-service life compared with pitched roof coverings and require regular inspection and maintenance. Although the covering may appear satisfactory at the time of inspection, repairs or replacement should be anticipated as it approaches the end of its serviceable life.",
+        "tokens": [],
+        "when": [
+          "h1rc_felt_sheets",
+          "true"
+        ]
+      },
+      {
+        "id": "h1_asbestos",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_ASBESTOS_ROOF}",
+        "text": "The roof covering material appears to contain asbestos. If left in good condition and undisturbed, it presents a low health risk. However, any disturbance, repair or removal should only be undertaken following advice from a suitably qualified asbestos specialist. The presence of asbestos-containing materials may affect future marketability.",
+        "tokens": [],
+        "when": [
+          "cb_corrugated_asbestos_sheets",
+          "true"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_garage_garage_repair",
+    "set_title": "Garage Defects",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h1_minor",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_MINOR_DEFECTS}",
+        "text": "Minor defects: Defects were noted in the garage, including {H1_MINOR_DEFECTS}. Repairs are recommended in the near future to prevent further deterioration.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H1_MINOR_DEFECTS}",
+            "options": [
+              [
+                "h1mi_a_leaking_roof",
+                "a leaking roof"
+              ],
+              [
+                "h1mi_cracked_walls",
+                "cracked walls"
+              ],
+              [
+                "h1mi_rotten_window_frame_s",
+                "rotten window frame(s)"
+              ],
+              [
+                "h1mi_cracked_glazing",
+                "cracked glazing"
+              ],
+              [
+                "h1mi_a_cracked_floor",
+                "a cracked floor"
+              ],
+              [
+                "h1mi_damaged_door_s",
+                "damaged door(s)"
+              ]
+            ],
+            "pdf_options": [
+              "a leaking roof",
+              "cracked walls",
+              "rotten window frame(s)",
+              "cracked glazing",
+              "a cracked floor",
+              "damaged door(s)"
+            ],
+            "label": "Minor defects noted",
+            "other": [
+              "h1mi_other",
+              "h1mi_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Minor defects: Defects were noted in the garage, including a leaking roof, cracked walls, rotten window frame(s), cracked glazing, a cracked floor, damaged door(s), other defects."
+        ],
+        "when": [
+          "cb_h1_minor",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_minor",
+            "label": "Minor defects",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_significant",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_SIGNIFICANT_DEFECTS}",
+        "text": "Significant defects: Serious defects were noted in the garage, including {H1_SIGNIFICANT_DEFECTS}. Prompt investigation and repair are required to address the defects and prevent further deterioration or safety risks.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H1_SIGNIFICANT_DEFECTS}",
+            "options": [
+              [
+                "h1si_a_badly_leaking_roof",
+                "a badly leaking roof"
+              ],
+              [
+                "h1si_badly_cracked_or_unstable_walls",
+                "badly cracked or unstable walls"
+              ],
+              [
+                "h1si_beetle_infestation",
+                "beetle infestation"
+              ],
+              [
+                "h1si_damaged_glazing",
+                "damaged glazing"
+              ],
+              [
+                "h1si_a_badly_cracked_floor",
+                "a badly cracked floor"
+              ],
+              [
+                "h1si_door_s_in_disrepair",
+                "door(s) in disrepair"
+              ]
+            ],
+            "pdf_options": [
+              "a badly leaking roof",
+              "badly cracked or unstable walls",
+              "beetle infestation",
+              "damaged glazing",
+              "a badly cracked floor",
+              "door(s) in disrepair"
+            ],
+            "label": "Significant defects noted",
+            "other": [
+              "h1si_other",
+              "h1si_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Significant defects: Serious defects were noted in the garage, including a badly leaking roof, badly cracked or unstable walls, beetle infestation, damaged glazing, a badly cracked floor, door(s) in disrepair, other significant defects."
+        ],
+        "when": [
+          "cb_h1_significant",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h1_significant",
+            "label": "Significant defects",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h1_safety",
+        "masters": [
+          "{H_GARAGE}"
+        ],
+        "sub": "{H1_SAFETY_HAZARD}",
+        "text": "Safety hazard: The current condition of some of the elements of the garage is a safety hazard. You should resolve observed issues now.",
+        "tokens": [],
+        "when": [
+          "cb_is_safety_hazard",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_is_safety_hazard",
+            "label": "Safety hazard",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_grounds_garage_roof_timber_repair",
+      "activity_grounds_garage_safety_hazard_repair",
+      "activity_grounds_garage_not_inspected"
+    ]
+  }
+]

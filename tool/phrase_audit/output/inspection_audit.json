@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 363,
+  "screensAudited": 360,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2212,
-   "approvedLegacyBank": 484,
-   "approvedCurrentBankOnly": 1701,
+   "distinctEmitted": 2186,
+   "approvedLegacyBank": 459,
+   "approvedCurrentBankOnly": 1700,
    "unapproved": 0
   }
  },
@@ -590,19 +590,19 @@
    "sectionKey": "H",
    "screenId": "activity_grounds_garage",
    "title": "Garage",
-   "dataFieldCount": 23,
-   "permutationCount": 45,
+   "dataFieldCount": 68,
+   "permutationCount": 78,
    "severities": [],
    "phraseStats": {
-    "total": 24,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 22,
+    "total": 17,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 17,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The garage walls are constructed of cavity brick wall.",
-    "The garage walls are constructed of block work.",
-    "The garage walls are constructed of precast concrete wall."
+    "No garage: There are no garages on the property; no further comments required.",
+    "Not Inspected: Because access keys were not provided by the vendor or estate agent, or the provided keys could not open the garage, I was unable to inspect the garage(s) and therefore unable to comment about the internal condition of the garage(s) and roof timber or structure.",
+    "Shared Garage Access: Your legal adviser should confirm the rights of access, maintenance responsibilities and any liabilities relating to the shared garage access."
    ]
   },
   {
@@ -613,25 +613,35 @@
    "permutationCount": 4,
    "severities": [],
    "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 0,
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The inspection of the grounds was visual only. Underground services, buried structures, and concealed defects could not be inspected or confirmed as part of this inspection.",
+    "No inspection restrictions: There were no unusual restrictions affecting my inspection of the grounds within the apparent ownership of the property.",
+    "Restricted access: Access to the rear or external elevations of the property was not available. Consequently, I was unable to inspect or comment on the condition or composition of the rear grounds. Comments are limited to those external areas that were visible and accessible at the time of the inspection."
+   ]
   },
   {
    "sectionKey": "H",
    "screenId": "activity_grounds_garage_garage_repair",
-   "title": "Garage",
-   "dataFieldCount": 17,
+   "title": "Garage Defects",
+   "dataFieldCount": 19,
    "permutationCount": 21,
    "severities": [],
    "phraseStats": {
-    "total": 14,
-    "approvedLegacy": 14,
-    "approvedCurrentBankOnly": 0,
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Safety hazard: The current condition of some of the elements of the garage is a safety hazard. You should resolve observed issues now.",
+    "Minor defects: Defects were noted in the garage, including a leaking roof, cracked walls, rotten window frame(s), cracked glazing, a cracked floor, damaged door(s) and sample detail. Repairs are recommended in the near future to prevent further deterioration.",
+    "Significant defects: Serious defects were noted in the garage, including a badly leaking roof, badly cracked or unstable walls, beetle infestation, damaged glazing, a badly cracked floor, door(s) in disrepair and sample detail. Prompt investigation and repair are required to address the defects and prevent further deterioration or safety risks."
+   ]
   },
   {
    "sectionKey": "H",
@@ -688,20 +698,6 @@
    "phraseStats": {
     "total": 5,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_grounds_garage_roof_timber_repair",
-   "title": "Roof Timber",
-   "dataFieldCount": 7,
-   "permutationCount": 9,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 6,
     "approvedCurrentBankOnly": 0,
     "unapproved": 0
    }
@@ -791,23 +787,6 @@
   },
   {
    "sectionKey": "H",
-   "screenId": "activity_grounds_garage_safety_hazard_repair",
-   "title": "Safety Hazard",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The current condition of some of the elements of the garage is a safety hazard (See section J3 - Risk). You should resolve observed issues now."
-   ]
-  },
-  {
-   "sectionKey": "H",
    "screenId": "activity_grounds_other_main_screen",
    "title": "Other",
    "dataFieldCount": 2,
@@ -883,23 +862,6 @@
     "approvedCurrentBankOnly": 0,
     "unapproved": 0
    }
-  },
-  {
-   "sectionKey": "H",
-   "screenId": "activity_grounds_garage_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 3,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The garage could not be inspected. As it is not accessible, it should be inspected and assessed by an appropriately qualified person when access can be arranged."
-   ]
   },
   {
    "sectionKey": "H",

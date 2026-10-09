@@ -91,15 +91,15 @@ class InspectionPhraseEngine {
       case 'activity_grounds_limitations':
         return _groundsLimitations(answers);
       case 'activity_grounds_garage':
-        return _groundsGarage(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_garage_not_inspected':
-        return _groundsGarageNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_garage_garage_repair':
-        return _groundsGarageRepair(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_garage_roof_timber_repair':
-        return _groundsGarageRoofTimber(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_garage_safety_hazard_repair':
-        return _groundsGarageSafetyHazard(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_grounds':
         return _groundsOtherGrounds(answers);
       case 'activity_grounds_other_front_garden':
@@ -2126,7 +2126,6 @@ class InspectionPhraseEngine {
   List<String> _groundsLimitations(Map<String, String> answers) {
     final noRestrictions = _isChecked(answers['cb_no_restrictions']);
     final noRearAccess = _isChecked(answers['cb_no_rear_access']);
-    if (!noRestrictions && !noRearAccess) return const [];
     var template = _sub('{H_GROUNDS}', '{H_LIMITATIONS_STANDARD_TEXT}');
     if (template.isEmpty) return const [];
     final restrictionsText = noRestrictions
@@ -2138,245 +2137,6 @@ class InspectionPhraseEngine {
         .replaceAll('{LIMITATIONS_NO_RESTRICTIONS}', restrictionsText)
         .replaceAll('{LIMITATIONS_NO_REAR_ACCESS}', rearText);
     return _split(_normalize(template));
-  }
-
-  List<String> _groundsGarage(Map<String, String> answers) {
-    final phrases = <String>[];
-
-    final garageNo = _cleanLower(answers['actv_no_of_garage']);
-    final garageType = _cleanLower(answers['actv_type']);
-    // Both details are required to complete this sentence; a literal "..."
-    // placeholder is not acceptable in a finalised client report, so wait
-    // until the surveyor has answered both.
-    if (garageNo.isNotEmpty && garageType.isNotEmpty) {
-      var template = _sub('{H_GARAGE}', '{ABOUT_GARAGE_TYPE}');
-      if (template.isNotEmpty) {
-        template = template
-            .replaceAll('{GAR_NO_OF_GAR}', garageNo)
-            .replaceAll('{GAR_TYPE}', garageType);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final walls = _labelsFor(
-      [
-        'cb_cavity_brick_wall',
-        'cb_block_work',
-        'cb_precast_concrete_wall',
-        'cb_timber_frame_wall',
-        'cb_single_skin_brickwork',
-        'cb_other_594',
-      ],
-      answers,
-      {
-        'cb_cavity_brick_wall': 'Cavity brick wall',
-        'cb_block_work': 'Block work',
-        'cb_precast_concrete_wall': 'Precast concrete wall',
-        'cb_timber_frame_wall': 'Timber frame wall',
-        'cb_single_skin_brickwork': 'Single skin brickwork',
-        'cb_other_594': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_594', 'et_other_471', walls);
-    if (walls.isNotEmpty) {
-      var template = _sub('{H_GARAGE}', '{ABOUT_GARAGE_WALLS}');
-      if (template.isNotEmpty) {
-        template =
-            template.replaceAll('{GAR_WALL}', _toWords(walls).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final roofTypes = _labelsFor(
-      ['cb_pitched', 'cb_flat', 'cb_other_390'],
-      answers,
-      {
-        'cb_pitched': 'Pitched',
-        'cb_flat': 'Flat',
-        'cb_other_390': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_390', 'et_other_142', roofTypes);
-    final roofCovers = _labelsFor(
-      [
-        'cb_the_floor_above',
-        'cb_tiles',
-        'cb_slates',
-        'cb_mineral_felt',
-        'cb_corrugated_asbestos_sheets',
-        'cb_other_376',
-      ],
-      answers,
-      {
-        'cb_the_floor_above': 'The floor above',
-        'cb_tiles': 'Tiles',
-        'cb_slates': 'Slates',
-        'cb_mineral_felt': 'Mineral felt',
-        'cb_corrugated_asbestos_sheets': 'Corrugated asbestos sheets',
-        'cb_other_376': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_376', 'et_other_634', roofCovers);
-    final roofCond = _cleanLower(answers['actv_condition']);
-    // All three details are required to complete this sentence; a literal
-    // "..." placeholder is not acceptable in a finalised client report, so
-    // wait until the surveyor has answered them all.
-    if (roofTypes.isNotEmpty && roofCovers.isNotEmpty && roofCond.isNotEmpty) {
-      var template = _sub('{H_GARAGE}', '{ABOUT_GARAGE_ROOF}');
-      if (template.isNotEmpty) {
-        template = template
-            .replaceAll('{GAR_ROOF_TYPE}', _toWords(roofTypes).toLowerCase())
-            .replaceAll('{GAR_ROOF_COVER}', _toWords(roofCovers).toLowerCase())
-            .replaceAll('{GAR_ROOF_COVER_COND}', roofCond);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_single_skin_brickwork'])) {
-      phrases.addAll(_split(_normalize(
-          _sub('{H_GARAGE}', '{IF_SINGLE_BRICK_SKIN_IS_SELECTED}'))));
-    }
-    if (_isChecked(answers['cb_mineral_felt'])) {
-      phrases.addAll(_split(
-          _normalize(_sub('{H_GARAGE}', '{IF_MINERAL_FELT_IS_SELECTED}'))));
-    }
-    if (_isChecked(answers['cb_corrugated_asbestos_sheets'])) {
-      phrases.addAll(
-          _split(_normalize(_sub('{H_GARAGE}', '{IF_ASBESTOS_IS_SELECTED}'))));
-    }
-
-    final convertedTo = _cleanLower(answers['actv_converted_to']);
-    if (convertedTo.isNotEmpty) {
-      var template = _sub('{H_GARAGE}', '{ABOUT_GARAGE_CONVERTED}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{GAR_COND_CONV_TO}', convertedTo);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_shared_access'])) {
-      phrases.addAll(_split(
-          _normalize(_sub('{H_GARAGE}', '{ABOUT_GARAGE_SHARED_ACCESS}'))));
-    }
-
-    return phrases;
-  }
-
-  List<String> _groundsGarageNotInspected(Map<String, String> answers) {
-    if (_isChecked(answers['cb_not_inspected_no_garage'])) {
-      return _split(_normalize(_sub('{H_GARAGE}', '{NO_GARAGE}')));
-    }
-    if (_isChecked(answers['cb_not_inspected'])) {
-      final source = _cleanLower(answers['actv_access_keys_not_provided_by']);
-      if (source.isNotEmpty) {
-        final template = _sub('{H_GARAGE}', '{NOT_INSPECTED_ACCESS_KEYS}')
-            .replaceAll('{GARAGE_KEY_SOURCE}', source);
-        if (template.isNotEmpty) return _split(_normalize(template));
-      }
-      return _split(_normalize(_sub('{H_GARAGE}', '{NOT_INSPECTED}')));
-    }
-    return const [];
-  }
-
-  List<String> _groundsGarageRepair(Map<String, String> answers) {
-    final phrases = <String>[];
-    final soonDefects = _labelsFor(
-      [
-        'cb_roof_is_leaking',
-        'cb_walls_are_cracked',
-        'cb_window_frames_are_rotten',
-        'cb_window_glazing_is_cracked',
-        'cb_door_is_damaged',
-        'cb_floor_is_cracked',
-        'cb_other_785',
-      ],
-      answers,
-      {
-        'cb_roof_is_leaking': 'Roof is leaking',
-        'cb_walls_are_cracked': 'Walls are cracked',
-        'cb_window_frames_are_rotten': 'Window frames are rotten',
-        'cb_window_glazing_is_cracked': 'Window glazing is cracked',
-        'cb_door_is_damaged': 'Door is damaged',
-        'cb_floor_is_cracked': 'Floor is cracked',
-        'cb_other_785': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_785', 'et_other_703', soonDefects);
-    if (soonDefects.isNotEmpty) {
-      var template = _sub('{H_GARAGE}', '{REPAIR_GARAGE_REPAIR_SOON}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll(
-            '{GAR_REP_SOON_DEFECT}', _toWords(soonDefects).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final nowDefects = _labelsFor(
-      [
-        'cb_roof_is_badly_leaking',
-        'cb_walls_are_badly_cracked',
-        'cb_walls_are_unstable',
-        'cb_window_glazing_is_smashed',
-        'cb_floor_is_badly_cracked',
-        'cb_doors_are_in_disrepair',
-        'cb_other_528',
-      ],
-      answers,
-      {
-        'cb_roof_is_badly_leaking': 'Roof is badly leaking',
-        'cb_walls_are_badly_cracked': 'Walls are badly cracked',
-        'cb_walls_are_unstable': 'Walls are unstable',
-        'cb_window_glazing_is_smashed': 'Window glazing is smashed',
-        'cb_floor_is_badly_cracked': 'Floor is badly cracked',
-        'cb_doors_are_in_disrepair': 'Doors are in disrepair',
-        'cb_other_528': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_528', 'et_other_670', nowDefects);
-    if (nowDefects.isNotEmpty) {
-      var template = _sub('{H_GARAGE}', '{REPAIR_GARAGE_REPAIR_NOW}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll(
-            '{GAR_REP_NOW_DEFECT}', _toWords(nowDefects).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _groundsGarageRoofTimber(Map<String, String> answers) {
-    final defects = _labelsFor(
-      [
-        'cb_is_rotten',
-        'cb_has_beetles_infestation',
-        'cb_is_broken',
-        'cb_is_badly_cracked',
-        'cb_is_badly_damaged',
-        'cb_other_795',
-      ],
-      answers,
-      {
-        'cb_is_rotten': 'Is rotten',
-        'cb_has_beetles_infestation': 'Has beetle infestation',
-        'cb_is_broken': 'Is broken',
-        'cb_is_badly_cracked': 'Is badly cracked',
-        'cb_is_badly_damaged': 'Is badly damaged',
-        'cb_other_795': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_795', 'et_other_756', defects);
-    if (defects.isEmpty) return const [];
-    var template = _sub('{H_GARAGE}', '{REPAIR_ROOF_TIMBER}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{GAR_REP_ROOF_TIMBER_DEF}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _groundsGarageSafetyHazard(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_is_safety_hazard'])) return const [];
-    return _split(_normalize(_sub('{H_GARAGE}', '{REPAIR_SAFETY_HAZARD}')));
   }
 
   List<String> _groundsOtherGrounds(Map<String, String> answers) {

@@ -9367,6 +9367,325 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_cs_communal',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'h1_no_garage',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_NO_GARAGE}',
+    [
+    ],
+    whenField: 'cb_h1_no_garage',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_not_inspected',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'cb_h1_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_converted',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_CONVERTED}',
+    [
+      VerbatimToken(
+        '{H1_CONVERTED_TO}',
+        options: {
+          'h1cv_habitable_accommodation': 'habitable accommodation',
+          'h1cv_an_office': 'an office',
+          'h1cv_a_workshop': 'a workshop',
+        },
+        otherCheckbox: 'h1cv_other',
+        otherText: 'h1cv_other_text',
+        pdfOptions: ['habitable accommodation', 'an office', 'a workshop'],
+      ),
+    ],
+    pdf:
+        'Converted garage: The garage has been converted into habitable accommodation, an office, a workshop, other.',
+    whenField: 'cb_h1_converted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_shared',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_SHARED_ACCESS}',
+    [
+    ],
+    whenField: 'cb_shared_access',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_description',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{H1_GARAGE_TYPE}',
+        options: {
+          'h1d_a_garage_in_a_block_of_garages': 'a garage in a block of garages',
+          'h1d_an_attached': 'an attached',
+          'h1d_a_detached': 'a detached',
+          'h1d_an_integral': 'an integral',
+          'h1d_garage': 'garage',
+          'h1d_undercroft': 'undercroft',
+        },
+        otherCheckbox: 'h1d_other',
+        otherText: 'h1d_other_text',
+        pdfOptions: ['a garage in a block of garages', 'an attached', 'a detached', 'an integral', 'garage', 'undercroft'],
+      ),
+    ],
+    pdf:
+        'Description: The property incorporates a garage in a block of garages, an attached, a detached, an integral, garage, undercroft, other garage(s).',
+    whenField: 'cb_h1_description',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_walls',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_WALLS}',
+    [
+      VerbatimToken(
+        '{H1_WALLS}',
+        options: {
+          'h1w_single_skin_brick': 'single skin brick',
+          'h1w_cavity_brick': 'cavity brick',
+          'h1w_block': 'block',
+          'h1w_prefabricated_concrete': 'prefabricated concrete',
+          'h1w_timber_frame': 'timber frame',
+          'h1w_steel_frame': 'steel frame',
+        },
+        otherCheckbox: 'h1w_other',
+        otherText: 'h1w_other_text',
+        pdfOptions: ['single skin brick', 'cavity brick', 'block', 'prefabricated concrete', 'timber frame', 'steel frame'],
+      ),
+    ],
+    pdf:
+        'Walls: The garage is constructed of single skin brick, cavity brick, block, prefabricated concrete, timber frame, steel frame, other wall(s).',
+    whenField: 'cb_h1_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_roof',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_ROOF}',
+    [
+      VerbatimToken(
+        '{H1_ROOF_TYPE}',
+        options: {
+          'h1rt_pitched': 'pitched',
+          'h1rt_flat': 'flat',
+          'h1rt_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h1rt_other',
+        otherText: 'h1rt_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H1_ROOF_COVER}',
+        options: {
+          'h1rc_clay_tiles': 'clay tiles',
+          'h1rc_concrete_tiles': 'concrete tiles',
+          'h1rc_slates': 'slates',
+          'h1rc_felt_sheets': 'felt sheets',
+          'cb_corrugated_asbestos_sheets': 'asbestos sheets',
+          'h1rc_rubber_membrane': 'rubber membrane',
+          'h1rc_single_ply_membrane': 'single-ply membrane',
+          'h1rc_grp_fibreglass': 'GRP fibreglass',
+          'h1rc_asphalt': 'asphalt',
+          'h1rc_metal_sheets': 'metal sheets',
+          'h1rc_plastic_sheets': 'plastic sheets',
+        },
+        otherCheckbox: 'h1rc_other',
+        otherText: 'h1rc_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt sheets', 'asbestos sheets', 'rubber membrane', 'single-ply membrane', 'GRP fibreglass', 'asphalt', 'metal sheets', 'plastic sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt sheets, asbestos sheets, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, metal sheets, plastic sheets, other material.',
+    whenField: 'cb_h1_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_floor',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_FLOOR}',
+    [
+      VerbatimToken(
+        '{H1_FLOOR}',
+        options: {
+          'h1f_concrete': 'concrete',
+          'h1f_stone': 'stone',
+        },
+        otherCheckbox: 'h1f_other',
+        otherText: 'h1f_other_text',
+        pdfOptions: ['concrete', 'stone'],
+      ),
+    ],
+    pdf:
+        'Garage Floor: The garage floor is constructed of concrete, stone, other material.',
+    whenField: 'cb_h1_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_doors',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_DOORS}',
+    [
+      VerbatimToken(
+        '{H1_DOOR_TYPE}',
+        options: {
+          'h1do_manually': 'manually',
+          'h1do_electrically_operated_up_and_over': 'electrically operated up-and-over',
+          'h1do_roller_shutter': 'roller shutter',
+          'h1do_side_hinged_door': 'side-hinged door',
+          'h1do_rear_or_side_door': 'rear or side door',
+        },
+        otherCheckbox: 'h1do_other',
+        otherText: 'h1do_other_text',
+        pdfOptions: ['manually', 'electrically operated up-and-over', 'roller shutter', 'side-hinged door', 'rear or side door'],
+      ),
+      VerbatimToken(
+        '{H1_DOOR_MATERIAL}',
+        options: {
+          'h1dm_steel': 'steel',
+          'h1dm_timber': 'timber',
+          'h1dm_aluminium': 'aluminium',
+          'h1dm_upvc': 'uPVC',
+          'h1dm_grp_fibreglass': 'GRP (fibreglass)',
+        },
+        otherCheckbox: 'h1dm_other',
+        otherText: 'h1dm_other_text',
+        pdfOptions: ['steel', 'timber', 'aluminium', 'uPVC', 'GRP (fibreglass)'],
+      ),
+    ],
+    pdf:
+        'Garage Doors: The garage is fitted with a manually, electrically operated up-and-over, roller shutter, side-hinged door, rear or side door, other constructed of steel, timber, aluminium, uPVC, GRP (fibreglass), other material.',
+    whenField: 'cb_h1_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_condition',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_CONDITION}',
+    [
+      VerbatimToken(
+        '{H1_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_condition',
+    whenValue: 'Good',
+    whenAny: [['actv_condition', 'Reasonable'], ['actv_condition', 'Fair'], ['actv_condition', 'Poor'], ['actv_condition', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h1_no_defects',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_NO_DEFECTS_NOTED}',
+    [
+    ],
+    whenField: 'cb_h1_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_felt',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_FELT_ROOF}',
+    [
+    ],
+    whenField: 'h1rc_felt_sheets',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_asbestos',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_ASBESTOS_ROOF}',
+    [
+    ],
+    whenField: 'cb_corrugated_asbestos_sheets',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_minor',
+    'activity_grounds_garage_garage_repair',
+    '{H_GARAGE}',
+    '{H1_MINOR_DEFECTS}',
+    [
+      VerbatimToken(
+        '{H1_MINOR_DEFECTS}',
+        options: {
+          'h1mi_a_leaking_roof': 'a leaking roof',
+          'h1mi_cracked_walls': 'cracked walls',
+          'h1mi_rotten_window_frame_s': 'rotten window frame(s)',
+          'h1mi_cracked_glazing': 'cracked glazing',
+          'h1mi_a_cracked_floor': 'a cracked floor',
+          'h1mi_damaged_door_s': 'damaged door(s)',
+        },
+        otherCheckbox: 'h1mi_other',
+        otherText: 'h1mi_other_text',
+        pdfOptions: ['a leaking roof', 'cracked walls', 'rotten window frame(s)', 'cracked glazing', 'a cracked floor', 'damaged door(s)'],
+      ),
+    ],
+    pdf:
+        'Minor defects: Defects were noted in the garage, including a leaking roof, cracked walls, rotten window frame(s), cracked glazing, a cracked floor, damaged door(s), other defects.',
+    whenField: 'cb_h1_minor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_significant',
+    'activity_grounds_garage_garage_repair',
+    '{H_GARAGE}',
+    '{H1_SIGNIFICANT_DEFECTS}',
+    [
+      VerbatimToken(
+        '{H1_SIGNIFICANT_DEFECTS}',
+        options: {
+          'h1si_a_badly_leaking_roof': 'a badly leaking roof',
+          'h1si_badly_cracked_or_unstable_walls': 'badly cracked or unstable walls',
+          'h1si_beetle_infestation': 'beetle infestation',
+          'h1si_damaged_glazing': 'damaged glazing',
+          'h1si_a_badly_cracked_floor': 'a badly cracked floor',
+          'h1si_door_s_in_disrepair': 'door(s) in disrepair',
+        },
+        otherCheckbox: 'h1si_other',
+        otherText: 'h1si_other_text',
+        pdfOptions: ['a badly leaking roof', 'badly cracked or unstable walls', 'beetle infestation', 'damaged glazing', 'a badly cracked floor', 'door(s) in disrepair'],
+      ),
+    ],
+    pdf:
+        'Significant defects: Serious defects were noted in the garage, including a badly leaking roof, badly cracked or unstable walls, beetle infestation, damaged glazing, a badly cracked floor, door(s) in disrepair, other significant defects.',
+    whenField: 'cb_h1_significant',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_safety',
+    'activity_grounds_garage_garage_repair',
+    '{H_GARAGE}',
+    '{H1_SAFETY_HAZARD}',
+    [
+    ],
+    whenField: 'cb_is_safety_hazard',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

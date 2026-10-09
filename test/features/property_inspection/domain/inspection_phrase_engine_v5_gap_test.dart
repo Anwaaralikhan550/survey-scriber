@@ -29,18 +29,4 @@ void main() {
     expect(phrases, contains(contains('OFTEC-registered engineer')));
   });
 
-  test('garage access limitation identifies who did not provide keys', () {
-    final phrases = engine.buildPhrases(
-      'activity_grounds_garage_not_inspected',
-      {
-        'cb_not_inspected': 'true',
-        'actv_access_keys_not_provided_by': 'Estate agent',
-      },
-    );
-
-    expect(phrases.single, contains('estate agent'));
-    expect(phrases.single, contains('unable to inspect the garage'));
-  });
-
-
 }
