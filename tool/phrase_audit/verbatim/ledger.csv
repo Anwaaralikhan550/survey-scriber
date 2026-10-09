@@ -4,7 +4,7 @@ ca7a61684a,Party conflict disclosure,No Conflict: I am not aware of any conflict
 f86a0742a4,Party conflict disclosure,"Should any conflict become apparent before completion of the inspection or report, you will be informed immediately.",EXACT,{PARTY_DISCLOSURES_NONE},100,DONE
 be24e1a5de,Party conflict disclosure,Conflict noted: I suspect that a conflict-of-interest issue may exist in this transaction as defined by current RICS Valuation Standards and the RICS Rules of Conduct.,EXACT,{PARTY_DISCLOSURES_CONFLICT},100,DONE
 5f8e443e5c,Party conflict disclosure,I am known to one or more persons connected to the property owner or to an interest in the property.,EXACT,{PARTY_DISCLOSURES_CONFLICT},100,DONE
-ae7285f45a,Property address,"Property Address Town County Postcode Country Weather: At the time of my inspection, the weather was dry, wet, overcast, sunny, cold, windy, rainy, snowing, following a period of dry, wet, overcast, sunny, cold, windy, rainy, snowing weather.",MENU,,0,UNVERIFIED
+ae7285f45a,Property address,"Property Address Town County Postcode Country Weather: At the time of my inspection, the weather was dry, wet, overcast, sunny, cold, windy, rainy, snowing, following a period of dry, wet, overcast, sunny, cold, windy, rainy, snowing weather.",MENU,,0,DONE
 a452aa3bff,Property address,"Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods, and dampness.",EXACT,{D_WEATHER}::{A1_WEATHER},100,DONE
 ddbc0263b4,Property address,"Status: At the time of my inspection, the property was occupied, vacant, or partly occupied.",MENU,,0,VERIFIED
 6fad4d7559,Property address,"The property was fully furnished, partly furnished, unfurnished, and floor surfaces were fully covered, partly covered, uncovered, which limited inspection of concealed areas.",MENU,,0,VERIFIED
@@ -16,7 +16,7 @@ e0a703ceaf,Overall opinion,"In my opinion, the property represents a reasonable,
 aa5d09f023,Overall opinion,"Reasonable with repair: This property is believed to be a reasonable proposition for purchase, given that you are prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported.",EXACT,{OVERALL_OPINION_REASONABLE_WITH_REPAIR},100,DONE
 8daadd909f,Overall opinion,These defects are considered normal in properties of this age and construction.,EXACT,{OVERALL_OPINION_REASONABLE_WITH_REPAIR},100,DONE
 1af2a909fc,Overall opinion,"Provided that the works are carried out to a good standard, I cannot foresee any problems regarding a future resale of the property in normal market conditions.",EXACT,{OVERALL_OPINION_REASONABLE_WITH_REPAIR},100,DONE
-dcb9584d6c,Overall opinion,"(Although this appears in this part of the report, the field selection and input are captured at the end of the report to allow the surveyor to provide a comment based on the full post inspection assessment) Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage, other providing one, two, three, four, five, six or more bedrooms.",MENU,,0,UNVERIFIED
+dcb9584d6c,Overall opinion,"(Although this appears in this part of the report, the field selection and input are captured at the end of the report to allow the surveyor to provide a comment based on the full post inspection assessment) Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage, other providing one, two, three, four, five, six or more bedrooms.",MENU,,0,DONE
 5610692719,Overall opinion,"Year built: The property is understood to have been built in (enter year), pre-1900, 1900-1929, 1930-1949, 1950-1969, 1970-1989, 1990-2009, 2010 onwards, or the exact construction date is unknown.",MENU,,0,VERIFIED
 9492ba2941,Overall opinion,"This assessment is based on available information, the apparent age and style of construction, and a visual inspection only.",EXACT,{D_YEAR_BUILT_I_THINK},100,DONE
 d6a87464df,Overall opinion,"Unless documentary evidence is available, the stated age should be regarded as an approximation.",EXACT,{D_YEAR_BUILT_I_THINK},100,DONE
@@ -91,14 +91,14 @@ afccf3b392,Parking,The possible effects of electromagnetic fields have been the 
 38ee5e6aca,Parking,"The Health Protection Agency (HPA), an independent body with responsibility for advising on electromagnetic fields, has advised that following the studies in 2000 and 2001, there may be risks, in specified circumstances, to the health of certain categories of people.",EXACT,{D_LOCATION}::{A4_EMF},100,DONE
 4949ce656b,Parking,"Public perception may, however, affect marketability and future value of the property.",EXACT,{D_LOCATION}::{A4_EMF},100,DONE
 152ca6a48f,Parking,"If required, technical information can be obtained from the HPA or local electricity company.",EXACT,{D_LOCATION}::{A4_EMF},100,DONE
-0b73225820,Parking,"If susceptible to flooding is selected, add text below: The property is situated close to the sea, river, a canal, reservoir, or in a low-lying area, and may be susceptible to occasional or seasonal flooding.",MENU,,0,UNVERIFIED
+0b73225820,Parking,"If susceptible to flooding is selected, add text below: The property is situated close to the sea, river, a canal, reservoir, or in a low-lying area, and may be susceptible to occasional or seasonal flooding.",MENU,,0,DONE
 7841d9e366,Parking,Your legal adviser should make further enquiries and advise you whether the building has been flooded in the past or is at risk of flooding.,EXACT,{D_LOCATION}::{A4_FLOODING},100,DONE
 a4a8539a79,Parking,Enquiries should also be made to the Environment Agency.,EXACT,{D_LOCATION}::{A4_FLOODING},100,DONE
 ea89b0cb26,Parking,E - Outside the Property Limitations My inspection of the exterior was carried out from ground level and other reasonably accessible positions.,ACCEPT,{E_LIMITATIONS}::{E0_GROUND_LEVEL},87,DONE
 c719c77a59,Parking,"My inspection was restricted by the surrounding elements, including the layout of the area, and available vantage points from which I was able to view the property.",EXACT,{E_LIMITATIONS}::{E0_VANTAGE_POINTS},100,DONE
 3e371a0ad1,Parking,"Limitations: The inspection was limited by height, restricted access, nearby buildings, vegetation, weather conditions, roof configuration, health and safety considerations.",MENU,,0,VERIFIED
 0b639efd03,Parking,Restricted Access: There was no direct access to the rear of the building.,EXACT,{E_LIMITATIONS}::{E0_RESTRICTED_ACCESS},100,DONE
-7dcd46c328,Parking,"For this reason, I cannot make any detailed comments regarding the condition of the uninspected walls, roof slopes, rainwater goods, etc.",MENU,,0,UNVERIFIED
+7dcd46c328,Parking,"For this reason, I cannot make any detailed comments regarding the condition of the uninspected walls, roof slopes, rainwater goods, etc.",MENU,,0,DONE
 76d1d3a398,Parking,You should accept the risk that some defects may exist in these unseen areas.,EXACT,{E_LIMITATIONS}::{E0_RESTRICTED_ACCESS},100,DONE
 a2b4b52491,Parking,"Roof coverings, chimney stacks, and high-level elements were inspected using binoculars where appropriate.",EXACT,{E_LIMITATIONS}::{E0_BINOCULARS},100,DONE
 6733d360de,Parking,"No parts of the building were opened up, dismantled, or assessed.",EXACT,{E_LIMITATIONS}::{E0_BINOCULARS},100,DONE
@@ -106,7 +106,7 @@ bf8bd59d69,Parking,"Where elements were concealed or inaccessible, no comment ca
 13c81ad5df,Parking,Weather condition Wet weather: It was raining at the time of inspection; leaks and defects are more likely to be detected when it is raining.,EXACT,{E_LIMITATIONS}::{E0_WEATHER_WET},100,DONE
 b9b21ae5d4,Parking,"Dry weather: It was more difficult to detect leakages to the chimney stacks, roof covering, and rainwater goods because it was not raining at the time of my inspection.",EXACT,{E_LIMITATIONS}::{E0_WEATHER_DRY},100,DONE
 6e2a2b738f,Parking,"Snowfall: Snow was falling at the time of the inspection, or there had been recent snowfall before the inspection.",EXACT,{E_LIMITATIONS}::{E0_WEATHER_SNOWFALL},100,DONE
-f36fbdf7ec,Parking,"Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds.",MENU,,0,UNVERIFIED
+f36fbdf7ec,Parking,"Snow cover and freezing conditions, including residual conditions, may have concealed defects to roofs, rainwater goods, external surfaces, and the surrounding grounds.",MENU,,0,DONE
 dca1eae90c,Parking,Some defects may only become apparent once the snow has melted and a further inspection may be required if concerns arise.,EXACT,{E_LIMITATIONS}::{E0_WEATHER_SNOWFALL},100,DONE
 5c7b77ea42,E1,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CHIMNEY}::{E1L_NOT_APPLICABLE},100,DONE
 8bf9989e51,E1,No further comments are necessary.,EXACT,{E_CHIMNEY}::{E1L_NOT_APPLICABLE},100,DONE
@@ -529,7 +529,7 @@ e560132df1,E4,Minor Defect: Localised defects were observed.,EXACT,{E_MAIN_WALLS
 53f885800f,E4,Associated repairs to the surrounding masonry or window frame may also be required.,EXACT,{E_MAIN_WALLS}::{E4_SILL_SIGNIFICANT},100,DONE
 09c0881c41,E4,General Maintenance: External walls should be inspected periodically as part of routine maintenance.,EXACT,{E_MAIN_WALLS}::{E4_GENERAL_MAINTENANCE},100,DONE
 cc4f587329,E4,"Prompt repair of defective pointing, render, sealants, and isolated masonry defects will assist in maintaining the weather resistance and structural integrity of the building.",EXACT,{E_MAIN_WALLS}::{E4_GENERAL_MAINTENANCE},100,DONE
-7187e4907b,E4,"If the Property is a Flat, add this.",MENU,,0,UNVERIFIED
+7187e4907b,E4,"If the Property is a Flat, add this.",MENU,,0,DONE
 3ab66b2b27,E4,You should ask the management company whether any repairs to the external walls have been carried out previously or are currently proposed.,EXACT,{E_MAIN_WALLS}::{FLAT_MANAGEMENT},100,DONE
 6406ebc7e1,E4,"Your legal adviser should confirm responsibility for repairs to the external walls with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_MAIN_WALLS}::{FLAT_MANAGEMENT},100,DONE
 c4a5d7bcea,E4,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
@@ -863,7 +863,7 @@ e1f394acfb,E9,The inspection was visual and non-invasive.,EXACT,{F_INSIDE_THE_PR
 1e94130118,E9,Comments relate only to the condition observed at the time of the inspection.,EXACT,{F_INSIDE_THE_PROPERTY}::{F0_VISUAL},100,DONE
 0d3aeff9f1,E9,"Limitations: The inspection of the internal accommodation was limited by fitted floor coverings, furniture, stored items, fixed fittings, restricted access, locked rooms, limited roof access, limited lighting, health, and safety considerations.",MENU,,0,VERIFIED
 2f9dfda515,E9,"Where roof space access was available, only those areas that could be inspected safely from the access hatch and boarded areas were examined.",EXACT,{F_INSIDE_THE_PROPERTY}::{F0_ROOF_ACCESS_AVAILABLE},100,DONE
-8847c566b0,E9,"Insulation, stored items, roof timbers, and restricted headroom may have limited the inspection.",MENU,,0,UNVERIFIED
+8847c566b0,E9,"Insulation, stored items, roof timbers, and restricted headroom may have limited the inspection.",MENU,,0,DONE
 66b447311f,E9,Inaccessible areas have not been inspected.,EXACT,{F_INSIDE_THE_PROPERTY}::{F0_ROOF_ACCESS_AVAILABLE},100,DONE
 298074df6b,E9,"Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection.",MENU,,0,VERIFIED
 6770dd48a9,E9,No comments can be made regarding unseen elements.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_ROOF_NOT_FULLY_INSPECTED},100,DONE
@@ -986,7 +986,7 @@ b3f524b94e,F1,The pipe should be inspected by a suitably qualified plumber to es
 92d1002e22,F1,General Maintenance: Roof spaces should remain adequately ventilated and free from unnecessary stored items that may restrict inspection or ventilation.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{DEFAULT_TEXT_IF_FLAT},100,DONE
 0db4d9bee4,F1,Roof timbers should be inspected whenever significant roofing works are undertaken.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_GENERAL_MAINTENANCE},100,DONE
 93f0549eae,F1,Prompt attention to water penetration will reduce the risk of timber decay and associated structural deterioration.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_GENERAL_MAINTENANCE},100,DONE
-04a5b8beac,F1,"If the Property is a Flat, add this.",MENU,,0,UNVERIFIED
+04a5b8beac,F1,"If the Property is a Flat, add this.",MENU,,0,DONE
 502ad9fbbc,F1,You should ask the management company whether any repairs to the roof structure have been carried out previously or are currently proposed.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{FLAT_MANAGEMENT},100,DONE
 965d19b3ce,F1,"Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{FLAT_MANAGEMENT},100,DONE
 f56c8befe8,F1,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
@@ -1333,15 +1333,15 @@ a56715f9bd,F9,Remedial works are likely to be disruptive and potentially costly.
 ca25f24f55,F9,Minor decorative defects and isolated repairs should be addressed before deterioration becomes more extensive.,EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
 fc2f5e6efc,F9,"Stored items should not obstruct inspection hatches, ventilation openings, or access to services.",EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
 1d6de9e793,F9,Condition rating 123 G Services Services are concealed within the structure and cannot be fully inspected during a Home Survey.,ACCEPT,{G_LIMITATIONS_STANDARD_TEXT},86,DONE
-2b1f15138d,F9,"The inspection is visual only, and services are not assessed for safety, operation, efficiency, capacity, compliance with current regulations, or remaining service life.",MENU,,0,UNVERIFIED
+2b1f15138d,F9,"The inspection is visual only, and services are not assessed for safety, operation, efficiency, capacity, compliance with current regulations, or remaining service life.",MENU,,0,DONE
 bdc7de0a87,F9,Comments are limited to the visible parts of the installation.,EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
 f576d24a46,F9,"Unless otherwise stated, services should be assumed to require routine maintenance appropriate to their age and use.",EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
 92ee5faf85,F9,"Where there is any doubt about the condition or safe operation of a service installation, further inspection by an appropriately qualified specialist should be obtained before legal purchase commitment.",EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
 cf755a0c0f,F9,"It has been assumed that the necessary statutory compliance certificates, inspection records, and approvals are available where required.",EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
 5969abb368,F9,These documents have not been inspected as part of this survey and should be verified by your legal adviser before exchange of contracts.,EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
 c714ee067b,F9,"Where the condition or safety of a service installation cannot be assessed from a visual inspection, I may recommend further investigation by an appropriately qualified specialist and apply an appropriate Condition Rating.",EXACT,{G_LIMITATIONS_STANDARD_TEXT},100,DONE
-bcb2c1e8c8,F9,"The inspection was limited by one or more of the following access restrictions, boxed-in services, stored items, fixed fittings, locked cupboards, floor coverings, or health and safety considerations.",MENU,,0,UNVERIFIED
-0bd467dc01,F9,"Concealed pipework, wiring, ductwork, and underground services could not be inspected.",MENU,,0,UNVERIFIED
+bcb2c1e8c8,F9,"The inspection was limited by one or more of the following access restrictions, boxed-in services, stored items, fixed fittings, locked cupboards, floor coverings, or health and safety considerations.",MENU,,0,DONE
+0bd467dc01,F9,"Concealed pipework, wiring, ductwork, and underground services could not be inspected.",MENU,,0,DONE
 2629352c93,G1,"Metre: There is a mains electricity supply connected to the property, and the meter unit is located under the stairs, in an outside box, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.",MENU,,0,VERIFIED
 a7f27c601e,G1,Metre not found: I did not find the electric meter.,EXACT,{G_ELECTRICITY}::{G1_METER_NOT_FOUND},100,DONE
 acf3dbfd55,G1,"Please ask the vendor about the location of the mains electricity meter, as you must know where it is located.",EXACT,{G_ELECTRICITY}::{G1_METER_NOT_FOUND},100,DONE
@@ -1419,9 +1419,9 @@ bfd8edf885,G3,"Missing lid: The cold-water storage tank(s) has no lid, or the li
 e69e800e40,G3,A suitable close-fitting lid should be installed as soon as possible.,EXACT,{G_WATER}::{G3_MISSING_LID},100,DONE
 3922735c7f,G3,Asbestos cement tank: The cold-water storage tank is constructed of asbestos cement.,EXACT,{G_WATER}::{G3_ASBESTOS_TANK},100,DONE
 2f088b8ca5,G3,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",EXACT,{G_DRAINAGE}::{G6_ASBESTOS_SOIL_STACK},100,DONE
-e511290e50,G3,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,UNVERIFIED
+e511290e50,G3,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,DONE
 ee251b97c2,G3,The visible water supply pipework comprises plastic and/or copper.,EXACT,{G_WATER}::{STANDARD_TEXT_2},100,DONE
-ffb22bb82f,G3,"Much of the plumbing is concealed within the structure, and the routing, support, joints, and condition of hidden pipework could not be assessed during this visual inspection.",MENU,,0,UNVERIFIED
+ffb22bb82f,G3,"Much of the plumbing is concealed within the structure, and the routing, support, joints, and condition of hidden pipework could not be assessed during this visual inspection.",MENU,,0,DONE
 614686e0a9,G3,"If there are any concerns regarding the plumbing installation or its condition, you should obtain further advice from a suitably qualified plumber before legal purchase commitment.",EXACT,{G_WATER}::{STANDARD_TEXT_2},100,DONE
 9c7af1fd2d,G4,No heating: The property does not have a fixed heating system.,EXACT,{G_HEATING}::{ABOUT_NO_HEATING},100,DONE
 443b036477,G4,"Although no repair is currently required, the absence of fixed heating may result in cold rooms, condensation, and mould growth.",EXACT,{G_HEATING}::{ABOUT_NO_HEATING},100,DONE
@@ -1530,7 +1530,7 @@ e787682d1a,G6,"They should be cleared and repaired, as necessary.",EXACT,{G_DRAI
 718cc4531e,G6,Blocked gullies can result in overflowing water and dampness to adjacent walls.,EXACT,{G_DRAINAGE}::{G6_GULLIES},100,DONE
 2446dfb38b,G6,Asbestos Cement Soil Stack: The soil and vent pipe is constructed of asbestos cement.,EXACT,{G_DRAINAGE}::{G6_ASBESTOS_SOIL_STACK},100,DONE
 92b38d9020,G6,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",EXACT,{G_DRAINAGE}::{G6_ASBESTOS_SOIL_STACK},100,DONE
-2eb8e4e1c1,G6,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,UNVERIFIED
+2eb8e4e1c1,G6,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,DONE
 c6bd7e5c9d,G7,"Not applicable: Other than the possibility of the drainage system being shared, there are no other common services to this property.",EXACT,{G_COMMON_SERVICES}::{G7_NOT_APPLICABLE},100,DONE
 1fc8407710,G7,"Description: Communal services and installations, including shared drainage, grounds maintenance, cleaning, lifts, communal heating, hot water systems, door entry systems, vehicular access, parking areas, other were not specifically assessed as part of this inspection.",MENU,,0,VERIFIED
 b0a629b82f,G7,These installations are normally subject to maintenance contracts.,EXACT,{G_COMMON_SERVICES}::{COMMON_SERVICES},100,DONE
@@ -1559,10 +1559,10 @@ e53eb0f349,H1,"Your legal adviser should verify that any necessary planning perm
 ba78e08e2c,H1,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 783f809e61,H1,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE
 ade8e3fc1e,H1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-6d6841a17a,H1,"If felt sheets is selected, add this.",MENU,,0,UNVERIFIED
+6d6841a17a,H1,"If felt sheets is selected, add this.",MENU,,0,DONE
 21639dfd1d,H1,Flat felt roofs have a limited-service life compared with pitched roof coverings and require regular inspection and maintenance.,EXACT,{H_GARAGE}::{H1_FELT_ROOF},100,DONE
 e7b0cedfad,H1,"Although the covering may appear satisfactory at the time of inspection, repairs or replacement should be anticipated as it approaches the end of its serviceable life.",EXACT,{H_GARAGE}::{H1_FELT_ROOF},100,DONE
-55a4eb72d5,H1,"If asbestos sheet is selected, add this.",MENU,,0,UNVERIFIED
+55a4eb72d5,H1,"If asbestos sheet is selected, add this.",MENU,,0,DONE
 e18d025d35,H1,The roof covering material appears to contain asbestos.,EXACT,{H_GARAGE}::{H1_ASBESTOS_ROOF},100,DONE
 61a808d1a8,H1,"If left in good condition and undisturbed, it presents a low health risk.",EXACT,{H_GARAGE}::{H1_ASBESTOS_ROOF},100,DONE
 9d2304073d,H1,"However, any disturbance, repair or removal should only be undertaken following advice from a suitably qualified asbestos specialist.",EXACT,{H_GARAGE}::{H1_ASBESTOS_ROOF},100,DONE
@@ -1638,7 +1638,7 @@ e823d63ef4,H2,"Also, the trees should be regularly pruned to restrict future gro
 d082d5d4ac,H2,Subsoil: The exact nature of the subsoil has not been investigated as part of this survey.,EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
 fa55f27465,H2,"However, the subsoil in the area may include shrinkable clay.",EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
 78283f4074,H2,"Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions.",EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
-6b44066d78,H2,"Your legal adviser should confirm, where applicable, ownership of the shared areas, rights of access, maintenance responsibilities, service charge liabilities, and any restrictions affecting their use.",MENU,,0,UNVERIFIED
+6b44066d78,H2,"Your legal adviser should confirm, where applicable, ownership of the shared areas, rights of access, maintenance responsibilities, service charge liabilities, and any restrictions affecting their use.",MENU,,0,DONE
 0d6d3bf905,H3,"Right of Way: The property benefits from and/or is subject to shared rights of way over a private road, driveway, footpath, entrance lobby, or other shared access.",MENU,,0,VERIFIED
 90810e07cd,H3,"Your legal adviser should confirm the rights of access, maintenance responsibilities and any associated.",EXACT,{H_OTHER_AREA}::{H3_RIGHT_OF_WAY},100,DONE
 133d22fa50,H3,Lifts: The building is served by one or more passenger lifts.,EXACT,{H_OTHER_AREA}::{H3_LIFTS},100,DONE
@@ -1658,7 +1658,7 @@ fe1dd4e4cb,H3,"However, the inspection was limited to those areas that were visi
 037cb4b6c4,H3,"Recent gardening works, dense vegetation, or other ground cover may conceal evidence of invasive plants and prevent their identification during a visual inspection.",EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_NOT_FOUND},100,DONE
 3bf7296a1c,H3,Found: Japanese knotweed was identified within or adjacent to the property boundary.,EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_FOUND},100,DONE
 50851eb185,H3,"This invasive plant can damage hard landscaping and, in some circumstances, affect structures.",EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_FOUND},100,DONE
-e0fe2522ea,H3,"It may also affect mortgageability, insurability, marketability, and value.",MENU,,0,UNVERIFIED
+e0fe2522ea,H3,"It may also affect mortgageability, insurability, marketability, and value.",MENU,,0,DONE
 e8df6ebe57,H3,I recommend that you arrange for further inspection by a remediation specialist who is a member of a recognised body so that you can get advice about future management and control and an insurance-backed guarantee.,EXACT,{H_OTHER_AREA}::{H3_KNOTWEED_FOUND},100,DONE
 31fa36836e,H3,Management A: Japanese knotweed is present and has caused damage to building structures and/or boundary features.,EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_A},100,DONE
 a0e81a94e2,H3,A suitably qualified invasive weed specialist should inspect the site without delay and implement an appropriate treatment and remediation programme.,EXACT,{H_OTHER_AREA}::{H3_MANAGEMENT_A},100,DONE
@@ -1684,25 +1684,25 @@ c4d71fb5df,I1,Asbestos - Whether asbestos surveys or asbestos management informa
 5e22410bb8,I1,Flood Risk - Environmental searches to establish flood risk and any previous flooding.,EXACT,{ISSUE_REGULATIONS}::{I1_FLOOD_RISK},100,DONE
 a06891d78a,I1,"Mining and Ground Stability - Mining, ground stability, or other relevant environmental searches where appropriate.",EXACT,{ISSUE_REGULATIONS}::{I1_MINING},100,DONE
 9fc4a48920,I1,"Trees - Whether Tree Preservation Orders, Conservation Area restrictions or other legal constraints apply.",EXACT,{ISSUE_REGULATIONS}::{I1_TREES},100,DONE
-74e0406870,I1,"Rights of Way and Easements - Rights of access, easements, wayleaves, covenants, and any other rights affecting the property.",MENU,,0,UNVERIFIED
+74e0406870,I1,"Rights of Way and Easements - Rights of access, easements, wayleaves, covenants, and any other rights affecting the property.",MENU,,0,DONE
 3a233d20db,I1,Boundaries - Boundary ownership and maintenance responsibilities from the title documentation.,EXACT,{ISSUE_REGULATIONS}::{I1_BOUNDARIES},100,DONE
-af22eb27be,I1,"Shared Facilities - Ownership, maintenance obligations, service charges, reserve funds, and future liabilities.",MENU,,0,UNVERIFIED
+af22eb27be,I1,"Shared Facilities - Ownership, maintenance obligations, service charges, reserve funds, and future liabilities.",MENU,,0,DONE
 40d8c370e1,I1,Private Roads and Shared Access - Maintenance responsibilities and associated financial obligations.,EXACT,{ISSUE_REGULATIONS}::{I1_PRIVATE_ROADS},100,DONE
 234a9738b7,I1,"Drainage - The drainage arrangement, maintenance responsibilities, and compliance with current regulations where applicable.",EXACT,{ISSUE_REGULATIONS}::{I1_DRAINAGE},100,DONE
-00a091264e,I1,"Leasehold Property - Remaining lease term, ground rent, service charges, reserve fund contributions, planned major works, lease restrictions and repair obligations.",MENU,,0,UNVERIFIED
+00a091264e,I1,"Leasehold Property - Remaining lease term, ground rent, service charges, reserve fund contributions, planned major works, lease restrictions and repair obligations.",MENU,,0,DONE
 e31ccd8809,I1,"Freehold Property - Any restrictive covenants, estate charges or management arrangements affecting the property.",EXACT,{ISSUE_REGULATIONS}::{I1_FREEHOLD},100,DONE
 1cebb1ba4f,I1,Listed Building: The property may be a listed building.,EXACT,{ISSUE_REGULATIONS}::{I1_LISTED_BUILDING},100,DONE
 94d506c6ce,I1,"Your legal adviser should confirm its listed status, the grade of listing, and explain the legal implications of ownership.",EXACT,{ISSUE_REGULATIONS}::{I1_LISTED_BUILDING},100,DONE
-44ed37ee18,I1,"Listed buildings are subject to statutory protection, and alterations, extensions, repairs, or demolition may require Listed Building Consent and, where applicable, Planning Permission.",MENU,,0,UNVERIFIED
+44ed37ee18,I1,"Listed buildings are subject to statutory protection, and alterations, extensions, repairs, or demolition may require Listed Building Consent and, where applicable, Planning Permission.",MENU,,0,DONE
 f34f0be55c,I1,"Repairs may also need to be carried out using traditional materials and specialist contractors, which can increase maintenance and repair costs.",EXACT,{ISSUE_REGULATIONS}::{I1_LISTED_BUILDING},100,DONE
 45dc342e4a,I2,"Where applicable, your legal adviser should obtain copies of available guarantees, warranties, certificates, and supporting documentation relating to: Window/doors: Replacement windows and external doors (including FENSA, CERTASS or Building Regulation certification).",ACCEPT,{ISSUE_GUARANTEES}::{I2_INTRO},72,DONE
-594d4300e4,I2,"Boiler: Boiler installations, servicing, commissioning documentation, and heating system warranties.",MENU,,0,UNVERIFIED
+594d4300e4,I2,"Boiler: Boiler installations, servicing, commissioning documentation, and heating system warranties.",MENU,,0,DONE
 c9e724fc64,I2,"Structural alterations: Structural alterations, roof replacements, loft conversions and associated structural calculations or guarantees.",EXACT,{ISSUE_GUARANTEES}::{I2_STRUCTURAL_ALTERATIONS},100,DONE
 67e56e93ca,I2,"DPC treatment: Damp-proofing treatment works, including treatment specifications and contractor details.",EXACT,{ISSUE_GUARANTEES}::{I2_DPC_TREATMENT},100,DONE
 fbd0d1cffe,I2,"Timber treatment: Timber treatment works, including treatment specifications and contractor details.",EXACT,{ISSUE_GUARANTEES}::{I2_TIMBER_TREATMENT},100,DONE
 f3ef7bc75f,I2,"Cavity insulation: Cavity wall insulation installation certificates, guarantees, and warranties.",EXACT,{ISSUE_GUARANTEES}::{I2_CAVITY_INSULATION},100,DONE
 30f0ce89ea,I2,"Spray foam: Spray foam insulation installation details, guarantees and warranties, together with confirmation of any lender requirements.",EXACT,{ISSUE_GUARANTEES}::{I2_SPRAY_FOAM},100,DONE
-92c9f998d2,I2,"Renewable energy: Renewable energy installations, including solar PV, solar thermal, battery storage, air source heat pumps, and ground source heat pumps, together with installation certificates, ownership details, maintenance agreements, warranties and any lease or finance agreements.",MENU,,0,UNVERIFIED
+92c9f998d2,I2,"Renewable energy: Renewable energy installations, including solar PV, solar thermal, battery storage, air source heat pumps, and ground source heat pumps, together with installation certificates, ownership details, maintenance agreements, warranties and any lease or finance agreements.",MENU,,0,DONE
 9d78f7dcdb,I2,"Others: Any other significant repair, improvement, or structural work where guarantees, warranties or certification are available.",EXACT,{ISSUE_GUARANTEES}::{I2_OTHERS},100,DONE
 7f42c3d0a6,I3,Freehold Property: The property is understood to be held on a freehold basis.,EXACT,{ISSUE_OTHER_MATTERS}::{I3_FREEHOLD},100,DONE
 0b22e8ca5c,I3,"Your legal adviser should confirm the tenure, that vacant possession will be available on completion, and whether the title is subject to any restrictive covenants, easements, rights of way, or other matters that could affect the use, enjoyment, marketability, or value of the property.",EXACT,{ISSUE_OTHER_MATTERS}::{I3_FREEHOLD},100,DONE
@@ -1710,10 +1710,10 @@ cfc364a421,I3,"Your legal adviser should also confirm whether there are any esta
 642fb7c1ed,I3,"Where the property forms part of a managed estate or private development, enquiries should be made regarding the management arrangements, service or estate charges, planned maintenance works, and any outstanding financial liabilities or disputes.",EXACT,{ISSUE_OTHER_MATTERS}::{I3_FREEHOLD},100,DONE
 851a08034b,I3,"Leasehold Property: Your legal adviser should also confirm the amount of any ground rent, service charges, reserve fund contributions, and whether these are reasonable.",EXACT,{ISSUE_OTHER_MATTERS}::{I3_LEASEHOLD},100,DONE
 f0e77d4553,I3,"They should investigate the lease for any onerous covenants, restrictions, or unusual obligations that could affect the property's value, marketability, or future sale.",EXACT,{ISSUE_OTHER_MATTERS}::{I3_LEASEHOLD},100,DONE
-f62a0b5dd0,I3,"Enquiries should be made of the landlord or managing agent to establish whether there are any outstanding service charges, planned major works, disputes, or significant future expenditure.",MENU,,0,UNVERIFIED
+f62a0b5dd0,I3,"Enquiries should be made of the landlord or managing agent to establish whether there are any outstanding service charges, planned major works, disputes, or significant future expenditure.",MENU,,0,DONE
 33a0fa06c5,I3,Confirmation should also be obtained that appropriate buildings insurance and management arrangements are in place.,EXACT,{ISSUE_OTHER_MATTERS}::{I3_LEASEHOLD},100,DONE
-3e0964c8b2,I3,"Share of Freehold Property: Where the property is held with a share of the freehold, your legal adviser should confirm the ownership structure, the remaining lease term, rights and obligations under the lease, responsibility for repairs and maintenance, service charges, reserve fund contributions, management arrangements, any restrictive covenants, and whether there are any planned major works or ongoing disputes affecting the building.",MENU,,0,UNVERIFIED
-b0bf1fe9b9,I3,"Flying Freehold: Where the property includes or is affected by a flying freehold, your legal adviser should confirm the extent of the flying freehold and ensure that adequate rights of support, shelter, protection, access for inspection, maintenance and repair are contained within the title.",MENU,,0,UNVERIFIED
+3e0964c8b2,I3,"Share of Freehold Property: Where the property is held with a share of the freehold, your legal adviser should confirm the ownership structure, the remaining lease term, rights and obligations under the lease, responsibility for repairs and maintenance, service charges, reserve fund contributions, management arrangements, any restrictive covenants, and whether there are any planned major works or ongoing disputes affecting the building.",MENU,,0,DONE
+b0bf1fe9b9,I3,"Flying Freehold: Where the property includes or is affected by a flying freehold, your legal adviser should confirm the extent of the flying freehold and ensure that adequate rights of support, shelter, protection, access for inspection, maintenance and repair are contained within the title.",MENU,,0,DONE
 2d83ab488b,I3,"They should also confirm that there are no restrictions which could adversely affect the property's marketability or mortgageability, and that suitable indemnity insurance or other legal protection is available where required.",EXACT,{ISSUE_OTHER_MATTERS}::{I3_FLYING_FREEHOLD},100,DONE
 cc2ad63616,I3,Private Road: The property is accessed via a private road or shared access.,EXACT,{ISSUE_OTHER_MATTERS}::{I3_PRIVATE_ROAD},100,DONE
 c4c80abed4,I3,"Your legal adviser should confirm ownership, rights of access, maintenance responsibilities, and any financial obligations associated with its upkeep.",EXACT,{ISSUE_OTHER_MATTERS}::{I3_PRIVATE_ROAD},100,DONE
@@ -1753,12 +1753,12 @@ e028281c9b,J2,"Influencing trees: There are small, medium or large trees within 
 003846ae76,J2,"Where no evidence of damage was observed, no further action is required.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE
 9a30c52b3e,J2,"However, where damage is evident, further investigation should be undertaken by a qualified tree specialist.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE
 bf09032e1e,J2,Routine tree management should be carried out as necessary.,EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE
-8421398ff9,J2,"Retaining Walls: Evidence of movement, bulging, cracking, deterioration was observed.",MENU,,0,UNVERIFIED
+8421398ff9,J2,"Retaining Walls: Evidence of movement, bulging, cracking, deterioration was observed.",MENU,,0,DONE
 9f473a8c8a,J2,Further investigation should be undertaken where structural stability appears affected and appropriate repair or rebuild organised.,EXACT,{RISK_TO_GROUNDS}::{GROUNDS_RETAINING_WALLS},100,DONE
 6278ba8965,J2,"Sloping Ground: The property may be situated on gently, moderately, steeply sloping ground.",TOKENISED,{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND},77,DONE
 d8c6a36242,J2,"Sloping sites are more susceptible to drainage problems, erosion, ground movement, and retaining wall issues if not properly maintained.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND},100,DONE
 f26bde1fdb,J2,"Regular monitoring and routine maintenance of drainage systems, external ground levels, and retaining structures (where present) are recommended to help minimise future risks.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND},100,DONE
-2786cc81d6,J3,"Trip Hazards: Potential trip hazards were identified, including uneven paving, damaged steps, raised thresholds, uneven floor surfaces, loose floor coverings, damaged decking, other.",MENU,,0,UNVERIFIED
+2786cc81d6,J3,"Trip Hazards: Potential trip hazards were identified, including uneven paving, damaged steps, raised thresholds, uneven floor surfaces, loose floor coverings, damaged decking, other.",MENU,,0,DONE
 5dd592b423,J3,Repairs should be undertaken to reduce the risk of injury.,EXACT,{RISK_TO_PEOPLE}::{PEOPLE_TRIP_HAZARDS},100,DONE
 329da6b251,J3,Damaged Stairs: The staircase requires some repairs based upon a visual inspection.,EXACT,{RISK_TO_PEOPLE}::{PEOPLE_DAMAGED_STAIRS},100,DONE
 bc885d7856,J3,"Where loose handrails, damaged balustrades or uneven treads are present, these should be repaired promptly.",EXACT,{RISK_TO_PEOPLE}::{PEOPLE_DAMAGED_STAIRS},100,DONE
@@ -1772,9 +1772,9 @@ a7947d7b63,J3,"As a precaution, we recommend that an asbestos identification sur
 676b6c1a53,J3,"In addition to any asbestos-containing materials specifically referred to elsewhere in this report, other concealed or inaccessible asbestos materials may also be present.",EXACT,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},100,DONE
 8ec887184e,J3,The inspection undertaken for this survey is not intended to identify or confirm the presence of asbestos.,EXACT,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},100,DONE
 cd60cf98c4,J3,"According to the Health and Safety Executive (HSE), asbestos-containing materials do not normally present a significant health risk if they are in good condition and remain undisturbed.",EXACT,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},100,DONE
-ee1faf1c43,J3,"However, if such materials are damaged, drilled, cut, or otherwise disturbed, asbestos fibres may be released, posing a health hazard and requiring specialist management or removal.",MENU,,0,UNVERIFIED
+ee1faf1c43,J3,"However, if such materials are damaged, drilled, cut, or otherwise disturbed, asbestos fibres may be released, posing a health hazard and requiring specialist management or removal.",MENU,,0,DONE
 b3cdc1b162,J3,Any work involving suspected asbestos-containing materials must comply with the **Control of Asbestos Regulations 2012**.,QUERY,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},98,OPEN
-b6c119037e,J3,"These regulations impose strict requirements on the assessment, handling, removal, and disposal of asbestos, which can significantly increase the cost of repair, maintenance, or alteration works.",MENU,,0,UNVERIFIED
+b6c119037e,J3,"These regulations impose strict requirements on the assessment, handling, removal, and disposal of asbestos, which can significantly increase the cost of repair, maintenance, or alteration works.",MENU,,0,DONE
 3bb9dbe321,J3,"If asbestos is suspected or confirmed, your legal adviser should make appropriate enquiries regarding any previous asbestos surveys, removal works, or management records relating to the property.",EXACT,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},100,DONE
 06ce4e9969,J3,Further advice should be obtained where refurbishment is proposed.,EXACT,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},100,DONE
 c3d9a7a301,J3,Mould Growth: Localised mould growth associated with condensation was observed.,EXACT,{RISK_TO_PEOPLE}::{PEOPLE_MOULD_GROWTH},100,DONE
@@ -1787,7 +1787,7 @@ c6a8049454,J3,"General Advice: The inspection identified matters requiring repai
 27fc8a5f3e,J4,Airport: The property is located close to an airport and/or flight path.,EXACT,{RISK_TO_OTHER}::{J4_AIRPORT},100,DONE
 547aa675a4,J4,"Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",EXACT,{RISK_TO_OTHER}::{J4_AIRPORT},100,DONE
 a8c6106835,J4,Train Station: The property is located close to a railway station.,EXACT,{RISK_TO_OTHER}::{J4_TRAIN_STATION},100,DONE
-0e28856543,J4,"Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",MENU,,0,UNVERIFIED
+0e28856543,J4,"Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",MENU,,0,DONE
 398eab5bc0,J4,Railway Line: The property is located close to a railway line.,EXACT,{RISK_TO_OTHER}::{J4_RAILWAY_LINE},100,DONE
 2db06b9c9a,J4,"Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property.",EXACT,{RISK_TO_OTHER}::{J4_RAILWAY_LINE},100,DONE
 f3faa02e51,J4,Motorway: The property is located close to a motorway.,EXACT,{RISK_TO_OTHER}::{J4_MOTORWAY},100,DONE
