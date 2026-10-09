@@ -707,7 +707,7 @@ class InspectionPhraseEngine {
       case 'activity_issues_regulation':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_issues_glazed_sections':
-        return _issuesGuarantees(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_issues_other_matters':
         return _issuesOtherMatters(answers);
       case 'activity_risks_risk_to_building_':
@@ -2419,54 +2419,6 @@ class InspectionPhraseEngine {
         phrases.addAll(_split(_normalize(template)));
       }
     }
-    return phrases;
-  }
-
-  List<String> _issuesGuarantees(Map<String, String> answers) {
-    // Section I2 (Guarantees) - approved bank imported in Phase 4.
-    final phrases = <String>[];
-
-    final glazedSections = _labelsFor(
-      [
-        'cb_chimney_stack',
-        'cb_rainwater_goods',
-        'cb_conservatory',
-        'cb_porch',
-        'cb_other_471'
-      ],
-      answers,
-      {
-        'cb_chimney_stack': 'windows',
-        'cb_rainwater_goods': 'doors',
-        'cb_conservatory': 'conservatory',
-        'cb_porch': 'porch',
-        'cb_other_471': 'other',
-      },
-    );
-    _addOther(answers, 'cb_other_471', 'et_other_433', glazedSections);
-    if (glazedSections.isNotEmpty) {
-      var template = _sub('{ISSUE_GUARANTEES}', '{GUARANTEES_GLAZED_SECTION}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_splitResolved(template.replaceAll(
-          '{ISSUE_GLAZED_SECTION}',
-          _toWords(glazedSections).toLowerCase(),
-        )));
-      }
-    }
-
-    if (_isChecked(answers['cb_private_road'])) {
-      final template = _sub('{ISSUE_GUARANTEES}', '{GUARANTEES_DPC_TREATMENT}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-    if (_isChecked(answers['cb_party_walls'])) {
-      final template = _sub('{ISSUE_GUARANTEES}', '{GUARANTEES_REMOVED_WALL}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-    if (_isChecked(answers['cb_tenanted'])) {
-      final template = _sub('{ISSUE_GUARANTEES}', '{GUARANTEES_BUILDING_WORK}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
     return phrases;
   }
 

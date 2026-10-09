@@ -10741,6 +10741,106 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_listed_building',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'i2_intro',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_INTRO}',
+    [
+    ],
+    whenField: 'cb_i2_intro',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_windows',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_WINDOWS_DOORS}',
+    [
+    ],
+    whenField: 'cb_i2_windows',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_boiler',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_BOILER}',
+    [
+    ],
+    whenField: 'cb_i2_boiler',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_structural',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_STRUCTURAL_ALTERATIONS}',
+    [
+    ],
+    whenField: 'cb_i2_structural',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_dpc',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_DPC_TREATMENT}',
+    [
+    ],
+    whenField: 'cb_i2_dpc',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_timber',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_TIMBER_TREATMENT}',
+    [
+    ],
+    whenField: 'cb_i2_timber',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_cavity',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_CAVITY_INSULATION}',
+    [
+    ],
+    whenField: 'cb_i2_cavity',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_spray',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_SPRAY_FOAM}',
+    [
+    ],
+    whenField: 'cb_i2_spray',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_renewable',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_RENEWABLE_ENERGY}',
+    [
+    ],
+    whenField: 'cb_i2_renewable',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_others',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_OTHERS}',
+    [
+    ],
+    whenField: 'cb_i2_others',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

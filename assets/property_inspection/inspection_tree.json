@@ -12603,65 +12603,53 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_glazed_sections",
-              "label": "Glazed Sections",
-              "type": "label"
-            },
-            {
-              "id": "cb_chimney_stack",
-              "label": "windows",
+              "id": "cb_i2_intro",
+              "label": "Standard introduction",
               "type": "checkbox"
             },
             {
-              "id": "cb_rainwater_goods",
-              "label": "doors",
+              "id": "cb_i2_windows",
+              "label": "Window / doors",
               "type": "checkbox"
             },
             {
-              "id": "cb_conservatory",
-              "label": "conservatory",
+              "id": "cb_i2_boiler",
+              "label": "Boiler",
               "type": "checkbox"
             },
             {
-              "id": "cb_porch",
-              "label": "porch",
+              "id": "cb_i2_structural",
+              "label": "Structural alterations",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_471",
-              "label": "Other",
+              "id": "cb_i2_dpc",
+              "label": "DPC treatment",
               "type": "checkbox"
             },
             {
-              "id": "et_other_433",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_471",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_private_road",
-              "label": "DPC Treatment",
+              "id": "cb_i2_timber",
+              "label": "Timber treatment",
               "type": "checkbox"
             },
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Satisfactory",
-                "Poor"
-              ]
-            },
-            {
-              "id": "cb_party_walls",
-              "label": "Removed Wall",
+              "id": "cb_i2_cavity",
+              "label": "Cavity insulation",
               "type": "checkbox"
             },
             {
-              "id": "cb_tenanted",
-              "label": "Building Work",
+              "id": "cb_i2_spray",
+              "label": "Spray foam",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i2_renewable",
+              "label": "Renewable energy",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i2_others",
+              "label": "Others",
               "type": "checkbox"
             }
           ]

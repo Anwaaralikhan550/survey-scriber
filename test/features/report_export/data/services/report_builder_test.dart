@@ -3310,53 +3310,6 @@ void main() {
       expect(j4Text, isNot(contains('security system')));
     });
 
-    test('injects legacy Section F guarantee phrase into I2', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'I',
-            title: 'I Issues',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_issues_glazed_sections',
-                title: 'I2 Guarantees',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_chimney_stack',
-                    label: 'windows',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_issues_glazed_sections': {
-              'cb_chimney_stack': 'true',
-            },
-            'activity_inside_property_other_celler_damp': {
-              'cb_serious_dump': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final screen = doc.sections.first.screens.first;
-      expect(
-        screen.phrases.join(' ').toLowerCase(),
-        contains('dampness problem repair is covered by any guarantees'),
-      );
-    });
-
     test(
         'injects RICS L2 E5/E6 PVC-replacement guarantee cross-inject into I2',
         () {
@@ -3406,16 +3359,11 @@ void main() {
 
       final all =
           doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      // Windows and doors both map to the single PDF "Window/doors:" item.
       expect(
         all,
         contains(
-          'confirm whether the pvc glazed sections to the windows were installed by a contractor registered with fensa',
-        ),
-      );
-      expect(
-        all,
-        contains(
-          'confirm whether the pvc glazed sections to the doors were installed by a contractor registered with fensa',
+          'window/doors: replacement windows and external doors (including fensa, certass or building regulation certification)',
         ),
       );
     });
@@ -3467,7 +3415,7 @@ void main() {
       expect(
         all,
         contains(
-          'obtain the spray foam insulation installation details, guarantees '
+          'spray foam: spray foam insulation installation details, guarantees '
           'and warranties, together with confirmation of any lender requirements',
         ),
       );
@@ -3564,8 +3512,8 @@ void main() {
       expect(
         all,
         contains(
-          'renewable energy installations, including solar pv, solar thermal, '
-          'battery storage, air source heat pumps and ground source heat pumps',
+          'renewable energy: renewable energy installations, including solar pv, solar thermal, '
+          'battery storage, air source heat pumps, and ground source heat pumps',
         ),
       );
     });

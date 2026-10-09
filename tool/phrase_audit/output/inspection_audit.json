@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1950,
-   "approvedLegacyBank": 209,
-   "approvedCurrentBankOnly": 1714,
+   "distinctEmitted": 1952,
+   "approvedLegacyBank": 208,
+   "approvedCurrentBankOnly": 1717,
    "unapproved": 0
   }
  },
@@ -2937,18 +2937,18 @@
    "screenId": "activity_issues_glazed_sections",
    "title": "I2 Guarantees",
    "dataFieldCount": 10,
-   "permutationCount": 14,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 7,
+    "total": 10,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 10,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "You should ask your legal adviser to check whether the glazed sections to the windows have been installed by a contractor registered with FENSA or CERTASS and confirm whether they are covered by a guarantee or warranty, and advise on the implications.",
-    "You should ask your legal adviser to check whether the glazed sections to the doors have been installed by a contractor registered with FENSA or CERTASS and confirm whether they are covered by a guarantee or warranty, and advise on the implications.",
-    "You should ask your legal adviser to check whether the glazed sections to the conservatory have been installed by a contractor registered with FENSA or CERTASS and confirm whether they are covered by a guarantee or warranty, and advise on the implications."
+    "Where applicable, your legal adviser should obtain copies of available guarantees, warranties, certificates, and supporting documentation relating to:",
+    "Window/doors: Replacement windows and external doors (including FENSA, CERTASS or Building Regulation certification).",
+    "Boiler: Boiler installations, servicing, commissioning documentation, and heating system warranties."
    ]
   },
   {

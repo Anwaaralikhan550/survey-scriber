@@ -1035,68 +1035,31 @@ class ReportBuilder {
 
   List<String> _legacyDerivedSectionFIssueGuarantees(V2RawReportData rawData) {
     final phrases = <String>[];
-    final cellar = _answersForScreen(
-        rawData, 'activity_inside_property_other_celler_damp');
-    final basement = _answersForScreen(
-        rawData, 'activity_inside_property_other_celler_damp__serious_damp');
 
-    if (_isCheckedValue(cellar['cb_serious_dump'])) {
-      phrases.add(
-          'You should check with your legal adviser to see if the dampness problem repair is covered by any guarantees or warranties.');
-    }
-    if (_isCheckedValue(basement['cb_serious_dump'])) {
-      phrases.add(
-          'You should check with your legal adviser to see if the dampness problem is covered by any guarantees or warranties.');
-    }
-
-    // RICS L2 cross-injections from Section E5 Windows and E6 Outside
-    // Doors (Phase 2B): each section's spec text says "Add text to:
-    // Section J2 Guarantees" for a PVC-glazed-replacement scenario - "J2"
-    // is almost certainly a typo for "I2" (Guarantees is I2 everywhere
-    // else in the library; the app has no J2 content at all). Deferred at
-    // the time to whoever did I2's own rewrite; wired here (Phase 2F) now
-    // that I2 is the active element.
+    // Revised I2 Guarantees checklist (PDF items). The E5/E6 replacement-PVC
+    // scenario, the F1 spray-foam advisory and the renewable-energy
+    // installations each add the matching PDF item (bank-first, PDF wording
+    // as the fallback). Old non-PDF lines (cellar/basement dampness, FENSA
+    // sentence) were removed.
     final windowsAbout = _answersForScreen(
         rawData, 'activity_outside_property_windows_aboutwindow');
-    if (_isCheckedValue(windowsAbout['e5t_replacement']) &&
-        _isCheckedValue(windowsAbout['e5t_pvcu'])) {
-      phrases.add(
-          'You should ask your legal adviser to confirm whether the PVC glazed sections to the windows were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
-    }
-
-    // The "PVC" outside-doors screen is its own dedicated material
-    // variant (separate from the timber/steel/aluminium/other door
-    // screens), so its own "Replacement" checkbox alone is the PVC +
-    // replacement signal - no separate material checkbox to combine it
-    // with, unlike the combined windows screen above.
-    final doorsAboutPvc = _answersForScreen(
+    final doorsAbout = _answersForScreen(
         rawData, 'activity_outside_property_out_side_doors_about_doors');
-    if (_isCheckedValue(doorsAboutPvc['e6t_replacement']) &&
-        _isCheckedValue(doorsAboutPvc['e6m_pvcu'])) {
-      phrases.add(
-          'You should ask your legal adviser to confirm whether the PVC glazed sections to the doors were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
+    if ((_isCheckedValue(windowsAbout['e5t_replacement']) &&
+            _isCheckedValue(windowsAbout['e5t_pvcu'])) ||
+        (_isCheckedValue(doorsAbout['e6t_replacement']) &&
+            _isCheckedValue(doorsAbout['e6m_pvcu']))) {
+      phrases.add(_approvedBankPhrase('{ISSUE_GUARANTEES}::{I2_WINDOWS_DOORS}') ??
+          'Window/doors: Replacement windows and external doors (including FENSA, CERTASS or Building Regulation certification).');
     }
 
-    // Revised-spec cross-injection (Phase 7): where the F1 Roof Structure
-    // spray-foam advisory fires (cb_spray_foam on the About Roof Structure
-    // screen), the revised I2 Guarantees checklist adds a spray-foam guarantee
-    // enquiry. Text mirrors the approved bank key
-    // {ISSUE_GUARANTEES}::{GUARANTEES_SPRAY_FOAM}.
     final aboutRoof = _answersForScreen(
         rawData, 'activity_inside_property_about_roof_structure');
     if (_isCheckedValue(aboutRoof['cb_spray_foam'])) {
-      phrases.add(
-          'You should ask your legal adviser to obtain the spray foam '
-          'insulation installation details, guarantees and warranties, together '
-          'with confirmation of any lender requirements.');
+      phrases.add(_approvedBankPhrase('{ISSUE_GUARANTEES}::{I2_SPRAY_FOAM}') ??
+          'Spray foam: Spray foam insulation installation details, guarantees and warranties, together with confirmation of any lender requirements.');
     }
 
-    // Revised-spec cross-injection (Phase 7): where a renewable-energy
-    // installation is present - solar PV (activity_services_solar_power),
-    // solar thermal (activity_services_water_heating_solar_power) or the
-    // Section D other-services solar flags - the revised I2 Guarantees
-    // checklist adds a renewable-energy guarantee enquiry. Text mirrors the
-    // approved bank key {ISSUE_GUARANTEES}::{GUARANTEES_RENEWABLE_ENERGY}.
     final solarPv = _answersForScreen(rawData, 'activity_services_solar_power');
     final solarThermal = _answersForScreen(
         rawData, 'activity_services_water_heating_solar_power');
@@ -1110,12 +1073,8 @@ class ReportBuilder {
         _isCheckedValue(otherServices['ch1']) ||
         _isCheckedValue(otherServices['ch2']);
     if (hasRenewable) {
-      phrases.add(
-          'You should ask your legal adviser to obtain the installation '
-          'certificates, ownership details, maintenance agreements, warranties '
-          'and any lease or finance agreements for renewable energy '
-          'installations, including solar PV, solar thermal, battery storage, '
-          'air source heat pumps and ground source heat pumps.');
+      phrases.add(_approvedBankPhrase('{ISSUE_GUARANTEES}::{I2_RENEWABLE_ENERGY}') ??
+          'Renewable energy: Renewable energy installations, including solar PV, solar thermal, battery storage, air source heat pumps, and ground source heat pumps, together with installation certificates, ownership details, maintenance agreements, warranties and any lease or finance agreements.');
     }
 
     return _cleanupPhrases(phrases);
