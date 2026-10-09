@@ -574,3 +574,5 @@ ec10c53080,HEADING,directive: flat-property paragraph (cross-cutting item F1 in 
 2cf1141064,TESTED,inspection_verbatim_e9_test
 9b30dd14a1,HEADING,directive: flat-property paragraph (cross-cutting)
 e22c980456,HEADING,PDF layout heading 'Roof Underlay' runs into the paragraph label; paragraph printed as 'No Underlay: ...' (rule f1_ul_no)
+a2083eafe5,TESTED,inspection_verbatim_f_test: fixed prose wrongly detected as option list
+c054c7a162,TESTED,inspection_verbatim_f_test: fixed prose wrongly detected as option list

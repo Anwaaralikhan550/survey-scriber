@@ -5999,6 +5999,609 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: '1',
     whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
   ),
+  VerbatimRule(
+    'f2_desc',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{CEILING_MATERIALS}',
+        options: {
+          'f2m_plaster': 'plaster',
+          'f2m_plasterboard': 'plasterboard',
+          'f2m_lath_and_plaster': 'lath and plaster',
+        },
+        otherCheckbox: 'cb_other_406',
+        otherText: 'et_other_339',
+        pdfOptions: ['plaster', 'plasterboard', 'lath and plaster'],
+      ),
+      VerbatimToken(
+        '{CEILING_FINISHES}',
+        options: {
+          'f2f_painted': 'painted',
+          'f2f_textured_coating': 'textured coating',
+          'f2f_papered': 'papered',
+          'f2f_timber_clad': 'timber-clad',
+          'f2f_tiled': 'tiled',
+          'f2f_wallpapered': 'wallpapered',
+          'f2f_decorative_panelled': 'decorative panelled',
+        },
+        otherCheckbox: 'cb_other_388',
+        otherText: 'et_other_340',
+        pdfOptions: ['painted', 'textured coating', 'papered', 'timber-clad', 'tiled', 'wallpapered', 'decorative panelled'],
+      ),
+    ],
+    pdf:
+        'Description: The ceilings are formed in plaster, plasterboard, lath and plaster, other ceilings.',
+    pdfMore: [
+      'The ceiling finishes comprise painted, textured coating, papered, timber-clad, tiled, wallpapered, decorative panelled, other finishes.',
+    ],
+  ),
+  VerbatimRule(
+    'f2_cond',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_CONDITION}',
+    [
+      VerbatimToken(
+        '{CEILING_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the ceilings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'f2_lath',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_LATH_PLASTER}',
+    [
+    ],
+    whenField: 'f2m_lath_and_plaster',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_textured',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_TEXTURED_COATING}',
+    [
+    ],
+    whenField: 'f2f_textured_coating',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_general',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_crack_minor',
+    'activity_inside_property_ceilings_cracks',
+    '{F_CEILINGS}',
+    '{F2_MINOR_CRACKING}',
+    [
+    ],
+    whenField: 'actv_cracking',
+    whenValue: 'Minor cracking',
+  ),
+  VerbatimRule(
+    'f2_crack_major',
+    'activity_inside_property_ceilings_cracks',
+    '{F_CEILINGS}',
+    '{F2_SIGNIFICANT_CRACKING}',
+    [
+    ],
+    whenField: 'actv_cracking',
+    whenValue: 'Significant cracking',
+  ),
+  VerbatimRule(
+    'f2_un_minor',
+    'activity_inside_property_ceilings_unevenness',
+    '{F_CEILINGS}',
+    '{F2_MINOR_UNEVENNESS}',
+    [
+      VerbatimToken(
+        '{CEILING_UNEVENNESS}',
+        options: {
+          'f2u_bowing': 'bowing',
+          'f2u_undulations': 'undulations',
+          'f2u_unevenness': 'unevenness',
+        },
+        otherCheckbox: 'f2u_other',
+        otherText: 'f2u_other_text',
+        pdfOptions: ['bowing', 'undulations', 'unevenness'],
+      ),
+    ],
+    pdf:
+        'Minor unevenness: Minor bowing, undulations, unevenness, other were noted on the ceiling surfaces.',
+    whenField: 'actv_unevenness',
+    whenValue: 'Minor unevenness',
+  ),
+  VerbatimRule(
+    'f2_un_major',
+    'activity_inside_property_ceilings_unevenness',
+    '{F_CEILINGS}',
+    '{F2_SIGNIFICANT_UNEVENNESS}',
+    [
+      VerbatimToken(
+        '{CEILING_UNEVENNESS}',
+        options: {
+          'f2u_bowing': 'bowing',
+          'f2u_undulations': 'undulations',
+          'f2u_unevenness': 'unevenness',
+        },
+        otherCheckbox: 'f2u_other',
+        otherText: 'f2u_other_text',
+        pdfOptions: ['bowing', 'undulations', 'unevenness'],
+      ),
+    ],
+    pdf:
+        'Significant unevenness: Significant bowing, undulations, unevenness, other were noted on the ceiling surfaces.',
+    whenField: 'actv_unevenness',
+    whenValue: 'Significant unevenness',
+  ),
+  VerbatimRule(
+    'f2_ws_wet',
+    'activity_inside_property_ceilings_water_staining',
+    '{F_CEILINGS}',
+    '{F2_WET_STAINING}',
+    [
+      VerbatimToken(
+        '{STAINING_LOCATIONS}',
+        options: {
+          'f2wl_lounge': 'lounge',
+          'f2wl_dining_room': 'dining room',
+          'f2wl_bedroom': 'bedroom',
+          'f2wl_kitchen': 'kitchen',
+          'f2wl_bathroom': 'bathroom',
+        },
+        otherCheckbox: 'f2wl_other',
+        otherText: 'f2wl_other_text',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen', 'bathroom'],
+      ),
+      VerbatimToken(
+        '{STAINING_SOURCES}',
+        options: {
+          'f2ws_loft_space': 'loft space',
+          'f2ws_roof': 'roof',
+          'f2ws_bathroom': 'bathroom',
+          'f2ws_floor_above': 'floor above',
+          'f2ws_another_concealed_source': 'another concealed source',
+        },
+        pdfOptions: ['loft space', 'roof', 'bathroom', 'floor above', 'another concealed source'],
+      ),
+    ],
+    pdf:
+        'Wet water staining: Localised water staining was noted to the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other.',
+    pdfMore: [
+      'The moisture is suspected to originate from the loft space, roof, bathroom, floor above, another concealed source.',
+    ],
+    whenField: 'actv_staining',
+    whenValue: 'Wet water staining',
+  ),
+  VerbatimRule(
+    'f2_ws_dry',
+    'activity_inside_property_ceilings_water_staining',
+    '{F_CEILINGS}',
+    '{F2_DRY_STAINING}',
+    [
+      VerbatimToken(
+        '{STAINING_LOCATIONS}',
+        options: {
+          'f2wl_lounge': 'lounge',
+          'f2wl_dining_room': 'dining room',
+          'f2wl_bedroom': 'bedroom',
+          'f2wl_kitchen': 'kitchen',
+          'f2wl_bathroom': 'bathroom',
+        },
+        otherCheckbox: 'f2wl_other',
+        otherText: 'f2wl_other_text',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen', 'bathroom'],
+      ),
+    ],
+    pdf:
+        'Dry water staining: Localised water staining was noted on the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other.',
+    whenField: 'actv_staining',
+    whenValue: 'Dry water staining',
+  ),
+  VerbatimRule(
+    'f2_poly',
+    'activity_inside_property_ceilings_polystyrene',
+    '{F_CEILINGS}',
+    '{F2_POLYSTYRENE}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_heavy',
+    'activity_inside_property_ceilings_heavy_paper_lining',
+    '{F_CEILINGS}',
+    '{F2_HEAVY_COVERING}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_ornamental',
+    'activity_inside_property_ceilings_repairs_ornamental_plaster',
+    '{F_CEILINGS}',
+    '{F2_ORNAMENTAL_PLASTER}',
+    [
+      VerbatimToken(
+        '{ORNAMENTAL_DEFECTS}',
+        options: {
+          'f2o_loose': 'loose',
+          'f2o_cracked': 'cracked',
+          'f2o_damaged': 'damaged',
+          'f2o_unstable': 'unstable',
+          'f2o_partially_missing': 'partially missing',
+        },
+        otherCheckbox: 'f2o_other',
+        otherText: 'f2o_other_text',
+        pdfOptions: ['loose', 'cracked', 'damaged', 'unstable', 'partially missing'],
+      ),
+    ],
+    pdf:
+        'Ornamental plaster repair: The ceiling incorporates ornamental plaster features, some of which were found to be loose, cracked, damaged, unstable, partially missing, other.',
+  ),
+  VerbatimRule(
+    'f2_intro',
+    'activity_inside_property_ceilings_main_screen',
+    '{F_CEILINGS}',
+    '{F2_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f3_desc',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_CONSTRUCTION}',
+        options: {
+          'f3m_solid_masonry': 'solid masonry',
+          'f3m_timber_stud_partitions': 'timber stud partitions',
+          'f3m_plasterboard_partitions': 'plasterboard partitions',
+          'f3m_lath_and_plaster': 'lath and plaster',
+        },
+        otherCheckbox: 'cb_other_590',
+        otherText: 'et_other_428',
+        pdfOptions: ['solid masonry', 'timber stud partitions', 'plasterboard partitions', 'lath and plaster'],
+      ),
+      VerbatimToken(
+        '{WALL_FINISH}',
+        options: {
+          'f3f_paint': 'paint',
+          'f3f_plaster': 'plaster',
+          'f3f_wallpaper': 'wallpaper',
+          'f3f_tiling': 'tiling',
+          'f3f_timber_panelling': 'timber panelling',
+          'f3f_textured_coating': 'textured coating',
+          'f3f_decorative_panelling': 'decorative panelling',
+        },
+        otherCheckbox: 'cb_other_606',
+        otherText: 'et_other_427',
+        pdfOptions: ['paint', 'plaster', 'wallpaper', 'tiling', 'timber panelling', 'textured coating', 'decorative panelling'],
+      ),
+    ],
+    pdf:
+        'Description: The walls are formed in solid masonry, timber stud partitions, plasterboard partitions, lath and plaster, other construction.',
+    pdfMore: [
+      'The wall finish comprises paint, plaster, wallpaper, tiling, timber panelling, textured coating, decorative panelling, other finishes.',
+    ],
+  ),
+  VerbatimRule(
+    'f3_cond',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls and partitions appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'f3_lath',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_LATH_PLASTER}',
+    [
+    ],
+    whenField: 'f3m_lath_and_plaster',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f3_textured',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_TEXTURED_COATING}',
+    [
+    ],
+    whenField: 'f3f_textured_coating',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f3_general',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f3_crack_minor',
+    'activity_in_side_property_wap_movement_cracks',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_MINOR_CRACKING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'Minor cracking',
+  ),
+  VerbatimRule(
+    'f3_crack_major',
+    'activity_in_side_property_wap_movement_cracks',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_SIGNIFICANT_CRACKING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'Significant cracking',
+  ),
+  VerbatimRule(
+    'f3_movement',
+    'activity_in_side_property_wap_movement_cracks',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_STRUCTURAL_MOVEMENT}',
+    [
+      VerbatimToken(
+        '{WALL_MOVEMENT}',
+        options: {
+          'f3mv_historic': 'historic',
+          'f3mv_localised': 'localised',
+          'f3mv_progressive': 'progressive',
+        },
+        pdfOptions: ['historic', 'localised', 'progressive'],
+      ),
+    ],
+    pdf:
+        'Structural Movement: Evidence of historic, localised, progressive movement was observed.',
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'Structural Movement',
+  ),
+  VerbatimRule(
+    'f3_hollow',
+    'activity_in_side_property_wap_hollow_plaster',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_HOLLOW_PLASTER}',
+    [
+    ],
+    whenField: 'cb_hollow_plaster',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f3_condensation',
+    'activity_in_side_property_wap_repair_condensation',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_CONDENSATION}',
+    [
+      VerbatimToken(
+        '{CONDENSATION_AREAS}',
+        options: {
+          'f3c_lounge': 'lounge',
+          'f3c_bedrooms': 'bedrooms',
+          'f3c_bathrooms': 'bathrooms',
+          'f3c_kitchens': 'kitchens',
+        },
+        otherCheckbox: 'f3c_other',
+        otherText: 'f3c_other_text',
+        pdfOptions: ['lounge', 'bedrooms', 'bathrooms', 'kitchens'],
+      ),
+    ],
+    pdf:
+        'Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other area(s).',
+  ),
+  VerbatimRule(
+    'f3_nodamp',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_NO_DAMP}',
+    [
+    ],
+    whenField: 'damp_status',
+    whenValue: 'No damp',
+  ),
+  VerbatimRule(
+    'f3_pen',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_PENETRATING_DAMP}',
+    [
+      VerbatimToken(
+        '{DAMP_LOCATION}',
+        text: 'et_location',
+      ),
+    ],
+    pdf:
+        'Penetrating damp noted: Elevated moisture readings were recorded to sections of the wall surfaces including the (type wall location).',
+    whenField: 'damp_status',
+    whenValue: 'Penetrating damp noted',
+  ),
+  VerbatimRule(
+    'f3_known',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_DAMP_SOURCE_KNOWN}',
+    [
+      VerbatimToken(
+        '{DAMP_CAUSES}',
+        options: {
+          'f3dc_defective_rainwater_goods': 'defective rainwater goods',
+          'f3dc_blocked_gullies': 'blocked gullies',
+          'f3dc_leaking_pipework': 'leaking pipework',
+          'f3dc_bridged_damp_proof_course': 'bridged damp-proof course',
+        },
+        otherCheckbox: 'f3dc_other',
+        otherText: 'f3dc_other_text',
+        pdfOptions: ['defective rainwater goods', 'blocked gullies', 'leaking pipework', 'bridged damp-proof course'],
+      ),
+    ],
+    pdf:
+        'Damp source known: Dampness was noted and is likely to result from defective rainwater goods, blocked gullies, leaking pipework, bridged damp-proof course, other.',
+    whenField: 'actv_status_91',
+    whenValue: 'Damp source known',
+  ),
+  VerbatimRule(
+    'f3_fix',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_DAMP_REPAIR}',
+    [
+      VerbatimToken(
+        '{DAMP_REPAIRS}',
+        options: {
+          'f3dr_clearing_rainwater_goods': 'clearing rainwater goods',
+          'f3dr_repairing_defective_rainwater_goods': 'repairing defective rainwater goods',
+          'f3dr_unblocking_gullies': 'unblocking gullies',
+          'f3dr_repairing_leaking_pipework': 'repairing leaking pipework',
+          'f3dr_removing_any_bridging_of_the_damp_proof_course': 'removing any bridging of the damp-proof course',
+        },
+        otherCheckbox: 'f3dr_other',
+        otherText: 'f3dr_other_text',
+        pdfOptions: ['clearing rainwater goods', 'repairing defective rainwater goods', 'unblocking gullies', 'repairing leaking pipework', 'removing any bridging of the damp-proof course'],
+      ),
+    ],
+    pdf:
+        'Repair Damp defect: The source of dampness should be addressed by repairing the identified defects, which may include clearing rainwater goods, repairing defective rainwater goods, unblocking gullies, repairing leaking pipework, removing any bridging of the damp-proof course, other as appropriate.',
+  ),
+  VerbatimRule(
+    'f3_unknown',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_DAMP_SOURCE_UNKNOWN}',
+    [
+    ],
+    whenField: 'actv_status_91',
+    whenValue: 'Unknown damp source',
+  ),
+  VerbatimRule(
+    'f3_rising',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_SUSPECTED_RISING_DAMP}',
+    [
+      VerbatimToken(
+        '{DAMP_LOCATION}',
+        text: 'et_location',
+      ),
+    ],
+    pdf:
+        'Suspected rising damp: Elevated moisture readings were recorded at the base of the wall(s), consistent with possible rising damp, including the (type wall location).',
+    whenField: 'damp_status',
+    whenValue: 'Suspected rising damp',
+  ),
+  VerbatimRule(
+    'f3_ia',
+    'activity_in_side_property_wap_removed_wall',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_INTERNAL_ALTERATIONS}',
+    [
+      VerbatimToken(
+        '{IA_STATE}',
+        options: {
+          'f3ia_removed': 'removed',
+          'f3ia_partially_removed': 'partially removed',
+          'f3ia_altered': 'altered',
+          'f3ia_new_opening_created': 'new opening created',
+          'f3ia_has_been_formed': 'has been formed',
+        },
+        pdfOptions: ['removed', 'partially removed', 'altered', 'new opening created', 'has been formed'],
+      ),
+    ],
+    pdf:
+        'Internal Alterations: Evidence was observed that an internal wall has been removed, partially removed, altered, new opening created, has been formed.',
+  ),
+  VerbatimRule(
+    'f3_ia_ok',
+    'activity_in_side_property_wap_removed_wall',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_ALTERATIONS_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'actv_ia_outcome',
+    whenValue: 'No defects noted',
+  ),
+  VerbatimRule(
+    'f3_ia_defects',
+    'activity_in_side_property_wap_removed_wall',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_ALTERATIONS_DEFECTS}',
+    [
+      VerbatimToken(
+        '{IA_LOCATION}',
+        text: 'et_ia_location',
+      ),
+      VerbatimToken(
+        '{IA_ISSUES}',
+        options: {
+          'f3iad_distortion': 'Distortion',
+          'f3iad_cracking': 'cracking',
+          'f3iad_inadequate_support': 'inadequate support',
+        },
+        otherCheckbox: 'f3iad_other',
+        otherText: 'f3iad_other_text',
+        pdfOptions: ['Distortion', 'cracking', 'inadequate support'],
+      ),
+    ],
+    pdf:
+        'Defects noted: An original internal wall has been removed to form an opening at (type in location).',
+    pdfMore: [
+      'Distortion, cracking, inadequate support, other issues were noted around the altered area.',
+    ],
+    whenField: 'actv_ia_outcome',
+    whenValue: 'Defects noted',
+  ),
+  VerbatimRule(
+    'f3_intro',
+    'activity_inside_property_walls_and_partitions_main_screen',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
   // <<verbatim-rules-end>>
 ];
 

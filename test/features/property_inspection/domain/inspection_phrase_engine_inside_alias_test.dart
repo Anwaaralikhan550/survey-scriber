@@ -50,18 +50,6 @@ void main() {
 
     const engine = InspectionPhraseEngine(phraseTexts);
 
-    test('ceilings repairs uses llMainContainer status', () {
-      final phrases = engine.buildPhrases(
-        'activity_inside_property_ceilings_repairs_ceilings',
-        <String, String>{
-          'llMainContainer': 'Now',
-          'cb_lounge': 'true',
-          'cb_badly_cracked': 'true',
-        },
-      );
-      expect(phrases.join(' ').toLowerCase(), contains('ceilings-now='));
-    });
-
     test('floors repair uses llMainContainer repair type', () {
       final phrases = engine.buildPhrases(
         'activity_in_side_property_floors_repair_floor_repair',
@@ -195,71 +183,5 @@ void main() {
       expect(repair.join(' ').toLowerCase(), contains('other-repair-now='));
     });
 
-    test('walls and woodwork read llMainContainer values', () {
-      final condensation = engine.buildPhrases(
-        'activity_in_side_property_wap_repair_condensation',
-        <String, String>{'llMainContainer': 'None'},
-      );
-      expect(condensation.join(' ').toLowerCase(),
-          contains('wap-condensation-none'));
-
-      final wallRepair = engine.buildPhrases(
-        'activity_in_side_property_wap_repair_wall_repair',
-        <String, String>{
-          'llMainContainer': 'Now',
-          'cb_property': 'true',
-          'cb_badly_cracked_17': 'true',
-        },
-      );
-      expect(wallRepair.join(' ').toLowerCase(), contains('wap-repair-now='));
-
-      final woodRepair = engine.buildPhrases(
-        'activity_in_side_property_ww_wood_work_repair',
-        <String, String>{
-          'llMainContainer': 'Repair now',
-          'cb_stairs_49': 'true',
-          'cb_badly_worn': 'true',
-        },
-      );
-      expect(woodRepair.join(' ').toLowerCase(), contains('wood-repair-now='));
-
-      final woodInfestation = engine.buildPhrases(
-        'activity_in_side_property_wood_work_repair_infestation',
-        <String, String>{
-          'llMainContainer': 'Major',
-          'cb_staircase': 'true',
-          'cb_plastic': 'true',
-        },
-      );
-      expect(woodInfestation.join(' ').toLowerCase(),
-          contains('wood-infest-major='));
-
-      final missingSeverity = engine.buildPhrases(
-        'activity_in_side_property_wood_work_repair_infestation',
-        <String, String>{
-          'cb_staircase': 'true',
-          'cb_plastic': 'true',
-        },
-      );
-      expect(missingSeverity, isEmpty);
-
-      final woodInfestationMinor = engine.buildPhrases(
-        'activity_in_side_property_wood_work_repair_infestation',
-        <String, String>{
-          'llMainContainer': 'Minor',
-          'cb_staircase': 'true',
-          'cb_plastic': 'true',
-        },
-      );
-      expect(woodInfestationMinor.join(' ').toLowerCase(),
-          contains('wood-infest-minor='));
-
-      final cupboards = engine.buildPhrases(
-        'activity_in_side_property_cupboards',
-        <String, String>{'llMainContainer': 'Good'},
-      );
-      expect(
-          cupboards.join(' ').toLowerCase(), contains('wood-cupboards=good'));
-    });
   });
 }

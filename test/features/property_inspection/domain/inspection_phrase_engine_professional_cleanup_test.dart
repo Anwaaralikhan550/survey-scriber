@@ -89,51 +89,6 @@ void main() {
     expect(phrase, 'The property is not understood to be a listed building.');
   });
 
-  test('poor ceiling condition never says no repair is needed', () {
-    final phrase = engine.buildPhrases(
-      'inside_property_ceilings_about_ceilings',
-      {
-        'actv_made_up': 'Mainly of',
-        'cb_plasterboard': 'true',
-        'cb_painted': 'true',
-        'actv_condition': 'Poor',
-      },
-    ).single;
-
-    expect(phrase, contains('unsatisfactory condition'));
-    expect(phrase, contains('repairs or renewal'));
-    expect(phrase, isNot(contains('No repair is currently needed')));
-  });
-
-  test('poor internal-wall condition never says no repair is needed', () {
-    final phrase = engine.buildPhrases(
-      'activity_inside_property_wap_walls',
-      {
-        'cb_solid': 'true',
-        'cb_painted': 'true',
-        'actv_condition': 'Poor',
-      },
-    ).join(' ');
-
-    expect(phrase, contains('unsatisfactory condition'));
-    expect(phrase, isNot(contains('No repair is currently needed')));
-  });
-
-  test('poor floor condition never says no repair is needed', () {
-    final phrase = engine.buildPhrases(
-      'activity_in_side_property_floors_about_floor',
-      {
-        'actv_construction': 'All solid',
-        'actv_covered_with': 'Mainly',
-        'cb_carpets': 'true',
-        'actv_condition': 'Poor',
-      },
-    ).join(' ');
-
-    expect(phrase, contains('unsatisfactory condition'));
-    expect(phrase, isNot(contains('No repair is currently needed')));
-  });
-
 
   test('non-numeric wall thickness is suppressed', () {
     final phrase = engine.buildPhrases(

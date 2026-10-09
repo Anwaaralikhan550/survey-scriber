@@ -48,7 +48,7 @@ slices.append({'screen': ABOUT, 'replace_all': True, 'keep': [], 'rules': [
        subs={COND_LIST: '{CEILING_CONDITION}'},
        tokens=[dd('{CEILING_CONDITION}', 'actv_condition', 'Condition', COND5, lower=True)]),
     pr('f2_lath', 'LATH_PLASTER', 'If lath and plaster is selected, add this', 'If textured coating is selected',
-       drop='If lath and plaster is selected, add this –', subs={'–lath and plaster–': '‘lath and plaster’'},
+       drop='If lath and plaster is selected, add this –',
        when=['f2m_lath_and_plaster', 'true']),
     pr('f2_textured', 'TEXTURED_COATING', 'If textured coating is selected, add this', 'Minor cracking:',
        drop='If textured coating is selected, add this –', when=['f2f_textured_coating', 'true']),

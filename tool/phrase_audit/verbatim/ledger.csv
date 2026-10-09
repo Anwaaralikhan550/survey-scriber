@@ -876,7 +876,7 @@ e7b2859ec4,F1,"Description: The roof structure is formed in traditional cut timb
 17483d6529,F1,"Condition: Where visible, the roof structure appears in good, reasonable, fair, poor, very poor condition, consistent with its age and construction.",MENU,,0,VERIFIED
 ebcdc800ff,F1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 340bc86497,F1,Routine maintenance appropriate to the roof structure material should be expected.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CONDITION},100,DONE
-e22c980456,F1,"Roof Underlay No Underlay: The absence of a roof underlay could result in water leakage, lower internal temperatures, higher heating costs, condensation, and mould growth.",MENU,,0,UNVERIFIED
+e22c980456,F1,"Roof Underlay No Underlay: The absence of a roof underlay could result in water leakage, lower internal temperatures, higher heating costs, condensation, and mould growth.",MENU,,0,DONE
 81a97c978c,F1,I recommend that you contact a qualified person to inspect the roof covering and confirm its watertightness.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_UNDERLAY},100,DONE
 c74bb81e77,F1,"Underlay present: The underside of the roof covering incorporates traditional bituminous felt, breathable membrane, timber boards, other, which should provide a secondary barrier to driving rain and snow, where visible.",MENU,,0,VERIFIED
 97c5d64f4c,F1,"Where visible, the underlay appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
@@ -990,112 +990,112 @@ b3f524b94e,F1,The pipe should be inspected by a suitably qualified plumber to es
 502ad9fbbc,F1,You should ask the management company whether any repairs to the roof structure have been carried out previously or are currently proposed.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{DEFAULT_TEXT_IF_FLAT},69,OPEN
 965d19b3ce,F1,"Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_PROPERTY_FLAT_SELECTED},100,DONE
 f56c8befe8,F1,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE
-9394cf62bc,F2,The ceilings have been inspected from within the rooms only.,TOKENISED,{F_CEILINGS}::{ABOUT_FINISHES},64,DONE
+9394cf62bc,F2,The ceilings have been inspected from within the rooms only.,EXACT,{F_CEILINGS}::{F2_INTRO},100,DONE
 fc83754e97,F2,No opening up or destructive investigation has been undertaken.,EXACT,{E_MAIN_WALLS}::{STANDARD_TEXT},100,DONE
-6632c80c6c,F2,"Description: The ceilings are formed in plaster, plasterboard, lath and plaster, other ceilings.",MENU,,0,UNVERIFIED
-203105ebf1,F2,"The ceiling finishes comprise painted, textured coating, papered, timber-clad, tiled, wallpapered, decorative panelled, other finishes.",MENU,,0,UNVERIFIED
-aba7f2b69e,F2,"Condition: Where visible, the ceilings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,UNVERIFIED
+6632c80c6c,F2,"Description: The ceilings are formed in plaster, plasterboard, lath and plaster, other ceilings.",MENU,,0,VERIFIED
+203105ebf1,F2,"The ceiling finishes comprise painted, textured coating, papered, timber-clad, tiled, wallpapered, decorative panelled, other finishes.",MENU,,0,VERIFIED
+aba7f2b69e,F2,"Condition: Where visible, the ceilings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
 68669c64db,F2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 3c9f7e4745,F2,Routine maintenance appropriate to the ceiling material should be expected.,EXACT,{F_CEILINGS}::{ABOUT_CONDITION},100,DONE
-893dc7c293,F2,"If lath and plaster is selected, add this - The ceilings are fully or partially made of older plaster supported on thin wooden strips (called 'lath and plaster'), typical of properties built before the 1940s.",EXACT,{F_CEILINGS}::{IF_LATH_AND_PLASTER_IS_SELECTED},100,DONE
-908778fdcc,F2,"While no significant defects were noted at the time of inspection, these ceilings can deteriorate with age as the plaster loses its bond with the timber laths.",EXACT,{F_CEILINGS}::{IF_LATH_AND_PLASTER_IS_SELECTED},100,DONE
-9a140e5097,F2,"They are susceptible to vibration and disturbance, and localised repairs are likely to be required over time, particularly during redecoration or alteration works.",EXACT,{F_CEILINGS}::{IF_LATH_AND_PLASTER_IS_SELECTED},100,DONE
-1321e12272,F2,"Repairs can be difficult and may dislodge adjacent plaster, making complete ceiling replacement more economical in some cases.",EXACT,{F_CEILINGS}::{IF_LATH_AND_PLASTER_IS_SELECTED},100,DONE
-62e56108fa,F2,"If textured coating is selected, add this - Parts of the ceilings within the property may contain asbestos-containing materials.",EXACT,{F_CEILINGS}::{IF_TEXTURED_IS_SELECTED},100,DONE
-73628fcd23,F2,"In their current condition, these are not normally considered a significant risk if left undisturbed.",EXACT,{F_CEILINGS}::{IF_TEXTURED_IS_SELECTED},100,DONE
-73c31ddfdb,F2,"However, they should not be drilled, sanded, cut, or otherwise disturbed without appropriate precautions.",EXACT,{F_CEILINGS}::{IF_TEXTURED_IS_SELECTED},100,DONE
-4e928ba24c,F2,"If future refurbishment or replacement is planned, the material should be assessed beforehand and, if asbestos is confirmed, removed by a licensed contractor.",EXACT,{F_CEILINGS}::{IF_TEXTURED_IS_SELECTED},100,DONE
-47678e3b9f,F2,This can add significantly to the cost of future works.,EXACT,{F_CEILINGS}::{IF_TEXTURED_IS_SELECTED},100,DONE
-cd34897c1f,F2,Minor cracking: Minor shrinkage or settlement cracking was observed in the ceiling finishes.,TOKENISED,{F_CEILINGS}::{CRACKS},88,DONE
+893dc7c293,F2,"If lath and plaster is selected, add this - The ceilings are fully or partially made of older plaster supported on thin wooden strips (called 'lath and plaster'), typical of properties built before the 1940s.",EXACT,{F_CEILINGS}::{F2_LATH_PLASTER},100,DONE
+908778fdcc,F2,"While no significant defects were noted at the time of inspection, these ceilings can deteriorate with age as the plaster loses its bond with the timber laths.",EXACT,{F_CEILINGS}::{F2_LATH_PLASTER},100,DONE
+9a140e5097,F2,"They are susceptible to vibration and disturbance, and localised repairs are likely to be required over time, particularly during redecoration or alteration works.",EXACT,{F_CEILINGS}::{F2_LATH_PLASTER},100,DONE
+1321e12272,F2,"Repairs can be difficult and may dislodge adjacent plaster, making complete ceiling replacement more economical in some cases.",EXACT,{F_CEILINGS}::{F2_LATH_PLASTER},100,DONE
+62e56108fa,F2,"If textured coating is selected, add this - Parts of the ceilings within the property may contain asbestos-containing materials.",EXACT,{F_CEILINGS}::{F2_TEXTURED_COATING},100,DONE
+73628fcd23,F2,"In their current condition, these are not normally considered a significant risk if left undisturbed.",EXACT,{F_CEILINGS}::{F2_TEXTURED_COATING},100,DONE
+73c31ddfdb,F2,"However, they should not be drilled, sanded, cut, or otherwise disturbed without appropriate precautions.",EXACT,{F_CEILINGS}::{F2_TEXTURED_COATING},100,DONE
+4e928ba24c,F2,"If future refurbishment or replacement is planned, the material should be assessed beforehand and, if asbestos is confirmed, removed by a licensed contractor.",EXACT,{F_CEILINGS}::{F2_TEXTURED_COATING},100,DONE
+47678e3b9f,F2,This can add significantly to the cost of future works.,EXACT,{F_CEILINGS}::{F2_TEXTURED_COATING},100,DONE
+cd34897c1f,F2,Minor cracking: Minor shrinkage or settlement cracking was observed in the ceiling finishes.,EXACT,{F_CEILINGS}::{F2_MINOR_CRACKING},100,DONE
 688273086b,F2,Such cracking is common in properties of this age and type and is not considered structurally significant.,EXACT,{F_CEILINGS}::{CRACKS},100,DONE
 b4cf688653,F2,The cracks may be adequately filled with appropriate material and redecorated during routine maintenance.,EXACT,{F_CEILINGS}::{CRACKS},100,DONE
-b2fe195afd,F2,Significant cracking: Significant cracking was observed in parts of the ceilings.,TOKENISED,{F_CEILINGS}::{CRACKS},62,DONE
-d86294d2fc,F2,Further investigation is recommended where cracking appears progressive or is associated with distortion.,ADD,{F_CEILINGS}::{HEAVY_PAPER_LINING},50,OPEN
-8e61704d4b,F2,"Minor unevenness: Minor bowing, undulations, unevenness, other were noted on the ceiling surfaces.",MENU,,0,UNVERIFIED
-77411f67f5,F2,These are not uncommon in properties of this age and do not necessarily indicate structural movement.,ADD,{F_CEILINGS}::{CRACKS},66,OPEN
-840a171ce1,F2,"Significant unevenness: Significant bowing, undulations, unevenness, other were noted on the ceiling surfaces.",MENU,,0,UNVERIFIED
-86c879b27b,F2,Further investigation should be undertaken where structural movement is suspected.,ADD,{F_CEILINGS}::{STANDARD_TEXT},49,OPEN
-b8624c578f,F2,"Wet water staining: Localised water staining was noted to the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other.",MENU,,0,UNVERIFIED
-80e31bc223,F2,"The moisture is suspected to originate from the loft space, roof, bathroom, floor above, another concealed source.",MENU,,0,UNVERIFIED
-f44bad3480,F2,The source of the leak should be identified and repaired before the affected ceilings are redecorated.,ADD,{F_CEILINGS}::{IF_TEXTURED_IS_SELECTED},50,OPEN
-32d078fa0b,F2,"Dry water staining: Localised water staining was noted on the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other.",MENU,,0,UNVERIFIED
-14aea1cc32,F2,Damage consistent with previous water penetration was observed.,ADD,{F_CEILINGS}::{CRACKS},52,OPEN
-88c79f288e,F2,"Although the affected area appears dry at the time of inspection, repairs and redecoration should be undertaken as required.",ADD,{F_CEILINGS}::{IF_LATH_AND_PLASTER_IS_SELECTED},52,OPEN
-a72ae31d35,F2,"Polystyrene Ceiling Tiles: Parts of the ceilings are covered with polystyrene tiles, which present a fire safety risk.",EXACT,{F_CEILINGS}::{POLYSTYRENE},100,DONE
-580e55b18f,F2,"Polystyrene is highly flammable and, if ignited, can contribute to the rapid spread of fire while releasing dense, toxic smoke and harmful fumes that can significantly increase the risk to occupants.",EXACT,{F_CEILINGS}::{POLYSTYRENE},100,DONE
-9684961dcf,F2,"Although these tiles may have been acceptable when installed, they no longer meet modern fire safety expectations.",EXACT,{F_CEILINGS}::{POLYSTYRENE},100,DONE
-b1e5468587,F2,They should be removed as soon as practicable by a competent contractor.,EXACT,{F_CEILINGS}::{POLYSTYRENE},100,DONE
-55a9329665,F2,"Be aware that removal may damage the underlying ceiling, particularly if the tiles have been firmly bonded, and repairs or complete replacement of the ceiling finish may be required.",EXACT,{F_CEILINGS}::{POLYSTYRENE},100,DONE
-ffb8e8e433,F2,"Heavy decorative covering: The ceilings are covered with heavy lining paper, decorative finishes, or similar coverings.",EXACT,{F_CEILINGS}::{HEAVY_PAPER_LINING},100,DONE
-f5411db7d3,F2,"No significant defects were evident at the time of inspection; however, these finishes can conceal minor cracking or other imperfections.",EXACT,{F_CEILINGS}::{HEAVY_PAPER_LINING},100,DONE
-b74ab6710f,F2,"Their removal during future redecoration may damage the underlying plaster, and you should allow for localised repairs or re-plastering.",EXACT,{F_CEILINGS}::{HEAVY_PAPER_LINING},100,DONE
-07abc27299,F2,"Ornamental plaster repair: The ceiling incorporates ornamental plaster features, some of which were found to be loose, cracked, damaged, unstable, partially missing, other.",MENU,,0,UNVERIFIED
-ff04db10e7,F2,"These defects present a safety hazard, as sections may become detached and fall.",EXACT,{F_CEILINGS}::{ORNAMENTAL_PLASTER},100,DONE
-cff6a1657f,F2,A suitably qualified plastering contractor should inspect the affected areas and carry out appropriate repairs or replacement without delay.,EXACT,{F_CEILINGS}::{ORNAMENTAL_PLASTER},100,DONE
-f2897ecc31,F2,"Localised repairs may be possible; however, where deterioration is extensive, complete replacement of the affected ornamental plasterwork may be necessary, resulting in more extensive and costly remedial works.",EXACT,{F_CEILINGS}::{ORNAMENTAL_PLASTER},100,DONE
-5e24ca9b59,F2,"General Maintenance: Ceilings should be inspected periodically for signs of cracking, distortion, or water penetration.",UNRESOLVED,{F_CEILINGS}::{CONTAINS_ASBESTOS},52,OPEN
-5d604c1b54,F2,"Prompt repair of roof leaks, plumbing defects and condensation problems will reduce the likelihood of damage to internal ceiling finishes.",ADD,{F_CEILINGS}::{IF_LATH_AND_PLASTER_IS_SELECTED},45,OPEN
-cfb7ca7d14,F2,Routine redecoration should be expected throughout the normal life of the property.,ADD,{F_CEILINGS}::{HEAVY_PAPER_LINING},47,OPEN
+b2fe195afd,F2,Significant cracking: Significant cracking was observed in parts of the ceilings.,EXACT,{F_CEILINGS}::{F2_SIGNIFICANT_CRACKING},100,DONE
+d86294d2fc,F2,Further investigation is recommended where cracking appears progressive or is associated with distortion.,EXACT,{F_CEILINGS}::{F2_SIGNIFICANT_CRACKING},100,DONE
+8e61704d4b,F2,"Minor unevenness: Minor bowing, undulations, unevenness, other were noted on the ceiling surfaces.",MENU,,0,VERIFIED
+77411f67f5,F2,These are not uncommon in properties of this age and do not necessarily indicate structural movement.,EXACT,{F_CEILINGS}::{F2_MINOR_UNEVENNESS},100,DONE
+840a171ce1,F2,"Significant unevenness: Significant bowing, undulations, unevenness, other were noted on the ceiling surfaces.",MENU,,0,VERIFIED
+86c879b27b,F2,Further investigation should be undertaken where structural movement is suspected.,EXACT,{F_CEILINGS}::{F2_SIGNIFICANT_UNEVENNESS},100,DONE
+b8624c578f,F2,"Wet water staining: Localised water staining was noted to the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other.",MENU,,0,VERIFIED
+80e31bc223,F2,"The moisture is suspected to originate from the loft space, roof, bathroom, floor above, another concealed source.",MENU,,0,VERIFIED
+f44bad3480,F2,The source of the leak should be identified and repaired before the affected ceilings are redecorated.,EXACT,{F_CEILINGS}::{F2_WET_STAINING},100,DONE
+32d078fa0b,F2,"Dry water staining: Localised water staining was noted on the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other.",MENU,,0,VERIFIED
+14aea1cc32,F2,Damage consistent with previous water penetration was observed.,EXACT,{F_CEILINGS}::{F2_DRY_STAINING},100,DONE
+88c79f288e,F2,"Although the affected area appears dry at the time of inspection, repairs and redecoration should be undertaken as required.",EXACT,{F_CEILINGS}::{F2_DRY_STAINING},100,DONE
+a72ae31d35,F2,"Polystyrene Ceiling Tiles: Parts of the ceilings are covered with polystyrene tiles, which present a fire safety risk.",EXACT,{F_CEILINGS}::{F2_POLYSTYRENE},100,DONE
+580e55b18f,F2,"Polystyrene is highly flammable and, if ignited, can contribute to the rapid spread of fire while releasing dense, toxic smoke and harmful fumes that can significantly increase the risk to occupants.",EXACT,{F_CEILINGS}::{F2_POLYSTYRENE},100,DONE
+9684961dcf,F2,"Although these tiles may have been acceptable when installed, they no longer meet modern fire safety expectations.",EXACT,{F_CEILINGS}::{F2_POLYSTYRENE},100,DONE
+b1e5468587,F2,They should be removed as soon as practicable by a competent contractor.,EXACT,{F_CEILINGS}::{F2_POLYSTYRENE},100,DONE
+55a9329665,F2,"Be aware that removal may damage the underlying ceiling, particularly if the tiles have been firmly bonded, and repairs or complete replacement of the ceiling finish may be required.",EXACT,{F_CEILINGS}::{F2_POLYSTYRENE},100,DONE
+ffb8e8e433,F2,"Heavy decorative covering: The ceilings are covered with heavy lining paper, decorative finishes, or similar coverings.",EXACT,{F_CEILINGS}::{F2_HEAVY_COVERING},100,DONE
+f5411db7d3,F2,"No significant defects were evident at the time of inspection; however, these finishes can conceal minor cracking or other imperfections.",EXACT,{F_CEILINGS}::{F2_HEAVY_COVERING},100,DONE
+b74ab6710f,F2,"Their removal during future redecoration may damage the underlying plaster, and you should allow for localised repairs or re-plastering.",EXACT,{F_CEILINGS}::{F2_HEAVY_COVERING},100,DONE
+07abc27299,F2,"Ornamental plaster repair: The ceiling incorporates ornamental plaster features, some of which were found to be loose, cracked, damaged, unstable, partially missing, other.",MENU,,0,VERIFIED
+ff04db10e7,F2,"These defects present a safety hazard, as sections may become detached and fall.",EXACT,{F_CEILINGS}::{F2_ORNAMENTAL_PLASTER},100,DONE
+cff6a1657f,F2,A suitably qualified plastering contractor should inspect the affected areas and carry out appropriate repairs or replacement without delay.,EXACT,{F_CEILINGS}::{F2_ORNAMENTAL_PLASTER},100,DONE
+f2897ecc31,F2,"Localised repairs may be possible; however, where deterioration is extensive, complete replacement of the affected ornamental plasterwork may be necessary, resulting in more extensive and costly remedial works.",EXACT,{F_CEILINGS}::{F2_ORNAMENTAL_PLASTER},100,DONE
+5e24ca9b59,F2,"General Maintenance: Ceilings should be inspected periodically for signs of cracking, distortion, or water penetration.",EXACT,{F_CEILINGS}::{F2_GENERAL_MAINTENANCE},100,DONE
+5d604c1b54,F2,"Prompt repair of roof leaks, plumbing defects and condensation problems will reduce the likelihood of damage to internal ceiling finishes.",EXACT,{F_CEILINGS}::{F2_GENERAL_MAINTENANCE},100,DONE
+cfb7ca7d14,F2,Routine redecoration should be expected throughout the normal life of the property.,EXACT,{F_CEILINGS}::{F2_GENERAL_MAINTENANCE},100,DONE
 a2083eafe5,F3,"My inspection was limited by fixed furniture, kitchen units, bathroom fittings, large appliances, stored items, tiled finishes, decorative wall coverings, and fitted cupboards, which prevented full inspection of the concealed areas.",MENU,,0,UNVERIFIED
-a216f2ab7e,F3,"The condition of hidden wall construction, lintels, structural supports, and other concealed elements could not be confirmed without opening the structure, which is outside the scope of a Level 2 Home Survey.",UNRESOLVED,{F_WALLS_AND_PARTITIONS}::{STANDARD_TEXT},67,OPEN
-0c6267491c,F3,"No comment can be made on the condition of these concealed areas, and defects may exist that were not visible at the time of my inspection.",ADD,{F_WALLS_AND_PARTITIONS}::{IF_LATH_AND_PLASTER_IS_SELECTED},49,OPEN
-c50e44f24a,F3,"Description: The walls are formed in solid masonry, timber stud partitions, plasterboard partitions, lath and plaster, other construction.",MENU,,0,UNVERIFIED
-2b96c3d542,F3,"The wall finish comprises paint, plaster, wallpaper, tiling, timber panelling, textured coating, decorative panelling, other finishes.",MENU,,0,UNVERIFIED
-e19589b9f3,F3,"Condition: Where visible, the walls and partitions appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,UNVERIFIED
-9453533e6b,F3,Routine redecoration appropriate to the age and condition of the property should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{WALL_FINISHES},100,DONE
+a216f2ab7e,F3,"The condition of hidden wall construction, lintels, structural supports, and other concealed elements could not be confirmed without opening the structure, which is outside the scope of a Level 2 Home Survey.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_INTRO},100,DONE
+0c6267491c,F3,"No comment can be made on the condition of these concealed areas, and defects may exist that were not visible at the time of my inspection.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_INTRO},100,DONE
+c50e44f24a,F3,"Description: The walls are formed in solid masonry, timber stud partitions, plasterboard partitions, lath and plaster, other construction.",MENU,,0,VERIFIED
+2b96c3d542,F3,"The wall finish comprises paint, plaster, wallpaper, tiling, timber panelling, textured coating, decorative panelling, other finishes.",MENU,,0,VERIFIED
+e19589b9f3,F3,"Condition: Where visible, the walls and partitions appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
+9453533e6b,F3,Routine redecoration appropriate to the age and condition of the property should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDITION},100,DONE
 444ee8a699,F3,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-54ae15774f,F3,Routine maintenance appropriate to the wall material should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{WALL_CONDITION},100,DONE
-e77621e54d,F3,"If lath and plaster is selected, add this - The walls are fully or partially made of older plaster supported on thin wooden strips, called lath and plaster, typical of properties built before the 1940s.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_LATH_AND_PLASTER_IS_SELECTED},100,DONE
-9413100427,F3,"While no significant defects were noted at the time of inspection, these walls can deteriorate with age as the plaster loses its bond with the timber laths.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_LATH_AND_PLASTER_IS_SELECTED},100,DONE
-121c787bff,F3,"If textured coating is selected, add this - Some internal walls have a textured decorative coating, which may contain small amounts of asbestos.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_TEXTURED_IS_SELECTED},100,DONE
-48ae4d5fa7,F3,"If disturbed during repair, refurbishment or removal, asbestos fibres could be released and present a health risk.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_TEXTURED_IS_SELECTED},100,DONE
-38a1d4d32e,F3,"Before undertaking any work that may disturb the coating, you should consider having it assessed and, if asbestos is confirmed or suspected, ensure any work is carried out by a suitably competent contractor in accordance with current guidance.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_TEXTURED_IS_SELECTED},100,DONE
-caa31a3f25,F3,Minor cracking: Minor shrinkage or settlement cracking was observed in the wall finishes.,ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},60,OPEN
+54ae15774f,F3,Routine maintenance appropriate to the wall material should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDITION},100,DONE
+e77621e54d,F3,"If lath and plaster is selected, add this - The walls are fully or partially made of older plaster supported on thin wooden strips, called lath and plaster, typical of properties built before the 1940s.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_LATH_PLASTER},100,DONE
+9413100427,F3,"While no significant defects were noted at the time of inspection, these walls can deteriorate with age as the plaster loses its bond with the timber laths.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_LATH_PLASTER},100,DONE
+121c787bff,F3,"If textured coating is selected, add this - Some internal walls have a textured decorative coating, which may contain small amounts of asbestos.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_TEXTURED_COATING},100,DONE
+48ae4d5fa7,F3,"If disturbed during repair, refurbishment or removal, asbestos fibres could be released and present a health risk.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_TEXTURED_COATING},100,DONE
+38a1d4d32e,F3,"Before undertaking any work that may disturb the coating, you should consider having it assessed and, if asbestos is confirmed or suspected, ensure any work is carried out by a suitably competent contractor in accordance with current guidance.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_TEXTURED_COATING},100,DONE
+caa31a3f25,F3,Minor cracking: Minor shrinkage or settlement cracking was observed in the wall finishes.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_MINOR_CRACKING},100,DONE
 a5782458e2,F3,Such cracking is common in properties of this age and type and is not considered structurally significant.,EXACT,{F_CEILINGS}::{CRACKS},100,DONE
 24e42ab96c,F3,The cracks may be adequately filled with appropriate material and redecorated during routine maintenance.,EXACT,{F_CEILINGS}::{CRACKS},100,DONE
-232fc1838b,F3,Significant cracking: Significant cracking was observed on some of the walls.,ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},50,OPEN
-193fc2cd34,F3,Further investigation is recommended where cracking appears progressive or is associated with distortion.,ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_CONDENSATION_NOTED},49,OPEN
-c33bcb4ad5,F3,"Structural Movement: Evidence of historic, localised, progressive movement was observed.",UNRESOLVED,{F_WALLS_AND_PARTITIONS}::{REPAIRS_CONDENSATION_NOTED},62,OPEN
-7e3661a255,F3,"Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",EXACT,{RISK_TO_BUILDING}::{BUILDING_MOVEMENTS_STATUS_INVESTIGATE},100,DONE
-3ec8d5d466,F3,Hollow Plaster: Localised areas of hollow-sounding plaster were noted.,EXACT,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},100,DONE
-8ea7aa544d,F3,This usually indicates that the plaster has lost adhesion to the underlying surface.,EXACT,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},100,DONE
-f95f37efc6,F3,"Although stable at the time of inspection, affected areas may become loose or detached over time.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},100,DONE
-22c324b22c,F3,"Localised repairs may be possible; however, where deterioration is more extensive, or the plaster becomes unstable, it may be more practical and cost-effective to remove and replace the affected section.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},100,DONE
-d398f61866,F3,"Repairs can be undertaken as part of routine maintenance or redecoration, as necessary.",EXACT,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},100,DONE
-cffb83972a,F3,"Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other area(s).",MENU,,0,UNVERIFIED
+232fc1838b,F3,Significant cracking: Significant cracking was observed on some of the walls.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_SIGNIFICANT_CRACKING},100,DONE
+193fc2cd34,F3,Further investigation is recommended where cracking appears progressive or is associated with distortion.,EXACT,{F_CEILINGS}::{F2_SIGNIFICANT_CRACKING},100,DONE
+c33bcb4ad5,F3,"Structural Movement: Evidence of historic, localised, progressive movement was observed.",MENU,,0,VERIFIED
+7e3661a255,F3,"Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_STRUCTURAL_MOVEMENT},100,DONE
+3ec8d5d466,F3,Hollow Plaster: Localised areas of hollow-sounding plaster were noted.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
+8ea7aa544d,F3,This usually indicates that the plaster has lost adhesion to the underlying surface.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
+f95f37efc6,F3,"Although stable at the time of inspection, affected areas may become loose or detached over time.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
+22c324b22c,F3,"Localised repairs may be possible; however, where deterioration is more extensive, or the plaster becomes unstable, it may be more practical and cost-effective to remove and replace the affected section.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
+d398f61866,F3,"Repairs can be undertaken as part of routine maintenance or redecoration, as necessary.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
+cffb83972a,F3,"Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other area(s).",MENU,,0,VERIFIED
 c054c7a162,F3,"Condensation is commonly associated with occupancy patterns, heating, insulation, and ventilation.",MENU,,0,UNVERIFIED
-12a8c85c12,F3,Maintaining a suitable balance between heating and ventilation should assist in reducing condensation.,EXACT,{F_WALLS_AND_PARTITIONS}::{REPAIRS_CONDENSATION_NONE},100,DONE
-4fbbacc2ad,F3,"Extractor fans may be installed, and windows opened regularly.",EXACT,{F_WALLS_AND_PARTITIONS}::{REPAIRS_CONDENSATION_NOTED},100,DONE
-8b189164b2,F3,No Damp: Random moisture readings were taken to accessible wall surfaces using a hand-held electronic moisture meter.,TOKENISED,{F_WALLS_AND_PARTITIONS}::{DAMPNESS_NOTED},65,DONE
-fcc69efea0,F3,No elevated moisture readings were recorded at the time of inspection.,ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},57,OPEN
-29dc8424f3,F3,Penetrating damp noted: Elevated moisture readings were recorded to sections of the wall surfaces including the (type wall location).,ADD,{F_WALLS_AND_PARTITIONS}::{IF_TILED_IS_SELECTED},53,OPEN
+12a8c85c12,F3,Maintaining a suitable balance between heating and ventilation should assist in reducing condensation.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDENSATION},100,DONE
+4fbbacc2ad,F3,"Extractor fans may be installed, and windows opened regularly.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDENSATION},100,DONE
+8b189164b2,F3,No Damp: Random moisture readings were taken to accessible wall surfaces using a hand-held electronic moisture meter.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_NO_DAMP},100,DONE
+fcc69efea0,F3,No elevated moisture readings were recorded at the time of inspection.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_NO_DAMP},100,DONE
+29dc8424f3,F3,Penetrating damp noted: Elevated moisture readings were recorded to sections of the wall surfaces including the (type wall location).,MENU,,0,VERIFIED
 02a8e38860,F3,"Where there are built-in fitments such as kitchen fittings, dampness can be difficult to trace but costly and inconvenient to rectify.",EXACT,{F_WALLS_AND_PARTITIONS}::{DAMPNESS_NONE},100,DONE
-7828ef7de4,F3,"Damp source known: Dampness was noted and is likely to result from defective rainwater goods, blocked gullies, leaking pipework, bridged damp-proof course, other.",MENU,,0,UNVERIFIED
-898b061f40,F3,"Where remedial action(s) have not been included in this report, it is recommended that a suitably qualified damp specialist investigates the cause and carries out any necessary repairs.",ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_REPAIR},49,OPEN
-0753d60495,F3,"This may require opening concealed areas, with the owner's agreement.",ADD,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_OVER_LARGE_AREA_IS_SELECTED},51,OPEN
-524ec90d70,F3,"Associated remedial works may also be required, including replacing damaged plaster and repairing or renewing decayed timber.",ADD,{F_WALLS_AND_PARTITIONS}::{CAUSES_KNOWN},52,OPEN
-9db3a3494a,F3,"Repair Damp defect: The source of dampness should be addressed by repairing the identified defects, which may include clearing rainwater goods, repairing defective rainwater goods, unblocking gullies, repairing leaking pipework, removing any bridging of the damp-proof course, other as appropriate.",UNRESOLVED,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_OVER_LARGE_AREA_IS_SELECTED},43,OPEN
-f8777c94f2,F3,"Once the source of moisture has been eliminated, any affected internal finishes should be allowed to dry thoroughly before being repaired or replaced.",ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_REPAIR},47,OPEN
-a547f5a3ff,F3,"If dampness persists after these repairs, further investigation by a suitably qualified damp and timber specialist should be undertaken to identify any concealed defects and recommend any additional remedial works.",ADD,{F_WALLS_AND_PARTITIONS}::{NOT_INSPECTED},46,OPEN
-95208e83c6,F3,These repairs should be carried out promptly to minimise the risk of further deterioration.,ADD,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},48,OPEN
+7828ef7de4,F3,"Damp source known: Dampness was noted and is likely to result from defective rainwater goods, blocked gullies, leaking pipework, bridged damp-proof course, other.",MENU,,0,VERIFIED
+898b061f40,F3,"Where remedial action(s) have not been included in this report, it is recommended that a suitably qualified damp specialist investigates the cause and carries out any necessary repairs.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_DAMP_SOURCE_KNOWN},100,DONE
+0753d60495,F3,"This may require opening concealed areas, with the owner's agreement.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_DAMP_SOURCE_KNOWN},100,DONE
+524ec90d70,F3,"Associated remedial works may also be required, including replacing damaged plaster and repairing or renewing decayed timber.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_DAMP_SOURCE_KNOWN},100,DONE
+9db3a3494a,F3,"Repair Damp defect: The source of dampness should be addressed by repairing the identified defects, which may include clearing rainwater goods, repairing defective rainwater goods, unblocking gullies, repairing leaking pipework, removing any bridging of the damp-proof course, other as appropriate.",MENU,,0,VERIFIED
+f8777c94f2,F3,"Once the source of moisture has been eliminated, any affected internal finishes should be allowed to dry thoroughly before being repaired or replaced.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_DAMP_REPAIR},100,DONE
+a547f5a3ff,F3,"If dampness persists after these repairs, further investigation by a suitably qualified damp and timber specialist should be undertaken to identify any concealed defects and recommend any additional remedial works.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_DAMP_REPAIR},100,DONE
+95208e83c6,F3,These repairs should be carried out promptly to minimise the risk of further deterioration.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_DAMP_REPAIR},100,DONE
 4e725be305,F3,Unknown damp source: The source of moisture cannot be confirmed during a visual inspection.,EXACT,{E_MAIN_WALLS}::{E4_INVESTIGATE_CAUSE},100,DONE
-4e726daa62,F3,Further investigation should be undertaken where moisture levels remain elevated or visible dampness is present.,ADD,{F_WALLS_AND_PARTITIONS}::{IF_HOLLOW_IS_SELECTED},48,OPEN
-78f332e1dc,F3,"Suspected rising damp: Elevated moisture readings were recorded at the base of the wall(s), consistent with possible rising damp, including the (type wall location).",UNRESOLVED,{F_WALLS_AND_PARTITIONS}::{IF_LATH_AND_PLASTER_IS_SELECTED},50,OPEN
-a045ed6b68,F3,"Where fitted units, such as kitchen cabinets, conceal wall surfaces, the extent of dampness cannot be fully assessed, and any necessary remedial works may be more extensive and costly.",UNRESOLVED,{F_WALLS_AND_PARTITIONS}::{DAMPNESS_NONE},50,OPEN
-c1dcfdf363,F3,I recommend further investigation by a suitably qualified damp specialist to confirm the cause and advise on any necessary repairs.,ADD,{F_WALLS_AND_PARTITIONS}::{CAUSES_KNOWN},49,OPEN
-f6202283cd,F3,"Internal Alterations: Evidence was observed that an internal wall has been removed, partially removed, altered, new opening created, has been formed.",MENU,,0,UNVERIFIED
-5bf2a90138,F3,"Where an internal wall has been removed or altered, other parts of the property must be properly supported.",EXACT,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},100,DONE
+4e726daa62,F3,Further investigation should be undertaken where moisture levels remain elevated or visible dampness is present.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_DAMP_SOURCE_UNKNOWN},100,DONE
+78f332e1dc,F3,"Suspected rising damp: Elevated moisture readings were recorded at the base of the wall(s), consistent with possible rising damp, including the (type wall location).",MENU,,0,VERIFIED
+a045ed6b68,F3,"Where fitted units, such as kitchen cabinets, conceal wall surfaces, the extent of dampness cannot be fully assessed, and any necessary remedial works may be more extensive and costly.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_SUSPECTED_RISING_DAMP},100,DONE
+c1dcfdf363,F3,I recommend further investigation by a suitably qualified damp specialist to confirm the cause and advise on any necessary repairs.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_SUSPECTED_RISING_DAMP},100,DONE
+f6202283cd,F3,"Internal Alterations: Evidence was observed that an internal wall has been removed, partially removed, altered, new opening created, has been formed.",MENU,,0,VERIFIED
+5bf2a90138,F3,"Where an internal wall has been removed or altered, other parts of the property must be properly supported.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_INTERNAL_ALTERATIONS},100,DONE
 444ee8a699,F3,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-88b17e901a,F3,Routine maintenance appropriate to the building material should be expected.,FIX,{F_WALLS_AND_PARTITIONS}::{WALL_CONDITION},93,OPEN
-bb79b43c15,F3,Defects noted: An original internal wall has been removed to form an opening at (type in location).,ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},59,OPEN
-98f3a42186,F3,"Distortion, cracking, inadequate support, other issues were noted around the altered area.",MENU,,0,UNVERIFIED
-488a15c703,F3,"While no significant progressive movement was evident at the time of inspection, the structural adequacy of the alteration cannot be confirmed during a visual inspection.",ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_REPAIR},60,OPEN
-a4276d9dd1,F3,Your legal adviser should verify that Building Regulations approval and a completion certificate were obtained for the work.,FIX,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_REPAIR},72,OPEN
-caf0afc19e,F3,"If satisfactory documentation is unavailable, I recommend further investigation by a suitably qualified structural engineer.",ADD,{F_WALLS_AND_PARTITIONS}::{IF_STUD_WALL_AND_CRACKED_OR_BADLY_CRACKED_IS_SELECTED},48,OPEN
-61f1db4e4b,F3,"This may require opening parts of the structure, with the owner's agreement, to confirm that adequate support has been provided.",ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_REMOVED_WALL_OK},49,OPEN
-e413b6e205,F3,"General Maintenance: Internal walls should be inspected periodically for signs of cracking, dampness, or movement.",UNRESOLVED,{F_WALLS_AND_PARTITIONS}::{ABOUT_COMPOSITE_PROFESSIONAL},50,OPEN
-a8af214a2c,F3,Minor cracking and decorative defects should be repaired during routine maintenance.,ADD,{F_WALLS_AND_PARTITIONS}::{IF_STUD_WALL_AND_CRACKED_OR_BADLY_CRACKED_IS_SELECTED},60,OPEN
-290a777966,F3,Maintaining adequate heating and ventilation will assist in reducing the risk of condensation and mould growth.,ADD,{F_WALLS_AND_PARTITIONS}::{REPAIRS_CONDENSATION_NONE},71,OPEN
+88b17e901a,F3,Routine maintenance appropriate to the building material should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_ALTERATIONS_NO_DEFECTS},100,DONE
+bb79b43c15,F3,Defects noted: An original internal wall has been removed to form an opening at (type in location).,MENU,,0,VERIFIED
+98f3a42186,F3,"Distortion, cracking, inadequate support, other issues were noted around the altered area.",MENU,,0,VERIFIED
+488a15c703,F3,"While no significant progressive movement was evident at the time of inspection, the structural adequacy of the alteration cannot be confirmed during a visual inspection.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_ALTERATIONS_DEFECTS},100,DONE
+a4276d9dd1,F3,Your legal adviser should verify that Building Regulations approval and a completion certificate were obtained for the work.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_ALTERATIONS_DEFECTS},100,DONE
+caf0afc19e,F3,"If satisfactory documentation is unavailable, I recommend further investigation by a suitably qualified structural engineer.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_ALTERATIONS_DEFECTS},100,DONE
+61f1db4e4b,F3,"This may require opening parts of the structure, with the owner's agreement, to confirm that adequate support has been provided.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_ALTERATIONS_DEFECTS},100,DONE
+e413b6e205,F3,"General Maintenance: Internal walls should be inspected periodically for signs of cracking, dampness, or movement.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_GENERAL_MAINTENANCE},100,DONE
+a8af214a2c,F3,Minor cracking and decorative defects should be repaired during routine maintenance.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_GENERAL_MAINTENANCE},100,DONE
+290a777966,F3,Maintaining adequate heating and ventilation will assist in reducing the risk of condensation and mould growth.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_GENERAL_MAINTENANCE},100,DONE
 99303d03b3,F4,"The condition of concealed floor timbers, floor voids, joists, sleeper walls, and foundations cannot be confirmed without lifting floor finishes or opening the structure.",MENU,,0,UNVERIFIED
 61dae8d3f2,F4,Only the visible performance of the floors was assessed during normal use.,ADD,{F_FLOORS}::{REPAIR_UNEVEN_FLOOR_MINOR},54,OPEN
 12891e1ec0,F4,"The inspection was limited by fitted floor coverings, furniture, stored items, fixed kitchen units, bathroom fittings, or restricted access.",MENU,,0,UNVERIFIED
@@ -1732,7 +1732,7 @@ c0a173545a,I3,Your legal adviser should confirm whether the property will be sol
 61f7baec30,I3,The Home Survey is a visual inspection only and cannot identify every potential risk.,ADD,{ISSUE_OTHER_MATTERS}::{OTHER_MATTERS_FREEHOLD},48,OPEN
 2ff4e42c77,I3,"Where appropriate, further investigation by an appropriately qualified person is recommended.",ADD,{ISSUE_OTHER_MATTERS}::{OTHER_MATTERS_FREEHOLD},45,OPEN
 7874f717a5,J1,"Structural Movement: Evidence of historic, localised, recurring, progressive movement, including possible structural was observed.",MENU,,0,UNVERIFIED
-d7237c1c8d,J1,"Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",EXACT,{RISK_TO_BUILDING}::{BUILDING_MOVEMENTS_STATUS_INVESTIGATE},100,DONE
+d7237c1c8d,J1,"Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_STRUCTURAL_MOVEMENT},100,DONE
 5045b3b905,J1,"Water Penetration: Evidence of roof leakage, penetrating damp, plumbing leakage, condensation, and localised dampness was observed.",MENU,,0,UNVERIFIED
 4844001d64,J1,The source should be identified and repaired to prevent further deterioration.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{EVIDENCE_WATER_PENETRATION},100,DONE
 a99dc05367,J1,"Timber Decay: Evidence of wet rot, dry rot, localised timber decay was observed.",UNRESOLVED,,0,OPEN
