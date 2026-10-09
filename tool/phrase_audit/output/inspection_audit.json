@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 421,
+  "screensAudited": 411,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2313,
+   "distinctEmitted": 2330,
    "approvedLegacyBank": 588,
-   "approvedCurrentBankOnly": 1698,
+   "approvedCurrentBankOnly": 1715,
    "unapproved": 0
   }
  },
@@ -2122,19 +2122,19 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_built_in_fittings",
    "title": "Built In Fittings",
-   "dataFieldCount": 30,
-   "permutationCount": 44,
+   "dataFieldCount": 49,
+   "permutationCount": 69,
    "severities": [],
    "phraseStats": {
-    "total": 12,
+    "total": 25,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 12,
+    "approvedCurrentBankOnly": 25,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Kitchen Sink: The sink is formed in the material observed. The sink was inspected visually only and was not assessed for leakage or drainage performance.",
-    "Built-in Appliances: The property incorporates built-in appliances. These appliances have not been assessed. Their condition, safety and serviceability are outside the scope of this inspection.",
-    "Extractor Fan: A kitchen extractor fan is fitted. Its effectiveness cannot be confirmed without normal use. Regular cleaning of grease filters and vents should be undertaken to maintain efficient operation."
+    "Condition: Where visible, they appear in good condition. Routine adjustment and maintenance should be expected with normal use. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the built-in fittings should be expected.",
+    "Condition: Where visible, they appear in reasonable condition. Routine adjustment and maintenance should be expected with normal use. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the built-in fittings should be expected.",
+    "Condition: Where visible, they appear in fair condition. Routine adjustment and maintenance should be expected with normal use. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the built-in fittings should be expected."
    ]
   },
   {
@@ -2216,56 +2216,55 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_built_in_fittings_repair_fittings",
    "title": "Repair Fitting",
-   "dataFieldCount": 21,
-   "permutationCount": 25,
+   "dataFieldCount": 1,
+   "permutationCount": 3,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Defects: The fittings in the kitchen, utility room and sample detail are worn, damaged, badly fitted, incomplete, broken and sample detail. Repairs should be undertaken as part of normal maintenance. These should be repaired soon. Many buyers would plan to replace older kitchen fittings.",
-    "Defects: The fittings in the kitchen, utility room and sample detail are badly worn, badly damaged, damp, partly rotted and insect infested (See Section J1 - Risks). Repairs should be undertaken as part of normal maintenance. These should be repaired now.",
-    "Rot Advice: The fittings that are partly rotted could conceal more extensive problems in adjacent parts of the building. I was not able to identify these without disturbing parts of the property, and so you should ask an appropriately qualified person to inspect the problem. To do this properly, parts of the fittings will have to be disturbed. You should discuss this matter with the current owner of the property."
+    "Fittings defects: One or more cupboard doors or drawers require adjustment, repair, replacement due to wear or damage."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_wood_work_second",
    "title": "Wood Work",
-   "dataFieldCount": 11,
-   "permutationCount": 17,
+   "dataFieldCount": 15,
+   "permutationCount": 25,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 18,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 18,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Internal Doors, Door Frames: The joinery items are made up of doors, architraves, stairs, stairs threads, handrails, balusters, skirting boards, cladding and sample detail, and these are formed in timber. Where visible, they appear in reasonable condition. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine adjustment and maintenance appropriate to their age and construction should be expected.",
-    "Internal Doors, Door Frames: The joinery items are made up of doors, architraves, stairs, stairs threads, handrails, balusters, skirting boards, cladding and sample detail, and these are formed in timber. Where visible, they appear in satisfactory condition. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine adjustment and maintenance appropriate to their age and construction should be expected.",
-    "Internal Doors, Door Frames: The joinery items are made up of doors, architraves, stairs, stairs threads, handrails, balusters, skirting boards, cladding and sample detail, and these are formed in timber. Where visible, they appear in unsatisfactory and poor condition. No significant defects requiring immediate attention were identified unless otherwise stated below. Routine adjustment and maintenance appropriate to their age and construction should be expected."
+    "Description: The joinery items comprise internal doors timber components.",
+    "Description: The joinery items comprise door frames timber components.",
+    "Description: The joinery items comprise skirting boards timber components."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_wood_work_door_sampling",
    "title": "Door Repair",
-   "dataFieldCount": 13,
-   "permutationCount": 15,
+   "dataFieldCount": 1,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Operation: The internal door(s) do not shut correctly. One or more doors require adjustment, repair, or replacement due to wear, distortion or defective ironmongery. Over time, door hinges, latches, and handles can wear, requiring occasional adjustment and repair.",
-    "Defects: The door(s) to the lounge, bedroom, dining room, kitchen and sample detail are damaged, poorly fitted, not closing well, poorly secured and sample detail. Repairs should be undertaken to maintain safe operation and prevent further deterioration. This should be repaired soon."
+    "Door operation: The internal doors selected for operation opened and closed freely. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the timber joinery material should be expected.",
+    "Door operation: The internal doors selected for operation opened and closed with resistance. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the timber joinery material should be expected.",
+    "One or more internal doors do not close properly or operate with resistance. This is commonly caused by normal wear and tear, minor distortion, settlement, or worn hinges, latches, or other ironmongery. In most cases, adjustment or minor repairs will restore satisfactory operation. Where defects are more severe or the door is damaged, replacement may be required. Repairs should be undertaken as part of routine maintenance."
    ]
   },
   {
@@ -2566,8 +2565,27 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_built_in_fittings_repair_defective_sealants",
    "title": "Defective Sealants",
-   "dataFieldCount": 9,
-   "permutationCount": 11,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
+   "severities": [],
+   "phraseStats": {
+    "total": 6,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 6,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Sealant defects: The sealant around the sink or at the wall joints with the worktop is cracked. Defective sealant should be renewed to reduce the risk of water penetration into adjacent units.",
+    "Sealant defects: The sealant around the sink or at the wall joints with the worktop is damaged. Defective sealant should be renewed to reduce the risk of water penetration into adjacent units.",
+    "Sealant defects: The sealant around the sink or at the wall joints with the worktop is moulded. Defective sealant should be renewed to reduce the risk of water penetration into adjacent units."
+   ]
+  },
+  {
+   "sectionKey": "F",
+   "screenId": "activity_in_side_property_ww_wood_work_repair",
+   "title": "WoodWork Repair",
+   "dataFieldCount": 23,
+   "permutationCount": 25,
    "severities": [],
    "phraseStats": {
     "total": 1,
@@ -2576,44 +2594,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Sink Surround: The sealant around the edges of the kitchen sink, utility room sink and sample detail is damaged, partly missing, poorly applied and sample detail and is allowing excess water to seep behind the fitting, affecting the adjacent surfaces and hidden parts (See Section J1 - Risks). Defective sealant should be renewed to reduce the risk of water penetration into adjacent units. This should be repaired now."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_cupboards",
-   "title": "Fitted/Builtin Cupboards",
-   "dataFieldCount": 1,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "There are some cupboards of timber construction within the property. Where visible, these appear in reasonable condition. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "There are some cupboards of timber construction within the property. Where visible, these appear in satisfactory condition. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way.",
-    "There are some cupboards of timber construction within the property. Where visible, these appear in unsatisfactory and poor condition. No significant defects requiring immediate attention were identified unless otherwise stated below. No repair is currently needed. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_ww_wood_work_repair",
-   "title": "WoodWork Repair",
-   "dataFieldCount": 28,
-   "permutationCount": 32,
-   "severities": [],
-   "phraseStats": {
-    "total": 2,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Defects: The stairs, stairs threads, handrails, balusters, skirting boards and sample detail are worn, loose, poorly fitted, damaged, poorly secured and sample detail. Repairs should be undertaken to maintain safe operation and prevent further deterioration. This should be repaired soon.",
-    "Defects: The stairs, stairs threads, handrails, balusters and skirting boards are badly worn, very loose, incomplete, missing, damp, rotten and sample detail in places. Repairs should be undertaken to maintain safe operation and prevent further deterioration. This should be repaired now."
+    "Defect noted: One or more internal joinery elements, including doors, locks, door frames, skirting boards, architraves, the staircase, balustrades, handrails, window boards, timber cladding, cupboards, built-in joinery and sample detail, were found to be worn, loose, poorly fitted, damaged, inadequately secured, missing, affected by decay and sample detail. Where the defects are minor, repairs can be undertaken as part of routine maintenance. Otherwise, where the defects are significant or affect safety, security or normal operation, repairs or replacement should be carried out without delay by a suitably qualified contractor."
    ]
   },
   {
@@ -2859,55 +2840,19 @@
    "sectionKey": "F",
    "screenId": "activity_in_side_property_built_in_fittings_repair_moulding_noted",
    "title": "Moulding noted",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
+   "dataFieldCount": 10,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 11,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 11,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Wall Tiling: Some moulding was noted to flexible sealants around the kitchen sink. The moulding sealants should be removed, the area cleaned up, and new sealants applied to avoid further leakages. It should be maintained and checked regularly, as even slight damage may allow water penetration to enclosed areas beneath, which may cause rot and decay to the timber floor structure.",
-    "Wall Tiling: Some moulding was noted to flexible sealants around the utility room sink. The moulding sealants should be removed, the area cleaned up, and new sealants applied to avoid further leakages. It should be maintained and checked regularly, as even slight damage may allow water penetration to enclosed areas beneath, which may cause rot and decay to the timber floor structure.",
-    "Wall Tiling: Some moulding was noted to flexible sealants around the kitchen sink, utility room sink and sample detail. The moulding sealants should be removed, the area cleaned up, and new sealants applied to avoid further leakages. It should be maintained and checked regularly, as even slight damage may allow water penetration to enclosed areas beneath, which may cause rot and decay to the timber floor structure."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_wood_work_damaged_lock",
-   "title": "Damaged Lock",
-   "dataFieldCount": 11,
-   "permutationCount": 13,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Ironmongery: The lock(s) to the lounge, bedroom, dining room, kitchen and sample detail door(s) are damaged, in disrepair, stuck and sample detail. Loose or defective ironmongery should be adjusted or replaced as part of routine maintenance. This should be repaired soon."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_wood_work_repair_balusters",
-   "title": "Balusters",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Balustrades and Handrails: Along the side of the staircase and around the edge of the landing, vertical pieces of wood (called balusters or spindles) support the handrail. The balusters are too far apart and are a safety hazard because they cannot properly support anyone leaning against them. Loose or damaged guarding should be repaired to maintain safety. This should be made safe now.",
-    "Balustrades and Handrails: Along the side of the staircase and around the edge of the landing, vertical pieces of wood (called balusters or spindles) support the handrail. The balusters are missing and are a safety hazard because they cannot properly support anyone leaning against them. Loose or damaged guarding should be repaired to maintain safety. This should be made safe now.",
-    "Balustrades and Handrails: Along the side of the staircase and around the edge of the landing, vertical pieces of wood (called balusters or spindles) support the handrail. The balusters are broken and are a safety hazard because they cannot properly support anyone leaning against them. Loose or damaged guarding should be repaired to maintain safety. This should be made safe now."
+    "Defects: One or more of the following defects were observed: damaged cupboard doors. Repairs should be undertaken as part of normal maintenance.",
+    "Defects: One or more of the following defects were observed: loose hinges. Repairs should be undertaken as part of normal maintenance.",
+    "Defects: One or more of the following defects were observed: damaged worktops. Repairs should be undertaken as part of normal maintenance."
    ]
   },
   {
@@ -2984,40 +2929,6 @@
     "Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height at the time of my inspection. No comments can be made regarding unseen elements.",
     "Roof Not Fully Inspected: I could not fully inspect the roof timber because of the floor was not safe to walk on at the time of my inspection. No comments can be made regarding unseen elements.",
     "Roof Not Fully Inspected: I could not fully inspect the roof timber because of floor was boarded at the time of my inspection. No comments can be made regarding unseen elements."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_built_in_fittings_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The built-in fittings could not be inspected. As they are not accessible, they should be inspected and maintained as necessary to identify and address any defects at an early stage."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_wood_work_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The internal woodwork could not be inspected. As it is not accessible, it should be inspected and maintained as necessary to identify and address any defects at an early stage."
    ]
   },
   {
@@ -3213,39 +3124,19 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_built_in_fittings_repair_water_seepage",
-   "title": "Water Seepage",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 4,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Moisture: Localised moisture staining or deterioration was observed to the units or surrounding finishes. The sealant around the edges of the kitchen sink is allowing excess water to seep behind the fitting (See Section J1 - Risks). The source should be identified and repaired before replacing damaged materials. This should be repaired now.",
-    "Moisture: Localised moisture staining or deterioration was observed to the units or surrounding finishes. The sealant around the edges of the kitchen sink is allowing excess water to seep affecting the adjacent surfaces (See Section J1 - Risks). The source should be identified and repaired before replacing damaged materials. This should be repaired now.",
-    "Moisture: Localised moisture staining or deterioration was observed to the units or surrounding finishes. The sealant around the edges of the kitchen sink is allowing excess water to seep hidden parts (See Section J1 - Risks). The source should be identified and repaired before replacing damaged materials. This should be repaired now."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_in_side_property_wood_work_repair_infestation",
    "title": "Infestation",
-   "dataFieldCount": 15,
-   "permutationCount": 19,
+   "dataFieldCount": 12,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed to parts of the staircase, floorboards, skirting, under stairs, cupboards and sample detail timber in the lounge, reception, dining room, kitchen, bedroom and sample detail. I saw only a small infestation requiring limited repair. You should ask an appropriately qualified person to investigate and repair this soon.",
-    "Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed to parts of the staircase, floorboards, skirting, under stairs, cupboards and sample detail timber in the lounge, reception, dining room, kitchen, bedroom and sample detail. Further investigation by an appropriately qualified timber specialist is recommended, as activity appears active or widespread - the large and active infestation of wood-boring insects is serious (See Section J1 - Risks)."
+    "Wood-Boring Insects: I found minor and significant evidence of active and historic wood-boring insect activity in parts of the staircase, floorboards, skirting, under stairs, cupboards and sample detail in the sample detail. The extent of any concealed damage could not be determined during this visual inspection. Where activity is historic, no treatment may be necessary if the timber is dry and the infestation is inactive. Where active infestation is suspected, or significant timber deterioration is present, a suitably qualified timber specialist should inspect the affected areas, confirm the extent of the infestation, and carry out any necessary treatment and repairs without delay."
    ]
   },
   {
@@ -3378,23 +3269,6 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_wood_work_repair_damp_timber",
-   "title": "Damp timber",
-   "dataFieldCount": 18,
-   "permutationCount": 20,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Timber Decay: Localised wet rot, surface decay, or timber deterioration was observed to the timber staircase, floorboards, skirting, under stairs, cupboards and sample detail in the lounge, reception, dining room, kitchen, bedroom and sample detail - it is damp, rotten and sample detail. The source of moisture should be identified and repaired before remedial timber works are undertaken. This is serious, and once the dampness problem has been resolved (see Section J1 - Risks), the affected parts should be repaired."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_in_side_property_bathroom_fittings_mould",
    "title": "Moulding",
    "dataFieldCount": 5,
@@ -3482,23 +3356,6 @@
    },
    "editedBankSamples": [
     "Wood Boring Noted: Evidence of active and historic wood-boring insect activity was observed in the property, lounge, bedrooms, bathrooms, kitchens and sample detail areas. Further inspection of active activity by an appropriately qualified timber specialist is recommended where activity appears active or widespread. Otherwise, for historic activity, further enquiries should be made to the vendor regarding history, treatment work, and guarantee certificates."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_wood_work_damaged_lock__damaged_lock",
-   "title": "Damaged Lock",
-   "dataFieldCount": 11,
-   "permutationCount": 13,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Ironmongery: The lock(s) to the lounge, bedroom, dining room, kitchen and sample detail door(s) are damaged, in disrepair, stuck and sample detail. Loose or defective ironmongery should be adjusted or replaced as part of routine maintenance. This should be repaired soon."
    ]
   },
   {
@@ -3844,25 +3701,31 @@
    "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 6,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "The inspection was limited by stored items, fixed appliances, contents of cupboards, restricted access, or locked cupboards. Wall and floor surfaces concealed behind fitted units could not be inspected. No comment can therefore be made regarding the condition of concealed areas."
+   ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_inside_property_woodwork_main_screen",
    "title": "Woodwork",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
+   "dataFieldCount": 3,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 6,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "General Maintenance: A representative sample of timber has been inspected, but the possibility of concealed defects being present in inaccessible timber cannot be ruled out completely. Internal woodwork should be inspected and maintained as part of normal property ownership. Moving parts should be adjusted and lubricated where necessary. Timber should be redecorated periodically to protect exposed surfaces. Any source of moisture should be addressed promptly to minimise the risk of timber deterioration."
+   ]
   },
   {
    "sectionKey": "F",
@@ -3894,55 +3757,20 @@
   },
   {
    "sectionKey": "F",
-   "screenId": "activity_in_side_property_wood_work",
-   "title": "Wood Work",
-   "dataFieldCount": 8,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 9,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Some internal doors and frames are distorted, and the door(s) do not shut properly. This may have been affected by past settlement. As far as can be seen from this single inspection, the movement appears to be longstanding and is consistent with properties of this age and type of construction. I did not note any signs of current or ongoing movement that warrant any further investigation or structural repairs. The door(s) and their frames should be adjusted, repaired, refitted so that it closes properly.",
-    "One or more internal doors are glazed, and it is not possible to confirm whether safety glass has been fitted. If the doors are not fitted with safety glasses, any breakages could result in injury to nearby persons. You should ask your legal adviser to check whether safety glass has been installed.",
-    "Creaking stairs: The staircase creaks when walked on. This is commonly caused by the natural shrinkage and movement of timber over time, which can loosen joints and fixings. In the absence of other signs of structural weakness, this is not normally a safety concern. However, the staircase should be overhauled, with loose joints and fixings repaired as part of routine maintenance to reduce movement and prevent further deterioration."
-   ]
-  },
-  {
-   "sectionKey": "F",
    "screenId": "activity_in_side_property_wood_work_creaking_stairs",
    "title": "Creaking Stairs",
    "dataFieldCount": 1,
-   "permutationCount": 3,
+   "permutationCount": 5,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Creaking stairs: The staircase creaks when walked on. This is commonly caused by the natural shrinkage and movement of timber over time, which can loosen joints and fixings. In the absence of other signs of structural weakness, this is not normally a safety concern. However, the staircase should be overhauled, with loose joints and fixings repaired as part of routine maintenance to reduce movement and prevent further deterioration."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_wood_work_glazed_internal_doors",
-   "title": "Glazed Internal Doors",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "One or more internal doors are glazed, and it is not possible to confirm whether safety glass has been fitted. If the doors are not fitted with safety glasses, any breakages could result in injury to nearby persons. You should ask your legal adviser to check whether safety glass has been installed."
+    "Creaking stairs: The staircase creaks when walked on. This is commonly caused by the natural shrinkage and movement of timber over time, which can loosen joints and fixings. In the absence of other signs of structural weakness, this is not normally a safety concern. However, the staircase should be overhauled, with loose joints and fixings repaired as part of routine maintenance to reduce movement and prevent further deterioration.",
+    "Repair now: The staircase creaks and exhibits noticeable movement when in use, suggesting that joints or fixings may have become loose or that the supporting timber requires repair. Although the exact cause could not be confirmed during this visual inspection, the staircase should be inspected by a suitably qualified contractor, with any necessary repairs carried out without delay to ensure it remains safe and serviceable."
    ]
   },
   {
@@ -3959,13 +3787,31 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Stair Treads: The vertical part of each step of the staircase (called a riser) is open. Called an ‘open thread’, this is a safety hazard, as small children could fall through the gap or become trapped. The staircase should be made safe soon."
+    "No handrails: The staircase has open risers (open treads), which present a safety hazard, particularly to young children, due to the risk of falling through or becoming trapped between the treads. Although open-riser staircases may have been acceptable when installed, they do not provide the same level of safety as modern enclosed staircases. A suitably qualified contractor should assess the staircase and install appropriate infill panels or other suitable guarding to improve safety. This work should be carried out without delay where young children are likely to occupy or visit the property."
    ]
   },
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_wood_work_out_of_square_doors",
    "title": "Out Of Square Doors",
+   "dataFieldCount": 1,
+   "permutationCount": 5,
+   "severities": [],
+   "phraseStats": {
+    "total": 2,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 2,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Out of square door/frames: Some internal doors and frames are distorted, and the door(s) do not shut properly. This may have been affected by past settlement. As far as can be seen from this single inspection, the movement appears to be longstanding and is consistent with properties of this age and type of construction. I did not note any signs of current or ongoing movement that warrant any further investigation or structural repairs. The door(s) and their frames should be adjusted, repaired, refitted so that it closes properly.",
+    "Investigate: Some internal doors and frames are distorted, and the door(s) do not shut properly. I noted signs that suggest current or ongoing movement that warrants further investigation. You should instruct a suitably qualified structural engineer to inspect the building and provide a report with any necessary recommendations as soon as possible."
+   ]
+  },
+  {
+   "sectionKey": "F",
+   "screenId": "activity_in_side_property_wood_work_rocking_handrails",
+   "title": "Rocking Handrails",
    "dataFieldCount": 1,
    "permutationCount": 3,
    "severities": [],
@@ -3976,24 +3822,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Some internal doors and frames are distorted, and the door(s) do not shut properly. This may have been affected by past settlement. As far as can be seen from this single inspection, the movement appears to be longstanding and is consistent with properties of this age and type of construction. I did not note any signs of current or ongoing movement that warrant any further investigation or structural repairs. The door(s) and their frames should be adjusted, repaired, refitted so that it closes properly."
-   ]
-  },
-  {
-   "sectionKey": "F",
-   "screenId": "activity_in_side_property_wood_work_rocking_handrails",
-   "title": "Rocking Handrails",
-   "dataFieldCount": 1,
-   "permutationCount": 5,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Balustrades and Handrails: Around the edge of the landing, vertical pieces of wood (called balusters or spindles) support the handrail. The handrail rocked from side to side when I gently pushed it. Loose or damaged guarding should be repaired to maintain safety - this is a safety hazard because it could collapse if someone leant or fell against it. This should be made safe now."
+    "Rocking handrails: The staircase handrail, supported by timber balusters (spindles), was found to be loose and rocked when gently assessed. This is a safety hazard, as the handrail may fail if subjected to normal use or excessive force. Repairs should be carried out without delay by a suitably qualified contractor to securely fix the handrail and associated balustrade."
    ]
   },
   {

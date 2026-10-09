@@ -7241,6 +7241,489 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_general_maintenance',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'f6_worktops',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_WORKTOPS}',
+    [
+      VerbatimToken(
+        '{WT_ROOMS}',
+        options: {
+          'f6wr_kitchen': 'kitchen',
+          'f6wr_utility_room': 'utility room',
+        },
+        otherCheckbox: 'cb_other_1008',
+        otherText: 'et_other_764',
+        pdfOptions: ['kitchen', 'utility room'],
+      ),
+      VerbatimToken(
+        '{WORKTOP_MATERIALS}',
+        options: {
+          'f6wt_laminate_particle_board': 'laminate particle board',
+          'f6wt_solid_timber': 'solid timber',
+          'f6wt_granite': 'granite',
+          'f6wt_quartz': 'quartz',
+          'f6wt_stone': 'stone',
+          'f6wt_corian': 'Corian',
+          'f6wt_compressed_composite': 'compressed composite',
+          'f6wt_marble': 'marble',
+          'f6wt_steel': 'steel',
+        },
+        otherCheckbox: 'cb_other_672',
+        otherText: 'et_other_614',
+        pdfOptions: ['laminate particle board', 'solid timber', 'granite', 'quartz', 'stone', 'Corian', 'compressed composite', 'marble', 'steel'],
+      ),
+    ],
+    pdf:
+        'Worktop(s): The kitchen, utility room, other worktops comprise laminate particle board, solid timber, granite, quartz, stone, Corian, compressed composite, marble, steel, other material.',
+  ),
+  VerbatimRule(
+    'f6_fittings',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_FITTINGS}',
+    [
+      VerbatimToken(
+        '{FT_ROOMS}',
+        options: {
+          'f6fr_kitchen': 'kitchen',
+          'f6fr_utility_room': 'utility room',
+        },
+        otherCheckbox: 'f6fr_other',
+        otherText: 'f6fr_other_text',
+        pdfOptions: ['kitchen', 'utility room'],
+      ),
+      VerbatimToken(
+        '{FITTING_MATERIALS}',
+        options: {
+          'f6fm_timber': 'timber',
+          'f6fm_vinyl_wrapped_timber': 'vinyl-wrapped timber',
+          'f6fm_laminated_mdf': 'laminated MDF',
+        },
+        otherCheckbox: 'cb_other_343',
+        otherText: 'et_other_745',
+        pdfOptions: ['timber', 'vinyl-wrapped timber', 'laminated MDF'],
+      ),
+    ],
+    pdf:
+        'Fittings: The kitchen, utility room, other units are formed in timber, vinyl-wrapped timber, laminated MDF, other materials.',
+  ),
+  VerbatimRule(
+    'f6_cond',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_CONDITION}',
+    [
+      VerbatimToken(
+        '{FITTING_CONDITION}',
+        dropdown: 'android_material_design_spinner3',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f6_sink',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_KITCHEN_SINK}',
+    [
+      VerbatimToken(
+        '{SINK_ROOMS}',
+        options: {
+          'f6sr_kitchen': 'kitchen',
+          'f6sr_utility_room': 'utility room',
+        },
+        otherCheckbox: 'f6sr_other',
+        otherText: 'f6sr_other_text',
+        pdfOptions: ['kitchen', 'utility room'],
+      ),
+      VerbatimToken(
+        '{SINK_MATERIAL}',
+        options: {
+          'f6sm_stainless_steel': 'stainless steel',
+          'f6sm_ceramic': 'ceramic',
+          'f6sm_composite': 'composite',
+          'f6sm_stone': 'stone',
+        },
+        otherCheckbox: 'f6sm_other',
+        otherText: 'f6sm_other_text',
+        pdfOptions: ['stainless steel', 'ceramic', 'composite', 'stone'],
+      ),
+      VerbatimToken(
+        '{SINK_CONDITION}',
+        dropdown: 'actv_sink_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Kitchen Sink: The kitchen, utility room, other sink(s) is formed in stainless steel, ceramic, composite, stone, other material.',
+    pdfMore: [
+      'Where visible, it appears in good, reasonable, fair, poor, very poor condition.',
+    ],
+  ),
+  VerbatimRule(
+    'f6_appliances',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_APPLIANCES}',
+    [
+      VerbatimToken(
+        '{APPLIANCES}',
+        options: {
+          'f6ap_oven': 'oven',
+          'f6ap_hob': 'hob',
+          'f6ap_extractor_hood': 'extractor hood',
+          'f6ap_microwave': 'microwave',
+          'f6ap_dishwasher': 'dishwasher',
+          'f6ap_refrigerator': 'refrigerator',
+          'f6ap_freezer': 'freezer',
+          'f6ap_washing_machine': 'washing machine',
+          'f6ap_tumble_dryer': 'tumble dryer',
+        },
+        otherCheckbox: 'f6ap_other',
+        otherText: 'f6ap_other_text',
+        pdfOptions: ['oven', 'hob', 'extractor hood', 'microwave', 'dishwasher', 'refrigerator', 'freezer', 'washing machine', 'tumble dryer'],
+      ),
+    ],
+    pdf:
+        'Built-in Appliances: The property incorporates oven, hob, extractor hood, microwave, dishwasher, refrigerator, freezer, washing machine, tumble dryer, other built-in appliances.',
+  ),
+  VerbatimRule(
+    'f6_extractor',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_EXTRACTOR_FAN}',
+    [
+      VerbatimToken(
+        '{EXTRACTOR_STATE}',
+        dropdown: 'actv_extractor',
+        dropdownOptions: ['Operating', 'Not operating'],
+        lower: true,
+        pdfOptions: ['operating', 'not operating'],
+      ),
+    ],
+    pdf:
+        'Extractor Fan: The kitchen extractor fan was operating, not operating at the time of inspection.',
+  ),
+  VerbatimRule(
+    'f6_general',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f6_fit_defects',
+    'activity_in_side_property_built_in_fittings_repair_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_FITTINGS_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_fittings_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f6_sealant',
+    'activity_in_side_property_built_in_fittings_repair_defective_sealants',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_SEALANT_DEFECTS}',
+    [
+      VerbatimToken(
+        '{SEALANT_DEFECT_LIST}',
+        options: {
+          'f6sd_cracked': 'cracked',
+          'f6sd_damaged': 'damaged',
+          'f6sd_moulded': 'moulded',
+          'f6sd_worn': 'worn',
+          'f6sd_missing': 'missing',
+        },
+        pdfOptions: ['cracked', 'damaged', 'moulded', 'worn', 'missing'],
+      ),
+    ],
+    pdf:
+        'Sealant defects: The sealant around the sink or at the wall joints with the worktop is cracked, damaged, moulded, worn, missing.',
+  ),
+  VerbatimRule(
+    'f6_defects',
+    'activity_in_side_property_built_in_fittings_repair_moulding_noted',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_DEFECTS_LIST}',
+    [
+      VerbatimToken(
+        '{FITTING_DEFECT_LIST}',
+        options: {
+          'f6dl_damaged_cupboard_doors': 'damaged cupboard doors',
+          'f6dl_loose_hinges': 'loose hinges',
+          'f6dl_damaged_worktops': 'damaged worktops',
+          'f6dl_worn_finishes': 'worn finishes',
+          'f6dl_defective_sealant': 'defective sealant',
+          'f6dl_cracked_wall_tiles': 'cracked wall tiles',
+          'f6dl_damaged_plinths': 'damaged plinths',
+          'f6dl_water_damaged_units': 'water-damaged units',
+          'f6dl_misaligned_drawers': 'misaligned drawers',
+          'f6dl_loose_handles': 'loose handles',
+        },
+        pdfOptions: ['damaged cupboard doors', 'loose hinges', 'damaged worktops', 'worn finishes', 'defective sealant', 'cracked wall tiles', 'damaged plinths', 'water-damaged units', 'misaligned drawers', 'loose handles'],
+      ),
+    ],
+    pdf:
+        'Defects: One or more of the following defects were observed: • damaged cupboard doors • loose hinges • damaged worktops • worn finishes • defective sealant • cracked wall tiles • damaged plinths • water-damaged units • misaligned drawers • loose handles Repairs should be undertaken as part of normal maintenance.',
+  ),
+  VerbatimRule(
+    'f6_intro',
+    'activity_inside_property_built_in_fittings_main_screen',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f7_desc',
+    'activity_in_side_property_wood_work_second',
+    '{F_WOODWORK}',
+    '{F7_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{JOINERY_ITEMS}',
+        options: {
+          'f7i_internal_doors': 'internal doors',
+          'f7i_door_frames': 'door frames',
+          'f7i_skirting_boards': 'skirting boards',
+          'f7i_architraves': 'architraves',
+          'f7i_staircases': 'staircases',
+          'f7i_balustrades': 'balustrades',
+          'f7i_handrails': 'handrails',
+          'f7i_window_boards': 'window boards',
+          'f7i_timber_cladding': 'timber cladding',
+          'f7i_wardrobe_s': 'wardrobe(s)',
+          'f7i_cupboards': 'cupboards',
+          'f7i_built_in_joinery': 'built-in joinery',
+        },
+        otherCheckbox: 'cb_other_410',
+        otherText: 'et_other_800',
+        pdfOptions: ['internal doors', 'door frames', 'skirting boards', 'architraves', 'staircases', 'balustrades', 'handrails', 'window boards', 'timber cladding', 'wardrobe(s)', 'cupboards', 'built-in joinery'],
+      ),
+    ],
+    pdf:
+        'Description: The joinery items comprise internal doors, door frames, skirting boards, architraves, staircases, balustrades, handrails, window boards, timber cladding, wardrobe(s), cupboards, built-in joinery, other timber components.',
+  ),
+  VerbatimRule(
+    'f7_cond',
+    'activity_in_side_property_wood_work_second',
+    '{F_WOODWORK}',
+    '{F7_CONDITION}',
+    [
+      VerbatimToken(
+        '{JOINERY_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, they appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f7_defect',
+    'activity_in_side_property_ww_wood_work_repair',
+    '{F_WOODWORK}',
+    '{F7_DEFECT_NOTED}',
+    [
+      VerbatimToken(
+        '{JOINERY_ELEMENTS}',
+        options: {
+          'f7e_doors': 'doors',
+          'f7e_locks': 'locks',
+          'f7e_door_frames': 'door frames',
+          'f7e_skirting_boards': 'skirting boards',
+          'f7e_architraves': 'architraves',
+          'f7e_the_staircase': 'the staircase',
+          'f7e_balustrades': 'balustrades',
+          'f7e_handrails': 'handrails',
+          'f7e_window_boards': 'window boards',
+          'f7e_timber_cladding': 'timber cladding',
+          'f7e_cupboards': 'cupboards',
+          'f7e_built_in_joinery': 'built-in joinery',
+        },
+        otherCheckbox: 'f7e_other',
+        otherText: 'f7e_other_text',
+        pdfOptions: ['doors', 'locks', 'door frames', 'skirting boards', 'architraves', 'the staircase', 'balustrades', 'handrails', 'window boards', 'timber cladding', 'cupboards', 'built-in joinery'],
+      ),
+      VerbatimToken(
+        '{JOINERY_DEFECTS}',
+        options: {
+          'f7d_worn': 'worn',
+          'f7d_loose': 'loose',
+          'f7d_poorly_fitted': 'poorly fitted',
+          'f7d_damaged': 'damaged',
+          'f7d_inadequately_secured': 'inadequately secured',
+          'f7d_missing': 'missing',
+          'f7d_affected_by_decay': 'affected by decay',
+        },
+        otherCheckbox: 'f7d_other',
+        otherText: 'f7d_other_text',
+        pdfOptions: ['worn', 'loose', 'poorly fitted', 'damaged', 'inadequately secured', 'missing', 'affected by decay'],
+      ),
+    ],
+    pdf:
+        'Defect noted: One or more internal joinery elements, including doors, locks, door frames, skirting boards, architraves, the staircase, balustrades, handrails, window boards, timber cladding, cupboards, built-in joinery, other timber fittings, were found to be worn, loose, poorly fitted, damaged, inadequately secured, missing, affected by decay, other.',
+  ),
+  VerbatimRule(
+    'f7_door_op',
+    'activity_in_side_property_wood_work_door_sampling',
+    '{F_WOODWORK}',
+    '{F7_DOOR_OPERATION}',
+    [
+      VerbatimToken(
+        '{DOOR_OPERATION}',
+        dropdown: 'actv_door_operation',
+        dropdownOptions: ['Freely', 'With resistance', 'With difficulty'],
+        lower: true,
+        pdfOptions: ['freely', 'with resistance', 'with difficulty'],
+      ),
+    ],
+    pdf:
+        'Door operation: The internal doors selected for operation opened and closed freely, with resistance, with difficulty.',
+  ),
+  VerbatimRule(
+    'f7_door_op_add',
+    'activity_in_side_property_wood_work_door_sampling',
+    '{F_WOODWORK}',
+    '{F7_DOOR_OPERATION_ADDON}',
+    [
+    ],
+    whenField: 'actv_door_operation',
+    whenValue: 'With resistance',
+    whenAny: [['actv_door_operation', 'With difficulty']],
+  ),
+  VerbatimRule(
+    'f7_oos',
+    'activity_in_side_property_wood_work_out_of_square_doors',
+    '{F_WOODWORK}',
+    '{F7_OUT_OF_SQUARE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Out of square door/frames',
+  ),
+  VerbatimRule(
+    'f7_investigate',
+    'activity_in_side_property_wood_work_out_of_square_doors',
+    '{F_WOODWORK}',
+    '{F7_INVESTIGATE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Investigate',
+  ),
+  VerbatimRule(
+    'f7_creak',
+    'activity_in_side_property_wood_work_creaking_stairs',
+    '{F_WOODWORK}',
+    '{F7_CREAKING_STAIRS}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Creaking stairs',
+  ),
+  VerbatimRule(
+    'f7_creak_now',
+    'activity_in_side_property_wood_work_creaking_stairs',
+    '{F_WOODWORK}',
+    '{F7_CREAKING_STAIRS_NOW}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'f7_rocking',
+    'activity_in_side_property_wood_work_rocking_handrails',
+    '{F_WOODWORK}',
+    '{F7_ROCKING_HANDRAILS}',
+    [
+    ],
+    whenField: 'cb_rocking_handrails',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f7_open_risers',
+    'activity_in_side_property_wood_work_open_threads',
+    '{F_WOODWORK}',
+    '{F7_NO_HANDRAILS}',
+    [
+    ],
+    whenField: 'cb_open_threads',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f7_wb',
+    'activity_in_side_property_wood_work_repair_infestation',
+    '{F_WOODWORK}',
+    '{F7_WOOD_BORING}',
+    [
+      VerbatimToken(
+        '{WB_SEVERITY}',
+        options: {
+          'f7s_minor': 'minor',
+          'f7s_significant': 'significant',
+        },
+        pdfOptions: ['minor', 'significant'],
+      ),
+      VerbatimToken(
+        '{WB_ACTIVITY}',
+        options: {
+          'f7a_active': 'active',
+          'f7a_historic': 'historic',
+        },
+        pdfOptions: ['active', 'historic'],
+      ),
+      VerbatimToken(
+        '{WB_PARTS}',
+        options: {
+          'f7p_staircase': 'staircase',
+          'f7p_floorboards': 'floorboards',
+          'f7p_skirting': 'skirting',
+          'f7p_under_stairs': 'under stairs',
+          'f7p_cupboards': 'cupboards',
+        },
+        otherCheckbox: 'f7p_other',
+        otherText: 'f7p_other_text',
+        pdfOptions: ['staircase', 'floorboards', 'skirting', 'under stairs', 'cupboards'],
+      ),
+      VerbatimToken(
+        '{WB_LOCATION}',
+        text: 'et_wb_location',
+      ),
+    ],
+    pdf:
+        'Wood-Boring Insects: I found minor, significant evidence of active, historic wood-boring insect activity in parts of the staircase, floorboards, skirting, under stairs, cupboards, other timber in the (type in location).',
+  ),
+  VerbatimRule(
+    'f7_general',
+    'activity_inside_property_woodwork_main_screen',
+    '{F_WOODWORK}',
+    '{F7_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

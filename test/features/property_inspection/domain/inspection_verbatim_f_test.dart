@@ -46,4 +46,22 @@ void main() {
       expect(out, contains('This may be associated with condensation, defective flashings, unused flues, or moisture penetration.'));
     });
   });
+
+  group('F6 Built-in fittings', () {
+    test('intro prints once a condition rating is chosen', () {
+      expect(
+        intro('activity_inside_property_built_in_fittings_main_screen'),
+        contains('The inspection was limited by stored items, fixed appliances, contents of cupboards, restricted access, or locked cupboards.'),
+      );
+    });
+  });
+
+  group('F7 Woodwork', () {
+    test('door operation add-on paragraph', () {
+      final out = engine.buildPhrases(
+          'activity_in_side_property_wood_work_door_sampling',
+          {'actv_door_operation': 'With difficulty'}).join(' ');
+      expect(out, contains('This is commonly caused by normal wear and tear, minor distortion, settlement, or worn hinges, latches, or other ironmongery.'));
+    });
+  });
 }

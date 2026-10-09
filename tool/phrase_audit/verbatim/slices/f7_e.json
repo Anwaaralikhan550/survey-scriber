@@ -1,0 +1,607 @@
+[
+  {
+    "screen": "activity_in_side_property_wood_work_second",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f7_desc",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_DESCRIPTION}",
+        "text": "Description: The joinery items comprise {JOINERY_ITEMS} timber components.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{JOINERY_ITEMS}",
+            "options": [
+              [
+                "f7i_internal_doors",
+                "internal doors"
+              ],
+              [
+                "f7i_door_frames",
+                "door frames"
+              ],
+              [
+                "f7i_skirting_boards",
+                "skirting boards"
+              ],
+              [
+                "f7i_architraves",
+                "architraves"
+              ],
+              [
+                "f7i_staircases",
+                "staircases"
+              ],
+              [
+                "f7i_balustrades",
+                "balustrades"
+              ],
+              [
+                "f7i_handrails",
+                "handrails"
+              ],
+              [
+                "f7i_window_boards",
+                "window boards"
+              ],
+              [
+                "f7i_timber_cladding",
+                "timber cladding"
+              ],
+              [
+                "f7i_wardrobe_s",
+                "wardrobe(s)"
+              ],
+              [
+                "f7i_cupboards",
+                "cupboards"
+              ],
+              [
+                "f7i_built_in_joinery",
+                "built-in joinery"
+              ]
+            ],
+            "pdf_options": [
+              "internal doors",
+              "door frames",
+              "skirting boards",
+              "architraves",
+              "staircases",
+              "balustrades",
+              "handrails",
+              "window boards",
+              "timber cladding",
+              "wardrobe(s)",
+              "cupboards",
+              "built-in joinery"
+            ],
+            "label": "Joinery items comprise",
+            "other": [
+              "cb_other_410",
+              "et_other_800"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The joinery items comprise internal doors, door frames, skirting boards, architraves, staircases, balustrades, handrails, window boards, timber cladding, wardrobe(s), cupboards, built-in joinery, other timber components."
+        ]
+      },
+      {
+        "id": "f7_cond",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_CONDITION}",
+        "text": "Condition: Where visible and operated during the inspection, they appear in {JOINERY_CONDITION} condition. Routine adjustment and maintenance appropriate to their age and construction should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the timber joinery should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{JOINERY_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible and operated during the inspection, they appear in good, reasonable, fair, poor, very poor condition."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_ww_wood_work_repair",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f7_defect",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_DEFECT_NOTED}",
+        "text": "Defect noted: One or more internal joinery elements, including {JOINERY_ELEMENTS}, were found to be {JOINERY_DEFECTS}. Where the defects are minor, repairs can be undertaken as part of routine maintenance. Otherwise, where the defects are significant or affect safety, security or normal operation, repairs or replacement should be carried out without delay by a suitably qualified contractor.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{JOINERY_ELEMENTS}",
+            "options": [
+              [
+                "f7e_doors",
+                "doors"
+              ],
+              [
+                "f7e_locks",
+                "locks"
+              ],
+              [
+                "f7e_door_frames",
+                "door frames"
+              ],
+              [
+                "f7e_skirting_boards",
+                "skirting boards"
+              ],
+              [
+                "f7e_architraves",
+                "architraves"
+              ],
+              [
+                "f7e_the_staircase",
+                "the staircase"
+              ],
+              [
+                "f7e_balustrades",
+                "balustrades"
+              ],
+              [
+                "f7e_handrails",
+                "handrails"
+              ],
+              [
+                "f7e_window_boards",
+                "window boards"
+              ],
+              [
+                "f7e_timber_cladding",
+                "timber cladding"
+              ],
+              [
+                "f7e_cupboards",
+                "cupboards"
+              ],
+              [
+                "f7e_built_in_joinery",
+                "built-in joinery"
+              ]
+            ],
+            "pdf_options": [
+              "doors",
+              "locks",
+              "door frames",
+              "skirting boards",
+              "architraves",
+              "the staircase",
+              "balustrades",
+              "handrails",
+              "window boards",
+              "timber cladding",
+              "cupboards",
+              "built-in joinery"
+            ],
+            "label": "Joinery elements including",
+            "other": [
+              "f7e_other",
+              "f7e_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{JOINERY_DEFECTS}",
+            "options": [
+              [
+                "f7d_worn",
+                "worn"
+              ],
+              [
+                "f7d_loose",
+                "loose"
+              ],
+              [
+                "f7d_poorly_fitted",
+                "poorly fitted"
+              ],
+              [
+                "f7d_damaged",
+                "damaged"
+              ],
+              [
+                "f7d_inadequately_secured",
+                "inadequately secured"
+              ],
+              [
+                "f7d_missing",
+                "missing"
+              ],
+              [
+                "f7d_affected_by_decay",
+                "affected by decay"
+              ]
+            ],
+            "pdf_options": [
+              "worn",
+              "loose",
+              "poorly fitted",
+              "damaged",
+              "inadequately secured",
+              "missing",
+              "affected by decay"
+            ],
+            "label": "Found to be",
+            "other": [
+              "f7d_other",
+              "f7d_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Defect noted: One or more internal joinery elements, including doors, locks, door frames, skirting boards, architraves, the staircase, balustrades, handrails, window boards, timber cladding, cupboards, built-in joinery, other timber fittings, were found to be worn, loose, poorly fitted, damaged, inadequately secured, missing, affected by decay, other."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wood_work_door_sampling",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f7_door_op",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_DOOR_OPERATION}",
+        "text": "Door operation: The internal doors selected for operation opened and closed {DOOR_OPERATION}. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the timber joinery material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{DOOR_OPERATION}",
+            "dropdown": "actv_door_operation",
+            "field_label": "Doors opened and closed",
+            "dropdown_options": [
+              "Freely",
+              "With resistance",
+              "With difficulty"
+            ],
+            "pdf_options": [
+              "freely",
+              "with resistance",
+              "with difficulty"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Door operation: The internal doors selected for operation opened and closed freely, with resistance, with difficulty."
+        ]
+      },
+      {
+        "id": "f7_door_op_add",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_DOOR_OPERATION_ADDON}",
+        "text": "One or more internal doors do not close properly or operate with resistance. This is commonly caused by normal wear and tear, minor distortion, settlement, or worn hinges, latches, or other ironmongery. In most cases, adjustment or minor repairs will restore satisfactory operation. Where defects are more severe or the door is damaged, replacement may be required. Repairs should be undertaken as part of routine maintenance.",
+        "tokens": [],
+        "when": [
+          "actv_door_operation",
+          "With resistance"
+        ],
+        "when_any": [
+          [
+            "actv_door_operation",
+            "With difficulty"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wood_work_out_of_square_doors",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f7_oos",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_OUT_OF_SQUARE}",
+        "text": "Out of square door/frames: Some internal doors and frames are distorted, and the door(s) do not shut properly. This may have been affected by past settlement. As far as can be seen from this single inspection, the movement appears to be longstanding and is consistent with properties of this age and type of construction. I did not note any signs of current or ongoing movement that warrant any further investigation or structural repairs. The door(s) and their frames should be adjusted, repaired, refitted so that it closes properly.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Out of square door/frames"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Distorted doors and frames",
+            "type": "dropdown",
+            "options": [
+              "Out of square door/frames",
+              "Investigate"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f7_investigate",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_INVESTIGATE}",
+        "text": "Investigate: Some internal doors and frames are distorted, and the door(s) do not shut properly. I noted signs that suggest current or ongoing movement that warrants further investigation. You should instruct a suitably qualified structural engineer to inspect the building and provide a report with any necessary recommendations as soon as possible.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Investigate"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wood_work_creaking_stairs",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f7_creak",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_CREAKING_STAIRS}",
+        "text": "Creaking stairs: The staircase creaks when walked on. This is commonly caused by the natural shrinkage and movement of timber over time, which can loosen joints and fixings. In the absence of other signs of structural weakness, this is not normally a safety concern. However, the staircase should be overhauled, with loose joints and fixings repaired as part of routine maintenance to reduce movement and prevent further deterioration.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Creaking stairs"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Staircase",
+            "type": "dropdown",
+            "options": [
+              "Creaking stairs",
+              "Repair now"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f7_creak_now",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_CREAKING_STAIRS_NOW}",
+        "text": "Repair now: The staircase creaks and exhibits noticeable movement when in use, suggesting that joints or fixings may have become loose or that the supporting timber requires repair. Although the exact cause could not be confirmed during this visual inspection, the staircase should be inspected by a suitably qualified contractor, with any necessary repairs carried out without delay to ensure it remains safe and serviceable.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Repair now"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wood_work_rocking_handrails",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f7_rocking",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_ROCKING_HANDRAILS}",
+        "text": "Rocking handrails: The staircase handrail, supported by timber balusters (spindles), was found to be loose and rocked when gently assessed. This is a safety hazard, as the handrail may fail if subjected to normal use or excessive force. Repairs should be carried out without delay by a suitably qualified contractor to securely fix the handrail and associated balustrade.",
+        "tokens": [],
+        "when": [
+          "cb_rocking_handrails",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_rocking_handrails",
+            "label": "Rocking handrails",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wood_work_open_threads",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f7_open_risers",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_NO_HANDRAILS}",
+        "text": "No handrails: The staircase has open risers (open treads), which present a safety hazard, particularly to young children, due to the risk of falling through or becoming trapped between the treads. Although open-riser staircases may have been acceptable when installed, they do not provide the same level of safety as modern enclosed staircases. A suitably qualified contractor should assess the staircase and install appropriate infill panels or other suitable guarding to improve safety. This work should be carried out without delay where young children are likely to occupy or visit the property.",
+        "tokens": [],
+        "when": [
+          "cb_open_threads",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_open_threads",
+            "label": "Open risers (no handrails)",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wood_work_repair_infestation",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f7_wb",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_WOOD_BORING}",
+        "text": "Wood-Boring Insects: I found {WB_SEVERITY} evidence of {WB_ACTIVITY} wood-boring insect activity in parts of the {WB_PARTS} in the {WB_LOCATION}. The extent of any concealed damage could not be determined during this visual inspection. Where activity is historic, no treatment may be necessary if the timber is dry and the infestation is inactive. Where active infestation is suspected, or significant timber deterioration is present, a suitably qualified timber specialist should inspect the affected areas, confirm the extent of the infestation, and carry out any necessary treatment and repairs without delay.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WB_SEVERITY}",
+            "options": [
+              [
+                "f7s_minor",
+                "minor"
+              ],
+              [
+                "f7s_significant",
+                "significant"
+              ]
+            ],
+            "pdf_options": [
+              "minor",
+              "significant"
+            ],
+            "label": "Evidence"
+          },
+          {
+            "kind": "checks",
+            "token": "{WB_ACTIVITY}",
+            "options": [
+              [
+                "f7a_active",
+                "active"
+              ],
+              [
+                "f7a_historic",
+                "historic"
+              ]
+            ],
+            "pdf_options": [
+              "active",
+              "historic"
+            ],
+            "label": "Activity"
+          },
+          {
+            "kind": "checks",
+            "token": "{WB_PARTS}",
+            "options": [
+              [
+                "f7p_staircase",
+                "staircase"
+              ],
+              [
+                "f7p_floorboards",
+                "floorboards"
+              ],
+              [
+                "f7p_skirting",
+                "skirting"
+              ],
+              [
+                "f7p_under_stairs",
+                "under stairs"
+              ],
+              [
+                "f7p_cupboards",
+                "cupboards"
+              ]
+            ],
+            "pdf_options": [
+              "staircase",
+              "floorboards",
+              "skirting",
+              "under stairs",
+              "cupboards"
+            ],
+            "label": "In parts of the",
+            "other": [
+              "f7p_other",
+              "f7p_other_text"
+            ]
+          },
+          {
+            "kind": "text",
+            "token": "{WB_LOCATION}",
+            "dropdown": "et_wb_location",
+            "field_label": "Location"
+          }
+        ],
+        "pdf": [
+          "Wood-Boring Insects: I found minor, significant evidence of active, historic wood-boring insect activity in parts of the staircase, floorboards, skirting, under stairs, cupboards, other timber in the (type in location)."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_woodwork_main_screen",
+    "rules": [
+      {
+        "id": "f7_general",
+        "masters": [
+          "{F_WOODWORK}"
+        ],
+        "sub": "{F7_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: A representative sample of timber has been inspected, but the possibility of concealed defects being present in inaccessible timber cannot be ruled out completely. Internal woodwork should be inspected and maintained as part of normal property ownership. Moving parts should be adjusted and lubricated where necessary. Timber should be redecorated periodically to protect exposed surfaces. Any source of moisture should be addressed promptly to minimise the risk of timber deterioration.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_in_side_property_cupboards",
+      "activity_in_side_property_wood_work",
+      "activity_in_side_property_wood_work_damaged_lock",
+      "activity_in_side_property_wood_work_damaged_lock__damaged_lock",
+      "activity_in_side_property_wood_work_repair_balusters",
+      "activity_in_side_property_wood_work_repair_damp_timber",
+      "activity_in_side_property_wood_work_not_inspected",
+      "activity_in_side_property_wood_work_glazed_internal_doors"
+    ]
+  }
+]

@@ -162,3 +162,5 @@ bank key, and the test that proves it.
 | F3 Walls and partitions | DONE (gate green after removing obsolete parity tests) | 20 rules (`gen_f3.py`): description, condition, add-ons, cracking/structural movement, hollow plaster (new), condensation, dampness (6 paragraphs), internal alterations, intro, general maintenance. |
 | F4 Floors | DONE (gate green after removing obsolete parity tests) | 18 rules (`gen_f4.py`); description/condition, creaking, repair timber floor, tiles, loose floorboards, wood boring, decay, dampness, underfloor ventilation, laminate, vibration, sloping, intro, general maintenance. |
 | F5 Fireplaces and chimneys | DONE (gate green after removing obsolete tests) | 11 rules (`gen_f5.py`); merged type screens; blocked fireplace, removed breasts, boiler flues, defects (new), dampness (new). |
+| F6 Built-in fittings | DONE (gate green after removing obsolete tests) | 11 rules (`gen_f6.py`). |
+| F7 Woodwork | DONE (gate green after removing obsolete parity test) | 13 rules (`gen_f7.py`); 8 old screens retired. F-derived J1 lines (out-of-square doors, infestation) stay as is until J1 is rebuilt. |

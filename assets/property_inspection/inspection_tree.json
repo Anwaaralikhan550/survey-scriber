@@ -8575,18 +8575,18 @@
           "order": 1,
           "fields": [
             {
-              "id": "label_location_30",
-              "label": "Location",
+              "id": "label_wt_rooms",
+              "label": "Worktops in",
               "type": "label"
             },
             {
-              "id": "cb_kitchen",
-              "label": "Kitchen",
+              "id": "f6wr_kitchen",
+              "label": "kitchen",
               "type": "checkbox"
             },
             {
-              "id": "cb_utility_room",
-              "label": "Utility room",
+              "id": "f6wr_utility_room",
+              "label": "utility room",
               "type": "checkbox"
             },
             {
@@ -8599,41 +8599,57 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_1008",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_worktops",
-              "label": "Worktops",
+              "id": "label_worktop_materials",
+              "label": "Worktops comprise",
               "type": "label"
             },
             {
-              "id": "cb_particle_board_93",
-              "label": "Particle board",
+              "id": "f6wt_laminate_particle_board",
+              "label": "laminate particle board",
               "type": "checkbox"
             },
             {
-              "id": "cb_timber_83",
-              "label": "Timber",
+              "id": "f6wt_solid_timber",
+              "label": "solid timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_granite_26",
-              "label": "Granite",
+              "id": "f6wt_granite",
+              "label": "granite",
               "type": "checkbox"
             },
             {
-              "id": "cb_marble_38",
-              "label": "Marble",
+              "id": "f6wt_quartz",
+              "label": "quartz",
               "type": "checkbox"
             },
             {
-              "id": "cb_glass_81",
-              "label": "Glass",
+              "id": "f6wt_stone",
+              "label": "stone",
               "type": "checkbox"
             },
             {
-              "id": "cb_metal_60",
-              "label": "Metal",
+              "id": "f6wt_corian",
+              "label": "Corian",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6wt_compressed_composite",
+              "label": "compressed composite",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6wt_marble",
+              "label": "marble",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6wt_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
@@ -8646,16 +8662,55 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_672",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_wall_cabinetbases",
-              "label": "Wall Cabinet/Bases",
+              "id": "label_ft_rooms",
+              "label": "Units in",
               "type": "label"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "f6fr_kitchen",
+              "label": "kitchen",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6fr_utility_room",
+              "label": "utility room",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6fr_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6fr_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f6fr_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_fitting_materials",
+              "label": "Units formed in",
+              "type": "label"
+            },
+            {
+              "id": "f6fm_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6fm_vinyl_wrapped_timber",
+              "label": "vinyl-wrapped timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6fm_laminated_mdf",
+              "label": "laminated MDF",
               "type": "checkbox"
             },
             {
@@ -8668,6 +8723,7 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_343",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
@@ -8675,119 +8731,166 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             },
             {
-              "id": "cb_kitchen_sink",
-              "label": "Kitchen sink",
+              "id": "label_sink_rooms",
+              "label": "Sink in",
+              "type": "label"
+            },
+            {
+              "id": "f6sr_kitchen",
+              "label": "kitchen",
               "type": "checkbox"
             },
             {
-              "id": "actv_sink_material",
-              "label": "Sink material",
+              "id": "f6sr_utility_room",
+              "label": "utility room",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6sr_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6sr_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f6sr_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_sink_material",
+              "label": "Sink formed in",
+              "type": "label"
+            },
+            {
+              "id": "f6sm_stainless_steel",
+              "label": "stainless steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6sm_ceramic",
+              "label": "ceramic",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6sm_composite",
+              "label": "composite",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6sm_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6sm_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6sm_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f6sm_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_sink_condition",
+              "label": "Sink condition",
               "type": "dropdown",
               "options": [
-                "Stainless steel",
-                "Ceramic",
-                "Composite",
-                "Stone",
-                "Other"
-              ],
-              "conditionalOn": "cb_kitchen_sink",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
             },
             {
-              "id": "cb_built_in_appliances",
-              "label": "Built-in appliances",
+              "id": "label_appliances",
+              "label": "The property incorporates",
+              "type": "label"
+            },
+            {
+              "id": "f6ap_oven",
+              "label": "oven",
               "type": "checkbox"
             },
             {
-              "id": "cb_appliance_oven",
-              "label": "Oven",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f6ap_hob",
+              "label": "hob",
+              "type": "checkbox"
             },
             {
-              "id": "cb_appliance_hob",
-              "label": "Hob",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f6ap_extractor_hood",
+              "label": "extractor hood",
+              "type": "checkbox"
             },
             {
-              "id": "cb_appliance_extractor_hood",
-              "label": "Extractor hood",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f6ap_microwave",
+              "label": "microwave",
+              "type": "checkbox"
             },
             {
-              "id": "cb_appliance_microwave",
-              "label": "Microwave",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f6ap_dishwasher",
+              "label": "dishwasher",
+              "type": "checkbox"
             },
             {
-              "id": "cb_appliance_dishwasher",
-              "label": "Dishwasher",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f6ap_refrigerator",
+              "label": "refrigerator",
+              "type": "checkbox"
             },
             {
-              "id": "cb_appliance_refrigerator",
-              "label": "Refrigerator",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f6ap_freezer",
+              "label": "freezer",
+              "type": "checkbox"
             },
             {
-              "id": "cb_appliance_freezer",
-              "label": "Freezer",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f6ap_washing_machine",
+              "label": "washing machine",
+              "type": "checkbox"
             },
             {
-              "id": "cb_appliance_washing_machine",
-              "label": "Washing machine",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "f6ap_tumble_dryer",
+              "label": "tumble dryer",
+              "type": "checkbox"
             },
             {
-              "id": "cb_appliance_tumble_dryer",
-              "label": "Tumble dryer",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_appliance_other",
+              "id": "f6ap_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_built_in_appliances",
+              "type": "checkbox"
+            },
+            {
+              "id": "f6ap_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f6ap_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_extractor_fan",
+              "id": "actv_extractor",
               "label": "Extractor fan",
+              "type": "dropdown",
+              "options": [
+                "Operating",
+                "Not operating"
+              ]
+            },
+            {
+              "id": "cb_general_maintenance",
+              "label": "General maintenance",
               "type": "checkbox"
             }
           ]
@@ -9301,202 +9404,9 @@
           "order": 2,
           "fields": [
             {
-              "id": "actv_repair_type",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
-            },
-            {
-              "id": "label_location_63",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_kitchen",
-              "label": "Kitchen",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_utility_room",
-              "label": "Utility room",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_672",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_361",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair now & cb_other_672",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_32",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_badly_worn_16",
-              "label": "Badly worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_badly_damaged_94",
-              "label": "Badly damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damp_95",
-              "label": "Damp",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_partly_rotted_19",
-              "label": "Partly rotted",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_insect_infested_26",
-              "label": "Insect infested",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_64",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_kitchen_51",
-              "label": "Kitchen",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_utility_room_15",
-              "label": "Utility room",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_332",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_336",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_332",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_31",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_worn",
-              "label": "Worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_badly_fitted",
-              "label": "Badly fitted",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_incomplete",
-              "label": "Incomplete",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_broken",
-              "label": "Broken",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_818",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_180",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_818",
-              "conditionalMode": "show"
+              "id": "cb_fittings_defects",
+              "label": "Fittings defects",
+              "type": "checkbox"
             }
           ]
         },
@@ -9508,48 +9418,68 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_made_up_of_2",
-              "label": "Made up of",
+              "id": "label_joinery_items",
+              "label": "Joinery items comprise",
               "type": "label"
             },
             {
-              "id": "cb_doors",
-              "label": "Doors",
+              "id": "f7i_internal_doors",
+              "label": "internal doors",
               "type": "checkbox"
             },
             {
-              "id": "cb_architraves",
-              "label": "Architraves",
+              "id": "f7i_door_frames",
+              "label": "door frames",
               "type": "checkbox"
             },
             {
-              "id": "cb_stairs",
-              "label": "Stairs",
+              "id": "f7i_skirting_boards",
+              "label": "skirting boards",
               "type": "checkbox"
             },
             {
-              "id": "cb_stairs_threads",
-              "label": "Stairs threads",
+              "id": "f7i_architraves",
+              "label": "architraves",
               "type": "checkbox"
             },
             {
-              "id": "cb_handrails",
-              "label": "Handrails",
+              "id": "f7i_staircases",
+              "label": "staircases",
               "type": "checkbox"
             },
             {
-              "id": "cb_balusters",
-              "label": "Balusters",
+              "id": "f7i_balustrades",
+              "label": "balustrades",
               "type": "checkbox"
             },
             {
-              "id": "cb_skirting_boards",
-              "label": "Skirting boards",
+              "id": "f7i_handrails",
+              "label": "handrails",
               "type": "checkbox"
             },
             {
-              "id": "cb_cladding",
-              "label": "Cladding",
+              "id": "f7i_window_boards",
+              "label": "window boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7i_timber_cladding",
+              "label": "timber cladding",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7i_wardrobe_s",
+              "label": "wardrobe(s)",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7i_cupboards",
+              "label": "cupboards",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7i_built_in_joinery",
+              "label": "built-in joinery",
               "type": "checkbox"
             },
             {
@@ -9562,6 +9492,7 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_410",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
@@ -9569,9 +9500,11 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -9584,83 +9517,14 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_door_locations",
-              "label": "Door location(s)",
-              "type": "label"
-            },
-            {
-              "id": "cb_lounge",
-              "label": "Lounge",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bedroom",
-              "label": "Bedroom",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_dining",
-              "label": "Dining room",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_kitchen",
-              "label": "Kitchen",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_905",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_689",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_905",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_47",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_damage_29",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_poorly_fitted_50",
-              "label": "Poorly fitted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_not_closing_well_53",
-              "label": "Not closing well",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_poorly_secured_28",
-              "label": "Poorly secured",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_443",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_362",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_443",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_door_not_closing_well",
-              "label": "Door not closing well",
-              "type": "checkbox"
+              "id": "actv_door_operation",
+              "label": "Doors opened and closed",
+              "type": "dropdown",
+              "options": [
+                "Freely",
+                "With resistance",
+                "With difficulty"
+              ]
             }
           ]
         },
@@ -10940,82 +10804,34 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_location_31",
-              "label": "Location",
+              "id": "label_sealant_defect_list",
+              "label": "Sealant is",
               "type": "label"
             },
             {
-              "id": "cb_kitchen_sink",
-              "label": "Kitchen sink",
+              "id": "f6sd_cracked",
+              "label": "cracked",
               "type": "checkbox"
             },
             {
-              "id": "cb_utility_room_sink",
-              "label": "Utility room sink",
+              "id": "f6sd_damaged",
+              "label": "damaged",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_717",
-              "label": "Other",
+              "id": "f6sd_moulded",
+              "label": "moulded",
               "type": "checkbox"
             },
             {
-              "id": "et_other_916",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_717",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_30",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_damaged_38",
-              "label": "Damaged",
+              "id": "f6sd_worn",
+              "label": "worn",
               "type": "checkbox"
             },
             {
-              "id": "cb_partly_missing_86",
-              "label": "Partly missing",
+              "id": "f6sd_missing",
+              "label": "missing",
               "type": "checkbox"
-            },
-            {
-              "id": "cb_poorly_applied_75",
-              "label": "Poorly applied",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_356",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_817",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_356",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_in_side_property_cupboards",
-          "title": "Fitted/Builtin Cupboards",
-          "type": "screen",
-          "parentId": "group_wood_work_75",
-          "order": 4,
-          "fields": [
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
             }
           ]
         },
@@ -11034,257 +10850,134 @@
           "order": 4,
           "fields": [
             {
-              "id": "actv_repair_type",
-              "label": "Repair type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
+              "id": "label_joinery_elements",
+              "label": "Joinery elements including",
+              "type": "label"
             },
             {
-              "id": "label_location_57",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f7e_doors",
+              "label": "doors",
+              "type": "checkbox"
             },
             {
-              "id": "cb_stairs",
-              "label": "Stairs",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f7e_locks",
+              "label": "locks",
+              "type": "checkbox"
             },
             {
-              "id": "cb_stairs_threads",
-              "label": "Stairs threads",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f7e_door_frames",
+              "label": "door frames",
+              "type": "checkbox"
             },
             {
-              "id": "cb_handrails",
-              "label": "Handrails",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f7e_skirting_boards",
+              "label": "skirting boards",
+              "type": "checkbox"
             },
             {
-              "id": "cb_balusters",
-              "label": "Balusters",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f7e_architraves",
+              "label": "architraves",
+              "type": "checkbox"
             },
             {
-              "id": "cb_skirting_boards",
-              "label": "Skirting boards",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "id": "f7e_the_staircase",
+              "label": "the staircase",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_1084",
+              "id": "f7e_balustrades",
+              "label": "balustrades",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7e_handrails",
+              "label": "handrails",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7e_window_boards",
+              "label": "window boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7e_timber_cladding",
+              "label": "timber cladding",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7e_cupboards",
+              "label": "cupboards",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7e_built_in_joinery",
+              "label": "built-in joinery",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7e_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_661",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_1084",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_51",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_worn_68",
-              "label": "Worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loose_20",
-              "label": "Loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_fitted_73",
-              "label": "Poorly fitted",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged_42",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_secured_55",
-              "label": "Poorly secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_612",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_366",
+              "id": "f7e_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_612",
+              "conditionalOn": "f7e_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_location_58",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "label_joinery_defects",
+              "label": "Found to be",
+              "type": "label"
             },
             {
-              "id": "cb_stairs_49",
-              "label": "Stairs",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "f7d_worn",
+              "label": "worn",
+              "type": "checkbox"
             },
             {
-              "id": "cb_stairs_threads_27",
-              "label": "Stairs threads",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "f7d_loose",
+              "label": "loose",
+              "type": "checkbox"
             },
             {
-              "id": "cb_handrails_94",
-              "label": "Handrails",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "f7d_poorly_fitted",
+              "label": "poorly fitted",
+              "type": "checkbox"
             },
             {
-              "id": "cb_balusters_64",
-              "label": "Balusters",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "f7d_damaged",
+              "label": "damaged",
+              "type": "checkbox"
             },
             {
-              "id": "cb_skirting_boards_47",
-              "label": "Skirting boards",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "f7d_inadequately_secured",
+              "label": "inadequately secured",
+              "type": "checkbox"
             },
             {
-              "id": "label_defect_50",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "f7d_missing",
+              "label": "missing",
+              "type": "checkbox"
             },
             {
-              "id": "cb_badly_worn",
-              "label": "Badly worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "id": "f7d_affected_by_decay",
+              "label": "affected by decay",
+              "type": "checkbox"
             },
             {
-              "id": "cb_very_loose",
-              "label": "Very loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_incomplete",
-              "label": "Incomplete",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_missing",
-              "label": "Missing",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damp",
-              "label": "Damp",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotten",
-              "label": "Rotten",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_766",
+              "id": "f7d_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type",
-              "conditionalValue": "Repair now",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_516",
+              "id": "f7d_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_repair_type=Repair now & cb_other_766",
+              "conditionalOn": "f7d_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -12691,150 +12384,59 @@
           "order": 6,
           "fields": [
             {
-              "id": "label_location_32",
-              "label": "Location",
+              "id": "label_fitting_defect_list",
+              "label": "One or more of the following defects were observed",
               "type": "label"
             },
             {
-              "id": "cb_kitchen_sink",
-              "label": "Kitchen sink",
+              "id": "f6dl_damaged_cupboard_doors",
+              "label": "damaged cupboard doors",
               "type": "checkbox"
             },
             {
-              "id": "cb_Utility_room_sink",
-              "label": "Utility room sink",
+              "id": "f6dl_loose_hinges",
+              "label": "loose hinges",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_717",
-              "label": "Other",
+              "id": "f6dl_damaged_worktops",
+              "label": "damaged worktops",
               "type": "checkbox"
             },
             {
-              "id": "et_other_916",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_717",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_in_side_property_wood_work_damaged_lock",
-          "title": "Damaged Lock",
-          "type": "screen",
-          "parentId": "group_wood_work_75",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_damaged_lock_in_the",
-              "label": "Damaged lock in the",
-              "type": "label"
-            },
-            {
-              "id": "cb_lounge",
-              "label": "Lounge",
+              "id": "f6dl_worn_finishes",
+              "label": "worn finishes",
               "type": "checkbox"
             },
             {
-              "id": "cb_bedroom",
-              "label": "Bedroom",
+              "id": "f6dl_defective_sealant",
+              "label": "defective sealant",
               "type": "checkbox"
             },
             {
-              "id": "cb_dining",
-              "label": "Dining room",
+              "id": "f6dl_cracked_wall_tiles",
+              "label": "cracked wall tiles",
               "type": "checkbox"
             },
             {
-              "id": "cb_kitchen",
-              "label": "Kitchen",
+              "id": "f6dl_damaged_plinths",
+              "label": "damaged plinths",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_776",
-              "label": "Other",
+              "id": "f6dl_water_damaged_units",
+              "label": "water-damaged units",
               "type": "checkbox"
             },
             {
-              "id": "et_other_770",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_776",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_46",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_damaged_58",
-              "label": "Damaged",
+              "id": "f6dl_misaligned_drawers",
+              "label": "misaligned drawers",
               "type": "checkbox"
             },
             {
-              "id": "cb_in_disrepair_33",
-              "label": "In disrepair",
+              "id": "f6dl_loose_handles",
+              "label": "loose handles",
               "type": "checkbox"
-            },
-            {
-              "id": "cb_stuck_35",
-              "label": "Stuck",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_629",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_259",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_629",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_in_side_property_wood_work_repair_balusters",
-          "title": "Balusters",
-          "type": "screen",
-          "parentId": "group_repairs_76",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_defect_48",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_too_far_apart_93",
-              "label": "Too far apart",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_missing_47",
-              "label": "Missing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_broken_89",
-              "label": "Broken",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_890",
-              "label": "other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_516",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_890",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -13012,34 +12614,6 @@
             {
               "id": "cb_unsafe_floor",
               "label": "Unsafe floor",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_in_side_property_built_in_fittings_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_f6_built_in_fittings_72",
-          "order": 7,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not inspected",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_in_side_property_wood_work_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_f7_woodwork_74",
-          "order": 7,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not inspected",
               "type": "checkbox"
             }
           ]
@@ -13452,47 +13026,6 @@
           ]
         },
         {
-          "id": "activity_in_side_property_built_in_fittings_repair_water_seepage",
-          "title": "Water Seepage",
-          "type": "screen",
-          "parentId": "group_repairs_73",
-          "order": 8,
-          "fields": [
-            {
-              "id": "label_location_33",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_kitchen_sink",
-              "label": "Behind the fitting",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_Utility_room_sink",
-              "label": "Affecting the adjacent surfaces",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_Hidden_parts",
-              "label": "Hidden parts",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_717",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_916",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_717",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_in_side_property_wood_work_repair_infestation",
           "title": "Infestation",
           "type": "screen",
@@ -13500,97 +13033,82 @@
           "order": 8,
           "fields": [
             {
-              "id": "actv_condition",
-              "label": "Severity",
-              "type": "dropdown",
-              "options": [
-                "Minor",
-                "Major"
-              ]
-            },
-            {
-              "id": "label_infestation_in_part_of",
-              "label": "Infestation in Part Of",
+              "id": "label_wb_severity",
+              "label": "Evidence",
               "type": "label"
             },
             {
-              "id": "cb_staircase",
-              "label": "Staircase",
+              "id": "f7s_minor",
+              "label": "minor",
               "type": "checkbox"
             },
             {
-              "id": "cb_floorboards",
-              "label": "Floorboards",
+              "id": "f7s_significant",
+              "label": "significant",
               "type": "checkbox"
             },
             {
-              "id": "cb_skirting",
-              "label": "Skirting",
+              "id": "label_wb_activity",
+              "label": "Activity",
+              "type": "label"
+            },
+            {
+              "id": "f7a_active",
+              "label": "active",
               "type": "checkbox"
             },
             {
-              "id": "cb_under_stairs",
-              "label": "Under stairs",
+              "id": "f7a_historic",
+              "label": "historic",
               "type": "checkbox"
             },
             {
-              "id": "cb_cupboards",
-              "label": "Cupboards",
+              "id": "label_wb_parts",
+              "label": "In parts of the",
+              "type": "label"
+            },
+            {
+              "id": "f7p_staircase",
+              "label": "staircase",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_1032",
+              "id": "f7p_floorboards",
+              "label": "floorboards",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7p_skirting",
+              "label": "skirting",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7p_under_stairs",
+              "label": "under stairs",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7p_cupboards",
+              "label": "cupboards",
+              "type": "checkbox"
+            },
+            {
+              "id": "f7p_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_728",
+              "id": "f7p_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_1032",
+              "conditionalOn": "f7p_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_location_43",
+              "id": "et_wb_location",
               "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_plastic",
-              "label": "Lounge",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cast_iron",
-              "label": "Reception",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_asbestos_cement",
-              "label": "Dining room",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Kitchen",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_Bedroom",
-              "label": "Bedroom",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_697",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_427",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_697",
-              "conditionalMode": "show"
+              "type": "text"
             }
           ]
         },
@@ -13976,126 +13494,6 @@
           "order": 10
         },
         {
-          "id": "activity_in_side_property_wood_work_repair_damp_timber",
-          "title": "Damp timber",
-          "type": "screen",
-          "parentId": "group_repairs_76",
-          "order": 10,
-          "fields": [
-            {
-              "id": "label_component",
-              "label": "Component",
-              "type": "label"
-            },
-            {
-              "id": "cb_staircase",
-              "label": "Staircase",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_floorboards",
-              "label": "Floorboards",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_skirting",
-              "label": "Skirting",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_under_stairs",
-              "label": "Under stairs",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_cupboards",
-              "label": "Cupboards",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_270",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_516",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_270",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_42",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_lounge_72",
-              "label": "Lounge",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_reception_49",
-              "label": "Reception",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_dining_room_84",
-              "label": "Dining room",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_kitchen_72",
-              "label": "Kitchen",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bedroom_44",
-              "label": "Bedroom",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_750",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_302",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_750",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_49",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_damp",
-              "label": "Damp",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rotten",
-              "label": "Rotten",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_498",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_534",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_498",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_in_side_property_bathroom_fittings_mould",
           "title": "Moulding",
           "type": "screen",
@@ -14287,84 +13685,6 @@
           "type": "group",
           "parentId": null,
           "order": 12
-        },
-        {
-          "id": "activity_in_side_property_wood_work_damaged_lock__damaged_lock",
-          "title": "Damaged Lock",
-          "type": "screen",
-          "parentId": "group_repairs_76",
-          "order": 12,
-          "fields": [
-            {
-              "id": "label_damaged_lock_in_the_2",
-              "label": "Damaged lock in the",
-              "type": "label"
-            },
-            {
-              "id": "cb_lounge",
-              "label": "Lounge",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bedroom",
-              "label": "Bedroom",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_dining",
-              "label": "Dining room",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_kitchen",
-              "label": "Kitchen",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_776",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_770",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_776",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_92",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_damaged_58",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_in_disrepair_33",
-              "label": "In disrepair",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_stuck_35",
-              "label": "Stuck",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_629",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_259",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_629",
-              "conditionalMode": "show"
-            }
-          ]
         },
         {
           "id": "activity_in_side_property_bathroom_fittings_wood_rot",
@@ -15410,6 +14730,11 @@
                 "2",
                 "3"
               ]
+            },
+            {
+              "id": "cb_general_maintenance",
+              "label": "General maintenance",
+              "type": "checkbox"
             }
           ]
         },
@@ -15494,78 +14819,6 @@
           "inlinePosition": "header"
         },
         {
-          "id": "activity_in_side_property_wood_work",
-          "title": "Wood Work",
-          "type": "screen",
-          "parentId": "group_wood_work_75",
-          "order": 1,
-          "inlinePosition": "header",
-          "fields": [
-            {
-              "id": "label_woodwork",
-              "label": "Woodwork",
-              "type": "label"
-            },
-            {
-              "id": "label_fittedbuiltin_cupboards",
-              "label": "Fitted/Builtin Cupboards",
-              "type": "label"
-            },
-            {
-              "id": "label_damaged_lock",
-              "label": "Damaged Lock",
-              "type": "label"
-            },
-            {
-              "id": "cb_Door_sampling",
-              "label": "Door sampling",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "cb_Door_sampling",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_out_of_square_doors",
-              "label": "Out of Square Doors",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_glazed_internal_doors",
-              "label": "Glazed Internal Doors",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_creaking_stairs",
-              "label": "Creaking Stairs",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_stairs_handrails",
-              "label": "Rocking Stairs Handrails",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_no_stairs_handrails",
-              "label": "No Stairs Handrails",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_open_threads",
-              "label": "Open Stair Threads",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
           "id": "activity_in_side_property_wood_work_creaking_stairs",
           "title": "Creaking Stairs",
           "type": "screen",
@@ -15573,23 +14826,13 @@
           "order": 200,
           "fields": [
             {
-              "id": "cb_is_creaking_stairs",
-              "label": "Creaking stairs",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_in_side_property_wood_work_glazed_internal_doors",
-          "title": "Glazed Internal Doors",
-          "type": "screen",
-          "parentId": "group_wood_work_75",
-          "order": 201,
-          "fields": [
-            {
-              "id": "cb_no_safety_glass_rating",
-              "label": "No safety glass rating",
-              "type": "checkbox"
+              "id": "actv_status",
+              "label": "Staircase",
+              "type": "dropdown",
+              "options": [
+                "Creaking stairs",
+                "Repair now"
+              ]
             }
           ]
         },
@@ -15602,7 +14845,7 @@
           "fields": [
             {
               "id": "cb_open_threads",
-              "label": "Open threads",
+              "label": "Open risers (no handrails)",
               "type": "checkbox"
             }
           ]
@@ -15615,9 +14858,13 @@
           "order": 203,
           "fields": [
             {
-              "id": "cb_out_of_square_doors",
-              "label": "Out of square doors",
-              "type": "checkbox"
+              "id": "actv_status",
+              "label": "Distorted doors and frames",
+              "type": "dropdown",
+              "options": [
+                "Out of square door/frames",
+                "Investigate"
+              ]
             }
           ]
         },
@@ -15629,13 +14876,9 @@
           "order": 204,
           "fields": [
             {
-              "id": "actv_status",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "None",
-                "Rocking handrails present"
-              ]
+              "id": "cb_rocking_handrails",
+              "label": "Rocking handrails",
+              "type": "checkbox"
             }
           ]
         }

@@ -61,18 +61,6 @@ void main() {
       expect(phrases.join(' ').toLowerCase(), isNot(contains('fire-other=')));
     });
 
-    test('built-in repair reads llMainContainer repair type', () {
-      final phrases = engine.buildPhrases(
-        'activity_in_side_property_built_in_fittings_repair_fittings',
-        <String, String>{
-          'llMainContainer': 'Repair now',
-          'cb_kitchen': 'true',
-          'cb_badly_worn_16': 'true',
-        },
-      );
-      expect(phrases.join(' ').toLowerCase(), contains('bif-now='));
-    });
-
     test('bathroom repair reads llMainContainer repair type', () {
       final phrases = engine.buildPhrases(
         'activity_in_side_property_bathroom_fittings_repair',
