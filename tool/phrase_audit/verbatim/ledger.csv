@@ -184,9 +184,9 @@ b8080a8dae,E1,"Repair now: This is a safety hazard, and the aerial/satellite dis
 00478e4cc5,E1,"Where loose or inadequately fixed, repairs should be carried out promptly to prevent damage during adverse weather.",EXACT,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_NOW_SAFETY_HAZARD},100,DONE
 33e9cb13d6,E1,"General notes: Routine maintenance works should be carried out to prevent water penetration and thereafter as and when due, to keep the stacks in good condition.",EXACT,{E_CHIMNEY_REPAIR}::{STANDARD_TEXT},100,DONE
 f05d3992dc,E1,"It would also be wise to check the condition of the chimney pots, flaunching, and flashing, during routine maintenance and carry out all necessary works to ensure weather tightness of the stacks.",EXACT,{E_CHIMNEY_REPAIR}::{STANDARD_TEXT},100,DONE
-062aa57fc7,E1,"If the Property is a Flat, add this: You should ask the management company whether any repairs to the chimney stack(s) have been carried out previously or are currently proposed.",EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE
-4d8e958cb5,E1,"Your legal adviser should confirm responsibility for repairs to the chimney stack(s) with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE
-840e1127c7,E1,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE
+062aa57fc7,E1,"If the Property is a Flat, add this: You should ask the management company whether any repairs to the chimney stack(s) have been carried out previously or are currently proposed.",EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
+4d8e958cb5,E1,"Your legal adviser should confirm responsibility for repairs to the chimney stack(s) with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
+840e1127c7,E1,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
 ff4b304a8c,E1,"Condition rating 1 The element(s) are performing their intended function, and no significant defects were observed.",EXACT,{E_CHIMNEY_REPAIR_CONDITION_RATING}::{CONDITION_RATING_1},100,DONE
 7e4cd0eb87,E1,Routine maintenance appropriate to the age and construction should be expected.,EXACT,{E_CHIMNEY_REPAIR_CONDITION_RATING}::{CONDITION_RATING_1},100,DONE
 406430f3fc,E1,Condition rating 2 Defects requiring repair or maintenance were identified.,EXACT,{E_CHIMNEY_REPAIR_CONDITION_RATING}::{CONDITION_RATING_2},100,DONE
@@ -317,7 +317,7 @@ ac5d7bbe0b,E2,"General maintenance: Roof coverings should be inspected periodica
 fb07222ec5,E2,"Add text to: Section J1 - Risk to Building - The roof slopes to the front, side and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards.",EXACT,{RISK_TO_BUILDING}::{ROOF_SPREADING},100,DONE
 1ddd6a9e13,E2,"If the Property is a Flat, add this: You should ask the management company whether any repairs to the roof covering have been carried out previously or are currently proposed.",EXACT,{E_ROOF_COVERING_REPAIR}::{E_RC_REPAIR_DEFAULT_TEXT},100,DONE
 bb05cf79ba,E2,"Your legal adviser should confirm responsibility for repairs to the roof covering with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_ROOF_COVERING_REPAIR}::{E_RC_DEFAULT_TEXT_IF_FLAT_ROOF},100,DONE
-de0455e805,E2,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE
+de0455e805,E2,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
 ff1f75406d,E3,Not Inspected: The rainwater goods could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_NOT_INSPECTED},100,DONE
 6826165716,E3,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
 80bcf455a3,E3,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
@@ -360,9 +360,9 @@ a211b57920,E3,Blocked gullies may result in localised flooding and water penetra
 f6f33ed7b2,E3,"Add text to: Section J1 - Risk to Building - One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted.",EXACT,{RISK_TO_BUILDING}::{RWG_DEFECTS},100,DONE
 66f0879e69,E3,"General Maintenance: Rainwater goods should be inspected and cleared at regular intervals, particularly during the autumn and following severe weather.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_STANDARD_TEXT},100,DONE
 8061daad21,E3,"Routine maintenance will assist in preventing blockages, overflow, water penetration, and premature deterioration.",MENU,,0,VERIFIED
-8a9130fc27,E3,"If the Property is a Flat, add this: You should ask the management company whether any repairs to the rainwater goods have been carried out previously or are currently proposed.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_PROPERTY_FLAT_SELECTED},100,DONE
-90782d46f0,E3,"Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_PROPERTY_FLAT_SELECTED},100,DONE
-483cc8fe52,E3,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE
+8a9130fc27,E3,"If the Property is a Flat, add this: You should ask the management company whether any repairs to the rainwater goods have been carried out previously or are currently proposed.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{FLAT_MANAGEMENT},100,DONE
+90782d46f0,E3,"Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{FLAT_MANAGEMENT},100,DONE
+483cc8fe52,E3,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
 e4c548c5a1,E4,The external walls have been inspected visually and by touch from the outside and internally where exposed.,EXACT,{E_MAIN_WALLS}::{STANDARD_TEXT},100,DONE
 5df284bfe5,E4,No opening up or destructive investigation has been undertaken.,EXACT,{E_MAIN_WALLS}::{STANDARD_TEXT},100,DONE
 244e656e2e,E4,The composition of the wall material cannot be fully confirmed without causing damage to the walls.,EXACT,{E_MAIN_WALLS}::{STANDARD_TEXT},100,DONE
@@ -530,9 +530,9 @@ e560132df1,E4,Minor Defect: Localised defects were observed.,EXACT,{E_MAIN_WALLS
 09c0881c41,E4,General Maintenance: External walls should be inspected periodically as part of routine maintenance.,EXACT,{E_MAIN_WALLS}::{E4_GENERAL_MAINTENANCE},100,DONE
 cc4f587329,E4,"Prompt repair of defective pointing, render, sealants, and isolated masonry defects will assist in maintaining the weather resistance and structural integrity of the building.",EXACT,{E_MAIN_WALLS}::{E4_GENERAL_MAINTENANCE},100,DONE
 7187e4907b,E4,"If the Property is a Flat, add this.",MENU,,0,UNVERIFIED
-3ab66b2b27,E4,You should ask the management company whether any repairs to the external walls have been carried out previously or are currently proposed.,ADD,{E_MAIN_WALLS}::{E4_EXTENSIONS},53,OPEN
-6406ebc7e1,E4,"Your legal adviser should confirm responsibility for repairs to the external walls with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",ADD,{E_MAIN_WALLS}::{E4_EWS1_NOT_REQUIRED},50,OPEN
-c4a5d7bcea,E4,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE
+3ab66b2b27,E4,You should ask the management company whether any repairs to the external walls have been carried out previously or are currently proposed.,EXACT,{E_MAIN_WALLS}::{FLAT_MANAGEMENT},100,DONE
+6406ebc7e1,E4,"Your legal adviser should confirm responsibility for repairs to the external walls with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_MAIN_WALLS}::{FLAT_MANAGEMENT},100,DONE
+c4a5d7bcea,E4,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
 2000ff5e12,E5,Not every part of the windows was inspected in detail.,EXACT,{E_WINDOWS}::{WINDOWS_STANDARD_TEXT},100,DONE
 c09008b3f8,E5,The inspection was limited to those parts that were readily accessible without causing damage or moving furnishings.,EXACT,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},100,DONE
 e89b2ed8cc,E5,Only a representative sample of accessible windows was opened and closed during the inspection.,EXACT,{E_WINDOWS}::{WINDOWS_STANDARD_TEXT},100,DONE
@@ -747,8 +747,8 @@ b7eb6cdee0,E8,"Otherwise, where decay is advanced, localised repair or replaceme
 3c551c0555,E8,"Before carrying out repairs, alterations or removal, specialist advice should be obtained.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{CONTAIN_ASBESTOS},100,DONE
 2e1bd3d44b,E8,"Defective Joinery One or more defects were observed, including: • Loose fascias • Loose soffits • Damaged bargeboards • Open joints • Defective fixings • Weathered decoration • Localised timber decay • Distorted joinery • Minor impact damage Repairs should be undertaken to prevent further deterioration and maintain weather resistance.",MENU,,0,VERIFIED
 ec10c53080,E8,"If the property is a flat, add the following.",MENU,,0,DONE
-5064c3290d,E8,"As this is a leasehold property, your legal adviser should confirm, before the exchange of contracts, the provisions within the lease relating to the maintenance and external redecoration of the building, including when such works are due to be carried out and who is responsible for the cost.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{IF_PROPERTY_FLAT_IS_SELECTED},100,DONE
-400cef4c65,E8,"You should also ask the management company whether any repairs or external redecoration works have been undertaken previously, whether any are currently planned, and whether any associated costs are likely to be payable by leaseholders.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{IF_PROPERTY_FLAT_IS_SELECTED},100,DONE
+5064c3290d,E8,"As this is a leasehold property, your legal adviser should confirm, before the exchange of contracts, the provisions within the lease relating to the maintenance and external redecoration of the building, including when such works are due to be carried out and who is responsible for the cost.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{FLAT_MANAGEMENT},100,DONE
+400cef4c65,E8,"You should also ask the management company whether any repairs or external redecoration works have been undertaken previously, whether any are currently planned, and whether any associated costs are likely to be payable by leaseholders.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{FLAT_MANAGEMENT},100,DONE
 9f04a5217a,E8,General Maintenance: External joinery should be inspected periodically as part of routine property maintenance.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
 e851565807,E8,Timber components should be redecorated at appropriate intervals to maintain protection against weathering.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
 2ac9755826,E8,"Sealants, fixings, and joints should be inspected regularly and renewed where deterioration becomes evident.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},100,DONE
@@ -845,10 +845,10 @@ c55b37b7e9,E9,"Decorations: The decorations to the stairway are peeling, flaking
 ee10214bca,E9,General Maintenance: External ancillary structures should be inspected periodically as part of routine property maintenance.,EXACT,{E_OTHER_AREA}::{E9_GENERAL_MAINTENANCE},100,DONE
 2cf1141064,E9,"Rainwater disposal, structural stability, guarding, fixings, waterproofing and external finishes should be maintained to reduce the risk of deterioration and ensure continued safe use.",MENU,,0,VERIFIED
 9b30dd14a1,E9,"If the property is a flat, add the following.",MENU,,0,DONE
-bd164b5c81,E9,It is assumed that the common parts are maintained under appropriate maintenance contracts and are the responsibility of the management company.,EXACT,{E_OTHER}::{COMMUNAL_AREA_CONDITION},100,DONE
-e6776721e7,E9,Your legal adviser should obtain full details and refer to Section I3 - Issues for Your Legal Adviser.,ADD,{E_OTHER}::{COMMUNAL_AREA_CONDITION},62,OPEN
-fde54f0b2f,E9,Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos.,EXACT,{E_OTHER}::{COMMUNAL_AREA_CONDITION},100,DONE
-6c8993a6a3,E9,"Where communal facilities are provided, your legal adviser should confirm: the identity of the management company, responsibility for maintenance and repairs, current service charges and reserve fund contributions, any planned major works, and any outstanding maintenance liabilities.",UNRESOLVED,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},50,OPEN
+bd164b5c81,E9,It is assumed that the common parts are maintained under appropriate maintenance contracts and are the responsibility of the management company.,EXACT,{E_OTHER_AREA}::{FLAT_MANAGEMENT},100,DONE
+e6776721e7,E9,Your legal adviser should obtain full details and refer to Section I3 - Issues for Your Legal Adviser.,EXACT,{E_OTHER_AREA}::{FLAT_MANAGEMENT},100,DONE
+fde54f0b2f,E9,Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos.,EXACT,{E_OTHER_AREA}::{FLAT_MANAGEMENT},100,DONE
+6c8993a6a3,E9,"Where communal facilities are provided, your legal adviser should confirm: the identity of the management company, responsibility for maintenance and repairs, current service charges and reserve fund contributions, any planned major works, and any outstanding maintenance liabilities.",EXACT,{E_OTHER_AREA}::{FLAT_MANAGEMENT},100,DONE
 b355940e56,E9,"Condition rating 123 F Inside the Property Inspection Limitations It was not practical to inspect parts of the property that were covered, concealed or otherwise inaccessible without causing damage or disturbance, such as lifting carpets or removing fixed fittings.",UNRESOLVED,{E_OTHER_AREA}::{E9_E9_R_ROOF},43,OPEN
 2d09d59be0,E9,"Consequently, no assurance can be given regarding the condition of these concealed areas.",ADD,{E_OTHER_AREA}::{E9_INTRO},52,OPEN
 0095050343,E9,This report relates only to those parts of the property that were reasonably accessible at the time of the inspection.,ADD,{E_OTHER_AREA}::{E9_INTRO},74,OPEN
@@ -987,9 +987,9 @@ b3f524b94e,F1,The pipe should be inspected by a suitably qualified plumber to es
 0db4d9bee4,F1,Roof timbers should be inspected whenever significant roofing works are undertaken.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_GENERAL_MAINTENANCE},100,DONE
 93f0549eae,F1,Prompt attention to water penetration will reduce the risk of timber decay and associated structural deterioration.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_GENERAL_MAINTENANCE},100,DONE
 04a5b8beac,F1,"If the Property is a Flat, add this.",MENU,,0,UNVERIFIED
-502ad9fbbc,F1,You should ask the management company whether any repairs to the roof structure have been carried out previously or are currently proposed.,ADD,{F_ABOUT_ROOF_STRUCTURE}::{DEFAULT_TEXT_IF_FLAT},69,OPEN
-965d19b3ce,F1,"Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_PROPERTY_FLAT_SELECTED},100,DONE
-f56c8befe8,F1,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE
+502ad9fbbc,F1,You should ask the management company whether any repairs to the roof structure have been carried out previously or are currently proposed.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{FLAT_MANAGEMENT},100,DONE
+965d19b3ce,F1,"Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{FLAT_MANAGEMENT},100,DONE
+f56c8befe8,F1,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_MULTI_STACK}::{FLAT_MANAGEMENT},100,DONE
 9394cf62bc,F2,The ceilings have been inspected from within the rooms only.,EXACT,{F_CEILINGS}::{F2_INTRO},100,DONE
 fc83754e97,F2,No opening up or destructive investigation has been undertaken.,EXACT,{E_MAIN_WALLS}::{STANDARD_TEXT},100,DONE
 6632c80c6c,F2,"Description: The ceilings are formed in plaster, plasterboard, lath and plaster, other ceilings.",MENU,,0,VERIFIED
@@ -1402,7 +1402,7 @@ e906f4a3a4,G3,Not found: There is an independent mains water supply to the prope
 829941ce59,G3,"Please ask the vendor about the location of the water stopcock, as you must know where it is located.",EXACT,{G_WATER}::{G3_STOPCOCK_NOT_FOUND},100,DONE
 e170a5f29b,G3,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
 957861a151,G3,Lead rising: The visible incoming water supply pipe is lead.,EXACT,{G_WATER}::{G3_LEAD_RISING},100,DONE
-516f6d9e1d,G3,"Lead pipework was commonly used before 1970 and may allow small amounts of lead to enter the drinking water, particularly in soft water areas, presenting a potential health risk (see Section J3 - Risks).",UNRESOLVED,{G_WATER}::{G3_LEAD_RISING},93,OPEN
+516f6d9e1d,G3,"Lead pipework was commonly used before 1970 and may allow small amounts of lead to enter the drinking water, particularly in soft water areas, presenting a potential health risk (see Section J3 - Risks).",ACCEPT,{G_WATER}::{G3_LEAD_RISING},93,DONE
 4711076657,G3,You should obtain advice from your water supplier and consider replacing the lead pipework to eliminate this risk.,EXACT,{G_WATER}::{G3_LEAD_RISING},100,DONE
 1285ef2344,G3,Further information is available from the Drinking Water Inspectorate.,EXACT,{G_WATER}::{G3_LEAD_RISING},100,DONE
 490d46b8d3,G3,You should obtain advice from your water supplier and arrange for replacement of the lead pipework where appropriate.,EXACT,{G_WATER}::{G3_LEAD_RISING},100,DONE
@@ -1749,13 +1749,13 @@ e663fa7d19,J1,"I am unable to confirm, from a single visual inspection, whether 
 3f01e7e42a,J1,Tree defects: One or more trees are located close to the property.,EXACT,{H_OTHER}::{H2_NEARBY_TREES},100,DONE
 750d3e78cf,J1,Detrimental effects on the property were noted.,EXACT,{RISK_TO_BUILDING}::{J1_TREE_DEFECTS},100,DONE
 da58607b1c,J1,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
-e028281c9b,J2,"Influencing trees: There are small, medium or large trees within influencing distance of the property.",FIX,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},84,OPEN
+e028281c9b,J2,"Influencing trees: There are small, medium or large trees within influencing distance of the property.",TOKENISED,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},84,DONE
 003846ae76,J2,"Where no evidence of damage was observed, no further action is required.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE
 9a30c52b3e,J2,"However, where damage is evident, further investigation should be undertaken by a qualified tree specialist.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE
 bf09032e1e,J2,Routine tree management should be carried out as necessary.,EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE
 8421398ff9,J2,"Retaining Walls: Evidence of movement, bulging, cracking, deterioration was observed.",MENU,,0,UNVERIFIED
 9f473a8c8a,J2,Further investigation should be undertaken where structural stability appears affected and appropriate repair or rebuild organised.,EXACT,{RISK_TO_GROUNDS}::{GROUNDS_RETAINING_WALLS},100,DONE
-6278ba8965,J2,"Sloping Ground: The property may be situated on gently, moderately, steeply sloping ground.",UNRESOLVED,{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND},77,OPEN
+6278ba8965,J2,"Sloping Ground: The property may be situated on gently, moderately, steeply sloping ground.",TOKENISED,{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND},77,DONE
 d8c6a36242,J2,"Sloping sites are more susceptible to drainage problems, erosion, ground movement, and retaining wall issues if not properly maintained.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND},100,DONE
 f26bde1fdb,J2,"Regular monitoring and routine maintenance of drainage systems, external ground levels, and retaining structures (where present) are recommended to help minimise future risks.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND},100,DONE
 2786cc81d6,J3,"Trip Hazards: Potential trip hazards were identified, including uneven paving, damaged steps, raised thresholds, uneven floor surfaces, loose floor coverings, damaged decking, other.",MENU,,0,UNVERIFIED
@@ -1773,7 +1773,7 @@ a7947d7b63,J3,"As a precaution, we recommend that an asbestos identification sur
 8ec887184e,J3,The inspection undertaken for this survey is not intended to identify or confirm the presence of asbestos.,EXACT,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},100,DONE
 cd60cf98c4,J3,"According to the Health and Safety Executive (HSE), asbestos-containing materials do not normally present a significant health risk if they are in good condition and remain undisturbed.",EXACT,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},100,DONE
 ee1faf1c43,J3,"However, if such materials are damaged, drilled, cut, or otherwise disturbed, asbestos fibres may be released, posing a health hazard and requiring specialist management or removal.",MENU,,0,UNVERIFIED
-b3cdc1b162,J3,Any work involving suspected asbestos-containing materials must comply with the **Control of Asbestos Regulations 2012**.,FIX,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},98,OPEN
+b3cdc1b162,J3,Any work involving suspected asbestos-containing materials must comply with the **Control of Asbestos Regulations 2012**.,QUERY,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},98,OPEN
 b6c119037e,J3,"These regulations impose strict requirements on the assessment, handling, removal, and disposal of asbestos, which can significantly increase the cost of repair, maintenance, or alteration works.",MENU,,0,UNVERIFIED
 3bb9dbe321,J3,"If asbestos is suspected or confirmed, your legal adviser should make appropriate enquiries regarding any previous asbestos surveys, removal works, or management records relating to the property.",EXACT,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},100,DONE
 06ce4e9969,J3,Further advice should be obtained where refurbishment is proposed.,EXACT,{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS},100,DONE

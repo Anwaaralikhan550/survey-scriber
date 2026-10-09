@@ -11616,6 +11616,11 @@
                 "2",
                 "3"
               ]
+            },
+            {
+              "id": "cb_property_is_flat",
+              "label": "Property is a flat",
+              "type": "checkbox"
             }
           ],
           "inlinePosition": "header"
@@ -13428,6 +13433,11 @@
                 "2",
                 "3"
               ]
+            },
+            {
+              "id": "cb_property_is_flat",
+              "label": "Property is a flat",
+              "type": "checkbox"
             }
           ],
           "inlinePosition": "header"
@@ -23266,6 +23276,11 @@
                 "2",
                 "3"
               ]
+            },
+            {
+              "id": "cb_property_is_flat",
+              "label": "Property is a flat",
+              "type": "checkbox"
             }
           ],
           "inlinePosition": "header"
@@ -23296,6 +23311,11 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "cb_property_is_flat",
+              "label": "Property is a flat",
+              "type": "checkbox"
             }
           ],
           "inlinePosition": "header"
@@ -23335,6 +23355,11 @@
             {
               "id": "cb_general_maintenance",
               "label": "General maintenance",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_property_is_flat",
+              "label": "Property is a flat",
               "type": "checkbox"
             }
           ],
@@ -23563,6 +23588,11 @@
               "id": "cb_general_maintenance",
               "label": "General maintenance",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_property_is_flat",
+              "label": "Property is a flat",
+              "type": "checkbox"
             }
           ]
         },
@@ -23621,6 +23651,11 @@
             {
               "id": "cb_general_maintenance",
               "label": "General maintenance",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_property_is_flat",
+              "label": "Property is a flat",
               "type": "checkbox"
             }
           ],

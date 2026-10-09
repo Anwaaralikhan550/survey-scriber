@@ -11070,6 +11070,76 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_j1_trees',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'flat_e1',
+    'activity_outside_property_chimney_main_screen',
+    '@chimney',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e2',
+    'activity_outside_property_roof_covering_main',
+    '{E_ROOF_COVERING}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e3',
+    'activity_outside_property_rainwater_goods_main_screen',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e4',
+    'activity_outside_property_main_walls_main_screen',
+    '{E_MAIN_WALLS}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e8',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e9',
+    'activity_outside_property_other_main_screen',
+    '{E_OTHER_AREA}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_f1',
+    'activity_inside_property_roof_structure_main_screen',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 
