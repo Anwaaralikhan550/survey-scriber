@@ -19708,179 +19708,19 @@
           "order": 1,
           "fields": [
             {
-              "id": "label_select_repair_now_if_defect_is_causing_damp_3",
-              "label": "Select repair now if defect is causing damp.",
-              "type": "label"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Repair Type",
+              "id": "actv_severity",
+              "label": "Deterioration",
               "type": "dropdown",
               "options": [
-                "Repair soon",
-                "Repair now"
+                "Minor",
+                "Moderate",
+                "Significant"
               ]
-            },
-            {
-              "id": "label_walls_13",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_10",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_344",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_651",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_344",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_walls_14",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front_64",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side_38",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear_36",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_9",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building_47",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition_21",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension_36",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window_50",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_299",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_455",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_299",
-              "conditionalMode": "show"
             },
             {
               "id": "cb_causing_damp",
               "label": "Causing damp",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
+              "type": "checkbox"
             }
           ]
         },
@@ -20540,23 +20380,18 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_wall",
+              "id": "label_wall_location",
               "label": "Wall",
               "type": "label"
             },
             {
-              "id": "cb_main_building",
-              "label": "Main building",
+              "id": "e4w_loc_main_building",
+              "label": "main building",
               "type": "checkbox"
             },
             {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
+              "id": "e4w_loc_extension_s",
+              "label": "extension(s)",
               "type": "checkbox"
             },
             {
@@ -20574,74 +20409,25 @@
             },
             {
               "id": "et_thickness",
-              "label": "Thickness",
+              "label": "Thickness (mm)",
               "type": "text"
-            },
-            {
-              "id": "actv_finishes",
-              "label": "Finishes",
-              "type": "dropdown",
-              "options": [
-                "Fully",
-                "Partially"
-              ]
-            },
-            {
-              "id": "actv_rendered",
-              "label": "Rendered",
-              "type": "dropdown",
-              "options": [
-                "smooth",
-                "roughcast"
-              ]
-            },
-            {
-              "id": "label_finishes_type",
-              "label": "Finishes type",
-              "type": "label"
-            },
-            {
-              "id": "cb_painted",
-              "label": "Painted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_pebble_dash",
-              "label": "Pebble dash",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mock_tudor",
-              "label": "Mock Tudor Wall",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_327",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_444",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_327",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_is_weathered",
-              "label": "weathered wall",
-              "type": "checkbox"
             },
             {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_painted",
+              "label": "Painted walls",
+              "type": "checkbox"
             }
           ]
         },
@@ -20653,300 +20439,84 @@
           "order": 2,
           "fields": [
             {
+              "id": "label_lintel_walls",
+              "label": "Wall",
+              "type": "label"
+            },
+            {
+              "id": "e4l_w_front",
+              "label": "front",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_w_side",
+              "label": "side",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_w_rear",
+              "label": "rear",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_w_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_w_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e4l_w_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_lintel_locations",
+              "label": "Location",
+              "type": "label"
+            },
+            {
+              "id": "e4l_l_main_building",
+              "label": "main building",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_back_addition",
+              "label": "back addition",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_extension",
+              "label": "extension",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_bay_window",
+              "label": "bay window",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e4l_l_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Severity",
               "type": "dropdown",
               "options": [
-                "Repair soon",
-                "Repair now"
+                "Minor defects",
+                "Significant defect"
               ]
-            },
-            {
-              "id": "label_walls_2",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_608",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_752",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_608",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_4",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_423",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_883",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_423",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_4",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loosened",
-              "label": "Cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_distorted",
-              "label": "Distorted",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bulging",
-              "label": "Bulging",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_6081",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_7521",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_6081",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_walls",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front_27",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side_17",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear_30",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_6082",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_7522",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_6082",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_3",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building_67",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition_32",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension_63",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window_86",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_318",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_806",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_318",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_3",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_eroded_49",
-              "label": "Badly Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loosened_83",
-              "label": "Badly Cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_distorted_now",
-              "label": "Very Distorted",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bulging_now",
-              "label": "Allowing Dampness",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_6083",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_7523",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_6083",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_causing_damp",
-              "label": "Causing damp",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -21881,75 +21451,168 @@
           "order": 3,
           "fields": [
             {
-              "id": "label_cladded_with",
+              "id": "label_wall_cladding",
+              "label": "Cladding",
+              "type": "label"
+            },
+            {
+              "id": "e4c_facing_brickwork",
+              "label": "facing brickwork",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_natural_or_reconstituted_stone",
+              "label": "natural or reconstituted stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_timber_cladding",
+              "label": "timber cladding",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_plastic_panelling_boards",
+              "label": "plastic panelling boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_weatherboarding",
+              "label": "weatherboarding",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_fibre_cement_boards",
+              "label": "fibre cement boards",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_upvc_cladding",
+              "label": "uPVC cladding",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_fibre_cement_panels",
+              "label": "fibre cement panels",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_composite_cladding_panels",
+              "label": "composite cladding panels",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_glass_curtain_walling",
+              "label": "glass curtain walling",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_hanging_tiles_including_shingle_or_plain_tiles",
+              "label": "hanging tiles (including shingle or plain tiles)",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_aluminium_cladding_panels",
+              "label": "aluminium cladding panels",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_terracotta_cladding_tiles",
+              "label": "terracotta cladding tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4c_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e4c_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_main_walls_ews1",
+          "title": "EWS1 Cladding",
+          "type": "screen",
+          "parentId": "group_main_walls_16",
+          "order": 4,
+          "fields": [
+            {
+              "id": "actv_ews1_extent",
+              "label": "Extent",
+              "type": "dropdown",
+              "options": [
+                "Partially",
+                "Predominantly"
+              ]
+            },
+            {
+              "id": "label_ews1_types",
               "label": "Cladded with",
               "type": "label"
             },
             {
-              "id": "cb_clay_tiles",
-              "label": "Clay tiles",
+              "id": "e4e_brick_slip",
+              "label": "brick-slip",
               "type": "checkbox"
             },
             {
-              "id": "cb_timber",
-              "label": "Timber",
+              "id": "e4e_brick_effect_outer_face",
+              "label": "brick-effect outer face",
               "type": "checkbox"
             },
             {
-              "id": "cb_weathered_boards",
-              "label": "Weathered boards",
+              "id": "e4e_rainscreen_boards",
+              "label": "rainscreen boards",
               "type": "checkbox"
             },
             {
-              "id": "cb_profile_sheets",
-              "label": "Profile sheets",
+              "id": "e4e_terracotta_tiles",
+              "label": "terracotta tiles",
               "type": "checkbox"
             },
             {
-              "id": "cb_shingle_plates",
-              "label": "Shingle plates",
+              "id": "e4e_compressed_composite_boards",
+              "label": "compressed composite boards",
               "type": "checkbox"
             },
             {
-              "id": "cb_compressed_flat_panels",
-              "label": "Compressed flat panels",
+              "id": "e4e_aluminium_panels",
+              "label": "aluminium panels",
               "type": "checkbox"
             },
             {
-              "id": "cb_insulated_cladding",
-              "label": "Insulated cladding",
+              "id": "e4e_glass_reinforced_concrete_grc_panels",
+              "label": "glass reinforced concrete (GRC) panels",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_927",
-              "label": "Other",
+              "id": "e4e_glass_curtain_walling",
+              "label": "glass curtain walling",
               "type": "checkbox"
             },
             {
-              "id": "actv_cladding",
-              "label": "Cladding",
+              "id": "e4e_hanging_tiles_including_shingle_or_plain_tiles",
+              "label": "hanging tiles (including shingle or plain tiles)",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4e_aluminium_cladding_panels",
+              "label": "aluminium cladding panels",
+              "type": "checkbox"
+            },
+            {
+              "id": "actv_ews1",
+              "label": "EWS1",
               "type": "dropdown",
               "options": [
-                "Fully",
-                "Partially"
-              ]
-            },
-            {
-              "id": "et_other_709",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_927",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "EWS1 form not required",
+                "EWS1 form required"
               ]
             }
           ]
@@ -23346,58 +23009,23 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_wall_5",
+              "id": "label_wall_location",
               "label": "Wall",
               "type": "label"
             },
             {
-              "id": "cb_main_building",
-              "label": "Main building",
+              "id": "e4w_loc_main_building",
+              "label": "main building",
               "type": "checkbox"
             },
             {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
+              "id": "e4w_loc_extension_s",
+              "label": "extension(s)",
               "type": "checkbox"
             },
             {
               "id": "cb_other_832",
               "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_finishes_type_3",
-              "label": "Finishes type",
-              "type": "label"
-            },
-            {
-              "id": "cb_painted",
-              "label": "Painted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_pebble_dash",
-              "label": "Pebble dash",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mock_tudor",
-              "label": "Mock Tudor Wall",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_327",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_weathered",
-              "label": "weathered wall",
               "type": "checkbox"
             },
             {
@@ -23410,44 +23038,25 @@
             },
             {
               "id": "et_thickness",
-              "label": "Thickness",
+              "label": "Thickness (mm)",
               "type": "text"
-            },
-            {
-              "id": "actv_finishes",
-              "label": "Finishes",
-              "type": "dropdown",
-              "options": [
-                "Fully",
-                "Partially"
-              ]
-            },
-            {
-              "id": "actv_rendered",
-              "label": "Rendered",
-              "type": "dropdown",
-              "options": [
-                "smooth",
-                "roughcast"
-              ]
-            },
-            {
-              "id": "et_other_444",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_327",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_painted",
+              "label": "Painted walls",
+              "type": "checkbox"
             }
           ]
         },
@@ -23466,293 +23075,84 @@
           "order": 4,
           "fields": [
             {
+              "id": "label_lintel_walls",
+              "label": "Wall",
+              "type": "label"
+            },
+            {
+              "id": "e4l_w_front",
+              "label": "front",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_w_side",
+              "label": "side",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_w_rear",
+              "label": "rear",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_w_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_w_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e4l_w_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_lintel_locations",
+              "label": "Location",
+              "type": "label"
+            },
+            {
+              "id": "e4l_l_main_building",
+              "label": "main building",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_back_addition",
+              "label": "back addition",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_extension",
+              "label": "extension",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_bay_window",
+              "label": "bay window",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4l_l_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e4l_l_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Severity",
               "type": "dropdown",
               "options": [
-                "Repair soon",
-                "Repair now"
+                "Minor defects",
+                "Significant defect"
               ]
-            },
-            {
-              "id": "label_walls_7",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_608",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_51",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_423",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_71",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loosened",
-              "label": "Cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_distorted",
-              "label": "Distorted",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bulging",
-              "label": "Bulging",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_6081",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_walls_8",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front_27",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side_17",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear_30",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_6082",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_52",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building_67",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition_32",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension_63",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window_86",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_318",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_72",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_eroded_49",
-              "label": "Badly Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loosened_83",
-              "label": "Badly Cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_distorted_now",
-              "label": "Very Distorted",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bulging_now",
-              "label": "Allowing Dampness",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_6083",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_752",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_608",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_883",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_423",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_7521",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_6081",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_7522",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_6082",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_806",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_318",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_7523",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_6083",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -24456,169 +23856,155 @@
               "label": "Status",
               "type": "dropdown",
               "options": [
-                "None",
-                "Present"
+                "No damp found",
+                "Damp found"
               ]
             },
             {
               "id": "et_location_677",
-              "label": "Location",
+              "label": "Location of elevated readings (e.g. lower walls in the lounge)",
               "type": "text",
-              "conditionalOn": "actv_status=Present",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "label_eg_lower_walls_in_the_lounge",
-              "label": "e.g. Lower walls in the lounge..",
+              "id": "label_damp_causes",
+              "label": "Penetrating damp probably caused by",
               "type": "label",
-              "conditionalOn": "actv_status=Present",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "label_damp_cause",
-              "label": "Damp cause",
-              "type": "label",
-              "conditionalOn": "actv_status=Present",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_penetrating_damp",
-              "label": "Penetrating DAMP",
+              "id": "e4d_cause_overflowing_gutter",
+              "label": "overflowing gutter",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "label_caused_by_2",
-              "label": "Caused By",
-              "type": "label",
-              "conditionalOn": "actv_status=Present & cb_penetrating_damp",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_overflowing_gutter",
-              "label": "Overflowing gutter",
+              "id": "e4d_cause_roof_leak",
+              "label": "roof leak",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_penetrating_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_roof_leak",
-              "label": "Roof leak",
+              "id": "e4d_cause_leaking_downpipe",
+              "label": "leaking downpipe",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_penetrating_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_leaking_downpipe",
-              "label": "Leaking down pipe",
+              "id": "e4d_cause_bridged_dpc",
+              "label": "bridged DPC",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_penetrating_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_bridged_dpc",
-              "label": "Bridged DPC",
+              "id": "e4d_cause_blocked_gully",
+              "label": "blocked gully",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_penetrating_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_blocked_gully",
-              "label": "Blocked gully",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_penetrating_damp",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_380",
+              "id": "e4d_cause_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_penetrating_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "et_other_184",
+              "id": "e4d_cause_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_status=Present & cb_other_380",
+              "conditionalOn": "actv_status=Damp found&e4d_cause_other",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_rising_damp",
-              "label": "Rising DAMP",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Present",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_caused_by_3",
-              "label": "Caused By",
+              "id": "label_damp_repairs",
+              "label": "Repairs may involve",
               "type": "label",
-              "conditionalOn": "actv_status=Present & cb_rising_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_damaged_dpc",
-              "label": "Damaged DPC",
+              "id": "e4d_rep_gutters",
+              "label": "gutters",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_rising_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_old_and_brittle_dpc",
-              "label": "Old and brittle DPC",
+              "id": "e4d_rep_roof_covering",
+              "label": "roof covering",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_rising_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_bridged_dpcSecond",
-              "label": "Bridged DPC",
+              "id": "e4d_rep_downpipes",
+              "label": "downpipes",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_rising_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_defective_drainage",
-              "label": "Defective drainage",
+              "id": "e4d_rep_damp_proof_course",
+              "label": "damp-proof course",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_rising_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_other_1030",
+              "id": "e4d_rep_blocked_gullies",
+              "label": "blocked gullies",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Damp found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4d_rep_damaged_drainage",
+              "label": "damaged drainage",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Damp found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4d_rep_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present & cb_rising_damp",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "et_other_722",
+              "id": "e4d_rep_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_status=Present & cb_other_1030",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_install_french_gutters",
-              "label": "Install french gutters",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Present",
+              "conditionalOn": "actv_status=Damp found&e4d_rep_other",
               "conditionalMode": "show"
             },
             {
               "id": "cb_unknown_cause",
-              "label": "Unknown cause",
+              "label": "Investigate cause",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_dpc_treatment_noted",
-              "label": "DPC treatment noted",
+              "id": "cb_rising_damp",
+              "label": "Rising damp",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Present",
+              "conditionalOn": "actv_status=Damp found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_install_french_gutters",
+              "label": "Install drain guttering",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Damp found",
               "conditionalMode": "show"
             }
           ]
@@ -24631,270 +24017,44 @@
           "order": 5,
           "fields": [
             {
-              "id": "label_select_repair_now_if_defect_is_causing_damp_2",
-              "label": "Select repair now if defect is causing damp.",
+              "id": "label_render_defects",
+              "label": "Render is",
               "type": "label"
             },
             {
-              "id": "actv_condition",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
+              "id": "e4rn_cracked",
+              "label": "cracked",
+              "type": "checkbox"
             },
             {
-              "id": "label_walls_9",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "e4rn_eroded",
+              "label": "eroded",
+              "type": "checkbox"
             },
             {
-              "id": "cb_front",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "e4rn_loose",
+              "label": "loose",
+              "type": "checkbox"
             },
             {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "e4rn_missing",
+              "label": "missing",
+              "type": "checkbox"
             },
             {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_8",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_312",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_575",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_312",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_8",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_cracked_96",
-              "label": "Cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loose_91",
-              "label": "Loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_missing_in_places_63",
-              "label": "Missing in places",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_868",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_857",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_868",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_walls_10",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front_62",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side_16",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear_56",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_7",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building_87",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition_36",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension_15",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window_24",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_632",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_430",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_632",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_7",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_cracked_101",
-              "label": "Cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loose_28",
-              "label": "Loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_missing_in_places_44",
-              "label": "Missing in places",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_415",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_264",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_415",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_causing_damp",
-              "label": "Causing damp",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
+              "id": "e4rn_damaged",
+              "label": "damaged",
+              "type": "checkbox"
             },
             {
               "id": "cb_hazard",
               "label": "Hazard",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_causing_damp",
+              "label": "Causing damp",
+              "type": "checkbox"
             }
           ]
         },
@@ -26151,58 +25311,23 @@
           "order": 6,
           "fields": [
             {
-              "id": "label_wall_6",
+              "id": "label_wall_location",
               "label": "Wall",
               "type": "label"
             },
             {
-              "id": "cb_main_building",
-              "label": "Main building",
+              "id": "e4w_loc_main_building",
+              "label": "main building",
               "type": "checkbox"
             },
             {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
+              "id": "e4w_loc_extension_s",
+              "label": "extension(s)",
               "type": "checkbox"
             },
             {
               "id": "cb_other_832",
               "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_finishes_type_4",
-              "label": "Finishes type",
-              "type": "label"
-            },
-            {
-              "id": "cb_painted",
-              "label": "Painted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_pebble_dash",
-              "label": "Pebble dash",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mock_tudor",
-              "label": "Mock Tudor Wall",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_327",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_weathered",
-              "label": "weathered wall",
               "type": "checkbox"
             },
             {
@@ -26215,44 +25340,25 @@
             },
             {
               "id": "et_thickness",
-              "label": "Thickness",
+              "label": "Thickness (mm)",
               "type": "text"
-            },
-            {
-              "id": "actv_finishes",
-              "label": "Finishes",
-              "type": "dropdown",
-              "options": [
-                "Fully",
-                "Partially"
-              ]
-            },
-            {
-              "id": "actv_rendered",
-              "label": "Rendered",
-              "type": "dropdown",
-              "options": [
-                "smooth",
-                "roughcast"
-              ]
-            },
-            {
-              "id": "et_other_444",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_327",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_painted",
+              "label": "Painted walls",
+              "type": "checkbox"
             }
           ]
         },
@@ -27163,114 +26269,92 @@
           "fields": [
             {
               "id": "actv_status",
-              "label": "Status",
+              "label": "DPC",
               "type": "dropdown",
               "options": [
                 "Visible",
-                "Not Visible"
+                "Partially visible",
+                "Not visible"
               ]
             },
             {
-              "id": "cb_plastic",
-              "label": "Plastic",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Visible",
-              "conditionalMode": "show"
+              "id": "label_dpc_material",
+              "label": "DPC assumed to consist of",
+              "type": "label"
             },
             {
-              "id": "cb_felt",
-              "label": "Felt",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Visible",
-              "conditionalMode": "show"
+              "id": "e4p_plastic",
+              "label": "plastic",
+              "type": "checkbox"
             },
             {
-              "id": "cb_slates",
-              "label": "Slates",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Visible",
-              "conditionalMode": "show"
+              "id": "e4p_felt",
+              "label": "felt",
+              "type": "checkbox"
             },
             {
-              "id": "cb_engineering_bricks",
-              "label": "Engineering bricks",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Visible",
-              "conditionalMode": "show"
+              "id": "e4p_slates",
+              "label": "slates",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_259",
+              "id": "e4p_engineering_bricks",
+              "label": "engineering bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4p_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Visible",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_105",
+              "id": "e4p_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_status=Visible & cb_other_259",
+              "conditionalOn": "e4p_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_main_walls_dpc_treatment",
+          "title": "DPC Treatment",
+          "type": "screen",
+          "parentId": "group_main_walls_16",
+          "order": 8,
+          "fields": [
+            {
+              "id": "label_dpc_treatment",
+              "label": "Evidence noted of",
+              "type": "label"
             },
             {
-              "id": "actv_not_visible_because_of",
-              "label": "Not visible because of",
-              "type": "dropdown",
-              "options": [
-                "Pointing",
-                "Rendered plinth",
-                "Other"
-              ],
-              "conditionalOn": "actv_status=Not Visible",
-              "conditionalMode": "show"
+              "id": "e4t_damp_proof_course_treatment",
+              "label": "damp proof course treatment",
+              "type": "checkbox"
             },
             {
-              "id": "label_dpc_consist_of",
-              "label": "DPC consist of",
-              "type": "label",
-              "conditionalOn": "actv_status=Not Visible",
-              "conditionalMode": "show"
+              "id": "e4t_wall_ventilation_apparatus",
+              "label": "wall ventilation apparatus",
+              "type": "checkbox"
             },
             {
-              "id": "cb_plastic_89",
-              "label": "Plastic",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Not Visible",
-              "conditionalMode": "show"
+              "id": "e4t_ventilation_holes",
+              "label": "ventilation holes",
+              "type": "checkbox"
             },
             {
-              "id": "cb_felt_73",
-              "label": "Felt",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Not Visible",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_slates_45",
-              "label": "Slates",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Not Visible",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_engineering_bricks_41",
-              "label": "Engineering bricks",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Not Visible",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_312",
+              "id": "e4t_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_status=Not Visible",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_637",
+              "id": "e4t_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_status=Not Visible & cb_other_312",
+              "conditionalOn": "e4t_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -27283,242 +26367,52 @@
           "order": 7,
           "fields": [
             {
-              "id": "label_select_repair_now_if_defect_is_causing_damp",
-              "label": "Select repair now if defect is causing damp.",
+              "id": "label_pointing_defects",
+              "label": "Pointing is",
               "type": "label"
             },
             {
-              "id": "actv_condition",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
+              "id": "e4pt_eroded",
+              "label": "eroded",
+              "type": "checkbox"
             },
             {
-              "id": "label_walls_11",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "e4pt_cracked",
+              "label": "cracked",
+              "type": "checkbox"
             },
             {
-              "id": "cb_front",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "e4pt_loose",
+              "label": "loose",
+              "type": "checkbox"
             },
             {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "e4pt_missing",
+              "label": "missing",
+              "type": "checkbox"
             },
             {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "e4pt_damaged",
+              "label": "damaged",
+              "type": "checkbox"
             },
             {
-              "id": "label_location_6",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_423",
+              "id": "e4pt_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_883",
+              "id": "e4pt_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_423",
+              "conditionalOn": "e4pt_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_defect_6",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Eroded",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loosened",
-              "label": "Loosened",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_soon",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_soon",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_walls_12",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front_27",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side_17",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear_30",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_5",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building_67",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition_32",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension_63",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window_86",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_318",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_806",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_318",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_5",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_eroded_49",
-              "label": "Eroded",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loosened_83",
-              "label": "Loosened",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_now",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_now",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_now",
-              "conditionalMode": "show"
+              "id": "cb_causing_damp",
+              "label": "Causing damp",
+              "type": "checkbox"
             }
           ]
         },
@@ -28731,58 +27625,23 @@
           "order": 8,
           "fields": [
             {
-              "id": "label_wall_7",
+              "id": "label_wall_location",
               "label": "Wall",
               "type": "label"
             },
             {
-              "id": "cb_main_building",
-              "label": "Main building",
+              "id": "e4w_loc_main_building",
+              "label": "main building",
               "type": "checkbox"
             },
             {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
+              "id": "e4w_loc_extension_s",
+              "label": "extension(s)",
               "type": "checkbox"
             },
             {
               "id": "cb_other_832",
               "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_finishes_type_5",
-              "label": "Finishes type",
-              "type": "label"
-            },
-            {
-              "id": "cb_painted",
-              "label": "Painted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_pebble_dash",
-              "label": "Pebble dash",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mock_tudor",
-              "label": "Mock Tudor Wall",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_327",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_weathered",
-              "label": "weathered wall",
               "type": "checkbox"
             },
             {
@@ -28795,44 +27654,25 @@
             },
             {
               "id": "et_thickness",
-              "label": "Thickness",
+              "label": "Thickness (mm)",
               "type": "text"
-            },
-            {
-              "id": "actv_finishes",
-              "label": "Finishes",
-              "type": "dropdown",
-              "options": [
-                "Fully",
-                "Partially"
-              ]
-            },
-            {
-              "id": "actv_rendered",
-              "label": "Rendered",
-              "type": "dropdown",
-              "options": [
-                "smooth",
-                "roughcast"
-              ]
-            },
-            {
-              "id": "et_other_444",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_327",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_painted",
+              "label": "Painted walls",
+              "type": "checkbox"
             }
           ]
         },
@@ -29246,23 +28086,23 @@
           "order": 9,
           "fields": [
             {
-              "id": "label_walled_removed_location",
-              "label": "Walled removed location",
+              "id": "label_removed_location",
+              "label": "Wall removed to",
               "type": "label"
             },
             {
-              "id": "cb_lounge",
-              "label": "Lounge",
+              "id": "e4r_lounge",
+              "label": "lounge",
               "type": "checkbox"
             },
             {
-              "id": "cb_kitchen",
-              "label": "Kitchen",
+              "id": "e4r_kitchen",
+              "label": "kitchen",
               "type": "checkbox"
             },
             {
-              "id": "cb_bedroom",
-              "label": "Bedroom",
+              "id": "e4r_bedroom",
+              "label": "bedroom",
               "type": "checkbox"
             },
             {
@@ -29279,63 +28119,82 @@
               "conditionalMode": "show"
             },
             {
-              "id": "cb_defects_noted",
+              "id": "label_removed_defects",
               "label": "Defects noted",
+              "type": "label"
+            },
+            {
+              "id": "e4rd_cracking",
+              "label": "cracking",
               "type": "checkbox"
             },
             {
-              "id": "label_describe_defect",
-              "label": "Describe defect",
-              "type": "label",
-              "conditionalOn": "cb_defects_noted",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "e4rd_distortions",
+              "label": "distortions",
+              "type": "checkbox"
             },
             {
-              "id": "cb_distorted",
-              "label": "Distorted",
-              "type": "checkbox",
-              "conditionalOn": "cb_defects_noted",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_cracked",
-              "label": "Cracked",
-              "type": "checkbox",
-              "conditionalOn": "cb_defects_noted",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_supported",
-              "label": "Poorly supported walls",
-              "type": "checkbox",
-              "conditionalOn": "cb_defects_noted",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_518",
+              "id": "e4rd_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "cb_defects_noted",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_491",
+              "id": "e4rd_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_518",
+              "conditionalOn": "e4rd_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_main_walls_extensions",
+          "title": "Extensions and alterations",
+          "type": "screen",
+          "parentId": "group_main_walls_16",
+          "order": 10,
+          "fields": [
+            {
+              "id": "label_ext_alterations",
+              "label": "Alterations",
+              "type": "label"
             },
             {
-              "id": "EtDescribeDefect",
-              "label": "Describe defect",
+              "id": "e4x_wall_removal",
+              "label": "wall removal",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4x_new_openings",
+              "label": "new openings",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4x_replacement_lintels",
+              "label": "replacement lintels",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4x_structural_alterations",
+              "label": "structural alterations",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4x_building_extension_works",
+              "label": "building extension works",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4x_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4x_other_text",
+              "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_defects_noted",
+              "conditionalOn": "e4x_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -29349,37 +28208,13 @@
           "order": 9,
           "fields": [
             {
-              "id": "label_walls_4",
-              "label": "Walls",
-              "type": "label"
-            },
-            {
-              "id": "cb_front",
-              "label": "Front",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_608",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_752",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_608",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "actv_status",
+              "label": "Wall ties",
+              "type": "dropdown",
+              "options": [
+                "Wall Ties defects",
+                "Repair defect"
+              ]
             }
           ]
         },
@@ -29879,64 +28714,24 @@
           "order": 10,
           "fields": [
             {
-              "id": "label_wall_8",
+              "id": "label_wall_location",
               "label": "Wall",
               "type": "label"
             },
             {
-              "id": "cb_main_building",
-              "label": "Main building",
+              "id": "e4w_loc_main_building",
+              "label": "main building",
               "type": "checkbox"
             },
             {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
+              "id": "e4w_loc_extension_s",
+              "label": "extension(s)",
               "type": "checkbox"
             },
             {
               "id": "cb_other_832",
               "label": "Other",
               "type": "checkbox"
-            },
-            {
-              "id": "label_finishes_type_6",
-              "label": "Finishes type",
-              "type": "label"
-            },
-            {
-              "id": "cb_painted",
-              "label": "Painted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_pebble_dash",
-              "label": "Pebble dash",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mock_tudor",
-              "label": "Mock Tudor Wall",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_327",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_weathered",
-              "label": "weathered wall",
-              "type": "checkbox"
-            },
-            {
-              "id": "other",
-              "label": "Other Wall",
-              "type": "text"
             },
             {
               "id": "et_other_133",
@@ -29948,44 +28743,148 @@
             },
             {
               "id": "et_thickness",
-              "label": "Thickness",
+              "label": "Thickness (mm)",
               "type": "text"
             },
             {
-              "id": "actv_finishes",
-              "label": "Finishes",
-              "type": "dropdown",
-              "options": [
-                "Fully",
-                "Partially"
-              ]
-            },
-            {
-              "id": "actv_rendered",
-              "label": "Rendered",
-              "type": "dropdown",
-              "options": [
-                "smooth",
-                "roughcast"
-              ]
-            },
-            {
-              "id": "et_other_444",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_327",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "other",
+              "label": "Other construction type",
+              "type": "text"
             },
             {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_painted",
+              "label": "Painted walls",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_main_walls_about_wall__rendered_masonry",
+          "title": "Rendered masonry",
+          "type": "screen",
+          "parentId": "group_about_the_wall_17",
+          "order": 12,
+          "fields": [
+            {
+              "id": "label_wall_location",
+              "label": "Wall",
+              "type": "label"
+            },
+            {
+              "id": "e4w_loc_main_building",
+              "label": "main building",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4w_loc_extension_s",
+              "label": "extension(s)",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_832",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_other_133",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cb_other_832",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "et_thickness",
+              "label": "Thickness (mm)",
+              "type": "text"
+            },
+            {
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            },
+            {
+              "id": "cb_painted",
+              "label": "Painted walls",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_main_walls_about_wall__pebble_dash_masonry",
+          "title": "Pebble dash masonry",
+          "type": "screen",
+          "parentId": "group_about_the_wall_17",
+          "order": 14,
+          "fields": [
+            {
+              "id": "label_wall_location",
+              "label": "Wall",
+              "type": "label"
+            },
+            {
+              "id": "e4w_loc_main_building",
+              "label": "main building",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4w_loc_extension_s",
+              "label": "extension(s)",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_832",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_other_133",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cb_other_832",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "et_thickness",
+              "label": "Thickness (mm)",
+              "type": "text"
+            },
+            {
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            },
+            {
+              "id": "cb_painted",
+              "label": "Painted walls",
+              "type": "checkbox"
             }
           ]
         },
@@ -30769,215 +29668,210 @@
               "label": "Movement status",
               "type": "dropdown",
               "options": [
-                "None",
-                "Usual",
-                "All elevations",
-                "Recent",
-                "Recurrent",
-                "Investigate"
+                "Minor subsidence",
+                "Significant subsidence",
+                "No structural movement",
+                "Normal defects",
+                "Recent defects",
+                "Recurring defects",
+                "Differential thermal movement",
+                "Restraint steel rods"
               ]
             },
             {
-              "id": "label_wall_3",
-              "label": "Wall",
+              "id": "label_move_walls",
+              "label": "Walls",
               "type": "label",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_front",
-              "label": "Front",
+              "id": "e4m_w_front",
+              "label": "front",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_side",
-              "label": "Side",
+              "id": "e4m_w_side",
+              "label": "side",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_rear",
-              "label": "Rear",
+              "id": "e4m_w_rear",
+              "label": "rear",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "label_location_16",
+              "id": "label_move_locations",
               "label": "Location",
               "type": "label",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_main_building",
-              "label": "Main building",
+              "id": "e4m_l_main_building",
+              "label": "main building",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_back_addition",
-              "label": "Back addition",
+              "id": "e4m_l_back_addition",
+              "label": "back addition",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_extension",
-              "label": "Extension",
+              "id": "e4m_l_extension",
+              "label": "extension",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_bay_window",
-              "label": "Bay window",
+              "id": "e4m_l_bay_window",
+              "label": "bay window",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_other_501",
+              "id": "e4m_l_porch",
+              "label": "porch",
+              "type": "checkbox",
+              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4m_l_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "et_other_406",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_movement_status=Recent & cb_other_501",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_cracks_potentially_arising",
-              "label": "Cracks potentially arising",
-              "type": "label",
-              "conditionalOn": "actv_movement_status=Recent",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_settlement",
-              "label": "Settlement",
-              "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_subsidence",
-              "label": "Subsidence",
-              "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_point_loading",
-              "label": "Point loading",
-              "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_wall_tie_rust",
-              "label": "Wall tie rust",
-              "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_682",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_884",
+              "id": "e4m_l_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_movement_status=Recent & cb_other_682",
+              "conditionalOn": "actv_movement_status=Recent defects&e4m_l_other",
               "conditionalMode": "show"
             },
             {
-              "id": "label_wall_4",
-              "label": "Wall",
+              "id": "label_move_causes",
+              "label": "Cracks potentially arising from",
               "type": "label",
-              "conditionalOn": "actv_movement_status=Recurrent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_front_48",
-              "label": "Front",
+              "id": "e4m_c_settlement",
+              "label": "settlement",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurrent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_side_46",
-              "label": "Side",
+              "id": "e4m_c_subsidence",
+              "label": "subsidence",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurrent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_rear_89",
-              "label": "Rear",
+              "id": "e4m_c_nearby_vegetation",
+              "label": "nearby vegetation",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurrent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "label_location_15",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_movement_status=Recurrent",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building_92",
-              "label": "Main building",
+              "id": "e4m_c_point_loading",
+              "label": "point loading",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurrent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_back_addition_19",
-              "label": "Back addition",
+              "id": "e4m_c_wall_tie_damage",
+              "label": "wall tie damage",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurrent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_extension_45",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurrent",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window_35",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurrent",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_694",
+              "id": "e4m_c_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurrent",
+              "conditionalOn": "actv_movement_status=Recent defects",
               "conditionalMode": "show"
             },
             {
-              "id": "et_other_425",
+              "id": "e4m_c_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_movement_status=Recurrent & cb_other_694",
+              "conditionalOn": "actv_movement_status=Recent defects&e4m_c_other",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_move_locations_recurring",
+              "label": "Walls repaired",
+              "type": "label",
+              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4m_r_main_building",
+              "label": "main building",
+              "type": "checkbox",
+              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4m_r_back_addition",
+              "label": "back addition",
+              "type": "checkbox",
+              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4m_r_extension",
+              "label": "extension",
+              "type": "checkbox",
+              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4m_r_bay_window",
+              "label": "bay window",
+              "type": "checkbox",
+              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4m_r_porch",
+              "label": "porch",
+              "type": "checkbox",
+              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4m_r_other",
+              "label": "Other",
+              "type": "checkbox",
+              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4m_r_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "actv_movement_status=Recurring defects&e4m_r_other",
               "conditionalMode": "show"
             }
           ]
@@ -31751,61 +30645,38 @@
           "order": 13,
           "fields": [
             {
-              "id": "label_walls_3",
+              "id": "label_thin_walls",
               "label": "Walls",
               "type": "label"
             },
             {
-              "id": "cb_front",
-              "label": "Front",
+              "id": "e4tw_front",
+              "label": "front",
               "type": "checkbox"
             },
             {
-              "id": "cb_side",
-              "label": "Side",
+              "id": "e4tw_rear",
+              "label": "rear",
               "type": "checkbox"
             },
             {
-              "id": "cb_rear",
-              "label": "Rear",
+              "id": "e4tw_side",
+              "label": "side",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_608",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_752",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_608",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_12",
+              "id": "label_thin_locations",
               "label": "Location",
               "type": "label"
             },
             {
-              "id": "cb_main_building",
-              "label": "Main building",
+              "id": "e4tl_main_building",
+              "label": "main building",
               "type": "checkbox"
             },
             {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bay_window",
-              "label": "Bay window",
+              "id": "e4tl_extension",
+              "label": "extension",
               "type": "checkbox"
             },
             {
@@ -31831,293 +30702,122 @@
           "order": 13,
           "fields": [
             {
+              "id": "label_sill_walls",
+              "label": "Wall",
+              "type": "label"
+            },
+            {
+              "id": "e4s_w_front",
+              "label": "front",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_w_side",
+              "label": "side",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_w_rear",
+              "label": "rear",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_w_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_w_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e4s_w_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_sill_locations",
+              "label": "Location",
+              "type": "label"
+            },
+            {
+              "id": "e4s_l_main_building",
+              "label": "main building",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_l_back_addition",
+              "label": "back addition",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_l_extension",
+              "label": "extension",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_l_bay_window",
+              "label": "bay window",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_l_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_l_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e4s_l_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_sill_defects",
+              "label": "Defects",
+              "type": "label"
+            },
+            {
+              "id": "e4s_d_damaged",
+              "label": "damaged",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_d_rotten",
+              "label": "rotten",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_d_cracked",
+              "label": "cracked",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_d_distorted",
+              "label": "distorted",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_d_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e4s_d_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e4s_d_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Severity",
               "type": "dropdown",
               "options": [
-                "Repair soon",
-                "Repair now"
+                "Minor Defect",
+                "Significant Defect"
               ]
-            },
-            {
-              "id": "label_walls_5",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_608",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_752",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_608",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_14",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_423",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_883",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_423",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_11",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loosened",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_cracked_soon",
-              "label": "Cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_eroded",
-              "label": "Eroded",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_6081",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_7521",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon & cb_other_6081",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_walls_6",
-              "label": "Walls",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_front_27",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side_17",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rear_30",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_6082",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_7522",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_6082",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_13",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_main_building_67",
-              "label": "Main building",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_back_addition_32",
-              "label": "Back addition",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_extension_63",
-              "label": "Extension",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_bay_window_86",
-              "label": "Bay window",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_318",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_806",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_318",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_10",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_eroded_49",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loosened_83",
-              "label": "Unstable",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_very_distorted_now",
-              "label": "Very Distorted",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_allowing_dampness_now",
-              "label": "Allowing Dampness",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_6083",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_7523",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now & cb_other_6083",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_causing_damp",
-              "label": "Causing damp",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -33938,24 +32638,55 @@
           "order": 17,
           "fields": [
             {
-              "id": "label_size_of_tree",
-              "label": "Size Of tree",
-              "type": "label"
+              "id": "actv_trees",
+              "label": "Trees",
+              "type": "dropdown",
+              "options": [
+                "Trees",
+                "Tree defects noted"
+              ]
             },
             {
-              "id": "cb_small",
-              "label": "Small",
-              "type": "checkbox"
+              "id": "label_tree_defects",
+              "label": "Defects",
+              "type": "label",
+              "conditionalOn": "actv_trees=Tree defects noted",
+              "conditionalMode": "show"
             },
             {
-              "id": "cb_medium",
-              "label": "Medium",
-              "type": "checkbox"
+              "id": "e4td_cracking",
+              "label": "cracking",
+              "type": "checkbox",
+              "conditionalOn": "actv_trees=Tree defects noted",
+              "conditionalMode": "show"
             },
             {
-              "id": "cb_medium_to_large",
-              "label": "Medium to large",
-              "type": "checkbox"
+              "id": "e4td_distortion",
+              "label": "distortion",
+              "type": "checkbox",
+              "conditionalOn": "actv_trees=Tree defects noted",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4td_heave",
+              "label": "heave",
+              "type": "checkbox",
+              "conditionalOn": "actv_trees=Tree defects noted",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4td_other",
+              "label": "Other",
+              "type": "checkbox",
+              "conditionalOn": "actv_trees=Tree defects noted",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "e4td_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "actv_trees=Tree defects noted&e4td_other",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -35626,6 +34357,11 @@
               "id": "ar_etNote",
               "label": "Note",
               "type": "text"
+            },
+            {
+              "id": "cb_general_maintenance",
+              "label": "General maintenance",
+              "type": "checkbox"
             }
           ],
           "inlinePosition": "header"

@@ -2564,13 +2564,6 @@ void main() {
               'cb_wc_89': 'true',
               'cb_badly_cracked_62': 'true',
             },
-            'activity_outside_property_main_walls_damp': {
-              'et_location_677': 'the lounge and hallway',
-            },
-            'activity_outside_property_main_wall_repairs_render': {
-              'actv_condition': 'Repair now',
-              'cb_hazard': 'true',
-            },
             'activity_outside_property_windows_repairs_repair_window': {
               'cb_safety_hazard': 'true',
               'cb_ch1': 'true',
@@ -2596,15 +2589,6 @@ void main() {
       expect(j3Text, isNot(contains('this is safety hazards')));
 
       expect(j3Text, contains('bathtub and wc are badly cracked'));
-
-      expect(
-        j3Text,
-        contains('internal wall surfaces that include the lounge and hallway'),
-      );
-      expect(j3Text, isNot(contains('surfaces the include')));
-
-      expect(j3Text, contains('render coating to the building are eroded'));
-      expect(j3Text, isNot(contains('render coating to the building is')));
 
       expect(
         j3Text,
@@ -2854,7 +2838,7 @@ void main() {
     });
 
     test(
-        'adds the E2 roof covering J1 and J3 injections from the bank (PDF Add text to lines)'
+        'adds the PDF Add-text-to J1/J3 injections for E2, E3 and E4 from the bank'
         'approved bank', () {
       final tree = InspectionTreePayload(
         sections: [
@@ -2914,6 +2898,12 @@ void main() {
             'activity_outside_property_rwg__repair_pipes_gutters': {
               'actv_condition': 'Repair now',
             },
+            'activity_outside_property_main_walls_damp': {
+              'cb_rising_damp': 'true',
+            },
+            'activity_outside_property_main_wall_repairs_lintel': {
+              'actv_condition': 'Significant defect',
+            },
             'activity_outside_property_roof_spreading_repair': {
               'rc_rs_front': 'true',
             },
@@ -2926,6 +2916,8 @@ void main() {
       final section = doc.sections.firstWhere((s) => s.key == 'J');
       final all = section.screens.expand((s) => s.phrases).join('\n');
       expect(all, contains('One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted'));
+      expect(all, contains('suggesting the presence of rising damp. Further investigation by a suitably qualified damp and timber specialist is recommended to determine the cause and extent of the problem'));
+      expect(all, contains('One or more small beams that span across the top of the window or door opening, including brick arch (called a lintel), is damaged, cracked, distorted'));
       for (final sentence in const [
         'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing',
         'The surface of the roof slope(s) of the building is significantly distorted, uneven or undulating',

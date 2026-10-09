@@ -556,3 +556,7 @@ aaf8c238ec,TESTED,report_builder_test: adds the E2 roof covering J1 and J3 injec
 58760970f5,TESTED,report_builder_test: adds the E2 roof covering J1 and J3 injections
 fe0d7cf576,TESTED,inspection_verbatim_e3_test: fixed prose wrongly detected as option list
 8061daad21,TESTED,inspection_verbatim_e3_test: fixed prose wrongly detected as option list
+eaf9d4b593,TESTED,inspection_verbatim_e4_test: fixed prose wrongly detected as option list
+de3fc2b3c2,TESTED,inspection_verbatim_e4_test: fixed prose wrongly detected as option list
+1ee19f05d5,TESTED,inspection_verbatim_e4_test: fixed prose wrongly detected as option list
+2918271587,TESTED,report_builder_test: J1 injection

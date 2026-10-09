@@ -1651,6 +1651,1237 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     pdf:
         'Blocked Gullies: One or more drainage gullies serving the rainwater system appear partially blocked, fully blocked.',
   ),
+  VerbatimRule(
+    'e4_desc_solid',
+    'activity_outside_property_main_walls_about_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'solid brick',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_solid',
+    'activity_outside_property_main_walls_about_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_solid',
+    'activity_outside_property_main_walls_about_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_cbrick',
+    'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'cavity brick',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_cbrick',
+    'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_cbrick',
+    'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_cblock',
+    'activity_outside_property_main_walls_about_wall__cavity_block_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'cavity blockwork',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_cblock',
+    'activity_outside_property_main_walls_about_wall__cavity_block_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_cblock',
+    'activity_outside_property_main_walls_about_wall__cavity_block_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_stud',
+    'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'timber frame',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_stud',
+    'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_stud',
+    'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_other',
+    'activity_outside_property_main_walls_about_wall__other',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        text: 'other',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_other',
+    'activity_outside_property_main_walls_about_wall__other',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_other',
+    'activity_outside_property_main_walls_about_wall__other',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_rendered',
+    'activity_outside_property_main_walls_about_wall__rendered_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'rendered masonry',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_rendered',
+    'activity_outside_property_main_walls_about_wall__rendered_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_rendered',
+    'activity_outside_property_main_walls_about_wall__rendered_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_pebble',
+    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'pebble dash masonry',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_pebble',
+    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_pebble',
+    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_cladding',
+    'activity_outside_property_main_walls_cladding',
+    '{E_MAIN_WALLS}',
+    '{E4_CLADDING}',
+    [
+      VerbatimToken(
+        '{WALL_CLADDING}',
+        options: {
+          'e4c_facing_brickwork': 'facing brickwork',
+          'e4c_natural_or_reconstituted_stone': 'natural or reconstituted stone',
+          'e4c_timber_cladding': 'timber cladding',
+          'e4c_plastic_panelling_boards': 'plastic panelling boards',
+          'e4c_weatherboarding': 'weatherboarding',
+          'e4c_fibre_cement_boards': 'fibre cement boards',
+          'e4c_upvc_cladding': 'uPVC cladding',
+          'e4c_fibre_cement_panels': 'fibre cement panels',
+          'e4c_composite_cladding_panels': 'composite cladding panels',
+          'e4c_glass_curtain_walling': 'glass curtain walling',
+          'e4c_hanging_tiles_including_shingle_or_plain_tiles': 'hanging tiles (including shingle or plain tiles)',
+          'e4c_aluminium_cladding_panels': 'aluminium cladding panels',
+          'e4c_terracotta_cladding_tiles': 'terracotta cladding tiles',
+        },
+        otherCheckbox: 'e4c_other',
+        otherText: 'e4c_other_text',
+        pdfOptions: ['facing brickwork', 'natural or reconstituted stone', 'timber cladding', 'plastic panelling boards', 'weatherboarding', 'fibre cement boards', 'uPVC cladding', 'fibre cement panels', 'composite cladding panels', 'glass curtain walling', 'hanging tiles (including shingle or plain tiles)', 'aluminium cladding panels', 'terracotta cladding tiles'],
+      ),
+    ],
+    pdf:
+        'Cladding: The external wall finish or cladding comprises facing brickwork, natural or reconstituted stone, timber cladding, plastic panelling boards.',
+    pdfMore: [
+      'weatherboarding, fibre cement boards, uPVC cladding, fibre cement panels, composite cladding panels, glass curtain walling, hanging tiles (including shingle or plain tiles), aluminium cladding panels, terracotta cladding tiles, other finishes.',
+    ],
+  ),
+  VerbatimRule(
+    'e4_ews1',
+    'activity_outside_property_main_walls_ews1',
+    '{E_MAIN_WALLS}',
+    '{E4_EWS1_CLADDING}',
+    [
+      VerbatimToken(
+        '{EWS1_EXTENT}',
+        dropdown: 'actv_ews1_extent',
+        dropdownOptions: ['Partially', 'Predominantly'],
+        lower: true,
+        pdfOptions: ['partially', 'predominantly'],
+      ),
+      VerbatimToken(
+        '{EWS1_TYPES}',
+        options: {
+          'e4e_brick_slip': 'brick-slip',
+          'e4e_brick_effect_outer_face': 'brick-effect outer face',
+          'e4e_rainscreen_boards': 'rainscreen boards',
+          'e4e_terracotta_tiles': 'terracotta tiles',
+          'e4e_compressed_composite_boards': 'compressed composite boards',
+          'e4e_aluminium_panels': 'aluminium panels',
+          'e4e_glass_reinforced_concrete_grc_panels': 'glass reinforced concrete (GRC) panels',
+          'e4e_glass_curtain_walling': 'glass curtain walling',
+          'e4e_hanging_tiles_including_shingle_or_plain_tiles': 'hanging tiles (including shingle or plain tiles)',
+          'e4e_aluminium_cladding_panels': 'aluminium cladding panels',
+        },
+        pdfOptions: ['brick-slip', 'brick-effect outer face', 'rainscreen boards', 'terracotta tiles', 'compressed composite boards', 'aluminium panels', 'glass reinforced concrete (GRC) panels', 'glass curtain walling', 'hanging tiles (including shingle or plain tiles)', 'aluminium cladding panels'],
+      ),
+    ],
+    pdf:
+        'EWS1 Cladding: The external walls are partially or predominantly cladded with a brick-slip, brick-effect outer face, rainscreen boards, terracotta tiles, compressed composite boards, aluminium panels, glass reinforced concrete (GRC) panels, glass curtain walling, hanging tiles (including shingle or plain tiles), aluminium cladding panels, etc.',
+  ),
+  VerbatimRule(
+    'e4_ews1_not',
+    'activity_outside_property_main_walls_ews1',
+    '{E_MAIN_WALLS}',
+    '{E4_EWS1_NOT_REQUIRED}',
+    [
+    ],
+    whenField: 'actv_ews1',
+    whenValue: 'EWS1 form not required',
+  ),
+  VerbatimRule(
+    'e4_ews1_req',
+    'activity_outside_property_main_walls_ews1',
+    '{E_MAIN_WALLS}',
+    '{E4_EWS1_REQUIRED}',
+    [
+    ],
+    whenField: 'actv_ews1',
+    whenValue: 'EWS1 form required',
+  ),
+  VerbatimRule(
+    'e4_moisture',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_MOISTURE_READINGS}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No damp found',
+    whenAny: [['actv_status', 'Damp found']],
+  ),
+  VerbatimRule(
+    'e4_nodamp',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_NO_DAMP}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No damp found',
+  ),
+  VerbatimRule(
+    'e4_damp',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_DAMP_FOUND}',
+    [
+      VerbatimToken(
+        '{DAMP_LOCATIONS}',
+        text: 'et_location_677',
+      ),
+    ],
+    pdf:
+        'Damp found: Elevated moisture readings were recorded to sections of the internal wall surfaces that include (enter locations).',
+    whenField: 'actv_status',
+    whenValue: 'Damp found',
+  ),
+  VerbatimRule(
+    'e4_pen',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_PENETRATING}',
+    [
+      VerbatimToken(
+        '{DAMP_CAUSES}',
+        options: {
+          'e4d_cause_overflowing_gutter': 'overflowing gutter',
+          'e4d_cause_roof_leak': 'roof leak',
+          'e4d_cause_leaking_downpipe': 'leaking downpipe',
+          'e4d_cause_bridged_dpc': 'bridged DPC',
+          'e4d_cause_blocked_gully': 'blocked gully',
+        },
+        otherCheckbox: 'e4d_cause_other',
+        otherText: 'e4d_cause_other_text',
+        pdfOptions: ['overflowing gutter', 'roof leak', 'leaking downpipe', 'bridged DPC', 'blocked gully'],
+      ),
+    ],
+    pdf:
+        'Penetrating damp cause: This may have been affected by penetrating damp probably caused by overflowing gutter, roof leak, leaking downpipe, bridged DPC, blocked gully, other.',
+    whenField: 'actv_status',
+    whenValue: 'Damp found',
+  ),
+  VerbatimRule(
+    'e4_repair_opts',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_REPAIR_OPTIONS}',
+    [
+      VerbatimToken(
+        '{DAMP_REPAIRS}',
+        options: {
+          'e4d_rep_gutters': 'gutters',
+          'e4d_rep_roof_covering': 'roof covering',
+          'e4d_rep_downpipes': 'downpipes',
+          'e4d_rep_damp_proof_course': 'damp-proof course',
+          'e4d_rep_blocked_gullies': 'blocked gullies',
+          'e4d_rep_damaged_drainage': 'damaged drainage',
+        },
+        otherCheckbox: 'e4d_rep_other',
+        otherText: 'e4d_rep_other_text',
+        pdfOptions: ['gutters', 'roof covering', 'downpipes', 'damp-proof course', 'blocked gullies', 'damaged drainage'],
+      ),
+    ],
+    pdf:
+        'This may involve repairs to the gutters, roof covering, downpipes, damp-proof course, blocked gullies, damaged drainage, other, as appropriate.',
+    whenField: 'actv_status',
+    whenValue: 'Damp found',
+  ),
+  VerbatimRule(
+    'e4_investigate',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_INVESTIGATE_CAUSE}',
+    [
+    ],
+    whenField: 'cb_unknown_cause',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_rising',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_RISING_DAMP}',
+    [
+    ],
+    whenField: 'cb_rising_damp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_drain',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_INSTALL_DRAIN_GUTTERING}',
+    [
+    ],
+    whenField: 'cb_install_french_gutters',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_dpc',
+    'activity_outside_property_main_walls_dpc',
+    '{E_MAIN_WALLS}',
+    '{E4_DPC}',
+    [
+      VerbatimToken(
+        '{DPC_STATE}',
+        dropdown: 'actv_status',
+        dropdownOptions: ['Visible', 'Partially visible', 'Not visible'],
+        lower: true,
+        pdfOptions: ['visible', 'partially visible', 'not visible'],
+      ),
+    ],
+    pdf:
+        'Damp-proof course: The walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC is visible, partially visible, not visible; one would normally be expected for a property of this age and type.',
+  ),
+  VerbatimRule(
+    'e4_dpc_material',
+    'activity_outside_property_main_walls_dpc',
+    '{E_MAIN_WALLS}',
+    '{E4_DPC_MATERIAL}',
+    [
+      VerbatimToken(
+        '{DPC_MATERIAL}',
+        options: {
+          'e4p_plastic': 'plastic',
+          'e4p_felt': 'felt',
+          'e4p_slates': 'slates',
+          'e4p_engineering_bricks': 'engineering bricks',
+        },
+        otherCheckbox: 'e4p_other',
+        otherText: 'e4p_other_text',
+        pdfOptions: ['plastic', 'felt', 'slates', 'engineering bricks'],
+      ),
+    ],
+    pdf:
+        'The DPC is assumed to consist of plastic, felt, slates, engineering bricks, other.',
+  ),
+  VerbatimRule(
+    'e4_dpc_adequacy',
+    'activity_outside_property_main_walls_dpc',
+    '{E_MAIN_WALLS}',
+    '{E4_DPC_ADEQUACY}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Visible',
+    whenAny: [['actv_status', 'Partially visible'], ['actv_status', 'Not visible']],
+  ),
+  VerbatimRule(
+    'e4_treatment',
+    'activity_outside_property_main_walls_dpc_treatment',
+    '{E_MAIN_WALLS}',
+    '{E4_DPC_TREATMENT}',
+    [
+      VerbatimToken(
+        '{DPC_TREATMENT}',
+        options: {
+          'e4t_damp_proof_course_treatment': 'damp proof course treatment',
+          'e4t_wall_ventilation_apparatus': 'wall ventilation apparatus',
+          'e4t_ventilation_holes': 'ventilation holes',
+        },
+        otherCheckbox: 'e4t_other',
+        otherText: 'e4t_other_text',
+        pdfOptions: ['damp proof course treatment', 'wall ventilation apparatus', 'ventilation holes'],
+      ),
+    ],
+    pdf:
+        'DPC Treatment noted: I noted evidence of damp proof course treatment, wall ventilation apparatus, ventilation holes, other in the property.',
+  ),
+  VerbatimRule(
+    'e4_removed',
+    'activity_outside_property_main_walls_removed_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_REMOVED_WALL}',
+    [
+      VerbatimToken(
+        '{REMOVED_LOCATION}',
+        options: {
+          'e4r_lounge': 'lounge',
+          'e4r_kitchen': 'kitchen',
+          'e4r_bedroom': 'bedroom',
+        },
+        otherCheckbox: 'cb_other_1020',
+        otherText: 'et_other_522',
+        pdfOptions: ['lounge', 'kitchen', 'bedroom'],
+      ),
+    ],
+    pdf:
+        'Removed wall: An external wall to the lounge, kitchen, bedroom, other appears to have been removed as part of previous alterations.',
+  ),
+  VerbatimRule(
+    'e4_removed_defect',
+    'activity_outside_property_main_walls_removed_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_REMOVED_DEFECT}',
+    [
+      VerbatimToken(
+        '{REMOVED_DEFECTS}',
+        options: {
+          'e4rd_cracking': 'cracking',
+          'e4rd_distortions': 'distortions',
+        },
+        otherCheckbox: 'e4rd_other',
+        otherText: 'e4rd_other_text',
+        pdfOptions: ['cracking', 'distortions'],
+      ),
+    ],
+    pdf:
+        'Defect noted: I noted cracking, distortions, other in the surrounding wall surfaces.',
+  ),
+  VerbatimRule(
+    'e4_extensions',
+    'activity_outside_property_main_walls_extensions',
+    '{E_MAIN_WALLS}',
+    '{E4_EXTENSIONS}',
+    [
+      VerbatimToken(
+        '{EXT_ALTERATIONS}',
+        options: {
+          'e4x_wall_removal': 'wall removal',
+          'e4x_new_openings': 'new openings',
+          'e4x_replacement_lintels': 'replacement lintels',
+          'e4x_structural_alterations': 'structural alterations',
+          'e4x_building_extension_works': 'building extension works',
+        },
+        otherCheckbox: 'e4x_other',
+        otherText: 'e4x_other_text',
+        pdfOptions: ['wall removal', 'new openings', 'replacement lintels', 'structural alterations', 'building extension works'],
+      ),
+    ],
+    pdf:
+        'These include wall removal, new openings, replacement lintels, structural alterations, building extension works, other alterations.',
+  ),
+  VerbatimRule(
+    'e4_cwi',
+    'activity_outside_property_main_wall_repairs_cavity_wall_insulation',
+    '{E_MAIN_WALLS}',
+    '{E4_CAVITY_WALL_INSULATION}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_thin',
+    'activity_outside_property_main_wall_repairs_thin_slim_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_THIN_WALL}',
+    [
+      VerbatimToken(
+        '{THIN_WALLS}',
+        options: {
+          'e4tw_front': 'front',
+          'e4tw_rear': 'rear',
+          'e4tw_side': 'side',
+        },
+        pdfOptions: ['front', 'rear', 'side'],
+      ),
+      VerbatimToken(
+        '{THIN_LOCATIONS}',
+        options: {
+          'e4tl_main_building': 'main building',
+          'e4tl_extension': 'extension',
+        },
+        otherCheckbox: 'cb_other_423',
+        otherText: 'et_other_883',
+        pdfOptions: ['main building', 'extension'],
+      ),
+    ],
+    pdf:
+        'Thin wall: The external wall to the front, rear, side walls of the main building, extension, other is not thick enough and vulnerable to damp problems and heat loss.',
+  ),
+  VerbatimRule(
+    'e4_trees',
+    'activity_outside_property_main_wall_repairs_near_by_tress',
+    '{E_MAIN_WALLS}',
+    '{E4_TREES}',
+    [
+    ],
+    whenField: 'actv_trees',
+    whenValue: 'Trees',
+  ),
+  VerbatimRule(
+    'e4_tree_defects',
+    'activity_outside_property_main_wall_repairs_near_by_tress',
+    '{E_MAIN_WALLS}',
+    '{E4_TREE_DEFECTS}',
+    [
+      VerbatimToken(
+        '{TREE_DEFECTS}',
+        options: {
+          'e4td_cracking': 'cracking',
+          'e4td_distortion': 'distortion',
+          'e4td_heave': 'heave',
+        },
+        otherCheckbox: 'e4td_other',
+        otherText: 'e4td_other_text',
+        pdfOptions: ['cracking', 'distortion', 'heave'],
+      ),
+    ],
+    pdf:
+        'Tree defects noted: There are trees located close to the property, and I noted defects that may be associated with their influence, including cracking, distortion, heave, other observed defects.',
+    whenField: 'actv_trees',
+    whenValue: 'Tree defects noted',
+  ),
+  VerbatimRule(
+    'e4_mv_0',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_0}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Minor subsidence',
+  ),
+  VerbatimRule(
+    'e4_mv_1',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_1}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Significant subsidence',
+  ),
+  VerbatimRule(
+    'e4_mv_2',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_2}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'No structural movement',
+  ),
+  VerbatimRule(
+    'e4_mv_3',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_3}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Normal defects',
+  ),
+  VerbatimRule(
+    'e4_mv_recent',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_RECENT}',
+    [
+      VerbatimToken(
+        '{MOVE_WALLS}',
+        options: {
+          'e4m_w_front': 'front',
+          'e4m_w_side': 'side',
+          'e4m_w_rear': 'rear',
+        },
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{MOVE_LOCATIONS}',
+        options: {
+          'e4m_l_main_building': 'main building',
+          'e4m_l_back_addition': 'back addition',
+          'e4m_l_extension': 'extension',
+          'e4m_l_bay_window': 'bay window',
+          'e4m_l_porch': 'porch',
+        },
+        otherCheckbox: 'e4m_l_other',
+        otherText: 'e4m_l_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window', 'porch'],
+      ),
+      VerbatimToken(
+        '{MOVE_CAUSES}',
+        options: {
+          'e4m_c_settlement': 'settlement',
+          'e4m_c_subsidence': 'subsidence',
+          'e4m_c_nearby_vegetation': 'nearby vegetation',
+          'e4m_c_point_loading': 'point loading',
+          'e4m_c_wall_tie_damage': 'wall tie damage',
+        },
+        otherCheckbox: 'e4m_c_other',
+        otherText: 'e4m_c_other_text',
+        pdfOptions: ['settlement', 'subsidence', 'nearby vegetation', 'point loading', 'wall tie damage'],
+      ),
+    ],
+    pdf:
+        'Recent defects: The front, side, rear walls of the main building, back addition, extension, bay window, porch, other areas have been damaged by movement cracks potentially arising from settlement, subsidence, nearby vegetation, point loading, wall tie damage, other causes, and this is considered structurally significant.',
+    whenField: 'actv_movement_status',
+    whenValue: 'Recent defects',
+  ),
+  VerbatimRule(
+    'e4_mv_recurring',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_RECURRING}',
+    [
+      VerbatimToken(
+        '{MOVE_LOCATIONS_RECURRING}',
+        options: {
+          'e4m_r_main_building': 'main building',
+          'e4m_r_back_addition': 'back addition',
+          'e4m_r_extension': 'extension',
+          'e4m_r_bay_window': 'bay window',
+          'e4m_r_porch': 'porch',
+        },
+        otherCheckbox: 'e4m_r_other',
+        otherText: 'e4m_r_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window', 'porch'],
+      ),
+    ],
+    pdf:
+        'Recurring defects: The outside wall(s) to the main building, back addition, extension, bay window, porch, other have been repaired, indicating that the building has been affected by previous movement.',
+    whenField: 'actv_movement_status',
+    whenValue: 'Recurring defects',
+  ),
+  VerbatimRule(
+    'e4_mv_thermal',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_THERMAL}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Differential thermal movement',
+  ),
+  VerbatimRule(
+    'e4_mv_rods',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_RODS}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Restraint steel rods',
+  ),
+  VerbatimRule(
+    'e4_spall',
+    'activity_outside_property_main_wall_repairs_spalling',
+    '{E_MAIN_WALLS}',
+    '{E4_SPALLING}',
+    [
+      VerbatimToken(
+        '{SPALL_SEVERITY}',
+        dropdown: 'actv_severity',
+        dropdownOptions: ['Minor', 'Moderate', 'Significant'],
+        lower: true,
+        pdfOptions: ['minor', 'moderate', 'significant'],
+      ),
+    ],
+    pdf:
+        'Spalled Brickwork: A few bricks exhibit minor, moderate, significant deterioration (this is called spalling).',
+  ),
+  VerbatimRule(
+    'e4_spall_damp',
+    'activity_outside_property_main_wall_repairs_spalling',
+    '{E_MAIN_WALLS}',
+    '{E4_SPALLING_DAMP}',
+    [
+    ],
+    whenField: 'cb_causing_damp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_pointing',
+    'activity_outside_property_main_wall_repairs_pointing',
+    '{E_MAIN_WALLS}',
+    '{E4_POINTING}',
+    [
+      VerbatimToken(
+        '{POINTING_DEFECTS}',
+        options: {
+          'e4pt_eroded': 'eroded',
+          'e4pt_cracked': 'cracked',
+          'e4pt_loose': 'loose',
+          'e4pt_missing': 'missing',
+          'e4pt_damaged': 'damaged',
+        },
+        otherCheckbox: 'e4pt_other',
+        otherText: 'e4pt_other_text',
+        pdfOptions: ['eroded', 'cracked', 'loose', 'missing', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Repair pointing: The mortar between the bricks (known as the pointing) to parts of the building is eroded, cracked, loose, missing, damaged, other.',
+  ),
+  VerbatimRule(
+    'e4_pointing_damp',
+    'activity_outside_property_main_wall_repairs_pointing',
+    '{E_MAIN_WALLS}',
+    '{E4_POINTING_DAMP}',
+    [
+    ],
+    whenField: 'cb_causing_damp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_render',
+    'activity_outside_property_main_wall_repairs_render',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDER}',
+    [
+      VerbatimToken(
+        '{RENDER_DEFECTS}',
+        options: {
+          'e4rn_cracked': 'cracked',
+          'e4rn_eroded': 'eroded',
+          'e4rn_loose': 'loose',
+          'e4rn_missing': 'missing',
+          'e4rn_damaged': 'damaged',
+        },
+        pdfOptions: ['cracked', 'eroded', 'loose', 'missing', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Repair render: Parts of the render coating to the building are cracked, eroded, loose, missing, damaged.',
+  ),
+  VerbatimRule(
+    'e4_render_hazard',
+    'activity_outside_property_main_wall_repairs_render',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDER_HAZARD}',
+    [
+    ],
+    whenField: 'cb_hazard',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_render_damp',
+    'activity_outside_property_main_wall_repairs_render',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDER_DAMP}',
+    [
+    ],
+    whenField: 'cb_causing_damp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_walltie_prev',
+    'activity_outside_property_main_wall_repairs_wall_the_repair',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_TIES_PREVIOUS}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Wall Ties defects',
+  ),
+  VerbatimRule(
+    'e4_walltie_defect',
+    'activity_outside_property_main_wall_repairs_wall_the_repair',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_TIES_DEFECT}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Repair defect',
+  ),
+  VerbatimRule(
+    'e4_lintel_win',
+    'activity_outside_property_main_wall_repairs_lintel',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL}',
+    [
+      VerbatimToken(
+        '{LINTEL_WALLS}',
+        options: {
+          'e4l_w_front': 'front',
+          'e4l_w_side': 'side',
+          'e4l_w_rear': 'rear',
+        },
+        otherCheckbox: 'e4l_w_other',
+        otherText: 'e4l_w_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{LINTEL_LOCATIONS}',
+        options: {
+          'e4l_l_main_building': 'main building',
+          'e4l_l_back_addition': 'back addition',
+          'e4l_l_extension': 'extension',
+          'e4l_l_bay_window': 'bay window',
+        },
+        otherCheckbox: 'e4l_l_other',
+        otherText: 'e4l_l_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window'],
+      ),
+    ],
+    pdf:
+        'Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted.',
+  ),
+  VerbatimRule(
+    'e4_lintel_minor_win',
+    'activity_outside_property_main_wall_repairs_lintel',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL_MINOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Minor defects',
+  ),
+  VerbatimRule(
+    'e4_lintel_major_win',
+    'activity_outside_property_main_wall_repairs_lintel',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL_SIGNIFICANT}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Significant defect',
+  ),
+  VerbatimRule(
+    'e4_lintel_door',
+    'activity_outside_property_main_wall_repairs_lintel__door',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL}',
+    [
+      VerbatimToken(
+        '{LINTEL_WALLS}',
+        options: {
+          'e4l_w_front': 'front',
+          'e4l_w_side': 'side',
+          'e4l_w_rear': 'rear',
+        },
+        otherCheckbox: 'e4l_w_other',
+        otherText: 'e4l_w_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{LINTEL_LOCATIONS}',
+        options: {
+          'e4l_l_main_building': 'main building',
+          'e4l_l_back_addition': 'back addition',
+          'e4l_l_extension': 'extension',
+          'e4l_l_bay_window': 'bay window',
+        },
+        otherCheckbox: 'e4l_l_other',
+        otherText: 'e4l_l_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window'],
+      ),
+    ],
+    pdf:
+        'Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted.',
+  ),
+  VerbatimRule(
+    'e4_lintel_minor_door',
+    'activity_outside_property_main_wall_repairs_lintel__door',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL_MINOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Minor defects',
+  ),
+  VerbatimRule(
+    'e4_lintel_major_door',
+    'activity_outside_property_main_wall_repairs_lintel__door',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL_SIGNIFICANT}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Significant defect',
+  ),
+  VerbatimRule(
+    'e4_sill',
+    'activity_outside_property_main_wall_repairs_window_sills',
+    '{E_MAIN_WALLS}',
+    '{E4_WINDOWSILL}',
+    [
+      VerbatimToken(
+        '{SILL_WALLS}',
+        options: {
+          'e4s_w_front': 'front',
+          'e4s_w_side': 'side',
+          'e4s_w_rear': 'rear',
+        },
+        otherCheckbox: 'e4s_w_other',
+        otherText: 'e4s_w_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{SILL_LOCATIONS}',
+        options: {
+          'e4s_l_main_building': 'main building',
+          'e4s_l_back_addition': 'back addition',
+          'e4s_l_extension': 'extension',
+          'e4s_l_bay_window': 'bay window',
+        },
+        otherCheckbox: 'e4s_l_other',
+        otherText: 'e4s_l_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window'],
+      ),
+      VerbatimToken(
+        '{SILL_DEFECTS}',
+        options: {
+          'e4s_d_damaged': 'damaged',
+          'e4s_d_rotten': 'rotten',
+          'e4s_d_cracked': 'cracked',
+          'e4s_d_distorted': 'distorted',
+        },
+        otherCheckbox: 'e4s_d_other',
+        otherText: 'e4s_d_other_text',
+        pdfOptions: ['damaged', 'rotten', 'cracked', 'distorted'],
+      ),
+    ],
+    pdf:
+        'Windowsill defect: The windowsill(s) to the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, rotten, cracked, distorted, other.',
+  ),
+  VerbatimRule(
+    'e4_sill_minor',
+    'activity_outside_property_main_wall_repairs_window_sills',
+    '{E_MAIN_WALLS}',
+    '{E4_SILL_MINOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Minor Defect',
+  ),
+  VerbatimRule(
+    'e4_sill_major',
+    'activity_outside_property_main_wall_repairs_window_sills',
+    '{E_MAIN_WALLS}',
+    '{E4_SILL_SIGNIFICANT}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Significant Defect',
+  ),
+  VerbatimRule(
+    'e4_general',
+    'activity_outside_property_main_walls_main_screen',
+    '{E_MAIN_WALLS}',
+    '{E4_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

@@ -357,7 +357,9 @@ List<Map<String, String>> buildPermutations(
       case InspectionFieldType.checkbox:
         permutations.add({field.id: 'true'});
       case InspectionFieldType.text:
-        permutations.add({field.id: sampleText});
+        permutations.add({
+          field.id: field.id == 'et_thickness' ? sampleNumber : sampleText,
+        });
       case InspectionFieldType.number:
         permutations.add({field.id: sampleNumber});
       case InspectionFieldType.label:
@@ -375,7 +377,8 @@ List<Map<String, String>> buildPermutations(
       case InspectionFieldType.checkbox:
         maximal[field.id] = 'true';
       case InspectionFieldType.text:
-        maximal[field.id] = sampleText;
+        maximal[field.id] =
+            field.id == 'et_thickness' ? sampleNumber : sampleText;
       case InspectionFieldType.number:
         maximal[field.id] = sampleNumber;
       case InspectionFieldType.label:

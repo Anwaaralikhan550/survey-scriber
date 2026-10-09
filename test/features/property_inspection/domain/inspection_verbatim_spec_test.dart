@@ -113,7 +113,7 @@ void main() {
           if (t.dropdown != null) {
             a[t.dropdown!] = t.dropdownOptions.first;
           } else if (t.text != null) {
-            a[t.text!] = 'sample';
+            a[t.text!] = t.text == 'et_thickness' ? '280' : 'sample';
           } else {
             a[t.options.keys.first] = 'true';
           }
@@ -142,7 +142,7 @@ void main() {
               : t.dropdown != null
                   ? shown(t, t.dropdownOptions.first)
                   : t.text != null
-                      ? 'sample'
+                      ? (t.text == 'et_thickness' ? '280' : 'sample')
                       : t.options.values.first;
         }
         return m;

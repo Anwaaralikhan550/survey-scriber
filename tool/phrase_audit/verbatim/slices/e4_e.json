@@ -1,0 +1,2705 @@
+[
+  {
+    "screen": "activity_outside_property_main_walls_about_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_desc_solid",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DESCRIPTION}",
+        "text": "Description: The external walls of the {WALL_LOCATION} are constructed of {WALL_THICKNESS} mm {WALL_TYPE}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_LOCATION}",
+            "options": [
+              [
+                "e4w_loc_main_building",
+                "main building"
+              ],
+              [
+                "e4w_loc_extension_s",
+                "extension(s)"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension(s)"
+            ],
+            "label": "Wall",
+            "other": [
+              "cb_other_832",
+              "et_other_133"
+            ]
+          },
+          {
+            "kind": "text",
+            "token": "{WALL_THICKNESS}",
+            "dropdown": "et_thickness",
+            "field_label": "Thickness (mm)"
+          },
+          {
+            "kind": "constant",
+            "token": "{WALL_TYPE}",
+            "value": "solid brick"
+          }
+        ],
+        "pdf": [
+          "Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s)."
+        ]
+      },
+      {
+        "id": "e4_cond_solid",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_CONDITION}",
+        "text": "Condition: Where visible, the walls appear in {WALL_CONDITION_VALUE} condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WALL_CONDITION_VALUE}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction."
+        ]
+      },
+      {
+        "id": "e4_painted_solid",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_PAINTED}",
+        "text": "Painted Walls: The external wall surfaces, or parts of them, have been painted. Painting masonry can reduce its ability to breathe, trapping moisture within the wall. Rainwater may penetrate through fine cracks in the paint but be unable to evaporate freely, increasing the risk of dampness, frost damage and spalling of bricks or render over time. High internal humidity can also contribute to moisture becoming trapped within the wall construction. Painted external masonry also requires regular maintenance, as the finish will deteriorate and require periodic preparation and repainting to maintain its weather resistance and appearance. When future redecoration is undertaken, breathable masonry paint should be used where appropriate to minimise the risk of moisture becoming trapped.",
+        "tokens": [],
+        "when": [
+          "cb_painted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_painted",
+            "label": "Painted walls",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_about_wall__cavity_brick_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_desc_cbrick",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DESCRIPTION}",
+        "text": "Description: The external walls of the {WALL_LOCATION} are constructed of {WALL_THICKNESS} mm {WALL_TYPE}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_LOCATION}",
+            "options": [
+              [
+                "e4w_loc_main_building",
+                "main building"
+              ],
+              [
+                "e4w_loc_extension_s",
+                "extension(s)"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension(s)"
+            ],
+            "label": "Wall",
+            "other": [
+              "cb_other_832",
+              "et_other_133"
+            ]
+          },
+          {
+            "kind": "text",
+            "token": "{WALL_THICKNESS}",
+            "dropdown": "et_thickness",
+            "field_label": "Thickness (mm)"
+          },
+          {
+            "kind": "constant",
+            "token": "{WALL_TYPE}",
+            "value": "cavity brick"
+          }
+        ],
+        "pdf": [
+          "Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s)."
+        ]
+      },
+      {
+        "id": "e4_cond_cbrick",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_CONDITION}",
+        "text": "Condition: Where visible, the walls appear in {WALL_CONDITION_VALUE} condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WALL_CONDITION_VALUE}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction."
+        ]
+      },
+      {
+        "id": "e4_painted_cbrick",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_PAINTED}",
+        "text": "Painted Walls: The external wall surfaces, or parts of them, have been painted. Painting masonry can reduce its ability to breathe, trapping moisture within the wall. Rainwater may penetrate through fine cracks in the paint but be unable to evaporate freely, increasing the risk of dampness, frost damage and spalling of bricks or render over time. High internal humidity can also contribute to moisture becoming trapped within the wall construction. Painted external masonry also requires regular maintenance, as the finish will deteriorate and require periodic preparation and repainting to maintain its weather resistance and appearance. When future redecoration is undertaken, breathable masonry paint should be used where appropriate to minimise the risk of moisture becoming trapped.",
+        "tokens": [],
+        "when": [
+          "cb_painted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_painted",
+            "label": "Painted walls",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_about_wall__cavity_block_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_desc_cblock",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DESCRIPTION}",
+        "text": "Description: The external walls of the {WALL_LOCATION} are constructed of {WALL_THICKNESS} mm {WALL_TYPE}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_LOCATION}",
+            "options": [
+              [
+                "e4w_loc_main_building",
+                "main building"
+              ],
+              [
+                "e4w_loc_extension_s",
+                "extension(s)"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension(s)"
+            ],
+            "label": "Wall",
+            "other": [
+              "cb_other_832",
+              "et_other_133"
+            ]
+          },
+          {
+            "kind": "text",
+            "token": "{WALL_THICKNESS}",
+            "dropdown": "et_thickness",
+            "field_label": "Thickness (mm)"
+          },
+          {
+            "kind": "constant",
+            "token": "{WALL_TYPE}",
+            "value": "cavity blockwork"
+          }
+        ],
+        "pdf": [
+          "Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s)."
+        ]
+      },
+      {
+        "id": "e4_cond_cblock",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_CONDITION}",
+        "text": "Condition: Where visible, the walls appear in {WALL_CONDITION_VALUE} condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WALL_CONDITION_VALUE}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction."
+        ]
+      },
+      {
+        "id": "e4_painted_cblock",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_PAINTED}",
+        "text": "Painted Walls: The external wall surfaces, or parts of them, have been painted. Painting masonry can reduce its ability to breathe, trapping moisture within the wall. Rainwater may penetrate through fine cracks in the paint but be unable to evaporate freely, increasing the risk of dampness, frost damage and spalling of bricks or render over time. High internal humidity can also contribute to moisture becoming trapped within the wall construction. Painted external masonry also requires regular maintenance, as the finish will deteriorate and require periodic preparation and repainting to maintain its weather resistance and appearance. When future redecoration is undertaken, breathable masonry paint should be used where appropriate to minimise the risk of moisture becoming trapped.",
+        "tokens": [],
+        "when": [
+          "cb_painted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_painted",
+            "label": "Painted walls",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_about_wall__cavity_stud_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_desc_stud",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DESCRIPTION}",
+        "text": "Description: The external walls of the {WALL_LOCATION} are constructed of {WALL_THICKNESS} mm {WALL_TYPE}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_LOCATION}",
+            "options": [
+              [
+                "e4w_loc_main_building",
+                "main building"
+              ],
+              [
+                "e4w_loc_extension_s",
+                "extension(s)"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension(s)"
+            ],
+            "label": "Wall",
+            "other": [
+              "cb_other_832",
+              "et_other_133"
+            ]
+          },
+          {
+            "kind": "text",
+            "token": "{WALL_THICKNESS}",
+            "dropdown": "et_thickness",
+            "field_label": "Thickness (mm)"
+          },
+          {
+            "kind": "constant",
+            "token": "{WALL_TYPE}",
+            "value": "timber frame"
+          }
+        ],
+        "pdf": [
+          "Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s)."
+        ]
+      },
+      {
+        "id": "e4_cond_stud",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_CONDITION}",
+        "text": "Condition: Where visible, the walls appear in {WALL_CONDITION_VALUE} condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WALL_CONDITION_VALUE}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction."
+        ]
+      },
+      {
+        "id": "e4_painted_stud",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_PAINTED}",
+        "text": "Painted Walls: The external wall surfaces, or parts of them, have been painted. Painting masonry can reduce its ability to breathe, trapping moisture within the wall. Rainwater may penetrate through fine cracks in the paint but be unable to evaporate freely, increasing the risk of dampness, frost damage and spalling of bricks or render over time. High internal humidity can also contribute to moisture becoming trapped within the wall construction. Painted external masonry also requires regular maintenance, as the finish will deteriorate and require periodic preparation and repainting to maintain its weather resistance and appearance. When future redecoration is undertaken, breathable masonry paint should be used where appropriate to minimise the risk of moisture becoming trapped.",
+        "tokens": [],
+        "when": [
+          "cb_painted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_painted",
+            "label": "Painted walls",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_about_wall__other",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_desc_other",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DESCRIPTION}",
+        "text": "Description: The external walls of the {WALL_LOCATION} are constructed of {WALL_THICKNESS} mm {WALL_TYPE}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_LOCATION}",
+            "options": [
+              [
+                "e4w_loc_main_building",
+                "main building"
+              ],
+              [
+                "e4w_loc_extension_s",
+                "extension(s)"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension(s)"
+            ],
+            "label": "Wall",
+            "other": [
+              "cb_other_832",
+              "et_other_133"
+            ]
+          },
+          {
+            "kind": "text",
+            "token": "{WALL_THICKNESS}",
+            "dropdown": "et_thickness",
+            "field_label": "Thickness (mm)"
+          },
+          {
+            "kind": "text",
+            "token": "{WALL_TYPE}",
+            "dropdown": "other",
+            "field_label": "Other construction type"
+          }
+        ],
+        "pdf": [
+          "Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s)."
+        ]
+      },
+      {
+        "id": "e4_cond_other",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_CONDITION}",
+        "text": "Condition: Where visible, the walls appear in {WALL_CONDITION_VALUE} condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WALL_CONDITION_VALUE}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction."
+        ]
+      },
+      {
+        "id": "e4_painted_other",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_PAINTED}",
+        "text": "Painted Walls: The external wall surfaces, or parts of them, have been painted. Painting masonry can reduce its ability to breathe, trapping moisture within the wall. Rainwater may penetrate through fine cracks in the paint but be unable to evaporate freely, increasing the risk of dampness, frost damage and spalling of bricks or render over time. High internal humidity can also contribute to moisture becoming trapped within the wall construction. Painted external masonry also requires regular maintenance, as the finish will deteriorate and require periodic preparation and repainting to maintain its weather resistance and appearance. When future redecoration is undertaken, breathable masonry paint should be used where appropriate to minimise the risk of moisture becoming trapped.",
+        "tokens": [],
+        "when": [
+          "cb_painted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_painted",
+            "label": "Painted walls",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_about_wall__rendered_masonry",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_desc_rendered",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DESCRIPTION}",
+        "text": "Description: The external walls of the {WALL_LOCATION} are constructed of {WALL_THICKNESS} mm {WALL_TYPE}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_LOCATION}",
+            "options": [
+              [
+                "e4w_loc_main_building",
+                "main building"
+              ],
+              [
+                "e4w_loc_extension_s",
+                "extension(s)"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension(s)"
+            ],
+            "label": "Wall",
+            "other": [
+              "cb_other_832",
+              "et_other_133"
+            ]
+          },
+          {
+            "kind": "text",
+            "token": "{WALL_THICKNESS}",
+            "dropdown": "et_thickness",
+            "field_label": "Thickness (mm)"
+          },
+          {
+            "kind": "constant",
+            "token": "{WALL_TYPE}",
+            "value": "rendered masonry"
+          }
+        ],
+        "pdf": [
+          "Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s)."
+        ]
+      },
+      {
+        "id": "e4_cond_rendered",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_CONDITION}",
+        "text": "Condition: Where visible, the walls appear in {WALL_CONDITION_VALUE} condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WALL_CONDITION_VALUE}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction."
+        ]
+      },
+      {
+        "id": "e4_painted_rendered",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_PAINTED}",
+        "text": "Painted Walls: The external wall surfaces, or parts of them, have been painted. Painting masonry can reduce its ability to breathe, trapping moisture within the wall. Rainwater may penetrate through fine cracks in the paint but be unable to evaporate freely, increasing the risk of dampness, frost damage and spalling of bricks or render over time. High internal humidity can also contribute to moisture becoming trapped within the wall construction. Painted external masonry also requires regular maintenance, as the finish will deteriorate and require periodic preparation and repainting to maintain its weather resistance and appearance. When future redecoration is undertaken, breathable masonry paint should be used where appropriate to minimise the risk of moisture becoming trapped.",
+        "tokens": [],
+        "when": [
+          "cb_painted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_painted",
+            "label": "Painted walls",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ],
+    "new_screen": {
+      "id": "activity_outside_property_main_walls_about_wall__rendered_masonry",
+      "title": "Rendered masonry",
+      "parent": "group_about_the_wall_17",
+      "order": 12,
+      "after": "activity_outside_property_main_walls_about_wall__other"
+    }
+  },
+  {
+    "screen": "activity_outside_property_main_walls_about_wall__pebble_dash_masonry",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_desc_pebble",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DESCRIPTION}",
+        "text": "Description: The external walls of the {WALL_LOCATION} are constructed of {WALL_THICKNESS} mm {WALL_TYPE}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_LOCATION}",
+            "options": [
+              [
+                "e4w_loc_main_building",
+                "main building"
+              ],
+              [
+                "e4w_loc_extension_s",
+                "extension(s)"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension(s)"
+            ],
+            "label": "Wall",
+            "other": [
+              "cb_other_832",
+              "et_other_133"
+            ]
+          },
+          {
+            "kind": "text",
+            "token": "{WALL_THICKNESS}",
+            "dropdown": "et_thickness",
+            "field_label": "Thickness (mm)"
+          },
+          {
+            "kind": "constant",
+            "token": "{WALL_TYPE}",
+            "value": "pebble dash masonry"
+          }
+        ],
+        "pdf": [
+          "Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s)."
+        ]
+      },
+      {
+        "id": "e4_cond_pebble",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_CONDITION}",
+        "text": "Condition: Where visible, the walls appear in {WALL_CONDITION_VALUE} condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WALL_CONDITION_VALUE}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction."
+        ]
+      },
+      {
+        "id": "e4_painted_pebble",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_PAINTED}",
+        "text": "Painted Walls: The external wall surfaces, or parts of them, have been painted. Painting masonry can reduce its ability to breathe, trapping moisture within the wall. Rainwater may penetrate through fine cracks in the paint but be unable to evaporate freely, increasing the risk of dampness, frost damage and spalling of bricks or render over time. High internal humidity can also contribute to moisture becoming trapped within the wall construction. Painted external masonry also requires regular maintenance, as the finish will deteriorate and require periodic preparation and repainting to maintain its weather resistance and appearance. When future redecoration is undertaken, breathable masonry paint should be used where appropriate to minimise the risk of moisture becoming trapped.",
+        "tokens": [],
+        "when": [
+          "cb_painted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_painted",
+            "label": "Painted walls",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ],
+    "new_screen": {
+      "id": "activity_outside_property_main_walls_about_wall__pebble_dash_masonry",
+      "title": "Pebble dash masonry",
+      "parent": "group_about_the_wall_17",
+      "order": 14,
+      "after": "activity_outside_property_main_walls_about_wall__rendered_masonry"
+    }
+  },
+  {
+    "screen": "activity_outside_property_main_walls_cladding",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_cladding",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_CLADDING}",
+        "text": "Cladding: The external wall finish or cladding comprises {WALL_CLADDING}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_CLADDING}",
+            "options": [
+              [
+                "e4c_facing_brickwork",
+                "facing brickwork"
+              ],
+              [
+                "e4c_natural_or_reconstituted_stone",
+                "natural or reconstituted stone"
+              ],
+              [
+                "e4c_timber_cladding",
+                "timber cladding"
+              ],
+              [
+                "e4c_plastic_panelling_boards",
+                "plastic panelling boards"
+              ],
+              [
+                "e4c_weatherboarding",
+                "weatherboarding"
+              ],
+              [
+                "e4c_fibre_cement_boards",
+                "fibre cement boards"
+              ],
+              [
+                "e4c_upvc_cladding",
+                "uPVC cladding"
+              ],
+              [
+                "e4c_fibre_cement_panels",
+                "fibre cement panels"
+              ],
+              [
+                "e4c_composite_cladding_panels",
+                "composite cladding panels"
+              ],
+              [
+                "e4c_glass_curtain_walling",
+                "glass curtain walling"
+              ],
+              [
+                "e4c_hanging_tiles_including_shingle_or_plain_tiles",
+                "hanging tiles (including shingle or plain tiles)"
+              ],
+              [
+                "e4c_aluminium_cladding_panels",
+                "aluminium cladding panels"
+              ],
+              [
+                "e4c_terracotta_cladding_tiles",
+                "terracotta cladding tiles"
+              ]
+            ],
+            "pdf_options": [
+              "facing brickwork",
+              "natural or reconstituted stone",
+              "timber cladding",
+              "plastic panelling boards",
+              "weatherboarding",
+              "fibre cement boards",
+              "uPVC cladding",
+              "fibre cement panels",
+              "composite cladding panels",
+              "glass curtain walling",
+              "hanging tiles (including shingle or plain tiles)",
+              "aluminium cladding panels",
+              "terracotta cladding tiles"
+            ],
+            "label": "Cladding",
+            "other": [
+              "e4c_other",
+              "e4c_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Cladding: The external wall finish or cladding comprises facing brickwork, natural or reconstituted stone, timber cladding, plastic panelling boards.",
+          "weatherboarding, fibre cement boards, uPVC cladding, fibre cement panels, composite cladding panels, glass curtain walling, hanging tiles (including shingle or plain tiles), aluminium cladding panels, terracotta cladding tiles, other finishes."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_ews1",
+    "new_screen": {
+      "id": "activity_outside_property_main_walls_ews1",
+      "title": "EWS1 Cladding",
+      "parent": "group_main_walls_16",
+      "order": 4,
+      "after": "activity_outside_property_main_walls_cladding"
+    },
+    "rules": [
+      {
+        "id": "e4_ews1",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_EWS1_CLADDING}",
+        "text": "EWS1 Cladding: The external walls are {EWS1_EXTENT} cladded with a {EWS1_TYPES}, etc. This type of construction typically comprises fixing the cladding materials to a metal support frame secured to the primary structure, with a ventilated cavity and non-combustible mineral wool insulation behind. The inner leaf is commonly formed of concrete, blockwork or a metal framing system incorporating sheathing board and plasterboard lining.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{EWS1_EXTENT}",
+            "dropdown": "actv_ews1_extent",
+            "field_label": "Extent",
+            "dropdown_options": [
+              "Partially",
+              "Predominantly"
+            ],
+            "pdf_options": [
+              "partially",
+              "predominantly"
+            ],
+            "lower": true
+          },
+          {
+            "kind": "checks",
+            "token": "{EWS1_TYPES}",
+            "options": [
+              [
+                "e4e_brick_slip",
+                "brick-slip"
+              ],
+              [
+                "e4e_brick_effect_outer_face",
+                "brick-effect outer face"
+              ],
+              [
+                "e4e_rainscreen_boards",
+                "rainscreen boards"
+              ],
+              [
+                "e4e_terracotta_tiles",
+                "terracotta tiles"
+              ],
+              [
+                "e4e_compressed_composite_boards",
+                "compressed composite boards"
+              ],
+              [
+                "e4e_aluminium_panels",
+                "aluminium panels"
+              ],
+              [
+                "e4e_glass_reinforced_concrete_grc_panels",
+                "glass reinforced concrete (GRC) panels"
+              ],
+              [
+                "e4e_glass_curtain_walling",
+                "glass curtain walling"
+              ],
+              [
+                "e4e_hanging_tiles_including_shingle_or_plain_tiles",
+                "hanging tiles (including shingle or plain tiles)"
+              ],
+              [
+                "e4e_aluminium_cladding_panels",
+                "aluminium cladding panels"
+              ]
+            ],
+            "pdf_options": [
+              "brick-slip",
+              "brick-effect outer face",
+              "rainscreen boards",
+              "terracotta tiles",
+              "compressed composite boards",
+              "aluminium panels",
+              "glass reinforced concrete (GRC) panels",
+              "glass curtain walling",
+              "hanging tiles (including shingle or plain tiles)",
+              "aluminium cladding panels"
+            ],
+            "label": "Cladded with"
+          }
+        ],
+        "pdf": [
+          "EWS1 Cladding: The external walls are partially or predominantly cladded with a brick-slip, brick-effect outer face, rainscreen boards, terracotta tiles, compressed composite boards, aluminium panels, glass reinforced concrete (GRC) panels, glass curtain walling, hanging tiles (including shingle or plain tiles), aluminium cladding panels, etc."
+        ]
+      },
+      {
+        "id": "e4_ews1_not",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_EWS1_NOT_REQUIRED}",
+        "text": "EWS1 form not required: Based on the visual evidence available during my inspection, the external wall construction appears broadly consistent with a building that may satisfy current EWS1 requirements. However, this inspection did not include an assessment of the external wall system for fire safety compliance, and I am not qualified to certify compliance. Confirmation can only be provided following an assessment by a suitably qualified fire safety professional, where required, and the issue of a valid EWS1 form. Your legal adviser should make further enquiries of the seller or managing agent and obtain a copy of any current EWS1 form, together with details of any planned, ongoing, or completed fire safety or cladding remediation works before you exchange contracts or commit to the purchase. This inspection should not be relied upon as confirmation of compliance with current fire safety legislation or lender requirements. Neither the surveyor nor this practice accepts liability for any loss, costs or delays arising from the fire performance of the external wall system, the absence or content of an EWS1 form, or any current or future remediation works or associated costs.",
+        "tokens": [],
+        "when": [
+          "actv_ews1",
+          "EWS1 form not required"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_ews1",
+            "label": "EWS1",
+            "type": "dropdown",
+            "options": [
+              "EWS1 form not required",
+              "EWS1 form required"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e4_ews1_req",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_EWS1_REQUIRED}",
+        "text": "EWS1 form required: The external wall construction observed during my inspection indicates that a detailed assessment of the external wall system may be required to confirm compliance with current fire safety requirements. My inspection was limited to a visual assessment only and did not include opening up, intrusive investigations or a fire safety appraisal of the cladding system. Where required, confirmation of the fire performance of the external wall system can only be provided by a suitably qualified fire safety professional following a detailed assessment and, where applicable, the issue of a valid EWS1 form. Your legal adviser should make further enquiries of the seller, freeholder or managing agent and obtain copies of any current EWS1 form, fire risk assessments relating to the external wall system, and details of any planned, ongoing or completed remediation works before exchange of contracts or completion of the purchase. Neither the surveyor nor this practice has assessed the external wall system for compliance with fire safety legislation or lender requirements and accepts no liability to you or any third party for any loss, delay, remediation costs or other financial consequences arising directly or indirectly from the fire performance of the external wall system, the requirement for or content of an EWS1 form, or any current or future remedial works.",
+        "tokens": [],
+        "when": [
+          "actv_ews1",
+          "EWS1 form required"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_damp",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_moisture",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_MOISTURE_READINGS}",
+        "text": "Moisture metre readings: Random moisture readings were taken to accessible internal wall surfaces using a hand-held electronic moisture meter.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "No damp found"
+        ],
+        "when_any": [
+          [
+            "actv_status",
+            "Damp found"
+          ]
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Status",
+            "type": "dropdown",
+            "options": [
+              "No damp found",
+              "Damp found"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e4_nodamp",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_NO_DAMP}",
+        "text": "No damp found: No readings were obtained that suggest abnormal moisture levels at the time of inspection.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "No damp found"
+        ]
+      },
+      {
+        "id": "e4_damp",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DAMP_FOUND}",
+        "text": "Damp found: Elevated moisture readings were recorded to sections of the internal wall surfaces that include {DAMP_LOCATIONS}.",
+        "tokens": [
+          {
+            "kind": "text",
+            "token": "{DAMP_LOCATIONS}",
+            "dropdown": "et_location_677",
+            "field_label": "Location of elevated readings (e.g. lower walls in the lounge)",
+            "cond": "actv_status=Damp found"
+          }
+        ],
+        "pdf": [
+          "Damp found: Elevated moisture readings were recorded to sections of the internal wall surfaces that include (enter locations)."
+        ],
+        "when": [
+          "actv_status",
+          "Damp found"
+        ]
+      },
+      {
+        "id": "e4_pen",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_PENETRATING}",
+        "text": "Penetrating damp cause: This may have been affected by penetrating damp probably caused by {DAMP_CAUSES}. When the problem has been resolved, the wall may need to be repaired.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DAMP_CAUSES}",
+            "options": [
+              [
+                "e4d_cause_overflowing_gutter",
+                "overflowing gutter"
+              ],
+              [
+                "e4d_cause_roof_leak",
+                "roof leak"
+              ],
+              [
+                "e4d_cause_leaking_downpipe",
+                "leaking downpipe"
+              ],
+              [
+                "e4d_cause_bridged_dpc",
+                "bridged DPC"
+              ],
+              [
+                "e4d_cause_blocked_gully",
+                "blocked gully"
+              ]
+            ],
+            "pdf_options": [
+              "overflowing gutter",
+              "roof leak",
+              "leaking downpipe",
+              "bridged DPC",
+              "blocked gully"
+            ],
+            "label": "Penetrating damp probably caused by",
+            "other": [
+              "e4d_cause_other",
+              "e4d_cause_other_text"
+            ],
+            "cond": "actv_status=Damp found"
+          }
+        ],
+        "pdf": [
+          "Penetrating damp cause: This may have been affected by penetrating damp probably caused by overflowing gutter, roof leak, leaking downpipe, bridged DPC, blocked gully, other."
+        ],
+        "when": [
+          "actv_status",
+          "Damp found"
+        ]
+      },
+      {
+        "id": "e4_repair_opts",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_REPAIR_OPTIONS}",
+        "text": "Repair options: The source of the moisture should be identified and remedied as a priority. This may involve repairs to the {DAMP_REPAIRS}, as appropriate. Once the source of moisture has been eliminated and the affected walls have been allowed sufficient time to dry naturally, any damaged plaster, decorations or other finishes should be repaired or replaced, as necessary. The affected area should then be monitored to ensure that the dampness does not recur.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DAMP_REPAIRS}",
+            "options": [
+              [
+                "e4d_rep_gutters",
+                "gutters"
+              ],
+              [
+                "e4d_rep_roof_covering",
+                "roof covering"
+              ],
+              [
+                "e4d_rep_downpipes",
+                "downpipes"
+              ],
+              [
+                "e4d_rep_damp_proof_course",
+                "damp-proof course"
+              ],
+              [
+                "e4d_rep_blocked_gullies",
+                "blocked gullies"
+              ],
+              [
+                "e4d_rep_damaged_drainage",
+                "damaged drainage"
+              ]
+            ],
+            "pdf_options": [
+              "gutters",
+              "roof covering",
+              "downpipes",
+              "damp-proof course",
+              "blocked gullies",
+              "damaged drainage"
+            ],
+            "label": "Repairs may involve",
+            "other": [
+              "e4d_rep_other",
+              "e4d_rep_other_text"
+            ],
+            "cond": "actv_status=Damp found"
+          }
+        ],
+        "pdf": [
+          "This may involve repairs to the gutters, roof covering, downpipes, damp-proof course, blocked gullies, damaged drainage, other, as appropriate."
+        ],
+        "when": [
+          "actv_status",
+          "Damp found"
+        ]
+      },
+      {
+        "id": "e4_investigate",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_INVESTIGATE_CAUSE}",
+        "text": "Investigate cause: The source of moisture cannot be confirmed during a visual inspection. You should instruct a suitably qualified contractor to investigate the cause of the dampness and carry out any necessary repairs to prevent further moisture penetration. Following completion of the repairs, the affected walls should be allowed to dry before any replastering, redecoration or replacement of finishes is undertaken. Premature redecoration may result in the recurrence of staining or damage if residual moisture remains within the wall.",
+        "tokens": [],
+        "when": [
+          "cb_unknown_cause",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_unknown_cause",
+            "label": "Investigate cause",
+            "type": "checkbox",
+            "conditionalOn": "actv_status=Damp found",
+            "conditionalMode": "show"
+          }
+        ]
+      },
+      {
+        "id": "e4_rising",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_RISING_DAMP}",
+        "text": "Rising damp: The wall(s) may be affected by rising damp. Probable causes include a damaged, deteriorated or bridged damp-proof course (DPC), high external ground levels, defective drainage, or other factors. The source of the moisture should be identified and remedied by a suitably qualified contractor. Once the cause has been addressed, any damaged plaster, decorations or other affected finishes may require repair or replacement.",
+        "tokens": [],
+        "when": [
+          "cb_rising_damp",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_rising_damp",
+            "label": "Rising damp",
+            "type": "checkbox",
+            "conditionalOn": "actv_status=Damp found",
+            "conditionalMode": "show"
+          }
+        ]
+      },
+      {
+        "id": "e4_drain",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_INSTALL_DRAIN_GUTTERING}",
+        "text": "Install drain guttering: Because the external ground levels are high in relation to the building, the damp-proof course (DPC) may be bridged in places, allowing moisture to penetrate the walls. External ground levels should be reduced where practicable to maintain an appropriate clearance below the damp-proof course. Where this is not feasible, suitable drainage measures, such as a French drain or gravel-filled drainage channel, may be appropriate to improve surface water drainage and reduce the risk of moisture penetration. A suitably qualified contractor should advise on the most appropriate remedial solution.",
+        "tokens": [],
+        "when": [
+          "cb_install_french_gutters",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_install_french_gutters",
+            "label": "Install drain guttering",
+            "type": "checkbox",
+            "conditionalOn": "actv_status=Damp found",
+            "conditionalMode": "show"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_dpc",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_dpc",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DPC}",
+        "text": "Damp-proof course: The walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC is {DPC_STATE}; one would normally be expected for a property of this age and type.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{DPC_STATE}",
+            "dropdown": "actv_status",
+            "field_label": "DPC",
+            "dropdown_options": [
+              "Visible",
+              "Partially visible",
+              "Not visible"
+            ],
+            "pdf_options": [
+              "visible",
+              "partially visible",
+              "not visible"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Damp-proof course: The walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC is visible, partially visible, not visible; one would normally be expected for a property of this age and type."
+        ]
+      },
+      {
+        "id": "e4_dpc_material",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DPC_MATERIAL}",
+        "text": "The DPC is assumed to consist of {DPC_MATERIAL}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DPC_MATERIAL}",
+            "options": [
+              [
+                "e4p_plastic",
+                "plastic"
+              ],
+              [
+                "e4p_felt",
+                "felt"
+              ],
+              [
+                "e4p_slates",
+                "slates"
+              ],
+              [
+                "e4p_engineering_bricks",
+                "engineering bricks"
+              ]
+            ],
+            "pdf_options": [
+              "plastic",
+              "felt",
+              "slates",
+              "engineering bricks"
+            ],
+            "label": "DPC assumed to consist of",
+            "other": [
+              "e4p_other",
+              "e4p_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "The DPC is assumed to consist of plastic, felt, slates, engineering bricks, other."
+        ]
+      },
+      {
+        "id": "e4_dpc_adequacy",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DPC_ADEQUACY}",
+        "text": "The adequacy of concealed damp-proof courses cannot be confirmed during a visual inspection.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Visible"
+        ],
+        "when_any": [
+          [
+            "actv_status",
+            "Partially visible"
+          ],
+          [
+            "actv_status",
+            "Not visible"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_dpc_treatment",
+    "new_screen": {
+      "id": "activity_outside_property_main_walls_dpc_treatment",
+      "title": "DPC Treatment",
+      "parent": "group_main_walls_16",
+      "order": 8,
+      "after": "activity_outside_property_main_walls_dpc"
+    },
+    "rules": [
+      {
+        "id": "e4_treatment",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_DPC_TREATMENT}",
+        "text": "DPC Treatment noted: I noted evidence of {DPC_TREATMENT} in the property. You should ask your legal adviser to check whether there has been a dampness problem before and if a valid guarantee or warranty covers this work. If not, you should ask an appropriately qualified person to inspect the property, assess its condition, and identify what repairs are required. Once the repairs have been completed, this person should issue a certificate of ‘structural worthiness.’ You should ask your insurance company if this problem would affect your ability to get insurance cover for this property.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DPC_TREATMENT}",
+            "options": [
+              [
+                "e4t_damp_proof_course_treatment",
+                "damp proof course treatment"
+              ],
+              [
+                "e4t_wall_ventilation_apparatus",
+                "wall ventilation apparatus"
+              ],
+              [
+                "e4t_ventilation_holes",
+                "ventilation holes"
+              ]
+            ],
+            "pdf_options": [
+              "damp proof course treatment",
+              "wall ventilation apparatus",
+              "ventilation holes"
+            ],
+            "label": "Evidence noted of",
+            "other": [
+              "e4t_other",
+              "e4t_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "DPC Treatment noted: I noted evidence of damp proof course treatment, wall ventilation apparatus, ventilation holes, other in the property."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_removed_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_removed",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_REMOVED_WALL}",
+        "text": "Removed wall: An external wall to the {REMOVED_LOCATION} appears to have been removed as part of previous alterations. This work should have been carried out with Building Regulations approval and should have included adequate structural support for the remaining wall above the openings. Due to the internal floor and ceiling finishes, I was unable to confirm whether suitable structural support has been provided. I strongly recommend that your legal adviser obtains confirmation that the necessary Building Regulations approval was obtained for these alterations. If the required approval cannot be confirmed, or the work was not properly supervised, there is a risk that additional structural support may be required. This could result in further investigation, remedial works, additional costs, and disruption.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{REMOVED_LOCATION}",
+            "options": [
+              [
+                "e4r_lounge",
+                "lounge"
+              ],
+              [
+                "e4r_kitchen",
+                "kitchen"
+              ],
+              [
+                "e4r_bedroom",
+                "bedroom"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "kitchen",
+              "bedroom"
+            ],
+            "label": "Wall removed to",
+            "other": [
+              "cb_other_1020",
+              "et_other_522"
+            ]
+          }
+        ],
+        "pdf": [
+          "Removed wall: An external wall to the lounge, kitchen, bedroom, other appears to have been removed as part of previous alterations."
+        ]
+      },
+      {
+        "id": "e4_removed_defect",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_REMOVED_DEFECT}",
+        "text": "Defect noted: I noted {REMOVED_DEFECTS} in the surrounding wall surfaces. However, due to the concealed nature of the structure behind the wall and the floor and ceiling finishes, I was unable to confirm whether adequate structural support has been provided. You should instruct a suitably qualified structural engineer to carry out further investigation and advise on the adequacy of the structural alterations and any remedial works that may be required.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{REMOVED_DEFECTS}",
+            "options": [
+              [
+                "e4rd_cracking",
+                "cracking"
+              ],
+              [
+                "e4rd_distortions",
+                "distortions"
+              ]
+            ],
+            "pdf_options": [
+              "cracking",
+              "distortions"
+            ],
+            "label": "Defects noted",
+            "other": [
+              "e4rd_other",
+              "e4rd_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Defect noted: I noted cracking, distortions, other in the surrounding wall surfaces."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_extensions",
+    "new_screen": {
+      "id": "activity_outside_property_main_walls_extensions",
+      "title": "Extensions and alterations",
+      "parent": "group_main_walls_16",
+      "order": 10,
+      "after": "activity_outside_property_main_walls_removed_wall"
+    },
+    "rules": [
+      {
+        "id": "e4_extensions",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_EXTENSIONS}",
+        "text": "Extensions and alterations: Evidence was noted that external alterations have been carried out to the property. These include {EXT_ALTERATIONS}. Your legal adviser should confirm that all appropriate statutory approvals and completion certificates have been obtained where required.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{EXT_ALTERATIONS}",
+            "options": [
+              [
+                "e4x_wall_removal",
+                "wall removal"
+              ],
+              [
+                "e4x_new_openings",
+                "new openings"
+              ],
+              [
+                "e4x_replacement_lintels",
+                "replacement lintels"
+              ],
+              [
+                "e4x_structural_alterations",
+                "structural alterations"
+              ],
+              [
+                "e4x_building_extension_works",
+                "building extension works"
+              ]
+            ],
+            "pdf_options": [
+              "wall removal",
+              "new openings",
+              "replacement lintels",
+              "structural alterations",
+              "building extension works"
+            ],
+            "label": "Alterations",
+            "other": [
+              "e4x_other",
+              "e4x_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "These include wall removal, new openings, replacement lintels, structural alterations, building extension works, other alterations."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_cavity_wall_insulation",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_cwi",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_CAVITY_WALL_INSULATION}",
+        "text": "Cavity Wall Insulation: There is evidence that cavity wall insulation has been installed. Your legal adviser should verify the type of insulation used, the date of installation, and whether any guarantees or warranties are available. If it is confirmed that foam cavity wall insulation has been installed, please note that this type of insulation has been associated with problems in some properties. These may include deterioration of the insulation over time, allowing moisture to bridge the cavity and resulting in internal dampness, or contributing to the accelerated corrosion of wall ties where conditions are conducive. The availability of any guarantees or warranties should also be confirmed.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Cavity Wall Insulation",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_thin_slim_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_thin",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_THIN_WALL}",
+        "text": "Thin wall: The external wall to the {THIN_WALLS} walls of the {THIN_LOCATIONS} is not thick enough and vulnerable to damp problems and heat loss. This substandard construction should be improved soon. In some cases, rebuilding the wall to modern standards may be the only economic option.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{THIN_WALLS}",
+            "options": [
+              [
+                "e4tw_front",
+                "front"
+              ],
+              [
+                "e4tw_rear",
+                "rear"
+              ],
+              [
+                "e4tw_side",
+                "side"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "rear",
+              "side"
+            ],
+            "label": "Walls"
+          },
+          {
+            "kind": "checks",
+            "token": "{THIN_LOCATIONS}",
+            "options": [
+              [
+                "e4tl_main_building",
+                "main building"
+              ],
+              [
+                "e4tl_extension",
+                "extension"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension"
+            ],
+            "label": "Location",
+            "other": [
+              "cb_other_423",
+              "et_other_883"
+            ]
+          }
+        ],
+        "pdf": [
+          "Thin wall: The external wall to the front, rear, side walls of the main building, extension, other is not thick enough and vulnerable to damp problems and heat loss."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_near_by_tress",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_trees",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_TREES}",
+        "text": "Trees: There are trees located close to the property. I noted no obvious signs to suggest that they have caused significant damage to the property. However, it would be prudent to implement a programme of management to control their future growth. Trees can affect building foundations and below-ground services, particularly where shrinkable subsoils are present.",
+        "tokens": [],
+        "when": [
+          "actv_trees",
+          "Trees"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_trees",
+            "label": "Trees",
+            "type": "dropdown",
+            "options": [
+              "Trees",
+              "Tree defects noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e4_tree_defects",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_TREE_DEFECTS}",
+        "text": "Tree defects noted: There are trees located close to the property, and I noted defects that may be associated with their influence, including {TREE_DEFECTS}. Although the cause cannot be confirmed during a visual inspection, further investigation by a suitably qualified structural engineer and, where appropriate, an arboriculturist is recommended to establish whether the trees are contributing to the observed defects and to advise on any necessary remedial works.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{TREE_DEFECTS}",
+            "options": [
+              [
+                "e4td_cracking",
+                "cracking"
+              ],
+              [
+                "e4td_distortion",
+                "distortion"
+              ],
+              [
+                "e4td_heave",
+                "heave"
+              ]
+            ],
+            "pdf_options": [
+              "cracking",
+              "distortion",
+              "heave"
+            ],
+            "label": "Defects",
+            "other": [
+              "e4td_other",
+              "e4td_other_text"
+            ],
+            "cond": "actv_trees=Tree defects noted"
+          }
+        ],
+        "pdf": [
+          "Tree defects noted: There are trees located close to the property, and I noted defects that may be associated with their influence, including cracking, distortion, heave, other observed defects."
+        ],
+        "when": [
+          "actv_trees",
+          "Tree defects noted"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_movements",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_mv_0",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_MOVE_0}",
+        "text": "Minor subsidence: Diagonally stepped and other similar cracks were noted to the external elevations of the property. Evidence of previous repairs, including localised repointing and repairs to the bay and other wall sections, was also observed. Based on a single visual inspection, it is not possible to confirm whether the movement is historic and stable or whether it is progressive. Although no significant distortion or evidence requiring immediate structural intervention was apparent at the time of inspection, the cause, extent, and current activity of the movement cannot be confirmed without further investigation and monitoring over time. You should ask your legal adviser whether any guarantees, warranties, structural reports, or insurance claims relating to these repairs are available. In the absence of satisfactory documentary evidence, I recommend that the affected areas are inspected by a suitably qualified structural engineer, who can advise whether any further investigation or monitoring is necessary before you commit to the purchase.",
+        "tokens": [],
+        "when": [
+          "actv_movement_status",
+          "Minor subsidence"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_movement_status",
+            "label": "Movement status",
+            "type": "dropdown",
+            "options": [
+              "Minor subsidence",
+              "Significant subsidence",
+              "No structural movement",
+              "Normal defects",
+              "Recent defects",
+              "Recurring defects",
+              "Differential thermal movement",
+              "Restraint steel rods"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e4_mv_1",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_MOVE_1}",
+        "text": "Significant subsidence: Significant diagonally stepped and other similar cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls. Where some of these cracks may have or have not been repaired and the time of repair is unknown, I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive. The pattern of cracking is consistent with movement that may be associated with subsidence or foundation movement. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts. Your legal adviser should also establish whether there is any history of subsidence, structural movement, underpinning, monitoring, insurance claims, or structural repairs affecting the property. If you proceed with the purchase without further investigation, you will be accepting the risk that more significant structural defects and associated repair costs may become apparent in the future.",
+        "tokens": [],
+        "when": [
+          "actv_movement_status",
+          "Significant subsidence"
+        ]
+      },
+      {
+        "id": "e4_mv_2",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_MOVE_2}",
+        "text": "No Structural Movement: Although I did not observe any evidence of significant structural movement during my inspection, I cannot be categorical that none has occurred, as all buildings are subject to some degree of movement, such as normal settlement and seasonal thermal or moisture-related movement. It is also possible that evidence of movement, including cracks, may be concealed by floor coverings, decorations, fitted furniture, or other obstructions.",
+        "tokens": [],
+        "when": [
+          "actv_movement_status",
+          "No structural movement"
+        ]
+      },
+      {
+        "id": "e4_mv_3",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_MOVE_3}",
+        "text": "Normal defects: I noted no evidence of any significant recent or progressive structural movement within the property. However, there are signs that the property has experienced some historic movement, as evidenced by cracking to external and internal wall surfaces, at junctions and around openings. As far as could be observed, these cracks appear longstanding in nature, and there is no evidence to suggest significant ongoing movement. No significant repairs are considered necessary at this time, although localised repairs and redecoration may be required as part of routine maintenance.",
+        "tokens": [],
+        "when": [
+          "actv_movement_status",
+          "Normal defects"
+        ]
+      },
+      {
+        "id": "e4_mv_recent",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_MOVE_RECENT}",
+        "text": "Recent defects: The {MOVE_WALLS} walls of the {MOVE_LOCATIONS} areas have been damaged by movement cracks potentially arising from {MOVE_CAUSES}, and this is considered structurally significant. Movement within the property is considered serious and could worsen over time. Parts of the property could become unstable. You should instruct an appropriately qualified structural engineer to investigate the problem and recommend an appropriate scheme of repair. To carry out a proper investigation, it is likely that parts of the property will need to be opened or disturbed, and this should be discussed with the building owner. Evidence of previous structural movement, even where satisfactorily resolved, may affect the property's future mortgageability and saleability.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{MOVE_WALLS}",
+            "options": [
+              [
+                "e4m_w_front",
+                "front"
+              ],
+              [
+                "e4m_w_side",
+                "side"
+              ],
+              [
+                "e4m_w_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "Walls",
+            "cond": "actv_movement_status=Recent defects"
+          },
+          {
+            "kind": "checks",
+            "token": "{MOVE_LOCATIONS}",
+            "options": [
+              [
+                "e4m_l_main_building",
+                "main building"
+              ],
+              [
+                "e4m_l_back_addition",
+                "back addition"
+              ],
+              [
+                "e4m_l_extension",
+                "extension"
+              ],
+              [
+                "e4m_l_bay_window",
+                "bay window"
+              ],
+              [
+                "e4m_l_porch",
+                "porch"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "back addition",
+              "extension",
+              "bay window",
+              "porch"
+            ],
+            "label": "Location",
+            "other": [
+              "e4m_l_other",
+              "e4m_l_other_text"
+            ],
+            "cond": "actv_movement_status=Recent defects"
+          },
+          {
+            "kind": "checks",
+            "token": "{MOVE_CAUSES}",
+            "options": [
+              [
+                "e4m_c_settlement",
+                "settlement"
+              ],
+              [
+                "e4m_c_subsidence",
+                "subsidence"
+              ],
+              [
+                "e4m_c_nearby_vegetation",
+                "nearby vegetation"
+              ],
+              [
+                "e4m_c_point_loading",
+                "point loading"
+              ],
+              [
+                "e4m_c_wall_tie_damage",
+                "wall tie damage"
+              ]
+            ],
+            "pdf_options": [
+              "settlement",
+              "subsidence",
+              "nearby vegetation",
+              "point loading",
+              "wall tie damage"
+            ],
+            "label": "Cracks potentially arising from",
+            "other": [
+              "e4m_c_other",
+              "e4m_c_other_text"
+            ],
+            "cond": "actv_movement_status=Recent defects"
+          }
+        ],
+        "pdf": [
+          "Recent defects: The front, side, rear walls of the main building, back addition, extension, bay window, porch, other areas have been damaged by movement cracks potentially arising from settlement, subsidence, nearby vegetation, point loading, wall tie damage, other causes, and this is considered structurally significant."
+        ],
+        "when": [
+          "actv_movement_status",
+          "Recent defects"
+        ]
+      },
+      {
+        "id": "e4_mv_recurring",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_MOVE_RECURRING}",
+        "text": "Recurring defects: The outside wall(s) to the {MOVE_LOCATIONS_RECURRING} have been repaired, indicating that the building has been affected by previous movement. However, recent cracking suggests that movement may have recurred. This may indicate that the previous repairs have not been fully effective. You should ask your legal adviser to establish whether any guarantees, warranties or insurance-backed schemes are available in relation to these repairs. If satisfactory information cannot be obtained, you should instruct an appropriately qualified structural engineer to investigate the cause and extent of the movement and recommend an appropriate scheme of repair. Evidence of previous structural movement, even where satisfactorily resolved, may affect the property's future mortgageability and saleability.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{MOVE_LOCATIONS_RECURRING}",
+            "options": [
+              [
+                "e4m_r_main_building",
+                "main building"
+              ],
+              [
+                "e4m_r_back_addition",
+                "back addition"
+              ],
+              [
+                "e4m_r_extension",
+                "extension"
+              ],
+              [
+                "e4m_r_bay_window",
+                "bay window"
+              ],
+              [
+                "e4m_r_porch",
+                "porch"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "back addition",
+              "extension",
+              "bay window",
+              "porch"
+            ],
+            "label": "Walls repaired",
+            "other": [
+              "e4m_r_other",
+              "e4m_r_other_text"
+            ],
+            "cond": "actv_movement_status=Recurring defects"
+          }
+        ],
+        "pdf": [
+          "Recurring defects: The outside wall(s) to the main building, back addition, extension, bay window, porch, other have been repaired, indicating that the building has been affected by previous movement."
+        ],
+        "when": [
+          "actv_movement_status",
+          "Recurring defects"
+        ]
+      },
+      {
+        "id": "e4_mv_thermal",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_MOVE_THERMAL}",
+        "text": "Differential Thermal Movement: Some of the observed cracking is consistent with differential thermal settlement or movement between the replacement windows and doors and the surrounding wall construction. This occurs because the varied materials expand and contract at varying rates as temperatures change, resulting in minor cracking around openings. The cracking appears longstanding and is not considered indicative of significant structural movement.",
+        "tokens": [],
+        "when": [
+          "actv_movement_status",
+          "Differential thermal movement"
+        ]
+      },
+      {
+        "id": "e4_mv_rods",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_MOVE_RODS}",
+        "text": "Restraint steel rods: Lateral restraint steel rods have been installed to address previous structural movement. Based on my visual inspection, the installation appears longstanding, and I noted no evidence of recent or progressive movement associated with the areas inspected. However, a visual inspection cannot confirm that all movement has permanently ceased. Where no recent cracks have been observed, this will indicate that the installation appears to be performing its intended function, although its adequacy cannot be confirmed without structural design information or intrusive investigation.",
+        "tokens": [],
+        "when": [
+          "actv_movement_status",
+          "Restraint steel rods"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_spalling",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_spall",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_SPALLING}",
+        "text": "Spalled Brickwork: A few bricks exhibit {SPALL_SEVERITY} deterioration (this is called spalling). Damaged bricks should be replaced where deterioration is sufficient to affect the weather resistance of the wall.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{SPALL_SEVERITY}",
+            "dropdown": "actv_severity",
+            "field_label": "Deterioration",
+            "dropdown_options": [
+              "Minor",
+              "Moderate",
+              "Significant"
+            ],
+            "pdf_options": [
+              "minor",
+              "moderate",
+              "significant"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Spalled Brickwork: A few bricks exhibit minor, moderate, significant deterioration (this is called spalling)."
+        ]
+      },
+      {
+        "id": "e4_spall_damp",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_SPALLING_DAMP}",
+        "text": "Causing damp: This is allowing damp to get into the building. These should be repaired now.",
+        "tokens": [],
+        "when": [
+          "cb_causing_damp",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_causing_damp",
+            "label": "Causing damp",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_pointing",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_pointing",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_POINTING}",
+        "text": "Repair pointing: The mortar between the bricks (known as the pointing) to parts of the building is {POINTING_DEFECTS}. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{POINTING_DEFECTS}",
+            "options": [
+              [
+                "e4pt_eroded",
+                "eroded"
+              ],
+              [
+                "e4pt_cracked",
+                "cracked"
+              ],
+              [
+                "e4pt_loose",
+                "loose"
+              ],
+              [
+                "e4pt_missing",
+                "missing"
+              ],
+              [
+                "e4pt_damaged",
+                "damaged"
+              ]
+            ],
+            "pdf_options": [
+              "eroded",
+              "cracked",
+              "loose",
+              "missing",
+              "damaged"
+            ],
+            "label": "Pointing is",
+            "other": [
+              "e4pt_other",
+              "e4pt_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Repair pointing: The mortar between the bricks (known as the pointing) to parts of the building is eroded, cracked, loose, missing, damaged, other."
+        ]
+      },
+      {
+        "id": "e4_pointing_damp",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_POINTING_DAMP}",
+        "text": "Causing damp: This is allowing damp to get into the building. These should be repaired now. Repair pointing: The mortar between the bricks (known as the pointing) to parts of the building is eroded, cracked, loose, missing, damaged, other. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration. Causing damp: This is allowing damp to get into the building. These should be repaired now.",
+        "tokens": [],
+        "when": [
+          "cb_causing_damp",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_causing_damp",
+            "label": "Causing damp",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_render",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_render",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_RENDER}",
+        "text": "Repair render: Parts of the render coating to the building are {RENDER_DEFECTS}. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RENDER_DEFECTS}",
+            "options": [
+              [
+                "e4rn_cracked",
+                "cracked"
+              ],
+              [
+                "e4rn_eroded",
+                "eroded"
+              ],
+              [
+                "e4rn_loose",
+                "loose"
+              ],
+              [
+                "e4rn_missing",
+                "missing"
+              ],
+              [
+                "e4rn_damaged",
+                "damaged"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "eroded",
+              "loose",
+              "missing",
+              "damaged"
+            ],
+            "label": "Render is"
+          }
+        ],
+        "pdf": [
+          "Repair render: Parts of the render coating to the building are cracked, eroded, loose, missing, damaged."
+        ]
+      },
+      {
+        "id": "e4_render_hazard",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_RENDER_HAZARD}",
+        "text": "Hazard: Rendering pieces are likely to fall and cause harm to people who may be nearby. This is a hazard, and this repair should be carried out urgently.",
+        "tokens": [],
+        "when": [
+          "cb_hazard",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_hazard",
+            "label": "Hazard",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e4_render_damp",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_RENDER_DAMP}",
+        "text": "Causing damp: This is allowing damp to get into the building. These should be repaired now. Repair pointing: The mortar between the bricks (known as the pointing) to parts of the building is eroded, cracked, loose, missing, damaged, other. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration. Causing damp: This is allowing damp to get into the building. These should be repaired now. Repair render: Parts of the render coating to the building are cracked, eroded, loose, missing, damaged. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration. Hazard: Rendering pieces are likely to fall and cause harm to people who may be nearby. This is a hazard, and this repair should be carried out urgently. Causing damp: This is allowing damp to get into the building. These should be repaired now.",
+        "tokens": [],
+        "when": [
+          "cb_causing_damp",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_causing_damp",
+            "label": "Causing damp",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_wall_the_repair",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_walltie_prev",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_WALL_TIES_PREVIOUS}",
+        "text": "Wall Ties defects: Parts of the walls to the side of the property show evidence of previous cavity wall tie repairs. No further repairs appear necessary based on my visual inspection, and the property should be maintained in the normal way. You should ask your legal adviser to confirm whether any guarantees, warranties or completion certificates are available for these works. If satisfactory documentation is not available, you should instruct a suitably qualified specialist to inspect the walls and confirm that the repairs remain satisfactory.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Wall Ties defects"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Wall ties",
+            "type": "dropdown",
+            "options": [
+              "Wall Ties defects",
+              "Repair defect"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e4_walltie_defect",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_WALL_TIES_DEFECT}",
+        "text": "Repair defect: Some signs may be consistent with defective cavity wall ties. Defective wall ties can affect the stability of cavity walls if left untreated. You should instruct a suitably qualified specialist to conduct a detailed inspection, confirm the condition of the wall ties, and recommend any necessary remedial works. Your legal adviser should also establish whether any guarantees or warranties are available in relation to previous repairs, if applicable.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Repair defect"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_lintel",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_lintel_win",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_LINTEL}",
+        "text": "Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the {LINTEL_WALLS} wall of the {LINTEL_LOCATIONS} is damaged, cracked, or distorted.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{LINTEL_WALLS}",
+            "options": [
+              [
+                "e4l_w_front",
+                "front"
+              ],
+              [
+                "e4l_w_side",
+                "side"
+              ],
+              [
+                "e4l_w_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "Wall",
+            "other": [
+              "e4l_w_other",
+              "e4l_w_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{LINTEL_LOCATIONS}",
+            "options": [
+              [
+                "e4l_l_main_building",
+                "main building"
+              ],
+              [
+                "e4l_l_back_addition",
+                "back addition"
+              ],
+              [
+                "e4l_l_extension",
+                "extension"
+              ],
+              [
+                "e4l_l_bay_window",
+                "bay window"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "back addition",
+              "extension",
+              "bay window"
+            ],
+            "label": "Location",
+            "other": [
+              "e4l_l_other",
+              "e4l_l_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted."
+        ]
+      },
+      {
+        "id": "e4_lintel_minor_win",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_LINTEL_MINOR}",
+        "text": "Minor defects: The defects observed are limited and do not require significant repair. Where appropriate, cracks should be filled, defective pointing repaired, and any localised defects made good to help restore the integrity of the lintel or brick arch. Repairs should be carried out in the near future to prevent further deterioration.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Minor defects"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Severity",
+            "type": "dropdown",
+            "options": [
+              "Minor defects",
+              "Significant defect"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e4_lintel_major_win",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_LINTEL_SIGNIFICANT}",
+        "text": "Significant defect: The defects observed are significant and have caused, or are likely to cause, movement or damage to the adjoining masonry. Further investigation by a suitably qualified contractor is recommended. Repairs may include repairing or replacing the lintel or rebuilding the brick arch, together with making good the surrounding masonry. The extent of the work required may increase once the lintel has been exposed.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Significant defect"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_lintel__door",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_lintel_door",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_LINTEL}",
+        "text": "Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the {LINTEL_WALLS} wall of the {LINTEL_LOCATIONS} is damaged, cracked, or distorted.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{LINTEL_WALLS}",
+            "options": [
+              [
+                "e4l_w_front",
+                "front"
+              ],
+              [
+                "e4l_w_side",
+                "side"
+              ],
+              [
+                "e4l_w_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "Wall",
+            "other": [
+              "e4l_w_other",
+              "e4l_w_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{LINTEL_LOCATIONS}",
+            "options": [
+              [
+                "e4l_l_main_building",
+                "main building"
+              ],
+              [
+                "e4l_l_back_addition",
+                "back addition"
+              ],
+              [
+                "e4l_l_extension",
+                "extension"
+              ],
+              [
+                "e4l_l_bay_window",
+                "bay window"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "back addition",
+              "extension",
+              "bay window"
+            ],
+            "label": "Location",
+            "other": [
+              "e4l_l_other",
+              "e4l_l_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted."
+        ]
+      },
+      {
+        "id": "e4_lintel_minor_door",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_LINTEL_MINOR}",
+        "text": "Minor defects: The defects observed are limited and do not require significant repair. Where appropriate, cracks should be filled, defective pointing repaired, and any localised defects made good to help restore the integrity of the lintel or brick arch. Repairs should be carried out in the near future to prevent further deterioration.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Minor defects"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Severity",
+            "type": "dropdown",
+            "options": [
+              "Minor defects",
+              "Significant defect"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e4_lintel_major_door",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_LINTEL_SIGNIFICANT}",
+        "text": "Significant defect: The defects observed are significant and have caused, or are likely to cause, movement or damage to the adjoining masonry. Further investigation by a suitably qualified contractor is recommended. Repairs may include repairing or replacing the lintel or rebuilding the brick arch, together with making good the surrounding masonry. The extent of the work required may increase once the lintel has been exposed.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Significant defect"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_wall_repairs_window_sills",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e4_sill",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_WINDOWSILL}",
+        "text": "Windowsill defect: The windowsill(s) to the {SILL_WALLS} wall of the {SILL_LOCATIONS} is {SILL_DEFECTS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{SILL_WALLS}",
+            "options": [
+              [
+                "e4s_w_front",
+                "front"
+              ],
+              [
+                "e4s_w_side",
+                "side"
+              ],
+              [
+                "e4s_w_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "Wall",
+            "other": [
+              "e4s_w_other",
+              "e4s_w_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{SILL_LOCATIONS}",
+            "options": [
+              [
+                "e4s_l_main_building",
+                "main building"
+              ],
+              [
+                "e4s_l_back_addition",
+                "back addition"
+              ],
+              [
+                "e4s_l_extension",
+                "extension"
+              ],
+              [
+                "e4s_l_bay_window",
+                "bay window"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "back addition",
+              "extension",
+              "bay window"
+            ],
+            "label": "Location",
+            "other": [
+              "e4s_l_other",
+              "e4s_l_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{SILL_DEFECTS}",
+            "options": [
+              [
+                "e4s_d_damaged",
+                "damaged"
+              ],
+              [
+                "e4s_d_rotten",
+                "rotten"
+              ],
+              [
+                "e4s_d_cracked",
+                "cracked"
+              ],
+              [
+                "e4s_d_distorted",
+                "distorted"
+              ]
+            ],
+            "pdf_options": [
+              "damaged",
+              "rotten",
+              "cracked",
+              "distorted"
+            ],
+            "label": "Defects",
+            "other": [
+              "e4s_d_other",
+              "e4s_d_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Windowsill defect: The windowsill(s) to the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, rotten, cracked, distorted, other."
+        ]
+      },
+      {
+        "id": "e4_sill_minor",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_SILL_MINOR}",
+        "text": "Minor Defect: Localised defects were observed. Repairs should be carried out to prevent further deterioration and maintain effective weather protection.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Minor Defect"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Severity",
+            "type": "dropdown",
+            "options": [
+              "Minor Defect",
+              "Significant Defect"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e4_sill_major",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_SILL_SIGNIFICANT}",
+        "text": "Significant Defect: The windowsill(s) is significantly damaged or defective and may be allowing water penetration into the building. Prompt repair or replacement by a suitably qualified contractor is recommended. Associated repairs to the surrounding masonry or window frame may also be required.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Significant Defect"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_main_screen",
+    "rules": [
+      {
+        "id": "e4_general",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{E4_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: External walls should be inspected periodically as part of routine maintenance. Prompt repair of defective pointing, render, sealants, and isolated masonry defects will assist in maintaining the weather resistance and structural integrity of the building.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -143,3 +143,31 @@ def add_screen(node_id, title, parent_id, order, fields, after_id, path=TREE):
     json.loads(raw)
     open(path, 'w', encoding='utf-8', newline='').write(raw)
     return True
+
+def remove_screen(node_id, path=TREE):
+    """Delete a screen node (text-level, keeps the rest of the file byte-identical)."""
+    raw = open(path, encoding='utf-8', newline='').read()
+    marker = '"id": "%s"' % node_id
+    if raw.count(marker) != 1:
+        raise SystemExit(f'screen id {node_id!r} occurs {raw.count(marker)}x')
+    mi = raw.index(marker)
+    obj_start = raw.rfind('{', 0, mi)
+    obj_end = _match_brace(raw, obj_start)
+    WS = ' \r\n\t'
+    a = obj_start
+    b = obj_end + 1
+    j = a - 1
+    while raw[j] in WS:
+        j -= 1
+    if raw[j] == ',':
+        a = j
+    else:
+        k = b
+        while raw[k] in WS:
+            k += 1
+        if raw[k] == ',':
+            b = k + 1
+    raw = raw[:a] + raw[b:]
+    json.loads(raw)
+    open(path, 'w', encoding='utf-8', newline='').write(raw)
+    return True

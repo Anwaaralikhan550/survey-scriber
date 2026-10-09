@@ -1334,48 +1334,25 @@ class ReportBuilder {
           'One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted (see section E3 - Rainwater Goods).');
     }
 
-    // RICS L2 cross-injections from Section E4 Main Walls (Phase 2B): 4 of
-    // the spec's 5 wall -> J1 injections that this data model captures
-    // (damp-moisture-readings, drainage-guttering, lintel-repair-now,
-    // windowsill-repair-now). The 5th (trees showing defects) has no
-    // "defects noted" field on the nearby-trees screen in the current
-    // tree - only tree size is captured - so it is intentionally not
-    // wired here rather than guessed (same class of gap as E2's
-    // flashing-at-junction injection above; this one still needs its own
-    // new field).
+    // PDF "Add text to: Section J1" lines of E4 Main walls (bank-first).
     final mainWallsDamp = _answersForScreen(
         rawData, 'activity_outside_property_main_walls_damp');
-    final mainWallsDampLocation =
-        (mainWallsDamp['et_location_677'] ?? '').trim();
-    if (mainWallsDampLocation.isNotEmpty) {
-      phrases.add(
-          'Elevated moisture readings were recorded to sections of the internal wall surfaces that include ${mainWallsDampLocation.toLowerCase()} (see section E4 - Main Walls).');
-    }
-    if (_isCheckedValue(mainWallsDamp['cb_install_french_gutters'])) {
-      phrases.add(
-          'The external ground levels are high in relation to the building, the damp-proof course (DPC) may be bridged in places, allowing moisture to penetrate the walls (see section E4 - Main Walls).');
+    if (_isCheckedValue(mainWallsDamp['cb_rising_damp'])) {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{RISING_DAMP}') ??
+          'Elevated moisture readings and associated defects to wall finishes were recorded on internal wall surfaces, suggesting the presence of rising damp. Further investigation by a suitably qualified damp and timber specialist is recommended to determine the cause and extent of the problem (see section E4 - Main Walls).');
     }
 
-    final lintelRepair = _answersForScreen(
-        rawData, 'activity_outside_property_main_wall_repairs_lintel');
-    if ((lintelRepair['actv_condition'] ??
-            lintelRepair['llMainContainer'] ??
-            '')
-        .toLowerCase()
-        .contains('now')) {
-      phrases.add(
-          'The small beam that spans across the top of the window or door opening including brick arch (called a lintel) is damaged, cracked, distorted (see section E4 - Main Walls).');
-    }
-
-    final windowSillRepair = _answersForScreen(
-        rawData, 'activity_outside_property_main_wall_repairs_window_sills');
-    if ((windowSillRepair['actv_condition'] ??
-            windowSillRepair['llMainContainer'] ??
-            '')
-        .toLowerCase()
-        .contains('now')) {
-      phrases.add(
-          'The small beam that spans across the bottom of the window opening (called a windowsill) is damaged, cracked, distorted (see section E4 - Main Walls).');
+    for (final lintelScreen in const [
+      'activity_outside_property_main_wall_repairs_lintel',
+      'activity_outside_property_main_wall_repairs_lintel__door',
+    ]) {
+      final lintelRepair = _answersForScreen(rawData, lintelScreen);
+      if ((lintelRepair['actv_condition'] ?? '').toLowerCase() ==
+          'significant defect') {
+        phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{LINTEL_DEFECT}') ??
+            'One or more small beams that span across the top of the window or door opening, including brick arch (called a lintel), is damaged, cracked, distorted (see section E4 - Main Walls).');
+        break;
+      }
     }
 
     // RICS L2 cross-injection from Section E8 Other Joinery and Finishes
@@ -1665,32 +1642,6 @@ class ReportBuilder {
         'repair now') {
       phrases.add(_approvedBankPhrase('{RISK_TO_PEOPLE}::{ROOF_TILES_DEFECTS}') ??
           'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
-    }
-
-    // RICS L2 cross-injections from Section E4 Main Walls (Phase 2B): the
-    // spec's 2 wall -> J3 (Risk to People) injections (damp-moisture-
-    // readings is a dual J1+J3 target, shared with the J1 method above;
-    // render-hazard fires alongside the render "now" hazard sentence,
-    // since both describe the same falling-render danger to people).
-    final mainWallsDampForPeople = _answersForScreen(
-        rawData, 'activity_outside_property_main_walls_damp');
-    final mainWallsDampLocationForPeople =
-        (mainWallsDampForPeople['et_location_677'] ?? '').trim();
-    if (mainWallsDampLocationForPeople.isNotEmpty) {
-      phrases.add(
-          'Elevated moisture readings were recorded to sections of the internal wall surfaces that include ${mainWallsDampLocationForPeople.toLowerCase()} (see section E4 - Main Walls).');
-    }
-
-    final renderRepair = _answersForScreen(
-        rawData, 'activity_outside_property_main_wall_repairs_render');
-    if ((renderRepair['actv_condition'] ??
-            renderRepair['llMainContainer'] ??
-            '')
-            .toLowerCase()
-            .contains('now') &&
-        _isCheckedValue(renderRepair['cb_hazard'])) {
-      phrases.add(
-          'Parts of the render coating to the building are eroded, loose, missing, damaged, other (see section E4 - Main Walls).');
     }
 
     // RICS L2 cross-injections from Section E5 Windows (Phase 2B): 2 of

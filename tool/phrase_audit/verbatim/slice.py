@@ -43,7 +43,7 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(__file__))
-from treeedit import add_screen, edit_screen_fields, field  # noqa: E402
+from treeedit import add_screen, edit_screen_fields, field, remove_screen  # noqa: E402
 
 SPEC = 'lib/features/property_inspection/domain/inspection_verbatim_spec.dart'
 MARK = '  // <<verbatim-rules-end>>'
@@ -148,6 +148,12 @@ def token_fields(t):
 
 
 def apply_slice(sl):
+    if 'remove_screens' in sl:
+        for sid in sl['remove_screens']:
+            if ('"id": "%s"' % sid) in open('assets/property_inspection/inspection_tree.json', encoding='utf-8').read():
+                remove_screen(sid)
+                print('removed screen', sid)
+        return
     screen = sl['screen']
     ns = sl.get('new_screen')
     removes = list(sl.get('remove_fields', []))

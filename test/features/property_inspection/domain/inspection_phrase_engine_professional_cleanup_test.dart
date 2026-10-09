@@ -153,16 +153,13 @@ void main() {
     final phrase = engine.buildPhrases(
       'activity_outside_property_main_walls_about_wall',
       {
-        'cb_main_building': 'true',
+        'e4w_loc_main_building': 'true',
         'et_thickness': 'sample detail',
-        'actv_finishes': 'Fully',
-        'actv_rendered': 'Smooth',
-        'cb_painted': 'true',
-        'actv_condition': 'Reasonable',
       },
-    ).single;
+    ).join(' ');
 
     expect(phrase, isNot(contains('sample detail mm')));
+    expect(phrase, contains('constructed of solid brick'));
   });
 
   test('repair allowance is narrative, not raw labelled output', () {

@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 520,
+  "screensAudited": 525,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2701,
-   "approvedLegacyBank": 634,
-   "approvedCurrentBankOnly": 2040,
+   "distinctEmitted": 2715,
+   "approvedLegacyBank": 629,
+   "approvedCurrentBankOnly": 2059,
    "unapproved": 0
   }
  },
@@ -4592,18 +4592,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_wall_repairs_spalling",
    "title": "Spalling",
-   "dataFieldCount": 20,
-   "permutationCount": 24,
+   "dataFieldCount": 2,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Spalled Brickwork: A number of the bricks to the front, side and rear of the main building, back addition, extension, bay window and sample detail have deteriorated (this is called spalling). Damaged bricks should be replaced where deterioration is sufficient to affect the weather resistance of the wall.",
-    "Spalled Brickwork: A number of the bricks to the front, side and rear of the main building, back addition, extension, bay window and sample detail have deteriorated (this is called spalling). Damaged bricks should be replaced where deterioration is sufficient to affect the weather resistance of the wall. Causing damp: This is allowing damp to get into the building. These should be repaired now."
+    "Spalled Brickwork: A few bricks exhibit minor deterioration (this is called spalling). Damaged bricks should be replaced where deterioration is sufficient to affect the weather resistance of the wall.",
+    "Spalled Brickwork: A few bricks exhibit moderate deterioration (this is called spalling). Damaged bricks should be replaced where deterioration is sufficient to affect the weather resistance of the wall.",
+    "Spalled Brickwork: A few bricks exhibit significant deterioration (this is called spalling). Damaged bricks should be replaced where deterioration is sufficient to affect the weather resistance of the wall."
    ]
   },
   {
@@ -4741,37 +4742,38 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_walls_about_wall",
    "title": "Solid brick wall",
-   "dataFieldCount": 15,
-   "permutationCount": 25,
+   "dataFieldCount": 7,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 20,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 19,
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The external walls of the main building are constructed of solid brick wall construction.",
-    "Description: The external walls of the back addition are constructed of solid brick wall construction.",
-    "Description: The external walls of the extension are constructed of solid brick wall construction."
+    "Condition: Where visible, the walls appear in good condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in fair condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_wall_repairs_lintel",
    "title": "Windows",
-   "dataFieldCount": 36,
-   "permutationCount": 40,
+   "dataFieldCount": 12,
+   "permutationCount": 16,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 3,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair lintels soon: The small beam that spans across the top of the window opening including brick arch (called a lintel) in the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is damaged, cracked, distorted, bulging and sample detail. This should be repaired soon. To repair the lintel properly, it may have to be replaced completely. Cracked or deteriorated lintels should be further investigated and repaired where necessary.",
-    "Repair lintels now: The small beam that spans across the top of the window opening including brick arch (called a lintel) in the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is badly damaged, badly cracked, very distorted, allowing dampness and sample detail. The defect is causing the window frame to distort (see section J1 - Risk to Building). A new lintel or arch may be needed, and you may have to organise associated repairs. This can increase the amount of repair work required."
+    "Minor defects: The defects observed are limited and do not require significant repair. Where appropriate, cracks should be filled, defective pointing repaired, and any localised defects made good to help restore the integrity of the lintel or brick arch. Repairs should be carried out in the near future to prevent further deterioration.",
+    "Significant defect: The defects observed are significant and have caused, or are likely to cause, movement or damage to the adjoining masonry. Further investigation by a suitably qualified contractor is recommended. Repairs may include repairing or replacing the lintel or rebuilding the brick arch, together with making good the surrounding masonry. The extent of the work required may increase once the lintel has been exposed.",
+    "Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is damaged, cracked, or distorted."
    ]
   },
   {
@@ -5006,19 +5008,38 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_walls_cladding",
    "title": "Cladding",
-   "dataFieldCount": 11,
-   "permutationCount": 19,
+   "dataFieldCount": 15,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 14,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 14,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Condition: Where visible, the walls appear in reasonable condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age and construction of the building should be expected.",
-    "Condition: Where visible, the walls appear in satisfactory condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age and construction of the building should be expected.",
-    "Condition: Where visible, the walls appear in unsatisfactory and poor condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age and construction of the building should be expected."
+    "Cladding: The external wall finish or cladding comprises facing brickwork.",
+    "Cladding: The external wall finish or cladding comprises natural or reconstituted stone.",
+    "Cladding: The external wall finish or cladding comprises timber cladding."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_main_walls_ews1",
+   "title": "EWS1 Cladding",
+   "dataFieldCount": 12,
+   "permutationCount": 18,
+   "severities": [],
+   "phraseStats": {
+    "total": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 4,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "EWS1 form not required: Based on the visual evidence available during my inspection, the external wall construction appears broadly consistent with a building that may satisfy current EWS1 requirements. However, this inspection did not include an assessment of the external wall system for fire safety compliance, and I am not qualified to certify compliance. Confirmation can only be provided following an assessment by a suitably qualified fire safety professional, where required, and the issue of a valid EWS1 form. Your legal adviser should make further enquiries of the seller or managing agent and obtain a copy of any current EWS1 form, together with details of any planned, ongoing, or completed fire safety or cladding remediation works before you exchange contracts or commit to the purchase. This inspection should not be relied upon as confirmation of compliance with current fire safety legislation or lender requirements. Neither the surveyor nor this practice accepts liability for any loss, costs or delays arising from the fire performance of the external wall system, the absence or content of an EWS1 form, or any current or future remediation works or associated costs.",
+    "EWS1 form required: The external wall construction observed during my inspection indicates that a detailed assessment of the external wall system may be required to confirm compliance with current fire safety requirements. My inspection was limited to a visual assessment only and did not include opening up, intrusive investigations or a fire safety appraisal of the cladding system. Where required, confirmation of the fire performance of the external wall system can only be provided by a suitably qualified fire safety professional following a detailed assessment and, where applicable, the issue of a valid EWS1 form. Your legal adviser should make further enquiries of the seller, freeholder or managing agent and obtain copies of any current EWS1 form, fire risk assessments relating to the external wall system, and details of any planned, ongoing or completed remediation works before exchange of contracts or completion of the purchase. Neither the surveyor nor this practice has assessed the external wall system for compliance with fire safety legislation or lender requirements and accepts no liability to you or any third party for any loss, delay, remediation costs or other financial consequences arising directly or indirectly from the fire performance of the external wall system, the requirement for or content of an EWS1 form, or any current or future remedial works.",
+    "EWS1 Cladding: The external walls are partially cladded with a brick-slip, brick-effect outer face, rainscreen boards, terracotta tiles, compressed composite boards, aluminium panels, glass reinforced concrete (GRC) panels, glass curtain walling, hanging tiles (including shingle or plain tiles) and aluminium cladding panels, etc. This type of construction typically comprises fixing the cladding materials to a metal support frame secured to the primary structure, with a ventilated cavity and non-combustible mineral wool insulation behind. The inner leaf is commonly formed of concrete, blockwork or a metal framing system incorporating sheathing board and plasterboard lining."
    ]
   },
   {
@@ -5428,37 +5449,38 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_walls_about_wall__cavity_brick_wall",
    "title": "Cavity brick wall",
-   "dataFieldCount": 15,
-   "permutationCount": 25,
+   "dataFieldCount": 7,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 20,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 19,
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The external walls of the main building are constructed of cavity brick wall construction.",
-    "Description: The external walls of the back addition are constructed of cavity brick wall construction.",
-    "Description: The external walls of the extension are constructed of cavity brick wall construction."
+    "Condition: Where visible, the walls appear in good condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in fair condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_wall_repairs_lintel__door",
    "title": "Door",
-   "dataFieldCount": 35,
-   "permutationCount": 39,
+   "dataFieldCount": 12,
+   "permutationCount": 16,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 3,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair lintels soon: The small beam that spans across the top of the door opening including brick arch (called a lintel) in the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is damaged, cracked, distorted, bulging and sample detail. This should be repaired soon. To repair the lintel properly, it may have to be replaced completely. Cracked or deteriorated lintels should be further investigated and repaired where necessary.",
-    "Repair lintels now: The small beam that spans across the top of the door opening including brick arch (called a lintel) in the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is badly damaged, badly cracked, very distorted, allowing dampness and sample detail. The defect is causing the window frame to distort (see section J1 - Risk to Building). A new lintel or arch may be needed, and you may have to organise associated repairs. This can increase the amount of repair work required."
+    "Minor defects: The defects observed are limited and do not require significant repair. Where appropriate, cracks should be filled, defective pointing repaired, and any localised defects made good to help restore the integrity of the lintel or brick arch. Repairs should be carried out in the near future to prevent further deterioration.",
+    "Significant defect: The defects observed are significant and have caused, or are likely to cause, movement or damage to the adjoining masonry. Further investigation by a suitably qualified contractor is recommended. Repairs may include repairing or replacing the lintel or rebuilding the brick arch, together with making good the surrounding masonry. The extent of the work required may increase once the lintel has been exposed.",
+    "Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is damaged, cracked, or distorted."
    ]
   },
   {
@@ -5563,34 +5585,34 @@
    "permutationCount": 24,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 8,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Moisture metre readings: Random moisture readings were taken to accessible internal wall surfaces using a hand-held electronic moisture meter. No damp found: No readings were obtained that suggest abnormal moisture levels at the time of inspection.",
-    "Moisture metre readings: Random moisture readings were taken to accessible internal wall surfaces using a hand-held electronic moisture meter. Damp found: Elevated moisture readings were recorded to sections of the internal wall surfaces that include sample detail (see section J1 - Risk to Building; see section J3 - Risk to people). Penetrating damp: This may have been affected by penetrating damp probably caused by overflowing gutter, roof leak, leaking down pipe, bridged dpc, blocked gully and sample detail. When the problem has been resolved, the wall may need to be repaired. Repair options: The source of the moisture should be identified and remedied as a priority. Once the source of moisture has been eliminated and the affected walls have been allowed sufficient time to dry naturally, any damaged plaster, decorations or other finishes should be repaired or replaced as necessary. The affected area should then be monitored to ensure that the dampness does not recur.",
-    "Rising damp: This may have been affected by rising damp probably caused by damaged dpc, old and brittle dpc, bridged dpc, defective drainage and sample detail. When the problem has been resolved, the wall may need to be repaired."
+    "Moisture metre readings: Random moisture readings were taken to accessible internal wall surfaces using a hand-held electronic moisture meter.",
+    "No damp found: No readings were obtained that suggest abnormal moisture levels at the time of inspection.",
+    "Investigate cause: The source of moisture cannot be confirmed during a visual inspection. You should instruct a suitably qualified contractor to investigate the cause of the dampness and carry out any necessary repairs to prevent further moisture penetration. Following completion of the repairs, the affected walls should be allowed to dry before any replastering, redecoration or replacement of finishes is undertaken. Premature redecoration may result in the recurrence of staining or damage if residual moisture remains within the wall."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_wall_repairs_render",
    "title": "Render",
-   "dataFieldCount": 31,
-   "permutationCount": 35,
+   "dataFieldCount": 7,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 8,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair render: Parts of the render coating to the front, side and rear wall(s) of the main building, back addition, extension, bay window and sample detail are cracked, loose, missing in places and sample detail. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration.",
-    "Repair render: Parts of the render coating to the front, side and rear wall(s) of the main building, back addition, extension, bay window and sample detail are cracked, loose, missing in places and sample detail. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration. Causing damp: This is allowing damp to get into the building (see section J1 - Risk to Building). These should be repaired now.",
-    "Hazard: Rendering pieces are likely to fall and cause harm to people who may be nearby. This is a hazard, and this repair should be carried out urgently (see section J3 - Risk to people)."
+    "Repair render: Parts of the render coating to the building are cracked. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration.",
+    "Repair render: Parts of the render coating to the building are eroded. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration.",
+    "Repair render: Parts of the render coating to the building are loose. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration."
    ]
   },
   {
@@ -5876,19 +5898,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_walls_about_wall__cavity_block_wall",
    "title": "Cavity block wall",
-   "dataFieldCount": 15,
-   "permutationCount": 25,
+   "dataFieldCount": 7,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 20,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 19,
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The external walls of the main building are constructed of cavity block wall construction.",
-    "Description: The external walls of the back addition are constructed of cavity block wall construction.",
-    "Description: The external walls of the extension are constructed of cavity block wall construction."
+    "Condition: Where visible, the walls appear in good condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in fair condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
    ]
   },
   {
@@ -6194,36 +6216,57 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_walls_dpc",
    "title": "DPC",
-   "dataFieldCount": 14,
-   "permutationCount": 22,
+   "dataFieldCount": 7,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 9,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 9,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Damp-proof course: The walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC) that is visible, one would normally be expected for a property of this age and type. The DPC is assumed to consist of plastic, felt, slates, engineering bricks and sample detail. The adequacy of concealed damp-proof courses cannot be confirmed during a visual inspection.",
-    "Damp-proof course: The walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC) that is not visible because of pointing, one would normally be expected for a property of this age and type. The DPC is assumed to consist of plastic, felt, slates, engineering bricks and sample detail. The adequacy of concealed damp-proof courses cannot be confirmed during a visual inspection."
+    "Damp-proof course: The walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC is visible; one would normally be expected for a property of this age and type.",
+    "The adequacy of concealed damp-proof courses cannot be confirmed during a visual inspection.",
+    "Damp-proof course: The walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC is partially visible; one would normally be expected for a property of this age and type."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_main_walls_dpc_treatment",
+   "title": "DPC Treatment",
+   "dataFieldCount": 5,
+   "permutationCount": 7,
+   "severities": [],
+   "phraseStats": {
+    "total": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 4,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "DPC Treatment noted: I noted evidence of damp proof course treatment in the property. You should ask your legal adviser to check whether there has been a dampness problem before and if a valid guarantee or warranty covers this work. If not, you should ask an appropriately qualified person to inspect the property, assess its condition, and identify what repairs are required. Once the repairs have been completed, this person should issue a certificate of ‘structural worthiness.’ You should ask your insurance company if this problem would affect your ability to get insurance cover for this property.",
+    "DPC Treatment noted: I noted evidence of wall ventilation apparatus in the property. You should ask your legal adviser to check whether there has been a dampness problem before and if a valid guarantee or warranty covers this work. If not, you should ask an appropriately qualified person to inspect the property, assess its condition, and identify what repairs are required. Once the repairs have been completed, this person should issue a certificate of ‘structural worthiness.’ You should ask your insurance company if this problem would affect your ability to get insurance cover for this property.",
+    "DPC Treatment noted: I noted evidence of ventilation holes in the property. You should ask your legal adviser to check whether there has been a dampness problem before and if a valid guarantee or warranty covers this work. If not, you should ask an appropriately qualified person to inspect the property, assess its condition, and identify what repairs are required. Once the repairs have been completed, this person should issue a certificate of ‘structural worthiness.’ You should ask your insurance company if this problem would affect your ability to get insurance cover for this property."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_wall_repairs_pointing",
    "title": "Pointing",
-   "dataFieldCount": 27,
-   "permutationCount": 31,
+   "dataFieldCount": 8,
+   "permutationCount": 10,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 7,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair pointing: The mortar between the bricks (known as the pointing) to the front, side and rear of the main building, back addition, extension, bay window and sample detail has eroded, loosened and sample detail. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration.",
-    "Repair pointing: The mortar between the bricks (known as the pointing) to the front, side and rear of the main building, back addition, extension, bay window and sample detail has eroded, loosened and sample detail. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration. Causing damp: This is allowing damp to get into the building (see section J1 - Risk to Building). These should be repaired now."
+    "Repair pointing: The mortar between the bricks (known as the pointing) to parts of the building is eroded. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration.",
+    "Repair pointing: The mortar between the bricks (known as the pointing) to parts of the building is cracked. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration.",
+    "Repair pointing: The mortar between the bricks (known as the pointing) to parts of the building is loose. The defective pointing should be renewed using a mortar appropriate to the age, type, and construction of the building. This may comprise lime-based mortar or Portland cement mortar, as appropriate. Weathered or defective pointing should be renewed as part of routine maintenance to help reduce water penetration and minimise further deterioration."
    ]
   },
   {
@@ -6554,19 +6597,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_walls_about_wall__cavity_stud_wall",
    "title": "Cavity stud wall",
-   "dataFieldCount": 15,
-   "permutationCount": 25,
+   "dataFieldCount": 7,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 20,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 19,
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The external walls of the main building are constructed of cavity stud wall construction.",
-    "Description: The external walls of the back addition are constructed of cavity stud wall construction.",
-    "Description: The external walls of the extension are constructed of cavity stud wall construction."
+    "Condition: Where visible, the walls appear in good condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in fair condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
    ]
   },
   {
@@ -6647,13 +6690,13 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_walls_removed_wall",
    "title": "Removed Walls",
-   "dataFieldCount": 12,
-   "permutationCount": 14,
+   "dataFieldCount": 9,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 7,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -6664,21 +6707,39 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_main_wall_repairs_wall_the_repair",
-   "title": "Wall Tie Repair",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
+   "screenId": "activity_outside_property_main_walls_extensions",
+   "title": "Extensions and alterations",
+   "dataFieldCount": 7,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 6,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Wall Ties defects: Parts of the walls to the front of the property show evidence of previous cavity wall tie repairs. No further repairs appear necessary based on my visual inspection, and the property should be maintained in the normal way. You should ask your legal adviser to confirm whether any guarantees, warranties or completion certificates are available for these works (see section I2 - Guarantees). If satisfactory documentation is not available, you should instruct a suitably qualified specialist to inspect the walls and confirm that the repairs remain satisfactory.",
-    "Wall Ties defects: Parts of the walls to the side of the property show evidence of previous cavity wall tie repairs. No further repairs appear necessary based on my visual inspection, and the property should be maintained in the normal way. You should ask your legal adviser to confirm whether any guarantees, warranties or completion certificates are available for these works (see section I2 - Guarantees). If satisfactory documentation is not available, you should instruct a suitably qualified specialist to inspect the walls and confirm that the repairs remain satisfactory.",
-    "Wall Ties defects: Parts of the walls to the rear of the property show evidence of previous cavity wall tie repairs. No further repairs appear necessary based on my visual inspection, and the property should be maintained in the normal way. You should ask your legal adviser to confirm whether any guarantees, warranties or completion certificates are available for these works (see section I2 - Guarantees). If satisfactory documentation is not available, you should instruct a suitably qualified specialist to inspect the walls and confirm that the repairs remain satisfactory."
+    "Extensions and alterations: Evidence was noted that external alterations have been carried out to the property. These include wall removal. Your legal adviser should confirm that all appropriate statutory approvals and completion certificates have been obtained where required.",
+    "Extensions and alterations: Evidence was noted that external alterations have been carried out to the property. These include new openings. Your legal adviser should confirm that all appropriate statutory approvals and completion certificates have been obtained where required.",
+    "Extensions and alterations: Evidence was noted that external alterations have been carried out to the property. These include replacement lintels. Your legal adviser should confirm that all appropriate statutory approvals and completion certificates have been obtained where required."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_main_wall_repairs_wall_the_repair",
+   "title": "Wall Tie Repair",
+   "dataFieldCount": 1,
+   "permutationCount": 5,
+   "severities": [],
+   "phraseStats": {
+    "total": 2,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 2,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Wall Ties defects: Parts of the walls to the side of the property show evidence of previous cavity wall tie repairs. No further repairs appear necessary based on my visual inspection, and the property should be maintained in the normal way. You should ask your legal adviser to confirm whether any guarantees, warranties or completion certificates are available for these works. If satisfactory documentation is not available, you should instruct a suitably qualified specialist to inspect the walls and confirm that the repairs remain satisfactory.",
+    "Repair defect: Some signs may be consistent with defective cavity wall ties. Defective wall ties can affect the stability of cavity walls if left untreated. You should instruct a suitably qualified specialist to conduct a detailed inspection, confirm the condition of the wall ties, and recommend any necessary remedial works. Your legal adviser should also establish whether any guarantees or warranties are available in relation to previous repairs, if applicable."
    ]
   },
   {
@@ -6925,19 +6986,57 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_walls_about_wall__other",
    "title": "Other",
-   "dataFieldCount": 16,
-   "permutationCount": 26,
+   "dataFieldCount": 8,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 7,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The external walls of the main building, back addition, extension and sample detail are constructed of sample detail construction. Cladding: The external wall finish comprises fully rendered smooth with painted, pebble dash, mock tudor wall and sample detail finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
-    "Description: The external walls of the main building, back addition, extension and sample detail are constructed of sample detail construction. Cladding: The external wall finish comprises partially rendered smooth with painted, pebble dash, mock tudor wall and sample detail finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
-    "Description: The external walls of the main building, back addition, extension and sample detail are constructed of sample detail construction. Cladding: The external wall finish comprises fully rendered roughcast with painted, pebble dash, mock tudor wall and sample detail finishes. These are weathered commensurate to the age and type of property. Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
+    "Condition: Where visible, the walls appear in good condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in fair condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_main_walls_about_wall__rendered_masonry",
+   "title": "Rendered masonry",
+   "dataFieldCount": 7,
+   "permutationCount": 17,
+   "severities": [],
+   "phraseStats": {
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Condition: Where visible, the walls appear in good condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in fair condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_main_walls_about_wall__pebble_dash_masonry",
+   "title": "Pebble dash masonry",
+   "dataFieldCount": 7,
+   "permutationCount": 17,
+   "severities": [],
+   "phraseStats": {
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Condition: Where visible, the walls appear in good condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
+    "Condition: Where visible, the walls appear in fair condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
    ]
   },
   {
@@ -7146,18 +7245,18 @@
    "screenId": "activity_outside_property_main_walls_movements",
    "title": "Movements",
    "dataFieldCount": 25,
-   "permutationCount": 37,
+   "permutationCount": 41,
    "severities": [],
    "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 4,
+    "total": 8,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "No Structural Movement: Although I did not observe any evidence of significant structural movement during my inspection, I cannot be categorical that none has occurred, as all buildings are subject to some degree of movement, such as normal settlement and seasonal thermal or moisture-related movement. It is also possible that evidence of movement, including cracks, may be concealed by floor coverings, decorations, fitted furniture, or other obstructions.",
-    "Normal defects: I noted no evidence of any significant recent or progressive structural movement within the property. However, there are signs that the property has experienced some historic movement, as evidenced by cracking to external and internal wall surfaces, at junctions and around openings. As far as could be observed, these cracks appear longstanding in nature, and there is no evidence to suggest significant ongoing movement. No significant repairs are considered necessary at this time, although localised repairs and redecoration may be required as part of routine maintenance.",
-    "Recent: The front, side and rear walls of the main building, back addition, extension, bay window and sample detail have been damaged by movement cracks potentially arising from settlement, subsidence, point loading, wall tie rust and sample detail and this is considered structurally significant (see section I2 - Guarantees). Movement within the property is considered serious and could worsen over time. Parts of the property could become unstable. You should instruct an appropriately qualified structural engineer to investigate the problem and recommend an appropriate scheme of repair. To carry out a proper investigation, it is likely that parts of the property will need to be opened or disturbed, and this should be discussed with the building owner. Evidence of previous structural movement, even where satisfactorily resolved, may affect the property's future mortgageability and saleability."
+    "Minor subsidence: Diagonally stepped and other similar cracks were noted to the external elevations of the property. Evidence of previous repairs, including localised repointing and repairs to the bay and other wall sections, was also observed. Based on a single visual inspection, it is not possible to confirm whether the movement is historic and stable or whether it is progressive. Although no significant distortion or evidence requiring immediate structural intervention was apparent at the time of inspection, the cause, extent, and current activity of the movement cannot be confirmed without further investigation and monitoring over time. You should ask your legal adviser whether any guarantees, warranties, structural reports, or insurance claims relating to these repairs are available. In the absence of satisfactory documentary evidence, I recommend that the affected areas are inspected by a suitably qualified structural engineer, who can advise whether any further investigation or monitoring is necessary before you commit to the purchase.",
+    "Significant subsidence: Significant diagonally stepped and other similar cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls. Where some of these cracks may have or have not been repaired and the time of repair is unknown, I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive. The pattern of cracking is consistent with movement that may be associated with subsidence or foundation movement. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts. Your legal adviser should also establish whether there is any history of subsidence, structural movement, underpinning, monitoring, insurance claims, or structural repairs affecting the property. If you proceed with the purchase without further investigation, you will be accepting the risk that more significant structural defects and associated repair costs may become apparent in the future.",
+    "No Structural Movement: Although I did not observe any evidence of significant structural movement during my inspection, I cannot be categorical that none has occurred, as all buildings are subject to some degree of movement, such as normal settlement and seasonal thermal or moisture-related movement. It is also possible that evidence of movement, including cracks, may be concealed by floor coverings, decorations, fitted furniture, or other obstructions."
    ]
   },
   {
@@ -7485,8 +7584,8 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_wall_repairs_thin_slim_wall",
    "title": "Thin|slim Wall",
-   "dataFieldCount": 11,
-   "permutationCount": 13,
+   "dataFieldCount": 7,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
     "total": 1,
@@ -7495,25 +7594,26 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Thin wall: The external wall to the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is not thick enough and vulnerable to damp problems and heat loss. This substandard construction should be improved soon. In some cases, rebuilding the wall to modern standards may be the only economic option."
+    "Thin wall: The external wall to the front, rear and side walls of the main building, extension and sample detail is not thick enough and vulnerable to damp problems and heat loss. This substandard construction should be improved soon. In some cases, rebuilding the wall to modern standards may be the only economic option."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_wall_repairs_window_sills",
    "title": "Windows Sills",
-   "dataFieldCount": 35,
-   "permutationCount": 39,
+   "dataFieldCount": 18,
+   "permutationCount": 22,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 3,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair windowsill soon: The small beam that spans across the bottom of the window opening (called a windowsill) in the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is damaged, cracked, eroded and sample detail. This should be repaired soon. To repair the windowsill properly, it may have to be replaced completely. Cracked or deteriorated lintels should be further investigated and repaired where necessary.",
-    "Repair windowsill now: The small beam that spans across the bottom of the window opening (called a windowsill) in the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is damaged, unstable, very distorted, allowing dampness and sample detail. The defect is causing the window frame to distort (see section J1 - Risk to Building). A new windowsill may be needed, and you may have to organise associated repairs. This can increase the amount of repair work required."
+    "Minor Defect: Localised defects were observed. Repairs should be carried out to prevent further deterioration and maintain effective weather protection.",
+    "Significant Defect: The windowsill(s) is significantly damaged or defective and may be allowing water penetration into the building. Prompt repair or replacement by a suitably qualified contractor is recommended. Associated repairs to the surrounding masonry or window frame may also be required.",
+    "Windowsill defect: The windowsill(s) to the front, side, rear and sample detail wall of the main building, back addition, extension, bay window and sample detail is damaged, rotten, cracked, distorted and sample detail."
    ]
   },
   {
@@ -8124,19 +8224,18 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_wall_repairs_near_by_tress",
    "title": "Nearby Tree",
-   "dataFieldCount": 3,
-   "permutationCount": 5,
+   "dataFieldCount": 6,
+   "permutationCount": 10,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Trees: There are small sized trees located close to the property. I noted no obvious signs to suggest that they have caused significant damage to the property. However, it would be prudent to implement a programme of management to control their future growth. Trees can affect building foundations and below-ground services, particularly where shrinkable subsoils are present.",
-    "Trees: There are medium sized trees located close to the property. I noted no obvious signs to suggest that they have caused significant damage to the property. However, it would be prudent to implement a programme of management to control their future growth. Trees can affect building foundations and below-ground services, particularly where shrinkable subsoils are present.",
-    "Trees: There are medium to large sized trees located close to the property. I noted no obvious signs to suggest that they have caused significant damage to the property. However, it would be prudent to implement a programme of management to control their future growth. Trees can affect building foundations and below-ground services, particularly where shrinkable subsoils are present."
+    "Trees: There are trees located close to the property. I noted no obvious signs to suggest that they have caused significant damage to the property. However, it would be prudent to implement a programme of management to control their future growth. Trees can affect building foundations and below-ground services, particularly where shrinkable subsoils are present.",
+    "Tree defects noted: There are trees located close to the property, and I noted defects that may be associated with their influence, including cracking, distortion, heave and sample detail. Although the cause cannot be confirmed during a visual inspection, further investigation by a suitably qualified structural engineer and, where appropriate, an arboriculturist is recommended to establish whether the trees are contributing to the observed defects and to advise on any necessary remedial works."
    ]
   },
   {
@@ -8992,13 +9091,13 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_main_walls_main_screen",
    "title": "Main Walls",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
+   "dataFieldCount": 3,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 9,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [

@@ -33,3 +33,9 @@ client's yes/no. Tick `[x]` and record the answer when it arrives.
 | 25 | E2 Flat roof | Flat felt paragraph sits between "Condition" and "No repair required" | App prints it only when mineral felt / high-performance felt is chosen. Intended for felt only? |
 | 26 | E2 Roof flat property | "If the Property is a Flat, add this: You should ask the management company…" | Needs the survey's property type = Flat. Not wired yet for any section; scheduled as one cross-cutting item. |
 | 27 | E2 Valley gutters / Verge | "This should be repaired soon." printed twice in one paragraph | Same as #15 (duplicate sentence). Copied exactly. |
+| 28 | E4 Cladding | "…plastic panelling boards**.** weatherboarding, fibre cement boards…" | Full stop inside the option list. Implemented as two options ("plastic panelling boards", "weatherboarding"). |
+| 29 | E4 DPC | "(called a damp-proof course or DPC is visible, partially visible, not visible; one would normally be expected…" | Closing bracket missing after "DPC". Copied exactly. |
+| 30 | E4 Repair render | "The defective **pointing** should be renewed using a mortar…" appears in the Repair render paragraph | Copy of the pointing paragraph? ("render" intended?) Copied exactly. |
+| 31 | E4 Operation (E5) | "opened and closed freely, with minor **with** resistance, with difficulty" | Extra "with". Copied exactly (E5). |
+| 32 | E4 Description | "…constructed of (type 000) mm solid brick, cavity brick, …, rendered masonry, pebble dash masonry…" | Implemented as one screen per wall type (two new screens for rendered / pebble dash masonry) with the thickness entered in mm (non-numeric thickness is not printed). |
+| 33 | E4 J-layer | Old app added J1/J3 lines for: moisture readings, drain guttering, windowsill repair-now, render hazard, tree defects | The revised PDF only lists "Add text to J1" for Rising damp and Lintel defect. The other lines were removed. Confirm. |
