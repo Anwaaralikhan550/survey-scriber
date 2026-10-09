@@ -721,17 +721,17 @@ class InspectionPhraseEngine {
       case 'activity_property_type':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_construction':
-        return _propertyConstruction(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_built_year':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_roof':
-        return _propertyRoof(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_property_ground_area':
         return _propertyGroundArea(answers);
       case 'activity_property_extended':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_extended_wall':
-        return _extendedWall(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_parking':
       case 'activity_parking__parking':
         return _propertyParking(answers);
@@ -746,15 +746,15 @@ class InspectionPhraseEngine {
       case 'activity_property_flate':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_construction_floor':
-        return _constructionFloor(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_construction_window':
-        return _constructionWindow(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_gated_community':
         return _gatedCommunity(answers);
       case 'activity_energy_effiency':
-        return _energyEfficiency(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_energy_environment_impect':
-        return _energyEnvironmentalImpact(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_estate_location':
         return _estateLocation(answers);
       case 'activity_property_location':
@@ -772,12 +772,12 @@ class InspectionPhraseEngine {
       case 'activity_topography':
         return _sectionDTopography(answers);
       case 'activity_internal_wall':
-        return _sectionDInternalWall(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_listed_building':
       case 'activity_listed_building__listed_building':
-        return _sectionDListedBuilding(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_other_service':
-        return _sectionDOtherService(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_accommodation_schedule':
         return _accommodationSchedule(answers);
 
@@ -2552,140 +2552,7 @@ class InspectionPhraseEngine {
   }
 
   // ── Section D: About the Property ──────────────────────────────
-
-  List<String> _propertyConstruction(Map<String, String> answers) {
-    final items = <String>[];
-    if (_isChecked(answers['ch1']))
-      items.add('traditional materials and techniques');
-    if (_isChecked(answers['ch2'])) items.add('solid wall');
-    if (_isChecked(answers['ch3'])) items.add('cavity wall');
-    if (_isChecked(answers['ch4'])) items.add('timber frame');
-    if (_isChecked(answers['ch5'])) items.add('steel frame');
-    if (_isChecked(answers['ch6'])) items.add('concrete wall');
-    if (_isChecked(answers['ch8'])) items.add('precast concrete panels');
-    if (_isChecked(answers['ch9'])) items.add('system-built');
-    if (_isChecked(answers['ch7'])) {
-      final other = (answers['etPropertyTypeOther'] ?? '').trim();
-      items.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    if (items.isEmpty) return const [];
-    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_TYPE_AREA}
-    final template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_TYPE_AREA}');
-    final result = <String>[];
-    if (template.isEmpty) {
-      result.add(
-        'The property is believed to be built using ${_toWords(items)} '
-            'construction.',
-      );
-    } else {
-      result.addAll(_split(_normalize(
-        template.replaceAll('{CONSTRUCTION_TYPE}', _toWords(items)),
-      )));
-    }
-    // Spec conditional — "If timber or steel frame is selected, add this":
-    // the Modern Building Design advisory (approved bank sub-key).
-    if (_isChecked(answers['ch4']) || _isChecked(answers['ch5'])) {
-      final modern =
-          _sub('{D_CONSTRUCTION}', '{CONDITION_TYPE_OF_CONSTRUCTION}');
-      if (modern.isNotEmpty) result.addAll(_split(_normalize(modern)));
-    }
-    // Spec conditional — "If concrete wall or precast concrete panels are
-    // selected, add this": the mortgage-lending advisory (approved bank
-    // sub-key). Fires for concrete wall (ch6) or precast concrete panels
-    // (ch8); system-built (ch9) is not covered by the spec's advisory.
-    if (_isChecked(answers['ch6']) || _isChecked(answers['ch8'])) {
-      final concrete =
-          _sub('{D_CONSTRUCTION}', '{CONCRETE_CONSTRUCTION_ADVISORY}');
-      if (concrete.isNotEmpty) result.addAll(_split(_normalize(concrete)));
-    }
-    return result;
-  }
-
-  List<String> _propertyRoof(Map<String, String> answers) {
-    final types = <String>[];
-    if (_isChecked(answers['ch1'])) types.add('flat');
-    if (_isChecked(answers['ch2'])) types.add('pitched');
-    final roofMaterial = <String>[];
-    if (_isChecked(answers['ch8'])) roofMaterial.add('concrete');
-    if (_isChecked(answers['ch9'])) roofMaterial.add('clay');
-    if (_isChecked(answers['ch10'])) roofMaterial.add('natural');
-    if (_isChecked(answers['ch11'])) roofMaterial.add('composite');
-    if (_isChecked(answers['ch12'])) roofMaterial.add('mineral felt');
-    if (_isChecked(answers['ch13'])) roofMaterial.add('rubber');
-    if (_isChecked(answers['ch14'])) roofMaterial.add('fiberglass');
-    if (_isChecked(answers['ch15'])) roofMaterial.add('single ply membrane');
-    if (_isChecked(answers['ch_plastic'])) roofMaterial.add('plastic');
-    if (_isChecked(answers['ch_asphalt'])) roofMaterial.add('asphalt');
-    if (_isChecked(answers['ch_polycarbonate']))
-      roofMaterial.add('polycarbonate');
-    if (_isChecked(answers['ch16'])) {
-      final other = (answers['etCoveredWithOther'] ?? '').trim();
-      roofMaterial.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    final coverType = <String>[];
-    if (_isChecked(answers['ch6'])) coverType.add('tiles');
-    if (_isChecked(answers['ch7'])) coverType.add('sheets');
-    if (_isChecked(answers['ch_slates'])) coverType.add('slates');
-    if (_isChecked(answers['ch_coatings'])) coverType.add('coatings');
-    if (_isChecked(answers['ch17'])) {
-      final other = (answers['etCoveredTypeOther'] ?? '').trim();
-      coverType.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    if (types.isEmpty && roofMaterial.isEmpty && coverType.isEmpty) {
-      return const [];
-    }
-    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_ROOF_AREA}. Emit only
-    // when the sentence can be completed - partial data would otherwise
-    // produce fragments like "covered in ." (client-reported defect class).
-    if (types.isEmpty || (roofMaterial.isEmpty && coverType.isEmpty)) {
-      return const [];
-    }
-    if (types.length > 1 || roofMaterial.length > 1 || coverType.length > 1) {
-      final forms = types.length == 1
-          ? 'a ${types.single} roof form'
-          : 'a combination of ${_toWords(types)} roof forms';
-      final hasCoverings = roofMaterial.isNotEmpty;
-      final hasFinishes = coverType.isNotEmpty;
-      final key = hasCoverings && hasFinishes
-          ? '{D_CONSTRUCTION}::{CONSTRUCTION_ROOF_COMPOSITE}'
-          : hasCoverings
-              ? '{D_CONSTRUCTION}::{CONSTRUCTION_ROOF_COMPOSITE_COVERING}'
-              : '{D_CONSTRUCTION}::{CONSTRUCTION_ROOF_COMPOSITE_FINISH}';
-      final fallback = hasCoverings && hasFinishes
-          ? 'The main building has {ROOF_FORMS}. The roof coverings comprise '
-              '{ROOF_COVERINGS}, finished in {ROOF_FINISHES}.'
-          : hasCoverings
-              ? 'The main building has {ROOF_FORMS}. The roof coverings '
-                  'comprise {ROOF_COVERINGS}.'
-              : 'The main building has {ROOF_FORMS}. The roof coverings are '
-                  'formed in {ROOF_FINISHES}.';
-      var composite = _phraseTexts[key] ?? fallback;
-      composite = composite
-          .replaceAll('{ROOF_FORMS}', forms)
-          .replaceAll('{ROOF_COVERINGS}', _toWords(roofMaterial))
-          .replaceAll('{ROOF_FINISHES}', _toWords(coverType));
-      return _splitResolved(composite);
-    }
-    var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_ROOF_AREA}');
-    if (template.isEmpty) {
-      template = 'The main roof is of {CONTSTRUCTION_ROOF_TYPE} construction '
-          'formed with {CONTSTRUCTION_ROOF_BUILT_WITH} structural members. '
-          'The roof covering is formed in {CONSTRUCTION_ROOF_COVERED_WITH} '
-          '{CONTSTRUCTION_ROOF_MATERIAL}.';
-    }
-    // This screen does not capture the roof structure build-up; drop that
-    // clause rather than leaving an empty slot (RICS L2 wording).
-    template = template.replaceAll(
-      ' formed with {CONTSTRUCTION_ROOF_BUILT_WITH} structural members',
-      '',
-    );
-    template = template
-        .replaceAll('{CONTSTRUCTION_ROOF_TYPE}', _toWords(types))
-        .replaceAll('{CONSTRUCTION_ROOF_COVERED_WITH}', _toWords(roofMaterial))
-        .replaceAll('{CONTSTRUCTION_ROOF_MATERIAL}', _toWords(coverType));
-    return _splitResolved(template);
-  }
-
+
   List<String> _propertyGroundArea(Map<String, String> answers) {
     final items = <String>[];
     if (_isChecked(answers['ch1'])) items.add('residential');
@@ -2708,119 +2575,7 @@ class InspectionPhraseEngine {
       template.replaceAll('{AREA_TYPE}', _toWords(items)),
     );
   }
-
-  List<String> _extendedWall(Map<String, String> answers) {
-    final wallTypes = <String>[];
-    if (_isChecked(answers['ch1'])) wallTypes.add('cavity wall');
-    if (_isChecked(answers['ch2'])) wallTypes.add('cavity brick wall');
-    if (_isChecked(answers['ch3'])) wallTypes.add('solid wall');
-    if (_isChecked(answers['ch4'])) wallTypes.add('solid bounded brick wall');
-    if (_isChecked(answers['ch5'])) wallTypes.add('stud wall');
-    if (_isChecked(answers['ch6'])) {
-      final other = (answers['etCoveredWithOther'] ?? '').trim();
-      wallTypes.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    final finishes = <String>[];
-    if (_isChecked(answers['ch7'])) finishes.add('painted');
-    if (_isChecked(answers['ch8'])) finishes.add('pebble dash');
-    if (_isChecked(answers['ch9'])) finishes.add('mock tudor');
-    if (_isChecked(answers['ch10'])) {
-      final other = (answers['etFinishesOtherNew'] ?? '').trim();
-      finishes.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    final cladding = <String>[];
-    if (_isChecked(answers['ch11'])) cladding.add('tiles');
-    if (_isChecked(answers['ch12'])) cladding.add('timber');
-    if (_isChecked(answers['ch13'])) cladding.add('weathered board');
-    if (_isChecked(answers['ch14'])) cladding.add('profile sheets');
-    if (_isChecked(answers['ch15'])) cladding.add('shingle plates');
-    if (_isChecked(answers['ch16'])) cladding.add('compressed flat panel');
-    if (_isChecked(answers['ch17'])) cladding.add('insulated cladding');
-    if (_isChecked(answers['ch18'])) {
-      final other = (answers['etCladdingFinishesOther'] ?? '').trim();
-      cladding.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    final renderedArea =
-        (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
-    final renderedQuality = (answers['android_material_design_spinner2'] ?? '')
-        .trim()
-        .toLowerCase();
-    final claddingArea = (answers['android_material_design_spinner4'] ?? '')
-        .trim()
-        .toLowerCase();
-    if (wallTypes.isEmpty &&
-        finishes.isEmpty &&
-        cladding.isEmpty &&
-        renderedArea.isEmpty &&
-        renderedQuality.isEmpty &&
-        claddingArea.isEmpty) {
-      return const [];
-    }
-    // Approved bank: {D_CONSTRUCTION} external wall sentences. This screen
-    // (id `activity_extended_wall`, tree title "External Wall") is the
-    // Construction group's External Walls / Finishes / Cladding element.
-    final phrases = <String>[];
-    if (wallTypes.isNotEmpty) {
-      var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_EXT_WALL_AREA}');
-      if (template.isEmpty) {
-        template = 'The main external walls are built of '
-            '{CONSTRUCTION_EXT_WALL_TYPE} construction.';
-      }
-      phrases.addAll(_splitResolved(
-        template.replaceAll(
-          '{CONSTRUCTION_EXT_WALL_TYPE}',
-          _toWords(wallTypes),
-        ),
-      ));
-    }
-    if (finishes.isNotEmpty || renderedArea.isNotEmpty) {
-      var template =
-          _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_EXT_WALL_FINISHES}');
-      if (template.isEmpty) {
-        template = 'Externally, the main walls are '
-            '{CONSTRUCTION_EXT_WALL_RENDERED_AREA} rendered '
-            '{CONSTRUCTION_EXT_WALL_RENDERED_TYPE} with '
-            '{CONSTRUCTION_EXT_WALL_RENDERED_FINISHES} finishes.';
-      }
-      if (finishes.isEmpty) {
-        template = template.replaceAll(
-          'with {CONSTRUCTION_EXT_WALL_RENDERED_FINISHES} finishes',
-          '',
-        );
-      }
-      phrases.addAll(_splitResolved(
-        template
-            .replaceAll('{CONSTRUCTION_EXT_WALL_RENDERED_AREA}', renderedArea)
-            .replaceAll(
-              '{CONSTRUCTION_EXT_WALL_RENDERED_TYPE}',
-              renderedQuality,
-            )
-            .replaceAll(
-              '{CONSTRUCTION_EXT_WALL_RENDERED_FINISHES}',
-              _toWords(finishes),
-            ),
-      ));
-    }
-    if (cladding.isNotEmpty) {
-      var template =
-          _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_EXT_WALL_CLADDING}');
-      if (template.isEmpty) {
-        template = 'The main walls are {CONSTRUCTION_EXT_WALL_CLADDING_AREA} '
-            'cladded with {CONSTRUCTION_EXT_WALL_CLADDING_FINISHES} '
-            'finishing.';
-      }
-      phrases.addAll(_splitResolved(
-        template
-            .replaceAll('{CONSTRUCTION_EXT_WALL_CLADDING_AREA}', claddingArea)
-            .replaceAll(
-              '{CONSTRUCTION_EXT_WALL_CLADDING_FINISHES}',
-              _toWords(cladding),
-            ),
-      ));
-    }
-    return phrases;
-  }
-
+
   List<String> _propertyParking(Map<String, String> answers) {
     final status =
         (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
@@ -2926,73 +2681,7 @@ class InspectionPhraseEngine {
         .replaceAll('{GARDEN_BOUNDRY_FENCES}', fenceSentence);
     return _splitResolved(template);
   }
-
-  List<String> _constructionFloor(Map<String, String> answers) {
-    final items = <String>[];
-    if (_isChecked(answers['ch1'])) items.add('suspended timber');
-    if (_isChecked(answers['ch2'])) items.add('solid');
-    if (_isChecked(answers['ch3'])) items.add('suspended beam and block');
-    if (_isChecked(answers['ch4'])) items.add('in situ-concrete');
-    if (_isChecked(answers['ch5'])) {
-      final other = (answers['etCoveredWithOther'] ?? '').trim();
-      items.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    if (items.isEmpty) return const [];
-    final buildType =
-        (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
-    final prefix =
-        buildType.contains('mixture') ? 'of a mixture of' : 'mainly of';
-    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_FLOOR_AREA}
-    var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_FLOOR_AREA}');
-    if (template.isEmpty) {
-      template = 'The floors of the property are built '
-          '{CONSTRUCTION_FLOOR_BUILT_TYPE} {CONSTRUCTION_FLOOR_BUILT_WITH} '
-          'floor construction.';
-    }
-    return _splitResolved(
-      template
-          .replaceAll('{CONSTRUCTION_FLOOR_BUILT_TYPE}', prefix)
-          .replaceAll('{CONSTRUCTION_FLOOR_BUILT_WITH}', _toWords(items)),
-    );
-  }
-
-  List<String> _constructionWindow(Map<String, String> answers) {
-    final glazing = <String>[];
-    if (_isChecked(answers['ch1'])) glazing.add('single');
-    if (_isChecked(answers['ch2'])) glazing.add('double');
-    if (_isChecked(answers['ch3'])) glazing.add('secondary');
-    if (_isChecked(answers['ch4'])) {
-      final other = (answers['etCoveredWithOther'] ?? '').trim();
-      glazing.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    final materials = <String>[];
-    if (_isChecked(answers['ch5'])) materials.add('PVC');
-    if (_isChecked(answers['ch6'])) materials.add('timber');
-    if (_isChecked(answers['ch7'])) materials.add('aluminium');
-    if (_isChecked(answers['ch8'])) materials.add('steel');
-    if (_isChecked(answers['ch9'])) {
-      final other = (answers['etWindowMaterialOther'] ?? '').trim();
-      materials.add(other.isNotEmpty ? other : 'other');
-    }
-    if (glazing.isEmpty) return const [];
-    final mixType =
-        (answers['android_material_design_spinner'] ?? '').trim().toLowerCase();
-    final prefix = mixType.contains('mixture') ? 'a mixture of' : 'mainly of';
-    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_WINDOWS_AREA}
-    var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_WINDOWS_AREA}');
-    if (template.isEmpty) {
-      template = 'The windows are {CONSTUCTION_GLAZED_WITH} '
-          '{CONSTRUCTION_GLAZED_TYPE} glazed {CONSTRUCTION_WINDOW_MATERIAL} '
-          'units.';
-    }
-    return _splitResolved(
-      template
-          .replaceAll('{CONSTUCTION_GLAZED_WITH}', prefix)
-          .replaceAll('{CONSTRUCTION_GLAZED_TYPE}', _toWords(glazing))
-          .replaceAll('{CONSTRUCTION_WINDOW_MATERIAL}', _toWords(materials)),
-    );
-  }
-
+
   List<String> _gatedCommunity(Map<String, String> answers) {
     final status = (answers['android_material_design_spinner3'] ?? '')
         .trim()
@@ -3002,63 +2691,7 @@ class InspectionPhraseEngine {
     if (text.isNotEmpty) return _split(_normalize(text));
     return const ['The property is located within a gated development.'];
   }
-
-  List<String> _energyEfficiency(Map<String, String> answers) {
-    // Approved bank: {D_ENERGY} embeds both efficiency and environmental
-    // impact ratings in one paragraph; this screen only captures the
-    // efficiency half, so substitute just that pair and leave the impact
-    // placeholders for _energyEnvironmentalImpact() to fill on its screen.
-    final current = (answers['android_material_design_spinner'] ?? '').trim();
-    final potential =
-        (answers['android_material_design_spinner2'] ?? '').trim();
-    // Both values are required to complete this sentence; a literal "..."
-    // placeholder is not acceptable in a finalised client report, so wait
-    // until the surveyor has answered both.
-    if (current.isEmpty || potential.isEmpty) return const [];
-    var template = _phraseTexts['{D_ENERGY}'] ?? '';
-    if (template.isEmpty) {
-      return ['Energy Efficiency: Current $current, Potential $potential.'];
-    }
-    template = template
-        .replaceAll('{ENERGY_EFFICIENCY_CURRENT_VALUE}', current)
-        .replaceAll('{ENERGY_EFFICIENCY_POTENTIAL_VALUE}', potential)
-        // Environmental impact half is answered on its own screen; keep
-        // this screen's output scoped to the energy-efficiency line only.
-        .replaceAll(
-          RegExp(r'<strong>Environmental Impact:<\/strong>[\s\S]*'),
-          '',
-        );
-    return _splitResolved(template);
-  }
-
-  List<String> _energyEnvironmentalImpact(Map<String, String> answers) {
-    // Approved bank: {D_ENERGY} - environmental-impact half (see
-    // _energyEfficiency above for the paired efficiency half).
-    final current = (answers['android_material_design_spinner'] ?? '').trim();
-    final potential =
-        (answers['android_material_design_spinner2'] ?? '').trim();
-    // Both values are required to complete this sentence; a literal "..."
-    // placeholder is not acceptable in a finalised client report, so wait
-    // until the surveyor has answered both.
-    if (current.isEmpty || potential.isEmpty) return const [];
-    var template = _phraseTexts['{D_ENERGY}'] ?? '';
-    if (template.isEmpty) {
-      return [
-        'Environmental Impact: Current $current, Potential $potential.',
-      ];
-    }
-    final match =
-        RegExp(r'<strong>Environmental Impact:<\/strong>[^<]*').firstMatch(
-      template,
-    );
-    if (match == null) return const [];
-    template = match
-        .group(0)!
-        .replaceAll('{ENVIRONMENT_IMPACT_CURRENT_VALUE}', current)
-        .replaceAll('{ENVIRONMENT_IMPACT_POTENTIAL_VALUE}', potential);
-    return _splitResolved(template);
-  }
-
+
   List<String> _estateLocation(Map<String, String> answers) {
     final location = (answers['android_material_design_spinner'] ?? '').trim();
     if (location.isEmpty) return const [];
@@ -3337,83 +2970,9 @@ class InspectionPhraseEngine {
     return _splitResolved(template.replaceAll('{GROUND_TOPOGRAPHY}', text));
   }
 
-  // Section D: Internal Wall
-  List<String> _sectionDInternalWall(Map<String, String> answers) {
-    final types = <String>[];
-    if (_isChecked(answers['ch1'])) types.add('stud');
-    if (_isChecked(answers['ch2'])) types.add('solid');
-    if (_isChecked(answers['ch3'])) types.add('lath and plaster');
-    if (_isChecked(answers['ch4'])) {
-      final other = (answers['etCoveredWithOther'] ?? '').trim();
-      types.add(other.isNotEmpty ? other.toLowerCase() : 'other');
-    }
-    if (types.isEmpty) return const [];
-    // Approved bank: {D_CONSTRUCTION}::{CONSTRUCTION_INT_WALL_AREA}
-    var template = _sub('{D_CONSTRUCTION}', '{CONSTRUCTION_INT_WALL_AREA}');
-    if (template.isEmpty) {
-      template = 'The internal walls are built of '
-          '{CONSTRUCTION_INT_WALL_PARTITION_TYPE} partitions.';
-    }
-    return _splitResolved(
-      template.replaceAll(
-        '{CONSTRUCTION_INT_WALL_PARTITION_TYPE}',
-        _toWords(types),
-      ),
-    );
-  }
-
-  // Section D: Listed Building
-  List<String> _sectionDListedBuilding(Map<String, String> answers) {
-    final status = (answers['android_material_design_spinner'] ?? '').trim();
-    if (status.isEmpty) return const [];
-    if (status.toLowerCase() == 'yes') {
-      // Approved bank: {D_LISTED_BUILDING} (single paragraph, no <br/>).
-      final template = _phraseTexts['{D_LISTED_BUILDING}'] ?? '';
-      if (template.isNotEmpty) return _splitResolved(template);
-      return [
-        'The property is a listed building.',
-        'Please contact your legal adviser to advise you on the implication of this building status.',
-      ];
-    }
-    final template = _phraseTexts['{D_LISTED_BUILDING_NOT_LISTED}'] ??
-        'The property is not understood to be a listed building.';
-    return _splitResolved(template);
-  }
-
-  // Section D: Other Service
-  List<String> _sectionDOtherService(Map<String, String> answers) {
-    final hasSolarElectricity = _isChecked(answers['ch1']);
-    final hasSolarHotWater = _isChecked(answers['ch2']);
-
-    List<String> resolveSub(String subCode, String fallback) {
-      final template = _sub('{ENERGY_OTHER_SERVICES}', subCode);
-      if (template.trim().isEmpty) return <String>[fallback];
-      return _split(_normalize(template));
-    }
-
-    if (!hasSolarElectricity && !hasSolarHotWater) {
-      return resolveSub(
-        '{ENERGY_OTHER_SERVICES_NONE}',
-        'No other energy services were identified.',
-      );
-    }
-
-    final phrases = <String>[];
-    if (hasSolarElectricity) {
-      phrases.addAll(resolveSub(
-        '{ENERGY_OTHER_SERVICES_SOLAR_ELECTRICITY}',
-        'The property has photovoltaic panels that generate electricity.',
-      ));
-    }
-    if (hasSolarHotWater) {
-      phrases.addAll(resolveSub(
-        '{ENERGY_OTHER_SERVICES_SOLAR_HOT_WATER}',
-        'The property has solar water heating panels installed.',
-      ));
-    }
-    return phrases;
-  }
-
+  // Section D: Internal Wall
+  // Section D: Listed Building
+  // Section D: Other Service
   List<String> _accommodationSchedule(Map<String, String> answers) {
     final phrases = <String>[];
     final rooms = <String>[];

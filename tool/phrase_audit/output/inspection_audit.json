@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 348,
+  "screensAudited": 347,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1939,
-   "approvedLegacyBank": 192,
-   "approvedCurrentBankOnly": 1720,
+   "distinctEmitted": 1899,
+   "approvedLegacyBank": 172,
+   "approvedCurrentBankOnly": 1700,
    "unapproved": 0
   }
  },
@@ -42,18 +42,18 @@
    "screenId": "activity_property_construction",
    "title": "Property",
    "dataFieldCount": 12,
-   "permutationCount": 20,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 13,
+    "total": 4,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 13,
+    "approvedCurrentBankOnly": 4,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is believed to be constructed using traditional materials and techniques construction.",
-    "The property is believed to be constructed using solid wall construction.",
-    "The property is believed to be constructed using cavity wall construction."
+    "Modern Building Design: The building is believed to be of a modern design, framed externally with timber, steel, or other materials, but most of the framework is concealed on both sides by cladding. The durability of the structure is dependent upon the care taken during construction. For this reason, I cannot comment on the condition of the concealed structure, given the limited scope and technique of the inspection. Please be aware that any alteration to this type of building will require specialist advice from a qualified person. The exterior of the property must be adequately maintained to prevent water penetration. It is also important to reduce the risk of condensation that might encourage damage or weaken concealed components. When improving insulation, you should ensure that the material used is appropriate. You can only install insulation within the wall cavity with specialist advice.",
+    "Where the property is of concrete or precast concrete panel construction, some lenders may regard this as a non-standard form of construction. As a result, the availability of mortgage finance may be more limited than for traditionally constructed properties, and some lenders may decline to lend altogether. Lending criteria vary between mortgage providers and may depend on the specific construction type, its condition, and whether any approved repair or certification schemes have been carried out. You should make enquiries with your proposed lender or an independent mortgage broker at an early stage to confirm that satisfactory mortgage finance will be available before committing to the purchase.",
+    "Construction has been identified from visible inspection only and has not been confirmed by opening concealed elements."
    ]
   },
   {
@@ -79,17 +79,18 @@
    "sectionKey": "D",
    "screenId": "activity_property_roof",
    "title": "Roof",
-   "dataFieldCount": 21,
-   "permutationCount": 23,
+   "dataFieldCount": 20,
+   "permutationCount": 22,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The main building has a combination of flat and pitched roof forms. The roof coverings comprise concrete, clay, natural, composite, mineral felt, rubber, fiberglass, single ply membrane, plastic, asphalt, polycarbonate and sample detail, finished in tiles, sheets, slates, coatings and sample detail."
+    "Roof type: The main roof is of pitched, flat and mansard construction formed with traditional cut timber, prefabricated trussed rafters and sample detail structural members.",
+    "Roof cover: The roof covering is formed in clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, metal sheeting, mineral felt, rubber membrane, single-ply membrane and sample detail."
    ]
   },
   {
@@ -171,19 +172,17 @@
    "sectionKey": "D",
    "screenId": "activity_extended_wall",
    "title": "External Wall",
-   "dataFieldCount": 24,
-   "permutationCount": 32,
+   "dataFieldCount": 9,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 26,
-    "approvedLegacy": 17,
-    "approvedCurrentBankOnly": 9,
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The external walls are constructed of cavity wall construction.",
-    "The external walls are constructed of cavity brick wall construction.",
-    "The external walls are constructed of solid wall construction."
+    "External walls: The external walls are constructed of solid brick, cavity brick, stone, timber frame, steel frame, rendered masonry and sample detail construction."
    ]
   },
   {
@@ -242,19 +241,17 @@
    "sectionKey": "D",
    "screenId": "activity_internal_wall",
    "title": "Internal Wall",
-   "dataFieldCount": 5,
-   "permutationCount": 7,
+   "dataFieldCount": 6,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Internal walls are formed in stud partitions.",
-    "Internal walls are formed in solid partitions.",
-    "Internal walls are formed in lath and plaster partitions."
+    "Internal walls: Internal walls are formed in solid masonry, timber stud partitions, lath and plaster and sample detail."
    ]
   },
   {
@@ -299,19 +296,17 @@
    "sectionKey": "D",
    "screenId": "activity_construction_floor",
    "title": "Floor",
-   "dataFieldCount": 7,
-   "permutationCount": 11,
+   "dataFieldCount": 6,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 7,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 7,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The floors are mainly of suspended timber construction.",
-    "The floors are mainly of solid construction.",
-    "The floors are mainly of suspended beam and block construction."
+    "Floors: Floors are of solid concrete, suspended timber, beam and block and sample detail construction."
    ]
   },
   {
@@ -337,19 +332,17 @@
    "sectionKey": "D",
    "screenId": "activity_construction_window",
    "title": "Window",
-   "dataFieldCount": 12,
-   "permutationCount": 16,
+   "dataFieldCount": 11,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The windows are fitted with frames incorporating single glazing.",
-    "The windows are fitted with frames incorporating double glazing.",
-    "The windows are fitted with frames incorporating secondary glazing."
+    "Windows: Windows are fitted with timber, PVCu, aluminium, steel and sample detail frames incorporating single, double, triple glazing and secondary glazing, where applicable."
    ]
   },
   {
@@ -374,14 +367,13 @@
    "permutationCount": 5,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance.",
-    "The property is not understood to be a listed building."
+    "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
    ]
   },
   {
@@ -392,14 +384,13 @@
    "permutationCount": 5,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance.",
-    "The property is not understood to be a listed building."
+    "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
    ]
   },
   {
@@ -424,31 +415,19 @@
    "screenId": "activity_energy_effiency",
    "title": "Energy",
    "dataFieldCount": 2,
-   "permutationCount": 4,
+   "permutationCount": 28,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "According to the available Energy Performance Certificate: Energy Efficiency Rating: sample detail. Potential Rating: sample detail. This information has not been independently verified."
+    "Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: A. Potential Rating: A. This information has not been independently verified.",
+    "Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: B. Potential Rating: A. This information has not been independently verified.",
+    "Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: C. Potential Rating: A. This information has not been independently verified."
    ]
-  },
-  {
-   "sectionKey": "D",
-   "screenId": "activity_energy_environment_impect",
-   "title": "Environmental Impact",
-   "dataFieldCount": 2,
-   "permutationCount": 4,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
   },
   {
    "sectionKey": "D",
@@ -468,17 +447,17 @@
    "sectionKey": "D",
    "screenId": "activity_other_service",
    "title": "Other Service",
-   "dataFieldCount": 2,
-   "permutationCount": 4,
+   "dataFieldCount": 7,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 2,
+    "total": 1,
+    "approvedLegacy": 0,
     "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property is fitted with no renewable energy installations. Where renewable energy systems are present, your legal adviser should confirm ownership, maintenance obligations, guarantees and any agreements with electricity providers."
+    "Other services: The property is fitted with photovoltaic (solar PV) panels, solar water heating panels, an inverter, battery storage and sample detail. Where renewable energy systems are present, your legal adviser should confirm ownership, maintenance obligations, guarantees and any agreements with electricity providers."
    ]
   },
   {

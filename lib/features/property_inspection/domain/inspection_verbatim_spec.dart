@@ -11433,6 +11433,304 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_a2_flat',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'a3_type',
+    'activity_property_construction',
+    '{D_CONSTRUCTION}',
+    '{A3_TYPE}',
+    [
+      VerbatimToken(
+        '{A3_CONSTRUCTION_TYPE}',
+        options: {
+          'a3_type_0_traditional_masonry': 'traditional masonry',
+          'a3_type_0_solid_wall': 'solid wall',
+          'a3_type_0_cavity_wall': 'cavity wall',
+          'a3_type_0_timber_frame': 'timber frame',
+          'a3_type_0_steel_frame': 'steel frame',
+          'a3_type_0_concrete_wall': 'concrete wall',
+          'a3_type_0_precast_concrete_panels': 'precast concrete panels',
+          'a3_type_0_system_built': 'system-built',
+        },
+        otherCheckbox: 'a3_type_0_other',
+        otherText: 'a3_type_0_other_text',
+        pdfOptions: ['traditional masonry', 'solid wall', 'cavity wall', 'timber frame', 'steel frame', 'concrete wall', 'precast concrete panels', 'system-built'],
+      ),
+    ],
+    pdf:
+        'Type: The property is believed to be constructed using traditional masonry, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels, system-built, other construction.',
+    whenField: 'cb_a3_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_visible',
+    'activity_property_construction',
+    '{D_CONSTRUCTION}',
+    '{A3_VISIBLE_ONLY}',
+    [
+    ],
+    whenField: 'cb_a3_visible',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_modern',
+    'activity_property_construction',
+    '{D_CONSTRUCTION}',
+    '{A3_MODERN_BUILDING_DESIGN}',
+    [
+    ],
+    whenField: 'a3_type_0_timber_frame',
+    whenValue: 'true',
+    whenAny: [['a3_type_0_steel_frame', 'true']],
+  ),
+  VerbatimRule(
+    'a3_concrete',
+    'activity_property_construction',
+    '{D_CONSTRUCTION}',
+    '{A3_CONCRETE_ADVISORY}',
+    [
+    ],
+    whenField: 'a3_type_0_concrete_wall',
+    whenValue: 'true',
+    whenAny: [['a3_type_0_precast_concrete_panels', 'true']],
+  ),
+  VerbatimRule(
+    'a3_roof_type',
+    'activity_property_roof',
+    '{D_CONSTRUCTION}',
+    '{A3_ROOF_TYPE}',
+    [
+      VerbatimToken(
+        '{A3_ROOF_FORM}',
+        options: {
+          'a3_roof_type_0_pitched': 'pitched',
+          'a3_roof_type_0_flat': 'flat',
+          'a3_roof_type_0_mansard': 'mansard',
+        },
+        pdfOptions: ['pitched', 'flat', 'mansard'],
+      ),
+      VerbatimToken(
+        '{A3_ROOF_STRUCTURE}',
+        options: {
+          'a3_roof_type_1_traditional_cut_timber': 'traditional cut timber',
+          'a3_roof_type_1_prefabricated_trussed_rafters': 'prefabricated trussed rafters',
+        },
+        otherCheckbox: 'a3_roof_type_1_other',
+        otherText: 'a3_roof_type_1_other_text',
+        pdfOptions: ['traditional cut timber', 'prefabricated trussed rafters'],
+      ),
+    ],
+    pdf:
+        'Roof type: The main roof is of pitched, flat, mansard construction formed with traditional cut timber, prefabricated trussed rafters, other structural members.',
+    whenField: 'cb_a3_roof_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_roof_cover',
+    'activity_property_roof',
+    '{D_CONSTRUCTION}',
+    '{A3_ROOF_COVER}',
+    [
+      VerbatimToken(
+        '{A3_ROOF_COVER}',
+        options: {
+          'a3_roof_cover_0_clay_tiles': 'clay tiles',
+          'a3_roof_cover_0_concrete_tiles': 'concrete tiles',
+          'a3_roof_cover_0_natural_slate': 'natural slate',
+          'a3_roof_cover_0_artificial_slate': 'artificial slate',
+          'a3_roof_cover_0_fibre_cement_slates': 'fibre cement slates',
+          'a3_roof_cover_0_metal_sheeting': 'metal sheeting',
+          'a3_roof_cover_0_mineral_felt': 'mineral felt',
+          'a3_roof_cover_0_rubber_membrane': 'rubber membrane',
+          'a3_roof_cover_0_single_ply_membrane': 'single-ply membrane',
+        },
+        otherCheckbox: 'a3_roof_cover_0_other',
+        otherText: 'a3_roof_cover_0_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'natural slate', 'artificial slate', 'fibre cement slates', 'metal sheeting', 'mineral felt', 'rubber membrane', 'single-ply membrane'],
+      ),
+    ],
+    pdf:
+        'Roof cover: The roof covering is formed in clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, metal sheeting, mineral felt, rubber membrane, single-ply membrane, other.',
+    whenField: 'cb_a3_roof_cover',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_ext_walls',
+    'activity_extended_wall',
+    '{D_CONSTRUCTION}',
+    '{A3_EXTERNAL_WALLS}',
+    [
+      VerbatimToken(
+        '{A3_EXTERNAL_WALLS}',
+        options: {
+          'a3_ext_walls_0_solid_brick': 'solid brick',
+          'a3_ext_walls_0_cavity_brick': 'cavity brick',
+          'a3_ext_walls_0_stone': 'stone',
+          'a3_ext_walls_0_timber_frame': 'timber frame',
+          'a3_ext_walls_0_steel_frame': 'steel frame',
+          'a3_ext_walls_0_rendered_masonry': 'rendered masonry',
+        },
+        otherCheckbox: 'a3_ext_walls_0_other',
+        otherText: 'a3_ext_walls_0_other_text',
+        pdfOptions: ['solid brick', 'cavity brick', 'stone', 'timber frame', 'steel frame', 'rendered masonry'],
+      ),
+    ],
+    pdf:
+        'External walls: The external walls are constructed of solid brick, cavity brick, stone, timber frame, steel frame, rendered masonry, other construction.',
+    whenField: 'cb_a3_ext_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_int_walls',
+    'activity_internal_wall',
+    '{D_CONSTRUCTION}',
+    '{A3_INTERNAL_WALLS}',
+    [
+      VerbatimToken(
+        '{A3_INTERNAL_WALLS}',
+        options: {
+          'a3_int_walls_0_solid_masonry': 'solid masonry',
+          'a3_int_walls_0_timber_stud_partitions': 'timber stud partitions',
+          'a3_int_walls_0_lath_and_plaster': 'lath and plaster',
+        },
+        otherCheckbox: 'a3_int_walls_0_other',
+        otherText: 'a3_int_walls_0_other_text',
+        pdfOptions: ['solid masonry', 'timber stud partitions', 'lath and plaster'],
+      ),
+    ],
+    pdf:
+        'Internal walls: Internal walls are formed in solid masonry, timber stud partitions, lath and plaster, other.',
+    whenField: 'cb_a3_int_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_floors',
+    'activity_construction_floor',
+    '{D_CONSTRUCTION}',
+    '{A3_FLOORS}',
+    [
+      VerbatimToken(
+        '{A3_FLOORS}',
+        options: {
+          'a3_floors_0_solid_concrete': 'solid concrete',
+          'a3_floors_0_suspended_timber': 'suspended timber',
+          'a3_floors_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'a3_floors_0_other',
+        otherText: 'a3_floors_0_other_text',
+        pdfOptions: ['solid concrete', 'suspended timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floors: Floors are of solid concrete, suspended timber, beam and block, other construction.',
+    whenField: 'cb_a3_floors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_windows',
+    'activity_construction_window',
+    '{D_CONSTRUCTION}',
+    '{A3_WINDOWS}',
+    [
+      VerbatimToken(
+        '{A3_WINDOW_FRAMES}',
+        options: {
+          'a3_windows_0_timber': 'timber',
+          'a3_windows_0_pvcu': 'PVCu',
+          'a3_windows_0_aluminium': 'aluminium',
+          'a3_windows_0_steel': 'steel',
+        },
+        otherCheckbox: 'a3_windows_0_other',
+        otherText: 'a3_windows_0_other_text',
+        pdfOptions: ['timber', 'PVCu', 'aluminium', 'steel'],
+      ),
+      VerbatimToken(
+        '{A3_GLAZING}',
+        options: {
+          'a3_windows_1_single': 'single',
+          'a3_windows_1_double': 'double',
+          'a3_windows_1_triple_glazing': 'triple glazing',
+          'a3_windows_1_secondary_glazing': 'secondary glazing',
+        },
+        pdfOptions: ['single', 'double', 'triple glazing', 'secondary glazing'],
+      ),
+    ],
+    pdf:
+        'Windows: Windows are fitted with timber, PVCu, aluminium, steel, other frames incorporating single, double, triple glazing, secondary glazing, where applicable.',
+    whenField: 'cb_a3_windows',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_listed',
+    'activity_listed_building__listed_building',
+    '{D_CONSTRUCTION}',
+    '{A3_LISTED_BUILDING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Yes',
+  ),
+  VerbatimRule(
+    'a3_services',
+    'activity_other_service',
+    '{D_CONSTRUCTION}',
+    '{A3_OTHER_SERVICES}',
+    [
+      VerbatimToken(
+        '{A3_SERVICES}',
+        options: {
+          'ch1': 'photovoltaic (solar PV) panels',
+          'ch2': 'solar water heating panels',
+          'a3_os_inverter': 'an inverter',
+          'a3_os_battery': 'battery storage',
+        },
+        otherCheckbox: 'a3_os_other',
+        otherText: 'a3_os_other_text',
+        pdfOptions: ['photovoltaic (solar PV) panels', 'solar water heating panels', 'an inverter', 'battery storage'],
+      ),
+    ],
+    pdf:
+        'Other services: The property is fitted with photovoltaic (solar PV) panels, solar water heating panels, an inverter, battery storage, other renewable energy installations.',
+    whenField: 'cb_a3_services',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_energy',
+    'activity_energy_effiency',
+    '{D_CONSTRUCTION}',
+    '{A3_ENERGY_PERFORMANCE}',
+    [
+      VerbatimToken(
+        '{A3_EE_RATING}',
+        dropdown: 'android_material_design_spinner',
+        dropdownOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        pdfOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+      ),
+      VerbatimToken(
+        '{A3_EE_POTENTIAL}',
+        dropdown: 'android_material_design_spinner2',
+        dropdownOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        pdfOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+      ),
+    ],
+    pdf:
+        'Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: A, B, C, D, E, F, or G.',
+    pdfMore: [
+      'Potential Rating: A, B, C, D, E, F, or G.',
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'A',
+    whenAny: [['android_material_design_spinner', 'B'], ['android_material_design_spinner', 'C'], ['android_material_design_spinner', 'D'], ['android_material_design_spinner', 'E'], ['android_material_design_spinner', 'F'], ['android_material_design_spinner', 'G']],
+  ),
+  VerbatimRule(
+    'a3_listed_alias',
+    'activity_listed_building',
+    '{D_CONSTRUCTION}',
+    '{A3_LISTED_BUILDING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Yes',
+  ),
   // <<verbatim-rules-end>>
 ];
 

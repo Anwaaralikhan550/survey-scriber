@@ -76,28 +76,22 @@
    "section": "D",
    "screen": "group_construction_2",
    "phrases": [
-    "The property is believed to be constructed using traditional materials and techniques, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels and system-built construction.",
-    "Modern Building Design: The building is believed to be of a modern design, framed externally with timber, steel, or other materials, but most of the framework is concealed on both sides by cladding. The durability of the structure is dependent upon the care taken during construction. For this reason, I cannot comment on the condition of the concealed structure, given the limited scope and technique of the inspection. Please be aware that any alteration to this type of building will require specialist advice from a qualified person. The exterior of the property must be adequately maintained to prevent water penetration. It is also important to reduce the risk of condensation that might encourage damage or weaken concealed components. When improving insulation, you should ensure that the material used is appropriate. You can only install insulation within the wall cavity with specialist advice.",
-    "The main building has a combination of flat and pitched roof forms. The roof coverings comprise concrete, clay, natural, composite, mineral felt, rubber, fiberglass, single ply membrane, plastic, asphalt and polycarbonate, finished in tiles, sheets, slates and coatings.",
-    "The external walls are constructed of cavity wall, cavity brick wall, solid wall, solid bounded brick wall and stud wall construction. Externally, the main walls are fully rendered smooth with painted, pebble dash and mock tudor finishes. The main walls are fully cladded with tiles, timber, weatherboarding, profile sheets, shingle plates, compressed flat panel and insulated cladding finishing.",
-    "Internal walls are formed in stud, solid and lath and plaster partitions. The floors are mainly of suspended timber, solid, suspended beam and block and in situ-concrete construction. The windows are fitted with uPVC, timber, aluminium and steel frames incorporating single, double and secondary glazing."
+    "Construction has been identified from visible inspection only and has not been confirmed by opening concealed elements. The roof type is The main roof is of pitched, flat and mansard construction formed with traditional cut timber and prefabricated trussed rafters structural members. The internal walls are built of Internal walls are formed in solid masonry, timber stud partitions and lath and plaster. The floors are built of Floors are of solid concrete, suspended timber and beam and block construction. The windows are mainly Windows are fitted with timber, PVCu, aluminium and steel frames incorporating single, double, triple glazing and secondary glazing, where applicable."
    ]
   },
   {
    "section": "D",
    "screen": "activity_listed_building__listed_building",
    "phrases": [
-    "The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
+    "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
    ]
   },
   {
    "section": "D",
    "screen": "section_d_energy_merged",
    "phrases": [
-    "According to the available Energy Performance Certificate: Energy Efficiency Rating: sample detail. Potential Rating: sample detail. This information has not been independently verified.",
-    "Environmental Impact: Current sample detail Potential sample detail.",
-    "The property has photovoltaic panels designed to produce electricity from sunlight installed on the roof slope(s).",
-    "The property has solar water heating panels installed on the roof slope(s)."
+    "Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: A. Potential Rating: A. This information has not been independently verified.",
+    "Other services: The property is fitted with photovoltaic (solar PV) panels, solar water heating panels, an inverter and battery storage. Where renewable energy systems are present, your legal adviser should confirm ownership, maintenance obligations, guarantees and any agreements with electricity providers."
    ]
   },
   {
@@ -1059,9 +1053,9 @@
    "section": "D",
    "screen": "activity_property_construction",
    "phrases": [
-    "The property is believed to be constructed using traditional materials and techniques, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels and system-built construction.",
-    "Modern Building Design: The building is believed to be of a modern design, framed externally with timber, steel, or other materials, but most of the framework is concealed on both sides by cladding. The durability of the structure is dependent upon the care taken during construction. For this reason, I cannot comment on the condition of the concealed structure, given the limited scope and technique of the inspection.",
-    "Please be aware that any alteration to this type of building will require specialist advice from a qualified person. The exterior of the property must be adequately maintained to prevent water penetration. It is also important to reduce the risk of condensation that might encourage damage or weaken concealed components. When improving insulation, you should ensure that the material used is appropriate. You can only install insulation within the wall cavity with specialist advice.",
+    "Type: The property is believed to be constructed using traditional masonry, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels and system-built construction.",
+    "Construction has been identified from visible inspection only and has not been confirmed by opening concealed elements.",
+    "Modern Building Design: The building is believed to be of a modern design, framed externally with timber, steel, or other materials, but most of the framework is concealed on both sides by cladding. The durability of the structure is dependent upon the care taken during construction. For this reason, I cannot comment on the condition of the concealed structure, given the limited scope and technique of the inspection. Please be aware that any alteration to this type of building will require specialist advice from a qualified person. The exterior of the property must be adequately maintained to prevent water penetration. It is also important to reduce the risk of condensation that might encourage damage or weaken concealed components. When improving insulation, you should ensure that the material used is appropriate. You can only install insulation within the wall cavity with specialist advice.",
     "Where the property is of concrete or precast concrete panel construction, some lenders may regard this as a non-standard form of construction. As a result, the availability of mortgage finance may be more limited than for traditionally constructed properties, and some lenders may decline to lend altogether. Lending criteria vary between mortgage providers and may depend on the specific construction type, its condition, and whether any approved repair or certification schemes have been carried out. You should make enquiries with your proposed lender or an independent mortgage broker at an early stage to confirm that satisfactory mortgage finance will be available before committing to the purchase."
    ]
   },
@@ -1077,7 +1071,8 @@
    "section": "D",
    "screen": "activity_property_roof",
    "phrases": [
-    "The main building has a combination of flat and pitched roof forms. The roof coverings comprise concrete, clay, natural, composite, mineral felt, rubber, fiberglass, single ply membrane, plastic, asphalt and polycarbonate, finished in tiles, sheets, slates and coatings."
+    "Roof type: The main roof is of pitched, flat and mansard construction formed with traditional cut timber and prefabricated trussed rafters structural members.",
+    "Roof cover: The roof covering is formed in clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, metal sheeting, mineral felt, rubber membrane and single-ply membrane."
    ]
   },
   {
@@ -1114,9 +1109,7 @@
    "section": "D",
    "screen": "activity_extended_wall",
    "phrases": [
-    "The external walls are constructed of cavity wall, cavity brick wall, solid wall, solid bounded brick wall and stud wall construction.",
-    "Externally, the main walls are fully rendered smooth with painted, pebble dash and mock tudor finishes.",
-    "The main walls are fully cladded with tiles, timber, weatherboarding, profile sheets, shingle plates, compressed flat panel and insulated cladding finishing."
+    "External walls: The external walls are constructed of solid brick, cavity brick, stone, timber frame, steel frame and rendered masonry construction."
    ]
   },
   {
@@ -1145,7 +1138,7 @@
    "section": "D",
    "screen": "activity_internal_wall",
    "phrases": [
-    "Internal walls are formed in stud, solid and lath and plaster partitions."
+    "Internal walls: Internal walls are formed in solid masonry, timber stud partitions and lath and plaster."
    ]
   },
   {
@@ -1166,7 +1159,7 @@
    "section": "D",
    "screen": "activity_construction_floor",
    "phrases": [
-    "The floors are mainly of suspended timber, solid, suspended beam and block and in situ-concrete construction."
+    "Floors: Floors are of solid concrete, suspended timber and beam and block construction."
    ]
   },
   {
@@ -1180,7 +1173,7 @@
    "section": "D",
    "screen": "activity_construction_window",
    "phrases": [
-    "The windows are fitted with uPVC, timber, aluminium and steel frames incorporating single, double and secondary glazing."
+    "Windows: Windows are fitted with timber, PVCu, aluminium and steel frames incorporating single, double, triple glazing and secondary glazing, where applicable."
    ]
   },
   {
@@ -1194,14 +1187,14 @@
    "section": "D",
    "screen": "activity_listed_building",
    "phrases": [
-    "The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
+    "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
    ]
   },
   {
    "section": "D",
    "screen": "activity_listed_building__listed_building",
    "phrases": [
-    "The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
+    "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
    ]
   },
   {
@@ -1215,14 +1208,7 @@
    "section": "D",
    "screen": "activity_energy_effiency",
    "phrases": [
-    "According to the available Energy Performance Certificate: Energy Efficiency Rating: sample detail. Potential Rating: sample detail. This information has not been independently verified."
-   ]
-  },
-  {
-   "section": "D",
-   "screen": "activity_energy_environment_impect",
-   "phrases": [
-    "Environmental Impact: Current sample detail Potential sample detail."
+    "Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: A. Potential Rating: A. This information has not been independently verified."
    ]
   },
   {
@@ -1236,8 +1222,7 @@
    "section": "D",
    "screen": "activity_other_service",
    "phrases": [
-    "The property has photovoltaic panels designed to produce electricity from sunlight installed on the roof slope(s).",
-    "The property has solar water heating panels installed on the roof slope(s)."
+    "Other services: The property is fitted with photovoltaic (solar PV) panels, solar water heating panels, an inverter and battery storage. Where renewable energy systems are present, your legal adviser should confirm ownership, maintenance obligations, guarantees and any agreements with electricity providers."
    ]
   },
   {

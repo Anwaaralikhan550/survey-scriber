@@ -102,78 +102,72 @@
           "order": 1,
           "fields": [
             {
-              "id": "label_construction_type",
-              "label": "Construction Type",
-              "type": "label"
-            },
-            {
-              "id": "ch1",
-              "label": "Traditional materials and techniques",
+              "id": "cb_a3_type",
+              "label": "Construction type",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
+              "id": "label_a3_construction_type",
+              "label": "Constructed using",
+              "type": "label"
+            },
+            {
+              "id": "a3_type_0_traditional_masonry",
+              "label": "traditional masonry",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_type_0_solid_wall",
               "label": "solid wall",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
+              "id": "a3_type_0_cavity_wall",
               "label": "cavity wall",
               "type": "checkbox"
             },
             {
-              "id": "ch4",
+              "id": "a3_type_0_timber_frame",
               "label": "timber frame",
               "type": "checkbox"
             },
             {
-              "id": "ch5",
+              "id": "a3_type_0_steel_frame",
               "label": "steel frame",
               "type": "checkbox"
             },
             {
-              "id": "ch6",
+              "id": "a3_type_0_concrete_wall",
               "label": "concrete wall",
               "type": "checkbox"
             },
             {
-              "id": "ch8",
+              "id": "a3_type_0_precast_concrete_panels",
               "label": "precast concrete panels",
               "type": "checkbox"
             },
             {
-              "id": "ch9",
+              "id": "a3_type_0_system_built",
               "label": "system-built",
               "type": "checkbox"
             },
             {
-              "id": "ch7",
+              "id": "a3_type_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etPropertyTypeOther",
+              "id": "a3_type_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch7",
+              "conditionalOn": "a3_type_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "android_material_design_spinner",
-              "label": "Property Type",
-              "type": "dropdown",
-              "options": [
-                "House",
-                "Flat",
-                "Bungalow",
-                "Other"
-              ]
-            },
-            {
-              "id": "etPropertyTypeOther1",
-              "label": "Property Type",
-              "type": "text"
+              "id": "cb_a3_visible",
+              "label": "Construction identified from visible inspection only",
+              "type": "checkbox"
             }
           ]
         },
@@ -226,128 +220,123 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_roof_type_3",
-              "label": "Roof Type",
+              "id": "cb_a3_roof_type",
+              "label": "Roof type",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a3_roof_form",
+              "label": "Main roof is of",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Flat",
+              "id": "a3_roof_type_0_pitched",
+              "label": "pitched",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Pitched",
+              "id": "a3_roof_type_0_flat",
+              "label": "flat",
               "type": "checkbox"
             },
             {
-              "id": "label_roof_material",
-              "label": "Roof Material",
+              "id": "a3_roof_type_0_mansard",
+              "label": "mansard",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a3_roof_structure",
+              "label": "Formed with",
               "type": "label"
             },
             {
-              "id": "ch8",
-              "label": "Concrete",
+              "id": "a3_roof_type_1_traditional_cut_timber",
+              "label": "traditional cut timber",
               "type": "checkbox"
             },
             {
-              "id": "ch9",
-              "label": "Clay",
+              "id": "a3_roof_type_1_prefabricated_trussed_rafters",
+              "label": "prefabricated trussed rafters",
               "type": "checkbox"
             },
             {
-              "id": "ch10",
-              "label": "Natural",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch11",
-              "label": "Composite",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch12",
-              "label": "Mineral felt",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch13",
-              "label": "Rubber",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch14",
-              "label": "Fiberglass",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch15",
-              "label": "Single ply membrane",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch_plastic",
-              "label": "Plastic",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch_asphalt",
-              "label": "Asphalt",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch_polycarbonate",
-              "label": "Polycarbonate",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch16",
+              "id": "a3_roof_type_1_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etCoveredWithOther",
+              "id": "a3_roof_type_1_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch16",
+              "conditionalOn": "a3_roof_type_1_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_cover_type",
-              "label": "Cover Type",
+              "id": "cb_a3_roof_cover",
+              "label": "Roof cover",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a3_roof_cover",
+              "label": "Roof covering formed in",
               "type": "label"
             },
             {
-              "id": "ch6",
-              "label": "Tiles",
+              "id": "a3_roof_cover_0_clay_tiles",
+              "label": "clay tiles",
               "type": "checkbox"
             },
             {
-              "id": "ch7",
-              "label": "Sheets",
+              "id": "a3_roof_cover_0_concrete_tiles",
+              "label": "concrete tiles",
               "type": "checkbox"
             },
             {
-              "id": "ch_slates",
-              "label": "Slates",
+              "id": "a3_roof_cover_0_natural_slate",
+              "label": "natural slate",
               "type": "checkbox"
             },
             {
-              "id": "ch_coatings",
-              "label": "Coatings",
+              "id": "a3_roof_cover_0_artificial_slate",
+              "label": "artificial slate",
               "type": "checkbox"
             },
             {
-              "id": "ch17",
+              "id": "a3_roof_cover_0_fibre_cement_slates",
+              "label": "fibre cement slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_roof_cover_0_metal_sheeting",
+              "label": "metal sheeting",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_roof_cover_0_mineral_felt",
+              "label": "mineral felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_roof_cover_0_rubber_membrane",
+              "label": "rubber membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_roof_cover_0_single_ply_membrane",
+              "label": "single-ply membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_roof_cover_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etCoveredTypeOther",
+              "id": "a3_roof_cover_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch17",
+              "conditionalOn": "a3_roof_cover_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -649,158 +638,55 @@
           "order": 6,
           "fields": [
             {
-              "id": "label_built_of",
-              "label": "Built Of",
+              "id": "cb_a3_ext_walls",
+              "label": "External walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a3_external_walls",
+              "label": "Constructed of",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Cavity wall",
+              "id": "a3_ext_walls_0_solid_brick",
+              "label": "solid brick",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Cavity brick wall",
+              "id": "a3_ext_walls_0_cavity_brick",
+              "label": "cavity brick",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "Solid wall",
+              "id": "a3_ext_walls_0_stone",
+              "label": "stone",
               "type": "checkbox"
             },
             {
-              "id": "ch4",
-              "label": "Solid bounded brick wall",
+              "id": "a3_ext_walls_0_timber_frame",
+              "label": "timber frame",
               "type": "checkbox"
             },
             {
-              "id": "ch5",
-              "label": "Stud wall",
+              "id": "a3_ext_walls_0_steel_frame",
+              "label": "steel frame",
               "type": "checkbox"
             },
             {
-              "id": "ch6",
+              "id": "a3_ext_walls_0_rendered_masonry",
+              "label": "rendered masonry",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_ext_walls_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etCoveredWithOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "ch6",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner",
-              "label": "Rendered",
-              "type": "dropdown",
-              "options": [
-                "Fully",
-                "Partially"
-              ]
-            },
-            {
-              "id": "android_material_design_spinner2",
-              "label": "Rendered Quality",
-              "type": "dropdown",
-              "options": [
-                "Smooth",
-                "Roughcast"
-              ]
-            },
-            {
-              "id": "label_finishes",
-              "label": "Finishes",
-              "type": "label"
-            },
-            {
-              "id": "ch7",
-              "label": "Painted",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch8",
-              "label": "Pebble dash",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch9",
-              "label": "Mock Tudor",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch10",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "etFinishesOtherNew",
+              "id": "a3_ext_walls_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch10",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "android_material_design_spinner4",
-              "label": "Cladding",
-              "type": "dropdown",
-              "options": [
-                "Fully",
-                "Partially"
-              ]
-            },
-            {
-              "id": "label_cladding_finishes",
-              "label": "Cladding Finishes",
-              "type": "label"
-            },
-            {
-              "id": "ch11",
-              "label": "Tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch12",
-              "label": "Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch13",
-              "label": "Weathered board",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch14",
-              "label": "Profile sheets",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch15",
-              "label": "Shingle plates",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch16",
-              "label": "Compressed flat panel",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch17",
-              "label": "Insulated cladding",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch18",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "etCladdingFinishesOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "ch18",
+              "conditionalOn": "a3_ext_walls_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -1094,35 +980,40 @@
           "order": 8,
           "fields": [
             {
-              "id": "label_partition_type",
-              "label": "Partition Type",
+              "id": "cb_a3_int_walls",
+              "label": "Internal walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a3_internal_walls",
+              "label": "Formed in",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Stud",
+              "id": "a3_int_walls_0_solid_masonry",
+              "label": "solid masonry",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Solid",
+              "id": "a3_int_walls_0_timber_stud_partitions",
+              "label": "timber stud partitions",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "Lath and plaster",
+              "id": "a3_int_walls_0_lath_and_plaster",
+              "label": "lath and plaster",
               "type": "checkbox"
             },
             {
-              "id": "ch4",
+              "id": "a3_int_walls_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etCoveredWithOther",
+              "id": "a3_int_walls_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch4",
+              "conditionalOn": "a3_int_walls_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -1325,49 +1216,40 @@
           "order": 10,
           "fields": [
             {
-              "id": "android_material_design_spinner",
-              "label": "Composition",
-              "type": "dropdown",
-              "options": [
-                "Mainly of",
-                "Of a mixture of"
-              ]
+              "id": "cb_a3_floors",
+              "label": "Floors",
+              "type": "checkbox"
             },
             {
-              "id": "label_built_with",
-              "label": "Construction",
+              "id": "label_a3_floors",
+              "label": "Floors are of",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Suspended timber",
+              "id": "a3_floors_0_solid_concrete",
+              "label": "solid concrete",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Solid",
+              "id": "a3_floors_0_suspended_timber",
+              "label": "suspended timber",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "Suspended Beam and Block",
+              "id": "a3_floors_0_beam_and_block",
+              "label": "beam and block",
               "type": "checkbox"
             },
             {
-              "id": "ch4",
-              "label": "In situ-concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "ch5",
+              "id": "a3_floors_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etCoveredWithOther",
+              "id": "a3_floors_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch5",
+              "conditionalOn": "a3_floors_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -1519,84 +1401,72 @@
           "order": 12,
           "fields": [
             {
-              "id": "android_material_design_spinner",
-              "label": "Composition",
-              "type": "dropdown",
-              "options": [
-                "Mainly of",
-                "A mixture of"
-              ]
+              "id": "cb_a3_windows",
+              "label": "Windows",
+              "type": "checkbox"
             },
             {
-              "id": "label_glazzed_type",
-              "label": "Glazing",
+              "id": "label_a3_window_frames",
+              "label": "Fitted with",
               "type": "label"
             },
             {
-              "id": "ch1",
-              "label": "Single",
+              "id": "a3_windows_0_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "ch2",
-              "label": "Double",
+              "id": "a3_windows_0_pvcu",
+              "label": "PVCu",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "Secondary",
+              "id": "a3_windows_0_aluminium",
+              "label": "aluminium",
               "type": "checkbox"
             },
             {
-              "id": "ch4",
+              "id": "a3_windows_0_steel",
+              "label": "steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_windows_0_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "etCoveredWithOther",
+              "id": "a3_windows_0_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "ch4",
+              "conditionalOn": "a3_windows_0_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_window_material",
-              "label": "Frames",
+              "id": "label_a3_glazing",
+              "label": "Incorporating",
               "type": "label"
             },
             {
-              "id": "ch5",
-              "label": "PVC",
+              "id": "a3_windows_1_single",
+              "label": "single",
               "type": "checkbox"
             },
             {
-              "id": "ch6",
-              "label": "Timber",
+              "id": "a3_windows_1_double",
+              "label": "double",
               "type": "checkbox"
             },
             {
-              "id": "ch7",
-              "label": "Aluminium",
+              "id": "a3_windows_1_triple_glazing",
+              "label": "triple glazing",
               "type": "checkbox"
             },
             {
-              "id": "ch8",
-              "label": "Steel",
+              "id": "a3_windows_1_secondary_glazing",
+              "label": "secondary glazing",
               "type": "checkbox"
-            },
-            {
-              "id": "ch9",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "etWindowMaterialOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "ch9",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -1688,7 +1558,7 @@
           "fields": [
             {
               "id": "android_material_design_spinner",
-              "label": "Status",
+              "label": "Listed building",
               "type": "dropdown",
               "options": [
                 "Yes",
@@ -1706,7 +1576,7 @@
           "fields": [
             {
               "id": "android_material_design_spinner",
-              "label": "Status",
+              "label": "Listed building",
               "type": "dropdown",
               "options": [
                 "Yes",
@@ -1741,43 +1611,32 @@
           "order": 16,
           "fields": [
             {
-              "id": "label_efficiency",
-              "label": "Efficiency",
-              "type": "label"
-            },
-            {
               "id": "android_material_design_spinner",
-              "label": "Current",
-              "type": "text"
+              "label": "Energy Efficiency Rating",
+              "type": "dropdown",
+              "options": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G"
+              ]
             },
             {
               "id": "android_material_design_spinner2",
-              "label": "Potential",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_energy_environment_impect",
-          "title": "Environmental Impact",
-          "type": "screen",
-          "parentId": null,
-          "order": 17,
-          "fields": [
-            {
-              "id": "label_environmental_impact",
-              "label": "Environmental Impact",
-              "type": "label"
-            },
-            {
-              "id": "android_material_design_spinner",
-              "label": "Current",
-              "type": "text"
-            },
-            {
-              "id": "android_material_design_spinner2",
-              "label": "Potential",
-              "type": "text"
+              "label": "Potential Rating",
+              "type": "dropdown",
+              "options": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "F",
+                "G"
+              ]
             }
           ]
         },
@@ -1807,14 +1666,47 @@
           "order": 18,
           "fields": [
             {
+              "id": "cb_a3_services",
+              "label": "Other services present",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a3_services",
+              "label": "Renewable energy installations",
+              "type": "label"
+            },
+            {
               "id": "ch1",
-              "label": "Solar Electricity",
+              "label": "photovoltaic (solar PV) panels",
               "type": "checkbox"
             },
             {
               "id": "ch2",
-              "label": "Solar Hot Water",
+              "label": "solar water heating panels",
               "type": "checkbox"
+            },
+            {
+              "id": "a3_os_inverter",
+              "label": "an inverter",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_os_battery",
+              "label": "battery storage",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_os_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "a3_os_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "a3_os_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },

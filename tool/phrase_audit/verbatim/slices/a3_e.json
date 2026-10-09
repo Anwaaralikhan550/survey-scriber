@@ -1,0 +1,814 @@
+[
+  {
+    "screen": "activity_property_construction",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_type",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_TYPE}",
+        "text": "Type: The property is believed to be constructed using {A3_CONSTRUCTION_TYPE} construction.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A3_CONSTRUCTION_TYPE}",
+            "options": [
+              [
+                "a3_type_0_traditional_masonry",
+                "traditional masonry"
+              ],
+              [
+                "a3_type_0_solid_wall",
+                "solid wall"
+              ],
+              [
+                "a3_type_0_cavity_wall",
+                "cavity wall"
+              ],
+              [
+                "a3_type_0_timber_frame",
+                "timber frame"
+              ],
+              [
+                "a3_type_0_steel_frame",
+                "steel frame"
+              ],
+              [
+                "a3_type_0_concrete_wall",
+                "concrete wall"
+              ],
+              [
+                "a3_type_0_precast_concrete_panels",
+                "precast concrete panels"
+              ],
+              [
+                "a3_type_0_system_built",
+                "system-built"
+              ]
+            ],
+            "pdf_options": [
+              "traditional masonry",
+              "solid wall",
+              "cavity wall",
+              "timber frame",
+              "steel frame",
+              "concrete wall",
+              "precast concrete panels",
+              "system-built"
+            ],
+            "label": "Constructed using",
+            "other": [
+              "a3_type_0_other",
+              "a3_type_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Type: The property is believed to be constructed using traditional masonry, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels, system-built, other construction."
+        ],
+        "when": [
+          "cb_a3_type",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a3_type",
+            "label": "Construction type",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "a3_visible",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_VISIBLE_ONLY}",
+        "text": "Construction has been identified from visible inspection only and has not been confirmed by opening concealed elements.",
+        "tokens": [],
+        "when": [
+          "cb_a3_visible",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a3_visible",
+            "label": "Construction identified from visible inspection only",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "a3_modern",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_MODERN_BUILDING_DESIGN}",
+        "text": "Modern Building Design: The building is believed to be of a modern design, framed externally with timber, steel, or other materials, but most of the framework is concealed on both sides by cladding. The durability of the structure is dependent upon the care taken during construction. For this reason, I cannot comment on the condition of the concealed structure, given the limited scope and technique of the inspection. Please be aware that any alteration to this type of building will require specialist advice from a qualified person. The exterior of the property must be adequately maintained to prevent water penetration. It is also important to reduce the risk of condensation that might encourage damage or weaken concealed components. When improving insulation, you should ensure that the material used is appropriate. You can only install insulation within the wall cavity with specialist advice.",
+        "tokens": [],
+        "when": [
+          "a3_type_0_timber_frame",
+          "true"
+        ],
+        "when_any": [
+          [
+            "a3_type_0_steel_frame",
+            "true"
+          ]
+        ]
+      },
+      {
+        "id": "a3_concrete",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_CONCRETE_ADVISORY}",
+        "text": "Where the property is of concrete or precast concrete panel construction, some lenders may regard this as a non-standard form of construction. As a result, the availability of mortgage finance may be more limited than for traditionally constructed properties, and some lenders may decline to lend altogether. Lending criteria vary between mortgage providers and may depend on the specific construction type, its condition, and whether any approved repair or certification schemes have been carried out. You should make enquiries with your proposed lender or an independent mortgage broker at an early stage to confirm that satisfactory mortgage finance will be available before committing to the purchase.",
+        "tokens": [],
+        "when": [
+          "a3_type_0_concrete_wall",
+          "true"
+        ],
+        "when_any": [
+          [
+            "a3_type_0_precast_concrete_panels",
+            "true"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_roof",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_roof_type",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_ROOF_TYPE}",
+        "text": "Roof type: The main roof is of {A3_ROOF_FORM} construction formed with {A3_ROOF_STRUCTURE} structural members.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A3_ROOF_FORM}",
+            "options": [
+              [
+                "a3_roof_type_0_pitched",
+                "pitched"
+              ],
+              [
+                "a3_roof_type_0_flat",
+                "flat"
+              ],
+              [
+                "a3_roof_type_0_mansard",
+                "mansard"
+              ]
+            ],
+            "pdf_options": [
+              "pitched",
+              "flat",
+              "mansard"
+            ],
+            "label": "Main roof is of"
+          },
+          {
+            "kind": "checks",
+            "token": "{A3_ROOF_STRUCTURE}",
+            "options": [
+              [
+                "a3_roof_type_1_traditional_cut_timber",
+                "traditional cut timber"
+              ],
+              [
+                "a3_roof_type_1_prefabricated_trussed_rafters",
+                "prefabricated trussed rafters"
+              ]
+            ],
+            "pdf_options": [
+              "traditional cut timber",
+              "prefabricated trussed rafters"
+            ],
+            "label": "Formed with",
+            "other": [
+              "a3_roof_type_1_other",
+              "a3_roof_type_1_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Roof type: The main roof is of pitched, flat, mansard construction formed with traditional cut timber, prefabricated trussed rafters, other structural members."
+        ],
+        "when": [
+          "cb_a3_roof_type",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a3_roof_type",
+            "label": "Roof type",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "a3_roof_cover",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_ROOF_COVER}",
+        "text": "Roof cover: The roof covering is formed in {A3_ROOF_COVER}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A3_ROOF_COVER}",
+            "options": [
+              [
+                "a3_roof_cover_0_clay_tiles",
+                "clay tiles"
+              ],
+              [
+                "a3_roof_cover_0_concrete_tiles",
+                "concrete tiles"
+              ],
+              [
+                "a3_roof_cover_0_natural_slate",
+                "natural slate"
+              ],
+              [
+                "a3_roof_cover_0_artificial_slate",
+                "artificial slate"
+              ],
+              [
+                "a3_roof_cover_0_fibre_cement_slates",
+                "fibre cement slates"
+              ],
+              [
+                "a3_roof_cover_0_metal_sheeting",
+                "metal sheeting"
+              ],
+              [
+                "a3_roof_cover_0_mineral_felt",
+                "mineral felt"
+              ],
+              [
+                "a3_roof_cover_0_rubber_membrane",
+                "rubber membrane"
+              ],
+              [
+                "a3_roof_cover_0_single_ply_membrane",
+                "single-ply membrane"
+              ]
+            ],
+            "pdf_options": [
+              "clay tiles",
+              "concrete tiles",
+              "natural slate",
+              "artificial slate",
+              "fibre cement slates",
+              "metal sheeting",
+              "mineral felt",
+              "rubber membrane",
+              "single-ply membrane"
+            ],
+            "label": "Roof covering formed in",
+            "other": [
+              "a3_roof_cover_0_other",
+              "a3_roof_cover_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Roof cover: The roof covering is formed in clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, metal sheeting, mineral felt, rubber membrane, single-ply membrane, other."
+        ],
+        "when": [
+          "cb_a3_roof_cover",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a3_roof_cover",
+            "label": "Roof cover",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_extended_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_ext_walls",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_EXTERNAL_WALLS}",
+        "text": "External walls: The external walls are constructed of {A3_EXTERNAL_WALLS} construction.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A3_EXTERNAL_WALLS}",
+            "options": [
+              [
+                "a3_ext_walls_0_solid_brick",
+                "solid brick"
+              ],
+              [
+                "a3_ext_walls_0_cavity_brick",
+                "cavity brick"
+              ],
+              [
+                "a3_ext_walls_0_stone",
+                "stone"
+              ],
+              [
+                "a3_ext_walls_0_timber_frame",
+                "timber frame"
+              ],
+              [
+                "a3_ext_walls_0_steel_frame",
+                "steel frame"
+              ],
+              [
+                "a3_ext_walls_0_rendered_masonry",
+                "rendered masonry"
+              ]
+            ],
+            "pdf_options": [
+              "solid brick",
+              "cavity brick",
+              "stone",
+              "timber frame",
+              "steel frame",
+              "rendered masonry"
+            ],
+            "label": "Constructed of",
+            "other": [
+              "a3_ext_walls_0_other",
+              "a3_ext_walls_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "External walls: The external walls are constructed of solid brick, cavity brick, stone, timber frame, steel frame, rendered masonry, other construction."
+        ],
+        "when": [
+          "cb_a3_ext_walls",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a3_ext_walls",
+            "label": "External walls",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_internal_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_int_walls",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_INTERNAL_WALLS}",
+        "text": "Internal walls: Internal walls are formed in {A3_INTERNAL_WALLS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A3_INTERNAL_WALLS}",
+            "options": [
+              [
+                "a3_int_walls_0_solid_masonry",
+                "solid masonry"
+              ],
+              [
+                "a3_int_walls_0_timber_stud_partitions",
+                "timber stud partitions"
+              ],
+              [
+                "a3_int_walls_0_lath_and_plaster",
+                "lath and plaster"
+              ]
+            ],
+            "pdf_options": [
+              "solid masonry",
+              "timber stud partitions",
+              "lath and plaster"
+            ],
+            "label": "Formed in",
+            "other": [
+              "a3_int_walls_0_other",
+              "a3_int_walls_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Internal walls: Internal walls are formed in solid masonry, timber stud partitions, lath and plaster, other."
+        ],
+        "when": [
+          "cb_a3_int_walls",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a3_int_walls",
+            "label": "Internal walls",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_construction_floor",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_floors",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_FLOORS}",
+        "text": "Floors: Floors are of {A3_FLOORS} construction.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A3_FLOORS}",
+            "options": [
+              [
+                "a3_floors_0_solid_concrete",
+                "solid concrete"
+              ],
+              [
+                "a3_floors_0_suspended_timber",
+                "suspended timber"
+              ],
+              [
+                "a3_floors_0_beam_and_block",
+                "beam and block"
+              ]
+            ],
+            "pdf_options": [
+              "solid concrete",
+              "suspended timber",
+              "beam and block"
+            ],
+            "label": "Floors are of",
+            "other": [
+              "a3_floors_0_other",
+              "a3_floors_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Floors: Floors are of solid concrete, suspended timber, beam and block, other construction."
+        ],
+        "when": [
+          "cb_a3_floors",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a3_floors",
+            "label": "Floors",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_construction_window",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_windows",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_WINDOWS}",
+        "text": "Windows: Windows are fitted with {A3_WINDOW_FRAMES} frames incorporating {A3_GLAZING}, where applicable.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A3_WINDOW_FRAMES}",
+            "options": [
+              [
+                "a3_windows_0_timber",
+                "timber"
+              ],
+              [
+                "a3_windows_0_pvcu",
+                "PVCu"
+              ],
+              [
+                "a3_windows_0_aluminium",
+                "aluminium"
+              ],
+              [
+                "a3_windows_0_steel",
+                "steel"
+              ]
+            ],
+            "pdf_options": [
+              "timber",
+              "PVCu",
+              "aluminium",
+              "steel"
+            ],
+            "label": "Fitted with",
+            "other": [
+              "a3_windows_0_other",
+              "a3_windows_0_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{A3_GLAZING}",
+            "options": [
+              [
+                "a3_windows_1_single",
+                "single"
+              ],
+              [
+                "a3_windows_1_double",
+                "double"
+              ],
+              [
+                "a3_windows_1_triple_glazing",
+                "triple glazing"
+              ],
+              [
+                "a3_windows_1_secondary_glazing",
+                "secondary glazing"
+              ]
+            ],
+            "pdf_options": [
+              "single",
+              "double",
+              "triple glazing",
+              "secondary glazing"
+            ],
+            "label": "Incorporating"
+          }
+        ],
+        "pdf": [
+          "Windows: Windows are fitted with timber, PVCu, aluminium, steel, other frames incorporating single, double, triple glazing, secondary glazing, where applicable."
+        ],
+        "when": [
+          "cb_a3_windows",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a3_windows",
+            "label": "Windows",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_listed_building__listed_building",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_listed",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_LISTED_BUILDING}",
+        "text": "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner",
+          "Yes"
+        ],
+        "extra_fields": [
+          {
+            "id": "android_material_design_spinner",
+            "label": "Listed building",
+            "type": "dropdown",
+            "options": [
+              "Yes",
+              "No"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_listed_building",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_listed_alias",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_LISTED_BUILDING}",
+        "text": "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner",
+          "Yes"
+        ],
+        "extra_fields": [
+          {
+            "id": "android_material_design_spinner",
+            "label": "Listed building",
+            "type": "dropdown",
+            "options": [
+              "Yes",
+              "No"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_energy_effiency",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_energy",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_ENERGY_PERFORMANCE}",
+        "text": "Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: {A3_EE_RATING}. Potential Rating: {A3_EE_POTENTIAL}. This information has not been independently verified.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{A3_EE_RATING}",
+            "dropdown": "android_material_design_spinner",
+            "field_label": "Energy Efficiency Rating",
+            "dropdown_options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G"
+            ],
+            "pdf_options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G"
+            ]
+          },
+          {
+            "kind": "dropdown",
+            "token": "{A3_EE_POTENTIAL}",
+            "dropdown": "android_material_design_spinner2",
+            "field_label": "Potential Rating",
+            "dropdown_options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G"
+            ],
+            "pdf_options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F",
+              "G"
+            ]
+          }
+        ],
+        "pdf": [
+          "Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: A, B, C, D, E, F, or G.",
+          "Potential Rating: A, B, C, D, E, F, or G."
+        ],
+        "when": [
+          "android_material_design_spinner",
+          "A"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner",
+            "B"
+          ],
+          [
+            "android_material_design_spinner",
+            "C"
+          ],
+          [
+            "android_material_design_spinner",
+            "D"
+          ],
+          [
+            "android_material_design_spinner",
+            "E"
+          ],
+          [
+            "android_material_design_spinner",
+            "F"
+          ],
+          [
+            "android_material_design_spinner",
+            "G"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_other_service",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a3_services",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{A3_OTHER_SERVICES}",
+        "text": "Other services: The property is fitted with {A3_SERVICES}. Where renewable energy systems are present, your legal adviser should confirm ownership, maintenance obligations, guarantees and any agreements with electricity providers.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A3_SERVICES}",
+            "options": [
+              [
+                "ch1",
+                "photovoltaic (solar PV) panels"
+              ],
+              [
+                "ch2",
+                "solar water heating panels"
+              ],
+              [
+                "a3_os_inverter",
+                "an inverter"
+              ],
+              [
+                "a3_os_battery",
+                "battery storage"
+              ]
+            ],
+            "pdf_options": [
+              "photovoltaic (solar PV) panels",
+              "solar water heating panels",
+              "an inverter",
+              "battery storage"
+            ],
+            "label": "Renewable energy installations",
+            "other": [
+              "a3_os_other",
+              "a3_os_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Other services: The property is fitted with photovoltaic (solar PV) panels, solar water heating panels, an inverter, battery storage, other renewable energy installations."
+        ],
+        "when": [
+          "cb_a3_services",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a3_services",
+            "label": "Other services present",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -24,23 +24,6 @@ void main() {
     expect(phrases, isEmpty);
   });
 
-  test('mixed roof selections produce a coherent composite description', () {
-    final phrases = engine.buildPhrases(
-      'activity_property_roof',
-      {
-        'ch1': 'true',
-        'ch2': 'true',
-        'ch8': 'true',
-        'ch9': 'true',
-        'ch6': 'true',
-        'ch7': 'true',
-      },
-    );
-
-    expect(phrases.single, contains('combination of flat and pitched'));
-    expect(phrases.single, contains('coverings comprise concrete and clay'));
-    expect(phrases.single, isNot(contains('concrete and clay tiles and sheets')));
-  });
 
   test('other area without description does not leak a raw option', () {
     expect(
@@ -80,14 +63,6 @@ void main() {
     expect(phrase, contains('revisit the area at different times'));
   });
 
-  test('not-listed response uses qualified wording', () {
-    final phrase = engine.buildPhrases(
-      'activity_listed_building',
-      {'android_material_design_spinner': 'No'},
-    ).single;
-
-    expect(phrase, 'The property is not understood to be a listed building.');
-  });
 
 
   test('non-numeric wall thickness is suppressed', () {
