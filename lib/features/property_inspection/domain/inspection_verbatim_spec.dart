@@ -8542,6 +8542,155 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: '1',
     whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
   ),
+  VerbatimRule(
+    'g3_stopcock',
+    'activity_services_water_main_water',
+    '{G_WATER}',
+    '{G3_STOPCOCK}',
+    [
+      VerbatimToken(
+        '{WATER_STOPCOCK_LOCATION}',
+        options: {
+          'g3s_under_the_stairs': 'under the stairs',
+          'g3s_under_the_kitchen_sink': 'under the kitchen sink',
+          'g3s_in_the_bathroom': 'in the bathroom',
+          'g3s_in_the_hall': 'in the hall',
+          'g3s_in_the_garage': 'in the garage',
+        },
+        otherCheckbox: 'g3s_other',
+        otherText: 'g3s_other_text',
+        pdfOptions: ['under the stairs', 'under the kitchen sink', 'in the bathroom', 'in the hall', 'in the garage'],
+      ),
+    ],
+    pdf:
+        'The stopcock within the property is located under the stairs, under the kitchen sink, in the bathroom, in the hall, in the garage, other.',
+    whenField: 'actv_g3_stopcock',
+    whenValue: 'Stopcock found',
+  ),
+  VerbatimRule(
+    'g3_not_found',
+    'activity_services_water_main_water',
+    '{G_WATER}',
+    '{G3_STOPCOCK_NOT_FOUND}',
+    [
+    ],
+    whenField: 'actv_g3_stopcock',
+    whenValue: 'Not found',
+  ),
+  VerbatimRule(
+    'g3_lead',
+    'activity_services_water_main_water',
+    '{G_WATER}',
+    '{G3_LEAD_RISING}',
+    [
+    ],
+    whenField: 'cb_lead_rising',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g3_tank',
+    'activity_services_water_water_tank',
+    '{G_WATER}',
+    '{G3_WATER_TANK}',
+    [
+      VerbatimToken(
+        '{WATER_TANK_LOCATION}',
+        options: {
+          'cb_roof_space': 'roof space',
+          'cb_airing_cupboard': 'airing cupboard',
+          'cb_kitchen': 'kitchen',
+        },
+        otherCheckbox: 'cb_other_289',
+        otherText: 'et_other_442',
+        pdfOptions: ['roof space', 'airing cupboard', 'kitchen'],
+      ),
+      VerbatimToken(
+        '{WATER_TANK_MATERIAL}',
+        options: {
+          'cb_plastic': 'plastic',
+          'cb_galvanised_steel': 'galvanised steel',
+          'cb_asbestos': 'asbestos cement',
+        },
+        otherCheckbox: 'cb_other_640',
+        otherText: 'et_other_643',
+        pdfOptions: ['plastic', 'galvanised steel', 'asbestos cement'],
+      ),
+      VerbatimToken(
+        '{WATER_TANK_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Reasonable', 'Fair', 'Poor'],
+        lower: true,
+        pdfOptions: ['reasonable', 'fair', 'poor'],
+      ),
+      VerbatimToken(
+        '{WATER_TANK_INSULATION}',
+        dropdown: 'actv_g3_tank_insulation',
+        dropdownOptions: ['Adequately insulated', 'Inadequately insulated'],
+        lower: true,
+        pdfOptions: ['adequately insulated', 'inadequately insulated'],
+      ),
+    ],
+    pdf:
+        'Water tank: A cold-water storage tank located in the roof space, airing cupboard, kitchen, other and is constructed of plastic, galvanised steel, asbestos cement, other.',
+    pdfMore: [
+      'It appeared to be in reasonable, fair, poor condition.',
+      'The visible tank and associated pipework were adequately insulated, inadequately insulated.',
+    ],
+  ),
+  VerbatimRule(
+    'g3_inadequate',
+    'activity_services_water_water_tank',
+    '{G_WATER}',
+    '{G3_INADEQUATE_INSULATION}',
+    [
+    ],
+    whenField: 'actv_g3_tank_insulation',
+    whenValue: 'Inadequately insulated',
+  ),
+  VerbatimRule(
+    'g3_damaged',
+    'activity_services_water_repair_main_screen',
+    '{G_WATER}',
+    '{G3_DAMAGED_TANK}',
+    [
+      VerbatimToken(
+        '{WATER_TANK_DEFECT}',
+        options: {
+          'g3d_damaged': 'damaged',
+          'g3d_not_adequately_supported': 'not adequately supported',
+          'g3d_leaking': 'leaking',
+          'g3d_overflowing': 'overflowing',
+        },
+        otherCheckbox: 'g3d_other',
+        otherText: 'g3d_other_text',
+        pdfOptions: ['damaged', 'not adequately supported', 'leaking', 'overflowing'],
+      ),
+    ],
+    pdf:
+        'Damaged tank: The cold-water storage tank is damaged, not adequately supported, leaking, overflowing, other.',
+    whenField: 'cb_g3_damaged_tank',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g3_lid',
+    'activity_services_water_repair_main_screen',
+    '{G_WATER}',
+    '{G3_MISSING_LID}',
+    [
+    ],
+    whenField: 'cb_no_lid_over_tank',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g3_asbestos',
+    'activity_services_water_repair_main_screen',
+    '{G_WATER}',
+    '{G3_ASBESTOS_TANK}',
+    [
+    ],
+    whenField: 'cb_asbestos_material',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

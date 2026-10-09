@@ -5845,27 +5845,73 @@
           "order": 1,
           "fields": [
             {
-              "id": "cb_stopcock_found",
-              "label": "Stopcock Found",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_stopcok_location",
-              "label": "Stopcok Location",
+              "id": "actv_g3_stopcock",
+              "label": "Stopcock",
               "type": "dropdown",
               "options": [
-                "Under the kitchen sink",
-                "In the bathroom",
-                "In the hall",
-                "In the garage",
-                "Other"
-              ],
-              "conditionalOn": "cb_stopcock_found",
+                "Stopcock found",
+                "Not found"
+              ]
+            },
+            {
+              "id": "label_water_stopcock_location",
+              "label": "Stopcock located",
+              "type": "label",
+              "conditionalOn": "actv_g3_stopcock=Stopcock found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g3s_under_the_stairs",
+              "label": "under the stairs",
+              "type": "checkbox",
+              "conditionalOn": "actv_g3_stopcock=Stopcock found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g3s_under_the_kitchen_sink",
+              "label": "under the kitchen sink",
+              "type": "checkbox",
+              "conditionalOn": "actv_g3_stopcock=Stopcock found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g3s_in_the_bathroom",
+              "label": "in the bathroom",
+              "type": "checkbox",
+              "conditionalOn": "actv_g3_stopcock=Stopcock found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g3s_in_the_hall",
+              "label": "in the hall",
+              "type": "checkbox",
+              "conditionalOn": "actv_g3_stopcock=Stopcock found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g3s_in_the_garage",
+              "label": "in the garage",
+              "type": "checkbox",
+              "conditionalOn": "actv_g3_stopcock=Stopcock found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g3s_other",
+              "label": "Other",
+              "type": "checkbox",
+              "conditionalOn": "actv_g3_stopcock=Stopcock found",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "g3s_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "actv_g3_stopcock=Stopcock found&g3s_other",
               "conditionalMode": "show"
             },
             {
               "id": "cb_lead_rising",
-              "label": "Lead Rising",
+              "label": "Lead rising",
               "type": "checkbox"
             }
           ]
@@ -7213,20 +7259,6 @@
           ]
         },
         {
-          "id": "activity_services_water_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_g3_water_91",
-          "order": 5,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
           "id": "activity_services_shared_services_not_inspected",
           "title": "Not Inspected",
           "type": "screen",
@@ -7297,36 +7329,6 @@
           ]
         },
         {
-          "id": "activity_services_water_disused_tank",
-          "title": "Disused water tank",
-          "type": "screen",
-          "parentId": "group_g3_water_91",
-          "order": 2,
-          "fields": [
-            {
-              "id": "actv_disused_tank_location",
-              "label": "Disused Tank Location",
-              "type": "dropdown",
-              "options": [
-                "The roof space",
-                "Airing cupboard",
-                "Other"
-              ]
-            },
-            {
-              "id": "actv_tank_formed_in",
-              "label": "Disused Tank Location",
-              "type": "dropdown",
-              "options": [
-                "Plastic",
-                "Steel",
-                "Asbestos",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
           "id": "activity_services_water_water_tank",
           "title": "Water Tank",
           "type": "screen",
@@ -7335,22 +7337,22 @@
           "fields": [
             {
               "id": "label_water_tank_location",
-              "label": "Cold Water Tank Location",
+              "label": "Cold water tank location",
               "type": "label"
             },
             {
               "id": "cb_roof_space",
-              "label": "Roof space",
+              "label": "roof space",
               "type": "checkbox"
             },
             {
               "id": "cb_airing_cupboard",
-              "label": "Airing cupboard",
+              "label": "airing cupboard",
               "type": "checkbox"
             },
             {
               "id": "cb_kitchen",
-              "label": "Kitchen",
+              "label": "kitchen",
               "type": "checkbox"
             },
             {
@@ -7363,26 +7365,27 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_289",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "label_water_tank_material",
-              "label": "Cold Water Tank Material",
+              "label": "Cold water tank material",
               "type": "label"
             },
             {
               "id": "cb_plastic",
-              "label": "Plastic",
+              "label": "plastic",
               "type": "checkbox"
             },
             {
-              "id": "cb_galvanised_metal",
-              "label": "Galvanised metal",
+              "id": "cb_galvanised_steel",
+              "label": "galvanised steel",
               "type": "checkbox"
             },
             {
               "id": "cb_asbestos",
-              "label": "Asbestos",
+              "label": "asbestos cement",
               "type": "checkbox"
             },
             {
@@ -7395,34 +7398,26 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_640",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "actv_condition",
-              "label": "Other",
+              "label": "Tank condition",
               "type": "dropdown",
               "options": [
                 "Reasonable",
-                "Reasonable with repair",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor"
               ]
-            }
-          ]
-        },
-        {
-          "id": "activity_services_water_insulation",
-          "title": "Insulation",
-          "type": "screen",
-          "parentId": "group_g3_water_91",
-          "order": 4,
-          "fields": [
+            },
             {
-              "id": "actv_status",
-              "label": "Status",
+              "id": "actv_g3_tank_insulation",
+              "label": "Tank and pipework insulation",
               "type": "dropdown",
               "options": [
-                "Ok",
-                "Inadequate"
+                "Adequately insulated",
+                "Inadequately insulated"
               ]
             }
           ]
@@ -7997,55 +7992,56 @@
           "order": 9999,
           "fields": [
             {
+              "id": "cb_g3_damaged_tank",
+              "label": "Damaged tank",
+              "type": "checkbox"
+            },
+            {
               "id": "label_water_tank_defect",
-              "label": "Water Tank Defects",
+              "label": "Tank defect",
               "type": "label"
             },
             {
-              "id": "cb_damaged",
-              "label": "Damaged",
+              "id": "g3d_damaged",
+              "label": "damaged",
               "type": "checkbox"
             },
             {
-              "id": "cb_not_properly_supported",
-              "label": "Not properly supported",
+              "id": "g3d_not_adequately_supported",
+              "label": "not adequately supported",
               "type": "checkbox"
             },
             {
-              "id": "cb_leaking",
-              "label": "Leaking",
+              "id": "g3d_leaking",
+              "label": "leaking",
               "type": "checkbox"
             },
             {
-              "id": "cb_overflowing",
-              "label": "Overflowing",
+              "id": "g3d_overflowing",
+              "label": "overflowing",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_850",
+              "id": "g3d_other",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_567",
+              "id": "g3d_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_850",
+              "conditionalOn": "g3d_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "cb_no_lid_over_tank",
-              "label": "No Lid Over Tank",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_poorly_fitted_lid",
-              "label": "Poorly Fitted Lid",
+              "label": "Missing lid",
               "type": "checkbox"
             },
             {
               "id": "cb_asbestos_material",
-              "label": "Asbestos Material",
+              "label": "Asbestos cement tank",
               "type": "checkbox"
             }
           ]
@@ -8105,157 +8101,6 @@
               "id": "cb_poor_insulation",
               "label": "Poor insulation",
               "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_water_repair_asbestos",
-          "title": "Asbestos Repair",
-          "type": "screen",
-          "parentId": "activity_services_water",
-          "order": 520,
-          "fields": [
-            {
-              "id": "label_defect_60",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_not_properly_supported",
-              "label": "Not properly supported",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_overflowing",
-              "label": "Overflowing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_358",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_883",
-              "label": "Other (specify)",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_water_repair_cover_screen",
-          "title": "Cover Repair",
-          "type": "screen",
-          "parentId": "activity_services_water",
-          "order": 521,
-          "fields": [
-            {
-              "id": "label_defect_61",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_not_properly_supported",
-              "label": "Not properly supported",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_overflowing",
-              "label": "Overflowing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_750",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_704",
-              "label": "Other (specify)",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_water_repair_water_tank_screen",
-          "title": "Water Tank Repair",
-          "type": "screen",
-          "parentId": "activity_services_water",
-          "order": 522,
-          "fields": [
-            {
-              "id": "label_defect_62",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_not_properly_supported",
-              "label": "Not properly supported",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_leaking",
-              "label": "Leaking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_overflowing",
-              "label": "Overflowing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_635",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_615",
-              "label": "Other (specify)",
-              "type": "text"
-            }
-          ]
-        },
-        {
-          "id": "services_water_insulation",
-          "title": "Water Insulation",
-          "type": "screen",
-          "parentId": "activity_services_water",
-          "order": 523,
-          "fields": [
-            {
-              "id": "actv_status",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Good",
-                "Poor",
-                "Not applicable"
-              ]
             }
           ]
         }

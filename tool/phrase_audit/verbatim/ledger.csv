@@ -1393,36 +1393,36 @@ f23beb7186,G2,"Where there is any doubt regarding the condition, installation or
 c227dbff4b,G2,"Old tank: Although I could see no problems with the existing tank, it is older, has a single skin (modern ones have a double skin) and no secondary containment.",EXACT,{G_GAS_AND_OIL}::{G2_OLD_TANK},100,DONE
 426ec07331,G2,"If your property is close to a stream or watercourse, when the tank is replaced, you will have to meet the current requirements.",EXACT,{G_GAS_AND_OIL}::{G2_OLD_TANK},100,DONE
 acaa3c3201,G2,"If you want to be sure, you should ask an appropriately qualified person to inspect the oil installation system now.",EXACT,{G_GAS_AND_OIL}::{G2_OLD_TANK},100,DONE
-f0de8ccee8,G3,Stopcock found: There is an independent mains water supply to the property.,ADD,{G_WATER}::{LEAD_RISING},50,OPEN
-8cb9cdf3b3,G3,"The stopcock within the property is located under the stairs, under the kitchen sink, in the bathroom, in the hall, in the garage, other.",MENU,,0,UNVERIFIED
-6857e519c9,G3,Visible pipework and fittings were inspected where accessible.,ADD,{G_WATER}::{STANDARD_TEXT},70,OPEN
-29f2d48002,G3,The water installation was not pressure assessed.,FIX,{G_WATER}::{NOT_INSPECTED},74,OPEN
-e906f4a3a4,G3,Not found: There is an independent mains water supply to the property.,ADD,{G_WATER}::{LEAD_RISING},50,OPEN
-3309890c83,G3,I did not find the water stopcock within the property.,ADD,{G_WATER}::{STOPCOCK_FOUND},51,OPEN
-829941ce59,G3,"Please ask the vendor about the location of the water stopcock, as you must know where it is located.",ADD,{G_WATER}::{STOPCOCK_NOT_FOUND},53,OPEN
+f0de8ccee8,G3,Stopcock found: There is an independent mains water supply to the property.,EXACT,{G_WATER}::{G3_STOPCOCK_NOT_FOUND},100,DONE
+8cb9cdf3b3,G3,"The stopcock within the property is located under the stairs, under the kitchen sink, in the bathroom, in the hall, in the garage, other.",MENU,,0,VERIFIED
+6857e519c9,G3,Visible pipework and fittings were inspected where accessible.,EXACT,{G_WATER}::{G3_STOPCOCK},100,DONE
+29f2d48002,G3,The water installation was not pressure assessed.,EXACT,{G_WATER}::{G3_STOPCOCK},100,DONE
+e906f4a3a4,G3,Not found: There is an independent mains water supply to the property.,EXACT,{G_WATER}::{G3_STOPCOCK_NOT_FOUND},100,DONE
+3309890c83,G3,I did not find the water stopcock within the property.,EXACT,{G_WATER}::{G3_STOPCOCK_NOT_FOUND},100,DONE
+829941ce59,G3,"Please ask the vendor about the location of the water stopcock, as you must know where it is located.",EXACT,{G_WATER}::{G3_STOPCOCK_NOT_FOUND},100,DONE
 e170a5f29b,G3,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
-957861a151,G3,Lead rising: The visible incoming water supply pipe is lead.,ADD,{G_WATER}::{LEAD_RISING},49,OPEN
-516f6d9e1d,G3,"Lead pipework was commonly used before 1970 and may allow small amounts of lead to enter the drinking water, particularly in soft water areas, presenting a potential health risk (see Section J3 - Risks).",UNRESOLVED,{G_WATER}::{STANDARD_TEXT_2},43,OPEN
-4711076657,G3,You should obtain advice from your water supplier and consider replacing the lead pipework to eliminate this risk.,EXACT,{G_WATER}::{LEAD_RISING},100,DONE
-1285ef2344,G3,Further information is available from the Drinking Water Inspectorate.,ADD,{G_WATER}::{LEAD_RISING},64,OPEN
-490d46b8d3,G3,You should obtain advice from your water supplier and arrange for replacement of the lead pipework where appropriate.,ADD,{G_WATER}::{LEAD_RISING},78,OPEN
-da5adbc571,G3,Further guidance is available from the Drinking Water Inspectorate.,ADD,{G_WATER}::{LEAD_RISING},67,OPEN
-e274175de9,G3,"Water tank: A cold-water storage tank located in the roof space, airing cupboard, kitchen, other and is constructed of plastic, galvanised steel, asbestos cement, other.",MENU,,0,UNVERIFIED
-6db725717a,G3,"It appeared to be in reasonable, fair, poor condition.",UNRESOLVED,{G_WATER}::{STANDARD_TEXT},46,OPEN
-92c1e3c1b9,G3,"The visible tank and associated pipework were adequately insulated, inadequately insulated.",ADD,{G_WATER}::{STANDARD_TEXT},51,OPEN
-5e39398056,G3,Inadequate insulation: The visible water tank and/or associated pipework are inadequately insulated.,ADD,{G_WATER}::{STOPCOCK_FOUND},50,OPEN
-a8b1c45521,G3,This increases the risk of freezing during cold weather and may result in leaks and heat loss.,ADD,{G_WATER}::{LEAD_RISING},46,OPEN
-11d5ffa126,G3,Additional insulation should be installed.,ADD,{G_WATER}::{NOT_INSPECTED},64,OPEN
-528d1351dd,G3,"Damaged tank: The cold-water storage tank is damaged, not adequately supported, leaking, overflowing, other.",MENU,,0,UNVERIFIED
-1c1ee33f25,G3,Repairs or replacement should be carried out by a suitably qualified plumber without delay.,ADD,{G_WATER}::{NOT_INSPECTED},58,OPEN
-bfd8edf885,G3,"Missing lid: The cold-water storage tank(s) has no lid, or the lid is not properly fitted, which may allow contamination of the stored water.",UNRESOLVED,{G_WATER}::{STANDARD_TEXT},46,OPEN
-e69e800e40,G3,A suitable close-fitting lid should be installed as soon as possible.,ADD,{G_WATER}::{STANDARD_TEXT},47,OPEN
-3922735c7f,G3,Asbestos cement tank: The cold-water storage tank is constructed of asbestos cement.,ADD,{G_WATER}::{NOT_INSPECTED},54,OPEN
-2f088b8ca5,G3,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",ADD,{G_WATER}::{LEAD_RISING},44,OPEN
+957861a151,G3,Lead rising: The visible incoming water supply pipe is lead.,EXACT,{G_WATER}::{G3_LEAD_RISING},100,DONE
+516f6d9e1d,G3,"Lead pipework was commonly used before 1970 and may allow small amounts of lead to enter the drinking water, particularly in soft water areas, presenting a potential health risk (see Section J3 - Risks).",UNRESOLVED,{G_WATER}::{G3_LEAD_RISING},93,OPEN
+4711076657,G3,You should obtain advice from your water supplier and consider replacing the lead pipework to eliminate this risk.,EXACT,{G_WATER}::{G3_LEAD_RISING},100,DONE
+1285ef2344,G3,Further information is available from the Drinking Water Inspectorate.,EXACT,{G_WATER}::{G3_LEAD_RISING},100,DONE
+490d46b8d3,G3,You should obtain advice from your water supplier and arrange for replacement of the lead pipework where appropriate.,EXACT,{G_WATER}::{G3_LEAD_RISING},100,DONE
+da5adbc571,G3,Further guidance is available from the Drinking Water Inspectorate.,EXACT,{G_WATER}::{G3_LEAD_RISING},100,DONE
+e274175de9,G3,"Water tank: A cold-water storage tank located in the roof space, airing cupboard, kitchen, other and is constructed of plastic, galvanised steel, asbestos cement, other.",MENU,,0,VERIFIED
+6db725717a,G3,"It appeared to be in reasonable, fair, poor condition.",MENU,,0,VERIFIED
+92c1e3c1b9,G3,"The visible tank and associated pipework were adequately insulated, inadequately insulated.",MENU,,0,VERIFIED
+5e39398056,G3,Inadequate insulation: The visible water tank and/or associated pipework are inadequately insulated.,EXACT,{G_WATER}::{G3_INADEQUATE_INSULATION},100,DONE
+a8b1c45521,G3,This increases the risk of freezing during cold weather and may result in leaks and heat loss.,EXACT,{G_WATER}::{G3_INADEQUATE_INSULATION},100,DONE
+11d5ffa126,G3,Additional insulation should be installed.,EXACT,{G_WATER}::{G3_INADEQUATE_INSULATION},100,DONE
+528d1351dd,G3,"Damaged tank: The cold-water storage tank is damaged, not adequately supported, leaking, overflowing, other.",MENU,,0,VERIFIED
+1c1ee33f25,G3,Repairs or replacement should be carried out by a suitably qualified plumber without delay.,EXACT,{G_WATER}::{G3_DAMAGED_TANK},100,DONE
+bfd8edf885,G3,"Missing lid: The cold-water storage tank(s) has no lid, or the lid is not properly fitted, which may allow contamination of the stored water.",EXACT,{G_WATER}::{G3_MISSING_LID},100,DONE
+e69e800e40,G3,A suitable close-fitting lid should be installed as soon as possible.,EXACT,{G_WATER}::{G3_MISSING_LID},100,DONE
+3922735c7f,G3,Asbestos cement tank: The cold-water storage tank is constructed of asbestos cement.,EXACT,{G_WATER}::{G3_ASBESTOS_TANK},100,DONE
+2f088b8ca5,G3,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",EXACT,{G_WATER}::{G3_ASBESTOS_TANK},100,DONE
 e511290e50,G3,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,UNVERIFIED
-ee251b97c2,G3,The visible water supply pipework comprises plastic and/or copper.,ADD,{G_WATER}::{LEAD_RISING},51,OPEN
+ee251b97c2,G3,The visible water supply pipework comprises plastic and/or copper.,EXACT,{G_WATER}::{STANDARD_TEXT_2},100,DONE
 ffb22bb82f,G3,"Much of the plumbing is concealed within the structure, and the routing, support, joints, and condition of hidden pipework could not be assessed during this visual inspection.",MENU,,0,UNVERIFIED
-614686e0a9,G3,"If there are any concerns regarding the plumbing installation or its condition, you should obtain further advice from a suitably qualified plumber before legal purchase commitment.",ADD,{G_WATER}::{NOT_INSPECTED},56,OPEN
+614686e0a9,G3,"If there are any concerns regarding the plumbing installation or its condition, you should obtain further advice from a suitably qualified plumber before legal purchase commitment.",EXACT,{G_WATER}::{STANDARD_TEXT_2},100,DONE
 9c7af1fd2d,G4,No heating: The property does not have a fixed heating system.,EXACT,{G_HEATING}::{ABOUT_NO_HEATING},100,DONE
 443b036477,G4,"Although no repair is currently required, the absence of fixed heating may result in cold rooms, condensation, and mould growth.",EXACT,{G_HEATING}::{ABOUT_NO_HEATING},100,DONE
 1097e9d222,G4,It is also likely to adversely affect the property's Energy Performance Certificate (EPC) rating and may impact its marketability.,EXACT,{G_HEATING}::{ABOUT_NO_HEATING},100,DONE
@@ -1529,7 +1529,7 @@ ff9e9080b7,G6,"The gullies are partly blocked, damaged, uncovered, completely bl
 e787682d1a,G6,"They should be cleared and repaired, as necessary.",ADD,{G_DRAINAGE}::{PRIVATE_SYSTEM_SEPTIC_TANK},64,OPEN
 718cc4531e,G6,Blocked gullies can result in overflowing water and dampness to adjacent walls.,ADD,{G_DRAINAGE}::{REPAIR_GULLIES},68,OPEN
 2446dfb38b,G6,Asbestos Cement Soil Stack: The soil and vent pipe is constructed of asbestos cement.,ADD,{G_DRAINAGE}::{IF_ASBESTOS_CEMENT_IS_SELECTED},65,OPEN
-92b38d9020,G6,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",ADD,{G_DRAINAGE}::{SOIL_VENT_NOT_INSPECTED},44,OPEN
+92b38d9020,G6,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",EXACT,{G_WATER}::{G3_ASBESTOS_TANK},100,DONE
 2eb8e4e1c1,G6,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,UNVERIFIED
 c6bd7e5c9d,G7,"Not applicable: Other than the possibility of the drainage system being shared, there are no other common services to this property.",EXACT,{G_COMMON_SERVICES}::{NOT_INSPECTED},100,DONE
 1fc8407710,G7,"Description: Communal services and installations, including shared drainage, grounds maintenance, cleaning, lifts, communal heating, hot water systems, door entry systems, vehicular access, parking areas, other were not specifically assessed as part of this inspection.",MENU,,0,UNVERIFIED

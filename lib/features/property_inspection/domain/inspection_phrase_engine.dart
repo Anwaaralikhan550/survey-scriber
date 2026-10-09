@@ -176,11 +176,13 @@ class InspectionPhraseEngine {
       case 'activity_services_gas_oil_not_inspected':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_main_screen':
-        return _servicesWaterMain(answers);
+        return _conditionRatingNotes(answers,
+            ratingKey: 'android_material_design_spinner4',
+            master: '{G_WATER}');
       case 'activity_services_water_main_water':
-        return _servicesWaterMainWater(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_not_inspected':
-        return _servicesWaterNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_heating_main_screen':
         return [
           ..._servicesHeatingAbout(answers),
@@ -788,12 +790,12 @@ class InspectionPhraseEngine {
 
       // ── Section G: services detail screens ──
       case 'activity_services_water_disused_tank':
-        return _servicesWaterDisusedTank(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_water_tank':
-        return _servicesWaterTank(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_insulation':
       case 'services_water_insulation':
-        return _servicesWaterInsulation(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_heating_radiators':
         return _servicesHeatingRadiators(answers);
       case 'activity_services_heating_other_heating':
@@ -801,16 +803,13 @@ class InspectionPhraseEngine {
       case 'activity_services_heating_old_boiler':
         return _servicesHeatingOldBoiler(answers);
       case 'activity_services_water_repair_main_screen':
-        return _servicesWaterRepairMain(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_repair_asbestos':
-        return _servicesWaterRepairDefect(
-            answers, 'Asbestos repair', 'cb_other_358', 'et_other_883');
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_repair_cover_screen':
-        return _servicesWaterRepairDefect(
-            answers, 'Cover repair', 'cb_other_750', 'et_other_704');
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_repair_water_tank_screen':
-        return _servicesWaterRepairDefect(
-            answers, 'Water tank repair', 'cb_other_635', 'et_other_615');
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_drainage_chamber_lids':
         return _servicesDrainageChamberLids(answers);
       case 'activity_services_drainage_public_system':
@@ -3064,97 +3063,6 @@ class InspectionPhraseEngine {
     }
 
     return phrases;
-  }
-
-  List<String> _servicesWaterMain(Map<String, String> answers) {
-    final phrases = <String>[];
-    final standard = _sub('{G_WATER}', '{STANDARD_TEXT}');
-    if (standard.isNotEmpty) {
-      phrases.addAll(_split(_normalize(standard)));
-    }
-
-    // Legacy parity: stopcock/lead-rising were historically on Main Water.
-    // In Flutter they are shown on Water main screen, so generate here too.
-    if (_isChecked(answers['cb_stopcock_found'])) {
-      final location = _cleanLower(answers['actv_stopcok_location']);
-      if (location.isNotEmpty) {
-        var template = _sub('{G_WATER}', '{STOPCOCK_FOUND}');
-        if (template.isNotEmpty) {
-          template = template.replaceAll('{WATER_STOPCOCK_LOCATION}', location);
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    } else if (answers.containsKey('cb_stopcock_found')) {
-      final template = _sub('{G_WATER}', '{STOPCOCK_NOT_FOUND}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_lead_rising'])) {
-      final template = _sub('{G_WATER}', '{LEAD_RISING}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
-    if (rating.isNotEmpty) {
-      var template = _sub('{G_WATER}', '{CONDITION_RATING}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WATER_CONDITION_RATING}', rating);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final notes = (answers['ar_etNote'] ?? '').trim();
-    if (notes.isNotEmpty) {
-      var template = _sub('{G_WATER}', '{NOTES}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WATER_NOTES}', notes);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesWaterMainWater(Map<String, String> answers) {
-    final phrases = <String>[];
-    if (_isChecked(answers['cb_stopcock_found'])) {
-      final location = _cleanLower(answers['actv_stopcok_location']);
-      if (location.isNotEmpty) {
-        var template = _sub('{G_WATER}', '{STOPCOCK_FOUND}');
-        if (template.isNotEmpty) {
-          template = template.replaceAll('{WATER_STOPCOCK_LOCATION}', location);
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    } else {
-      final template = _sub('{G_WATER}', '{STOPCOCK_NOT_FOUND}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_lead_rising'])) {
-      final template = _sub('{G_WATER}', '{LEAD_RISING}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final standard2 = _sub('{G_WATER}', '{STANDARD_TEXT_2}');
-    if (standard2.isNotEmpty) {
-      phrases.addAll(_split(_normalize(standard2)));
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesWaterNotInspected(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    return _split(_normalize(_sub('{G_WATER}', '{NOT_INSPECTED}')));
   }
 
   List<String> _servicesHeatingMain(Map<String, String> answers) {
@@ -5787,85 +5695,6 @@ class InspectionPhraseEngine {
     return phrases;
   }
 
-  // Section G: Services - water disused tank
-  List<String> _servicesWaterDisusedTank(Map<String, String> answers) {
-    // The dropdown option "The roof space" carries its own leading article,
-    // but the bank template already supplies "within the {LOCATION}" -
-    // substituting the option as-is doubles the article ("within the the
-    // roof space"). Strip a redundant leading "the " from the answer so
-    // only the template's own article remains.
-    final location = _cleanLower(answers['actv_disused_tank_location'])
-        .replaceFirst(RegExp(r'^the\s+'), '');
-    final material = _cleanLower(answers['actv_tank_formed_in']);
-    if (location.isEmpty || material.isEmpty) return const [];
-    var template =
-        _sub('{F_ROOF_STRUCTURE_WATER_TANK}', '{DISUSED_WATER_TANK}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{RS_WT_DISUSED_WATER_TANK_LOCATION}', location)
-        .replaceAll('{RS_WT_DISUSED_WATER_TANK_MATERIAL}', material);
-    return _split(_normalize(template));
-  }
-
-  // Section G: Services - water tank
-  List<String> _servicesWaterTank(Map<String, String> answers) {
-    final locations = <String>[];
-    if (_isChecked(answers['cb_roof_space'])) locations.add('roof space');
-    if (_isChecked(answers['cb_airing_cupboard']))
-      locations.add('airing cupboard');
-    if (_isChecked(answers['cb_kitchen'])) locations.add('kitchen');
-    if (_isChecked(answers['cb_other_289'])) {
-      final other = (answers['et_other_442'] ?? '').trim();
-      if (other.isNotEmpty) {
-        locations.add(other.toLowerCase());
-      }
-    }
-    final materials = <String>[];
-    if (_isChecked(answers['cb_plastic'])) materials.add('plastic');
-    if (_isChecked(answers['cb_galvanised_metal']))
-      materials.add('galvanised metal');
-    if (_isChecked(answers['cb_asbestos'])) materials.add('asbestos');
-    if (_isChecked(answers['cb_other_640'])) {
-      final other = (answers['et_other_643'] ?? '').trim();
-      if (other.isNotEmpty) {
-        materials.add(other.toLowerCase());
-      }
-    }
-    final condition = _cleanLower(answers['actv_condition']);
-    if (locations.isEmpty || materials.isEmpty || condition.isEmpty) {
-      return const [];
-    }
-    var template = _sub(
-        '{F_ROOF_STRUCTURE_WATER_TANK}', '{WATERL_TANK_MATERIAL_LOCATION}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{RS_WT_LOCATION}', _toWords(locations).toLowerCase())
-        .replaceAll('{RS_WT_MATERIAL}', _toWords(materials).toLowerCase())
-        .replaceAll('{RS_WT_CONDITION}', condition);
-    return _split(_normalize(template));
-  }
-
-  // Section G: Services - water insulation
-  List<String> _servicesWaterInsulation(Map<String, String> answers) {
-    final status = _cleanLower(answers['actv_status']);
-    if (status.isEmpty) return const [];
-    if (status == 'ok' || status == 'good') {
-      final template = _phraseTexts[
-              '{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_OK}'] ??
-          '';
-      if (template.isNotEmpty) return _split(_normalize(template));
-      return const [];
-    }
-    if (status.contains('inadequate') || status == 'poor') {
-      final template = _phraseTexts[
-              '{F_ROOF_STRUCTURE_WATER_TANK}::{INSULATION_STATUS_NOT_ADEQUATELY_INSULATED}'] ??
-          '';
-      if (template.isNotEmpty) return _split(_normalize(template));
-      return const [];
-    }
-    return const [];
-  }
-
   // Section G: Services - heating radiators
   List<String> _servicesHeatingRadiators(Map<String, String> answers) {
     final type = _cleanLower(answers['actv_radiators_and_clandad_floor_pipes']);
@@ -5907,66 +5736,6 @@ class InspectionPhraseEngine {
     if (!_isChecked(answers['cb_old_boiler'])) return const [];
     final template = _sub('{G_HEATING}', '{ABOUT_OLD_BOILER}');
     if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  // Section G: Services - water repair main
-  List<String> _servicesWaterRepairMain(Map<String, String> answers) {
-    final defects = <String>[];
-    if (_isChecked(answers['cb_damaged'])) defects.add('damaged');
-    if (_isChecked(answers['cb_not_properly_supported']))
-      defects.add('not properly supported');
-    if (_isChecked(answers['cb_leaking'])) defects.add('leaking');
-    if (_isChecked(answers['cb_overflowing'])) defects.add('overflowing');
-    if (_isChecked(answers['cb_other_850'])) {
-      final other = (answers['et_other_567'] ?? '').trim();
-      if (other.isNotEmpty) {
-        defects.add(other.toLowerCase());
-      }
-    }
-    if (_isChecked(answers['cb_no_lid_over_tank']))
-      defects.add('no lid over tank');
-    if (_isChecked(answers['cb_poorly_fitted_lid']))
-      defects.add('poorly fitted lid');
-    if (_isChecked(answers['cb_asbestos_material']))
-      defects.add('asbestos material');
-    if (defects.isEmpty) return const [];
-    var template = _sub('{F_ABOUT_ROOF_STRUCTURE}', '{REPAIR_TANK}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-      '{RSR_RT_WATER_TANK}',
-      _toWords(defects).toLowerCase(),
-    );
-    return _split(_normalize(template));
-  }
-
-  // Section G: Services - water repair (asbestos/cover/tank variants)
-  List<String> _servicesWaterRepairDefect(
-    Map<String, String> answers,
-    String repairType,
-    String otherCbId,
-    String otherEtId,
-  ) {
-    if (repairType.isEmpty) return const [];
-    final defects = <String>[];
-    if (_isChecked(answers['cb_damaged'])) defects.add('damaged');
-    if (_isChecked(answers['cb_not_properly_supported']))
-      defects.add('not properly supported');
-    if (_isChecked(answers['cb_leaking'])) defects.add('leaking');
-    if (_isChecked(answers['cb_overflowing'])) defects.add('overflowing');
-    if (_isChecked(answers[otherCbId])) {
-      final other = (answers[otherEtId] ?? '').trim();
-      if (other.isNotEmpty) {
-        defects.add(other.toLowerCase());
-      }
-    }
-    if (defects.isEmpty) return const [];
-    var template = _sub('{F_ABOUT_ROOF_STRUCTURE}', '{REPAIR_TANK}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-      '{RSR_RT_WATER_TANK}',
-      _toWords(defects).toLowerCase(),
-    );
     return _split(_normalize(template));
   }
 

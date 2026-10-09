@@ -1,0 +1,347 @@
+[
+  {
+    "screen": "activity_services_water_main_water",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g3_stopcock",
+        "masters": [
+          "{G_WATER}"
+        ],
+        "sub": "{G3_STOPCOCK}",
+        "text": "Stopcock found: There is an independent mains water supply to the property. The stopcock within the property is located {WATER_STOPCOCK_LOCATION}. Visible pipework and fittings were inspected where accessible. The water installation was not pressure assessed.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WATER_STOPCOCK_LOCATION}",
+            "options": [
+              [
+                "g3s_under_the_stairs",
+                "under the stairs"
+              ],
+              [
+                "g3s_under_the_kitchen_sink",
+                "under the kitchen sink"
+              ],
+              [
+                "g3s_in_the_bathroom",
+                "in the bathroom"
+              ],
+              [
+                "g3s_in_the_hall",
+                "in the hall"
+              ],
+              [
+                "g3s_in_the_garage",
+                "in the garage"
+              ]
+            ],
+            "pdf_options": [
+              "under the stairs",
+              "under the kitchen sink",
+              "in the bathroom",
+              "in the hall",
+              "in the garage"
+            ],
+            "label": "Stopcock located",
+            "other": [
+              "g3s_other",
+              "g3s_other_text"
+            ],
+            "cond": "actv_g3_stopcock=Stopcock found"
+          }
+        ],
+        "pdf": [
+          "The stopcock within the property is located under the stairs, under the kitchen sink, in the bathroom, in the hall, in the garage, other."
+        ],
+        "when": [
+          "actv_g3_stopcock",
+          "Stopcock found"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_g3_stopcock",
+            "label": "Stopcock",
+            "type": "dropdown",
+            "options": [
+              "Stopcock found",
+              "Not found"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "g3_not_found",
+        "masters": [
+          "{G_WATER}"
+        ],
+        "sub": "{G3_STOPCOCK_NOT_FOUND}",
+        "text": "Not found: There is an independent mains water supply to the property. I did not find the water stopcock within the property. Please ask the vendor about the location of the water stopcock, as you must know where it is located. The property must be maintained in the normal way.",
+        "tokens": [],
+        "when": [
+          "actv_g3_stopcock",
+          "Not found"
+        ]
+      },
+      {
+        "id": "g3_lead",
+        "masters": [
+          "{G_WATER}"
+        ],
+        "sub": "{G3_LEAD_RISING}",
+        "text": "Lead rising: The visible incoming water supply pipe is lead. Lead pipework was commonly used before 1970 and may allow small amounts of lead to enter the drinking water, particularly in soft water areas, presenting a potential health risk (see Section J3 – Risks). You should obtain advice from your water supplier and consider replacing the lead pipework to eliminate this risk. Further information is available from the Drinking Water Inspectorate. You should obtain advice from your water supplier and arrange for replacement of the lead pipework where appropriate. Further guidance is available from the Drinking Water Inspectorate.",
+        "tokens": [],
+        "when": [
+          "cb_lead_rising",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_lead_rising",
+            "label": "Lead rising",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_services_water_water_tank",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g3_tank",
+        "masters": [
+          "{G_WATER}"
+        ],
+        "sub": "{G3_WATER_TANK}",
+        "text": "Water tank: A cold-water storage tank located in the {WATER_TANK_LOCATION} and is constructed of {WATER_TANK_MATERIAL}. It appeared to be in {WATER_TANK_CONDITION} condition. The visible tank and associated pipework were {WATER_TANK_INSULATION}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WATER_TANK_LOCATION}",
+            "options": [
+              [
+                "cb_roof_space",
+                "roof space"
+              ],
+              [
+                "cb_airing_cupboard",
+                "airing cupboard"
+              ],
+              [
+                "cb_kitchen",
+                "kitchen"
+              ]
+            ],
+            "pdf_options": [
+              "roof space",
+              "airing cupboard",
+              "kitchen"
+            ],
+            "label": "Cold water tank location",
+            "other": [
+              "cb_other_289",
+              "et_other_442"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{WATER_TANK_MATERIAL}",
+            "options": [
+              [
+                "cb_plastic",
+                "plastic"
+              ],
+              [
+                "cb_galvanised_steel",
+                "galvanised steel"
+              ],
+              [
+                "cb_asbestos",
+                "asbestos cement"
+              ]
+            ],
+            "pdf_options": [
+              "plastic",
+              "galvanised steel",
+              "asbestos cement"
+            ],
+            "label": "Cold water tank material",
+            "other": [
+              "cb_other_640",
+              "et_other_643"
+            ]
+          },
+          {
+            "kind": "dropdown",
+            "token": "{WATER_TANK_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Tank condition",
+            "dropdown_options": [
+              "Reasonable",
+              "Fair",
+              "Poor"
+            ],
+            "pdf_options": [
+              "reasonable",
+              "fair",
+              "poor"
+            ],
+            "lower": true
+          },
+          {
+            "kind": "dropdown",
+            "token": "{WATER_TANK_INSULATION}",
+            "dropdown": "actv_g3_tank_insulation",
+            "field_label": "Tank and pipework insulation",
+            "dropdown_options": [
+              "Adequately insulated",
+              "Inadequately insulated"
+            ],
+            "pdf_options": [
+              "adequately insulated",
+              "inadequately insulated"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Water tank: A cold-water storage tank located in the roof space, airing cupboard, kitchen, other and is constructed of plastic, galvanised steel, asbestos cement, other.",
+          "It appeared to be in reasonable, fair, poor condition.",
+          "The visible tank and associated pipework were adequately insulated, inadequately insulated."
+        ]
+      },
+      {
+        "id": "g3_inadequate",
+        "masters": [
+          "{G_WATER}"
+        ],
+        "sub": "{G3_INADEQUATE_INSULATION}",
+        "text": "Inadequate insulation: The visible water tank and/or associated pipework are inadequately insulated. This increases the risk of freezing during cold weather and may result in leaks and heat loss. Additional insulation should be installed.",
+        "tokens": [],
+        "when": [
+          "actv_g3_tank_insulation",
+          "Inadequately insulated"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_services_water_repair_main_screen",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g3_damaged",
+        "masters": [
+          "{G_WATER}"
+        ],
+        "sub": "{G3_DAMAGED_TANK}",
+        "text": "Damaged tank: The cold-water storage tank is {WATER_TANK_DEFECT}. Repairs or replacement should be carried out by a suitably qualified plumber without delay.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WATER_TANK_DEFECT}",
+            "options": [
+              [
+                "g3d_damaged",
+                "damaged"
+              ],
+              [
+                "g3d_not_adequately_supported",
+                "not adequately supported"
+              ],
+              [
+                "g3d_leaking",
+                "leaking"
+              ],
+              [
+                "g3d_overflowing",
+                "overflowing"
+              ]
+            ],
+            "pdf_options": [
+              "damaged",
+              "not adequately supported",
+              "leaking",
+              "overflowing"
+            ],
+            "label": "Tank defect",
+            "other": [
+              "g3d_other",
+              "g3d_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Damaged tank: The cold-water storage tank is damaged, not adequately supported, leaking, overflowing, other."
+        ],
+        "when": [
+          "cb_g3_damaged_tank",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_g3_damaged_tank",
+            "label": "Damaged tank",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g3_lid",
+        "masters": [
+          "{G_WATER}"
+        ],
+        "sub": "{G3_MISSING_LID}",
+        "text": "Missing lid: The cold-water storage tank(s) has no lid, or the lid is not properly fitted, which may allow contamination of the stored water. A suitable close-fitting lid should be installed as soon as possible.",
+        "tokens": [],
+        "when": [
+          "cb_no_lid_over_tank",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_no_lid_over_tank",
+            "label": "Missing lid",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g3_asbestos",
+        "masters": [
+          "{G_WATER}"
+        ],
+        "sub": "{G3_ASBESTOS_TANK}",
+        "text": "Asbestos cement tank: The cold-water storage tank is constructed of asbestos cement. Provided it remains in good condition and is left undisturbed, it presents a low health risk. If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",
+        "tokens": [],
+        "when": [
+          "cb_asbestos_material",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_asbestos_material",
+            "label": "Asbestos cement tank",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_services_water_not_inspected",
+      "activity_services_water_disused_tank",
+      "activity_services_water_insulation",
+      "services_water_insulation",
+      "activity_services_water_repair_asbestos",
+      "activity_services_water_repair_cover_screen",
+      "activity_services_water_repair_water_tank_screen"
+    ]
+  }
+]

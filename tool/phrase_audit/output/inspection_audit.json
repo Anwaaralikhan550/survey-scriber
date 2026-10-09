@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 390,
+  "screensAudited": 383,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2324,
-   "approvedLegacyBank": 561,
-   "approvedCurrentBankOnly": 1736,
+   "distinctEmitted": 2286,
+   "approvedLegacyBank": 559,
+   "approvedCurrentBankOnly": 1700,
    "unapproved": 0
   }
  },
@@ -1200,19 +1200,19 @@
    "sectionKey": "G",
    "screenId": "activity_services_water_main_water",
    "title": "Main Water",
-   "dataFieldCount": 3,
+   "dataFieldCount": 9,
    "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 9,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 7,
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The main internal stopcock could not be identified during my inspection. You should ask the vendor to confirm its location, as this is important for you to know. The property must be maintained in the normal way.",
-    "The external water supply pipe rising is made of lead, and this may be a health hazard (see section J3 - Risks to People). Before 1970, many water supply pipes were made of lead and research has shown that small quantities can pass into the water. This can be a problem in areas that have ‘soft’ water. You should obtain advice from your water supplier and consider replacing the lead pipework to eliminate this risk. For further advice, visit the Drinking Water Inspectorate at www.dwi.gov.uk.",
-    "The main internal stopcock was identified and is located under the kitchen sink. The property must be maintained in the normal way."
+    "Not found: There is an independent mains water supply to the property. I did not find the water stopcock within the property. Please ask the vendor about the location of the water stopcock, as you must know where it is located. The property must be maintained in the normal way.",
+    "Lead rising: The visible incoming water supply pipe is lead. Lead pipework was commonly used before 1970 and may allow small amounts of lead to enter the drinking water, particularly in soft water areas, presenting a potential health risk (see Section J3 – Risks). You should obtain advice from your water supplier and consider replacing the lead pipework to eliminate this risk. Further information is available from the Drinking Water Inspectorate. You should obtain advice from your water supplier and arrange for replacement of the lead pipework where appropriate. Further guidance is available from the Drinking Water Inspectorate.",
+    "Stopcock found: There is an independent mains water supply to the property. The stopcock within the property is located under the stairs, under the kitchen sink, in the bathroom, in the hall, in the garage and sample detail. Visible pipework and fittings were inspected where accessible. The water installation was not pressure assessed."
    ]
   },
   {
@@ -1504,23 +1504,6 @@
   },
   {
    "sectionKey": "G",
-   "screenId": "activity_services_water_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The water installation could not be inspected. As it is not accessible, it should be inspected and tested by an appropriately qualified plumber before legal commitment."
-   ]
-  },
-  {
-   "sectionKey": "G",
    "screenId": "activity_services_shared_services_not_inspected",
    "title": "Not Inspected",
    "dataFieldCount": 1,
@@ -1541,70 +1524,29 @@
    "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 5,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 0,
     "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The property appears to be supplied with mains water. Visible pipework and fittings were inspected where accessible, and the water installation was not pressure tested. Water pressure could not be assessed during my inspection. I recommend a test before purchase commitment by an appropriately qualified plumber to be certain regarding the condition, and all recommendations should be carried out."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_water_disused_tank",
-   "title": "Disused water tank",
-   "dataFieldCount": 2,
-   "permutationCount": 14,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Disused Water Tank: A plastic disused cold water storage tank remains within the roof space. Removal may be considered during future maintenance where it is no longer required. You should make arrangements to remove this soon.",
-    "Disused Water Tank: A plastic disused cold water storage tank remains within the airing cupboard. Removal may be considered during future maintenance where it is no longer required. You should make arrangements to remove this soon.",
-    "Disused Water Tank: A plastic disused cold water storage tank remains within the other. Removal may be considered during future maintenance where it is no longer required. You should make arrangements to remove this soon."
-   ]
+   }
   },
   {
    "sectionKey": "G",
    "screenId": "activity_services_water_water_tank",
    "title": "Water Tank",
-   "dataFieldCount": 11,
-   "permutationCount": 17,
+   "dataFieldCount": 12,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Water Storage Tanks: The cold water tank(s) within the roof space, airing cupboard, kitchen and sample detail are formed in plastic, galvanised metal, asbestos and sample detail and, where visible, appear in reasonable condition. No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated.",
-    "Water Storage Tanks: The cold water tank(s) within the roof space, airing cupboard, kitchen and sample detail are formed in plastic, galvanised metal, asbestos and sample detail and, where visible, appear in reasonable with repair condition. No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated.",
-    "Water Storage Tanks: The cold water tank(s) within the roof space, airing cupboard, kitchen and sample detail are formed in plastic, galvanised metal, asbestos and sample detail and, where visible, appear in unsatisfactory and poor condition. No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_water_insulation",
-   "title": "Insulation",
-   "dataFieldCount": 1,
-   "permutationCount": 5,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Water Tank Insulation: The water tank and associated pipework appear adequately insulated, and no sign of leakage or condensation was noted at the time of my inspection.",
-    "Water Tank Insulation: The water tank and associated pipework appear partially insulated.",
-    "The level of thermal insulation is less than current standards of 270 to 300 mm thickness. This will result in lower internal temperatures and higher heating costs. Uninsulated pipework passing through unheated areas can freeze during cold weather, causing a leak. Improving insulation may reduce the risk of freezing and heat loss. The property must be maintained in the normal way. This should be improved soon."
+    "Inadequate insulation: The visible water tank and/or associated pipework are inadequately insulated. This increases the risk of freezing during cold weather and may result in leaks and heat loss. Additional insulation should be installed.",
+    "Water tank: A cold-water storage tank located in the roof space, airing cupboard, kitchen and sample detail and is constructed of plastic, galvanised steel, asbestos cement and sample detail. It appeared to be in reasonable condition. The visible tank and associated pipework were adequately insulated.",
+    "Water tank: A cold-water storage tank located in the roof space, airing cupboard, kitchen and sample detail and is constructed of plastic, galvanised steel, asbestos cement and sample detail. It appeared to be in fair condition. The visible tank and associated pipework were adequately insulated."
    ]
   },
   {
@@ -1879,15 +1821,15 @@
    "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 3,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The water tank is damaged. This should be repaired or replaced now.",
-    "The water tank is not properly supported. This should be repaired or replaced now.",
-    "The water tank is leaking. This should be repaired or replaced now."
+    "Missing lid: The cold-water storage tank(s) has no lid, or the lid is not properly fitted, which may allow contamination of the stored water. A suitable close-fitting lid should be installed as soon as possible.",
+    "Asbestos cement tank: The cold-water storage tank is constructed of asbestos cement. Provided it remains in good condition and is left undisturbed, it presents a low health risk. If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",
+    "Damaged tank: The cold-water storage tank is damaged, not adequately supported, leaking, overflowing and sample detail. Repairs or replacement should be carried out by a suitably qualified plumber without delay."
    ]
   },
   {
@@ -1934,82 +1876,6 @@
     "approvedCurrentBankOnly": 0,
     "unapproved": 0
    }
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_water_repair_asbestos",
-   "title": "Asbestos Repair",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The water tank is damaged. This should be repaired or replaced now.",
-    "The water tank is not properly supported. This should be repaired or replaced now.",
-    "The water tank is leaking. This should be repaired or replaced now."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_water_repair_cover_screen",
-   "title": "Cover Repair",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The water tank is damaged. This should be repaired or replaced now.",
-    "The water tank is not properly supported. This should be repaired or replaced now.",
-    "The water tank is leaking. This should be repaired or replaced now."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_water_repair_water_tank_screen",
-   "title": "Water Tank Repair",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The water tank is damaged. This should be repaired or replaced now.",
-    "The water tank is not properly supported. This should be repaired or replaced now.",
-    "The water tank is leaking. This should be repaired or replaced now."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "services_water_insulation",
-   "title": "Water Insulation",
-   "dataFieldCount": 1,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Water Tank Insulation: The water tank and associated pipework appear adequately insulated, and no sign of leakage or condensation was noted at the time of my inspection.",
-    "Water Tank Insulation: The water tank and associated pipework appear partially insulated.",
-    "The level of thermal insulation is less than current standards of 270 to 300 mm thickness. This will result in lower internal temperatures and higher heating costs. Uninsulated pipework passing through unheated areas can freeze during cold weather, causing a leak. Improving insulation may reduce the risk of freezing and heat loss. The property must be maintained in the normal way. This should be improved soon."
-   ]
   },
   {
    "sectionKey": "F",
