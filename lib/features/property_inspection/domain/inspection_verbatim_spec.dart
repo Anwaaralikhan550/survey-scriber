@@ -8937,6 +8937,121 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_g4_repair',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'g5_not_found',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_NOT_FOUND}',
+    [
+    ],
+    whenField: 'cb_wh_not_found',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_communal',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_COMMUNAL}',
+    [
+    ],
+    whenField: 'cb_wh_communal',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_boiler',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_WATER_HEATING}',
+    [
+      VerbatimToken(
+        '{HEAT_WATER_BOILER_TYPE}',
+        options: {
+          'g5b_combination_boiler': 'combination boiler',
+          'g5b_conventional_boiler': 'conventional boiler',
+          'g5b_sealed_boiler_system': 'sealed boiler system',
+          'g5b_electrical_boiler': 'electrical boiler',
+          'g5b_oil_fired_boiler': 'oil-fired boiler',
+        },
+        otherCheckbox: 'g5b_other',
+        otherText: 'g5b_other_text',
+        pdfOptions: ['combination boiler', 'conventional boiler', 'sealed boiler system', 'electrical boiler', 'oil-fired boiler'],
+      ),
+      VerbatimToken(
+        '{HEAT_WATER_BOILER_LOCATION}',
+        options: {
+          'g5bl_airing_cupboard': 'airing cupboard',
+          'g5bl_kitchen': 'kitchen',
+          'g5bl_utility_room': 'utility room',
+          'g5bl_bedroom': 'bedroom',
+          'g5bl_garage': 'garage',
+          'g5bl_loft': 'loft',
+        },
+        otherCheckbox: 'g5bl_other',
+        otherText: 'g5bl_other_text',
+        pdfOptions: ['airing cupboard', 'kitchen', 'utility room', 'bedroom', 'garage', 'loft'],
+      ),
+    ],
+    pdf:
+        'Water heating: The hot water is provided by the combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other installed in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.',
+    whenField: 'cb_wh_boiler',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_immersion',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_ELECTRIC_IMMERSION}',
+    [
+      VerbatimToken(
+        '{HEAT_CYLINDER_LOCATION}',
+        options: {
+          'g5c_airing_cupboard': 'airing cupboard',
+          'g5c_kitchen': 'kitchen',
+          'g5c_utility_room': 'utility room',
+          'g5c_bedroom': 'bedroom',
+          'g5c_garage': 'garage',
+          'g5c_loft': 'loft',
+        },
+        otherCheckbox: 'g5c_other',
+        otherText: 'g5c_other_text',
+        pdfOptions: ['airing cupboard', 'kitchen', 'utility room', 'bedroom', 'garage', 'loft'],
+      ),
+    ],
+    pdf:
+        'Electric Immersion: The hot water is provided by an insulated cylinder located in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.',
+    whenField: 'cb_wh_immersion',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_poor_ins',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_POOR_CYLINDER_INSULATION}',
+    [
+    ],
+    whenField: 'cb_poor_cylinder_condition',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_point_of_use',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_POINT_OF_USE}',
+    [
+    ],
+    whenField: 'cb_wh_point_of_use',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_solar',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_SOLAR_WATER_HEATING}',
+    [
+    ],
+    whenField: 'cb_wh_solar',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

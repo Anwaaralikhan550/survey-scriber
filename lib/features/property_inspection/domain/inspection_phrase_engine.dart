@@ -220,21 +220,23 @@ class InspectionPhraseEngine {
       case 'activity_services_shared_services_not_inspected':
         return _servicesCommonServicesNotInspected(answers);
       case 'activity_services_water_heating_main_screen':
-        return _servicesWaterHeatingMain(answers);
+        return _conditionRatingNotes(answers,
+            ratingKey: 'android_material_design_spinner4',
+            master: '{G_WATER_HEATING}');
       case 'activity_water_heating_communal_hot_water':
-        return _servicesWaterHeatingCommunalHotWater(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_heating_gas_heating':
-        return _servicesWaterHeatingGas(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_heating_electric_heating':
-        return _servicesWaterHeatingElectric(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_heating_solar_power':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_heating_repair_leaking_cylinder':
-        return _servicesWaterHeatingRepairLeakingCylinder(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_heating_repair_loose_panels':
-        return _servicesWaterHeatingRepairLoosePanels(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_heating_not_inspected':
-        return _servicesWaterHeatingNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_inside_property_limitation':
         return _insidePropertyLimitations(answers);
       case 'activity_inside_property_roof_structure_main_screen':
@@ -814,7 +816,7 @@ class InspectionPhraseEngine {
       case 'activity_services_drainage_public_system':
         return _servicesDrainagePublicSystem(answers);
       case 'activity_services_water_heating_cylinder':
-        return _servicesWaterHeatingCylinder(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
 
       // ── Section F: woodwork sub-screens ──
       case 'activity_in_side_property_wood_work_creaking_stairs':
@@ -3496,152 +3498,6 @@ class InspectionPhraseEngine {
     return _split(_normalize(template));
   }
 
-  List<String> _servicesWaterHeatingMain(Map<String, String> answers) {
-    final phrases = <String>[];
-    final standard = _sub('{G_WATER_HEATING}', '{STANDARD_TEXT}');
-    if (standard.isNotEmpty) {
-      phrases.addAll(_split(_normalize(standard)));
-    }
-    final standard2 = _sub('{G_WATER_HEATING}', '{STANDARD_TEXT_2}');
-    if (standard2.isNotEmpty) {
-      phrases.addAll(_split(_normalize(standard2)));
-    }
-
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
-    if (rating.isNotEmpty) {
-      var template = _sub('{G_WATER_HEATING}', '{CONDITION_RATING}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WH_COND_RATING}', rating);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final notes = (answers['ar_etNote'] ?? '').trim();
-    if (notes.isNotEmpty) {
-      var template = _sub('{G_WATER_HEATING}', '{NOTES}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WH_NOTES}', notes);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesWaterHeatingCommunalHotWater(
-      Map<String, String> answers) {
-    if (!_isChecked(answers['cb_communal_hot_water'])) return const [];
-    final template = _sub('{G_WATER_HEATING}', '{COMMUNAL_HOT_WATER}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesWaterHeatingGas(Map<String, String> answers) {
-    final phrases = <String>[];
-    final type = _cleanLower(answers['actv_type']);
-    final location = _cleanLower(answers['actv_location']);
-    // Location is required to complete these sentences ("...located in the
-    // {LOCATION}."); a literal "the ." fragment is not acceptable in a
-    // finalised client report, so wait until the surveyor has answered it.
-    if (type.contains('combi') && location.isNotEmpty) {
-      var template =
-          _sub('{G_WATER_HEATING}', '{GAS_WATER_HEATING_COMBI_BOILER}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WH_GWH_CYLI_LOCATION}', location);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    } else if (type.contains('conventional') && location.isNotEmpty) {
-      var template =
-          _sub('{G_WATER_HEATING}', '{GAS_WATER_HEATING_CONVENTIONAL}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WH_GWH_CYLI_LOCATION}', location);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    } else if (type.contains('other') && location.isNotEmpty) {
-      var template = _sub('{G_WATER_HEATING}', '{GAS_WATER_HEATING_OTHER}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WH_GWH_CYLI_LOCATION}', location);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_poor_cylinder_condition'])) {
-      final template = _sub('{G_WATER_HEATING}', '{POOR_CYLINDER_CONDITION}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesWaterHeatingElectric(Map<String, String> answers) {
-    final phrases = <String>[];
-    final type = _cleanLower(answers['actv_type']);
-    final location = _cleanLower(answers['actv_location']);
-    // Location is required to complete this sentence ("...located in the
-    // {LOCATION}."); a literal "the ." fragment is not acceptable in a
-    // finalised client report, so wait until the surveyor has answered it.
-    if (type.contains('immersion') && location.isNotEmpty) {
-      var template =
-          _sub('{G_WATER_HEATING}', '{ELECTRIC_WATER_HEATING_IMMERSION}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{WH_EWH_CYLI_LOCATION}', location);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    } else if (type.contains('point-of-use') || type.contains('point of use')) {
-      final template =
-          _sub('{G_WATER_HEATING}', '{ELECTRIC_WATER_HEATING_POINT_OF_USE}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    } else if (type.contains('other')) {
-      final template =
-          _sub('{G_WATER_HEATING}', '{ELECTRIC_WATER_HEATING_OTHER}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_poor_cylinder_condition'])) {
-      final template =
-          _sub('{G_WATER_HEATING}', '{ELECTRIC_POOR_CYLINDER_CONDITION}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _servicesWaterHeatingRepairLeakingCylinder(
-      Map<String, String> answers) {
-    final defect = _cleanLower(answers['actv_defect']);
-    if (defect.isEmpty) return const [];
-    var template = _sub('{G_WATER_HEATING}', '{REPAIR_LEAKING_CYLINDER}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{WH_REPAIR_LEAK_CYLI_DEFECTS}', defect);
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesWaterHeatingRepairLoosePanels(
-      Map<String, String> answers) {
-    final defect = _cleanLower(answers['actv_defect']);
-    if (defect.isEmpty) return const [];
-    var template = _sub('{G_WATER_HEATING}', '{REPAIR_LOOSE_SOLAR_PANELS}');
-    if (template.isEmpty) return const [];
-    template =
-        template.replaceAll('{WH_REPAIR_LOOS_SOL_PANEL_DEFECTS}', defect);
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesWaterHeatingNotInspected(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    final template = _sub('{G_WATER_HEATING}', '{NOT_INSPECTED}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
   List<String> _insidePropertyLimitations(Map<String, String> answers) {
     final phrases = <String>[];
 
@@ -5519,14 +5375,6 @@ class InspectionPhraseEngine {
       return const [];
     }
     final template = _sub('{G_DRAINAGE}', '{PUBLIC_SYSTEM}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  // Section G: Services - water heating cylinder
-  List<String> _servicesWaterHeatingCylinder(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_poor_insulation'])) return const [];
-    final template = _sub('{G_WATER_HEATING}', '{POOR_CYLINDER_CONDITION}');
     if (template.isEmpty) return const [];
     return _split(_normalize(template));
   }

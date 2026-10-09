@@ -1462,29 +1462,29 @@ c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency o
 f867415b7f,G4,The associated ground collectors or boreholes are below ground and could not be inspected.,EXACT,{G_HEATING}::{ABOUT_GROUND_SOURCE_HEAT_PUMP_LOCATED},100,DONE
 ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
 c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency or controls was undertaken.",EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
-f6403e6eca,G5,I was unable to locate the water heating system.,ADD,{G_WATER_HEATING}::{ELECTRIC_WATER_HEATING_OTHER},60,OPEN
-fcaa35b461,G5,"Please ask the vendor about the location of the water heating system, as it is important that you know where it is located.",ADD,{G_WATER_HEATING}::{GAS_WATER_HEATING_COMBI_BOILER},49,OPEN
-0b1e713e79,G5,"Communal water heating: The property has hot water centrally by a communal water heating system, gas-powered.",ADD,{G_WATER_HEATING}::{ELECTRIC_WATER_HEATING_OTHER},60,OPEN
-33f4e43372,G5,It is likely to be metered or supplied as part of combined services.,ADD,{G_WATER_HEATING}::{REPAIR_LOOSE_SOLAR_PANELS},44,OPEN
+f6403e6eca,G5,I was unable to locate the water heating system.,EXACT,{G_WATER_HEATING}::{G5_NOT_FOUND},100,DONE
+fcaa35b461,G5,"Please ask the vendor about the location of the water heating system, as it is important that you know where it is located.",EXACT,{G_WATER_HEATING}::{G5_NOT_FOUND},100,DONE
+0b1e713e79,G5,"Communal water heating: The property has hot water centrally by a communal water heating system, gas-powered.",EXACT,{G_WATER_HEATING}::{G5_COMMUNAL},100,DONE
+33f4e43372,G5,It is likely to be metered or supplied as part of combined services.,EXACT,{G_WATER_HEATING}::{G5_COMMUNAL},100,DONE
 1d8f6a31a5,G5,I could not inspect the system due to access restrictions and cannot comment on the type and condition.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
-18a496d0c4,G5,"Water heating: The hot water is provided by the combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other installed in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,UNVERIFIED
+18a496d0c4,G5,"Water heating: The hot water is provided by the combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other installed in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,VERIFIED
 1ebbeb0848,G5,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY_MULTI_STACK}::{LEANING_CHIMNEY_CONDITION_OK},100,DONE
-c0aeff24d7,G5,"Electric Immersion: The hot water is provided by an insulated cylinder located in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,UNVERIFIED
+c0aeff24d7,G5,"Electric Immersion: The hot water is provided by an insulated cylinder located in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,VERIFIED
 2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
 fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,EXACT,{G_HEATING}::{G4_BOILER},100,DONE
 6e090c60c6,G5,Poor cylinder insulation: The hot water cylinder is not properly insulated.,EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 0693c2d809,G5,"Hot water tanks store water for long periods, and there will be a waste of energy if these tanks and the adjacent pipes are not properly insulated.",EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 8ccd8e73de,G5,This should be insulated soon.,EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
-9dbbc2cc23,G5,Point-of-use: Hot water is provided by individual electric point-of-use water heaters serving individual outlets or appliances.,ADD,{G_WATER_HEATING}::{ELECTRIC_WATER_HEATING_OTHER},61,OPEN
+9dbbc2cc23,G5,Point-of-use: Hot water is provided by individual electric point-of-use water heaters serving individual outlets or appliances.,EXACT,{G_WATER_HEATING}::{G5_POINT_OF_USE},100,DONE
 2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
-eff2aa202a,G5,"No operational testing or assessment of performance, efficiency or remaining service life was undertaken.",ADD,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},60,OPEN
+eff2aa202a,G5,"No operational testing or assessment of performance, efficiency or remaining service life was undertaken.",EXACT,{G_WATER_HEATING}::{G5_POINT_OF_USE},100,DONE
 2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
 fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,EXACT,{G_HEATING}::{G4_BOILER},100,DONE
-ed0829e79e,G5,Solar water heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply.,EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
-bf277d4115,G5,"The installation was inspected visually only, and no operational testing or assessment of performance was undertaken.",EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
+ed0829e79e,G5,Solar water heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply.,EXACT,{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING},100,DONE
+bf277d4115,G5,"The installation was inspected visually only, and no operational testing or assessment of performance was undertaken.",EXACT,{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING},100,DONE
 bd76685055,G5,Routine maintenance should be carried out in accordance with the manufacturer's recommendations.,EXACT,{G_ELECTRICITY}::{G1_SOLAR_PV},100,DONE
 87a45504e2,G5,"The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection.",EXACT,{G_ELECTRICITY}::{G1_SOLAR_THERMAL},100,DONE
-ee8232044e,G5,"Your legal adviser should verify that any required Building Regulations approval, commissioning documentation and any available warranties or guarantees are provided.",EXACT,{G_WATER_HEATING}::{SOLAR_WATER_HEATING},100,DONE
+ee8232044e,G5,"Your legal adviser should verify that any required Building Regulations approval, commissioning documentation and any available warranties or guarantees are provided.",EXACT,{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING},100,DONE
 a5596b97d6,G6,Inspection of the accessible inspection chamber(s) cannot confirm the condition of the concealed drainage system.,ADD,{G_DRAINAGE}::{PUBLIC_SYSTEM_STATUS_NOT_INSPECTED},55,OPEN
 f72cbbb4ac,G6,"Hidden defects may still be present and can only be identified by specialist testing, such as a CCTV drain survey.",ADD,{OTHER_EXTERNAL_AREA}::{OTHER_CONDITION},47,OPEN
 112a6564c2,G6,Septic Tank: The property is connected to a septic tank.,EXACT,{G_DRAINAGE}::{PRIVATE_SYSTEM_SEPTIC_TANK},100,DONE

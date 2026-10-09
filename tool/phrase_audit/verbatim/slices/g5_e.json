@@ -1,0 +1,292 @@
+[
+  {
+    "screen": "activity_services_water_heating_gas_heating",
+    "set_title": "About Water Heating",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g5_not_found",
+        "masters": [
+          "{G_WATER_HEATING}"
+        ],
+        "sub": "{G5_NOT_FOUND}",
+        "text": "Not found. I was unable to locate the water heating system. Please ask the vendor about the location of the water heating system, as it is important that you know where it is located.",
+        "tokens": [],
+        "when": [
+          "cb_wh_not_found",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_wh_not_found",
+            "label": "Water heating not found",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g5_communal",
+        "masters": [
+          "{G_WATER_HEATING}"
+        ],
+        "sub": "{G5_COMMUNAL}",
+        "text": "Communal water heating: The property has hot water centrally by a communal water heating system, gas-powered. It is likely to be metered or supplied as part of combined services. I could not inspect the system due to access restrictions and cannot comment on the type and condition.",
+        "tokens": [],
+        "when": [
+          "cb_wh_communal",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_wh_communal",
+            "label": "Communal water heating",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g5_boiler",
+        "masters": [
+          "{G_WATER_HEATING}"
+        ],
+        "sub": "{G5_WATER_HEATING}",
+        "text": "Water heating: The hot water is provided by the {HEAT_WATER_BOILER_TYPE} installed in the {HEAT_WATER_BOILER_LOCATION}. The property must be maintained in the normal way.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{HEAT_WATER_BOILER_TYPE}",
+            "options": [
+              [
+                "g5b_combination_boiler",
+                "combination boiler"
+              ],
+              [
+                "g5b_conventional_boiler",
+                "conventional boiler"
+              ],
+              [
+                "g5b_sealed_boiler_system",
+                "sealed boiler system"
+              ],
+              [
+                "g5b_electrical_boiler",
+                "electrical boiler"
+              ],
+              [
+                "g5b_oil_fired_boiler",
+                "oil-fired boiler"
+              ]
+            ],
+            "pdf_options": [
+              "combination boiler",
+              "conventional boiler",
+              "sealed boiler system",
+              "electrical boiler",
+              "oil-fired boiler"
+            ],
+            "label": "Hot water provided by",
+            "other": [
+              "g5b_other",
+              "g5b_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{HEAT_WATER_BOILER_LOCATION}",
+            "options": [
+              [
+                "g5bl_airing_cupboard",
+                "airing cupboard"
+              ],
+              [
+                "g5bl_kitchen",
+                "kitchen"
+              ],
+              [
+                "g5bl_utility_room",
+                "utility room"
+              ],
+              [
+                "g5bl_bedroom",
+                "bedroom"
+              ],
+              [
+                "g5bl_garage",
+                "garage"
+              ],
+              [
+                "g5bl_loft",
+                "loft"
+              ]
+            ],
+            "pdf_options": [
+              "airing cupboard",
+              "kitchen",
+              "utility room",
+              "bedroom",
+              "garage",
+              "loft"
+            ],
+            "label": "Installed in the",
+            "other": [
+              "g5bl_other",
+              "g5bl_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Water heating: The hot water is provided by the combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other installed in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other."
+        ],
+        "when": [
+          "cb_wh_boiler",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_wh_boiler",
+            "label": "Water heating (boiler)",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g5_immersion",
+        "masters": [
+          "{G_WATER_HEATING}"
+        ],
+        "sub": "{G5_ELECTRIC_IMMERSION}",
+        "text": "Electric Immersion: The hot water is provided by an insulated cylinder located in the {HEAT_CYLINDER_LOCATION}. The installation was inspected visually only. No operational testing or assessment of efficiency was undertaken.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{HEAT_CYLINDER_LOCATION}",
+            "options": [
+              [
+                "g5c_airing_cupboard",
+                "airing cupboard"
+              ],
+              [
+                "g5c_kitchen",
+                "kitchen"
+              ],
+              [
+                "g5c_utility_room",
+                "utility room"
+              ],
+              [
+                "g5c_bedroom",
+                "bedroom"
+              ],
+              [
+                "g5c_garage",
+                "garage"
+              ],
+              [
+                "g5c_loft",
+                "loft"
+              ]
+            ],
+            "pdf_options": [
+              "airing cupboard",
+              "kitchen",
+              "utility room",
+              "bedroom",
+              "garage",
+              "loft"
+            ],
+            "label": "Cylinder located in the",
+            "other": [
+              "g5c_other",
+              "g5c_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Electric Immersion: The hot water is provided by an insulated cylinder located in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other."
+        ],
+        "when": [
+          "cb_wh_immersion",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_wh_immersion",
+            "label": "Electric immersion",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g5_poor_ins",
+        "masters": [
+          "{G_WATER_HEATING}"
+        ],
+        "sub": "{G5_POOR_CYLINDER_INSULATION}",
+        "text": "Poor cylinder insulation: The hot water cylinder is not properly insulated. Hot water tanks store water for long periods, and there will be a waste of energy if these tanks and the adjacent pipes are not properly insulated. This should be insulated soon.",
+        "tokens": [],
+        "when": [
+          "cb_poor_cylinder_condition",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_poor_cylinder_condition",
+            "label": "Poor cylinder insulation",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g5_point_of_use",
+        "masters": [
+          "{G_WATER_HEATING}"
+        ],
+        "sub": "{G5_POINT_OF_USE}",
+        "text": "Point-of-use: Hot water is provided by individual electric point-of-use water heaters serving individual outlets or appliances. The installation was inspected visually only. No operational testing or assessment of performance, efficiency or remaining service life was undertaken. The installation was inspected visually only. No operational testing or assessment of efficiency was undertaken.",
+        "tokens": [],
+        "when": [
+          "cb_wh_point_of_use",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_wh_point_of_use",
+            "label": "Point-of-use",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g5_solar",
+        "masters": [
+          "{G_WATER_HEATING}"
+        ],
+        "sub": "{G5_SOLAR_WATER_HEATING}",
+        "text": "Solar water heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply. The installation was inspected visually only, and no operational testing or assessment of performance was undertaken. Routine maintenance should be carried out in accordance with the manufacturer's recommendations. The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection. Your legal adviser should verify that any required Building Regulations approval, commissioning documentation and any available warranties or guarantees are provided.",
+        "tokens": [],
+        "when": [
+          "cb_wh_solar",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_wh_solar",
+            "label": "Solar water heating",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_water_heating_communal_hot_water",
+      "activity_services_water_heating_electric_heating",
+      "activity_services_water_heating_cylinder",
+      "activity_services_water_heating_repair_leaking_cylinder",
+      "activity_services_water_heating_repair_loose_panels",
+      "activity_services_water_heating_not_inspected"
+    ]
+  }
+]

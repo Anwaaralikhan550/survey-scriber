@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 379,
+  "screensAudited": 373,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2273,
-   "approvedLegacyBank": 553,
-   "approvedCurrentBankOnly": 1693,
+   "distinctEmitted": 2252,
+   "approvedLegacyBank": 529,
+   "approvedCurrentBankOnly": 1696,
    "unapproved": 0
   }
  },
@@ -1326,37 +1326,6 @@
   },
   {
    "sectionKey": "G",
-   "screenId": "activity_water_heating_communal_hot_water",
-   "title": "Communal Hot Water",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The hot water in the property is provided centrally by gas powered communal boiler(s). I could not inspect the system due to access restrictions and cannot comment on the type and condition."
-   ]
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_water_heating_repair_leaking_cylinder",
-   "title": "Leaking Cylinder",
-   "dataFieldCount": 1,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
    "screenId": "activity_services_drainage_repair_chamber_cover",
    "title": "Chamber Cover",
    "dataFieldCount": 1,
@@ -1463,30 +1432,21 @@
   {
    "sectionKey": "G",
    "screenId": "activity_services_water_heating_gas_heating",
-   "title": "Gas water heating",
-   "dataFieldCount": 3,
-   "permutationCount": 17,
+   "title": "About Water Heating",
+   "dataFieldCount": 30,
+   "permutationCount": 32,
    "severities": [],
    "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 8,
-    "approvedCurrentBankOnly": 0,
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
     "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_water_heating_repair_loose_panels",
-   "title": "Loose solar panels",
-   "dataFieldCount": 1,
-   "permutationCount": 7,
-   "severities": [],
-   "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 3,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Not found. I was unable to locate the water heating system. Please ask the vendor about the location of the water heating system, as it is important that you know where it is located.",
+    "Communal water heating: The property has hot water centrally by a communal water heating system, gas-powered. It is likely to be metered or supplied as part of combined services. I could not inspect the system due to access restrictions and cannot comment on the type and condition.",
+    "Poor cylinder insulation: The hot water cylinder is not properly insulated. Hot water tanks store water for long periods, and there will be a waste of energy if these tanks and the adjacent pipes are not properly insulated. This should be insulated soon."
+   ]
   },
   {
    "sectionKey": "G",
@@ -1551,23 +1511,6 @@
   },
   {
    "sectionKey": "G",
-   "screenId": "activity_services_water_heating_electric_heating",
-   "title": "Electric water heating",
-   "dataFieldCount": 3,
-   "permutationCount": 17,
-   "severities": [],
-   "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 7,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The hot water is provided by an electric water heating system. The property must be maintained in the normal way."
-   ]
-  },
-  {
-   "sectionKey": "G",
    "screenId": "activity_services_drainage_repair_chamber_pipes",
    "title": "Chamber Pipes",
    "dataFieldCount": 5,
@@ -1579,23 +1522,6 @@
     "approvedCurrentBankOnly": 0,
     "unapproved": 0
    }
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_water_heating_not_inspected",
-   "title": "Not Inspected",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Not Inspected: The water heating installation could not be inspected. As it is not accessible, it should be inspected and tested by an appropriately qualified engineer before legal commitment."
-   ]
   },
   {
    "sectionKey": "G",
@@ -1664,14 +1590,11 @@
    "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 8,
-    "approvedLegacy": 6,
-    "approvedCurrentBankOnly": 1,
+    "total": 5,
+    "approvedLegacy": 4,
+    "approvedCurrentBankOnly": 0,
     "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The water heating installations were not tested, and the adequacy of hot water delivery cannot be confirmed. I recommend a test before purchase commitment by an appropriately qualified person to be certain regarding the condition, and all recommendations should be carried out."
-   ]
+   }
   },
   {
    "sectionKey": "G",
@@ -1783,20 +1706,6 @@
    "sectionKey": "G",
    "screenId": "activity_services_drainage_public_system",
    "title": "Public System",
-   "dataFieldCount": 1,
-   "permutationCount": 3,
-   "severities": [],
-   "phraseStats": {
-    "total": 1,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "G",
-   "screenId": "activity_services_water_heating_cylinder",
-   "title": "Cylinder",
    "dataFieldCount": 1,
    "permutationCount": 3,
    "severities": [],

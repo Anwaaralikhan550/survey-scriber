@@ -6862,39 +6862,6 @@
           ]
         },
         {
-          "id": "activity_water_heating_communal_hot_water",
-          "title": "Communal Hot Water",
-          "type": "screen",
-          "parentId": "group_water_heating_94",
-          "order": 2,
-          "fields": [
-            {
-              "id": "cb_communal_hot_water",
-              "label": "Communal Hot Water",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_water_heating_repair_leaking_cylinder",
-          "title": "Leaking Cylinder",
-          "type": "screen",
-          "parentId": "group_repairs_95",
-          "order": 2,
-          "fields": [
-            {
-              "id": "actv_defect",
-              "label": "Defect",
-              "type": "dropdown",
-              "options": [
-                "Is leaking badly",
-                "Has leaking pipes",
-                "Other"
-              ]
-            }
-          ]
-        },
-        {
           "id": "activity_services_drainage_repair_chamber_cover",
           "title": "Chamber Cover",
           "type": "screen",
@@ -7281,53 +7248,184 @@
         },
         {
           "id": "activity_services_water_heating_gas_heating",
-          "title": "Gas water heating",
+          "title": "About Water Heating",
           "type": "screen",
           "parentId": "group_water_heating_94",
           "order": 4,
           "fields": [
             {
-              "id": "actv_type",
-              "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Combi Boiler",
-                "Conventional",
-                "Other"
-              ]
+              "id": "cb_wh_not_found",
+              "label": "Water heating not found",
+              "type": "checkbox"
             },
             {
-              "id": "label_boiler_location",
-              "label": "Boiler Location",
-              "type": "label",
-              "conditionalOn": "actv_type=Combi Boiler | actv_type=Other",
+              "id": "cb_wh_communal",
+              "label": "Communal water heating",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_wh_boiler",
+              "label": "Water heating (boiler)",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_heat_water_boiler_type",
+              "label": "Hot water provided by",
+              "type": "label"
+            },
+            {
+              "id": "g5b_combination_boiler",
+              "label": "combination boiler",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5b_conventional_boiler",
+              "label": "conventional boiler",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5b_sealed_boiler_system",
+              "label": "sealed boiler system",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5b_electrical_boiler",
+              "label": "electrical boiler",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5b_oil_fired_boiler",
+              "label": "oil-fired boiler",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5b_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5b_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g5b_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_cylinder_location",
-              "label": "Water Storage Cylinder Located In",
-              "type": "label",
-              "conditionalOn": "!actv_type=Combi Boiler & !actv_type=Other",
+              "id": "label_heat_water_boiler_location",
+              "label": "Installed in the",
+              "type": "label"
+            },
+            {
+              "id": "g5bl_airing_cupboard",
+              "label": "airing cupboard",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5bl_kitchen",
+              "label": "kitchen",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5bl_utility_room",
+              "label": "utility room",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5bl_bedroom",
+              "label": "bedroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5bl_garage",
+              "label": "garage",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5bl_loft",
+              "label": "loft",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5bl_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5bl_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g5bl_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Airing cupboard",
-                "Kitchen",
-                "Bedroom",
-                "Garage",
-                "Other"
-              ]
+              "id": "cb_wh_immersion",
+              "label": "Electric immersion",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_heat_cylinder_location",
+              "label": "Cylinder located in the",
+              "type": "label"
+            },
+            {
+              "id": "g5c_airing_cupboard",
+              "label": "airing cupboard",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5c_kitchen",
+              "label": "kitchen",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5c_utility_room",
+              "label": "utility room",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5c_bedroom",
+              "label": "bedroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5c_garage",
+              "label": "garage",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5c_loft",
+              "label": "loft",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5c_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "g5c_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "g5c_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             },
             {
               "id": "cb_poor_cylinder_condition",
               "label": "Poor cylinder insulation",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Conventional",
-              "conditionalMode": "show"
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_wh_point_of_use",
+              "label": "Point-of-use",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_wh_solar",
+              "label": "Solar water heating",
+              "type": "checkbox"
             }
           ]
         },
@@ -7337,25 +7435,6 @@
           "type": "group",
           "parentId": "group_g5_water_heating_93",
           "order": 4
-        },
-        {
-          "id": "activity_services_water_heating_repair_loose_panels",
-          "title": "Loose solar panels",
-          "type": "screen",
-          "parentId": "group_repairs_95",
-          "order": 4,
-          "fields": [
-            {
-              "id": "actv_defect",
-              "label": "Defect",
-              "type": "dropdown",
-              "options": [
-                "Not Secure",
-                "Not Properly Fixed",
-                "Other"
-              ]
-            }
-          ]
         },
         {
           "id": "group_repairs_97",
@@ -7570,53 +7649,6 @@
           ]
         },
         {
-          "id": "activity_services_water_heating_electric_heating",
-          "title": "Electric water heating",
-          "type": "screen",
-          "parentId": "group_water_heating_94",
-          "order": 6,
-          "fields": [
-            {
-              "id": "actv_type",
-              "label": "Type",
-              "type": "dropdown",
-              "options": [
-                "Immersion",
-                "Point-of-use",
-                "Other"
-              ]
-            },
-            {
-              "id": "label_immersion_location",
-              "label": "Electric immersion heater cylinder location",
-              "type": "label",
-              "conditionalOn": "actv_type=Immersion",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_location",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Airing cupboard",
-                "Kitchen",
-                "Bedroom",
-                "Garage",
-                "Other"
-              ],
-              "conditionalOn": "actv_type=Immersion",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poor_cylinder_condition",
-              "label": "Poor cylinder insulation",
-              "type": "checkbox",
-              "conditionalOn": "actv_type=Immersion",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_services_drainage_repair_chamber_pipes",
           "title": "Chamber Pipes",
           "type": "screen",
@@ -7654,20 +7686,6 @@
               "type": "text",
               "conditionalOn": "cb_other_458",
               "conditionalMode": "show"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_water_heating_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_g5_water_heating_93",
-          "order": 7,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
-              "type": "checkbox"
             }
           ]
         },
@@ -8141,20 +8159,6 @@
             {
               "id": "cb_property_connected_to_public_sewer",
               "label": "Property connected to public sewer",
-              "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_services_water_heating_cylinder",
-          "title": "Cylinder",
-          "type": "screen",
-          "parentId": "group_water_heating_94",
-          "order": 510,
-          "fields": [
-            {
-              "id": "cb_poor_insulation",
-              "label": "Poor insulation",
               "type": "checkbox"
             }
           ]
