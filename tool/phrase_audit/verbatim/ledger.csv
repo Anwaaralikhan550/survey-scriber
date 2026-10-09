@@ -1531,16 +1531,16 @@ e787682d1a,G6,"They should be cleared and repaired, as necessary.",EXACT,{G_DRAI
 2446dfb38b,G6,Asbestos Cement Soil Stack: The soil and vent pipe is constructed of asbestos cement.,EXACT,{G_DRAINAGE}::{G6_ASBESTOS_SOIL_STACK},100,DONE
 92b38d9020,G6,"Provided it remains in good condition and is left undisturbed, it presents a low health risk.",EXACT,{G_DRAINAGE}::{G6_ASBESTOS_SOIL_STACK},100,DONE
 2eb8e4e1c1,G6,"If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",MENU,,0,UNVERIFIED
-c6bd7e5c9d,G7,"Not applicable: Other than the possibility of the drainage system being shared, there are no other common services to this property.",EXACT,{G_COMMON_SERVICES}::{NOT_INSPECTED},100,DONE
-1fc8407710,G7,"Description: Communal services and installations, including shared drainage, grounds maintenance, cleaning, lifts, communal heating, hot water systems, door entry systems, vehicular access, parking areas, other were not specifically assessed as part of this inspection.",MENU,,0,UNVERIFIED
+c6bd7e5c9d,G7,"Not applicable: Other than the possibility of the drainage system being shared, there are no other common services to this property.",EXACT,{G_COMMON_SERVICES}::{G7_NOT_APPLICABLE},100,DONE
+1fc8407710,G7,"Description: Communal services and installations, including shared drainage, grounds maintenance, cleaning, lifts, communal heating, hot water systems, door entry systems, vehicular access, parking areas, other were not specifically assessed as part of this inspection.",MENU,,0,VERIFIED
 b0a629b82f,G7,These installations are normally subject to maintenance contracts.,EXACT,{G_COMMON_SERVICES}::{COMMON_SERVICES},100,DONE
 48355a35c9,G7,Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs.,EXACT,{G_COMMON_SERVICES}::{COMMON_SERVICES},100,DONE
 ab1448e42f,G7,Condition rating 123 H Grounds The inspection of the grounds was visual only.,ADD,{G_COMMON_SERVICES}::{CONDITION_RATING},42,OPEN
-c32c71f85c,G7,"Underground services, buried structures, and concealed defects could not be inspected or confirmed as part of this inspection.",UNRESOLVED,{G_COMMON_SERVICES}::{NOT_INSPECTED},43,OPEN
-83432fbdac,G7,No inspection restrictions: There were no unusual restrictions affecting my inspection of the grounds within the apparent ownership of the property.,ADD,{G_COMMON_SERVICES}::{NOT_INSPECTED},50,OPEN
+c32c71f85c,G7,"Underground services, buried structures, and concealed defects could not be inspected or confirmed as part of this inspection.",UNRESOLVED,{G_COMMON_SERVICES}::{G7_DESCRIPTION},59,OPEN
+83432fbdac,G7,No inspection restrictions: There were no unusual restrictions affecting my inspection of the grounds within the apparent ownership of the property.,ADD,{G_COMMON_SERVICES}::{G7_NOT_APPLICABLE},50,OPEN
 ff5b4d8f5a,G7,Restricted access: Access to the rear or external elevations of the property was not available.,ADD,{G_COMMON_SERVICES}::{COMMON_SERVICES},48,OPEN
-2a2547c17b,G7,"Consequently, I was unable to inspect or comment on the condition or composition of the rear grounds.",ADD,{G_COMMON_SERVICES}::{NOT_INSPECTED},44,OPEN
-ecf3b08039,G7,Comments are limited to those external areas that were visible and accessible at the time of the inspection.,ADD,{G_COMMON_SERVICES}::{NOT_INSPECTED},46,OPEN
+2a2547c17b,G7,"Consequently, I was unable to inspect or comment on the condition or composition of the rear grounds.",ADD,{G_COMMON_SERVICES}::{G7_NOT_APPLICABLE},44,OPEN
+ecf3b08039,G7,Comments are limited to those external areas that were visible and accessible at the time of the inspection.,ADD,{G_COMMON_SERVICES}::{G7_DESCRIPTION},52,OPEN
 eaa46daa9e,H1,No garage: There are no garages on the property; no further comments required.,ADD,{H_GARAGE}::{NO_GARAGE},71,OPEN
 ad7afb6ecc,H1,"Not Inspected: Because access keys were not provided by the vendor or estate agent, or the provided keys could not open the garage, I was unable to inspect the garage(s) and therefore unable to comment about the internal condition of the garage(s) and roof timber or structure.",UNRESOLVED,{H_GARAGE}::{NOT_INSPECTED_ACCESS_KEYS},67,OPEN
 6da34f2cb4,H1,"Converted garage: The garage has been converted into habitable accommodation, an office, a workshop, other.",MENU,,0,UNVERIFIED

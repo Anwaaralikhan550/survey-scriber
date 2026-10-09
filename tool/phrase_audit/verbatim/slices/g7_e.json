@@ -1,0 +1,116 @@
+[
+  {
+    "screen": "activity_services_shared_services",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g7_na",
+        "masters": [
+          "{G_COMMON_SERVICES}"
+        ],
+        "sub": "{G7_NOT_APPLICABLE}",
+        "text": "Not applicable: Other than the possibility of the drainage system being shared, there are no other common services to this property.",
+        "tokens": [],
+        "when": [
+          "cb_not_applicable",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_applicable",
+            "label": "Not applicable",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g7_desc",
+        "masters": [
+          "{G_COMMON_SERVICES}"
+        ],
+        "sub": "{G7_DESCRIPTION}",
+        "text": "Description: Communal services and installations, including {CS_SERVICES} were not specifically assessed as part of this inspection. These installations are normally subject to maintenance contracts. Your legal adviser should confirm that appropriate maintenance arrangements are in place and establish your responsibilities for any associated service charges or future repair costs.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CS_SERVICES}",
+            "options": [
+              [
+                "g7s_shared_drainage",
+                "shared drainage"
+              ],
+              [
+                "g7s_grounds_maintenance",
+                "grounds maintenance"
+              ],
+              [
+                "g7s_cleaning",
+                "cleaning"
+              ],
+              [
+                "g7s_lifts",
+                "lifts"
+              ],
+              [
+                "g7s_communal_heating",
+                "communal heating"
+              ],
+              [
+                "g7s_hot_water_systems",
+                "hot water systems"
+              ],
+              [
+                "g7s_door_entry_systems",
+                "door entry systems"
+              ],
+              [
+                "g7s_vehicular_access",
+                "vehicular access"
+              ],
+              [
+                "g7s_parking_areas",
+                "parking areas"
+              ]
+            ],
+            "pdf_options": [
+              "shared drainage",
+              "grounds maintenance",
+              "cleaning",
+              "lifts",
+              "communal heating",
+              "hot water systems",
+              "door entry systems",
+              "vehicular access",
+              "parking areas"
+            ],
+            "label": "Communal services and installations",
+            "other": [
+              "g7s_other",
+              "g7s_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: Communal services and installations, including shared drainage, grounds maintenance, cleaning, lifts, communal heating, hot water systems, door entry systems, vehicular access, parking areas, other were not specifically assessed as part of this inspection."
+        ],
+        "when": [
+          "cb_cs_communal",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_cs_communal",
+            "label": "Communal services",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_services_shared_services_not_inspected"
+    ]
+  }
+]

@@ -216,11 +216,13 @@ class InspectionPhraseEngine {
       case 'activity_services_drainage_not_inspected':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_common_services_main_screen':
-        return _servicesCommonServicesMain(answers);
+        return _conditionRatingNotes(answers,
+            ratingKey: 'android_material_design_spinner4',
+            master: '{G_COMMON_SERVICES}');
       case 'activity_services_shared_services':
-        return _servicesCommonServices(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_shared_services_not_inspected':
-        return _servicesCommonServicesNotInspected(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_water_heating_main_screen':
         return _conditionRatingNotes(answers,
             ratingKey: 'android_material_design_spinner4',
@@ -3066,86 +3068,6 @@ class InspectionPhraseEngine {
     }
 
     return phrases;
-  }
-
-  List<String> _servicesCommonServicesMain(Map<String, String> answers) {
-    final phrases = <String>[];
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
-    if (rating.isNotEmpty) {
-      var template = _sub('{G_COMMON_SERVICES}', '{CONDITION_RATING}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{CS_COND_RATIING}', rating);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-    final notes = (answers['ar_etNote'] ?? '').trim();
-    if (notes.isNotEmpty) {
-      var template = _sub('{G_COMMON_SERVICES}', '{NOTES}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{CS_NOTES}', notes);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _servicesCommonServices(Map<String, String> answers) {
-    final selections = _labelsFor(
-      [
-        'cb_communal_drain',
-        'cb_grounds_maintenance',
-        'cb_cleaning',
-        'cb_lifts',
-        'cb_hot_water',
-        'cb_door_access_systems',
-        'cb_vehicular_access',
-        'cb_parking',
-        'cb_communal_lighting',
-        'cb_other_268',
-      ],
-      answers,
-      {
-        'cb_communal_drain': 'Communal drain',
-        'cb_grounds_maintenance': 'Grounds maintenance',
-        'cb_cleaning': 'Cleaning',
-        'cb_lifts': 'Lifts',
-        'cb_hot_water': 'Hot water',
-        'cb_door_access_systems': 'Door access systems',
-        'cb_vehicular_access': 'Vehicular access',
-        'cb_parking': 'Parking',
-        'cb_communal_lighting': 'Communal lighting',
-        'cb_other_268': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_268', 'et_other_783', selections);
-    // Both bank templates that consume this value place it at the start of
-    // a sentence ("{CS_COMM_SERVICES}, which are..." and directly after a
-    // full stop with no separating space), so it must be capitalized here
-    // rather than left lowercase like a normal mid-sentence substitution.
-    final commonServicesText = selections.isEmpty
-        ? ''
-        : _capitalizeFirst(_toWords(selections).toLowerCase());
-
-    if (_isChecked(answers['cb_not_applicable'])) {
-      var template = _sub('{G_COMMON_SERVICES}', '{NOT_APPLICABLE}');
-      if (template.isEmpty) return const [];
-      template = template.replaceAll('{COMMON_SERVICES}', commonServicesText);
-      return _split(_normalize(template));
-    }
-
-    if (commonServicesText.isEmpty) return const [];
-    var template = _sub('{G_COMMON_SERVICES}', '{COMMON_SERVICES}');
-    if (template.isEmpty) return const [];
-    template = template.replaceAll('{CS_COMM_SERVICES}', commonServicesText);
-    return _split(_normalize(template));
-  }
-
-  List<String> _servicesCommonServicesNotInspected(
-      Map<String, String> answers) {
-    if (!_isChecked(answers['cb_not_inspected'])) return const [];
-    final template = _sub('{G_COMMON_SERVICES}', '{NOT_INSPECTED}');
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
   }
 
   List<String> _insidePropertyLimitations(Map<String, String> answers) {

@@ -9328,6 +9328,45 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_g6_asbestos',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'g7_na',
+    'activity_services_shared_services',
+    '{G_COMMON_SERVICES}',
+    '{G7_NOT_APPLICABLE}',
+    [
+    ],
+    whenField: 'cb_not_applicable',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g7_desc',
+    'activity_services_shared_services',
+    '{G_COMMON_SERVICES}',
+    '{G7_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{CS_SERVICES}',
+        options: {
+          'g7s_shared_drainage': 'shared drainage',
+          'g7s_grounds_maintenance': 'grounds maintenance',
+          'g7s_cleaning': 'cleaning',
+          'g7s_lifts': 'lifts',
+          'g7s_communal_heating': 'communal heating',
+          'g7s_hot_water_systems': 'hot water systems',
+          'g7s_door_entry_systems': 'door entry systems',
+          'g7s_vehicular_access': 'vehicular access',
+          'g7s_parking_areas': 'parking areas',
+        },
+        otherCheckbox: 'g7s_other',
+        otherText: 'g7s_other_text',
+        pdfOptions: ['shared drainage', 'grounds maintenance', 'cleaning', 'lifts', 'communal heating', 'hot water systems', 'door entry systems', 'vehicular access', 'parking areas'],
+      ),
+    ],
+    pdf:
+        'Description: Communal services and installations, including shared drainage, grounds maintenance, cleaning, lifts, communal heating, hot water systems, door entry systems, vehicular access, parking areas, other were not specifically assessed as part of this inspection.',
+    whenField: 'cb_cs_communal',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

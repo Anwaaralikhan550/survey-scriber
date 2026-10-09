@@ -6453,97 +6453,76 @@
           "fields": [
             {
               "id": "cb_not_applicable",
-              "label": "Not Applicable",
+              "label": "Not applicable",
               "type": "checkbox"
             },
             {
-              "id": "label_common_services",
-              "label": "Common Services",
-              "type": "label",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "cb_cs_communal",
+              "label": "Communal services",
+              "type": "checkbox"
             },
             {
-              "id": "cb_communal_drain",
-              "label": "Communal drain",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "label_cs_services",
+              "label": "Communal services and installations",
+              "type": "label"
             },
             {
-              "id": "cb_grounds_maintenance",
-              "label": "Grounds maintenance",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "g7s_shared_drainage",
+              "label": "shared drainage",
+              "type": "checkbox"
             },
             {
-              "id": "cb_cleaning",
-              "label": "Cleaning",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "g7s_grounds_maintenance",
+              "label": "grounds maintenance",
+              "type": "checkbox"
             },
             {
-              "id": "cb_lifts",
-              "label": "Lifts",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "g7s_cleaning",
+              "label": "cleaning",
+              "type": "checkbox"
             },
             {
-              "id": "cb_hot_water",
-              "label": "Hot water",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "g7s_lifts",
+              "label": "lifts",
+              "type": "checkbox"
             },
             {
-              "id": "cb_door_access_systems",
-              "label": "Door access systems",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "g7s_communal_heating",
+              "label": "communal heating",
+              "type": "checkbox"
             },
             {
-              "id": "cb_vehicular_access",
-              "label": "Vehicular access",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "g7s_hot_water_systems",
+              "label": "hot water systems",
+              "type": "checkbox"
             },
             {
-              "id": "cb_parking",
-              "label": "Parking",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "g7s_door_entry_systems",
+              "label": "door entry systems",
+              "type": "checkbox"
             },
             {
-              "id": "cb_communal_lighting",
-              "label": "Communal lighting",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "id": "g7s_vehicular_access",
+              "label": "vehicular access",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_268",
+              "id": "g7s_parking_areas",
+              "label": "parking areas",
+              "type": "checkbox"
+            },
+            {
+              "id": "g7s_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_applicable",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_783",
+              "id": "g7s_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_268 & !cb_not_applicable",
+              "conditionalOn": "g7s_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
-            },
-            {
-              "id": "cb_not_inspected",
-              "label": "Not inspected",
-              "type": "checkbox"
             }
           ]
         },
@@ -7633,20 +7612,6 @@
           "type": "group",
           "parentId": "group_g6_drainage_96",
           "order": 4
-        },
-        {
-          "id": "activity_services_shared_services_not_inspected",
-          "title": "Not Inspected",
-          "type": "screen",
-          "parentId": "group_g7_common_services_98",
-          "order": 5,
-          "fields": [
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
-              "type": "checkbox"
-            }
-          ]
         },
         {
           "id": "group_g3_water_91",
