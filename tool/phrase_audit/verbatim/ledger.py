@@ -57,7 +57,9 @@ def build():
             rid = row_id(e['key'], s)
             key, score = '', 0
             if is_menu_or_directive(n):
-                disp, status = 'MENU', 'DONE'
+                # option list / directive: its options must be implemented in the
+                # form exactly as the PDF lists them (plan T3). Not verified yet.
+                disp, status = 'MENU', 'UNVERIFIED'
             elif n in idx and any(c[1:] == cnorm(s)[1:] for c in cidx[n]):
                 # exact incl. capitals and punctuation (first letter may differ)
                 disp, status, key, score = 'EXACT', 'DONE', idx[n][0], 100
@@ -84,20 +86,21 @@ def main():
         w.writerow(['id', 'section', 'pdf_sentence', 'disposition',
                     'bank_key', 'score', 'status'])
         w.writerows(rows)
-    prose = [r for r in rows if r[3] != 'MENU']
+    prose = [r for r in rows if r[3] != 'MENU']  # option lists are tracked separately
     by = {}
     for r in prose:
         by[r[3]] = by.get(r[3], 0) + 1
     open_rows = [r for r in rows if r[6] == 'OPEN']
+    unverified = [r for r in rows if r[6] == 'UNVERIFIED']
     print(f'ledger rows: {len(rows)}  (prose {len(prose)}, menu/directive {len(rows)-len(prose)})')
     for k in sorted(by):
         print(f'  {k:11} {by[k]:5}  {by[k]*100/len(prose):5.1f}%')
-    print(f'OPEN rows: {len(open_rows)}')
+    print(f'OPEN prose rows: {len(open_rows)}   |   UNVERIFIED option-list rows (T3): {len(unverified)}')
     secs = {}
     for r in open_rows:
         secs[r[1]] = secs.get(r[1], 0) + 1
     print('OPEN by section:', dict(sorted(secs.items())))
-    if '--check' in sys.argv and open_rows:
+    if '--check' in sys.argv and (open_rows or unverified):
         sys.exit(1)
 
 

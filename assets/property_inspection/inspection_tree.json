@@ -28683,13 +28683,18 @@
               "type": "checkbox"
             },
             {
+              "id": "ch_flashing_lead_substitute",
+              "label": "lead substitute",
+              "type": "checkbox"
+            },
+            {
               "id": "ch2",
               "label": "mortar",
               "type": "checkbox"
             },
             {
-              "id": "ch3",
-              "label": "lead and mortar",
+              "id": "ch_flashing_bricks",
+              "label": "bricks",
               "type": "checkbox"
             },
             {
@@ -28711,14 +28716,20 @@
               "conditionalMode": "show"
             },
             {
+              "id": "actv_flashing_condition",
+              "label": "Flashing condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Poor",
+                "Defective"
+              ]
+            },
+            {
               "id": "label_flaunching",
               "label": "Flaunching",
               "type": "label"
-            },
-            {
-              "id": "ch6",
-              "label": "lead",
-              "type": "checkbox"
             },
             {
               "id": "ch7",
@@ -28726,8 +28737,13 @@
               "type": "checkbox"
             },
             {
-              "id": "ch8",
-              "label": "lead and mortar",
+              "id": "ch_flaunching_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "ch_flaunching_concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
@@ -28747,6 +28763,17 @@
               "conditionalOn": "ch10",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "actv_flaunching_condition",
+              "label": "Flaunching condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Poor",
+                "Defective"
+              ]
             }
           ]
         },

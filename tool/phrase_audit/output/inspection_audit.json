@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2600,
+   "distinctEmitted": 2618,
    "approvedLegacyBank": 643,
-   "approvedCurrentBankOnly": 1930,
+   "approvedCurrentBankOnly": 1948,
    "unapproved": 0
   }
  },
@@ -2530,9 +2530,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Structural Alterations: The original roof structure has been substantially modified to form the loft conversion, with most elements now concealed from view, so I am unable to comment on the areas thus concealed. Externally I noted no severe loss of line or pitch to the roof coverings, which would suggest it is currently serving its designed function. Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.",
-    "Structural Alterations: The original roof structure has been substantially modified to form the loft conversion, with most elements now concealed from view, so I am unable to comment on the areas thus concealed. During my inspection I observed cracked walls. The adequacy of structural support cannot be confirmed during a visual inspection. Further investigation by an appropriately qualified structural engineer is recommended, and your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained for these works before purchase commitment.",
-    "Structural Alterations: The original roof structure has been substantially modified to form the loft conversion, with most elements now concealed from view, so I am unable to comment on the areas thus concealed. During my inspection I observed sagging ceiling. The adequacy of structural support cannot be confirmed during a visual inspection. Further investigation by an appropriately qualified structural engineer is recommended, and your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained for these works before purchase commitment."
+    "Structural Alterations: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view. Consequently, I am unable to comment on the condition of the concealed areas. Externally I noted no severe loss of line or pitch to the roof coverings, which would suggest it is currently serving its designed function. Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.",
+    "Structural Alterations: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view. Consequently, I am unable to comment on the condition of the concealed areas. During my inspection I observed cracked walls. The adequacy of structural support cannot be confirmed during a visual inspection. Further investigation by an appropriately qualified structural engineer is recommended, and your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained for these works before purchase commitment.",
+    "Structural Alterations: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view. Consequently, I am unable to comment on the condition of the concealed areas. During my inspection I observed sagging ceiling. The adequacy of structural support cannot be confirmed during a visual inspection. Further investigation by an appropriately qualified structural engineer is recommended, and your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained for these works before purchase commitment."
    ]
   },
   {
@@ -4002,9 +4002,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed, partially removed, or altered within the roof space, but I cannot confirm if the remaining structure has been properly supported because I could not get a clear view. Removed chimney breasts that are poorly supported can affect the structure of the building (See Section J1 - Risks). The adequacy of structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate approvals were obtained where applicable. Further, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible (See Section I1 - Regulations).",
-    "Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed, partially removed, or altered within the roof space, and the remaining structure appears to be properly supported. The adequacy of structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate approvals were obtained where applicable. If not, you should ask an appropriately qualified structural engineer to inspect the structure and provide a report with recommendations soon.",
-    "Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed, partially removed, or altered within the roof space, and the remaining structure does not appear to be properly supported. The adequacy of structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate approvals were obtained where applicable. If not, you should ask an appropriately qualified structural engineer to inspect the structure and provide a report with recommendations soon."
+    "Chimney Breast Alterations: Part of the chimney breast within the roof space has been removed. I could not confirm whether the remaining masonry is adequately supported due to limited visibility. Inadequate support can compromise the building's structural stability (See Section J1 - Risks). Your legal adviser should confirm that the necessary Building Regulations approval was obtained. If this cannot be confirmed, or there is any doubt about the adequacy of the support, you should instruct a suitably qualified professional to inspect the remaining structure and provide recommendations before committing to the purchase (See Section I1 - Regulations).",
+    "Chimney Breast Alterations: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure appears to be properly supported. Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work. If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",
+    "Chimney Breast Alterations: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported. Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work. If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible."
    ]
   },
   {
@@ -6352,17 +6352,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_water_proofing",
    "title": "Waterproofing",
-   "dataFieldCount": 12,
-   "permutationCount": 14,
+   "dataFieldCount": 15,
+   "permutationCount": 29,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 19,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 19,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Flashings: The waterproofing between the chimney stack and the roof covering (called the flashing) appears to be formed in lead, mortar, lead and mortar, tiles and sample detail. Flaunching: The cement bedding around the base of the chimney pot (called flaunching) appears to be formed in lead, mortar, lead and mortar, tiles and sample detail."
+    "Flashings: The waterproofing between the chimney stack and the roof covering (called the flashing) appears to be formed in lead.",
+    "Flashings: The waterproofing between the chimney stack and the roof covering (called the flashing) appears to be formed in lead substitute.",
+    "Flashings: The waterproofing between the chimney stack and the roof covering (called the flashing) appears to be formed in mortar."
    ]
   },
   {

@@ -1530,54 +1530,93 @@ class InspectionPhraseEngine {
   }
 
   List<String> _chimneyWaterProofing(Map<String, String> answers) {
+    // Flashings and flaunching are independent (PDF E1): each part is emitted
+    // when its own selection exists. Legacy ids (lead and mortar, flaunching
+    // lead) are still read so previously saved surveys keep rendering.
     final flashing = _labelsFor(
-      ['ch1', 'ch2', 'ch3', 'ch4'],
+      [
+        'ch1',
+        'ch_flashing_lead_substitute',
+        'ch2',
+        'ch3',
+        'ch_flashing_bricks',
+        'ch4',
+      ],
       answers,
       {
-        'ch1': 'Lead',
-        'ch2': 'Mortar',
-        'ch3': 'Lead and mortar',
-        'ch4': 'Tiles',
+        'ch1': 'lead',
+        'ch_flashing_lead_substitute': 'lead substitute',
+        'ch2': 'mortar',
+        'ch3': 'lead and mortar',
+        'ch_flashing_bricks': 'bricks',
+        'ch4': 'tiles',
       },
     );
-    if (_isChecked(answers['ch5'])) {
-      final otherFlashing = (answers['etGroundTypeOther'] ?? '').trim();
-      if (otherFlashing.isNotEmpty) {
-        flashing.add(otherFlashing);
-      }
-    }
+    _addOther(answers, 'ch5', 'etGroundTypeOther', flashing);
 
     final flaunching = _labelsFor(
-      ['ch6', 'ch7', 'ch8', 'ch9'],
+      [
+        'ch6',
+        'ch7',
+        'ch8',
+        'ch_flaunching_bricks',
+        'ch_flaunching_concrete',
+        'ch9',
+      ],
       answers,
       {
-        'ch6': 'Lead',
-        'ch7': 'Mortar',
-        'ch8': 'Lead and mortar',
-        'ch9': 'Tiles',
+        'ch6': 'lead',
+        'ch7': 'mortar',
+        'ch8': 'lead and mortar',
+        'ch_flaunching_bricks': 'bricks',
+        'ch_flaunching_concrete': 'concrete',
+        'ch9': 'tiles',
       },
     );
-    if (_isChecked(answers['ch10'])) {
-      final otherFlaunching = (answers['etFlaunchingOther'] ?? '').trim();
-      if (otherFlaunching.isNotEmpty) {
-        flaunching.add(otherFlaunching);
-      }
-    }
-
-    if (flashing.isEmpty || flaunching.isEmpty) return const [];
+    _addOther(answers, 'ch10', 'etFlaunchingOther', flaunching);
 
     final phraseCode = _chimneyPhraseCodeFromAnswers(
       answers,
       fallbackIsMulti: false,
     );
-    var template = _sub(phraseCode, '{WATERPROOFING}');
-    if (template.isEmpty) return const [];
-    final flashingText = _toWords(flashing).toLowerCase();
-    final flaunchingText = _toWords(flaunching).toLowerCase();
-    template = template
-        .replaceAll('{CS_WATERPROOFING_FLASHING_FORMED_IN}', flashingText)
-        .replaceAll('{CS_WATERPROOFING_FLAUNCHING_FORMED_IN}', flaunchingText);
-    return _split(_normalize(template));
+    final phrases = <String>[];
+
+    String part(String subCode, Map<String, String> tokens) {
+      var template = _sub(phraseCode, subCode);
+      if (template.isEmpty) return '';
+      tokens.forEach((token, value) {
+        template = template.replaceAll(token, value);
+      });
+      return template;
+    }
+
+    if (flashing.isNotEmpty) {
+      phrases.addAll(_split(_normalize(part('{WATERPROOFING_FLASHING}', {
+        '{CS_WATERPROOFING_FLASHING_FORMED_IN}':
+            _toWords(flashing).toLowerCase(),
+      }))));
+      final condition = _cleanLower(answers['actv_flashing_condition']);
+      if (condition.isNotEmpty) {
+        phrases.addAll(
+            _split(_normalize(part('{WATERPROOFING_FLASHING_CONDITION}', {
+          '{CS_WATERPROOFING_FLASHING_CONDITION}': condition,
+        }))));
+      }
+    }
+    if (flaunching.isNotEmpty) {
+      phrases.addAll(_split(_normalize(part('{WATERPROOFING_FLAUNCHING}', {
+        '{CS_WATERPROOFING_FLAUNCHING_FORMED_IN}':
+            _toWords(flaunching).toLowerCase(),
+      }))));
+      final condition = _cleanLower(answers['actv_flaunching_condition']);
+      if (condition.isNotEmpty) {
+        phrases.addAll(
+            _split(_normalize(part('{WATERPROOFING_FLAUNCHING_CONDITION}', {
+          '{CS_WATERPROOFING_FLAUNCHING_CONDITION}': condition,
+        }))));
+      }
+    }
+    return phrases;
   }
 
   List<String> _chimneyCondition(Map<String, String> answers) {
