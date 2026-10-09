@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 510,
+  "screensAudited": 512,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2632,
+   "distinctEmitted": 2648,
    "approvedLegacyBank": 643,
-   "approvedCurrentBankOnly": 1962,
+   "approvedCurrentBankOnly": 1978,
    "unapproved": 0
   }
  },
@@ -8329,6 +8329,44 @@
    "editedBankSamples": [
     "Removed chimney or pots: The pots to the chimney stack(s) have been removed and covered over. You should ask your legal adviser to confirm whether the removed chimney pots received appropriate statutory approvals where required from the local council and advise on the implications.",
     "Removed chimney or pots: The pots to the front, side, rear and sample detail chimney stack(s) have been removed and covered over. You should ask your legal adviser to confirm whether the removed chimney pots received appropriate statutory approvals where required from the local council and advise on the implications."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_chimney_aerials",
+   "title": "Aerials and Satellite Dishes",
+   "dataFieldCount": 2,
+   "permutationCount": 4,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Aerials and satellite dishes: An aerial is attached to the chimney stack. Where secure, no action is currently required.",
+    "Aerials and satellite dishes: A satellite dish is attached to the chimney stack. Where secure, no action is currently required.",
+    "Aerials and satellite dishes: An aerial and a satellite dish are attached to the chimney stack. Where secure, no action is currently required."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_chimney_defects",
+   "title": "Chimney Defects",
+   "dataFieldCount": 12,
+   "permutationCount": 14,
+   "severities": [],
+   "phraseStats": {
+    "total": 13,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 13,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Chimney Defects: One or more chimney defects were observed, including: loose flashings. Repairs should be undertaken by an appropriately qualified roofing contractor to prevent further deterioration and water penetration.",
+    "Chimney Defects: One or more chimney defects were observed, including: missing flashings. Repairs should be undertaken by an appropriately qualified roofing contractor to prevent further deterioration and water penetration.",
+    "Chimney Defects: One or more chimney defects were observed, including: cracked flaunching. Repairs should be undertaken by an appropriately qualified roofing contractor to prevent further deterioration and water penetration."
    ]
   },
   {

@@ -92,3 +92,52 @@ if __name__ == '__main__':
     changed, _, _ = edit_screen_fields(sys.argv[1], lambda f: f, path=tmp)
     print('changed' if changed else 'unchanged')
     os.remove(tmp)
+
+
+def _match_brace(text, open_idx):
+    depth, i, in_str = 0, open_idx, False
+    while i < len(text):
+        c = text[i]
+        if in_str:
+            if c == chr(92):
+                i += 1
+            elif c == '"':
+                in_str = False
+        else:
+            if c == '"':
+                in_str = True
+            elif c == '{':
+                depth += 1
+            elif c == '}':
+                depth -= 1
+                if depth == 0:
+                    return i
+        i += 1
+    raise ValueError('unbalanced braces')
+
+
+def add_screen(node_id, title, parent_id, order, fields, after_id, path=TREE):
+    """Insert a new screen node right after node `after_id` (text-level).
+    Returns False (no change) if node_id already exists."""
+    raw = open(path, encoding='utf-8', newline='').read()
+    if '"id": "%s"' % node_id in raw:
+        return False
+    marker = '"id": "%s"' % after_id
+    if raw.count(marker) != 1:
+        raise SystemExit(f'after id {after_id!r} occurs {raw.count(marker)}x')
+    mi = raw.index(marker)
+    line_start = raw.rfind('\n', 0, mi) + 1
+    indent = len(raw[line_start:mi]) - 2           # object indent (id is one level in)
+    obj_start = raw.rfind('{', 0, mi)
+    obj_end = _match_brace(raw, obj_start)
+    node = {
+        'id': node_id, 'title': title, 'type': 'screen',
+        'parentId': parent_id, 'order': order, 'fields': fields,
+    }
+    body = json.dumps(node, indent=2, ensure_ascii=False).split('\n')
+    pad = ' ' * indent
+    text = ',\r\n' + pad + body[0] + ''.join('\r\n' + pad + ln for ln in body[1:])
+    raw = raw[:obj_end + 1] + text + raw[obj_end + 1:]
+    json.loads(raw)
+    open(path, 'w', encoding='utf-8', newline='').write(raw)
+    return True

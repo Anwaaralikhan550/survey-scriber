@@ -24,6 +24,7 @@ class VerbatimToken {
     this.dropdownOptions = const [],
     this.text,
     this.lower = false,
+    this.cap = false,
     this.pdfOptions = const [],
   });
 
@@ -53,6 +54,10 @@ class VerbatimToken {
   /// capitalised for display while the PDF sentence is lower case).
   final bool lower;
 
+  /// Capitalise the first letter of the printed value (token starts a
+  /// sentence).
+  final bool cap;
+
   /// The option list exactly as the PDF prints it (without "other").
   final List<String> pdfOptions;
 }
@@ -67,6 +72,7 @@ class VerbatimRule {
     this.tokens, {
     this.pdf,
     this.first = false,
+    this.isAre = false,
   });
 
   /// Stable name used in test output.
@@ -86,6 +92,9 @@ class VerbatimRule {
 
   /// Emit before the screen's hand-written handler output (PDF order).
   final bool first;
+
+  /// Replace `{IS_ARE}` with is/are from the first token's number of choices.
+  final bool isAre;
 }
 
 /// All PDF-verbatim rules. Grouped by PDF section; keep PDF order.
@@ -328,6 +337,55 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Leaning chimney: The chimney stack appears slightly leaning, significantly leaning.',
     first: true,
   ),
+  VerbatimRule(
+    'e1_aerials_attached',
+    'activity_outside_property_chimney_aerials',
+    '@chimney',
+    '{AERIALS_ATTACHED}',
+    [
+      VerbatimToken(
+        '{CS_ATTACHED_ITEMS}',
+        options: {
+          'ca_aerial': 'an aerial',
+          'ca_satellite': 'a satellite dish',
+        },
+        pdfOptions: ['an aerial', 'a satellite dish'],
+        cap: true,
+      ),
+    ],
+    pdf:
+        'Aerials and satellite dishes: An aerial, a satellite dish is attached to the chimney stack.',
+    isAre: true,
+  ),
+  VerbatimRule(
+    'e1_chimney_defects',
+    'activity_outside_property_chimney_defects',
+    '@chimney',
+    '{CHIMNEY_DEFECTS}',
+    [
+      VerbatimToken(
+        '{CS_CHIMNEY_DEFECT_LIST}',
+        options: {
+          'cd_loose_flashings': 'loose flashings',
+          'cd_missing_flashings': 'missing flashings',
+          'cd_cracked_flaunching': 'cracked flaunching',
+          'cd_missing_mortar': 'missing mortar',
+          'cd_spalled_bricks': 'spalled bricks',
+          'cd_damaged_pointing': 'damaged pointing',
+          'cd_loose_chimney_pots': 'loose chimney pots',
+          'cd_broken_chimney_pots': 'broken chimney pots',
+          'cd_vegetation_growth': 'vegetation growth',
+          'cd_open_flues': 'open flues',
+          'cd_loose_aerial_fixings': 'loose aerial fixings',
+          'cd_loose_satellite_fixings': 'loose satellite dish fixings',
+        },
+        pdfOptions: ['loose flashings', 'missing flashings', 'cracked flaunching', 'missing mortar', 'spalled bricks', 'damaged pointing', 'loose chimney pots', 'broken chimney pots', 'vegetation growth', 'open flues', 'loose aerial fixings', 'loose satellite dish fixings'],
+      ),
+    ],
+    pdf:
+        'Chimney Defects: One or more chimney defects were observed, including: • Loose flashings • Missing flashings • Cracked flaunching • Missing mortar • Spalled bricks • Damaged pointing • Loose chimney pots • Broken chimney pots • Vegetation growth • Open flues • Loose aerial fixings • Loose satellite dish fixings Repairs should be undertaken by an appropriately qualified roofing contractor to prevent further deterioration and water penetration.',
+  ),
+  // <<verbatim-rules-end>>
 ];
 
 extension _VerbatimSpec on InspectionPhraseEngine {
@@ -348,15 +406,22 @@ extension _VerbatimSpec on InspectionPhraseEngine {
       var text = _phraseTexts['$master::${rule.sub}'] ?? '';
       if (text.isEmpty) continue;
       var complete = true;
+      var count = 0;
       for (final token in rule.tokens) {
-        final value = _verbatimTokenValue(token, answers);
-        if (value.isEmpty) {
+        final items = _verbatimTokenItems(token, answers);
+        if (items.isEmpty) {
           complete = false;
           break;
         }
+        if (count == 0) count = items.length;
+        var value = InspectionPhraseEngine._toWords(items);
+        if (token.cap) value = InspectionPhraseEngine._capitalizeFirst(value);
         text = text.replaceAll(token.token, value);
       }
       if (!complete) continue;
+      if (rule.isAre) {
+        text = text.replaceAll('{IS_ARE}', count > 1 ? 'are' : 'is');
+      }
       out.addAll(InspectionPhraseEngine._split(
         InspectionPhraseEngine._normalize(text),
       ));
@@ -364,13 +429,17 @@ extension _VerbatimSpec on InspectionPhraseEngine {
     return out;
   }
 
-  String _verbatimTokenValue(VerbatimToken token, Map<String, String> answers) {
+  List<String> _verbatimTokenItems(
+    VerbatimToken token,
+    Map<String, String> answers,
+  ) {
     if (token.dropdown != null) {
       final v = (answers[token.dropdown] ?? '').trim();
-      return token.lower ? v.toLowerCase() : v;
+      return v.isEmpty ? const [] : [token.lower ? v.toLowerCase() : v];
     }
     if (token.text != null) {
-      return (answers[token.text] ?? '').trim();
+      final v = (answers[token.text] ?? '').trim();
+      return v.isEmpty ? const [] : [v];
     }
     final labels = <String, String>{...token.legacy, ...token.options};
     final items = InspectionPhraseEngine._labelsFor(
@@ -386,6 +455,6 @@ extension _VerbatimSpec on InspectionPhraseEngine {
         items,
       );
     }
-    return InspectionPhraseEngine._toWords(items);
+    return items;
   }
 }

@@ -35303,6 +35303,94 @@
           ]
         },
         {
+          "id": "activity_outside_property_chimney_aerials",
+          "title": "Aerials and Satellite Dishes",
+          "type": "screen",
+          "parentId": "group_chimney_6",
+          "order": 22,
+          "fields": [
+            {
+              "id": "ca_aerial",
+              "label": "an aerial",
+              "type": "checkbox"
+            },
+            {
+              "id": "ca_satellite",
+              "label": "a satellite dish",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_chimney_defects",
+          "title": "Chimney Defects",
+          "type": "screen",
+          "parentId": "group_chimney_6",
+          "order": 24,
+          "fields": [
+            {
+              "id": "cd_loose_flashings",
+              "label": "loose flashings",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_missing_flashings",
+              "label": "missing flashings",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_cracked_flaunching",
+              "label": "cracked flaunching",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_missing_mortar",
+              "label": "missing mortar",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_spalled_bricks",
+              "label": "spalled bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_damaged_pointing",
+              "label": "damaged pointing",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_loose_chimney_pots",
+              "label": "loose chimney pots",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_broken_chimney_pots",
+              "label": "broken chimney pots",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_vegetation_growth",
+              "label": "vegetation growth",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_open_flues",
+              "label": "open flues",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_loose_aerial_fixings",
+              "label": "loose aerial fixings",
+              "type": "checkbox"
+            },
+            {
+              "id": "cd_loose_satellite_fixings",
+              "label": "loose satellite dish fixings",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
           "id": "outside_property_roof_covering_roof_structure_layout",
           "title": "Undulating/Uneven Roof",
           "type": "screen",

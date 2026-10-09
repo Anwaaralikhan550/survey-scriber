@@ -119,9 +119,16 @@ void main() {
         return a;
       }
 
-      String expected(Map<String, String> values) {
+      String expected(Map<String, String> values, {int count = 1}) {
         var s = template!;
-        values.forEach((token, v) => s = s.replaceAll(token, v));
+        values.forEach((token, v) {
+          final tok = rule.tokens.firstWhere((x) => x.token == token);
+          final shown = tok.cap && v.isNotEmpty
+              ? v[0].toUpperCase() + v.substring(1)
+              : v;
+          s = s.replaceAll(token, shown);
+        });
+        if (rule.isAre) s = s.replaceAll('{IS_ARE}', count > 1 ? 'are' : 'is');
         return plain(s);
       }
 
@@ -176,7 +183,8 @@ void main() {
           a[ids[0]] = 'true';
           a[ids[1]] = 'true';
           final two = '${t.options[ids[0]]} and ${t.options[ids[1]]}';
-          expect(run(a), contains(expected({...firstValues(), t.token: two})));
+          expect(run(a),
+              contains(expected({...firstValues(), t.token: two}, count: 2)));
           if (t.otherCheckbox != null) {
             final b = base()..removeWhere((k, _) => t.options.containsKey(k));
             b[t.otherCheckbox!] = 'true';

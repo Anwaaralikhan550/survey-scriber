@@ -1,0 +1,71 @@
+[
+  {
+    "screen": "activity_outside_property_chimney_aerials",
+    "new_screen": {
+      "id": "activity_outside_property_chimney_aerials",
+      "title": "Aerials and Satellite Dishes",
+      "parent": "group_chimney_6",
+      "order": 22,
+      "after": "activity_outside_property_chimney_removed_pots"
+    },
+    "rules": [
+      {
+        "id": "e1_aerials_attached",
+        "masters": ["{E_CHIMNEY_SINGLE_STACK}", "{E_CHIMNEY_MULTI_STACK}"],
+        "dart_master": "@chimney",
+        "sub": "{AERIALS_ATTACHED}",
+        "text": "Aerials and satellite dishes: {CS_ATTACHED_ITEMS} {IS_ARE} attached to the chimney stack. Where secure, no action is currently required.",
+        "pdf": "Aerials and satellite dishes: An aerial, a satellite dish is attached to the chimney stack.",
+        "master_ref_after": "{PARTIAL_VIEW}",
+        "kind": "checks",
+        "token": "{CS_ATTACHED_ITEMS}",
+        "options": [["ca_aerial", "an aerial"], ["ca_satellite", "a satellite dish"]],
+        "pdf_options": ["an aerial", "a satellite dish"],
+        "cap": true,
+        "is_are": true
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_chimney_defects",
+    "new_screen": {
+      "id": "activity_outside_property_chimney_defects",
+      "title": "Chimney Defects",
+      "parent": "group_chimney_6",
+      "order": 24,
+      "after": "activity_outside_property_chimney_aerials"
+    },
+    "rules": [
+      {
+        "id": "e1_chimney_defects",
+        "masters": ["{E_CHIMNEY_SINGLE_STACK}", "{E_CHIMNEY_MULTI_STACK}"],
+        "dart_master": "@chimney",
+        "sub": "{CHIMNEY_DEFECTS}",
+        "text": "Chimney Defects: One or more chimney defects were observed, including: {CS_CHIMNEY_DEFECT_LIST}. Repairs should be undertaken by an appropriately qualified roofing contractor to prevent further deterioration and water penetration.",
+        "pdf": "Chimney Defects: One or more chimney defects were observed, including: • Loose flashings • Missing flashings • Cracked flaunching • Missing mortar • Spalled bricks • Damaged pointing • Loose chimney pots • Broken chimney pots • Vegetation growth • Open flues • Loose aerial fixings • Loose satellite dish fixings Repairs should be undertaken by an appropriately qualified roofing contractor to prevent further deterioration and water penetration.",
+        "master_ref_after": "{PARTIAL_VIEW}",
+        "kind": "checks",
+        "token": "{CS_CHIMNEY_DEFECT_LIST}",
+        "options": [
+          ["cd_loose_flashings", "loose flashings"],
+          ["cd_missing_flashings", "missing flashings"],
+          ["cd_cracked_flaunching", "cracked flaunching"],
+          ["cd_missing_mortar", "missing mortar"],
+          ["cd_spalled_bricks", "spalled bricks"],
+          ["cd_damaged_pointing", "damaged pointing"],
+          ["cd_loose_chimney_pots", "loose chimney pots"],
+          ["cd_broken_chimney_pots", "broken chimney pots"],
+          ["cd_vegetation_growth", "vegetation growth"],
+          ["cd_open_flues", "open flues"],
+          ["cd_loose_aerial_fixings", "loose aerial fixings"],
+          ["cd_loose_satellite_fixings", "loose satellite dish fixings"]
+        ],
+        "pdf_options": [
+          "loose flashings", "missing flashings", "cracked flaunching", "missing mortar",
+          "spalled bricks", "damaged pointing", "loose chimney pots", "broken chimney pots",
+          "vegetation growth", "open flues", "loose aerial fixings", "loose satellite dish fixings"
+        ]
+      }
+    ]
+  }
+]

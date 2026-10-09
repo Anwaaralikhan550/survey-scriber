@@ -79,8 +79,23 @@ def sentences(t, min_len=25):
             if len(p.strip()) >= min_len]
 
 
+def has_option_run(n, min_run=3, max_words=3):
+    """True if >= min_run consecutive comma-separated segments are short
+    (<= max_words words): the signature of an option list (front, rear, side,
+    centre ...) as opposed to ordinary prose with a few commas."""
+    segs = re.split(r',\s+(?:or |and )?', n)
+    run = best = 0
+    for sg in segs:
+        if 0 < len(sg.split()) <= max_words:
+            run += 1
+            best = max(best, run)
+        else:
+            run = 0
+    return best >= min_run
+
+
 def is_menu_or_directive(n):
-    return bool(DIRECTIVE.search(n) or OPTION_LIST.search(n)
+    return bool(DIRECTIVE.search(n) or has_option_run(n) or '•' in n
                 or LETTER_MENU.search(n) or TWO_MENU.search(n) or len(n) < 20)
 
 
