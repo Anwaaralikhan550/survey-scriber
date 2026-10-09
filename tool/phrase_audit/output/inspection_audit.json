@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 512,
+  "screensAudited": 520,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2648,
-   "approvedLegacyBank": 643,
-   "approvedCurrentBankOnly": 1978,
+   "distinctEmitted": 2701,
+   "approvedLegacyBank": 634,
+   "approvedCurrentBankOnly": 2040,
    "unapproved": 0
   }
  },
@@ -4559,18 +4559,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_roof_repair_tiles",
    "title": "Repair Tiles",
-   "dataFieldCount": 24,
-   "permutationCount": 28,
+   "dataFieldCount": 10,
+   "permutationCount": 16,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 3,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 2,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair soon: One or more tiles, slates, sheets roof covering are loose, have slipped, are missing, are cracked, are poorly secured, are damaged and sample detail. This should be repaired soon. You should contact a qualified roofing contractor to carry out further investigation and replace or repair damaged covering.",
-    "Repair now: One or more tiles, slates, or roof covering sections are loose, are lifted, have slipped, are missing, are cracked, are poorly secured, are damaged and sample detail. This should be repaired now. The fixings on older roofs can weaken and result in more future maintenance. In some cases, it may be economical to replace the whole roof covering rather than continuing to repair. You should contact a qualified roofing contractor to carry out further investigation and recommend remedial work."
+    "Leaking: The roof covering has extensive defects that are likely to allow water penetration into the building and may present a safety risk. Urgent repair is required. You should instruct a suitably qualified roofing contractor to carry out a detailed inspection, identify the full extent of the defects, and undertake the necessary remedial works without delay.",
+    "Repair soon: One or more tiles, slates, are loose, missing, lifted, slipped, cracked, broken, distorted and sample detail. This should be repaired soon. You should contact a qualified roofing contractor to carry out further investigation and replace or repair damaged covering.",
+    "Repair now: One or more tiles, slates, roof covering sections are severely or significantly loose, missing, lifted, slipped, cracked, broken, distorted and sample detail. Given the extent of the defect, this should be repaired now. The fixings on older roofs can weaken and result in more future maintenance. In some cases, it may be economical to replace the whole roof covering rather than continuing to repair. You should contact a qualified roofing contractor to carry out further investigation and recommend remedial work."
    ]
   },
   {
@@ -4704,18 +4705,18 @@
    "sectionKey": "E",
    "screenId": "outside_property_about_roof_layout",
    "title": "Pitched",
-   "dataFieldCount": 25,
-   "permutationCount": 31,
+   "dataFieldCount": 19,
+   "permutationCount": 29,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 6,
+    "total": 8,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
     "Asbestos: Parts of the roof covering and verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
-    "Flat felt roof coverings have a comparatively short life and will require regular maintenance checks. Even though the general condition of the felt may appear satisfactory for its type and age, repairs or replacement must be expected in the future. It is difficult to predict when this will be required as felt roofs can break down with little warning, even when visually appearing sound.",
+    "Condition: Where visible, the covering appears in good condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
     "Condition: Where visible, the covering appears in reasonable condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected."
    ]
   },
@@ -4967,18 +4968,19 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_roof_spreading_repair",
    "title": "Roof Spreading",
-   "dataFieldCount": 1,
-   "permutationCount": 7,
+   "dataFieldCount": 4,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
-    "total": 3,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 2,
+    "total": 5,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Roof Spreading: The roof slopes appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards. These are visual indicators that may be consistent with roof spread and suggest that the roof timber structure may require strengthening. I recommend that you instruct a suitably qualified structural engineer or roofing specialist to carry out further investigation and advise on any necessary remedial work without undue delay (see section J1 - Risk to Building).",
-    "There is evidence suggesting that the roof timber structure may previously have required strengthening due to the additional weight of a replacement roof covering. The roof timbers now appear to have been strengthened where visible. No repair is currently required, but the property must be maintained in the normal way."
+    "Roof Spreading: The roof slopes to all of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards. These are visual indicators that may be consistent with roof spread and suggest that the roof timber structure may require strengthening. I recommend that you instruct a suitably qualified structural engineer or roofing specialist to carry out further investigation and advise on any necessary remedial work without undue delay (see section J1 - Risk to Building).",
+    "Roof Spreading: The roof slopes to front of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards. These are visual indicators that may be consistent with roof spread and suggest that the roof timber structure may require strengthening. I recommend that you instruct a suitably qualified structural engineer or roofing specialist to carry out further investigation and advise on any necessary remedial work without undue delay (see section J1 - Risk to Building).",
+    "Roof Spreading: The roof slopes to side of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards. These are visual indicators that may be consistent with roof spread and suggest that the roof timber structure may require strengthening. I recommend that you instruct a suitably qualified structural engineer or roofing specialist to carry out further investigation and advise on any necessary remedial work without undue delay (see section J1 - Risk to Building)."
    ]
   },
   {
@@ -4986,18 +4988,18 @@
    "screenId": "activity_outside_property_rwg_about",
    "title": "About RWG",
    "dataFieldCount": 10,
-   "permutationCount": 18,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 15,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 15,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The rainwater goods contain asbestos cement. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before the pipes or gutters are disturbed in any way. This includes activities such as cleaning out gutters, etc.",
-    "General Maintenance: Rainwater goods should be inspected and cleared at regular intervals, particularly during the autumn and following severe weather. Routine maintenance will assist in preventing blockages, overflow, water penetration, and premature deterioration.",
-    "Shared Rainwater Goods: The rainwater goods are believed to be shared with the adjoining property. Your legal adviser should confirm ownership, maintenance responsibilities and any rights or obligations affecting the shared installation (See Section I3)."
+    "Description: The rainwater goods comprise uPVC gutters, downpipes, hoppers, and associated fittings.",
+    "Description: The rainwater goods comprise cast iron gutters, downpipes, hoppers, and associated fittings.",
+    "Description: The rainwater goods comprise aluminium gutters, downpipes, hoppers, and associated fittings."
    ]
   },
   {
@@ -5300,27 +5302,27 @@
    "sectionKey": "E",
    "screenId": "outside_property_about_roof_layout__flat",
    "title": "Flat",
-   "dataFieldCount": 25,
-   "permutationCount": 31,
+   "dataFieldCount": 12,
+   "permutationCount": 22,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 6,
+    "total": 17,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 17,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Asbestos: Parts of the roof covering and verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
+    "Flat roof coverings: The flat roof covering over the building is formed in mineral felt.",
     "Flat felt roof coverings have a comparatively short life and will require regular maintenance checks. Even though the general condition of the felt may appear satisfactory for its type and age, repairs or replacement must be expected in the future. It is difficult to predict when this will be required as felt roofs can break down with little warning, even when visually appearing sound.",
-    "Condition: Where visible, the covering appears in reasonable condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected."
+    "Flat roof coverings: The flat roof covering over the building is formed in high-performance felt."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_roof_repair_flat_roof",
    "title": "Flat Roof Repair",
-   "dataFieldCount": 16,
-   "permutationCount": 20,
+   "dataFieldCount": 10,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
     "total": 2,
@@ -5329,16 +5331,86 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair Flat roof: The flat roof covering is torn, split, damaged, blistered, holding water, covered with moss and sample detail. Repairs or replacement should be undertaken before further deterioration results in water penetration. To replace the covering, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work.",
-    "Repair Flat roof: The flat roof covering is torn, split, damaged, blistered, ponding and sample detail. Causing damp – The observed defect is causing damp penetration to the building below. The flat roof covering needs repair or replacement now. To do this, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work (see section J1 - Risk to Building)."
+    "Repair Flat roof: The flat roof covering is weathered, blistered, split, torn, worn, ponding, damaged and sample detail. Repairs or replacement should be undertaken before further deterioration results in water penetration. To replace the covering, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work.",
+    "Repair Flat roof: The flat roof covering is weathered, blistered, split, torn, worn, ponding, damaged and sample detail. Causing damp - The observed defect is causing damp penetration to the building below. The flat roof covering needs repair or replacement now. To do this, the work will have to meet the requirements of the Building Regulations. This may increase the amount of repair work (see section J1 - Risk to Building)."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_rwg__repair_pipes_gutters",
    "title": "Repairs",
-   "dataFieldCount": 21,
-   "permutationCount": 25,
+   "dataFieldCount": 8,
+   "permutationCount": 12,
+   "severities": [],
+   "phraseStats": {
+    "total": 2,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 2,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Damaged Sections: Sections of the gutters or downpipes are cracked, distorted, broken, split, missing and sample detail. This should be repaired soon. Repairs or replacement should be undertaken to maintain the weather resistance of the building.",
+    "Damaged Sections: Sections of the gutters or downpipes are cracked, distorted, broken, split, missing and sample detail. This should be repaired now. Repairs or replacement should be undertaken to maintain the weather resistance of the building."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_rwg_insufficient_slope",
+   "title": "Insufficient slope",
+   "dataFieldCount": 1,
+   "permutationCount": 3,
+   "severities": [],
+   "phraseStats": {
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Insufficient slope: The slope on the guttering is too shallow. This prevents the rainwater from draining properly and may result in future leaks. The gutters should be refitted with an adequate slope soon. You may have to replace parts of the system, and this can increase the amount of repair work."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_rwg_leakage",
+   "title": "Leakage",
+   "dataFieldCount": 1,
+   "permutationCount": 3,
+   "severities": [],
+   "phraseStats": {
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Leakage: Staining to fittings and adjoining elements and localised dampness indicate previous or current leakage from the rainwater goods. The affected sections should be checked for watertightness and repaired soon or repaired now, depending on the severity of the defect. Repairs should be undertaken to prevent further deterioration of adjacent building elements."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_rwg_defective_connections",
+   "title": "Defective connections",
+   "dataFieldCount": 8,
+   "permutationCount": 12,
+   "severities": [],
+   "phraseStats": {
+    "total": 2,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 2,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Defective Connections: One or more gutter or downpipe joints and connections are loose, missing, leaking, displaced, defective and sample detail. This should be repaired soon. Repairs should be undertaken to maintain the effectiveness of the rainwater system.",
+    "Defective Connections: One or more gutter or downpipe joints and connections are loose, missing, leaking, displaced, defective and sample detail. This should be repaired now. Repairs should be undertaken to maintain the effectiveness of the rainwater system."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_rwg_corrosion",
+   "title": "Corrosion",
+   "dataFieldCount": 1,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
     "total": 3,
@@ -5347,9 +5419,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Damaged Sections: The Pipes and Gutters are leaking, loose, incomplete, blocked, rusted, Do not have sufficient slope and sample detail. This should be repaired soon. Repairs or replacement should be undertaken to maintain the weather resistance of the building.",
-    "Insufficient slope: The slope on the guttering is too shallow. This prevents the rainwater from draining properly and may result in future leaks. The gutters should be refitted with an adequate slope soon. You may have to replace parts of the system, and this can increase the amount of repair work.",
-    "Damaged Sections: The Pipes and Gutters are leaking, loose, incomplete, blocked, rusted, Do not have sufficient slope and sample detail and causing damp penetration to nearby walls. This should be repaired now. Repairs should be undertaken to prevent further deterioration of adjacent building elements (see section J1 - Risk to Building)."
+    "Corrosion: Sections of the rainwater goods exhibit light corrosion. Corroded sections should be repaired or replaced where necessary to maintain satisfactory performance. This should be repaired promptly if the damage is significant.",
+    "Corrosion: Sections of the rainwater goods exhibit moderate corrosion. Corroded sections should be repaired or replaced where necessary to maintain satisfactory performance. This should be repaired promptly if the damage is significant.",
+    "Corrosion: Sections of the rainwater goods exhibit significant corrosion. Corroded sections should be repaired or replaced where necessary to maintain satisfactory performance. This should be repaired promptly if the damage is significant."
    ]
   },
   {
@@ -5468,8 +5540,8 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_roof_repair_parapet_wall",
    "title": "Parapet Wall Repair",
-   "dataFieldCount": 31,
-   "permutationCount": 35,
+   "dataFieldCount": 14,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
     "total": 3,
@@ -5478,9 +5550,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
+    "Safety hazard: This is a safety hazard, and parts of the parapet wall may fall to the ground and cause injury to people or property damage (see section J3 - Risk to People).",
     "Repair parapet: The rendering, copping, flashing and sample detail of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured and sample detail. This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
-    "Repair parapet: The rendering, copping, flashing and sample detail of the parapet(s) of the roof are badly damaged, very loose and sample detail. This should be repaired now. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
-    "Safety hazard: This is a safety hazard, and parts of the parapet wall may fall to the ground and cause injury to people or property damage (see section J3 - Risk to People)."
+    "Repair parapet: The rendering, copping, flashing and sample detail of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured and sample detail. This should be repaired now. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work."
    ]
   },
   {
@@ -5749,18 +5821,18 @@
    "sectionKey": "E",
    "screenId": "outside_property_about_roof_layout__mansard",
    "title": "Mansard",
-   "dataFieldCount": 25,
-   "permutationCount": 31,
+   "dataFieldCount": 19,
+   "permutationCount": 29,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 6,
+    "total": 8,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
     "Asbestos: Parts of the roof covering and verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
-    "Flat felt roof coverings have a comparatively short life and will require regular maintenance checks. Even though the general condition of the felt may appear satisfactory for its type and age, repairs or replacement must be expected in the future. It is difficult to predict when this will be required as felt roofs can break down with little warning, even when visually appearing sound.",
+    "Condition: Where visible, the covering appears in good condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
     "Condition: Where visible, the covering appears in reasonable condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected."
    ]
   },
@@ -5769,37 +5841,35 @@
    "screenId": "outside_property_roof_covering_weathered_layout",
    "title": "Condition",
    "dataFieldCount": 2,
-   "permutationCount": 8,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
+    "Condition: Where visible, the covering appears in good condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
     "Condition: Where visible, the covering appears in reasonable condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
-    "Condition: Where visible, the covering appears in satisfactory condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
-    "Condition: Where visible, the covering appears in unsatisfactory and poor condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected."
+    "Condition: Where visible, the covering appears in fair condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_roof_repair_verge",
    "title": "Verge Repair",
-   "dataFieldCount": 24,
-   "permutationCount": 28,
+   "dataFieldCount": 12,
+   "permutationCount": 14,
    "severities": [],
    "phraseStats": {
-    "total": 3,
+    "total": 1,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair verge: The mortar, tiles, clips and sample detail along the edge of the roof, called the verge, are damaged, loose, partly missing, cracked, poorly secured and sample detail. This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge, and this can increase the amount of repair work.",
-    "Repair verge: The mortar, tiles, clips and sample detail along the edge of the roof, called the verge, are badly damaged, badly cracked, about to drop and sample detail. This should be repaired now. Adjacent parts of the roof covering may have to be disturbed to repair the verge, and this can increase the amount of repair work.",
-    "This is a safety hazard, and parts of the verge may fall to the ground (see section J3 - Risk to People)."
+    "Repair verge: The mortar, tiles, slates, clips, caps and sample detail items along the edge of the roof, called the verge, are damaged, cracked, loose and sample detail. This should be repaired soon and, if significant, repaired promptly. Adjacent parts of the roof covering may have to be disturbed to repair the verge, and this can increase the amount of repair work. This should be repaired soon."
    ]
   },
   {
@@ -6034,17 +6104,73 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_roof_repair_valley_gutters",
    "title": "Valley Gutter Repair",
-   "dataFieldCount": 13,
-   "permutationCount": 15,
+   "dataFieldCount": 8,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Repair valley gutters: The valley gutter at the junction of the roofs to the front, side, rear and sample detail of the building is partially and completely blocked with debris, poorly aligned, poor detailing, detailing damage and sample detail. This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work."
+    "Repair valley gutters: The valley gutter at the junction of the roofs to all, front, side and rear of the building is blocked, has loose mortar and poorly aligned. This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work. This should be repaired soon.",
+    "Repair valley gutters: The valley gutter at the junction of the roofs to all, front, side and rear of the building is blocked, has loose mortar and poorly aligned. This should be repaired now. Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work. This should be repaired soon."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_roof_repair_flashing",
+   "title": "Flashing Repair",
+   "dataFieldCount": 2,
+   "permutationCount": 6,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Repair flashing: The waterproofing at the junction of the roof covering and wall is damaged or defective. This should be repaired soon. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+    "Repair flashing: The waterproofing at the junction of the roof covering and wall is damaged or defective. This should be repaired now. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+    "Causing damp: This is causing damp penetration to the adjoining building elements, and you must arrange to repair this urgently. Further defects and damage may be revealed from an intrusive or closer inspection by a qualified person."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_roof_repair_ridge_tiles",
+   "title": "Ridge Tiles Repair",
+   "dataFieldCount": 1,
+   "permutationCount": 5,
+   "severities": [],
+   "phraseStats": {
+    "total": 2,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 2,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Repair ridge tiles: The covering along the top of the roof structure called, the ridge tiles, is damaged or defective. This should be repaired soon. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+    "Repair ridge tiles: The covering along the top of the roof structure called, the ridge tiles, is damaged or defective. This should be repaired now. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_roof_repair_hip_tiles",
+   "title": "Hip Tiles Repair",
+   "dataFieldCount": 1,
+   "permutationCount": 5,
+   "severities": [],
+   "phraseStats": {
+    "total": 2,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 2,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Repair hip tile: The covering along the slope of the roof structure (called the hip tiles) is damaged or defective. This should be repaired soon. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+    "Repair hip tile: The covering along the slope of the roof structure (called the hip tiles) is damaged or defective. This should be repaired now. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done."
    ]
   },
   {
@@ -6390,18 +6516,18 @@
    "sectionKey": "E",
    "screenId": "outside_property_about_roof_layout__other",
    "title": "Other",
-   "dataFieldCount": 25,
-   "permutationCount": 31,
+   "dataFieldCount": 20,
+   "permutationCount": 30,
    "severities": [],
    "phraseStats": {
-    "total": 7,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 6,
+    "total": 8,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
     "Asbestos: Parts of the roof covering and verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
-    "Flat felt roof coverings have a comparatively short life and will require regular maintenance checks. Even though the general condition of the felt may appear satisfactory for its type and age, repairs or replacement must be expected in the future. It is difficult to predict when this will be required as felt roofs can break down with little warning, even when visually appearing sound.",
+    "Condition: Where visible, the covering appears in good condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
     "Condition: Where visible, the covering appears in reasonable condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected."
    ]
   },
@@ -6409,19 +6535,19 @@
    "sectionKey": "E",
    "screenId": "outside_property_roof_covering_flashing_layout",
    "title": "Roof Flashing With Wall",
-   "dataFieldCount": 6,
-   "permutationCount": 12,
+   "dataFieldCount": 9,
+   "permutationCount": 17,
    "severities": [],
    "phraseStats": {
-    "total": 7,
+    "total": 11,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 7,
+    "approvedCurrentBankOnly": 11,
     "unapproved": 0
    },
    "editedBankSamples": [
     "Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in lead.",
     "Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in mortar.",
-    "Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in tiles."
+    "Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in clay tiles."
    ]
   },
   {
@@ -6780,8 +6906,8 @@
    "sectionKey": "E",
    "screenId": "outside_property_roof_covering_ridge_tiles_layout",
    "title": "Ridge Tiles",
-   "dataFieldCount": 6,
-   "permutationCount": 12,
+   "dataFieldCount": 5,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
     "total": 7,
@@ -6790,9 +6916,9 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in tiles.",
-    "Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in lead.",
-    "Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in concrete."
+    "Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in clay.",
+    "Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in concrete.",
+    "Condition: Where visible, they appear in good condition. Loose or defective ridge tiles should be rebedded or mechanically fixed as appropriate. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the ridge tiles should be expected."
    ]
   },
   {
@@ -7002,16 +7128,17 @@
    "screenId": "activity_outside_property_rwg_blocked_gullies",
    "title": "Blocked gullies",
    "dataFieldCount": 1,
-   "permutationCount": 3,
+   "permutationCount": 5,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Blocked Gullies: One or more drainage gullies serving the rainwater system appear partially blocked, fully blocked. Blocked gullies may result in localised flooding and water penetration to adjacent building elements. The gullies should be cleared and maintained regularly."
+    "Blocked Gullies: One or more drainage gullies serving the rainwater system appear partially blocked. Blocked gullies may result in localised flooding and water penetration to adjacent building elements. The gullies should be cleared and maintained regularly.",
+    "Blocked Gullies: One or more drainage gullies serving the rainwater system appear fully blocked. Blocked gullies may result in localised flooding and water penetration to adjacent building elements. The gullies should be cleared and maintained regularly."
    ]
   },
   {
@@ -7113,8 +7240,8 @@
    "sectionKey": "E",
    "screenId": "outside_property_roof_covering_hip_tiles_layout",
    "title": "Hip Tiles",
-   "dataFieldCount": 6,
-   "permutationCount": 12,
+   "dataFieldCount": 5,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
     "total": 7,
@@ -7123,9 +7250,28 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in tiles.",
-    "Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in lead.",
-    "Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in concrete."
+    "Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in clay.",
+    "Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in concrete.",
+    "Condition: Where visible, they appear in good condition. Repairs should be undertaken where movement or deterioration is evident. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the hip tiles should be expected."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "outside_property_roof_covering_valley_gutters_layout",
+   "title": "Valley Gutters",
+   "dataFieldCount": 5,
+   "permutationCount": 13,
+   "severities": [],
+   "phraseStats": {
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Valley Gutters: The valley gutters are formed in lead.",
+    "Valley Gutters: The valley gutters are formed in mortar.",
+    "Condition: Where visible, they appear in good condition. Blocked or defective valley gutters should be cleared, repaired, or replaced as necessary to ensure effective drainage and prevent water penetration into the building. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the guttering should be expected."
    ]
   },
   {
@@ -7562,19 +7708,19 @@
    "sectionKey": "E",
    "screenId": "outside_property_roof_covering_parapet_wall_layout",
    "title": "Parapet Wall",
-   "dataFieldCount": 7,
-   "permutationCount": 17,
+   "dataFieldCount": 14,
+   "permutationCount": 22,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 15,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
+    "approvedCurrentBankOnly": 15,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Parapet walls: The parapet wall(s) is constructed of bricks.",
-    "Parapet walls: The parapet wall(s) is constructed of concrete.",
-    "Parapet walls: The parapet wall(s) is constructed of block."
+    "Parapet walls: The parapet wall(s) are constructed of brick.",
+    "Parapet walls: The parapet wall(s) are constructed of stone.",
+    "Parapet walls: The parapet wall(s) are constructed of rendered masonry."
    ]
   },
   {
@@ -7807,19 +7953,19 @@
    "sectionKey": "E",
    "screenId": "outside_property_roof_covering_deflection_layout",
    "title": "Deflection",
-   "dataFieldCount": 12,
-   "permutationCount": 16,
+   "dataFieldCount": 4,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
     "total": 5,
-    "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "You should contact a qualified roofing contractor to replace damaged timber or strengthen any weakened or undersized timber so that the roof structure can adequately bear the weight of the roof covering.",
-    "Minor deflection was noted to the roof front, side, rear and sample detail slope(s). This degree of deflection is not considered to be structurally significant and is not unusual for a building of this age, where some degree of settlement and timber movement is to be expected over the lifespan of the roof structure. No remedial action is considered necessary at this stage.",
-    "This is likely to be caused by damaged roof timber, heavy replacement covering and sample detail."
+    "Roof line deflection: Minor undulation or deflection to all roof slopes were observed. Such distortion is not uncommon in properties of this age and, unless accompanied by evidence of progressive movement, is not necessarily of structural significance.",
+    "Roof line deflection: Minor undulation or deflection to front roof slopes were observed. Such distortion is not uncommon in properties of this age and, unless accompanied by evidence of progressive movement, is not necessarily of structural significance.",
+    "Roof line deflection: Minor undulation or deflection to rear roof slopes were observed. Such distortion is not uncommon in properties of this age and, unless accompanied by evidence of progressive movement, is not necessarily of structural significance."
    ]
   },
   {
@@ -8373,35 +8519,36 @@
    "sectionKey": "E",
    "screenId": "outside_property_roof_covering_roof_structure_layout",
    "title": "Undulating/Uneven Roof",
-   "dataFieldCount": 8,
-   "permutationCount": 12,
+   "dataFieldCount": 4,
+   "permutationCount": 8,
    "severities": [],
    "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 3,
+    "total": 2,
+    "approvedLegacy": 0,
     "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
     "No repair required: No repair is currently needed, and this is not considered to be structurally significant. The timber used in older roofs can gradually change shape or distort during normal use. Also, heavier replacement tiles can cause minor deflection to the roof line in some instances. This does not currently appear to be a problem and is considered normal for this type of roof. Should further deflection or distortion occur, you should arrange for inspection by a qualified person.",
-    "Repair defect: The surface of the front, side and rear roof slope(s) of the building is significantly distorted, uneven or undulating. You should contact a qualified roofing contractor to replace damaged timber or strengthen any weakened or undersized timber so that the roof structure can adequately bear the weight of the roof covering (see section J1 - Risk to Building)."
+    "Repair defect: The surface of the front, rear and side roof slope(s) of the building is significantly distorted, uneven or undulating. You should contact a qualified roofing contractor to replace damaged timber or strengthen any weakened or undersized timber so that the roof structure can adequately bear the weight of the roof covering (see section J1 - Risk to Building)."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_roof_covering_summary",
    "title": "Roof Covering Summary",
-   "dataFieldCount": 2,
-   "permutationCount": 4,
+   "dataFieldCount": 3,
+   "permutationCount": 5,
    "severities": [],
    "phraseStats": {
-    "total": 2,
+    "total": 3,
     "approvedLegacy": 1,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Old roof covering: The roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon. If re-covered in heavier materials the timbers may need to be strengthened to comply with current Building Regulations. Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life."
+    "Old roof covering: The roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon. If re-covered in heavier materials the timbers may need to be strengthened to comply with current Building Regulations. Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life.",
+    "General maintenance: Roof coverings should be inspected periodically, particularly following severe weather. Routine maintenance, including replacement of isolated defective coverings, clearance of debris and localised repairs, should be expected throughout the life of the roof."
    ]
   },
   {

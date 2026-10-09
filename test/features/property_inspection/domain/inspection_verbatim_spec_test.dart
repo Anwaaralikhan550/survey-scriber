@@ -107,7 +107,9 @@ void main() {
       // Answers that make every token non-empty (first option of each).
       Map<String, String> base() {
         final a = <String, String>{};
+        if (rule.whenField != null) a[rule.whenField!] = rule.whenValue!;
         for (final t in rule.tokens) {
+          if (t.constant != null) continue;
           if (t.dropdown != null) {
             a[t.dropdown!] = t.dropdownOptions.first;
           } else if (t.text != null) {
@@ -135,19 +137,31 @@ void main() {
       Map<String, String> firstValues() {
         final m = <String, String>{};
         for (final t in rule.tokens) {
-          m[t.token] = t.dropdown != null
-              ? shown(t, t.dropdownOptions.first)
-              : t.text != null
-                  ? 'sample'
-                  : t.options.values.first;
+          m[t.token] = t.constant != null
+              ? t.constant!
+              : t.dropdown != null
+                  ? shown(t, t.dropdownOptions.first)
+                  : t.text != null
+                      ? 'sample'
+                      : t.options.values.first;
         }
         return m;
       }
 
-      String run(Map<String, String> answers) =>
-          collapse(engine.buildPhrases(rule.screen, answers).join(' '));
+      String run(Map<String, String> answers) => collapse(engine
+          .buildPhrases(
+            rule.screen,
+            {
+              if (rule.whenField != null) rule.whenField!: rule.whenValue!,
+              ...answers,
+            },
+          )
+          .join(' '));
 
       test('every option emits the exact bank sentence (T5)', () {
+        if (rule.tokens.every((t) => t.constant != null)) {
+          expect(run({}), contains(expected(firstValues())));
+        }
         for (final t in rule.tokens) {
           if (t.dropdown != null) {
             for (final v in t.dropdownOptions) {
@@ -197,8 +211,11 @@ void main() {
 
       test('nothing chosen emits nothing from this rule', () {
         final stem = plain(template!.split('{').first);
-        if (stem.length > 12) {
-          expect(run({}), isNot(contains(stem)));
+        final alwaysOn = rule.whenField == null &&
+            rule.tokens.every((t) => t.constant != null || t.optional);
+        if (stem.length > 12 && !alwaysOn) {
+          final bare = collapse(engine.buildPhrases(rule.screen, {}).join(' '));
+          expect(bare, isNot(contains(stem)));
         }
       });
     });

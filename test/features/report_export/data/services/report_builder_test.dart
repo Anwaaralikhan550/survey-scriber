@@ -2853,6 +2853,98 @@ void main() {
       );
     });
 
+    test(
+        'adds the E2 roof covering J1 and J3 injections from the bank (PDF Add text to lines)'
+        'approved bank', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_risk_to_building_',
+                title: 'J1 Risk To Building',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'actv_movement_status',
+                    label: 'Movement status',
+                    type: InspectionFieldType.dropdown,
+                    options: ['None', 'Noted'],
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = makeBankBackedBuilder().build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_risks_risk_to_building_': {
+              'actv_movement_status': 'None',
+            },
+            'activity_outside_property_roof_repair_tiles': {
+              'actv_condition': 'Repair now',
+              'rc_rt_loose': 'true',
+            },
+            'outside_property_roof_covering_roof_structure_layout': {
+              'actv_status': 'Repair defect',
+            },
+            'activity_outside_property_roof_repair_flat_roof': {
+              'actv_condition': 'Repair now',
+              'rc_fr_torn': 'true',
+            },
+            'activity_outside_property_rwg__repair_pipes_gutters': {
+              'actv_condition': 'Repair now',
+            },
+            'activity_outside_property_roof_spreading_repair': {
+              'rc_rs_front': 'true',
+            },
+            'activity_risks_other_': {'cb_not_applicable': 'true'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final all = section.screens.expand((s) => s.phrases).join('\n');
+      expect(all, contains('One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted'));
+      for (final sentence in const [
+        'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing',
+        'The surface of the roof slope(s) of the building is significantly distorted, uneven or undulating',
+        'The flat roof covering is weathered, blistered, split, torn, worn, ponding, or defective and causing rainwater to penetrate the building below',
+        'The roof slopes to the front, side and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards',
+      ]) {
+        expect(all, contains(sentence));
+      }
+      final j3 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people')
+          .phrases
+          .join('\n');
+      expect(
+        j3,
+        contains('One or more tiles, slates, or roof covering sections are '
+            'loose, slipped, cracked, broken, or missing'),
+      );
+    });
+
     test('does not synthesise J2 when none of the source screens show a risk',
         () {
       final tree = InspectionTreePayload(

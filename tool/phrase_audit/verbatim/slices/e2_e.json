@@ -1,0 +1,2326 @@
+[
+  {
+    "screen": "outside_property_about_roof_layout",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_desc_pitched",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_ABOUT_TYPE}",
+        "text": "Description: The {RC_TYPE} roof covering to the {RC_LOCATION} is formed in {RC_MATERIAL}.",
+        "tokens": [
+          {
+            "kind": "constant",
+            "token": "{RC_TYPE}",
+            "value": "pitched"
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_LOCATION}",
+            "options": [
+              [
+                "cb_main_building",
+                "main building"
+              ],
+              [
+                "cb_extension",
+                "extension"
+              ],
+              [
+                "rc_loc_porch",
+                "porch"
+              ],
+              [
+                "cb_bay_window",
+                "bay window"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension",
+              "porch",
+              "bay window"
+            ],
+            "label": "Location",
+            "other": [
+              "cb_other_22",
+              "etRoofLocationOther"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_MATERIAL}",
+            "options": [
+              [
+                "rc_mat_original_clay",
+                "original clay tiles"
+              ],
+              [
+                "rc_mat_replacement_clay",
+                "replacement clay tiles"
+              ],
+              [
+                "cb_concrete",
+                "concrete tiles"
+              ],
+              [
+                "cb_natural",
+                "natural slate"
+              ],
+              [
+                "rc_mat_artificial_slate",
+                "artificial slate"
+              ],
+              [
+                "rc_mat_fibre_cement",
+                "fibre cement slates"
+              ],
+              [
+                "rc_mat_aluminium",
+                "aluminium sheets"
+              ],
+              [
+                "cb_composite",
+                "composite slate"
+              ],
+              [
+                "rc_mat_asbestos_sheet",
+                "asbestos sheet"
+              ]
+            ],
+            "pdf_options": [
+              "original clay tiles",
+              "replacement clay tiles",
+              "concrete tiles",
+              "natural slate",
+              "artificial slate",
+              "fibre cement slates",
+              "aluminium sheets",
+              "composite slate",
+              "asbestos sheet"
+            ],
+            "label": "Material",
+            "other": [
+              "cb_other_78",
+              "etRoofMaterialOther"
+            ]
+          }
+        ],
+        "pdf": "Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material."
+      },
+      {
+        "id": "e2_cond_pitched",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_ABOUT_TYPE_CONDITION}",
+        "text": "Condition: Where visible, the covering appears in {RC_TYPE_CONDITION} condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_TYPE_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition."
+      },
+      {
+        "id": "e2_old_pitched",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{OLD_ROOF_COVERING}",
+        "text": "Old roof covering: The roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon. If re-covered in heavier materials the timbers may need to be strengthened to comply with current Building Regulations. Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life.",
+        "tokens": [],
+        "when": [
+          "cb_old_roof_covering",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_old_roof_covering",
+            "label": "Old roof covering",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e2_asbestos_pitched",
+        "masters": [
+          "{E_ROOF_COVERING_MATERIAL}"
+        ],
+        "sub": "{MATERIAL_COMPOSITE}",
+        "text": "Asbestos: Parts of the roof covering and verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
+        "tokens": [],
+        "when": [
+          "cb_composite",
+          "true"
+        ],
+        "when_any": [
+          [
+            "rc_mat_asbestos_sheet",
+            "true"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_about_roof_layout__mansard",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_desc_mansard",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_ABOUT_TYPE}",
+        "text": "Description: The {RC_TYPE} roof covering to the {RC_LOCATION} is formed in {RC_MATERIAL}.",
+        "tokens": [
+          {
+            "kind": "constant",
+            "token": "{RC_TYPE}",
+            "value": "mansard"
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_LOCATION}",
+            "options": [
+              [
+                "cb_main_building",
+                "main building"
+              ],
+              [
+                "cb_extension",
+                "extension"
+              ],
+              [
+                "rc_loc_porch",
+                "porch"
+              ],
+              [
+                "cb_bay_window",
+                "bay window"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension",
+              "porch",
+              "bay window"
+            ],
+            "label": "Location",
+            "other": [
+              "cb_other_22",
+              "etRoofLocationOther"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_MATERIAL}",
+            "options": [
+              [
+                "rc_mat_original_clay",
+                "original clay tiles"
+              ],
+              [
+                "rc_mat_replacement_clay",
+                "replacement clay tiles"
+              ],
+              [
+                "cb_concrete",
+                "concrete tiles"
+              ],
+              [
+                "cb_natural",
+                "natural slate"
+              ],
+              [
+                "rc_mat_artificial_slate",
+                "artificial slate"
+              ],
+              [
+                "rc_mat_fibre_cement",
+                "fibre cement slates"
+              ],
+              [
+                "rc_mat_aluminium",
+                "aluminium sheets"
+              ],
+              [
+                "cb_composite",
+                "composite slate"
+              ],
+              [
+                "rc_mat_asbestos_sheet",
+                "asbestos sheet"
+              ]
+            ],
+            "pdf_options": [
+              "original clay tiles",
+              "replacement clay tiles",
+              "concrete tiles",
+              "natural slate",
+              "artificial slate",
+              "fibre cement slates",
+              "aluminium sheets",
+              "composite slate",
+              "asbestos sheet"
+            ],
+            "label": "Material",
+            "other": [
+              "cb_other_78",
+              "etRoofMaterialOther"
+            ]
+          }
+        ],
+        "pdf": "Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material."
+      },
+      {
+        "id": "e2_cond_mansard",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_ABOUT_TYPE_CONDITION}",
+        "text": "Condition: Where visible, the covering appears in {RC_TYPE_CONDITION} condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_TYPE_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition."
+      },
+      {
+        "id": "e2_old_mansard",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{OLD_ROOF_COVERING}",
+        "text": "Old roof covering: The roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon. If re-covered in heavier materials the timbers may need to be strengthened to comply with current Building Regulations. Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life.",
+        "tokens": [],
+        "when": [
+          "cb_old_roof_covering",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_old_roof_covering",
+            "label": "Old roof covering",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e2_asbestos_mansard",
+        "masters": [
+          "{E_ROOF_COVERING_MATERIAL}"
+        ],
+        "sub": "{MATERIAL_COMPOSITE}",
+        "text": "Asbestos: Parts of the roof covering and verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
+        "tokens": [],
+        "when": [
+          "cb_composite",
+          "true"
+        ],
+        "when_any": [
+          [
+            "rc_mat_asbestos_sheet",
+            "true"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_about_roof_layout__other",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_desc_other",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_ABOUT_TYPE}",
+        "text": "Description: The {RC_TYPE} roof covering to the {RC_LOCATION} is formed in {RC_MATERIAL}.",
+        "tokens": [
+          {
+            "kind": "text",
+            "token": "{RC_TYPE}",
+            "dropdown": "other",
+            "field_label": "Other roof type"
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_LOCATION}",
+            "options": [
+              [
+                "cb_main_building",
+                "main building"
+              ],
+              [
+                "cb_extension",
+                "extension"
+              ],
+              [
+                "rc_loc_porch",
+                "porch"
+              ],
+              [
+                "cb_bay_window",
+                "bay window"
+              ]
+            ],
+            "pdf_options": [
+              "main building",
+              "extension",
+              "porch",
+              "bay window"
+            ],
+            "label": "Location",
+            "other": [
+              "cb_other_22",
+              "etRoofLocationOther"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_MATERIAL}",
+            "options": [
+              [
+                "rc_mat_original_clay",
+                "original clay tiles"
+              ],
+              [
+                "rc_mat_replacement_clay",
+                "replacement clay tiles"
+              ],
+              [
+                "cb_concrete",
+                "concrete tiles"
+              ],
+              [
+                "cb_natural",
+                "natural slate"
+              ],
+              [
+                "rc_mat_artificial_slate",
+                "artificial slate"
+              ],
+              [
+                "rc_mat_fibre_cement",
+                "fibre cement slates"
+              ],
+              [
+                "rc_mat_aluminium",
+                "aluminium sheets"
+              ],
+              [
+                "cb_composite",
+                "composite slate"
+              ],
+              [
+                "rc_mat_asbestos_sheet",
+                "asbestos sheet"
+              ]
+            ],
+            "pdf_options": [
+              "original clay tiles",
+              "replacement clay tiles",
+              "concrete tiles",
+              "natural slate",
+              "artificial slate",
+              "fibre cement slates",
+              "aluminium sheets",
+              "composite slate",
+              "asbestos sheet"
+            ],
+            "label": "Material",
+            "other": [
+              "cb_other_78",
+              "etRoofMaterialOther"
+            ]
+          }
+        ],
+        "pdf": "Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material."
+      },
+      {
+        "id": "e2_cond_other",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_ABOUT_TYPE_CONDITION}",
+        "text": "Condition: Where visible, the covering appears in {RC_TYPE_CONDITION} condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_TYPE_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition."
+      },
+      {
+        "id": "e2_old_other",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{OLD_ROOF_COVERING}",
+        "text": "Old roof covering: The roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon. If re-covered in heavier materials the timbers may need to be strengthened to comply with current Building Regulations. Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life.",
+        "tokens": [],
+        "when": [
+          "cb_old_roof_covering",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_old_roof_covering",
+            "label": "Old roof covering",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e2_asbestos_other",
+        "masters": [
+          "{E_ROOF_COVERING_MATERIAL}"
+        ],
+        "sub": "{MATERIAL_COMPOSITE}",
+        "text": "Asbestos: Parts of the roof covering and verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
+        "tokens": [],
+        "when": [
+          "cb_composite",
+          "true"
+        ],
+        "when_any": [
+          [
+            "rc_mat_asbestos_sheet",
+            "true"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_about_roof_layout__flat",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_flat_desc",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_FLAT_ABOUT}",
+        "text": "Flat roof coverings: The flat roof covering over the building is formed in {RC_MATERIAL}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_MATERIAL}",
+            "options": [
+              [
+                "cb_mineral_felt",
+                "mineral felt"
+              ],
+              [
+                "rc_flat_hp_felt",
+                "high-performance felt"
+              ],
+              [
+                "cb_rubber",
+                "rubber membrane"
+              ],
+              [
+                "cb_single_ply_membrane",
+                "single-ply membrane"
+              ],
+              [
+                "rc_flat_grp",
+                "GRP fibreglass"
+              ],
+              [
+                "rc_flat_asphalt",
+                "asphalt"
+              ],
+              [
+                "cb_fiberglass",
+                "fibreglass"
+              ],
+              [
+                "rc_flat_lead",
+                "lead"
+              ]
+            ],
+            "pdf_options": [
+              "mineral felt",
+              "high-performance felt",
+              "rubber membrane",
+              "single-ply membrane",
+              "GRP fibreglass",
+              "asphalt",
+              "fibreglass",
+              "lead"
+            ],
+            "label": "Material",
+            "other": [
+              "cb_other_78",
+              "etRoofMaterialOther"
+            ]
+          }
+        ],
+        "pdf": "Flat roof coverings: The flat roof covering over the building is formed in mineral felt, high-performance felt, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, fibreglass, lead, other material."
+      },
+      {
+        "id": "e2_flat_cond",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_FLAT_CONDITION}",
+        "text": "Condition: Where visible, the covering appears in {RC_TYPE_CONDITION} condition.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_TYPE_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition."
+      },
+      {
+        "id": "e2_flat_felt",
+        "masters": [
+          "{E_ROOF_COVERING_MATERIAL}"
+        ],
+        "sub": "{FLAT_MATERIAL_MINERAL_FELT}",
+        "text": "Flat felt roof coverings have a comparatively short life and will require regular maintenance checks. Even though the general condition of the felt may appear satisfactory for its type and age, repairs or replacement must be expected in the future. It is difficult to predict when this will be required as felt roofs can break down with little warning, even when visually appearing sound.",
+        "tokens": [],
+        "when": [
+          "cb_mineral_felt",
+          "true"
+        ],
+        "when_any": [
+          [
+            "rc_flat_hp_felt",
+            "true"
+          ]
+        ]
+      },
+      {
+        "id": "e2_flat_norepair",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_FLAT_NO_REPAIR}",
+        "text": "No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The flat roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Good"
+        ],
+        "when_any": [
+          [
+            "actv_condition",
+            "Reasonable"
+          ],
+          [
+            "actv_condition",
+            "Fair"
+          ],
+          [
+            "actv_condition",
+            "Poor"
+          ],
+          [
+            "actv_condition",
+            "Very poor"
+          ]
+        ]
+      },
+      {
+        "id": "e2_flat_old",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{OLD_ROOF_COVERING_FLAT}",
+        "text": "Old roof covering: The flat roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon. If re-covered in heavier materials, the timbers may need to be strengthened to comply with current Building Regulations. Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life.",
+        "tokens": [],
+        "when": [
+          "cb_old_roof_covering",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_old_roof_covering",
+            "label": "Old roof covering",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_roof_covering_weathered_layout",
+    "rules": [
+      {
+        "id": "e2_cond_weathered",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{RC_ABOUT_TYPE_CONDITION}",
+        "text": "Condition: Where visible, the covering appears in {RC_TYPE_CONDITION} condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_TYPE_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.",
+        "when": [
+          "cb_weathered",
+          "true"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_roof_covering_flashing_layout",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_flashing",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_FLASHING}",
+        "text": "Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in {RC_FLASHING}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_FLASHING}",
+            "options": [
+              [
+                "cb_lead",
+                "lead"
+              ],
+              [
+                "cb_mortar",
+                "mortar"
+              ],
+              [
+                "cb_tiles",
+                "clay tiles"
+              ],
+              [
+                "rc_fl_mineral_felt",
+                "mineral felt"
+              ],
+              [
+                "rc_fl_bitumen_tape",
+                "bitumen tape"
+              ],
+              [
+                "rc_fl_lead_substitute",
+                "lead substitute"
+              ]
+            ],
+            "pdf_options": [
+              "lead",
+              "mortar",
+              "clay tiles",
+              "mineral felt",
+              "bitumen tape",
+              "lead substitute"
+            ],
+            "label": "Formed in",
+            "other": [
+              "cb_other_33",
+              "et_other_87"
+            ]
+          }
+        ],
+        "pdf": "Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in lead, mortar, clay tiles, mineral felt, bitumen tape, lead substitute, other."
+      },
+      {
+        "id": "e2_flashing_cond",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_FLASHING_CONDITION}",
+        "text": "Condition: Where visible, the flashings appear in {RC_FLASHING_CONDITION} condition. Defective flashings should be repaired to reduce the risk of water penetration. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the roof covering should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_FLASHING_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Poor",
+              "Defective"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "poor",
+              "defective"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition."
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_roof_covering_ridge_tiles_layout",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_ridge",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_RIDGE_TILES}",
+        "text": "Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in {RC_RIDGE_TILES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_RIDGE_TILES}",
+            "options": [
+              [
+                "rc_ridge_clay",
+                "clay"
+              ],
+              [
+                "cb_concrete",
+                "concrete"
+              ]
+            ],
+            "pdf_options": [
+              "clay",
+              "concrete"
+            ],
+            "label": "Formed in",
+            "other": [
+              "cb_other_62",
+              "et_other_101"
+            ]
+          }
+        ],
+        "pdf": "Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in clay, concrete, other material."
+      },
+      {
+        "id": "e2_ridge_cond",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_RIDGE_TILES_CONDITION}",
+        "text": "Condition: Where visible, they appear in {RC_RIDGE_TILES_CONDITION} condition. Loose or defective ridge tiles should be rebedded or mechanically fixed as appropriate. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the ridge tiles should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_RIDGE_TILES_CONDITION}",
+            "dropdown": "actv_formed_in",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Poor",
+              "Defective"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "poor",
+              "defective"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, they appear in good, reasonable, poor, defective condition."
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_roof_covering_hip_tiles_layout",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_hip",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_HIP_TILES}",
+        "text": "Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in {RC_HIP_TILES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_HIP_TILES}",
+            "options": [
+              [
+                "rc_hip_clay",
+                "clay"
+              ],
+              [
+                "cb_concrete",
+                "concrete"
+              ]
+            ],
+            "pdf_options": [
+              "clay",
+              "concrete"
+            ],
+            "label": "Formed in",
+            "other": [
+              "cb_other_62",
+              "et_other_101"
+            ]
+          }
+        ],
+        "pdf": "Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in clay, concrete, other material."
+      },
+      {
+        "id": "e2_hip_cond",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_HIP_TILES_CONDITION}",
+        "text": "Condition: Where visible, they appear in {RC_HIP_TILES_CONDITION} condition. Repairs should be undertaken where movement or deterioration is evident. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the hip tiles should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_HIP_TILES_CONDITION}",
+            "dropdown": "actv_formed_in",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Poor",
+              "Defective"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "poor",
+              "defective"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, they appear in good, reasonable, poor, defective condition."
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_roof_covering_valley_gutters_layout",
+    "new_screen": {
+      "id": "outside_property_roof_covering_valley_gutters_layout",
+      "title": "Valley Gutters",
+      "parent": "group_roof_covering_10",
+      "order": 13,
+      "after": "outside_property_roof_covering_hip_tiles_layout"
+    },
+    "rules": [
+      {
+        "id": "e2_valley",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_VALLEY_GUTTERS}",
+        "text": "Valley Gutters: The valley gutters are formed in {RC_VALLEY_GUTTERS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_VALLEY_GUTTERS}",
+            "options": [
+              [
+                "rc_vg_lead",
+                "lead"
+              ],
+              [
+                "rc_vg_mortar",
+                "mortar"
+              ]
+            ],
+            "pdf_options": [
+              "lead",
+              "mortar"
+            ],
+            "label": "Formed in",
+            "other": [
+              "rc_vg_other",
+              "rc_vg_other_text"
+            ]
+          }
+        ],
+        "pdf": "Valley Gutters: The valley gutters are formed in lead, mortar, other material."
+      },
+      {
+        "id": "e2_valley_cond",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_VALLEY_GUTTERS_CONDITION}",
+        "text": "Condition: Where visible, they appear in {RC_VALLEY_GUTTERS_CONDITION} condition. Blocked or defective valley gutters should be cleared, repaired, or replaced as necessary to ensure effective drainage and prevent water penetration into the building. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the guttering should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_VALLEY_GUTTERS_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Poor",
+              "Blocked"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "poor",
+              "blocked"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, they appear in good, reasonable, poor, blocked condition."
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_roof_covering_parapet_wall_layout",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_parapet",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_PARAPET_WALL}",
+        "text": "Parapet walls: The parapet wall(s) are constructed of {RC_PARAPET_WALL_BUILT_WITH}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_PARAPET_WALL_BUILT_WITH}",
+            "options": [
+              [
+                "cb_bricks",
+                "brick"
+              ],
+              [
+                "rc_pw_stone",
+                "stone"
+              ],
+              [
+                "rc_pw_rendered_masonry",
+                "rendered masonry"
+              ],
+              [
+                "cb_concrete",
+                "concrete"
+              ]
+            ],
+            "pdf_options": [
+              "brick",
+              "stone",
+              "rendered masonry",
+              "concrete"
+            ],
+            "label": "Constructed of",
+            "other": [
+              "cb_other_44",
+              "et_other_101"
+            ]
+          }
+        ],
+        "pdf": "Parapet walls: The parapet wall(s) are constructed of brick, stone, rendered masonry, concrete, other.",
+        "master_ref_after": null
+      },
+      {
+        "id": "e2_parapet_coping",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_PARAPET_COPING}",
+        "text": "Coping: The parapet coping is formed in {RC_PARAPET_COPING}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_PARAPET_COPING}",
+            "options": [
+              [
+                "rc_pc_stone",
+                "stone"
+              ],
+              [
+                "rc_pc_tiles",
+                "tiles"
+              ],
+              [
+                "rc_pc_concrete",
+                "concrete"
+              ],
+              [
+                "rc_pc_engineering_brick",
+                "engineering brick"
+              ],
+              [
+                "rc_pc_metal",
+                "metal"
+              ]
+            ],
+            "pdf_options": [
+              "stone",
+              "tiles",
+              "concrete",
+              "engineering brick",
+              "metal"
+            ],
+            "label": "Coping formed in",
+            "other": [
+              "rc_pc_other",
+              "rc_pc_other_text"
+            ]
+          }
+        ],
+        "pdf": "Coping: The parapet coping is formed in stone, tiles, concrete, engineering brick, metal, other material."
+      },
+      {
+        "id": "e2_parapet_cond",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{E_RC_PARAPET_WALL_CONDITION}",
+        "text": "Condition: Where visible, these elements appear in {RC_PARAPET_WALL_CONDITION} condition. Defective copings or pointing should be repaired to prevent water penetration. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the wall should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RC_PARAPET_WALL_CONDITION}",
+            "dropdown": "android_material_design_spinner3",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Poor",
+              "Defective"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "poor",
+              "defective"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": "Condition: Where visible, these elements appear in good, reasonable, poor, defective condition."
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_roof_covering_deflection_layout",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_deflection",
+        "masters": [
+          "{E_RC_DEFLECTION_STATUS}"
+        ],
+        "sub": "{DEFLECTION_MINOR}",
+        "text": "Roof line deflection: Minor undulation or deflection to {RC_DEFLECTION_STATUS_LOCATION} roof slopes were observed. Such distortion is not uncommon in properties of this age and, unless accompanied by evidence of progressive movement, is not necessarily of structural significance.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_DEFLECTION_STATUS_LOCATION}",
+            "options": [
+              [
+                "rc_df_all",
+                "all"
+              ],
+              [
+                "cb_front_45",
+                "front"
+              ],
+              [
+                "cb_rear_47",
+                "rear"
+              ],
+              [
+                "cb_side_41",
+                "side"
+              ]
+            ],
+            "pdf_options": [
+              "all",
+              "front",
+              "rear",
+              "side"
+            ],
+            "label": "Location"
+          }
+        ],
+        "pdf": "Roof line deflection: Minor undulation or deflection to all, front, rear, side roof slopes were observed."
+      }
+    ]
+  },
+  {
+    "screen": "outside_property_roof_covering_roof_structure_layout",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_struct_ok",
+        "masters": [
+          "{E_ROOF_COVERING_ROOF_CONDITION}"
+        ],
+        "sub": "{RC_ROOF_CONDITION_OK}",
+        "text": "No repair required: No repair is currently needed, and this is not considered to be structurally significant. The timber used in older roofs can gradually change shape or distort during normal use. Also, heavier replacement tiles can cause minor deflection to the roof line in some instances. This does not currently appear to be a problem and is considered normal for this type of roof. Should further deflection or distortion occur, you should arrange for inspection by a qualified person.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "No repair required"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Status",
+            "type": "dropdown",
+            "options": [
+              "No repair required",
+              "Repair defect"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e2_struct_defect",
+        "masters": [
+          "{E_ROOF_COVERING_ROOF_CONDITION}"
+        ],
+        "sub": "{RC_ROOF_CONDITION_INVESTIGATE}",
+        "text": "Repair defect: The surface of the {RC_ROOF_INVESTIGATE_LOCATION} roof slope(s) of the building is significantly distorted, uneven or undulating. You should contact a qualified roofing contractor to replace damaged timber or strengthen any weakened or undersized timber so that the roof structure can adequately bear the weight of the roof covering (see section J1 - Risk to Building).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_ROOF_INVESTIGATE_LOCATION}",
+            "options": [
+              [
+                "cb_front_39",
+                "front"
+              ],
+              [
+                "cb_rear_20",
+                "rear"
+              ],
+              [
+                "cb_side_78",
+                "side"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "rear",
+              "side"
+            ],
+            "label": "Location",
+            "cond": "actv_status=Repair defect"
+          }
+        ],
+        "pdf": "Repair defect: The surface of the front, rear, side roof slope(s) of the building is significantly distorted, uneven or undulating.",
+        "when": [
+          "actv_status",
+          "Repair defect"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_repair_tiles",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_tiles_soon",
+        "masters": [
+          "{E_RC_TILES}"
+        ],
+        "sub": "{REPAIR_SOON}",
+        "text": "Repair soon: One or more tiles, slates, are {RC_ROOF_REPAIR_TILES_ISSUE}. This should be repaired soon. You should contact a qualified roofing contractor to carry out further investigation and replace or repair damaged covering.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_ROOF_REPAIR_TILES_ISSUE}",
+            "options": [
+              [
+                "rc_rt_loose",
+                "loose"
+              ],
+              [
+                "rc_rt_missing",
+                "missing"
+              ],
+              [
+                "rc_rt_lifted",
+                "lifted"
+              ],
+              [
+                "rc_rt_slipped",
+                "slipped"
+              ],
+              [
+                "rc_rt_cracked",
+                "cracked"
+              ],
+              [
+                "rc_rt_broken",
+                "broken"
+              ],
+              [
+                "rc_rt_distorted",
+                "distorted"
+              ]
+            ],
+            "pdf_options": [
+              "loose",
+              "missing",
+              "lifted",
+              "slipped",
+              "cracked",
+              "broken",
+              "distorted"
+            ],
+            "label": "Defects",
+            "other": [
+              "rc_rt_other",
+              "rc_rt_other_text"
+            ],
+            "cond": "actv_condition=Repair soon|Repair now"
+          }
+        ],
+        "pdf": "Repair soon: One or more tiles, slates, are loose, missing, lifted, slipped, cracked, broken, distorted, other.",
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now",
+              "Leaking"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e2_tiles_now",
+        "masters": [
+          "{E_RC_TILES}"
+        ],
+        "sub": "{REPAIR_NOW}",
+        "text": "Repair now: One or more tiles, slates, roof covering sections are severely or significantly {RC_ROOF_REPAIR_TILES_ISSUE}. Given the extent of the defect, this should be repaired now. The fixings on older roofs can weaken and result in more future maintenance. In some cases, it may be economical to replace the whole roof covering rather than continuing to repair. You should contact a qualified roofing contractor to carry out further investigation and recommend remedial work.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_ROOF_REPAIR_TILES_ISSUE}",
+            "options": [
+              [
+                "rc_rt_loose",
+                "loose"
+              ],
+              [
+                "rc_rt_missing",
+                "missing"
+              ],
+              [
+                "rc_rt_lifted",
+                "lifted"
+              ],
+              [
+                "rc_rt_slipped",
+                "slipped"
+              ],
+              [
+                "rc_rt_cracked",
+                "cracked"
+              ],
+              [
+                "rc_rt_broken",
+                "broken"
+              ],
+              [
+                "rc_rt_distorted",
+                "distorted"
+              ]
+            ],
+            "pdf_options": [
+              "loose",
+              "missing",
+              "lifted",
+              "slipped",
+              "cracked",
+              "broken",
+              "distorted"
+            ],
+            "label": "Defects",
+            "other": [
+              "rc_rt_other",
+              "rc_rt_other_text"
+            ],
+            "cond": "actv_condition=Repair soon|Repair now"
+          }
+        ],
+        "pdf": "Repair now: One or more tiles, slates, roof covering sections are severely or significantly loose, missing, lifted, slipped, cracked, broken, distorted, other.",
+        "when": [
+          "actv_condition",
+          "Repair now"
+        ]
+      },
+      {
+        "id": "e2_tiles_leaking",
+        "masters": [
+          "{E_RC_TILES}"
+        ],
+        "sub": "{LEAKING}",
+        "text": "Leaking: The roof covering has extensive defects that are likely to allow water penetration into the building and may present a safety risk. Urgent repair is required. You should instruct a suitably qualified roofing contractor to carry out a detailed inspection, identify the full extent of the defects, and undertake the necessary remedial works without delay.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Leaking"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_spreading_repair",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_spreading",
+        "masters": [
+          "{E_ROOF_COVERING_REPAIR}"
+        ],
+        "sub": "{RC_ROOF_SPREADING}",
+        "text": "Roof Spreading: The roof slopes to {RC_ROOF_SPREADING_LOCATION} of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards. These are visual indicators that may be consistent with roof spread and suggest that the roof timber structure may require strengthening. I recommend that you instruct a suitably qualified structural engineer or roofing specialist to carry out further investigation and advise on any necessary remedial work without undue delay (see section J1 - Risk to Building).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_ROOF_SPREADING_LOCATION}",
+            "options": [
+              [
+                "rc_rs_all",
+                "all"
+              ],
+              [
+                "rc_rs_front",
+                "front"
+              ],
+              [
+                "rc_rs_side",
+                "side"
+              ],
+              [
+                "rc_rs_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "all",
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "Location"
+          }
+        ],
+        "pdf": "Roof Spreading: The roof slopes to all, front, side, and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards."
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_repair_flat_roof",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_flatrepair_soon",
+        "masters": [
+          "{E_RC_FLAT_ROOF_REPAIR}"
+        ],
+        "sub": "{REPAIR_SOON}",
+        "text": "Repair Flat roof: The flat roof covering is {RC_FLAT_ROOF_REPAIR_COVERED}. Repairs or replacement should be undertaken before further deterioration results in water penetration. To replace the covering, the work will have to meet the requirements of the building regulations. This may increase the amount of repair work.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_FLAT_ROOF_REPAIR_COVERED}",
+            "options": [
+              [
+                "rc_fr_weathered",
+                "weathered"
+              ],
+              [
+                "rc_fr_blistered",
+                "blistered"
+              ],
+              [
+                "rc_fr_split",
+                "split"
+              ],
+              [
+                "rc_fr_torn",
+                "torn"
+              ],
+              [
+                "rc_fr_worn",
+                "worn"
+              ],
+              [
+                "rc_fr_ponding",
+                "ponding"
+              ],
+              [
+                "rc_fr_damaged",
+                "damaged"
+              ]
+            ],
+            "pdf_options": [
+              "weathered",
+              "blistered",
+              "split",
+              "torn",
+              "worn",
+              "ponding",
+              "damaged"
+            ],
+            "label": "Defects",
+            "other": [
+              "rc_fr_other",
+              "rc_fr_other_text"
+            ]
+          }
+        ],
+        "pdf": "Repair Flat roof: The flat roof covering is weathered, blistered, split, torn, worn, ponding, damaged, other.",
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e2_flatrepair_now",
+        "masters": [
+          "{E_RC_FLAT_ROOF_REPAIR}"
+        ],
+        "sub": "{REPAIR_NOW}",
+        "text": "Repair Flat roof: The flat roof covering is {RC_FLAT_ROOF_REPAIR_COVERED}. Causing damp - The observed defect is causing damp penetration to the building below. The flat roof covering needs repair or replacement now. To do this, the work will have to meet the requirements of the Building Regulations. This may increase the amount of repair work (see section J1 - Risk to Building).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_FLAT_ROOF_REPAIR_COVERED}",
+            "options": [
+              [
+                "rc_fr_weathered",
+                "weathered"
+              ],
+              [
+                "rc_fr_blistered",
+                "blistered"
+              ],
+              [
+                "rc_fr_split",
+                "split"
+              ],
+              [
+                "rc_fr_torn",
+                "torn"
+              ],
+              [
+                "rc_fr_worn",
+                "worn"
+              ],
+              [
+                "rc_fr_ponding",
+                "ponding"
+              ],
+              [
+                "rc_fr_damaged",
+                "damaged"
+              ]
+            ],
+            "pdf_options": [
+              "weathered",
+              "blistered",
+              "split",
+              "torn",
+              "worn",
+              "ponding",
+              "damaged"
+            ],
+            "label": "Defects",
+            "other": [
+              "rc_fr_other",
+              "rc_fr_other_text"
+            ]
+          }
+        ],
+        "when": [
+          "actv_condition",
+          "Repair now"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_repair_parapet_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_parapetrepair_soon",
+        "masters": [
+          "{E_RC_PARAPET_WALL_REPAIR}"
+        ],
+        "sub": "{REPAIR_SOON}",
+        "text": "Repair parapet: The {RC_PARAPET_WALL_REPAIR_SUBJECT} of the parapet(s) of the roof are {RC_PARAPET_WALL_REPAIR_ISSUE}. This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_PARAPET_WALL_REPAIR_SUBJECT}",
+            "options": [
+              [
+                "rc_pr_rendering",
+                "rendering"
+              ],
+              [
+                "rc_pr_copping",
+                "copping"
+              ],
+              [
+                "rc_pr_flashing",
+                "flashing"
+              ]
+            ],
+            "pdf_options": [
+              "rendering",
+              "copping",
+              "flashing"
+            ],
+            "label": "Parapet parts",
+            "other": [
+              "rc_pr_subj_other",
+              "rc_pr_subj_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_PARAPET_WALL_REPAIR_ISSUE}",
+            "options": [
+              [
+                "rc_pr_damaged",
+                "damaged"
+              ],
+              [
+                "rc_pr_loose",
+                "loose"
+              ],
+              [
+                "rc_pr_partly_missing",
+                "partly missing"
+              ],
+              [
+                "rc_pr_cracked",
+                "cracked"
+              ],
+              [
+                "rc_pr_poorly_secured",
+                "poorly secured"
+              ]
+            ],
+            "pdf_options": [
+              "damaged",
+              "loose",
+              "partly missing",
+              "cracked",
+              "poorly secured"
+            ],
+            "label": "Defects",
+            "other": [
+              "rc_pr_iss_other",
+              "rc_pr_iss_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Repair parapet: The rendering, copping, flashing, other of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured, other.",
+          "This should be repaired soon, repaired now."
+        ],
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e2_parapetrepair_now",
+        "masters": [
+          "{E_RC_PARAPET_WALL_REPAIR}"
+        ],
+        "sub": "{REPAIR_NOW}",
+        "text": "Repair parapet: The {RC_PARAPET_WALL_REPAIR_SUBJECT} of the parapet(s) of the roof are {RC_PARAPET_WALL_REPAIR_ISSUE}. This should be repaired now. Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_PARAPET_WALL_REPAIR_SUBJECT}",
+            "options": [
+              [
+                "rc_pr_rendering",
+                "rendering"
+              ],
+              [
+                "rc_pr_copping",
+                "copping"
+              ],
+              [
+                "rc_pr_flashing",
+                "flashing"
+              ]
+            ],
+            "pdf_options": [
+              "rendering",
+              "copping",
+              "flashing"
+            ],
+            "label": "Parapet parts",
+            "other": [
+              "rc_pr_subj_other",
+              "rc_pr_subj_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_PARAPET_WALL_REPAIR_ISSUE}",
+            "options": [
+              [
+                "rc_pr_damaged",
+                "damaged"
+              ],
+              [
+                "rc_pr_loose",
+                "loose"
+              ],
+              [
+                "rc_pr_partly_missing",
+                "partly missing"
+              ],
+              [
+                "rc_pr_cracked",
+                "cracked"
+              ],
+              [
+                "rc_pr_poorly_secured",
+                "poorly secured"
+              ]
+            ],
+            "pdf_options": [
+              "damaged",
+              "loose",
+              "partly missing",
+              "cracked",
+              "poorly secured"
+            ],
+            "label": "Defects",
+            "other": [
+              "rc_pr_iss_other",
+              "rc_pr_iss_other_text"
+            ]
+          }
+        ],
+        "when": [
+          "actv_condition",
+          "Repair now"
+        ]
+      },
+      {
+        "id": "e2_parapetrepair_hazard",
+        "masters": [
+          "{E_RC_PARAPET_WALL_REPAIR}"
+        ],
+        "sub": "{REPAIR_NOW_SAFETY_HAZARD}",
+        "text": "Safety hazard: This is a safety hazard, and parts of the parapet wall may fall to the ground and cause injury to people or property damage (see section J3 - Risk to People).",
+        "tokens": [],
+        "when": [
+          "cb_safety_hazard",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_safety_hazard",
+            "label": "Safety hazard",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_repair_verge",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_verge",
+        "masters": [
+          "{E_RC_VERGE_REPAIR}"
+        ],
+        "sub": "{REPAIR_SOON}",
+        "text": "Repair verge: The {RC_VERGE_REPAIR_ITEM} items along the edge of the roof, called the verge, are {RC_VERGE_REPAIR_ISSUE}. This should be repaired soon and, if significant, repaired promptly. Adjacent parts of the roof covering may have to be disturbed to repair the verge, and this can increase the amount of repair work. This should be repaired soon.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_VERGE_REPAIR_ITEM}",
+            "options": [
+              [
+                "rc_vr_mortar",
+                "mortar"
+              ],
+              [
+                "rc_vr_tiles",
+                "tiles"
+              ],
+              [
+                "rc_vr_slates",
+                "slates"
+              ],
+              [
+                "rc_vr_clips",
+                "clips"
+              ],
+              [
+                "rc_vr_caps",
+                "caps"
+              ]
+            ],
+            "pdf_options": [
+              "mortar",
+              "tiles",
+              "slates",
+              "clips",
+              "caps"
+            ],
+            "label": "Verge parts",
+            "other": [
+              "rc_vr_item_other",
+              "rc_vr_item_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_VERGE_REPAIR_ISSUE}",
+            "options": [
+              [
+                "rc_vr_damaged",
+                "damaged"
+              ],
+              [
+                "rc_vr_cracked",
+                "cracked"
+              ],
+              [
+                "rc_vr_loose",
+                "loose"
+              ]
+            ],
+            "pdf_options": [
+              "damaged",
+              "cracked",
+              "loose"
+            ],
+            "label": "Defects",
+            "other": [
+              "rc_vr_iss_other",
+              "rc_vr_iss_other_text"
+            ]
+          }
+        ],
+        "pdf": "Repair verge: The mortar, tiles, slates, clips, caps, other items along the edge of the roof, called the verge, are damaged, cracked, loose, other."
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_repair_valley_gutters",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e2_vgrepair_soon",
+        "masters": [
+          "{E_ROOF_COVERING_REPAIR}"
+        ],
+        "sub": "{E_RC_VALLEY_GUTTERS_REPAIR}",
+        "text": "Repair valley gutters: The valley gutter at the junction of the roofs to {RC_VALLEY_GUTTERS_REPAIR_LOCATION} of the building is {RC_VALLEY_GUTTERS_REPAIR_ISSUE}. This should be repaired soon. Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work. This should be repaired soon.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_VALLEY_GUTTERS_REPAIR_LOCATION}",
+            "options": [
+              [
+                "rc_vg_all",
+                "all"
+              ],
+              [
+                "rc_vg_front",
+                "front"
+              ],
+              [
+                "rc_vg_side",
+                "side"
+              ],
+              [
+                "rc_vg_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "all",
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "Location"
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_VALLEY_GUTTERS_REPAIR_ISSUE}",
+            "options": [
+              [
+                "rc_vgi_blocked",
+                "blocked"
+              ],
+              [
+                "rc_vgi_loose_mortar",
+                "has loose mortar"
+              ],
+              [
+                "rc_vgi_misaligned",
+                "poorly aligned"
+              ]
+            ],
+            "pdf_options": [
+              "blocked",
+              "has loose mortar",
+              "poorly aligned"
+            ],
+            "label": "Defects"
+          }
+        ],
+        "pdf": [
+          "Repair valley gutters: The valley gutter at the junction of the roofs to all, front, side, rear, of the building is blocked, has loose mortar, poorly aligned.",
+          "This should be repaired soon, now."
+        ],
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e2_vgrepair_now",
+        "masters": [
+          "{E_ROOF_COVERING_REPAIR}"
+        ],
+        "sub": "{E_RC_VALLEY_GUTTERS_REPAIR_NOW}",
+        "text": "Repair valley gutters: The valley gutter at the junction of the roofs to {RC_VALLEY_GUTTERS_REPAIR_LOCATION} of the building is {RC_VALLEY_GUTTERS_REPAIR_ISSUE}. This should be repaired now. Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work. This should be repaired soon.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RC_VALLEY_GUTTERS_REPAIR_LOCATION}",
+            "options": [
+              [
+                "rc_vg_all",
+                "all"
+              ],
+              [
+                "rc_vg_front",
+                "front"
+              ],
+              [
+                "rc_vg_side",
+                "side"
+              ],
+              [
+                "rc_vg_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "all",
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "Location"
+          },
+          {
+            "kind": "checks",
+            "token": "{RC_VALLEY_GUTTERS_REPAIR_ISSUE}",
+            "options": [
+              [
+                "rc_vgi_blocked",
+                "blocked"
+              ],
+              [
+                "rc_vgi_loose_mortar",
+                "has loose mortar"
+              ],
+              [
+                "rc_vgi_misaligned",
+                "poorly aligned"
+              ]
+            ],
+            "pdf_options": [
+              "blocked",
+              "has loose mortar",
+              "poorly aligned"
+            ],
+            "label": "Defects"
+          }
+        ],
+        "when": [
+          "actv_condition",
+          "Repair now"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_repair_flashing",
+    "new_screen": {
+      "id": "activity_outside_property_roof_repair_flashing",
+      "title": "Flashing Repair",
+      "parent": "group_repairs_12",
+      "order": 8,
+      "after": "activity_outside_property_roof_repair_valley_gutters"
+    },
+    "rules": [
+      {
+        "id": "e2_flrepair_soon",
+        "masters": [
+          "{E_RC_FLASHING_REPAIR}"
+        ],
+        "sub": "{REPAIR_SOON}",
+        "text": "Repair flashing: The waterproofing at the junction of the roof covering and wall is damaged or defective. This should be repaired soon. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+        "tokens": [],
+        "pdf": [
+          "Repair flashing: The waterproofing at the junction of the roof covering and wall is damaged or defective.",
+          "This should be repaired soon, repaired now."
+        ],
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e2_flrepair_now",
+        "masters": [
+          "{E_RC_FLASHING_REPAIR}"
+        ],
+        "sub": "{REPAIR_NOW}",
+        "text": "Repair flashing: The waterproofing at the junction of the roof covering and wall is damaged or defective. This should be repaired now. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Repair now"
+        ]
+      },
+      {
+        "id": "e2_flrepair_damp",
+        "masters": [
+          "{E_RC_FLASHING_REPAIR}"
+        ],
+        "sub": "{CAUSING_DAMP}",
+        "text": "Causing damp: This is causing damp penetration to the adjoining building elements, and you must arrange to repair this urgently. Further defects and damage may be revealed from an intrusive or closer inspection by a qualified person.",
+        "tokens": [],
+        "when": [
+          "cb_causing_damp",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_causing_damp",
+            "label": "Causing damp",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_repair_ridge_tiles",
+    "new_screen": {
+      "id": "activity_outside_property_roof_repair_ridge_tiles",
+      "title": "Ridge Tiles Repair",
+      "parent": "group_repairs_12",
+      "order": 9,
+      "after": "activity_outside_property_roof_repair_flashing"
+    },
+    "rules": [
+      {
+        "id": "e2_ridgerepair_soon",
+        "masters": [
+          "{E_RC_RIDGE_TILES_REPAIR}"
+        ],
+        "sub": "{REPAIR_SOON}",
+        "text": "Repair ridge tiles: The covering along the top of the roof structure called, the ridge tiles, is damaged or defective. This should be repaired soon. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+        "tokens": [],
+        "pdf": [
+          "Repair ridge tiles: The covering along the top of the roof structure called, the ridge tiles, is damaged or defective.",
+          "This should be repaired soon, repaired now."
+        ],
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e2_ridgerepair_now",
+        "masters": [
+          "{E_RC_RIDGE_TILES_REPAIR}"
+        ],
+        "sub": "{REPAIR_NOW}",
+        "text": "Repair ridge tiles: The covering along the top of the roof structure called, the ridge tiles, is damaged or defective. This should be repaired now. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Repair now"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_repair_hip_tiles",
+    "new_screen": {
+      "id": "activity_outside_property_roof_repair_hip_tiles",
+      "title": "Hip Tiles Repair",
+      "parent": "group_repairs_12",
+      "order": 10,
+      "after": "activity_outside_property_roof_repair_ridge_tiles"
+    },
+    "rules": [
+      {
+        "id": "e2_hiprepair_soon",
+        "masters": [
+          "{E_RC_HIP_TILES_REPAIR}"
+        ],
+        "sub": "{REPAIR_SOON}",
+        "text": "Repair hip tile: The covering along the slope of the roof structure (called the hip tiles) is damaged or defective. This should be repaired soon. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+        "tokens": [],
+        "pdf": [
+          "Repair hip tile: The covering along the slope of the roof structure (called the hip tiles) is damaged or defective.",
+          "This should be repaired soon, repaired now."
+        ],
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e2_hiprepair_now",
+        "masters": [
+          "{E_RC_HIP_TILES_REPAIR}"
+        ],
+        "sub": "{REPAIR_NOW}",
+        "text": "Repair hip tile: The covering along the slope of the roof structure (called the hip tiles) is damaged or defective. This should be repaired now. The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Repair now"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_covering_summary",
+    "rules": [
+      {
+        "id": "e2_general_maintenance",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{GENERAL_MAINTENANCE}",
+        "text": "General maintenance: Roof coverings should be inspected periodically, particularly following severe weather. Routine maintenance, including replacement of isolated defective coverings, clearance of debris and localised repairs, should be expected throughout the life of the roof.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

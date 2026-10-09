@@ -18,11 +18,13 @@ import sys
 TREE = 'assets/property_inspection/inspection_tree.json'
 
 
-def field(fid, label, ftype, options=None, cond=None):
+def field(fid, label, ftype, options=None, cond=None, cond_expr=None):
     f = {'id': fid, 'label': label, 'type': ftype}
     if options is not None:
         f['options'] = options
-    if cond:
+    if cond_expr:
+        f['conditionalOn'], f['conditionalMode'] = cond_expr, 'show'
+    elif cond:
         f['conditionalOn'], f['conditionalValue'] = cond
         f['conditionalMode'] = 'show'
     return f

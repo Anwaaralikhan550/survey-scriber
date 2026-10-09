@@ -143,3 +143,11 @@ phase and at sign-off.
 in `test/phrase_audit/verbatim/`, sample reports for every T6 scenario (PDF +
 text), and a final ledger summary: every PDF sentence, its disposition, its
 bank key, and the test that proves it.
+
+## 10. Progress log (updated after every section)
+
+| Section | Status | Notes |
+|---|---|---|
+| E1 Chimney stacks | DONE (prose rows 0 open) | Rule framework `kVerbatimRules`; new screens aerials + chimney defects; J1 chimney bank-first. |
+| E2 Roof covering | DONE in code (gate pending) | 52 rules (`slices/gen_e2.py` -> `e2_e.json`); 22 screens re-built to PDF options; new screens valley gutters, flashing/ridge/hip repair; old `_roof*` handlers removed; J1/J3 roof injects bank-first. Remaining ledger rows: 3 J-inject option rows (verified by report_builder tests). Extras left for the T2 cleanup: weather screen, asbestos screen, `RC_ROOF`, `DEFLECTION_*`, `ROOF_FIT_FOR_PURPOSE`, poor-roof screen. |
+

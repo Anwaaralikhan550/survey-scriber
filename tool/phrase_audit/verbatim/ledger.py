@@ -47,6 +47,7 @@ def load_decisions():
 SPEC = 'lib/features/property_inspection/domain/inspection_verbatim_spec.dart'
 BS = chr(92)  # backslash, avoids escaping trouble in the patterns below
 _LIT = re.compile(r"pdf:\s*((?:'(?:[^'" + BS + BS + r"]|" + BS + BS + r".)*'\s*)+),")
+_MORE = re.compile(r'pdfMore:\s*\[(.*?)\]\s*,', re.S)
 _ONE = re.compile(r"'((?:[^'" + BS + BS + r"]|" + BS + BS + r".)*)'")
 
 
@@ -59,6 +60,9 @@ def spec_pdf_sentences():
     for m in _LIT.finditer(src):
         text = ''.join(x.replace(BS + "'", "'") for x in _ONE.findall(m.group(1)))
         out.add(norm(text))
+    for m in _MORE.finditer(src):
+        for lit in _ONE.findall(m.group(1)):
+            out.add(norm(lit.replace(BS + "'", "'")))
     return out
 
 
@@ -93,6 +97,9 @@ def build():
                 score, _, key = sm.best(n, e['key'])
                 disp = 'NEAR' if score >= 95 else 'UNRESOLVED'
                 status = 'OPEN'
+            # J-layer injection rows are verified by a hand test (report_builder_test).
+            if disp == 'MENU' and rid in decisions and decisions[rid]['disposition'] == 'TESTED':
+                status = 'VERIFIED'
             # A hand decision applies only while the row is not already exact.
             if rid in decisions and disp not in ('EXACT', 'MENU'):
                 d = decisions[rid]

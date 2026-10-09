@@ -43,69 +43,6 @@ void main() {
       expect(legacy.join(' ').toLowerCase(), contains('shared'));
     });
 
-    test('about screen does not emit type phrase when made-up is empty', () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_rwg_about',
-        <String, String>{
-          'cb_plastic': 'true',
-          'actv_condition': 'reasonable',
-        },
-      );
-
-      expect(phrases.join(' ').toLowerCase(), isNot(contains('made_up=')));
-      expect(phrases.join(' ').toLowerCase(), contains('condition=reasonable'));
-      expect(phrases.join(' ').toLowerCase(), contains('standard'));
-    });
-
-    test('repair soon injects typed other defect and slope extra phrase', () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_rwg__repair_pipes_gutters',
-        <String, String>{
-          'actv_condition': 'Repair soon',
-          'cb_pipes_101': 'true',
-          'cb_other_458': 'true',
-          'et_other_423': 'split joint',
-          'cb_do_not_have_sufficient_slope_53': 'true',
-        },
-      );
-
-      final all = phrases.join(' ').toLowerCase();
-      expect(all, contains('pipes'));
-      expect(all, contains('split joint'));
-      expect(all, contains('slope-extra'));
-    });
-
-    test('about screen accepts legacy llMainContainer for made-up dropdown', () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_rwg_about',
-        <String, String>{
-          'llMainContainer': 'metal',
-          'cb_metal': 'true',
-          'actv_condition': 'good',
-        },
-      );
-
-      final all = phrases.join(' ').toLowerCase();
-      expect(all, contains('made_up=metal'));
-      expect(all, contains('type=metal'));
-    });
-
-    test('repair screen accepts legacy llMainContainer for condition dropdown',
-        () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_rwg__repair_pipes_gutters',
-        <String, String>{
-          'llMainContainer': 'Repair soon',
-          'cb_pipes_101': 'true',
-          'cb_are_loose_39': 'true',
-        },
-      );
-
-      final all = phrases.join(' ').toLowerCase();
-      expect(all, contains('pipes'));
-      expect(all, contains('loose'));
-    });
-
     test('weather screen accepts legacy llMainContainer for weather dropdown',
         () {
       final phrases = engine.buildPhrases(

@@ -49,7 +49,6 @@ class InspectionPhraseEngine {
         return [
           ..._rainwaterGoodsMainScreen(answers),
           ..._rwgBlocked(answers),
-          ..._rwgBlockedGullies(answers),
           ..._rwgOpenRunoffs(answers),
         ];
       case 'activity_outside_property_windows':
@@ -516,15 +515,15 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_repair_chimney_dish_aerial__satellite':
         return _chimneyRepairDishAerial(answers, screenId: screenId);
       case 'activity_outside_property_rwg__repair_pipes_gutters':
-        return _rwgRepairPipesGutters(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_rwg_about':
-        return _rwgAbout(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_rwg_weather_condition':
         return _rwgWeatherCondition(answers);
       case 'activity_outside_property_rwg_blocked_rwg':
         return _rwgBlocked(answers);
       case 'activity_outside_property_rwg_blocked_gullies':
-        return _rwgBlockedGullies(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_rwg_open_runoffs':
         return _rwgOpenRunoffs(answers);
       case 'activity_outside_property_rain_water_goods_not_inspected':
@@ -533,39 +532,39 @@ class InspectionPhraseEngine {
       case 'outside_property_about_roof_layout__flat':
       case 'outside_property_about_roof_layout__mansard':
       case 'outside_property_about_roof_layout__other':
-        return _roofAbout(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'outside_property_roof_covering_weather_layout':
         return _roofWeather(answers);
       case 'outside_property_roof_covering_flashing_layout':
-        return _roofFlashing(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'outside_property_roof_covering_ridge_tiles_layout':
-        return _roofRidgeTiles(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'outside_property_roof_covering_hip_tiles_layout':
-        return _roofHipTiles(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'outside_property_roof_covering_parapet_wall_layout':
-        return _roofParapetWall(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'outside_property_roof_covering_deflection_layout':
-        return _roofDeflection(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'outside_property_roof_covering_asbestos_layout':
         return _roofAsbestos(answers);
       case 'outside_property_roof_covering_roof_structure_layout':
-        return _roofStructure(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'outside_property_roof_covering_roof_spreading_layout':
         return _roofSpreading(answers);
       case 'activity_outside_property_roof_repair_tiles':
-        return _roofRepairTiles(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_roof_repair_poor_roof':
         return _roofRepairPoorRoof(answers);
       case 'activity_outside_property_roof_spreading_repair':
-        return _roofSpreadingRepair(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_roof_repair_flat_roof':
-        return _roofRepairFlatRoof(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_roof_repair_parapet_wall':
-        return _roofRepairParapetWall(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_roof_repair_verge':
-        return _roofRepairVerge(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_roof_repair_valley_gutters':
-        return _roofRepairValleyGutters(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_roof_not_inspected':
         return _roofNotInspected(answers);
       case 'activity_outside_property_main_walls_about_wall':
@@ -605,7 +604,7 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_main_wall_repairs_wall_the_repair':
         return _mainWallRepairWallTie(answers);
       case 'outside_property_roof_covering_weathered_layout':
-        return _roofCoveringWeathered(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_windows_aboutwindow':
         return _windowsAbout(answers);
       case 'activity_outside_property_windows_safety_glass_rating':
@@ -2052,180 +2051,6 @@ class InspectionPhraseEngine {
     return phrases;
   }
 
-  List<String> _rwgRepairPipesGutters(Map<String, String> answers) {
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
-    );
-    if (condition.isEmpty) return const [];
-
-    final isSoon = condition.contains('soon');
-    final itemIds = isSoon
-        ? ['cb_pipes_101', 'cb_gutters_28']
-        : ['cb_pipes_96', 'cb_gutters_59'];
-    final defectIds = isSoon
-        ? [
-            'cb_are_leaking_78',
-            'cb_are_loose_39',
-            'cb_are_incomplete_52',
-            'cb_are_blocked_101',
-            'cb_are_rusted_26',
-            'cb_do_not_have_sufficient_slope_53',
-          ]
-        : [
-            'cb_are_leaking_89',
-            'cb_are_loose_91',
-            'cb_are_incomplete_94',
-            'cb_are_blocked_52',
-            'cb_are_rusted_18',
-            'cb_do_not_have_sufficient_slope_65',
-          ];
-
-    final items = _labelsFor(itemIds, answers, {
-      'cb_pipes_101': 'Pipes',
-      'cb_gutters_28': 'Gutters',
-      'cb_pipes_96': 'Pipes',
-      'cb_gutters_59': 'Gutters',
-    });
-
-    final defects = _labelsFor(defectIds, answers, {
-      'cb_are_leaking_78': 'leaking',
-      'cb_are_loose_39': 'loose',
-      'cb_are_incomplete_52': 'incomplete',
-      'cb_are_blocked_101': 'blocked',
-      'cb_are_rusted_26': 'rusted',
-      'cb_do_not_have_sufficient_slope_53': 'Do not have sufficient slope',
-      'cb_are_leaking_89': 'leaking',
-      'cb_are_loose_91': 'loose',
-      'cb_are_incomplete_94': 'incomplete',
-      'cb_are_blocked_52': 'blocked',
-      'cb_are_rusted_18': 'rusted',
-      'cb_do_not_have_sufficient_slope_65': 'Do not have sufficient slope',
-    });
-    final otherDefectCheckbox = isSoon ? 'cb_other_458' : 'cb_other_4581';
-    final otherDefectTextId = isSoon ? 'et_other_423' : 'et_other_4231';
-    if (_isChecked(answers[otherDefectCheckbox])) {
-      final otherDefect = (answers[otherDefectTextId] ?? '').trim();
-      if (otherDefect.isNotEmpty) {
-        defects.add(otherDefect);
-      }
-    }
-
-    if (items.isEmpty || defects.isEmpty) return const [];
-
-    final phraseCode = '{E_RAINWATER_GOODS_ABOUT}';
-    final subCode = isSoon ? '{RWG_REPAIR_SOON}' : '{RWG_REPAIR_NOW}';
-    var template = _sub(phraseCode, subCode);
-    if (template.isEmpty) return const [];
-
-    final uniqueItems = _dedupeInsensitive(items);
-    final uniqueDefects = _dedupeInsensitive(defects);
-    final itemsText = _toWords(uniqueItems);
-    final defectsText = _toWords(uniqueDefects);
-    final isAre = _isAre(uniqueItems);
-
-    if (isSoon) {
-      template = template
-          .replaceAll('{RWG_REPAIR_ITEM_SOON}', itemsText)
-          .replaceAll('{RWG_REPAIR_DEFECT_SOON}', defectsText)
-          .replaceAll('{IS_ARE}', isAre);
-    } else {
-      template = template
-          .replaceAll('{RWG_REPAIR_ITEM_NOW}', itemsText)
-          .replaceAll('{RWG_REPAIR_DEFECT_NOW}', defectsText)
-          .replaceAll('{IS_ARE}', isAre);
-    }
-
-    final phrases = _split(_normalize(template)).toList();
-    if (uniqueDefects.any((d) => d.toLowerCase().contains('slope'))) {
-      final extra = _sub(phraseCode, '{RWG_IF_TYPE_IF_INSUFFICIENT_SLOPE}');
-      if (extra.isNotEmpty) {
-        phrases.addAll(_split(_normalize(extra)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _rwgAbout(Map<String, String> answers) {
-    final phrases = <String>[];
-    final phraseCode = '{E_RAINWATER_GOODS_ABOUT}';
-
-    final madeUp = _cleanLower(
-      _firstNonEmpty(
-        answers,
-        const ['actv_rainwater_goods_are_made_up', 'llMainContainer'],
-      ),
-    );
-    final types = _labelsFor(
-      [
-        'cb_plastic',
-        'cb_cast_iron',
-        'cb_asbestos_cement',
-        'cb_concrete',
-        'cb_metal',
-      ],
-      answers,
-      {
-        'cb_plastic': 'Plastic',
-        'cb_cast_iron': 'Cast iron',
-        'cb_asbestos_cement': 'Asbestos cement',
-        'cb_concrete': 'Concrete',
-        'cb_metal': 'Metal',
-      },
-    );
-    if (_isChecked(answers['cb_other_697'])) {
-      final otherType = (answers['et_other_427'] ?? '').trim();
-      if (otherType.isNotEmpty) {
-        types.add(otherType);
-      }
-    }
-
-    if (types.isNotEmpty) {
-      var template = _sub(phraseCode, '{RWG_ABOUT_TYPE}');
-      if (template.isNotEmpty) {
-        if (madeUp.isEmpty) {
-          template = '';
-        } else {
-          template = template
-              .replaceAll('{RWG_MADE_UP}', madeUp)
-              .replaceAll('{RWG_TYPE}', _toWords(types).toLowerCase());
-        }
-        if (template.isNotEmpty) {
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    }
-
-    final condition = _cleanLower(answers['actv_condition']);
-    if (condition.isNotEmpty) {
-      var template = _sub(phraseCode, '{RWG_ABOUT_CONDITION}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{RWG_CONDITION}', condition);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_Shared'])) {
-      phrases.addAll(
-          _split(_normalize(_sub(phraseCode, '{RAINWATER_GOODS_SHARED}'))));
-    }
-
-    if (_isChecked(answers['cb_asbestos_cement'])) {
-      final asbestos = _sub(phraseCode, '{RWG_IF_TYPE_ASBESTOS_CEMENT}');
-      if (asbestos.isNotEmpty) {
-        phrases.addAll(_split(_normalize(asbestos)));
-      }
-    }
-
-    if (phrases.isNotEmpty) {
-      final standard = _sub(phraseCode, '{RWG_STANDARD_TEXT}');
-      if (standard.isNotEmpty) {
-        phrases.addAll(_split(_normalize(standard)));
-      }
-    }
-
-    return phrases;
-  }
-
   List<String> _rwgWeatherCondition(Map<String, String> answers) {
     final weather = _cleanLower(
       _firstNonEmpty(
@@ -2256,12 +2081,6 @@ class InspectionPhraseEngine {
         _normalize(_sub('{E_RAINWATER_GOODS_ABOUT}', '{RWG_BLOCKED}')));
   }
 
-  List<String> _rwgBlockedGullies(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_blocked_gullies'])) return const [];
-    return _split(
-        _normalize(_sub('{E_RAINWATER_GOODS_ABOUT}', '{RWG_BLOCKED_GULLIES}')));
-  }
-
   List<String> _rwgOpenRunoffs(Map<String, String> answers) {
     if (!_isChecked(answers['cb_open_runoffs'])) return const [];
     return _split(
@@ -2272,156 +2091,6 @@ class InspectionPhraseEngine {
     if (!_isChecked(answers['cb_not_inspected'])) return const [];
     return _split(
         _normalize(_sub('{E_RAINWATER_GOODS_ABOUT}', '{RWG_NOT_INSPECTED}')));
-  }
-
-  List<String> _roofAbout(String screenId, Map<String, String> answers) {
-    final phrases = <String>[];
-    final phraseCode = '{E_ROOF_COVERING}';
-
-    var roofType = _cleanLower(answers['actv_roof_type']);
-    if (roofType.isEmpty) {
-      if (screenId.contains('__flat')) {
-        roofType = 'flat';
-      } else if (screenId.contains('__mansard')) {
-        roofType = 'mansard';
-      } else if (screenId.contains('__other')) {
-        roofType = 'other';
-      } else {
-        roofType = 'pitched';
-      }
-    }
-    final otherType = (answers['other'] ?? '').trim();
-    if (roofType == 'other' && otherType.isNotEmpty) {
-      roofType = otherType.toLowerCase();
-    }
-
-    final locations = _labelsFor(
-      [
-        'cb_main_building',
-        'cb_back_addition',
-        'cb_extension',
-        'cb_bay_window',
-        'cb_dormer_window',
-        'cb_other_22'
-      ],
-      answers,
-      {
-        'cb_main_building': 'Main building',
-        'cb_back_addition': 'Back addition',
-        'cb_extension': 'Extension',
-        'cb_bay_window': 'Bay window',
-        'cb_dormer_window': 'Dormer window',
-        'cb_other_22': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_22', 'etRoofLocationOther', locations);
-
-    final materials = _labelsFor(
-      [
-        'cb_original',
-        'cb_replacement',
-        'cb_interlocking',
-        'cb_concrete',
-        'cb_clay',
-        'cb_natural',
-        'cb_composite',
-        'cb_mineral_felt',
-        'cb_rubber',
-        'cb_fiberglass',
-        'cb_single_ply_membrane',
-        'cb_other_78',
-      ],
-      answers,
-      {
-        'cb_original': 'Original',
-        'cb_replacement': 'Replacement',
-        'cb_interlocking': 'Interlocking',
-        'cb_concrete': 'Concrete',
-        'cb_clay': 'Clay',
-        'cb_natural': 'Natural',
-        'cb_composite': 'Composite',
-        'cb_mineral_felt': 'Mineral felt',
-        'cb_rubber': 'Rubber material',
-        'cb_fiberglass': 'Fiberglass',
-        'cb_single_ply_membrane': 'Single ply membrane',
-        'cb_other_78': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_78', 'etRoofMaterialOther', materials);
-
-    final shapes = _labelsFor(
-      ['cb_tiles', 'cb_sheets'],
-      answers,
-      {
-        'cb_tiles': 'Tiles',
-        'cb_sheets': 'Sheets',
-      },
-    );
-
-    if (roofType.isNotEmpty &&
-        locations.isNotEmpty &&
-        materials.isNotEmpty &&
-        shapes.isNotEmpty) {
-      var template = _sub(phraseCode, '{RC_ABOUT_TYPE}');
-      if (template.isNotEmpty) {
-        final oldRoof = _isChecked(answers['cb_old_roof_covering'])
-            ? _sub(phraseCode, '{OLD_ROOF_COVERING}')
-            : '';
-        final locationText = _toWords(locations).toLowerCase();
-        final materialText = _toWords(materials).toLowerCase();
-        final shapeText = _toWords(shapes).toLowerCase();
-        template = template
-            .replaceAll('{RC_TYPE}', roofType)
-            .replaceAll('{RC_LOCATION}', locationText)
-            .replaceAll('{IS_ARE}', _isAre(locations))
-            .replaceAll('{RC_MATERIAL}', materialText)
-            .replaceAll('{RC_COV_MATERIAL_SHAPE}', shapeText)
-            .replaceAll('{OLD_ROOF_COVERING}', oldRoof);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final condition = _cleanLower(
-      _firstNonEmpty(
-        answers,
-        const [
-          'actv_condition',
-          'llMainContainer',
-          'android_material_design_spinner3'
-        ],
-      ),
-    );
-    if (condition.isNotEmpty) {
-      var template = _sub(phraseCode, '{RC_ABOUT_TYPE_CONDITION}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{RC_TYPE_CONDITION}', condition);
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_mineral_felt'])) {
-      final felt =
-          _sub('{E_ROOF_COVERING_MATERIAL}', '{FLAT_MATERIAL_MINERAL_FELT}');
-      if (felt.isNotEmpty) {
-        phrases.addAll(_split(_normalize(felt)));
-      }
-    }
-    if (_isChecked(answers['cb_replacement'])) {
-      final replacement =
-          _sub('{E_ROOF_COVERING_MATERIAL}', '{MATERIAL_REPLACEMENT}');
-      if (replacement.isNotEmpty) {
-        phrases.addAll(_split(_normalize(replacement)));
-      }
-    }
-    if (_isChecked(answers['cb_composite'])) {
-      final composite =
-          _sub('{E_ROOF_COVERING_MATERIAL}', '{MATERIAL_COMPOSITE}');
-      if (composite.isNotEmpty) {
-        phrases.addAll(_split(_normalize(composite)));
-      }
-    }
-
-    return phrases;
   }
 
   List<String> _roofWeather(Map<String, String> answers) {
@@ -2439,254 +2108,6 @@ class InspectionPhraseEngine {
     }
     if (_isChecked(answers['cb_weather_leaks_noted'])) {
       final extra = _sub(phraseCode, '{CONDITION_LEAKS_NOTED}');
-      if (extra.isNotEmpty) {
-        phrases.addAll(_split(_normalize(extra)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _roofFlashing(Map<String, String> answers) {
-    final items = _labelsFor(
-      ['cb_lead', 'cb_mortar', 'cb_tiles', 'cb_other_33'],
-      answers,
-      {
-        'cb_lead': 'Lead',
-        'cb_mortar': 'Mortar',
-        'cb_tiles': 'Tiles',
-        'cb_other_33': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_33', 'et_other_87', items);
-    if (items.isEmpty) return const [];
-
-    final phrases = <String>[];
-    var template = _sub('{E_ROOF_COVERING}', '{E_RC_FLASHING}');
-    if (template.isNotEmpty) {
-      template =
-          template.replaceAll('{RC_FLASHING}', _toWords(items).toLowerCase());
-      phrases.addAll(_split(_normalize(template)));
-    }
-
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
-    );
-    if (condition.isNotEmpty) {
-      var conditionTemplate =
-          _sub('{E_ROOF_COVERING}', '{E_RC_FLASHING_CONDITION}');
-      if (conditionTemplate.isNotEmpty) {
-        conditionTemplate =
-            conditionTemplate.replaceAll('{RC_FLASHING_CONDITION}', condition);
-        phrases.addAll(_split(_normalize(conditionTemplate)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _roofRidgeTiles(Map<String, String> answers) {
-    final items = _labelsFor(
-      ['cb_tiles', 'cb_lead', 'cb_concrete', 'cb_other_62'],
-      answers,
-      {
-        'cb_tiles': 'Tiles',
-        'cb_lead': 'Lead',
-        'cb_concrete': 'Concrete',
-        'cb_other_62': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_62', 'et_other_101', items);
-    if (items.isEmpty) return const [];
-    final phrases = <String>[];
-    var template = _sub('{E_ROOF_COVERING}', '{E_RC_RIDGE_TILES}');
-    if (template.isNotEmpty) {
-      template = template.replaceAll(
-          '{RC_RIDGE_TILES}', _toWords(items).toLowerCase());
-      phrases.addAll(_split(_normalize(template)));
-    }
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_formed_in', 'llMainContainer']),
-    );
-    if (condition.isNotEmpty) {
-      var conditionTemplate =
-          _sub('{E_ROOF_COVERING}', '{E_RC_RIDGE_TILES_CONDITION}');
-      if (conditionTemplate.isNotEmpty) {
-        conditionTemplate = conditionTemplate.replaceAll(
-            '{RC_RIDGE_TILES_CONDITION}', condition);
-        phrases.addAll(_split(_normalize(conditionTemplate)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _roofHipTiles(Map<String, String> answers) {
-    final items = _labelsFor(
-      ['cb_tiles', 'cb_lead', 'cb_concrete', 'cb_other_62'],
-      answers,
-      {
-        'cb_tiles': 'Tiles',
-        'cb_lead': 'Lead',
-        'cb_concrete': 'Concrete',
-        'cb_other_62': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_62', 'et_other_101', items);
-    if (items.isEmpty) return const [];
-    final phrases = <String>[];
-    var template = _sub('{E_ROOF_COVERING}', '{E_RC_HIP_TILES}');
-    if (template.isNotEmpty) {
-      template =
-          template.replaceAll('{RC_HIP_TILES}', _toWords(items).toLowerCase());
-      phrases.addAll(_split(_normalize(template)));
-    }
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_formed_in', 'llMainContainer']),
-    );
-    if (condition.isNotEmpty) {
-      var conditionTemplate =
-          _sub('{E_ROOF_COVERING}', '{E_RC_HIP_TILES_CONDITION}');
-      if (conditionTemplate.isNotEmpty) {
-        conditionTemplate =
-            conditionTemplate.replaceAll('{RC_HIP_TILES_CONDITION}', condition);
-        phrases.addAll(_split(_normalize(conditionTemplate)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _roofParapetWall(Map<String, String> answers) {
-    final builtWith = _labelsFor(
-      ['cb_bricks', 'cb_concrete', 'cb_block', 'cb_other_44'],
-      answers,
-      {
-        'cb_bricks': 'Bricks',
-        'cb_concrete': 'Concrete',
-        'cb_block': 'Block',
-        'cb_other_44': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_44', 'et_other_101', builtWith);
-    if (builtWith.isEmpty) return const [];
-
-    final phrases = <String>[];
-    var template = _sub('{E_ROOF_COVERING}', '{E_RC_PARAPET_WALL}');
-    if (template.isNotEmpty) {
-      final rendered = _cleanLower(answers['actv_rendered']);
-      // Rendered status is optional; a literal "and are ." fragment is not
-      // acceptable in a finalised client report, so drop the clause
-      // entirely when it hasn't been answered.
-      if (rendered.isEmpty) {
-        template = template.replaceAll(' and are {RC_PARAPET_WALL_RENDERED}', '');
-      } else {
-        template = template.replaceAll('{RC_PARAPET_WALL_RENDERED}', rendered);
-      }
-      template = template
-          .replaceAll(
-              '{RC_PARAPET_WALL_BUILT_WITH}', _toWords(builtWith).toLowerCase())
-          .replaceAll('{IS_ARE}', _isAre(builtWith));
-      phrases.addAll(_split(_normalize(template)));
-    }
-
-    final condition = _cleanLower(
-      _firstNonEmpty(
-        answers,
-        const [
-          'android_material_design_spinner3',
-          'actv_condition',
-          'llMainContainer'
-        ],
-      ),
-    );
-    if (condition.isNotEmpty) {
-      var conditionTemplate =
-          _sub('{E_ROOF_COVERING}', '{E_RC_PARAPET_WALL_CONDITION}');
-      if (conditionTemplate.isNotEmpty) {
-        conditionTemplate = conditionTemplate.replaceAll(
-            '{RC_PARAPET_WALL_CONDITION}', condition);
-        phrases.addAll(_split(_normalize(conditionTemplate)));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _roofDeflection(Map<String, String> answers) {
-    final phrases = <String>[];
-    final statusLocations = _labelsFor(
-      ['cb_front_45', 'cb_side_41', 'cb_rear_47', 'cb_other_207'],
-      answers,
-      {
-        'cb_front_45': 'Front',
-        'cb_side_41': 'Side',
-        'cb_rear_47': 'Rear',
-        'cb_other_207': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_207', 'et_other_822', statusLocations);
-
-    final status = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
-    );
-    if (status.isNotEmpty && statusLocations.isNotEmpty) {
-      final subCode = status.contains('significant')
-          ? '{DEFLECTION_SIGNIFICANT}'
-          : '{DEFLECTION_MINOR}';
-      var template = _sub('{E_RC_DEFLECTION_STATUS}', subCode);
-      if (template.isNotEmpty) {
-        template = template.replaceAll('{RC_DEFLECTION_STATUS_LOCATION}',
-            _toWords(statusLocations).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final causedByLocations = _labelsFor(
-      ['cb_front_77', 'cb_side_14', 'cb_rear_27', 'cb_other_1028'],
-      answers,
-      {
-        'cb_front_77': 'Front',
-        'cb_side_14': 'Side',
-        'cb_rear_27': 'Rear',
-        'cb_other_1028': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_1028', 'et_other_179', causedByLocations);
-    final locationForCause =
-        causedByLocations.isNotEmpty ? causedByLocations : statusLocations;
-
-    final reasons = _labelsFor(
-      [
-        'cb_damaged_roof_timber',
-        'cb_heavy_replacement_covering',
-        'cb_other_897'
-      ],
-      answers,
-      {
-        'cb_damaged_roof_timber': 'Damaged roof timber',
-        'cb_heavy_replacement_covering': 'Heavy replacement covering',
-        'cb_other_897': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_897', 'et_other_410', reasons);
-    if (locationForCause.isNotEmpty && reasons.isNotEmpty) {
-      var template = _sub('{E_ROOF_COVERING}', '{E_RC_DEFLECTION_CAUSED_BY}');
-      if (template.isNotEmpty) {
-        template = template
-            .replaceAll('{RC_DEFLECTION_CAUSED_BY_LOCATION}',
-                _toWords(locationForCause).toLowerCase())
-            .replaceAll('{RC_DEFLECTION_CAUSED_BY_REASON}',
-                _toWords(reasons).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    if (_isChecked(answers['cb_strengthen_timber'])) {
-      final extra =
-          _sub('{E_RC_DEFLECTION_OTHER}', '{DEFLECTION_STRENGTHEN_TIMBER}');
-      if (extra.isNotEmpty) {
-        phrases.addAll(_split(_normalize(extra)));
-      }
-    }
-    if (_isChecked(answers['cb_investigate'])) {
-      final extra = _sub('{E_RC_DEFLECTION_OTHER}', '{DEFLECTION_INVESTIGATE}');
       if (extra.isNotEmpty) {
         phrases.addAll(_split(_normalize(extra)));
       }
@@ -2714,61 +2135,6 @@ class InspectionPhraseEngine {
     return _split(_normalize(template));
   }
 
-  List<String> _roofStructure(Map<String, String> answers) {
-    final phrases = <String>[];
-    final locations = _labelsFor(
-      ['cb_main_building_22', 'cb_back_addition_48', 'cb_other_230'],
-      answers,
-      {
-        'cb_main_building_22': 'Main building',
-        'cb_back_addition_48': 'Back addition',
-        'cb_other_230': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_230', 'et_other_859', locations);
-    if (locations.isNotEmpty) {
-      var template = _sub('{E_ROOF_COVERING}', '{RC_ROOF}');
-      if (template.isNotEmpty) {
-        template = template.replaceAll(
-            '{RC_ROOF_LOCATION}', _toWords(locations).toLowerCase());
-        phrases.addAll(_split(_normalize(template)));
-      }
-    }
-
-    final status = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
-    );
-    if (status.isNotEmpty) {
-      if (status.contains('investigate')) {
-        final investigateLocations = _labelsFor(
-          ['cb_front_39', 'cb_side_78', 'cb_rear_20'],
-          answers,
-          {
-            'cb_front_39': 'Front',
-            'cb_side_78': 'Side',
-            'cb_rear_20': 'Rear',
-          },
-        );
-        if (investigateLocations.isNotEmpty) {
-          var template = _sub('{E_ROOF_COVERING_ROOF_CONDITION}',
-              '{RC_ROOF_CONDITION_INVESTIGATE}');
-          if (template.isNotEmpty) {
-            template = template.replaceAll('{RC_ROOF_INVESTIGATE_LOCATION}',
-                _toWords(investigateLocations).toLowerCase());
-            phrases.addAll(_split(_normalize(template)));
-          }
-        }
-      } else {
-        final template =
-            _sub('{E_ROOF_COVERING_ROOF_CONDITION}', '{RC_ROOF_CONDITION_OK}');
-        if (template.isNotEmpty) {
-          phrases.addAll(_split(_normalize(template)));
-        }
-      }
-    }
-    return phrases;
-  }
-
   List<String> _roofSpreading(Map<String, String> answers) {
     final locations = _labelsFor(
       ['cb_front', 'cb_side', 'cb_rear'],
@@ -2787,408 +2153,11 @@ class InspectionPhraseEngine {
     return _split(_normalize(template));
   }
 
-  List<String> _roofRepairTiles(Map<String, String> answers) {
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
-    );
-    if (condition.isEmpty) return const [];
-    final isSoon = condition.contains('soon');
-
-    final items = _labelsFor(
-      isSoon
-          ? ['cb_roof_14', 'cb_ridge_64', 'cb_hip_95']
-          : ['cb_roof_40', 'cb_ridge_16', 'cb_hip_42'],
-      answers,
-      {
-        'cb_roof_14': 'Roof',
-        'cb_ridge_64': 'Ridge',
-        'cb_hip_95': 'Hip',
-        'cb_roof_40': 'Roof',
-        'cb_ridge_16': 'Ridge',
-        'cb_hip_42': 'Hip',
-      },
-    );
-
-    final issues = _labelsFor(
-      isSoon
-          ? [
-              'cb_are_loose_71',
-              'cb_have_slipped_19',
-              'cb_are_missing_88',
-              'cb_are_cracked_80',
-              'cb_are_poorly_secured_51',
-              'cb_are_damaged_24',
-              'cb_other_195'
-            ]
-          : [
-              'cb_are_loose_24',
-              'cb_are_lifted_48',
-              'cb_have_slipped_71',
-              'cb_are_missing_29',
-              'cb_are_cracked_50',
-              'cb_are_poorly_secured_25',
-              'cb_are_damaged_65',
-              'cb_other_395'
-            ],
-      answers,
-      {
-        'cb_are_loose_71': 'Are loose',
-        'cb_have_slipped_19': 'Have slipped',
-        'cb_are_missing_88': 'Are missing',
-        'cb_are_cracked_80': 'Are cracked',
-        'cb_are_poorly_secured_51': 'Are poorly secured',
-        'cb_are_damaged_24': 'Are damaged',
-        'cb_other_195': 'Other',
-        'cb_are_loose_24': 'Are loose',
-        'cb_are_lifted_48': 'Are lifted',
-        'cb_have_slipped_71': 'Have slipped',
-        'cb_are_missing_29': 'Are missing',
-        'cb_are_cracked_50': 'Are cracked',
-        'cb_are_poorly_secured_25': 'Are poorly secured',
-        'cb_are_damaged_65': 'Are damaged',
-        'cb_other_395': 'Other',
-      },
-    );
-    _addOther(answers, isSoon ? 'cb_other_195' : 'cb_other_395',
-        isSoon ? 'et_other_903' : 'et_other_339', issues);
-    if (items.isEmpty || issues.isEmpty) return const [];
-
-    final phraseCode = '{E_RC_TILES}';
-    final subCode = isSoon ? '{REPAIR_SOON}' : '{REPAIR_NOW}';
-    var template = _sub(phraseCode, subCode);
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll(
-            '{RC_ROOF_REPAIR_TILES_ONE_OR_FEW}', _toWords(items).toLowerCase())
-        .replaceAll(
-            '{RC_ROOF_REPAIR_TILES_ISSUE}', _toWords(issues).toLowerCase());
-    return _split(_normalize(template));
-  }
-
   List<String> _roofRepairPoorRoof(Map<String, String> answers) {
     if (!_isChecked(answers['cb_repair_soon_70'])) return const [];
     final template =
         _sub('{E_ROOF_COVERING_REPAIR}', '{RC_POOR_ROOF_CONDITION}');
     if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
-  List<String> _roofSpreadingRepair(Map<String, String> answers) {
-    final status = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
-    );
-    if (status.isEmpty) return const [];
-    if (status.contains('previously strengthened')) {
-      final template = _sub('{E_ROOF_COVERING_REPAIR}',
-          '{RC_ROOF_SPREADING_PREVIOUSLY_STRENGTHENED}');
-      if (template.isEmpty) return const [];
-      return _split(_normalize(template));
-    }
-    if (status.contains('yes')) {
-      final template = _sub('{E_ROOF_COVERING_REPAIR}', '{RC_ROOF_SPREADING}');
-      if (template.isEmpty) return const [];
-      return _split(_normalize(template));
-    }
-    final ok = _sub('{E_ROOF_COVERING_REPAIR}', '{ROOF_FIT_FOR_PURPOSE}');
-    if (ok.isEmpty) return const [];
-    return _split(_normalize(ok));
-  }
-
-  List<String> _roofRepairFlatRoof(Map<String, String> answers) {
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
-    );
-    if (condition.isEmpty) return const [];
-    final isSoon = condition.contains('soon');
-    final issues = _labelsFor(
-      isSoon
-          ? [
-              'cb_torn',
-              'cb_split',
-              'cb_damaged',
-              'cb_blistered',
-              'cb_holding_water',
-              'cb_covered_with_moss',
-              'cb_other_944'
-            ]
-          : [
-              'cb_torn_78',
-              'cb_split_43',
-              'cb_damaged_25',
-              'cb_blistered_45',
-              'cb_ponding_58',
-              'cb_other_516'
-            ],
-      answers,
-      {
-        'cb_torn': 'Torn',
-        'cb_split': 'Split',
-        'cb_damaged': 'Damaged',
-        'cb_blistered': 'Blistered',
-        'cb_holding_water': 'Holding water',
-        'cb_covered_with_moss': 'Covered with moss',
-        'cb_other_944': 'Other',
-        'cb_torn_78': 'Torn',
-        'cb_split_43': 'Split',
-        'cb_damaged_25': 'Damaged',
-        'cb_blistered_45': 'Blistered',
-        'cb_ponding_58': 'Ponding',
-        'cb_other_516': 'Other',
-      },
-    );
-    _addOther(answers, isSoon ? 'cb_other_944' : 'cb_other_516',
-        isSoon ? 'et_other_617' : 'et_other_928', issues);
-    if (issues.isEmpty) return const [];
-    final phraseCode = '{E_RC_FLAT_ROOF_REPAIR}';
-    final subCode = isSoon ? '{REPAIR_SOON}' : '{REPAIR_NOW}';
-    var template = _sub(phraseCode, subCode);
-    if (template.isEmpty) return const [];
-    template = template.replaceAll(
-        '{RC_FLAT_ROOF_REPAIR_COVERED}', _toWords(issues).toLowerCase());
-    return _split(_normalize(template));
-  }
-
-  List<String> _roofRepairParapetWall(Map<String, String> answers) {
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
-    );
-    if (condition.isEmpty) return const [];
-    final isSoon = condition.contains('soon');
-    final subject = _labelsFor(
-      isSoon
-          ? [
-              'cb_rendering_68',
-              'cb_copping_21',
-              'cb_flashing_34',
-              'cb_other_836'
-            ]
-          : [
-              'cb_rendering_16',
-              'cb_copping_37',
-              'cb_flashing_76',
-              'cb_other_390'
-            ],
-      answers,
-      {
-        'cb_rendering_68': 'Rendering',
-        'cb_copping_21': 'Copping',
-        'cb_flashing_34': 'Flashing',
-        'cb_other_836': 'Other',
-        'cb_rendering_16': 'Rendering',
-        'cb_copping_37': 'Copping',
-        'cb_flashing_76': 'Flashing',
-        'cb_other_390': 'Other',
-      },
-    );
-    _addOther(answers, isSoon ? 'cb_other_836' : 'cb_other_390',
-        isSoon ? 'et_other_272' : 'et_other_662', subject);
-
-    final location = _labelsFor(
-      isSoon
-          ? ['cb_right_72', 'cb_left_59', 'cb_rear_58', 'cb_front_70']
-          : [
-              'cb_rendering_61',
-              'cb_copping_20',
-              'cb_flashing_83',
-              'cb_other_705'
-            ],
-      answers,
-      {
-        'cb_right_72': 'Right',
-        'cb_left_59': 'Left',
-        'cb_rear_58': 'Rear',
-        'cb_front_70': 'Front',
-        'cb_rendering_61': 'Right',
-        'cb_copping_20': 'Left',
-        'cb_flashing_83': 'Rear',
-        'cb_other_705': 'Front',
-      },
-    );
-
-    final issues = _labelsFor(
-      isSoon
-          ? [
-              'cb_damaged_94',
-              'cb_loose_22',
-              'cb_partly_missing_90',
-              'cb_cracked_73',
-              'cb_poorly_secured_94',
-              'cb_other_526'
-            ]
-          : ['cb_badly_damaged_70', 'cb_very_loose_63', 'cb_other_239'],
-      answers,
-      {
-        'cb_damaged_94': 'Damaged',
-        'cb_loose_22': 'Loose',
-        'cb_partly_missing_90': 'Partly missing',
-        'cb_cracked_73': 'Cracked',
-        'cb_poorly_secured_94': 'Poorly secured',
-        'cb_other_526': 'Other',
-        'cb_badly_damaged_70': 'Badly damaged',
-        'cb_very_loose_63': 'Very loose',
-        'cb_other_239': 'Other',
-      },
-    );
-    _addOther(answers, isSoon ? 'cb_other_526' : 'cb_other_239',
-        isSoon ? 'et_other_730' : 'et_other_787', issues);
-
-    if (subject.isEmpty || location.isEmpty || issues.isEmpty) return const [];
-    final phraseCode = '{E_RC_PARAPET_WALL_REPAIR}';
-    final subCode = isSoon ? '{REPAIR_SOON}' : '{REPAIR_NOW}';
-    var template = _sub(phraseCode, subCode);
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll(
-            '{RC_PARAPET_WALL_REPAIR_SUBJECT}', _toWords(subject).toLowerCase())
-        .replaceAll('{RC_PARAPET_WALL_REPAIR_LOCATION}',
-            _toWords(location).toLowerCase())
-        .replaceAll(
-            '{RC_PARAPET_WALL_REPAIR_ISSUE}', _toWords(issues).toLowerCase());
-    final phrases = _split(_normalize(template)).toList();
-
-    if (!isSoon && _isChecked(answers['cb_safety_hazard'])) {
-      final extra = _sub(phraseCode, '{REPAIR_NOW_SAFETY_HAZARD}');
-      if (extra.isNotEmpty) {
-        phrases.addAll(_split(_normalize(extra)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _roofRepairVerge(Map<String, String> answers) {
-    final condition = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']),
-    );
-    if (condition.isEmpty) return const [];
-    final isSoon = condition.contains('soon');
-    final items = _labelsFor(
-      isSoon
-          ? ['cb_mortar_58', 'cb_tiles_101', 'cb_clips_95', 'cb_other_521']
-          : [
-              'cb_rendering_52',
-              'cb_copping_32',
-              'cb_flashing_62',
-              'cb_other_814'
-            ],
-      answers,
-      {
-        'cb_mortar_58': 'Mortar',
-        'cb_tiles_101': 'Tiles',
-        'cb_clips_95': 'Clips',
-        'cb_other_521': 'Other',
-        'cb_rendering_52': 'Mortar',
-        'cb_copping_32': 'Tiles',
-        'cb_flashing_62': 'Clips',
-        'cb_other_814': 'Other',
-      },
-    );
-    _addOther(answers, isSoon ? 'cb_other_521' : 'cb_other_814',
-        isSoon ? 'et_other_650' : 'et_other_133', items);
-
-    final issues = _labelsFor(
-      isSoon
-          ? [
-              'cb_damaged_32',
-              'cb_loose_25',
-              'cb_partly_missing_77',
-              'cb_cracked_93',
-              'cb_poorly_secured_51',
-              'cb_other_507'
-            ]
-          : [
-              'cb_badly_damaged_19',
-              'cb_badly_cracked_46',
-              'cb_about_to_drop_36',
-              'cb_other_491'
-            ],
-      answers,
-      {
-        'cb_damaged_32': 'Damaged',
-        'cb_loose_25': 'Loose',
-        'cb_partly_missing_77': 'Partly missing',
-        'cb_cracked_93': 'Cracked',
-        'cb_poorly_secured_51': 'Poorly secured',
-        'cb_other_507': 'Other',
-        'cb_badly_damaged_19': 'Badly damaged',
-        'cb_badly_cracked_46': 'Badly cracked',
-        'cb_about_to_drop_36': 'About to drop',
-        'cb_other_491': 'Other',
-      },
-    );
-    _addOther(answers, isSoon ? 'cb_other_507' : 'cb_other_491',
-        isSoon ? 'et_other_458' : 'et_other_477', issues);
-
-    if (items.isEmpty || issues.isEmpty) return const [];
-    final phraseCode = '{E_RC_VERGE_REPAIR}';
-    final subCode = isSoon ? '{REPAIR_SOON}' : '{REPAIR_NOW}';
-    var template = _sub(phraseCode, subCode);
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{RC_VERGE_REPAIR_ITEM}', _toWords(items).toLowerCase())
-        .replaceAll('{RC_VERGE_REPAIR_ISSUE}', _toWords(issues).toLowerCase());
-    final phrases = _split(_normalize(template)).toList();
-
-    if (!isSoon && _isChecked(answers['cb_safety_hazard'])) {
-      final extra = _sub(phraseCode, '{REPAIR_NOW_SAFETY_HAZARD}');
-      if (extra.isNotEmpty) {
-        phrases.addAll(_split(_normalize(extra)));
-      }
-    }
-    return phrases;
-  }
-
-  List<String> _roofRepairValleyGutters(Map<String, String> answers) {
-    final locations = _labelsFor(
-      ['cb_front_14', 'cb_side_19', 'cb_rear_95', 'cb_other_6081'],
-      answers,
-      {
-        'cb_front_14': 'Front',
-        'cb_side_19': 'Side',
-        'cb_rear_95': 'Rear',
-        'cb_other_6081': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_6081', 'et_other_7521', locations);
-
-    final status = _labelsFor(
-      ['cb_partially_35', 'cb_completely_78'],
-      answers,
-      {
-        'cb_partially_35': 'Partially',
-        'cb_completely_78': 'Completely',
-      },
-    );
-
-    final issues = _labelsFor(
-      [
-        'cb_blocked_with_debris_90',
-        'cb_poorly_aligned_14',
-        'cb_Poor_detailing',
-        'cb_Detailing_damage',
-        'cb_other_608'
-      ],
-      answers,
-      {
-        'cb_blocked_with_debris_90': 'Blocked with debris',
-        'cb_poorly_aligned_14': 'Poorly aligned',
-        'cb_Poor_detailing': 'Poor detailing',
-        'cb_Detailing_damage': 'Detailing damage',
-        'cb_other_608': 'Other',
-      },
-    );
-    _addOther(answers, 'cb_other_608', 'et_other_752', issues);
-
-    if (locations.isEmpty || status.isEmpty || issues.isEmpty) return const [];
-    var template =
-        _sub('{E_ROOF_COVERING_REPAIR}', '{E_RC_VALLEY_GUTTERS_REPAIR}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{RC_VALLEY_GUTTERS_REPAIR_LOCATION}',
-            _toWords(locations).toLowerCase())
-        .replaceAll(
-            '{RC_VALLEY_GUTTERS_REPAIR_STATUS}', _toWords(status).toLowerCase())
-        .replaceAll(
-            '{RC_VALLEY_GUTTERS_REPAIR_ISSUE}', _toWords(issues).toLowerCase());
     return _split(_normalize(template));
   }
 
@@ -3230,16 +2199,6 @@ class InspectionPhraseEngine {
             '{RC_NOT_INSPECTED_LOCATION}', _toWords(locations).toLowerCase())
         .replaceAll('{RC_NOT_INSPECTED_ASSUMED_TYPE}', assumed);
     return _split(_normalize(template));
-  }
-
-  List<String> _roofCoveringWeathered(Map<String, String> answers) {
-    if (!_isChecked(answers['cb_weathered'])) return const [];
-    final condition = _cleanLower(answers['actv_condition']);
-    if (condition.isEmpty) return const [];
-    final template = _sub('{E_ROOF_COVERING}', '{RC_ABOUT_TYPE_CONDITION}');
-    if (template.isEmpty) return const [];
-    return _split(
-        _normalize(template.replaceAll('{RC_TYPE_CONDITION}', condition)));
   }
 
   List<String> _windowsAbout(Map<String, String> answers) {

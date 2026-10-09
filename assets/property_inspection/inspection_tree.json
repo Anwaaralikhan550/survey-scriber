@@ -19580,196 +19580,78 @@
               "type": "dropdown",
               "options": [
                 "Repair soon",
-                "Repair now"
+                "Repair now",
+                "Leaking"
               ]
             },
             {
-              "id": "label_type_of_tiles",
-              "label": "Type Of Tiles",
+              "id": "label_rc_roof_repair_tiles_issue",
+              "label": "Defects",
               "type": "label",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
+              "conditionalOn": "actv_condition=Repair soon|Repair now",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_roof_40",
-              "label": "Roof",
+              "id": "rc_rt_loose",
+              "label": "loose",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
+              "conditionalOn": "actv_condition=Repair soon|Repair now",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_ridge_16",
-              "label": "Ridge",
+              "id": "rc_rt_missing",
+              "label": "missing",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
+              "conditionalOn": "actv_condition=Repair soon|Repair now",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_hip_42",
-              "label": "Hip",
+              "id": "rc_rt_lifted",
+              "label": "lifted",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
+              "conditionalOn": "actv_condition=Repair soon|Repair now",
               "conditionalMode": "show"
             },
             {
-              "id": "label_defects_many_tiles_2",
-              "label": "Defects - Many tiles",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_loose_24",
-              "label": "Are loose",
+              "id": "rc_rt_slipped",
+              "label": "slipped",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
+              "conditionalOn": "actv_condition=Repair soon|Repair now",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_are_lifted_48",
-              "label": "Are lifted",
+              "id": "rc_rt_cracked",
+              "label": "cracked",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
+              "conditionalOn": "actv_condition=Repair soon|Repair now",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_have_slipped_71",
-              "label": "Have slipped",
+              "id": "rc_rt_broken",
+              "label": "broken",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
+              "conditionalOn": "actv_condition=Repair soon|Repair now",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_are_missing_29",
-              "label": "Are missing",
+              "id": "rc_rt_distorted",
+              "label": "distorted",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
+              "conditionalOn": "actv_condition=Repair soon|Repair now",
               "conditionalMode": "show"
             },
             {
-              "id": "cb_are_cracked_50",
-              "label": "Are cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_poorly_secured_25",
-              "label": "Are poorly secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_damaged_65",
-              "label": "Are damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_395",
+              "id": "rc_rt_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now|Repair Now",
+              "conditionalOn": "actv_condition=Repair soon|Repair now",
               "conditionalMode": "show"
             },
             {
-              "id": "et_other_339",
+              "id": "rc_rt_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_condition=Repair now|Repair Now&cb_other_395",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_type_of_tiles_2",
-              "label": "Type Of Tiles",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_roof_14",
-              "label": "Roof",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_ridge_64",
-              "label": "Ridge",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_hip_95",
-              "label": "Hip",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defects_many_tiles",
-              "label": "Defects - Many tiles",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_loose_71",
-              "label": "Are loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_have_slipped_19",
-              "label": "Have slipped",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_missing_88",
-              "label": "Are missing",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_cracked_80",
-              "label": "Are cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_poorly_secured_51",
-              "label": "Are poorly secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_damaged_24",
-              "label": "Are damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_195",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_903",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair soon|Repair Soon&cb_other_195",
+              "conditionalOn": "actv_condition=Repair soon|Repair now&rc_rt_other",
               "conditionalMode": "show"
             }
           ]
@@ -20512,132 +20394,34 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_location_59",
+              "id": "label_rc_location",
               "label": "Location",
               "type": "label"
             },
             {
               "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
+              "label": "main building",
               "type": "checkbox"
             },
             {
               "id": "cb_extension",
-              "label": "Extension",
+              "label": "extension",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_loc_porch",
+              "label": "porch",
               "type": "checkbox"
             },
             {
               "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_dormer_window",
-              "label": "Dormer window",
+              "label": "bay window",
               "type": "checkbox"
             },
             {
               "id": "cb_other_22",
               "label": "Other",
               "type": "checkbox"
-            },
-            {
-              "id": "label_material_4",
-              "label": "Material",
-              "type": "label"
-            },
-            {
-              "id": "cb_original",
-              "label": "Original",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_replacement",
-              "label": "Replacement",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_interlocking",
-              "label": "Interlocking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_clay",
-              "label": "Clay",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_natural",
-              "label": "Natural",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_composite",
-              "label": "Composite",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mineral_felt",
-              "label": "Mineral felt",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rubber",
-              "label": "Rubber material",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fiberglass",
-              "label": "Fiberglass",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_single_ply_membrane",
-              "label": "Single ply membrane",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_78",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_shape_of_covering_material",
-              "label": "Shape of covering material",
-              "type": "label"
-            },
-            {
-              "id": "cb_tiles",
-              "label": "Tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_sheets",
-              "label": "Sheets",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_old_roof_covering",
-              "label": "Old Roof Covering",
-              "type": "checkbox"
-            },
-            {
-              "id": "other",
-              "label": "Other roof type",
-              "type": "text",
-              "conditionalOn": "cb_other_22",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "etRoofLocationOther",
@@ -20648,10 +20432,65 @@
               "conditionalMode": "show"
             },
             {
+              "id": "label_rc_material",
+              "label": "Material",
+              "type": "label"
+            },
+            {
+              "id": "rc_mat_original_clay",
+              "label": "original clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_replacement_clay",
+              "label": "replacement clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_concrete",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_natural",
+              "label": "natural slate",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_artificial_slate",
+              "label": "artificial slate",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_fibre_cement",
+              "label": "fibre cement slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_aluminium",
+              "label": "aluminium sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_composite",
+              "label": "composite slate",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_asbestos_sheet",
+              "label": "asbestos sheet",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_78",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
               "id": "etRoofMaterialOther",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_22",
+              "conditionalOn": "cb_other_78",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
@@ -20660,10 +20499,17 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_old_roof_covering",
+              "label": "Old roof covering",
+              "type": "checkbox"
             }
           ]
         },
@@ -21927,19 +21773,29 @@
           "order": 3,
           "fields": [
             {
-              "id": "label_does_the_roof_timber_structure_require_strengthening",
-              "label": "Does the roof timber structure require strengthening?",
+              "id": "label_rc_roof_spreading_location",
+              "label": "Location",
               "type": "label"
             },
             {
-              "id": "actv_status",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Yes",
-                "No",
-                "Previously strengthened"
-              ]
+              "id": "rc_rs_all",
+              "label": "all",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_rs_front",
+              "label": "front",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_rs_side",
+              "label": "side",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_rs_rear",
+              "label": "rear",
+              "type": "checkbox"
             }
           ]
         },
@@ -21951,42 +21807,38 @@
           "order": 3,
           "fields": [
             {
-              "id": "actv_rainwater_goods_are_made_up",
-              "label": "Rainwater goods are made up",
-              "type": "dropdown",
-              "options": [
-                "Mainly of",
-                "A mixture of"
-              ]
-            },
-            {
-              "id": "label_type_2",
+              "id": "label_rwg_type",
               "label": "Type",
               "type": "label"
             },
             {
-              "id": "cb_plastic",
-              "label": "Plastic",
+              "id": "rwg_pvc",
+              "label": "PVC",
               "type": "checkbox"
             },
             {
               "id": "cb_cast_iron",
-              "label": "Cast iron",
+              "label": "cast iron",
               "type": "checkbox"
             },
             {
-              "id": "cb_asbestos_cement",
-              "label": "Asbestos cement",
+              "id": "rwg_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "rwg_steel",
+              "label": "steel",
               "type": "checkbox"
             },
             {
               "id": "cb_concrete",
-              "label": "Concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
-              "id": "cb_metal",
-              "label": "Metal",
+              "id": "cb_asbestos_cement",
+              "label": "asbestos cement",
               "type": "checkbox"
             },
             {
@@ -22003,19 +21855,21 @@
               "conditionalMode": "show"
             },
             {
-              "id": "cb_Shared",
-              "label": "Shared",
-              "type": "checkbox"
-            },
-            {
               "id": "actv_condition",
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_Shared",
+              "label": "Shared",
+              "type": "checkbox"
             }
           ]
         },
@@ -23161,98 +23015,48 @@
           "order": 4,
           "fields": [
             {
-              "id": "label_location_60",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_extension",
-              "label": "Extension",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_dormer_window",
-              "label": "Dormer window",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_22",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_material_5",
+              "id": "label_rc_material",
               "label": "Material",
               "type": "label"
             },
             {
-              "id": "cb_original",
-              "label": "Original",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_replacement",
-              "label": "Replacement",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_interlocking",
-              "label": "Interlocking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_clay",
-              "label": "Clay",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_natural",
-              "label": "Natural",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_composite",
-              "label": "Composite",
-              "type": "checkbox"
-            },
-            {
               "id": "cb_mineral_felt",
-              "label": "Mineral felt",
+              "label": "mineral felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_flat_hp_felt",
+              "label": "high-performance felt",
               "type": "checkbox"
             },
             {
               "id": "cb_rubber",
-              "label": "Rubber material",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fiberglass",
-              "label": "Fiberglass",
+              "label": "rubber membrane",
               "type": "checkbox"
             },
             {
               "id": "cb_single_ply_membrane",
-              "label": "Single ply membrane",
+              "label": "single-ply membrane",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_flat_grp",
+              "label": "GRP fibreglass",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_flat_asphalt",
+              "label": "asphalt",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_fiberglass",
+              "label": "fibreglass",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_flat_lead",
+              "label": "lead",
               "type": "checkbox"
             },
             {
@@ -23261,46 +23065,10 @@
               "type": "checkbox"
             },
             {
-              "id": "label_shape_of_covering_material_2",
-              "label": "Shape of covering material",
-              "type": "label"
-            },
-            {
-              "id": "cb_tiles",
-              "label": "Tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_sheets",
-              "label": "Sheets",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_old_roof_covering",
-              "label": "Old Roof Covering",
-              "type": "checkbox"
-            },
-            {
-              "id": "other",
-              "label": "Other roof type",
-              "type": "text",
-              "conditionalOn": "cb_other_22",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "etRoofLocationOther",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_22",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
               "id": "etRoofMaterialOther",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_22",
+              "conditionalOn": "cb_other_78",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
@@ -23309,10 +23077,17 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_old_roof_covering",
+              "label": "Old roof covering",
+              "type": "checkbox"
             }
           ]
         },
@@ -23340,108 +23115,56 @@
               ]
             },
             {
-              "id": "cb_torn",
-              "label": "Torn",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "label_rc_flat_roof_repair_covered",
+              "label": "Defects",
+              "type": "label"
             },
             {
-              "id": "cb_split",
-              "label": "Split",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_fr_weathered",
+              "label": "weathered",
+              "type": "checkbox"
             },
             {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_fr_blistered",
+              "label": "blistered",
+              "type": "checkbox"
             },
             {
-              "id": "cb_blistered",
-              "label": "Blistered",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_fr_split",
+              "label": "split",
+              "type": "checkbox"
             },
             {
-              "id": "cb_holding_water",
-              "label": "Holding water",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_fr_torn",
+              "label": "torn",
+              "type": "checkbox"
             },
             {
-              "id": "cb_covered_with_moss",
-              "label": "Covered with moss",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_fr_worn",
+              "label": "worn",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_944",
+              "id": "rc_fr_ponding",
+              "label": "ponding",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_fr_damaged",
+              "label": "damaged",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_fr_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_617",
+              "id": "rc_fr_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_condition=Repair soon&cb_other_944",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_torn_78",
-              "label": "Torn",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_split_43",
-              "label": "Split",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged_25",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_blistered_45",
-              "label": "Blistered",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_ponding_58",
-              "label": "Ponding",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_516",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_928",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now&cb_other_516",
+              "conditionalOn": "rc_fr_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -23459,188 +23182,159 @@
               "type": "dropdown",
               "options": [
                 "Repair soon",
-                "Repair now - if causing damp"
+                "Repair now"
               ]
             },
             {
-              "id": "label_item_3",
-              "label": "Item",
+              "id": "label_rwg_repair_defect",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_pipes_101",
-              "label": "Pipes",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair soon|Repair Soon",
-              "conditionalMode": "show"
+              "id": "rwg_dm_cracked",
+              "label": "cracked",
+              "type": "checkbox"
             },
             {
-              "id": "cb_gutters_28",
-              "label": "Gutters",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair soon|Repair Soon",
-              "conditionalMode": "show"
+              "id": "rwg_dm_distorted",
+              "label": "distorted",
+              "type": "checkbox"
             },
             {
-              "id": "label_defect_23",
-              "label": "Defect",
-              "type": "label"
+              "id": "rwg_dm_broken",
+              "label": "broken",
+              "type": "checkbox"
             },
             {
-              "id": "cb_are_leaking_78",
-              "label": "Leaking",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair soon|Repair Soon",
-              "conditionalMode": "show"
+              "id": "rwg_dm_split",
+              "label": "split",
+              "type": "checkbox"
             },
             {
-              "id": "cb_are_loose_39",
-              "label": "Loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair soon|Repair Soon",
-              "conditionalMode": "show"
+              "id": "rwg_dm_missing",
+              "label": "missing",
+              "type": "checkbox"
             },
             {
-              "id": "cb_are_incomplete_52",
-              "label": "Incomplete",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_blocked_101",
-              "label": "Blocked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_rusted_26",
-              "label": "Rusted",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_do_not_have_sufficient_slope_53",
-              "label": "Do not have sufficient slope",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair soon|Repair Soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_458",
+              "id": "rwg_dm_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair soon|Repair Soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_423",
+              "id": "rwg_dm_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_458",
+              "conditionalOn": "rwg_dm_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_rwg_insufficient_slope",
+          "title": "Insufficient slope",
+          "type": "screen",
+          "parentId": "group_e3_rain_water_goods_13",
+          "order": 5,
+          "fields": [
+            {
+              "id": "cb_insufficient_slope",
+              "label": "Insufficient slope",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_rwg_leakage",
+          "title": "Leakage",
+          "type": "screen",
+          "parentId": "group_e3_rain_water_goods_13",
+          "order": 6,
+          "fields": [
+            {
+              "id": "cb_leakage",
+              "label": "Leakage",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_rwg_defective_connections",
+          "title": "Defective connections",
+          "type": "screen",
+          "parentId": "group_e3_rain_water_goods_13",
+          "order": 8,
+          "fields": [
+            {
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Repair soon",
+                "Repair now"
+              ]
             },
             {
-              "id": "label_item_4",
-              "label": "Item",
+              "id": "label_rwg_connection_defect",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_pipes_96",
-              "label": "Pipes",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair now - if causing damp|Repair now|Repair Now",
-              "conditionalMode": "show"
+              "id": "rwg_cn_loose",
+              "label": "loose",
+              "type": "checkbox"
             },
             {
-              "id": "cb_gutters_59",
-              "label": "Gutters",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair now - if causing damp|Repair now|Repair Now",
-              "conditionalMode": "show"
+              "id": "rwg_cn_missing",
+              "label": "missing",
+              "type": "checkbox"
             },
             {
-              "id": "label_defect_22",
-              "label": "Defect",
-              "type": "label"
+              "id": "rwg_cn_leaking",
+              "label": "leaking",
+              "type": "checkbox"
             },
             {
-              "id": "cb_are_leaking_89",
-              "label": "Leaking",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair now - if causing damp|Repair now|Repair Now",
-              "conditionalMode": "show"
+              "id": "rwg_cn_displaced",
+              "label": "displaced",
+              "type": "checkbox"
             },
             {
-              "id": "cb_are_loose_91",
-              "label": "Loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair now - if causing damp|Repair now|Repair Now",
-              "conditionalMode": "show"
+              "id": "rwg_cn_defective",
+              "label": "defective",
+              "type": "checkbox"
             },
             {
-              "id": "cb_are_incomplete_94",
-              "label": "Incomplete",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair now - if causing damp|Repair now|Repair Now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_blocked_52",
-              "label": "Blocked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair now - if causing damp|Repair now|Repair Now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_are_rusted_18",
-              "label": "Rusted",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair now - if causing damp|Repair now|Repair Now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_do_not_have_sufficient_slope_65",
-              "label": "Do not have sufficient slope",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair now - if causing damp|Repair now|Repair Now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_4581",
+              "id": "rwg_cn_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition",
-              "conditionalValue": "Repair now - if causing damp|Repair now|Repair Now",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_4231",
+              "id": "rwg_cn_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_4581",
+              "conditionalOn": "rwg_cn_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_rwg_corrosion",
+          "title": "Corrosion",
+          "type": "screen",
+          "parentId": "group_e3_rain_water_goods_13",
+          "order": 10,
+          "fields": [
+            {
+              "id": "actv_corrosion",
+              "label": "Corrosion",
+              "type": "dropdown",
+              "options": [
+                "Light",
+                "Moderate",
+                "Significant"
+              ]
             }
           ]
         },
@@ -24668,242 +24362,85 @@
               ]
             },
             {
-              "id": "cb_rendering_68",
-              "label": "Rendering",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "label_rc_parapet_wall_repair_subject",
+              "label": "Parapet parts",
+              "type": "label"
             },
             {
-              "id": "cb_copping_21",
-              "label": "Copping",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_pr_rendering",
+              "label": "rendering",
+              "type": "checkbox"
             },
             {
-              "id": "cb_flashing_34",
-              "label": "Flashing",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_pr_copping",
+              "label": "copping",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_836",
+              "id": "rc_pr_flashing",
+              "label": "flashing",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_pr_subj_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_272",
+              "id": "rc_pr_subj_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_condition=Repair soon&cb_other_836",
+              "conditionalOn": "rc_pr_subj_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_location_21",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "label_rc_parapet_wall_repair_issue",
+              "label": "Defects",
+              "type": "label"
             },
             {
-              "id": "cb_right_72",
-              "label": "Right",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_pr_damaged",
+              "label": "damaged",
+              "type": "checkbox"
             },
             {
-              "id": "cb_left_59",
-              "label": "Left",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_pr_loose",
+              "label": "loose",
+              "type": "checkbox"
             },
             {
-              "id": "cb_rear_58",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_pr_partly_missing",
+              "label": "partly missing",
+              "type": "checkbox"
             },
             {
-              "id": "cb_front_70",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_pr_cracked",
+              "label": "cracked",
+              "type": "checkbox"
             },
             {
-              "id": "label_defect_18",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_pr_poorly_secured",
+              "label": "poorly secured",
+              "type": "checkbox"
             },
             {
-              "id": "cb_damaged_94",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_loose_22",
-              "label": "Loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_partly_missing_90",
-              "label": "Partly missing",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_cracked_73",
-              "label": "Cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_secured_94",
-              "label": "Poorly secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_526",
+              "id": "rc_pr_iss_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_730",
+              "id": "rc_pr_iss_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_condition=Repair soon&cb_other_526",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rendering_16",
-              "label": "Rendering",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_copping_37",
-              "label": "Copping",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_flashing_76",
-              "label": "Flashing",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_390",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_662",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now&cb_other_390",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_location_20",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rendering_61",
-              "label": "Right",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_copping_20",
-              "label": "Left",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_flashing_83",
-              "label": "Rear",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_705",
-              "label": "Front",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_17",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_badly_damaged_70",
-              "label": "Badly damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_very_loose_63",
-              "label": "Very loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_239",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_787",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now&cb_other_239",
+              "conditionalOn": "rc_pr_iss_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "cb_safety_hazard",
-              "label": "Is safety hazard?",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
+              "label": "Safety hazard",
+              "type": "checkbox"
             }
           ]
         },
@@ -26376,132 +25913,34 @@
           "order": 6,
           "fields": [
             {
-              "id": "label_location_61",
+              "id": "label_rc_location",
               "label": "Location",
               "type": "label"
             },
             {
               "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
+              "label": "main building",
               "type": "checkbox"
             },
             {
               "id": "cb_extension",
-              "label": "Extension",
+              "label": "extension",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_loc_porch",
+              "label": "porch",
               "type": "checkbox"
             },
             {
               "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_dormer_window",
-              "label": "Dormer window",
+              "label": "bay window",
               "type": "checkbox"
             },
             {
               "id": "cb_other_22",
               "label": "Other",
               "type": "checkbox"
-            },
-            {
-              "id": "label_material_6",
-              "label": "Material",
-              "type": "label"
-            },
-            {
-              "id": "cb_original",
-              "label": "Original",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_replacement",
-              "label": "Replacement",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_interlocking",
-              "label": "Interlocking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_clay",
-              "label": "Clay",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_natural",
-              "label": "Natural",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_composite",
-              "label": "Composite",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mineral_felt",
-              "label": "Mineral felt",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rubber",
-              "label": "Rubber material",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fiberglass",
-              "label": "Fiberglass",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_single_ply_membrane",
-              "label": "Single ply membrane",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_78",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_shape_of_covering_material_3",
-              "label": "Shape of covering material",
-              "type": "label"
-            },
-            {
-              "id": "cb_tiles",
-              "label": "Tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_sheets",
-              "label": "Sheets",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_old_roof_covering",
-              "label": "Old Roof Covering",
-              "type": "checkbox"
-            },
-            {
-              "id": "other",
-              "label": "Other roof type",
-              "type": "text",
-              "conditionalOn": "cb_other_22",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "etRoofLocationOther",
@@ -26512,10 +25951,65 @@
               "conditionalMode": "show"
             },
             {
+              "id": "label_rc_material",
+              "label": "Material",
+              "type": "label"
+            },
+            {
+              "id": "rc_mat_original_clay",
+              "label": "original clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_replacement_clay",
+              "label": "replacement clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_concrete",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_natural",
+              "label": "natural slate",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_artificial_slate",
+              "label": "artificial slate",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_fibre_cement",
+              "label": "fibre cement slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_aluminium",
+              "label": "aluminium sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_composite",
+              "label": "composite slate",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_asbestos_sheet",
+              "label": "asbestos sheet",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_78",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
               "id": "etRoofMaterialOther",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_22",
+              "conditionalOn": "cb_other_78",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
@@ -26524,10 +26018,17 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_old_roof_covering",
+              "label": "Old roof covering",
+              "type": "checkbox"
             }
           ]
         },
@@ -26545,12 +26046,14 @@
             },
             {
               "id": "actv_condition",
-              "label": "actv_condition",
+              "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             }
           ]
@@ -26563,194 +26066,79 @@
           "order": 6,
           "fields": [
             {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
+              "id": "label_rc_verge_repair_item",
+              "label": "Verge parts",
+              "type": "label"
             },
             {
-              "id": "cb_mortar_58",
-              "label": "Mortar",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_vr_mortar",
+              "label": "mortar",
+              "type": "checkbox"
             },
             {
-              "id": "cb_tiles_101",
-              "label": "Tiles",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_vr_tiles",
+              "label": "tiles",
+              "type": "checkbox"
             },
             {
-              "id": "cb_clips_95",
-              "label": "Clips",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_vr_slates",
+              "label": "slates",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_521",
+              "id": "rc_vr_clips",
+              "label": "clips",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_vr_caps",
+              "label": "caps",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_vr_item_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_650",
+              "id": "rc_vr_item_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_condition=Repair soon&cb_other_521",
+              "conditionalOn": "rc_vr_item_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
-              "id": "label_defect_21",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "label_rc_verge_repair_issue",
+              "label": "Defects",
+              "type": "label"
             },
             {
-              "id": "cb_damaged_32",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_vr_damaged",
+              "label": "damaged",
+              "type": "checkbox"
             },
             {
-              "id": "cb_loose_25",
-              "label": "Loose",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_vr_cracked",
+              "label": "cracked",
+              "type": "checkbox"
             },
             {
-              "id": "cb_partly_missing_77",
-              "label": "Partly missing",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "id": "rc_vr_loose",
+              "label": "loose",
+              "type": "checkbox"
             },
             {
-              "id": "cb_cracked_93",
-              "label": "Cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_secured_51",
-              "label": "Poorly secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_507",
+              "id": "rc_vr_iss_other",
               "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
-              "id": "et_other_458",
+              "id": "rc_vr_iss_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_condition=Repair soon&cb_other_507",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_particular",
-              "label": "Particular",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rendering_52",
-              "label": "Mortar",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_copping_32",
-              "label": "Tiles",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_flashing_62",
-              "label": "Clips",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_814",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_133",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now&cb_other_814",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_defect_20",
-              "label": "Defect",
-              "type": "label",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_badly_damaged_19",
-              "label": "Badly damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_badly_cracked_46",
-              "label": "Badly cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_about_to_drop_36",
-              "label": "About to drop",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_491",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_477",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_condition=Repair now&cb_other_491",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_safety_hazard",
-              "label": "Is safety hazard?",
-              "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair now",
+              "conditionalOn": "rc_vr_iss_other",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -27638,90 +27026,117 @@
           "order": 7,
           "fields": [
             {
-              "id": "label_location_22",
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Repair soon",
+                "Repair now"
+              ]
+            },
+            {
+              "id": "label_rc_valley_gutters_repair_location",
               "label": "Location",
               "type": "label"
             },
             {
-              "id": "cb_front_14",
-              "label": "Front",
+              "id": "rc_vg_all",
+              "label": "all",
               "type": "checkbox"
             },
             {
-              "id": "cb_side_19",
-              "label": "Side",
+              "id": "rc_vg_front",
+              "label": "front",
               "type": "checkbox"
             },
             {
-              "id": "cb_rear_95",
-              "label": "Rear",
+              "id": "rc_vg_side",
+              "label": "side",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_6081",
-              "label": "Other",
+              "id": "rc_vg_rear",
+              "label": "rear",
               "type": "checkbox"
             },
             {
-              "id": "et_other_7521",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_6081",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_status_2",
-              "label": "Status",
+              "id": "label_rc_valley_gutters_repair_issue",
+              "label": "Defects",
               "type": "label"
             },
             {
-              "id": "cb_partially_35",
-              "label": "Partially",
+              "id": "rc_vgi_blocked",
+              "label": "blocked",
               "type": "checkbox"
             },
             {
-              "id": "cb_completely_78",
-              "label": "Completely",
+              "id": "rc_vgi_loose_mortar",
+              "label": "has loose mortar",
               "type": "checkbox"
             },
             {
-              "id": "label_defect_19",
-              "label": "Defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_blocked_with_debris_90",
-              "label": "Blocked with debris",
+              "id": "rc_vgi_misaligned",
+              "label": "poorly aligned",
               "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_roof_repair_flashing",
+          "title": "Flashing Repair",
+          "type": "screen",
+          "parentId": "group_repairs_12",
+          "order": 8,
+          "fields": [
+            {
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Repair soon",
+                "Repair now"
+              ]
             },
             {
-              "id": "cb_poorly_aligned_14",
-              "label": "Poorly aligned",
+              "id": "cb_causing_damp",
+              "label": "Causing damp",
               "type": "checkbox"
-            },
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_roof_repair_ridge_tiles",
+          "title": "Ridge Tiles Repair",
+          "type": "screen",
+          "parentId": "group_repairs_12",
+          "order": 9,
+          "fields": [
             {
-              "id": "cb_Poor_detailing",
-              "label": "Poor detailing",
-              "type": "checkbox"
-            },
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Repair soon",
+                "Repair now"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_roof_repair_hip_tiles",
+          "title": "Hip Tiles Repair",
+          "type": "screen",
+          "parentId": "group_repairs_12",
+          "order": 10,
+          "fields": [
             {
-              "id": "cb_Detailing_damage",
-              "label": "Detailing damage",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_608",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_752",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_608",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Repair soon",
+                "Repair now"
+              ]
             }
           ]
         },
@@ -29109,132 +28524,39 @@
           "order": 8,
           "fields": [
             {
-              "id": "label_location_62",
+              "id": "other",
+              "label": "Other roof type",
+              "type": "text"
+            },
+            {
+              "id": "label_rc_location",
               "label": "Location",
               "type": "label"
             },
             {
               "id": "cb_main_building",
-              "label": "Main building",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_back_addition",
-              "label": "Back addition",
+              "label": "main building",
               "type": "checkbox"
             },
             {
               "id": "cb_extension",
-              "label": "Extension",
+              "label": "extension",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_loc_porch",
+              "label": "porch",
               "type": "checkbox"
             },
             {
               "id": "cb_bay_window",
-              "label": "Bay window",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_dormer_window",
-              "label": "Dormer window",
+              "label": "bay window",
               "type": "checkbox"
             },
             {
               "id": "cb_other_22",
               "label": "Other",
               "type": "checkbox"
-            },
-            {
-              "id": "label_material_7",
-              "label": "Material",
-              "type": "label"
-            },
-            {
-              "id": "cb_original",
-              "label": "Original",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_replacement",
-              "label": "Replacement",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_interlocking",
-              "label": "Interlocking",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_clay",
-              "label": "Clay",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_natural",
-              "label": "Natural",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_composite",
-              "label": "Composite",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_mineral_felt",
-              "label": "Mineral felt",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rubber",
-              "label": "Rubber material",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_fiberglass",
-              "label": "Fiberglass",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_single_ply_membrane",
-              "label": "Single ply membrane",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_78",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_shape_of_covering_material_4",
-              "label": "Shape of covering material",
-              "type": "label"
-            },
-            {
-              "id": "cb_tiles",
-              "label": "Tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_sheets",
-              "label": "Sheets",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_old_roof_covering",
-              "label": "Old Roof Covering",
-              "type": "checkbox"
-            },
-            {
-              "id": "other",
-              "label": "Other roof type",
-              "type": "text",
-              "conditionalOn": "cb_other_22",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "etRoofLocationOther",
@@ -29245,10 +28567,65 @@
               "conditionalMode": "show"
             },
             {
+              "id": "label_rc_material",
+              "label": "Material",
+              "type": "label"
+            },
+            {
+              "id": "rc_mat_original_clay",
+              "label": "original clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_replacement_clay",
+              "label": "replacement clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_concrete",
+              "label": "concrete tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_natural",
+              "label": "natural slate",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_artificial_slate",
+              "label": "artificial slate",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_fibre_cement",
+              "label": "fibre cement slates",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_aluminium",
+              "label": "aluminium sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_composite",
+              "label": "composite slate",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_mat_asbestos_sheet",
+              "label": "asbestos sheet",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_78",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
               "id": "etRoofMaterialOther",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "cb_other_22",
+              "conditionalOn": "cb_other_78",
               "conditionalValue": "true",
               "conditionalMode": "show"
             },
@@ -29257,10 +28634,17 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            },
+            {
+              "id": "cb_old_roof_covering",
+              "label": "Old roof covering",
+              "type": "checkbox"
             }
           ]
         },
@@ -29272,18 +28656,38 @@
           "order": 8,
           "fields": [
             {
+              "id": "label_rc_flashing",
+              "label": "Formed in",
+              "type": "label"
+            },
+            {
               "id": "cb_lead",
-              "label": "Lead",
+              "label": "lead",
               "type": "checkbox"
             },
             {
               "id": "cb_mortar",
-              "label": "Mortar",
+              "label": "mortar",
               "type": "checkbox"
             },
             {
               "id": "cb_tiles",
-              "label": "Tiles",
+              "label": "clay tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_fl_mineral_felt",
+              "label": "mineral felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_fl_bitumen_tape",
+              "label": "bitumen tape",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_fl_lead_substitute",
+              "label": "lead substitute",
               "type": "checkbox"
             },
             {
@@ -29304,9 +28708,10 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Poor",
+                "Defective"
               ]
             }
           ]
@@ -30419,23 +29824,18 @@
           "order": 10,
           "fields": [
             {
-              "id": "label_ridge_tiles_are_assumed_formed_in",
-              "label": "Ridge tiles are assumed formed in",
+              "id": "label_rc_ridge_tiles",
+              "label": "Formed in",
               "type": "label"
             },
             {
-              "id": "cb_tiles",
-              "label": "Tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lead",
-              "label": "Lead",
+              "id": "rc_ridge_clay",
+              "label": "clay",
               "type": "checkbox"
             },
             {
               "id": "cb_concrete",
-              "label": "Concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
@@ -30456,9 +29856,10 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Poor",
+                "Defective"
               ]
             }
           ]
@@ -31346,9 +30747,13 @@
           "order": 11,
           "fields": [
             {
-              "id": "cb_blocked_gullies",
+              "id": "actv_gully_state",
               "label": "Blocked gullies",
-              "type": "checkbox"
+              "type": "dropdown",
+              "options": [
+                "Partially blocked",
+                "Fully blocked"
+              ]
             }
           ]
         },
@@ -31703,23 +31108,18 @@
           "order": 12,
           "fields": [
             {
-              "id": "label_roofs_slopes_tiles_are_assumed_formed_in",
-              "label": "Roofs slopes tiles are assumed formed in",
+              "id": "label_rc_hip_tiles",
+              "label": "Formed in",
               "type": "label"
             },
             {
-              "id": "cb_tiles",
-              "label": "Tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_lead",
-              "label": "Lead",
+              "id": "rc_hip_clay",
+              "label": "clay",
               "type": "checkbox"
             },
             {
               "id": "cb_concrete",
-              "label": "Concrete",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
@@ -31740,9 +31140,58 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Poor",
+                "Defective"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "outside_property_roof_covering_valley_gutters_layout",
+          "title": "Valley Gutters",
+          "type": "screen",
+          "parentId": "group_roof_covering_10",
+          "order": 13,
+          "fields": [
+            {
+              "id": "label_rc_valley_gutters",
+              "label": "Formed in",
+              "type": "label"
+            },
+            {
+              "id": "rc_vg_lead",
+              "label": "lead",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_vg_mortar",
+              "label": "mortar",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_vg_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_vg_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "rc_vg_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Poor",
+                "Blocked"
               ]
             }
           ]
@@ -33184,23 +32633,28 @@
           "order": 14,
           "fields": [
             {
-              "id": "label_built_with_3",
-              "label": "Built with",
+              "id": "label_rc_parapet_wall_built_with",
+              "label": "Constructed of",
               "type": "label"
             },
             {
               "id": "cb_bricks",
-              "label": "Bricks",
+              "label": "brick",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_pw_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_pw_rendered_masonry",
+              "label": "rendered masonry",
               "type": "checkbox"
             },
             {
               "id": "cb_concrete",
-              "label": "Concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_block",
-              "label": "Block",
+              "label": "concrete",
               "type": "checkbox"
             },
             {
@@ -33217,23 +32671,57 @@
               "conditionalMode": "show"
             },
             {
-              "id": "actv_rendered",
-              "label": "Rendered",
-              "type": "dropdown",
-              "options": [
-                "Not rendered",
-                "Fully rendered",
-                "Partially rendered"
-              ]
+              "id": "label_rc_parapet_coping",
+              "label": "Coping formed in",
+              "type": "label"
+            },
+            {
+              "id": "rc_pc_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_pc_tiles",
+              "label": "tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_pc_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_pc_engineering_brick",
+              "label": "engineering brick",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_pc_metal",
+              "label": "metal",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_pc_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "rc_pc_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "rc_pc_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             },
             {
               "id": "android_material_design_spinner3",
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Poor",
+                "Defective"
               ]
             }
           ]
@@ -33873,84 +33361,29 @@
           "order": 16,
           "fields": [
             {
-              "id": "label_location_69",
+              "id": "label_rc_deflection_status_location",
               "label": "Location",
               "type": "label"
             },
             {
-              "id": "cb_front_45",
-              "label": "Front",
+              "id": "rc_df_all",
+              "label": "all",
               "type": "checkbox"
             },
             {
-              "id": "cb_side_41",
-              "label": "Side",
+              "id": "cb_front_45",
+              "label": "front",
               "type": "checkbox"
             },
             {
               "id": "cb_rear_47",
-              "label": "Rear",
+              "label": "rear",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_207",
-              "label": "Other",
+              "id": "cb_side_41",
+              "label": "side",
               "type": "checkbox"
-            },
-            {
-              "id": "label_cause_of_defect",
-              "label": "Cause of defect",
-              "type": "label"
-            },
-            {
-              "id": "cb_damaged_roof_timber",
-              "label": "Damaged roof timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_heavy_replacement_covering",
-              "label": "Heavy replacement covering",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_897",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_strengthen_timber",
-              "label": "Strengthen Timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_investigate",
-              "label": "Investigate",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_status",
-              "label": "Status",
-              "type": "dropdown",
-              "options": [
-                "Minor",
-                "Significant"
-              ]
-            },
-            {
-              "id": "et_other_822",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_207",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_410",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_897",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -35398,78 +34831,41 @@
           "order": 20,
           "fields": [
             {
-              "id": "label_roof_over_at_location",
-              "label": "Roof Over at location",
-              "type": "label"
+              "id": "actv_status",
+              "label": "Status",
+              "type": "dropdown",
+              "options": [
+                "No repair required",
+                "Repair defect"
+              ]
             },
             {
-              "id": "cb_main_building_22",
-              "label": "Main building",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_back_addition_48",
-              "label": "Back addition",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_230",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_roof_slope",
-              "label": "Roof Slope",
+              "id": "label_rc_roof_investigate_location",
+              "label": "Location",
               "type": "label",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Investigate|investigate",
+              "conditionalOn": "actv_status=Repair defect",
               "conditionalMode": "show"
             },
             {
               "id": "cb_front_39",
-              "label": "Front",
+              "label": "front",
               "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Investigate|investigate",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_side_78",
-              "label": "Side",
-              "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Investigate|investigate",
+              "conditionalOn": "actv_status=Repair defect",
               "conditionalMode": "show"
             },
             {
               "id": "cb_rear_20",
-              "label": "Rear",
+              "label": "rear",
               "type": "checkbox",
-              "conditionalOn": "actv_status",
-              "conditionalValue": "Investigate|investigate",
+              "conditionalOn": "actv_status=Repair defect",
               "conditionalMode": "show"
             },
             {
-              "id": "et_other_859",
-              "label": "et_other_859",
-              "type": "text",
-              "conditionalOn": "cb_other_230",
-              "conditionalValue": "true",
+              "id": "cb_side_78",
+              "label": "side",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair defect",
               "conditionalMode": "show"
-            },
-            {
-              "id": "label_condition_5",
-              "label": "Condition",
-              "type": "label"
-            },
-            {
-              "id": "actv_status",
-              "label": "actv_status",
-              "type": "dropdown",
-              "options": [
-                "Ok",
-                "Investigate"
-              ]
             }
           ]
         },
@@ -35488,6 +34884,11 @@
             {
               "id": "cb_end_of_useful_life",
               "label": "End of useful life",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_general_maintenance",
+              "label": "General maintenance",
               "type": "checkbox"
             }
           ]

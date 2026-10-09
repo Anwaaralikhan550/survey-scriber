@@ -37,7 +37,6 @@ void main() {
         'activity_outside_property_rainwater_goods',
         <String, String>{
           'cb_blocked_rwg': 'true',
-          'cb_blocked_gullies': 'true',
           'cb_open_runoffs': 'true',
           'cb_Shared_RWG': 'true',
         },
@@ -45,7 +44,6 @@ void main() {
 
       final all = phrases.join(' ').toLowerCase();
       expect(all, contains('rwg-blocked'));
-      expect(all, contains('rwg-blocked-gullies'));
       expect(all, contains('rwg-open-runoffs'));
       expect(all, contains('rwg-shared'));
     });

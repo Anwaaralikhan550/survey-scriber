@@ -141,7 +141,7 @@ c145e061e5,E1,"Condition: Where visible, the flaunching appears in good, reasona
 1159245f77,E1,Defective flaunching may permit water penetration and reduce the stability of chimney pots.,EXACT,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLAUNCHING_CONDITION},100,DONE
 dd0fbe38b9,E1,Repairs should be undertaken as part of routine maintenance or sooner where deterioration is significant.,EXACT,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLAUNCHING_CONDITION},100,DONE
 1992b38339,E1,Repair flaunching: The cement bedding around the base of the chimney pot (called flaunching) is damaged or defective.,TOKENISED,{E_CHIMNEY_MULTI_STACK}::{WATERPROOFING_FLAUNCHING},85,DONE
-5c0eb02340,E1,"This should be repaired soon, repaired now.",MENU,,0,UNVERIFIED
+5c0eb02340,E1,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
 7c0ddd9e3e,E1,"The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 4d87fb9831,E1,The owner of the neighbouring property may have some legal rights over the shared chimney.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 46929f370b,E1,You should check with your legal adviser before any work is done.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
@@ -149,7 +149,7 @@ d018aaf5d5,E1,Causing damp: This is causing damp penetration to the adjoining bu
 244b190ae3,E1,"Pointing Condition: The mortar joints to the chimney stack appear in good, reasonable, weathered, eroded, poor, other condition(s).",MENU,,0,VERIFIED
 e2acfb1733,E1,Weathered or eroded pointing should be renewed to reduce further deterioration and water penetration.,EXACT,{E_CHIMNEY_MULTI_STACK}::{POINTING_CONDITION},100,DONE
 5cc16d2d82,E1,Repointing: Some of the mortar between the bricks or stonework (called pointing) is damaged or defective.,TOKENISED,{E_CHIMNEY_REPOINTING_REPAIR}::{CHIMNEY_REPOINTING_REPAIR_SOON},82,DONE
-5c0eb02340,E1,"This should be repaired soon, repaired now.",MENU,,0,UNVERIFIED
+5c0eb02340,E1,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
 7c0ddd9e3e,E1,"The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 ed5d1fee7e,E1,"Damaged chimney pots: The chimney pots appear secure, weathered, cracked, damaged, missing, other.",MENU,,0,VERIFIED
 d2dffaaf9a,E1,Damaged or insecure chimney pots should be repaired or replaced to maintain weather resistance and safety.,EXACT,{E_CHIMNEY_MULTI_STACK}::{POTS_CONDITION},100,DONE
@@ -197,54 +197,54 @@ c1b89d1645,E1,Appropriate remedial works should be undertaken without delay.,EXA
 39e03e4f7a,E2,Not Inspected: The roof covering(s) could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_ROOF_COVERING}::{E_RC_NOT_INSPECTED},100,DONE
 4fdc996341,E2,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
 e747bfcd4a,E2,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
-01d4a9e23d,E2,"Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material.",MENU,,0,UNVERIFIED
-e7b5a53452,E2,"Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+01d4a9e23d,E2,"Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material.",MENU,,0,VERIFIED
+e7b5a53452,E2,"Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 648e2fe649,E2,The roof covering appears to be adequately performing its function.,EXACT,{E_ROOF_COVERING}::{RC_ABOUT_TYPE_CONDITION},100,DONE
 5bb8c5ad8d,E2,Routine maintenance appropriate to the age of the roof covering should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE
 ed4bb8f85d,E2,"Old roof covering: The roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon.",EXACT,{E_ROOF_COVERING_REPAIR}::{END_OF_USEFUL_LIFE},100,DONE
 55c985884a,E2,If re-covered in heavier materials the timbers may need to be strengthened to comply with current Building Regulations.,EXACT,{E_ROOF_COVERING_REPAIR}::{END_OF_USEFUL_LIFE},100,DONE
 588e3f4a38,E2,"Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life.",EXACT,{E_ROOF_COVERING_REPAIR}::{END_OF_USEFUL_LIFE},100,DONE
-400e7416b5,E2,"Repair soon: One or more tiles, slates, are loose, missing, lifted, slipped, cracked, broken, distorted, other.",MENU,,0,UNVERIFIED
+400e7416b5,E2,"Repair soon: One or more tiles, slates, are loose, missing, lifted, slipped, cracked, broken, distorted, other.",MENU,,0,VERIFIED
 49466e4fbc,E2,This should be repaired soon.,EXACT,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_SOON},100,DONE
 341b602ea6,E2,You should contact a qualified roofing contractor to carry out further investigation and replace or repair damaged covering.,EXACT,{E_RC_TILES}::{REPAIR_SOON},100,DONE
-131a9f37f9,E2,"Repair now: One or more tiles, slates, roof covering sections are severely or significantly loose, missing, lifted, slipped, cracked, broken, distorted, other.",MENU,,0,UNVERIFIED
-bb34402bcf,E2,"Given the extent of the defect, this should be repaired now.",ADD,{E_RC_PARAPET_WALL_REPAIR}::{REPAIR_NOW},64,OPEN
+131a9f37f9,E2,"Repair now: One or more tiles, slates, roof covering sections are severely or significantly loose, missing, lifted, slipped, cracked, broken, distorted, other.",MENU,,0,VERIFIED
+bb34402bcf,E2,"Given the extent of the defect, this should be repaired now.",EXACT,{E_RC_TILES}::{REPAIR_NOW},100,DONE
 ac686303fb,E2,The fixings on older roofs can weaken and result in more future maintenance.,EXACT,{E_RC_TILES}::{REPAIR_NOW},100,DONE
 9507d45c4f,E2,"In some cases, it may be economical to replace the whole roof covering rather than continuing to repair.",EXACT,{E_RC_TILES}::{REPAIR_NOW},100,DONE
 ae063f683b,E2,You should contact a qualified roofing contractor to carry out further investigation and recommend remedial work.,EXACT,{E_RC_TILES}::{REPAIR_NOW},100,DONE
-4060fac2c5,E2,Leaking: The roof covering has extensive defects that are likely to allow water penetration into the building and may present a safety risk.,ADD,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_NOW},53,OPEN
-184797e4ea,E2,Urgent repair is required.,ADD,{E_ROOF_COVERING_REPAIR}::{CONDITION_RATING_2},46,OPEN
-debf2f3627,E2,"You should instruct a suitably qualified roofing contractor to carry out a detailed inspection, identify the full extent of the defects, and undertake the necessary remedial works without delay.",UNRESOLVED,{E_ROOF_COVERING_REPAIR}::{RC_ROOF_SPREADING},62,OPEN
-aaf8c238ec,E2,"Add text to: Section J3 - Risk to People - One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing.",MENU,,0,UNVERIFIED
-9a0f49c3b3,E2,"Add text to: Section J1 - Risk to Building - One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing.",MENU,,0,UNVERIFIED
-e0efed9da6,E2,"Parapet walls: The parapet wall(s) are constructed of brick, stone, rendered masonry, concrete, other.",MENU,,0,UNVERIFIED
-f521df8d28,E2,"Coping: The parapet coping is formed in stone, tiles, concrete, engineering brick, metal, other material.",MENU,,0,UNVERIFIED
-a9c2b8683d,E2,"Condition: Where visible, these elements appear in good, reasonable, poor, defective condition.",MENU,,0,UNVERIFIED
+4060fac2c5,E2,Leaking: The roof covering has extensive defects that are likely to allow water penetration into the building and may present a safety risk.,EXACT,{E_RC_TILES}::{LEAKING},100,DONE
+184797e4ea,E2,Urgent repair is required.,EXACT,{E_RC_TILES}::{LEAKING},100,DONE
+debf2f3627,E2,"You should instruct a suitably qualified roofing contractor to carry out a detailed inspection, identify the full extent of the defects, and undertake the necessary remedial works without delay.",EXACT,{E_RC_TILES}::{LEAKING},100,DONE
+aaf8c238ec,E2,"Add text to: Section J3 - Risk to People - One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing.",MENU,,0,VERIFIED
+9a0f49c3b3,E2,"Add text to: Section J1 - Risk to Building - One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing.",MENU,,0,VERIFIED
+e0efed9da6,E2,"Parapet walls: The parapet wall(s) are constructed of brick, stone, rendered masonry, concrete, other.",MENU,,0,VERIFIED
+f521df8d28,E2,"Coping: The parapet coping is formed in stone, tiles, concrete, engineering brick, metal, other material.",MENU,,0,VERIFIED
+a9c2b8683d,E2,"Condition: Where visible, these elements appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 b5817579c5,E2,Defective copings or pointing should be repaired to prevent water penetration.,EXACT,{E_ROOF_COVERING}::{E_RC_PARAPET_WALL_CONDITION},100,DONE
 44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 ddecf9e273,E2,Routine maintenance appropriate to the age of the wall should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_PARAPET_WALL_CONDITION},100,DONE
-121989d3f1,E2,"Repair parapet: The rendering, copping, flashing, other of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured, other.",MENU,,0,UNVERIFIED
-5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,UNVERIFIED
+121989d3f1,E2,"Repair parapet: The rendering, copping, flashing, other of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured, other.",MENU,,0,VERIFIED
+5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
 a923990f0f,E2,"Adjacent parts of the roof covering may have to be disturbed to repair the verge tiles, and this can increase the amount of repair work.",EXACT,{E_RC_PARAPET_WALL_REPAIR}::{REPAIR_NOW},100,DONE
 fe1f27bf3d,E2,"Safety hazard: This is a safety hazard, and parts of the parapet wall may fall to the ground and cause injury to people or property damage.",EXACT,{E_RC_PARAPET_WALL_REPAIR}::{REPAIR_NOW_SAFETY_HAZARD},100,DONE
-833eeb27d8,E2,"Roof line deflection: Minor undulation or deflection to all, front, rear, side roof slopes were observed.",UNRESOLVED,{E_ROOF_COVERING_REPAIR}::{CONDITION_RATING_1},49,OPEN
-c6fc00fc98,E2,"Such distortion is not uncommon in properties of this age and, unless accompanied by evidence of progressive movement, is not necessarily of structural significance.",UNRESOLVED,{E_ROOF_COVERING_ROOF_CONDITION}::{RC_ROOF_CONDITION_OK},46,OPEN
+833eeb27d8,E2,"Roof line deflection: Minor undulation or deflection to all, front, rear, side roof slopes were observed.",MENU,,0,VERIFIED
+c6fc00fc98,E2,"Such distortion is not uncommon in properties of this age and, unless accompanied by evidence of progressive movement, is not necessarily of structural significance.",EXACT,{E_RC_DEFLECTION_STATUS}::{DEFLECTION_MINOR},100,DONE
 2e62d4f326,E2,"No repair required: No repair is currently needed, and this is not considered to be structurally significant.",EXACT,{E_ROOF_COVERING_ROOF_CONDITION}::{RC_ROOF_CONDITION_OK},100,DONE
 fd0a1db7ca,E2,The timber used in older roofs can gradually change shape or distort during normal use.,EXACT,{E_ROOF_COVERING_ROOF_CONDITION}::{RC_ROOF_CONDITION_OK},100,DONE
 ec086e8938,E2,"Also, heavier replacement tiles can cause minor deflection to the roof line in some instances.",EXACT,{E_ROOF_COVERING_ROOF_CONDITION}::{RC_ROOF_CONDITION_OK},100,DONE
 ed517a96e1,E2,This does not currently appear to be a problem and is considered normal for this type of roof.,EXACT,{E_ROOF_COVERING_ROOF_CONDITION}::{RC_ROOF_CONDITION_OK},100,DONE
 fcefd27c7a,E2,"Should further deflection or distortion occur, you should arrange for inspection by a qualified person.",EXACT,{E_ROOF_COVERING_ROOF_CONDITION}::{RC_ROOF_CONDITION_OK},100,DONE
-01e21af7ac,E2,"Repair defect: The surface of the front, rear, side roof slope(s) of the building is significantly distorted, uneven or undulating.",UNRESOLVED,{E_ROOF_COVERING_ROOF_CONDITION}::{RC_ROOF_CONDITION_INVESTIGATE},92,OPEN
+01e21af7ac,E2,"Repair defect: The surface of the front, rear, side roof slope(s) of the building is significantly distorted, uneven or undulating.",MENU,,0,VERIFIED
 9ab9c0d1ea,E2,You should contact a qualified roofing contractor to replace damaged timber or strengthen any weakened or undersized timber so that the roof structure can adequately bear the weight of the roof covering.,EXACT,{E_RC_DEFLECTION_OTHER}::{DEFLECTION_STRENGTHEN_TIMBER},100,DONE
-260b809efe,E2,"Add text to: Section J1 - Risk to Building - The surface of the roof slope(s) of the building is significantly distorted, uneven or undulating.",TOKENISED,{E_ROOF_COVERING_ROOF_CONDITION}::{RC_ROOF_CONDITION_INVESTIGATE},99,DONE
-372d66d83a,E2,"Flat roof coverings: The flat roof covering over the building is formed in mineral felt, high-performance felt, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, fibreglass, lead, other material.",MENU,,0,UNVERIFIED
-e7b5a53452,E2,"Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
+260b809efe,E2,"Add text to: Section J1 - Risk to Building - The surface of the roof slope(s) of the building is significantly distorted, uneven or undulating.",EXACT,{RISK_TO_BUILDING}::{ROOF_LINE_DEFLECTION},100,DONE
+372d66d83a,E2,"Flat roof coverings: The flat roof covering over the building is formed in mineral felt, high-performance felt, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, fibreglass, lead, other material.",MENU,,0,VERIFIED
+e7b5a53452,E2,"Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 5e025d9c51,E2,Flat felt roof coverings have a comparatively short life and will require regular maintenance checks.,EXACT,{E_ROOF_COVERING_MATERIAL}::{FLAT_MATERIAL_MINERAL_FELT},100,DONE
 664546de9b,E2,"Even though the general condition of the felt may appear satisfactory for its type and age, repairs or replacement must be expected in the future.",EXACT,{E_ROOF_COVERING_MATERIAL}::{FLAT_MATERIAL_MINERAL_FELT},100,DONE
 d3c40de8b2,E2,"It is difficult to predict when this will be required as felt roofs can break down with little warning, even when visually appearing sound.",EXACT,{E_ROOF_COVERING_MATERIAL}::{FLAT_MATERIAL_MINERAL_FELT},100,DONE
 44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-85af95929d,E2,The flat roof covering appears to be adequately performing its function.,FIX,{E_ROOF_COVERING}::{RC_ABOUT_TYPE_CONDITION},96,OPEN
+85af95929d,E2,The flat roof covering appears to be adequately performing its function.,EXACT,{E_ROOF_COVERING}::{RC_FLAT_NO_REPAIR},100,DONE
 5bb8c5ad8d,E2,Routine maintenance appropriate to the age of the roof covering should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE
 94af7f43ff,E2,"If the composite slates or asbestos sheet is selected, add the Asbestos: Parts of the roof covering and verge may contain asbestos.",EXACT,{E_ROOF_COVERING_MATERIAL}::{MATERIAL_COMPOSITE},100,DONE
 cf046b4d9c,E2,This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive.,EXACT,{E_ROOF_COVERING_MATERIAL}::{MATERIAL_COMPOSITE},100,DONE
@@ -252,77 +252,77 @@ eb29062680,E2,"However, it should not be disturbed, sanded, or drilled without t
 874078d879,E2,"When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly.",EXACT,{E_ROOF_COVERING_MATERIAL}::{MATERIAL_COMPOSITE},100,DONE
 65acec184e,E2,"Therefore, quotations for this work should be obtained before purchase commitment.",EXACT,{E_ROOF_COVERING_MATERIAL}::{MATERIAL_COMPOSITE},100,DONE
 dd44aa6d75,E2,"Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",EXACT,{E_ROOF_COVERING_MATERIAL}::{MATERIAL_COMPOSITE},100,DONE
-63b8b23f41,E2,"Old roof covering: The flat roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon.",NEAR,{E_ROOF_COVERING_REPAIR}::{END_OF_USEFUL_LIFE},98,OPEN
-0f0686ea80,E2,"If re-covered in heavier materials, the timbers may need to be strengthened to comply with current Building Regulations.",FIX,{E_ROOF_COVERING_REPAIR}::{END_OF_USEFUL_LIFE},100,OPEN
+63b8b23f41,E2,"Old roof covering: The flat roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon.",EXACT,{E_ROOF_COVERING}::{OLD_ROOF_COVERING_FLAT},100,DONE
+0f0686ea80,E2,"If re-covered in heavier materials, the timbers may need to be strengthened to comply with current Building Regulations.",EXACT,{E_ROOF_COVERING}::{OLD_ROOF_COVERING_FLAT},100,DONE
 588e3f4a38,E2,"Further, although functioning satisfactorily, older roof coverings should be expected to require increased maintenance and eventual replacement as part of their normal service life.",EXACT,{E_ROOF_COVERING_REPAIR}::{END_OF_USEFUL_LIFE},100,DONE
-6012072319,E2,"Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in lead, mortar, clay tiles, mineral felt, bitumen tape, lead substitute, other.",MENU,,0,UNVERIFIED
+6012072319,E2,"Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in lead, mortar, clay tiles, mineral felt, bitumen tape, lead substitute, other.",MENU,,0,VERIFIED
 c07f94654e,E2,"Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 cbea8fb9a4,E2,Defective flashings should be repaired to reduce the risk of water penetration.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE
 44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 5bb8c5ad8d,E2,Routine maintenance appropriate to the age of the roof covering should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE
-6bc4cd17a2,E2,Repair flashing: The waterproofing at the junction of the roof covering and wall is damaged or defective.,TOKENISED,{E_ROOF_COVERING}::{E_RC_FLASHING},76,DONE
-5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,UNVERIFIED
-3d73e8cb05,E2,"The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work.",FIX,{E_RC_VERGE_REPAIR}::{REPAIR_NOW},85,OPEN
+6bc4cd17a2,E2,Repair flashing: The waterproofing at the junction of the roof covering and wall is damaged or defective.,MENU,,0,VERIFIED
+5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
+3d73e8cb05,E2,"The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work.",EXACT,{E_RC_FLASHING_REPAIR}::{REPAIR_NOW},100,DONE
 3adc62b5c5,E2,The owner of the neighbouring property may have some legal rights over the shared chimney.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 998004909b,E2,You should check with your legal adviser before any work is done.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
-bcf569c2db,E2,"Causing damp: This is causing damp penetration to the adjoining building elements, and you must arrange to repair this urgently.",ADD,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_NOW},57,OPEN
-501c58b1cc,E2,Further defects and damage may be revealed from an intrusive or closer inspection by a qualified person.,ADD,{E_ROOF_COVERING_ROOF_CONDITION}::{RC_ROOF_CONDITION_OK},62,OPEN
-10957c0b01,E2,"Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in clay, concrete, other material.",UNRESOLVED,{E_ROOF_COVERING}::{E_RC_RIDGE_TILES},87,OPEN
-91e3cb03f8,E2,"Condition: Where visible, they appear in good, reasonable, poor, defective condition.",MENU,,0,UNVERIFIED
+bcf569c2db,E2,"Causing damp: This is causing damp penetration to the adjoining building elements, and you must arrange to repair this urgently.",EXACT,{E_RC_FLASHING_REPAIR}::{CAUSING_DAMP},100,DONE
+501c58b1cc,E2,Further defects and damage may be revealed from an intrusive or closer inspection by a qualified person.,EXACT,{E_RC_FLASHING_REPAIR}::{CAUSING_DAMP},100,DONE
+10957c0b01,E2,"Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in clay, concrete, other material.",MENU,,0,VERIFIED
+91e3cb03f8,E2,"Condition: Where visible, they appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 5efa104ad3,E2,Loose or defective ridge tiles should be rebedded or mechanically fixed as appropriate.,EXACT,{E_ROOF_COVERING}::{E_RC_RIDGE_TILES_CONDITION},100,DONE
 44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 c9e5c23c1b,E2,Routine maintenance appropriate to the age of the ridge tiles should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_RIDGE_TILES_CONDITION},100,DONE
-eb8ec2fd4c,E2,"Repair ridge tiles: The covering along the top of the roof structure called, the ridge tiles, is damaged or defective.",UNRESOLVED,{E_ROOF_COVERING}::{E_RC_RIDGE_TILES},88,OPEN
-5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,UNVERIFIED
-3d73e8cb05,E2,"The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work.",FIX,{E_RC_VERGE_REPAIR}::{REPAIR_NOW},85,OPEN
+eb8ec2fd4c,E2,"Repair ridge tiles: The covering along the top of the roof structure called, the ridge tiles, is damaged or defective.",MENU,,0,VERIFIED
+5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
+3d73e8cb05,E2,"The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work.",EXACT,{E_RC_FLASHING_REPAIR}::{REPAIR_NOW},100,DONE
 3adc62b5c5,E2,The owner of the neighbouring property may have some legal rights over the shared chimney.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 998004909b,E2,You should check with your legal adviser before any work is done.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
-a5d9d05527,E2,"Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in clay, concrete, other material.",UNRESOLVED,{E_ROOF_COVERING}::{E_RC_HIP_TILES},87,OPEN
-91e3cb03f8,E2,"Condition: Where visible, they appear in good, reasonable, poor, defective condition.",MENU,,0,UNVERIFIED
+a5d9d05527,E2,"Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in clay, concrete, other material.",MENU,,0,VERIFIED
+91e3cb03f8,E2,"Condition: Where visible, they appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 91b4cf15c3,E2,Repairs should be undertaken where movement or deterioration is evident.,EXACT,{E_ROOF_COVERING}::{E_RC_HIP_TILES_CONDITION},100,DONE
 44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 0123ecccd1,E2,Routine maintenance appropriate to the age of the hip tiles should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_HIP_TILES_CONDITION},100,DONE
-d21d57c057,E2,Repair hip tile: The covering along the slope of the roof structure (called the hip tiles) is damaged or defective.,TOKENISED,{E_ROOF_COVERING}::{E_RC_RIDGE_TILES},82,DONE
-5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,UNVERIFIED
-3d73e8cb05,E2,"The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work.",FIX,{E_RC_VERGE_REPAIR}::{REPAIR_NOW},85,OPEN
+d21d57c057,E2,Repair hip tile: The covering along the slope of the roof structure (called the hip tiles) is damaged or defective.,MENU,,0,VERIFIED
+5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
+3d73e8cb05,E2,"The roof covering may have to be disturbed to repair the flashing, and this can increase the amount of the work.",EXACT,{E_RC_FLASHING_REPAIR}::{REPAIR_NOW},100,DONE
 3adc62b5c5,E2,The owner of the neighbouring property may have some legal rights over the shared chimney.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
 998004909b,E2,You should check with your legal adviser before any work is done.,EXACT,{E_CHIMNEY_FLAUNCHING_REPAIR}::{FLAUNCHING_REPAIR_NOW},100,DONE
-b6453fee49,E2,"Valley Gutters: The valley gutters are formed in lead, mortar, other material.",UNRESOLVED,{E_ROOF_COVERING_REPAIR}::{E_RC_VALLEY_GUTTERS_REPAIR},55,OPEN
-91d103b79a,E2,"Condition: Where visible, they appear in good, reasonable, poor, blocked condition.",MENU,,0,UNVERIFIED
-6c304f237d,E2,"Blocked or defective valley gutters should be cleared, repaired, or replaced as necessary to ensure effective drainage and prevent water penetration into the building.",UNRESOLVED,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},54,OPEN
+b6453fee49,E2,"Valley Gutters: The valley gutters are formed in lead, mortar, other material.",MENU,,0,VERIFIED
+91d103b79a,E2,"Condition: Where visible, they appear in good, reasonable, poor, blocked condition.",MENU,,0,VERIFIED
+6c304f237d,E2,"Blocked or defective valley gutters should be cleared, repaired, or replaced as necessary to ensure effective drainage and prevent water penetration into the building.",EXACT,{E_ROOF_COVERING}::{E_RC_VALLEY_GUTTERS_CONDITION},100,DONE
 44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-ef68cb786c,E2,Routine maintenance appropriate to the age of the guttering should be expected.,FIX,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},93,OPEN
-2adee3533c,E2,"Repair valley gutters: The valley gutter at the junction of the roofs to all, front, side, rear, of the building is blocked, has loose mortar, poorly aligned.",MENU,,0,UNVERIFIED
-aaa269d923,E2,"This should be repaired soon, now.",MENU,,0,UNVERIFIED
-c62b04db6e,E2,"Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work.",EXACT,{E_ROOF_COVERING_REPAIR}::{E_RC_VALLEY_GUTTERS_REPAIR},100,DONE
+ef68cb786c,E2,Routine maintenance appropriate to the age of the guttering should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_VALLEY_GUTTERS_CONDITION},100,DONE
+2adee3533c,E2,"Repair valley gutters: The valley gutter at the junction of the roofs to all, front, side, rear, of the building is blocked, has loose mortar, poorly aligned.",MENU,,0,VERIFIED
+aaa269d923,E2,"This should be repaired soon, now.",MENU,,0,VERIFIED
+c62b04db6e,E2,"Adjacent parts of the roof covering may have to be disturbed to repair the gutter, and this can increase the amount of repair work.",EXACT,{E_ROOF_COVERING_REPAIR}::{E_RC_VALLEY_GUTTERS_REPAIR_NOW},100,DONE
 49466e4fbc,E2,This should be repaired soon.,EXACT,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_SOON},100,DONE
-8acf1bc198,E2,"Repair verge: The mortar, tiles, slates, clips, caps, other items along the edge of the roof, called the verge, are damaged, cracked, loose, other.",MENU,,0,UNVERIFIED
-77c9a68b40,E2,"This should be repaired soon and, if significant, repaired promptly.",UNRESOLVED,{E_RC_PARAPET_WALL_REPAIR}::{REPAIR_SOON},60,OPEN
+8acf1bc198,E2,"Repair verge: The mortar, tiles, slates, clips, caps, other items along the edge of the roof, called the verge, are damaged, cracked, loose, other.",MENU,,0,VERIFIED
+77c9a68b40,E2,"This should be repaired soon and, if significant, repaired promptly.",EXACT,{E_RC_VERGE_REPAIR}::{REPAIR_SOON},100,DONE
 7c071b09a3,E2,"Adjacent parts of the roof covering may have to be disturbed to repair the verge, and this can increase the amount of repair work.",EXACT,{E_RC_VERGE_REPAIR}::{REPAIR_NOW},100,DONE
 49466e4fbc,E2,This should be repaired soon.,EXACT,{E_CHIMNEY_AERIAL_DISH_REPAIR}::{AERIAL_DISH_REPAIR_SOON},100,DONE
-b3bd4cee6c,E2,"Repair Flat roof: The flat roof covering is weathered, blistered, split, torn, worn, ponding, damaged, other.",MENU,,0,UNVERIFIED
+b3bd4cee6c,E2,"Repair Flat roof: The flat roof covering is weathered, blistered, split, torn, worn, ponding, damaged, other.",MENU,,0,VERIFIED
 ab8cb9f128,E2,Repairs or replacement should be undertaken before further deterioration results in water penetration.,EXACT,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_SOON},100,DONE
 cebef3e9f9,E2,"To replace the covering, the work will have to meet the requirements of the building regulations.",EXACT,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_SOON},100,DONE
 a00c49247a,E2,This may increase the amount of repair work.,EXACT,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_NOW},100,DONE
 482a9a603c,E2,Causing damp - The observed defect is causing damp penetration to the building below.,EXACT,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_NOW},100,DONE
 2e6f89b6f0,E2,The flat roof covering needs repair or replacement now.,EXACT,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_NOW},100,DONE
-b932d7dc97,E2,"To do this, the work will have to meet the requirements of the Building Regulations.",UNRESOLVED,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_NOW},99,OPEN
+b932d7dc97,E2,"To do this, the work will have to meet the requirements of the Building Regulations.",EXACT,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_NOW},100,DONE
 a00c49247a,E2,This may increase the amount of repair work.,EXACT,{E_RC_FLAT_ROOF_REPAIR}::{REPAIR_NOW},100,DONE
-58760970f5,E2,"Add text to: Section J1 - Risk to Building - The flat roof covering is weathered, blistered, split, torn, worn, ponding, or defective and causing rainwater to penetrate the building below.",MENU,,0,UNVERIFIED
-f14ec8285b,E2,"Roof Spreading: The roof slopes to all, front, side, and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards.",UNRESOLVED,{E_ROOF_COVERING_REPAIR}::{RC_ROOF_SPREADING},84,OPEN
+58760970f5,E2,"Add text to: Section J1 - Risk to Building - The flat roof covering is weathered, blistered, split, torn, worn, ponding, or defective and causing rainwater to penetrate the building below.",MENU,,0,VERIFIED
+f14ec8285b,E2,"Roof Spreading: The roof slopes to all, front, side, and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards.",MENU,,0,VERIFIED
 1ad3bf0543,E2,These are visual indicators that may be consistent with roof spread and suggest that the roof timber structure may require strengthening.,EXACT,{E_ROOF_COVERING_REPAIR}::{RC_ROOF_SPREADING},100,DONE
 e74e0282d7,E2,I recommend that you instruct a suitably qualified structural engineer or roofing specialist to carry out further investigation and advise on any necessary remedial work without undue delay.,EXACT,{E_ROOF_COVERING_REPAIR}::{RC_ROOF_SPREADING},100,DONE
-ac5d7bbe0b,E2,"General maintenance: Roof coverings should be inspected periodically, particularly following severe weather.",ADD,{E_ROOF_COVERING}::{E_RC_NOT_INSPECTED},50,OPEN
-21b46d2372,E2,"Routine maintenance, including replacement of isolated defective coverings, clearance of debris and localised repairs, should be expected throughout the life of the roof.",UNRESOLVED,{E_ROOF_COVERING}::{E_RC_RIDGE_TILES_CONDITION},52,OPEN
-fb07222ec5,E2,"Add text to: Section J1 - Risk to Building - The roof slopes to the front, side and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards.",UNRESOLVED,{E_ROOF_COVERING_REPAIR}::{RC_ROOF_SPREADING},85,OPEN
+ac5d7bbe0b,E2,"General maintenance: Roof coverings should be inspected periodically, particularly following severe weather.",EXACT,{E_ROOF_COVERING}::{GENERAL_MAINTENANCE},100,DONE
+21b46d2372,E2,"Routine maintenance, including replacement of isolated defective coverings, clearance of debris and localised repairs, should be expected throughout the life of the roof.",EXACT,{E_ROOF_COVERING}::{GENERAL_MAINTENANCE},100,DONE
+fb07222ec5,E2,"Add text to: Section J1 - Risk to Building - The roof slopes to the front, side and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards.",EXACT,{RISK_TO_BUILDING}::{ROOF_SPREADING},100,DONE
 1ddd6a9e13,E2,"If the Property is a Flat, add this: You should ask the management company whether any repairs to the roof covering have been carried out previously or are currently proposed.",EXACT,{E_ROOF_COVERING_REPAIR}::{E_RC_REPAIR_DEFAULT_TEXT},100,DONE
 bb05cf79ba,E2,"Your legal adviser should confirm responsibility for repairs to the roof covering with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_ROOF_COVERING_REPAIR}::{E_RC_DEFAULT_TEXT_IF_FLAT_ROOF},100,DONE
 de0455e805,E2,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE
 ff1f75406d,E3,Not Inspected: The rainwater goods could not be inspected due to access restrictions and the height and configuration of the building.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_NOT_INSPECTED},100,DONE
 6826165716,E3,"Consequently, I am unable to comment on their composition or condition.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
 80bcf455a3,E3,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_INSPECTED_ACCESS},100,DONE
-9bdfe80f05,E3,"Description: The rainwater goods comprise PVC, cast iron, aluminium, steel, concrete, asbestos cement, other, gutters, downpipes, hoppers, and associated fittings.",MENU,,0,UNVERIFIED
-01d5d549f7,E3,"Condition: Where visible, the rainwater goods appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,UNVERIFIED
+9bdfe80f05,E3,"Description: The rainwater goods comprise PVC, cast iron, aluminium, steel, concrete, asbestos cement, other, gutters, downpipes, hoppers, and associated fittings.",MENU,,0,VERIFIED
+01d5d549f7,E3,"Condition: Where visible, the rainwater goods appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 0aa13fdde9,E3,No parts of the rainwater installation were dismantled or tested.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},100,DONE
 3f1d400da6,E3,The adequacy of underground drainage has not been assessed as part of this inspection.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},100,DONE
 1cc47eeecf,E3,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
@@ -340,26 +340,26 @@ e399bf812c,E3,"Your legal adviser should confirm ownership, maintenance responsi
 68afc3eb1b,E3,This prevents the rainwater from draining properly and may result in future leaks.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_TYPE_IF_INSUFFICIENT_SLOPE},100,DONE
 c0510066f9,E3,The gutters should be refitted with an adequate slope soon.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_TYPE_IF_INSUFFICIENT_SLOPE},100,DONE
 ffdcce417e,E3,"You may have to replace parts of the system, and this can increase the amount of repair work.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_TYPE_IF_INSUFFICIENT_SLOPE},100,DONE
-a5c319da9e,E3,"Damaged Sections: Sections of the gutters or downpipes are cracked, distorted, broken, split, missing, other.",MENU,,0,UNVERIFIED
-c56c54728f,E3,"This should be repaired soon, repaired now.",MENU,,0,UNVERIFIED
-b85f6bf809,E3,Repairs or replacement should be undertaken to maintain the weather resistance of the building.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_REPAIR_SOON},100,DONE
-ca3371805e,E3,Leakage: Staining to fittings and adjoining elements and localised dampness indicate previous or current leakage from the rainwater goods.,ADD,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},47,OPEN
-de603c083b,E3,"The affected sections should be checked for watertightness and repaired soon or repaired now, depending on the severity of the defect.",ADD,{E_RAINWATER_GOODS_ABOUT}::{RWG_BLOCKED},48,OPEN
-d2b67c1ab2,E3,Repairs should be undertaken to prevent further deterioration of adjacent building elements.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_REPAIR_NOW},100,DONE
-fe0d7cf576,E3,"Blocked Gutters: Vegetation, moss, leaves, or other debris were observed within sections of the guttering.",MENU,,0,UNVERIFIED
+a5c319da9e,E3,"Damaged Sections: Sections of the gutters or downpipes are cracked, distorted, broken, split, missing, other.",MENU,,0,VERIFIED
+c56c54728f,E3,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
+b85f6bf809,E3,Repairs or replacement should be undertaken to maintain the weather resistance of the building.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_REPAIR_NOW},100,DONE
+ca3371805e,E3,Leakage: Staining to fittings and adjoining elements and localised dampness indicate previous or current leakage from the rainwater goods.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_LEAKAGE},100,DONE
+de603c083b,E3,"The affected sections should be checked for watertightness and repaired soon or repaired now, depending on the severity of the defect.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_LEAKAGE},100,DONE
+d2b67c1ab2,E3,Repairs should be undertaken to prevent further deterioration of adjacent building elements.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_LEAKAGE},100,DONE
+fe0d7cf576,E3,"Blocked Gutters: Vegetation, moss, leaves, or other debris were observed within sections of the guttering.",MENU,,0,VERIFIED
 9d872c3349,E3,The gutters should be cleared as part of routine maintenance to maintain effective rainwater disposal.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_BLOCKED},100,DONE
-aafe24f968,E3,"Blocked Gullies: One or more drainage gullies serving the rainwater system appear partially blocked, fully blocked.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_BLOCKED_GULLIES},100,DONE
+aafe24f968,E3,"Blocked Gullies: One or more drainage gullies serving the rainwater system appear partially blocked, fully blocked.",MENU,,0,VERIFIED
 a211b57920,E3,Blocked gullies may result in localised flooding and water penetration to adjacent building elements.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_BLOCKED_GULLIES},100,DONE
 927e597224,E3,The gullies should be cleared and maintained regularly.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_BLOCKED_GULLIES},100,DONE
-7cb87b30c2,E3,"Defective Connections: One or more gutter or downpipe joints and connections are loose, missing, leaking, displaced, defective, other.",MENU,,0,UNVERIFIED
-97bf504979,E3,"This should be repaired soon, now.",MENU,,0,UNVERIFIED
-38bc3d897c,E3,Repairs should be undertaken to maintain the effectiveness of the rainwater system.,ADD,{E_RAINWATER_GOODS_ABOUT}::{RWG_REPAIR_SOON},70,OPEN
-3467ecb995,E3,"Corrosion: Sections of the rainwater goods exhibit light, moderate, significant corrosion.",UNRESOLVED,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},54,OPEN
-7f7b508f6a,E3,Corroded sections should be repaired or replaced where necessary to maintain satisfactory performance.,ADD,{E_RAINWATER_GOODS_ABOUT}::{RWG_BLOCKED},54,OPEN
-8daef8d41d,E3,This should be repaired promptly if the damage is significant.,ADD,{E_RAINWATER_GOODS_ABOUT}::{RWG_REPAIR_SOON},59,OPEN
-f6f33ed7b2,E3,"Add text to: Section J1 - Risk to Building - One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted.",UNRESOLVED,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_TYPE},52,OPEN
+7cb87b30c2,E3,"Defective Connections: One or more gutter or downpipe joints and connections are loose, missing, leaking, displaced, defective, other.",MENU,,0,VERIFIED
+97bf504979,E3,"This should be repaired soon, now.",MENU,,0,VERIFIED
+38bc3d897c,E3,Repairs should be undertaken to maintain the effectiveness of the rainwater system.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_CONNECTIONS_NOW},100,DONE
+3467ecb995,E3,"Corrosion: Sections of the rainwater goods exhibit light, moderate, significant corrosion.",MENU,,0,VERIFIED
+7f7b508f6a,E3,Corroded sections should be repaired or replaced where necessary to maintain satisfactory performance.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_CORROSION},100,DONE
+8daef8d41d,E3,This should be repaired promptly if the damage is significant.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_CORROSION},100,DONE
+f6f33ed7b2,E3,"Add text to: Section J1 - Risk to Building - One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted.",EXACT,{RISK_TO_BUILDING}::{RWG_DEFECTS},100,DONE
 66f0879e69,E3,"General Maintenance: Rainwater goods should be inspected and cleared at regular intervals, particularly during the autumn and following severe weather.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_STANDARD_TEXT},100,DONE
-8061daad21,E3,"Routine maintenance will assist in preventing blockages, overflow, water penetration, and premature deterioration.",MENU,,0,UNVERIFIED
+8061daad21,E3,"Routine maintenance will assist in preventing blockages, overflow, water penetration, and premature deterioration.",MENU,,0,VERIFIED
 8a9130fc27,E3,"If the Property is a Flat, add this: You should ask the management company whether any repairs to the rainwater goods have been carried out previously or are currently proposed.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_PROPERTY_FLAT_SELECTED},100,DONE
 90782d46f0,E3,"Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise.",EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_IF_PROPERTY_FLAT_SELECTED},100,DONE
 483cc8fe52,E3,This may help reduce the risk of unexpected repair costs or increases in the service charge.,EXACT,{E_CHIMNEY_REPAIR_DEFAULT_TEXT}::{DEFAULT_TEXT_FLAT},100,DONE

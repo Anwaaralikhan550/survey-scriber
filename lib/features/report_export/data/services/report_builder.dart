@@ -1288,54 +1288,36 @@ class ReportBuilder {
           'One or more chimney stack(s) is in poor condition. This is a safety hazard. Further investigation and repair should be arranged immediately (see section E1 - Chimney Stacks).');
     }
 
-    // RICS L2 cross-injections from Section E2 Roof Coverings (Phase 2B):
-    // 6 of E2's 7 spec-required E2 -> J1 injections that this data model
-    // captures (tile defects, significant deflection, ridge tiles damaged,
-    // hip tiles damaged, flat-roof damp, roof spreading). The 7th
-    // (flashing-at-junction damaged) has no repair-soon/now screen in the
-    // current tree - `outside_property_roof_covering_flashing_layout` only
-    // captures the description/condition, not a repair branch - so it is
-    // intentionally not wired here rather than guessed (same class of gap
-    // as E1's chimney-flashing "causing damp" checkbox before that was
-    // added; this one still needs its own new field).
+    // PDF "Add text to: Section J1" lines of E2 Roof covering (bank-first).
     final roofRepairTiles =
         _answersForScreen(rawData, 'activity_outside_property_roof_repair_tiles');
-    final roofTilesCondition =
-        (roofRepairTiles['actv_condition'] ?? '').toLowerCase();
-    if (roofTilesCondition.contains('now')) {
-      if (_isCheckedValue(roofRepairTiles['cb_roof_40'])) {
-        phrases.add(
-            'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
-      }
-      if (_isCheckedValue(roofRepairTiles['cb_ridge_16'])) {
-        phrases.add(
-            'The covering along the top of the roof structure (called the ridge tiles) is damaged or defective (see section E2 - Roof Coverings).');
-      }
-      if (_isCheckedValue(roofRepairTiles['cb_hip_42'])) {
-        phrases.add(
-            'The covering along the slope of the roof structure (called the hip tiles) is damaged or defective (see section E2 - Roof Coverings).');
-      }
+    if ((roofRepairTiles['actv_condition'] ?? '').toLowerCase() ==
+        'repair now') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_TILES_DEFECTS}') ??
+          'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
     }
 
     final roofStructure = _answersForScreen(
         rawData, 'outside_property_roof_covering_roof_structure_layout');
-    if ((roofStructure['actv_status'] ?? '').toLowerCase().contains('investigate')) {
-      phrases.add(
+    if ((roofStructure['actv_status'] ?? '').toLowerCase() == 'repair defect') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_LINE_DEFLECTION}') ??
           'The surface of the roof slope(s) of the building is significantly distorted, uneven or undulating (see section E2 - Roof Coverings).');
     }
 
     final flatRoofRepair = _answersForScreen(
         rawData, 'activity_outside_property_roof_repair_flat_roof');
-    if ((flatRoofRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
-      phrases.add(
-          'The flat roof covering is weathered, blistered, split, torn, worn, ponding, or defective (see section E2 - Roof Coverings).');
+    if ((flatRoofRepair['actv_condition'] ?? '').toLowerCase() ==
+        'repair now') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{FLAT_ROOF_DEFECTS}') ??
+          'The flat roof covering is weathered, blistered, split, torn, worn, ponding, or defective and causing rainwater to penetrate the building below (see section E2 - Roof Coverings).');
     }
 
     final roofSpreadingRepair = _answersForScreen(
         rawData, 'activity_outside_property_roof_spreading_repair');
-    if ((roofSpreadingRepair['actv_status'] ?? '').toLowerCase() == 'yes') {
-      phrases.add(
-          'The roof slopes appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards (see section E2 - Roof Coverings).');
+    if (const ['rc_rs_all', 'rc_rs_front', 'rc_rs_side', 'rc_rs_rear']
+        .any((id) => _isCheckedValue(roofSpreadingRepair[id]))) {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_SPREADING}') ??
+          'The roof slopes to the front, side and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards (see section E2 - Roof Coverings).');
     }
 
     // RICS L2 cross-injection from Section E3 Rainwater Goods (Phase 2B):
@@ -1343,9 +1325,13 @@ class ReportBuilder {
     // damp) repair branch.
     final rwgRepair = _answersForScreen(
         rawData, 'activity_outside_property_rwg__repair_pipes_gutters');
-    if ((rwgRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
-      phrases.add(
-          'One or more defects affecting the rainwater gutters, downpipes, associated fittings and drainage arrangements were noted (see section E3 - Rainwater Goods).');
+    final rwgConnections = _answersForScreen(
+        rawData, 'activity_outside_property_rwg_defective_connections');
+    if ((rwgRepair['actv_condition'] ?? '').toLowerCase() == 'repair now' ||
+        (rwgConnections['actv_condition'] ?? '').toLowerCase() ==
+            'repair now') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{RWG_DEFECTS}') ??
+          'One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted (see section E3 - Rainwater Goods).');
     }
 
     // RICS L2 cross-injections from Section E4 Main Walls (Phase 2B): 4 of
@@ -1672,24 +1658,13 @@ class ReportBuilder {
       }
     }
 
-    // RICS L2 cross-injections from Section E2 Roof Coverings (Phase 2B):
-    // 2 of E2's 7 spec-required E2 -> J3 (Risk to People) injections.
+    // PDF "Add text to: Section J3" line of E2 Roof covering (bank-first).
     final roofRepairTilesForPeople = _answersForScreen(
         rawData, 'activity_outside_property_roof_repair_tiles');
-    if ((roofRepairTilesForPeople['actv_condition'] ?? '')
-            .toLowerCase()
-            .contains('now') &&
-        _isCheckedValue(roofRepairTilesForPeople['cb_roof_40'])) {
-      phrases.add(
+    if ((roofRepairTilesForPeople['actv_condition'] ?? '').toLowerCase() ==
+        'repair now') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_PEOPLE}::{ROOF_TILES_DEFECTS}') ??
           'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
-    }
-
-    final parapetRepair = _answersForScreen(
-        rawData, 'activity_outside_property_roof_repair_parapet_wall');
-    if (_isCheckedValue(parapetRepair['cb_safety_hazard']) &&
-        (parapetRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
-      phrases.add(
-          'The rendering, copping, flashing, other of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured, other (see section E2 - Roof Coverings).');
     }
 
     // RICS L2 cross-injections from Section E4 Main Walls (Phase 2B): the

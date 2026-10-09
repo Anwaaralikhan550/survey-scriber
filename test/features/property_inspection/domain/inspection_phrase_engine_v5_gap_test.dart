@@ -15,16 +15,6 @@ void main() {
     engine = InspectionPhraseEngine(texts);
   });
 
-  test('previously strengthened roof has a dedicated professional narrative', () {
-    final phrases = engine.buildPhrases(
-      'activity_outside_property_roof_spreading_repair',
-      {'actv_status': 'Previously strengthened'},
-    );
-
-    expect(phrases.single, contains('previously have required strengthening'));
-    expect(phrases.single, contains('No repair is currently required'));
-  });
-
   test('poor-fitting water tank lid has a dedicated repair narrative', () {
     final phrases = engine.buildPhrases(
       'activity_inside_property_water_tank',
