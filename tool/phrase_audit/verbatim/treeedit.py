@@ -171,3 +171,21 @@ def remove_screen(node_id, path=TREE):
     json.loads(raw)
     open(path, 'w', encoding='utf-8', newline='').write(raw)
     return True
+
+
+def set_title(node_id, title, path=TREE):
+    """Change a node's title (text-level)."""
+    raw = open(path, encoding='utf-8', newline='').read()
+    marker = '"id": "%s"' % node_id
+    if raw.count(marker) != 1:
+        raise SystemExit(f'node id {node_id!r} occurs {raw.count(marker)}x')
+    mi = raw.index(marker)
+    obj_start = raw.rfind('{', 0, mi)
+    obj_end = _match_brace(raw, obj_start)
+    seg = raw[obj_start:obj_end]
+    k = seg.index('"title": "')
+    k2 = seg.index('"', k + len('"title": "'))
+    seg = seg[:k] + '"title": "%s"' % title + seg[k2 + 1:]
+    raw = raw[:obj_start] + seg + raw[obj_end:]
+    json.loads(raw)
+    open(path, 'w', encoding='utf-8', newline='').write(raw)

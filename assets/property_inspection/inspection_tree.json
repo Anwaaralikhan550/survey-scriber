@@ -20542,39 +20542,59 @@
         },
         {
           "id": "activity_outside_property_out_side_doors_about_doors",
-          "title": "PVC",
+          "title": "About doors",
           "type": "screen",
           "parentId": "group_outside_doors_24",
           "order": 2,
           "fields": [
             {
-              "id": "label_door_location",
-              "label": "Door location",
+              "id": "label_door_types",
+              "label": "The property incorporates",
               "type": "label"
             },
             {
-              "id": "cb_main",
-              "label": "Main",
+              "id": "e6t_replacement",
+              "label": "replacement",
               "type": "checkbox"
             },
             {
-              "id": "cb_rear",
-              "label": "Rear",
+              "id": "e6t_original",
+              "label": "original",
               "type": "checkbox"
             },
             {
-              "id": "cb_side",
-              "label": "Side",
+              "id": "e6t_old",
+              "label": "old",
               "type": "checkbox"
             },
             {
-              "id": "cb_patio",
-              "label": "Patio",
+              "id": "e6t_front",
+              "label": "front",
               "type": "checkbox"
             },
             {
-              "id": "cb_garage",
-              "label": "Garage",
+              "id": "e6t_rear",
+              "label": "rear",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6t_side",
+              "label": "side",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6t_patio",
+              "label": "patio",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6t_french",
+              "label": "French",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6t_bi_fold",
+              "label": "bi-fold",
               "type": "checkbox"
             },
             {
@@ -20591,32 +20611,93 @@
               "conditionalMode": "show"
             },
             {
-              "id": "cb_replacement",
-              "label": "Replacement",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_glazzing_3",
-              "label": "Glazzing",
+              "id": "label_door_materials",
+              "label": "Formed of",
               "type": "label"
             },
             {
-              "id": "cb_single",
-              "label": "Single",
+              "id": "e6m_timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
-              "id": "cb_double",
-              "label": "Double",
+              "id": "e6m_pvcu",
+              "label": "PVCu",
               "type": "checkbox"
+            },
+            {
+              "id": "e6m_composite",
+              "label": "composite",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6m_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6m_steel",
+              "label": "steel",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6m_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6m_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e6m_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_door_glazing",
+              "label": "Glazing",
+              "type": "label"
+            },
+            {
+              "id": "e6g_single_glazing",
+              "label": "single glazing",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6g_double_glazing",
+              "label": "double glazing",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6g_triple_glazing",
+              "label": "triple glazing",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6g_decorative_glazing",
+              "label": "decorative glazing",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6g_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6g_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e6g_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             },
             {
               "id": "actv_status",
-              "label": "Safety Glass Rating Status",
+              "label": "Safety glass markings",
               "type": "dropdown",
               "options": [
-                "Noted",
-                "No SG Rating"
+                "No BS EN noted",
+                "BS EN noted"
               ]
             },
             {
@@ -20624,41 +20705,295 @@
               "label": "Condition",
               "type": "dropdown",
               "options": [
+                "Good",
                 "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
             },
             {
-              "id": "actv_status_security",
-              "label": "Door sealing condition",
+              "id": "actv_seals",
+              "label": "Glazing seals condition",
               "type": "dropdown",
               "options": [
-                "Properly",
-                "Fairly",
-                "Poorly"
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
               ]
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_out_side_doors_thresholds",
+          "title": "Thresholds",
+          "type": "screen",
+          "parentId": "group_outside_doors_24",
+          "order": 4,
+          "fields": [
+            {
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_out_side_doors_operation",
+          "title": "Operation",
+          "type": "screen",
+          "parentId": "group_outside_doors_24",
+          "order": 6,
+          "fields": [
+            {
+              "id": "actv_operation",
+              "label": "Doors opened and closed",
+              "type": "dropdown",
+              "options": [
+                "Freely",
+                "With resistance",
+                "With difficulty"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_out_side_doors_security",
+          "title": "Security",
+          "type": "screen",
+          "parentId": "group_outside_doors_24",
+          "order": 8,
+          "fields": [
+            {
+              "id": "label_door_locks",
+              "label": "Doors are fitted with",
+              "type": "label"
+            },
+            {
+              "id": "e6lk_multi_point_locking",
+              "label": "multi-point locking",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6lk_mortice_locks",
+              "label": "mortice locks",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6lk_cylinder_locks",
+              "label": "cylinder locks",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6lk_night_latches",
+              "label": "night latches",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6lk_combination_of_locking_systems",
+              "label": "combination of locking systems",
+              "type": "checkbox"
             },
             {
               "id": "actv_seciruty_offered",
-              "label": "Security Offered",
+              "label": "Level of security",
               "type": "dropdown",
               "options": [
                 "Reasonable",
+                "Adequate",
                 "Inadequate"
               ]
             }
           ]
         },
         {
+          "id": "activity_outside_property_out_side_doors_defective_operation",
+          "title": "Defective operation",
+          "type": "screen",
+          "parentId": "group_outside_doors_24",
+          "order": 10,
+          "fields": [
+            {
+              "id": "label_door_defective_operation",
+              "label": "External doors were found to",
+              "type": "label"
+            },
+            {
+              "id": "e6do_stick_during_operation",
+              "label": "stick during operation",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6do_fail_to_close_correctly",
+              "label": "fail to close correctly",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6do_require_adjustment",
+              "label": "require adjustment",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6do_have_damaged_hinges",
+              "label": "have damaged hinges",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6do_have_defective_handles",
+              "label": "have defective handles",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6do_have_defective_locking_mechanisms",
+              "label": "have defective locking mechanisms",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6do_be_distorted",
+              "label": "be distorted",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6do_have_localised_decay",
+              "label": "have localised decay",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6do_have_damaged_frames",
+              "label": "have damaged frames",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_out_side_doors_timber_doors",
+          "title": "Timber doors",
+          "type": "screen",
+          "parentId": "group_outside_doors_24",
+          "order": 12,
+          "fields": [
+            {
+              "id": "label_timber_door_issues",
+              "label": "Issues that may occur",
+              "type": "label"
+            },
+            {
+              "id": "e6td_localised_weathering",
+              "label": "localised weathering",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6td_paint_deterioration",
+              "label": "paint deterioration",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6td_surface_splitting",
+              "label": "surface splitting",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6td_minor_decay",
+              "label": "minor decay",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_out_side_doors_patio_french",
+          "title": "Patio and French doors",
+          "type": "screen",
+          "parentId": "group_outside_doors_24",
+          "order": 14,
+          "fields": [
+            {
+              "id": "label_patio_doors",
+              "label": "The property incorporates",
+              "type": "label"
+            },
+            {
+              "id": "e6pf_sliding_patio_doors",
+              "label": "sliding patio doors",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6pf_french_doors",
+              "label": "French doors",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6pf_bi_fold_doors",
+              "label": "bi-fold doors",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6pf_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6pf_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "e6pf_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_general_maintenance",
+              "label": "General maintenance",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
           "id": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors",
-          "title": "Main Door",
+          "title": "Repair doors",
           "type": "screen",
           "parentId": "group_repairs_25",
           "order": 2,
           "fields": [
             {
-              "id": "other",
+              "id": "label_repair_locations",
+              "label": "Doors in",
+              "type": "label"
+            },
+            {
+              "id": "e6rl_lounge",
+              "label": "lounge",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6rl_dining_room",
+              "label": "dining room",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6rl_bedroom",
+              "label": "bedroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6rl_kitchen",
+              "label": "kitchen",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_337",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_other_362",
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_337",
@@ -20666,135 +21001,64 @@
               "conditionalMode": "show"
             },
             {
-              "id": "actv_repair_type",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
+              "id": "label_repair_defects",
+              "label": "Defects",
+              "type": "label"
             },
             {
-              "id": "cb_poorly_secured",
-              "label": "Poorly Secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
+              "id": "e6rd_have_damaged_lock_s",
+              "label": "have damaged lock(s)",
+              "type": "checkbox"
             },
             {
-              "id": "cb_inadequate_lock",
-              "label": "Inadequate Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
+              "id": "e6rd_have_missing_lock_s",
+              "label": "have missing lock(s)",
+              "type": "checkbox"
             },
             {
-              "id": "cb_rotted_frame",
-              "label": "Rotted Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
+              "id": "e6rd_are_difficult_to_open",
+              "label": "are difficult to open",
+              "type": "checkbox"
             },
             {
-              "id": "cb_damaged_lock",
-              "label": "Damaged Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
+              "id": "e6rd_are_badly_worn",
+              "label": "are badly worn",
+              "type": "checkbox"
             },
             {
-              "id": "cb_other_337",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
+              "id": "e6rd_are_rotten",
+              "label": "are rotten",
+              "type": "checkbox"
             },
             {
-              "id": "et_other_362",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
-              "conditionalMode": "show"
+              "id": "e6rd_have_broken_glass",
+              "label": "have broken glass",
+              "type": "checkbox"
             },
             {
-              "id": "actv_condition_now",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
+              "id": "e6rd_have_failed_glazing",
+              "label": "have failed glazing",
+              "type": "checkbox"
             },
             {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
+              "id": "e6rd_are_in_disrepair",
+              "label": "are in disrepair",
+              "type": "checkbox"
             },
             {
-              "id": "cb_rotten",
-              "label": "Rotten",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
+              "id": "e6rd_are_severely_damaged",
+              "label": "are severely damaged",
+              "type": "checkbox"
             },
             {
-              "id": "cb_partly_worn",
-              "label": "Partly Worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
+              "id": "e6rd_present_a_safety_or_security_risk",
+              "label": "present a safety or security risk",
+              "type": "checkbox"
             },
             {
-              "id": "cb_failed_glazing",
-              "label": "Failed Glazing",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_sticks_against_frame",
-              "label": "Sticks against Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_fitted",
-              "label": "Poorly Fitted",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_837",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_855",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_soon",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
+              "id": "e6rd_have_other_defects",
+              "label": "have other defects",
+              "type": "checkbox"
             }
           ]
         },
@@ -23099,269 +23363,11 @@
           "order": 4
         },
         {
-          "id": "activity_outside_property_out_side_doors_about_doors__timber",
-          "title": "Timber",
-          "type": "screen",
-          "parentId": "group_outside_doors_24",
-          "order": 4,
-          "fields": [
-            {
-              "id": "label_door_location_2",
-              "label": "Door location",
-              "type": "label"
-            },
-            {
-              "id": "cb_main",
-              "label": "Main",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_patio",
-              "label": "Patio",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_garage",
-              "label": "Garage",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_859",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_replacement",
-              "label": "Replacement",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_glazzing_6",
-              "label": "Glazzing",
-              "type": "label"
-            },
-            {
-              "id": "cb_single",
-              "label": "Single",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_double",
-              "label": "Double",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_179",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_859",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_status",
-              "label": "Safety Glass Rating Status",
-              "type": "dropdown",
-              "options": [
-                "Noted",
-                "No SG Rating"
-              ]
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_status_security",
-              "label": "Door sealing condition",
-              "type": "dropdown",
-              "options": [
-                "Properly",
-                "Fairly",
-                "Poorly"
-              ]
-            },
-            {
-              "id": "actv_seciruty_offered",
-              "label": "Security Offered",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Inadequate"
-              ]
-            }
-          ]
-        },
-        {
           "id": "group_repairs_25",
           "title": "Repairs",
           "type": "group",
           "parentId": "group_e6_outside_doors_23",
           "order": 4
-        },
-        {
-          "id": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__rear_door",
-          "title": "Rear Door",
-          "type": "screen",
-          "parentId": "group_repairs_25",
-          "order": 4,
-          "fields": [
-            {
-              "id": "cb_poorly_secured",
-              "label": "Poorly Secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_inadequate_lock",
-              "label": "Inadequate Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotted_frame",
-              "label": "Rotted Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged_lock",
-              "label": "Damaged Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_337",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotten",
-              "label": "Rotten",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_partly_worn",
-              "label": "Partly Worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_failed_glazing",
-              "label": "Failed Glazing",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_sticks_against_frame",
-              "label": "Sticks against Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_fitted",
-              "label": "Poorly Fitted",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_837",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "other",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_337",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_repair_type",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
-            },
-            {
-              "id": "et_other_362",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_now",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_855",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_soon",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            }
-          ]
         },
         {
           "id": "group_porches_29",
@@ -25365,264 +25371,6 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_out_side_doors_about_doors__steel",
-          "title": "Steel",
-          "type": "screen",
-          "parentId": "group_outside_doors_24",
-          "order": 6,
-          "fields": [
-            {
-              "id": "label_door_location_3",
-              "label": "Door location",
-              "type": "label"
-            },
-            {
-              "id": "cb_main",
-              "label": "Main",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_patio",
-              "label": "Patio",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_garage",
-              "label": "Garage",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_859",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_replacement",
-              "label": "Replacement",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_glazzing_7",
-              "label": "Glazzing",
-              "type": "label"
-            },
-            {
-              "id": "cb_single",
-              "label": "Single",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_double",
-              "label": "Double",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_179",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_859",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_status",
-              "label": "Safety Glass Rating Status",
-              "type": "dropdown",
-              "options": [
-                "Noted",
-                "No SG Rating"
-              ]
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_status_security",
-              "label": "Door sealing condition",
-              "type": "dropdown",
-              "options": [
-                "Properly",
-                "Fairly",
-                "Poorly"
-              ]
-            },
-            {
-              "id": "actv_seciruty_offered",
-              "label": "Security Offered",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Inadequate"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__side_door",
-          "title": "Side Door",
-          "type": "screen",
-          "parentId": "group_repairs_25",
-          "order": 6,
-          "fields": [
-            {
-              "id": "cb_poorly_secured",
-              "label": "Poorly Secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_inadequate_lock",
-              "label": "Inadequate Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotted_frame",
-              "label": "Rotted Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged_lock",
-              "label": "Damaged Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_337",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotten",
-              "label": "Rotten",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_partly_worn",
-              "label": "Partly Worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_failed_glazing",
-              "label": "Failed Glazing",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_sticks_against_frame",
-              "label": "Sticks against Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_fitted",
-              "label": "Poorly Fitted",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_837",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "other",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_337",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_repair_type",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
-            },
-            {
-              "id": "et_other_362",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_now",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_855",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_soon",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
             }
           ]
         },
@@ -27727,264 +27475,6 @@
           ]
         },
         {
-          "id": "activity_outside_property_out_side_doors_about_doors__aluminium",
-          "title": "Aluminium",
-          "type": "screen",
-          "parentId": "group_outside_doors_24",
-          "order": 8,
-          "fields": [
-            {
-              "id": "label_door_location_4",
-              "label": "Door location",
-              "type": "label"
-            },
-            {
-              "id": "cb_main",
-              "label": "Main",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_patio",
-              "label": "Patio",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_garage",
-              "label": "Garage",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_859",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_replacement",
-              "label": "Replacement",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_glazzing_8",
-              "label": "Glazzing",
-              "type": "label"
-            },
-            {
-              "id": "cb_single",
-              "label": "Single",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_double",
-              "label": "Double",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_179",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_859",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_status",
-              "label": "Safety Glass Rating Status",
-              "type": "dropdown",
-              "options": [
-                "Noted",
-                "No SG Rating"
-              ]
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_status_security",
-              "label": "Door sealing condition",
-              "type": "dropdown",
-              "options": [
-                "Properly",
-                "Fairly",
-                "Poorly"
-              ]
-            },
-            {
-              "id": "actv_seciruty_offered",
-              "label": "Security Offered",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Inadequate"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__patio_door",
-          "title": "Patio Door",
-          "type": "screen",
-          "parentId": "group_repairs_25",
-          "order": 8,
-          "fields": [
-            {
-              "id": "cb_poorly_secured",
-              "label": "Poorly Secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_inadequate_lock",
-              "label": "Inadequate Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotted_frame",
-              "label": "Rotted Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged_lock",
-              "label": "Damaged Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_337",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotten",
-              "label": "Rotten",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_partly_worn",
-              "label": "Partly Worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_failed_glazing",
-              "label": "Failed Glazing",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_sticks_against_frame",
-              "label": "Sticks against Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_fitted",
-              "label": "Poorly Fitted",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_837",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "other",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_337",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_repair_type",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
-            },
-            {
-              "id": "et_other_362",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_now",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_855",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_soon",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_outside_property_conservatory_porch_repairs__window_glazing",
           "title": "Window Glazing",
           "type": "screen",
@@ -28939,269 +28429,6 @@
           ]
         },
         {
-          "id": "activity_outside_property_out_side_doors_about_doors__other",
-          "title": "Other",
-          "type": "screen",
-          "parentId": "group_outside_doors_24",
-          "order": 10,
-          "fields": [
-            {
-              "id": "label_door_location_5",
-              "label": "Door location",
-              "type": "label"
-            },
-            {
-              "id": "cb_main",
-              "label": "Main",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rear",
-              "label": "Rear",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_side",
-              "label": "Side",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_patio",
-              "label": "Patio",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_garage",
-              "label": "Garage",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_859",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_replacement",
-              "label": "Replacement",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_glazzing_9",
-              "label": "Glazzing",
-              "type": "label"
-            },
-            {
-              "id": "cb_single",
-              "label": "Single",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_double",
-              "label": "Double",
-              "type": "checkbox"
-            },
-            {
-              "id": "other",
-              "label": "Other door type",
-              "type": "text"
-            },
-            {
-              "id": "et_other_179",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_859",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_status",
-              "label": "Safety Glass Rating Status",
-              "type": "dropdown",
-              "options": [
-                "Noted",
-                "No SG Rating"
-              ]
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ]
-            },
-            {
-              "id": "actv_status_security",
-              "label": "Door sealing condition",
-              "type": "dropdown",
-              "options": [
-                "Properly",
-                "Fairly",
-                "Poorly"
-              ]
-            },
-            {
-              "id": "actv_seciruty_offered",
-              "label": "Security Offered",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Inadequate"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__garage_door",
-          "title": "Garage Door",
-          "type": "screen",
-          "parentId": "group_repairs_25",
-          "order": 10,
-          "fields": [
-            {
-              "id": "cb_poorly_secured",
-              "label": "Poorly Secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_inadequate_lock",
-              "label": "Inadequate Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotted_frame",
-              "label": "Rotted Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged_lock",
-              "label": "Damaged Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_337",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotten",
-              "label": "Rotten",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_partly_worn",
-              "label": "Partly Worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_failed_glazing",
-              "label": "Failed Glazing",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_sticks_against_frame",
-              "label": "Sticks against Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_fitted",
-              "label": "Poorly Fitted",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_837",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "other",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_337",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_repair_type",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
-            },
-            {
-              "id": "et_other_362",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_now",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_855",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_soon",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            }
-          ]
-        },
-        {
           "id": "activity_outside_property_conservatory_porch_repairs__roof_glazing",
           "title": "Roof Glazing",
           "type": "screen",
@@ -30127,154 +29354,6 @@
           "type": "group",
           "parentId": null,
           "order": 12
-        },
-        {
-          "id": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__other_door",
-          "title": "Other Door",
-          "type": "screen",
-          "parentId": "group_repairs_25",
-          "order": 12,
-          "fields": [
-            {
-              "id": "cb_poorly_secured",
-              "label": "Poorly Secured",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_inadequate_lock",
-              "label": "Inadequate Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotted_frame",
-              "label": "Rotted Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged_lock",
-              "label": "Damaged Lock",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_337",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_damaged",
-              "label": "Damaged",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_rotten",
-              "label": "Rotten",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_partly_worn",
-              "label": "Partly Worn",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_failed_glazing",
-              "label": "Failed Glazing",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_sticks_against_frame",
-              "label": "Sticks against Frame",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_poorly_fitted",
-              "label": "Poorly Fitted",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_other_837",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "other",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_337",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_repair_type",
-              "label": "Repair Type",
-              "type": "dropdown",
-              "options": [
-                "Repair soon",
-                "Repair now"
-              ]
-            },
-            {
-              "id": "et_other_362",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair soon & cb_other_337",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_now",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair soon",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "et_other_855",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "actv_repair_type=Repair now & cb_other_837",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition_soon",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "actv_repair_type=Repair now",
-              "conditionalMode": "show"
-            }
-          ]
         },
         {
           "id": "activity_outside_property_conservatory_porch_repairs__floor",
@@ -34692,230 +33771,64 @@
           ]
         },
         {
-          "id": "activity_outside_property_out_side_doors_repairs_failed_glazing_location",
-          "title": "Failed Glazing Location",
-          "type": "screen",
-          "parentId": "group_repairs_25_internal",
-          "order": 300,
-          "fields": [
-            {
-              "id": "label_location",
-              "label": "Location",
-              "type": "label"
-            },
-            {
-              "id": "cb_main_63",
-              "label": "Main",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rear_80",
-              "label": "Rear",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_side_35",
-              "label": "Side",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_patio_42",
-              "label": "Patio",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_garage_95",
-              "label": "Garage",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_791",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_129",
-              "label": "Other (specify)",
-              "type": "text"
-            },
-            {
-              "id": "label_defects",
-              "label": "Defects",
-              "type": "label"
-            },
-            {
-              "id": "cb_is_damaged_25",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_rotten_49",
-              "label": "Rotten",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_partly_worn_73",
-              "label": "Partly worn",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_secured_99",
-              "label": "Poorly secured",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_inadequate_lock_89",
-              "label": "Inadequate lock",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_rotted_frame_43",
-              "label": "Rotted frame",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_damaged_lock_74",
-              "label": "Damaged lock",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_failed_glazing_45",
-              "label": "Failed glazing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_sticks_against_frame_48",
-              "label": "Sticks against frame",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_fitted_84",
-              "label": "Poorly fitted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_641",
-              "label": "Other defect",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_288",
-              "label": "Other defect (specify)",
-              "type": "text"
-            }
-          ]
-        },
-        {
           "id": "activity_outside_property_out_side_doors_repairs_inadequate_lock_location",
-          "title": "Inadequate Lock Location",
+          "title": "Inadequate lock",
           "type": "screen",
           "parentId": "group_repairs_25_internal",
           "order": 301,
           "fields": [
             {
-              "id": "label_location",
-              "label": "Location",
+              "id": "label_lock_locations",
+              "label": "Locking arrangements to",
               "type": "label"
             },
             {
-              "id": "cb_main_63",
-              "label": "Main",
+              "id": "e6il_main",
+              "label": "main",
               "type": "checkbox"
             },
             {
-              "id": "cb_rear_80",
-              "label": "Rear",
+              "id": "e6il_rear",
+              "label": "rear",
               "type": "checkbox"
             },
             {
-              "id": "cb_side_35",
-              "label": "Side",
+              "id": "e6il_side",
+              "label": "side",
               "type": "checkbox"
             },
             {
-              "id": "cb_patio_42",
-              "label": "Patio",
+              "id": "e6il_patio",
+              "label": "patio",
               "type": "checkbox"
             },
             {
-              "id": "cb_garage_95",
-              "label": "Garage",
+              "id": "e6il_sliding_patio_doors",
+              "label": "sliding patio doors",
               "type": "checkbox"
             },
             {
-              "id": "cb_other_791",
+              "id": "e6il_french_doors",
+              "label": "French doors",
+              "type": "checkbox"
+            },
+            {
+              "id": "e6il_bi_fold_doors",
+              "label": "bi-fold doors",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_il",
               "label": "Other",
               "type": "checkbox"
             },
             {
-              "id": "et_other_129",
-              "label": "Other (specify)",
-              "type": "text"
-            },
-            {
-              "id": "label_defects",
-              "label": "Defects",
-              "type": "label"
-            },
-            {
-              "id": "cb_is_damaged_25",
-              "label": "Damaged",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_rotten_49",
-              "label": "Rotten",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_partly_worn_73",
-              "label": "Partly worn",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_secured_99",
-              "label": "Poorly secured",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_inadequate_lock_89",
-              "label": "Inadequate lock",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_rotted_frame_43",
-              "label": "Rotted frame",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_damaged_lock_74",
-              "label": "Damaged lock",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_has_failed_glazing_45",
-              "label": "Failed glazing",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_sticks_against_frame_48",
-              "label": "Sticks against frame",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_is_poorly_fitted_84",
-              "label": "Poorly fitted",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_641",
-              "label": "Other defect",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_288",
-              "label": "Other defect (specify)",
-              "type": "text"
+              "id": "et_other_il",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cb_other_il",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },

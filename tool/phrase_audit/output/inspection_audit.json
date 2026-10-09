@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 529,
+  "screensAudited": 525,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 2764,
-   "approvedLegacyBank": 626,
-   "approvedCurrentBankOnly": 2111,
+   "distinctEmitted": 2694,
+   "approvedLegacyBank": 614,
+   "approvedCurrentBankOnly": 2053,
    "unapproved": 0
   }
  },
@@ -4777,39 +4777,151 @@
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_out_side_doors_about_doors",
-   "title": "PVC",
-   "dataFieldCount": 14,
-   "permutationCount": 28,
+   "title": "About doors",
+   "dataFieldCount": 27,
+   "permutationCount": 47,
    "severities": [],
    "phraseStats": {
-    "total": 23,
+    "total": 36,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 23,
+    "approvedCurrentBankOnly": 36,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Description: The property incorporates main door(s). The external door(s) are formed of pvc.",
-    "Description: The property incorporates rear door(s). The external door(s) are formed of pvc.",
-    "Description: The property incorporates side door(s). The external door(s) are formed of pvc."
+    "Description: The property incorporates replacement doors.",
+    "The doors appear to have been fully replaced or partially replaced. Where replacement doors have been installed, your legal adviser should confirm that the installation was carried out under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Any available guarantees or warranties should also be obtained.",
+    "Description: The property incorporates original doors."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_out_side_doors_thresholds",
+   "title": "Thresholds",
+   "dataFieldCount": 1,
+   "permutationCount": 11,
+   "severities": [],
+   "phraseStats": {
+    "total": 5,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Thresholds: The door thresholds appear in good condition. Minor wear is consistent with normal use. Defective thresholds should be repaired where deterioration affects weather resistance or safe operation.",
+    "Thresholds: The door thresholds appear in reasonable condition. Minor wear is consistent with normal use. Defective thresholds should be repaired where deterioration affects weather resistance or safe operation.",
+    "Thresholds: The door thresholds appear in fair condition. Minor wear is consistent with normal use. Defective thresholds should be repaired where deterioration affects weather resistance or safe operation."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_out_side_doors_operation",
+   "title": "Operation",
+   "dataFieldCount": 1,
+   "permutationCount": 7,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Operation: The doors selected for operation opened and closed freely. Doors should be inspected and maintained regularly. Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary. Timber doors should be redecorated periodically to maintain protection against weathering. Sealants should be inspected and renewed where deterioration becomes evident.",
+    "Operation: The doors selected for operation opened and closed with resistance. Doors should be inspected and maintained regularly. Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary. Timber doors should be redecorated periodically to maintain protection against weathering. Sealants should be inspected and renewed where deterioration becomes evident.",
+    "Operation: The doors selected for operation opened and closed with difficulty. Doors should be inspected and maintained regularly. Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary. Timber doors should be redecorated periodically to maintain protection against weathering. Sealants should be inspected and renewed where deterioration becomes evident."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_out_side_doors_security",
+   "title": "Security",
+   "dataFieldCount": 6,
+   "permutationCount": 12,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Security: The doors are fitted with multi-point locking, mortice locks, cylinder locks, night latches and combination of locking systems. The level of security appears reasonable based upon a visual inspection only. The effectiveness of locks and security devices has not been evaluated.",
+    "Security: The doors are fitted with multi-point locking, mortice locks, cylinder locks, night latches and combination of locking systems. The level of security appears adequate based upon a visual inspection only. The effectiveness of locks and security devices has not been evaluated.",
+    "Security: The doors are fitted with multi-point locking, mortice locks, cylinder locks, night latches and combination of locking systems. The level of security appears inadequate based upon a visual inspection only. The effectiveness of locks and security devices has not been evaluated."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_out_side_doors_defective_operation",
+   "title": "Defective operation",
+   "dataFieldCount": 9,
+   "permutationCount": 11,
+   "severities": [],
+   "phraseStats": {
+    "total": 10,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 10,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Defective Operation One or more external doors were found to: stick during operation. Repairs or adjustment should be undertaken to maintain security, weather resistance, and ease of operation.",
+    "Defective Operation One or more external doors were found to: fail to close correctly. Repairs or adjustment should be undertaken to maintain security, weather resistance, and ease of operation.",
+    "Defective Operation One or more external doors were found to: require adjustment. Repairs or adjustment should be undertaken to maintain security, weather resistance, and ease of operation."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_out_side_doors_timber_doors",
+   "title": "Timber doors",
+   "dataFieldCount": 4,
+   "permutationCount": 6,
+   "severities": [],
+   "phraseStats": {
+    "total": 5,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Timber Doors: Where timber external doors are present, localised weathering may occur as part of their normal service life. Regular decoration and maintenance should be undertaken to prolong their lifespan.",
+    "Timber Doors: Where timber external doors are present, paint deterioration may occur as part of their normal service life. Regular decoration and maintenance should be undertaken to prolong their lifespan.",
+    "Timber Doors: Where timber external doors are present, surface splitting may occur as part of their normal service life. Regular decoration and maintenance should be undertaken to prolong their lifespan."
+   ]
+  },
+  {
+   "sectionKey": "E",
+   "screenId": "activity_outside_property_out_side_doors_patio_french",
+   "title": "Patio and French doors",
+   "dataFieldCount": 6,
+   "permutationCount": 8,
+   "severities": [],
+   "phraseStats": {
+    "total": 5,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Patio and French Doors: The property incorporates sliding patio doors. The running gear, hinges and locking mechanisms should be inspected and maintained periodically.",
+    "Patio and French Doors: The property incorporates French doors. The running gear, hinges and locking mechanisms should be inspected and maintained periodically.",
+    "Patio and French Doors: The property incorporates bi-fold doors. The running gear, hinges and locking mechanisms should be inspected and maintained periodically."
    ]
   },
   {
    "sectionKey": "E",
    "screenId": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors",
-   "title": "Main Door",
-   "dataFieldCount": 18,
-   "permutationCount": 30,
+   "title": "Repair doors",
+   "dataFieldCount": 17,
+   "permutationCount": 19,
    "severities": [],
    "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 3,
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Inadequate lock: The locking arrangements to the main door(s) do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property.",
-    "The main door(s) to the property damaged, rotten, partly worn, failed glazing, sticks against frame, poorly fitted and sample detail. These should be repaired without delay, as the security of the property may be compromised. However, severely or significantly damaged door(s) should be repaired immediately.",
-    "However, severely or significantly damaged door(s) should be repaired immediately. Doors that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the doors entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable (see section I2 - Guarantees)."
+    "Repair doors: The door(s) in the lounge, dining room, bedroom, kitchen and sample detail have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk and have other defects. Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration. Where the defects affect the weather-tightness, security, or safe operation of the doors, repairs should be undertaken without delay. Severely damaged doors should be repaired or replaced immediately."
    ]
   },
   {
@@ -5450,44 +5562,6 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_about_doors__timber",
-   "title": "Timber",
-   "dataFieldCount": 14,
-   "permutationCount": 28,
-   "severities": [],
-   "phraseStats": {
-    "total": 24,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 24,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Description: The property incorporates main door(s). The external door(s) are formed of timber.",
-    "Timber doors: Where timber external doors are present, localised weathering, paint deterioration, surface splitting, or minor decay may occur as part of their normal service life. Regular decoration and maintenance should be undertaken to prolong their lifespan.",
-    "Description: The property incorporates rear door(s). The external door(s) are formed of timber."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__rear_door",
-   "title": "Rear Door",
-   "dataFieldCount": 18,
-   "permutationCount": 30,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Inadequate lock: The locking arrangements to the rear door(s) do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property.",
-    "The rear door(s) to the property damaged, rotten, partly worn, failed glazing, sticks against frame, poorly fitted and sample detail. These should be repaired without delay, as the security of the property may be compromised. However, severely or significantly damaged door(s) should be repaired immediately.",
-    "However, severely or significantly damaged door(s) should be repaired immediately. Doors that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the doors entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable (see section I2 - Guarantees)."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_repairs__windows",
    "title": "Windows",
    "dataFieldCount": 17,
@@ -6007,44 +6081,6 @@
     "Condition: Where visible, the walls appear in good condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
     "Condition: Where visible, the walls appear in reasonable condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected.",
     "Condition: Where visible, the walls appear in fair condition, consistent with their age and type of construction. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The external walls appear to be adequately performing their function. Routine maintenance appropriate to the age and construction of the building should be expected."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_about_doors__steel",
-   "title": "Steel",
-   "dataFieldCount": 14,
-   "permutationCount": 28,
-   "severities": [],
-   "phraseStats": {
-    "total": 23,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 23,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Description: The property incorporates main door(s). The external door(s) are formed of steel.",
-    "Description: The property incorporates rear door(s). The external door(s) are formed of steel.",
-    "Description: The property incorporates side door(s). The external door(s) are formed of steel."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__side_door",
-   "title": "Side Door",
-   "dataFieldCount": 18,
-   "permutationCount": 30,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Inadequate lock: The locking arrangements to the side door(s) do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property.",
-    "The side door(s) to the property damaged, rotten, partly worn, failed glazing, sticks against frame, poorly fitted and sample detail. These should be repaired without delay, as the security of the property may be compromised. However, severely or significantly damaged door(s) should be repaired immediately.",
-    "However, severely or significantly damaged door(s) should be repaired immediately. Doors that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the doors entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable (see section I2 - Guarantees)."
    ]
   },
   {
@@ -6710,44 +6746,6 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_about_doors__aluminium",
-   "title": "Aluminium",
-   "dataFieldCount": 14,
-   "permutationCount": 28,
-   "severities": [],
-   "phraseStats": {
-    "total": 23,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 23,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Description: The property incorporates main door(s). The external door(s) are formed of aluminium.",
-    "Description: The property incorporates rear door(s). The external door(s) are formed of aluminium.",
-    "Description: The property incorporates side door(s). The external door(s) are formed of aluminium."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__patio_door",
-   "title": "Patio Door",
-   "dataFieldCount": 18,
-   "permutationCount": 30,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Inadequate lock: The locking arrangements to the patio door(s) do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property.",
-    "The patio door(s) to the property damaged, rotten, partly worn, failed glazing, sticks against frame, poorly fitted and sample detail. These should be repaired without delay, as the security of the property may be compromised. However, severely or significantly damaged door(s) should be repaired immediately.",
-    "However, severely or significantly damaged door(s) should be repaired immediately. Doors that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the doors entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable (see section I2 - Guarantees)."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_repairs__window_glazing",
    "title": "Window Glazing",
    "dataFieldCount": 13,
@@ -7137,44 +7135,6 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_about_doors__other",
-   "title": "Other",
-   "dataFieldCount": 15,
-   "permutationCount": 29,
-   "severities": [],
-   "phraseStats": {
-    "total": 23,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 23,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Description: The property incorporates main door(s). The external door(s) are formed of other.",
-    "Description: The property incorporates rear door(s). The external door(s) are formed of other.",
-    "Description: The property incorporates side door(s). The external door(s) are formed of other."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__garage_door",
-   "title": "Garage Door",
-   "dataFieldCount": 18,
-   "permutationCount": 30,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Inadequate lock: The locking arrangements to the garage door(s) do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property.",
-    "The garage door(s) to the property damaged, rotten, partly worn, failed glazing, sticks against frame, poorly fitted and sample detail. These should be repaired without delay, as the security of the property may be compromised. However, severely or significantly damaged door(s) should be repaired immediately.",
-    "However, severely or significantly damaged door(s) should be repaired immediately. Doors that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the doors entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable (see section I2 - Guarantees)."
-   ]
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_repairs__roof_glazing",
    "title": "Roof Glazing",
    "dataFieldCount": 19,
@@ -7448,25 +7408,6 @@
     "Valley Gutters: The valley gutters are formed in lead.",
     "Valley Gutters: The valley gutters are formed in mortar.",
     "Condition: Where visible, they appear in good condition. Blocked or defective valley gutters should be cleared, repaired, or replaced as necessary to ensure effective drainage and prevent water penetration into the building. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the age of the guttering should be expected."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__other_door",
-   "title": "Other Door",
-   "dataFieldCount": 18,
-   "permutationCount": 30,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 2,
-    "approvedCurrentBankOnly": 3,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Inadequate lock: The locking arrangements to the sample detail door(s) do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property.",
-    "The sample detail door(s) to the property damaged, rotten, partly worn, failed glazing, sticks against frame, poorly fitted and sample detail. These should be repaired without delay, as the security of the property may be compromised. However, severely or significantly damaged door(s) should be repaired immediately.",
-    "However, severely or significantly damaged door(s) should be repaired immediately. Doors that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the doors entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable (see section I2 - Guarantees)."
    ]
   },
   {
@@ -9279,31 +9220,22 @@
   },
   {
    "sectionKey": "E",
-   "screenId": "activity_outside_property_out_side_doors_repairs_failed_glazing_location",
-   "title": "Failed Glazing Location",
-   "dataFieldCount": 19,
-   "permutationCount": 21,
-   "severities": [],
-   "phraseStats": {
-    "total": 0,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 0,
-    "unapproved": 0
-   }
-  },
-  {
-   "sectionKey": "E",
    "screenId": "activity_outside_property_out_side_doors_repairs_inadequate_lock_location",
-   "title": "Inadequate Lock Location",
-   "dataFieldCount": 19,
-   "permutationCount": 21,
+   "title": "Inadequate lock",
+   "dataFieldCount": 9,
+   "permutationCount": 11,
    "severities": [],
    "phraseStats": {
-    "total": 0,
+    "total": 8,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "Inadequate Lock: The locking arrangements to the main, do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property.",
+    "Inadequate Lock: The locking arrangements to the rear, do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property.",
+    "Inadequate Lock: The locking arrangements to the side, do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property."
+   ]
   },
   {
    "sectionKey": "A",

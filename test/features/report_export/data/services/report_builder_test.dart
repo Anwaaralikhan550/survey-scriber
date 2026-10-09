@@ -2564,11 +2564,6 @@ void main() {
               'cb_wc_89': 'true',
               'cb_badly_cracked_62': 'true',
             },
-            'activity_outside_property_out_side_doors_repairs_repair_out_side_doors':
-                {
-              'actv_repair_type': 'Repair now',
-              'cb_damaged': 'true',
-            },
           },
         ),
         const ExportConfig(),
@@ -2586,11 +2581,6 @@ void main() {
 
       expect(j3Text, contains('bathtub and wc are badly cracked'));
 
-      expect(
-        j3Text,
-        contains(
-            'affected by single or multiple defects, and this is a health and safety hazard (see section e6'),
-      );
       expect(j3Text, isNot(contains('this is health and safety hazard')));
     });
 
@@ -3297,7 +3287,7 @@ void main() {
         _makeRawData(
           tree: tree,
           allAnswers: {
-            'activity_outside_property_out_side_doors_about_doors': {
+            'activity_outside_property_out_side_doors_security': {
               'actv_seciruty_offered': 'Inadequate',
             },
             'activity_outside_property_other_communal_area': {
@@ -3367,7 +3357,7 @@ void main() {
         _makeRawData(
           tree: tree,
           allAnswers: {
-            'activity_outside_property_out_side_doors_about_doors': {
+            'activity_outside_property_out_side_doors_security': {
               'actv_seciruty_offered': 'Reasonable',
             },
             'activity_risks_other_': {
@@ -3473,7 +3463,8 @@ void main() {
               'e5t_pvcu': 'true',
             },
             'activity_outside_property_out_side_doors_about_doors': {
-              'cb_replacement': 'true',
+              'e6t_replacement': 'true',
+              'e6m_pvcu': 'true',
             },
           },
         ),

@@ -633,14 +633,14 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_out_side_doors_about_doors__aluminium':
       case 'activity_outside_property_out_side_doors_about_doors__steel':
       case 'activity_outside_property_out_side_doors_about_doors__other':
-        return _outsideDoorsAbout(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_out_side_doors_repairs_repair_out_side_doors':
       case 'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__rear_door':
       case 'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__side_door':
       case 'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__patio_door':
       case 'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__garage_door':
       case 'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__other_door':
-        return _outsideDoorsRepair(screenId, answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_conservatory_porch_location_construction':
       case 'activity_outside_property_conservatory_porch_location_construction__location_and_construction':
         return _cpLocationConstruction(screenId, answers);
@@ -883,9 +883,9 @@ class InspectionPhraseEngine {
         // sentence in the assembled report, not fill a gap.
         return const [];
       case 'activity_outside_property_out_side_safety_glass_rating':
-        return _outsideDoorsSafetyGlassRating(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_out_side_doors_wall_sealing':
-        return _outsideDoorsWallSealing(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
 
       // ── Section A: overall opinion ──
       case 'activity_over_all_openion':
@@ -2189,258 +2189,6 @@ class InspectionPhraseEngine {
   List<String> _windowsNotInspected(Map<String, String> answers) {
     if (!_isChecked(answers['cb_not_inspected'])) return const [];
     return _split(_normalize(_sub('{E_WINDOWS}', '{NOT_INSPECTED}')));
-  }
-
-  List<String> _outsideDoorsAbout(
-      String screenId, Map<String, String> answers) {
-    final locations = _labelsFor(
-      // cb_other_859 (the "Other" checkbox) is deliberately excluded here:
-      // it has no label of its own and is already handled explicitly below
-      // via its free-text value.
-      [
-        'cb_main',
-        'cb_rear',
-        'cb_side',
-        'cb_patio',
-        'cb_garage',
-      ],
-      answers,
-      {
-        'cb_main': 'Main',
-        'cb_rear': 'Rear',
-        'cb_side': 'Side',
-        'cb_patio': 'Patio',
-        'cb_garage': 'Garage',
-      },
-    );
-    if (_isChecked(answers['cb_other_859'])) {
-      final otherLocation = (answers['et_other_179'] ?? '').trim();
-      if (otherLocation.isNotEmpty) {
-        locations.add(otherLocation);
-      }
-    }
-
-    final material = _doorMaterialFromScreen(screenId, answers);
-    final materialCode = _doorMaterialCodeFromScreen(screenId);
-
-    final glazing = _labelsFor(
-      ['cb_single', 'cb_double'],
-      answers,
-      {
-        'cb_single': 'Single',
-        'cb_double': 'Double',
-      },
-    );
-
-    final replacement =
-        _isChecked(answers['cb_replacement']) ? 'replacement' : '';
-    final safetyStatus = _cleanLower(answers['actv_status']);
-    final condition = _cleanLower(answers['actv_condition']);
-    final sealing = _cleanLower(answers['actv_status_security']);
-    final security = _cleanLower(answers['actv_seciruty_offered']);
-    final hasAnyData = locations.isNotEmpty ||
-        replacement.isNotEmpty ||
-        glazing.isNotEmpty ||
-        safetyStatus.isNotEmpty ||
-        condition.isNotEmpty ||
-        sealing.isNotEmpty ||
-        security.isNotEmpty;
-    if (!hasAnyData) return const [];
-
-    var template = _sub('{E_OUTSIDE_DOORS}', materialCode);
-    if (template.isEmpty) return const [];
-
-    var doorLocation = '';
-    final doorLocationTemplate = _sub('{E_OUTSIDE_DOORS}', '{DOOR_LOCATION}');
-    if (doorLocationTemplate.isNotEmpty && locations.isNotEmpty) {
-      doorLocation = doorLocationTemplate
-          .replaceAll('{DOOR_LOCATION}', _toWords(locations).toLowerCase())
-          .replaceAll('{REPLACEMENT}', replacement)
-          .replaceAll('{DOOR_MATERIAL}', material.toLowerCase());
-    }
-    if (doorLocation.isNotEmpty) {
-      doorLocation = doorLocation
-          .replaceAll(RegExp(r'\{[^}]+\}'), '')
-          .replaceAll(RegExp(r'\s{2,}'), ' ')
-          // A single empty slot right before punctuation (e.g. an empty
-          // {REPLACEMENT}) leaves exactly one space before the following
-          // word, which the \s{2,} collapse above doesn't catch.
-          .replaceAllMapped(RegExp(r'\s+([.,;:])'), (m) => m.group(1)!)
-          .trim();
-    }
-
-    // RICS L2 rewrite (Phase 2B, E6): Glazing is now its own labelled
-    // sentence (spec's "Glazing:" paragraph) instead of being folded into
-    // the Description sentence, mirroring E5's WINDOWS_ABOUT/DOOR_GLAZING
-    // split.
-    var glazingText = '';
-    if (glazing.isNotEmpty) {
-      glazingText = _sub('{E_OUTSIDE_DOORS}', '{DOOR_GLAZING}')
-          .replaceAll('{DOOR_GLAZZING}', _toWords(glazing).toLowerCase());
-    }
-    if (doorLocation.isNotEmpty && glazingText.isNotEmpty) {
-      doorLocation = '$doorLocation $glazingText';
-    } else if (glazingText.isNotEmpty) {
-      doorLocation = glazingText;
-    }
-
-    var sgText = '';
-    if (safetyStatus.isNotEmpty) {
-      sgText = _sub(
-          '{E_OUTSIDE_DOORS}',
-          safetyStatus.contains('noted')
-              ? '{DOOR_SG_RATING_NOTED}'
-              : '{DOOR_SG_RATING_NO_SG_RATING}');
-    }
-
-    var conditionText = '';
-    if (condition.isNotEmpty) {
-      conditionText = _sub('{E_OUTSIDE_DOORS}', '{DOOR_CONDITION}')
-          .replaceAll('{DOOR_CONDITION}', condition);
-    }
-
-    // RICS L2 rewrite (Phase 2B, E6): the spec pairs "Security:" with an
-    // "Inadequate Lock:" follow-up sentence whenever the overall security
-    // level is assessed as inadequate. The door repair screens have no
-    // dedicated safety-hazard checkbox to key this off (unlike windows),
-    // so this reuses the existing actv_seciruty_offered dropdown that
-    // already feeds {SECURITY_OFFERED} - the same field, not a new one.
-    var sealingText = '';
-    if (sealing.isNotEmpty && security.isNotEmpty) {
-      sealingText = _sub('{E_OUTSIDE_DOORS}', '{WALL_SEALING}')
-          .replaceAll('{DOOR_SEALING_CONDITION}', sealing)
-          .replaceAll('{SECURITY_OFFERED}', security);
-      if (security.contains('inadequate')) {
-        final lockText = _sub('{E_OUTSIDE_DOORS}', '{INADEQUATE_LOCK_SELECTED}')
-            .replaceAll(
-              '{DOOR_LOCATION}',
-              locations.isNotEmpty
-                  ? _toWords(locations).toLowerCase()
-                  : 'door',
-            );
-        if (lockText.isNotEmpty) {
-          sealingText = '$sealingText<br />\r\n<br />\r\n$lockText';
-        }
-      }
-    }
-
-    template = template
-        .replaceAll('{DOOR_LOCATION}', doorLocation)
-        .replaceAll('{DOOR_SG_RATING_STATUS}', sgText)
-        .replaceAll('{DOOR_CONDITION}', conditionText)
-        .replaceAll('{WALL_SEALING}', sealingText);
-
-    final phrases = _split(_normalize(template)).toList();
-
-    if (_isChecked(answers['cb_replacement'])) {
-      phrases.addAll(
-          _split(_normalize(_sub('{E_OUTSIDE_DOORS}', '{IF_REPLACEMENT}'))));
-    }
-
-    // RICS L2 rewrite (Phase 2B, E6): "Timber Doors" note, gated on the
-    // material screen variant actually being timber.
-    if (materialCode == '{TIMBER}') {
-      phrases.addAll(_split(
-          _normalize(_sub('{E_OUTSIDE_DOORS}', '{TIMBER_DOORS_NOTE}'))));
-    }
-
-    // RICS L2 rewrite (Phase 2B, E6): "Patio and French Doors" note,
-    // gated on the existing "Patio" location checkbox.
-    if (locations.any((l) => l.toLowerCase() == 'patio')) {
-      phrases.addAll(_split(_normalize(
-          _sub('{E_OUTSIDE_DOORS}', '{PATIO_FRENCH_DOORS_NOTE}'))));
-    }
-
-    return phrases;
-  }
-
-  List<String> _outsideDoorsRepair(
-      String screenId, Map<String, String> answers) {
-    final repairType = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_repair_type', 'llMainContainer']),
-    );
-    if (repairType.isEmpty) return const [];
-    final isNow = repairType.contains('now');
-
-    final defects = _labelsFor(
-      isNow
-          ? [
-              'cb_damaged',
-              'cb_rotten',
-              'cb_partly_worn',
-              'cb_failed_glazing',
-              'cb_sticks_against_frame',
-              'cb_poorly_fitted',
-            ]
-          : [
-              'cb_poorly_secured',
-              'cb_inadequate_lock',
-              'cb_rotted_frame',
-              'cb_damaged_lock',
-            ],
-      answers,
-      {
-        'cb_poorly_secured': 'Poorly secured',
-        'cb_inadequate_lock': 'Inadequate lock',
-        'cb_rotted_frame': 'Rotted frame',
-        'cb_damaged_lock': 'Damaged lock',
-        'cb_damaged': 'Damaged',
-        'cb_rotten': 'Rotten',
-        'cb_partly_worn': 'Partly worn',
-        'cb_failed_glazing': 'Failed glazing',
-        'cb_sticks_against_frame': 'Sticks against frame',
-        'cb_poorly_fitted': 'Poorly fitted',
-      },
-    );
-    if (isNow) {
-      final otherDefect = (answers['et_other_855'] ?? '').trim();
-      if (_isChecked(answers['cb_other_837']) && otherDefect.isNotEmpty) {
-        defects.add(otherDefect);
-      }
-    } else {
-      final otherDefect = _firstNonEmpty(answers, ['et_other_362', 'other']);
-      if (_isChecked(answers['cb_other_337']) && otherDefect.isNotEmpty) {
-        defects.add(otherDefect);
-      }
-    }
-    if (defects.isEmpty) return const [];
-
-    final doorLocation = _doorLocationFromScreen(screenId, answers);
-    final repairCode = _doorRepairSection(screenId);
-    var wrapper = _sub('{E_OUTSIDE_DOORS}', repairCode);
-    if (wrapper.isEmpty) return const [];
-
-    final repairTemplate = _sub('{E_OUTSIDE_DOORS}',
-            isNow ? '{DOOR_REPAIR_NOW}' : '{DOOR_REPAIR_SOON}')
-        .replaceAll('{DOOR_LOCATION}', doorLocation)
-        .replaceAll('{DOOR_DEFECT}', _toWords(defects).toLowerCase());
-
-    wrapper = wrapper
-        .replaceAll('{DOOR_REPAIR_SOON}', isNow ? '' : repairTemplate)
-        .replaceAll('{DOOR_REPAIR_NOW}', isNow ? repairTemplate : '');
-
-    final phrases = _split(_normalize(wrapper)).toList();
-    if (_isChecked(answers['cb_damaged_lock'])) {
-      final lock = _sub('{E_OUTSIDE_DOORS}', '{DAMAGED_STOCK_LOCK_SELECTED}')
-          .replaceAll('{DOOR_LOCATION}', doorLocation);
-      phrases.addAll(_split(_normalize(lock)));
-    }
-    if (_isChecked(answers['cb_inadequate_lock'])) {
-      final lock = _sub('{E_OUTSIDE_DOORS}', '{INADEQUATE_LOCK_SELECTED}')
-          .replaceAll('{DOOR_LOCATION}', doorLocation);
-      phrases.addAll(_split(_normalize(lock)));
-    }
-    // RICS L2 rewrite (Phase 2B, E6): the door repair screens have no
-    // dedicated "in disrepair"/"severely damaged" checkbox (unlike the
-    // windows repair screen's cb_are_in_disrepair_33), so the spec's
-    // "if very poor is selected, add this" comprehensive-repair addendum
-    // is derived from the existing Repair Now tier itself - any door
-    // selected for the urgent repair bucket gets this addendum.
-    if (isNow) {
-      phrases.addAll(_split(_normalize(
-          _sub('{E_OUTSIDE_DOORS}', '{DOORS_DEFECT_IF_IN_DISREPAIR}'))));
-    }
-    return phrases;
   }
 
   List<String> _cpLocationConstruction(
@@ -12477,104 +12225,8 @@ class InspectionPhraseEngine {
   }
 
   // Section E: outside door repair location (failed glazing / inadequate lock)
-  List<String> _outsideDoorsRepairLocation(
-      Map<String, String> answers, String repairType) {
-    final locations = <String>[];
-    if (_isChecked(answers['cb_main_63'])) locations.add('main');
-    if (_isChecked(answers['cb_rear_80'])) locations.add('rear');
-    if (_isChecked(answers['cb_side_35'])) locations.add('side');
-    if (_isChecked(answers['cb_patio_42'])) locations.add('patio');
-    if (_isChecked(answers['cb_garage_95'])) locations.add('garage');
-    if (_isChecked(answers['cb_other_791'])) {
-      final other = (answers['et_other_129'] ?? '').trim();
-      if (other.isNotEmpty) {
-        locations.add(other.toLowerCase());
-      }
-    }
-    final defects = <String>[];
-    if (_isChecked(answers['cb_is_damaged_25'])) defects.add('damaged');
-    if (_isChecked(answers['cb_is_rotten_49'])) defects.add('rotten');
-    if (_isChecked(answers['cb_is_partly_worn_73'])) defects.add('partly worn');
-    if (_isChecked(answers['cb_is_poorly_secured_99']))
-      defects.add('poorly secured');
-    if (_isChecked(answers['cb_has_inadequate_lock_89']))
-      defects.add('inadequate lock');
-    if (_isChecked(answers['cb_has_rotted_frame_43']))
-      defects.add('rotted frame');
-    if (_isChecked(answers['cb_has_damaged_lock_74']))
-      defects.add('damaged lock');
-    if (_isChecked(answers['cb_has_failed_glazing_45']))
-      defects.add('failed glazing');
-    if (_isChecked(answers['cb_sticks_against_frame_48']))
-      defects.add('sticks against frame');
-    if (_isChecked(answers['cb_is_poorly_fitted_84']))
-      defects.add('poorly fitted');
-    if (_isChecked(answers['cb_other_641'])) {
-      final other = (answers['et_other_288'] ?? '').trim();
-      if (other.isNotEmpty) {
-        defects.add(other.toLowerCase());
-      }
-    }
-    if (repairType.toLowerCase().contains('inadequate')) {
-      if (locations.isEmpty) return const [];
-      var template = _sub('{E_OUTSIDE_DOORS}', '{DAMAGED_STOCK_LOCK_SELECTED}');
-      if (template.isEmpty) return const [];
-      template = template.replaceAll(
-          '{DOOR_LOCATION}', _toWords(locations).toLowerCase());
-      return _split(_normalize(template));
-    }
-    if (repairType.toLowerCase().contains('failed')) {
-      if (locations.isEmpty) return const [];
-      var template = _sub('{E_OUTSIDE_DOORS}', '{DOOR_REPAIR_SOON}');
-      if (template.isEmpty) return const [];
-      template = template
-          .replaceAll('{DOOR_LOCATION}', _toWords(locations).toLowerCase())
-          .replaceAll('{DOOR_DEFECT}', 'failed glazing');
-      return _split(_normalize(template));
-    }
-    if (locations.isEmpty || defects.isEmpty) return const [];
-    var template = _sub('{E_OUTSIDE_DOORS}', '{DOOR_REPAIR_SOON}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{DOOR_LOCATION}', _toWords(locations).toLowerCase())
-        .replaceAll('{DOOR_DEFECT}', _toWords(defects).toLowerCase());
-    return _split(_normalize(template));
-  }
-
   // Section E: legacy outside doors safety glass status screen
-  List<String> _outsideDoorsSafetyGlassRating(Map<String, String> answers) {
-    final status = _cleanLower(
-      _firstNonEmpty(answers, const ['actv_status', 'llMainContainer']),
-    );
-    if (status.isEmpty) return const [];
-    final template = _sub(
-      '{E_OUTSIDE_DOORS}',
-      status.contains('noted')
-          ? '{DOOR_SG_RATING_NOTED}'
-          : '{DOOR_SG_RATING_NO_SG_RATING}',
-    );
-    if (template.isEmpty) return const [];
-    return _split(_normalize(template));
-  }
-
   // Section E: legacy outside doors wall sealing screen
-  List<String> _outsideDoorsWallSealing(Map<String, String> answers) {
-    final sealing = _cleanLower(
-      _firstNonEmpty(
-        answers,
-        const ['actv_status_security', 'llMainContainer'],
-      ),
-    );
-    final security = _cleanLower(answers['actv_seciruty_offered']);
-    if (sealing.isEmpty || security.isEmpty) return const [];
-    var template = _sub('{E_OUTSIDE_DOORS}', '{WALL_SEALING}');
-    if (template.isEmpty) return const [];
-    template = template
-        .replaceAll('{DOOR_SEALING_CONDITION}', sealing)
-        .replaceAll('{SECURITY_OFFERED}', security);
-    return _split(_normalize(template));
-  }
-
   // Section A: overall opinion
   List<String> _overallOpinion(Map<String, String> answers) {
     final opinion = (answers['android_material_design_spinner5'] ?? '').trim();
@@ -12750,26 +12402,6 @@ class InspectionPhraseEngine {
     if (screenId.contains('__garage_door')) return '{GARAGE_DOOR_REPAIR}';
     if (screenId.contains('__other_door')) return '{OTHER_DOOR_REPAIR}';
     return '{MAIN_DOOR_REPAIR}';
-  }
-
-  static String _doorMaterialFromScreen(
-      String screenId, Map<String, String> answers) {
-    if (screenId.contains('__timber')) return 'Timber';
-    if (screenId.contains('__steel')) return 'Steel';
-    if (screenId.contains('__aluminium')) return 'Aluminium';
-    if (screenId.contains('__other')) {
-      final typed = _firstNonEmpty(answers, ['other', 'et_other_152']).trim();
-      return typed.isNotEmpty ? typed : 'other';
-    }
-    return 'PVC';
-  }
-
-  static String _doorMaterialCodeFromScreen(String screenId) {
-    if (screenId.contains('__timber')) return '{TIMBER}';
-    if (screenId.contains('__steel')) return '{STEEL}';
-    if (screenId.contains('__aluminium')) return '{ALUMINIUM}';
-    if (screenId.contains('__other')) return '{OTHER}';
-    return '{PVC}';
   }
 
   static bool _isPorchScreenVariant(

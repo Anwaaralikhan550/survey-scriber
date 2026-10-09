@@ -1071,7 +1071,8 @@ class ReportBuilder {
     // with, unlike the combined windows screen above.
     final doorsAboutPvc = _answersForScreen(
         rawData, 'activity_outside_property_out_side_doors_about_doors');
-    if (_isCheckedValue(doorsAboutPvc['cb_replacement'])) {
+    if (_isCheckedValue(doorsAboutPvc['e6t_replacement']) &&
+        _isCheckedValue(doorsAboutPvc['e6m_pvcu'])) {
       phrases.add(
           'You should ask your legal adviser to confirm whether the PVC glazed sections to the doors were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
     }
@@ -1654,55 +1655,6 @@ class ReportBuilder {
           'The design of one or more windows does not provide a suitable means of escape for occupants in the event of a fire (see section E5 - Windows).');
     }
 
-    // RICS L2 cross-injections from Section E6 Outside Doors (Phase 2B):
-    // 1 of the spec's 2 door -> J3 (Risk to People) injections. The 2nd
-    // targets "Section J2 Guarantees" per the spec's own text - the same
-    // likely typo documented for E5 above (Guarantees is I2 everywhere
-    // else in the library) - wired as an I2 target (Phase 2F) in
-    // _legacyDerivedSectionFIssueGuarantees above, rather than to the
-    // wrong section.
-    //
-    // The door repair screens have no dedicated safety-hazard/disrepair
-    // checkbox (unlike the windows repair screen's cb_safety_hazard), so
-    // this fires whenever any door location's repair is in the "Repair
-    // now" tier with at least one defect selected - the same signal the
-    // engine's own DOORS_DEFECT_IF_IN_DISREPAIR addendum uses.
-    for (final screenId in const [
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__rear_door',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__side_door',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__patio_door',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__garage_door',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__other_door',
-    ]) {
-      final doorRepair = _answersForScreen(rawData, screenId);
-      final repairType = (doorRepair['actv_repair_type'] ??
-              doorRepair['llMainContainer'] ??
-              '')
-          .trim()
-          .toLowerCase();
-      if (!repairType.contains('now')) continue;
-      final nowDefects = _labelsForAnswerMap(
-        doorRepair,
-        const <String, String>{
-          'cb_damaged': 'damaged',
-          'cb_rotten': 'rotten',
-          'cb_partly_worn': 'partly worn',
-          'cb_failed_glazing': 'failed glazing',
-          'cb_sticks_against_frame': 'sticks against frame',
-          'cb_poorly_fitted': 'poorly fitted',
-          'cb_other_837': 'other',
-        },
-        otherCheckboxId: 'cb_other_837',
-        otherTextId: 'et_other_855',
-      );
-      if (nowDefects.isNotEmpty) {
-        phrases.add(
-            'One or more doors have been affected by single or multiple defects, and this is a health and safety hazard (see section E6 - Outside Doors).');
-        break;
-      }
-    }
-
     // RICS L2 cross-injection from Section E9 Other (Phase 2B): the
     // spec's one E9 -> J3 injection (handrail defects). Not present in
     // the digitised library's crossInjects list for this element (a
@@ -1939,11 +1891,7 @@ class ReportBuilder {
     // safety-relevant fact and takes priority over a Reasonable finding
     // elsewhere on the property.
     const doorScreens = <String>[
-      'activity_outside_property_out_side_doors_about_doors',
-      'activity_outside_property_out_side_doors_about_doors__timber',
-      'activity_outside_property_out_side_doors_about_doors__steel',
-      'activity_outside_property_out_side_doors_about_doors__aluminium',
-      'activity_outside_property_out_side_doors_about_doors__other',
+      'activity_outside_property_out_side_doors_security',
     ];
     var doorSecurityFound = false;
     var doorSecurityInadequate = false;

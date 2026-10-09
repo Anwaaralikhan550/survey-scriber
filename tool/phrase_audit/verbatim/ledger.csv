@@ -536,16 +536,16 @@ c4a5d7bcea,E4,This may help reduce the risk of unexpected repair costs or increa
 2000ff5e12,E5,Not every part of the windows was inspected in detail.,EXACT,{E_WINDOWS}::{WINDOWS_STANDARD_TEXT},100,DONE
 c09008b3f8,E5,The inspection was limited to those parts that were readily accessible without causing damage or moving furnishings.,EXACT,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},100,DONE
 e89b2ed8cc,E5,Only a representative sample of accessible windows was opened and closed during the inspection.,EXACT,{E_WINDOWS}::{WINDOWS_STANDARD_TEXT},100,DONE
-018435007f,E5,"Windows obscured by curtains, blinds, shutters, furniture, stored items, or fitted security devices could not be fully inspected.",MENU,,0,UNVERIFIED
+018435007f,E5,"Windows obscured by curtains, blinds, shutters, furniture, stored items, or fitted security devices could not be fully inspected.",MENU,,0,VERIFIED
 6b5f0611b0,E5,Double-glazed units cannot be assessed for thermal performance during a visual inspection.,EXACT,{E_WINDOWS}::{WINDOWS_STANDARD_TEXT},100,DONE
 a526050f5b,E5,"Description: The windows are formed of replacement, original, old, PVCu, timber, old style timber sash, modern PVC sash, modern timber sash, aluminium, composite, other framed units.",MENU,,0,VERIFIED
 fa6cc7cd82,E5,"Glazing: The glazing comprises single glazing, double glazing, triple glazing, secondary glazing, decorative glazing, other.",MENU,,0,VERIFIED
 2c277561d3,E5,"No BS EN: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
 c752750c88,E5,The absence of visible markings does not necessarily indicate that safety glazing has not been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
-883968ba53,E5,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_WINDOWS}::{E5_BS_EN_NOTED},100,DONE
+883968ba53,E5,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
 e32d884b45,E5,"BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
 9687bc4a30,E5,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
-883968ba53,E5,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_WINDOWS}::{E5_BS_EN_NOTED},100,DONE
+883968ba53,E5,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
 4bf4ec55e8,E5,"Condition: Where visible and operated during the inspection, the windows appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 b06c220d4f,E5,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 c9c2d74cdb,E5,Routine maintenance appropriate to the age of window material should be expected.,EXACT,{E_WINDOWS}::{E5_CONDITION},100,DONE
@@ -555,12 +555,12 @@ a0f072b81c,E5,"In some cases, it may be more economical to replace the windows e
 8666ab823e,E5,Applicable guarantees or warranties should be obtained.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},100,DONE
 95a03d8af8,E5,"If replacement window is selected, add this: The windows appear to have been fully replaced or partially replaced.",EXACT,{E_WINDOWS}::{E5_REPLACEMENT},100,DONE
 c72e03a8f8,E5,"Where replacement windows have been installed, your legal adviser should confirm that the installation was carried out under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable.",EXACT,{E_WINDOWS}::{E5_REPLACEMENT},100,DONE
-908be9d916,E5,Any available guarantees or warranties should also be obtained.,EXACT,{E_OUTSIDE_DOORS}::{IF_REPLACEMENT},100,DONE
+908be9d916,E5,Any available guarantees or warranties should also be obtained.,EXACT,{E_OUTSIDE_DOORS}::{E6_REPLACEMENT},100,DONE
 4d0c644174,E5,"If old-style timber sash is selected, add this: Double-hung sash windows are expensive to maintain and tend to be ill-fitting and allow heat loss.",EXACT,{E_WINDOWS}::{E5_OLD_SASH},100,DONE
 f796181b33,E5,"From time to time, it is important to employ a joiner to inspect the sash windows, check the cords, and ease them before redecoration.",EXACT,{E_WINDOWS}::{E5_OLD_SASH},100,DONE
 fa564e10ed,E5,This is best done in conjunction with the redecoration cycle.,EXACT,{E_WINDOWS}::{E5_OLD_SASH},100,DONE
 7d5710adbe,E5,"Glazing seals: The external sealant around the window frames appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
-61e81feb3b,E5,Defective sealant should be renewed to reduce the risk of water penetration.,EXACT,{E_OUTSIDE_DOORS}::{WALL_SEALING},100,DONE
+61e81feb3b,E5,Defective sealant should be renewed to reduce the risk of water penetration.,EXACT,{E_OUTSIDE_DOORS}::{E6_GLAZING_SEALS},100,DONE
 8f9ba62e75,E5,"Sill projection: Externally, the windowsills beyond the face of the walls appear to project adequately beyond the face of the walls.",EXACT,{E_WINDOWS}::{E5_SILL_PROJECTION},100,DONE
 5a6ee063a1,E5,"The junctions between the window frames and the surrounding wall openings appear to be properly, fairly, poorly sealed.",MENU,,0,VERIFIED
 4fc0f19e36,E5,These seals should be inspected regularly for cracking and repaired as necessary to prevent water ingress.,EXACT,{E_WINDOWS}::{E5_SILL_PROJECTION},100,DONE
@@ -579,9 +579,9 @@ a995b40832,E5,"These are formed in timber, PVCu, aluminium, other construction w
 6d337d4279,E5,Repairs should be undertaken where deterioration is sufficient to affect weather resistance.,EXACT,{E_WINDOWS}::{E5_WINDOWSILLS_CONDITION},100,DONE
 530e26513b,E5,"Operation: The windows selected for operation opened and closed freely, with minor with resistance, with difficulty.",MENU,,0,VERIFIED
 9615dd2218,E5,Windows should be inspected and maintained regularly.,EXACT,{E_WINDOWS}::{E5_OPERATION},100,DONE
-b5f6ebaa83,E5,"Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary.",MENU,,0,UNVERIFIED
+b5f6ebaa83,E5,"Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary.",MENU,,0,VERIFIED
 ce5cea8cbc,E5,Timber windows should be redecorated periodically to maintain protection against weathering.,EXACT,{E_WINDOWS}::{E5_OPERATION},100,DONE
-bf968094ed,E5,Sealants should be inspected and renewed where deterioration becomes evident.,EXACT,{E_WINDOWS}::{E5_OPERATION},100,DONE
+bf968094ed,E5,Sealants should be inspected and renewed where deterioration becomes evident.,EXACT,{E_OUTSIDE_DOORS}::{E6_OPERATION},100,DONE
 b72c4bb38b,E5,Defective Operation One or more windows were found to: • stick during operation • fail to close correctly • fail to lock securely • require adjustment • have damaged hinges • have defective handles • have defective locking mechanisms Repairs or adjustment should be undertaken to maintain security and weather resistance.,MENU,,0,VERIFIED
 829f547424,E5,"Failed Glazed Units: One or more double-glazed units exhibit internal condensation, misting, failed seals.",MENU,,0,VERIFIED
 eaec551dec,E5,"Although this does not usually affect structural performance, replacement of the affected glazing units should be anticipated.",EXACT,{E_WINDOWS_REPAIR}::{WINDOWS_REPAIR_FAILED_GLAZING_LOCATION},100,DONE
@@ -590,7 +590,7 @@ d5e834fc4d,E5,"Damaged glazing should be replaced to maintain safety, security, 
 fe6f55b546,E5,"Hazard: One or more panes are damaged, and this presents a health and safety hazard.",EXACT,{E_WINDOWS}::{E5_GLAZING_HAZARD},100,DONE
 f9cb576084,E5,The damage should be promptly repaired by a qualified professional.,EXACT,{E_WINDOWS}::{E5_GLAZING_HAZARD},100,DONE
 5c18489577,E5,"Timber Windows: Where timber windows are present, localised weathering, paint deterioration, minor decay, other issues may occur as part of their normal service life.",MENU,,0,VERIFIED
-6b81e89e26,E5,Regular decoration and maintenance should be undertaken to prolong their lifespan.,EXACT,{E_OUTSIDE_DOORS}::{TIMBER_DOORS_NOTE},100,DONE
+6b81e89e26,E5,Regular decoration and maintenance should be undertaken to prolong their lifespan.,EXACT,{E_OUTSIDE_DOORS}::{E6_TIMBER_DOORS},100,DONE
 6897237343,E5,Condensation: Some condensation was noted on the glazing at the time of inspection.,EXACT,{E_WINDOWS}::{E5_CONDENSATION},100,DONE
 3731c4eb2b,E5,"Condensation is influenced by occupancy, heating and ventilation and does not necessarily indicate a defect with the windows.",EXACT,{E_WINDOWS}::{E5_CONDENSATION},100,DONE
 f2c01529b6,E5,Fire Trap Risk: The design of the window(s) does not provide a suitable means of escape in the event of a fire.,EXACT,{E_WINDOWS}::{E5_FIRE_TRAP},100,DONE
@@ -602,54 +602,54 @@ f2c01529b6,E5,Fire Trap Risk: The design of the window(s) does not provide a sui
 ccdacaf396,E6,"The operation and performance of locks, alarms and security systems were not assessed.",EXACT,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},100,DONE
 8e8dbd3a62,E6,Not every part of the external doors was inspected in detail.,EXACT,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},100,DONE
 0b767179a4,E6,The inspection was limited to those parts that were readily accessible without causing damage or moving furnishings.,EXACT,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},100,DONE
-eaa726c31b,E6,"Description: The property incorporates replacement, original, old, front, rear, side, patio, French, bi-fold, other doors.",MENU,,0,UNVERIFIED
-acd8eb5a95,E6,"The external doors are formed of timber, PVCu, composite, aluminium, steel, other material.",MENU,,0,UNVERIFIED
-9bc2be547b,E6,"Glazing: The glazed sections comprise single glazing, double glazing, triple glazing, decorative glazing, other.",MENU,,0,UNVERIFIED
+eaa726c31b,E6,"Description: The property incorporates replacement, original, old, front, rear, side, patio, French, bi-fold, other doors.",MENU,,0,VERIFIED
+acd8eb5a95,E6,"The external doors are formed of timber, PVCu, composite, aluminium, steel, other material.",MENU,,0,VERIFIED
+9bc2be547b,E6,"Glazing: The glazed sections comprise single glazing, double glazing, triple glazing, decorative glazing, other.",MENU,,0,VERIFIED
 d93549dc6f,E6,The presence of safety glazing cannot be confirmed by visual inspection unless permanently marked.,EXACT,{E_OUTSIDE_DOORS}::{DOOR_GLAZING},100,DONE
 72d0f17d63,E6,"No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
 8da4a6885d,E6,The absence of visible markings does not necessarily indicate that safety glazing has not been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
-02e3810ae9,E6,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_WINDOWS}::{E5_BS_EN_NOTED},100,DONE
+02e3810ae9,E6,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
 2cf4d089e1,E6,"BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
 80ee6e0447,E6,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
-02e3810ae9,E6,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_WINDOWS}::{E5_BS_EN_NOTED},100,DONE
-170e3dd974,E6,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,UNVERIFIED
+02e3810ae9,E6,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+170e3dd974,E6,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 1015d63015,E6,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 abf3231871,E6,Routine maintenance appropriate to the door material should be expected.,EXACT,{E_OUTSIDE_DOORS}::{DOOR_CONDITION},100,DONE
 a266a5e3dc,E6,"If very poor is selected, add this: Doors that are in poor condition or in disrepair will require comprehensive repair.",EXACT,{E_OUTSIDE_DOORS}::{DOORS_DEFECT_IF_IN_DISREPAIR},100,DONE
 1aa0418a9c,E6,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_OUTSIDE_DOORS}::{DOORS_DEFECT_IF_IN_DISREPAIR},100,DONE
 40ba31a2f9,E6,"This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},100,DONE
 069377096e,E6,Applicable guarantees or warranties should be obtained.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_DEFECT_IF_IN_DISREPAIR},100,DONE
-0a7aad4a9e,E6,"If replacement door is selected, add this: The doors appear to have been fully replaced or partially replaced.",EXACT,{E_OUTSIDE_DOORS}::{IF_REPLACEMENT},100,DONE
-c7f77c79e0,E6,"Where replacement doors have been installed, your legal adviser should confirm that the installation was carried out under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable.",EXACT,{E_OUTSIDE_DOORS}::{IF_REPLACEMENT},100,DONE
-467bb0e381,E6,Any available guarantees or warranties should also be obtained.,EXACT,{E_OUTSIDE_DOORS}::{IF_REPLACEMENT},100,DONE
-e6cfdeaa21,E6,"Glazing seals: The external sealant around the door frames appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-c3319631e6,E6,Defective sealant should be renewed to reduce the risk of water penetration.,EXACT,{E_OUTSIDE_DOORS}::{WALL_SEALING},100,DONE
-70c6f70162,E6,"Repair doors: The door(s) in the lounge, dining room, bedroom, kitchen, other, have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk, have other defects.",MENU,,0,UNVERIFIED
+0a7aad4a9e,E6,"If replacement door is selected, add this: The doors appear to have been fully replaced or partially replaced.",EXACT,{E_OUTSIDE_DOORS}::{E6_REPLACEMENT},100,DONE
+c7f77c79e0,E6,"Where replacement doors have been installed, your legal adviser should confirm that the installation was carried out under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable.",EXACT,{E_OUTSIDE_DOORS}::{E6_REPLACEMENT},100,DONE
+467bb0e381,E6,Any available guarantees or warranties should also be obtained.,EXACT,{E_OUTSIDE_DOORS}::{E6_REPLACEMENT},100,DONE
+e6cfdeaa21,E6,"Glazing seals: The external sealant around the door frames appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+c3319631e6,E6,Defective sealant should be renewed to reduce the risk of water penetration.,EXACT,{E_OUTSIDE_DOORS}::{E6_GLAZING_SEALS},100,DONE
+70c6f70162,E6,"Repair doors: The door(s) in the lounge, dining room, bedroom, kitchen, other, have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk, have other defects.",MENU,,0,VERIFIED
 8af274db27,E6,"Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration.",MENU,,0,VERIFIED
-465a6c98dd,E6,"Where the defects affect the weather-tightness, security, or safe operation of the doors, repairs should be undertaken without delay.",UNRESOLVED,{E_OUTSIDE_DOORS}::{DOOR_CONDITION},49,OPEN
-d2cbb0cd9f,E6,Severely damaged doors should be repaired or replaced immediately.,FIX,{E_OUTSIDE_DOORS}::{DOORS_DEFECT_IF_IN_DISREPAIR},73,OPEN
-8263c49218,E6,"Thresholds: The door thresholds appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,UNVERIFIED
-11b7ceb2a0,E6,Minor wear is consistent with normal use.,ADD,{E_OUTSIDE_DOORS}::{DOOR_CONDITION},42,OPEN
-e93cd6e1ef,E6,Defective thresholds should be repaired where deterioration affects weather resistance or safe operation.,ADD,{E_OUTSIDE_DOORS}::{WALL_SEALING},63,OPEN
-799e3ab030,E6,"Operation: The doors selected for operation opened and closed freely, with resistance, with difficulty.",UNRESOLVED,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},48,OPEN
-4041c8688b,E6,Doors should be inspected and maintained regularly.,ADD,{E_OUTSIDE_DOORS}::{PATIO_FRENCH_DOORS_NOTE},60,OPEN
+465a6c98dd,E6,"Where the defects affect the weather-tightness, security, or safe operation of the doors, repairs should be undertaken without delay.",EXACT,{E_OUTSIDE_DOORS}::{E6_REPAIR_DOORS},100,DONE
+d2cbb0cd9f,E6,Severely damaged doors should be repaired or replaced immediately.,EXACT,{E_OUTSIDE_DOORS}::{E6_REPAIR_DOORS},100,DONE
+8263c49218,E6,"Thresholds: The door thresholds appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
+11b7ceb2a0,E6,Minor wear is consistent with normal use.,EXACT,{E_OUTSIDE_DOORS}::{E6_THRESHOLDS},100,DONE
+e93cd6e1ef,E6,Defective thresholds should be repaired where deterioration affects weather resistance or safe operation.,EXACT,{E_OUTSIDE_DOORS}::{E6_THRESHOLDS},100,DONE
+799e3ab030,E6,"Operation: The doors selected for operation opened and closed freely, with resistance, with difficulty.",MENU,,0,VERIFIED
+4041c8688b,E6,Doors should be inspected and maintained regularly.,EXACT,{E_OUTSIDE_DOORS}::{E6_OPERATION},100,DONE
 9c7b9def04,E6,"Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary.",MENU,,0,UNVERIFIED
-a243f3f367,E6,Timber doors should be redecorated periodically to maintain protection against weathering.,ADD,{E_OUTSIDE_DOORS}::{INADEQUATE_LOCK_SELECTED},51,OPEN
-1a7e89ae92,E6,Sealants should be inspected and renewed where deterioration becomes evident.,EXACT,{E_WINDOWS}::{E5_OPERATION},100,DONE
-40a13daf06,E6,"Security: The doors are fitted with multi-point locking, mortice locks, cylinder locks, night latches, combination of locking systems.",MENU,,0,UNVERIFIED
-8ed7c23e9b,E6,"The level of security appears reasonable, adequate, inadequate based upon a visual inspection only.",UNRESOLVED,{E_OUTSIDE_DOORS}::{WALL_SEALING},80,OPEN
-2ed6a09f23,E6,The effectiveness of locks and security devices has not been evaluated.,EXACT,{E_OUTSIDE_DOORS}::{WALL_SEALING},100,DONE
-4fe7835679,E6,"Inadequate Lock: The locking arrangements to the main, rear, side, patio, sliding patio doors, French doors, or bi-fold doors, other door(s), do not meet current security standards and present a security risk.",MENU,,0,UNVERIFIED
-aa4b8bf879,E6,The locks should be upgraded at the earliest opportunity to improve the security of the property.,EXACT,{E_OUTSIDE_DOORS}::{INADEQUATE_LOCK_SELECTED},100,DONE
-22e6425497,E6,"Defective Operation One or more external doors were found to: • stick during operation • fail to close correctly • require adjustment • have damaged hinges • have defective handles • have defective locking mechanisms • be distorted • have localised decay • have damaged frames Repairs or adjustment should be undertaken to maintain security, weather resistance, and ease of operation.",MENU,,0,UNVERIFIED
-5ea4ac6ce0,E6,"Timber Doors: Where timber external doors are present, localised weathering, paint deterioration, surface splitting, minor decay may occur as part of their normal service life.",MENU,,0,UNVERIFIED
-1f77090411,E6,Regular decoration and maintenance should be undertaken to prolong their lifespan.,EXACT,{E_OUTSIDE_DOORS}::{TIMBER_DOORS_NOTE},100,DONE
-0a47eb5440,E6,"Patio and French Doors: The property incorporates sliding patio doors, French doors, bi-fold doors, other similar doors.",MENU,,0,UNVERIFIED
-9e187c08d1,E6,"The running gear, hinges and locking mechanisms should be inspected and maintained periodically.",EXACT,{E_OUTSIDE_DOORS}::{PATIO_FRENCH_DOORS_NOTE},100,DONE
-b0227e39d3,E6,General Maintenance: External doors should be inspected and maintained regularly.,ADD,{E_OUTSIDE_DOORS}::{PATIO_FRENCH_DOORS_NOTE},64,OPEN
+a243f3f367,E6,Timber doors should be redecorated periodically to maintain protection against weathering.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
+1a7e89ae92,E6,Sealants should be inspected and renewed where deterioration becomes evident.,EXACT,{E_OUTSIDE_DOORS}::{E6_OPERATION},100,DONE
+40a13daf06,E6,"Security: The doors are fitted with multi-point locking, mortice locks, cylinder locks, night latches, combination of locking systems.",MENU,,0,VERIFIED
+8ed7c23e9b,E6,"The level of security appears reasonable, adequate, inadequate based upon a visual inspection only.",MENU,,0,VERIFIED
+2ed6a09f23,E6,The effectiveness of locks and security devices has not been evaluated.,EXACT,{E_OUTSIDE_DOORS}::{E6_SECURITY},100,DONE
+4fe7835679,E6,"Inadequate Lock: The locking arrangements to the main, rear, side, patio, sliding patio doors, French doors, or bi-fold doors, other door(s), do not meet current security standards and present a security risk.",MENU,,0,VERIFIED
+aa4b8bf879,E6,The locks should be upgraded at the earliest opportunity to improve the security of the property.,EXACT,{E_OUTSIDE_DOORS}::{E6_INADEQUATE_LOCK},100,DONE
+22e6425497,E6,"Defective Operation One or more external doors were found to: • stick during operation • fail to close correctly • require adjustment • have damaged hinges • have defective handles • have defective locking mechanisms • be distorted • have localised decay • have damaged frames Repairs or adjustment should be undertaken to maintain security, weather resistance, and ease of operation.",MENU,,0,VERIFIED
+5ea4ac6ce0,E6,"Timber Doors: Where timber external doors are present, localised weathering, paint deterioration, surface splitting, minor decay may occur as part of their normal service life.",MENU,,0,VERIFIED
+1f77090411,E6,Regular decoration and maintenance should be undertaken to prolong their lifespan.,EXACT,{E_OUTSIDE_DOORS}::{E6_TIMBER_DOORS},100,DONE
+0a47eb5440,E6,"Patio and French Doors: The property incorporates sliding patio doors, French doors, bi-fold doors, other similar doors.",MENU,,0,VERIFIED
+9e187c08d1,E6,"The running gear, hinges and locking mechanisms should be inspected and maintained periodically.",EXACT,{E_OUTSIDE_DOORS}::{E6_PATIO_FRENCH},100,DONE
+b0227e39d3,E6,General Maintenance: External doors should be inspected and maintained regularly.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
 d7754938e2,E6,"Moving parts, hinges, locks, handles, and seals should be cleaned, lubricated, and adjusted where necessary.",MENU,,0,UNVERIFIED
-a243f3f367,E6,Timber doors should be redecorated periodically to maintain protection against weathering.,ADD,{E_OUTSIDE_DOORS}::{INADEQUATE_LOCK_SELECTED},51,OPEN
-1cef5b3463,E6,Flexible sealants should be inspected and renewed where deterioration becomes evident.,ADD,{E_OUTSIDE_DOORS}::{WALL_SEALING},59,OPEN
+a243f3f367,E6,Timber doors should be redecorated periodically to maintain protection against weathering.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
+1cef5b3463,E6,Flexible sealants should be inspected and renewed where deterioration becomes evident.,EXACT,{E_OUTSIDE_DOORS}::{E6_GENERAL_MAINTENANCE},100,DONE
 6f1e83ec96,E7,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_APPLICABLE},100,DONE
 1b49094a40,E7,No further comments are necessary.,EXACT,{E_CS_CHIMNEY_INSPECTION_STATUS}::{NOT_APPLICABLE},100,DONE
 068020f5cc,E7,"This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom, other similar structures.",MENU,,0,UNVERIFIED
@@ -661,11 +661,11 @@ a733e1e8c4,E7,"The walls comprise single-glazed, double-glazed, triple-glazed, P
 7af427800f,E7,"Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).",MENU,,0,UNVERIFIED
 4a0a150ed9,E7,"No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
 6a399d2047,E7,The absence of visible markings does not necessarily indicate that safety glazing has not been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
-1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_WINDOWS}::{E5_BS_EN_NOTED},100,DONE
+1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
 dcd0c7bd51,E7,"BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
 03522b3f3f,E7,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
-1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_WINDOWS}::{E5_BS_EN_NOTED},100,DONE
-9e7a7d495d,E7,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,UNVERIFIED
+1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+9e7a7d495d,E7,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 5609d069d0,E7,Conservatories require routine maintenance appropriate to their age and construction.,ADD,{E_CONSERVATORY_PORCHES}::{PORCH_CONDITION},62,OPEN
 762dfb518d,E7,"Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability.",MENU,,0,UNVERIFIED
 7e49dd84fb,E7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
@@ -691,11 +691,11 @@ a733e1e8c4,E7,"The walls comprise single-glazed, double-glazed, triple-glazed, P
 7af427800f,E7,"Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).",MENU,,0,UNVERIFIED
 4a0a150ed9,E7,"No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
 6a399d2047,E7,The absence of visible markings does not necessarily indicate that safety glazing has not been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NO_SG_RATING},100,DONE
-1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_WINDOWS}::{E5_BS_EN_NOTED},100,DONE
+1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
 dcd0c7bd51,E7,"BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing.",EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
 03522b3f3f,E7,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_SAFETY_GLASS_RATING_NOTED},100,DONE
-1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_WINDOWS}::{E5_BS_EN_NOTED},100,DONE
-9e7a7d495d,E7,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,UNVERIFIED
+1a660bc0a1,E7,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_OUTSIDE_DOORS}::{E6_BS_EN_NOTED},100,DONE
+9e7a7d495d,E7,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 d53974d068,E7,Porches require routine maintenance appropriate to their age and construction.,ADD,{E_CONSERVATORY_PORCHES}::{PORCH_CONDITION},65,OPEN
 762dfb518d,E7,"Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability.",MENU,,0,UNVERIFIED
 7e49dd84fb,E7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE

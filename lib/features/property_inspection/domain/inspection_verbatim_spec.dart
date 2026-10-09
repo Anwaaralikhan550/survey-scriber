@@ -3375,6 +3375,372 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: '1',
     whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
   ),
+  VerbatimRule(
+    'e6_intro',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{STANDARD_TEXT}',
+    [
+    ],
+    first: true,
+    whenField: 'actv_condition',
+    whenValue: 'Good',
+    whenAny: [['actv_condition', 'Reasonable'], ['actv_condition', 'Fair'], ['actv_condition', 'Poor'], ['actv_condition', 'Very poor']],
+  ),
+  VerbatimRule(
+    'e6_desc',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{DOOR_TYPES}',
+        options: {
+          'e6t_replacement': 'replacement',
+          'e6t_original': 'original',
+          'e6t_old': 'old',
+          'e6t_front': 'front',
+          'e6t_rear': 'rear',
+          'e6t_side': 'side',
+          'e6t_patio': 'patio',
+          'e6t_french': 'French',
+          'e6t_bi_fold': 'bi-fold',
+        },
+        otherCheckbox: 'cb_other_859',
+        otherText: 'et_other_179',
+        pdfOptions: ['replacement', 'original', 'old', 'front', 'rear', 'side', 'patio', 'French', 'bi-fold'],
+      ),
+    ],
+    pdf:
+        'Description: The property incorporates replacement, original, old, front, rear, side, patio, French, bi-fold, other doors.',
+  ),
+  VerbatimRule(
+    'e6_material',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_MATERIAL}',
+    [
+      VerbatimToken(
+        '{DOOR_MATERIALS}',
+        options: {
+          'e6m_timber': 'timber',
+          'e6m_pvcu': 'PVCu',
+          'e6m_composite': 'composite',
+          'e6m_aluminium': 'aluminium',
+          'e6m_steel': 'steel',
+        },
+        otherCheckbox: 'e6m_other',
+        otherText: 'e6m_other_text',
+        pdfOptions: ['timber', 'PVCu', 'composite', 'aluminium', 'steel'],
+      ),
+    ],
+    pdf:
+        'The external doors are formed of timber, PVCu, composite, aluminium, steel, other material.',
+  ),
+  VerbatimRule(
+    'e6_glazing',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_GLAZING}',
+    [
+      VerbatimToken(
+        '{DOOR_GLAZING}',
+        options: {
+          'e6g_single_glazing': 'single glazing',
+          'e6g_double_glazing': 'double glazing',
+          'e6g_triple_glazing': 'triple glazing',
+          'e6g_decorative_glazing': 'decorative glazing',
+        },
+        otherCheckbox: 'e6g_other',
+        otherText: 'e6g_other_text',
+        pdfOptions: ['single glazing', 'double glazing', 'triple glazing', 'decorative glazing'],
+      ),
+    ],
+    pdf:
+        'Glazing: The glazed sections comprise single glazing, double glazing, triple glazing, decorative glazing, other.',
+  ),
+  VerbatimRule(
+    'e6_bs_no',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_NO_BS_EN}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No BS EN noted',
+  ),
+  VerbatimRule(
+    'e6_bs_yes',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_BS_EN_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'BS EN noted',
+  ),
+  VerbatimRule(
+    'e6_condition',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_CONDITION}',
+    [
+      VerbatimToken(
+        '{DOOR_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.',
+  ),
+  VerbatimRule(
+    'e6_very_poor',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_VERY_POOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Very poor',
+  ),
+  VerbatimRule(
+    'e6_replacement',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_REPLACEMENT}',
+    [
+    ],
+    whenField: 'e6t_replacement',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e6_seals',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_GLAZING_SEALS}',
+    [
+      VerbatimToken(
+        '{DOOR_SEAL_CONDITION}',
+        dropdown: 'actv_seals',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Glazing seals: The external sealant around the door frames appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e6_repair',
+    'activity_outside_property_out_side_doors_repairs_repair_out_side_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_REPAIR_DOORS}',
+    [
+      VerbatimToken(
+        '{REPAIR_LOCATIONS}',
+        options: {
+          'e6rl_lounge': 'lounge',
+          'e6rl_dining_room': 'dining room',
+          'e6rl_bedroom': 'bedroom',
+          'e6rl_kitchen': 'kitchen',
+        },
+        otherCheckbox: 'cb_other_337',
+        otherText: 'et_other_362',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen'],
+      ),
+      VerbatimToken(
+        '{REPAIR_DEFECTS}',
+        options: {
+          'e6rd_have_damaged_lock_s': 'have damaged lock(s)',
+          'e6rd_have_missing_lock_s': 'have missing lock(s)',
+          'e6rd_are_difficult_to_open': 'are difficult to open',
+          'e6rd_are_badly_worn': 'are badly worn',
+          'e6rd_are_rotten': 'are rotten',
+          'e6rd_have_broken_glass': 'have broken glass',
+          'e6rd_have_failed_glazing': 'have failed glazing',
+          'e6rd_are_in_disrepair': 'are in disrepair',
+          'e6rd_are_severely_damaged': 'are severely damaged',
+          'e6rd_present_a_safety_or_security_risk': 'present a safety or security risk',
+          'e6rd_have_other_defects': 'have other defects',
+        },
+        pdfOptions: ['have damaged lock(s)', 'have missing lock(s)', 'are difficult to open', 'are badly worn', 'are rotten', 'have broken glass', 'have failed glazing', 'are in disrepair', 'are severely damaged', 'present a safety or security risk', 'have other defects'],
+      ),
+    ],
+    pdf:
+        'Repair doors: The door(s) in the lounge, dining room, bedroom, kitchen, other, have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk, have other defects.',
+    pdfMore: [
+      'Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration.',
+    ],
+  ),
+  VerbatimRule(
+    'e6_thresholds',
+    'activity_outside_property_out_side_doors_thresholds',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_THRESHOLDS}',
+    [
+      VerbatimToken(
+        '{THRESHOLD_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Thresholds: The door thresholds appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e6_operation',
+    'activity_outside_property_out_side_doors_operation',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_OPERATION}',
+    [
+      VerbatimToken(
+        '{DOOR_OPERATION}',
+        dropdown: 'actv_operation',
+        dropdownOptions: ['Freely', 'With resistance', 'With difficulty'],
+        lower: true,
+        pdfOptions: ['freely', 'with resistance', 'with difficulty'],
+      ),
+    ],
+    pdf:
+        'Operation: The doors selected for operation opened and closed freely, with resistance, with difficulty.',
+  ),
+  VerbatimRule(
+    'e6_security',
+    'activity_outside_property_out_side_doors_security',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_SECURITY}',
+    [
+      VerbatimToken(
+        '{DOOR_LOCKS}',
+        options: {
+          'e6lk_multi_point_locking': 'multi-point locking',
+          'e6lk_mortice_locks': 'mortice locks',
+          'e6lk_cylinder_locks': 'cylinder locks',
+          'e6lk_night_latches': 'night latches',
+          'e6lk_combination_of_locking_systems': 'combination of locking systems',
+        },
+        pdfOptions: ['multi-point locking', 'mortice locks', 'cylinder locks', 'night latches', 'combination of locking systems'],
+      ),
+      VerbatimToken(
+        '{DOOR_SECURITY_LEVEL}',
+        dropdown: 'actv_seciruty_offered',
+        dropdownOptions: ['Reasonable', 'Adequate', 'Inadequate'],
+        lower: true,
+        pdfOptions: ['reasonable', 'adequate', 'inadequate'],
+      ),
+    ],
+    pdf:
+        'Security: The doors are fitted with multi-point locking, mortice locks, cylinder locks, night latches, combination of locking systems.',
+    pdfMore: [
+      'The level of security appears reasonable, adequate, inadequate based upon a visual inspection only.',
+    ],
+  ),
+  VerbatimRule(
+    'e6_inadequate_lock',
+    'activity_outside_property_out_side_doors_repairs_inadequate_lock_location',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_INADEQUATE_LOCK}',
+    [
+      VerbatimToken(
+        '{LOCK_LOCATIONS}',
+        options: {
+          'e6il_main': 'main',
+          'e6il_rear': 'rear',
+          'e6il_side': 'side',
+          'e6il_patio': 'patio',
+          'e6il_sliding_patio_doors': 'sliding patio doors',
+          'e6il_french_doors': 'French doors',
+          'e6il_bi_fold_doors': 'bi-fold doors',
+        },
+        otherCheckbox: 'cb_other_il',
+        otherText: 'et_other_il',
+        pdfOptions: ['main', 'rear', 'side', 'patio', 'sliding patio doors', 'French doors', 'bi-fold doors'],
+      ),
+    ],
+    pdf:
+        'Inadequate Lock: The locking arrangements to the main, rear, side, patio, sliding patio doors, French doors, or bi-fold doors, other door(s), do not meet current security standards and present a security risk.',
+  ),
+  VerbatimRule(
+    'e6_defective_op',
+    'activity_outside_property_out_side_doors_defective_operation',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_DEFECTIVE_OPERATION}',
+    [
+      VerbatimToken(
+        '{DOOR_DEFECTIVE_OPERATION}',
+        options: {
+          'e6do_stick_during_operation': 'stick during operation',
+          'e6do_fail_to_close_correctly': 'fail to close correctly',
+          'e6do_require_adjustment': 'require adjustment',
+          'e6do_have_damaged_hinges': 'have damaged hinges',
+          'e6do_have_defective_handles': 'have defective handles',
+          'e6do_have_defective_locking_mechanisms': 'have defective locking mechanisms',
+          'e6do_be_distorted': 'be distorted',
+          'e6do_have_localised_decay': 'have localised decay',
+          'e6do_have_damaged_frames': 'have damaged frames',
+        },
+        pdfOptions: ['stick during operation', 'fail to close correctly', 'require adjustment', 'have damaged hinges', 'have defective handles', 'have defective locking mechanisms', 'be distorted', 'have localised decay', 'have damaged frames'],
+      ),
+    ],
+    pdf:
+        'Defective Operation One or more external doors were found to: • stick during operation • fail to close correctly • require adjustment • have damaged hinges • have defective handles • have defective locking mechanisms • be distorted • have localised decay • have damaged frames Repairs or adjustment should be undertaken to maintain security, weather resistance, and ease of operation.',
+  ),
+  VerbatimRule(
+    'e6_timber',
+    'activity_outside_property_out_side_doors_timber_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_TIMBER_DOORS}',
+    [
+      VerbatimToken(
+        '{TIMBER_DOOR_ISSUES}',
+        options: {
+          'e6td_localised_weathering': 'localised weathering',
+          'e6td_paint_deterioration': 'paint deterioration',
+          'e6td_surface_splitting': 'surface splitting',
+          'e6td_minor_decay': 'minor decay',
+        },
+        pdfOptions: ['localised weathering', 'paint deterioration', 'surface splitting', 'minor decay'],
+      ),
+    ],
+    pdf:
+        'Timber Doors: Where timber external doors are present, localised weathering, paint deterioration, surface splitting, minor decay may occur as part of their normal service life.',
+  ),
+  VerbatimRule(
+    'e6_patio',
+    'activity_outside_property_out_side_doors_patio_french',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_PATIO_FRENCH}',
+    [
+      VerbatimToken(
+        '{PATIO_DOORS}',
+        options: {
+          'e6pf_sliding_patio_doors': 'sliding patio doors',
+          'e6pf_french_doors': 'French doors',
+          'e6pf_bi_fold_doors': 'bi-fold doors',
+        },
+        otherCheckbox: 'e6pf_other',
+        otherText: 'e6pf_other_text',
+        pdfOptions: ['sliding patio doors', 'French doors', 'bi-fold doors'],
+      ),
+    ],
+    pdf:
+        'Patio and French Doors: The property incorporates sliding patio doors, French doors, bi-fold doors, other similar doors.',
+  ),
+  VerbatimRule(
+    'e6_general',
+    'activity_outside_property_out_side_doors_patio_french',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

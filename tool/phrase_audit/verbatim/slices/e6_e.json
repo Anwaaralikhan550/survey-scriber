@@ -1,0 +1,914 @@
+[
+  {
+    "screen": "activity_outside_property_out_side_doors_about_doors",
+    "set_title": "About doors",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e6_intro",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{STANDARD_TEXT}",
+        "text": "Only a representative sample of accessible doors was opened and closed during the inspection. Doors obstructed by security devices, stored items, furniture, or other restrictions could not be fully inspected. The operation and performance of locks, alarms and security systems were not assessed. Not every part of the external doors was inspected in detail. The inspection was limited to those parts that were readily accessible without causing damage or moving furnishings.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Good"
+        ],
+        "when_any": [
+          [
+            "actv_condition",
+            "Reasonable"
+          ],
+          [
+            "actv_condition",
+            "Fair"
+          ],
+          [
+            "actv_condition",
+            "Poor"
+          ],
+          [
+            "actv_condition",
+            "Very poor"
+          ]
+        ],
+        "first": true
+      },
+      {
+        "id": "e6_desc",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_DESCRIPTION}",
+        "text": "Description: The property incorporates {DOOR_TYPES} doors.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DOOR_TYPES}",
+            "options": [
+              [
+                "e6t_replacement",
+                "replacement"
+              ],
+              [
+                "e6t_original",
+                "original"
+              ],
+              [
+                "e6t_old",
+                "old"
+              ],
+              [
+                "e6t_front",
+                "front"
+              ],
+              [
+                "e6t_rear",
+                "rear"
+              ],
+              [
+                "e6t_side",
+                "side"
+              ],
+              [
+                "e6t_patio",
+                "patio"
+              ],
+              [
+                "e6t_french",
+                "French"
+              ],
+              [
+                "e6t_bi_fold",
+                "bi-fold"
+              ]
+            ],
+            "pdf_options": [
+              "replacement",
+              "original",
+              "old",
+              "front",
+              "rear",
+              "side",
+              "patio",
+              "French",
+              "bi-fold"
+            ],
+            "label": "The property incorporates",
+            "other": [
+              "cb_other_859",
+              "et_other_179"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The property incorporates replacement, original, old, front, rear, side, patio, French, bi-fold, other doors."
+        ]
+      },
+      {
+        "id": "e6_material",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_MATERIAL}",
+        "text": "The external doors are formed of {DOOR_MATERIALS} material.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DOOR_MATERIALS}",
+            "options": [
+              [
+                "e6m_timber",
+                "timber"
+              ],
+              [
+                "e6m_pvcu",
+                "PVCu"
+              ],
+              [
+                "e6m_composite",
+                "composite"
+              ],
+              [
+                "e6m_aluminium",
+                "aluminium"
+              ],
+              [
+                "e6m_steel",
+                "steel"
+              ]
+            ],
+            "pdf_options": [
+              "timber",
+              "PVCu",
+              "composite",
+              "aluminium",
+              "steel"
+            ],
+            "label": "Formed of",
+            "other": [
+              "e6m_other",
+              "e6m_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "The external doors are formed of timber, PVCu, composite, aluminium, steel, other material."
+        ]
+      },
+      {
+        "id": "e6_glazing",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_GLAZING}",
+        "text": "Glazing: The glazed sections comprise {DOOR_GLAZING}. The presence of safety glazing cannot be confirmed by visual inspection unless permanently marked.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DOOR_GLAZING}",
+            "options": [
+              [
+                "e6g_single_glazing",
+                "single glazing"
+              ],
+              [
+                "e6g_double_glazing",
+                "double glazing"
+              ],
+              [
+                "e6g_triple_glazing",
+                "triple glazing"
+              ],
+              [
+                "e6g_decorative_glazing",
+                "decorative glazing"
+              ]
+            ],
+            "pdf_options": [
+              "single glazing",
+              "double glazing",
+              "triple glazing",
+              "decorative glazing"
+            ],
+            "label": "Glazing",
+            "other": [
+              "e6g_other",
+              "e6g_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Glazing: The glazed sections comprise single glazing, double glazing, triple glazing, decorative glazing, other."
+        ]
+      },
+      {
+        "id": "e6_bs_no",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_NO_BS_EN}",
+        "text": "No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The absence of visible markings does not necessarily indicate that safety glazing has not been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "No BS EN noted"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Safety glass markings",
+            "type": "dropdown",
+            "options": [
+              "No BS EN noted",
+              "BS EN noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e6_bs_yes",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_BS_EN_NOTED}",
+        "text": "BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The absence of visible markings does not necessarily indicate that safety glazing has not been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows. BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The presence of visible markings indicates that safety glazing has been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "BS EN noted"
+        ]
+      },
+      {
+        "id": "e6_condition",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_CONDITION}",
+        "text": "Condition: Where visible and operated during the inspection, the doors appear in {DOOR_CONDITION} condition, consistent with their age and type. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the door material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{DOOR_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type."
+        ]
+      },
+      {
+        "id": "e6_very_poor",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_VERY_POOR}",
+        "text": "Doors that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the doors entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Very poor"
+        ]
+      },
+      {
+        "id": "e6_replacement",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_REPLACEMENT}",
+        "text": "The doors appear to have been fully replaced or partially replaced. Where replacement doors have been installed, your legal adviser should confirm that the installation was carried out under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Any available guarantees or warranties should also be obtained.",
+        "tokens": [],
+        "when": [
+          "e6t_replacement",
+          "true"
+        ]
+      },
+      {
+        "id": "e6_seals",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_GLAZING_SEALS}",
+        "text": "Glazing seals: The external sealant around the door frames appears in {DOOR_SEAL_CONDITION} condition. Defective sealant should be renewed to reduce the risk of water penetration.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{DOOR_SEAL_CONDITION}",
+            "dropdown": "actv_seals",
+            "field_label": "Glazing seals condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Glazing seals: The external sealant around the door frames appears in good, reasonable, fair, poor, very poor condition."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_out_side_doors_repairs_repair_out_side_doors",
+    "set_title": "Repair doors",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e6_repair",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_REPAIR_DOORS}",
+        "text": "Repair doors: The door(s) in the {REPAIR_LOCATIONS} {REPAIR_DEFECTS}. Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration. Where the defects affect the weather-tightness, security, or safe operation of the doors, repairs should be undertaken without delay. Severely damaged doors should be repaired or replaced immediately.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{REPAIR_LOCATIONS}",
+            "options": [
+              [
+                "e6rl_lounge",
+                "lounge"
+              ],
+              [
+                "e6rl_dining_room",
+                "dining room"
+              ],
+              [
+                "e6rl_bedroom",
+                "bedroom"
+              ],
+              [
+                "e6rl_kitchen",
+                "kitchen"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "dining room",
+              "bedroom",
+              "kitchen"
+            ],
+            "label": "Doors in",
+            "other": [
+              "cb_other_337",
+              "et_other_362"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{REPAIR_DEFECTS}",
+            "options": [
+              [
+                "e6rd_have_damaged_lock_s",
+                "have damaged lock(s)"
+              ],
+              [
+                "e6rd_have_missing_lock_s",
+                "have missing lock(s)"
+              ],
+              [
+                "e6rd_are_difficult_to_open",
+                "are difficult to open"
+              ],
+              [
+                "e6rd_are_badly_worn",
+                "are badly worn"
+              ],
+              [
+                "e6rd_are_rotten",
+                "are rotten"
+              ],
+              [
+                "e6rd_have_broken_glass",
+                "have broken glass"
+              ],
+              [
+                "e6rd_have_failed_glazing",
+                "have failed glazing"
+              ],
+              [
+                "e6rd_are_in_disrepair",
+                "are in disrepair"
+              ],
+              [
+                "e6rd_are_severely_damaged",
+                "are severely damaged"
+              ],
+              [
+                "e6rd_present_a_safety_or_security_risk",
+                "present a safety or security risk"
+              ],
+              [
+                "e6rd_have_other_defects",
+                "have other defects"
+              ]
+            ],
+            "pdf_options": [
+              "have damaged lock(s)",
+              "have missing lock(s)",
+              "are difficult to open",
+              "are badly worn",
+              "are rotten",
+              "have broken glass",
+              "have failed glazing",
+              "are in disrepair",
+              "are severely damaged",
+              "present a safety or security risk",
+              "have other defects"
+            ],
+            "label": "Defects"
+          }
+        ],
+        "pdf": [
+          "Repair doors: The door(s) in the lounge, dining room, bedroom, kitchen, other, have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk, have other defects.",
+          "Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_out_side_doors_thresholds",
+    "new_screen": {
+      "id": "activity_outside_property_out_side_doors_thresholds",
+      "title": "Thresholds",
+      "parent": "group_outside_doors_24",
+      "order": 4,
+      "after": "activity_outside_property_out_side_doors_about_doors"
+    },
+    "rules": [
+      {
+        "id": "e6_thresholds",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_THRESHOLDS}",
+        "text": "Thresholds: The door thresholds appear in {THRESHOLD_CONDITION} condition. Minor wear is consistent with normal use. Defective thresholds should be repaired where deterioration affects weather resistance or safe operation.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{THRESHOLD_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Thresholds: The door thresholds appear in good, reasonable, fair, poor, very poor condition."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_out_side_doors_operation",
+    "new_screen": {
+      "id": "activity_outside_property_out_side_doors_operation",
+      "title": "Operation",
+      "parent": "group_outside_doors_24",
+      "order": 6,
+      "after": "activity_outside_property_out_side_doors_thresholds"
+    },
+    "rules": [
+      {
+        "id": "e6_operation",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_OPERATION}",
+        "text": "Operation: The doors selected for operation opened and closed {DOOR_OPERATION}. Doors should be inspected and maintained regularly. Moving parts, hinges, locks, and drainage channels should be cleaned, lubricated, and adjusted where necessary. Timber doors should be redecorated periodically to maintain protection against weathering. Sealants should be inspected and renewed where deterioration becomes evident.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{DOOR_OPERATION}",
+            "dropdown": "actv_operation",
+            "field_label": "Doors opened and closed",
+            "dropdown_options": [
+              "Freely",
+              "With resistance",
+              "With difficulty"
+            ],
+            "pdf_options": [
+              "freely",
+              "with resistance",
+              "with difficulty"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Operation: The doors selected for operation opened and closed freely, with resistance, with difficulty."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_out_side_doors_security",
+    "new_screen": {
+      "id": "activity_outside_property_out_side_doors_security",
+      "title": "Security",
+      "parent": "group_outside_doors_24",
+      "order": 8,
+      "after": "activity_outside_property_out_side_doors_operation"
+    },
+    "rules": [
+      {
+        "id": "e6_security",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_SECURITY}",
+        "text": "Security: The doors are fitted with {DOOR_LOCKS}. The level of security appears {DOOR_SECURITY_LEVEL} based upon a visual inspection only. The effectiveness of locks and security devices has not been evaluated.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DOOR_LOCKS}",
+            "options": [
+              [
+                "e6lk_multi_point_locking",
+                "multi-point locking"
+              ],
+              [
+                "e6lk_mortice_locks",
+                "mortice locks"
+              ],
+              [
+                "e6lk_cylinder_locks",
+                "cylinder locks"
+              ],
+              [
+                "e6lk_night_latches",
+                "night latches"
+              ],
+              [
+                "e6lk_combination_of_locking_systems",
+                "combination of locking systems"
+              ]
+            ],
+            "pdf_options": [
+              "multi-point locking",
+              "mortice locks",
+              "cylinder locks",
+              "night latches",
+              "combination of locking systems"
+            ],
+            "label": "Doors are fitted with"
+          },
+          {
+            "kind": "dropdown",
+            "token": "{DOOR_SECURITY_LEVEL}",
+            "dropdown": "actv_seciruty_offered",
+            "field_label": "Level of security",
+            "dropdown_options": [
+              "Reasonable",
+              "Adequate",
+              "Inadequate"
+            ],
+            "pdf_options": [
+              "reasonable",
+              "adequate",
+              "inadequate"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Security: The doors are fitted with multi-point locking, mortice locks, cylinder locks, night latches, combination of locking systems.",
+          "The level of security appears reasonable, adequate, inadequate based upon a visual inspection only."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_out_side_doors_repairs_inadequate_lock_location",
+    "replace_all": true,
+    "keep": [],
+    "set_title": "Inadequate lock",
+    "rules": [
+      {
+        "id": "e6_inadequate_lock",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_INADEQUATE_LOCK}",
+        "text": "Inadequate Lock: The locking arrangements to the {LOCK_LOCATIONS}, do not meet current security standards and present a security risk. The locks should be upgraded at the earliest opportunity to improve the security of the property.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{LOCK_LOCATIONS}",
+            "options": [
+              [
+                "e6il_main",
+                "main"
+              ],
+              [
+                "e6il_rear",
+                "rear"
+              ],
+              [
+                "e6il_side",
+                "side"
+              ],
+              [
+                "e6il_patio",
+                "patio"
+              ],
+              [
+                "e6il_sliding_patio_doors",
+                "sliding patio doors"
+              ],
+              [
+                "e6il_french_doors",
+                "French doors"
+              ],
+              [
+                "e6il_bi_fold_doors",
+                "bi-fold doors"
+              ]
+            ],
+            "pdf_options": [
+              "main",
+              "rear",
+              "side",
+              "patio",
+              "sliding patio doors",
+              "French doors",
+              "bi-fold doors"
+            ],
+            "label": "Locking arrangements to",
+            "other": [
+              "cb_other_il",
+              "et_other_il"
+            ]
+          }
+        ],
+        "pdf": [
+          "Inadequate Lock: The locking arrangements to the main, rear, side, patio, sliding patio doors, French doors, or bi-fold doors, other door(s), do not meet current security standards and present a security risk."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_out_side_doors_defective_operation",
+    "new_screen": {
+      "id": "activity_outside_property_out_side_doors_defective_operation",
+      "title": "Defective operation",
+      "parent": "group_outside_doors_24",
+      "order": 10,
+      "after": "activity_outside_property_out_side_doors_security"
+    },
+    "rules": [
+      {
+        "id": "e6_defective_op",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_DEFECTIVE_OPERATION}",
+        "text": "Defective Operation One or more external doors were found to: {DOOR_DEFECTIVE_OPERATION}. Repairs or adjustment should be undertaken to maintain security, weather resistance, and ease of operation.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DOOR_DEFECTIVE_OPERATION}",
+            "options": [
+              [
+                "e6do_stick_during_operation",
+                "stick during operation"
+              ],
+              [
+                "e6do_fail_to_close_correctly",
+                "fail to close correctly"
+              ],
+              [
+                "e6do_require_adjustment",
+                "require adjustment"
+              ],
+              [
+                "e6do_have_damaged_hinges",
+                "have damaged hinges"
+              ],
+              [
+                "e6do_have_defective_handles",
+                "have defective handles"
+              ],
+              [
+                "e6do_have_defective_locking_mechanisms",
+                "have defective locking mechanisms"
+              ],
+              [
+                "e6do_be_distorted",
+                "be distorted"
+              ],
+              [
+                "e6do_have_localised_decay",
+                "have localised decay"
+              ],
+              [
+                "e6do_have_damaged_frames",
+                "have damaged frames"
+              ]
+            ],
+            "pdf_options": [
+              "stick during operation",
+              "fail to close correctly",
+              "require adjustment",
+              "have damaged hinges",
+              "have defective handles",
+              "have defective locking mechanisms",
+              "be distorted",
+              "have localised decay",
+              "have damaged frames"
+            ],
+            "label": "External doors were found to"
+          }
+        ],
+        "pdf": [
+          "Defective Operation One or more external doors were found to: • stick during operation • fail to close correctly • require adjustment • have damaged hinges • have defective handles • have defective locking mechanisms • be distorted • have localised decay • have damaged frames Repairs or adjustment should be undertaken to maintain security, weather resistance, and ease of operation."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_out_side_doors_timber_doors",
+    "new_screen": {
+      "id": "activity_outside_property_out_side_doors_timber_doors",
+      "title": "Timber doors",
+      "parent": "group_outside_doors_24",
+      "order": 12,
+      "after": "activity_outside_property_out_side_doors_defective_operation"
+    },
+    "rules": [
+      {
+        "id": "e6_timber",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_TIMBER_DOORS}",
+        "text": "Timber Doors: Where timber external doors are present, {TIMBER_DOOR_ISSUES} may occur as part of their normal service life. Regular decoration and maintenance should be undertaken to prolong their lifespan.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{TIMBER_DOOR_ISSUES}",
+            "options": [
+              [
+                "e6td_localised_weathering",
+                "localised weathering"
+              ],
+              [
+                "e6td_paint_deterioration",
+                "paint deterioration"
+              ],
+              [
+                "e6td_surface_splitting",
+                "surface splitting"
+              ],
+              [
+                "e6td_minor_decay",
+                "minor decay"
+              ]
+            ],
+            "pdf_options": [
+              "localised weathering",
+              "paint deterioration",
+              "surface splitting",
+              "minor decay"
+            ],
+            "label": "Issues that may occur"
+          }
+        ],
+        "pdf": [
+          "Timber Doors: Where timber external doors are present, localised weathering, paint deterioration, surface splitting, minor decay may occur as part of their normal service life."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_out_side_doors_patio_french",
+    "new_screen": {
+      "id": "activity_outside_property_out_side_doors_patio_french",
+      "title": "Patio and French doors",
+      "parent": "group_outside_doors_24",
+      "order": 14,
+      "after": "activity_outside_property_out_side_doors_timber_doors"
+    },
+    "rules": [
+      {
+        "id": "e6_patio",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_PATIO_FRENCH}",
+        "text": "Patio and French Doors: The property incorporates {PATIO_DOORS}. The running gear, hinges and locking mechanisms should be inspected and maintained periodically.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{PATIO_DOORS}",
+            "options": [
+              [
+                "e6pf_sliding_patio_doors",
+                "sliding patio doors"
+              ],
+              [
+                "e6pf_french_doors",
+                "French doors"
+              ],
+              [
+                "e6pf_bi_fold_doors",
+                "bi-fold doors"
+              ]
+            ],
+            "pdf_options": [
+              "sliding patio doors",
+              "French doors",
+              "bi-fold doors"
+            ],
+            "label": "The property incorporates",
+            "other": [
+              "e6pf_other",
+              "e6pf_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Patio and French Doors: The property incorporates sliding patio doors, French doors, bi-fold doors, other similar doors."
+        ]
+      },
+      {
+        "id": "e6_general",
+        "masters": [
+          "{E_OUTSIDE_DOORS}"
+        ],
+        "sub": "{E6_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: External doors should be inspected and maintained regularly. Moving parts, hinges, locks, handles, and seals should be cleaned, lubricated, and adjusted where necessary. Timber doors should be redecorated periodically to maintain protection against weathering. Flexible sealants should be inspected and renewed where deterioration becomes evident.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_outside_property_out_side_doors_about_doors__timber",
+      "activity_outside_property_out_side_doors_about_doors__steel",
+      "activity_outside_property_out_side_doors_about_doors__aluminium",
+      "activity_outside_property_out_side_doors_about_doors__other",
+      "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__rear_door",
+      "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__side_door",
+      "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__patio_door",
+      "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__garage_door",
+      "activity_outside_property_out_side_doors_repairs_repair_out_side_doors__other_door",
+      "activity_outside_property_out_side_doors_repairs_failed_glazing_location"
+    ]
+  }
+]

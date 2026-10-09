@@ -43,7 +43,7 @@ import sys
 import tempfile
 
 sys.path.insert(0, os.path.dirname(__file__))
-from treeedit import add_screen, edit_screen_fields, field, remove_screen  # noqa: E402
+from treeedit import add_screen, edit_screen_fields, field, remove_screen, set_title  # noqa: E402
 
 SPEC = 'lib/features/property_inspection/domain/inspection_verbatim_spec.dart'
 MARK = '  // <<verbatim-rules-end>>'
@@ -155,6 +155,8 @@ def apply_slice(sl):
                 print('removed screen', sid)
         return
     screen = sl['screen']
+    if sl.get('set_title'):
+        set_title(screen, sl['set_title'])
     ns = sl.get('new_screen')
     removes = list(sl.get('remove_fields', []))
     if ns:
