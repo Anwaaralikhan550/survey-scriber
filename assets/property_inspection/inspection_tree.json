@@ -12489,153 +12489,108 @@
           "order": 2,
           "fields": [
             {
-              "id": "label_building_regulation",
-              "label": "Building Regulation",
-              "type": "label"
-            },
-            {
-              "id": "cb_removed_wall",
-              "label": "Removed wall",
+              "id": "cb_i1_intro",
+              "label": "Standard introduction",
               "type": "checkbox"
             },
             {
-              "id": "cb_replacement_roof_covering",
-              "label": "Replacement roof covering",
+              "id": "cb_i1_alterations",
+              "label": "Property alterations",
               "type": "checkbox"
-            },
-            {
-              "id": "cb_conservatory",
-              "label": "Conservatory",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_638",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_332",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_638",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_planning_permission",
-              "label": "Planning permission",
-              "type": "label"
-            },
-            {
-              "id": "cb_kitchen_extension",
-              "label": "Kitchen extension",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_rear_extension",
-              "label": "Rear extension",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_loft_conversion",
-              "label": "Loft conversion",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_459",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_575",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_459",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_glazed_sections",
-              "label": "Glazed Sections",
-              "type": "label"
-            },
-            {
-              "id": "cb_windows",
-              "label": "Windows",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_doors",
-              "label": "Doors",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_conservatory_glazed",
-              "label": "Conservatory",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_porch",
-              "label": "Porch",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_other_952",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "et_other_154",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_952",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
             },
             {
               "id": "cb_new_build",
-              "label": "New Build",
+              "label": "New build property",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_roof",
+              "label": "Roof alterations and loft conversions",
               "type": "checkbox"
             },
             {
               "id": "cb_converted_building",
-              "label": "Converted Building",
+              "label": "Converted building",
               "type": "checkbox"
             },
             {
-              "id": "actv_conversion_status",
-              "label": "Conversion Status",
-              "type": "dropdown",
-              "options": [
-                "Known",
-                "Unknown"
-              ],
-              "conditionalOn": "cb_converted_building",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
+              "id": "cb_i1_chimney",
+              "label": "Chimney breast alterations",
+              "type": "checkbox"
             },
             {
-              "id": "actv_before_built_as",
-              "label": "Conversion Status",
-              "type": "dropdown",
-              "options": [
-                "A semi detached house",
-                "A detached house",
-                "A warehouse",
-                "An office block",
-                "Other"
-              ],
-              "conditionalOn": "cb_converted_building&actv_conversion_status=Known",
-              "conditionalMode": "show"
+              "id": "cb_i1_windows",
+              "label": "Replacement windows and doors",
+              "type": "checkbox"
             },
             {
-              "id": "cb_conservation",
-              "label": "Conservation Area",
+              "id": "cb_i1_electrical",
+              "label": "Electrical installation",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_gas",
+              "label": "Gas installation",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_asbestos",
+              "label": "Asbestos",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_flood",
+              "label": "Flood risk",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_mining",
+              "label": "Mining and ground stability",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_trees",
+              "label": "Trees",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_row",
+              "label": "Rights of way and easements",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_boundaries",
+              "label": "Boundaries",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_shared",
+              "label": "Shared facilities",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_roads",
+              "label": "Private roads and shared access",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_drainage",
+              "label": "Drainage",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_leasehold",
+              "label": "Leasehold property",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_i1_freehold",
+              "label": "Freehold property",
               "type": "checkbox"
             },
             {
               "id": "cb_listed_building",
-              "label": "Listed Building",
+              "label": "Listed building",
               "type": "checkbox"
             }
           ]

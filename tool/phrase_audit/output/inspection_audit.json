@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1951,
+   "distinctEmitted": 1950,
    "approvedLegacyBank": 209,
-   "approvedCurrentBankOnly": 1715,
+   "approvedCurrentBankOnly": 1714,
    "unapproved": 0
   }
  },
@@ -2917,19 +2917,19 @@
    "sectionKey": "I",
    "screenId": "activity_issues_regulation",
    "title": "I1 Regulation",
-   "dataFieldCount": 22,
-   "permutationCount": 34,
+   "dataFieldCount": 21,
+   "permutationCount": 23,
    "severities": [],
    "phraseStats": {
-    "total": 22,
+    "total": 21,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 22,
+    "approvedCurrentBankOnly": 21,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "You should ask your legal adviser to confirm whether the removed wall received building regulation approval (including the issuing of a completion certificate) from the local council and advise on the implications.",
-    "You should ask your legal adviser to confirm whether the removed replacement roof covering received building regulation approval (including the issuing of a completion certificate) from the local council and advise on the implications.",
-    "You should ask your legal adviser to confirm whether the removed conservatory received building regulation approval (including the issuing of a completion certificate) from the local council and advise on the implications."
+    "The comments below are based solely on a visual inspection of the property and should not be regarded as legal advice. Your legal adviser should make appropriate enquiries and obtain supporting documentation where necessary. Your legal adviser should investigate and confirm the following, where applicable:",
+    "Property Alterations – Whether extensions, alterations, conversions, or structural modifications have the necessary Planning Permission, Building Regulation approval, Completion Certificates, and any other statutory consents.",
+    "New Build Property: Your legal adviser should confirm whether the property benefits from a recognised new home warranty (such as NHBC, LABC, Premier Guarantee or equivalent), the remaining period of cover, the extent of the protection provided, and whether all relevant completion certificates and warranty documentation are available."
    ]
   },
   {

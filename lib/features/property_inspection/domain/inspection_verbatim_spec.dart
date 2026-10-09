@@ -10531,6 +10531,216 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'actv_h3_management',
     whenValue: 'Management D',
   ),
+  VerbatimRule(
+    'i1_intro',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_INTRO}',
+    [
+    ],
+    whenField: 'cb_i1_intro',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_alterations',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_PROPERTY_ALTERATIONS}',
+    [
+    ],
+    whenField: 'cb_i1_alterations',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_new_build',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_NEW_BUILD}',
+    [
+    ],
+    whenField: 'cb_new_build',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_roof',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_ROOF_ALTERATIONS}',
+    [
+    ],
+    whenField: 'cb_i1_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_converted',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_CONVERTED_BUILDING}',
+    [
+    ],
+    whenField: 'cb_converted_building',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_chimney',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_CHIMNEY_BREAST}',
+    [
+    ],
+    whenField: 'cb_i1_chimney',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_windows',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_REPLACEMENT_WINDOWS}',
+    [
+    ],
+    whenField: 'cb_i1_windows',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_electrical',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_ELECTRICAL}',
+    [
+    ],
+    whenField: 'cb_i1_electrical',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_gas',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_GAS}',
+    [
+    ],
+    whenField: 'cb_i1_gas',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_asbestos',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_ASBESTOS}',
+    [
+    ],
+    whenField: 'cb_i1_asbestos',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_flood',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_FLOOD_RISK}',
+    [
+    ],
+    whenField: 'cb_i1_flood',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_mining',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_MINING}',
+    [
+    ],
+    whenField: 'cb_i1_mining',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_trees',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_TREES}',
+    [
+    ],
+    whenField: 'cb_i1_trees',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_row',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_RIGHTS_OF_WAY}',
+    [
+    ],
+    whenField: 'cb_i1_row',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_boundaries',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_BOUNDARIES}',
+    [
+    ],
+    whenField: 'cb_i1_boundaries',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_shared',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_SHARED_FACILITIES}',
+    [
+    ],
+    whenField: 'cb_i1_shared',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_roads',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_PRIVATE_ROADS}',
+    [
+    ],
+    whenField: 'cb_i1_roads',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_drainage',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_DRAINAGE}',
+    [
+    ],
+    whenField: 'cb_i1_drainage',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_leasehold',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_LEASEHOLD}',
+    [
+    ],
+    whenField: 'cb_i1_leasehold',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_freehold',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_FREEHOLD}',
+    [
+    ],
+    whenField: 'cb_i1_freehold',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_listed',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_LISTED_BUILDING}',
+    [
+    ],
+    whenField: 'cb_listed_building',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

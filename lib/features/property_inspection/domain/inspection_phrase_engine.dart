@@ -705,7 +705,7 @@ class InspectionPhraseEngine {
       case 'activity_outside_property_other_not_inspected':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_issues_regulation':
-        return _issuesRegulation(answers);
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_issues_glazed_sections':
         return _issuesGuarantees(answers);
       case 'activity_issues_other_matters':
@@ -2419,137 +2419,6 @@ class InspectionPhraseEngine {
         phrases.addAll(_split(_normalize(template)));
       }
     }
-    return phrases;
-  }
-
-  List<String> _issuesRegulation(Map<String, String> answers) {
-    // Section I (Legal Issues) - approved bank imported in Phase 4 from the
-    // legacy tbl_issue_phrase/tbl_sub_issue_phrase tables (never ported by
-    // the original migration; see tool/phrase_audit/import_issue_risk_bank.py).
-    final phrases = <String>[];
-
-    final buildingRegulation = _labelsFor(
-      [
-        'cb_removed_wall',
-        'cb_replacement_roof_covering',
-        'cb_conservatory',
-        'cb_other_638'
-      ],
-      answers,
-      {
-        // The approved template already supplies a fixed "the removed"
-        // prefix ("...confirm whether the removed {ITEMS} received..."),
-        // so this option must not repeat the word itself or it doubles
-        // ("the removed removed wall").
-        'cb_removed_wall': 'wall',
-        'cb_replacement_roof_covering': 'replacement roof covering',
-        'cb_conservatory': 'conservatory',
-        'cb_other_638': 'other',
-      },
-    );
-    _addOther(answers, 'cb_other_638', 'et_other_332', buildingRegulation);
-    if (buildingRegulation.isNotEmpty) {
-      var template =
-          _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_BUILDING_REGULATION}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_splitResolved(template.replaceAll(
-          '{BUILDING_REGULATION}',
-          _toWords(buildingRegulation).toLowerCase(),
-        )));
-      }
-    }
-
-    final planningPermission = _labelsFor(
-      [
-        'cb_kitchen_extension',
-        'cb_rear_extension',
-        'cb_loft_conversion',
-        'cb_other_459'
-      ],
-      answers,
-      {
-        'cb_kitchen_extension': 'kitchen extension',
-        'cb_rear_extension': 'rear extension',
-        'cb_loft_conversion': 'loft conversion',
-        'cb_other_459': 'other',
-      },
-    );
-    _addOther(answers, 'cb_other_459', 'et_other_575', planningPermission);
-    if (planningPermission.isNotEmpty) {
-      var template =
-          _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_PLANNING_PERMISSION}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_splitResolved(template.replaceAll(
-          '{PLANNING_PERMISSION}',
-          _toWords(planningPermission).toLowerCase(),
-        )));
-      }
-    }
-
-    final glazedSections = _labelsFor(
-      [
-        'cb_windows',
-        'cb_doors',
-        'cb_conservatory_glazed',
-        'cb_porch',
-        'cb_other_952'
-      ],
-      answers,
-      {
-        'cb_windows': 'windows',
-        'cb_doors': 'doors',
-        'cb_conservatory_glazed': 'conservatory',
-        'cb_porch': 'porch',
-        'cb_other_952': 'other',
-      },
-    );
-    _addOther(answers, 'cb_other_952', 'et_other_154', glazedSections);
-    if (glazedSections.isNotEmpty) {
-      var template =
-          _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_GLAZED_SECTIONS}');
-      if (template.isNotEmpty) {
-        phrases.addAll(_splitResolved(template.replaceAll(
-          '{GLAZED_SECTIONS}',
-          _toWords(glazedSections).toLowerCase(),
-        )));
-      }
-    }
-
-    if (_isChecked(answers['cb_new_build'])) {
-      final template = _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_NEW_BUILD}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
-    if (_isChecked(answers['cb_converted_building'])) {
-      final builtAs = (answers['actv_before_built_as'] ?? '').trim();
-      // The approved KNOWN/UNKNOWN templates already narrate the
-      // known-vs-unknown distinction in bank wording via which sub-code is
-      // selected; an extra ad-hoc "recorded as known/unknown" sentence
-      // would just restate the same fact outside the approved bank.
-      final subCode = builtAs.isNotEmpty
-          ? '{REGULATIONS_CONVERSION_STATUS_KNOW}'
-          : '{REGULATIONS_CONVERSION_STATUS_UNKNOW}';
-      var template = _sub('{ISSUE_REGULATIONS}', subCode);
-      if (template.isNotEmpty) {
-        template = template.replaceAll(
-          '{REG_CONV_STATUS_KNOWN_ORI_BUILT}',
-          builtAs.toLowerCase(),
-        );
-        phrases.addAll(_splitResolved(template));
-      }
-    }
-
-    if (_isChecked(answers['cb_conservation'])) {
-      final template = _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_CONSERVATION}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
-    if (_isChecked(answers['cb_listed_building'])) {
-      final template =
-          _sub('{ISSUE_REGULATIONS}', '{REGULATIONS_LISTED_BUILDING}');
-      if (template.isNotEmpty) phrases.addAll(_splitResolved(template));
-    }
-
     return phrases;
   }
 

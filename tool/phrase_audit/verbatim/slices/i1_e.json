@@ -1,0 +1,429 @@
+[
+  {
+    "screen": "activity_issues_regulation",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "i1_intro",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_INTRO}",
+        "text": "The comments below are based solely on a visual inspection of the property and should not be regarded as legal advice. Your legal adviser should make appropriate enquiries and obtain supporting documentation where necessary. Your legal adviser should investigate and confirm the following, where applicable:",
+        "tokens": [],
+        "when": [
+          "cb_i1_intro",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_intro",
+            "label": "Standard introduction",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_alterations",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_PROPERTY_ALTERATIONS}",
+        "text": "Property Alterations – Whether extensions, alterations, conversions, or structural modifications have the necessary Planning Permission, Building Regulation approval, Completion Certificates, and any other statutory consents.",
+        "tokens": [],
+        "when": [
+          "cb_i1_alterations",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_alterations",
+            "label": "Property alterations",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_new_build",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_NEW_BUILD}",
+        "text": "New Build Property: Your legal adviser should confirm whether the property benefits from a recognised new home warranty (such as NHBC, LABC, Premier Guarantee or equivalent), the remaining period of cover, the extent of the protection provided, and whether all relevant completion certificates and warranty documentation are available.",
+        "tokens": [],
+        "when": [
+          "cb_new_build",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_new_build",
+            "label": "New build property",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_roof",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_ROOF_ALTERATIONS}",
+        "text": "Roof Alterations and Loft Conversions – Whether roof replacements, structural roof alterations or loft conversions have the necessary statutory approvals and completion certificates.",
+        "tokens": [],
+        "when": [
+          "cb_i1_roof",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_roof",
+            "label": "Roof alterations and loft conversions",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_converted",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_CONVERTED_BUILDING}",
+        "text": "Converted Building: The property forms part of a building that has been converted from its original use into residential accommodation. Your legal adviser should confirm that the conversion and any subsequent alterations received the necessary Planning Permission (where required), Building Regulation approval, and Completion Certificate. They should also confirm that any associated guarantees, warranties, and statutory documentation are available and advise on any implications for the property's value, marketability, and mortgageability.",
+        "tokens": [],
+        "when": [
+          "cb_converted_building",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_converted_building",
+            "label": "Converted building",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_chimney",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_CHIMNEY_BREAST}",
+        "text": "Chimney Breast Alterations – Whether the removal or alteration of chimney breasts received Building Regulation approval and any required structural certification.",
+        "tokens": [],
+        "when": [
+          "cb_i1_chimney",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_chimney",
+            "label": "Chimney breast alterations",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_windows",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_REPLACEMENT_WINDOWS}",
+        "text": "Replacement Windows and Doors – Whether replacement installations comply with Building Regulations and have appropriate certification.",
+        "tokens": [],
+        "when": [
+          "cb_i1_windows",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_windows",
+            "label": "Replacement windows and doors",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_electrical",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_ELECTRICAL}",
+        "text": "Electrical Installation – Whether a recent Electrical Installation Condition Report (EICR) is available.",
+        "tokens": [],
+        "when": [
+          "cb_i1_electrical",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_electrical",
+            "label": "Electrical installation",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_gas",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_GAS}",
+        "text": "Gas Installation – Whether recent gas safety inspections and servicing records are available.",
+        "tokens": [],
+        "when": [
+          "cb_i1_gas",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_gas",
+            "label": "Gas installation",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_asbestos",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_ASBESTOS}",
+        "text": "Asbestos – Whether asbestos surveys or asbestos management information are available where asbestos-containing materials are suspected.",
+        "tokens": [],
+        "when": [
+          "cb_i1_asbestos",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_asbestos",
+            "label": "Asbestos",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_flood",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_FLOOD_RISK}",
+        "text": "Flood Risk – Environmental searches to establish flood risk and any previous flooding.",
+        "tokens": [],
+        "when": [
+          "cb_i1_flood",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_flood",
+            "label": "Flood risk",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_mining",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_MINING}",
+        "text": "Mining and Ground Stability – Mining, ground stability, or other relevant environmental searches where appropriate.",
+        "tokens": [],
+        "when": [
+          "cb_i1_mining",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_mining",
+            "label": "Mining and ground stability",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_trees",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_TREES}",
+        "text": "Trees – Whether Tree Preservation Orders, Conservation Area restrictions or other legal constraints apply.",
+        "tokens": [],
+        "when": [
+          "cb_i1_trees",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_trees",
+            "label": "Trees",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_row",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_RIGHTS_OF_WAY}",
+        "text": "Rights of Way and Easements – Rights of access, easements, wayleaves, covenants, and any other rights affecting the property.",
+        "tokens": [],
+        "when": [
+          "cb_i1_row",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_row",
+            "label": "Rights of way and easements",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_boundaries",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_BOUNDARIES}",
+        "text": "Boundaries – Boundary ownership and maintenance responsibilities from the title documentation.",
+        "tokens": [],
+        "when": [
+          "cb_i1_boundaries",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_boundaries",
+            "label": "Boundaries",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_shared",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_SHARED_FACILITIES}",
+        "text": "Shared Facilities – Ownership, maintenance obligations, service charges, reserve funds, and future liabilities.",
+        "tokens": [],
+        "when": [
+          "cb_i1_shared",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_shared",
+            "label": "Shared facilities",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_roads",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_PRIVATE_ROADS}",
+        "text": "Private Roads and Shared Access – Maintenance responsibilities and associated financial obligations.",
+        "tokens": [],
+        "when": [
+          "cb_i1_roads",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_roads",
+            "label": "Private roads and shared access",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_drainage",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_DRAINAGE}",
+        "text": "Drainage – The drainage arrangement, maintenance responsibilities, and compliance with current regulations where applicable.",
+        "tokens": [],
+        "when": [
+          "cb_i1_drainage",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_drainage",
+            "label": "Drainage",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_leasehold",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_LEASEHOLD}",
+        "text": "Leasehold Property – Remaining lease term, ground rent, service charges, reserve fund contributions, planned major works, lease restrictions and repair obligations.",
+        "tokens": [],
+        "when": [
+          "cb_i1_leasehold",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_leasehold",
+            "label": "Leasehold property",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_freehold",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_FREEHOLD}",
+        "text": "Freehold Property – Any restrictive covenants, estate charges or management arrangements affecting the property.",
+        "tokens": [],
+        "when": [
+          "cb_i1_freehold",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i1_freehold",
+            "label": "Freehold property",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i1_listed",
+        "masters": [
+          "{ISSUE_REGULATIONS}"
+        ],
+        "sub": "{I1_LISTED_BUILDING}",
+        "text": "Listed Building: The property may be a listed building. Your legal adviser should confirm its listed status, the grade of listing, and explain the legal implications of ownership. Listed buildings are subject to statutory protection, and alterations, extensions, repairs, or demolition may require Listed Building Consent and, where applicable, Planning Permission. Repairs may also need to be carried out using traditional materials and specialist contractors, which can increase maintenance and repair costs.",
+        "tokens": [],
+        "when": [
+          "cb_listed_building",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_listed_building",
+            "label": "Listed building",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]
