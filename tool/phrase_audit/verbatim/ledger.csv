@@ -653,7 +653,7 @@ a243f3f367,E6,Timber doors should be redecorated periodically to maintain protec
 6f1e83ec96,E7,Not Applicable: The property does not incorporate the element(s) referred to in this section.,EXACT,{E_CHIMNEY}::{E1L_NOT_APPLICABLE},100,DONE
 1b49094a40,E7,No further comments are necessary.,EXACT,{E_CHIMNEY}::{E1L_NOT_APPLICABLE},100,DONE
 068020f5cc,E7,"This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom, other similar structures.",MENU,,0,DONE
-1e09e3bfb6,E7,"Where no conservatory or porch is present, this section is not applicable.",EXACT,{E_CONSERVATORY_PORCHES}::{STANDARD_TEXT},100,DONE
+1e09e3bfb6,E7,"Where no conservatory or porch is present, this section is not applicable.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_SCOPE},100,DONE
 0bcf4fe1a3,E7,"Conservatory: The conservatory(s) is located to the front, side, rear, other of the building.",MENU,,0,VERIFIED
 a733e1e8c4,E7,"The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections.",MENU,,0,VERIFIED
 9a678b16cf,E7,"Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials.",MENU,,0,VERIFIED
@@ -1773,7 +1773,7 @@ a7947d7b63,J3,"As a precaution, we recommend that an asbestos identification sur
 8ec887184e,J3,The inspection undertaken for this survey is not intended to identify or confirm the presence of asbestos.,EXACT,{RISK_TO_PEOPLE}::{J3_ASBESTOS},100,DONE
 cd60cf98c4,J3,"According to the Health and Safety Executive (HSE), asbestos-containing materials do not normally present a significant health risk if they are in good condition and remain undisturbed.",EXACT,{RISK_TO_PEOPLE}::{J3_ASBESTOS},100,DONE
 ee1faf1c43,J3,"However, if such materials are damaged, drilled, cut, or otherwise disturbed, asbestos fibres may be released, posing a health hazard and requiring specialist management or removal.",MENU,,0,DONE
-b3cdc1b162,J3,Any work involving suspected asbestos-containing materials must comply with the **Control of Asbestos Regulations 2012**.,QUERY,{RISK_TO_PEOPLE}::{J3_ASBESTOS},98,OPEN
+b3cdc1b162,J3,Any work involving suspected asbestos-containing materials must comply with the **Control of Asbestos Regulations 2012**.,ACCEPT,{RISK_TO_PEOPLE}::{J3_ASBESTOS},98,DONE
 b6c119037e,J3,"These regulations impose strict requirements on the assessment, handling, removal, and disposal of asbestos, which can significantly increase the cost of repair, maintenance, or alteration works.",MENU,,0,DONE
 3bb9dbe321,J3,"If asbestos is suspected or confirmed, your legal adviser should make appropriate enquiries regarding any previous asbestos surveys, removal works, or management records relating to the property.",EXACT,{RISK_TO_PEOPLE}::{J3_ASBESTOS},100,DONE
 06ce4e9969,J3,Further advice should be obtained where refurbishment is proposed.,EXACT,{RISK_TO_PEOPLE}::{J3_ASBESTOS},100,DONE

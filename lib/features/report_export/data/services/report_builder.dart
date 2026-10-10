@@ -581,6 +581,19 @@ class ReportBuilder {
             'activity_services_water_main_water',
             isInspection,
           ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_water_water_tank',
+            isInspection,
+          ),
+          ...withRepairHeading(
+            'Water Repair',
+            _buildPhrasesForScreenId(
+              rawData,
+              'activity_services_water_repair_main_screen',
+              isInspection,
+            ),
+          ),
           ...standard2,
           ...main.rating,
           ...main.notes,
@@ -814,7 +827,7 @@ class ReportBuilder {
     if (left.isEmpty || right.isEmpty) return false;
     return left == right;
   }
-
+
   List<String> _narrativeFallbackForIssuesRisks(
     String screenTitle,
     List<ReportField> fields,
@@ -1414,7 +1427,7 @@ class ReportBuilder {
     if (id == 'activity_property_is_noisy_area') return 130;
     return 1000;
   }
-
+
   List<String> _cleanupPhrases(List<String> phrases) {
     final out = <String>[];
     final seen = <String>{};
@@ -1924,7 +1937,8 @@ class ReportBuilder {
               } else {
                 // No phrase handler — convert fields to narrative phrases
                 // so data is not lost when other screens do have phrases.
-                final fallback = _shouldUseRawFieldFallback(screen.id)
+                final fallback = _shouldUseRawFieldFallback(screen.id) &&
+                        !_isPhraseOnlyScreen(screen.id)
                     ? _fieldsToPhrases(fields)
                     : const <String>[];
                 if (fallback.isNotEmpty) {
@@ -1939,11 +1953,13 @@ class ReportBuilder {
                   } else {
                     mergedPhrases.addAll(fallback);
                   }
-                } else if (fields.any((f) => f.displayValue.isNotEmpty)) {
+                } else if (!_isPhraseOnlyScreen(screen.id) &&
+                    fields.any((f) => f.displayValue.isNotEmpty)) {
                   mergedFields.addAll(fields);
                 }
               }
-            } else if (fields.any((f) => f.displayValue.isNotEmpty)) {
+            } else if (!_isPhraseOnlyScreen(screen.id) &&
+                    fields.any((f) => f.displayValue.isNotEmpty)) {
               mergedFields.addAll(fields);
             }
           }
@@ -2292,33 +2308,38 @@ class ReportBuilder {
       phrases = _phrasesForScreen(node, rawData, isInspection);
     }
 
-    // When no engine phrases exist but fields have data, convert fields to
-    // simple narrative phrases so the report avoids raw "Yes/No" tables.
-    if (isInspection &&
-        phrases.isEmpty &&
-        config.includePhrases &&
-        fields.any((f) => f.displayValue.isNotEmpty)) {
-      if (_alwaysRegenerateFromAnswersScreenIds.contains(normalizedId) &&
-          !_sectionDSummaryNarrativeScreenIds.contains(normalizedId)) {
-        final narrative = _narrativeFallbackForIssuesRisks(node.title, fields);
-        if (narrative.isNotEmpty) {
-          phrases = _cleanupPhrases(narrative);
-          fields = const [];
+    // Sections D-J are phrase-only: report text is exactly the PDF phrases the rules emit. A screen
+    // whose rules did not fire prints nothing (no raw "Label: value" lines, no field table, no
+    // fallback narrative). Other sections keep the previous fallbacks.
+    if (isInspection && config.includePhrases && _isPhraseOnlyScreen(node.id)) {
+      if (phrases.isEmpty) fields = const [];
+    } else {
+      if (isInspection &&
+          phrases.isEmpty &&
+          config.includePhrases &&
+          fields.any((f) => f.displayValue.isNotEmpty)) {
+        if (_alwaysRegenerateFromAnswersScreenIds.contains(normalizedId) &&
+            !_sectionDSummaryNarrativeScreenIds.contains(normalizedId)) {
+          final narrative = _narrativeFallbackForIssuesRisks(node.title, fields);
+          if (narrative.isNotEmpty) {
+            phrases = _cleanupPhrases(narrative);
+            fields = const [];
+          }
         }
       }
-    }
 
-    if (isInspection &&
-        phrases.isEmpty &&
-        config.includePhrases &&
-        fields.any((f) => f.displayValue.isNotEmpty)) {
-      final fallback = _shouldUseRawFieldFallback(node.id)
-          ? _fieldsToPhrases(fields)
-          : const <String>[];
-      final cleanedFallback = _cleanupPhrases(fallback);
-      if (cleanedFallback.isNotEmpty) {
-        phrases = cleanedFallback;
-        fields = const []; // Suppress raw table — phrases cover the data.
+      if (isInspection &&
+          phrases.isEmpty &&
+          config.includePhrases &&
+          fields.any((f) => f.displayValue.isNotEmpty)) {
+        final fallback = _shouldUseRawFieldFallback(node.id)
+            ? _fieldsToPhrases(fields)
+            : const <String>[];
+        final cleanedFallback = _cleanupPhrases(fallback);
+        if (cleanedFallback.isNotEmpty) {
+          phrases = cleanedFallback;
+          fields = const []; // Suppress raw table - phrases cover the data.
+        }
       }
     }
 
@@ -2529,6 +2550,11 @@ class ReportBuilder {
     phrases.addAll(entries);
     return phrases;
   }
+
+  /// A screen that has verbatim PDF rules is phrase-only: when its rules emit nothing the report prints
+  /// nothing for it (no raw "Label: value" lines, no field table, no fallback narrative).
+  bool _isPhraseOnlyScreen(String screenId) =>
+      inspectionPhraseEngine?.hasVerbatimRulesFor(screenId) ?? false;
 
   bool _shouldUseRawFieldFallback(String screenId) {
     final normalizedId = screenId.trim().toLowerCase();

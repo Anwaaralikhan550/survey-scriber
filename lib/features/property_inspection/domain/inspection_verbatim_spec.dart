@@ -13235,6 +13235,16 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_e1_general',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'e7_scope',
+    'activity_outside_property_conservatory_porch_main_screen',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_SCOPE}',
+    [
+    ],
+    whenField: 'cb_e7_scope',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

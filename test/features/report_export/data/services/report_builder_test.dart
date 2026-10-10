@@ -1791,9 +1791,9 @@ void main() {
       );
 
       final doc = customBuilder.build(rawData, const ExportConfig());
-      final screen = doc.sections.single.screens.single;
+      final printed = doc.sections.expand((s) => s.screens).expand((s) => s.phrases).join(' ');
       expect(
-        screen.phrases.join(' '),
+        printed,
         isNot(contains('Insect infestation: Partly missing')),
       );
     });
@@ -1847,9 +1847,9 @@ void main() {
       );
 
       final doc = customBuilder.build(rawData, const ExportConfig());
-      final screen = doc.sections.single.screens.single;
+      final printed = doc.sections.expand((s) => s.screens).expand((s) => s.phrases).join(' ');
       expect(
-        screen.phrases.join(' '),
+        printed,
         isNot(contains('Condition: Reasonable')),
       );
     });
@@ -1914,9 +1914,9 @@ void main() {
       );
 
       final doc = customBuilder.build(rawData, const ExportConfig());
-      final screen = doc.sections.single.screens.single;
+      final printed = doc.sections.expand((s) => s.screens).expand((s) => s.phrases).join(' ');
       expect(
-        screen.phrases.join(' '),
+        printed,
         isNot(contains('Condition: Poor')),
       );
     });

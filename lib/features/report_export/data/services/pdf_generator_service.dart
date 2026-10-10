@@ -161,7 +161,9 @@ class PdfGeneratorService {
   /// from the digit 1 in the report's sans-serif body font, where a bare
   /// "I" and "1" render as near-identical vertical strokes at body-text
   /// size.
-  static final RegExp _sectionLetterRefPattern = RegExp(r'\bI[1-5]\b');
+  /// Also bolds the legal reference that the client PDF prints in bold.
+  static final RegExp _sectionLetterRefPattern =
+      RegExp(r'\bI[1-5]\b|Control of Asbestos Regulations 2012');
 
   pw.TextSpan _boldSectionLetterSpans(String text, pw.TextStyle baseStyle) {
     final matches = _sectionLetterRefPattern.allMatches(text).toList();

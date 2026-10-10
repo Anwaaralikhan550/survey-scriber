@@ -22578,6 +22578,11 @@
                 "2",
                 "3"
               ]
+            },
+            {
+              "id": "cb_e7_scope",
+              "label": "Section scope statement",
+              "type": "checkbox"
             }
           ],
           "inlinePosition": "header"

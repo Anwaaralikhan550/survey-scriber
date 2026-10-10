@@ -14,6 +14,10 @@ class InspectionPhraseEngine {
   /// master templates (see ParagraphComposer).
   Map<String, String> get phraseTexts => Map.unmodifiable(_phraseTexts);
 
+  /// True when the screen is driven by verbatim PDF rules (see inspection_verbatim_spec.dart).
+  bool hasVerbatimRulesFor(String screenId) =>
+      kVerbatimRules.any((r) => r.screen == screenId);
+
   List<String> buildPhrases(String screenId, Map<String, String> rawAnswers) {
     var answers = rawAnswers;
     if (screenId == 'activity_over_all_openion') {
