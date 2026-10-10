@@ -1,0 +1,20 @@
+# fragment (normalised, lower case) | reason  -- PDF rows rawcheck.py cannot match one-to-one; each is rendered, see reason
+potential rating: a, b, c, d, e, f, or g|option list: energy rating dropdown fills it (rule a3_energy)
+the joinery items comprise|option list filled by the F7 description checkboxes (heading glued in the PDF row)
+shared rights of way over a private road|option list filled by the H3 right-of-way checkboxes
+property address town county postcode|form labels plus the weather option lists (rule a1_weather)
+the accommodation comprises: ground floor|printed by the PDF/DOCX generators around the accommodation table
+the subject property is set within level, sloping, hilly|option list filled by the H2 grounds dropdown
+although this appears in this part of the report|author note to the developer, not report text
+water heating not found|heading glued to "Not found."; rule g5 prints it
+if the property is a flat, add the following|directive; flat paragraphs are tick-box rules
+the cellar or basement was partially, significantly flooded|option list: cellar flooded dropdown
+(type in location)|free-text placeholder in the PDF: the surveyor's text replaces it
+(yyyy)|free-text placeholder in the PDF: the surveyor's year replaces it
+(enter locations)|free-text placeholder in the PDF: the surveyor's text replaces it
+(type wall location)|free-text placeholder in the PDF: the surveyor's text replaces it
+operating, not operating|option list: extractor fan dropdown
+small, medium or large trees|option list filled by the J2 tree-size dropdown
+(enter year), pre-1900|option list: year built band / exact year (rules a2_year_*)
+rcd protection, rcbo protection, surge protection|option list: RCD protection checkboxes (rule g1)
+because of limited roof height; the floor was not safe|option list: roof-not-fully-inspected reasons (rule f0_rnfi)

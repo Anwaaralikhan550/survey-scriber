@@ -43,3 +43,19 @@ Branch `feature/verbatim-completion` (not merged to `main`). Source of truth: `S
 1. Client reviews `CLIENT_QUERIES.md` and answers or accepts the defaults.
 2. Generate one sample report per property type with the final build and read it against the PDF.
 3. Run the full Flutter gate once more on the merge commit.
+
+## 6. Independent raw-PDF audit (added 2026-10-10)
+
+The checks above use the digitised JSON of the PDF. `rawcheck.py` repeats the comparison on the client's PDF itself
+(`pdftotext -layout`), with no digitised file in between:
+
+| Check | Result | Command |
+|---|---|---|
+| Every distinct PDF sentence has a bank counterpart | 1012 distinct sentences: 951 exact after normalisation, 61 within 95% or accepted (option-list / free-text placeholder / directive rows, each with a reason in `verbatim/rawcheck_accepted.csv`), 0 unmatched | `python3 tool/phrase_audit/verbatim/rawcheck.py` |
+| Every PDF sentence is rendered in the 8-scenario master report | 1012 of 1012 | `python3 tool/phrase_audit/verbatim/rawcheck.py --master tool/phrase_audit/output/master_report/master_report.json` |
+| Literal text of the 693 rule keys against the raw PDF text | 1900 of 1903 segments exact; the other 3 differ only in quote style (the PDF uses a backtick as opening quote) and the PDF's literal `**` around "Control of Asbestos Regulations 2012" | one-off script, see session notes |
+| UI options with no rule | `python3 tool/phrase_audit/verbatim/optioncheck.py`: 25 dropdown values (condition ratings 1/2/3 on the E/F main screens are printed by the rating-notes handler; J2 slope and tree size are filled by report_builder) and 18 checkboxes (navigation boxes, J2 location boxes and "safety hazard / causing damp" boxes read by report_builder; two roof-summary boxes and "Shared RWG" are unused UI) | informational |
+
+Not changed on purpose (instruction: keep current logic): hard-coded J1/J2/J3 cross-injection sentences, the main-wall
+"mixture of wall types" paragraph and the aerial/satellite J3 sentence that prints the PDF's option list. These render
+text that is not word for word in the PDF; they are listed in the session report.
