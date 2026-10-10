@@ -80,6 +80,8 @@
    "phrases": [
     "Type: The property is believed to be constructed using traditional masonry, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels and system-built construction.",
     "Construction has been identified from visible inspection only and has not been confirmed by opening concealed elements.",
+    "Modern Building Design: The building is believed to be of a modern design, framed externally with timber, steel, or other materials, but most of the framework is concealed on both sides by cladding. The durability of the structure is dependent upon the care taken during construction. For this reason, I cannot comment on the condition of the concealed structure, given the limited scope and technique of the inspection. Please be aware that any alteration to this type of building will require specialist advice from a qualified person. The exterior of the property must be adequately maintained to prevent water penetration. It is also important to reduce the risk of condensation that might encourage damage or weaken concealed components. When improving insulation, you should ensure that the material used is appropriate. You can only install insulation within the wall cavity with specialist advice.",
+    "Where the property is of concrete or precast concrete panel construction, some lenders may regard this as a non-standard form of construction. As a result, the availability of mortgage finance may be more limited than for traditionally constructed properties, and some lenders may decline to lend altogether. Lending criteria vary between mortgage providers and may depend on the specific construction type, its condition, and whether any approved repair or certification schemes have been carried out. You should make enquiries with your proposed lender or an independent mortgage broker at an early stage to confirm that satisfactory mortgage finance will be available before committing to the purchase.",
     "Roof type: The main roof is of pitched, flat and mansard construction formed with traditional cut timber and prefabricated trussed rafters structural members.",
     "Roof cover: The roof covering is formed in clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, metal sheeting, mineral felt, rubber membrane and single-ply membrane.",
     "External walls: The external walls are constructed of solid brick, cavity brick, stone, timber frame, steel frame and rendered masonry construction.",
@@ -253,7 +255,8 @@
     "Condition rating is: 1.",
     "The element(s) are performing their intended function, and no significant defects were observed. Routine maintenance appropriate to the age and construction should be expected.",
     "sample detail",
-    "You should ask the management company whether any repairs to the chimney stack(s) have been carried out previously or are currently proposed. Your legal adviser should confirm responsibility for repairs to the chimney stack(s) with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise. This may help reduce the risk of unexpected repair costs or increases in the service charge."
+    "You should ask the management company whether any repairs to the chimney stack(s) have been carried out previously or are currently proposed. Your legal adviser should confirm responsibility for repairs to the chimney stack(s) with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise. This may help reduce the risk of unexpected repair costs or increases in the service charge.",
+    "General notes: Routine maintenance works should be carried out to prevent water penetration and thereafter as and when due, to keep the stacks in good condition. It would also be wise to check the condition of the chimney pots, flaunching, and flashing, during routine maintenance and carry out all necessary works to ensure weather tightness of the stacks."
    ]
   },
   {
@@ -428,7 +431,8 @@
     "Repair conservatory: The conservatory door(s), window(s), glazing, roof, floor, wall(s) and rainwater goods are cracked, damaged, rotten, leaking, damp, have failed, are misted and present a safety hazard. These defects should be repaired in the near future. However, where the defects are severe or extensive, repairs should be carried out immediately.",
     "Not Applicable: The property does not incorporate the element(s) referred to in this section. No further comments are necessary.",
     "Condition rating is: 1.",
-    "sample detail"
+    "sample detail",
+    "This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom, other similar structures. Where no conservatory or porch is present, this section is not applicable."
    ]
   },
   {
@@ -850,6 +854,11 @@
     "sample detail",
     "Stopcock found: There is an independent mains water supply to the property. The stopcock within the property is located under the stairs, under the kitchen sink, in the bathroom, in the hall and in the garage. Visible pipework and fittings were inspected where accessible. The water installation was not pressure assessed.",
     "Lead rising: The visible incoming water supply pipe is lead. Lead pipework was commonly used before 1970 and may allow small amounts of lead to enter the drinking water, particularly in soft water areas, presenting a potential health risk (see Section J3 – Risks). You should obtain advice from your water supplier and consider replacing the lead pipework to eliminate this risk. Further information is available from the Drinking Water Inspectorate. You should obtain advice from your water supplier and arrange for replacement of the lead pipework where appropriate. Further guidance is available from the Drinking Water Inspectorate.",
+    "Water tank: A cold-water storage tank located in the roof space, airing cupboard and kitchen and is constructed of plastic, galvanised steel and asbestos cement. It appeared to be in reasonable condition. The visible tank and associated pipework were adequately insulated.",
+    "[[SUBHEADING]] Water Repair",
+    "Damaged tank: The cold-water storage tank is damaged, not adequately supported, leaking and overflowing. Repairs or replacement should be carried out by a suitably qualified plumber without delay.",
+    "Missing lid: The cold-water storage tank(s) has no lid, or the lid is not properly fitted, which may allow contamination of the stored water. A suitable close-fitting lid should be installed as soon as possible.",
+    "Asbestos cement tank: The cold-water storage tank is constructed of asbestos cement. Provided it remains in good condition and is left undisturbed, it presents a low health risk. If alteration, removal, or replacement is proposed, advice should first be obtained from a suitably qualified asbestos specialist.",
     "The visible water supply pipework comprises plastic and/or copper. Much of the plumbing is concealed within the structure, and the routing, support, joints, and condition of hidden pipework could not be assessed during this visual inspection. If there are any concerns regarding the plumbing installation or its condition, you should obtain further advice from a suitably qualified plumber before legal purchase commitment.",
     "Condition rating is: 1."
    ]
@@ -1010,26 +1019,27 @@
   },
   {
    "section": "J",
+   "screen": "activity_risks_risk_to_people_",
+   "phrases": [
+    "Trip Hazards: Potential trip hazards were identified, including uneven paving, damaged steps, raised thresholds, uneven floor surfaces, loose floor coverings and damaged decking. Repairs should be undertaken to reduce the risk of injury.",
+    "Damaged Stairs: The staircase requires some repairs based upon a visual inspection. Where loose handrails, damaged balustrades or uneven treads are present, these should be repaired promptly. Also, defective guarding should be repaired without delay.",
+    "Electrical Safety: Visible defects were identified. Further inspection by a qualified electrician is recommended before legal commitment.",
+    "Gas Safety: Gas appliances and installations were not assessed. Where there is any doubt regarding their age, condition or maintenance history, inspection by a Gas Safe registered engineer is recommended before legal commitment.",
+    "Asbestos: Properties constructed before 2000 may contain asbestos-containing materials (ACMs). As a precaution, we recommend that an asbestos identification survey is carried out by a suitably qualified and licensed asbestos surveyor before purchase, particularly if you intend to undertake refurbishment, alterations, or demolition works. In addition to any asbestos-containing materials specifically referred to elsewhere in this report, other concealed or inaccessible asbestos materials may also be present. The inspection undertaken for this survey is not intended to identify or confirm the presence of asbestos. According to the Health and Safety Executive (HSE), asbestos-containing materials do not normally present a significant health risk if they are in good condition and remain undisturbed. However, if such materials are damaged, drilled, cut, or otherwise disturbed, asbestos fibres may be released, posing a health hazard and requiring specialist management or removal. Any work involving suspected asbestos-containing materials must comply with the Control of Asbestos Regulations 2012. These regulations impose strict requirements on the assessment, handling, removal, and disposal of asbestos, which can significantly increase the cost of repair, maintenance, or alteration works. If asbestos is suspected or confirmed, your legal adviser should make appropriate enquiries regarding any previous asbestos surveys, removal works, or management records relating to the property. Further advice should be obtained where refurbishment is proposed.",
+    "Mould Growth: Localised mould growth associated with condensation was observed. Maintaining adequate heating and ventilation should assist in reducing further mould growth.",
+    "General Advice: The inspection identified matters requiring repair, maintenance, or further investigation. These should be considered before legal commitment and reflected in your future maintenance planning. Buildings require regular inspection and maintenance throughout their service life. Prompt attention to isolated defects will normally reduce the likelihood of more extensive deterioration and costly future repairs. Where specialist inspections have been recommended within this report, these should be obtained before legal commitment where practicable.",
+    "The design of one or more windows does not provide a suitable means of escape for occupants in the event of a fire (see section E5 - Windows).",
+    "Trip Hazards: Potential trip hazards were identified, including uneven paving, damaged steps, raised thresholds, uneven floor surfaces, loose floor coverings, damaged decking, other. Repairs should be undertaken to reduce the risk of injury.",
+    "The electrical system is below current standards because of observed defects, and this is a safety hazard (see section G1 - Electricity)."
+   ]
+  },
+  {
+   "section": "J",
    "screen": "derived_j2_risk_to_grounds",
    "phrases": [
     "Influencing trees: There are small trees within influencing distance of the property. Where no evidence of damage was observed, no further action is required. However, where damage is evident, further investigation should be undertaken by a qualified tree specialist. Routine tree management should be carried out as necessary.",
     "Retaining Walls: Evidence of movement, bulging, cracking, deterioration was observed. Further investigation should be undertaken where structural stability appears affected and appropriate repair or rebuild organised.",
     "Parts of the boundary fencing to the front, rear, side and communal garden are broken, unstable, leaning, loose in places, badly damaged, rotted in places and missing in places. Defective boundary structures should be repaired where deterioration affects stability or security."
-   ]
-  },
-  {
-   "section": "J",
-   "screen": "derived_j3_risk_to_people",
-   "phrases": [
-    "The design of one or more windows does not provide a suitable means of escape for occupants in the event of a fire (see section E5 - Windows).",
-    "Trip Hazards: Potential trip hazards were identified, including uneven paving, damaged steps, raised thresholds, uneven floor surfaces, loose floor coverings, damaged decking, other. Repairs should be undertaken to reduce the risk of injury.",
-    "The electrical system is below current standards because of observed defects, and this is a safety hazard (see section G1 - Electricity).",
-    "Electrical Safety: Visible defects were identified. Further inspection by a qualified electrician is recommended before legal commitment.",
-    "Asbestos: Properties constructed before 2000 may contain asbestos-containing materials (ACMs). As a precaution, we recommend that an asbestos identification survey is carried out by a suitably qualified and licensed asbestos surveyor before purchase, particularly if you intend to undertake refurbishment, alterations, or demolition works. In addition to any asbestos-containing materials specifically referred to elsewhere in this report, other concealed or inaccessible asbestos materials may also be present. The inspection undertaken for this survey is not intended to identify or confirm the presence of asbestos. According to the Health and Safety Executive (HSE), asbestos-containing materials do not normally present a significant health risk if they are in good condition and remain undisturbed. However, if such materials are damaged, drilled, cut, or otherwise disturbed, asbestos fibres may be released, posing a health hazard and requiring specialist management or removal. Any work involving suspected asbestos-containing materials must comply with the Control of Asbestos Regulations 2012. These regulations impose strict requirements on the assessment, handling, removal, and disposal of asbestos, which can significantly increase the cost of repair, maintenance, or alteration works. If asbestos is suspected or confirmed, your legal adviser should make appropriate enquiries regarding any previous asbestos surveys, removal works, or management records relating to the property. Further advice should be obtained where refurbishment is proposed.",
-    "Older properties may contain lead pipework, lead flashings, or lead-based paint. No testing has been undertaken during this inspection. Further advice should be obtained where refurbishment is proposed.",
-    "No significant mould growth was observed.",
-    "The presence of radon gas cannot be determined during a visual inspection. Where appropriate, your legal adviser should obtain environmental search information.",
-    "General Advice: The inspection identified matters requiring repair, maintenance, or further investigation. These should be considered before legal commitment and reflected in your future maintenance planning. Buildings require regular inspection and maintenance throughout their service life. Prompt attention to isolated defects will normally reduce the likelihood of more extensive deterioration and costly future repairs. Where specialist inspections have been recommended within this report, these should be obtained before legal commitment where practicable."
    ]
   },
   {
@@ -2424,6 +2434,19 @@
   },
   {
    "section": "J",
+   "screen": "activity_risks_risk_to_people_",
+   "phrases": [
+    "Trip Hazards: Potential trip hazards were identified, including uneven paving, damaged steps, raised thresholds, uneven floor surfaces, loose floor coverings and damaged decking. Repairs should be undertaken to reduce the risk of injury.",
+    "Damaged Stairs: The staircase requires some repairs based upon a visual inspection. Where loose handrails, damaged balustrades or uneven treads are present, these should be repaired promptly. Also, defective guarding should be repaired without delay.",
+    "Electrical Safety: Visible defects were identified. Further inspection by a qualified electrician is recommended before legal commitment.",
+    "Gas Safety: Gas appliances and installations were not assessed. Where there is any doubt regarding their age, condition or maintenance history, inspection by a Gas Safe registered engineer is recommended before legal commitment.",
+    "Asbestos: Properties constructed before 2000 may contain asbestos-containing materials (ACMs). As a precaution, we recommend that an asbestos identification survey is carried out by a suitably qualified and licensed asbestos surveyor before purchase, particularly if you intend to undertake refurbishment, alterations, or demolition works. In addition to any asbestos-containing materials specifically referred to elsewhere in this report, other concealed or inaccessible asbestos materials may also be present. The inspection undertaken for this survey is not intended to identify or confirm the presence of asbestos. According to the Health and Safety Executive (HSE), asbestos-containing materials do not normally present a significant health risk if they are in good condition and remain undisturbed. However, if such materials are damaged, drilled, cut, or otherwise disturbed, asbestos fibres may be released, posing a health hazard and requiring specialist management or removal. Any work involving suspected asbestos-containing materials must comply with the Control of Asbestos Regulations 2012. These regulations impose strict requirements on the assessment, handling, removal, and disposal of asbestos, which can significantly increase the cost of repair, maintenance, or alteration works. If asbestos is suspected or confirmed, your legal adviser should make appropriate enquiries regarding any previous asbestos surveys, removal works, or management records relating to the property. Further advice should be obtained where refurbishment is proposed.",
+    "Mould Growth: Localised mould growth associated with condensation was observed. Maintaining adequate heating and ventilation should assist in reducing further mould growth.",
+    "General Advice: The inspection identified matters requiring repair, maintenance, or further investigation. These should be considered before legal commitment and reflected in your future maintenance planning. Buildings require regular inspection and maintenance throughout their service life. Prompt attention to isolated defects will normally reduce the likelihood of more extensive deterioration and costly future repairs. Where specialist inspections have been recommended within this report, these should be obtained before legal commitment where practicable."
+   ]
+  },
+  {
+   "section": "J",
    "screen": "activity_risks_other_",
    "phrases": [
     "Airport: The property is located close to an airport and/or flight path. Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",
@@ -3534,7 +3557,8 @@
     "The element(s) are performing their intended function, and no significant defects were observed. Routine maintenance appropriate to the age and construction should be expected.",
     "Notes:",
     "sample detail",
-    "You should ask the management company whether any repairs to the chimney stack(s) have been carried out previously or are currently proposed. Your legal adviser should confirm responsibility for repairs to the chimney stack(s) with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise. This may help reduce the risk of unexpected repair costs or increases in the service charge."
+    "You should ask the management company whether any repairs to the chimney stack(s) have been carried out previously or are currently proposed. Your legal adviser should confirm responsibility for repairs to the chimney stack(s) with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise. This may help reduce the risk of unexpected repair costs or increases in the service charge.",
+    "General notes: Routine maintenance works should be carried out to prevent water penetration and thereafter as and when due, to keep the stacks in good condition. It would also be wise to check the condition of the chimney pots, flaunching, and flashing, during routine maintenance and carry out all necessary works to ensure weather tightness of the stacks."
    ]
   },
   {
@@ -3588,7 +3612,8 @@
    "phrases": [
     "Condition rating is: 1.",
     "Notes:",
-    "sample detail"
+    "sample detail",
+    "This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom, other similar structures. Where no conservatory or porch is present, this section is not applicable."
    ]
   },
   {

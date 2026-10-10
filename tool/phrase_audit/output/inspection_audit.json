@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 343,
+  "screensAudited": 344,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1770,
+   "distinctEmitted": 1778,
    "approvedLegacyBank": 117,
-   "approvedCurrentBankOnly": 1626,
+   "approvedCurrentBankOnly": 1634,
    "unapproved": 0
   }
  },
@@ -549,14 +549,11 @@
    "permutationCount": 1,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 0,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 0,
     "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Floor and site-plan sketches were recorded during the inspection and should be treated as indicative rather than measured drawings."
-   ]
+   }
   },
   {
    "sectionKey": "K",
@@ -2984,6 +2981,25 @@
     "Wood-Boring Insects: Evidence of active or historic wood-boring insect activity was observed. Further investigation by an appropriately qualified timber specialist is recommended where activity appears active or widespread.",
     "Significant subsidence: Significant cracks associated with structural movement were noted to the building, the corresponding internal walls, and the party walls. I am unable to confirm, from a single visual inspection, whether the movement is historic and stable or progressive. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts.",
     "Tree defects: One or more trees are located close to the property. Detrimental effects on the property were noted. You should contact a qualified person for further investigation and advice."
+   ]
+  },
+  {
+   "sectionKey": "J",
+   "screenId": "activity_risks_risk_to_people_",
+   "title": "J3 Risk To People",
+   "dataFieldCount": 15,
+   "permutationCount": 17,
+   "severities": [],
+   "phraseStats": {
+    "total": 7,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 7,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Damaged Stairs: The staircase requires some repairs based upon a visual inspection. Where loose handrails, damaged balustrades or uneven treads are present, these should be repaired promptly. Also, defective guarding should be repaired without delay.",
+    "Electrical Safety: Visible defects were identified. Further inspection by a qualified electrician is recommended before legal commitment.",
+    "Gas Safety: Gas appliances and installations were not assessed. Where there is any doubt regarding their age, condition or maintenance history, inspection by a Gas Safe registered engineer is recommended before legal commitment."
    ]
   },
   {
@@ -5958,13 +5974,13 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_chimney_main_screen",
    "title": "Chimney",
-   "dataFieldCount": 3,
-   "permutationCount": 11,
+   "dataFieldCount": 4,
+   "permutationCount": 12,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 11,
     "approvedLegacy": 5,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -6048,15 +6064,18 @@
    "sectionKey": "E",
    "screenId": "activity_outside_property_conservatory_porch_main_screen",
    "title": "Condition Rating",
-   "dataFieldCount": 2,
-   "permutationCount": 8,
+   "dataFieldCount": 3,
+   "permutationCount": 9,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 6,
     "approvedLegacy": 4,
-    "approvedCurrentBankOnly": 0,
+    "approvedCurrentBankOnly": 1,
     "unapproved": 0
-   }
+   },
+   "editedBankSamples": [
+    "This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom, other similar structures. Where no conservatory or porch is present, this section is not applicable."
+   ]
   },
   {
    "sectionKey": "E",
