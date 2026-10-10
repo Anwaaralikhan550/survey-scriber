@@ -109,6 +109,7 @@ def main():
     for e in json.load(open(REF, encoding='utf-8'))['entries']:
         pdf_raw += [clean(x).lower() for x in split(e.get('rawBlock', ''))]
     pdf_raw = list(set(pdf_raw))
+    pdf_blob = ' '.join(pdf_raw)
     # reachability: a key is live when its sub/master token is named in the Dart code, or when a live bank text
     # contains that token (master templates compose their sub keys); iterate to a fixpoint.
     tok_re = re.compile(r'\{[A-Z0-9_]+\}')
@@ -150,11 +151,31 @@ def main():
             bad = []
             for x in segs:
                 x = LABEL.sub('', x) if LABEL.match(x) else x
+                if x in pdf_blob:
+                    continue            # exact piece of the PDF text: no fuzzy search needed
                 r = process.extractOne(x, pdf_raw, scorer=fuzz.partial_ratio)
                 if not r or r[1] < a.min:
                     bad.append((round(r[1]) if r else 0, x[:90]))
             if bad:
                 foreign.append((k, bad[0][0], bad[0][1]))
+    # ---- T7 coverage: the bank key behind every ledger sentence must be reachable (named in the Dart code / rules)
+    unreachable = []
+    t7 = 0
+    live_norm = [norm(v) for k, v in bank.items()
+                 if k.split('::')[-1] in src or any(k.split('::')[-1].startswith(f) for f in DYNAMIC)]
+    for r in rows:
+        if r['disposition'] not in ('EXACT', 'TOKENISED', 'ACCEPT') or not r['bank_key']:
+            continue
+        t7 += 1
+        tok = r['bank_key'].split('::')[-1]
+        if r['bank_key'] not in bank or not (tok in src or any(tok.startswith(f) for f in DYNAMIC)):
+            # the ledger may have matched a stale duplicate key: accept when any referenced key holds the sentence
+            want = norm(r['pdf_sentence'])
+            if not any(want and want in nk for nk in live_norm):
+                unreachable.append((r['section'], r['id'], r['bank_key']))
+    print(f'T7: {t7} ledger sentences with a bank key, {len(unreachable)} whose key is missing or never referenced')
+    for u in unreachable[:a.show]:
+        print('   T7 UNREACHABLE', u)
     print(f'T2: {reach} reachable bank keys, {len(foreign)} sentences not in the PDF (< {a.min}); {len(orphans)} orphan keys')
     for f in foreign[:a.show]:
         print('   T2 FOREIGN', f)
@@ -168,7 +189,7 @@ def main():
     if a.orphans:
         for o in orphans[:200]:
             print('   ORPHAN', o)
-    sys.exit(1 if fails1 or foreign else 0)
+    sys.exit(1 if fails1 or foreign or unreachable else 0)
 
 
 if __name__ == '__main__':
