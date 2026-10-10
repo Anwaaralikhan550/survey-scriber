@@ -67,7 +67,9 @@ def main():
     ap.add_argument('--min', type=float, default=90)
     ap.add_argument('--orphans', action='store_true')
     ap.add_argument('--show', type=int, default=30)
-    ap.add_argument('--delete-orphans', action='store_true', help='remove orphan keys from the bank (via bankkeys.py)')
+    ap.add_argument('--delete-orphans', action='store_true', help='remove orphan keys from the bank (via bankkeys.py). ONLY safe for the token-based list '
+                    'of the first cleanup: the proximity check mis-reads @chimney rules and main-screen rating keys, so '
+                    'always diff the T6 dump before/after (it must show 0 lost) and run the full gate')
     a = ap.parse_args()
     bank = json.load(open(BANK, encoding='utf-8'))
     src = ''.join(open(f, encoding='utf-8').read() for f in glob.glob('lib/**/*.dart', recursive=True))
@@ -106,19 +108,41 @@ def main():
     for e in json.load(open(REF, encoding='utf-8'))['entries']:
         pdf_raw += [clean(x).lower() for x in split(e.get('rawBlock', ''))]
     pdf_raw = list(set(pdf_raw))
+    # reachability: a key is live when its sub/master token is named in the Dart code, or when a live bank text
+    # contains that token (master templates compose their sub keys); iterate to a fixpoint.
+    tok_re = re.compile(r'\{[A-Z0-9_]+\}')
+    by_tok = {}
+    for k in bank:
+        by_tok.setdefault(k.split('::')[-1], []).append(k)     # a key is named by its last token (sub, or the master itself)
+    # 'M::S' is live when the Dart code names M and S close together (a _sub(M, S) call, a rule, or a helper call with
+    # phraseCodeFor...: M, ...SubCode: S), when S is a run-time-built prefix, or when the key is written whole.
+    positions = {}
+    for m in tok_re.finditer(src):
+        positions.setdefault(m.group(0), []).append(m.start())
+
+    def near(a, b, window=900):
+        pb = positions.get(b, [])
+        return any(abs(x - y) <= window for x in positions.get(a, []) for y in pb)
+
+    live = set()
+    for k in bank:
+        parts = k.split('::')
+        if len(parts) == 1:
+            if parts[0] in positions:
+                live.add(k)
+        elif k in src or near(parts[0], parts[1]) or any(parts[1].startswith(f) for f in DYNAMIC):
+            live.add(k)
     orphans, foreign = [], []
     reach = 0
     for k, v in bank.items():
-        parts = k.split('::')
-        tok = parts[-1]
-        if tok not in src and tok not in bank_text and not any(tok.startswith(f) for f in DYNAMIC):
+        if k not in live:
             orphans.append(k)
             continue
         reach += 1
-        if k in extras:
-            continue
+        if k in extras or '::' not in k:
+            continue            # master templates only define paragraph grouping for ParagraphComposer; never printed
         for s in split(v):
-            segs = [x.strip(' .,:;-').lower() for x in re.split(r'\{[A-Za-z0-9_]+\}', DIRECTIVE.sub('', clean(s)))]
+            segs = [x.strip(' .,:;-').lower() for x in re.split(r'\{[A-Za-z0-9_]+\}', DIRECTIVE.sub('', XREF.sub('', clean(s))))]
             segs = [x for x in segs if len(x) >= 18]
             if not segs:
                 continue

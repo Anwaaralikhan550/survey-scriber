@@ -885,7 +885,7 @@ class InspectionPhraseEngine {
 
       // ── Section K: floor/site plan sketches ──
       case 'activity_capture_floor_site_plan_sketches':
-        return _resolve('{K_FLOOR_SITE_PLAN_SKETCHES}');
+        return const [];  // not in the PDF (CLIENT_QUERIES #127)
       default:
         return const [];
     }
@@ -1661,51 +1661,7 @@ class InspectionPhraseEngine {
   }
 
   // ── Section D: About the Property ──────────────────────────────
-
-  /// Builds the approved-bank garden narrative for front/rear/communal
-  /// gardens: {D_GROUND}::{GROUND_X_GARDEN} with the fence sentence from
-  /// {GROUND_GARDEN}::{GARDEN_BOUNDRY_FENCES} / {GARDEN_NO_BOUNDRY_FENCES}.
-  List<String> _approvedGardenPhrases(
-    String gardenName,
-    String surfaceText, {
-    required bool noBoundary,
-    required String fencingText,
-  }) {
-    final area = gardenName.toLowerCase();
-    final subCode = '{GROUND_${area.toUpperCase()}_GARDEN}';
-    final typeToken = '{GROUND_${area.toUpperCase()}_GARDEN_TYPE}';
-
-    String fenceSentence = '';
-    if (noBoundary) {
-      fenceSentence = _sub('{GROUND_GARDEN}', '{GARDEN_NO_BOUNDRY_FENCES}');
-      if (fenceSentence.isEmpty) {
-        fenceSentence = 'There are no boundary fences installed.';
-      }
-    } else if (fencingText.isNotEmpty) {
-      var fenceTemplate = _sub('{GROUND_GARDEN}', '{GARDEN_BOUNDRY_FENCES}');
-      if (fenceTemplate.isEmpty) {
-        fenceTemplate =
-            'The boundary fences are formed in {GARDEN_BOUNDRY_FENCES}.';
-      }
-      fenceSentence =
-          fenceTemplate.replaceAll('{GARDEN_BOUNDRY_FENCES}', fencingText);
-    }
-
-    if (surfaceText.isEmpty) {
-      return fenceSentence.isEmpty ? const [] : _splitResolved(fenceSentence);
-    }
-
-    var template = _sub('{D_GROUND}', subCode);
-    if (template.isEmpty) {
-      template = 'The $area garden of the property is $typeToken. '
-          '{GARDEN_BOUNDRY_FENCES}';
-    }
-    template = template
-        .replaceAll(typeToken, surfaceText)
-        .replaceAll('{GARDEN_BOUNDRY_FENCES}', fenceSentence);
-    return _splitResolved(template);
-  }
-
+
   // ── New methods for uncovered screens ──────────────────────────
 
   // Section D: Residential garden (combined front/rear/communal)

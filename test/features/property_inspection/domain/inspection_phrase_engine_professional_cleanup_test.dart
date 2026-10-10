@@ -60,12 +60,4 @@ void main() {
   });
 
 
-  test('floor and site plans carry an indicative-use limitation', () {
-    final phrase = engine.buildPhrases(
-      'activity_capture_floor_site_plan_sketches',
-      {'captured': 'true'},
-    ).single;
-
-    expect(phrase, contains('indicative rather than measured drawings'));
-  });
 }
