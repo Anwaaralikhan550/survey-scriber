@@ -47,7 +47,7 @@ DIRECTIVE = re.compile(r'^(?:if .{3,90}? (?:is |are )?selected,? ?(?:add|include
                        r'section [a-z]\d ?[a-z ]{0,30}?- (?:[a-z ]{3,40} - )?|condition rating \d\s*)', re.I)
 
 
-POINTER = re.compile(r'^section [a-z]\d[^-]{0,35}-\s*(?:[^-]{3,40}-\s*)?', re.I)
+POINTER = re.compile(r'^(?:[a-z ]{3,30}:\s*)?(?:add text to:\s*)?section [a-z]\d[^-]{0,35}-\s*(?:[^-]{3,40}-\s*)?', re.I)
 
 
 def norm(t):
@@ -86,7 +86,8 @@ def main():
         txt = norm(bank.get(r['bank_key'], ''))
         want = norm(r['pdf_sentence'])
         checked += 1
-        if want and want not in txt and fuzz.partial_ratio(want, txt) < 97:
+        need = 80 if r['disposition'] == 'TOKENISED' else 97   # tokenised rows differ by the option-list words
+        if want and want not in txt and fuzz.partial_ratio(want, txt) < need:
             fails1.append((r['id'], r['bank_key'], want[:90]))
     print(f'T1: {checked} EXACT/TOKENISED rows checked, {len(fails1)} not found in their bank key')
     for f in fails1[:a.show]:
