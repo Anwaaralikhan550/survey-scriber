@@ -1289,7 +1289,7 @@ class ReportBuilder {
     if (_isCheckedValue(potsRepair['cb_is_safety_hazard']) &&
         (potsRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
       phrases.add(
-          'One or several pots that are fitted to the main building chimney stack are broken and partly missing (see section E1 - Chimney Stacks).');
+          'One or several pots fitted to the main building chimney stack are broken and partly missing (see section E1 - Chimney Stacks).');
     }
 
     for (final screenId in const [
@@ -1299,9 +1299,25 @@ class ReportBuilder {
       final aerial = _answersForScreen(rawData, screenId);
       if (_isCheckedValue(aerial['cb_is_safety_hazard']) &&
           (aerial['actv_condition'] ?? '').toLowerCase().contains('now')) {
-        final isSatellite = screenId.contains('satellite');
+        // PDF J3 sentence: the option list is replaced by the defects the surveyor ticked.
+        final pre = screenId.contains('satellite') ? 'e1l_sa_d_' : 'e1l_ae_d_';
+        final defects = _labelsForAnswerMap(
+          aerial,
+          <String, String>{
+            '${pre}loose': 'loose',
+            '${pre}rusted': 'rusted',
+            '${pre}damaged': 'damaged',
+            '${pre}dangling': 'dangling',
+            '${pre}other': 'other',
+          },
+          otherCheckboxId: '${pre}other',
+          otherTextId: '${pre}other_text',
+        );
+        final defectText = defects.isEmpty
+            ? 'loose, rusted, damaged, dangling, other'
+            : _toLegacyWords(defects);
         phrases.add(
-            'An ${isSatellite ? 'satellite dish' : 'aerial'} attached to the property is loose, rusted, damaged, dangling, other (see section E1 - Chimney Stacks).');
+            'An aerial or satellite dish attached to the property is $defectText (see section E1 - Chimney Stacks).');
       }
     }
 
