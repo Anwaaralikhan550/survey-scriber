@@ -69,6 +69,7 @@ def main():
     ap.add_argument('--section', default=None)
     ap.add_argument('--limit', type=int, default=40)
     ap.add_argument('--screens', action='store_true', help='use per-screen engine output instead of the assembled report')
+    ap.add_argument('--dump', default=DUMP, help='phrase dump json (default: the T6 dump)')
     ap.add_argument('--legacy', action='store_true', help='only screens whose engine case still uses a legacy handler')
     a = ap.parse_args()
     pdf = []
@@ -78,7 +79,7 @@ def main():
             if len(n) > 10:
                 pdf.append(n)
     pdf = list(set(pdf))
-    raw = json.load(open(DUMP, encoding='utf-8'))
+    raw = json.load(open(a.dump, encoding='utf-8'))
     dump = raw['screens'] if a.screens else raw['report']
     legacy = legacy_screens() if a.legacy else None
     foreign = defaultdict(list)
