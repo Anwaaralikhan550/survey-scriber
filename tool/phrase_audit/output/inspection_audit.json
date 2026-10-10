@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1778,
+   "distinctEmitted": 1782,
    "approvedLegacyBank": 117,
-   "approvedCurrentBankOnly": 1634,
+   "approvedCurrentBankOnly": 1638,
    "unapproved": 0
   }
  },
@@ -372,13 +372,14 @@
    "permutationCount": 5,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
+    "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance.",
+    "The property is not understood to be a listed building."
    ]
   },
   {
@@ -389,13 +390,14 @@
    "permutationCount": 5,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance."
+    "Listed building: The property is understood to be a listed building. Where the property is listed, your legal adviser should advise you regarding the implications for future alterations, repairs, and maintenance.",
+    "The property is not understood to be a listed building."
    ]
   },
   {
@@ -406,13 +408,14 @@
    "permutationCount": 5,
    "severities": [],
    "phraseStats": {
-    "total": 1,
+    "total": 2,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 1,
+    "approvedCurrentBankOnly": 2,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Gated: The property is located within a gated development and accessed via security-operated or access-controlled gates."
+    "Gated: The property is located within a gated development and accessed via security-operated or access-controlled gates.",
+    "The property is not located within a gated development."
    ]
   },
   {
@@ -3006,13 +3009,13 @@
    "sectionKey": "J",
    "screenId": "activity_risks_other_",
    "title": "J4 Other",
-   "dataFieldCount": 4,
-   "permutationCount": 6,
+   "dataFieldCount": 5,
+   "permutationCount": 7,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 5,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [

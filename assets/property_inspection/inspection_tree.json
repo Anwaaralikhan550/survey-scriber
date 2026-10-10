@@ -13052,6 +13052,11 @@
               "id": "cb_motorway",
               "label": "Motorway",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_x_j4_none",
+              "label": "No other risks identified",
+              "type": "checkbox"
             }
           ]
         },

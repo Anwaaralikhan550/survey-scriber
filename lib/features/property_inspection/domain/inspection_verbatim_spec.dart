@@ -13245,6 +13245,46 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_e7_scope',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'x_listed_no',
+    'activity_listed_building__listed_building',
+    '{D_CONSTRUCTION}',
+    '{X_NOT_LISTED}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'No',
+  ),
+  VerbatimRule(
+    'x_listed_no2',
+    'activity_listed_building',
+    '{D_CONSTRUCTION}',
+    '{X_NOT_LISTED}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'No',
+  ),
+  VerbatimRule(
+    'x_gated_no',
+    'activity_gated_community',
+    '{D_GROUND}',
+    '{X_NOT_GATED}',
+    [
+    ],
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'No',
+  ),
+  VerbatimRule(
+    'x_j4_none',
+    'activity_risks_other_',
+    '{RISK_TO_OTHER}',
+    '{X_NO_OTHER_RISKS}',
+    [
+    ],
+    whenField: 'cb_x_j4_none',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

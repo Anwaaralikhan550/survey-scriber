@@ -1,0 +1,81 @@
+[
+  {
+    "screen": "activity_listed_building__listed_building",
+    "rules": [
+      {
+        "id": "x_listed_no",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{X_NOT_LISTED}",
+        "text": "The property is not understood to be a listed building.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_listed_building",
+    "rules": [
+      {
+        "id": "x_listed_no2",
+        "masters": [
+          "{D_CONSTRUCTION}"
+        ],
+        "sub": "{X_NOT_LISTED}",
+        "text": "The property is not understood to be a listed building.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_gated_community",
+    "rules": [
+      {
+        "id": "x_gated_no",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{X_NOT_GATED}",
+        "text": "The property is not located within a gated development.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner3",
+          "No"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_risks_other_",
+    "rules": [
+      {
+        "id": "x_j4_none",
+        "masters": [
+          "{RISK_TO_OTHER}"
+        ],
+        "sub": "{X_NO_OTHER_RISKS}",
+        "text": "No other risks were identified during the inspection.",
+        "tokens": [],
+        "when": [
+          "cb_x_j4_none",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_x_j4_none",
+            "label": "No other risks identified",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]
