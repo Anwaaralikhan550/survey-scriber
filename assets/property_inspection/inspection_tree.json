@@ -22373,6 +22373,11 @@
               "id": "cb_property_is_flat",
               "label": "Property is a flat",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_e1_general",
+              "label": "General notes",
+              "type": "checkbox"
             }
           ],
           "inlinePosition": "header"

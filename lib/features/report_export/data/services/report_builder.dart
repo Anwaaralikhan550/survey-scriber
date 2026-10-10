@@ -814,7 +814,7 @@ class ReportBuilder {
     if (left.isEmpty || right.isEmpty) return false;
     return left == right;
   }
-
+
   List<String> _narrativeFallbackForIssuesRisks(
     String screenTitle,
     List<ReportField> fields,
@@ -1414,7 +1414,7 @@ class ReportBuilder {
     if (id == 'activity_property_is_noisy_area') return 130;
     return 1000;
   }
-
+
   List<String> _cleanupPhrases(List<String> phrases) {
     final out = <String>[];
     final seen = <String>{};
@@ -1918,11 +1918,9 @@ class ReportBuilder {
                     !_startsWithTitle(screenPhrases, screenReportTitle)) {
                   mergedPhrases.add(_mergedSubheading(screenReportTitle));
                 }
-                if (isLegacyConstructionSummary) {
-                  mergedPhrases.addAll(screenPhrases.take(2));
-                } else {
-                  mergedPhrases.addAll(screenPhrases);
-                }
+                // Every PDF paragraph of a Construction screen is report text (type, visible-only,
+                // modern design, concrete advisory ...): never truncate to the first two.
+                mergedPhrases.addAll(screenPhrases);
               } else {
                 // No phrase handler — convert fields to narrative phrases
                 // so data is not lost when other screens do have phrases.

@@ -13225,6 +13225,16 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'cb_j3_general',
     whenValue: 'true',
   ),
+  VerbatimRule(
+    'e1_general',
+    'activity_outside_property_chimney_main_screen',
+    '{E_CHIMNEY}',
+    '{E1_GENERAL_NOTES}',
+    [
+    ],
+    whenField: 'cb_e1_general',
+    whenValue: 'true',
+  ),
   // <<verbatim-rules-end>>
 ];
 

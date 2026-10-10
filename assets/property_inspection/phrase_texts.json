@@ -1239,6 +1239,7 @@
   "{E_CHIMNEY}::{E1L_AERIAL_SOON}": "Repair soon: This should be repaired soon.",
   "{E_CHIMNEY}::{E1L_AERIAL_NOW}": "Repair now: This is a safety hazard, and the aerial/satellite dish may fall to the ground or on people. Where loose or inadequately fixed, repairs should be carried out promptly to prevent damage during adverse weather.",
   "{E_CHIMNEY}::{E1L_REPAIR_AERIAL_E1L_SA}": "Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is {CS_AERIAL_DEFECTS}.",
+  "{E_CHIMNEY}::{E1_GENERAL_NOTES}": "General notes: Routine maintenance works should be carried out to prevent water penetration and thereafter as and when due, to keep the stacks in good condition. It would also be wise to check the condition of the chimney pots, flaunching, and flashing, during routine maintenance and carry out all necessary works to ensure weather tightness of the stacks.",
   "{E_LIMITATIONS}::{E0_GROUND_LEVEL}": "My inspection of the exterior was carried out from ground level and other reasonably accessible positions.",
   "{E_LIMITATIONS}::{E0_VANTAGE_POINTS}": "My inspection was restricted by the surrounding elements, including the layout of the area, and available vantage points from which I was able to view the property.",
   "{E_LIMITATIONS}::{E0_LIMITED_BY}": "Limitations: The inspection was limited by {E0_LIMITS}.",
