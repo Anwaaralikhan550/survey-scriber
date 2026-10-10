@@ -1,0 +1,60 @@
+[
+  {
+    "screen": "activity_outside_property_main_walls_main_screen",
+    "rules": [
+      {
+        "id": "e4_intro",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{STANDARD_TEXT}",
+        "text": "The external walls have been inspected visually and by touch from the outside and internally where exposed. No opening up or destructive investigation has been undertaken. The composition of the wall material cannot be fully confirmed without causing damage to the walls.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_windows_main_screen",
+    "rules": [
+      {
+        "id": "e5_intro",
+        "masters": [
+          "{E_WINDOWS}"
+        ],
+        "sub": "{WINDOWS_STANDARD_TEXT}",
+        "text": "Not every part of the windows was inspected in detail. The inspection was limited to those parts that were readily accessible without causing damage or moving furnishings. Only a representative sample of accessible windows was opened and closed during the inspection. Windows obscured by curtains, blinds, shutters, furniture, stored items, or fitted security devices could not be fully inspected. Double-glazed units cannot be assessed for thermal performance during a visual inspection.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      }
+    ]
+  }
+]

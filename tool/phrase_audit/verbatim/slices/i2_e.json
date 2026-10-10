@@ -1,0 +1,209 @@
+[
+  {
+    "screen": "activity_issues_glazed_sections",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "i2_intro",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_INTRO}",
+        "text": "Where applicable, your legal adviser should obtain copies of available guarantees, warranties, certificates, and supporting documentation relating to:",
+        "tokens": [],
+        "when": [
+          "cb_i2_intro",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_intro",
+            "label": "Standard introduction",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i2_windows",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_WINDOWS_DOORS}",
+        "text": "Window/doors: Replacement windows and external doors (including FENSA, CERTASS or Building Regulation certification).",
+        "tokens": [],
+        "when": [
+          "cb_i2_windows",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_windows",
+            "label": "Window / doors",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i2_boiler",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_BOILER}",
+        "text": "Boiler: Boiler installations, servicing, commissioning documentation, and heating system warranties.",
+        "tokens": [],
+        "when": [
+          "cb_i2_boiler",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_boiler",
+            "label": "Boiler",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i2_structural",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_STRUCTURAL_ALTERATIONS}",
+        "text": "Structural alterations: Structural alterations, roof replacements, loft conversions and associated structural calculations or guarantees.",
+        "tokens": [],
+        "when": [
+          "cb_i2_structural",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_structural",
+            "label": "Structural alterations",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i2_dpc",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_DPC_TREATMENT}",
+        "text": "DPC treatment: Damp-proofing treatment works, including treatment specifications and contractor details.",
+        "tokens": [],
+        "when": [
+          "cb_i2_dpc",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_dpc",
+            "label": "DPC treatment",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i2_timber",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_TIMBER_TREATMENT}",
+        "text": "Timber treatment: Timber treatment works, including treatment specifications and contractor details.",
+        "tokens": [],
+        "when": [
+          "cb_i2_timber",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_timber",
+            "label": "Timber treatment",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i2_cavity",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_CAVITY_INSULATION}",
+        "text": "Cavity insulation: Cavity wall insulation installation certificates, guarantees, and warranties.",
+        "tokens": [],
+        "when": [
+          "cb_i2_cavity",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_cavity",
+            "label": "Cavity insulation",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i2_spray",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_SPRAY_FOAM}",
+        "text": "Spray foam: Spray foam insulation installation details, guarantees and warranties, together with confirmation of any lender requirements.",
+        "tokens": [],
+        "when": [
+          "cb_i2_spray",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_spray",
+            "label": "Spray foam",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i2_renewable",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_RENEWABLE_ENERGY}",
+        "text": "Renewable energy: Renewable energy installations, including solar PV, solar thermal, battery storage, air source heat pumps, and ground source heat pumps, together with installation certificates, ownership details, maintenance agreements, warranties and any lease or finance agreements.",
+        "tokens": [],
+        "when": [
+          "cb_i2_renewable",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_renewable",
+            "label": "Renewable energy",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "i2_others",
+        "masters": [
+          "{ISSUE_GUARANTEES}"
+        ],
+        "sub": "{I2_OTHERS}",
+        "text": "Others: Any other significant repair, improvement, or structural work where guarantees, warranties or certification are available.",
+        "tokens": [],
+        "when": [
+          "cb_i2_others",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_i2_others",
+            "label": "Others",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

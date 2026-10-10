@@ -1,0 +1,546 @@
+[
+  {
+    "screen": "activity_in_side_property_fire_places",
+    "set_title": "Fireplaces",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f5_desc",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_DESCRIPTION}",
+        "text": "Description: The property incorporates {FIREPLACE_TYPES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{FIREPLACE_TYPES}",
+            "options": [
+              [
+                "f5t_open_fireplaces",
+                "open fireplaces"
+              ],
+              [
+                "f5t_gas_fires",
+                "gas fires"
+              ],
+              [
+                "f5t_electric_fires",
+                "electric fires"
+              ],
+              [
+                "f5t_solid_fuel_stoves",
+                "solid fuel stoves"
+              ],
+              [
+                "f5t_wood_burning_stoves",
+                "wood-burning stoves"
+              ],
+              [
+                "f5t_multi_fuel_stoves",
+                "multi-fuel stoves"
+              ],
+              [
+                "f5t_decorative_fireplaces",
+                "decorative fireplaces"
+              ]
+            ],
+            "pdf_options": [
+              "open fireplaces",
+              "gas fires",
+              "electric fires",
+              "solid fuel stoves",
+              "wood-burning stoves",
+              "multi-fuel stoves",
+              "decorative fireplaces"
+            ],
+            "label": "The property incorporates"
+          }
+        ],
+        "pdf": [
+          "Description: The property incorporates open fireplaces, gas fires, electric fires, solid fuel stoves, wood-burning stoves, multi-fuel stoves, decorative fireplaces."
+        ]
+      },
+      {
+        "id": "f5_cond",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_CONDITION}",
+        "text": "Condition: Where visible, the fireplace(s) and chimney breast(s) appear in {FIREPLACE_CONDITION} condition, consistent with their age and construction. If the flues are to be used, they should be inspected and assessed by an appropriately qualified chimney specialist before use. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the fireplaces, chimney breasts and flues material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{FIREPLACE_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the fireplace(s) and chimney breast(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_fire_places_repair_blocked_fireplace",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f5_vented",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_VENTED_BLOCKED}",
+        "text": "Vented blocked fireplace: The fireplace(s) in the {BLOCKED_LOCATIONS} are vented.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{BLOCKED_LOCATIONS}",
+            "options": [
+              [
+                "f5b_lounge",
+                "lounge"
+              ],
+              [
+                "f5b_dining_room",
+                "dining room"
+              ],
+              [
+                "f5b_bedroom",
+                "bedroom"
+              ],
+              [
+                "f5b_kitchen",
+                "kitchen"
+              ],
+              [
+                "f5b_hallway",
+                "hallway"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "dining room",
+              "bedroom",
+              "kitchen",
+              "hallway"
+            ],
+            "label": "Fireplace(s) in",
+            "other": [
+              "f5b_other",
+              "f5b_other_text"
+            ],
+            "cond": "actv_status=Vented|Unvented"
+          }
+        ],
+        "pdf": [
+          "Vented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other are vented."
+        ],
+        "when": [
+          "actv_status",
+          "Vented"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Blocked fireplace",
+            "type": "dropdown",
+            "options": [
+              "Vented",
+              "Unvented"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f5_unvented",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_UNVENTED_BLOCKED}",
+        "text": "Unvented blocked fireplace: The fireplace(s) in the {BLOCKED_LOCATIONS} have been sealed, but no ventilation to the redundant flue was evident. Unventilated flues can trap moisture, increasing the risk of dampness, condensation, and deterioration of the chimney structure. A suitably qualified contractor should inspect the flue and install appropriate permanent ventilation, such as ventilating air bricks or flue vents, where required. This work should be carried out soon to reduce the risk of moisture-related defects.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{BLOCKED_LOCATIONS}",
+            "options": [
+              [
+                "f5b_lounge",
+                "lounge"
+              ],
+              [
+                "f5b_dining_room",
+                "dining room"
+              ],
+              [
+                "f5b_bedroom",
+                "bedroom"
+              ],
+              [
+                "f5b_kitchen",
+                "kitchen"
+              ],
+              [
+                "f5b_hallway",
+                "hallway"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "dining room",
+              "bedroom",
+              "kitchen",
+              "hallway"
+            ],
+            "label": "Fireplace(s) in",
+            "other": [
+              "f5b_other",
+              "f5b_other_text"
+            ],
+            "cond": "actv_status=Vented|Unvented"
+          }
+        ],
+        "pdf": [
+          "Unvented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other have been sealed, but no ventilation to the redundant flue was evident."
+        ],
+        "when": [
+          "actv_status",
+          "Unvented"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_fire_places_repair_removed_cb",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f5_removed",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_REMOVED_CHIMNEY_BREASTS}",
+        "text": "Removed Chimney Breasts: Evidence was observed that a chimney breast has been {RCB_STATE}. The adequacy of concealed structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate Building Regulation approval and completion certification were obtained where applicable. Where structural adequacy is uncertain, further investigation by an appropriately qualified structural engineer is recommended.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RCB_STATE}",
+            "options": [
+              [
+                "f5r_partially_removed",
+                "partially removed"
+              ],
+              [
+                "f5r_removed",
+                "removed"
+              ]
+            ],
+            "pdf_options": [
+              "partially removed",
+              "removed"
+            ],
+            "label": "Chimney breast has been"
+          }
+        ],
+        "pdf": [
+          "Removed Chimney Breasts: Evidence was observed that a chimney breast has been partially removed, removed."
+        ]
+      },
+      {
+        "id": "f5_removed_defects",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_REMOVED_DEFECTS}",
+        "text": "Defects noted: The chimney breast has been removed from the {RCB_LOCATIONS}. The adjacent construction is {RCB_DEFECTS}. I saw evidence that indicates this has not been done properly. You should ask an appropriately qualified person to investigate this problem and recommend any repairs. This may involve removing parts of the floor and wall, and you should discuss this with the property owner.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RCB_LOCATIONS}",
+            "options": [
+              [
+                "f5rl_lounge",
+                "lounge"
+              ],
+              [
+                "f5rl_bedroom",
+                "bedroom"
+              ],
+              [
+                "f5rl_kitchen",
+                "kitchen"
+              ],
+              [
+                "f5rl_bathroom",
+                "bathroom"
+              ],
+              [
+                "f5rl_utility_room",
+                "utility room"
+              ],
+              [
+                "f5rl_hallway",
+                "hallway"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "bedroom",
+              "kitchen",
+              "bathroom",
+              "utility room",
+              "hallway"
+            ],
+            "label": "Chimney breast removed from",
+            "other": [
+              "f5rl_other",
+              "f5rl_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{RCB_DEFECTS}",
+            "options": [
+              [
+                "f5rd_damaged",
+                "damaged"
+              ],
+              [
+                "f5rd_cracked",
+                "cracked"
+              ],
+              [
+                "f5rd_distorted",
+                "distorted"
+              ]
+            ],
+            "pdf_options": [
+              "damaged",
+              "cracked",
+              "distorted"
+            ],
+            "label": "Adjacent construction is",
+            "other": [
+              "f5rd_other",
+              "f5rd_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Defects noted: The chimney breast has been removed from the lounge, bedroom, kitchen, bathroom, utility room, hallway, other.",
+          "The adjacent construction is damaged, cracked, distorted, other."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_fire_places_repair_boiler_flue",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f5_boiler",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_BOILER_FLUES}",
+        "text": "Boiler Flues: Where a heating appliance discharges through an external wall or roof, the visible flue terminal appears secure, adequately positioned, and free from obvious obstruction. The installation has not been assessed.",
+        "tokens": [],
+        "when": [
+          "cb_boiler_flue",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_boiler_flue",
+            "label": "Boiler flues",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_fire_places_defects",
+    "new_screen": {
+      "id": "activity_in_side_property_fire_places_defects",
+      "title": "Fireplace defects",
+      "parent": "group_f5_fireplaces_and_chimneys_69",
+      "order": 14,
+      "after": "activity_in_side_property_fire_places_repair_boiler_flue"
+    },
+    "rules": [
+      {
+        "id": "f5_defects",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_FIREPLACE_DEFECTS}",
+        "text": "Fireplace defects: One or more of the following defects were observed: {FIREPLACE_DEFECT_LIST}. Repairs should be undertaken where deterioration affects safety or continued use. If you plan to use the fireplace again, you should ask an appropriately qualified person to inspect and repair the fireplace. Although I do not know the full extent of the work required, you should plan for complete replacement. You should not use the fireplace until this has been done.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{FIREPLACE_DEFECT_LIST}",
+            "options": [
+              [
+                "f5fd_cracked_fire_surround",
+                "cracked fire surround"
+              ],
+              [
+                "f5fd_damaged_hearth",
+                "damaged hearth"
+              ],
+              [
+                "f5fd_loose_fireplace_components",
+                "loose fireplace components"
+              ],
+              [
+                "f5fd_cracked_chimney_breast",
+                "cracked chimney breast"
+              ],
+              [
+                "f5fd_distorted_fireplace_opening",
+                "distorted fireplace opening"
+              ],
+              [
+                "f5fd_localised_damp_staining",
+                "localised damp staining"
+              ],
+              [
+                "f5fd_surface_deterioration",
+                "surface deterioration"
+              ]
+            ],
+            "pdf_options": [
+              "cracked fire surround",
+              "damaged hearth",
+              "loose fireplace components",
+              "cracked chimney breast",
+              "distorted fireplace opening",
+              "localised damp staining",
+              "surface deterioration"
+            ],
+            "label": "One or more of the following defects were observed"
+          }
+        ],
+        "pdf": [
+          "Fireplace defects: One or more of the following defects were observed: • cracked fire surround • damaged hearth • loose fireplace components • cracked chimney breast • distorted fireplace opening • localised damp staining • surface deterioration Repairs should be undertaken where deterioration affects safety or continued use."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_fire_places_dampness",
+    "new_screen": {
+      "id": "activity_in_side_property_fire_places_dampness",
+      "title": "Dampness",
+      "parent": "group_f5_fireplaces_and_chimneys_69",
+      "order": 16,
+      "after": "activity_in_side_property_fire_places_defects"
+    },
+    "rules": [
+      {
+        "id": "f5_damp",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_DAMPNESS}",
+        "text": "Dampness: Localised damp staining was observed on the chimney breast. This may be associated with condensation, defective flashings, unused flues, or moisture penetration. The source should be identified and repaired before internal redecoration is undertaken.",
+        "tokens": [],
+        "when": [
+          "cb_dampness",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_dampness",
+            "label": "Dampness",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_fireplaces_main_screen",
+    "rules": [
+      {
+        "id": "f5_intro",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_INTRO}",
+        "text": "This section relates to visible fireplaces, chimney breasts, and associated flues within the property. The inspection was limited to a visual assessment only. Fireplaces, flues, and appliances were not assessed, dismantled, or operated unless otherwise stated. The internal condition of chimney flues, liners and concealed structural elements cannot be confirmed during a visual inspection. No smoke testing, CCTV survey or opening up was undertaken. Combustion appliances should be provided with adequate permanent ventilation in accordance with current standards. The adequacy of ventilation has not been assessed during this inspection.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      },
+      {
+        "id": "f5_general",
+        "masters": [
+          "{F_FIREPLACES_AND_CHIMNEYS}"
+        ],
+        "sub": "{F5_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: Fireplaces, flues, and combustion appliances should be inspected and serviced regularly by appropriately qualified contractors. Unused flues should be adequately ventilated to reduce the risk of condensation and dampness. Where fireplaces are no longer required, appropriate capping and ventilation should be maintained.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_in_side_property_fire_places_diffrent",
+      "activity_in_side_property_fire_places__gas_fire",
+      "activity_in_side_property_fire_places__imitation_system",
+      "activity_in_side_property_fire_places__wood_burning_stove",
+      "activity_in_side_property_fire_places__electric_fire",
+      "activity_in_side_property_fire_places__other",
+      "activity_in_side_property_fire_places_repair_fire_place",
+      "activity_in_side_property_fire_places_repair_damage_grate",
+      "activity_in_side_property_fire_places_repair_damage_surround",
+      "activity_in_side_property_fire_places_not_inspected"
+    ]
+  }
+]

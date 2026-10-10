@@ -1,0 +1,27 @@
+[
+  {
+    "screen": "activity_outside_property_chimney_main_screen",
+    "rules": [
+      {
+        "id": "e1_general",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1_GENERAL_NOTES}",
+        "text": "General notes: Routine maintenance works should be carried out to prevent water penetration and thereafter as and when due, to keep the stacks in good condition. It would also be wise to check the condition of the chimney pots, flaunching, and flashing, during routine maintenance and carry out all necessary works to ensure weather tightness of the stacks.",
+        "tokens": [],
+        "when": [
+          "cb_e1_general",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e1_general",
+            "label": "General notes",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

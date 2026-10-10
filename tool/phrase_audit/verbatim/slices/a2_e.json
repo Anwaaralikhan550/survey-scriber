@@ -1,0 +1,552 @@
+[
+  {
+    "screen": "activity_property_type",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a2_type",
+        "masters": [
+          "{D_PROPERTY_TYPE}"
+        ],
+        "sub": "{A2_PROPERTY_TYPE}",
+        "text": "Property type: The property is a {A2_TYPE} providing {A2_BEDROOMS} bedrooms.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A2_TYPE}",
+            "options": [
+              [
+                "a2t_detached",
+                "detached"
+              ],
+              [
+                "a2t_semi_detached",
+                "semi-detached"
+              ],
+              [
+                "a2t_end_of_terrace",
+                "end-of-terrace"
+              ],
+              [
+                "a2t_mid_terrace",
+                "mid-terrace"
+              ],
+              [
+                "a2t_purpose_built_flat",
+                "purpose-built flat"
+              ],
+              [
+                "a2t_converted_flat",
+                "converted flat"
+              ],
+              [
+                "a2t_maisonette",
+                "maisonette"
+              ],
+              [
+                "a2t_bungalow",
+                "bungalow"
+              ],
+              [
+                "a2t_cottage",
+                "cottage"
+              ]
+            ],
+            "pdf_options": [
+              "detached",
+              "semi-detached",
+              "end-of-terrace",
+              "mid-terrace",
+              "purpose-built flat",
+              "converted flat",
+              "maisonette",
+              "bungalow",
+              "cottage"
+            ],
+            "label": "The property is a",
+            "other": [
+              "a2t_other",
+              "a2t_other_text"
+            ]
+          },
+          {
+            "kind": "dropdown",
+            "token": "{A2_BEDROOMS}",
+            "dropdown": "actv_a2_bedrooms",
+            "field_label": "Providing bedrooms",
+            "dropdown_options": [
+              "One",
+              "Two",
+              "Three",
+              "Four",
+              "Five",
+              "Six or more"
+            ],
+            "pdf_options": [
+              "one",
+              "two",
+              "three",
+              "four",
+              "five",
+              "six or more"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage, other providing one, two, three, four, five, six or more bedrooms."
+        ],
+        "when": [
+          "cb_a2_type",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a2_type",
+            "label": "Property type",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_built_year",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a2_year_exact",
+        "masters": [
+          "{D_YEAR_BUILT}"
+        ],
+        "sub": "{A2_YEAR_EXACT}",
+        "text": "Year built: The property is understood to have been built in {A2_YEAR}. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
+        "tokens": [
+          {
+            "kind": "text",
+            "token": "{A2_YEAR}",
+            "dropdown": "android_material_design_spinner",
+            "field_label": "Year built (enter year)"
+          }
+        ],
+        "pdf": [
+          "Year built: The property is understood to have been built in (enter year), pre-1900, 1900-1929, 1930-1949, 1950-1969, 1970-1989, 1990-2009, 2010 onwards, or the exact construction date is unknown."
+        ],
+        "when": [
+          "cb_a2_year_exact",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a2_year_exact",
+            "label": "Exact year known",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "a2_year_band",
+        "masters": [
+          "{D_YEAR_BUILT}"
+        ],
+        "sub": "{A2_YEAR_BAND}",
+        "text": "Year built: The property is understood to have been built in {A2_BAND}. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation. Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{A2_BAND}",
+            "dropdown": "actv_a2_year_band",
+            "field_label": "Year built band",
+            "dropdown_options": [
+              "pre-1900",
+              "1900– 1929",
+              "1930–1949",
+              "1950–1969",
+              "1970–1989",
+              "1990–2009",
+              "2010 onwards",
+              "the exact construction date is unknown"
+            ],
+            "pdf_options": [
+              "pre-1900",
+              "1900– 1929",
+              "1930–1949",
+              "1950–1969",
+              "1970–1989",
+              "1990–2009",
+              "2010 onwards",
+              "the exact construction date is unknown"
+            ]
+          }
+        ],
+        "pdf": [
+          "Year built: The property is understood to have been built in (enter year), pre-1900, 1900-1929, 1930-1949, 1950-1969, 1970-1989, 1990-2009, 2010 onwards, or the exact construction date is unknown."
+        ],
+        "when": [
+          "actv_a2_year_band",
+          "pre-1900"
+        ],
+        "when_any": [
+          [
+            "actv_a2_year_band",
+            "1900– 1929"
+          ],
+          [
+            "actv_a2_year_band",
+            "1930–1949"
+          ],
+          [
+            "actv_a2_year_band",
+            "1950–1969"
+          ],
+          [
+            "actv_a2_year_band",
+            "1970–1989"
+          ],
+          [
+            "actv_a2_year_band",
+            "1990–2009"
+          ],
+          [
+            "actv_a2_year_band",
+            "2010 onwards"
+          ],
+          [
+            "actv_a2_year_band",
+            "the exact construction date is unknown"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_extended",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a2_not_extended",
+        "masters": [
+          "{D_EXTENDED}"
+        ],
+        "sub": "{A2_NOT_EXTENDED}",
+        "text": "Not Extended: From observable physical evidence, the property does not appear to have been extended.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner",
+          "Not extended"
+        ],
+        "extra_fields": [
+          {
+            "id": "android_material_design_spinner",
+            "label": "Extension",
+            "type": "dropdown",
+            "options": [
+              "Not extended",
+              "Extended"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "a2_extended",
+        "masters": [
+          "{D_EXTENDED}"
+        ],
+        "sub": "{A2_EXTENDED}",
+        "text": "Extended: The property has been extended to provide {A2_EXTENSION} accommodation. The extension appears compatible with the original building in terms of construction and appearance. This assessment is based on a visual inspection only, and no opening-up or verification of concealed construction was undertaken. Your legal adviser should confirm that all necessary statutory approvals, including planning permission, Building Regulations approval, and any completion certificates or guarantees, have been obtained where required.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A2_EXTENSION}",
+            "options": [
+              [
+                "a2e_side",
+                "side"
+              ],
+              [
+                "a2e_rear",
+                "rear"
+              ],
+              [
+                "a2e_front",
+                "front"
+              ],
+              [
+                "a2e_single_storey",
+                "single-storey"
+              ],
+              [
+                "a2e_two_storey",
+                "two-storey"
+              ],
+              [
+                "a2e_roof",
+                "roof"
+              ],
+              [
+                "a2e_loft",
+                "loft"
+              ]
+            ],
+            "pdf_options": [
+              "side",
+              "rear",
+              "front",
+              "single-storey",
+              "two-storey",
+              "roof",
+              "loft"
+            ],
+            "label": "Extended to provide"
+          }
+        ],
+        "pdf": [
+          "Extended: The property has been extended to provide side, rear, front, single-storey, two-storey, roof, loft accommodation."
+        ],
+        "when": [
+          "android_material_design_spinner",
+          "Extended"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_converted",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a2_not_converted",
+        "masters": [
+          "{D_CONVERTED}"
+        ],
+        "sub": "{A2_NOT_CONVERTED}",
+        "text": "Not converted: The property has not been converted.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner",
+          "Not converted"
+        ],
+        "extra_fields": [
+          {
+            "id": "android_material_design_spinner",
+            "label": "Conversion",
+            "type": "dropdown",
+            "options": [
+              "Not converted",
+              "Converted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "a2_converted",
+        "masters": [
+          "{D_CONVERTED}"
+        ],
+        "sub": "{A2_CONVERTED}",
+        "text": "Converted: The property has been converted from its original use. The property was a {A2_PRIOR_TYPE}, which has been converted to self-contained units.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A2_PRIOR_TYPE}",
+            "options": [
+              [
+                "a2c_detached_house",
+                "detached house"
+              ],
+              [
+                "a2c_semi_detached_house",
+                "semi-detached house"
+              ],
+              [
+                "a2c_mid_terrace_house",
+                "mid-terrace house"
+              ],
+              [
+                "a2c_end_terrace_house",
+                "end-terrace house"
+              ]
+            ],
+            "pdf_options": [
+              "detached house",
+              "semi-detached house",
+              "mid-terrace house",
+              "end-terrace house"
+            ],
+            "label": "The property was a",
+            "other": [
+              "a2c_other",
+              "a2c_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "The property was a detached house, semi-detached house, mid-terrace house, end-terrace house, other, which has been converted to self-contained units."
+        ],
+        "when": [
+          "android_material_design_spinner",
+          "Converted"
+        ]
+      },
+      {
+        "id": "a2_known_date",
+        "masters": [
+          "{D_CONVERTED}"
+        ],
+        "sub": "{A2_KNOWN_DATE}",
+        "text": "Known date: The year of conversion is {A2_YEAR_CONVERTED}. Your legal adviser should confirm that all statutory local authority consents and approvals are in place.",
+        "tokens": [
+          {
+            "kind": "text",
+            "token": "{A2_YEAR_CONVERTED}",
+            "dropdown": "textView3",
+            "field_label": "Year of conversion"
+          }
+        ],
+        "pdf": [
+          "Known date: The year of conversion is (YYYY)."
+        ],
+        "when": [
+          "actv_a2_conversion_date",
+          "Known date"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_a2_conversion_date",
+            "label": "Date of conversion",
+            "type": "dropdown",
+            "options": [
+              "Known date",
+              "Unknown date"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "a2_unknown_date",
+        "masters": [
+          "{D_CONVERTED}"
+        ],
+        "sub": "{A2_UNKNOWN_DATE}",
+        "text": "Unknown date: The date of conversion is unknown. Your legal adviser should verify that all appropriate statutory approvals and completion certificates were obtained.",
+        "tokens": [],
+        "when": [
+          "actv_a2_conversion_date",
+          "Unknown date"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_flate",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a2_flat",
+        "masters": [
+          "{D_FLAT_INFO}"
+        ],
+        "sub": "{A2_FLAT_INFORMATION}",
+        "text": "Flat information: The property is located on the {A2_FLOOR} of a {A2_STOREYS} storey building. The property is accessed via a {A2_ACCESS} to the {A2_ELEVATION} elevation of the property.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{A2_FLOOR}",
+            "dropdown": "actv_a2_floor",
+            "field_label": "Located on the",
+            "dropdown_options": [
+              "Lower ground floor",
+              "Ground floor",
+              "First floor",
+              "Second floor",
+              "Third floor",
+              "Fourth floor"
+            ],
+            "pdf_options": [
+              "lower ground floor",
+              "ground floor",
+              "first floor",
+              "second floor",
+              "third floor",
+              "fourth floor"
+            ],
+            "lower": true
+          },
+          {
+            "kind": "dropdown",
+            "token": "{A2_STOREYS}",
+            "dropdown": "actv_a2_storeys",
+            "field_label": "Storeys in the building",
+            "dropdown_options": [
+              "One",
+              "Two",
+              "Three",
+              "Four"
+            ],
+            "pdf_options": [
+              "one",
+              "two",
+              "three",
+              "four"
+            ],
+            "lower": true
+          },
+          {
+            "kind": "dropdown",
+            "token": "{A2_ACCESS}",
+            "dropdown": "actv_a2_access",
+            "field_label": "Accessed via a",
+            "dropdown_options": [
+              "Private door",
+              "Communal door",
+              "Communal door with entry system"
+            ],
+            "pdf_options": [
+              "private door",
+              "communal door",
+              "communal door with entry system"
+            ],
+            "lower": true
+          },
+          {
+            "kind": "dropdown",
+            "token": "{A2_ELEVATION}",
+            "dropdown": "actv_a2_elevation",
+            "field_label": "Elevation",
+            "dropdown_options": [
+              "Front",
+              "Side",
+              "Rear"
+            ],
+            "pdf_options": [
+              "front",
+              "side",
+              "rear"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Flat information: The property is located on the lower ground floor, ground floor, first floor, second floor, third floor, fourth floor, other floor of a one, two, three, four, other storey building.",
+          "The property is accessed via a private door, communal door, communal door with entry system, other to the front, side, rear, elevation of the property."
+        ],
+        "when": [
+          "cb_a2_flat",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a2_flat",
+            "label": "Flat information",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

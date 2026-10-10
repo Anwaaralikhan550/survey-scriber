@@ -1,0 +1,13333 @@
+part of 'inspection_phrase_engine.dart';
+
+/// Data-driven phrase rules for the PDF-verbatim completion work.
+///
+/// A rule says: "when this screen is built, take the approved bank sentence
+/// `master::sub`, fill its `{TOKEN}`s from the form, and emit it". Tokens are
+/// filled from checkbox groups (joined "a, b and c"), a dropdown or a text
+/// field. A rule fires only when every token has a value, so an untouched
+/// screen emits nothing.
+///
+/// Every rule also records the PDF's own option list (`pdfOptions`), which the
+/// generated test (`inspection_verbatim_spec_test.dart`) compares with the form
+/// definition, so the options a surveyor can pick are exactly the PDF's.
+
+/// How a `{TOKEN}` is filled.
+class VerbatimToken {
+  const VerbatimToken(
+    this.token, {
+    this.options = const {},
+    this.legacy = const {},
+    this.otherCheckbox,
+    this.otherText,
+    this.dropdown,
+    this.dropdownOptions = const [],
+    this.text,
+    this.lower = false,
+    this.cap = false,
+    this.constant,
+    this.optional = false,
+    this.pdfOptions = const [],
+  });
+
+  /// Placeholder in the bank sentence, e.g. `{CS_STACK_CONSTRUCTION}`.
+  final String token;
+
+  /// Checkbox id -> label printed in the sentence (the PDF option text).
+  final Map<String, String> options;
+
+  /// Old checkbox ids still rendered for previously saved surveys.
+  final Map<String, String> legacy;
+
+  /// "Other" checkbox id and its typed-text field id.
+  final String? otherCheckbox;
+  final String? otherText;
+
+  /// Single-choice dropdown field id; its value is printed as selected.
+  final String? dropdown;
+
+  /// Dropdown values as defined in the form (checked against the PDF).
+  final List<String> dropdownOptions;
+
+  /// Free-text field id.
+  final String? text;
+
+  /// Print the selected dropdown value in lower case (form labels may be
+  /// capitalised for display while the PDF sentence is lower case).
+  final bool lower;
+
+  /// Capitalise the first letter of the printed value (token starts a
+  /// sentence).
+  final bool cap;
+
+  /// Fixed value (e.g. the roof type of a screen) - never asked of the surveyor.
+  final String? constant;
+
+  /// An unanswered optional token is replaced by nothing instead of
+  /// suppressing the sentence.
+  final bool optional;
+
+  /// The option list exactly as the PDF prints it (without "other").
+  final List<String> pdfOptions;
+}
+
+/// One approved sentence and where its values come from.
+class VerbatimRule {
+  const VerbatimRule(
+    this.id,
+    this.screen,
+    this.master,
+    this.sub,
+    this.tokens, {
+    this.pdf,
+    this.pdfMore = const [],
+    this.first = false,
+    this.isAre = false,
+    this.whenField,
+    this.whenValue,
+    this.whenAny = const [],
+  });
+
+  /// Stable name used in test output.
+  final String id;
+  final String screen;
+
+  /// Bank master code, or `@chimney` to pick the single/multi stack master
+  /// from the answers.
+  final String master;
+  final String sub;
+  final List<VerbatimToken> tokens;
+
+  /// The PDF sentence this rule implements, exactly as the PDF prints it
+  /// (option list included). The ledger uses it to mark that option-list row
+  /// verified once the generated tests pass.
+  final String? pdf;
+
+  /// Further PDF option-list sentences this rule also implements.
+  final List<String> pdfMore;
+
+  /// Emit before the screen's hand-written handler output (PDF order).
+  final bool first;
+
+  /// Replace `{IS_ARE}` with is/are from the first token's number of choices.
+  final bool isAre;
+
+  /// Fire only when this dropdown holds this value (case-insensitive), e.g.
+  /// `actv_condition` = `Repair now`.
+  final String? whenField;
+  final String? whenValue;
+
+  /// Further `[field, value]` pairs that also make the rule fire (OR with
+  /// `whenField`/`whenValue`).
+  final List<List<String>> whenAny;
+}
+
+/// All PDF-verbatim rules. Grouped by PDF section; keep PDF order.
+const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
+  // ── E1 Chimney stacks ────────────────────────────────────────────────
+  VerbatimRule(
+    'e1_stack_construction',
+    'activity_outside_property_stacks',
+    '@chimney',
+    '{STACK_CONSTRUCTION}',
+    [
+      VerbatimToken(
+        '{CS_STACK_CONSTRUCTION}',
+        options: {
+          'st_brick': 'brick',
+          'st_stone': 'stone',
+          'st_rendered_masonry': 'rendered masonry',
+        },
+        otherCheckbox: 'st_other',
+        otherText: 'et_stack_other',
+        pdfOptions: ['brick', 'stone', 'rendered masonry'],
+      ),
+    ],
+    pdf:
+        'Description: The chimney stack(s) are constructed of brick, stone, rendered masonry, other construction.',
+  ),
+  VerbatimRule(
+    'e1_stack_appearance',
+    'activity_outside_property_stacks',
+    '@chimney',
+    '{STACK_APPEARANCE}',
+    [
+      VerbatimToken(
+        '{CS_STACK_APPEARANCE}',
+        dropdown: 'actv_stack_appearance',
+        dropdownOptions: ['original', 'replaced', 'rebuilt'],
+        pdfOptions: ['original', 'replaced', 'rebuilt'],
+      ),
+    ],
+    pdf:
+        'The chimney stack(s) appear original, replaced, rebuilt.',
+  ),
+  VerbatimRule(
+    'e1_stack_pots',
+    'activity_outside_property_stacks',
+    '@chimney',
+    '{STACK_POTS}',
+    [
+      VerbatimToken(
+        '{CS_STACK_POT_TYPES}',
+        options: {
+          'pot_clay': 'clay pots',
+          'pot_terracotta': 'terracotta pots',
+          'pot_metal_flues': 'metal flues',
+          'pot_cowls': 'cowls',
+          'pot_caps': 'caps',
+        },
+        otherCheckbox: 'pot_other',
+        otherText: 'et_pot_other',
+        pdfOptions: [
+          'clay pots',
+          'terracotta pots',
+          'metal flues',
+          'cowls',
+          'caps',
+        ],
+      ),
+    ],
+    pdf:
+        'Pots: The chimney stack(s) are fitted with clay pots, terracotta pots, metal flues, cowls, caps, other pot(s).',
+  ),
+  VerbatimRule(
+    'e1_partial_view',
+    'activity_outside_property_chimney_partial_view',
+    '{E_CS_CHIMNEY_INSPECTION_STATUS}',
+    '{PARTIAL_VIEW}',
+    [
+      VerbatimToken(
+        '{CS_PARTIAL_REASONS}',
+        options: {
+          'pv_height': 'height',
+          'pv_restricted_access': 'restricted access',
+          'pv_adjacent_buildings': 'adjacent buildings',
+          'pv_roof_configuration': 'roof configuration',
+          'pv_health_safety': 'health and safety restrictions',
+        },
+        pdfOptions: [
+          'height',
+          'restricted access',
+          'adjacent buildings',
+          'roof configuration',
+          'health and safety restrictions',
+        ],
+      ),
+    ],
+    pdf:
+        'Not fully inspected: The chimney stack(s) could not be fully inspected because of height, restricted access, adjacent buildings, roof configuration, health and safety restrictions.',
+  ),
+  VerbatimRule(
+    'e1_flashing_formed',
+    'activity_outside_property_water_proofing',
+    '@chimney',
+    '{WATERPROOFING_FLASHING}',
+    [
+      VerbatimToken(
+        '{CS_WATERPROOFING_FLASHING_FORMED_IN}',
+        options: {
+          'ch1': 'lead',
+          'ch_flashing_lead_substitute': 'lead substitute',
+          'ch2': 'mortar',
+          'ch_flashing_bricks': 'bricks',
+          'ch4': 'tiles',
+        },
+        legacy: {'ch3': 'lead and mortar'},
+        otherCheckbox: 'ch5',
+        otherText: 'etGroundTypeOther',
+        pdfOptions: ['lead', 'lead substitute', 'mortar', 'bricks', 'tiles'],
+      ),
+    ],
+    pdf:
+        'Flashings: The waterproofing between the chimney stack and the roof covering (called the flashing) appears to be formed in lead, lead substitute, mortar, bricks, tiles, other material.',
+  ),
+  VerbatimRule(
+    'e1_flashing_condition',
+    'activity_outside_property_water_proofing',
+    '@chimney',
+    '{WATERPROOFING_FLASHING_CONDITION}',
+    [
+      VerbatimToken(
+        '{CS_WATERPROOFING_FLASHING_CONDITION}',
+        dropdown: 'actv_flashing_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Poor', 'Defective'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'poor', 'defective'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.',
+  ),
+  VerbatimRule(
+    'e1_flaunching_formed',
+    'activity_outside_property_water_proofing',
+    '@chimney',
+    '{WATERPROOFING_FLAUNCHING}',
+    [
+      VerbatimToken(
+        '{CS_WATERPROOFING_FLAUNCHING_FORMED_IN}',
+        options: {
+          'ch7': 'mortar',
+          'ch_flaunching_bricks': 'bricks',
+          'ch_flaunching_concrete': 'concrete',
+          'ch9': 'tiles',
+        },
+        legacy: {'ch6': 'lead', 'ch8': 'lead and mortar'},
+        otherCheckbox: 'ch10',
+        otherText: 'etFlaunchingOther',
+        pdfOptions: ['mortar', 'bricks', 'concrete', 'tiles'],
+      ),
+    ],
+    pdf:
+        'Flaunching: The cement bedding around the base of the chimney pot (called flaunching) appears to be formed in mortar, bricks, concrete, tiles, other material.',
+  ),
+  VerbatimRule(
+    'e1_flaunching_condition',
+    'activity_outside_property_water_proofing',
+    '@chimney',
+    '{WATERPROOFING_FLAUNCHING_CONDITION}',
+    [
+      VerbatimToken(
+        '{CS_WATERPROOFING_FLAUNCHING_CONDITION}',
+        dropdown: 'actv_flaunching_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Poor', 'Defective'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'poor', 'defective'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the flaunching appears in good, reasonable, poor, defective condition.',
+  ),
+  VerbatimRule(
+    'e1_pointing_condition',
+    'activity_outside_property_water_proofing',
+    '@chimney',
+    '{POINTING_CONDITION}',
+    [
+      VerbatimToken(
+        '{CS_POINTING_CONDITION}',
+        options: {
+          'pt_good': 'good',
+          'pt_reasonable': 'reasonable',
+          'pt_weathered': 'weathered',
+          'pt_eroded': 'eroded',
+          'pt_poor': 'poor',
+        },
+        otherCheckbox: 'pt_other',
+        otherText: 'et_pointing_other',
+        pdfOptions: ['good', 'reasonable', 'weathered', 'eroded', 'poor'],
+      ),
+    ],
+    pdf:
+        'Pointing Condition: The mortar joints to the chimney stack appear in good, reasonable, weathered, eroded, poor, other condition(s).',
+  ),
+  VerbatimRule(
+    'e1_pots_condition',
+    'activity_outside_property_water_proofing',
+    '@chimney',
+    '{POTS_CONDITION}',
+    [
+      VerbatimToken(
+        '{CS_POTS_CONDITION}',
+        options: {
+          'pc_secure': 'secure',
+          'pc_weathered': 'weathered',
+          'pc_cracked': 'cracked',
+          'pc_damaged': 'damaged',
+          'pc_missing': 'missing',
+        },
+        otherCheckbox: 'pc_other',
+        otherText: 'et_pots_other',
+        pdfOptions: ['secure', 'weathered', 'cracked', 'damaged', 'missing'],
+      ),
+    ],
+    pdf:
+        'Damaged chimney pots: The chimney pots appear secure, weathered, cracked, damaged, missing, other.',
+  ),
+  VerbatimRule(
+    'e1_leaning_degree',
+    'activity_outside_property_leaning_chimney',
+    '@chimney',
+    '{LEANING_CHIMNEY}',
+    [
+      VerbatimToken(
+        '{CS_LEANING_DEGREE}',
+        dropdown: 'actv_leaning_degree',
+        dropdownOptions: ['slightly leaning', 'significantly leaning'],
+        pdfOptions: ['slightly leaning', 'significantly leaning'],
+      ),
+    ],
+    pdf:
+        'Leaning chimney: The chimney stack appears slightly leaning, significantly leaning.',
+    first: true,
+  ),
+  VerbatimRule(
+    'e1_aerials_attached',
+    'activity_outside_property_chimney_aerials',
+    '@chimney',
+    '{AERIALS_ATTACHED}',
+    [
+      VerbatimToken(
+        '{CS_ATTACHED_ITEMS}',
+        options: {
+          'ca_aerial': 'an aerial',
+          'ca_satellite': 'a satellite dish',
+        },
+        pdfOptions: ['an aerial', 'a satellite dish'],
+        cap: true,
+      ),
+    ],
+    pdf:
+        'Aerials and satellite dishes: An aerial, a satellite dish is attached to the chimney stack.',
+    isAre: true,
+  ),
+  VerbatimRule(
+    'e1_chimney_defects',
+    'activity_outside_property_chimney_defects',
+    '@chimney',
+    '{CHIMNEY_DEFECTS}',
+    [
+      VerbatimToken(
+        '{CS_CHIMNEY_DEFECT_LIST}',
+        options: {
+          'cd_loose_flashings': 'loose flashings',
+          'cd_missing_flashings': 'missing flashings',
+          'cd_cracked_flaunching': 'cracked flaunching',
+          'cd_missing_mortar': 'missing mortar',
+          'cd_spalled_bricks': 'spalled bricks',
+          'cd_damaged_pointing': 'damaged pointing',
+          'cd_loose_chimney_pots': 'loose chimney pots',
+          'cd_broken_chimney_pots': 'broken chimney pots',
+          'cd_vegetation_growth': 'vegetation growth',
+          'cd_open_flues': 'open flues',
+          'cd_loose_aerial_fixings': 'loose aerial fixings',
+          'cd_loose_satellite_fixings': 'loose satellite dish fixings',
+        },
+        pdfOptions: ['loose flashings', 'missing flashings', 'cracked flaunching', 'missing mortar', 'spalled bricks', 'damaged pointing', 'loose chimney pots', 'broken chimney pots', 'vegetation growth', 'open flues', 'loose aerial fixings', 'loose satellite dish fixings'],
+      ),
+    ],
+    pdf:
+        'Chimney Defects: One or more chimney defects were observed, including: • Loose flashings • Missing flashings • Cracked flaunching • Missing mortar • Spalled bricks • Damaged pointing • Loose chimney pots • Broken chimney pots • Vegetation growth • Open flues • Loose aerial fixings • Loose satellite dish fixings Repairs should be undertaken by an appropriately qualified roofing contractor to prevent further deterioration and water penetration.',
+  ),
+  VerbatimRule(
+    'e2_desc_pitched',
+    'outside_property_about_roof_layout',
+    '{E_ROOF_COVERING}',
+    '{RC_ABOUT_TYPE}',
+    [
+      VerbatimToken(
+        '{RC_TYPE}',
+        constant: 'pitched',
+      ),
+      VerbatimToken(
+        '{RC_LOCATION}',
+        options: {
+          'cb_main_building': 'main building',
+          'cb_extension': 'extension',
+          'rc_loc_porch': 'porch',
+          'cb_bay_window': 'bay window',
+        },
+        otherCheckbox: 'cb_other_22',
+        otherText: 'etRoofLocationOther',
+        pdfOptions: ['main building', 'extension', 'porch', 'bay window'],
+      ),
+      VerbatimToken(
+        '{RC_MATERIAL}',
+        options: {
+          'rc_mat_original_clay': 'original clay tiles',
+          'rc_mat_replacement_clay': 'replacement clay tiles',
+          'cb_concrete': 'concrete tiles',
+          'cb_natural': 'natural slate',
+          'rc_mat_artificial_slate': 'artificial slate',
+          'rc_mat_fibre_cement': 'fibre cement slates',
+          'rc_mat_aluminium': 'aluminium sheets',
+          'cb_composite': 'composite slate',
+          'rc_mat_asbestos_sheet': 'asbestos sheet',
+        },
+        otherCheckbox: 'cb_other_78',
+        otherText: 'etRoofMaterialOther',
+        pdfOptions: ['original clay tiles', 'replacement clay tiles', 'concrete tiles', 'natural slate', 'artificial slate', 'fibre cement slates', 'aluminium sheets', 'composite slate', 'asbestos sheet'],
+      ),
+    ],
+    pdf:
+        'Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material.',
+  ),
+  VerbatimRule(
+    'e2_cond_pitched',
+    'outside_property_about_roof_layout',
+    '{E_ROOF_COVERING}',
+    '{RC_ABOUT_TYPE_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_TYPE_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e2_old_pitched',
+    'outside_property_about_roof_layout',
+    '{E_ROOF_COVERING}',
+    '{OLD_ROOF_COVERING}',
+    [
+    ],
+    whenField: 'cb_old_roof_covering',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e2_asbestos_pitched',
+    'outside_property_about_roof_layout',
+    '{E_ROOF_COVERING_MATERIAL}',
+    '{MATERIAL_COMPOSITE}',
+    [
+    ],
+    whenField: 'cb_composite',
+    whenValue: 'true',
+    whenAny: [['rc_mat_asbestos_sheet', 'true']],
+  ),
+  VerbatimRule(
+    'e2_desc_mansard',
+    'outside_property_about_roof_layout__mansard',
+    '{E_ROOF_COVERING}',
+    '{RC_ABOUT_TYPE}',
+    [
+      VerbatimToken(
+        '{RC_TYPE}',
+        constant: 'mansard',
+      ),
+      VerbatimToken(
+        '{RC_LOCATION}',
+        options: {
+          'cb_main_building': 'main building',
+          'cb_extension': 'extension',
+          'rc_loc_porch': 'porch',
+          'cb_bay_window': 'bay window',
+        },
+        otherCheckbox: 'cb_other_22',
+        otherText: 'etRoofLocationOther',
+        pdfOptions: ['main building', 'extension', 'porch', 'bay window'],
+      ),
+      VerbatimToken(
+        '{RC_MATERIAL}',
+        options: {
+          'rc_mat_original_clay': 'original clay tiles',
+          'rc_mat_replacement_clay': 'replacement clay tiles',
+          'cb_concrete': 'concrete tiles',
+          'cb_natural': 'natural slate',
+          'rc_mat_artificial_slate': 'artificial slate',
+          'rc_mat_fibre_cement': 'fibre cement slates',
+          'rc_mat_aluminium': 'aluminium sheets',
+          'cb_composite': 'composite slate',
+          'rc_mat_asbestos_sheet': 'asbestos sheet',
+        },
+        otherCheckbox: 'cb_other_78',
+        otherText: 'etRoofMaterialOther',
+        pdfOptions: ['original clay tiles', 'replacement clay tiles', 'concrete tiles', 'natural slate', 'artificial slate', 'fibre cement slates', 'aluminium sheets', 'composite slate', 'asbestos sheet'],
+      ),
+    ],
+    pdf:
+        'Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material.',
+  ),
+  VerbatimRule(
+    'e2_cond_mansard',
+    'outside_property_about_roof_layout__mansard',
+    '{E_ROOF_COVERING}',
+    '{RC_ABOUT_TYPE_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_TYPE_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e2_old_mansard',
+    'outside_property_about_roof_layout__mansard',
+    '{E_ROOF_COVERING}',
+    '{OLD_ROOF_COVERING}',
+    [
+    ],
+    whenField: 'cb_old_roof_covering',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e2_asbestos_mansard',
+    'outside_property_about_roof_layout__mansard',
+    '{E_ROOF_COVERING_MATERIAL}',
+    '{MATERIAL_COMPOSITE}',
+    [
+    ],
+    whenField: 'cb_composite',
+    whenValue: 'true',
+    whenAny: [['rc_mat_asbestos_sheet', 'true']],
+  ),
+  VerbatimRule(
+    'e2_desc_other',
+    'outside_property_about_roof_layout__other',
+    '{E_ROOF_COVERING}',
+    '{RC_ABOUT_TYPE}',
+    [
+      VerbatimToken(
+        '{RC_TYPE}',
+        text: 'other',
+      ),
+      VerbatimToken(
+        '{RC_LOCATION}',
+        options: {
+          'cb_main_building': 'main building',
+          'cb_extension': 'extension',
+          'rc_loc_porch': 'porch',
+          'cb_bay_window': 'bay window',
+        },
+        otherCheckbox: 'cb_other_22',
+        otherText: 'etRoofLocationOther',
+        pdfOptions: ['main building', 'extension', 'porch', 'bay window'],
+      ),
+      VerbatimToken(
+        '{RC_MATERIAL}',
+        options: {
+          'rc_mat_original_clay': 'original clay tiles',
+          'rc_mat_replacement_clay': 'replacement clay tiles',
+          'cb_concrete': 'concrete tiles',
+          'cb_natural': 'natural slate',
+          'rc_mat_artificial_slate': 'artificial slate',
+          'rc_mat_fibre_cement': 'fibre cement slates',
+          'rc_mat_aluminium': 'aluminium sheets',
+          'cb_composite': 'composite slate',
+          'rc_mat_asbestos_sheet': 'asbestos sheet',
+        },
+        otherCheckbox: 'cb_other_78',
+        otherText: 'etRoofMaterialOther',
+        pdfOptions: ['original clay tiles', 'replacement clay tiles', 'concrete tiles', 'natural slate', 'artificial slate', 'fibre cement slates', 'aluminium sheets', 'composite slate', 'asbestos sheet'],
+      ),
+    ],
+    pdf:
+        'Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material.',
+  ),
+  VerbatimRule(
+    'e2_cond_other',
+    'outside_property_about_roof_layout__other',
+    '{E_ROOF_COVERING}',
+    '{RC_ABOUT_TYPE_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_TYPE_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e2_old_other',
+    'outside_property_about_roof_layout__other',
+    '{E_ROOF_COVERING}',
+    '{OLD_ROOF_COVERING}',
+    [
+    ],
+    whenField: 'cb_old_roof_covering',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e2_asbestos_other',
+    'outside_property_about_roof_layout__other',
+    '{E_ROOF_COVERING_MATERIAL}',
+    '{MATERIAL_COMPOSITE}',
+    [
+    ],
+    whenField: 'cb_composite',
+    whenValue: 'true',
+    whenAny: [['rc_mat_asbestos_sheet', 'true']],
+  ),
+  VerbatimRule(
+    'e2_flat_desc',
+    'outside_property_about_roof_layout__flat',
+    '{E_ROOF_COVERING}',
+    '{RC_FLAT_ABOUT}',
+    [
+      VerbatimToken(
+        '{RC_MATERIAL}',
+        options: {
+          'cb_mineral_felt': 'mineral felt',
+          'rc_flat_hp_felt': 'high-performance felt',
+          'cb_rubber': 'rubber membrane',
+          'cb_single_ply_membrane': 'single-ply membrane',
+          'rc_flat_grp': 'GRP fibreglass',
+          'rc_flat_asphalt': 'asphalt',
+          'cb_fiberglass': 'fibreglass',
+          'rc_flat_lead': 'lead',
+        },
+        otherCheckbox: 'cb_other_78',
+        otherText: 'etRoofMaterialOther',
+        pdfOptions: ['mineral felt', 'high-performance felt', 'rubber membrane', 'single-ply membrane', 'GRP fibreglass', 'asphalt', 'fibreglass', 'lead'],
+      ),
+    ],
+    pdf:
+        'Flat roof coverings: The flat roof covering over the building is formed in mineral felt, high-performance felt, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, fibreglass, lead, other material.',
+  ),
+  VerbatimRule(
+    'e2_flat_cond',
+    'outside_property_about_roof_layout__flat',
+    '{E_ROOF_COVERING}',
+    '{RC_FLAT_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_TYPE_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e2_flat_felt',
+    'outside_property_about_roof_layout__flat',
+    '{E_ROOF_COVERING_MATERIAL}',
+    '{FLAT_MATERIAL_MINERAL_FELT}',
+    [
+    ],
+    whenField: 'cb_mineral_felt',
+    whenValue: 'true',
+    whenAny: [['rc_flat_hp_felt', 'true']],
+  ),
+  VerbatimRule(
+    'e2_flat_norepair',
+    'outside_property_about_roof_layout__flat',
+    '{E_ROOF_COVERING}',
+    '{RC_FLAT_NO_REPAIR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Good',
+    whenAny: [['actv_condition', 'Reasonable'], ['actv_condition', 'Fair'], ['actv_condition', 'Poor'], ['actv_condition', 'Very poor']],
+  ),
+  VerbatimRule(
+    'e2_flat_old',
+    'outside_property_about_roof_layout__flat',
+    '{E_ROOF_COVERING}',
+    '{OLD_ROOF_COVERING_FLAT}',
+    [
+    ],
+    whenField: 'cb_old_roof_covering',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e2_cond_weathered',
+    'outside_property_roof_covering_weathered_layout',
+    '{E_ROOF_COVERING}',
+    '{RC_ABOUT_TYPE_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_TYPE_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'cb_weathered',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e2_flashing',
+    'outside_property_roof_covering_flashing_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_FLASHING}',
+    [
+      VerbatimToken(
+        '{RC_FLASHING}',
+        options: {
+          'cb_lead': 'lead',
+          'cb_mortar': 'mortar',
+          'cb_tiles': 'clay tiles',
+          'rc_fl_mineral_felt': 'mineral felt',
+          'rc_fl_bitumen_tape': 'bitumen tape',
+          'rc_fl_lead_substitute': 'lead substitute',
+        },
+        otherCheckbox: 'cb_other_33',
+        otherText: 'et_other_87',
+        pdfOptions: ['lead', 'mortar', 'clay tiles', 'mineral felt', 'bitumen tape', 'lead substitute'],
+      ),
+    ],
+    pdf:
+        'Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in lead, mortar, clay tiles, mineral felt, bitumen tape, lead substitute, other.',
+  ),
+  VerbatimRule(
+    'e2_flashing_cond',
+    'outside_property_roof_covering_flashing_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_FLASHING_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_FLASHING_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Poor', 'Defective'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'poor', 'defective'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.',
+  ),
+  VerbatimRule(
+    'e2_ridge',
+    'outside_property_roof_covering_ridge_tiles_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_RIDGE_TILES}',
+    [
+      VerbatimToken(
+        '{RC_RIDGE_TILES}',
+        options: {
+          'rc_ridge_clay': 'clay',
+          'cb_concrete': 'concrete',
+        },
+        otherCheckbox: 'cb_other_62',
+        otherText: 'et_other_101',
+        pdfOptions: ['clay', 'concrete'],
+      ),
+    ],
+    pdf:
+        'Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in clay, concrete, other material.',
+  ),
+  VerbatimRule(
+    'e2_ridge_cond',
+    'outside_property_roof_covering_ridge_tiles_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_RIDGE_TILES_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_RIDGE_TILES_CONDITION}',
+        dropdown: 'actv_formed_in',
+        dropdownOptions: ['Good', 'Reasonable', 'Poor', 'Defective'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'poor', 'defective'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, they appear in good, reasonable, poor, defective condition.',
+  ),
+  VerbatimRule(
+    'e2_hip',
+    'outside_property_roof_covering_hip_tiles_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_HIP_TILES}',
+    [
+      VerbatimToken(
+        '{RC_HIP_TILES}',
+        options: {
+          'rc_hip_clay': 'clay',
+          'cb_concrete': 'concrete',
+        },
+        otherCheckbox: 'cb_other_62',
+        otherText: 'et_other_101',
+        pdfOptions: ['clay', 'concrete'],
+      ),
+    ],
+    pdf:
+        'Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in clay, concrete, other material.',
+  ),
+  VerbatimRule(
+    'e2_hip_cond',
+    'outside_property_roof_covering_hip_tiles_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_HIP_TILES_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_HIP_TILES_CONDITION}',
+        dropdown: 'actv_formed_in',
+        dropdownOptions: ['Good', 'Reasonable', 'Poor', 'Defective'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'poor', 'defective'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, they appear in good, reasonable, poor, defective condition.',
+  ),
+  VerbatimRule(
+    'e2_valley',
+    'outside_property_roof_covering_valley_gutters_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_VALLEY_GUTTERS}',
+    [
+      VerbatimToken(
+        '{RC_VALLEY_GUTTERS}',
+        options: {
+          'rc_vg_lead': 'lead',
+          'rc_vg_mortar': 'mortar',
+        },
+        otherCheckbox: 'rc_vg_other',
+        otherText: 'rc_vg_other_text',
+        pdfOptions: ['lead', 'mortar'],
+      ),
+    ],
+    pdf:
+        'Valley Gutters: The valley gutters are formed in lead, mortar, other material.',
+  ),
+  VerbatimRule(
+    'e2_valley_cond',
+    'outside_property_roof_covering_valley_gutters_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_VALLEY_GUTTERS_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_VALLEY_GUTTERS_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Poor', 'Blocked'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'poor', 'blocked'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, they appear in good, reasonable, poor, blocked condition.',
+  ),
+  VerbatimRule(
+    'e2_parapet',
+    'outside_property_roof_covering_parapet_wall_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_PARAPET_WALL}',
+    [
+      VerbatimToken(
+        '{RC_PARAPET_WALL_BUILT_WITH}',
+        options: {
+          'cb_bricks': 'brick',
+          'rc_pw_stone': 'stone',
+          'rc_pw_rendered_masonry': 'rendered masonry',
+          'cb_concrete': 'concrete',
+        },
+        otherCheckbox: 'cb_other_44',
+        otherText: 'et_other_101',
+        pdfOptions: ['brick', 'stone', 'rendered masonry', 'concrete'],
+      ),
+    ],
+    pdf:
+        'Parapet walls: The parapet wall(s) are constructed of brick, stone, rendered masonry, concrete, other.',
+  ),
+  VerbatimRule(
+    'e2_parapet_coping',
+    'outside_property_roof_covering_parapet_wall_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_PARAPET_COPING}',
+    [
+      VerbatimToken(
+        '{RC_PARAPET_COPING}',
+        options: {
+          'rc_pc_stone': 'stone',
+          'rc_pc_tiles': 'tiles',
+          'rc_pc_concrete': 'concrete',
+          'rc_pc_engineering_brick': 'engineering brick',
+          'rc_pc_metal': 'metal',
+        },
+        otherCheckbox: 'rc_pc_other',
+        otherText: 'rc_pc_other_text',
+        pdfOptions: ['stone', 'tiles', 'concrete', 'engineering brick', 'metal'],
+      ),
+    ],
+    pdf:
+        'Coping: The parapet coping is formed in stone, tiles, concrete, engineering brick, metal, other material.',
+  ),
+  VerbatimRule(
+    'e2_parapet_cond',
+    'outside_property_roof_covering_parapet_wall_layout',
+    '{E_ROOF_COVERING}',
+    '{E_RC_PARAPET_WALL_CONDITION}',
+    [
+      VerbatimToken(
+        '{RC_PARAPET_WALL_CONDITION}',
+        dropdown: 'android_material_design_spinner3',
+        dropdownOptions: ['Good', 'Reasonable', 'Poor', 'Defective'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'poor', 'defective'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, these elements appear in good, reasonable, poor, defective condition.',
+  ),
+  VerbatimRule(
+    'e2_deflection',
+    'outside_property_roof_covering_deflection_layout',
+    '{E_RC_DEFLECTION_STATUS}',
+    '{DEFLECTION_MINOR}',
+    [
+      VerbatimToken(
+        '{RC_DEFLECTION_STATUS_LOCATION}',
+        options: {
+          'rc_df_all': 'all',
+          'cb_front_45': 'front',
+          'cb_rear_47': 'rear',
+          'cb_side_41': 'side',
+        },
+        pdfOptions: ['all', 'front', 'rear', 'side'],
+      ),
+    ],
+    pdf:
+        'Roof line deflection: Minor undulation or deflection to all, front, rear, side roof slopes were observed.',
+  ),
+  VerbatimRule(
+    'e2_struct_ok',
+    'outside_property_roof_covering_roof_structure_layout',
+    '{E_ROOF_COVERING_ROOF_CONDITION}',
+    '{RC_ROOF_CONDITION_OK}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No repair required',
+  ),
+  VerbatimRule(
+    'e2_struct_defect',
+    'outside_property_roof_covering_roof_structure_layout',
+    '{E_ROOF_COVERING_ROOF_CONDITION}',
+    '{RC_ROOF_CONDITION_INVESTIGATE}',
+    [
+      VerbatimToken(
+        '{RC_ROOF_INVESTIGATE_LOCATION}',
+        options: {
+          'cb_front_39': 'front',
+          'cb_rear_20': 'rear',
+          'cb_side_78': 'side',
+        },
+        pdfOptions: ['front', 'rear', 'side'],
+      ),
+    ],
+    pdf:
+        'Repair defect: The surface of the front, rear, side roof slope(s) of the building is significantly distorted, uneven or undulating.',
+    whenField: 'actv_status',
+    whenValue: 'Repair defect',
+  ),
+  VerbatimRule(
+    'e2_tiles_soon',
+    'activity_outside_property_roof_repair_tiles',
+    '{E_RC_TILES}',
+    '{REPAIR_SOON}',
+    [
+      VerbatimToken(
+        '{RC_ROOF_REPAIR_TILES_ISSUE}',
+        options: {
+          'rc_rt_loose': 'loose',
+          'rc_rt_missing': 'missing',
+          'rc_rt_lifted': 'lifted',
+          'rc_rt_slipped': 'slipped',
+          'rc_rt_cracked': 'cracked',
+          'rc_rt_broken': 'broken',
+          'rc_rt_distorted': 'distorted',
+        },
+        otherCheckbox: 'rc_rt_other',
+        otherText: 'rc_rt_other_text',
+        pdfOptions: ['loose', 'missing', 'lifted', 'slipped', 'cracked', 'broken', 'distorted'],
+      ),
+    ],
+    pdf:
+        'Repair soon: One or more tiles, slates, are loose, missing, lifted, slipped, cracked, broken, distorted, other.',
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e2_tiles_now',
+    'activity_outside_property_roof_repair_tiles',
+    '{E_RC_TILES}',
+    '{REPAIR_NOW}',
+    [
+      VerbatimToken(
+        '{RC_ROOF_REPAIR_TILES_ISSUE}',
+        options: {
+          'rc_rt_loose': 'loose',
+          'rc_rt_missing': 'missing',
+          'rc_rt_lifted': 'lifted',
+          'rc_rt_slipped': 'slipped',
+          'rc_rt_cracked': 'cracked',
+          'rc_rt_broken': 'broken',
+          'rc_rt_distorted': 'distorted',
+        },
+        otherCheckbox: 'rc_rt_other',
+        otherText: 'rc_rt_other_text',
+        pdfOptions: ['loose', 'missing', 'lifted', 'slipped', 'cracked', 'broken', 'distorted'],
+      ),
+    ],
+    pdf:
+        'Repair now: One or more tiles, slates, roof covering sections are severely or significantly loose, missing, lifted, slipped, cracked, broken, distorted, other.',
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e2_tiles_leaking',
+    'activity_outside_property_roof_repair_tiles',
+    '{E_RC_TILES}',
+    '{LEAKING}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Leaking',
+  ),
+  VerbatimRule(
+    'e2_spreading',
+    'activity_outside_property_roof_spreading_repair',
+    '{E_ROOF_COVERING_REPAIR}',
+    '{RC_ROOF_SPREADING}',
+    [
+      VerbatimToken(
+        '{RC_ROOF_SPREADING_LOCATION}',
+        options: {
+          'rc_rs_all': 'all',
+          'rc_rs_front': 'front',
+          'rc_rs_side': 'side',
+          'rc_rs_rear': 'rear',
+        },
+        pdfOptions: ['all', 'front', 'side', 'rear'],
+      ),
+    ],
+    pdf:
+        'Roof Spreading: The roof slopes to all, front, side, and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards.',
+  ),
+  VerbatimRule(
+    'e2_flatrepair_soon',
+    'activity_outside_property_roof_repair_flat_roof',
+    '{E_RC_FLAT_ROOF_REPAIR}',
+    '{REPAIR_SOON}',
+    [
+      VerbatimToken(
+        '{RC_FLAT_ROOF_REPAIR_COVERED}',
+        options: {
+          'rc_fr_weathered': 'weathered',
+          'rc_fr_blistered': 'blistered',
+          'rc_fr_split': 'split',
+          'rc_fr_torn': 'torn',
+          'rc_fr_worn': 'worn',
+          'rc_fr_ponding': 'ponding',
+          'rc_fr_damaged': 'damaged',
+        },
+        otherCheckbox: 'rc_fr_other',
+        otherText: 'rc_fr_other_text',
+        pdfOptions: ['weathered', 'blistered', 'split', 'torn', 'worn', 'ponding', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Repair Flat roof: The flat roof covering is weathered, blistered, split, torn, worn, ponding, damaged, other.',
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e2_flatrepair_now',
+    'activity_outside_property_roof_repair_flat_roof',
+    '{E_RC_FLAT_ROOF_REPAIR}',
+    '{REPAIR_NOW}',
+    [
+      VerbatimToken(
+        '{RC_FLAT_ROOF_REPAIR_COVERED}',
+        options: {
+          'rc_fr_weathered': 'weathered',
+          'rc_fr_blistered': 'blistered',
+          'rc_fr_split': 'split',
+          'rc_fr_torn': 'torn',
+          'rc_fr_worn': 'worn',
+          'rc_fr_ponding': 'ponding',
+          'rc_fr_damaged': 'damaged',
+        },
+        otherCheckbox: 'rc_fr_other',
+        otherText: 'rc_fr_other_text',
+        pdfOptions: ['weathered', 'blistered', 'split', 'torn', 'worn', 'ponding', 'damaged'],
+      ),
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e2_parapetrepair_soon',
+    'activity_outside_property_roof_repair_parapet_wall',
+    '{E_RC_PARAPET_WALL_REPAIR}',
+    '{REPAIR_SOON}',
+    [
+      VerbatimToken(
+        '{RC_PARAPET_WALL_REPAIR_SUBJECT}',
+        options: {
+          'rc_pr_rendering': 'rendering',
+          'rc_pr_copping': 'copping',
+          'rc_pr_flashing': 'flashing',
+        },
+        otherCheckbox: 'rc_pr_subj_other',
+        otherText: 'rc_pr_subj_other_text',
+        pdfOptions: ['rendering', 'copping', 'flashing'],
+      ),
+      VerbatimToken(
+        '{RC_PARAPET_WALL_REPAIR_ISSUE}',
+        options: {
+          'rc_pr_damaged': 'damaged',
+          'rc_pr_loose': 'loose',
+          'rc_pr_partly_missing': 'partly missing',
+          'rc_pr_cracked': 'cracked',
+          'rc_pr_poorly_secured': 'poorly secured',
+        },
+        otherCheckbox: 'rc_pr_iss_other',
+        otherText: 'rc_pr_iss_other_text',
+        pdfOptions: ['damaged', 'loose', 'partly missing', 'cracked', 'poorly secured'],
+      ),
+    ],
+    pdf:
+        'Repair parapet: The rendering, copping, flashing, other of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured, other.',
+    pdfMore: [
+      'This should be repaired soon, repaired now.',
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e2_parapetrepair_now',
+    'activity_outside_property_roof_repair_parapet_wall',
+    '{E_RC_PARAPET_WALL_REPAIR}',
+    '{REPAIR_NOW}',
+    [
+      VerbatimToken(
+        '{RC_PARAPET_WALL_REPAIR_SUBJECT}',
+        options: {
+          'rc_pr_rendering': 'rendering',
+          'rc_pr_copping': 'copping',
+          'rc_pr_flashing': 'flashing',
+        },
+        otherCheckbox: 'rc_pr_subj_other',
+        otherText: 'rc_pr_subj_other_text',
+        pdfOptions: ['rendering', 'copping', 'flashing'],
+      ),
+      VerbatimToken(
+        '{RC_PARAPET_WALL_REPAIR_ISSUE}',
+        options: {
+          'rc_pr_damaged': 'damaged',
+          'rc_pr_loose': 'loose',
+          'rc_pr_partly_missing': 'partly missing',
+          'rc_pr_cracked': 'cracked',
+          'rc_pr_poorly_secured': 'poorly secured',
+        },
+        otherCheckbox: 'rc_pr_iss_other',
+        otherText: 'rc_pr_iss_other_text',
+        pdfOptions: ['damaged', 'loose', 'partly missing', 'cracked', 'poorly secured'],
+      ),
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e2_parapetrepair_hazard',
+    'activity_outside_property_roof_repair_parapet_wall',
+    '{E_RC_PARAPET_WALL_REPAIR}',
+    '{REPAIR_NOW_SAFETY_HAZARD}',
+    [
+    ],
+    whenField: 'cb_safety_hazard',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e2_verge',
+    'activity_outside_property_roof_repair_verge',
+    '{E_RC_VERGE_REPAIR}',
+    '{REPAIR_SOON}',
+    [
+      VerbatimToken(
+        '{RC_VERGE_REPAIR_ITEM}',
+        options: {
+          'rc_vr_mortar': 'mortar',
+          'rc_vr_tiles': 'tiles',
+          'rc_vr_slates': 'slates',
+          'rc_vr_clips': 'clips',
+          'rc_vr_caps': 'caps',
+        },
+        otherCheckbox: 'rc_vr_item_other',
+        otherText: 'rc_vr_item_other_text',
+        pdfOptions: ['mortar', 'tiles', 'slates', 'clips', 'caps'],
+      ),
+      VerbatimToken(
+        '{RC_VERGE_REPAIR_ISSUE}',
+        options: {
+          'rc_vr_damaged': 'damaged',
+          'rc_vr_cracked': 'cracked',
+          'rc_vr_loose': 'loose',
+        },
+        otherCheckbox: 'rc_vr_iss_other',
+        otherText: 'rc_vr_iss_other_text',
+        pdfOptions: ['damaged', 'cracked', 'loose'],
+      ),
+    ],
+    pdf:
+        'Repair verge: The mortar, tiles, slates, clips, caps, other items along the edge of the roof, called the verge, are damaged, cracked, loose, other.',
+  ),
+  VerbatimRule(
+    'e2_vgrepair_soon',
+    'activity_outside_property_roof_repair_valley_gutters',
+    '{E_ROOF_COVERING_REPAIR}',
+    '{E_RC_VALLEY_GUTTERS_REPAIR}',
+    [
+      VerbatimToken(
+        '{RC_VALLEY_GUTTERS_REPAIR_LOCATION}',
+        options: {
+          'rc_vg_all': 'all',
+          'rc_vg_front': 'front',
+          'rc_vg_side': 'side',
+          'rc_vg_rear': 'rear',
+        },
+        pdfOptions: ['all', 'front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{RC_VALLEY_GUTTERS_REPAIR_ISSUE}',
+        options: {
+          'rc_vgi_blocked': 'blocked',
+          'rc_vgi_loose_mortar': 'has loose mortar',
+          'rc_vgi_misaligned': 'poorly aligned',
+        },
+        pdfOptions: ['blocked', 'has loose mortar', 'poorly aligned'],
+      ),
+    ],
+    pdf:
+        'Repair valley gutters: The valley gutter at the junction of the roofs to all, front, side, rear, of the building is blocked, has loose mortar, poorly aligned.',
+    pdfMore: [
+      'This should be repaired soon, now.',
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e2_vgrepair_now',
+    'activity_outside_property_roof_repair_valley_gutters',
+    '{E_ROOF_COVERING_REPAIR}',
+    '{E_RC_VALLEY_GUTTERS_REPAIR_NOW}',
+    [
+      VerbatimToken(
+        '{RC_VALLEY_GUTTERS_REPAIR_LOCATION}',
+        options: {
+          'rc_vg_all': 'all',
+          'rc_vg_front': 'front',
+          'rc_vg_side': 'side',
+          'rc_vg_rear': 'rear',
+        },
+        pdfOptions: ['all', 'front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{RC_VALLEY_GUTTERS_REPAIR_ISSUE}',
+        options: {
+          'rc_vgi_blocked': 'blocked',
+          'rc_vgi_loose_mortar': 'has loose mortar',
+          'rc_vgi_misaligned': 'poorly aligned',
+        },
+        pdfOptions: ['blocked', 'has loose mortar', 'poorly aligned'],
+      ),
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e2_flrepair_soon',
+    'activity_outside_property_roof_repair_flashing',
+    '{E_RC_FLASHING_REPAIR}',
+    '{REPAIR_SOON}',
+    [
+    ],
+    pdf:
+        'Repair flashing: The waterproofing at the junction of the roof covering and wall is damaged or defective.',
+    pdfMore: [
+      'This should be repaired soon, repaired now.',
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e2_flrepair_now',
+    'activity_outside_property_roof_repair_flashing',
+    '{E_RC_FLASHING_REPAIR}',
+    '{REPAIR_NOW}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e2_flrepair_damp',
+    'activity_outside_property_roof_repair_flashing',
+    '{E_RC_FLASHING_REPAIR}',
+    '{CAUSING_DAMP}',
+    [
+    ],
+    whenField: 'cb_causing_damp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e2_ridgerepair_soon',
+    'activity_outside_property_roof_repair_ridge_tiles',
+    '{E_RC_RIDGE_TILES_REPAIR}',
+    '{REPAIR_SOON}',
+    [
+    ],
+    pdf:
+        'Repair ridge tiles: The covering along the top of the roof structure called, the ridge tiles, is damaged or defective.',
+    pdfMore: [
+      'This should be repaired soon, repaired now.',
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e2_ridgerepair_now',
+    'activity_outside_property_roof_repair_ridge_tiles',
+    '{E_RC_RIDGE_TILES_REPAIR}',
+    '{REPAIR_NOW}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e2_hiprepair_soon',
+    'activity_outside_property_roof_repair_hip_tiles',
+    '{E_RC_HIP_TILES_REPAIR}',
+    '{REPAIR_SOON}',
+    [
+    ],
+    pdf:
+        'Repair hip tile: The covering along the slope of the roof structure (called the hip tiles) is damaged or defective.',
+    pdfMore: [
+      'This should be repaired soon, repaired now.',
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e2_hiprepair_now',
+    'activity_outside_property_roof_repair_hip_tiles',
+    '{E_RC_HIP_TILES_REPAIR}',
+    '{REPAIR_NOW}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e2_general_maintenance',
+    'activity_outside_property_roof_covering_summary',
+    '{E_ROOF_COVERING}',
+    '{GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e3_desc',
+    'activity_outside_property_rwg_about',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_ABOUT_TYPE}',
+    [
+      VerbatimToken(
+        '{RWG_TYPE}',
+        options: {
+          'rwg_pvc': 'PVC',
+          'cb_cast_iron': 'cast iron',
+          'rwg_aluminium': 'aluminium',
+          'rwg_steel': 'steel',
+          'cb_concrete': 'concrete',
+          'cb_asbestos_cement': 'asbestos cement',
+        },
+        otherCheckbox: 'cb_other_697',
+        otherText: 'et_other_427',
+        pdfOptions: ['PVC', 'cast iron', 'aluminium', 'steel', 'concrete', 'asbestos cement'],
+      ),
+    ],
+    pdf:
+        'Description: The rainwater goods comprise PVC, cast iron, aluminium, steel, concrete, asbestos cement, other, gutters, downpipes, hoppers, and associated fittings.',
+  ),
+  VerbatimRule(
+    'e3_cond',
+    'activity_outside_property_rwg_about',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_ABOUT_CONDITION}',
+    [
+      VerbatimToken(
+        '{RWG_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the rainwater goods appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.',
+  ),
+  VerbatimRule(
+    'e3_asbestos',
+    'activity_outside_property_rwg_about',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_IF_TYPE_ASBESTOS_CEMENT}',
+    [
+    ],
+    whenField: 'cb_asbestos_cement',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e3_shared',
+    'activity_outside_property_rwg_about',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RAINWATER_GOODS_SHARED}',
+    [
+    ],
+    whenField: 'cb_Shared',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e3_general',
+    'activity_outside_property_rwg_about',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_STANDARD_TEXT}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Good',
+    whenAny: [['actv_condition', 'Reasonable'], ['actv_condition', 'Fair'], ['actv_condition', 'Poor'], ['actv_condition', 'Very poor']],
+  ),
+  VerbatimRule(
+    'e3_damaged_soon',
+    'activity_outside_property_rwg__repair_pipes_gutters',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_REPAIR_SOON}',
+    [
+      VerbatimToken(
+        '{RWG_REPAIR_DEFECT}',
+        options: {
+          'rwg_dm_cracked': 'cracked',
+          'rwg_dm_distorted': 'distorted',
+          'rwg_dm_broken': 'broken',
+          'rwg_dm_split': 'split',
+          'rwg_dm_missing': 'missing',
+        },
+        otherCheckbox: 'rwg_dm_other',
+        otherText: 'rwg_dm_other_text',
+        pdfOptions: ['cracked', 'distorted', 'broken', 'split', 'missing'],
+      ),
+    ],
+    pdf:
+        'Damaged Sections: Sections of the gutters or downpipes are cracked, distorted, broken, split, missing, other.',
+    pdfMore: [
+      'This should be repaired soon, repaired now.',
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e3_damaged_now',
+    'activity_outside_property_rwg__repair_pipes_gutters',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_REPAIR_NOW}',
+    [
+      VerbatimToken(
+        '{RWG_REPAIR_DEFECT}',
+        options: {
+          'rwg_dm_cracked': 'cracked',
+          'rwg_dm_distorted': 'distorted',
+          'rwg_dm_broken': 'broken',
+          'rwg_dm_split': 'split',
+          'rwg_dm_missing': 'missing',
+        },
+        otherCheckbox: 'rwg_dm_other',
+        otherText: 'rwg_dm_other_text',
+        pdfOptions: ['cracked', 'distorted', 'broken', 'split', 'missing'],
+      ),
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e3_slope',
+    'activity_outside_property_rwg_insufficient_slope',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_IF_TYPE_IF_INSUFFICIENT_SLOPE}',
+    [
+    ],
+    whenField: 'cb_insufficient_slope',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e3_leakage',
+    'activity_outside_property_rwg_leakage',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_LEAKAGE}',
+    [
+    ],
+    whenField: 'cb_leakage',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e3_conn_soon',
+    'activity_outside_property_rwg_defective_connections',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_CONNECTIONS_SOON}',
+    [
+      VerbatimToken(
+        '{RWG_CONNECTION_DEFECT}',
+        options: {
+          'rwg_cn_loose': 'loose',
+          'rwg_cn_missing': 'missing',
+          'rwg_cn_leaking': 'leaking',
+          'rwg_cn_displaced': 'displaced',
+          'rwg_cn_defective': 'defective',
+        },
+        otherCheckbox: 'rwg_cn_other',
+        otherText: 'rwg_cn_other_text',
+        pdfOptions: ['loose', 'missing', 'leaking', 'displaced', 'defective'],
+      ),
+    ],
+    pdf:
+        'Defective Connections: One or more gutter or downpipe joints and connections are loose, missing, leaking, displaced, defective, other.',
+    pdfMore: [
+      'This should be repaired soon, now.',
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e3_conn_now',
+    'activity_outside_property_rwg_defective_connections',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_CONNECTIONS_NOW}',
+    [
+      VerbatimToken(
+        '{RWG_CONNECTION_DEFECT}',
+        options: {
+          'rwg_cn_loose': 'loose',
+          'rwg_cn_missing': 'missing',
+          'rwg_cn_leaking': 'leaking',
+          'rwg_cn_displaced': 'displaced',
+          'rwg_cn_defective': 'defective',
+        },
+        otherCheckbox: 'rwg_cn_other',
+        otherText: 'rwg_cn_other_text',
+        pdfOptions: ['loose', 'missing', 'leaking', 'displaced', 'defective'],
+      ),
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e3_corrosion',
+    'activity_outside_property_rwg_corrosion',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_CORROSION}',
+    [
+      VerbatimToken(
+        '{RWG_CORROSION_LEVEL}',
+        dropdown: 'actv_corrosion',
+        dropdownOptions: ['Light', 'Moderate', 'Significant'],
+        lower: true,
+        pdfOptions: ['light', 'moderate', 'significant'],
+      ),
+    ],
+    pdf:
+        'Corrosion: Sections of the rainwater goods exhibit light, moderate, significant corrosion.',
+  ),
+  VerbatimRule(
+    'e3_gullies',
+    'activity_outside_property_rwg_blocked_gullies',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{RWG_BLOCKED_GULLIES}',
+    [
+      VerbatimToken(
+        '{RWG_GULLY_STATE}',
+        dropdown: 'actv_gully_state',
+        dropdownOptions: ['Partially blocked', 'Fully blocked'],
+        lower: true,
+        pdfOptions: ['partially blocked', 'fully blocked'],
+      ),
+    ],
+    pdf:
+        'Blocked Gullies: One or more drainage gullies serving the rainwater system appear partially blocked, fully blocked.',
+  ),
+  VerbatimRule(
+    'e4_desc_solid',
+    'activity_outside_property_main_walls_about_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'solid brick',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_solid',
+    'activity_outside_property_main_walls_about_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_solid',
+    'activity_outside_property_main_walls_about_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_cbrick',
+    'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'cavity brick',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_cbrick',
+    'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_cbrick',
+    'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_cblock',
+    'activity_outside_property_main_walls_about_wall__cavity_block_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'cavity blockwork',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_cblock',
+    'activity_outside_property_main_walls_about_wall__cavity_block_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_cblock',
+    'activity_outside_property_main_walls_about_wall__cavity_block_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_stud',
+    'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'timber frame',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_stud',
+    'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_stud',
+    'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_other',
+    'activity_outside_property_main_walls_about_wall__other',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        text: 'other',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_other',
+    'activity_outside_property_main_walls_about_wall__other',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_other',
+    'activity_outside_property_main_walls_about_wall__other',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_rendered',
+    'activity_outside_property_main_walls_about_wall__rendered_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'rendered masonry',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_rendered',
+    'activity_outside_property_main_walls_about_wall__rendered_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_rendered',
+    'activity_outside_property_main_walls_about_wall__rendered_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_desc_pebble',
+    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_LOCATION}',
+        options: {
+          'e4w_loc_main_building': 'main building',
+          'e4w_loc_extension_s': 'extension(s)',
+        },
+        otherCheckbox: 'cb_other_832',
+        otherText: 'et_other_133',
+        pdfOptions: ['main building', 'extension(s)'],
+      ),
+      VerbatimToken(
+        '{WALL_THICKNESS}',
+        text: 'et_thickness',
+      ),
+      VerbatimToken(
+        '{WALL_TYPE}',
+        constant: 'pebble dash masonry',
+      ),
+    ],
+    pdf:
+        'Description: The external walls of the main building, extension(s), other, are constructed of (type 000) mm solid brick, cavity brick, cavity blockwork, timber frame, rendered masonry, pebble dash masonry, other construction type(s).',
+  ),
+  VerbatimRule(
+    'e4_cond_pebble',
+    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION_VALUE}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.',
+  ),
+  VerbatimRule(
+    'e4_painted_pebble',
+    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_PAINTED}',
+    [
+    ],
+    whenField: 'cb_painted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_cladding',
+    'activity_outside_property_main_walls_cladding',
+    '{E_MAIN_WALLS}',
+    '{E4_CLADDING}',
+    [
+      VerbatimToken(
+        '{WALL_CLADDING}',
+        options: {
+          'e4c_facing_brickwork': 'facing brickwork',
+          'e4c_natural_or_reconstituted_stone': 'natural or reconstituted stone',
+          'e4c_timber_cladding': 'timber cladding',
+          'e4c_plastic_panelling_boards': 'plastic panelling boards',
+          'e4c_weatherboarding': 'weatherboarding',
+          'e4c_fibre_cement_boards': 'fibre cement boards',
+          'e4c_upvc_cladding': 'uPVC cladding',
+          'e4c_fibre_cement_panels': 'fibre cement panels',
+          'e4c_composite_cladding_panels': 'composite cladding panels',
+          'e4c_glass_curtain_walling': 'glass curtain walling',
+          'e4c_hanging_tiles_including_shingle_or_plain_tiles': 'hanging tiles (including shingle or plain tiles)',
+          'e4c_aluminium_cladding_panels': 'aluminium cladding panels',
+          'e4c_terracotta_cladding_tiles': 'terracotta cladding tiles',
+        },
+        otherCheckbox: 'e4c_other',
+        otherText: 'e4c_other_text',
+        pdfOptions: ['facing brickwork', 'natural or reconstituted stone', 'timber cladding', 'plastic panelling boards', 'weatherboarding', 'fibre cement boards', 'uPVC cladding', 'fibre cement panels', 'composite cladding panels', 'glass curtain walling', 'hanging tiles (including shingle or plain tiles)', 'aluminium cladding panels', 'terracotta cladding tiles'],
+      ),
+    ],
+    pdf:
+        'Cladding: The external wall finish or cladding comprises facing brickwork, natural or reconstituted stone, timber cladding, plastic panelling boards.',
+    pdfMore: [
+      'weatherboarding, fibre cement boards, uPVC cladding, fibre cement panels, composite cladding panels, glass curtain walling, hanging tiles (including shingle or plain tiles), aluminium cladding panels, terracotta cladding tiles, other finishes.',
+    ],
+  ),
+  VerbatimRule(
+    'e4_ews1',
+    'activity_outside_property_main_walls_ews1',
+    '{E_MAIN_WALLS}',
+    '{E4_EWS1_CLADDING}',
+    [
+      VerbatimToken(
+        '{EWS1_EXTENT}',
+        dropdown: 'actv_ews1_extent',
+        dropdownOptions: ['Partially', 'Predominantly'],
+        lower: true,
+        pdfOptions: ['partially', 'predominantly'],
+      ),
+      VerbatimToken(
+        '{EWS1_TYPES}',
+        options: {
+          'e4e_brick_slip': 'brick-slip',
+          'e4e_brick_effect_outer_face': 'brick-effect outer face',
+          'e4e_rainscreen_boards': 'rainscreen boards',
+          'e4e_terracotta_tiles': 'terracotta tiles',
+          'e4e_compressed_composite_boards': 'compressed composite boards',
+          'e4e_aluminium_panels': 'aluminium panels',
+          'e4e_glass_reinforced_concrete_grc_panels': 'glass reinforced concrete (GRC) panels',
+          'e4e_glass_curtain_walling': 'glass curtain walling',
+          'e4e_hanging_tiles_including_shingle_or_plain_tiles': 'hanging tiles (including shingle or plain tiles)',
+          'e4e_aluminium_cladding_panels': 'aluminium cladding panels',
+        },
+        pdfOptions: ['brick-slip', 'brick-effect outer face', 'rainscreen boards', 'terracotta tiles', 'compressed composite boards', 'aluminium panels', 'glass reinforced concrete (GRC) panels', 'glass curtain walling', 'hanging tiles (including shingle or plain tiles)', 'aluminium cladding panels'],
+      ),
+    ],
+    pdf:
+        'EWS1 Cladding: The external walls are partially or predominantly cladded with a brick-slip, brick-effect outer face, rainscreen boards, terracotta tiles, compressed composite boards, aluminium panels, glass reinforced concrete (GRC) panels, glass curtain walling, hanging tiles (including shingle or plain tiles), aluminium cladding panels, etc.',
+  ),
+  VerbatimRule(
+    'e4_ews1_not',
+    'activity_outside_property_main_walls_ews1',
+    '{E_MAIN_WALLS}',
+    '{E4_EWS1_NOT_REQUIRED}',
+    [
+    ],
+    whenField: 'actv_ews1',
+    whenValue: 'EWS1 form not required',
+  ),
+  VerbatimRule(
+    'e4_ews1_req',
+    'activity_outside_property_main_walls_ews1',
+    '{E_MAIN_WALLS}',
+    '{E4_EWS1_REQUIRED}',
+    [
+    ],
+    whenField: 'actv_ews1',
+    whenValue: 'EWS1 form required',
+  ),
+  VerbatimRule(
+    'e4_moisture',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_MOISTURE_READINGS}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No damp found',
+    whenAny: [['actv_status', 'Damp found']],
+  ),
+  VerbatimRule(
+    'e4_nodamp',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_NO_DAMP}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No damp found',
+  ),
+  VerbatimRule(
+    'e4_damp',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_DAMP_FOUND}',
+    [
+      VerbatimToken(
+        '{DAMP_LOCATIONS}',
+        text: 'et_location_677',
+      ),
+    ],
+    pdf:
+        'Damp found: Elevated moisture readings were recorded to sections of the internal wall surfaces that include (enter locations).',
+    whenField: 'actv_status',
+    whenValue: 'Damp found',
+  ),
+  VerbatimRule(
+    'e4_pen',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_PENETRATING}',
+    [
+      VerbatimToken(
+        '{DAMP_CAUSES}',
+        options: {
+          'e4d_cause_overflowing_gutter': 'overflowing gutter',
+          'e4d_cause_roof_leak': 'roof leak',
+          'e4d_cause_leaking_downpipe': 'leaking downpipe',
+          'e4d_cause_bridged_dpc': 'bridged DPC',
+          'e4d_cause_blocked_gully': 'blocked gully',
+        },
+        otherCheckbox: 'e4d_cause_other',
+        otherText: 'e4d_cause_other_text',
+        pdfOptions: ['overflowing gutter', 'roof leak', 'leaking downpipe', 'bridged DPC', 'blocked gully'],
+      ),
+    ],
+    pdf:
+        'Penetrating damp cause: This may have been affected by penetrating damp probably caused by overflowing gutter, roof leak, leaking downpipe, bridged DPC, blocked gully, other.',
+    whenField: 'actv_status',
+    whenValue: 'Damp found',
+  ),
+  VerbatimRule(
+    'e4_repair_opts',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_REPAIR_OPTIONS}',
+    [
+      VerbatimToken(
+        '{DAMP_REPAIRS}',
+        options: {
+          'e4d_rep_gutters': 'gutters',
+          'e4d_rep_roof_covering': 'roof covering',
+          'e4d_rep_downpipes': 'downpipes',
+          'e4d_rep_damp_proof_course': 'damp-proof course',
+          'e4d_rep_blocked_gullies': 'blocked gullies',
+          'e4d_rep_damaged_drainage': 'damaged drainage',
+        },
+        otherCheckbox: 'e4d_rep_other',
+        otherText: 'e4d_rep_other_text',
+        pdfOptions: ['gutters', 'roof covering', 'downpipes', 'damp-proof course', 'blocked gullies', 'damaged drainage'],
+      ),
+    ],
+    pdf:
+        'This may involve repairs to the gutters, roof covering, downpipes, damp-proof course, blocked gullies, damaged drainage, other, as appropriate.',
+    whenField: 'actv_status',
+    whenValue: 'Damp found',
+  ),
+  VerbatimRule(
+    'e4_investigate',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_INVESTIGATE_CAUSE}',
+    [
+    ],
+    whenField: 'cb_unknown_cause',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_rising',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_RISING_DAMP}',
+    [
+    ],
+    whenField: 'cb_rising_damp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_drain',
+    'activity_outside_property_main_walls_damp',
+    '{E_MAIN_WALLS}',
+    '{E4_INSTALL_DRAIN_GUTTERING}',
+    [
+    ],
+    whenField: 'cb_install_french_gutters',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_dpc',
+    'activity_outside_property_main_walls_dpc',
+    '{E_MAIN_WALLS}',
+    '{E4_DPC}',
+    [
+      VerbatimToken(
+        '{DPC_STATE}',
+        dropdown: 'actv_status',
+        dropdownOptions: ['Visible', 'Partially visible', 'Not visible'],
+        lower: true,
+        pdfOptions: ['visible', 'partially visible', 'not visible'],
+      ),
+    ],
+    pdf:
+        'Damp-proof course: The walls have a barrier against dampness rising from the ground (called a damp-proof course or DPC is visible, partially visible, not visible; one would normally be expected for a property of this age and type.',
+  ),
+  VerbatimRule(
+    'e4_dpc_material',
+    'activity_outside_property_main_walls_dpc',
+    '{E_MAIN_WALLS}',
+    '{E4_DPC_MATERIAL}',
+    [
+      VerbatimToken(
+        '{DPC_MATERIAL}',
+        options: {
+          'e4p_plastic': 'plastic',
+          'e4p_felt': 'felt',
+          'e4p_slates': 'slates',
+          'e4p_engineering_bricks': 'engineering bricks',
+        },
+        otherCheckbox: 'e4p_other',
+        otherText: 'e4p_other_text',
+        pdfOptions: ['plastic', 'felt', 'slates', 'engineering bricks'],
+      ),
+    ],
+    pdf:
+        'The DPC is assumed to consist of plastic, felt, slates, engineering bricks, other.',
+  ),
+  VerbatimRule(
+    'e4_dpc_adequacy',
+    'activity_outside_property_main_walls_dpc',
+    '{E_MAIN_WALLS}',
+    '{E4_DPC_ADEQUACY}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Visible',
+    whenAny: [['actv_status', 'Partially visible'], ['actv_status', 'Not visible']],
+  ),
+  VerbatimRule(
+    'e4_treatment',
+    'activity_outside_property_main_walls_dpc_treatment',
+    '{E_MAIN_WALLS}',
+    '{E4_DPC_TREATMENT}',
+    [
+      VerbatimToken(
+        '{DPC_TREATMENT}',
+        options: {
+          'e4t_damp_proof_course_treatment': 'damp proof course treatment',
+          'e4t_wall_ventilation_apparatus': 'wall ventilation apparatus',
+          'e4t_ventilation_holes': 'ventilation holes',
+        },
+        otherCheckbox: 'e4t_other',
+        otherText: 'e4t_other_text',
+        pdfOptions: ['damp proof course treatment', 'wall ventilation apparatus', 'ventilation holes'],
+      ),
+    ],
+    pdf:
+        'DPC Treatment noted: I noted evidence of damp proof course treatment, wall ventilation apparatus, ventilation holes, other in the property.',
+  ),
+  VerbatimRule(
+    'e4_removed',
+    'activity_outside_property_main_walls_removed_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_REMOVED_WALL}',
+    [
+      VerbatimToken(
+        '{REMOVED_LOCATION}',
+        options: {
+          'e4r_lounge': 'lounge',
+          'e4r_kitchen': 'kitchen',
+          'e4r_bedroom': 'bedroom',
+        },
+        otherCheckbox: 'cb_other_1020',
+        otherText: 'et_other_522',
+        pdfOptions: ['lounge', 'kitchen', 'bedroom'],
+      ),
+    ],
+    pdf:
+        'Removed wall: An external wall to the lounge, kitchen, bedroom, other appears to have been removed as part of previous alterations.',
+  ),
+  VerbatimRule(
+    'e4_removed_defect',
+    'activity_outside_property_main_walls_removed_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_REMOVED_DEFECT}',
+    [
+      VerbatimToken(
+        '{REMOVED_DEFECTS}',
+        options: {
+          'e4rd_cracking': 'cracking',
+          'e4rd_distortions': 'distortions',
+        },
+        otherCheckbox: 'e4rd_other',
+        otherText: 'e4rd_other_text',
+        pdfOptions: ['cracking', 'distortions'],
+      ),
+    ],
+    pdf:
+        'Defect noted: I noted cracking, distortions, other in the surrounding wall surfaces.',
+  ),
+  VerbatimRule(
+    'e4_extensions',
+    'activity_outside_property_main_walls_extensions',
+    '{E_MAIN_WALLS}',
+    '{E4_EXTENSIONS}',
+    [
+      VerbatimToken(
+        '{EXT_ALTERATIONS}',
+        options: {
+          'e4x_wall_removal': 'wall removal',
+          'e4x_new_openings': 'new openings',
+          'e4x_replacement_lintels': 'replacement lintels',
+          'e4x_structural_alterations': 'structural alterations',
+          'e4x_building_extension_works': 'building extension works',
+        },
+        otherCheckbox: 'e4x_other',
+        otherText: 'e4x_other_text',
+        pdfOptions: ['wall removal', 'new openings', 'replacement lintels', 'structural alterations', 'building extension works'],
+      ),
+    ],
+    pdf:
+        'These include wall removal, new openings, replacement lintels, structural alterations, building extension works, other alterations.',
+  ),
+  VerbatimRule(
+    'e4_cwi',
+    'activity_outside_property_main_wall_repairs_cavity_wall_insulation',
+    '{E_MAIN_WALLS}',
+    '{E4_CAVITY_WALL_INSULATION}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_thin',
+    'activity_outside_property_main_wall_repairs_thin_slim_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_THIN_WALL}',
+    [
+      VerbatimToken(
+        '{THIN_WALLS}',
+        options: {
+          'e4tw_front': 'front',
+          'e4tw_rear': 'rear',
+          'e4tw_side': 'side',
+        },
+        pdfOptions: ['front', 'rear', 'side'],
+      ),
+      VerbatimToken(
+        '{THIN_LOCATIONS}',
+        options: {
+          'e4tl_main_building': 'main building',
+          'e4tl_extension': 'extension',
+        },
+        otherCheckbox: 'cb_other_423',
+        otherText: 'et_other_883',
+        pdfOptions: ['main building', 'extension'],
+      ),
+    ],
+    pdf:
+        'Thin wall: The external wall to the front, rear, side walls of the main building, extension, other is not thick enough and vulnerable to damp problems and heat loss.',
+  ),
+  VerbatimRule(
+    'e4_trees',
+    'activity_outside_property_main_wall_repairs_near_by_tress',
+    '{E_MAIN_WALLS}',
+    '{E4_TREES}',
+    [
+    ],
+    whenField: 'actv_trees',
+    whenValue: 'Trees',
+  ),
+  VerbatimRule(
+    'e4_tree_defects',
+    'activity_outside_property_main_wall_repairs_near_by_tress',
+    '{E_MAIN_WALLS}',
+    '{E4_TREE_DEFECTS}',
+    [
+      VerbatimToken(
+        '{TREE_DEFECTS}',
+        options: {
+          'e4td_cracking': 'cracking',
+          'e4td_distortion': 'distortion',
+          'e4td_heave': 'heave',
+        },
+        otherCheckbox: 'e4td_other',
+        otherText: 'e4td_other_text',
+        pdfOptions: ['cracking', 'distortion', 'heave'],
+      ),
+    ],
+    pdf:
+        'Tree defects noted: There are trees located close to the property, and I noted defects that may be associated with their influence, including cracking, distortion, heave, other observed defects.',
+    whenField: 'actv_trees',
+    whenValue: 'Tree defects noted',
+  ),
+  VerbatimRule(
+    'e4_mv_0',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_0}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Minor subsidence',
+  ),
+  VerbatimRule(
+    'e4_mv_1',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_1}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Significant subsidence',
+  ),
+  VerbatimRule(
+    'e4_mv_2',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_2}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'No structural movement',
+  ),
+  VerbatimRule(
+    'e4_mv_3',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_3}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Normal defects',
+  ),
+  VerbatimRule(
+    'e4_mv_recent',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_RECENT}',
+    [
+      VerbatimToken(
+        '{MOVE_WALLS}',
+        options: {
+          'e4m_w_front': 'front',
+          'e4m_w_side': 'side',
+          'e4m_w_rear': 'rear',
+        },
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{MOVE_LOCATIONS}',
+        options: {
+          'e4m_l_main_building': 'main building',
+          'e4m_l_back_addition': 'back addition',
+          'e4m_l_extension': 'extension',
+          'e4m_l_bay_window': 'bay window',
+          'e4m_l_porch': 'porch',
+        },
+        otherCheckbox: 'e4m_l_other',
+        otherText: 'e4m_l_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window', 'porch'],
+      ),
+      VerbatimToken(
+        '{MOVE_CAUSES}',
+        options: {
+          'e4m_c_settlement': 'settlement',
+          'e4m_c_subsidence': 'subsidence',
+          'e4m_c_nearby_vegetation': 'nearby vegetation',
+          'e4m_c_point_loading': 'point loading',
+          'e4m_c_wall_tie_damage': 'wall tie damage',
+        },
+        otherCheckbox: 'e4m_c_other',
+        otherText: 'e4m_c_other_text',
+        pdfOptions: ['settlement', 'subsidence', 'nearby vegetation', 'point loading', 'wall tie damage'],
+      ),
+    ],
+    pdf:
+        'Recent defects: The front, side, rear walls of the main building, back addition, extension, bay window, porch, other areas have been damaged by movement cracks potentially arising from settlement, subsidence, nearby vegetation, point loading, wall tie damage, other causes, and this is considered structurally significant.',
+    whenField: 'actv_movement_status',
+    whenValue: 'Recent defects',
+  ),
+  VerbatimRule(
+    'e4_mv_recurring',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_RECURRING}',
+    [
+      VerbatimToken(
+        '{MOVE_LOCATIONS_RECURRING}',
+        options: {
+          'e4m_r_main_building': 'main building',
+          'e4m_r_back_addition': 'back addition',
+          'e4m_r_extension': 'extension',
+          'e4m_r_bay_window': 'bay window',
+          'e4m_r_porch': 'porch',
+        },
+        otherCheckbox: 'e4m_r_other',
+        otherText: 'e4m_r_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window', 'porch'],
+      ),
+    ],
+    pdf:
+        'Recurring defects: The outside wall(s) to the main building, back addition, extension, bay window, porch, other have been repaired, indicating that the building has been affected by previous movement.',
+    whenField: 'actv_movement_status',
+    whenValue: 'Recurring defects',
+  ),
+  VerbatimRule(
+    'e4_mv_thermal',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_THERMAL}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Differential thermal movement',
+  ),
+  VerbatimRule(
+    'e4_mv_rods',
+    'activity_outside_property_main_walls_movements',
+    '{E_MAIN_WALLS}',
+    '{E4_MOVE_RODS}',
+    [
+    ],
+    whenField: 'actv_movement_status',
+    whenValue: 'Restraint steel rods',
+  ),
+  VerbatimRule(
+    'e4_spall',
+    'activity_outside_property_main_wall_repairs_spalling',
+    '{E_MAIN_WALLS}',
+    '{E4_SPALLING}',
+    [
+      VerbatimToken(
+        '{SPALL_SEVERITY}',
+        dropdown: 'actv_severity',
+        dropdownOptions: ['Minor', 'Moderate', 'Significant'],
+        lower: true,
+        pdfOptions: ['minor', 'moderate', 'significant'],
+      ),
+    ],
+    pdf:
+        'Spalled Brickwork: A few bricks exhibit minor, moderate, significant deterioration (this is called spalling).',
+  ),
+  VerbatimRule(
+    'e4_spall_damp',
+    'activity_outside_property_main_wall_repairs_spalling',
+    '{E_MAIN_WALLS}',
+    '{E4_SPALLING_DAMP}',
+    [
+    ],
+    whenField: 'cb_causing_damp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_pointing',
+    'activity_outside_property_main_wall_repairs_pointing',
+    '{E_MAIN_WALLS}',
+    '{E4_POINTING}',
+    [
+      VerbatimToken(
+        '{POINTING_DEFECTS}',
+        options: {
+          'e4pt_eroded': 'eroded',
+          'e4pt_cracked': 'cracked',
+          'e4pt_loose': 'loose',
+          'e4pt_missing': 'missing',
+          'e4pt_damaged': 'damaged',
+        },
+        otherCheckbox: 'e4pt_other',
+        otherText: 'e4pt_other_text',
+        pdfOptions: ['eroded', 'cracked', 'loose', 'missing', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Repair pointing: The mortar between the bricks (known as the pointing) to parts of the building is eroded, cracked, loose, missing, damaged, other.',
+  ),
+  VerbatimRule(
+    'e4_pointing_damp',
+    'activity_outside_property_main_wall_repairs_pointing',
+    '{E_MAIN_WALLS}',
+    '{E4_POINTING_DAMP}',
+    [
+    ],
+    whenField: 'cb_causing_damp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_render',
+    'activity_outside_property_main_wall_repairs_render',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDER}',
+    [
+      VerbatimToken(
+        '{RENDER_DEFECTS}',
+        options: {
+          'e4rn_cracked': 'cracked',
+          'e4rn_eroded': 'eroded',
+          'e4rn_loose': 'loose',
+          'e4rn_missing': 'missing',
+          'e4rn_damaged': 'damaged',
+        },
+        pdfOptions: ['cracked', 'eroded', 'loose', 'missing', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Repair render: Parts of the render coating to the building are cracked, eroded, loose, missing, damaged.',
+  ),
+  VerbatimRule(
+    'e4_render_hazard',
+    'activity_outside_property_main_wall_repairs_render',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDER_HAZARD}',
+    [
+    ],
+    whenField: 'cb_hazard',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_render_damp',
+    'activity_outside_property_main_wall_repairs_render',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDER_DAMP}',
+    [
+    ],
+    whenField: 'cb_causing_damp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_walltie_prev',
+    'activity_outside_property_main_wall_repairs_wall_the_repair',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_TIES_PREVIOUS}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Wall Ties defects',
+  ),
+  VerbatimRule(
+    'e4_walltie_defect',
+    'activity_outside_property_main_wall_repairs_wall_the_repair',
+    '{E_MAIN_WALLS}',
+    '{E4_WALL_TIES_DEFECT}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Repair defect',
+  ),
+  VerbatimRule(
+    'e4_lintel_win',
+    'activity_outside_property_main_wall_repairs_lintel',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL}',
+    [
+      VerbatimToken(
+        '{LINTEL_WALLS}',
+        options: {
+          'e4l_w_front': 'front',
+          'e4l_w_side': 'side',
+          'e4l_w_rear': 'rear',
+        },
+        otherCheckbox: 'e4l_w_other',
+        otherText: 'e4l_w_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{LINTEL_LOCATIONS}',
+        options: {
+          'e4l_l_main_building': 'main building',
+          'e4l_l_back_addition': 'back addition',
+          'e4l_l_extension': 'extension',
+          'e4l_l_bay_window': 'bay window',
+        },
+        otherCheckbox: 'e4l_l_other',
+        otherText: 'e4l_l_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window'],
+      ),
+    ],
+    pdf:
+        'Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted.',
+  ),
+  VerbatimRule(
+    'e4_lintel_minor_win',
+    'activity_outside_property_main_wall_repairs_lintel',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL_MINOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Minor defects',
+  ),
+  VerbatimRule(
+    'e4_lintel_major_win',
+    'activity_outside_property_main_wall_repairs_lintel',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL_SIGNIFICANT}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Significant defect',
+  ),
+  VerbatimRule(
+    'e4_lintel_door',
+    'activity_outside_property_main_wall_repairs_lintel__door',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL}',
+    [
+      VerbatimToken(
+        '{LINTEL_WALLS}',
+        options: {
+          'e4l_w_front': 'front',
+          'e4l_w_side': 'side',
+          'e4l_w_rear': 'rear',
+        },
+        otherCheckbox: 'e4l_w_other',
+        otherText: 'e4l_w_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{LINTEL_LOCATIONS}',
+        options: {
+          'e4l_l_main_building': 'main building',
+          'e4l_l_back_addition': 'back addition',
+          'e4l_l_extension': 'extension',
+          'e4l_l_bay_window': 'bay window',
+        },
+        otherCheckbox: 'e4l_l_other',
+        otherText: 'e4l_l_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window'],
+      ),
+    ],
+    pdf:
+        'Lintel defect: The lintel (the beam supporting the masonry above a door or window opening), including a brick arch where applicable, in the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, cracked, or distorted.',
+  ),
+  VerbatimRule(
+    'e4_lintel_minor_door',
+    'activity_outside_property_main_wall_repairs_lintel__door',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL_MINOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Minor defects',
+  ),
+  VerbatimRule(
+    'e4_lintel_major_door',
+    'activity_outside_property_main_wall_repairs_lintel__door',
+    '{E_MAIN_WALLS}',
+    '{E4_LINTEL_SIGNIFICANT}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Significant defect',
+  ),
+  VerbatimRule(
+    'e4_sill',
+    'activity_outside_property_main_wall_repairs_window_sills',
+    '{E_MAIN_WALLS}',
+    '{E4_WINDOWSILL}',
+    [
+      VerbatimToken(
+        '{SILL_WALLS}',
+        options: {
+          'e4s_w_front': 'front',
+          'e4s_w_side': 'side',
+          'e4s_w_rear': 'rear',
+        },
+        otherCheckbox: 'e4s_w_other',
+        otherText: 'e4s_w_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{SILL_LOCATIONS}',
+        options: {
+          'e4s_l_main_building': 'main building',
+          'e4s_l_back_addition': 'back addition',
+          'e4s_l_extension': 'extension',
+          'e4s_l_bay_window': 'bay window',
+        },
+        otherCheckbox: 'e4s_l_other',
+        otherText: 'e4s_l_other_text',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window'],
+      ),
+      VerbatimToken(
+        '{SILL_DEFECTS}',
+        options: {
+          'e4s_d_damaged': 'damaged',
+          'e4s_d_rotten': 'rotten',
+          'e4s_d_cracked': 'cracked',
+          'e4s_d_distorted': 'distorted',
+        },
+        otherCheckbox: 'e4s_d_other',
+        otherText: 'e4s_d_other_text',
+        pdfOptions: ['damaged', 'rotten', 'cracked', 'distorted'],
+      ),
+    ],
+    pdf:
+        'Windowsill defect: The windowsill(s) to the front, side, rear, other wall of the main building, back addition, extension, bay window, other is damaged, rotten, cracked, distorted, other.',
+  ),
+  VerbatimRule(
+    'e4_sill_minor',
+    'activity_outside_property_main_wall_repairs_window_sills',
+    '{E_MAIN_WALLS}',
+    '{E4_SILL_MINOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Minor Defect',
+  ),
+  VerbatimRule(
+    'e4_sill_major',
+    'activity_outside_property_main_wall_repairs_window_sills',
+    '{E_MAIN_WALLS}',
+    '{E4_SILL_SIGNIFICANT}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Significant Defect',
+  ),
+  VerbatimRule(
+    'e4_general',
+    'activity_outside_property_main_walls_main_screen',
+    '{E_MAIN_WALLS}',
+    '{E4_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e5_desc',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WIN_TYPES}',
+        options: {
+          'e5t_replacement': 'replacement',
+          'e5t_original': 'original',
+          'e5t_old': 'old',
+          'e5t_pvcu': 'PVCu',
+          'e5t_timber': 'timber',
+          'e5t_old_style_timber_sash': 'old style timber sash',
+          'e5t_modern_pvc_sash': 'modern PVC sash',
+          'e5t_modern_timber_sash': 'modern timber sash',
+          'e5t_aluminium': 'aluminium',
+          'e5t_composite': 'composite',
+        },
+        otherCheckbox: 'cb_other_895',
+        otherText: 'et_other_220',
+        pdfOptions: ['replacement', 'original', 'old', 'PVCu', 'timber', 'old style timber sash', 'modern PVC sash', 'modern timber sash', 'aluminium', 'composite'],
+      ),
+    ],
+    pdf:
+        'Description: The windows are formed of replacement, original, old, PVCu, timber, old style timber sash, modern PVC sash, modern timber sash, aluminium, composite, other framed units.',
+  ),
+  VerbatimRule(
+    'e5_glazing',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_GLAZING}',
+    [
+      VerbatimToken(
+        '{WIN_GLAZING}',
+        options: {
+          'e5g_single_glazing': 'single glazing',
+          'e5g_double_glazing': 'double glazing',
+          'e5g_triple_glazing': 'triple glazing',
+          'e5g_secondary_glazing': 'secondary glazing',
+          'e5g_decorative_glazing': 'decorative glazing',
+        },
+        otherCheckbox: 'e5g_other',
+        otherText: 'e5g_other_text',
+        pdfOptions: ['single glazing', 'double glazing', 'triple glazing', 'secondary glazing', 'decorative glazing'],
+      ),
+    ],
+    pdf:
+        'Glazing: The glazing comprises single glazing, double glazing, triple glazing, secondary glazing, decorative glazing, other.',
+  ),
+  VerbatimRule(
+    'e5_bs_no',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_NO_BS_EN}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No BS EN',
+  ),
+  VerbatimRule(
+    'e5_bs_yes',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_BS_EN_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'BS EN noted',
+  ),
+  VerbatimRule(
+    'e5_condition',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_CONDITION}',
+    [
+      VerbatimToken(
+        '{WIN_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, the windows appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.',
+  ),
+  VerbatimRule(
+    'e5_very_poor',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_VERY_POOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Very poor',
+  ),
+  VerbatimRule(
+    'e5_replacement',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_REPLACEMENT}',
+    [
+    ],
+    whenField: 'e5t_replacement',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e5_old_sash',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_OLD_SASH}',
+    [
+    ],
+    whenField: 'e5t_old_style_timber_sash',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e5_seals',
+    'activity_outside_property_windows_aboutwindow',
+    '{E_WINDOWS}',
+    '{E5_GLAZING_SEALS}',
+    [
+      VerbatimToken(
+        '{SEAL_CONDITION}',
+        dropdown: 'actv_seals',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Glazing seals: The external sealant around the window frames appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e5_sill',
+    'activity_outside_property_windows_sill_projection',
+    '{E_WINDOWS}',
+    '{E5_SILL_PROJECTION}',
+    [
+      VerbatimToken(
+        '{SILL_SEALING}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Properly', 'Fairly', 'Poorly'],
+        lower: true,
+        pdfOptions: ['properly', 'fairly', 'poorly'],
+      ),
+    ],
+    pdf:
+        'The junctions between the window frames and the surrounding wall openings appear to be properly, fairly, poorly sealed.',
+    whenField: 'actv_projection_type',
+    whenValue: 'Sill projection',
+  ),
+  VerbatimRule(
+    'e5_sill_defect',
+    'activity_outside_property_windows_sill_projection',
+    '{E_WINDOWS}',
+    '{E5_SILL_DEFECT}',
+    [
+      VerbatimToken(
+        '{SILL_DEFECTS}',
+        options: {
+          'e5sd_adequate': 'adequate',
+          'e5sd_properly_installed': 'properly installed',
+          'e5sd_properly_drained': 'properly drained',
+          'e5sd_cracked': 'cracked',
+          'e5sd_defective': 'defective',
+        },
+        pdfOptions: ['adequate', 'properly installed', 'properly drained', 'cracked', 'defective'],
+      ),
+    ],
+    pdf:
+        'Sill defect: The windowsill projection beyond the face of the wall does not appear to be adequate, properly installed, properly drained, cracked, defective.',
+    whenField: 'actv_projection_type',
+    whenValue: 'Sill defect',
+  ),
+  VerbatimRule(
+    'e5_repair',
+    'activity_outside_property_windows_repairs_repair_window',
+    '{E_WINDOWS}',
+    '{E5_REPAIR_WINDOWS}',
+    [
+      VerbatimToken(
+        '{REPAIR_LOCATIONS}',
+        options: {
+          'e5rl_lounge': 'lounge',
+          'e5rl_dining_room': 'dining room',
+          'e5rl_bedroom': 'bedroom',
+          'e5rl_kitchen': 'kitchen',
+        },
+        otherCheckbox: 'cb_other_471',
+        otherText: 'et_other_175',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen'],
+      ),
+      VerbatimToken(
+        '{REPAIR_DEFECTS}',
+        options: {
+          'e5rd_have_damaged_lock_s': 'have damaged lock(s)',
+          'e5rd_have_missing_lock_s': 'have missing lock(s)',
+          'e5rd_are_difficult_to_open': 'are difficult to open',
+          'e5rd_are_badly_worn': 'are badly worn',
+          'e5rd_are_rotten': 'are rotten',
+          'e5rd_have_broken_glass': 'have broken glass',
+          'e5rd_have_failed_glazing': 'have failed glazing',
+          'e5rd_are_in_disrepair': 'are in disrepair',
+          'e5rd_are_severely_damaged': 'are severely damaged',
+          'e5rd_present_a_safety_or_security_risk': 'present a safety or security risk',
+          'e5rd_have_other_defects': 'have other defects',
+        },
+        pdfOptions: ['have damaged lock(s)', 'have missing lock(s)', 'are difficult to open', 'are badly worn', 'are rotten', 'have broken glass', 'have failed glazing', 'are in disrepair', 'are severely damaged', 'present a safety or security risk', 'have other defects'],
+      ),
+    ],
+    pdf:
+        'Repair windows: The window(s) in the lounge, dining room, bedroom, kitchen, other, have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk, have other defects.',
+    pdfMore: [
+      'Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration.',
+    ],
+  ),
+  VerbatimRule(
+    'e5_velux',
+    'activity_outside_property_windows_velux_window',
+    '{E_WINDOWS}',
+    '{E5_VELUX}',
+    [
+      VerbatimToken(
+        '{VELUX_TYPES}',
+        options: {
+          'e5vt_roof_windows': 'roof windows',
+          'e5vt_roof_skylights': 'roof skylights',
+          'e5vt_velux_roof_windows': 'Velux roof windows',
+        },
+        otherCheckbox: 'cb_other_629',
+        otherText: 'et_other_290',
+        pdfOptions: ['roof windows', 'roof skylights', 'Velux roof windows'],
+      ),
+      VerbatimToken(
+        '{VELUX_MATERIALS}',
+        options: {
+          'e5vm_timber': 'timber',
+          'e5vm_pvcu': 'PVCu',
+          'e5vm_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'cb_other_610',
+        otherText: 'et_other_816',
+        pdfOptions: ['timber', 'PVCu', 'aluminium'],
+      ),
+      VerbatimToken(
+        '{VELUX_GLAZING}',
+        options: {
+          'e5vg_double': 'double',
+          'e5vg_triple': 'triple',
+        },
+        pdfOptions: ['double', 'triple'],
+      ),
+    ],
+    pdf:
+        'Roof Velux Windows: Type: The property incorporates roof windows, roof skylights, Velux roof windows, other.',
+    pdfMore: [
+      'These are formed in timber, PVCu, aluminium, other construction with double, triple glazing.',
+    ],
+  ),
+  VerbatimRule(
+    'e5_velux_cond',
+    'activity_outside_property_windows_velux_window',
+    '{E_WINDOWS}',
+    '{E5_VELUX_CONDITION}',
+    [
+      VerbatimToken(
+        '{VELUX_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e5_windowsills',
+    'activity_outside_property_windows_windowsills',
+    '{E_WINDOWS}',
+    '{E5_WINDOWSILLS}',
+    [
+      VerbatimToken(
+        '{SILL_MATERIALS}',
+        options: {
+          'e5sm_pvcu': 'PVCu',
+          'e5sm_timber': 'timber',
+          'e5sm_brick': 'brick',
+          'e5sm_tiles': 'tiles',
+          'e5sm_concrete': 'concrete',
+        },
+        otherCheckbox: 'e5sm_other',
+        otherText: 'e5sm_other_text',
+        pdfOptions: ['PVCu', 'timber', 'brick', 'tiles', 'concrete'],
+      ),
+    ],
+    pdf:
+        'Windowsills: The windowsills are formed in PVCu, timber, brick, tiles, concrete, other material.',
+  ),
+  VerbatimRule(
+    'e5_windowsills_cond',
+    'activity_outside_property_windows_windowsills',
+    '{E_WINDOWS}',
+    '{E5_WINDOWSILLS_CONDITION}',
+    [
+      VerbatimToken(
+        '{SILL_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e5_operation',
+    'activity_outside_property_windows_operation',
+    '{E_WINDOWS}',
+    '{E5_OPERATION}',
+    [
+      VerbatimToken(
+        '{WIN_OPERATION}',
+        dropdown: 'actv_operation',
+        dropdownOptions: ['Freely', 'With minor with resistance', 'With difficulty'],
+        lower: true,
+        pdfOptions: ['freely', 'with minor with resistance', 'with difficulty'],
+      ),
+    ],
+    pdf:
+        'Operation: The windows selected for operation opened and closed freely, with minor with resistance, with difficulty.',
+  ),
+  VerbatimRule(
+    'e5_defective_op',
+    'activity_outside_property_windows_defective_operation',
+    '{E_WINDOWS}',
+    '{E5_DEFECTIVE_OPERATION}',
+    [
+      VerbatimToken(
+        '{WIN_DEFECTIVE_OPERATION}',
+        options: {
+          'e5do_stick_during_operation': 'stick during operation',
+          'e5do_fail_to_close_correctly': 'fail to close correctly',
+          'e5do_fail_to_lock_securely': 'fail to lock securely',
+          'e5do_require_adjustment': 'require adjustment',
+          'e5do_have_damaged_hinges': 'have damaged hinges',
+          'e5do_have_defective_handles': 'have defective handles',
+          'e5do_have_defective_locking_mechanisms': 'have defective locking mechanisms',
+        },
+        pdfOptions: ['stick during operation', 'fail to close correctly', 'fail to lock securely', 'require adjustment', 'have damaged hinges', 'have defective handles', 'have defective locking mechanisms'],
+      ),
+    ],
+    pdf:
+        'Defective Operation One or more windows were found to: • stick during operation • fail to close correctly • fail to lock securely • require adjustment • have damaged hinges • have defective handles • have defective locking mechanisms Repairs or adjustment should be undertaken to maintain security and weather resistance.',
+  ),
+  VerbatimRule(
+    'e5_failed_units',
+    'activity_outside_property_windows_failed_glazed_units',
+    '{E_WINDOWS}',
+    '{E5_FAILED_UNITS}',
+    [
+      VerbatimToken(
+        '{FAILED_UNIT_SIGNS}',
+        options: {
+          'e5fg_internal_condensation': 'internal condensation',
+          'e5fg_misting': 'misting',
+          'e5fg_failed_seals': 'failed seals',
+        },
+        pdfOptions: ['internal condensation', 'misting', 'failed seals'],
+      ),
+    ],
+    pdf:
+        'Failed Glazed Units: One or more double-glazed units exhibit internal condensation, misting, failed seals.',
+  ),
+  VerbatimRule(
+    'e5_damaged_glazing',
+    'activity_outside_property_windows_damaged_glazing',
+    '{E_WINDOWS}',
+    '{E5_DAMAGED_GLAZING}',
+    [
+      VerbatimToken(
+        '{DAMAGED_PANES}',
+        options: {
+          'e5dg_cracked': 'cracked',
+          'e5dg_broken': 'broken',
+          'e5dg_chipped': 'chipped',
+          'e5dg_damaged': 'damaged',
+        },
+        pdfOptions: ['cracked', 'broken', 'chipped', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Damaged Glazing: One or more panes are cracked, broken, chipped, damaged.',
+  ),
+  VerbatimRule(
+    'e5_glazing_hazard',
+    'activity_outside_property_windows_damaged_glazing',
+    '{E_WINDOWS}',
+    '{E5_GLAZING_HAZARD}',
+    [
+    ],
+    whenField: 'cb_hazard',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e5_timber',
+    'activity_outside_property_windows_timber_windows',
+    '{E_WINDOWS}',
+    '{E5_TIMBER_WINDOWS}',
+    [
+      VerbatimToken(
+        '{TIMBER_ISSUES}',
+        options: {
+          'e5tw_localised_weathering': 'localised weathering',
+          'e5tw_paint_deterioration': 'paint deterioration',
+          'e5tw_minor_decay': 'minor decay',
+        },
+        otherCheckbox: 'e5tw_other',
+        otherText: 'e5tw_other_text',
+        pdfOptions: ['localised weathering', 'paint deterioration', 'minor decay'],
+      ),
+    ],
+    pdf:
+        'Timber Windows: Where timber windows are present, localised weathering, paint deterioration, minor decay, other issues may occur as part of their normal service life.',
+  ),
+  VerbatimRule(
+    'e5_condensation',
+    'activity_outside_property_windows_condensation',
+    '{E_WINDOWS}',
+    '{E5_CONDENSATION}',
+    [
+    ],
+    whenField: 'cb_condensation',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e5_fire_trap',
+    'activity_outside_property_windows_repairs_no_fire_escape_risk',
+    '{E_WINDOWS}',
+    '{E5_FIRE_TRAP}',
+    [
+      VerbatimToken(
+        '{FIRE_LOCATIONS}',
+        options: {
+          'e5fl_lounge': 'lounge',
+          'e5fl_dining_room': 'dining room',
+          'e5fl_bedroom': 'bedroom',
+          'e5fl_study': 'study',
+        },
+        otherCheckbox: 'cb_other_175',
+        otherText: 'et_other_308',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'study'],
+      ),
+      VerbatimToken(
+        '{FIRE_OPENINGS}',
+        options: {
+          'e5fo_no_opening': 'no opening',
+          'e5fo_a_small_opening': 'a small opening',
+        },
+        pdfOptions: ['no opening', 'a small opening'],
+      ),
+    ],
+    pdf:
+        'The affected window(s) in the lounge, dining room, bedroom, study, other room have no opening, a small opening, creating a potential safety hazard.',
+  ),
+  VerbatimRule(
+    'e4_intro',
+    'activity_outside_property_main_walls_main_screen',
+    '{E_MAIN_WALLS}',
+    '{STANDARD_TEXT}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'e5_intro',
+    'activity_outside_property_windows_main_screen',
+    '{E_WINDOWS}',
+    '{WINDOWS_STANDARD_TEXT}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'e6_intro',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{STANDARD_TEXT}',
+    [
+    ],
+    first: true,
+    whenField: 'actv_condition',
+    whenValue: 'Good',
+    whenAny: [['actv_condition', 'Reasonable'], ['actv_condition', 'Fair'], ['actv_condition', 'Poor'], ['actv_condition', 'Very poor']],
+  ),
+  VerbatimRule(
+    'e6_desc',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{DOOR_TYPES}',
+        options: {
+          'e6t_replacement': 'replacement',
+          'e6t_original': 'original',
+          'e6t_old': 'old',
+          'e6t_front': 'front',
+          'e6t_rear': 'rear',
+          'e6t_side': 'side',
+          'e6t_patio': 'patio',
+          'e6t_french': 'French',
+          'e6t_bi_fold': 'bi-fold',
+        },
+        otherCheckbox: 'cb_other_859',
+        otherText: 'et_other_179',
+        pdfOptions: ['replacement', 'original', 'old', 'front', 'rear', 'side', 'patio', 'French', 'bi-fold'],
+      ),
+    ],
+    pdf:
+        'Description: The property incorporates replacement, original, old, front, rear, side, patio, French, bi-fold, other doors.',
+  ),
+  VerbatimRule(
+    'e6_material',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_MATERIAL}',
+    [
+      VerbatimToken(
+        '{DOOR_MATERIALS}',
+        options: {
+          'e6m_timber': 'timber',
+          'e6m_pvcu': 'PVCu',
+          'e6m_composite': 'composite',
+          'e6m_aluminium': 'aluminium',
+          'e6m_steel': 'steel',
+        },
+        otherCheckbox: 'e6m_other',
+        otherText: 'e6m_other_text',
+        pdfOptions: ['timber', 'PVCu', 'composite', 'aluminium', 'steel'],
+      ),
+    ],
+    pdf:
+        'The external doors are formed of timber, PVCu, composite, aluminium, steel, other material.',
+  ),
+  VerbatimRule(
+    'e6_glazing',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_GLAZING}',
+    [
+      VerbatimToken(
+        '{DOOR_GLAZING}',
+        options: {
+          'e6g_single_glazing': 'single glazing',
+          'e6g_double_glazing': 'double glazing',
+          'e6g_triple_glazing': 'triple glazing',
+          'e6g_decorative_glazing': 'decorative glazing',
+        },
+        otherCheckbox: 'e6g_other',
+        otherText: 'e6g_other_text',
+        pdfOptions: ['single glazing', 'double glazing', 'triple glazing', 'decorative glazing'],
+      ),
+    ],
+    pdf:
+        'Glazing: The glazed sections comprise single glazing, double glazing, triple glazing, decorative glazing, other.',
+  ),
+  VerbatimRule(
+    'e6_bs_no',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_NO_BS_EN}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No BS EN noted',
+  ),
+  VerbatimRule(
+    'e6_bs_yes',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_BS_EN_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'BS EN noted',
+  ),
+  VerbatimRule(
+    'e6_condition',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_CONDITION}',
+    [
+      VerbatimToken(
+        '{DOOR_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.',
+  ),
+  VerbatimRule(
+    'e6_very_poor',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_VERY_POOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Very poor',
+  ),
+  VerbatimRule(
+    'e6_replacement',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_REPLACEMENT}',
+    [
+    ],
+    whenField: 'e6t_replacement',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e6_seals',
+    'activity_outside_property_out_side_doors_about_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_GLAZING_SEALS}',
+    [
+      VerbatimToken(
+        '{DOOR_SEAL_CONDITION}',
+        dropdown: 'actv_seals',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Glazing seals: The external sealant around the door frames appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e6_repair',
+    'activity_outside_property_out_side_doors_repairs_repair_out_side_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_REPAIR_DOORS}',
+    [
+      VerbatimToken(
+        '{REPAIR_LOCATIONS}',
+        options: {
+          'e6rl_lounge': 'lounge',
+          'e6rl_dining_room': 'dining room',
+          'e6rl_bedroom': 'bedroom',
+          'e6rl_kitchen': 'kitchen',
+        },
+        otherCheckbox: 'cb_other_337',
+        otherText: 'et_other_362',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen'],
+      ),
+      VerbatimToken(
+        '{REPAIR_DEFECTS}',
+        options: {
+          'e6rd_have_damaged_lock_s': 'have damaged lock(s)',
+          'e6rd_have_missing_lock_s': 'have missing lock(s)',
+          'e6rd_are_difficult_to_open': 'are difficult to open',
+          'e6rd_are_badly_worn': 'are badly worn',
+          'e6rd_are_rotten': 'are rotten',
+          'e6rd_have_broken_glass': 'have broken glass',
+          'e6rd_have_failed_glazing': 'have failed glazing',
+          'e6rd_are_in_disrepair': 'are in disrepair',
+          'e6rd_are_severely_damaged': 'are severely damaged',
+          'e6rd_present_a_safety_or_security_risk': 'present a safety or security risk',
+          'e6rd_have_other_defects': 'have other defects',
+        },
+        pdfOptions: ['have damaged lock(s)', 'have missing lock(s)', 'are difficult to open', 'are badly worn', 'are rotten', 'have broken glass', 'have failed glazing', 'are in disrepair', 'are severely damaged', 'present a safety or security risk', 'have other defects'],
+      ),
+    ],
+    pdf:
+        'Repair doors: The door(s) in the lounge, dining room, bedroom, kitchen, other, have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk, have other defects.',
+    pdfMore: [
+      'Where the defects are minor and do not present a safety or security risk, repairs should be carried out soon to prevent further deterioration.',
+    ],
+  ),
+  VerbatimRule(
+    'e6_thresholds',
+    'activity_outside_property_out_side_doors_thresholds',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_THRESHOLDS}',
+    [
+      VerbatimToken(
+        '{THRESHOLD_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Thresholds: The door thresholds appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e6_operation',
+    'activity_outside_property_out_side_doors_operation',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_OPERATION}',
+    [
+      VerbatimToken(
+        '{DOOR_OPERATION}',
+        dropdown: 'actv_operation',
+        dropdownOptions: ['Freely', 'With resistance', 'With difficulty'],
+        lower: true,
+        pdfOptions: ['freely', 'with resistance', 'with difficulty'],
+      ),
+    ],
+    pdf:
+        'Operation: The doors selected for operation opened and closed freely, with resistance, with difficulty.',
+  ),
+  VerbatimRule(
+    'e6_security',
+    'activity_outside_property_out_side_doors_security',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_SECURITY}',
+    [
+      VerbatimToken(
+        '{DOOR_LOCKS}',
+        options: {
+          'e6lk_multi_point_locking': 'multi-point locking',
+          'e6lk_mortice_locks': 'mortice locks',
+          'e6lk_cylinder_locks': 'cylinder locks',
+          'e6lk_night_latches': 'night latches',
+          'e6lk_combination_of_locking_systems': 'combination of locking systems',
+        },
+        pdfOptions: ['multi-point locking', 'mortice locks', 'cylinder locks', 'night latches', 'combination of locking systems'],
+      ),
+      VerbatimToken(
+        '{DOOR_SECURITY_LEVEL}',
+        dropdown: 'actv_seciruty_offered',
+        dropdownOptions: ['Reasonable', 'Adequate', 'Inadequate'],
+        lower: true,
+        pdfOptions: ['reasonable', 'adequate', 'inadequate'],
+      ),
+    ],
+    pdf:
+        'Security: The doors are fitted with multi-point locking, mortice locks, cylinder locks, night latches, combination of locking systems.',
+    pdfMore: [
+      'The level of security appears reasonable, adequate, inadequate based upon a visual inspection only.',
+    ],
+  ),
+  VerbatimRule(
+    'e6_inadequate_lock',
+    'activity_outside_property_out_side_doors_repairs_inadequate_lock_location',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_INADEQUATE_LOCK}',
+    [
+      VerbatimToken(
+        '{LOCK_LOCATIONS}',
+        options: {
+          'e6il_main': 'main',
+          'e6il_rear': 'rear',
+          'e6il_side': 'side',
+          'e6il_patio': 'patio',
+          'e6il_sliding_patio_doors': 'sliding patio doors',
+          'e6il_french_doors': 'French doors',
+          'e6il_bi_fold_doors': 'bi-fold doors',
+        },
+        otherCheckbox: 'cb_other_il',
+        otherText: 'et_other_il',
+        pdfOptions: ['main', 'rear', 'side', 'patio', 'sliding patio doors', 'French doors', 'bi-fold doors'],
+      ),
+    ],
+    pdf:
+        'Inadequate Lock: The locking arrangements to the main, rear, side, patio, sliding patio doors, French doors, or bi-fold doors, other door(s), do not meet current security standards and present a security risk.',
+  ),
+  VerbatimRule(
+    'e6_defective_op',
+    'activity_outside_property_out_side_doors_defective_operation',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_DEFECTIVE_OPERATION}',
+    [
+      VerbatimToken(
+        '{DOOR_DEFECTIVE_OPERATION}',
+        options: {
+          'e6do_stick_during_operation': 'stick during operation',
+          'e6do_fail_to_close_correctly': 'fail to close correctly',
+          'e6do_require_adjustment': 'require adjustment',
+          'e6do_have_damaged_hinges': 'have damaged hinges',
+          'e6do_have_defective_handles': 'have defective handles',
+          'e6do_have_defective_locking_mechanisms': 'have defective locking mechanisms',
+          'e6do_be_distorted': 'be distorted',
+          'e6do_have_localised_decay': 'have localised decay',
+          'e6do_have_damaged_frames': 'have damaged frames',
+        },
+        pdfOptions: ['stick during operation', 'fail to close correctly', 'require adjustment', 'have damaged hinges', 'have defective handles', 'have defective locking mechanisms', 'be distorted', 'have localised decay', 'have damaged frames'],
+      ),
+    ],
+    pdf:
+        'Defective Operation One or more external doors were found to: • stick during operation • fail to close correctly • require adjustment • have damaged hinges • have defective handles • have defective locking mechanisms • be distorted • have localised decay • have damaged frames Repairs or adjustment should be undertaken to maintain security, weather resistance, and ease of operation.',
+  ),
+  VerbatimRule(
+    'e6_timber',
+    'activity_outside_property_out_side_doors_timber_doors',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_TIMBER_DOORS}',
+    [
+      VerbatimToken(
+        '{TIMBER_DOOR_ISSUES}',
+        options: {
+          'e6td_localised_weathering': 'localised weathering',
+          'e6td_paint_deterioration': 'paint deterioration',
+          'e6td_surface_splitting': 'surface splitting',
+          'e6td_minor_decay': 'minor decay',
+        },
+        pdfOptions: ['localised weathering', 'paint deterioration', 'surface splitting', 'minor decay'],
+      ),
+    ],
+    pdf:
+        'Timber Doors: Where timber external doors are present, localised weathering, paint deterioration, surface splitting, minor decay may occur as part of their normal service life.',
+  ),
+  VerbatimRule(
+    'e6_patio',
+    'activity_outside_property_out_side_doors_patio_french',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_PATIO_FRENCH}',
+    [
+      VerbatimToken(
+        '{PATIO_DOORS}',
+        options: {
+          'e6pf_sliding_patio_doors': 'sliding patio doors',
+          'e6pf_french_doors': 'French doors',
+          'e6pf_bi_fold_doors': 'bi-fold doors',
+        },
+        otherCheckbox: 'e6pf_other',
+        otherText: 'e6pf_other_text',
+        pdfOptions: ['sliding patio doors', 'French doors', 'bi-fold doors'],
+      ),
+    ],
+    pdf:
+        'Patio and French Doors: The property incorporates sliding patio doors, French doors, bi-fold doors, other similar doors.',
+  ),
+  VerbatimRule(
+    'e6_general',
+    'activity_outside_property_out_side_doors_patio_french',
+    '{E_OUTSIDE_DOORS}',
+    '{E6_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7c_loc',
+    'activity_outside_property_conservatory_porch_location_construction',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_LOCATION}',
+    [
+      VerbatimToken(
+        '{CP_LOCATIONS}',
+        options: {
+          'e7cl_front': 'front',
+          'e7cl_side': 'side',
+          'e7cl_rear': 'rear',
+        },
+        otherCheckbox: 'e7cl_other',
+        otherText: 'e7cl_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{CP_WALLS}',
+        options: {
+          'e7cw_single_glazed': 'single-glazed',
+          'e7cw_double_glazed': 'double-glazed',
+          'e7cw_triple_glazed': 'triple-glazed',
+          'e7cw_pvc_framed': 'PVC framed',
+          'e7cw_timber_framed': 'timber framed',
+          'e7cw_aluminium_framed': 'aluminium framed',
+          'e7cw_steel_framed': 'steel framed',
+        },
+        otherCheckbox: 'e7cw_other',
+        otherText: 'e7cw_other_text',
+        pdfOptions: ['single-glazed', 'double-glazed', 'triple-glazed', 'PVC framed', 'timber framed', 'aluminium framed', 'steel framed'],
+      ),
+    ],
+    pdf:
+        'Conservatory: The conservatory(s) is located to the front, side, rear, other of the building.',
+    pdfMore: [
+      'The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections.',
+    ],
+  ),
+  VerbatimRule(
+    'e7c_bregs',
+    'activity_outside_property_conservatory_porch_location_construction',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_BUILDING_REGULATIONS}',
+    [
+    ],
+    whenField: 'cb_building_regulations',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7c_roof',
+    'activity_outside_property_conservatory_porch_roof',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_ROOF}',
+    [
+      VerbatimToken(
+        '{CP_ROOF_MATERIALS}',
+        options: {
+          'e7cr_glass': 'glass',
+          'e7cr_polycarbonate_sheets': 'polycarbonate sheets',
+          'e7cr_solid_insulated_panels': 'solid insulated panels',
+          'e7cr_roofing_tiles': 'roofing tiles',
+        },
+        otherCheckbox: 'e7cr_other',
+        otherText: 'e7cr_other_text',
+        pdfOptions: ['glass', 'polycarbonate sheets', 'solid insulated panels', 'roofing tiles'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials.',
+  ),
+  VerbatimRule(
+    'e7c_doors',
+    'activity_outside_property_conservatory_porch_doors',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_DOORS_WINDOWS}',
+    [
+      VerbatimToken(
+        '{CP_DOORS_WINDOWS}',
+        options: {
+          'e7cd_single_glazed': 'single-glazed',
+          'e7cd_double_glazed': 'double-glazed',
+          'e7cd_triple_glazed': 'triple-glazed',
+          'e7cd_pvc': 'PVC',
+          'e7cd_timber': 'timber',
+          'e7cd_aluminium': 'aluminium',
+          'e7cd_steel_framed': 'steel-framed',
+        },
+        pdfOptions: ['single-glazed', 'double-glazed', 'triple-glazed', 'PVC', 'timber', 'aluminium', 'steel-framed'],
+      ),
+    ],
+    pdf:
+        'Doors and Windows: The conservatory comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s).',
+  ),
+  VerbatimRule(
+    'e7c_floor',
+    'activity_outside_property_conservatory_porch_floor',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_FLOOR}',
+    [
+      VerbatimToken(
+        '{CP_FLOOR_CONSTRUCTION}',
+        options: {
+          'e7cfc_solid_concrete': 'solid concrete',
+          'e7cfc_suspended_timber': 'suspended timber',
+        },
+        otherCheckbox: 'e7cfc_other',
+        otherText: 'e7cfc_other_text',
+        pdfOptions: ['solid concrete', 'suspended timber'],
+      ),
+      VerbatimToken(
+        '{CP_FLOOR_COVERING}',
+        options: {
+          'e7cfv_timber': 'timber',
+          'e7cfv_carpet': 'carpet',
+          'e7cfv_tiles': 'tiles',
+          'e7cfv_laminated_flooring': 'laminated flooring',
+          'e7cfv_vinyl': 'vinyl',
+        },
+        otherCheckbox: 'e7cfv_other',
+        otherText: 'e7cfv_other_text',
+        pdfOptions: ['timber', 'carpet', 'tiles', 'laminated flooring', 'vinyl'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).',
+  ),
+  VerbatimRule(
+    'e7c_bs_no',
+    'activity_outside_property_conservatory_porch_safety_glass_rating',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_NO_BS_EN}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No BS EN noted',
+  ),
+  VerbatimRule(
+    'e7c_bs_yes',
+    'activity_outside_property_conservatory_porch_safety_glass_rating',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_BS_EN_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'BS EN noted',
+  ),
+  VerbatimRule(
+    'e7c_cond',
+    'activity_outside_property_porch_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_CONDITION}',
+    [
+      VerbatimToken(
+        '{CP_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.',
+  ),
+  VerbatimRule(
+    'e7c_vpoor',
+    'activity_outside_property_porch_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_VERY_POOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Very poor',
+  ),
+  VerbatimRule(
+    'e7c_unstable',
+    'activity_outside_property_porch_poor_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_UNSTABLE}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7c_joint',
+    'activity_outside_property_porch_open_to_building',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_JOINT_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7p_loc',
+    'activity_outside_property_conservatory_porch_location_construction__location_and_construction',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_LOCATION}',
+    [
+      VerbatimToken(
+        '{CP_LOCATIONS}',
+        options: {
+          'e7pl_front': 'front',
+          'e7pl_side': 'side',
+          'e7pl_rear': 'rear',
+        },
+        otherCheckbox: 'e7pl_other',
+        otherText: 'e7pl_other_text',
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+      VerbatimToken(
+        '{CP_WALLS}',
+        options: {
+          'e7pw_single_glazed': 'single-glazed',
+          'e7pw_double_glazed': 'double-glazed',
+          'e7pw_triple_glazed': 'triple-glazed',
+          'e7pw_pvc_framed': 'PVC framed',
+          'e7pw_timber_framed': 'timber framed',
+          'e7pw_aluminium_framed': 'aluminium framed',
+          'e7pw_steel_framed': 'steel framed',
+        },
+        otherCheckbox: 'e7pw_other',
+        otherText: 'e7pw_other_text',
+        pdfOptions: ['single-glazed', 'double-glazed', 'triple-glazed', 'PVC framed', 'timber framed', 'aluminium framed', 'steel framed'],
+      ),
+    ],
+    pdf:
+        'Porch: The porch(s) located to the front, side, rear, other of the building.',
+    pdfMore: [
+      'The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections.',
+    ],
+  ),
+  VerbatimRule(
+    'e7p_bregs',
+    'activity_outside_property_conservatory_porch_location_construction__location_and_construction',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_BUILDING_REGULATIONS}',
+    [
+    ],
+    whenField: 'cb_building_regulations',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7p_roof',
+    'activity_outside_property_conservatory_porch_roof__roof',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_ROOF}',
+    [
+      VerbatimToken(
+        '{CP_ROOF_MATERIALS}',
+        options: {
+          'e7pr_glass': 'glass',
+          'e7pr_polycarbonate_sheets': 'polycarbonate sheets',
+          'e7pr_solid_insulated_panels': 'solid insulated panels',
+          'e7pr_roofing_tiles': 'roofing tiles',
+        },
+        otherCheckbox: 'e7pr_other',
+        otherText: 'e7pr_other_text',
+        pdfOptions: ['glass', 'polycarbonate sheets', 'solid insulated panels', 'roofing tiles'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials.',
+  ),
+  VerbatimRule(
+    'e7p_doors',
+    'activity_outside_property_conservatory_porch_doors__doors',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_DOORS_WINDOWS}',
+    [
+      VerbatimToken(
+        '{CP_DOORS_WINDOWS}',
+        options: {
+          'e7pd_single_glazed': 'single-glazed',
+          'e7pd_double_glazed': 'double-glazed',
+          'e7pd_triple_glazed': 'triple-glazed',
+          'e7pd_pvc': 'PVC',
+          'e7pd_timber': 'timber',
+          'e7pd_aluminium': 'aluminium',
+          'e7pd_steel_framed': 'steel-framed',
+        },
+        pdfOptions: ['single-glazed', 'double-glazed', 'triple-glazed', 'PVC', 'timber', 'aluminium', 'steel-framed'],
+      ),
+    ],
+    pdf:
+        'Doors and Windows: The porch comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s).',
+  ),
+  VerbatimRule(
+    'e7p_floor',
+    'activity_outside_property_conservatory_porch_floor__floor',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_FLOOR}',
+    [
+      VerbatimToken(
+        '{CP_FLOOR_CONSTRUCTION}',
+        options: {
+          'e7pfc_solid_concrete': 'solid concrete',
+          'e7pfc_suspended_timber': 'suspended timber',
+        },
+        otherCheckbox: 'e7pfc_other',
+        otherText: 'e7pfc_other_text',
+        pdfOptions: ['solid concrete', 'suspended timber'],
+      ),
+      VerbatimToken(
+        '{CP_FLOOR_COVERING}',
+        options: {
+          'e7pfv_timber': 'timber',
+          'e7pfv_carpet': 'carpet',
+          'e7pfv_tiles': 'tiles',
+          'e7pfv_laminated_flooring': 'laminated flooring',
+          'e7pfv_vinyl': 'vinyl',
+        },
+        otherCheckbox: 'e7pfv_other',
+        otherText: 'e7pfv_other_text',
+        pdfOptions: ['timber', 'carpet', 'tiles', 'laminated flooring', 'vinyl'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s).',
+  ),
+  VerbatimRule(
+    'e7p_bs_no',
+    'activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_NO_BS_EN}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No BS EN noted',
+  ),
+  VerbatimRule(
+    'e7p_bs_yes',
+    'activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_BS_EN_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'BS EN noted',
+  ),
+  VerbatimRule(
+    'e7p_cond',
+    'activity_outside_property_porch_condition__condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_CONDITION}',
+    [
+      VerbatimToken(
+        '{CP_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.',
+  ),
+  VerbatimRule(
+    'e7p_vpoor',
+    'activity_outside_property_porch_condition__condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_VERY_POOR}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Very poor',
+  ),
+  VerbatimRule(
+    'e7p_unstable',
+    'activity_outside_property_porch_poor_condition__poor_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_UNSTABLE}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7p_joint',
+    'activity_outside_property_porch_open_to_building__open_to_building',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_JOINT_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7c_repair',
+    'activity_outside_property_conservatory_porch_repairs',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_REPAIR}',
+    [
+      VerbatimToken(
+        '{CP_REPAIR_ELEMENTS}',
+        options: {
+          'e7cre_door_s': 'door(s)',
+          'e7cre_window_s': 'window(s)',
+          'e7cre_glazing': 'glazing',
+          'e7cre_roof': 'roof',
+          'e7cre_floor': 'floor',
+          'e7cre_wall_s': 'wall(s)',
+          'e7cre_rainwater_goods': 'rainwater goods',
+        },
+        otherCheckbox: 'e7cre_other',
+        otherText: 'e7cre_other_text',
+        pdfOptions: ['door(s)', 'window(s)', 'glazing', 'roof', 'floor', 'wall(s)', 'rainwater goods'],
+      ),
+      VerbatimToken(
+        '{CP_REPAIR_DEFECTS}',
+        options: {
+          'e7crd_cracked': 'cracked',
+          'e7crd_damaged': 'damaged',
+          'e7crd_rotten': 'rotten',
+          'e7crd_leaking': 'leaking',
+          'e7crd_damp': 'damp',
+          'e7crd_have_failed': 'have failed',
+          'e7crd_are_misted': 'are misted',
+          'e7crd_present_a_safety_hazard': 'present a safety hazard',
+        },
+        otherCheckbox: 'e7crd_other',
+        otherText: 'e7crd_other_text',
+        pdfOptions: ['cracked', 'damaged', 'rotten', 'leaking', 'damp', 'have failed', 'are misted', 'present a safety hazard'],
+      ),
+    ],
+    pdf:
+        'Repair conservatory: The conservatory door(s), window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted, present a safety hazard, other.',
+    whenField: 'actv_cp',
+    whenValue: 'Conservatory',
+  ),
+  VerbatimRule(
+    'e7p_repair',
+    'activity_outside_property_conservatory_porch_repairs',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_REPAIR}',
+    [
+      VerbatimToken(
+        '{CP_REPAIR_ELEMENTS}',
+        options: {
+          'e7pre_door': 'door',
+          'e7pre_window_s': 'window(s)',
+          'e7pre_glazing': 'glazing',
+          'e7pre_roof': 'roof',
+          'e7pre_floor': 'floor',
+          'e7pre_wall_s': 'wall(s)',
+          'e7pre_rainwater_goods': 'rainwater goods',
+        },
+        otherCheckbox: 'e7pre_other',
+        otherText: 'e7pre_other_text',
+        pdfOptions: ['door', 'window(s)', 'glazing', 'roof', 'floor', 'wall(s)', 'rainwater goods'],
+      ),
+      VerbatimToken(
+        '{CP_REPAIR_DEFECTS}',
+        options: {
+          'e7prd_cracked': 'cracked',
+          'e7prd_damaged': 'damaged',
+          'e7prd_rotten': 'rotten',
+          'e7prd_leaking': 'leaking',
+          'e7prd_damp': 'damp',
+          'e7prd_have_failed': 'have failed',
+          'e7prd_are_misted_over': 'are misted over',
+          'e7prd_present_a_safety_hazard': 'present a safety hazard',
+        },
+        otherCheckbox: 'e7prd_other',
+        otherText: 'e7prd_other_text',
+        pdfOptions: ['cracked', 'damaged', 'rotten', 'leaking', 'damp', 'have failed', 'are misted over', 'present a safety hazard'],
+      ),
+    ],
+    pdf:
+        'Repair porch: The porch door, window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted over, present a safety hazard, other.',
+    whenField: 'actv_cp',
+    whenValue: 'Porch',
+  ),
+  VerbatimRule(
+    'e7_not_applicable',
+    'activity_outside_property_conservatory_porch_not_inspected',
+    '{E_CONSERVATORY_PORCHES}',
+    '{NOT_INSPECTED_NOT_APPLICABLE}',
+    [
+    ],
+    whenField: 'cb_not_applicable',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_inspected',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_INSPECTED}',
+    [
+    ],
+    first: true,
+    whenField: 'actv_condition',
+    whenValue: '1',
+    whenAny: [['actv_condition', '2'], ['actv_condition', '3']],
+  ),
+  VerbatimRule(
+    'e8_desc',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{JOINERY_MATERIALS}',
+        options: {
+          'e8m_timber': 'timber',
+          'e8m_pvcu': 'PVCu',
+          'e8m_aluminium': 'aluminium',
+          'e8m_asbestos_board': 'asbestos board',
+          'e8m_cement_board': 'cement board',
+          'e8m_fibre_cement': 'fibre cement',
+          'e8m_slates': 'slates',
+        },
+        otherCheckbox: 'cb_other_397',
+        otherText: 'et_other_393',
+        pdfOptions: ['timber', 'PVCu', 'aluminium', 'asbestos board', 'cement board', 'fibre cement', 'slates'],
+      ),
+    ],
+    pdf:
+        'Description: The external eaves-level joinery comprises timber, PVCu, aluminium, asbestos board, cement board, fibre cement, slates, other materials.',
+  ),
+  VerbatimRule(
+    'e8_decorations',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_DECORATIONS}',
+    [
+      VerbatimToken(
+        '{JOINERY_DECORATIONS}',
+        dropdown: 'actv_decorations',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Weathered', 'Poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'weathered', 'poor'],
+      ),
+    ],
+    pdf:
+        'Decorations: The external painted or stained finishes appear in good, reasonable, fair, weathered, poor condition.',
+  ),
+  VerbatimRule(
+    'e8_condition',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_CONDITION}',
+    [
+      VerbatimToken(
+        '{JOINERY_CONDITION}',
+        dropdown: 'actv_joinery_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, these elements appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'e8_asbestos',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_ASBESTOS_CEMENT}',
+    [
+    ],
+    whenField: 'cb_open_runoffs',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_general',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_repair',
+    'activity_outside_property_other_joinery_and_finishes_repairs',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_REPAIR}',
+    [
+      VerbatimToken(
+        '{JOINERY_ITEMS}',
+        options: {
+          'e8i_fascias': 'fascias',
+          'e8i_soffits': 'soffits',
+          'e8i_barge_boards': 'barge boards',
+          'e8i_verge_clips': 'verge clips',
+          'e8i_timber_cladding': 'timber cladding',
+        },
+        otherCheckbox: 'cb_other_289',
+        otherText: 'et_other_178',
+        pdfOptions: ['fascias', 'soffits', 'barge boards', 'verge clips', 'timber cladding'],
+      ),
+      VerbatimToken(
+        '{JOINERY_LOCATIONS}',
+        options: {
+          'e8l_main_building': 'main building',
+          'e8l_back_addition': 'back addition',
+          'e8l_extension': 'extension',
+          'e8l_bay_window': 'bay window',
+          'e8l_garage': 'garage',
+        },
+        otherCheckbox: 'cb_other_269',
+        otherText: 'et_other_567',
+        pdfOptions: ['main building', 'back addition', 'extension', 'bay window', 'garage'],
+      ),
+      VerbatimToken(
+        '{JOINERY_DEFECTS}',
+        options: {
+          'e8d_rotted': 'rotted',
+          'e8d_damaged': 'damaged',
+          'e8d_poorly_secured': 'poorly secured',
+          'e8d_incomplete': 'incomplete',
+          'e8d_missing': 'missing',
+        },
+        otherCheckbox: 'cb_other_777',
+        otherText: 'et_other_473',
+        pdfOptions: ['rotted', 'damaged', 'poorly secured', 'incomplete', 'missing'],
+      ),
+    ],
+    pdf:
+        'Repair: The fascias, soffits, barge boards, verge clips, timber cladding, other to the main building, back addition, extension, bay window, garage, other are rotted, damaged, poorly secured, incomplete, missing, other.',
+  ),
+  VerbatimRule(
+    'e8_hazard',
+    'activity_outside_property_other_joinery_and_finishes_repairs',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_HAZARD}',
+    [
+    ],
+    whenField: 'cb_safety_hazard',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_not_inspected',
+    'activity_outside_property_other_joinery_finishes_not_inspected',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e8_weathering',
+    'activity_outside_property_other_joinery_and_finishes_timber_weathering',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_TIMBER_WEATHERING}',
+    [
+      VerbatimToken(
+        '{WEATHERING_LEVEL}',
+        dropdown: 'actv_weathering',
+        dropdownOptions: ['Minor', 'Moderate', 'Significant'],
+        lower: true,
+        pdfOptions: ['minor', 'moderate', 'significant'],
+      ),
+    ],
+    pdf:
+        'Timber Weathering: Exposed timber joinery exhibits minor, moderate, significant weathering.',
+  ),
+  VerbatimRule(
+    'e8_decay',
+    'activity_outside_property_other_joinery_and_finishes_timber_decay',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_TIMBER_DECAY}',
+    [
+      VerbatimToken(
+        '{TIMBER_DECAY_SIGNS}',
+        options: {
+          'e8td_localised_wet_rot': 'localised wet rot',
+          'e8td_surface_decay': 'surface decay',
+          'e8td_timber_deterioration': 'timber deterioration',
+        },
+        cap: true,
+        pdfOptions: ['localised wet rot', 'surface decay', 'timber deterioration'],
+      ),
+    ],
+    pdf:
+        'Timber Decay: Localised wet rot, surface decay, timber deterioration was observed.',
+  ),
+  VerbatimRule(
+    'e8_defective',
+    'activity_outside_property_other_joinery_and_finishes_defective_joinery',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_DEFECTIVE_JOINERY}',
+    [
+      VerbatimToken(
+        '{JOINERY_DEFECT_LIST}',
+        options: {
+          'e8dj_loose_fascias': 'loose fascias',
+          'e8dj_loose_soffits': 'loose soffits',
+          'e8dj_damaged_bargeboards': 'damaged bargeboards',
+          'e8dj_open_joints': 'open joints',
+          'e8dj_defective_fixings': 'defective fixings',
+          'e8dj_weathered_decoration': 'weathered decoration',
+          'e8dj_localised_timber_decay': 'localised timber decay',
+          'e8dj_distorted_joinery': 'distorted joinery',
+          'e8dj_minor_impact_damage': 'minor impact damage',
+        },
+        pdfOptions: ['loose fascias', 'loose soffits', 'damaged bargeboards', 'open joints', 'defective fixings', 'weathered decoration', 'localised timber decay', 'distorted joinery', 'minor impact damage'],
+      ),
+    ],
+    pdf:
+        'Defective Joinery One or more defects were observed, including: • Loose fascias • Loose soffits • Damaged bargeboards • Open joints • Defective fixings • Weathered decoration • Localised timber decay • Distorted joinery • Minor impact damage Repairs should be undertaken to prevent further deterioration and maintain weather resistance.',
+  ),
+  VerbatimRule(
+    'e9_carport',
+    'activity_outside_property_other_other_external',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT}',
+    [
+      VerbatimToken(
+        '{E9_CARPORT_TYPES}',
+        options: {
+          'e90c_timber': 'timber',
+          'e90c_steel': 'steel',
+          'e90c_aluminium': 'aluminium',
+          'e90c_masonry': 'masonry',
+        },
+        pdfOptions: ['timber', 'steel', 'aluminium', 'masonry'],
+      ),
+    ],
+    pdf:
+        'Carport: The property incorporates a timber, steel, aluminium, masonry carport.',
+  ),
+  VerbatimRule(
+    'e9_carport_roof',
+    'activity_outside_property_other_other_roof',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT_ROOF}',
+    [
+      VerbatimToken(
+        '{E9_ROOF_SHAPE}',
+        options: {
+          'e90rs_pitched': 'pitched',
+          'e90rs_flat': 'flat',
+          'e90rs_lean_to': 'lean-to',
+        },
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{E9_ROOF_COVERING}',
+        options: {
+          'e90rc_tiles': 'tiles',
+          'e90rc_slates': 'slates',
+          'e90rc_felt_sheet': 'felt sheet',
+          'e90rc_polycarbonate_sheet': 'polycarbonate sheet',
+          'e90rc_metal_sheeting': 'metal sheeting',
+        },
+        otherCheckbox: 'e90rc_other',
+        otherText: 'e90rc_other_text',
+        pdfOptions: ['tiles', 'slates', 'felt sheet', 'polycarbonate sheet', 'metal sheeting'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to construction and covered with tiles, slates, felt sheet, polycarbonate sheet, metal sheeting, other material.',
+  ),
+  VerbatimRule(
+    'e9_carport_walls',
+    'activity_outside_property_other_other_wall',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT_WALLS}',
+    [
+      VerbatimToken(
+        '{E9_WALL_MATERIALS}',
+        options: {
+          'e90w_bricks': 'bricks',
+          'e90w_timber': 'timber',
+          'e90w_steel': 'steel',
+          'e90w_glass': 'glass',
+          'e90w_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'e90w_other',
+        otherText: 'e90w_other_text',
+        pdfOptions: ['bricks', 'timber', 'steel', 'glass', 'aluminium'],
+      ),
+    ],
+    pdf:
+        'Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.',
+  ),
+  VerbatimRule(
+    'e9_carport_floor',
+    'activity_outside_property_other_floors',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT_FLOOR}',
+    [
+      VerbatimToken(
+        '{E9_FLOOR_FINISH}',
+        options: {
+          'e90f_concrete': 'concrete',
+          'e90f_block_paving': 'block paving',
+          'e90f_tarmac': 'tarmac',
+          'e90f_gravel': 'gravel',
+        },
+        otherCheckbox: 'e90f_other',
+        otherText: 'e90f_other_text',
+        pdfOptions: ['concrete', 'block paving', 'tarmac', 'gravel'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.',
+  ),
+  VerbatimRule(
+    'e9_carport_cond',
+    'activity_out_side_other_external_area_condition',
+    '{E_OTHER_AREA}',
+    '{E9_CARPORT_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_porch',
+    'activity_outside_property_other_other_external__construction',
+    '{E_OTHER_AREA}',
+    '{E9_PORCH}',
+    [
+      VerbatimToken(
+        '{E9_PORCH_MATERIALS}',
+        options: {
+          'e91c_timber': 'timber',
+          'e91c_steel': 'steel',
+          'e91c_concrete': 'concrete',
+          'e91c_plastic': 'plastic',
+        },
+        otherCheckbox: 'e91c_other',
+        otherText: 'e91c_other_text',
+        pdfOptions: ['timber', 'steel', 'concrete', 'plastic'],
+      ),
+    ],
+    pdf:
+        'Porch Canopy: The property incorporates a porch canopy constructed of timber, steel, concrete, plastic, other material.',
+  ),
+  VerbatimRule(
+    'e9_porch_roof',
+    'activity_outside_property_other_other_roof__roof',
+    '{E_OTHER_AREA}',
+    '{E9_PORCH_ROOF}',
+    [
+      VerbatimToken(
+        '{E9_ROOF_COVERING}',
+        options: {
+          'e91r_tiles': 'tiles',
+          'e91r_slates': 'slates',
+          'e91r_felt': 'felt',
+          'e91r_polycarbonate': 'polycarbonate',
+          'e91r_plastic': 'plastic',
+        },
+        otherCheckbox: 'e91r_other',
+        otherText: 'e91r_other_text',
+        pdfOptions: ['tiles', 'slates', 'felt', 'polycarbonate', 'plastic'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof covering comprises tiles, slates, felt, polycarbonate, plastic, other material.',
+  ),
+  VerbatimRule(
+    'e9_porch_cond',
+    'activity_out_side_other_external_area_condition__condition',
+    '{E_OTHER_AREA}',
+    '{E9_PORCH_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the canopy appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_terrace',
+    'activity_outside_property_other_other_external__construction__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE}',
+    [
+      VerbatimToken(
+        '{E9_TERRACE_MATERIALS}',
+        options: {
+          'e92c_timber': 'timber',
+          'e92c_concrete': 'concrete',
+          'e92c_steel': 'steel',
+        },
+        otherCheckbox: 'e92c_other',
+        otherText: 'e92c_other_text',
+        pdfOptions: ['timber', 'concrete', 'steel'],
+      ),
+    ],
+    pdf:
+        'The structure is formed in timber, concrete, steel, other materials.',
+  ),
+  VerbatimRule(
+    'e9_terrace_roof',
+    'activity_outside_property_other_other_roof__roof__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_ROOF}',
+    [
+      VerbatimToken(
+        '{E9_ROOF_SHAPE}',
+        options: {
+          'e92rs_pitched': 'pitched',
+          'e92rs_flat': 'flat',
+          'e92rs_lean_to': 'lean-to',
+        },
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{E9_ROOF_COVERING}',
+        options: {
+          'e92rc_tiles': 'tiles',
+          'e92rc_slates': 'slates',
+          'e92rc_felt': 'felt',
+          'e92rc_polycarbonate': 'polycarbonate',
+          'e92rc_metal_sheeting': 'metal sheeting',
+        },
+        otherCheckbox: 'e92rc_other',
+        otherText: 'e92rc_other_text',
+        pdfOptions: ['tiles', 'slates', 'felt', 'polycarbonate', 'metal sheeting'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to construction and covered with tiles, slates, felt, polycarbonate, metal sheeting, other materials.',
+  ),
+  VerbatimRule(
+    'e9_terrace_walls',
+    'activity_outside_property_other_other_wall__wall_construction__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_WALLS}',
+    [
+      VerbatimToken(
+        '{E9_WALL_MATERIALS}',
+        options: {
+          'e92w_bricks': 'bricks',
+          'e92w_timber': 'timber',
+          'e92w_steel': 'steel',
+          'e92w_glass': 'glass',
+          'e92w_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'e92w_other',
+        otherText: 'e92w_other_text',
+        pdfOptions: ['bricks', 'timber', 'steel', 'glass', 'aluminium'],
+      ),
+    ],
+    pdf:
+        'Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.',
+  ),
+  VerbatimRule(
+    'e9_terrace_floor',
+    'activity_outside_property_other_floors__floor__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_FLOOR}',
+    [
+      VerbatimToken(
+        '{E9_FLOOR_FINISH}',
+        options: {
+          'e92f_concrete': 'concrete',
+          'e92f_block_paving': 'block paving',
+          'e92f_tarmac': 'tarmac',
+          'e92f_gravel': 'gravel',
+        },
+        otherCheckbox: 'e92f_other',
+        otherText: 'e92f_other_text',
+        pdfOptions: ['concrete', 'block paving', 'tarmac', 'gravel'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.',
+  ),
+  VerbatimRule(
+    'e9_terrace_drains',
+    'activity_outside_property_other_drains__drains__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_DRAINS}',
+    [
+      VerbatimToken(
+        '{E9_DRAIN_MATERIALS}',
+        options: {
+          'e92d_bitumen': 'bitumen',
+          'e92d_felt': 'felt',
+          'e92d_concrete': 'concrete',
+        },
+        otherCheckbox: 'e92d_other',
+        otherText: 'e92d_other_text',
+        pdfOptions: ['bitumen', 'felt', 'concrete'],
+      ),
+      VerbatimToken(
+        '{E9_DRAIN_STATE}',
+        options: {
+          'e92s_well_drained': 'well drained',
+          'e92s_poorly_drained': 'poorly drained',
+          'e92s_unobstructed': 'unobstructed',
+          'e92s_obstructed': 'obstructed',
+        },
+        pdfOptions: ['well drained', 'poorly drained', 'unobstructed', 'obstructed'],
+      ),
+    ],
+    pdf:
+        'Drains: The drains are laid with bitumen, felt, concrete or other suitable materials, other appear well drained, poorly drained, unobstructed, obstructed.',
+  ),
+  VerbatimRule(
+    'e9_terrace_cond',
+    'activity_out_side_other_external_area_condition__condition__2',
+    '{E_OTHER_AREA}',
+    '{E9_TERRACE_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_balcony',
+    'activity_outside_property_other_other_external__construction__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY}',
+    [
+      VerbatimToken(
+        '{E9_BALCONY_TYPES}',
+        options: {
+          'e93c_timber': 'timber',
+          'e93c_steel': 'steel',
+          'e93c_concrete': 'concrete',
+          'e93c_cantilevered': 'cantilevered',
+        },
+        pdfOptions: ['timber', 'steel', 'concrete', 'cantilevered'],
+      ),
+    ],
+    pdf:
+        'Balcony: The property incorporates a timber, steel, concrete, cantilevered balcony(s).',
+  ),
+  VerbatimRule(
+    'e9_balcony_walls',
+    'activity_outside_property_other_other_wall__wall_construction__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY_WALLS}',
+    [
+      VerbatimToken(
+        '{E9_WALL_MATERIALS}',
+        options: {
+          'e93w_bricks': 'bricks',
+          'e93w_timber': 'timber',
+          'e93w_steel': 'steel',
+          'e93w_glass': 'glass',
+          'e93w_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'e93w_other',
+        otherText: 'e93w_other_text',
+        pdfOptions: ['bricks', 'timber', 'steel', 'glass', 'aluminium'],
+      ),
+    ],
+    pdf:
+        'Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.',
+  ),
+  VerbatimRule(
+    'e9_balcony_floor',
+    'activity_outside_property_other_floors__floor__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY_FLOOR}',
+    [
+      VerbatimToken(
+        '{E9_FLOOR_FINISH}',
+        options: {
+          'e93f_concrete': 'concrete',
+          'e93f_block_paving': 'block paving',
+          'e93f_tarmac': 'tarmac',
+          'e93f_gravel': 'gravel',
+        },
+        otherCheckbox: 'e93f_other',
+        otherText: 'e93f_other_text',
+        pdfOptions: ['concrete', 'block paving', 'tarmac', 'gravel'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.',
+  ),
+  VerbatimRule(
+    'e9_balcony_drains',
+    'activity_outside_property_other_drains__drains__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY_DRAINS}',
+    [
+      VerbatimToken(
+        '{E9_DRAIN_MATERIALS}',
+        options: {
+          'e93d_bitumen': 'bitumen',
+          'e93d_felt': 'felt',
+          'e93d_concrete': 'concrete',
+        },
+        otherCheckbox: 'e93d_other',
+        otherText: 'e93d_other_text',
+        pdfOptions: ['bitumen', 'felt', 'concrete'],
+      ),
+      VerbatimToken(
+        '{E9_DRAIN_STATE}',
+        options: {
+          'e93s_well_drained': 'well drained',
+          'e93s_poorly_drained': 'poorly drained',
+          'e93s_unobstructed': 'unobstructed',
+          'e93s_obstructed': 'obstructed',
+        },
+        pdfOptions: ['well drained', 'poorly drained', 'unobstructed', 'obstructed'],
+      ),
+    ],
+    pdf:
+        'Drains: The drains are laid with bitumen, felt, concrete, other materials, other appear well drained, poorly drained, unobstructed, obstructed.',
+  ),
+  VerbatimRule(
+    'e9_balcony_cond',
+    'activity_out_side_other_external_area_condition__condition__3',
+    '{E_OTHER_AREA}',
+    '{E9_BALCONY_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_juliet',
+    'activity_outside_property_other_other_external__construction__4',
+    '{E_OTHER_AREA}',
+    '{E9_JULIET}',
+    [
+      VerbatimToken(
+        '{E9_JULIET_MATERIALS}',
+        options: {
+          'e94c_steel': 'steel',
+          'e94c_aluminium': 'aluminium',
+          'e94c_glass': 'glass',
+        },
+        otherCheckbox: 'e94c_other',
+        otherText: 'e94c_other_text',
+        pdfOptions: ['steel', 'aluminium', 'glass'],
+      ),
+    ],
+    pdf:
+        'Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel, aluminium, glass, other materials.',
+  ),
+  VerbatimRule(
+    'e9_juliet_cond',
+    'activity_out_side_other_external_area_condition__condition__4',
+    '{E_OTHER_AREA}',
+    '{E9_JULIET_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, it appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_stairs',
+    'activity_outside_property_other_other_external__construction__5',
+    '{E_OTHER_AREA}',
+    '{E9_STAIRS}',
+    [
+      VerbatimToken(
+        '{E9_STAIR_MATERIALS}',
+        options: {
+          'e95c_concrete': 'concrete',
+          'e95c_steel': 'steel',
+          'e95c_timber': 'timber',
+          'e95c_brick': 'brick',
+        },
+        otherCheckbox: 'e95c_other',
+        otherText: 'e95c_other_text',
+        pdfOptions: ['concrete', 'steel', 'timber', 'brick'],
+      ),
+    ],
+    pdf:
+        'External Staircase: The property incorporates an external staircase constructed of concrete, steel, timber, brick, other materials.',
+  ),
+  VerbatimRule(
+    'e9_stairs_elements',
+    'activity_outside_property_other_handrails__handrails__5',
+    '{E_OTHER_AREA}',
+    '{E9_STAIRS_ELEMENTS}',
+    [
+      VerbatimToken(
+        '{E9_STAIR_ELEMENT_MATERIALS}',
+        options: {
+          'e95e_steel': 'steel',
+          'e95e_timber': 'timber',
+          'e95e_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'e95e_other',
+        otherText: 'e95e_other_text',
+        pdfOptions: ['steel', 'timber', 'aluminium'],
+      ),
+    ],
+    pdf:
+        'Element (s): The handrails, landing, and steps are formed in steel, timber, aluminium, other materials.',
+  ),
+  VerbatimRule(
+    'e9_stairs_cond',
+    'activity_out_side_other_external_area_condition__condition__5',
+    '{E_OTHER_AREA}',
+    '{E9_STAIRS_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the staircase appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_other',
+    'activity_outside_property_other_other_external__construction__6',
+    '{E_OTHER_AREA}',
+    '{E9_OTHER}',
+    [
+      VerbatimToken(
+        '{E9_OTHER_STRUCTURES}',
+        options: {
+          'e96c_bin_stores': 'bin stores',
+          'e96c_cycle_stores': 'cycle stores',
+          'e96c_garden_walls': 'garden walls',
+          'e96c_pergolas': 'pergolas',
+          'e96c_gazebos': 'gazebos',
+          'e96c_covered_walkways': 'covered walkways',
+          'e96c_storage_compounds': 'storage compounds',
+        },
+        otherCheckbox: 'e96c_other',
+        otherText: 'e96c_other_text',
+        pdfOptions: ['bin stores', 'cycle stores', 'garden walls', 'pergolas', 'gazebos', 'covered walkways', 'storage compounds'],
+      ),
+    ],
+    pdf:
+        'Other External Structures: Other external structures include bin stores, cycle stores, garden walls, pergolas, gazebos, covered walkways, storage compounds, other ancillary structures.',
+  ),
+  VerbatimRule(
+    'e9_other_cond',
+    'activity_out_side_other_external_area_condition__condition__6',
+    '{E_OTHER_AREA}',
+    '{E9_OTHER_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_rw',
+    'activity_outside_property_other_retaining_walls',
+    '{E_OTHER_AREA}',
+    '{E9_RETAINING}',
+    [
+      VerbatimToken(
+        '{E9_RW_MATERIALS}',
+        options: {
+          'e9rw_brick': 'brick',
+          'e9rw_stone': 'stone',
+          'e9rw_concrete': 'concrete',
+          'e9rw_gabion': 'gabion',
+          'e9rw_timber': 'timber',
+        },
+        pdfOptions: ['brick', 'stone', 'concrete', 'gabion', 'timber'],
+      ),
+    ],
+    pdf:
+        'Retaining Walls: The property incorporates brick, stone, concrete, gabion, timber retaining walls.',
+  ),
+  VerbatimRule(
+    'e9_rw_cond',
+    'activity_outside_property_other_retaining_walls',
+    '{E_OTHER_AREA}',
+    '{E9_RETAINING_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_weather_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'e9_rw_defects',
+    'activity_outside_property_other_retaining_walls_defects',
+    '{E_OTHER_AREA}',
+    '{E9_RETAINING_DEFECTS}',
+    [
+      VerbatimToken(
+        '{E9_RW_DEFECTS}',
+        options: {
+          'e9rd_movement': 'movement',
+          'e9rd_bulging': 'bulging',
+          'e9rd_instability': 'instability',
+          'e9rd_damage': 'damage',
+        },
+        otherCheckbox: 'e9rd_other',
+        otherText: 'e9rd_other_text',
+        pdfOptions: ['movement', 'bulging', 'instability', 'damage'],
+      ),
+    ],
+    pdf:
+        'Defects noted: Evidence of movement, bulging, instability, damage, other was noted to parts or all retaining walls.',
+  ),
+  VerbatimRule(
+    'e9_communal',
+    'activity_outside_property_other_communal_area',
+    '{E_OTHER_AREA}',
+    '{E9_COMMUNAL}',
+    [
+      VerbatimToken(
+        '{E9_COMMUNAL}',
+        options: {
+          'e9ca_communal_entrances': 'communal entrances',
+          'e9ca_access_roads': 'access roads',
+          'e9ca_parking_areas': 'parking areas',
+          'e9ca_footpaths': 'footpaths',
+          'e9ca_landscaped_areas': 'landscaped areas',
+          'e9ca_boundary_structures': 'boundary structures',
+          'e9ca_security_gates': 'security gates',
+          'e9ca_cctv': 'CCTV',
+          'e9ca_lighting': 'lighting',
+          'e9ca_bin_stores': 'bin stores',
+          'e9ca_cycle_stores': 'cycle stores',
+        },
+        otherCheckbox: 'e9ca_other',
+        otherText: 'e9ca_other_text',
+        pdfOptions: ['communal entrances', 'access roads', 'parking areas', 'footpaths', 'landscaped areas', 'boundary structures', 'security gates', 'CCTV', 'lighting', 'bin stores', 'cycle stores'],
+      ),
+    ],
+    pdf:
+        'Description: Where applicable, the external communal areas comprise communal entrances, access roads, parking areas, footpaths, landscaped areas, boundary structures, security gates, CCTV, lighting, bin stores, cycle stores, other facilities.',
+  ),
+  VerbatimRule(
+    'e9_communal_cond',
+    'activity_outside_property_other_communal_area',
+    '{E_OTHER_AREA}',
+    '{E9_COMMUNAL_CONDITION}',
+    [
+      VerbatimToken(
+        '{E9_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.',
+  ),
+  VerbatimRule(
+    'e9_r_roof',
+    'activity_outside_property_other_repairs_roof',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_ROOF}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rr_s_carport': 'carport',
+          'e9rr_s_balcony': 'balcony',
+          'e9rr_s_canopy': 'canopy',
+        },
+        otherCheckbox: 'e9rr_s_other',
+        otherText: 'e9rr_s_other_text',
+        pdfOptions: ['carport', 'balcony', 'canopy'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rr_d_missing': 'missing',
+          'e9rr_d_slipped': 'slipped',
+          'e9rr_d_cracked': 'cracked',
+          'e9rr_d_lifted': 'lifted',
+          'e9rr_d_in_disrepair': 'in disrepair',
+          'e9rr_d_leaking': 'leaking',
+          'e9rr_d_damaged': 'damaged',
+          'e9rr_d_poorly_secured': 'poorly secured',
+          'e9rr_d_dilapidated': 'dilapidated',
+        },
+        otherCheckbox: 'e9rr_d_other',
+        otherText: 'e9rr_d_other_text',
+        pdfOptions: ['missing', 'slipped', 'cracked', 'lifted', 'in disrepair', 'leaking', 'damaged', 'poorly secured', 'dilapidated'],
+      ),
+    ],
+    pdf:
+        'Repairs Roof: The flashing, roof tile, sheet, or slate covering of the roof over the carport, balcony, canopy, other is missing, slipped, cracked, lifted, in disrepair, leaking, damaged, poorly secured, dilapidated, other.',
+  ),
+  VerbatimRule(
+    'e9_r_wall',
+    'activity_outside_property_other_repairs_wall',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_WALL}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rw_s_balcony': 'balcony',
+          'e9rw_s_carport': 'carport',
+          'e9rw_s_roof_terrace': 'roof terrace',
+          'e9rw_s_staircase': 'staircase',
+        },
+        otherCheckbox: 'e9rw_s_other',
+        otherText: 'e9rw_s_other_text',
+        pdfOptions: ['balcony', 'carport', 'roof terrace', 'staircase'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rw_d_are_cracked': 'are cracked',
+          'e9rw_d_are_damaged': 'are damaged',
+          'e9rw_d_are_unstable': 'are unstable',
+          'e9rw_d_have_eroded_render': 'have eroded render',
+        },
+        otherCheckbox: 'e9rw_d_other',
+        otherText: 'e9rw_d_other_text',
+        pdfOptions: ['are cracked', 'are damaged', 'are unstable', 'have eroded render'],
+      ),
+    ],
+    pdf:
+        'Walls: The balcony, carport, roof terrace, staircase, other wall(s) are cracked, are damaged, are unstable, have eroded render, other.',
+  ),
+  VerbatimRule(
+    'e9_r_floor',
+    'activity_outside_property_other_repairs_floor',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_FLOOR}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rf_s_balcony': 'balcony',
+          'e9rf_s_carport': 'carport',
+          'e9rf_s_roof_terrace': 'roof terrace',
+          'e9rf_s_staircase_floor': 'staircase floor',
+        },
+        pdfOptions: ['balcony', 'carport', 'roof terrace', 'staircase floor'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rf_d_split': 'split',
+          'e9rf_d_cracked': 'cracked',
+        },
+        otherCheckbox: 'e9rf_d_other',
+        otherText: 'e9rf_d_other_text',
+        pdfOptions: ['split', 'cracked'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor surface, timbers, or decking of the balcony, carport, roof terrace, staircase floor is split, cracked, other.',
+  ),
+  VerbatimRule(
+    'e9_r_drains',
+    'activity_outside_property_other_repairs_drains',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_DRAINS}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rd_s_balcony': 'balcony',
+          'e9rd_s_carport': 'carport',
+          'e9rd_s_roof_terrace': 'roof terrace',
+          'e9rd_s_staircase': 'staircase',
+        },
+        otherCheckbox: 'e9rd_s_other',
+        otherText: 'e9rd_s_other_text',
+        pdfOptions: ['balcony', 'carport', 'roof terrace', 'staircase'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rd_d_too_small': 'too small',
+          'e9rd_d_blocked': 'blocked',
+          'e9rd_d_poorly_drained': 'poorly drained',
+          'e9rd_d_damaged': 'damaged',
+        },
+        otherCheckbox: 'e9rd_d_other',
+        otherText: 'e9rd_d_other_text',
+        pdfOptions: ['too small', 'blocked', 'poorly drained', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Drains: The balcony, carport, roof terrace, staircase, other drains are too small, blocked, poorly drained, damaged, other, resulting in rainwater ponding.',
+  ),
+  VerbatimRule(
+    'e9_r_rails',
+    'activity_outside_property_other_repairs_hand_rails',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_RAILS}',
+    [
+      VerbatimToken(
+        '{E9_R_STRUCTURES}',
+        options: {
+          'e9rh_s_balcony': 'balcony',
+          'e9rh_s_juliet_balcony': 'Juliet balcony',
+          'e9rh_s_terrace': 'terrace',
+          'e9rh_s_stairs': 'stairs',
+        },
+        otherCheckbox: 'e9rh_s_other',
+        otherText: 'e9rh_s_other_text',
+        pdfOptions: ['balcony', 'Juliet balcony', 'terrace', 'stairs'],
+      ),
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rh_d_inadequate': 'inadequate',
+          'e9rh_d_poorly_secured': 'poorly secured',
+          'e9rh_d_incomplete': 'incomplete',
+          'e9rh_d_loose': 'loose',
+          'e9rh_d_corroded': 'corroded',
+          'e9rh_d_rotten': 'rotten',
+          'e9rh_d_damaged': 'damaged',
+        },
+        otherCheckbox: 'e9rh_d_other',
+        otherText: 'e9rh_d_other_text',
+        pdfOptions: ['inadequate', 'poorly secured', 'incomplete', 'loose', 'corroded', 'rotten', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Handrails: The handrail(s) of the balcony, Juliet balcony, terrace, stairs, other are inadequate, poorly secured, incomplete, loose, corroded, rotten, damaged, other and may not provide adequate protection against falls.',
+  ),
+  VerbatimRule(
+    'e9_r_steps',
+    'activity_outside_property_other_repairs_steps_landing',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_STEPS}',
+    [
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rs_d_split': 'split',
+          'e9rs_d_cracked': 'cracked',
+          'e9rs_d_partly_rotted': 'partly rotted',
+          'e9rs_d_rusted': 'rusted',
+          'e9rs_d_defective': 'defective',
+        },
+        pdfOptions: ['split', 'cracked', 'partly rotted', 'rusted', 'defective'],
+      ),
+    ],
+    pdf:
+        'Metal Stairs: The surfaces of the steps or landing are split, cracked, partly rotted, rusted, defective.',
+  ),
+  VerbatimRule(
+    'e9_r_decor',
+    'activity_outside_property_other_repairs_decorations',
+    '{E_OTHER_AREA}',
+    '{E9_E9_R_DECOR}',
+    [
+      VerbatimToken(
+        '{E9_R_DEFECTS}',
+        options: {
+          'e9rn_d_peeling': 'peeling',
+          'e9rn_d_flaking': 'flaking',
+          'e9rn_d_damaged': 'damaged',
+        },
+        otherCheckbox: 'e9rn_d_other',
+        otherText: 'e9rn_d_other_text',
+        pdfOptions: ['peeling', 'flaking', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Decorations: The decorations to the stairway are peeling, flaking, damaged, other.',
+  ),
+  VerbatimRule(
+    'e9_intro',
+    'activity_outside_property_other_main_screen',
+    '{E_OTHER_AREA}',
+    '{E9_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'e9_general',
+    'activity_outside_property_other_main_screen',
+    '{E_OTHER_AREA}',
+    '{E9_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_loft',
+    'activity_inside_property_loft_converted',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_LOFT_CONVERTED}',
+    [
+    ],
+    whenField: 'cb_loft_converted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_desc',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{RS_CONSTRUCTION}',
+        options: {
+          'f1d_traditional_cut_timber': 'traditional cut timber',
+          'f1d_prefabricated_trussed_rafters': 'prefabricated trussed rafters',
+          'f1d_steel': 'steel',
+        },
+        otherCheckbox: 'f1d_other',
+        otherText: 'f1d_other_text',
+        pdfOptions: ['traditional cut timber', 'prefabricated trussed rafters', 'steel'],
+      ),
+    ],
+    pdf:
+        'Description: The roof structure is formed in traditional cut timber, prefabricated trussed rafters, steel, other construction.',
+  ),
+  VerbatimRule(
+    'f1_cond',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CONDITION}',
+    [
+      VerbatimToken(
+        '{RS_CONDITION}',
+        dropdown: 'actv_roof_structure_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the roof structure appears in good, reasonable, fair, poor, very poor condition, consistent with its age and construction.',
+  ),
+  VerbatimRule(
+    'f1_spray',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_SPRAY_FOAM}',
+    [
+    ],
+    whenField: 'cb_spray_foam',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_water',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_WATER_PENETRATION}',
+    [
+    ],
+    whenField: 'cb_water_penetration',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_soilpipe',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CAPPED_SOIL_PIPE}',
+    [
+    ],
+    whenField: 'cb_capped_soil_vent_pipe',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_general',
+    'activity_inside_property_about_roof_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_ul_no',
+    'activity_inside_property_roof_underlay',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_NO_UNDERLAY}',
+    [
+    ],
+    whenField: 'actv_underlay',
+    whenValue: 'No underlay',
+  ),
+  VerbatimRule(
+    'f1_ul_present',
+    'activity_inside_property_roof_underlay',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_UNDERLAY_PRESENT}',
+    [
+      VerbatimToken(
+        '{UL_MATERIALS}',
+        options: {
+          'f1u_traditional_bituminous_felt': 'traditional bituminous felt',
+          'f1u_breathable_membrane': 'breathable membrane',
+          'f1u_timber_boards': 'timber boards',
+        },
+        otherCheckbox: 'f1u_other',
+        otherText: 'f1u_other_text',
+        pdfOptions: ['traditional bituminous felt', 'breathable membrane', 'timber boards'],
+      ),
+      VerbatimToken(
+        '{UL_CONDITION}',
+        dropdown: 'actv_ul_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Underlay present: The underside of the roof covering incorporates traditional bituminous felt, breathable membrane, timber boards, other, which should provide a secondary barrier to driving rain and snow, where visible.',
+    pdfMore: [
+      'Where visible, the underlay appears in good, reasonable, fair, poor, very poor condition.',
+    ],
+    whenField: 'actv_underlay',
+    whenValue: 'Underlay present',
+  ),
+  VerbatimRule(
+    'f1_ul_defects',
+    'activity_inside_property_roof_underlay',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_UNDERLAY_DEFECTS}',
+    [
+      VerbatimToken(
+        '{UL_DEFECTS}',
+        options: {
+          'f1ud_worn': 'worn',
+          'f1ud_torn': 'torn',
+          'f1ud_missing': 'missing',
+          'f1ud_damaged': 'damaged',
+        },
+        pdfOptions: ['worn', 'torn', 'missing', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Defects noted: The roof underlay is worn, torn, missing, damaged in places, reducing its effectiveness as a secondary barrier against wind-driven rain and dust.',
+  ),
+  VerbatimRule(
+    'f1_ve_no',
+    'activity_inside_property_roof_ventilation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_NO_VENTILATION}',
+    [
+    ],
+    whenField: 'actv_ventilation',
+    whenValue: 'No ventilation',
+  ),
+  VerbatimRule(
+    'f1_ve_noted',
+    'activity_inside_property_roof_ventilation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_VENTILATION_NOTED}',
+    [
+      VerbatimToken(
+        '{VENT_LEVEL}',
+        dropdown: 'actv_vent_level',
+        dropdownOptions: ['Adequate', 'Limited', 'Restricted'],
+        lower: true,
+        pdfOptions: ['adequate', 'limited', 'restricted'],
+      ),
+    ],
+    pdf:
+        'Ventilation noted: The roof space appears to have adequate, limited, restricted ventilation.',
+    whenField: 'actv_ventilation',
+    whenValue: 'Ventilation noted',
+  ),
+  VerbatimRule(
+    'f1_ve_cond',
+    'activity_inside_property_roof_ventilation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CONDENSATION_NOTED}',
+    [
+    ],
+    whenField: 'actv_ventilation',
+    whenValue: 'Condensation noted',
+  ),
+  VerbatimRule(
+    'f1_in',
+    'activity_inside_property_roof_insulation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_THERMAL_INSULATION}',
+    [
+      VerbatimToken(
+        '{INSULATION_STATE}',
+        options: {
+          'f1i_adequate': 'adequate',
+          'f1i_limited': 'limited',
+          'f1i_insufficient': 'insufficient',
+          'f1i_poorly_fitted': 'poorly fitted',
+        },
+        otherCheckbox: 'f1i_other',
+        otherText: 'f1i_other_text',
+        pdfOptions: ['adequate', 'limited', 'insufficient', 'poorly fitted'],
+      ),
+    ],
+    pdf:
+        'Thermal Insulation: The roof space floor insulation appears adequate, limited, insufficient, poorly fitted, other based upon the visible areas only.',
+  ),
+  VerbatimRule(
+    'f1_in_ok',
+    'activity_inside_property_roof_insulation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_INSULATION_ADEQUATE}',
+    [
+    ],
+    whenField: 'actv_insulation_outcome',
+    whenValue: 'Adequate insulation',
+  ),
+  VerbatimRule(
+    'f1_in_bad',
+    'activity_inside_property_roof_insulation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_INSULATION_INADEQUATE}',
+    [
+    ],
+    whenField: 'actv_insulation_outcome',
+    whenValue: 'Inadequate/no insulation',
+  ),
+  VerbatimRule(
+    'f1_tank',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_WATER_TANKS}',
+    [
+      VerbatimToken(
+        '{TANK_MATERIALS}',
+        options: {
+          'f1t_plastic': 'plastic',
+          'f1t_galvanised_steel': 'galvanised steel',
+          'f1t_asbestos_cement': 'asbestos cement',
+          'f1t_fibreglass': 'fibreglass',
+        },
+        otherCheckbox: 'f1t_other',
+        otherText: 'f1t_other_text',
+        pdfOptions: ['plastic', 'galvanised steel', 'asbestos cement', 'fibreglass'],
+      ),
+    ],
+    pdf:
+        'Water Storage Tanks: The roof space contains plastic, galvanised steel, asbestos cement, fibreglass, other cold water storage tanks.',
+  ),
+  VerbatimRule(
+    'f1_tank_cond',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_CONDITION}',
+    [
+      VerbatimToken(
+        '{TANK_CONDITION}',
+        dropdown: 'actv_tank_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the tank appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f1_tank_leak',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_LEAKING}',
+    [
+    ],
+    whenField: 'cb_tank_leaking',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_tank_ins',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_INSULATION}',
+    [
+      VerbatimToken(
+        '{TANK_INSULATION}',
+        dropdown: 'actv_tank_insulation',
+        dropdownOptions: ['Adequately insulated', 'Partially insulated', 'Uninsulated'],
+        lower: true,
+        pdfOptions: ['adequately insulated', 'partially insulated', 'uninsulated'],
+      ),
+    ],
+    pdf:
+        'Water Tank Insulation: The water tank and associated pipework appear adequately insulated, partially insulated, uninsulated.',
+  ),
+  VerbatimRule(
+    'f1_tank_cover',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_COVER}',
+    [
+      VerbatimToken(
+        '{TANK_COVER_MATERIALS}',
+        options: {
+          'f1c_plastic': 'plastic',
+          'f1c_galvanised_metal': 'galvanised metal',
+          'f1c_asbestos': 'asbestos',
+        },
+        otherCheckbox: 'f1c_other',
+        otherText: 'f1c_other_text',
+        pdfOptions: ['plastic', 'galvanised metal', 'asbestos'],
+      ),
+    ],
+    pdf:
+        'Missing or Inadequate tank cover: The plastic, galvanised metal, asbestos, other cold water tank cover(s) are missing or inadequate.',
+  ),
+  VerbatimRule(
+    'f1_tank_disused',
+    'activity_inside_property_water_tank',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TANK_DISUSED}',
+    [
+      VerbatimToken(
+        '{DISUSED_TANKS}',
+        options: {
+          'f1x_plastic': 'plastic',
+          'f1x_galvanised_steel': 'galvanised steel',
+          'f1x_asbestos_cement': 'asbestos cement',
+        },
+        otherCheckbox: 'f1x_other',
+        otherText: 'f1x_other_text',
+        cap: true,
+        pdfOptions: ['plastic', 'galvanised steel', 'asbestos cement'],
+      ),
+    ],
+    pdf:
+        'Disused Water Tank: Plastic, galvanised steel, asbestos cement, other disused water storage tank(s) remain within the roof space.',
+  ),
+  VerbatimRule(
+    'f1_tdef',
+    'activity_inside_property_repair_timber_structure',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TIMBER_DEFECTS}',
+    [
+      VerbatimToken(
+        '{TIMBER_DEFECTS}',
+        options: {
+          'f1td_distortion': 'distortion',
+          'f1td_splitting': 'splitting',
+          'f1td_cracking': 'cracking',
+          'f1td_notching': 'notching',
+          'f1td_alterations': 'alterations',
+        },
+        otherCheckbox: 'f1td_other',
+        otherText: 'f1td_other_text',
+        pdfOptions: ['distortion', 'splitting', 'cracking', 'notching', 'alterations'],
+      ),
+    ],
+    pdf:
+        'Timber defects: Localised distortion, splitting, cracking, notching, alterations, other were observed.',
+  ),
+  VerbatimRule(
+    'f1_rot',
+    'activity_inside_property_repair_timber_rot',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_TIMBER_DECAY}',
+    [
+      VerbatimToken(
+        '{TIMBER_DECAY}',
+        options: {
+          'f1r_wet_rot': 'wet rot',
+          'f1r_dry_rot': 'dry rot',
+          'f1r_fungal_decay': 'fungal decay',
+        },
+        otherCheckbox: 'f1r_other',
+        otherText: 'f1r_other_text',
+        pdfOptions: ['wet rot', 'dry rot', 'fungal decay'],
+      ),
+    ],
+    pdf:
+        'Timber Decay: Evidence of wet rot, dry rot, fungal decay, other timber decay was observed.',
+  ),
+  VerbatimRule(
+    'f1_thin',
+    'activity_inside_property_repair_under_size_timber',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_THIN_TIMBERS}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_heavy',
+    'activity_inside_property_repair_heavy_roof',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_HEAVY_TILES}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_wb_no',
+    'activity_inside_property_repair_insect_infestation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_NO_WOOD_BORING}',
+    [
+    ],
+    whenField: 'actv_insect_infestation',
+    whenValue: 'No wood-boring',
+  ),
+  VerbatimRule(
+    'f1_wb_yes',
+    'activity_inside_property_repair_insect_infestation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_WOOD_BORING_NOTED}',
+    [
+      VerbatimToken(
+        '{WB_ACTIVITY}',
+        options: {
+          'f1w_active': 'active',
+          'f1w_historic': 'historic',
+        },
+        pdfOptions: ['active', 'historic'],
+      ),
+    ],
+    pdf:
+        'Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed.',
+    whenField: 'actv_insect_infestation',
+    whenValue: 'Wood boring noted',
+  ),
+  VerbatimRule(
+    'f1_move',
+    'activity_inside_property_roof_movement',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_ROOF_MOVEMENT}',
+    [
+      VerbatimToken(
+        '{RM_EVIDENCE}',
+        options: {
+          'f1m_deflection': 'deflection',
+          'f1m_sagging': 'sagging',
+          'f1m_spread': 'spread',
+        },
+        otherCheckbox: 'f1m_other',
+        otherText: 'f1m_other_text',
+        pdfOptions: ['deflection', 'sagging', 'spread'],
+      ),
+      VerbatimToken(
+        '{RM_LEVEL}',
+        options: {
+          'f1ml_normal': 'normal',
+          'f1ml_minor': 'minor',
+          'f1ml_significant': 'significant',
+          'f1ml_severe': 'severe',
+          'f1ml_presents_a_hazard': 'presents a hazard',
+        },
+        otherCheckbox: 'f1ml_other',
+        otherText: 'f1ml_other_text',
+        pdfOptions: ['normal', 'minor', 'significant', 'severe', 'presents a hazard'],
+      ),
+    ],
+    pdf:
+        'Roof Movement: Evidence of deflection, sagging, spread, other was observed.',
+    pdfMore: [
+      'Observed roof movement is normal, minor, significant, severe, presents a hazard, other.',
+    ],
+  ),
+  VerbatimRule(
+    'f1_alter',
+    'activity_inside_property_structural_alterations',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_STRUCTURAL_ALTERATIONS}',
+    [
+      VerbatimToken(
+        '{RS_ALTERATIONS}',
+        options: {
+          'f1a_loft_conversion': 'loft conversion',
+          'f1a_altered_roof_members': 'altered roof members',
+          'f1a_removed_struts': 'removed struts',
+          'f1a_trimmed_rafters': 'trimmed rafters',
+          'f1a_replacement_supports': 'replacement supports',
+          'f1a_additional_timber_supports': 'additional timber supports',
+        },
+        otherCheckbox: 'f1a_other',
+        otherText: 'f1a_other_text',
+        pdfOptions: ['loft conversion', 'altered roof members', 'removed struts', 'trimmed rafters', 'replacement supports', 'additional timber supports'],
+      ),
+    ],
+    pdf:
+        'Structural Alterations: Evidence of structural alterations to the roof space was observed, including loft conversion, altered roof members, removed struts, trimmed rafters, replacement supports, additional timber supports, other alterations.',
+  ),
+  VerbatimRule(
+    'f1_cb',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_BREAST}',
+    [
+      VerbatimToken(
+        '{CB_STATE}',
+        options: {
+          'f1cb_removed': 'removed',
+          'f1cb_partially_removed': 'partially removed',
+          'f1cb_altered': 'altered',
+          'f1cb_rendered': 'rendered',
+        },
+        otherCheckbox: 'f1cb_other',
+        otherText: 'f1cb_other_text',
+        pdfOptions: ['removed', 'partially removed', 'altered', 'rendered'],
+      ),
+    ],
+    pdf:
+        'Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed, partially removed, altered, rendered, other within the roof space.',
+  ),
+  VerbatimRule(
+    'f1_cb_ni',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Not inspected',
+  ),
+  VerbatimRule(
+    'f1_cb_ok',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_ADEQUATE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Adequate support',
+  ),
+  VerbatimRule(
+    'f1_cb_poor',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_POOR}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Poor support',
+  ),
+  VerbatimRule(
+    'f1_cb_risk',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_COLLAPSE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Risk of collapse',
+  ),
+  VerbatimRule(
+    'f1_cb_damp',
+    'activity_inside_property_repair_removed_chimney_breast',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_CHIMNEY_DAMP}',
+    [
+    ],
+    whenField: 'cb_damp_chimney',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_pw_part',
+    'activity_inside_property_repair_party_walls',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_PARTY_WALL_PARTIAL}',
+    [
+    ],
+    whenField: 'actv_party_wall',
+    whenValue: 'Partially missing',
+  ),
+  VerbatimRule(
+    'f1_pw_large',
+    'activity_inside_property_repair_party_walls',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_PARTY_WALL_LARGE}',
+    [
+    ],
+    whenField: 'actv_party_wall',
+    whenValue: 'Largely missing',
+  ),
+  VerbatimRule(
+    'f1_not_full',
+    'activity_inside_property_roof_structure_not_inspected',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_ROOF_NOT_FULLY_INSPECTED}',
+    [
+      VerbatimToken(
+        '{RS_LIMITS}',
+        options: {
+          'f1n_limited_roof_height': 'limited roof height',
+          'f1n_the_floor_was_not_safe_to_walk_on': 'the floor was not safe to walk on',
+          'f1n_floor_was_boarded': 'floor was boarded',
+          'f1n_excessive_storage': 'excessive storage',
+          'f1n_insulation': 'insulation',
+          'f1n_underlining': 'underlining',
+        },
+        otherCheckbox: 'f1n_other',
+        otherText: 'f1n_other_text',
+        pdfOptions: ['limited roof height', 'the floor was not safe to walk on', 'floor was boarded', 'excessive storage', 'insulation', 'underlining'],
+      ),
+    ],
+    pdf:
+        'Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection.',
+  ),
+  VerbatimRule(
+    'f1_unsafe',
+    'activity_inside_property_roof_structure_not_inspected',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_UNSAFE_FLOOR}',
+    [
+    ],
+    whenField: 'cb_unsafe_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f1_intro',
+    'activity_inside_property_roof_structure_main_screen',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f2_desc',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{CEILING_MATERIALS}',
+        options: {
+          'f2m_plaster': 'plaster',
+          'f2m_plasterboard': 'plasterboard',
+          'f2m_lath_and_plaster': 'lath and plaster',
+        },
+        otherCheckbox: 'cb_other_406',
+        otherText: 'et_other_339',
+        pdfOptions: ['plaster', 'plasterboard', 'lath and plaster'],
+      ),
+      VerbatimToken(
+        '{CEILING_FINISHES}',
+        options: {
+          'f2f_painted': 'painted',
+          'f2f_textured_coating': 'textured coating',
+          'f2f_papered': 'papered',
+          'f2f_timber_clad': 'timber-clad',
+          'f2f_tiled': 'tiled',
+          'f2f_wallpapered': 'wallpapered',
+          'f2f_decorative_panelled': 'decorative panelled',
+        },
+        otherCheckbox: 'cb_other_388',
+        otherText: 'et_other_340',
+        pdfOptions: ['painted', 'textured coating', 'papered', 'timber-clad', 'tiled', 'wallpapered', 'decorative panelled'],
+      ),
+    ],
+    pdf:
+        'Description: The ceilings are formed in plaster, plasterboard, lath and plaster, other ceilings.',
+    pdfMore: [
+      'The ceiling finishes comprise painted, textured coating, papered, timber-clad, tiled, wallpapered, decorative panelled, other finishes.',
+    ],
+  ),
+  VerbatimRule(
+    'f2_cond',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_CONDITION}',
+    [
+      VerbatimToken(
+        '{CEILING_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the ceilings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'f2_lath',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_LATH_PLASTER}',
+    [
+    ],
+    whenField: 'f2m_lath_and_plaster',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_textured',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_TEXTURED_COATING}',
+    [
+    ],
+    whenField: 'f2f_textured_coating',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_general',
+    'inside_property_ceilings_about_ceilings',
+    '{F_CEILINGS}',
+    '{F2_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_crack_minor',
+    'activity_inside_property_ceilings_cracks',
+    '{F_CEILINGS}',
+    '{F2_MINOR_CRACKING}',
+    [
+    ],
+    whenField: 'actv_cracking',
+    whenValue: 'Minor cracking',
+  ),
+  VerbatimRule(
+    'f2_crack_major',
+    'activity_inside_property_ceilings_cracks',
+    '{F_CEILINGS}',
+    '{F2_SIGNIFICANT_CRACKING}',
+    [
+    ],
+    whenField: 'actv_cracking',
+    whenValue: 'Significant cracking',
+  ),
+  VerbatimRule(
+    'f2_un_minor',
+    'activity_inside_property_ceilings_unevenness',
+    '{F_CEILINGS}',
+    '{F2_MINOR_UNEVENNESS}',
+    [
+      VerbatimToken(
+        '{CEILING_UNEVENNESS}',
+        options: {
+          'f2u_bowing': 'bowing',
+          'f2u_undulations': 'undulations',
+          'f2u_unevenness': 'unevenness',
+        },
+        otherCheckbox: 'f2u_other',
+        otherText: 'f2u_other_text',
+        pdfOptions: ['bowing', 'undulations', 'unevenness'],
+      ),
+    ],
+    pdf:
+        'Minor unevenness: Minor bowing, undulations, unevenness, other were noted on the ceiling surfaces.',
+    whenField: 'actv_unevenness',
+    whenValue: 'Minor unevenness',
+  ),
+  VerbatimRule(
+    'f2_un_major',
+    'activity_inside_property_ceilings_unevenness',
+    '{F_CEILINGS}',
+    '{F2_SIGNIFICANT_UNEVENNESS}',
+    [
+      VerbatimToken(
+        '{CEILING_UNEVENNESS}',
+        options: {
+          'f2u_bowing': 'bowing',
+          'f2u_undulations': 'undulations',
+          'f2u_unevenness': 'unevenness',
+        },
+        otherCheckbox: 'f2u_other',
+        otherText: 'f2u_other_text',
+        pdfOptions: ['bowing', 'undulations', 'unevenness'],
+      ),
+    ],
+    pdf:
+        'Significant unevenness: Significant bowing, undulations, unevenness, other were noted on the ceiling surfaces.',
+    whenField: 'actv_unevenness',
+    whenValue: 'Significant unevenness',
+  ),
+  VerbatimRule(
+    'f2_ws_wet',
+    'activity_inside_property_ceilings_water_staining',
+    '{F_CEILINGS}',
+    '{F2_WET_STAINING}',
+    [
+      VerbatimToken(
+        '{STAINING_LOCATIONS}',
+        options: {
+          'f2wl_lounge': 'lounge',
+          'f2wl_dining_room': 'dining room',
+          'f2wl_bedroom': 'bedroom',
+          'f2wl_kitchen': 'kitchen',
+          'f2wl_bathroom': 'bathroom',
+        },
+        otherCheckbox: 'f2wl_other',
+        otherText: 'f2wl_other_text',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen', 'bathroom'],
+      ),
+      VerbatimToken(
+        '{STAINING_SOURCES}',
+        options: {
+          'f2ws_loft_space': 'loft space',
+          'f2ws_roof': 'roof',
+          'f2ws_bathroom': 'bathroom',
+          'f2ws_floor_above': 'floor above',
+          'f2ws_another_concealed_source': 'another concealed source',
+        },
+        pdfOptions: ['loft space', 'roof', 'bathroom', 'floor above', 'another concealed source'],
+      ),
+    ],
+    pdf:
+        'Wet water staining: Localised water staining was noted to the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other.',
+    pdfMore: [
+      'The moisture is suspected to originate from the loft space, roof, bathroom, floor above, another concealed source.',
+    ],
+    whenField: 'actv_staining',
+    whenValue: 'Wet water staining',
+  ),
+  VerbatimRule(
+    'f2_ws_dry',
+    'activity_inside_property_ceilings_water_staining',
+    '{F_CEILINGS}',
+    '{F2_DRY_STAINING}',
+    [
+      VerbatimToken(
+        '{STAINING_LOCATIONS}',
+        options: {
+          'f2wl_lounge': 'lounge',
+          'f2wl_dining_room': 'dining room',
+          'f2wl_bedroom': 'bedroom',
+          'f2wl_kitchen': 'kitchen',
+          'f2wl_bathroom': 'bathroom',
+        },
+        otherCheckbox: 'f2wl_other',
+        otherText: 'f2wl_other_text',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen', 'bathroom'],
+      ),
+    ],
+    pdf:
+        'Dry water staining: Localised water staining was noted on the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other.',
+    whenField: 'actv_staining',
+    whenValue: 'Dry water staining',
+  ),
+  VerbatimRule(
+    'f2_poly',
+    'activity_inside_property_ceilings_polystyrene',
+    '{F_CEILINGS}',
+    '{F2_POLYSTYRENE}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_heavy',
+    'activity_inside_property_ceilings_heavy_paper_lining',
+    '{F_CEILINGS}',
+    '{F2_HEAVY_COVERING}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f2_ornamental',
+    'activity_inside_property_ceilings_repairs_ornamental_plaster',
+    '{F_CEILINGS}',
+    '{F2_ORNAMENTAL_PLASTER}',
+    [
+      VerbatimToken(
+        '{ORNAMENTAL_DEFECTS}',
+        options: {
+          'f2o_loose': 'loose',
+          'f2o_cracked': 'cracked',
+          'f2o_damaged': 'damaged',
+          'f2o_unstable': 'unstable',
+          'f2o_partially_missing': 'partially missing',
+        },
+        otherCheckbox: 'f2o_other',
+        otherText: 'f2o_other_text',
+        pdfOptions: ['loose', 'cracked', 'damaged', 'unstable', 'partially missing'],
+      ),
+    ],
+    pdf:
+        'Ornamental plaster repair: The ceiling incorporates ornamental plaster features, some of which were found to be loose, cracked, damaged, unstable, partially missing, other.',
+  ),
+  VerbatimRule(
+    'f2_intro',
+    'activity_inside_property_ceilings_main_screen',
+    '{F_CEILINGS}',
+    '{F2_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f3_desc',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{WALL_CONSTRUCTION}',
+        options: {
+          'f3m_solid_masonry': 'solid masonry',
+          'f3m_timber_stud_partitions': 'timber stud partitions',
+          'f3m_plasterboard_partitions': 'plasterboard partitions',
+          'f3m_lath_and_plaster': 'lath and plaster',
+        },
+        otherCheckbox: 'cb_other_590',
+        otherText: 'et_other_428',
+        pdfOptions: ['solid masonry', 'timber stud partitions', 'plasterboard partitions', 'lath and plaster'],
+      ),
+      VerbatimToken(
+        '{WALL_FINISH}',
+        options: {
+          'f3f_paint': 'paint',
+          'f3f_plaster': 'plaster',
+          'f3f_wallpaper': 'wallpaper',
+          'f3f_tiling': 'tiling',
+          'f3f_timber_panelling': 'timber panelling',
+          'f3f_textured_coating': 'textured coating',
+          'f3f_decorative_panelling': 'decorative panelling',
+        },
+        otherCheckbox: 'cb_other_606',
+        otherText: 'et_other_427',
+        pdfOptions: ['paint', 'plaster', 'wallpaper', 'tiling', 'timber panelling', 'textured coating', 'decorative panelling'],
+      ),
+    ],
+    pdf:
+        'Description: The walls are formed in solid masonry, timber stud partitions, plasterboard partitions, lath and plaster, other construction.',
+    pdfMore: [
+      'The wall finish comprises paint, plaster, wallpaper, tiling, timber panelling, textured coating, decorative panelling, other finishes.',
+    ],
+  ),
+  VerbatimRule(
+    'f3_cond',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_CONDITION}',
+    [
+      VerbatimToken(
+        '{WALL_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the walls and partitions appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'f3_lath',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_LATH_PLASTER}',
+    [
+    ],
+    whenField: 'f3m_lath_and_plaster',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f3_textured',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_TEXTURED_COATING}',
+    [
+    ],
+    whenField: 'f3f_textured_coating',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f3_general',
+    'activity_inside_property_wap_walls',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f3_crack_minor',
+    'activity_in_side_property_wap_movement_cracks',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_MINOR_CRACKING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'Minor cracking',
+  ),
+  VerbatimRule(
+    'f3_crack_major',
+    'activity_in_side_property_wap_movement_cracks',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_SIGNIFICANT_CRACKING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'Significant cracking',
+  ),
+  VerbatimRule(
+    'f3_movement',
+    'activity_in_side_property_wap_movement_cracks',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_STRUCTURAL_MOVEMENT}',
+    [
+      VerbatimToken(
+        '{WALL_MOVEMENT}',
+        options: {
+          'f3mv_historic': 'historic',
+          'f3mv_localised': 'localised',
+          'f3mv_progressive': 'progressive',
+        },
+        pdfOptions: ['historic', 'localised', 'progressive'],
+      ),
+    ],
+    pdf:
+        'Structural Movement: Evidence of historic, localised, progressive movement was observed.',
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'Structural Movement',
+  ),
+  VerbatimRule(
+    'f3_hollow',
+    'activity_in_side_property_wap_hollow_plaster',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_HOLLOW_PLASTER}',
+    [
+    ],
+    whenField: 'cb_hollow_plaster',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f3_condensation',
+    'activity_in_side_property_wap_repair_condensation',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_CONDENSATION}',
+    [
+      VerbatimToken(
+        '{CONDENSATION_AREAS}',
+        options: {
+          'f3c_lounge': 'lounge',
+          'f3c_bedrooms': 'bedrooms',
+          'f3c_bathrooms': 'bathrooms',
+          'f3c_kitchens': 'kitchens',
+        },
+        otherCheckbox: 'f3c_other',
+        otherText: 'f3c_other_text',
+        pdfOptions: ['lounge', 'bedrooms', 'bathrooms', 'kitchens'],
+      ),
+    ],
+    pdf:
+        'Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other area(s).',
+  ),
+  VerbatimRule(
+    'f3_nodamp',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_NO_DAMP}',
+    [
+    ],
+    whenField: 'damp_status',
+    whenValue: 'No damp',
+  ),
+  VerbatimRule(
+    'f3_pen',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_PENETRATING_DAMP}',
+    [
+      VerbatimToken(
+        '{DAMP_LOCATION}',
+        text: 'et_location',
+      ),
+    ],
+    pdf:
+        'Penetrating damp noted: Elevated moisture readings were recorded to sections of the wall surfaces including the (type wall location).',
+    whenField: 'damp_status',
+    whenValue: 'Penetrating damp noted',
+  ),
+  VerbatimRule(
+    'f3_known',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_DAMP_SOURCE_KNOWN}',
+    [
+      VerbatimToken(
+        '{DAMP_CAUSES}',
+        options: {
+          'f3dc_defective_rainwater_goods': 'defective rainwater goods',
+          'f3dc_blocked_gullies': 'blocked gullies',
+          'f3dc_leaking_pipework': 'leaking pipework',
+          'f3dc_bridged_damp_proof_course': 'bridged damp-proof course',
+        },
+        otherCheckbox: 'f3dc_other',
+        otherText: 'f3dc_other_text',
+        pdfOptions: ['defective rainwater goods', 'blocked gullies', 'leaking pipework', 'bridged damp-proof course'],
+      ),
+    ],
+    pdf:
+        'Damp source known: Dampness was noted and is likely to result from defective rainwater goods, blocked gullies, leaking pipework, bridged damp-proof course, other.',
+    whenField: 'actv_status_91',
+    whenValue: 'Damp source known',
+  ),
+  VerbatimRule(
+    'f3_fix',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_DAMP_REPAIR}',
+    [
+      VerbatimToken(
+        '{DAMP_REPAIRS}',
+        options: {
+          'f3dr_clearing_rainwater_goods': 'clearing rainwater goods',
+          'f3dr_repairing_defective_rainwater_goods': 'repairing defective rainwater goods',
+          'f3dr_unblocking_gullies': 'unblocking gullies',
+          'f3dr_repairing_leaking_pipework': 'repairing leaking pipework',
+          'f3dr_removing_any_bridging_of_the_damp_proof_course': 'removing any bridging of the damp-proof course',
+        },
+        otherCheckbox: 'f3dr_other',
+        otherText: 'f3dr_other_text',
+        pdfOptions: ['clearing rainwater goods', 'repairing defective rainwater goods', 'unblocking gullies', 'repairing leaking pipework', 'removing any bridging of the damp-proof course'],
+      ),
+    ],
+    pdf:
+        'Repair Damp defect: The source of dampness should be addressed by repairing the identified defects, which may include clearing rainwater goods, repairing defective rainwater goods, unblocking gullies, repairing leaking pipework, removing any bridging of the damp-proof course, other as appropriate.',
+  ),
+  VerbatimRule(
+    'f3_unknown',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_DAMP_SOURCE_UNKNOWN}',
+    [
+    ],
+    whenField: 'actv_status_91',
+    whenValue: 'Unknown damp source',
+  ),
+  VerbatimRule(
+    'f3_rising',
+    'activity_in_side_property_wap_dampness',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_SUSPECTED_RISING_DAMP}',
+    [
+      VerbatimToken(
+        '{DAMP_LOCATION}',
+        text: 'et_location',
+      ),
+    ],
+    pdf:
+        'Suspected rising damp: Elevated moisture readings were recorded at the base of the wall(s), consistent with possible rising damp, including the (type wall location).',
+    whenField: 'damp_status',
+    whenValue: 'Suspected rising damp',
+  ),
+  VerbatimRule(
+    'f3_ia',
+    'activity_in_side_property_wap_removed_wall',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_INTERNAL_ALTERATIONS}',
+    [
+      VerbatimToken(
+        '{IA_STATE}',
+        options: {
+          'f3ia_removed': 'removed',
+          'f3ia_partially_removed': 'partially removed',
+          'f3ia_altered': 'altered',
+          'f3ia_new_opening_created': 'new opening created',
+          'f3ia_has_been_formed': 'has been formed',
+        },
+        pdfOptions: ['removed', 'partially removed', 'altered', 'new opening created', 'has been formed'],
+      ),
+    ],
+    pdf:
+        'Internal Alterations: Evidence was observed that an internal wall has been removed, partially removed, altered, new opening created, has been formed.',
+  ),
+  VerbatimRule(
+    'f3_ia_ok',
+    'activity_in_side_property_wap_removed_wall',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_ALTERATIONS_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'actv_ia_outcome',
+    whenValue: 'No defects noted',
+  ),
+  VerbatimRule(
+    'f3_ia_defects',
+    'activity_in_side_property_wap_removed_wall',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_ALTERATIONS_DEFECTS}',
+    [
+      VerbatimToken(
+        '{IA_LOCATION}',
+        text: 'et_ia_location',
+      ),
+      VerbatimToken(
+        '{IA_ISSUES}',
+        options: {
+          'f3iad_distortion': 'Distortion',
+          'f3iad_cracking': 'cracking',
+          'f3iad_inadequate_support': 'inadequate support',
+        },
+        otherCheckbox: 'f3iad_other',
+        otherText: 'f3iad_other_text',
+        pdfOptions: ['Distortion', 'cracking', 'inadequate support'],
+      ),
+    ],
+    pdf:
+        'Defects noted: An original internal wall has been removed to form an opening at (type in location).',
+    pdfMore: [
+      'Distortion, cracking, inadequate support, other issues were noted around the altered area.',
+    ],
+    whenField: 'actv_ia_outcome',
+    whenValue: 'Defects noted',
+  ),
+  VerbatimRule(
+    'f3_intro',
+    'activity_inside_property_walls_and_partitions_main_screen',
+    '{F_WALLS_AND_PARTITIONS}',
+    '{F3_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f4_desc',
+    'activity_in_side_property_floors_about_floor',
+    '{F_FLOORS}',
+    '{F4_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{FLOOR_CONSTRUCTION}',
+        options: {
+          'f4c_solid_concrete': 'solid concrete',
+          'f4c_suspended_timber': 'suspended timber',
+          'f4c_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'cb_other_989',
+        otherText: 'et_other_424',
+        pdfOptions: ['solid concrete', 'suspended timber', 'beam and block'],
+      ),
+      VerbatimToken(
+        '{FLOOR_FINISHES}',
+        options: {
+          'f4f_floorboards': 'floorboards',
+          'f4f_carpet': 'carpet',
+          'f4f_tiles': 'tiles',
+          'f4f_ceramic_tiles': 'ceramic tiles',
+          'f4f_laminate_flooring': 'laminate flooring',
+          'f4f_wood_flooring': 'wood flooring',
+          'f4f_vinyl': 'vinyl',
+          'f4f_stone_tiles': 'stone tiles',
+        },
+        otherCheckbox: 'cb_other_837',
+        otherText: 'et_other_882',
+        pdfOptions: ['floorboards', 'carpet', 'tiles', 'ceramic tiles', 'laminate flooring', 'wood flooring', 'vinyl', 'stone tiles'],
+      ),
+    ],
+    pdf:
+        'Description: The floors are formed in solid concrete, suspended timber, beam and block, other construction.',
+    pdfMore: [
+      'The floor finishes comprise floorboards, carpet, tiles, ceramic tiles, laminate flooring, wood flooring, vinyl, stone tiles, other finishes.',
+    ],
+  ),
+  VerbatimRule(
+    'f4_cond',
+    'activity_in_side_property_floors_about_floor',
+    '{F_FLOORS}',
+    '{F4_CONDITION}',
+    [
+      VerbatimToken(
+        '{FLOOR_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the floors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'f4_general',
+    'activity_in_side_property_floors_about_floor',
+    '{F_FLOORS}',
+    '{F4_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f4_nocreak',
+    'activity_in_side_property_floors_creaking',
+    '{F_FLOORS}',
+    '{F4_NO_CREAKING}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No Creaking floor',
+  ),
+  VerbatimRule(
+    'f4_creak',
+    'activity_in_side_property_floors_creaking',
+    '{F_FLOORS}',
+    '{F4_CREAKING_NOTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Creaking floor noted',
+  ),
+  VerbatimRule(
+    'f4_repair',
+    'activity_in_side_property_floors_repair_floor_repair',
+    '{F_FLOORS}',
+    '{F4_REPAIR_TIMBER_FLOOR}',
+    [
+      VerbatimToken(
+        '{FLOOR_LOCATIONS}',
+        options: {
+          'f4rl_lounge': 'lounge',
+          'f4rl_bedroom': 'bedroom',
+          'f4rl_kitchen': 'kitchen',
+          'f4rl_bathroom': 'bathroom',
+          'f4rl_hallway': 'hallway',
+        },
+        otherCheckbox: 'cb_other_221',
+        otherText: 'et_other_911',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'hallway'],
+      ),
+      VerbatimToken(
+        '{FLOOR_DEFECTS}',
+        options: {
+          'f4rd_broken': 'broken',
+          'f4rd_poorly_supported': 'poorly supported',
+          'f4rd_uneven': 'uneven',
+          'f4rd_springy': 'springy',
+          'f4rd_loose': 'loose',
+          'f4rd_sloping': 'sloping',
+          'f4rd_incomplete': 'incomplete',
+          'f4rd_damp': 'damp',
+          'f4rd_insect_infested': 'insect infested',
+          'f4rd_rotten': 'rotten',
+          'f4rd_poorly_ventilated': 'poorly ventilated',
+        },
+        otherCheckbox: 'cb_other_565',
+        otherText: 'et_other_232',
+        pdfOptions: ['broken', 'poorly supported', 'uneven', 'springy', 'loose', 'sloping', 'incomplete', 'damp', 'insect infested', 'rotten', 'poorly ventilated'],
+      ),
+      VerbatimToken(
+        '{FLOOR_SEVERITY}',
+        dropdown: 'actv_repair_type',
+        dropdownOptions: ['Minor', 'Significant'],
+        lower: true,
+        pdfOptions: ['minor', 'significant'],
+      ),
+    ],
+    pdf:
+        'Repair timber floor: The timber floor to the lounge, bedroom, kitchen, bathroom, hallway, other is broken, poorly supported, uneven, springy, loose, sloping, incomplete, damp, insect infested, rotten, poorly ventilated, others, and the defect(s) is considered minor, significant.',
+  ),
+  VerbatimRule(
+    'f4_tiles_ok',
+    'activity_in_side_property_floors_tiles',
+    '{F_FLOORS}',
+    '{F4_NO_CRACKED_TILES}',
+    [
+      VerbatimToken(
+        '{TILE_CONDITION}',
+        dropdown: 'actv_tile_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+      VerbatimToken(
+        '{TILE_LOCATIONS}',
+        options: {
+          'f4t_kitchen': 'kitchen',
+          'f4t_utility_room': 'utility room',
+          'f4t_bathroom': 'bathroom',
+          'f4t_toilet': 'toilet',
+          'f4t_conservatory': 'conservatory',
+          'f4t_porch': 'porch',
+        },
+        otherCheckbox: 'cb_other_240',
+        otherText: 'et_other_392',
+        pdfOptions: ['kitchen', 'utility room', 'bathroom', 'toilet', 'conservatory', 'porch'],
+      ),
+    ],
+    pdf:
+        'No Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition.',
+    pdfMore: [
+      'Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection.',
+    ],
+    whenField: 'actv_tiles',
+    whenValue: 'No cracked tiles',
+  ),
+  VerbatimRule(
+    'f4_tiles_bad',
+    'activity_in_side_property_floors_tiles',
+    '{F_FLOORS}',
+    '{F4_CRACKED_TILES}',
+    [
+      VerbatimToken(
+        '{TILE_DEFECTS}',
+        options: {
+          'f4td_cracked': 'cracked',
+          'f4td_loose': 'loose',
+          'f4td_damaged': 'damaged',
+        },
+        pdfOptions: ['cracked', 'loose', 'damaged'],
+      ),
+      VerbatimToken(
+        '{TILE_LOCATIONS}',
+        options: {
+          'f4t_kitchen': 'kitchen',
+          'f4t_utility_room': 'utility room',
+          'f4t_bathroom': 'bathroom',
+          'f4t_toilet': 'toilet',
+          'f4t_conservatory': 'conservatory',
+          'f4t_porch': 'porch',
+        },
+        otherCheckbox: 'cb_other_240',
+        otherText: 'et_other_392',
+        pdfOptions: ['kitchen', 'utility room', 'bathroom', 'toilet', 'conservatory', 'porch'],
+      ),
+    ],
+    pdf:
+        'Cracked Tiles: Localised cracked, loose, damaged floor tiles to the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas were observed.',
+    pdfMore: [
+      'Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection.',
+    ],
+    whenField: 'actv_tiles',
+    whenValue: 'Cracked tiles',
+  ),
+  VerbatimRule(
+    'f4_loose',
+    'activity_in_side_property_floors_loose_floorboards',
+    '{F_FLOORS}',
+    '{F4_LOOSE_FLOORBOARDS}',
+    [
+    ],
+    whenField: 'cb_loose_floorboards',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f4_wb',
+    'activity_in_side_property_floors_timber_infection',
+    '{F_FLOORS}',
+    '{F4_WOOD_BORING_NOTED}',
+    [
+      VerbatimToken(
+        '{WB_ACTIVITY}',
+        options: {
+          'f4wa_active': 'active',
+          'f4wa_historic': 'historic',
+        },
+        pdfOptions: ['active', 'historic'],
+      ),
+      VerbatimToken(
+        '{WB_LOCATIONS}',
+        options: {
+          'f4wl_property': 'property',
+          'f4wl_lounge': 'lounge',
+          'f4wl_bedrooms': 'bedrooms',
+          'f4wl_bathrooms': 'bathrooms',
+          'f4wl_kitchens': 'kitchens',
+        },
+        otherCheckbox: 'cb_other_965',
+        otherText: 'et_other_529',
+        pdfOptions: ['property', 'lounge', 'bedrooms', 'bathrooms', 'kitchens'],
+      ),
+    ],
+    pdf:
+        'Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed in the property, lounge, bedrooms, bathrooms, kitchens, other areas.',
+  ),
+  VerbatimRule(
+    'f4_decay',
+    'activity_in_side_property_floors_timber_decay',
+    '{F_FLOORS}',
+    '{F4_TIMBER_DECAY_NOTED}',
+    [
+      VerbatimToken(
+        '{DECAY_LOCATIONS}',
+        options: {
+          'f4dc_floor_timbers': 'floor timbers',
+          'f4dc_staircase_timbers': 'staircase timbers',
+          'f4dc_bathroom_floor': 'bathroom floor',
+          'f4dc_kitchen_floor': 'kitchen floor',
+          'f4dc_basement_floor_joists': 'basement floor joists',
+        },
+        otherCheckbox: 'cb_other_802',
+        otherText: 'et_other_592',
+        pdfOptions: ['floor timbers', 'staircase timbers', 'bathroom floor', 'kitchen floor', 'basement floor joists'],
+      ),
+    ],
+    pdf:
+        'Timber decay noted: Decay was noted to the floor timbers, staircase timbers, bathroom floor, kitchen floor, basement floor joists, other areas.',
+  ),
+  VerbatimRule(
+    'f4_damp',
+    'activity_in_side_property_floors_dampness',
+    '{F_FLOORS}',
+    '{F4_DAMPNESS_NOTED}',
+    [
+      VerbatimToken(
+        '{DAMP_LOCATIONS}',
+        options: {
+          'f4dl_lounge': 'lounge',
+          'f4dl_bedroom': 'bedroom',
+          'f4dl_kitchen': 'kitchen',
+          'f4dl_bathroom': 'bathroom',
+          'f4dl_utility_room': 'utility room',
+        },
+        otherCheckbox: 'cb_other_240',
+        otherText: 'et_other_392',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'utility room'],
+      ),
+      VerbatimToken(
+        '{DAMP_CAUSES}',
+        options: {
+          'f4dcs_faulty_plumbing': 'faulty plumbing',
+          'f4dcs_bathtub_spillage': 'bathtub spillage',
+          'f4dcs_leaking_sealants': 'leaking sealants',
+        },
+        otherCheckbox: 'cb_other_215',
+        otherText: 'et_other_358',
+        pdfOptions: ['faulty plumbing', 'bathtub spillage', 'leaking sealants'],
+      ),
+    ],
+    pdf:
+        'Dampness noted: Although I could not see the full extent of the dampness problem in the lounge, bedroom, kitchen, bathroom, utility room, other areas, I suspect the dampness is caused by faulty plumbing, bathtub spillage, leaking sealants, other.',
+    whenField: 'actv_status',
+    whenValue: 'Dampness noted',
+  ),
+  VerbatimRule(
+    'f4_damp_unknown',
+    'activity_in_side_property_floors_dampness',
+    '{F_FLOORS}',
+    '{F4_UNKNOWN_DAMP_CAUSE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Unknown damp cause',
+  ),
+  VerbatimRule(
+    'f4_vent',
+    'activity_in_side_property_floors_floor_ventilation',
+    '{F_FLOORS}',
+    '{F4_UNDERFLOOR_VENTILATION}',
+    [
+      VerbatimToken(
+        '{UNDERFLOOR_VENTILATION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Adequate', 'Limited', 'Restricted'],
+        lower: true,
+        pdfOptions: ['adequate', 'limited', 'restricted'],
+      ),
+    ],
+    pdf:
+        'Underfloor Ventilation: Where applicable, the suspended timber floor is provided with adequate, limited, or restricted underfloor ventilation.',
+  ),
+  VerbatimRule(
+    'f4_laminate',
+    'activity_in_side_property_floors_repair_floor_laminate_wood_floor',
+    '{F_FLOORS}',
+    '{F4_LAMINATE_WOOD_DEFECTS}',
+    [
+      VerbatimToken(
+        '{LAMINATE_LOCATIONS}',
+        options: {
+          'f4ll_lounge': 'lounge',
+          'f4ll_bedroom': 'bedroom',
+          'f4ll_kitchen': 'kitchen',
+          'f4ll_bathroom': 'bathroom',
+          'f4ll_utility_room': 'utility room',
+          'f4ll_hallway': 'hallway',
+        },
+        otherCheckbox: 'cb_other_345',
+        otherText: 'et_other_711',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'utility room', 'hallway'],
+      ),
+      VerbatimToken(
+        '{LAMINATE_DEFECTS}',
+        options: {
+          'f4ld_worn': 'worn',
+          'f4ld_damaged': 'damaged',
+          'f4ld_poorly_fitted': 'poorly fitted',
+          'f4ld_incomplete': 'incomplete',
+          'f4ld_cracked': 'cracked',
+          'f4ld_lifted': 'lifted',
+        },
+        otherCheckbox: 'cb_other_1109',
+        otherText: 'et_other_588',
+        pdfOptions: ['worn', 'damaged', 'poorly fitted', 'incomplete', 'cracked', 'lifted'],
+      ),
+    ],
+    pdf:
+        'Laminate/Wood floor defects: The laminate or wood flooring to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other areas are worn, damaged, poorly fitted, incomplete, cracked, lifted, other.',
+  ),
+  VerbatimRule(
+    'f4_vibration',
+    'activity_in_side_property_floors_repair_floor_vibration',
+    '{F_FLOORS}',
+    '{F4_EXCESSIVE_VIBRATION}',
+    [
+    ],
+    whenField: 'cb_floor_vibration_excessive',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f4_sloping',
+    'activity_in_side_property_floors_repair_sloping_floor',
+    '{F_FLOORS}',
+    '{F4_SLOPING_FLOOR}',
+    [
+      VerbatimToken(
+        '{SLOPING_LOCATIONS}',
+        options: {
+          'f4sl_lounge': 'lounge',
+          'f4sl_bedroom': 'bedroom',
+          'f4sl_kitchen': 'kitchen',
+          'f4sl_bathroom': 'bathroom',
+          'f4sl_utility_room': 'utility room',
+          'f4sl_hallway': 'hallway',
+        },
+        otherCheckbox: 'cb_other_856',
+        otherText: 'et_other_113',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'utility room', 'hallway'],
+      ),
+      VerbatimToken(
+        '{SLOPE_DEGREE}',
+        dropdown: 'actv_status',
+        dropdownOptions: ['Slightly', 'Significantly'],
+        lower: true,
+        pdfOptions: ['slightly', 'significantly'],
+      ),
+    ],
+    pdf:
+        'Sloping floor: The floor to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other rooms are slightly, significantly sloping.',
+  ),
+  VerbatimRule(
+    'f4_intro',
+    'activity_inside_property_floors_main_screen',
+    '{F_FLOORS}',
+    '{F4_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f5_desc',
+    'activity_in_side_property_fire_places',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{FIREPLACE_TYPES}',
+        options: {
+          'f5t_open_fireplaces': 'open fireplaces',
+          'f5t_gas_fires': 'gas fires',
+          'f5t_electric_fires': 'electric fires',
+          'f5t_solid_fuel_stoves': 'solid fuel stoves',
+          'f5t_wood_burning_stoves': 'wood-burning stoves',
+          'f5t_multi_fuel_stoves': 'multi-fuel stoves',
+          'f5t_decorative_fireplaces': 'decorative fireplaces',
+        },
+        pdfOptions: ['open fireplaces', 'gas fires', 'electric fires', 'solid fuel stoves', 'wood-burning stoves', 'multi-fuel stoves', 'decorative fireplaces'],
+      ),
+    ],
+    pdf:
+        'Description: The property incorporates open fireplaces, gas fires, electric fires, solid fuel stoves, wood-burning stoves, multi-fuel stoves, decorative fireplaces.',
+  ),
+  VerbatimRule(
+    'f5_cond',
+    'activity_in_side_property_fire_places',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_CONDITION}',
+    [
+      VerbatimToken(
+        '{FIREPLACE_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the fireplace(s) and chimney breast(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'f5_vented',
+    'activity_in_side_property_fire_places_repair_blocked_fireplace',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_VENTED_BLOCKED}',
+    [
+      VerbatimToken(
+        '{BLOCKED_LOCATIONS}',
+        options: {
+          'f5b_lounge': 'lounge',
+          'f5b_dining_room': 'dining room',
+          'f5b_bedroom': 'bedroom',
+          'f5b_kitchen': 'kitchen',
+          'f5b_hallway': 'hallway',
+        },
+        otherCheckbox: 'f5b_other',
+        otherText: 'f5b_other_text',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen', 'hallway'],
+      ),
+    ],
+    pdf:
+        'Vented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other are vented.',
+    whenField: 'actv_status',
+    whenValue: 'Vented',
+  ),
+  VerbatimRule(
+    'f5_unvented',
+    'activity_in_side_property_fire_places_repair_blocked_fireplace',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_UNVENTED_BLOCKED}',
+    [
+      VerbatimToken(
+        '{BLOCKED_LOCATIONS}',
+        options: {
+          'f5b_lounge': 'lounge',
+          'f5b_dining_room': 'dining room',
+          'f5b_bedroom': 'bedroom',
+          'f5b_kitchen': 'kitchen',
+          'f5b_hallway': 'hallway',
+        },
+        otherCheckbox: 'f5b_other',
+        otherText: 'f5b_other_text',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen', 'hallway'],
+      ),
+    ],
+    pdf:
+        'Unvented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other have been sealed, but no ventilation to the redundant flue was evident.',
+    whenField: 'actv_status',
+    whenValue: 'Unvented',
+  ),
+  VerbatimRule(
+    'f5_removed',
+    'activity_in_side_property_fire_places_repair_removed_cb',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_REMOVED_CHIMNEY_BREASTS}',
+    [
+      VerbatimToken(
+        '{RCB_STATE}',
+        options: {
+          'f5r_partially_removed': 'partially removed',
+          'f5r_removed': 'removed',
+        },
+        pdfOptions: ['partially removed', 'removed'],
+      ),
+    ],
+    pdf:
+        'Removed Chimney Breasts: Evidence was observed that a chimney breast has been partially removed, removed.',
+  ),
+  VerbatimRule(
+    'f5_removed_defects',
+    'activity_in_side_property_fire_places_repair_removed_cb',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_REMOVED_DEFECTS}',
+    [
+      VerbatimToken(
+        '{RCB_LOCATIONS}',
+        options: {
+          'f5rl_lounge': 'lounge',
+          'f5rl_bedroom': 'bedroom',
+          'f5rl_kitchen': 'kitchen',
+          'f5rl_bathroom': 'bathroom',
+          'f5rl_utility_room': 'utility room',
+          'f5rl_hallway': 'hallway',
+        },
+        otherCheckbox: 'f5rl_other',
+        otherText: 'f5rl_other_text',
+        pdfOptions: ['lounge', 'bedroom', 'kitchen', 'bathroom', 'utility room', 'hallway'],
+      ),
+      VerbatimToken(
+        '{RCB_DEFECTS}',
+        options: {
+          'f5rd_damaged': 'damaged',
+          'f5rd_cracked': 'cracked',
+          'f5rd_distorted': 'distorted',
+        },
+        otherCheckbox: 'f5rd_other',
+        otherText: 'f5rd_other_text',
+        pdfOptions: ['damaged', 'cracked', 'distorted'],
+      ),
+    ],
+    pdf:
+        'Defects noted: The chimney breast has been removed from the lounge, bedroom, kitchen, bathroom, utility room, hallway, other.',
+    pdfMore: [
+      'The adjacent construction is damaged, cracked, distorted, other.',
+    ],
+  ),
+  VerbatimRule(
+    'f5_boiler',
+    'activity_in_side_property_fire_places_repair_boiler_flue',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_BOILER_FLUES}',
+    [
+    ],
+    whenField: 'cb_boiler_flue',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f5_defects',
+    'activity_in_side_property_fire_places_defects',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_FIREPLACE_DEFECTS}',
+    [
+      VerbatimToken(
+        '{FIREPLACE_DEFECT_LIST}',
+        options: {
+          'f5fd_cracked_fire_surround': 'cracked fire surround',
+          'f5fd_damaged_hearth': 'damaged hearth',
+          'f5fd_loose_fireplace_components': 'loose fireplace components',
+          'f5fd_cracked_chimney_breast': 'cracked chimney breast',
+          'f5fd_distorted_fireplace_opening': 'distorted fireplace opening',
+          'f5fd_localised_damp_staining': 'localised damp staining',
+          'f5fd_surface_deterioration': 'surface deterioration',
+        },
+        pdfOptions: ['cracked fire surround', 'damaged hearth', 'loose fireplace components', 'cracked chimney breast', 'distorted fireplace opening', 'localised damp staining', 'surface deterioration'],
+      ),
+    ],
+    pdf:
+        'Fireplace defects: One or more of the following defects were observed: • cracked fire surround • damaged hearth • loose fireplace components • cracked chimney breast • distorted fireplace opening • localised damp staining • surface deterioration Repairs should be undertaken where deterioration affects safety or continued use.',
+  ),
+  VerbatimRule(
+    'f5_damp',
+    'activity_in_side_property_fire_places_dampness',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_DAMPNESS}',
+    [
+    ],
+    whenField: 'cb_dampness',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f5_intro',
+    'activity_inside_property_fireplaces_main_screen',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f5_general',
+    'activity_inside_property_fireplaces_main_screen',
+    '{F_FIREPLACES_AND_CHIMNEYS}',
+    '{F5_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f6_worktops',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_WORKTOPS}',
+    [
+      VerbatimToken(
+        '{WT_ROOMS}',
+        options: {
+          'f6wr_kitchen': 'kitchen',
+          'f6wr_utility_room': 'utility room',
+        },
+        otherCheckbox: 'cb_other_1008',
+        otherText: 'et_other_764',
+        pdfOptions: ['kitchen', 'utility room'],
+      ),
+      VerbatimToken(
+        '{WORKTOP_MATERIALS}',
+        options: {
+          'f6wt_laminate_particle_board': 'laminate particle board',
+          'f6wt_solid_timber': 'solid timber',
+          'f6wt_granite': 'granite',
+          'f6wt_quartz': 'quartz',
+          'f6wt_stone': 'stone',
+          'f6wt_corian': 'Corian',
+          'f6wt_compressed_composite': 'compressed composite',
+          'f6wt_marble': 'marble',
+          'f6wt_steel': 'steel',
+        },
+        otherCheckbox: 'cb_other_672',
+        otherText: 'et_other_614',
+        pdfOptions: ['laminate particle board', 'solid timber', 'granite', 'quartz', 'stone', 'Corian', 'compressed composite', 'marble', 'steel'],
+      ),
+    ],
+    pdf:
+        'Worktop(s): The kitchen, utility room, other worktops comprise laminate particle board, solid timber, granite, quartz, stone, Corian, compressed composite, marble, steel, other material.',
+  ),
+  VerbatimRule(
+    'f6_fittings',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_FITTINGS}',
+    [
+      VerbatimToken(
+        '{FT_ROOMS}',
+        options: {
+          'f6fr_kitchen': 'kitchen',
+          'f6fr_utility_room': 'utility room',
+        },
+        otherCheckbox: 'f6fr_other',
+        otherText: 'f6fr_other_text',
+        pdfOptions: ['kitchen', 'utility room'],
+      ),
+      VerbatimToken(
+        '{FITTING_MATERIALS}',
+        options: {
+          'f6fm_timber': 'timber',
+          'f6fm_vinyl_wrapped_timber': 'vinyl-wrapped timber',
+          'f6fm_laminated_mdf': 'laminated MDF',
+        },
+        otherCheckbox: 'cb_other_343',
+        otherText: 'et_other_745',
+        pdfOptions: ['timber', 'vinyl-wrapped timber', 'laminated MDF'],
+      ),
+    ],
+    pdf:
+        'Fittings: The kitchen, utility room, other units are formed in timber, vinyl-wrapped timber, laminated MDF, other materials.',
+  ),
+  VerbatimRule(
+    'f6_cond',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_CONDITION}',
+    [
+      VerbatimToken(
+        '{FITTING_CONDITION}',
+        dropdown: 'android_material_design_spinner3',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f6_sink',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_KITCHEN_SINK}',
+    [
+      VerbatimToken(
+        '{SINK_ROOMS}',
+        options: {
+          'f6sr_kitchen': 'kitchen',
+          'f6sr_utility_room': 'utility room',
+        },
+        otherCheckbox: 'f6sr_other',
+        otherText: 'f6sr_other_text',
+        pdfOptions: ['kitchen', 'utility room'],
+      ),
+      VerbatimToken(
+        '{SINK_MATERIAL}',
+        options: {
+          'f6sm_stainless_steel': 'stainless steel',
+          'f6sm_ceramic': 'ceramic',
+          'f6sm_composite': 'composite',
+          'f6sm_stone': 'stone',
+        },
+        otherCheckbox: 'f6sm_other',
+        otherText: 'f6sm_other_text',
+        pdfOptions: ['stainless steel', 'ceramic', 'composite', 'stone'],
+      ),
+      VerbatimToken(
+        '{SINK_CONDITION}',
+        dropdown: 'actv_sink_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Kitchen Sink: The kitchen, utility room, other sink(s) is formed in stainless steel, ceramic, composite, stone, other material.',
+    pdfMore: [
+      'Where visible, it appears in good, reasonable, fair, poor, very poor condition.',
+    ],
+  ),
+  VerbatimRule(
+    'f6_appliances',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_APPLIANCES}',
+    [
+      VerbatimToken(
+        '{APPLIANCES}',
+        options: {
+          'f6ap_oven': 'oven',
+          'f6ap_hob': 'hob',
+          'f6ap_extractor_hood': 'extractor hood',
+          'f6ap_microwave': 'microwave',
+          'f6ap_dishwasher': 'dishwasher',
+          'f6ap_refrigerator': 'refrigerator',
+          'f6ap_freezer': 'freezer',
+          'f6ap_washing_machine': 'washing machine',
+          'f6ap_tumble_dryer': 'tumble dryer',
+        },
+        otherCheckbox: 'f6ap_other',
+        otherText: 'f6ap_other_text',
+        pdfOptions: ['oven', 'hob', 'extractor hood', 'microwave', 'dishwasher', 'refrigerator', 'freezer', 'washing machine', 'tumble dryer'],
+      ),
+    ],
+    pdf:
+        'Built-in Appliances: The property incorporates oven, hob, extractor hood, microwave, dishwasher, refrigerator, freezer, washing machine, tumble dryer, other built-in appliances.',
+  ),
+  VerbatimRule(
+    'f6_extractor',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_EXTRACTOR_FAN}',
+    [
+      VerbatimToken(
+        '{EXTRACTOR_STATE}',
+        dropdown: 'actv_extractor',
+        dropdownOptions: ['Operating', 'Not operating'],
+        lower: true,
+        pdfOptions: ['operating', 'not operating'],
+      ),
+    ],
+    pdf:
+        'Extractor Fan: The kitchen extractor fan was operating, not operating at the time of inspection.',
+  ),
+  VerbatimRule(
+    'f6_general',
+    'activity_in_side_property_built_in_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f6_fit_defects',
+    'activity_in_side_property_built_in_fittings_repair_fittings',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_FITTINGS_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_fittings_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f6_sealant',
+    'activity_in_side_property_built_in_fittings_repair_defective_sealants',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_SEALANT_DEFECTS}',
+    [
+      VerbatimToken(
+        '{SEALANT_DEFECT_LIST}',
+        options: {
+          'f6sd_cracked': 'cracked',
+          'f6sd_damaged': 'damaged',
+          'f6sd_moulded': 'moulded',
+          'f6sd_worn': 'worn',
+          'f6sd_missing': 'missing',
+        },
+        pdfOptions: ['cracked', 'damaged', 'moulded', 'worn', 'missing'],
+      ),
+    ],
+    pdf:
+        'Sealant defects: The sealant around the sink or at the wall joints with the worktop is cracked, damaged, moulded, worn, missing.',
+  ),
+  VerbatimRule(
+    'f6_defects',
+    'activity_in_side_property_built_in_fittings_repair_moulding_noted',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_DEFECTS_LIST}',
+    [
+      VerbatimToken(
+        '{FITTING_DEFECT_LIST}',
+        options: {
+          'f6dl_damaged_cupboard_doors': 'damaged cupboard doors',
+          'f6dl_loose_hinges': 'loose hinges',
+          'f6dl_damaged_worktops': 'damaged worktops',
+          'f6dl_worn_finishes': 'worn finishes',
+          'f6dl_defective_sealant': 'defective sealant',
+          'f6dl_cracked_wall_tiles': 'cracked wall tiles',
+          'f6dl_damaged_plinths': 'damaged plinths',
+          'f6dl_water_damaged_units': 'water-damaged units',
+          'f6dl_misaligned_drawers': 'misaligned drawers',
+          'f6dl_loose_handles': 'loose handles',
+        },
+        pdfOptions: ['damaged cupboard doors', 'loose hinges', 'damaged worktops', 'worn finishes', 'defective sealant', 'cracked wall tiles', 'damaged plinths', 'water-damaged units', 'misaligned drawers', 'loose handles'],
+      ),
+    ],
+    pdf:
+        'Defects: One or more of the following defects were observed: • damaged cupboard doors • loose hinges • damaged worktops • worn finishes • defective sealant • cracked wall tiles • damaged plinths • water-damaged units • misaligned drawers • loose handles Repairs should be undertaken as part of normal maintenance.',
+  ),
+  VerbatimRule(
+    'f6_intro',
+    'activity_inside_property_built_in_fittings_main_screen',
+    '{F_BUILT_IN_FITTINGS}',
+    '{F6_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f7_desc',
+    'activity_in_side_property_wood_work_second',
+    '{F_WOODWORK}',
+    '{F7_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{JOINERY_ITEMS}',
+        options: {
+          'f7i_internal_doors': 'internal doors',
+          'f7i_door_frames': 'door frames',
+          'f7i_skirting_boards': 'skirting boards',
+          'f7i_architraves': 'architraves',
+          'f7i_staircases': 'staircases',
+          'f7i_balustrades': 'balustrades',
+          'f7i_handrails': 'handrails',
+          'f7i_window_boards': 'window boards',
+          'f7i_timber_cladding': 'timber cladding',
+          'f7i_wardrobe_s': 'wardrobe(s)',
+          'f7i_cupboards': 'cupboards',
+          'f7i_built_in_joinery': 'built-in joinery',
+        },
+        otherCheckbox: 'cb_other_410',
+        otherText: 'et_other_800',
+        pdfOptions: ['internal doors', 'door frames', 'skirting boards', 'architraves', 'staircases', 'balustrades', 'handrails', 'window boards', 'timber cladding', 'wardrobe(s)', 'cupboards', 'built-in joinery'],
+      ),
+    ],
+    pdf:
+        'Description: The joinery items comprise internal doors, door frames, skirting boards, architraves, staircases, balustrades, handrails, window boards, timber cladding, wardrobe(s), cupboards, built-in joinery, other timber components.',
+  ),
+  VerbatimRule(
+    'f7_cond',
+    'activity_in_side_property_wood_work_second',
+    '{F_WOODWORK}',
+    '{F7_CONDITION}',
+    [
+      VerbatimToken(
+        '{JOINERY_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible and operated during the inspection, they appear in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f7_defect',
+    'activity_in_side_property_ww_wood_work_repair',
+    '{F_WOODWORK}',
+    '{F7_DEFECT_NOTED}',
+    [
+      VerbatimToken(
+        '{JOINERY_ELEMENTS}',
+        options: {
+          'f7e_doors': 'doors',
+          'f7e_locks': 'locks',
+          'f7e_door_frames': 'door frames',
+          'f7e_skirting_boards': 'skirting boards',
+          'f7e_architraves': 'architraves',
+          'f7e_the_staircase': 'the staircase',
+          'f7e_balustrades': 'balustrades',
+          'f7e_handrails': 'handrails',
+          'f7e_window_boards': 'window boards',
+          'f7e_timber_cladding': 'timber cladding',
+          'f7e_cupboards': 'cupboards',
+          'f7e_built_in_joinery': 'built-in joinery',
+        },
+        otherCheckbox: 'f7e_other',
+        otherText: 'f7e_other_text',
+        pdfOptions: ['doors', 'locks', 'door frames', 'skirting boards', 'architraves', 'the staircase', 'balustrades', 'handrails', 'window boards', 'timber cladding', 'cupboards', 'built-in joinery'],
+      ),
+      VerbatimToken(
+        '{JOINERY_DEFECTS}',
+        options: {
+          'f7d_worn': 'worn',
+          'f7d_loose': 'loose',
+          'f7d_poorly_fitted': 'poorly fitted',
+          'f7d_damaged': 'damaged',
+          'f7d_inadequately_secured': 'inadequately secured',
+          'f7d_missing': 'missing',
+          'f7d_affected_by_decay': 'affected by decay',
+        },
+        otherCheckbox: 'f7d_other',
+        otherText: 'f7d_other_text',
+        pdfOptions: ['worn', 'loose', 'poorly fitted', 'damaged', 'inadequately secured', 'missing', 'affected by decay'],
+      ),
+    ],
+    pdf:
+        'Defect noted: One or more internal joinery elements, including doors, locks, door frames, skirting boards, architraves, the staircase, balustrades, handrails, window boards, timber cladding, cupboards, built-in joinery, other timber fittings, were found to be worn, loose, poorly fitted, damaged, inadequately secured, missing, affected by decay, other.',
+  ),
+  VerbatimRule(
+    'f7_door_op',
+    'activity_in_side_property_wood_work_door_sampling',
+    '{F_WOODWORK}',
+    '{F7_DOOR_OPERATION}',
+    [
+      VerbatimToken(
+        '{DOOR_OPERATION}',
+        dropdown: 'actv_door_operation',
+        dropdownOptions: ['Freely', 'With resistance', 'With difficulty'],
+        lower: true,
+        pdfOptions: ['freely', 'with resistance', 'with difficulty'],
+      ),
+    ],
+    pdf:
+        'Door operation: The internal doors selected for operation opened and closed freely, with resistance, with difficulty.',
+  ),
+  VerbatimRule(
+    'f7_door_op_add',
+    'activity_in_side_property_wood_work_door_sampling',
+    '{F_WOODWORK}',
+    '{F7_DOOR_OPERATION_ADDON}',
+    [
+    ],
+    whenField: 'actv_door_operation',
+    whenValue: 'With resistance',
+    whenAny: [['actv_door_operation', 'With difficulty']],
+  ),
+  VerbatimRule(
+    'f7_oos',
+    'activity_in_side_property_wood_work_out_of_square_doors',
+    '{F_WOODWORK}',
+    '{F7_OUT_OF_SQUARE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Out of square door/frames',
+  ),
+  VerbatimRule(
+    'f7_investigate',
+    'activity_in_side_property_wood_work_out_of_square_doors',
+    '{F_WOODWORK}',
+    '{F7_INVESTIGATE}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Investigate',
+  ),
+  VerbatimRule(
+    'f7_creak',
+    'activity_in_side_property_wood_work_creaking_stairs',
+    '{F_WOODWORK}',
+    '{F7_CREAKING_STAIRS}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Creaking stairs',
+  ),
+  VerbatimRule(
+    'f7_creak_now',
+    'activity_in_side_property_wood_work_creaking_stairs',
+    '{F_WOODWORK}',
+    '{F7_CREAKING_STAIRS_NOW}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'f7_rocking',
+    'activity_in_side_property_wood_work_rocking_handrails',
+    '{F_WOODWORK}',
+    '{F7_ROCKING_HANDRAILS}',
+    [
+    ],
+    whenField: 'cb_rocking_handrails',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f7_open_risers',
+    'activity_in_side_property_wood_work_open_threads',
+    '{F_WOODWORK}',
+    '{F7_NO_HANDRAILS}',
+    [
+    ],
+    whenField: 'cb_open_threads',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f7_wb',
+    'activity_in_side_property_wood_work_repair_infestation',
+    '{F_WOODWORK}',
+    '{F7_WOOD_BORING}',
+    [
+      VerbatimToken(
+        '{WB_SEVERITY}',
+        options: {
+          'f7s_minor': 'minor',
+          'f7s_significant': 'significant',
+        },
+        pdfOptions: ['minor', 'significant'],
+      ),
+      VerbatimToken(
+        '{WB_ACTIVITY}',
+        options: {
+          'f7a_active': 'active',
+          'f7a_historic': 'historic',
+        },
+        pdfOptions: ['active', 'historic'],
+      ),
+      VerbatimToken(
+        '{WB_PARTS}',
+        options: {
+          'f7p_staircase': 'staircase',
+          'f7p_floorboards': 'floorboards',
+          'f7p_skirting': 'skirting',
+          'f7p_under_stairs': 'under stairs',
+          'f7p_cupboards': 'cupboards',
+        },
+        otherCheckbox: 'f7p_other',
+        otherText: 'f7p_other_text',
+        pdfOptions: ['staircase', 'floorboards', 'skirting', 'under stairs', 'cupboards'],
+      ),
+      VerbatimToken(
+        '{WB_LOCATION}',
+        text: 'et_wb_location',
+      ),
+    ],
+    pdf:
+        'Wood-Boring Insects: I found minor, significant evidence of active, historic wood-boring insect activity in parts of the staircase, floorboards, skirting, under stairs, cupboards, other timber in the (type in location).',
+  ),
+  VerbatimRule(
+    'f7_general',
+    'activity_inside_property_woodwork_main_screen',
+    '{F_WOODWORK}',
+    '{F7_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f8_desc',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{BATH_ROOMS}',
+        options: {
+          'f8r_family_bathroom_s': 'family bathroom(s)',
+          'f8r_shower_room_s': 'shower room(s)',
+          'f8r_ensuite_shower_room_s': 'ensuite shower room(s)',
+          'f8r_ensuite_bathroom_s': 'ensuite bathroom(s)',
+          'f8r_separate_toilet_s': 'separate toilet(s)',
+          'f8r_utility_room': 'utility room',
+        },
+        otherCheckbox: 'cb_other_653',
+        otherText: 'et_other_836',
+        pdfOptions: ['family bathroom(s)', 'shower room(s)', 'ensuite shower room(s)', 'ensuite bathroom(s)', 'separate toilet(s)', 'utility room'],
+      ),
+    ],
+    pdf:
+        'Description: The property incorporates a family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room, other.',
+  ),
+  VerbatimRule(
+    'f8_sanitary',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_SANITARY_WARE}',
+    [
+      VerbatimToken(
+        '{SANITARY_WARE}',
+        options: {
+          'f8s_bathtub_s': 'bathtub(s)',
+          'f8s_shower_s': 'shower(s)',
+          'f8s_wash_hand_basin_s': 'wash hand basin(s)',
+          'f8s_wcs': 'WCs',
+          'f8s_bidet_s': 'bidet(s)',
+          'f8s_mains_pressure_shower': 'mains pressure shower',
+          'f8s_electric_shower': 'electric shower',
+          'f8s_thermostatic_shower': 'thermostatic shower',
+          'f8s_shower_enclosure': 'shower enclosure',
+          'f8s_wet_room': 'wet room',
+        },
+        otherCheckbox: 'f8s_other',
+        otherText: 'f8s_other_text',
+        pdfOptions: ['bathtub(s)', 'shower(s)', 'wash hand basin(s)', 'WCs', 'bidet(s)', 'mains pressure shower', 'electric shower', 'thermostatic shower', 'shower enclosure', 'wet room'],
+      ),
+    ],
+    pdf:
+        'Sanitary ware: These are fitted with a combination of sanitaryware including a bathtub(s), shower(s), wash hand basin(s), WCs, bidet(s), mains pressure shower, electric shower, thermostatic shower, shower enclosure, wet room, other installation.',
+  ),
+  VerbatimRule(
+    'f8_walls',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_WALL_FINISHES}',
+    [
+      VerbatimToken(
+        '{BATH_WALL_FINISHES}',
+        options: {
+          'f8w_ceramic_tiles': 'ceramic tiles',
+          'f8w_stone_tiles': 'stone tiles',
+          'f8w_water_resistant_wall_panels': 'water-resistant wall panels',
+          'f8w_painted_plaster': 'painted plaster',
+        },
+        otherCheckbox: 'f8w_other',
+        otherText: 'f8w_other_text',
+        pdfOptions: ['ceramic tiles', 'stone tiles', 'water-resistant wall panels', 'painted plaster'],
+      ),
+    ],
+    pdf:
+        'Wall finishes: Wall finishes comprise ceramic tiles, stone tiles, water-resistant wall panels, painted plaster, other finishes.',
+  ),
+  VerbatimRule(
+    'f8_cond',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_CONDITION}',
+    [
+      VerbatimToken(
+        '{BATH_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the bathroom fittings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.',
+  ),
+  VerbatimRule(
+    'f8_general',
+    'activity_in_side_property_bathroom_fittings_second',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f8_sealants',
+    'activity_in_side_property_bathroom_fittings_sealant',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_SEALANTS}',
+    [
+      VerbatimToken(
+        '{SEALANT_CONDITION}',
+        dropdown: 'actv_sealant_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Sealants: Sealant around the bath, shower tray, basin, and sanitary fittings appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f8_fan_ok',
+    'activity_in_side_property_bathroom_fittings_extractor_fan',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_FAN_WORKING}',
+    [
+      VerbatimToken(
+        '{FAN_ROOMS}',
+        options: {
+          'f8f_family_bathroom_s': 'family bathroom(s)',
+          'f8f_shower_room_s': 'shower room(s)',
+          'f8f_ensuite_shower_room_s': 'ensuite shower room(s)',
+          'f8f_ensuite_bathroom_s': 'ensuite bathroom(s)',
+          'f8f_separate_toilet_s': 'separate toilet(s)',
+          'f8f_utility_room': 'utility room',
+        },
+        pdfOptions: ['family bathroom(s)', 'shower room(s)', 'ensuite shower room(s)', 'ensuite bathroom(s)', 'separate toilet(s)', 'utility room'],
+      ),
+    ],
+    pdf:
+        'Working extractor fan: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were working at the time of inspection.',
+    whenField: 'actv_status',
+    whenValue: 'Working extractor fan',
+  ),
+  VerbatimRule(
+    'f8_fan_bad',
+    'activity_in_side_property_bathroom_fittings_extractor_fan',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_FAN_NOT_WORKING}',
+    [
+      VerbatimToken(
+        '{FAN_ROOMS}',
+        options: {
+          'f8f_family_bathroom_s': 'family bathroom(s)',
+          'f8f_shower_room_s': 'shower room(s)',
+          'f8f_ensuite_shower_room_s': 'ensuite shower room(s)',
+          'f8f_ensuite_bathroom_s': 'ensuite bathroom(s)',
+          'f8f_separate_toilet_s': 'separate toilet(s)',
+          'f8f_utility_room': 'utility room',
+        },
+        pdfOptions: ['family bathroom(s)', 'shower room(s)', 'ensuite shower room(s)', 'ensuite bathroom(s)', 'separate toilet(s)', 'utility room'],
+      ),
+    ],
+    pdf:
+        'Fan not working: The extractor fan(s) installed in the family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room were not working at the time of inspection.',
+    whenField: 'actv_status',
+    whenValue: 'Fan not working',
+  ),
+  VerbatimRule(
+    'f8_defects',
+    'activity_in_side_property_bathroom_fittings_repair',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_DEFECTS_LIST}',
+    [
+      VerbatimToken(
+        '{BATH_DEFECT_LIST}',
+        options: {
+          'f8dl_defective_sealant': 'defective sealant',
+          'f8dl_cracked_sanitary_ware': 'cracked sanitary ware',
+          'f8dl_damaged_wall_tiles': 'damaged wall tiles',
+          'f8dl_damaged_cubicle_screen': 'damaged cubicle/screen',
+          'f8dl_loose_floor_tiles': 'loose floor tiles',
+          'f8dl_poor_ventilation': 'poor ventilation',
+          'f8dl_condensation': 'condensation',
+          'f8dl_mould_growth': 'mould growth',
+          'f8dl_water_staining': 'water staining',
+          'f8dl_damaged_fittings': 'damaged fittings',
+          'f8dl_damaged_bathtub_panel': 'damaged bathtub panel',
+          'f8dl_minor_plumbing_leaks': 'minor plumbing leaks',
+        },
+        pdfOptions: ['defective sealant', 'cracked sanitary ware', 'damaged wall tiles', 'damaged cubicle/screen', 'loose floor tiles', 'poor ventilation', 'condensation', 'mould growth', 'water staining', 'damaged fittings', 'damaged bathtub panel', 'minor plumbing leaks'],
+      ),
+    ],
+    pdf:
+        'Defects: One or more of the following defects were observed: • defective sealant • cracked sanitary ware • damaged wall tiles • damaged cubicle/screen • loose floor tiles • poor ventilation • condensation • mould growth • water staining • damaged fittings • damaged bathtub panel • minor plumbing leaks Repairs should be undertaken as part of normal property maintenance.',
+  ),
+  VerbatimRule(
+    'f8_intro',
+    'activity_inside_property_bathroom_fittings_main_screen',
+    '{F_BATHROOM_FITTINGS}',
+    '{F8_INTRO}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'f9_ca_ni',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Not inspected',
+  ),
+  VerbatimRule(
+    'f9_ca_desc',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{COMMUNAL_PARTS}',
+        options: {
+          'f9c_entrance_lobby': 'entrance lobby',
+          'f9c_hallway': 'hallway',
+          'f9c_landing': 'landing',
+          'f9c_staircases': 'staircases',
+          'f9c_lift_lobby': 'lift lobby',
+          'f9c_fire_lobby': 'fire lobby',
+          'f9c_balcony': 'balcony',
+          'f9c_communal_storage': 'communal storage',
+          'f9c_common_room': 'common room',
+        },
+        otherCheckbox: 'f9c_other',
+        otherText: 'f9c_other_text',
+        pdfOptions: ['entrance lobby', 'hallway', 'landing', 'staircases', 'lift lobby', 'fire lobby', 'balcony', 'communal storage', 'common room'],
+      ),
+    ],
+    pdf:
+        'Description: Internal communal parts to the property comprise entrance lobby, hallway, landing, staircases, lift lobby, fire lobby, balcony, communal storage, common room, other internal areas.',
+  ),
+  VerbatimRule(
+    'f9_ca_ok',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'No defects noted',
+  ),
+  VerbatimRule(
+    'f9_ca_wear',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_WEAR}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Wear and tear noted',
+  ),
+  VerbatimRule(
+    'f9_ca_poor',
+    'activity_in_side_property_other_communal_area',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_POOR}',
+    [
+      VerbatimToken(
+        '{COMMUNAL_REMEDIAL}',
+        options: {
+          'f9p_repairs': 'repairs',
+          'f9p_general_maintenance': 'general maintenance',
+          'f9p_redecoration': 'redecoration',
+          'f9p_refurbishment': 'refurbishment',
+        },
+        otherCheckbox: 'f9p_other',
+        otherText: 'f9p_other_text',
+        pdfOptions: ['repairs', 'general maintenance', 'redecoration', 'refurbishment'],
+      ),
+    ],
+    pdf:
+        'Poor condition: The internal communal areas are in poor condition and require repairs, general maintenance, redecoration, refurbishment, other remedial works.',
+    whenField: 'actv_status',
+    whenValue: 'Poor condition',
+  ),
+  VerbatimRule(
+    'f9_repair',
+    'activity_in_side_property_other_repair',
+    '{F_OTHER}',
+    '{F9_COMMUNAL_REPAIR}',
+    [
+      VerbatimToken(
+        '{REPAIR_AREAS}',
+        options: {
+          'f9ra_entry_stairs': 'entry stairs',
+          'f9ra_landing': 'landing',
+          'f9ra_balcony': 'balcony',
+          'f9ra_hallway': 'hallway',
+          'f9ra_shared_lobby': 'shared lobby',
+          'f9ra_fire_lobby': 'fire lobby',
+          'f9ra_common_room': 'common room',
+        },
+        otherCheckbox: 'et_other_609_cb',
+        otherText: 'et_other_609',
+        pdfOptions: ['entry stairs', 'landing', 'balcony', 'hallway', 'shared lobby', 'fire lobby', 'common room'],
+      ),
+      VerbatimToken(
+        '{REPAIR_DEFECTS}',
+        options: {
+          'f9rd_worn': 'worn',
+          'f9rd_damaged': 'damaged',
+          'f9rd_creaking': 'creaking',
+          'f9rd_badly_cracked': 'badly cracked',
+          'f9rd_sloping': 'sloping',
+          'f9rd_missing_in_places': 'missing in places',
+          'f9rd_in_disrepair': 'in disrepair',
+        },
+        otherCheckbox: 'f9rd_other',
+        otherText: 'f9rd_other_text',
+        pdfOptions: ['worn', 'damaged', 'creaking', 'badly cracked', 'sloping', 'missing in places', 'in disrepair'],
+      ),
+    ],
+    pdf:
+        'Repair: The entry stairs, landing, balcony, hallway, shared lobby, fire lobby, common room, other areas are worn, damaged, creaking, badly cracked, sloping, missing in places, in disrepair, other.',
+  ),
+  VerbatimRule(
+    'f9_cellar_ni',
+    'activity_inside_property_other_celler_no_access',
+    '{F_OTHER}',
+    '{F9_CELLAR_NOT_INSPECTED}',
+    [
+      VerbatimToken(
+        '{CELLAR_ACCESS}',
+        options: {
+          'f9na_restricted_access': 'restricted access',
+          'f9na_no_access': 'no access',
+        },
+        otherCheckbox: 'cb_other_704',
+        otherText: 'et_other_412',
+        pdfOptions: ['restricted access', 'no access'],
+      ),
+    ],
+    pdf:
+        'Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to restricted access, no access, other.',
+  ),
+  VerbatimRule(
+    'f9_cellar_walls',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_WALLS}',
+    [
+      VerbatimToken(
+        '{CELLAR_WALLS}',
+        options: {
+          'f9cw_bricks': 'bricks',
+          'f9cw_stone': 'stone',
+          'f9cw_loose_soil': 'loose soil',
+          'f9cw_concrete': 'concrete',
+        },
+        otherCheckbox: 'f9cw_other',
+        otherText: 'f9cw_other_text',
+        pdfOptions: ['bricks', 'stone', 'loose soil', 'concrete'],
+      ),
+    ],
+    pdf:
+        'Walls: The property incorporates a cellar, basement and the walls are formed in bricks, stone, loose soil, concrete, other materials.',
+  ),
+  VerbatimRule(
+    'f9_cellar_floor',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_FLOOR}',
+    [
+      VerbatimToken(
+        '{CELLAR_FLOOR}',
+        options: {
+          'f9cf_solid_concrete': 'solid concrete',
+          'f9cf_timber': 'timber',
+          'f9cf_stone': 'stone',
+          'f9cf_loose_soil': 'loose soil',
+        },
+        otherCheckbox: 'f9cf_other',
+        otherText: 'f9cf_other_text',
+        pdfOptions: ['solid concrete', 'timber', 'stone', 'loose soil'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of solid concrete, timber, stone, loose soil, other.',
+  ),
+  VerbatimRule(
+    'f9_cellar_cond',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_CONDITION}',
+    [
+      VerbatimToken(
+        '{CELLAR_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the cellar appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f9_cellar_unused',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_NOT_IN_USE}',
+    [
+    ],
+    whenField: 'actv_used_as',
+    whenValue: 'Not in use',
+  ),
+  VerbatimRule(
+    'f9_cellar_used',
+    'activity_inside_property_other_celler_inspected',
+    '{F_OTHER}',
+    '{F9_CELLAR_IN_USE}',
+    [
+    ],
+    whenField: 'actv_used_as',
+    whenValue: 'In use',
+  ),
+  VerbatimRule(
+    'f9_cellar_unsuitable',
+    'activity_inside_property_other_celler_not_habitable',
+    '{F_OTHER}',
+    '{F9_CELLAR_UNSUITABLE}',
+    [
+      VerbatimToken(
+        '{CELLAR_LIMITATIONS}',
+        options: {
+          'f9un_low_headroom': 'low headroom',
+          'f9un_dampness': 'dampness',
+          'f9un_difficult_access': 'difficult access',
+          'f9un_poor_ventilation': 'poor ventilation',
+        },
+        otherCheckbox: 'cb_other_697',
+        otherText: 'et_other_427',
+        pdfOptions: ['low headroom', 'dampness', 'difficult access', 'poor ventilation'],
+      ),
+    ],
+    pdf:
+        'Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to low headroom, dampness, difficult access, poor ventilation, other limitations.',
+  ),
+  VerbatimRule(
+    'f9_cellar_flooded',
+    'activity_inside_property_other_celler_flooded',
+    '{F_OTHER}',
+    '{F9_CELLAR_FLOODED}',
+    [
+      VerbatimToken(
+        '{CELLAR_FLOOD_DEGREE}',
+        dropdown: 'actv_possible_flooded',
+        dropdownOptions: ['Partially', 'Significantly'],
+        lower: true,
+        pdfOptions: ['partially', 'significantly'],
+      ),
+    ],
+    pdf:
+        'Flooded: The cellar or basement was partially, significantly flooded due to defective drainage or groundwater ingress.',
+  ),
+  VerbatimRule(
+    'f9_cellar_damp',
+    'activity_inside_property_other_celler_damp',
+    '{F_OTHER}',
+    '{F9_CELLAR_DAMP}',
+    [
+      VerbatimToken(
+        '{CELLAR_DAMP_AREAS}',
+        options: {
+          'f9dm_lower_walls': 'lower walls',
+          'f9dm_upper_walls': 'upper walls',
+          'f9dm_throughout_the_cellar': 'throughout the cellar',
+          'f9dm_exposed_floor_joists': 'exposed floor joists',
+        },
+        otherCheckbox: 'cb_others_389',
+        otherText: 'et_others_471',
+        pdfOptions: ['lower walls', 'upper walls', 'throughout the cellar', 'exposed floor joists'],
+      ),
+    ],
+    pdf:
+        'Damp: Dampness was noted on the lower walls, upper walls, throughout the cellar, exposed floor joists, other areas.',
+  ),
+  VerbatimRule(
+    'f9_cellar_waterproofing',
+    'activity_inside_property_other_celler_damp',
+    '{F_OTHER}',
+    '{F9_CELLAR_WATERPROOFING}',
+    [
+    ],
+    whenField: 'cb_serious_dump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f9_cellar_decay',
+    'activity_inside_property_other_celler_joists_decay',
+    '{F_OTHER}',
+    '{F9_CELLAR_TIMBER_DECAY}',
+    [
+    ],
+    whenField: 'cb_joists_decay',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f9_general',
+    'activity_inside_property_other_main_screen',
+    '{F_OTHER}',
+    '{F9_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_meter',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_METER}',
+    [
+      VerbatimToken(
+        '{ELE_METER_LOCATION}',
+        options: {
+          'g1m_under_the_stairs': 'under the stairs',
+          'g1m_in_an_outside_box': 'in an outside box',
+          'g1m_in_the_entrance_hall': 'in the entrance hall',
+          'g1m_in_the_kitchen': 'in the kitchen',
+          'g1m_in_the_garage': 'in the garage',
+          'g1m_in_a_communal_cupboard': 'in a communal cupboard',
+        },
+        otherCheckbox: 'cb_other_387',
+        otherText: 'et_other_564',
+        pdfOptions: ['under the stairs', 'in an outside box', 'in the entrance hall', 'in the kitchen', 'in the garage', 'in a communal cupboard'],
+      ),
+    ],
+    pdf:
+        'Metre: There is a mains electricity supply connected to the property, and the meter unit is located under the stairs, in an outside box, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.',
+  ),
+  VerbatimRule(
+    'g1_meter_nf',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_METER_NOT_FOUND}',
+    [
+    ],
+    whenField: 'cb_electricity_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_cu',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_CONSUMER_UNIT}',
+    [
+      VerbatimToken(
+        '{ELE_CU_LOCATION}',
+        options: {
+          'g1c_under_the_stairs': 'under the stairs',
+          'g1c_in_the_entrance_hall': 'in the entrance hall',
+          'g1c_in_the_kitchen': 'in the kitchen',
+          'g1c_in_the_garage': 'in the garage',
+          'g1c_in_a_communal_cupboard': 'in a communal cupboard',
+        },
+        otherCheckbox: 'cb_other_717',
+        otherText: 'et_other_618',
+        pdfOptions: ['under the stairs', 'in the entrance hall', 'in the kitchen', 'in the garage', 'in a communal cupboard'],
+      ),
+    ],
+    pdf:
+        'Consumer unit: There is a consumer unit(s) installed under the stairs, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other.',
+  ),
+  VerbatimRule(
+    'g1_cu_nf',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_CONSUMER_UNIT_NOT_FOUND}',
+    [
+    ],
+    whenField: 'cb_fuse_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_rcd',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_RCD_PROTECTION}',
+    [
+      VerbatimToken(
+        '{ELE_RCD}',
+        options: {
+          'g1r_rcd_protection': 'RCD protection',
+          'g1r_rcbo_protection': 'RCBO protection',
+          'g1r_surge_protection': 'surge protection',
+          'g1r_no_visible_rcd_protection': 'no visible RCD protection',
+        },
+        pdfOptions: ['RCD protection', 'RCBO protection', 'surge protection', 'no visible RCD protection'],
+      ),
+    ],
+    pdf:
+        'RCD Protection: The consumer unit incorporates RCD protection, RCBO protection, surge protection; no visible RCD protection.',
+  ),
+  VerbatimRule(
+    'g1_dated',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_DATED_OR_OLD}',
+    [
+    ],
+    whenField: 'cb_dated_electrical_system',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_general',
+    'activity_service_about_electricity',
+    '{G_ELECTRICITY}',
+    '{G1_GENERAL_MAINTENANCE}',
+    [
+    ],
+    whenField: 'cb_general_maintenance',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_poor',
+    'activity_services_electricity_repair_electrical_hazard',
+    '{G_ELECTRICITY}',
+    '{G1_POOR_STANDARDS}',
+    [
+      VerbatimToken(
+        '{ELE_POOR_STANDARDS}',
+        options: {
+          'g1p_exposed_wires': 'exposed wires',
+          'g1p_damaged_fittings': 'damaged fittings',
+          'g1p_cracked_fixtures': 'cracked fixtures',
+          'g1p_diy_work': 'DIY work',
+        },
+        otherCheckbox: 'cb_other_685',
+        otherText: 'et_other_733',
+        pdfOptions: ['exposed wires', 'damaged fittings', 'cracked fixtures', 'DIY work'],
+      ),
+    ],
+    pdf:
+        'Poor Standards: The electrical system is below current standards because there are exposed wires, damaged fittings, cracked fixtures, DIY work, other issues, and this is a safety hazard.',
+  ),
+  VerbatimRule(
+    'g1_pv',
+    'activity_services_solar_power',
+    '{G_ELECTRICITY}',
+    '{G1_SOLAR_PV}',
+    [
+    ],
+    whenField: 'cb_solar_pv',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g1_battery',
+    'activity_services_solar_power',
+    '{G_ELECTRICITY}',
+    '{G1_SOLAR_BATTERY}',
+    [
+      VerbatimToken(
+        '{ELE_BATTERY_LOCATION}',
+        options: {
+          'g1b_loft': 'loft',
+          'g1b_under_the_stairs': 'under the stairs',
+        },
+        otherCheckbox: 'cb_other_870',
+        otherText: 'et_other_723',
+        pdfOptions: ['loft', 'under the stairs'],
+      ),
+    ],
+    pdf:
+        'Battery storage/Inverter: A solar battery and/or inverter is in the loft, under the stairs, other.',
+  ),
+  VerbatimRule(
+    'g1_thermal',
+    'activity_services_water_heating_solar_power',
+    '{G_ELECTRICITY}',
+    '{G1_SOLAR_THERMAL}',
+    [
+    ],
+    whenField: 'cb_solar_power',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_smell',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_GAS_SMELL}',
+    [
+    ],
+    whenField: 'cb_gas_smell_noted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_capped',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_CAPPED_GAS}',
+    [
+    ],
+    whenField: 'cb_gas_supply_is_capped_off',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_meter',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_METER}',
+    [
+      VerbatimToken(
+        '{GAS_METER_LOCATION}',
+        options: {
+          'g2m_under_the_stairs': 'under the stairs',
+          'g2m_in_an_outside_box': 'in an outside box',
+          'g2m_in_the_kitchen': 'in the kitchen',
+          'g2m_in_the_garage': 'in the garage',
+          'g2m_in_a_communal_cupboard': 'in a communal cupboard',
+        },
+        otherCheckbox: 'g2m_other',
+        otherText: 'g2m_other_text',
+        pdfOptions: ['under the stairs', 'in an outside box', 'in the kitchen', 'in the garage', 'in a communal cupboard'],
+      ),
+    ],
+    pdf:
+        'Metre: There is a mains gas connection to the property, and the meter unit is located under the stairs, in an outside box, in the kitchen, in the garage, in a communal cupboard, other.',
+    whenField: 'actv_condition',
+    whenValue: 'Metre',
+  ),
+  VerbatimRule(
+    'g2_meter_nf',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_METER_NOT_FOUND}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Metre not found',
+  ),
+  VerbatimRule(
+    'g2_dated',
+    'activity_services_main_gas',
+    '{G_GAS_AND_OIL}',
+    '{G2_DATED_OR_OLD}',
+    [
+    ],
+    whenField: 'cb_dated_gas',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_oil',
+    'activity_services_oil',
+    '{G_GAS_AND_OIL}',
+    '{G2_OIL_TANK}',
+    [
+      VerbatimToken(
+        '{OIL_TANK_TYPE}',
+        options: {
+          'g2t_plastic': 'plastic',
+          'g2t_metal': 'metal',
+        },
+        otherCheckbox: 'g2t_other',
+        otherText: 'g2t_other_text',
+        pdfOptions: ['plastic', 'metal'],
+      ),
+      VerbatimToken(
+        '{OIL_TANK_LOCATION}',
+        options: {
+          'g2l_front_garden': 'front garden',
+          'g2l_side_garden': 'side garden',
+          'g2l_rear_garden': 'rear garden',
+        },
+        otherCheckbox: 'g2l_other',
+        otherText: 'g2l_other_text',
+        pdfOptions: ['front garden', 'side garden', 'rear garden'],
+      ),
+    ],
+    pdf:
+        'Oil tank: The property is served by an oil-fired heating system with a plastic, metal, other fuel storage tank located at the front garden, side garden, rear garden, other.',
+  ),
+  VerbatimRule(
+    'g2_old_tank',
+    'activity_services_oil',
+    '{G_GAS_AND_OIL}',
+    '{G2_OLD_TANK}',
+    [
+    ],
+    whenField: 'cb_old_tank',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g2_testing',
+    'activity_services_gas_oil_main_screen',
+    '{G_GAS_AND_OIL}',
+    '{G2_TESTING}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'g2_certification',
+    'activity_services_gas_oil_main_screen',
+    '{G_GAS_AND_OIL}',
+    '{G2_CERTIFICATION}',
+    [
+    ],
+    first: true,
+    whenField: 'android_material_design_spinner4',
+    whenValue: '1',
+    whenAny: [['android_material_design_spinner4', '2'], ['android_material_design_spinner4', '3']],
+  ),
+  VerbatimRule(
+    'g3_stopcock',
+    'activity_services_water_main_water',
+    '{G_WATER}',
+    '{G3_STOPCOCK}',
+    [
+      VerbatimToken(
+        '{WATER_STOPCOCK_LOCATION}',
+        options: {
+          'g3s_under_the_stairs': 'under the stairs',
+          'g3s_under_the_kitchen_sink': 'under the kitchen sink',
+          'g3s_in_the_bathroom': 'in the bathroom',
+          'g3s_in_the_hall': 'in the hall',
+          'g3s_in_the_garage': 'in the garage',
+        },
+        otherCheckbox: 'g3s_other',
+        otherText: 'g3s_other_text',
+        pdfOptions: ['under the stairs', 'under the kitchen sink', 'in the bathroom', 'in the hall', 'in the garage'],
+      ),
+    ],
+    pdf:
+        'The stopcock within the property is located under the stairs, under the kitchen sink, in the bathroom, in the hall, in the garage, other.',
+    whenField: 'actv_g3_stopcock',
+    whenValue: 'Stopcock found',
+  ),
+  VerbatimRule(
+    'g3_not_found',
+    'activity_services_water_main_water',
+    '{G_WATER}',
+    '{G3_STOPCOCK_NOT_FOUND}',
+    [
+    ],
+    whenField: 'actv_g3_stopcock',
+    whenValue: 'Not found',
+  ),
+  VerbatimRule(
+    'g3_lead',
+    'activity_services_water_main_water',
+    '{G_WATER}',
+    '{G3_LEAD_RISING}',
+    [
+    ],
+    whenField: 'cb_lead_rising',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g3_tank',
+    'activity_services_water_water_tank',
+    '{G_WATER}',
+    '{G3_WATER_TANK}',
+    [
+      VerbatimToken(
+        '{WATER_TANK_LOCATION}',
+        options: {
+          'cb_roof_space': 'roof space',
+          'cb_airing_cupboard': 'airing cupboard',
+          'cb_kitchen': 'kitchen',
+        },
+        otherCheckbox: 'cb_other_289',
+        otherText: 'et_other_442',
+        pdfOptions: ['roof space', 'airing cupboard', 'kitchen'],
+      ),
+      VerbatimToken(
+        '{WATER_TANK_MATERIAL}',
+        options: {
+          'cb_plastic': 'plastic',
+          'cb_galvanised_steel': 'galvanised steel',
+          'cb_asbestos': 'asbestos cement',
+        },
+        otherCheckbox: 'cb_other_640',
+        otherText: 'et_other_643',
+        pdfOptions: ['plastic', 'galvanised steel', 'asbestos cement'],
+      ),
+      VerbatimToken(
+        '{WATER_TANK_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Reasonable', 'Fair', 'Poor'],
+        lower: true,
+        pdfOptions: ['reasonable', 'fair', 'poor'],
+      ),
+      VerbatimToken(
+        '{WATER_TANK_INSULATION}',
+        dropdown: 'actv_g3_tank_insulation',
+        dropdownOptions: ['Adequately insulated', 'Inadequately insulated'],
+        lower: true,
+        pdfOptions: ['adequately insulated', 'inadequately insulated'],
+      ),
+    ],
+    pdf:
+        'Water tank: A cold-water storage tank located in the roof space, airing cupboard, kitchen, other and is constructed of plastic, galvanised steel, asbestos cement, other.',
+    pdfMore: [
+      'It appeared to be in reasonable, fair, poor condition.',
+      'The visible tank and associated pipework were adequately insulated, inadequately insulated.',
+    ],
+  ),
+  VerbatimRule(
+    'g3_inadequate',
+    'activity_services_water_water_tank',
+    '{G_WATER}',
+    '{G3_INADEQUATE_INSULATION}',
+    [
+    ],
+    whenField: 'actv_g3_tank_insulation',
+    whenValue: 'Inadequately insulated',
+  ),
+  VerbatimRule(
+    'g3_damaged',
+    'activity_services_water_repair_main_screen',
+    '{G_WATER}',
+    '{G3_DAMAGED_TANK}',
+    [
+      VerbatimToken(
+        '{WATER_TANK_DEFECT}',
+        options: {
+          'g3d_damaged': 'damaged',
+          'g3d_not_adequately_supported': 'not adequately supported',
+          'g3d_leaking': 'leaking',
+          'g3d_overflowing': 'overflowing',
+        },
+        otherCheckbox: 'g3d_other',
+        otherText: 'g3d_other_text',
+        pdfOptions: ['damaged', 'not adequately supported', 'leaking', 'overflowing'],
+      ),
+    ],
+    pdf:
+        'Damaged tank: The cold-water storage tank is damaged, not adequately supported, leaking, overflowing, other.',
+    whenField: 'cb_g3_damaged_tank',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g3_lid',
+    'activity_services_water_repair_main_screen',
+    '{G_WATER}',
+    '{G3_MISSING_LID}',
+    [
+    ],
+    whenField: 'cb_no_lid_over_tank',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g3_asbestos',
+    'activity_services_water_repair_main_screen',
+    '{G_WATER}',
+    '{G3_ASBESTOS_TANK}',
+    [
+    ],
+    whenField: 'cb_asbestos_material',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_no_heating',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_NO_HEATING}',
+    [
+    ],
+    whenField: 'cb_no_heating',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_not_found',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_HEATING_NOT_FOUND}',
+    [
+    ],
+    whenField: 'cb_heating_not_found',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_communal',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_COMMUNAL_HEATING}',
+    [
+    ],
+    whenField: 'cb_communal_heating',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_boiler',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_BOILER}',
+    [
+      VerbatimToken(
+        '{HEAT_BOILER_TYPE}',
+        options: {
+          'g4b_combination_boiler': 'combination boiler',
+          'g4b_conventional_boiler': 'conventional boiler',
+          'g4b_sealed_boiler_system': 'sealed boiler system',
+          'g4b_electrical_boiler': 'electrical boiler',
+          'g4b_oil_fired_boiler': 'oil-fired boiler',
+        },
+        otherCheckbox: 'g4b_other',
+        otherText: 'g4b_other_text',
+        pdfOptions: ['combination boiler', 'conventional boiler', 'sealed boiler system', 'electrical boiler', 'oil-fired boiler'],
+      ),
+      VerbatimToken(
+        '{HEAT_BOILER_LOCATION}',
+        options: {
+          'g4l_kitchen': 'kitchen',
+          'g4l_utility_room': 'utility room',
+          'g4l_bedroom': 'bedroom',
+          'g4l_under_the_stairs': 'under the stairs',
+          'g4l_garage': 'garage',
+        },
+        otherCheckbox: 'g4l_other',
+        otherText: 'g4l_other_text',
+        pdfOptions: ['kitchen', 'utility room', 'bedroom', 'under the stairs', 'garage'],
+      ),
+    ],
+    pdf:
+        'Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other.',
+    whenField: 'cb_boiler_present',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_emitters',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_HEAT_EMITTERS}',
+    [
+      VerbatimToken(
+        '{HEAT_EMITTERS}',
+        options: {
+          'g4e_radiators': 'radiators',
+          'g4e_underfloor_heating_pipes': 'underfloor heating pipes',
+          'g4e_ceiling_vents': 'ceiling vents',
+          'g4e_wall_vents': 'wall vents',
+        },
+        otherCheckbox: 'g4e_other',
+        otherText: 'g4e_other_text',
+        pdfOptions: ['radiators', 'underfloor heating pipes', 'ceiling vents', 'wall vents'],
+      ),
+    ],
+    pdf:
+        'Heat emitters: The boiler is connected to radiators, underfloor heating pipes, ceiling vents, wall vents, other as heat emitters; their capacity, efficiency, and lifespan are not readily ascertained.',
+    whenField: 'cb_connected_to_radiator',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_room_heaters',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_ROOM_HEATERS}',
+    [
+      VerbatimToken(
+        '{HEAT_ROOM_HEATERS}',
+        options: {
+          'g4r_oil_filled': 'oil-filled',
+          'g4r_electric_storage': 'electric storage',
+          'g4r_individual_room_electric': 'individual room electric',
+        },
+        otherCheckbox: 'g4r_other',
+        otherText: 'g4r_other_text',
+        pdfOptions: ['oil-filled', 'electric storage', 'individual room electric'],
+      ),
+    ],
+    pdf:
+        'Room heaters: The property is heated by oil-filled, electric storage, individual room electric, other heaters.',
+    whenField: 'cb_room_heaters',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_old_boiler',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_OLD_BOILER}',
+    [
+    ],
+    whenField: 'cb_old_boiler',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_forced_air',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_FORCED_AIR}',
+    [
+      VerbatimToken(
+        '{HEAT_FORCED_AIR_LOCATION}',
+        options: {
+          'g4f_utility_room': 'utility room',
+          'g4f_loft': 'loft',
+          'g4f_garage': 'garage',
+          'g4f_cupboard': 'cupboard',
+          'g4f_basement': 'basement',
+        },
+        otherCheckbox: 'g4f_other',
+        otherText: 'g4f_other_text',
+        pdfOptions: ['utility room', 'loft', 'garage', 'cupboard', 'basement'],
+      ),
+    ],
+    pdf:
+        'Forced Air Heating: The property is heated by a forced air heating system with the main unit located in the utility room, loft, garage, cupboard, basement, other.',
+    whenField: 'cb_forced_air',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_ashp',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_AIR_SOURCE_HEAT_PUMP}',
+    [
+      VerbatimToken(
+        '{HEAT_ASHP_INTERNAL_LOC}',
+        options: {
+          'g4ai_kitchen': 'kitchen',
+          'g4ai_utility_room': 'utility room',
+          'g4ai_garage': 'garage',
+        },
+        otherCheckbox: 'g4ai_other',
+        otherText: 'g4ai_other_text',
+        pdfOptions: ['kitchen', 'utility room', 'garage'],
+      ),
+      VerbatimToken(
+        '{HEAT_ASHP_EXTERNAL_LOC}',
+        options: {
+          'g4ae_front': 'front',
+          'g4ae_side': 'side',
+          'g4ae_rear': 'rear',
+        },
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+    ],
+    pdf:
+        'Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property.',
+    whenField: 'cb_air_source_heat_pump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_gshp',
+    'activity_services_heating_about_heating',
+    '{G_HEATING}',
+    '{G4_GROUND_SOURCE_HEAT_PUMP}',
+    [
+      VerbatimToken(
+        '{HEAT_GSHP_INTERNAL_LOC}',
+        options: {
+          'g4gi_kitchen': 'kitchen',
+          'g4gi_utility_room': 'utility room',
+          'g4gi_garage': 'garage',
+        },
+        otherCheckbox: 'g4gi_other',
+        otherText: 'g4gi_other_text',
+        pdfOptions: ['kitchen', 'utility room', 'garage'],
+      ),
+    ],
+    pdf:
+        'Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other.',
+    whenField: 'cb_ground_source_heat_pump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g4_repair',
+    'activity_services_heating_repair_main_screen',
+    '{G_HEATING}',
+    '{G4_REPAIR}',
+    [
+      VerbatimToken(
+        '{HEAT_REPAIR_ITEM}',
+        options: {
+          'g4ri_radiator_s': 'radiator(s)',
+          'g4ri_pipework': 'pipework',
+        },
+        pdfOptions: ['radiator(s)', 'pipework'],
+      ),
+      VerbatimToken(
+        '{HEAT_REPAIR_LOCATION}',
+        options: {
+          'g4rl_lounge': 'lounge',
+          'g4rl_bedroom': 'bedroom',
+          'g4rl_bathroom': 'bathroom',
+        },
+        otherCheckbox: 'g4rl_other',
+        otherText: 'g4rl_other_text',
+        pdfOptions: ['lounge', 'bedroom', 'bathroom'],
+      ),
+      VerbatimToken(
+        '{HEAT_REPAIR_DEFECT}',
+        options: {
+          'g4rd_leaking': 'leaking',
+          'g4rd_damaged': 'damaged',
+        },
+        otherCheckbox: 'g4rd_other',
+        otherText: 'g4rd_other_text',
+        pdfOptions: ['leaking', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Repair: The radiator(s), pipework in the lounge, bedroom, bathroom, other areas are leaking, damaged, other and may be causing damp to nearby elements.',
+    whenField: 'cb_g4_repair',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_not_found',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_NOT_FOUND}',
+    [
+    ],
+    whenField: 'cb_wh_not_found',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_communal',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_COMMUNAL}',
+    [
+    ],
+    whenField: 'cb_wh_communal',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_boiler',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_WATER_HEATING}',
+    [
+      VerbatimToken(
+        '{HEAT_WATER_BOILER_TYPE}',
+        options: {
+          'g5b_combination_boiler': 'combination boiler',
+          'g5b_conventional_boiler': 'conventional boiler',
+          'g5b_sealed_boiler_system': 'sealed boiler system',
+          'g5b_electrical_boiler': 'electrical boiler',
+          'g5b_oil_fired_boiler': 'oil-fired boiler',
+        },
+        otherCheckbox: 'g5b_other',
+        otherText: 'g5b_other_text',
+        pdfOptions: ['combination boiler', 'conventional boiler', 'sealed boiler system', 'electrical boiler', 'oil-fired boiler'],
+      ),
+      VerbatimToken(
+        '{HEAT_WATER_BOILER_LOCATION}',
+        options: {
+          'g5bl_airing_cupboard': 'airing cupboard',
+          'g5bl_kitchen': 'kitchen',
+          'g5bl_utility_room': 'utility room',
+          'g5bl_bedroom': 'bedroom',
+          'g5bl_garage': 'garage',
+          'g5bl_loft': 'loft',
+        },
+        otherCheckbox: 'g5bl_other',
+        otherText: 'g5bl_other_text',
+        pdfOptions: ['airing cupboard', 'kitchen', 'utility room', 'bedroom', 'garage', 'loft'],
+      ),
+    ],
+    pdf:
+        'Water heating: The hot water is provided by the combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other installed in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.',
+    whenField: 'cb_wh_boiler',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_immersion',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_ELECTRIC_IMMERSION}',
+    [
+      VerbatimToken(
+        '{HEAT_CYLINDER_LOCATION}',
+        options: {
+          'g5c_airing_cupboard': 'airing cupboard',
+          'g5c_kitchen': 'kitchen',
+          'g5c_utility_room': 'utility room',
+          'g5c_bedroom': 'bedroom',
+          'g5c_garage': 'garage',
+          'g5c_loft': 'loft',
+        },
+        otherCheckbox: 'g5c_other',
+        otherText: 'g5c_other_text',
+        pdfOptions: ['airing cupboard', 'kitchen', 'utility room', 'bedroom', 'garage', 'loft'],
+      ),
+    ],
+    pdf:
+        'Electric Immersion: The hot water is provided by an insulated cylinder located in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.',
+    whenField: 'cb_wh_immersion',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_poor_ins',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_POOR_CYLINDER_INSULATION}',
+    [
+    ],
+    whenField: 'cb_poor_cylinder_condition',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_point_of_use',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_POINT_OF_USE}',
+    [
+    ],
+    whenField: 'cb_wh_point_of_use',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g5_solar',
+    'activity_services_water_heating_gas_heating',
+    '{G_WATER_HEATING}',
+    '{G5_SOLAR_WATER_HEATING}',
+    [
+    ],
+    whenField: 'cb_wh_solar',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_septic',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_SEPTIC_TANK}',
+    [
+    ],
+    whenField: 'cb_septic_tank',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_cesspit',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_CESSPIT}',
+    [
+    ],
+    whenField: 'cb_cess_pit',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_public',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_PUBLIC_SEWER}',
+    [
+    ],
+    whenField: 'cb_public_system',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_no_defects',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_NO_DEFECTS_NOTED}',
+    [
+    ],
+    whenField: 'cb_dr_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_chamber',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_INSPECTION_CHAMBER}',
+    [
+      VerbatimToken(
+        '{DRAIN_CHAMBER_FINDING}',
+        options: {
+          'g6cf_blockage': 'blockage',
+          'g6cf_recent_blockage': 'recent blockage',
+          'g6cf_significant_defect': 'significant defect',
+        },
+        otherCheckbox: 'g6cf_other',
+        otherText: 'g6cf_other_text',
+        pdfOptions: ['blockage', 'recent blockage', 'significant defect'],
+      ),
+    ],
+    pdf:
+        'No blockage, recent blockage, significant defect, other was noted.',
+    whenField: 'cb_dr_chamber',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_not_inspected',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'cb_dr_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_shared',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_SHARED_DRAINAGE}',
+    [
+    ],
+    whenField: 'cb_shared',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_svp',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_SOIL_AND_VENT_PIPE}',
+    [
+      VerbatimToken(
+        '{DRAIN_SVP_LOCATION}',
+        options: {
+          'g6sl_front': 'front',
+          'g6sl_rear': 'rear',
+          'g6sl_side': 'side',
+        },
+        otherCheckbox: 'g6sl_other',
+        otherText: 'g6sl_other_text',
+        pdfOptions: ['front', 'rear', 'side'],
+      ),
+      VerbatimToken(
+        '{DRAIN_SVP_MATERIAL}',
+        options: {
+          'cb_material_plastic_pipe': 'plastic',
+          'cb_material_cast_iron': 'cast iron',
+          'cb_material_asbestos_cement': 'asbestos cement',
+        },
+        otherCheckbox: 'g6sm_other',
+        otherText: 'g6sm_other_text',
+        pdfOptions: ['plastic', 'cast iron', 'asbestos cement'],
+      ),
+    ],
+    pdf:
+        'Soil and Vent Pipe: The soil and vent pipe is visible at the front, rear, side, other of the property and is constructed of plastic, cast iron, asbestos cement, other material.',
+    whenField: 'cb_dr_svp',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_svp_visible',
+    'activity_services_drainage',
+    '{G_DRAINAGE}',
+    '{G6_SVP_VISIBLE}',
+    [
+      VerbatimToken(
+        '{DRAIN_SVP_VISIBLE_IN}',
+        options: {
+          'g6sv_roof_space': 'roof space',
+        },
+        otherCheckbox: 'g6sv_other',
+        otherText: 'g6sv_other_text',
+        pdfOptions: ['roof space'],
+      ),
+    ],
+    pdf:
+        'Visible/Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space/other.',
+    whenField: 'cb_dr_svp_visible',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_cover',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_CHAMBER_COVER}',
+    [
+      VerbatimToken(
+        '{DRAIN_COVER_DEFECT}',
+        options: {
+          'g6cv_broken': 'broken',
+          'g6cv_corroded': 'corroded',
+          'g6cv_poorly_secured': 'poorly secured',
+        },
+        otherCheckbox: 'g6cv_other',
+        otherText: 'g6cv_other_text',
+        pdfOptions: ['broken', 'corroded', 'poorly secured'],
+      ),
+    ],
+    pdf:
+        'Inspection Chamber Cover: The inspection chamber cover(s) are broken, corroded, poorly secured, other and presents a safety hazard.',
+    whenField: 'cb_g6_cover',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_walls',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_CHAMBER_WALLS}',
+    [
+      VerbatimToken(
+        '{DRAIN_WALL_DEFECT}',
+        options: {
+          'g6cw_cracked': 'cracked',
+          'g6cw_crumbling': 'crumbling',
+          'g6cw_damaged': 'damaged',
+        },
+        otherCheckbox: 'g6cw_other',
+        otherText: 'g6cw_other_text',
+        pdfOptions: ['cracked', 'crumbling', 'damaged'],
+      ),
+    ],
+    pdf:
+        'Inspection Chamber Walls: The inspection chamber walls are cracked, crumbling, damaged, other.',
+    whenField: 'cb_g6_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_channels',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_DRAIN_CHANNELS}',
+    [
+      VerbatimToken(
+        '{DRAIN_CHANNEL_DEFECT}',
+        options: {
+          'g6dc_cracked': 'cracked',
+          'g6dc_poorly_formed': 'poorly formed',
+          'g6dc_partially_blocked': 'partially blocked',
+        },
+        otherCheckbox: 'g6dc_other',
+        otherText: 'g6dc_other_text',
+        pdfOptions: ['cracked', 'poorly formed', 'partially blocked'],
+      ),
+    ],
+    pdf:
+        'Drain Channels: The drainage channels within the inspection chamber are cracked, poorly formed, partially blocked, other.',
+    whenField: 'cb_g6_channels',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_svp_defects',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_SVP_DEFECTS}',
+    [
+      VerbatimToken(
+        '{DRAIN_SVP_DEFECT}',
+        options: {
+          'g6sd_cracked': 'cracked',
+          'g6sd_damaged': 'damaged',
+          'g6sd_corroded': 'corroded',
+          'g6sd_leaking': 'leaking',
+          'g6sd_inadequately_supported': 'inadequately supported',
+        },
+        otherCheckbox: 'g6sd_other',
+        otherText: 'g6sd_other_text',
+        pdfOptions: ['cracked', 'damaged', 'corroded', 'leaking', 'inadequately supported'],
+      ),
+    ],
+    pdf:
+        'Soil and Vent Pipe Defects: The soil and vent pipe is cracked, damaged, corroded, leaking, inadequately supported, other.',
+    whenField: 'cb_g6_svp_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_roots',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_TREE_ROOT_INGRESS}',
+    [
+    ],
+    whenField: 'cb_roots_in_chamber',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_gullies',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_GULLIES}',
+    [
+      VerbatimToken(
+        '{DRAIN_GULLY_DEFECT}',
+        options: {
+          'g6gu_partly_blocked': 'partly blocked',
+          'g6gu_damaged': 'damaged',
+          'g6gu_uncovered': 'uncovered',
+          'g6gu_completely_blocked': 'completely blocked',
+        },
+        otherCheckbox: 'g6gu_other',
+        otherText: 'g6gu_other_text',
+        pdfOptions: ['partly blocked', 'damaged', 'uncovered', 'completely blocked'],
+      ),
+    ],
+    pdf:
+        'The gullies are partly blocked, damaged, uncovered, completely blocked, other.',
+    whenField: 'cb_g6_gullies',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g6_asbestos',
+    'activity_services_drainage_repair_chamber_cover',
+    '{G_DRAINAGE}',
+    '{G6_ASBESTOS_SOIL_STACK}',
+    [
+    ],
+    whenField: 'cb_g6_asbestos',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g7_na',
+    'activity_services_shared_services',
+    '{G_COMMON_SERVICES}',
+    '{G7_NOT_APPLICABLE}',
+    [
+    ],
+    whenField: 'cb_not_applicable',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'g7_desc',
+    'activity_services_shared_services',
+    '{G_COMMON_SERVICES}',
+    '{G7_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{CS_SERVICES}',
+        options: {
+          'g7s_shared_drainage': 'shared drainage',
+          'g7s_grounds_maintenance': 'grounds maintenance',
+          'g7s_cleaning': 'cleaning',
+          'g7s_lifts': 'lifts',
+          'g7s_communal_heating': 'communal heating',
+          'g7s_hot_water_systems': 'hot water systems',
+          'g7s_door_entry_systems': 'door entry systems',
+          'g7s_vehicular_access': 'vehicular access',
+          'g7s_parking_areas': 'parking areas',
+        },
+        otherCheckbox: 'g7s_other',
+        otherText: 'g7s_other_text',
+        pdfOptions: ['shared drainage', 'grounds maintenance', 'cleaning', 'lifts', 'communal heating', 'hot water systems', 'door entry systems', 'vehicular access', 'parking areas'],
+      ),
+    ],
+    pdf:
+        'Description: Communal services and installations, including shared drainage, grounds maintenance, cleaning, lifts, communal heating, hot water systems, door entry systems, vehicular access, parking areas, other were not specifically assessed as part of this inspection.',
+    whenField: 'cb_cs_communal',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_no_garage',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_NO_GARAGE}',
+    [
+    ],
+    whenField: 'cb_h1_no_garage',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_not_inspected',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'cb_h1_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_converted',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_CONVERTED}',
+    [
+      VerbatimToken(
+        '{H1_CONVERTED_TO}',
+        options: {
+          'h1cv_habitable_accommodation': 'habitable accommodation',
+          'h1cv_an_office': 'an office',
+          'h1cv_a_workshop': 'a workshop',
+        },
+        otherCheckbox: 'h1cv_other',
+        otherText: 'h1cv_other_text',
+        pdfOptions: ['habitable accommodation', 'an office', 'a workshop'],
+      ),
+    ],
+    pdf:
+        'Converted garage: The garage has been converted into habitable accommodation, an office, a workshop, other.',
+    whenField: 'cb_h1_converted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_shared',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_SHARED_ACCESS}',
+    [
+    ],
+    whenField: 'cb_shared_access',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_description',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_DESCRIPTION}',
+    [
+      VerbatimToken(
+        '{H1_GARAGE_TYPE}',
+        options: {
+          'h1d_a_garage_in_a_block_of_garages': 'a garage in a block of garages',
+          'h1d_an_attached': 'an attached',
+          'h1d_a_detached': 'a detached',
+          'h1d_an_integral': 'an integral',
+          'h1d_garage': 'garage',
+          'h1d_undercroft': 'undercroft',
+        },
+        otherCheckbox: 'h1d_other',
+        otherText: 'h1d_other_text',
+        pdfOptions: ['a garage in a block of garages', 'an attached', 'a detached', 'an integral', 'garage', 'undercroft'],
+      ),
+    ],
+    pdf:
+        'Description: The property incorporates a garage in a block of garages, an attached, a detached, an integral, garage, undercroft, other garage(s).',
+    whenField: 'cb_h1_description',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_walls',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_WALLS}',
+    [
+      VerbatimToken(
+        '{H1_WALLS}',
+        options: {
+          'h1w_single_skin_brick': 'single skin brick',
+          'h1w_cavity_brick': 'cavity brick',
+          'h1w_block': 'block',
+          'h1w_prefabricated_concrete': 'prefabricated concrete',
+          'h1w_timber_frame': 'timber frame',
+          'h1w_steel_frame': 'steel frame',
+        },
+        otherCheckbox: 'h1w_other',
+        otherText: 'h1w_other_text',
+        pdfOptions: ['single skin brick', 'cavity brick', 'block', 'prefabricated concrete', 'timber frame', 'steel frame'],
+      ),
+    ],
+    pdf:
+        'Walls: The garage is constructed of single skin brick, cavity brick, block, prefabricated concrete, timber frame, steel frame, other wall(s).',
+    whenField: 'cb_h1_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_roof',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_ROOF}',
+    [
+      VerbatimToken(
+        '{H1_ROOF_TYPE}',
+        options: {
+          'h1rt_pitched': 'pitched',
+          'h1rt_flat': 'flat',
+          'h1rt_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h1rt_other',
+        otherText: 'h1rt_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H1_ROOF_COVER}',
+        options: {
+          'h1rc_clay_tiles': 'clay tiles',
+          'h1rc_concrete_tiles': 'concrete tiles',
+          'h1rc_slates': 'slates',
+          'h1rc_felt_sheets': 'felt sheets',
+          'cb_corrugated_asbestos_sheets': 'asbestos sheets',
+          'h1rc_rubber_membrane': 'rubber membrane',
+          'h1rc_single_ply_membrane': 'single-ply membrane',
+          'h1rc_grp_fibreglass': 'GRP fibreglass',
+          'h1rc_asphalt': 'asphalt',
+          'h1rc_metal_sheets': 'metal sheets',
+          'h1rc_plastic_sheets': 'plastic sheets',
+        },
+        otherCheckbox: 'h1rc_other',
+        otherText: 'h1rc_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt sheets', 'asbestos sheets', 'rubber membrane', 'single-ply membrane', 'GRP fibreglass', 'asphalt', 'metal sheets', 'plastic sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt sheets, asbestos sheets, rubber membrane, single-ply membrane, GRP fibreglass, asphalt, metal sheets, plastic sheets, other material.',
+    whenField: 'cb_h1_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_floor',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_FLOOR}',
+    [
+      VerbatimToken(
+        '{H1_FLOOR}',
+        options: {
+          'h1f_concrete': 'concrete',
+          'h1f_stone': 'stone',
+        },
+        otherCheckbox: 'h1f_other',
+        otherText: 'h1f_other_text',
+        pdfOptions: ['concrete', 'stone'],
+      ),
+    ],
+    pdf:
+        'Garage Floor: The garage floor is constructed of concrete, stone, other material.',
+    whenField: 'cb_h1_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_doors',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_DOORS}',
+    [
+      VerbatimToken(
+        '{H1_DOOR_TYPE}',
+        options: {
+          'h1do_manually': 'manually',
+          'h1do_electrically_operated_up_and_over': 'electrically operated up-and-over',
+          'h1do_roller_shutter': 'roller shutter',
+          'h1do_side_hinged_door': 'side-hinged door',
+          'h1do_rear_or_side_door': 'rear or side door',
+        },
+        otherCheckbox: 'h1do_other',
+        otherText: 'h1do_other_text',
+        pdfOptions: ['manually', 'electrically operated up-and-over', 'roller shutter', 'side-hinged door', 'rear or side door'],
+      ),
+      VerbatimToken(
+        '{H1_DOOR_MATERIAL}',
+        options: {
+          'h1dm_steel': 'steel',
+          'h1dm_timber': 'timber',
+          'h1dm_aluminium': 'aluminium',
+          'h1dm_upvc': 'uPVC',
+          'h1dm_grp_fibreglass': 'GRP (fibreglass)',
+        },
+        otherCheckbox: 'h1dm_other',
+        otherText: 'h1dm_other_text',
+        pdfOptions: ['steel', 'timber', 'aluminium', 'uPVC', 'GRP (fibreglass)'],
+      ),
+    ],
+    pdf:
+        'Garage Doors: The garage is fitted with a manually, electrically operated up-and-over, roller shutter, side-hinged door, rear or side door, other constructed of steel, timber, aluminium, uPVC, GRP (fibreglass), other material.',
+    whenField: 'cb_h1_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_condition',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_CONDITION}',
+    [
+      VerbatimToken(
+        '{H1_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_condition',
+    whenValue: 'Good',
+    whenAny: [['actv_condition', 'Reasonable'], ['actv_condition', 'Fair'], ['actv_condition', 'Poor'], ['actv_condition', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h1_no_defects',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_NO_DEFECTS_NOTED}',
+    [
+    ],
+    whenField: 'cb_h1_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_felt',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_FELT_ROOF}',
+    [
+    ],
+    whenField: 'h1rc_felt_sheets',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_asbestos',
+    'activity_grounds_garage',
+    '{H_GARAGE}',
+    '{H1_ASBESTOS_ROOF}',
+    [
+    ],
+    whenField: 'cb_corrugated_asbestos_sheets',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_minor',
+    'activity_grounds_garage_garage_repair',
+    '{H_GARAGE}',
+    '{H1_MINOR_DEFECTS}',
+    [
+      VerbatimToken(
+        '{H1_MINOR_DEFECTS}',
+        options: {
+          'h1mi_a_leaking_roof': 'a leaking roof',
+          'h1mi_cracked_walls': 'cracked walls',
+          'h1mi_rotten_window_frame_s': 'rotten window frame(s)',
+          'h1mi_cracked_glazing': 'cracked glazing',
+          'h1mi_a_cracked_floor': 'a cracked floor',
+          'h1mi_damaged_door_s': 'damaged door(s)',
+        },
+        otherCheckbox: 'h1mi_other',
+        otherText: 'h1mi_other_text',
+        pdfOptions: ['a leaking roof', 'cracked walls', 'rotten window frame(s)', 'cracked glazing', 'a cracked floor', 'damaged door(s)'],
+      ),
+    ],
+    pdf:
+        'Minor defects: Defects were noted in the garage, including a leaking roof, cracked walls, rotten window frame(s), cracked glazing, a cracked floor, damaged door(s), other defects.',
+    whenField: 'cb_h1_minor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_significant',
+    'activity_grounds_garage_garage_repair',
+    '{H_GARAGE}',
+    '{H1_SIGNIFICANT_DEFECTS}',
+    [
+      VerbatimToken(
+        '{H1_SIGNIFICANT_DEFECTS}',
+        options: {
+          'h1si_a_badly_leaking_roof': 'a badly leaking roof',
+          'h1si_badly_cracked_or_unstable_walls': 'badly cracked or unstable walls',
+          'h1si_beetle_infestation': 'beetle infestation',
+          'h1si_damaged_glazing': 'damaged glazing',
+          'h1si_a_badly_cracked_floor': 'a badly cracked floor',
+          'h1si_door_s_in_disrepair': 'door(s) in disrepair',
+        },
+        otherCheckbox: 'h1si_other',
+        otherText: 'h1si_other_text',
+        pdfOptions: ['a badly leaking roof', 'badly cracked or unstable walls', 'beetle infestation', 'damaged glazing', 'a badly cracked floor', 'door(s) in disrepair'],
+      ),
+    ],
+    pdf:
+        'Significant defects: Serious defects were noted in the garage, including a badly leaking roof, badly cracked or unstable walls, beetle infestation, damaged glazing, a badly cracked floor, door(s) in disrepair, other significant defects.',
+    whenField: 'cb_h1_significant',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h1_safety',
+    'activity_grounds_garage_garage_repair',
+    '{H_GARAGE}',
+    '{H1_SAFETY_HAZARD}',
+    [
+    ],
+    whenField: 'cb_is_safety_hazard',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_topo',
+    'activity_grounds_other_grounds',
+    '{H_OTHER}',
+    '{H2_GROUNDS_TOPOGRAPHY}',
+    [
+      VerbatimToken(
+        '{H2_TOPOGRAPHY}',
+        dropdown: 'actv_type',
+        dropdownOptions: ['Level', 'Sloping', 'Hilly', 'Undulating'],
+        lower: true,
+        pdfOptions: ['level', 'sloping', 'hilly', 'undulating'],
+      ),
+    ],
+    pdf:
+        'Grounds: The subject property is set within level, sloping, hilly, undulating grounds.',
+    whenField: 'actv_type',
+    whenValue: 'Level',
+    whenAny: [['actv_type', 'Sloping'], ['actv_type', 'Hilly'], ['actv_type', 'Undulating']],
+  ),
+  VerbatimRule(
+    'h2_shared_garden',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_SHARED_GARDEN}',
+    [
+    ],
+    whenField: 'cb_h2_h2_shared_garden',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_comm_surface',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_COMMUNAL_GROUNDS}',
+    [
+      VerbatimToken(
+        '{H2_COMM_SURFACE}',
+        options: {
+          'h2_comm_surface_0_paved': 'paved',
+          'h2_comm_surface_0_lawned': 'lawned',
+          'h2_comm_surface_0_decked': 'decked',
+          'h2_comm_surface_0_artificially_lawned': 'artificially lawned',
+          'h2_comm_surface_0_laid_with_stones': 'laid with stones',
+          'h2_comm_surface_0_laid_with_tile_chippings': 'laid with tile chippings',
+        },
+        otherCheckbox: 'h2_comm_surface_0_other',
+        otherText: 'h2_comm_surface_0_other_text',
+        pdfOptions: ['paved', 'lawned', 'decked', 'artificially lawned', 'laid with stones', 'laid with tile chippings'],
+      ),
+    ],
+    pdf:
+        'Grounds: The communal/shared garden is paved, lawned, decked, artificially lawned, laid with stones, laid with tile chippings, other.',
+    whenField: 'cb_h2_h2_comm_surface',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_comm_fence',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_COMMUNAL_FENCE}',
+    [
+      VerbatimToken(
+        '{H2_COMM_FENCE}',
+        options: {
+          'h2_comm_fence_0_timber': 'timber',
+          'h2_comm_fence_0_brick': 'brick',
+          'h2_comm_fence_0_concrete': 'concrete',
+          'h2_comm_fence_0_wire_mesh': 'wire mesh',
+          'h2_comm_fence_0_hedges': 'hedges',
+          'h2_comm_fence_0_shrubs': 'shrubs',
+        },
+        otherCheckbox: 'h2_comm_fence_0_other',
+        otherText: 'h2_comm_fence_0_other_text',
+        pdfOptions: ['timber', 'brick', 'concrete', 'wire mesh', 'hedges', 'shrubs'],
+      ),
+    ],
+    pdf:
+        'Fence: The boundary fences are formed in timber, brick, concrete, wire mesh, hedges, shrubs, other.',
+    whenField: 'cb_h2_h2_comm_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_comm_no_fence',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_NO_FENCING}',
+    [
+    ],
+    whenField: 'cb_h2_h2_comm_no_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_comm_cond',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_COMMUNAL_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_COMMUNAL_CONDITION_COND}',
+        dropdown: 'actv_h2_comm_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_comm_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_comm_cond', 'Reasonable'], ['actv_h2_comm_cond', 'Fair'], ['actv_h2_comm_cond', 'Poor'], ['actv_h2_comm_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_shared_areas',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_SHARED_AREAS}',
+    [
+      VerbatimToken(
+        '{H2_SHARED_AREAS}',
+        options: {
+          'h2_shared_areas_0_shared_driveway': 'shared driveway',
+          'h2_shared_areas_0_shared_garden': 'shared garden',
+          'h2_shared_areas_0_communal_parking': 'communal parking',
+          'h2_shared_areas_0_communal_gardens': 'communal gardens',
+          'h2_shared_areas_0_shared_pathways': 'shared pathways',
+        },
+        otherCheckbox: 'h2_shared_areas_0_other',
+        otherText: 'h2_shared_areas_0_other_text',
+        pdfOptions: ['shared driveway', 'shared garden', 'communal parking', 'communal gardens', 'shared pathways'],
+      ),
+    ],
+    pdf:
+        'Shared Areas: The property benefits from a shared driveway, shared garden, communal parking, communal gardens, shared pathways, other access.',
+    whenField: 'cb_h2_h2_shared_areas',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_shared_cond',
+    'activity_grounds_shared_access',
+    '{H_OTHER}',
+    '{H2_SHARED_AREAS_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_SHARED_AREAS_CONDITION_COND}',
+        dropdown: 'actv_h2_shared_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the shared areas appear in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_shared_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_shared_cond', 'Reasonable'], ['actv_h2_shared_cond', 'Fair'], ['actv_h2_shared_cond', 'Poor'], ['actv_h2_shared_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_outside',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_OUTSIDE_AREAS}',
+    [
+      VerbatimToken(
+        '{H2_OUTSIDE_AREAS}',
+        options: {
+          'h2_outside_0_front_garden': 'front garden',
+          'h2_outside_0_rear_garden': 'rear garden',
+          'h2_outside_0_side_garden': 'side garden',
+          'h2_outside_0_courtyard_garden': 'courtyard garden',
+          'h2_outside_0_terrace': 'terrace',
+          'h2_outside_0_patio': 'patio',
+        },
+        otherCheckbox: 'h2_outside_0_other',
+        otherText: 'h2_outside_0_other_text',
+        pdfOptions: ['front garden', 'rear garden', 'side garden', 'courtyard garden', 'terrace', 'patio'],
+      ),
+    ],
+    pdf:
+        'Description: The outside areas comprise front garden, rear garden, side garden, courtyard garden, terrace, patio, other.',
+    whenField: 'cb_h2_h2_outside',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_surfaces',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_SURFACES}',
+    [
+      VerbatimToken(
+        '{H2_SURFACES}',
+        options: {
+          'h2_surfaces_0_lawn': 'lawn',
+          'h2_surfaces_0_block_paving': 'block paving',
+          'h2_surfaces_0_concrete': 'concrete',
+          'h2_surfaces_0_gravel': 'gravel',
+          'h2_surfaces_0_tarmac': 'tarmac',
+          'h2_surfaces_0_timber_decking': 'timber decking',
+          'h2_surfaces_0_composite_decking': 'composite decking',
+          'h2_surfaces_0_stone_paving': 'stone paving',
+        },
+        otherCheckbox: 'h2_surfaces_0_other',
+        otherText: 'h2_surfaces_0_other_text',
+        pdfOptions: ['lawn', 'block paving', 'concrete', 'gravel', 'tarmac', 'timber decking', 'composite decking', 'stone paving'],
+      ),
+    ],
+    pdf:
+        'Grounds: The surfaces comprise lawn, block paving, concrete, gravel, tarmac, timber decking, composite decking, stone paving, other finishes.',
+    whenField: 'cb_h2_h2_surfaces',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_boundaries',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_BOUNDARIES}',
+    [
+      VerbatimToken(
+        '{H2_BOUNDARIES}',
+        options: {
+          'h2_boundaries_0_timber_fencing': 'timber fencing',
+          'h2_boundaries_0_brick_walls': 'brick walls',
+          'h2_boundaries_0_hedging': 'hedging',
+          'h2_boundaries_0_stone_walls': 'stone walls',
+          'h2_boundaries_0_concrete_sections': 'concrete sections',
+          'h2_boundaries_0_wire': 'wire',
+          'h2_boundaries_0_metal_railings': 'metal railings',
+        },
+        otherCheckbox: 'h2_boundaries_0_other',
+        otherText: 'h2_boundaries_0_other_text',
+        pdfOptions: ['timber fencing', 'brick walls', 'hedging', 'stone walls', 'concrete sections', 'wire', 'metal railings'],
+      ),
+    ],
+    pdf:
+        'Fence: The boundaries comprise timber fencing, brick walls, hedging, stone walls, concrete sections, wire, metal railings, other.',
+    whenField: 'cb_h2_h2_boundaries',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_garden_cond',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_GARDEN_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_GARDEN_CONDITION_COND}',
+        dropdown: 'actv_h2_garden_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_garden_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_garden_cond', 'Reasonable'], ['actv_h2_garden_cond', 'Fair'], ['actv_h2_garden_cond', 'Poor'], ['actv_h2_garden_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_garden_no_defects',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_GARDEN_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_garden_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_hardstanding',
+    'activity_grounds_other_front_garden',
+    '{H_OTHER}',
+    '{H2_HARDSTANDING}',
+    [
+      VerbatimToken(
+        '{H2_HARD_LEVEL}',
+        options: {
+          'h2_hardstanding_0_level': 'level',
+          'h2_hardstanding_0_reasonably_level': 'reasonably level',
+        },
+        pdfOptions: ['level', 'reasonably level'],
+      ),
+      VerbatimToken(
+        '{H2_HARD_UNEVEN}',
+        options: {
+          'h2_hardstanding_1_no_unevenness': 'no unevenness',
+          'h2_hardstanding_1_minor_unevenness': 'minor unevenness',
+        },
+        pdfOptions: ['no unevenness', 'minor unevenness'],
+      ),
+    ],
+    pdf:
+        'Hardstanding areas: The paths and hardstanding area appear level, reasonably level, and exhibit no unevenness, minor unevenness.',
+    whenField: 'cb_h2_h2_hardstanding',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_repair_fence',
+    'activity_grounds_other_repair_fence',
+    '{H_OTHER}',
+    '{H2_REPAIR_FENCE}',
+    [
+      VerbatimToken(
+        '{H2_FENCE_DEFECTS}',
+        options: {
+          'h2fd_cracked': 'cracked',
+          'cb_broken': 'broken',
+          'cb_unstable': 'unstable',
+          'cb_leaning': 'leaning',
+          'cb_loose_in_places': 'loose in places',
+          'cb_badly_damaged': 'severely damaged',
+          'cb_rotted_in_places': 'rotten',
+          'cb_missing_in_places': 'missing in places',
+        },
+        otherCheckbox: 'h2_repair_fence_0_other',
+        otherText: 'h2_repair_fence_0_other_text',
+        pdfOptions: ['cracked', 'broken', 'unstable', 'leaning', 'loose in places', 'severely damaged', 'rotten', 'missing in places'],
+      ),
+    ],
+    pdf:
+        'Repair fence: Parts of the boundary fencing are cracked, broken, unstable, leaning, loose in places, severely damaged, rotten, missing in places, other.',
+    whenField: 'cb_h2_h2_repair_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_sheds',
+    'activity_grounds_other_repair_shed',
+    '{H_OTHER}',
+    '{H2_SHEDS}',
+    [
+      VerbatimToken(
+        '{H2_SHED_MATERIAL}',
+        options: {
+          'h2_sheds_0_timber': 'timber',
+          'h2_sheds_0_brick': 'brick',
+          'h2_sheds_0_aluminium': 'aluminium',
+        },
+        otherCheckbox: 'h2_sheds_0_other',
+        otherText: 'h2_sheds_0_other_text',
+        pdfOptions: ['timber', 'brick', 'aluminium'],
+      ),
+      VerbatimToken(
+        '{H2_SHED_ROOF}',
+        options: {
+          'h2_sheds_1_pitched': 'pitched',
+          'h2_sheds_1_flat': 'flat',
+        },
+        otherCheckbox: 'h2_sheds_1_other',
+        otherText: 'h2_sheds_1_other_text',
+        pdfOptions: ['pitched', 'flat'],
+      ),
+      VerbatimToken(
+        '{H2_SHED_COVER}',
+        options: {
+          'h2_sheds_2_felt': 'felt',
+          'h2_sheds_2_tiles': 'tiles',
+          'h2_sheds_2_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_sheds_2_other',
+        otherText: 'h2_sheds_2_other_text',
+        pdfOptions: ['felt', 'tiles', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Sheds: There is timber, brick, aluminium, other shed(s) located within the grounds of the property.',
+    pdfMore: [
+      'The roof(s) are pitched, flat, other, and covered with felt, tiles, metal sheets, other materials.',
+    ],
+    whenField: 'cb_h2_h2_sheds',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_shed_cond',
+    'activity_grounds_other_repair_shed',
+    '{H_OTHER}',
+    '{H2_SHED_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_SHED_CONDITION_COND}',
+        dropdown: 'actv_h2_shed_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the shed(s) appear in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_shed_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_shed_cond', 'Reasonable'], ['actv_h2_shed_cond', 'Fair'], ['actv_h2_shed_cond', 'Poor'], ['actv_h2_shed_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_OB_TYPE}',
+        options: {
+          'h2_ob_0_large_shed': 'large shed',
+          'h2_ob_0_workshop': 'workshop',
+          'h2_ob_0_annex': 'annex',
+          'h2_ob_0_summer_house': 'summer house',
+          'h2_ob_0_office': 'office',
+          'h2_ob_0_studio': 'studio',
+        },
+        otherCheckbox: 'h2_ob_0_other',
+        otherText: 'h2_ob_0_other_text',
+        pdfOptions: ['large shed', 'workshop', 'annex', 'summer house', 'office', 'studio'],
+      ),
+    ],
+    pdf:
+        'Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s).',
+    whenField: 'cb_h2_h2_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cons',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_CONSTRUCTION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONSTRUCTION}',
+        options: {
+          'h2_ob_cons_0_bricks': 'bricks',
+          'h2_ob_cons_0_blocks': 'blocks',
+          'h2_ob_cons_0_timber': 'timber',
+          'h2_ob_cons_0_steel': 'steel',
+          'h2_ob_cons_0_prefabricated_concrete': 'prefabricated concrete',
+          'h2_ob_cons_0_aluminium': 'aluminium',
+          'h2_ob_cons_0_composite_boards': 'composite boards',
+        },
+        otherCheckbox: 'h2_ob_cons_0_other',
+        otherText: 'h2_ob_cons_0_other_text',
+        pdfOptions: ['bricks', 'blocks', 'timber', 'steel', 'prefabricated concrete', 'aluminium', 'composite boards'],
+      ),
+    ],
+    pdf:
+        'Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials.',
+    whenField: 'cb_h2_h2_ob_cons',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_roof',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_ROOF}',
+    [
+      VerbatimToken(
+        '{H2_OB_ROOF}',
+        options: {
+          'h2_ob_roof_0_pitched': 'pitched',
+          'h2_ob_roof_0_flat': 'flat',
+          'h2_ob_roof_0_lean_to': 'lean-to',
+        },
+        otherCheckbox: 'h2_ob_roof_0_other',
+        otherText: 'h2_ob_roof_0_other_text',
+        pdfOptions: ['pitched', 'flat', 'lean-to'],
+      ),
+      VerbatimToken(
+        '{H2_OB_COVER}',
+        options: {
+          'h2_ob_roof_1_clay_tiles': 'clay tiles',
+          'h2_ob_roof_1_concrete_tiles': 'concrete tiles',
+          'h2_ob_roof_1_slates': 'slates',
+          'h2_ob_roof_1_felt': 'felt',
+          'h2_ob_roof_1_rubber_membrane': 'rubber membrane',
+          'h2_ob_roof_1_metal_sheets': 'metal sheets',
+        },
+        otherCheckbox: 'h2_ob_roof_1_other',
+        otherText: 'h2_ob_roof_1_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'slates', 'felt', 'rubber membrane', 'metal sheets'],
+      ),
+    ],
+    pdf:
+        'Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material.',
+    whenField: 'cb_h2_h2_ob_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_floor',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_FLOOR}',
+    [
+      VerbatimToken(
+        '{H2_OB_FLOOR}',
+        options: {
+          'h2_ob_floor_0_concrete': 'concrete',
+          'h2_ob_floor_0_suspended_timber': 'suspended timber',
+          'h2_ob_floor_0_engineered_timber': 'engineered timber',
+          'h2_ob_floor_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'h2_ob_floor_0_other',
+        otherText: 'h2_ob_floor_0_other_text',
+        pdfOptions: ['concrete', 'suspended timber', 'engineered timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material.',
+    whenField: 'cb_h2_h2_ob_floor',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_doors',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_DOORS}',
+    [
+      VerbatimToken(
+        '{H2_OB_DOORS}',
+        options: {
+          'h2_ob_doors_0_timber_upvc': 'timber uPVC',
+          'h2_ob_doors_0_aluminium': 'aluminium',
+          'h2_ob_doors_0_metal': 'metal',
+        },
+        otherCheckbox: 'h2_ob_doors_0_other',
+        otherText: 'h2_ob_doors_0_other_text',
+        pdfOptions: ['timber uPVC', 'aluminium', 'metal'],
+      ),
+    ],
+    pdf:
+        'Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.',
+    whenField: 'cb_h2_h2_ob_doors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_ob_cond',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_CONDITION}',
+    [
+      VerbatimToken(
+        '{H2_OB_CONDITION_COND}',
+        dropdown: 'actv_h2_ob_cond',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_h2_ob_cond',
+    whenValue: 'Good',
+    whenAny: [['actv_h2_ob_cond', 'Reasonable'], ['actv_h2_ob_cond', 'Fair'], ['actv_h2_ob_cond', 'Poor'], ['actv_h2_ob_cond', 'Very poor']],
+  ),
+  VerbatimRule(
+    'h2_ob_no_defects',
+    'activity_grounds_other_large_outbuildings',
+    '{H_OTHER}',
+    '{H2_OB_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_h2_h2_ob_no_defects',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_repair_ob',
+    'activity_other_repair_outbuilding',
+    '{H_OTHER}',
+    '{H2_REPAIR_OUTBUILDING}',
+    [
+      VerbatimToken(
+        '{H2_ROB_TYPE}',
+        options: {
+          'h2_repair_ob_0_shed': 'shed',
+          'h2_repair_ob_0_workshop': 'workshop',
+          'h2_repair_ob_0_annex': 'annex',
+          'h2_repair_ob_0_summer_house': 'summer house',
+          'h2_repair_ob_0_office': 'office',
+          'h2_repair_ob_0_studio': 'studio',
+        },
+        otherCheckbox: 'h2_repair_ob_0_other',
+        otherText: 'h2_repair_ob_0_other_text',
+        pdfOptions: ['shed', 'workshop', 'annex', 'summer house', 'office', 'studio'],
+      ),
+      VerbatimToken(
+        '{H2_ROB_DEFECTS}',
+        options: {
+          'h2_repair_ob_1_damaged': 'damaged',
+          'h2_repair_ob_1_have_broken_parts': 'have broken parts',
+          'h2_repair_ob_1_is_unstable': 'is unstable',
+          'h2_repair_ob_1_is_rotted_in_places': 'is rotted in places',
+          'h2_repair_ob_1_have_missing_sections': 'have missing sections',
+        },
+        otherCheckbox: 'h2_repair_ob_1_other',
+        otherText: 'h2_repair_ob_1_other_text',
+        pdfOptions: ['damaged', 'have broken parts', 'is unstable', 'is rotted in places', 'have missing sections'],
+      ),
+    ],
+    pdf:
+        'Repair outbuilding: Parts of the shed, workshop, annex, summer house, office, studio, other permanent outbuilding are damaged, have broken parts, is unstable, is rotted in places, have missing sections, other.',
+    whenField: 'cb_h2_h2_repair_ob',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_rw',
+    'activity_other_repair_retaining_walls',
+    '{H_OTHER}',
+    '{H2_RETAINING_WALL}',
+    [
+      VerbatimToken(
+        '{H2_RW_DEFECTS}',
+        options: {
+          'cb_cracked': 'cracked',
+          'h2rw_leaning': 'leaning',
+          'cb_distorted': 'distorted',
+          'cb_unstable': 'unstable',
+          'h2rw_weak': 'weak',
+          'cb_damaged': 'damaged',
+          'h2rw_in_poor_condition': 'in poor condition',
+        },
+        pdfOptions: ['cracked', 'leaning', 'distorted', 'unstable', 'weak', 'damaged', 'in poor condition'],
+      ),
+    ],
+    pdf:
+        'Retaining Wall: The retaining wall(s) is cracked, leaning, distorted, unstable, weak, damaged, in poor condition and may present a potential safety hazard.',
+    whenField: 'cb_h2_h2_rw',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_trees',
+    'activity_other_repair_nearby_trees',
+    '{H_OTHER}',
+    '{H2_NEARBY_TREES}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'No defects',
+    whenAny: [['actv_condition', 'Defects noted']],
+  ),
+  VerbatimRule(
+    'h2_trees_none',
+    'activity_other_repair_nearby_trees',
+    '{H_OTHER}',
+    '{H2_TREES_NO_DEFECTS}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'No defects',
+  ),
+  VerbatimRule(
+    'h2_trees_defects',
+    'activity_other_repair_nearby_trees',
+    '{H_OTHER}',
+    '{H2_TREES_DEFECTS}',
+    [
+      VerbatimToken(
+        '{H2_TREE_AFFECTED}',
+        options: {
+          'h2ta_property': 'property',
+          'h2ta_fencing': 'fencing',
+          'h2ta_finished_grounds': 'finished grounds',
+          'h2ta_outbuilding': 'outbuilding',
+        },
+        otherCheckbox: 'h2ta_other',
+        otherText: 'h2ta_other_text',
+        pdfOptions: ['property', 'fencing', 'finished grounds', 'outbuilding'],
+      ),
+      VerbatimToken(
+        '{H2_TREE_DEFECT}',
+        options: {
+          'cb_significant_cracks': 'significant cracks',
+          'cb_subsidence_movement': 'subsidence movement',
+        },
+        pdfOptions: ['significant cracks', 'subsidence movement'],
+      ),
+    ],
+    pdf:
+        'Detrimental effects on the property, fencing, finished grounds, outbuilding, other were noted that include significant cracks, subsidence movement.',
+    whenField: 'actv_condition',
+    whenValue: 'Defects noted',
+  ),
+  VerbatimRule(
+    'h2_subsoil',
+    'activity_other_repair_shrinkable_clay',
+    '{H_OTHER}',
+    '{H2_SUBSOIL}',
+    [
+    ],
+    whenField: 'cb_shrinkable_clay',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_private',
+    'activity_grounds_other_private_road',
+    '{H_OTHER}',
+    '{H2_PRIVATE_ROAD}',
+    [
+    ],
+    whenField: 'cb_private_road',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h3_row',
+    'activity_grounds_other_area_right_of_way',
+    '{H_OTHER_AREA}',
+    '{H3_RIGHT_OF_WAY}',
+    [
+      VerbatimToken(
+        '{H3_RIGHT_OF_WAY_OVER}',
+        options: {
+          'h3r_private_road': 'private road',
+          'h3r_driveway': 'driveway',
+          'h3r_footpath': 'footpath',
+          'h3r_entrance_lobby': 'entrance lobby',
+        },
+        otherCheckbox: 'h3r_other',
+        otherText: 'h3r_other_text',
+        pdfOptions: ['private road', 'driveway', 'footpath', 'entrance lobby'],
+      ),
+    ],
+    pdf:
+        'Right of Way: The property benefits from and/or is subject to shared rights of way over a private road, driveway, footpath, entrance lobby, or other shared access.',
+    whenField: 'cb_h3_row',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h3_lifts',
+    'activity_grounds_other_area_lifts',
+    '{H_OTHER_AREA}',
+    '{H3_LIFTS}',
+    [
+    ],
+    whenField: 'cb_lifts',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h3_flooding',
+    'activity_grounds_other_area_flooding',
+    '{H_OTHER_AREA}',
+    '{H3_FLOODING}',
+    [
+      VerbatimToken(
+        '{H3_FLOOD_PROXIMITY}',
+        options: {
+          'h3f_river': 'river',
+          'h3f_canal': 'canal',
+          'h3f_the_coast': 'the coast',
+          'h3f_low_lying_land': 'low-lying land',
+          'h3f_reservoir': 'reservoir',
+        },
+        pdfOptions: ['river', 'canal', 'the coast', 'low-lying land', 'reservoir'],
+      ),
+    ],
+    pdf:
+        'Flooding: The property is in an area that may be at risk of flooding due to its proximity to a river, canal, the coast, low-lying land, reservoir, other watercourse.',
+    whenField: 'cb_h3_flooding',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h3_emf',
+    'activity_grounds_other_area_emf',
+    '{H_OTHER_AREA}',
+    '{H3_EMF}',
+    [
+      VerbatimToken(
+        '{H3_EMF_SOURCE}',
+        options: {
+          'h3e_electricity_substation': 'electricity substation',
+          'h3e_high_voltage_overhead_power_lines': 'high-voltage overhead power lines',
+          'h3e_pylons': 'pylons',
+        },
+        otherCheckbox: 'h3e_other',
+        otherText: 'h3e_other_text',
+        pdfOptions: ['electricity substation', 'high-voltage overhead power lines', 'pylons'],
+      ),
+    ],
+    pdf:
+        'Electromagnetic Fields (EMF): Electromagnetic Fields: The property is located close to an electricity substation, high-voltage overhead power lines, pylons, other, which may give rise to concerns regarding electromagnetic fields.',
+    whenField: 'cb_h3_emf',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h3_kw_not_inspected',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_KNOTWEED_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Not inspected',
+  ),
+  VerbatimRule(
+    'h3_kw_not_found',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_KNOTWEED_NOT_FOUND}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Not found',
+  ),
+  VerbatimRule(
+    'h3_kw_found',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_KNOTWEED_FOUND}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Found',
+  ),
+  VerbatimRule(
+    'h3_kw_a',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_MANAGEMENT_A}',
+    [
+    ],
+    whenField: 'actv_h3_management',
+    whenValue: 'Management A',
+  ),
+  VerbatimRule(
+    'h3_kw_b',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_MANAGEMENT_B}',
+    [
+    ],
+    whenField: 'actv_h3_management',
+    whenValue: 'Management B',
+  ),
+  VerbatimRule(
+    'h3_kw_c',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_MANAGEMENT_C}',
+    [
+    ],
+    whenField: 'actv_h3_management',
+    whenValue: 'Management C',
+  ),
+  VerbatimRule(
+    'h3_kw_d',
+    'activity_grounds_other_area_knotweed',
+    '{H_OTHER_AREA}',
+    '{H3_MANAGEMENT_D}',
+    [
+    ],
+    whenField: 'actv_h3_management',
+    whenValue: 'Management D',
+  ),
+  VerbatimRule(
+    'i1_intro',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_INTRO}',
+    [
+    ],
+    whenField: 'cb_i1_intro',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_alterations',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_PROPERTY_ALTERATIONS}',
+    [
+    ],
+    whenField: 'cb_i1_alterations',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_new_build',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_NEW_BUILD}',
+    [
+    ],
+    whenField: 'cb_new_build',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_roof',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_ROOF_ALTERATIONS}',
+    [
+    ],
+    whenField: 'cb_i1_roof',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_converted',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_CONVERTED_BUILDING}',
+    [
+    ],
+    whenField: 'cb_converted_building',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_chimney',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_CHIMNEY_BREAST}',
+    [
+    ],
+    whenField: 'cb_i1_chimney',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_windows',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_REPLACEMENT_WINDOWS}',
+    [
+    ],
+    whenField: 'cb_i1_windows',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_electrical',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_ELECTRICAL}',
+    [
+    ],
+    whenField: 'cb_i1_electrical',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_gas',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_GAS}',
+    [
+    ],
+    whenField: 'cb_i1_gas',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_asbestos',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_ASBESTOS}',
+    [
+    ],
+    whenField: 'cb_i1_asbestos',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_flood',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_FLOOD_RISK}',
+    [
+    ],
+    whenField: 'cb_i1_flood',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_mining',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_MINING}',
+    [
+    ],
+    whenField: 'cb_i1_mining',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_trees',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_TREES}',
+    [
+    ],
+    whenField: 'cb_i1_trees',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_row',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_RIGHTS_OF_WAY}',
+    [
+    ],
+    whenField: 'cb_i1_row',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_boundaries',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_BOUNDARIES}',
+    [
+    ],
+    whenField: 'cb_i1_boundaries',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_shared',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_SHARED_FACILITIES}',
+    [
+    ],
+    whenField: 'cb_i1_shared',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_roads',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_PRIVATE_ROADS}',
+    [
+    ],
+    whenField: 'cb_i1_roads',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_drainage',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_DRAINAGE}',
+    [
+    ],
+    whenField: 'cb_i1_drainage',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_leasehold',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_LEASEHOLD}',
+    [
+    ],
+    whenField: 'cb_i1_leasehold',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_freehold',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_FREEHOLD}',
+    [
+    ],
+    whenField: 'cb_i1_freehold',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i1_listed',
+    'activity_issues_regulation',
+    '{ISSUE_REGULATIONS}',
+    '{I1_LISTED_BUILDING}',
+    [
+    ],
+    whenField: 'cb_listed_building',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_intro',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_INTRO}',
+    [
+    ],
+    whenField: 'cb_i2_intro',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_windows',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_WINDOWS_DOORS}',
+    [
+    ],
+    whenField: 'cb_i2_windows',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_boiler',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_BOILER}',
+    [
+    ],
+    whenField: 'cb_i2_boiler',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_structural',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_STRUCTURAL_ALTERATIONS}',
+    [
+    ],
+    whenField: 'cb_i2_structural',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_dpc',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_DPC_TREATMENT}',
+    [
+    ],
+    whenField: 'cb_i2_dpc',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_timber',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_TIMBER_TREATMENT}',
+    [
+    ],
+    whenField: 'cb_i2_timber',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_cavity',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_CAVITY_INSULATION}',
+    [
+    ],
+    whenField: 'cb_i2_cavity',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_spray',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_SPRAY_FOAM}',
+    [
+    ],
+    whenField: 'cb_i2_spray',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_renewable',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_RENEWABLE_ENERGY}',
+    [
+    ],
+    whenField: 'cb_i2_renewable',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i2_others',
+    'activity_issues_glazed_sections',
+    '{ISSUE_GUARANTEES}',
+    '{I2_OTHERS}',
+    [
+    ],
+    whenField: 'cb_i2_others',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_freehold',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_FREEHOLD}',
+    [
+    ],
+    whenField: 'cb_freehold',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_leasehold',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_LEASEHOLD}',
+    [
+    ],
+    whenField: 'cb_leasehold',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_share',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_SHARE_OF_FREEHOLD}',
+    [
+    ],
+    whenField: 'cb_i3_share',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_flying',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_FLYING_FREEHOLD}',
+    [
+    ],
+    whenField: 'cb_i3_flying',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_road',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_PRIVATE_ROAD}',
+    [
+    ],
+    whenField: 'cb_private_road',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_row',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_RIGHTS_OF_WAY}',
+    [
+    ],
+    whenField: 'cb_right_of_way',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_party',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_PARTY_WALL}',
+    [
+    ],
+    whenField: 'cb_party_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_tenanted',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_TENANTED}',
+    [
+    ],
+    whenField: 'cb_tenanted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'i3_general',
+    'activity_issues_other_matters',
+    '{ISSUE_OTHER_MATTERS}',
+    '{I3_GENERAL_LEGAL_ENQUIRIES}',
+    [
+    ],
+    whenField: 'cb_i3_general',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_structural',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_STRUCTURAL_MOVEMENT}',
+    [
+      VerbatimToken(
+        '{J1_MOVEMENT_KIND}',
+        options: {
+          'j1_structural_0_historic': 'historic',
+          'j1_structural_0_localised': 'localised',
+          'j1_structural_0_recurring': 'recurring',
+          'j1_structural_0_progressive': 'progressive',
+        },
+        pdfOptions: ['historic', 'localised', 'recurring', 'progressive'],
+      ),
+    ],
+    pdf:
+        'Structural Movement: Evidence of historic, localised, recurring, progressive movement, including possible structural was observed.',
+    whenField: 'cb_j1_structural',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_water',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_WATER_PENETRATION}',
+    [
+      VerbatimToken(
+        '{J1_WATER_SOURCE}',
+        options: {
+          'j1w_roof_leakage': 'roof leakage',
+          'j1w_penetrating_damp': 'penetrating damp',
+          'j1w_plumbing_leakage': 'plumbing leakage',
+          'j1w_condensation': 'condensation',
+          'j1w_localised_dampness': 'localised dampness',
+        },
+        pdfOptions: ['roof leakage', 'penetrating damp', 'plumbing leakage', 'condensation', 'localised dampness'],
+      ),
+    ],
+    pdf:
+        'Water Penetration: Evidence of roof leakage, penetrating damp, plumbing leakage, condensation, and localised dampness was observed.',
+    whenField: 'cb_j1_water',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_timber',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_TIMBER_DECAY}',
+    [
+      VerbatimToken(
+        '{J1_TIMBER_DECAY_KIND}',
+        options: {
+          'j1_timber_0_wet_rot': 'wet rot',
+          'j1_timber_0_dry_rot': 'dry rot',
+          'j1_timber_0_localised_timber_decay': 'localised timber decay',
+        },
+        pdfOptions: ['wet rot', 'dry rot', 'localised timber decay'],
+      ),
+    ],
+    pdf:
+        'Timber Decay: Evidence of wet rot, dry rot, localised timber decay was observed.',
+    whenField: 'cb_j1_timber',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_woodboring',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_WOOD_BORING_INSECTS}',
+    [
+    ],
+    whenField: 'cb_j1_woodboring',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_condensation',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_CONDENSATION}',
+    [
+      VerbatimToken(
+        '{J1_CONDENSATION_KIND}',
+        options: {
+          'j1_condensation_0_condensation': 'condensation',
+          'j1_condensation_0_surface_mould_growth': 'surface mould growth',
+          'j1_condensation_0_limited_ventilation': 'limited ventilation',
+        },
+        pdfOptions: ['condensation', 'surface mould growth', 'limited ventilation'],
+      ),
+    ],
+    pdf:
+        'Condensation: Evidence of condensation, surface mould growth, limited ventilation was observed.',
+    whenField: 'cb_j1_condensation',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_drainage',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_DRAINAGE}',
+    [
+      VerbatimToken(
+        '{J1_DRAINAGE_KIND}',
+        options: {
+          'j1_drainage_0_blocked_gullies': 'blocked gullies',
+          'j1_drainage_0_standing_water': 'standing water',
+          'j1_drainage_0_poor_surface_drainage': 'poor surface drainage',
+          'j1_drainage_0_localised_ponding': 'localised ponding',
+        },
+        pdfOptions: ['blocked gullies', 'standing water', 'poor surface drainage', 'localised ponding'],
+      ),
+    ],
+    pdf:
+        'Drainage: Evidence of blocked gullies, standing water, poor surface drainage, localised ponding was observed.',
+    whenField: 'cb_j1_drainage',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_subsidence',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_SIGNIFICANT_SUBSIDENCE}',
+    [
+    ],
+    whenField: 'cb_j1_subsidence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j1_trees',
+    'activity_risks_risk_to_building_',
+    '{RISK_TO_BUILDING}',
+    '{J1_TREE_DEFECTS}',
+    [
+    ],
+    whenField: 'cb_j1_trees',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e1',
+    'activity_outside_property_chimney_main_screen',
+    '@chimney',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e2',
+    'activity_outside_property_roof_covering_main',
+    '{E_ROOF_COVERING}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e3',
+    'activity_outside_property_rainwater_goods_main_screen',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e4',
+    'activity_outside_property_main_walls_main_screen',
+    '{E_MAIN_WALLS}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e8',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_e9',
+    'activity_outside_property_other_main_screen',
+    '{E_OTHER_AREA}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'flat_f1',
+    'activity_inside_property_roof_structure_main_screen',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{FLAT_MANAGEMENT}',
+    [
+    ],
+    whenField: 'cb_property_is_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a1_weather',
+    'activity_property_weather',
+    '{D_WEATHER}',
+    '{A1_WEATHER}',
+    [
+      VerbatimToken(
+        '{A1_WEATHER_NOW}',
+        dropdown: 'android_material_design_spinner',
+        dropdownOptions: ['Dry', 'Wet', 'Overcast', 'Sunny', 'Cold', 'Windy', 'Rainy', 'Snowing'],
+        lower: true,
+        pdfOptions: ['dry', 'wet', 'overcast', 'sunny', 'cold', 'windy', 'rainy', 'snowing'],
+      ),
+      VerbatimToken(
+        '{A1_WEATHER_BEFORE}',
+        dropdown: 'android_material_design_spinner2',
+        dropdownOptions: ['Dry', 'Wet', 'Overcast', 'Sunny', 'Cold', 'Windy', 'Rainy', 'Snowing'],
+        lower: true,
+        pdfOptions: ['dry', 'wet', 'overcast', 'sunny', 'cold', 'windy', 'rainy', 'snowing'],
+      ),
+    ],
+    pdf:
+        'Weather: At the time of my inspection, the weather was dry, wet, overcast, sunny, cold, windy, rainy, snowing, following a period of dry, wet, overcast, sunny, cold, windy, rainy, snowing weather.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Dry',
+    whenAny: [['android_material_design_spinner', 'Wet'], ['android_material_design_spinner', 'Overcast'], ['android_material_design_spinner', 'Sunny'], ['android_material_design_spinner', 'Cold'], ['android_material_design_spinner', 'Windy'], ['android_material_design_spinner', 'Rainy'], ['android_material_design_spinner', 'Snowing']],
+  ),
+  VerbatimRule(
+    'a1_status',
+    'activity_property_status',
+    '{D_PROPERTY_STATUS}',
+    '{A1_STATUS}',
+    [
+      VerbatimToken(
+        '{A1_OCCUPANCY}',
+        dropdown: 'android_material_design_spinner',
+        dropdownOptions: ['Occupied', 'Vacant', 'Partly occupied'],
+        lower: true,
+        pdfOptions: ['occupied', 'vacant', 'partly occupied'],
+      ),
+      VerbatimToken(
+        '{A1_FURNISHING}',
+        dropdown: 'android_material_design_spinner2',
+        dropdownOptions: ['Fully furnished', 'Partly furnished', 'Unfurnished'],
+        lower: true,
+        pdfOptions: ['fully furnished', 'partly furnished', 'unfurnished'],
+      ),
+      VerbatimToken(
+        '{A1_FLOOR_COVERING}',
+        dropdown: 'android_material_design_spinner3',
+        dropdownOptions: ['Fully covered', 'Partly covered', 'Uncovered'],
+        lower: true,
+        pdfOptions: ['fully covered', 'partly covered', 'uncovered'],
+      ),
+    ],
+    pdf:
+        'Status: At the time of my inspection, the property was occupied, vacant, or partly occupied.',
+    pdfMore: [
+      'The property was fully furnished, partly furnished, unfurnished, and floor surfaces were fully covered, partly covered, uncovered, which limited inspection of concealed areas.',
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Occupied',
+    whenAny: [['android_material_design_spinner', 'Vacant'], ['android_material_design_spinner', 'Partly occupied']],
+  ),
+  VerbatimRule(
+    'a1_orientation',
+    'activity_property_facing',
+    '{D_PROPERTY_FACING}',
+    '{A1_ORIENTATION}',
+    [
+      VerbatimToken(
+        '{A1_FACING}',
+        dropdown: 'android_material_design_spinner',
+        dropdownOptions: ['North', 'North-east', 'East', 'South-east', 'South', 'South-west', 'West', 'North-west'],
+        lower: true,
+        pdfOptions: ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'],
+      ),
+    ],
+    pdf:
+        'Orientation: The front elevation of the property faces approximately north, north-east, east, south-east, south, south-west, west, north-west.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'North',
+    whenAny: [['android_material_design_spinner', 'North-east'], ['android_material_design_spinner', 'East'], ['android_material_design_spinner', 'South-east'], ['android_material_design_spinner', 'South'], ['android_material_design_spinner', 'South-west'], ['android_material_design_spinner', 'West'], ['android_material_design_spinner', 'North-west']],
+  ),
+  VerbatimRule(
+    'a2_type',
+    'activity_property_type',
+    '{D_PROPERTY_TYPE}',
+    '{A2_PROPERTY_TYPE}',
+    [
+      VerbatimToken(
+        '{A2_TYPE}',
+        options: {
+          'a2t_detached': 'detached',
+          'a2t_semi_detached': 'semi-detached',
+          'a2t_end_of_terrace': 'end-of-terrace',
+          'a2t_mid_terrace': 'mid-terrace',
+          'a2t_purpose_built_flat': 'purpose-built flat',
+          'a2t_converted_flat': 'converted flat',
+          'a2t_maisonette': 'maisonette',
+          'a2t_bungalow': 'bungalow',
+          'a2t_cottage': 'cottage',
+        },
+        otherCheckbox: 'a2t_other',
+        otherText: 'a2t_other_text',
+        pdfOptions: ['detached', 'semi-detached', 'end-of-terrace', 'mid-terrace', 'purpose-built flat', 'converted flat', 'maisonette', 'bungalow', 'cottage'],
+      ),
+      VerbatimToken(
+        '{A2_BEDROOMS}',
+        dropdown: 'actv_a2_bedrooms',
+        dropdownOptions: ['One', 'Two', 'Three', 'Four', 'Five', 'Six or more'],
+        lower: true,
+        pdfOptions: ['one', 'two', 'three', 'four', 'five', 'six or more'],
+      ),
+    ],
+    pdf:
+        'Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage, other providing one, two, three, four, five, six or more bedrooms.',
+    whenField: 'cb_a2_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a2_year_exact',
+    'activity_property_built_year',
+    '{D_YEAR_BUILT}',
+    '{A2_YEAR_EXACT}',
+    [
+      VerbatimToken(
+        '{A2_YEAR}',
+        text: 'android_material_design_spinner',
+      ),
+    ],
+    pdf:
+        'Year built: The property is understood to have been built in (enter year), pre-1900, 1900-1929, 1930-1949, 1950-1969, 1970-1989, 1990-2009, 2010 onwards, or the exact construction date is unknown.',
+    whenField: 'cb_a2_year_exact',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a2_year_band',
+    'activity_property_built_year',
+    '{D_YEAR_BUILT}',
+    '{A2_YEAR_BAND}',
+    [
+      VerbatimToken(
+        '{A2_BAND}',
+        dropdown: 'actv_a2_year_band',
+        dropdownOptions: ['pre-1900', '1900– 1929', '1930–1949', '1950–1969', '1970–1989', '1990–2009', '2010 onwards', 'the exact construction date is unknown'],
+        pdfOptions: ['pre-1900', '1900– 1929', '1930–1949', '1950–1969', '1970–1989', '1990–2009', '2010 onwards', 'the exact construction date is unknown'],
+      ),
+    ],
+    pdf:
+        'Year built: The property is understood to have been built in (enter year), pre-1900, 1900-1929, 1930-1949, 1950-1969, 1970-1989, 1990-2009, 2010 onwards, or the exact construction date is unknown.',
+    whenField: 'actv_a2_year_band',
+    whenValue: 'pre-1900',
+    whenAny: [['actv_a2_year_band', '1900– 1929'], ['actv_a2_year_band', '1930–1949'], ['actv_a2_year_band', '1950–1969'], ['actv_a2_year_band', '1970–1989'], ['actv_a2_year_band', '1990–2009'], ['actv_a2_year_band', '2010 onwards'], ['actv_a2_year_band', 'the exact construction date is unknown']],
+  ),
+  VerbatimRule(
+    'a2_not_extended',
+    'activity_property_extended',
+    '{D_EXTENDED}',
+    '{A2_NOT_EXTENDED}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Not extended',
+  ),
+  VerbatimRule(
+    'a2_extended',
+    'activity_property_extended',
+    '{D_EXTENDED}',
+    '{A2_EXTENDED}',
+    [
+      VerbatimToken(
+        '{A2_EXTENSION}',
+        options: {
+          'a2e_side': 'side',
+          'a2e_rear': 'rear',
+          'a2e_front': 'front',
+          'a2e_single_storey': 'single-storey',
+          'a2e_two_storey': 'two-storey',
+          'a2e_roof': 'roof',
+          'a2e_loft': 'loft',
+        },
+        pdfOptions: ['side', 'rear', 'front', 'single-storey', 'two-storey', 'roof', 'loft'],
+      ),
+    ],
+    pdf:
+        'Extended: The property has been extended to provide side, rear, front, single-storey, two-storey, roof, loft accommodation.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Extended',
+  ),
+  VerbatimRule(
+    'a2_not_converted',
+    'activity_property_converted',
+    '{D_CONVERTED}',
+    '{A2_NOT_CONVERTED}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Not converted',
+  ),
+  VerbatimRule(
+    'a2_converted',
+    'activity_property_converted',
+    '{D_CONVERTED}',
+    '{A2_CONVERTED}',
+    [
+      VerbatimToken(
+        '{A2_PRIOR_TYPE}',
+        options: {
+          'a2c_detached_house': 'detached house',
+          'a2c_semi_detached_house': 'semi-detached house',
+          'a2c_mid_terrace_house': 'mid-terrace house',
+          'a2c_end_terrace_house': 'end-terrace house',
+        },
+        otherCheckbox: 'a2c_other',
+        otherText: 'a2c_other_text',
+        pdfOptions: ['detached house', 'semi-detached house', 'mid-terrace house', 'end-terrace house'],
+      ),
+    ],
+    pdf:
+        'The property was a detached house, semi-detached house, mid-terrace house, end-terrace house, other, which has been converted to self-contained units.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Converted',
+  ),
+  VerbatimRule(
+    'a2_known_date',
+    'activity_property_converted',
+    '{D_CONVERTED}',
+    '{A2_KNOWN_DATE}',
+    [
+      VerbatimToken(
+        '{A2_YEAR_CONVERTED}',
+        text: 'textView3',
+      ),
+    ],
+    pdf:
+        'Known date: The year of conversion is (YYYY).',
+    whenField: 'actv_a2_conversion_date',
+    whenValue: 'Known date',
+  ),
+  VerbatimRule(
+    'a2_unknown_date',
+    'activity_property_converted',
+    '{D_CONVERTED}',
+    '{A2_UNKNOWN_DATE}',
+    [
+    ],
+    whenField: 'actv_a2_conversion_date',
+    whenValue: 'Unknown date',
+  ),
+  VerbatimRule(
+    'a2_flat',
+    'activity_property_flate',
+    '{D_FLAT_INFO}',
+    '{A2_FLAT_INFORMATION}',
+    [
+      VerbatimToken(
+        '{A2_FLOOR}',
+        dropdown: 'actv_a2_floor',
+        dropdownOptions: ['Lower ground floor', 'Ground floor', 'First floor', 'Second floor', 'Third floor', 'Fourth floor'],
+        lower: true,
+        pdfOptions: ['lower ground floor', 'ground floor', 'first floor', 'second floor', 'third floor', 'fourth floor'],
+      ),
+      VerbatimToken(
+        '{A2_STOREYS}',
+        dropdown: 'actv_a2_storeys',
+        dropdownOptions: ['One', 'Two', 'Three', 'Four'],
+        lower: true,
+        pdfOptions: ['one', 'two', 'three', 'four'],
+      ),
+      VerbatimToken(
+        '{A2_ACCESS}',
+        dropdown: 'actv_a2_access',
+        dropdownOptions: ['Private door', 'Communal door', 'Communal door with entry system'],
+        lower: true,
+        pdfOptions: ['private door', 'communal door', 'communal door with entry system'],
+      ),
+      VerbatimToken(
+        '{A2_ELEVATION}',
+        dropdown: 'actv_a2_elevation',
+        dropdownOptions: ['Front', 'Side', 'Rear'],
+        lower: true,
+        pdfOptions: ['front', 'side', 'rear'],
+      ),
+    ],
+    pdf:
+        'Flat information: The property is located on the lower ground floor, ground floor, first floor, second floor, third floor, fourth floor, other floor of a one, two, three, four, other storey building.',
+    pdfMore: [
+      'The property is accessed via a private door, communal door, communal door with entry system, other to the front, side, rear, elevation of the property.',
+    ],
+    whenField: 'cb_a2_flat',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_type',
+    'activity_property_construction',
+    '{D_CONSTRUCTION}',
+    '{A3_TYPE}',
+    [
+      VerbatimToken(
+        '{A3_CONSTRUCTION_TYPE}',
+        options: {
+          'a3_type_0_traditional_masonry': 'traditional masonry',
+          'a3_type_0_solid_wall': 'solid wall',
+          'a3_type_0_cavity_wall': 'cavity wall',
+          'a3_type_0_timber_frame': 'timber frame',
+          'a3_type_0_steel_frame': 'steel frame',
+          'a3_type_0_concrete_wall': 'concrete wall',
+          'a3_type_0_precast_concrete_panels': 'precast concrete panels',
+          'a3_type_0_system_built': 'system-built',
+        },
+        otherCheckbox: 'a3_type_0_other',
+        otherText: 'a3_type_0_other_text',
+        pdfOptions: ['traditional masonry', 'solid wall', 'cavity wall', 'timber frame', 'steel frame', 'concrete wall', 'precast concrete panels', 'system-built'],
+      ),
+    ],
+    pdf:
+        'Type: The property is believed to be constructed using traditional masonry, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels, system-built, other construction.',
+    whenField: 'cb_a3_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_visible',
+    'activity_property_construction',
+    '{D_CONSTRUCTION}',
+    '{A3_VISIBLE_ONLY}',
+    [
+    ],
+    whenField: 'cb_a3_visible',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_modern',
+    'activity_property_construction',
+    '{D_CONSTRUCTION}',
+    '{A3_MODERN_BUILDING_DESIGN}',
+    [
+    ],
+    whenField: 'a3_type_0_timber_frame',
+    whenValue: 'true',
+    whenAny: [['a3_type_0_steel_frame', 'true']],
+  ),
+  VerbatimRule(
+    'a3_concrete',
+    'activity_property_construction',
+    '{D_CONSTRUCTION}',
+    '{A3_CONCRETE_ADVISORY}',
+    [
+    ],
+    whenField: 'a3_type_0_concrete_wall',
+    whenValue: 'true',
+    whenAny: [['a3_type_0_precast_concrete_panels', 'true']],
+  ),
+  VerbatimRule(
+    'a3_roof_type',
+    'activity_property_roof',
+    '{D_CONSTRUCTION}',
+    '{A3_ROOF_TYPE}',
+    [
+      VerbatimToken(
+        '{A3_ROOF_FORM}',
+        options: {
+          'a3_roof_type_0_pitched': 'pitched',
+          'a3_roof_type_0_flat': 'flat',
+          'a3_roof_type_0_mansard': 'mansard',
+        },
+        pdfOptions: ['pitched', 'flat', 'mansard'],
+      ),
+      VerbatimToken(
+        '{A3_ROOF_STRUCTURE}',
+        options: {
+          'a3_roof_type_1_traditional_cut_timber': 'traditional cut timber',
+          'a3_roof_type_1_prefabricated_trussed_rafters': 'prefabricated trussed rafters',
+        },
+        otherCheckbox: 'a3_roof_type_1_other',
+        otherText: 'a3_roof_type_1_other_text',
+        pdfOptions: ['traditional cut timber', 'prefabricated trussed rafters'],
+      ),
+    ],
+    pdf:
+        'Roof type: The main roof is of pitched, flat, mansard construction formed with traditional cut timber, prefabricated trussed rafters, other structural members.',
+    whenField: 'cb_a3_roof_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_roof_cover',
+    'activity_property_roof',
+    '{D_CONSTRUCTION}',
+    '{A3_ROOF_COVER}',
+    [
+      VerbatimToken(
+        '{A3_ROOF_COVER}',
+        options: {
+          'a3_roof_cover_0_clay_tiles': 'clay tiles',
+          'a3_roof_cover_0_concrete_tiles': 'concrete tiles',
+          'a3_roof_cover_0_natural_slate': 'natural slate',
+          'a3_roof_cover_0_artificial_slate': 'artificial slate',
+          'a3_roof_cover_0_fibre_cement_slates': 'fibre cement slates',
+          'a3_roof_cover_0_metal_sheeting': 'metal sheeting',
+          'a3_roof_cover_0_mineral_felt': 'mineral felt',
+          'a3_roof_cover_0_rubber_membrane': 'rubber membrane',
+          'a3_roof_cover_0_single_ply_membrane': 'single-ply membrane',
+        },
+        otherCheckbox: 'a3_roof_cover_0_other',
+        otherText: 'a3_roof_cover_0_other_text',
+        pdfOptions: ['clay tiles', 'concrete tiles', 'natural slate', 'artificial slate', 'fibre cement slates', 'metal sheeting', 'mineral felt', 'rubber membrane', 'single-ply membrane'],
+      ),
+    ],
+    pdf:
+        'Roof cover: The roof covering is formed in clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, metal sheeting, mineral felt, rubber membrane, single-ply membrane, other.',
+    whenField: 'cb_a3_roof_cover',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_ext_walls',
+    'activity_extended_wall',
+    '{D_CONSTRUCTION}',
+    '{A3_EXTERNAL_WALLS}',
+    [
+      VerbatimToken(
+        '{A3_EXTERNAL_WALLS}',
+        options: {
+          'a3_ext_walls_0_solid_brick': 'solid brick',
+          'a3_ext_walls_0_cavity_brick': 'cavity brick',
+          'a3_ext_walls_0_stone': 'stone',
+          'a3_ext_walls_0_timber_frame': 'timber frame',
+          'a3_ext_walls_0_steel_frame': 'steel frame',
+          'a3_ext_walls_0_rendered_masonry': 'rendered masonry',
+        },
+        otherCheckbox: 'a3_ext_walls_0_other',
+        otherText: 'a3_ext_walls_0_other_text',
+        pdfOptions: ['solid brick', 'cavity brick', 'stone', 'timber frame', 'steel frame', 'rendered masonry'],
+      ),
+    ],
+    pdf:
+        'External walls: The external walls are constructed of solid brick, cavity brick, stone, timber frame, steel frame, rendered masonry, other construction.',
+    whenField: 'cb_a3_ext_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_int_walls',
+    'activity_internal_wall',
+    '{D_CONSTRUCTION}',
+    '{A3_INTERNAL_WALLS}',
+    [
+      VerbatimToken(
+        '{A3_INTERNAL_WALLS}',
+        options: {
+          'a3_int_walls_0_solid_masonry': 'solid masonry',
+          'a3_int_walls_0_timber_stud_partitions': 'timber stud partitions',
+          'a3_int_walls_0_lath_and_plaster': 'lath and plaster',
+        },
+        otherCheckbox: 'a3_int_walls_0_other',
+        otherText: 'a3_int_walls_0_other_text',
+        pdfOptions: ['solid masonry', 'timber stud partitions', 'lath and plaster'],
+      ),
+    ],
+    pdf:
+        'Internal walls: Internal walls are formed in solid masonry, timber stud partitions, lath and plaster, other.',
+    whenField: 'cb_a3_int_walls',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_floors',
+    'activity_construction_floor',
+    '{D_CONSTRUCTION}',
+    '{A3_FLOORS}',
+    [
+      VerbatimToken(
+        '{A3_FLOORS}',
+        options: {
+          'a3_floors_0_solid_concrete': 'solid concrete',
+          'a3_floors_0_suspended_timber': 'suspended timber',
+          'a3_floors_0_beam_and_block': 'beam and block',
+        },
+        otherCheckbox: 'a3_floors_0_other',
+        otherText: 'a3_floors_0_other_text',
+        pdfOptions: ['solid concrete', 'suspended timber', 'beam and block'],
+      ),
+    ],
+    pdf:
+        'Floors: Floors are of solid concrete, suspended timber, beam and block, other construction.',
+    whenField: 'cb_a3_floors',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_windows',
+    'activity_construction_window',
+    '{D_CONSTRUCTION}',
+    '{A3_WINDOWS}',
+    [
+      VerbatimToken(
+        '{A3_WINDOW_FRAMES}',
+        options: {
+          'a3_windows_0_timber': 'timber',
+          'a3_windows_0_pvcu': 'PVCu',
+          'a3_windows_0_aluminium': 'aluminium',
+          'a3_windows_0_steel': 'steel',
+        },
+        otherCheckbox: 'a3_windows_0_other',
+        otherText: 'a3_windows_0_other_text',
+        pdfOptions: ['timber', 'PVCu', 'aluminium', 'steel'],
+      ),
+      VerbatimToken(
+        '{A3_GLAZING}',
+        options: {
+          'a3_windows_1_single': 'single',
+          'a3_windows_1_double': 'double',
+          'a3_windows_1_triple_glazing': 'triple glazing',
+          'a3_windows_1_secondary_glazing': 'secondary glazing',
+        },
+        pdfOptions: ['single', 'double', 'triple glazing', 'secondary glazing'],
+      ),
+    ],
+    pdf:
+        'Windows: Windows are fitted with timber, PVCu, aluminium, steel, other frames incorporating single, double, triple glazing, secondary glazing, where applicable.',
+    whenField: 'cb_a3_windows',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_listed',
+    'activity_listed_building__listed_building',
+    '{D_CONSTRUCTION}',
+    '{A3_LISTED_BUILDING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Yes',
+  ),
+  VerbatimRule(
+    'a3_services',
+    'activity_other_service',
+    '{D_CONSTRUCTION}',
+    '{A3_OTHER_SERVICES}',
+    [
+      VerbatimToken(
+        '{A3_SERVICES}',
+        options: {
+          'ch1': 'photovoltaic (solar PV) panels',
+          'ch2': 'solar water heating panels',
+          'a3_os_inverter': 'an inverter',
+          'a3_os_battery': 'battery storage',
+        },
+        otherCheckbox: 'a3_os_other',
+        otherText: 'a3_os_other_text',
+        pdfOptions: ['photovoltaic (solar PV) panels', 'solar water heating panels', 'an inverter', 'battery storage'],
+      ),
+    ],
+    pdf:
+        'Other services: The property is fitted with photovoltaic (solar PV) panels, solar water heating panels, an inverter, battery storage, other renewable energy installations.',
+    whenField: 'cb_a3_services',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a3_energy',
+    'activity_energy_effiency',
+    '{D_CONSTRUCTION}',
+    '{A3_ENERGY_PERFORMANCE}',
+    [
+      VerbatimToken(
+        '{A3_EE_RATING}',
+        dropdown: 'android_material_design_spinner',
+        dropdownOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        pdfOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+      ),
+      VerbatimToken(
+        '{A3_EE_POTENTIAL}',
+        dropdown: 'android_material_design_spinner2',
+        dropdownOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        pdfOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+      ),
+    ],
+    pdf:
+        'Energy performance: According to the available Energy Performance Certificate: Energy Efficiency Rating: A, B, C, D, E, F, or G.',
+    pdfMore: [
+      'Potential Rating: A, B, C, D, E, F, or G.',
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'A',
+    whenAny: [['android_material_design_spinner', 'B'], ['android_material_design_spinner', 'C'], ['android_material_design_spinner', 'D'], ['android_material_design_spinner', 'E'], ['android_material_design_spinner', 'F'], ['android_material_design_spinner', 'G']],
+  ),
+  VerbatimRule(
+    'a3_listed_alias',
+    'activity_listed_building',
+    '{D_CONSTRUCTION}',
+    '{A3_LISTED_BUILDING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Yes',
+  ),
+  VerbatimRule(
+    'a4_topo',
+    'activity_topography',
+    '{D_GROUND}',
+    '{A4_TOPOGRAPHY}',
+    [
+      VerbatimToken(
+        '{A4_SLOPE}',
+        dropdown: 'android_material_design_spinner',
+        dropdownOptions: ['Level', 'Gently sloping', 'Moderately sloping', 'Steeply sloping'],
+        lower: true,
+        pdfOptions: ['level', 'gently sloping', 'moderately sloping', 'steeply sloping'],
+      ),
+    ],
+    pdf:
+        'Topology: The property occupies level, gently sloping, moderately sloping, steeply sloping ground.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Level',
+    whenAny: [['android_material_design_spinner', 'Gently sloping'], ['android_material_design_spinner', 'Moderately sloping'], ['android_material_design_spinner', 'Steeply sloping']],
+  ),
+  VerbatimRule(
+    'front_type',
+    'activity_front_garden',
+    '{D_GROUND}',
+    '{A4_FRONT_GARDEN}',
+    [
+      VerbatimToken(
+        '{A4_FRONT_FINISHES}',
+        options: {
+          'front_type_0_lawn': 'lawn',
+          'front_type_0_artificial_lawn': 'artificial lawn',
+          'front_type_0_paving': 'paving',
+          'front_type_0_timber_decking': 'timber decking',
+          'front_type_0_gravel': 'gravel',
+          'front_type_0_stones': 'stones',
+          'front_type_0_hardstanding': 'hardstanding',
+        },
+        otherCheckbox: 'front_type_0_other',
+        otherText: 'front_type_0_other_text',
+        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
+      ),
+    ],
+    pdf:
+        'Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
+    whenField: 'cb_front_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'front_fence',
+    'activity_front_garden',
+    '{D_GROUND}',
+    '{A4_FRONT_FENCING}',
+    [
+      VerbatimToken(
+        '{A4_FRONT_BOUNDARIES}',
+        options: {
+          'front_fence_0_timber_fencing': 'timber fencing',
+          'front_fence_0_brick_wall': 'brick wall',
+          'front_fence_0_block_wall': 'block wall',
+          'front_fence_0_hedging': 'hedging',
+          'front_fence_0_wire_mesh': 'wire mesh',
+          'front_fence_0_concrete_sections': 'concrete sections',
+          'front_fence_0_metal_railings': 'metal railings',
+        },
+        otherCheckbox: 'front_fence_0_other',
+        otherText: 'front_fence_0_other_text',
+        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
+      ),
+    ],
+    pdf:
+        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
+    whenField: 'cb_front_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'rear_type',
+    'activity_rear_garden',
+    '{D_GROUND}',
+    '{A4_REAR_GARDEN}',
+    [
+      VerbatimToken(
+        '{A4_REAR_FINISHES}',
+        options: {
+          'rear_type_0_lawn': 'lawn',
+          'rear_type_0_artificial_lawn': 'artificial lawn',
+          'rear_type_0_paving': 'paving',
+          'rear_type_0_timber_decking': 'timber decking',
+          'rear_type_0_gravel': 'gravel',
+          'rear_type_0_stones': 'stones',
+          'rear_type_0_hardstanding': 'hardstanding',
+        },
+        otherCheckbox: 'rear_type_0_other',
+        otherText: 'rear_type_0_other_text',
+        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
+      ),
+    ],
+    pdf:
+        'Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
+    whenField: 'cb_rear_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'rear_fence',
+    'activity_rear_garden',
+    '{D_GROUND}',
+    '{A4_REAR_FENCING}',
+    [
+      VerbatimToken(
+        '{A4_REAR_BOUNDARIES}',
+        options: {
+          'rear_fence_0_timber_fencing': 'timber fencing',
+          'rear_fence_0_brick_wall': 'brick wall',
+          'rear_fence_0_block_wall': 'block wall',
+          'rear_fence_0_hedging': 'hedging',
+          'rear_fence_0_wire_mesh': 'wire mesh',
+          'rear_fence_0_concrete_sections': 'concrete sections',
+          'rear_fence_0_metal_railings': 'metal railings',
+        },
+        otherCheckbox: 'rear_fence_0_other',
+        otherText: 'rear_fence_0_other_text',
+        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
+      ),
+    ],
+    pdf:
+        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
+    whenField: 'cb_rear_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'communal_type',
+    'activity_communal_garden',
+    '{D_GROUND}',
+    '{A4_COMMUNAL_GARDEN}',
+    [
+      VerbatimToken(
+        '{A4_COMMUNAL_FINISHES}',
+        options: {
+          'communal_type_0_lawn': 'lawn',
+          'communal_type_0_artificial_lawn': 'artificial lawn',
+          'communal_type_0_paving': 'paving',
+          'communal_type_0_timber_decking': 'timber decking',
+          'communal_type_0_gravel': 'gravel',
+          'communal_type_0_stones': 'stones',
+          'communal_type_0_hardstanding': 'hardstanding',
+        },
+        otherCheckbox: 'communal_type_0_other',
+        otherText: 'communal_type_0_other_text',
+        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
+      ),
+    ],
+    pdf:
+        'Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
+    whenField: 'cb_communal_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'communal_fence',
+    'activity_communal_garden',
+    '{D_GROUND}',
+    '{A4_COMMUNAL_FENCING}',
+    [
+      VerbatimToken(
+        '{A4_COMMUNAL_BOUNDARIES}',
+        options: {
+          'communal_fence_0_timber_fencing': 'timber fencing',
+          'communal_fence_0_brick_wall': 'brick wall',
+          'communal_fence_0_block_wall': 'block wall',
+          'communal_fence_0_hedging': 'hedging',
+          'communal_fence_0_wire_mesh': 'wire mesh',
+          'communal_fence_0_concrete_sections': 'concrete sections',
+          'communal_fence_0_metal_railings': 'metal railings',
+        },
+        otherCheckbox: 'communal_fence_0_other',
+        otherText: 'communal_fence_0_other_text',
+        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
+      ),
+    ],
+    pdf:
+        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
+    whenField: 'cb_communal_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'gg_front_type',
+    'activity_garden',
+    '{D_GROUND}',
+    '{A4_GG_FRONT_GARDEN}',
+    [
+      VerbatimToken(
+        '{A4_GG_FRONT_FINISHES}',
+        options: {
+          'gg_front_type_0_lawn': 'lawn',
+          'gg_front_type_0_artificial_lawn': 'artificial lawn',
+          'gg_front_type_0_paving': 'paving',
+          'gg_front_type_0_timber_decking': 'timber decking',
+          'gg_front_type_0_gravel': 'gravel',
+          'gg_front_type_0_stones': 'stones',
+          'gg_front_type_0_hardstanding': 'hardstanding',
+        },
+        otherCheckbox: 'gg_front_type_0_other',
+        otherText: 'gg_front_type_0_other_text',
+        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
+      ),
+    ],
+    pdf:
+        'Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
+    whenField: 'cb_gg_front_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'gg_front_fence',
+    'activity_garden',
+    '{D_GROUND}',
+    '{A4_GG_FRONT_FENCING}',
+    [
+      VerbatimToken(
+        '{A4_GG_FRONT_BOUNDARIES}',
+        options: {
+          'gg_front_fence_0_timber_fencing': 'timber fencing',
+          'gg_front_fence_0_brick_wall': 'brick wall',
+          'gg_front_fence_0_block_wall': 'block wall',
+          'gg_front_fence_0_hedging': 'hedging',
+          'gg_front_fence_0_wire_mesh': 'wire mesh',
+          'gg_front_fence_0_concrete_sections': 'concrete sections',
+          'gg_front_fence_0_metal_railings': 'metal railings',
+        },
+        otherCheckbox: 'gg_front_fence_0_other',
+        otherText: 'gg_front_fence_0_other_text',
+        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
+      ),
+    ],
+    pdf:
+        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
+    whenField: 'cb_gg_front_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'gg_rear_type',
+    'activity_garden',
+    '{D_GROUND}',
+    '{A4_GG_REAR_GARDEN}',
+    [
+      VerbatimToken(
+        '{A4_GG_REAR_FINISHES}',
+        options: {
+          'gg_rear_type_0_lawn': 'lawn',
+          'gg_rear_type_0_artificial_lawn': 'artificial lawn',
+          'gg_rear_type_0_paving': 'paving',
+          'gg_rear_type_0_timber_decking': 'timber decking',
+          'gg_rear_type_0_gravel': 'gravel',
+          'gg_rear_type_0_stones': 'stones',
+          'gg_rear_type_0_hardstanding': 'hardstanding',
+        },
+        otherCheckbox: 'gg_rear_type_0_other',
+        otherText: 'gg_rear_type_0_other_text',
+        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
+      ),
+    ],
+    pdf:
+        'Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
+    whenField: 'cb_gg_rear_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'gg_rear_fence',
+    'activity_garden',
+    '{D_GROUND}',
+    '{A4_GG_REAR_FENCING}',
+    [
+      VerbatimToken(
+        '{A4_GG_REAR_BOUNDARIES}',
+        options: {
+          'gg_rear_fence_0_timber_fencing': 'timber fencing',
+          'gg_rear_fence_0_brick_wall': 'brick wall',
+          'gg_rear_fence_0_block_wall': 'block wall',
+          'gg_rear_fence_0_hedging': 'hedging',
+          'gg_rear_fence_0_wire_mesh': 'wire mesh',
+          'gg_rear_fence_0_concrete_sections': 'concrete sections',
+          'gg_rear_fence_0_metal_railings': 'metal railings',
+        },
+        otherCheckbox: 'gg_rear_fence_0_other',
+        otherText: 'gg_rear_fence_0_other_text',
+        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
+      ),
+    ],
+    pdf:
+        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
+    whenField: 'cb_gg_rear_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'gg_communal_type',
+    'activity_garden',
+    '{D_GROUND}',
+    '{A4_GG_COMMUNAL_GARDEN}',
+    [
+      VerbatimToken(
+        '{A4_GG_COMMUNAL_FINISHES}',
+        options: {
+          'gg_communal_type_0_lawn': 'lawn',
+          'gg_communal_type_0_artificial_lawn': 'artificial lawn',
+          'gg_communal_type_0_paving': 'paving',
+          'gg_communal_type_0_timber_decking': 'timber decking',
+          'gg_communal_type_0_gravel': 'gravel',
+          'gg_communal_type_0_stones': 'stones',
+          'gg_communal_type_0_hardstanding': 'hardstanding',
+        },
+        otherCheckbox: 'gg_communal_type_0_other',
+        otherText: 'gg_communal_type_0_other_text',
+        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
+      ),
+    ],
+    pdf:
+        'Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
+    whenField: 'cb_gg_communal_type',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'gg_communal_fence',
+    'activity_garden',
+    '{D_GROUND}',
+    '{A4_GG_COMMUNAL_FENCING}',
+    [
+      VerbatimToken(
+        '{A4_GG_COMMUNAL_BOUNDARIES}',
+        options: {
+          'gg_communal_fence_0_timber_fencing': 'timber fencing',
+          'gg_communal_fence_0_brick_wall': 'brick wall',
+          'gg_communal_fence_0_block_wall': 'block wall',
+          'gg_communal_fence_0_hedging': 'hedging',
+          'gg_communal_fence_0_wire_mesh': 'wire mesh',
+          'gg_communal_fence_0_concrete_sections': 'concrete sections',
+          'gg_communal_fence_0_metal_railings': 'metal railings',
+        },
+        otherCheckbox: 'gg_communal_fence_0_other',
+        otherText: 'gg_communal_fence_0_other_text',
+        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
+      ),
+    ],
+    pdf:
+        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
+    whenField: 'cb_gg_communal_fence',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_pk_none',
+    'activity_parking',
+    '{D_GROUND}',
+    '{A4_NO_PARKING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'No Parking',
+  ),
+  VerbatimRule(
+    'a4_pk_type',
+    'activity_parking',
+    '{D_GROUND}',
+    '{A4_PARKING_TYPE}',
+    [
+      VerbatimToken(
+        '{A4_PARKING_KINDS}',
+        options: {
+          'a4_pk_k_residential': 'residential',
+          'a4_pk_k_private': 'private',
+          'a4_pk_k_allocated': 'allocated',
+          'a4_pk_k_communal': 'communal',
+          'a4_pk_k_off_street': 'off-street',
+          'a4_pk_k_underground_facility': 'underground facility',
+        },
+        otherCheckbox: 'a4_pk_k_other',
+        otherText: 'a4_pk_k_other_text',
+        pdfOptions: ['residential', 'private', 'allocated', 'communal', 'off-street', 'underground facility'],
+      ),
+    ],
+    pdf:
+        'Type: The property comes with residential, private, allocated, communal, off-street, underground facility, other parking.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Available',
+  ),
+  VerbatimRule(
+    'a4_pk_paid',
+    'activity_parking',
+    '{D_GROUND}',
+    '{A4_PAID_PARKING}',
+    [
+    ],
+    whenField: 'cb_a4_pk_paid',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_pp_none',
+    'activity_parking__parking',
+    '{D_GROUND}',
+    '{A4_NO_PARKING}',
+    [
+    ],
+    whenField: 'android_material_design_spinner',
+    whenValue: 'No Parking',
+  ),
+  VerbatimRule(
+    'a4_pp_type',
+    'activity_parking__parking',
+    '{D_GROUND}',
+    '{A4_PARKING_TYPE}',
+    [
+      VerbatimToken(
+        '{A4_PARKING_KINDS}',
+        options: {
+          'a4_pp_k_residential': 'residential',
+          'a4_pp_k_private': 'private',
+          'a4_pp_k_allocated': 'allocated',
+          'a4_pp_k_communal': 'communal',
+          'a4_pp_k_off_street': 'off-street',
+          'a4_pp_k_underground_facility': 'underground facility',
+        },
+        otherCheckbox: 'a4_pp_k_other',
+        otherText: 'a4_pp_k_other_text',
+        pdfOptions: ['residential', 'private', 'allocated', 'communal', 'off-street', 'underground facility'],
+      ),
+    ],
+    pdf:
+        'Type: The property comes with residential, private, allocated, communal, off-street, underground facility, other parking.',
+    whenField: 'android_material_design_spinner',
+    whenValue: 'Available',
+  ),
+  VerbatimRule(
+    'a4_pp_paid',
+    'activity_parking__parking',
+    '{D_GROUND}',
+    '{A4_PAID_PARKING}',
+    [
+    ],
+    whenField: 'cb_a4_pp_paid',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_gated',
+    'activity_gated_community',
+    '{D_GROUND}',
+    '{A4_GATED}',
+    [
+    ],
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'Yes',
+  ),
+  VerbatimRule(
+    'a4_location',
+    'activity_property_location',
+    '{D_LOCATION}',
+    '{A4_LOCATION}',
+    [
+      VerbatimToken(
+        '{A4_AREA}',
+        options: {
+          'a4_location_0_well_established_residential_area': 'well-established residential area',
+          'a4_location_0_modern_residential_development': 'modern residential development',
+          'a4_location_0_mixed_residential_and_commercial_area': 'mixed residential and commercial area',
+          'a4_location_0_rural_location': 'rural location',
+          'a4_location_0_conservation': 'conservation',
+          'a4_location_0_village_setting': 'village setting',
+          'a4_location_0_suburban_location': 'suburban location',
+        },
+        pdfOptions: ['well-established residential area', 'modern residential development', 'mixed residential and commercial area', 'rural location', 'conservation', 'village setting', 'suburban location'],
+      ),
+    ],
+    pdf:
+        'Location: The property is situated within a well-established residential area, modern residential development, mixed residential and commercial area, rural location, conservation, village setting, suburban location.',
+    whenField: 'cb_a4_location',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_density',
+    'activity_property_location',
+    '{D_LOCATION}',
+    '{A4_DENSITY}',
+    [
+      VerbatimToken(
+        '{A4_DENSITY_LEVEL}',
+        dropdown: 'android_material_design_spinner2',
+        dropdownOptions: ['Low', 'Medium', 'High'],
+        lower: true,
+        pdfOptions: ['low', 'medium', 'high'],
+      ),
+    ],
+    pdf:
+        'Density: The surrounding development is considered low, medium, high density.',
+    whenField: 'android_material_design_spinner2',
+    whenValue: 'Low',
+    whenAny: [['android_material_design_spinner2', 'Medium'], ['android_material_design_spinner2', 'High']],
+  ),
+  VerbatimRule(
+    'a4_road',
+    'activity_property_private_road',
+    '{D_LOCATION}',
+    '{A4_ROAD}',
+    [
+      VerbatimToken(
+        '{A4_ROAD_KIND}',
+        options: {
+          'a4_road_0_adopted_public_road': 'adopted public road',
+          'a4_road_0_private_road': 'private road',
+          'a4_road_0_cul_de_sac': 'cul-de-sac',
+          'a4_road_0_unmade_road': 'unmade road',
+        },
+        otherCheckbox: 'a4_road_0_other',
+        otherText: 'a4_road_0_other_text',
+        pdfOptions: ['adopted public road', 'private road', 'cul-de-sac', 'unmade road'],
+      ),
+    ],
+    pdf:
+        'Road: The property is located on an adopted public road, private road, cul-de-sac, unmade road, other.',
+    whenField: 'cb_a4_road',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_noise',
+    'activity_property_is_noisy_area',
+    '{D_LOCATION}',
+    '{A4_NOISE}',
+    [
+      VerbatimToken(
+        '{A4_NOISE_SOURCES}',
+        options: {
+          'a4_noise_0_train_lines_or_a_station': 'train lines or a station',
+          'a4_noise_0_major_roads': 'major roads',
+          'a4_noise_0_commercial_premises': 'commercial premises',
+          'a4_noise_0_industrial_premises': 'industrial premises',
+          'a4_noise_0_public_open_space': 'public open space',
+          'a4_noise_0_schools': 'schools',
+        },
+        otherCheckbox: 'a4_noise_0_other',
+        otherText: 'a4_noise_0_other_text',
+        pdfOptions: ['train lines or a station', 'major roads', 'commercial premises', 'industrial premises', 'public open space', 'schools'],
+      ),
+    ],
+    pdf:
+        'Noise: The property is located adjacent to, or close to, train lines or a station, major roads, commercial premises, industrial premises, public open space, schools, other.',
+    whenField: 'cb_a4_noise',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_conservation',
+    'activity_property_ground_area',
+    '{D_LOCATION}',
+    '{A4_CONSERVATION}',
+    [
+    ],
+    whenField: 'ch4',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_facilities',
+    'activity_property_facelities',
+    '{D_LOCATION}',
+    '{A4_FACILITIES}',
+    [
+      VerbatimToken(
+        '{A4_AMENITIES}',
+        options: {
+          'a4_facilities_0_schools': 'schools',
+          'a4_facilities_0_shops': 'shops',
+          'a4_facilities_0_medical_facilities': 'medical facilities',
+          'a4_facilities_0_bus_services': 'bus services',
+          'a4_facilities_0_train_stations': 'train stations',
+          'a4_facilities_0_parks': 'parks',
+        },
+        otherCheckbox: 'a4_facilities_0_other',
+        otherText: 'a4_facilities_0_other_text',
+        pdfOptions: ['schools', 'shops', 'medical facilities', 'bus services', 'train stations', 'parks'],
+      ),
+    ],
+    pdf:
+        'Facilities: Local amenities observed within reasonable proximity include schools, shops, medical facilities, bus services, train stations, parks, other facilities.',
+    whenField: 'cb_a4_facilities',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_remote',
+    'activity_property_facelities',
+    '{D_LOCATION}',
+    '{A4_REMOTE}',
+    [
+    ],
+    whenField: 'cb_a4_remote',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_emf',
+    'activity_property_local_environment',
+    '{D_LOCATION}',
+    '{A4_EMF}',
+    [
+    ],
+    whenField: 'a4_lenv_0_electricity_substation',
+    whenValue: 'true',
+    whenAny: [['a4_lenv_0_overhead_power_lines', 'true']],
+  ),
+  VerbatimRule(
+    'a4_flood',
+    'activity_property_local_environment',
+    '{D_LOCATION}',
+    '{A4_FLOODING}',
+    [
+    ],
+    whenField: 'a4_lenv_0_susceptible_to_flooding',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'a4_lenv',
+    'activity_property_local_environment',
+    '{D_LOCATION}',
+    '{A4_LOCAL_ENVIRONMENT}',
+    [
+      VerbatimToken(
+        '{A4_FEATURES}',
+        options: {
+          'a4_lenv_0_susceptible_to_flooding': 'Susceptible to flooding',
+          'a4_lenv_0_railway_line': 'Railway line',
+          'a4_lenv_0_busy_road': 'Busy road',
+          'a4_lenv_0_commercial_premises': 'Commercial premises',
+          'a4_lenv_0_industrial_premises': 'Industrial premises',
+          'a4_lenv_0_public_house': 'Public house',
+          'a4_lenv_0_school': 'School',
+          'a4_lenv_0_electricity_substation': 'Electricity substation',
+          'a4_lenv_0_overhead_power_lines': 'Overhead power lines',
+          'a4_lenv_0_pylons': 'Pylons',
+          'a4_lenv_0_airport_flight_path': 'Airport flight path',
+        },
+        otherCheckbox: 'a4_lenv_0_other',
+        otherText: 'a4_lenv_0_other_text',
+        pdfOptions: ['Susceptible to flooding', 'Railway line', 'Busy road', 'Commercial premises', 'Industrial premises', 'Public house', 'School', 'Electricity substation', 'Overhead power lines', 'Pylons', 'Airport flight path'],
+      ),
+    ],
+    pdf:
+        'Local environment: I observed the following environmental feature(s) that may influence your enjoyment of the property, its future marketability or materially affect the subject property: • Susceptible to flooding • Railway line • Busy road • Commercial premises • Industrial premises • Public house • School • Electricity substation • Overhead power lines • Pylons • Airport flight path • Other Where environmental concerns exist, you should make your own enquiries before legal commitment.',
+    whenField: 'cb_a4_lenv',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_number',
+    'activity_outside_property_stacks',
+    '{E_CHIMNEY}',
+    '{E1L_NUMBER}',
+    [
+      VerbatimToken(
+        '{CS_NUMBER}',
+        dropdown: 'actv_stack_number',
+        dropdownOptions: ['One', 'Two', 'Three', 'Multiple'],
+        lower: true,
+        pdfOptions: ['one', 'two', 'three', 'multiple'],
+      ),
+    ],
+    pdf:
+        'Number: The property has one, two, three, multiple stacks(s).',
+    whenField: 'actv_stack_number',
+    whenValue: 'One',
+    whenAny: [['actv_stack_number', 'Two'], ['actv_stack_number', 'Three'], ['actv_stack_number', 'Multiple']],
+  ),
+  VerbatimRule(
+    'e1l_condition',
+    'activity_outside_property_condition',
+    '{E_CHIMNEY}',
+    '{E1L_STACK_CONDITION}',
+    [
+      VerbatimToken(
+        '{CS_STACK_CONDITION}',
+        dropdown: 'android_material_design_spinner3',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the chimney stack(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+    whenField: 'android_material_design_spinner3',
+    whenValue: 'Good',
+    whenAny: [['android_material_design_spinner3', 'Reasonable'], ['android_material_design_spinner3', 'Fair'], ['android_material_design_spinner3', 'Poor'], ['android_material_design_spinner3', 'Very poor']],
+  ),
+  VerbatimRule(
+    'e1l_norepair',
+    'activity_outside_property_condition',
+    '{E_CHIMNEY}',
+    '{E1L_NO_REPAIR}',
+    [
+    ],
+    whenField: 'cb_e1l_norepair',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_shared',
+    'activity_outside_property_shared_chimney',
+    '{E_CHIMNEY}',
+    '{E1L_SHARED}',
+    [
+    ],
+    whenField: 'cb_e1l_shared',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_lean_ok',
+    'activity_outside_property_leaning_chimney',
+    '{E_CHIMNEY}',
+    '{E1L_LEAN_NO_REPAIR}',
+    [
+    ],
+    whenField: 'android_material_design_spinner4',
+    whenValue: 'No repair required',
+  ),
+  VerbatimRule(
+    'e1l_lean_repair',
+    'activity_outside_property_leaning_chimney',
+    '{E_CHIMNEY}',
+    '{E1L_LEAN_REPAIR}',
+    [
+    ],
+    whenField: 'android_material_design_spinner4',
+    whenValue: 'Repair required',
+  ),
+  VerbatimRule(
+    'e1l_removed',
+    'activity_outside_property_chimney_removed_pots',
+    '{E_CHIMNEY}',
+    '{E1L_REMOVED}',
+    [
+      VerbatimToken(
+        '{CS_REMOVED_LOCATIONS}',
+        options: {
+          'e1l_rm_front': 'front',
+          'e1l_rm_rear': 'rear',
+          'e1l_rm_side': 'side',
+          'e1l_rm_centre': 'centre',
+        },
+        pdfOptions: ['front', 'rear', 'side', 'centre'],
+      ),
+      VerbatimToken(
+        '{CS_REMOVED_WHAT}',
+        options: {
+          'e1l_rw_removed': 'removed',
+          'e1l_rw_altered': 'altered',
+          'e1l_rw_covered_over_with_roofing': 'covered over with roofing',
+        },
+        pdfOptions: ['removed', 'altered', 'covered over with roofing'],
+      ),
+    ],
+    pdf:
+        'Removed chimney or pots: The chimney stack(s) or pots to the front, rear, side, centre have been removed, altered, covered over with roofing.',
+    whenField: 'cb_Removed_pots',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_na',
+    'activity_outside_property_chimney_not_inspected',
+    '{E_CHIMNEY}',
+    '{E1L_NOT_APPLICABLE}',
+    [
+    ],
+    whenField: 'cb_Not_applicable',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_ni',
+    'activity_outside_property_chimney_not_inspected',
+    '{E_CHIMNEY}',
+    '{E1L_NOT_INSPECTED}',
+    [
+    ],
+    whenField: 'cb_not_inspected_access',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_dummy',
+    'activity_outside_property_chimney_not_inspected',
+    '{E_CHIMNEY}',
+    '{E1L_DUMMY_BREAST}',
+    [
+    ],
+    whenField: 'cb_dummy_chimney_breast',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_rflash',
+    'activity_outside_property_repair_flashing',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_FLASHING}',
+    [
+      VerbatimToken(
+        '{CS_URGENCY_E1L_RFLASH}',
+        dropdown: 'android_material_design_spinner4',
+        dropdownOptions: ['Repaired soon', 'Repaired now'],
+        lower: true,
+        pdfOptions: ['repaired soon', 'repaired now'],
+      ),
+    ],
+    pdf:
+        'This should be repaired soon, repaired now, depending on the severity of the defect.',
+    whenField: 'android_material_design_spinner4',
+    whenValue: 'Repaired soon',
+    whenAny: [['android_material_design_spinner4', 'Repaired now']],
+  ),
+  VerbatimRule(
+    'e1l_rflash_damp',
+    'activity_outside_property_repair_flashing',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_FLASHING_DAMP}',
+    [
+    ],
+    whenField: 'cb_is_causing_dump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_rflaunch',
+    'activity_outside_property_chimney_repair_flaunching',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_FLAUNCHING}',
+    [
+      VerbatimToken(
+        '{CS_URGENCY_E1L_RFLAUNCH}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Repaired soon', 'Repaired now'],
+        lower: true,
+        pdfOptions: ['repaired soon', 'repaired now'],
+      ),
+    ],
+    pdf:
+        'This should be repaired soon, repaired now.',
+    whenField: 'actv_condition',
+    whenValue: 'Repaired soon',
+    whenAny: [['actv_condition', 'Repaired now']],
+  ),
+  VerbatimRule(
+    'e1l_rflaunch_damp',
+    'activity_outside_property_chimney_repair_flaunching',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_FLAUNCHING_DAMP}',
+    [
+    ],
+    whenField: 'cb_is_causing_dump',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_rpoint',
+    'activity_outside_property_repair_chimney_repointing',
+    '{E_CHIMNEY}',
+    '{E1L_REPOINTING}',
+    [
+      VerbatimToken(
+        '{CS_URGENCY_E1L_RPOINT}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Repaired soon', 'Repaired now'],
+        lower: true,
+        pdfOptions: ['repaired soon', 'repaired now'],
+      ),
+    ],
+    pdf:
+        'This should be repaired soon, repaired now.',
+    whenField: 'actv_condition',
+    whenValue: 'Repaired soon',
+    whenAny: [['actv_condition', 'Repaired now']],
+  ),
+  VerbatimRule(
+    'e1l_rpot',
+    'activity_outside_property_repair_chimney_pots',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_POT}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+    whenAny: [['actv_condition', 'Repair now']],
+  ),
+  VerbatimRule(
+    'e1l_poor',
+    'activity_outside_property_repair_chimney_disrepair',
+    '{E_CHIMNEY}',
+    '{E1L_POOR_CHIMNEY}',
+    [
+      VerbatimToken(
+        '{CS_POOR_LOCATIONS}',
+        options: {
+          'e1l_pc_front': 'front',
+          'e1l_pc_rear': 'rear',
+          'e1l_pc_side': 'side',
+          'e1l_pc_centre': 'centre',
+        },
+        pdfOptions: ['front', 'rear', 'side', 'centre'],
+      ),
+    ],
+    pdf:
+        'Poor chimney condition: The chimney stack(s) on the front, rear, side, centre of the building are in poor condition.',
+    whenField: 'cb_repair_soon_70',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_ae_soon',
+    'activity_outside_property_repair_chimney_dish_aerial',
+    '{E_CHIMNEY}',
+    '{E1L_AERIAL_SOON}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e1l_ae_now',
+    'activity_outside_property_repair_chimney_dish_aerial',
+    '{E_CHIMNEY}',
+    '{E1L_AERIAL_NOW}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e1l_sa_soon',
+    'activity_outside_property_repair_chimney_dish_aerial__satellite',
+    '{E_CHIMNEY}',
+    '{E1L_AERIAL_SOON}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
+    'e1l_sa_now',
+    'activity_outside_property_repair_chimney_dish_aerial__satellite',
+    '{E_CHIMNEY}',
+    '{E1L_AERIAL_NOW}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'e1l_location',
+    'activity_outside_property_location',
+    '{E_CHIMNEY}',
+    '{E1L_LOCATION}',
+    [
+      VerbatimToken(
+        '{CS_LOCATIONS}',
+        options: {
+          'e1l_loc_front': 'front',
+          'e1l_loc_rear': 'rear',
+          'e1l_loc_side': 'side',
+          'e1l_loc_centre': 'centre',
+        },
+        otherCheckbox: 'e1l_loc_other',
+        otherText: 'e1l_loc_other_text',
+        pdfOptions: ['front', 'rear', 'side', 'centre'],
+      ),
+    ],
+    pdf:
+        'Location: The chimney stack(s) are located to the front, rear, side, centre, other locations.',
+    whenField: 'cb_e1l_location',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_ae_def',
+    'activity_outside_property_repair_chimney_dish_aerial',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_AERIAL_E1L_AE}',
+    [
+      VerbatimToken(
+        '{CS_AERIAL_DEFECTS}',
+        options: {
+          'e1l_ae_d_loose': 'loose',
+          'e1l_ae_d_rusted': 'rusted',
+          'e1l_ae_d_damaged': 'damaged',
+          'e1l_ae_d_dangling': 'dangling',
+        },
+        otherCheckbox: 'e1l_ae_d_other',
+        otherText: 'e1l_ae_d_other_text',
+        pdfOptions: ['loose', 'rusted', 'damaged', 'dangling'],
+      ),
+    ],
+    pdf:
+        'Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling, other.',
+    whenField: 'cb_e1l_ae_def',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1l_sa_def',
+    'activity_outside_property_repair_chimney_dish_aerial__satellite',
+    '{E_CHIMNEY}',
+    '{E1L_REPAIR_AERIAL_E1L_SA}',
+    [
+      VerbatimToken(
+        '{CS_AERIAL_DEFECTS}',
+        options: {
+          'e1l_sa_d_loose': 'loose',
+          'e1l_sa_d_rusted': 'rusted',
+          'e1l_sa_d_damaged': 'damaged',
+          'e1l_sa_d_dangling': 'dangling',
+        },
+        otherCheckbox: 'e1l_sa_d_other',
+        otherText: 'e1l_sa_d_other_text',
+        pdfOptions: ['loose', 'rusted', 'damaged', 'dangling'],
+      ),
+    ],
+    pdf:
+        'Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling, other.',
+    whenField: 'cb_e1l_sa_def',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_ground',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_GROUND_LEVEL}',
+    [
+    ],
+    whenField: 'cb_e0_ground',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_vantage',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_VANTAGE_POINTS}',
+    [
+    ],
+    whenField: 'cb_e0_vantage',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_limited',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_LIMITED_BY}',
+    [
+      VerbatimToken(
+        '{E0_LIMITS}',
+        options: {
+          'e0l_height': 'height',
+          'e0l_restricted_access': 'restricted access',
+          'e0l_nearby_buildings': 'nearby buildings',
+          'e0l_vegetation': 'vegetation',
+          'e0l_weather_conditions': 'weather conditions',
+          'e0l_roof_configuration': 'roof configuration',
+          'e0l_health_and_safety_considerations': 'health and safety considerations',
+        },
+        pdfOptions: ['height', 'restricted access', 'nearby buildings', 'vegetation', 'weather conditions', 'roof configuration', 'health and safety considerations'],
+      ),
+    ],
+    pdf:
+        'Limitations: The inspection was limited by height, restricted access, nearby buildings, vegetation, weather conditions, roof configuration, health and safety considerations.',
+    whenField: 'cb_e0_limited',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_restricted',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_RESTRICTED_ACCESS}',
+    [
+    ],
+    whenField: 'cb_e0_restricted',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_binoculars',
+    'activity_outside_property_limitation',
+    '{E_LIMITATIONS}',
+    '{E0_BINOCULARS}',
+    [
+    ],
+    whenField: 'cb_e0_binoculars',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0w_roof_wet',
+    'outside_property_roof_covering_weather_layout',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_WET}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Wet weather',
+  ),
+  VerbatimRule(
+    'e0w_roof_dry',
+    'outside_property_roof_covering_weather_layout',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_DRY}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Dry weather',
+  ),
+  VerbatimRule(
+    'e0w_roof_snowfall',
+    'outside_property_roof_covering_weather_layout',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_SNOWFALL}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Snowfall',
+  ),
+  VerbatimRule(
+    'e0w_rwg_wet',
+    'activity_rwg_weather_condition',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_WET}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Wet weather',
+  ),
+  VerbatimRule(
+    'e0w_rwg_dry',
+    'activity_rwg_weather_condition',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_DRY}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Dry weather',
+  ),
+  VerbatimRule(
+    'e0w_rwg_snowfall',
+    'activity_rwg_weather_condition',
+    '{E_LIMITATIONS}',
+    '{E0_WEATHER_SNOWFALL}',
+    [
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Snowfall',
+  ),
+  VerbatimRule(
+    'e0_roof_ni',
+    'activity_outside_property_roof_not_inspected',
+    '{E_ROOF_COVERING}',
+    '{E0_NOT_INSPECTED_E2}',
+    [
+    ],
+    whenField: 'cb_e0_roof_ni',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_rwg_ni',
+    'activity_outside_property_rain_water_goods_not_inspected',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{E0_NOT_INSPECTED_E3}',
+    [
+    ],
+    whenField: 'cb_not_inspected',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_rwg_blocked',
+    'activity_outside_property_rwg_blocked_rwg',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{E0_BLOCKED_GUTTERS}',
+    [
+    ],
+    whenField: 'cb_blocked_rwg',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e0_rwg_runoffs',
+    'activity_outside_property_rwg_open_runoffs',
+    '{E_RAINWATER_GOODS_ABOUT}',
+    '{E0_RUNOFFS}',
+    [
+    ],
+    whenField: 'cb_open_runoffs',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_concealed',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_CONCEALED}',
+    [
+    ],
+    whenField: 'cb_f0_concealed',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_roofspace',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_ROOF_SPACE_INACCESSIBLE}',
+    [
+    ],
+    whenField: 'cb_f0_roofspace',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_moisture',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_MOISTURE}',
+    [
+    ],
+    whenField: 'cb_f0_moisture',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_visual',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_VISUAL}',
+    [
+    ],
+    whenField: 'cb_f0_visual',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_limited',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_LIMITED_BY}',
+    [
+      VerbatimToken(
+        '{F0_LIMITS}',
+        options: {
+          'f0l_fitted_floor_coverings': 'fitted floor coverings',
+          'f0l_furniture': 'furniture',
+          'f0l_stored_items': 'stored items',
+          'f0l_fixed_fittings': 'fixed fittings',
+          'f0l_restricted_access': 'restricted access',
+          'f0l_locked_rooms': 'locked rooms',
+          'f0l_limited_roof_access': 'limited roof access',
+          'f0l_limited_lighting': 'limited lighting',
+          'f0l_health_and_safety_considerations': 'health, and safety considerations',
+        },
+        pdfOptions: ['fitted floor coverings', 'furniture', 'stored items', 'fixed fittings', 'restricted access', 'locked rooms', 'limited roof access', 'limited lighting', 'health, and safety considerations'],
+      ),
+    ],
+    pdf:
+        'Limitations: The inspection of the internal accommodation was limited by fitted floor coverings, furniture, stored items, fixed fittings, restricted access, locked rooms, limited roof access, limited lighting, health, and safety considerations.',
+    whenField: 'cb_f0_limited',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_roofavail',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_ROOF_ACCESS_AVAILABLE}',
+    [
+    ],
+    whenField: 'cb_f0_roofavail',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_rnfi',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_ROOF_NOT_FULLY}',
+    [
+      VerbatimToken(
+        '{F0_RNFI_REASONS}',
+        options: {
+          'f0r_limited_roof_height_the_floor_was_not_safe_to_walk_on': 'limited roof height; the floor was not safe to walk on',
+          'f0r_floor_was_boarded': 'floor was boarded',
+          'f0r_excessive_storage': 'excessive storage',
+          'f0r_insulation': 'insulation',
+          'f0r_underlining': 'underlining',
+        },
+        otherCheckbox: 'f0r_other',
+        otherText: 'f0r_other_text',
+        pdfOptions: ['limited roof height; the floor was not safe to walk on', 'floor was boarded', 'excessive storage', 'insulation', 'underlining'],
+      ),
+    ],
+    pdf:
+        'Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection.',
+    whenField: 'cb_f0_rnfi',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f0_unsafe',
+    'activity_inside_property_limitation',
+    '{F_INSIDE_THE_PROPERTY}',
+    '{F0_UNSAFE_FLOOR}',
+    [
+    ],
+    whenField: 'cb_f0_unsafe',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j4_airport',
+    'activity_risks_other_',
+    '{RISK_TO_OTHER}',
+    '{J4_AIRPORT}',
+    [
+    ],
+    whenField: 'cb_airport',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j4_station',
+    'activity_risks_other_',
+    '{RISK_TO_OTHER}',
+    '{J4_TRAIN_STATION}',
+    [
+    ],
+    whenField: 'cb_train_station',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j4_line',
+    'activity_risks_other_',
+    '{RISK_TO_OTHER}',
+    '{J4_RAILWAY_LINE}',
+    [
+    ],
+    whenField: 'cb_train_line',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j4_motorway',
+    'activity_risks_other_',
+    '{RISK_TO_OTHER}',
+    '{J4_MOTORWAY}',
+    [
+    ],
+    whenField: 'cb_motorway',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j4_further',
+    'activity_risks_repair_or_improve',
+    '{RISK_TO_OTHER}',
+    '{J4_FURTHER_INVESTIGATIONS}',
+    [
+    ],
+    whenField: 'cb_repair_or_improve',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'k1_market',
+    'activity_k1_valuation_assumptions',
+    '{K1_VALUATION}',
+    '{K1_MARKET_VALUE}',
+    [
+    ],
+    whenField: 'cb_k1_market',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'k1_flats',
+    'activity_k1_valuation_assumptions',
+    '{K1_VALUATION}',
+    '{K1_FLATS}',
+    [
+    ],
+    whenField: 'cb_k1_flats',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'k1_lease',
+    'activity_k1_valuation_assumptions',
+    '{K1_VALUATION}',
+    '{K1_LEASE_LENGTH}',
+    [
+    ],
+    whenField: 'cb_k1_lease',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'oo_pleased',
+    'activity_over_all_openion',
+    '{OVERALL_OPINION}',
+    '{OO_PLEASED}',
+    [
+      VerbatimToken(
+        '{OO_PRICE}',
+        text: 'android_material_design_spinner',
+      ),
+    ],
+    pdf:
+        'Reasonable: I am pleased to advise you that this property is believed to be a reasonable proposition for purchase at £390,500.00 [Three Hundred Ninety Thousand and five hundred Pounds].',
+    whenField: 'android_material_design_spinner5',
+    whenValue: 'Reasonable',
+  ),
+  VerbatimRule(
+    'oo_opinion',
+    'activity_over_all_openion',
+    '{OVERALL_OPINION}',
+    '{OO_OPINION}',
+    [
+      VerbatimToken(
+        '{OO_RATING}',
+        dropdown: 'android_material_design_spinner5',
+        dropdownOptions: ['Reasonable', 'Good', 'Fair', 'Poor'],
+        lower: true,
+        pdfOptions: ['reasonable', 'good', 'fair', 'poor'],
+      ),
+    ],
+    pdf:
+        'In my opinion, the property represents a reasonable, good, fair, poor proposition for purchase at the agreed price, subject to the findings and recommendations contained within this report.',
+    whenField: 'android_material_design_spinner5',
+    whenValue: 'Reasonable',
+    whenAny: [['android_material_design_spinner5', 'Good'], ['android_material_design_spinner5', 'Fair'], ['android_material_design_spinner5', 'Poor']],
+  ),
+  VerbatimRule(
+    'oo_repair',
+    'activity_over_all_openion',
+    '{OVERALL_OPINION}',
+    '{OO_REASONABLE_WITH_REPAIR}',
+    [
+    ],
+    whenField: 'cb_oo_repair',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_trip',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_TRIP_HAZARDS}',
+    [
+      VerbatimToken(
+        '{J3_TRIP_LIST}',
+        options: {
+          'j3t_uneven_paving': 'uneven paving',
+          'j3t_damaged_steps': 'damaged steps',
+          'j3t_raised_thresholds': 'raised thresholds',
+          'j3t_uneven_floor_surfaces': 'uneven floor surfaces',
+          'j3t_loose_floor_coverings': 'loose floor coverings',
+          'j3t_damaged_decking': 'damaged decking',
+        },
+        otherCheckbox: 'j3t_other',
+        otherText: 'j3t_other_text',
+        pdfOptions: ['uneven paving', 'damaged steps', 'raised thresholds', 'uneven floor surfaces', 'loose floor coverings', 'damaged decking'],
+      ),
+    ],
+    pdf:
+        'Trip Hazards: Potential trip hazards were identified, including uneven paving, damaged steps, raised thresholds, uneven floor surfaces, loose floor coverings, damaged decking, other.',
+    whenField: 'cb_j3_trip',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_stairs',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_DAMAGED_STAIRS}',
+    [
+    ],
+    whenField: 'cb_j3_stairs',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_electrical',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_ELECTRICAL_SAFETY}',
+    [
+    ],
+    whenField: 'cb_j3_electrical',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_gas',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_GAS_SAFETY}',
+    [
+    ],
+    whenField: 'cb_j3_gas',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_asbestos',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_ASBESTOS}',
+    [
+    ],
+    whenField: 'cb_j3_asbestos',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_mould',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_MOULD_GROWTH}',
+    [
+    ],
+    whenField: 'cb_j3_mould',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'j3_general',
+    'activity_risks_risk_to_people_',
+    '{RISK_TO_PEOPLE}',
+    '{J3_GENERAL_ADVICE}',
+    [
+    ],
+    whenField: 'cb_j3_general',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e1_general',
+    'activity_outside_property_chimney_main_screen',
+    '{E_CHIMNEY}',
+    '{E1_GENERAL_NOTES}',
+    [
+    ],
+    whenField: 'cb_e1_general',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e7_scope',
+    'activity_outside_property_conservatory_porch_main_screen',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_SCOPE}',
+    [
+    ],
+    whenField: 'cb_e7_scope',
+    whenValue: 'true',
+  ),
+  // <<verbatim-rules-end>>
+];
+
+extension _VerbatimSpec on InspectionPhraseEngine {
+  List<String> _verbatimPhrases(
+    String screenId,
+    Map<String, String> answers, {
+    required bool first,
+  }) {
+    final out = <String>[];
+    for (final rule in kVerbatimRules) {
+      if (rule.screen != screenId || rule.first != first) continue;
+      if (rule.whenField != null) {
+        bool hit(String? f, String? v) =>
+            (answers[f] ?? '').trim().toLowerCase() == (v ?? '').toLowerCase();
+        if (!hit(rule.whenField, rule.whenValue) &&
+            !rule.whenAny.any((p) => hit(p[0], p[1]))) {
+          continue;
+        }
+      }
+      final master = rule.master == '@chimney'
+          ? InspectionPhraseEngine._chimneyPhraseCodeFromAnswers(
+              answers,
+              fallbackIsMulti: false,
+            )
+          : rule.master;
+      var text = _phraseTexts['$master::${rule.sub}'] ?? '';
+      if (text.isEmpty) continue;
+      var complete = true;
+      var count = 0;
+      for (final token in rule.tokens) {
+        final items = _verbatimTokenItems(token, answers);
+        if (items.isEmpty && token.optional) {
+          text = text.replaceAll(token.token, '');
+          continue;
+        }
+        if (items.isEmpty) {
+          complete = false;
+          break;
+        }
+        if (count == 0) count = items.length;
+        var value = InspectionPhraseEngine._toWords(items);
+        if (token.cap) value = InspectionPhraseEngine._capitalizeFirst(value);
+        text = text.replaceAll(token.token, value);
+      }
+      if (!complete) continue;
+      if (rule.isAre) {
+        text = text.replaceAll('{IS_ARE}', count > 1 ? 'are' : 'is');
+      }
+      out.addAll(InspectionPhraseEngine._split(
+        InspectionPhraseEngine._normalize(text),
+      ));
+    }
+    return out;
+  }
+
+  List<String> _verbatimTokenItems(
+    VerbatimToken token,
+    Map<String, String> answers,
+  ) {
+    if (token.constant != null) return [token.constant!];
+    if (token.dropdown != null) {
+      final v = (answers[token.dropdown] ?? '').trim();
+      return v.isEmpty ? const [] : [token.lower ? v.toLowerCase() : v];
+    }
+    if (token.text != null) {
+      final v = (answers[token.text] ?? '').trim();
+      return v.isEmpty ? const [] : [v];
+    }
+    final labels = <String, String>{...token.legacy, ...token.options};
+    final items = InspectionPhraseEngine._labelsFor(
+      labels.keys.toList(),
+      answers,
+      labels,
+    );
+    if (token.otherCheckbox != null && token.otherText != null) {
+      InspectionPhraseEngine._addOther(
+        answers,
+        token.otherCheckbox!,
+        token.otherText!,
+        items,
+      );
+    }
+    return items;
+  }
+}

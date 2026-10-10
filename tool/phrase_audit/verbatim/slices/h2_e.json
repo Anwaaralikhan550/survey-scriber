@@ -1,0 +1,1858 @@
+[
+  {
+    "screen": "activity_grounds_other_grounds",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_topo",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_GROUNDS_TOPOGRAPHY}",
+        "text": "Grounds: The subject property is set within {H2_TOPOGRAPHY} grounds.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{H2_TOPOGRAPHY}",
+            "dropdown": "actv_type",
+            "field_label": "The property is set within",
+            "dropdown_options": [
+              "Level",
+              "Sloping",
+              "Hilly",
+              "Undulating"
+            ],
+            "pdf_options": [
+              "level",
+              "sloping",
+              "hilly",
+              "undulating"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Grounds: The subject property is set within level, sloping, hilly, undulating grounds."
+        ],
+        "when": [
+          "actv_type",
+          "Level"
+        ],
+        "when_any": [
+          [
+            "actv_type",
+            "Sloping"
+          ],
+          [
+            "actv_type",
+            "Hilly"
+          ],
+          [
+            "actv_type",
+            "Undulating"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_shared_access",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_shared_garden",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_SHARED_GARDEN}",
+        "text": "Shared Garden: The communal/shared garden is shared with neighbouring property or properties. Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",
+        "tokens": [],
+        "when": [
+          "cb_h2_h2_shared_garden",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_shared_garden",
+            "label": "Shared garden",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_comm_surface",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_COMMUNAL_GROUNDS}",
+        "text": "Grounds: The communal/shared garden is {H2_COMM_SURFACE}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_COMM_SURFACE}",
+            "options": [
+              [
+                "h2_comm_surface_0_paved",
+                "paved"
+              ],
+              [
+                "h2_comm_surface_0_lawned",
+                "lawned"
+              ],
+              [
+                "h2_comm_surface_0_decked",
+                "decked"
+              ],
+              [
+                "h2_comm_surface_0_artificially_lawned",
+                "artificially lawned"
+              ],
+              [
+                "h2_comm_surface_0_laid_with_stones",
+                "laid with stones"
+              ],
+              [
+                "h2_comm_surface_0_laid_with_tile_chippings",
+                "laid with tile chippings"
+              ]
+            ],
+            "pdf_options": [
+              "paved",
+              "lawned",
+              "decked",
+              "artificially lawned",
+              "laid with stones",
+              "laid with tile chippings"
+            ],
+            "label": "Communal garden is",
+            "other": [
+              "h2_comm_surface_0_other",
+              "h2_comm_surface_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Grounds: The communal/shared garden is paved, lawned, decked, artificially lawned, laid with stones, laid with tile chippings, other."
+        ],
+        "when": [
+          "cb_h2_h2_comm_surface",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_comm_surface",
+            "label": "Communal garden surfaces",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_comm_fence",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_COMMUNAL_FENCE}",
+        "text": "Fence: The boundary fences are formed in {H2_COMM_FENCE}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_COMM_FENCE}",
+            "options": [
+              [
+                "h2_comm_fence_0_timber",
+                "timber"
+              ],
+              [
+                "h2_comm_fence_0_brick",
+                "brick"
+              ],
+              [
+                "h2_comm_fence_0_concrete",
+                "concrete"
+              ],
+              [
+                "h2_comm_fence_0_wire_mesh",
+                "wire mesh"
+              ],
+              [
+                "h2_comm_fence_0_hedges",
+                "hedges"
+              ],
+              [
+                "h2_comm_fence_0_shrubs",
+                "shrubs"
+              ]
+            ],
+            "pdf_options": [
+              "timber",
+              "brick",
+              "concrete",
+              "wire mesh",
+              "hedges",
+              "shrubs"
+            ],
+            "label": "Boundary fences formed in",
+            "other": [
+              "h2_comm_fence_0_other",
+              "h2_comm_fence_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Fence: The boundary fences are formed in timber, brick, concrete, wire mesh, hedges, shrubs, other."
+        ],
+        "when": [
+          "cb_h2_h2_comm_fence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_comm_fence",
+            "label": "Communal garden fences",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_comm_no_fence",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_NO_FENCING}",
+        "text": "No Fencing: The communal/shared garden of the property does not have fencing.",
+        "tokens": [],
+        "when": [
+          "cb_h2_h2_comm_no_fence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_comm_no_fence",
+            "label": "No fencing",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_comm_cond",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_COMMUNAL_CONDITION}",
+        "text": "Condition: Where visible, the garage appears in {H2_COMMUNAL_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction of the garage should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{H2_COMMUNAL_CONDITION_COND}",
+            "dropdown": "actv_h2_comm_cond",
+            "field_label": "Communal garden condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition."
+        ],
+        "when": [
+          "actv_h2_comm_cond",
+          "Good"
+        ],
+        "when_any": [
+          [
+            "actv_h2_comm_cond",
+            "Reasonable"
+          ],
+          [
+            "actv_h2_comm_cond",
+            "Fair"
+          ],
+          [
+            "actv_h2_comm_cond",
+            "Poor"
+          ],
+          [
+            "actv_h2_comm_cond",
+            "Very poor"
+          ]
+        ]
+      },
+      {
+        "id": "h2_shared_areas",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_SHARED_AREAS}",
+        "text": "Shared Areas: The property benefits from a {H2_SHARED_AREAS} access.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_SHARED_AREAS}",
+            "options": [
+              [
+                "h2_shared_areas_0_shared_driveway",
+                "shared driveway"
+              ],
+              [
+                "h2_shared_areas_0_shared_garden",
+                "shared garden"
+              ],
+              [
+                "h2_shared_areas_0_communal_parking",
+                "communal parking"
+              ],
+              [
+                "h2_shared_areas_0_communal_gardens",
+                "communal gardens"
+              ],
+              [
+                "h2_shared_areas_0_shared_pathways",
+                "shared pathways"
+              ]
+            ],
+            "pdf_options": [
+              "shared driveway",
+              "shared garden",
+              "communal parking",
+              "communal gardens",
+              "shared pathways"
+            ],
+            "label": "Property benefits from a",
+            "other": [
+              "h2_shared_areas_0_other",
+              "h2_shared_areas_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Shared Areas: The property benefits from a shared driveway, shared garden, communal parking, communal gardens, shared pathways, other access."
+        ],
+        "when": [
+          "cb_h2_h2_shared_areas",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_shared_areas",
+            "label": "Shared areas",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_shared_cond",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_SHARED_AREAS_CONDITION}",
+        "text": "Condition: Where visible, the shared areas appear in {H2_SHARED_AREAS_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction should be expected. Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{H2_SHARED_AREAS_CONDITION_COND}",
+            "dropdown": "actv_h2_shared_cond",
+            "field_label": "Shared areas condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the shared areas appear in good, reasonable, fair, poor, very poor condition."
+        ],
+        "when": [
+          "actv_h2_shared_cond",
+          "Good"
+        ],
+        "when_any": [
+          [
+            "actv_h2_shared_cond",
+            "Reasonable"
+          ],
+          [
+            "actv_h2_shared_cond",
+            "Fair"
+          ],
+          [
+            "actv_h2_shared_cond",
+            "Poor"
+          ],
+          [
+            "actv_h2_shared_cond",
+            "Very poor"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_other_front_garden",
+    "set_title": "Gardens",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_outside",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_OUTSIDE_AREAS}",
+        "text": "Description: The outside areas comprise {H2_OUTSIDE_AREAS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_OUTSIDE_AREAS}",
+            "options": [
+              [
+                "h2_outside_0_front_garden",
+                "front garden"
+              ],
+              [
+                "h2_outside_0_rear_garden",
+                "rear garden"
+              ],
+              [
+                "h2_outside_0_side_garden",
+                "side garden"
+              ],
+              [
+                "h2_outside_0_courtyard_garden",
+                "courtyard garden"
+              ],
+              [
+                "h2_outside_0_terrace",
+                "terrace"
+              ],
+              [
+                "h2_outside_0_patio",
+                "patio"
+              ]
+            ],
+            "pdf_options": [
+              "front garden",
+              "rear garden",
+              "side garden",
+              "courtyard garden",
+              "terrace",
+              "patio"
+            ],
+            "label": "Outside areas comprise",
+            "other": [
+              "h2_outside_0_other",
+              "h2_outside_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The outside areas comprise front garden, rear garden, side garden, courtyard garden, terrace, patio, other."
+        ],
+        "when": [
+          "cb_h2_h2_outside",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_outside",
+            "label": "Outside areas",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_surfaces",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_SURFACES}",
+        "text": "Grounds: The surfaces comprise {H2_SURFACES}. Where decking is installed, it should be inspected regularly as deterioration may create a safety hazard.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_SURFACES}",
+            "options": [
+              [
+                "h2_surfaces_0_lawn",
+                "lawn"
+              ],
+              [
+                "h2_surfaces_0_block_paving",
+                "block paving"
+              ],
+              [
+                "h2_surfaces_0_concrete",
+                "concrete"
+              ],
+              [
+                "h2_surfaces_0_gravel",
+                "gravel"
+              ],
+              [
+                "h2_surfaces_0_tarmac",
+                "tarmac"
+              ],
+              [
+                "h2_surfaces_0_timber_decking",
+                "timber decking"
+              ],
+              [
+                "h2_surfaces_0_composite_decking",
+                "composite decking"
+              ],
+              [
+                "h2_surfaces_0_stone_paving",
+                "stone paving"
+              ]
+            ],
+            "pdf_options": [
+              "lawn",
+              "block paving",
+              "concrete",
+              "gravel",
+              "tarmac",
+              "timber decking",
+              "composite decking",
+              "stone paving"
+            ],
+            "label": "Surfaces comprise",
+            "other": [
+              "h2_surfaces_0_other",
+              "h2_surfaces_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Grounds: The surfaces comprise lawn, block paving, concrete, gravel, tarmac, timber decking, composite decking, stone paving, other finishes."
+        ],
+        "when": [
+          "cb_h2_h2_surfaces",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_surfaces",
+            "label": "Garden surfaces",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_boundaries",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_BOUNDARIES}",
+        "text": "Fence: The boundaries comprise {H2_BOUNDARIES}. Boundary ownership cannot be confirmed during a visual inspection. Your legal adviser should confirm ownership and maintenance responsibilities from the title documentation and the vendor(s).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_BOUNDARIES}",
+            "options": [
+              [
+                "h2_boundaries_0_timber_fencing",
+                "timber fencing"
+              ],
+              [
+                "h2_boundaries_0_brick_walls",
+                "brick walls"
+              ],
+              [
+                "h2_boundaries_0_hedging",
+                "hedging"
+              ],
+              [
+                "h2_boundaries_0_stone_walls",
+                "stone walls"
+              ],
+              [
+                "h2_boundaries_0_concrete_sections",
+                "concrete sections"
+              ],
+              [
+                "h2_boundaries_0_wire",
+                "wire"
+              ],
+              [
+                "h2_boundaries_0_metal_railings",
+                "metal railings"
+              ]
+            ],
+            "pdf_options": [
+              "timber fencing",
+              "brick walls",
+              "hedging",
+              "stone walls",
+              "concrete sections",
+              "wire",
+              "metal railings"
+            ],
+            "label": "Boundaries comprise",
+            "other": [
+              "h2_boundaries_0_other",
+              "h2_boundaries_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Fence: The boundaries comprise timber fencing, brick walls, hedging, stone walls, concrete sections, wire, metal railings, other."
+        ],
+        "when": [
+          "cb_h2_h2_boundaries",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_boundaries",
+            "label": "Boundaries",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_garden_cond",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_GARDEN_CONDITION}",
+        "text": "Condition: Where visible, the garage appears in {H2_GARDEN_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction of the garage should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{H2_GARDEN_CONDITION_COND}",
+            "dropdown": "actv_h2_garden_cond",
+            "field_label": "Garden condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition."
+        ],
+        "when": [
+          "actv_h2_garden_cond",
+          "Good"
+        ],
+        "when_any": [
+          [
+            "actv_h2_garden_cond",
+            "Reasonable"
+          ],
+          [
+            "actv_h2_garden_cond",
+            "Fair"
+          ],
+          [
+            "actv_h2_garden_cond",
+            "Poor"
+          ],
+          [
+            "actv_h2_garden_cond",
+            "Very poor"
+          ]
+        ]
+      },
+      {
+        "id": "h2_garden_no_defects",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_GARDEN_NO_DEFECTS}",
+        "text": "No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.",
+        "tokens": [],
+        "when": [
+          "cb_h2_h2_garden_no_defects",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_garden_no_defects",
+            "label": "Garden: no defects noted",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_hardstanding",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_HARDSTANDING}",
+        "text": "Hardstanding areas: The paths and hardstanding area appear {H2_HARD_LEVEL}, and exhibit {H2_HARD_UNEVEN}. Minor settlement is common and may be addressed during routine maintenance. Where areas of uneven paving, trip hazards, or surface deterioration are present, adequate repairs and removal of damaged sections should be undertaken where necessary to maintain safe use.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_HARD_LEVEL}",
+            "options": [
+              [
+                "h2_hardstanding_0_level",
+                "level"
+              ],
+              [
+                "h2_hardstanding_0_reasonably_level",
+                "reasonably level"
+              ]
+            ],
+            "pdf_options": [
+              "level",
+              "reasonably level"
+            ],
+            "label": "Paths and hardstanding appear"
+          },
+          {
+            "kind": "checks",
+            "token": "{H2_HARD_UNEVEN}",
+            "options": [
+              [
+                "h2_hardstanding_1_no_unevenness",
+                "no unevenness"
+              ],
+              [
+                "h2_hardstanding_1_minor_unevenness",
+                "minor unevenness"
+              ]
+            ],
+            "pdf_options": [
+              "no unevenness",
+              "minor unevenness"
+            ],
+            "label": "and exhibit"
+          }
+        ],
+        "pdf": [
+          "Hardstanding areas: The paths and hardstanding area appear level, reasonably level, and exhibit no unevenness, minor unevenness."
+        ],
+        "when": [
+          "cb_h2_h2_hardstanding",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_hardstanding",
+            "label": "Hardstanding areas",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_other_repair_fence",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_repair_fence",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_REPAIR_FENCE}",
+        "text": "Repair fence: Parts of the boundary fencing are {H2_FENCE_DEFECTS}. You should arrange to repair or replace the affected fencing soon. However. if the damage is significant, repair should be carried out promptly and may be expensive.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_FENCE_DEFECTS}",
+            "options": [
+              [
+                "h2fd_cracked",
+                "cracked"
+              ],
+              [
+                "cb_broken",
+                "broken"
+              ],
+              [
+                "cb_unstable",
+                "unstable"
+              ],
+              [
+                "cb_leaning",
+                "leaning"
+              ],
+              [
+                "cb_loose_in_places",
+                "loose in places"
+              ],
+              [
+                "cb_badly_damaged",
+                "severely damaged"
+              ],
+              [
+                "cb_rotted_in_places",
+                "rotten"
+              ],
+              [
+                "cb_missing_in_places",
+                "missing in places"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "broken",
+              "unstable",
+              "leaning",
+              "loose in places",
+              "severely damaged",
+              "rotten",
+              "missing in places"
+            ],
+            "label": "Boundary fencing is",
+            "other": [
+              "h2_repair_fence_0_other",
+              "h2_repair_fence_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Repair fence: Parts of the boundary fencing are cracked, broken, unstable, leaning, loose in places, severely damaged, rotten, missing in places, other."
+        ],
+        "when": [
+          "cb_h2_h2_repair_fence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_repair_fence",
+            "label": "Repair fence",
+            "type": "checkbox"
+          },
+          {
+            "id": "cb_front",
+            "label": "Front",
+            "type": "checkbox"
+          },
+          {
+            "id": "cb_rear",
+            "label": "Rear",
+            "type": "checkbox"
+          },
+          {
+            "id": "cb_side",
+            "label": "Side",
+            "type": "checkbox"
+          },
+          {
+            "id": "cb_communal",
+            "label": "Communal",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_other_repair_shed",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_sheds",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_SHEDS}",
+        "text": "Sheds: There is {H2_SHED_MATERIAL} shed(s) located within the grounds of the property. The roof(s) are {H2_SHED_ROOF}, and covered with {H2_SHED_COVER} materials.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_SHED_MATERIAL}",
+            "options": [
+              [
+                "h2_sheds_0_timber",
+                "timber"
+              ],
+              [
+                "h2_sheds_0_brick",
+                "brick"
+              ],
+              [
+                "h2_sheds_0_aluminium",
+                "aluminium"
+              ]
+            ],
+            "pdf_options": [
+              "timber",
+              "brick",
+              "aluminium"
+            ],
+            "label": "Shed(s) of",
+            "other": [
+              "h2_sheds_0_other",
+              "h2_sheds_0_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{H2_SHED_ROOF}",
+            "options": [
+              [
+                "h2_sheds_1_pitched",
+                "pitched"
+              ],
+              [
+                "h2_sheds_1_flat",
+                "flat"
+              ]
+            ],
+            "pdf_options": [
+              "pitched",
+              "flat"
+            ],
+            "label": "Roof(s) are",
+            "other": [
+              "h2_sheds_1_other",
+              "h2_sheds_1_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{H2_SHED_COVER}",
+            "options": [
+              [
+                "h2_sheds_2_felt",
+                "felt"
+              ],
+              [
+                "h2_sheds_2_tiles",
+                "tiles"
+              ],
+              [
+                "h2_sheds_2_metal_sheets",
+                "metal sheets"
+              ]
+            ],
+            "pdf_options": [
+              "felt",
+              "tiles",
+              "metal sheets"
+            ],
+            "label": "Covered with",
+            "other": [
+              "h2_sheds_2_other",
+              "h2_sheds_2_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Sheds: There is timber, brick, aluminium, other shed(s) located within the grounds of the property.",
+          "The roof(s) are pitched, flat, other, and covered with felt, tiles, metal sheets, other materials."
+        ],
+        "when": [
+          "cb_h2_h2_sheds",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_sheds",
+            "label": "Sheds",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_shed_cond",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_SHED_CONDITION}",
+        "text": "Condition: Where visible, the shed(s) appear in {H2_SHED_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction of the shed should be expected. However, where the shed is in poor condition, you should arrange to repair or replace the shed.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{H2_SHED_CONDITION_COND}",
+            "dropdown": "actv_h2_shed_cond",
+            "field_label": "Shed condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the shed(s) appear in good, reasonable, fair, poor, very poor condition."
+        ],
+        "when": [
+          "actv_h2_shed_cond",
+          "Good"
+        ],
+        "when_any": [
+          [
+            "actv_h2_shed_cond",
+            "Reasonable"
+          ],
+          [
+            "actv_h2_shed_cond",
+            "Fair"
+          ],
+          [
+            "actv_h2_shed_cond",
+            "Poor"
+          ],
+          [
+            "actv_h2_shed_cond",
+            "Very poor"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_other_large_outbuildings",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_ob",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_OUTBUILDING}",
+        "text": "Outbuilding: The property incorporates a {H2_OB_TYPE} permanent structure (s).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_OB_TYPE}",
+            "options": [
+              [
+                "h2_ob_0_large_shed",
+                "large shed"
+              ],
+              [
+                "h2_ob_0_workshop",
+                "workshop"
+              ],
+              [
+                "h2_ob_0_annex",
+                "annex"
+              ],
+              [
+                "h2_ob_0_summer_house",
+                "summer house"
+              ],
+              [
+                "h2_ob_0_office",
+                "office"
+              ],
+              [
+                "h2_ob_0_studio",
+                "studio"
+              ]
+            ],
+            "pdf_options": [
+              "large shed",
+              "workshop",
+              "annex",
+              "summer house",
+              "office",
+              "studio"
+            ],
+            "label": "Property incorporates a",
+            "other": [
+              "h2_ob_0_other",
+              "h2_ob_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Outbuilding: The property incorporates a large shed, workshop, annex, summer house, office, studio, other permanent structure (s)."
+        ],
+        "when": [
+          "cb_h2_h2_ob",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_ob",
+            "label": "Outbuilding",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_ob_cons",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_OB_CONSTRUCTION}",
+        "text": "Construction: The structure(s) is formed of {H2_OB_CONSTRUCTION} materials.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_OB_CONSTRUCTION}",
+            "options": [
+              [
+                "h2_ob_cons_0_bricks",
+                "bricks"
+              ],
+              [
+                "h2_ob_cons_0_blocks",
+                "blocks"
+              ],
+              [
+                "h2_ob_cons_0_timber",
+                "timber"
+              ],
+              [
+                "h2_ob_cons_0_steel",
+                "steel"
+              ],
+              [
+                "h2_ob_cons_0_prefabricated_concrete",
+                "prefabricated concrete"
+              ],
+              [
+                "h2_ob_cons_0_aluminium",
+                "aluminium"
+              ],
+              [
+                "h2_ob_cons_0_composite_boards",
+                "composite boards"
+              ]
+            ],
+            "pdf_options": [
+              "bricks",
+              "blocks",
+              "timber",
+              "steel",
+              "prefabricated concrete",
+              "aluminium",
+              "composite boards"
+            ],
+            "label": "Structure formed of",
+            "other": [
+              "h2_ob_cons_0_other",
+              "h2_ob_cons_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Construction: The structure(s) is formed of bricks, blocks, timber, steel, prefabricated concrete, aluminium, composite boards, other materials."
+        ],
+        "when": [
+          "cb_h2_h2_ob_cons",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_ob_cons",
+            "label": "Outbuilding construction",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_ob_roof",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_OB_ROOF}",
+        "text": "Roof: The roof is of {H2_OB_ROOF} construction and is covered with {H2_OB_COVER} material.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_OB_ROOF}",
+            "options": [
+              [
+                "h2_ob_roof_0_pitched",
+                "pitched"
+              ],
+              [
+                "h2_ob_roof_0_flat",
+                "flat"
+              ],
+              [
+                "h2_ob_roof_0_lean_to",
+                "lean-to"
+              ]
+            ],
+            "pdf_options": [
+              "pitched",
+              "flat",
+              "lean-to"
+            ],
+            "label": "Roof construction",
+            "other": [
+              "h2_ob_roof_0_other",
+              "h2_ob_roof_0_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{H2_OB_COVER}",
+            "options": [
+              [
+                "h2_ob_roof_1_clay_tiles",
+                "clay tiles"
+              ],
+              [
+                "h2_ob_roof_1_concrete_tiles",
+                "concrete tiles"
+              ],
+              [
+                "h2_ob_roof_1_slates",
+                "slates"
+              ],
+              [
+                "h2_ob_roof_1_felt",
+                "felt"
+              ],
+              [
+                "h2_ob_roof_1_rubber_membrane",
+                "rubber membrane"
+              ],
+              [
+                "h2_ob_roof_1_metal_sheets",
+                "metal sheets"
+              ]
+            ],
+            "pdf_options": [
+              "clay tiles",
+              "concrete tiles",
+              "slates",
+              "felt",
+              "rubber membrane",
+              "metal sheets"
+            ],
+            "label": "Roof covered with",
+            "other": [
+              "h2_ob_roof_1_other",
+              "h2_ob_roof_1_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Roof: The roof is of pitched, flat, lean-to, other construction and is covered with clay tiles, concrete tiles, slates, felt, rubber membrane, metal sheets, other material."
+        ],
+        "when": [
+          "cb_h2_h2_ob_roof",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_ob_roof",
+            "label": "Outbuilding roof",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_ob_floor",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_OB_FLOOR}",
+        "text": "Floor: The floor is constructed of {H2_OB_FLOOR} material. Minor cracking, shrinkage, and surface wear to concrete floors are not uncommon and do not necessarily indicate structural movement. The floor was inspected visually only, and concealed areas beneath floor coverings or finishes could not be examined.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_OB_FLOOR}",
+            "options": [
+              [
+                "h2_ob_floor_0_concrete",
+                "concrete"
+              ],
+              [
+                "h2_ob_floor_0_suspended_timber",
+                "suspended timber"
+              ],
+              [
+                "h2_ob_floor_0_engineered_timber",
+                "engineered timber"
+              ],
+              [
+                "h2_ob_floor_0_beam_and_block",
+                "beam and block"
+              ]
+            ],
+            "pdf_options": [
+              "concrete",
+              "suspended timber",
+              "engineered timber",
+              "beam and block"
+            ],
+            "label": "Floor constructed of",
+            "other": [
+              "h2_ob_floor_0_other",
+              "h2_ob_floor_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Floor: The floor is constructed of concrete, suspended timber, engineered timber, beam and block, other material."
+        ],
+        "when": [
+          "cb_h2_h2_ob_floor",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_ob_floor",
+            "label": "Outbuilding floor",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_ob_doors",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_OB_DOORS}",
+        "text": "Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of {H2_OB_DOORS} framed units. These appeared serviceable at the time of my inspection. Routine maintenance is recommended.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_OB_DOORS}",
+            "options": [
+              [
+                "h2_ob_doors_0_timber_upvc",
+                "timber uPVC"
+              ],
+              [
+                "h2_ob_doors_0_aluminium",
+                "aluminium"
+              ],
+              [
+                "h2_ob_doors_0_metal",
+                "metal"
+              ]
+            ],
+            "pdf_options": [
+              "timber uPVC",
+              "aluminium",
+              "metal"
+            ],
+            "label": "Doors / windows formed of",
+            "other": [
+              "h2_ob_doors_0_other",
+              "h2_ob_doors_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units."
+        ],
+        "when": [
+          "cb_h2_h2_ob_doors",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_ob_doors",
+            "label": "Outbuilding doors and windows",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "h2_ob_cond",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_OB_CONDITION}",
+        "text": "Condition: Where visible, the building appears in {H2_OB_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction of the outbuilding should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{H2_OB_CONDITION_COND}",
+            "dropdown": "actv_h2_ob_cond",
+            "field_label": "Outbuilding condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition."
+        ],
+        "when": [
+          "actv_h2_ob_cond",
+          "Good"
+        ],
+        "when_any": [
+          [
+            "actv_h2_ob_cond",
+            "Reasonable"
+          ],
+          [
+            "actv_h2_ob_cond",
+            "Fair"
+          ],
+          [
+            "actv_h2_ob_cond",
+            "Poor"
+          ],
+          [
+            "actv_h2_ob_cond",
+            "Very poor"
+          ]
+        ]
+      },
+      {
+        "id": "h2_ob_no_defects",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_OB_NO_DEFECTS}",
+        "text": "No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.",
+        "tokens": [],
+        "when": [
+          "cb_h2_h2_ob_no_defects",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_ob_no_defects",
+            "label": "Outbuilding: no defects noted",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_other_repair_outbuilding",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_repair_ob",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_REPAIR_OUTBUILDING}",
+        "text": "Repair outbuilding: Parts of the {H2_ROB_TYPE} permanent outbuilding are {H2_ROB_DEFECTS}. This should be repaired soon, and if the defects are significant or present a hazard, it should be promptly repaired.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_ROB_TYPE}",
+            "options": [
+              [
+                "h2_repair_ob_0_shed",
+                "shed"
+              ],
+              [
+                "h2_repair_ob_0_workshop",
+                "workshop"
+              ],
+              [
+                "h2_repair_ob_0_annex",
+                "annex"
+              ],
+              [
+                "h2_repair_ob_0_summer_house",
+                "summer house"
+              ],
+              [
+                "h2_repair_ob_0_office",
+                "office"
+              ],
+              [
+                "h2_repair_ob_0_studio",
+                "studio"
+              ]
+            ],
+            "pdf_options": [
+              "shed",
+              "workshop",
+              "annex",
+              "summer house",
+              "office",
+              "studio"
+            ],
+            "label": "Parts of the",
+            "other": [
+              "h2_repair_ob_0_other",
+              "h2_repair_ob_0_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{H2_ROB_DEFECTS}",
+            "options": [
+              [
+                "h2_repair_ob_1_damaged",
+                "damaged"
+              ],
+              [
+                "h2_repair_ob_1_have_broken_parts",
+                "have broken parts"
+              ],
+              [
+                "h2_repair_ob_1_is_unstable",
+                "is unstable"
+              ],
+              [
+                "h2_repair_ob_1_is_rotted_in_places",
+                "is rotted in places"
+              ],
+              [
+                "h2_repair_ob_1_have_missing_sections",
+                "have missing sections"
+              ]
+            ],
+            "pdf_options": [
+              "damaged",
+              "have broken parts",
+              "is unstable",
+              "is rotted in places",
+              "have missing sections"
+            ],
+            "label": "Defects",
+            "other": [
+              "h2_repair_ob_1_other",
+              "h2_repair_ob_1_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Repair outbuilding: Parts of the shed, workshop, annex, summer house, office, studio, other permanent outbuilding are damaged, have broken parts, is unstable, is rotted in places, have missing sections, other."
+        ],
+        "when": [
+          "cb_h2_h2_repair_ob",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_repair_ob",
+            "label": "Repair outbuilding",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_other_repair_retaining_walls",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_rw",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_RETAINING_WALL}",
+        "text": "Retaining Wall: The retaining wall(s) is {H2_RW_DEFECTS} and may present a potential safety hazard. As retaining walls support significant ground loads, failure could result in substantial damage and costly repairs. An appropriately qualified specialist should inspect the wall without delay and recommend any necessary remedial works. If the retaining wall is shared with the neighbouring property owner, they may have some rights. Before any work is done, you should ask your legal adviser to investigate this matter and explain the implications.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_RW_DEFECTS}",
+            "options": [
+              [
+                "cb_cracked",
+                "cracked"
+              ],
+              [
+                "h2rw_leaning",
+                "leaning"
+              ],
+              [
+                "cb_distorted",
+                "distorted"
+              ],
+              [
+                "cb_unstable",
+                "unstable"
+              ],
+              [
+                "h2rw_weak",
+                "weak"
+              ],
+              [
+                "cb_damaged",
+                "damaged"
+              ],
+              [
+                "h2rw_in_poor_condition",
+                "in poor condition"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "leaning",
+              "distorted",
+              "unstable",
+              "weak",
+              "damaged",
+              "in poor condition"
+            ],
+            "label": "Retaining wall is"
+          }
+        ],
+        "pdf": [
+          "Retaining Wall: The retaining wall(s) is cracked, leaning, distorted, unstable, weak, damaged, in poor condition and may present a potential safety hazard."
+        ],
+        "when": [
+          "cb_h2_h2_rw",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h2_h2_rw",
+            "label": "Retaining wall",
+            "type": "checkbox"
+          },
+          {
+            "id": "cb_front",
+            "label": "Front",
+            "type": "checkbox"
+          },
+          {
+            "id": "cb_side",
+            "label": "Side",
+            "type": "checkbox"
+          },
+          {
+            "id": "cb_rear",
+            "label": "Rear",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_other_repair_nearby_trees",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_trees",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_NEARBY_TREES}",
+        "text": "Nearby Trees: One or more trees are located close to the property. Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "No defects"
+        ],
+        "when_any": [
+          [
+            "actv_condition",
+            "Defects noted"
+          ]
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Nearby trees",
+            "type": "dropdown",
+            "options": [
+              "No defects",
+              "Defects noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "h2_trees_none",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_TREES_NO_DEFECTS}",
+        "text": "No defects: No significant detrimental effects on the property were noted to date, although the trees should be regularly pruned to restrict future growth and minimise the risk of defects occurring.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "No defects"
+        ]
+      },
+      {
+        "id": "h2_trees_defects",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_TREES_DEFECTS}",
+        "text": "Defects noted: One or more trees are located close to the property. Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods. With groups of trees, the risk is usually greatest during prolonged dry spells. Detrimental effects on the {H2_TREE_AFFECTED} were noted that include {H2_TREE_DEFECT}. You should contact a qualified person for further investigation and advice. Also, the trees should be regularly pruned to restrict future growth and minimise the risk of further defects occurring.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H2_TREE_AFFECTED}",
+            "options": [
+              [
+                "h2ta_property",
+                "property"
+              ],
+              [
+                "h2ta_fencing",
+                "fencing"
+              ],
+              [
+                "h2ta_finished_grounds",
+                "finished grounds"
+              ],
+              [
+                "h2ta_outbuilding",
+                "outbuilding"
+              ]
+            ],
+            "pdf_options": [
+              "property",
+              "fencing",
+              "finished grounds",
+              "outbuilding"
+            ],
+            "label": "Detrimental effects on the",
+            "other": [
+              "h2ta_other",
+              "h2ta_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{H2_TREE_DEFECT}",
+            "options": [
+              [
+                "cb_significant_cracks",
+                "significant cracks"
+              ],
+              [
+                "cb_subsidence_movement",
+                "subsidence movement"
+              ]
+            ],
+            "pdf_options": [
+              "significant cracks",
+              "subsidence movement"
+            ],
+            "label": "Defects include"
+          }
+        ],
+        "pdf": [
+          "Detrimental effects on the property, fencing, finished grounds, outbuilding, other were noted that include significant cracks, subsidence movement."
+        ],
+        "when": [
+          "actv_condition",
+          "Defects noted"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_other_repair_shrinkable_clay",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_subsoil",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_SUBSOIL}",
+        "text": "Subsoil: The exact nature of the subsoil has not been investigated as part of this survey. However, the subsoil in the area may include shrinkable clay. Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions. Your legal adviser should confirm, where applicable, ownership of the shared areas, rights of access, maintenance responsibilities, service charge liabilities, and any restrictions affecting their use.",
+        "tokens": [],
+        "when": [
+          "cb_shrinkable_clay",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_shrinkable_clay",
+            "label": "Subsoil",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_other_private_road",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h2_private",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_PRIVATE_ROAD}",
+        "text": "Private road: The road serving the property appears to be private and may not be maintained at public expense. Your legal adviser should confirm its status, together with any rights of access, maintenance responsibilities, and associated liabilities.",
+        "tokens": [],
+        "when": [
+          "cb_private_road",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_private_road",
+            "label": "Private road",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_grounds_other_front_garden__rear_garden",
+      "activity_grounds_other_front_garden__side_garden",
+      "activity_grounds_other_front_garden__other_garden",
+      "activity_grounds_other_front_garden__communal_garden",
+      "activity_other_repair_legal_issues",
+      "activity_grounds_other_not_inspected"
+    ]
+  }
+]

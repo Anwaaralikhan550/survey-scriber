@@ -1,0 +1,1428 @@
+[
+  {
+    "screen": "activity_inside_property_loft_converted",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_loft",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_LOFT_CONVERTED}",
+        "text": "Loft converted: The original roof structure has been substantially altered to form the loft conversion, with most structural elements now concealed from view. Consequently, I am unable to comment on the condition of the concealed areas. Your legal advisers must verify that all necessary planning permissions, Building Regulations approvals, and required interim and final inspections were obtained for the conversion before you commit to the purchase.",
+        "tokens": [],
+        "when": [
+          "cb_loft_converted",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_loft_converted",
+            "label": "Loft converted",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_about_roof_structure",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_desc",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_DESCRIPTION}",
+        "text": "Description: The roof structure is formed in {RS_CONSTRUCTION} construction.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RS_CONSTRUCTION}",
+            "options": [
+              [
+                "f1d_traditional_cut_timber",
+                "traditional cut timber"
+              ],
+              [
+                "f1d_prefabricated_trussed_rafters",
+                "prefabricated trussed rafters"
+              ],
+              [
+                "f1d_steel",
+                "steel"
+              ]
+            ],
+            "pdf_options": [
+              "traditional cut timber",
+              "prefabricated trussed rafters",
+              "steel"
+            ],
+            "label": "Roof structure formed in",
+            "other": [
+              "f1d_other",
+              "f1d_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The roof structure is formed in traditional cut timber, prefabricated trussed rafters, steel, other construction."
+        ]
+      },
+      {
+        "id": "f1_cond",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_CONDITION}",
+        "text": "Condition: Where visible, the roof structure appears in {RS_CONDITION} condition, consistent with its age and construction. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the roof structure material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{RS_CONDITION}",
+            "dropdown": "actv_roof_structure_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the roof structure appears in good, reasonable, fair, poor, very poor condition, consistent with its age and construction."
+        ]
+      },
+      {
+        "id": "f1_spray",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_SPRAY_FOAM}",
+        "text": "Spray foam insulation: Spray foam insulation has been applied to the underside of the roof, fully or partially concealing the roof structure and preventing a full inspection of the roof covering and timbers. Consequently, I am unable to assess the condition of the concealed elements, and defects such as timber decay, wet rot, insect attack, or roof leaks may be hidden. Spray foam can restrict ventilation, trap moisture, and increase the risk of timber deterioration. It may also adversely affect the property's mortgageability, insurability and future saleability, as many lenders and insurers require specialist reports or removal of the insulation before accepting the property. Before committing to the purchase, you should: Obtain written confirmation from your mortgage lender and insurer that the property is acceptable. Instruct an independent specialist to carry out an intrusive inspection and advise whether the spray foam should be removed. Ensure that necessary remedial works or removal are completed, or that the cost is reflected in the purchase price. No opinion can be given on the condition of the concealed roof structure, and I cannot accept responsibility for defects hidden by the spray foam insulation.",
+        "tokens": [],
+        "when": [
+          "cb_spray_foam",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_spray_foam",
+            "label": "Spray foam insulation",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f1_water",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_WATER_PENETRATION}",
+        "text": "Evidence of Water Penetration: Water staining or dampness was observed on roof timbers, underlay, or adjacent structural elements. The source should be identified and repaired to prevent further deterioration.",
+        "tokens": [],
+        "when": [
+          "cb_water_penetration",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_water_penetration",
+            "label": "Evidence of water penetration",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f1_soilpipe",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_CAPPED_SOIL_PIPE}",
+        "text": "Capped Soil Vent Pipe: A capped soil and vent pipe was noted terminating within the roof space. This arrangement is not considered appropriate, as any leakage or escape of foul gases could discharge into the roof space. The pipe should be inspected by a suitably qualified plumber to establish its purpose and condition. Where it forms part of the drainage ventilation system, it should be appropriately extended and terminated to the outside air in accordance with current requirements. Any redundant pipework should be removed or suitably sealed.",
+        "tokens": [],
+        "when": [
+          "cb_capped_soil_vent_pipe",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_capped_soil_vent_pipe",
+            "label": "Capped soil and vent pipe",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f1_general",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: Roof spaces should remain adequately ventilated and free from unnecessary stored items that may restrict inspection or ventilation. Roof timbers should be inspected whenever significant roofing works are undertaken. Prompt attention to water penetration will reduce the risk of timber decay and associated structural deterioration.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_roof_underlay",
+    "new_screen": {
+      "id": "activity_inside_property_roof_underlay",
+      "title": "Roof underlay",
+      "parent": "group_roof_structure_58",
+      "order": 24,
+      "after": "activity_inside_property_about_roof_structure"
+    },
+    "rules": [
+      {
+        "id": "f1_ul_no",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_NO_UNDERLAY}",
+        "text": "No Underlay: The absence of a roof underlay could result in water leakage, lower internal temperatures, higher heating costs, condensation, and mould growth. I recommend that you contact a qualified person to inspect the roof covering and confirm its watertightness.",
+        "tokens": [],
+        "when": [
+          "actv_underlay",
+          "No underlay"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_underlay",
+            "label": "Roof underlay",
+            "type": "dropdown",
+            "options": [
+              "No underlay",
+              "Underlay present"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f1_ul_present",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_UNDERLAY_PRESENT}",
+        "text": "Underlay present: The underside of the roof covering incorporates {UL_MATERIALS}, which should provide a secondary barrier to driving rain and snow, where visible. Where visible, the underlay appears in {UL_CONDITION} condition. Where no underlay is present, this is likely to reflect the age and type of construction and is not necessarily a defect. However, installing a suitable breathable underlay when the roof covering is next renewed would improve weather protection and thermal performance. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the underlay material should be expected.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{UL_MATERIALS}",
+            "options": [
+              [
+                "f1u_traditional_bituminous_felt",
+                "traditional bituminous felt"
+              ],
+              [
+                "f1u_breathable_membrane",
+                "breathable membrane"
+              ],
+              [
+                "f1u_timber_boards",
+                "timber boards"
+              ]
+            ],
+            "pdf_options": [
+              "traditional bituminous felt",
+              "breathable membrane",
+              "timber boards"
+            ],
+            "label": "Underside incorporates",
+            "other": [
+              "f1u_other",
+              "f1u_other_text"
+            ],
+            "cond": "actv_underlay=Underlay present"
+          },
+          {
+            "kind": "dropdown",
+            "token": "{UL_CONDITION}",
+            "dropdown": "actv_ul_condition",
+            "field_label": "Underlay condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true,
+            "cond": "actv_underlay=Underlay present"
+          }
+        ],
+        "pdf": [
+          "Underlay present: The underside of the roof covering incorporates traditional bituminous felt, breathable membrane, timber boards, other, which should provide a secondary barrier to driving rain and snow, where visible.",
+          "Where visible, the underlay appears in good, reasonable, fair, poor, very poor condition."
+        ],
+        "when": [
+          "actv_underlay",
+          "Underlay present"
+        ]
+      },
+      {
+        "id": "f1_ul_defects",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_UNDERLAY_DEFECTS}",
+        "text": "Defects noted: The roof underlay is {UL_DEFECTS} in places, reducing its effectiveness as a secondary barrier against wind-driven rain and dust. I recommend that a qualified roofing contractor inspect the roof covering to confirm its weathertightness and carry out any necessary repairs. Ongoing routine maintenance appropriate to the roof covering should be expected.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{UL_DEFECTS}",
+            "options": [
+              [
+                "f1ud_worn",
+                "worn"
+              ],
+              [
+                "f1ud_torn",
+                "torn"
+              ],
+              [
+                "f1ud_missing",
+                "missing"
+              ],
+              [
+                "f1ud_damaged",
+                "damaged"
+              ]
+            ],
+            "pdf_options": [
+              "worn",
+              "torn",
+              "missing",
+              "damaged"
+            ],
+            "label": "Underlay is",
+            "cond": "actv_underlay=Underlay present"
+          }
+        ],
+        "pdf": [
+          "Defects noted: The roof underlay is worn, torn, missing, damaged in places, reducing its effectiveness as a secondary barrier against wind-driven rain and dust."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_roof_ventilation",
+    "new_screen": {
+      "id": "activity_inside_property_roof_ventilation",
+      "title": "Roof ventilation",
+      "parent": "group_roof_structure_58",
+      "order": 26,
+      "after": "activity_inside_property_roof_underlay"
+    },
+    "rules": [
+      {
+        "id": "f1_ve_no",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_NO_VENTILATION}",
+        "text": "No ventilation: No ventilation has been provided in the roof space. The roof space must be ventilated to the outside air to prevent dampness. When installing insulation, the ventilation must not be obstructed.",
+        "tokens": [],
+        "when": [
+          "actv_ventilation",
+          "No ventilation"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_ventilation",
+            "label": "Roof ventilation",
+            "type": "dropdown",
+            "options": [
+              "No ventilation",
+              "Ventilation noted",
+              "Condensation noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f1_ve_noted",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_VENTILATION_NOTED}",
+        "text": "Ventilation noted: The roof space appears to have {VENT_LEVEL} ventilation. Adequate roof space ventilation assists in reducing the risk of condensation and timber decay. Where ventilation is limited, improvements should be considered when future roofing works are undertaken.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{VENT_LEVEL}",
+            "dropdown": "actv_vent_level",
+            "field_label": "Ventilation appears",
+            "dropdown_options": [
+              "Adequate",
+              "Limited",
+              "Restricted"
+            ],
+            "pdf_options": [
+              "adequate",
+              "limited",
+              "restricted"
+            ],
+            "lower": true,
+            "cond": "actv_ventilation=Ventilation noted"
+          }
+        ],
+        "pdf": [
+          "Ventilation noted: The roof space appears to have adequate, limited, restricted ventilation."
+        ],
+        "when": [
+          "actv_ventilation",
+          "Ventilation noted"
+        ]
+      },
+      {
+        "id": "f1_ve_cond",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_CONDENSATION_NOTED}",
+        "text": "Condensation noted: The roof space has no or insufficient ventilation, resulting in condensation and mould growth on some of the timbers or roof underlay. Additional ventilation should be provided to improve air circulation, reduce condensation, and help maintain the condition of the roof timbers. Significantly damaged or rotted timbers should be replaced.",
+        "tokens": [],
+        "when": [
+          "actv_ventilation",
+          "Condensation noted"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_roof_insulation",
+    "new_screen": {
+      "id": "activity_inside_property_roof_insulation",
+      "title": "Roof insulation",
+      "parent": "group_roof_structure_58",
+      "order": 28,
+      "after": "activity_inside_property_roof_ventilation"
+    },
+    "rules": [
+      {
+        "id": "f1_in",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_THERMAL_INSULATION}",
+        "text": "Thermal Insulation: The roof space floor insulation appears {INSULATION_STATE} based upon the visible areas only. The thickness and continuity of insulation cannot be confirmed without disturbing the insulation. Reference should also be made to the Energy Performance Certificate where available.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{INSULATION_STATE}",
+            "options": [
+              [
+                "f1i_adequate",
+                "adequate"
+              ],
+              [
+                "f1i_limited",
+                "limited"
+              ],
+              [
+                "f1i_insufficient",
+                "insufficient"
+              ],
+              [
+                "f1i_poorly_fitted",
+                "poorly fitted"
+              ]
+            ],
+            "pdf_options": [
+              "adequate",
+              "limited",
+              "insufficient",
+              "poorly fitted"
+            ],
+            "label": "Insulation appears",
+            "other": [
+              "f1i_other",
+              "f1i_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Thermal Insulation: The roof space floor insulation appears adequate, limited, insufficient, poorly fitted, other based upon the visible areas only."
+        ]
+      },
+      {
+        "id": "f1_in_ok",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_INSULATION_ADEQUATE}",
+        "text": "Adequate insulation: The insulation to the loft floor appears adequate where visible. Where insulation is inadequate or absent, you should upgrade it to a depth of 270–300 mm to meet current recommended standards, taking care not to obstruct roof ventilation.",
+        "tokens": [],
+        "when": [
+          "actv_insulation_outcome",
+          "Adequate insulation"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_insulation_outcome",
+            "label": "Insulation outcome",
+            "type": "dropdown",
+            "options": [
+              "Adequate insulation",
+              "Inadequate/no insulation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f1_in_bad",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_INSULATION_INADEQUATE}",
+        "text": "Inadequate/no insulation: The loft insulation is below the current recommended standard of 270–300 mm or is absent. This can lead to heat loss, higher heating costs, and an increased risk of condensation and mould. I recommend upgrading the insulation to current standards, ensuring roof ventilation is not obstructed.",
+        "tokens": [],
+        "when": [
+          "actv_insulation_outcome",
+          "Inadequate/no insulation"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_water_tank",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_tank",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_WATER_TANKS}",
+        "text": "Water Storage Tanks: The roof space contains {TANK_MATERIALS} cold water storage tanks.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{TANK_MATERIALS}",
+            "options": [
+              [
+                "f1t_plastic",
+                "plastic"
+              ],
+              [
+                "f1t_galvanised_steel",
+                "galvanised steel"
+              ],
+              [
+                "f1t_asbestos_cement",
+                "asbestos cement"
+              ],
+              [
+                "f1t_fibreglass",
+                "fibreglass"
+              ]
+            ],
+            "pdf_options": [
+              "plastic",
+              "galvanised steel",
+              "asbestos cement",
+              "fibreglass"
+            ],
+            "label": "Cold water storage tanks",
+            "other": [
+              "f1t_other",
+              "f1t_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Water Storage Tanks: The roof space contains plastic, galvanised steel, asbestos cement, fibreglass, other cold water storage tanks."
+        ]
+      },
+      {
+        "id": "f1_tank_cond",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_TANK_CONDITION}",
+        "text": "Condition: Where visible, the tank appears in {TANK_CONDITION} condition. No defects noted: No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated. Routine maintenance appropriate to the tank material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{TANK_CONDITION}",
+            "dropdown": "actv_tank_condition",
+            "field_label": "Tank condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the tank appears in good, reasonable, fair, poor, very poor condition."
+        ]
+      },
+      {
+        "id": "f1_tank_leak",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_TANK_LEAKING}",
+        "text": "Leaking: The water tank is leaking or in disrepair. You should repair or replace this promptly to prevent further dampness and damage to nearby elements.",
+        "tokens": [],
+        "when": [
+          "cb_tank_leaking",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_tank_leaking",
+            "label": "Leaking",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "f1_tank_ins",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_TANK_INSULATION}",
+        "text": "Water Tank Insulation: The water tank and associated pipework appear {TANK_INSULATION}. Improving insulation may reduce the risk of freezing and heat loss. The absence of, or inadequate, insulation could result in condensation, dampness or leakage to the ceiling or surrounding areas.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{TANK_INSULATION}",
+            "dropdown": "actv_tank_insulation",
+            "field_label": "Tank insulation",
+            "dropdown_options": [
+              "Adequately insulated",
+              "Partially insulated",
+              "Uninsulated"
+            ],
+            "pdf_options": [
+              "adequately insulated",
+              "partially insulated",
+              "uninsulated"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Water Tank Insulation: The water tank and associated pipework appear adequately insulated, partially insulated, uninsulated."
+        ]
+      },
+      {
+        "id": "f1_tank_cover",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_TANK_COVER}",
+        "text": "Missing or Inadequate tank cover: The {TANK_COVER_MATERIALS} cold water tank cover(s) are missing or inadequate. This should be replaced soon.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{TANK_COVER_MATERIALS}",
+            "options": [
+              [
+                "f1c_plastic",
+                "plastic"
+              ],
+              [
+                "f1c_galvanised_metal",
+                "galvanised metal"
+              ],
+              [
+                "f1c_asbestos",
+                "asbestos"
+              ]
+            ],
+            "pdf_options": [
+              "plastic",
+              "galvanised metal",
+              "asbestos"
+            ],
+            "label": "Tank cover missing or inadequate",
+            "other": [
+              "f1c_other",
+              "f1c_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Missing or Inadequate tank cover: The plastic, galvanised metal, asbestos, other cold water tank cover(s) are missing or inadequate."
+        ]
+      },
+      {
+        "id": "f1_tank_disused",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_TANK_DISUSED}",
+        "text": "Disused Water Tank: {DISUSED_TANKS} disused water storage tank(s) remain within the roof space. Removal may be considered during future maintenance where it is no longer required.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DISUSED_TANKS}",
+            "options": [
+              [
+                "f1x_plastic",
+                "plastic"
+              ],
+              [
+                "f1x_galvanised_steel",
+                "galvanised steel"
+              ],
+              [
+                "f1x_asbestos_cement",
+                "asbestos cement"
+              ]
+            ],
+            "pdf_options": [
+              "plastic",
+              "galvanised steel",
+              "asbestos cement"
+            ],
+            "label": "Disused tanks",
+            "other": [
+              "f1x_other",
+              "f1x_other_text"
+            ],
+            "cap": true
+          }
+        ],
+        "pdf": [
+          "Disused Water Tank: Plastic, galvanised steel, asbestos cement, other disused water storage tank(s) remain within the roof space."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_repair_timber_structure",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_tdef",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_TIMBER_DEFECTS}",
+        "text": "Timber defects: Localised {TIMBER_DEFECTS} were observed. Repairs or further investigation should be undertaken where structural adequacy is uncertain.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{TIMBER_DEFECTS}",
+            "options": [
+              [
+                "f1td_distortion",
+                "distortion"
+              ],
+              [
+                "f1td_splitting",
+                "splitting"
+              ],
+              [
+                "f1td_cracking",
+                "cracking"
+              ],
+              [
+                "f1td_notching",
+                "notching"
+              ],
+              [
+                "f1td_alterations",
+                "alterations"
+              ]
+            ],
+            "pdf_options": [
+              "distortion",
+              "splitting",
+              "cracking",
+              "notching",
+              "alterations"
+            ],
+            "label": "Localised",
+            "other": [
+              "f1td_other",
+              "f1td_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Timber defects: Localised distortion, splitting, cracking, notching, alterations, other were observed."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_repair_timber_rot",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_rot",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_TIMBER_DECAY}",
+        "text": "Timber Decay: Evidence of {TIMBER_DECAY} timber decay was observed. The source of moisture should be identified and promptly rectified before repairs are undertaken. Ventilation to the roof space should be maintained to prevent conditions favourable to rot.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{TIMBER_DECAY}",
+            "options": [
+              [
+                "f1r_wet_rot",
+                "wet rot"
+              ],
+              [
+                "f1r_dry_rot",
+                "dry rot"
+              ],
+              [
+                "f1r_fungal_decay",
+                "fungal decay"
+              ]
+            ],
+            "pdf_options": [
+              "wet rot",
+              "dry rot",
+              "fungal decay"
+            ],
+            "label": "Evidence of",
+            "other": [
+              "f1r_other",
+              "f1r_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Timber Decay: Evidence of wet rot, dry rot, fungal decay, other timber decay was observed."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_repair_under_size_timber",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_thin",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_THIN_TIMBERS}",
+        "text": "Thin Timbers: Parts of the original timber structure are too small, and this could affect the stability of the roof structure. You should ask an appropriately qualified person to inspect the roof and recommend a repair scheme.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Thin timbers",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_repair_heavy_roof",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_heavy",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_HEAVY_TILES}",
+        "text": "Heavy tiles sagging: The roof covering is too heavy and has caused the roof structure to distort, sag, or cause nearby walls to crack. You should ask an appropriately qualified person or roofing specialist to inspect the roof to determine the extent of the problem and specify any necessary remedial works.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Heavy tiles sagging",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_repair_insect_infestation",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_wb_no",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_NO_WOOD_BORING}",
+        "text": "No Wood-boring: No visible evidence of active wood-boring insect infestation was observed in the accessible roof timbers. Roof space is intrinsically a dusty place, and such evidence may be concealed by dust and insulation. Historic flight holes may be present and are not necessarily indicative of active infestation.",
+        "tokens": [],
+        "when": [
+          "actv_insect_infestation",
+          "No wood-boring"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_insect_infestation",
+            "label": "Wood-boring insects",
+            "type": "dropdown",
+            "options": [
+              "No wood-boring",
+              "Wood boring noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f1_wb_yes",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_WOOD_BORING_NOTED}",
+        "text": "Wood Boring Noted: Evidence of {WB_ACTIVITY} wood-boring insect activity was observed. Further inspection by an appropriately qualified timber specialist is recommended where activity appears active or widespread. Otherwise, for historic activity, further enquiries should be made to the vendor regarding its history, treatment work, and guarantee certificates.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WB_ACTIVITY}",
+            "options": [
+              [
+                "f1w_active",
+                "active"
+              ],
+              [
+                "f1w_historic",
+                "historic"
+              ]
+            ],
+            "pdf_options": [
+              "active",
+              "historic"
+            ],
+            "label": "Activity observed",
+            "cond": "actv_insect_infestation=Wood boring noted"
+          }
+        ],
+        "pdf": [
+          "Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed."
+        ],
+        "when": [
+          "actv_insect_infestation",
+          "Wood boring noted"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_roof_movement",
+    "new_screen": {
+      "id": "activity_inside_property_roof_movement",
+      "title": "Roof movement",
+      "parent": "group_roof_structure_58",
+      "order": 30,
+      "after": "activity_inside_property_repair_heavy_roof"
+    },
+    "rules": [
+      {
+        "id": "f1_move",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_ROOF_MOVEMENT}",
+        "text": "Roof Movement: Evidence of {RM_EVIDENCE} was observed. Observed roof movement is {RM_LEVEL}. Further investigation by an appropriately qualified roofing contractor is recommended where movement appears significant or presents a hazard.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RM_EVIDENCE}",
+            "options": [
+              [
+                "f1m_deflection",
+                "deflection"
+              ],
+              [
+                "f1m_sagging",
+                "sagging"
+              ],
+              [
+                "f1m_spread",
+                "spread"
+              ]
+            ],
+            "pdf_options": [
+              "deflection",
+              "sagging",
+              "spread"
+            ],
+            "label": "Evidence of",
+            "other": [
+              "f1m_other",
+              "f1m_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{RM_LEVEL}",
+            "options": [
+              [
+                "f1ml_normal",
+                "normal"
+              ],
+              [
+                "f1ml_minor",
+                "minor"
+              ],
+              [
+                "f1ml_significant",
+                "significant"
+              ],
+              [
+                "f1ml_severe",
+                "severe"
+              ],
+              [
+                "f1ml_presents_a_hazard",
+                "presents a hazard"
+              ]
+            ],
+            "pdf_options": [
+              "normal",
+              "minor",
+              "significant",
+              "severe",
+              "presents a hazard"
+            ],
+            "label": "Observed movement is",
+            "other": [
+              "f1ml_other",
+              "f1ml_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Roof Movement: Evidence of deflection, sagging, spread, other was observed.",
+          "Observed roof movement is normal, minor, significant, severe, presents a hazard, other."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_structural_alterations",
+    "new_screen": {
+      "id": "activity_inside_property_structural_alterations",
+      "title": "Structural alterations",
+      "parent": "group_roof_structure_58",
+      "order": 32,
+      "after": "activity_inside_property_roof_movement"
+    },
+    "rules": [
+      {
+        "id": "f1_alter",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_STRUCTURAL_ALTERATIONS}",
+        "text": "Structural Alterations: Evidence of structural alterations to the roof space was observed, including {RS_ALTERATIONS} alterations. The adequacy of structural support cannot be confirmed during a visual inspection. Your legal adviser should confirm that appropriate statutory approvals and completion certificates were obtained where applicable.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RS_ALTERATIONS}",
+            "options": [
+              [
+                "f1a_loft_conversion",
+                "loft conversion"
+              ],
+              [
+                "f1a_altered_roof_members",
+                "altered roof members"
+              ],
+              [
+                "f1a_removed_struts",
+                "removed struts"
+              ],
+              [
+                "f1a_trimmed_rafters",
+                "trimmed rafters"
+              ],
+              [
+                "f1a_replacement_supports",
+                "replacement supports"
+              ],
+              [
+                "f1a_additional_timber_supports",
+                "additional timber supports"
+              ]
+            ],
+            "pdf_options": [
+              "loft conversion",
+              "altered roof members",
+              "removed struts",
+              "trimmed rafters",
+              "replacement supports",
+              "additional timber supports"
+            ],
+            "label": "Alterations include",
+            "other": [
+              "f1a_other",
+              "f1a_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Structural Alterations: Evidence of structural alterations to the roof space was observed, including loft conversion, altered roof members, removed struts, trimmed rafters, replacement supports, additional timber supports, other alterations."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_repair_removed_chimney_breast",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_cb",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_CHIMNEY_BREAST}",
+        "text": "Chimney Breast Alterations: Evidence was observed that a chimney breast has been {CB_STATE} within the roof space.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CB_STATE}",
+            "options": [
+              [
+                "f1cb_removed",
+                "removed"
+              ],
+              [
+                "f1cb_partially_removed",
+                "partially removed"
+              ],
+              [
+                "f1cb_altered",
+                "altered"
+              ],
+              [
+                "f1cb_rendered",
+                "rendered"
+              ]
+            ],
+            "pdf_options": [
+              "removed",
+              "partially removed",
+              "altered",
+              "rendered"
+            ],
+            "label": "Chimney breast has been",
+            "other": [
+              "f1cb_other",
+              "f1cb_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Chimney Breast Alterations: Evidence was observed that a chimney breast has been removed, partially removed, altered, rendered, other within the roof space."
+        ]
+      },
+      {
+        "id": "f1_cb_ni",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_CHIMNEY_NOT_INSPECTED}",
+        "text": "Not inspected: Part of the chimney breast within the roof space has been removed. I could not confirm whether the remaining masonry is adequately supported due to limited visibility. Inadequate support can compromise the building's structural stability. Your legal adviser should confirm that the necessary Building Regulations approval was obtained. If this cannot be confirmed, or there is any doubt about the adequacy of the support, you should instruct a suitably qualified professional to inspect the remaining structure and provide recommendations before committing to the purchase.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Not inspected"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Support to remaining structure",
+            "type": "dropdown",
+            "options": [
+              "Not inspected",
+              "Adequate support",
+              "Poor support",
+              "Risk of collapse"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f1_cb_ok",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_CHIMNEY_ADEQUATE}",
+        "text": "Adequate support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure appears to be properly supported. Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work. If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Adequate support"
+        ]
+      },
+      {
+        "id": "f1_cb_poor",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_CHIMNEY_POOR}",
+        "text": "Poor support: Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported. Your legal adviser should confirm that the necessary Building Regulations approval was obtained for this work. If approval cannot be confirmed, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Poor support"
+        ]
+      },
+      {
+        "id": "f1_cb_risk",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_CHIMNEY_COLLAPSE}",
+        "text": "Risk of collapse: Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse. This is a safety hazard. You should ask your legal adviser to check if the local authority gave permission for this work. Further, you should instruct a suitably qualified professional to inspect the structure and provide a report with any necessary recommendations as soon as possible.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Risk of collapse"
+        ]
+      },
+      {
+        "id": "f1_cb_damp",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_CHIMNEY_DAMP}",
+        "text": "Minor Chimney Damp: Minor dampness from water penetration was noted to the rendered chimney breast within the roof space. This is not uncommon in a property of this age and construction, as a damp-proof course would not normally have been provided to the chimney. The moisture is likely to have been exacerbated by defects in the flashing where the roof abuts the chimney stack. This is not considered a significant concern at present, but the flashing should be inspected and repaired if necessary, during routine roof maintenance or when the roof covering is next renewed.",
+        "tokens": [],
+        "when": [
+          "cb_damp_chimney",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_damp_chimney",
+            "label": "Minor chimney damp",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_repair_party_walls",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_pw_part",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_PARTY_WALL_PARTIAL}",
+        "text": "Partially missing: The party wall within the roof space is incomplete, leaving gaps that could allow fire to spread between this and the neighbouring property. The wall should be extended to the underside of the roof covering and all gaps suitably fire-stopped as soon as possible. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property.",
+        "tokens": [],
+        "when": [
+          "actv_party_wall",
+          "Partially missing"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_party_wall",
+            "label": "Party wall",
+            "type": "dropdown",
+            "options": [
+              "Partially missing",
+              "Largely missing"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f1_pw_large",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_PARTY_WALL_LARGE}",
+        "text": "Largely missing: The party wall within the roof space is missing, creating a risk of fire spread between this and the neighbouring property and reducing security between the properties. The wall should be rebuilt to the underside of the roof covering and all gaps appropriately fire-stopped without delay. As the party wall may be subject to legal rights and obligations under the Party Wall etc. Act 1996, you should consult your legal adviser before arranging any works, particularly where the proposed work may affect the adjoining property.",
+        "tokens": [],
+        "when": [
+          "actv_party_wall",
+          "Largely missing"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_roof_structure_not_inspected",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f1_not_full",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_ROOF_NOT_FULLY_INSPECTED}",
+        "text": "Roof Not Fully Inspected: I could not fully inspect the roof timber because of {RS_LIMITS} at the time of my inspection. No comments can be made regarding unseen elements.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{RS_LIMITS}",
+            "options": [
+              [
+                "f1n_limited_roof_height",
+                "limited roof height"
+              ],
+              [
+                "f1n_the_floor_was_not_safe_to_walk_on",
+                "the floor was not safe to walk on"
+              ],
+              [
+                "f1n_floor_was_boarded",
+                "floor was boarded"
+              ],
+              [
+                "f1n_excessive_storage",
+                "excessive storage"
+              ],
+              [
+                "f1n_insulation",
+                "insulation"
+              ],
+              [
+                "f1n_underlining",
+                "underlining"
+              ]
+            ],
+            "pdf_options": [
+              "limited roof height",
+              "the floor was not safe to walk on",
+              "floor was boarded",
+              "excessive storage",
+              "insulation",
+              "underlining"
+            ],
+            "label": "Could not fully inspect the roof timber because",
+            "other": [
+              "f1n_other",
+              "f1n_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Roof Not Fully Inspected: I could not fully inspect the roof timber because of limited roof height; the floor was not safe to walk on, floor was boarded, excessive storage, insulation, underlining, other at the time of my inspection."
+        ]
+      },
+      {
+        "id": "f1_unsafe",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_UNSAFE_FLOOR}",
+        "text": "Unsafe floor: I could not fully inspect the roof timbers because the floor was unsafe to walk on at the time of my inspection.",
+        "tokens": [],
+        "when": [
+          "cb_unsafe_floor",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_unsafe_floor",
+            "label": "Unsafe floor",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_roof_structure_main_screen",
+    "rules": [
+      {
+        "id": "f1_intro",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{F1_INTRO}",
+        "text": "The roof structure was inspected from the roof access hatch where available and from those areas that were safely accessible at the time of the inspection.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_inside_property_weather_condition",
+      "activity_inside_property_repair_tank",
+      "activity_inside_property_repair_roof_spreading"
+    ]
+  }
+]

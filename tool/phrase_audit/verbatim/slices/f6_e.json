@@ -1,0 +1,606 @@
+[
+  {
+    "screen": "activity_in_side_property_built_in_fittings",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f6_worktops",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_WORKTOPS}",
+        "text": "Worktop(s): The {WT_ROOMS} worktops comprise {WORKTOP_MATERIALS} material.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WT_ROOMS}",
+            "options": [
+              [
+                "f6wr_kitchen",
+                "kitchen"
+              ],
+              [
+                "f6wr_utility_room",
+                "utility room"
+              ]
+            ],
+            "pdf_options": [
+              "kitchen",
+              "utility room"
+            ],
+            "label": "Worktops in",
+            "other": [
+              "cb_other_1008",
+              "et_other_764"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{WORKTOP_MATERIALS}",
+            "options": [
+              [
+                "f6wt_laminate_particle_board",
+                "laminate particle board"
+              ],
+              [
+                "f6wt_solid_timber",
+                "solid timber"
+              ],
+              [
+                "f6wt_granite",
+                "granite"
+              ],
+              [
+                "f6wt_quartz",
+                "quartz"
+              ],
+              [
+                "f6wt_stone",
+                "stone"
+              ],
+              [
+                "f6wt_corian",
+                "Corian"
+              ],
+              [
+                "f6wt_compressed_composite",
+                "compressed composite"
+              ],
+              [
+                "f6wt_marble",
+                "marble"
+              ],
+              [
+                "f6wt_steel",
+                "steel"
+              ]
+            ],
+            "pdf_options": [
+              "laminate particle board",
+              "solid timber",
+              "granite",
+              "quartz",
+              "stone",
+              "Corian",
+              "compressed composite",
+              "marble",
+              "steel"
+            ],
+            "label": "Worktops comprise",
+            "other": [
+              "cb_other_672",
+              "et_other_614"
+            ]
+          }
+        ],
+        "pdf": [
+          "Worktop(s): The kitchen, utility room, other worktops comprise laminate particle board, solid timber, granite, quartz, stone, Corian, compressed composite, marble, steel, other material."
+        ]
+      },
+      {
+        "id": "f6_fittings",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_FITTINGS}",
+        "text": "Fittings: The {FT_ROOMS} units are formed in {FITTING_MATERIALS} materials.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{FT_ROOMS}",
+            "options": [
+              [
+                "f6fr_kitchen",
+                "kitchen"
+              ],
+              [
+                "f6fr_utility_room",
+                "utility room"
+              ]
+            ],
+            "pdf_options": [
+              "kitchen",
+              "utility room"
+            ],
+            "label": "Units in",
+            "other": [
+              "f6fr_other",
+              "f6fr_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{FITTING_MATERIALS}",
+            "options": [
+              [
+                "f6fm_timber",
+                "timber"
+              ],
+              [
+                "f6fm_vinyl_wrapped_timber",
+                "vinyl-wrapped timber"
+              ],
+              [
+                "f6fm_laminated_mdf",
+                "laminated MDF"
+              ]
+            ],
+            "pdf_options": [
+              "timber",
+              "vinyl-wrapped timber",
+              "laminated MDF"
+            ],
+            "label": "Units formed in",
+            "other": [
+              "cb_other_343",
+              "et_other_745"
+            ]
+          }
+        ],
+        "pdf": [
+          "Fittings: The kitchen, utility room, other units are formed in timber, vinyl-wrapped timber, laminated MDF, other materials."
+        ]
+      },
+      {
+        "id": "f6_cond",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_CONDITION}",
+        "text": "Condition: Where visible, they appear in {FITTING_CONDITION} condition. Routine adjustment and maintenance should be expected with normal use. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the built-in fittings should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{FITTING_CONDITION}",
+            "dropdown": "android_material_design_spinner3",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition."
+        ]
+      },
+      {
+        "id": "f6_sink",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_KITCHEN_SINK}",
+        "text": "Kitchen Sink: The {SINK_ROOMS} sink(s) is formed in {SINK_MATERIAL} material. Where visible, it appears in {SINK_CONDITION} condition. The sink was inspected visually only and was not assessed for leakage or drainage performance.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{SINK_ROOMS}",
+            "options": [
+              [
+                "f6sr_kitchen",
+                "kitchen"
+              ],
+              [
+                "f6sr_utility_room",
+                "utility room"
+              ]
+            ],
+            "pdf_options": [
+              "kitchen",
+              "utility room"
+            ],
+            "label": "Sink in",
+            "other": [
+              "f6sr_other",
+              "f6sr_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{SINK_MATERIAL}",
+            "options": [
+              [
+                "f6sm_stainless_steel",
+                "stainless steel"
+              ],
+              [
+                "f6sm_ceramic",
+                "ceramic"
+              ],
+              [
+                "f6sm_composite",
+                "composite"
+              ],
+              [
+                "f6sm_stone",
+                "stone"
+              ]
+            ],
+            "pdf_options": [
+              "stainless steel",
+              "ceramic",
+              "composite",
+              "stone"
+            ],
+            "label": "Sink formed in",
+            "other": [
+              "f6sm_other",
+              "f6sm_other_text"
+            ]
+          },
+          {
+            "kind": "dropdown",
+            "token": "{SINK_CONDITION}",
+            "dropdown": "actv_sink_condition",
+            "field_label": "Sink condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Kitchen Sink: The kitchen, utility room, other sink(s) is formed in stainless steel, ceramic, composite, stone, other material.",
+          "Where visible, it appears in good, reasonable, fair, poor, very poor condition."
+        ]
+      },
+      {
+        "id": "f6_appliances",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_APPLIANCES}",
+        "text": "Built-in Appliances: The property incorporates {APPLIANCES} built-in appliances. These appliances have not been assessed. Their condition, safety and serviceability are outside the scope of this inspection.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{APPLIANCES}",
+            "options": [
+              [
+                "f6ap_oven",
+                "oven"
+              ],
+              [
+                "f6ap_hob",
+                "hob"
+              ],
+              [
+                "f6ap_extractor_hood",
+                "extractor hood"
+              ],
+              [
+                "f6ap_microwave",
+                "microwave"
+              ],
+              [
+                "f6ap_dishwasher",
+                "dishwasher"
+              ],
+              [
+                "f6ap_refrigerator",
+                "refrigerator"
+              ],
+              [
+                "f6ap_freezer",
+                "freezer"
+              ],
+              [
+                "f6ap_washing_machine",
+                "washing machine"
+              ],
+              [
+                "f6ap_tumble_dryer",
+                "tumble dryer"
+              ]
+            ],
+            "pdf_options": [
+              "oven",
+              "hob",
+              "extractor hood",
+              "microwave",
+              "dishwasher",
+              "refrigerator",
+              "freezer",
+              "washing machine",
+              "tumble dryer"
+            ],
+            "label": "The property incorporates",
+            "other": [
+              "f6ap_other",
+              "f6ap_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Built-in Appliances: The property incorporates oven, hob, extractor hood, microwave, dishwasher, refrigerator, freezer, washing machine, tumble dryer, other built-in appliances."
+        ]
+      },
+      {
+        "id": "f6_extractor",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_EXTRACTOR_FAN}",
+        "text": "Extractor Fan: The kitchen extractor fan was {EXTRACTOR_STATE} at the time of inspection. Its effectiveness cannot be confirmed without normal use. Regular cleaning of grease filters and vents should be undertaken to maintain efficient operation.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{EXTRACTOR_STATE}",
+            "dropdown": "actv_extractor",
+            "field_label": "Extractor fan",
+            "dropdown_options": [
+              "Operating",
+              "Not operating"
+            ],
+            "pdf_options": [
+              "operating",
+              "not operating"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Extractor Fan: The kitchen extractor fan was operating, not operating at the time of inspection."
+        ]
+      },
+      {
+        "id": "f6_general",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: Built-in fittings should be maintained as part of normal property ownership. Sealants should be inspected periodically and renewed where deterioration becomes evident. Cupboard hinges, runners, and door furniture should be adjusted or replaced where necessary. Water leaks should be repaired promptly to prevent damage to adjoining units and finishes.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_built_in_fittings_repair_fittings",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f6_fit_defects",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_FITTINGS_DEFECTS}",
+        "text": "Fittings defects: One or more cupboard doors or drawers require adjustment, repair, replacement due to wear or damage.",
+        "tokens": [],
+        "when": [
+          "cb_fittings_defects",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_fittings_defects",
+            "label": "Fittings defects",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_built_in_fittings_repair_defective_sealants",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f6_sealant",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_SEALANT_DEFECTS}",
+        "text": "Sealant defects: The sealant around the sink or at the wall joints with the worktop is {SEALANT_DEFECT_LIST}. Defective sealant should be renewed to reduce the risk of water penetration into adjacent units.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{SEALANT_DEFECT_LIST}",
+            "options": [
+              [
+                "f6sd_cracked",
+                "cracked"
+              ],
+              [
+                "f6sd_damaged",
+                "damaged"
+              ],
+              [
+                "f6sd_moulded",
+                "moulded"
+              ],
+              [
+                "f6sd_worn",
+                "worn"
+              ],
+              [
+                "f6sd_missing",
+                "missing"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "damaged",
+              "moulded",
+              "worn",
+              "missing"
+            ],
+            "label": "Sealant is"
+          }
+        ],
+        "pdf": [
+          "Sealant defects: The sealant around the sink or at the wall joints with the worktop is cracked, damaged, moulded, worn, missing."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_built_in_fittings_repair_moulding_noted",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f6_defects",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_DEFECTS_LIST}",
+        "text": "Defects: One or more of the following defects were observed: {FITTING_DEFECT_LIST}. Repairs should be undertaken as part of normal maintenance.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{FITTING_DEFECT_LIST}",
+            "options": [
+              [
+                "f6dl_damaged_cupboard_doors",
+                "damaged cupboard doors"
+              ],
+              [
+                "f6dl_loose_hinges",
+                "loose hinges"
+              ],
+              [
+                "f6dl_damaged_worktops",
+                "damaged worktops"
+              ],
+              [
+                "f6dl_worn_finishes",
+                "worn finishes"
+              ],
+              [
+                "f6dl_defective_sealant",
+                "defective sealant"
+              ],
+              [
+                "f6dl_cracked_wall_tiles",
+                "cracked wall tiles"
+              ],
+              [
+                "f6dl_damaged_plinths",
+                "damaged plinths"
+              ],
+              [
+                "f6dl_water_damaged_units",
+                "water-damaged units"
+              ],
+              [
+                "f6dl_misaligned_drawers",
+                "misaligned drawers"
+              ],
+              [
+                "f6dl_loose_handles",
+                "loose handles"
+              ]
+            ],
+            "pdf_options": [
+              "damaged cupboard doors",
+              "loose hinges",
+              "damaged worktops",
+              "worn finishes",
+              "defective sealant",
+              "cracked wall tiles",
+              "damaged plinths",
+              "water-damaged units",
+              "misaligned drawers",
+              "loose handles"
+            ],
+            "label": "One or more of the following defects were observed"
+          }
+        ],
+        "pdf": [
+          "Defects: One or more of the following defects were observed: • damaged cupboard doors • loose hinges • damaged worktops • worn finishes • defective sealant • cracked wall tiles • damaged plinths • water-damaged units • misaligned drawers • loose handles Repairs should be undertaken as part of normal maintenance."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_built_in_fittings_main_screen",
+    "rules": [
+      {
+        "id": "f6_intro",
+        "masters": [
+          "{F_BUILT_IN_FITTINGS}"
+        ],
+        "sub": "{F6_INTRO}",
+        "text": "The inspection was limited by stored items, fixed appliances, contents of cupboards, restricted access, or locked cupboards. Wall and floor surfaces concealed behind fitted units could not be inspected. No comment can therefore be made regarding the condition of concealed areas.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_in_side_property_built_in_fittings_not_inspected",
+      "activity_in_side_property_built_in_fittings_repair_water_seepage"
+    ]
+  }
+]

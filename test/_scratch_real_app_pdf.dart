@@ -18,7 +18,7 @@ import 'package:survey_scriber/features/report_export/domain/models/export_confi
 import 'package:survey_scriber/shared/domain/entities/survey.dart';
 
 const String _scratchRoot =
-    r'C:\Users\DELL\AppData\Local\Temp\claude\C--Users-DELL--claude\f78106f7-eaad-4726-8b3a-b341e2e38587\scratchpad';
+    r'C:\Users\DELL\AppData\Local\Temp\claude\C--Users-DELL--claude\cbb88d3d-2ca7-4db8-b434-9a4f047ceffa\scratchpad';
 
 // Numbered repeat-group duplicate slots (activity_x__y__2 .. __6) - a normal
 // single-property inspection never touches these; they only exist for
@@ -156,7 +156,7 @@ final Map<String, Map<String, String>> _curatedIssues = {
 
   // ── Construction group (D) ──
   'activity_property_construction': {
-    'ch1': 'true', 'ch2': 'true', 'ch3': 'true',
+    'ch1': 'true', // traditional masonry (single choice)
   },
   'activity_property_roof': {
     'ch2': 'true', // Pitched
@@ -164,12 +164,12 @@ final Map<String, Map<String, String>> _curatedIssues = {
     'ch6': 'true', // Tiles
   },
   'activity_extended_wall': {
-    'ch2': 'true', 'ch3': 'true', // Cavity brick wall + Solid wall
+    'ch2': 'true', // Cavity brick wall (single choice)
     'android_material_design_spinner': 'Partially',
     'android_material_design_spinner2': 'Smooth',
     'ch7': 'true', // Painted
   },
-  'activity_internal_wall': {'ch1': 'true', 'ch2': 'true'}, // Stud + Solid
+  'activity_internal_wall': {'ch2': 'true'}, // Solid (single choice)
   'activity_construction_floor': {
     'android_material_design_spinner': 'Of a mixture of',
     'ch1': 'true', 'ch2': 'true', // Suspended timber + Solid
@@ -569,6 +569,13 @@ String _textValueFor(InspectionFieldDefinition field) {
   }
   if (label.contains('location')) return 'Kitchen';
   if (label.contains('date')) return '2015';
+  // EPC bands — realistic values instead of a placeholder.
+  if (label.contains('efficiency') ||
+      label.contains('impact') ||
+      label.contains('rating')) {
+    return 'C';
+  }
+  if (label.contains('year')) return '1985';
   // Leave "Other: ___" free-text fields blank rather than typing a
   // placeholder into them. A real surveyor only fills these in when they
   // have something specific to say; handlers that read them already guard
@@ -576,31 +583,36 @@ String _textValueFor(InspectionFieldDefinition field) {
   // empty value is correctly treated as "nothing to add" instead of
   // leaking "N/A"/"n/a" into composed sentences.
   if (label.contains('other')) return '';
-  return 'sample detail';
+  // No generic dummy text: leave non-specific free-text fields blank so no
+  // placeholder ("sample detail") ever reaches the finished report.
+  return '';
 }
 
 Map<String, String> _answersFor(InspectionNodeDefinition screen) {
   final answers = <String, String>{};
+  // Single-choice rule: a real surveyor ticks ONE applicable option per
+  // choice group, not every box. Ticking every checkbox is what made the
+  // earlier run emit "laid to lawn, artificial lawn, paving, gravel, ..."
+  // option-lists. So we select only the FIRST non-"Other" checkbox on the
+  // screen and leave the rest unticked.
+  var checkedOne = false;
   for (final field in screen.fields) {
     switch (field.type) {
       case InspectionFieldType.checkbox:
-        // Don't auto-check "Other"/"Others" toggles: a real surveyor only
-        // ticks these when they have something specific to type into the
-        // paired free-text field, and _textValueFor's placeholder "N/A" for
-        // that field would otherwise leak into the composed sentence (e.g.
-        // "...front, side, rear and n/a") wherever this checkbox is left
-        // unchecked - misread as a phrase-engine bug when it's actually
-        // this demo harness over-filling every checkbox indiscriminately.
+        // Never auto-tick "Other"/"Others" (needs paired free text).
         final label = field.label.trim().toLowerCase();
         if (label == 'other' || label == 'others') continue;
+        if (checkedOne) continue; // one option per screen
         answers[field.id] = 'true';
+        checkedOne = true;
       case InspectionFieldType.dropdown:
         final v = _pickDropdownValue(field);
         if (v != null) answers[field.id] = v;
       case InspectionFieldType.text:
         answers[field.id] = _textValueFor(field);
       case InspectionFieldType.number:
-        answers[field.id] = '2';
+        // Realistic single count, not a blanket "2".
+        answers[field.id] = '1';
       case InspectionFieldType.label:
         break;
     }
@@ -633,11 +645,32 @@ void main() {
 
     final skipBases = _preferredVariant.keys.toSet();
     final allowedVariant = _preferredVariant.values.toSet();
+    // Property-type consistency: this is a 4-bed DETACHED HOUSE, so the
+    // flat/maisonette, conversion-to-flats and communal-garden screens must
+    // not be filled (they would emit conflicting "lower ground floor flat" /
+    // "converted into self-contained flats" / "shared garden" clauses).
+    const conflictingScreens = {
+      'activity_property_flate',
+      'activity_property_converted',
+      'activity_communal_garden',
+      'activity_grounds_other_communal_garden',
+      // "Other area" presence screens — a clean detached house with a private
+      // garden has none of these, and filling them asserts features that
+      // conflict with the property (communal garden, lifts, invasive plants,
+      // flood/EMF exposure, shared right of way).
+      'activity_grounds_other_area_common_garden',
+      'activity_grounds_other_area_lifts',
+      'activity_grounds_other_area_knotweed',
+      'activity_grounds_other_area_flooding',
+      'activity_grounds_other_area_emf',
+      'activity_grounds_other_area_right_of_way',
+    };
     final screens = <InspectionNodeDefinition>[];
     for (final section in tree.sections) {
       for (final node in section.nodes) {
         if (node.type != InspectionNodeType.screen) continue;
         final id = node.id;
+        if (conflictingScreens.contains(id)) continue;
         if (_repeatSlotSuffix.hasMatch(id) && !_curatedIssues.containsKey(id)) {
           continue;
         }

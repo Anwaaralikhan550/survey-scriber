@@ -179,7 +179,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
   static const String _environmentImpactScreenId =
       'activity_energy_environment_impect';
   static const String _otherServiceScreenId = 'activity_other_service';
-  static const String _propertyLocationScreenId = 'activity_property_location';
   static const String _chimneyLocationScreenId =
       'activity_outside_property_location';
   static const String _chimneyConditionScreenId =
@@ -511,9 +510,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       // Auto-mark as completed when there is at least one non-empty answer.
       // Legacy parity exception: Property Location density requires all
       // mandatory fields before the screen can be considered complete.
-      final hasData = _screenId == _propertyLocationScreenId
-          ? _isPropertyLocationComplete()
-          : state.answers.values.any((v) => v.trim().isNotEmpty);
+      final hasData = state.answers.values.any((v) => v.trim().isNotEmpty);
       if (hasData) {
         final wasCompleted = state.screenMeta?.isCompleted ?? false;
         await _repo.setScreenCompleted(
@@ -573,14 +570,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
         return false;
       }
     }
-    if (_screenId == _propertyLocationScreenId &&
-        !_isPropertyLocationComplete()) {
-      state = state.copyWith(
-        errorMessage:
-            'Established Area, Location Density From, and To are required.',
-      );
-      return false;
-    }
     state = state.copyWith(isSaving: true);
     try {
       await _repo.saveScreenAnswers(
@@ -610,17 +599,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       return false;
     }
   }
-
-  bool _isPropertyLocationComplete() {
-    final wellNewly =
-        (state.answers['android_material_design_spinner'] ?? '').trim();
-    final from =
-        (state.answers['android_material_design_spinner2'] ?? '').trim();
-    final to =
-        (state.answers['android_material_design_spinner20'] ?? '').trim();
-    return wellNewly.isNotEmpty && from.isNotEmpty && to.isNotEmpty;
-  }
-
+
   String? _validateLegacyRequireds() {
     if (_mainWallsAboutScreenIds.contains(_screenId)) {
       bool isChecked(String key) =>
@@ -1751,30 +1730,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
         final otherChecked = isChecked('cb_other_251');
         final otherText = (state.answers['et_other_928'] ?? '').trim();
         if (otherChecked && otherText.isEmpty) {
-          return 'Enter Other reason text or uncheck Other.';
-        }
-      }
-    }
-
-    if (_screenId == 'activity_inside_property_limitation') {
-      bool isChecked(String key) =>
-          (state.answers[key] ?? '').trim().toLowerCase() == 'true';
-      if (isChecked('ch2')) {
-        final reasonKeys = [
-          'cb_statuslimited_roof_height',
-          'cb_floors_not_safe_to_walk_on',
-          'cb_some_or_all_of_the_floors_are_boarded',
-          'cb_excessive_storage_of_personal_goods',
-          'ch3',
-          'ch4',
-          'ch5',
-          'ch6',
-        ];
-        if (!reasonKeys.any(isChecked)) {
-          return 'Select reason.';
-        }
-        final otherText = (state.answers['etGroundTypeOther'] ?? '').trim();
-        if (isChecked('ch6') && otherText.isEmpty) {
           return 'Enter Other reason text or uncheck Other.';
         }
       }

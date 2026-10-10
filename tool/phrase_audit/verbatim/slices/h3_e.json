@@ -1,0 +1,346 @@
+[
+  {
+    "screen": "activity_grounds_other_area_right_of_way",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h3_row",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_RIGHT_OF_WAY}",
+        "text": "Right of Way: The property benefits from and/or is subject to shared rights of way over a {H3_RIGHT_OF_WAY_OVER}. Your legal adviser should confirm the rights of access, maintenance responsibilities and any associated.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H3_RIGHT_OF_WAY_OVER}",
+            "options": [
+              [
+                "h3r_private_road",
+                "private road"
+              ],
+              [
+                "h3r_driveway",
+                "driveway"
+              ],
+              [
+                "h3r_footpath",
+                "footpath"
+              ],
+              [
+                "h3r_entrance_lobby",
+                "entrance lobby"
+              ]
+            ],
+            "pdf_options": [
+              "private road",
+              "driveway",
+              "footpath",
+              "entrance lobby"
+            ],
+            "label": "Shared rights of way over",
+            "other": [
+              "h3r_other",
+              "h3r_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Right of Way: The property benefits from and/or is subject to shared rights of way over a private road, driveway, footpath, entrance lobby, or other shared access."
+        ],
+        "when": [
+          "cb_h3_row",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h3_row",
+            "label": "Right of way",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_other_area_lifts",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h3_lifts",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_LIFTS}",
+        "text": "Lifts: The building is served by one or more passenger lifts. These are specialist installations and were not inspected or assessed as part of this survey. Your legal adviser should confirm that appropriate inspection, maintenance, and servicing arrangements are in place.",
+        "tokens": [],
+        "when": [
+          "cb_lifts",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_lifts",
+            "label": "Lifts",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_other_area_flooding",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h3_flooding",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_FLOODING}",
+        "text": "Flooding: The property is in an area that may be at risk of flooding due to its proximity to a {H3_FLOOD_PROXIMITY}. Your legal adviser should make appropriate enquiries and, where necessary, obtain an environmental or flood risk report.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H3_FLOOD_PROXIMITY}",
+            "options": [
+              [
+                "h3f_river",
+                "river"
+              ],
+              [
+                "h3f_canal",
+                "canal"
+              ],
+              [
+                "h3f_the_coast",
+                "the coast"
+              ],
+              [
+                "h3f_low_lying_land",
+                "low-lying land"
+              ],
+              [
+                "h3f_reservoir",
+                "reservoir"
+              ]
+            ],
+            "pdf_options": [
+              "river",
+              "canal",
+              "the coast",
+              "low-lying land",
+              "reservoir"
+            ],
+            "label": "Close to"
+          }
+        ],
+        "pdf": [
+          "Flooding: The property is in an area that may be at risk of flooding due to its proximity to a river, canal, the coast, low-lying land, reservoir, other watercourse."
+        ],
+        "when": [
+          "cb_h3_flooding",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h3_flooding",
+            "label": "Flooding risk",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_other_area_emf",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h3_emf",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_EMF}",
+        "text": "Electromagnetic Fields (EMF): Electromagnetic Fields: The property is located close to an {H3_EMF_SOURCE}, which may give rise to concerns regarding electromagnetic fields. Such installations may also generate noise and can affect the property's marketability. Further information can be obtained from the electricity network operator or the UK Health Security Agency (formerly the Health Protection Agency). The property is located close to electricity infrastructure that may give rise to concerns regarding electromagnetic fields.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{H3_EMF_SOURCE}",
+            "options": [
+              [
+                "h3e_electricity_substation",
+                "electricity substation"
+              ],
+              [
+                "h3e_high_voltage_overhead_power_lines",
+                "high-voltage overhead power lines"
+              ],
+              [
+                "h3e_pylons",
+                "pylons"
+              ]
+            ],
+            "pdf_options": [
+              "electricity substation",
+              "high-voltage overhead power lines",
+              "pylons"
+            ],
+            "label": "Located close to",
+            "other": [
+              "h3e_other",
+              "h3e_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Electromagnetic Fields (EMF): Electromagnetic Fields: The property is located close to an electricity substation, high-voltage overhead power lines, pylons, other, which may give rise to concerns regarding electromagnetic fields."
+        ],
+        "when": [
+          "cb_h3_emf",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_h3_emf",
+            "label": "Electromagnetic fields",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_grounds_other_area_knotweed",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "h3_kw_not_inspected",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_KNOTWEED_NOT_INSPECTED}",
+        "text": "Japanese Knotweed Not Inspected: Japanese Knotweed: Dense vegetation or restricted access prevented a full inspection of the grounds. Consequently, I cannot confirm whether Japanese knotweed or other invasive plants are present. Further investigation by a suitably qualified specialist is recommended if required.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Not inspected"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Japanese knotweed",
+            "type": "dropdown",
+            "options": [
+              "Not inspected",
+              "Not found",
+              "Found"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "h3_kw_not_found",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_KNOTWEED_NOT_FOUND}",
+        "text": "Not Found: No evidence of Japanese knotweed was observed within the areas inspected. However, the inspection was limited to those areas that were visible and reasonably accessible at the time of the survey, and its absence cannot be guaranteed. Recent gardening works, dense vegetation, or other ground cover may conceal evidence of invasive plants and prevent their identification during a visual inspection.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Not found"
+        ]
+      },
+      {
+        "id": "h3_kw_found",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_KNOTWEED_FOUND}",
+        "text": "Found: Japanese knotweed was identified within or adjacent to the property boundary. This invasive plant can damage hard landscaping and, in some circumstances, affect structures. It may also affect mortgageability, insurability, marketability, and value. I recommend that you arrange for further inspection by a remediation specialist who is a member of a recognised body so that you can get advice about future management and control and an insurance-backed guarantee.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Found"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_h3_management",
+            "label": "Knotweed management",
+            "type": "dropdown",
+            "options": [
+              "Management A",
+              "Management B",
+              "Management C",
+              "Management D"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "h3_kw_a",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_MANAGEMENT_A}",
+        "text": "Management A: Japanese knotweed is present and has caused damage to building structures and/or boundary features. A suitably qualified invasive weed specialist should inspect the site without delay and implement an appropriate treatment and remediation programme.",
+        "tokens": [],
+        "when": [
+          "actv_h3_management",
+          "Management A"
+        ]
+      },
+      {
+        "id": "h3_kw_b",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_MANAGEMENT_B}",
+        "text": "Management B: Japanese knotweed is present and is adversely affecting the use of the property or its amenities. A specialist treatment and management plan should be implemented.",
+        "tokens": [],
+        "when": [
+          "actv_h3_management",
+          "Management B"
+        ]
+      },
+      {
+        "id": "h3_kw_c",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_MANAGEMENT_C}",
+        "text": "Management C: Japanese knotweed is present, but no damage to buildings or boundary structures was evident at the time of inspection. A specialist management or treatment programme is nevertheless recommended.",
+        "tokens": [],
+        "when": [
+          "actv_h3_management",
+          "Management C"
+        ]
+      },
+      {
+        "id": "h3_kw_d",
+        "masters": [
+          "{H_OTHER_AREA}"
+        ],
+        "sub": "{H3_MANAGEMENT_D}",
+        "text": "Management D: Japanese knotweed was observed on neighbouring land within approximately three metres of the property boundary. Although no damage was evident to the subject property, the infestation should be monitored, and your legal adviser should make appropriate enquiries where necessary.",
+        "tokens": [],
+        "when": [
+          "actv_h3_management",
+          "Management D"
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_grounds_other_area_common_garden",
+      "activity_grounds_other_area_not_inspected"
+    ]
+  }
+]

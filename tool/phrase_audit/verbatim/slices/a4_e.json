@@ -1,0 +1,1709 @@
+[
+  {
+    "remove_screens": [
+      "activity_estate_location"
+    ]
+  },
+  {
+    "screen": "activity_topography",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a4_topo",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_TOPOGRAPHY}",
+        "text": "Topology: The property occupies {A4_SLOPE} ground.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{A4_SLOPE}",
+            "dropdown": "android_material_design_spinner",
+            "field_label": "Ground",
+            "dropdown_options": [
+              "Level",
+              "Gently sloping",
+              "Moderately sloping",
+              "Steeply sloping"
+            ],
+            "pdf_options": [
+              "level",
+              "gently sloping",
+              "moderately sloping",
+              "steeply sloping"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Topology: The property occupies level, gently sloping, moderately sloping, steeply sloping ground."
+        ],
+        "when": [
+          "android_material_design_spinner",
+          "Level"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner",
+            "Gently sloping"
+          ],
+          [
+            "android_material_design_spinner",
+            "Moderately sloping"
+          ],
+          [
+            "android_material_design_spinner",
+            "Steeply sloping"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_front_garden",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "front_type",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_FRONT_GARDEN}",
+        "text": "Front garden: The front garden is laid to {A4_FRONT_FINISHES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_FRONT_FINISHES}",
+            "options": [
+              [
+                "front_type_0_lawn",
+                "lawn"
+              ],
+              [
+                "front_type_0_artificial_lawn",
+                "artificial lawn"
+              ],
+              [
+                "front_type_0_paving",
+                "paving"
+              ],
+              [
+                "front_type_0_timber_decking",
+                "timber decking"
+              ],
+              [
+                "front_type_0_gravel",
+                "gravel"
+              ],
+              [
+                "front_type_0_stones",
+                "stones"
+              ],
+              [
+                "front_type_0_hardstanding",
+                "hardstanding"
+              ]
+            ],
+            "pdf_options": [
+              "lawn",
+              "artificial lawn",
+              "paving",
+              "timber decking",
+              "gravel",
+              "stones",
+              "hardstanding"
+            ],
+            "label": "Laid to",
+            "other": [
+              "front_type_0_other",
+              "front_type_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes."
+        ],
+        "when": [
+          "cb_front_type",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_front_type",
+            "label": "Front garden finishes",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "front_fence",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_FRONT_FENCING}",
+        "text": "Fencing: Boundaries are formed by {A4_FRONT_BOUNDARIES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_FRONT_BOUNDARIES}",
+            "options": [
+              [
+                "front_fence_0_timber_fencing",
+                "timber fencing"
+              ],
+              [
+                "front_fence_0_brick_wall",
+                "brick wall"
+              ],
+              [
+                "front_fence_0_block_wall",
+                "block wall"
+              ],
+              [
+                "front_fence_0_hedging",
+                "hedging"
+              ],
+              [
+                "front_fence_0_wire_mesh",
+                "wire mesh"
+              ],
+              [
+                "front_fence_0_concrete_sections",
+                "concrete sections"
+              ],
+              [
+                "front_fence_0_metal_railings",
+                "metal railings"
+              ]
+            ],
+            "pdf_options": [
+              "timber fencing",
+              "brick wall",
+              "block wall",
+              "hedging",
+              "wire mesh",
+              "concrete sections",
+              "metal railings"
+            ],
+            "label": "Boundaries formed by",
+            "other": [
+              "front_fence_0_other",
+              "front_fence_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other."
+        ],
+        "when": [
+          "cb_front_fence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_front_fence",
+            "label": "Front garden boundaries",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_rear_garden",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "rear_type",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_REAR_GARDEN}",
+        "text": "Rear garden: The rear garden is laid to {A4_REAR_FINISHES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_REAR_FINISHES}",
+            "options": [
+              [
+                "rear_type_0_lawn",
+                "lawn"
+              ],
+              [
+                "rear_type_0_artificial_lawn",
+                "artificial lawn"
+              ],
+              [
+                "rear_type_0_paving",
+                "paving"
+              ],
+              [
+                "rear_type_0_timber_decking",
+                "timber decking"
+              ],
+              [
+                "rear_type_0_gravel",
+                "gravel"
+              ],
+              [
+                "rear_type_0_stones",
+                "stones"
+              ],
+              [
+                "rear_type_0_hardstanding",
+                "hardstanding"
+              ]
+            ],
+            "pdf_options": [
+              "lawn",
+              "artificial lawn",
+              "paving",
+              "timber decking",
+              "gravel",
+              "stones",
+              "hardstanding"
+            ],
+            "label": "Laid to",
+            "other": [
+              "rear_type_0_other",
+              "rear_type_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes."
+        ],
+        "when": [
+          "cb_rear_type",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_rear_type",
+            "label": "Rear garden finishes",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "rear_fence",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_REAR_FENCING}",
+        "text": "Fencing: Boundaries are formed by {A4_REAR_BOUNDARIES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_REAR_BOUNDARIES}",
+            "options": [
+              [
+                "rear_fence_0_timber_fencing",
+                "timber fencing"
+              ],
+              [
+                "rear_fence_0_brick_wall",
+                "brick wall"
+              ],
+              [
+                "rear_fence_0_block_wall",
+                "block wall"
+              ],
+              [
+                "rear_fence_0_hedging",
+                "hedging"
+              ],
+              [
+                "rear_fence_0_wire_mesh",
+                "wire mesh"
+              ],
+              [
+                "rear_fence_0_concrete_sections",
+                "concrete sections"
+              ],
+              [
+                "rear_fence_0_metal_railings",
+                "metal railings"
+              ]
+            ],
+            "pdf_options": [
+              "timber fencing",
+              "brick wall",
+              "block wall",
+              "hedging",
+              "wire mesh",
+              "concrete sections",
+              "metal railings"
+            ],
+            "label": "Boundaries formed by",
+            "other": [
+              "rear_fence_0_other",
+              "rear_fence_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other."
+        ],
+        "when": [
+          "cb_rear_fence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_rear_fence",
+            "label": "Rear garden boundaries",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_communal_garden",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "communal_type",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_COMMUNAL_GARDEN}",
+        "text": "Communal garden: The communal garden is laid to {A4_COMMUNAL_FINISHES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_COMMUNAL_FINISHES}",
+            "options": [
+              [
+                "communal_type_0_lawn",
+                "lawn"
+              ],
+              [
+                "communal_type_0_artificial_lawn",
+                "artificial lawn"
+              ],
+              [
+                "communal_type_0_paving",
+                "paving"
+              ],
+              [
+                "communal_type_0_timber_decking",
+                "timber decking"
+              ],
+              [
+                "communal_type_0_gravel",
+                "gravel"
+              ],
+              [
+                "communal_type_0_stones",
+                "stones"
+              ],
+              [
+                "communal_type_0_hardstanding",
+                "hardstanding"
+              ]
+            ],
+            "pdf_options": [
+              "lawn",
+              "artificial lawn",
+              "paving",
+              "timber decking",
+              "gravel",
+              "stones",
+              "hardstanding"
+            ],
+            "label": "Laid to",
+            "other": [
+              "communal_type_0_other",
+              "communal_type_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes."
+        ],
+        "when": [
+          "cb_communal_type",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_communal_type",
+            "label": "Communal garden finishes",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "communal_fence",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_COMMUNAL_FENCING}",
+        "text": "Fencing: Boundaries are formed by {A4_COMMUNAL_BOUNDARIES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_COMMUNAL_BOUNDARIES}",
+            "options": [
+              [
+                "communal_fence_0_timber_fencing",
+                "timber fencing"
+              ],
+              [
+                "communal_fence_0_brick_wall",
+                "brick wall"
+              ],
+              [
+                "communal_fence_0_block_wall",
+                "block wall"
+              ],
+              [
+                "communal_fence_0_hedging",
+                "hedging"
+              ],
+              [
+                "communal_fence_0_wire_mesh",
+                "wire mesh"
+              ],
+              [
+                "communal_fence_0_concrete_sections",
+                "concrete sections"
+              ],
+              [
+                "communal_fence_0_metal_railings",
+                "metal railings"
+              ]
+            ],
+            "pdf_options": [
+              "timber fencing",
+              "brick wall",
+              "block wall",
+              "hedging",
+              "wire mesh",
+              "concrete sections",
+              "metal railings"
+            ],
+            "label": "Boundaries formed by",
+            "other": [
+              "communal_fence_0_other",
+              "communal_fence_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other."
+        ],
+        "when": [
+          "cb_communal_fence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_communal_fence",
+            "label": "Communal garden boundaries",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_garden",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "gg_front_type",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_GG_FRONT_GARDEN}",
+        "text": "Front garden: The front garden is laid to {A4_GG_FRONT_FINISHES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_GG_FRONT_FINISHES}",
+            "options": [
+              [
+                "gg_front_type_0_lawn",
+                "lawn"
+              ],
+              [
+                "gg_front_type_0_artificial_lawn",
+                "artificial lawn"
+              ],
+              [
+                "gg_front_type_0_paving",
+                "paving"
+              ],
+              [
+                "gg_front_type_0_timber_decking",
+                "timber decking"
+              ],
+              [
+                "gg_front_type_0_gravel",
+                "gravel"
+              ],
+              [
+                "gg_front_type_0_stones",
+                "stones"
+              ],
+              [
+                "gg_front_type_0_hardstanding",
+                "hardstanding"
+              ]
+            ],
+            "pdf_options": [
+              "lawn",
+              "artificial lawn",
+              "paving",
+              "timber decking",
+              "gravel",
+              "stones",
+              "hardstanding"
+            ],
+            "label": "Front garden laid to",
+            "other": [
+              "gg_front_type_0_other",
+              "gg_front_type_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes."
+        ],
+        "when": [
+          "cb_gg_front_type",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_gg_front_type",
+            "label": "Front garden finishes",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "gg_front_fence",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_GG_FRONT_FENCING}",
+        "text": "Fencing: Boundaries are formed by {A4_GG_FRONT_BOUNDARIES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_GG_FRONT_BOUNDARIES}",
+            "options": [
+              [
+                "gg_front_fence_0_timber_fencing",
+                "timber fencing"
+              ],
+              [
+                "gg_front_fence_0_brick_wall",
+                "brick wall"
+              ],
+              [
+                "gg_front_fence_0_block_wall",
+                "block wall"
+              ],
+              [
+                "gg_front_fence_0_hedging",
+                "hedging"
+              ],
+              [
+                "gg_front_fence_0_wire_mesh",
+                "wire mesh"
+              ],
+              [
+                "gg_front_fence_0_concrete_sections",
+                "concrete sections"
+              ],
+              [
+                "gg_front_fence_0_metal_railings",
+                "metal railings"
+              ]
+            ],
+            "pdf_options": [
+              "timber fencing",
+              "brick wall",
+              "block wall",
+              "hedging",
+              "wire mesh",
+              "concrete sections",
+              "metal railings"
+            ],
+            "label": "Front garden boundaries formed by",
+            "other": [
+              "gg_front_fence_0_other",
+              "gg_front_fence_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other."
+        ],
+        "when": [
+          "cb_gg_front_fence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_gg_front_fence",
+            "label": "Front garden boundaries",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "gg_rear_type",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_GG_REAR_GARDEN}",
+        "text": "Rear garden: The rear garden is laid to {A4_GG_REAR_FINISHES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_GG_REAR_FINISHES}",
+            "options": [
+              [
+                "gg_rear_type_0_lawn",
+                "lawn"
+              ],
+              [
+                "gg_rear_type_0_artificial_lawn",
+                "artificial lawn"
+              ],
+              [
+                "gg_rear_type_0_paving",
+                "paving"
+              ],
+              [
+                "gg_rear_type_0_timber_decking",
+                "timber decking"
+              ],
+              [
+                "gg_rear_type_0_gravel",
+                "gravel"
+              ],
+              [
+                "gg_rear_type_0_stones",
+                "stones"
+              ],
+              [
+                "gg_rear_type_0_hardstanding",
+                "hardstanding"
+              ]
+            ],
+            "pdf_options": [
+              "lawn",
+              "artificial lawn",
+              "paving",
+              "timber decking",
+              "gravel",
+              "stones",
+              "hardstanding"
+            ],
+            "label": "Rear garden laid to",
+            "other": [
+              "gg_rear_type_0_other",
+              "gg_rear_type_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes."
+        ],
+        "when": [
+          "cb_gg_rear_type",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_gg_rear_type",
+            "label": "Rear garden finishes",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "gg_rear_fence",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_GG_REAR_FENCING}",
+        "text": "Fencing: Boundaries are formed by {A4_GG_REAR_BOUNDARIES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_GG_REAR_BOUNDARIES}",
+            "options": [
+              [
+                "gg_rear_fence_0_timber_fencing",
+                "timber fencing"
+              ],
+              [
+                "gg_rear_fence_0_brick_wall",
+                "brick wall"
+              ],
+              [
+                "gg_rear_fence_0_block_wall",
+                "block wall"
+              ],
+              [
+                "gg_rear_fence_0_hedging",
+                "hedging"
+              ],
+              [
+                "gg_rear_fence_0_wire_mesh",
+                "wire mesh"
+              ],
+              [
+                "gg_rear_fence_0_concrete_sections",
+                "concrete sections"
+              ],
+              [
+                "gg_rear_fence_0_metal_railings",
+                "metal railings"
+              ]
+            ],
+            "pdf_options": [
+              "timber fencing",
+              "brick wall",
+              "block wall",
+              "hedging",
+              "wire mesh",
+              "concrete sections",
+              "metal railings"
+            ],
+            "label": "Rear garden boundaries formed by",
+            "other": [
+              "gg_rear_fence_0_other",
+              "gg_rear_fence_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other."
+        ],
+        "when": [
+          "cb_gg_rear_fence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_gg_rear_fence",
+            "label": "Rear garden boundaries",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "gg_communal_type",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_GG_COMMUNAL_GARDEN}",
+        "text": "Communal garden: The communal garden is laid to {A4_GG_COMMUNAL_FINISHES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_GG_COMMUNAL_FINISHES}",
+            "options": [
+              [
+                "gg_communal_type_0_lawn",
+                "lawn"
+              ],
+              [
+                "gg_communal_type_0_artificial_lawn",
+                "artificial lawn"
+              ],
+              [
+                "gg_communal_type_0_paving",
+                "paving"
+              ],
+              [
+                "gg_communal_type_0_timber_decking",
+                "timber decking"
+              ],
+              [
+                "gg_communal_type_0_gravel",
+                "gravel"
+              ],
+              [
+                "gg_communal_type_0_stones",
+                "stones"
+              ],
+              [
+                "gg_communal_type_0_hardstanding",
+                "hardstanding"
+              ]
+            ],
+            "pdf_options": [
+              "lawn",
+              "artificial lawn",
+              "paving",
+              "timber decking",
+              "gravel",
+              "stones",
+              "hardstanding"
+            ],
+            "label": "Communal garden laid to",
+            "other": [
+              "gg_communal_type_0_other",
+              "gg_communal_type_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes."
+        ],
+        "when": [
+          "cb_gg_communal_type",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_gg_communal_type",
+            "label": "Communal garden finishes",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "gg_communal_fence",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_GG_COMMUNAL_FENCING}",
+        "text": "Fencing: Boundaries are formed by {A4_GG_COMMUNAL_BOUNDARIES}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_GG_COMMUNAL_BOUNDARIES}",
+            "options": [
+              [
+                "gg_communal_fence_0_timber_fencing",
+                "timber fencing"
+              ],
+              [
+                "gg_communal_fence_0_brick_wall",
+                "brick wall"
+              ],
+              [
+                "gg_communal_fence_0_block_wall",
+                "block wall"
+              ],
+              [
+                "gg_communal_fence_0_hedging",
+                "hedging"
+              ],
+              [
+                "gg_communal_fence_0_wire_mesh",
+                "wire mesh"
+              ],
+              [
+                "gg_communal_fence_0_concrete_sections",
+                "concrete sections"
+              ],
+              [
+                "gg_communal_fence_0_metal_railings",
+                "metal railings"
+              ]
+            ],
+            "pdf_options": [
+              "timber fencing",
+              "brick wall",
+              "block wall",
+              "hedging",
+              "wire mesh",
+              "concrete sections",
+              "metal railings"
+            ],
+            "label": "Communal garden boundaries formed by",
+            "other": [
+              "gg_communal_fence_0_other",
+              "gg_communal_fence_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other."
+        ],
+        "when": [
+          "cb_gg_communal_fence",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_gg_communal_fence",
+            "label": "Communal garden boundaries",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_parking",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a4_pk_none",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_NO_PARKING}",
+        "text": "No Parking: The property does not come with parking.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner",
+          "No Parking"
+        ],
+        "extra_fields": [
+          {
+            "id": "android_material_design_spinner",
+            "label": "Status",
+            "type": "dropdown",
+            "options": [
+              "Available",
+              "No Parking"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "a4_pk_type",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_PARKING_TYPE}",
+        "text": "Type: The property comes with {A4_PARKING_KINDS} parking.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_PARKING_KINDS}",
+            "options": [
+              [
+                "a4_pk_k_residential",
+                "residential"
+              ],
+              [
+                "a4_pk_k_private",
+                "private"
+              ],
+              [
+                "a4_pk_k_allocated",
+                "allocated"
+              ],
+              [
+                "a4_pk_k_communal",
+                "communal"
+              ],
+              [
+                "a4_pk_k_off_street",
+                "off-street"
+              ],
+              [
+                "a4_pk_k_underground_facility",
+                "underground facility"
+              ]
+            ],
+            "pdf_options": [
+              "residential",
+              "private",
+              "allocated",
+              "communal",
+              "off-street",
+              "underground facility"
+            ],
+            "label": "Comes with",
+            "other": [
+              "a4_pk_k_other",
+              "a4_pk_k_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Type: The property comes with residential, private, allocated, communal, off-street, underground facility, other parking."
+        ],
+        "when": [
+          "android_material_design_spinner",
+          "Available"
+        ]
+      },
+      {
+        "id": "a4_pk_paid",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_PAID_PARKING}",
+        "text": "Paid parking: Pay and display parking operates in the immediate area.",
+        "tokens": [],
+        "when": [
+          "cb_a4_pk_paid",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a4_pk_paid",
+            "label": "Paid parking in the area",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_parking__parking",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a4_pp_none",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_NO_PARKING}",
+        "text": "No Parking: The property does not come with parking.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner",
+          "No Parking"
+        ],
+        "extra_fields": [
+          {
+            "id": "android_material_design_spinner",
+            "label": "Status",
+            "type": "dropdown",
+            "options": [
+              "Available",
+              "No Parking"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "a4_pp_type",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_PARKING_TYPE}",
+        "text": "Type: The property comes with {A4_PARKING_KINDS} parking.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_PARKING_KINDS}",
+            "options": [
+              [
+                "a4_pp_k_residential",
+                "residential"
+              ],
+              [
+                "a4_pp_k_private",
+                "private"
+              ],
+              [
+                "a4_pp_k_allocated",
+                "allocated"
+              ],
+              [
+                "a4_pp_k_communal",
+                "communal"
+              ],
+              [
+                "a4_pp_k_off_street",
+                "off-street"
+              ],
+              [
+                "a4_pp_k_underground_facility",
+                "underground facility"
+              ]
+            ],
+            "pdf_options": [
+              "residential",
+              "private",
+              "allocated",
+              "communal",
+              "off-street",
+              "underground facility"
+            ],
+            "label": "Comes with",
+            "other": [
+              "a4_pp_k_other",
+              "a4_pp_k_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Type: The property comes with residential, private, allocated, communal, off-street, underground facility, other parking."
+        ],
+        "when": [
+          "android_material_design_spinner",
+          "Available"
+        ]
+      },
+      {
+        "id": "a4_pp_paid",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_PAID_PARKING}",
+        "text": "Paid parking: Pay and display parking operates in the immediate area.",
+        "tokens": [],
+        "when": [
+          "cb_a4_pp_paid",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a4_pp_paid",
+            "label": "Paid parking in the area",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_gated_community",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a4_gated",
+        "masters": [
+          "{D_GROUND}"
+        ],
+        "sub": "{A4_GATED}",
+        "text": "Gated: The property is located within a gated development and accessed via security-operated or access-controlled gates.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner3",
+          "Yes"
+        ],
+        "extra_fields": [
+          {
+            "id": "android_material_design_spinner3",
+            "label": "Gated development",
+            "type": "dropdown",
+            "options": [
+              "Yes",
+              "No"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_location",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a4_location",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_LOCATION}",
+        "text": "Location: The property is situated within a {A4_AREA}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_AREA}",
+            "options": [
+              [
+                "a4_location_0_well_established_residential_area",
+                "well-established residential area"
+              ],
+              [
+                "a4_location_0_modern_residential_development",
+                "modern residential development"
+              ],
+              [
+                "a4_location_0_mixed_residential_and_commercial_area",
+                "mixed residential and commercial area"
+              ],
+              [
+                "a4_location_0_rural_location",
+                "rural location"
+              ],
+              [
+                "a4_location_0_conservation",
+                "conservation"
+              ],
+              [
+                "a4_location_0_village_setting",
+                "village setting"
+              ],
+              [
+                "a4_location_0_suburban_location",
+                "suburban location"
+              ]
+            ],
+            "pdf_options": [
+              "well-established residential area",
+              "modern residential development",
+              "mixed residential and commercial area",
+              "rural location",
+              "conservation",
+              "village setting",
+              "suburban location"
+            ],
+            "label": "Situated within a"
+          }
+        ],
+        "pdf": [
+          "Location: The property is situated within a well-established residential area, modern residential development, mixed residential and commercial area, rural location, conservation, village setting, suburban location."
+        ],
+        "when": [
+          "cb_a4_location",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a4_location",
+            "label": "Location",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "a4_density",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_DENSITY}",
+        "text": "Density: The surrounding development is considered {A4_DENSITY_LEVEL}.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{A4_DENSITY_LEVEL}",
+            "dropdown": "android_material_design_spinner2",
+            "field_label": "Surrounding development",
+            "dropdown_options": [
+              "Low",
+              "Medium",
+              "High"
+            ],
+            "pdf_options": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Density: The surrounding development is considered low, medium, high density."
+        ],
+        "when": [
+          "android_material_design_spinner2",
+          "Low"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner2",
+            "Medium"
+          ],
+          [
+            "android_material_design_spinner2",
+            "High"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_private_road",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a4_road",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_ROAD}",
+        "text": "Road: The property is located on an {A4_ROAD_KIND}. Where the property is situated on a private road, your legal adviser should confirm maintenance responsibilities and any associated financial liabilities.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_ROAD_KIND}",
+            "options": [
+              [
+                "a4_road_0_adopted_public_road",
+                "adopted public road"
+              ],
+              [
+                "a4_road_0_private_road",
+                "private road"
+              ],
+              [
+                "a4_road_0_cul_de_sac",
+                "cul-de-sac"
+              ],
+              [
+                "a4_road_0_unmade_road",
+                "unmade road"
+              ]
+            ],
+            "pdf_options": [
+              "adopted public road",
+              "private road",
+              "cul-de-sac",
+              "unmade road"
+            ],
+            "label": "Located on a",
+            "other": [
+              "a4_road_0_other",
+              "a4_road_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Road: The property is located on an adopted public road, private road, cul-de-sac, unmade road, other."
+        ],
+        "when": [
+          "cb_a4_road",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a4_road",
+            "label": "Road",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_is_noisy_area",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a4_noise",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_NOISE}",
+        "text": "Noise: The property is located adjacent to, or close to, {A4_NOISE_SOURCES}. Such features may influence future enjoyment or marketability and should be considered before purchase.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_NOISE_SOURCES}",
+            "options": [
+              [
+                "a4_noise_0_train_lines_or_a_station",
+                "train lines or a station"
+              ],
+              [
+                "a4_noise_0_major_roads",
+                "major roads"
+              ],
+              [
+                "a4_noise_0_commercial_premises",
+                "commercial premises"
+              ],
+              [
+                "a4_noise_0_industrial_premises",
+                "industrial premises"
+              ],
+              [
+                "a4_noise_0_public_open_space",
+                "public open space"
+              ],
+              [
+                "a4_noise_0_schools",
+                "schools"
+              ]
+            ],
+            "pdf_options": [
+              "train lines or a station",
+              "major roads",
+              "commercial premises",
+              "industrial premises",
+              "public open space",
+              "schools"
+            ],
+            "label": "Close to",
+            "other": [
+              "a4_noise_0_other",
+              "a4_noise_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Noise: The property is located adjacent to, or close to, train lines or a station, major roads, commercial premises, industrial premises, public open space, schools, other."
+        ],
+        "when": [
+          "cb_a4_noise",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a4_noise",
+            "label": "Noise",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_ground_area",
+    "rules": [
+      {
+        "id": "a4_conservation",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_CONSERVATION}",
+        "text": "Conservation area: The property is suspected to be in an established conservation area. Your legal adviser should advise you on the implications of the property being situated in this location.",
+        "tokens": [],
+        "when": [
+          "ch4",
+          "true"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_facelities",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a4_facilities",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_FACILITIES}",
+        "text": "Facilities: Local amenities observed within reasonable proximity include {A4_AMENITIES}. The availability, quality and suitability of local amenities have not been investigated as part of this inspection.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_AMENITIES}",
+            "options": [
+              [
+                "a4_facilities_0_schools",
+                "schools"
+              ],
+              [
+                "a4_facilities_0_shops",
+                "shops"
+              ],
+              [
+                "a4_facilities_0_medical_facilities",
+                "medical facilities"
+              ],
+              [
+                "a4_facilities_0_bus_services",
+                "bus services"
+              ],
+              [
+                "a4_facilities_0_train_stations",
+                "train stations"
+              ],
+              [
+                "a4_facilities_0_parks",
+                "parks"
+              ]
+            ],
+            "pdf_options": [
+              "schools",
+              "shops",
+              "medical facilities",
+              "bus services",
+              "train stations",
+              "parks"
+            ],
+            "label": "Observed",
+            "other": [
+              "a4_facilities_0_other",
+              "a4_facilities_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Facilities: Local amenities observed within reasonable proximity include schools, shops, medical facilities, bus services, train stations, parks, other facilities."
+        ],
+        "when": [
+          "cb_a4_facilities",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a4_facilities",
+            "label": "Facilities",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "a4_remote",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_REMOTE}",
+        "text": "Remote area - The property is in a remote area and likely to be far away from some of the usual facilities and amenities. Also, because of the location of the property, it is recommended that you contact the utility company to be certain regarding the nature of the drainage connection.",
+        "tokens": [],
+        "when": [
+          "cb_a4_remote",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a4_remote",
+            "label": "Remote area",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_property_local_environment",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "a4_lenv",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_LOCAL_ENVIRONMENT}",
+        "text": "Local environment: I observed the following environmental feature(s) that may influence your enjoyment of the property, its future marketability or materially affect the subject property: {A4_FEATURES}. Where environmental concerns exist, you should make your own enquiries before legal commitment.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{A4_FEATURES}",
+            "options": [
+              [
+                "a4_lenv_0_susceptible_to_flooding",
+                "Susceptible to flooding"
+              ],
+              [
+                "a4_lenv_0_railway_line",
+                "Railway line"
+              ],
+              [
+                "a4_lenv_0_busy_road",
+                "Busy road"
+              ],
+              [
+                "a4_lenv_0_commercial_premises",
+                "Commercial premises"
+              ],
+              [
+                "a4_lenv_0_industrial_premises",
+                "Industrial premises"
+              ],
+              [
+                "a4_lenv_0_public_house",
+                "Public house"
+              ],
+              [
+                "a4_lenv_0_school",
+                "School"
+              ],
+              [
+                "a4_lenv_0_electricity_substation",
+                "Electricity substation"
+              ],
+              [
+                "a4_lenv_0_overhead_power_lines",
+                "Overhead power lines"
+              ],
+              [
+                "a4_lenv_0_pylons",
+                "Pylons"
+              ],
+              [
+                "a4_lenv_0_airport_flight_path",
+                "Airport flight path"
+              ]
+            ],
+            "pdf_options": [
+              "Susceptible to flooding",
+              "Railway line",
+              "Busy road",
+              "Commercial premises",
+              "Industrial premises",
+              "Public house",
+              "School",
+              "Electricity substation",
+              "Overhead power lines",
+              "Pylons",
+              "Airport flight path"
+            ],
+            "label": "Environmental features",
+            "other": [
+              "a4_lenv_0_other",
+              "a4_lenv_0_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Local environment: I observed the following environmental feature(s) that may influence your enjoyment of the property, its future marketability or materially affect the subject property: • Susceptible to flooding • Railway line • Busy road • Commercial premises • Industrial premises • Public house • School • Electricity substation • Overhead power lines • Pylons • Airport flight path • Other Where environmental concerns exist, you should make your own enquiries before legal commitment."
+        ],
+        "when": [
+          "cb_a4_lenv",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_a4_lenv",
+            "label": "Local environment",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "a4_emf",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_EMF}",
+        "text": "The property is in a location that could be affected by electromagnetic fields from an electricity substation or pylons located near the property. In addition to being unsightly, it may cause noise and disturbance, or interference may deter some future buyers, thus limiting saleability. The possible effects of electromagnetic fields have been the subject of media coverage. The Health Protection Agency (HPA), an independent body with responsibility for advising on electromagnetic fields, has advised that following the studies in 2000 and 2001, there may be risks, in specified circumstances, to the health of certain categories of people. Public perception may, however, affect marketability and future value of the property. If required, technical information can be obtained from the HPA or local electricity company.",
+        "tokens": [],
+        "when": [
+          "a4_lenv_0_electricity_substation",
+          "true"
+        ],
+        "when_any": [
+          [
+            "a4_lenv_0_overhead_power_lines",
+            "true"
+          ]
+        ]
+      },
+      {
+        "id": "a4_flood",
+        "masters": [
+          "{D_LOCATION}"
+        ],
+        "sub": "{A4_FLOODING}",
+        "text": "The property is situated close to the sea, river, a canal, reservoir, or in a low-lying area, and may be susceptible to occasional or seasonal flooding. Your legal adviser should make further enquiries and advise you whether the building has been flooded in the past or is at risk of flooding. Enquiries should also be made to the Environment Agency.",
+        "tokens": [],
+        "when": [
+          "a4_lenv_0_susceptible_to_flooding",
+          "true"
+        ]
+      }
+    ]
+  }
+]

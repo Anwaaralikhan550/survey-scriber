@@ -1,0 +1,1093 @@
+[
+  {
+    "screen": "activity_in_side_property_floors_about_floor",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_desc",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_DESCRIPTION}",
+        "text": "Description: The floors are formed in {FLOOR_CONSTRUCTION} construction. The floor finishes comprise {FLOOR_FINISHES} finishes.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{FLOOR_CONSTRUCTION}",
+            "options": [
+              [
+                "f4c_solid_concrete",
+                "solid concrete"
+              ],
+              [
+                "f4c_suspended_timber",
+                "suspended timber"
+              ],
+              [
+                "f4c_beam_and_block",
+                "beam and block"
+              ]
+            ],
+            "pdf_options": [
+              "solid concrete",
+              "suspended timber",
+              "beam and block"
+            ],
+            "label": "Floors formed in",
+            "other": [
+              "cb_other_989",
+              "et_other_424"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{FLOOR_FINISHES}",
+            "options": [
+              [
+                "f4f_floorboards",
+                "floorboards"
+              ],
+              [
+                "f4f_carpet",
+                "carpet"
+              ],
+              [
+                "f4f_tiles",
+                "tiles"
+              ],
+              [
+                "f4f_ceramic_tiles",
+                "ceramic tiles"
+              ],
+              [
+                "f4f_laminate_flooring",
+                "laminate flooring"
+              ],
+              [
+                "f4f_wood_flooring",
+                "wood flooring"
+              ],
+              [
+                "f4f_vinyl",
+                "vinyl"
+              ],
+              [
+                "f4f_stone_tiles",
+                "stone tiles"
+              ]
+            ],
+            "pdf_options": [
+              "floorboards",
+              "carpet",
+              "tiles",
+              "ceramic tiles",
+              "laminate flooring",
+              "wood flooring",
+              "vinyl",
+              "stone tiles"
+            ],
+            "label": "Floor finishes comprise",
+            "other": [
+              "cb_other_837",
+              "et_other_882"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The floors are formed in solid concrete, suspended timber, beam and block, other construction.",
+          "The floor finishes comprise floorboards, carpet, tiles, ceramic tiles, laminate flooring, wood flooring, vinyl, stone tiles, other finishes."
+        ]
+      },
+      {
+        "id": "f4_cond",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_CONDITION}",
+        "text": "Condition: Where visible, the floors appear in {FLOOR_CONDITION} condition, consistent with their age and construction. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the flooring material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{FLOOR_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the floors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction."
+        ]
+      },
+      {
+        "id": "f4_general",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: Because floor coverings were not lifted, concealed defects may exist that could not be identified during a visual inspection. No comment can therefore be made regarding the condition of concealed floor timbers or supporting construction. Floors should be inspected periodically for signs of movement, dampness, or deterioration. Prompt repair of plumbing leaks, water penetration and defective ventilation will reduce the risk of damage to concealed floor timbers. Floor finishes should be repaired or replaced as part of normal property maintenance when they reach the end of their service life.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_creaking",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_nocreak",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_NO_CREAKING}",
+        "text": "No Creaking floor: I walked over the accessible suspended floor surfaces and found them to be firm and level underfoot, with no evidence of excessive springiness or distortion. This is based on a visual inspection only, and the condition of concealed floor timbers cannot be confirmed without opening up the structure.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "No Creaking floor"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Creaking",
+            "type": "dropdown",
+            "options": [
+              "No Creaking floor",
+              "Creaking floor noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f4_creak",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_CREAKING_NOTED}",
+        "text": "Creaking floor noted: I walked over the accessible suspended floor surfaces and found them to be firm underfoot. Localised creaking and minor unevenness were noted in parts of the floors and/or stairs. These are not uncommon in properties of this age, and, at the time of inspection, there was no evidence of excessive springiness or significant distortion suggestive of structural failure. This is associated with normal shrinkage or movement between floorboards and joists. Repairs may be undertaken as part of routine maintenance.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Creaking floor noted"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_repair_floor_repair",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_repair",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_REPAIR_TIMBER_FLOOR}",
+        "text": "Repair timber floor: The timber floor to the {FLOOR_LOCATIONS} is {FLOOR_DEFECTS}, and the defect(s) is considered {FLOOR_SEVERITY}. This is common with floors of this age and construction, and these should be repaired soon. However, where the defect is significant, repair must be carried out promptly by a qualified professional.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{FLOOR_LOCATIONS}",
+            "options": [
+              [
+                "f4rl_lounge",
+                "lounge"
+              ],
+              [
+                "f4rl_bedroom",
+                "bedroom"
+              ],
+              [
+                "f4rl_kitchen",
+                "kitchen"
+              ],
+              [
+                "f4rl_bathroom",
+                "bathroom"
+              ],
+              [
+                "f4rl_hallway",
+                "hallway"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "bedroom",
+              "kitchen",
+              "bathroom",
+              "hallway"
+            ],
+            "label": "Timber floor to",
+            "other": [
+              "cb_other_221",
+              "et_other_911"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{FLOOR_DEFECTS}",
+            "options": [
+              [
+                "f4rd_broken",
+                "broken"
+              ],
+              [
+                "f4rd_poorly_supported",
+                "poorly supported"
+              ],
+              [
+                "f4rd_uneven",
+                "uneven"
+              ],
+              [
+                "f4rd_springy",
+                "springy"
+              ],
+              [
+                "f4rd_loose",
+                "loose"
+              ],
+              [
+                "f4rd_sloping",
+                "sloping"
+              ],
+              [
+                "f4rd_incomplete",
+                "incomplete"
+              ],
+              [
+                "f4rd_damp",
+                "damp"
+              ],
+              [
+                "f4rd_insect_infested",
+                "insect infested"
+              ],
+              [
+                "f4rd_rotten",
+                "rotten"
+              ],
+              [
+                "f4rd_poorly_ventilated",
+                "poorly ventilated"
+              ]
+            ],
+            "pdf_options": [
+              "broken",
+              "poorly supported",
+              "uneven",
+              "springy",
+              "loose",
+              "sloping",
+              "incomplete",
+              "damp",
+              "insect infested",
+              "rotten",
+              "poorly ventilated"
+            ],
+            "label": "Defects",
+            "other": [
+              "cb_other_565",
+              "et_other_232"
+            ]
+          },
+          {
+            "kind": "dropdown",
+            "token": "{FLOOR_SEVERITY}",
+            "dropdown": "actv_repair_type",
+            "field_label": "Defect is considered",
+            "dropdown_options": [
+              "Minor",
+              "Significant"
+            ],
+            "pdf_options": [
+              "minor",
+              "significant"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Repair timber floor: The timber floor to the lounge, bedroom, kitchen, bathroom, hallway, other is broken, poorly supported, uneven, springy, loose, sloping, incomplete, damp, insect infested, rotten, poorly ventilated, others, and the defect(s) is considered minor, significant."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_tiles",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_tiles_ok",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_NO_CRACKED_TILES}",
+        "text": "No Cracked Tiles: The floor tiles appear in {TILE_CONDITION} condition. Where visible, the floor tiles in the {TILE_LOCATIONS} areas showed no evidence of cracking at the time of my inspection. No repairs are currently required. Routine maintenance only is recommended.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{TILE_CONDITION}",
+            "dropdown": "actv_tile_condition",
+            "field_label": "Tile condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true,
+            "cond": "actv_tiles=No cracked tiles"
+          },
+          {
+            "kind": "checks",
+            "token": "{TILE_LOCATIONS}",
+            "options": [
+              [
+                "f4t_kitchen",
+                "kitchen"
+              ],
+              [
+                "f4t_utility_room",
+                "utility room"
+              ],
+              [
+                "f4t_bathroom",
+                "bathroom"
+              ],
+              [
+                "f4t_toilet",
+                "toilet"
+              ],
+              [
+                "f4t_conservatory",
+                "conservatory"
+              ],
+              [
+                "f4t_porch",
+                "porch"
+              ]
+            ],
+            "pdf_options": [
+              "kitchen",
+              "utility room",
+              "bathroom",
+              "toilet",
+              "conservatory",
+              "porch"
+            ],
+            "label": "Floor tiles in",
+            "other": [
+              "cb_other_240",
+              "et_other_392"
+            ],
+            "cond": "actv_tiles=No cracked tiles|Cracked tiles"
+          }
+        ],
+        "pdf": [
+          "No Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition.",
+          "Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection."
+        ],
+        "when": [
+          "actv_tiles",
+          "No cracked tiles"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_tiles",
+            "label": "Floor tiles",
+            "type": "dropdown",
+            "options": [
+              "No cracked tiles",
+              "Cracked tiles"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f4_tiles_bad",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_CRACKED_TILES}",
+        "text": "Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition. Where visible, the floor tiles in the {TILE_LOCATIONS} areas showed no evidence of cracking at the time of my inspection. No repairs are currently required. Routine maintenance only is recommended. Cracked Tiles: Localised {TILE_DEFECTS} floor tiles to the {TILE_LOCATIONS} areas were observed. Repairs should be undertaken to maintain the floor finish and reduce the risk of further deterioration.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{TILE_DEFECTS}",
+            "options": [
+              [
+                "f4td_cracked",
+                "cracked"
+              ],
+              [
+                "f4td_loose",
+                "loose"
+              ],
+              [
+                "f4td_damaged",
+                "damaged"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "loose",
+              "damaged"
+            ],
+            "label": "Tiles are",
+            "cond": "actv_tiles=Cracked tiles"
+          },
+          {
+            "kind": "checks",
+            "token": "{TILE_LOCATIONS}",
+            "options": [
+              [
+                "f4t_kitchen",
+                "kitchen"
+              ],
+              [
+                "f4t_utility_room",
+                "utility room"
+              ],
+              [
+                "f4t_bathroom",
+                "bathroom"
+              ],
+              [
+                "f4t_toilet",
+                "toilet"
+              ],
+              [
+                "f4t_conservatory",
+                "conservatory"
+              ],
+              [
+                "f4t_porch",
+                "porch"
+              ]
+            ],
+            "pdf_options": [
+              "kitchen",
+              "utility room",
+              "bathroom",
+              "toilet",
+              "conservatory",
+              "porch"
+            ],
+            "label": "Floor tiles in",
+            "other": [
+              "cb_other_240",
+              "et_other_392"
+            ],
+            "cond": "actv_tiles=No cracked tiles|Cracked tiles"
+          }
+        ],
+        "pdf": [
+          "Cracked Tiles: Localised cracked, loose, damaged floor tiles to the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas were observed.",
+          "Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection."
+        ],
+        "when": [
+          "actv_tiles",
+          "Cracked tiles"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_loose_floorboards",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_loose",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_LOOSE_FLOORBOARDS}",
+        "text": "Loose Floorboards: Loose and creaking floor finishes were noted and will require local repair or renewal. Removal of floor coverings may reveal additional defects requiring attention.",
+        "tokens": [],
+        "when": [
+          "cb_loose_floorboards",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_loose_floorboards",
+            "label": "Loose floorboards",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_timber_infection",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_wb",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_WOOD_BORING_NOTED}",
+        "text": "Wood Boring Noted: Evidence of {WB_ACTIVITY} wood-boring insect activity was observed in the {WB_LOCATIONS} areas. Further inspection of active activity by an appropriately qualified timber specialist is recommended where activity appears active or widespread. Otherwise, for historic activity, further enquiries should be made to the vendor regarding history, treatment work, and guarantee certificates.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WB_ACTIVITY}",
+            "options": [
+              [
+                "f4wa_active",
+                "active"
+              ],
+              [
+                "f4wa_historic",
+                "historic"
+              ]
+            ],
+            "pdf_options": [
+              "active",
+              "historic"
+            ],
+            "label": "Activity observed"
+          },
+          {
+            "kind": "checks",
+            "token": "{WB_LOCATIONS}",
+            "options": [
+              [
+                "f4wl_property",
+                "property"
+              ],
+              [
+                "f4wl_lounge",
+                "lounge"
+              ],
+              [
+                "f4wl_bedrooms",
+                "bedrooms"
+              ],
+              [
+                "f4wl_bathrooms",
+                "bathrooms"
+              ],
+              [
+                "f4wl_kitchens",
+                "kitchens"
+              ]
+            ],
+            "pdf_options": [
+              "property",
+              "lounge",
+              "bedrooms",
+              "bathrooms",
+              "kitchens"
+            ],
+            "label": "Observed in",
+            "other": [
+              "cb_other_965",
+              "et_other_529"
+            ]
+          }
+        ],
+        "pdf": [
+          "Wood Boring Noted: Evidence of active, historic wood-boring insect activity was observed in the property, lounge, bedrooms, bathrooms, kitchens, other areas."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_timber_decay",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_decay",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_TIMBER_DECAY_NOTED}",
+        "text": "Timber decay noted: Decay was noted to the {DECAY_LOCATIONS} areas. The full extent of the decay could not be determined during this visual inspection, and additional concealed defects may be present. Further investigation by a suitably qualified timber specialist is recommended, and you should obtain a report and quotations for any necessary remedial works before committing to the purchase.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DECAY_LOCATIONS}",
+            "options": [
+              [
+                "f4dc_floor_timbers",
+                "floor timbers"
+              ],
+              [
+                "f4dc_staircase_timbers",
+                "staircase timbers"
+              ],
+              [
+                "f4dc_bathroom_floor",
+                "bathroom floor"
+              ],
+              [
+                "f4dc_kitchen_floor",
+                "kitchen floor"
+              ],
+              [
+                "f4dc_basement_floor_joists",
+                "basement floor joists"
+              ]
+            ],
+            "pdf_options": [
+              "floor timbers",
+              "staircase timbers",
+              "bathroom floor",
+              "kitchen floor",
+              "basement floor joists"
+            ],
+            "label": "Decay noted to",
+            "other": [
+              "cb_other_802",
+              "et_other_592"
+            ]
+          }
+        ],
+        "pdf": [
+          "Timber decay noted: Decay was noted to the floor timbers, staircase timbers, bathroom floor, kitchen floor, basement floor joists, other areas."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_dampness",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_damp",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_DAMPNESS_NOTED}",
+        "text": "Dampness noted: Although I could not see the full extent of the dampness problem in the {DAMP_LOCATIONS} areas, I suspect the dampness is caused by {DAMP_CAUSES}. You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DAMP_LOCATIONS}",
+            "options": [
+              [
+                "f4dl_lounge",
+                "lounge"
+              ],
+              [
+                "f4dl_bedroom",
+                "bedroom"
+              ],
+              [
+                "f4dl_kitchen",
+                "kitchen"
+              ],
+              [
+                "f4dl_bathroom",
+                "bathroom"
+              ],
+              [
+                "f4dl_utility_room",
+                "utility room"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "bedroom",
+              "kitchen",
+              "bathroom",
+              "utility room"
+            ],
+            "label": "Dampness in",
+            "other": [
+              "cb_other_240",
+              "et_other_392"
+            ],
+            "cond": "actv_status=Dampness noted"
+          },
+          {
+            "kind": "checks",
+            "token": "{DAMP_CAUSES}",
+            "options": [
+              [
+                "f4dcs_faulty_plumbing",
+                "faulty plumbing"
+              ],
+              [
+                "f4dcs_bathtub_spillage",
+                "bathtub spillage"
+              ],
+              [
+                "f4dcs_leaking_sealants",
+                "leaking sealants"
+              ]
+            ],
+            "pdf_options": [
+              "faulty plumbing",
+              "bathtub spillage",
+              "leaking sealants"
+            ],
+            "label": "Suspected cause",
+            "other": [
+              "cb_other_215",
+              "et_other_358"
+            ],
+            "cond": "actv_status=Dampness noted"
+          }
+        ],
+        "pdf": [
+          "Dampness noted: Although I could not see the full extent of the dampness problem in the lounge, bedroom, kitchen, bathroom, utility room, other areas, I suspect the dampness is caused by faulty plumbing, bathtub spillage, leaking sealants, other."
+        ],
+        "when": [
+          "actv_status",
+          "Dampness noted"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Dampness",
+            "type": "dropdown",
+            "options": [
+              "Dampness noted",
+              "Unknown damp cause"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f4_damp_unknown",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_UNKNOWN_DAMP_CAUSE}",
+        "text": "Unknown damp cause: Although I could not see the full extent of the damp problem, I suspect more serious defects exist in hidden areas. You should ask an appropriately qualified person to inspect the floor and identify the full extent of the problems.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "Unknown damp cause"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_floor_ventilation",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_vent",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_UNDERFLOOR_VENTILATION}",
+        "text": "Underfloor Ventilation: Where applicable, the suspended timber floor is provided with {UNDERFLOOR_VENTILATION} underfloor ventilation. Adequate ventilation is important in reducing the risk of condensation and timber decay. Where ventilation appears restricted or limited, improvements should be considered during future maintenance works.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{UNDERFLOOR_VENTILATION}",
+            "dropdown": "actv_condition",
+            "field_label": "Underfloor ventilation",
+            "dropdown_options": [
+              "Adequate",
+              "Limited",
+              "Restricted"
+            ],
+            "pdf_options": [
+              "adequate",
+              "limited",
+              "restricted"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Underfloor Ventilation: Where applicable, the suspended timber floor is provided with adequate, limited, or restricted underfloor ventilation."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_repair_floor_laminate_wood_floor",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_laminate",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_LAMINATE_WOOD_DEFECTS}",
+        "text": "Laminate/Wood floor defects: The laminate or wood flooring to the {LAMINATE_LOCATIONS} areas are {LAMINATE_DEFECTS}. These should be repaired or replaced soon.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{LAMINATE_LOCATIONS}",
+            "options": [
+              [
+                "f4ll_lounge",
+                "lounge"
+              ],
+              [
+                "f4ll_bedroom",
+                "bedroom"
+              ],
+              [
+                "f4ll_kitchen",
+                "kitchen"
+              ],
+              [
+                "f4ll_bathroom",
+                "bathroom"
+              ],
+              [
+                "f4ll_utility_room",
+                "utility room"
+              ],
+              [
+                "f4ll_hallway",
+                "hallway"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "bedroom",
+              "kitchen",
+              "bathroom",
+              "utility room",
+              "hallway"
+            ],
+            "label": "Flooring to",
+            "other": [
+              "cb_other_345",
+              "et_other_711"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{LAMINATE_DEFECTS}",
+            "options": [
+              [
+                "f4ld_worn",
+                "worn"
+              ],
+              [
+                "f4ld_damaged",
+                "damaged"
+              ],
+              [
+                "f4ld_poorly_fitted",
+                "poorly fitted"
+              ],
+              [
+                "f4ld_incomplete",
+                "incomplete"
+              ],
+              [
+                "f4ld_cracked",
+                "cracked"
+              ],
+              [
+                "f4ld_lifted",
+                "lifted"
+              ]
+            ],
+            "pdf_options": [
+              "worn",
+              "damaged",
+              "poorly fitted",
+              "incomplete",
+              "cracked",
+              "lifted"
+            ],
+            "label": "Defects",
+            "other": [
+              "cb_other_1109",
+              "et_other_588"
+            ]
+          }
+        ],
+        "pdf": [
+          "Laminate/Wood floor defects: The laminate or wood flooring to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other areas are worn, damaged, poorly fitted, incomplete, cracked, lifted, other."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_repair_floor_vibration",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_vibration",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_EXCESSIVE_VIBRATION}",
+        "text": "Excessive floor vibration: The floor was found to vibrate excessively underfoot, suggesting inadequate support and/or deterioration of the timber structure, such as fungal decay or wood-boring insect attack. The exact cause could not be confirmed within the scope of this inspection. You should instruct a suitably qualified contractor to inspect the floor structure, including the underfloor void where accessible, determine the cause, and carry out any necessary repairs before purchase commitment.",
+        "tokens": [],
+        "when": [
+          "cb_floor_vibration_excessive",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_floor_vibration_excessive",
+            "label": "Excessive floor vibration",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_floors_repair_sloping_floor",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f4_sloping",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_SLOPING_FLOOR}",
+        "text": "Sloping floor: The floor to the {SLOPING_LOCATIONS} rooms are {SLOPE_DEGREE} sloping. This is commonly associated with long-standing settlement, historic movement, or deflection of the floor structure. Where the slope is slight, and there is no evidence of ongoing movement or associated structural defects, it is unlikely to be of structural significance, and no repairs are considered necessary. Where the slope is significant, or accompanied by cracking or distortion, further investigation by a suitably qualified building contractor is recommended to determine the cause and specify any necessary remedial works before purchase commitment.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{SLOPING_LOCATIONS}",
+            "options": [
+              [
+                "f4sl_lounge",
+                "lounge"
+              ],
+              [
+                "f4sl_bedroom",
+                "bedroom"
+              ],
+              [
+                "f4sl_kitchen",
+                "kitchen"
+              ],
+              [
+                "f4sl_bathroom",
+                "bathroom"
+              ],
+              [
+                "f4sl_utility_room",
+                "utility room"
+              ],
+              [
+                "f4sl_hallway",
+                "hallway"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "bedroom",
+              "kitchen",
+              "bathroom",
+              "utility room",
+              "hallway"
+            ],
+            "label": "Floor to",
+            "other": [
+              "cb_other_856",
+              "et_other_113"
+            ]
+          },
+          {
+            "kind": "dropdown",
+            "token": "{SLOPE_DEGREE}",
+            "dropdown": "actv_status",
+            "field_label": "Slope",
+            "dropdown_options": [
+              "Slightly",
+              "Significantly"
+            ],
+            "pdf_options": [
+              "slightly",
+              "significantly"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Sloping floor: The floor to the lounge, bedroom, kitchen, bathroom, utility room, hallway, other rooms are slightly, significantly sloping."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_floors_main_screen",
+    "rules": [
+      {
+        "id": "f4_intro",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_INTRO}",
+        "text": "The condition of concealed floor timbers, floor voids, joists, sleeper walls, and foundations cannot be confirmed without lifting floor finishes or opening the structure. Only the visible performance of the floors was assessed during normal use. The inspection was limited by fitted floor coverings, furniture, stored items, fixed kitchen units, bathroom fittings, or restricted access. The floor construction has been inspected from within the property only. Floor coverings were not lifted, and no opening up or destructive investigation was undertaken.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_in_side_property_floors_repair_uneven_floor",
+      "activity_in_side_property_floors_repair_not_inspetcted"
+    ]
+  }
+]

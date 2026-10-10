@@ -1,0 +1,597 @@
+[
+  {
+    "screen": "activity_services_heating_about_heating",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g4_no_heating",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_NO_HEATING}",
+        "text": "No heating: The property does not have a fixed heating system. Although no repair is currently required, the absence of fixed heating may result in cold rooms, condensation, and mould growth. It is also likely to adversely affect the property's Energy Performance Certificate (EPC) rating and may impact its marketability. You should consider installing a suitable fixed heating system.",
+        "tokens": [],
+        "when": [
+          "cb_no_heating",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_no_heating",
+            "label": "No heating",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g4_not_found",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_HEATING_NOT_FOUND}",
+        "text": "Heating not found: I was unable to locate the boiler or heating system. Please ask the vendor about the location of the boiler or heating system, as you must know where it is located.",
+        "tokens": [],
+        "when": [
+          "cb_heating_not_found",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_heating_not_found",
+            "label": "Heating not found",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g4_communal",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_COMMUNAL_HEATING}",
+        "text": "Communal heating: The property is heated centrally by a communal heating system. I could not inspect the system due to access restrictions and cannot comment on the type and condition.",
+        "tokens": [],
+        "when": [
+          "cb_communal_heating",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_communal_heating",
+            "label": "Communal heating",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g4_boiler",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_BOILER}",
+        "text": "Boiler: The property is heated by a {HEAT_BOILER_TYPE} that is installed in {HEAT_BOILER_LOCATION}. The installation was inspected visually only. No operational testing or assessment of efficiency was undertaken.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{HEAT_BOILER_TYPE}",
+            "options": [
+              [
+                "g4b_combination_boiler",
+                "combination boiler"
+              ],
+              [
+                "g4b_conventional_boiler",
+                "conventional boiler"
+              ],
+              [
+                "g4b_sealed_boiler_system",
+                "sealed boiler system"
+              ],
+              [
+                "g4b_electrical_boiler",
+                "electrical boiler"
+              ],
+              [
+                "g4b_oil_fired_boiler",
+                "oil-fired boiler"
+              ]
+            ],
+            "pdf_options": [
+              "combination boiler",
+              "conventional boiler",
+              "sealed boiler system",
+              "electrical boiler",
+              "oil-fired boiler"
+            ],
+            "label": "Boiler type",
+            "other": [
+              "g4b_other",
+              "g4b_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{HEAT_BOILER_LOCATION}",
+            "options": [
+              [
+                "g4l_kitchen",
+                "kitchen"
+              ],
+              [
+                "g4l_utility_room",
+                "utility room"
+              ],
+              [
+                "g4l_bedroom",
+                "bedroom"
+              ],
+              [
+                "g4l_under_the_stairs",
+                "under the stairs"
+              ],
+              [
+                "g4l_garage",
+                "garage"
+              ]
+            ],
+            "pdf_options": [
+              "kitchen",
+              "utility room",
+              "bedroom",
+              "under the stairs",
+              "garage"
+            ],
+            "label": "Boiler installed in",
+            "other": [
+              "g4l_other",
+              "g4l_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other."
+        ],
+        "when": [
+          "cb_boiler_present",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_boiler_present",
+            "label": "Boiler",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g4_emitters",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_HEAT_EMITTERS}",
+        "text": "Heat emitters: The boiler is connected to {HEAT_EMITTERS} as heat emitters; their capacity, efficiency, and lifespan are not readily ascertained. I recommend these are serviced and demonstrated to yourselves, so you are satisfied with their performance under variable operational requirements.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{HEAT_EMITTERS}",
+            "options": [
+              [
+                "g4e_radiators",
+                "radiators"
+              ],
+              [
+                "g4e_underfloor_heating_pipes",
+                "underfloor heating pipes"
+              ],
+              [
+                "g4e_ceiling_vents",
+                "ceiling vents"
+              ],
+              [
+                "g4e_wall_vents",
+                "wall vents"
+              ]
+            ],
+            "pdf_options": [
+              "radiators",
+              "underfloor heating pipes",
+              "ceiling vents",
+              "wall vents"
+            ],
+            "label": "Boiler connected to",
+            "other": [
+              "g4e_other",
+              "g4e_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Heat emitters: The boiler is connected to radiators, underfloor heating pipes, ceiling vents, wall vents, other as heat emitters; their capacity, efficiency, and lifespan are not readily ascertained."
+        ],
+        "when": [
+          "cb_connected_to_radiator",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_connected_to_radiator",
+            "label": "Heat emitters",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g4_room_heaters",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_ROOM_HEATERS}",
+        "text": "Room heaters: The property is heated by {HEAT_ROOM_HEATERS} heaters. These appear in reasonable condition. However, I cannot comment on their serviceability as the system was not operating at the time of my inspection and I have no evidence of any service history. The property must be maintained in the normal way.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{HEAT_ROOM_HEATERS}",
+            "options": [
+              [
+                "g4r_oil_filled",
+                "oil-filled"
+              ],
+              [
+                "g4r_electric_storage",
+                "electric storage"
+              ],
+              [
+                "g4r_individual_room_electric",
+                "individual room electric"
+              ]
+            ],
+            "pdf_options": [
+              "oil-filled",
+              "electric storage",
+              "individual room electric"
+            ],
+            "label": "Room heaters",
+            "other": [
+              "g4r_other",
+              "g4r_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Room heaters: The property is heated by oil-filled, electric storage, individual room electric, other heaters."
+        ],
+        "when": [
+          "cb_room_heaters",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_room_heaters",
+            "label": "Room heaters",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g4_old_boiler",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_OLD_BOILER}",
+        "text": "Old boiler: Although no significant defects were apparent from the limited visual inspection, the boiler is older. Older boilers are less efficient and may become increasingly unreliable and costly to maintain. You should anticipate replacement as the boiler approaches the end of its serviceable life.",
+        "tokens": [],
+        "when": [
+          "cb_old_boiler",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_old_boiler",
+            "label": "Old boiler",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g4_forced_air",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_FORCED_AIR}",
+        "text": "Forced Air Heating: The property is heated by a forced air heating system with the main unit located in the {HEAT_FORCED_AIR_LOCATION}. Warm air is distributed throughout the property via a network of ducts and vents. The installation was inspected visually only, and no operational testing or assessment of efficiency was undertaken. The property must be maintained in the normal way.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{HEAT_FORCED_AIR_LOCATION}",
+            "options": [
+              [
+                "g4f_utility_room",
+                "utility room"
+              ],
+              [
+                "g4f_loft",
+                "loft"
+              ],
+              [
+                "g4f_garage",
+                "garage"
+              ],
+              [
+                "g4f_cupboard",
+                "cupboard"
+              ],
+              [
+                "g4f_basement",
+                "basement"
+              ]
+            ],
+            "pdf_options": [
+              "utility room",
+              "loft",
+              "garage",
+              "cupboard",
+              "basement"
+            ],
+            "label": "Main unit located in",
+            "other": [
+              "g4f_other",
+              "g4f_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Forced Air Heating: The property is heated by a forced air heating system with the main unit located in the utility room, loft, garage, cupboard, basement, other."
+        ],
+        "when": [
+          "cb_forced_air",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_forced_air",
+            "label": "Forced air heating",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g4_ashp",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_AIR_SOURCE_HEAT_PUMP}",
+        "text": "Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the {HEAT_ASHP_INTERNAL_LOC} and the external unit located to the {HEAT_ASHP_EXTERNAL_LOC} of the property. The installation was inspected visually only. No operational testing or assessment of performance, efficiency or controls was undertaken.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{HEAT_ASHP_INTERNAL_LOC}",
+            "options": [
+              [
+                "g4ai_kitchen",
+                "kitchen"
+              ],
+              [
+                "g4ai_utility_room",
+                "utility room"
+              ],
+              [
+                "g4ai_garage",
+                "garage"
+              ]
+            ],
+            "pdf_options": [
+              "kitchen",
+              "utility room",
+              "garage"
+            ],
+            "label": "Internal unit located in",
+            "other": [
+              "g4ai_other",
+              "g4ai_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{HEAT_ASHP_EXTERNAL_LOC}",
+            "options": [
+              [
+                "g4ae_front",
+                "front"
+              ],
+              [
+                "g4ae_side",
+                "side"
+              ],
+              [
+                "g4ae_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "External unit located to the"
+          }
+        ],
+        "pdf": [
+          "Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property."
+        ],
+        "when": [
+          "cb_air_source_heat_pump",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_air_source_heat_pump",
+            "label": "Air source heat pump",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g4_gshp",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_GROUND_SOURCE_HEAT_PUMP}",
+        "text": "Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the {HEAT_GSHP_INTERNAL_LOC}. The associated ground collectors or boreholes are below ground and could not be inspected. The installation was inspected visually only. No operational testing or assessment of performance, efficiency or controls was undertaken.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{HEAT_GSHP_INTERNAL_LOC}",
+            "options": [
+              [
+                "g4gi_kitchen",
+                "kitchen"
+              ],
+              [
+                "g4gi_utility_room",
+                "utility room"
+              ],
+              [
+                "g4gi_garage",
+                "garage"
+              ]
+            ],
+            "pdf_options": [
+              "kitchen",
+              "utility room",
+              "garage"
+            ],
+            "label": "Internal unit located in",
+            "other": [
+              "g4gi_other",
+              "g4gi_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other."
+        ],
+        "when": [
+          "cb_ground_source_heat_pump",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_ground_source_heat_pump",
+            "label": "Ground source heat pump",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_services_heating_repair_main_screen",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g4_repair",
+        "masters": [
+          "{G_HEATING}"
+        ],
+        "sub": "{G4_REPAIR}",
+        "text": "Repair: The {HEAT_REPAIR_ITEM} in the {HEAT_REPAIR_LOCATION} areas are {HEAT_REPAIR_DEFECT} and may be causing damp to nearby elements. Although this is not yet serious, the problem can quickly get worse and damage other parts of the property. You should ask an appropriately qualified person to check this now and promptly resolve the situation. Where a significant leak has occurred causing damage to other parts of the property, this may indicate more widespread defects within the installation. A suitably qualified plumber/heating engineer should investigate the cause, carry out any necessary repairs, and inspect the remainder of the system without delay.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{HEAT_REPAIR_ITEM}",
+            "options": [
+              [
+                "g4ri_radiator_s",
+                "radiator(s)"
+              ],
+              [
+                "g4ri_pipework",
+                "pipework"
+              ]
+            ],
+            "pdf_options": [
+              "radiator(s)",
+              "pipework"
+            ],
+            "label": "Leaking item"
+          },
+          {
+            "kind": "checks",
+            "token": "{HEAT_REPAIR_LOCATION}",
+            "options": [
+              [
+                "g4rl_lounge",
+                "lounge"
+              ],
+              [
+                "g4rl_bedroom",
+                "bedroom"
+              ],
+              [
+                "g4rl_bathroom",
+                "bathroom"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "bedroom",
+              "bathroom"
+            ],
+            "label": "Located in the",
+            "other": [
+              "g4rl_other",
+              "g4rl_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{HEAT_REPAIR_DEFECT}",
+            "options": [
+              [
+                "g4rd_leaking",
+                "leaking"
+              ],
+              [
+                "g4rd_damaged",
+                "damaged"
+              ]
+            ],
+            "pdf_options": [
+              "leaking",
+              "damaged"
+            ],
+            "label": "Defect",
+            "other": [
+              "g4rd_other",
+              "g4rd_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Repair: The radiator(s), pipework in the lounge, bedroom, bathroom, other areas are leaking, damaged, other and may be causing damp to nearby elements."
+        ],
+        "when": [
+          "cb_g4_repair",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_g4_repair",
+            "label": "Repair",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_services_heating_not_inspected",
+      "activity_services_heating_radiators",
+      "activity_services_heating_other_heating",
+      "activity_services_heating_old_boiler"
+    ]
+  }
+]

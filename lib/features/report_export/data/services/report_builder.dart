@@ -83,6 +83,7 @@ class ReportBuilder {
     'activity_issues_glazed_sections',
     'activity_issues_other_matters',
     'activity_risks_risk_to_building_',
+    'activity_risks_risk_to_people_',
     'activity_risks_other_',
     'activity_risks_repair_or_improve',
     'activity_in_side_property_fire_places__other',
@@ -580,6 +581,19 @@ class ReportBuilder {
             'activity_services_water_main_water',
             isInspection,
           ),
+          ..._buildPhrasesForScreenId(
+            rawData,
+            'activity_services_water_water_tank',
+            isInspection,
+          ),
+          ...withRepairHeading(
+            'Water Repair',
+            _buildPhrasesForScreenId(
+              rawData,
+              'activity_services_water_repair_main_screen',
+              isInspection,
+            ),
+          ),
           ...standard2,
           ...main.rating,
           ...main.notes,
@@ -814,184 +828,6 @@ class ReportBuilder {
     return left == right;
   }
 
-  List<String> _sectionDSummaryNarrativeFromAnswers(
-    String screenId,
-    Map<String, String> answers,
-  ) {
-    final id = screenId.trim().toLowerCase();
-    if (id == 'activity_property_location') {
-      final from = (answers['android_material_design_spinner2'] ?? '').trim();
-      final to = (answers['android_material_design_spinner20'] ?? '').trim();
-      final area = (answers['android_material_design_spinner'] ?? '').trim();
-      if (from.isNotEmpty && to.isNotEmpty) {
-        if (from.toLowerCase() == to.toLowerCase()) {
-          return [
-            'The property is located in an established ${from.toLowerCase()}-density area.'
-          ];
-        }
-        return [
-          'The property is located in an established area where surrounding development ranges from ${from.toLowerCase()} to ${to.toLowerCase()} density.'
-        ];
-      }
-      if (from.isNotEmpty || to.isNotEmpty) {
-        final density = (from.isNotEmpty ? from : to).toLowerCase();
-        return [
-          'The property is located in an established area with surrounding density described as $density.'
-        ];
-      }
-      if (area.isNotEmpty && area.toLowerCase() != 'yes') {
-        return ['The property is located in a ${area.toLowerCase()} area.'];
-      }
-      return const [];
-    }
-    if (id == 'activity_property_facelities') {
-      final value = (answers['android_material_design_spinner7'] ?? '')
-          .trim()
-          .toLowerCase();
-      if (value == 'accessible') {
-        return const [
-          'The local facilities include schools, shops and transport links and appear to be reasonably accessible from the property.'
-        ];
-      }
-      if (value == 'remote') {
-        return const [
-          'The property is located in a more remote setting and some day-to-day facilities may be further away than usual.'
-        ];
-      }
-      return const [];
-    }
-    if (id == 'activity_property_local_environment') {
-      final status = (answers['android_material_design_spinner8'] ?? '')
-          .trim()
-          .toLowerCase();
-      if (status.contains('no adverse')) {
-        return const [
-          'There are no known or apparent adverse local environmental features that are likely to materially affect the property.'
-        ];
-      }
-    }
-    if (id == 'activity_property_private_road') {
-      final status = (answers['android_material_design_spinner3'] ?? '')
-          .trim()
-          .toLowerCase();
-      if (status == 'yes' || status == 'true' || status == 'private') {
-        return const [
-          'The road outside the property is likely to be a private road and maintenance responsibility should be confirmed by your legal adviser.'
-        ];
-      }
-      if (status == 'no' || status == 'false') {
-        return const [
-          'The road outside the property is not understood to be private.'
-        ];
-      }
-    }
-    if (id == 'activity_property_is_noisy_area') {
-      final status = (answers['android_material_design_spinner4'] ?? '')
-          .trim()
-          .toLowerCase();
-      if (status == 'yes' || status == 'true' || status == 'fully') {
-        return const [
-          'The property is in an area where external noise influences may affect day-to-day enjoyment, saleability and value.'
-        ];
-      }
-    }
-    return const [];
-  }
-
-  List<String> _sectionDSummaryNarrativeFromFields(
-    String screenId,
-    List<ReportField> fields,
-  ) {
-    final id = screenId.trim().toLowerCase();
-    String? value(String label) {
-      for (final f in fields) {
-        if (f.label.trim().toLowerCase() == label.toLowerCase() &&
-            f.displayValue.isNotEmpty &&
-            f.displayValue != '-') {
-          return f.displayValue;
-        }
-      }
-      return null;
-    }
-
-    if (id == 'activity_property_location') {
-      final from = value('From');
-      final to = value('To');
-      if (from != null && to != null) {
-        if (from.toLowerCase() == to.toLowerCase()) {
-          return [
-            'The property is located in an established ${from.toLowerCase()}-density area.'
-          ];
-        }
-        return [
-          'The property is located in an established area where surrounding development ranges from ${from.toLowerCase()} to ${to.toLowerCase()} density.'
-        ];
-      }
-      final one = from ?? to;
-      if (one != null) {
-        return [
-          'The property is located in an established area with surrounding density described as ${one.toLowerCase()}.'
-        ];
-      }
-    }
-
-    if (id == 'activity_property_facelities') {
-      final remote = value('Remote');
-      if (remote != null) {
-        final n = remote.toLowerCase();
-        if (n == 'accessible') {
-          return const [
-            'The local facilities include schools, shops and transport links and appear to be reasonably accessible from the property.'
-          ];
-        }
-        return [
-          'Local facilities are recorded as $n for this property location.'
-        ];
-      }
-    }
-
-    if (id == 'activity_property_local_environment') {
-      final flooding = value('Flooding');
-      if (flooding != null && flooding.toLowerCase() == 'no adverse') {
-        return const [
-          'There are no known or apparent adverse local environmental features that are likely to materially affect the property.'
-        ];
-      }
-      if (flooding != null) {
-        return [
-          'Local environmental factors were noted, including flooding risk recorded as ${flooding.toLowerCase()}.'
-        ];
-      }
-    }
-
-    if (id == 'activity_property_private_road') {
-      final status = value('Status');
-      if (status != null) {
-        final s = status.toLowerCase();
-        if (s == 'yes') {
-          return const [
-            'The road outside the property is likely to be a private road and maintenance responsibility should be confirmed by your legal adviser.'
-          ];
-        }
-        if (s == 'no') {
-          return const [
-            'The road outside the property is not understood to be private.'
-          ];
-        }
-      }
-    }
-
-    if (id == 'activity_property_is_noisy_area') {
-      final status = value('Status');
-      if (status != null && status.toLowerCase() != 'no') {
-        return const [
-          'The property is in an area where external noise influences may affect day-to-day enjoyment, saleability and value.'
-        ];
-      }
-    }
-    return const [];
-  }
-
   List<String> _narrativeFallbackForIssuesRisks(
     String screenTitle,
     List<ReportField> fields,
@@ -1015,87 +851,33 @@ class ReportBuilder {
     return ['The following matters were identified in $screenTitle: $body.'];
   }
 
-  // E1's spec text has a cross-inject Phase 2B correctly identified but left
-  // unwired at the time ("Add highlighted below text to: Section I3" - I
-  // hadn't been rebuilt yet). Section I is now fully migrated (Phase 2F),
-  // so this closes that gap: when the surveyor records a shared chimney on
-  // E1's dedicated screen, the same spec-mandated sentence about shared
-  // rainwater goods and chimney stacks is injected into I3.
-  List<String> _legacyDerivedSectionFIssueOtherMattersSharedChimney(
-      V2RawReportData rawData) {
-    final sharedChimney =
-        _answersForScreen(rawData, 'activity_outside_property_shared_chimney');
-    final hasSharedChimney = ['ch1', 'ch2', 'ch3', 'ch4', 'cb_other_608']
-        .any((id) => _isCheckedValue(sharedChimney[id]));
-    if (!hasSharedChimney) return const [];
-    return [
-      'The rainwater goods and chimney stack(s) are shared. The owner of the neighbouring property or properties may have some legal rights over these shared building parts. You should check with your legal adviser before any work is done.'
-    ];
-  }
-
   List<String> _legacyDerivedSectionFIssueGuarantees(V2RawReportData rawData) {
     final phrases = <String>[];
-    final cellar = _answersForScreen(
-        rawData, 'activity_inside_property_other_celler_damp');
-    final basement = _answersForScreen(
-        rawData, 'activity_inside_property_other_celler_damp__serious_damp');
 
-    if (_isCheckedValue(cellar['cb_serious_dump'])) {
-      phrases.add(
-          'You should check with your legal adviser to see if the dampness problem repair is covered by any guarantees or warranties.');
-    }
-    if (_isCheckedValue(basement['cb_serious_dump'])) {
-      phrases.add(
-          'You should check with your legal adviser to see if the dampness problem is covered by any guarantees or warranties.');
-    }
-
-    // RICS L2 cross-injections from Section E5 Windows and E6 Outside
-    // Doors (Phase 2B): each section's spec text says "Add text to:
-    // Section J2 Guarantees" for a PVC-glazed-replacement scenario - "J2"
-    // is almost certainly a typo for "I2" (Guarantees is I2 everywhere
-    // else in the library; the app has no J2 content at all). Deferred at
-    // the time to whoever did I2's own rewrite; wired here (Phase 2F) now
-    // that I2 is the active element.
+    // Revised I2 Guarantees checklist (PDF items). The E5/E6 replacement-PVC
+    // scenario, the F1 spray-foam advisory and the renewable-energy
+    // installations each add the matching PDF item (bank-first, PDF wording
+    // as the fallback). Old non-PDF lines (cellar/basement dampness, FENSA
+    // sentence) were removed.
     final windowsAbout = _answersForScreen(
         rawData, 'activity_outside_property_windows_aboutwindow');
-    if (_isCheckedValue(windowsAbout['cb_is_replacement']) &&
-        _isCheckedValue(windowsAbout['cb_pvc'])) {
-      phrases.add(
-          'You should ask your legal adviser to confirm whether the PVC glazed sections to the windows were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
-    }
-
-    // The "PVC" outside-doors screen is its own dedicated material
-    // variant (separate from the timber/steel/aluminium/other door
-    // screens), so its own "Replacement" checkbox alone is the PVC +
-    // replacement signal - no separate material checkbox to combine it
-    // with, unlike the combined windows screen above.
-    final doorsAboutPvc = _answersForScreen(
+    final doorsAbout = _answersForScreen(
         rawData, 'activity_outside_property_out_side_doors_about_doors');
-    if (_isCheckedValue(doorsAboutPvc['cb_replacement'])) {
-      phrases.add(
-          'You should ask your legal adviser to confirm whether the PVC glazed sections to the doors were installed by a contractor registered with FENSA. Enquiries should also be made regarding any guarantees or warranties for the double glazing.');
+    if ((_isCheckedValue(windowsAbout['e5t_replacement']) &&
+            _isCheckedValue(windowsAbout['e5t_pvcu'])) ||
+        (_isCheckedValue(doorsAbout['e6t_replacement']) &&
+            _isCheckedValue(doorsAbout['e6m_pvcu']))) {
+      phrases.add(_approvedBankPhrase('{ISSUE_GUARANTEES}::{I2_WINDOWS_DOORS}') ??
+          'Window/doors: Replacement windows and external doors (including FENSA, CERTASS or Building Regulation certification).');
     }
 
-    // Revised-spec cross-injection (Phase 7): where the F1 Roof Structure
-    // spray-foam advisory fires (cb_spray_foam on the About Roof Structure
-    // screen), the revised I2 Guarantees checklist adds a spray-foam guarantee
-    // enquiry. Text mirrors the approved bank key
-    // {ISSUE_GUARANTEES}::{GUARANTEES_SPRAY_FOAM}.
     final aboutRoof = _answersForScreen(
         rawData, 'activity_inside_property_about_roof_structure');
     if (_isCheckedValue(aboutRoof['cb_spray_foam'])) {
-      phrases.add(
-          'You should ask your legal adviser to obtain the spray foam '
-          'insulation installation details, guarantees and warranties, together '
-          'with confirmation of any lender requirements.');
+      phrases.add(_approvedBankPhrase('{ISSUE_GUARANTEES}::{I2_SPRAY_FOAM}') ??
+          'Spray foam: Spray foam insulation installation details, guarantees and warranties, together with confirmation of any lender requirements.');
     }
 
-    // Revised-spec cross-injection (Phase 7): where a renewable-energy
-    // installation is present - solar PV (activity_services_solar_power),
-    // solar thermal (activity_services_water_heating_solar_power) or the
-    // Section D other-services solar flags - the revised I2 Guarantees
-    // checklist adds a renewable-energy guarantee enquiry. Text mirrors the
-    // approved bank key {ISSUE_GUARANTEES}::{GUARANTEES_RENEWABLE_ENERGY}.
     final solarPv = _answersForScreen(rawData, 'activity_services_solar_power');
     final solarThermal = _answersForScreen(
         rawData, 'activity_services_water_heating_solar_power');
@@ -1109,12 +891,8 @@ class ReportBuilder {
         _isCheckedValue(otherServices['ch1']) ||
         _isCheckedValue(otherServices['ch2']);
     if (hasRenewable) {
-      phrases.add(
-          'You should ask your legal adviser to obtain the installation '
-          'certificates, ownership details, maintenance agreements, warranties '
-          'and any lease or finance agreements for renewable energy '
-          'installations, including solar PV, solar thermal, battery storage, '
-          'air source heat pumps and ground source heat pumps.');
+      phrases.add(_approvedBankPhrase('{ISSUE_GUARANTEES}::{I2_RENEWABLE_ENERGY}') ??
+          'Renewable energy: Renewable energy installations, including solar PV, solar thermal, battery storage, air source heat pumps, and ground source heat pumps, together with installation certificates, ownership details, maintenance agreements, warranties and any lease or finance agreements.');
     }
 
     return _cleanupPhrases(phrases);
@@ -1122,123 +900,6 @@ class ReportBuilder {
 
   List<String> _legacyDerivedSectionFRiskToBuilding(V2RawReportData rawData) {
     final phrases = <String>[];
-
-    final woodMain =
-        _answersForScreen(rawData, 'activity_in_side_property_wood_work');
-    if (_isCheckedValue(woodMain['cb_out_of_square_doors'])) {
-      phrases.add(
-          'Some internal doors and frame are distorted and do not shut properly. This may have been affected by past settlement.');
-    }
-
-    final infestation = _answersForScreen(
-        rawData, 'activity_in_side_property_wood_work_repair_infestation');
-    final severity =
-        (infestation['actv_condition'] ?? infestation['llMainContainer'] ?? '')
-            .trim()
-            .toLowerCase();
-    final infestationParts = _labelsForAnswerMap(
-      infestation,
-      const <String, String>{
-        'cb_staircase': 'staircase',
-        'cb_floorboards': 'floorboards',
-        'cb_skirting': 'skirting',
-        'cb_under_stairs': 'under stairs',
-        'cb_cupboards': 'cupboards',
-        'cb_other_1032': 'other',
-      },
-      otherCheckboxId: 'cb_other_1032',
-      otherTextId: 'et_other_728',
-    );
-    final infestationLocations = _labelsForAnswerMap(
-      infestation,
-      const <String, String>{
-        'cb_plastic': 'lounge',
-        'cb_cast_iron': 'reception',
-        'cb_asbestos_cement': 'dining room',
-        'cb_concrete': 'kitchen',
-        'cb_Bedroom': 'bedroom',
-        'cb_other_697': 'other',
-      },
-      otherCheckboxId: 'cb_other_697',
-      otherTextId: 'et_other_427',
-    );
-    if (severity == 'minor' &&
-        infestationParts.isNotEmpty &&
-        infestationLocations.isNotEmpty) {
-      phrases.add(
-          'I found an active infestation of wood-boring insects in parts of the ${_toLegacyWords(infestationParts)} timber in the ${_toLegacyWords(infestationLocations)}.');
-    } else if (severity == 'major' &&
-        infestationParts.isNotEmpty &&
-        infestationLocations.isNotEmpty) {
-      phrases.add(
-          'I found a large and active infestation of wood-boring insects in parts of the staircase timber.');
-    }
-
-    final dampTimber = _answersForScreen(
-        rawData, 'activity_in_side_property_wood_work_repair_damp_timber');
-    final dampComponents = _labelsForAnswerMap(
-      dampTimber,
-      const <String, String>{
-        'cb_staircase': 'staircase',
-        'cb_floorboards': 'floorboards',
-        'cb_skirting': 'skirting',
-        'cb_under_stairs': 'under stairs',
-        'cb_cupboards': 'cupboards',
-        'cb_other_270': 'other',
-      },
-      otherCheckboxId: 'cb_other_270',
-      otherTextId: 'et_other_516',
-    );
-    final dampLocations = _labelsForAnswerMap(
-      dampTimber,
-      const <String, String>{
-        'cb_lounge_72': 'lounge',
-        'cb_reception_49': 'reception',
-        'cb_dining_room_84': 'dining room',
-        'cb_kitchen_72': 'kitchen',
-        'cb_bedroom_44': 'bedroom',
-        'cb_other_750': 'other',
-      },
-      otherCheckboxId: 'cb_other_750',
-      otherTextId: 'et_other_302',
-    );
-    final dampDefects = _labelsForAnswerMap(
-      dampTimber,
-      const <String, String>{
-        'cb_damp': 'damp',
-        'cb_rotten': 'rotten',
-        'cb_other_498': 'other',
-      },
-      otherCheckboxId: 'cb_other_498',
-      otherTextId: 'et_other_534',
-    );
-    if (dampComponents.isNotEmpty &&
-        dampLocations.isNotEmpty &&
-        dampDefects.isNotEmpty) {
-      phrases.add(
-          'The timber ${_toLegacyWords(dampComponents)} in the ${_toLegacyWords(dampLocations)} is ${_toLegacyWords(dampDefects)}.');
-    }
-
-    final leaking = _answersForScreen(
-        rawData, 'activity_in_side_property_bathroom_fittings_leaking');
-    final leakingLocations = _labelsForAnswerMap(
-      leaking,
-      const <String, String>{
-        'cb_bathtub': 'bathtub',
-        'cb_shower': 'shower',
-        'cb_wc': 'wc',
-        'cb_wash_hand_basin': 'wash hand basin',
-        'cb_urinal': 'urinal',
-        'cb_other_937': 'other',
-      },
-      otherCheckboxId: 'cb_other_937',
-      otherTextId: 'et_other_861',
-    );
-    if (leakingLocations.isNotEmpty) {
-      final locationsText = _toLegacyWords(leakingLocations);
-      phrases.add(
-          'The $locationsText ${_legacyIsAre(leakingLocations)} leaking and causing dampness to nearby elements.');
-    }
 
     // RICS L2 cross-injections from Section E1 Chimney stacks (Phase 2B):
     // all 4 spec-required E1 -> J1 injections (flashing-causing-damp,
@@ -1272,68 +933,51 @@ class ReportBuilder {
 
     final leaning = _answersForScreen(
         rawData, 'activity_outside_property_leaning_chimney');
-    if ((leaning['android_material_design_spinner4'] ?? '')
-        .toLowerCase()
-        .contains('repair')) {
-      phrases.add(
-          'The chimney stack appears leaning and the movement appears significant, and action is required now (see section E1 - Chimney Stacks).');
+    if ((leaning['android_material_design_spinner4'] ?? '').toLowerCase() ==
+        'repair required') {
+      phrases.add(_approvedBankPhrase(
+              '{RISK_TO_BUILDING}::{CHIMNEY_LEANING_SIGNIFICANT}') ??
+          'The chimney stack(s) is leaning and the movement appears significant, and immediate action is required (see section E1 - Chimney Stacks).');
     }
 
     final disrepair = _answersForScreen(
         rawData, 'activity_outside_property_repair_chimney_disrepair');
     if (_isCheckedValue(disrepair['cb_repair_soon_70'])) {
-      phrases.add(
-          'The chimney stack(s) on the building are in poor condition. This is a safety hazard (see section E1 - Chimney Stacks).');
+      phrases.add(_approvedBankPhrase(
+              '{RISK_TO_BUILDING}::{CHIMNEY_POOR_CONDITION}') ??
+          'One or more chimney stack(s) is in poor condition. This is a safety hazard. Further investigation and repair should be arranged immediately (see section E1 - Chimney Stacks).');
     }
 
-    // RICS L2 cross-injections from Section E2 Roof Coverings (Phase 2B):
-    // 6 of E2's 7 spec-required E2 -> J1 injections that this data model
-    // captures (tile defects, significant deflection, ridge tiles damaged,
-    // hip tiles damaged, flat-roof damp, roof spreading). The 7th
-    // (flashing-at-junction damaged) has no repair-soon/now screen in the
-    // current tree - `outside_property_roof_covering_flashing_layout` only
-    // captures the description/condition, not a repair branch - so it is
-    // intentionally not wired here rather than guessed (same class of gap
-    // as E1's chimney-flashing "causing damp" checkbox before that was
-    // added; this one still needs its own new field).
+    // PDF "Add text to: Section J1" lines of E2 Roof covering (bank-first).
     final roofRepairTiles =
         _answersForScreen(rawData, 'activity_outside_property_roof_repair_tiles');
-    final roofTilesCondition =
-        (roofRepairTiles['actv_condition'] ?? '').toLowerCase();
-    if (roofTilesCondition.contains('now')) {
-      if (_isCheckedValue(roofRepairTiles['cb_roof_40'])) {
-        phrases.add(
-            'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
-      }
-      if (_isCheckedValue(roofRepairTiles['cb_ridge_16'])) {
-        phrases.add(
-            'The covering along the top of the roof structure (called the ridge tiles) is damaged or defective (see section E2 - Roof Coverings).');
-      }
-      if (_isCheckedValue(roofRepairTiles['cb_hip_42'])) {
-        phrases.add(
-            'The covering along the slope of the roof structure (called the hip tiles) is damaged or defective (see section E2 - Roof Coverings).');
-      }
+    if ((roofRepairTiles['actv_condition'] ?? '').toLowerCase() ==
+        'repair now') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_TILES_DEFECTS}') ??
+          'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
     }
 
     final roofStructure = _answersForScreen(
         rawData, 'outside_property_roof_covering_roof_structure_layout');
-    if ((roofStructure['actv_status'] ?? '').toLowerCase().contains('investigate')) {
-      phrases.add(
+    if ((roofStructure['actv_status'] ?? '').toLowerCase() == 'repair defect') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_LINE_DEFLECTION}') ??
           'The surface of the roof slope(s) of the building is significantly distorted, uneven or undulating (see section E2 - Roof Coverings).');
     }
 
     final flatRoofRepair = _answersForScreen(
         rawData, 'activity_outside_property_roof_repair_flat_roof');
-    if ((flatRoofRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
-      phrases.add(
-          'The flat roof covering is weathered, blistered, split, torn, worn, ponding, or defective (see section E2 - Roof Coverings).');
+    if ((flatRoofRepair['actv_condition'] ?? '').toLowerCase() ==
+        'repair now') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{FLAT_ROOF_DEFECTS}') ??
+          'The flat roof covering is weathered, blistered, split, torn, worn, ponding, or defective and causing rainwater to penetrate the building below (see section E2 - Roof Coverings).');
     }
 
     final roofSpreadingRepair = _answersForScreen(
         rawData, 'activity_outside_property_roof_spreading_repair');
-    if ((roofSpreadingRepair['actv_status'] ?? '').toLowerCase() == 'yes') {
-      phrases.add(
-          'The roof slopes appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards (see section E2 - Roof Coverings).');
+    if (const ['rc_rs_all', 'rc_rs_front', 'rc_rs_side', 'rc_rs_rear']
+        .any((id) => _isCheckedValue(roofSpreadingRepair[id]))) {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_SPREADING}') ??
+          'The roof slopes to the front, side and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards (see section E2 - Roof Coverings).');
     }
 
     // RICS L2 cross-injection from Section E3 Rainwater Goods (Phase 2B):
@@ -1341,73 +985,60 @@ class ReportBuilder {
     // damp) repair branch.
     final rwgRepair = _answersForScreen(
         rawData, 'activity_outside_property_rwg__repair_pipes_gutters');
-    if ((rwgRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
-      phrases.add(
-          'One or more defects affecting the rainwater gutters, downpipes, associated fittings and drainage arrangements were noted (see section E3 - Rainwater Goods).');
+    final rwgConnections = _answersForScreen(
+        rawData, 'activity_outside_property_rwg_defective_connections');
+    if ((rwgRepair['actv_condition'] ?? '').toLowerCase() == 'repair now' ||
+        (rwgConnections['actv_condition'] ?? '').toLowerCase() ==
+            'repair now') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{RWG_DEFECTS}') ??
+          'One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted (see section E3 - Rainwater Goods).');
     }
 
-    // RICS L2 cross-injections from Section E4 Main Walls (Phase 2B): 4 of
-    // the spec's 5 wall -> J1 injections that this data model captures
-    // (damp-moisture-readings, drainage-guttering, lintel-repair-now,
-    // windowsill-repair-now). The 5th (trees showing defects) has no
-    // "defects noted" field on the nearby-trees screen in the current
-    // tree - only tree size is captured - so it is intentionally not
-    // wired here rather than guessed (same class of gap as E2's
-    // flashing-at-junction injection above; this one still needs its own
-    // new field).
+    // PDF "Add text to: Section J1" lines of F1 Roof structure (bank-first).
+    final chimneyBreast = _answersForScreen(
+        rawData, 'activity_inside_property_repair_removed_chimney_breast');
+    final chimneyBreastStatus =
+        (chimneyBreast['actv_status'] ?? '').toLowerCase();
+    if (chimneyBreastStatus == 'poor support') {
+      phrases.add(
+          _approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_CHIMNEY_POOR_SUPPORT}') ??
+              'Part of the chimney breast within the roof space of this property has been removed, and the remaining structure does not appear to be properly supported (see section F1 - Roof Structure).');
+    } else if (chimneyBreastStatus == 'risk of collapse') {
+      phrases.add(
+          _approvedBankPhrase('{RISK_TO_BUILDING}::{ROOF_CHIMNEY_COLLAPSE}') ??
+              'Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse (see section F1 - Roof Structure).');
+    }
+
+    // PDF "Add text to: Section J1" lines of E4 Main walls (bank-first).
     final mainWallsDamp = _answersForScreen(
         rawData, 'activity_outside_property_main_walls_damp');
-    final mainWallsDampLocation =
-        (mainWallsDamp['et_location_677'] ?? '').trim();
-    if (mainWallsDampLocation.isNotEmpty) {
-      phrases.add(
-          'Elevated moisture readings were recorded to sections of the internal wall surfaces that include ${mainWallsDampLocation.toLowerCase()} (see section E4 - Main Walls).');
-    }
-    if (_isCheckedValue(mainWallsDamp['cb_install_french_gutters'])) {
-      phrases.add(
-          'The external ground levels are high in relation to the building, the damp-proof course (DPC) may be bridged in places, allowing moisture to penetrate the walls (see section E4 - Main Walls).');
+    if (_isCheckedValue(mainWallsDamp['cb_rising_damp'])) {
+      phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{RISING_DAMP}') ??
+          'Elevated moisture readings and associated defects to wall finishes were recorded on internal wall surfaces, suggesting the presence of rising damp. Further investigation by a suitably qualified damp and timber specialist is recommended to determine the cause and extent of the problem (see section E4 - Main Walls).');
     }
 
-    final lintelRepair = _answersForScreen(
-        rawData, 'activity_outside_property_main_wall_repairs_lintel');
-    if ((lintelRepair['actv_condition'] ??
-            lintelRepair['llMainContainer'] ??
-            '')
-        .toLowerCase()
-        .contains('now')) {
-      phrases.add(
-          'The small beam that spans across the top of the window or door opening including brick arch (called a lintel) is damaged, cracked, distorted (see section E4 - Main Walls).');
-    }
-
-    final windowSillRepair = _answersForScreen(
-        rawData, 'activity_outside_property_main_wall_repairs_window_sills');
-    if ((windowSillRepair['actv_condition'] ??
-            windowSillRepair['llMainContainer'] ??
-            '')
-        .toLowerCase()
-        .contains('now')) {
-      phrases.add(
-          'The small beam that spans across the bottom of the window opening (called a windowsill) is damaged, cracked, distorted (see section E4 - Main Walls).');
-    }
-
-    // RICS L2 cross-injection from Section E8 Other Joinery and Finishes
-    // (Phase 2B): the spec's single E8 -> J1 injection, gated on the
-    // repair screen's own "Rotted" defect checkbox - a direct 1:1 mapping
-    // (the spec's cross-inject text is literally "...is rotted"), unlike
-    // E6/E7's Repair-Now-tier derivation where no matching checkbox exists.
-    for (final screenId in const [
-      'activity_outside_property_other_joinery_and_finishes_repairs',
-      'activity_outside_property_other_joinery_and_finishes_repairs__repairs',
+    for (final lintelScreen in const [
+      'activity_outside_property_main_wall_repairs_lintel',
+      'activity_outside_property_main_wall_repairs_lintel__door',
     ]) {
-      final joineryRepair = _answersForScreen(rawData, screenId);
-      if (_isCheckedValue(joineryRepair['cb_rotted'])) {
-        phrases.add(
-            'Parts of the usual work at the eaves level is rotted. This should be repaired to avoid further deterioration (see section E8 - Other Joinery and Finishes).');
+      final lintelRepair = _answersForScreen(rawData, lintelScreen);
+      if ((lintelRepair['actv_condition'] ?? '').toLowerCase() ==
+          'significant defect') {
+        phrases.add(_approvedBankPhrase('{RISK_TO_BUILDING}::{LINTEL_DEFECT}') ??
+            'One or more small beams that span across the top of the window or door opening, including brick arch (called a lintel), is damaged, cracked, distorted (see section E4 - Main Walls).');
+        break;
       }
     }
 
     return _cleanupPhrases(phrases);
   }
+
+  /// Fills a J2 option-list token from an H2 dropdown; when the surveyor chose
+  /// nothing the token and its following word collapse to just that word.
+  String _fillJ2Token(String text, String token, String value, String next) =>
+      value.isEmpty
+          ? text.replaceAll('$token $next', next)
+          : text.replaceAll(token, value);
 
   /// RICS L2 J2 "Risks to the Grounds" (Phase 2F): the app has no
   /// dedicated J2 screen at all - spec's 4 sub-topics (Trees, Retaining
@@ -1437,10 +1068,13 @@ class ReportBuilder {
     final groundsTopo =
         _answersForScreen(rawData, 'activity_grounds_other_grounds');
     final topoType = (groundsTopo['actv_type'] ?? '').trim().toLowerCase();
-    if (topoType.isNotEmpty && topoType != 'relatively level') {
-      phrases.add(
-          _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND}') ??
-              'The property occupies a $topoType site. Although no evidence of instability was observed during the inspection, sloping ground can influence drainage and foundations, and should be considered as part of routine maintenance.');
+    if (topoType.isNotEmpty && topoType != 'level') {
+      final slopeBank =
+          _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND}');
+      phrases.add(slopeBank != null
+          ? _fillJ2Token(slopeBank, '{J2_SLOPE}',
+              (groundsTopo['actv_j2_slope'] ?? '').trim().toLowerCase(), 'sloping')
+          : 'The property occupies a $topoType site. Although no evidence of instability was observed during the inspection, sloping ground can influence drainage and foundations, and should be considered as part of routine maintenance.');
     }
 
     // Trees: H2's nearby-trees repair screen.
@@ -1448,7 +1082,7 @@ class ReportBuilder {
         _answersForScreen(rawData, 'activity_other_repair_nearby_trees');
     final treeCondition =
         (nearbyTrees['actv_condition'] ?? '').trim().toLowerCase();
-    if (treeCondition == 'problems') {
+    if (treeCondition == 'defects noted') {
       final proximity =
           (nearbyTrees['actv_proximity_of_adjacent_tree'] ?? '')
               .trim()
@@ -1467,7 +1101,8 @@ class ReportBuilder {
       final v2Trees =
           _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES}');
       if (v2Trees != null) {
-        phrases.add(v2Trees);
+        phrases.add(_fillJ2Token(v2Trees, '{J2_TREE_SIZE}',
+            (nearbyTrees['actv_j2_tree_size'] ?? '').trim().toLowerCase(), 'trees'));
       } else if (treeIssues.isNotEmpty) {
         phrases.add(
             'There are $proximityText within influencing distance of the property, and these appear to be causing ${_toLegacyWords(treeIssues)}. Further investigation by an appropriately qualified person is recommended before legal commitment.');
@@ -1670,194 +1305,33 @@ class ReportBuilder {
       }
     }
 
-    // RICS L2 cross-injections from Section E2 Roof Coverings (Phase 2B):
-    // 2 of E2's 7 spec-required E2 -> J3 (Risk to People) injections.
+    // PDF "Add text to: Section J3" line of E2 Roof covering (bank-first).
     final roofRepairTilesForPeople = _answersForScreen(
         rawData, 'activity_outside_property_roof_repair_tiles');
-    if ((roofRepairTilesForPeople['actv_condition'] ?? '')
-            .toLowerCase()
-            .contains('now') &&
-        _isCheckedValue(roofRepairTilesForPeople['cb_roof_40'])) {
-      phrases.add(
+    if ((roofRepairTilesForPeople['actv_condition'] ?? '').toLowerCase() ==
+        'repair now') {
+      phrases.add(_approvedBankPhrase('{RISK_TO_PEOPLE}::{ROOF_TILES_DEFECTS}') ??
           'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing (see section E2 - Roof Coverings).');
     }
 
-    final parapetRepair = _answersForScreen(
-        rawData, 'activity_outside_property_roof_repair_parapet_wall');
-    if (_isCheckedValue(parapetRepair['cb_safety_hazard']) &&
-        (parapetRepair['actv_condition'] ?? '').toLowerCase().contains('now')) {
-      phrases.add(
-          'The rendering, copping, flashing, other of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured, other (see section E2 - Roof Coverings).');
-    }
-
-    // RICS L2 cross-injections from Section E4 Main Walls (Phase 2B): the
-    // spec's 2 wall -> J3 (Risk to People) injections (damp-moisture-
-    // readings is a dual J1+J3 target, shared with the J1 method above;
-    // render-hazard fires alongside the render "now" hazard sentence,
-    // since both describe the same falling-render danger to people).
-    final mainWallsDampForPeople = _answersForScreen(
-        rawData, 'activity_outside_property_main_walls_damp');
-    final mainWallsDampLocationForPeople =
-        (mainWallsDampForPeople['et_location_677'] ?? '').trim();
-    if (mainWallsDampLocationForPeople.isNotEmpty) {
-      phrases.add(
-          'Elevated moisture readings were recorded to sections of the internal wall surfaces that include ${mainWallsDampLocationForPeople.toLowerCase()} (see section E4 - Main Walls).');
-    }
-
-    final renderRepair = _answersForScreen(
-        rawData, 'activity_outside_property_main_wall_repairs_render');
-    if ((renderRepair['actv_condition'] ??
-            renderRepair['llMainContainer'] ??
-            '')
-            .toLowerCase()
-            .contains('now') &&
-        _isCheckedValue(renderRepair['cb_hazard'])) {
-      phrases.add(
-          'Parts of the render coating to the building are eroded, loose, missing, damaged, other (see section E4 - Main Walls).');
-    }
-
-    // RICS L2 cross-injections from Section E5 Windows (Phase 2B): 2 of
-    // the spec's 3 window -> J3 (Risk to People) injections (repair
-    // safety-hazard, fire-trap-risk). The 3rd targets "Section J2
-    // Guarantees" per the spec's own text, but this app has no J2 content
-    // at all (J1=Building, J3=Risk to People [renamed from a pre-existing
-    // mislabelled "J2" - see report_builder's derived_j3_risk_to_people
-    // fix], J4=Other) and "Guarantees" is I2 everywhere else in the
-    // library, so this is almost certainly a typo in the client's
-    // document. Wired as an I2 target (Phase 2F) in
-    // _legacyDerivedSectionFIssueGuarantees above, rather than to the
-    // wrong section.
-    final windowsRepairForPeople = _answersForScreen(
-        rawData, 'activity_outside_property_windows_repairs_repair_window');
-    final windowsRepairHowMany = _labelsForAnswerMap(
-      windowsRepairForPeople,
-      const <String, String>{
-        'cb_ch1': 'one',
-        'cb_ch2': 'some',
-        'cb_ch3': 'many',
-      },
-    );
-    if (_isCheckedValue(windowsRepairForPeople['cb_safety_hazard']) &&
-        windowsRepairHowMany.isNotEmpty) {
-      phrases.add(
-          'One or more windows have been affected by single or multiple defects, and this is a health and safety hazard (see section E5 - Windows).');
-    }
-
+    // PDF "Add text to: Section J3" line of E5 Windows (bank-first).
     final fireEscapeRisk = _answersForScreen(rawData,
         'activity_outside_property_windows_repairs_no_fire_escape_risk');
-    final fireEscapeLocations = _labelsForAnswerMap(
-      fireEscapeRisk,
-      const <String, String>{
-        'cb_lounge_84': 'lounge',
-        'cb_bedroom_43': 'bedroom',
-        'cb_study_61': 'study',
-      },
-    );
-    if (fireEscapeLocations.isNotEmpty) {
-      phrases.add(
-          'The design of the window(s) does not provide a suitable means of escape in the event of a fire (see section E5 - Windows).');
-    }
-
-    // RICS L2 cross-injections from Section E6 Outside Doors (Phase 2B):
-    // 1 of the spec's 2 door -> J3 (Risk to People) injections. The 2nd
-    // targets "Section J2 Guarantees" per the spec's own text - the same
-    // likely typo documented for E5 above (Guarantees is I2 everywhere
-    // else in the library) - wired as an I2 target (Phase 2F) in
-    // _legacyDerivedSectionFIssueGuarantees above, rather than to the
-    // wrong section.
-    //
-    // The door repair screens have no dedicated safety-hazard/disrepair
-    // checkbox (unlike the windows repair screen's cb_safety_hazard), so
-    // this fires whenever any door location's repair is in the "Repair
-    // now" tier with at least one defect selected - the same signal the
-    // engine's own DOORS_DEFECT_IF_IN_DISREPAIR addendum uses.
-    for (final screenId in const [
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__rear_door',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__side_door',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__patio_door',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__garage_door',
-      'activity_outside_property_out_side_doors_repairs_repair_out_side_doors__other_door',
-    ]) {
-      final doorRepair = _answersForScreen(rawData, screenId);
-      final repairType = (doorRepair['actv_repair_type'] ??
-              doorRepair['llMainContainer'] ??
-              '')
-          .trim()
-          .toLowerCase();
-      if (!repairType.contains('now')) continue;
-      final nowDefects = _labelsForAnswerMap(
-        doorRepair,
-        const <String, String>{
-          'cb_damaged': 'damaged',
-          'cb_rotten': 'rotten',
-          'cb_partly_worn': 'partly worn',
-          'cb_failed_glazing': 'failed glazing',
-          'cb_sticks_against_frame': 'sticks against frame',
-          'cb_poorly_fitted': 'poorly fitted',
-          'cb_other_837': 'other',
-        },
-        otherCheckboxId: 'cb_other_837',
-        otherTextId: 'et_other_855',
-      );
-      if (nowDefects.isNotEmpty) {
-        phrases.add(
-            'One or more doors have been affected by single or multiple defects, and this is a health and safety hazard (see section E6 - Outside Doors).');
-        break;
-      }
-    }
-
-    // RICS L2 cross-injection from Section E9 Other (Phase 2B): the
-    // spec's one E9 -> J3 injection (handrail defects). Not present in
-    // the digitised library's crossInjects list for this element (a
-    // digitiser gap - the raw spec text uses "Add text to J3" without the
-    // "Section" wording every other injection in the library uses, which
-    // the extraction pattern didn't catch), but confirmed present in the
-    // raw spec text and wired here regardless. Checked across the 5
-    // numbered handrail-repair screen variants that actually reference
-    // {OTHER_REPAIR_HANDRAILS} in their wrapper (roof terrace, balcony,
-    // Juliet balcony, external stairs, other - carport and porch canopy
-    // have no handrails in the spec or this app's screens).
-    for (final screenId in const [
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__2',
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__3',
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__4',
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__5',
-      'activity_outside_property_other_repairs_hand_rails__hand_rails__6',
-    ]) {
-      final handrailRepair = _answersForScreen(rawData, screenId);
-      final handrailDefects = _labelsForAnswerMap(
-        handrailRepair,
-        const <String, String>{
-          'cb_partly_rotten_65': 'partly rotten',
-          'cb_not_strong_enough_51': 'not strong enough',
-          'cb_inadequately_designed_43': 'inadequately designed',
-        },
-      );
-      if (handrailDefects.isNotEmpty) {
-        phrases.add(
-            'The handrail(s) are damaged, inadequate or poorly designed and this presents a safety risk (see section E9 - Other).');
-        break;
-      }
+    if (fireEscapeRisk.entries.any((e) =>
+        (e.key.startsWith('e5fl_') || e.key == 'cb_other_175') &&
+        _isCheckedValue(e.value))) {
+      phrases.add(_approvedBankPhrase('{RISK_TO_PEOPLE}::{WINDOWS_FIRE_TRAP}') ??
+          'The design of one or more windows does not provide a suitable means of escape for occupants in the event of a fire (see section E5 - Windows).');
     }
 
     // Revised-spec J3 topic statements (verbatim from the approved bank),
     // surfaced when their category is relevant so J3 matches the revised
     // Risks-to-People structure. Skipped when the bank is unavailable.
 
-    // Trip Hazards — uneven floors recorded on the floor uneven-repair screen.
+    // Trip Hazards - "uneven" ticked on the F4 repair timber floor screen.
     final unevenFloor = _answersForScreen(
-        rawData, 'activity_in_side_property_floors_repair_uneven_floor');
-    const unevenLocations = <String>[
-      'cb_lounge',
-      'cb_bedrooms',
-      'cb_kitchen',
-      'cb_bathroom',
-      'cb_hall',
-      'cb_utility_room',
-      'cb_other_839',
-    ];
-    if (unevenLocations.any((id) => _isCheckedValue(unevenFloor[id]))) {
+        rawData, 'activity_in_side_property_floors_repair_floor_repair');
+    if (_isCheckedValue(unevenFloor['f4rd_uneven'])) {
       final v = _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_TRIP_HAZARDS}');
       if (v != null) phrases.add(v);
     }
@@ -1865,9 +1339,11 @@ class ReportBuilder {
     // Electrical Safety — visible electrical defects on the hazard screen.
     final elecHazard = _answersForScreen(
         rawData, 'activity_services_electricity_repair_electrical_hazard');
-    if (_isCheckedValue(elecHazard['cb_exposed_wires']) ||
-        _isCheckedValue(elecHazard['cb_damaged_fittings']) ||
-        _isCheckedValue(elecHazard['cb_other_685'])) {
+    if (elecHazard.entries
+        .any((e) => e.key.startsWith('g1p_') && _isCheckedValue(e.value))) {
+      final g1 =
+          _approvedBankPhrase('{RISK_TO_PEOPLE}::{ELECTRICAL_BELOW_STANDARD}');
+      if (g1 != null) phrases.add(g1);
       final v =
           _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_ELECTRICAL_SAFETY}');
       if (v != null) phrases.add(v);
@@ -1893,214 +1369,6 @@ class ReportBuilder {
   // by visual inspection). So this function always returns 4 phrases,
   // never stays empty, matching spec's structure rather than J1-J3's
   // risk-triggered philosophy.
-  List<String> _legacyDerivedSectionFRiskToHealth(V2RawReportData rawData) {
-    final phrases = <String>[];
-
-    // Asbestos: RICS L2 treats this as one property-wide finding, not a
-    // per-location list, so this checks every screen across Sections E, F,
-    // G and H that records an asbestos-containing material and only
-    // distinguishes observed-vs-not-observed, matching spec's own
-    // two-branch wording exactly. Each of these screens already narrates
-    // its own specific asbestos content in place (E2 roof covering, F
-    // ceilings/walls, G water/drainage, H garage) - this is a property-wide
-    // summary in addition to that detail, the same "component narrates
-    // locally, J adds a risk-level summary" pattern J1-J3 already use.
-    const asbestosCheckboxSites = <String, List<String>>{
-      'activity_grounds_garage': ['cb_corrugated_asbestos_sheets'],
-      'activity_services_drainage': ['cb_material_asbestos_cement'],
-      'activity_services_water_water_tank': ['cb_asbestos'],
-      'activity_services_water_repair_main_screen': ['cb_asbestos_material'],
-      'activity_inside_property_ceilings_repairs_ceilings': [
-        'cb_contain_asbestos_material'
-      ],
-      'inside_property_ceilings_about_ceilings': ['cb_textured'],
-      'activity_inside_property_water_tank': ['cb_asbestos', 'cb_asbestos_disused'],
-      'activity_inside_property_wap_walls': ['cb_textured'],
-      'activity_outside_property_rwg_about': ['cb_asbestos_cement'],
-      'activity_outside_property_other_joinery_and_finishes_main_screen': [
-        'cb_open_runoffs'
-      ],
-      'outside_property_about_roof_layout': ['cb_composite'],
-      'outside_property_about_roof_layout__flat': ['cb_composite'],
-      'outside_property_about_roof_layout__mansard': ['cb_composite'],
-      'outside_property_about_roof_layout__other': ['cb_composite'],
-      'activity_inside_property_ceilings_contains_asbestos': [
-        'cb_lounge',
-        'cb_bedroom',
-        'cb_kitchen',
-        'cb_bathroom',
-        'cb_Property',
-      ],
-      'outside_property_roof_covering_asbestos_layout': [
-        'cb_roof_covering',
-        'cb_verge',
-        'cb_soffits',
-        'cb_other_654',
-      ],
-    };
-    var asbestosObserved = false;
-    for (final entry in asbestosCheckboxSites.entries) {
-      final answers = _answersForScreen(rawData, entry.key);
-      if (answers.isEmpty) continue;
-      if (entry.value.any((id) => _isCheckedValue(answers[id]))) {
-        asbestosObserved = true;
-        break;
-      }
-    }
-    if (!asbestosObserved) {
-      final disusedTank =
-          _answersForScreen(rawData, 'activity_services_water_disused_tank');
-      if ((disusedTank['actv_tank_formed_in'] ?? '').trim().toLowerCase() ==
-          'asbestos') {
-        asbestosObserved = true;
-      }
-    }
-    if (asbestosObserved) {
-      phrases.add(
-          _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_ASBESTOS}') ??
-              'Materials that may contain asbestos were observed during the inspection. Where these materials remain in good condition and are left undisturbed, they do not normally present a significant health risk. Specialist advice should be obtained before disturbance or removal.');
-    } else {
-      phrases.add(
-          'No materials suspected of containing asbestos were identified during the inspection.');
-    }
-
-    // Lead: spec's own text has no "or" branch - it is a single
-    // unconditional advisory about older properties in general, not
-    // triggered by any specific answer.
-    phrases.add(
-        'Older properties may contain lead pipework, lead flashings, or lead-based paint. No testing has been undertaken during this inspection. Further advice should be obtained where refurbishment is proposed.');
-
-    // Mould Growth: F-section bathroom fittings and built-in fittings
-    // moulding screens.
-    var mouldObserved = false;
-    final builtInMoulding = _answersForScreen(
-        rawData,
-        'activity_in_side_property_built_in_fittings_repair_moulding_noted');
-    for (final id in const [
-      'cb_kitchen_sink',
-      'cb_Utility_room_sink',
-      'cb_other_717'
-    ]) {
-      if (_isCheckedValue(builtInMoulding[id])) {
-        mouldObserved = true;
-        break;
-      }
-    }
-    if (!mouldObserved) {
-      final bathroomMoulding = _answersForScreen(
-          rawData, 'activity_in_side_property_bathroom_fittings_mould');
-      for (final id in const [
-        'cb_bathtub',
-        'cb_wash_hand_basin',
-        'cb_shower_tray',
-        'cb_other_1061'
-      ]) {
-        if (_isCheckedValue(bathroomMoulding[id])) {
-          mouldObserved = true;
-          break;
-        }
-      }
-    }
-    if (mouldObserved) {
-      phrases.add(
-          _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_MOULD_GROWTH}') ??
-              'Localised mould growth associated with condensation was observed. Maintaining adequate heating and ventilation should assist in reducing further mould growth.');
-    } else {
-      phrases.add('No significant mould growth was observed.');
-    }
-
-    // Radon: cannot be determined by visual inspection - unconditional per
-    // spec, always fires the same as Lead above.
-    phrases.add(
-        'The presence of radon gas cannot be determined during a visual inspection. Where appropriate, your legal adviser should obtain environmental search information.');
-
-    return _cleanupPhrases(phrases);
-  }
-
-  // J5 Risks to the Security of the Property (Phase 2F): another brand-new
-  // spec element with no dedicated screen. Spec has 6 sub-topics (External
-  // Doors, Windows, External Lighting, Security Systems, Overall Risk
-  // Assessment, General Advice). Unlike J4's Asbestos/Mould, a door's or
-  // security-system's security LEVEL cannot be safely defaulted to a
-  // negative claim when the surveyor never actually recorded it - "no
-  // materials suspected of containing asbestos" is a true fact regardless
-  // of which checkbox fired, but "the doors provide reasonable security"
-  // is not a safe default when no door screen was ever touched. So Doors
-  // and Security Systems only fire when real data exists (J1-J3's
-  // silence-when-absent philosophy), while General Advice is genuine
-  // unconditional spec boilerplate (J4's Lead/Radon philosophy) and always
-  // fires. Windows, External Lighting and Overall Risk Assessment have no
-  // safe source to derive from at all - see the sign-off packet for why
-  // each is a flagged content gap rather than fabricated.
-  List<String> _legacyDerivedSectionFRiskToSecurity(V2RawReportData rawData) {
-    final phrases = <String>[];
-
-    // External Doors: E6's existing actv_seciruty_offered dropdown, already
-    // narrated per-door in Section E6 itself - this is a property-wide
-    // summary, same "component narrates locally, J adds a summary"
-    // pattern as J4's Asbestos/Mould. Checked across all 5 door-material
-    // screen variants; if any door is Inadequate, that is the more
-    // safety-relevant fact and takes priority over a Reasonable finding
-    // elsewhere on the property.
-    const doorScreens = <String>[
-      'activity_outside_property_out_side_doors_about_doors',
-      'activity_outside_property_out_side_doors_about_doors__timber',
-      'activity_outside_property_out_side_doors_about_doors__steel',
-      'activity_outside_property_out_side_doors_about_doors__aluminium',
-      'activity_outside_property_out_side_doors_about_doors__other',
-    ];
-    var doorSecurityFound = false;
-    var doorSecurityInadequate = false;
-    for (final screenId in doorScreens) {
-      final answers = _answersForScreen(rawData, screenId);
-      final security =
-          (answers['actv_seciruty_offered'] ?? '').trim().toLowerCase();
-      if (security.isEmpty) continue;
-      doorSecurityFound = true;
-      if (security.contains('inadequate')) {
-        doorSecurityInadequate = true;
-        break;
-      }
-    }
-    if (doorSecurityFound) {
-      phrases.add(doorSecurityInadequate
-          ? 'The accessible external doors appear to offer limited security based upon a visual inspection. The effectiveness of the locks has not been tested.'
-          : 'The accessible external doors appear to provide reasonable security based upon a visual inspection. The effectiveness of the locks has not been tested.');
-    }
-
-    // Security Systems: the Communal Area screen's amenity checkboxes
-    // (CCTV, automatic gates, entry system) are the only security-system
-    // data the tree captures anywhere - scoped to properties with a
-    // communal area (mainly flats/shared buildings), so this only fires
-    // when that screen was genuinely answered, same reasoning as Doors
-    // above.
-    final communalArea =
-        _answersForScreen(rawData, 'activity_outside_property_other_communal_area');
-    if (communalArea.isNotEmpty) {
-      final hasSecuritySystem = _isCheckedValue(communalArea['cb_cctv']) ||
-          _isCheckedValue(communalArea['cb_automatic_gates']) ||
-          _isCheckedValue(communalArea['cb_entry_system']);
-      phrases.add(hasSecuritySystem
-          ? 'The property incorporates a visible security system to the communal areas. These installations were not tested.'
-          : 'No visible security system was noted to the communal areas. These installations were not tested.');
-    }
-
-    // (General Advice moved: the revised spec places the general-maintenance
-    // advisory at the end of J3 Risks to People, not with the security risks.
-    // See _riskGeneralMaintenanceAdvice, added to J3 in the section assembly.)
-
-    return _cleanupPhrases(phrases);
-  }
-
-  // Revised-spec general-maintenance advisory. Under the revised structure this
-  // closes J3 Risks to People (previously it closed the app's J5 Security).
-  static const String _riskGeneralMaintenanceAdvice =
-      'Buildings require regular inspection and maintenance throughout their '
-      'service life. Prompt attention to isolated defects will normally reduce '
-      'the likelihood of more extensive deterioration and costly future '
-      'repairs. Where specialist inspections have been recommended within this '
-      'report, these should be obtained before legal commitment where '
-      'practicable.';
 
   List<String> _labelsForAnswerMap(
     Map<String, String> answers,
@@ -2159,158 +1427,7 @@ class ReportBuilder {
     if (id == 'activity_property_is_noisy_area') return 130;
     return 1000;
   }
-
-  List<String> _legacyStyleSectionDConstructionPhrases(List<String> phrases) {
-    if (phrases.isEmpty) return const <String>[];
-
-    final labelValues = <String, String>{};
-    final narrative = <String>[];
-    var removedIsolatedOption = false;
-    final labelPattern = RegExp(r'^\s*([^:]+):\s*(.+?)\s*$');
-
-    for (final phrase in phrases) {
-      final m = labelPattern.firstMatch(phrase);
-      if (m == null) {
-        final value = phrase.trim();
-        if (!_isIsolatedConstructionOption(value)) {
-          narrative.add(value);
-        } else {
-          removedIsolatedOption = true;
-        }
-        continue;
-      }
-      final key = (m.group(1) ?? '').trim().toLowerCase();
-      final value = _cleanConstructionValue(m.group(2) ?? '');
-      if (key.isEmpty || value.isEmpty) {
-        narrative.add(phrase.trim());
-        continue;
-      }
-      labelValues[key] = value;
-    }
-
-    // If there are no known construction labels, keep original phrasing.
-    const knownKeys = <String>{
-      'roof type',
-      'roof material',
-      'cover type',
-      'extension walls',
-      'finishes',
-      'internal walls',
-      'floors',
-      'windows',
-      'window material',
-    };
-    if (!labelValues.keys.any(knownKeys.contains)) {
-      if (removedIsolatedOption) {
-        final cleaned = _cleanupPhrases(narrative);
-        return cleaned.isEmpty ? const <String>[] : <String>[cleaned.join(' ')];
-      }
-      return List<String>.from(phrases);
-    }
-
-    final out = <String>[];
-    if (narrative.isNotEmpty) {
-      out.add(narrative.first);
-    }
-
-    final roofType = labelValues['roof type'];
-    final roofMaterial = labelValues['roof material'];
-    final coverType = labelValues['cover type'];
-    if ((roofType ?? '').isNotEmpty ||
-        (roofMaterial ?? '').isNotEmpty ||
-        (coverType ?? '').isNotEmpty) {
-      final bits = <String>[];
-      if ((roofType ?? '').isNotEmpty) bits.add('The roof type is $roofType');
-      if ((roofMaterial ?? '').isNotEmpty) {
-        bits.add('the roof material is $roofMaterial');
-      }
-      if ((coverType ?? '').isNotEmpty) {
-        bits.add('the roof cover is $coverType');
-      }
-      out.add('${bits.join(', ')}.');
-    }
-
-    final extensionWalls = labelValues['extension walls'];
-    if ((extensionWalls ?? '').isNotEmpty) {
-      out.add('The main external walls are built of $extensionWalls.');
-    }
-
-    final finishes = labelValues['finishes'];
-    if ((finishes ?? '').isNotEmpty) {
-      out.add('The external wall finishes are $finishes.');
-    }
-
-    final internalWalls = labelValues['internal walls'];
-    if ((internalWalls ?? '').isNotEmpty) {
-      out.add('The internal walls are built of $internalWalls.');
-    }
-
-    final floors = labelValues['floors'];
-    if ((floors ?? '').isNotEmpty) {
-      out.add('The floors are built of $floors.');
-    }
-
-    final windows = labelValues['windows'];
-    final windowMaterial = labelValues['window material'];
-    if ((windows ?? '').isNotEmpty || (windowMaterial ?? '').isNotEmpty) {
-      if ((windows ?? '').isNotEmpty && (windowMaterial ?? '').isNotEmpty) {
-        out.add(
-            'The windows are mainly $windows and are formed in $windowMaterial.');
-      } else if ((windows ?? '').isNotEmpty) {
-        out.add('The windows are mainly $windows.');
-      } else {
-        out.add('The windows are formed in $windowMaterial.');
-      }
-    }
-
-    final cleaned = _cleanupPhrases(out);
-    if (cleaned.isEmpty) return const <String>[];
-    // Construction is one logical element. Keep its component sentences in
-    // one flowing paragraph rather than exposing isolated option fragments.
-    return <String>[cleaned.join(' ')];
-  }
-
-  bool _isIsolatedConstructionOption(String phrase) {
-    final value =
-        phrase.trim().toLowerCase().replaceAll(RegExp(r'[.]+$'), '').trim();
-    const rawOptions = <String>{
-      'flat',
-      'pitched',
-      'solid',
-      'cavity',
-      'timber frame',
-      'steel frame',
-      'concrete frame',
-      'tiles',
-      'sheets',
-      'slates',
-      'coatings',
-      'pvc',
-      'timber',
-      'aluminium',
-      'steel',
-    };
-    return rawOptions.contains(value);
-  }
-
-  String _cleanConstructionValue(String raw) {
-    var v = raw.trim();
-    if (v.isEmpty) return '';
-    if (RegExp(r'^\.+$').hasMatch(v)) return '';
-    v = v.replaceAll(RegExp(r'\s+'), ' ');
-    v = v.replaceAll(RegExp(r'\.\.+'), '.');
-    v = v.replaceAll(RegExp(r'^\.+|\.+$'), '');
-    v = v.replaceAll(
-      RegExp(r'\bmainly of mainly of\b', caseSensitive: false),
-      'mainly of',
-    );
-    v = v.replaceAll(
-      RegExp(r'\bmainly mainly\b', caseSensitive: false),
-      'mainly',
-    );
-    return v.trim();
-  }
-
+
   List<String> _cleanupPhrases(List<String> phrases) {
     final out = <String>[];
     final seen = <String>{};
@@ -2814,15 +1931,14 @@ class ReportBuilder {
                     !_startsWithTitle(screenPhrases, screenReportTitle)) {
                   mergedPhrases.add(_mergedSubheading(screenReportTitle));
                 }
-                if (isLegacyConstructionSummary) {
-                  mergedPhrases.addAll(screenPhrases.take(2));
-                } else {
-                  mergedPhrases.addAll(screenPhrases);
-                }
+                // Every PDF paragraph of a Construction screen is report text (type, visible-only,
+                // modern design, concrete advisory ...): never truncate to the first two.
+                mergedPhrases.addAll(screenPhrases);
               } else {
                 // No phrase handler — convert fields to narrative phrases
                 // so data is not lost when other screens do have phrases.
-                final fallback = _shouldUseRawFieldFallback(screen.id)
+                final fallback = _shouldUseRawFieldFallback(screen.id) &&
+                        !_isPhraseOnlyScreen(screen.id)
                     ? _fieldsToPhrases(fields)
                     : const <String>[];
                 if (fallback.isNotEmpty) {
@@ -2837,11 +1953,13 @@ class ReportBuilder {
                   } else {
                     mergedPhrases.addAll(fallback);
                   }
-                } else if (fields.any((f) => f.displayValue.isNotEmpty)) {
+                } else if (!_isPhraseOnlyScreen(screen.id) &&
+                    fields.any((f) => f.displayValue.isNotEmpty)) {
                   mergedFields.addAll(fields);
                 }
               }
-            } else if (fields.any((f) => f.displayValue.isNotEmpty)) {
+            } else if (!_isPhraseOnlyScreen(screen.id) &&
+                    fields.any((f) => f.displayValue.isNotEmpty)) {
               mergedFields.addAll(fields);
             }
           }
@@ -2864,14 +1982,6 @@ class ReportBuilder {
                 mergedPhrases.addAll(fallbackPhrases.take(2));
               }
             }
-          }
-
-          if (isLegacyConstructionSummary && mergedPhrases.isNotEmpty) {
-            final rewritten =
-                _legacyStyleSectionDConstructionPhrases(mergedPhrases);
-            mergedPhrases
-              ..clear()
-              ..addAll(rewritten);
           }
 
           final cleanedMergedPhrases =
@@ -2985,6 +2095,20 @@ class ReportBuilder {
     }
 
     if (sectionKey == 'J') {
+      // PDF J intro paragraph (end of the I3 page), printed once at the top of J.
+      final jIntro = inspectionPhraseEngine?.buildStaticSubPhrases('{J_INTRO}', '') ??
+          const <String>[];
+      if (jIntro.isNotEmpty) {
+        screens.insert(
+          0,
+          ReportScreen(
+            screenId: 'derived_j_intro',
+            title: 'Risks',
+            fields: const <ReportField>[],
+            phrases: jIntro,
+          ),
+        );
+      }
       // Revised spec (Phase 7): the Risks section is exactly four subsections -
       // J1 Risks to the Building, J2 Risks to the Grounds, J3 Risks to People,
       // J4 Other risks. The app previously produced five (a separate J4 Risks
@@ -3017,16 +2141,14 @@ class ReportBuilder {
         }
       }
 
-      // J3 Risks to People (synthesized): people-safety risks, then the former
-      // health risks (asbestos/mould/lead/radon), then the general-maintenance
-      // advisory - matching the revised J3 structure. Health always fires, so
-      // J3 is always present.
-      final j3People = _cleanupPhrases(<String>[
-        ..._legacyDerivedSectionFRiskToPeople(rawData),
-        ..._legacyDerivedSectionFRiskToHealth(rawData),
-        _approvedBankPhrase('{RISK_TO_PEOPLE}::{PEOPLE_GENERAL_ADVICE}') ??
-            _riskGeneralMaintenanceAdvice,
-      ]);
+      // J3 Risks to People: the native screen carries the PDF paragraphs and the
+      // cross-injected people-safety lines; only when it has no answers of its own
+      // are the cross-injections shown on a derived screen.
+      final hasNativeJ3 = screens.any((s) =>
+          s.screenId.trim().toLowerCase() == 'activity_risks_risk_to_people_');
+      final j3People = hasNativeJ3
+          ? const <String>[]
+          : _cleanupPhrases(_legacyDerivedSectionFRiskToPeople(rawData));
       if (j3People.isNotEmpty) {
         final insertAt = screens.indexWhere(
           (s) => s.screenId.trim().toLowerCase() == anchorId,
@@ -3041,37 +2163,6 @@ class ReportBuilder {
           screens.insert(insertAt, j3Screen);
         } else {
           screens.add(j3Screen);
-        }
-      }
-
-      // J4 Other risks: enrich the native activity_risks_other_ screen (which
-      // carries the proximity risks) with the former J5 security risks. If the
-      // native screen is absent, synthesize a J4 entry so the security content
-      // is never dropped.
-      final riskToSecurity = _legacyDerivedSectionFRiskToSecurity(rawData);
-      if (riskToSecurity.isNotEmpty) {
-        final j4Index = screens.indexWhere(
-          (s) => s.screenId.trim().toLowerCase() == anchorId,
-        );
-        if (j4Index >= 0) {
-          final existing = screens[j4Index];
-          screens[j4Index] = ReportScreen(
-            screenId: existing.screenId,
-            title: existing.title,
-            fields: existing.fields,
-            phrases: <String>[...existing.phrases, ...riskToSecurity],
-            userNote: existing.userNote,
-            parentId: existing.parentId,
-            isCompleted: existing.isCompleted,
-            isMergedGroup: existing.isMergedGroup,
-          );
-        } else {
-          screens.add(ReportScreen(
-            screenId: 'derived_j4_other_risks',
-            title: 'J4 Other Risks',
-            fields: const <ReportField>[],
-            phrases: riskToSecurity,
-          ));
         }
       }
 
@@ -3101,35 +2192,6 @@ class ReportBuilder {
     }
 
     _disambiguateGenericScreenTitles(screens, sectionDef.nodes);
-
-    if (screens.isEmpty &&
-        !config.includeEmptyScreens &&
-        isInspection &&
-        sectionDef.key.trim().toUpperCase() == 'K') {
-      return ReportSection(
-        key: 'K',
-        title: 'K – Additional assumption(s)',
-        description: sectionDef.description,
-        displayOrder: displayOrder,
-        screens: const <ReportScreen>[
-          ReportScreen(
-            screenId: 'k_additional_assumptions_default',
-            title: 'K – Additional assumption(s)',
-            fields: <ReportField>[],
-            phrases: <String>[
-              'My opinion has been arrived at largely on the basis of the standard assumptions governing residential valuations. (These are outlined in this section and under market value in the description of the Home Survey Service).',
-              'The purchase price provided is a reflection of current market conditions and the result of shortages of properties with too many buyers in the market and is considered to be the maximum likely to be achieved under present market conditions. Any deterioration in condition or downturn in market activity could lead to this figure not being achieved on early resale.',
-            ],
-          ),
-          ReportScreen(
-            screenId: 'k_other_considerations_default',
-            title: 'K - Other Considerations',
-            fields: <ReportField>[],
-            phrases: <String>['No further comments.'],
-          ),
-        ],
-      );
-    }
 
     if (screens.isEmpty && !config.includeEmptyScreens) return null;
 
@@ -3244,48 +2306,40 @@ class ReportBuilder {
       phrases = const [];
     } else {
       phrases = _phrasesForScreen(node, rawData, isInspection);
-      if (_sectionDSummaryNarrativeScreenIds.contains(normalizedId)) {
-        final hardNarrative =
-            _sectionDSummaryNarrativeFromAnswers(node.id, answers);
-        if (hardNarrative.isNotEmpty) {
-          phrases = _cleanupPhrases(hardNarrative);
-        } else {
-          final fromFields =
-              _sectionDSummaryNarrativeFromFields(node.id, fields);
-          if (fromFields.isNotEmpty) {
-            phrases = _cleanupPhrases(fromFields);
+    }
+
+    // Sections D-J are phrase-only: report text is exactly the PDF phrases the rules emit. A screen
+    // whose rules did not fire prints nothing (no raw "Label: value" lines, no field table, no
+    // fallback narrative). Other sections keep the previous fallbacks.
+    if (isInspection && config.includePhrases && _isPhraseOnlyScreen(node.id)) {
+      if (phrases.isEmpty) fields = const [];
+    } else {
+      if (isInspection &&
+          phrases.isEmpty &&
+          config.includePhrases &&
+          fields.any((f) => f.displayValue.isNotEmpty)) {
+        if (_alwaysRegenerateFromAnswersScreenIds.contains(normalizedId) &&
+            !_sectionDSummaryNarrativeScreenIds.contains(normalizedId)) {
+          final narrative = _narrativeFallbackForIssuesRisks(node.title, fields);
+          if (narrative.isNotEmpty) {
+            phrases = _cleanupPhrases(narrative);
+            fields = const [];
           }
         }
       }
-    }
 
-    // When no engine phrases exist but fields have data, convert fields to
-    // simple narrative phrases so the report avoids raw "Yes/No" tables.
-    if (isInspection &&
-        phrases.isEmpty &&
-        config.includePhrases &&
-        fields.any((f) => f.displayValue.isNotEmpty)) {
-      if (_alwaysRegenerateFromAnswersScreenIds.contains(normalizedId) &&
-          !_sectionDSummaryNarrativeScreenIds.contains(normalizedId)) {
-        final narrative = _narrativeFallbackForIssuesRisks(node.title, fields);
-        if (narrative.isNotEmpty) {
-          phrases = _cleanupPhrases(narrative);
-          fields = const [];
+      if (isInspection &&
+          phrases.isEmpty &&
+          config.includePhrases &&
+          fields.any((f) => f.displayValue.isNotEmpty)) {
+        final fallback = _shouldUseRawFieldFallback(node.id)
+            ? _fieldsToPhrases(fields)
+            : const <String>[];
+        final cleanedFallback = _cleanupPhrases(fallback);
+        if (cleanedFallback.isNotEmpty) {
+          phrases = cleanedFallback;
+          fields = const []; // Suppress raw table - phrases cover the data.
         }
-      }
-    }
-
-    if (isInspection &&
-        phrases.isEmpty &&
-        config.includePhrases &&
-        fields.any((f) => f.displayValue.isNotEmpty)) {
-      final fallback = _shouldUseRawFieldFallback(node.id)
-          ? _fieldsToPhrases(fields)
-          : const <String>[];
-      final cleanedFallback = _cleanupPhrases(fallback);
-      if (cleanedFallback.isNotEmpty) {
-        phrases = cleanedFallback;
-        fields = const []; // Suppress raw table — phrases cover the data.
       }
     }
 
@@ -3353,15 +2407,16 @@ class ReportBuilder {
           ...cleaned,
           ..._legacyDerivedSectionFIssueGuarantees(rawData),
         ]);
-      } else if (normalizedId == 'activity_issues_other_matters') {
-        cleaned = _cleanupPhrases([
-          ...cleaned,
-          ..._legacyDerivedSectionFIssueOtherMattersSharedChimney(rawData),
-        ]);
       } else if (normalizedId == 'activity_risks_risk_to_building_') {
         cleaned = _cleanupPhrases([
           ...cleaned,
           ..._legacyDerivedSectionFRiskToBuilding(rawData),
+        ]);
+      }
+      if (normalizedId == 'activity_risks_risk_to_people_') {
+        cleaned = _cleanupPhrases([
+          ...cleaned,
+          ..._legacyDerivedSectionFRiskToPeople(rawData),
         ]);
       }
       if (normalizedId == 'activity_in_side_property_fire_places__other') {
@@ -3495,6 +2550,11 @@ class ReportBuilder {
     phrases.addAll(entries);
     return phrases;
   }
+
+  /// A screen that has verbatim PDF rules is phrase-only: when its rules emit nothing the report prints
+  /// nothing for it (no raw "Label: value" lines, no field table, no fallback narrative).
+  bool _isPhraseOnlyScreen(String screenId) =>
+      inspectionPhraseEngine?.hasVerbatimRulesFor(screenId) ?? false;
 
   bool _shouldUseRawFieldFallback(String screenId) {
     final normalizedId = screenId.trim().toLowerCase();

@@ -1,0 +1,27 @@
+[
+  {
+    "screen": "activity_outside_property_conservatory_porch_main_screen",
+    "rules": [
+      {
+        "id": "e7_scope",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_SCOPE}",
+        "text": "This section applies where the property incorporates a conservatory, porch, entrance lobby, sunroom, other similar structures. Where no conservatory or porch is present, this section is not applicable.",
+        "tokens": [],
+        "when": [
+          "cb_e7_scope",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e7_scope",
+            "label": "Section scope statement",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

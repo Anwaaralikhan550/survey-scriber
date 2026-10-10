@@ -1,0 +1,960 @@
+[
+  {
+    "remove_screens": [
+      "activity_outside_property_rendering",
+      "activity_outside_property_chimney_removed_chimney_stack"
+    ]
+  },
+  {
+    "screen": "activity_outside_property_stacks",
+    "remove_fields": [
+      "android_material_design_spinner3",
+      "EtMultipleNumber",
+      "android_material_design_spinner4",
+      "android_material_design_spinner5"
+    ],
+    "rules": [
+      {
+        "id": "e1l_number",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_NUMBER}",
+        "text": "Number: The property has {CS_NUMBER} stacks(s).",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CS_NUMBER}",
+            "dropdown": "actv_stack_number",
+            "field_label": "Number of stacks",
+            "dropdown_options": [
+              "One",
+              "Two",
+              "Three",
+              "Multiple"
+            ],
+            "pdf_options": [
+              "one",
+              "two",
+              "three",
+              "multiple"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Number: The property has one, two, three, multiple stacks(s)."
+        ],
+        "when": [
+          "actv_stack_number",
+          "One"
+        ],
+        "when_any": [
+          [
+            "actv_stack_number",
+            "Two"
+          ],
+          [
+            "actv_stack_number",
+            "Three"
+          ],
+          [
+            "actv_stack_number",
+            "Multiple"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_location",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_location",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_LOCATION}",
+        "text": "Location: The chimney stack(s) are located to the {CS_LOCATIONS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CS_LOCATIONS}",
+            "options": [
+              [
+                "e1l_loc_front",
+                "front"
+              ],
+              [
+                "e1l_loc_rear",
+                "rear"
+              ],
+              [
+                "e1l_loc_side",
+                "side"
+              ],
+              [
+                "e1l_loc_centre",
+                "centre"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "rear",
+              "side",
+              "centre"
+            ],
+            "label": "Located to the",
+            "other": [
+              "e1l_loc_other",
+              "e1l_loc_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Location: The chimney stack(s) are located to the front, rear, side, centre, other locations."
+        ],
+        "when": [
+          "cb_e1l_location",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e1l_location",
+            "label": "Location",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_condition",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_condition",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_STACK_CONDITION}",
+        "text": "Condition: Where visible, the chimney stack(s) appear in {CS_STACK_CONDITION} condition, consistent with their age and construction.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CS_STACK_CONDITION}",
+            "dropdown": "android_material_design_spinner3",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the chimney stack(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction."
+        ],
+        "when": [
+          "android_material_design_spinner3",
+          "Good"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner3",
+            "Reasonable"
+          ],
+          [
+            "android_material_design_spinner3",
+            "Fair"
+          ],
+          [
+            "android_material_design_spinner3",
+            "Poor"
+          ],
+          [
+            "android_material_design_spinner3",
+            "Very poor"
+          ]
+        ]
+      },
+      {
+        "id": "e1l_norepair",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_NO_REPAIR}",
+        "text": "No repair: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine inspection and maintenance should be expected as part of normal property ownership.",
+        "tokens": [],
+        "when": [
+          "cb_e1l_norepair",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e1l_norepair",
+            "label": "No repair needed",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_shared_chimney",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_shared",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_SHARED}",
+        "text": "Shared chimney: The chimney stack is believed to be shared with the neighbouring property or properties. The owner of the neighbouring property or properties may have some legal rights over this shared chimney. Your legal adviser should confirm ownership, maintenance responsibilities and any legal rights affecting the shared structure.",
+        "tokens": [],
+        "when": [
+          "cb_e1l_shared",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e1l_shared",
+            "label": "Shared chimney",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_leaning_chimney",
+    "remove_fields": [
+      "label_location_2",
+      "ch1",
+      "ch2",
+      "ch3",
+      "ch4",
+      "cb_other_608",
+      "et_other_752",
+      "label_condition_4"
+    ],
+    "rules": [
+      {
+        "id": "e1l_lean_ok",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_LEAN_NO_REPAIR}",
+        "text": "No repair required: No repair is currently needed. The property must be maintained in the normal way. Over time, brick or stone chimneys can distort and lean over. In the worst cases, the stack can become unstable. At present, this movement is small, and no action is required now. However, this problem can get worse, so the chimney should be periodically inspected, and you should plan to have the chimney rebuilt at a future time if the movement continues. Where significant movement is evident, further investigation by an appropriately qualified structural engineer or roofing contractor is recommended before legal commitment.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "No repair required"
+        ],
+        "extra_fields": [
+          {
+            "id": "android_material_design_spinner4",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "No repair required",
+              "Repair required"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e1l_lean_repair",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_LEAN_REPAIR}",
+        "text": "Repair required: At present, the observed chimney movement appears significant, and action is required now. You should contact a qualified person to inspect the chimney and recommend remedial action, which may involve rebuilding the chimney.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "Repair required"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_chimney_removed_pots",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_removed",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_REMOVED}",
+        "text": "Removed chimney or pots: The chimney stack(s) or pots to the {CS_REMOVED_LOCATIONS} have been {CS_REMOVED_WHAT}. You should ask your legal adviser to confirm whether the removed chimney stack(s) received appropriate statutory approvals where required from the local council and advise on the implications.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CS_REMOVED_LOCATIONS}",
+            "options": [
+              [
+                "e1l_rm_front",
+                "front"
+              ],
+              [
+                "e1l_rm_rear",
+                "rear"
+              ],
+              [
+                "e1l_rm_side",
+                "side"
+              ],
+              [
+                "e1l_rm_centre",
+                "centre"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "rear",
+              "side",
+              "centre"
+            ],
+            "label": "Location"
+          },
+          {
+            "kind": "checks",
+            "token": "{CS_REMOVED_WHAT}",
+            "options": [
+              [
+                "e1l_rw_removed",
+                "removed"
+              ],
+              [
+                "e1l_rw_altered",
+                "altered"
+              ],
+              [
+                "e1l_rw_covered_over_with_roofing",
+                "covered over with roofing"
+              ]
+            ],
+            "pdf_options": [
+              "removed",
+              "altered",
+              "covered over with roofing"
+            ],
+            "label": "Work carried out"
+          }
+        ],
+        "pdf": [
+          "Removed chimney or pots: The chimney stack(s) or pots to the front, rear, side, centre have been removed, altered, covered over with roofing."
+        ],
+        "when": [
+          "cb_Removed_pots",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_Removed_pots",
+            "label": "Removed chimney or pots",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_chimney_not_inspected",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_na",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_NOT_APPLICABLE}",
+        "text": "Not Applicable: The property does not incorporate the element(s) referred to in this section. No further comments are necessary.",
+        "tokens": [],
+        "when": [
+          "cb_Not_applicable",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_Not_applicable",
+            "label": "Not applicable",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e1l_ni",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_NOT_INSPECTED}",
+        "text": "Not Inspected: The chimney stack(s) could not be inspected due to access restrictions and the height and configuration of the building. Consequently, I am unable to comment on their composition or condition. As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected_access",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected_access",
+            "label": "Not inspected (access restricted)",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "e1l_dummy",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_DUMMY_BREAST}",
+        "text": "Dummy chimney breast: The property is installed with false or dummy chimney(s) with no internal brick breast. These are hollow, non-structural features usually built using timber or metal framing and covered with plasterboard or brick slips to mimic a traditional chimney stack.",
+        "tokens": [],
+        "when": [
+          "cb_dummy_chimney_breast",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_dummy_chimney_breast",
+            "label": "Dummy chimney breast",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_repair_flashing",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_rflash",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_REPAIR_FLASHING}",
+        "text": "Repair flashing: The waterproofing between the chimney stack and the roof covering is damaged or defective. This should be {CS_URGENCY_E1L_RFLASH}, depending on the severity of the defect. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the extent of the work.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CS_URGENCY_E1L_RFLASH}",
+            "dropdown": "android_material_design_spinner4",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Repaired soon",
+              "Repaired now"
+            ],
+            "pdf_options": [
+              "repaired soon",
+              "repaired now"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "This should be repaired soon, repaired now, depending on the severity of the defect."
+        ],
+        "when": [
+          "android_material_design_spinner4",
+          "Repaired soon"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "Repaired now"
+          ]
+        ]
+      },
+      {
+        "id": "e1l_rflash_damp",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_REPAIR_FLASHING_DAMP}",
+        "text": "Causing damp: This is causing damp penetration to the adjoining building elements.",
+        "tokens": [],
+        "when": [
+          "cb_is_causing_dump",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_is_causing_dump",
+            "label": "Is causing damp",
+            "type": "checkbox",
+            "conditionalOn": "android_material_design_spinner4",
+            "conditionalValue": "Repaired now",
+            "conditionalMode": "show"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_chimney_repair_flaunching",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_rflaunch",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_REPAIR_FLAUNCHING}",
+        "text": "Repair flaunching: The cement bedding around the base of the chimney pot (called flaunching) is damaged or defective. This should be {CS_URGENCY_E1L_RFLAUNCH}. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work. The owner of the neighbouring property may have some legal rights over the shared chimney. You should check with your legal adviser before any work is done.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CS_URGENCY_E1L_RFLAUNCH}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Repaired soon",
+              "Repaired now"
+            ],
+            "pdf_options": [
+              "repaired soon",
+              "repaired now"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "This should be repaired soon, repaired now."
+        ],
+        "when": [
+          "actv_condition",
+          "Repaired soon"
+        ],
+        "when_any": [
+          [
+            "actv_condition",
+            "Repaired now"
+          ]
+        ]
+      },
+      {
+        "id": "e1l_rflaunch_damp",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_REPAIR_FLAUNCHING_DAMP}",
+        "text": "Causing damp: This is causing damp penetration to the adjoining building elements.",
+        "tokens": [],
+        "when": [
+          "cb_is_causing_dump",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_is_causing_dump",
+            "label": "Is causing damp",
+            "type": "checkbox",
+            "conditionalOn": "actv_condition",
+            "conditionalValue": "Repaired now",
+            "conditionalMode": "show"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_repair_chimney_repointing",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_rpoint",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_REPOINTING}",
+        "text": "Repointing: Some of the mortar between the bricks or stonework (called pointing) is damaged or defective. This should be {CS_URGENCY_E1L_RPOINT}. The roof covering and chimney stack may have to be disturbed to repair the flashing, and this can increase the amount of the work.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CS_URGENCY_E1L_RPOINT}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Repaired soon",
+              "Repaired now"
+            ],
+            "pdf_options": [
+              "repaired soon",
+              "repaired now"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "This should be repaired soon, repaired now."
+        ],
+        "when": [
+          "actv_condition",
+          "Repaired soon"
+        ],
+        "when_any": [
+          [
+            "actv_condition",
+            "Repaired now"
+          ]
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_is_causing_dump",
+            "label": "Is causing damp",
+            "type": "checkbox",
+            "conditionalOn": "actv_condition",
+            "conditionalValue": "Repaired now",
+            "conditionalMode": "show"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_repair_chimney_pots",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_rpot",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_REPAIR_POT}",
+        "text": "Repair pot: One or several pots fitted to the main building chimney stack are broken and partly missing. To replace the pot, you will have to renew the cement bedding around the base, called the flaunching, which holds the pot in place. The chimney pot may also be connected to a chimney flue that serves a heating appliance below, and a suitable replacement must be used.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ],
+        "when_any": [
+          [
+            "actv_condition",
+            "Repair now"
+          ]
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now"
+            ]
+          },
+          {
+            "id": "cb_is_safety_hazard",
+            "label": "Is safety hazard",
+            "type": "checkbox",
+            "conditionalOn": "actv_condition",
+            "conditionalValue": "Repair now",
+            "conditionalMode": "show"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_repair_chimney_disrepair",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_poor",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_POOR_CHIMNEY}",
+        "text": "Poor chimney condition: The chimney stack(s) on the {CS_POOR_LOCATIONS} of the building are in poor condition. This is a safety hazard. Although this can be repaired, it may be economical to rebuild the whole stack. This should be done now. If the chimney is no longer used by heating appliances below, it may be economical to reduce the chimney height to below roof level and extend the roof covering over it.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CS_POOR_LOCATIONS}",
+            "options": [
+              [
+                "e1l_pc_front",
+                "front"
+              ],
+              [
+                "e1l_pc_rear",
+                "rear"
+              ],
+              [
+                "e1l_pc_side",
+                "side"
+              ],
+              [
+                "e1l_pc_centre",
+                "centre"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "rear",
+              "side",
+              "centre"
+            ],
+            "label": "Chimney stack(s) on the"
+          }
+        ],
+        "pdf": [
+          "Poor chimney condition: The chimney stack(s) on the front, rear, side, centre of the building are in poor condition."
+        ],
+        "when": [
+          "cb_repair_soon_70",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_repair_soon_70",
+            "label": "Poor chimney condition",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_repair_chimney_dish_aerial",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_ae_def",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_REPAIR_AERIAL_E1L_AE}",
+        "text": "Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is {CS_AERIAL_DEFECTS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CS_AERIAL_DEFECTS}",
+            "options": [
+              [
+                "e1l_ae_d_loose",
+                "loose"
+              ],
+              [
+                "e1l_ae_d_rusted",
+                "rusted"
+              ],
+              [
+                "e1l_ae_d_damaged",
+                "damaged"
+              ],
+              [
+                "e1l_ae_d_dangling",
+                "dangling"
+              ]
+            ],
+            "pdf_options": [
+              "loose",
+              "rusted",
+              "damaged",
+              "dangling"
+            ],
+            "label": "Defect",
+            "other": [
+              "e1l_ae_d_other",
+              "e1l_ae_d_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling, other."
+        ],
+        "when": [
+          "cb_e1l_ae_def",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e1l_ae_def",
+            "label": "Aerial / satellite dish defect",
+            "type": "checkbox"
+          },
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e1l_ae_soon",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_AERIAL_SOON}",
+        "text": "Repair soon: This should be repaired soon.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ]
+      },
+      {
+        "id": "e1l_ae_now",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_AERIAL_NOW}",
+        "text": "Repair now: This is a safety hazard, and the aerial/satellite dish may fall to the ground or on people. Where loose or inadequately fixed, repairs should be carried out promptly to prevent damage during adverse weather.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Repair now"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_is_safety_hazard",
+            "label": "Is safety hazard",
+            "type": "checkbox",
+            "conditionalOn": "actv_condition",
+            "conditionalValue": "Repair now",
+            "conditionalMode": "show"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_repair_chimney_dish_aerial__satellite",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e1l_sa_def",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_REPAIR_AERIAL_E1L_SA}",
+        "text": "Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is {CS_AERIAL_DEFECTS}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CS_AERIAL_DEFECTS}",
+            "options": [
+              [
+                "e1l_sa_d_loose",
+                "loose"
+              ],
+              [
+                "e1l_sa_d_rusted",
+                "rusted"
+              ],
+              [
+                "e1l_sa_d_damaged",
+                "damaged"
+              ],
+              [
+                "e1l_sa_d_dangling",
+                "dangling"
+              ]
+            ],
+            "pdf_options": [
+              "loose",
+              "rusted",
+              "damaged",
+              "dangling"
+            ],
+            "label": "Defect",
+            "other": [
+              "e1l_sa_d_other",
+              "e1l_sa_d_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Repair aerials and satellite dishes: An aerial or satellite dish attached to the property is loose, rusted, damaged, dangling, other."
+        ],
+        "when": [
+          "cb_e1l_sa_def",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_e1l_sa_def",
+            "label": "Aerial / satellite dish defect",
+            "type": "checkbox"
+          },
+          {
+            "id": "actv_condition",
+            "label": "Condition",
+            "type": "dropdown",
+            "options": [
+              "Repair soon",
+              "Repair now"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e1l_sa_soon",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_AERIAL_SOON}",
+        "text": "Repair soon: This should be repaired soon.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Repair soon"
+        ]
+      },
+      {
+        "id": "e1l_sa_now",
+        "masters": [
+          "{E_CHIMNEY}"
+        ],
+        "sub": "{E1L_AERIAL_NOW}",
+        "text": "Repair now: This is a safety hazard, and the aerial/satellite dish may fall to the ground or on people. Where loose or inadequately fixed, repairs should be carried out promptly to prevent damage during adverse weather.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Repair now"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_is_safety_hazard",
+            "label": "Is safety hazard",
+            "type": "checkbox",
+            "conditionalOn": "actv_condition",
+            "conditionalValue": "Repair now",
+            "conditionalMode": "show"
+          }
+        ]
+      }
+    ]
+  }
+]

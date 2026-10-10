@@ -1,0 +1,5 @@
+# bank key,reason (T2 exemptions: never emitted at run time)
+{E_CONSERVATORY_PORCHES}::{PORCH_FLOOR},kept only as ParagraphComposer test fixture (paragraph_composer_test.dart); porch text is printed by rules e7c_*/e7p_*
+{E_CONSERVATORY_PORCHES}::{PORCH_LOCATION_CONSTRUCTION},kept only as ParagraphComposer test fixture (paragraph_composer_test.dart); porch text is printed by rules e7c_*/e7p_*
+{E_CONSERVATORY_PORCHES}::{PORCH_ROOF},kept only as ParagraphComposer test fixture (paragraph_composer_test.dart); porch text is printed by rules e7c_*/e7p_*
+{E_CONSERVATORY_PORCHES}::{PORCH_WINDOWS},kept only as ParagraphComposer test fixture (paragraph_composer_test.dart); porch text is printed by rules e7c_*/e7p_*

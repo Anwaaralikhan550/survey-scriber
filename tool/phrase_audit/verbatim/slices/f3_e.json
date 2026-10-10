@@ -1,0 +1,734 @@
+[
+  {
+    "screen": "activity_inside_property_wap_walls",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f3_desc",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_DESCRIPTION}",
+        "text": "Description: The walls are formed in {WALL_CONSTRUCTION} construction. The wall finish comprises {WALL_FINISH} finishes.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_CONSTRUCTION}",
+            "options": [
+              [
+                "f3m_solid_masonry",
+                "solid masonry"
+              ],
+              [
+                "f3m_timber_stud_partitions",
+                "timber stud partitions"
+              ],
+              [
+                "f3m_plasterboard_partitions",
+                "plasterboard partitions"
+              ],
+              [
+                "f3m_lath_and_plaster",
+                "lath and plaster"
+              ]
+            ],
+            "pdf_options": [
+              "solid masonry",
+              "timber stud partitions",
+              "plasterboard partitions",
+              "lath and plaster"
+            ],
+            "label": "Walls formed in",
+            "other": [
+              "cb_other_590",
+              "et_other_428"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{WALL_FINISH}",
+            "options": [
+              [
+                "f3f_paint",
+                "paint"
+              ],
+              [
+                "f3f_plaster",
+                "plaster"
+              ],
+              [
+                "f3f_wallpaper",
+                "wallpaper"
+              ],
+              [
+                "f3f_tiling",
+                "tiling"
+              ],
+              [
+                "f3f_timber_panelling",
+                "timber panelling"
+              ],
+              [
+                "f3f_textured_coating",
+                "textured coating"
+              ],
+              [
+                "f3f_decorative_panelling",
+                "decorative panelling"
+              ]
+            ],
+            "pdf_options": [
+              "paint",
+              "plaster",
+              "wallpaper",
+              "tiling",
+              "timber panelling",
+              "textured coating",
+              "decorative panelling"
+            ],
+            "label": "Wall finish comprises",
+            "other": [
+              "cb_other_606",
+              "et_other_427"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The walls are formed in solid masonry, timber stud partitions, plasterboard partitions, lath and plaster, other construction.",
+          "The wall finish comprises paint, plaster, wallpaper, tiling, timber panelling, textured coating, decorative panelling, other finishes."
+        ]
+      },
+      {
+        "id": "f3_cond",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_CONDITION}",
+        "text": "Condition: Where visible, the walls and partitions appear in {WALL_CONDITION} condition, consistent with their age and construction. Routine redecoration appropriate to the age and condition of the property should be expected. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the wall material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{WALL_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the walls and partitions appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction."
+        ]
+      },
+      {
+        "id": "f3_lath",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_LATH_PLASTER}",
+        "text": "The walls are fully or partially made of older plaster supported on thin wooden strips, called lath and plaster, typical of properties built before the 1940s. While no significant defects were noted at the time of inspection, these walls can deteriorate with age as the plaster loses its bond with the timber laths.",
+        "tokens": [],
+        "when": [
+          "f3m_lath_and_plaster",
+          "true"
+        ]
+      },
+      {
+        "id": "f3_textured",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_TEXTURED_COATING}",
+        "text": "Some internal walls have a textured decorative coating, which may contain small amounts of asbestos. If disturbed during repair, refurbishment or removal, asbestos fibres could be released and present a health risk. Before undertaking any work that may disturb the coating, you should consider having it assessed and, if asbestos is confirmed or suspected, ensure any work is carried out by a suitably competent contractor in accordance with current guidance.",
+        "tokens": [],
+        "when": [
+          "f3f_textured_coating",
+          "true"
+        ]
+      },
+      {
+        "id": "f3_general",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: Internal walls should be inspected periodically for signs of cracking, dampness, or movement. Minor cracking and decorative defects should be repaired during routine maintenance. Maintaining adequate heating and ventilation will assist in reducing the risk of condensation and mould growth.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wap_movement_cracks",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f3_crack_minor",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_MINOR_CRACKING}",
+        "text": "Minor cracking: Minor shrinkage or settlement cracking was observed in the wall finishes. Such cracking is common in properties of this age and type and is not considered structurally significant. The cracks may be adequately filled with appropriate material and redecorated during routine maintenance.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner3",
+          "Minor cracking"
+        ],
+        "extra_fields": [
+          {
+            "id": "android_material_design_spinner3",
+            "label": "Cracking",
+            "type": "dropdown",
+            "options": [
+              "Minor cracking",
+              "Significant cracking",
+              "Structural Movement"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f3_crack_major",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_SIGNIFICANT_CRACKING}",
+        "text": "Significant cracking: Significant cracking was observed on some of the walls. Further investigation is recommended where cracking appears progressive or is associated with distortion.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner3",
+          "Significant cracking"
+        ]
+      },
+      {
+        "id": "f3_movement",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_STRUCTURAL_MOVEMENT}",
+        "text": "Structural Movement: Evidence of {WALL_MOVEMENT} movement was observed. Where movement appears progressive or structurally significant, further investigation by an appropriately qualified structural engineer is recommended before legal commitment.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{WALL_MOVEMENT}",
+            "options": [
+              [
+                "f3mv_historic",
+                "historic"
+              ],
+              [
+                "f3mv_localised",
+                "localised"
+              ],
+              [
+                "f3mv_progressive",
+                "progressive"
+              ]
+            ],
+            "pdf_options": [
+              "historic",
+              "localised",
+              "progressive"
+            ],
+            "label": "Movement observed",
+            "cond": "android_material_design_spinner3=Structural Movement"
+          }
+        ],
+        "pdf": [
+          "Structural Movement: Evidence of historic, localised, progressive movement was observed."
+        ],
+        "when": [
+          "android_material_design_spinner3",
+          "Structural Movement"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wap_hollow_plaster",
+    "new_screen": {
+      "id": "activity_in_side_property_wap_hollow_plaster",
+      "title": "Hollow plaster",
+      "parent": "group_walls_and_partitions_64",
+      "order": 12,
+      "after": "activity_in_side_property_wap_movement_cracks"
+    },
+    "rules": [
+      {
+        "id": "f3_hollow",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_HOLLOW_PLASTER}",
+        "text": "Hollow Plaster: Localised areas of hollow-sounding plaster were noted. This usually indicates that the plaster has lost adhesion to the underlying surface. Although stable at the time of inspection, affected areas may become loose or detached over time. Localised repairs may be possible; however, where deterioration is more extensive, or the plaster becomes unstable, it may be more practical and cost-effective to remove and replace the affected section. Repairs can be undertaken as part of routine maintenance or redecoration, as necessary.",
+        "tokens": [],
+        "when": [
+          "cb_hollow_plaster",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_hollow_plaster",
+            "label": "Hollow plaster",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wap_repair_condensation",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f3_condensation",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_CONDENSATION}",
+        "text": "Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the {CONDENSATION_AREAS} area(s). Condensation is commonly associated with occupancy patterns, heating, insulation, and ventilation. Maintaining a suitable balance between heating and ventilation should assist in reducing condensation. Extractor fans may be installed, and windows opened regularly.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CONDENSATION_AREAS}",
+            "options": [
+              [
+                "f3c_lounge",
+                "lounge"
+              ],
+              [
+                "f3c_bedrooms",
+                "bedrooms"
+              ],
+              [
+                "f3c_bathrooms",
+                "bathrooms"
+              ],
+              [
+                "f3c_kitchens",
+                "kitchens"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "bedrooms",
+              "bathrooms",
+              "kitchens"
+            ],
+            "label": "Condensation and mould in",
+            "other": [
+              "f3c_other",
+              "f3c_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other area(s)."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wap_dampness",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f3_nodamp",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_NO_DAMP}",
+        "text": "No Damp: Random moisture readings were taken to accessible wall surfaces using a hand-held electronic moisture meter. No elevated moisture readings were recorded at the time of inspection.",
+        "tokens": [],
+        "when": [
+          "damp_status",
+          "No damp"
+        ],
+        "extra_fields": [
+          {
+            "id": "damp_status",
+            "label": "Dampness",
+            "type": "dropdown",
+            "options": [
+              "No damp",
+              "Penetrating damp noted",
+              "Suspected rising damp"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f3_pen",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_PENETRATING_DAMP}",
+        "text": "Penetrating damp noted: Elevated moisture readings were recorded to sections of the wall surfaces including the {DAMP_LOCATION}. Where there are built-in fitments such as kitchen fittings, dampness can be difficult to trace but costly and inconvenient to rectify.",
+        "tokens": [
+          {
+            "kind": "text",
+            "token": "{DAMP_LOCATION}",
+            "dropdown": "et_location",
+            "field_label": "Wall location",
+            "cond": "damp_status=Penetrating damp noted"
+          }
+        ],
+        "pdf": [
+          "Penetrating damp noted: Elevated moisture readings were recorded to sections of the wall surfaces including the (type wall location)."
+        ],
+        "when": [
+          "damp_status",
+          "Penetrating damp noted"
+        ]
+      },
+      {
+        "id": "f3_known",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_DAMP_SOURCE_KNOWN}",
+        "text": "Damp source known: Dampness was noted and is likely to result from {DAMP_CAUSES}. Where remedial action(s) have not been included in this report, it is recommended that a suitably qualified damp specialist investigates the cause and carries out any necessary repairs. This may require opening concealed areas, with the owner's agreement. Associated remedial works may also be required, including replacing damaged plaster and repairing or renewing decayed timber.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DAMP_CAUSES}",
+            "options": [
+              [
+                "f3dc_defective_rainwater_goods",
+                "defective rainwater goods"
+              ],
+              [
+                "f3dc_blocked_gullies",
+                "blocked gullies"
+              ],
+              [
+                "f3dc_leaking_pipework",
+                "leaking pipework"
+              ],
+              [
+                "f3dc_bridged_damp_proof_course",
+                "bridged damp-proof course"
+              ]
+            ],
+            "pdf_options": [
+              "defective rainwater goods",
+              "blocked gullies",
+              "leaking pipework",
+              "bridged damp-proof course"
+            ],
+            "label": "Dampness likely to result from",
+            "other": [
+              "f3dc_other",
+              "f3dc_other_text"
+            ],
+            "cond": "actv_status_91=Damp source known"
+          }
+        ],
+        "pdf": [
+          "Damp source known: Dampness was noted and is likely to result from defective rainwater goods, blocked gullies, leaking pipework, bridged damp-proof course, other."
+        ],
+        "when": [
+          "actv_status_91",
+          "Damp source known"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status_91",
+            "label": "Source",
+            "type": "dropdown",
+            "options": [
+              "Damp source known",
+              "Unknown damp source"
+            ],
+            "conditionalOn": "damp_status=Penetrating damp noted",
+            "conditionalMode": "show"
+          }
+        ]
+      },
+      {
+        "id": "f3_fix",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_DAMP_REPAIR}",
+        "text": "Repair Damp defect: The source of dampness should be addressed by repairing the identified defects, which may include {DAMP_REPAIRS} as appropriate. Once the source of moisture has been eliminated, any affected internal finishes should be allowed to dry thoroughly before being repaired or replaced. If dampness persists after these repairs, further investigation by a suitably qualified damp and timber specialist should be undertaken to identify any concealed defects and recommend any additional remedial works. These repairs should be carried out promptly to minimise the risk of further deterioration.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{DAMP_REPAIRS}",
+            "options": [
+              [
+                "f3dr_clearing_rainwater_goods",
+                "clearing rainwater goods"
+              ],
+              [
+                "f3dr_repairing_defective_rainwater_goods",
+                "repairing defective rainwater goods"
+              ],
+              [
+                "f3dr_unblocking_gullies",
+                "unblocking gullies"
+              ],
+              [
+                "f3dr_repairing_leaking_pipework",
+                "repairing leaking pipework"
+              ],
+              [
+                "f3dr_removing_any_bridging_of_the_damp_proof_course",
+                "removing any bridging of the damp-proof course"
+              ]
+            ],
+            "pdf_options": [
+              "clearing rainwater goods",
+              "repairing defective rainwater goods",
+              "unblocking gullies",
+              "repairing leaking pipework",
+              "removing any bridging of the damp-proof course"
+            ],
+            "label": "Repairs may include",
+            "other": [
+              "f3dr_other",
+              "f3dr_other_text"
+            ],
+            "cond": "actv_status_91=Damp source known"
+          }
+        ],
+        "pdf": [
+          "Repair Damp defect: The source of dampness should be addressed by repairing the identified defects, which may include clearing rainwater goods, repairing defective rainwater goods, unblocking gullies, repairing leaking pipework, removing any bridging of the damp-proof course, other as appropriate."
+        ]
+      },
+      {
+        "id": "f3_unknown",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_DAMP_SOURCE_UNKNOWN}",
+        "text": "Unknown damp source: The source of moisture cannot be confirmed during a visual inspection. Further investigation should be undertaken where moisture levels remain elevated or visible dampness is present.",
+        "tokens": [],
+        "when": [
+          "actv_status_91",
+          "Unknown damp source"
+        ]
+      },
+      {
+        "id": "f3_rising",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_SUSPECTED_RISING_DAMP}",
+        "text": "Suspected rising damp: Elevated moisture readings were recorded at the base of the wall(s), consistent with possible rising damp, including the {DAMP_LOCATION}. Where fitted units, such as kitchen cabinets, conceal wall surfaces, the extent of dampness cannot be fully assessed, and any necessary remedial works may be more extensive and costly. I recommend further investigation by a suitably qualified damp specialist to confirm the cause and advise on any necessary repairs.",
+        "tokens": [
+          {
+            "kind": "text",
+            "token": "{DAMP_LOCATION}",
+            "dropdown": "et_location",
+            "field_label": "Wall location",
+            "cond": "damp_status=Penetrating damp noted|Suspected rising damp"
+          }
+        ],
+        "pdf": [
+          "Suspected rising damp: Elevated moisture readings were recorded at the base of the wall(s), consistent with possible rising damp, including the (type wall location)."
+        ],
+        "when": [
+          "damp_status",
+          "Suspected rising damp"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_in_side_property_wap_removed_wall",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f3_ia",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_INTERNAL_ALTERATIONS}",
+        "text": "Internal Alterations: Evidence was observed that an internal wall has been {IA_STATE}. Where an internal wall has been removed or altered, other parts of the property must be properly supported.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{IA_STATE}",
+            "options": [
+              [
+                "f3ia_removed",
+                "removed"
+              ],
+              [
+                "f3ia_partially_removed",
+                "partially removed"
+              ],
+              [
+                "f3ia_altered",
+                "altered"
+              ],
+              [
+                "f3ia_new_opening_created",
+                "new opening created"
+              ],
+              [
+                "f3ia_has_been_formed",
+                "has been formed"
+              ]
+            ],
+            "pdf_options": [
+              "removed",
+              "partially removed",
+              "altered",
+              "new opening created",
+              "has been formed"
+            ],
+            "label": "Internal wall has been"
+          }
+        ],
+        "pdf": [
+          "Internal Alterations: Evidence was observed that an internal wall has been removed, partially removed, altered, new opening created, has been formed."
+        ]
+      },
+      {
+        "id": "f3_ia_ok",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_ALTERATIONS_NO_DEFECTS}",
+        "text": "No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the building material should be expected.",
+        "tokens": [],
+        "when": [
+          "actv_ia_outcome",
+          "No defects noted"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_ia_outcome",
+            "label": "Outcome",
+            "type": "dropdown",
+            "options": [
+              "No defects noted",
+              "Defects noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f3_ia_defects",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_ALTERATIONS_DEFECTS}",
+        "text": "Defects noted: An original internal wall has been removed to form an opening at {IA_LOCATION}. {IA_ISSUES} issues were noted around the altered area. While no significant progressive movement was evident at the time of inspection, the structural adequacy of the alteration cannot be confirmed during a visual inspection. Your legal adviser should verify that Building Regulations approval and a completion certificate were obtained for the work. If satisfactory documentation is unavailable, I recommend further investigation by a suitably qualified structural engineer. This may require opening parts of the structure, with the owner's agreement, to confirm that adequate support has been provided.",
+        "tokens": [
+          {
+            "kind": "text",
+            "token": "{IA_LOCATION}",
+            "dropdown": "et_ia_location",
+            "field_label": "Opening location",
+            "cond": "actv_ia_outcome=Defects noted"
+          },
+          {
+            "kind": "checks",
+            "token": "{IA_ISSUES}",
+            "options": [
+              [
+                "f3iad_distortion",
+                "Distortion"
+              ],
+              [
+                "f3iad_cracking",
+                "cracking"
+              ],
+              [
+                "f3iad_inadequate_support",
+                "inadequate support"
+              ]
+            ],
+            "pdf_options": [
+              "Distortion",
+              "cracking",
+              "inadequate support"
+            ],
+            "label": "Issues noted around the altered area",
+            "other": [
+              "f3iad_other",
+              "f3iad_other_text"
+            ],
+            "cond": "actv_ia_outcome=Defects noted"
+          }
+        ],
+        "pdf": [
+          "Defects noted: An original internal wall has been removed to form an opening at (type in location).",
+          "Distortion, cracking, inadequate support, other issues were noted around the altered area."
+        ],
+        "when": [
+          "actv_ia_outcome",
+          "Defects noted"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_walls_and_partitions_main_screen",
+    "rules": [
+      {
+        "id": "f3_intro",
+        "masters": [
+          "{F_WALLS_AND_PARTITIONS}"
+        ],
+        "sub": "{F3_INTRO}",
+        "text": "My inspection was limited by fixed furniture, kitchen units, bathroom fittings, large appliances, stored items, tiled finishes, decorative wall coverings, and fitted cupboards, which prevented full inspection of the concealed areas. The condition of hidden wall construction, lintels, structural supports, and other concealed elements could not be confirmed without opening the structure, which is outside the scope of a Level 2 Home Survey. No comment can be made on the condition of these concealed areas, and defects may exist that were not visible at the time of my inspection.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_in_side_property_wap_repair_wall_repair",
+      "activity_in_side_property_wap_repair_sealants",
+      "activity_inside_property_wap_not_inspected",
+      "activity_in_side_property_wap_repair_removed_wall"
+    ]
+  }
+]

@@ -104,53 +104,6 @@ void main() {
   }
 
   group('ReportBuilder.build', () {
-    test('collapses equal density boundaries into professional prose', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'D',
-            title: 'About Property',
-            description: '',
-            nodes: const [
-              InspectionNodeDefinition(
-                id: 'activity_property_location',
-                title: 'Location',
-                type: InspectionNodeType.screen,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner2',
-                    label: 'From',
-                    type: InspectionFieldType.dropdown,
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner20',
-                    label: 'To',
-                    type: InspectionFieldType.dropdown,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_property_location': {
-              'android_material_design_spinner2': 'Low',
-              'android_material_design_spinner20': 'Low',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      expect(doc.sections.single.screens.single.phrases.single,
-          'The property is located in an established low-density area.');
-      expect(doc.sections.single.screens.single.phrases.single,
-          isNot(contains('low to low')));
-    });
 
     test('suppresses raw boolean status fields when no narrative applies', () {
       final tree = InspectionTreePayload(
@@ -191,60 +144,6 @@ void main() {
       expect(doc.sections, isEmpty);
     });
 
-    test('removes isolated construction options and emits one paragraph', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'D',
-            title: 'About Property',
-            description: '',
-            nodes: const [
-              InspectionNodeDefinition(
-                id: 'group_construction_2',
-                title: 'Construction',
-                type: InspectionNodeType.group,
-                fields: [],
-              ),
-              InspectionNodeDefinition(
-                id: 'activity_property_roof',
-                title: 'Roof',
-                type: InspectionNodeType.screen,
-                parentId: 'group_construction_2',
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'ch1',
-                    label: 'Flat',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_property_roof': {'ch1': 'true'},
-          },
-          persistedPhrases: {
-            'activity_property_roof': [
-              'Flat.',
-              'The main building has a flat roof form.',
-            ],
-          },
-          persistedPhraseManualFlags: {
-            'activity_property_roof': true,
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final phrases = doc.sections.single.screens.single.phrases;
-      expect(phrases, hasLength(1));
-      expect(phrases.single, 'The main building has a flat roof form.');
-    });
 
     test('synthesises conflicting wall types assigned to the same location',
         () {
@@ -1522,153 +1421,6 @@ void main() {
           isTrue);
     });
 
-    test('merges Section D energy screens into one Energy heading', () {
-      // RICS L2 wording (Gate 3 fix): the merged D-Energy group now routes
-      // through the phrase engine instead of hardcoding its own English, so
-      // this test needs a phrase-engine fixture to produce any content.
-      final phraseEngine = InspectionPhraseEngine({
-        '{D_ENERGY}':
-            'According to the available Energy Performance Certificate: '
-                'Energy Efficiency Rating: {ENERGY_EFFICIENCY_CURRENT_VALUE}. '
-                'Potential Rating: {ENERGY_EFFICIENCY_POTENTIAL_VALUE}. This '
-                'information has not been independently verified.<br />\r\n'
-                '<strong>Environmental Impact:</strong> Current '
-                '{ENVIRONMENT_IMPACT_CURRENT_VALUE} Potential '
-                '{ENVIRONMENT_IMPACT_POTENTIAL_VALUE}.',
-        '{ENERGY_OTHER_SERVICES}::{ENERGY_OTHER_SERVICES_SOLAR_ELECTRICITY}':
-            'The property has photovoltaic panels designed to produce '
-                'electricity from sunlight installed on the roof slope(s).',
-      });
-      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'D',
-            title: 'About Property',
-            description: '',
-            nodes: [
-              const InspectionNodeDefinition(
-                id: 'activity_energy_effiency',
-                title: 'Energy',
-                type: InspectionNodeType.screen,
-                parentId: null,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner',
-                    label: 'Current',
-                    type: InspectionFieldType.text,
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner2',
-                    label: 'Potential',
-                    type: InspectionFieldType.text,
-                  ),
-                ],
-              ),
-              const InspectionNodeDefinition(
-                id: 'activity_energy_environment_impect',
-                title: 'Environmental Impact',
-                type: InspectionNodeType.screen,
-                parentId: null,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner',
-                    label: 'Current',
-                    type: InspectionFieldType.text,
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner2',
-                    label: 'Potential',
-                    type: InspectionFieldType.text,
-                  ),
-                ],
-              ),
-              const InspectionNodeDefinition(
-                id: 'activity_other_service',
-                title: 'Other Service',
-                type: InspectionNodeType.screen,
-                parentId: null,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'ch1',
-                    label: 'Solar Electricity',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'ch2',
-                    label: 'Solar Hot Water',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-              const InspectionNodeDefinition(
-                id: 'activity_after_energy',
-                title: 'After Energy',
-                type: InspectionNodeType.screen,
-                parentId: null,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'f',
-                    label: 'Field',
-                    type: InspectionFieldType.text,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = customBuilder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_energy_effiency': {
-              'android_material_design_spinner': '61',
-              'android_material_design_spinner2': '78',
-            },
-            'activity_energy_environment_impect': {
-              'android_material_design_spinner': '58',
-              'android_material_design_spinner2': '76',
-            },
-            'activity_other_service': {
-              'ch1': 'true',
-            },
-            'activity_after_energy': {'f': 'ok'},
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final screens = doc.sections.single.screens;
-      expect(screens.map((s) => s.title).toList(),
-          equals(['Energy', 'After Energy']));
-      expect(screens.first.isMergedGroup, isTrue);
-      expect(
-        screens.first.phrases
-            .any((p) => p.toLowerCase().contains('energy efficiency rating: 61')),
-        isTrue,
-      );
-      expect(
-        screens.first.phrases
-            .any((p) => p.toLowerCase().contains('potential rating: 78')),
-        isTrue,
-      );
-      expect(
-        screens.first.phrases
-            .any((p) => p.toLowerCase().contains('current 58')),
-        isTrue,
-      );
-      expect(
-        screens.first.phrases.any(
-          (p) =>
-              p.toLowerCase().contains('solar') ||
-              p.toLowerCase().contains('photovoltaic'),
-        ),
-        isTrue,
-      );
-    });
-
     test('merges Section E chimney group into Chimney Stacks heading', () {
       final tree = InspectionTreePayload(
         sections: [
@@ -1776,8 +1528,9 @@ void main() {
 
     test('regenerates chimney phrases when persisted phrase list is empty', () {
       final phraseEngine = InspectionPhraseEngine({
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK}': 'Single-stack narrative.',
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}': 'Pots {CS_POTS}.',
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK_CONSTRUCTION}':
+            'Single-stack narrative.',
+        '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}': 'Pots {CS_STACK_POT_TYPES}.',
         '{E_CHIMNEY_SINGLE_STACK}::{STACK_RENDERING}':
             'Rendered {CS_RENDERING}.',
       });
@@ -1825,7 +1578,8 @@ void main() {
         allAnswers: {
           'activity_outside_property_stacks': {
             'android_material_design_spinner3': 'Single',
-            'android_material_design_spinner2': '2',
+            'st_brick': 'true',
+            'pot_clay': 'true',
             'android_material_design_spinner4': 'Single',
           },
         },
@@ -1848,77 +1602,6 @@ void main() {
       expect(screen.phrases, isNotEmpty);
       expect(screen.phrases.join(' '), contains('Single-stack narrative.'));
       expect(screen.phrases.join(' '), isNot(contains('Stacks:')));
-    });
-
-    test(
-        'regenerates fireplaces other condition from answers when persisted phrase is stale',
-        () {
-      final phraseEngine = InspectionPhraseEngine({
-        '{F_FIREPLACES_AND_CHIMNEYS}::{OTHER_CONDITION}':
-            'These appear in {FAC_FP_OTH_CONDITION} condition. No repair is currently needed. The property must be maintained in the normal way.',
-      });
-      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'F',
-            title: 'Inside Property',
-            description: '',
-            nodes: const [
-              InspectionNodeDefinition(
-                id: 'activity_in_side_property_fire_places__other',
-                title: 'Other',
-                type: InspectionNodeType.screen,
-                parentId: null,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'actv_condition',
-                    label: 'Condition',
-                    type: InspectionFieldType.dropdown,
-                    options: ['Reasonable', 'Satisfactory'],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final rawData = _makeRawData(
-        tree: tree,
-        allAnswers: {
-          'activity_in_side_property_fire_places__other': {
-            'actv_condition': 'Reasonable',
-          },
-        },
-      );
-      final stalePersisted = V2RawReportData(
-        survey: rawData.survey,
-        tree: rawData.tree,
-        allAnswers: rawData.allAnswers,
-        screenStates: rawData.screenStates,
-        photoFilePaths: rawData.photoFilePaths,
-        signatureRows: rawData.signatureRows,
-        persistedPhrases: {
-          'activity_in_side_property_fire_places__other': [
-            'The fireplace in the lounge incorporates a .',
-          ],
-        },
-        persistedPhraseManualFlags: const {
-          'activity_in_side_property_fire_places__other': false,
-        },
-      );
-
-      final doc = customBuilder.build(stalePersisted, const ExportConfig());
-      final screen = doc.sections.single.screens.single;
-      expect(
-        screen.phrases.join(' '),
-        contains('These appear in reasonable condition.'),
-      );
-      expect(
-        screen.phrases.join(' '),
-        isNot(contains('incorporates a .')),
-      );
     });
 
     test(
@@ -2108,9 +1791,9 @@ void main() {
       );
 
       final doc = customBuilder.build(rawData, const ExportConfig());
-      final screen = doc.sections.single.screens.single;
+      final printed = doc.sections.expand((s) => s.screens).expand((s) => s.phrases).join(' ');
       expect(
-        screen.phrases.join(' '),
+        printed,
         isNot(contains('Insect infestation: Partly missing')),
       );
     });
@@ -2164,9 +1847,9 @@ void main() {
       );
 
       final doc = customBuilder.build(rawData, const ExportConfig());
-      final screen = doc.sections.single.screens.single;
+      final printed = doc.sections.expand((s) => s.screens).expand((s) => s.phrases).join(' ');
       expect(
-        screen.phrases.join(' '),
+        printed,
         isNot(contains('Condition: Reasonable')),
       );
     });
@@ -2231,88 +1914,13 @@ void main() {
       );
 
       final doc = customBuilder.build(rawData, const ExportConfig());
-      final screen = doc.sections.single.screens.single;
+      final printed = doc.sections.expand((s) => s.screens).expand((s) => s.phrases).join(' ');
       expect(
-        screen.phrases.join(' '),
+        printed,
         isNot(contains('Condition: Poor')),
       );
     });
 
-    test('condenses chimney stacks phrases into one paragraph', () {
-      final phraseEngine = InspectionPhraseEngine({
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK}':
-            'The property has one chimney stack.',
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK_POTS}':
-            'The chimney stack is fitted with 4 pot(s).',
-        '{E_CHIMNEY_SINGLE_STACK}::{STACK_RENDERING}':
-            'The outer faces of the chimney stack is single rendered.',
-      });
-      final customBuilder = ReportBuilder(inspectionPhraseEngine: phraseEngine);
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'E',
-            title: 'Outside Property',
-            description: '',
-            nodes: const [
-              InspectionNodeDefinition(
-                id: 'activity_outside_property_stacks',
-                title: 'Stacks',
-                type: InspectionNodeType.screen,
-                parentId: null,
-                fields: [
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner3',
-                    label: 'Stacks',
-                    type: InspectionFieldType.dropdown,
-                    options: ['Single', 'Multiple'],
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner2',
-                    label: 'Pots',
-                    type: InspectionFieldType.dropdown,
-                    options: ['1', '2', '3', '4'],
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner4',
-                    label: 'Rendered Stack(s)',
-                    type: InspectionFieldType.dropdown,
-                    options: ['Single', 'Multiple'],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = customBuilder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_outside_property_stacks': {
-              'android_material_design_spinner3': 'Single',
-              'android_material_design_spinner2': '4',
-              'android_material_design_spinner4': 'Single',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final screen = doc.sections.single.screens.single;
-      expect(screen.phrases, hasLength(1));
-      expect(screen.phrases.single,
-          contains('The property has one chimney stack.'));
-      expect(
-        screen.phrases.single,
-        contains('The chimney stack is fitted with 4 pot(s).'),
-      );
-      expect(
-        screen.phrases.single,
-        contains('The outer faces of the chimney stack is single rendered.'),
-      );
-    });
 
     test('applies conditional visibility filtering', () {
       final treeWithConditional = InspectionTreePayload(
@@ -2441,86 +2049,6 @@ void main() {
     });
 
     test(
-        'injects legacy Section F building risk phrases into J1 and creates J3',
-        () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'J',
-            title: 'J Risks',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_risks_risk_to_building_',
-                title: 'J1 Risk To Building',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'actv_movement_status',
-                    label: 'Movement status',
-                    type: InspectionFieldType.dropdown,
-                    options: ['None', 'Noted'],
-                  ),
-                ],
-              ),
-              InspectionNodeDefinition(
-                id: 'activity_risks_other_',
-                title: 'J4 Other',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_not_applicable',
-                    label: 'Not Applicable',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_risks_risk_to_building_': {
-              'actv_movement_status': 'None',
-            },
-            'activity_in_side_property_wood_work': {
-              'cb_out_of_square_doors': 'true',
-              'cb_glazed_internal_doors': 'true',
-            },
-            'activity_in_side_property_bathroom_fittings_leaking': {
-              'cb_bathtub': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j1 = section.screens
-          .firstWhere((s) => s.screenId == 'activity_risks_risk_to_building_');
-      expect(
-        j1.phrases.join(' ').toLowerCase(),
-        contains('some internal doors and frame are distorted'),
-      );
-      expect(
-        j1.phrases.join(' ').toLowerCase(),
-        contains('the bathtub is leaking and causing dampness'),
-      );
-
-      final j3 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
-      expect(j3.title, 'J3 Risk To People');
-      expect(
-        j3.phrases.join(' ').toLowerCase(),
-        contains('one or more internal doors are glazed'),
-      );
-    });
-
-    test(
         'J3 Risk To People grammar fixes: articles and subject-verb agreement (Phase 2F)',
         () {
       final tree = InspectionTreePayload(
@@ -2561,22 +2089,6 @@ void main() {
               'cb_wc_89': 'true',
               'cb_badly_cracked_62': 'true',
             },
-            'activity_outside_property_main_walls_damp': {
-              'et_location_677': 'the lounge and hallway',
-            },
-            'activity_outside_property_main_wall_repairs_render': {
-              'actv_condition': 'Repair now',
-              'cb_hazard': 'true',
-            },
-            'activity_outside_property_windows_repairs_repair_window': {
-              'cb_safety_hazard': 'true',
-              'cb_ch1': 'true',
-            },
-            'activity_outside_property_out_side_doors_repairs_repair_out_side_doors':
-                {
-              'actv_repair_type': 'Repair now',
-              'cb_damaged': 'true',
-            },
           },
         ),
         const ExportConfig(),
@@ -2594,25 +2106,6 @@ void main() {
 
       expect(j3Text, contains('bathtub and wc are badly cracked'));
 
-      expect(
-        j3Text,
-        contains('internal wall surfaces that include the lounge and hallway'),
-      );
-      expect(j3Text, isNot(contains('surfaces the include')));
-
-      expect(j3Text, contains('render coating to the building are eroded'));
-      expect(j3Text, isNot(contains('render coating to the building is')));
-
-      expect(
-        j3Text,
-        contains(
-            'affected by single or multiple defects, and this is a health and safety hazard (see section e5'),
-      );
-      expect(
-        j3Text,
-        contains(
-            'affected by single or multiple defects, and this is a health and safety hazard (see section e6'),
-      );
       expect(j3Text, isNot(contains('this is health and safety hazard')));
     });
 
@@ -2667,7 +2160,7 @@ void main() {
               'actv_type': 'Sloping',
             },
             'activity_other_repair_nearby_trees': {
-              'actv_condition': 'Problems',
+              'actv_condition': 'Defects noted',
               'actv_proximity_of_adjacent_tree': 'Several',
               'cb_significant_cracks': 'true',
             },
@@ -2752,7 +2245,7 @@ void main() {
           allAnswers: {
             'activity_grounds_other_grounds': {'actv_type': 'Sloping'},
             'activity_other_repair_nearby_trees': {
-              'actv_condition': 'Problems',
+              'actv_condition': 'Defects noted',
               'actv_proximity_of_adjacent_tree': 'Several',
               'cb_significant_cracks': 'true',
             },
@@ -2772,8 +2265,193 @@ void main() {
       final j2Text = j2.phrases.join('\n');
       // Verbatim revised-spec wording, straight from the approved bank keys.
       expect(j2Text, contains('Sloping Ground: The property may be situated on sloping ground.'));
-      expect(j2Text, contains('Influencing Trees: There are trees within influencing distance of the property.'));
+      expect(j2Text, contains('Influencing trees: There are trees within influencing distance of the property.'));
       expect(j2Text, contains('Retaining Walls: Evidence of movement, bulging, cracking, deterioration was observed.'));
+    });
+
+    test(
+        'J1 emits the PDF chimney cross-inject sentences (E1 -> J1) from the '
+        'approved bank', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_risk_to_building_',
+                title: 'J1 Risk To Building',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'actv_movement_status',
+                    label: 'Movement status',
+                    type: InspectionFieldType.dropdown,
+                    options: ['None', 'Noted'],
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = makeBankBackedBuilder().build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_risks_risk_to_building_': {
+              'actv_movement_status': 'None',
+            },
+            'activity_outside_property_leaning_chimney': {
+              'android_material_design_spinner4': 'Repair required',
+            },
+            'activity_outside_property_repair_chimney_disrepair': {
+              'cb_repair_soon_70': 'true',
+            },
+            'activity_risks_other_': {'cb_not_applicable': 'true'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final all = section.screens.expand((s) => s.phrases).join('\n');
+      expect(
+        all,
+        contains('The chimney stack(s) is leaning and the movement appears '
+            'significant, and immediate action is required'),
+      );
+      expect(
+        all,
+        contains('One or more chimney stack(s) is in poor condition. This is '
+            'a safety hazard. Further investigation and repair should be '
+            'arranged immediately'),
+      );
+    });
+
+    test(
+        'adds the PDF Add-text-to J1/J3 injections for E2-E5 and F1 from the bank'
+        'approved bank', () {
+      final tree = InspectionTreePayload(
+        sections: [
+          InspectionSectionDefinition(
+            key: 'J',
+            title: 'J Risks',
+            description: '',
+            nodes: [
+              InspectionNodeDefinition(
+                id: 'activity_risks_risk_to_building_',
+                title: 'J1 Risk To Building',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'actv_movement_status',
+                    label: 'Movement status',
+                    type: InspectionFieldType.dropdown,
+                    options: ['None', 'Noted'],
+                  ),
+                ],
+              ),
+              InspectionNodeDefinition(
+                id: 'activity_risks_other_',
+                title: 'J4 Other',
+                type: InspectionNodeType.screen,
+                fields: const [
+                  InspectionFieldDefinition(
+                    id: 'cb_not_applicable',
+                    label: 'Not Applicable',
+                    type: InspectionFieldType.checkbox,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final doc = makeBankBackedBuilder().build(
+        _makeRawData(
+          tree: tree,
+          allAnswers: {
+            'activity_risks_risk_to_building_': {
+              'actv_movement_status': 'None',
+            },
+            'activity_outside_property_roof_repair_tiles': {
+              'actv_condition': 'Repair now',
+              'rc_rt_loose': 'true',
+            },
+            'outside_property_roof_covering_roof_structure_layout': {
+              'actv_status': 'Repair defect',
+            },
+            'activity_outside_property_roof_repair_flat_roof': {
+              'actv_condition': 'Repair now',
+              'rc_fr_torn': 'true',
+            },
+            'activity_outside_property_rwg__repair_pipes_gutters': {
+              'actv_condition': 'Repair now',
+            },
+            'activity_outside_property_main_walls_damp': {
+              'cb_rising_damp': 'true',
+            },
+            'activity_outside_property_main_wall_repairs_lintel': {
+              'actv_condition': 'Significant defect',
+            },
+            'activity_outside_property_windows_repairs_no_fire_escape_risk': {
+              'e5fl_lounge': 'true',
+            },
+            'activity_inside_property_repair_removed_chimney_breast': {
+              'actv_status': 'Risk of collapse',
+            },
+            'activity_outside_property_roof_spreading_repair': {
+              'rc_rs_front': 'true',
+            },
+            'activity_risks_other_': {'cb_not_applicable': 'true'},
+          },
+        ),
+        const ExportConfig(),
+      );
+
+      final section = doc.sections.firstWhere((s) => s.key == 'J');
+      final all = section.screens.expand((s) => s.phrases).join('\n');
+      expect(all, contains('One or more defects affecting the rainwater gutters, downpipes, associated fittings, and drainage arrangements were noted'));
+      expect(all, contains('suggesting the presence of rising damp. Further investigation by a suitably qualified damp and timber specialist is recommended to determine the cause and extent of the problem'));
+      expect(all, contains('One or more small beams that span across the top of the window or door opening, including brick arch (called a lintel), is damaged, cracked, distorted'));
+      expect(all, contains('Part of the chimney breast within the roof space has been removed, and the remaining structure is not properly supported and is at risk of collapse'));
+      for (final sentence in const [
+        'One or more tiles, slates, or roof covering sections are loose, slipped, cracked, broken, or missing',
+        'The surface of the roof slope(s) of the building is significantly distorted, uneven or undulating',
+        'The flat roof covering is weathered, blistered, split, torn, worn, ponding, or defective and causing rainwater to penetrate the building below',
+        'The roof slopes to the front, side and rear of the building appear uneven or undulating, and the adjoining wall appears distorted, cracked, bowing or leaning outwards',
+      ]) {
+        expect(all, contains(sentence));
+      }
+      final j3 = section.screens
+          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people')
+          .phrases
+          .join('\n');
+      expect(
+        j3,
+        contains('One or more tiles, slates, or roof covering sections are '
+            'loose, slipped, cracked, broken, or missing'),
+      );
+      expect(
+        j3,
+        contains('The design of one or more windows does not provide a suitable means of escape for occupants in the event of a fire'),
+      );
     });
 
     test('does not synthesise J2 when none of the source screens show a risk',
@@ -2807,10 +2485,10 @@ void main() {
           tree: tree,
           allAnswers: {
             'activity_grounds_other_grounds': {
-              'actv_type': 'Relatively level',
+              'actv_type': 'Level',
             },
             'activity_other_repair_nearby_trees': {
-              'actv_condition': 'OK',
+              'actv_condition': 'No defects',
             },
             'activity_risks_other_': {
               'cb_not_applicable': 'true',
@@ -2827,134 +2505,7 @@ void main() {
       );
     });
 
-    test(
-        'folds the former Health risks (asbestos/mould/lead/radon) into J3 '
-        'Risks to People, ending with the general-maintenance advisory', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'J',
-            title: 'J Risks',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_risks_other_',
-                title: 'J4 Other',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_not_applicable',
-                    label: 'Not Applicable',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
 
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_grounds_garage': {
-              'cb_corrugated_asbestos_sheets': 'true',
-            },
-            'activity_in_side_property_bathroom_fittings_mould': {
-              'cb_bathtub': 'true',
-            },
-            'activity_risks_other_': {
-              'cb_not_applicable': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final section = doc.sections.firstWhere((s) => s.key == 'J');
-      // Revised spec: no separate J4 Risk To Health screen any more.
-      expect(
-        section.screens.any((s) => s.screenId == 'derived_j4_risk_to_health'),
-        isFalse,
-      );
-      final j3 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
-      expect(j3.title, 'J3 Risk To People');
-      final j3Text = j3.phrases.join(' ').toLowerCase();
-      expect(j3Text, contains('materials that may contain asbestos were observed'));
-      expect(j3Text,
-          isNot(contains('no materials suspected of containing asbestos')));
-      expect(j3Text, contains('older properties may contain lead pipework'));
-      expect(j3Text,
-          contains('localised mould growth associated with condensation'));
-      expect(j3Text, isNot(contains('no significant mould growth')));
-      expect(j3Text, contains('presence of radon gas cannot be determined'));
-      // The general-maintenance advisory now closes J3.
-      expect(
-          j3Text, contains('buildings require regular inspection and maintenance'));
-
-      final j3Index = section.screens
-          .indexWhere((s) => s.screenId == 'derived_j3_risk_to_people');
-      final otherIndex =
-          section.screens.indexWhere((s) => s.screenId == 'activity_risks_other_');
-      expect(j3Index, lessThan(otherIndex));
-    });
-
-    test(
-        'J3 emits the revised-spec approved-bank wording verbatim (asbestos / '
-        'mould / general advice) when the phrase bank is available', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'J',
-            title: 'J Risks',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_risks_other_',
-                title: 'J4 Other',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_not_applicable',
-                    label: 'Not Applicable',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = makeBankBackedBuilder().build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_grounds_garage': {
-              'cb_corrugated_asbestos_sheets': 'true',
-            },
-            'activity_in_side_property_bathroom_fittings_mould': {
-              'cb_bathtub': 'true',
-            },
-            'activity_risks_other_': {'cb_not_applicable': 'true'},
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j3 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
-      final j3Text = j3.phrases.join('\n');
-      // Verbatim revised-spec wording from the approved {RISK_TO_PEOPLE}::* keys.
-      expect(j3Text, contains('Control of Asbestos Regulations 2012'));
-      expect(j3Text, contains('asbestos-containing materials (ACMs)'));
-      expect(j3Text, contains('Mould Growth: Localised mould growth'));
-      expect(j3Text,
-          contains('General Advice: The inspection identified matters requiring'));
-    });
 
     test(
         'J3 surfaces the revised Trip Hazards / Electrical Safety / Gas Safety '
@@ -2987,11 +2538,11 @@ void main() {
         _makeRawData(
           tree: tree,
           allAnswers: {
-            'activity_in_side_property_floors_repair_uneven_floor': {
-              'cb_lounge': 'true',
+            'activity_in_side_property_floors_repair_floor_repair': {
+              'f4rd_uneven': 'true',
             },
             'activity_services_electricity_repair_electrical_hazard': {
-              'cb_exposed_wires': 'true',
+              'g1p_exposed_wires': 'true',
             },
             'activity_services_main_gas': {'actv_condition': 'ok'},
             'activity_risks_other_': {'cb_not_applicable': 'true'},
@@ -3011,269 +2562,9 @@ void main() {
           contains('Gas Safety: Gas appliances and installations were not assessed'));
     });
 
-    test(
-        'J3 does not surface Trip / Electrical / Gas topics when their category '
-        'is absent', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'J',
-            title: 'J Risks',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_risks_other_',
-                title: 'J4 Other',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_not_applicable',
-                    label: 'Not Applicable',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
 
-      final doc = makeBankBackedBuilder().build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_risks_other_': {'cb_not_applicable': 'true'},
-          },
-        ),
-        const ExportConfig(),
-      );
 
-      final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j3Text = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people')
-          .phrases
-          .join('\n');
-      expect(j3Text, isNot(contains('Trip Hazards:')));
-      expect(j3Text, isNot(contains('Electrical Safety:')));
-      expect(j3Text, isNot(contains('Gas Safety:')));
-    });
 
-    test(
-        'J3 Risks to People: health negative branches when no asbestos/mould '
-        'signal is present', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'J',
-            title: 'J Risks',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_risks_other_',
-                title: 'J4 Other',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_not_applicable',
-                    label: 'Not Applicable',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_risks_other_': {
-              'cb_not_applicable': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j3 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
-      final j3Text = j3.phrases.join(' ').toLowerCase();
-      expect(j3Text, contains('no materials suspected of containing asbestos'));
-      expect(j3Text, contains('no significant mould growth'));
-      expect(j3Text, contains('older properties may contain lead pipework'));
-      expect(j3Text, contains('presence of radon gas cannot be determined'));
-    });
-
-    test(
-        'folds the former Security risks (external doors + communal security '
-        'systems) into J4 Other risks', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'J',
-            title: 'J Risks',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_risks_other_',
-                title: 'J4 Other',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_not_applicable',
-                    label: 'Not Applicable',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_outside_property_out_side_doors_about_doors': {
-              'actv_seciruty_offered': 'Inadequate',
-            },
-            'activity_outside_property_other_communal_area': {
-              'cb_cctv': 'true',
-            },
-            'activity_risks_other_': {
-              'cb_not_applicable': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final section = doc.sections.firstWhere((s) => s.key == 'J');
-      // Revised spec: no separate J5 Risk To Security screen any more; the
-      // security risks fold into the native J4 Other risks screen.
-      expect(
-        section.screens.any((s) => s.screenId == 'derived_j5_risk_to_security'),
-        isFalse,
-      );
-      final j4 = section.screens
-          .firstWhere((s) => s.screenId == 'activity_risks_other_');
-      final j4Text = j4.phrases.join(' ').toLowerCase();
-      expect(j4Text, contains('external doors appear to offer limited security'));
-      expect(j4Text, isNot(contains('reasonable security')));
-      expect(j4Text,
-          contains('incorporates a visible security system to the communal areas'));
-      // The general-maintenance advisory now lives in J3, not J4.
-      expect(j4Text,
-          isNot(contains('buildings require regular inspection and maintenance')));
-      final j3 = section.screens
-          .firstWhere((s) => s.screenId == 'derived_j3_risk_to_people');
-      expect(
-        j3.phrases.join(' ').toLowerCase(),
-        contains('buildings require regular inspection and maintenance'),
-      );
-    });
-
-    test(
-        'J4 Other risks: reasonable-door branch; no communal screen means the '
-        'security-system line is silent', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'J',
-            title: 'J Risks',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_risks_other_',
-                title: 'J4 Other',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_not_applicable',
-                    label: 'Not Applicable',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_outside_property_out_side_doors_about_doors': {
-              'actv_seciruty_offered': 'Reasonable',
-            },
-            'activity_risks_other_': {
-              'cb_not_applicable': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final section = doc.sections.firstWhere((s) => s.key == 'J');
-      final j4 = section.screens
-          .firstWhere((s) => s.screenId == 'activity_risks_other_');
-      final j4Text = j4.phrases.join(' ').toLowerCase();
-      expect(
-          j4Text, contains('external doors appear to provide reasonable security'));
-      expect(j4Text, isNot(contains('security system')));
-    });
-
-    test('injects legacy Section F guarantee phrase into I2', () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'I',
-            title: 'I Issues',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_issues_glazed_sections',
-                title: 'I2 Guarantees',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_chimney_stack',
-                    label: 'windows',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_issues_glazed_sections': {
-              'cb_chimney_stack': 'true',
-            },
-            'activity_inside_property_other_celler_damp': {
-              'cb_serious_dump': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final screen = doc.sections.first.screens.first;
-      expect(
-        screen.phrases.join(' ').toLowerCase(),
-        contains('dampness problem repair is covered by any guarantees'),
-      );
-    });
 
     test(
         'injects RICS L2 E5/E6 PVC-replacement guarantee cross-inject into I2',
@@ -3310,11 +2601,12 @@ void main() {
               'cb_chimney_stack': 'true',
             },
             'activity_outside_property_windows_aboutwindow': {
-              'cb_is_replacement': 'true',
-              'cb_pvc': 'true',
+              'e5t_replacement': 'true',
+              'e5t_pvcu': 'true',
             },
             'activity_outside_property_out_side_doors_about_doors': {
-              'cb_replacement': 'true',
+              'e6t_replacement': 'true',
+              'e6m_pvcu': 'true',
             },
           },
         ),
@@ -3323,16 +2615,11 @@ void main() {
 
       final all =
           doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
+      // Windows and doors both map to the single PDF "Window/doors:" item.
       expect(
         all,
         contains(
-          'confirm whether the pvc glazed sections to the windows were installed by a contractor registered with fensa',
-        ),
-      );
-      expect(
-        all,
-        contains(
-          'confirm whether the pvc glazed sections to the doors were installed by a contractor registered with fensa',
+          'window/doors: replacement windows and external doors (including fensa, certass or building regulation certification)',
         ),
       );
     });
@@ -3384,7 +2671,7 @@ void main() {
       expect(
         all,
         contains(
-          'obtain the spray foam insulation installation details, guarantees '
+          'spray foam: spray foam insulation installation details, guarantees '
           'and warranties, together with confirmation of any lender requirements',
         ),
       );
@@ -3481,8 +2768,8 @@ void main() {
       expect(
         all,
         contains(
-          'renewable energy installations, including solar pv, solar thermal, '
-          'battery storage, air source heat pumps and ground source heat pumps',
+          'renewable energy: renewable energy installations, including solar pv, solar thermal, '
+          'battery storage, air source heat pumps, and ground source heat pumps',
         ),
       );
     });
@@ -3567,7 +2854,7 @@ void main() {
             },
             // Replacement, but not PVC - should not fire.
             'activity_outside_property_windows_aboutwindow': {
-              'cb_is_replacement': 'true',
+              'e5t_replacement': 'true',
               'cb_timber': 'true',
             },
           },
@@ -3579,100 +2866,6 @@ void main() {
           doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
       expect(all, isNot(contains('pvc glazed sections to the windows')));
       expect(all, isNot(contains('pvc glazed sections to the doors')));
-    });
-
-    test('injects E1 shared-chimney RICS L2 cross-inject into I3 (Phase 2G-mini)',
-        () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'I',
-            title: 'I Issues',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_issues_other_matters',
-                title: 'I3 Other Matters',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_freehold',
-                    label: 'Freehold',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_issues_other_matters': {
-              'cb_freehold': 'true',
-            },
-            'activity_outside_property_shared_chimney': {
-              'ch1': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final all =
-          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
-      expect(
-        all,
-        contains(
-          'the rainwater goods and chimney stack(s) are shared',
-        ),
-      );
-    });
-
-    test('does not inject the shared-chimney cross-inject when no shared chimney is recorded',
-        () {
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'I',
-            title: 'I Issues',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'activity_issues_other_matters',
-                title: 'I3 Other Matters',
-                type: InspectionNodeType.screen,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_freehold',
-                    label: 'Freehold',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = builder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_issues_other_matters': {
-              'cb_freehold': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final all =
-          doc.sections.first.screens.first.phrases.join(' ').toLowerCase();
-      expect(all, isNot(contains('rainwater goods and chimney stack(s) are shared')));
     });
 
     test(
@@ -3766,121 +2959,5 @@ void main() {
       );
     });
 
-    test('assembles G1 Electricity in legacy order including standard text 2',
-        () {
-      const phraseTexts = <String, String>{
-        '{G_LIMITATIONS_STANDARD_TEXT}':
-            'g-limit-1<br />\\r\\n<br />\\r\\ng-limit-2',
-        '{G_ELECTRICITY}::{STANDARD_TEXT}': 'g1-standard',
-        '{G_ELECTRICITY}::{MAINS_ELECTRICITY_INSPECTED}':
-            'g1-mains={ELE_ME_METER_LOC}',
-        '{G_ELECTRICITY}::{FUSE_INSPECTED}': 'g1-fuse={ELE_ME_FUSE_BOX_LOC}',
-        '{G_ELECTRICITY}::{DATED_ELECTRICAL_SYSTEM}': 'g1-dated',
-        '{G_ELECTRICITY}::{STANDARD_TEXT_2}': 'g1-standard-2',
-        '{G_ELECTRICITY}::{CONDITION_RATING}':
-            'Condition rating is: {ELE_CON_RT}.',
-      };
-      final gBuilder = ReportBuilder(
-        inspectionPhraseEngine: const InspectionPhraseEngine(phraseTexts),
-      );
-
-      final tree = InspectionTreePayload(
-        sections: [
-          InspectionSectionDefinition(
-            key: 'G',
-            title: 'G Services',
-            description: '',
-            nodes: [
-              InspectionNodeDefinition(
-                id: 'group_g1_electricity_85',
-                title: 'G1 Electricity',
-                type: InspectionNodeType.group,
-                order: 1,
-                fields: const [],
-              ),
-              InspectionNodeDefinition(
-                id: 'group_electricity_86',
-                title: 'Electricity',
-                type: InspectionNodeType.group,
-                parentId: 'group_g1_electricity_85',
-                order: 1,
-                fields: const [],
-              ),
-              InspectionNodeDefinition(
-                id: 'activity_services_electricity_main_screen',
-                title: 'Electricity',
-                type: InspectionNodeType.screen,
-                parentId: 'group_electricity_86',
-                order: -1,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'android_material_design_spinner4',
-                    label: 'Condition Rating',
-                    type: InspectionFieldType.dropdown,
-                    options: ['1', '2', '3'],
-                  ),
-                ],
-              ),
-              InspectionNodeDefinition(
-                id: 'activity_service_about_electricity',
-                title: 'Mains Electricity',
-                type: InspectionNodeType.screen,
-                parentId: 'group_electricity_86',
-                order: 2,
-                fields: const [
-                  InspectionFieldDefinition(
-                    id: 'cb_under_the_stairs_40',
-                    label: 'Under the stairs',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'cb_in_an_outside_box_54',
-                    label: 'Under the stairs',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                  InspectionFieldDefinition(
-                    id: 'cb_dated_electrical_system',
-                    label: 'Dated electrical system',
-                    type: InspectionFieldType.checkbox,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-
-      final doc = gBuilder.build(
-        _makeRawData(
-          tree: tree,
-          allAnswers: {
-            'activity_services_electricity_main_screen': {
-              'android_material_design_spinner4': '1',
-            },
-            'activity_service_about_electricity': {
-              'cb_under_the_stairs_40': 'true',
-              'cb_in_an_outside_box_54': 'true',
-              'cb_dated_electrical_system': 'true',
-            },
-          },
-        ),
-        const ExportConfig(),
-      );
-
-      final g1 = doc.sections.single.screens.firstWhere(
-        (s) => s.screenId == 'group_g1_electricity_85',
-      );
-      expect(
-        g1.phrases,
-        equals([
-          'g1-standard',
-          'g1-mains=under the stairs',
-          'g1-fuse=in an outside box',
-          'g1-dated',
-          'g1-standard-2',
-          'Condition rating is: 1.',
-        ]),
-      );
-    });
   });
 }

@@ -1,0 +1,190 @@
+[
+  {
+    "screen": "activity_risks_other_",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "j4_airport",
+        "masters": [
+          "{RISK_TO_OTHER}"
+        ],
+        "sub": "{J4_AIRPORT}",
+        "text": "Airport: The property is located close to an airport and/or flight path. Aircraft operations may result in noise and disturbance, which could affect the enjoyment, marketability, and value of the property.",
+        "tokens": [],
+        "when": [
+          "cb_airport",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_airport",
+            "label": "Airport",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j4_station",
+        "masters": [
+          "{RISK_TO_OTHER}"
+        ],
+        "sub": "{J4_TRAIN_STATION}",
+        "text": "Train Station: The property is located close to a railway station. Associated rail operations, passenger activity, traffic, and noise may affect the enjoyment, marketability, and value of the property.",
+        "tokens": [],
+        "when": [
+          "cb_train_station",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_train_station",
+            "label": "Train Station",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j4_line",
+        "masters": [
+          "{RISK_TO_OTHER}"
+        ],
+        "sub": "{J4_RAILWAY_LINE}",
+        "text": "Railway Line: The property is located close to a railway line. Passing trains may generate noise and vibration, which could affect the enjoyment, marketability, and value of the property.",
+        "tokens": [],
+        "when": [
+          "cb_train_line",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_train_line",
+            "label": "Railway Line",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "j4_motorway",
+        "masters": [
+          "{RISK_TO_OTHER}"
+        ],
+        "sub": "{J4_MOTORWAY}",
+        "text": "Motorway: The property is located close to a motorway. Traffic noise, air quality, and associated activity may affect the enjoyment, marketability, and value of the property.",
+        "tokens": [],
+        "when": [
+          "cb_motorway",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_motorway",
+            "label": "Motorway",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_risks_repair_or_improve",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "j4_further",
+        "masters": [
+          "{RISK_TO_OTHER}"
+        ],
+        "sub": "{J4_FURTHER_INVESTIGATIONS}",
+        "text": "Further Investigations and Repairs: Where repairs or further investigations are recommended, you should obtain quotations from suitably qualified and reputable contractors before exchanging contracts. The results of these investigations, together with advice from your legal adviser, may influence your decision to proceed or the price you are prepared to pay. Until these enquiries have been completed, the extent and cost of any necessary remedial works cannot be confirmed. Proceeding with the purchase before obtaining this information means accepting the risk that additional defects or costs may become apparent after completion.",
+        "tokens": [],
+        "when": [
+          "cb_repair_or_improve",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_repair_or_improve",
+            "label": "Further investigations and repairs",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_k1_valuation_assumptions",
+    "new_screen": {
+      "id": "activity_k1_valuation_assumptions",
+      "title": "K1 Valuation assumptions",
+      "parent": null,
+      "order": 2,
+      "after": "activity_capture_floor_site_plan_sketches"
+    },
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "k1_market",
+        "masters": [
+          "{K1_VALUATION}"
+        ],
+        "sub": "{K1_MARKET_VALUE}",
+        "text": "Market Value: The opinion of market value reflects market conditions at the date of inspection and valuation. In some locations, limited housing supply and strong buyer demand may result in competitive bidding and prices above asking levels. Should market conditions change, or the property's condition deteriorate, its resale value may be adversely affected.",
+        "tokens": [],
+        "when": [
+          "cb_k1_market",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_k1_market",
+            "label": "Market value",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "k1_flats",
+        "masters": [
+          "{K1_VALUATION}"
+        ],
+        "sub": "{K1_FLATS}",
+        "text": "Flats: Unless confirmed otherwise by your legal adviser, the valuation has been prepared on the assumption that the property is held on a lease with an unexpired term of approximately 90 years and that there are no onerous lease terms or unusual liabilities that would adversely affect its value.",
+        "tokens": [],
+        "when": [
+          "cb_k1_flats",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_k1_flats",
+            "label": "Flats (leasehold assumption)",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "k1_lease",
+        "masters": [
+          "{K1_VALUATION}"
+        ],
+        "sub": "{K1_LEASE_LENGTH}",
+        "text": "Lease Length: The lease is assumed to have a satisfactory unexpired term, and no immediate action is considered necessary. However, the value and marketability of leasehold properties diminish as the lease term reduces. Once the unexpired term approaches or falls below 80 years, the cost of extending the lease can increase significantly and the property's value and mortgageability may be adversely affected. You should seek advice on extending the lease well before it reaches this point. Your legal adviser should confirm the remaining lease term and advise on any implications before you proceed with the purchase.",
+        "tokens": [],
+        "when": [
+          "cb_k1_lease",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_k1_lease",
+            "label": "Lease length",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

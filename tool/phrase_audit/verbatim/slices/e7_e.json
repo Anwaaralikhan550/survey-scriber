@@ -1,0 +1,1237 @@
+[
+  {
+    "screen": "activity_outside_property_conservatory_porch_location_construction",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7c_loc",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_LOCATION}",
+        "text": "Conservatory: The conservatory(s) is located to the {CP_LOCATIONS} of the building. The walls comprise {CP_WALLS} wall sections.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_LOCATIONS}",
+            "options": [
+              [
+                "e7cl_front",
+                "front"
+              ],
+              [
+                "e7cl_side",
+                "side"
+              ],
+              [
+                "e7cl_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "Conservatory located to",
+            "other": [
+              "e7cl_other",
+              "e7cl_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{CP_WALLS}",
+            "options": [
+              [
+                "e7cw_single_glazed",
+                "single-glazed"
+              ],
+              [
+                "e7cw_double_glazed",
+                "double-glazed"
+              ],
+              [
+                "e7cw_triple_glazed",
+                "triple-glazed"
+              ],
+              [
+                "e7cw_pvc_framed",
+                "PVC framed"
+              ],
+              [
+                "e7cw_timber_framed",
+                "timber framed"
+              ],
+              [
+                "e7cw_aluminium_framed",
+                "aluminium framed"
+              ],
+              [
+                "e7cw_steel_framed",
+                "steel framed"
+              ]
+            ],
+            "pdf_options": [
+              "single-glazed",
+              "double-glazed",
+              "triple-glazed",
+              "PVC framed",
+              "timber framed",
+              "aluminium framed",
+              "steel framed"
+            ],
+            "label": "Walls comprise",
+            "other": [
+              "e7cw_other",
+              "e7cw_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Conservatory: The conservatory(s) is located to the front, side, rear, other of the building.",
+          "The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections."
+        ]
+      },
+      {
+        "id": "e7c_bregs",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_BUILDING_REGULATIONS}",
+        "text": "Building Regulations: The conservatory appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",
+        "tokens": [],
+        "when": [
+          "cb_building_regulations",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_building_regulations",
+            "label": "Building Regulations",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_roof",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7c_roof",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_ROOF}",
+        "text": "Roof: The roof is formed in {CP_ROOF_MATERIALS} materials.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_ROOF_MATERIALS}",
+            "options": [
+              [
+                "e7cr_glass",
+                "glass"
+              ],
+              [
+                "e7cr_polycarbonate_sheets",
+                "polycarbonate sheets"
+              ],
+              [
+                "e7cr_solid_insulated_panels",
+                "solid insulated panels"
+              ],
+              [
+                "e7cr_roofing_tiles",
+                "roofing tiles"
+              ]
+            ],
+            "pdf_options": [
+              "glass",
+              "polycarbonate sheets",
+              "solid insulated panels",
+              "roofing tiles"
+            ],
+            "label": "Roof formed in",
+            "other": [
+              "e7cr_other",
+              "e7cr_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_doors",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7c_doors",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_DOORS_WINDOWS}",
+        "text": "Doors and Windows: The conservatory comprises {CP_DOORS_WINDOWS} door(s), and window(s).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_DOORS_WINDOWS}",
+            "options": [
+              [
+                "e7cd_single_glazed",
+                "single-glazed"
+              ],
+              [
+                "e7cd_double_glazed",
+                "double-glazed"
+              ],
+              [
+                "e7cd_triple_glazed",
+                "triple-glazed"
+              ],
+              [
+                "e7cd_pvc",
+                "PVC"
+              ],
+              [
+                "e7cd_timber",
+                "timber"
+              ],
+              [
+                "e7cd_aluminium",
+                "aluminium"
+              ],
+              [
+                "e7cd_steel_framed",
+                "steel-framed"
+              ]
+            ],
+            "pdf_options": [
+              "single-glazed",
+              "double-glazed",
+              "triple-glazed",
+              "PVC",
+              "timber",
+              "aluminium",
+              "steel-framed"
+            ],
+            "label": "Doors and windows"
+          }
+        ],
+        "pdf": [
+          "Doors and Windows: The conservatory comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s)."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_floor",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7c_floor",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_FLOOR}",
+        "text": "Floor: The floor is of {CP_FLOOR_CONSTRUCTION} construction, and the floor is covered with {CP_FLOOR_COVERING} covering(s).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_FLOOR_CONSTRUCTION}",
+            "options": [
+              [
+                "e7cfc_solid_concrete",
+                "solid concrete"
+              ],
+              [
+                "e7cfc_suspended_timber",
+                "suspended timber"
+              ]
+            ],
+            "pdf_options": [
+              "solid concrete",
+              "suspended timber"
+            ],
+            "label": "Floor is of",
+            "other": [
+              "e7cfc_other",
+              "e7cfc_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{CP_FLOOR_COVERING}",
+            "options": [
+              [
+                "e7cfv_timber",
+                "timber"
+              ],
+              [
+                "e7cfv_carpet",
+                "carpet"
+              ],
+              [
+                "e7cfv_tiles",
+                "tiles"
+              ],
+              [
+                "e7cfv_laminated_flooring",
+                "laminated flooring"
+              ],
+              [
+                "e7cfv_vinyl",
+                "vinyl"
+              ]
+            ],
+            "pdf_options": [
+              "timber",
+              "carpet",
+              "tiles",
+              "laminated flooring",
+              "vinyl"
+            ],
+            "label": "Floor covered with",
+            "other": [
+              "e7cfv_other",
+              "e7cfv_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s)."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_safety_glass_rating",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7c_bs_no",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_NO_BS_EN}",
+        "text": "No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The absence of visible markings does not necessarily indicate that safety glazing has not been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "No BS EN noted"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Safety glass markings",
+            "type": "dropdown",
+            "options": [
+              "No BS EN noted",
+              "BS EN noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e7c_bs_yes",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_BS_EN_NOTED}",
+        "text": "BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The presence of visible markings indicates that safety glazing has been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "BS EN noted"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_porch_condition",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7c_cond",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_CONDITION}",
+        "text": "Condition: Where visible and operated during the inspection, the doors appear in {CP_CONDITION} condition, consistent with their age and type. Conservatories require routine maintenance appropriate to their age and construction. Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the conservatory material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CP_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type."
+        ]
+      },
+      {
+        "id": "e7c_vpoor",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_VERY_POOR}",
+        "text": "Conservatories that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the doors entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Very poor"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_porch_poor_condition",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7c_unstable",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_UNSTABLE}",
+        "text": "Unstable Structure: Evidence of movement, distortion, or deflection was observed. Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Unstable structure",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_porch_open_to_building",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7c_joint",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_JOINT_DEFECTS}",
+        "text": "Building Joint Defects: Defects were noted to the junction between the conservatory and the main building. The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects. Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Building joint defects",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_location_construction__location_and_construction",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7p_loc",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_LOCATION}",
+        "text": "Porch: The porch(s) located to the {CP_LOCATIONS} of the building. The walls comprise {CP_WALLS} wall sections.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_LOCATIONS}",
+            "options": [
+              [
+                "e7pl_front",
+                "front"
+              ],
+              [
+                "e7pl_side",
+                "side"
+              ],
+              [
+                "e7pl_rear",
+                "rear"
+              ]
+            ],
+            "pdf_options": [
+              "front",
+              "side",
+              "rear"
+            ],
+            "label": "Porch located to",
+            "other": [
+              "e7pl_other",
+              "e7pl_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{CP_WALLS}",
+            "options": [
+              [
+                "e7pw_single_glazed",
+                "single-glazed"
+              ],
+              [
+                "e7pw_double_glazed",
+                "double-glazed"
+              ],
+              [
+                "e7pw_triple_glazed",
+                "triple-glazed"
+              ],
+              [
+                "e7pw_pvc_framed",
+                "PVC framed"
+              ],
+              [
+                "e7pw_timber_framed",
+                "timber framed"
+              ],
+              [
+                "e7pw_aluminium_framed",
+                "aluminium framed"
+              ],
+              [
+                "e7pw_steel_framed",
+                "steel framed"
+              ]
+            ],
+            "pdf_options": [
+              "single-glazed",
+              "double-glazed",
+              "triple-glazed",
+              "PVC framed",
+              "timber framed",
+              "aluminium framed",
+              "steel framed"
+            ],
+            "label": "Walls comprise",
+            "other": [
+              "e7pw_other",
+              "e7pw_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Porch: The porch(s) located to the front, side, rear, other of the building.",
+          "The walls comprise single-glazed, double-glazed, triple-glazed, PVC framed, timber framed, aluminium framed, steel framed, other wall sections."
+        ]
+      },
+      {
+        "id": "e7p_bregs",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_BUILDING_REGULATIONS}",
+        "text": "Building Regulations: The porch appears to be a later addition to the property. Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",
+        "tokens": [],
+        "when": [
+          "cb_building_regulations",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_building_regulations",
+            "label": "Building Regulations",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_roof__roof",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7p_roof",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_ROOF}",
+        "text": "Roof: The roof is formed in {CP_ROOF_MATERIALS} materials.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_ROOF_MATERIALS}",
+            "options": [
+              [
+                "e7pr_glass",
+                "glass"
+              ],
+              [
+                "e7pr_polycarbonate_sheets",
+                "polycarbonate sheets"
+              ],
+              [
+                "e7pr_solid_insulated_panels",
+                "solid insulated panels"
+              ],
+              [
+                "e7pr_roofing_tiles",
+                "roofing tiles"
+              ]
+            ],
+            "pdf_options": [
+              "glass",
+              "polycarbonate sheets",
+              "solid insulated panels",
+              "roofing tiles"
+            ],
+            "label": "Roof formed in",
+            "other": [
+              "e7pr_other",
+              "e7pr_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Roof: The roof is formed in glass, polycarbonate sheets, solid insulated panels, roofing tiles, other materials."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_doors__doors",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7p_doors",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_DOORS_WINDOWS}",
+        "text": "Doors and Windows: The porch comprises {CP_DOORS_WINDOWS} door(s), and window(s).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_DOORS_WINDOWS}",
+            "options": [
+              [
+                "e7pd_single_glazed",
+                "single-glazed"
+              ],
+              [
+                "e7pd_double_glazed",
+                "double-glazed"
+              ],
+              [
+                "e7pd_triple_glazed",
+                "triple-glazed"
+              ],
+              [
+                "e7pd_pvc",
+                "PVC"
+              ],
+              [
+                "e7pd_timber",
+                "timber"
+              ],
+              [
+                "e7pd_aluminium",
+                "aluminium"
+              ],
+              [
+                "e7pd_steel_framed",
+                "steel-framed"
+              ]
+            ],
+            "pdf_options": [
+              "single-glazed",
+              "double-glazed",
+              "triple-glazed",
+              "PVC",
+              "timber",
+              "aluminium",
+              "steel-framed"
+            ],
+            "label": "Doors and windows"
+          }
+        ],
+        "pdf": [
+          "Doors and Windows: The porch comprises single-glazed, double-glazed, triple-glazed, PVC, timber, aluminium, steel-framed door(s), and window(s)."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_floor__floor",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7p_floor",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_FLOOR}",
+        "text": "Floor: The floor is of {CP_FLOOR_CONSTRUCTION} construction, and the floor is covered with {CP_FLOOR_COVERING} covering(s).",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_FLOOR_CONSTRUCTION}",
+            "options": [
+              [
+                "e7pfc_solid_concrete",
+                "solid concrete"
+              ],
+              [
+                "e7pfc_suspended_timber",
+                "suspended timber"
+              ]
+            ],
+            "pdf_options": [
+              "solid concrete",
+              "suspended timber"
+            ],
+            "label": "Floor is of",
+            "other": [
+              "e7pfc_other",
+              "e7pfc_other_text"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{CP_FLOOR_COVERING}",
+            "options": [
+              [
+                "e7pfv_timber",
+                "timber"
+              ],
+              [
+                "e7pfv_carpet",
+                "carpet"
+              ],
+              [
+                "e7pfv_tiles",
+                "tiles"
+              ],
+              [
+                "e7pfv_laminated_flooring",
+                "laminated flooring"
+              ],
+              [
+                "e7pfv_vinyl",
+                "vinyl"
+              ]
+            ],
+            "pdf_options": [
+              "timber",
+              "carpet",
+              "tiles",
+              "laminated flooring",
+              "vinyl"
+            ],
+            "label": "Floor covered with",
+            "other": [
+              "e7pfv_other",
+              "e7pfv_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Floor: The floor is of solid concrete, suspended timber, other construction, and the floor is covered with timber, carpet, tiles, laminated flooring, vinyl, other covering(s)."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7p_bs_no",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_NO_BS_EN}",
+        "text": "No BS EN noted: No visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The absence of visible markings does not necessarily indicate that safety glazing has not been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "No BS EN noted"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_status",
+            "label": "Safety glass markings",
+            "type": "dropdown",
+            "options": [
+              "No BS EN noted",
+              "BS EN noted"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e7p_bs_yes",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_BS_EN_NOTED}",
+        "text": "BS EN noted: Visible British Standard, BS EN, or other permanent safety markings were identified on the accessible glazing. The presence of visible markings indicates that safety glazing has been installed. Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",
+        "tokens": [],
+        "when": [
+          "actv_status",
+          "BS EN noted"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_porch_condition__condition",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7p_cond",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_CONDITION}",
+        "text": "Condition: Where visible and operated during the inspection, the doors appear in {CP_CONDITION} condition, consistent with their age and type. Porches require routine maintenance appropriate to their age and construction. Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the porch material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CP_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type."
+        ]
+      },
+      {
+        "id": "e7p_vpoor",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_VERY_POOR}",
+        "text": "Porches that are in poor condition or in disrepair will require comprehensive repair. In some cases, it may be more economical to replace the doors entirely. This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable. Applicable guarantees or warranties should be obtained.",
+        "tokens": [],
+        "when": [
+          "actv_condition",
+          "Very poor"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_porch_poor_condition__poor_condition",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7p_unstable",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_UNSTABLE}",
+        "text": "Unstable Structure: Evidence of movement, distortion, deflection was observed. Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Unstable structure",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_porch_open_to_building__open_to_building",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7p_joint",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_JOINT_DEFECTS}",
+        "text": "Building Joint Defects: Defects were noted to the junction between the conservatory and the main building. The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects. Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Building joint defects",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_repairs",
+    "replace_all": true,
+    "keep": [],
+    "set_title": "Repair conservatory or porch",
+    "rules": [
+      {
+        "id": "e7c_repair",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_C_REPAIR}",
+        "text": "Repair conservatory: The conservatory {CP_REPAIR_ELEMENTS} are {CP_REPAIR_DEFECTS}. These defects should be repaired in the near future. However, where the defects are severe or extensive, repairs should be carried out immediately.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_REPAIR_ELEMENTS}",
+            "options": [
+              [
+                "e7cre_door_s",
+                "door(s)"
+              ],
+              [
+                "e7cre_window_s",
+                "window(s)"
+              ],
+              [
+                "e7cre_glazing",
+                "glazing"
+              ],
+              [
+                "e7cre_roof",
+                "roof"
+              ],
+              [
+                "e7cre_floor",
+                "floor"
+              ],
+              [
+                "e7cre_wall_s",
+                "wall(s)"
+              ],
+              [
+                "e7cre_rainwater_goods",
+                "rainwater goods"
+              ]
+            ],
+            "pdf_options": [
+              "door(s)",
+              "window(s)",
+              "glazing",
+              "roof",
+              "floor",
+              "wall(s)",
+              "rainwater goods"
+            ],
+            "label": "Conservatory elements",
+            "other": [
+              "e7cre_other",
+              "e7cre_other_text"
+            ],
+            "cond": "actv_cp=Conservatory"
+          },
+          {
+            "kind": "checks",
+            "token": "{CP_REPAIR_DEFECTS}",
+            "options": [
+              [
+                "e7crd_cracked",
+                "cracked"
+              ],
+              [
+                "e7crd_damaged",
+                "damaged"
+              ],
+              [
+                "e7crd_rotten",
+                "rotten"
+              ],
+              [
+                "e7crd_leaking",
+                "leaking"
+              ],
+              [
+                "e7crd_damp",
+                "damp"
+              ],
+              [
+                "e7crd_have_failed",
+                "have failed"
+              ],
+              [
+                "e7crd_are_misted",
+                "are misted"
+              ],
+              [
+                "e7crd_present_a_safety_hazard",
+                "present a safety hazard"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "damaged",
+              "rotten",
+              "leaking",
+              "damp",
+              "have failed",
+              "are misted",
+              "present a safety hazard"
+            ],
+            "label": "Defects",
+            "other": [
+              "e7crd_other",
+              "e7crd_other_text"
+            ],
+            "cond": "actv_cp=Conservatory"
+          }
+        ],
+        "pdf": [
+          "Repair conservatory: The conservatory door(s), window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted, present a safety hazard, other."
+        ],
+        "when": [
+          "actv_cp",
+          "Conservatory"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_cp",
+            "label": "Repair of",
+            "type": "dropdown",
+            "options": [
+              "Conservatory",
+              "Porch"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "e7p_repair",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{E7_P_REPAIR}",
+        "text": "Repair porch: The porch {CP_REPAIR_ELEMENTS} are {CP_REPAIR_DEFECTS}. These defects should be repaired in the near future. However, where the defects are severe or extensive, repairs should be carried out immediately.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CP_REPAIR_ELEMENTS}",
+            "options": [
+              [
+                "e7pre_door",
+                "door"
+              ],
+              [
+                "e7pre_window_s",
+                "window(s)"
+              ],
+              [
+                "e7pre_glazing",
+                "glazing"
+              ],
+              [
+                "e7pre_roof",
+                "roof"
+              ],
+              [
+                "e7pre_floor",
+                "floor"
+              ],
+              [
+                "e7pre_wall_s",
+                "wall(s)"
+              ],
+              [
+                "e7pre_rainwater_goods",
+                "rainwater goods"
+              ]
+            ],
+            "pdf_options": [
+              "door",
+              "window(s)",
+              "glazing",
+              "roof",
+              "floor",
+              "wall(s)",
+              "rainwater goods"
+            ],
+            "label": "Porch elements",
+            "other": [
+              "e7pre_other",
+              "e7pre_other_text"
+            ],
+            "cond": "actv_cp=Porch"
+          },
+          {
+            "kind": "checks",
+            "token": "{CP_REPAIR_DEFECTS}",
+            "options": [
+              [
+                "e7prd_cracked",
+                "cracked"
+              ],
+              [
+                "e7prd_damaged",
+                "damaged"
+              ],
+              [
+                "e7prd_rotten",
+                "rotten"
+              ],
+              [
+                "e7prd_leaking",
+                "leaking"
+              ],
+              [
+                "e7prd_damp",
+                "damp"
+              ],
+              [
+                "e7prd_have_failed",
+                "have failed"
+              ],
+              [
+                "e7prd_are_misted_over",
+                "are misted over"
+              ],
+              [
+                "e7prd_present_a_safety_hazard",
+                "present a safety hazard"
+              ]
+            ],
+            "pdf_options": [
+              "cracked",
+              "damaged",
+              "rotten",
+              "leaking",
+              "damp",
+              "have failed",
+              "are misted over",
+              "present a safety hazard"
+            ],
+            "label": "Defects",
+            "other": [
+              "e7prd_other",
+              "e7prd_other_text"
+            ],
+            "cond": "actv_cp=Porch"
+          }
+        ],
+        "pdf": [
+          "Repair porch: The porch door, window(s), glazing, roof, floor, wall(s), rainwater goods, other are cracked, damaged, rotten, leaking, damp, have failed, are misted over, present a safety hazard, other."
+        ],
+        "when": [
+          "actv_cp",
+          "Porch"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_conservatory_porch_not_inspected",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "e7_not_applicable",
+        "masters": [
+          "{E_CONSERVATORY_PORCHES}"
+        ],
+        "sub": "{NOT_INSPECTED_NOT_APPLICABLE}",
+        "text": "Not Applicable: The property does not incorporate the element(s) referred to in this section. No further comments are necessary.",
+        "tokens": [],
+        "when": [
+          "cb_not_applicable",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_applicable",
+            "label": "Not applicable",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_outside_property_conservatory_porch_windows",
+      "activity_outside_property_conservatory_porch_windows__windows",
+      "outside_property_conservatory_porch_flashing_layout",
+      "outside_property_conservatory_porch_flashing_layout__roof_flashing_with_wall",
+      "activity_outside_property_conservatory_porch_repairs__walls",
+      "activity_outside_property_conservatory_porch_repairs__windows",
+      "activity_outside_property_conservatory_porch_repairs__door_glazing",
+      "activity_outside_property_conservatory_porch_repairs__window_glazing",
+      "activity_outside_property_conservatory_porch_repairs__roof_glazing",
+      "activity_outside_property_conservatory_porch_repairs__floor",
+      "activity_outside_property_conservatory_porch_repairs__rainwater_goods"
+    ]
+  }
+]

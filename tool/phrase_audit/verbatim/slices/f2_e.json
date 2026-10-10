@@ -1,0 +1,657 @@
+[
+  {
+    "screen": "inside_property_ceilings_about_ceilings",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f2_desc",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_DESCRIPTION}",
+        "text": "Description: The ceilings are formed in {CEILING_MATERIALS} ceilings. The ceiling finishes comprise {CEILING_FINISHES} finishes.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CEILING_MATERIALS}",
+            "options": [
+              [
+                "f2m_plaster",
+                "plaster"
+              ],
+              [
+                "f2m_plasterboard",
+                "plasterboard"
+              ],
+              [
+                "f2m_lath_and_plaster",
+                "lath and plaster"
+              ]
+            ],
+            "pdf_options": [
+              "plaster",
+              "plasterboard",
+              "lath and plaster"
+            ],
+            "label": "Ceilings formed in",
+            "other": [
+              "cb_other_406",
+              "et_other_339"
+            ]
+          },
+          {
+            "kind": "checks",
+            "token": "{CEILING_FINISHES}",
+            "options": [
+              [
+                "f2f_painted",
+                "painted"
+              ],
+              [
+                "f2f_textured_coating",
+                "textured coating"
+              ],
+              [
+                "f2f_papered",
+                "papered"
+              ],
+              [
+                "f2f_timber_clad",
+                "timber-clad"
+              ],
+              [
+                "f2f_tiled",
+                "tiled"
+              ],
+              [
+                "f2f_wallpapered",
+                "wallpapered"
+              ],
+              [
+                "f2f_decorative_panelled",
+                "decorative panelled"
+              ]
+            ],
+            "pdf_options": [
+              "painted",
+              "textured coating",
+              "papered",
+              "timber-clad",
+              "tiled",
+              "wallpapered",
+              "decorative panelled"
+            ],
+            "label": "Finishes comprise",
+            "other": [
+              "cb_other_388",
+              "et_other_340"
+            ]
+          }
+        ],
+        "pdf": [
+          "Description: The ceilings are formed in plaster, plasterboard, lath and plaster, other ceilings.",
+          "The ceiling finishes comprise painted, textured coating, papered, timber-clad, tiled, wallpapered, decorative panelled, other finishes."
+        ]
+      },
+      {
+        "id": "f2_cond",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_CONDITION}",
+        "text": "Condition: Where visible, the ceilings appear in {CEILING_CONDITION} condition, consistent with their age and construction. No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the ceiling material should be expected.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{CEILING_CONDITION}",
+            "dropdown": "actv_condition",
+            "field_label": "Condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true
+          }
+        ],
+        "pdf": [
+          "Condition: Where visible, the ceilings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction."
+        ]
+      },
+      {
+        "id": "f2_lath",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_LATH_PLASTER}",
+        "text": "The ceilings are fully or partially made of older plaster supported on thin wooden strips (called ‘lath and plaster’), typical of properties built before the 1940s. While no significant defects were noted at the time of inspection, these ceilings can deteriorate with age as the plaster loses its bond with the timber laths. They are susceptible to vibration and disturbance, and localised repairs are likely to be required over time, particularly during redecoration or alteration works. Repairs can be difficult and may dislodge adjacent plaster, making complete ceiling replacement more economical in some cases.",
+        "tokens": [],
+        "when": [
+          "f2m_lath_and_plaster",
+          "true"
+        ]
+      },
+      {
+        "id": "f2_textured",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_TEXTURED_COATING}",
+        "text": "Parts of the ceilings within the property may contain asbestos-containing materials. In their current condition, these are not normally considered a significant risk if left undisturbed. However, they should not be drilled, sanded, cut, or otherwise disturbed without appropriate precautions. If future refurbishment or replacement is planned, the material should be assessed beforehand and, if asbestos is confirmed, removed by a licensed contractor. This can add significantly to the cost of future works.",
+        "tokens": [],
+        "when": [
+          "f2f_textured_coating",
+          "true"
+        ]
+      },
+      {
+        "id": "f2_general",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: Ceilings should be inspected periodically for signs of cracking, distortion, or water penetration. Prompt repair of roof leaks, plumbing defects and condensation problems will reduce the likelihood of damage to internal ceiling finishes. Routine redecoration should be expected throughout the normal life of the property.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_ceilings_cracks",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f2_crack_minor",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_MINOR_CRACKING}",
+        "text": "Minor cracking: Minor shrinkage or settlement cracking was observed in the ceiling finishes. Such cracking is common in properties of this age and type and is not considered structurally significant. The cracks may be adequately filled with appropriate material and redecorated during routine maintenance.",
+        "tokens": [],
+        "when": [
+          "actv_cracking",
+          "Minor cracking"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_cracking",
+            "label": "Cracking",
+            "type": "dropdown",
+            "options": [
+              "Minor cracking",
+              "Significant cracking"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f2_crack_major",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_SIGNIFICANT_CRACKING}",
+        "text": "Significant cracking: Significant cracking was observed in parts of the ceilings. Further investigation is recommended where cracking appears progressive or is associated with distortion.",
+        "tokens": [],
+        "when": [
+          "actv_cracking",
+          "Significant cracking"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_ceilings_unevenness",
+    "new_screen": {
+      "id": "activity_inside_property_ceilings_unevenness",
+      "title": "Unevenness",
+      "parent": "group_ceilings_61",
+      "order": 12,
+      "after": "activity_inside_property_ceilings_cracks"
+    },
+    "rules": [
+      {
+        "id": "f2_un_minor",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_MINOR_UNEVENNESS}",
+        "text": "Minor unevenness: Minor {CEILING_UNEVENNESS} were noted on the ceiling surfaces. These are not uncommon in properties of this age and do not necessarily indicate structural movement.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CEILING_UNEVENNESS}",
+            "options": [
+              [
+                "f2u_bowing",
+                "bowing"
+              ],
+              [
+                "f2u_undulations",
+                "undulations"
+              ],
+              [
+                "f2u_unevenness",
+                "unevenness"
+              ]
+            ],
+            "pdf_options": [
+              "bowing",
+              "undulations",
+              "unevenness"
+            ],
+            "label": "Noted",
+            "other": [
+              "f2u_other",
+              "f2u_other_text"
+            ],
+            "cond": "actv_unevenness=Minor unevenness|Significant unevenness"
+          }
+        ],
+        "pdf": [
+          "Minor unevenness: Minor bowing, undulations, unevenness, other were noted on the ceiling surfaces."
+        ],
+        "when": [
+          "actv_unevenness",
+          "Minor unevenness"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_unevenness",
+            "label": "Unevenness",
+            "type": "dropdown",
+            "options": [
+              "Minor unevenness",
+              "Significant unevenness"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f2_un_major",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_SIGNIFICANT_UNEVENNESS}",
+        "text": "Significant unevenness: Significant {CEILING_UNEVENNESS} were noted on the ceiling surfaces. Further investigation should be undertaken where structural movement is suspected.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{CEILING_UNEVENNESS}",
+            "options": [
+              [
+                "f2u_bowing",
+                "bowing"
+              ],
+              [
+                "f2u_undulations",
+                "undulations"
+              ],
+              [
+                "f2u_unevenness",
+                "unevenness"
+              ]
+            ],
+            "pdf_options": [
+              "bowing",
+              "undulations",
+              "unevenness"
+            ],
+            "label": "Noted",
+            "other": [
+              "f2u_other",
+              "f2u_other_text"
+            ],
+            "cond": "actv_unevenness=Minor unevenness|Significant unevenness"
+          }
+        ],
+        "pdf": [
+          "Significant unevenness: Significant bowing, undulations, unevenness, other were noted on the ceiling surfaces."
+        ],
+        "when": [
+          "actv_unevenness",
+          "Significant unevenness"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_ceilings_water_staining",
+    "new_screen": {
+      "id": "activity_inside_property_ceilings_water_staining",
+      "title": "Water staining",
+      "parent": "group_ceilings_61",
+      "order": 14,
+      "after": "activity_inside_property_ceilings_unevenness"
+    },
+    "rules": [
+      {
+        "id": "f2_ws_wet",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_WET_STAINING}",
+        "text": "Wet water staining: Localised water staining was noted to the ceiling in the {STAINING_LOCATIONS}. The moisture is suspected to originate from the {STAINING_SOURCES}. The source of the leak should be identified and repaired before the affected ceilings are redecorated.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{STAINING_LOCATIONS}",
+            "options": [
+              [
+                "f2wl_lounge",
+                "lounge"
+              ],
+              [
+                "f2wl_dining_room",
+                "dining room"
+              ],
+              [
+                "f2wl_bedroom",
+                "bedroom"
+              ],
+              [
+                "f2wl_kitchen",
+                "kitchen"
+              ],
+              [
+                "f2wl_bathroom",
+                "bathroom"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "dining room",
+              "bedroom",
+              "kitchen",
+              "bathroom"
+            ],
+            "label": "Ceiling in",
+            "other": [
+              "f2wl_other",
+              "f2wl_other_text"
+            ],
+            "cond": "actv_staining=Wet water staining|Dry water staining"
+          },
+          {
+            "kind": "checks",
+            "token": "{STAINING_SOURCES}",
+            "options": [
+              [
+                "f2ws_loft_space",
+                "loft space"
+              ],
+              [
+                "f2ws_roof",
+                "roof"
+              ],
+              [
+                "f2ws_bathroom",
+                "bathroom"
+              ],
+              [
+                "f2ws_floor_above",
+                "floor above"
+              ],
+              [
+                "f2ws_another_concealed_source",
+                "another concealed source"
+              ]
+            ],
+            "pdf_options": [
+              "loft space",
+              "roof",
+              "bathroom",
+              "floor above",
+              "another concealed source"
+            ],
+            "label": "Moisture suspected to originate from",
+            "cond": "actv_staining=Wet water staining"
+          }
+        ],
+        "pdf": [
+          "Wet water staining: Localised water staining was noted to the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other.",
+          "The moisture is suspected to originate from the loft space, roof, bathroom, floor above, another concealed source."
+        ],
+        "when": [
+          "actv_staining",
+          "Wet water staining"
+        ],
+        "extra_fields": [
+          {
+            "id": "actv_staining",
+            "label": "Water staining",
+            "type": "dropdown",
+            "options": [
+              "Wet water staining",
+              "Dry water staining"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "f2_ws_dry",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_DRY_STAINING}",
+        "text": "Dry water staining: Localised water staining was noted on the ceiling in the {STAINING_LOCATIONS}. Damage consistent with previous water penetration was observed. Although the affected area appears dry at the time of inspection, repairs and redecoration should be undertaken as required.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{STAINING_LOCATIONS}",
+            "options": [
+              [
+                "f2wl_lounge",
+                "lounge"
+              ],
+              [
+                "f2wl_dining_room",
+                "dining room"
+              ],
+              [
+                "f2wl_bedroom",
+                "bedroom"
+              ],
+              [
+                "f2wl_kitchen",
+                "kitchen"
+              ],
+              [
+                "f2wl_bathroom",
+                "bathroom"
+              ]
+            ],
+            "pdf_options": [
+              "lounge",
+              "dining room",
+              "bedroom",
+              "kitchen",
+              "bathroom"
+            ],
+            "label": "Ceiling in",
+            "other": [
+              "f2wl_other",
+              "f2wl_other_text"
+            ],
+            "cond": "actv_staining=Wet water staining|Dry water staining"
+          }
+        ],
+        "pdf": [
+          "Dry water staining: Localised water staining was noted on the ceiling in the lounge, dining room, bedroom, kitchen, bathroom, other."
+        ],
+        "when": [
+          "actv_staining",
+          "Dry water staining"
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_ceilings_polystyrene",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f2_poly",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_POLYSTYRENE}",
+        "text": "Polystyrene Ceiling Tiles: Parts of the ceilings are covered with polystyrene tiles, which present a fire safety risk. Polystyrene is highly flammable and, if ignited, can contribute to the rapid spread of fire while releasing dense, toxic smoke and harmful fumes that can significantly increase the risk to occupants. Although these tiles may have been acceptable when installed, they no longer meet modern fire safety expectations. They should be removed as soon as practicable by a competent contractor. Be aware that removal may damage the underlying ceiling, particularly if the tiles have been firmly bonded, and repairs or complete replacement of the ceiling finish may be required.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Polystyrene ceiling tiles",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_ceilings_heavy_paper_lining",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f2_heavy",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_HEAVY_COVERING}",
+        "text": "Heavy decorative covering: The ceilings are covered with heavy lining paper, decorative finishes, or similar coverings. No significant defects were evident at the time of inspection; however, these finishes can conceal minor cracking or other imperfections. Their removal during future redecoration may damage the underlying plaster, and you should allow for localised repairs or re-plastering.",
+        "tokens": [],
+        "when": [
+          "cb_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_not_inspected",
+            "label": "Heavy decorative covering",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_ceilings_repairs_ornamental_plaster",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "f2_ornamental",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_ORNAMENTAL_PLASTER}",
+        "text": "Ornamental plaster repair: The ceiling incorporates ornamental plaster features, some of which were found to be {ORNAMENTAL_DEFECTS}. These defects present a safety hazard, as sections may become detached and fall. A suitably qualified plastering contractor should inspect the affected areas and carry out appropriate repairs or replacement without delay. Localised repairs may be possible; however, where deterioration is extensive, complete replacement of the affected ornamental plasterwork may be necessary, resulting in more extensive and costly remedial works.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{ORNAMENTAL_DEFECTS}",
+            "options": [
+              [
+                "f2o_loose",
+                "loose"
+              ],
+              [
+                "f2o_cracked",
+                "cracked"
+              ],
+              [
+                "f2o_damaged",
+                "damaged"
+              ],
+              [
+                "f2o_unstable",
+                "unstable"
+              ],
+              [
+                "f2o_partially_missing",
+                "partially missing"
+              ]
+            ],
+            "pdf_options": [
+              "loose",
+              "cracked",
+              "damaged",
+              "unstable",
+              "partially missing"
+            ],
+            "label": "Ornamental plaster is",
+            "other": [
+              "f2o_other",
+              "f2o_other_text"
+            ]
+          }
+        ],
+        "pdf": [
+          "Ornamental plaster repair: The ceiling incorporates ornamental plaster features, some of which were found to be loose, cracked, damaged, unstable, partially missing, other."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_ceilings_main_screen",
+    "rules": [
+      {
+        "id": "f2_intro",
+        "masters": [
+          "{F_CEILINGS}"
+        ],
+        "sub": "{F2_INTRO}",
+        "text": "The ceilings have been inspected from within the rooms only. No opening up or destructive investigation has been undertaken.",
+        "tokens": [],
+        "when": [
+          "android_material_design_spinner4",
+          "1"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner4",
+            "2"
+          ],
+          [
+            "android_material_design_spinner4",
+            "3"
+          ]
+        ],
+        "first": true
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_inside_property_ceilings_repairs_ceilings",
+      "activity_inside_property_ceilings_contains_asbestos",
+      "activity_inside_property_ceilings_not_inspected"
+    ]
+  }
+]

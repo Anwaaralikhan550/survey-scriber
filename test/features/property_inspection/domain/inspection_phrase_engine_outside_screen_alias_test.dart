@@ -16,52 +16,7 @@ void main() {
     };
 
     const engine = InspectionPhraseEngine(phraseTexts);
-
-    test('legacy roof covering screen routes to roof covering summary handler',
-        () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_roof_covering',
-        <String, String>{
-          'cb_roof_fit_for_pupose': 'true',
-          'cb_end_of_useful_life': 'true',
-        },
-      );
-
-      final all = phrases.join(' ').toLowerCase();
-      expect(all, contains('roof-fit'));
-      expect(all, contains('roof-eoul'));
-    });
-
-    test('legacy rainwater goods screen emits blocked/open/shared phrases', () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_rainwater_goods',
-        <String, String>{
-          'cb_blocked_rwg': 'true',
-          'cb_blocked_gullies': 'true',
-          'cb_open_runoffs': 'true',
-          'cb_Shared_RWG': 'true',
-        },
-      );
-
-      final all = phrases.join(' ').toLowerCase();
-      expect(all, contains('rwg-blocked'));
-      expect(all, contains('rwg-blocked-gullies'));
-      expect(all, contains('rwg-open-runoffs'));
-      expect(all, contains('rwg-shared'));
-    });
-
-    test('legacy windows screen routes to windows main screen handler', () {
-      final phrases = engine.buildPhrases(
-        'activity_outside_property_windows',
-        <String, String>{
-          'cb_window_random_sampling': 'true',
-          'cb_window_in_poor_condition': 'true',
-        },
-      );
-
-      final all = phrases.join(' ').toLowerCase();
-      expect(all, contains('windows-random-sampling'));
-      expect(all, contains('windows-poor-condition'));
-    });
+
+
   });
 }

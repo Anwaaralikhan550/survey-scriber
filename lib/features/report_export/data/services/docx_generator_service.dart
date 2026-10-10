@@ -420,10 +420,25 @@ class DocxGeneratorService {
     buf.write('</w:t></w:r></w:p>');
   }
 
+  static const String _boldLegalReference = 'Control of Asbestos Regulations 2012';
+
   void _writeParagraph(StringBuffer buf, String text) {
-    buf.write('<w:p><w:r><w:t xml:space="preserve">');
-    buf.write(_escapeXml(text));
-    buf.write('</w:t></w:r></w:p>');
+    buf.write('<w:p>');
+    // The legal reference is bold in the client PDF.
+    final parts = text.split(_boldLegalReference);
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].isNotEmpty) {
+        buf.write('<w:r><w:t xml:space="preserve">');
+        buf.write(_escapeXml(parts[i]));
+        buf.write('</w:t></w:r>');
+      }
+      if (i < parts.length - 1) {
+        buf.write('<w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">');
+        buf.write(_escapeXml(_boldLegalReference));
+        buf.write('</w:t></w:r>');
+      }
+    }
+    buf.write('</w:p>');
   }
 
   void _writeStyledParagraph(

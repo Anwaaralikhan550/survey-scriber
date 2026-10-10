@@ -1,0 +1,179 @@
+[
+  {
+    "screen": "activity_outside_property_chimney_main_screen",
+    "rules": [
+      {
+        "id": "flat_e1",
+        "masters": [
+          "{E_CHIMNEY_SINGLE_STACK}",
+          "{E_CHIMNEY_MULTI_STACK}"
+        ],
+        "sub": "{FLAT_MANAGEMENT}",
+        "text": "You should ask the management company whether any repairs to the chimney stack(s) have been carried out previously or are currently proposed. Your legal adviser should confirm responsibility for repairs to the chimney stack(s) with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise. This may help reduce the risk of unexpected repair costs or increases in the service charge.",
+        "tokens": [],
+        "when": [
+          "cb_property_is_flat",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_property_is_flat",
+            "label": "Property is a flat",
+            "type": "checkbox"
+          }
+        ],
+        "dart_master": "@chimney"
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_roof_covering_main",
+    "rules": [
+      {
+        "id": "flat_e2",
+        "masters": [
+          "{E_ROOF_COVERING}"
+        ],
+        "sub": "{FLAT_MANAGEMENT}",
+        "text": "You should ask the management company whether any repairs to the roof covering have been carried out previously or are currently proposed. Your legal adviser should confirm responsibility for repairs to the roof covering with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise. This may help reduce the risk of unexpected repair costs or increases in the service charge.",
+        "tokens": [],
+        "when": [
+          "cb_property_is_flat",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_property_is_flat",
+            "label": "Property is a flat",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_rainwater_goods_main_screen",
+    "rules": [
+      {
+        "id": "flat_e3",
+        "masters": [
+          "{E_RAINWATER_GOODS_ABOUT}"
+        ],
+        "sub": "{FLAT_MANAGEMENT}",
+        "text": "You should ask the management company whether any repairs to the rainwater goods have been carried out previously or are currently proposed. Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise. This may help reduce the risk of unexpected repair costs or increases in the service charge.",
+        "tokens": [],
+        "when": [
+          "cb_property_is_flat",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_property_is_flat",
+            "label": "Property is a flat",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_main_walls_main_screen",
+    "rules": [
+      {
+        "id": "flat_e4",
+        "masters": [
+          "{E_MAIN_WALLS}"
+        ],
+        "sub": "{FLAT_MANAGEMENT}",
+        "text": "You should ask the management company whether any repairs to the external walls have been carried out previously or are currently proposed. Your legal adviser should confirm responsibility for repairs to the external walls with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise. This may help reduce the risk of unexpected repair costs or increases in the service charge.",
+        "tokens": [],
+        "when": [
+          "cb_property_is_flat",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_property_is_flat",
+            "label": "Property is a flat",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_other_joinery_and_finishes_main_screen",
+    "rules": [
+      {
+        "id": "flat_e8",
+        "masters": [
+          "{E_OTHER_JOINERY_AND_FINISHES}"
+        ],
+        "sub": "{FLAT_MANAGEMENT}",
+        "text": "As this is a leasehold property, your legal adviser should confirm, before the exchange of contracts, the provisions within the lease relating to the maintenance and external redecoration of the building, including when such works are due to be carried out and who is responsible for the cost. You should also ask the management company whether any repairs or external redecoration works have been undertaken previously, whether any are currently planned, and whether any associated costs are likely to be payable by leaseholders.",
+        "tokens": [],
+        "when": [
+          "cb_property_is_flat",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_property_is_flat",
+            "label": "Property is a flat",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_outside_property_other_main_screen",
+    "rules": [
+      {
+        "id": "flat_e9",
+        "masters": [
+          "{E_OTHER_AREA}"
+        ],
+        "sub": "{FLAT_MANAGEMENT}",
+        "text": "It is assumed that the common parts are maintained under appropriate maintenance contracts and are the responsibility of the management company. Your legal adviser should obtain full details and refer to Section I3 – Issues for Your Legal Adviser. Your legal adviser should also confirm that the person responsible for managing the building has complied with all applicable statutory requirements relating to asbestos. Where communal facilities are provided, your legal adviser should confirm: the identity of the management company, responsibility for maintenance and repairs, current service charges and reserve fund contributions, any planned major works, and any outstanding maintenance liabilities.",
+        "tokens": [],
+        "when": [
+          "cb_property_is_flat",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_property_is_flat",
+            "label": "Property is a flat",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_inside_property_roof_structure_main_screen",
+    "rules": [
+      {
+        "id": "flat_f1",
+        "masters": [
+          "{F_ABOUT_ROOF_STRUCTURE}"
+        ],
+        "sub": "{FLAT_MANAGEMENT}",
+        "text": "You should ask the management company whether any repairs to the roof structure have been carried out previously or are currently proposed. Your legal adviser should confirm responsibility for repairs to the rainwater goods with the management company and ensure that an adequate sinking or reserve fund is in place to meet the cost of future repairs or replacement, should the need arise. This may help reduce the risk of unexpected repair costs or increases in the service charge.",
+        "tokens": [],
+        "when": [
+          "cb_property_is_flat",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_property_is_flat",
+            "label": "Property is a flat",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  }
+]

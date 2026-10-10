@@ -1,0 +1,387 @@
+[
+  {
+    "screen": "activity_service_about_electricity",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g1_meter",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_METER}",
+        "text": "Metre: There is a mains electricity supply connected to the property, and the meter unit is located {ELE_METER_LOCATION}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{ELE_METER_LOCATION}",
+            "options": [
+              [
+                "g1m_under_the_stairs",
+                "under the stairs"
+              ],
+              [
+                "g1m_in_an_outside_box",
+                "in an outside box"
+              ],
+              [
+                "g1m_in_the_entrance_hall",
+                "in the entrance hall"
+              ],
+              [
+                "g1m_in_the_kitchen",
+                "in the kitchen"
+              ],
+              [
+                "g1m_in_the_garage",
+                "in the garage"
+              ],
+              [
+                "g1m_in_a_communal_cupboard",
+                "in a communal cupboard"
+              ]
+            ],
+            "pdf_options": [
+              "under the stairs",
+              "in an outside box",
+              "in the entrance hall",
+              "in the kitchen",
+              "in the garage",
+              "in a communal cupboard"
+            ],
+            "label": "Meter located",
+            "other": [
+              "cb_other_387",
+              "et_other_564"
+            ]
+          }
+        ],
+        "pdf": [
+          "Metre: There is a mains electricity supply connected to the property, and the meter unit is located under the stairs, in an outside box, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other."
+        ]
+      },
+      {
+        "id": "g1_meter_nf",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_METER_NOT_FOUND}",
+        "text": "Metre not found: I did not find the electric meter. Please ask the vendor about the location of the mains electricity meter, as you must know where it is located.",
+        "tokens": [],
+        "when": [
+          "cb_electricity_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_electricity_not_inspected",
+            "label": "Meter not found",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g1_cu",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_CONSUMER_UNIT}",
+        "text": "Consumer unit: There is a consumer unit(s) installed {ELE_CU_LOCATION}.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{ELE_CU_LOCATION}",
+            "options": [
+              [
+                "g1c_under_the_stairs",
+                "under the stairs"
+              ],
+              [
+                "g1c_in_the_entrance_hall",
+                "in the entrance hall"
+              ],
+              [
+                "g1c_in_the_kitchen",
+                "in the kitchen"
+              ],
+              [
+                "g1c_in_the_garage",
+                "in the garage"
+              ],
+              [
+                "g1c_in_a_communal_cupboard",
+                "in a communal cupboard"
+              ]
+            ],
+            "pdf_options": [
+              "under the stairs",
+              "in the entrance hall",
+              "in the kitchen",
+              "in the garage",
+              "in a communal cupboard"
+            ],
+            "label": "Consumer unit installed",
+            "other": [
+              "cb_other_717",
+              "et_other_618"
+            ]
+          }
+        ],
+        "pdf": [
+          "Consumer unit: There is a consumer unit(s) installed under the stairs, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other."
+        ]
+      },
+      {
+        "id": "g1_cu_nf",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_CONSUMER_UNIT_NOT_FOUND}",
+        "text": "Not found: I did not find the consumer unit(s). Please ask the vendor about the location of the fuse box, as you must know where it is located.",
+        "tokens": [],
+        "when": [
+          "cb_fuse_not_inspected",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_fuse_not_inspected",
+            "label": "Consumer unit not found",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g1_rcd",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_RCD_PROTECTION}",
+        "text": "RCD Protection: The consumer unit incorporates {ELE_RCD}. The operation of protective devices has not been assessed.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{ELE_RCD}",
+            "options": [
+              [
+                "g1r_rcd_protection",
+                "RCD protection"
+              ],
+              [
+                "g1r_rcbo_protection",
+                "RCBO protection"
+              ],
+              [
+                "g1r_surge_protection",
+                "surge protection"
+              ],
+              [
+                "g1r_no_visible_rcd_protection",
+                "no visible RCD protection"
+              ]
+            ],
+            "pdf_options": [
+              "RCD protection",
+              "RCBO protection",
+              "surge protection",
+              "no visible RCD protection"
+            ],
+            "label": "The consumer unit incorporates"
+          }
+        ],
+        "pdf": [
+          "RCD Protection: The consumer unit incorporates RCD protection, RCBO protection, surge protection; no visible RCD protection."
+        ]
+      },
+      {
+        "id": "g1_dated",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_DATED_OR_OLD}",
+        "text": "Dated or Old: The installation appears to comprise dated or older electrical components and would require upgrading to current standards.",
+        "tokens": [],
+        "when": [
+          "cb_dated_electrical_system",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_dated_electrical_system",
+            "label": "Dated or old installation",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g1_general",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_GENERAL_MAINTENANCE}",
+        "text": "General Maintenance: Where the installation appears dated, altered, or poorly maintained, an Electrical Installation Condition Report (EICR) should be obtained before legal commitment.",
+        "tokens": [],
+        "when": [
+          "cb_general_maintenance",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_general_maintenance",
+            "label": "General maintenance",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_services_electricity_repair_electrical_hazard",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g1_poor",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_POOR_STANDARDS}",
+        "text": "Poor Standards: The electrical system is below current standards because there are {ELE_POOR_STANDARDS} issues, and this is a safety hazard. You should ask an appropriately qualified person to inspect the electrical system and carry out required repairs or replacement(s). Although I do not know the extent of the repair and improvement works required, you should plan for partial or complete replacement.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{ELE_POOR_STANDARDS}",
+            "options": [
+              [
+                "g1p_exposed_wires",
+                "exposed wires"
+              ],
+              [
+                "g1p_damaged_fittings",
+                "damaged fittings"
+              ],
+              [
+                "g1p_cracked_fixtures",
+                "cracked fixtures"
+              ],
+              [
+                "g1p_diy_work",
+                "DIY work"
+              ]
+            ],
+            "pdf_options": [
+              "exposed wires",
+              "damaged fittings",
+              "cracked fixtures",
+              "DIY work"
+            ],
+            "label": "Electrical system is below current standards because",
+            "other": [
+              "cb_other_685",
+              "et_other_733"
+            ]
+          }
+        ],
+        "pdf": [
+          "Poor Standards: The electrical system is below current standards because there are exposed wires, damaged fittings, cracked fixtures, DIY work, other issues, and this is a safety hazard."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_services_solar_power",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g1_pv",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_SOLAR_PV}",
+        "text": "Solar photovoltaic (PV) system: The property is fitted with photovoltaic (PV) panels installed on the roof slope(s). These generate electricity for use within the property, with any surplus potentially exported to the National Grid. No significant defects were apparent from the limited visual inspection. Routine maintenance should be carried out in accordance with the manufacturer's recommendations.",
+        "tokens": [],
+        "when": [
+          "cb_solar_pv",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_solar_pv",
+            "label": "Solar photovoltaic (PV) system",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "id": "g1_battery",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_SOLAR_BATTERY}",
+        "text": "Battery storage/Inverter: A solar battery and/or inverter is in the {ELE_BATTERY_LOCATION}. These components were not assessed, and no comment can be made on their operation, performance, or remaining service life.",
+        "tokens": [
+          {
+            "kind": "checks",
+            "token": "{ELE_BATTERY_LOCATION}",
+            "options": [
+              [
+                "g1b_loft",
+                "loft"
+              ],
+              [
+                "g1b_under_the_stairs",
+                "under the stairs"
+              ]
+            ],
+            "pdf_options": [
+              "loft",
+              "under the stairs"
+            ],
+            "label": "Battery/inverter in",
+            "other": [
+              "cb_other_870",
+              "et_other_723"
+            ]
+          }
+        ],
+        "pdf": [
+          "Battery storage/Inverter: A solar battery and/or inverter is in the loft, under the stairs, other."
+        ]
+      }
+    ]
+  },
+  {
+    "screen": "activity_services_water_heating_solar_power",
+    "replace_all": true,
+    "keep": [],
+    "rules": [
+      {
+        "id": "g1_thermal",
+        "masters": [
+          "{G_ELECTRICITY}"
+        ],
+        "sub": "{G1_SOLAR_THERMAL}",
+        "text": "Solar thermal (hot water): The property is fitted with solar thermal panels installed on the roof slope(s). These use solar energy to heat water for the domestic hot water system. No significant defects were apparent from the limited visual inspection. Routine maintenance should be carried out in accordance with the manufacturer's recommendations. The installation appears to have been professionally completed; however, this cannot be confirmed during a visual inspection. Your legal adviser should verify that appropriate planning permission (where required), Building Regulations approval, commissioning certificates and any applicable MCS certification are available (see Section I1 – Regulations). They should also confirm whether transferable warranties or guarantees exist for the installation (see Section I2 – Guarantees). If the necessary approvals or certification are unavailable, further investigation should be undertaken before legal purchase commitment.",
+        "tokens": [],
+        "when": [
+          "cb_solar_power",
+          "true"
+        ],
+        "extra_fields": [
+          {
+            "id": "cb_solar_power",
+            "label": "Solar thermal (hot water)",
+            "type": "checkbox"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "remove_screens": [
+      "activity_services_electricity_repair_loose_panels",
+      "activity_services_electricity_not_inspected"
+    ]
+  }
+]

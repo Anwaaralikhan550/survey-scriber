@@ -319,7 +319,9 @@ String _maskAbbreviations(String text) {
   return text
       .replaceAll(RegExp(r'\be\.g\.', caseSensitive: false), 'eg')
       .replaceAll(RegExp(r'\bi\.e\.', caseSensitive: false), 'ie')
-      .replaceAll(RegExp(r'\betc\.', caseSensitive: false), 'etc');
+      .replaceAll(RegExp(r'\betc\.', caseSensitive: false), 'etc')
+      // PDF typo copied verbatim (CLIENT_QUERIES #87): "However. if the damage is significant".
+      .replaceAll('However. if the damage', 'However, if the damage');
 }
 
 List<String> grammarIssues(String phrase) {
@@ -357,7 +359,9 @@ List<Map<String, String>> buildPermutations(
       case InspectionFieldType.checkbox:
         permutations.add({field.id: 'true'});
       case InspectionFieldType.text:
-        permutations.add({field.id: sampleText});
+        permutations.add({
+          field.id: field.id == 'et_thickness' ? sampleNumber : sampleText,
+        });
       case InspectionFieldType.number:
         permutations.add({field.id: sampleNumber});
       case InspectionFieldType.label:
@@ -375,7 +379,8 @@ List<Map<String, String>> buildPermutations(
       case InspectionFieldType.checkbox:
         maximal[field.id] = 'true';
       case InspectionFieldType.text:
-        maximal[field.id] = sampleText;
+        maximal[field.id] =
+            field.id == 'et_thickness' ? sampleNumber : sampleText;
       case InspectionFieldType.number:
         maximal[field.id] = sampleNumber;
       case InspectionFieldType.label:
