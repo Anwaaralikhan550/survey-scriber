@@ -163,9 +163,19 @@ class _FilterBar extends StatelessWidget {
           // "Live Bookings" is a long label; shorten to "Live" in the chip.
           final label =
               option == JobFilter.live ? 'Live' : option.title;
+          final isSelected = option == selected;
+          final scheme = Theme.of(context).colorScheme;
           return ChoiceChip(
-            label: Text(label),
-            selected: option == selected,
+            // The app chip theme's label colour is near-white, which made the text invisible on the
+            // light chip background: set an explicit readable colour.
+            label: Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? scheme.onPrimaryContainer : scheme.onSurface,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+              ),
+            ),
+            selected: isSelected,
             onSelected: (_) => onChanged(option),
           );
         },

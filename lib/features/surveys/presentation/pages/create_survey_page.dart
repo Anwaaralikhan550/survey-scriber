@@ -8,7 +8,10 @@ import '../../../../shared/domain/entities/survey.dart';
 import '../providers/create_survey_provider.dart';
 
 class CreateSurveyPage extends ConsumerStatefulWidget {
-  const CreateSurveyPage({super.key});
+  const CreateSurveyPage({super.key, this.initialType = SurveyType.inspection});
+
+  /// Segment selected on the Home screen when the big plus was pressed.
+  final SurveyType initialType;
 
   @override
   ConsumerState<CreateSurveyPage> createState() => _CreateSurveyPageState();
@@ -25,7 +28,7 @@ class _CreateSurveyPageState extends ConsumerState<CreateSurveyPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       if (ref.read(createSurveyProvider).step == CreateSurveyStep.selectType) {
-        ref.read(createSurveyProvider.notifier).selectType(SurveyType.inspection);
+        ref.read(createSurveyProvider.notifier).selectType(widget.initialType);
       }
     });
   }
@@ -68,9 +71,11 @@ class _CreateSurveyPageState extends ConsumerState<CreateSurveyPage> {
       ),
       body: SafeArea(
         child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 150),
           child: switch (state.step) {
-            CreateSurveyStep.selectType => const _TypeSelectionView(key: ValueKey('type')),
+            // The type-selection step is retired: the type is applied on the first frame, so show an
+            // empty body (not the old type cards) until then - otherwise the cancelled screen flashes.
+            CreateSurveyStep.selectType => const SizedBox.shrink(key: ValueKey('init')),
             CreateSurveyStep.basicInfo => const _BasicInfoView(key: ValueKey('info')),
             CreateSurveyStep.creating => const _CreatingView(key: ValueKey('creating')),
             _ => const SizedBox.shrink(),

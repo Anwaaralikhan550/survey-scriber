@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_scriber/app/theme/app_theme.dart';
 import 'package:survey_scriber/features/dashboard/presentation/pages/jobs_list_page.dart';
 import 'package:survey_scriber/features/dashboard/presentation/providers/dashboard_provider.dart';
 import 'package:survey_scriber/shared/domain/entities/survey.dart';
@@ -68,5 +69,30 @@ void main() {
         findsOneWidget,
       );
     });
+  });
+
+  chipTextColourTest();
+}
+
+void chipTextColourTest() {
+  testWidgets('filter chip labels use a readable (non-white) colour', (tester) async {
+    await tester.pumpWidget(ProviderScope(
+      overrides: [jobsListProvider.overrideWith((ref, key) async => <Survey>[])],
+      child: MaterialApp(
+        theme: AppTheme.lightTheme(),
+        home: const JobsListPage(
+          segment: HomeSegment.homeSurveys,
+          initialFilter: JobFilter.all,
+          showFilterBar: true,
+        ),
+      ),
+    ));
+    await tester.pumpAndSettle();
+    for (final name in ['All', 'Live', 'In Progress']) {
+      final text = tester.widget<Text>(find.descendant(of: find.widgetWithText(ChoiceChip, name), matching: find.text(name)));
+      final c = text.style?.color;
+      expect(c, isNotNull, reason: name);
+      expect(c!.computeLuminance(), lessThan(0.5), reason: '$name label must be dark enough to read');
+    }
   });
 }
