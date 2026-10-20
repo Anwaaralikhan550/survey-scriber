@@ -38,6 +38,10 @@ import {
   UploadV2TreeDto,
   V2TreeUploadResponseDto,
   V2TreeLatestResponseDto,
+  UploadPhraseBankDto,
+  PhraseBankUploadResponseDto,
+  PhraseBankLatestResponseDto,
+  PHRASE_BANK_TYPES,
 } from './dto';
 
 @Injectable()
@@ -1394,6 +1398,163 @@ export class ConfigService {
       tree: latest.treeData as Record<string, unknown>,
       publishedAt: latest.publishedAt,
       checksum: latest.checksum ?? '',
+    };
+  }
+
+  // ----------------------------------------
+  // Phrase bank publishing (live phrase edits)
+  // ----------------------------------------
+
+  /** Number of editable phrases in a bank (flat map, or valuation `templates`). */
+  private phraseBankEntryCount(bankType: string, bank: Record<string, unknown>): number {
+    return bankType === 'valuation_phrases'
+      ? Object.keys((bank['templates'] as Record<string, unknown>) ?? {}).length
+      : Object.keys(bank).length;
+  }
+
+  /**
+   * Shape check so a broken file can never reach the phones:
+   * inspection_phrases = {key: string}; valuation_phrases = {meta, templates: {id: {text: string}}}.
+   */
+  private validatePhraseBank(bankType: string, bank: Record<string, unknown>): void {
+    if (bankType === 'valuation_phrases') {
+      const templates = bank['templates'];
+      if (typeof templates !== 'object' || templates === null || Array.isArray(templates)) {
+        throw new BadRequestException('valuation_phrases must contain a "templates" object');
+      }
+      for (const [id, t] of Object.entries(templates as Record<string, unknown>)) {
+        const text = (t as Record<string, unknown> | null)?.['text'];
+        if (typeof text !== 'string' || text.trim() === '') {
+          throw new BadRequestException(`Template "${id}" must have a non-empty "text" string`);
+        }
+      }
+    } else {
+      for (const [key, value] of Object.entries(bank)) {
+        if (typeof value !== 'string') {
+          throw new BadRequestException(`Phrase "${key}" must be a string`);
+        }
+      }
+    }
+    if (this.phraseBankEntryCount(bankType, bank) === 0) {
+      throw new BadRequestException('Phrase bank is empty');
+    }
+  }
+
+  /**
+   * Publish a whole phrase bank. Every phone picks it up on its next refresh (no app update).
+   * Identical content is not re-published (idempotent), and a bank that lost more than half of the
+   * previous phrases is refused (protects against uploading a wrong or truncated file).
+   */
+  async uploadPhraseBank(
+    dto: UploadPhraseBankDto,
+    userId: string,
+  ): Promise<PhraseBankUploadResponseDto> {
+    this.validatePhraseBank(dto.bankType, dto.bank);
+
+    const json = JSON.stringify(dto.bank);
+    const sizeBytes = Buffer.byteLength(json, 'utf8');
+    if (sizeBytes > 8 * 1024 * 1024) {
+      throw new BadRequestException('Phrase bank is larger than 8 MB');
+    }
+    const checksum = crypto.createHash('sha256').update(json).digest('hex');
+
+    const latest = await this.prisma.v2TreeVersion.findFirst({
+      where: { treeType: dto.bankType },
+      orderBy: { version: 'desc' },
+    });
+
+    if (latest?.checksum === checksum) {
+      return {
+        id: latest.id,
+        bankType: latest.treeType,
+        version: latest.version,
+        sizeBytes: latest.sizeBytes,
+        checksum,
+        publishedAt: latest.publishedAt,
+        unchanged: true,
+      };
+    }
+
+    if (latest) {
+      const before = this.phraseBankEntryCount(
+        dto.bankType,
+        latest.treeData as Record<string, unknown>,
+      );
+      const after = this.phraseBankEntryCount(dto.bankType, dto.bank);
+      if (before > 0 && after < before * 0.5) {
+        throw new BadRequestException(
+          `Refusing to publish: the new bank has ${after} phrases, the current one has ${before}`,
+        );
+      }
+    }
+
+    const nextVersion = (latest?.version ?? 0) + 1;
+    const record = await this.prisma.v2TreeVersion.create({
+      data: {
+        treeType: dto.bankType,
+        version: nextVersion,
+        treeData: dto.bank as any,
+        sizeBytes,
+        checksum,
+        publishedBy: userId,
+      },
+    });
+
+    await this.incrementConfigVersion(userId);
+    this.invalidateConfigCache();
+
+    await this.auditService.log({
+      actorType: ActorType.STAFF,
+      actorId: userId,
+      action: 'config.phrase_bank_published',
+      entityType: AuditEntityType.SURVEY,
+      entityId: record.id,
+      metadata: { bankType: dto.bankType, version: nextVersion, sizeBytes, checksum },
+    });
+
+    this.logger.log(
+      `Phrase bank published: type=${dto.bankType} version=${nextVersion} size=${sizeBytes}B ` +
+        `checksum=${checksum.substring(0, 12)}...`,
+    );
+
+    return {
+      id: record.id,
+      bankType: record.treeType,
+      version: record.version,
+      sizeBytes: record.sizeBytes,
+      checksum: record.checksum ?? checksum,
+      publishedAt: record.publishedAt,
+      unchanged: false,
+    };
+  }
+
+  /**
+   * Latest published phrase bank. When the client sends the checksum it already has and it matches,
+   * the (large) body is omitted.
+   */
+  async getLatestPhraseBank(
+    bankType: string,
+    knownChecksum?: string,
+  ): Promise<PhraseBankLatestResponseDto> {
+    if (!(PHRASE_BANK_TYPES as readonly string[]).includes(bankType)) {
+      throw new BadRequestException('bankType must be "inspection_phrases" or "valuation_phrases"');
+    }
+    const latest = await this.prisma.v2TreeVersion.findFirst({
+      where: { treeType: bankType },
+      orderBy: { version: 'desc' },
+    });
+    if (!latest) {
+      throw new NotFoundException(`No published phrase bank for type "${bankType}"`);
+    }
+    const checksum = latest.checksum ?? '';
+    const unchanged = !!knownChecksum && knownChecksum === checksum;
+    return {
+      bankType: latest.treeType,
+      version: latest.version,
+      checksum,
+      publishedAt: latest.publishedAt,
+      unchanged,
+      ...(unchanged ? {} : { bank: latest.treeData as Record<string, unknown> }),
     };
   }
 

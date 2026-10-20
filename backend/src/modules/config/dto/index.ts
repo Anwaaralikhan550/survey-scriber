@@ -4,3 +4,5 @@ export * from './section-type.dto';
 export * from './config-version.dto';
 export * from './user-admin.dto';
 export * from './v2-tree.dto';
+export * from './phrase-bank.dto';
+export * from './phrase-bank.dto';

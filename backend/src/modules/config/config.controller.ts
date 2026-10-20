@@ -48,6 +48,10 @@ import {
   UploadV2TreeDto,
   V2TreeUploadResponseDto,
   V2TreeLatestResponseDto,
+  UploadPhraseBankDto,
+  PhraseBankUploadResponseDto,
+  PhraseBankLatestResponseDto,
+  PhraseBankQueryDto,
 } from './dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
@@ -78,6 +82,22 @@ export class ConfigPublicController {
   @ApiResponse({ status: 200, type: FullConfigResponseDto })
   async getFullConfig(): Promise<FullConfigResponseDto> {
     return this.configService.getFullConfig();
+  }
+
+  @Public()
+  @Get('phrase-bank/:bankType')
+  @ApiOperation({
+    summary: 'Latest published phrase bank (live phrase edits)',
+    description:
+      'Phones call this on start/resume. Send ?known=<checksum> to skip the download when nothing changed.',
+  })
+  @ApiResponse({ status: 200, type: PhraseBankLatestResponseDto })
+  @ApiResponse({ status: 404, description: 'No published phrase bank yet' })
+  async getLatestPhraseBank(
+    @Param('bankType') bankType: string,
+    @Query() query: PhraseBankQueryDto,
+  ): Promise<PhraseBankLatestResponseDto> {
+    return this.configService.getLatestPhraseBank(bankType, query.known);
   }
 
   @Public()
@@ -424,6 +444,23 @@ export class ConfigAdminController {
     @CurrentUser() user: Omit<User, 'passwordHash'>,
   ): Promise<V2TreeUploadResponseDto> {
     return this.configService.uploadV2Tree(dto, user.id);
+  }
+
+  @Post('phrase-bank/upload')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({
+    summary: 'Publish a phrase bank (admin)',
+    description:
+      'Used by the mobile admin panel and the phrase portal. Phones receive the new wording on their next refresh.',
+  })
+  @ApiResponse({ status: 201, type: PhraseBankUploadResponseDto })
+  @ApiResponse({ status: 400, description: 'Invalid phrase bank' })
+  @ApiResponse({ status: 403, description: 'Forbidden - admin only' })
+  async uploadPhraseBank(
+    @Body() dto: UploadPhraseBankDto,
+    @CurrentUser() user: Omit<User, 'passwordHash'>,
+  ): Promise<PhraseBankUploadResponseDto> {
+    return this.configService.uploadPhraseBank(dto, user.id);
   }
 
   @Get('v2-tree/latest/:treeType')
