@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -9,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../../../core/database/app_database.dart';
 import '../../../../core/database/database_providers.dart';
 import '../../../../core/network/api_client.dart';
+import '../../../../core/phrases/phrase_bank_sync.dart';
 import '../../../../core/sync/legacy_main_walls_sync_mapping.dart';
 import '../../../../core/sync/sync_manager.dart';
 import '../../../../core/sync/sync_state.dart';
@@ -51,25 +53,46 @@ final inspectionNodeMapProvider =
 
 final inspectionPhraseTextsProvider =
     FutureProvider<Map<String, String>>((ref) async {
-  // Check for admin-edited local override first, fall back to bundled asset.
-  String raw;
+  final sync = ref.watch(phraseBankSyncProvider);
+  // Live updates: ask the server for newer wording in the background and
+  // reload this provider when it arrives.
+  unawaited(sync.refresh(PhraseBank.inspection).then((changed) {
+    if (changed) {
+      try {
+        ref.invalidateSelf();
+      } catch (_) {/* provider already disposed */}
+    }
+  }));
+
+  // Priority: pending local admin edit (not yet published) -> last bank from
+  // the server -> bundled asset.
+  Map<String, String>? decode(String? raw) {
+    if (raw == null) return null;
+    try {
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      return decoded.map((key, value) => MapEntry(key, value?.toString() ?? ''));
+    } catch (e) {
+      debugPrint('[inspectionPhraseTextsProvider] Unreadable phrase bank: $e');
+      return null;
+    }
+  }
+
   try {
     final dir = await getApplicationDocumentsDirectory();
     final localFile = File('${dir.path}/admin/inspection_v2_phrase_texts.json');
     if (await localFile.exists()) {
-      raw = await localFile.readAsString();
-    } else {
-      raw = await rootBundle
-          .loadString('assets/property_inspection/phrase_texts.json');
+      final local = decode(await localFile.readAsString());
+      if (local != null) return local;
     }
   } catch (e, stack) {
     debugPrint('[inspectionPhraseTextsProvider] Failed to load local override, '
-        'falling back to bundled asset: $e\n$stack');
-    raw = await rootBundle
-        .loadString('assets/property_inspection/phrase_texts.json');
+        'falling back: $e\n$stack');
   }
-  final decoded = jsonDecode(raw) as Map<String, dynamic>;
-  return decoded.map((key, value) => MapEntry(key, value?.toString() ?? ''));
+  final cached = decode(await sync.readCached(PhraseBank.inspection));
+  if (cached != null) return cached;
+  return decode(await rootBundle
+          .loadString('assets/property_inspection/phrase_texts.json')) ??
+      <String, String>{};
 });
 
 final inspectionPhraseEngineProvider = Provider<InspectionPhraseEngine?>((ref) {

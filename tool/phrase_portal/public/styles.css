@@ -84,3 +84,11 @@ code{font-family:var(--mono);background:var(--accent-soft);color:var(--accent);p
   .layout{grid-template-columns:1fr}
   .list-pane{max-height:38vh}
 }
+
+.live-state{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+.live-state.on{background:#e3f6ea;color:#14663a}
+.live-state.off{background:#fdeceb;color:#9b2c24}
+.login-dlg{border:1px solid #d6dbe3;border-radius:12px;padding:20px;min-width:320px}
+.login-dlg::backdrop{background:rgba(15,23,42,.45)}
+.login-dlg h3{margin:0 0 6px}
+.login-dlg input{display:block;width:100%;box-sizing:border-box;margin:8px 0;padding:9px 10px;border:1px solid #cdd3dc;border-radius:8px;font:inherit}

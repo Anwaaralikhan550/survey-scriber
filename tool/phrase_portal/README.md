@@ -52,3 +52,14 @@ Tests: `node --test tool/phrase_portal/test.js` (no install).
   instance at a time.
 - After editing, run the phrase audit (`flutter test test/phrase_audit`) to
   confirm the bank still produces 0 placeholder-leak / grammar defects.
+
+## Live publishing (edits reach every phone)
+
+Click **Log in to publish** and sign in with a SurveyScriber *admin* account. After that every
+**Save** also publishes the whole bank to the server; phones pick it up on next start/resume
+(no app update). The toast says **LIVE** or **NOT live (reason)** - never silent.
+
+- Server: `SS_API_URL` (default `http://158.69.1.183:3000/api/v1`).
+- Login pulls the latest published bank into the local files first, so you edit the current wording.
+- The password is never stored; tokens live in memory only.
+- Needs the backend with the `phrase-bank` endpoints deployed.

@@ -24,6 +24,8 @@
         </select>
       </label>
       <span id="counts" class="counts"></span>
+      <span id="liveState" class="live-state off" title="Edits are published to all phones when logged in">Offline - not logged in</span>
+      <button id="loginBtn" class="btn ghost" type="button">Log in to publish</button>
     </div>
   </header>
 
@@ -67,6 +69,20 @@
       </div>
     </section>
   </main>
+
+  <dialog id="loginDlg" class="login-dlg">
+    <form method="dialog" id="loginForm">
+      <h3>Admin login</h3>
+      <p class="hint">Saved edits go live on every phone. Use your SurveyScriber admin account. The password is not stored.</p>
+      <input id="loginEmail" type="email" placeholder="Admin email" autocomplete="username" required>
+      <input id="loginPass" type="password" placeholder="Password" autocomplete="current-password" required>
+      <div id="loginErr" class="validation" hidden></div>
+      <div class="editor-actions">
+        <button id="loginCancel" class="btn ghost" type="button">Cancel</button>
+        <button id="loginSubmit" class="btn primary" type="submit">Log in</button>
+      </div>
+    </form>
+  </dialog>
 
   <div id="toast" class="toast" hidden></div>
   <script src="app.js"></script>

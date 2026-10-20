@@ -159,13 +159,78 @@ async function save() {
     const e = originalEntry(key);
     if (e) { e.value = value; e.tokens = tokenSet(value); }
     state.edited.delete(key);
-    toast('Saved to phrase_texts.json', 'ok');
+    reportPublish(data.publish);
     renderList();
     renderEditor();
   } catch (err) {
     toast(String(err.message || err), 'err');
   }
 }
+
+function setLive(on, email) {
+  const el = $('liveState');
+  el.className = 'live-state ' + (on ? 'on' : 'off');
+  el.textContent = on ? 'Live - publishing as ' + email : 'Offline - not logged in';
+  $('loginBtn').textContent = on ? 'Log out' : 'Log in to publish';
+}
+
+function reportPublish(p) {
+  if (p && p.live) {
+    toast(p.unchanged ? 'Saved. Already live (no change).' : 'Saved and LIVE on all phones (version ' + p.version + ')', 'ok');
+    return;
+  }
+  if (p && p.reason === 'login_expired') setLive(false);
+  const why = !p || p.reason === 'not_logged_in' ? 'log in to publish'
+    : p.reason === 'login_expired' ? 'login expired, log in again' : p.reason;
+  toast('Saved to file only - NOT live (' + why + ')', 'err');
+}
+
+async function refreshStatus() {
+  try {
+    const st = await (await fetch('/api/status')).json();
+    setLive(st.loggedIn, st.email);
+  } catch { setLive(false); }
+}
+
+$('loginBtn').addEventListener('click', async () => {
+  if ($('liveState').classList.contains('on')) {
+    await fetch('/api/logout', { method: 'POST' });
+    setLive(false);
+    return;
+  }
+  $('loginErr').hidden = true;
+  $('loginDlg').showModal();
+});
+$('loginCancel').addEventListener('click', () => $('loginDlg').close());
+$('loginForm').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  $('loginSubmit').disabled = true;
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: $('loginEmail').value, password: $('loginPass').value }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      $('loginErr').textContent = data.error || 'Login failed';
+      $('loginErr').hidden = false;
+      return;
+    }
+    $('loginPass').value = '';
+    $('loginDlg').close();
+    setLive(true, data.email);
+    const changed = Object.values(data.pulls || {}).some((p) => p.changed);
+    toast(changed ? 'Logged in. Latest published phrases loaded - reloading.' : 'Logged in. Saves now go live.', 'ok');
+    if (changed) loadBank(state.bank).catch((err) => toast(String(err), 'err'));
+  } catch (err) {
+    $('loginErr').textContent = String(err.message || err);
+    $('loginErr').hidden = false;
+  } finally {
+    $('loginSubmit').disabled = false;
+  }
+});
+refreshStatus();
 
 let toastTimer;
 function toast(msg, kind) {

@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/network/api_client.dart';
+import '../../../core/phrases/phrase_bank_sync.dart';
 import '../../property_inspection/domain/models/inspection_models.dart';
 
 /// Identifies which survey tree to operate on.
@@ -186,23 +188,28 @@ class TreeAdminRepository {
 
   // ─── Phrase Texts Management ────────────────────────────────────
 
-  /// Load phrase texts (from local override or asset).
+  PhraseBankSync get _phraseSync => PhraseBankSync(apiClient: _apiClient);
+
+  /// Load phrase texts: unpublished local edit -> last published bank -> asset.
+  /// Building on the published bank keeps one admin's edit from erasing another's.
   Future<Map<String, String>> loadPhraseTexts() async {
-    String raw;
+    String? raw;
     final local = await _phraseTextsFile();
     if (await local.exists()) {
       raw = await local.readAsString();
-    } else {
-      raw = await rootBundle.loadString(
-        'assets/property_inspection/phrase_texts.json',
-      );
     }
+    raw ??= await _phraseSync.readCached(PhraseBank.inspection);
+    raw ??= await rootBundle.loadString(
+      'assets/property_inspection/phrase_texts.json',
+    );
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     return decoded.map((k, v) => MapEntry(k, v?.toString() ?? ''));
   }
 
-  /// Save phrase texts with backup.
-  Future<void> savePhraseTexts(Map<String, String> texts) async {
+  /// Save phrase texts with backup, then publish to the server so every phone
+  /// gets the new wording. Returns true when published (live), false when the
+  /// edit could only be kept on this phone (offline, not an admin, no API).
+  Future<bool> savePhraseTexts(Map<String, String> texts) async {
     final local = await _phraseTextsFile();
 
     // Backup if exists
@@ -218,20 +225,31 @@ class TreeAdminRepository {
     await local.parent.create(recursive: true);
     final json = const JsonEncoder.withIndent('  ').convert(texts);
     await local.writeAsString(json);
+
+    if (_apiClient == null) return false;
+    try {
+      await _phraseSync.publish(PhraseBank.inspection, texts);
+      // Published: the server copy (now cached) is the source of truth again.
+      await local.delete();
+      return true;
+    } catch (e) {
+      debugPrint('[TreeAdminRepository] phrase publish failed, kept local: $e');
+      return false;
+    }
   }
 
-  /// Update a single phrase template.
-  Future<void> updatePhraseTemplate(String key, String value) async {
+  /// Update a single phrase template. Returns true when it went live.
+  Future<bool> updatePhraseTemplate(String key, String value) async {
     final texts = await loadPhraseTexts();
     texts[key] = value;
-    await savePhraseTexts(texts);
+    return savePhraseTexts(texts);
   }
 
-  /// Delete a phrase template.
-  Future<void> deletePhraseTemplate(String key) async {
+  /// Delete a phrase template. Returns true when it went live.
+  Future<bool> deletePhraseTemplate(String key) async {
     final texts = await loadPhraseTexts();
     texts.remove(key);
-    await savePhraseTexts(texts);
+    return savePhraseTexts(texts);
   }
 
   // ─── Field Operations ──────────────────────────────────────────

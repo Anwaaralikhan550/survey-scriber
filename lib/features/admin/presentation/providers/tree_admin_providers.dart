@@ -455,11 +455,13 @@ class TreeAdminNotifier extends StateNotifier<TreeAdminState> {
   Future<bool> updatePhraseTemplate(String key, String value) async {
     state = state.copyWith(isSaving: true, error: null);
     try {
-      await _repo.updatePhraseTemplate(key, value);
+      final live = await _repo.updatePhraseTemplate(key, value);
       _invalidate();
       state = state.copyWith(
         isSaving: false,
-        lastAction: 'Phrase template updated',
+        lastAction: live
+            ? 'Phrase template updated - live on all phones'
+            : 'Phrase template updated on this phone only (not published: offline or no admin access)',
       );
       return true;
     } catch (e) {
@@ -471,11 +473,13 @@ class TreeAdminNotifier extends StateNotifier<TreeAdminState> {
   Future<bool> deletePhraseTemplate(String key) async {
     state = state.copyWith(isSaving: true, error: null);
     try {
-      await _repo.deletePhraseTemplate(key);
+      final live = await _repo.deletePhraseTemplate(key);
       _invalidate();
       state = state.copyWith(
         isSaving: false,
-        lastAction: 'Phrase template deleted',
+        lastAction: live
+            ? 'Phrase template deleted - live on all phones'
+            : 'Phrase template deleted on this phone only (not published: offline or no admin access)',
       );
       return true;
     } catch (e) {

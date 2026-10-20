@@ -62,3 +62,83 @@ test('valuation file round-trips through the portal writer without changing cont
   const raw = load(rel);
   assert.deepStrictEqual(JSON.parse(asciiStringify(raw)), raw);
 });
+
+// ── live publishing (fake API, no network, no repo files touched) ──
+const { login, logout, publishBank, orderLike, session } = require('./server.js');
+
+const reply = (status, body) => ({ status, json: async () => body });
+const fakeApi = (routes, calls = []) => async (url, init) => {
+  const p = url.replace(/^https?:\/\/[^/]+\/api\/v1/, '');
+  calls.push({ p, auth: init.headers.Authorization, body: init.body && JSON.parse(init.body) });
+  return routes(p, init, calls.length);
+};
+
+test('not logged in: save stays file-only, nothing is sent', async () => {
+  logout();
+  const calls = [];
+  const r = await publishBank('inspection', { a: 'b' }, fakeApi(() => reply(500, {}), calls));
+  assert.deepStrictEqual(r, { live: false, reason: 'not_logged_in' });
+  assert.strictEqual(calls.length, 0);
+});
+
+test('login then publish sends the whole bank with the admin token', async () => {
+  const calls = [];
+  const api = fakeApi((p) => {
+    if (p === '/auth/login') return reply(200, { accessToken: 'AT', refreshToken: 'RT', user: { role: 'ADMIN' } });
+    if (p === '/admin/config/phrase-bank/upload') return reply(201, { version: 7, unchanged: false });
+    return reply(404, {});
+  }, calls);
+  const l = await login('a@b.c', 'pw', api);
+  assert.ok(l.ok);
+  const bank = { '{K}': 'Text {T}.' };
+  const r = await publishBank('inspection', bank, api);
+  assert.deepStrictEqual(r, { live: true, version: 7, unchanged: false });
+  const up = calls[1];
+  assert.strictEqual(up.auth, 'Bearer AT');
+  assert.deepStrictEqual(up.body, { bankType: 'inspection_phrases', bank });
+  const v = await publishBank('valuation', { meta: {}, templates: {} }, api);
+  assert.strictEqual(calls[2].body.bankType, 'valuation_phrases');
+  assert.ok(v.live);
+  logout();
+});
+
+test('expired access token is refreshed once and the publish retried', async () => {
+  session.accessToken = 'OLD'; session.refreshToken = 'RT';
+  let uploads = 0;
+  const api = fakeApi((p) => {
+    if (p === '/auth/refresh') return reply(200, { accessToken: 'NEW', refreshToken: 'RT2' });
+    uploads++;
+    return uploads === 1 ? reply(401, {}) : reply(201, { version: 2 });
+  });
+  const r = await publishBank('inspection', { a: 'b' }, api);
+  assert.strictEqual(r.live, true);
+  assert.strictEqual(session.accessToken, 'NEW');
+  logout();
+});
+
+test('non-admin (403), server error and unreachable server are reported, never silent', async () => {
+  session.accessToken = 'AT';
+  assert.match((await publishBank('inspection', {}, fakeApi(() => reply(403, {})))).reason, /not an admin/);
+  assert.strictEqual((await publishBank('inspection', {}, fakeApi(() => reply(400, { message: 'Refusing to publish' })))).reason, 'Refusing to publish');
+  const down = async () => { throw new Error('connect ECONNREFUSED'); };
+  const r = await publishBank('inspection', {}, down);
+  assert.strictEqual(r.live, false);
+  assert.match(r.reason, /Cannot reach the server/);
+  logout();
+});
+
+test('wrong password gives a clear login failure and no session', async () => {
+  const r = await login('a@b.c', 'bad', fakeApi(() => reply(401, { message: 'Invalid credentials' })));
+  assert.strictEqual(r.ok, false);
+  assert.strictEqual(session.accessToken, null);
+});
+
+test('orderLike keeps the local key order so a pull does not churn git', () => {
+  const local = { b: '1', a: '2' };
+  const remote = { a: '2', c: '3', b: '1' }; // JSONB reorders keys
+  assert.deepStrictEqual(Object.keys(orderLike(local, remote)), ['b', 'a', 'c']);
+  const lv = { meta: {}, templates: { y: { text: 'Y' }, x: { text: 'X' } } };
+  const rv = { meta: {}, templates: { x: { text: 'X' }, y: { text: 'Y2' } } };
+  assert.deepStrictEqual(Object.keys(orderLike(lv, rv).templates), ['y', 'x']);
+  assert.strictEqual(orderLike(lv, rv).templates.y.text, 'Y2');
+});

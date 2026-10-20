@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/sync/sync_manager.dart';
 import '../core/utils/logger.dart';
 import '../features/config/presentation/providers/config_providers.dart';
+import '../features/property_inspection/presentation/providers/inspection_providers.dart';
+import '../features/property_valuation/presentation/providers/valuation_providers.dart';
 import '../features/settings/domain/entities/app_preferences.dart';
 import '../features/settings/presentation/providers/preferences_provider.dart';
 import 'router/app_router.dart';
@@ -39,6 +41,9 @@ class _SurveyScriberState extends ConsumerState<SurveyScriber>
     if (state == AppLifecycleState.resumed) {
       AppLogger.d('App', 'Resumed from background, checking config version');
       ref.read(syncStateProvider.notifier).checkConfigVersion();
+      // Live phrase edits: reloading the phrase providers re-checks the server.
+      ref.invalidate(inspectionPhraseTextsProvider);
+      ref.invalidate(valuationPhraseCatalogProvider);
     }
   }
 

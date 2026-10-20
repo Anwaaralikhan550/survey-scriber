@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -9,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../../../core/database/app_database.dart';
 import '../../../../core/database/database_providers.dart';
 import '../../../../core/network/api_client.dart';
+import '../../../../core/phrases/phrase_bank_sync.dart';
 import '../../../../core/sync/sync_manager.dart';
 import '../../../../core/sync/sync_state.dart';
 import '../../../../core/sync/v2_sync_helper.dart';
@@ -68,36 +70,52 @@ final valuationChildScreensProvider =
 
 final valuationPhraseCatalogProvider =
     FutureProvider<ValuationPhraseCatalog>((ref) async {
-  // A draft override is useful for review/preview, but a release build must
-  // not silently activate it. Only an approved local catalog can replace the
-  // bundled bank in production.
-  String raw;
-  var loadedLocalOverride = false;
+  final sync = ref.watch(phraseBankSyncProvider);
+  // Live updates: ask the server for newer wording in the background and
+  // reload this provider when it arrives.
+  unawaited(sync.refresh(PhraseBank.valuation).then((changed) {
+    if (changed) {
+      try {
+        ref.invalidateSelf();
+      } catch (_) {/* provider already disposed */}
+    }
+  }));
+
+  Future<String> bundled() =>
+      rootBundle.loadString('assets/property_valuation/phrase_texts.json');
+
+  ValuationPhraseCatalog? parse(String? raw) {
+    if (raw == null) return null;
+    try {
+      return ValuationPhraseCatalog.fromRawJson(raw);
+    } catch (e) {
+      debugPrint('[valuationPhraseCatalogProvider] Unreadable phrase bank: $e');
+      return null;
+    }
+  }
+
+  // A local draft override is useful for review/preview, but a release build
+  // must not silently activate it. Only an approved local catalog can replace
+  // the bank in production. A bank published by an admin through the server is
+  // a deliberate action, so it is used as received.
   try {
     final dir = await getApplicationDocumentsDirectory();
     final localFile = File('${dir.path}/admin/valuation_v2_phrase_texts.json');
     if (await localFile.exists()) {
-      raw = await localFile.readAsString();
-      loadedLocalOverride = true;
-    } else {
-      raw = await rootBundle
-          .loadString('assets/property_valuation/phrase_texts.json');
+      final local = parse(await localFile.readAsString());
+      if (local != null && !(kReleaseMode && !local.isApproved)) return local;
+      if (local != null) {
+        debugPrint('[valuationPhraseCatalogProvider] Ignoring unapproved local '
+            'phrase bank in release mode.');
+      }
     }
   } catch (e, stack) {
-    debugPrint('[valuationPhraseTextsProvider] Failed to load local override, '
-        'falling back to bundled asset: $e\n$stack');
-    raw = await rootBundle
-        .loadString('assets/property_valuation/phrase_texts.json');
+    debugPrint('[valuationPhraseCatalogProvider] Failed to load local override, '
+        'falling back: $e\n$stack');
   }
-  final catalog = ValuationPhraseCatalog.fromRawJson(raw);
-  if (loadedLocalOverride && kReleaseMode && !catalog.isApproved) {
-    debugPrint('[valuationPhraseCatalogProvider] Ignoring unapproved local '
-        'phrase bank in release mode.');
-    final bundled = await rootBundle
-        .loadString('assets/property_valuation/phrase_texts.json');
-    return ValuationPhraseCatalog.fromRawJson(bundled);
-  }
-  return catalog;
+  final cached = parse(await sync.readCached(PhraseBank.valuation));
+  if (cached != null) return cached;
+  return ValuationPhraseCatalog.fromRawJson(await bundled());
 });
 
 /// Compatibility view for code that reads valuation bank text directly.
