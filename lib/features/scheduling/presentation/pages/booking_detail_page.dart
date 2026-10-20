@@ -258,7 +258,7 @@ class _BookingDetailContent extends ConsumerWidget {
               ]
                   .whereType<String>()
                   .where((s) => s.trim().isNotEmpty)
-                  .join(', ');
+                  .join('\n'); // one part per line, as in the PDF
               final address =
                   structured.isNotEmpty ? structured : booking.propertyAddress;
               return Card(
@@ -348,7 +348,8 @@ class _BookingDetailContent extends ConsumerWidget {
                       _DetailRow(
                         icon: Icons.location_on,
                         label: 'Agent Address',
-                        value: booking.estateAgentAddress!,
+                        // stored one part per line; older bookings used commas
+                        value: _addressLines(booking.estateAgentAddress!),
                       ),
                     ],
                     if (booking.estateAgentNotes != null) ...[
@@ -597,6 +598,13 @@ class _BookingDetailContent extends ConsumerWidget {
       );
     }
   }
+}
+
+/// Address on separate lines: keeps stored line breaks, otherwise splits the comma-joined legacy form.
+String _addressLines(String raw) {
+  final v = raw.trim();
+  if (v.contains('\n')) return v;
+  return v.split(',').map((p) => p.trim()).where((p) => p.isNotEmpty).join('\n');
 }
 
 class _DetailRow extends StatelessWidget {

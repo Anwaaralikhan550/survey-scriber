@@ -17,6 +17,7 @@ void main() {
     String? county,
     String? postcode,
     String? propertyAddress,
+    String? estateAgentAddress,
   }) =>
       Booking(
         id: 'b1',
@@ -36,6 +37,7 @@ void main() {
         county: county,
         postcode: postcode,
         propertyAddress: propertyAddress,
+        estateAgentAddress: estateAgentAddress,
         createdById: 'u1',
         createdAt: DateTime(2026, 1, 1),
         updatedAt: DateTime(2026, 1, 1),
@@ -83,9 +85,21 @@ void main() {
       )));
       await tester.pumpAndSettle();
 
-      // County must precede Postcode (per the PDF): Essex before IG4 5DD.
-      expect(find.text('29 Taylor Drive, Chelmsford, Essex, IG4 5DD'),
+      // One part per line, County before Postcode (per the PDF).
+      expect(find.text('29 Taylor Drive\nChelmsford\nEssex\nIG4 5DD'),
           findsOneWidget);
+    });
+
+    testWidgets('estate-agent address is shown one part per line (also for old comma form)',
+        (tester) async {
+      bigScreen(tester);
+      await tester.pumpWidget(host(booking(
+        accessType: BookingAccessType.collectKeys,
+        estateAgentName: 'Bravo Agent',
+        estateAgentAddress: '29 Taylor Drive, Chelmsford, Essex, IG4 5DD',
+      )));
+      await tester.pumpAndSettle();
+      expect(find.text('29 Taylor Drive\nChelmsford\nEssex\nIG4 5DD'), findsOneWidget);
     });
 
     testWidgets('falls back to the legacy single-line address', (tester) async {
