@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/providers/auth_notifier.dart';
 import '../../features/auth/presentation/providers/auth_state.dart';
+import '../../features/dashboard/presentation/providers/dashboard_provider.dart';
 import '../../features/settings/presentation/providers/preferences_provider.dart';
 import '../../shared/presentation/widgets/sync_indicator.dart';
 import '../router/routes.dart';
@@ -133,14 +134,18 @@ class MainShell extends ConsumerWidget {
               ),
           ],
         ),
-        floatingActionButton: _buildFAB(context, colorScheme),
+        floatingActionButton: _buildFAB(context, ref, colorScheme),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: _buildBottomNav(context, theme, ref),
       ),
     );
   }
 
-  Widget _buildFAB(BuildContext context, ColorScheme colorScheme) =>
+  Widget _buildFAB(
+    BuildContext context,
+    WidgetRef ref,
+    ColorScheme colorScheme,
+  ) =>
       DecoratedBox(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
@@ -154,7 +159,14 @@ class MainShell extends ConsumerWidget {
           ],
         ),
         child: FloatingActionButton(
-          onPressed: () => context.push(Routes.newSurvey),
+          // Opens the Create Booking form for the segment selected at the top of Home
+          // (Home Surveys or Valuations).
+          onPressed: () => context.push(
+            Routes.schedulingBookPath(
+              valuation:
+                  ref.read(dashboardProvider).segment == HomeSegment.valuations,
+            ),
+          ),
           elevation: 0,
           highlightElevation: 0,
           backgroundColor: colorScheme.primary,

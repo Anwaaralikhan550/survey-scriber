@@ -19,8 +19,11 @@ class CreateBookingPage extends ConsumerStatefulWidget {
     this.date,
     this.startTime,
     this.endTime,
+    this.initialSurveyType = BookingSurveyType.homeSurvey,
   });
 
+  /// Survey type pre-selected when the form opens (the segment chosen on Home).
+  final BookingSurveyType initialSurveyType;
   final DateTime? date;
   final String? startTime;
   final String? endTime;
@@ -50,7 +53,7 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
 
   static const _propertyTypes = ['House', 'Flat', 'Bungalow', 'Other'];
 
-  BookingSurveyType _surveyType = BookingSurveyType.homeSurvey;
+  late BookingSurveyType _surveyType;
   String? _propertyType;
   BookingAccessType _accessType = BookingAccessType.directAccess;
 
@@ -62,6 +65,7 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
   @override
   void initState() {
     super.initState();
+    _surveyType = widget.initialSurveyType;
     _selectedDate = widget.date ?? DateTime.now();
     _startTime = widget.startTime ?? '09:00';
     _endTime = widget.endTime ?? '10:00';
@@ -89,6 +93,45 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
       c.dispose();
     }
     super.dispose();
+  }
+
+  Future<void> _pickDate() async {
+    final today = DateTime.now();
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(today.year - 1),
+      lastDate: DateTime(today.year + 3),
+    );
+    if (picked != null && mounted) setState(() => _selectedDate = picked);
+  }
+
+  TimeOfDay _parseTime(String hhmm) {
+    final p = hhmm.split(':');
+    return TimeOfDay(hour: int.parse(p[0]), minute: int.parse(p[1]));
+  }
+
+  String _formatTime(TimeOfDay t) =>
+      '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}';
+
+  Future<void> _pickTime({required bool start}) async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: _parseTime(start ? _startTime : _endTime),
+    );
+    if (picked == null || !mounted) return;
+    setState(() {
+      if (start) {
+        _startTime = _formatTime(picked);
+        // keep a valid range: end follows start by one hour when it would be before/equal to it
+        if (_formatTime(_parseTime(_endTime)).compareTo(_startTime) <= 0) {
+          _endTime = _formatTime(
+              TimeOfDay(hour: (picked.hour + 1) % 24, minute: picked.minute));
+        }
+      } else {
+        _endTime = _formatTime(picked);
+      }
+    });
   }
 
   String? _trim(TextEditingController c) =>
@@ -230,11 +273,33 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    _iconRow(theme, colorScheme, Icons.calendar_month,
-                        dateFormat.format(_selectedDate)),
+                    InkWell(
+                      key: const ValueKey('pick-date'),
+                      onTap: _pickDate,
+                      child: _iconRow(theme, colorScheme, Icons.calendar_month,
+                          dateFormat.format(_selectedDate)),
+                    ),
                     const SizedBox(height: 12),
-                    _iconRow(theme, colorScheme, Icons.access_time,
-                        '$_startTime - $_endTime'),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            key: const ValueKey('pick-start'),
+                            onTap: () => _pickTime(start: true),
+                            child: _iconRow(theme, colorScheme,
+                                Icons.access_time, _startTime),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            key: const ValueKey('pick-end'),
+                            onTap: () => _pickTime(start: false),
+                            child: _iconRow(theme, colorScheme,
+                                Icons.access_time_filled, _endTime),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

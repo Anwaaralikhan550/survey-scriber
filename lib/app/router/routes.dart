@@ -68,6 +68,10 @@ abstract final class Routes {
   static const String scheduling = '/scheduling';
   static const String schedulingCalendar = '/scheduling/calendar';
   static const String schedulingBook = '/scheduling/book';
+
+  /// Create Booking form with the Home Surveys / Valuations choice pre-selected (used by the big plus button).
+  static String schedulingBookPath({required bool valuation}) =>
+      valuation ? '$schedulingBook?type=valuation' : schedulingBook;
   static const String bookingsList = '/scheduling/bookings';
   static const String bookingDetail = '/scheduling/bookings/:id';
   static const String availabilitySettings = '/scheduling/availability';

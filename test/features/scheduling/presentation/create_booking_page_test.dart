@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_scriber/features/scheduling/domain/entities/booking.dart';
 import 'package:survey_scriber/features/scheduling/presentation/pages/create_booking_page.dart';
 
 void main() {
@@ -85,6 +86,63 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Please enter a valid email'), findsOneWidget);
+    });
+  });
+
+  group('CreateBookingPage - opened from the big plus (App-Edit)', () {
+    testWidgets('Valuation is pre-selected when the Valuations segment opened it',
+        (tester) async {
+      bigScreen(tester);
+      await tester.pumpWidget(const ProviderScope(
+        child: MaterialApp(
+          home: CreateBookingPage(initialSurveyType: BookingSurveyType.valuation),
+        ),
+      ));
+      await tester.pumpAndSettle();
+      final seg = tester.widget<SegmentedButton<BookingSurveyType>>(
+          find.byType(SegmentedButton<BookingSurveyType>).first);
+      expect(seg.selected, {BookingSurveyType.valuation});
+    });
+
+    testWidgets('Home Survey is the default selection', (tester) async {
+      bigScreen(tester);
+      await tester.pumpWidget(host());
+      await tester.pumpAndSettle();
+      final seg = tester.widget<SegmentedButton<BookingSurveyType>>(
+          find.byType(SegmentedButton<BookingSurveyType>).first);
+      expect(seg.selected, {BookingSurveyType.homeSurvey});
+    });
+
+    testWidgets('date is tappable and the picked day is shown', (tester) async {
+      bigScreen(tester);
+      await tester.pumpWidget(host());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const ValueKey('pick-date')));
+      await tester.pumpAndSettle();
+      expect(find.byType(DatePickerDialog), findsOneWidget);
+      await tester.tap(find.text('15').first);
+      await tester.tap(find.text('OK'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining(' 15, '), findsOneWidget);
+    });
+
+    testWidgets('start and end time are tappable (time picker opens)',
+        (tester) async {
+      bigScreen(tester);
+      await tester.pumpWidget(host());
+      await tester.pumpAndSettle();
+
+      for (final key in ['pick-start', 'pick-end']) {
+        await tester.tap(find.byKey(ValueKey(key)));
+        await tester.pumpAndSettle();
+        expect(find.byType(TimePickerDialog), findsOneWidget, reason: key);
+        await tester.tap(find.text('OK'));
+        await tester.pumpAndSettle();
+      }
+      // unchanged picks keep the default 09:00 - 10:00
+      expect(find.text('09:00'), findsOneWidget);
+      expect(find.text('10:00'), findsOneWidget);
     });
   });
 }

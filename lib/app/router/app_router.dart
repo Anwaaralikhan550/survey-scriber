@@ -701,7 +701,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.schedulingBook,
-        builder: (context, state) => const CreateBookingPage(),
+        builder: (context, state) => CreateBookingPage(
+          initialSurveyType: state.uri.queryParameters['type'] == 'valuation'
+              ? BookingSurveyType.valuation
+              : BookingSurveyType.homeSurvey,
+        ),
       ),
       GoRoute(
         path: Routes.bookingsList,
