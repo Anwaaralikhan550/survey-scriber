@@ -48,7 +48,10 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
   final _notesController = TextEditingController();
   final _agentNameController = TextEditingController();
   final _agentPhoneController = TextEditingController();
-  final _agentAddressController = TextEditingController();
+  final _agentAddressLineController = TextEditingController();
+  final _agentCityController = TextEditingController();
+  final _agentPostcodeController = TextEditingController();
+  final _agentCountyController = TextEditingController();
   final _agentNotesController = TextEditingController();
 
   static const _propertyTypes = ['House', 'Flat', 'Bungalow', 'Other'];
@@ -87,7 +90,10 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
       _notesController,
       _agentNameController,
       _agentPhoneController,
-      _agentAddressController,
+      _agentAddressLineController,
+      _agentCityController,
+      _agentPostcodeController,
+      _agentCountyController,
       _agentNotesController,
     ]) {
       c.dispose();
@@ -157,6 +163,15 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
       _trim(_postcodeController),
     ].whereType<String>().join(', ');
 
+    // Estate-agent address: Address Line, City, Postcode, County (PDF order), stored as
+    // one value with one part per line.
+    final agentAddress = [
+      _trim(_agentAddressLineController),
+      _trim(_agentCityController),
+      _trim(_agentPostcodeController),
+      _trim(_agentCountyController),
+    ].whereType<String>().join('\n');
+
     try {
       final booking =
           await ref.read(bookingsNotifierProvider.notifier).createBooking(
@@ -186,8 +201,9 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
                 estateAgentPhone: _accessType == BookingAccessType.collectKeys
                     ? _trim(_agentPhoneController)
                     : null,
-                estateAgentAddress: _accessType == BookingAccessType.collectKeys
-                    ? _trim(_agentAddressController)
+                estateAgentAddress: _accessType == BookingAccessType.collectKeys &&
+                        agentAddress.isNotEmpty
+                    ? agentAddress
                     : null,
                 estateAgentNotes: _accessType == BookingAccessType.collectKeys
                     ? _trim(_agentNotesController)
@@ -396,8 +412,19 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
               _field(_agentPhoneController, 'Phone Number', Icons.phone,
                   keyboard: TextInputType.phone),
               const SizedBox(height: 16),
-              _field(_agentAddressController, 'Address', Icons.location_on,
-                  caps: TextCapitalization.words, maxLines: 2),
+              _field(_agentAddressLineController, 'Address Line',
+                  Icons.location_on,
+                  caps: TextCapitalization.words),
+              const SizedBox(height: 16),
+              _field(_agentCityController, 'City', Icons.location_city,
+                  caps: TextCapitalization.words),
+              const SizedBox(height: 16),
+              _field(_agentPostcodeController, 'Postcode',
+                  Icons.markunread_mailbox,
+                  caps: TextCapitalization.characters),
+              const SizedBox(height: 16),
+              _field(_agentCountyController, 'County', Icons.map_outlined,
+                  caps: TextCapitalization.words),
               const SizedBox(height: 16),
               _field(_agentNotesController, "Agent's Notes", Icons.notes,
                   maxLines: 2),

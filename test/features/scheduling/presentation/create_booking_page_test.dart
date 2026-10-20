@@ -1,8 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show StateNotifier;
+import 'package:survey_scriber/features/auth/domain/entities/user.dart';
+import 'package:survey_scriber/features/auth/presentation/providers/auth_notifier.dart';
+import 'package:survey_scriber/features/auth/presentation/providers/auth_state.dart';
 import 'package:survey_scriber/features/scheduling/domain/entities/booking.dart';
+import 'package:survey_scriber/features/scheduling/presentation/providers/scheduling_providers.dart';
 import 'package:survey_scriber/features/scheduling/presentation/pages/create_booking_page.dart';
+
+class _FakeAuth extends StateNotifier<AuthState> implements AuthNotifier {
+  _FakeAuth()
+      : super(const AuthState(
+          status: AuthStatus.authenticated,
+          hasValidToken: true,
+          user: User(id: 'u1', email: 'a@b.c', firstName: 'A', lastName: 'B'),
+        ));
+  @override
+  dynamic noSuchMethod(Invocation i) => null;
+}
+
+class _CapturingBookings extends StateNotifier<BookingsState>
+    implements BookingsNotifier {
+  _CapturingBookings() : super(const BookingsState());
+  Map<String, Object?> captured = {};
+
+  @override
+  Future<Booking?> createBooking({
+    required String surveyorId,
+    required DateTime date,
+    required String startTime,
+    required String endTime,
+    BookingSurveyType surveyType = BookingSurveyType.homeSurvey,
+    String? jobRef,
+    String? clientName,
+    String? clientPhone,
+    String? clientEmail,
+    String? propertyType,
+    String? yearBuilt,
+    String? propertyAddress,
+    String? addressLine,
+    String? city,
+    String? town,
+    String? postcode,
+    String? county,
+    String? notes,
+    BookingAccessType? accessType,
+    String? estateAgentName,
+    String? estateAgentPhone,
+    String? estateAgentAddress,
+    String? estateAgentNotes,
+  }) async {
+    captured = {
+      'surveyType': surveyType,
+      'accessType': accessType,
+      'estateAgentName': estateAgentName,
+      'estateAgentAddress': estateAgentAddress,
+    };
+    return null;
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation i) => null;
+}
 
 void main() {
   // The form is a long ListView; give the test a tall surface so every field
@@ -143,6 +203,59 @@ void main() {
       // unchanged picks keep the default 09:00 - 10:00
       expect(find.text('09:00'), findsOneWidget);
       expect(find.text('10:00'), findsOneWidget);
+    });
+  });
+
+  group('CreateBookingPage - estate agent address (App-Edit)', () {
+    testWidgets('Collect Keys shows Address Line / City / Postcode / County and '
+        'composes them one per line', (tester) async {
+      bigScreen(tester);
+      final fake = _CapturingBookings();
+      await tester.pumpWidget(ProviderScope(
+        overrides: [
+          authNotifierProvider.overrideWith((ref) => _FakeAuth()),
+          bookingsNotifierProvider.overrideWith((ref) => fake),
+        ],
+        child: const MaterialApp(home: CreateBookingPage()),
+      ));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Collect Keys'));
+      await tester.pumpAndSettle();
+
+      // the agent block has its own four address fields (they come after the property ones)
+      Finder agent(String label) => find.widgetWithText(TextFormField, label).last;
+      await tester.enterText(agent('Address Line'), '29 Taylor Drive');
+      await tester.enterText(agent('City'), 'Chelmsford');
+      await tester.enterText(agent('Postcode'), 'IG4 5DD');
+      await tester.enterText(agent('County'), 'Essex');
+      await tester.enterText(find.widgetWithText(TextFormField, 'Estate Agent Name'), 'Bravo Agent');
+      await tester.pump();
+
+      await tester.tap(find.byWidgetPredicate((w) => w is FilledButton));
+      await tester.pumpAndSettle();
+
+      expect(fake.captured['accessType'], BookingAccessType.collectKeys);
+      expect(fake.captured['estateAgentName'], 'Bravo Agent');
+      expect(fake.captured['estateAgentAddress'],
+          '29 Taylor Drive\nChelmsford\nIG4 5DD\nEssex');
+    });
+
+    testWidgets('Direct Access sends no agent address', (tester) async {
+      bigScreen(tester);
+      final fake = _CapturingBookings();
+      await tester.pumpWidget(ProviderScope(
+        overrides: [
+          authNotifierProvider.overrideWith((ref) => _FakeAuth()),
+          bookingsNotifierProvider.overrideWith((ref) => fake),
+        ],
+        child: const MaterialApp(home: CreateBookingPage()),
+      ));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byWidgetPredicate((w) => w is FilledButton));
+      await tester.pumpAndSettle();
+      expect(fake.captured['accessType'], BookingAccessType.directAccess);
+      expect(fake.captured['estateAgentAddress'], isNull);
     });
   });
 }
