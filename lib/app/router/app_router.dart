@@ -453,7 +453,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: Routes.liveBookings,
-                builder: (context, state) => const BookingsListPage(),
+                builder: (context, state) =>
+                    const BookingsListPage(showNewBookingButton: false),
               ),
             ],
           ),

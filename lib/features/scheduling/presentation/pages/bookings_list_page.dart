@@ -3,12 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/routes.dart';
+import '../../../dashboard/presentation/providers/dashboard_provider.dart';
+import '../../domain/entities/booking.dart';
 import '../../domain/entities/booking_status.dart';
 import '../providers/scheduling_providers.dart';
 import '../widgets/booking_card.dart';
 
 class BookingsListPage extends ConsumerStatefulWidget {
-  const BookingsListPage({super.key});
+  const BookingsListPage({super.key, this.showNewBookingButton = true});
+
+  /// The Live Bookings tab hides it: the big plus button in the shell creates bookings.
+  final bool showNewBookingButton;
 
   @override
   ConsumerState<BookingsListPage> createState() => _BookingsListPageState();
@@ -35,6 +40,7 @@ class _BookingsListPageState extends ConsumerState<BookingsListPage> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final state = ref.watch(bookingsNotifierProvider);
+    final segment = ref.watch(dashboardProvider.select((d) => d.segment));
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -42,7 +48,7 @@ class _BookingsListPageState extends ConsumerState<BookingsListPage> {
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
         title: Text(
-          'My Bookings',
+          'Live Bookings',
           style: theme.textTheme.titleLarge?.copyWith(
             color: colorScheme.onSurface,
             fontWeight: FontWeight.w600,
@@ -61,6 +67,32 @@ class _BookingsListPageState extends ConsumerState<BookingsListPage> {
       ),
       body: Column(
         children: [
+          // Home Surveys / Valuations (same selection as the Home screen)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+            child: SizedBox(
+              width: double.infinity,
+              child: SegmentedButton<HomeSegment>(
+                segments: const [
+                  ButtonSegment(
+                    value: HomeSegment.homeSurveys,
+                    label: Text('Home Surveys'),
+                    icon: Icon(Icons.home_work_outlined),
+                  ),
+                  ButtonSegment(
+                    value: HomeSegment.valuations,
+                    label: Text('Valuations'),
+                    icon: Icon(Icons.request_quote_outlined),
+                  ),
+                ],
+                selected: {segment},
+                showSelectedIcon: false,
+                onSelectionChanged: (s) =>
+                    ref.read(dashboardProvider.notifier).setSegment(s.first),
+              ),
+            ),
+          ),
+
           // Filter chips
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -89,12 +121,14 @@ class _BookingsListPageState extends ConsumerState<BookingsListPage> {
 
           // Content
           Expanded(
-            child: _buildContent(state),
+            child: _buildContent(state, segment),
           ),
         ],
       ),
       // Prominent, beautiful action button
-      floatingActionButton: FilledButton.icon(
+      floatingActionButton: !widget.showNewBookingButton
+          ? null
+          : FilledButton.icon(
         onPressed: () => context.push(Routes.schedulingCalendar),
         icon: const Icon(Icons.add, size: 22),
         label: const Text('New Booking'),
@@ -155,7 +189,12 @@ class _BookingsListPageState extends ConsumerState<BookingsListPage> {
     );
   }
 
-  Widget _buildContent(BookingsState state) {
+  Widget _buildContent(BookingsState state, HomeSegment segment) {
+    final visible = state.bookings
+        .where((b) => segment == HomeSegment.valuations
+            ? b.surveyType == BookingSurveyType.valuation
+            : b.surveyType != BookingSurveyType.valuation)
+        .toList();
     if (state.isLoading && state.bookings.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -197,7 +236,7 @@ class _BookingsListPageState extends ConsumerState<BookingsListPage> {
       );
     }
 
-    if (state.bookings.isEmpty) {
+    if (visible.isEmpty) {
       return Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -216,7 +255,7 @@ class _BookingsListPageState extends ConsumerState<BookingsListPage> {
             Text(
               _selectedStatus != null
                   ? 'No ${_selectedStatus!.displayName.toLowerCase()} bookings'
-                  : 'Create your first booking',
+                  : 'No ${segment.label} bookings yet',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
@@ -234,10 +273,10 @@ class _BookingsListPageState extends ConsumerState<BookingsListPage> {
       },
       child: ListView.separated(
         padding: const EdgeInsets.all(16),
-        itemCount: state.bookings.length,
+        itemCount: visible.length,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
         itemBuilder: (context, index) {
-          final booking = state.bookings[index];
+          final booking = visible[index];
           return BookingCard(
             booking: booking,
             onTap: () => context.push(Routes.bookingDetailPath(booking.id)),

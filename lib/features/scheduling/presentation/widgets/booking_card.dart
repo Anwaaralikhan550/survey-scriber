@@ -4,6 +4,15 @@ import 'package:intl/intl.dart';
 import '../../domain/entities/booking.dart';
 import 'status_chip.dart';
 
+String _address(Booking b) {
+  final legacy = (b.propertyAddress ?? '').trim();
+  if (legacy.isNotEmpty) return legacy;
+  return [b.addressLine, b.city, b.town, b.county, b.postcode]
+      .whereType<String>()
+      .where((p) => p.trim().isNotEmpty)
+      .join(', ');
+}
+
 class BookingCard extends StatelessWidget {
   const BookingCard({
     super.key,
@@ -56,6 +65,33 @@ class BookingCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
+              // Job reference + survey type (Home Survey / Valuation)
+              if ((booking.jobRef ?? '').isNotEmpty) ...[
+                Row(
+                  children: [
+                    Icon(Icons.tag, size: 16, color: colorScheme.primary),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        booking.jobRef!,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      booking.surveyType.label,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+              ],
+
               // Time
               Row(
                 children: [
@@ -97,8 +133,8 @@ class BookingCard extends StatelessWidget {
                 ),
               ],
 
-              // Property address
-              if (booking.propertyAddress != null) ...[
+              // Property address (legacy single line, else the structured parts)
+              if (_address(booking).isNotEmpty) ...[
                 const SizedBox(height: 8),
                 Row(
                   children: [
@@ -110,7 +146,7 @@ class BookingCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        booking.propertyAddress!,
+                        _address(booking),
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: colorScheme.onSurfaceVariant,
                         ),
