@@ -18,6 +18,9 @@ class DashboardPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardProvider);
     final syncState = ref.watch(syncStateProvider);
+    // "Total" = live bookings (pending + confirmed); null means they could not be loaded -> surveys.
+    final liveBookings = ref.watch(liveBookingCountsProvider);
+    final liveFromBookings = liveBookings.valueOrNull?[state.segment];
     final theme = Theme.of(context);
 
     // Show restoration overlay during initial sync on empty dashboard
@@ -38,7 +41,10 @@ class DashboardPage extends ConsumerWidget {
         backgroundColor: theme.colorScheme.surface,
         body: SafeArea(
           child: RefreshIndicator(
-            onRefresh: () => ref.read(dashboardProvider.notifier).refresh(),
+            onRefresh: () async {
+              ref.invalidate(liveBookingCountsProvider);
+              await ref.read(dashboardProvider.notifier).refresh();
+            },
             color: theme.colorScheme.primary,
             backgroundColor: theme.colorScheme.surface,
             child: CustomScrollView(
@@ -79,10 +85,18 @@ class DashboardPage extends ConsumerWidget {
                       bottom: 24,
                     ),
                     child: StatsCards(
-                      stats: state.stats,
-                      isLoading: state.isLoading,
-                      onTotalTap: () =>
-                          _openJobs(context, state.segment, JobFilter.live),
+                      stats: liveFromBookings == null
+                          ? state.stats
+                          : DashboardStats(
+                              live: liveFromBookings,
+                              inProgress: state.stats.inProgress,
+                              completed: state.stats.completed,
+                            ),
+                      isLoading: state.isLoading || liveBookings.isLoading,
+                      // bookings -> the Live Bookings tab; surveys fallback -> the survey list
+                      onTotalTap: () => liveFromBookings == null
+                          ? _openJobs(context, state.segment, JobFilter.live)
+                          : context.go(Routes.liveBookings),
                       onInProgressTap: () => _openJobs(
                           context, state.segment, JobFilter.inProgress),
                       onCompletedTap: () => _openJobs(

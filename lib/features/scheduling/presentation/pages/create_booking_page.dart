@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../auth/presentation/providers/auth_notifier.dart';
 import '../../domain/entities/booking.dart';
+import '../../../dashboard/presentation/providers/dashboard_provider.dart' show liveBookingCountsProvider;
 import '../providers/scheduling_providers.dart';
 
 /// Combined Create-Booking screen.
@@ -214,6 +215,7 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Booking created successfully')),
         );
+        ref.invalidate(liveBookingCountsProvider);
         context.pop();
       }
     } catch (e) {

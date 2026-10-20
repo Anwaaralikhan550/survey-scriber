@@ -3,6 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../shared/domain/entities/survey.dart';
 import '../../../../shared/presentation/widgets/analytics_cards.dart';
 import '../../../auth/presentation/providers/auth_notifier.dart';
+import '../../../scheduling/domain/entities/booking.dart';
+import '../../../scheduling/domain/entities/booking_status.dart';
+import '../../../scheduling/domain/repositories/scheduling_repository.dart';
+import '../../../scheduling/presentation/providers/scheduling_providers.dart';
 import '../../../surveys/domain/repositories/survey_repository.dart';
 import '../../../surveys/presentation/providers/survey_providers.dart';
 
@@ -65,6 +69,36 @@ enum JobFilter {
     }
   }
 }
+
+/// Live bookings (pending + confirmed, i.e. new instructions not yet completed) per Home segment.
+/// Pages through the bookings API (max 100 per page).
+Future<Map<HomeSegment, int>> countLiveBookings(SchedulingRepository repo) async {
+  final counts = {HomeSegment.homeSurveys: 0, HomeSegment.valuations: 0};
+  for (final status in [BookingStatus.pending, BookingStatus.confirmed]) {
+    for (var page = 1; page <= 10; page++) {
+      final batch = await repo.getMyBookings(status: status, page: page, limit: 100);
+      for (final b in batch) {
+        final seg = b.surveyType == BookingSurveyType.valuation
+            ? HomeSegment.valuations
+            : HomeSegment.homeSurveys;
+        counts[seg] = counts[seg]! + 1;
+      }
+      if (batch.length < 100) break;
+    }
+  }
+  return counts;
+}
+
+/// Source of the dashboard "Total" card. `null` when the bookings could not be loaded
+/// (offline / server error): the card then falls back to the survey-based count.
+final liveBookingCountsProvider =
+    FutureProvider.autoDispose<Map<HomeSegment, int>?>((ref) async {
+  try {
+    return await countLiveBookings(ref.watch(schedulingRepositoryProvider));
+  } catch (_) {
+    return null;
+  }
+});
 
 class DashboardStats {
   const DashboardStats({
