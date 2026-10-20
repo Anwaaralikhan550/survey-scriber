@@ -17,6 +17,15 @@ node tool/phrase_portal/server.js
 
 No `npm install` — it uses Node built-ins only (Node 18+).
 
+## Banks
+
+- **inspection**: flat `{key: sentence}` map (about 1,256 keys).
+- **valuation**: `{meta, templates: {VAL_DRAFT_xxxx: {screenId, text, ...}}}` (495 templates). The portal lists the
+  templates (key + screen id), searches by key / screen id / text, and an edit changes only the `text`.
+  `meta`, `screenId` and any other field stay as they are.
+
+Tests: `node --test tool/phrase_portal/test.js` (no install).
+
 ## What it does
 
 - **Search** across all ~888 phrase keys and their sentence text.

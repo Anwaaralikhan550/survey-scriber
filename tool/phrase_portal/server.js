@@ -43,6 +43,66 @@ function readBank(name) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
+/** A bank is either a flat {key: text} map (inspection) or
+ *  {meta, templates: {id: {screenId, text, ...}}} (valuation). */
+const isTemplatesBank = (raw) =>
+  !!raw && typeof raw.templates === 'object' && raw.templates !== null && !Array.isArray(raw.templates);
+
+const textOfTemplate = (t) => (typeof t === 'string' ? t : String((t && t.text) || ''));
+
+/** Editable entries of a bank, whatever its shape. */
+function entriesOf(raw) {
+  if (isTemplatesBank(raw)) {
+    return Object.entries(raw.templates).map(([key, t]) => {
+      const value = textOfTemplate(t);
+      return { key, value, tokens: tokenSet(value), screenId: (t && t.screenId) || undefined };
+    });
+  }
+  return Object.entries(raw).map(([key, value]) => ({ key, value, tokens: tokenSet(value) }));
+}
+
+function currentText(raw, key) {
+  if (isTemplatesBank(raw)) return key in raw.templates ? textOfTemplate(raw.templates[key]) : undefined;
+  return key in raw ? raw[key] : undefined;
+}
+
+/** Writes the new text in place (a valuation template keeps its screenId and other fields). */
+function setText(raw, key, value) {
+  if (isTemplatesBank(raw)) {
+    const t = raw.templates[key];
+    raw.templates[key] = typeof t === 'object' && t !== null ? { ...t, text: value } : value;
+  } else {
+    raw[key] = value;
+  }
+}
+
+/** Token-preserving edit of one entry. Returns {status, body}; mutates `raw` only on success. */
+function applyEdit(raw, key, value, force = false) {
+  if (!key) return { status: 400, body: { error: 'Missing key' } };
+  const old = currentText(raw, key);
+  if (old === undefined) return { status: 404, body: { error: 'Key not found: ' + key } };
+  const before = tokenSet(old);
+  const after = tokenSet(value);
+  const removed = before.filter((t) => !after.includes(t));
+  const added = after.filter((t) => !before.includes(t));
+  // Guard: never silently drop a placeholder the engine substitutes, and never
+  // introduce a new one it doesn't know about - either breaks the report.
+  if (!force && (removed.length || added.length)) {
+    return {
+      status: 409,
+      body: {
+        error: 'placeholder_mismatch', removed, added,
+        message:
+          'This edit changes the {TOKEN} placeholders. Removing or adding a ' +
+          'token can break the report. Fix the tokens, or re-save with ' +
+          'Override if you are certain.',
+      },
+    };
+  }
+  setText(raw, key, value);
+  return { status: 200, body: { ok: true, key, tokens: after } };
+}
+
 function send(res, code, body, type = 'application/json') {
   res.writeHead(code, { 'Content-Type': type, 'Cache-Control': 'no-store' });
   if (Buffer.isBuffer(body) || typeof body === 'string') res.end(body);
@@ -67,10 +127,7 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET' && u.pathname === '/api/bank') {
     const name = u.searchParams.get('name') || 'inspection';
     try {
-      const data = readBank(name);
-      const entries = Object.entries(data).map(([key, value]) => ({
-        key, value, tokens: tokenSet(value),
-      }));
+      const entries = entriesOf(readBank(name));
       return send(res, 200, { name, count: entries.length, entries });
     } catch (e) {
       return send(res, 500, { error: String(e.message || e) });
@@ -84,31 +141,11 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       try {
         const { name = 'inspection', key, value, force = false } = JSON.parse(raw || '{}');
-        if (!key) return send(res, 400, { error: 'Missing key' });
         const data = readBank(name);
-        if (!(key in data)) return send(res, 404, { error: 'Key not found: ' + key });
-
-        const before = tokenSet(data[key]);
-        const after = tokenSet(value);
-        const removed = before.filter((t) => !after.includes(t));
-        const added = after.filter((t) => !before.includes(t));
-
-        // Guard: never silently drop a placeholder the engine substitutes, and
-        // never introduce a new one it doesn't know about — either breaks the
-        // report. Requires an explicit force to override.
-        if (!force && (removed.length || added.length)) {
-          return send(res, 409, {
-            error: 'placeholder_mismatch', removed, added,
-            message:
-              'This edit changes the {TOKEN} placeholders. Removing or adding a ' +
-              'token can break the report. Fix the tokens, or re-save with ' +
-              'Override if you are certain.',
-          });
-        }
-
-        data[key] = value;
+        const result = applyEdit(data, key, value, force);
+        if (result.status !== 200) return send(res, result.status, result.body);
         fs.writeFileSync(BANKS[name], asciiStringify(data), 'utf8');
-        return send(res, 200, { ok: true, key, tokens: after });
+        return send(res, 200, result.body);
       } catch (e) {
         return send(res, 500, { error: String(e.message || e) });
       }
@@ -124,8 +161,12 @@ const server = http.createServer((req, res) => {
   send(res, 405, 'Method not allowed', 'text/plain');
 });
 
-server.listen(PORT, () => {
-  console.log(`\n  Phrase Bank portal → http://localhost:${PORT}\n`);
-  console.log(`  inspection: ${BANKS.inspection}`);
-  console.log(`  valuation : ${BANKS.valuation}\n`);
-});
+if (require.main === module) {
+  server.listen(PORT, () => {
+    console.log(`\n  Phrase Bank portal → http://localhost:${PORT}\n`);
+    console.log(`  inspection: ${BANKS.inspection}`);
+    console.log(`  valuation : ${BANKS.valuation}\n`);
+  });
+}
+
+module.exports = { entriesOf, applyEdit, tokenSet, isTemplatesBank, asciiStringify };

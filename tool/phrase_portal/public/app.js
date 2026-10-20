@@ -35,6 +35,7 @@ function matches(e) {
   const f = state.filter;
   if (!f) return true;
   return e.key.toLowerCase().includes(f) ||
+         String(e.screenId || '').toLowerCase().includes(f) ||
          String(currentValue(e.key)).toLowerCase().includes(f);
 }
 
@@ -52,7 +53,8 @@ function renderList() {
       (state.edited.has(e.key) ? ' edited' : '');
     row.innerHTML =
       `<div class="rk"></div><div class="rv"></div>`;
-    row.querySelector('.rk').textContent = e.key;
+    // valuation templates carry the screen they belong to
+    row.querySelector('.rk').textContent = e.screenId ? e.key + '  ·  ' + e.screenId : e.key;
     row.querySelector('.rv').textContent = currentValue(e.key);
     row.onclick = () => select(e.key);
     frag.appendChild(row);
