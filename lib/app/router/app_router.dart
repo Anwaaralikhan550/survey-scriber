@@ -64,6 +64,7 @@ import '../../features/profile/presentation/pages/change_password_page.dart';
 import '../../features/profile/presentation/pages/edit_profile_page.dart';
 import '../../features/reinspection/presentation/pages/reinspection_overview_page.dart';
 import '../../features/reports/presentation/pages/reports_page.dart';
+import '../../features/scheduling/domain/entities/booking.dart' show BookingSurveyType;
 import '../../features/scheduling/presentation/pages/availability_settings_page.dart';
 import '../../features/scheduling/presentation/pages/booking_detail_page.dart';
 import '../../features/scheduling/presentation/pages/bookings_list_page.dart';
