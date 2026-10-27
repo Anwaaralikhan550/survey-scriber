@@ -92,8 +92,3 @@ code{font-family:var(--mono);background:var(--accent-soft);color:var(--accent);p
 .login-dlg::backdrop{background:rgba(15,23,42,.45)}
 .login-dlg h3{margin:0 0 6px}
 .login-dlg input{display:block;width:100%;box-sizing:border-box;margin:8px 0;padding:9px 10px;border:1px solid #cdd3dc;border-radius:8px;font:inherit}
-
-.bank-status{padding:8px 20px;font-size:12.5px;border-bottom:1px solid var(--line);background:var(--card);color:var(--soft)}
-.bank-status.ok{background:var(--ok-soft);color:var(--ok)}
-.bank-status.warn{background:var(--warn-soft);color:var(--warn)}
-.bank-status.err{background:var(--err-soft);color:var(--err)}
