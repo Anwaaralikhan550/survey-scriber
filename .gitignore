@@ -94,3 +94,4 @@ node_modules/
 
 # Temporary Claude files
 tmpclaude-*
+tool/phrase_portal/dist/
