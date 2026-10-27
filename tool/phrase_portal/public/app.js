@@ -1,32 +1,149 @@
 'use strict';
+/**
+ * SurveyScriber Phrase Bank portal — static web app.
+ *
+ * Talks directly to the SurveyScriber API (same origin, under /api/v1):
+ *   GET  /config/phrase-bank/:type          latest published bank (public)
+ *   POST /admin/config/phrase-bank/upload   publish the whole bank (admin only)
+ *   POST /auth/login | /auth/refresh | /auth/logout
+ * Nothing is stored on the web server; the published bank on the API is the
+ * source of truth, and every phone picks it up on its next start/resume.
+ */
 const $ = (id) => document.getElementById(id);
-const TOKEN_RE = /\{[A-Z0-9_]+\}/g;
-const tokenSet = (s) => [...new Set((String(s).match(TOKEN_RE) || []))].sort();
+const L = window.BankLogic;
+const API = '/api/v1';
+const SESSION_KEY = 'ss_portal_session';
 
 const state = {
   bank: 'inspection',
-  entries: [],          // {key, value, tokens} — original loaded values
-  edited: new Map(),    // key -> new value (unsaved)
-  selected: null,       // key
+  raw: null,            // the full bank object (what gets published)
+  entries: [],          // {key, value, tokens, screenId?} snapshot for the list
+  edited: new Map(),    // key -> new value (unsaved, in-editor)
+  selected: null,
   filter: '',
+  published: null,      // {version, checksum, publishedAt} or null when nothing is published yet
+  session: null,        // {accessToken, refreshToken, email}
 };
 
+// ── session ────────────────────────────────────────────────────────
+function loadSession() {
+  try { state.session = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null'); } catch { state.session = null; }
+}
+function saveSession(s) {
+  state.session = s;
+  try { s ? sessionStorage.setItem(SESSION_KEY, JSON.stringify(s)) : sessionStorage.removeItem(SESSION_KEY); } catch {}
+}
+
+async function apiJson(path, { method = 'GET', body, auth = false, retry = true } = {}) {
+  const headers = { Accept: 'application/json' };
+  if (body !== undefined) headers['Content-Type'] = 'application/json';
+  if (auth && state.session) headers.Authorization = 'Bearer ' + state.session.accessToken;
+  let res;
+  try {
+    res = await fetch(API + path, { method, headers, body: body === undefined ? undefined : JSON.stringify(body) });
+  } catch (e) {
+    return { status: 0, body: { message: 'Cannot reach the server: ' + (e.message || e) } };
+  }
+  let parsed = {};
+  try { parsed = await res.json(); } catch { /* empty body */ }
+  if (res.status === 401 && auth && retry && (await refreshSession())) {
+    return apiJson(path, { method, body, auth, retry: false });
+  }
+  return { status: res.status, body: parsed };
+}
+
+async function refreshSession() {
+  if (!state.session || !state.session.refreshToken) return false;
+  const r = await apiJson('/auth/refresh', { method: 'POST', body: { refreshToken: state.session.refreshToken } });
+  if ((r.status === 200 || r.status === 201) && r.body.accessToken) {
+    saveSession({ ...state.session, accessToken: r.body.accessToken, refreshToken: r.body.refreshToken || state.session.refreshToken });
+    return true;
+  }
+  saveSession(null);
+  setLive();
+  return false;
+}
+
+async function login(email, password) {
+  const r = await apiJson('/auth/login', { method: 'POST', body: { email, password } });
+  if (r.status !== 200 && r.status !== 201) {
+    return { ok: false, message: r.body.message || 'Login failed' };
+  }
+  if (!r.body.accessToken) return { ok: false, message: 'Login response had no token' };
+  const role = r.body.user && r.body.user.role;
+  if (role && role !== 'ADMIN') {
+    return { ok: false, message: 'This account is ' + role + '. Only an ADMIN can publish phrases.' };
+  }
+  saveSession({ accessToken: r.body.accessToken, refreshToken: r.body.refreshToken || null, email });
+  setLive();
+  return { ok: true };
+}
+
+async function logout() {
+  if (state.session && state.session.refreshToken) {
+    await apiJson('/auth/logout', { method: 'POST', body: { refreshToken: state.session.refreshToken }, auth: true, retry: false });
+  }
+  saveSession(null);
+  setLive();
+}
+
+function setLive() {
+  const on = !!state.session;
+  const el = $('liveState');
+  el.className = 'live-state ' + (on ? 'on' : 'off');
+  el.textContent = on ? 'Live - publishing as ' + state.session.email : 'Read only - log in to publish';
+  $('loginBtn').textContent = on ? 'Log out' : 'Log in to publish';
+}
+
+// ── bank loading ───────────────────────────────────────────────────
 async function loadBank(name) {
-  const res = await fetch(`/api/bank?name=${encodeURIComponent(name)}`);
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || 'Load failed');
+  const type = L.API_TYPE[name];
+  setStatus('Loading…', '');
+  const r = await apiJson('/config/phrase-bank/' + type);
+  let raw; let published = null;
+  if (r.status === 200 && r.body.bank) {
+    raw = r.body.bank;
+    published = { version: r.body.version, checksum: r.body.checksum, publishedAt: r.body.publishedAt };
+  } else if (r.status === 404) {
+    // Nothing published yet: start from the bank bundled with the app, so the
+    // first save publishes the complete bank.
+    const b = await fetch('assets/banks/' + name + '.json', { cache: 'no-store' });
+    if (!b.ok) throw new Error('Baseline bank not found (' + b.status + ')');
+    raw = await b.json();
+  } else {
+    throw new Error(r.body.message || ('Server error ' + r.status));
+  }
   state.bank = name;
-  state.entries = data.entries;
+  state.raw = raw;
+  state.entries = L.entriesOf(raw);
   state.edited.clear();
   state.selected = null;
-  $('counts').textContent = `${data.count} phrases`;
+  state.published = published;
+  $('counts').textContent = state.entries.length + ' phrases';
+  renderStatus();
   renderList();
   renderEditor();
 }
 
+function renderStatus() {
+  const p = state.published;
+  if (p) {
+    const when = p.publishedAt ? new Date(p.publishedAt).toLocaleString() : '';
+    setStatus('Published version ' + p.version + (when ? ' · ' + when : '') + ' · live on all phones', 'ok');
+  } else {
+    setStatus('Not published yet: phones use the bank built into the app. Your first save publishes the complete bank.', 'warn');
+  }
+}
+function setStatus(text, kind) {
+  const el = $('bankStatus');
+  el.textContent = text;
+  el.className = 'bank-status ' + (kind || '');
+}
+
+// ── list / editor ──────────────────────────────────────────────────
 function currentValue(key) {
   if (state.edited.has(key)) return state.edited.get(key);
-  const e = state.entries.find((x) => x.key === key);
+  const e = originalEntry(key);
   return e ? e.value : '';
 }
 function originalEntry(key) { return state.entries.find((x) => x.key === key); }
@@ -49,11 +166,9 @@ function renderList() {
     shown++;
     if (shown > 600) continue; // keep the DOM light; narrow the search
     const row = document.createElement('button');
-    row.className = 'row' + (e.key === state.selected ? ' active' : '') +
-      (state.edited.has(e.key) ? ' edited' : '');
-    row.innerHTML =
-      `<div class="rk"></div><div class="rv"></div>`;
-    // valuation templates carry the screen they belong to
+    row.type = 'button';
+    row.className = 'row' + (e.key === state.selected ? ' active' : '') + (state.edited.has(e.key) ? ' edited' : '');
+    row.innerHTML = '<div class="rk"></div><div class="rv"></div>';
     row.querySelector('.rk').textContent = e.screenId ? e.key + '  ·  ' + e.screenId : e.key;
     row.querySelector('.rv').textContent = currentValue(e.key);
     row.onclick = () => select(e.key);
@@ -64,7 +179,8 @@ function renderList() {
     const more = document.createElement('div');
     more.className = 'row';
     more.style.cursor = 'default';
-    more.innerHTML = `<div class="rv">${shown - 600} more… refine your search.</div>`;
+    more.innerHTML = '<div class="rv"></div>';
+    more.querySelector('.rv').textContent = (shown - 600) + ' more… refine your search.';
     list.appendChild(more);
   }
 }
@@ -80,11 +196,8 @@ function renderEditor() {
   $('empty').hidden = hasSel;
   $('editor').hidden = !hasSel;
   if (!hasSel) return;
-
-  const key = state.selected;
-  $('editKey').textContent = key;
-  const ta = $('editValue');
-  ta.value = currentValue(key);
+  $('editKey').textContent = state.selected;
+  $('editValue').value = currentValue(state.selected);
   $('overrideChk').checked = false;
   validate();
 }
@@ -93,11 +206,10 @@ function validate() {
   const key = state.selected;
   const orig = originalEntry(key);
   const before = orig ? orig.tokens : [];
-  const now = tokenSet($('editValue').value);
+  const now = L.tokenSet($('editValue').value);
   const missing = before.filter((t) => !now.includes(t));
   const added = now.filter((t) => !before.includes(t));
 
-  // token chips
   const chips = $('tokenChips');
   chips.innerHTML = '';
   for (const t of before) {
@@ -113,21 +225,22 @@ function validate() {
     chips.appendChild(c);
   }
 
-  // dirty state
-  const dirty = state.edited.has(key) ||
-    $('editValue').value !== (orig ? orig.value : '');
+  const dirty = state.edited.has(key) || $('editValue').value !== (orig ? orig.value : '');
   $('dirtyBadge').hidden = !dirty;
 
-  // validation message
   const v = $('validation');
   const override = $('overrideChk').checked;
   const changed = missing.length || added.length;
   if (changed && !override) {
     v.hidden = false; v.className = 'validation err';
     v.innerHTML =
-      (missing.length ? `Removed token(s): <b>${missing.join(', ')}</b>. ` : '') +
-      (added.length ? `New token(s): <b>${added.join(', ')}</b>. ` : '') +
+      (missing.length ? 'Removed token(s): <b></b>. ' : '') +
+      (added.length ? 'New token(s): <b></b>. ' : '') +
       'Fix the tokens, or tick Override to save anyway.';
+    const bs = v.querySelectorAll('b');
+    let i = 0;
+    if (missing.length) bs[i++].textContent = missing.join(', ');
+    if (added.length) bs[i++].textContent = added.join(', ');
     $('saveBtn').disabled = true;
   } else if (changed && override) {
     v.hidden = false; v.className = 'validation warn';
@@ -137,100 +250,72 @@ function validate() {
     v.hidden = true;
     $('saveBtn').disabled = !dirty;
   }
+  $('saveBtn').textContent = state.session ? 'Save & publish' : 'Save (log in first)';
   return { missing, added, override };
 }
 
+// ── save = publish the whole bank ──────────────────────────────────
 async function save() {
+  if (!state.session) {
+    toast('Log in with an admin account to publish.', 'err');
+    openLogin();
+    return;
+  }
   const key = state.selected;
   const value = $('editValue').value;
   const { override } = validate();
-  try {
-    const res = await fetch('/api/save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: state.bank, key, value, force: override }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      toast(data.message || data.error || 'Save failed', 'err');
-      return;
-    }
-    // commit into the loaded snapshot so it becomes the new baseline
+
+  // Apply on a copy so a failed publish never corrupts the in-memory bank.
+  const draft = JSON.parse(JSON.stringify(state.raw));
+  const edit = L.applyEdit(draft, key, value, override);
+  if (edit.status !== 200) { toast(edit.body.message || edit.body.error, 'err'); return; }
+
+  $('saveBtn').disabled = true;
+  setStatus('Publishing…', '');
+  const r = await apiJson('/admin/config/phrase-bank/upload', {
+    method: 'POST', auth: true, body: { bankType: L.API_TYPE[state.bank], bank: draft },
+  });
+  if (r.status === 201 || r.status === 200) {
+    state.raw = draft;
     const e = originalEntry(key);
-    if (e) { e.value = value; e.tokens = tokenSet(value); }
+    if (e) { e.value = value; e.tokens = L.tokenSet(value); }
     state.edited.delete(key);
-    reportPublish(data.publish);
+    state.published = { version: r.body.version, checksum: r.body.checksum, publishedAt: r.body.publishedAt };
+    renderStatus();
+    toast(r.body.unchanged ? 'Already live (no change).' : 'Saved and LIVE on all phones (version ' + r.body.version + ')', 'ok');
     renderList();
     renderEditor();
-  } catch (err) {
-    toast(String(err.message || err), 'err');
-  }
-}
-
-function setLive(on, email) {
-  const el = $('liveState');
-  el.className = 'live-state ' + (on ? 'on' : 'off');
-  el.textContent = on ? 'Live - publishing as ' + email : 'Offline - not logged in';
-  $('loginBtn').textContent = on ? 'Log out' : 'Log in to publish';
-}
-
-function reportPublish(p) {
-  if (p && p.live) {
-    toast(p.unchanged ? 'Saved. Already live (no change).' : 'Saved and LIVE on all phones (version ' + p.version + ')', 'ok');
     return;
   }
-  if (p && p.reason === 'login_expired') setLive(false);
-  const why = !p || p.reason === 'not_logged_in' ? 'log in to publish'
-    : p.reason === 'login_expired' ? 'login expired, log in again' : p.reason;
-  toast('Saved to file only - NOT live (' + why + ')', 'err');
+  renderStatus();
+  $('saveBtn').disabled = false;
+  if (r.status === 401) { saveSession(null); setLive(); toast('Login expired. Log in again, then save.', 'err'); openLogin(); return; }
+  if (r.status === 403) { toast('This account is not an ADMIN. Cannot publish.', 'err'); return; }
+  toast('NOT published: ' + (r.body.message || ('server error ' + r.status)), 'err');
 }
 
-async function refreshStatus() {
-  try {
-    const st = await (await fetch('/api/status')).json();
-    setLive(st.loggedIn, st.email);
-  } catch { setLive(false); }
-}
+// ── login dialog ───────────────────────────────────────────────────
+function openLogin() { $('loginErr').hidden = true; $('loginDlg').showModal(); }
 
 $('loginBtn').addEventListener('click', async () => {
-  if ($('liveState').classList.contains('on')) {
-    await fetch('/api/logout', { method: 'POST' });
-    setLive(false);
-    return;
-  }
-  $('loginErr').hidden = true;
-  $('loginDlg').showModal();
+  if (state.session) { await logout(); toast('Logged out.', 'ok'); renderEditor(); return; }
+  openLogin();
 });
 $('loginCancel').addEventListener('click', () => $('loginDlg').close());
 $('loginForm').addEventListener('submit', async (ev) => {
   ev.preventDefault();
   $('loginSubmit').disabled = true;
   try {
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: $('loginEmail').value, password: $('loginPass').value }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      $('loginErr').textContent = data.error || 'Login failed';
-      $('loginErr').hidden = false;
-      return;
-    }
+    const r = await login($('loginEmail').value.trim(), $('loginPass').value);
+    if (!r.ok) { $('loginErr').textContent = r.message; $('loginErr').hidden = false; return; }
     $('loginPass').value = '';
     $('loginDlg').close();
-    setLive(true, data.email);
-    const changed = Object.values(data.pulls || {}).some((p) => p.changed);
-    toast(changed ? 'Logged in. Latest published phrases loaded - reloading.' : 'Logged in. Saves now go live.', 'ok');
-    if (changed) loadBank(state.bank).catch((err) => toast(String(err), 'err'));
-  } catch (err) {
-    $('loginErr').textContent = String(err.message || err);
-    $('loginErr').hidden = false;
+    toast('Logged in. Saves now go live on all phones.', 'ok');
+    renderEditor();
   } finally {
     $('loginSubmit').disabled = false;
   }
 });
-refreshStatus();
 
 let toastTimer;
 function toast(msg, kind) {
@@ -239,28 +324,22 @@ function toast(msg, kind) {
   t.className = 'toast ' + (kind || '');
   t.hidden = false;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { t.hidden = true; }, 3200);
+  toastTimer = setTimeout(() => { t.hidden = true; }, 3600);
 }
 
-// ── events ──
-$('search').addEventListener('input', (e) => {
-  state.filter = e.target.value.trim().toLowerCase();
-  renderList();
-});
+// ── events ─────────────────────────────────────────────────────────
+$('search').addEventListener('input', (e) => { state.filter = e.target.value.trim().toLowerCase(); renderList(); });
 $('bankSelect').addEventListener('change', (e) => {
-  const go = () => loadBank(e.target.value).catch((err) => toast(String(err), 'err'));
-  if (state.edited.size &&
-      !confirm(`${state.edited.size} unsaved edit(s) will be discarded. Switch bank?`)) {
+  if (state.edited.size && !confirm(state.edited.size + ' unsaved edit(s) will be discarded. Switch bank?')) {
     e.target.value = state.bank; return;
   }
-  go();
+  loadBank(e.target.value).catch((err) => { setStatus(String(err.message || err), 'err'); toast(String(err.message || err), 'err'); });
 });
 $('editValue').addEventListener('input', () => {
   const key = state.selected;
   const orig = originalEntry(key);
   const val = $('editValue').value;
-  if (orig && val === orig.value) state.edited.delete(key);
-  else state.edited.set(key, val);
+  if (orig && val === orig.value) state.edited.delete(key); else state.edited.set(key, val);
   validate();
 });
 $('overrideChk').addEventListener('change', validate);
@@ -270,8 +349,8 @@ $('revertBtn').addEventListener('click', () => {
   if (orig) { $('editValue').value = orig.value; state.edited.delete(state.selected); }
   validate(); renderList();
 });
-window.addEventListener('beforeunload', (e) => {
-  if (state.edited.size) { e.preventDefault(); e.returnValue = ''; }
-});
+window.addEventListener('beforeunload', (e) => { if (state.edited.size) { e.preventDefault(); e.returnValue = ''; } });
 
-loadBank('inspection').catch((err) => toast(String(err), 'err'));
+loadSession();
+setLive();
+loadBank('inspection').catch((err) => { setStatus(String(err.message || err), 'err'); toast(String(err.message || err), 'err'); });

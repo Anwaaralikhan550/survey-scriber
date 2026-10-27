@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Phrase Bank Editor · SurveyScriber</title>
+  <meta name="robots" content="noindex, nofollow">
+  <title>Phrase Bank · SurveyScriber Admin</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,8 +12,8 @@
     <div class="brand">
       <span class="dot"></span>
       <div>
-        <div class="title">Phrase Bank Editor</div>
-        <div class="sub">RICS L2 sentence templates · SurveyScriber</div>
+        <div class="title">Phrase Bank</div>
+        <div class="sub">SurveyScriber admin portal · RICS L2 sentence templates</div>
       </div>
     </div>
     <div class="topbar-right">
@@ -24,10 +25,12 @@
         </select>
       </label>
       <span id="counts" class="counts"></span>
-      <span id="liveState" class="live-state off" title="Edits are published to all phones when logged in">Offline - not logged in</span>
+      <span id="liveState" class="live-state off">Read only - log in to publish</span>
       <button id="loginBtn" class="btn ghost" type="button">Log in to publish</button>
     </div>
   </header>
+
+  <div id="bankStatus" class="bank-status">Loading…</div>
 
   <main class="layout">
     <aside class="list-pane">
@@ -40,7 +43,7 @@
     <section class="editor-pane" id="editorPane">
       <div id="empty" class="empty">
         <p>Select a phrase on the left to edit it.</p>
-        <p class="hint">Every <code>{TOKEN}</code> is a locked parameter the report fills in. Removing or renaming one is blocked, to protect the sentence logic.</p>
+        <p class="hint">Every <code>{TOKEN}</code> is a locked parameter the report fills in. Removing or renaming one is blocked, to protect the sentence logic. Saving publishes the bank to every phone.</p>
       </div>
 
       <div id="editor" class="editor" hidden>
@@ -54,8 +57,7 @@
           <div id="tokenChips" class="chips"></div>
         </div>
 
-        <textarea id="editValue" class="value-area" spellcheck="true"
-          aria-label="Phrase sentence"></textarea>
+        <textarea id="editValue" class="value-area" spellcheck="true" aria-label="Phrase sentence"></textarea>
 
         <div id="validation" class="validation" hidden></div>
 
@@ -64,7 +66,7 @@
           <label class="override">
             <input type="checkbox" id="overrideChk"> Override token lock
           </label>
-          <button id="saveBtn" class="btn primary" type="button">Save</button>
+          <button id="saveBtn" class="btn primary" type="button">Save &amp; publish</button>
         </div>
       </div>
     </section>
@@ -73,10 +75,10 @@
   <dialog id="loginDlg" class="login-dlg">
     <form method="dialog" id="loginForm">
       <h3>Admin login</h3>
-      <p class="hint">Saved edits go live on every phone. Use your SurveyScriber admin account. The password is not stored.</p>
+      <p class="hint">Saved edits go live on every phone. Use your SurveyScriber ADMIN account. The password is never stored; the session ends when this tab closes.</p>
       <input id="loginEmail" type="email" placeholder="Admin email" autocomplete="username" required>
       <input id="loginPass" type="password" placeholder="Password" autocomplete="current-password" required>
-      <div id="loginErr" class="validation" hidden></div>
+      <div id="loginErr" class="validation err" hidden></div>
       <div class="editor-actions">
         <button id="loginCancel" class="btn ghost" type="button">Cancel</button>
         <button id="loginSubmit" class="btn primary" type="submit">Log in</button>
@@ -85,6 +87,7 @@
   </dialog>
 
   <div id="toast" class="toast" hidden></div>
+  <script src="bank-logic.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

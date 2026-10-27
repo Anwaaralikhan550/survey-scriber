@@ -1,65 +1,57 @@
-# Phrase Bank Editor — web portal
+# Phrase Bank — SurveyScriber admin portal
 
-A small, zero-dependency web tool for searching and safely editing the RICS L2
-phrase bank (the sentence templates the report is built from) on a proper
-screen instead of the phone.
+A static web app for searching and safely editing the RICS L2 phrase bank (the sentence
+templates the report is built from) on a proper screen instead of the phone. Saving publishes
+the bank to the SurveyScriber server; every phone picks it up on its next start/resume.
+No app update, no file editing, no Node process on the server.
 
-Edits the real asset files in place:
-- `assets/property_inspection/phrase_texts.json`
-- `assets/property_valuation/phrase_texts.json`
+## For the admin (client)
 
-## Run
+1. Open **http://portal.surveyscriber.com** (see "Link" below until DNS/TLS are done).
+2. Click **Log in to publish** and sign in with your SurveyScriber **ADMIN** account.
+   The password is never stored; the session ends when the tab closes.
+3. Pick the bank (Home Survey or Valuation), search a key or sentence, edit, **Save & publish**.
+   - The green status line shows the published version and time.
+   - Yellow "Not published yet" means phones still use the bank built into the app;
+     your first save publishes the complete bank (1,256 inspection phrases / 495 valuation templates).
+4. **Token lock**: every `{TOKEN}` is a parameter the report fills in. A save that removes or adds
+   a token is blocked; tick **Override token lock** only for a deliberate structural change.
+
+Without logging in the portal is read-only (it shows the published bank).
+
+## Link, DNS and HTTPS (one-time setup)
+
+- The VPS already serves the portal: nginx vhost `portal.surveyscriber.com` ->
+  `/var/www/surveyscriber-portal`, with `/api/` proxied to the backend on port 3000.
+- **DNS (client, GoDaddy for surveyscriber.com):** add an A record `portal` -> `158.69.1.183`.
+  Until then the link does not resolve; for a quick test add to your PC's hosts file:
+  `158.69.1.183 portal.surveyscriber.com`.
+- **HTTPS (server admin, root):** `certbot --nginx -d portal.surveyscriber.com`. Until TLS exists the
+  login travels over plain HTTP; do not use the portal from public Wi-Fi before that.
+
+## Deploy (developer)
 
 ```bash
-node tool/phrase_portal/server.js
-# then open http://localhost:4599   (set PORT=xxxx to change)
+bash tool/phrase_portal/deploy.sh          # test + build dist/ + upload (needs naija SSH key)
+bash tool/phrase_portal/deploy.sh --build  # build only
 ```
 
-No `npm install` — it uses Node built-ins only (Node 18+).
+The build copies `public/` plus the baseline banks from `assets/property_*/phrase_texts.json` to
+`dist/assets/banks/` and uploads everything to the web root. `BUILD` holds the git commit.
 
-## Banks
+## Local development
 
-- **inspection**: flat `{key: sentence}` map (about 1,256 keys).
-- **valuation**: `{meta, templates: {VAL_DRAFT_xxxx: {screenId, text, ...}}}` (495 templates). The portal lists the
-  templates (key + screen id), searches by key / screen id / text, and an edit changes only the `text`.
-  `meta`, `screenId` and any other field stay as they are.
+```bash
+node tool/phrase_portal/server.js          # http://localhost:4599, /api/ proxied to the VPS backend
+SS_API_ORIGIN=http://localhost:3000 node tool/phrase_portal/server.js   # against a local backend
+node --test tool/phrase_portal/test.js     # no install, Node 18+
+```
 
-Tests: `node --test tool/phrase_portal/test.js` (no install).
+## How it works
 
-## What it does
-
-- **Search** across all ~888 phrase keys and their sentence text.
-- **Edit** any sentence in a large editor.
-- **Token lock** — every `{TOKEN}` in a sentence is a parameter the report
-  fills in. Removing or renaming one breaks the report, so the tool blocks a
-  save that changes the set of tokens. Tick **Override token lock** to save a
-  deliberate structural change (e.g. a genuinely new parameter the engine
-  already substitutes).
-- **Saves in the repo's exact JSON format** (`indent=2`, non-ASCII escaped),
-  so edits produce clean, minimal diffs.
-
-## Workflow
-
-1. Run the server, edit phrases, save.
-2. The asset file is updated on disk.
-3. Commit the file and rebuild the app — the new wording ships with the next
-   build. (Live over-the-air sync to installed apps is a separate, larger
-   piece and is not part of this tool.)
-
-## Notes
-
-- Single-admin tool — it reads and writes the file directly, so run one
-  instance at a time.
-- After editing, run the phrase audit (`flutter test test/phrase_audit`) to
-  confirm the bank still produces 0 placeholder-leak / grammar defects.
-
-## Live publishing (edits reach every phone)
-
-Click **Log in to publish** and sign in with a SurveyScriber *admin* account. After that every
-**Save** also publishes the whole bank to the server; phones pick it up on next start/resume
-(no app update). The toast says **LIVE** or **NOT live (reason)** - never silent.
-
-- Server: `SS_API_URL` (default `http://158.69.1.183:3000/api/v1`).
-- Login pulls the latest published bank into the local files first, so you edit the current wording.
-- The password is never stored; tokens live in memory only.
-- Needs the backend with the `phrase-bank` endpoints deployed.
+- `public/app.js` — UI; `GET /api/v1/config/phrase-bank/:type` (public), `POST /api/v1/admin/config/phrase-bank/upload`
+  (admin, whole bank), `POST /api/v1/auth/login|refresh|logout`. Access token refreshes automatically; a 401/403 is
+  reported, never silent.
+- `public/bank-logic.js` — bank shapes (flat map / `{meta, templates}`), token lock, in-place edit; shared with tests.
+- Server side guards (backend): shape validation, idempotent publish (identical content = no new version),
+  refuses a bank that lost more than half its phrases, 8 MB cap, audit log entry per publish.
