@@ -28,7 +28,7 @@ cp "$HERE/public/index.html" "$HERE/public/app.js" "$HERE/public/bank-logic.js" 
 # Baseline banks: used only until a bank is published on the server (first save publishes the full bank).
 cp "$REPO/assets/property_inspection/phrase_texts.json" "$DIST/assets/banks/inspection.json"
 cp "$REPO/assets/property_valuation/phrase_texts.json" "$DIST/assets/banks/valuation.json"
-( cd "$DIST/assets/banks" && node -e "JSON.parse(require('fs').readFileSync('inspection.json','utf8'));JSON.parse(require('fs').readFileSync('valuation.json','utf8'))" )
+node -e "JSON.parse(require('fs').readFileSync('$DIST/assets/banks/inspection.json','utf8'));JSON.parse(require('fs').readFileSync('$DIST/assets/banks/valuation.json','utf8'))"
 ( cd "$DIST" && git -C "$REPO" rev-parse --short HEAD > BUILD 2>/dev/null || date -u +%Y%m%dT%H%M%SZ > BUILD )
 ls -la "$DIST" "$DIST/assets/banks"
 
