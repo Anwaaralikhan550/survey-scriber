@@ -4,89 +4,173 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Phrase Bank · SurveyScriber Admin</title>
+  <meta name="color-scheme" content="light">
+  <title>SurveyScriber Admin · Phrase Bank</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="dot"></span>
-      <div>
-        <div class="title">Phrase Bank</div>
-        <div class="sub">SurveyScriber admin portal · RICS L2 sentence templates</div>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <label class="bank-select">
-        Bank
-        <select id="bankSelect">
-          <option value="inspection">Home Survey (inspection)</option>
-          <option value="valuation">Valuation</option>
-        </select>
-      </label>
-      <span id="counts" class="counts"></span>
-      <span id="liveState" class="live-state off">Read only - log in to publish</span>
-      <button id="loginBtn" class="btn ghost" type="button">Log in to publish</button>
-    </div>
-  </header>
 
-  <div id="bankStatus" class="bank-status">Loading…</div>
+  <!-- ───────── Login (nothing else is visible until you sign in) ───────── -->
+  <main id="loginView" class="login" hidden>
+    <section class="login-brand" aria-hidden="true">
+      <div class="logo"><span class="logo-mark">S</span><span class="logo-word">SurveyScriber</span></div>
+      <h1>Edit report wording once.<br>Every phone gets it.</h1>
+      <ul class="brand-points">
+        <li><span>1</span>Search any sentence the reports are built from</li>
+        <li><span>2</span>Change the wording safely, placeholders stay protected</li>
+        <li><span>3</span>Save and it goes live on all phones, no app update</li>
+      </ul>
+      <p class="brand-foot">Admin portal · authorised staff only</p>
+    </section>
 
-  <main class="layout">
-    <aside class="list-pane">
-      <div class="search-wrap">
-        <input id="search" type="search" placeholder="Search key or sentence…" autocomplete="off">
-      </div>
-      <div id="list" class="list" role="listbox" aria-label="Phrase keys"></div>
-    </aside>
+    <section class="login-card-wrap">
+      <form id="loginForm" class="login-card" autocomplete="on">
+        <div class="logo logo-dark"><span class="logo-mark">S</span><span class="logo-word">SurveyScriber</span></div>
+        <h2>Sign in</h2>
+        <p class="muted">Use your SurveyScriber <b>admin</b> account.</p>
 
-    <section class="editor-pane" id="editorPane">
-      <div id="empty" class="empty">
-        <p>Select a phrase on the left to edit it.</p>
-        <p class="hint">Every <code>{TOKEN}</code> is a locked parameter the report fills in. Removing or renaming one is blocked, to protect the sentence logic. Saving publishes the bank to every phone.</p>
-      </div>
+        <label class="field">
+          <span>Email</span>
+          <input id="loginEmail" type="email" placeholder="you@company.com" autocomplete="username" required>
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <div class="pw">
+            <input id="loginPass" type="password" placeholder="Your password" autocomplete="current-password" required>
+            <button id="pwToggle" class="pw-toggle" type="button" aria-label="Show password">Show</button>
+          </div>
+        </label>
 
-      <div id="editor" class="editor" hidden>
-        <div class="editor-head">
-          <code id="editKey" class="editkey"></code>
-          <span id="dirtyBadge" class="dirty-badge" hidden>unsaved</span>
-        </div>
-
-        <div class="tokens-row">
-          <span class="tokens-label">Required tokens</span>
-          <div id="tokenChips" class="chips"></div>
-        </div>
-
-        <textarea id="editValue" class="value-area" spellcheck="true" aria-label="Phrase sentence"></textarea>
-
-        <div id="validation" class="validation" hidden></div>
-
-        <div class="editor-actions">
-          <button id="revertBtn" class="btn ghost" type="button">Revert</button>
-          <label class="override">
-            <input type="checkbox" id="overrideChk"> Override token lock
-          </label>
-          <button id="saveBtn" class="btn primary" type="button">Save &amp; publish</button>
-        </div>
-      </div>
+        <div id="loginErr" class="alert err" role="alert" hidden></div>
+        <button id="loginSubmit" class="btn primary block" type="submit">Sign in</button>
+        <p class="tiny muted">Your password is never stored. The session ends when you close this tab.</p>
+      </form>
     </section>
   </main>
 
-  <dialog id="loginDlg" class="login-dlg">
-    <form method="dialog" id="loginForm">
-      <h3>Admin login</h3>
-      <p class="hint">Saved edits go live on every phone. Use your SurveyScriber ADMIN account. The password is never stored; the session ends when this tab closes.</p>
-      <input id="loginEmail" type="email" placeholder="Admin email" autocomplete="username" required>
-      <input id="loginPass" type="password" placeholder="Password" autocomplete="current-password" required>
-      <div id="loginErr" class="validation err" hidden></div>
-      <div class="editor-actions">
-        <button id="loginCancel" class="btn ghost" type="button">Cancel</button>
-        <button id="loginSubmit" class="btn primary" type="submit">Log in</button>
+  <!-- ───────── App (shown only after sign-in) ───────── -->
+  <div id="appView" class="shell" hidden>
+    <aside id="side" class="side">
+      <div class="logo logo-light"><span class="logo-mark">S</span><span class="logo-word">SurveyScriber</span></div>
+      <nav class="nav" aria-label="Main">
+        <button class="nav-item active" data-view="dash" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <div class="nav-label">Phrase banks</div>
+        <button class="nav-item" data-view="inspection" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+          <span>Home Survey</span><em id="navCountInspection"></em>
+        </button>
+        <button class="nav-item" data-view="valuation" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-4zm-1 15-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6z"/></svg>
+          <span>Valuation</span><em id="navCountValuation"></em>
+        </button>
+      </nav>
+      <div class="side-foot">
+        <div class="who">
+          <span id="avatar" class="avatar">A</span>
+          <div><div id="whoEmail" class="who-email"></div><div class="who-role">Administrator</div></div>
+        </div>
+        <button id="logoutBtn" class="btn ghost-light block" type="button">Sign out</button>
       </div>
-    </form>
-  </dialog>
+    </aside>
 
-  <div id="toast" class="toast" hidden></div>
+    <div class="main">
+      <header class="top">
+        <button id="menuBtn" class="menu-btn" type="button" aria-label="Open menu">☰</button>
+        <h1 id="pageTitle">Dashboard</h1>
+        <span id="livePill" class="pill ok">Signed in · can publish</span>
+      </header>
+
+      <!-- Dashboard -->
+      <section id="dashView" class="page">
+        <div class="hero">
+          <div>
+            <h2>Phrase Bank</h2>
+            <p>Manage the sentences your survey reports are written from. Everything you save here is published to every phone.</p>
+          </div>
+          <div class="hero-actions">
+            <button class="btn primary" data-go="inspection" type="button">Edit Home Survey phrases</button>
+            <button class="btn" data-go="valuation" type="button">Edit Valuation phrases</button>
+          </div>
+        </div>
+
+        <div class="cards" id="statCards" aria-live="polite"></div>
+
+        <h3 class="section-title">How it works</h3>
+        <ol class="steps">
+          <li><span class="step-n">1</span><div><b>Find &amp; edit</b><p>Open a bank, search a sentence and change the wording.</p></div></li>
+          <li><span class="step-n">2</span><div><b>Save &amp; publish</b><p>The new version is stored on the server straight away.</p></div></li>
+          <li><span class="step-n">3</span><div><b>Phones update</b><p>Each phone picks it up the next time the app is opened with internet.</p></div></li>
+        </ol>
+
+        <div class="two">
+          <div class="panel good">
+            <h3>Do</h3>
+            <ul>
+              <li>Change wording, spelling, tone and punctuation.</li>
+              <li>Keep every <code>{TOKEN}</code> exactly as it is (same name, same spelling).</li>
+              <li>Check the green “Published version” line after you save.</li>
+              <li>Sign out on shared computers.</li>
+            </ul>
+          </div>
+          <div class="panel bad">
+            <h3>Don’t</h3>
+            <ul>
+              <li>Don’t delete, rename or add <code>{TOKENS}</code>: the report fills these in and would break.</li>
+              <li>Don’t tick “Override token lock” unless your developer told you to.</li>
+              <li>Don’t leave the page with unsaved edits.</li>
+              <li>Don’t share your admin password.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Editor -->
+      <section id="editView" class="page flush" hidden>
+        <div id="bankStatus" class="bank-status">Loading…</div>
+        <div class="layout">
+          <aside class="list-pane">
+            <div class="search-wrap">
+              <input id="search" type="search" placeholder="Search a word, sentence or key…" autocomplete="off">
+              <div id="listMeta" class="list-meta"></div>
+            </div>
+            <div id="list" class="list" role="listbox" aria-label="Phrases"></div>
+          </aside>
+
+          <section class="editor-pane">
+            <div id="empty" class="empty">
+              <div class="empty-icon">✎</div>
+              <h3>Pick a phrase to edit</h3>
+              <p>Choose a sentence from the list on the left.</p>
+              <p class="hint">Words in curly brackets like <code>{TOKEN}</code> are filled in by the report. They are locked so the report never breaks.</p>
+            </div>
+
+            <div id="editor" class="editor" hidden>
+              <div class="editor-head">
+                <code id="editKey" class="editkey"></code>
+                <span id="dirtyBadge" class="pill warn" hidden>Unsaved</span>
+              </div>
+              <div class="tokens-row">
+                <span class="tokens-label">Locked placeholders</span>
+                <div id="tokenChips" class="chips"></div>
+              </div>
+              <textarea id="editValue" class="value-area" spellcheck="true" aria-label="Phrase sentence"></textarea>
+              <div id="validation" class="alert" hidden></div>
+              <div class="editor-actions">
+                <button id="revertBtn" class="btn ghost" type="button">Revert</button>
+                <label class="override"><input type="checkbox" id="overrideChk"> Override token lock</label>
+                <button id="saveBtn" class="btn primary" type="button">Save &amp; publish</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden></div>
   <script src="bank-logic.js"></script>
   <script src="app.js"></script>
 </body>

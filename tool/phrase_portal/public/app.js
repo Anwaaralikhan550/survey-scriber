@@ -1,29 +1,31 @@
 'use strict';
 /**
- * SurveyScriber Phrase Bank portal — static web app.
+ * SurveyScriber Phrase Bank admin portal — static web app.
  *
- * Talks directly to the SurveyScriber API (same origin, under /api/v1):
- *   GET  /config/phrase-bank/:type          latest published bank (public)
+ * Nothing is shown until an ADMIN signs in. After sign-in it talks to the
+ * SurveyScriber API (same origin, under /api/v1):
+ *   GET  /config/phrase-bank/:type          latest published bank
  *   POST /admin/config/phrase-bank/upload   publish the whole bank (admin only)
- *   POST /auth/login | /auth/refresh | /auth/logout
- * Nothing is stored on the web server; the published bank on the API is the
- * source of truth, and every phone picks it up on its next start/resume.
+ *   POST /auth/login | /auth/refresh | /auth/logout, GET /auth/me
+ * The published bank on the API is the source of truth; every phone picks it
+ * up on its next start/resume.
  */
 const $ = (id) => document.getElementById(id);
 const L = window.BankLogic;
 const API = '/api/v1';
 const SESSION_KEY = 'ss_portal_session';
+const BANK_NAMES = { inspection: 'Home Survey', valuation: 'Valuation' };
 
 const state = {
-  bank: 'inspection',
-  raw: null,            // the full bank object (what gets published)
-  entries: [],          // {key, value, tokens, screenId?} snapshot for the list
-  edited: new Map(),    // key -> new value (unsaved, in-editor)
+  session: null,         // {accessToken, refreshToken, email}
+  view: 'dash',          // dash | inspection | valuation
+  bank: 'inspection',    // bank shown in the editor
+  banks: { inspection: null, valuation: null }, // {raw, entries, published, error}
+  edited: new Map(),     // key -> unsaved text (current bank only)
   selected: null,
   filter: '',
-  published: null,      // {version, checksum, publishedAt} or null when nothing is published yet
-  session: null,        // {accessToken, refreshToken, email}
 };
+const cur = () => state.banks[state.bank];
 
 // ── session ────────────────────────────────────────────────────────
 function loadSession() {
@@ -31,7 +33,7 @@ function loadSession() {
 }
 function saveSession(s) {
   state.session = s;
-  try { s ? sessionStorage.setItem(SESSION_KEY, JSON.stringify(s)) : sessionStorage.removeItem(SESSION_KEY); } catch {}
+  try { s ? sessionStorage.setItem(SESSION_KEY, JSON.stringify(s)) : sessionStorage.removeItem(SESSION_KEY); } catch { /* storage blocked */ }
 }
 
 async function apiJson(path, { method = 'GET', body, auth = false, retry = true } = {}) {
@@ -42,7 +44,7 @@ async function apiJson(path, { method = 'GET', body, auth = false, retry = true 
   try {
     res = await fetch(API + path, { method, headers, body: body === undefined ? undefined : JSON.stringify(body) });
   } catch (e) {
-    return { status: 0, body: { message: 'Cannot reach the server: ' + (e.message || e) } };
+    return { status: 0, body: { message: 'Cannot reach the server. Check your internet connection.' } };
   }
   let parsed = {};
   try { parsed = await res.json(); } catch { /* empty body */ }
@@ -59,137 +61,218 @@ async function refreshSession() {
     saveSession({ ...state.session, accessToken: r.body.accessToken, refreshToken: r.body.refreshToken || state.session.refreshToken });
     return true;
   }
-  saveSession(null);
-  setLive();
   return false;
 }
 
 async function login(email, password) {
   const r = await apiJson('/auth/login', { method: 'POST', body: { email, password } });
   if (r.status !== 200 && r.status !== 201) {
-    return { ok: false, message: r.body.message || 'Login failed' };
+    return { ok: false, message: r.status === 0 ? r.body.message : (r.body.message || 'Sign in failed') };
   }
-  if (!r.body.accessToken) return { ok: false, message: 'Login response had no token' };
+  if (!r.body.accessToken) return { ok: false, message: 'Sign in failed (no token returned).' };
   const role = r.body.user && r.body.user.role;
   if (role && role !== 'ADMIN') {
-    return { ok: false, message: 'This account is ' + role + '. Only an ADMIN can publish phrases.' };
+    return { ok: false, message: 'This account is ' + role + '. Only an ADMIN account can use this portal.' };
   }
   saveSession({ accessToken: r.body.accessToken, refreshToken: r.body.refreshToken || null, email });
-  setLive();
   return { ok: true };
 }
 
-async function logout() {
+async function signOut(message) {
   if (state.session && state.session.refreshToken) {
     await apiJson('/auth/logout', { method: 'POST', body: { refreshToken: state.session.refreshToken }, auth: true, retry: false });
   }
   saveSession(null);
-  setLive();
+  state.banks = { inspection: null, valuation: null };
+  state.edited.clear();
+  state.selected = null;
+  showLogin(message);
 }
 
-function setLive() {
-  const on = !!state.session;
-  const el = $('liveState');
-  el.className = 'live-state ' + (on ? 'on' : 'off');
-  el.textContent = on ? 'Live - publishing as ' + state.session.email : 'Read only - log in to publish';
-  $('loginBtn').textContent = on ? 'Log out' : 'Log in to publish';
+// ── screens ────────────────────────────────────────────────────────
+function showLogin(message) {
+  $('appView').hidden = true;
+  $('loginView').hidden = false;
+  $('loginPass').value = '';
+  const err = $('loginErr');
+  err.hidden = !message;
+  err.textContent = message || '';
+  setTimeout(() => $('loginEmail').focus(), 0);
+}
+
+function showApp() {
+  $('loginView').hidden = true;
+  $('appView').hidden = false;
+  const email = state.session.email || 'admin';
+  $('whoEmail').textContent = email;
+  $('avatar').textContent = email.charAt(0).toUpperCase();
+  go('dash');
+}
+
+/** Switch page. Returns false if the user cancelled because of unsaved edits. */
+function go(view) {
+  if (state.edited.size && state.view !== 'dash' &&
+      !confirm(state.edited.size + ' unsaved edit(s) will be lost. Leave this page?')) {
+    return false;
+  }
+  state.edited.clear();
+  state.selected = null;
+  state.filter = '';
+  $('search').value = '';
+  state.view = view;
+  document.querySelectorAll('.nav-item').forEach((b) => b.classList.toggle('active', b.dataset.view === view));
+  $('side').classList.remove('open');
+  const isDash = view === 'dash';
+  $('dashView').hidden = !isDash;
+  $('editView').hidden = isDash;
+  $('pageTitle').textContent = isDash ? 'Dashboard' : BANK_NAMES[view] + ' phrases';
+  if (isDash) { renderCards(); ensureBanks(); } else { state.bank = view; openEditor(); }
+  return true;
 }
 
 // ── bank loading ───────────────────────────────────────────────────
-async function loadBank(name) {
+async function fetchBank(name) {
   const type = L.API_TYPE[name];
-  setStatus('Loading…', '');
   const r = await apiJson('/config/phrase-bank/' + type);
-  let raw; let published = null;
   if (r.status === 200 && r.body.bank) {
-    raw = r.body.bank;
-    published = { version: r.body.version, checksum: r.body.checksum, publishedAt: r.body.publishedAt };
-  } else if (r.status === 404) {
+    const raw = r.body.bank;
+    return { raw, entries: L.entriesOf(raw),
+      published: { version: r.body.version, checksum: r.body.checksum, publishedAt: r.body.publishedAt } };
+  }
+  if (r.status === 404) {
     // Nothing published yet: start from the bank bundled with the app, so the
     // first save publishes the complete bank.
     const b = await fetch('assets/banks/' + name + '.json', { cache: 'no-store' });
-    if (!b.ok) throw new Error('Baseline bank not found (' + b.status + ')');
-    raw = await b.json();
-  } else {
-    throw new Error(r.body.message || ('Server error ' + r.status));
+    if (!b.ok) return { error: 'Baseline bank not found (' + b.status + ')' };
+    const raw = await b.json();
+    return { raw, entries: L.entriesOf(raw), published: null };
   }
-  state.bank = name;
-  state.raw = raw;
-  state.entries = L.entriesOf(raw);
-  state.edited.clear();
-  state.selected = null;
-  state.published = published;
-  $('counts').textContent = state.entries.length + ' phrases';
+  return { error: r.body.message || ('Server error ' + r.status) };
+}
+
+async function ensureBank(name, force) {
+  if (state.banks[name] && !state.banks[name].error && !force) return state.banks[name];
+  state.banks[name] = await fetchBank(name);
+  return state.banks[name];
+}
+
+async function ensureBanks() {
+  await Promise.all(Object.keys(BANK_NAMES).map((n) => ensureBank(n)));
+  updateNavCounts();
+  if (state.view === 'dash') renderCards();
+}
+
+function updateNavCounts() {
+  $('navCountInspection').textContent = state.banks.inspection && state.banks.inspection.entries ? state.banks.inspection.entries.length : '';
+  $('navCountValuation').textContent = state.banks.valuation && state.banks.valuation.entries ? state.banks.valuation.entries.length : '';
+}
+
+// ── dashboard ──────────────────────────────────────────────────────
+function fmtDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+function renderCards() {
+  const wrap = $('statCards');
+  wrap.innerHTML = '';
+  for (const name of Object.keys(BANK_NAMES)) {
+    const b = state.banks[name];
+    if (!b) { const s = el('div', 'skeleton'); wrap.appendChild(s); continue; }
+    const card = el('div', 'card');
+    const k = el('div', 'k', BANK_NAMES[name] + ' phrases');
+    let pill;
+    let big; let sub;
+    if (b.error) {
+      pill = el('span', 'pill err', 'Error'); big = '—'; sub = b.error;
+    } else if (b.published) {
+      pill = el('span', 'pill ok', 'Live'); big = 'Version ' + b.published.version;
+      sub = 'Published ' + fmtDate(b.published.publishedAt) + ' · ' + b.entries.length + ' phrases';
+    } else {
+      pill = el('span', 'pill warn', 'Not published yet'); big = b.entries.length + ' phrases';
+      sub = 'Phones use the wording built into the app. Your first save publishes this bank.';
+    }
+    k.appendChild(pill);
+    card.append(k, el('div', 'v', big), el('div', 's', sub));
+    const go2 = el('button', 'btn go', 'Open ' + BANK_NAMES[name]);
+    go2.type = 'button';
+    go2.onclick = () => go(name);
+    card.appendChild(go2);
+    wrap.appendChild(card);
+  }
+}
+
+// ── editor ─────────────────────────────────────────────────────────
+async function openEditor() {
+  setStatus('Loading…', '');
+  $('list').innerHTML = '';
+  $('listMeta').textContent = '';
+  renderEditor();
+  const b = await ensureBank(state.bank, true);
+  if (state.view !== state.bank) return; // user navigated away
+  updateNavCounts();
+  if (b.error) { setStatus(b.error, 'err'); return; }
   renderStatus();
   renderList();
-  renderEditor();
 }
 
 function renderStatus() {
-  const p = state.published;
-  if (p) {
-    const when = p.publishedAt ? new Date(p.publishedAt).toLocaleString() : '';
-    setStatus('Published version ' + p.version + (when ? ' · ' + when : '') + ' · live on all phones', 'ok');
-  } else {
-    setStatus('Not published yet: phones use the bank built into the app. Your first save publishes the complete bank.', 'warn');
-  }
+  const p = cur().published;
+  if (p) setStatus('Published version ' + p.version + ' · ' + fmtDate(p.publishedAt) + ' · live on all phones', 'ok');
+  else setStatus('Not published yet: phones use the bank built into the app. Your first save publishes the complete bank.', 'warn');
 }
 function setStatus(text, kind) {
-  const el = $('bankStatus');
-  el.textContent = text;
-  el.className = 'bank-status ' + (kind || '');
+  const e = $('bankStatus');
+  e.textContent = text;
+  e.className = 'bank-status ' + (kind || '');
 }
 
-// ── list / editor ──────────────────────────────────────────────────
+function originalEntry(key) { const b = cur(); return b && b.entries ? b.entries.find((x) => x.key === key) : undefined; }
 function currentValue(key) {
   if (state.edited.has(key)) return state.edited.get(key);
   const e = originalEntry(key);
   return e ? e.value : '';
 }
-function originalEntry(key) { return state.entries.find((x) => x.key === key); }
-
 function matches(e) {
   const f = state.filter;
   if (!f) return true;
   return e.key.toLowerCase().includes(f) ||
-         String(e.screenId || '').toLowerCase().includes(f) ||
-         String(currentValue(e.key)).toLowerCase().includes(f);
+    String(e.screenId || '').toLowerCase().includes(f) ||
+    String(currentValue(e.key)).toLowerCase().includes(f);
 }
 
 function renderList() {
+  const b = cur();
   const list = $('list');
   list.innerHTML = '';
+  if (!b || !b.entries) return;
   const frag = document.createDocumentFragment();
   let shown = 0;
-  for (const e of state.entries) {
+  for (const e of b.entries) {
     if (!matches(e)) continue;
     shown++;
-    if (shown > 600) continue; // keep the DOM light; narrow the search
-    const row = document.createElement('button');
+    if (shown > 400) continue; // keep the DOM light; narrow the search
+    const row = el('button', 'row' + (e.key === state.selected ? ' active' : '') + (state.edited.has(e.key) ? ' edited' : ''));
     row.type = 'button';
-    row.className = 'row' + (e.key === state.selected ? ' active' : '') + (state.edited.has(e.key) ? ' edited' : '');
-    row.innerHTML = '<div class="rk"></div><div class="rv"></div>';
-    row.querySelector('.rk').textContent = e.screenId ? e.key + '  ·  ' + e.screenId : e.key;
-    row.querySelector('.rv').textContent = currentValue(e.key);
+    row.append(el('div', 'rk', e.screenId ? e.key + '  ·  ' + e.screenId : e.key), el('div', 'rv', currentValue(e.key)));
     row.onclick = () => select(e.key);
     frag.appendChild(row);
   }
   list.appendChild(frag);
-  if (shown > 600) {
-    const more = document.createElement('div');
-    more.className = 'row';
-    more.style.cursor = 'default';
-    more.innerHTML = '<div class="rv"></div>';
-    more.querySelector('.rv').textContent = (shown - 600) + ' more… refine your search.';
-    list.appendChild(more);
-  }
+  $('listMeta').textContent = shown === b.entries.length
+    ? b.entries.length + ' phrases'
+    : shown + ' of ' + b.entries.length + ' phrases' + (shown > 400 ? ' (showing 400, refine your search)' : '');
+  if (shown === 0) list.appendChild(el('div', 'row', 'No phrase matches your search.'));
 }
 
-function select(key) {
-  state.selected = key;
-  renderList();
-  renderEditor();
-}
+function select(key) { state.selected = key; renderList(); renderEditor(); }
 
 function renderEditor() {
   const hasSel = state.selected != null;
@@ -212,18 +295,9 @@ function validate() {
 
   const chips = $('tokenChips');
   chips.innerHTML = '';
-  for (const t of before) {
-    const c = document.createElement('span');
-    c.className = 'chip' + (missing.includes(t) ? ' missing' : '');
-    c.textContent = t;
-    chips.appendChild(c);
-  }
-  for (const t of added) {
-    const c = document.createElement('span');
-    c.className = 'chip added';
-    c.textContent = t + ' (new)';
-    chips.appendChild(c);
-  }
+  if (!before.length && !added.length) chips.appendChild(el('span', 'muted tiny', 'None: this sentence has no placeholders.'));
+  for (const t of before) chips.appendChild(el('span', 'chip' + (missing.includes(t) ? ' missing' : ''), t));
+  for (const t of added) chips.appendChild(el('span', 'chip added', t + ' (new)'));
 
   const dirty = state.edited.has(key) || $('editValue').value !== (orig ? orig.value : '');
   $('dirtyBadge').hidden = !dirty;
@@ -232,90 +306,59 @@ function validate() {
   const override = $('overrideChk').checked;
   const changed = missing.length || added.length;
   if (changed && !override) {
-    v.hidden = false; v.className = 'validation err';
-    v.innerHTML =
-      (missing.length ? 'Removed token(s): <b></b>. ' : '') +
-      (added.length ? 'New token(s): <b></b>. ' : '') +
-      'Fix the tokens, or tick Override to save anyway.';
-    const bs = v.querySelectorAll('b');
-    let i = 0;
-    if (missing.length) bs[i++].textContent = missing.join(', ');
-    if (added.length) bs[i++].textContent = added.join(', ');
+    v.hidden = false; v.className = 'alert err';
+    v.textContent =
+      (missing.length ? 'Removed placeholder(s): ' + missing.join(', ') + '. ' : '') +
+      (added.length ? 'New placeholder(s): ' + added.join(', ') + '. ' : '') +
+      'Put them back as they were, or tick Override only if your developer asked for this change.';
     $('saveBtn').disabled = true;
   } else if (changed && override) {
-    v.hidden = false; v.className = 'validation warn';
-    v.textContent = 'Token lock overridden — make sure the engine substitutes these tokens.';
+    v.hidden = false; v.className = 'alert warn';
+    v.textContent = 'Token lock overridden. Make sure the report engine fills these placeholders.';
     $('saveBtn').disabled = false;
   } else {
     v.hidden = true;
     $('saveBtn').disabled = !dirty;
   }
-  $('saveBtn').textContent = state.session ? 'Save & publish' : 'Save (log in first)';
-  return { missing, added, override };
 }
 
 // ── save = publish the whole bank ──────────────────────────────────
 async function save() {
-  if (!state.session) {
-    toast('Log in with an admin account to publish.', 'err');
-    openLogin();
-    return;
-  }
+  const b = cur();
   const key = state.selected;
   const value = $('editValue').value;
-  const { override } = validate();
+  const override = $('overrideChk').checked;
 
   // Apply on a copy so a failed publish never corrupts the in-memory bank.
-  const draft = JSON.parse(JSON.stringify(state.raw));
+  const draft = JSON.parse(JSON.stringify(b.raw));
   const edit = L.applyEdit(draft, key, value, override);
   if (edit.status !== 200) { toast(edit.body.message || edit.body.error, 'err'); return; }
 
   $('saveBtn').disabled = true;
+  $('saveBtn').textContent = 'Publishing…';
   setStatus('Publishing…', '');
   const r = await apiJson('/admin/config/phrase-bank/upload', {
     method: 'POST', auth: true, body: { bankType: L.API_TYPE[state.bank], bank: draft },
   });
+  $('saveBtn').textContent = 'Save & publish';
   if (r.status === 201 || r.status === 200) {
-    state.raw = draft;
+    b.raw = draft;
     const e = originalEntry(key);
     if (e) { e.value = value; e.tokens = L.tokenSet(value); }
     state.edited.delete(key);
-    state.published = { version: r.body.version, checksum: r.body.checksum, publishedAt: r.body.publishedAt };
+    b.published = { version: r.body.version, checksum: r.body.checksum, publishedAt: r.body.publishedAt };
     renderStatus();
-    toast(r.body.unchanged ? 'Already live (no change).' : 'Saved and LIVE on all phones (version ' + r.body.version + ')', 'ok');
+    toast(r.body.unchanged ? 'Already live, nothing changed.' : 'Saved and LIVE on all phones (version ' + r.body.version + ')', 'ok');
     renderList();
     renderEditor();
     return;
   }
   renderStatus();
-  $('saveBtn').disabled = false;
-  if (r.status === 401) { saveSession(null); setLive(); toast('Login expired. Log in again, then save.', 'err'); openLogin(); return; }
-  if (r.status === 403) { toast('This account is not an ADMIN. Cannot publish.', 'err'); return; }
+  validate();
+  if (r.status === 401) { await signOut('Your session expired. Please sign in again.'); return; }
+  if (r.status === 403) { toast('This account is not an ADMIN, so it cannot publish.', 'err'); return; }
   toast('NOT published: ' + (r.body.message || ('server error ' + r.status)), 'err');
 }
-
-// ── login dialog ───────────────────────────────────────────────────
-function openLogin() { $('loginErr').hidden = true; $('loginDlg').showModal(); }
-
-$('loginBtn').addEventListener('click', async () => {
-  if (state.session) { await logout(); toast('Logged out.', 'ok'); renderEditor(); return; }
-  openLogin();
-});
-$('loginCancel').addEventListener('click', () => $('loginDlg').close());
-$('loginForm').addEventListener('submit', async (ev) => {
-  ev.preventDefault();
-  $('loginSubmit').disabled = true;
-  try {
-    const r = await login($('loginEmail').value.trim(), $('loginPass').value);
-    if (!r.ok) { $('loginErr').textContent = r.message; $('loginErr').hidden = false; return; }
-    $('loginPass').value = '';
-    $('loginDlg').close();
-    toast('Logged in. Saves now go live on all phones.', 'ok');
-    renderEditor();
-  } finally {
-    $('loginSubmit').disabled = false;
-  }
-});
 
 let toastTimer;
 function toast(msg, kind) {
@@ -324,17 +367,39 @@ function toast(msg, kind) {
   t.className = 'toast ' + (kind || '');
   t.hidden = false;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { t.hidden = true; }, 3600);
+  toastTimer = setTimeout(() => { t.hidden = true; }, 4200);
 }
 
 // ── events ─────────────────────────────────────────────────────────
-$('search').addEventListener('input', (e) => { state.filter = e.target.value.trim().toLowerCase(); renderList(); });
-$('bankSelect').addEventListener('change', (e) => {
-  if (state.edited.size && !confirm(state.edited.size + ' unsaved edit(s) will be discarded. Switch bank?')) {
-    e.target.value = state.bank; return;
+$('loginForm').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const btn = $('loginSubmit');
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  $('loginErr').hidden = true;
+  try {
+    const r = await login($('loginEmail').value.trim(), $('loginPass').value);
+    if (!r.ok) { $('loginErr').textContent = r.message; $('loginErr').hidden = false; return; }
+    $('loginPass').value = '';
+    showApp();
+  } finally {
+    btn.disabled = false; btn.textContent = 'Sign in';
   }
-  loadBank(e.target.value).catch((err) => { setStatus(String(err.message || err), 'err'); toast(String(err.message || err), 'err'); });
 });
+$('pwToggle').addEventListener('click', () => {
+  const p = $('loginPass');
+  const show = p.type === 'password';
+  p.type = show ? 'text' : 'password';
+  $('pwToggle').textContent = show ? 'Hide' : 'Show';
+});
+$('logoutBtn').addEventListener('click', async () => {
+  if (state.edited.size && !confirm(state.edited.size + ' unsaved edit(s) will be lost. Sign out?')) return;
+  await signOut();
+});
+$('menuBtn').addEventListener('click', () => $('side').classList.toggle('open'));
+document.querySelectorAll('.nav-item').forEach((b) => b.addEventListener('click', () => go(b.dataset.view)));
+document.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', () => go(b.dataset.go)));
+
+$('search').addEventListener('input', (e) => { state.filter = e.target.value.trim().toLowerCase(); renderList(); });
 $('editValue').addEventListener('input', () => {
   const key = state.selected;
   const orig = originalEntry(key);
@@ -350,7 +415,19 @@ $('revertBtn').addEventListener('click', () => {
   validate(); renderList();
 });
 window.addEventListener('beforeunload', (e) => { if (state.edited.size) { e.preventDefault(); e.returnValue = ''; } });
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's' && state.view !== 'dash' && !$('saveBtn').disabled && state.selected != null) {
+    e.preventDefault(); save();
+  }
+});
 
-loadSession();
-setLive();
-loadBank('inspection').catch((err) => { setStatus(String(err.message || err), 'err'); toast(String(err.message || err), 'err'); });
+// ── boot ───────────────────────────────────────────────────────────
+(async function boot() {
+  loadSession();
+  if (!state.session) { showLogin(); return; }
+  // Verify the stored session still works before showing anything.
+  const me = await apiJson('/auth/me', { auth: true });
+  if (me.status === 200 && (!me.body.role || me.body.role === 'ADMIN')) { showApp(); return; }
+  saveSession(null);
+  showLogin();
+})();
