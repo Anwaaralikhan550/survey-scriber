@@ -1299,18 +1299,20 @@ class _InspectionDropdownState extends State<_InspectionDropdown>
     final theme = Theme.of(parentContext);
     final colorScheme = theme.colorScheme;
     final screenHeight = MediaQuery.of(parentContext).size.height;
-    final bottomPadding = MediaQuery.of(parentContext).viewPadding.bottom;
+    final view = View.of(parentContext);
+    // System navigation bar height. Android 15 draws apps edge-to-edge, so the
+    // sheet must keep its last option above the nav bar. Take the largest of
+    // the MediaQuery values and the raw window inset so it is never 0 by mistake.
+    final bottomPadding = [
+      MediaQuery.viewPaddingOf(parentContext).bottom,
+      MediaQuery.paddingOf(parentContext).bottom,
+      view.viewPadding.bottom / view.devicePixelRatio,
+    ].reduce((a, b) => a > b ? a : b);
 
     setState(() => _isOpen = true);
     _iconController.forward();
 
-    const headerHeight = 76.0;
-    const itemHeight = 49.0;
-    final contentHeight =
-        headerHeight + (widget.options.length * itemHeight) + bottomPadding;
     final maxHeight = screenHeight * 0.7;
-    final sheetHeight =
-        contentHeight.clamp(headerHeight + itemHeight, maxHeight);
 
     showModalBottomSheet<String>(
       context: parentContext,
@@ -1320,65 +1322,71 @@ class _InspectionDropdownState extends State<_InspectionDropdown>
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (sheetContext) => SizedBox(
-        height: sheetHeight,
-        child: Column(
-          children: [
-            // Drag handle
-            Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 8),
-              width: 32,
-              height: 4,
-              decoration: BoxDecoration(
-                color: colorScheme.onSurfaceVariant.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(2),
+      builder: (sheetContext) => ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: maxHeight),
+        child: SafeArea(
+          top: false,
+          minimum: EdgeInsets.only(bottom: bottomPadding),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Drag handle
+              Container(
+                margin: const EdgeInsets.only(top: 12, bottom: 8),
+                width: 32,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: colorScheme.onSurfaceVariant.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-            ),
-            // Title
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 4, 20, 12),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  widget.label,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
+              // Title
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 4, 20, 12),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    widget.label,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Divider(
-              height: 1,
-              color: colorScheme.outlineVariant.withOpacity(0.3),
-            ),
-            // Options list
-            Expanded(
-              child: ListView.separated(
-                padding: EdgeInsets.fromLTRB(0, 4, 0, bottomPadding + 4),
-                itemCount: widget.options.length,
-                separatorBuilder: (_, __) => Divider(
-                  height: 1,
-                  indent: 52,
-                  endIndent: 20,
-                  color: colorScheme.outlineVariant.withOpacity(0.15),
-                ),
-                itemBuilder: (_, index) {
-                  final option = widget.options[index];
-                  final isSelected = option == widget.value;
-
-                  return _DropdownOption(
-                    label: option,
-                    isSelected: isSelected,
-                    onTap: () {
-                      widget.onChanged(option);
-                      widget.onOptionCommitted?.call();
-                      Navigator.pop(sheetContext, option);
-                    },
-                  );
-                },
+              Divider(
+                height: 1,
+                color: colorScheme.outlineVariant.withOpacity(0.3),
               ),
-            ),
-          ],
+              // Options list
+              Flexible(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.fromLTRB(0, 4, 0, 8),
+                  itemCount: widget.options.length,
+                  separatorBuilder: (_, __) => Divider(
+                    height: 1,
+                    indent: 52,
+                    endIndent: 20,
+                    color: colorScheme.outlineVariant.withOpacity(0.15),
+                  ),
+                  itemBuilder: (_, index) {
+                    final option = widget.options[index];
+                    final isSelected = option == widget.value;
+
+                    return _DropdownOption(
+                      label: option,
+                      isSelected: isSelected,
+                      onTap: () {
+                        widget.onChanged(option);
+                        widget.onOptionCommitted?.call();
+                        Navigator.pop(sheetContext, option);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     ).then((_) {
