@@ -16985,6 +16985,13 @@
           "order": 4
         },
         {
+          "id": "group_other_area_33",
+          "title": "Other Area",
+          "type": "group",
+          "parentId": "group_e9_other_area_32",
+          "order": 1
+        },
+        {
           "id": "group_repairs_42",
           "title": "Repairs",
           "type": "group",
@@ -22837,13 +22844,6 @@
               "conditionalMode": "show"
             }
           ]
-        },
-        {
-          "id": "group_other_area_33",
-          "title": "Other Area",
-          "type": "group",
-          "parentId": "group_e9_other_area_32",
-          "order": 1
         }
       ]
     },

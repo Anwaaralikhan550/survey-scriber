@@ -57,6 +57,14 @@ abstract class BaseSurveyRepository {
   Future<InspectionTreePayload> loadTree() async {
     if (_treeCache != null) return _treeCache!;
 
+    // Web has no documents directory (no admin override / OTA cache);
+    // the bundled asset is the only source there.
+    if (kIsWeb) {
+      final raw = await rootBundle.loadString(_treeAsset);
+      _treeCache = InspectionTreePayload.fromJson(raw);
+      return _treeCache!;
+    }
+
     final dir = await getApplicationDocumentsDirectory();
 
     // ─── Bundled asset override ──────────────────────────────────────

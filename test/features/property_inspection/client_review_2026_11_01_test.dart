@@ -81,6 +81,26 @@ void main() {
           'activity_inside_property_bathroom_fittings_main_screen');
     });
 
+    test('main group is placed before Repairs in the file (the app orders by placement)', () {
+      // The section page sorts tiles by displayOrder, which is the node's index
+      // in the JSON, not its "order" attribute. Found in the 1 Nov E2E run:
+      // E9 showed [Repairs, Other Area].
+      final raw = File('assets/property_inspection/inspection_tree.json').readAsStringSync();
+      int placement(String id) => raw.indexOf('"id": "$id"');
+      for (final landing in [
+        'group_e1_chimney_5', 'group_e2_roof_covering_9', 'group_e6_outside_doors_23',
+        'group_e7_conservatory_and_porches_26', 'group_e8_other_joinery_and_finishes_31',
+        'group_e9_other_area_32', 'group_f5_fireplaces_and_chimneys_69',
+        'group_f6_built_in_fittings_72', 'group_f7_woodwork_74', 'group_f8_bathroom_fittings_77',
+      ]) {
+        final kids = childrenOf(landing);
+        final repairs = kids.singleWhere((n) => n['title'] == 'Repairs');
+        final main = kids.firstWhere((n) => n['type'] == 'group' && n['title'] != 'Repairs');
+        expect(placement(main['id'] as String), lessThan(placement(repairs['id'] as String)),
+            reason: '$landing: ${main['title']} must be placed before Repairs');
+      }
+    });
+
     test('every element landing has exactly one header screen in its main group', () {
       for (final g in [
         'group_chimney_6', 'group_roof_covering_10', 'group_outside_doors_24',

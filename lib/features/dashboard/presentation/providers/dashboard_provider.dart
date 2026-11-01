@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/domain/entities/survey.dart';
@@ -188,7 +189,8 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       _allSurveys = await _repository.getAllSurveys();
       if (!mounted) return;
       _recompute();
-    } catch (e) {
+    } catch (e, st) {
+      debugPrint('[Dashboard] load failed: $e ' + '$st');
       if (!mounted) return;
       state = state.copyWith(
         isLoading: false,

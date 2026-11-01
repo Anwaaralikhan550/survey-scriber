@@ -1,5 +1,7 @@
 import 'package:drift/drift.dart';
-import 'package:drift_flutter/drift_flutter.dart';
+
+import 'open_connection_native.dart'
+    if (dart.library.js_interop) 'open_connection_web.dart';
 
 import 'daos/generated_reports_dao.dart';
 import 'daos/media_dao.dart';
@@ -39,7 +41,7 @@ part 'app_database.g.dart';
   daos: [SyncQueueDao, MediaDao, SignatureDao, GeneratedReportsDao, SurveyRecommendationsDao, SurveyQualityScoresDao],
 )
 class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(driftDatabase(name: 'survey_scriber'));
+  AppDatabase() : super(openAppConnection());
 
   AppDatabase.forTesting(super.e);
 
