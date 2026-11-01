@@ -34,8 +34,6 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
   static const String _environmentImpactScreenId =
       'activity_energy_environment_impect';
   static const String _otherServiceScreenId = 'activity_other_service';
-  static const String _floorsAboutScreenId =
-      'activity_in_side_property_floors_about_floor';
   static const String _groundAreaScreenId = 'activity_property_ground_area';
   static const Map<String, String> _groundAreaCheckboxToScreenId = {
     // Reuse existing screens only (no recreation).
@@ -129,7 +127,6 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
     final visibleFields = filterLonelyLabels(normalizedFields
         .where((field) => shouldShowInspectionField(field, state.answers))
         .toList());
-    _debugScreenPayload(screenId, normalizedFields, visibleFields);
     final enginePhrases =
         phraseEngine?.buildPhrases(screenId, state.answers) ?? const <String>[];
     final fieldPhrases =
@@ -570,23 +567,5 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
         ),
       ),
     );
-  }
-
-  void _debugScreenPayload(
-    String screenId,
-    List<InspectionFieldDefinition> normalizedFields,
-    List<InspectionFieldDefinition> visibleFields,
-  ) {
-    if (screenId != _floorsAboutScreenId) return;
-    final normalized = normalizedFields
-        .map(
-            (f) => '${f.id}:${f.label}:${f.type.name}:${f.conditionalOn ?? ''}')
-        .join(' | ');
-    final visible = visibleFields
-        .map((f) => '${f.id}:${f.label}:${f.type.name}')
-        .join(' | ');
-    debugPrint('[DBG_FLOORS_ABOUT] screenId=$screenId');
-    debugPrint('[DBG_FLOORS_ABOUT] normalized=$normalized');
-    debugPrint('[DBG_FLOORS_ABOUT] visible=$visible');
   }
 }
