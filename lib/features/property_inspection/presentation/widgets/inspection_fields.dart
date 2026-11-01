@@ -836,8 +836,6 @@ List<InspectionFieldDefinition> sanitizeInspectionFieldsForScreen(
       screenId ==
           'activity_outside_property_other_about_joinery_and_finishes' ||
       screenId ==
-          'activity_outside_property_other_joinery_finishes_condition' ||
-      screenId ==
           'activity_outside_property_other_about_joinery_and_finishes__other_joinery_and_finishes') {
     return fields
         .map((field) => field.id == 'actv_condition'

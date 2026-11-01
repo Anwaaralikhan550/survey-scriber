@@ -65,8 +65,6 @@ abstract class BaseSurveyRepository {
       return _treeCache!;
     }
 
-    final dir = await getApplicationDocumentsDirectory();
-
     // ─── Bundled asset override ──────────────────────────────────────
     // When bundledTreeVersion > 0, ALWAYS use the bundled asset.
     // This ensures app-shipped tree fixes take effect regardless of
@@ -79,6 +77,8 @@ abstract class BaseSurveyRepository {
       _treeCache = InspectionTreePayload.fromJson(raw);
       return _treeCache!;
     }
+
+    final dir = await getApplicationDocumentsDirectory();
 
     // ─── PRIORITY 1: Admin local override (set by admin panel) ─────
     try {
@@ -199,11 +199,15 @@ abstract class BaseSurveyRepository {
           ..where((tbl) => tbl.surveyId.equals(surveyId)))
         .get();
     if (existingRows.isNotEmpty && existingRows.length == expectedCount) {
-      // Reinitialize when tree structure changed (parent/title/type), not just count.
+      // Reinitialize when tree structure changed (parent/title/type/placement),
+      // not just count. Placement matters: section pages order tiles by
+      // displayOrder, so a reordered tree must reach existing surveys too.
       final treeById = <String, InspectionNodeDefinition>{};
+      final treeIndex = <String, int>{};
       for (final section in tree.sections) {
-        for (final node in section.nodes) {
-          treeById[node.id] = node;
+        for (var i = 0; i < section.nodes.length; i += 1) {
+          treeById[section.nodes[i].id] = section.nodes[i];
+          treeIndex[section.nodes[i].id] = i;
         }
       }
       var structureMatches = true;
@@ -212,7 +216,8 @@ abstract class BaseSurveyRepository {
         if (node == null ||
             row.parentId != node.parentId ||
             row.title != node.title ||
-            row.nodeType != node.type.name) {
+            row.nodeType != node.type.name ||
+            row.displayOrder != treeIndex[row.screenId]) {
           structureMatches = false;
           break;
         }
@@ -222,10 +227,15 @@ abstract class BaseSurveyRepository {
       }
     }
     final now = DateTime.now();
+    // A rebuild after an app update must not wipe the surveyor's progress:
+    // carry each screen's completed tick, phrase text, manual-edit flag and
+    // note over to the new row (answers live in a separate table).
+    final previous = {for (final row in existingRows) row.screenId: row};
     final entries = <InspectionV2ScreensCompanion>[];
     for (final section in tree.sections) {
       for (var i = 0; i < section.nodes.length; i += 1) {
         final node = section.nodes[i];
+        final old = previous[node.id];
         entries.add(InspectionV2ScreensCompanion.insert(
           id: '${surveyId}_$_idPrefix${node.id}',
           surveyId: surveyId,
@@ -236,7 +246,12 @@ abstract class BaseSurveyRepository {
           nodeType: Value(node.type.name),
           parentId: Value(node.parentId),
           displayOrder: i,
-          createdAt: now,
+          createdAt: old?.createdAt ?? now,
+          isCompleted: Value(old?.isCompleted ?? false),
+          phraseOutput: Value(old?.phraseOutput),
+          phraseEditedManually: Value(old?.phraseEditedManually ?? false),
+          userNote: Value(old?.userNote),
+          updatedAt: Value(old?.updatedAt),
         ));
       }
     }

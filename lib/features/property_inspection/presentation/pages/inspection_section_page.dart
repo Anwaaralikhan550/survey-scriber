@@ -7,6 +7,7 @@ import '../../../../core/database/app_database.dart';
 import '../../domain/models/inspection_models.dart';
 import '../../domain/field_phrase_processor.dart';
 import '../../domain/group_completion.dart';
+import '../../domain/section_visibility.dart';
 import '../providers/inspection_providers.dart';
 import '../widgets/inspection_fields.dart';
 
@@ -140,180 +141,12 @@ class _InspectionSectionPageState extends ConsumerState<InspectionSectionPage> {
                 data: (value) => value,
                 orElse: () => const <String, InspectionNodeDefinition>{},
               );
-              final visibleNodes = nodes.where((node) {
-                if (node.parentId != parentNodeId) return false;
-                if (node.nodeType != 'screen') return true;
-                final definition = nodeMap[node.screenId];
-                return definition?.inlinePosition != 'header';
-              }).toList();
-
-              // Legacy parity: remove rogue outside-property group from
-              // Inside Property top-level menu.
-              if (sectionKey == 'F' && parentNodeId == null) {
-                visibleNodes.removeWhere((node) =>
-                    node.screenId ==
-                    'group_outside_property_other_joinery_and_finishes_main_screen_80');
-              }
-
-              // Legacy parity: E9 "Other area" menu should only expose
-              // Repairs + Not inspected, with Note/Condition Rating via
-              // the inline header screen.
-              if (parentNodeId == 'group_e9_other_area_32') {
-                visibleNodes.retainWhere((node) =>
-                    node.screenId == 'group_other_area_33' ||
-                    node.screenId == 'group_repairs_42' ||
-                    node.screenId ==
-                        'activity_outside_property_other_not_inspected');
-              }
-              if (parentNodeId == 'group_other_area_33') {
-                visibleNodes.retainWhere((node) =>
-                    node.screenId ==
-                        'activity_outside_property_other_communal_area' ||
-                    node.screenId == 'group_other_external_area_34');
-              }
-              if (parentNodeId == 'group_carport_35') {
-                // Legacy parity: Carport should show only these screens.
-                const allowed = <String>{
-                  'activity_outside_property_other_other_external', // Construction
-                  'activity_outside_property_other_other_roof', // Roof
-                  'activity_outside_property_other_floors', // Floor
-                  'activity_outside_property_other_drains', // Drains
-                  'activity_out_side_other_external_area_condition', // Condition
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_porch_canopy_36') {
-                // Legacy parity: Porch Canopy should show only these screens.
-                const allowed = <String>{
-                  'activity_outside_property_other_other_external__construction', // Construction
-                  'activity_outside_property_other_other_roof__roof', // Roof
-                  'activity_out_side_other_external_area_condition__condition', // Condition
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_roof_terrace_37') {
-                // Legacy parity: Roof Terrace excludes Wall Construction.
-                const allowed = <String>{
-                  'activity_outside_property_other_other_external__construction__2', // Construction
-                  'activity_outside_property_other_other_roof__roof__2', // Roof
-                  'activity_outside_property_other_floors__floor__2', // Floor
-                  'activity_outside_property_other_handrails__handrails__2', // Handrails
-                  'activity_outside_property_other_drains__drains__2', // Drains
-                  'activity_outside_property_other_overloaded__overloaded__2', // Overloaded
-                  'activity_outside_property_other_no_safety_glass__no_safety_glass__2', // No safety glass
-                  'activity_out_side_other_external_area_condition__condition__2', // Condition
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_balcony_38') {
-                // Legacy parity: Balcony excludes Roof and Wall Construction.
-                const allowed = <String>{
-                  'activity_outside_property_other_other_external__construction__3', // Construction
-                  'activity_outside_property_other_floors__floor__3', // Floor
-                  'activity_outside_property_other_handrails__handrails__3', // Handrails
-                  'activity_outside_property_other_drains__drains__3', // Drains
-                  'activity_outside_property_other_overloaded__overloaded__3', // Overloaded
-                  'activity_outside_property_other_no_safety_glass__no_safety_glass__3', // No safety glass
-                  'activity_out_side_other_external_area_condition__condition__3', // Condition
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_juliet_balcony_39') {
-                // Legacy parity: Juliet Balcony excludes Roof and Wall Construction.
-                const allowed = <String>{
-                  'activity_outside_property_other_other_external__construction__4', // Construction
-                  'activity_outside_property_other_floors__floor__4', // Floor
-                  'activity_outside_property_other_handrails__handrails__4', // Handrails
-                  'activity_outside_property_other_drains__drains__4', // Drains
-                  'activity_outside_property_other_overloaded__overloaded__4', // Overloaded
-                  'activity_outside_property_other_no_safety_glass__no_safety_glass__4', // No safety glass
-                  'activity_out_side_other_external_area_condition__condition__4', // Condition
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_external_stairs_40') {
-                // Legacy parity: External Stairs excludes Drains and Wall Construction.
-                const allowed = <String>{
-                  'activity_outside_property_other_other_external__construction__5', // Construction
-                  'activity_outside_property_other_other_roof__roof__5', // Roof
-                  'activity_outside_property_other_floors__floor__5', // Floor
-                  'activity_outside_property_other_handrails__handrails__5', // Handrails
-                  'activity_outside_property_other_overloaded__overloaded__5', // Overloaded
-                  'activity_outside_property_other_no_safety_glass__no_safety_glass__5', // No safety glass
-                  'activity_out_side_other_external_area_condition__condition__5', // Condition
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_other_41') {
-                // Legacy parity: Other excludes Wall Construction.
-                const allowed = <String>{
-                  'activity_outside_property_other_other_external__construction__6', // Construction
-                  'activity_outside_property_other_other_roof__roof__6', // Roof
-                  'activity_outside_property_other_floors__floor__6', // Floor
-                  'activity_outside_property_other_handrails__handrails__6', // Handrails
-                  'activity_outside_property_other_drains__drains__6', // Drains
-                  'activity_outside_property_other_overloaded__overloaded__6', // Overloaded
-                  'activity_outside_property_other_no_safety_glass__no_safety_glass__6', // No safety glass
-                  'activity_out_side_other_external_area_condition__condition__6', // Condition
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_carport_43') {
-                // Legacy parity: Repairs > Carport shows only Wall, Roof, Floor, Drains.
-                const allowed = <String>{
-                  'activity_outside_property_other_repairs_wall',
-                  'activity_outside_property_other_repairs_roof',
-                  'activity_outside_property_other_repairs_floor',
-                  'activity_outside_property_other_repairs_drains',
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_porch_canopy_44') {
-                // Legacy parity: Repairs > Porch Canopy shows only Roof.
-                const allowed = <String>{
-                  'activity_outside_property_other_repairs_roof__roof',
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_wood_work_75') {
-                // Legacy parity: Wood Work menu exposes only 3 entries.
-                const allowed = <String>{
-                  'activity_in_side_property_wood_work_second',
-                  'activity_in_side_property_cupboards',
-                  'activity_in_side_property_wood_work_damaged_lock',
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_g3_water_91') {
-                // Legacy parity: Services > Water should expose only
-                // Water + Not Inspected at this level.
-                const allowed = <String>{
-                  'activity_services_water_main_screen',
-                  'activity_services_water_not_inspected',
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
-              if (parentNodeId == 'group_g4_heating_92') {
-                // Legacy parity: Services > Heating should expose only
-                // Heating + Not Inspected at this level.
-                const allowed = <String>{
-                  'activity_services_heating_main_screen',
-                  'activity_services_heating_not_inspected',
-                };
-                visibleNodes
-                    .retainWhere((node) => allowed.contains(node.screenId));
-              }
+              final visibleNodes = visibleSectionNodes(
+                sectionKey: sectionKey,
+                parentNodeId: parentNodeId,
+                nodes: nodes,
+                nodeMap: nodeMap,
+              );
 
               if (visibleNodes.isEmpty) {
                 return const Center(child: Text('No screens yet.'));

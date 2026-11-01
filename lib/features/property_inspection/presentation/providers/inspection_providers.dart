@@ -200,9 +200,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
   final Ref _ref;
   final String _surveyId;
   final String _screenId;
-  static const String _environmentImpactScreenId =
-      'activity_energy_environment_impect';
-  static const String _otherServiceScreenId = 'activity_other_service';
   static const String _chimneyLocationScreenId =
       'activity_outside_property_location';
   static const String _chimneyConditionScreenId =
@@ -409,8 +406,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
     'activity_outside_property_other_about_joinery_and_finishes',
     'activity_outside_property_other_about_joinery_and_finishes__other_joinery_and_finishes',
   };
-  static const String _otherJoineryConditionScreenId =
-      'activity_outside_property_other_joinery_finishes_condition';
   static const Set<String> _otherJoineryRepairsScreenIds = <String>{
     'activity_outside_property_other_joinery_and_finishes_repairs',
     'activity_outside_property_other_joinery_and_finishes_repairs__repairs',
@@ -1628,12 +1623,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
               '';
       if (materialOtherChecked && materialOtherText.trim().isEmpty) {
         return 'Enter Other material text or uncheck Other.';
-      }
-    }
-    if (_screenId == _otherJoineryConditionScreenId) {
-      final condition = (state.answers['actv_condition'] ?? '').trim();
-      if (condition.isEmpty) {
-        return 'Select condition.';
       }
     }
     if (_otherJoineryRepairsScreenIds.contains(_screenId)) {

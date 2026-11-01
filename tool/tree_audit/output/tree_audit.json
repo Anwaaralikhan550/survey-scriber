@@ -1,0 +1,86 @@
+[
+ {
+  "code": "L5",
+  "section": "E",
+  "id": "group_rainwater_goods_14",
+  "path": "E Outside Property > Rain Water Goods > Rainwater Goods",
+  "msg": "app shows ['Weather Condition', 'About RWG', 'Insufficient slope', 'Leakage', 'Corrosion', 'Blocked RWG', 'Blocked gullies', 'Open runoffs'] but \"order\" says ['Weather Condition', 'About RWG', 'Blocked RWG', 'Insufficient slope', 'Leakage', 'Blocked gullies', 'Corrosion', 'Open runoffs']"
+ },
+ {
+  "code": "L5",
+  "section": "E",
+  "id": "group_windows_21",
+  "path": "E Outside Property > Windows > Windows",
+  "msg": "app shows ['About windows', 'Velux window', 'Windowsills', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation', 'Sill Projection/Wall Sealing'] but \"order\" says ['About windows', 'Velux window', 'Windowsills', 'Sill Projection/Wall Sealing', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation']"
+ },
+ {
+  "code": "L5",
+  "section": "F",
+  "id": "group_ceilings_61",
+  "path": "F Inside Property > Ceilings > Ceilings",
+  "msg": "app shows ['About Ceilings', 'Cracks', 'Unevenness', 'Water staining', 'Polystyrene', 'Heavy Paper Lining'] but \"order\" says ['About Ceilings', 'Cracks', 'Polystyrene', 'Heavy Paper Lining', 'Unevenness', 'Water staining']"
+ },
+ {
+  "code": "L5",
+  "section": "F",
+  "id": "group_roof_structure_58",
+  "path": "F Inside Property > Roof Structure > Roof Structure",
+  "msg": "app shows ['Loft Converted', 'About Roof structure', 'Roof underlay', 'Roof ventilation', 'Roof insulation', 'Water Tank', 'Insect infestation', 'Timber rot', 'Undersize timber', 'Heavy roof', 'Roof movement', 'Structural alterations', 'Removed Chimney Breast', 'Party Wall Problem'] but \"order\" says ['Loft Converted', 'About Roof structure', 'Water Tank', 'Insect infestation', 'Timber rot', 'Undersize timber', 'Heavy roof', 'Removed Chimney Breast', 'Party Wall Problem', 'Roof underlay', 'Roof ventilation', 'Roof insulation', 'Roof movement', 'Structural alterations']"
+ },
+ {
+  "code": "L5",
+  "section": "F",
+  "id": "group_walls_and_partitions_64",
+  "path": "F Inside Property > Walls and Partitions > Walls and Partitions",
+  "msg": "app shows ['Walls', 'Condensation', 'Dampness', 'Movement Cracks', 'Hollow plaster', 'Removed Wall'] but \"order\" says ['Walls', 'Condensation', 'Dampness', 'Movement Cracks', 'Removed Wall', 'Hollow plaster']"
+ },
+ {
+  "code": "L5",
+  "section": "K",
+  "id": "activity_capture_floor_site_plan_sketches",
+  "path": "Capture floor/site plan sketches > Capture floor/site plan sketches",
+  "msg": "app shows ['Capture floor/site plan sketches', 'K1 Valuation assumptions'] but \"order\" says ['K1 Valuation assumptions', 'Capture floor/site plan sketches']"
+ },
+ {
+  "code": "T1",
+  "section": "E",
+  "id": "activity_outside_property_chimney_not_inspected",
+  "path": "E Outside Property > Chimney > Not Inspected",
+  "msg": "\"Not Inspected\" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})"
+ },
+ {
+  "code": "T1",
+  "section": "E",
+  "id": "activity_outside_property_roof_not_inspected",
+  "path": "E Outside Property > Roof Covering > Not Inspected",
+  "msg": "\"Not Inspected\" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})"
+ },
+ {
+  "code": "T1",
+  "section": "F",
+  "id": "activity_inside_property_roof_structure_not_inspected",
+  "path": "F Inside Property > Roof Structure > Not Inspected",
+  "msg": "\"Not Inspected\" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})"
+ },
+ {
+  "code": "E1",
+  "section": "D",
+  "id": "group_area_4",
+  "path": "About Property > Ground > Area > Area",
+  "msg": "empty group"
+ },
+ {
+  "code": "E1",
+  "section": "F",
+  "id": "group_outside_property_other_joinery_and_finishes_main_screen_80",
+  "path": "F Inside Property > OutSide_Property_Other_Joinery_And_Finishes_Main_Screen_",
+  "msg": "empty group"
+ },
+ {
+  "code": "E1",
+  "section": "K",
+  "id": "activity_capture_floor_site_plan_sketches",
+  "path": "Capture floor/site plan sketches > Capture floor/site plan sketches",
+  "msg": "screen has no answerable field"
+ }
+]

@@ -2235,10 +2235,17 @@
       "title": "H Grounds",
       "nodes": [
         {
+          "id": "group_garage_104",
+          "title": "Garage",
+          "type": "group",
+          "parentId": "group_h1_garage_50",
+          "order": 0
+        },
+        {
           "id": "activity_grounds_garage",
           "title": "Garage",
           "type": "screen",
-          "parentId": "group_h1_garage_50",
+          "parentId": "group_garage_104",
           "order": 1,
           "fields": [
             {
@@ -2992,8 +2999,9 @@
           "id": "activity_grounds_garage_main_screen",
           "title": "Garage",
           "type": "screen",
-          "parentId": "group_h1_garage_50",
-          "order": 0,
+          "parentId": "group_garage_104",
+          "order": -1,
+          "inlinePosition": "header",
           "fields": [
             {
               "id": "label_repairs",
@@ -3047,7 +3055,7 @@
           "title": "Repairs",
           "type": "group",
           "parentId": "group_h1_garage_50",
-          "order": 4
+          "order": 2
         },
         {
           "id": "activity_grounds_other_front_garden",
@@ -3288,8 +3296,8 @@
           "id": "activity_grounds_shared_access",
           "title": "Shared Access",
           "type": "screen",
-          "parentId": "group_h2_other_52",
-          "order": 4,
+          "parentId": "group_other_53",
+          "order": 10,
           "fields": [
             {
               "id": "cb_h2_h2_shared_garden",
@@ -3717,8 +3725,8 @@
           "id": "activity_grounds_other_private_road",
           "title": "Private Road",
           "type": "screen",
-          "parentId": "group_h2_other_52",
-          "order": 6,
+          "parentId": "group_other_53",
+          "order": 11,
           "fields": [
             {
               "id": "cb_private_road",
@@ -3976,8 +3984,8 @@
           "id": "activity_other_repair_shrinkable_clay",
           "title": "Shrinkable Clay",
           "type": "screen",
-          "parentId": "group_h2_other_52",
-          "order": 10,
+          "parentId": "group_other_53",
+          "order": 12,
           "fields": [
             {
               "id": "cb_shrinkable_clay",
@@ -4490,10 +4498,17 @@
           "order": 1
         },
         {
+          "id": "group_water_100",
+          "title": "Water",
+          "type": "group",
+          "parentId": "group_g3_water_91",
+          "order": 0
+        },
+        {
           "id": "activity_services_water_main_water",
           "title": "Main Water",
           "type": "screen",
-          "parentId": "group_g3_water_91",
+          "parentId": "group_water_100",
           "order": 1,
           "fields": [
             {
@@ -4569,10 +4584,17 @@
           ]
         },
         {
+          "id": "group_heating_101",
+          "title": "Heating",
+          "type": "group",
+          "parentId": "group_g4_heating_92",
+          "order": 0
+        },
+        {
           "id": "activity_services_heating_about_heating",
           "title": "About Heating System",
           "type": "screen",
-          "parentId": "group_g4_heating_92",
+          "parentId": "group_heating_101",
           "order": 1,
           "fields": [
             {
@@ -4921,10 +4943,17 @@
           "order": 1
         },
         {
+          "id": "group_drainage_102",
+          "title": "Drainage",
+          "type": "group",
+          "parentId": "group_g6_drainage_96",
+          "order": 0
+        },
+        {
           "id": "activity_services_drainage",
           "title": "Drainage",
           "type": "screen",
-          "parentId": "group_g6_drainage_96",
+          "parentId": "group_drainage_102",
           "order": 1,
           "fields": [
             {
@@ -5097,10 +5126,17 @@
           ]
         },
         {
+          "id": "group_common_services_103",
+          "title": "Common Services",
+          "type": "group",
+          "parentId": "group_g7_common_services_98",
+          "order": 0
+        },
+        {
           "id": "activity_services_shared_services",
           "title": "Common Services",
           "type": "screen",
-          "parentId": "group_g7_common_services_98",
+          "parentId": "group_common_services_103",
           "order": 1,
           "fields": [
             {
@@ -5972,18 +6008,11 @@
           ]
         },
         {
-          "id": "group_repairs_90",
-          "title": "Repairs",
-          "type": "group",
-          "parentId": "group_g2_gas_and_oil_88",
-          "order": 4
-        },
-        {
           "id": "activity_services_heating_repair_main_screen",
           "title": "Repairs",
           "type": "screen",
           "parentId": "group_g4_heating_92",
-          "order": 4,
+          "order": 2,
           "fields": [
             {
               "id": "cb_g4_repair",
@@ -6252,18 +6281,11 @@
           ]
         },
         {
-          "id": "group_repairs_95",
-          "title": "Repairs",
-          "type": "group",
-          "parentId": "group_g5_water_heating_93",
-          "order": 4
-        },
-        {
           "id": "group_repairs_97",
           "title": "Repairs",
           "type": "group",
           "parentId": "group_g6_drainage_96",
-          "order": 4
+          "order": 2
         },
         {
           "id": "group_g3_water_91",
@@ -6276,8 +6298,9 @@
           "id": "activity_services_water_main_screen",
           "title": "Water",
           "type": "screen",
-          "parentId": "group_g3_water_91",
-          "order": 0,
+          "parentId": "group_water_100",
+          "order": -1,
+          "inlinePosition": "header",
           "fields": [
             {
               "id": "label_water",
@@ -6325,8 +6348,8 @@
           "id": "activity_services_water_water_tank",
           "title": "Water Tank",
           "type": "screen",
-          "parentId": "group_g3_water_91",
-          "order": 3,
+          "parentId": "group_water_100",
+          "order": 2,
           "fields": [
             {
               "id": "label_water_tank_location",
@@ -6426,8 +6449,9 @@
           "id": "activity_services_heating_main_screen",
           "title": "Heating",
           "type": "screen",
-          "parentId": "group_g4_heating_92",
-          "order": 0,
+          "parentId": "group_heating_101",
+          "order": -1,
+          "inlinePosition": "header",
           "fields": [
             {
               "id": "label_repairs_21",
@@ -6563,8 +6587,9 @@
           "id": "activity_services_drainage_main_screen",
           "title": "Drainage",
           "type": "screen",
-          "parentId": "group_g6_drainage_96",
-          "order": 0,
+          "parentId": "group_drainage_102",
+          "order": -1,
+          "inlinePosition": "header",
           "fields": [
             {
               "id": "label_repairs_19",
@@ -6624,8 +6649,9 @@
           "id": "activity_services_common_services_main_screen",
           "title": "Common Services",
           "type": "screen",
-          "parentId": "group_g7_common_services_98",
-          "order": 0,
+          "parentId": "group_common_services_103",
+          "order": -1,
+          "inlinePosition": "header",
           "fields": [
             {
               "id": "ar_etNote",
@@ -6649,7 +6675,7 @@
           "title": "Repairs",
           "type": "screen",
           "parentId": "group_g3_water_91",
-          "order": 9999,
+          "order": 3,
           "fields": [
             {
               "id": "cb_g3_damaged_tank",
@@ -8060,49 +8086,49 @@
               "id": "label_fan_rooms",
               "label": "Fan(s) installed in",
               "type": "label",
-              "conditionalOn": "actv_status=Working extractor fan|Fan not working",
+              "conditionalOn": "actv_status=Working extractor fan|actv_status=Fan not working",
               "conditionalMode": "show"
             },
             {
               "id": "f8f_family_bathroom_s",
               "label": "family bathroom(s)",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Working extractor fan|Fan not working",
+              "conditionalOn": "actv_status=Working extractor fan|actv_status=Fan not working",
               "conditionalMode": "show"
             },
             {
               "id": "f8f_shower_room_s",
               "label": "shower room(s)",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Working extractor fan|Fan not working",
+              "conditionalOn": "actv_status=Working extractor fan|actv_status=Fan not working",
               "conditionalMode": "show"
             },
             {
               "id": "f8f_ensuite_shower_room_s",
               "label": "ensuite shower room(s)",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Working extractor fan|Fan not working",
+              "conditionalOn": "actv_status=Working extractor fan|actv_status=Fan not working",
               "conditionalMode": "show"
             },
             {
               "id": "f8f_ensuite_bathroom_s",
               "label": "ensuite bathroom(s)",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Working extractor fan|Fan not working",
+              "conditionalOn": "actv_status=Working extractor fan|actv_status=Fan not working",
               "conditionalMode": "show"
             },
             {
               "id": "f8f_separate_toilet_s",
               "label": "separate toilet(s)",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Working extractor fan|Fan not working",
+              "conditionalOn": "actv_status=Working extractor fan|actv_status=Fan not working",
               "conditionalMode": "show"
             },
             {
               "id": "f8f_utility_room",
               "label": "utility room",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Working extractor fan|Fan not working",
+              "conditionalOn": "actv_status=Working extractor fan|actv_status=Fan not working",
               "conditionalMode": "show"
             }
           ]
@@ -8455,42 +8481,42 @@
               "id": "label_ceiling_unevenness",
               "label": "Noted",
               "type": "label",
-              "conditionalOn": "actv_unevenness=Minor unevenness|Significant unevenness",
+              "conditionalOn": "actv_unevenness=Minor unevenness|actv_unevenness=Significant unevenness",
               "conditionalMode": "show"
             },
             {
               "id": "f2u_bowing",
               "label": "bowing",
               "type": "checkbox",
-              "conditionalOn": "actv_unevenness=Minor unevenness|Significant unevenness",
+              "conditionalOn": "actv_unevenness=Minor unevenness|actv_unevenness=Significant unevenness",
               "conditionalMode": "show"
             },
             {
               "id": "f2u_undulations",
               "label": "undulations",
               "type": "checkbox",
-              "conditionalOn": "actv_unevenness=Minor unevenness|Significant unevenness",
+              "conditionalOn": "actv_unevenness=Minor unevenness|actv_unevenness=Significant unevenness",
               "conditionalMode": "show"
             },
             {
               "id": "f2u_unevenness",
               "label": "unevenness",
               "type": "checkbox",
-              "conditionalOn": "actv_unevenness=Minor unevenness|Significant unevenness",
+              "conditionalOn": "actv_unevenness=Minor unevenness|actv_unevenness=Significant unevenness",
               "conditionalMode": "show"
             },
             {
               "id": "f2u_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_unevenness=Minor unevenness|Significant unevenness",
+              "conditionalOn": "actv_unevenness=Minor unevenness|actv_unevenness=Significant unevenness",
               "conditionalMode": "show"
             },
             {
               "id": "f2u_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_unevenness=Minor unevenness|Significant unevenness&f2u_other",
+              "conditionalOn": "actv_unevenness=Minor unevenness&f2u_other|actv_unevenness=Significant unevenness&f2u_other",
               "conditionalMode": "show"
             }
           ]
@@ -8515,56 +8541,56 @@
               "id": "label_staining_locations",
               "label": "Ceiling in",
               "type": "label",
-              "conditionalOn": "actv_staining=Wet water staining|Dry water staining",
+              "conditionalOn": "actv_staining=Wet water staining|actv_staining=Dry water staining",
               "conditionalMode": "show"
             },
             {
               "id": "f2wl_lounge",
               "label": "lounge",
               "type": "checkbox",
-              "conditionalOn": "actv_staining=Wet water staining|Dry water staining",
+              "conditionalOn": "actv_staining=Wet water staining|actv_staining=Dry water staining",
               "conditionalMode": "show"
             },
             {
               "id": "f2wl_dining_room",
               "label": "dining room",
               "type": "checkbox",
-              "conditionalOn": "actv_staining=Wet water staining|Dry water staining",
+              "conditionalOn": "actv_staining=Wet water staining|actv_staining=Dry water staining",
               "conditionalMode": "show"
             },
             {
               "id": "f2wl_bedroom",
               "label": "bedroom",
               "type": "checkbox",
-              "conditionalOn": "actv_staining=Wet water staining|Dry water staining",
+              "conditionalOn": "actv_staining=Wet water staining|actv_staining=Dry water staining",
               "conditionalMode": "show"
             },
             {
               "id": "f2wl_kitchen",
               "label": "kitchen",
               "type": "checkbox",
-              "conditionalOn": "actv_staining=Wet water staining|Dry water staining",
+              "conditionalOn": "actv_staining=Wet water staining|actv_staining=Dry water staining",
               "conditionalMode": "show"
             },
             {
               "id": "f2wl_bathroom",
               "label": "bathroom",
               "type": "checkbox",
-              "conditionalOn": "actv_staining=Wet water staining|Dry water staining",
+              "conditionalOn": "actv_staining=Wet water staining|actv_staining=Dry water staining",
               "conditionalMode": "show"
             },
             {
               "id": "f2wl_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_staining=Wet water staining|Dry water staining",
+              "conditionalOn": "actv_staining=Wet water staining|actv_staining=Dry water staining",
               "conditionalMode": "show"
             },
             {
               "id": "f2wl_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_staining=Wet water staining|Dry water staining&f2wl_other",
+              "conditionalOn": "actv_staining=Wet water staining&f2wl_other|actv_staining=Dry water staining&f2wl_other",
               "conditionalMode": "show"
             },
             {
@@ -8718,13 +8744,6 @@
           ]
         },
         {
-          "id": "group_repairs_65",
-          "title": "Repairs",
-          "type": "group",
-          "parentId": "group_f3_walls_and_partitions_63",
-          "order": 4
-        },
-        {
           "id": "activity_in_side_property_floors_creaking",
           "title": "Creaking",
           "type": "screen",
@@ -8874,56 +8893,56 @@
               "id": "label_blocked_locations",
               "label": "Fireplace(s) in",
               "type": "label",
-              "conditionalOn": "actv_status=Vented|Unvented",
+              "conditionalOn": "actv_status=Vented|actv_status=Unvented",
               "conditionalMode": "show"
             },
             {
               "id": "f5b_lounge",
               "label": "lounge",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Vented|Unvented",
+              "conditionalOn": "actv_status=Vented|actv_status=Unvented",
               "conditionalMode": "show"
             },
             {
               "id": "f5b_dining_room",
               "label": "dining room",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Vented|Unvented",
+              "conditionalOn": "actv_status=Vented|actv_status=Unvented",
               "conditionalMode": "show"
             },
             {
               "id": "f5b_bedroom",
               "label": "bedroom",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Vented|Unvented",
+              "conditionalOn": "actv_status=Vented|actv_status=Unvented",
               "conditionalMode": "show"
             },
             {
               "id": "f5b_kitchen",
               "label": "kitchen",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Vented|Unvented",
+              "conditionalOn": "actv_status=Vented|actv_status=Unvented",
               "conditionalMode": "show"
             },
             {
               "id": "f5b_hallway",
               "label": "hallway",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Vented|Unvented",
+              "conditionalOn": "actv_status=Vented|actv_status=Unvented",
               "conditionalMode": "show"
             },
             {
               "id": "f5b_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Vented|Unvented",
+              "conditionalOn": "actv_status=Vented|actv_status=Unvented",
               "conditionalMode": "show"
             },
             {
               "id": "f5b_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_status=Vented|Unvented&f5b_other",
+              "conditionalOn": "actv_status=Vented&f5b_other|actv_status=Unvented&f5b_other",
               "conditionalMode": "show"
             }
           ]
@@ -9622,7 +9641,7 @@
               "id": "et_location",
               "label": "Wall location",
               "type": "text",
-              "conditionalOn": "damp_status=Penetrating damp noted|Suspected rising damp",
+              "conditionalOn": "damp_status=Penetrating damp noted|damp_status=Suspected rising damp",
               "conditionalMode": "show"
             },
             {
@@ -9780,63 +9799,63 @@
               "id": "label_tile_locations",
               "label": "Floor tiles in",
               "type": "label",
-              "conditionalOn": "actv_tiles=No cracked tiles|Cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
               "conditionalMode": "show"
             },
             {
               "id": "f4t_kitchen",
               "label": "kitchen",
               "type": "checkbox",
-              "conditionalOn": "actv_tiles=No cracked tiles|Cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
               "conditionalMode": "show"
             },
             {
               "id": "f4t_utility_room",
               "label": "utility room",
               "type": "checkbox",
-              "conditionalOn": "actv_tiles=No cracked tiles|Cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
               "conditionalMode": "show"
             },
             {
               "id": "f4t_bathroom",
               "label": "bathroom",
               "type": "checkbox",
-              "conditionalOn": "actv_tiles=No cracked tiles|Cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
               "conditionalMode": "show"
             },
             {
               "id": "f4t_toilet",
               "label": "toilet",
               "type": "checkbox",
-              "conditionalOn": "actv_tiles=No cracked tiles|Cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
               "conditionalMode": "show"
             },
             {
               "id": "f4t_conservatory",
               "label": "conservatory",
               "type": "checkbox",
-              "conditionalOn": "actv_tiles=No cracked tiles|Cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
               "conditionalMode": "show"
             },
             {
               "id": "f4t_porch",
               "label": "porch",
               "type": "checkbox",
-              "conditionalOn": "actv_tiles=No cracked tiles|Cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
               "conditionalMode": "show"
             },
             {
               "id": "cb_other_240",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_tiles=No cracked tiles|Cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
               "conditionalMode": "show"
             },
             {
               "id": "et_other_392",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_tiles=No cracked tiles|Cracked tiles&cb_other_240",
+              "conditionalOn": "actv_tiles=No cracked tiles&cb_other_240|actv_tiles=Cracked tiles&cb_other_240",
               "conditionalMode": "show"
             },
             {
@@ -10157,13 +10176,6 @@
               ]
             }
           ]
-        },
-        {
-          "id": "group_basement_84",
-          "title": "Basement",
-          "type": "group",
-          "parentId": "group_other_82",
-          "order": 6
         },
         {
           "id": "activity_inside_property_roof_structure_not_inspected",
@@ -13377,70 +13389,70 @@
               "id": "label_rc_roof_repair_tiles_issue",
               "label": "Defects",
               "type": "label",
-              "conditionalOn": "actv_condition=Repair soon|Repair now",
+              "conditionalOn": "actv_condition=Repair soon|actv_condition=Repair now",
               "conditionalMode": "show"
             },
             {
               "id": "rc_rt_loose",
               "label": "loose",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair now",
+              "conditionalOn": "actv_condition=Repair soon|actv_condition=Repair now",
               "conditionalMode": "show"
             },
             {
               "id": "rc_rt_missing",
               "label": "missing",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair now",
+              "conditionalOn": "actv_condition=Repair soon|actv_condition=Repair now",
               "conditionalMode": "show"
             },
             {
               "id": "rc_rt_lifted",
               "label": "lifted",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair now",
+              "conditionalOn": "actv_condition=Repair soon|actv_condition=Repair now",
               "conditionalMode": "show"
             },
             {
               "id": "rc_rt_slipped",
               "label": "slipped",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair now",
+              "conditionalOn": "actv_condition=Repair soon|actv_condition=Repair now",
               "conditionalMode": "show"
             },
             {
               "id": "rc_rt_cracked",
               "label": "cracked",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair now",
+              "conditionalOn": "actv_condition=Repair soon|actv_condition=Repair now",
               "conditionalMode": "show"
             },
             {
               "id": "rc_rt_broken",
               "label": "broken",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair now",
+              "conditionalOn": "actv_condition=Repair soon|actv_condition=Repair now",
               "conditionalMode": "show"
             },
             {
               "id": "rc_rt_distorted",
               "label": "distorted",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair now",
+              "conditionalOn": "actv_condition=Repair soon|actv_condition=Repair now",
               "conditionalMode": "show"
             },
             {
               "id": "rc_rt_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_condition=Repair soon|Repair now",
+              "conditionalOn": "actv_condition=Repair soon|actv_condition=Repair now",
               "conditionalMode": "show"
             },
             {
               "id": "rc_rt_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_condition=Repair soon|Repair now&rc_rt_other",
+              "conditionalOn": "actv_condition=Repair soon&rc_rt_other|actv_condition=Repair now&rc_rt_other",
               "conditionalMode": "show"
             }
           ]
@@ -16369,11 +16381,18 @@
           ]
         },
         {
-          "id": "activity_outside_property_rwg__repair_pipes_gutters",
+          "id": "group_repairs_105",
           "title": "Repairs",
-          "type": "screen",
+          "type": "group",
           "parentId": "group_e3_rain_water_goods_13",
-          "order": 4,
+          "order": 1
+        },
+        {
+          "id": "activity_outside_property_rwg__repair_pipes_gutters",
+          "title": "Repair pipes and gutters",
+          "type": "screen",
+          "parentId": "group_repairs_105",
+          "order": 1,
           "fields": [
             {
               "id": "actv_condition",
@@ -16433,8 +16452,8 @@
           "id": "activity_outside_property_rwg_insufficient_slope",
           "title": "Insufficient slope",
           "type": "screen",
-          "parentId": "group_e3_rain_water_goods_13",
-          "order": 5,
+          "parentId": "group_rainwater_goods_14",
+          "order": 10,
           "fields": [
             {
               "id": "cb_insufficient_slope",
@@ -16447,8 +16466,8 @@
           "id": "activity_outside_property_rwg_leakage",
           "title": "Leakage",
           "type": "screen",
-          "parentId": "group_e3_rain_water_goods_13",
-          "order": 6,
+          "parentId": "group_rainwater_goods_14",
+          "order": 11,
           "fields": [
             {
               "id": "cb_leakage",
@@ -16461,8 +16480,8 @@
           "id": "activity_outside_property_rwg_defective_connections",
           "title": "Defective connections",
           "type": "screen",
-          "parentId": "group_e3_rain_water_goods_13",
-          "order": 8,
+          "parentId": "group_repairs_105",
+          "order": 2,
           "fields": [
             {
               "id": "actv_condition",
@@ -16522,8 +16541,8 @@
           "id": "activity_outside_property_rwg_corrosion",
           "title": "Corrosion",
           "type": "screen",
-          "parentId": "group_e3_rain_water_goods_13",
-          "order": 10,
+          "parentId": "group_rainwater_goods_14",
+          "order": 12,
           "fields": [
             {
               "id": "actv_corrosion",
@@ -16996,13 +17015,6 @@
           "title": "Repairs",
           "type": "group",
           "parentId": "group_e9_other_area_32",
-          "order": 4
-        },
-        {
-          "id": "group_porch_canopy_44",
-          "title": "Porch Canopy",
-          "type": "group",
-          "parentId": "group_repairs_42",
           "order": 4
         },
         {
@@ -18456,13 +18468,6 @@
           ]
         },
         {
-          "id": "group_roof_terrace_45",
-          "title": "Roof Terrace",
-          "type": "group",
-          "parentId": "group_repairs_42",
-          "order": 6
-        },
-        {
           "id": "activity_outside_property_chimney_not_inspected",
           "title": "Not Inspected",
           "type": "screen",
@@ -18613,7 +18618,7 @@
           "title": "Not inspected",
           "type": "screen",
           "parentId": "group_e3_rain_water_goods_13",
-          "order": 7,
+          "order": 3,
           "fields": [
             {
               "id": "cb_not_inspected",
@@ -19532,13 +19537,6 @@
           "order": 8
         },
         {
-          "id": "group_balcony_46",
-          "title": "Balcony",
-          "type": "group",
-          "parentId": "group_repairs_42",
-          "order": 8
-        },
-        {
           "id": "activity_outside_property_rwg_blocked_rwg",
           "title": "Blocked RWG",
           "type": "screen",
@@ -20365,13 +20363,6 @@
           "order": 10
         },
         {
-          "id": "group_juliet_balcony_47",
-          "title": "Juliet Balcony",
-          "type": "group",
-          "parentId": "group_repairs_42",
-          "order": 10
-        },
-        {
           "id": "activity_outside_property_rwg_blocked_gullies",
           "title": "Blocked gullies",
           "type": "screen",
@@ -20875,13 +20866,6 @@
           ]
         },
         {
-          "id": "group_external_stairs_48",
-          "title": "External Stairs",
-          "type": "group",
-          "parentId": "group_repairs_42",
-          "order": 12
-        },
-        {
           "id": "activity_outside_property_rwg_open_runoffs",
           "title": "Open runoffs",
           "type": "screen",
@@ -21297,13 +21281,6 @@
           "title": "Other",
           "type": "group",
           "parentId": "group_other_external_area_34",
-          "order": 14
-        },
-        {
-          "id": "group_other_49",
-          "title": "Other",
-          "type": "group",
-          "parentId": "group_repairs_42",
           "order": 14
         },
         {
@@ -22765,30 +22742,11 @@
           "inlinePosition": "header"
         },
         {
-          "id": "activity_outside_property_other_joinery_finishes_condition",
-          "title": "Condition Rating",
-          "type": "screen",
-          "parentId": "group_other_joinery_and_finishes_82",
-          "order": 2,
-          "fields": [
-            {
-              "id": "actv_condition",
-              "label": "Condition Rating",
-              "type": "dropdown",
-              "options": [
-                "1",
-                "2",
-                "3"
-              ]
-            }
-          ]
-        },
-        {
           "id": "activity_outside_property_out_side_doors_repairs_inadequate_lock_location",
           "title": "Inadequate lock",
           "type": "screen",
-          "parentId": "group_repairs_25_internal",
-          "order": 301,
+          "parentId": "group_repairs_25",
+          "order": 2,
           "fields": [
             {
               "id": "label_lock_locations",

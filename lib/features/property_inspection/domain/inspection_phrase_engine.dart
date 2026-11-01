@@ -690,18 +690,6 @@ class InspectionPhraseEngine {
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_about_joinery_and_finishes':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
-      case 'activity_outside_property_other_joinery_finishes_condition':
-      case 'activity_outside_property_other_joinery_fininshes_condition':
-        // This screen's `actv_condition` field is a numeric 1/2/3 dropdown
-        // (see inspection_tree.json), not the descriptive good/reasonable/
-        // fair/poor value _otherJoineryCondition expects - routing it there
-        // produced nonsense like "appear in 1 condition". Route to the
-        // numeric-rating handler instead (same one the main E8 screen
-        // correctly uses), which this screen's field actually matches.
-        // The two screens duplicating the same rating concept is a
-        // separate, larger tree-structure question, flagged for a product
-        // decision rather than resolved here.
-        return _otherJoineryConditionRating(answers);
       case 'activity_outside_property_other_joinery_and_finishes_repairs':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_other_joinery_finishes_not_inspected':
