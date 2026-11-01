@@ -619,7 +619,11 @@ export class SchedulingService {
       workEnd = availability.endTime;
     }
 
-    if (!isAvailable) {
+    // No availability record at all = the surveyor has never set working hours.
+    // Treat that as available (bookings are created by the surveyors themselves);
+    // only an explicit "not available" exception or an inactive/closed day blocks.
+    const hasSchedule = !!exception || !!availability;
+    if (hasSchedule && !isAvailable) {
       throw new BadRequestException('Surveyor is not available on this date');
     }
 
