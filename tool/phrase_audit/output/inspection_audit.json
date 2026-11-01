@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "inspection_v2",
-  "screensAudited": 344,
+  "screensAudited": 343,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 1782,
+   "distinctEmitted": 1777,
    "approvedLegacyBank": 117,
-   "approvedCurrentBankOnly": 1638,
+   "approvedCurrentBankOnly": 1633,
    "unapproved": 0
   }
  },
@@ -1476,7 +1476,7 @@
   {
    "sectionKey": "F",
    "screenId": "activity_in_side_property_wood_work_second",
-   "title": "Wood Work",
+   "title": "Woodwork",
    "dataFieldCount": 15,
    "permutationCount": 25,
    "severities": [],
@@ -4435,25 +4435,6 @@
     "Asbestos: Parts of the roof covering and verge may contain asbestos. This type of asbestos base product is not normally a cause for concern according to the Health and Safety Executive. However, it should not be disturbed, sanded, or drilled without taking suitable safety precautions. When the slates are eventually replaced, a licensed removal contractor will need to be instructed, and this could be costly. Therefore, quotations for this work should be obtained before purchase commitment. Because of the possible asbestos content, you should get advice from a contractor experienced in this type of work or an asbestos specialist before any work is carried out.",
     "Condition: Where visible, the covering appears in good condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
     "Condition: Where visible, the covering appears in reasonable condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected."
-   ]
-  },
-  {
-   "sectionKey": "E",
-   "screenId": "outside_property_roof_covering_weathered_layout",
-   "title": "Condition",
-   "dataFieldCount": 2,
-   "permutationCount": 12,
-   "severities": [],
-   "phraseStats": {
-    "total": 5,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Condition: Where visible, the covering appears in good condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
-    "Condition: Where visible, the covering appears in reasonable condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected.",
-    "Condition: Where visible, the covering appears in fair condition. No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below. The roof covering appears to be adequately performing its function. Routine maintenance appropriate to the age of the roof covering should be expected."
    ]
   },
   {

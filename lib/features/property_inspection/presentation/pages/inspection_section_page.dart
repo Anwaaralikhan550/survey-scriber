@@ -6,6 +6,7 @@ import '../../../../app/router/routes.dart';
 import '../../../../core/database/app_database.dart';
 import '../../domain/models/inspection_models.dart';
 import '../../domain/field_phrase_processor.dart';
+import '../../domain/group_completion.dart';
 import '../providers/inspection_providers.dart';
 import '../widgets/inspection_fields.dart';
 
@@ -59,9 +60,10 @@ class _InspectionSectionPageState extends ConsumerState<InspectionSectionPage> {
     List<InspectionV2Screen> visibleNodes,
   ) async {
     final currentIndex = visibleNodes.indexWhere((item) => item.id == node.id);
-    final nextNodeId = currentIndex >= 0 && currentIndex + 1 < visibleNodes.length
-        ? visibleNodes[currentIndex + 1].screenId
-        : node.screenId;
+    final nextNodeId =
+        currentIndex >= 0 && currentIndex + 1 < visibleNodes.length
+            ? visibleNodes[currentIndex + 1].screenId
+            : node.screenId;
 
     if (node.nodeType == 'group') {
       await context.push(
@@ -346,6 +348,7 @@ class _InspectionSectionPageState extends ConsumerState<InspectionSectionPage> {
                         key: _keyForNode(node.screenId),
                         child: _GroupTile(
                           title: 'Other area',
+                          isComplete: isGroupComplete(node.screenId, nodes),
                           sectionColor: sectionColor,
                           icon: _inspectionIconForTitle(
                               'Other area', node.screenId),
@@ -357,8 +360,10 @@ class _InspectionSectionPageState extends ConsumerState<InspectionSectionPage> {
                       key: _keyForNode(node.screenId),
                       child: _GroupTile(
                         title: _stripLegacyPrefix(node.title),
+                        isComplete: isGroupComplete(node.screenId, nodes),
                         sectionColor: sectionColor,
-                        icon: _inspectionIconForTitle(node.title, node.screenId),
+                        icon:
+                            _inspectionIconForTitle(node.title, node.screenId),
                         onTap: () => _openNode(context, node, visibleNodes),
                       ),
                     );
@@ -898,12 +903,16 @@ class _GroupTile extends StatelessWidget {
     required this.sectionColor,
     required this.icon,
     required this.onTap,
+    this.isComplete = false,
   });
 
   final String title;
   final Color sectionColor;
   final IconData icon;
   final VoidCallback onTap;
+
+  /// Shown as a tick badge; see [isGroupComplete] for the rule.
+  final bool isComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -924,19 +933,51 @@ class _GroupTile extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Container(
+              SizedBox(
                 width: 40,
                 height: 40,
-                decoration: BoxDecoration(
-                  color: sectionColor.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Icon(
-                    icon,
-                    size: 20,
-                    color: sectionColor,
-                  ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: sectionColor.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          icon,
+                          size: 20,
+                          color: sectionColor,
+                        ),
+                      ),
+                    ),
+                    if (isComplete)
+                      Positioned(
+                        right: -3,
+                        bottom: -3,
+                        child: Container(
+                          key: const ValueKey('group-complete-badge'),
+                          width: 18,
+                          height: 18,
+                          decoration: BoxDecoration(
+                            color: sectionColor,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: theme.colorScheme.surface,
+                              width: 2,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.check_rounded,
+                            size: 11,
+                            color: theme.colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
               const SizedBox(width: 12),

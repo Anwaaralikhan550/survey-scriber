@@ -6887,17 +6887,24 @@
         },
         {
           "id": "group_fire_places_70",
-          "title": "Fire Places",
+          "title": "Fireplaces",
           "type": "group",
           "parentId": "group_f5_fireplaces_and_chimneys_69",
+          "order": 1
+        },
+        {
+          "id": "group_built_in_fittings_83",
+          "title": "Built In Fittings",
+          "type": "group",
+          "parentId": "group_f6_built_in_fittings_72",
           "order": 1
         },
         {
           "id": "activity_in_side_property_built_in_fittings",
           "title": "Built In Fittings",
           "type": "screen",
-          "parentId": "group_f6_built_in_fittings_72",
-          "order": 1,
+          "parentId": "group_built_in_fittings_83",
+          "order": 2,
           "fields": [
             {
               "id": "label_wt_rooms",
@@ -7222,14 +7229,14 @@
         },
         {
           "id": "group_wood_work_75",
-          "title": "Wood Work",
+          "title": "Woodwork",
           "type": "group",
           "parentId": "group_f7_woodwork_74",
           "order": 1
         },
         {
           "id": "group_bathroom_fitting_78",
-          "title": "Bathroom Fitting",
+          "title": "Bathroom Fittings",
           "type": "group",
           "parentId": "group_f8_bathroom_fittings_77",
           "order": 1
@@ -7737,7 +7744,7 @@
         },
         {
           "id": "activity_in_side_property_wood_work_second",
-          "title": "Wood Work",
+          "title": "Woodwork",
           "type": "screen",
           "parentId": "group_wood_work_75",
           "order": 2,
@@ -8851,7 +8858,7 @@
           "id": "activity_in_side_property_fire_places_repair_blocked_fireplace",
           "title": "Blocked Fireplace",
           "type": "screen",
-          "parentId": "group_f5_fireplaces_and_chimneys_69",
+          "parentId": "group_repairs_71",
           "order": 4,
           "fields": [
             {
@@ -9880,7 +9887,7 @@
           "id": "activity_in_side_property_fire_places_repair_removed_cb",
           "title": "Removed CB",
           "type": "screen",
-          "parentId": "group_f5_fireplaces_and_chimneys_69",
+          "parentId": "group_repairs_71",
           "order": 6,
           "fields": [
             {
@@ -10526,7 +10533,7 @@
           "id": "activity_in_side_property_fire_places_repair_boiler_flue",
           "title": "Boiler Flue",
           "type": "screen",
-          "parentId": "group_f5_fireplaces_and_chimneys_69",
+          "parentId": "group_repairs_71",
           "order": 8,
           "fields": [
             {
@@ -10540,7 +10547,7 @@
           "id": "activity_in_side_property_fire_places_defects",
           "title": "Fireplace defects",
           "type": "screen",
-          "parentId": "group_f5_fireplaces_and_chimneys_69",
+          "parentId": "group_repairs_71",
           "order": 14,
           "fields": [
             {
@@ -10589,7 +10596,7 @@
           "id": "activity_in_side_property_fire_places_dampness",
           "title": "Dampness",
           "type": "screen",
-          "parentId": "group_f5_fireplaces_and_chimneys_69",
+          "parentId": "group_repairs_71",
           "order": 16,
           "fields": [
             {
@@ -11820,8 +11827,8 @@
           "id": "activity_inside_property_fireplaces_main_screen",
           "title": "Fireplaces and Chimneys",
           "type": "screen",
-          "parentId": "group_f5_fireplaces_and_chimneys_69",
-          "order": 0,
+          "parentId": "group_fire_places_70",
+          "order": -1,
           "inlinePosition": "header",
           "fields": [
             {
@@ -11895,8 +11902,8 @@
           "id": "activity_inside_property_built_in_fittings_main_screen",
           "title": "Built In Fittings",
           "type": "screen",
-          "parentId": "group_f6_built_in_fittings_72",
-          "order": 0,
+          "parentId": "group_built_in_fittings_83",
+          "order": -1,
           "fields": [
             {
               "id": "label_repairs_4",
@@ -11950,8 +11957,8 @@
           "id": "activity_inside_property_woodwork_main_screen",
           "title": "Woodwork",
           "type": "screen",
-          "parentId": "group_f7_woodwork_74",
-          "order": 0,
+          "parentId": "group_wood_work_75",
+          "order": -1,
           "inlinePosition": "header",
           "fields": [
             {
@@ -11980,8 +11987,8 @@
           "id": "activity_inside_property_bathroom_fittings_main_screen",
           "title": "Bathroom Fittings",
           "type": "screen",
-          "parentId": "group_f8_bathroom_fittings_77",
-          "order": 0,
+          "parentId": "group_bathroom_fitting_78",
+          "order": -1,
           "inlinePosition": "header",
           "fields": [
             {
@@ -13276,7 +13283,7 @@
           "fields": [
             {
               "id": "android_material_design_spinner4",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repaired soon",
@@ -13358,7 +13365,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -13997,7 +14004,7 @@
             },
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -16113,7 +16120,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repaired soon",
@@ -16144,7 +16151,7 @@
             },
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -16299,7 +16306,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -16370,7 +16377,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -16459,7 +16466,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -16714,6 +16721,13 @@
           "order": 4
         },
         {
+          "id": "group_other_joinery_and_finishes_82",
+          "title": "Other Joinery and Finishes",
+          "type": "group",
+          "parentId": "group_e8_other_joinery_and_finishes_31",
+          "order": 1
+        },
+        {
           "id": "activity_outside_property_other_joinery_and_finishes_repairs",
           "title": "Repairs",
           "type": "screen",
@@ -16860,7 +16874,7 @@
           "id": "activity_outside_property_other_joinery_and_finishes_timber_weathering",
           "title": "Timber weathering",
           "type": "screen",
-          "parentId": "group_e8_other_joinery_and_finishes_31",
+          "parentId": "group_other_joinery_and_finishes_82",
           "order": 8,
           "fields": [
             {
@@ -16879,7 +16893,7 @@
           "id": "activity_outside_property_other_joinery_and_finishes_timber_decay",
           "title": "Timber decay",
           "type": "screen",
-          "parentId": "group_e8_other_joinery_and_finishes_31",
+          "parentId": "group_other_joinery_and_finishes_82",
           "order": 10,
           "fields": [
             {
@@ -16908,7 +16922,7 @@
           "id": "activity_outside_property_other_joinery_and_finishes_defective_joinery",
           "title": "Defective joinery",
           "type": "screen",
-          "parentId": "group_e8_other_joinery_and_finishes_31",
+          "parentId": "group_other_joinery_and_finishes_82",
           "order": 12,
           "fields": [
             {
@@ -16993,7 +17007,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -18020,7 +18034,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -18168,32 +18182,6 @@
               "id": "cb_old_roof_covering",
               "label": "Old roof covering",
               "type": "checkbox"
-            }
-          ]
-        },
-        {
-          "id": "outside_property_roof_covering_weathered_layout",
-          "title": "Condition",
-          "type": "screen",
-          "parentId": "group_roof_covering_10",
-          "order": 6,
-          "fields": [
-            {
-              "id": "cb_weathered",
-              "label": "Weathered",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Good",
-                "Reasonable",
-                "Fair",
-                "Poor",
-                "Very poor"
-              ]
             }
           ]
         },
@@ -18472,7 +18460,7 @@
           "title": "Not Inspected",
           "type": "screen",
           "parentId": "group_e1_chimney_5",
-          "order": 0,
+          "order": 7,
           "fields": [
             {
               "id": "cb_Not_applicable",
@@ -18500,7 +18488,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -18563,7 +18551,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -18586,7 +18574,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -18604,7 +18592,7 @@
           "fields": [
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repair soon",
@@ -19254,7 +19242,7 @@
             },
             {
               "id": "actv_condition",
-              "label": "Condition",
+              "label": "Repair Timescales",
               "type": "dropdown",
               "options": [
                 "Repaired soon",
@@ -22325,8 +22313,8 @@
           "id": "activity_outside_property_chimney_main_screen",
           "title": "Chimney",
           "type": "screen",
-          "parentId": "group_e1_chimney_5",
-          "order": 99,
+          "parentId": "group_chimney_6",
+          "order": -1,
           "fields": [
             {
               "id": "label_repairs_10",
@@ -22506,8 +22494,8 @@
           "id": "activity_outside_property_outside_doors_main_screen",
           "title": "Outside Doors",
           "type": "screen",
-          "parentId": "group_e6_outside_doors_23",
-          "order": 0,
+          "parentId": "group_outside_doors_24",
+          "order": -1,
           "fields": [
             {
               "id": "label_repairs_15",
@@ -22556,8 +22544,8 @@
           "id": "activity_outside_property_conservatory_porch_main_screen",
           "title": "Condition Rating",
           "type": "screen",
-          "parentId": "group_e7_conservatory_and_porches_26",
-          "order": 0,
+          "parentId": "group_conservatory_and_porch_27",
+          "order": -1,
           "fields": [
             {
               "id": "label_note_14",
@@ -22596,8 +22584,9 @@
           "id": "activity_outside_property_other_joinery_and_finishes_main_screen",
           "title": "E8 Other Joinery and Finishes",
           "type": "screen",
-          "parentId": "group_e8_other_joinery_and_finishes_31",
+          "parentId": "group_other_joinery_and_finishes_82",
           "order": -1,
+          "inlinePosition": "header",
           "fields": [
             {
               "id": "actv_condition",
@@ -22707,7 +22696,7 @@
           "id": "activity_outside_property_other_main_screen",
           "title": "E9 Other Outside Property",
           "type": "screen",
-          "parentId": "group_e9_other_area_32",
+          "parentId": "group_other_area_33",
           "order": -1,
           "fields": [
             {
@@ -22772,7 +22761,7 @@
           "id": "activity_outside_property_other_joinery_finishes_condition",
           "title": "Condition Rating",
           "type": "screen",
-          "parentId": "group_e8_other_joinery_and_finishes_31",
+          "parentId": "group_other_joinery_and_finishes_82",
           "order": 2,
           "fields": [
             {

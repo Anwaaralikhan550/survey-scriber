@@ -611,8 +611,6 @@ class InspectionPhraseEngine {
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_main_wall_repairs_wall_the_repair':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
-      case 'outside_property_roof_covering_weathered_layout':
-        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_windows_aboutwindow':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_windows_safety_glass_rating':

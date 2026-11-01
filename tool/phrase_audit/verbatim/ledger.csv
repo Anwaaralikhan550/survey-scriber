@@ -5,7 +5,7 @@ f86a0742a4,Party conflict disclosure,"Should any conflict become apparent before
 be24e1a5de,Party conflict disclosure,Conflict noted: I suspect that a conflict-of-interest issue may exist in this transaction as defined by current RICS Valuation Standards and the RICS Rules of Conduct.,EXACT,{PARTY_DISCLOSURES_CONFLICT},100,DONE
 5f8e443e5c,Party conflict disclosure,I am known to one or more persons connected to the property owner or to an interest in the property.,EXACT,{PARTY_DISCLOSURES_CONFLICT},100,DONE
 ae7285f45a,Property address,"Property Address Town County Postcode Country Weather: At the time of my inspection, the weather was dry, wet, overcast, sunny, cold, windy, rainy, snowing, following a period of dry, wet, overcast, sunny, cold, windy, rainy, snowing weather.",MENU,,0,DONE
-a452aa3bff,Property address,"Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods, and dampness.",EXACT,{D_WEATHER}::{A1_WEATHER},100,DONE
+a452aa3bff,Property address,"Weather conditions can influence the visibility of certain defects, particularly those associated with roof coverings, rainwater goods, and dampness.",EXACT,{D_WEATHER},100,DONE
 ddbc0263b4,Property address,"Status: At the time of my inspection, the property was occupied, vacant, or partly occupied.",MENU,,0,VERIFIED
 6fad4d7559,Property address,"The property was fully furnished, partly furnished, unfurnished, and floor surfaces were fully covered, partly covered, uncovered, which limited inspection of concealed areas.",MENU,,0,VERIFIED
 eefefc1bda,Property address,"Orientation: The front elevation of the property faces approximately north, north-east, east, south-east, south, south-west, west, north-west.",MENU,,0,VERIFIED
@@ -1432,7 +1432,7 @@ dfc3c82067,G4,Heating not found: I was unable to locate the boiler or heating sy
 7a1f6e4d73,G4,Communal heating: The property is heated centrally by a communal heating system.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
 0d62aac814,G4,I could not inspect the system due to access restrictions and cannot comment on the type and condition.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
 18c124f06d,G4,"Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other.",MENU,,0,VERIFIED
-ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_ELECTRICITY}::{STANDARD_TEXT},100,DONE
 35f425e183,G4,No operational testing or assessment of efficiency was undertaken.,EXACT,{G_HEATING}::{G4_BOILER},100,DONE
 5c9cccde43,G4,"Heat emitters: The boiler is connected to radiators, underfloor heating pipes, ceiling vents, wall vents, other as heat emitters; their capacity, efficiency, and lifespan are not readily ascertained.",MENU,,0,VERIFIED
 357a27088e,G4,"I recommend these are serviced and demonstrated to yourselves, so you are satisfied with their performance under variable operational requirements.",EXACT,{G_HEATING}::{ABOUT_CONNECTED_TO_RADIATOR_UNDERFLOOR_PIPES},100,DONE
@@ -1456,11 +1456,11 @@ f09d4b6351,G4,"Forced Air Heating: The property is heated by a forced air heatin
 b650c39595,G4,"The installation was inspected visually only, and no operational testing or assessment of efficiency was undertaken.",EXACT,{G_HEATING}::{G4_FORCED_AIR},100,DONE
 7763876cac,G4,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY}::{E1L_LEAN_NO_REPAIR},100,DONE
 9303cd1e46,G4,"Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property.",MENU,,0,VERIFIED
-ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_ELECTRICITY}::{STANDARD_TEXT},100,DONE
 c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency or controls was undertaken.",EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
 66a388d659,G4,"Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other.",MENU,,0,VERIFIED
 f867415b7f,G4,The associated ground collectors or boreholes are below ground and could not be inspected.,EXACT,{G_HEATING}::{G4_GROUND_SOURCE_HEAT_PUMP},100,DONE
-ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_ELECTRICITY}::{STANDARD_TEXT},100,DONE
 c1ae9eb2eb,G4,"No operational testing or assessment of performance, efficiency or controls was undertaken.",EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
 f6403e6eca,G5,I was unable to locate the water heating system.,EXACT,{G_WATER_HEATING}::{G5_NOT_FOUND},100,DONE
 fcaa35b461,G5,"Please ask the vendor about the location of the water heating system, as it is important that you know where it is located.",EXACT,{G_WATER_HEATING}::{G5_NOT_FOUND},100,DONE
@@ -1470,15 +1470,15 @@ fcaa35b461,G5,"Please ask the vendor about the location of the water heating sys
 18a496d0c4,G5,"Water heating: The hot water is provided by the combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other installed in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,VERIFIED
 1ebbeb0848,G5,The property must be maintained in the normal way.,EXACT,{E_CHIMNEY}::{E1L_LEAN_NO_REPAIR},100,DONE
 c0aeff24d7,G5,"Electric Immersion: The hot water is provided by an insulated cylinder located in the airing cupboard, kitchen, utility room, bedroom, garage, loft, other.",MENU,,0,VERIFIED
-2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_ELECTRICITY}::{STANDARD_TEXT},100,DONE
 fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,EXACT,{G_HEATING}::{G4_BOILER},100,DONE
 6e090c60c6,G5,Poor cylinder insulation: The hot water cylinder is not properly insulated.,EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 0693c2d809,G5,"Hot water tanks store water for long periods, and there will be a waste of energy if these tanks and the adjacent pipes are not properly insulated.",EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 8ccd8e73de,G5,This should be insulated soon.,EXACT,{G_WATER_HEATING}::{ELECTRIC_POOR_CYLINDER_CONDITION},100,DONE
 9dbbc2cc23,G5,Point-of-use: Hot water is provided by individual electric point-of-use water heaters serving individual outlets or appliances.,EXACT,{G_WATER_HEATING}::{G5_POINT_OF_USE},100,DONE
-2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_ELECTRICITY}::{STANDARD_TEXT},100,DONE
 eff2aa202a,G5,"No operational testing or assessment of performance, efficiency or remaining service life was undertaken.",EXACT,{G_WATER_HEATING}::{G5_POINT_OF_USE},100,DONE
-2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_HEATING}::{G4_AIR_SOURCE_HEAT_PUMP},100,DONE
+2d75632dfc,G5,The installation was inspected visually only.,EXACT,{G_ELECTRICITY}::{STANDARD_TEXT},100,DONE
 fad6e59c94,G5,No operational testing or assessment of efficiency was undertaken.,EXACT,{G_HEATING}::{G4_BOILER},100,DONE
 ed0829e79e,G5,Solar water heating: The property is provided with a solar water heating (solar thermal) system to supplement the domestic hot water supply.,EXACT,{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING},100,DONE
 bf277d4115,G5,"The installation was inspected visually only, and no operational testing or assessment of performance was undertaken.",EXACT,{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING},100,DONE

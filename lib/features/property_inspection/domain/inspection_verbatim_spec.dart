@@ -729,25 +729,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
-    'e2_cond_weathered',
-    'outside_property_roof_covering_weathered_layout',
-    '{E_ROOF_COVERING}',
-    '{RC_ABOUT_TYPE_CONDITION}',
-    [
-      VerbatimToken(
-        '{RC_TYPE_CONDITION}',
-        dropdown: 'actv_condition',
-        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
-        lower: true,
-        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
-      ),
-    ],
-    pdf:
-        'Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.',
-    whenField: 'cb_weathered',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
     'e2_flashing',
     'outside_property_roof_covering_flashing_layout',
     '{E_ROOF_COVERING}',

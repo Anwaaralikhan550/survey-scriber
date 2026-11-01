@@ -70,7 +70,8 @@ final inspectionPhraseTextsProvider =
     if (raw == null) return null;
     try {
       final decoded = jsonDecode(raw) as Map<String, dynamic>;
-      return decoded.map((key, value) => MapEntry(key, value?.toString() ?? ''));
+      return decoded
+          .map((key, value) => MapEntry(key, value?.toString() ?? ''));
     } catch (e) {
       debugPrint('[inspectionPhraseTextsProvider] Unreadable phrase bank: $e');
       return null;
@@ -220,8 +221,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       'activity_outside_property_water_proofing';
   static const String _roofCoveringWeatherScreenId =
       'outside_property_roof_covering_weather_layout';
-  static const String _roofCoveringConditionScreenId =
-      'outside_property_roof_covering_weathered_layout';
   static const String _roofCoveringFlashingScreenId =
       'outside_property_roof_covering_flashing_layout';
   static const String _roofCoveringRidgeTilesScreenId =
@@ -563,35 +562,14 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
 
   Future<bool> markComplete() async {
     if (state.screenDefinition == null) return false;
+    // Client review (1 Nov 2026): the legacy "select at least one ..." rules
+    // forced surveyors to pick options that do not apply and blocked
+    // "Mark complete". Only data-integrity checks still block (an "Other"
+    // box ticked without its text); everything else is the surveyor's call.
     final validationError = _validateLegacyRequireds();
-    if (validationError != null) {
+    if (validationError != null && isBlockingValidation(validationError)) {
       state = state.copyWith(errorMessage: validationError);
       return false;
-    }
-    if (_screenId == _environmentImpactScreenId) {
-      final current =
-          (state.answers['android_material_design_spinner'] ?? '').trim();
-      final potential =
-          (state.answers['android_material_design_spinner2'] ?? '').trim();
-      if (current.isEmpty || potential.isEmpty) {
-        state = state.copyWith(
-          errorMessage:
-              'Current and Potential are required for Environmental Impact.',
-        );
-        return false;
-      }
-    }
-    if (_screenId == _otherServiceScreenId) {
-      final hasSolarElectricity =
-          (state.answers['ch1'] ?? '').trim().toLowerCase() == 'true';
-      final hasSolarHotWater =
-          (state.answers['ch2'] ?? '').trim().toLowerCase() == 'true';
-      if (!hasSolarElectricity && !hasSolarHotWater) {
-        state = state.copyWith(
-          errorMessage: 'Select at least one Other Service option.',
-        );
-        return false;
-      }
     }
     state = state.copyWith(isSaving: true);
     try {
@@ -622,7 +600,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       return false;
     }
   }
-
+
   String? _validateLegacyRequireds() {
     if (_mainWallsAboutScreenIds.contains(_screenId)) {
       bool isChecked(String key) =>
@@ -1971,17 +1949,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
         return 'Select status.';
       }
     }
-    if (_screenId == _roofCoveringConditionScreenId) {
-      final weatheredChecked =
-          (state.answers['cb_weathered'] ?? '').trim().toLowerCase() == 'true';
-      if (!weatheredChecked) {
-        return 'Select Weathered.';
-      }
-      final condition = (state.answers['actv_condition'] ?? '').trim();
-      if (condition.isEmpty) {
-        return 'Select condition.';
-      }
-    }
     if (_screenId == _roofCoveringFlashingScreenId) {
       bool isChecked(String key) =>
           (state.answers[key] ?? '').trim().toLowerCase() == 'true';
@@ -2806,3 +2773,10 @@ final inspectionScreenProvider = StateNotifierProvider.autoDispose.family<
         repo, ref, params.surveyId, params.screenId);
   },
 );
+
+/// Which legacy validation messages still block "Mark complete".
+///
+/// Only the data-integrity rules do: an "Other" checkbox ticked without its
+/// free-text. Mandatory-selection rules ("Select at least one ...",
+/// "Select condition.") no longer block (client review, 1 Nov 2026).
+bool isBlockingValidation(String message) => message.startsWith('Enter Other');
