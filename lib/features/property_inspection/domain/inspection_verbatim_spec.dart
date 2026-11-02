@@ -6219,6 +6219,72 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
+    'f2_repair_now',
+    'activity_inside_property_ceilings_repairs_ceilings',
+    '{F_CEILINGS}',
+    '{REPAIRS_CELLINGS_NOW}',
+    [
+      VerbatimToken(
+        '{CER_RC_NOW_LOCATION}',
+        options: {
+          'f2r_now_lounge': 'lounge',
+          'f2r_now_bedroom': 'bedroom',
+          'f2r_now_kitchen': 'kitchen',
+          'f2r_now_bathroom': 'bathroom',
+        },
+        otherCheckbox: 'f2r_now_room_other',
+        otherText: 'f2r_now_room_other_text',
+      ),
+      VerbatimToken(
+        '{CER_RC_NOW_DEFECT}',
+        options: {
+          'f2r_now_badly_cracked': 'badly cracked',
+          'f2r_now_very_loose': 'very loose',
+          'f2r_now_stained': 'stained heavily with damp',
+          'f2r_now_unstable': 'unstable and may fall',
+        },
+        otherCheckbox: 'f2r_now_defect_other',
+        otherText: 'f2r_now_defect_other_text',
+      ),
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Repair now',
+  ),
+  VerbatimRule(
+    'f2_repair_soon',
+    'activity_inside_property_ceilings_repairs_ceilings',
+    '{F_CEILINGS}',
+    '{REPAIRS_CELLINGS_SOON}',
+    [
+      VerbatimToken(
+        '{CER_RC_SOON_LOCATION}',
+        options: {
+          'f2r_soon_lounge': 'lounge',
+          'f2r_soon_bedroom': 'bedroom',
+          'f2r_soon_kitchen': 'kitchen',
+          'f2r_soon_bathroom': 'bathroom',
+        },
+        otherCheckbox: 'f2r_soon_room_other',
+        otherText: 'f2r_soon_room_other_text',
+      ),
+      VerbatimToken(
+        '{CER_RC_SOON_DEFECT}',
+        options: {
+          'f2r_soon_missing': 'missing in places',
+          'f2r_soon_loose': 'loose',
+          'f2r_soon_uneven': 'uneven',
+          'f2r_soon_sagging': 'sagging',
+          'f2r_soon_bowed': 'bowed',
+          'f2r_soon_stained': 'stained',
+        },
+        otherCheckbox: 'f2r_soon_defect_other',
+        otherText: 'f2r_soon_defect_other_text',
+      ),
+    ],
+    whenField: 'actv_status',
+    whenValue: 'Repair soon',
+  ),
+  VerbatimRule(
     'f2_ornamental',
     'activity_inside_property_ceilings_repairs_ornamental_plaster',
     '{F_CEILINGS}',
@@ -9982,6 +10048,36 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Repair fence: Parts of the boundary fencing are cracked, broken, unstable, leaning, loose in places, severely damaged, rotten, missing in places, other.',
     whenField: 'cb_h2_h2_repair_fence',
     whenValue: 'true',
+  ),
+  VerbatimRule(
+    'h2_shed_repair',
+    'activity_grounds_other_repair_shed_repair',
+    '{H_OTHER}',
+    '{REPAIR_SHED}',
+    [
+      VerbatimToken(
+        '{OTH_REP_SHED_TYPE}',
+        options: {
+          'h2rs_timber': 'timber',
+          'h2rs_brick': 'brick',
+        },
+        otherCheckbox: 'h2rs_type_other',
+        otherText: 'h2rs_type_other_text',
+      ),
+      VerbatimToken(
+        '{OTH_REP_SHED_DEF}',
+        options: {
+          'h2rs_damaged': 'is damaged',
+          'h2rs_disrepair': 'in disrepair',
+          'h2rs_unstable': 'is unstable',
+        },
+        otherCheckbox: 'h2rs_defect_other',
+        otherText: 'h2rs_defect_other_text',
+      ),
+    ],
+    whenField: 'h2rs_damaged',
+    whenValue: 'true',
+    whenAny: [['h2rs_disrepair', 'true'], ['h2rs_unstable', 'true'], ['h2rs_defect_other', 'true']],
   ),
   VerbatimRule(
     'h2_sheds',

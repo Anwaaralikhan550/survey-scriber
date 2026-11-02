@@ -226,4 +226,58 @@ void main() {
       expect(find.text('Outside the Property > Other Outside Property > Repairs > External structures > Roof'), findsOneWidget);
     });
   });
+
+  group('Shed and Ceiling repairs', () {
+    final engine = InspectionPhraseEngine(
+      (jsonDecode(File('assets/property_inspection/phrase_texts.json').readAsStringSync())
+              as Map<String, dynamic>)
+          .map((k, v) => MapEntry(k, v?.toString() ?? '')),
+    );
+
+    test('Shed is in the garden area, Repairs has Shed Repair', () {
+      expect(nodes['activity_grounds_other_repair_shed']!.parentId, 'group_other_53');
+      final repair = nodes['activity_grounds_other_repair_shed_repair']!;
+      expect(repair.title, 'Shed Repair');
+      expect(repair.parentId, 'group_repairs_54');
+    });
+
+    test('Shed Repair prints its approved sentence', () {
+      expect(
+        engine.buildPhrases('activity_grounds_other_repair_shed_repair', {
+          'h2rs_timber': 'true',
+          'h2rs_damaged': 'true',
+        }),
+        ['The timber shed is damaged. This should be repaired or replaced soon.'],
+      );
+      expect(engine.buildPhrases('activity_grounds_other_repair_shed_repair', const {}), isEmpty);
+    });
+
+    test('Ceiling repairs are more than ornamental plaster', () {
+      final repairs = [
+        for (final n in nodes.values)
+          if (n.parentId == 'group_repairs_62') n.title,
+      ];
+      expect(repairs, ['Repair Ceilings', 'Ornamental Plaster']);
+    });
+
+    test('Repair Ceilings prints repair soon and repair now', () {
+      const screen = 'activity_inside_property_ceilings_repairs_ceilings';
+      expect(
+        engine.buildPhrases(screen, {
+          'actv_status': 'Repair soon',
+          'f2r_soon_lounge': 'true',
+          'f2r_soon_uneven': 'true',
+        }),
+        ['The ceilings to the lounge are uneven. This should be repaired soon.'],
+      );
+      expect(
+        engine.buildPhrases(screen, {
+          'actv_status': 'Repair now',
+          'f2r_now_kitchen': 'true',
+          'f2r_now_badly_cracked': 'true',
+        }).single,
+        startsWith('The ceilings to the kitchen are badly cracked'),
+      );
+    });
+  });
 }

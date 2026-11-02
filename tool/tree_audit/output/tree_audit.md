@@ -1,6 +1,6 @@
 # Inspection tree audit
 
-Nodes: 433 (338 screens). Element landings checked: 23.
+Nodes: 436 (341 screens). Element landings checked: 23.
 
 | Code | Check | Findings |
 |---|---|---|
@@ -21,7 +21,7 @@ Nodes: 433 (338 screens). Element landings checked: 23.
 ## L5: App order (placement) differs from the "order" attribute (6)
 
 - **Outside Property > Rain Water Goods > Rainwater Goods** (`group_rainwater_goods_14`): app shows ['Weather Condition', 'About RWG', 'Insufficient slope', 'Leakage', 'Corrosion', 'Blocked RWG', 'Blocked gullies', 'Open runoffs'] but "order" says ['Weather Condition', 'About RWG', 'Blocked RWG', 'Insufficient slope', 'Leakage', 'Blocked gullies', 'Corrosion', 'Open runoffs']
-- **Outside Property > Windows > Windows** (`group_windows_21`): app shows ['About windows', 'Velux window', 'Windowsills', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation', 'Sill Projection/Wall Sealing'] but "order" says ['About windows', 'Velux window', 'Windowsills', 'Sill Projection/Wall Sealing', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation']
+- **Outside Property > Windows > Windows** (`group_windows_21`): app shows ['About windows', 'Velux window', 'Windowsills', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation', 'Sill Projection/Wall Sealing', 'Sill Defect'] but "order" says ['About windows', 'Velux window', 'Windowsills', 'Sill Projection/Wall Sealing', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation', 'Sill Defect']
 - **F Inside Property > Ceilings > Ceilings** (`group_ceilings_61`): app shows ['About Ceilings', 'Cracks', 'Unevenness', 'Water staining', 'Polystyrene', 'Heavy Paper Lining'] but "order" says ['About Ceilings', 'Cracks', 'Polystyrene', 'Heavy Paper Lining', 'Unevenness', 'Water staining']
 - **F Inside Property > Roof Structure > Roof Structure** (`group_roof_structure_58`): app shows ['Loft Converted', 'About Roof structure', 'Roof underlay', 'Roof ventilation', 'Roof insulation', 'Water Tank', 'Insect infestation', 'Timber rot', 'Undersize timber', 'Heavy roof', 'Roof movement', 'Structural alterations', 'Removed Chimney Breast', 'Party Wall Problem'] but "order" says ['Loft Converted', 'About Roof structure', 'Water Tank', 'Insect infestation', 'Timber rot', 'Undersize timber', 'Heavy roof', 'Removed Chimney Breast', 'Party Wall Problem', 'Roof underlay', 'Roof ventilation', 'Roof insulation', 'Roof movement', 'Structural alterations']
 - **F Inside Property > Walls and Partitions > Walls and Partitions** (`group_walls_and_partitions_64`): app shows ['Walls', 'Condensation', 'Dampness', 'Movement Cracks', 'Hollow plaster', 'Removed Wall'] but "order" says ['Walls', 'Condensation', 'Dampness', 'Movement Cracks', 'Removed Wall', 'Hollow plaster']

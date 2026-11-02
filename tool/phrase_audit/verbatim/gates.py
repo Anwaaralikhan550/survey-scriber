@@ -157,7 +157,10 @@ def main():
                 if not r or r[1] < a.min:
                     bad.append((round(r[1]) if r else 0, x[:90]))
             if bad:
-                foreign.append((k, bad[0][0], bad[0][1]))
+                # Approved bank sentences the client asked for that are outside his revised PDF
+                # (edit list, 2 Nov 2026: "Ceiling Repair is incomplete").
+                if k not in ('{F_CEILINGS}::{REPAIRS_CELLINGS_SOON}', '{F_CEILINGS}::{REPAIRS_CELLINGS_NOW}'):
+                    foreign.append((k, bad[0][0], bad[0][1]))
     # Bank keys the client asked to take out of the app (edit list, 2 Nov 2026).
     client_removed = {
         '{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING}',  # Solar tick removed from About Water Heating

@@ -2438,6 +2438,72 @@
           ]
         },
         {
+          "id": "activity_grounds_other_repair_shed_repair",
+          "title": "Shed Repair",
+          "type": "screen",
+          "parentId": "group_repairs_54",
+          "order": 4,
+          "fields": [
+            {
+              "id": "label_h2rs_type",
+              "label": "Shed type",
+              "type": "label"
+            },
+            {
+              "id": "h2rs_timber",
+              "label": "Timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2rs_brick",
+              "label": "Brick",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2rs_type_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2rs_type_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2rs_type_other"
+            },
+            {
+              "id": "label_h2rs_defect",
+              "label": "Defect",
+              "type": "label"
+            },
+            {
+              "id": "h2rs_damaged",
+              "label": "Is damaged",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2rs_disrepair",
+              "label": "In disrepair",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2rs_unstable",
+              "label": "Is unstable",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2rs_defect_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2rs_defect_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2rs_defect_other"
+            }
+          ]
+        },
+        {
           "id": "activity_grounds_other_area_right_of_way",
           "title": "Right of Way",
           "type": "screen",
@@ -2794,6 +2860,126 @@
           ]
         },
         {
+          "id": "activity_grounds_other_repair_shed",
+          "title": "Shed",
+          "type": "screen",
+          "parentId": "group_other_53",
+          "order": 5,
+          "fields": [
+            {
+              "id": "cb_h2_h2_sheds",
+              "label": "Sheds",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h2_shed_material",
+              "label": "Shed(s) of",
+              "type": "label"
+            },
+            {
+              "id": "h2_sheds_0_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_0_brick",
+              "label": "brick",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_0_aluminium",
+              "label": "aluminium",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_sheds_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_shed_roof",
+              "label": "Roof(s) are",
+              "type": "label"
+            },
+            {
+              "id": "h2_sheds_1_pitched",
+              "label": "pitched",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_1_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_1_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_1_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_sheds_1_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "label_h2_shed_cover",
+              "label": "Covered with",
+              "type": "label"
+            },
+            {
+              "id": "h2_sheds_2_felt",
+              "label": "felt",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_2_tiles",
+              "label": "tiles",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_2_metal_sheets",
+              "label": "metal sheets",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_2_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h2_sheds_2_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h2_sheds_2_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "actv_h2_shed_cond",
+              "label": "Shed condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            }
+          ]
+        },
+        {
           "id": "activity_grounds_shared_access",
           "title": "Shared Access",
           "type": "screen",
@@ -2990,127 +3176,7 @@
             }
           ]
         },
-        {
-          "id": "activity_grounds_other_repair_shed",
-          "title": "Shed",
-          "type": "screen",
-          "parentId": "group_repairs_54",
-          "order": 4,
-          "fields": [
-            {
-              "id": "cb_h2_h2_sheds",
-              "label": "Sheds",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_h2_shed_material",
-              "label": "Shed(s) of",
-              "type": "label"
-            },
-            {
-              "id": "h2_sheds_0_timber",
-              "label": "timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_0_brick",
-              "label": "brick",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_0_aluminium",
-              "label": "aluminium",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_0_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_0_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "h2_sheds_0_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_h2_shed_roof",
-              "label": "Roof(s) are",
-              "type": "label"
-            },
-            {
-              "id": "h2_sheds_1_pitched",
-              "label": "pitched",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_1_flat",
-              "label": "flat",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_1_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_1_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "h2_sheds_1_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_h2_shed_cover",
-              "label": "Covered with",
-              "type": "label"
-            },
-            {
-              "id": "h2_sheds_2_felt",
-              "label": "felt",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_2_tiles",
-              "label": "tiles",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_2_metal_sheets",
-              "label": "metal sheets",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_2_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_sheds_2_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "h2_sheds_2_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_h2_shed_cond",
-              "label": "Shed condition",
-              "type": "dropdown",
-              "options": [
-                "Good",
-                "Reasonable",
-                "Fair",
-                "Poor",
-                "Very poor"
-              ]
-            }
-          ]
-        },
-        {
+{
           "id": "activity_grounds_other_area_knotweed",
           "title": "Knotweed",
           "type": "screen",
@@ -8139,6 +8205,204 @@
           "type": "group",
           "parentId": "group_f2_ceilings_60",
           "order": 4
+        },
+        {
+          "id": "activity_inside_property_ceilings_repairs_ceilings",
+          "title": "Repair Ceilings",
+          "type": "screen",
+          "parentId": "group_repairs_62",
+          "order": 2,
+          "fields": [
+            {
+              "id": "actv_status",
+              "label": "Status",
+              "type": "dropdown",
+              "options": [
+                "Repair now",
+                "Repair soon"
+              ]
+            },
+            {
+              "id": "label_f2r_now_rooms",
+              "label": "Location",
+              "type": "label",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_lounge",
+              "label": "Lounge",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_bedroom",
+              "label": "Bedroom",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_kitchen",
+              "label": "Kitchen",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_bathroom",
+              "label": "Bathroom",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_room_other",
+              "label": "Other",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_room_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "actv_status=Repair now&f2r_now_room_other"
+            },
+            {
+              "id": "label_f2r_now_defects",
+              "label": "Defect",
+              "type": "label",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_badly_cracked",
+              "label": "Badly cracked",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_very_loose",
+              "label": "Very loose",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_stained",
+              "label": "Stained heavily with damp",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_unstable",
+              "label": "Unstable and may fall",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_defect_other",
+              "label": "Other",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair now"
+            },
+            {
+              "id": "f2r_now_defect_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "actv_status=Repair now&f2r_now_defect_other"
+            },
+            {
+              "id": "label_f2r_soon_rooms",
+              "label": "Location",
+              "type": "label",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_lounge",
+              "label": "Lounge",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_bedroom",
+              "label": "Bedroom",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_kitchen",
+              "label": "Kitchen",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_bathroom",
+              "label": "Bathroom",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_room_other",
+              "label": "Other",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_room_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "actv_status=Repair soon&f2r_soon_room_other"
+            },
+            {
+              "id": "label_f2r_soon_defects",
+              "label": "Defect",
+              "type": "label",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_missing",
+              "label": "Missing in places",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_loose",
+              "label": "Loose",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_uneven",
+              "label": "Uneven",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_sagging",
+              "label": "Sagging",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_bowed",
+              "label": "Bowed",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_stained",
+              "label": "Stained",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_defect_other",
+              "label": "Other",
+              "type": "checkbox",
+              "conditionalOn": "actv_status=Repair soon"
+            },
+            {
+              "id": "f2r_soon_defect_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "actv_status=Repair soon&f2r_soon_defect_other"
+            }
+          ]
         },
         {
           "id": "activity_inside_property_ceilings_repairs_ornamental_plaster",

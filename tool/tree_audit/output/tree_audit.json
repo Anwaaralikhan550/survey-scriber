@@ -11,7 +11,7 @@
   "section": "E",
   "id": "group_windows_21",
   "path": "Outside Property > Windows > Windows",
-  "msg": "app shows ['About windows', 'Velux window', 'Windowsills', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation', 'Sill Projection/Wall Sealing'] but \"order\" says ['About windows', 'Velux window', 'Windowsills', 'Sill Projection/Wall Sealing', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation']"
+  "msg": "app shows ['About windows', 'Velux window', 'Windowsills', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation', 'Sill Projection/Wall Sealing', 'Sill Defect'] but \"order\" says ['About windows', 'Velux window', 'Windowsills', 'Sill Projection/Wall Sealing', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation', 'Sill Defect']"
  },
  {
   "code": "L5",
