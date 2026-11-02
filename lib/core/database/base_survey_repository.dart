@@ -10,6 +10,7 @@ import 'app_database.dart';
 import '../network/api_client.dart';
 import '../../features/property_inspection/domain/models/inspection_models.dart';
 import '../../features/property_inspection/domain/field_phrase_processor.dart';
+import '../../features/property_inspection/domain/legacy_answer_migration.dart';
 
 /// Shared base class for InspectionRepository and ValuationRepository.
 ///
@@ -328,7 +329,10 @@ abstract class BaseSurveyRepository {
       result.putIfAbsent(row.screenId, () => {})[row.fieldKey] =
           row.value ?? '';
     }
-    return result;
+    return {
+      for (final entry in result.entries)
+        entry.key: migrateLegacyAnswers(entry.key, entry.value),
+    };
   }
 
   Future<List<InspectionV2Screen>> getAllScreensForSurvey(
@@ -348,9 +352,9 @@ abstract class BaseSurveyRepository {
           ..where((tbl) =>
               tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
         .get();
-    return {
+    return migrateLegacyAnswers(screenId, {
       for (final row in rows) row.fieldKey: row.value ?? '',
-    };
+    });
   }
 
   Future<void> saveScreenAnswers({

@@ -190,6 +190,63 @@ def step_t14():
     _options_as_when_any('communal_fence', 'communal_fence_0_', '')
 
 
+def field_json(indent, fid, label, ftype, conditional=None):
+    lines = ['{', '  "id": %s,' % json.dumps(fid), '  "label": %s,' % json.dumps(label)]
+    if conditional:
+        lines.append('  "type": %s,' % json.dumps(ftype))
+        lines.append('  "conditionalOn": %s' % json.dumps(conditional))
+    else:
+        lines.append('  "type": %s' % json.dumps(ftype))
+    lines.append('}')
+    return (NL + indent).join(lines)
+
+
+def replace_field(sid, fid, new_fields):
+    """Swap one field for several: [(id, label, type, conditionalOn or None)]."""
+    global raw
+    start, end = field_span(sid, fid)
+    line_start = raw.rfind(NL, 0, start) + len(NL)
+    indent = raw[line_start:start]
+    text = (',' + NL + indent).join(field_json(indent, *f) for f in new_fields)
+    raw = raw[:start] + text + raw[end:]
+
+
+def replace_in_node(sid, old, new):
+    global raw
+    start, end = node_span(sid)
+    obj = raw[start:end]
+    if old not in obj:
+        raise SystemExit('%r not on %s' % (old, sid))
+    raw = raw[:start] + obj.replace(old, new) + raw[end:]
+
+
+MOVEMENT_OPTIONS = [
+    ('Minor subsidence', 'mv_minor_subsidence'),
+    ('Significant subsidence', 'mv_significant_subsidence'),
+    ('No structural movement', 'mv_no_structural_movement'),
+    ('Normal defects', 'mv_normal_defects'),
+    ('Recent defects', 'mv_recent_defects'),
+    ('Recurring defects', 'mv_recurring_defects'),
+    ('Differential thermal movement', 'mv_differential_thermal_movement'),
+    ('Restraint steel rods', 'mv_restraint_steel_rods'),
+]
+
+
+def step_t15():
+    global spec
+    sid = 'activity_outside_property_main_walls_movements'
+    replace_field(sid, 'actv_movement_status',
+                  [('label_movement_status', 'Movement status', 'label', None)]
+                  + [(tick, label, 'checkbox', None) for label, tick in MOVEMENT_OPTIONS])
+    replace_in_node(sid, 'actv_movement_status=Recent defects', 'mv_recent_defects')
+    replace_in_node(sid, 'actv_movement_status=Recurring defects', 'mv_recurring_defects')
+    for label, tick in MOVEMENT_OPTIONS:
+        old = "whenField: 'actv_movement_status',%s    whenValue: '%s'," % (SPEC_NL, label)
+        if spec.count(old) != 1:
+            raise SystemExit('rule for %s occurs %dx' % (label, spec.count(old)))
+        spec = spec.replace(old, "whenField: '%s',%s    whenValue: 'true'," % (tick, SPEC_NL))
+
+
 STEPS = {name[5:]: fn for name, fn in list(globals().items()) if name.startswith('step_')}
 
 if __name__ == '__main__':

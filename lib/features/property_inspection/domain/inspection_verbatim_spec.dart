@@ -2436,8 +2436,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{E4_MOVE_0}',
     [
     ],
-    whenField: 'actv_movement_status',
-    whenValue: 'Minor subsidence',
+    whenField: 'mv_minor_subsidence',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'e4_mv_1',
@@ -2446,8 +2446,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{E4_MOVE_1}',
     [
     ],
-    whenField: 'actv_movement_status',
-    whenValue: 'Significant subsidence',
+    whenField: 'mv_significant_subsidence',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'e4_mv_2',
@@ -2456,8 +2456,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{E4_MOVE_2}',
     [
     ],
-    whenField: 'actv_movement_status',
-    whenValue: 'No structural movement',
+    whenField: 'mv_no_structural_movement',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'e4_mv_3',
@@ -2466,8 +2466,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{E4_MOVE_3}',
     [
     ],
-    whenField: 'actv_movement_status',
-    whenValue: 'Normal defects',
+    whenField: 'mv_normal_defects',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'e4_mv_recent',
@@ -2513,8 +2513,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'Recent defects: The front, side, rear walls of the main building, back addition, extension, bay window, porch, other areas have been damaged by movement cracks potentially arising from settlement, subsidence, nearby vegetation, point loading, wall tie damage, other causes, and this is considered structurally significant.',
-    whenField: 'actv_movement_status',
-    whenValue: 'Recent defects',
+    whenField: 'mv_recent_defects',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'e4_mv_recurring',
@@ -2538,8 +2538,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'Recurring defects: The outside wall(s) to the main building, back addition, extension, bay window, porch, other have been repaired, indicating that the building has been affected by previous movement.',
-    whenField: 'actv_movement_status',
-    whenValue: 'Recurring defects',
+    whenField: 'mv_recurring_defects',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'e4_mv_thermal',
@@ -2548,8 +2548,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{E4_MOVE_THERMAL}',
     [
     ],
-    whenField: 'actv_movement_status',
-    whenValue: 'Differential thermal movement',
+    whenField: 'mv_differential_thermal_movement',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'e4_mv_rods',
@@ -2558,8 +2558,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{E4_MOVE_RODS}',
     [
     ],
-    whenField: 'actv_movement_status',
-    whenValue: 'Restraint steel rods',
+    whenField: 'mv_restraint_steel_rods',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'e4_spall',

@@ -19884,214 +19884,244 @@
           "order": 11,
           "fields": [
             {
-              "id": "actv_movement_status",
+              "id": "label_movement_status",
               "label": "Movement status",
-              "type": "dropdown",
-              "options": [
-                "Minor subsidence",
-                "Significant subsidence",
-                "No structural movement",
-                "Normal defects",
-                "Recent defects",
-                "Recurring defects",
-                "Differential thermal movement",
-                "Restraint steel rods"
-              ]
+              "type": "label"
+            },
+            {
+              "id": "mv_minor_subsidence",
+              "label": "Minor subsidence",
+              "type": "checkbox"
+            },
+            {
+              "id": "mv_significant_subsidence",
+              "label": "Significant subsidence",
+              "type": "checkbox"
+            },
+            {
+              "id": "mv_no_structural_movement",
+              "label": "No structural movement",
+              "type": "checkbox"
+            },
+            {
+              "id": "mv_normal_defects",
+              "label": "Normal defects",
+              "type": "checkbox"
+            },
+            {
+              "id": "mv_recent_defects",
+              "label": "Recent defects",
+              "type": "checkbox"
+            },
+            {
+              "id": "mv_recurring_defects",
+              "label": "Recurring defects",
+              "type": "checkbox"
+            },
+            {
+              "id": "mv_differential_thermal_movement",
+              "label": "Differential thermal movement",
+              "type": "checkbox"
+            },
+            {
+              "id": "mv_restraint_steel_rods",
+              "label": "Restraint steel rods",
+              "type": "checkbox"
             },
             {
               "id": "label_move_walls",
               "label": "Walls",
               "type": "label",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_w_front",
               "label": "front",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_w_side",
               "label": "side",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_w_rear",
               "label": "rear",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "label_move_locations",
               "label": "Location",
               "type": "label",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_l_main_building",
               "label": "main building",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_l_back_addition",
               "label": "back addition",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_l_extension",
               "label": "extension",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_l_bay_window",
               "label": "bay window",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_l_porch",
               "label": "porch",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_l_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_l_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_movement_status=Recent defects&e4m_l_other",
+              "conditionalOn": "mv_recent_defects&e4m_l_other",
               "conditionalMode": "show"
             },
             {
               "id": "label_move_causes",
               "label": "Cracks potentially arising from",
               "type": "label",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_c_settlement",
               "label": "settlement",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_c_subsidence",
               "label": "subsidence",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_c_nearby_vegetation",
               "label": "nearby vegetation",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_c_point_loading",
               "label": "point loading",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_c_wall_tie_damage",
               "label": "wall tie damage",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_c_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recent defects",
+              "conditionalOn": "mv_recent_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_c_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_movement_status=Recent defects&e4m_c_other",
+              "conditionalOn": "mv_recent_defects&e4m_c_other",
               "conditionalMode": "show"
             },
             {
               "id": "label_move_locations_recurring",
               "label": "Walls repaired",
               "type": "label",
-              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalOn": "mv_recurring_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_r_main_building",
               "label": "main building",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalOn": "mv_recurring_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_r_back_addition",
               "label": "back addition",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalOn": "mv_recurring_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_r_extension",
               "label": "extension",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalOn": "mv_recurring_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_r_bay_window",
               "label": "bay window",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalOn": "mv_recurring_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_r_porch",
               "label": "porch",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalOn": "mv_recurring_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_r_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_movement_status=Recurring defects",
+              "conditionalOn": "mv_recurring_defects",
               "conditionalMode": "show"
             },
             {
               "id": "e4m_r_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_movement_status=Recurring defects&e4m_r_other",
+              "conditionalOn": "mv_recurring_defects&e4m_r_other",
               "conditionalMode": "show"
             }
           ]

@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_scriber/features/property_inspection/domain/inspection_phrase_engine.dart';
+import 'package:survey_scriber/features/property_inspection/domain/legacy_answer_migration.dart';
 import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
 
 void main() {
@@ -80,6 +81,55 @@ void main() {
     test('nothing ticked prints nothing', () {
       expect(engine.buildPhrases('activity_rear_garden', const {}), isEmpty);
       expect(engine.buildPhrases('activity_communal_garden', const {}), isEmpty);
+    });
+  });
+
+  group('Movement status: multiple selection', () {
+    const screen = 'activity_outside_property_main_walls_movements';
+
+    test('options are ticks; follow-up boxes still open', () {
+      final fields = nodes[screen]!.fields;
+      expect(fields.map((f) => f.id), isNot(contains('actv_movement_status')));
+      final ticks = fields.where((f) => f.id.startsWith('mv_'));
+      expect(ticks.map((f) => f.label), [
+        'Minor subsidence', 'Significant subsidence', 'No structural movement', 'Normal defects',
+        'Recent defects', 'Recurring defects', 'Differential thermal movement', 'Restraint steel rods',
+      ]);
+      expect(ticks.every((f) => f.type == InspectionFieldType.checkbox), isTrue);
+      expect(fields.firstWhere((f) => f.id == 'e4m_w_front').conditionalOn, 'mv_recent_defects');
+      expect(fields.firstWhere((f) => f.id == 'e4m_r_main_building').conditionalOn, 'mv_recurring_defects');
+      expect(fields.firstWhere((f) => f.id == 'e4m_l_other_text').conditionalOn, 'mv_recent_defects&e4m_l_other');
+    });
+
+    test('each tick prints its own sentence', () {
+      final engine = InspectionPhraseEngine(
+        (jsonDecode(File('assets/property_inspection/phrase_texts.json').readAsStringSync())
+                as Map<String, dynamic>)
+            .map((k, v) => MapEntry(k, v?.toString() ?? '')),
+      );
+      final one = engine.buildPhrases(screen, {'mv_minor_subsidence': 'true'});
+      final two = engine.buildPhrases(screen, {
+        'mv_minor_subsidence': 'true',
+        'mv_differential_thermal_movement': 'true',
+      });
+      expect(one, hasLength(1));
+      expect(two, hasLength(2));
+      expect(two, contains(one.single));
+    });
+
+    test('a value saved before the change becomes its tick', () {
+      expect(migrateLegacyAnswers(screen, {'actv_movement_status': 'Recent defects', 'e4m_w_front': 'true'}),
+          {'mv_recent_defects': 'true', 'e4m_w_front': 'true'});
+    });
+
+    test('the old value does not come back once ticks are saved', () {
+      expect(migrateLegacyAnswers(screen, {'actv_movement_status': 'Recent defects', 'mv_recent_defects': 'false'}),
+          {'mv_recent_defects': 'false'});
+    });
+
+    test('other screens are untouched', () {
+      const other = {'actv_movement_status': 'Recent defects'};
+      expect(migrateLegacyAnswers('activity_party_disclosure', other), other);
     });
   });
 }
