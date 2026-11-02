@@ -35,3 +35,26 @@ Map<String, String> migrateLegacyAnswers(
   });
   return out;
 }
+
+/// Fields that moved to a new screen: new screen -> old screen, field id prefix.
+const movedAnswers = <String, ({String fromScreen, String fieldPrefix})>{
+  'activity_outside_property_windows_sill_defect': (
+    fromScreen: 'activity_outside_property_windows_sill_projection',
+    fieldPrefix: 'e5sd_',
+  ),
+};
+
+/// Answers saved on the old screen show on the new one until it has its own.
+Map<String, String> mergeMovedAnswers(
+  String screenId,
+  Map<String, String> answers,
+  Map<String, String> oldScreenAnswers,
+) {
+  final moved = movedAnswers[screenId];
+  if (moved == null) return answers;
+  return {
+    for (final entry in oldScreenAnswers.entries)
+      if (entry.key.startsWith(moved.fieldPrefix)) entry.key: entry.value,
+    ...answers,
+  };
+}

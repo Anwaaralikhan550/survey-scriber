@@ -132,4 +132,43 @@ void main() {
       expect(migrateLegacyAnswers('activity_party_disclosure', other), other);
     });
   });
+
+  group('Windows: Sill Projection and Sill Defect are separate', () {
+    const projection = 'activity_outside_property_windows_sill_projection';
+    const defect = 'activity_outside_property_windows_sill_defect';
+    final engine = InspectionPhraseEngine(
+      (jsonDecode(File('assets/property_inspection/phrase_texts.json').readAsStringSync())
+              as Map<String, dynamic>)
+          .map((k, v) => MapEntry(k, v?.toString() ?? '')),
+    );
+
+    test('two screens under Windows, no choice between them', () {
+      expect(nodes[projection]!.fields.map((f) => f.id), ['actv_condition']);
+      expect(nodes[projection]!.fields.single.conditionalOn, isNull);
+      expect(nodes[defect]!.title, 'Sill Defect');
+      expect(nodes[defect]!.parentId, 'group_windows_21');
+      expect(nodes[defect]!.fields.where((f) => f.conditionalOn != null), isEmpty);
+    });
+
+    test('each prints its own sentence, on its own', () {
+      final a = engine.buildPhrases(projection, {'actv_condition': 'Properly'});
+      final b = engine.buildPhrases(defect, {'e5sd_cracked': 'true'});
+      expect(a.single, startsWith('Sill projection:'));
+      expect(b.single, startsWith('Sill defect:'));
+      expect(b.single, contains('cracked'));
+      expect(engine.buildPhrases(projection, const {}), isEmpty);
+      expect(engine.buildPhrases(defect, const {}), isEmpty);
+    });
+
+    test('defects saved on the old screen show on the new one', () {
+      expect(
+        mergeMovedAnswers(defect, const {}, {'e5sd_cracked': 'true', 'actv_condition': 'Fairly'}),
+        {'e5sd_cracked': 'true'},
+      );
+      expect(
+        mergeMovedAnswers(defect, {'e5sd_cracked': 'false'}, {'e5sd_cracked': 'true'}),
+        {'e5sd_cracked': 'false'},
+      );
+    });
+  });
 }

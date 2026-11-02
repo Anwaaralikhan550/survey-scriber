@@ -18286,16 +18286,7 @@
           "parentId": "group_windows_21",
           "order": 7,
           "fields": [
-            {
-              "id": "actv_projection_type",
-              "label": "Sill",
-              "type": "dropdown",
-              "options": [
-                "Sill projection",
-                "Sill defect"
-              ]
-            },
-            {
+{
               "id": "actv_condition",
               "label": "Sealing around windows",
               "type": "dropdown",
@@ -18304,50 +18295,46 @@
                 "Fairly",
                 "Poorly"
               ],
-              "conditionalOn": "actv_projection_type=Sill projection",
               "conditionalMode": "show"
-            },
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_windows_sill_defect",
+          "title": "Sill Defect",
+          "type": "screen",
+          "parentId": "group_windows_21",
+          "order": 14,
+          "fields": [
             {
               "id": "label_sill_defects",
               "label": "Windowsill projection",
-              "type": "label",
-              "conditionalOn": "actv_projection_type=Sill defect",
-              "conditionalMode": "show"
+              "type": "label"
             },
             {
               "id": "e5sd_adequate",
               "label": "adequate",
-              "type": "checkbox",
-              "conditionalOn": "actv_projection_type=Sill defect",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
               "id": "e5sd_properly_installed",
               "label": "properly installed",
-              "type": "checkbox",
-              "conditionalOn": "actv_projection_type=Sill defect",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
               "id": "e5sd_properly_drained",
               "label": "properly drained",
-              "type": "checkbox",
-              "conditionalOn": "actv_projection_type=Sill defect",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
               "id": "e5sd_cracked",
               "label": "cracked",
-              "type": "checkbox",
-              "conditionalOn": "actv_projection_type=Sill defect",
-              "conditionalMode": "show"
+              "type": "checkbox"
             },
             {
               "id": "e5sd_defective",
               "label": "defective",
-              "type": "checkbox",
-              "conditionalOn": "actv_projection_type=Sill defect",
-              "conditionalMode": "show"
+              "type": "checkbox"
             }
           ]
         },

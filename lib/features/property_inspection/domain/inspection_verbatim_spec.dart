@@ -3014,12 +3014,13 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'The junctions between the window frames and the surrounding wall openings appear to be properly, fairly, poorly sealed.',
-    whenField: 'actv_projection_type',
-    whenValue: 'Sill projection',
+    whenField: 'actv_condition',
+    whenValue: 'Properly',
+    whenAny: [['actv_condition', 'Fairly'], ['actv_condition', 'Poorly']],
   ),
   VerbatimRule(
     'e5_sill_defect',
-    'activity_outside_property_windows_sill_projection',
+    'activity_outside_property_windows_sill_defect',
     '{E_WINDOWS}',
     '{E5_SILL_DEFECT}',
     [
@@ -3037,8 +3038,9 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'Sill defect: The windowsill projection beyond the face of the wall does not appear to be adequate, properly installed, properly drained, cracked, defective.',
-    whenField: 'actv_projection_type',
-    whenValue: 'Sill defect',
+    whenField: 'e5sd_adequate',
+    whenValue: 'true',
+    whenAny: [['e5sd_properly_installed', 'true'], ['e5sd_properly_drained', 'true'], ['e5sd_cracked', 'true'], ['e5sd_defective', 'true']],
   ),
   VerbatimRule(
     'e5_repair',

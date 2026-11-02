@@ -247,6 +247,101 @@ def step_t15():
         spec = spec.replace(old, "whenField: '%s',%s    whenValue: 'true'," % (tick, SPEC_NL))
 
 
+def insert_screen_after(after_id, sid, title, parent, order, fields):
+    """New screen node right after another: fields [(id, label, type, conditionalOn or None)]."""
+    global raw
+    start, end = node_span(after_id)
+    line_start = raw.rfind(NL, 0, start) + len(NL)
+    indent = raw[line_start:start]
+    inner = indent + '  '
+    fields_indent = inner + '  '
+    field_text = (',' + NL + fields_indent).join(field_json(fields_indent, *f) for f in fields)
+    obj = NL.join([
+        '{',
+        inner + '"id": %s,' % json.dumps(sid),
+        inner + '"title": %s,' % json.dumps(title),
+        inner + '"type": "screen",',
+        inner + '"parentId": %s,' % json.dumps(parent),
+        inner + '"order": %d,' % order,
+        inner + '"fields": [',
+        fields_indent + field_text,
+        inner + ']',
+        indent + '}',
+    ])
+    raw = raw[:end] + ',' + NL + indent + obj + raw[end:]
+
+
+def rule_block(name):
+    marker = "  VerbatimRule(%s    '%s'," % (SPEC_NL, name)
+    if spec.count(marker) != 1:
+        raise SystemExit('rule %s occurs %dx' % (name, spec.count(marker)))
+    start = spec.index(marker)
+    end_marker = '%s  ),%s' % (SPEC_NL, SPEC_NL)
+    return start, spec.index(end_marker, start)
+
+
+def set_rule_screen(name, screen):
+    global spec
+    start, end = rule_block(name)
+    body = spec[start:end]
+    new, n = re.subn(r"(VerbatimRule\(\s*'%s',\s*)'[^']+'" % re.escape(name),
+                     lambda m: "%s'%s'" % (m.group(1), screen), body, count=1)
+    if n != 1:
+        raise SystemExit('no screen on ' + name)
+    spec = spec[:start] + new + spec[end:]
+
+
+def set_rule_when(name, pairs):
+    """Rule fires when any (field, value) pair holds."""
+    global spec
+    start, end = rule_block(name)
+    body = spec[start:end]
+    body = re.sub(r"\s*whenField: '[^']*',", '', body)
+    body = re.sub(r"\s*whenValue: '[^']*',", '', body)
+    body = re.sub(r"\s*whenAny: \[.*?\]\],", '', body, flags=re.S)
+    (field, value), rest = pairs[0], pairs[1:]
+    lines = ["    whenField: '%s'," % field, "    whenValue: '%s'," % value]
+    if rest:
+        lines.append('    whenAny: [%s],' % ', '.join("['%s', '%s']" % p for p in rest))
+    spec = spec[:start] + body + SPEC_NL + SPEC_NL.join(lines) + spec[end:]
+
+
+def remove_conditional(sid, fid):
+    global raw
+    start, end = field_span(sid, fid)
+    obj = raw[start:end]
+    new, n = re.subn(r',\s*"conditionalOn":\s*"[^"]*"', '', obj, count=1)
+    if n != 1:
+        raise SystemExit('no conditionalOn on %s/%s' % (sid, fid))
+    raw = raw[:start] + new + raw[end:]
+
+
+SILL_SCREEN = 'activity_outside_property_windows_sill_projection'
+SILL_DEFECT_SCREEN = 'activity_outside_property_windows_sill_defect'
+SILL_DEFECTS = [
+    ('e5sd_adequate', 'adequate'),
+    ('e5sd_properly_installed', 'properly installed'),
+    ('e5sd_properly_drained', 'properly drained'),
+    ('e5sd_cracked', 'cracked'),
+    ('e5sd_defective', 'defective'),
+]
+
+
+def step_t16():
+    remove_field(SILL_SCREEN, 'actv_projection_type')
+    remove_conditional(SILL_SCREEN, 'actv_condition')
+    remove_field(SILL_SCREEN, 'label_sill_defects')
+    for fid, _ in SILL_DEFECTS:
+        remove_field(SILL_SCREEN, fid)
+    insert_screen_after(
+        SILL_SCREEN, SILL_DEFECT_SCREEN, 'Sill Defect', 'group_windows_21', 14,
+        [('label_sill_defects', 'Windowsill projection', 'label', None)]
+        + [(fid, label, 'checkbox', None) for fid, label in SILL_DEFECTS])
+    set_rule_when('e5_sill', [('actv_condition', 'Properly'), ('actv_condition', 'Fairly'), ('actv_condition', 'Poorly')])
+    set_rule_screen('e5_sill_defect', SILL_DEFECT_SCREEN)
+    set_rule_when('e5_sill_defect', [(fid, 'true') for fid, _ in SILL_DEFECTS])
+
+
 STEPS = {name[5:]: fn for name, fn in list(globals().items()) if name.startswith('step_')}
 
 if __name__ == '__main__':

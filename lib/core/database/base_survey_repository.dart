@@ -329,6 +329,12 @@ abstract class BaseSurveyRepository {
       result.putIfAbsent(row.screenId, () => {})[row.fieldKey] =
           row.value ?? '';
     }
+    for (final entry in movedAnswers.entries) {
+      final old = result[entry.value.fromScreen];
+      if (old == null) continue;
+      result[entry.key] =
+          mergeMovedAnswers(entry.key, result[entry.key] ?? const {}, old);
+    }
     return {
       for (final entry in result.entries)
         entry.key: migrateLegacyAnswers(entry.key, entry.value),
@@ -352,9 +358,21 @@ abstract class BaseSurveyRepository {
           ..where((tbl) =>
               tbl.surveyId.equals(surveyId) & tbl.screenId.equals(screenId)))
         .get();
-    return migrateLegacyAnswers(screenId, {
-      for (final row in rows) row.fieldKey: row.value ?? '',
-    });
+    final answers = {for (final row in rows) row.fieldKey: row.value ?? ''};
+    final moved = movedAnswers[screenId];
+    if (moved == null) return migrateLegacyAnswers(screenId, answers);
+
+    final oldRows = await (_db.select(_db.inspectionV2Answers)
+          ..where((tbl) =>
+              tbl.surveyId.equals(surveyId) &
+              tbl.screenId.equals(moved.fromScreen)))
+        .get();
+    return migrateLegacyAnswers(
+      screenId,
+      mergeMovedAnswers(screenId, answers, {
+        for (final row in oldRows) row.fieldKey: row.value ?? '',
+      }),
+    );
   }
 
   Future<void> saveScreenAnswers({
