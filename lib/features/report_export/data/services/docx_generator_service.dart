@@ -18,8 +18,11 @@ import 'pdf_shared_utils.dart';
 /// DOCX is essentially a ZIP containing XML files following the Open XML spec.
 class DocxGeneratorService {
   static const _inspectionReportTitle = 'RICS HomeBuyer Report';
-  static const _fullWidthTable = '<w:tblW w:w="9638" w:type="dxa"/>'
-      '<w:tblInd w:w="0" w:type="dxa"/><w:tblLayout w:type="fixed"/>';
+  /// A table on the text margins. Word draws a table's left edge one cell margin
+  /// outside the indent, so the indent equals the table's left cell margin.
+  static String _fullWidthTable(int leftCellMargin) =>
+      '<w:tblW w:w="9638" w:type="dxa"/>'
+      '<w:tblInd w:w="$leftCellMargin" w:type="dxa"/><w:tblLayout w:type="fixed"/>';
 
   DocxGeneratorService(this._config);
 
@@ -480,7 +483,7 @@ class DocxGeneratorService {
           '<w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr></w:p>');
     }
     final fill = _pdfColorToHex(color ?? _config.accentColor);
-    buf.write('<w:tbl><w:tblPr>$_fullWidthTable<w:tblCellMar>');
+    buf.write('<w:tbl><w:tblPr>${_fullWidthTable(108)}<w:tblCellMar>');
     buf.write('<w:top w:w="80" w:type="dxa"/><w:left w:w="160" w:type="dxa"/>');
     buf.write('<w:bottom w:w="80" w:type="dxa"/><w:right w:w="160" w:type="dxa"/>');
     buf.write('</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="9638"/></w:tblGrid>');
@@ -581,7 +584,7 @@ class DocxGeneratorService {
         ('Survey Duration', PdfSharedUtils.formatDuration(meta.surveyDuration!)),
     ];
 
-    buf.write('<w:tbl><w:tblPr>$_fullWidthTable');
+    buf.write('<w:tbl><w:tblPr>${_fullWidthTable(160)}');
     buf.write('<w:tblBorders>');
     for (final side in const ['top', 'left', 'bottom', 'right', 'insideH', 'insideV']) {
       buf.write('<w:$side w:val="single" w:sz="4" w:space="0" w:color="EDEDED"/>');
@@ -626,7 +629,7 @@ class DocxGeneratorService {
     required String fillHex,
     required List<({String text, int size, bool bold})> lines,
   }) {
-    buf.write('<w:tbl><w:tblPr>$_fullWidthTable<w:tblCellMar>');
+    buf.write('<w:tbl><w:tblPr>${_fullWidthTable(160)}<w:tblCellMar>');
     buf.write('<w:top w:w="160" w:type="dxa"/><w:bottom w:w="160" w:type="dxa"/>');
     buf.write('</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="9638"/></w:tblGrid>');
     buf.write('<w:tr><w:tc><w:tcPr><w:tcW w:w="9638" w:type="dxa"/>');
