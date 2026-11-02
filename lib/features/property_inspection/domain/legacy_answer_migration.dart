@@ -16,6 +16,22 @@ const _dropdownToTicks = <String, Map<String, Map<String, String>>>{
       'Restraint steel rods': 'mv_restraint_steel_rods',
     },
   },
+  'activity_services_heating_main_screen': {
+    'actv_location': {
+      'Kitchen': 'g4b_kitchen',
+      'Utility': 'g4b_utility',
+      'Bedroom': 'g4b_bedroom',
+      'Garage': 'g4b_garage',
+      'Lounge': 'g4b_lounge',
+      'Chimney breast': 'g4b_chimney_breast',
+      'Other': 'g4b_other',
+    },
+    'actv_connected_heat': {
+      'Radiators': 'g4he_radiators',
+      'Underfloor pipes': 'g4he_underfloor_pipes',
+      'Other': 'g4he_other',
+    },
+  },
 };
 
 Map<String, String> migrateLegacyAnswers(

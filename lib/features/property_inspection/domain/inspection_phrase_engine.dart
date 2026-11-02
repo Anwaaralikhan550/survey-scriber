@@ -18,6 +18,20 @@ class InspectionPhraseEngine {
   bool hasVerbatimRulesFor(String screenId) =>
       kVerbatimRules.any((r) => r.screen == screenId);
 
+  /// "Metre" chosen with no location ticked still gets its comment: the approved
+  /// sentence without the location clause.
+  List<String> _gasMeterWithoutLocation(Map<String, String> answers) {
+    if ((answers['actv_condition'] ?? '').trim() != 'Metre') return const [];
+    final anyLocation = answers.entries.any((e) =>
+        e.key.startsWith('g2m_') &&
+        (e.value.trim().toLowerCase() == 'true' ||
+            (e.key == 'g2m_other_text' && e.value.trim().isNotEmpty)));
+    if (anyLocation) return const [];
+    final text = phraseTexts['{G_GAS_AND_OIL}::{G2_METER}'];
+    if (text == null) return const [];
+    return [text.replaceFirst(', and the meter unit is located {GAS_METER_LOCATION}', '')];
+  }
+
   List<String> buildPhrases(String screenId, Map<String, String> rawAnswers) {
     var answers = rawAnswers;
     if (screenId == 'activity_over_all_openion') {
@@ -173,7 +187,7 @@ class InspectionPhraseEngine {
       case 'activity_services_gas_oil':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_main_gas':
-        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+        return _gasMeterWithoutLocation(answers);
       case 'activity_services_oil':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_services_gas_oil_repair_gas_meter':

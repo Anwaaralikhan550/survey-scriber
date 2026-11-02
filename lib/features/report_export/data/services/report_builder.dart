@@ -1069,7 +1069,8 @@ class ReportBuilder {
     final groundsTopo =
         _answersForScreen(rawData, 'activity_grounds_other_grounds');
     final topoType = (groundsTopo['actv_type'] ?? '').trim().toLowerCase();
-    if (topoType.isNotEmpty && topoType != 'level') {
+    final slopeChosen = (groundsTopo['actv_j2_slope'] ?? '').trim().isNotEmpty;
+    if (slopeChosen || (topoType.isNotEmpty && topoType != 'level')) {
       final slopeBank =
           _approvedBankPhrase('{RISK_TO_GROUNDS}::{GROUNDS_SLOPING_GROUND}');
       phrases.add(slopeBank != null

@@ -9,6 +9,7 @@ import 'package:survey_scriber/features/property_inspection/domain/inspection_ph
 import 'package:survey_scriber/features/property_inspection/domain/legacy_answer_migration.dart';
 import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
 import 'package:survey_scriber/features/property_inspection/presentation/widgets/inspection_breadcrumb_bar.dart';
+import 'package:survey_scriber/features/property_inspection/presentation/widgets/inspection_fields.dart';
 
 void main() {
   final tree = InspectionTreePayload.fromJson(
@@ -293,5 +294,65 @@ void main() {
     final usedAs = nodes['activity_inside_property_other_celler_inspected']!;
     expect(usedAs.fields.map((f) => f.id), ['actv_used_as']);
     expect(usedAs.fields.single.options, ['Not in use', 'In use']);
+  });
+
+  group('Heating main screen', () {
+    final fields = sanitizeInspectionFieldsForScreen(
+      'activity_services_heating_main_screen',
+      nodes['activity_services_heating_main_screen']!.fields,
+    );
+
+    test('Location: multiple selection with Airing cupboard and Other text', () {
+      expect(fields.map((f) => f.id), isNot(contains('actv_location')));
+      final labels = fields.where((f) => f.id.startsWith('g4b_')).map((f) => f.label).toList();
+      expect(labels, ['Kitchen', 'Utility', 'Bedroom', 'Garage', 'Lounge', 'Chimney breast', 'Airing cupboard', 'Other', 'Other']);
+      expect(fields.firstWhere((f) => f.id == 'g4b_airing_cupboard').type, InspectionFieldType.checkbox);
+      final otherText = fields.firstWhere((f) => f.id == 'g4b_other_text');
+      expect(otherText.type, InspectionFieldType.text);
+      expect(shouldShowInspectionField(otherText, const {'g4b_other': 'true'}), isTrue);
+      expect(shouldShowInspectionField(otherText, const {}), isFalse);
+    });
+
+    test('Connected heat emitters: multiple selection', () {
+      expect(fields.map((f) => f.id), isNot(contains('actv_connected_heat')));
+      final ticks = fields.where((f) => f.id.startsWith('g4he_'));
+      expect(ticks.map((f) => f.label), ['Radiators', 'Underfloor pipes', 'Other']);
+      expect(ticks.every((f) => f.type == InspectionFieldType.checkbox), isTrue);
+    });
+
+    test('values saved before the change become ticks', () {
+      expect(
+        migrateLegacyAnswers('activity_services_heating_main_screen',
+            {'actv_location': 'Kitchen', 'actv_connected_heat': 'Radiators', 'actv_boiler': 'Other'}),
+        {'g4b_kitchen': 'true', 'g4he_radiators': 'true', 'actv_boiler': 'Other'},
+      );
+    });
+  });
+
+  group('Gas meter comment', () {
+    final engine = InspectionPhraseEngine(
+      (jsonDecode(File('assets/property_inspection/phrase_texts.json').readAsStringSync())
+              as Map<String, dynamic>)
+          .map((k, v) => MapEntry(k, v?.toString() ?? '')),
+    );
+    const screen = 'activity_services_main_gas';
+
+    test('with a location: the approved sentence', () {
+      expect(
+        engine.buildPhrases(screen, {'actv_condition': 'Metre', 'g2m_in_the_kitchen': 'true'}).single,
+        startsWith('Metre: There is a mains gas connection to the property, and the meter unit is located in the kitchen.'),
+      );
+    });
+
+    test('without a location: still printed, without the location clause', () {
+      final phrase = engine.buildPhrases(screen, {'actv_condition': 'Metre'}).single;
+      expect(phrase, startsWith('Metre: There is a mains gas connection to the property.'));
+      expect(phrase, isNot(contains('{')));
+    });
+
+    test('Metre not found keeps its own sentence; nothing chosen prints nothing', () {
+      expect(engine.buildPhrases(screen, {'actv_condition': 'Metre not found'}).single, startsWith('Metre not found:'));
+      expect(engine.buildPhrases(screen, const {}), isEmpty);
+    });
   });
 }
