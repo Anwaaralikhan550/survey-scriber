@@ -32,4 +32,29 @@ class V2SyncHelper {
         Uuid.NAMESPACE_URL,
         'v2_answer_${surveyId}_${screenId}_$fieldKey',
       );
+
+  /// The answer key sent to the backend for an inspection answer.
+  ///
+  /// The backend keeps one answer per (section, questionKey), while several
+  /// screens of a section share a field id (Party Disclosure and Property Facing
+  /// both use `android_material_design_spinner`). A plain field id let one
+  /// screen's value overwrite another's, so the key carries the screen as well.
+  static String answerQuestionKey(String screenId, String fieldKey) =>
+      '$screenId$_answerKeySeparator$fieldKey';
+
+  /// Reverse of [answerQuestionKey]; null for a plain field id from an older app.
+  static ({String screenId, String fieldKey})? parseAnswerQuestionKey(
+    String questionKey,
+  ) {
+    final at = questionKey.indexOf(_answerKeySeparator);
+    if (at <= 0 || at + _answerKeySeparator.length >= questionKey.length) {
+      return null;
+    }
+    return (
+      screenId: questionKey.substring(0, at),
+      fieldKey: questionKey.substring(at + _answerKeySeparator.length),
+    );
+  }
+
+  static const _answerKeySeparator = '::';
 }

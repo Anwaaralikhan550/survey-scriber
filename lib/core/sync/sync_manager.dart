@@ -32,6 +32,7 @@ import '../utils/logger.dart';
 import '../../features/config/presentation/helpers/config_aware_fields.dart';
 import 'legacy_main_walls_sync_mapping.dart';
 import 'sync_state.dart';
+import 'v2_answer_pull.dart';
 import 'v2_sync_helper.dart';
 
 /// F12 FIX: Custom exception for sync conflicts (HTTP 409)
@@ -2412,6 +2413,19 @@ class SyncManager {
       return;
     }
 
+    final keyed = V2SyncHelper.parseAnswerQuestionKey(questionKey);
+    if (keyed != null) {
+      await _writePulledV2Answer(
+        surveyId: surveyId,
+        screenId: keyed.screenId,
+        fieldKey: keyed.fieldKey,
+        value: value,
+        data: data,
+        overwriteLocal: true,
+      );
+      return;
+    }
+
     final legacyDecoded =
         LegacyMainWallsSyncMapping.decodeRemoteAnswer(questionKey, value);
     if (legacyDecoded != null) {
@@ -2468,23 +2482,36 @@ class SyncManager {
       return;
     }
 
-    // Determine ID prefix (valuation uses 'val_').
-    final survey = await surveysDao.getSurveyById(surveyId);
-    final prefix = (survey?.type.isValuation ?? false) ? 'val_' : '';
-    final v2Id = '${surveyId}_$prefix${screenId}_$questionKey';
+    await _writePulledV2Answer(
+      surveyId: surveyId,
+      screenId: screenId,
+      fieldKey: questionKey,
+      value: value,
+      data: data,
+      overwriteLocal: false,
+    );
+  }
 
-    await db.into(db.inspectionV2Answers).insertOnConflictUpdate(
-          InspectionV2AnswersCompanion(
-            id: Value(v2Id),
-            surveyId: Value(surveyId),
-            screenId: Value(screenId),
-            fieldKey: Value(questionKey),
-            value: Value(value),
-            createdAt:
-                Value(_parseDateTime(data['createdAt']) ?? DateTime.now()),
-            updatedAt: Value(_parseDateTime(data['updatedAt'])),
-          ),
-        );
+  Future<void> _writePulledV2Answer({
+    required String surveyId,
+    required String screenId,
+    required String fieldKey,
+    required String value,
+    required Map<String, dynamic> data,
+    required bool overwriteLocal,
+  }) async {
+    final survey = await surveysDao.getSurveyById(surveyId);
+    await writePulledV2Answer(
+      db,
+      surveyId: surveyId,
+      screenId: screenId,
+      fieldKey: fieldKey,
+      value: value,
+      isValuation: survey?.type.isValuation ?? false,
+      createdAt: _parseDateTime(data['createdAt']),
+      updatedAt: _parseDateTime(data['updatedAt']),
+      overwriteLocal: overwriteLocal,
+    );
   }
 
   /// Fallback V2 answer routing when sectionTypeKey is unresolvable.
@@ -2500,6 +2527,19 @@ class SyncManager {
   ) async {
     final value = data['value'] as String?;
     if (value == null || value.trim().isEmpty) return false;
+
+    final keyed = V2SyncHelper.parseAnswerQuestionKey(questionKey);
+    if (keyed != null) {
+      await _writePulledV2Answer(
+        surveyId: surveyId,
+        screenId: keyed.screenId,
+        fieldKey: keyed.fieldKey,
+        value: value,
+        data: data,
+        overwriteLocal: true,
+      );
+      return true;
+    }
 
     final legacyDecoded =
         LegacyMainWallsSyncMapping.decodeRemoteAnswer(questionKey, value);
@@ -2543,22 +2583,14 @@ class SyncManager {
       return false;
     }
 
-    final survey = await surveysDao.getSurveyById(surveyId);
-    final prefix = (survey?.type.isValuation ?? false) ? 'val_' : '';
-    final v2Id = '${surveyId}_$prefix${screenId}_$questionKey';
-
-    await db.into(db.inspectionV2Answers).insertOnConflictUpdate(
-          InspectionV2AnswersCompanion(
-            id: Value(v2Id),
-            surveyId: Value(surveyId),
-            screenId: Value(screenId),
-            fieldKey: Value(questionKey),
-            value: Value(value),
-            createdAt:
-                Value(_parseDateTime(data['createdAt']) ?? DateTime.now()),
-            updatedAt: Value(_parseDateTime(data['updatedAt'])),
-          ),
-        );
+    await _writePulledV2Answer(
+      surveyId: surveyId,
+      screenId: screenId,
+      fieldKey: questionKey,
+      value: value,
+      data: data,
+      overwriteLocal: false,
+    );
 
     AppLogger.d('SyncManager',
         'V2 fallback: matched answer $entityId → screen=$screenId field=$questionKey');

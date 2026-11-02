@@ -2722,7 +2722,10 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
           payload: {
             'sectionId': sectionId,
             'surveyId': _surveyId,
-            'questionKey': fieldKey,
+            // Main walls keys already name their screen (mw_sbbw_...).
+            'questionKey': LegacyMainWallsSyncMapping.handlesScreen(_screenId)
+                ? fieldKey
+                : V2SyncHelper.answerQuestionKey(_screenId, fieldKey),
             'value': value,
           },
         );
