@@ -34,19 +34,23 @@ class DocxGeneratorService {
     final archive = Archive();
 
     // [Content_Types].xml — includes image MIME types when images are present
-    _addContentTypes(archive, images);
+    final isInspection = doc.reportType == ReportType.inspection;
+    _addContentTypes(archive, images, withHeaderFooter: isInspection);
 
     // _rels/.rels
     _addRels(archive);
 
     // word/_rels/document.xml.rels — includes image relationships
-    _addDocumentRels(archive, images);
+    _addDocumentRels(archive, images, withHeaderFooter: isInspection);
 
     // word/media/ — embedded image files
     _addMediaFiles(archive, images);
 
     // word/styles.xml
-    _addStyles(archive);
+    _addStyles(archive, isInspection: isInspection);
+
+    // word/header1.xml + word/footer1.xml — the running page header and footer
+    if (isInspection) _addHeaderFooter(archive, doc);
 
     _reportProgress('Generating content', 0.35);
 
@@ -76,7 +80,11 @@ class DocxGeneratorService {
   //  ARCHIVE STRUCTURE
   // ═══════════════════════════════════════════════════════════════════
 
-  void _addContentTypes(Archive archive, _DocxImageBundle images) {
+  void _addContentTypes(
+    Archive archive,
+    _DocxImageBundle images, {
+    required bool withHeaderFooter,
+  }) {
     final buf = StringBuffer()
       ..write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>')
       ..write(
@@ -94,8 +102,15 @@ class DocxGeneratorService {
       ..write(
           '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>')
       ..write(
-          '<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>')
-      ..write('</Types>');
+          '<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>');
+    if (withHeaderFooter) {
+      buf
+        ..write(
+            '<Override PartName="/word/header1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>')
+        ..write(
+            '<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>');
+    }
+    buf.write('</Types>');
 
     final xml = buf.toString();
     archive.addFile(ArchiveFile(
@@ -118,13 +133,24 @@ class DocxGeneratorService {
     ));
   }
 
-  void _addDocumentRels(Archive archive, _DocxImageBundle images) {
+  void _addDocumentRels(
+    Archive archive,
+    _DocxImageBundle images, {
+    required bool withHeaderFooter,
+  }) {
     final buf = StringBuffer()
       ..write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>')
       ..write(
           '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">')
       ..write(
           '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>');
+    if (withHeaderFooter) {
+      buf
+        ..write(
+            '<Relationship Id="rIdHeader1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml"/>')
+        ..write(
+            '<Relationship Id="rIdFooter1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/>');
+    }
     for (final ref in images.allImages) {
       buf.write('<Relationship Id="${ref.relId}" '
           'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" '
@@ -155,9 +181,11 @@ class DocxGeneratorService {
   //  STYLES
   // ═══════════════════════════════════════════════════════════════════
 
-  void _addStyles(Archive archive) {
-    const fontName = 'Calibri';
+  void _addStyles(Archive archive, {required bool isInspection}) {
+    final fontName = isInspection ? 'Noto Sans' : 'Calibri';
     final accentHex = _pdfColorToHex(_config.accentColor);
+    // Sub-headers are bold dark text in the home survey report, as in the PDF.
+    final subHeaderHex = isInspection ? '333333' : accentHex;
 
     final buf = StringBuffer();
     buf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>');
@@ -190,8 +218,8 @@ class DocxGeneratorService {
     buf.write('<w:name w:val="heading 2"/>');
     buf.write('<w:pPr><w:spacing w:before="240" w:after="80"/>');
     buf.write('<w:outlineLvl w:val="1"/></w:pPr>');
-    buf.write('<w:rPr><w:b/><w:sz w:val="28"/>');
-    buf.write('<w:color w:val="$accentHex"/>');
+    buf.write('<w:rPr><w:b/><w:sz w:val="${isInspection ? 24 : 28}"/>');
+    buf.write('<w:color w:val="$subHeaderHex"/>');
     buf.write('</w:rPr></w:style>');
 
     // Heading 3
@@ -199,8 +227,8 @@ class DocxGeneratorService {
     buf.write('<w:name w:val="heading 3"/>');
     buf.write('<w:pPr><w:spacing w:before="200" w:after="60"/>');
     buf.write('<w:outlineLvl w:val="2"/></w:pPr>');
-    buf.write('<w:rPr><w:b/><w:sz w:val="24"/>');
-    buf.write('<w:color w:val="$accentHex"/>');
+    buf.write('<w:rPr><w:b/><w:sz w:val="${isInspection ? 22 : 24}"/>');
+    buf.write('<w:color w:val="$subHeaderHex"/>');
     buf.write('</w:rPr></w:style>');
 
     // Table style
@@ -261,13 +289,18 @@ class DocxGeneratorService {
 
     // AI Executive Summary (if present)
     if (doc.aiExecutiveSummary != null && doc.aiExecutiveSummary!.isNotEmpty) {
-      _writeHeading(buf, 'Executive Summary', 'Heading1');
+      _writeMainHeading(buf, doc, 'Executive Summary');
       _writeAiNarrativeParagraph(buf, doc.aiExecutiveSummary!);
     }
 
     // Sections
     for (final section in doc.sections) {
-      _writeHeading(buf, section.title, 'Heading1');
+      _writeMainHeading(
+        buf,
+        doc,
+        section.title,
+        color: PdfSharedUtils.sectionColor(section.key, _config.accentColor),
+      );
       var accommodationWritten = false;
       if (doc.reportType == ReportType.valuation &&
           section.key.trim().toLowerCase() == 'property_assessment' &&
@@ -346,7 +379,7 @@ class DocxGeneratorService {
 
     // Signatures section — embeds signature images when available
     if (_config.includeSignatures && doc.signatures.isNotEmpty) {
-      _writeHeading(buf, 'Signatures', 'Heading1');
+      _writeMainHeading(buf, doc, 'Signatures');
       var sigImgId = 1;
       for (final sig in doc.signatures) {
         final imgRef = images.signatureLookup[sig.filePath];
@@ -362,12 +395,23 @@ class DocxGeneratorService {
     if (_config.includePhotos && images.photoImages.isNotEmpty) {
       // Page break before photos
       buf.write('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');
-      _writeHeading(buf, 'Property Photos', 'Heading1');
+      _writeMainHeading(buf, doc, 'Property Photos');
       var photoImgId = 1000; // Offset to avoid signature ID collisions
       for (final imgRef in images.photoImages) {
         _writeInlineImage(buf, imgRef, photoImgId++);
         buf.write('<w:p/>'); // spacing between photos
       }
+    }
+
+    if (doc.reportType == ReportType.inspection) {
+      buf.write('<w:sectPr>');
+      buf.write('<w:headerReference w:type="default" r:id="rIdHeader1"/>');
+      buf.write('<w:footerReference w:type="default" r:id="rIdFooter1"/>');
+      buf.write('<w:pgSz w:w="11906" w:h="16838"/>');
+      buf.write('<w:pgMar w:top="1200" w:right="1134" w:bottom="1000" w:left="1134" '
+          'w:header="500" w:footer="400" w:gutter="0"/>');
+      buf.write('<w:titlePg/>'); // no running header on the first page
+      buf.write('</w:sectPr>');
     }
 
     buf.write('</w:body></w:document>');
@@ -415,6 +459,64 @@ class DocxGeneratorService {
     }
     // Page break
     buf.write('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');
+  }
+
+  /// Main section header: coloured banner in the home survey report.
+  void _writeMainHeading(
+    StringBuffer buf,
+    ReportDocument doc,
+    String text, {
+    PdfColor? color,
+  }) {
+    if (doc.reportType != ReportType.inspection) {
+      _writeHeading(buf, text, 'Heading1');
+      return;
+    }
+    final fill = _pdfColorToHex(color ?? _config.accentColor);
+    buf.write('<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="pct"/><w:tblCellMar>');
+    buf.write('<w:top w:w="80" w:type="dxa"/><w:left w:w="160" w:type="dxa"/>');
+    buf.write('<w:bottom w:w="80" w:type="dxa"/><w:right w:w="160" w:type="dxa"/>');
+    buf.write('</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="9638"/></w:tblGrid>');
+    buf.write('<w:tr><w:tc><w:tcPr><w:tcW w:w="5000" w:type="pct"/>');
+    buf.write('<w:shd w:val="clear" w:color="auto" w:fill="$fill"/></w:tcPr>');
+    buf.write('<w:p><w:pPr><w:pStyle w:val="Heading1"/><w:spacing w:before="0" w:after="0"/></w:pPr>');
+    buf.write('<w:r><w:rPr><w:b/><w:color w:val="FFFFFF"/><w:sz w:val="28"/></w:rPr>');
+    buf.write('<w:t xml:space="preserve">${_escapeXml(text)}</w:t></w:r></w:p>');
+    buf.write('</w:tc></w:tr></w:tbl>');
+    buf.write('<w:p><w:pPr><w:spacing w:after="60"/></w:pPr></w:p>');
+  }
+
+  void _addHeaderFooter(Archive archive, ReportDocument doc) {
+    final accentHex = _pdfColorToHex(_config.accentColor);
+    const namespaces = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
+    const tabs = '<w:tabs><w:tab w:val="center" w:pos="4819"/><w:tab w:val="right" w:pos="9638"/></w:tabs>';
+    String run(String text, {bool bold = false, String color = '333333'}) =>
+        '<w:r><w:rPr>${bold ? '<w:b/>' : ''}<w:color w:val="$color"/><w:sz w:val="16"/></w:rPr>'
+        '<w:t xml:space="preserve">${_escapeXml(text)}</w:t></w:r>';
+    const tab = '<w:r><w:tab/></w:r>';
+    String field(String name) =>
+        '<w:fldSimple w:instr=" $name "><w:r><w:rPr><w:sz w:val="16"/></w:rPr><w:t>1</w:t></w:r></w:fldSimple>';
+
+    final header = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<w:hdr $namespaces><w:p><w:pPr>$tabs'
+        '<w:pBdr><w:bottom w:val="single" w:sz="4" w:space="4" w:color="$accentHex"/></w:pBdr>'
+        '</w:pPr>'
+        '${run(_inspectionReportTitle, bold: true, color: accentHex)}$tab'
+        '${run(doc.surveyMeta.title)}$tab'
+        '${run(_config.companyName)}'
+        '</w:p></w:hdr>';
+    final footer = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<w:ftr $namespaces><w:p><w:pPr>$tabs'
+        '<w:pBdr><w:top w:val="single" w:sz="4" w:space="4" w:color="$accentHex"/></w:pBdr>'
+        '</w:pPr>'
+        '${run('Generated by SurveyScriber')}$tab$tab'
+        '${run('Page ')}${field('PAGE')}${run(' of ')}${field('NUMPAGES')}'
+        '</w:p></w:ftr>';
+
+    for (final (name, xml) in [('word/header1.xml', header), ('word/footer1.xml', footer)]) {
+      final bytes = utf8.encode(xml);
+      archive.addFile(ArchiveFile(name, bytes.length, bytes));
+    }
   }
 
   void _writeHeading(StringBuffer buf, String text, String style) {
