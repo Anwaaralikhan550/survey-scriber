@@ -1,6 +1,6 @@
 # Inspection tree audit
 
-Nodes: 436 (341 screens). Element landings checked: 23.
+Nodes: 439 (344 screens). Element landings checked: 23.
 
 | Code | Check | Findings |
 |---|---|---|
@@ -29,9 +29,9 @@ Nodes: 436 (341 screens). Element landings checked: 23.
 
 ## T1: Title style (3)
 
-- **Outside Property > Chimney > Not Inspected** (`activity_outside_property_chimney_not_inspected`): "Not Inspected" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})
-- **Outside Property > Roof Covering > Not Inspected** (`activity_outside_property_roof_not_inspected`): "Not Inspected" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})
-- **F Inside Property > Roof Structure > Not Inspected** (`activity_inside_property_roof_structure_not_inspected`): "Not Inspected" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})
+- **Outside Property > Chimney > Not Inspected** (`activity_outside_property_chimney_not_inspected`): "Not Inspected" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})
+- **Outside Property > Roof Covering > Not Inspected** (`activity_outside_property_roof_not_inspected`): "Not Inspected" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})
+- **F Inside Property > Roof Structure > Not Inspected** (`activity_inside_property_roof_structure_not_inspected`): "Not Inspected" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})
 
 ## E1: Empty group or screen (2)
 

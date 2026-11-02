@@ -7829,7 +7829,7 @@
         },
         {
           "id": "activity_inside_property_other_celler_no_access",
-          "title": "No access",
+          "title": "Not inspected",
           "type": "screen",
           "parentId": "group_cellar_83",
           "order": 2,
@@ -7861,6 +7861,117 @@
               "conditionalOn": "cb_other_704",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_celler_walls",
+          "title": "Walls",
+          "type": "screen",
+          "parentId": "group_cellar_83",
+          "order": 3,
+          "fields": [
+            {
+              "id": "label_cellar_walls",
+              "label": "Walls formed in",
+              "type": "label"
+            },
+            {
+              "id": "f9cw_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cw_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cw_loose_soil",
+              "label": "loose soil",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cw_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cw_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cw_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f9cw_other"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_celler_floor",
+          "title": "Floor",
+          "type": "screen",
+          "parentId": "group_cellar_83",
+          "order": 4,
+          "fields": [
+            {
+              "id": "label_cellar_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "f9cf_solid_concrete",
+              "label": "solid concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cf_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cf_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cf_loose_soil",
+              "label": "loose soil",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cf_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9cf_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f9cf_other"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_celler_condition",
+          "title": "Condition",
+          "type": "screen",
+          "parentId": "group_cellar_83",
+          "order": 5,
+          "fields": [
+            {
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
             }
           ]
         },
@@ -8983,7 +9094,7 @@
         },
         {
           "id": "group_cellar_83",
-          "title": "Cellar",
+          "title": "Cellar/Basement",
           "type": "group",
           "parentId": "group_other_82",
           "order": 4
@@ -9838,95 +9949,7 @@
           "parentId": "group_cellar_83",
           "order": 6,
           "fields": [
-            {
-              "id": "label_cellar_walls",
-              "label": "Walls formed in",
-              "type": "label"
-            },
-            {
-              "id": "f9cw_bricks",
-              "label": "bricks",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cw_stone",
-              "label": "stone",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cw_loose_soil",
-              "label": "loose soil",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cw_concrete",
-              "label": "concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cw_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cw_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "f9cw_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "label_cellar_floor",
-              "label": "Floor constructed of",
-              "type": "label"
-            },
-            {
-              "id": "f9cf_solid_concrete",
-              "label": "solid concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cf_timber",
-              "label": "timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cf_stone",
-              "label": "stone",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cf_loose_soil",
-              "label": "loose soil",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cf_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "f9cf_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "f9cf_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Good",
-                "Reasonable",
-                "Fair",
-                "Poor",
-                "Very poor"
-              ]
-            },
-            {
+{
               "id": "actv_used_as",
               "label": "Use of cellar",
               "type": "dropdown",
@@ -10488,7 +10511,7 @@
         },
         {
           "id": "activity_inside_property_other_celler_not_habitable",
-          "title": "Not Habitable",
+          "title": "Unsuitable",
           "type": "screen",
           "parentId": "group_cellar_83",
           "order": 8,
@@ -11074,7 +11097,7 @@
         },
         {
           "id": "activity_inside_property_other_celler_joists_decay",
-          "title": "Joists Decay",
+          "title": "Timber decay",
           "type": "screen",
           "parentId": "group_cellar_83",
           "order": 14,

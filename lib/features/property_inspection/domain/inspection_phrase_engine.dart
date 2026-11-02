@@ -628,6 +628,10 @@ class InspectionPhraseEngine {
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_grounds_other_repair_shed_repair':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_celler_walls':
+      case 'activity_inside_property_other_celler_floor':
+      case 'activity_inside_property_other_celler_condition':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_windows_velux_window':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_outside_property_windows_not_inspected':

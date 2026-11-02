@@ -472,6 +472,47 @@ def _set_dropdown_options(sid, fid, options):
     raw = raw[:start] + new + raw[end:]
 
 
+CELLAR = 'activity_inside_property_other_celler_'
+
+
+def step_t19():
+    # The client's order: Not inspected, Walls, Floor, Condition, Used as (Not in use /
+    # In use), Unsuitable, Flooded, Damp (+ Waterproofing failure), Timber decay.
+    set_title('group_cellar_83', 'Cellar/Basement')
+    set_title(CELLAR + 'no_access', 'Not inspected')
+    set_title(CELLAR + 'not_habitable', 'Unsuitable')
+    set_title(CELLAR + 'joists_decay', 'Timber decay')
+
+    used_as = CELLAR + 'inspected'
+    walls = [('label_cellar_walls', 'Walls formed in', 'label', None),
+             ('f9cw_bricks', 'bricks', 'checkbox', None),
+             ('f9cw_stone', 'stone', 'checkbox', None),
+             ('f9cw_loose_soil', 'loose soil', 'checkbox', None),
+             ('f9cw_concrete', 'concrete', 'checkbox', None),
+             ('f9cw_other', 'Other', 'checkbox', None),
+             ('f9cw_other_text', 'Other', 'text', 'f9cw_other')]
+    floor = [('label_cellar_floor', 'Floor constructed of', 'label', None),
+             ('f9cf_solid_concrete', 'solid concrete', 'checkbox', None),
+             ('f9cf_timber', 'timber', 'checkbox', None),
+             ('f9cf_stone', 'stone', 'checkbox', None),
+             ('f9cf_loose_soil', 'loose soil', 'checkbox', None),
+             ('f9cf_other', 'Other', 'checkbox', None),
+             ('f9cf_other_text', 'Other', 'text', 'f9cf_other')]
+    for fid, *_ in walls + floor:
+        remove_field(used_as, fid)
+    remove_field(used_as, 'actv_condition')
+
+    insert_screen_after(CELLAR + 'no_access', CELLAR + 'walls', 'Walls', 'group_cellar_83', 3, walls)
+    insert_screen_after(CELLAR + 'walls', CELLAR + 'floor', 'Floor', 'group_cellar_83', 4, floor)
+    insert_screen_after(CELLAR + 'floor', CELLAR + 'condition', 'Condition', 'group_cellar_83', 5,
+                        [('actv_condition', 'Condition', 'dropdown', None)])
+    _set_dropdown_options(CELLAR + 'condition', 'actv_condition',
+                          ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'])
+    set_rule_screen('f9_cellar_walls', CELLAR + 'walls')
+    set_rule_screen('f9_cellar_floor', CELLAR + 'floor')
+    set_rule_screen('f9_cellar_cond', CELLAR + 'condition')
+
+
 STEPS = {name[5:]: fn for name, fn in list(globals().items()) if name.startswith('step_')}
 
 if __name__ == '__main__':

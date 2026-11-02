@@ -8122,7 +8122,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
   ),
   VerbatimRule(
     'f9_cellar_walls',
-    'activity_inside_property_other_celler_inspected',
+    'activity_inside_property_other_celler_walls',
     '{F_OTHER}',
     '{F9_CELLAR_WALLS}',
     [
@@ -8144,7 +8144,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
   ),
   VerbatimRule(
     'f9_cellar_floor',
-    'activity_inside_property_other_celler_inspected',
+    'activity_inside_property_other_celler_floor',
     '{F_OTHER}',
     '{F9_CELLAR_FLOOR}',
     [
@@ -8166,7 +8166,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
   ),
   VerbatimRule(
     'f9_cellar_cond',
-    'activity_inside_property_other_celler_inspected',
+    'activity_inside_property_other_celler_condition',
     '{F_OTHER}',
     '{F9_CELLAR_CONDITION}',
     [

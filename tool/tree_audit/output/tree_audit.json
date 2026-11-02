@@ -46,21 +46,21 @@
   "section": "E",
   "id": "activity_outside_property_chimney_not_inspected",
   "path": "Outside Property > Chimney > Not Inspected",
-  "msg": "\"Not Inspected\" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})"
+  "msg": "\"Not Inspected\" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})"
  },
  {
   "code": "T1",
   "section": "E",
   "id": "activity_outside_property_roof_not_inspected",
   "path": "Outside Property > Roof Covering > Not Inspected",
-  "msg": "\"Not Inspected\" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})"
+  "msg": "\"Not Inspected\" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})"
  },
  {
   "code": "T1",
   "section": "F",
   "id": "activity_inside_property_roof_structure_not_inspected",
   "path": "F Inside Property > Roof Structure > Not Inspected",
-  "msg": "\"Not Inspected\" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})"
+  "msg": "\"Not Inspected\" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})"
  },
  {
   "code": "E1",

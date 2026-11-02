@@ -137,4 +137,50 @@ void main() {
     expect(applyClientParagraphRules('group_e6_outside_doors_23', [doors]), [doors]);
     expect(applyClientParagraphRules('group_e2_roof_covering_9', [doors]), [doors]);
   });
+
+  group('Cellar/Basement', () {
+    const inside = 'group_f9_other_81';
+
+    test('his heading, his labels and his order', () {
+      expect(
+        applyClientParagraphRules(inside, [
+          'Condition rating is: 2.',
+          'General Maintenance: Ancillary internal areas should be inspected periodically.',
+          'Description: Internal communal parts to the property comprise a hallway.',
+          'Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected.',
+          'Walls: The property incorporates a cellar, basement and the walls are formed in bricks materials.',
+          'Floor: The floor is constructed of stone.',
+          'Condition: Where visible, the cellar appears in good condition. Minor dampness may be expected. '
+              'No defects noted: No significant defects requiring immediate attention were identified unless '
+              'otherwise stated below. Routine maintenance is recommended.',
+          'In use: The cellar or basement has been adapted for use as storage or other uses.',
+          'Timber decay: Decay was noted in exposed floor joists within the cellar.',
+          'Repair: The landing areas are worn.',
+        ]),
+        [
+          'Condition rating is: 2.',
+          'Description: Internal communal parts to the property comprise a hallway.',
+          '[[SUBHEADING]] Cellar/Basement',
+          'Not inspected: The property has a cellar or basement, but it could not be inspected.',
+          'Walls: The property incorporates a cellar, basement and the walls are formed in bricks materials.',
+          'Floor: The floor is constructed of stone.',
+          'Condition: Where visible, the cellar appears in good condition. Minor dampness may be expected.',
+          'No defects noted: No significant defects requiring immediate attention were identified unless '
+              'otherwise stated below. Routine maintenance is recommended.',
+          'In use: The cellar or basement has been adapted for use as storage or other uses.',
+          'Timber decay: Decay was noted in exposed floor joists within the cellar.',
+          'General Maintenance: Ancillary internal areas should be inspected periodically.',
+          'Repair: The landing areas are worn.',
+        ],
+      );
+    });
+
+    test('no cellar answers: nothing is added or moved', () {
+      const phrases = [
+        'General Maintenance: Ancillary internal areas should be inspected periodically.',
+        'Description: Internal communal parts to the property comprise a hallway.',
+      ];
+      expect(applyClientParagraphRules(inside, phrases), phrases);
+    });
+  });
 }

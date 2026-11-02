@@ -21,12 +21,73 @@ final _labelStart =
     RegExp(r"(?<=[.!?)])\s+(?=[A-Z][A-Za-z0-9&/'() -]{0,48}:\s)");
 
 List<String> applyClientParagraphRules(String groupId, List<String> phrases) {
+  if (groupId == _insideOtherGroup) return _cellarParagraphs(phrases);
   if (!clientParagraphGroups.contains(groupId)) return phrases;
   final items = [
     for (final p in phrases)
       for (final item in p.split(_labelStart)) ..._splitRating(item),
   ];
   return groupId == _chimneyGroup ? _chimneyParagraphs(items) : items;
+}
+
+// Cellar/Basement: his heading, then his paragraphs in his order.
+const _insideOtherGroup = 'group_f9_other_81';
+const _cellarHeading = '[[SUBHEADING]] Cellar/Basement';
+const _cellarNotInspectedBank = 'Cellar/Basement Not inspected: ';
+const _cellarConditionStart = 'Condition: Where visible, the cellar appears';
+const _noDefectsLabel = ' No defects noted: ';
+const _generalMaintenanceStart = 'General Maintenance: Ancillary internal areas';
+const _cellarStarts = <String>[
+  'Not inspected: The property has a cellar',
+  'Walls: The property incorporates a cellar',
+  'Floor: The floor is constructed of',
+  _cellarConditionStart,
+  'No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance is recommended.',
+  'Not in use: The property has a cellar',
+  'In use: The cellar or basement',
+  'Unsuitable: The cellar or basement',
+  'Flooded: The cellar or basement',
+  'Damp: Dampness was noted on the',
+  'Waterproofing failure: The extent of dampness',
+  'Timber decay: Decay was noted',
+];
+
+List<String> _cellarParagraphs(List<String> phrases) {
+  final items = <String>[];
+  for (final raw in phrases) {
+    var phrase = raw;
+    if (phrase.startsWith(_cellarNotInspectedBank)) {
+      phrase = 'Not inspected: ${phrase.substring(_cellarNotInspectedBank.length)}';
+    }
+    final split = phrase.startsWith(_cellarConditionStart)
+        ? phrase.indexOf(_noDefectsLabel)
+        : -1;
+    if (split > 0) {
+      items
+        ..add(phrase.substring(0, split))
+        ..add(phrase.substring(split + 1));
+    } else {
+      items.add(phrase);
+    }
+  }
+
+  bool isCellar(String p) => _cellarStarts.any(p.startsWith);
+  final first = items.indexWhere(isCellar);
+  if (first < 0) return items;
+  final last = items.lastIndexWhere(isCellar);
+
+  final general = items.indexWhere((p) => p.startsWith(_generalMaintenanceStart));
+  final out = <String>[
+    for (var i = 0; i < first; i++)
+      if (i != general) items[i],
+    _cellarHeading,
+    for (var i = first; i <= last; i++)
+      if (i != general) items[i],
+    if (general >= 0) items[general],
+    for (var i = last + 1; i < items.length; i++)
+      if (i != general) items[i],
+  ];
+  return out;
 }
 
 // "Condition rating is: 1." stands alone (it prints bold), its explanation follows.

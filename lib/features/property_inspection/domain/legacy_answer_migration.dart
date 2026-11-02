@@ -42,6 +42,18 @@ const movedAnswers = <String, ({String fromScreen, String fieldPrefix})>{
     fromScreen: 'activity_outside_property_windows_sill_projection',
     fieldPrefix: 'e5sd_',
   ),
+  'activity_inside_property_other_celler_walls': (
+    fromScreen: 'activity_inside_property_other_celler_inspected',
+    fieldPrefix: 'f9cw_',
+  ),
+  'activity_inside_property_other_celler_floor': (
+    fromScreen: 'activity_inside_property_other_celler_inspected',
+    fieldPrefix: 'f9cf_',
+  ),
+  'activity_inside_property_other_celler_condition': (
+    fromScreen: 'activity_inside_property_other_celler_inspected',
+    fieldPrefix: 'actv_condition',
+  ),
 };
 
 /// Answers saved on the old screen show on the new one until it has its own.

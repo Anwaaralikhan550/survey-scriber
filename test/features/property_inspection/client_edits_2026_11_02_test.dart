@@ -280,4 +280,18 @@ void main() {
       );
     });
   });
+
+  test('Cellar/Basement screens in the client order; "Used as" only holds the use', () {
+    expect(nodes['group_cellar_83']!.title, 'Cellar/Basement');
+    final titles = tree.sections
+        .firstWhere((s) => s.key == 'F')
+        .nodes
+        .where((n) => n.parentId == 'group_cellar_83')
+        .map((n) => n.title)
+        .toList();
+    expect(titles, ['Not inspected', 'Walls', 'Floor', 'Condition', 'Used as', 'Unsuitable', 'Flooded', 'Damp', 'Timber decay']);
+    final usedAs = nodes['activity_inside_property_other_celler_inspected']!;
+    expect(usedAs.fields.map((f) => f.id), ['actv_used_as']);
+    expect(usedAs.fields.single.options, ['Not in use', 'In use']);
+  });
 }
