@@ -339,7 +339,6 @@ def step_t16():
         + [(fid, label, 'checkbox', None) for fid, label in SILL_DEFECTS])
     set_rule_when('e5_sill', [('actv_condition', 'Properly'), ('actv_condition', 'Fairly'), ('actv_condition', 'Poorly')])
     set_rule_screen('e5_sill_defect', SILL_DEFECT_SCREEN)
-    set_rule_when('e5_sill_defect', [(fid, 'true') for fid, _ in SILL_DEFECTS])
 
 
 def set_parent(sid, parent):
@@ -363,6 +362,7 @@ def token(name, options, other_cb=None, other_text=None):
     lines = ["      VerbatimToken(", "        '%s'," % name, "        options: {"]
     lines += ["          '%s': '%s'," % (k, v) for k, v in options]
     lines.append("        },")
+    lines.append("        pdfOptions: [%s]," % ', '.join("'%s'" % v for _, v in options))
     if other_cb:
         lines.append("        otherCheckbox: '%s'," % other_cb)
         lines.append("        otherText: '%s'," % other_text)
@@ -371,12 +371,13 @@ def token(name, options, other_cb=None, other_text=None):
 
 
 def rule(name, screen, master, sub, tokens, pairs):
-    (field, value), rest = pairs[0], pairs[1:]
     lines = ["  VerbatimRule(", "    '%s'," % name, "    '%s'," % screen, "    '%s'," % master,
-             "    '%s'," % sub, "    ["] + tokens + ["    ],", "    whenField: '%s'," % field,
-             "    whenValue: '%s'," % value]
-    if rest:
-        lines.append("    whenAny: [%s]," % ', '.join("['%s', '%s']" % p for p in rest))
+             "    '%s'," % sub, "    ["] + tokens + ["    ],"]
+    if pairs:
+        (field, value), rest = pairs[0], pairs[1:]
+        lines += ["    whenField: '%s'," % field, "    whenValue: '%s'," % value]
+        if rest:
+            lines.append("    whenAny: [%s]," % ', '.join("['%s', '%s']" % p for p in rest))
     lines.append("  ),")
     return chr(10).join(lines) + chr(10)
 
@@ -394,10 +395,10 @@ def step_t18():
     remove_span(start, end)
     _insert_object_after('activity_grounds_other_front_garden', obj)
 
-    shed_types = [('h2rs_timber', 'Timber', 'timber'), ('h2rs_brick', 'Brick', 'brick')]
-    shed_defects = [('h2rs_damaged', 'Is damaged', 'is damaged'),
-                    ('h2rs_disrepair', 'In disrepair', 'in disrepair'),
-                    ('h2rs_unstable', 'Is unstable', 'is unstable')]
+    shed_types = [('h2rs_timber', 'timber', 'timber'), ('h2rs_brick', 'brick', 'brick')]
+    shed_defects = [('h2rs_damaged', 'is damaged', 'is damaged'),
+                    ('h2rs_disrepair', 'in disrepair', 'in disrepair'),
+                    ('h2rs_unstable', 'is unstable', 'is unstable')]
     insert_screen_after(
         'activity_grounds_other_repair_fence', SHED_REPAIR, 'Shed Repair', 'group_repairs_54', 4,
         [('label_h2rs_type', 'Shed type', 'label', None)]
@@ -412,20 +413,20 @@ def step_t18():
         'h2_shed_repair', SHED_REPAIR, '{H_OTHER}', '{REPAIR_SHED}',
         [token('{OTH_REP_SHED_TYPE}', [(i, v) for i, _, v in shed_types], 'h2rs_type_other', 'h2rs_type_other_text'),
          token('{OTH_REP_SHED_DEF}', [(i, v) for i, _, v in shed_defects], 'h2rs_defect_other', 'h2rs_defect_other_text')],
-        [(i, 'true') for i, _, _ in shed_defects] + [('h2rs_defect_other', 'true')]))
+        None))
 
     # Ceiling repairs: the screen and its two approved sentences come back.
-    rooms = [('lounge', 'Lounge'), ('bedroom', 'Bedroom'), ('kitchen', 'Kitchen'), ('bathroom', 'Bathroom')]
-    now_defects = [('f2r_now_badly_cracked', 'Badly cracked', 'badly cracked'),
-                   ('f2r_now_very_loose', 'Very loose', 'very loose'),
-                   ('f2r_now_stained', 'Stained heavily with damp', 'stained heavily with damp'),
-                   ('f2r_now_unstable', 'Unstable and may fall', 'unstable and may fall')]
-    soon_defects = [('f2r_soon_missing', 'Missing in places', 'missing in places'),
-                    ('f2r_soon_loose', 'Loose', 'loose'),
-                    ('f2r_soon_uneven', 'Uneven', 'uneven'),
-                    ('f2r_soon_sagging', 'Sagging', 'sagging'),
-                    ('f2r_soon_bowed', 'Bowed', 'bowed'),
-                    ('f2r_soon_stained', 'Stained', 'stained')]
+    rooms = [('lounge', 'lounge'), ('bedroom', 'bedroom'), ('kitchen', 'kitchen'), ('bathroom', 'bathroom')]
+    now_defects = [('f2r_now_badly_cracked', 'badly cracked', 'badly cracked'),
+                   ('f2r_now_very_loose', 'very loose', 'very loose'),
+                   ('f2r_now_stained', 'stained heavily with damp', 'stained heavily with damp'),
+                   ('f2r_now_unstable', 'unstable and may fall', 'unstable and may fall')]
+    soon_defects = [('f2r_soon_missing', 'missing in places', 'missing in places'),
+                    ('f2r_soon_loose', 'loose', 'loose'),
+                    ('f2r_soon_uneven', 'uneven', 'uneven'),
+                    ('f2r_soon_sagging', 'sagging', 'sagging'),
+                    ('f2r_soon_bowed', 'bowed', 'bowed'),
+                    ('f2r_soon_stained', 'stained', 'stained')]
     fields = [('actv_status', 'Status', 'dropdown', None)]
     for key, status, defects in (('now', 'Repair now', now_defects), ('soon', 'Repair soon', soon_defects)):
         cond = 'actv_status=' + status

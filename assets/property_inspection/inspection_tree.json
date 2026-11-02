@@ -2451,12 +2451,12 @@
             },
             {
               "id": "h2rs_timber",
-              "label": "Timber",
+              "label": "timber",
               "type": "checkbox"
             },
             {
               "id": "h2rs_brick",
-              "label": "Brick",
+              "label": "brick",
               "type": "checkbox"
             },
             {
@@ -2477,17 +2477,17 @@
             },
             {
               "id": "h2rs_damaged",
-              "label": "Is damaged",
+              "label": "is damaged",
               "type": "checkbox"
             },
             {
               "id": "h2rs_disrepair",
-              "label": "In disrepair",
+              "label": "in disrepair",
               "type": "checkbox"
             },
             {
               "id": "h2rs_unstable",
-              "label": "Is unstable",
+              "label": "is unstable",
               "type": "checkbox"
             },
             {
@@ -8341,25 +8341,25 @@
             },
             {
               "id": "f2r_now_lounge",
-              "label": "Lounge",
+              "label": "lounge",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair now"
             },
             {
               "id": "f2r_now_bedroom",
-              "label": "Bedroom",
+              "label": "bedroom",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair now"
             },
             {
               "id": "f2r_now_kitchen",
-              "label": "Kitchen",
+              "label": "kitchen",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair now"
             },
             {
               "id": "f2r_now_bathroom",
-              "label": "Bathroom",
+              "label": "bathroom",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair now"
             },
@@ -8383,25 +8383,25 @@
             },
             {
               "id": "f2r_now_badly_cracked",
-              "label": "Badly cracked",
+              "label": "badly cracked",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair now"
             },
             {
               "id": "f2r_now_very_loose",
-              "label": "Very loose",
+              "label": "very loose",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair now"
             },
             {
               "id": "f2r_now_stained",
-              "label": "Stained heavily with damp",
+              "label": "stained heavily with damp",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair now"
             },
             {
               "id": "f2r_now_unstable",
-              "label": "Unstable and may fall",
+              "label": "unstable and may fall",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair now"
             },
@@ -8425,25 +8425,25 @@
             },
             {
               "id": "f2r_soon_lounge",
-              "label": "Lounge",
+              "label": "lounge",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
             {
               "id": "f2r_soon_bedroom",
-              "label": "Bedroom",
+              "label": "bedroom",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
             {
               "id": "f2r_soon_kitchen",
-              "label": "Kitchen",
+              "label": "kitchen",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
             {
               "id": "f2r_soon_bathroom",
-              "label": "Bathroom",
+              "label": "bathroom",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
@@ -8467,37 +8467,37 @@
             },
             {
               "id": "f2r_soon_missing",
-              "label": "Missing in places",
+              "label": "missing in places",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
             {
               "id": "f2r_soon_loose",
-              "label": "Loose",
+              "label": "loose",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
             {
               "id": "f2r_soon_uneven",
-              "label": "Uneven",
+              "label": "uneven",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
             {
               "id": "f2r_soon_sagging",
-              "label": "Sagging",
+              "label": "sagging",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
             {
               "id": "f2r_soon_bowed",
-              "label": "Bowed",
+              "label": "bowed",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
             {
               "id": "f2r_soon_stained",
-              "label": "Stained",
+              "label": "stained",
               "type": "checkbox",
               "conditionalOn": "actv_status=Repair soon"
             },
