@@ -11693,16 +11693,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenAny: [['android_material_design_spinner', 'B'], ['android_material_design_spinner', 'C'], ['android_material_design_spinner', 'D'], ['android_material_design_spinner', 'E'], ['android_material_design_spinner', 'F'], ['android_material_design_spinner', 'G']],
   ),
   VerbatimRule(
-    'a3_listed_alias',
-    'activity_listed_building',
-    '{D_CONSTRUCTION}',
-    '{A3_LISTED_BUILDING}',
-    [
-    ],
-    whenField: 'android_material_design_spinner',
-    whenValue: 'Yes',
-  ),
-  VerbatimRule(
     'a4_topo',
     'activity_topography',
     '{D_GROUND}',
@@ -11885,214 +11875,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
-    'gg_front_type',
-    'activity_garden',
-    '{D_GROUND}',
-    '{A4_GG_FRONT_GARDEN}',
-    [
-      VerbatimToken(
-        '{A4_GG_FRONT_FINISHES}',
-        options: {
-          'gg_front_type_0_lawn': 'lawn',
-          'gg_front_type_0_artificial_lawn': 'artificial lawn',
-          'gg_front_type_0_paving': 'paving',
-          'gg_front_type_0_timber_decking': 'timber decking',
-          'gg_front_type_0_gravel': 'gravel',
-          'gg_front_type_0_stones': 'stones',
-          'gg_front_type_0_hardstanding': 'hardstanding',
-        },
-        otherCheckbox: 'gg_front_type_0_other',
-        otherText: 'gg_front_type_0_other_text',
-        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
-      ),
-    ],
-    pdf:
-        'Front garden: The front garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
-    whenField: 'cb_gg_front_type',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'gg_front_fence',
-    'activity_garden',
-    '{D_GROUND}',
-    '{A4_GG_FRONT_FENCING}',
-    [
-      VerbatimToken(
-        '{A4_GG_FRONT_BOUNDARIES}',
-        options: {
-          'gg_front_fence_0_timber_fencing': 'timber fencing',
-          'gg_front_fence_0_brick_wall': 'brick wall',
-          'gg_front_fence_0_block_wall': 'block wall',
-          'gg_front_fence_0_hedging': 'hedging',
-          'gg_front_fence_0_wire_mesh': 'wire mesh',
-          'gg_front_fence_0_concrete_sections': 'concrete sections',
-          'gg_front_fence_0_metal_railings': 'metal railings',
-        },
-        otherCheckbox: 'gg_front_fence_0_other',
-        otherText: 'gg_front_fence_0_other_text',
-        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
-      ),
-    ],
-    pdf:
-        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
-    whenField: 'cb_gg_front_fence',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'gg_rear_type',
-    'activity_garden',
-    '{D_GROUND}',
-    '{A4_GG_REAR_GARDEN}',
-    [
-      VerbatimToken(
-        '{A4_GG_REAR_FINISHES}',
-        options: {
-          'gg_rear_type_0_lawn': 'lawn',
-          'gg_rear_type_0_artificial_lawn': 'artificial lawn',
-          'gg_rear_type_0_paving': 'paving',
-          'gg_rear_type_0_timber_decking': 'timber decking',
-          'gg_rear_type_0_gravel': 'gravel',
-          'gg_rear_type_0_stones': 'stones',
-          'gg_rear_type_0_hardstanding': 'hardstanding',
-        },
-        otherCheckbox: 'gg_rear_type_0_other',
-        otherText: 'gg_rear_type_0_other_text',
-        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
-      ),
-    ],
-    pdf:
-        'Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
-    whenField: 'cb_gg_rear_type',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'gg_rear_fence',
-    'activity_garden',
-    '{D_GROUND}',
-    '{A4_GG_REAR_FENCING}',
-    [
-      VerbatimToken(
-        '{A4_GG_REAR_BOUNDARIES}',
-        options: {
-          'gg_rear_fence_0_timber_fencing': 'timber fencing',
-          'gg_rear_fence_0_brick_wall': 'brick wall',
-          'gg_rear_fence_0_block_wall': 'block wall',
-          'gg_rear_fence_0_hedging': 'hedging',
-          'gg_rear_fence_0_wire_mesh': 'wire mesh',
-          'gg_rear_fence_0_concrete_sections': 'concrete sections',
-          'gg_rear_fence_0_metal_railings': 'metal railings',
-        },
-        otherCheckbox: 'gg_rear_fence_0_other',
-        otherText: 'gg_rear_fence_0_other_text',
-        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
-      ),
-    ],
-    pdf:
-        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
-    whenField: 'cb_gg_rear_fence',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'gg_communal_type',
-    'activity_garden',
-    '{D_GROUND}',
-    '{A4_GG_COMMUNAL_GARDEN}',
-    [
-      VerbatimToken(
-        '{A4_GG_COMMUNAL_FINISHES}',
-        options: {
-          'gg_communal_type_0_lawn': 'lawn',
-          'gg_communal_type_0_artificial_lawn': 'artificial lawn',
-          'gg_communal_type_0_paving': 'paving',
-          'gg_communal_type_0_timber_decking': 'timber decking',
-          'gg_communal_type_0_gravel': 'gravel',
-          'gg_communal_type_0_stones': 'stones',
-          'gg_communal_type_0_hardstanding': 'hardstanding',
-        },
-        otherCheckbox: 'gg_communal_type_0_other',
-        otherText: 'gg_communal_type_0_other_text',
-        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
-      ),
-    ],
-    pdf:
-        'Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
-    whenField: 'cb_gg_communal_type',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'gg_communal_fence',
-    'activity_garden',
-    '{D_GROUND}',
-    '{A4_GG_COMMUNAL_FENCING}',
-    [
-      VerbatimToken(
-        '{A4_GG_COMMUNAL_BOUNDARIES}',
-        options: {
-          'gg_communal_fence_0_timber_fencing': 'timber fencing',
-          'gg_communal_fence_0_brick_wall': 'brick wall',
-          'gg_communal_fence_0_block_wall': 'block wall',
-          'gg_communal_fence_0_hedging': 'hedging',
-          'gg_communal_fence_0_wire_mesh': 'wire mesh',
-          'gg_communal_fence_0_concrete_sections': 'concrete sections',
-          'gg_communal_fence_0_metal_railings': 'metal railings',
-        },
-        otherCheckbox: 'gg_communal_fence_0_other',
-        otherText: 'gg_communal_fence_0_other_text',
-        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
-      ),
-    ],
-    pdf:
-        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
-    whenField: 'cb_gg_communal_fence',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
-    'a4_pk_none',
-    'activity_parking',
-    '{D_GROUND}',
-    '{A4_NO_PARKING}',
-    [
-    ],
-    whenField: 'android_material_design_spinner',
-    whenValue: 'No Parking',
-  ),
-  VerbatimRule(
-    'a4_pk_type',
-    'activity_parking',
-    '{D_GROUND}',
-    '{A4_PARKING_TYPE}',
-    [
-      VerbatimToken(
-        '{A4_PARKING_KINDS}',
-        options: {
-          'a4_pk_k_residential': 'residential',
-          'a4_pk_k_private': 'private',
-          'a4_pk_k_allocated': 'allocated',
-          'a4_pk_k_communal': 'communal',
-          'a4_pk_k_off_street': 'off-street',
-          'a4_pk_k_underground_facility': 'underground facility',
-        },
-        otherCheckbox: 'a4_pk_k_other',
-        otherText: 'a4_pk_k_other_text',
-        pdfOptions: ['residential', 'private', 'allocated', 'communal', 'off-street', 'underground facility'],
-      ),
-    ],
-    pdf:
-        'Type: The property comes with residential, private, allocated, communal, off-street, underground facility, other parking.',
-    whenField: 'android_material_design_spinner',
-    whenValue: 'Available',
-  ),
-  VerbatimRule(
-    'a4_pk_paid',
-    'activity_parking',
-    '{D_GROUND}',
-    '{A4_PAID_PARKING}',
-    [
-    ],
-    whenField: 'cb_a4_pk_paid',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
     'a4_pp_none',
     'activity_parking__parking',
     '{D_GROUND}',
@@ -12245,12 +12027,12 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
   ),
   VerbatimRule(
     'a4_conservation',
-    'activity_property_ground_area',
+    'activity_property_location',
     '{D_LOCATION}',
     '{A4_CONSERVATION}',
     [
     ],
-    whenField: 'ch4',
+    whenField: 'a4_location_0_conservation',
     whenValue: 'true',
   ),
   VerbatimRule(
@@ -13219,16 +13001,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
   VerbatimRule(
     'x_listed_no',
     'activity_listed_building__listed_building',
-    '{D_CONSTRUCTION}',
-    '{X_NOT_LISTED}',
-    [
-    ],
-    whenField: 'android_material_design_spinner',
-    whenValue: 'No',
-  ),
-  VerbatimRule(
-    'x_listed_no2',
-    'activity_listed_building',
     '{D_CONSTRUCTION}',
     '{X_NOT_LISTED}',
     [

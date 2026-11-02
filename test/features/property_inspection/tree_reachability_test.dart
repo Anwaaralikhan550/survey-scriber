@@ -10,10 +10,6 @@ import 'package:survey_scriber/core/database/app_database.dart';
 import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
 import 'package:survey_scriber/features/property_inspection/domain/section_visibility.dart';
 
-/// Screens opened by ticking a checkbox on Ground > Area (legacy flow in
-/// InspectionScreenPage), not by a tile.
-const _openedFromAreaCheckboxes = {'activity_garden', 'activity_parking'};
-
 void main() {
   final tree = InspectionTreePayload.fromJson(
     File('assets/property_inspection/inspection_tree.json').readAsStringSync(),
@@ -78,9 +74,6 @@ void main() {
       for (final t in tiles) {
         reached.add(t.screenId);
         if (t.nodeType == 'group') visit(t.screenId);
-        if (t.screenId == 'activity_property_ground_area') {
-          reached.addAll(_openedFromAreaCheckboxes);
-        }
       }
     }
 

@@ -3,14 +3,14 @@
   "code": "L5",
   "section": "E",
   "id": "group_rainwater_goods_14",
-  "path": "E Outside Property > Rain Water Goods > Rainwater Goods",
+  "path": "Outside Property > Rain Water Goods > Rainwater Goods",
   "msg": "app shows ['Weather Condition', 'About RWG', 'Insufficient slope', 'Leakage', 'Corrosion', 'Blocked RWG', 'Blocked gullies', 'Open runoffs'] but \"order\" says ['Weather Condition', 'About RWG', 'Blocked RWG', 'Insufficient slope', 'Leakage', 'Blocked gullies', 'Corrosion', 'Open runoffs']"
  },
  {
   "code": "L5",
   "section": "E",
   "id": "group_windows_21",
-  "path": "E Outside Property > Windows > Windows",
+  "path": "Outside Property > Windows > Windows",
   "msg": "app shows ['About windows', 'Velux window', 'Windowsills', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation', 'Sill Projection/Wall Sealing'] but \"order\" says ['About windows', 'Velux window', 'Windowsills', 'Sill Projection/Wall Sealing', 'Operation', 'Defective operation', 'Failed glazed units', 'Damaged glazing', 'Timber windows', 'Condensation']"
  },
  {
@@ -45,14 +45,14 @@
   "code": "T1",
   "section": "E",
   "id": "activity_outside_property_chimney_not_inspected",
-  "path": "E Outside Property > Chimney > Not Inspected",
+  "path": "Outside Property > Chimney > Not Inspected",
   "msg": "\"Not Inspected\" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})"
  },
  {
   "code": "T1",
   "section": "E",
   "id": "activity_outside_property_roof_not_inspected",
-  "path": "E Outside Property > Roof Covering > Not Inspected",
+  "path": "Outside Property > Roof Covering > Not Inspected",
   "msg": "\"Not Inspected\" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})"
  },
  {
@@ -61,13 +61,6 @@
   "id": "activity_inside_property_roof_structure_not_inspected",
   "path": "F Inside Property > Roof Structure > Not Inspected",
   "msg": "\"Not Inspected\" (spellings in use: {'Not Inspected': 3, 'Not inspected': 3})"
- },
- {
-  "code": "E1",
-  "section": "D",
-  "id": "group_area_4",
-  "path": "About Property > Ground > Area > Area",
-  "msg": "empty group"
  },
  {
   "code": "E1",

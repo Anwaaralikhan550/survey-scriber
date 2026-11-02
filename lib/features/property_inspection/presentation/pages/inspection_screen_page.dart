@@ -34,12 +34,6 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
   static const String _environmentImpactScreenId =
       'activity_energy_environment_impect';
   static const String _otherServiceScreenId = 'activity_other_service';
-  static const String _groundAreaScreenId = 'activity_property_ground_area';
-  static const Map<String, String> _groundAreaCheckboxToScreenId = {
-    // Reuse existing screens only (no recreation).
-    'ch1': 'activity_garden', // Residential -> Garden
-    'ch2': 'activity_parking', // Commercial -> Parking
-  };
 
   GlobalKey _keyForField(String fieldId) =>
       _fieldKeys.putIfAbsent(fieldId, GlobalKey.new);
@@ -137,7 +131,6 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
     final showCompass = screenId == 'activity_property_facing';
     final isFloorPlanCapture =
         screenId == 'activity_capture_floor_site_plan_sketches';
-    final sectionKey = state.screenMeta?.sectionKey;
     final floorPlanSectionId = 'inspection_v2_floor_plan_$surveyId';
 
     return PopScope(
@@ -280,41 +273,10 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
                                 child: InspectionFieldInput(
                                   field: field,
                                   value: value,
-                                  onChanged: (next) {
-                                    notifier.setAnswer(field.id, next);
-                                    if (screenId != _groundAreaScreenId ||
-                                        field.type !=
-                                            InspectionFieldType.checkbox ||
-                                        next.toLowerCase() != 'true' ||
-                                        sectionKey == null) {
-                                      return;
-                                    }
-                                    final targetScreenId =
-                                        _groundAreaCheckboxToScreenId[field.id];
-                                    if (targetScreenId == null) return;
-                                    context.push(
-                                      Routes.inspectionScreenPath(
-                                        surveyId,
-                                        sectionKey,
-                                        targetScreenId,
-                                      ),
-                                    );
-                                  },
+                                  onChanged: (next) =>
+                                      notifier.setAnswer(field.id, next),
                                   onDiscreteSelection: () {
-                                    final shouldNavigate =
-                                        screenId == _groundAreaScreenId &&
-                                            field.type ==
-                                                InspectionFieldType.checkbox &&
-                                            (state.answers[field.id] ?? '')
-                                                    .toLowerCase() !=
-                                                'true' &&
-                                            sectionKey != null &&
-                                            _groundAreaCheckboxToScreenId[
-                                                    field.id] !=
-                                                null;
-                                    if (shouldNavigate || nextFieldId == null) {
-                                      return;
-                                    }
+                                    if (nextFieldId == null) return;
 
                                     final delay = field.type ==
                                             InspectionFieldType.dropdown

@@ -1435,6 +1435,13 @@ class ReportBuilder {
     if (id == 'activity_property_converted') return 40;
     if (id == 'activity_property_flate') return 50;
     if (id == 'group_construction_2') return 60;
+    // Ground comes straight after Construction (client edit, 2 Nov 2026).
+    if (id == 'activity_topography') return 61;
+    if (id == 'activity_front_garden') return 62;
+    if (id == 'activity_rear_garden') return 63;
+    if (id == 'activity_communal_garden') return 64;
+    if (id == 'activity_parking__parking') return 65;
+    if (id == 'activity_gated_community') return 66;
     if (_isListedBuildingScreenId(id)) return 70;
     if (id == 'section_d_energy_merged') return 80;
     if (id == 'activity_property_location') return 90;

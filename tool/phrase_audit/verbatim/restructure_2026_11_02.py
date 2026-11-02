@@ -116,6 +116,80 @@ def step_t11():
     remove_rule('g5_solar')
 
 
+def rule_ids_for_screen(screen):
+    return re.findall(r"VerbatimRule\(\s*'([^']+)',\s*'%s'," % re.escape(screen), spec)
+
+
+def set_rule_condition(name, screen, when_field):
+    """Point one rule at another screen and condition field."""
+    global spec
+    pat = re.compile(
+        r"(VerbatimRule\(\s*'%s',\s*)'[^']+'(,.*?whenField: )'[^']+'" % re.escape(name), re.S)
+    spec, n = pat.subn(lambda m: "%s'%s'%s'%s'" % (m.group(1), screen, m.group(2), when_field), spec, count=1)
+    if n != 1:
+        raise SystemExit('rule not found ' + name)
+
+
+def move_node_after(sid, after_id):
+    global raw
+    start, end = node_span(sid)
+    obj = raw[start:end]
+    remove_span(start, end)
+    _, after_end = node_span(after_id)
+    line_start = raw.rfind(NL, 0, after_end - len(raw[node_span(after_id)[0]:after_end])) + len(NL)
+    indent = raw[line_start:node_span(after_id)[0]]
+    raw = raw[:after_end] + ',' + NL + indent + obj + raw[after_end:]
+
+
+def set_order(sid, order):
+    global raw
+    start, end = node_span(sid)
+    obj = raw[start:end]
+    new, n = re.subn(r'("order":\s*)-?\d+', lambda m: m.group(1) + str(order), obj, count=1)
+    if n != 1:
+        raise SystemExit('no order on ' + sid)
+    raw = raw[:start] + new + raw[end:]
+
+
+def step_t13():
+    # Listed Building: keep the standalone screen only.
+    remove_node('activity_listed_building')
+    for rid in rule_ids_for_screen('activity_listed_building'):
+        remove_rule(rid)
+    # Area repeats Property Location density and the gardens. The conservation
+    # sentence stays, on the conservation tick of Property Location density.
+    set_rule_condition('a4_conservation', 'activity_property_location', 'a4_location_0_conservation')
+    for sid in ('group_area_4', 'activity_garden', 'activity_parking', 'activity_property_ground_area'):
+        remove_node(sid)
+    for screen in ('activity_garden', 'activity_parking'):
+        for rid in rule_ids_for_screen(screen):
+            remove_rule(rid)
+    # Ground comes straight after Construction.
+    move_node_after('group_ground_3', 'group_construction_2')
+    set_order('group_ground_3', 13)
+
+
+def _options_as_when_any(rule, prefix, count_note):
+    global spec
+    marker = "  VerbatimRule(%s    '%s'," % (SPEC_NL, rule)
+    start = spec.index(marker)
+    end_marker = '%s  ),%s' % (SPEC_NL, SPEC_NL)
+    end = spec.index(end_marker, start)
+    body = spec[start:end]
+    ids = re.findall(r"'(%s[a-z_]+)': '" % re.escape(prefix), body) + [prefix + 'other']
+    pairs = ', '.join("['%s', 'true']" % i for i in ids)
+    spec = spec[:end] + SPEC_NL + '    whenAny: [%s],' % pairs + spec[end:]
+
+
+def step_t14():
+    # The options show without their heading tick, and ticking only an option
+    # printed nothing: the client's missing Rear Garden boundaries and Communal Garden.
+    _options_as_when_any('rear_type', 'rear_type_0_', '')
+    _options_as_when_any('rear_fence', 'rear_fence_0_', '')
+    _options_as_when_any('communal_type', 'communal_type_0_', '')
+    _options_as_when_any('communal_fence', 'communal_fence_0_', '')
+
+
 STEPS = {name[5:]: fn for name, fn in list(globals().items()) if name.startswith('step_')}
 
 if __name__ == '__main__':
