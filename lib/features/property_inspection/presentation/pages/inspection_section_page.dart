@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/routes.dart';
 import '../../../../core/database/app_database.dart';
+import '../../domain/inspection_breadcrumb.dart';
 import '../../domain/models/inspection_models.dart';
 import '../../domain/field_phrase_processor.dart';
 import '../../domain/group_completion.dart';
 import '../../domain/section_visibility.dart';
 import '../providers/inspection_providers.dart';
+import '../widgets/inspection_breadcrumb_bar.dart';
 import '../widgets/inspection_fields.dart';
 
 class InspectionSectionPage extends ConsumerStatefulWidget {
@@ -125,7 +127,19 @@ class _InspectionSectionPageState extends ConsumerState<InspectionSectionPage> {
                 ? context.pop()
                 : context.go(Routes.surveyDetailPath(surveyId)),
           ),
-          title: Text(_sectionTitle(sectionKey)),
+          title: Text(inspectionSectionTitle(sectionKey)),
+          bottom: parentNodeId == null
+              ? null
+              : nodeMapAsync.maybeWhen(
+                  data: (nodeMap) => InspectionBreadcrumbBar(
+                    path: inspectionBreadcrumb(
+                      sectionKey: sectionKey,
+                      nodeId: parentNodeId,
+                      nodeMap: nodeMap,
+                    ),
+                  ),
+                  orElse: () => null,
+                ),
         ),
         body: SafeArea(
           child: nodesAsync.when(
@@ -223,21 +237,6 @@ class _InspectionSectionPageState extends ConsumerState<InspectionSectionPage> {
       ),
     );
   }
-
-  String _sectionTitle(String key) => switch (key) {
-        'A' => 'About Inspection',
-        'D' => 'About the Property',
-        'E' => 'Outside the Property',
-        'F' => 'Inside the Property',
-        'G' => 'Services',
-        'H' => 'Grounds',
-        'I' => 'Issues for Legal Advisers',
-        'J' => 'Risks',
-        'K' => 'Floor/Site Plan Sketches',
-        'R' => 'Room Details',
-        'O' => 'Overall Opinion',
-        _ => 'Section $key',
-      };
 
   Color _sectionColor(String key, ThemeData theme) => switch (key) {
         'A' => theme.colorScheme.primary,

@@ -2,10 +2,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_scriber/features/property_inspection/domain/inspection_breadcrumb.dart';
 import 'package:survey_scriber/features/property_inspection/domain/inspection_phrase_engine.dart';
 import 'package:survey_scriber/features/property_inspection/domain/legacy_answer_migration.dart';
 import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
+import 'package:survey_scriber/features/property_inspection/presentation/widgets/inspection_breadcrumb_bar.dart';
 
 void main() {
   final tree = InspectionTreePayload.fromJson(
@@ -169,6 +172,58 @@ void main() {
         mergeMovedAnswers(defect, {'e5sd_cracked': 'false'}, {'e5sd_cracked': 'true'}),
         {'e5sd_cracked': 'false'},
       );
+    });
+  });
+
+  group('Header shows where the surveyor is', () {
+    final nodeMap = {
+      for (final sec in tree.sections)
+        for (final n in sec.nodes) n.id: n,
+    };
+
+    List<String> path(String key, String id) =>
+        inspectionBreadcrumb(sectionKey: key, nodeId: id, nodeMap: nodeMap);
+
+    test('every screen has its section, its groups and its own title', () {
+      final broken = <String>[];
+      for (final sec in tree.sections) {
+        for (final n in sec.nodes) {
+          final p = path(sec.key, n.id);
+          if (p.first != inspectionSectionTitle(sec.key) || p.last.isEmpty || p.length < 2) {
+            broken.add(n.id);
+          }
+          if (n.parentId != null && p.length < 3) broken.add(n.id);
+        }
+      }
+      expect(broken, isEmpty);
+    });
+
+    test('Carport roof and Porches roof read differently', () {
+      final carport = path('E', 'activity_outside_property_other_other_roof');
+      final porch = path('E', 'activity_outside_property_conservatory_porch_roof__roof');
+      expect(carport.last, 'Roof');
+      expect(porch.last, 'Roof');
+      expect(carport.join(), contains('Carport'));
+      expect(porch.join(), contains('Porch'));
+      expect(carport.first, 'Outside the Property');
+    });
+
+    testWidgets('the bar shows the path and a long path does not overflow', (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: SizedBox(
+          width: 320,
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Roof'),
+              bottom: const InspectionBreadcrumbBar(
+                path: ['Outside the Property', 'Other Outside Property', 'Repairs', 'External structures', 'Roof'],
+              ),
+            ),
+          ),
+        ),
+      ));
+      expect(tester.takeException(), isNull);
+      expect(find.text('Outside the Property > Other Outside Property > Repairs > External structures > Roof'), findsOneWidget);
     });
   });
 }

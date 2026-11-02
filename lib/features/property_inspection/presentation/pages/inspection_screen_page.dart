@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../domain/inspection_breadcrumb.dart';
 import '../../domain/field_phrase_processor.dart';
 import '../../domain/models/inspection_models.dart';
 import '../../../../app/router/routes.dart';
 import '../providers/inspection_providers.dart';
+import '../widgets/inspection_breadcrumb_bar.dart';
 import '../widgets/inspection_fields.dart';
 import '../../../media/presentation/widgets/photo_grid.dart';
 
@@ -132,6 +134,17 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
     final isFloorPlanCapture =
         screenId == 'activity_capture_floor_site_plan_sketches';
     final floorPlanSectionId = 'inspection_v2_floor_plan_$surveyId';
+    final screenSectionKey = state.screenMeta?.sectionKey;
+    final breadcrumb = screenSectionKey == null
+        ? null
+        : ref.watch(inspectionNodeMapProvider).maybeWhen(
+              data: (nodeMap) => inspectionBreadcrumb(
+                sectionKey: screenSectionKey,
+                nodeId: screenId,
+                nodeMap: nodeMap,
+              ),
+              orElse: () => null,
+            );
 
     return PopScope(
       canPop: false,
@@ -142,6 +155,9 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
         appBar: AppBar(
           leading: BackButton(onPressed: goBack),
           title: Text(_stripLegacyPrefix(screen.title)),
+          bottom: breadcrumb == null
+              ? null
+              : InspectionBreadcrumbBar(path: breadcrumb),
           actions: isLegacyResettableScreen
               ? [
                   IconButton(
