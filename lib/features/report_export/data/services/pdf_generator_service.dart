@@ -985,13 +985,18 @@ class PdfGeneratorService {
           if (si > 0 ||
               (doc.aiExecutiveSummary != null &&
                   doc.aiExecutiveSummary!.isNotEmpty)) {
-            widgets.add(pw.SizedBox(height: 6));
-            widgets.add(pw.Divider(
-              color: PdfSharedUtils.mediumGrey,
-              thickness: 0.5,
-              height: 1,
-            ));
-            widgets.add(pw.SizedBox(height: 10));
+            if (doc.reportType == ReportType.inspection) {
+              // Every main section of the home survey starts on a new page.
+              widgets.add(pw.NewPage());
+            } else {
+              widgets.add(pw.SizedBox(height: 6));
+              widgets.add(pw.Divider(
+                color: PdfSharedUtils.mediumGrey,
+                thickness: 0.5,
+                height: 1,
+              ));
+              widgets.add(pw.SizedBox(height: 10));
+            }
           }
 
           // Section header bar (per-section color)
@@ -1197,7 +1202,9 @@ class PdfGeneratorService {
 
         // Signatures
         if (_config.includeSignatures && doc.signatures.isNotEmpty) {
-          widgets.add(pw.SizedBox(height: 16));
+          widgets.add(doc.reportType == ReportType.inspection
+              ? pw.NewPage()
+              : pw.SizedBox(height: 16));
           widgets.add(pw.Container(
             width: double.infinity,
             padding: const pw.EdgeInsets.symmetric(horizontal: 12, vertical: 8),

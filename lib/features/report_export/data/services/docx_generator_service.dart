@@ -300,6 +300,9 @@ class DocxGeneratorService {
         doc,
         section.title,
         color: PdfSharedUtils.sectionColor(section.key, _config.accentColor),
+        // The first page already ended with a page break.
+        newPage: section != doc.sections.first ||
+            (doc.aiExecutiveSummary?.isNotEmpty ?? false),
       );
       var accommodationWritten = false;
       if (doc.reportType == ReportType.valuation &&
@@ -379,7 +382,7 @@ class DocxGeneratorService {
 
     // Signatures section — embeds signature images when available
     if (_config.includeSignatures && doc.signatures.isNotEmpty) {
-      _writeMainHeading(buf, doc, 'Signatures');
+      _writeMainHeading(buf, doc, 'Signatures', newPage: true);
       var sigImgId = 1;
       for (final sig in doc.signatures) {
         final imgRef = images.signatureLookup[sig.filePath];
@@ -467,10 +470,16 @@ class DocxGeneratorService {
     ReportDocument doc,
     String text, {
     PdfColor? color,
+    bool newPage = false,
   }) {
     if (doc.reportType != ReportType.inspection) {
       _writeHeading(buf, text, 'Heading1');
       return;
+    }
+    if (newPage) {
+      // A near-zero-height paragraph, so the banner sits at the top of the page.
+      buf.write('<w:p><w:pPr><w:pageBreakBefore/>'
+          '<w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr></w:p>');
     }
     final fill = _pdfColorToHex(color ?? _config.accentColor);
     buf.write('<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="pct"/><w:tblCellMar>');

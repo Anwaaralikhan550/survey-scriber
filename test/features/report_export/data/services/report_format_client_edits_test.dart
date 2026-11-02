@@ -134,4 +134,16 @@ void main() {
       expect(await _xml(doc, 'word/styles.xml'), contains('w:ascii="Calibri"'));
     });
   });
+
+  test('every main section starts on a new page, the first one follows the cover', () async {
+    const sections = [
+      ReportSection(key: 'A', title: 'About Inspection', description: '', displayOrder: 0, screens: []),
+      ReportSection(key: 'D', title: 'About Property', description: '', displayOrder: 1, screens: []),
+      ReportSection(key: 'E', title: 'Outside Property', description: '', displayOrder: 2, screens: []),
+    ];
+    final xml = await _xml(_doc(sections: sections));
+    expect('<w:pageBreakBefore/>'.allMatches(xml), hasLength(2));
+    expect(xml.indexOf('<w:pageBreakBefore/>'), greaterThan(xml.indexOf('About Inspection')));
+    expect(xml.indexOf('<w:pageBreakBefore/>'), lessThan(xml.indexOf('About Property')));
+  });
 }
