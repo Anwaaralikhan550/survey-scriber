@@ -17,6 +17,8 @@ import 'pdf_shared_utils.dart';
 ///
 /// DOCX is essentially a ZIP containing XML files following the Open XML spec.
 class DocxGeneratorService {
+  static const _inspectionReportTitle = 'RICS HomeBuyer Report';
+
   DocxGeneratorService(this._config);
 
   final ExportConfig _config;
@@ -379,10 +381,12 @@ class DocxGeneratorService {
   }
 
   void _writeHeader(StringBuffer buf, ReportDocument doc, DateFormat fmt) {
+    if (doc.reportType == ReportType.inspection) {
+      _writeInspectionCover(buf, doc, fmt);
+      return;
+    }
     final meta = doc.surveyMeta;
-    final reportLabel = doc.reportType == ReportType.inspection
-        ? 'Home Survey Inspection Report'
-        : 'Valuation Report';
+    const reportLabel = 'Valuation Report';
     final accentHex = _pdfColorToHex(_config.accentColor);
 
     _writeStyledParagraph(buf, reportLabel,
@@ -421,6 +425,117 @@ class DocxGeneratorService {
   }
 
   static const String _boldLegalReference = 'Control of Asbestos Regulations 2012';
+
+  /// First page of the home survey report: same layout as the PDF cover.
+  void _writeInspectionCover(
+    StringBuffer buf,
+    ReportDocument doc,
+    DateFormat fmt,
+  ) {
+    final meta = doc.surveyMeta;
+    final accentHex = _pdfColorToHex(_config.accentColor);
+
+    _writeBanner(
+      buf,
+      fillHex: accentHex,
+      lines: const [
+        (text: _inspectionReportTitle, size: 56, bold: true),
+        (text: 'Level 2 Home Survey', size: 28, bold: false),
+      ],
+    );
+
+    buf.write('<w:p><w:pPr><w:spacing w:before="480" w:after="120"/></w:pPr></w:p>');
+    _writeCenteredText(buf, meta.title, size: 36, bold: true, color: '333333');
+    if (meta.address != null && meta.address != meta.title) {
+      _writeCenteredText(buf, meta.address!, size: 24, color: '999999');
+    }
+    buf.write('<w:p><w:pPr><w:spacing w:before="240" w:after="120"/></w:pPr></w:p>');
+
+    final rows = <(String, String)>[
+      ('Property Address', meta.address ?? meta.title),
+      if (meta.clientName != null) ('Client Name', meta.clientName!),
+      if (meta.jobRef != null) ('Job Reference', meta.jobRef!),
+      if (meta.inspectionDate != null)
+        ('Inspection Date', fmt.format(meta.inspectionDate!)),
+      (
+        'Report Generated',
+        DateFormat('d MMMM yyyy, h:mm a').format(doc.generatedAt),
+      ),
+      if (meta.surveyDuration != null)
+        ('Survey Duration', PdfSharedUtils.formatDuration(meta.surveyDuration!)),
+    ];
+
+    buf.write('<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="pct"/>');
+    buf.write('<w:tblBorders>');
+    for (final side in const ['top', 'left', 'bottom', 'right', 'insideH', 'insideV']) {
+      buf.write('<w:$side w:val="single" w:sz="4" w:space="0" w:color="EDEDED"/>');
+    }
+    buf.write('</w:tblBorders><w:tblCellMar>');
+    buf.write('<w:top w:w="100" w:type="dxa"/><w:left w:w="160" w:type="dxa"/>');
+    buf.write('<w:bottom w:w="100" w:type="dxa"/><w:right w:w="160" w:type="dxa"/>');
+    buf.write('</w:tblCellMar></w:tblPr>');
+    buf.write('<w:tblGrid><w:gridCol w:w="3600"/><w:gridCol w:w="5400"/></w:tblGrid>');
+    for (var i = 0; i < rows.length; i++) {
+      final fill = i.isEven ? 'EDEDED' : 'FFFFFF';
+      buf.write('<w:tr>');
+      _writeCoverCell(buf, rows[i].$1, width: 2000, fill: fill, bold: true, color: '999999');
+      _writeCoverCell(buf, rows[i].$2, width: 3000, fill: fill, color: '212121');
+      buf.write('</w:tr>');
+    }
+    buf.write('</w:tbl>');
+
+    // Page break
+    buf.write('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');
+  }
+
+  void _writeCoverCell(
+    StringBuffer buf,
+    String text, {
+    required int width,
+    required String fill,
+    bool bold = false,
+    required String color,
+  }) {
+    buf.write('<w:tc><w:tcPr><w:tcW w:w="$width" w:type="pct"/>');
+    buf.write('<w:shd w:val="clear" w:color="auto" w:fill="$fill"/></w:tcPr>');
+    buf.write('<w:p><w:pPr><w:spacing w:after="0"/></w:pPr><w:r><w:rPr>');
+    if (bold) buf.write('<w:b/>');
+    buf.write('<w:color w:val="$color"/><w:sz w:val="20"/></w:rPr>');
+    buf.write('<w:t xml:space="preserve">${_escapeXml(text)}</w:t></w:r></w:p></w:tc>');
+  }
+
+  /// Full-width coloured block with centred white text.
+  void _writeBanner(
+    StringBuffer buf, {
+    required String fillHex,
+    required List<({String text, int size, bool bold})> lines,
+  }) {
+    buf.write('<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="pct"/><w:tblCellMar>');
+    buf.write('<w:top w:w="160" w:type="dxa"/><w:bottom w:w="160" w:type="dxa"/>');
+    buf.write('</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="9000"/></w:tblGrid>');
+    buf.write('<w:tr><w:tc><w:tcPr><w:tcW w:w="5000" w:type="pct"/>');
+    buf.write('<w:shd w:val="clear" w:color="auto" w:fill="$fillHex"/></w:tcPr>');
+    for (final line in lines) {
+      buf.write('<w:p><w:pPr><w:spacing w:after="40"/><w:jc w:val="center"/></w:pPr><w:r><w:rPr>');
+      if (line.bold) buf.write('<w:b/>');
+      buf.write('<w:color w:val="FFFFFF"/><w:sz w:val="${line.size}"/></w:rPr>');
+      buf.write('<w:t xml:space="preserve">${_escapeXml(line.text)}</w:t></w:r></w:p>');
+    }
+    buf.write('</w:tc></w:tr></w:tbl>');
+  }
+
+  void _writeCenteredText(
+    StringBuffer buf,
+    String text, {
+    required int size,
+    bool bold = false,
+    required String color,
+  }) {
+    buf.write('<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr>');
+    if (bold) buf.write('<w:b/>');
+    buf.write('<w:color w:val="$color"/><w:sz w:val="$size"/></w:rPr>');
+    buf.write('<w:t xml:space="preserve">${_escapeXml(text)}</w:t></w:r></w:p>');
+  }
 
   void _writeParagraph(StringBuffer buf, String text) {
     buf.write('<w:p>');

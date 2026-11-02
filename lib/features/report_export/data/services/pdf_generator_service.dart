@@ -1244,9 +1244,7 @@ class PdfGeneratorService {
         isInspection ? _inspectionReportLabel(doc) : 'Valuation Report';
     final subtitle =
         isInspection ? 'Level 2 Home Survey' : 'Mortgage Valuation Report';
-    final ricsLine = isInspection
-        ? 'Prepared with reference to the RICS Home Survey Standard, 1st edition'
-        : 'Professional property valuation report';
+    const valuationLine = 'Professional property valuation report';
 
     // Build the property details table rows.
     final tableRows = <_CoverTableEntry>[
@@ -1292,12 +1290,14 @@ class PdfGeneratorService {
                   pw.Text(subtitle,
                       style: const pw.TextStyle(
                           fontSize: 14, color: PdfColors.white)),
-                  pw.SizedBox(height: 4),
-                  pw.Text(ricsLine,
-                      style: pw.TextStyle(
-                          fontSize: 11,
-                          fontWeight: pw.FontWeight.bold,
-                          color: PdfColors.white)),
+                  if (!isInspection) ...[
+                    pw.SizedBox(height: 4),
+                    pw.Text(valuationLine,
+                        style: pw.TextStyle(
+                            fontSize: 11,
+                            fontWeight: pw.FontWeight.bold,
+                            color: PdfColors.white)),
+                  ],
                 ],
               ),
             ),
@@ -1670,7 +1670,7 @@ class PdfGeneratorService {
   String _inspectionReportLabel(ReportDocument doc) {
     final astTitle = doc.aiAstPayload?.title?.trim() ?? '';
     if (astTitle.isNotEmpty) return astTitle;
-    return 'Home Survey Inspection Report';
+    return 'RICS HomeBuyer Report';
   }
 
   List<pw.Widget> _aiAstSection(ReportAstSection section, PdfColor accent) {
