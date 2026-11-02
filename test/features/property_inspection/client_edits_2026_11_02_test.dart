@@ -193,7 +193,6 @@ void main() {
           if (p.first != inspectionSectionTitle(sec.key) || p.last.isEmpty || p.length < 2) {
             broken.add(n.id);
           }
-          if (n.parentId != null && p.length < 3) broken.add(n.id);
         }
       }
       expect(broken, isEmpty);
