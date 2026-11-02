@@ -1080,19 +1080,29 @@ class PdfGeneratorService {
             if (screen.isMergedGroup && !isAboutPropertyTopMerged) {
               // ── Merged group (e.g. "E1 Chimney") — accent sub-header
               //    with flowing paragraphs ─────────────────────────────
-              widgets.add(pw.Container(
-                width: double.infinity,
-                padding:
-                    const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: pw.BoxDecoration(
-                  color: PdfColor.fromHex('#F5F5F5'),
-                  border: pw.Border(
-                      left: pw.BorderSide(color: sectionClr, width: 3)),
-                ),
-                child: pw.Text(screen.title,
-                    style: pw.TextStyle(
-                        fontWeight: pw.FontWeight.bold, fontSize: 12)),
-              ));
+              widgets.add(doc.reportType == ReportType.inspection
+                  ? pw.Padding(
+                      padding:
+                          const pw.EdgeInsets.only(left: 4, top: 6, bottom: 2),
+                      child: pw.Text(screen.title,
+                          style: pw.TextStyle(
+                              fontWeight: pw.FontWeight.bold,
+                              fontSize: 12,
+                              color: PdfSharedUtils.headerDark)),
+                    )
+                  : pw.Container(
+                      width: double.infinity,
+                      padding: const pw.EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
+                      decoration: pw.BoxDecoration(
+                        color: PdfColor.fromHex('#F5F5F5'),
+                        border: pw.Border(
+                            left: pw.BorderSide(color: sectionClr, width: 3)),
+                      ),
+                      child: pw.Text(screen.title,
+                          style: pw.TextStyle(
+                              fontWeight: pw.FontWeight.bold, fontSize: 12)),
+                    ));
               widgets.add(pw.SizedBox(height: 4));
 
               if (screen.phrases.isNotEmpty && _config.includePhrases) {
