@@ -199,6 +199,11 @@ void main() {
       expect(broken, isEmpty);
     });
 
+    test('a landing and its inner group with one name appear once', () {
+      expect(path('E', 'activity_outside_property_windows_sill_defect'),
+          ['Outside the Property', 'Windows', 'Sill Defect']);
+    });
+
     test('Carport roof and Porches roof read differently', () {
       final carport = path('E', 'activity_outside_property_other_other_roof');
       final porch = path('E', 'activity_outside_property_conservatory_porch_roof__roof');

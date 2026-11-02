@@ -31,7 +31,9 @@ List<String> inspectionBreadcrumb({
   while (id != null && seen.add(id)) {
     final node = nodeMap[id];
     if (node == null) break;
-    titles.insert(0, node.title.replaceFirst(_legacyPrefix, '').trim());
+    final title = node.title.replaceFirst(_legacyPrefix, '').trim();
+    // A landing and the group inside it often share a name: "Windows > Windows".
+    if (titles.isEmpty || titles.first != title) titles.insert(0, title);
     id = node.parentId;
   }
   return [inspectionSectionTitle(sectionKey), ...titles];
