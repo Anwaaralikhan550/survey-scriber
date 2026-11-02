@@ -649,6 +649,12 @@ class DocxGeneratorService {
   }
 
   void _writeParagraph(StringBuffer buf, String text) {
+    if (PdfSharedUtils.conditionRatingLine.hasMatch(text.trim())) {
+      buf.write('<w:p><w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">');
+      buf.write(_escapeXml(text));
+      buf.write('</w:t></w:r></w:p>');
+      return;
+    }
     buf.write('<w:p>');
     // The legal reference is bold in the client PDF.
     final parts = text.split(_boldLegalReference);

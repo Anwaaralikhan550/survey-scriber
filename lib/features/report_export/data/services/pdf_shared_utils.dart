@@ -239,6 +239,12 @@ class PdfSharedUtils {
   static const int maxTotalPages = 1000;
   static const int maxFieldTextLength = 50000;
 
+  /// The "Condition rating is: 1." line, printed bold in the home survey report.
+  static final conditionRatingLine = RegExp(
+    r'^condition rating(?: is)?:?\s+[^.]{1,30}\.?$',
+    caseSensitive: false,
+  );
+
   /// Maximum photos to include in a single PDF.  Beyond this, memory
   /// pressure makes the export unreliable on mid-range devices.
   static const int maxPhotosInPdf = 200;

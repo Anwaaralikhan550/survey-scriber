@@ -147,9 +147,17 @@ class PdfGeneratorService {
       widgets.add(
         pw.Padding(
           padding: const pw.EdgeInsets.fromLTRB(8, 2, 8, 6),
-          child: pw.RichText(
-            text: _boldSectionLetterSpans(sanitize(phrase), bodyStyle),
-          ),
+          child: PdfSharedUtils.conditionRatingLine.hasMatch(phrase)
+              ? pw.Text(
+                  sanitize(phrase),
+                  style: bodyStyle.copyWith(
+                    font: _fonts.bold,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                )
+              : pw.RichText(
+                  text: _boldSectionLetterSpans(sanitize(phrase), bodyStyle),
+                ),
         ),
       );
     }

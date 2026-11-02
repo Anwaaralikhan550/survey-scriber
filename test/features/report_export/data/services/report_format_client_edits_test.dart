@@ -146,4 +146,24 @@ void main() {
     expect(xml.indexOf('<w:pageBreakBefore/>'), greaterThan(xml.indexOf('About Inspection')));
     expect(xml.indexOf('<w:pageBreakBefore/>'), lessThan(xml.indexOf('About Property')));
   });
+
+  test('condition rating line is bold, its explanation is not', () async {
+    const sections = [
+      ReportSection(
+        key: 'E',
+        title: 'Outside Property',
+        description: '',
+        displayOrder: 0,
+        screens: [
+          ReportScreen(screenId: 's', title: 'Stacks', fields: [], phrases: [
+            'Condition rating is: 1.',
+            'The element(s) are performing their intended function.',
+          ],),
+        ],
+      ),
+    ];
+    final xml = await _xml(_doc(sections: sections));
+    expect(xml, contains('<w:b/></w:rPr><w:t xml:space="preserve">Condition rating is: 1.</w:t>'));
+    expect(xml, contains('<w:r><w:t xml:space="preserve">The element(s) are performing'));
+  });
 }
