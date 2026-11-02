@@ -158,6 +158,10 @@ def main():
                     bad.append((round(r[1]) if r else 0, x[:90]))
             if bad:
                 foreign.append((k, bad[0][0], bad[0][1]))
+    # Bank keys the client asked to take out of the app (edit list, 2 Nov 2026).
+    client_removed = {
+        '{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING}',  # Solar tick removed from About Water Heating
+    }
     # ---- T7 coverage: the bank key behind every ledger sentence must be reachable (named in the Dart code / rules)
     unreachable = []
     t7 = 0
@@ -165,6 +169,8 @@ def main():
                  if k.split('::')[-1] in src or any(k.split('::')[-1].startswith(f) for f in DYNAMIC)]
     for r in rows:
         if r['disposition'] not in ('EXACT', 'TOKENISED', 'ACCEPT') or not r['bank_key']:
+            continue
+        if r['bank_key'] in client_removed:
             continue
         t7 += 1
         tok = r['bank_key'].split('::')[-1]

@@ -9024,16 +9024,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
-    'g5_solar',
-    'activity_services_water_heating_gas_heating',
-    '{G_WATER_HEATING}',
-    '{G5_SOLAR_WATER_HEATING}',
-    [
-    ],
-    whenField: 'cb_wh_solar',
-    whenValue: 'true',
-  ),
-  VerbatimRule(
     'g6_septic',
     'activity_services_drainage',
     '{G_DRAINAGE}',

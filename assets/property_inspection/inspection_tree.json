@@ -6272,11 +6272,6 @@
               "id": "cb_wh_point_of_use",
               "label": "Point-of-use",
               "type": "checkbox"
-            },
-            {
-              "id": "cb_wh_solar",
-              "label": "Solar water heating",
-              "type": "checkbox"
             }
           ]
         },
@@ -10009,7 +10004,7 @@
         },
         {
           "id": "activity_in_side_property_built_in_fittings_repair_moulding_noted",
-          "title": "Moulding noted",
+          "title": "Defects",
           "type": "screen",
           "parentId": "group_repairs_73",
           "order": 6,
@@ -22907,7 +22902,7 @@
         },
         {
           "id": "activity_over_all_openion",
-          "title": "OverAll Opinion",
+          "title": "Overall Opinion",
           "type": "screen",
           "parentId": null,
           "order": 10,
