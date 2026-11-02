@@ -1,4 +1,5 @@
 // Client edit list "Survey Scriber Edit Oct 2026.docx" (2 Nov 2026): the app screens.
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -48,5 +49,37 @@ void main() {
     final d = tree.sections.firstWhere((s) => s.key == 'D');
     final tiles = d.nodes.where((n) => n.parentId == null).map((n) => n.id).toList();
     expect(tiles.indexOf('group_ground_3'), tiles.indexOf('group_construction_2') + 1);
+  });
+
+  group('Garden phrases print from the ticked options', () {
+    final engine = InspectionPhraseEngine(
+      (jsonDecode(File('assets/property_inspection/phrase_texts.json').readAsStringSync())
+              as Map<String, dynamic>)
+          .map((k, v) => MapEntry(k, v?.toString() ?? '')),
+    );
+
+    test('Rear Garden boundaries without the heading tick', () {
+      final phrases = engine.buildPhrases('activity_rear_garden', {
+        'rear_type_0_lawn': 'true',
+        'rear_fence_0_timber_fencing': 'true',
+        'rear_fence_0_hedging': 'true',
+      });
+      expect(phrases, contains('Rear garden: The rear garden is laid to lawn.'));
+      expect(phrases.join(' '), contains('timber fencing and hedging'));
+    });
+
+    test('Communal Garden without the heading tick', () {
+      final phrases = engine.buildPhrases('activity_communal_garden', {
+        'communal_type_0_paving': 'true',
+        'communal_fence_0_brick_wall': 'true',
+      });
+      expect(phrases.join(' '), contains('The communal garden is laid to paving.'));
+      expect(phrases.join(' '), contains('brick wall'));
+    });
+
+    test('nothing ticked prints nothing', () {
+      expect(engine.buildPhrases('activity_rear_garden', const {}), isEmpty);
+      expect(engine.buildPhrases('activity_communal_garden', const {}), isEmpty);
+    });
   });
 }

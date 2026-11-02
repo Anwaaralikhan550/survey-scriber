@@ -11792,6 +11792,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Rear garden: The rear garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
     whenField: 'cb_rear_type',
     whenValue: 'true',
+    whenAny: [['rear_type_0_lawn', 'true'], ['rear_type_0_artificial_lawn', 'true'], ['rear_type_0_paving', 'true'], ['rear_type_0_timber_decking', 'true'], ['rear_type_0_gravel', 'true'], ['rear_type_0_stones', 'true'], ['rear_type_0_hardstanding', 'true'], ['rear_type_0_other', 'true']],
   ),
   VerbatimRule(
     'rear_fence',
@@ -11819,6 +11820,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
     whenField: 'cb_rear_fence',
     whenValue: 'true',
+    whenAny: [['rear_fence_0_timber_fencing', 'true'], ['rear_fence_0_brick_wall', 'true'], ['rear_fence_0_block_wall', 'true'], ['rear_fence_0_hedging', 'true'], ['rear_fence_0_wire_mesh', 'true'], ['rear_fence_0_concrete_sections', 'true'], ['rear_fence_0_metal_railings', 'true'], ['rear_fence_0_other', 'true']],
   ),
   VerbatimRule(
     'communal_type',
@@ -11846,6 +11848,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Communal garden: The communal garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
     whenField: 'cb_communal_type',
     whenValue: 'true',
+    whenAny: [['communal_type_0_lawn', 'true'], ['communal_type_0_artificial_lawn', 'true'], ['communal_type_0_paving', 'true'], ['communal_type_0_timber_decking', 'true'], ['communal_type_0_gravel', 'true'], ['communal_type_0_stones', 'true'], ['communal_type_0_hardstanding', 'true'], ['communal_type_0_other', 'true']],
   ),
   VerbatimRule(
     'communal_fence',
@@ -11873,6 +11876,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
     whenField: 'cb_communal_fence',
     whenValue: 'true',
+    whenAny: [['communal_fence_0_timber_fencing', 'true'], ['communal_fence_0_brick_wall', 'true'], ['communal_fence_0_block_wall', 'true'], ['communal_fence_0_hedging', 'true'], ['communal_fence_0_wire_mesh', 'true'], ['communal_fence_0_concrete_sections', 'true'], ['communal_fence_0_metal_railings', 'true'], ['communal_fence_0_other', 'true']],
   ),
   VerbatimRule(
     'a4_pp_none',
