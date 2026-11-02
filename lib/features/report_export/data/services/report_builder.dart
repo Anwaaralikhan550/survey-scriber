@@ -8,6 +8,7 @@ import '../../../property_inspection/presentation/widgets/inspection_fields.dart
 import '../../../property_valuation/domain/valuation_phrase_engine.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
+import 'client_paragraph_rules.dart';
 import 'paragraph_composer.dart';
 import 'report_data_service.dart';
 
@@ -2000,8 +2001,10 @@ class ReportBuilder {
             }
           }
 
-          final cleanedMergedPhrases =
-              _composeParagraphs(_cleanupPhrases(mergedPhrases));
+          final cleanedMergedPhrases = applyClientParagraphRules(
+            group.id,
+            _composeParagraphs(_cleanupPhrases(mergedPhrases)),
+          );
 
           // Skip truly empty groups (no phrases, no fields, no notes)
           // Legacy structural parity: keep About Property's

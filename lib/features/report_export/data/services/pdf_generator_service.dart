@@ -10,6 +10,7 @@ import 'package:pdf/widgets.dart' as pw;
 import '../../../../core/utils/logger.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
+import 'client_paragraph_rules.dart';
 import 'pdf_shared_utils.dart';
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -96,6 +97,7 @@ class PdfGeneratorService {
     List<String> phrases, {
     String? sectionKey,
     String? screenTitle,
+    bool dedupe = true,
   }) {
     final widgets = <pw.Widget>[];
 
@@ -116,7 +118,7 @@ class PdfGeneratorService {
           .replaceAll(RegExp(r'[^\w\s]'), '')
           .trim();
       if (dedupeKey.isEmpty) continue;
-      if (seen.contains(dedupeKey)) continue;
+      if (dedupe && seen.contains(dedupeKey)) continue;
       seen.add(dedupeKey);
 
       final isSubheading = phrase.startsWith(_mergedSubheadingPrefix);
@@ -1098,6 +1100,8 @@ class PdfGeneratorService {
                   screen.phrases,
                   sectionKey: section.key,
                   screenTitle: screen.title,
+                  // A repeated paragraph here belongs to another wall or window.
+                  dedupe: !clientParagraphGroups.contains(screen.screenId),
                 ));
               }
             } else {
