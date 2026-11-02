@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../core/error/exceptions.dart';
 import '../../../auth/presentation/providers/auth_notifier.dart';
 import '../../domain/entities/booking.dart';
 import '../../../dashboard/presentation/providers/dashboard_provider.dart' show liveBookingCountsProvider;
@@ -221,12 +222,24 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
+          SnackBar(content: Text(_bookingErrorMessage(e))),
         );
       }
     } finally {
       if (mounted) setState(() => _isSubmitting = false);
     }
+  }
+
+  /// The server's reason for refusing the booking, without the exception name.
+  String _bookingErrorMessage(Object error) {
+    final String? message = switch (error) {
+      ValidationException(:final message) => message,
+      ServerException(:final message) => message,
+      NetworkException(:final message) => message,
+      UnauthorizedException(:final message) => message,
+      _ => null,
+    };
+    return message ?? 'The booking could not be created. Please try again.';
   }
 
   @override

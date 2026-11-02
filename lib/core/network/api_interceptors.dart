@@ -70,16 +70,20 @@ class TokenRefreshInterceptor extends Interceptor {
   TokenRefreshInterceptor({
     required this.dio,
     this.onTokenRefreshFailed,
+    @visibleForTesting this.refreshAdapter,
   });
 
   final Dio dio;
   final void Function()? onTokenRefreshFailed;
+  final HttpClientAdapter? refreshAdapter;
 
   bool _isRefreshing = false;
   final List<_RequestRetry> _pendingRequests = [];
 
   /// Timeout for pending requests waiting on a token refresh.
   static const _pendingTimeout = Duration(seconds: 30);
+
+  static const _retriedAfterRefreshKey = 'retriedAfterRefresh';
 
   static const _authEndpoints = [
     'auth/login',
@@ -100,6 +104,12 @@ class TokenRefreshInterceptor extends Interceptor {
 
     if (response?.statusCode != 401 ||
         _authEndpoints.any(requestPath.contains)) {
+      return handler.next(err);
+    }
+
+    // A freshly issued token was rejected too: the session really is gone.
+    if (err.requestOptions.extra[_retriedAfterRefreshKey] == true) {
+      await _handleRefreshFailure();
       return handler.next(err);
     }
 
@@ -145,6 +155,7 @@ class TokenRefreshInterceptor extends Interceptor {
     _isRefreshing = true;
     _logger.d('Starting token refresh');
 
+    final String newAccessToken;
     try {
       final refreshDio = Dio(BaseOptions(
         baseUrl: AppConstants.baseUrl,
@@ -158,6 +169,7 @@ class TokenRefreshInterceptor extends Interceptor {
 
       // SECURITY: Apply certificate pinning to refresh requests as well
       CertificatePinning.configure(refreshDio);
+      if (refreshAdapter != null) refreshDio.httpClientAdapter = refreshAdapter!;
 
       final refreshResponse = await refreshDio.post<Map<String, dynamic>>(
         'auth/refresh',
@@ -169,38 +181,18 @@ class TokenRefreshInterceptor extends Interceptor {
         throw Exception('Empty refresh response');
       }
 
-      final newAccessToken = data['accessToken'] as String?;
+      final accessToken = data['accessToken'] as String?;
       final newRefreshToken = data['refreshToken'] as String?;
 
-      if (newAccessToken == null || newRefreshToken == null) {
+      if (accessToken == null || newRefreshToken == null) {
         throw Exception('Invalid refresh response');
       }
 
-      await StorageService.setAuthToken(newAccessToken);
+      await StorageService.setAuthToken(accessToken);
       await StorageService.setRefreshToken(newRefreshToken);
+      newAccessToken = accessToken;
 
       _logger.d('Token refresh successful');
-
-      final retryOptions = err.requestOptions;
-      retryOptions.headers['Authorization'] = 'Bearer $newAccessToken';
-      final retryResponse = await dio.fetch<dynamic>(retryOptions);
-
-      // Retry all pending requests with the new token
-      final pending = List<_RequestRetry>.from(_pendingRequests);
-      _pendingRequests.clear();
-      _isRefreshing = false;
-
-      for (final req in pending) {
-        req.requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
-        try {
-          final response = await dio.fetch<dynamic>(req.requestOptions);
-          req.completer.complete(response);
-        } catch (e) {
-          req.completer.completeError(e);
-        }
-      }
-
-      return handler.resolve(retryResponse);
     } on DioException catch (refreshError) {
       _logger.e('Token refresh failed: ${refreshError.message}');
       await _handleRefreshFailure();
@@ -210,6 +202,39 @@ class TokenRefreshInterceptor extends Interceptor {
       await _handleRefreshFailure();
       return handler.next(err);
     }
+
+    // The session is fine from here on. An error from a retried request is that
+    // request's own answer (a refused booking, say), so it goes back to the
+    // caller and must never log the user out.
+    final pending = List<_RequestRetry>.from(_pendingRequests);
+    _pendingRequests.clear();
+    _isRefreshing = false;
+
+    final retryOptions = err.requestOptions;
+    retryOptions.headers['Authorization'] = 'Bearer $newAccessToken';
+    retryOptions.extra[_retriedAfterRefreshKey] = true;
+    Response<dynamic>? retryResponse;
+    DioException? retryError;
+    try {
+      retryResponse = await dio.fetch<dynamic>(retryOptions);
+    } on DioException catch (e) {
+      retryError = e;
+    }
+
+    // Retry all pending requests with the new token
+    for (final req in pending) {
+      req.requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
+      req.requestOptions.extra[_retriedAfterRefreshKey] = true;
+      try {
+        final response = await dio.fetch<dynamic>(req.requestOptions);
+        req.completer.complete(response);
+      } catch (e) {
+        req.completer.completeError(e);
+      }
+    }
+
+    if (retryError != null) return handler.next(retryError);
+    return handler.resolve(retryResponse!);
   }
 
   Future<void> _handleRefreshFailure() async {

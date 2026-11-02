@@ -1,3 +1,4 @@
+import 'package:survey_scriber/core/error/exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,6 +25,7 @@ class _CapturingBookings extends StateNotifier<BookingsState>
     implements BookingsNotifier {
   _CapturingBookings() : super(const BookingsState());
   Map<String, Object?> captured = {};
+  Object? failWith;
 
   @override
   Future<Booking?> createBooking({
@@ -57,6 +59,7 @@ class _CapturingBookings extends StateNotifier<BookingsState>
       'estateAgentName': estateAgentName,
       'estateAgentAddress': estateAgentAddress,
     };
+    if (failWith != null) throw failWith!;
     return null;
   }
 
@@ -257,5 +260,24 @@ void main() {
       expect(fake.captured['accessType'], BookingAccessType.directAccess);
       expect(fake.captured['estateAgentAddress'], isNull);
     });
+  });
+
+  testWidgets('a refused booking shows the server reason and keeps the form open', (tester) async {
+    bigScreen(tester);
+    final fake = _CapturingBookings()
+      ..failWith = const ValidationException(message: 'Cannot create booking for past dates');
+    await tester.pumpWidget(ProviderScope(
+      overrides: [
+        authNotifierProvider.overrideWith((ref) => _FakeAuth()),
+        bookingsNotifierProvider.overrideWith((ref) => fake),
+      ],
+      child: const MaterialApp(home: CreateBookingPage()),
+    ));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byWidgetPredicate((w) => w is FilledButton));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(find.text('Cannot create booking for past dates'), findsOneWidget);
+    expect(find.byType(CreateBookingPage), findsOneWidget);
   });
 }

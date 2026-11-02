@@ -386,7 +386,8 @@ class BookingsNotifier extends StateNotifier<BookingsState>
       return booking;
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
-      return null;
+      // The form shows the server's reason, so the caller needs the failure.
+      rethrow;
     }
   }
 
