@@ -166,4 +166,37 @@ void main() {
     expect(xml, contains('<w:b/></w:rPr><w:t xml:space="preserve">Condition rating is: 1.</w:t>'));
     expect(xml, contains('<w:r><w:t xml:space="preserve">The element(s) are performing'));
   });
+
+  test('sub-heading marker never prints; a sub-heading with no text is dropped', () async {
+    const sections = [
+      ReportSection(
+        key: 'H',
+        title: 'H Grounds',
+        description: '',
+        displayOrder: 0,
+        screens: [
+          ReportScreen(
+            screenId: 'g',
+            title: 'H1 Garage',
+            fields: [],
+            isMergedGroup: true,
+            phrases: [
+              '[[SUBHEADING]] Garage',
+              'Description: A garage.',
+              '[[SUBHEADING]] Empty one',
+              '[[SUBHEADING]] Garage Defects',
+              'Minor defects: Cracks.',
+              '[[SUBHEADING]] Empty last',
+            ],
+          ),
+        ],
+      ),
+    ];
+    final xml = await _xml(_doc(sections: sections));
+    expect(xml, isNot(contains('[[SUBHEADING]]')));
+    expect(xml, contains('<w:pStyle w:val="Heading3"/></w:pPr><w:r><w:t xml:space="preserve">Garage</w:t>'));
+    expect(xml, contains('<w:pStyle w:val="Heading3"/></w:pPr><w:r><w:t xml:space="preserve">Garage Defects</w:t>'));
+    expect(xml, isNot(contains('Empty one')));
+    expect(xml, isNot(contains('Empty last')));
+  });
 }

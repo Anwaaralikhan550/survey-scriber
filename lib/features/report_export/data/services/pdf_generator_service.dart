@@ -99,6 +99,8 @@ class PdfGeneratorService {
   }) {
     final widgets = <pw.Widget>[];
 
+    // A sub-heading is only added once text follows it.
+    pw.Widget? pendingSubheading;
     final seen = <String>{};
     for (final raw in phrases) {
       final phrase = _normalizeRenderedPhrase(_rewriteFieldLikePhrase(
@@ -121,21 +123,24 @@ class PdfGeneratorService {
       if (isSubheading) {
         final text = phrase.substring(_mergedSubheadingPrefix.length).trim();
         if (text.isEmpty) continue;
-        widgets.add(
-          pw.Padding(
-            padding: const pw.EdgeInsets.fromLTRB(8, 6, 8, 2),
-            child: pw.Text(
-              sanitize(text),
-              style: pw.TextStyle(
-                fontSize: 10.5,
-                lineSpacing: 2.0,
-                fontWeight: pw.FontWeight.bold,
-                color: PdfSharedUtils.headerDark,
-              ),
+        pendingSubheading = pw.Padding(
+          padding: const pw.EdgeInsets.fromLTRB(8, 6, 8, 2),
+          child: pw.Text(
+            sanitize(text),
+            style: pw.TextStyle(
+              fontSize: 10.5,
+              lineSpacing: 2.0,
+              fontWeight: pw.FontWeight.bold,
+              color: PdfSharedUtils.headerDark,
             ),
           ),
         );
         continue;
+      }
+
+      if (pendingSubheading != null) {
+        widgets.add(pendingSubheading);
+        pendingSubheading = null;
       }
 
       final bodyStyle = pw.TextStyle(

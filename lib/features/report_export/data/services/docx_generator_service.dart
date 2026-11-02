@@ -337,9 +337,7 @@ class DocxGeneratorService {
           _writeHeading(buf, screen.title, 'Heading2');
 
           if (screen.phrases.isNotEmpty && _config.includePhrases) {
-            for (final phrase in screen.phrases) {
-              _writeParagraph(buf, phrase);
-            }
+            _writePhrases(buf, screen.phrases);
           }
         } else {
           // ── Individual screen ──
@@ -348,9 +346,7 @@ class DocxGeneratorService {
           // Suppress field table when phrases exist — the phrases already
           // express the data in professional surveyor language.
           if (screen.phrases.isNotEmpty && _config.includePhrases) {
-            for (final phrase in screen.phrases) {
-              _writeParagraph(buf, phrase);
-            }
+            _writePhrases(buf, screen.phrases);
           } else if (screen.fields.isNotEmpty) {
             _writeFieldsTable(buf, screen.fields);
           }
@@ -646,6 +642,24 @@ class DocxGeneratorService {
     if (bold) buf.write('<w:b/>');
     buf.write('<w:color w:val="$color"/><w:sz w:val="$size"/></w:rPr>');
     buf.write('<w:t xml:space="preserve">${_escapeXml(text)}</w:t></w:r></w:p>');
+  }
+
+  static const String _mergedSubheadingPrefix = '[[SUBHEADING]] ';
+
+  /// Body text of a screen. The sub-heading marker is the report builder's own
+  /// and never reaches the page; a sub-heading with no text under it is dropped.
+  void _writePhrases(StringBuffer buf, List<String> phrases) {
+    for (var i = 0; i < phrases.length; i++) {
+      final phrase = phrases[i];
+      if (!phrase.startsWith(_mergedSubheadingPrefix)) {
+        _writeParagraph(buf, phrase);
+        continue;
+      }
+      final hasText = i + 1 < phrases.length &&
+          !phrases[i + 1].startsWith(_mergedSubheadingPrefix);
+      final title = phrase.substring(_mergedSubheadingPrefix.length).trim();
+      if (hasText && title.isNotEmpty) _writeHeading(buf, title, 'Heading3');
+    }
   }
 
   void _writeParagraph(StringBuffer buf, String text) {
