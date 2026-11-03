@@ -98,6 +98,7 @@ class PdfGeneratorService {
     String? sectionKey,
     String? screenTitle,
     bool dedupe = true,
+    bool subLabels = false,
   }) {
     final widgets = <pw.Widget>[];
 
@@ -163,7 +164,11 @@ class PdfGeneratorService {
                   ),
                 )
               : pw.RichText(
-                  text: _boldSectionLetterSpans(sanitize(phrase), bodyStyle),
+                  text: _boldSectionLetterSpans(
+                    sanitize(phrase),
+                    bodyStyle,
+                    subLabels: subLabels,
+                  ),
                 ),
         ),
       );
@@ -180,9 +185,17 @@ class PdfGeneratorService {
   static final RegExp _sectionLetterRefPattern =
       RegExp(r'\bI[1-5]\b|Control of Asbestos Regulations 2012');
 
-  pw.TextSpan _boldSectionLetterSpans(String text, pw.TextStyle baseStyle) {
-    final matches = _sectionLetterRefPattern.allMatches(text).toList();
-    if (matches.isEmpty) {
+  pw.TextSpan _boldSectionLetterSpans(
+    String text,
+    pw.TextStyle baseStyle, {
+    bool subLabels = false,
+  }) {
+    final ranges = <({int start, int end})>[
+      if (subLabels) ...PdfSharedUtils.subLabelRanges(text),
+      for (final match in _sectionLetterRefPattern.allMatches(text))
+        (start: match.start, end: match.end),
+    ]..sort((a, b) => a.start.compareTo(b.start));
+    if (ranges.isEmpty) {
       return pw.TextSpan(text: text, style: baseStyle);
     }
     final boldStyle = baseStyle.copyWith(
@@ -191,15 +204,19 @@ class PdfGeneratorService {
     );
     final children = <pw.TextSpan>[];
     var cursor = 0;
-    for (final match in matches) {
-      if (match.start > cursor) {
+    for (final range in ranges) {
+      if (range.end <= cursor) continue;
+      if (range.start > cursor) {
         children.add(pw.TextSpan(
-          text: text.substring(cursor, match.start),
+          text: text.substring(cursor, range.start),
           style: baseStyle,
         ));
+        cursor = range.start;
       }
-      children.add(pw.TextSpan(text: match.group(0), style: boldStyle));
-      cursor = match.end;
+      children.add(
+        pw.TextSpan(text: text.substring(cursor, range.end), style: boldStyle),
+      );
+      cursor = range.end;
     }
     if (cursor < text.length) {
       children.add(pw.TextSpan(text: text.substring(cursor), style: baseStyle));
@@ -1031,6 +1048,11 @@ class PdfGeneratorService {
           ));
           widgets.add(pw.SizedBox(height: 8));
 
+          final subLabels = PdfSharedUtils.printsSubLabels(
+            doc.reportType == ReportType.inspection,
+            section.key,
+          );
+
           // AI section payload (AST preferred, legacy narrative fallback)
           final astSection = doc.aiAstPayload?.sectionFor(section.key);
           if (astSection != null && astSection.hasAnyContent) {
@@ -1080,6 +1102,13 @@ class PdfGeneratorService {
             if (screen.isMergedGroup && !isAboutPropertyTopMerged) {
               // ── Merged group (e.g. "E1 Chimney") — accent sub-header
               //    with flowing paragraphs ─────────────────────────────
+              // The heading, the rating and the first lines of text share a page.
+              if (subLabels &&
+                  screen.phrases.isNotEmpty &&
+                  PdfSharedUtils.conditionRatingLine
+                      .hasMatch(screen.phrases.first.trim())) {
+                widgets.add(pw.NewPage(freeSpace: 110));
+              }
               widgets.add(doc.reportType == ReportType.inspection
                   ? pw.Padding(
                       padding:
@@ -1112,6 +1141,7 @@ class PdfGeneratorService {
                   screenTitle: screen.title,
                   // A repeated paragraph here belongs to another wall or window.
                   dedupe: !clientParagraphGroups.contains(screen.screenId),
+                  subLabels: subLabels,
                 ));
               }
             } else {
@@ -1135,6 +1165,7 @@ class PdfGeneratorService {
                   screen.phrases,
                   sectionKey: section.key,
                   screenTitle: screen.title,
+                  subLabels: subLabels,
                 ));
               } else if (screen.fields.isNotEmpty) {
                 final fallback = _narrativeFromFields(
@@ -1144,6 +1175,7 @@ class PdfGeneratorService {
                     fallback,
                     sectionKey: section.key,
                     screenTitle: screen.title,
+                    subLabels: subLabels,
                   ));
                 } else {
                   widgets.add(_fieldsTable(screen.fields));

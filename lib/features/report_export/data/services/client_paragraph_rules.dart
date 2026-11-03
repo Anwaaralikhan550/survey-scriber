@@ -6,6 +6,8 @@
 /// phrase bank is not changed; this runs on the finished text of the element.
 library;
 
+import 'pdf_shared_utils.dart';
+
 const _chimneyGroup = 'group_e1_chimney_5';
 
 const clientParagraphGroups = <String>{
@@ -28,6 +30,29 @@ List<String> applyClientParagraphRules(String groupId, List<String> phrases) {
       for (final item in p.split(_labelStart)) ..._splitRating(item),
   ];
   return groupId == _chimneyGroup ? _chimneyParagraphs(items) : items;
+}
+
+/// An element's condition rating sits directly under its heading (client, 3 Nov
+/// 2026). The rating's fixed explanation, when it has one, stays right below it.
+List<String> conditionRatingFirst(
+  List<String> phrases,
+  Set<String> explanations,
+) {
+  final top = <String>[];
+  final rest = <String>[];
+  for (var i = 0; i < phrases.length; i++) {
+    if (!PdfSharedUtils.conditionRatingLine.hasMatch(phrases[i].trim())) {
+      rest.add(phrases[i]);
+      continue;
+    }
+    top.add(phrases[i]);
+    // A note with no paragraph of its own can follow the explanation in one line.
+    if (i + 1 < phrases.length &&
+        explanations.any(phrases[i + 1].trimLeft().startsWith)) {
+      top.add(phrases[++i]);
+    }
+  }
+  return top.isEmpty ? phrases : [...top, ...rest];
 }
 
 // Cellar/Basement: his heading, then his paragraphs in his order.

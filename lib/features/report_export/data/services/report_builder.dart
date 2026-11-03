@@ -24,6 +24,17 @@ class ReportBuilder {
   final InspectionPhraseEngine? inspectionPhraseEngine;
   final ValuationPhraseEngine? valuationPhraseEngine;
 
+  /// The fixed sentence that follows a numeric condition rating.
+  late final Set<String> _ratingExplanations = {
+    for (final entry
+        in (inspectionPhraseEngine?.phraseTexts ?? const <String, String>{})
+            .entries)
+      if (entry.key.endsWith('::{CONDITION_RATING_1}') ||
+          entry.key.endsWith('::{CONDITION_RATING_2}') ||
+          entry.key.endsWith('::{CONDITION_RATING_3}'))
+        entry.value.trim(),
+  };
+
   /// Groups adjacent phrases into paragraphs according to the approved
   /// master-template structure (client fix: sentences belonging to the same
   /// element must render as one paragraph, not one sentence per line).
@@ -2009,10 +2020,13 @@ class ReportBuilder {
             }
           }
 
-          final cleanedMergedPhrases = applyClientParagraphRules(
+          final clientParagraphs = applyClientParagraphRules(
             group.id,
             _composeParagraphs(_cleanupPhrases(mergedPhrases)),
           );
+          final cleanedMergedPhrases = isInspection
+              ? conditionRatingFirst(clientParagraphs, _ratingExplanations)
+              : clientParagraphs;
 
           // Skip truly empty groups (no phrases, no fields, no notes)
           // Legacy structural parity: keep About Property's

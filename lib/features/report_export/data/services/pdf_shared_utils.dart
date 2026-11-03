@@ -245,6 +245,72 @@ class PdfSharedUtils {
     caseSensitive: false,
   );
 
+  /// Whether a section's "Description:", "Glazing:" labels print bold. About
+  /// Inspection and About Property already read through their item headings
+  /// (client, 3 Nov 2026).
+  static bool printsSubLabels(bool isInspection, String sectionKey) {
+    final key = sectionKey.trim().toUpperCase();
+    return isInspection && key != 'A' && key != 'D';
+  }
+
+  static final _labelWithoutColon =
+      RegExp(r'^Defective (?:Joinery|Operation)(?= One or more )');
+  static final _leadingLabel = RegExp(r'^[A-Z][^:.!?]{0,60}:(?=\s)');
+  static final _chainedLabel = RegExp(r'^\s+([A-Z][^:.!?]{0,60}:)(?=\s)');
+  static final _inlineLabel =
+      RegExp(r'(?<=[.!?)])\s+([A-Z][^:.!?]{0,60}:)(?=\s)');
+  static final _sentenceWord = RegExp(
+    r'\b(?:you|should|was|were|are|has|have|had|will|must|can|may|following)\b',
+    caseSensitive: false,
+  );
+  // The Main Walls note can run straight into this label when it has no full stop.
+  static final _noteThenMaintenance =
+      RegExp(r'\sGeneral Maintenance:$', caseSensitive: false);
+
+  static bool _isLabel(String label) {
+    if (label.split(RegExp(r'\s+')).length > 8) return false;
+    if (_sentenceWord.hasMatch(label)) return false;
+    return !RegExp(r'\bis\b', caseSensitive: false).hasMatch(label) ||
+        label.startsWith('If ');
+  }
+
+  /// Where a paragraph's sub-headings ("Description:", "No defects noted:") are,
+  /// in reading order. Sentences that merely contain a colon are not sub-headings.
+  static List<({int start, int end})> subLabelRanges(String text) {
+    final ranges = <({int start, int end})>[];
+    if (conditionRatingLine.hasMatch(text.trim())) return ranges;
+
+    final plain = _labelWithoutColon.firstMatch(text);
+    if (plain != null) {
+      ranges.add((start: plain.start, end: plain.end));
+    } else {
+      final leading = _leadingLabel.firstMatch(text);
+      if (leading != null && _isLabel(leading.group(0)!)) {
+        final maintenance = _noteThenMaintenance.firstMatch(leading.group(0)!);
+        ranges.add((
+          start: maintenance == null ? 0 : maintenance.start + 1,
+          end: leading.end,
+        ));
+        final chained = _chainedLabel.firstMatch(text.substring(leading.end));
+        if (chained != null && _isLabel(chained.group(1)!)) {
+          ranges.add((
+            start: leading.end + chained.end - chained.group(1)!.length,
+            end: leading.end + chained.end,
+          ));
+        }
+      }
+    }
+    for (final match in _inlineLabel.allMatches(text)) {
+      if (_isLabel(match.group(1)!)) {
+        ranges.add((
+          start: match.end - match.group(1)!.length,
+          end: match.end,
+        ));
+      }
+    }
+    return ranges;
+  }
+
   /// Maximum photos to include in a single PDF.  Beyond this, memory
   /// pressure makes the export unreliable on mid-range devices.
   static const int maxPhotosInPdf = 200;

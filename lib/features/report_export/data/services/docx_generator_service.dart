@@ -317,6 +317,11 @@ class DocxGeneratorService {
         accommodationWritten = true;
       }
 
+      final subLabels = PdfSharedUtils.printsSubLabels(
+        doc.reportType == ReportType.inspection,
+        section.key,
+      );
+
       // AI section narrative (if present)
       final aiNarrative = doc.aiSectionNarratives[section.key];
       if (aiNarrative != null && aiNarrative.isNotEmpty) {
@@ -342,7 +347,7 @@ class DocxGeneratorService {
           _writeHeading(buf, screen.title, 'Heading2');
 
           if (screen.phrases.isNotEmpty && _config.includePhrases) {
-            _writePhrases(buf, screen.phrases);
+            _writePhrases(buf, screen.phrases, subLabels: subLabels);
           }
         } else {
           // ── Individual screen ──
@@ -351,7 +356,7 @@ class DocxGeneratorService {
           // Suppress field table when phrases exist — the phrases already
           // express the data in professional surveyor language.
           if (screen.phrases.isNotEmpty && _config.includePhrases) {
-            _writePhrases(buf, screen.phrases);
+            _writePhrases(buf, screen.phrases, subLabels: subLabels);
           } else if (screen.fields.isNotEmpty) {
             _writeFieldsTable(buf, screen.fields);
           }
@@ -660,11 +665,15 @@ class DocxGeneratorService {
 
   /// Body text of a screen. The sub-heading marker is the report builder's own
   /// and never reaches the page; a sub-heading with no text under it is dropped.
-  void _writePhrases(StringBuffer buf, List<String> phrases) {
+  void _writePhrases(
+    StringBuffer buf,
+    List<String> phrases, {
+    bool subLabels = false,
+  }) {
     for (var i = 0; i < phrases.length; i++) {
       final phrase = phrases[i];
       if (!phrase.startsWith(_mergedSubheadingPrefix)) {
-        _writeParagraph(buf, phrase);
+        _writeParagraph(buf, phrase, subLabels: subLabels);
         continue;
       }
       final hasText = i + 1 < phrases.length &&
@@ -674,14 +683,45 @@ class DocxGeneratorService {
     }
   }
 
-  void _writeParagraph(StringBuffer buf, String text) {
+  void _writeParagraph(StringBuffer buf, String text, {bool subLabels = false}) {
     if (PdfSharedUtils.conditionRatingLine.hasMatch(text.trim())) {
-      buf.write('<w:p><w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">');
-      buf.write(_escapeXml(text));
-      buf.write('</w:t></w:r></w:p>');
+      // Stays on one page with the text below it.
+      buf.write('<w:p><w:pPr><w:keepNext/></w:pPr>');
+      _writeBoldRun(buf, text);
+      buf.write('</w:p>');
       return;
     }
     buf.write('<w:p>');
+    var cursor = 0;
+    if (subLabels) {
+      for (final label in PdfSharedUtils.subLabelRanges(text)) {
+        _writeTextBetweenLabels(buf, text.substring(cursor, label.start));
+        _writeBoldRun(buf, text.substring(label.start, label.end));
+        cursor = label.end;
+      }
+      _writeTextBetweenLabels(buf, text.substring(cursor));
+    } else {
+      _writeBodyRuns(buf, text);
+    }
+    buf.write('</w:p>');
+  }
+
+  /// [_escapeXml] trims its text, so the space beside a label is written itself.
+  void _writeTextBetweenLabels(StringBuffer buf, String text) {
+    const space = '<w:r><w:t xml:space="preserve"> </w:t></w:r>';
+    final core = text.trim();
+    if (text.isNotEmpty && text.trimLeft() != text) buf.write(space);
+    _writeBodyRuns(buf, core);
+    if (core.isNotEmpty && text.trimRight() != text) buf.write(space);
+  }
+
+  void _writeBoldRun(StringBuffer buf, String text) {
+    buf.write('<w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">');
+    buf.write(_escapeXml(text));
+    buf.write('</w:t></w:r>');
+  }
+
+  void _writeBodyRuns(StringBuffer buf, String text) {
     // The legal reference is bold in the client PDF.
     final parts = text.split(_boldLegalReference);
     for (var i = 0; i < parts.length; i++) {
@@ -690,13 +730,8 @@ class DocxGeneratorService {
         buf.write(_escapeXml(parts[i]));
         buf.write('</w:t></w:r>');
       }
-      if (i < parts.length - 1) {
-        buf.write('<w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">');
-        buf.write(_escapeXml(_boldLegalReference));
-        buf.write('</w:t></w:r>');
-      }
+      if (i < parts.length - 1) _writeBoldRun(buf, _boldLegalReference);
     }
-    buf.write('</w:p>');
   }
 
   void _writeStyledParagraph(
