@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, Logger, NotFoundException, ServiceUnav
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
 import { ActorType, AuditEntityType } from '@prisma/client';
+import { AppSettingsService } from '../app-settings/app-settings.service';
 import { AuditActions, AuditService } from '../audit/audit.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { EMAIL_TEMPLATE_DEFAULTS, EmailTemplateDefault } from './email-template.defaults';
@@ -21,14 +22,18 @@ export class EmailTemplatesService {
     private readonly prisma: PrismaService,
     private readonly configService: ConfigService,
     private readonly audit: AuditService,
+    private readonly settings: AppSettingsService,
   ) {}
 
-  private get appName(): string {
-    return this.configService.get<string>('APP_NAME') || 'SurveyScriber';
+  private async commonValues(): Promise<Record<string, string>> {
+    const { appName } = await this.settings.values();
+    return { appName, year: String(new Date().getFullYear()) };
   }
 
-  private commonValues(): Record<string, string> {
-    return { appName: this.appName, year: String(new Date().getFullYear()) };
+  /** Who an email comes from, and where replies go. The address itself stays the server's. */
+  async sender(address: string): Promise<{ from: { name: string; address: string }; replyTo?: string }> {
+    const { senderName, supportEmail } = await this.settings.values();
+    return { from: { name: senderName, address }, ...(supportEmail ? { replyTo: supportEmail } : {}) };
   }
 
   /**
@@ -52,7 +57,7 @@ export class EmailTemplatesService {
     } catch (error) {
       this.logger.warn(`Could not read the edited email "${key}", sending the original: ${error}`);
     }
-    return fillTemplate(template, { ...this.commonValues(), ...values }, rawHtml);
+    return fillTemplate(template, { ...(await this.commonValues()), ...values }, rawHtml);
   }
 
   async list() {
@@ -102,15 +107,15 @@ export class EmailTemplatesService {
     return this.get(key);
   }
 
-  preview(key: string, edit: EmailContent): EmailContent {
+  async preview(key: string, edit: EmailContent): Promise<EmailContent> {
     const original = this.originalOf(key);
     this.assertSound(edit, original);
-    return fillTemplate(edit, { ...this.commonValues(), ...SAMPLE_VALUES }, SAMPLE_RAW_HTML);
+    return fillTemplate(edit, { ...(await this.commonValues()), ...SAMPLE_VALUES }, SAMPLE_RAW_HTML);
   }
 
   /** Goes only to the person asking, so this can never be used to send mail to anyone else. */
   async sendTest(key: string, edit: EmailContent, actor: Actor): Promise<{ sentTo: string }> {
-    const content = this.preview(key, edit);
+    const content = await this.preview(key, edit);
     const transporter = this.createTransporter();
     if (!transporter) {
       throw new ServiceUnavailableException('This server has no email account set up, so nothing could be sent.');
@@ -118,7 +123,7 @@ export class EmailTemplatesService {
     const from = this.configService.get<string>('SMTP_FROM') || 'noreply@surveyscriber.com';
     try {
       await transporter.sendMail({
-        from: `"${this.appName}" <${from}>`,
+        ...(await this.sender(from)),
         to: actor.email,
         subject: `[Test] ${content.subject}`,
         html: content.html,

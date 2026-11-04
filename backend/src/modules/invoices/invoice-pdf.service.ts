@@ -1,39 +1,19 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import PDFDocument from 'pdfkit';
+import { AppSettingsService, AppSettingValues } from '../app-settings/app-settings.service';
 import { InvoiceDetailDto } from './dto/invoice.dto';
 
 @Injectable()
 export class InvoicePdfService {
   private readonly logger = new Logger(InvoicePdfService.name);
 
-  // Company details from environment
-  private readonly companyName: string;
-  private readonly companyAddress1: string;
-  private readonly companyAddress2: string;
-  private readonly companyVat: string;
-  private readonly companyEmail: string;
-  private readonly companyPhone: string;
-  private readonly bankAccountName: string;
-  private readonly bankSortCode: string;
-  private readonly bankAccountNumber: string;
-
-  constructor(private readonly configService: ConfigService) {
-    this.companyName = this.configService.get('COMPANY_NAME', 'SurveyScriber Ltd');
-    this.companyAddress1 = this.configService.get('COMPANY_ADDRESS_LINE1', '123 Business Park');
-    this.companyAddress2 = this.configService.get('COMPANY_ADDRESS_LINE2', 'London, SW1A 1AA');
-    this.companyVat = this.configService.get('COMPANY_VAT_NUMBER', '');
-    this.companyEmail = this.configService.get('COMPANY_EMAIL', 'billing@surveyscriber.com');
-    this.companyPhone = this.configService.get('COMPANY_PHONE', '');
-    this.bankAccountName = this.configService.get('BANK_ACCOUNT_NAME', 'SurveyScriber Ltd');
-    this.bankSortCode = this.configService.get('BANK_SORT_CODE', '');
-    this.bankAccountNumber = this.configService.get('BANK_ACCOUNT_NUMBER', '');
-  }
+  constructor(private readonly settings: AppSettingsService) {}
 
   /**
    * Generate PDF invoice as a Buffer
    */
   async generateInvoicePdf(invoice: InvoiceDetailDto): Promise<Buffer> {
+    const company = await this.settings.values();
     return new Promise((resolve, reject) => {
       try {
         const doc = new PDFDocument({
@@ -41,7 +21,7 @@ export class InvoicePdfService {
           margin: 50,
           info: {
             Title: `Invoice ${invoice.invoiceNumber}`,
-            Author: this.companyName,
+            Author: company.companyName,
             Subject: `Invoice for ${invoice.client.company || invoice.client.email}`,
           },
         });
@@ -53,13 +33,13 @@ export class InvoicePdfService {
         doc.on('error', reject);
 
         // Generate PDF content
-        this.renderHeader(doc, invoice);
-        this.renderAddresses(doc, invoice);
+        this.renderHeader(doc, invoice, company);
+        this.renderAddresses(doc, invoice, company);
         this.renderBookingInfo(doc, invoice);
         this.renderLineItems(doc, invoice);
         this.renderTotals(doc, invoice);
-        this.renderPaymentInfo(doc, invoice);
-        this.renderFooter(doc);
+        this.renderPaymentInfo(doc, invoice, company);
+        this.renderFooter(doc, company);
 
         doc.end();
       } catch (error) {
@@ -68,13 +48,13 @@ export class InvoicePdfService {
     });
   }
 
-  private renderHeader(doc: PDFKit.PDFDocument, invoice: InvoiceDetailDto): void {
+  private renderHeader(doc: PDFKit.PDFDocument, invoice: InvoiceDetailDto, company: AppSettingValues): void {
     // Company name / logo area
     doc
       .fontSize(24)
       .font('Helvetica-Bold')
       .fillColor('#1a1a1a')
-      .text(this.companyName, 50, 50);
+      .text(company.companyName, 50, 50);
 
     // Invoice title
     doc
@@ -153,7 +133,7 @@ export class InvoicePdfService {
       .stroke();
   }
 
-  private renderAddresses(doc: PDFKit.PDFDocument, invoice: InvoiceDetailDto): void {
+  private renderAddresses(doc: PDFKit.PDFDocument, invoice: InvoiceDetailDto, company: AppSettingValues): void {
     const top = 220;
 
     // Bill To
@@ -203,21 +183,21 @@ export class InvoicePdfService {
       .fontSize(11)
       .fillColor('#1a1a1a')
       .font('Helvetica-Bold')
-      .text(this.companyName, 350, top + 15);
+      .text(company.companyName, 350, top + 15);
 
     doc.font('Helvetica').fontSize(10);
 
     yOffset = top + 30;
-    if (this.companyAddress1) {
-      doc.text(this.companyAddress1, 350, yOffset);
+    if (company.companyAddress1) {
+      doc.text(company.companyAddress1, 350, yOffset);
       yOffset += 15;
     }
-    if (this.companyAddress2) {
-      doc.text(this.companyAddress2, 350, yOffset);
+    if (company.companyAddress2) {
+      doc.text(company.companyAddress2, 350, yOffset);
       yOffset += 15;
     }
-    if (this.companyVat) {
-      doc.text(`VAT: ${this.companyVat}`, 350, yOffset);
+    if (company.companyVat) {
+      doc.text(`VAT: ${company.companyVat}`, 350, yOffset);
     }
   }
 
@@ -361,7 +341,7 @@ export class InvoicePdfService {
     (doc as any).totalsEndY = y + 40;
   }
 
-  private renderPaymentInfo(doc: PDFKit.PDFDocument, invoice: InvoiceDetailDto): void {
+  private renderPaymentInfo(doc: PDFKit.PDFDocument, invoice: InvoiceDetailDto, company: AppSettingValues): void {
     let y = (doc as any).totalsEndY || 600;
     y += 30;
 
@@ -404,7 +384,7 @@ export class InvoicePdfService {
     }
 
     // Bank details
-    if (this.bankAccountNumber && invoice.status !== 'PAID') {
+    if (company.bankAccountNumber && invoice.status !== 'PAID') {
       doc
         .rect(50, y, 250, 90)
         .fillColor('#F5F5F5')
@@ -419,13 +399,13 @@ export class InvoicePdfService {
       doc.font('Helvetica').fontSize(9).fillColor('#1a1a1a');
 
       let bankY = y + 28;
-      doc.text(`Account Name: ${this.bankAccountName}`, 60, bankY);
+      doc.text(`Account Name: ${company.bankAccountName}`, 60, bankY);
       bankY += 15;
-      if (this.bankSortCode) {
-        doc.text(`Sort Code: ${this.bankSortCode}`, 60, bankY);
+      if (company.bankSortCode) {
+        doc.text(`Sort Code: ${company.bankSortCode}`, 60, bankY);
         bankY += 15;
       }
-      doc.text(`Account Number: ${this.bankAccountNumber}`, 60, bankY);
+      doc.text(`Account Number: ${company.bankAccountNumber}`, 60, bankY);
       bankY += 15;
       doc.text(`Reference: ${invoice.invoiceNumber}`, 60, bankY);
     }
@@ -446,7 +426,7 @@ export class InvoicePdfService {
     }
   }
 
-  private renderFooter(doc: PDFKit.PDFDocument): void {
+  private renderFooter(doc: PDFKit.PDFDocument, company: AppSettingValues): void {
     const pageHeight = doc.page.height;
 
     doc
@@ -454,7 +434,7 @@ export class InvoicePdfService {
       .fillColor('#999999')
       .font('Helvetica')
       .text(
-        `Thank you for your business | ${this.companyEmail}${this.companyPhone ? ' | ' + this.companyPhone : ''}`,
+        `Thank you for your business | ${company.companyEmail}${company.companyPhone ? ' | ' + company.companyPhone : ''}`,
         50,
         pageHeight - 50,
         { align: 'center', width: 495 },

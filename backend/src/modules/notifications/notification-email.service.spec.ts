@@ -47,7 +47,7 @@ describe('NotificationEmailService', () => {
         NotificationEmailService,
         { provide: PrismaService, useValue: mockPrisma },
         { provide: ConfigService, useValue: mockConfig },
-        { provide: EmailTemplatesService, useValue: { render: async () => ({ subject: 'Survey Report - x', html: '<p>x</p>', text: 'x' }) } },
+        { provide: EmailTemplatesService, useValue: { render: async () => ({ subject: 'Survey Report - x', html: '<p>x</p>', text: 'x' }), sender: async () => ({ from: 'x@example.com' }) } },
       ],
     }).compile();
 

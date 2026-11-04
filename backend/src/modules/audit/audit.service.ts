@@ -239,6 +239,9 @@ export const AuditActions = {
   EMAIL_TEMPLATE_RESET: 'email_template.reset',
   EMAIL_TEMPLATE_TEST_SENT: 'email_template.test_sent',
 
+  // Settings
+  APP_SETTINGS_UPDATED: 'app_settings.updated',
+
   // Webhooks
   WEBHOOK_CREATED: 'webhook.created',
   WEBHOOK_UPDATED: 'webhook.updated',

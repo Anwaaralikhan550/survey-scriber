@@ -8,7 +8,6 @@ export class EmailService {
   private readonly logger = new Logger(EmailService.name);
   private readonly transporter: nodemailer.Transporter;
   private readonly fromAddress: string;
-  private readonly appName: string;
   private readonly frontendUrl: string;
 
   constructor(
@@ -23,7 +22,6 @@ export class EmailService {
     const pass = this.configService.get<string>('SMTP_PASS');
 
     this.fromAddress = this.configService.get<string>('SMTP_FROM') || 'noreply@surveyscriber.com';
-    this.appName = this.configService.get<string>('APP_NAME') || 'SurveyScriber';
     this.frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3000';
 
     // Create transporter only if SMTP is configured
@@ -87,7 +85,7 @@ export class EmailService {
     text: string,
   ): Promise<void> {
     const mailOptions = {
-      from: `"${this.appName}" <${this.fromAddress}>`,
+      ...(await this.templates.sender(this.fromAddress)),
       to,
       subject,
       html,

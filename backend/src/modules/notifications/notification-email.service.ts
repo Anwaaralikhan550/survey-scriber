@@ -20,7 +20,6 @@ export class NotificationEmailService {
   private readonly logger = new Logger(NotificationEmailService.name);
   private readonly transporter: nodemailer.Transporter | null;
   private readonly fromAddress: string;
-  private readonly appName: string;
   private readonly clientPortalUrl: string;
   private readonly staffAppUrl: string;
   private readonly emailEnabled: boolean;
@@ -43,7 +42,6 @@ export class NotificationEmailService {
 
     this.fromAddress =
       this.configService.get<string>('SMTP_FROM') || 'noreply@surveyscriber.com';
-    this.appName = this.configService.get<string>('APP_NAME') || 'SurveyScriber';
     this.clientPortalUrl =
       this.configService.get<string>('CLIENT_PORTAL_URL') || 'http://localhost:3000/client';
     this.staffAppUrl =
@@ -235,7 +233,7 @@ export class NotificationEmailService {
 
     try {
       const info = await this.transporter.sendMail({
-        from: `"${this.appName}" <${this.fromAddress}>`,
+        ...(await this.templates.sender(this.fromAddress)),
         to: recipient.email,
         subject: fullSubject,
         html,
@@ -379,7 +377,7 @@ export class NotificationEmailService {
       try {
         // Non-null assertion: sendWithRetry is only called when transporter exists
         const info = await this.transporter!.sendMail({
-          from: `"${this.appName}" <${this.fromAddress}>`,
+          ...(await this.templates.sender(this.fromAddress)),
           to,
           subject,
           html,
@@ -505,7 +503,7 @@ export class NotificationEmailService {
 
     try {
       const info = await this.transporter.sendMail({
-        from: `"${this.appName}" <${this.fromAddress}>`,
+        ...(await this.templates.sender(this.fromAddress)),
         to: recipientEmail,
         subject,
         html,

@@ -10,7 +10,6 @@ export class MagicLinkService {
   private readonly logger = new Logger(MagicLinkService.name);
   private readonly transporter: nodemailer.Transporter | null;
   private readonly fromAddress: string;
-  private readonly appName: string;
   private readonly frontendUrl: string;
   private readonly clientPortalUrl: string;
   private readonly magicLinkExpiryMinutes: number;
@@ -31,7 +30,6 @@ export class MagicLinkService {
     const pass = this.configService.get<string>('SMTP_PASS');
 
     this.fromAddress = this.configService.get<string>('SMTP_FROM') || 'noreply@surveyscriber.com';
-    this.appName = this.configService.get<string>('APP_NAME') || 'SurveyScriber';
     this.frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3000';
     this.clientPortalUrl = this.configService.get<string>('CLIENT_PORTAL_URL') || this.frontendUrl;
 
@@ -167,7 +165,7 @@ export class MagicLinkService {
     text: string,
   ): Promise<void> {
     const mailOptions = {
-      from: `"${this.appName}" <${this.fromAddress}>`,
+      ...(await this.templates.sender(this.fromAddress)),
       to,
       subject,
       html,

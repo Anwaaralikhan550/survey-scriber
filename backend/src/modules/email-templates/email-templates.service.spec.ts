@@ -52,7 +52,10 @@ function setup(stored: Record<string, EmailContent> = {}) {
     notificationEmailLog: { create: jest.fn(async () => ({})) },
   };
   const audit = { log: jest.fn(async () => undefined) };
-  const templates = new EmailTemplatesService(prisma as never, config, audit as never);
+  const settings = {
+    values: jest.fn(async () => ({ appName: 'SurveyScriber', senderName: 'SurveyScriber', supportEmail: '' })),
+  };
+  const templates = new EmailTemplatesService(prisma as never, config, audit as never, settings as never);
   const sent: any[] = [];
   const transporter = { sendMail: jest.fn(async (mail: any) => { sent.push(mail); return { messageId: 'x' }; }) };
   const notifications = new NotificationEmailService(config, prisma as never, templates) as any;
@@ -61,7 +64,7 @@ function setup(stored: Record<string, EmailContent> = {}) {
   auth.transporter = transporter;
   const magic = new MagicLinkService(prisma as never, config, templates) as any;
   magic.transporter = transporter;
-  return { prisma, audit, templates, sent, notifications, auth, magic };
+  return { prisma, audit, settings, templates, sent, notifications, auth, magic };
 }
 
 const same = (mail: any, want: any) => {
@@ -192,6 +195,28 @@ describe('edited emails', () => {
   });
 });
 
+describe('settings in emails', () => {
+  it('a changed app name, sender and support email reach the very next email', async () => {
+    const { auth, notifications, settings, sent } = setup();
+    await auth.sendPasswordResetEmail('a@example.com', 'Grace', 'abc');
+    expect(sent[0].from).toEqual({ name: 'SurveyScriber', address: 'noreply@surveyscriber.com' });
+    expect(sent[0].replyTo).toBeUndefined();
+
+    settings.values.mockResolvedValue({ appName: 'Acme Surveys', senderName: 'Acme Office', supportEmail: 'help@acme.example' });
+    await auth.sendPasswordResetEmail('a@example.com', 'Grace', 'abc');
+    await notifications.sendBookingConfirmedEmail(booking);
+    await notifications.sendInvoicePaidEmail(invoice);
+    await notifications.sendSurveyReportEmail('c@example.com', 'Oak Road', Buffer.from('pdf'), 'Sam Lee');
+    for (const mail of sent.slice(1)) {
+      expect(mail.from).toEqual({ name: 'Acme Office', address: 'noreply@surveyscriber.com' });
+      expect(mail.replyTo).toBe('help@acme.example');
+    }
+    expect(sent[1].subject).toBe('Reset your Acme Surveys password');
+    expect(sent[2].subject).toContain(' - Acme Surveys');
+    expect(sent[2].html).toContain('Acme Surveys');
+  });
+});
+
 describe('saving', () => {
   const t = EMAIL_TEMPLATE_DEFAULTS.find((d) => d.key === 'booking_confirmed')!;
   const good = { subject: t.subject, html: t.html, text: t.text };
@@ -244,10 +269,10 @@ describe('saving', () => {
     expect(list.filter((e) => e.edited).map((e) => e.key)).toEqual(['booking_confirmed']);
   });
 
-  it('a preview uses made-up values, never a real link', () => {
+  it('a preview uses made-up values, never a real link', async () => {
     const { templates } = setup();
     for (const d of EMAIL_TEMPLATE_DEFAULTS) {
-      const out = templates.preview(d.key, { subject: d.subject, html: d.html, text: d.text });
+      const out = await templates.preview(d.key, { subject: d.subject, html: d.html, text: d.text });
       expect(out.html + out.subject + out.text).not.toMatch(/\{\{\w+\}\}/);
     }
   });

@@ -1088,3 +1088,13 @@ model EmailTemplate {
 
   @@map("email_templates")
 }
+
+/// Settings changed by an admin. No row means the server's own value is used.
+model AppSetting {
+  key       String   @id @db.VarChar(64)
+  value     String   @db.VarChar(200)
+  updatedBy String?  @map("updated_by") @db.VarChar(255)
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("app_settings")
+}
