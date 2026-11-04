@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../../../core/database/app_database.dart';
 import '../../../../core/database/database_providers.dart';
 import '../../../../core/network/api_client.dart';
+import '../../../../core/survey_tree/tree_sync.dart';
 import '../../../../core/phrases/phrase_bank_sync.dart';
 import '../../../../core/sync/legacy_main_walls_sync_mapping.dart';
 import '../../../../core/sync/sync_manager.dart';
@@ -23,8 +24,20 @@ import '../../domain/inspection_phrase_engine.dart';
 
 final inspectionRepositoryProvider = Provider<InspectionRepository>((ref) {
   final db = ref.watch(appDatabaseProvider);
-  final apiClient = ref.watch(apiClientProvider);
-  return InspectionRepository(db, apiClient: apiClient);
+  return InspectionRepository(db, treeSync: ref.watch(treeSyncProvider));
+});
+
+/// Asks the server for a newer survey tree, on app start and resume. When one
+/// arrives, the screens reload from it.
+final inspectionTreeRefreshProvider = FutureProvider<void>((ref) async {
+  final changed = await ref
+      .watch(treeSyncProvider)
+      .refresh('inspection_v2', InspectionRepository.bundledVersion);
+  if (changed) {
+    ref.read(inspectionRepositoryProvider).invalidateCache();
+    ref.invalidate(inspectionSectionsProvider);
+    ref.invalidate(inspectionNodeMapProvider);
+  }
 });
 
 /// Increment to force [inspectionNodesProvider] and

@@ -38,6 +38,9 @@ import {
   UploadV2TreeDto,
   V2TreeUploadResponseDto,
   V2TreeLatestResponseDto,
+  RollbackV2TreeDto,
+  V2TreePublishedResponseDto,
+  V2TreeVersionDto,
   UploadPhraseBankDto,
   PhraseBankUploadResponseDto,
   PhraseBankLatestResponseDto,
@@ -1313,39 +1316,76 @@ export class ConfigService {
     dto: UploadV2TreeDto,
     userId: string,
   ): Promise<V2TreeUploadResponseDto> {
-    // Validate tree structure
+    this.assertTreeType(dto.treeType);
     this.validateV2TreeStructure(dto.tree);
+    this.validateV2TreeReachability(dto.tree);
 
-    // Serialize and compute checksum
     const treeJson = JSON.stringify(dto.tree);
     const sizeBytes = Buffer.byteLength(treeJson, 'utf8');
     const checksum = crypto.createHash('sha256').update(treeJson).digest('hex');
 
-    // Determine next version number
-    const latestVersion = await this.prisma.v2TreeVersion.findFirst({
+    const latest = await this.prisma.v2TreeVersion.findFirst({
       where: { treeType: dto.treeType },
       orderBy: { version: 'desc' },
-      select: { version: true },
     });
-    const nextVersion = (latestVersion?.version ?? 0) + 1;
 
-    // Create version record
-    const record = await this.prisma.v2TreeVersion.create({
-      data: {
-        treeType: dto.treeType,
-        version: nextVersion,
-        treeData: dto.tree as any,
-        sizeBytes,
+    this.assertNotOverwriting(latest?.version ?? 0, dto.baseVersion);
+
+    if (latest?.checksum === checksum) {
+      return {
+        id: latest.id,
+        treeType: latest.treeType,
+        version: latest.version,
+        sizeBytes: latest.sizeBytes,
         checksum,
-        publishedBy: userId,
-      },
-    });
+        publishedAt: latest.publishedAt,
+        unchanged: true,
+      };
+    }
+
+    if (latest) {
+      const before = this.treeNodeCount(latest.treeData as Record<string, unknown>);
+      const after = this.treeNodeCount(dto.tree);
+      if (before > 0 && after < before * 0.5) {
+        throw new BadRequestException(
+          `Refusing to publish: the new tree has ${after} screens and groups, the current one has ${before}`,
+        );
+      }
+    }
+
+    return this.publishTreeVersion(dto.treeType, (latest?.version ?? 0) + 1, dto.tree, sizeBytes, checksum, userId);
+  }
+
+  private async publishTreeVersion(
+    treeType: string,
+    version: number,
+    tree: Record<string, unknown>,
+    sizeBytes: number,
+    checksum: string,
+    userId: string,
+  ): Promise<V2TreeUploadResponseDto> {
+    let record;
+    try {
+      record = await this.prisma.v2TreeVersion.create({
+        data: {
+          treeType,
+          version,
+          treeData: tree as any,
+          sizeBytes,
+          checksum,
+          publishedBy: userId,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+        throw new ConflictException('Someone else has just published. Please reload and try again.');
+      }
+      throw error;
+    }
 
     // Increment config version for cache invalidation across clients
     await this.incrementConfigVersion(userId);
-    this.invalidateConfigCache();
 
-    // Audit log
     await this.auditService.log({
       actorType: ActorType.STAFF,
       actorId: userId,
@@ -1353,15 +1393,15 @@ export class ConfigService {
       entityType: AuditEntityType.SURVEY,
       entityId: record.id,
       metadata: {
-        treeType: dto.treeType,
-        version: nextVersion,
+        treeType,
+        version,
         sizeBytes,
         checksum,
       },
     });
 
     this.logger.log(
-      `V2 tree published: type=${dto.treeType} version=${nextVersion} ` +
+      `V2 tree published: type=${treeType} version=${version} ` +
       `size=${sizeBytes}B checksum=${checksum.substring(0, 12)}...`,
     );
 
@@ -1372,7 +1412,167 @@ export class ConfigService {
       sizeBytes: record.sizeBytes,
       checksum: record.checksum ?? checksum,
       publishedAt: record.publishedAt,
+      unchanged: false,
     };
+  }
+
+  private assertTreeType(treeType: string): void {
+    if (!['inspection_v2', 'valuation_v2'].includes(treeType)) {
+      throw new BadRequestException('treeType must be "inspection_v2" or "valuation_v2"');
+    }
+  }
+
+  /** Two people must not overwrite each other: edits say which version they started from. */
+  private assertNotOverwriting(latestVersion: number, baseVersion?: number): void {
+    if (baseVersion !== undefined && baseVersion !== latestVersion) {
+      throw new ConflictException(
+        `Someone published version ${latestVersion} after you started (you started from version ${baseVersion}). ` +
+        'Reload to see their work, then make your change again.',
+      );
+    }
+  }
+
+  private treeNodeCount(tree: Record<string, unknown>): number {
+    const sections = tree['sections'];
+    if (!Array.isArray(sections)) return 0;
+    return sections.reduce(
+      (n, s) => n + (Array.isArray((s as Record<string, unknown>)?.['nodes']) ? ((s as Record<string, unknown>)['nodes'] as unknown[]).length : 0),
+      0,
+    );
+  }
+
+  /**
+   * Published survey tree for the phones. When the client sends the checksum it already has
+   * and it matches, the (large) tree is left out.
+   */
+  async getPublishedTree(treeType: string, knownChecksum?: string): Promise<V2TreePublishedResponseDto> {
+    this.assertTreeType(treeType);
+    const latest = await this.prisma.v2TreeVersion.findFirst({
+      where: { treeType },
+      orderBy: { version: 'desc' },
+    });
+    if (!latest) {
+      throw new NotFoundException(`No published tree found for type "${treeType}"`);
+    }
+    const checksum = latest.checksum ?? '';
+    const unchanged = !!knownChecksum && knownChecksum === checksum;
+    return {
+      treeType: latest.treeType,
+      version: latest.version,
+      checksum,
+      publishedAt: latest.publishedAt,
+      unchanged,
+      ...(unchanged ? {} : { tree: latest.treeData as Record<string, unknown> }),
+    };
+  }
+
+  async getPublishedTreeVersion(treeType: string): Promise<{ version: number }> {
+    this.assertTreeType(treeType);
+    const latest = await this.prisma.v2TreeVersion.findFirst({
+      where: { treeType },
+      orderBy: { version: 'desc' },
+      select: { version: true },
+    });
+    return { version: latest?.version ?? 0 };
+  }
+
+  async listTreeVersions(treeType: string): Promise<V2TreeVersionDto[]> {
+    this.assertTreeType(treeType);
+    const versions = await this.prisma.v2TreeVersion.findMany({
+      where: { treeType },
+      orderBy: { version: 'desc' },
+      take: 100,
+      select: {
+        version: true,
+        checksum: true,
+        sizeBytes: true,
+        publishedAt: true,
+        publisher: { select: { email: true } },
+      },
+    });
+    return versions.map((v) => ({
+      version: v.version,
+      checksum: v.checksum ?? '',
+      sizeBytes: v.sizeBytes,
+      publishedAt: v.publishedAt,
+      publishedBy: v.publisher?.email,
+    }));
+  }
+
+  /** Brings an earlier version back as a new one, so history is never lost. */
+  async rollbackTree(treeType: string, dto: RollbackV2TreeDto, userId: string): Promise<V2TreeUploadResponseDto> {
+    this.assertTreeType(treeType);
+    const latest = await this.prisma.v2TreeVersion.findFirst({
+      where: { treeType },
+      orderBy: { version: 'desc' },
+    });
+    this.assertNotOverwriting(latest?.version ?? 0, dto.baseVersion);
+    const target = await this.prisma.v2TreeVersion.findFirst({
+      where: { treeType, version: dto.version },
+    });
+    if (!target || !latest) {
+      throw new NotFoundException(`Version ${dto.version} not found`);
+    }
+    return this.publishTreeVersion(
+      treeType,
+      latest.version + 1,
+      target.treeData as Record<string, unknown>,
+      target.sizeBytes,
+      target.checksum ?? crypto.createHash('sha256').update(JSON.stringify(target.treeData)).digest('hex'),
+      userId,
+    );
+  }
+
+  /**
+   * Every screen can be reached and no condition names a field the screen does not have.
+   * The app's own tests hold the built-in trees to these rules; a published tree must meet them too.
+   */
+  private validateV2TreeReachability(tree: Record<string, unknown>): void {
+    const sections = tree['sections'] as Record<string, unknown>[];
+    const nodes = sections.flatMap((s) => (s['nodes'] as Record<string, unknown>[]) ?? []);
+    const parentOf = new Map<string, string | null>();
+    for (const n of nodes) parentOf.set(n['id'] as string, (n['parentId'] as string | null) ?? null);
+
+    const hasChild = new Set<string>();
+    for (const n of nodes) {
+      const id = n['id'] as string;
+      const parent = parentOf.get(id);
+      if (parent) {
+        if (!parentOf.has(parent)) {
+          throw new BadRequestException(`"${n['title'] ?? id}" belongs to a parent that does not exist ("${parent}")`);
+        }
+        hasChild.add(parent);
+      }
+      // A loop of parents would hide these screens for ever.
+      const seen = new Set<string>([id]);
+      for (let p = parentOf.get(id); p; p = parentOf.get(p)) {
+        if (seen.has(p)) {
+          throw new BadRequestException(`"${n['title'] ?? id}" is inside itself`);
+        }
+        seen.add(p);
+      }
+    }
+
+    for (const n of nodes) {
+      const id = n['id'] as string;
+      if (n['type'] === 'group' && !hasChild.has(id) && !ConfigService.HIDDEN_EMPTY_GROUPS.includes(id)) {
+        throw new BadRequestException(`Group "${n['title'] ?? id}" has nothing in it, so it would open blank`);
+      }
+      const fields = Array.isArray(n['fields']) ? (n['fields'] as Record<string, unknown>[]) : [];
+      const ids = new Set(fields.map((f) => f['id'] as string));
+      for (const f of fields) {
+        const expr = f['conditionalOn'];
+        if (typeof expr !== 'string' || !expr) continue;
+        for (const token of expr.split(/[|&]/)) {
+          const key = token.trim().replace('!', '').split('=')[0].trim();
+          if (key && !ids.has(key)) {
+            throw new BadRequestException(
+              `Field "${f['label'] ?? f['id']}" on "${n['title'] ?? id}" depends on "${key}", which is not on that screen`,
+            );
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -1557,6 +1757,11 @@ export class ConfigService {
       ...(unchanged ? {} : { bank: latest.treeData as Record<string, unknown> }),
     };
   }
+
+  /// Empty on purpose: the app hides it (section_visibility.dart), so it never opens blank.
+  private static readonly HIDDEN_EMPTY_GROUPS = [
+    'group_outside_property_other_joinery_and_finishes_main_screen_80',
+  ];
 
   /// Valid field types matching the Flutter InspectionFieldType enum
   private static readonly VALID_FIELD_TYPES = [

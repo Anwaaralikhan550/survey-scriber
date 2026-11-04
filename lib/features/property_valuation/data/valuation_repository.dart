@@ -1,14 +1,16 @@
 import '../../../core/database/base_survey_repository.dart';
-import '../../../core/network/api_client.dart';
+import '../../../core/survey_tree/tree_sync.dart';
 
 class ValuationRepository extends BaseSurveyRepository {
-  ValuationRepository(super.db, {ApiClient? apiClient})
+  ValuationRepository(super.db, {TreeSync? treeSync})
       : super(
           treeAsset: 'assets/property_valuation/valuation_tree.json',
-          localOverrideName: 'valuation_v2_tree.json',
           idPrefix: 'val_',
-          apiClient: apiClient,
+          treeSync: treeSync,
           treeType: 'valuation_v2',
-          bundledTreeVersion: 3,
+          bundledTreeVersion: bundledVersion,
         );
+
+  /// Bump this when the bundled JSON changes (see InspectionRepository).
+  static const int bundledVersion = 3;
 }

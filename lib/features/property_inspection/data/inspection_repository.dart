@@ -1,19 +1,20 @@
 import 'package:drift/drift.dart';
 
 import '../../../core/database/base_survey_repository.dart';
-import '../../../core/network/api_client.dart';
+import '../../../core/survey_tree/tree_sync.dart';
 
 class InspectionRepository extends BaseSurveyRepository {
-  InspectionRepository(super.db, {ApiClient? apiClient})
+  InspectionRepository(super.db, {TreeSync? treeSync})
       : super(
           treeAsset: 'assets/property_inspection/inspection_tree.json',
-          localOverrideName: 'inspection_v2_tree.json',
-          apiClient: apiClient,
+          treeSync: treeSync,
           treeType: 'inspection_v2',
-          // Bump this when the bundled JSON is updated so stale OTA
-          // caches are cleared and the new asset takes effect.
-          bundledTreeVersion: 7,
+          bundledTreeVersion: bundledVersion,
         );
+
+  /// Bump this when the bundled JSON changes. Trees published from the admin for
+  /// the old version then stop applying, and the new built-in tree takes effect.
+  static const int bundledVersion = 7;
 
   /// Returns condition ratings grouped by section key.
   /// Each entry maps sectionKey -> list of rating values (e.g., "1", "2", "3").

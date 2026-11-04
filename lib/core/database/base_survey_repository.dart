@@ -1,13 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:drift/drift.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'app_database.dart';
-import '../network/api_client.dart';
+import '../survey_tree/tree_sync.dart';
 import '../../features/property_inspection/domain/models/inspection_models.dart';
 import '../../features/property_inspection/domain/field_phrase_processor.dart';
 import '../../features/property_inspection/domain/legacy_answer_migration.dart';
@@ -23,23 +21,20 @@ abstract class BaseSurveyRepository {
   BaseSurveyRepository(
     this._db, {
     required String treeAsset,
-    required String localOverrideName,
     String idPrefix = '',
-    ApiClient? apiClient,
+    TreeSync? treeSync,
     String? treeType,
     int bundledTreeVersion = 0,
   })  : _treeAsset = treeAsset,
-        _localOverrideName = localOverrideName,
         _idPrefix = idPrefix,
-        _apiClient = apiClient,
+        _treeSync = treeSync ?? TreeSync(),
         _treeType = treeType,
         _bundledTreeVersion = bundledTreeVersion;
 
   final AppDatabase _db;
   final String _treeAsset;
-  final String _localOverrideName;
   final String _idPrefix;
-  final ApiClient? _apiClient;
+  final TreeSync _treeSync;
   final String? _treeType;
   final int _bundledTreeVersion;
 
@@ -58,114 +53,20 @@ abstract class BaseSurveyRepository {
   Future<InspectionTreePayload> loadTree() async {
     if (_treeCache != null) return _treeCache!;
 
-    // Web has no documents directory (no admin override / OTA cache);
-    // the bundled asset is the only source there.
-    if (kIsWeb) {
-      final raw = await rootBundle.loadString(_treeAsset);
-      _treeCache = InspectionTreePayload.fromJson(raw);
-      return _treeCache!;
-    }
-
-    // ─── Bundled asset override ──────────────────────────────────────
-    // When bundledTreeVersion > 0, ALWAYS use the bundled asset.
-    // This ensures app-shipped tree fixes take effect regardless of
-    // what the server or local caches have. To resume OTA updates,
-    // set bundledTreeVersion back to 0 after publishing to the server.
-    if (_bundledTreeVersion > 0) {
-      debugPrint(
-          '[BaseSurveyRepo] Using bundled asset (v$_bundledTreeVersion): $_treeAsset');
-      final raw = await rootBundle.loadString(_treeAsset);
-      _treeCache = InspectionTreePayload.fromJson(raw);
-      return _treeCache!;
-    }
-
-    final dir = await getApplicationDocumentsDirectory();
-
-    // ─── PRIORITY 1: Admin local override (set by admin panel) ─────
-    try {
-      final adminFile = File('${dir.path}/admin/$_localOverrideName');
-      if (await adminFile.exists()) {
-        final raw = await adminFile.readAsString();
-        _treeCache = InspectionTreePayload.fromJson(raw);
-        debugPrint(
-            '[BaseSurveyRepo] Loaded from admin override: $_localOverrideName');
-        return _treeCache!;
-      }
-    } catch (e) {
-      debugPrint('[BaseSurveyRepo] Admin override failed: $e');
-    }
-
-    // ─── PRIORITY 2: API fetch (OTA update) ────────────────────────
-    if (_apiClient != null && _treeType != null) {
-      try {
-        final raw = await _fetchTreeFromApi();
-        _treeCache = InspectionTreePayload.fromJson(raw);
-        // Write cache in background — don't block the return.
-        // ignore: unawaited_futures
-        _writeCacheFile(dir, raw);
-        debugPrint('[BaseSurveyRepo] Loaded from API (OTA): $_treeType');
-        return _treeCache!;
-      } catch (e) {
-        debugPrint('[BaseSurveyRepo] API fetch failed, trying cache: $e');
+    // The tree published from the admin, when it belongs to this app's built-in
+    // tree (see TreeSync); otherwise the built-in tree.
+    final treeType = _treeType;
+    if (treeType != null) {
+      final published = await _treeSync.readUsable(treeType, _bundledTreeVersion);
+      if (published != null) {
+        _treeCache = published;
+        return published;
       }
     }
 
-    // ─── PRIORITY 3: Cached API response (offline fallback) ────────
-    try {
-      final cacheFile = File('${dir.path}/cache/ota_$_localOverrideName');
-      if (await cacheFile.exists()) {
-        final raw = await cacheFile.readAsString();
-        _treeCache = InspectionTreePayload.fromJson(raw);
-        debugPrint(
-            '[BaseSurveyRepo] Loaded from OTA cache: $_localOverrideName');
-        return _treeCache!;
-      }
-    } catch (e) {
-      debugPrint('[BaseSurveyRepo] OTA cache failed: $e');
-    }
-
-    // ─── PRIORITY 4: Bundled asset (factory default) ───────────────
-    debugPrint('[BaseSurveyRepo] Loading from bundled asset: $_treeAsset');
     final raw = await rootBundle.loadString(_treeAsset);
     _treeCache = InspectionTreePayload.fromJson(raw);
     return _treeCache!;
-  }
-
-  // ─── OTA Helpers ──────────────────────────────────────────────────
-
-  /// Fetch the latest published V2 tree from the backend API.
-  ///
-  /// Returns the raw JSON string of the tree payload (the `tree` field
-  /// from the `V2TreeLatestResponseDto`).
-  Future<String> _fetchTreeFromApi() async {
-    final response = await _apiClient!.get<Map<String, dynamic>>(
-      'admin/config/v2-tree/latest/$_treeType',
-    );
-
-    final data = response.data;
-    if (data == null) {
-      throw Exception('Empty response from v2-tree API');
-    }
-
-    final tree = data['tree'];
-    if (tree == null) {
-      throw Exception('No "tree" field in v2-tree response');
-    }
-
-    return jsonEncode(tree);
-  }
-
-  /// Persist the API-fetched tree JSON to a cache file for offline use.
-  ///
-  /// This is fire-and-forget — cache write failures are non-fatal.
-  Future<void> _writeCacheFile(Directory dir, String content) async {
-    try {
-      final cacheFile = File('${dir.path}/cache/ota_$_localOverrideName');
-      await cacheFile.parent.create(recursive: true);
-      await cacheFile.writeAsString(content);
-    } catch (e) {
-      debugPrint('[BaseSurveyRepo] Failed to write OTA cache: $e');
-    }
   }
 
   Future<Map<String, InspectionNodeDefinition>> loadNodeMap() async {

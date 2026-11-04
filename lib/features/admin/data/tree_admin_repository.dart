@@ -8,16 +8,28 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../../core/network/api_client.dart';
 import '../../../core/phrases/phrase_bank_sync.dart';
+import '../../../core/survey_tree/tree_sync.dart';
+import '../../property_inspection/data/inspection_repository.dart';
+import '../../property_valuation/data/valuation_repository.dart';
 import '../../property_inspection/domain/models/inspection_models.dart';
 
 /// Identifies which survey tree to operate on.
 enum SurveyTreeType {
-  inspection('inspection_v2', 'assets/property_inspection/inspection_tree.json'),
-  valuation('valuation_v2', 'assets/property_valuation/valuation_tree.json');
+  inspection(
+    'inspection_v2',
+    'assets/property_inspection/inspection_tree.json',
+    InspectionRepository.bundledVersion,
+  ),
+  valuation(
+    'valuation_v2',
+    'assets/property_valuation/valuation_tree.json',
+    ValuationRepository.bundledVersion,
+  );
 
-  const SurveyTreeType(this.key, this.assetPath);
+  const SurveyTreeType(this.key, this.assetPath, this.bundledVersion);
   final String key;
   final String assetPath;
+  final int bundledVersion;
 
   String get displayName => switch (this) {
         SurveyTreeType.inspection => 'Inspection',
@@ -45,9 +57,12 @@ class TreeValidationResult {
 /// should call [loadTreeRaw] to check for local overrides before falling back
 /// to the bundled asset.
 class TreeAdminRepository {
-  TreeAdminRepository({ApiClient? apiClient}) : _apiClient = apiClient;
+  TreeAdminRepository({ApiClient? apiClient, TreeSync? treeSync})
+      : _apiClient = apiClient,
+        _treeSync = treeSync ?? TreeSync(apiClient: apiClient);
 
   final ApiClient? _apiClient;
+  final TreeSync _treeSync;
   final Map<SurveyTreeType, InspectionTreePayload> _cache = {};
   Directory? _docsDir;
 
@@ -79,13 +94,38 @@ class TreeAdminRepository {
   // ─── Tree Loading ───────────────────────────────────────────────
 
   /// Returns the raw JSON string for a tree.
-  /// Checks for a local override in documents first, then falls back to asset.
+  /// Edits not yet published first, then the published tree, then the asset.
   Future<String> loadTreeRaw(SurveyTreeType type) async {
     final local = await _treeFile(type);
     if (await local.exists()) {
       return local.readAsString();
     }
-    return rootBundle.loadString(type.assetPath);
+    final published = await _treeSync.readUsableRaw(type.key, type.bundledVersion);
+    return published ?? rootBundle.loadString(type.assetPath);
+  }
+
+  Future<File> _baseVersionFile(SurveyTreeType type) async {
+    final dir = await _documentsDir;
+    return File('${dir.path}/admin/${type.key}_base_version.txt');
+  }
+
+  /// Notes the published version these edits start from, so that publishing can
+  /// refuse to overwrite what someone else published meanwhile.
+  Future<void> _rememberBaseVersion(SurveyTreeType type) async {
+    final version = await _treeSync.serverVersion(type.key);
+    final file = await _baseVersionFile(type);
+    if (version == null) {
+      if (await file.exists()) await file.delete();
+      return;
+    }
+    await file.parent.create(recursive: true);
+    await file.writeAsString('$version');
+  }
+
+  Future<int?> _baseVersion(SurveyTreeType type) async {
+    final file = await _baseVersionFile(type);
+    if (!await file.exists()) return null;
+    return int.tryParse((await file.readAsString()).trim());
   }
 
   /// Returns a parsed tree payload.
@@ -122,6 +162,8 @@ class TreeAdminRepository {
     final local = await _treeFile(type);
     if (await local.exists()) {
       await _createBackup(type, await local.readAsString());
+    } else {
+      await _rememberBaseVersion(type);
     }
 
     // Ensure directory exists
@@ -142,6 +184,8 @@ class TreeAdminRepository {
       await _createBackup(type, await local.readAsString());
       await local.delete();
     }
+    final base = await _baseVersionFile(type);
+    if (await base.exists()) await base.delete();
     _cache.remove(type);
   }
 
@@ -767,17 +811,27 @@ class TreeAdminRepository {
     }
 
     // 3. POST to the backend (large payload — extend timeouts)
-    await apiClient.post<Map<String, dynamic>>(
+    parsed['baseBundledVersion'] = type.bundledVersion;
+    final baseVersion = await _baseVersion(type);
+    final response = await apiClient.post<Map<String, dynamic>>(
       'admin/config/v2-tree/upload',
       data: {
         'treeType': type.key,
         'tree': parsed,
+        if (baseVersion != null) 'baseVersion': baseVersion,
       },
       options: Options(
         sendTimeout: const Duration(minutes: 2),
         receiveTimeout: const Duration(minutes: 2),
       ),
     );
+
+    // Published: this phone now works from the server's copy, like every other.
+    final checksum = response.data?['checksum'] as String?;
+    if (checksum != null) {
+      await _treeSync.store(type.key, jsonEncode(parsed), checksum);
+    }
+    await resetToAsset(type);
   }
 
   // ─── Helpers ───────────────────────────────────────────────────

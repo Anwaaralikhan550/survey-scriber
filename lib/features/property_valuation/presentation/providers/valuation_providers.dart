@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../../../core/database/app_database.dart';
 import '../../../../core/database/database_providers.dart';
 import '../../../../core/network/api_client.dart';
+import '../../../../core/survey_tree/tree_sync.dart';
 import '../../../../core/phrases/phrase_bank_sync.dart';
 import '../../../../core/sync/sync_manager.dart';
 import '../../../../core/sync/sync_state.dart';
@@ -23,8 +24,19 @@ import '../../../property_inspection/domain/models/inspection_models.dart';
 
 final valuationRepositoryProvider = Provider<ValuationRepository>((ref) {
   final db = ref.watch(appDatabaseProvider);
-  final apiClient = ref.watch(apiClientProvider);
-  return ValuationRepository(db, apiClient: apiClient);
+  return ValuationRepository(db, treeSync: ref.watch(treeSyncProvider));
+});
+
+/// Asks the server for a newer survey tree, on app start and resume.
+final valuationTreeRefreshProvider = FutureProvider<void>((ref) async {
+  final changed = await ref
+      .watch(treeSyncProvider)
+      .refresh('valuation_v2', ValuationRepository.bundledVersion);
+  if (changed) {
+    ref.read(valuationRepositoryProvider).invalidateCache();
+    ref.invalidate(valuationSectionsProvider);
+    ref.invalidate(valuationNodeMapProvider);
+  }
 });
 
 /// Increment to force [valuationNodesProvider] to refetch from the database.

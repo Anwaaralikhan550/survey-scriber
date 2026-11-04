@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_client.dart';
+import '../../../../core/survey_tree/tree_sync.dart';
 import '../../../property_inspection/domain/models/inspection_models.dart';
 import '../../../property_inspection/presentation/providers/inspection_providers.dart';
 import '../../../property_valuation/presentation/providers/valuation_providers.dart';
@@ -13,7 +14,10 @@ import '../../data/tree_admin_repository.dart';
 
 final treeAdminRepositoryProvider = Provider<TreeAdminRepository>((ref) {
   final apiClient = ref.watch(apiClientProvider);
-  return TreeAdminRepository(apiClient: apiClient);
+  return TreeAdminRepository(
+    apiClient: apiClient,
+    treeSync: ref.watch(treeSyncProvider),
+  );
 });
 
 // ─── Tree Providers ───────────────────────────────────────────────

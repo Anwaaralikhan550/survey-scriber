@@ -44,6 +44,9 @@ class _SurveyScriberState extends ConsumerState<SurveyScriber>
       // Live phrase edits: reloading the phrase providers re-checks the server.
       ref.invalidate(inspectionPhraseTextsProvider);
       ref.invalidate(valuationPhraseCatalogProvider);
+      // Live survey tree edits, the same way.
+      ref.invalidate(inspectionTreeRefreshProvider);
+      ref.invalidate(valuationTreeRefreshProvider);
     }
   }
 

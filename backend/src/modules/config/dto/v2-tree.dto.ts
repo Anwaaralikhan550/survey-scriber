@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsIn, IsObject, IsNotEmpty } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsIn, IsInt, IsObject, IsNotEmpty, IsOptional, Min } from 'class-validator';
 
 // ============================================
 // Request DTOs
@@ -24,6 +24,29 @@ export class UploadV2TreeDto {
   @IsObject()
   @IsNotEmpty()
   tree: Record<string, unknown>;
+
+  @ApiPropertyOptional({
+    description:
+      'The published version these edits started from (0 when none). The upload is refused ' +
+      'if someone has published since, so nobody overwrites another person\'s work.',
+  })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  baseVersion?: number;
+}
+
+export class RollbackV2TreeDto {
+  @ApiProperty({ description: 'The version to bring back' })
+  @IsInt()
+  @Min(1)
+  version: number;
+
+  @ApiPropertyOptional({ description: 'The version on screen when the admin chose this' })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  baseVersion?: number;
 }
 
 // ============================================
@@ -48,6 +71,27 @@ export class V2TreeUploadResponseDto {
 
   @ApiProperty({ description: 'Publish timestamp' })
   publishedAt: Date;
+
+  @ApiPropertyOptional({ description: 'true when the server already had identical content' })
+  unchanged?: boolean;
+}
+
+export class V2TreePublishedResponseDto {
+  @ApiProperty() treeType: string;
+  @ApiProperty() version: number;
+  @ApiProperty() checksum: string;
+  @ApiProperty() publishedAt: Date;
+  @ApiProperty({ description: 'true when the client already has this tree; the tree is then left out' })
+  unchanged: boolean;
+  @ApiPropertyOptional() tree?: Record<string, unknown>;
+}
+
+export class V2TreeVersionDto {
+  @ApiProperty() version: number;
+  @ApiProperty() checksum: string;
+  @ApiProperty() sizeBytes: number;
+  @ApiProperty() publishedAt: Date;
+  @ApiPropertyOptional() publishedBy?: string;
 }
 
 export class V2TreeLatestResponseDto {

@@ -42,6 +42,9 @@ import {
   ConfigVersionResponseDto,
   FullConfigResponseDto,
   UpdateUserRoleDto,
+  RollbackV2TreeDto,
+  V2TreePublishedResponseDto,
+  V2TreeVersionDto,
   UserAdminResponseDto,
   UsersQueryDto,
   UsersListResponseDto,
@@ -98,6 +101,29 @@ export class ConfigPublicController {
     @Query() query: PhraseBankQueryDto,
   ): Promise<PhraseBankLatestResponseDto> {
     return this.configService.getLatestPhraseBank(bankType, query.known);
+  }
+
+  @Public()
+  @Get('v2-tree/:treeType/version')
+  @ApiOperation({ summary: 'The published version number of a survey tree, 0 when none' })
+  async getPublishedTreeVersion(@Param('treeType') treeType: string): Promise<{ version: number }> {
+    return this.configService.getPublishedTreeVersion(treeType);
+  }
+
+  @Public()
+  @Get('v2-tree/:treeType')
+  @ApiOperation({
+    summary: 'Latest published survey tree (live tree edits)',
+    description:
+      'Phones call this on start/resume. Send ?known=<checksum> to skip the download when nothing changed.',
+  })
+  @ApiResponse({ status: 200, type: V2TreePublishedResponseDto })
+  @ApiResponse({ status: 404, description: 'No published tree yet' })
+  async getPublishedTree(
+    @Param('treeType') treeType: string,
+    @Query() query: PhraseBankQueryDto,
+  ): Promise<V2TreePublishedResponseDto> {
+    return this.configService.getPublishedTree(treeType, query.known);
   }
 
   @Public()
@@ -428,6 +454,7 @@ export class ConfigAdminController {
   // ----------------------------------------
 
   @Post('v2-tree/upload')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Publish a V2 tree (inspection or valuation)',
@@ -438,12 +465,36 @@ export class ConfigAdminController {
   @ApiResponse({ status: 201, type: V2TreeUploadResponseDto })
   @ApiResponse({ status: 400, description: 'Invalid tree structure' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @ApiResponse({ status: 403, description: 'Forbidden — admin only' })
+  @ApiResponse({ status: 403, description: 'Forbidden — administrators and sub admins only' })
+  @ApiResponse({ status: 409, description: 'Someone published since these edits started' })
   async uploadV2Tree(
     @Body() dto: UploadV2TreeDto,
     @CurrentUser() user: Omit<User, 'passwordHash'>,
   ): Promise<V2TreeUploadResponseDto> {
     return this.configService.uploadV2Tree(dto, user.id);
+  }
+
+  @Get('v2-tree/versions/:treeType')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
+  @ApiOperation({ summary: 'Every published version of a survey tree, newest first' })
+  @ApiResponse({ status: 200, type: [V2TreeVersionDto] })
+  async listTreeVersions(@Param('treeType') treeType: string): Promise<V2TreeVersionDto[]> {
+    return this.configService.listTreeVersions(treeType);
+  }
+
+  @Post('v2-tree/rollback/:treeType')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({ summary: 'Publish an earlier version again, as a new version' })
+  @ApiResponse({ status: 201, type: V2TreeUploadResponseDto })
+  @ApiResponse({ status: 404, description: 'No such version' })
+  @ApiResponse({ status: 409, description: 'Someone published since this was chosen' })
+  async rollbackTree(
+    @Param('treeType') treeType: string,
+    @Body() dto: RollbackV2TreeDto,
+    @CurrentUser() user: Omit<User, 'passwordHash'>,
+  ): Promise<V2TreeUploadResponseDto> {
+    return this.configService.rollbackTree(treeType, dto, user.id);
   }
 
   @Post('phrase-bank/upload')
@@ -465,6 +516,7 @@ export class ConfigAdminController {
   }
 
   @Get('v2-tree/latest/:treeType')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @ApiOperation({
     summary: 'Get the latest published V2 tree',
     description: 'Returns the most recently published tree for the given type.',
