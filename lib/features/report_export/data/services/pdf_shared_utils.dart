@@ -253,6 +253,19 @@ class PdfSharedUtils {
     return isInspection && key != 'A' && key != 'D';
   }
 
+  /// Whether element headings and condition ratings carry the section's colour
+  /// bar: Outside Property to Risks (client, 4 Nov 2026).
+  static bool printsSideBar(bool isInspection, String sectionKey) =>
+      isInspection &&
+      const {'E', 'H', 'F', 'G', 'R', 'I', 'J'}
+          .contains(sectionKey.trim().toUpperCase());
+
+  /// I Issues writes its sub-headings with a dash: "Asbestos – Whether ..."
+  /// (client, 4 Nov 2026).
+  static bool printsDashLabels(String sectionKey) =>
+      sectionKey.trim().toUpperCase() == 'I';
+
+  static final _dashLabel = RegExp(r'^[A-Z][^\u2013:.!?]{0,60}(?= \u2013 )');
   static final _labelWithoutColon =
       RegExp(r'^Defective (?:Joinery|Operation)(?= One or more )');
   static final _leadingLabel = RegExp(r'^[A-Z][^:.!?]{0,60}:(?=\s)');
@@ -276,9 +289,19 @@ class PdfSharedUtils {
 
   /// Where a paragraph's sub-headings ("Description:", "No defects noted:") are,
   /// in reading order. Sentences that merely contain a colon are not sub-headings.
-  static List<({int start, int end})> subLabelRanges(String text) {
+  static List<({int start, int end})> subLabelRanges(
+    String text, {
+    bool dashLabels = false,
+  }) {
     final ranges = <({int start, int end})>[];
     if (conditionRatingLine.hasMatch(text.trim())) return ranges;
+
+    if (dashLabels) {
+      final dash = _dashLabel.firstMatch(text);
+      if (dash != null && _isLabel(dash.group(0)!)) {
+        ranges.add((start: dash.start, end: dash.end));
+      }
+    }
 
     final plain = _labelWithoutColon.firstMatch(text);
     if (plain != null) {

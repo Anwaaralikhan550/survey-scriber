@@ -99,6 +99,8 @@ class PdfGeneratorService {
     String? screenTitle,
     bool dedupe = true,
     bool subLabels = false,
+    bool dashLabels = false,
+    PdfColor? ratingBar,
   }) {
     final widgets = <pw.Widget>[];
 
@@ -152,10 +154,25 @@ class PdfGeneratorService {
         font: _fonts.base,
         fontFallback: _fonts.fallback,
       );
+      final isRating = PdfSharedUtils.conditionRatingLine.hasMatch(phrase);
+      if (isRating && ratingBar != null) {
+        widgets.add(_sideBar(
+          ratingBar,
+          pw.Text(
+            sanitize(phrase),
+            style: bodyStyle.copyWith(
+              font: _fonts.bold,
+              fontWeight: pw.FontWeight.bold,
+            ),
+          ),
+        ));
+        widgets.add(pw.SizedBox(height: 6));
+        continue;
+      }
       widgets.add(
         pw.Padding(
           padding: const pw.EdgeInsets.fromLTRB(8, 2, 8, 6),
-          child: PdfSharedUtils.conditionRatingLine.hasMatch(phrase)
+          child: isRating
               ? pw.Text(
                   sanitize(phrase),
                   style: bodyStyle.copyWith(
@@ -168,6 +185,7 @@ class PdfGeneratorService {
                     sanitize(phrase),
                     bodyStyle,
                     subLabels: subLabels,
+                    dashLabels: dashLabels,
                   ),
                 ),
         ),
@@ -175,6 +193,21 @@ class PdfGeneratorService {
     }
     return widgets;
   }
+
+  static bool _opensWithRating(List<String> phrases) =>
+      phrases.isNotEmpty &&
+      PdfSharedUtils.conditionRatingLine.hasMatch(phrases.first.trim());
+
+  /// The section's colour bar beside an element heading or its rating. Its text
+  /// lines up with the paragraphs below.
+  pw.Widget _sideBar(PdfColor color, pw.Widget child) => pw.Container(
+        width: double.infinity,
+        padding: const pw.EdgeInsets.only(left: 8, top: 2, right: 8, bottom: 2),
+        decoration: pw.BoxDecoration(
+          border: pw.Border(left: pw.BorderSide(color: color, width: 3)),
+        ),
+        child: child,
+      );
 
   /// Bolds "I1"-"I5" section-reference tokens (e.g. "see section I3",
   /// "Section I2 - Guarantees") so capital I is visually distinguishable
@@ -189,9 +222,11 @@ class PdfGeneratorService {
     String text,
     pw.TextStyle baseStyle, {
     bool subLabels = false,
+    bool dashLabels = false,
   }) {
     final ranges = <({int start, int end})>[
-      if (subLabels) ...PdfSharedUtils.subLabelRanges(text),
+      if (subLabels)
+        ...PdfSharedUtils.subLabelRanges(text, dashLabels: dashLabels),
       for (final match in _sectionLetterRefPattern.allMatches(text))
         (start: match.start, end: match.end),
     ]..sort((a, b) => a.start.compareTo(b.start));
@@ -1052,6 +1087,13 @@ class PdfGeneratorService {
             doc.reportType == ReportType.inspection,
             section.key,
           );
+          final dashLabels = PdfSharedUtils.printsDashLabels(section.key);
+          final sideBar = PdfSharedUtils.printsSideBar(
+            doc.reportType == ReportType.inspection,
+            section.key,
+          )
+              ? sectionClr
+              : null;
 
           // AI section payload (AST preferred, legacy narrative fallback)
           final astSection = doc.aiAstPayload?.sectionFor(section.key);
@@ -1109,15 +1151,19 @@ class PdfGeneratorService {
                       .hasMatch(screen.phrases.first.trim())) {
                 widgets.add(pw.NewPage(freeSpace: 110));
               }
-              widgets.add(doc.reportType == ReportType.inspection
+              if (sideBar != null) widgets.add(pw.SizedBox(height: 6));
+              final mergedTitle = pw.Text(screen.title,
+                  style: pw.TextStyle(
+                      fontWeight: pw.FontWeight.bold,
+                      fontSize: 12,
+                      color: PdfSharedUtils.headerDark));
+              widgets.add(sideBar != null
+                  ? _sideBar(sideBar, mergedTitle)
+                  : doc.reportType == ReportType.inspection
                   ? pw.Padding(
                       padding:
                           const pw.EdgeInsets.only(left: 4, top: 6, bottom: 2),
-                      child: pw.Text(screen.title,
-                          style: pw.TextStyle(
-                              fontWeight: pw.FontWeight.bold,
-                              fontSize: 12,
-                              color: PdfSharedUtils.headerDark)),
+                      child: mergedTitle,
                     )
                   : pw.Container(
                       width: double.infinity,
@@ -1132,7 +1178,12 @@ class PdfGeneratorService {
                           style: pw.TextStyle(
                               fontWeight: pw.FontWeight.bold, fontSize: 12)),
                     ));
-              widgets.add(pw.SizedBox(height: 4));
+              // The bar runs unbroken from the heading into the rating below it.
+              if (!(sideBar != null &&
+                  _opensWithRating(screen.phrases) &&
+                  _config.includePhrases)) {
+                widgets.add(pw.SizedBox(height: 4));
+              }
 
               if (screen.phrases.isNotEmpty && _config.includePhrases) {
                 widgets.addAll(_phraseParagraphWidgets(
@@ -1142,30 +1193,45 @@ class PdfGeneratorService {
                   // A repeated paragraph here belongs to another wall or window.
                   dedupe: !clientParagraphGroups.contains(screen.screenId),
                   subLabels: subLabels,
+                  dashLabels: dashLabels,
+                  ratingBar: sideBar,
                 ));
               }
             } else {
               // ── Individual screen — lighter heading ─────────────────
+              final barBeforeRating = sideBar != null &&
+                  !hideScreenTitle &&
+                  _opensWithRating(screen.phrases) &&
+                  _config.includePhrases;
               if (!hideScreenTitle) {
-                widgets.add(pw.Padding(
-                  padding: const pw.EdgeInsets.only(left: 4, top: 4, bottom: 2),
-                  child: pw.Text(screen.title,
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold,
-                          fontSize: 11,
-                          color: PdfSharedUtils.headerDark)),
-                ));
+                final screenHeading = pw.Text(screen.title,
+                    style: pw.TextStyle(
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 11,
+                        color: PdfSharedUtils.headerDark));
+                if (sideBar != null) {
+                  widgets.add(pw.SizedBox(height: 4));
+                  widgets.add(_sideBar(sideBar, screenHeading));
+                } else {
+                  widgets.add(pw.Padding(
+                    padding:
+                        const pw.EdgeInsets.only(left: 4, top: 4, bottom: 2),
+                    child: screenHeading,
+                  ));
+                }
               }
 
               // Suppress field table when phrases exist — phrases already
               // express the data in professional surveyor language.
               if (screen.phrases.isNotEmpty && _config.includePhrases) {
-                widgets.add(pw.SizedBox(height: 2));
+                if (!barBeforeRating) widgets.add(pw.SizedBox(height: 2));
                 widgets.addAll(_phraseParagraphWidgets(
                   screen.phrases,
                   sectionKey: section.key,
                   screenTitle: screen.title,
                   subLabels: subLabels,
+                  dashLabels: dashLabels,
+                  ratingBar: sideBar,
                 ));
               } else if (screen.fields.isNotEmpty) {
                 final fallback = _narrativeFromFields(
@@ -1176,6 +1242,8 @@ class PdfGeneratorService {
                     sectionKey: section.key,
                     screenTitle: screen.title,
                     subLabels: subLabels,
+                    dashLabels: dashLabels,
+                    ratingBar: sideBar,
                   ));
                 } else {
                   widgets.add(_fieldsTable(screen.fields));
@@ -1306,11 +1374,43 @@ class PdfGeneratorService {
   ) {
     final meta = doc.surveyMeta;
     final isInspection = doc.reportType == ReportType.inspection;
-    final mainTitle =
-        isInspection ? _inspectionReportLabel(doc) : 'Valuation Report';
+    final mainTitle = isInspection ? 'Home Buyer Report' : 'Valuation Report';
     final subtitle =
-        isInspection ? 'Level 2 Home Survey' : 'Mortgage Valuation Report';
+        isInspection ? meta.reportLevel : 'Mortgage Valuation Report';
     const valuationLine = 'Professional property valuation report';
+    final company = _config.reportCompanyName.trim();
+    final logo = _config.reportCompanyLogo;
+
+    final bannerText = pw.Column(
+      mainAxisSize: pw.MainAxisSize.min,
+      children: [
+        if (company.isNotEmpty) ...[
+          pw.Text(company,
+              textAlign: pw.TextAlign.center,
+              style: pw.TextStyle(
+                  fontSize: 20,
+                  fontWeight: pw.FontWeight.bold,
+                  color: PdfColors.white)),
+          pw.SizedBox(height: 4),
+        ],
+        pw.Text(mainTitle,
+            style: pw.TextStyle(
+                fontSize: company.isEmpty ? 28 : 16,
+                fontWeight: pw.FontWeight.bold,
+                color: PdfColors.white)),
+        pw.SizedBox(height: 4),
+        pw.Text(subtitle,
+            style: const pw.TextStyle(fontSize: 14, color: PdfColors.white)),
+        if (!isInspection) ...[
+          pw.SizedBox(height: 4),
+          pw.Text(valuationLine,
+              style: pw.TextStyle(
+                  fontSize: 11,
+                  fontWeight: pw.FontWeight.bold,
+                  color: PdfColors.white)),
+        ],
+      ],
+    );
 
     // Build the property details table rows.
     final tableRows = <_CoverTableEntry>[
@@ -1338,34 +1438,30 @@ class PdfGeneratorService {
             // ── Full-width accent banner ───────────────────────────
             pw.Container(
               width: double.infinity,
-              height: 80,
+              constraints: const pw.BoxConstraints(minHeight: 80),
+              padding: const pw.EdgeInsets.all(10),
               decoration: pw.BoxDecoration(
                 color: accent,
                 borderRadius: pw.BorderRadius.circular(4),
               ),
               alignment: pw.Alignment.center,
-              child: pw.Column(
-                mainAxisAlignment: pw.MainAxisAlignment.center,
-                children: [
-                  pw.Text(mainTitle,
-                      style: pw.TextStyle(
-                          fontSize: 28,
-                          fontWeight: pw.FontWeight.bold,
-                          color: PdfColors.white)),
-                  pw.SizedBox(height: 4),
-                  pw.Text(subtitle,
-                      style: const pw.TextStyle(
-                          fontSize: 14, color: PdfColors.white)),
-                  if (!isInspection) ...[
-                    pw.SizedBox(height: 4),
-                    pw.Text(valuationLine,
-                        style: pw.TextStyle(
-                            fontSize: 11,
-                            fontWeight: pw.FontWeight.bold,
-                            color: PdfColors.white)),
-                  ],
-                ],
-              ),
+              child: logo == null
+                  ? bannerText
+                  : pw.Row(
+                      children: [
+                        // The empty end keeps the text in the middle of the bar.
+                        pw.SizedBox(
+                          width: 80,
+                          height: 64,
+                          child: pw.Image(pw.MemoryImage(logo),
+                              fit: pw.BoxFit.contain,
+                              alignment: pw.Alignment.centerLeft),
+                        ),
+                        pw.SizedBox(width: 8),
+                        pw.Expanded(child: bannerText),
+                        pw.SizedBox(width: 88),
+                      ],
+                    ),
             ),
 
             pw.SizedBox(height: 30),
@@ -1501,7 +1597,7 @@ class PdfGeneratorService {
 
   pw.Widget _pageHeader(ReportDocument doc, PdfColor accent) {
     final reportLabel = doc.reportType == ReportType.inspection
-        ? _inspectionReportLabel(doc)
+        ? '${doc.surveyMeta.reportLevel} Report'
         : 'Property Valuation Report';
     return pw.Container(
       margin: const pw.EdgeInsets.only(bottom: 8),
@@ -1537,14 +1633,24 @@ class PdfGeneratorService {
         border: pw.Border(top: pw.BorderSide(color: accent, width: 0.5)),
       ),
       child: pw.Row(
-        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
         children: [
-          pw.Text('Generated by SurveyScriber',
-              style: const pw.TextStyle(
-                  fontSize: 7, color: PdfSharedUtils.headerDark)),
-          pw.Text('Page ${context.pageNumber} of ${context.pagesCount}',
-              style: const pw.TextStyle(
-                  fontSize: 7, color: PdfSharedUtils.headerDark)),
+          pw.Expanded(
+            child: pw.Text('Generated by SurveyScriber',
+                style: const pw.TextStyle(
+                    fontSize: 7, color: PdfSharedUtils.headerDark)),
+          ),
+          pw.Expanded(
+            child: pw.Text(_config.reportCompanyName.trim(),
+                textAlign: pw.TextAlign.center,
+                style: const pw.TextStyle(
+                    fontSize: 7, color: PdfSharedUtils.headerDark)),
+          ),
+          pw.Expanded(
+            child: pw.Text('Page ${context.pageNumber} of ${context.pagesCount}',
+                textAlign: pw.TextAlign.right,
+                style: const pw.TextStyle(
+                    fontSize: 7, color: PdfSharedUtils.headerDark)),
+          ),
         ],
       ),
     );
@@ -1732,12 +1838,6 @@ class PdfGeneratorService {
   }
 
   // ── AI Widgets ──────────────────────────────────────────────────────
-
-  String _inspectionReportLabel(ReportDocument doc) {
-    final astTitle = doc.aiAstPayload?.title?.trim() ?? '';
-    if (astTitle.isNotEmpty) return astTitle;
-    return 'RICS HomeBuyer Report';
-  }
 
   List<pw.Widget> _aiAstSection(ReportAstSection section, PdfColor accent) {
     final widgets = <pw.Widget>[];

@@ -204,10 +204,14 @@ class SurveyMeta {
     this.startedAt,
     this.completedAt,
     this.surveyDuration,
+    this.reportLevel = 'Level 2 Home Survey',
   });
 
   final String surveyId;
   final String title;
+
+  /// Home survey level from the survey's report type.
+  final String reportLevel;
   final String? address;
   final String? jobRef;
   final String? clientName;

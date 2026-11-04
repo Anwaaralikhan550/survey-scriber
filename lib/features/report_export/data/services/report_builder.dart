@@ -180,6 +180,7 @@ class ReportBuilder {
         startedAt: rawData.survey.startedAt,
         completedAt: rawData.survey.completedAt,
         surveyDuration: surveyDuration,
+        reportLevel: rawData.survey.type.reportLevel,
       ),
       sections: sections,
       signatures: config.includeSignatures ? signatures : [],

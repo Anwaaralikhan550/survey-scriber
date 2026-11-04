@@ -17,7 +17,11 @@ import 'pdf_shared_utils.dart';
 ///
 /// DOCX is essentially a ZIP containing XML files following the Open XML spec.
 class DocxGeneratorService {
-  static const _inspectionReportTitle = 'RICS HomeBuyer Report';
+  static const _logoDocPrId = 99999;
+  // The logo floats over the left end of the first page's bar.
+  static const _logoMaxWidthEmu = 740000;
+  static const _logoMaxHeightEmu = 640000;
+
   /// A table on the text margins. Word draws a table's left edge one cell margin
   /// outside the indent, so the indent equals the table's left cell margin.
   static String _fullWidthTable(int leftCellMargin) =>
@@ -290,7 +294,7 @@ class DocxGeneratorService {
     final dateFormat = DateFormat('d MMMM yyyy');
 
     // Title / Header
-    _writeHeader(buf, doc, dateFormat);
+    _writeHeader(buf, doc, dateFormat, images.logo);
 
     // AI Executive Summary (if present)
     if (doc.aiExecutiveSummary != null && doc.aiExecutiveSummary!.isNotEmpty) {
@@ -321,6 +325,14 @@ class DocxGeneratorService {
         doc.reportType == ReportType.inspection,
         section.key,
       );
+      final dashLabels = PdfSharedUtils.printsDashLabels(section.key);
+      final sideBarHex = PdfSharedUtils.printsSideBar(
+        doc.reportType == ReportType.inspection,
+        section.key,
+      )
+          ? _pdfColorToHex(
+              PdfSharedUtils.sectionColor(section.key, _config.accentColor))
+          : null;
 
       // AI section narrative (if present)
       final aiNarrative = doc.aiSectionNarratives[section.key];
@@ -344,19 +356,31 @@ class DocxGeneratorService {
         }
         if (screen.isMergedGroup) {
           // ── Merged group (e.g. "E1 Chimney") — flowing paragraphs ──
-          _writeHeading(buf, screen.title, 'Heading2');
+          _writeHeading(buf, screen.title, 'Heading2', barHex: sideBarHex);
 
           if (screen.phrases.isNotEmpty && _config.includePhrases) {
-            _writePhrases(buf, screen.phrases, subLabels: subLabels);
+            _writePhrases(
+              buf,
+              screen.phrases,
+              subLabels: subLabels,
+              dashLabels: dashLabels,
+              ratingBarHex: sideBarHex,
+            );
           }
         } else {
           // ── Individual screen ──
-          _writeHeading(buf, screen.title, 'Heading3');
+          _writeHeading(buf, screen.title, 'Heading3', barHex: sideBarHex);
 
           // Suppress field table when phrases exist — the phrases already
           // express the data in professional surveyor language.
           if (screen.phrases.isNotEmpty && _config.includePhrases) {
-            _writePhrases(buf, screen.phrases, subLabels: subLabels);
+            _writePhrases(
+              buf,
+              screen.phrases,
+              subLabels: subLabels,
+              dashLabels: dashLabels,
+              ratingBarHex: sideBarHex,
+            );
           } else if (screen.fields.isNotEmpty) {
             _writeFieldsTable(buf, screen.fields);
           }
@@ -433,15 +457,22 @@ class DocxGeneratorService {
     ));
   }
 
-  void _writeHeader(StringBuffer buf, ReportDocument doc, DateFormat fmt) {
+  void _writeHeader(
+    StringBuffer buf,
+    ReportDocument doc,
+    DateFormat fmt,
+    _DocxImageRef? logo,
+  ) {
     if (doc.reportType == ReportType.inspection) {
-      _writeInspectionCover(buf, doc, fmt);
+      _writeInspectionCover(buf, doc, fmt, logo);
       return;
     }
     final meta = doc.surveyMeta;
     const reportLabel = 'Valuation Report';
     final accentHex = _pdfColorToHex(_config.accentColor);
+    final company = _config.reportCompanyName.trim();
 
+    if (logo != null) _writeInlineImage(buf, logo, _logoDocPrId);
     _writeStyledParagraph(buf, reportLabel,
         fontSize: 36, bold: true, color: accentHex);
     _writeStyledParagraph(buf, meta.title, fontSize: 24);
@@ -453,7 +484,10 @@ class DocxGeneratorService {
     if (meta.clientName != null)
       _writeParagraph(buf, 'Client: ${meta.clientName}');
     _writeParagraph(buf, 'Date: ${fmt.format(doc.generatedAt)}');
-    _writeParagraph(buf, 'Prepared by: ${_config.companyName}');
+    _writeParagraph(
+      buf,
+      'Prepared by: ${company.isEmpty ? _config.companyName : company}',
+    );
     if (meta.startedAt != null) {
       _writeParagraph(buf,
           'Started: ${DateFormat('d MMM yyyy HH:mm').format(meta.startedAt!)}');
@@ -523,7 +557,7 @@ class DocxGeneratorService {
         '<w:hdr $namespaces><w:p><w:pPr>$tabs'
         '<w:pBdr><w:bottom w:val="single" w:sz="4" w:space="4" w:color="$accentHex"/></w:pBdr>'
         '</w:pPr>'
-        '${run(_inspectionReportTitle, bold: true, color: accentHex)}$tab'
+        '${run('${doc.surveyMeta.reportLevel} Report', bold: true, color: accentHex)}$tab'
         '${run(doc.surveyMeta.title)}$tab'
         '${run(_config.companyName)}'
         '</w:p></w:hdr>';
@@ -531,7 +565,8 @@ class DocxGeneratorService {
         '<w:ftr $namespaces><w:p><w:pPr>$tabs'
         '<w:pBdr><w:top w:val="single" w:sz="4" w:space="4" w:color="$accentHex"/></w:pBdr>'
         '</w:pPr>'
-        '${run('Generated by SurveyScriber')}$tab$tab'
+        '${run('Generated by SurveyScriber')}$tab'
+        '${run(_config.reportCompanyName.trim())}$tab'
         '${plain('Page ')}${field('PAGE')}${plain(' of ')}${field('NUMPAGES')}'
         '</w:p></w:ftr>';
 
@@ -541,8 +576,20 @@ class DocxGeneratorService {
     }
   }
 
-  void _writeHeading(StringBuffer buf, String text, String style) {
-    buf.write('<w:p><w:pPr><w:pStyle w:val="$style"/></w:pPr>');
+  /// The section's colour bar on the text margin. Paragraphs in a row with the
+  /// same bar draw as one unbroken line.
+  static String _sideBarProps(String hex) =>
+      '<w:pBdr><w:left w:val="single" w:sz="24" w:space="4" w:color="$hex"/></w:pBdr>'
+      '<w:ind w:left="140"/>';
+
+  void _writeHeading(
+    StringBuffer buf,
+    String text,
+    String style, {
+    String? barHex,
+  }) {
+    final bar = barHex == null ? '' : '<w:keepNext/>${_sideBarProps(barHex)}';
+    buf.write('<w:p><w:pPr><w:pStyle w:val="$style"/>$bar</w:pPr>');
     buf.write('<w:r><w:t xml:space="preserve">');
     buf.write(_escapeXml(text));
     buf.write('</w:t></w:r></w:p>');
@@ -555,16 +602,20 @@ class DocxGeneratorService {
     StringBuffer buf,
     ReportDocument doc,
     DateFormat fmt,
+    _DocxImageRef? logo,
   ) {
     final meta = doc.surveyMeta;
     final accentHex = _pdfColorToHex(_config.accentColor);
+    final company = _config.reportCompanyName.trim();
 
     _writeBanner(
       buf,
       fillHex: accentHex,
-      lines: const [
-        (text: _inspectionReportTitle, size: 56, bold: true),
-        (text: 'Level 2 Home Survey', size: 28, bold: false),
+      logo: logo,
+      lines: [
+        if (company.isNotEmpty) (text: company, size: 40, bold: true),
+        (text: 'Home Buyer Report', size: company.isEmpty ? 56 : 32, bold: true),
+        (text: meta.reportLevel, size: 28, bold: false),
       ],
     );
 
@@ -633,19 +684,42 @@ class DocxGeneratorService {
     StringBuffer buf, {
     required String fillHex,
     required List<({String text, int size, bool bold})> lines,
+    _DocxImageRef? logo,
   }) {
+    // Text stays clear of the logo on both sides, so it keeps to the bar's middle.
+    final indent = logo == null ? '' : '<w:ind w:left="1340" w:right="1340"/>';
     buf.write('<w:tbl><w:tblPr>${_fullWidthTable(160)}<w:tblCellMar>');
-    buf.write('<w:top w:w="160" w:type="dxa"/><w:bottom w:w="160" w:type="dxa"/>');
+    buf.write('<w:top w:w="160" w:type="dxa"/><w:left w:w="160" w:type="dxa"/>');
+    buf.write('<w:bottom w:w="160" w:type="dxa"/><w:right w:w="160" w:type="dxa"/>');
     buf.write('</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="9638"/></w:tblGrid>');
     buf.write('<w:tr><w:tc><w:tcPr><w:tcW w:w="9638" w:type="dxa"/>');
     buf.write('<w:shd w:val="clear" w:color="auto" w:fill="$fillHex"/></w:tcPr>');
     for (final line in lines) {
-      buf.write('<w:p><w:pPr><w:spacing w:after="40"/><w:jc w:val="center"/></w:pPr><w:r><w:rPr>');
+      buf.write('<w:p><w:pPr><w:spacing w:after="40"/>$indent<w:jc w:val="center"/></w:pPr>');
+      if (logo != null && line == lines.first) _writeFloatingLogo(buf, logo);
+      buf.write('<w:r><w:rPr>');
       if (line.bold) buf.write('<w:b/>');
       buf.write('<w:color w:val="FFFFFF"/><w:sz w:val="${line.size}"/></w:rPr>');
       buf.write('<w:t xml:space="preserve">${_escapeXml(line.text)}</w:t></w:r></w:p>');
     }
     buf.write('</w:tc></w:tr></w:tbl>');
+  }
+
+  /// The logo at the left end of the bar, over the fill. The text does not wrap
+  /// around it.
+  void _writeFloatingLogo(StringBuffer buf, _DocxImageRef ref) {
+    // Centred against a three-line bar, whose inner height is about 66 pt.
+    final top = ((838200 - ref.heightEmu) / 2).round();
+    buf.write('<w:r><w:drawing>');
+    buf.write('<wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+        'relativeHeight="1" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">');
+    buf.write('<wp:simplePos x="0" y="0"/>');
+    buf.write('<wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset></wp:positionH>');
+    buf.write('<wp:positionV relativeFrom="paragraph"><wp:posOffset>$top</wp:posOffset></wp:positionV>');
+    buf.write('<wp:extent cx="${ref.widthEmu}" cy="${ref.heightEmu}"/>');
+    buf.write('<wp:wrapNone/>');
+    _writeDrawingBody(buf, ref, _logoDocPrId);
+    buf.write('</wp:anchor></w:drawing></w:r>');
   }
 
   void _writeCenteredText(
@@ -669,11 +743,19 @@ class DocxGeneratorService {
     StringBuffer buf,
     List<String> phrases, {
     bool subLabels = false,
+    bool dashLabels = false,
+    String? ratingBarHex,
   }) {
     for (var i = 0; i < phrases.length; i++) {
       final phrase = phrases[i];
       if (!phrase.startsWith(_mergedSubheadingPrefix)) {
-        _writeParagraph(buf, phrase, subLabels: subLabels);
+        _writeParagraph(
+          buf,
+          phrase,
+          subLabels: subLabels,
+          dashLabels: dashLabels,
+          ratingBarHex: ratingBarHex,
+        );
         continue;
       }
       final hasText = i + 1 < phrases.length &&
@@ -683,10 +765,17 @@ class DocxGeneratorService {
     }
   }
 
-  void _writeParagraph(StringBuffer buf, String text, {bool subLabels = false}) {
+  void _writeParagraph(
+    StringBuffer buf,
+    String text, {
+    bool subLabels = false,
+    bool dashLabels = false,
+    String? ratingBarHex,
+  }) {
     if (PdfSharedUtils.conditionRatingLine.hasMatch(text.trim())) {
       // Stays on one page with the text below it.
-      buf.write('<w:p><w:pPr><w:keepNext/></w:pPr>');
+      final bar = ratingBarHex == null ? '' : _sideBarProps(ratingBarHex);
+      buf.write('<w:p><w:pPr><w:keepNext/>$bar</w:pPr>');
       _writeBoldRun(buf, text);
       buf.write('</w:p>');
       return;
@@ -694,7 +783,10 @@ class DocxGeneratorService {
     buf.write('<w:p>');
     var cursor = 0;
     if (subLabels) {
-      for (final label in PdfSharedUtils.subLabelRanges(text)) {
+      for (final label in PdfSharedUtils.subLabelRanges(
+        text,
+        dashLabels: dashLabels,
+      )) {
         _writeTextBetweenLabels(buf, text.substring(cursor, label.start));
         _writeBoldRun(buf, text.substring(label.start, label.end));
         cursor = label.end;
@@ -781,6 +873,12 @@ class DocxGeneratorService {
     buf.write('<w:p><w:r><w:drawing>');
     buf.write('<wp:inline distT="0" distB="0" distL="0" distR="0">');
     buf.write('<wp:extent cx="${ref.widthEmu}" cy="${ref.heightEmu}"/>');
+    _writeDrawingBody(buf, ref, docPrId);
+    buf.write('</wp:inline>');
+    buf.write('</w:drawing></w:r></w:p>');
+  }
+
+  void _writeDrawingBody(StringBuffer buf, _DocxImageRef ref, int docPrId) {
     buf.write('<wp:docPr id="$docPrId" name="Image $docPrId"/>');
     buf.write('<wp:cNvGraphicFramePr>');
     buf.write('<a:graphicFrameLocks noChangeAspect="1"/>');
@@ -807,8 +905,6 @@ class DocxGeneratorService {
     buf.write('</pic:pic>');
     buf.write('</a:graphicData>');
     buf.write('</a:graphic>');
-    buf.write('</wp:inline>');
-    buf.write('</w:drawing></w:r></w:p>');
   }
 
   void _writeAiNarrativeParagraph(
@@ -1092,6 +1188,26 @@ class DocxGeneratorService {
     var imageIdx = 1;
     var relIdx = 2; // rId1 = styles; images start at rId2
 
+    // Company logo for the first page
+    _DocxImageRef? logo;
+    final logoBytes = _config.reportCompanyLogo;
+    if (logoBytes != null) {
+      final ext = _detectImageFormat(logoBytes);
+      final size = _logoSizeEmu(logoBytes);
+      logo = _DocxImageRef(
+        relId: 'rId$relIdx',
+        mediaPath: 'media/image$imageIdx.$ext',
+        bytes: logoBytes,
+        extension: ext,
+        contentType: ext == 'png' ? 'image/png' : 'image/jpeg',
+        widthEmu: size.width,
+        heightEmu: size.height,
+      );
+      allImages.add(logo);
+      imageIdx++;
+      relIdx++;
+    }
+
     // Signature images
     if (_config.includeSignatures) {
       for (final sig in doc.signatures) {
@@ -1162,7 +1278,53 @@ class DocxGeneratorService {
       allImages: allImages,
       signatureLookup: sigLookup,
       photoImages: photoImages,
+      logo: logo,
     );
+  }
+
+  /// The logo's display size: its own shape, inside the bar's logo column.
+  static ({int width, int height}) _logoSizeEmu(Uint8List bytes) {
+    final pixels = _imagePixelSize(bytes);
+    if (pixels == null) {
+      return (width: _logoMaxHeightEmu, height: _logoMaxHeightEmu);
+    }
+    final widthScale = _logoMaxWidthEmu / pixels.width;
+    final heightScale = _logoMaxHeightEmu / pixels.height;
+    final scale = widthScale < heightScale ? widthScale : heightScale;
+    return (
+      width: (pixels.width * scale).round(),
+      height: (pixels.height * scale).round(),
+    );
+  }
+
+  /// Pixel size read from a PNG or JPEG header; null when it cannot be read.
+  static ({int width, int height})? _imagePixelSize(Uint8List b) {
+    final data = ByteData.sublistView(b);
+    if (_detectImageFormat(b) == 'png') {
+      if (b.length < 24) return null;
+      final width = data.getUint32(16);
+      final height = data.getUint32(20);
+      return width == 0 || height == 0 ? null : (width: width, height: height);
+    }
+    var i = 2;
+    while (i + 9 < b.length) {
+      if (b[i] != 0xFF) return null;
+      final marker = b[i + 1];
+      // SOF0-SOF15 carry the size; C4, C8 and CC are other tables.
+      if (marker >= 0xC0 &&
+          marker <= 0xCF &&
+          marker != 0xC4 &&
+          marker != 0xC8 &&
+          marker != 0xCC) {
+        final height = data.getUint16(i + 5);
+        final width = data.getUint16(i + 7);
+        return width == 0 || height == 0
+            ? null
+            : (width: width, height: height);
+      }
+      i += 2 + data.getUint16(i + 2);
+    }
+    return null;
   }
 
   /// Detect image format from magic bytes.
@@ -1272,6 +1434,7 @@ class _DocxImageBundle {
     required this.allImages,
     required this.signatureLookup,
     required this.photoImages,
+    this.logo,
   });
 
   /// Every image ref (signatures + photos), used for content types and rels.
@@ -1282,6 +1445,9 @@ class _DocxImageBundle {
 
   /// Photo image refs in display order.
   final List<_DocxImageRef> photoImages;
+
+  /// The surveyor's company logo, when one is saved.
+  final _DocxImageRef? logo;
 
   bool get hasImages => allImages.isNotEmpty;
   bool get hasPng => allImages.any((r) => r.extension == 'png');

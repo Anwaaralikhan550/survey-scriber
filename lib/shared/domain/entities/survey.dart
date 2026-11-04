@@ -93,6 +93,12 @@ enum SurveyType {
         SurveyType.other => 'Other Survey',
       };
 
+  /// The level a home survey report prints. A new report type (Level 3) adds
+  /// its own line here and the report follows.
+  String get reportLevel => switch (this) {
+        _ => 'Level 2 Home Survey',
+      };
+
   /// Parse from backend string format.
   /// Accepts both old (LEVEL_2, INSPECTION_V2, SNAGGING, etc.) and new formats
   /// for backwards compatibility with existing backend data.

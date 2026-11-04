@@ -15,6 +15,8 @@ class ExportConfig {
     this.includeAiNarrative = false,
     this.includeRecommendations = true,
     this.companyName = 'SurveyScriber',
+    this.reportCompanyName = '',
+    this.reportCompanyLogo,
     this.accentColor = const PdfColor(0.08, 0.38, 0.75), // #1565C0
     this.showPageNumbers = true,
     this.showTableOfContents = true,
@@ -35,6 +37,10 @@ class ExportConfig {
   final bool includeRecommendations;
 
   final String companyName;
+
+  /// The surveyor's company from Settings; empty when none is saved.
+  final String reportCompanyName;
+  final Uint8List? reportCompanyLogo;
   final PdfColor accentColor;
   final bool showPageNumbers;
   final bool showTableOfContents;
@@ -49,6 +55,8 @@ class ExportConfig {
     bool? includeAiNarrative,
     bool? includeRecommendations,
     String? companyName,
+    String? reportCompanyName,
+    Uint8List? reportCompanyLogo,
     PdfColor? accentColor,
     bool? showPageNumbers,
     bool? showTableOfContents,
@@ -63,6 +71,8 @@ class ExportConfig {
         includeAiNarrative: includeAiNarrative ?? this.includeAiNarrative,
         includeRecommendations: includeRecommendations ?? this.includeRecommendations,
         companyName: companyName ?? this.companyName,
+        reportCompanyName: reportCompanyName ?? this.reportCompanyName,
+        reportCompanyLogo: reportCompanyLogo ?? this.reportCompanyLogo,
         accentColor: accentColor ?? this.accentColor,
         showPageNumbers: showPageNumbers ?? this.showPageNumbers,
         showTableOfContents: showTableOfContents ?? this.showTableOfContents,
