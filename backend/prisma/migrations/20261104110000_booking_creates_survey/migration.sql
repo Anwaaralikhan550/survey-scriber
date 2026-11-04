@@ -24,7 +24,7 @@ WITH new_surveys AS (
         b."surveyor_id" AS user_id,
         b."date" AS inspection_date
     FROM "bookings" b
-    WHERE b."status" <> 'CANCELLED'
+    WHERE b."status" <> 'CANCELLED' AND b."survey_id" IS NULL
 ),
 inserted AS (
     INSERT INTO "surveys" ("id", "title", "property_address", "status", "type", "job_ref", "client_name", "user_id", "inspection_date", "created_at", "updated_at")
