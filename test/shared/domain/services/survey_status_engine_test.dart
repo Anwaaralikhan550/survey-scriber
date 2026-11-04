@@ -73,10 +73,10 @@ void main() {
         }
       });
 
-      test('disallows draft to completed directly', () {
+      test('allows draft to completed: the first report completes a survey', () {
         expect(
           engine.canTransition(SurveyStatus.draft, SurveyStatus.completed),
-          isFalse,
+          isTrue,
         );
       });
 
@@ -274,7 +274,8 @@ void main() {
       test('returns correct transitions for draft', () {
         final transitions = engine.getAllowedTransitions(SurveyStatus.draft);
         expect(transitions, contains(SurveyStatus.inProgress));
-        expect(transitions.length, equals(1));
+        expect(transitions, contains(SurveyStatus.completed));
+        expect(transitions.length, equals(2));
       });
 
       test('returns correct transitions for inProgress', () {
