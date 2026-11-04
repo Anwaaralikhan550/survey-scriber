@@ -28,6 +28,7 @@ describe('SurveysService - Survey State Transitions', () => {
     section: {
       deleteMany: jest.Mock;
     };
+    booking: { updateMany: jest.Mock };
     $transaction: jest.Mock;
   };
 
@@ -67,6 +68,7 @@ describe('SurveysService - Survey State Transitions', () => {
       section: {
         deleteMany: jest.fn(),
       },
+      booking: { updateMany: jest.fn() },
       $transaction: jest.fn((fn) => fn(mockPrismaService)),
     };
 
@@ -238,14 +240,27 @@ describe('SurveysService - Survey State Transitions', () => {
       ).rejects.toThrow(BadRequestException);
     });
 
-    it('should reject DRAFT → COMPLETED (must go through IN_PROGRESS)', async () => {
-      const survey = createMockSurvey(SurveyStatus.DRAFT);
-      mockPrismaService.survey.findUnique.mockResolvedValue(survey);
+    it.each([SurveyStatus.DRAFT, SurveyStatus.IN_PROGRESS, SurveyStatus.PAUSED])(
+      'the first report completes a %s survey and its booking',
+      async (from) => {
+        const survey = createMockSurvey(from);
+        mockPrismaService.survey.findUnique.mockResolvedValue(survey);
+        mockPrismaService.survey.update.mockResolvedValue({
+          ...survey,
+          status: SurveyStatus.COMPLETED,
+        });
 
-      await expect(
-        service.update(survey.id, { status: SurveyStatus.COMPLETED }, mockUser),
-      ).rejects.toThrow(BadRequestException);
-    });
+        await service.update(survey.id, { status: SurveyStatus.COMPLETED }, mockUser);
+
+        expect(mockPrismaService.booking.updateMany).toHaveBeenCalledWith({
+          where: {
+            surveyId: survey.id,
+            status: { in: ['PENDING', 'CONFIRMED'] },
+          },
+          data: { status: 'COMPLETED' },
+        });
+      },
+    );
 
     it('should reject DRAFT → APPROVED (must go through workflow)', async () => {
       const survey = createMockSurvey(SurveyStatus.DRAFT);
