@@ -1,8 +1,10 @@
 'use strict';
 /**
- * SurveyScriber Phrase Bank admin portal — static web app.
+ * SurveyScriber admin portal — static web app.
  *
- * Nothing is shown until an ADMIN signs in. After sign-in it talks to the
+ * Nothing is shown until an administrator or sub admin signs in. This file holds
+ * the sign-in, navigation and phrase editor; the other pages are in pages/*.js.
+ * After sign-in it talks to the
  * SurveyScriber API (same origin, under /api/v1):
  *   GET  /config/phrase-bank/:type          latest published bank
  *   POST /admin/config/phrase-bank/upload   publish the whole bank (admin only)
@@ -12,12 +14,13 @@
  */
 const $ = (id) => document.getElementById(id);
 const L = window.BankLogic;
+const AL = window.AdminLogic;
 const API = '/api/v1';
 const SESSION_KEY = 'ss_portal_session';
 const BANK_NAMES = { inspection: 'Home Survey', valuation: 'Valuation' };
 
 const state = {
-  session: null,         // {accessToken, refreshToken, email}
+  session: null,         // {accessToken, refreshToken, email, role}
   view: 'dash',          // dash | inspection | valuation
   bank: 'inspection',    // bank shown in the editor
   banks: { inspection: null, valuation: null }, // {raw, entries, published, error}
@@ -71,10 +74,10 @@ async function login(email, password) {
   }
   if (!r.body.accessToken) return { ok: false, message: 'Sign in failed (no token returned).' };
   const role = r.body.user && r.body.user.role;
-  if (role && role !== 'ADMIN') {
-    return { ok: false, message: 'This account is ' + role + '. Only an ADMIN account can use this portal.' };
+  if (!AL.canUsePortal(role)) {
+    return { ok: false, message: 'This account is a ' + AL.roleLabel(role) + ' account. Only administrators and sub admins can use this portal.' };
   }
-  saveSession({ accessToken: r.body.accessToken, refreshToken: r.body.refreshToken || null, email });
+  saveSession({ accessToken: r.body.accessToken, refreshToken: r.body.refreshToken || null, email, role });
   return { ok: true };
 }
 
@@ -106,7 +109,11 @@ function showApp() {
   const email = state.session.email || 'admin';
   $('whoEmail').textContent = email;
   $('avatar').textContent = email.charAt(0).toUpperCase();
-  go('dash');
+  const role = state.session.role;
+  $('whoRole').textContent = AL.roleLabel(role);
+  document.querySelectorAll('.nav-item').forEach((b) => { b.hidden = !AL.canSee(b.dataset.view, role); });
+  document.querySelectorAll('.nav-label.admin-only').forEach((n) => { n.hidden = role !== 'ADMIN'; });
+  go(AL.startPage(location.hash, role));
 }
 
 /** Switch page. Returns false if the user cancelled because of unsaved edits. */
@@ -115,6 +122,12 @@ function go(view) {
       !confirm(state.edited.size + ' unsaved edit(s) will be lost. Leave this page?')) {
     return false;
   }
+  const leaving = window.SSPages[state.view];
+  if (leaving && leaving.unsaved && leaving.unsaved() &&
+      !confirm('Your unsaved changes will be lost. Leave this page?')) {
+    return false;
+  }
+  if (!AL.canSee(view, state.session.role)) view = 'dash';
   state.edited.clear();
   state.selected = null;
   state.filter = '';
@@ -123,11 +136,24 @@ function go(view) {
   document.querySelectorAll('.nav-item').forEach((b) => b.classList.toggle('active', b.dataset.view === view));
   $('side').classList.remove('open');
   const isDash = view === 'dash';
+  const isBank = !!BANK_NAMES[view];
   $('dashView').hidden = !isDash;
-  $('editView').hidden = isDash;
-  $('pageTitle').textContent = isDash ? 'Dashboard' : BANK_NAMES[view] + ' phrases';
-  if (isDash) { renderCards(); ensureBanks(); } else { state.bank = view; openEditor(); }
+  $('editView').hidden = !isBank;
+  $('pageView').hidden = isDash || isBank;
+  $('pageTitle').textContent = AL.pageOf(view).title;
+  history.replaceState(null, '', '#/' + view);
+  if (isDash) { renderCards(); ensureBanks(); }
+  else if (isBank) { state.bank = view; openEditor(); }
+  else renderPage(view);
   return true;
+}
+
+function renderPage(view) {
+  const box = $('pageView');
+  box.replaceChildren();
+  const page = window.SSPages[view];
+  if (page) page.render(box);
+  else box.append(SS.emptyBox(AL.pageOf(view).title, 'This page is being built.'));
 }
 
 // ── bank loading ───────────────────────────────────────────────────
@@ -393,6 +419,8 @@ $('pwToggle').addEventListener('click', () => {
 });
 $('logoutBtn').addEventListener('click', async () => {
   if (state.edited.size && !confirm(state.edited.size + ' unsaved edit(s) will be lost. Sign out?')) return;
+  const open = window.SSPages[state.view];
+  if (open && open.unsaved && open.unsaved() && !confirm('Your unsaved changes will be lost. Sign out?')) return;
   await signOut();
 });
 $('menuBtn').addEventListener('click', () => $('side').classList.toggle('open'));
@@ -414,12 +442,18 @@ $('revertBtn').addEventListener('click', () => {
   if (orig) { $('editValue').value = orig.value; state.edited.delete(state.selected); }
   validate(); renderList();
 });
-window.addEventListener('beforeunload', (e) => { if (state.edited.size) { e.preventDefault(); e.returnValue = ''; } });
+window.addEventListener('beforeunload', (e) => {
+  const open = window.SSPages[state.view];
+  if (state.edited.size || (open && open.unsaved && open.unsaved())) { e.preventDefault(); e.returnValue = ''; }
+});
 document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && e.key === 's' && state.view !== 'dash' && !$('saveBtn').disabled && state.selected != null) {
     e.preventDefault(); save();
   }
 });
+
+// What the admin pages use from this file.
+Object.assign(window.SS, { apiJson, toast, state, go, signOut });
 
 // ── boot ───────────────────────────────────────────────────────────
 (async function boot() {
@@ -427,7 +461,11 @@ document.addEventListener('keydown', (e) => {
   if (!state.session) { showLogin(); return; }
   // Verify the stored session still works before showing anything.
   const me = await apiJson('/auth/me', { auth: true });
-  if (me.status === 200 && (!me.body.role || me.body.role === 'ADMIN')) { showApp(); return; }
+  if (me.status === 200 && AL.canUsePortal(me.body.role)) {
+    saveSession({ ...state.session, role: me.body.role });
+    showApp();
+    return;
+  }
   saveSession(null);
   showLogin();
 })();

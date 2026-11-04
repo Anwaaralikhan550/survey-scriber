@@ -9,6 +9,49 @@ const { BASELINE } = require('./server.js');
 const REPO = path.resolve(__dirname, '..', '..');
 const load = (rel) => JSON.parse(fs.readFileSync(path.join(REPO, rel), 'utf8'));
 
+test('portal roles: staff get in, field users do not; admin pages stay with the administrator', () => {
+  const AL = require('./public/admin-logic.js');
+  assert.ok(AL.canUsePortal('ADMIN'));
+  assert.ok(AL.canUsePortal('MANAGER'));
+  assert.ok(!AL.canUsePortal('SURVEYOR'));
+  assert.ok(!AL.canUsePortal('VIEWER'));
+  assert.ok(!AL.canUsePortal(undefined));
+  for (const key of ['subAdmins', 'email', 'settings']) {
+    assert.ok(AL.canSee(key, 'ADMIN'), key);
+    assert.ok(!AL.canSee(key, 'MANAGER'), key);
+  }
+  for (const key of ['dash', 'fieldUsers', 'options', 'tree', 'inspection', 'valuation']) {
+    assert.ok(AL.canSee(key, 'MANAGER'), key);
+  }
+  assert.strictEqual(AL.roleLabel('MANAGER'), 'Sub Admin');
+});
+
+test('the address bar opens only pages the role may see', () => {
+  const AL = require('./public/admin-logic.js');
+  assert.strictEqual(AL.startPage('#/fieldUsers', 'MANAGER'), 'fieldUsers');
+  assert.strictEqual(AL.startPage('#/settings', 'MANAGER'), 'dash');
+  assert.strictEqual(AL.startPage('#/settings', 'ADMIN'), 'settings');
+  assert.strictEqual(AL.startPage('#/nonsense', 'ADMIN'), 'dash');
+  assert.strictEqual(AL.startPage('', 'ADMIN'), 'dash');
+});
+
+test('every page has its nav button and every nav button has a page', () => {
+  const AL = require('./public/admin-logic.js');
+  const html = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
+  const nav = [...html.matchAll(/class="nav-item[^"]*" data-view="([a-zA-Z]+)"/g)].map((m) => m[1]);
+  assert.deepStrictEqual(nav.slice().sort(), AL.PAGES.map((p) => p.key).sort());
+});
+
+test('admin pages never put text in through innerHTML', () => {
+  const dir = path.join(__dirname, 'public');
+  const files = ['ui.js', 'app.js', ...(fs.existsSync(path.join(dir, 'pages')) ? fs.readdirSync(path.join(dir, 'pages')).map((f) => 'pages/' + f) : [])];
+  for (const file of files) {
+    const code = fs.readFileSync(path.join(dir, file), 'utf8');
+    const uses = [...code.matchAll(/innerHTML\s*=\s*([^;]+);/g)].map((m) => m[1].trim());
+    assert.ok(uses.every((u) => u === "''"), file + ': ' + uses.join(' | '));
+  }
+});
+
 test('inspection bank (flat map) loads every key', () => {
   const raw = load('assets/property_inspection/phrase_texts.json');
   const entries = entriesOf(raw);

@@ -24,7 +24,7 @@ node --test "$HERE/test.js" >/dev/null
 echo "[2/3] build -> $DIST"
 rm -rf "$DIST"
 mkdir -p "$DIST/assets/banks"
-cp "$HERE/public/index.html" "$HERE/public/app.js" "$HERE/public/bank-logic.js" "$HERE/public/styles.css" "$DIST/"
+cp -r "$HERE/public/." "$DIST/"
 # Baseline banks: used only until a bank is published on the server (first save publishes the full bank).
 cp "$REPO/assets/property_inspection/phrase_texts.json" "$DIST/assets/banks/inspection.json"
 cp "$REPO/assets/property_valuation/phrase_texts.json" "$DIST/assets/banks/valuation.json"
@@ -37,9 +37,14 @@ if [[ "${1:-}" == "--build" ]]; then exit 0; fi
 echo "[3/3] upload -> $SSH_USER@$SSH_HOST:$WEB_ROOT"
 SSH=(ssh -p "$SSH_PORT" -i "$SSH_KEY" -o IdentitiesOnly=yes -o BatchMode=yes)
 "${SSH[@]}" "$SSH_USER@$SSH_HOST" "mkdir -p '$WEB_ROOT/assets/banks'"
-scp -P "$SSH_PORT" -i "$SSH_KEY" -o IdentitiesOnly=yes -o BatchMode=yes \
-  "$DIST"/index.html "$DIST"/app.js "$DIST"/bank-logic.js "$DIST"/styles.css "$DIST"/BUILD \
+scp -r -P "$SSH_PORT" -i "$SSH_KEY" -o IdentitiesOnly=yes -o BatchMode=yes \
+  "$DIST"/*.html "$DIST"/*.js "$DIST"/*.css "$DIST"/BUILD \
   "$SSH_USER@$SSH_HOST:$WEB_ROOT/"
+if compgen -G "$DIST/pages/*.js" >/dev/null; then
+  "${SSH[@]}" "$SSH_USER@$SSH_HOST" "mkdir -p '$WEB_ROOT/pages'"
+  scp -P "$SSH_PORT" -i "$SSH_KEY" -o IdentitiesOnly=yes -o BatchMode=yes \
+    "$DIST"/pages/*.js "$SSH_USER@$SSH_HOST:$WEB_ROOT/pages/"
+fi
 scp -P "$SSH_PORT" -i "$SSH_KEY" -o IdentitiesOnly=yes -o BatchMode=yes \
   "$DIST"/assets/banks/*.json "$SSH_USER@$SSH_HOST:$WEB_ROOT/assets/banks/"
 "${SSH[@]}" "$SSH_USER@$SSH_HOST" "ls -la '$WEB_ROOT' '$WEB_ROOT/assets/banks' && cat '$WEB_ROOT/BUILD'"
