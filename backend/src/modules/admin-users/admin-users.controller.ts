@@ -19,6 +19,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { AdminUsersService } from './admin-users.service';
 import {
+  AdminSummaryDto,
   AdminUserResponseDto,
   AdminUsersListDto,
   AdminUsersQueryDto,
@@ -35,6 +36,13 @@ type Actor = Omit<User, 'passwordHash'>;
 @ApiBearerAuth('JWT-auth')
 export class AdminUsersController {
   constructor(private readonly users: AdminUsersService) {}
+
+  @Get('summary')
+  @ApiOperation({ summary: "The Dashboard's numbers" })
+  @ApiResponse({ status: 200, type: AdminSummaryDto })
+  summary(@CurrentUser() actor: Actor): Promise<AdminSummaryDto> {
+    return this.users.summary(actor);
+  }
 
   @Get()
   @ApiOperation({ summary: 'List users. A sub admin sees field users only.' })

@@ -204,6 +204,19 @@ code{font-family:var(--mono);font-size:.92em;background:var(--accent-soft);color
 .dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
 .pill.off{background:var(--line-soft);color:var(--soft)}
 
+.stat-rows{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:6px 0 0;font-size:13px}
+.stat-rows dt{color:var(--soft)}
+.stat-rows dd{margin:0;font-weight:600;color:var(--navy);text-align:right}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.tile{display:flex;flex-direction:column;gap:2px;text-align:left;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--ink)}
+.tile b{color:var(--navy);font-size:14px}
+.tile span{font-size:12.5px;color:var(--soft)}
+button.tile{cursor:pointer}
+button.tile:hover{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tile.off{background:transparent}
+.tile.off b{color:var(--soft)}
+.config-version{margin:16px 0 8px}
+
 /* ── responsive ───────────────────────────────── */
 @media (max-width:980px){
   .login{grid-template-columns:1fr}

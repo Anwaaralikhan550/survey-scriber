@@ -134,6 +134,22 @@ export class AdminUserResponseDto {
   @ApiPropertyOptional() emailSent?: boolean;
 }
 
+export class AdminSummaryDto {
+  @ApiProperty() users: {
+    total: number;
+    active: number;
+    inactive: number;
+    administrators: number;
+    subAdmins: number;
+    fieldUsers: number;
+    viewers: number;
+  };
+  @ApiProperty() surveys: Record<string, number>;
+  @ApiProperty() bookings: Record<string, number>;
+  @ApiProperty() configVersion: number;
+  @ApiProperty() recentActivity: { action: string; actor: string | null; at: Date }[];
+}
+
 export class AdminUsersListDto {
   @ApiProperty({ type: [AdminUserResponseDto] }) data: AdminUserResponseDto[];
   @ApiProperty() meta: { page: number; limit: number; total: number; totalPages: number };

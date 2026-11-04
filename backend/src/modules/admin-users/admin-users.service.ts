@@ -6,13 +6,14 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ActorType, AuditEntityType, Prisma, User, UserRole } from '@prisma/client';
+import { ActorType, AuditEntityType, BookingStatus, Prisma, SurveyStatus, User, UserRole } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 import { AuditActions, AuditService } from '../audit/audit.service';
 import { AuthService } from '../auth/auth.service';
 import { PrismaService } from '../prisma/prisma.service';
 import {
+  AdminSummaryDto,
   AdminUserResponseDto,
   AdminUsersListDto,
   AdminUsersQueryDto,
@@ -86,6 +87,60 @@ export class AdminUsersService {
       where: { role: UserRole.ADMIN, isActive: true, id: { not: user.id } },
     });
     if (others === 0) throw new ForbiddenException(message);
+  }
+
+  /** The Dashboard's numbers. The audit trail stays with administrators. */
+  async summary(actor: Actor): Promise<AdminSummaryDto> {
+    const [users, surveys, bookings, config] = await Promise.all([
+      this.prisma.user.groupBy({ by: ['role', 'isActive'], _count: { _all: true } }),
+      this.prisma.survey.groupBy({ by: ['status'], where: { deletedAt: null }, _count: { _all: true } }),
+      this.prisma.booking.groupBy({ by: ['status'], _count: { _all: true } }),
+      this.prisma.configVersion.findFirst(),
+    ]);
+
+    const inRole = (role: UserRole) =>
+      users.filter((u) => u.role === role).reduce((n, u) => n + u._count._all, 0);
+    const active = users.filter((u) => u.isActive).reduce((n, u) => n + u._count._all, 0);
+    const total = users.reduce((n, u) => n + u._count._all, 0);
+
+    const byStatus = <T extends string>(all: T[], rows: { status: T; _count: { _all: number } }[]) =>
+      Object.fromEntries(
+        all.map((status) => [status, rows.find((r) => r.status === status)?._count._all ?? 0]),
+      ) as Record<T, number>;
+
+    let recentActivity: AdminSummaryDto['recentActivity'] = [];
+    if (actor.role === UserRole.ADMIN) {
+      const logs = await this.prisma.auditLog.findMany({
+        where: { actorType: ActorType.STAFF, action: { startsWith: 'user.' } },
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+      });
+      const ids = [...new Set(logs.map((l) => l.actorId).filter((id): id is string => !!id))];
+      const actors = ids.length
+        ? await this.prisma.user.findMany({ where: { id: { in: ids } }, select: { id: true, email: true } })
+        : [];
+      recentActivity = logs.map((l) => ({
+        action: l.action,
+        actor: actors.find((a) => a.id === l.actorId)?.email ?? null,
+        at: l.createdAt,
+      }));
+    }
+
+    return {
+      users: {
+        total,
+        active,
+        inactive: total - active,
+        administrators: inRole(UserRole.ADMIN),
+        subAdmins: inRole(UserRole.MANAGER),
+        fieldUsers: inRole(UserRole.SURVEYOR),
+        viewers: inRole(UserRole.VIEWER),
+      },
+      surveys: byStatus(Object.values(SurveyStatus), surveys),
+      bookings: byStatus(Object.values(BookingStatus), bookings),
+      configVersion: config?.version ?? 0,
+      recentActivity,
+    };
   }
 
   async list(query: AdminUsersQueryDto, actor: Actor): Promise<AdminUsersListDto> {

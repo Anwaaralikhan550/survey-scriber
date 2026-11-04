@@ -142,7 +142,7 @@ function go(view) {
   $('pageView').hidden = isDash || isBank;
   $('pageTitle').textContent = AL.pageOf(view).title;
   history.replaceState(null, '', '#/' + view);
-  if (isDash) { renderCards(); ensureBanks(); }
+  if (isDash) { window.SSPages.dash.renderSummary($('dashSummary')); renderCards(); ensureBanks(); }
   else if (isBank) { state.bank = view; openEditor(); }
   else renderPage(view);
   return true;
