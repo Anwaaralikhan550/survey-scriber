@@ -3,6 +3,7 @@ import {
   Post,
   Get,
   Patch,
+  Put,
   Delete,
   Body,
   Param,
@@ -40,6 +41,7 @@ import {
   UserResponseDto,
   LogoutResponseDto,
 } from './dto/auth-response.dto';
+import { BrandingResponseDto, UpdateBrandingDto } from './dto/update-branding.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { Public } from './decorators/public.decorator';
@@ -243,6 +245,30 @@ export class AuthController {
     @Body() dto: UpdateProfileDto,
   ): Promise<UserResponseDto> {
     return this.authService.updateProfile(user.id, dto);
+  }
+
+  @Get('branding')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
+  @ApiOperation({ summary: "Get the current user's company name and logo" })
+  @ApiResponse({ status: 200, type: BrandingResponseDto })
+  async getBranding(
+    @CurrentUser() user: Omit<User, 'passwordHash'>,
+  ): Promise<BrandingResponseDto> {
+    return this.authService.getBranding(user.id);
+  }
+
+  @Put('branding')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
+  @ApiOperation({ summary: "Save the current user's company name and logo" })
+  @ApiResponse({ status: 200, type: BrandingResponseDto })
+  @ApiResponse({ status: 400, description: 'Validation error' })
+  async updateBranding(
+    @CurrentUser() user: Omit<User, 'passwordHash'>,
+    @Body() dto: UpdateBrandingDto,
+  ): Promise<BrandingResponseDto> {
+    return this.authService.updateBranding(user.id, dto);
   }
 
   @Patch('change-password')

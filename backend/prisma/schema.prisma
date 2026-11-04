@@ -66,11 +66,25 @@ model User {
   bookingChangeRequestsReviewed BookingChangeRequest[]  @relation("BookingChangeRequestReviewer")
   aiUsageLogs                   AiUsageLog[]
   publishedTrees                V2TreeVersion[]
+  branding                      UserBranding?
 
   // Performance indexes for common queries
   @@index([role])
   @@index([isActive])
   @@map("users")
+}
+
+/// The surveyor's own company, printed on their reports. Kept apart from User so
+/// the logo is not loaded with every authenticated request.
+model UserBranding {
+  userId      String   @id @map("user_id") @db.Uuid
+  companyName String?  @map("company_name") @db.VarChar(255)
+  companyLogo String?  @map("company_logo") @db.Text
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_branding")
 }
 
 /// Refresh token for JWT token rotation

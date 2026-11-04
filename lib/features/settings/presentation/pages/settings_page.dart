@@ -17,6 +17,7 @@ import '../../../../features/auth/presentation/providers/auth_notifier.dart';
 import '../../../../shared/presentation/widgets/cached_avatar.dart';
 import '../../../../shared/presentation/widgets/permission_widgets.dart';
 import '../../domain/entities/app_preferences.dart';
+import '../providers/company_branding_provider.dart';
 import '../providers/preferences_provider.dart';
 import '../widgets/settings_section_card.dart';
 import 'static_content_page.dart';
@@ -45,6 +46,7 @@ class SettingsPage extends ConsumerWidget {
           padding: const EdgeInsets.all(AppSpacing.md),
           children: const [
             _ProfileSection(),
+            _CompanySection(),
             _AppearanceSection(),
             _SurveyPreferencesSection(),
             _SyncSection(),
@@ -142,6 +144,35 @@ class _ProfileSection extends ConsumerWidget {
       initials: user?.initials,
       semanticLabel: 'Profile photo of ${user?.fullName ?? 'user'}',
     );
+}
+
+/// The surveyor's company, printed on their reports.
+class _CompanySection extends ConsumerWidget {
+  const _CompanySection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final company = ref.watch(companyBrandingProvider);
+    final colorScheme = Theme.of(context).colorScheme;
+    return SettingsSectionCard(
+      title: 'Company',
+      icon: Icons.business_outlined,
+      children: [
+        SettingsItem(
+          title: company.name.isEmpty ? 'Company name and logo' : company.name,
+          subtitle: company.logo == null
+              ? 'Shown on your reports'
+              : 'Logo saved. Shown on your reports',
+          leading: Icon(
+            Icons.badge_outlined,
+            color: colorScheme.onSurfaceVariant,
+          ),
+          onTap: () => context.push(Routes.companyDetails),
+          showDivider: false,
+        ),
+      ],
+    );
+  }
 }
 
 /// Appearance settings section.

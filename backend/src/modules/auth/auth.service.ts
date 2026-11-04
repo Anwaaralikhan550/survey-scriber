@@ -17,6 +17,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { AuditService, AuditActions } from '../audit/audit.service';
 import { RegisterDto } from './dto/register.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
+import { BrandingResponseDto, UpdateBrandingDto } from './dto/update-branding.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
@@ -347,6 +348,35 @@ export class AuthService {
     }
 
     return true;
+  }
+
+  async getBranding(userId: string): Promise<BrandingResponseDto> {
+    const branding = await this.prisma.userBranding.findUnique({
+      where: { userId },
+    });
+    return {
+      companyName: branding?.companyName ?? null,
+      companyLogo: branding?.companyLogo ?? null,
+    };
+  }
+
+  async updateBranding(
+    userId: string,
+    dto: UpdateBrandingDto,
+  ): Promise<BrandingResponseDto> {
+    const data = {
+      companyName: dto.companyName?.trim() || null,
+      companyLogo: dto.companyLogo || null,
+    };
+    const branding = await this.prisma.userBranding.upsert({
+      where: { userId },
+      create: { userId, ...data },
+      update: data,
+    });
+    return {
+      companyName: branding.companyName,
+      companyLogo: branding.companyLogo,
+    };
   }
 
   async updateProfile(userId: string, dto: UpdateProfileDto): Promise<UserResponseDto> {

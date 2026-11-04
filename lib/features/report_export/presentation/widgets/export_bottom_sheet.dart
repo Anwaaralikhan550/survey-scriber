@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/feature_flags/feature_flag_providers.dart';
 import '../../../../core/feature_flags/feature_flags.dart';
+import '../../../settings/presentation/providers/company_branding_provider.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
 import '../providers/export_providers.dart';
@@ -162,7 +163,10 @@ class _ExportBottomSheetState extends ConsumerState<ExportBottomSheet> {
   }
 
   void _startExport() {
+    final company = ref.read(companyBrandingProvider);
     final config = ExportConfig(
+      reportCompanyName: company.name,
+      reportCompanyLogo: company.logo,
       format: _format,
       includePhotos: _includePhotos,
       includePhrases: _includePhrases,

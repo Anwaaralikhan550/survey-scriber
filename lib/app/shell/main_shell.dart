@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/providers/auth_notifier.dart';
 import '../../features/auth/presentation/providers/auth_state.dart';
 import '../../features/dashboard/presentation/providers/dashboard_provider.dart';
+import '../../features/settings/presentation/providers/company_branding_provider.dart';
 import '../../features/settings/presentation/providers/preferences_provider.dart';
 import '../../shared/presentation/widgets/sync_indicator.dart';
 import '../router/routes.dart';
@@ -25,6 +26,8 @@ class MainShell extends ConsumerWidget {
     final colorScheme = theme.colorScheme;
     final syncState = ref.watch(syncStateProvider);
     final prefs = ref.watch(preferencesProvider);
+    // Brings the company details to a new phone before its first report.
+    ref.watch(companyBrandingProvider.select((_) => null));
 
     // F8 FIX: Check if auth is still resolving (initial or loading state)
     // Show loading overlay to prevent dashboard flash before auth is confirmed
