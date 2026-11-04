@@ -209,6 +209,11 @@ export const AuditActions = {
 
   // User Management
   USER_ROLE_CHANGED: 'user.role_changed',
+  USER_CREATED: 'user.created',
+  USER_UPDATED: 'user.updated',
+  USER_ACTIVATED: 'user.activated',
+  USER_DEACTIVATED: 'user.deactivated',
+  USER_PASSWORD_EMAIL_SENT: 'user.password_email_sent',
 
   // Booking Requests
   BOOKING_REQUEST_CREATED: 'booking_request.created',

@@ -40,6 +40,7 @@ export class AuthService {
   private readonly maxImageSize = 5 * 1024 * 1024; // 5MB
   private readonly allowedMimeTypes = ['image/jpeg', 'image/png'];
   private readonly RESET_TOKEN_EXPIRY_MINUTES = 15;
+  private readonly INVITE_TOKEN_EXPIRY_MINUTES = 7 * 24 * 60;
   private readonly urlBuilder: ApiUrlBuilder;
 
   // OWASP A7: Account lockout thresholds (brute-force protection)
@@ -516,6 +517,42 @@ export class AuthService {
     }
 
     return { success: true };
+  }
+
+  /** A new user chooses their own password: the link stays open for a week. */
+  async sendAccountInvite(user: User): Promise<boolean> {
+    const token = await this.issuePasswordToken(user.id, this.INVITE_TOKEN_EXPIRY_MINUTES);
+    try {
+      await this.emailService.sendAccountInviteEmail(user.email, user.firstName || 'there', token);
+      return true;
+    } catch (error) {
+      this.logger.error(`Failed to send account invite: ${error}`);
+      return false;
+    }
+  }
+
+  /** An administrator asked for this user to get a new password link. */
+  async sendAdminPasswordReset(user: User): Promise<boolean> {
+    const token = await this.issuePasswordToken(user.id, this.RESET_TOKEN_EXPIRY_MINUTES);
+    try {
+      await this.emailService.sendPasswordResetEmail(user.email, user.firstName || 'User', token);
+      return true;
+    } catch (error) {
+      this.logger.error(`Failed to send password reset email: ${error}`);
+      return false;
+    }
+  }
+
+  private async issuePasswordToken(userId: string, minutes: number): Promise<string> {
+    const plainToken = crypto.randomBytes(32).toString('hex');
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        resetPasswordToken: this.hashToken(plainToken),
+        resetPasswordExpiresAt: new Date(Date.now() + minutes * 60000),
+      },
+    });
+    return plainToken;
   }
 
   /**

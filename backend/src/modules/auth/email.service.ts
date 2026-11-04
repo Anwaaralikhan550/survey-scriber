@@ -66,6 +66,43 @@ export class EmailService {
     await this.sendEmail(toEmail, subject, html, text);
   }
 
+  /**
+   * Tell a user added by an administrator that their account is ready.
+   */
+  async sendAccountInviteEmail(
+    toEmail: string,
+    firstName: string,
+    token: string,
+  ): Promise<void> {
+    const link = `${this.frontendUrl}/reset-password?token=${token}`;
+    const subject = `Your ${this.appName} account is ready`;
+    const name = this.escapeHtml(firstName);
+    const app = this.escapeHtml(this.appName);
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<body style="margin: 0; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #f5f5f5; color: #222222;">
+  <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 8px; padding: 32px;">
+    <h1 style="margin: 0 0 16px; font-size: 20px;">Welcome to ${app}</h1>
+    <p style="margin: 0 0 16px;">Hello ${name},</p>
+    <p style="margin: 0 0 24px;">An account has been created for you. Set your password to sign in. This link stays open for 7 days.</p>
+    <p style="margin: 0 0 24px;"><a href="${link}" style="display: inline-block; padding: 12px 24px; background: #1565C0; color: #ffffff; text-decoration: none; border-radius: 6px;">Set your password</a></p>
+    <p style="margin: 0; font-size: 13px; color: #666666;">If you were not expecting this email, you can ignore it.</p>
+  </div>
+</body>
+</html>`;
+    const text = `Hello ${firstName},\n\nAn account has been created for you on ${this.appName}. Set your password to sign in (the link stays open for 7 days):\n\n${link}\n\nIf you were not expecting this email, you can ignore it.`;
+    await this.sendEmail(toEmail, subject, html, text);
+  }
+
+  private escapeHtml(value: string): string {
+    return value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
   private async sendEmail(
     to: string,
     subject: string,

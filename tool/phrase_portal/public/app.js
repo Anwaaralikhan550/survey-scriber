@@ -382,7 +382,7 @@ async function save() {
   renderStatus();
   validate();
   if (r.status === 401) { await signOut('Your session expired. Please sign in again.'); return; }
-  if (r.status === 403) { toast('This account is not an ADMIN, so it cannot publish.', 'err'); return; }
+  if (r.status === 403) { toast('This account cannot publish phrases.', 'err'); return; }
   toast('NOT published: ' + (r.body.message || ('server error ' + r.status)), 'err');
 }
 

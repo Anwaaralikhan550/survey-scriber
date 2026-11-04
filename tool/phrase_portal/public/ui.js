@@ -29,6 +29,11 @@ window.SS = window.SS || {};
     return d.toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
   };
 
+  SS.fmtDay = function (iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+  };
+
   SS.loadingBox = function (text) {
     const box = SS.el('div', 'state', [SS.el('div', 'spinner'), SS.el('p', '', text || 'Loading…')]);
     box.setAttribute('role', 'status');
@@ -178,6 +183,8 @@ window.SS = window.SS || {};
   /** The server's message, which NestJS may send as a list. */
   SS.messageOf = function (r, fallback) {
     const m = r && r.body && r.body.message;
+    const details = r && r.body && r.body.details;
+    if (Array.isArray(details) && details.length) return details.join('. ');
     if (Array.isArray(m)) return m.join('. ');
     return m || fallback || ('Server error ' + (r ? r.status : ''));
   };

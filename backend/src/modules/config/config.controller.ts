@@ -447,6 +447,7 @@ export class ConfigAdminController {
   }
 
   @Post('phrase-bank/upload')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Publish a phrase bank (admin)',
