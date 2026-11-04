@@ -1,6 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { UserRole, SurveyStatus, SurveyType } from '@prisma/client';
+import {
+  completeLinkedBooking,
+  unlinkDeletedSurvey,
+} from '../scheduling/booking-survey';
 import { createHash } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { ApiUrlBuilder } from '../../common/utils/api-url.util';
@@ -214,6 +218,7 @@ export class SyncService {
               clientName: survey.clientName,
               parentSurveyId: survey.parentSurveyId,
               userId: survey.userId,
+              inspectionDate: survey.inspectionDate,
               createdAt: survey.createdAt,
               updatedAt: survey.updatedAt,
             },
@@ -435,6 +440,12 @@ export class SyncService {
             clientName: data?.clientName !== undefined ? String(data.clientName) : undefined,
           },
         });
+        if (
+          validatedStatus === SurveyStatus.COMPLETED &&
+          survey.status !== SurveyStatus.COMPLETED
+        ) {
+          await completeLinkedBooking(tx, entityId);
+        }
         return { operationId, success: true, entityId };
       }
 
@@ -451,6 +462,7 @@ export class SyncService {
           where: { id: entityId },
           data: { deletedAt: new Date() },
         });
+        await unlinkDeletedSurvey(tx, entityId);
         return { operationId, success: true, entityId };
       }
 

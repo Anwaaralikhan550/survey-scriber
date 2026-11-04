@@ -38,6 +38,7 @@ describe('SyncService', () => {
   };
 
   const mockPrismaService = {
+    booking: { updateMany: jest.fn() },
     syncIdempotency: {
       findUnique: jest.fn(),
       create: jest.fn(),

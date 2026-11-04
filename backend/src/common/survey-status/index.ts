@@ -5,9 +5,9 @@
  * Used by both REST API (surveys.service.ts) and Sync API (sync.service.ts).
  *
  * State Machine:
- * - DRAFT → IN_PROGRESS (start work)
+ * - DRAFT → IN_PROGRESS (start work), COMPLETED (first report generated)
  * - IN_PROGRESS → PAUSED (pause work), COMPLETED (finish work)
- * - PAUSED → IN_PROGRESS (resume work)
+ * - PAUSED → IN_PROGRESS (resume work), COMPLETED (first report generated)
  * - COMPLETED → PENDING_REVIEW (submit for review)
  * - PENDING_REVIEW → APPROVED, REJECTED (manager decision)
  * - APPROVED → (terminal state)
@@ -24,9 +24,9 @@ import { BadRequestException, ForbiddenException } from '@nestjs/common';
  * Maps current status to array of allowed target statuses.
  */
 export const SURVEY_STATUS_TRANSITIONS: Record<SurveyStatus, SurveyStatus[]> = {
-  [SurveyStatus.DRAFT]: [SurveyStatus.IN_PROGRESS],
+  [SurveyStatus.DRAFT]: [SurveyStatus.IN_PROGRESS, SurveyStatus.COMPLETED],
   [SurveyStatus.IN_PROGRESS]: [SurveyStatus.PAUSED, SurveyStatus.COMPLETED],
-  [SurveyStatus.PAUSED]: [SurveyStatus.IN_PROGRESS],
+  [SurveyStatus.PAUSED]: [SurveyStatus.IN_PROGRESS, SurveyStatus.COMPLETED],
   [SurveyStatus.COMPLETED]: [SurveyStatus.PENDING_REVIEW],
   [SurveyStatus.PENDING_REVIEW]: [SurveyStatus.APPROVED, SurveyStatus.REJECTED],
   [SurveyStatus.APPROVED]: [], // Terminal state

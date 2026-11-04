@@ -552,6 +552,18 @@ export class SchedulingController {
     return this.schedulingService.updateBookingStatus(id, dto, user);
   }
 
+  @Post('bookings/:id/inspection')
+  @Roles(UserRole.ADMIN, UserRole.MANAGER, UserRole.SURVEYOR)
+  @ApiOperation({ summary: "Get the booking's inspection, creating it if it has none" })
+  @ApiParam({ name: 'id', description: 'Booking ID' })
+  @ApiResponse({ status: 201, type: BookingResponseDto })
+  async ensureBookingSurvey(
+    @Param('id', ParseUUIDPipe) id: string,
+    @CurrentUser() user: AuthenticatedUser,
+  ): Promise<BookingResponseDto> {
+    return this.schedulingService.ensureBookingSurvey(id, user);
+  }
+
   @Delete('bookings/:id')
   @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @ApiOperation({ summary: 'Cancel a booking (sets status to CANCELLED)' })

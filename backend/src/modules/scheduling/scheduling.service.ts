@@ -6,8 +6,13 @@ import {
   ConflictException,
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { UserRole, BookingStatus, Prisma } from '@prisma/client';
+import { UserRole, BookingStatus, Prisma, SurveyStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import {
+  createSurveyForBooking,
+  retireUnstartedSurvey,
+  surveyFieldsFromBooking,
+} from './booking-survey';
 import {
   BookingCreatedEvent,
   BookingStatusChangedEvent,
@@ -667,9 +672,20 @@ export class SchedulingService {
             }
           }
 
-          // Create booking INSIDE same transaction
+          // Create booking INSIDE same transaction, with its inspection
+          const surveyId = await createSurveyForBooking(tx, {
+            surveyorId: dto.surveyorId,
+            surveyType: dto.surveyType ?? 'home_survey',
+            jobRef: dto.jobRef ?? null,
+            clientName: dto.clientName ?? null,
+            postcode: dto.postcode ?? null,
+            propertyAddress: dto.propertyAddress ?? null,
+            date: bookingDate,
+          });
+
           return tx.booking.create({
             data: {
+              surveyId,
               surveyorId: dto.surveyorId,
               date: bookingDate,
               startTime: dto.startTime,
@@ -763,6 +779,31 @@ export class SchedulingService {
       throw new ForbiddenException('Viewers cannot update bookings');
     }
 
+    const linkedSurvey = booking.surveyId
+      ? await this.prisma.survey.findUnique({
+          where: { id: booking.surveyId },
+          include: {
+            sections: {
+              where: { answers: { some: {} } },
+              select: { id: true },
+              take: 1,
+            },
+          },
+        })
+      : null;
+
+    const surveyType = dto.surveyType ?? booking.surveyType;
+    if (
+      surveyType !== booking.surveyType &&
+      linkedSurvey &&
+      (linkedSurvey.status !== SurveyStatus.DRAFT ||
+        linkedSurvey.sections.length > 0)
+    ) {
+      throw new BadRequestException(
+        'The survey type cannot change once the inspection has started',
+      );
+    }
+
     // If date or time is being updated, validate
     const newDate = dto.date ? new Date(dto.date) : booking.date;
     const newStartTime = dto.startTime ?? booking.startTime;
@@ -774,13 +815,43 @@ export class SchedulingService {
       }
     }
 
-    // If date or time changed, check for double-booking with transaction protection
+    const fields = {
+      date: dto.date ? newDate : undefined,
+      startTime: dto.startTime,
+      endTime: dto.endTime,
+      clientName: dto.clientName,
+      clientPhone: dto.clientPhone,
+      clientEmail: dto.clientEmail,
+      propertyAddress: dto.propertyAddress,
+      notes: dto.notes,
+      surveyType: dto.surveyType,
+      jobRef: dto.jobRef,
+      propertyType: dto.propertyType,
+      yearBuilt: dto.yearBuilt,
+      addressLine: dto.addressLine,
+      city: dto.city,
+      town: dto.town,
+      postcode: dto.postcode,
+      county: dto.county,
+      accessType: dto.accessType,
+      estateAgentName: dto.estateAgentName,
+      estateAgentPhone: dto.estateAgentPhone,
+      estateAgentAddress: dto.estateAgentAddress,
+      estateAgentNotes: dto.estateAgentNotes,
+    };
+
+    // Saving a booking with its time unchanged, or a cancelled one, books no new slot.
+    const slotChanged =
+      booking.status !== BookingStatus.CANCELLED &&
+      (newDate.getTime() !== booking.date.getTime() ||
+        newStartTime !== booking.startTime ||
+        newEndTime !== booking.endTime);
+
     let updated;
     try {
-      if (dto.date || dto.startTime || dto.endTime) {
-        // Use SERIALIZABLE transaction when time/date changes (race-condition prone)
-        updated = await this.prisma.$transaction(
-          async (tx) => {
+      updated = await this.prisma.$transaction(
+        async (tx) => {
+          if (slotChanged) {
             const existingBookings = await tx.booking.findMany({
               where: {
                 surveyorId: booking.surveyorId,
@@ -804,48 +875,32 @@ export class SchedulingService {
                 );
               }
             }
+          }
 
-            return tx.booking.update({
-              where: { id },
-              data: {
-                date: dto.date ? new Date(dto.date) : undefined,
-                startTime: dto.startTime,
-                endTime: dto.endTime,
-                clientName: dto.clientName,
-                clientPhone: dto.clientPhone,
-                clientEmail: dto.clientEmail,
-                propertyAddress: dto.propertyAddress,
-                notes: dto.notes,
+          const saved = await tx.booking.update({
+            where: { id },
+            data: fields,
+            include: {
+              surveyor: {
+                select: { id: true, firstName: true, lastName: true, email: true },
               },
-              include: {
-                surveyor: {
-                  select: { id: true, firstName: true, lastName: true, email: true },
-                },
-              },
-            });
-          },
-          {
-            isolationLevel: Prisma.TransactionIsolationLevel.Serializable,
-          },
-        );
-      } else {
-        // No time/date change - simple update without transaction overhead
-        updated = await this.prisma.booking.update({
-          where: { id },
-          data: {
-            clientName: dto.clientName,
-            clientPhone: dto.clientPhone,
-            clientEmail: dto.clientEmail,
-            propertyAddress: dto.propertyAddress,
-            notes: dto.notes,
-          },
-          include: {
-            surveyor: {
-              select: { id: true, firstName: true, lastName: true, email: true },
             },
-          },
-        });
-      }
+          });
+
+          // The inspection shows what the booking says.
+          if (linkedSurvey && linkedSurvey.deletedAt === null) {
+            await tx.survey.update({
+              where: { id: linkedSurvey.id },
+              data: surveyFieldsFromBooking(saved),
+            });
+          }
+          return saved;
+        },
+        // SERIALIZABLE when the slot changes (race-condition prone)
+        slotChanged
+          ? { isolationLevel: Prisma.TransactionIsolationLevel.Serializable }
+          : undefined,
+      );
     } catch (error) {
       // Handle unique constraint violation (P2002) - database-level safety net
       if (
@@ -860,6 +915,42 @@ export class SchedulingService {
     }
 
     return this.mapBookingToResponse(updated);
+  }
+
+  /**
+   * The booking's inspection, created now if it has none (its inspection was
+   * deleted, for example).
+   */
+  async ensureBookingSurvey(
+    id: string,
+    currentUser: AuthenticatedUser,
+  ): Promise<BookingResponseDto> {
+    const booking = await this.prisma.booking.findUnique({ where: { id } });
+    if (!booking) {
+      throw new NotFoundException('Booking not found');
+    }
+    if (currentUser.role === UserRole.VIEWER) {
+      throw new ForbiddenException('Viewers cannot start an inspection');
+    }
+    if (
+      currentUser.role === UserRole.SURVEYOR &&
+      booking.surveyorId !== currentUser.id
+    ) {
+      throw new ForbiddenException(
+        'Surveyors can only start inspections for their own bookings',
+      );
+    }
+    if (booking.status === BookingStatus.CANCELLED) {
+      throw new BadRequestException('This booking has been cancelled');
+    }
+
+    const saved = await this.prisma.$transaction(async (tx) => {
+      const current = await tx.booking.findUniqueOrThrow({ where: { id } });
+      if (current.surveyId) return current;
+      const surveyId = await createSurveyForBooking(tx, current);
+      return tx.booking.update({ where: { id }, data: { surveyId } });
+    });
+    return this.mapBookingToResponse(saved);
   }
 
   /**
@@ -926,6 +1017,9 @@ export class SchedulingService {
     this.validateBookingTransition(booking.status, dto.status);
 
     const previousStatus = booking.status;
+    if (dto.status === BookingStatus.CANCELLED) {
+      await retireUnstartedSurvey(this.prisma, booking.surveyId);
+    }
     const updated = await this.prisma.booking.update({
       where: { id },
       data: { status: dto.status },
@@ -988,6 +1082,7 @@ export class SchedulingService {
     this.validateBookingTransition(booking.status, BookingStatus.CANCELLED);
 
     const previousStatus = booking.status;
+    await retireUnstartedSurvey(this.prisma, booking.surveyId);
     const updated = await this.prisma.booking.update({
       where: { id },
       data: { status: BookingStatus.CANCELLED },
@@ -1122,6 +1217,7 @@ export class SchedulingService {
   private mapBookingToResponse(booking: any): BookingResponseDto {
     return {
       id: booking.id,
+      surveyId: booking.surveyId ?? undefined,
       surveyorId: booking.surveyorId,
       date: booking.date.toISOString().split('T')[0],
       startTime: booking.startTime,

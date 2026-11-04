@@ -15,6 +15,7 @@ import {
   ActorType,
   AuditEntityType,
 } from '@prisma/client';
+import { retireUnstartedSurvey } from '../scheduling/booking-survey';
 import { AuditService, AuditActions } from '../audit/audit.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { WebhookDispatcherService } from '../webhooks/webhook-dispatcher.service';
@@ -394,7 +395,7 @@ export class BookingChangeRequestsService {
     const result = await this.prisma.$transaction(async (tx) => {
       // Apply the change to the booking
       if (request.type === BookingChangeRequestType.RESCHEDULE) {
-        await tx.booking.update({
+        const moved = await tx.booking.update({
           where: { id: request.bookingId },
           data: {
             date: request.proposedDate!,
@@ -402,13 +403,20 @@ export class BookingChangeRequestsService {
             endTime: request.proposedEndTime!,
           },
         });
+        if (moved.surveyId) {
+          await tx.survey.update({
+            where: { id: moved.surveyId },
+            data: { inspectionDate: moved.date },
+          });
+        }
       } else if (request.type === BookingChangeRequestType.CANCEL) {
-        await tx.booking.update({
+        const cancelled = await tx.booking.update({
           where: { id: request.bookingId },
           data: {
             status: BookingStatus.CANCELLED,
           },
         });
+        await retireUnstartedSurvey(tx, cancelled.surveyId);
       }
 
       // Update the change request

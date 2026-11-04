@@ -8,6 +8,10 @@ import {
   Logger,
 } from '@nestjs/common';
 import { UserRole, Prisma, SurveyType, SurveyStatus, ActorType, AuditEntityType } from '@prisma/client';
+import {
+  completeLinkedBooking,
+  unlinkDeletedSurvey,
+} from '../scheduling/booking-survey';
 import { AuditService, AuditActions } from '../audit/audit.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { WebhookDispatcherService } from '../webhooks/webhook-dispatcher.service';
@@ -382,6 +386,13 @@ export class SurveysService {
         },
       });
 
+      if (
+        dto.status === SurveyStatus.COMPLETED &&
+        existingSurvey.status !== SurveyStatus.COMPLETED
+      ) {
+        await completeLinkedBooking(tx, id);
+      }
+
       return updatedSurvey;
     });
 
@@ -421,9 +432,12 @@ export class SurveysService {
 
     const deletedAt = new Date();
 
-    await this.prisma.survey.update({
-      where: { id },
-      data: { deletedAt },
+    await this.prisma.$transaction(async (tx) => {
+      await tx.survey.update({
+        where: { id },
+        data: { deletedAt },
+      });
+      await unlinkDeletedSurvey(tx, id);
     });
 
     this.logger.log('Survey soft-deleted: ' + id + ' by user: ' + user.id);

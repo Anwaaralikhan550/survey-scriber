@@ -38,6 +38,7 @@ describe('SurveysService', () => {
   };
 
   const mockPrismaService = {
+    booking: { updateMany: jest.fn() },
     survey: {
       findUnique: jest.fn(),
       findMany: jest.fn(),
@@ -336,6 +337,12 @@ describe('SurveysService', () => {
   });
 
   describe('softDelete', () => {
+    beforeEach(() => {
+      mockPrismaService.$transaction.mockImplementation(async (fn: any) =>
+        fn(mockPrismaService),
+      );
+    });
+
     it('should soft delete a survey successfully', async () => {
       mockPrismaService.survey.findUnique.mockResolvedValue(mockSurvey);
       const deletedAt = new Date();

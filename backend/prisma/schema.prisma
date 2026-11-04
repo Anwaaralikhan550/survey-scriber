@@ -149,6 +149,8 @@ model Survey {
   deletedAt       DateTime?    @map("deleted_at")
   // Report PDF storage path (set when staff exports PDF)
   reportPdfPath   String?      @map("report_pdf_path") @db.VarChar(500)
+  // Date of the visit, from the booking. Null for surveys made without a booking.
+  inspectionDate  DateTime?    @map("inspection_date") @db.Date
 
   // Relations
   user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -157,6 +159,7 @@ model Survey {
   childSurveys Survey[]  @relation("SurveyReinspection")
   sections     Section[]
   media        Media[]
+  booking      Booking?
 
   @@index([userId])
   @@index([status])
@@ -554,7 +557,10 @@ model Booking {
   createdById     String        @map("created_by_id") @db.Uuid
   createdAt       DateTime      @default(now()) @map("created_at")
   updatedAt       DateTime      @updatedAt @map("updated_at")
+  // The inspection this booking created
+  surveyId        String?       @unique @map("survey_id") @db.Uuid
 
+  survey         Survey?                @relation(fields: [surveyId], references: [id], onDelete: SetNull)
   surveyor       User                   @relation("BookingSurveyor", fields: [surveyorId], references: [id], onDelete: Cascade)
   createdBy      User                   @relation("BookingCreator", fields: [createdById], references: [id], onDelete: Restrict)
   client         Client?                @relation(fields: [clientId], references: [id], onDelete: SetNull)

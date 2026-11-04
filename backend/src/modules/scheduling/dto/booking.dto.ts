@@ -4,6 +4,7 @@ import {
   IsDateString,
   IsEmail,
   IsEnum,
+  IsIn,
   IsInt,
   IsOptional,
   IsString,
@@ -264,6 +265,87 @@ export class UpdateBookingDto {
   @IsString()
   @MaxLength(2000)
   notes?: string;
+
+  @ApiPropertyOptional({ enum: ['home_survey', 'valuation'] })
+  @IsOptional()
+  @IsIn(['home_survey', 'valuation'])
+  surveyType?: string;
+
+  @ApiPropertyOptional({ maxLength: 100 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(100)
+  jobRef?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 50 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(50)
+  propertyType?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 20 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(20)
+  yearBuilt?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 255 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  addressLine?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 120 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  city?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 120 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  town?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 20 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(20)
+  postcode?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 120 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(120)
+  county?: string | null;
+
+  @ApiPropertyOptional({ enum: ['direct', 'collect_keys'] })
+  @IsOptional()
+  @IsIn(['direct', 'collect_keys'])
+  accessType?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 255 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  estateAgentName?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 50 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(50)
+  estateAgentPhone?: string | null;
+
+  @ApiPropertyOptional({ maxLength: 500 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(500)
+  estateAgentAddress?: string | null;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  estateAgentNotes?: string | null;
 }
 
 /**
@@ -349,6 +431,12 @@ export class ListBookingsDto {
 export class BookingResponseDto {
   @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
   id: string;
+
+  @ApiPropertyOptional({
+    example: '550e8400-e29b-41d4-a716-446655440000',
+    description: 'The inspection this booking created',
+  })
+  surveyId?: string;
 
   @ApiProperty({ example: '550e8400-e29b-41d4-a716-446655440000' })
   surveyorId: string;

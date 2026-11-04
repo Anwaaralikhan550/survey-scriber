@@ -27,6 +27,7 @@ describe('SchedulingService.createBooking - availability', () => {
     surveyorAvailability: { findUnique: jest.fn() },
     availabilityException: { findUnique: jest.fn() },
     booking: { findMany: jest.fn(), create: jest.fn() },
+    survey: { create: jest.fn(async () => ({ id: 's1' })) },
     $transaction: jest.fn(),
   };
 
