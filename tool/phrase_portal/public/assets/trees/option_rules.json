@@ -1,0 +1,740 @@
+{
+ "inspection": {
+  "activity_energy_effiency": {
+   "android_material_design_spinner": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+   ]
+  },
+  "activity_gated_community": {
+   "android_material_design_spinner3": [
+    "No",
+    "Yes"
+   ]
+  },
+  "activity_grounds_garage": {
+   "actv_condition": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_other_area_knotweed": {
+   "actv_h3_management": [
+    "Management A",
+    "Management B",
+    "Management C",
+    "Management D"
+   ],
+   "actv_status": [
+    "Found",
+    "Not found",
+    "Not inspected"
+   ]
+  },
+  "activity_grounds_other_front_garden": {
+   "actv_h2_garden_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_other_grounds": {
+   "actv_type": [
+    "Hilly",
+    "Level",
+    "Sloping",
+    "Undulating"
+   ]
+  },
+  "activity_grounds_other_large_outbuildings": {
+   "actv_h2_ob_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_other_repair_shed": {
+   "actv_h2_shed_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_grounds_shared_access": {
+   "actv_h2_comm_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ],
+   "actv_h2_shared_cond": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_in_side_property_bathroom_fittings_extractor_fan": {
+   "actv_status": [
+    "Fan not working",
+    "Working extractor fan"
+   ]
+  },
+  "activity_in_side_property_fire_places_repair_blocked_fireplace": {
+   "actv_status": [
+    "Unvented",
+    "Vented"
+   ]
+  },
+  "activity_in_side_property_floors_creaking": {
+   "actv_status": [
+    "Creaking floor noted",
+    "No Creaking floor"
+   ]
+  },
+  "activity_in_side_property_floors_dampness": {
+   "actv_status": [
+    "Dampness noted",
+    "Unknown damp cause"
+   ]
+  },
+  "activity_in_side_property_floors_tiles": {
+   "actv_tiles": [
+    "Cracked tiles",
+    "No cracked tiles"
+   ]
+  },
+  "activity_in_side_property_other_communal_area": {
+   "actv_status": [
+    "No defects noted",
+    "Not inspected",
+    "Poor condition",
+    "Wear and tear noted"
+   ]
+  },
+  "activity_in_side_property_wap_dampness": {
+   "actv_status_91": [
+    "Damp source known",
+    "Unknown damp source"
+   ],
+   "damp_status": [
+    "No damp",
+    "Penetrating damp noted",
+    "Suspected rising damp"
+   ]
+  },
+  "activity_in_side_property_wap_movement_cracks": {
+   "android_material_design_spinner3": [
+    "Minor cracking",
+    "Significant cracking",
+    "Structural Movement"
+   ]
+  },
+  "activity_in_side_property_wap_removed_wall": {
+   "actv_ia_outcome": [
+    "Defects noted",
+    "No defects noted"
+   ]
+  },
+  "activity_in_side_property_wood_work_creaking_stairs": {
+   "actv_status": [
+    "Creaking stairs",
+    "Repair now"
+   ]
+  },
+  "activity_in_side_property_wood_work_door_sampling": {
+   "actv_door_operation": [
+    "With difficulty",
+    "With resistance"
+   ]
+  },
+  "activity_in_side_property_wood_work_out_of_square_doors": {
+   "actv_status": [
+    "Investigate",
+    "Out of square door/frames"
+   ]
+  },
+  "activity_inside_property_bathroom_fittings_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_inside_property_built_in_fittings_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_inside_property_ceilings_cracks": {
+   "actv_cracking": [
+    "Minor cracking",
+    "Significant cracking"
+   ]
+  },
+  "activity_inside_property_ceilings_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_inside_property_ceilings_repairs_ceilings": {
+   "actv_status": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_inside_property_ceilings_unevenness": {
+   "actv_unevenness": [
+    "Minor unevenness",
+    "Significant unevenness"
+   ]
+  },
+  "activity_inside_property_ceilings_water_staining": {
+   "actv_staining": [
+    "Dry water staining",
+    "Wet water staining"
+   ]
+  },
+  "activity_inside_property_fireplaces_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_inside_property_floors_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_inside_property_other_celler_inspected": {
+   "actv_used_as": [
+    "In use",
+    "Not in use"
+   ]
+  },
+  "activity_inside_property_repair_insect_infestation": {
+   "actv_insect_infestation": [
+    "No wood-boring",
+    "Wood boring noted"
+   ]
+  },
+  "activity_inside_property_repair_party_walls": {
+   "actv_party_wall": [
+    "Largely missing",
+    "Partially missing"
+   ]
+  },
+  "activity_inside_property_repair_removed_chimney_breast": {
+   "actv_status": [
+    "Adequate support",
+    "Not inspected",
+    "Poor support",
+    "Risk of collapse"
+   ]
+  },
+  "activity_inside_property_roof_insulation": {
+   "actv_insulation_outcome": [
+    "Adequate insulation",
+    "Inadequate/no insulation"
+   ]
+  },
+  "activity_inside_property_roof_structure_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_inside_property_roof_underlay": {
+   "actv_underlay": [
+    "No underlay",
+    "Underlay present"
+   ]
+  },
+  "activity_inside_property_roof_ventilation": {
+   "actv_ventilation": [
+    "Condensation noted",
+    "No ventilation",
+    "Ventilation noted"
+   ]
+  },
+  "activity_inside_property_walls_and_partitions_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_listed_building__listed_building": {
+   "android_material_design_spinner": [
+    "No",
+    "Yes"
+   ]
+  },
+  "activity_other_repair_nearby_trees": {
+   "actv_condition": [
+    "Defects noted",
+    "No defects"
+   ]
+  },
+  "activity_outside_property_chimney_repair_flaunching": {
+   "actv_condition": [
+    "Repaired now",
+    "Repaired soon"
+   ]
+  },
+  "activity_outside_property_condition": {
+   "android_material_design_spinner3": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_outside_property_conservatory_porch_repairs": {
+   "actv_cp": [
+    "Conservatory",
+    "Porch"
+   ]
+  },
+  "activity_outside_property_conservatory_porch_safety_glass_rating": {
+   "actv_status": [
+    "BS EN noted",
+    "No BS EN noted"
+   ]
+  },
+  "activity_outside_property_conservatory_porch_safety_glass_rating__safety_glass_rating": {
+   "actv_status": [
+    "BS EN noted",
+    "No BS EN noted"
+   ]
+  },
+  "activity_outside_property_leaning_chimney": {
+   "android_material_design_spinner4": [
+    "No repair required",
+    "Repair required"
+   ]
+  },
+  "activity_outside_property_main_wall_repairs_lintel": {
+   "actv_condition": [
+    "Minor defects",
+    "Significant defect"
+   ]
+  },
+  "activity_outside_property_main_wall_repairs_lintel__door": {
+   "actv_condition": [
+    "Minor defects",
+    "Significant defect"
+   ]
+  },
+  "activity_outside_property_main_wall_repairs_near_by_tress": {
+   "actv_trees": [
+    "Tree defects noted",
+    "Trees"
+   ]
+  },
+  "activity_outside_property_main_wall_repairs_wall_the_repair": {
+   "actv_status": [
+    "Repair defect",
+    "Wall Ties defects"
+   ]
+  },
+  "activity_outside_property_main_wall_repairs_window_sills": {
+   "actv_condition": [
+    "Minor Defect",
+    "Significant Defect"
+   ]
+  },
+  "activity_outside_property_main_walls_damp": {
+   "actv_status": [
+    "Damp found",
+    "No damp found"
+   ]
+  },
+  "activity_outside_property_main_walls_dpc": {
+   "actv_status": [
+    "Not visible",
+    "Partially visible",
+    "Visible"
+   ]
+  },
+  "activity_outside_property_main_walls_ews1": {
+   "actv_ews1": [
+    "EWS1 form not required",
+    "EWS1 form required"
+   ]
+  },
+  "activity_outside_property_main_walls_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_outside_property_other_joinery_and_finishes_main_screen": {
+   "actv_condition": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_outside_property_other_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_outside_property_out_side_doors_about_doors": {
+   "actv_condition": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ],
+   "actv_status": [
+    "BS EN noted",
+    "No BS EN noted"
+   ]
+  },
+  "activity_outside_property_porch_condition": {
+   "actv_condition": [
+    "Very poor"
+   ]
+  },
+  "activity_outside_property_porch_condition__condition": {
+   "actv_condition": [
+    "Very poor"
+   ]
+  },
+  "activity_outside_property_repair_chimney_dish_aerial": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_repair_chimney_dish_aerial__satellite": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_repair_chimney_pots": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_repair_chimney_repointing": {
+   "actv_condition": [
+    "Repaired now",
+    "Repaired soon"
+   ]
+  },
+  "activity_outside_property_repair_flashing": {
+   "android_material_design_spinner4": [
+    "Repaired now",
+    "Repaired soon"
+   ]
+  },
+  "activity_outside_property_roof_repair_flashing": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_roof_repair_flat_roof": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_roof_repair_hip_tiles": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_roof_repair_parapet_wall": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_roof_repair_ridge_tiles": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_roof_repair_tiles": {
+   "actv_condition": [
+    "Leaking",
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_roof_repair_valley_gutters": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_rwg__repair_pipes_gutters": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_rwg_about": {
+   "actv_condition": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "activity_outside_property_rwg_defective_connections": {
+   "actv_condition": [
+    "Repair now",
+    "Repair soon"
+   ]
+  },
+  "activity_outside_property_stacks": {
+   "actv_stack_number": [
+    "Multiple",
+    "One",
+    "Three",
+    "Two"
+   ]
+  },
+  "activity_outside_property_windows_aboutwindow": {
+   "actv_condition": [
+    "Very poor"
+   ],
+   "actv_status": [
+    "BS EN noted",
+    "No BS EN"
+   ]
+  },
+  "activity_outside_property_windows_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_outside_property_windows_sill_projection": {
+   "actv_condition": [
+    "Fairly",
+    "Poorly",
+    "Properly"
+   ]
+  },
+  "activity_over_all_openion": {
+   "android_material_design_spinner5": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable"
+   ]
+  },
+  "activity_parking__parking": {
+   "android_material_design_spinner": [
+    "Available",
+    "No Parking"
+   ]
+  },
+  "activity_property_built_year": {
+   "actv_a2_year_band": [
+    "1900– 1929",
+    "1930–1949",
+    "1950–1969",
+    "1970–1989",
+    "1990–2009",
+    "2010 onwards",
+    "pre-1900",
+    "the exact construction date is unknown"
+   ]
+  },
+  "activity_property_converted": {
+   "actv_a2_conversion_date": [
+    "Known date",
+    "Unknown date"
+   ],
+   "android_material_design_spinner": [
+    "Converted",
+    "Not converted"
+   ]
+  },
+  "activity_property_extended": {
+   "android_material_design_spinner": [
+    "Extended",
+    "Not extended"
+   ]
+  },
+  "activity_property_facing": {
+   "android_material_design_spinner": [
+    "East",
+    "North",
+    "North-east",
+    "North-west",
+    "South",
+    "South-east",
+    "South-west",
+    "West"
+   ]
+  },
+  "activity_property_location": {
+   "android_material_design_spinner2": [
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  "activity_property_status": {
+   "android_material_design_spinner": [
+    "Occupied",
+    "Partly occupied",
+    "Vacant"
+   ]
+  },
+  "activity_property_weather": {
+   "android_material_design_spinner": [
+    "Cold",
+    "Dry",
+    "Overcast",
+    "Rainy",
+    "Snowing",
+    "Sunny",
+    "Wet",
+    "Windy"
+   ]
+  },
+  "activity_rwg_weather_condition": {
+   "actv_status": [
+    "Dry weather",
+    "Snowfall",
+    "Wet weather"
+   ]
+  },
+  "activity_services_gas_oil_main_screen": {
+   "android_material_design_spinner4": [
+    "1",
+    "2",
+    "3"
+   ]
+  },
+  "activity_services_main_gas": {
+   "actv_condition": [
+    "Metre",
+    "Metre not found"
+   ]
+  },
+  "activity_services_water_main_water": {
+   "actv_g3_stopcock": [
+    "Not found",
+    "Stopcock found"
+   ]
+  },
+  "activity_services_water_water_tank": {
+   "actv_g3_tank_insulation": [
+    "Inadequately insulated"
+   ]
+  },
+  "activity_topography": {
+   "android_material_design_spinner": [
+    "Gently sloping",
+    "Level",
+    "Moderately sloping",
+    "Steeply sloping"
+   ]
+  },
+  "outside_property_about_roof_layout__flat": {
+   "actv_condition": [
+    "Fair",
+    "Good",
+    "Poor",
+    "Reasonable",
+    "Very poor"
+   ]
+  },
+  "outside_property_roof_covering_roof_structure_layout": {
+   "actv_status": [
+    "No repair required",
+    "Repair defect"
+   ]
+  },
+  "outside_property_roof_covering_weather_layout": {
+   "actv_status": [
+    "Dry weather",
+    "Snowfall",
+    "Wet weather"
+   ]
+  }
+ },
+ "valuation": {
+  "new_build_property": {
+   "actv_work_stage": [
+    "Complete"
+   ]
+  },
+  "val_sub_floor_vents": {
+   "actv_sub_floor_vents": [
+    "Adequate",
+    "Inadequate"
+   ]
+  },
+  "val_gas": {
+   "actv_gas_supply": [
+    "Mains",
+    "None"
+   ]
+  },
+  "val_water": {
+   "actv_water_supply": [
+    "Mains",
+    "Private"
+   ]
+  },
+  "val_damp_meter": {
+   "actv_damp_meter": [
+    "Damp Found",
+    "No damp"
+   ]
+  },
+  "overall_condition": {
+   "actv_overall_condition": [
+    "Good",
+    "Average",
+    "Poor"
+   ]
+  }
+ }
+}

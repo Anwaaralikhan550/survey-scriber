@@ -217,6 +217,30 @@ button.tile:hover{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-s
 .tile.off b{color:var(--soft)}
 .config-version{margin:16px 0 8px}
 
+.tree-bar{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.tree-bar select{background:#fff}
+.tree-status{font-size:13px}
+.page-intro{margin:0 0 14px}
+.check-label{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--soft)}
+.option-list{display:grid;gap:14px}
+.option-card{gap:8px}
+.option-card h3{font-size:15px;color:var(--navy)}
+.option-path{font-size:12.5px}
+.option-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}
+.option-input{padding:8px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);width:100%}
+.option-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.option-input:disabled{background:var(--bg);color:var(--faint);text-decoration:line-through}
+.option-row .btn{padding:6px 10px;font-size:12.5px}
+.option-notes{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px}
+.option-notes:empty{display:none}
+.option-note{font-size:12.5px;color:var(--warn)}
+.option-card>.btn{justify-self:start;align-self:flex-start;padding:7px 12px;font-size:13px}
+.review-list{list-style:none;margin:0;padding:0;max-height:46vh;overflow:auto;display:grid;gap:8px}
+.review-list li{display:grid;gap:1px;font-size:13.5px}
+.review-list b{font-weight:600;color:var(--navy)}
+.review-list span{font-size:12px}
+.dialog.wide{width:min(94vw,720px)}
+
 /* ── responsive ───────────────────────────────── */
 @media (max-width:980px){
   .login{grid-template-columns:1fr}

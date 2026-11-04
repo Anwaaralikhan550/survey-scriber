@@ -52,6 +52,123 @@ test('admin pages never put text in through innerHTML', () => {
   }
 });
 
+const TL = require('./public/tree-logic.js');
+const sampleTree = () => ({
+  baseBundledVersion: 8,
+  sections: [{
+    key: 'E',
+    title: 'Outside Property',
+    nodes: [
+      { id: 'g', title: 'Chimney', type: 'group', parentId: null },
+      { id: 's', title: 'Repairs', type: 'screen', parentId: 'g', fields: [
+        { id: 'd', label: 'Condition', type: 'dropdown', options: ['Good', 'Fair', 'Poor'] },
+        { id: 't', label: 'Note', type: 'text' },
+      ] },
+    ],
+  }],
+});
+
+test('dropdowns are found with where they live', () => {
+  const list = TL.dropdowns(sampleTree());
+  assert.strictEqual(list.length, 1);
+  assert.strictEqual(list[0].path, 'Outside Property > Chimney > Repairs');
+  assert.strictEqual(list[0].field.id, 'd');
+});
+
+test('both real trees: every dropdown is listed', () => {
+  const inspection = load('assets/property_inspection/inspection_tree.json');
+  const valuation = load('assets/property_valuation/valuation_tree.json');
+  assert.ok(TL.dropdowns(inspection).length >= 197);
+  assert.strictEqual(TL.dropdowns(valuation).length, 62);
+  assert.deepStrictEqual(TL.problems(inspection), []);
+  assert.deepStrictEqual(TL.problems(valuation), []);
+});
+
+test('renaming keeps the stored value; going back removes the rename', () => {
+  const f = TL.dropdowns(sampleTree())[0].field;
+  TL.rename(f, 'Good', ' Very good ');
+  assert.deepStrictEqual(f.options, ['Good', 'Fair', 'Poor']);
+  assert.strictEqual(TL.wordsOf(f, 'Good'), 'Very good');
+  TL.rename(f, 'Good', 'Good');
+  assert.strictEqual(f.optionLabels, undefined);
+});
+
+test('hiding and bringing back', () => {
+  const f = TL.dropdowns(sampleTree())[0].field;
+  TL.setHidden(f, 'Poor', true);
+  assert.deepStrictEqual(f.hiddenOptions, ['Poor']);
+  assert.ok(TL.isHidden(f, 'Poor'));
+  TL.setHidden(f, 'Poor', false);
+  assert.strictEqual(f.hiddenOptions, undefined);
+});
+
+test('adding: empty and duplicates refused, including against new words', () => {
+  const f = TL.dropdowns(sampleTree())[0].field;
+  assert.ok(TL.addOption(f, '  '));
+  assert.ok(TL.addOption(f, 'fair'));
+  TL.rename(f, 'Good', 'Very good');
+  assert.ok(TL.addOption(f, 'VERY GOOD'));
+  assert.strictEqual(TL.addOption(f, 'Excellent'), null);
+  assert.ok(f.options.includes('Excellent'));
+});
+
+test('problems: nothing left, duplicates, empty words', () => {
+  const f = TL.dropdowns(sampleTree())[0].field;
+  assert.strictEqual(TL.problemWith(f), null);
+  TL.rename(f, 'Good', '   ');
+  assert.match(TL.problemWith(f), /no text/);
+  TL.rename(f, 'Good', 'Good');
+  TL.rename(f, 'Fair', 'good');
+  assert.match(TL.problemWith(f), /twice/);
+  TL.rename(f, 'Fair', 'Fair');
+  f.options.forEach((o) => TL.setHidden(f, o, true));
+  assert.match(TL.problemWith(f), /At least one/);
+});
+
+test('a hidden option may share words with a shown one', () => {
+  const f = TL.dropdowns(sampleTree())[0].field;
+  TL.setHidden(f, 'Fair', true);
+  TL.rename(f, 'Poor', 'Fair');
+  assert.strictEqual(TL.problemWith(f), null);
+});
+
+test('the review lists each change in plain words', () => {
+  const before = sampleTree();
+  const after = TL.clone(before);
+  const f = TL.dropdowns(after)[0].field;
+  TL.rename(f, 'Good', 'Very good');
+  TL.setHidden(f, 'Poor', true);
+  TL.addOption(f, 'Excellent');
+  const what = TL.optionChanges(before, after).map((c) => c.what);
+  assert.deepStrictEqual(what.sort(), ['"Good" now reads "Very good"', 'Added "Excellent"', 'Hid "Poor"'].sort());
+  assert.deepStrictEqual(TL.optionChanges(before, TL.clone(before)), []);
+});
+
+test('search finds a screen, a list, an option and new words', () => {
+  const entry = TL.dropdowns(sampleTree())[0];
+  assert.ok(TL.matches(entry, 'chimney'));
+  assert.ok(TL.matches(entry, 'condition'));
+  assert.ok(TL.matches(entry, 'poor'));
+  assert.ok(!TL.matches(entry, 'zebra'));
+  TL.rename(entry.field, 'Good', 'Superb');
+  assert.ok(TL.matches(entry, 'superb'));
+});
+
+test('option_rules.json fits the trees', () => {
+  const rules = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'assets', 'trees', 'option_rules.json'), 'utf8'));
+  const screens = new Set(TL.nodesOf(load('assets/property_inspection/inspection_tree.json')).map((n) => n.id));
+  for (const screen of Object.keys(rules.inspection)) assert.ok(screens.has(screen), screen);
+  const vals = new Set(TL.nodesOf(load('assets/property_valuation/valuation_tree.json')).map((n) => n.id));
+  for (const screen of Object.keys(rules.valuation)) assert.ok(vals.has(screen), screen);
+});
+
+test('the portal knows which built-in tree this app has', () => {
+  const { bundledVersions } = require('./server.js');
+  const v = bundledVersions();
+  assert.ok(Number.isInteger(v.inspection) && v.inspection >= 8);
+  assert.ok(Number.isInteger(v.valuation));
+});
+
 test('inspection bank (flat map) loads every key', () => {
   const raw = load('assets/property_inspection/phrase_texts.json');
   const entries = entriesOf(raw);

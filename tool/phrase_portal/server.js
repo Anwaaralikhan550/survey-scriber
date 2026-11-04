@@ -24,7 +24,23 @@ const API_ORIGIN = (process.env.SS_API_ORIGIN || 'http://158.69.1.183:3000').rep
 const BASELINE = {
   '/assets/banks/inspection.json': path.join(REPO, 'assets', 'property_inspection', 'phrase_texts.json'),
   '/assets/banks/valuation.json': path.join(REPO, 'assets', 'property_valuation', 'phrase_texts.json'),
+  '/assets/trees/inspection.json': path.join(REPO, 'assets', 'property_inspection', 'inspection_tree.json'),
+  '/assets/trees/valuation.json': path.join(REPO, 'assets', 'property_valuation', 'valuation_tree.json'),
 };
+
+/** Which built-in tree this app version has: the published tree must say the same. */
+function bundledVersions() {
+  const read = (rel) => {
+    const code = fs.readFileSync(path.join(REPO, rel), 'utf8');
+    const m = code.match(/static const int bundledVersion = (\d+);/);
+    if (!m) throw new Error('bundledVersion not found in ' + rel);
+    return Number(m[1]);
+  };
+  return {
+    inspection: read('lib/features/property_inspection/data/inspection_repository.dart'),
+    valuation: read('lib/features/property_valuation/data/valuation_repository.dart'),
+  };
+}
 
 const TYPES = { html: 'text/html; charset=utf-8', js: 'text/javascript', css: 'text/css', json: 'application/json' };
 
@@ -58,6 +74,7 @@ const server = http.createServer((req, res) => {
   const u = new URL(req.url, `http://localhost:${PORT}`);
   if (u.pathname.startsWith('/api/')) return proxy(req, res);
   if (BASELINE[u.pathname]) return serveFile(res, BASELINE[u.pathname]);
+  if (u.pathname === '/assets/trees/meta.json') return send(res, 200, JSON.stringify(bundledVersions()), TYPES.json);
   if (req.method !== 'GET') return send(res, 405, 'Method not allowed');
   const rel = u.pathname === '/' ? 'index.html' : u.pathname.replace(/^\//, '');
   const file = path.join(ROOT, 'public', rel);
@@ -72,4 +89,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { server, BASELINE, API_ORIGIN };
+module.exports = { server, BASELINE, API_ORIGIN, bundledVersions };

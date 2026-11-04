@@ -28,6 +28,11 @@ cp -r "$HERE/public/." "$DIST/"
 # Baseline banks: used only until a bank is published on the server (first save publishes the full bank).
 cp "$REPO/assets/property_inspection/phrase_texts.json" "$DIST/assets/banks/inspection.json"
 cp "$REPO/assets/property_valuation/phrase_texts.json" "$DIST/assets/banks/valuation.json"
+# The trees built into this app version, and which version that is.
+mkdir -p "$DIST/assets/trees"
+cp "$REPO/assets/property_inspection/inspection_tree.json" "$DIST/assets/trees/inspection.json"
+cp "$REPO/assets/property_valuation/valuation_tree.json" "$DIST/assets/trees/valuation.json"
+( cd "$HERE" && node -e "console.log(JSON.stringify(require('./server.js').bundledVersions()))" ) > "$DIST/assets/trees/meta.json"
 ( cd "$DIST/assets/banks" && node -e "JSON.parse(require('fs').readFileSync('inspection.json','utf8'));JSON.parse(require('fs').readFileSync('valuation.json','utf8'))" )
 ( cd "$DIST" && git -C "$REPO" rev-parse --short HEAD > BUILD 2>/dev/null || date -u +%Y%m%dT%H%M%SZ > BUILD )
 ls -la "$DIST" "$DIST/assets/banks"
@@ -47,5 +52,8 @@ if compgen -G "$DIST/pages/*.js" >/dev/null; then
 fi
 scp -P "$SSH_PORT" -i "$SSH_KEY" -o IdentitiesOnly=yes -o BatchMode=yes \
   "$DIST"/assets/banks/*.json "$SSH_USER@$SSH_HOST:$WEB_ROOT/assets/banks/"
+"${SSH[@]}" "$SSH_USER@$SSH_HOST" "mkdir -p '$WEB_ROOT/assets/trees'"
+scp -P "$SSH_PORT" -i "$SSH_KEY" -o IdentitiesOnly=yes -o BatchMode=yes \
+  "$DIST"/assets/trees/*.json "$SSH_USER@$SSH_HOST:$WEB_ROOT/assets/trees/"
 "${SSH[@]}" "$SSH_USER@$SSH_HOST" "ls -la '$WEB_ROOT' '$WEB_ROOT/assets/banks' && cat '$WEB_ROOT/BUILD'"
 echo "Deployed. Check: curl -s -H 'Host: portal.surveyscriber.com' http://$SSH_HOST/ | head -c 200"

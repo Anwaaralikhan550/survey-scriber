@@ -325,7 +325,26 @@ class TreeAdminRepository {
     final tree = await loadTree(type);
     final updated = _mapTreeFields(tree, screenId, (field) {
       if (field.id == fieldId) {
-        return field.copyWith(options: options);
+        // Words chosen on the web for options no longer in the list go with them.
+        final labels = field.optionLabels == null
+            ? null
+            : {
+                for (final e in field.optionLabels!.entries)
+                  if (options.contains(e.key)) e.key: e.value,
+              };
+        final hidden = field.hiddenOptions?.where(options.contains).toList();
+        return InspectionFieldDefinition(
+          id: field.id,
+          label: field.label,
+          type: field.type,
+          options: options,
+          conditionalOn: field.conditionalOn,
+          conditionalValue: field.conditionalValue,
+          conditionalMode: field.conditionalMode,
+          phraseTemplate: field.phraseTemplate,
+          optionLabels: labels == null || labels.isEmpty ? null : labels,
+          hiddenOptions: hidden == null || hidden.isEmpty ? null : hidden,
+        );
       }
       return field;
     });

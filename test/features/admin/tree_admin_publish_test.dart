@@ -167,6 +167,38 @@ void main() {
     expect(sentNodes.firstWhere((n) => n['id'] == withDefaults!['id'])['reportDefaults'], withDefaults!['reportDefaults']);
   });
 
+  test('removing an option on the phone removes its web words too', () async {
+    final asset = jsonDecode(File(type.assetPath).readAsStringSync()) as Map<String, dynamic>;
+    late String screenId;
+    late Map<String, dynamic> field;
+    for (final section in asset['sections'] as List) {
+      for (final node in section['nodes'] as List) {
+        for (final f in (node['fields'] as List? ?? const [])) {
+          if (f['type'] == 'dropdown' && (f['options'] as List).length >= 3) {
+            screenId = node['id'] as String;
+            field = f as Map<String, dynamic>;
+          }
+        }
+      }
+    }
+    final options = (field['options'] as List).cast<String>();
+    field['optionLabels'] = {options[0]: 'Words A', options[1]: 'Words B'};
+    field['hiddenOptions'] = [options[1]];
+    asset['baseBundledVersion'] = type.bundledVersion;
+    store.files['tree_${type.key}.json'] = jsonEncode(asset);
+
+    await repo.updateDropdownOptions(type, screenId, field['id'] as String, [options[0], options[2]]);
+    await repo.publishTree(type);
+
+    final kept = ((sent!['tree'] as Map)['sections'] as List)
+        .expand((s) => s['nodes'] as List)
+        .firstWhere((n) => n['id'] == screenId)['fields'] as List;
+    final after = kept.firstWhere((f) => f['id'] == field['id']) as Map;
+    expect(after['options'], [options[0], options[2]]);
+    expect(after['optionLabels'], {options[0]: 'Words A'});
+    expect(after.containsKey('hiddenOptions'), isFalse);
+  });
+
   test('reset throws the draft away', () async {
     final id = await firstScreenId();
     await repo.updateScreenTitle(type, id, 'Mine');
