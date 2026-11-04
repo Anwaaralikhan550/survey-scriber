@@ -231,26 +231,60 @@ class SchedulingRepositoryImpl implements SchedulingRepository {
   @override
   Future<Booking> updateBooking(
     String id, {
-    DateTime? date,
-    String? startTime,
-    String? endTime,
+    required DateTime date,
+    required String startTime,
+    required String endTime,
+    required BookingSurveyType surveyType,
+    String? jobRef,
     String? clientName,
     String? clientPhone,
     String? clientEmail,
+    String? propertyType,
+    String? yearBuilt,
     String? propertyAddress,
+    String? addressLine,
+    String? city,
+    String? town,
+    String? postcode,
+    String? county,
     String? notes,
+    BookingAccessType? accessType,
+    String? estateAgentName,
+    String? estateAgentPhone,
+    String? estateAgentAddress,
+    String? estateAgentNotes,
   }) async {
     final model = await _remoteDataSource.updateBooking(
       id,
       date: date,
       startTime: startTime,
       endTime: endTime,
+      surveyType: surveyType,
+      jobRef: jobRef,
       clientName: clientName,
       clientPhone: clientPhone,
       clientEmail: clientEmail,
+      propertyType: propertyType,
+      yearBuilt: yearBuilt,
       propertyAddress: propertyAddress,
+      addressLine: addressLine,
+      city: city,
+      town: town,
+      postcode: postcode,
+      county: county,
       notes: notes,
+      accessType: accessType,
+      estateAgentName: estateAgentName,
+      estateAgentPhone: estateAgentPhone,
+      estateAgentAddress: estateAgentAddress,
+      estateAgentNotes: estateAgentNotes,
     );
+    return model.toEntity();
+  }
+
+  @override
+  Future<Booking> ensureBookingSurvey(String id) async {
+    final model = await _remoteDataSource.ensureBookingSurvey(id);
     return model.toEntity();
   }
 

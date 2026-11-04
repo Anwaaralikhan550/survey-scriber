@@ -21,6 +21,7 @@ class DashboardPage extends ConsumerWidget {
     // "Total" = live bookings (pending + confirmed); null means they could not be loaded -> surveys.
     final liveBookings = ref.watch(liveBookingCountsProvider);
     final liveFromBookings = liveBookings.valueOrNull?[state.segment];
+    final weekBookings = ref.watch(weekBookingCountsProvider(state.segment));
     final theme = Theme.of(context);
 
     // Show restoration overlay during initial sync on empty dashboard
@@ -43,6 +44,7 @@ class DashboardPage extends ConsumerWidget {
           child: RefreshIndicator(
             onRefresh: () async {
               ref.invalidate(liveBookingCountsProvider);
+              ref.invalidate(weekBookingCountsProvider);
               await ref.read(dashboardProvider.notifier).refresh();
             },
             color: theme.colorScheme.primary,
@@ -110,9 +112,9 @@ class DashboardPage extends ConsumerWidget {
                     padding: const EdgeInsets.only(bottom: 24),
                     child: AnalyticsSection(
                       data: state.analytics,
-                      isLoading: state.isLoading,
-                      onTap: () =>
-                          _openJobs(context, state.segment, JobFilter.thisWeek),
+                      isLoading: state.isLoading || weekBookings.isLoading,
+                      weekBookings: weekBookings.valueOrNull,
+                      onTap: () => context.go(Routes.liveBookings),
                     ),
                   ),
                 ),

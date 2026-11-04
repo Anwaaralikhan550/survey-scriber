@@ -147,6 +147,12 @@ class $SurveysTable extends Surveys with TableInfo<$SurveysTable, Survey> {
   late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
       'deleted_at', aliasedName, true,
       type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _inspectionDateMeta =
+      const VerificationMeta('inspectionDate');
+  @override
+  late final GeneratedColumn<DateTime> inspectionDate =
+      GeneratedColumn<DateTime>('inspection_date', aliasedName, true,
+          type: DriftSqlType.dateTime, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -170,7 +176,8 @@ class $SurveysTable extends Surveys with TableInfo<$SurveysTable, Survey> {
         aiSummary,
         riskSummary,
         repairRecommendations,
-        deletedAt
+        deletedAt,
+        inspectionDate
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -297,6 +304,12 @@ class $SurveysTable extends Surveys with TableInfo<$SurveysTable, Survey> {
       context.handle(_deletedAtMeta,
           deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
+    if (data.containsKey('inspection_date')) {
+      context.handle(
+          _inspectionDateMeta,
+          inspectionDate.isAcceptableOrUnknown(
+              data['inspection_date']!, _inspectionDateMeta));
+    }
     return context;
   }
 
@@ -351,6 +364,8 @@ class $SurveysTable extends Surveys with TableInfo<$SurveysTable, Survey> {
           data['${effectivePrefix}repair_recommendations']),
       deletedAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}deleted_at']),
+      inspectionDate: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}inspection_date']),
     );
   }
 
@@ -397,6 +412,9 @@ class Survey extends DataClass implements Insertable<Survey> {
   /// When set, the survey is treated as deleted locally (hidden from UI)
   /// but preserved for sync consistency.
   final DateTime? deletedAt;
+
+  /// Date of the visit, from the booking. Null for surveys made without one.
+  final DateTime? inspectionDate;
   const Survey(
       {required this.id,
       required this.title,
@@ -419,7 +437,8 @@ class Survey extends DataClass implements Insertable<Survey> {
       this.aiSummary,
       this.riskSummary,
       this.repairRecommendations,
-      this.deletedAt});
+      this.deletedAt,
+      this.inspectionDate});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -466,6 +485,9 @@ class Survey extends DataClass implements Insertable<Survey> {
     }
     if (!nullToAbsent || deletedAt != null) {
       map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
+    if (!nullToAbsent || inspectionDate != null) {
+      map['inspection_date'] = Variable<DateTime>(inspectionDate);
     }
     return map;
   }
@@ -515,6 +537,9 @@ class Survey extends DataClass implements Insertable<Survey> {
       deletedAt: deletedAt == null && nullToAbsent
           ? const Value.absent()
           : Value(deletedAt),
+      inspectionDate: inspectionDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(inspectionDate),
     );
   }
 
@@ -545,6 +570,7 @@ class Survey extends DataClass implements Insertable<Survey> {
       repairRecommendations:
           serializer.fromJson<String?>(json['repairRecommendations']),
       deletedAt: serializer.fromJson<DateTime?>(json['deletedAt']),
+      inspectionDate: serializer.fromJson<DateTime?>(json['inspectionDate']),
     );
   }
   @override
@@ -574,6 +600,7 @@ class Survey extends DataClass implements Insertable<Survey> {
       'repairRecommendations':
           serializer.toJson<String?>(repairRecommendations),
       'deletedAt': serializer.toJson<DateTime?>(deletedAt),
+      'inspectionDate': serializer.toJson<DateTime?>(inspectionDate),
     };
   }
 
@@ -599,7 +626,8 @@ class Survey extends DataClass implements Insertable<Survey> {
           Value<String?> aiSummary = const Value.absent(),
           Value<String?> riskSummary = const Value.absent(),
           Value<String?> repairRecommendations = const Value.absent(),
-          Value<DateTime?> deletedAt = const Value.absent()}) =>
+          Value<DateTime?> deletedAt = const Value.absent(),
+          Value<DateTime?> inspectionDate = const Value.absent()}) =>
       Survey(
         id: id ?? this.id,
         title: title ?? this.title,
@@ -626,6 +654,8 @@ class Survey extends DataClass implements Insertable<Survey> {
             ? repairRecommendations.value
             : this.repairRecommendations,
         deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+        inspectionDate:
+            inspectionDate.present ? inspectionDate.value : this.inspectionDate,
       );
   Survey copyWithCompanion(SurveysCompanion data) {
     return Survey(
@@ -665,6 +695,9 @@ class Survey extends DataClass implements Insertable<Survey> {
           ? data.repairRecommendations.value
           : this.repairRecommendations,
       deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
+      inspectionDate: data.inspectionDate.present
+          ? data.inspectionDate.value
+          : this.inspectionDate,
     );
   }
 
@@ -692,7 +725,8 @@ class Survey extends DataClass implements Insertable<Survey> {
           ..write('aiSummary: $aiSummary, ')
           ..write('riskSummary: $riskSummary, ')
           ..write('repairRecommendations: $repairRecommendations, ')
-          ..write('deletedAt: $deletedAt')
+          ..write('deletedAt: $deletedAt, ')
+          ..write('inspectionDate: $inspectionDate')
           ..write(')'))
         .toString();
   }
@@ -720,7 +754,8 @@ class Survey extends DataClass implements Insertable<Survey> {
         aiSummary,
         riskSummary,
         repairRecommendations,
-        deletedAt
+        deletedAt,
+        inspectionDate
       ]);
   @override
   bool operator ==(Object other) =>
@@ -747,7 +782,8 @@ class Survey extends DataClass implements Insertable<Survey> {
           other.aiSummary == this.aiSummary &&
           other.riskSummary == this.riskSummary &&
           other.repairRecommendations == this.repairRecommendations &&
-          other.deletedAt == this.deletedAt);
+          other.deletedAt == this.deletedAt &&
+          other.inspectionDate == this.inspectionDate);
 }
 
 class SurveysCompanion extends UpdateCompanion<Survey> {
@@ -773,6 +809,7 @@ class SurveysCompanion extends UpdateCompanion<Survey> {
   final Value<String?> riskSummary;
   final Value<String?> repairRecommendations;
   final Value<DateTime?> deletedAt;
+  final Value<DateTime?> inspectionDate;
   final Value<int> rowid;
   const SurveysCompanion({
     this.id = const Value.absent(),
@@ -797,6 +834,7 @@ class SurveysCompanion extends UpdateCompanion<Survey> {
     this.riskSummary = const Value.absent(),
     this.repairRecommendations = const Value.absent(),
     this.deletedAt = const Value.absent(),
+    this.inspectionDate = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   SurveysCompanion.insert({
@@ -822,6 +860,7 @@ class SurveysCompanion extends UpdateCompanion<Survey> {
     this.riskSummary = const Value.absent(),
     this.repairRecommendations = const Value.absent(),
     this.deletedAt = const Value.absent(),
+    this.inspectionDate = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         title = Value(title),
@@ -851,6 +890,7 @@ class SurveysCompanion extends UpdateCompanion<Survey> {
     Expression<String>? riskSummary,
     Expression<String>? repairRecommendations,
     Expression<DateTime>? deletedAt,
+    Expression<DateTime>? inspectionDate,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -877,6 +917,7 @@ class SurveysCompanion extends UpdateCompanion<Survey> {
       if (repairRecommendations != null)
         'repair_recommendations': repairRecommendations,
       if (deletedAt != null) 'deleted_at': deletedAt,
+      if (inspectionDate != null) 'inspection_date': inspectionDate,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -904,6 +945,7 @@ class SurveysCompanion extends UpdateCompanion<Survey> {
       Value<String?>? riskSummary,
       Value<String?>? repairRecommendations,
       Value<DateTime?>? deletedAt,
+      Value<DateTime?>? inspectionDate,
       Value<int>? rowid}) {
     return SurveysCompanion(
       id: id ?? this.id,
@@ -929,6 +971,7 @@ class SurveysCompanion extends UpdateCompanion<Survey> {
       repairRecommendations:
           repairRecommendations ?? this.repairRecommendations,
       deletedAt: deletedAt ?? this.deletedAt,
+      inspectionDate: inspectionDate ?? this.inspectionDate,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -1003,6 +1046,9 @@ class SurveysCompanion extends UpdateCompanion<Survey> {
     if (deletedAt.present) {
       map['deleted_at'] = Variable<DateTime>(deletedAt.value);
     }
+    if (inspectionDate.present) {
+      map['inspection_date'] = Variable<DateTime>(inspectionDate.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -1034,6 +1080,7 @@ class SurveysCompanion extends UpdateCompanion<Survey> {
           ..write('riskSummary: $riskSummary, ')
           ..write('repairRecommendations: $repairRecommendations, ')
           ..write('deletedAt: $deletedAt, ')
+          ..write('inspectionDate: $inspectionDate, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -7506,6 +7553,7 @@ typedef $$SurveysTableCreateCompanionBuilder = SurveysCompanion Function({
   Value<String?> riskSummary,
   Value<String?> repairRecommendations,
   Value<DateTime?> deletedAt,
+  Value<DateTime?> inspectionDate,
   Value<int> rowid,
 });
 typedef $$SurveysTableUpdateCompanionBuilder = SurveysCompanion Function({
@@ -7531,6 +7579,7 @@ typedef $$SurveysTableUpdateCompanionBuilder = SurveysCompanion Function({
   Value<String?> riskSummary,
   Value<String?> repairRecommendations,
   Value<DateTime?> deletedAt,
+  Value<DateTime?> inspectionDate,
   Value<int> rowid,
 });
 
@@ -7612,6 +7661,10 @@ class $$SurveysTableFilterComposer
 
   ColumnFilters<DateTime> get deletedAt => $composableBuilder(
       column: $table.deletedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get inspectionDate => $composableBuilder(
+      column: $table.inspectionDate,
+      builder: (column) => ColumnFilters(column));
 }
 
 class $$SurveysTableOrderingComposer
@@ -7693,6 +7746,10 @@ class $$SurveysTableOrderingComposer
 
   ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
       column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get inspectionDate => $composableBuilder(
+      column: $table.inspectionDate,
+      builder: (column) => ColumnOrderings(column));
 }
 
 class $$SurveysTableAnnotationComposer
@@ -7769,6 +7826,9 @@ class $$SurveysTableAnnotationComposer
 
   GeneratedColumn<DateTime> get deletedAt =>
       $composableBuilder(column: $table.deletedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get inspectionDate => $composableBuilder(
+      column: $table.inspectionDate, builder: (column) => column);
 }
 
 class $$SurveysTableTableManager extends RootTableManager<
@@ -7816,6 +7876,7 @@ class $$SurveysTableTableManager extends RootTableManager<
             Value<String?> riskSummary = const Value.absent(),
             Value<String?> repairRecommendations = const Value.absent(),
             Value<DateTime?> deletedAt = const Value.absent(),
+            Value<DateTime?> inspectionDate = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               SurveysCompanion(
@@ -7841,6 +7902,7 @@ class $$SurveysTableTableManager extends RootTableManager<
             riskSummary: riskSummary,
             repairRecommendations: repairRecommendations,
             deletedAt: deletedAt,
+            inspectionDate: inspectionDate,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -7866,6 +7928,7 @@ class $$SurveysTableTableManager extends RootTableManager<
             Value<String?> riskSummary = const Value.absent(),
             Value<String?> repairRecommendations = const Value.absent(),
             Value<DateTime?> deletedAt = const Value.absent(),
+            Value<DateTime?> inspectionDate = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               SurveysCompanion.insert(
@@ -7891,6 +7954,7 @@ class $$SurveysTableTableManager extends RootTableManager<
             riskSummary: riskSummary,
             repairRecommendations: repairRecommendations,
             deletedAt: deletedAt,
+            inspectionDate: inspectionDate,
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0

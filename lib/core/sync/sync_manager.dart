@@ -524,6 +524,47 @@ class _ItemSyncResult {
 
 /// SyncManager handles the actual sync operations
 /// This is a pure Dart service that doesn't depend on Flutter
+/// A survey coming from the server carries only what the server stores. Progress,
+/// counters, timestamps and AI text live on the phone and must survive the update.
+entities.Survey keepLocalSurveyFields(
+  entities.Survey fromServer,
+  entities.Survey? local,
+) =>
+    local == null
+        ? fromServer
+        : entities.Survey(
+            id: fromServer.id,
+            title: fromServer.title,
+            type: fromServer.type,
+            status: fromServer.status,
+            createdAt: fromServer.createdAt,
+            updatedAt: fromServer.updatedAt,
+            jobRef: fromServer.jobRef,
+            address: fromServer.address,
+            clientName: fromServer.clientName,
+            parentSurveyId: fromServer.parentSurveyId,
+            inspectionDate: fromServer.inspectionDate,
+            startedAt: local.startedAt,
+            completedAt: local.completedAt,
+            progress: local.progress,
+            photoCount: local.photoCount,
+            noteCount: local.noteCount,
+            totalSections: local.totalSections,
+            completedSections: local.completedSections,
+            reinspectionNumber: local.reinspectionNumber,
+            aiSummary: local.aiSummary,
+            riskSummary: local.riskSummary,
+            repairRecommendations: local.repairRecommendations,
+            deletedAt: local.deletedAt,
+          );
+
+/// A date with no time from the server, kept as that same day on this phone
+/// whatever its time zone.
+DateTime? parseServerDateOnly(Object? value) {
+  if (value is! String || value.length < 10) return null;
+  return DateTime.tryParse(value.substring(0, 10));
+}
+
 class SyncManager {
   SyncManager({
     required this.apiClient,
@@ -2051,7 +2092,12 @@ class SyncManager {
     switch (entityType) {
       case 'SURVEY':
         final survey = _mapServerSurvey(entityId, data);
-        await surveysDao.upsertSurvey(survey);
+        await surveysDao.upsertSurvey(
+          keepLocalSurveyFields(
+            survey,
+            await surveysDao.getSurveyById(entityId),
+          ),
+        );
       case 'SECTION':
         var section = _mapServerSection(entityId, data);
         // Prevent duplication: composite sync push sends sections without
@@ -2204,6 +2250,7 @@ class SyncManager {
         jobRef: data['jobRef'] as String?,
         clientName: data['clientName'] as String?,
         parentSurveyId: data['parentSurveyId'] as String?,
+        inspectionDate: parseServerDateOnly(data['inspectionDate']),
       );
 
   /// Map server section JSON to local SurveySection entity.

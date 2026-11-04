@@ -89,15 +89,32 @@ abstract class SchedulingRepository {
   });
   Future<Booking> updateBooking(
     String id, {
-    DateTime? date,
-    String? startTime,
-    String? endTime,
+    required DateTime date,
+    required String startTime,
+    required String endTime,
+    required BookingSurveyType surveyType,
+    String? jobRef,
     String? clientName,
     String? clientPhone,
     String? clientEmail,
+    String? propertyType,
+    String? yearBuilt,
     String? propertyAddress,
+    String? addressLine,
+    String? city,
+    String? town,
+    String? postcode,
+    String? county,
     String? notes,
+    BookingAccessType? accessType,
+    String? estateAgentName,
+    String? estateAgentPhone,
+    String? estateAgentAddress,
+    String? estateAgentNotes,
   });
+  /// The booking's inspection, created now if it has none.
+  Future<Booking> ensureBookingSurvey(String id);
+
   Future<Booking> updateBookingStatus(String id, BookingStatus status);
   Future<Booking> cancelBooking(String id);
 }

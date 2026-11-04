@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../app/router/routes.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../report_export/domain/models/export_config.dart';
 import '../providers/company_branding_provider.dart';
@@ -46,22 +47,30 @@ class _CompanyBrandingPageState extends ConsumerState<CompanyBrandingPage> {
   /// Every logo is stored as a PNG of at most [_maxLogoSide], so any picture
   /// the phone can open works in both the PDF and the Word report.
   static Future<Uint8List> _toLogoPng(Uint8List bytes) async {
-    final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
-    final descriptor = await ui.ImageDescriptor.encoded(buffer);
-    final longest = descriptor.width > descriptor.height
-        ? descriptor.width
-        : descriptor.height;
-    final scale = longest > _maxLogoSide ? _maxLogoSide / longest : 1.0;
-    final codec = await descriptor.instantiateCodec(
-      targetWidth: (descriptor.width * scale).round(),
-      targetHeight: (descriptor.height * scale).round(),
-    );
-    final frame = await codec.getNextFrame();
-    final data = await frame.image.toByteData(format: ui.ImageByteFormat.png);
-    frame.image.dispose();
-    codec.dispose();
-    descriptor.dispose();
-    buffer.dispose();
+    Future<ui.Image> decode({int? width, int? height}) async {
+      final codec = await ui.instantiateImageCodec(
+        bytes,
+        targetWidth: width,
+        targetHeight: height,
+      );
+      final frame = await codec.getNextFrame();
+      codec.dispose();
+      return frame.image;
+    }
+
+    var image = await decode();
+    final longest = image.width > image.height ? image.width : image.height;
+    if (longest > _maxLogoSide) {
+      final scale = _maxLogoSide / longest;
+      final resized = await decode(
+        width: (image.width * scale).round(),
+        height: (image.height * scale).round(),
+      );
+      image.dispose();
+      image = resized;
+    }
+    final data = await image.toByteData(format: ui.ImageByteFormat.png);
+    image.dispose();
     return data!.buffer.asUint8List();
   }
 
@@ -102,7 +111,11 @@ class _CompanyBrandingPageState extends ConsumerState<CompanyBrandingPage> {
     _say(reachedServer
         ? 'Company details saved'
         : 'Saved on this phone. It will upload when you are back online.');
-    if (context.canPop()) context.pop();
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go(Routes.settings);
+    }
   }
 
   @override

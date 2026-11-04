@@ -727,6 +727,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         ),
       ),
       GoRoute(
+        path: Routes.bookingEdit,
+        builder: (context, state) => _buildWithRequiredParam(
+          state: state,
+          paramKey: 'id',
+          builder: (id) => EditBookingPage(bookingId: id),
+        ),
+      ),
+      GoRoute(
         path: Routes.availabilitySettings,
         builder: (context, state) => const AvailabilitySettingsPage(),
       ),

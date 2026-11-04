@@ -40,6 +40,9 @@ class Surveys extends Table {
   /// but preserved for sync consistency.
   DateTimeColumn get deletedAt => dateTime().nullable()();
 
+  /// Date of the visit, from the booking. Null for surveys made without one.
+  DateTimeColumn get inspectionDate => dateTime().nullable()();
+
   @override
   Set<Column> get primaryKey => {id};
 }

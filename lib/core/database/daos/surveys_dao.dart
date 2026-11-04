@@ -278,6 +278,7 @@ class SurveysDao extends DatabaseAccessor<AppDatabase> with _$SurveysDaoMixin {
         riskSummary: row.riskSummary,
         repairRecommendations: row.repairRecommendations,
         deletedAt: row.deletedAt,
+        inspectionDate: row.inspectionDate,
       );
 
   /// Map domain entity to database companion
@@ -304,5 +305,6 @@ class SurveysDao extends DatabaseAccessor<AppDatabase> with _$SurveysDaoMixin {
         riskSummary: Value(survey.riskSummary),
         repairRecommendations: Value(survey.repairRecommendations),
         deletedAt: Value(survey.deletedAt),
+        inspectionDate: Value(survey.inspectionDate),
       );
 }

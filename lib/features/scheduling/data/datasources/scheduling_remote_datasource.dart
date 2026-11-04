@@ -299,27 +299,63 @@ class SchedulingRemoteDataSource {
 
   Future<BookingModel> updateBooking(
     String id, {
-    DateTime? date,
-    String? startTime,
-    String? endTime,
+    required DateTime date,
+    required String startTime,
+    required String endTime,
+    required BookingSurveyType surveyType,
+    String? jobRef,
     String? clientName,
     String? clientPhone,
     String? clientEmail,
+    String? propertyType,
+    String? yearBuilt,
     String? propertyAddress,
+    String? addressLine,
+    String? city,
+    String? town,
+    String? postcode,
+    String? county,
     String? notes,
+    BookingAccessType? accessType,
+    String? estateAgentName,
+    String? estateAgentPhone,
+    String? estateAgentAddress,
+    String? estateAgentNotes,
   }) async {
     final response = await _apiClient.put<Map<String, dynamic>>(
       '$_basePath/bookings/$id',
+      // Every field goes up, so one the surveyor emptied is cleared on the server.
       data: {
-        if (date != null) 'date': _dateFormat.format(date),
-        if (startTime != null) 'startTime': startTime,
-        if (endTime != null) 'endTime': endTime,
-        if (clientName != null) 'clientName': clientName,
-        if (clientPhone != null) 'clientPhone': clientPhone,
-        if (clientEmail != null) 'clientEmail': clientEmail,
-        if (propertyAddress != null) 'propertyAddress': propertyAddress,
-        if (notes != null) 'notes': notes,
+        'date': _dateFormat.format(date),
+        'startTime': startTime,
+        'endTime': endTime,
+        'surveyType': surveyType.wireValue,
+        'jobRef': jobRef,
+        'clientName': clientName,
+        'clientPhone': clientPhone,
+        'clientEmail': clientEmail,
+        'propertyType': propertyType,
+        'yearBuilt': yearBuilt,
+        'propertyAddress': propertyAddress,
+        'addressLine': addressLine,
+        'city': city,
+        'town': town,
+        'postcode': postcode,
+        'county': county,
+        'notes': notes,
+        'accessType': accessType?.wireValue,
+        'estateAgentName': estateAgentName,
+        'estateAgentPhone': estateAgentPhone,
+        'estateAgentAddress': estateAgentAddress,
+        'estateAgentNotes': estateAgentNotes,
       },
+    );
+    return BookingModel.fromJson(response.data!);
+  }
+
+  Future<BookingModel> ensureBookingSurvey(String id) async {
+    final response = await _apiClient.post<Map<String, dynamic>>(
+      '$_basePath/bookings/$id/inspection',
     );
     return BookingModel.fromJson(response.data!);
   }

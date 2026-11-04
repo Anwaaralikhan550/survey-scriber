@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../app/router/routes.dart';
+import '../../../../core/sync/sync_manager.dart';
+import '../../../../shared/domain/entities/survey.dart';
+import '../../../surveys/presentation/providers/survey_providers.dart';
 import '../../domain/entities/booking.dart';
 import '../../domain/entities/booking_status.dart';
 import '../providers/scheduling_providers.dart';
+import 'create_booking_page.dart';
 import '../widgets/status_chip.dart';
 
 class BookingDetailPage extends ConsumerWidget {
@@ -33,6 +39,14 @@ class BookingDetailPage extends ConsumerWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          if (asyncBooking.valueOrNull != null)
+            IconButton(
+              tooltip: 'Edit booking',
+              icon: const Icon(Icons.edit_outlined),
+              onPressed: () => context.push(Routes.bookingEditPath(bookingId)),
+            ),
+        ],
       ),
       body: asyncBooking.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -391,6 +405,18 @@ class _BookingDetailContent extends ConsumerWidget {
 
         const SizedBox(height: 24),
 
+        if (booking.status != BookingStatus.cancelled) ...[
+          SizedBox(
+            height: 48,
+            child: FilledButton.icon(
+              onPressed: () => _openInspection(context, ref),
+              icon: const Icon(Icons.assignment_outlined),
+              label: const Text('Open Inspection'),
+            ),
+          ),
+          const SizedBox(height: 12),
+        ],
+
         // Actions
         if (booking.status == BookingStatus.pending) ...[
           Row(
@@ -543,6 +569,56 @@ class _BookingDetailContent extends ConsumerWidget {
     );
   }
 
+  /// The inspection is on the phone once it has synced. If it was deleted, the
+  /// booking starts a new one.
+  Future<void> _openInspection(BuildContext context, WidgetRef ref) async {
+    final surveys = ref.read(localSurveyRepositoryProvider);
+    final sync = ref.read(syncStateProvider.notifier);
+
+    Future<Survey?> onThisPhone(String id) async {
+      final survey = await surveys.getSurveyById(id);
+      return survey == null || survey.isDeleted ? null : survey;
+    }
+
+    void say(String message) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      }
+    }
+
+    try {
+      var surveyId = booking.surveyId;
+      if (surveyId == null) {
+        final updated = await ref
+            .read(schedulingRepositoryProvider)
+            .ensureBookingSurvey(booking.id);
+        surveyId = updated.surveyId;
+        ref.invalidate(bookingDetailProvider(booking.id));
+      }
+      if (surveyId == null) return;
+
+      var survey = await onThisPhone(surveyId);
+      for (var attempt = 0; survey == null && attempt < 10; attempt++) {
+        await sync.pullNow();
+        survey = await onThisPhone(surveyId);
+        if (survey == null) {
+          await Future<void>.delayed(const Duration(milliseconds: 500));
+          survey = await onThisPhone(surveyId);
+        }
+      }
+      if (survey == null) {
+        say('The inspection could not be downloaded. Please check your connection.');
+        return;
+      }
+      if (context.mounted) context.push(Routes.surveyDetailPath(surveyId));
+    } catch (e) {
+      say(serverMessageOf(e) ??
+          'The inspection could not be opened. Please check your connection.');
+    }
+  }
+
   Future<void> _confirmBooking(BuildContext context, WidgetRef ref) async {
     await ref
         .read(bookingsNotifierProvider.notifier)
@@ -597,6 +673,37 @@ class _BookingDetailContent extends ConsumerWidget {
         const SnackBar(content: Text('Booking marked as completed')),
       );
     }
+  }
+}
+
+/// Loads the booking, then shows the form with its details filled in.
+class EditBookingPage extends ConsumerWidget {
+  const EditBookingPage({super.key, required this.bookingId});
+
+  final String bookingId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncBooking = ref.watch(bookingDetailProvider(bookingId));
+    return asyncBooking.maybeWhen(
+      // Loaded once: a refresh must not empty a form being filled in.
+      skipLoadingOnRefresh: true,
+      data: (booking) => booking == null
+          ? Scaffold(
+              appBar: AppBar(title: const Text('Edit Booking')),
+              body: const Center(child: Text('Booking not found')),
+            )
+          : CreateBookingPage(key: ValueKey(booking.id), booking: booking),
+      error: (_, __) => Scaffold(
+        appBar: AppBar(title: const Text('Edit Booking')),
+        body: const Center(
+          child: Text('Unable to load the booking. Please check your connection.'),
+        ),
+      ),
+      orElse: () => const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      ),
+    );
   }
 }
 

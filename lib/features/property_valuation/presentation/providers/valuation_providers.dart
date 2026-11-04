@@ -17,6 +17,7 @@ import '../../../../core/sync/v2_sync_helper.dart';
 import '../../data/valuation_repository.dart';
 import '../../domain/valuation_answer_validator.dart';
 import '../../domain/valuation_phrase_catalog.dart';
+import '../../../surveys/presentation/providers/survey_lifecycle.dart';
 import '../../domain/valuation_phrase_engine.dart';
 import '../../../property_inspection/domain/models/inspection_models.dart';
 
@@ -394,6 +395,9 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
 
   /// Queue answer sync entries for changed/new answers on this screen.
   Future<void> _queueAnswersForSync() async {
+    if (state.answers.isNotEmpty) {
+      await _ref.read(surveyLifecycleProvider).markStarted(_surveyId);
+    }
     try {
       final syncManager = _ref.read(syncManagerProvider);
 

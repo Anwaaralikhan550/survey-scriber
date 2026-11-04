@@ -53,6 +53,9 @@ abstract final class SurveyInvalidation {
 
     // Forms list shows survey list with status filters
     ref.invalidate(formsProvider);
+
+    // Survey Folder lists
+    ref.invalidate(jobsListProvider);
   }
 
   /// Invalidate list-level providers only (no specific survey).
@@ -60,6 +63,7 @@ abstract final class SurveyInvalidation {
   static void afterBulkMutation(Ref ref) {
     ref.invalidate(dashboardProvider);
     ref.invalidate(formsProvider);
+    ref.invalidate(jobsListProvider);
   }
 
   /// Invalidate all survey-related providers for a specific survey.

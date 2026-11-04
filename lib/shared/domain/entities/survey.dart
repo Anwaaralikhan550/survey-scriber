@@ -146,6 +146,7 @@ class Survey extends Equatable {
     this.riskSummary,
     this.repairRecommendations,
     this.deletedAt,
+    this.inspectionDate,
   });
 
   final String id;
@@ -182,6 +183,9 @@ class Survey extends Equatable {
 
   /// Soft delete timestamp — null means active, non-null means deleted.
   final DateTime? deletedAt;
+
+  /// Date of the visit, from the booking. Null for surveys made without one.
+  final DateTime? inspectionDate;
 
   /// Whether this survey has been soft-deleted.
   bool get isDeleted => deletedAt != null;
@@ -222,6 +226,7 @@ class Survey extends Equatable {
     String? riskSummary,
     String? repairRecommendations,
     DateTime? deletedAt,
+    DateTime? inspectionDate,
   }) =>
       Survey(
         id: id ?? this.id,
@@ -246,6 +251,7 @@ class Survey extends Equatable {
         riskSummary: riskSummary ?? this.riskSummary,
         repairRecommendations: repairRecommendations ?? this.repairRecommendations,
         deletedAt: deletedAt ?? this.deletedAt,
+        inspectionDate: inspectionDate ?? this.inspectionDate,
       );
 
   @override
@@ -258,6 +264,7 @@ class Survey extends Equatable {
         updatedAt,
         startedAt,
         completedAt,
+        inspectionDate,
         jobRef,
         address,
         clientName,

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../app/router/routes.dart';
 import '../../../../shared/presentation/widgets/empty_state.dart';
 import '../../../../shared/presentation/widgets/survey_card.dart';
+import '../../../surveys/presentation/widgets/survey_folder_actions.dart';
 import '../providers/dashboard_provider.dart';
 
 /// Filtered list of jobs opened from a dashboard metric card, the "This week"
@@ -100,7 +101,9 @@ class _JobsListPageState extends ConsumerState<JobsListPage> {
             if (surveys.isEmpty) {
               return EmptyState(
                 icon: Icons.assignment_outlined,
-                title: 'No ${_filter.title.toLowerCase()}',
+                title: _filter == JobFilter.all
+                    ? 'No surveys yet'
+                    : 'No ${_filter.title.toLowerCase()}',
                 description:
                     'There are no ${widget.segment.label.toLowerCase()} in this list yet',
               );
@@ -130,6 +133,7 @@ class _JobsListPageState extends ConsumerState<JobsListPage> {
                     survey: survey,
                     onTap: () =>
                         context.push(Routes.surveyDetailPath(survey.id)),
+                    menu: SurveyFolderMenu(survey: survey),
                   );
                 },
               ),

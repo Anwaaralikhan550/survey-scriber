@@ -36,6 +36,7 @@ class AnalyticsSection extends StatelessWidget {
     this.isLoading = false,
     this.onViewDetails,
     this.onTap,
+    this.weekBookings,
     super.key,
   });
 
@@ -43,8 +44,11 @@ class AnalyticsSection extends StatelessWidget {
   final bool isLoading;
   final VoidCallback? onViewDetails;
 
-  /// Tapping the "This week" card opens the current-week jobs list.
+  /// Tapping the "This week" card opens the bookings.
   final VoidCallback? onTap;
+
+  /// Bookings per day, Monday first; null when they could not be loaded.
+  final List<int>? weekBookings;
 
   // Per the client's App-Edit brief: the completion "Insight" card and the
   // "Status Distribution" card are not required on the dashboard. Only the
@@ -53,8 +57,7 @@ class AnalyticsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final card = WeeklyProgressCard(
-      progressData: data.weeklyProgress,
-      totalThisWeek: data.surveysThisWeek,
+      bookingsPerDay: weekBookings,
       isLoading: isLoading,
     );
     return Padding(
@@ -200,17 +203,17 @@ class CompletionRateCard extends StatelessWidget {
       );
 }
 
-/// Card showing weekly progress with mini bar chart
+/// "This week": a bar per day, Monday first. A day with bookings is highlighted
+/// with its number of bookings on the bar.
 class WeeklyProgressCard extends StatelessWidget {
   const WeeklyProgressCard({
-    required this.progressData,
-    required this.totalThisWeek,
+    required this.bookingsPerDay,
     this.isLoading = false,
     super.key,
   });
 
-  final List<double> progressData;
-  final int totalThisWeek;
+  /// Null when the bookings could not be loaded.
+  final List<int>? bookingsPerDay;
   final bool isLoading;
 
   static const _dayLabels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
@@ -218,6 +221,8 @@ class WeeklyProgressCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final counts = bookingsPerDay;
+    final total = counts?.fold<int>(0, (sum, n) => sum + n);
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
@@ -264,61 +269,64 @@ class WeeklyProgressCard extends StatelessWidget {
             ],
           ),
           AppSpacing.gapVerticalMd,
-          // Mini bar chart
           if (isLoading)
             _buildShimmer(theme, double.infinity, 48)
           else
-            SizedBox(
-              height: 48,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: List.generate(7, (index) {
-                  final value =
-                      index < progressData.length ? progressData[index] : 0.0;
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 2),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: FractionallySizedBox(
-                                heightFactor: value.clamp(0.1, 1.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primary.withOpacity(
-                                      value > 0 ? 0.7 : 0.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(3),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: List.generate(7, (index) {
+                final count =
+                    counts != null && index < counts.length ? counts[index] : 0;
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 18,
+                          child: count > 0
+                              ? Text(
+                                  '$count',
+                                  style: theme.textTheme.labelSmall?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.primary,
                                   ),
-                                ),
-                              ),
-                            ),
+                                )
+                              : null,
+                        ),
+                        Container(
+                          height: 6,
+                          decoration: BoxDecoration(
+                            color: AppColors.primary
+                                .withOpacity(count > 0 ? 0.7 : 0.2),
+                            borderRadius: BorderRadius.circular(3),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            _dayLabels[index],
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              fontSize: 9,
-                              color: theme.colorScheme.onSurfaceVariant
-                                  .withOpacity(0.7),
-                            ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          _dayLabels[index],
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            fontSize: 9,
+                            color: theme.colorScheme.onSurfaceVariant
+                                .withOpacity(0.7),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  );
-                }),
-              ),
+                  ),
+                );
+              }),
             ),
           AppSpacing.gapVerticalSm,
           if (isLoading)
             _buildShimmer(theme, 80, 14)
           else
             Text(
-              '$totalThisWeek surveys',
+              switch (total) {
+                null => 'Bookings unavailable offline',
+                1 => '1 booking',
+                _ => '$total bookings',
+              },
               style: theme.textTheme.labelMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w500,

@@ -75,6 +75,7 @@ abstract final class Routes {
       valuation ? '$schedulingBook?type=valuation' : schedulingBook;
   static const String bookingsList = '/scheduling/bookings';
   static const String bookingDetail = '/scheduling/bookings/:id';
+  static const String bookingEdit = '/scheduling/bookings/:id/edit';
   static const String availabilitySettings = '/scheduling/availability';
 
   // Invoices routes
@@ -147,6 +148,7 @@ abstract final class Routes {
   static String clientRequestChangePath(String bookingId) =>
       '/client/bookings/$bookingId/request-change';
   static String bookingDetailPath(String id) => '/scheduling/bookings/$id';
+  static String bookingEditPath(String id) => '/scheduling/bookings/$id/edit';
   static String invoiceDetailPath(String id) => '/invoices/$id';
   static String clientBookingDetailPath(String id) => '/client/bookings/$id';
   static String clientReportDetailPath(String id) => '/client/reports/$id';

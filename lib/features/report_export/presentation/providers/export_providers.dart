@@ -10,6 +10,7 @@ import '../../../property_inspection/presentation/providers/inspection_providers
 import '../../../property_valuation/presentation/providers/valuation_providers.dart';
 import '../../data/services/export_service.dart';
 import '../../data/services/report_builder.dart';
+import '../../../surveys/presentation/providers/survey_lifecycle.dart';
 import '../../data/services/report_data_service.dart';
 import '../../domain/models/export_config.dart';
 
@@ -121,6 +122,7 @@ class ExportNotifier extends StateNotifier<ExportState> {
     ExportConfig config = const ExportConfig(),
   }) async {
     return _export(
+      surveyId,
       () async {
         // Ensure phrase texts are loaded so report export uses the same
         // inspection phrase engine as the live preview pipeline.
@@ -139,6 +141,7 @@ class ExportNotifier extends StateNotifier<ExportState> {
     ExportConfig config = const ExportConfig(),
   }) async {
     return _export(
+      surveyId,
       () => _exportService.exportValuation(
         surveyId,
         config,
@@ -147,7 +150,10 @@ class ExportNotifier extends StateNotifier<ExportState> {
     );
   }
 
-  Future<String?> _export(Future<ExportResult> Function() doExport) async {
+  Future<String?> _export(
+    String surveyId,
+    Future<ExportResult> Function() doExport,
+  ) async {
     if (state.isExporting) return null;
 
     _cancelled = false;
@@ -155,6 +161,7 @@ class ExportNotifier extends StateNotifier<ExportState> {
 
     try {
       final result = await doExport();
+      await _ref.read(surveyLifecycleProvider).markReportGenerated(surveyId);
       if (_cancelled) return result.outputPath;
 
       _setState(ExportState(result: result));

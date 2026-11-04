@@ -67,6 +67,7 @@ class Booking extends Equatable {
     required this.startTime,
     required this.endTime,
     required this.status,
+    this.surveyId,
     this.surveyType = BookingSurveyType.homeSurvey,
     this.jobRef,
     this.clientName,
@@ -98,6 +99,9 @@ class Booking extends Equatable {
   final String startTime; // "HH:MM" format
   final String endTime; // "HH:MM" format
   final BookingStatus status;
+
+  /// The inspection this booking created.
+  final String? surveyId;
 
   /// Which survey this booking is for (Home Survey or Valuation).
   final BookingSurveyType surveyType;
@@ -167,6 +171,7 @@ class Booking extends Equatable {
 
   Booking copyWith({
     String? id,
+    String? surveyId,
     String? surveyorId,
     DateTime? date,
     String? startTime,
@@ -198,6 +203,7 @@ class Booking extends Equatable {
   }) =>
       Booking(
         id: id ?? this.id,
+        surveyId: surveyId ?? this.surveyId,
         surveyorId: surveyorId ?? this.surveyorId,
         date: date ?? this.date,
         startTime: startTime ?? this.startTime,
@@ -231,6 +237,7 @@ class Booking extends Equatable {
   @override
   List<Object?> get props => [
         id,
+        surveyId,
         surveyorId,
         date,
         startTime,

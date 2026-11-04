@@ -16,6 +16,7 @@ import '../../../../core/sync/sync_manager.dart';
 import '../../../../core/sync/sync_state.dart';
 import '../../../../core/sync/v2_sync_helper.dart';
 import '../../data/inspection_repository.dart';
+import '../../../surveys/presentation/providers/survey_lifecycle.dart';
 import '../../domain/field_phrase_processor.dart';
 import '../../domain/models/inspection_models.dart';
 import '../../domain/inspection_phrase_engine.dart';
@@ -2689,6 +2690,9 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
 
   /// Queue answer sync entries for changed/new answers on this screen.
   Future<void> _queueAnswersForSync() async {
+    if (state.answers.isNotEmpty) {
+      await _ref.read(surveyLifecycleProvider).markStarted(_surveyId);
+    }
     try {
       final syncManager = _ref.read(syncManagerProvider);
 

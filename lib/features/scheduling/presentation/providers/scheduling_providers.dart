@@ -391,6 +391,70 @@ class BookingsNotifier extends StateNotifier<BookingsState>
     }
   }
 
+  Future<Booking> updateBooking(
+    String id, {
+    required DateTime date,
+    required String startTime,
+    required String endTime,
+    required BookingSurveyType surveyType,
+    String? jobRef,
+    String? clientName,
+    String? clientPhone,
+    String? clientEmail,
+    String? propertyType,
+    String? yearBuilt,
+    String? propertyAddress,
+    String? addressLine,
+    String? city,
+    String? town,
+    String? postcode,
+    String? county,
+    String? notes,
+    BookingAccessType? accessType,
+    String? estateAgentName,
+    String? estateAgentPhone,
+    String? estateAgentAddress,
+    String? estateAgentNotes,
+  }) async {
+    state = state.copyWith(isLoading: true);
+    try {
+      final updated = await _repository.updateBooking(
+        id,
+        date: date,
+        startTime: startTime,
+        endTime: endTime,
+        surveyType: surveyType,
+        jobRef: jobRef,
+        clientName: clientName,
+        clientPhone: clientPhone,
+        clientEmail: clientEmail,
+        propertyType: propertyType,
+        yearBuilt: yearBuilt,
+        propertyAddress: propertyAddress,
+        addressLine: addressLine,
+        city: city,
+        town: town,
+        postcode: postcode,
+        county: county,
+        notes: notes,
+        accessType: accessType,
+        estateAgentName: estateAgentName,
+        estateAgentPhone: estateAgentPhone,
+        estateAgentAddress: estateAgentAddress,
+        estateAgentNotes: estateAgentNotes,
+      );
+      state = state.copyWith(
+        bookings: state.bookings.map((b) => b.id == id ? updated : b).toList(),
+        isLoading: false,
+      );
+      return updated;
+    } catch (e) {
+      state = state.copyWith(isLoading: false, error: e.toString());
+      // The form shows the server's reason, so the caller needs the failure.
+      rethrow;
+    }
+  }
+
   Future<void> updateBookingStatus(String id, BookingStatus status) async {
     state = state.copyWith(isLoading: true);
     try {

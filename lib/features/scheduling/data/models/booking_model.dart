@@ -37,6 +37,7 @@ class BookingModel {
     required this.startTime,
     required this.endTime,
     required this.status,
+    this.surveyId,
     this.surveyType,
     this.jobRef,
     this.clientName,
@@ -69,6 +70,7 @@ class BookingModel {
       startTime: json['startTime'] as String,
       endTime: json['endTime'] as String,
       status: json['status'] as String,
+      surveyId: json['surveyId'] as String?,
       surveyType: json['surveyType'] as String?,
       jobRef: json['jobRef'] as String?,
       clientName: json['clientName'] as String?,
@@ -102,6 +104,7 @@ class BookingModel {
   final String startTime;
   final String endTime;
   final String status;
+  final String? surveyId;
   final String? surveyType;
   final String? jobRef;
   final String? clientName;
@@ -133,6 +136,7 @@ class BookingModel {
         startTime: startTime,
         endTime: endTime,
         status: BookingStatus.fromBackendString(status),
+        surveyId: surveyId,
         surveyType: BookingSurveyType.fromWire(surveyType),
         jobRef: jobRef,
         clientName: clientName,

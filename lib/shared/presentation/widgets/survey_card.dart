@@ -8,12 +8,16 @@ class SurveyCard extends StatelessWidget {
     required this.survey,
     this.onTap,
     this.showProgress = true,
+    this.menu,
     super.key,
   });
 
   final Survey survey;
   final VoidCallback? onTap;
   final bool showProgress;
+
+  /// Actions shown at the end of the card's first row.
+  final Widget? menu;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +75,7 @@ class SurveyCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   SurveyStatusBadge(status: survey.status),
+                  if (menu != null) menu!,
                 ],
               ),
               if (survey.address != null) ...[

@@ -46,7 +46,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   @override
-  int get schemaVersion => 21;
+  int get schemaVersion => 22;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -165,6 +165,14 @@ class AppDatabase extends _$AppDatabase {
               'INTEGER NOT NULL DEFAULT 0',
             );
           }
+          if (from < 22) {
+            await _addColumnIfNotExists(
+              m,
+              'surveys',
+              'inspection_date',
+              'INTEGER',
+            );
+          }
         },
         beforeOpen: (details) async {
           // Safety check: ensure required columns exist even if schema version is current
@@ -201,6 +209,9 @@ class AppDatabase extends _$AppDatabase {
     }
     if (!surveysColumns.contains('deleted_at')) {
       await customStatement('ALTER TABLE surveys ADD COLUMN deleted_at INTEGER');
+    }
+    if (!surveysColumns.contains('inspection_date')) {
+      await customStatement('ALTER TABLE surveys ADD COLUMN inspection_date INTEGER');
     }
 
     // Check sync_queue table columns

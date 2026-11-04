@@ -176,7 +176,8 @@ class ReportBuilder {
         address: rawData.survey.address,
         jobRef: rawData.survey.jobRef,
         clientName: rawData.survey.clientName,
-        inspectionDate: rawData.survey.createdAt,
+        inspectionDate:
+            rawData.survey.inspectionDate ?? rawData.survey.createdAt,
         startedAt: rawData.survey.startedAt,
         completedAt: rawData.survey.completedAt,
         surveyDuration: surveyDuration,

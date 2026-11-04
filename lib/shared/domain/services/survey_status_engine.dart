@@ -12,9 +12,9 @@ class SurveyStatusEngine {
   /// Allowed status transitions map.
   /// Key = current status, Value = list of allowed target statuses.
   static const Map<SurveyStatus, Set<SurveyStatus>> _allowedTransitions = {
-    SurveyStatus.draft: {SurveyStatus.inProgress},
+    SurveyStatus.draft: {SurveyStatus.inProgress, SurveyStatus.completed},
     SurveyStatus.inProgress: {SurveyStatus.paused, SurveyStatus.completed},
-    SurveyStatus.paused: {SurveyStatus.inProgress},
+    SurveyStatus.paused: {SurveyStatus.inProgress, SurveyStatus.completed},
     SurveyStatus.completed: {SurveyStatus.pendingReview},
     SurveyStatus.pendingReview: {SurveyStatus.approved, SurveyStatus.rejected},
     SurveyStatus.approved: {},

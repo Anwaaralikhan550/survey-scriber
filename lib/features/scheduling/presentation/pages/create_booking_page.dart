@@ -3,10 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../app/router/routes.dart';
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/sync/sync_manager.dart';
 import '../../../auth/presentation/providers/auth_notifier.dart';
 import '../../domain/entities/booking.dart';
-import '../../../dashboard/presentation/providers/dashboard_provider.dart' show liveBookingCountsProvider;
+import '../../../dashboard/presentation/providers/dashboard_provider.dart'
+    show liveBookingCountsProvider, weekBookingCountsProvider;
 import '../providers/scheduling_providers.dart';
 
 /// Combined Create-Booking screen.
@@ -14,7 +17,7 @@ import '../providers/scheduling_providers.dart';
 /// App-Edit brief: "You cannot have Create Bookings and Select Survey type.
 /// You need to combine this" — so the survey type (Home Survey / Valuation) is
 /// chosen here at the top of a single booking form, replacing the separate
-/// "Select Survey Type" step.
+/// "Select Survey Type" step. The same form edits a booking when [booking] is set.
 class CreateBookingPage extends ConsumerStatefulWidget {
   const CreateBookingPage({
     super.key,
@@ -22,7 +25,11 @@ class CreateBookingPage extends ConsumerStatefulWidget {
     this.startTime,
     this.endTime,
     this.initialSurveyType = BookingSurveyType.homeSurvey,
+    this.booking,
   });
+
+  /// The booking being edited.
+  final Booking? booking;
 
   /// Survey type pre-selected when the form opens (the segment chosen on Home).
   final BookingSurveyType initialSurveyType;
@@ -32,6 +39,50 @@ class CreateBookingPage extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<CreateBookingPage> createState() => _CreateBookingPageState();
+}
+
+/// The server's reason for refusing, without the exception name.
+String? serverMessageOf(Object error) => switch (error) {
+      ValidationException(:final message) => message,
+      ServerException(:final message) => message,
+      NetworkException(:final message) => message,
+      UnauthorizedException(:final message) => message,
+      _ => null,
+    };
+
+final _ukPostcode = RegExp(
+  r'^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$',
+  caseSensitive: false,
+);
+
+/// The estate agent's address is stored as one value, one part per line, with
+/// empty parts left out: Address Line, City, Postcode, County. Reads it back into
+/// the form's fields. A part left out moves the others up, so the postcode is
+/// found by its shape.
+({String line, String city, String postcode, String county}) splitAgentAddress(
+  String? stored,
+) {
+  final parts = (stored ?? '')
+      .split('\n')
+      .map((p) => p.trim())
+      .where((p) => p.isNotEmpty)
+      .toList();
+  final at = parts.indexWhere(_ukPostcode.hasMatch);
+  if (at < 0) {
+    return (
+      line: parts.isNotEmpty ? parts[0] : '',
+      city: parts.length > 1 ? parts[1] : '',
+      postcode: parts.length > 2 ? parts[2] : '',
+      county: parts.length > 3 ? parts.sublist(3).join(', ') : '',
+    );
+  }
+  final before = parts.sublist(0, at);
+  return (
+    line: before.isNotEmpty ? before[0] : '',
+    city: before.length > 1 ? before.sublist(1).join(', ') : '',
+    postcode: parts[at],
+    county: parts.sublist(at + 1).join(', '),
+  );
 }
 
 class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
@@ -70,10 +121,45 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
   @override
   void initState() {
     super.initState();
+    final booking = widget.booking;
+    if (booking != null) {
+      _fillFrom(booking);
+      return;
+    }
     _surveyType = widget.initialSurveyType;
     _selectedDate = widget.date ?? DateTime.now();
     _startTime = widget.startTime ?? '09:00';
     _endTime = widget.endTime ?? '10:00';
+  }
+
+  void _fillFrom(Booking booking) {
+    _surveyType = booking.surveyType;
+    _selectedDate = booking.date;
+    _startTime = booking.startTime;
+    _endTime = booking.endTime;
+    _propertyType = booking.propertyType;
+    _accessType = booking.accessType ?? BookingAccessType.directAccess;
+    _jobRefController.text = booking.jobRef ?? '';
+    _clientNameController.text = booking.clientName ?? '';
+    _clientPhoneController.text = booking.clientPhone ?? '';
+    _clientEmailController.text = booking.clientEmail ?? '';
+    _yearBuiltController.text = booking.yearBuilt ?? '';
+    _cityController.text = booking.city ?? '';
+    _townController.text = booking.town ?? '';
+    _postcodeController.text = booking.postcode ?? '';
+    _countyController.text = booking.county ?? '';
+    _notesController.text = booking.notes ?? '';
+    // A booking from before the address was split has only the one line.
+    _addressLineController.text =
+        booking.addressLine ?? booking.propertyAddress ?? '';
+    _agentNameController.text = booking.estateAgentName ?? '';
+    _agentPhoneController.text = booking.estateAgentPhone ?? '';
+    _agentNotesController.text = booking.estateAgentNotes ?? '';
+    final agent = splitAgentAddress(booking.estateAgentAddress);
+    _agentAddressLineController.text = agent.line;
+    _agentCityController.text = agent.city;
+    _agentPostcodeController.text = agent.postcode;
+    _agentCountyController.text = agent.county;
   }
 
   @override
@@ -105,11 +191,14 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
 
   Future<void> _pickDate() async {
     final today = DateTime.now();
+    final earliest = DateTime(today.year - 1);
+    final latest = DateTime(today.year + 3);
     final picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate,
-      firstDate: DateTime(today.year - 1),
-      lastDate: DateTime(today.year + 3),
+      // An old booking keeps its own date within reach.
+      firstDate: _selectedDate.isBefore(earliest) ? _selectedDate : earliest,
+      lastDate: _selectedDate.isAfter(latest) ? _selectedDate : latest,
     );
     if (picked != null && mounted) setState(() => _selectedDate = picked);
   }
@@ -174,50 +263,96 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
       _trim(_agentCountyController),
     ].whereType<String>().join('\n');
 
+    final isCollectKeys = _accessType == BookingAccessType.collectKeys;
+    final address = composedAddress.isEmpty ? null : composedAddress;
+    final agentName = isCollectKeys ? _trim(_agentNameController) : null;
+    final agentPhone = isCollectKeys ? _trim(_agentPhoneController) : null;
+    final agentAddressValue =
+        isCollectKeys && agentAddress.isNotEmpty ? agentAddress : null;
+    final agentNotes = isCollectKeys ? _trim(_agentNotesController) : null;
+    final notifier = ref.read(bookingsNotifierProvider.notifier);
+    final editing = widget.booking;
+
     try {
-      final booking =
-          await ref.read(bookingsNotifierProvider.notifier).createBooking(
-                surveyorId: user.id,
-                date: _selectedDate,
-                startTime: _startTime,
-                endTime: _endTime,
-                surveyType: _surveyType,
-                jobRef: _trim(_jobRefController),
-                clientName: _trim(_clientNameController),
-                clientPhone: _trim(_clientPhoneController),
-                clientEmail: _trim(_clientEmailController),
-                propertyType: _propertyType,
-                yearBuilt: _trim(_yearBuiltController),
-                propertyAddress:
-                    composedAddress.isEmpty ? null : composedAddress,
-                addressLine: _trim(_addressLineController),
-                city: _trim(_cityController),
-                town: _trim(_townController),
-                postcode: _trim(_postcodeController),
-                county: _trim(_countyController),
-                notes: _trim(_notesController),
-                accessType: _accessType,
-                estateAgentName: _accessType == BookingAccessType.collectKeys
-                    ? _trim(_agentNameController)
-                    : null,
-                estateAgentPhone: _accessType == BookingAccessType.collectKeys
-                    ? _trim(_agentPhoneController)
-                    : null,
-                estateAgentAddress: _accessType == BookingAccessType.collectKeys &&
-                        agentAddress.isNotEmpty
-                    ? agentAddress
-                    : null,
-                estateAgentNotes: _accessType == BookingAccessType.collectKeys
-                    ? _trim(_agentNotesController)
-                    : null,
-              );
+      if (editing != null) {
+        await notifier.updateBooking(
+          editing.id,
+          date: _selectedDate,
+          startTime: _startTime,
+          endTime: _endTime,
+          surveyType: _surveyType,
+          jobRef: _trim(_jobRefController),
+          clientName: _trim(_clientNameController),
+          clientPhone: _trim(_clientPhoneController),
+          clientEmail: _trim(_clientEmailController),
+          propertyType: _propertyType,
+          yearBuilt: _trim(_yearBuiltController),
+          propertyAddress: address,
+          addressLine: _trim(_addressLineController),
+          city: _trim(_cityController),
+          town: _trim(_townController),
+          postcode: _trim(_postcodeController),
+          county: _trim(_countyController),
+          notes: _trim(_notesController),
+          accessType: _accessType,
+          estateAgentName: agentName,
+          estateAgentPhone: agentPhone,
+          estateAgentAddress: agentAddressValue,
+          estateAgentNotes: agentNotes,
+        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Booking updated')),
+          );
+          ref.invalidate(bookingDetailProvider(editing.id));
+          ref.invalidate(liveBookingCountsProvider);
+          ref.invalidate(weekBookingCountsProvider);
+          // The inspection follows the booking.
+          ref.read(syncStateProvider.notifier).pullNow();
+          _leave();
+        }
+        return;
+      }
+
+      final booking = await notifier.createBooking(
+        surveyorId: user.id,
+        date: _selectedDate,
+        startTime: _startTime,
+        endTime: _endTime,
+        surveyType: _surveyType,
+        jobRef: _trim(_jobRefController),
+        clientName: _trim(_clientNameController),
+        clientPhone: _trim(_clientPhoneController),
+        clientEmail: _trim(_clientEmailController),
+        propertyType: _propertyType,
+        yearBuilt: _trim(_yearBuiltController),
+        propertyAddress: address,
+        addressLine: _trim(_addressLineController),
+        city: _trim(_cityController),
+        town: _trim(_townController),
+        postcode: _trim(_postcodeController),
+        county: _trim(_countyController),
+        notes: _trim(_notesController),
+        accessType: _accessType,
+        estateAgentName: agentName,
+        estateAgentPhone: agentPhone,
+        estateAgentAddress: agentAddressValue,
+        estateAgentNotes: agentNotes,
+      );
 
       if (mounted && booking != null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Booking created successfully')),
+          const SnackBar(
+            content: Text(
+              'Booking created. Its inspection is in Survey Folder under Live.',
+            ),
+          ),
         );
         ref.invalidate(liveBookingCountsProvider);
-        context.pop();
+        ref.invalidate(weekBookingCountsProvider);
+        // Brings the booking's new inspection to this phone.
+        ref.read(syncStateProvider.notifier).pullNow();
+        _leave();
       }
     } catch (e) {
       if (mounted) {
@@ -230,16 +365,20 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
     }
   }
 
+  void _leave() {
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go(Routes.dashboard);
+    }
+  }
+
   /// The server's reason for refusing the booking, without the exception name.
   String _bookingErrorMessage(Object error) {
-    final String? message = switch (error) {
-      ValidationException(:final message) => message,
-      ServerException(:final message) => message,
-      NetworkException(:final message) => message,
-      UnauthorizedException(:final message) => message,
-      _ => null,
-    };
-    return message ?? 'The booking could not be created. Please try again.';
+    return serverMessageOf(error) ??
+        (widget.booking == null
+            ? 'The booking could not be created. Please try again.'
+            : 'The booking could not be saved. Please try again.');
   }
 
   @override
@@ -255,7 +394,7 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
         title: Text(
-          'Create Booking',
+          widget.booking == null ? 'Create Booking' : 'Edit Booking',
           style: theme.textTheme.titleLarge?.copyWith(
             color: colorScheme.onSurface,
             fontWeight: FontWeight.w600,
@@ -368,7 +507,7 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
                 labelText: 'Property Type',
                 prefixIcon: Icon(Icons.house_outlined),
               ),
-              items: _propertyTypes
+              items: {..._propertyTypes, if (_propertyType != null) _propertyType!}
                   .map((t) => DropdownMenuItem(value: t, child: Text(t)))
                   .toList(),
               onChanged: (v) => setState(() => _propertyType = v),
@@ -469,7 +608,12 @@ class _CreateBookingPageState extends ConsumerState<CreateBookingPage> {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     : const Icon(Icons.check),
-                label: Text(_isSubmitting ? 'Creating...' : 'Create Booking'),
+                label: Text(switch ((widget.booking != null, _isSubmitting)) {
+                  (false, false) => 'Create Booking',
+                  (false, true) => 'Creating...',
+                  (true, false) => 'Save Changes',
+                  (true, true) => 'Saving...',
+                }),
               ),
             ),
           ],

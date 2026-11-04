@@ -101,6 +101,53 @@ final liveBookingCountsProvider =
   }
 });
 
+/// Bookings per day of the current week, Monday first, for one Home segment.
+/// Cancelled bookings do not count. Pages through the bookings API.
+Future<List<int>> countWeekBookings(
+  SchedulingRepository repo,
+  HomeSegment segment,
+  DateTime today,
+) async {
+  final monday = DateTime(today.year, today.month, today.day)
+      .subtract(Duration(days: today.weekday - 1));
+  final sunday = monday.add(const Duration(days: 6));
+  final counts = List<int>.filled(7, 0);
+  final wanted = segment == HomeSegment.valuations
+      ? BookingSurveyType.valuation
+      : BookingSurveyType.homeSurvey;
+  for (var page = 1; page <= 10; page++) {
+    final batch = await repo.getMyBookings(
+      startDate: monday,
+      endDate: sunday,
+      page: page,
+      limit: 100,
+    );
+    for (final b in batch) {
+      if (b.status == BookingStatus.cancelled || b.surveyType != wanted) continue;
+      final day = DateTime(b.date.year, b.date.month, b.date.day)
+          .difference(monday)
+          .inDays;
+      if (day >= 0 && day < 7) counts[day]++;
+    }
+    if (batch.length < 100) break;
+  }
+  return counts;
+}
+
+/// The "This week" card. `null` when the bookings could not be loaded.
+final weekBookingCountsProvider =
+    FutureProvider.autoDispose.family<List<int>?, HomeSegment>((ref, segment) async {
+  try {
+    return await countWeekBookings(
+      ref.watch(schedulingRepositoryProvider),
+      segment,
+      DateTime.now(),
+    );
+  } catch (_) {
+    return null;
+  }
+});
+
 class DashboardStats {
   const DashboardStats({
     required this.live,
