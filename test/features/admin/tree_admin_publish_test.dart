@@ -124,6 +124,49 @@ void main() {
     expect(sent!.containsKey('baseVersion'), isFalse);
   });
 
+  test('editing on the phone keeps words chosen on the web, and what the app does not use', () async {
+    final asset = jsonDecode(File(type.assetPath).readAsStringSync()) as Map<String, dynamic>;
+    asset['baseBundledVersion'] = type.bundledVersion;
+    Map<String, dynamic>? dropdown;
+    String? screenId;
+    Map<String, dynamic>? withDefaults;
+    for (final section in asset['sections'] as List) {
+      for (final node in section['nodes'] as List) {
+        if (node['reportDefaults'] != null) withDefaults ??= node as Map<String, dynamic>;
+        for (final field in (node['fields'] as List?) ?? const []) {
+          if (field['type'] == 'dropdown' && dropdown == null) {
+            dropdown = field as Map<String, dynamic>;
+            screenId = node['id'] as String;
+          }
+        }
+      }
+    }
+    final first = (dropdown!['options'] as List).first as String;
+    dropdown!['optionLabels'] = {first: 'Words from the web'};
+    dropdown!['hiddenOptions'] = [(dropdown!['options'] as List).last];
+    dropdown!['phraseTemplate'] = 'Template {x}';
+    store.files['tree_${type.key}.json'] = jsonEncode(asset);
+
+    await repo.updateScreenTitle(type, screenId!, 'New title');
+    await repo.updateConditionalRule(type, screenId!, dropdown!['id'] as String, conditionalOn: 'a=b', conditionalValue: '', conditionalMode: 'show');
+    await repo.updateFieldLabel(type, screenId!, dropdown!['id'] as String, 'New label');
+    await repo.publishTree(type);
+
+    final tree = sent!['tree'] as Map<String, dynamic>;
+    final sentNodes = [
+      for (final s in tree['sections'] as List)
+        for (final n in s['nodes'] as List) n as Map<String, dynamic>,
+    ];
+    final sentField = (sentNodes.firstWhere((n) => n['id'] == screenId)['fields'] as List)
+        .cast<Map<String, dynamic>>()
+        .firstWhere((f) => f['id'] == dropdown!['id']);
+    expect(sentField['optionLabels'], {first: 'Words from the web'});
+    expect(sentField['hiddenOptions'], [(dropdown!['options'] as List).last]);
+    expect(sentField['phraseTemplate'], 'Template {x}');
+    expect(sentField['label'], 'New label');
+    expect(sentNodes.firstWhere((n) => n['id'] == withDefaults!['id'])['reportDefaults'], withDefaults!['reportDefaults']);
+  });
+
   test('reset throws the draft away', () async {
     final id = await firstScreenId();
     await repo.updateScreenTitle(type, id, 'Mine');

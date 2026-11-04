@@ -807,7 +807,8 @@ class InspectionFieldInput extends StatelessWidget {
         return _InspectionDropdown(
           label: field.label,
           value: value,
-          options: options,
+          options: field.offeredOptions(value),
+          textOf: field.optionText,
           onChanged: onChanged,
           onOptionCommitted: onDiscreteSelection,
         );
@@ -847,6 +848,7 @@ class InspectionFieldInput extends StatelessWidget {
 /// subtle dividers, and smooth open/close animations.
 class _InspectionDropdown extends StatefulWidget {
   const _InspectionDropdown({
+    required this.textOf,
     required this.label,
     required this.value,
     required this.options,
@@ -862,6 +864,9 @@ class _InspectionDropdown extends StatefulWidget {
 
   @override
   State<_InspectionDropdown> createState() => _InspectionDropdownState();
+
+  /// The words to show for a stored option value.
+  final String Function(String) textOf;
 }
 
 class _InspectionDropdownState extends State<_InspectionDropdown>
@@ -892,8 +897,7 @@ class _InspectionDropdownState extends State<_InspectionDropdown>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final hasValue =
-        widget.value.isNotEmpty && widget.options.contains(widget.value);
+    final hasValue = widget.value.isNotEmpty;
 
     return InkWell(
       onTap: () => _openSheet(context),
@@ -938,7 +942,7 @@ class _InspectionDropdownState extends State<_InspectionDropdown>
         ),
         child: hasValue
             ? Text(
-                widget.value,
+                widget.textOf(widget.value),
                 style: theme.textTheme.bodyLarge,
                 overflow: TextOverflow.ellipsis,
               )
@@ -1026,7 +1030,7 @@ class _InspectionDropdownState extends State<_InspectionDropdown>
                     final isSelected = option == widget.value;
 
                     return _DropdownOption(
-                      label: option,
+                      label: widget.textOf(option),
                       isSelected: isSelected,
                       onTap: () {
                         widget.onChanged(option);

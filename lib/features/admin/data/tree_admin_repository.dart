@@ -350,6 +350,8 @@ class TreeAdminRepository {
           conditionalOn: field.conditionalOn,
           conditionalValue: field.conditionalValue,
           conditionalMode: field.conditionalMode,
+          optionLabels: field.optionLabels,
+          hiddenOptions: field.hiddenOptions,
           phraseTemplate: phraseTemplate,
         );
       }
@@ -378,6 +380,9 @@ class TreeAdminRepository {
           conditionalOn: conditionalOn,
           conditionalValue: conditionalValue,
           conditionalMode: conditionalMode,
+          phraseTemplate: field.phraseTemplate,
+          optionLabels: field.optionLabels,
+          hiddenOptions: field.hiddenOptions,
         );
       }
       return field;

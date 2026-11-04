@@ -20,6 +20,7 @@ import '../../domain/valuation_answer_validator.dart';
 import '../../domain/valuation_phrase_catalog.dart';
 import '../../../surveys/presentation/providers/survey_lifecycle.dart';
 import '../../domain/valuation_phrase_engine.dart';
+import '../../../property_inspection/domain/option_labels.dart';
 import '../../../property_inspection/domain/models/inspection_models.dart';
 
 final valuationRepositoryProvider = Provider<ValuationRepository>((ref) {
@@ -140,8 +141,14 @@ final valuationPhraseTextsProvider =
 
 final valuationPhraseEngineProvider = Provider<ValuationPhraseEngine>((ref) {
   final catalog = ref.watch(valuationPhraseCatalogProvider);
+  final sections = ref.watch(valuationSectionsProvider).valueOrNull;
   return catalog.maybeWhen(
-    data: ValuationPhraseEngine.catalog,
+    data: (data) => ValuationPhraseEngine.catalog(
+      data,
+      optionLabels: sections == null
+          ? OptionLabels.empty
+          : OptionLabels.fromSections(sections),
+    ),
     orElse: ValuationPhraseEngine.new,
   );
 });

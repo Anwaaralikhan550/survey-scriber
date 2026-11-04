@@ -10,6 +10,7 @@ import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
 import 'client_paragraph_rules.dart';
 import 'paragraph_composer.dart';
+import '../../../property_inspection/domain/option_labels.dart';
 import 'report_data_service.dart';
 
 /// Transforms [V2RawReportData] into a format-agnostic [ReportDocument]
@@ -125,11 +126,24 @@ class ReportBuilder {
     'Condition ratings assume that current compliance certificates are available for all services and should be verified. In the absence of appropriate certification, condition ratings would by default reduce to the lowest level, which is condition rating 3.',
   ];
 
+  bool get _enginesLackLabels =>
+      (inspectionPhraseEngine?.optionLabels.isEmpty ?? false) ||
+      (valuationPhraseEngine?.optionLabels.isEmpty ?? false);
+
   ReportDocument build(
     V2RawReportData rawData,
     ExportConfig config, {
     Duration? surveyDuration,
   }) {
+    // The dropdown words chosen in the admin, from this survey's tree.
+    final labels = OptionLabels.fromSections(rawData.tree.sections);
+    if (!labels.isEmpty && _enginesLackLabels) {
+      return ReportBuilder(
+        inspectionPhraseEngine: inspectionPhraseEngine?.withLabelsFrom(rawData.tree.sections),
+        valuationPhraseEngine: valuationPhraseEngine?.withLabelsFrom(rawData.tree.sections),
+      ).build(rawData, config, surveyDuration: surveyDuration);
+    }
+
     final isInspection = rawData.survey.type.isInspection;
 
     final orderedSectionDefs = _orderedSectionsForReport(
@@ -2631,7 +2645,12 @@ class ReportBuilder {
       if (!shouldShowInspectionField(field, answers)) continue;
 
       final rawValue = answers[field.id] ?? '';
-      final displayValue = _formatDisplayValue(rawValue, field.type);
+      final displayValue = _formatDisplayValue(
+        field.type == InspectionFieldType.dropdown
+            ? field.optionText(rawValue)
+            : rawValue,
+        field.type,
+      );
 
       result.add(ReportField(
         fieldId: field.id,

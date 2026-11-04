@@ -21,6 +21,7 @@ import '../../../surveys/presentation/providers/survey_lifecycle.dart';
 import '../../domain/field_phrase_processor.dart';
 import '../../domain/models/inspection_models.dart';
 import '../../domain/inspection_phrase_engine.dart';
+import '../../domain/option_labels.dart';
 
 final inspectionRepositoryProvider = Provider<InspectionRepository>((ref) {
   final db = ref.watch(appDatabaseProvider);
@@ -112,8 +113,14 @@ final inspectionPhraseTextsProvider =
 
 final inspectionPhraseEngineProvider = Provider<InspectionPhraseEngine?>((ref) {
   final texts = ref.watch(inspectionPhraseTextsProvider);
+  final sections = ref.watch(inspectionSectionsProvider).valueOrNull;
   return texts.maybeWhen(
-    data: (map) => InspectionPhraseEngine(map),
+    data: (map) => InspectionPhraseEngine(
+      map,
+      optionLabels: sections == null
+          ? OptionLabels.empty
+          : OptionLabels.fromSections(sections),
+    ),
     orElse: () => null,
   );
 });

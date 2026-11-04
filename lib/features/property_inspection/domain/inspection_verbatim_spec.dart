@@ -13161,7 +13161,7 @@ extension _VerbatimSpec on InspectionPhraseEngine {
       var complete = true;
       var count = 0;
       for (final token in rule.tokens) {
-        final items = _verbatimTokenItems(token, answers);
+        final items = _verbatimTokenItems(screenId, token, answers);
         if (items.isEmpty && token.optional) {
           text = text.replaceAll(token.token, '');
           continue;
@@ -13187,12 +13187,14 @@ extension _VerbatimSpec on InspectionPhraseEngine {
   }
 
   List<String> _verbatimTokenItems(
+    String screenId,
     VerbatimToken token,
     Map<String, String> answers,
   ) {
     if (token.constant != null) return [token.constant!];
     if (token.dropdown != null) {
-      final v = (answers[token.dropdown] ?? '').trim();
+      final stored = (answers[token.dropdown] ?? '').trim();
+      final v = optionLabels.show(screenId, token.dropdown!, stored);
       return v.isEmpty ? const [] : [token.lower ? v.toLowerCase() : v];
     }
     if (token.text != null) {

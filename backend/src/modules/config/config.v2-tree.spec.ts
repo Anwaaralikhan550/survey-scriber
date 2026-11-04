@@ -120,6 +120,18 @@ describe('ConfigService - published survey tree', () => {
       ['a duplicate screen', tree([screen('s1'), screen('s1')])],
       ['an unknown field type', tree([screen('s1', null, [{ id: 'd', label: 'D', type: 'magic' }])])],
       ['a condition on a missing field', tree([screen('s1', null, [{ id: 'd', label: 'D', type: 'text', conditionalOn: 'ghost=Yes' }])])],
+      ['renaming an option the field does not have', tree([screen('s1', null, [
+        { id: 'd', label: 'D', type: 'dropdown', options: ['A'], optionLabels: { B: 'Bee' } },
+      ])])],
+      ['an option renamed to nothing', tree([screen('s1', null, [
+        { id: 'd', label: 'D', type: 'dropdown', options: ['A'], optionLabels: { A: '  ' } },
+      ])])],
+      ['every option hidden', tree([screen('s1', null, [
+        { id: 'd', label: 'D', type: 'dropdown', options: ['A'], hiddenOptions: ['A'] },
+      ])])],
+      ['two options showing the same words', tree([screen('s1', null, [
+        { id: 'd', label: 'D', type: 'dropdown', options: ['A', 'B'], optionLabels: { B: 'a' } },
+      ])])],
       ['a parent loop', tree([
         { id: 'g1', title: 'G1', type: 'group', parentId: 'g2', order: 0 },
         { id: 'g2', title: 'G2', type: 'group', parentId: 'g1', order: 0 },
@@ -127,6 +139,13 @@ describe('ConfigService - published survey tree', () => {
     ])('%s is refused', async (_name, bad) => {
       await expect(upload(bad)).rejects.toBeInstanceOf(BadRequestException);
       expect(store).toHaveLength(0);
+    });
+
+    it('renamed and hidden options that leave a good list are accepted', async () => {
+      const ok = tree([screen('s1', null, [
+        { id: 'd', label: 'D', type: 'dropdown', options: ['A', 'B', 'C'], optionLabels: { A: 'Alpha' }, hiddenOptions: ['C'] },
+      ])]);
+      expect((await upload(ok)).version).toBe(1);
     });
 
     it('a tree that lost over half its screens is refused', async () => {

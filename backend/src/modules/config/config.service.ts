@@ -1880,7 +1880,33 @@ export class ConfigService {
             `Dropdown field "${f['id']}" in screen "${node['id']}" has no options`,
           );
         }
+        this.validateOptionWords(f, node['id'] as string, options as unknown[]);
       }
+    }
+  }
+
+  /** Renamed and hidden options must leave a usable, unambiguous list. */
+  private validateOptionWords(field: Record<string, unknown>, screenId: string, options: unknown[]): void {
+    const name = `"${field['label'] ?? field['id']}" on screen "${screenId}"`;
+    const labels = (field['optionLabels'] ?? {}) as Record<string, unknown>;
+    const hidden = (field['hiddenOptions'] ?? []) as unknown[];
+    for (const [value, words] of Object.entries(labels)) {
+      if (!options.includes(value)) {
+        throw new BadRequestException(`${name} renames an option it does not have ("${value}")`);
+      }
+      if (typeof words !== 'string' || !words.trim()) {
+        throw new BadRequestException(`${name} has an option with empty text ("${value}")`);
+      }
+    }
+    const shown = options
+      .filter((o) => !hidden.includes(o))
+      .map((o) => String(labels[o as string] ?? o).trim().toLowerCase());
+    if (shown.length === 0) {
+      throw new BadRequestException(`${name} would have no options left`);
+    }
+    const duplicate = shown.find((w, i) => shown.indexOf(w) !== i);
+    if (duplicate !== undefined) {
+      throw new BadRequestException(`${name} would show "${duplicate}" twice`);
     }
   }
 

@@ -1,3 +1,5 @@
+import '../../property_inspection/domain/models/inspection_models.dart';
+import '../../property_inspection/domain/option_labels.dart';
 import 'valuation_phrase_catalog.dart';
 
 /// Live-preview phrase engine for Valuation screens.
@@ -7,12 +9,22 @@ import 'valuation_phrase_catalog.dart';
 /// reviewer sign-off, not a certified RICS phrase database.
 class ValuationPhraseEngine {
   ValuationPhraseEngine([Map<String, String> phraseTexts = const {}])
-      : _catalog = ValuationPhraseCatalog.fromLegacyMap(phraseTexts);
+      : _catalog = ValuationPhraseCatalog.fromLegacyMap(phraseTexts),
+        optionLabels = OptionLabels.empty;
 
-  ValuationPhraseEngine.catalog(ValuationPhraseCatalog catalog)
-      : _catalog = catalog;
+  ValuationPhraseEngine.catalog(
+    ValuationPhraseCatalog catalog, {
+    this.optionLabels = OptionLabels.empty,
+  }) : _catalog = catalog;
 
   final ValuationPhraseCatalog _catalog;
+
+  /// Dropdown words chosen in the admin; rules still match the stored value.
+  final OptionLabels optionLabels;
+
+  /// This engine with the admin's dropdown words for [sections].
+  ValuationPhraseEngine withLabelsFrom(Iterable<InspectionSectionDefinition> sections) =>
+      ValuationPhraseEngine.catalog(_catalog, optionLabels: OptionLabels.fromSections(sections));
 
   /// Read-only view of the candidate valuation phrase bank backing this
   /// engine. The bank is a professional draft source pending client/RICS
@@ -24,8 +36,13 @@ class ValuationPhraseEngine {
   // ─── public entry point ──────────────────────────────────────────────
 
   List<String> buildPhrases(String screenId, Map<String, String> answers) {
-    return _cleanupPhrases(_buildPhrasesRaw(screenId, answers));
+    return _cleanupPhrases(
+      _buildPhrasesRaw(screenId, optionLabels.withWords(screenId, answers)),
+    );
   }
+
+  /// What to print for a dropdown; `_val` is what rules compare against.
+  static String _say(Map<String, String> a, String key) => OptionLabels.say(a, key);
 
   /// Exposes phrase provenance to the audit and reviewer tooling while
   /// preserving [buildPhrases] for existing preview, persistence and export
@@ -619,9 +636,9 @@ class ValuationPhraseEngine {
   List<String> _generalDetails(Map<String, String> answers) {
     final phrases = <String>[];
 
-    final status = _val(answers, 'actv_status');
-    final finishes = _val(answers, 'actv_finishes');
-    final carpeted = _val(answers, 'actv_carpeted');
+    final status = _say(answers, 'actv_status');
+    final finishes = _say(answers, 'actv_finishes');
+    final carpeted = _say(answers, 'actv_carpeted');
     if (status.isNotEmpty || finishes.isNotEmpty || carpeted.isNotEmpty) {
       final parts = <String>[];
       if (status.isNotEmpty) {
@@ -640,17 +657,17 @@ class ValuationPhraseEngine {
 
     final reason = _val(answers, 'actv_vl_reason');
     if (reason.isNotEmpty && reason.toLowerCase() != 'other') {
-      phrases.add('The purpose of this valuation is for $reason.');
+      phrases.add('The purpose of this valuation is for ${_say(answers, 'actv_vl_reason')}.');
     }
 
-    final weather = _val(answers, 'actv_weather');
+    final weather = _say(answers, 'actv_weather');
     if (weather.isNotEmpty) {
       phrases.add(
           'At the time of my inspection, the weather conditions were ${weather.toLowerCase()}. '
           'It should be noted that certain defects may be more or less apparent depending on the prevailing weather conditions at the time of inspection.');
     }
 
-    final tenure = _val(answers, 'actv_tenure');
+    final tenure = _say(answers, 'actv_tenure');
     if (tenure.isNotEmpty) {
       phrases.add('The property is held on a ${tenure.toLowerCase()} basis. '
           'Your legal adviser should confirm the precise terms and any obligations arising from the tenure.');
@@ -662,19 +679,21 @@ class ValuationPhraseEngine {
       final safeSubType =
           type == 'Flat' || subType.toLowerCase() == 'other' ? '' : subType;
       final subTypeDescription = _propertySubTypeDescription(safeSubType);
+      final typeWords = _say(answers, 'actv_type');
       final leadWord =
-          subTypeDescription.isNotEmpty ? subTypeDescription : type;
+          subTypeDescription.isNotEmpty ? subTypeDescription : typeWords;
       final buf = StringBuffer('The property is ${_article(leadWord)} ');
       if (subTypeDescription.isNotEmpty) buf.write('$subTypeDescription ');
-      buf.write('${type.toLowerCase()}.');
+      buf.write('${typeWords.toLowerCase()}.');
       phrases.add(buf.toString());
     }
 
     if (type == 'Flat') {
-      final flatType = _val(answers, 'actv_flat_type');
-      final buildType = _val(answers, 'actv_build_type');
+      final storedFlatType = _val(answers, 'actv_flat_type');
+      final flatType = _say(answers, 'actv_flat_type');
+      final buildType = _say(answers, 'actv_build_type');
       if (flatType.isNotEmpty || buildType.isNotEmpty) {
-        final isMaisonette = flatType.isNotEmpty && flatType != 'Flat';
+        final isMaisonette = storedFlatType.isNotEmpty && storedFlatType != 'Flat';
         if (isMaisonette && buildType.isNotEmpty) {
           phrases.add(
             'The flat is configured as a ${flatType.toLowerCase()} within a ${buildType.toLowerCase()} building.',
@@ -688,7 +707,7 @@ class ValuationPhraseEngine {
       }
     }
 
-    final estateType = _val(answers, 'actv_estate_type');
+    final estateType = _say(answers, 'actv_estate_type');
     if (estateType.isNotEmpty) {
       phrases.add(
         'The property is situated on ${_article(estateType)} '
@@ -758,7 +777,7 @@ class ValuationPhraseEngine {
             'in accordance with the approved plans and specifications.');
       } else if (normalizedStage != 'other') {
         phrases.add(
-            'At the time of my inspection, the construction works were at the $normalizedStage stage. '
+            'At the time of my inspection, the construction works were at the ${_say(answers, 'actv_work_stage').toLowerCase()} stage. '
             'The valuation is provided on the basis that the property will be completed to a satisfactory standard '
             'in accordance with the approved plans and specifications.');
       }
@@ -767,7 +786,7 @@ class ValuationPhraseEngine {
     final warranty = _val(answers, 'actv_warranty');
     if (warranty.isNotEmpty && warranty.toLowerCase() != 'other') {
       phrases.add(
-        'The property benefits from ${_article(warranty)} $warranty '
+        'The property benefits from ${_article(_say(answers, 'actv_warranty'))} ${_say(answers, 'actv_warranty')} '
         'structural warranty. Your legal adviser should confirm the '
         'precise terms, duration, and transferability of this warranty '
         'cover.',
@@ -886,7 +905,7 @@ class ValuationPhraseEngine {
     final location = _val(answers, 'actv_location');
     if (location.isNotEmpty && location.toLowerCase() != 'other') {
       phrases.add(
-          'The property is situated within an established ${location.toLowerCase()} area, '
+          'The property is situated within an established ${_say(answers, 'actv_location').toLowerCase()} area, '
           'which is considered to be a desirable location for properties of this type.');
     }
 
@@ -1176,7 +1195,7 @@ class ValuationPhraseEngine {
           'The measured wall thickness is approximately $thickness, which is consistent with the identified construction type.');
     }
 
-    final movement = _val(answers, 'actv_building_movement');
+    final movement = _say(answers, 'actv_building_movement');
     if (movement.isNotEmpty) {
       phrases.add(
           'A careful examination was made of all accessible wall surfaces for evidence of structural movement, '
@@ -1271,7 +1290,7 @@ class ValuationPhraseEngine {
             'to reduce the risk of timber decay, fungal attack, and dampness to the sub-floor timbers.');
       } else {
         phrases.add(
-            'Sub-floor ventilation has been assessed as ${vents.toLowerCase()}.');
+            'Sub-floor ventilation has been assessed as ${_say(answers, 'actv_sub_floor_vents').toLowerCase()}.');
       }
     }
     _addConditionNotes(
@@ -1291,12 +1310,16 @@ class ValuationPhraseEngine {
       phrases.add('The property includes a block of garages, which was '
           'inspected as part of this survey.');
     } else if (type.isNotEmpty) {
-      final countDescription = switch (numberLower) {
-        'single' => 'a single',
-        'double' => 'a double',
-        _ => _article(type),
-      };
-      phrases.add('The property includes $countDescription $typeLower garage, '
+      final typeWords = _say(answers, 'actv_garage_type');
+      final numberWords = _say(answers, 'actv_number_of_garage');
+      final countDescription = numberWords != number
+          ? '${_article(numberWords)} ${numberWords.toLowerCase()}'
+          : switch (numberLower) {
+              'single' => 'a single',
+              'double' => 'a double',
+              _ => _article(typeWords),
+            };
+      phrases.add('The property includes $countDescription ${typeWords.toLowerCase()} garage, '
           'which was inspected as part of this survey.');
     }
     _addConditionNotes(
@@ -1575,7 +1598,7 @@ class ValuationPhraseEngine {
             'At the time of my inspection, the readings obtained were within acceptable parameters, '
             'and no visible signs of dampness, staining, or efflorescence were observed.');
       } else {
-        phrases.add('Damp meter readings indicated: ${meter.toLowerCase()}.');
+        phrases.add('Damp meter readings indicated: ${_say(answers, 'actv_damp_meter').toLowerCase()}.');
       }
     }
     _addConditionNotes(phrases, answers, 'actv_condition_damp', 'et_notes_damp',
@@ -1673,7 +1696,7 @@ class ValuationPhraseEngine {
         phrases.add(
             'The property does not have a gas supply connected at the present time.');
       } else {
-        phrases.add('The gas supply is ${supply.toLowerCase()}. '
+        phrases.add('The gas supply is ${_say(answers, 'actv_gas_supply').toLowerCase()}. '
             'A current Gas Safety Certificate, issued by a Gas Safe registered engineer, should be obtained.');
       }
     }
@@ -1695,7 +1718,7 @@ class ValuationPhraseEngine {
             'Your legal adviser should confirm the adequacy, quality, and any regulatory requirements '
             'associated with the private supply, including water testing and maintenance obligations.');
       } else {
-        phrases.add('The water supply is ${supply.toLowerCase()}. '
+        phrases.add('The water supply is ${_say(answers, 'actv_water_supply').toLowerCase()}. '
             'Your legal adviser should confirm the terms and adequacy of this supply.');
       }
     }
@@ -1887,9 +1910,9 @@ class ValuationPhraseEngine {
         'Where an EPC has been made available to us, the ratings are presented below for information purposes only. '
         'We have not verified these ratings and cannot comment on their accuracy or completeness.');
 
-    final currentRating = _val(answers, 'actv_epc_current_rating');
+    final currentRating = _say(answers, 'actv_epc_current_rating');
     final currentScore = _val(answers, 'et_epc_current_score');
-    final potentialRating = _val(answers, 'actv_epc_potential_rating');
+    final potentialRating = _say(answers, 'actv_epc_potential_rating');
     final potentialScore = _val(answers, 'et_epc_potential_score');
 
     String rating(String band, String score) {

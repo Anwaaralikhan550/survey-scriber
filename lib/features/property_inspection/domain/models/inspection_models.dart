@@ -23,6 +23,8 @@ class InspectionFieldDefinition {
     this.conditionalValue,
     this.conditionalMode,
     this.phraseTemplate,
+    this.optionLabels,
+    this.hiddenOptions,
   });
 
   factory InspectionFieldDefinition.fromJson(Map<String, dynamic> json) {
@@ -43,6 +45,9 @@ class InspectionFieldDefinition {
       conditionalValue: json['conditionalValue'] as String?,
       conditionalMode: json['conditionalMode'] as String?,
       phraseTemplate: json['phraseTemplate'] as String?,
+      optionLabels: (json['optionLabels'] as Map<String, dynamic>?)
+          ?.map((k, v) => MapEntry(k, v.toString())),
+      hiddenOptions: (json['hiddenOptions'] as List<dynamic>?)?.whereType<String>().toList(),
     );
   }
 
@@ -60,6 +65,28 @@ class InspectionFieldDefinition {
   /// Used by the admin panel to attach narrative phrases to fields.
   final String? phraseTemplate;
 
+  /// Option value -> the words people read. The stored answer stays the value,
+  /// so saved surveys, report rules and conditions keep working.
+  final Map<String, String>? optionLabels;
+
+  /// Options no longer offered. A survey that already chose one still shows and
+  /// prints it.
+  final List<String>? hiddenOptions;
+
+  /// The words for an option.
+  String optionText(String value) => optionLabels?[value] ?? value;
+
+  /// The options to offer, plus [current] when a saved answer needs it.
+  List<String> offeredOptions(String current) {
+    final all = options ?? const <String>[];
+    final hidden = hiddenOptions ?? const <String>[];
+    return [
+      for (final option in all)
+        if (!hidden.contains(option) || option == current) option,
+      if (current.isNotEmpty && !all.contains(current)) current,
+    ];
+  }
+
   Map<String, dynamic> toJson() {
     final m = <String, dynamic>{
       'id': id,
@@ -71,6 +98,8 @@ class InspectionFieldDefinition {
     if (conditionalValue != null) m['conditionalValue'] = conditionalValue;
     if (conditionalMode != null) m['conditionalMode'] = conditionalMode;
     if (phraseTemplate != null) m['phraseTemplate'] = phraseTemplate;
+    if (optionLabels != null && optionLabels!.isNotEmpty) m['optionLabels'] = optionLabels;
+    if (hiddenOptions != null && hiddenOptions!.isNotEmpty) m['hiddenOptions'] = hiddenOptions;
     return m;
   }
 
@@ -83,6 +112,8 @@ class InspectionFieldDefinition {
     String? conditionalValue,
     String? conditionalMode,
     String? phraseTemplate,
+    Map<String, String>? optionLabels,
+    List<String>? hiddenOptions,
   }) =>
       InspectionFieldDefinition(
         id: id ?? this.id,
@@ -93,6 +124,8 @@ class InspectionFieldDefinition {
         conditionalValue: conditionalValue ?? this.conditionalValue,
         conditionalMode: conditionalMode ?? this.conditionalMode,
         phraseTemplate: phraseTemplate ?? this.phraseTemplate,
+        optionLabels: optionLabels ?? this.optionLabels,
+        hiddenOptions: hiddenOptions ?? this.hiddenOptions,
       );
 }
 
@@ -104,6 +137,7 @@ class InspectionNodeDefinition {
     required this.type,
     this.parentId,
     this.inlinePosition,
+    this.reportDefaults,
     this.order,
   });
 
@@ -126,6 +160,7 @@ class InspectionNodeDefinition {
       type: type,
       parentId: json['parentId'] as String?,
       inlinePosition: json['inlinePosition'] as String?,
+      reportDefaults: json['reportDefaults'] as List<dynamic>?,
       order: (json['order'] as num?)?.toInt(),
     );
   }
@@ -136,6 +171,9 @@ class InspectionNodeDefinition {
   final InspectionNodeType type;
   final String? parentId;
   final String? inlinePosition;
+
+  /// Not used by the app; kept so that saving a tree does not lose it.
+  final List<dynamic>? reportDefaults;
   final int? order;
 
   Map<String, dynamic> toJson() {
@@ -148,6 +186,7 @@ class InspectionNodeDefinition {
     if (inlinePosition != null) m['inlinePosition'] = inlinePosition;
     if (order != null) m['order'] = order;
     if (fields.isNotEmpty) m['fields'] = fields.map((f) => f.toJson()).toList();
+    if (reportDefaults != null) m['reportDefaults'] = reportDefaults;
     return m;
   }
 
@@ -168,6 +207,7 @@ class InspectionNodeDefinition {
         parentId: parentId ?? this.parentId,
         inlinePosition: inlinePosition ?? this.inlinePosition,
         order: order ?? this.order,
+        reportDefaults: reportDefaults,
       );
 
   static String _humanizeId(String value) {

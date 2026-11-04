@@ -1,13 +1,25 @@
 import 'dart:convert';
 
 import '../../../core/utils/number_to_words.dart';
+import 'models/inspection_models.dart';
+import 'option_labels.dart';
 
 part 'inspection_verbatim_spec.dart';
 
 class InspectionPhraseEngine {
-  const InspectionPhraseEngine(this._phraseTexts);
+  const InspectionPhraseEngine(
+    this._phraseTexts, {
+    this.optionLabels = OptionLabels.empty,
+  });
 
   final Map<String, String> _phraseTexts;
+
+  /// Dropdown words chosen in the admin; rules still match the stored value.
+  final OptionLabels optionLabels;
+
+  /// This engine with the admin's dropdown words for [sections].
+  InspectionPhraseEngine withLabelsFrom(Iterable<InspectionSectionDefinition> sections) =>
+      InspectionPhraseEngine(_phraseTexts, optionLabels: OptionLabels.fromSections(sections));
 
   /// Read-only view of the approved phrase bank backing this engine.
   /// Consumed by the report layer to derive paragraph composition from the
@@ -33,12 +45,12 @@ class InspectionPhraseEngine {
   }
 
   List<String> buildPhrases(String screenId, Map<String, String> rawAnswers) {
-    var answers = rawAnswers;
+    var answers = optionLabels.withWords(screenId, rawAnswers);
     if (screenId == 'activity_over_all_openion') {
       // PDF price format "£390,500.00 [Three Hundred ... Pounds]" is derived from the typed amount.
       final price = (rawAnswers['android_material_design_spinner'] ?? '').trim();
       if (price.isNotEmpty) {
-        answers = {...rawAnswers, 'android_material_design_spinner': formatPriceBracketed(price)};
+        answers = {...answers, 'android_material_design_spinner': formatPriceBracketed(price)};
       }
     }
     return _refinePhrases(
@@ -955,7 +967,7 @@ class InspectionPhraseEngine {
     String notesKey = 'ar_etNote',
     String? master,
   }) {
-    final rating = (answers[ratingKey] ?? '').trim();
+    final rating = OptionLabels.say(answers, ratingKey);
     final notes = (answers[notesKey] ?? '').trim();
     final phrases = <String>[];
     if (rating.isNotEmpty) {
@@ -1112,7 +1124,7 @@ class InspectionPhraseEngine {
     if (rating.isNotEmpty) {
       var template = _sub(phraseCodeForRating, ratingSubCode);
       if (template.isNotEmpty) {
-        template = template.replaceAll(ratingPlaceholder, rating);
+        template = template.replaceAll(ratingPlaceholder, OptionLabels.say(answers, ratingKey));
         phrases.addAll(_split(_normalize(template)));
       }
       // RICS L2 numeric rating definition (Condition rating 1/2/3): a fixed
@@ -1273,11 +1285,12 @@ class InspectionPhraseEngine {
   List<String> _otherJoineryConditionRating(Map<String, String> answers) {
     final rating = _firstNonEmpty(answers, const ['actv_condition', 'llMainContainer']);
     if (rating.isEmpty) return const [];
+    final printed = OptionLabels.say(answers, 'actv_condition');
     final template =
         _sub('{E_OTHER_JOINERY_AND_FINISHES}', '{CONDITION_RATING}');
     if (template.isEmpty) return const [];
     return _split(_normalize(
-        template.replaceAll('{OJAF_CONDITION_RATING}', rating)));
+        template.replaceAll('{OJAF_CONDITION_RATING}', printed)));
   }
 
   List<String> _groundsLimitations(Map<String, String> answers) {
@@ -1298,7 +1311,7 @@ class InspectionPhraseEngine {
 
   List<String> _servicesElectricityMain(Map<String, String> answers) {
     final phrases = <String>[];
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
+    final rating = OptionLabels.say(answers, 'android_material_design_spinner4');
     if (rating.isNotEmpty) {
       var template = _sub('{G_ELECTRICITY}', '{CONDITION_RATING}');
       if (template.isNotEmpty) {
@@ -1321,7 +1334,7 @@ class InspectionPhraseEngine {
 
   List<String> _servicesGasOilMain(Map<String, String> answers) {
     final phrases = <String>[];
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
+    final rating = OptionLabels.say(answers, 'android_material_design_spinner4');
     if (rating.isNotEmpty) {
       var template = _sub('{G_GAS_AND_OIL}', '{CONDITION_RATING}');
       if (template.isNotEmpty) {
@@ -1344,7 +1357,7 @@ class InspectionPhraseEngine {
 
   List<String> _fireplacesMain(Map<String, String> answers) {
     final phrases = <String>[];
-    final rating = _cleanLower(answers['android_material_design_spinner4']);
+    final rating = _cleanLower(OptionLabels.say(answers, 'android_material_design_spinner4'));
     if (rating.isNotEmpty) {
       var template = _sub('{F_FIREPLACES_AND_CHIMNEYS}', '{CONDITION_RATING}');
       if (template.isNotEmpty) {
@@ -1389,7 +1402,7 @@ class InspectionPhraseEngine {
 
   List<String> _builtInFittingsMain(Map<String, String> answers) {
     final phrases = <String>[];
-    final rating = _cleanLower(answers['android_material_design_spinner4']);
+    final rating = _cleanLower(OptionLabels.say(answers, 'android_material_design_spinner4'));
     if (rating.isNotEmpty) {
       var template = _sub('{F_BUILT_IN_FITTINGS}', '{CONDITION_RATING}');
       if (template.isNotEmpty) {
@@ -1410,7 +1423,7 @@ class InspectionPhraseEngine {
 
   List<String> _woodWorkMainScreen(Map<String, String> answers) {
     final phrases = <String>[];
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
+    final rating = OptionLabels.say(answers, 'android_material_design_spinner4');
     if (rating.isNotEmpty) {
       var template = _sub('{F_WOOD_WORK}', '{CONDITION_RATING}');
       if (template.isNotEmpty) {
@@ -1431,7 +1444,7 @@ class InspectionPhraseEngine {
 
   List<String> _insideOtherMainScreen(Map<String, String> answers) {
     final phrases = <String>[];
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
+    final rating = OptionLabels.say(answers, 'android_material_design_spinner4');
     if (rating.isNotEmpty) {
       var template = _sub('{F_OTHER}', '{CONDITION_RATING}');
       if (template.isNotEmpty) {
@@ -1502,7 +1515,7 @@ class InspectionPhraseEngine {
 
   List<String> _bathroomFittingsMain(Map<String, String> answers) {
     final phrases = <String>[];
-    final rating = _cleanLower(answers['android_material_design_spinner4']);
+    final rating = _cleanLower(OptionLabels.say(answers, 'android_material_design_spinner4'));
     if (rating.isNotEmpty) {
       var template = _sub('{F_BATHROOM_FITTINGS}', '{CONDITION_RATING}');
       if (template.isNotEmpty) {
@@ -1724,7 +1737,7 @@ class InspectionPhraseEngine {
         locations.add(other.toLowerCase());
       }
     }
-    final rating = (answers['android_material_design_spinner4'] ?? '').trim();
+    final rating = OptionLabels.say(answers, 'android_material_design_spinner4');
     final assumedType = _cleanLower(answers['actv_assumed_type']);
     final notes = (answers['ar_etNote'] ?? '').trim();
     final phrases = <String>[];
