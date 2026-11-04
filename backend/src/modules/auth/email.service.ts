@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
+import { EmailTemplatesService } from '../email-templates/email-templates.service';
 
 @Injectable()
 export class EmailService {
@@ -10,7 +11,10 @@ export class EmailService {
   private readonly appName: string;
   private readonly frontendUrl: string;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly templates: EmailTemplatesService,
+  ) {
     // SMTP configuration from environment
     const host = this.configService.get<string>('SMTP_HOST');
     const port = parseInt(this.configService.get<string>('SMTP_PORT') || '587', 10);
@@ -58,10 +62,7 @@ export class EmailService {
   ): Promise<void> {
     const resetLink = `${this.frontendUrl}/reset-password?token=${resetToken}`;
 
-    const subject = `Reset your ${this.appName} password`;
-
-    const html = this.getPasswordResetEmailTemplate(firstName, resetLink);
-    const text = this.getPasswordResetEmailText(firstName, resetLink);
+    const { subject, html, text } = await this.templates.render('password_reset', { firstName, resetLink });
 
     await this.sendEmail(toEmail, subject, html, text);
   }
@@ -75,32 +76,8 @@ export class EmailService {
     token: string,
   ): Promise<void> {
     const link = `${this.frontendUrl}/reset-password?token=${token}`;
-    const subject = `Your ${this.appName} account is ready`;
-    const name = this.escapeHtml(firstName);
-    const app = this.escapeHtml(this.appName);
-    const html = `
-<!DOCTYPE html>
-<html lang="en">
-<body style="margin: 0; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #f5f5f5; color: #222222;">
-  <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 8px; padding: 32px;">
-    <h1 style="margin: 0 0 16px; font-size: 20px;">Welcome to ${app}</h1>
-    <p style="margin: 0 0 16px;">Hello ${name},</p>
-    <p style="margin: 0 0 24px;">An account has been created for you. Set your password to sign in. This link stays open for 7 days.</p>
-    <p style="margin: 0 0 24px;"><a href="${link}" style="display: inline-block; padding: 12px 24px; background: #1565C0; color: #ffffff; text-decoration: none; border-radius: 6px;">Set your password</a></p>
-    <p style="margin: 0; font-size: 13px; color: #666666;">If you were not expecting this email, you can ignore it.</p>
-  </div>
-</body>
-</html>`;
-    const text = `Hello ${firstName},\n\nAn account has been created for you on ${this.appName}. Set your password to sign in (the link stays open for 7 days):\n\n${link}\n\nIf you were not expecting this email, you can ignore it.`;
+    const { subject, html, text } = await this.templates.render('account_invite', { firstName, link });
     await this.sendEmail(toEmail, subject, html, text);
-  }
-
-  private escapeHtml(value: string): string {
-    return value
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
   }
 
   private async sendEmail(
@@ -134,114 +111,4 @@ export class EmailService {
     }
   }
 
-  private getPasswordResetEmailTemplate(firstName: string, resetLink: string): string {
-    return `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reset Your Password</title>
-</head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
-  <table role="presentation" style="width: 100%; border-collapse: collapse;">
-    <tr>
-      <td align="center" style="padding: 40px 0;">
-        <table role="presentation" style="width: 100%; max-width: 600px; border-collapse: collapse;">
-          <!-- Header -->
-          <tr>
-            <td style="background-color: #1976d2; padding: 30px 40px; border-radius: 8px 8px 0 0;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">
-                ${this.appName}
-              </h1>
-            </td>
-          </tr>
-
-          <!-- Body -->
-          <tr>
-            <td style="background-color: #ffffff; padding: 40px;">
-              <h2 style="margin: 0 0 20px; color: #333333; font-size: 20px; font-weight: 600;">
-                Reset Your Password
-              </h2>
-
-              <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-                Hi ${firstName},
-              </p>
-
-              <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-                We received a request to reset the password for your ${this.appName} account.
-                Click the button below to create a new password.
-              </p>
-
-              <table role="presentation" style="margin: 30px 0; width: 100%;">
-                <tr>
-                  <td align="center">
-                    <a href="${resetLink}"
-                       style="display: inline-block; padding: 14px 32px; background-color: #1976d2; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 8px;">
-                      Reset Password
-                    </a>
-                  </td>
-                </tr>
-              </table>
-
-              <p style="margin: 0 0 20px; color: #555555; font-size: 14px; line-height: 1.6;">
-                This link will expire in <strong>15 minutes</strong> for security reasons.
-              </p>
-
-              <p style="margin: 0 0 20px; color: #555555; font-size: 14px; line-height: 1.6;">
-                If you didn't request a password reset, you can safely ignore this email.
-                Your password will remain unchanged.
-              </p>
-
-              <!-- Alternative link -->
-              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eeeeee;">
-                <p style="margin: 0 0 10px; color: #888888; font-size: 13px;">
-                  If the button above doesn't work, copy and paste this link into your browser:
-                </p>
-                <p style="margin: 0; word-break: break-all;">
-                  <a href="${resetLink}" style="color: #1976d2; font-size: 13px;">${resetLink}</a>
-                </p>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="background-color: #fafafa; padding: 30px 40px; border-radius: 0 0 8px 8px; border-top: 1px solid #eeeeee;">
-              <p style="margin: 0 0 10px; color: #888888; font-size: 13px; text-align: center;">
-                This is an automated message from ${this.appName}.
-              </p>
-              <p style="margin: 0; color: #888888; font-size: 13px; text-align: center;">
-                &copy; ${new Date().getFullYear()} ${this.appName}. All rights reserved.
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-    `.trim();
-  }
-
-  private getPasswordResetEmailText(firstName: string, resetLink: string): string {
-    return `
-${this.appName} - Reset Your Password
-
-Hi ${firstName},
-
-We received a request to reset the password for your ${this.appName} account.
-
-To reset your password, visit the following link:
-${resetLink}
-
-This link will expire in 15 minutes for security reasons.
-
-If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
-  }
 }

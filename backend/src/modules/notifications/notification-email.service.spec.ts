@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigService } from '@nestjs/config';
+import { EmailTemplatesService } from '../email-templates/email-templates.service';
 import { NotificationEmailService } from './notification-email.service';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -46,6 +47,7 @@ describe('NotificationEmailService', () => {
         NotificationEmailService,
         { provide: PrismaService, useValue: mockPrisma },
         { provide: ConfigService, useValue: mockConfig },
+        { provide: EmailTemplatesService, useValue: { render: async () => ({ subject: 'Survey Report - x', html: '<p>x</p>', text: 'x' }) } },
       ],
     }).compile();
 

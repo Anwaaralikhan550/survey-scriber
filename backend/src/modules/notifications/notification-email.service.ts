@@ -5,6 +5,8 @@ import { NotificationType, Prisma, RecipientType } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { BookingWithRelations } from './events/booking.events';
 import { InvoiceWithRelations } from '../invoices/events/invoice.events';
+import { EmailContent, paymentTermsHtml, propertyRowHtml } from '../email-templates/email-template.helpers';
+import { EmailTemplatesService } from '../email-templates/email-templates.service';
 
 interface EmailRecipient {
   email: string;
@@ -26,6 +28,7 @@ export class NotificationEmailService {
   constructor(
     private readonly configService: ConfigService,
     private readonly prisma: PrismaService,
+    private readonly templates: EmailTemplatesService,
   ) {
     // Check if email notifications are enabled
     this.emailEnabled =
@@ -79,9 +82,7 @@ export class NotificationEmailService {
       await this.sendEmail(
         clientRecipient,
         NotificationType.BOOKING_CREATED,
-        `Your survey booking has been scheduled`,
-        this.getBookingCreatedClientHtml(booking, clientRecipient.name),
-        this.getBookingCreatedClientText(booking, clientRecipient.name),
+        await this.renderBooking('booking_created_client', booking, clientRecipient.name),
         booking.id,
       );
     }
@@ -91,9 +92,7 @@ export class NotificationEmailService {
       await this.sendEmail(
         surveyorRecipient,
         NotificationType.BOOKING_CREATED,
-        `New booking assigned: ${this.formatDate(booking.date)}`,
-        this.getBookingCreatedSurveyorHtml(booking),
-        this.getBookingCreatedSurveyorText(booking),
+        await this.renderBooking('booking_created_surveyor', booking, this.clientNameForSurveyor(booking)),
         booking.id,
       );
     }
@@ -109,9 +108,7 @@ export class NotificationEmailService {
       await this.sendEmail(
         clientRecipient,
         NotificationType.BOOKING_CONFIRMED,
-        `Your booking for ${this.formatDate(booking.date)} is confirmed`,
-        this.getBookingConfirmedHtml(booking, clientRecipient.name),
-        this.getBookingConfirmedText(booking, clientRecipient.name),
+        await this.renderBooking('booking_confirmed', booking, clientRecipient.name),
         booking.id,
       );
     }
@@ -129,9 +126,7 @@ export class NotificationEmailService {
       await this.sendEmail(
         clientRecipient,
         NotificationType.BOOKING_CANCELLED,
-        `Your booking for ${this.formatDate(booking.date)} has been cancelled`,
-        this.getBookingCancelledClientHtml(booking, clientRecipient.name),
-        this.getBookingCancelledClientText(booking, clientRecipient.name),
+        await this.renderBooking('booking_cancelled_client', booking, clientRecipient.name),
         booking.id,
       );
     }
@@ -141,9 +136,7 @@ export class NotificationEmailService {
       await this.sendEmail(
         surveyorRecipient,
         NotificationType.BOOKING_CANCELLED,
-        `Booking cancelled: ${this.formatDate(booking.date)}`,
-        this.getBookingCancelledSurveyorHtml(booking),
-        this.getBookingCancelledSurveyorText(booking),
+        await this.renderBooking('booking_cancelled_surveyor', booking, this.clientNameForSurveyor(booking)),
         booking.id,
       );
     }
@@ -159,9 +152,7 @@ export class NotificationEmailService {
       await this.sendEmail(
         clientRecipient,
         NotificationType.BOOKING_COMPLETED,
-        `Your survey has been completed`,
-        this.getBookingCompletedHtml(booking, clientRecipient.name),
-        this.getBookingCompletedText(booking, clientRecipient.name),
+        await this.renderBooking('booking_completed', booking, clientRecipient.name),
         booking.id,
       );
     }
@@ -181,9 +172,7 @@ export class NotificationEmailService {
       await this.sendInvoiceEmail(
         clientRecipient,
         NotificationType.INVOICE_ISSUED,
-        `Invoice ${invoice.invoiceNumber} - ${this.formatCurrency(invoice.total)}`,
-        this.getInvoiceIssuedHtml(invoice, clientRecipient.name),
-        this.getInvoiceIssuedText(invoice, clientRecipient.name),
+        await this.renderInvoice('invoice_issued', invoice, clientRecipient.name),
         invoice.id,
       );
     }
@@ -199,9 +188,7 @@ export class NotificationEmailService {
       await this.sendInvoiceEmail(
         clientRecipient,
         NotificationType.INVOICE_PAID,
-        `Payment Received - Invoice ${invoice.invoiceNumber}`,
-        this.getInvoicePaidHtml(invoice, clientRecipient.name),
-        this.getInvoicePaidText(invoice, clientRecipient.name),
+        await this.renderInvoice('invoice_paid', invoice, clientRecipient.name),
         invoice.id,
       );
     }
@@ -221,12 +208,10 @@ export class NotificationEmailService {
   private async sendInvoiceEmail(
     recipient: EmailRecipient,
     type: NotificationType,
-    subject: string,
-    html: string,
-    text: string,
+    content: EmailContent,
     invoiceId: string,
   ): Promise<void> {
-    const fullSubject = `${subject} - ${this.appName}`;
+    const { subject: fullSubject, html, text } = content;
 
     const logEntry = {
       notificationType: type,
@@ -273,167 +258,21 @@ export class NotificationEmailService {
     }
   }
 
-  // Invoice Issued - Client
-  private getInvoiceIssuedHtml(
-    invoice: InvoiceWithRelations,
-    clientName: string,
-  ): string {
-    const dueDate = invoice.dueDate
-      ? this.formatDate(invoice.dueDate)
-      : 'Upon receipt';
-
-    const content = `
-      <h2 style="margin: 0 0 20px; color: #333333; font-size: 20px; font-weight: 600;">
-        New Invoice
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Hi ${clientName},
-      </p>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        A new invoice has been issued for your account. Please see the details below:
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse; background-color: #f9f9f9; border-radius: 8px;">
-        <tr>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #888888; width: 140px;">Invoice Number</td>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 600;">${invoice.invoiceNumber}</td>
-        </tr>
-        <tr>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #888888;">Issue Date</td>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${invoice.issueDate ? this.formatDate(invoice.issueDate) : 'Today'}</td>
-        </tr>
-        <tr>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #888888;">Due Date</td>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${dueDate}</td>
-        </tr>
-        <tr>
-          <td style="padding: 16px 20px; color: #888888;">Total Amount</td>
-          <td style="padding: 16px 20px; color: #1976d2; font-size: 20px; font-weight: 700;">${this.formatCurrency(invoice.total)}</td>
-        </tr>
-      </table>
-      ${invoice.paymentTerms ? `
-      <p style="margin: 20px 0 10px; color: #666666; font-size: 14px; font-weight: 600;">
-        Payment Terms:
-      </p>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 14px; line-height: 1.6;">
-        ${invoice.paymentTerms}
-      </p>
-      ` : ''}
-      <table role="presentation" style="margin: 30px 0; width: 100%;">
-        <tr>
-          <td align="center">
-            <a href="${this.clientPortalUrl}/invoices/${invoice.id}"
-               style="display: inline-block; padding: 14px 32px; background-color: #1976d2; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 8px;">
-              View Invoice
-            </a>
-          </td>
-        </tr>
-      </table>
-      <p style="margin: 20px 0; color: #888888; font-size: 13px; line-height: 1.6; text-align: center;">
-        You can download a PDF copy of this invoice from your client portal.
-      </p>
-    `;
-    return this.getEmailWrapper(content);
-  }
-
-  private getInvoiceIssuedText(
-    invoice: InvoiceWithRelations,
-    clientName: string,
-  ): string {
-    const dueDate = invoice.dueDate
-      ? this.formatDate(invoice.dueDate)
-      : 'Upon receipt';
-
-    return `
-${this.appName} - New Invoice
-
-Hi ${clientName},
-
-A new invoice has been issued for your account:
-
-Invoice Number: ${invoice.invoiceNumber}
-Issue Date: ${invoice.issueDate ? this.formatDate(invoice.issueDate) : 'Today'}
-Due Date: ${dueDate}
-Total Amount: ${this.formatCurrency(invoice.total)}
-
-${invoice.paymentTerms ? `Payment Terms: ${invoice.paymentTerms}` : ''}
-
-View invoice: ${this.clientPortalUrl}/invoices/${invoice.id}
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
-  }
-
-  // Invoice Paid - Client
-  private getInvoicePaidHtml(
-    invoice: InvoiceWithRelations,
-    clientName: string,
-  ): string {
-    const content = `
-      <h2 style="margin: 0 0 20px; color: #4caf50; font-size: 20px; font-weight: 600;">
-        Payment Received - Thank You!
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Hi ${clientName},
-      </p>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        We've received your payment. Thank you for settling your invoice promptly.
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse; background-color: #e8f5e9; border-radius: 8px;">
-        <tr>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #c8e6c9; color: #2e7d32; width: 140px;">Invoice Number</td>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #c8e6c9; color: #1b5e20; font-weight: 600;">${invoice.invoiceNumber}</td>
-        </tr>
-        <tr>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #c8e6c9; color: #2e7d32;">Payment Date</td>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #c8e6c9; color: #1b5e20; font-weight: 500;">${invoice.paidDate ? this.formatDate(invoice.paidDate) : 'Today'}</td>
-        </tr>
-        <tr>
-          <td style="padding: 16px 20px; color: #2e7d32;">Amount Paid</td>
-          <td style="padding: 16px 20px; color: #1b5e20; font-size: 20px; font-weight: 700;">${this.formatCurrency(invoice.total)}</td>
-        </tr>
-      </table>
-      <div style="margin: 30px 0; padding: 20px; background-color: #f5f5f5; border-radius: 8px; text-align: center;">
-        <span style="display: inline-block; padding: 8px 24px; background-color: #4caf50; color: #ffffff; font-size: 14px; font-weight: 600; border-radius: 20px;">
-          PAID IN FULL
-        </span>
-      </div>
-      <table role="presentation" style="margin: 30px 0; width: 100%;">
-        <tr>
-          <td align="center">
-            <a href="${this.clientPortalUrl}/invoices/${invoice.id}"
-               style="display: inline-block; padding: 14px 32px; background-color: #1976d2; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 8px;">
-              View Receipt
-            </a>
-          </td>
-        </tr>
-      </table>
-    `;
-    return this.getEmailWrapper(content);
-  }
-
-  private getInvoicePaidText(
-    invoice: InvoiceWithRelations,
-    clientName: string,
-  ): string {
-    return `
-${this.appName} - Payment Received
-
-Hi ${clientName},
-
-Thank you for your payment!
-
-Invoice Number: ${invoice.invoiceNumber}
-Payment Date: ${invoice.paidDate ? this.formatDate(invoice.paidDate) : 'Today'}
-Amount Paid: ${this.formatCurrency(invoice.total)}
-
-Status: PAID IN FULL
-
-View receipt: ${this.clientPortalUrl}/invoices/${invoice.id}
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
+  private renderInvoice(key: string, invoice: InvoiceWithRelations, clientName: string): Promise<EmailContent> {
+    return this.templates.render(
+      key,
+      {
+        clientName,
+        invoiceNumber: invoice.invoiceNumber,
+        issueDate: invoice.issueDate ? this.formatDate(invoice.issueDate) : 'Today',
+        dueDate: invoice.dueDate ? this.formatDate(invoice.dueDate) : 'Upon receipt',
+        paidDate: invoice.paidDate ? this.formatDate(invoice.paidDate) : 'Today',
+        total: this.formatCurrency(invoice.total),
+        paymentTermsLine: invoice.paymentTerms ? `Payment Terms: ${invoice.paymentTerms}` : '',
+        invoiceLink: `${this.clientPortalUrl}/invoices/${invoice.id}`,
+      },
+      { paymentTermsBlock: paymentTermsHtml(invoice.paymentTerms) },
+    );
   }
 
   private formatCurrency(pence: number): string {
@@ -485,12 +324,10 @@ This is an automated message from ${this.appName}.
   private async sendEmail(
     recipient: EmailRecipient,
     type: NotificationType,
-    subject: string,
-    html: string,
-    text: string,
+    content: EmailContent,
     bookingId: string,
   ): Promise<void> {
-    const fullSubject = `${subject} - ${this.appName}`;
+    const { subject: fullSubject, html, text } = content;
 
     // Log the attempt — typed to match Prisma create input
     const logEntry: Prisma.NotificationEmailLogCreateInput = {
@@ -592,409 +429,33 @@ This is an automated message from ${this.appName}.
     });
   }
 
+  private clientNameForSurveyor(booking: BookingWithRelations): string {
+    return booking.clientName || booking.client?.firstName || 'Client';
+  }
+
+  private renderBooking(key: string, booking: BookingWithRelations, clientName: string): Promise<EmailContent> {
+    return this.templates.render(
+      key,
+      {
+        clientName,
+        bookingDate: this.formatDate(booking.date),
+        startTime: booking.startTime,
+        endTime: booking.endTime,
+        surveyorName: this.getSurveyorFullName(booking),
+        propertyLine: booking.propertyAddress ? `Property: ${booking.propertyAddress}` : '',
+        bookingLink: `${this.clientPortalUrl}/bookings/${booking.id}`,
+        staffBookingLink: `${this.staffAppUrl}/scheduling/bookings/${booking.id}`,
+        portalLink: `${this.clientPortalUrl}/dashboard`,
+      },
+      { propertyRow: propertyRowHtml(booking.propertyAddress) },
+    );
+  }
+
   private getSurveyorFullName(booking: BookingWithRelations): string {
     const { firstName, lastName } = booking.surveyor;
     if (firstName && lastName) return `${firstName} ${lastName}`;
     if (firstName) return firstName;
     return 'Your surveyor';
-  }
-
-  // ===========================
-  // Email Templates
-  // ===========================
-
-  private getEmailWrapper(content: string): string {
-    return `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
-  <table role="presentation" style="width: 100%; border-collapse: collapse;">
-    <tr>
-      <td align="center" style="padding: 40px 0;">
-        <table role="presentation" style="width: 100%; max-width: 600px; border-collapse: collapse;">
-          <!-- Header -->
-          <tr>
-            <td style="background-color: #1976d2; padding: 30px 40px; border-radius: 8px 8px 0 0;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">
-                ${this.appName}
-              </h1>
-            </td>
-          </tr>
-
-          <!-- Body -->
-          <tr>
-            <td style="background-color: #ffffff; padding: 40px;">
-              ${content}
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="background-color: #fafafa; padding: 30px 40px; border-radius: 0 0 8px 8px; border-top: 1px solid #eeeeee;">
-              <p style="margin: 0 0 10px; color: #888888; font-size: 13px; text-align: center;">
-                This is an automated message from ${this.appName}.
-              </p>
-              <p style="margin: 0; color: #888888; font-size: 13px; text-align: center;">
-                &copy; ${new Date().getFullYear()} ${this.appName}. All rights reserved.
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>`.trim();
-  }
-
-  // Booking Created - Client
-  private getBookingCreatedClientHtml(
-    booking: BookingWithRelations,
-    clientName: string,
-  ): string {
-    const content = `
-      <h2 style="margin: 0 0 20px; color: #333333; font-size: 20px; font-weight: 600;">
-        Booking Confirmation
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Hi ${clientName},
-      </p>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Your survey booking has been scheduled. Here are the details:
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse;">
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888; width: 120px;">Date</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${this.formatDate(booking.date)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Time</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${booking.startTime} - ${booking.endTime}</td>
-        </tr>
-        ${booking.propertyAddress ? `
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Property</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${booking.propertyAddress}</td>
-        </tr>
-        ` : ''}
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Surveyor</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${this.getSurveyorFullName(booking)}</td>
-        </tr>
-      </table>
-      <table role="presentation" style="margin: 30px 0; width: 100%;">
-        <tr>
-          <td align="center">
-            <a href="${this.clientPortalUrl}/bookings/${booking.id}"
-               style="display: inline-block; padding: 14px 32px; background-color: #1976d2; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 8px;">
-              View Booking
-            </a>
-          </td>
-        </tr>
-      </table>
-    `;
-    return this.getEmailWrapper(content);
-  }
-
-  private getBookingCreatedClientText(
-    booking: BookingWithRelations,
-    clientName: string,
-  ): string {
-    return `
-${this.appName} - Booking Confirmation
-
-Hi ${clientName},
-
-Your survey booking has been scheduled:
-
-Date: ${this.formatDate(booking.date)}
-Time: ${booking.startTime} - ${booking.endTime}
-${booking.propertyAddress ? `Property: ${booking.propertyAddress}` : ''}
-Surveyor: ${this.getSurveyorFullName(booking)}
-
-View your booking: ${this.clientPortalUrl}/bookings/${booking.id}
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
-  }
-
-  // Booking Created - Surveyor
-  private getBookingCreatedSurveyorHtml(booking: BookingWithRelations): string {
-    const clientName = booking.clientName || booking.client?.firstName || 'Client';
-    const content = `
-      <h2 style="margin: 0 0 20px; color: #333333; font-size: 20px; font-weight: 600;">
-        New Booking Assigned
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        A new survey booking has been assigned to you.
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse;">
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888; width: 120px;">Client</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${clientName}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Date</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${this.formatDate(booking.date)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Time</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${booking.startTime} - ${booking.endTime}</td>
-        </tr>
-        ${booking.propertyAddress ? `
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Property</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${booking.propertyAddress}</td>
-        </tr>
-        ` : ''}
-      </table>
-      <table role="presentation" style="margin: 30px 0; width: 100%;">
-        <tr>
-          <td align="center">
-            <a href="${this.staffAppUrl}/scheduling/bookings/${booking.id}"
-               style="display: inline-block; padding: 14px 32px; background-color: #1976d2; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 8px;">
-              View Booking
-            </a>
-          </td>
-        </tr>
-      </table>
-    `;
-    return this.getEmailWrapper(content);
-  }
-
-  private getBookingCreatedSurveyorText(booking: BookingWithRelations): string {
-    const clientName = booking.clientName || booking.client?.firstName || 'Client';
-    return `
-${this.appName} - New Booking Assigned
-
-A new survey booking has been assigned to you:
-
-Client: ${clientName}
-Date: ${this.formatDate(booking.date)}
-Time: ${booking.startTime} - ${booking.endTime}
-${booking.propertyAddress ? `Property: ${booking.propertyAddress}` : ''}
-
-View booking: ${this.staffAppUrl}/scheduling/bookings/${booking.id}
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
-  }
-
-  // Booking Confirmed - Client
-  private getBookingConfirmedHtml(
-    booking: BookingWithRelations,
-    clientName: string,
-  ): string {
-    const content = `
-      <h2 style="margin: 0 0 20px; color: #4caf50; font-size: 20px; font-weight: 600;">
-        Booking Confirmed
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Hi ${clientName},
-      </p>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Great news! Your survey booking has been confirmed by your surveyor.
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse;">
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888; width: 120px;">Date</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${this.formatDate(booking.date)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Time</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${booking.startTime} - ${booking.endTime}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Surveyor</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${this.getSurveyorFullName(booking)}</td>
-        </tr>
-      </table>
-    `;
-    return this.getEmailWrapper(content);
-  }
-
-  private getBookingConfirmedText(
-    booking: BookingWithRelations,
-    clientName: string,
-  ): string {
-    return `
-${this.appName} - Booking Confirmed
-
-Hi ${clientName},
-
-Great news! Your survey booking has been confirmed.
-
-Date: ${this.formatDate(booking.date)}
-Time: ${booking.startTime} - ${booking.endTime}
-Surveyor: ${this.getSurveyorFullName(booking)}
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
-  }
-
-  // Booking Cancelled - Client
-  private getBookingCancelledClientHtml(
-    booking: BookingWithRelations,
-    clientName: string,
-  ): string {
-    const content = `
-      <h2 style="margin: 0 0 20px; color: #f44336; font-size: 20px; font-weight: 600;">
-        Booking Cancelled
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Hi ${clientName},
-      </p>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        We're sorry to inform you that your survey booking has been cancelled.
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse;">
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888; width: 120px;">Date</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${this.formatDate(booking.date)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Time</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${booking.startTime} - ${booking.endTime}</td>
-        </tr>
-      </table>
-      <p style="margin: 20px 0; color: #555555; font-size: 14px; line-height: 1.6;">
-        If you have any questions, please contact us.
-      </p>
-    `;
-    return this.getEmailWrapper(content);
-  }
-
-  private getBookingCancelledClientText(
-    booking: BookingWithRelations,
-    clientName: string,
-  ): string {
-    return `
-${this.appName} - Booking Cancelled
-
-Hi ${clientName},
-
-Your survey booking has been cancelled.
-
-Date: ${this.formatDate(booking.date)}
-Time: ${booking.startTime} - ${booking.endTime}
-
-If you have any questions, please contact us.
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
-  }
-
-  // Booking Cancelled - Surveyor
-  private getBookingCancelledSurveyorHtml(booking: BookingWithRelations): string {
-    const clientName = booking.clientName || booking.client?.firstName || 'Client';
-    const content = `
-      <h2 style="margin: 0 0 20px; color: #f44336; font-size: 20px; font-weight: 600;">
-        Booking Cancelled
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        A booking has been cancelled.
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse;">
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888; width: 120px;">Client</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${clientName}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Date</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${this.formatDate(booking.date)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Time</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${booking.startTime} - ${booking.endTime}</td>
-        </tr>
-      </table>
-    `;
-    return this.getEmailWrapper(content);
-  }
-
-  private getBookingCancelledSurveyorText(booking: BookingWithRelations): string {
-    const clientName = booking.clientName || booking.client?.firstName || 'Client';
-    return `
-${this.appName} - Booking Cancelled
-
-A booking has been cancelled:
-
-Client: ${clientName}
-Date: ${this.formatDate(booking.date)}
-Time: ${booking.startTime} - ${booking.endTime}
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
-  }
-
-  // Booking Completed - Client
-  private getBookingCompletedHtml(
-    booking: BookingWithRelations,
-    clientName: string,
-  ): string {
-    const content = `
-      <h2 style="margin: 0 0 20px; color: #2196f3; font-size: 20px; font-weight: 600;">
-        Survey Completed
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Hi ${clientName},
-      </p>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Your survey has been completed. Once the report is finalized and approved, you will be able to access it in your client portal.
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse;">
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888; width: 120px;">Date</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${this.formatDate(booking.date)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #888888;">Surveyor</td>
-          <td style="padding: 12px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 500;">${this.getSurveyorFullName(booking)}</td>
-        </tr>
-      </table>
-      <table role="presentation" style="margin: 30px 0; width: 100%;">
-        <tr>
-          <td align="center">
-            <a href="${this.clientPortalUrl}/dashboard"
-               style="display: inline-block; padding: 14px 32px; background-color: #1976d2; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 8px;">
-              View Portal
-            </a>
-          </td>
-        </tr>
-      </table>
-    `;
-    return this.getEmailWrapper(content);
-  }
-
-  private getBookingCompletedText(
-    booking: BookingWithRelations,
-    clientName: string,
-  ): string {
-    return `
-${this.appName} - Survey Completed
-
-Hi ${clientName},
-
-Your survey has been completed.
-
-Date: ${this.formatDate(booking.date)}
-Surveyor: ${this.getSurveyorFullName(booking)}
-
-Once the report is finalized and approved, you can access it in your client portal:
-${this.clientPortalUrl}/dashboard
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
   }
 
   // ===========================
@@ -1015,10 +476,7 @@ This is an automated message from ${this.appName}.
     pdfBuffer: Buffer,
     senderName: string,
   ): Promise<boolean> {
-    const subject = `Survey Report - ${surveyTitle}`;
-
-    const html = this.getSurveyReportHtml(surveyTitle, senderName);
-    const text = this.getSurveyReportText(surveyTitle, senderName);
+    const { subject, html, text } = await this.templates.render('survey_report', { surveyTitle, senderName });
 
     const sanitizedTitle = surveyTitle
       .replace(/[^a-zA-Z0-9_\- ]/g, '')
@@ -1093,50 +551,4 @@ This is an automated message from ${this.appName}.
     }
   }
 
-  private getSurveyReportHtml(
-    surveyTitle: string,
-    senderName: string,
-  ): string {
-    const content = `
-      <h2 style="margin: 0 0 20px; color: #333333; font-size: 20px; font-weight: 600;">
-        Survey Report
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Please find attached the survey report for:
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse; background-color: #f9f9f9; border-radius: 8px;">
-        <tr>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #888888; width: 140px;">Survey</td>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 600;">${surveyTitle}</td>
-        </tr>
-        <tr>
-          <td style="padding: 16px 20px; color: #888888;">Sent By</td>
-          <td style="padding: 16px 20px; color: #333333; font-weight: 500;">${senderName}</td>
-        </tr>
-      </table>
-      <p style="margin: 20px 0 0; color: #555555; font-size: 14px; line-height: 1.6;">
-        The PDF report is attached to this email.
-      </p>
-    `;
-    return this.getEmailWrapper(content);
-  }
-
-  private getSurveyReportText(
-    surveyTitle: string,
-    senderName: string,
-  ): string {
-    return `
-${this.appName} - Survey Report
-
-Please find attached the survey report for:
-
-Survey: ${surveyTitle}
-Sent By: ${senderName}
-
-The PDF report is attached to this email.
-
----
-This is an automated message from ${this.appName}.
-    `.trim();
-  }
 }

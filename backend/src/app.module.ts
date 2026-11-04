@@ -9,6 +9,7 @@ import { PrismaModule } from './modules/prisma/prisma.module';
 import { HealthModule } from './modules/health/health.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AdminUsersModule } from './modules/admin-users/admin-users.module';
+import { EmailTemplatesModule } from './modules/email-templates/email-templates.module';
 import { SurveysModule } from './modules/surveys/surveys.module';
 import { SectionsModule } from './modules/sections/sections.module';
 import { AnswersModule } from './modules/answers/answers.module';
@@ -84,6 +85,7 @@ import { AiModule } from './modules/ai/ai.module';
     HealthModule,
     AuthModule,
     AdminUsersModule,
+    EmailTemplatesModule,
     SurveysModule,
     SectionsModule,
     AnswersModule,

@@ -1076,3 +1076,15 @@ model V2TreeVersion {
   @@index([publishedAt])
   @@map("v2_tree_versions")
 }
+
+/// Admins' edits to the emails. No row means the email goes out with its original wording.
+model EmailTemplate {
+  key       String   @id @db.VarChar(64)
+  subject   String   @db.VarChar(300)
+  html      String   @db.Text
+  text      String   @db.Text
+  updatedBy String?  @map("updated_by") @db.VarChar(255)
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("email_templates")
+}

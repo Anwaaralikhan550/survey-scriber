@@ -234,6 +234,11 @@ export const AuditActions = {
   REPORT_PDF_UPLOADED: 'report_pdf.uploaded',
   REPORT_EMAIL_SENT: 'report_email.sent',
 
+  // Email templates
+  EMAIL_TEMPLATE_UPDATED: 'email_template.updated',
+  EMAIL_TEMPLATE_RESET: 'email_template.reset',
+  EMAIL_TEMPLATE_TEST_SENT: 'email_template.test_sent',
+
   // Webhooks
   WEBHOOK_CREATED: 'webhook.created',
   WEBHOOK_UPDATED: 'webhook.updated',
