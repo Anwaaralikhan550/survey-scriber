@@ -12,6 +12,7 @@
     published: null,        // {version, tree, publishedAt} as loaded
     tree: null,             // the working copy
     rules: {},              // options that choose a written sentence
+    reportNodes: new Set(), // nodes the report's code asks for by id
     stale: false,           // published tree was made for an older app
   };
 
@@ -26,13 +27,15 @@
     store.type = type;
     store.tree = null;
     try {
-      const [baseline, meta, rules] = await Promise.all([
+      const [baseline, meta, rules, reportNodes] = await Promise.all([
         assetJson('assets/trees/' + type + '.json'),
         assetJson('assets/trees/meta.json'),
         assetJson('assets/trees/option_rules.json'),
+        assetJson('assets/trees/report_nodes.json'),
       ]);
       store.bundled[type] = { version: meta[type], tree: baseline };
       store.rules = rules[type] || {};
+      store.reportNodes = new Set(reportNodes[type] || []);
     } catch (e) {
       return e.message;
     }
@@ -99,7 +102,7 @@
   }
 
   /** The line above both pages: what is live, and the buttons. */
-  function statusBar(onReload, reviewItems) {
+  function statusBar(onReload, extraButtons) {
     const status = store.published
       ? 'Live: version ' + store.published.version + ', published ' + SS.fmtDate(store.published.publishedAt)
       : 'Nothing published yet: phones use the tree built into the app.';
@@ -118,7 +121,7 @@
       onReload(typeSelect.value);
     });
 
-    const publishBtn = SS.button('Publish', () => review(onReload, reviewItems), 'primary');
+    const publishBtn = SS.button('Publish', () => review(onReload), 'primary');
     const discardBtn = SS.button('Discard changes', async () => {
       if (await SS.confirmBox({ title: 'Discard your changes?', body: 'Nothing has been published.', okText: 'Discard', danger: true })) {
         onReload(store.type);
@@ -132,6 +135,7 @@
       SS.el('span', 'muted tree-status', status),
       SS.el('span', 'spacer'),
       SS.button('History', () => showHistory(onReload)),
+      ...(extraButtons || []),
       discardBtn,
       publishBtn,
     ]);
@@ -148,13 +152,14 @@
     return wrap;
   }
 
-  async function review(onReload, reviewItems) {
-    const trouble = TL.problems(store.tree);
+  async function review(onReload) {
+    const trouble = TL.treeProblems(store.tree);
     if (trouble.length) {
-      SS.toast(trouble[0].entry.path + ' > ' + trouble[0].entry.field.label + ': ' + trouble[0].problem, 'err');
+      const more = trouble.length > 1 ? ' (and ' + (trouble.length - 1) + ' more)' : '';
+      SS.toast(trouble[0].where + ': ' + trouble[0].problem + more, 'err');
       return;
     }
-    const items = reviewItems();
+    const items = TL.treeChanges(store.original, store.tree);
     const list = SS.el('ul', 'review-list', items.slice(0, 40).map((c) =>
       SS.el('li', '', [SS.el('b', '', c.what), SS.el('span', 'muted', c.where)])));
     const more = items.length > 40 ? SS.el('p', 'muted', 'And ' + (items.length - 40) + ' more.') : null;
@@ -215,5 +220,12 @@
     dialog.classList.add('wide');
   }
 
-  SS.treeData = { store, load, hasChanges, statusBar };
+  /** Starts again from the tree built into the app. Nothing is live until published. */
+  function resetToBuiltIn() {
+    const copy = TL.clone(store.bundled[store.type].tree);
+    copy.baseBundledVersion = store.bundled[store.type].version;
+    store.tree = copy;
+  }
+
+  SS.treeData = { store, load, hasChanges, statusBar, resetToBuiltIn };
 })();

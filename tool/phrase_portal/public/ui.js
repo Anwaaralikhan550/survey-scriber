@@ -105,7 +105,8 @@ window.SS = window.SS || {};
   };
 
   /**
-   * fields: [{name, label, type, value, options:[{value,label}], required, hint, autocomplete}]
+   * fields: [{name, label, type, value, options:[{value,label}], required, hint, autocomplete,
+   *           showWhen:{name, values}, tokens:[text the admin can insert]}]
    * save(values) returns an error message, or nothing when done.
    */
   SS.formBox = function ({ title, intro, fields, okText, save }) {
@@ -134,12 +135,34 @@ window.SS = window.SS || {};
       if (f.autocomplete) input.autocomplete = f.autocomplete;
       if (f.maxLength) input.maxLength = f.maxLength;
       inputs[f.name] = input;
-      return SS.el('label', 'field', [
+      const tokens = (f.tokens || []).map((token) => {
+        const b = SS.button(token, () => {
+          const at = input.selectionStart === null ? input.value.length : input.selectionStart;
+          input.value = input.value.slice(0, at) + token + input.value.slice(input.selectionEnd === null ? at : input.selectionEnd);
+          input.focus();
+          input.selectionStart = at + token.length;
+          input.selectionEnd = at + token.length;
+        }, 'token');
+        return b;
+      });
+      const row = SS.el(f.tokens ? 'div' : 'label', 'field', [
         SS.el('span', '', f.label + (f.required ? ' *' : '')),
         input,
+        tokens.length ? SS.el('div', 'token-row', tokens) : null,
         f.hint ? SS.el('small', 'muted', f.hint) : null,
       ]);
+      if (f.tokens) input.setAttribute('aria-label', f.label);
+      row.dataset.field = f.name;
+      return row;
     });
+
+    const showRows = () => {
+      fields.forEach((f, i) => {
+        if (f.showWhen) rows[i].hidden = !f.showWhen.values.includes(inputs[f.showWhen.name].value);
+      });
+    };
+    Object.values(inputs).forEach((i) => i.addEventListener('change', showRows));
+    showRows();
 
     return new Promise((resolve) => {
       let saved = false;
@@ -156,7 +179,11 @@ window.SS = window.SS || {};
       form.addEventListener('submit', async (ev) => {
         ev.preventDefault();
         const values = {};
-        for (const f of fields) values[f.name] = inputs[f.name].value.trim();
+        for (const f of fields) {
+          // A hidden row's box says nothing, whatever was typed before it was hidden.
+          const hiddenRow = f.showWhen && !f.showWhen.values.includes(inputs[f.showWhen.name].value);
+          values[f.name] = hiddenRow ? '' : inputs[f.name].value.trim();
+        }
         ok.disabled = true;
         error.hidden = true;
         let message;

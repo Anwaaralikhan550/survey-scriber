@@ -241,6 +241,35 @@ button.tile:hover{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-s
 .review-list span{font-size:12px}
 .dialog.wide{width:min(94vw,720px)}
 
+.tree-stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0 0 14px;font-size:13px;color:var(--soft)}
+.tree-stats b{color:var(--navy);font-size:15px;margin-right:4px}
+.tree-layout{display:grid;grid-template-columns:minmax(240px,320px) minmax(0,1fr);gap:16px;align-items:start}
+.tree-nav{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px;min-width:0}
+.tree-nav select,.tree-nav .search{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.tree-nodes{display:grid;gap:2px;max-height:62vh;overflow:auto}
+.tree-node{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;background:transparent;padding:7px 8px;border-radius:8px;cursor:pointer;color:var(--ink);font:inherit;font-size:13.5px}
+.tree-node:hover{background:var(--line-soft)}
+.tree-node:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.tree-node.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.tree-node .kind{flex:none;font-size:10.5px;font-weight:700;letter-spacing:.04em;color:var(--faint);text-transform:uppercase;width:42px}
+.tree-node .name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tree-node .count{flex:none;font-size:11.5px;color:var(--faint)}
+.tree-node small{display:block;font-size:11.5px;font-weight:400;color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tree-detail{display:grid;gap:14px;min-width:0}
+.tree-detail .id{font-family:var(--mono);font-size:11.5px;color:var(--faint);word-break:break-all}
+.node-title{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;font-size:15px;font-weight:600;color:var(--navy)}
+.node-title:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.detail-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.field-meta{display:flex;flex-wrap:wrap;gap:4px 8px;font-size:12px;color:var(--soft)}
+.field-meta .warn{color:var(--warn)}
+.table td.actions .btn{padding:5px 9px;font-size:12.5px}
+.table td.actions>div{display:flex;flex-wrap:nowrap;gap:6px;justify-content:flex-end}
+.tree-detail .table td.actions{white-space:nowrap;width:1%}
+.token-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.btn.token{padding:3px 8px;font-size:11.5px;font-family:var(--mono)}
+.field[hidden]{display:none}
+@media (max-width:700px){.tree-layout{grid-template-columns:minmax(0,1fr)}.tree-nodes{max-height:40vh}}
+
 /* ── responsive ───────────────────────────────── */
 @media (max-width:980px){
   .login{grid-template-columns:1fr}

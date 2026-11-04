@@ -139,9 +139,151 @@ test('the review lists each change in plain words', () => {
   TL.rename(f, 'Good', 'Very good');
   TL.setHidden(f, 'Poor', true);
   TL.addOption(f, 'Excellent');
-  const what = TL.optionChanges(before, after).map((c) => c.what);
+  const what = TL.treeChanges(before, after).map((c) => c.what);
   assert.deepStrictEqual(what.sort(), ['"Good" now reads "Very good"', 'Added "Excellent"', 'Hid "Poor"'].sort());
-  assert.deepStrictEqual(TL.optionChanges(before, TL.clone(before)), []);
+  assert.deepStrictEqual(TL.treeChanges(before, TL.clone(before)), []);
+});
+
+test('both real trees pass every tree check as they are', () => {
+  for (const rel of ['assets/property_inspection/inspection_tree.json', 'assets/property_valuation/valuation_tree.json']) {
+    assert.deepStrictEqual(TL.treeProblems(load(rel)), [], rel);
+  }
+});
+
+test('every node of a real tree is listed once, under its parent', () => {
+  const tree = load('assets/property_inspection/inspection_tree.json');
+  for (const section of tree.sections) {
+    const rows = TL.rowsOf(section);
+    assert.strictEqual(rows.length, section.nodes.length, section.key);
+    const at = new Map(rows.map((r, i) => [r.node.id, i]));
+    for (const r of rows) {
+      if (r.node.parentId && at.has(r.node.parentId)) assert.ok(at.get(r.node.parentId) < at.get(r.node.id));
+    }
+  }
+});
+
+test('new ids follow the mobile admin and never collide', () => {
+  const tree = sampleTree();
+  const a = TL.addNode(tree, 'E', { title: 'Lift Check!', isGroup: false, parentId: 'g' });
+  const b = TL.addNode(tree, 'E', { title: 'Lift Check', isGroup: false, parentId: 'g' });
+  const c = TL.addNode(tree, 'E', { title: 'Lift Check', isGroup: true, parentId: null });
+  assert.strictEqual(a.id, 'activity_lift_check');
+  assert.strictEqual(b.id, 'activity_lift_check_2');
+  assert.strictEqual(c.id, 'group_lift_check');
+  assert.strictEqual(TL.newField(a, { label: 'Is it OK?', type: 'dropdown', options: ['Y'] }).id, 'android_material_design_spinner_is_it_ok');
+  assert.strictEqual(TL.newField(a, { label: 'Is it OK?', type: 'checkbox' }).id, 'cb_is_it_ok');
+  a.fields.push({ id: 'edittext_note', label: 'Note', type: 'text' });
+  assert.strictEqual(TL.newField(a, { label: 'Note', type: 'text' }).id, 'edittext_note_2');
+});
+
+test('deleting a group takes everything inside it', () => {
+  const tree = sampleTree();
+  const inner = TL.addNode(tree, 'E', { title: 'Inner', isGroup: true, parentId: 'g' });
+  TL.addNode(tree, 'E', { title: 'Deep', isGroup: false, parentId: inner.id });
+  const gone = TL.removeNode(tree, 'g');
+  assert.strictEqual(gone.size, 4);
+  assert.strictEqual(tree.sections[0].nodes.length, 0);
+});
+
+test('tree checks: each mistake is named', () => {
+  const problemOf = (edit) => {
+    const tree = sampleTree();
+    edit(tree, tree.sections[0].nodes[1]);
+    return TL.treeProblems(tree).map((p) => p.problem).join(' ');
+  };
+  assert.strictEqual(problemOf(() => {}), '');
+  assert.match(problemOf((t, s) => { s.title = '  '; }), /title is needed/);
+  assert.match(problemOf((t) => { TL.addNode(t, 'E', { title: 'Empty', isGroup: true, parentId: null }); }), /empty/);
+  assert.match(problemOf((t, s) => { t.sections[0].nodes.push({ ...s }); }), /share the id/);
+  assert.match(problemOf((t, s) => { s.parentId = 'nowhere'; }), /parent no longer/);
+  assert.match(problemOf((t) => { t.sections[0].nodes[0].parentId = 's'; }), /inside itself/);
+  assert.match(problemOf((t, s) => { s.fields[0].label = ''; }), /needs a label/);
+  assert.match(problemOf((t, s) => { s.fields[0].options = []; }), /at least one option/);
+  assert.match(problemOf((t, s) => { s.fields[0].options = ['A', 'a']; }), /listed twice/);
+  assert.match(problemOf((t, s) => { s.fields[1].conditionalOn = 'nope'; }), /not on this screen/);
+  assert.match(problemOf((t, s) => { s.fields[1].conditionalOn = 'd=Good & !gone'; }), /"gone"/);
+  assert.match(problemOf((t, s) => { s.fields[1].conditionalOn = 't'; }), /depend on itself/);
+  assert.match(problemOf((t, s) => { s.fields[1].conditionalOn = 'd'; s.fields[1].conditionalValue = 'Bad'; }), /does not offer/);
+  assert.match(problemOf((t, s) => { s.fields[1].conditionalOn = 'd'; s.fields[1].conditionalMode = 'maybe'; }), /show or hide/);
+  assert.match(problemOf((t, s) => { s.fields[1].phraseTemplate = 'It is {other}.'; }), /\{other\}/);
+  assert.strictEqual(problemOf((t, s) => { s.fields[1].phraseTemplate = 'It is {d} and {t}.'; }), '');
+});
+
+test('applying an edit: removed options lose their words, clearing a condition clears it all', () => {
+  const f = TL.dropdowns(sampleTree())[0].field;
+  TL.rename(f, 'Good', 'Very good');
+  TL.rename(f, 'Fair', 'Okay');
+  TL.setHidden(f, 'Poor', true);
+  TL.applyField(f, { label: ' Rating ', options: ['Fair', 'Bad'], conditionalOn: 'x', conditionalValue: 'y', conditionalMode: 'hide', phraseTemplate: ' T ' });
+  assert.strictEqual(f.label, 'Rating');
+  assert.deepStrictEqual(f.options, ['Fair', 'Bad']);
+  assert.deepStrictEqual(f.optionLabels, { Fair: 'Okay' });
+  assert.strictEqual(f.hiddenOptions, undefined);
+  assert.strictEqual(f.phraseTemplate, 'T');
+  TL.applyField(f, { label: 'Rating', options: ['Fair', 'Bad'], conditionalOn: '', conditionalValue: 'y', conditionalMode: 'hide', phraseTemplate: '' });
+  for (const key of ['conditionalOn', 'conditionalValue', 'conditionalMode', 'phraseTemplate']) assert.strictEqual(f[key], undefined, key);
+});
+
+test('an edit leaves everything else in the JSON exactly as it was', () => {
+  const before = load('assets/property_inspection/inspection_tree.json');
+  const after = TL.clone(before);
+  const node = TL.nodesOf(after).find((n) => n.id === 'activity_property_flate');
+  const field = node.fields.find((f) => f.id === 'actv_a2_floor');
+  TL.applyField(field, { label: field.label, options: field.options });
+  assert.ok(TL.sameTree(before, after));
+  node.title = 'Flats';
+  assert.deepStrictEqual(TL.treeChanges(before, after).map((c) => c.what), ['"Flat Maisonettes" is now called "Flats"']);
+  node.title = 'Flat Maisonettes';
+  assert.ok(TL.sameTree(before, after));
+});
+
+test('the review names every kind of tree change', () => {
+  const before = sampleTree();
+  const after = TL.clone(before);
+  const [group, screen] = after.sections[0].nodes;
+  group.title = 'Chimneys';
+  screen.fields[0].label = 'State';
+  screen.fields[1].conditionalOn = 'd';
+  screen.fields[1].phraseTemplate = 'It is {d}.';
+  screen.fields.push(TL.newField(screen, { label: 'Lift', type: 'text' }));
+  screen.fields[0].options = ['Good', 'Fair'];
+  const added = TL.addNode(after, 'E', { title: 'New', isGroup: false, parentId: 'g' });
+  added.fields.push(TL.newField(added, { label: 'Inside', type: 'text' }));
+  const what = TL.treeChanges(before, after).map((c) => c.what);
+  for (const line of ['"Chimney" is now called "Chimneys"', 'Field "Condition" is now called "State"', 'Changed when "Note" shows',
+    'Changed the phrase template of "Note"', 'Added field "Lift"', 'Removed "Poor"', 'Added screen "New"', 'Added field "Inside"']) {
+    assert.ok(what.includes(line), line);
+  }
+  const removed = TL.clone(before);
+  TL.removeNode(removed, 's');
+  assert.deepStrictEqual(TL.treeChanges(before, removed).map((c) => c.what), ['Deleted screen "Repairs"']);
+  screen.fields = [];
+  assert.ok(TL.treeChanges(before, after).some((c) => c.what === 'Removed field "Condition"'));
+});
+
+test('a field that others depend on is known', () => {
+  const screen = sampleTree().sections[0].nodes[1];
+  screen.fields[1].conditionalOn = '!d & other=true';
+  assert.deepStrictEqual(TL.conditionKeys(screen.fields[1].conditionalOn), ['d', 'other']);
+  assert.deepStrictEqual(TL.dependentsOf(screen, 'd').map((f) => f.id), ['t']);
+  assert.deepStrictEqual(TL.dependentsOf(screen, 't'), []);
+});
+
+test('search across the tree finds names, ids and field labels', () => {
+  const tree = sampleTree();
+  assert.deepStrictEqual(TL.searchNodes(tree, 'repairs').map((r) => r.node.id), ['s']);
+  assert.deepStrictEqual(TL.searchNodes(tree, 'CONDITION').map((r) => r.node.id), ['s']);
+  assert.deepStrictEqual(TL.searchNodes(tree, 'chimney').map((r) => r.path), ['Outside Property > Chimney']);
+  assert.deepStrictEqual(TL.searchNodes(tree, '  '), []);
+});
+
+test('report_nodes.json only names nodes that exist', () => {
+  const nodes = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'assets', 'trees', 'report_nodes.json'), 'utf8'));
+  const inspection = new Set(TL.nodesOf(load('assets/property_inspection/inspection_tree.json')).map((n) => n.id));
+  const valuation = new Set(TL.nodesOf(load('assets/property_valuation/valuation_tree.json')).map((n) => n.id));
+  assert.ok(nodes.inspection.length > 100);
+  assert.ok(nodes.inspection.every((id) => inspection.has(id)));
+  assert.ok(nodes.valuation.every((id) => valuation.has(id)));
 });
 
 test('search finds a screen, a list, an option and new words', () => {

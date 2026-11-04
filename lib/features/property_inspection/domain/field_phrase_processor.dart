@@ -24,6 +24,7 @@ class FieldPhraseProcessor {
     final fieldTypes = <String, InspectionFieldType>{
       for (final f in fields) f.id: f.type,
     };
+    final fieldsById = {for (final f in fields) f.id: f};
 
     for (final field in fields) {
       final template = field.phraseTemplate;
@@ -39,7 +40,7 @@ class FieldPhraseProcessor {
         if (val != 'true') continue; // unchecked — skip entirely
       }
 
-      final resolved = _resolveTemplate(template, answers, fieldTypes);
+      final resolved = _resolveTemplate(template, answers, fieldTypes, fieldsById);
       if (resolved.isNotEmpty) {
         result.add(resolved);
       }
@@ -65,6 +66,7 @@ class FieldPhraseProcessor {
     String template,
     Map<String, String> answers,
     Map<String, InspectionFieldType> fieldTypes,
+    Map<String, InspectionFieldDefinition> fieldsById,
   ) {
     var result = template;
 
@@ -80,7 +82,8 @@ class FieldPhraseProcessor {
           return '';
         }
 
-        return raw;
+        // A renamed option prints its new words; the answer keeps its stored value.
+        return fieldsById[fieldId]?.optionText(raw) ?? raw;
       },
     );
 

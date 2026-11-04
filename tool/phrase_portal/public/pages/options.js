@@ -11,10 +11,6 @@
 
   const data = () => SS.treeData.store;
 
-  function reviewItems() {
-    return TL.optionChanges(data().original, data().tree);
-  }
-
   function optionRow(entry, option) {
     const { field } = entry;
     const hidden = TL.isHidden(field, option);
@@ -136,7 +132,7 @@
     }
     view.page = 1;
     view.changedOnly = false; // a fresh load has no changes to show
-    view.bar = SS.treeData.statusBar(open, reviewItems);
+    view.bar = SS.treeData.statusBar(open);
     view.list = SS.el('div', 'option-list');
     const search = SS.searchBox('Search a screen, list or option', view.query, (q) => {
       view.query = q;

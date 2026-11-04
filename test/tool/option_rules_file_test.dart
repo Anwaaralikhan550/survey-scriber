@@ -46,7 +46,37 @@ Map<String, dynamic> _generate() {
   };
 }
 
+/// Tree nodes the app's code asks for by id. Deleting one changes what the report prints.
+Map<String, List<String>> _reportNodes() {
+  Set<String> idsOf(String treePath) {
+    final tree = jsonDecode(File(treePath).readAsStringSync()) as Map<String, dynamic>;
+    return {
+      for (final section in tree['sections'] as List)
+        for (final node in section['nodes'] as List) node['id'] as String,
+    };
+  }
+
+  final quoted = RegExp(r"""['"]([a-z][a-z0-9_]*)['"]""");
+  final used = <String>{};
+  for (final file in Directory('lib').listSync(recursive: true).whereType<File>()) {
+    if (!file.path.endsWith('.dart') || file.path.endsWith('.g.dart')) continue;
+    used.addAll(quoted.allMatches(file.readAsStringSync()).map((m) => m.group(1)!));
+  }
+  List<String> usedIn(String treePath) => idsOf(treePath).where(used.contains).toList()..sort();
+  return {
+    'inspection': usedIn('assets/property_inspection/inspection_tree.json'),
+    'valuation': usedIn('assets/property_valuation/valuation_tree.json'),
+  };
+}
+
 void main() {
+  test('the portal knows which nodes the report asks for by id', () {
+    final current = const JsonEncoder.withIndent(' ').convert(_reportNodes());
+    final file = File('tool/phrase_portal/public/assets/trees/report_nodes.json');
+    if (Platform.environment['UPDATE_OPTION_RULES'] == '1') file.writeAsStringSync('$current\n');
+    expect(file.readAsStringSync().trim().replaceAll('\r\n', '\n'), current);
+  });
+
   test('the portal has the current list of options that choose a sentence', () {
     final current = const JsonEncoder.withIndent(' ').convert(_generate());
     final file = File(_file);
