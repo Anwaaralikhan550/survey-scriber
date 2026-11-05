@@ -13,6 +13,7 @@
     tree: null,             // the working copy
     rules: {},              // options that choose a written sentence
     reportNodes: new Set(), // nodes the report's code asks for by id
+    fixedScreens: new Set(), // screens where the app picks the fields itself
     stale: false,           // published tree was made for an older app
   };
 
@@ -27,15 +28,17 @@
     store.type = type;
     store.tree = null;
     try {
-      const [baseline, meta, rules, reportNodes] = await Promise.all([
+      const [baseline, meta, rules, reportNodes, fixedScreens] = await Promise.all([
         assetJson('assets/trees/' + type + '.json'),
         assetJson('assets/trees/meta.json'),
         assetJson('assets/trees/option_rules.json'),
         assetJson('assets/trees/report_nodes.json'),
+        assetJson('assets/trees/fixed_screens.json'),
       ]);
       store.bundled[type] = { version: meta[type], tree: baseline };
       store.rules = rules[type] || {};
       store.reportNodes = new Set(reportNodes[type] || []);
+      store.fixedScreens = new Set(fixedScreens[type] || []);
     } catch (e) {
       return e.message;
     }

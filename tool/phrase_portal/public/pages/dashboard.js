@@ -20,6 +20,12 @@
     'user.password_email_sent': 'Password email sent',
     'staff.login': 'Signed in',
     'staff.logout': 'Signed out',
+    'email_template.updated': 'Email template edited',
+    'email_template.reset': 'Email template back to original',
+    'email_template.test_sent': 'Test email sent',
+    'app_settings.updated': 'Settings changed',
+    'config.v2_tree_published': 'Survey tree published',
+    'config.phrase_bank_published': 'Phrases published',
   };
 
   function statCard(title, big, rows) {

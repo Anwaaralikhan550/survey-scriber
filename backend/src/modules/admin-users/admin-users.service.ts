@@ -111,7 +111,12 @@ export class AdminUsersService {
     let recentActivity: AdminSummaryDto['recentActivity'] = [];
     if (actor.role === UserRole.ADMIN) {
       const logs = await this.prisma.auditLog.findMany({
-        where: { actorType: ActorType.STAFF, action: { startsWith: 'user.' } },
+        where: {
+          actorType: ActorType.STAFF,
+          OR: ['user.', 'email_template.', 'app_settings.', 'config.'].map((prefix) => ({
+            action: { startsWith: prefix },
+          })),
+        },
         orderBy: { createdAt: 'desc' },
         take: 10,
       });

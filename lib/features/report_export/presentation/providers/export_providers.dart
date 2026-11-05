@@ -7,6 +7,7 @@ import '../../../../core/utils/logger.dart';
 import '../../../../shared/services/pdf_upload_service.dart';
 import '../../../ai/presentation/providers/ai_inspection_providers.dart';
 import '../../../property_inspection/presentation/providers/inspection_providers.dart';
+import '../../../property_valuation/domain/valuation_answer_validator.dart';
 import '../../../property_valuation/presentation/providers/valuation_providers.dart';
 import '../../data/services/export_service.dart';
 import '../../data/services/report_builder.dart';
@@ -169,15 +170,21 @@ class ExportNotifier extends StateNotifier<ExportState> {
     } catch (e) {
       AppLogger.e('Export', 'Export failed: $e');
       final hint = e.toString();
-      final message = hint.contains("won't fit") ||
-              hint.contains('exceed a page')
-          ? 'Report content too large for a single page. '
-              'Please try reducing AI narrative length or splitting sections.'
-          : hint.contains('timeout') || hint.contains('Timeout')
-              ? 'Export timed out. Please check your connection and try again.'
-              : hint.contains('No space') || hint.contains('storage')
-                  ? 'Not enough storage space to generate the report.'
-                  : 'Failed to export report. Please try again.';
+      final message = e is ValuationReportValidationException
+          ? 'Please correct these answers first:\n${e.errors.join('\n')}'
+          : hint.contains("won't fit") || hint.contains('exceed a page')
+              ? 'Report content too large for a single page. '
+                  'Please try reducing AI narrative length or splitting sections.'
+              : hint.contains('Unable to download') ||
+                      hint.contains('SocketException') ||
+                      hint.contains('Failed host lookup')
+                  ? 'The first PDF on a phone needs internet to load its fonts. '
+                      'Please connect and try again, or export as DOCX.'
+                  : hint.contains('timeout') || hint.contains('Timeout')
+                      ? 'Export timed out. Please check your connection and try again.'
+                      : hint.contains('No space') || hint.contains('storage')
+                          ? 'Not enough storage space to generate the report.'
+                          : 'Failed to export report. Please try again.';
       _setState(ExportState(errorMessage: message));
       return null;
     } finally {

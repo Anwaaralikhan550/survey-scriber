@@ -566,9 +566,9 @@ model Booking {
   client         Client?                @relation(fields: [clientId], references: [id], onDelete: SetNull)
   changeRequests BookingChangeRequest[]
 
-  // Prevent double-booking: same surveyor cannot have two bookings starting at the same time
-  // This is a database-level safety net for the application-level overlap check
-  @@unique([surveyorId, date, startTime], name: "bookings_no_double_booking")
+  // Prevent double-booking: same surveyor cannot have two live bookings starting at the same time.
+  // This is a database-level safety net for the application-level overlap check. It leaves out
+  // cancelled bookings, which Prisma cannot express: see migration 20261105090000.
   @@index([surveyorId])
   @@index([date])
   @@index([status])

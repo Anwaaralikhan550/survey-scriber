@@ -300,6 +300,14 @@ class _SuccessDialogState extends State<_SuccessDialog> {
   String get _reportTypeLabel =>
       reportType == ReportType.inspection ? 'Inspection' : 'Valuation';
 
+  /// A booked survey's title already starts with its type: "Inspection - R1".
+  String get _titleWithoutType {
+    final prefix = '$_reportTypeLabel - ';
+    return surveyTitle.startsWith(prefix)
+        ? surveyTitle.substring(prefix.length)
+        : surveyTitle;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -344,7 +352,7 @@ class _SuccessDialogState extends State<_SuccessDialog> {
                           ),
                         ),
                         Text(
-                          '$_reportTypeLabel - $surveyTitle',
+                          '$_reportTypeLabel - $_titleWithoutType',
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: theme.colorScheme.onSurfaceVariant,
                           ),
@@ -578,7 +586,7 @@ class _SuccessDialogState extends State<_SuccessDialog> {
     if (!_verifyFileExists(context)) return;
     await Share.shareXFiles(
       [XFile(result.outputPath)],
-      subject: '$_reportTypeLabel Report - $surveyTitle',
+      subject: '$_reportTypeLabel Report - $_titleWithoutType',
     );
   }
 

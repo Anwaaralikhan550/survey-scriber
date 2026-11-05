@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,9 +35,8 @@ class SurveyFolderMenu extends ConsumerWidget {
       _say(context, 'No report yet. Use Generate Report first.');
       return;
     }
-    final result = kIsWeb
-        ? null
-        : await OpenFilex.open(report.filePath);
+    final onThisDevice = !kIsWeb && await File(report.filePath).exists();
+    final result = onThisDevice ? await OpenFilex.open(report.filePath) : null;
     if (!context.mounted) return;
     if (result?.type != ResultType.done) {
       _say(

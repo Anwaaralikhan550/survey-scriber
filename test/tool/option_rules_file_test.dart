@@ -6,6 +6,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_scriber/features/property_inspection/domain/inspection_phrase_engine.dart';
+import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
+import 'package:survey_scriber/features/property_inspection/presentation/widgets/inspection_fields.dart';
 
 const _file = 'tool/phrase_portal/public/assets/trees/option_rules.json';
 
@@ -69,7 +71,44 @@ Map<String, List<String>> _reportNodes() {
   };
 }
 
+/// Screens where a field added in the portal would never show: the app picks the
+/// fields itself, or draws the whole screen.
+Map<String, List<String>> _fixedScreens() {
+  const probe = InspectionFieldDefinition(
+    id: 'portal_probe',
+    label: 'Probe',
+    type: InspectionFieldType.text,
+  );
+  List<String> fixedIn(String treePath, Set<String> drawnByTheApp) {
+    final tree = InspectionTreePayload.fromJson(File(treePath).readAsStringSync());
+    return [
+      for (final section in tree.sections)
+        for (final node in section.nodes)
+          if (node.type != InspectionNodeType.group &&
+              (drawnByTheApp.contains(node.id) ||
+                  !sanitizeInspectionFieldsForScreen(node.id, [...node.fields, probe])
+                      .any((f) => f.id == probe.id)))
+            node.id,
+    ]..sort();
+  }
+
+  return {
+    'inspection': fixedIn(
+      'assets/property_inspection/inspection_tree.json',
+      {'activity_capture_floor_site_plan_sketches'},
+    ),
+    'valuation': fixedIn('assets/property_valuation/valuation_tree.json', {}),
+  };
+}
+
 void main() {
+  test('the portal knows which screens cannot take a new field', () {
+    final current = const JsonEncoder.withIndent(' ').convert(_fixedScreens());
+    final file = File('tool/phrase_portal/public/assets/trees/fixed_screens.json');
+    if (Platform.environment['UPDATE_OPTION_RULES'] == '1') file.writeAsStringSync('$current\n');
+    expect(file.readAsStringSync().trim().replaceAll('\r\n', '\n'), current);
+  });
+
   test('the portal knows which nodes the report asks for by id', () {
     final current = const JsonEncoder.withIndent(' ').convert(_reportNodes());
     final file = File('tool/phrase_portal/public/assets/trees/report_nodes.json');

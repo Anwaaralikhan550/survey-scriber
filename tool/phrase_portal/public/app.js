@@ -39,7 +39,10 @@ function saveSession(s) {
   try { s ? sessionStorage.setItem(SESSION_KEY, JSON.stringify(s)) : sessionStorage.removeItem(SESSION_KEY); } catch { /* storage blocked */ }
 }
 
-async function apiJson(path, { method = 'GET', body, auth = false, retry = true } = {}) {
+// The server allows a few calls a second, and one page can ask for more than that.
+const BUSY_WAITS_MS = [700, 1500, 2500];
+
+async function apiJson(path, { method = 'GET', body, auth = false, retry = true, busyTries = 0 } = {}) {
   const headers = { Accept: 'application/json' };
   if (body !== undefined) headers['Content-Type'] = 'application/json';
   if (auth && state.session) headers.Authorization = 'Bearer ' + state.session.accessToken;
@@ -48,6 +51,10 @@ async function apiJson(path, { method = 'GET', body, auth = false, retry = true 
     res = await fetch(API + path, { method, headers, body: body === undefined ? undefined : JSON.stringify(body) });
   } catch (e) {
     return { status: 0, body: { message: 'Cannot reach the server. Check your internet connection.' } };
+  }
+  if (res.status === 429 && busyTries < BUSY_WAITS_MS.length && path !== '/auth/login') {
+    await new Promise((resolve) => setTimeout(resolve, BUSY_WAITS_MS[busyTries]));
+    return apiJson(path, { method, body, auth, retry, busyTries: busyTries + 1 });
   }
   let parsed = {};
   try { parsed = await res.json(); } catch { /* empty body */ }
@@ -464,6 +471,11 @@ Object.assign(window.SS, { apiJson, toast, state, go, signOut });
   if (me.status === 200 && AL.canUsePortal(me.body.role)) {
     saveSession({ ...state.session, role: me.body.role });
     showApp();
+    return;
+  }
+  // The server being down or busy says nothing about the session: keep it for the next reload.
+  if (me.status === 0 || me.status === 429 || me.status >= 500) {
+    showLogin('The server could not be reached. Reload this page to try again.');
     return;
   }
   saveSession(null);

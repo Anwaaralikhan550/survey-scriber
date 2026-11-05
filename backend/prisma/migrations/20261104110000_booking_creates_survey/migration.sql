@@ -6,10 +6,12 @@ CREATE UNIQUE INDEX "bookings_survey_id_key" ON "bookings"("survey_id");
 
 ALTER TABLE "bookings" ADD CONSTRAINT "bookings_survey_id_fkey" FOREIGN KEY ("survey_id") REFERENCES "surveys"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
--- Bookings made before this change get their inspection too. Cancelled ones do not.
+-- Bookings made before this change get their inspection too, in the folder their status says.
+-- Cancelled ones do not.
 WITH new_surveys AS (
     SELECT
         b."id" AS booking_id,
+        b."status" = 'COMPLETED' AS is_finished,
         gen_random_uuid() AS survey_id,
         b."survey_type" = 'valuation' AS is_valuation,
         COALESCE(
@@ -32,7 +34,7 @@ inserted AS (
         survey_id,
         LEFT((CASE WHEN is_valuation THEN 'Valuation - ' ELSE 'Inspection - ' END) || title_end, 255),
         address,
-        'DRAFT'::"SurveyStatus",
+        (CASE WHEN is_finished THEN 'COMPLETED' ELSE 'DRAFT' END)::"SurveyStatus",
         (CASE WHEN is_valuation THEN 'VALUATION' ELSE 'INSPECTION' END)::"SurveyType",
         job_ref,
         client_name,

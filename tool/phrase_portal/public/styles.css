@@ -302,7 +302,7 @@ button.tile:hover{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-s
   .menu-btn{display:block}
   .main{height:auto;min-height:100vh;overflow:visible}
   .page.flush{overflow:visible}
-  .layout{grid-template-columns:1fr}
+  .layout{grid-template-columns:minmax(0,1fr)}
   .list-pane{max-height:42vh;border-right:0;border-bottom:1px solid var(--line)}
   .two{grid-template-columns:1fr}
   .page{padding:20px 16px 40px}

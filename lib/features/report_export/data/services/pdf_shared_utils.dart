@@ -109,15 +109,23 @@ class PdfSharedUtils {
         'NotoEmoji-Regular', PdfGoogleFonts.notoEmojiRegular);
 
     return PdfFontDataBundle(
-      base: _extractFontBytes(baseFont)!,
-      bold: _extractFontBytes(boldFont)!,
-      italic: _extractFontBytes(italicFont)!,
+      base: _downloadedFontBytes(baseFont),
+      bold: _downloadedFontBytes(boldFont),
+      italic: _downloadedFontBytes(italicFont),
       fallbacks: [
-        _extractFontBytes(symbolFont)!,
-        _extractFontBytes(symbols2Font)!,
-        _extractFontBytes(emojiFont)!,
+        _downloadedFontBytes(symbolFont),
+        _downloadedFontBytes(symbols2Font),
+        _downloadedFontBytes(emojiFont),
       ],
     );
+  }
+
+  /// The font loader falls back to Helvetica, with no bytes, when it cannot
+  /// download a font. The export's error message depends on these words.
+  static ByteData _downloadedFontBytes(pw.Font font) {
+    final bytes = _extractFontBytes(font);
+    if (bytes == null) throw StateError('Unable to download the report fonts.');
+    return bytes;
   }
 
   /// Extract raw TTF [ByteData] from a loaded [pw.Font].

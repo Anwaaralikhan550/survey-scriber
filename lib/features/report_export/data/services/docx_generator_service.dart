@@ -44,13 +44,13 @@ class DocxGeneratorService {
 
     // [Content_Types].xml — includes image MIME types when images are present
     final isInspection = doc.reportType == ReportType.inspection;
-    _addContentTypes(archive, images, withHeaderFooter: isInspection);
+    _addContentTypes(archive, images);
 
     // _rels/.rels
     _addRels(archive);
 
     // word/_rels/document.xml.rels — includes image relationships
-    _addDocumentRels(archive, images, withHeaderFooter: isInspection);
+    _addDocumentRels(archive, images);
 
     // word/media/ — embedded image files
     _addMediaFiles(archive, images);
@@ -59,7 +59,7 @@ class DocxGeneratorService {
     _addStyles(archive, isInspection: isInspection);
 
     // word/header1.xml + word/footer1.xml — the running page header and footer
-    if (isInspection) _addHeaderFooter(archive, doc);
+    _addHeaderFooter(archive, doc);
 
     _reportProgress('Generating content', 0.35);
 
@@ -89,11 +89,7 @@ class DocxGeneratorService {
   //  ARCHIVE STRUCTURE
   // ═══════════════════════════════════════════════════════════════════
 
-  void _addContentTypes(
-    Archive archive,
-    _DocxImageBundle images, {
-    required bool withHeaderFooter,
-  }) {
+  void _addContentTypes(Archive archive, _DocxImageBundle images) {
     final buf = StringBuffer()
       ..write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>')
       ..write(
@@ -111,15 +107,12 @@ class DocxGeneratorService {
       ..write(
           '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>')
       ..write(
-          '<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>');
-    if (withHeaderFooter) {
-      buf
-        ..write(
-            '<Override PartName="/word/header1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>')
-        ..write(
-            '<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>');
-    }
-    buf.write('</Types>');
+          '<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>')
+      ..write(
+          '<Override PartName="/word/header1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>')
+      ..write(
+          '<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>')
+      ..write('</Types>');
 
     final xml = buf.toString();
     archive.addFile(ArchiveFile(
@@ -142,24 +135,17 @@ class DocxGeneratorService {
     ));
   }
 
-  void _addDocumentRels(
-    Archive archive,
-    _DocxImageBundle images, {
-    required bool withHeaderFooter,
-  }) {
+  void _addDocumentRels(Archive archive, _DocxImageBundle images) {
     final buf = StringBuffer()
       ..write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>')
       ..write(
           '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">')
       ..write(
-          '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>');
-    if (withHeaderFooter) {
-      buf
-        ..write(
-            '<Relationship Id="rIdHeader1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml"/>')
-        ..write(
-            '<Relationship Id="rIdFooter1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/>');
-    }
+          '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>')
+      ..write(
+          '<Relationship Id="rIdHeader1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml"/>')
+      ..write(
+          '<Relationship Id="rIdFooter1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/>');
     for (final ref in images.allImages) {
       buf.write('<Relationship Id="${ref.relId}" '
           'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" '
@@ -436,16 +422,14 @@ class DocxGeneratorService {
       }
     }
 
-    if (doc.reportType == ReportType.inspection) {
-      buf.write('<w:sectPr>');
-      buf.write('<w:headerReference w:type="default" r:id="rIdHeader1"/>');
-      buf.write('<w:footerReference w:type="default" r:id="rIdFooter1"/>');
-      buf.write('<w:pgSz w:w="11906" w:h="16838"/>');
-      buf.write('<w:pgMar w:top="1200" w:right="1134" w:bottom="1000" w:left="1134" '
-          'w:header="500" w:footer="400" w:gutter="0"/>');
-      buf.write('<w:titlePg/>'); // no running header on the first page
-      buf.write('</w:sectPr>');
-    }
+    buf.write('<w:sectPr>');
+    buf.write('<w:headerReference w:type="default" r:id="rIdHeader1"/>');
+    buf.write('<w:footerReference w:type="default" r:id="rIdFooter1"/>');
+    buf.write('<w:pgSz w:w="11906" w:h="16838"/>');
+    buf.write('<w:pgMar w:top="1200" w:right="1134" w:bottom="1000" w:left="1134" '
+        'w:header="500" w:footer="400" w:gutter="0"/>');
+    buf.write('<w:titlePg/>'); // no running header on the first page
+    buf.write('</w:sectPr>');
 
     buf.write('</w:body></w:document>');
 
@@ -463,45 +447,7 @@ class DocxGeneratorService {
     DateFormat fmt,
     _DocxImageRef? logo,
   ) {
-    if (doc.reportType == ReportType.inspection) {
-      _writeInspectionCover(buf, doc, fmt, logo);
-      return;
-    }
-    final meta = doc.surveyMeta;
-    const reportLabel = 'Valuation Report';
-    final accentHex = _pdfColorToHex(_config.accentColor);
-    final company = _config.reportCompanyName.trim();
-
-    if (logo != null) _writeInlineImage(buf, logo, _logoDocPrId);
-    _writeStyledParagraph(buf, reportLabel,
-        fontSize: 36, bold: true, color: accentHex);
-    _writeStyledParagraph(buf, meta.title, fontSize: 24);
-    if (meta.address != null && meta.address!.isNotEmpty) {
-      _writeStyledParagraph(buf, meta.address!, fontSize: 18, color: '888888');
-    }
-    buf.write('<w:p/>'); // blank line
-    if (meta.jobRef != null) _writeParagraph(buf, 'Reference: ${meta.jobRef}');
-    if (meta.clientName != null)
-      _writeParagraph(buf, 'Client: ${meta.clientName}');
-    _writeParagraph(buf, 'Date: ${fmt.format(doc.generatedAt)}');
-    _writeParagraph(
-      buf,
-      'Prepared by: ${company.isEmpty ? _config.companyName : company}',
-    );
-    if (meta.startedAt != null) {
-      _writeParagraph(buf,
-          'Started: ${DateFormat('d MMM yyyy HH:mm').format(meta.startedAt!)}');
-    }
-    if (meta.completedAt != null) {
-      _writeParagraph(buf,
-          'Completed: ${DateFormat('d MMM yyyy HH:mm').format(meta.completedAt!)}');
-    }
-    if (meta.surveyDuration != null) {
-      _writeParagraph(buf,
-          'Duration: ${PdfSharedUtils.formatDuration(meta.surveyDuration!)}');
-    }
-    // Page break
-    buf.write('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');
+    _writeCover(buf, doc, fmt, logo);
   }
 
   /// Main section header: coloured banner in the home survey report.
@@ -537,6 +483,9 @@ class DocxGeneratorService {
 
   void _addHeaderFooter(Archive archive, ReportDocument doc) {
     final accentHex = _pdfColorToHex(_config.accentColor);
+    final reportLabel = doc.reportType == ReportType.inspection
+        ? '${doc.surveyMeta.reportLevel} Report'
+        : 'Property Valuation Report';
     const namespaces = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
     const tabs = '<w:tabs><w:tab w:val="center" w:pos="4819"/><w:tab w:val="right" w:pos="9638"/></w:tabs>';
     String run(String text, {bool bold = false, String color = '333333'}) =>
@@ -557,7 +506,7 @@ class DocxGeneratorService {
         '<w:hdr $namespaces><w:p><w:pPr>$tabs'
         '<w:pBdr><w:bottom w:val="single" w:sz="4" w:space="4" w:color="$accentHex"/></w:pBdr>'
         '</w:pPr>'
-        '${run('${doc.surveyMeta.reportLevel} Report', bold: true, color: accentHex)}$tab'
+        '${run(reportLabel, bold: true, color: accentHex)}$tab'
         '${run(doc.surveyMeta.title)}$tab'
         '${run(_config.companyName)}'
         '</w:p></w:hdr>';
@@ -597,8 +546,8 @@ class DocxGeneratorService {
 
   static const String _boldLegalReference = 'Control of Asbestos Regulations 2012';
 
-  /// First page of the home survey report: same layout as the PDF cover.
-  void _writeInspectionCover(
+  /// First page of the report: same layout as the PDF cover.
+  void _writeCover(
     StringBuffer buf,
     ReportDocument doc,
     DateFormat fmt,
@@ -607,6 +556,7 @@ class DocxGeneratorService {
     final meta = doc.surveyMeta;
     final accentHex = _pdfColorToHex(_config.accentColor);
     final company = _config.reportCompanyName.trim();
+    final isInspection = doc.reportType == ReportType.inspection;
 
     _writeBanner(
       buf,
@@ -614,8 +564,18 @@ class DocxGeneratorService {
       logo: logo,
       lines: [
         if (company.isNotEmpty) (text: company, size: 40, bold: true),
-        (text: 'Home Buyer Report', size: company.isEmpty ? 56 : 32, bold: true),
-        (text: meta.reportLevel, size: 28, bold: false),
+        (
+          text: isInspection ? 'Home Buyer Report' : 'Valuation Report',
+          size: company.isEmpty ? 56 : 32,
+          bold: true,
+        ),
+        (
+          text: isInspection ? meta.reportLevel : 'Mortgage Valuation Report',
+          size: 28,
+          bold: false,
+        ),
+        if (!isInspection)
+          (text: 'Professional property valuation report', size: 22, bold: true),
       ],
     );
 

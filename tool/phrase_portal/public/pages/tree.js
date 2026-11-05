@@ -321,11 +321,13 @@
     }
 
     const fields = node.fields || [];
+    const fixed = data().fixedScreens.has(node.id);
     view.detail.replaceChildren(head, SS.el('div', 'card', [
       SS.el('div', 'detail-head', [
         SS.el('h3', '', fields.length + (fields.length === 1 ? ' field' : ' fields')),
-        SS.button('Add a field', () => addField(node), 'primary'),
+        fixed ? null : SS.button('Add a field', () => addField(node), 'primary'),
       ]),
+      fixed ? SS.el('div', 'option-note', 'The app builds this screen itself, so a new field would not show on it. A new field needs a developer here.') : null,
       fields.length
         ? SS.table([
           {
