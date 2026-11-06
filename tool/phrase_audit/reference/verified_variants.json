@@ -182,6 +182,13 @@
       "reviewedIn": "J1-delta-2026-09",
       "reason": "Empty subsidence-location permutation: handler drops \"around <loc>\", leaving \"stepped cracking.\"; approved variant of the revised (structural-engineer/before-exchange) wording.",
       "template": "There are signs that the property appears to be affected by subsidence as evidenced by stepped cracking. This does not appear to be within acceptable tolerance. I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts."
+    },
+    {
+      "master": "{G_GAS_AND_OIL}",
+      "subCode": "{G2_METER}",
+      "reviewedIn": "inspection_phrase_engine.dart (gas meter with no location ticked), 318deac",
+      "reason": "Gas meter comment must print even when no meter location is ticked (client item D16, 2 Nov 2026). The handler strips ', and the meter unit is located {GAS_METER_LOCATION}' instead of leaving an empty slot; the rest is the approved G2_METER text word for word. Approved by the user on 6 Nov 2026.",
+      "template": "Metre: There is a mains gas connection to the property. No smell of gas was detected during my inspection, and no other defects were noted that require urgent or significant repairs to the installation."
     }
   ]
 }
