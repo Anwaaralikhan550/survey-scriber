@@ -8,6 +8,7 @@ import '../../../../app/router/routes.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../domain/models/generated_report.dart';
 import '../providers/pdf_history_provider.dart';
+import '../../../../shared/presentation/widgets/safe_page_padding.dart';
 
 /// Page showing all locally generated PDF reports.
 class PdfHistoryPage extends ConsumerWidget {
@@ -78,7 +79,7 @@ class PdfHistoryPage extends ConsumerWidget {
     return RefreshIndicator(
       onRefresh: () => ref.read(pdfHistoryProvider.notifier).refresh(),
       child: ListView.separated(
-        padding: const EdgeInsets.all(AppSpacing.md),
+        padding: safePagePadding(context, AppSpacing.md),
         itemCount: state.reports.length,
         separatorBuilder: (_, __) => const SizedBox(height: 8),
         itemBuilder: (context, index) => _ReportCard(

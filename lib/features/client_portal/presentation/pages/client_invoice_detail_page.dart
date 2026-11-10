@@ -10,6 +10,7 @@ import '../../../invoices/domain/entities/invoice.dart';
 import '../../../invoices/presentation/widgets/invoice_status_chip.dart';
 import '../providers/client_invoices_providers.dart';
 import '../providers/client_portal_providers.dart';
+import '../../../../shared/presentation/widgets/safe_page_padding.dart';
 
 /// Client Invoice Detail Page
 class ClientInvoiceDetailPage extends ConsumerStatefulWidget {
@@ -178,7 +179,7 @@ class _ClientInvoiceDetailPageState
       },
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(16),
+        padding: safePagePadding(context),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

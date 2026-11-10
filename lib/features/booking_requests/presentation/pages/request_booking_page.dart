@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../providers/booking_request_providers.dart';
+import '../../../../shared/presentation/widgets/safe_page_padding.dart';
 
 /// Client's Request Booking Form Page
 class RequestBookingPage extends ConsumerStatefulWidget {
@@ -120,7 +121,7 @@ class _RequestBookingPageState extends ConsumerState<RequestBookingPage> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: safePagePadding(context),
         child: Form(
           key: _formKey,
           child: Column(

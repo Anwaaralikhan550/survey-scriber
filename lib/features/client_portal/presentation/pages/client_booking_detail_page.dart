@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/entities/client_booking.dart';
 import '../providers/client_portal_providers.dart';
+import '../../../../shared/presentation/widgets/safe_page_padding.dart';
 
 /// Client Booking Detail Page
 class ClientBookingDetailPage extends ConsumerWidget {
@@ -146,7 +147,7 @@ class ClientBookingDetailPage extends ConsumerWidget {
     final statusColor = _getStatusColor(colorScheme, booking.status);
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: safePagePadding(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

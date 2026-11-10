@@ -8,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../domain/entities/client_report.dart';
 import '../providers/client_portal_providers.dart';
+import '../../../../shared/presentation/widgets/safe_page_padding.dart';
 
 /// Client Report Detail Page
 class ClientReportDetailPage extends ConsumerWidget {
@@ -101,7 +102,7 @@ class ClientReportDetailPage extends ConsumerWidget {
     ClientReport report,
     WidgetRef ref,
   ) => SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: safePagePadding(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

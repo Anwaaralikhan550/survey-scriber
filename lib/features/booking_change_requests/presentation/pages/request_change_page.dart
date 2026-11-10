@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../domain/entities/booking_change_request.dart';
 import '../providers/booking_change_request_providers.dart';
+import '../../../../shared/presentation/widgets/safe_page_padding.dart';
 
 /// Client's Request Change Form Page
 class RequestChangePage extends ConsumerStatefulWidget {
@@ -173,7 +174,7 @@ class _RequestChangePageState extends ConsumerState<RequestChangePage> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: safePagePadding(context),
         child: Form(
           key: _formKey,
           child: Column(

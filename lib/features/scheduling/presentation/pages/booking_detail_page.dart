@@ -12,6 +12,7 @@ import '../../domain/entities/booking_status.dart';
 import '../providers/scheduling_providers.dart';
 import 'create_booking_page.dart';
 import '../widgets/status_chip.dart';
+import '../../../../shared/presentation/widgets/safe_page_padding.dart';
 
 class BookingDetailPage extends ConsumerWidget {
   const BookingDetailPage({
@@ -143,7 +144,7 @@ class _BookingDetailContent extends ConsumerWidget {
     final dateFormat = DateFormat('EEEE, MMMM d, yyyy');
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: safePagePadding(context),
       children: [
         // Status card
         Card(
