@@ -30,6 +30,18 @@ export class EmailTemplatesService {
     return { appName, year: String(new Date().getFullYear()) };
   }
 
+  /** The server's public address, without a trailing slash: links in emails start with it. */
+  async publicUrl(): Promise<string> {
+    const { publicUrl } = await this.settings.values();
+    return publicUrl.replace(/\/+$/, '');
+  }
+
+  /** Where Contact Us messages go: the support email, else the company email. */
+  async supportAddress(): Promise<string> {
+    const { supportEmail, companyEmail } = await this.settings.values();
+    return supportEmail || companyEmail;
+  }
+
   /** Who an email comes from, and where replies go. The address itself stays the server's. */
   async sender(address: string): Promise<{ from: { name: string; address: string }; replyTo?: string }> {
     const { senderName, supportEmail } = await this.settings.values();

@@ -47,6 +47,10 @@ model User {
   resetPasswordToken     String?   @map("reset_password_token") @db.VarChar(255)
   resetPasswordExpiresAt DateTime? @map("reset_password_expires_at")
 
+  // Sign-up activation: the emailed link carries the token, only its hash is stored.
+  activationTokenHash String?   @map("activation_token_hash") @db.VarChar(255)
+  activationExpiresAt DateTime? @map("activation_expires_at")
+
   // Account lockout fields (OWASP A7: brute-force protection)
   // Added by migration 20260124_h2_account_lockout
   failedLoginAttempts          Int       @default(0) @map("failed_login_attempts")

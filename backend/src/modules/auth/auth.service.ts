@@ -88,17 +88,73 @@ export class AuthService {
         firstName: dto.firstName,
         lastName: dto.lastName,
         role: UserRole.SURVEYOR,
+        emailVerified: false,
       },
     });
 
     // SEC-003: Avoid PII in logs (SOC2 compliance)
     this.logger.log(`User registered: ${user.id}`);
 
+    // Signing in waits for the emailed activation link. A failed send is not fatal:
+    // the next sign-in attempt sends the link again.
+    await this.sendActivation(user);
+
     return {
       id: user.id,
       email: user.email,
       role: user.role,
     };
+  }
+
+  /** The sign-up link stays open for a week. */
+  private readonly ACTIVATION_TOKEN_EXPIRY_MINUTES = 7 * 24 * 60;
+  /** Signing in again sends a fresh link, but not more often than this. */
+  private readonly ACTIVATION_RESEND_AFTER_MINUTES = 5;
+
+  private async sendActivation(user: User): Promise<void> {
+    const plainToken = crypto.randomBytes(32).toString('hex');
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: {
+        activationTokenHash: this.hashToken(plainToken),
+        activationExpiresAt: new Date(Date.now() + this.ACTIVATION_TOKEN_EXPIRY_MINUTES * 60000),
+      },
+    });
+    try {
+      await this.emailService.sendActivationEmail(
+        user.email,
+        user.firstName || 'User',
+        plainToken,
+        user.lastName || '',
+      );
+    } catch (error) {
+      this.logger.error(`Failed to send activation email: ${error}`);
+    }
+  }
+
+  /** True when a link was sent in the last few minutes, so a retry would only pile up emails. */
+  private activationSentRecently(user: User): boolean {
+    if (!user.activationExpiresAt) return false;
+    const sentAt = user.activationExpiresAt.getTime() - this.ACTIVATION_TOKEN_EXPIRY_MINUTES * 60000;
+    return Date.now() - sentAt < this.ACTIVATION_RESEND_AFTER_MINUTES * 60000;
+  }
+
+  /**
+   * The person clicked the link in their sign-up email.
+   * SECURITY: single use, and only the token's hash is stored.
+   */
+  async activateAccount(token: string): Promise<boolean> {
+    if (!token || typeof token !== 'string') return false;
+    const user = await this.prisma.user.findFirst({
+      where: { activationTokenHash: this.hashToken(token), activationExpiresAt: { gte: new Date() } },
+    });
+    if (!user) return false;
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: { emailVerified: true, activationTokenHash: null, activationExpiresAt: null },
+    });
+    this.logger.log(`Account activated: ${user.id}`);
+    return true;
   }
 
   // OWASP A7: Dummy hash used for constant-time login when user not found.
@@ -186,6 +242,14 @@ export class AuthService {
       });
 
       return null;
+    }
+
+    // Right password, but the sign-up link has not been used yet.
+    if (!user.emailVerified) {
+      if (!this.activationSentRecently(user)) await this.sendActivation(user);
+      throw new UnauthorizedException(
+        'Your account is not activated yet. Please click the activation link in the email we sent you. If you cannot find it, we have just sent it again.',
+      );
     }
 
     // Successful login: reset failed attempts and clear any lockout

@@ -11,6 +11,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AdminUsersModule } from './modules/admin-users/admin-users.module';
 import { EmailTemplatesModule } from './modules/email-templates/email-templates.module';
 import { AppSettingsModule } from './modules/app-settings/app-settings.module';
+import { ContactModule } from './modules/contact/contact.module';
 import { SurveysModule } from './modules/surveys/surveys.module';
 import { SectionsModule } from './modules/sections/sections.module';
 import { AnswersModule } from './modules/answers/answers.module';
@@ -88,6 +89,7 @@ import { AiModule } from './modules/ai/ai.module';
     AdminUsersModule,
     EmailTemplatesModule,
     AppSettingsModule,
+    ContactModule,
     SurveysModule,
     SectionsModule,
     AnswersModule,

@@ -51,6 +51,6 @@ import { STORAGE_SERVICE } from '../media/storage/storage.interface';
       useClass: LocalStorageService,
     },
   ],
-  exports: [AuthService, JwtStrategy],
+  exports: [AuthService, JwtStrategy, EmailService],
 })
 export class AuthModule {}

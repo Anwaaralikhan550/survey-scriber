@@ -1067,4 +1067,73 @@ The SurveyScriber Team.`,
       surveyTitle: "Survey title (subject line)",
     },
   },
+  {
+    key: "sign_up",
+    name: "Sign up (activate account)",
+    audience: "Someone who has just signed up in the app",
+    subject: "Activate your {{appName}} account",
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #f5f5f5; color: #333333;">
+  <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; padding: 32px; font-size: 16px; line-height: 1.6;">
+    <p style="margin: 0 0 16px;">Hi {{fullName}},</p>
+    <p style="margin: 0 0 16px;">Thanks for signing up for SurveyScriber. To activate your account, please, click the URL below</p>
+    <p style="margin: 0 0 16px;"><a href="{{activateLink}}" style="color: #1565C0; word-break: break-all;">{{activateLink}}</a></p>
+    <p style="margin: 0;">Thanks<br>{{appName}} Team</p>
+  </div>
+</body>
+</html>`,
+    text: `Hi {{fullName}},
+
+Thanks for signing up for SurveyScriber. To activate your account, please, click the URL below
+
+{{activateLink}}
+
+Thanks
+{{appName}} Team`,
+    placeholders: {
+      fullName: "First and last name",
+      activateLink: "The activation link (secret, works once)",
+      appName: "The app name",
+    },
+  },
+  {
+    key: "contact_us",
+    name: "Contact us",
+    audience: "The support address, when someone uses Contact Us in the app",
+    subject: "Contact Us: {{subject}}",
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #f5f5f5; color: #333333;">
+  <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; padding: 32px; font-size: 16px; line-height: 1.6;">
+    <p style="margin: 0 0 16px;">Hello,</p>
+    <p style="margin: 0 0 16px;">Email: {{email}}<br>Subject: {{subject}}<br><span style="white-space: pre-wrap;">Message: {{message}}</span></p>
+    <p style="margin: 0;">Thanks<br>{{userName}} - {{userId}}</p>
+  </div>
+</body>
+</html>`,
+    text: `Hello,
+
+Email: {{email}}
+Subject: {{subject}}
+Message: {{message}}
+
+Thanks
+{{userName}} - {{userId}}`,
+    placeholders: {
+      email: "The email address the person typed",
+      subject: "The subject the person typed",
+      message: "The message the person typed",
+      userName: "The person's name",
+      userId: "The person's user id",
+    },
+  },
 ];

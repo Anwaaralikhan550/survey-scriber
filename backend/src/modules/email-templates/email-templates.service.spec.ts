@@ -53,7 +53,13 @@ function setup(stored: Record<string, EmailContent> = {}) {
   };
   const audit = { log: jest.fn(async () => undefined) };
   const settings = {
-    values: jest.fn(async () => ({ appName: 'SurveyScriber', senderName: 'SurveyScriber', supportEmail: '' })),
+    values: jest.fn(async () => ({
+      appName: 'SurveyScriber',
+      senderName: 'SurveyScriber',
+      supportEmail: '',
+      companyEmail: 'billing@example.com',
+      publicUrl: 'https://api.example.com/',
+    })),
   };
   const templates = new EmailTemplatesService(prisma as never, config, audit as never, settings as never);
   const sent: any[] = [];
@@ -139,6 +145,39 @@ describe('with no edits, every email is word for word what it was', () => {
     expect(sent[0].attachments[0].filename).toBe('Survey_Report_Oak_Road.pdf');
   });
 
+  it('sign up email: the client wording and a working activation link', async () => {
+    const { auth, sent } = setup();
+    await auth.sendActivationEmail('a@example.com', 'Grace', 'tok123', 'Hill');
+    expect(sent[0].subject).toBe('Activate your SurveyScriber account');
+    expect(sent[0].text).toBe([
+      'Hi Grace Hill,',
+      'Thanks for signing up for SurveyScriber. To activate your account, please, click the URL below',
+      'https://api.example.com/api/v1/auth/activate?token=tok123',
+      'Thanks\nSurveyScriber Team',
+    ].join('\n\n'));
+    expect(sent[0].html).toContain('href="https://api.example.com/api/v1/auth/activate?token=tok123"');
+  });
+
+  it('contact us email: the client wording, and a script typed in it stays text', async () => {
+    const { auth, sent } = setup();
+    await auth.sendContactEmail('support@example.com', {
+      email: 'grace@example.com',
+      subject: 'My report',
+      message: 'Line one\n<script>alert(1)</script>',
+      userName: 'Grace Hill',
+      userId: 'u-1',
+    });
+    expect(sent[0].to).toBe('support@example.com');
+    expect(sent[0].subject).toBe('Contact Us: My report');
+    expect(sent[0].text).toBe([
+      'Hello,',
+      'Email: grace@example.com\nSubject: My report\nMessage: Line one\n<script>alert(1)</script>',
+      'Thanks\nGrace Hill - u-1',
+    ].join('\n\n'));
+    expect(sent[0].html).not.toContain('<script>');
+    expect(sent[0].html).toContain('&lt;script&gt;alert(1)&lt;/script&gt;');
+  });
+
   it('password reset, invitation, client login link', async () => {
     const { auth, magic, sent } = setup();
     await auth.sendPasswordResetEmail('a@example.com', 'Grace', 'abc');
@@ -220,7 +259,7 @@ describe('settings in emails', () => {
     expect(sent[0].from).toEqual({ name: 'SurveyScriber', address: 'noreply@surveyscriber.com' });
     expect(sent[0].replyTo).toBeUndefined();
 
-    settings.values.mockResolvedValue({ appName: 'Acme Surveys', senderName: 'Acme Office', supportEmail: 'help@acme.example' });
+    settings.values.mockResolvedValue({ appName: 'Acme Surveys', senderName: 'Acme Office', supportEmail: 'help@acme.example', companyEmail: 'billing@example.com', publicUrl: 'https://api.example.com' });
     await auth.sendPasswordResetEmail('a@example.com', 'Grace', 'abc');
     await notifications.sendBookingConfirmedEmail(booking);
     await notifications.sendInvoicePaidEmail(invoice);
@@ -240,7 +279,7 @@ describe('saving', () => {
   const good = { subject: t.subject, html: t.html, text: t.text };
 
   it('every email has what it needs', () => {
-    expect(EMAIL_TEMPLATE_DEFAULTS).toHaveLength(12);
+    expect(EMAIL_TEMPLATE_DEFAULTS).toHaveLength(14);
     for (const d of EMAIL_TEMPLATE_DEFAULTS) {
       expect(problemWith({ subject: d.subject, html: d.html, text: d.text }, d)).toBeNull();
       const used = new Set([...placeholdersIn(d.subject), ...placeholdersIn(d.html), ...placeholdersIn(d.text)]);
@@ -280,10 +319,10 @@ describe('saving', () => {
     await expect(templates.get('nope')).rejects.toThrow(NotFoundException);
   });
 
-  it('the list shows all twelve and which are edited', async () => {
+  it('the list shows all fourteen and which are edited', async () => {
     const { templates } = setup({ booking_confirmed: good });
     const list = await templates.list();
-    expect(list).toHaveLength(12);
+    expect(list).toHaveLength(14);
     expect(list.filter((e) => e.edited).map((e) => e.key)).toEqual(['booking_confirmed']);
   });
 

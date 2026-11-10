@@ -13,6 +13,7 @@ export const APP_SETTINGS = [
   { key: 'appName', group: 'General', label: 'App name', env: 'APP_NAME', fallback: 'SurveyScriber', hint: 'Used in the wording of emails.' },
   { key: 'senderName', group: 'General', label: 'Email sender name', env: '', fallback: '', hint: 'The name emails come from. Empty means the app name.' },
   { key: 'supportEmail', group: 'General', label: 'Support email', env: '', fallback: '', type: 'email', hint: 'Replies to emails go here. Empty means replies go to the sending address.' },
+  { key: 'publicUrl', group: 'General', label: 'Public address of the server', env: 'PUBLIC_API_URL', fallback: 'https://portal.surveyscriber.com', hint: 'Account activation links in emails start with this address.' },
   { key: 'companyName', group: 'Company, on invoices', label: 'Company name', env: 'COMPANY_NAME', fallback: 'SurveyScriber Ltd' },
   { key: 'companyAddress1', group: 'Company, on invoices', label: 'Address line 1', env: 'COMPANY_ADDRESS_LINE1', fallback: '123 Business Park' },
   { key: 'companyAddress2', group: 'Company, on invoices', label: 'Address line 2', env: 'COMPANY_ADDRESS_LINE2', fallback: 'London, SW1A 1AA' },

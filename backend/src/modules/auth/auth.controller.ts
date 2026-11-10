@@ -17,6 +17,7 @@ import {
   Res,
   StreamableFile,
   Req,
+  Query,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -55,6 +56,14 @@ interface MulterFile {
   buffer: Buffer;
 }
 
+function activationPage(ok: boolean): string {
+  const title = ok ? 'Your account is activated' : 'This link cannot be used';
+  const text = ok
+    ? 'Thank you. You can now sign in to the SurveyScriber app.'
+    : 'The activation link is not valid any more. Open the SurveyScriber app and sign in: we will email you a new link.';
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title}</title></head><body style="margin:0;padding:48px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f5f5f5;color:#333;"><div style="max-width:480px;margin:0 auto;background:#fff;border-radius:8px;padding:32px;text-align:center;"><h1 style="margin:0 0 16px;font-size:22px;">${title}</h1><p style="margin:0;font-size:16px;line-height:1.6;">${text}</p></div></body></html>`;
+}
+
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
@@ -77,6 +86,24 @@ export class AuthController {
   @ApiResponse({ status: 409, description: 'Email already registered' })
   async register(@Body() dto: RegisterDto): Promise<RegisterResponseDto> {
     return this.authService.register(dto);
+  }
+
+  /**
+   * The link in the sign-up email lands here. It answers with a small page, because
+   * the person opens it in a browser, not in the app.
+   */
+  @Public()
+  @Get('activate')
+  @SkipThrottle()
+  @ApiOperation({ summary: 'Activate an account from the emailed link' })
+  async activate(@Query('token') token: string, @Res() res: Response): Promise<void> {
+    const ok = await this.authService.activateAccount(token);
+    res
+      .status(ok ? HttpStatus.OK : HttpStatus.BAD_REQUEST)
+      .type('html')
+      .setHeader('Cache-Control', 'no-store')
+      .setHeader('Content-Security-Policy', "default-src 'none'; style-src 'unsafe-inline'")
+      .send(activationPage(ok));
   }
 
   @Public()

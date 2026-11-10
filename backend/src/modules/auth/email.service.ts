@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
+import { ApiUrlBuilder } from '../../common/utils/api-url.util';
 import { EmailTemplatesService } from '../email-templates/email-templates.service';
 
 @Injectable()
@@ -9,6 +10,7 @@ export class EmailService {
   private readonly transporter: nodemailer.Transporter;
   private readonly fromAddress: string;
   private readonly frontendUrl: string;
+  private readonly urlBuilder: ApiUrlBuilder;
 
   constructor(
     private readonly configService: ConfigService,
@@ -22,6 +24,7 @@ export class EmailService {
     const pass = this.configService.get<string>('SMTP_PASS');
 
     this.fromAddress = this.configService.get<string>('SMTP_FROM') || 'noreply@surveyscriber.com';
+    this.urlBuilder = new ApiUrlBuilder(configService);
     this.frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3000';
 
     // Create transporter only if SMTP is configured
@@ -64,6 +67,28 @@ export class EmailService {
 
     const { subject, html, text } = await this.templates.render('password_reset', { fullName, resetLink });
 
+    await this.sendEmail(toEmail, subject, html, text);
+  }
+
+  /** The link in the sign-up email. It opens a small page on the server that activates the account. */
+  async sendActivationEmail(
+    toEmail: string,
+    firstName: string,
+    token: string,
+    lastName = '',
+  ): Promise<void> {
+    const activateLink = `${await this.templates.publicUrl()}${this.urlBuilder.build('/auth/activate')}?token=${token}`;
+    const fullName = [firstName, lastName].filter(Boolean).join(' ');
+    const { subject, html, text } = await this.templates.render('sign_up', { fullName, activateLink });
+    await this.sendEmail(toEmail, subject, html, text);
+  }
+
+  /** What someone typed in Contact Us, sent to the support address. */
+  async sendContactEmail(
+    toEmail: string,
+    details: { email: string; subject: string; message: string; userName: string; userId: string },
+  ): Promise<void> {
+    const { subject, html, text } = await this.templates.render('contact_us', details);
     await this.sendEmail(toEmail, subject, html, text);
   }
 

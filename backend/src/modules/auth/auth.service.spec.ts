@@ -27,7 +27,7 @@ describe('AuthService', () => {
     phone: null,
     organization: null,
     avatarUrl: null,
-    emailVerified: false,
+    emailVerified: true,
     role: UserRole.SURVEYOR,
     isActive: true,
     createdAt: new Date('2024-01-01'),
@@ -35,6 +35,8 @@ describe('AuthService', () => {
     lastLoginAt: null,
     resetPasswordToken: null,
     resetPasswordExpiresAt: null,
+    activationTokenHash: null,
+    activationExpiresAt: null,
     failedLoginAttempts: 0,
     failedLoginWindowStartedAt: null,
     lockedUntil: null,
@@ -43,6 +45,7 @@ describe('AuthService', () => {
   const mockPrismaService = {
     user: {
       findUnique: jest.fn(),
+      findFirst: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
     },
@@ -66,6 +69,7 @@ describe('AuthService', () => {
   const mockEmailService = {
     sendPasswordResetEmail: jest.fn(),
     sendWelcomeEmail: jest.fn(),
+    sendActivationEmail: jest.fn(),
   };
 
   const mockStorageService = {
@@ -134,6 +138,37 @@ describe('AuthService', () => {
       expect(mockPrismaService.user.create).toHaveBeenCalled();
     });
 
+    it('creates the account not activated and emails the activation link', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue(null);
+      (bcrypt.hash as jest.Mock).mockResolvedValue('hashed-password');
+      mockPrismaService.user.create.mockResolvedValue({ ...mockUser, emailVerified: false });
+      mockPrismaService.user.update.mockResolvedValue(mockUser);
+
+      await service.register({ email: 'test@example.com', password: 'password123', firstName: 'Test', lastName: 'User' });
+
+      expect(mockPrismaService.user.create).toHaveBeenCalledWith({
+        data: expect.objectContaining({ emailVerified: false }),
+      });
+      const stored = mockPrismaService.user.update.mock.calls[0][0].data;
+      expect(stored.activationTokenHash).toMatch(/^[0-9a-f]{64}$/);
+      expect(stored.activationExpiresAt.getTime()).toBeGreaterThan(Date.now() + 6 * 24 * 3600 * 1000);
+      const [to, first, token, last] = mockEmailService.sendActivationEmail.mock.calls[0];
+      expect([to, first, last]).toEqual(['test@example.com', 'Test', 'User']);
+      expect(token).toMatch(/^[0-9a-f]{64}$/);
+    });
+
+    it('still registers when the activation email cannot be sent', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue(null);
+      (bcrypt.hash as jest.Mock).mockResolvedValue('hashed-password');
+      mockPrismaService.user.create.mockResolvedValue({ ...mockUser, emailVerified: false });
+      mockPrismaService.user.update.mockResolvedValue(mockUser);
+      mockEmailService.sendActivationEmail.mockRejectedValueOnce(new Error('smtp down'));
+
+      await expect(
+        service.register({ email: 'test@example.com', password: 'password123', firstName: 'Test', lastName: 'User' }),
+      ).resolves.toEqual({ id: mockUser.id, email: mockUser.email, role: mockUser.role });
+    });
+
     it('returns the existing registration response without creating a duplicate user', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
 
@@ -153,6 +188,30 @@ describe('AuthService', () => {
     });
   });
 
+  describe('activateAccount', () => {
+    it('activates with a valid link, once', async () => {
+      mockPrismaService.user.findFirst.mockResolvedValueOnce({ ...mockUser, emailVerified: false });
+      mockPrismaService.user.update.mockResolvedValue(mockUser);
+
+      await expect(service.activateAccount('a'.repeat(64))).resolves.toBe(true);
+      expect(mockPrismaService.user.update).toHaveBeenCalledWith({
+        where: { id: mockUser.id },
+        data: { emailVerified: true, activationTokenHash: null, activationExpiresAt: null },
+      });
+      const lookup = mockPrismaService.user.findFirst.mock.calls[0][0].where;
+      expect(lookup.activationTokenHash).toMatch(/^[0-9a-f]{64}$/);
+      expect(lookup.activationTokenHash).not.toBe('a'.repeat(64));
+      expect(lookup.activationExpiresAt.gte).toBeInstanceOf(Date);
+    });
+
+    it('refuses an unknown, used or expired link, and an empty one', async () => {
+      mockPrismaService.user.findFirst.mockResolvedValue(null);
+      await expect(service.activateAccount('b'.repeat(64))).resolves.toBe(false);
+      await expect(service.activateAccount('')).resolves.toBe(false);
+      expect(mockPrismaService.user.update).not.toHaveBeenCalled();
+    });
+  });
+
   describe('validateUser', () => {
     it('should return user without password if credentials are valid', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
@@ -164,6 +223,33 @@ describe('AuthService', () => {
       expect(result).toBeDefined();
       expect(result?.email).toBe(mockUser.email);
       expect((result as Record<string, unknown>)?.passwordHash).toBeUndefined();
+    });
+
+    it('blocks an account that is not activated, and sends the link again', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue({ ...mockUser, emailVerified: false });
+      mockPrismaService.user.update.mockResolvedValue(mockUser);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+
+      await expect(service.validateUser('test@example.com', 'password123')).rejects.toThrow(/not activated/);
+      expect(mockEmailService.sendActivationEmail).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not send the link again within five minutes', async () => {
+      const sentNow = new Date(Date.now() + 7 * 24 * 3600 * 1000 - 60_000);
+      mockPrismaService.user.findUnique.mockResolvedValue({ ...mockUser, emailVerified: false, activationExpiresAt: sentNow });
+      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+
+      await expect(service.validateUser('test@example.com', 'password123')).rejects.toThrow(/not activated/);
+      expect(mockEmailService.sendActivationEmail).not.toHaveBeenCalled();
+    });
+
+    it('a wrong password on a not activated account tells nothing and sends nothing', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue({ ...mockUser, emailVerified: false });
+      mockPrismaService.user.update.mockResolvedValue(mockUser);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(false);
+
+      await expect(service.validateUser('test@example.com', 'wrong')).resolves.toBeNull();
+      expect(mockEmailService.sendActivationEmail).not.toHaveBeenCalled();
     });
 
     it('should return null if user not found', async () => {
