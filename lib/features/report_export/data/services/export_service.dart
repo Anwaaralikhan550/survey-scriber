@@ -97,8 +97,13 @@ class ExportService {
         stage: 'Loading', percent: 0.05, message: 'Loading survey data...'));
 
     final rawData = await dataService.loadValuationData(surveyId);
-    final validationErrors =
-        ValuationAnswerValidator.validateSurvey(rawData.allAnswers);
+    final validationErrors = ValuationAnswerValidator.validateSurvey(
+      rawData.allAnswers,
+      titles: {
+        for (final section in rawData.tree.sections)
+          for (final node in section.nodes) node.id: node.title,
+      },
+    );
     if (validationErrors.isNotEmpty) {
       throw ValuationReportValidationException(validationErrors);
     }

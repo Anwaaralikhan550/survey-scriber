@@ -245,6 +245,18 @@ class _ExportDialogState extends ConsumerState<ExportDialog> {
       ];
     }
 
+    if (state.hasError && !state.canRetry) {
+      return [
+        FilledButton(
+          onPressed: () {
+            ref.read(exportProvider.notifier).reset();
+            Navigator.of(context).pop();
+          },
+          child: const Text('Close'),
+        ),
+      ];
+    }
+
     if (state.hasError) {
       return [
         TextButton(

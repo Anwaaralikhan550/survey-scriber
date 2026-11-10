@@ -78,12 +78,18 @@ class ValuationAnswerValidator {
     return errors;
   }
 
+  /// All screens' errors. With [titles] (screen id -> screen title) each
+  /// error names the screen to open, e.g. "Road: Select one road surface...".
   static List<String> validateSurvey(
-    Map<String, Map<String, String>> answersByScreen,
-  ) {
+    Map<String, Map<String, String>> answersByScreen, {
+    Map<String, String> titles = const {},
+  }) {
     final errors = <String>[];
     for (final entry in answersByScreen.entries) {
-      errors.addAll(validateScreen(entry.key, entry.value));
+      final title = titles[entry.key];
+      for (final error in validateScreen(entry.key, entry.value)) {
+        errors.add(title == null || title.isEmpty ? error : '$title: $error');
+      }
     }
     return errors;
   }

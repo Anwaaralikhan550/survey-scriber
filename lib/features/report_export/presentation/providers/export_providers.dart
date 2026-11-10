@@ -61,12 +61,16 @@ class ExportState {
     this.progress,
     this.result,
     this.errorMessage,
+    this.canRetry = true,
   });
 
   final bool isExporting;
   final ExportProgress? progress;
   final ExportResult? result;
   final String? errorMessage;
+
+  /// False when exporting again cannot help (answers must be corrected first).
+  final bool canRetry;
 
   bool get hasError => errorMessage != null;
   bool get isComplete => result != null;
@@ -171,7 +175,8 @@ class ExportNotifier extends StateNotifier<ExportState> {
       AppLogger.e('Export', 'Export failed: $e');
       final hint = e.toString();
       final message = e is ValuationReportValidationException
-          ? 'Please correct these answers first:\n${e.errors.join('\n')}'
+          ? 'Please correct these answers first:\n${e.errors.join('\n')}\n\n'
+              'Open each screen named above, correct it, then export again.'
           : hint.contains("won't fit") || hint.contains('exceed a page')
               ? 'Report content too large for a single page. '
                   'Please try reducing AI narrative length or splitting sections.'
@@ -185,7 +190,10 @@ class ExportNotifier extends StateNotifier<ExportState> {
                       : hint.contains('No space') || hint.contains('storage')
                           ? 'Not enough storage space to generate the report.'
                           : 'Failed to export report. Please try again.';
-      _setState(ExportState(errorMessage: message));
+      _setState(ExportState(
+        errorMessage: message,
+        canRetry: e is! ValuationReportValidationException,
+      ));
       return null;
     } finally {
       // Guarantee loading state is reset even if _setState was skipped
