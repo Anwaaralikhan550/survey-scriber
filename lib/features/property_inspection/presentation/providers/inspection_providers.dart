@@ -22,6 +22,7 @@ import '../../domain/field_phrase_processor.dart';
 import '../../domain/models/inspection_models.dart';
 import '../../domain/inspection_phrase_engine.dart';
 import '../../domain/option_labels.dart';
+import '../../../surveys/presentation/providers/survey_detail_provider.dart';
 
 final inspectionRepositoryProvider = Provider<InspectionRepository>((ref) {
   final db = ref.watch(appDatabaseProvider);
@@ -558,6 +559,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
         );
         if (!wasCompleted) {
           _ref.read(inspectionRefreshProvider.notifier).state++;
+          refreshSurveyProgress(_ref, _surveyId);
         }
         final currentMeta = state.screenMeta;
         if (currentMeta != null && !currentMeta.isCompleted) {
@@ -608,6 +610,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       // badge counts + section-page checkmarks) and
       // inspectionConditionSummaryProvider refetch from the database.
       _ref.read(inspectionRefreshProvider.notifier).state++;
+      refreshSurveyProgress(_ref, _surveyId);
 
       return true;
     } catch (e) {
@@ -2500,6 +2503,7 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
       await _queueAnswersForSync();
 
       _ref.read(inspectionRefreshProvider.notifier).state++;
+      refreshSurveyProgress(_ref, _surveyId);
       state = state.copyWith(isSaving: false, errorMessage: null);
       return true;
     } catch (e) {

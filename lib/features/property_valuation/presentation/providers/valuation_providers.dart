@@ -22,6 +22,7 @@ import '../../../surveys/presentation/providers/survey_lifecycle.dart';
 import '../../domain/valuation_phrase_engine.dart';
 import '../../../property_inspection/domain/option_labels.dart';
 import '../../../property_inspection/domain/models/inspection_models.dart';
+import '../../../surveys/presentation/providers/survey_detail_provider.dart';
 
 final valuationRepositoryProvider = Provider<ValuationRepository>((ref) {
   final db = ref.watch(appDatabaseProvider);
@@ -294,6 +295,7 @@ class ValuationScreenNotifier extends StateNotifier<ValuationScreenState> {
       // Bump the refresh counter so that valuationNodesProvider (overview
       // badge counts + section-page checkmarks) refetches from the database.
       _ref.read(valuationRefreshProvider.notifier).state++;
+      refreshSurveyProgress(_ref, _surveyId);
 
       return true;
     } catch (e) {

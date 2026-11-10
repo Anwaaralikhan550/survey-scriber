@@ -205,3 +205,11 @@ final surveyDetailProvider = StateNotifierProvider.autoDispose
     return SurveyDetailNotifier(repository, surveyId, ref);
   },
 );
+
+/// Re-reads the survey's completed-section counts for an open overview page
+/// (its progress ring), after a screen was marked complete. Does nothing when
+/// no page is showing that survey.
+void refreshSurveyProgress(Ref ref, String surveyId) {
+  if (!ref.exists(surveyDetailProvider(surveyId))) return;
+  ref.read(surveyDetailProvider(surveyId).notifier).refresh();
+}
