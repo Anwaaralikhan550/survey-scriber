@@ -1579,7 +1579,7 @@
         },
         {
           "id": "activity_property_private_road",
-          "title": "Private Road",
+          "title": "Road",
           "type": "screen",
           "parentId": null,
           "order": 28,
@@ -2335,7 +2335,7 @@
             },
             {
               "id": "actv_j2_slope",
-              "label": "Slope (J2 Risk to grounds)",
+              "label": "Slope Gradient (J2 Risk to grounds)",
               "type": "dropdown",
               "options": [
                 "Gently",
@@ -10641,7 +10641,7 @@
             },
             {
               "id": "actv_ia_outcome",
-              "label": "Outcome",
+              "label": "Condition",
               "type": "dropdown",
               "options": [
                 "No defects noted",
@@ -21106,7 +21106,7 @@
         },
         {
           "id": "activity_outside_property_porch_open_to_building",
-          "title": "Open to building",
+          "title": "Building joint defects",
           "type": "screen",
           "parentId": "group_conservatory_28",
           "order": 15,
@@ -21120,7 +21120,7 @@
         },
         {
           "id": "activity_outside_property_porch_open_to_building__open_to_building",
-          "title": "Open to building",
+          "title": "Building joint defects",
           "type": "screen",
           "parentId": "group_porches_29",
           "order": 15,

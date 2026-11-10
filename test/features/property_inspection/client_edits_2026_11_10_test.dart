@@ -234,6 +234,27 @@ void main() {
     expect(rating.inlinePosition, 'header');
   });
 
+  test('D1 D4 D8 D10 renamed tiles and labels', () {
+    final tree = InspectionTreePayload.fromJson(
+      File('assets/property_inspection/inspection_tree.json').readAsStringSync(),
+    );
+    final nodes = {
+      for (final s in tree.sections)
+        for (final n in s.nodes) n.id: n,
+    };
+    String label(String screen, String field) =>
+        nodes[screen]!.fields.firstWhere((f) => f.id == field).label;
+    expect(nodes['activity_property_private_road']!.title, 'Road');
+    expect(nodes['activity_grounds_other_private_road']!.title, 'Private Road'); // H2: really a private road
+    expect(nodes['activity_outside_property_porch_open_to_building']!.title, 'Building joint defects');
+    expect(nodes['activity_outside_property_porch_open_to_building__open_to_building']!.title, 'Building joint defects');
+    final slope = nodes.values
+        .expand((n) => n.fields)
+        .firstWhere((f) => f.id == 'actv_j2_slope');
+    expect(slope.label, 'Slope Gradient (J2 Risk to grounds)');
+    expect(label('activity_in_side_property_wap_removed_wall', 'actv_ia_outcome'), 'Condition');
+  });
+
   test('A8 Garden condition talks about the garden, not the garage', () {
     final out = engine.buildPhrases(
       'activity_grounds_other_front_garden',
