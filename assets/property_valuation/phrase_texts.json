@@ -9,7 +9,7 @@
   "templates": {
     "VAL_DRAFT_0001": {
       "screenId": "*",
-      "text": "A careful examination was made of all accessible wall surfaces for evidence of structural movement, including cracking, distortion, bulging, or displacement of masonry. Evidence of building movement was noted: none. So far as can be seen from this single inspection, the movement appears to be generally consistent with properties of this age and type of construction.",
+      "text": "A careful examination was made of all accessible wall surfaces for evidence of structural movement, including cracking, distortion, bulging, or displacement of masonry.",
       "allowedTokens": []
     },
     "VAL_DRAFT_0002": {

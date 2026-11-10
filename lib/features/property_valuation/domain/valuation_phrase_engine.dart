@@ -1198,7 +1198,13 @@ class ValuationPhraseEngine {
     }
 
     final movement = _say(answers, 'actv_building_movement');
-    if (movement.isNotEmpty) {
+    if (movement.toLowerCase() == 'none') {
+      // "Evidence of building movement was noted: none ... the movement
+      // appears consistent" contradicted itself; keep the examination only.
+      phrases.add(
+          'A careful examination was made of all accessible wall surfaces for evidence of structural movement, '
+          'including cracking, distortion, bulging, or displacement of masonry.');
+    } else if (movement.isNotEmpty) {
       phrases.add(
           'A careful examination was made of all accessible wall surfaces for evidence of structural movement, '
           'including cracking, distortion, bulging, or displacement of masonry. '

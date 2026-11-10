@@ -15,6 +15,17 @@ void main() {
     );
   });
 
+  test('C6 Building movement None does not claim movement was noted', () {
+    final none = engine.buildPhrases('val_walls_type', {'actv_building_movement': 'None'}).join(' ');
+    expect(none, contains('A careful examination was made of all accessible wall surfaces'));
+    expect(none, isNot(contains('movement was noted')));
+    expect(none, isNot(contains('the movement appears')));
+    final found = engine
+        .buildPhrases('val_walls_type', {'actv_building_movement': 'Structural Movement'})
+        .join(' ');
+    expect(found, contains('Evidence of building movement was noted: structural movement.'));
+  });
+
   group('A4 "Other" in a dropdown has a text box, and the typed words print', () {
     test('every valuation dropdown with Other has its text box', () {
       final tree = jsonDecode(File('assets/property_valuation/valuation_tree.json').readAsStringSync())
