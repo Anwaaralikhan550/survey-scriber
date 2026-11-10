@@ -11,6 +11,7 @@ import '../../../../core/utils/logger.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
 import 'pdf_shared_utils.dart';
+import 'report_image.dart';
 
 /// Generates DOCX files from [ReportDocument] using pure Dart XML +
 /// the `archive` package for ZIP compression.
@@ -1134,6 +1135,46 @@ class DocxGeneratorService {
   static const _photoHeightEmu = 3375000; // ~3.69 inches (4:3)
   static const _sigWidthEmu = 1800000; // ~1.97 inches
   static const _sigHeightEmu = 750000; // ~0.82 inches
+
+  /// Embeds an image upright (camera orientation applied) and sized to fit
+  /// [boxEmu] without changing its shape (client file 3, 10 Nov 2026: photos
+  /// were forced into a 4:3 landscape box). Falls back to the original bytes
+  /// in the full box when they cannot be decoded.
+  Future<_DocxImageRef> _imageRef(
+    Uint8List bytes, {
+    required String relId,
+    required int imageIdx,
+    required (int, int) maxPixels,
+    required (int, int) boxEmu,
+  }) async {
+    final upright = await uprightImageWithin(
+      bytes,
+      maxWidth: maxPixels.$1,
+      maxHeight: maxPixels.$2,
+    );
+    if (upright == null) {
+      final ext = _detectImageFormat(bytes);
+      return _DocxImageRef(
+        relId: relId,
+        mediaPath: 'media/image$imageIdx.$ext',
+        bytes: bytes,
+        extension: ext,
+        contentType: ext == 'png' ? 'image/png' : 'image/jpeg',
+        widthEmu: boxEmu.$1,
+        heightEmu: boxEmu.$2,
+      );
+    }
+    final size = upright.fitInto(boxEmu.$1.toDouble(), boxEmu.$2.toDouble());
+    return _DocxImageRef(
+      relId: relId,
+      mediaPath: 'media/image$imageIdx.png',
+      bytes: upright.bytes,
+      extension: 'png',
+      contentType: 'image/png',
+      widthEmu: size.width.round(),
+      heightEmu: size.height.round(),
+    );
+  }
   static const _maxDocxPhotos = 100;
 
   /// Pre-load signature and photo images from disk into byte arrays.
@@ -1175,16 +1216,12 @@ class DocxGeneratorService {
         final file = File(sig.filePath);
         if (!await file.exists()) continue;
         try {
-          final bytes = await file.readAsBytes();
-          final ext = _detectImageFormat(bytes);
-          final ref = _DocxImageRef(
+          final ref = await _imageRef(
+            await file.readAsBytes(),
             relId: 'rId$relIdx',
-            mediaPath: 'media/image$imageIdx.$ext',
-            bytes: bytes,
-            extension: ext,
-            contentType: ext == 'png' ? 'image/png' : 'image/jpeg',
-            widthEmu: _sigWidthEmu,
-            heightEmu: _sigHeightEmu,
+            imageIdx: imageIdx,
+            maxPixels: (900, 375),
+            boxEmu: (_sigWidthEmu, _sigHeightEmu),
           );
           allImages.add(ref);
           sigLookup[sig.filePath] = ref;
@@ -1208,16 +1245,12 @@ class DocxGeneratorService {
         final file = File(path);
         if (!await file.exists()) continue;
         try {
-          final bytes = await file.readAsBytes();
-          final ext = _detectImageFormat(bytes);
-          final ref = _DocxImageRef(
+          final ref = await _imageRef(
+            await file.readAsBytes(),
             relId: 'rId$relIdx',
-            mediaPath: 'media/image$imageIdx.$ext',
-            bytes: bytes,
-            extension: ext,
-            contentType: ext == 'png' ? 'image/png' : 'image/jpeg',
-            widthEmu: _photoWidthEmu,
-            heightEmu: _photoHeightEmu,
+            imageIdx: imageIdx,
+            maxPixels: (1600, 1600),
+            boxEmu: (_photoWidthEmu, _photoHeightEmu),
           );
           allImages.add(ref);
           photoImages.add(ref);

@@ -252,16 +252,37 @@ class SignaturePreviewService {
   }) async {
     final previewPath = getPreviewPath(signatureId);
 
-    // Create picture recorder
+    // Crop to the ink (plus [padding]) and draw it at 3x, so the signature
+    // is sharp and sits centred in the report box (client file 3,
+    // 10 Nov 2026: it was blurred and off-centre).
+    const scale = 3.0;
+    final drawn = strokes.where((s) => s.points.isNotEmpty).toList();
+    var bounds = Rect.fromLTWH(0, 0, canvasSize.width, canvasSize.height);
+    if (drawn.isNotEmpty) {
+      var widest = 0.0;
+      var left = double.infinity, top = double.infinity;
+      var right = -double.infinity, bottom = -double.infinity;
+      for (final stroke in drawn) {
+        if (stroke.strokeWidth > widest) widest = stroke.strokeWidth;
+        for (final p in stroke.points) {
+          if (p.x < left) left = p.x;
+          if (p.y < top) top = p.y;
+          if (p.x > right) right = p.x;
+          if (p.y > bottom) bottom = p.y;
+        }
+      }
+      bounds = Rect.fromLTRB(left, top, right, bottom)
+          .inflate(widest / 2 + padding);
+    }
+
     final recorder = ui.PictureRecorder();
-    final canvas = Canvas(recorder);
+    final canvas = Canvas(recorder)
+      ..scale(scale)
+      ..translate(-bounds.left, -bounds.top);
 
     // Draw background
     final bgPaint = Paint()..color = backgroundColor;
-    canvas.drawRect(
-      Rect.fromLTWH(0, 0, canvasSize.width, canvasSize.height),
-      bgPaint,
-    );
+    canvas.drawRect(bounds, bgPaint);
 
     // Draw strokes
     for (final stroke in strokes) {
@@ -287,8 +308,8 @@ class SignaturePreviewService {
     // Create image
     final picture = recorder.endRecording();
     final image = await picture.toImage(
-      canvasSize.width.toInt(),
-      canvasSize.height.toInt(),
+      (bounds.width * scale).ceil(),
+      (bounds.height * scale).ceil(),
     );
 
     // Convert to PNG bytes

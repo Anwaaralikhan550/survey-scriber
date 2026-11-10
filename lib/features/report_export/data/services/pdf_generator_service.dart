@@ -12,6 +12,7 @@ import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
 import 'client_paragraph_rules.dart';
 import 'pdf_shared_utils.dart';
+import 'report_image.dart';
 
 // ═══════════════════════════════════════════════════════════════════════
 //  C1 FIX — Image compression constants
@@ -23,8 +24,9 @@ import 'pdf_shared_utils.dart';
 // ═══════════════════════════════════════════════════════════════════════
 const _photoTargetWidth = 460;
 const _photoTargetHeight = 360;
-const _sigTargetWidth = 240;
-const _sigTargetHeight = 100;
+// Three times the 120 x 50 pt signature box, so the ink stays sharp.
+const _sigTargetWidth = 720;
+const _sigTargetHeight = 300;
 
 /// Maximum images to decompress concurrently during pre-loading.
 const _imageBatchSize = 5;
@@ -962,52 +964,20 @@ class PdfGeneratorService {
     return cache;
   }
 
-  /// Resize an image to fit within [maxWidth]×[maxHeight] using the
-  /// platform's hardware-accelerated image codec.
-  ///
-  /// [instantiateImageCodec] performs sub-sample decoding for JPEG: it
-  /// reads the file header and decodes directly at the reduced resolution
-  /// in a single pass, so it's both fast and memory-efficient.
-  ///
-  /// Returns PNG-encoded bytes of the resized image, or the original
-  /// bytes if the image is already small enough or decoding fails.
+  /// Shrinks an image to fit within [maxWidth] x [maxHeight] keeping its
+  /// shape and the camera's orientation (PNG). Returns the original bytes
+  /// when they cannot be decoded.
   static Future<Uint8List> _compressImageForPdf(
     Uint8List inputBytes, {
     required int maxWidth,
     required int maxHeight,
   }) async {
-    try {
-      final codec = await ui.instantiateImageCodec(
-        inputBytes,
-        targetWidth: maxWidth,
-        targetHeight: maxHeight,
-      );
-      final frame = await codec.getNextFrame();
-      final image = frame.image;
-
-      // instantiateImageCodec never upscales.  If the decoded image is
-      // smaller than the target on both axes, the original was already
-      // within bounds — return the original bytes which are likely JPEG
-      // (more compact than the PNG we would produce).
-      if (image.width < maxWidth && image.height < maxHeight) {
-        image.dispose();
-        codec.dispose();
-        return inputBytes;
-      }
-
-      // Re-encode the resized image as PNG.  The pdf library decodes
-      // both JPEG and PNG to raw RGBA, so the on-disk format only
-      // affects transfer size, not in-memory pixel count.
-      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      image.dispose();
-      codec.dispose();
-      if (byteData != null) {
-        return byteData.buffer.asUint8List();
-      }
-    } catch (_) {
-      // Fall back to original bytes — still works, just uses more memory
-    }
-    return inputBytes;
+    final image = await uprightImageWithin(
+      inputBytes,
+      maxWidth: maxWidth,
+      maxHeight: maxHeight,
+    );
+    return image?.bytes ?? inputBytes;
   }
 
   // ═══════════════════════════════════════════════════════════════════
