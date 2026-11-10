@@ -7,7 +7,7 @@
 (function () {
   const TL = window.TreeLogic;
   const PAGE_SIZE = 20;
-  const view = { box: null, list: null, bar: null, query: '', page: 1, changedOnly: false };
+  const view = { box: null, list: null, bar: null, query: '', page: 1, changedOnly: false, kind: 'dropdowns' };
 
   const data = () => SS.treeData.store;
 
@@ -101,7 +101,70 @@
     ]);
   }
 
+  function tickRow(entry, field) {
+    const input = SS.el('input', 'option-input');
+    input.type = 'text';
+    input.value = field.label;
+    input.maxLength = 200;
+    input.setAttribute('aria-label', 'Text for tick box ' + field.label);
+    const notes = SS.el('div', 'option-notes');
+    const original = data().original ? originalLabels().get(entry.screenId + '/' + field.id) : undefined;
+    function showNotes() {
+      const empty = !input.value.trim();
+      const items = [];
+      if (empty) items.push(SS.el('span', 'alert err', 'The tick box needs text.'));
+      else if (original !== undefined && original !== field.label) items.push(SS.el('span', 'muted', 'Original: ' + original));
+      notes.replaceChildren(...items);
+    }
+    showNotes();
+    input.addEventListener('input', () => {
+      field.label = input.value;
+      showNotes();
+      view.bar.update();
+    });
+    return SS.el('div', 'option-row', [input, notes]);
+  }
+
+  let originalCache = null;
+  function originalLabels() {
+    if (!originalCache || originalCache.source !== data().original) {
+      const map = new Map();
+      for (const e of TL.tickLists(data().original)) for (const f of e.ticks) map.set(e.screenId + '/' + f.id, f.label);
+      originalCache = { source: data().original, map };
+    }
+    return originalCache.map;
+  }
+
+  function tickCard(entry) {
+    return SS.el('div', 'card option-card', [
+      SS.el('div', 'option-path muted', entry.path),
+      SS.el('h3', '', entry.title + ' (tick boxes)'),
+      ...entry.ticks.map((f) => tickRow(entry, f)),
+    ]);
+  }
+
+  function renderTicks() {
+    const was = view.changedOnly ? originalLabels() : null;
+    const all = TL.tickLists(data().tree).filter((e) => TL.matchesTicks(e, view.query)
+      && (!was || e.ticks.some((f) => was.get(e.screenId + '/' + f.id) !== f.label)));
+    const pages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+    if (view.page > pages) view.page = pages;
+    const shown = all.slice((view.page - 1) * PAGE_SIZE, view.page * PAGE_SIZE);
+    if (all.length === 0) {
+      view.list.replaceChildren(SS.emptyBox(
+        view.changedOnly ? 'No changes yet' : 'No tick boxes match',
+        view.changedOnly ? 'Tick boxes you change will show here.' : 'Try another word.',
+      ));
+      return;
+    }
+    view.list.replaceChildren(
+      ...shown.map(tickCard),
+      SS.pager(view.page, PAGE_SIZE, all.length, (p) => { view.page = p; renderList(); document.getElementById('pageView').scrollTop = 0; }),
+    );
+  }
+
   function renderList() {
+    if (view.kind === 'ticks') { renderTicks(); return; }
     const original = new Map(view.changedOnly
       ? TL.dropdowns(data().original).map((e) => [e.screenId + '/' + e.field.id, JSON.stringify(e.field)])
       : []);
@@ -132,9 +195,10 @@
     }
     view.page = 1;
     view.changedOnly = false; // a fresh load has no changes to show
+    originalCache = null;
     view.bar = SS.treeData.statusBar(open);
     view.list = SS.el('div', 'option-list');
-    const search = SS.searchBox('Search a screen, list or option', view.query, (q) => {
+    const search = SS.searchBox('Search a screen, list, tick box or option', view.query, (q) => {
       view.query = q;
       view.page = 1;
       renderList();
@@ -143,9 +207,26 @@
     changed.type = 'checkbox';
     changed.checked = view.changedOnly;
     changed.addEventListener('change', () => { view.changedOnly = changed.checked; view.page = 1; renderList(); });
+    const intro = SS.el('p', 'muted page-intro');
+    const kinds = SS.el('div', 'toolbar');
+    function showKind() {
+      intro.textContent = view.kind === 'ticks'
+        ? 'The words next to every tick box in the survey. Some ticks print a fixed written sentence in the report; renaming a tick changes the words in the app, not that sentence. To change a sentence, use Phrases.'
+        : 'The text people pick from in the survey. New words also print in the report. Surveys already filled in keep their answers and show the new words.';
+      kinds.replaceChildren(
+        ...[['dropdowns', 'Dropdown lists'], ['ticks', 'Tick boxes']].map(([k, text]) => {
+          const b = SS.button(text, () => { view.kind = k; view.page = 1; showKind(); renderList(); });
+          b.setAttribute('aria-pressed', String(view.kind === k));
+          if (view.kind === k) b.classList.add('active');
+          return b;
+        }),
+      );
+    }
+    showKind();
     view.box.replaceChildren(
       view.bar,
-      SS.el('p', 'muted page-intro', 'The text people pick from in the survey. New words also print in the report. Surveys already filled in keep their answers and show the new words.'),
+      intro,
+      kinds,
       SS.el('div', 'toolbar', [search, SS.el('label', 'check-label', [changed, SS.el('span', '', 'Show only what I changed')])]),
       view.list,
     );

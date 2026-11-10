@@ -53,6 +53,23 @@
     return out;
   }
 
+  /** Screens that have tick boxes: the words next to each box are text options too. */
+  function tickLists(tree) {
+    const index = indexOf(tree);
+    const out = [];
+    for (const node of nodesOf(tree)) {
+      const ticks = (node.fields || []).filter((f) => f.type === 'checkbox');
+      if (ticks.length) out.push({ screenId: node.id, path: pathOf(tree, node.id, index), title: node.title, ticks });
+    }
+    return out;
+  }
+
+  function matchesTicks(entry, query) {
+    const q = String(query || '').trim().toLowerCase();
+    if (!q) return true;
+    return entry.path.toLowerCase().includes(q) || entry.ticks.some((f) => String(f.label || '').toLowerCase().includes(q));
+  }
+
   const wordsOf = (field, value) => (
     field.optionLabels && Object.prototype.hasOwnProperty.call(field.optionLabels, value)
       ? field.optionLabels[value]
@@ -413,7 +430,7 @@
     !!(rules && rules[screenId] && rules[screenId][fieldId]);
 
   return {
-    TREE_TYPE, FIELD_TYPES, clone, nodesOf, pathOf, dropdowns, wordsOf, isHidden, matches, rename, setHidden,
+    TREE_TYPE, FIELD_TYPES, clone, nodesOf, pathOf, dropdowns, tickLists, matchesTicks, wordsOf, isHidden, matches, rename, setHidden,
     addOption, problemWith, problems, treeChanges, sameTree, pickedSentence, fieldPicksSentences,
     stats, rowsOf, addNode, descendantIds, removeNode, splitOptions, conditionKeys, placeholdersIn,
     dependentsOf, fieldProblem, treeProblems, applyField, newField, searchNodes,

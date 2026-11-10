@@ -75,6 +75,30 @@ test('dropdowns are found with where they live', () => {
   assert.strictEqual(list[0].field.id, 'd');
 });
 
+test('tick boxes are listed per screen, and found by search', () => {
+  const tree = sampleTree();
+  tree.sections[0].nodes[1].fields.push({ id: 'cb1', label: 'Cracked', type: 'checkbox' });
+  const list = TL.tickLists(tree);
+  assert.strictEqual(list.length, 1);
+  assert.strictEqual(list[0].path, 'Outside Property > Chimney > Repairs');
+  assert.deepStrictEqual(list[0].ticks.map((f) => f.label), ['Cracked']);
+  assert.ok(TL.matchesTicks(list[0], 'crack'));
+  assert.ok(TL.matchesTicks(list[0], 'chimney'));
+  assert.ok(!TL.matchesTicks(list[0], 'roof'));
+});
+
+test('both real trees: every tick box is listed and a rename shows in the changes', () => {
+  for (const file of ['assets/property_inspection/inspection_tree.json', 'assets/property_valuation/valuation_tree.json']) {
+    const tree = load(file);
+    const all = TL.nodesOf(tree).flatMap((n) => n.fields || []).filter((f) => f.type === 'checkbox');
+    assert.strictEqual(TL.tickLists(tree).flatMap((e) => e.ticks).length, all.length);
+    const edited = TL.clone(tree);
+    TL.tickLists(edited)[0].ticks[0].label = 'Renamed tick';
+    assert.ok(TL.treeChanges(tree, edited).some((c) => c.what.includes('now called "Renamed tick"')));
+    assert.deepStrictEqual(TL.treeProblems(edited), []);
+  }
+});
+
 test('both real trees: every dropdown is listed', () => {
   const inspection = load('assets/property_inspection/inspection_tree.json');
   const valuation = load('assets/property_valuation/valuation_tree.json');
