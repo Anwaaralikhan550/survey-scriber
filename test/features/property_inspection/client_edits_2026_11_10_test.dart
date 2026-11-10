@@ -77,4 +77,16 @@ void main() {
       expect(withGate.where((p) => p.startsWith('Walls:')).length, 1);
     });
   });
+
+  test('A8 Garden condition talks about the garden, not the garage', () {
+    final out = engine.buildPhrases(
+      'activity_grounds_other_front_garden',
+      {'actv_h2_garden_cond': 'Reasonable'},
+    ).join('\n');
+    expect(out, contains('Condition: Where visible, the garden appears in reasonable condition.'));
+    expect(out, isNot(contains('garage')));
+    // The garage screen keeps its own garage sentence.
+    final garage = engine.buildPhrases('activity_grounds_garage', {'actv_condition': 'Reasonable'}).join('\n');
+    expect(garage, contains('the garage appears in reasonable condition'));
+  });
 }

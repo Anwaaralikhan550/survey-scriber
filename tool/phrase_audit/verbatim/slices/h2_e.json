@@ -639,7 +639,7 @@
           "{H_OTHER}"
         ],
         "sub": "{H2_GARDEN_CONDITION}",
-        "text": "Condition: Where visible, the garage appears in {H2_GARDEN_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction of the garage should be expected.",
+        "text": "Condition: Where visible, the garden appears in {H2_GARDEN_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction of the garden should be expected.",
         "tokens": [
           {
             "kind": "dropdown",

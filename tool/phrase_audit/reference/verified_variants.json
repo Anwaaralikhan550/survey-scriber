@@ -189,6 +189,13 @@
       "reviewedIn": "inspection_phrase_engine.dart (gas meter with no location ticked), 318deac",
       "reason": "Gas meter comment must print even when no meter location is ticked (client item D16, 2 Nov 2026). The handler strips ', and the meter unit is located {GAS_METER_LOCATION}' instead of leaving an empty slot; the rest is the approved G2_METER text word for word. Approved by the user on 6 Nov 2026.",
       "template": "Metre: There is a mains gas connection to the property. No smell of gas was detected during my inspection, and no other defects were noted that require urgent or significant repairs to the installation."
+    },
+    {
+      "master": "{H_OTHER}",
+      "subCode": "{H2_GARDEN_CONDITION}",
+      "reviewedIn": "phrase_texts.json H2 garden condition, client file (3) item A8, 10 Nov 2026",
+      "reason": "The PDF repeated the H1 garage condition sentence under H2 Gardens, so the garden condition read 'the garage appears'. Client reported it as the wrong comment (10 Nov 2026). Only the two words 'garage' were changed to 'garden'; the rest is the PDF text word for word.",
+      "template": "Condition: Where visible, the garden appears in {H2_GARDEN_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction of the garden should be expected."
     }
   ]
 }

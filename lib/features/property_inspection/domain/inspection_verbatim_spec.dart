@@ -9979,7 +9979,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       ),
     ],
     pdf:
-        'Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.',
+        'Condition: Where visible, the garden appears in good, reasonable, fair, poor, very poor condition.',
     whenField: 'actv_h2_garden_cond',
     whenValue: 'Good',
     whenAny: [['actv_h2_garden_cond', 'Reasonable'], ['actv_h2_garden_cond', 'Fair'], ['actv_h2_garden_cond', 'Poor'], ['actv_h2_garden_cond', 'Very poor']],
