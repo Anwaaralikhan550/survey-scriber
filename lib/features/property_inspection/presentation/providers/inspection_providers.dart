@@ -1783,18 +1783,6 @@ class InspectionScreenNotifier extends StateNotifier<InspectionScreenState> {
         }
       }
     }
-    if (_screenId == 'activity_services_water_main_screen' ||
-        _screenId == 'activity_services_water_main_water') {
-      final stopcockFound =
-          (state.answers['cb_stopcock_found'] ?? '').trim().toLowerCase() ==
-              'true';
-      if (stopcockFound) {
-        final location = (state.answers['actv_stopcok_location'] ?? '').trim();
-        if (location.isEmpty) {
-          return 'Main water stopcock location is required.';
-        }
-      }
-    }
     if (_screenId == _chimneyWaterproofingScreenId) {
       final flashingOtherChecked =
           (state.answers['ch5'] ?? '').trim().toLowerCase() == 'true';

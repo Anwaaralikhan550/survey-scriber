@@ -5903,30 +5903,6 @@
                 "2",
                 "3"
               ]
-            },
-            {
-              "id": "cb_stopcock_found",
-              "label": "Main water stopcock found",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_stopcok_location",
-              "label": "Main water stopcock location",
-              "type": "dropdown",
-              "options": [
-                "Front",
-                "Side",
-                "Rear",
-                "Other"
-              ],
-              "conditionalOn": "cb_stopcock_found=true",
-              "conditionalValue": "",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_lead_rising",
-              "label": "Lead rising main",
-              "type": "checkbox"
             }
           ]
         },

@@ -60,44 +60,16 @@ List<InspectionFieldDefinition> sanitizeInspectionFieldsForScreen(
     return fields.where((field) => field.id == 'cb_not_inspected').toList();
   }
   if (screenId == 'activity_services_water_main_screen') {
-    // Legacy parity: Water screen should include stopcock/lead controls
-    // plus condition rating and note.
+    // Condition rating and note only. The stopcock and lead rising main are
+    // asked on Main Water, which prints them (client file 3, 10 Nov 2026:
+    // the copies here printed nothing).
     final byId = <String, InspectionFieldDefinition>{
       for (final field in fields) field.id: field,
     };
-    InspectionFieldDefinition? f(String id) => byId[id];
-
     return <InspectionFieldDefinition>[
-      f('cb_stopcock_found') ??
-          const InspectionFieldDefinition(
-            id: 'cb_stopcock_found',
-            label: 'Main water stopcock found',
-            type: InspectionFieldType.checkbox,
-          ),
-      f('actv_stopcok_location') ??
-          const InspectionFieldDefinition(
-            id: 'actv_stopcok_location',
-            label: 'Main water stopcock location',
-            type: InspectionFieldType.dropdown,
-            options: <String>[
-              'Front',
-              'Side',
-              'Rear',
-              'Other',
-            ],
-            conditionalOn: 'cb_stopcock_found=true',
-            conditionalValue: '',
-            conditionalMode: 'show',
-          ),
-      f('cb_lead_rising') ??
-          const InspectionFieldDefinition(
-            id: 'cb_lead_rising',
-            label: 'Lead rising main',
-            type: InspectionFieldType.checkbox,
-          ),
-      if (f('android_material_design_spinner4') != null)
-        f('android_material_design_spinner4')!,
-      if (f('ar_etNote') != null) f('ar_etNote')!,
+      if (byId['android_material_design_spinner4'] != null)
+        byId['android_material_design_spinner4']!,
+      if (byId['ar_etNote'] != null) byId['ar_etNote']!,
     ];
   }
   if (screenId == 'activity_services_heating_main_screen') {

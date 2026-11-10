@@ -4,6 +4,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_scriber/features/property_inspection/domain/inspection_phrase_engine.dart';
+import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
+import 'package:survey_scriber/features/property_inspection/presentation/widgets/inspection_fields.dart';
 
 void main() {
   final phraseTexts = (jsonDecode(
@@ -170,6 +172,26 @@ void main() {
       expect(ids.indexOf(cUnst), ids.indexOf(cPoor) + 1);
       expect(ids.indexOf(pUnst), ids.indexOf(pPoor) + 1);
     });
+  });
+
+  test('D12 Water: stopcock asked once (Main Water), and it prints', () {
+    final tree = InspectionTreePayload.fromJson(
+      File('assets/property_inspection/inspection_tree.json').readAsStringSync(),
+    );
+    final nodes = {
+      for (final s in tree.sections)
+        for (final n in s.nodes) n.id: n,
+    };
+    final water = sanitizeInspectionFieldsForScreen(
+      'activity_services_water_main_screen',
+      nodes['activity_services_water_main_screen']!.fields,
+    ).map((f) => f.id).toList();
+    expect(water, ['android_material_design_spinner4', 'ar_etNote']);
+    final out = engine.buildPhrases('activity_services_water_main_water', {
+      'actv_g3_stopcock': 'Stopcock found',
+      'g3s_under_the_kitchen_sink': 'true',
+    }).join(' ');
+    expect(out, contains('located under the kitchen sink'));
   });
 
   test('A8 Garden condition talks about the garden, not the garage', () {
