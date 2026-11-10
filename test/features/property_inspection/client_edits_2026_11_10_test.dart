@@ -97,6 +97,33 @@ void main() {
     });
   });
 
+  test('A6 Other Joinery: Description first, Inspected text is not the not-inspected text', () {
+    final out = engine.buildPhrases(
+      'activity_outside_property_other_joinery_and_finishes_main_screen',
+      ticks(['e8m_timber', 'e8m_pvcu'], {
+        'actv_condition': '1',
+        'actv_decorations': 'Reasonable',
+        'actv_joinery_condition': 'Reasonable',
+      }),
+    );
+    final body = out.where((p) => !p.startsWith('Condition rating')).toList();
+    expect(body.first, startsWith('Description: The external eaves-level joinery comprises timber and PVCu'));
+    final order = ['Description:', 'Decorations:', 'Condition:', 'Inspected:']
+        .map((l) => body.indexWhere((p) => p.startsWith(l)))
+        .toList();
+    expect(order.every((i) => i >= 0), isTrue, reason: '$body');
+    expect(order, [...order]..sort());
+    final joined = out.join('\n');
+    expect(joined, isNot(contains('could not be inspected due to the height')));
+    expect(RegExp('Inspected:').allMatches(joined).length, 1);
+    // Not inspected still prints its own text.
+    final ni = engine.buildPhrases(
+      'activity_outside_property_other_joinery_finishes_not_inspected',
+      {'cb_not_inspected': 'true'},
+    ).join('\n');
+    expect(ni, contains('Not Inspected: The usual external works at eaves level'));
+  });
+
   test('A8 Garden condition talks about the garden, not the garage', () {
     final out = engine.buildPhrases(
       'activity_grounds_other_front_garden',

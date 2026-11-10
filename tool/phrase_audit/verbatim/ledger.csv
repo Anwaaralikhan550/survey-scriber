@@ -714,9 +714,9 @@ ea2709f242,E7,"However, where the defects are severe or extensive, repairs shoul
 b5813f45c2,E7,Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_JOINT_DEFECTS},100,DONE
 4d08b4e31a,E7,Building Regulations: The porch appears to be a later addition to the property.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_P_BUILDING_REGULATIONS},100,DONE
 e1711fae2e,E7,"Your legal adviser should confirm whether any necessary Building Regulation approval or exemption applies, together with any guarantees or warranties available.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BUILDING_REGULATIONS},100,DONE
-7c6cbef609,E8,Not Inspected: The usual external works at eaves level (the edges of the roof where the guttering is fixed) could not be inspected due to the height and configuration of the building.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
-85ff88a73a,E8,"Consequently, I am unable to comment on their condition.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
-b75f27f205,E8,"These elements are typically formed in timber and should be regularly inspected, maintained, and redecorated as necessary to protect them from weathering, prevent decay, and prolong their service life.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+7c6cbef609,E8,Not Inspected: The usual external works at eaves level (the edges of the roof where the guttering is fixed) could not be inspected due to the height and configuration of the building.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_NOT_INSPECTED},100,DONE
+85ff88a73a,E8,"Consequently, I am unable to comment on their condition.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_NOT_INSPECTED},100,DONE
+b75f27f205,E8,"These elements are typically formed in timber and should be regularly inspected, maintained, and redecorated as necessary to protect them from weathering, prevent decay, and prolong their service life.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_NOT_INSPECTED},100,DONE
 b01f186d67,E8,Inspected: Inspection was carried out from ground level and other reasonably accessible positions.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
 18145792a8,E8,High-level joinery was inspected using binoculars where appropriate.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
 068c47ab35,E8,"Concealed sections behind gutters, roof coverings or other finishes could not be inspected.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE

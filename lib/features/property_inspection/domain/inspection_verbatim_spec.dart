@@ -4213,18 +4213,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
-    'e8_inspected',
-    'activity_outside_property_other_joinery_and_finishes_main_screen',
-    '{E_OTHER_JOINERY_AND_FINISHES}',
-    '{E8_INSPECTED}',
-    [
-    ],
-    first: true,
-    whenField: 'actv_condition',
-    whenValue: '1',
-    whenAny: [['actv_condition', '2'], ['actv_condition', '3']],
-  ),
-  VerbatimRule(
     'e8_desc',
     'activity_outside_property_other_joinery_and_finishes_main_screen',
     '{E_OTHER_JOINERY_AND_FINISHES}',
@@ -4282,6 +4270,17 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'Condition: Where visible, these elements appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.',
+  ),
+  VerbatimRule(
+    'e8_inspected',
+    'activity_outside_property_other_joinery_and_finishes_main_screen',
+    '{E_OTHER_JOINERY_AND_FINISHES}',
+    '{E8_INSPECTED}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: '1',
+    whenAny: [['actv_condition', '2'], ['actv_condition', '3']],
   ),
   VerbatimRule(
     'e8_asbestos',
