@@ -1,3 +1,4 @@
+import 'system_bar_inset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -61,6 +62,7 @@ class _SurveyScriberState extends ConsumerState<SurveyScriber>
       darkTheme: AppTheme.darkTheme(),
       themeMode: _resolveThemeMode(prefs.themeMode),
       routerConfig: router,
+      builder: keepAboveNavigationBar,
       debugShowCheckedModeBanner: false,
     );
   }
