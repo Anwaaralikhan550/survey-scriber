@@ -8,6 +8,13 @@ import 'package:survey_scriber/features/property_valuation/domain/valuation_phra
 void main() {
   final engine = ValuationPhraseEngine();
 
+  test('C2 Road: Adopted + Made prints the existing road sentence', () {
+    expect(
+      engine.buildPhrases('road', {'cb_adopted': 'true', 'cb_made': 'true'}),
+      ['The property fronts onto an adopted highway maintained at public expense and a made-up road.'],
+    );
+  });
+
   group('A4 "Other" in a dropdown has a text box, and the typed words print', () {
     test('every valuation dropdown with Other has its text box', () {
       final tree = jsonDecode(File('assets/property_valuation/valuation_tree.json').readAsStringSync())

@@ -24,16 +24,20 @@ class ValuationAnswerValidator {
       );
     }
 
+    // Two separate questions: who maintains the road, and its surface.
+    // "Adopted" + "Made" is a normal answer (client file 3, 10 Nov 2026).
+    if (screenId == 'road' &&
+        _countChecked(answers, const ['cb_adopted', 'cb_private']) > 1) {
+      errors.add('Select either Adopted or Private for the road.');
+    }
     if (screenId == 'road' &&
         _countChecked(answers, const [
-              'cb_adopted',
-              'cb_private',
               'cb_made',
               'cb_partly_made',
               'cb_unmade',
             ]) >
             1) {
-      errors.add('Select one road type for the property approach.');
+      errors.add('Select one road surface: Made, Partly Made or Unmade.');
     }
 
     if (screenId == 'general_details') {
