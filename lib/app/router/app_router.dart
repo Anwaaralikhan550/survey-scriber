@@ -73,6 +73,7 @@ import '../../features/scheduling/presentation/pages/scheduling_page.dart';
 import '../../features/scheduling/presentation/pages/slot_calendar_page.dart';
 import '../../features/search/presentation/pages/search_page.dart';
 import '../../features/settings/presentation/pages/company_branding_page.dart';
+import '../../features/settings/presentation/pages/contact_us_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/signature/presentation/pages/signature_capture_page.dart';
 import '../../features/signature/presentation/pages/survey_signatures_page.dart';
@@ -683,6 +684,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.companyDetails,
         builder: (context, state) => const CompanyBrandingPage(),
+      ),
+      GoRoute(
+        path: Routes.contactUs,
+        builder: (context, state) => const ContactUsPage(),
       ),
       GoRoute(
         path: Routes.profile,

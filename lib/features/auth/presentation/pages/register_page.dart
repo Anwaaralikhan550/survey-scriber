@@ -38,80 +38,31 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   Future<void> _handleRegister() async {
     final controller = ref.read(registerControllerProvider.notifier);
-    final registerState = ref.read(registerControllerProvider);
     final success = await controller.submit();
 
     if (success && mounted) {
-      // Auto-login with the same credentials
-      final (loginSuccess, _) = await ref
-          .read(authNotifierProvider.notifier)
-          .login(
-            email: registerState.email,
-            password: registerState.password,
-          );
-
+      // The account works only after the emailed activation link is opened,
+      // so there is no automatic sign-in here.
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (dialogContext) => AlertDialog(
+          icon: const Icon(Icons.mark_email_read_outlined, size: 32),
+          title: const Text('Check your email'),
+          content: const Text(
+            'Thanks for signing up. We have emailed you a link to activate '
+            'your account. Please click it, then sign in.',
+          ),
+          actions: [
+            FilledButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
       if (!mounted) return;
-
-      if (loginSuccess) {
-        // Successfully logged in - navigate to dashboard
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Row(
-              children: [
-                Icon(
-                  Icons.check_circle_rounded,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  size: 20,
-                ),
-                const SizedBox(width: 12),
-                const Expanded(
-                  child: Text(
-                    'Welcome! Account created successfully.',
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
-            backgroundColor: Colors.green.shade600,
-            behavior: SnackBarBehavior.floating,
-            margin: const EdgeInsets.all(16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            duration: const Duration(seconds: 3),
-          ),
-        );
-        context.go(Routes.dashboard);
-      } else {
-        // Auto-login failed - navigate to login page
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Row(
-              children: [
-                Icon(
-                  Icons.check_circle_rounded,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  size: 20,
-                ),
-                const SizedBox(width: 12),
-                const Expanded(
-                  child: Text(
-                    'Account created! Please sign in.',
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
-            backgroundColor: Colors.green.shade600,
-            behavior: SnackBarBehavior.floating,
-            margin: const EdgeInsets.all(16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-        );
-        context.go(Routes.login);
-      }
+      context.go(Routes.login);
     }
   }
 

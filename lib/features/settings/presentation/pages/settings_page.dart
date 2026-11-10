@@ -828,6 +828,15 @@ class _AboutSection extends ConsumerWidget {
           ),
         ),
         SettingsItem(
+          title: 'Contact Us',
+          subtitle: 'Send a message to the SurveyScriber team',
+          leading: Icon(
+            Icons.mail_outline_rounded,
+            color: colorScheme.onSurfaceVariant,
+          ),
+          onTap: () => context.push(Routes.contactUs),
+        ),
+        SettingsItem(
           title: 'Open Source Licenses',
           leading: Icon(
             Icons.code_rounded,
