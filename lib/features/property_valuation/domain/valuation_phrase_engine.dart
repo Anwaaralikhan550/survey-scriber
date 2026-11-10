@@ -656,7 +656,7 @@ class ValuationPhraseEngine {
     }
 
     final reason = _val(answers, 'actv_vl_reason');
-    if (reason.isNotEmpty && reason.toLowerCase() != 'other') {
+    if (reason.isNotEmpty && OptionLabels.named(answers, 'actv_vl_reason')) {
       phrases.add('The purpose of this valuation is for ${_say(answers, 'actv_vl_reason')}.');
     }
 
@@ -676,8 +676,10 @@ class ValuationPhraseEngine {
     final type = _val(answers, 'actv_type');
     final subType = _val(answers, 'actv_sub_type');
     if (type.isNotEmpty && type.toLowerCase() != 'other') {
-      final safeSubType =
-          type == 'Flat' || subType.toLowerCase() == 'other' ? '' : subType;
+      final safeSubType = type == 'Flat' ||
+              !OptionLabels.named(answers, 'actv_sub_type')
+          ? ''
+          : _say(answers, 'actv_sub_type');
       final subTypeDescription = _propertySubTypeDescription(safeSubType);
       final typeWords = _say(answers, 'actv_type');
       final leadWord =
@@ -775,7 +777,7 @@ class ValuationPhraseEngine {
             'At the time of my inspection, the construction works were complete. '
             'The valuation is provided on the basis that the completed works have been carried out to a satisfactory standard '
             'in accordance with the approved plans and specifications.');
-      } else if (normalizedStage != 'other') {
+      } else if (OptionLabels.named(answers, 'actv_work_stage')) {
         phrases.add(
             'At the time of my inspection, the construction works were at the ${_say(answers, 'actv_work_stage').toLowerCase()} stage. '
             'The valuation is provided on the basis that the property will be completed to a satisfactory standard '
@@ -784,7 +786,7 @@ class ValuationPhraseEngine {
     }
 
     final warranty = _val(answers, 'actv_warranty');
-    if (warranty.isNotEmpty && warranty.toLowerCase() != 'other') {
+    if (warranty.isNotEmpty && OptionLabels.named(answers, 'actv_warranty')) {
       phrases.add(
         'The property benefits from ${_article(_say(answers, 'actv_warranty'))} ${_say(answers, 'actv_warranty')} '
         'structural warranty. Your legal adviser should confirm the '
@@ -903,7 +905,7 @@ class ValuationPhraseEngine {
     final phrases = <String>[];
 
     final location = _val(answers, 'actv_location');
-    if (location.isNotEmpty && location.toLowerCase() != 'other') {
+    if (location.isNotEmpty && OptionLabels.named(answers, 'actv_location')) {
       phrases.add(
           'The property is situated within an established ${_say(answers, 'actv_location').toLowerCase()} area, '
           'which is considered to be a desirable location for properties of this type.');

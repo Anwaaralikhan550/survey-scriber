@@ -2686,6 +2686,34 @@
       "screenId": "valuation",
       "text": "In my opinion, the open market value of the property, subject to the assumptions, special assumptions, and conditions set out in this report, is considered to be adequate security for the proposed mortgage advance. The valuation opinion is provided for the stated purpose and remains subject to the assumptions, special assumptions, and limiting conditions in this report.",
       "allowedTokens": []
+    },
+    "VAL_OTHER_TEXT_REASON": {
+      "screenId": "*",
+      "text": "The purpose of this valuation is for [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_OTHER_TEXT_WORK_STAGE": {
+      "screenId": "*",
+      "text": "At the time of my inspection, the construction works were at the [free text] stage. The valuation is provided on the basis that the property will be completed to a satisfactory standard in accordance with the approved plans and specifications.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_OTHER_TEXT_WARRANTY": {
+      "screenId": "*",
+      "text": "The property benefits from a [free text] structural warranty. Your legal adviser should confirm the precise terms, duration, and transferability of this warranty cover.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_OTHER_TEXT_LOCATION": {
+      "screenId": "*",
+      "text": "The property is situated within an established [free text] area, which is considered to be a desirable location for properties of this type.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
     }
   }
 }

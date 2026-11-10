@@ -48,7 +48,19 @@ class OptionLabels {
     return out;
   }
 
-  /// What to print for [fieldId]: the renamed words, otherwise the stored value.
-  static String say(Map<String, String> answers, String fieldId) =>
-      (answers['$_sayPrefix$fieldId'] ?? answers[fieldId] ?? '').trim();
+  /// What to print for [fieldId]: the renamed words, otherwise the stored
+  /// value. "Other" with words typed in its `<field>_other_text` box prints
+  /// those words.
+  static String say(Map<String, String> answers, String fieldId) {
+    final value = (answers[fieldId] ?? '').trim();
+    if (value.toLowerCase() == 'other') {
+      final typed = (answers['${fieldId}_other_text'] ?? '').trim();
+      if (typed.isNotEmpty) return typed;
+    }
+    return (answers['$_sayPrefix$fieldId'] ?? value).trim();
+  }
+
+  /// True unless [fieldId] is "Other" with nothing typed for it.
+  static bool named(Map<String, String> answers, String fieldId) =>
+      say(answers, fieldId).toLowerCase() != 'other';
 }

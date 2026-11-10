@@ -17,11 +17,13 @@
             { "id": "actv_finishes", "label": "Finishes", "type": "dropdown", "options": ["Unfurnished", "Partially furnished", "Fully furnished"] },
             { "id": "actv_carpeted", "label": "Carpeted", "type": "dropdown", "options": ["Fully", "Partially"] },
             { "id": "actv_vl_reason", "label": "Valuation Reason", "type": "dropdown", "options": ["Market Value", "Shared Ownership Buyback", "Right to Buy", "Help to buy", "Compulsory Order Purchase", "Other"] },
+            { "id": "actv_vl_reason_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_vl_reason=Other", "conditionalValue": "", "conditionalMode": "show" },
             { "id": "actv_weather", "label": "Weather", "type": "dropdown", "options": ["Dry", "Wet", "Snow"] },
             { "id": "actv_tenure", "label": "Tenure", "type": "dropdown", "options": ["Freehold", "Feuhold", "Leasehold", "Commonhold"] },
             { "id": "label_property_type", "label": "Property Type", "type": "label" },
             { "id": "actv_type", "label": "Property Type", "type": "dropdown", "options": ["Flat", "House", "Bungalow", "Other"] },
             { "id": "actv_sub_type", "label": "Sub Type", "type": "dropdown", "options": ["Detached", "Semi", "Mid", "End", "Terrace", "Other"] },
+            { "id": "actv_sub_type_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_sub_type=Other", "conditionalValue": "", "conditionalMode": "show" },
             { "id": "actv_flat_type", "label": "Flat Type", "type": "dropdown", "options": ["Flat", "Maisonette"], "conditionalOn": "actv_type=Flat" },
             { "id": "actv_build_type", "label": "Build Type", "type": "dropdown", "options": ["Purpose built", "Conversion"], "conditionalOn": "actv_type=Flat" },
             { "id": "actv_estate_type", "label": "Estate Type", "type": "dropdown", "options": ["Ex Commercial", "Ex Local Authority", "Ex Housing Association"] },
@@ -58,7 +60,9 @@
           "fields": [
             { "id": "et_builder_name", "label": "Builder Name", "type": "text" },
             { "id": "actv_work_stage", "label": "Work Stage", "type": "dropdown", "options": ["Complete", "Under construction", "Re-inspection", "Other"] },
+            { "id": "actv_work_stage_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_work_stage=Other", "conditionalValue": "", "conditionalMode": "show" },
             { "id": "actv_warranty", "label": "Warranty", "type": "dropdown", "options": ["NHBC", "Zurich", "Arch Cert", "Other"] },
+            { "id": "actv_warranty_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_warranty=Other", "conditionalValue": "", "conditionalMode": "show" },
             { "id": "et_incentives", "label": "Incentives", "type": "text" },
             { "id": "in_date", "label": "Date", "type": "text" }
           ]
@@ -120,6 +124,7 @@
           "order": 3,
           "fields": [
             { "id": "actv_location", "label": "Location", "type": "dropdown", "options": ["City", "Town", "Village", "Suburb", "Residential", "Commercial", "Rural", "Other"] },
+            { "id": "actv_location_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_location=Other", "conditionalValue": "", "conditionalMode": "show" },
             { "id": "label_property_close_to", "label": "Property Close To", "type": "label" },
             { "id": "cb_local_amenities", "label": "Local Amenities", "type": "checkbox" },
             { "id": "cb_conservation_area", "label": "Conservation Area", "type": "checkbox" },
@@ -436,6 +441,7 @@
             { "id": "label_garage", "label": "Garage", "type": "label" },
             { "id": "actv_garage_type", "label": "Garage Type", "type": "dropdown", "options": ["Integral", "Semi-Detached", "Detached", "Block of Garage"] },
             { "id": "actv_number_of_garage", "label": "Number of Garages", "type": "dropdown", "options": ["Single", "Double", "Other"] },
+            { "id": "actv_number_of_garage_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_number_of_garage=Other", "conditionalValue": "", "conditionalMode": "show" },
             { "id": "actv_condition_garage", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
             { "id": "et_notes_garage", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_garage=Unsatisfactory" },
             { "id": "et_general_remarks_garage", "label": "General Remarks", "type": "text" }
