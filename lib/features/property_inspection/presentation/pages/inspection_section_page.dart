@@ -127,7 +127,16 @@ class _InspectionSectionPageState extends ConsumerState<InspectionSectionPage> {
                 ? context.pop()
                 : context.go(Routes.surveyDetailPath(surveyId)),
           ),
-          title: Text(inspectionSectionTitle(sectionKey)),
+          title: Text(
+            inspectionGroupPageTitle(
+              sectionKey: sectionKey,
+              parentNodeId: parentNodeId,
+              nodeMap: nodeMapAsync.maybeWhen(
+                data: (value) => value,
+                orElse: () => const <String, InspectionNodeDefinition>{},
+              ),
+            ),
+          ),
           bottom: parentNodeId == null
               ? null
               : nodeMapAsync.maybeWhen(

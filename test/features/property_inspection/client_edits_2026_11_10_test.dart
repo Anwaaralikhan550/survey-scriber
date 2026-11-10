@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_scriber/features/property_inspection/domain/inspection_breadcrumb.dart';
 import 'package:survey_scriber/features/property_inspection/domain/inspection_phrase_engine.dart';
 import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
 import 'package:survey_scriber/features/property_inspection/presentation/widgets/inspection_fields.dart';
@@ -192,6 +193,28 @@ void main() {
       'g3s_under_the_kitchen_sink': 'true',
     }).join(' ');
     expect(out, contains('located under the kitchen sink'));
+  });
+
+  test('A3 a group page is titled with the group (Carport), top level with the section', () {
+    final tree = InspectionTreePayload.fromJson(
+      File('assets/property_inspection/inspection_tree.json').readAsStringSync(),
+    );
+    final nodeMap = {
+      for (final s in tree.sections)
+        for (final n in s.nodes) n.id: n,
+    };
+    expect(
+      inspectionGroupPageTitle(sectionKey: 'E', parentNodeId: 'group_carport_35', nodeMap: nodeMap),
+      'Carport',
+    );
+    expect(
+      inspectionGroupPageTitle(sectionKey: 'E', parentNodeId: null, nodeMap: nodeMap),
+      'Outside the Property',
+    );
+    expect(
+      inspectionGroupPageTitle(sectionKey: 'E', parentNodeId: 'no_such_node', nodeMap: nodeMap),
+      'Outside the Property',
+    );
   });
 
   test('A8 Garden condition talks about the garden, not the garage', () {

@@ -38,3 +38,15 @@ List<String> inspectionBreadcrumb({
   }
   return [inspectionSectionTitle(sectionKey), ...titles];
 }
+
+/// App bar title of a section page: the group being shown (e.g. "Carport"),
+/// or the section name at the top level (client file 3, 10 Nov 2026).
+String inspectionGroupPageTitle({
+  required String sectionKey,
+  required String? parentNodeId,
+  required Map<String, InspectionNodeDefinition> nodeMap,
+}) {
+  final node = parentNodeId == null ? null : nodeMap[parentNodeId];
+  final title = node?.title.replaceFirst(_legacyPrefix, '').trim() ?? '';
+  return title.isEmpty ? inspectionSectionTitle(sectionKey) : title;
+}
