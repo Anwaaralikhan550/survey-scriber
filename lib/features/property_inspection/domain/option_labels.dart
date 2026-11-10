@@ -62,5 +62,6 @@ class OptionLabels {
 
   /// True unless [fieldId] is "Other" with nothing typed for it.
   static bool named(Map<String, String> answers, String fieldId) =>
-      say(answers, fieldId).toLowerCase() != 'other';
+      (answers[fieldId] ?? '').trim().toLowerCase() != 'other' ||
+      (answers['${fieldId}_other_text'] ?? '').trim().isNotEmpty;
 }

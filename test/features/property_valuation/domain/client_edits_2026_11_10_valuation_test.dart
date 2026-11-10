@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_scriber/features/property_inspection/domain/option_labels.dart';
 import 'package:survey_scriber/features/property_valuation/domain/valuation_phrase_engine.dart';
 
 void main() {
@@ -74,6 +75,20 @@ void main() {
           'actv_warranty_other_text': 'Premier Guarantee',
         }).join(' '),
         contains('benefits from a Premier Guarantee structural warranty'),
+      );
+    });
+
+    test('a renamed Other with nothing typed still counts as Other', () {
+      const labels = OptionLabels({
+        'general_details': {
+          'actv_vl_reason': {'Other': 'Something else'},
+        },
+      });
+      final answers = labels.withWords('general_details', {'actv_vl_reason': 'Other'});
+      expect(OptionLabels.named(answers, 'actv_vl_reason'), isFalse);
+      expect(
+        OptionLabels.named({...answers, 'actv_vl_reason_other_text': 'probate'}, 'actv_vl_reason'),
+        isTrue,
       );
     });
 

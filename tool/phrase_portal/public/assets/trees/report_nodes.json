@@ -238,6 +238,8 @@
   "activity_outside_property_porch_open_to_building__open_to_building",
   "activity_outside_property_porch_poor_condition",
   "activity_outside_property_porch_poor_condition__poor_condition",
+  "activity_outside_property_porch_unstable_structure",
+  "activity_outside_property_porch_unstable_structure__unstable_structure",
   "activity_outside_property_rain_water_goods_not_inspected",
   "activity_outside_property_rainwater_goods_main_screen",
   "activity_outside_property_repair_chimney_dish_aerial",

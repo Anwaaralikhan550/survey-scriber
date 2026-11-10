@@ -1198,7 +1198,7 @@ class ValuationPhraseEngine {
     }
 
     final movement = _say(answers, 'actv_building_movement');
-    if (movement.toLowerCase() == 'none') {
+    if (_val(answers, 'actv_building_movement').toLowerCase() == 'none') {
       // "Evidence of building movement was noted: none ... the movement
       // appears consistent" contradicted itself; keep the examination only.
       phrases.add(
