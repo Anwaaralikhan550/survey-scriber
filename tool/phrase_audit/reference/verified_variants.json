@@ -203,6 +203,13 @@
       "reviewedIn": "phrase_texts.json porch building joint defects, client file (3) item D5, 10 Nov 2026",
       "reason": "The porch text repeated the conservatory sentence ('junction between the conservatory and the main building'). Client asked to use porch for porch sections and conservatory for conservatory (10 Nov 2026). Only 'conservatory' was changed to 'porch'; the rest is the PDF text word for word.",
       "template": "Building Joint Defects: Defects were noted to the junction between the porch and the main building. The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects. Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration."
+    },
+    {
+      "master": "{E_CONSERVATORY_PORCHES}",
+      "subCode": "{E7_P_UNSTABLE}",
+      "reviewedIn": "phrase_texts.json porch unstable structure, client file (3) item D6, 10 Nov 2026",
+      "reason": "Client's own text for the porch Unstable Structure section (10 Nov 2026) reads 'movement, distortion, or deflection', as the conservatory text already does; the porch text lacked 'or'.",
+      "template": "Unstable Structure: Evidence of movement, distortion, or deflection was observed. Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant."
     }
   ]
 }

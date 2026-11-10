@@ -135,6 +135,43 @@ void main() {
         contains('junction between the conservatory and the main building'));
   });
 
+  group('D6 Poor condition and Unstable structure are separate', () {
+    const cPoor = 'activity_outside_property_porch_poor_condition';
+    const pPoor = 'activity_outside_property_porch_poor_condition__poor_condition';
+    const cUnst = 'activity_outside_property_porch_unstable_structure';
+    const pUnst = 'activity_outside_property_porch_unstable_structure__unstable_structure';
+
+    test('Poor condition prints the poor-condition text', () {
+      expect(engine.buildPhrases(pPoor, {'cb_e7_poor_condition': 'true'}).join(' '),
+          startsWith('Porches that are in poor condition or in disrepair will require comprehensive repair.'));
+      expect(engine.buildPhrases(cPoor, {'cb_e7_poor_condition': 'true'}).join(' '),
+          startsWith('Conservatories that are in poor condition or in disrepair'));
+    });
+
+    test('Unstable structure has its own screen and text (client wording)', () {
+      expect(engine.buildPhrases(pUnst, {'cb_e7_unstable': 'true'}).join(' '),
+          startsWith('Unstable Structure: Evidence of movement, distortion, or deflection was observed.'));
+      expect(engine.buildPhrases(cUnst, {'cb_e7_unstable': 'true'}).join(' '),
+          startsWith('Unstable Structure: Evidence of movement, distortion, or deflection was observed.'));
+    });
+
+    test('surveys saved before the change keep their Unstable text', () {
+      expect(engine.buildPhrases(pPoor, {'cb_not_inspected': 'true'}).join(' '),
+          startsWith('Unstable Structure:'));
+    });
+
+    test('tree: Unstable structure tile comes right after Poor condition', () {
+      final tree = jsonDecode(File('assets/property_inspection/inspection_tree.json').readAsStringSync())
+          as Map<String, dynamic>;
+      final ids = [
+        for (final s in tree['sections'] as List)
+          for (final n in (s as Map)['nodes'] as List) (n as Map)['id'] as String,
+      ];
+      expect(ids.indexOf(cUnst), ids.indexOf(cPoor) + 1);
+      expect(ids.indexOf(pUnst), ids.indexOf(pPoor) + 1);
+    });
+  });
+
   test('A8 Garden condition talks about the garden, not the garage', () {
     final out = engine.buildPhrases(
       'activity_grounds_other_front_garden',

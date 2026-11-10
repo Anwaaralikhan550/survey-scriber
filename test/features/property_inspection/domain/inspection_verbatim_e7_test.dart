@@ -14,8 +14,9 @@ void main() {
 
   for (final s in const [
     'Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability.',
+    // The PDF's porch copy lacked "or"; the client's file (3), 10 Nov 2026, gives
+    // the porch text with "or", so both copies now read the same.
     'Unstable Structure: Evidence of movement, distortion, or deflection was observed.',
-    'Unstable Structure: Evidence of movement, distortion, deflection was observed.',
   ]) {
     test('bank holds: ${s.substring(0, 40)}', () => expect(flat, contains(s)));
   }

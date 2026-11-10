@@ -3903,7 +3903,29 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'Very poor',
   ),
   VerbatimRule(
+    'e7c_poor',
+    'activity_outside_property_porch_poor_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_VERY_POOR}',
+    [
+    ],
+    whenField: 'cb_e7_poor_condition',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
     'e7c_unstable',
+    'activity_outside_property_porch_unstable_structure',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_C_UNSTABLE}',
+    [
+    ],
+    whenField: 'cb_e7_unstable',
+    whenValue: 'true',
+  ),
+  // Surveys saved before 10 Nov 2026 ticked "Unstable structure" on the
+  // Poor condition screen.
+  VerbatimRule(
+    'e7c_unstable_legacy',
     'activity_outside_property_porch_poor_condition',
     '{E_CONSERVATORY_PORCHES}',
     '{E7_C_UNSTABLE}',
@@ -4097,7 +4119,29 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'Very poor',
   ),
   VerbatimRule(
+    'e7p_poor',
+    'activity_outside_property_porch_poor_condition__poor_condition',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_VERY_POOR}',
+    [
+    ],
+    whenField: 'cb_e7_poor_condition',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
     'e7p_unstable',
+    'activity_outside_property_porch_unstable_structure__unstable_structure',
+    '{E_CONSERVATORY_PORCHES}',
+    '{E7_P_UNSTABLE}',
+    [
+    ],
+    whenField: 'cb_e7_unstable',
+    whenValue: 'true',
+  ),
+  // Surveys saved before 10 Nov 2026 ticked "Unstable structure" on the
+  // Poor condition screen.
+  VerbatimRule(
+    'e7p_unstable_legacy',
     'activity_outside_property_porch_poor_condition__poor_condition',
     '{E_CONSERVATORY_PORCHES}',
     '{E7_P_UNSTABLE}',

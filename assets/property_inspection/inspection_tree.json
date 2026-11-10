@@ -21719,7 +21719,21 @@
           "order": 19,
           "fields": [
             {
-              "id": "cb_not_inspected",
+              "id": "cb_e7_poor_condition",
+              "label": "Poor condition",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_porch_unstable_structure",
+          "title": "Unstable structure",
+          "type": "screen",
+          "parentId": "group_conservatory_28",
+          "order": 20,
+          "fields": [
+            {
+              "id": "cb_e7_unstable",
               "label": "Unstable structure",
               "type": "checkbox"
             }
@@ -21733,7 +21747,21 @@
           "order": 19,
           "fields": [
             {
-              "id": "cb_not_inspected",
+              "id": "cb_e7_poor_condition",
+              "label": "Poor condition",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_outside_property_porch_unstable_structure__unstable_structure",
+          "title": "Unstable structure",
+          "type": "screen",
+          "parentId": "group_porches_29",
+          "order": 20,
+          "fields": [
+            {
+              "id": "cb_e7_unstable",
               "label": "Unstable structure",
               "type": "checkbox"
             }

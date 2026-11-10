@@ -890,7 +890,7 @@
           "{E_CONSERVATORY_PORCHES}"
         ],
         "sub": "{E7_P_UNSTABLE}",
-        "text": "Unstable Structure: Evidence of movement, distortion, deflection was observed. Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant.",
+        "text": "Unstable Structure: Evidence of movement, distortion, or deflection was observed. Further investigation by an appropriately qualified contractor is recommended where structural movement appears significant.",
         "tokens": [],
         "when": [
           "cb_not_inspected",
