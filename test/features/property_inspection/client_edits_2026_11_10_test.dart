@@ -78,6 +78,25 @@ void main() {
     });
   });
 
+  group('A5 Windows description: no "and" between age and material', () {
+    String desc(List<String> ids) => engine
+        .buildPhrases('activity_outside_property_windows_aboutwindow', ticks(ids))
+        .firstWhere((p) => p.startsWith('Description:'));
+
+    test('client example', () {
+      expect(desc(['e5t_replacement', 'e5t_pvcu']),
+          startsWith('Description: The windows are formed of replacement PVCu framed units.'));
+    });
+    test('two materials still joined', () {
+      expect(desc(['e5t_replacement', 'e5t_pvcu', 'e5t_timber']),
+          startsWith('Description: The windows are formed of replacement PVCu and timber framed units.'));
+    });
+    test('age word alone or material alone unchanged', () {
+      expect(desc(['e5t_original']), startsWith('Description: The windows are formed of original framed units.'));
+      expect(desc(['e5t_pvcu']), startsWith('Description: The windows are formed of PVCu framed units.'));
+    });
+  });
+
   test('A8 Garden condition talks about the garden, not the garage', () {
     final out = engine.buildPhrases(
       'activity_grounds_other_front_garden',

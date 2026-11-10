@@ -28,6 +28,7 @@ class VerbatimToken {
     this.constant,
     this.optional = false,
     this.pdfOptions = const [],
+    this.prefixKeys = const {},
   });
 
   /// Placeholder in the bank sentence, e.g. `{CS_STACK_CONSTRUCTION}`.
@@ -69,6 +70,11 @@ class VerbatimToken {
 
   /// The option list exactly as the PDF prints it (without "other").
   final List<String> pdfOptions;
+
+  /// Option ids that describe the others (e.g. "replacement" windows) and
+  /// are printed in front of them instead of joined with "and":
+  /// "replacement PVCu", not "replacement and PVCu".
+  final Set<String> prefixKeys;
 }
 
 /// One approved sentence and where its values come from.
@@ -2886,6 +2892,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         otherCheckbox: 'cb_other_895',
         otherText: 'et_other_220',
         pdfOptions: ['replacement', 'original', 'old', 'PVCu', 'timber', 'old style timber sash', 'modern PVC sash', 'modern timber sash', 'aluminium', 'composite'],
+        prefixKeys: {'e5t_replacement', 'e5t_original', 'e5t_old'},
       ),
     ],
     pdf:
@@ -13172,7 +13179,7 @@ extension _VerbatimSpec on InspectionPhraseEngine {
           break;
         }
         if (count == 0) count = items.length;
-        var value = InspectionPhraseEngine._toWords(items);
+        var value = _joinWithPrefixes(token, items, answers);
         if (token.cap) value = InspectionPhraseEngine._capitalizeFirst(value);
         text = text.replaceAll(token.token, value);
       }
@@ -13185,6 +13192,26 @@ extension _VerbatimSpec on InspectionPhraseEngine {
       ));
     }
     return out;
+  }
+
+  String _joinWithPrefixes(
+    VerbatimToken token,
+    List<String> items,
+    Map<String, String> answers,
+  ) {
+    if (token.prefixKeys.isEmpty) return InspectionPhraseEngine._toWords(items);
+    final prefixes = [
+      for (final k in token.prefixKeys)
+        if ((answers[k] ?? '').trim().toLowerCase() == 'true' &&
+            token.options[k] != null)
+          token.options[k]!,
+    ];
+    final rest = items.where((i) => !prefixes.contains(i)).toList();
+    if (prefixes.isEmpty || rest.isEmpty) {
+      return InspectionPhraseEngine._toWords(items);
+    }
+    return '${InspectionPhraseEngine._toWords(prefixes)} '
+        '${InspectionPhraseEngine._toWords(rest)}';
   }
 
   /// A checkbox gate (e.g. "Garage walls") with its choices listed under it.
