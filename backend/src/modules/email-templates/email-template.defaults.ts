@@ -28,107 +28,31 @@ export const EMAIL_TEMPLATE_DEFAULTS: EmailTemplateDefault[] = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reset Your Password</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
-  <table role="presentation" style="width: 100%; border-collapse: collapse;">
-    <tr>
-      <td align="center" style="padding: 40px 0;">
-        <table role="presentation" style="width: 100%; max-width: 600px; border-collapse: collapse;">
-          <!-- Header -->
-          <tr>
-            <td style="background-color: #1976d2; padding: 30px 40px; border-radius: 8px 8px 0 0;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">
-                {{appName}}
-              </h1>
-            </td>
-          </tr>
-
-          <!-- Body -->
-          <tr>
-            <td style="background-color: #ffffff; padding: 40px;">
-              <h2 style="margin: 0 0 20px; color: #333333; font-size: 20px; font-weight: 600;">
-                Reset Your Password
-              </h2>
-
-              <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-                Hi {{firstName}},
-              </p>
-
-              <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-                We received a request to reset the password for your {{appName}} account.
-                Click the button below to create a new password.
-              </p>
-
-              <table role="presentation" style="margin: 30px 0; width: 100%;">
-                <tr>
-                  <td align="center">
-                    <a href="{{resetLink}}"
-                       style="display: inline-block; padding: 14px 32px; background-color: #1976d2; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 8px;">
-                      Reset Password
-                    </a>
-                  </td>
-                </tr>
-              </table>
-
-              <p style="margin: 0 0 20px; color: #555555; font-size: 14px; line-height: 1.6;">
-                This link will expire in <strong>15 minutes</strong> for security reasons.
-              </p>
-
-              <p style="margin: 0 0 20px; color: #555555; font-size: 14px; line-height: 1.6;">
-                If you didn't request a password reset, you can safely ignore this email.
-                Your password will remain unchanged.
-              </p>
-
-              <!-- Alternative link -->
-              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eeeeee;">
-                <p style="margin: 0 0 10px; color: #888888; font-size: 13px;">
-                  If the button above doesn't work, copy and paste this link into your browser:
-                </p>
-                <p style="margin: 0; word-break: break-all;">
-                  <a href="{{resetLink}}" style="color: #1976d2; font-size: 13px;">{{resetLink}}</a>
-                </p>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="background-color: #fafafa; padding: 30px 40px; border-radius: 0 0 8px 8px; border-top: 1px solid #eeeeee;">
-              <p style="margin: 0 0 10px; color: #888888; font-size: 13px; text-align: center;">
-                This is an automated message from {{appName}}.
-              </p>
-              <p style="margin: 0; color: #888888; font-size: 13px; text-align: center;">
-                &copy; {{year}} {{appName}}. All rights reserved.
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+<body style="margin: 0; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #f5f5f5; color: #333333;">
+  <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; padding: 32px; font-size: 16px; line-height: 1.6;">
+    <p style="margin: 0 0 16px;">Hi {{fullName}},</p>
+    <p style="margin: 0 0 16px;">You recently requested a new password. Please ignore this email if you have not made this request, no changes have been made to your account, yet. Otherwise, you can reset your password by clicking the link below:</p>
+    <p style="margin: 0 0 16px;"><a href="{{resetLink}}" style="color: #1565C0; word-break: break-all;">{{resetLink}}</a></p>
+    <p style="margin: 0 0 16px;">This password reset link is only valid for 30 minutes from the time of your request.</p>
+    <p style="margin: 0;">Thanks<br>{{appName}} Team</p>
+  </div>
 </body>
 </html>`,
-    text: `{{appName}} - Reset Your Password
+    text: `Hi {{fullName}},
 
-Hi {{firstName}},
+You recently requested a new password. Please ignore this email if you have not made this request, no changes have been made to your account, yet. Otherwise, you can reset your password by clicking the link below:
 
-We received a request to reset the password for your {{appName}} account.
-
-To reset your password, visit the following link:
 {{resetLink}}
 
-This link will expire in 15 minutes for security reasons.
+This password reset link is only valid for 30 minutes from the time of your request.
 
-If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
-
----
-This is an automated message from {{appName}}.`,
+Thanks
+{{appName}} Team`,
     placeholders: {
-      firstName: "First name",
+      fullName: "First and last name",
       resetLink: "The reset link (secret, works once)",
       appName: "The app name",
-      year: "This year",
     },
   },
   {
@@ -1122,80 +1046,25 @@ This is an automated message from {{appName}}.`,
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
-  <table role="presentation" style="width: 100%; border-collapse: collapse;">
-    <tr>
-      <td align="center" style="padding: 40px 0;">
-        <table role="presentation" style="width: 100%; max-width: 600px; border-collapse: collapse;">
-          <!-- Header -->
-          <tr>
-            <td style="background-color: #1976d2; padding: 30px 40px; border-radius: 8px 8px 0 0;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">
-                {{appName}}
-              </h1>
-            </td>
-          </tr>
-
-          <!-- Body -->
-          <tr>
-            <td style="background-color: #ffffff; padding: 40px;">
-              
-      <h2 style="margin: 0 0 20px; color: #333333; font-size: 20px; font-weight: 600;">
-        Survey Report
-      </h2>
-      <p style="margin: 0 0 20px; color: #555555; font-size: 16px; line-height: 1.6;">
-        Please find attached the survey report for:
-      </p>
-      <table style="width: 100%; margin: 20px 0; border-collapse: collapse; background-color: #f9f9f9; border-radius: 8px;">
-        <tr>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #888888; width: 140px;">Survey</td>
-          <td style="padding: 16px 20px; border-bottom: 1px solid #eeeeee; color: #333333; font-weight: 600;">{{surveyTitle}}</td>
-        </tr>
-        <tr>
-          <td style="padding: 16px 20px; color: #888888;">Sent By</td>
-          <td style="padding: 16px 20px; color: #333333; font-weight: 500;">{{senderName}}</td>
-        </tr>
-      </table>
-      <p style="margin: 20px 0 0; color: #555555; font-size: 14px; line-height: 1.6;">
-        The PDF report is attached to this email.
-      </p>
-    
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="background-color: #fafafa; padding: 30px 40px; border-radius: 0 0 8px 8px; border-top: 1px solid #eeeeee;">
-              <p style="margin: 0 0 10px; color: #888888; font-size: 13px; text-align: center;">
-                This is an automated message from {{appName}}.
-              </p>
-              <p style="margin: 0; color: #888888; font-size: 13px; text-align: center;">
-                &copy; {{year}} {{appName}}. All rights reserved.
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+<body style="margin: 0; padding: 32px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #f5f5f5; color: #333333;">
+  <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; padding: 32px; font-size: 16px; line-height: 1.6;">
+    <p style="margin: 0 0 16px;">This is an automatically generated email from an unmonitored email address. Please, do not reply to this email address.</p>
+    <p style="margin: 0 0 16px;">Please find your generated inspection report attached. Please, download and store a copy on your device or PC, no copy is stored on the server.</p>
+    <p style="margin: 0 0 16px;">Please, extract the report and image file to the same location on your device or PC to view the embedded images.</p>
+    <p style="margin: 0;">Regards<br>The SurveyScriber Team.</p>
+  </div>
 </body>
 </html>`,
-    text: `{{appName}} - Survey Report
+    text: `This is an automatically generated email from an unmonitored email address. Please, do not reply to this email address.
 
-Please find attached the survey report for:
+Please find your generated inspection report attached. Please, download and store a copy on your device or PC, no copy is stored on the server.
 
-Survey: {{surveyTitle}}
-Sent By: {{senderName}}
+Please, extract the report and image file to the same location on your device or PC to view the embedded images.
 
-The PDF report is attached to this email.
-
----
-This is an automated message from {{appName}}.`,
+Regards
+The SurveyScriber Team.`,
     placeholders: {
-      surveyTitle: "Survey title",
-      senderName: "Name of the person sending the report",
-      appName: "The app name",
-      year: "This year",
+      surveyTitle: "Survey title (subject line)",
     },
   },
 ];

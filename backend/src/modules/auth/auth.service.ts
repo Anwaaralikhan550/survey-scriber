@@ -39,7 +39,7 @@ export class AuthService {
   private readonly logger = new Logger(AuthService.name);
   private readonly maxImageSize = 5 * 1024 * 1024; // 5MB
   private readonly allowedMimeTypes = ['image/jpeg', 'image/png'];
-  private readonly RESET_TOKEN_EXPIRY_MINUTES = 15;
+  private readonly RESET_TOKEN_EXPIRY_MINUTES = 30;
   private readonly INVITE_TOKEN_EXPIRY_MINUTES = 7 * 24 * 60;
   private readonly urlBuilder: ApiUrlBuilder;
 
@@ -509,6 +509,7 @@ export class AuthService {
         user.email,
         user.firstName || 'User',
         plainToken,
+        user.lastName || '',
       );
       this.logger.log(`Password reset email sent to user: ${user.id}`);
     } catch (error) {
@@ -535,7 +536,7 @@ export class AuthService {
   async sendAdminPasswordReset(user: User): Promise<boolean> {
     const token = await this.issuePasswordToken(user.id, this.RESET_TOKEN_EXPIRY_MINUTES);
     try {
-      await this.emailService.sendPasswordResetEmail(user.email, user.firstName || 'User', token);
+      await this.emailService.sendPasswordResetEmail(user.email, user.firstName || 'User', token, user.lastName || '');
       return true;
     } catch (error) {
       this.logger.error(`Failed to send password reset email: ${error}`);

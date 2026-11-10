@@ -57,10 +57,12 @@ export class EmailService {
     toEmail: string,
     firstName: string,
     resetToken: string,
+    lastName = '',
   ): Promise<void> {
     const resetLink = `${this.frontendUrl}/reset-password?token=${resetToken}`;
+    const fullName = [firstName, lastName].filter(Boolean).join(' ');
 
-    const { subject, html, text } = await this.templates.render('password_reset', { firstName, resetLink });
+    const { subject, html, text } = await this.templates.render('password_reset', { fullName, resetLink });
 
     await this.sendEmail(toEmail, subject, html, text);
   }

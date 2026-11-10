@@ -73,6 +73,21 @@ const same = (mail: any, want: any) => {
   expect(mail.text).toBe(want.text);
 };
 
+// Client file (4), 10 Nov 2026: the wording of the Report and Forgot Password emails.
+const CLIENT_REPORT_TEXT = [
+  'This is an automatically generated email from an unmonitored email address. Please, do not reply to this email address.',
+  'Please find your generated inspection report attached. Please, download and store a copy on your device or PC, no copy is stored on the server.',
+  'Please, extract the report and image file to the same location on your device or PC to view the embedded images.',
+  'Regards\nThe SurveyScriber Team.',
+].join('\n\n');
+const CLIENT_RESET_TEXT = [
+  'Hi Grace,',
+  'You recently requested a new password. Please ignore this email if you have not made this request, no changes have been made to your account, yet. Otherwise, you can reset your password by clicking the link below:',
+  'https://app.example.com/reset-password?token=abc',
+  'This password reset link is only valid for 30 minutes from the time of your request.',
+  'Thanks\nSurveyScriber Team',
+].join('\n\n');
+
 describe('with no edits, every email is word for word what it was', () => {
   beforeAll(() => jest.useFakeTimers({ now: new Date('2026-11-04T10:00:00Z'), doNotFake: ['nextTick', 'setImmediate'] }));
   afterAll(() => jest.useRealTimers());
@@ -118,7 +133,9 @@ describe('with no edits, every email is word for word what it was', () => {
   it('survey report keeps its attachment', async () => {
     const { notifications, sent } = setup();
     await notifications.sendSurveyReportEmail('c@example.com', 'Oak Road', Buffer.from('pdf'), 'Sam Lee');
-    same(sent[0], baseline.survey_report);
+    expect(sent[0].subject).toBe('Survey Report - Oak Road');
+    expect(sent[0].text).toBe(CLIENT_REPORT_TEXT);
+    expect(sent[0].html).toContain('Please, extract the report and image file to the same location');
     expect(sent[0].attachments[0].filename).toBe('Survey_Report_Oak_Road.pdf');
   });
 
@@ -127,7 +144,8 @@ describe('with no edits, every email is word for word what it was', () => {
     await auth.sendPasswordResetEmail('a@example.com', 'Grace', 'abc');
     await auth.sendAccountInviteEmail('a@example.com', 'Grace', 'abc');
     await magic.sendMagicLinkEmail('a@example.com', 'Grace', 'abc');
-    same(sent[0], baseline.password_reset);
+    expect(sent[0].subject).toBe('Reset your SurveyScriber password');
+    expect(sent[0].text).toBe(CLIENT_RESET_TEXT);
     same(sent[1], baseline.account_invite);
     same(sent[2], baseline.magic_link);
   });
@@ -167,7 +185,7 @@ describe('edited emails', () => {
     prisma.emailTemplate.findUnique.mockRejectedValue(new Error('database down'));
     await auth.sendPasswordResetEmail('a@example.com', 'Grace', 'abc');
     expect(sent[0].subject).toBe('Reset your SurveyScriber password');
-    expect(sent[0].html).toContain('Reset Password');
+    expect(sent[0].html).toContain('You recently requested a new password');
   });
 
   it('a script in a client name stays text in the HTML', async () => {

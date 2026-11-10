@@ -180,7 +180,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Reset password with token',
-    description: 'Reset password using the token from the email link. Token expires after 15 minutes.',
+    description: 'Reset password using the token from the email link. Token expires after 30 minutes.',
   })
   @ApiResponse({
     status: 200,
