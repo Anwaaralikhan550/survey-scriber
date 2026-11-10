@@ -142,7 +142,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         otherText: 'et_stack_other',
         pdfOptions: ['brick', 'stone', 'rendered masonry'],
       ),
-    ],
+    ],
     pdf:
         'Description: The chimney stack(s) are constructed of brick, stone, rendered masonry, other construction.',
   ),
@@ -158,7 +158,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         dropdownOptions: ['original', 'replaced', 'rebuilt'],
         pdfOptions: ['original', 'replaced', 'rebuilt'],
       ),
-    ],
+    ],
     pdf:
         'The chimney stack(s) appear original, replaced, rebuilt.',
   ),
@@ -187,7 +187,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
           'caps',
         ],
       ),
-    ],
+    ],
     pdf:
         'Pots: The chimney stack(s) are fitted with clay pots, terracotta pots, metal flues, cowls, caps, other pot(s).',
   ),
@@ -214,7 +214,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
           'health and safety restrictions',
         ],
       ),
-    ],
+    ],
     pdf:
         'Not fully inspected: The chimney stack(s) could not be fully inspected because of height, restricted access, adjacent buildings, roof configuration, health and safety restrictions.',
   ),
@@ -13146,7 +13146,8 @@ extension _VerbatimSpec on InspectionPhraseEngine {
         bool hit(String? f, String? v) =>
             (answers[f] ?? '').trim().toLowerCase() == (v ?? '').toLowerCase();
         if (!hit(rule.whenField, rule.whenValue) &&
-            !rule.whenAny.any((p) => hit(p[0], p[1]))) {
+            !rule.whenAny.any((p) => hit(p[0], p[1])) &&
+            !_choiceTicksGate(rule, answers)) {
           continue;
         }
       }
@@ -13184,6 +13185,29 @@ extension _VerbatimSpec on InspectionPhraseEngine {
       ));
     }
     return out;
+  }
+
+  /// A checkbox gate (e.g. "Garage walls") with its choices listed under it.
+  /// The screen lets the surveyor tick a choice without ticking the gate;
+  /// a ticked choice then counts as the gate being ticked, so the sentence
+  /// is not silently dropped. Only checkbox gates (`whenValue` 'true') with
+  /// tick-box choices qualify; no choice key is shared between rules.
+  bool _choiceTicksGate(VerbatimRule rule, Map<String, String> answers) {
+    if ((rule.whenValue ?? '').toLowerCase() != 'true' ||
+        rule.whenAny.isNotEmpty) {
+      return false;
+    }
+    bool ticked(String key) =>
+        (answers[key] ?? '').trim().toLowerCase() == 'true';
+    for (final token in rule.tokens) {
+      if (token.options.keys.any(ticked) || token.legacy.keys.any(ticked)) {
+        return true;
+      }
+      if (token.otherCheckbox != null && ticked(token.otherCheckbox!)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   List<String> _verbatimTokenItems(
