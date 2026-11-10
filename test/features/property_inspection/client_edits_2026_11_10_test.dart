@@ -124,6 +124,17 @@ void main() {
     expect(ni, contains('Not Inspected: The usual external works at eaves level'));
   });
 
+  test('D5 Porch joint defects talk about the porch; conservatory unchanged', () {
+    final porch = engine.buildPhrases(
+      'activity_outside_property_porch_open_to_building__open_to_building',
+      {'cb_not_inspected': 'true'},
+    ).join('\n');
+    expect(porch, contains('junction between the porch and the main building'));
+    expect(porch, isNot(contains('conservatory')));
+    expect(phraseTexts['{E_CONSERVATORY_PORCHES}::{E7_C_JOINT_DEFECTS}'],
+        contains('junction between the conservatory and the main building'));
+  });
+
   test('A8 Garden condition talks about the garden, not the garage', () {
     final out = engine.buildPhrases(
       'activity_grounds_other_front_garden',

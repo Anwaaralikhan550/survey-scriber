@@ -196,6 +196,13 @@
       "reviewedIn": "phrase_texts.json H2 garden condition, client file (3) item A8, 10 Nov 2026",
       "reason": "The PDF repeated the H1 garage condition sentence under H2 Gardens, so the garden condition read 'the garage appears'. Client reported it as the wrong comment (10 Nov 2026). Only the two words 'garage' were changed to 'garden'; the rest is the PDF text word for word.",
       "template": "Condition: Where visible, the garden appears in {H2_GARDEN_CONDITION_COND} condition. Routine maintenance appropriate to the age and construction of the garden should be expected."
+    },
+    {
+      "master": "{E_CONSERVATORY_PORCHES}",
+      "subCode": "{E7_P_JOINT_DEFECTS}",
+      "reviewedIn": "phrase_texts.json porch building joint defects, client file (3) item D5, 10 Nov 2026",
+      "reason": "The porch text repeated the conservatory sentence ('junction between the conservatory and the main building'). Client asked to use porch for porch sections and conservatory for conservatory (10 Nov 2026). Only 'conservatory' was changed to 'porch'; the rest is the PDF text word for word.",
+      "template": "Building Joint Defects: Defects were noted to the junction between the porch and the main building. The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects. Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration."
     }
   ]
 }

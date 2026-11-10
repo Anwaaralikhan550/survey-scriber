@@ -917,7 +917,7 @@
           "{E_CONSERVATORY_PORCHES}"
         ],
         "sub": "{E7_P_JOINT_DEFECTS}",
-        "text": "Building Joint Defects: Defects were noted to the junction between the conservatory and the main building. The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects. Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration.",
+        "text": "Building Joint Defects: Defects were noted to the junction between the porch and the main building. The defects may include cracked mortar pointing, sealants and weatherproof junction details or other defects. Repairs should be carried out to maintain a weathertight seal and reduce the risk of water penetration and further deterioration.",
         "tokens": [],
         "when": [
           "cb_not_inspected",
