@@ -12,5 +12,5 @@ class ValuationRepository extends BaseSurveyRepository {
         );
 
   /// Bump this when the bundled JSON changes (see InspectionRepository).
-  static const int bundledVersion = 4;
+  static const int bundledVersion = 5;
 }

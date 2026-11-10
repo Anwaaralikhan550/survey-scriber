@@ -1078,12 +1078,6 @@ class ValuationPhraseEngine {
       final vn = _val(answers, 'et_visibility_notes_fr');
       if (vn.isNotEmpty) phrases.add(_capitalizeFirst(vn));
     }
-    final vent = _val(answers, 'actv_roof_ventilation_fr');
-    if (vent.isNotEmpty) {
-      phrases.add(
-          'Roof ventilation is provided and appears ${vent.toLowerCase()}.');
-    }
-
     _addRemarks(phrases, answers, 'et_general_remarks_flat_roof');
     return phrases;
   }

@@ -222,7 +222,6 @@
             { "id": "cb_partial_view_fr", "label": "Partial View", "type": "checkbox" },
             { "id": "actv_visibility_condition_fr", "label": "Visibility Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
             { "id": "et_visibility_notes_fr", "label": "Visibility Notes", "type": "text", "conditionalOn": "actv_visibility_condition_fr=Unsatisfactory" },
-            { "id": "actv_roof_ventilation_fr", "label": "Roof Ventilation", "type": "dropdown", "options": ["Sufficient", "Not Sufficient"] },
             { "id": "et_general_remarks_flat_roof", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -757,13 +756,11 @@
             { "id": "cb_lpg", "label": "LPG", "type": "checkbox" },
             { "id": "cb_gas_hw", "label": "Gas", "type": "checkbox" },
             { "id": "cb_electric_hw", "label": "Electric", "type": "checkbox" },
-            { "id": "cb_solid_hw", "label": "Solid", "type": "checkbox" },
+            { "id": "cb_solid_hw", "label": "Solid Fuel", "type": "checkbox" },
             { "id": "cb_oil", "label": "Oil", "type": "checkbox" },
             { "id": "cb_radiators", "label": "Radiators", "type": "checkbox" },
             { "id": "cb_warm_air", "label": "Warm Air", "type": "checkbox" },
             { "id": "cb_storage", "label": "Storage", "type": "checkbox" },
-            { "id": "cb_full", "label": "Full", "type": "checkbox" },
-            { "id": "cb_part", "label": "Part", "type": "checkbox" },
             { "id": "cb_none_hw", "label": "None", "type": "checkbox" },
             { "id": "cb_other_657", "label": "Other", "type": "checkbox" },
             { "id": "et_other_301", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_657" },

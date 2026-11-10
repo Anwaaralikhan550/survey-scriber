@@ -27,6 +27,47 @@ void main() {
     expect(found, contains('Evidence of building movement was noted: structural movement.'));
   });
 
+  group('C4 C12 field removals', () {
+    final tree = jsonDecode(File('assets/property_valuation/valuation_tree.json').readAsStringSync())
+        as Map<String, dynamic>;
+    final fields = {
+      for (final s in tree['sections'] as List)
+        for (final n in (s as Map)['nodes'] as List)
+          (n as Map)['id'] as String: {
+            for (final f in (n['fields'] as List? ?? const [])) (f as Map)['id'] as String: f['label'],
+          },
+    };
+
+    test('C4 Flat Roof has no Roof Ventilation', () {
+      expect(fields['val_flat_roof']!.keys, isNot(contains('actv_roof_ventilation_fr')));
+      expect(
+        engine.buildPhrases('val_flat_roof', {'actv_roof_ventilation_fr': 'Sufficient'}).join(' '),
+        isNot(contains('Roof ventilation')),
+      );
+      // Pitched roof keeps its own ventilation.
+      expect(fields['val_pitched_roof']!.keys.any((k) => k.contains('ventilation')), isTrue);
+    });
+
+    test('C12 Hot Water: no Full/Part, Solid reads Solid Fuel', () {
+      final hw = fields['val_hot_water_central_heating']!;
+      expect(hw.keys, isNot(contains('cb_full')));
+      expect(hw.keys, isNot(contains('cb_part')));
+      expect(hw['cb_none_hw'], 'None');
+      expect(hw['cb_solid_hw'], 'Solid Fuel');
+    });
+
+    test('C12 the remaining answers still print', () {
+      expect(
+        engine.buildPhrases('val_hot_water_central_heating', {'cb_gas_hw': 'true', 'cb_solid_hw': 'true'}).join(' '),
+        contains('fuelled by gas and solid fuel'),
+      );
+      expect(
+        engine.buildPhrases('val_hot_water_central_heating', {'cb_none_hw': 'true'}).join(' '),
+        contains('No central heating system is installed'),
+      );
+    });
+  });
+
   group('A4 "Other" in a dropdown has a text box, and the typed words print', () {
     test('every valuation dropdown with Other has its text box', () {
       final tree = jsonDecode(File('assets/property_valuation/valuation_tree.json').readAsStringSync())
