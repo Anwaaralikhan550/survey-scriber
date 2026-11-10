@@ -8848,10 +8848,13 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
           'g4l_bedroom': 'bedroom',
           'g4l_under_the_stairs': 'under the stairs',
           'g4l_garage': 'garage',
+          // Not in the PDF list: client edit list, 2 Nov 2026 (Heating
+          // location to include airing cupboard).
+          'g4l_airing_cupboard': 'airing cupboard',
         },
         otherCheckbox: 'g4l_other',
         otherText: 'g4l_other_text',
-        pdfOptions: ['kitchen', 'utility room', 'bedroom', 'under the stairs', 'garage'],
+        pdfOptions: ['kitchen', 'utility room', 'bedroom', 'under the stairs', 'garage', 'airing cupboard'],
       ),
     ],
     pdf:

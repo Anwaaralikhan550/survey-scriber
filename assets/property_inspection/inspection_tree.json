@@ -4151,17 +4151,10 @@
           ]
         },
         {
-          "id": "group_heating_101",
-          "title": "Heating",
-          "type": "group",
-          "parentId": "group_g4_heating_92",
-          "order": 0
-        },
-        {
           "id": "activity_services_heating_about_heating",
-          "title": "About Heating System",
+          "title": "Heating",
           "type": "screen",
-          "parentId": "group_heating_101",
+          "parentId": "group_g4_heating_92",
           "order": 1,
           "fields": [
             {
@@ -4255,6 +4248,11 @@
             {
               "id": "g4l_garage",
               "label": "garage",
+              "type": "checkbox"
+            },
+            {
+              "id": "g4l_airing_cupboard",
+              "label": "airing cupboard",
               "type": "checkbox"
             },
             {
@@ -6011,15 +6009,10 @@
           "id": "activity_services_heating_main_screen",
           "title": "Heating",
           "type": "screen",
-          "parentId": "group_heating_101",
+          "parentId": "group_g4_heating_92",
           "order": -1,
           "inlinePosition": "header",
           "fields": [
-            {
-              "id": "label_repairs_21",
-              "label": "Repairs",
-              "type": "label"
-            },
             {
               "id": "label_heating",
               "label": "Heating",
@@ -6059,197 +6052,6 @@
                 "2",
                 "3"
               ]
-            },
-            {
-              "id": "cb_not_inspected",
-              "label": "Not Inspected",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_no_heating",
-              "label": "No Heating",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "cb_communal_heating",
-              "label": "Communal Heating",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "label_other_heating",
-              "label": "Other Heating",
-              "type": "label",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "cb_oil_filled",
-              "label": "Oil filled",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "cb_electric_storage",
-              "label": "Electric storage",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "cb_convector",
-              "label": "Convector",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "cb_other_923",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "et_other_717",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "cb_other_923 & !cb_not_inspected"
-            },
-            {
-              "id": "label_property_heated_by",
-              "label": "Property heated by",
-              "type": "label",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "actv_boiler",
-              "label": "Boiler",
-              "type": "dropdown",
-              "options": [
-                "Combination boiler",
-                "Conventional boiler",
-                "Condensing boiler",
-                "Conventional boiler combined with tank",
-                "Other"
-              ],
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "label_heating_location",
-              "label": "Location",
-              "type": "label",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4b_kitchen",
-              "label": "Kitchen",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4b_utility",
-              "label": "Utility",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4b_bedroom",
-              "label": "Bedroom",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4b_garage",
-              "label": "Garage",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4b_lounge",
-              "label": "Lounge",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4b_chimney_breast",
-              "label": "Chimney breast",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4b_airing_cupboard",
-              "label": "Airing cupboard",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4b_other",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4b_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "g4b_other & !cb_not_inspected"
-            },
-            {
-              "id": "label_boiler_flue",
-              "label": "Boiler Flue Connected To",
-              "type": "label",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "actv_location_new",
-              "label": "Location",
-              "type": "dropdown",
-              "options": [
-                "Sidewall",
-                "Roof covering",
-                "Chimney",
-                "Other"
-              ],
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "actv_condition",
-              "label": "Condition",
-              "type": "dropdown",
-              "options": [
-                "Reasonable",
-                "Satisfactory",
-                "Unsatisfactory and Poor"
-              ],
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "label_heat_emitters",
-              "label": "Connected heat emitters",
-              "type": "label",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4he_radiators",
-              "label": "Radiators",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4he_underfloor_pipes",
-              "label": "Underfloor pipes",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "g4he_other",
-              "label": "Other",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
-            },
-            {
-              "id": "cb_old_boiler",
-              "label": "Old Boiler",
-              "type": "checkbox",
-              "conditionalOn": "!cb_not_inspected"
             }
           ]
         },

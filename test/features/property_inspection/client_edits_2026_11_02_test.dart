@@ -300,28 +300,35 @@ void main() {
     expect(usedAs.fields.single.options, ['Not in use', 'In use']);
   });
 
-  group('Heating main screen', () {
+  // Client file (3), 10 Nov 2026: the Heating screen's own copies of these
+  // controls were removed; the Heating screen (About Heating content) asks them.
+  group('Heating screen', () {
     final fields = sanitizeInspectionFieldsForScreen(
-      'activity_services_heating_main_screen',
-      nodes['activity_services_heating_main_screen']!.fields,
+      'activity_services_heating_about_heating',
+      nodes['activity_services_heating_about_heating']!.fields,
     );
 
     test('Location: multiple selection with Airing cupboard and Other text', () {
-      expect(fields.map((f) => f.id), isNot(contains('actv_location')));
-      final labels = fields.where((f) => f.id.startsWith('g4b_')).map((f) => f.label).toList();
-      expect(labels, ['Kitchen', 'Utility', 'Bedroom', 'Garage', 'Lounge', 'Chimney breast', 'Airing cupboard', 'Other', 'Other']);
-      expect(fields.firstWhere((f) => f.id == 'g4b_airing_cupboard').type, InspectionFieldType.checkbox);
-      final otherText = fields.firstWhere((f) => f.id == 'g4b_other_text');
+      final labels = fields.where((f) => f.id.startsWith('g4l_')).map((f) => f.label).toList();
+      expect(labels, ['kitchen', 'utility room', 'bedroom', 'under the stairs', 'garage', 'airing cupboard', 'Other', 'Other']);
+      expect(fields.firstWhere((f) => f.id == 'g4l_airing_cupboard').type, InspectionFieldType.checkbox);
+      final otherText = fields.firstWhere((f) => f.id == 'g4l_other_text');
       expect(otherText.type, InspectionFieldType.text);
-      expect(shouldShowInspectionField(otherText, const {'g4b_other': 'true'}), isTrue);
+      expect(shouldShowInspectionField(otherText, const {'g4l_other': 'true'}), isTrue);
       expect(shouldShowInspectionField(otherText, const {}), isFalse);
     });
 
     test('Connected heat emitters: multiple selection', () {
-      expect(fields.map((f) => f.id), isNot(contains('actv_connected_heat')));
-      final ticks = fields.where((f) => f.id.startsWith('g4he_'));
-      expect(ticks.map((f) => f.label), ['Radiators', 'Underfloor pipes', 'Other']);
-      expect(ticks.every((f) => f.type == InspectionFieldType.checkbox), isTrue);
+      final ticks = fields.where((f) => f.id.startsWith('g4e_') && f.type == InspectionFieldType.checkbox);
+      expect(ticks.map((f) => f.label), ['radiators', 'underfloor heating pipes', 'ceiling vents', 'wall vents', 'Other']);
+    });
+
+    test('rating screen keeps only rating and note', () {
+      final rating = sanitizeInspectionFieldsForScreen(
+        'activity_services_heating_main_screen',
+        nodes['activity_services_heating_main_screen']!.fields,
+      );
+      expect(rating.map((f) => f.id), ['android_material_design_spinner4', 'ar_etNote']);
     });
 
     test('values saved before the change become ticks', () {

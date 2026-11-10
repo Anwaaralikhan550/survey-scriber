@@ -217,6 +217,23 @@ void main() {
     );
   });
 
+  test('D13 Heating: one Heating screen with the About Heating content, no extra header', () {
+    final tree = InspectionTreePayload.fromJson(
+      File('assets/property_inspection/inspection_tree.json').readAsStringSync(),
+    );
+    final g = tree.sections.firstWhere((s) => s.key == 'G').nodes;
+    final under = g.where((n) => n.parentId == 'group_g4_heating_92').toList();
+    expect(under.map((n) => n.title), containsAll(['Heating', 'Repairs']));
+    expect(g.any((n) => n.id == 'group_heating_101'), isFalse);
+    expect(g.any((n) => n.title == 'About Heating System'), isFalse);
+    final heating = g.firstWhere((n) => n.id == 'activity_services_heating_about_heating');
+    expect(heating.title, 'Heating');
+    expect(heating.parentId, 'group_g4_heating_92');
+    final rating = g.firstWhere((n) => n.id == 'activity_services_heating_main_screen');
+    expect(rating.parentId, 'group_g4_heating_92');
+    expect(rating.inlinePosition, 'header');
+  });
+
   test('A8 Garden condition talks about the garden, not the garage', () {
     final out = engine.buildPhrases(
       'activity_grounds_other_front_garden',
