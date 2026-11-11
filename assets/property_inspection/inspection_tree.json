@@ -843,6 +843,136 @@
           ]
         },
         {
+          "id": "activity_other_garden",
+          "title": "Other Garden",
+          "type": "screen",
+          "parentId": "group_ground_3",
+          "order": 9,
+          "fields": [
+            {
+              "id": "og_location",
+              "label": "Garden location (for example Side Garden)",
+              "type": "text"
+            },
+            {
+              "id": "cb_other_garden_type",
+              "label": "Other garden finishes",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_og_finishes",
+              "label": "Laid to",
+              "type": "label"
+            },
+            {
+              "id": "og_type_0_lawn",
+              "label": "lawn",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_artificial_lawn",
+              "label": "artificial lawn",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_paving",
+              "label": "paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_timber_decking",
+              "label": "timber decking",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_gravel",
+              "label": "gravel",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_stones",
+              "label": "stones",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_hardstanding",
+              "label": "hardstanding",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "og_type_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_other_garden_fence",
+              "label": "Other garden boundaries",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_og_boundaries",
+              "label": "Boundaries formed by",
+              "type": "label"
+            },
+            {
+              "id": "og_fence_0_timber_fencing",
+              "label": "timber fencing",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_brick_wall",
+              "label": "brick wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_block_wall",
+              "label": "block wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_hedging",
+              "label": "hedging",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_wire_mesh",
+              "label": "wire mesh",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_concrete_sections",
+              "label": "concrete sections",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_metal_railings",
+              "label": "metal railings",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "og_fence_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
           "id": "activity_property_flate",
           "title": "Flat Maisonettes",
           "type": "screen",
@@ -7858,6 +7988,43 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_no_access",
+          "title": "Not inspected",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 2,
+          "fields": [
+            {
+              "id": "label_basement_access",
+              "label": "Could not be inspected due to",
+              "type": "label"
+            },
+            {
+              "id": "f9bna_restricted_access",
+              "label": "restricted access",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bna_no_access",
+              "label": "no access",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_704b",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_other_412b",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cb_other_704b",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_other_celler_walls",
           "title": "Walls",
           "type": "screen",
@@ -7899,6 +8066,51 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "f9cw_other"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_basement_walls",
+          "title": "Walls",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 3,
+          "fields": [
+            {
+              "id": "label_basement_walls",
+              "label": "Walls formed in",
+              "type": "label"
+            },
+            {
+              "id": "f9bcw_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_loose_soil",
+              "label": "loose soil",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f9bcw_other"
             }
           ]
         },
@@ -7948,10 +8160,76 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_floor",
+          "title": "Floor",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 4,
+          "fields": [
+            {
+              "id": "label_basement_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "f9bcf_solid_concrete",
+              "label": "solid concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_loose_soil",
+              "label": "loose soil",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f9bcf_other"
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_other_celler_condition",
           "title": "Condition",
           "type": "screen",
           "parentId": "group_cellar_83",
+          "order": 5,
+          "fields": [
+            {
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_basement_condition",
+          "title": "Condition",
+          "type": "screen",
+          "parentId": "group_basement_84",
           "order": 5,
           "fields": [
             {
@@ -9087,10 +9365,17 @@
         },
         {
           "id": "group_cellar_83",
-          "title": "Cellar/Basement",
+          "title": "Cellar",
           "type": "group",
           "parentId": "group_other_82",
           "order": 4
+        },
+        {
+          "id": "group_basement_84",
+          "title": "Basement",
+          "type": "group",
+          "parentId": "group_other_82",
+          "order": 5
         },
         {
           "id": "activity_in_side_property_other_repair",
@@ -9954,6 +10239,24 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_inspected",
+          "title": "Used as",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 6,
+          "fields": [
+{
+              "id": "actv_used_as",
+              "label": "Use of basement",
+              "type": "dropdown",
+              "options": [
+                "Not in use",
+                "In use"
+              ]
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_roof_structure_not_inspected",
           "title": "Not Inspected",
           "type": "screen",
@@ -10550,6 +10853,53 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_not_habitable",
+          "title": "Unsuitable",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 8,
+          "fields": [
+            {
+              "id": "label_basement_limitations",
+              "label": "Should not be regarded as habitable due to",
+              "type": "label"
+            },
+            {
+              "id": "f9bun_low_headroom",
+              "label": "low headroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bun_dampness",
+              "label": "dampness",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bun_difficult_access",
+              "label": "difficult access",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bun_poor_ventilation",
+              "label": "poor ventilation",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_697b",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_other_427b",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cb_other_697b",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_repair_insect_infestation",
           "title": "Insect infestation",
           "type": "screen",
@@ -10784,6 +11134,24 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_flooded",
+          "title": "Flooded",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 10,
+          "fields": [
+            {
+              "id": "actv_possible_flooded",
+              "label": "Flooded",
+              "type": "dropdown",
+              "options": [
+                "Partially",
+                "Significantly"
+              ]
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_repair_timber_rot",
           "title": "Timber rot",
           "type": "screen",
@@ -10952,6 +11320,58 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_damp",
+          "title": "Damp",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 12,
+          "fields": [
+            {
+              "id": "label_basement_damp_areas",
+              "label": "Dampness noted on",
+              "type": "label"
+            },
+            {
+              "id": "f9bdm_lower_walls",
+              "label": "lower walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bdm_upper_walls",
+              "label": "upper walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bdm_throughout_the_basement",
+              "label": "throughout the basement",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bdm_exposed_floor_joists",
+              "label": "exposed floor joists",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_others_389b",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_others_471b",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cb_others_389b",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_serious_dump_b",
+              "label": "Waterproofing failure",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_repair_under_size_timber",
           "title": "Undersize timber",
           "type": "screen",
@@ -11097,6 +11517,20 @@
           "fields": [
             {
               "id": "cb_joists_decay",
+              "label": "Timber decay",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_basement_joists_decay",
+          "title": "Timber decay",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 14,
+          "fields": [
+            {
+              "id": "cb_joists_decay_b",
               "label": "Timber decay",
               "type": "checkbox"
             }
@@ -18593,17 +19027,17 @@
             },
             {
               "id": "e5sd_adequate",
-              "label": "adequate",
+              "label": "inadequate",
               "type": "checkbox"
             },
             {
               "id": "e5sd_properly_installed",
-              "label": "properly installed",
+              "label": "poorly installed",
               "type": "checkbox"
             },
             {
               "id": "e5sd_properly_drained",
-              "label": "properly drained",
+              "label": "poorly drained",
               "type": "checkbox"
             },
             {

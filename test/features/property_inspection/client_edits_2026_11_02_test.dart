@@ -286,8 +286,8 @@ void main() {
     });
   });
 
-  test('Cellar/Basement screens in the client order; "Used as" only holds the use', () {
-    expect(nodes['group_cellar_83']!.title, 'Cellar/Basement');
+  test('Cellar screens in the client order; "Used as" only holds the use', () {
+    expect(nodes['group_cellar_83']!.title, 'Cellar');
     final titles = tree.sections
         .firstWhere((s) => s.key == 'F')
         .nodes

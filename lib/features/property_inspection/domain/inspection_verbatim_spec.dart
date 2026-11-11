@@ -29,6 +29,7 @@ class VerbatimToken {
     this.optional = false,
     this.pdfOptions = const [],
     this.prefixKeys = const {},
+    this.fallback,
   });
 
   /// Placeholder in the bank sentence, e.g. `{CS_STACK_CONSTRUCTION}`.
@@ -70,6 +71,9 @@ class VerbatimToken {
 
   /// The option list exactly as the PDF prints it (without "other").
   final List<String> pdfOptions;
+
+  /// Printed when a free-text field was left empty, instead of dropping the sentence.
+  final String? fallback;
 
   /// Option ids that describe the others (e.g. "replacement" windows) and
   /// are printed in front of them instead of joined with "and":
@@ -3034,17 +3038,17 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       VerbatimToken(
         '{SILL_DEFECTS}',
         options: {
-          'e5sd_adequate': 'adequate',
-          'e5sd_properly_installed': 'properly installed',
-          'e5sd_properly_drained': 'properly drained',
+          'e5sd_adequate': 'inadequate',
+          'e5sd_properly_installed': 'poorly installed',
+          'e5sd_properly_drained': 'poorly drained',
           'e5sd_cracked': 'cracked',
           'e5sd_defective': 'defective',
         },
-        pdfOptions: ['adequate', 'properly installed', 'properly drained', 'cracked', 'defective'],
+        pdfOptions: ['inadequate', 'poorly installed', 'poorly drained', 'cracked', 'defective'],
       ),
     ],
     pdf:
-        'Sill defect: The windowsill projection beyond the face of the wall does not appear to be adequate, properly installed, properly drained, cracked, defective.',
+        'Sill defect: The windowsill projection beyond the face of the wall does not appear to be inadequate, poorly installed, poorly drained, cracked, defective.',
   ),
   VerbatimRule(
     'e5_repair',
@@ -8334,6 +8338,188 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
+    'f9_basement_ni',
+    'activity_inside_property_other_basement_no_access',
+    '{F_OTHER}',
+    '{F9_BASEMENT_NOT_INSPECTED}',
+    [
+      VerbatimToken(
+        '{CELLAR_ACCESS}',
+        options: {
+          'f9bna_restricted_access': 'restricted access',
+          'f9bna_no_access': 'no access',
+        },
+        otherCheckbox: 'cb_other_704b',
+        otherText: 'et_other_412b',
+        pdfOptions: ['restricted access', 'no access'],
+      ),
+    ],
+    pdf:
+        'Basement Not inspected: The property has a basement, but it could not be inspected due to restricted access, no access, other.',
+  ),
+  VerbatimRule(
+    'f9_basement_walls',
+    'activity_inside_property_other_basement_walls',
+    '{F_OTHER}',
+    '{F9_BASEMENT_WALLS}',
+    [
+      VerbatimToken(
+        '{CELLAR_WALLS}',
+        options: {
+          'f9bcw_bricks': 'bricks',
+          'f9bcw_stone': 'stone',
+          'f9bcw_loose_soil': 'loose soil',
+          'f9bcw_concrete': 'concrete',
+        },
+        otherCheckbox: 'f9bcw_other',
+        otherText: 'f9bcw_other_text',
+        pdfOptions: ['bricks', 'stone', 'loose soil', 'concrete'],
+      ),
+    ],
+    pdf:
+        'Walls: The property incorporates a basement and the walls are formed in bricks, stone, loose soil, concrete, other materials.',
+  ),
+  VerbatimRule(
+    'f9_basement_floor',
+    'activity_inside_property_other_basement_floor',
+    '{F_OTHER}',
+    '{F9_BASEMENT_FLOOR}',
+    [
+      VerbatimToken(
+        '{CELLAR_FLOOR}',
+        options: {
+          'f9bcf_solid_concrete': 'solid concrete',
+          'f9bcf_timber': 'timber',
+          'f9bcf_stone': 'stone',
+          'f9bcf_loose_soil': 'loose soil',
+        },
+        otherCheckbox: 'f9bcf_other',
+        otherText: 'f9bcf_other_text',
+        pdfOptions: ['solid concrete', 'timber', 'stone', 'loose soil'],
+      ),
+    ],
+    pdf:
+        'Floor: The floor is constructed of solid concrete, timber, stone, loose soil, other.',
+  ),
+  VerbatimRule(
+    'f9_basement_cond',
+    'activity_inside_property_other_basement_condition',
+    '{F_OTHER}',
+    '{F9_BASEMENT_CONDITION}',
+    [
+      VerbatimToken(
+        '{CELLAR_CONDITION}',
+        dropdown: 'actv_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Condition: Where visible, the basement appears in good, reasonable, fair, poor, very poor condition.',
+  ),
+  VerbatimRule(
+    'f9_basement_unused',
+    'activity_inside_property_other_basement_inspected',
+    '{F_OTHER}',
+    '{F9_BASEMENT_NOT_IN_USE}',
+    [
+    ],
+    whenField: 'actv_used_as',
+    whenValue: 'Not in use',
+  ),
+  VerbatimRule(
+    'f9_basement_used',
+    'activity_inside_property_other_basement_inspected',
+    '{F_OTHER}',
+    '{F9_BASEMENT_IN_USE}',
+    [
+    ],
+    whenField: 'actv_used_as',
+    whenValue: 'In use',
+  ),
+  VerbatimRule(
+    'f9_basement_unsuitable',
+    'activity_inside_property_other_basement_not_habitable',
+    '{F_OTHER}',
+    '{F9_BASEMENT_UNSUITABLE}',
+    [
+      VerbatimToken(
+        '{CELLAR_LIMITATIONS}',
+        options: {
+          'f9bun_low_headroom': 'low headroom',
+          'f9bun_dampness': 'dampness',
+          'f9bun_difficult_access': 'difficult access',
+          'f9bun_poor_ventilation': 'poor ventilation',
+        },
+        otherCheckbox: 'cb_other_697b',
+        otherText: 'et_other_427b',
+        pdfOptions: ['low headroom', 'dampness', 'difficult access', 'poor ventilation'],
+      ),
+    ],
+    pdf:
+        'Unsuitable: The basement should not be regarded as habitable accommodation due to low headroom, dampness, difficult access, poor ventilation, other limitations.',
+  ),
+  VerbatimRule(
+    'f9_basement_flooded',
+    'activity_inside_property_other_basement_flooded',
+    '{F_OTHER}',
+    '{F9_BASEMENT_FLOODED}',
+    [
+      VerbatimToken(
+        '{CELLAR_FLOOD_DEGREE}',
+        dropdown: 'actv_possible_flooded',
+        dropdownOptions: ['Partially', 'Significantly'],
+        lower: true,
+        pdfOptions: ['partially', 'significantly'],
+      ),
+    ],
+    pdf:
+        'Flooded: The basement was partially, significantly flooded due to defective drainage or groundwater ingress.',
+  ),
+  VerbatimRule(
+    'f9_basement_damp',
+    'activity_inside_property_other_basement_damp',
+    '{F_OTHER}',
+    '{F9_BASEMENT_DAMP}',
+    [
+      VerbatimToken(
+        '{CELLAR_DAMP_AREAS}',
+        options: {
+          'f9bdm_lower_walls': 'lower walls',
+          'f9bdm_upper_walls': 'upper walls',
+          'f9bdm_throughout_the_basement': 'throughout the basement',
+          'f9bdm_exposed_floor_joists': 'exposed floor joists',
+        },
+        otherCheckbox: 'cb_others_389b',
+        otherText: 'et_others_471b',
+        pdfOptions: ['lower walls', 'upper walls', 'throughout the basement', 'exposed floor joists'],
+      ),
+    ],
+    pdf:
+        'Damp: Dampness was noted on the lower walls, upper walls, throughout the basement, exposed floor joists, other areas.',
+  ),
+  VerbatimRule(
+    'f9_basement_waterproofing',
+    'activity_inside_property_other_basement_damp',
+    '{F_OTHER}',
+    '{F9_BASEMENT_WATERPROOFING}',
+    [
+    ],
+    whenField: 'cb_serious_dump_b',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'f9_basement_decay',
+    'activity_inside_property_other_basement_joists_decay',
+    '{F_OTHER}',
+    '{F9_BASEMENT_TIMBER_DECAY}',
+    [
+    ],
+    whenField: 'cb_joists_decay_b',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
     'f9_general',
     'activity_inside_property_other_main_screen',
     '{F_OTHER}',
@@ -11974,6 +12160,64 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenAny: [['rear_fence_0_timber_fencing', 'true'], ['rear_fence_0_brick_wall', 'true'], ['rear_fence_0_block_wall', 'true'], ['rear_fence_0_hedging', 'true'], ['rear_fence_0_wire_mesh', 'true'], ['rear_fence_0_concrete_sections', 'true'], ['rear_fence_0_metal_railings', 'true'], ['rear_fence_0_other', 'true']],
   ),
   VerbatimRule(
+    'og_type',
+    'activity_other_garden',
+    '{D_GROUND}',
+    '{A4_OTHER_GARDEN}',
+    [
+      VerbatimToken('{A4_OG_NAME_CAP}', text: 'og_location', lower: true, cap: true, fallback: 'other garden'),
+      VerbatimToken('{A4_OG_NAME}', text: 'og_location', lower: true, fallback: 'other garden'),
+      VerbatimToken(
+        '{A4_OG_FINISHES}',
+        options: {
+          'og_type_0_lawn': 'lawn',
+          'og_type_0_artificial_lawn': 'artificial lawn',
+          'og_type_0_paving': 'paving',
+          'og_type_0_timber_decking': 'timber decking',
+          'og_type_0_gravel': 'gravel',
+          'og_type_0_stones': 'stones',
+          'og_type_0_hardstanding': 'hardstanding',
+        },
+        otherCheckbox: 'og_type_0_other',
+        otherText: 'og_type_0_other_text',
+        pdfOptions: ['lawn', 'artificial lawn', 'paving', 'timber decking', 'gravel', 'stones', 'hardstanding'],
+      ),
+    ],
+    pdf:
+        'Other garden: The other garden is laid to lawn, artificial lawn, paving, timber decking, gravel, stones, hardstanding, other finishes.',
+    whenField: 'cb_other_garden_type',
+    whenValue: 'true',
+    whenAny: [['og_type_0_lawn', 'true'], ['og_type_0_artificial_lawn', 'true'], ['og_type_0_paving', 'true'], ['og_type_0_timber_decking', 'true'], ['og_type_0_gravel', 'true'], ['og_type_0_stones', 'true'], ['og_type_0_hardstanding', 'true'], ['og_type_0_other', 'true']],
+  ),
+  VerbatimRule(
+    'og_fence',
+    'activity_other_garden',
+    '{D_GROUND}',
+    '{A4_OTHER_FENCING}',
+    [
+      VerbatimToken(
+        '{A4_OG_BOUNDARIES}',
+        options: {
+          'og_fence_0_timber_fencing': 'timber fencing',
+          'og_fence_0_brick_wall': 'brick wall',
+          'og_fence_0_block_wall': 'block wall',
+          'og_fence_0_hedging': 'hedging',
+          'og_fence_0_wire_mesh': 'wire mesh',
+          'og_fence_0_concrete_sections': 'concrete sections',
+          'og_fence_0_metal_railings': 'metal railings',
+        },
+        otherCheckbox: 'og_fence_0_other',
+        otherText: 'og_fence_0_other_text',
+        pdfOptions: ['timber fencing', 'brick wall', 'block wall', 'hedging', 'wire mesh', 'concrete sections', 'metal railings'],
+      ),
+    ],
+    pdf:
+        'Fencing: Boundaries are formed by timber fencing, brick wall, block wall, hedging, wire mesh, concrete sections, metal railings, other.',
+    whenField: 'cb_other_garden_fence',
+    whenValue: 'true',
+    whenAny: [['og_fence_0_timber_fencing', 'true'], ['og_fence_0_brick_wall', 'true'], ['og_fence_0_block_wall', 'true'], ['og_fence_0_hedging', 'true'], ['og_fence_0_wire_mesh', 'true'], ['og_fence_0_concrete_sections', 'true'], ['og_fence_0_metal_railings', 'true'], ['og_fence_0_other', 'true']],
+  ),
+  VerbatimRule(
     'communal_type',
     'activity_communal_garden',
     '{D_GROUND}',
@@ -13296,7 +13540,8 @@ extension _VerbatimSpec on InspectionPhraseEngine {
     }
     if (token.text != null) {
       final v = (answers[token.text] ?? '').trim();
-      return v.isEmpty ? const [] : [v];
+      if (v.isEmpty) return token.fallback == null ? const [] : [token.fallback!];
+      return [token.lower ? v.toLowerCase() : v];
     }
     final labels = <String, String>{...token.legacy, ...token.options};
     final items = InspectionPhraseEngine._labelsFor(

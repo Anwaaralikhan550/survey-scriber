@@ -65,7 +65,7 @@ slices.append({
     ]})
 
 # ───────────── Sill projection / sill defect ─────────────
-SILL_DEF = 'adequate, properly installed, properly drained, cracked, defective'
+SILL_DEF = 'inadequate, poorly installed, poorly drained, cracked, defective'
 SILL_DD = {'id': 'actv_projection_type', 'label': 'Sill', 'type': 'dropdown', 'options': ['Sill projection', 'Sill defect']}
 slices.append({
     'screen': 'activity_outside_property_windows_sill_projection', 'replace_all': True, 'keep': [],

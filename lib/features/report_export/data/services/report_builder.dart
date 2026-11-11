@@ -1467,9 +1467,11 @@ class ReportBuilder {
     if (id == 'activity_topography') return 61;
     if (id == 'activity_front_garden') return 62;
     if (id == 'activity_rear_garden') return 63;
-    if (id == 'activity_communal_garden') return 64;
-    if (id == 'activity_parking__parking') return 65;
-    if (id == 'activity_gated_community') return 66;
+    // Other Garden sits between Rear and Communal (client edit, 11 Nov 2026).
+    if (id == 'activity_other_garden') return 64;
+    if (id == 'activity_communal_garden') return 65;
+    if (id == 'activity_parking__parking') return 66;
+    if (id == 'activity_gated_community') return 67;
     if (_isListedBuildingScreenId(id)) return 70;
     if (id == 'section_d_energy_merged') return 80;
     if (id == 'activity_property_location') return 90;
@@ -1933,6 +1935,9 @@ class ReportBuilder {
           final groupReportTitle = _reportTitleForNode(sectionDef.key, group);
 
           final mergedPhrases = <String>[];
+          // Basement screens keep their own list, so the report can print them as a second
+          // element after Cellar (client, 11 Nov 2026).
+          final basementPhrases = <String>[];
           final mergedNotes = <String>[];
           final mergedFields = <ReportField>[];
           final wallSynthesis = config.includePhrases &&
@@ -1977,15 +1982,18 @@ class ReportBuilder {
                 screen,
               );
               if (screenPhrases.isNotEmpty) {
+                final target = screen.id.contains('_other_basement_')
+                    ? basementPhrases
+                    : mergedPhrases;
                 if (includeSubheadings &&
                     screenReportTitle.trim().isNotEmpty &&
                     !_sameTitle(screenReportTitle, groupReportTitle) &&
                     !_startsWithTitle(screenPhrases, screenReportTitle)) {
-                  mergedPhrases.add(_mergedSubheading(screenReportTitle));
+                  target.add(_mergedSubheading(screenReportTitle));
                 }
                 // Every PDF paragraph of a Construction screen is report text (type, visible-only,
                 // modern design, concrete advisory ...): never truncate to the first two.
-                mergedPhrases.addAll(screenPhrases);
+                target.addAll(screenPhrases);
               } else {
                 // No phrase handler — convert fields to narrative phrases
                 // so data is not lost when other screens do have phrases.
@@ -2039,6 +2047,7 @@ class ReportBuilder {
           final clientParagraphs = applyClientParagraphRules(
             group.id,
             _composeParagraphs(_cleanupPhrases(mergedPhrases)),
+            basement: _composeParagraphs(_cleanupPhrases(basementPhrases)),
           );
           final cleanedMergedPhrases = isInspection
               ? conditionRatingFirst(clientParagraphs, _ratingExplanations)

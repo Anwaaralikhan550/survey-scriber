@@ -489,6 +489,24 @@ class InspectionPhraseEngine {
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_inside_property_other_celler_joists_decay__joists_decay':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_basement_no_access':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_basement_walls':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_basement_floor':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_basement_condition':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_basement_inspected':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_basement_not_habitable':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_basement_flooded':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_basement_damp':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_inside_property_other_basement_joists_decay':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_in_side_property_other_repair':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_inside_property_other_not_inspected':
@@ -766,6 +784,8 @@ class InspectionPhraseEngine {
       case 'activity_front_garden':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_rear_garden':
+        return const [];  // verbatim rules (inspection_verbatim_spec.dart)
+      case 'activity_other_garden':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)
       case 'activity_communal_garden':
         return const [];  // verbatim rules (inspection_verbatim_spec.dart)

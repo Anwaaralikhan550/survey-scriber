@@ -22,8 +22,12 @@ const clientParagraphGroups = <String>{
 final _labelStart =
     RegExp(r"(?<=[.!?)])\s+(?=[A-Z][A-Za-z0-9&/'() -]{0,48}:\s)");
 
-List<String> applyClientParagraphRules(String groupId, List<String> phrases) {
-  if (groupId == _insideOtherGroup) return _cellarParagraphs(phrases);
+List<String> applyClientParagraphRules(
+  String groupId,
+  List<String> phrases, {
+  List<String> basement = const [],
+}) {
+  if (groupId == _insideOtherGroup) return _cellarParagraphs(phrases, basement);
   if (!clientParagraphGroups.contains(groupId)) return phrases;
   final items = [
     for (final p in phrases)
@@ -55,9 +59,13 @@ List<String> conditionRatingFirst(
   return top.isEmpty ? phrases : [...top, ...rest];
 }
 
-// Cellar/Basement: his heading, then his paragraphs in his order.
+// Cellar and Basement are two elements (client, 11 Nov 2026): each has his heading, then
+// his paragraphs in his order. Basement follows Cellar.
 const _insideOtherGroup = 'group_f9_other_81';
-const _cellarHeading = '[[SUBHEADING]] Cellar/Basement';
+const _cellarHeading = '[[SUBHEADING]] Cellar';
+const _basementHeading = '[[SUBHEADING]] Basement';
+const _basementNotInspectedBank = 'Basement Not inspected: ';
+const _basementConditionStart = 'Condition: Where visible, the basement appears';
 const _cellarNotInspectedBank = 'Cellar/Basement Not inspected: ';
 const _cellarConditionStart = 'Condition: Where visible, the cellar appears';
 const _noDefectsLabel = ' No defects noted: ';
@@ -77,16 +85,21 @@ const _cellarStarts = <String>[
   'Timber decay: Decay was noted',
 ];
 
-List<String> _cellarParagraphs(List<String> phrases) {
+/// The paragraphs of one element: the bank's label on the not-inspected sentence becomes
+/// "Not inspected:", and the Condition sentence gives "No defects noted:" its own paragraph.
+List<String> _elementItems(
+  List<String> phrases,
+  String notInspectedBank,
+  String conditionStart,
+) {
   final items = <String>[];
   for (final raw in phrases) {
     var phrase = raw;
-    if (phrase.startsWith(_cellarNotInspectedBank)) {
-      phrase = 'Not inspected: ${phrase.substring(_cellarNotInspectedBank.length)}';
+    if (phrase.startsWith(notInspectedBank)) {
+      phrase = 'Not inspected: ${phrase.substring(notInspectedBank.length)}';
     }
-    final split = phrase.startsWith(_cellarConditionStart)
-        ? phrase.indexOf(_noDefectsLabel)
-        : -1;
+    final split =
+        phrase.startsWith(conditionStart) ? phrase.indexOf(_noDefectsLabel) : -1;
     if (split > 0) {
       items
         ..add(phrase.substring(0, split))
@@ -95,19 +108,36 @@ List<String> _cellarParagraphs(List<String> phrases) {
       items.add(phrase);
     }
   }
+  return items;
+}
+
+List<String> _cellarParagraphs(List<String> phrases, List<String> basement) {
+  final items =
+      _elementItems(phrases, _cellarNotInspectedBank, _cellarConditionStart);
+  final basementItems =
+      _elementItems(basement, _basementNotInspectedBank, _basementConditionStart);
+  final basementBlock = basementItems.isEmpty
+      ? const <String>[]
+      : [_basementHeading, ...basementItems];
 
   bool isCellar(String p) => _cellarStarts.any(p.startsWith);
   final first = items.indexWhere(isCellar);
-  if (first < 0) return items;
+  final general = items.indexWhere((p) => p.startsWith(_generalMaintenanceStart));
+  if (first < 0) {
+    if (basementBlock.isEmpty) return items;
+    // No Cellar text: Basement goes before General Maintenance, or at the end.
+    final at = general >= 0 ? general : items.length;
+    return [...items.sublist(0, at), ...basementBlock, ...items.sublist(at)];
+  }
   final last = items.lastIndexWhere(isCellar);
 
-  final general = items.indexWhere((p) => p.startsWith(_generalMaintenanceStart));
   final out = <String>[
     for (var i = 0; i < first; i++)
       if (i != general) items[i],
     _cellarHeading,
     for (var i = first; i <= last; i++)
       if (i != general) items[i],
+    ...basementBlock,
     if (general >= 0) items[general],
     for (var i = last + 1; i < items.length; i++)
       if (i != general) items[i],

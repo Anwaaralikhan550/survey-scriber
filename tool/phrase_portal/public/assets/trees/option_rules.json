@@ -229,6 +229,12 @@
     "3"
    ]
   },
+  "activity_inside_property_other_basement_inspected": {
+   "actv_used_as": [
+    "In use",
+    "Not in use"
+   ]
+  },
   "activity_inside_property_other_celler_inspected": {
    "actv_used_as": [
     "In use",

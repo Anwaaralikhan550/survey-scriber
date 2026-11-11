@@ -138,7 +138,7 @@ void main() {
     expect(applyClientParagraphRules('group_e2_roof_covering_9', [doors]), [doors]);
   });
 
-  group('Cellar/Basement', () {
+  group('Cellar', () {
     const inside = 'group_f9_other_81';
 
     test('his heading, his labels and his order', () {
@@ -160,7 +160,7 @@ void main() {
         [
           'Condition rating is: 2.',
           'Description: Internal communal parts to the property comprise a hallway.',
-          '[[SUBHEADING]] Cellar/Basement',
+          '[[SUBHEADING]] Cellar',
           'Not inspected: The property has a cellar or basement, but it could not be inspected.',
           'Walls: The property incorporates a cellar, basement and the walls are formed in bricks materials.',
           'Floor: The floor is constructed of stone.',

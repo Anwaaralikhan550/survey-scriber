@@ -342,15 +342,15 @@
             "options": [
               [
                 "e5sd_adequate",
-                "adequate"
+                "inadequate"
               ],
               [
                 "e5sd_properly_installed",
-                "properly installed"
+                "poorly installed"
               ],
               [
                 "e5sd_properly_drained",
-                "properly drained"
+                "poorly drained"
               ],
               [
                 "e5sd_cracked",
@@ -362,9 +362,9 @@
               ]
             ],
             "pdf_options": [
-              "adequate",
-              "properly installed",
-              "properly drained",
+              "inadequate",
+              "poorly installed",
+              "poorly drained",
               "cracked",
               "defective"
             ],
