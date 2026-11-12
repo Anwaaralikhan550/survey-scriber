@@ -1576,8 +1576,8 @@ f8fd4b53cc,H1,Prompt investigation and repair are required to address the defect
 2492bf6da1,H2,"Grounds: The subject property is set within level, sloping, hilly, undulating grounds.",MENU,,0,VERIFIED
 e00c98aef8,H2,Shared Garden: The communal/shared garden is shared with neighbouring property or properties.,EXACT,{H_OTHER}::{H2_SHARED_GARDEN},100,DONE
 1c30ee65c2,H2,"Your legal adviser should confirm your rights of use, maintenance responsibilities and any associated obligations or restrictions.",EXACT,{H_OTHER}::{H2_SHARED_AREAS_CONDITION},100,DONE
-84f651e2b9,H2,"Grounds: The communal/shared garden is paved, lawned, decked, artificially lawned, laid with stones, laid with tile chippings, other.",MENU,,0,VERIFIED
-6dd65085eb,H2,"Fence: The boundary fences are formed in timber, brick, concrete, wire mesh, hedges, shrubs, other.",MENU,,0,VERIFIED
+84f651e2b9,H2,"Grounds: The communal/shared garden is paved, lawned, decked, artificially lawned, laid with stones, laid with tile chippings, other.",MENU,,0,UNVERIFIED
+6dd65085eb,H2,"Fence: The boundary fences are formed in timber, brick, concrete, wire mesh, hedges, shrubs, other.",MENU,,0,UNVERIFIED
 66a683a5bf,H2,No Fencing: The communal/shared garden of the property does not have fencing.,EXACT,{H_OTHER}::{H2_NO_FENCING},100,DONE
 8f27724315,H2,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 278a560e78,H2,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE

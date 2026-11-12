@@ -166,6 +166,11 @@ def main():
         '{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING}',  # Solar tick removed from About Water Heating
         '{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_ADEQUATE}',  # Insulation outcome removed (client file 6, 12 Nov 2026)
         '{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_INADEQUATE}',
+        '{H_OTHER}::{H2_SHARED_GARDEN}',  # Shared Access: fields before Shared areas removed (client file 6)
+        '{H_OTHER}::{H2_COMMUNAL_GROUNDS}',
+        '{H_OTHER}::{H2_COMMUNAL_FENCE}',
+        '{H_OTHER}::{H2_NO_FENCING}',
+        '{H_OTHER}::{H2_COMMUNAL_CONDITION}',
     }
     # ---- T7 coverage: the bank key behind every ledger sentence must be reachable (named in the Dart code / rules)
     unreachable = []

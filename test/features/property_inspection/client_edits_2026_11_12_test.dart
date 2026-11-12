@@ -272,4 +272,24 @@ void main() {
       expect(out, contains('office'));
     });
   });
+  group('N18 Shared Access: only the Shared areas capture is left', () {
+    const screen = 'activity_grounds_shared_access';
+    test('fields', () {
+      final ids = nodes[screen]!.fields.map((f) => f.id).toList();
+      expect(ids.first, 'cb_h2_h2_shared_areas');
+      expect(ids, ['cb_h2_h2_shared_areas', 'label_h2_shared_areas', 'h2_shared_areas_0_shared_driveway', 'h2_shared_areas_0_shared_garden',
+        'h2_shared_areas_0_communal_parking', 'h2_shared_areas_0_communal_gardens', 'h2_shared_areas_0_shared_pathways',
+        'h2_shared_areas_0_other', 'h2_shared_areas_0_other_text', 'actv_h2_shared_cond']);
+    });
+    test('only the Shared Areas wording is generated', () {
+      final out = engine.buildPhrases(screen, ticks(['cb_h2_h2_shared_areas', 'h2_shared_areas_0_shared_driveway', 'h2_shared_areas_0_communal_parking'], {'actv_h2_shared_cond': 'Good'}));
+      expect(out.first, 'Shared Areas: The property benefits from a shared driveway and communal parking access.');
+      expect(out.length, 2);
+      expect(out.join(' '), isNot(contains('garage')));
+    });
+    test('answers saved for the removed fields print nothing now', () {
+      final out = say(screen, ticks(['cb_h2_h2_shared_garden', 'cb_h2_h2_comm_surface', 'h2_comm_surface_0_paved', 'cb_h2_h2_comm_no_fence'], {'actv_h2_comm_cond': 'Good'}));
+      expect(out, isEmpty);
+    });
+  });
 }
