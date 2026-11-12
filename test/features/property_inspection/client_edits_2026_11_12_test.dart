@@ -236,4 +236,18 @@ void main() {
       expect(say(screen, ticks(['e6t_replacement'])), startsWith('The doors appear to have been fully replaced or partially replaced.'));
     });
   });
+  group('N16 Door Repair (door operation): no hardcoded "No defects noted"', () {
+    const screen = 'activity_in_side_property_wood_work_door_sampling';
+    test('Freely prints only the operation sentence', () {
+      expect(say(screen, {'actv_door_operation': 'Freely'}), 'Door operation: The internal doors selected for operation opened and closed freely.');
+    });
+    test('With resistance / difficulty print the operation and the matching comment, not "No defects"', () {
+      for (final v in ['With resistance', 'With difficulty']) {
+        final out = say(screen, {'actv_door_operation': v});
+        expect(out, startsWith('Door operation: The internal doors selected for operation opened and closed ${v.toLowerCase()}.'));
+        expect(out, contains('One or more internal doors do not close properly or operate with resistance.'));
+        expect(out, isNot(contains('No defects noted')));
+      }
+    });
+  });
 }

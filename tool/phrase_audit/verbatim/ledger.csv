@@ -1225,7 +1225,7 @@ dadd8d9203,F7,"Defect noted: One or more internal joinery elements, including do
 4f33c77cb3,F7,"Otherwise, where the defects are significant or affect safety, security or normal operation, repairs or replacement should be carried out without delay by a suitably qualified contractor.",EXACT,{F_WOODWORK}::{F7_DEFECT_NOTED},100,DONE
 a96d4e886b,F7,"Door operation: The internal doors selected for operation opened and closed freely, with resistance, with difficulty.",MENU,,0,VERIFIED
 3cbc7545c1,F7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-921f086110,F7,Routine maintenance appropriate to the timber joinery material should be expected.,EXACT,{F_WOODWORK}::{F7_DOOR_OPERATION},100,DONE
+921f086110,F7,Routine maintenance appropriate to the timber joinery material should be expected.,ACCEPT,{F_WOODWORK}::{F7_CONDITION},94,DONE
 fbc1e22a06,F7,"If with minor resistance, or with difficulty is selected, add this.",MENU,,0,DONE
 fdb06ea33e,F7,One or more internal doors do not close properly or operate with resistance.,EXACT,{F_WOODWORK}::{F7_DOOR_OPERATION_ADDON},100,DONE
 c820d52b8b,F7,"This is commonly caused by normal wear and tear, minor distortion, settlement, or worn hinges, latches, or other ironmongery.",MENU,,0,VERIFIED

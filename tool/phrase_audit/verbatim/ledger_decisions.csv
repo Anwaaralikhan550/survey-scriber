@@ -631,3 +631,4 @@ b0bf1fe9b9,ACCEPT,"Prose sentence that contains commas (not an option list): ban
 ee1faf1c43,ACCEPT,"Prose sentence that contains commas (not an option list): bank text equals the PDF (T3 fuzzy 100)"
 b6c119037e,ACCEPT,"Prose sentence that contains commas (not an option list): bank text equals the PDF (T3 fuzzy 100)"
 0e28856543,ACCEPT,"Prose sentence that contains commas (not an option list): bank text equals the PDF (T3 fuzzy 100)"
+921f086110,ACCEPT,"Client file 6 (12 Nov 2026): the hardcoded No defects noted tail was removed from the Door operation sentence"
