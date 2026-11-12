@@ -171,4 +171,23 @@ void main() {
       expect(f.conditionalOn, 'actv_tiles=No cracked tiles|actv_tiles=Cracked tiles');
     });
   });
+  group('N12 Repair Tiles: Leaking is its own tick', () {
+    const screen = 'activity_outside_property_roof_repair_tiles';
+    test('dropdown has soon/now only, Leaking is a tick', () {
+      final f = {for (final x in nodes[screen]!.fields) x.id: x};
+      expect(f['actv_condition']!.options, ['Repair soon', 'Repair now']);
+      expect(f['rc_rt_leaking']!.label, 'Leaking');
+      expect(f['rc_rt_leaking']!.conditionalOn, isNull);
+    });
+    test('the tick prints its own sentence, alone or with a repair', () {
+      final alone = say(screen, ticks(['rc_rt_leaking']));
+      expect(alone, startsWith('Leaking: The roof covering has extensive defects that are likely to allow water penetration'));
+      final both = say(screen, ticks(['rc_rt_leaking', 'rc_rt_loose'], {'actv_condition': 'Repair soon'}));
+      expect(both, contains('Repair soon: One or more tiles, slates, are loose.'));
+      expect(both, contains('Leaking: The roof covering has extensive defects'));
+    });
+    test('a survey saved with the old dropdown value still prints it', () {
+      expect(say(screen, {'actv_condition': 'Leaking'}), startsWith('Leaking: The roof covering has extensive defects'));
+    });
+  });
 }

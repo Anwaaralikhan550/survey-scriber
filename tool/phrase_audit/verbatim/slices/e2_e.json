@@ -1481,8 +1481,14 @@
         "text": "Leaking: The roof covering has extensive defects that are likely to allow water penetration into the building and may present a safety risk. Urgent repair is required. You should instruct a suitably qualified roofing contractor to carry out a detailed inspection, identify the full extent of the defects, and undertake the necessary remedial works without delay.",
         "tokens": [],
         "when": [
-          "actv_condition",
-          "Leaking"
+          "rc_rt_leaking",
+          "true"
+        ],
+        "when_any": [
+          [
+            "actv_condition",
+            "Leaking"
+          ]
         ]
       }
     ]

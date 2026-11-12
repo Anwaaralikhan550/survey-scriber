@@ -1064,8 +1064,10 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{LEAKING}',
     [
     ],
-    whenField: 'actv_condition',
-    whenValue: 'Leaking',
+    whenField: 'rc_rt_leaking',
+    whenValue: 'true',
+    // Surveys saved before "Leaking" became its own tick still print it.
+    whenAny: [['actv_condition', 'Leaking']],
   ),
   VerbatimRule(
     'e2_spreading',

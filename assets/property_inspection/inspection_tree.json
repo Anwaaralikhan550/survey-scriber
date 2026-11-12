@@ -13619,9 +13619,13 @@
               "type": "dropdown",
               "options": [
                 "Repair soon",
-                "Repair now",
-                "Leaking"
+                "Repair now"
               ]
+            },
+            {
+              "id": "rc_rt_leaking",
+              "label": "Leaking",
+              "type": "checkbox"
             },
             {
               "id": "label_rc_roof_repair_tiles_issue",
