@@ -1918,44 +1918,6 @@
               "type": "checkbox"
             },
             {
-              "id": "cb_h1_converted",
-              "label": "Converted garage",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_h1_converted_to",
-              "label": "Converted into",
-              "type": "label"
-            },
-            {
-              "id": "h1cv_habitable_accommodation",
-              "label": "habitable accommodation",
-              "type": "checkbox"
-            },
-            {
-              "id": "h1cv_an_office",
-              "label": "an office",
-              "type": "checkbox"
-            },
-            {
-              "id": "h1cv_a_workshop",
-              "label": "a workshop",
-              "type": "checkbox"
-            },
-            {
-              "id": "h1cv_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "h1cv_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "h1cv_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
               "id": "cb_shared_access",
               "label": "Shared garage access",
               "type": "checkbox"
@@ -2317,6 +2279,44 @@
               "id": "cb_h1_no_defects",
               "label": "No defects noted",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_h1_converted",
+              "label": "Converted garage",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h1_converted_to",
+              "label": "Converted into",
+              "type": "label"
+            },
+            {
+              "id": "h1cv_habitable_accommodation",
+              "label": "habitable accommodation",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1cv_an_office",
+              "label": "an office",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1cv_a_workshop",
+              "label": "a workshop",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1cv_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1cv_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h1cv_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },

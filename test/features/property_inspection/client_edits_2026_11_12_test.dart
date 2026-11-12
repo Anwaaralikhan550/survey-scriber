@@ -250,4 +250,26 @@ void main() {
       }
     });
   });
+  group('N17 Garage screen: Converted garage after No defects noted', () {
+    const screen = 'activity_grounds_garage';
+    test('order and nothing lost', () {
+      final ids = nodes[screen]!.fields.map((f) => f.id).toList();
+      expect(ids.length, 76);
+      expect(ids.take(3), ['cb_h1_no_garage', 'cb_h1_not_inspected', 'cb_shared_access']);
+      expect(ids.sublist(ids.length - 8), [
+        'cb_h1_no_defects',
+        'cb_h1_converted',
+        'label_h1_converted_to',
+        'h1cv_habitable_accommodation',
+        'h1cv_an_office',
+        'h1cv_a_workshop',
+        'h1cv_other',
+        'h1cv_other_text',
+      ]);
+    });
+    test('the converted-garage sentence still prints', () {
+      final out = say(screen, ticks(['cb_h1_converted', 'h1cv_an_office']));
+      expect(out, contains('office'));
+    });
+  });
 }
