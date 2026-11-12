@@ -4385,17 +4385,17 @@
             },
             {
               "id": "g4l_kitchen",
-              "label": "kitchen",
+              "label": "the kitchen",
               "type": "checkbox"
             },
             {
               "id": "g4l_utility_room",
-              "label": "utility room",
+              "label": "the utility room",
               "type": "checkbox"
             },
             {
               "id": "g4l_bedroom",
-              "label": "bedroom",
+              "label": "the bedroom",
               "type": "checkbox"
             },
             {
@@ -4405,12 +4405,12 @@
             },
             {
               "id": "g4l_garage",
-              "label": "garage",
+              "label": "the garage",
               "type": "checkbox"
             },
             {
               "id": "g4l_airing_cupboard",
-              "label": "airing cupboard",
+              "label": "the airing cupboard",
               "type": "checkbox"
             },
             {

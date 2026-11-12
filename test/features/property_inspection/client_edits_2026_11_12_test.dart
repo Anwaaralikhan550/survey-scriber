@@ -109,4 +109,26 @@ void main() {
       expect(nodes.values.where((n) => n.title == 'Perished Decorations'), isEmpty);
     });
   });
+  group('N7 Boiler location reads "the ..."', () {
+    const screen = 'activity_services_heating_about_heating';
+    test('ticks and sentence', () {
+      expect(labels(screen), containsAll(['the kitchen', 'the utility room', 'the bedroom', 'under the stairs', 'the garage', 'the airing cupboard']));
+      final out = say(screen, ticks(['cb_boiler_present', 'g4b_combination_boiler', 'g4l_airing_cupboard']));
+      expect(out, contains('that is installed in the airing cupboard.'));
+      final two = say(screen, ticks(['cb_boiler_present', 'g4b_combination_boiler', 'g4l_kitchen', 'g4l_under_the_stairs']));
+      expect(two, contains('installed in the kitchen and under the stairs.'));
+    });
+  });
+
+  group('N8 Heat pumps: heading once', () {
+    const screen = 'activity_services_heating_about_heating';
+    test('air source and ground source', () {
+      final air = say(screen, ticks(['cb_air_source_heat_pump', 'g4ai_kitchen', 'g4ae_rear']));
+      expect(air, startsWith('Air Source Heat Pump: The property is heated by an air source heat pump'));
+      expect(air, isNot(contains('Air Source Heat Pump: Air Source')));
+      final ground = say(screen, ticks(['cb_ground_source_heat_pump', 'g4gi_kitchen']));
+      expect(ground, startsWith('Ground Source Heat Pump: The property is heated by a ground source heat pump'));
+      expect(ground, isNot(contains('Ground Source Heat Pump: Ground Source')));
+    });
+  });
 }

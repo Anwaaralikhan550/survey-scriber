@@ -116,15 +116,15 @@
             "options": [
               [
                 "g4l_kitchen",
-                "kitchen"
+                "the kitchen"
               ],
               [
                 "g4l_utility_room",
-                "utility room"
+                "the utility room"
               ],
               [
                 "g4l_bedroom",
-                "bedroom"
+                "the bedroom"
               ],
               [
                 "g4l_under_the_stairs",
@@ -132,15 +132,15 @@
               ],
               [
                 "g4l_garage",
-                "garage"
+                "the garage"
               ]
             ],
             "pdf_options": [
-              "kitchen",
-              "utility room",
-              "bedroom",
+              "the kitchen",
+              "the utility room",
+              "the bedroom",
               "under the stairs",
-              "garage"
+              "the garage"
             ],
             "label": "Boiler installed in",
             "other": [
@@ -150,7 +150,7 @@
           }
         ],
         "pdf": [
-          "Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other."
+          "Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in the kitchen, the utility room, the bedroom, under the stairs, the garage, other."
         ],
         "when": [
           "cb_boiler_present",
@@ -361,7 +361,7 @@
           "{G_HEATING}"
         ],
         "sub": "{G4_AIR_SOURCE_HEAT_PUMP}",
-        "text": "Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the {HEAT_ASHP_INTERNAL_LOC} and the external unit located to the {HEAT_ASHP_EXTERNAL_LOC} of the property. The installation was inspected visually only. No operational testing or assessment of performance, efficiency or controls was undertaken.",
+        "text": "Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the {HEAT_ASHP_INTERNAL_LOC} and the external unit located to the {HEAT_ASHP_EXTERNAL_LOC} of the property. The installation was inspected visually only. No operational testing or assessment of performance, efficiency or controls was undertaken.",
         "tokens": [
           {
             "kind": "checks",
@@ -417,7 +417,7 @@
           }
         ],
         "pdf": [
-          "Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property."
+          "Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property."
         ],
         "when": [
           "cb_air_source_heat_pump",
@@ -437,7 +437,7 @@
           "{G_HEATING}"
         ],
         "sub": "{G4_GROUND_SOURCE_HEAT_PUMP}",
-        "text": "Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the {HEAT_GSHP_INTERNAL_LOC}. The associated ground collectors or boreholes are below ground and could not be inspected. The installation was inspected visually only. No operational testing or assessment of performance, efficiency or controls was undertaken.",
+        "text": "Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the {HEAT_GSHP_INTERNAL_LOC}. The associated ground collectors or boreholes are below ground and could not be inspected. The installation was inspected visually only. No operational testing or assessment of performance, efficiency or controls was undertaken.",
         "tokens": [
           {
             "kind": "checks",
@@ -469,7 +469,7 @@
           }
         ],
         "pdf": [
-          "Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other."
+          "Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other."
         ],
         "when": [
           "cb_ground_source_heat_pump",

@@ -1431,7 +1431,7 @@ dfc3c82067,G4,Heating not found: I was unable to locate the boiler or heating sy
 648625652a,G4,"Please ask the vendor about the location of the boiler or heating system, as you must know where it is located.",EXACT,{G_HEATING}::{G4_HEATING_NOT_FOUND},100,DONE
 7a1f6e4d73,G4,Communal heating: The property is heated centrally by a communal heating system.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
 0d62aac814,G4,I could not inspect the system due to access restrictions and cannot comment on the type and condition.,EXACT,{G_HEATING}::{ABOUT_COMMUNAL_HEATING},100,DONE
-18c124f06d,G4,"Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other.",MENU,,0,VERIFIED
+18c124f06d,G4,"Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other.",MENU,,0,UNVERIFIED
 ee210c04aa,G4,The installation was inspected visually only.,EXACT,{G_ELECTRICITY}::{STANDARD_TEXT},100,DONE
 35f425e183,G4,No operational testing or assessment of efficiency was undertaken.,EXACT,{G_HEATING}::{G4_BOILER},100,DONE
 5c9cccde43,G4,"Heat emitters: The boiler is connected to radiators, underfloor heating pipes, ceiling vents, wall vents, other as heat emitters; their capacity, efficiency, and lifespan are not readily ascertained.",MENU,,0,VERIFIED

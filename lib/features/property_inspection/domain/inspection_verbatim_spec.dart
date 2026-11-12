@@ -9029,22 +9029,22 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       VerbatimToken(
         '{HEAT_BOILER_LOCATION}',
         options: {
-          'g4l_kitchen': 'kitchen',
-          'g4l_utility_room': 'utility room',
-          'g4l_bedroom': 'bedroom',
+          'g4l_kitchen': 'the kitchen',
+          'g4l_utility_room': 'the utility room',
+          'g4l_bedroom': 'the bedroom',
           'g4l_under_the_stairs': 'under the stairs',
-          'g4l_garage': 'garage',
+          'g4l_garage': 'the garage',
           // Not in the PDF list: client edit list, 2 Nov 2026 (Heating
           // location to include airing cupboard).
-          'g4l_airing_cupboard': 'airing cupboard',
+          'g4l_airing_cupboard': 'the airing cupboard',
         },
         otherCheckbox: 'g4l_other',
         otherText: 'g4l_other_text',
-        pdfOptions: ['kitchen', 'utility room', 'bedroom', 'under the stairs', 'garage', 'airing cupboard'],
+        pdfOptions: ['the kitchen', 'the utility room', 'the bedroom', 'under the stairs', 'the garage', 'the airing cupboard'],
       ),
     ],
     pdf:
-        'Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in kitchen, utility room, bedroom, under the stairs, garage, other.',
+        'Boiler: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other that is installed in the kitchen, the utility room, the bedroom, under the stairs, the garage, other.',
     whenField: 'cb_boiler_present',
     whenValue: 'true',
   ),
@@ -9158,7 +9158,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       ),
     ],
     pdf:
-        'Air Source Heat Pump: Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property.',
+        'Air Source Heat Pump: The property is heated by an air source heat pump with the internal unit located in the kitchen, utility room, garage, other and the external unit located to the front/side/rear of the property.',
     whenField: 'cb_air_source_heat_pump',
     whenValue: 'true',
   ),
@@ -9181,7 +9181,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       ),
     ],
     pdf:
-        'Ground Source Heat Pump: Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other.',
+        'Ground Source Heat Pump: The property is heated by a ground source heat pump with the internal unit located in the kitchen, utility room, garage, other.',
     whenField: 'cb_ground_source_heat_pump',
     whenValue: 'true',
   ),

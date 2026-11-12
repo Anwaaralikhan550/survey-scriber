@@ -310,7 +310,8 @@ void main() {
 
     test('Location: multiple selection with Airing cupboard and Other text', () {
       final labels = fields.where((f) => f.id.startsWith('g4l_')).map((f) => f.label).toList();
-      expect(labels, ['kitchen', 'utility room', 'bedroom', 'under the stairs', 'garage', 'airing cupboard', 'Other', 'Other']);
+      // Client file 6 (12 Nov 2026): the locations read "the kitchen" ... in the sentence.
+      expect(labels, ['the kitchen', 'the utility room', 'the bedroom', 'under the stairs', 'the garage', 'the airing cupboard', 'Other', 'Other']);
       expect(fields.firstWhere((f) => f.id == 'g4l_airing_cupboard').type, InspectionFieldType.checkbox);
       final otherText = fields.firstWhere((f) => f.id == 'g4l_other_text');
       expect(otherText.type, InspectionFieldType.text);
