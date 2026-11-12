@@ -75,13 +75,6 @@
    ]
   },
   "activity_grounds_shared_access": {
-   "actv_h2_comm_cond": [
-    "Fair",
-    "Good",
-    "Poor",
-    "Reasonable",
-    "Very poor"
-   ],
    "actv_h2_shared_cond": [
     "Fair",
     "Good",
@@ -259,12 +252,6 @@
     "Not inspected",
     "Poor support",
     "Risk of collapse"
-   ]
-  },
-  "activity_inside_property_roof_insulation": {
-   "actv_insulation_outcome": [
-    "Adequate insulation",
-    "Inadequate/no insulation"
    ]
   },
   "activity_inside_property_roof_structure_main_screen": {

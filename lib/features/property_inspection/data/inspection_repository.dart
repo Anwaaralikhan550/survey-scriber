@@ -14,7 +14,7 @@ class InspectionRepository extends BaseSurveyRepository {
 
   /// Bump this when the bundled JSON changes. Trees published from the admin for
   /// the old version then stop applying, and the new built-in tree takes effect.
-  static const int bundledVersion = 10;
+  static const int bundledVersion = 11;
 
   /// Returns condition ratings grouped by section key.
   /// Each entry maps sectionKey -> list of rating values (e.g., "1", "2", "3").
