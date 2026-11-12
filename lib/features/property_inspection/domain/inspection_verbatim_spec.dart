@@ -353,7 +353,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       ),
     ],
     pdf:
-        'Damaged chimney pots: The chimney pots appear secure, weathered, cracked, damaged, missing, other.',
+        'Pot condition: The chimney pots appear secure, weathered, cracked, damaged, missing, other.',
   ),
   VerbatimRule(
     'e1_leaning_degree',

@@ -75,4 +75,12 @@ void main() {
       expect(out, contains('formed in natural slates and artificial slates'));
     });
   });
+  group('N4 Chimney pots: header "Pot condition"', () {
+    test('the report label is Pot condition, the sentence is unchanged', () {
+      final out = say('activity_outside_property_water_proofing', ticks(['pc_cracked', 'pc_damaged']));
+      expect(out, contains('Pot condition: The chimney pots appear cracked and damaged. Damaged or insecure chimney pots should be repaired or replaced'));
+      expect(phraseTexts.values.where((v) => v.contains('Damaged chimney pots:')), isEmpty);
+      expect(phraseTexts['{E_CHIMNEY_MULTI_STACK}::{POTS_CONDITION}'], startsWith('Pot condition: '));
+    });
+  });
 }
