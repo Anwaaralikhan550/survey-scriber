@@ -292,4 +292,22 @@ void main() {
       expect(out, isEmpty);
     });
   });
+  group('N19 Nearby Trees: effects and defects print from their ticks', () {
+    const screen = 'activity_other_repair_nearby_trees';
+    test('ticks alone (dropdown left empty) print the defects sentence', () {
+      final out = say(screen, ticks(['h2ta_property', 'h2ta_fencing', 'cb_significant_cracks']));
+      expect(out, contains('Detrimental effects on the property and fencing were noted that include significant cracks.'));
+      expect(out, contains('Nearby Trees: One or more trees are located close to the property.'));
+    });
+    test('with the dropdown set it still prints, and No defects is unchanged', () {
+      final defects = say(screen, ticks(['h2ta_outbuilding', 'cb_subsidence_movement'], {'actv_condition': 'Defects noted'}));
+      expect(defects, contains('Detrimental effects on the outbuilding were noted that include subsidence movement.'));
+      final none = say(screen, {'actv_condition': 'No defects'});
+      expect(none, contains('No defects: No significant detrimental effects on the property were noted to date'));
+      expect(none, isNot(contains('Detrimental effects on the')));
+    });
+    test('nothing ticked and nothing chosen prints nothing', () {
+      expect(say(screen, {}), isEmpty);
+    });
+  });
 }

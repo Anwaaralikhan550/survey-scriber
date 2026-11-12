@@ -10535,7 +10535,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     whenField: 'actv_condition',
     whenValue: 'No defects',
-    whenAny: [['actv_condition', 'Defects noted']],
+    // Ticking an effect or a defect counts as "Defects noted" (client file 6, 12 Nov 2026).
+    whenAny: [['actv_condition', 'Defects noted'], ['h2ta_property', 'true'], ['h2ta_fencing', 'true'], ['h2ta_finished_grounds', 'true'], ['h2ta_outbuilding', 'true'], ['h2ta_other', 'true'], ['cb_significant_cracks', 'true'], ['cb_subsidence_movement', 'true']],
   ),
   VerbatimRule(
     'h2_trees_none',
@@ -10578,6 +10579,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Detrimental effects on the property, fencing, finished grounds, outbuilding, other were noted that include significant cracks, subsidence movement.',
     whenField: 'actv_condition',
     whenValue: 'Defects noted',
+    whenAny: [['h2ta_property', 'true'], ['h2ta_fencing', 'true'], ['h2ta_finished_grounds', 'true'], ['h2ta_outbuilding', 'true'], ['h2ta_other', 'true'], ['cb_significant_cracks', 'true'], ['cb_subsidence_movement', 'true']],
   ),
   VerbatimRule(
     'h2_subsoil',

@@ -1463,6 +1463,34 @@
           [
             "actv_condition",
             "Defects noted"
+          ],
+          [
+            "h2ta_property",
+            "true"
+          ],
+          [
+            "h2ta_fencing",
+            "true"
+          ],
+          [
+            "h2ta_finished_grounds",
+            "true"
+          ],
+          [
+            "h2ta_outbuilding",
+            "true"
+          ],
+          [
+            "h2ta_other",
+            "true"
+          ],
+          [
+            "cb_significant_cracks",
+            "true"
+          ],
+          [
+            "cb_subsidence_movement",
+            "true"
           ]
         ],
         "extra_fields": [
@@ -1557,6 +1585,36 @@
         "when": [
           "actv_condition",
           "Defects noted"
+        ],
+        "when_any": [
+          [
+            "h2ta_property",
+            "true"
+          ],
+          [
+            "h2ta_fencing",
+            "true"
+          ],
+          [
+            "h2ta_finished_grounds",
+            "true"
+          ],
+          [
+            "h2ta_outbuilding",
+            "true"
+          ],
+          [
+            "h2ta_other",
+            "true"
+          ],
+          [
+            "cb_significant_cracks",
+            "true"
+          ],
+          [
+            "cb_subsidence_movement",
+            "true"
+          ]
         ]
       }
     ]
