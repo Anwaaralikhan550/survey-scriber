@@ -83,4 +83,30 @@ void main() {
       expect(phraseTexts['{E_CHIMNEY_MULTI_STACK}::{POTS_CONDITION}'], startsWith('Pot condition: '));
     });
   });
+  group('N5 Lower Ground rooms: the second "Name of other" reads Number', () {
+    test('only that field changes', () {
+      final f = {for (final x in nodes['activity_no_of_rooms']!.fields) x.id: x.label};
+      expect(f['etNoOfRoomsOther'], 'Number');
+      expect(f['ar_etNote'], 'Name of other');
+      expect(nodes['activity_no_of_rooms__ground']!.fields.firstWhere((x) => x.id == 'etNoOfRoomsOther').label, 'No.of room for other');
+    });
+    test('the count still prints as before', () {
+      final out = say('activity_no_of_rooms', {'etNoOfRoomsOther': '2', 'ar_etNote': 'studies'});
+      expect(out, isNot(contains('{')));
+    });
+  });
+
+  group('N6 Drainage "Partially visible", External structures "Stair/Steps Decoration"', () {
+    test('the tick and the heading', () {
+      expect(labels('activity_services_drainage'), contains('Partially visible'));
+      expect(labels('activity_services_drainage'), isNot(contains('Visible / partially visible')));
+      final out = say('activity_services_drainage', ticks(['cb_dr_svp_visible', 'g6sv_roof_space']));
+      expect(out, contains('Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space.'));
+      expect(out, isNot(contains('Visible/Partially Visible')));
+    });
+    test('the screen is renamed, its sentence is untouched', () {
+      expect(nodes['activity_outside_property_other_repairs_decorations']!.title, 'Stair/Steps Decoration');
+      expect(nodes.values.where((n) => n.title == 'Perished Decorations'), isEmpty);
+    });
+  });
 }

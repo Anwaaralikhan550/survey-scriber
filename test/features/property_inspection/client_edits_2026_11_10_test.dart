@@ -36,7 +36,7 @@ void main() {
       ).join('\n');
       expect(main, contains('Inspection Chamber: The inspection chamber cover(s) were lifted'));
       expect(main, contains('Soil and Vent Pipe: The soil and vent pipe is visible at the front'));
-      expect(main, contains('Visible/Partially Visible:'));
+      expect(main, contains('Partially Visible:'));
       final repair = engine.buildPhrases(
         'activity_services_drainage_repair_chamber_cover',
         ticks(['g6cv_broken', 'g6cw_cracked', 'g6gu_partly_blocked']),

@@ -262,7 +262,7 @@
           "{G_DRAINAGE}"
         ],
         "sub": "{G6_SVP_VISIBLE}",
-        "text": "Visible/Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the {DRAIN_SVP_VISIBLE_IN}. The visible sections appeared satisfactory. The condition of concealed sections could not be assessed.",
+        "text": "Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the {DRAIN_SVP_VISIBLE_IN}. The visible sections appeared satisfactory. The condition of concealed sections could not be assessed.",
         "tokens": [
           {
             "kind": "checks",
@@ -284,7 +284,7 @@
           }
         ],
         "pdf": [
-          "Visible/Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space/other."
+          "Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space/other."
         ],
         "when": [
           "cb_dr_svp_visible",
@@ -293,7 +293,7 @@
         "extra_fields": [
           {
             "id": "cb_dr_svp_visible",
-            "label": "Visible / partially visible",
+            "label": "Partially visible",
             "type": "checkbox"
           }
         ]

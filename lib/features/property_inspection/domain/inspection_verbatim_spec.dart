@@ -9465,7 +9465,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       ),
     ],
     pdf:
-        'Visible/Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space/other.',
+        'Partially Visible: The soil and vent pipe is fully concealed or concealed within the building, with only limited sections visible in the roof space/other.',
     whenField: 'cb_dr_svp_visible',
     whenValue: 'true',
   ),

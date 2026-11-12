@@ -4820,7 +4820,7 @@
             },
             {
               "id": "cb_dr_svp_visible",
-              "label": "Visible / partially visible",
+              "label": "Partially visible",
               "type": "checkbox"
             },
             {
@@ -12449,7 +12449,7 @@
             },
             {
               "id": "etNoOfRoomsOther",
-              "label": "Name of other",
+              "label": "Number",
               "type": "number"
             }
           ]
@@ -21911,7 +21911,7 @@
         },
         {
           "id": "activity_outside_property_other_repairs_decorations",
-          "title": "Perished Decorations",
+          "title": "Stair/Steps Decoration",
           "type": "screen",
           "parentId": "group_carport_43",
           "order": 18,
