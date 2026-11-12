@@ -218,4 +218,22 @@ void main() {
       expect(out, isNot(contains('270')));
     });
   });
+  group('N15 Outside doors: replacement is its own option, not in the Description', () {
+    const screen = 'activity_outside_property_out_side_doors_about_doors';
+    test('the tick sits under its own label, after the door types', () {
+      final ids = nodes[screen]!.fields.map((f) => f.id).toList();
+      expect(ids.indexOf('label_door_replacement'), greaterThan(ids.indexOf('et_other_179')));
+      expect(ids.indexOf('e6t_replacement'), ids.indexOf('label_door_replacement') + 1);
+      expect(ids.indexOf('e6t_replacement'), lessThan(ids.indexOf('label_door_materials')));
+    });
+    test('Description no longer says replacement, the separate sentence prints', () {
+      final out = say(screen, ticks(['e6t_replacement', 'e6t_front', 'e6t_rear']));
+      expect(out, contains('Description: The property incorporates front and rear doors.'));
+      expect(out, isNot(contains('replacement, ')));
+      expect(out, contains('The doors appear to have been fully replaced or partially replaced.'));
+    });
+    test('replacement alone still prints its own sentence', () {
+      expect(say(screen, ticks(['e6t_replacement'])), startsWith('The doors appear to have been fully replaced or partially replaced.'));
+    });
+  });
 }

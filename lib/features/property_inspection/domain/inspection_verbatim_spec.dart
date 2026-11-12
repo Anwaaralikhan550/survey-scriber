@@ -3389,7 +3389,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       VerbatimToken(
         '{DOOR_TYPES}',
         options: {
-          'e6t_replacement': 'replacement',
           'e6t_original': 'original',
           'e6t_old': 'old',
           'e6t_front': 'front',
@@ -3401,11 +3400,11 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         },
         otherCheckbox: 'cb_other_859',
         otherText: 'et_other_179',
-        pdfOptions: ['replacement', 'original', 'old', 'front', 'rear', 'side', 'patio', 'French', 'bi-fold'],
+        pdfOptions: ['original', 'old', 'front', 'rear', 'side', 'patio', 'French', 'bi-fold'],
       ),
     ],
     pdf:
-        'Description: The property incorporates replacement, original, old, front, rear, side, patio, French, bi-fold, other doors.',
+        'Description: The property incorporates original, old, front, rear, side, patio, French, bi-fold, other doors.',
   ),
   VerbatimRule(
     'e6_material',

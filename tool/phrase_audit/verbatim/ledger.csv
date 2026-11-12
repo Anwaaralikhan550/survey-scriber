@@ -602,7 +602,7 @@ f2c01529b6,E5,Fire Trap Risk: The design of the window(s) does not provide a sui
 ccdacaf396,E6,"The operation and performance of locks, alarms and security systems were not assessed.",EXACT,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},100,DONE
 8e8dbd3a62,E6,Not every part of the external doors was inspected in detail.,EXACT,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},100,DONE
 0b767179a4,E6,The inspection was limited to those parts that were readily accessible without causing damage or moving furnishings.,EXACT,{E_OUTSIDE_DOORS}::{STANDARD_TEXT},100,DONE
-eaa726c31b,E6,"Description: The property incorporates replacement, original, old, front, rear, side, patio, French, bi-fold, other doors.",MENU,,0,VERIFIED
+eaa726c31b,E6,"Description: The property incorporates replacement, original, old, front, rear, side, patio, French, bi-fold, other doors.",MENU,,0,UNVERIFIED
 acd8eb5a95,E6,"The external doors are formed of timber, PVCu, composite, aluminium, steel, other material.",MENU,,0,VERIFIED
 9bc2be547b,E6,"Glazing: The glazed sections comprise single glazing, double glazing, triple glazing, decorative glazing, other.",MENU,,0,VERIFIED
 d93549dc6f,E6,The presence of safety glazing cannot be confirmed by visual inspection unless permanently marked.,EXACT,{E_OUTSIDE_DOORS}::{DOOR_GLAZING},100,DONE

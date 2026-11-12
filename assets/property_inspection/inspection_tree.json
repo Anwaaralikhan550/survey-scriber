@@ -14596,11 +14596,6 @@
               "type": "label"
             },
             {
-              "id": "e6t_replacement",
-              "label": "replacement",
-              "type": "checkbox"
-            },
-            {
               "id": "e6t_original",
               "label": "original",
               "type": "checkbox"
@@ -14652,6 +14647,16 @@
               "conditionalOn": "cb_other_859",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "label_door_replacement",
+              "label": "Replacement",
+              "type": "label"
+            },
+            {
+              "id": "e6t_replacement",
+              "label": "Doors replaced",
+              "type": "checkbox"
             },
             {
               "id": "label_door_materials",

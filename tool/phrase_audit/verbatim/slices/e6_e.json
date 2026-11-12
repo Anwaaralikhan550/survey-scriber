@@ -50,10 +50,6 @@
             "token": "{DOOR_TYPES}",
             "options": [
               [
-                "e6t_replacement",
-                "replacement"
-              ],
-              [
                 "e6t_original",
                 "original"
               ],
@@ -87,7 +83,6 @@
               ]
             ],
             "pdf_options": [
-              "replacement",
               "original",
               "old",
               "front",
@@ -105,7 +100,7 @@
           }
         ],
         "pdf": [
-          "Description: The property incorporates replacement, original, old, front, rear, side, patio, French, bi-fold, other doors."
+          "Description: The property incorporates original, old, front, rear, side, patio, French, bi-fold, other doors."
         ]
       },
       {
