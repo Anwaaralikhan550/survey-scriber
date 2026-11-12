@@ -5588,8 +5588,10 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{F1_CONDENSATION_NOTED}',
     [
     ],
-    whenField: 'actv_ventilation',
-    whenValue: 'Condensation noted',
+    whenField: 'cb_roof_condensation',
+    whenValue: 'true',
+    // Surveys saved before Condensation became its own tick still print it.
+    whenAny: [['actv_ventilation', 'Condensation noted']],
   ),
   VerbatimRule(
     'f1_in',
@@ -5612,26 +5614,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'Thermal Insulation: The roof space floor insulation appears adequate, limited, insufficient, poorly fitted, other based upon the visible areas only.',
-  ),
-  VerbatimRule(
-    'f1_in_ok',
-    'activity_inside_property_roof_insulation',
-    '{F_ABOUT_ROOF_STRUCTURE}',
-    '{F1_INSULATION_ADEQUATE}',
-    [
-    ],
-    whenField: 'actv_insulation_outcome',
-    whenValue: 'Adequate insulation',
-  ),
-  VerbatimRule(
-    'f1_in_bad',
-    'activity_inside_property_roof_insulation',
-    '{F_ABOUT_ROOF_STRUCTURE}',
-    '{F1_INSULATION_INADEQUATE}',
-    [
-    ],
-    whenField: 'actv_insulation_outcome',
-    whenValue: 'Inadequate/no insulation',
   ),
   VerbatimRule(
     'f1_tank',

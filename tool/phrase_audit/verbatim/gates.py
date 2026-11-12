@@ -164,6 +164,8 @@ def main():
     # Bank keys the client asked to take out of the app (edit list, 2 Nov 2026).
     client_removed = {
         '{G_WATER_HEATING}::{G5_SOLAR_WATER_HEATING}',  # Solar tick removed from About Water Heating
+        '{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_ADEQUATE}',  # Insulation outcome removed (client file 6, 12 Nov 2026)
+        '{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_INADEQUATE}',
     }
     # ---- T7 coverage: the bank key behind every ledger sentence must be reachable (named in the Dart code / rules)
     unreachable = []

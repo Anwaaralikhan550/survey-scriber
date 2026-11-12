@@ -415,8 +415,14 @@
         "text": "Condensation noted: The roof space has no or insufficient ventilation, resulting in condensation and mould growth on some of the timbers or roof underlay. Additional ventilation should be provided to improve air circulation, reduce condensation, and help maintain the condition of the roof timbers. Significantly damaged or rotted timbers should be replaced.",
         "tokens": [],
         "when": [
-          "actv_ventilation",
-          "Condensation noted"
+          "cb_roof_condensation",
+          "true"
+        ],
+        "when_any": [
+          [
+            "actv_ventilation",
+            "Condensation noted"
+          ]
         ]
       }
     ]
@@ -475,43 +481,6 @@
         ],
         "pdf": [
           "Thermal Insulation: The roof space floor insulation appears adequate, limited, insufficient, poorly fitted, other based upon the visible areas only."
-        ]
-      },
-      {
-        "id": "f1_in_ok",
-        "masters": [
-          "{F_ABOUT_ROOF_STRUCTURE}"
-        ],
-        "sub": "{F1_INSULATION_ADEQUATE}",
-        "text": "Adequate insulation: The insulation to the loft floor appears adequate where visible. Where insulation is inadequate or absent, you should upgrade it to a depth of 270–300 mm to meet current recommended standards, taking care not to obstruct roof ventilation.",
-        "tokens": [],
-        "when": [
-          "actv_insulation_outcome",
-          "Adequate insulation"
-        ],
-        "extra_fields": [
-          {
-            "id": "actv_insulation_outcome",
-            "label": "Insulation outcome",
-            "type": "dropdown",
-            "options": [
-              "Adequate insulation",
-              "Inadequate/no insulation"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "f1_in_bad",
-        "masters": [
-          "{F_ABOUT_ROOF_STRUCTURE}"
-        ],
-        "sub": "{F1_INSULATION_INADEQUATE}",
-        "text": "Inadequate/no insulation: The loft insulation is below the current recommended standard of 270–300 mm or is absent. This can lead to heat loss, higher heating costs, and an increased risk of condensation and mould. I recommend upgrading the insulation to current standards, ensuring roof ventilation is not obstructed.",
-        "tokens": [],
-        "when": [
-          "actv_insulation_outcome",
-          "Inadequate/no insulation"
         ]
       }
     ]

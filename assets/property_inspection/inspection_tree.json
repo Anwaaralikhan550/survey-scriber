@@ -9716,8 +9716,7 @@
               "type": "dropdown",
               "options": [
                 "No ventilation",
-                "Ventilation noted",
-                "Condensation noted"
+                "Ventilation noted"
               ]
             },
             {
@@ -9731,6 +9730,11 @@
               ],
               "conditionalOn": "actv_ventilation=Ventilation noted",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_roof_condensation",
+              "label": "Condensation noted",
+              "type": "checkbox"
             }
           ]
         },
@@ -9778,15 +9782,6 @@
               "conditionalOn": "f1i_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
-            },
-            {
-              "id": "actv_insulation_outcome",
-              "label": "Insulation outcome",
-              "type": "dropdown",
-              "options": [
-                "Adequate insulation",
-                "Inadequate/no insulation"
-              ]
             }
           ]
         },

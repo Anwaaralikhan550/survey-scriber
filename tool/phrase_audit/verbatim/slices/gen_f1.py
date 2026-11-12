@@ -93,15 +93,9 @@ slices.append({'screen': S_VE, 'new_screen': new_screen(S_VE, 'Roof ventilation'
 # ───────────── Insulation (new) ─────────────
 INS = 'adequate, limited, insufficient, poorly fitted, other'
 S_IN = I_ + 'roof_insulation'
-IN_DD = {'id': 'actv_insulation_outcome', 'label': 'Insulation outcome', 'type': 'dropdown',
-         'options': ['Adequate insulation', 'Inadequate/no insulation']}
 slices.append({'screen': S_IN, 'new_screen': new_screen(S_IN, 'Roof insulation', 28, S_VE), 'rules': [
     pr('f1_in', 'THERMAL_INSULATION', 'Thermal Insulation:', 'Adequate insulation:', subs={INS: '{INSULATION_STATE}'},
        tokens=[ck('{INSULATION_STATE}', 'Insulation appears', INS, 'f1i_', other=('f1i_other', 'f1i_other_text'))]),
-    pr('f1_in_ok', 'INSULATION_ADEQUATE', 'Adequate insulation:', 'Inadequate/no insulation:',
-       when=['actv_insulation_outcome', 'Adequate insulation'], extra=[IN_DD]),
-    pr('f1_in_bad', 'INSULATION_INADEQUATE', 'Inadequate/no insulation:', 'Water Storage Tanks:',
-       when=['actv_insulation_outcome', 'Inadequate/no insulation']),
 ]})
 
 # ───────────── Water tanks ─────────────

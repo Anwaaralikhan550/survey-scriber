@@ -190,4 +190,32 @@ void main() {
       expect(say(screen, {'actv_condition': 'Leaking'}), startsWith('Leaking: The roof covering has extensive defects'));
     });
   });
+  group('N13 Roof Ventilation: Condensation is its own tick', () {
+    const screen = 'activity_inside_property_roof_ventilation';
+    test('dropdown has no Condensation; a tick prints the existing sentence', () {
+      final f = {for (final x in nodes[screen]!.fields) x.id: x};
+      expect(f['actv_ventilation']!.options, ['No ventilation', 'Ventilation noted']);
+      expect(f['cb_roof_condensation']!.label, 'Condensation noted');
+      expect(f['cb_roof_condensation']!.conditionalOn, isNull);
+      expect(say(screen, ticks(['cb_roof_condensation'])), startsWith('Condensation noted: The roof space has no or insufficient ventilation'));
+    });
+    test('together with a ventilation choice, both sentences print; the old saved value still prints', () {
+      final both = say(screen, ticks(['cb_roof_condensation'], {'actv_ventilation': 'Ventilation noted', 'actv_vent_level': 'Limited'}));
+      expect(both, contains('Ventilation noted:'));
+      expect(both, contains('Condensation noted:'));
+      expect(say(screen, {'actv_ventilation': 'Condensation noted'}), startsWith('Condensation noted: The roof space'));
+    });
+  });
+
+  group('N14 Roof Insulation: no Insulation Outcome', () {
+    const screen = 'activity_inside_property_roof_insulation';
+    test('the field and its two sentences are gone, the Insulation choices stay', () {
+      expect(nodes[screen]!.fields.map((f) => f.id), isNot(contains('actv_insulation_outcome')));
+      expect(labels(screen), containsAll(['adequate', 'limited', 'insufficient', 'poorly fitted', 'Other']));
+      final out = say(screen, ticks(['f1i_adequate'], {'actv_insulation_outcome': 'Adequate insulation'}));
+      expect(out, startsWith('Thermal Insulation:'));
+      expect(out, isNot(contains('Adequate insulation:')));
+      expect(out, isNot(contains('270')));
+    });
+  });
 }
