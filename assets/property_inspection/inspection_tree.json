@@ -297,12 +297,12 @@
             },
             {
               "id": "a3_roof_cover_0_natural_slate",
-              "label": "natural slate",
+              "label": "natural slates",
               "type": "checkbox"
             },
             {
               "id": "a3_roof_cover_0_artificial_slate",
-              "label": "artificial slate",
+              "label": "artificial slates",
               "type": "checkbox"
             },
             {

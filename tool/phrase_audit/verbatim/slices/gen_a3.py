@@ -41,7 +41,7 @@ TYPE = ('traditional masonry, solid wall, cavity wall, timber frame, steel frame
         'system-built, other')
 RFORM = 'pitched, flat, mansard'
 RSTRUCT = 'traditional cut timber, prefabricated trussed rafters, other'
-RCOVER = ('clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, metal sheeting, mineral felt, '
+RCOVER = ('clay tiles, concrete tiles, natural slates, artificial slates, fibre cement slates, metal sheeting, mineral felt, '
           'rubber membrane, single-ply membrane, other')
 EWALL = 'solid brick, cavity brick, stone, timber frame, steel frame, rendered masonry, other'
 IWALL = 'solid masonry, timber stud partitions, lath and plaster, other'

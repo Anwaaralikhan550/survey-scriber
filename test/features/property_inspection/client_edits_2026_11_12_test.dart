@@ -66,4 +66,13 @@ void main() {
       );
     });
   });
+  group('N3 Roof cover: natural slates, artificial slates', () {
+    test('labels and sentence', () {
+      final l = labels('activity_property_roof');
+      expect(l, containsAll(['natural slates', 'artificial slates', 'fibre cement slates']));
+      expect(l, isNot(contains('natural slate')));
+      final out = say('activity_property_roof', ticks(['a3_roof_cover_0_natural_slate', 'a3_roof_cover_0_artificial_slate']));
+      expect(out, contains('formed in natural slates and artificial slates'));
+    });
+  });
 }
