@@ -11550,10 +11550,12 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
           'a2t_maisonette': 'maisonette',
           'a2t_bungalow': 'bungalow',
           'a2t_cottage': 'cottage',
+          'a2t_house': 'house',
+          'a2t_flat': 'flat',
         },
         otherCheckbox: 'a2t_other',
         otherText: 'a2t_other_text',
-        pdfOptions: ['detached', 'semi-detached', 'end-of-terrace', 'mid-terrace', 'purpose-built flat', 'converted flat', 'maisonette', 'bungalow', 'cottage'],
+        pdfOptions: ['detached', 'semi-detached', 'end-of-terrace', 'mid-terrace', 'purpose-built flat', 'converted flat', 'maisonette', 'bungalow', 'cottage', 'house', 'flat'],
       ),
       VerbatimToken(
         '{A2_BEDROOMS}',
@@ -11564,7 +11566,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       ),
     ],
     pdf:
-        'Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage, other providing one, two, three, four, five, six or more bedrooms.',
+        'Property type: The property is a detached, semi-detached, end-of-terrace, mid-terrace, purpose-built flat, converted flat, maisonette, bungalow, cottage, house, flat, other providing one, two, three, four, five, six or more bedrooms.',
     whenField: 'cb_a2_type',
     whenValue: 'true',
   ),

@@ -564,7 +564,7 @@ fa564e10ed,E5,This is best done in conjunction with the redecoration cycle.,EXAC
 8f9ba62e75,E5,"Sill projection: Externally, the windowsills beyond the face of the walls appear to project adequately beyond the face of the walls.",EXACT,{E_WINDOWS}::{E5_SILL_PROJECTION},100,DONE
 5a6ee063a1,E5,"The junctions between the window frames and the surrounding wall openings appear to be properly, fairly, poorly sealed.",MENU,,0,VERIFIED
 4fc0f19e36,E5,These seals should be inspected regularly for cracking and repaired as necessary to prevent water ingress.,EXACT,{E_WINDOWS}::{E5_SILL_PROJECTION},100,DONE
-d47153964b,E5,"Sill defect: The windowsill projection beyond the face of the wall does not appear to be adequate, properly installed, properly drained, cracked, defective.",MENU,,0,VERIFIED
+d47153964b,E5,"Sill defect: The windowsill projection beyond the face of the wall does not appear to be adequate, properly installed, properly drained, cracked, defective.",MENU,,0,UNVERIFIED
 7d9264e002,E5,This is allowing water ingress to adjoining walls and may be causing dampness.,EXACT,{E_WINDOWS}::{E5_SILL_DEFECT},100,DONE
 2428d4a144,E5,You should promptly arrange for further investigation and repair by a qualified professional to prevent further damage.,EXACT,{E_WINDOWS}::{E5_SILL_DEFECT},100,DONE
 c0fabc1e6f,E5,"Repair windows: The window(s) in the lounge, dining room, bedroom, kitchen, other, have damaged lock(s), have missing lock(s), are difficult to open, are badly worn, are rotten, have broken glass, have failed glazing, are in disrepair, are severely damaged, present a safety or security risk, have other defects.",MENU,,0,VERIFIED
@@ -1302,7 +1302,7 @@ da00a55951,F9,Your legal adviser should also confirm that the person responsible
 6eaa190ff1,F9,"Repair: The entry stairs, landing, balcony, hallway, shared lobby, fire lobby, common room, other areas are worn, damaged, creaking, badly cracked, sloping, missing in places, in disrepair, other.",MENU,,0,VERIFIED
 11062570a8,F9,"These should be repaired soon, and if the defect is considered significant, it should be promptly investigated by a qualified person and repaired.",EXACT,{F_OTHER}::{F9_COMMUNAL_REPAIR},100,DONE
 3b07af6f40,F9,"Cellar/Basement Not inspected: The property has a cellar or basement, but it could not be inspected due to restricted access, no access, other.",MENU,,0,VERIFIED
-e17770774f,F9,No comment can therefore be made on its condition.,EXACT,{F_OTHER}::{F9_CELLAR_NOT_INSPECTED},100,DONE
+e17770774f,F9,No comment can therefore be made on its condition.,EXACT,{F_OTHER}::{F9_BASEMENT_NOT_INSPECTED},100,DONE
 c2df02b7b9,F9,"Walls: The property incorporates a cellar, basement and the walls are formed in bricks, stone, loose soil, concrete, other materials.",MENU,,0,VERIFIED
 d32a2ed9d9,F9,"Floor: The floor is constructed of solid concrete, timber, stone, loose soil, other.",MENU,,0,VERIFIED
 b68b6c2578,F9,"Condition: Where visible, the cellar appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
@@ -1310,24 +1310,24 @@ b68b6c2578,F9,"Condition: Where visible, the cellar appears in good, reasonable,
 a5d55ac6da,F9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
 68b3c4492f,F9,Not in use: The property has a cellar which is currently unused.,EXACT,{F_OTHER}::{F9_CELLAR_NOT_IN_USE},100,DONE
-d298c8a592,F9,No significant defects were apparent from the limited inspection.,EXACT,{F_OTHER}::{F9_CELLAR_NOT_IN_USE},100,DONE
+d298c8a592,F9,No significant defects were apparent from the limited inspection.,EXACT,{F_OTHER}::{F9_BASEMENT_NOT_IN_USE},100,DONE
 fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
 54b855ccdf,F9,In use: The cellar or basement has been adapted for use as storage or other uses.,EXACT,{F_OTHER}::{F9_CELLAR_IN_USE},100,DONE
-ce85c8196a,F9,It appeared to be in reasonable condition at the time of inspection.,EXACT,{F_OTHER}::{F9_CELLAR_IN_USE},100,DONE
-7345ca08f5,F9,Continue normal maintenance.,EXACT,{F_OTHER}::{F9_CELLAR_IN_USE},100,DONE
+ce85c8196a,F9,It appeared to be in reasonable condition at the time of inspection.,EXACT,{F_OTHER}::{F9_BASEMENT_IN_USE},100,DONE
+7345ca08f5,F9,Continue normal maintenance.,EXACT,{F_OTHER}::{F9_BASEMENT_IN_USE},100,DONE
 db26f47efc,F9,"Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to low headroom, dampness, difficult access, poor ventilation, other limitations.",MENU,,0,VERIFIED
-6dbfa88b10,F9,It should only be used as ancillary storage space.,EXACT,{F_OTHER}::{F9_CELLAR_UNSUITABLE},100,DONE
+6dbfa88b10,F9,It should only be used as ancillary storage space.,EXACT,{F_OTHER}::{F9_BASEMENT_UNSUITABLE},100,DONE
 0e97d05740,F9,"Flooded: The cellar or basement was partially, significantly flooded due to defective drainage or groundwater ingress.",MENU,,0,VERIFIED
-90beaa7cbc,F9,An appropriately qualified drainage or building specialist should investigate the cause and recommend remedial works.,EXACT,{F_OTHER}::{F9_CELLAR_FLOODED},100,DONE
+90beaa7cbc,F9,An appropriately qualified drainage or building specialist should investigate the cause and recommend remedial works.,EXACT,{F_OTHER}::{F9_BASEMENT_FLOODED},100,DONE
 d6728720dc,F9,"Damp: Dampness was noted on the lower walls, upper walls, throughout the cellar, exposed floor joists, other areas.",MENU,,0,VERIFIED
-f17c5ef034,F9,Further investigation by a suitably qualified damp and timber specialist is recommended to establish the cause and specify appropriate repairs.,EXACT,{F_OTHER}::{F9_CELLAR_DAMP},100,DONE
-fb71a63bad,F9,Waterproofing failure: The extent of dampness suggests failure or absence of an effective waterproofing system.,EXACT,{F_OTHER}::{F9_CELLAR_WATERPROOFING},100,DONE
-a56715f9bd,F9,Remedial works are likely to be disruptive and potentially costly.,EXACT,{F_OTHER}::{F9_CELLAR_WATERPROOFING},100,DONE
-30a5de5a5a,F9,You should ask a suitably qualified specialist to investigate and provide recommendations.,EXACT,{F_OTHER}::{F9_CELLAR_WATERPROOFING},100,DONE
-0bafcc6d89,F9,Your legal adviser should also confirm whether any waterproofing guarantees or warranties remain in force.,EXACT,{F_OTHER}::{F9_CELLAR_WATERPROOFING},100,DONE
+f17c5ef034,F9,Further investigation by a suitably qualified damp and timber specialist is recommended to establish the cause and specify appropriate repairs.,EXACT,{F_OTHER}::{F9_BASEMENT_DAMP},100,DONE
+fb71a63bad,F9,Waterproofing failure: The extent of dampness suggests failure or absence of an effective waterproofing system.,EXACT,{F_OTHER}::{F9_BASEMENT_WATERPROOFING},100,DONE
+a56715f9bd,F9,Remedial works are likely to be disruptive and potentially costly.,EXACT,{F_OTHER}::{F9_BASEMENT_WATERPROOFING},100,DONE
+30a5de5a5a,F9,You should ask a suitably qualified specialist to investigate and provide recommendations.,EXACT,{F_OTHER}::{F9_BASEMENT_WATERPROOFING},100,DONE
+0bafcc6d89,F9,Your legal adviser should also confirm whether any waterproofing guarantees or warranties remain in force.,EXACT,{F_OTHER}::{F9_BASEMENT_WATERPROOFING},100,DONE
 917254b484,F9,Timber decay: Decay was noted in exposed floor joists within the cellar.,EXACT,{F_OTHER}::{F9_CELLAR_TIMBER_DECAY},100,DONE
-00bf2f287e,F9,This is a serious defect that may affect the structural integrity of the floor above.,EXACT,{F_OTHER}::{F9_CELLAR_TIMBER_DECAY},100,DONE
-6b56812da0,F9,A suitably qualified timber and damp specialist should inspect the affected timbers and recommend appropriate repairs.,EXACT,{F_OTHER}::{F9_CELLAR_TIMBER_DECAY},100,DONE
+00bf2f287e,F9,This is a serious defect that may affect the structural integrity of the floor above.,EXACT,{F_OTHER}::{F9_BASEMENT_TIMBER_DECAY},100,DONE
+6b56812da0,F9,A suitably qualified timber and damp specialist should inspect the affected timbers and recommend appropriate repairs.,EXACT,{F_OTHER}::{F9_BASEMENT_TIMBER_DECAY},100,DONE
 347a242086,F9,General Maintenance: Ancillary internal areas should be inspected periodically as part of routine property maintenance.,EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
 07dc0e6218,F9,Adequate heating and ventilation should be maintained to minimise condensation.,EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE
 ca25f24f55,F9,Minor decorative defects and isolated repairs should be addressed before deterioration becomes more extensive.,EXACT,{F_OTHER}::{F9_GENERAL_MAINTENANCE},100,DONE

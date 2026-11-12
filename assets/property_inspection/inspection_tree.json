@@ -67,6 +67,16 @@
               "type": "checkbox"
             },
             {
+              "id": "a2t_house",
+              "label": "house",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
               "id": "a2t_other",
               "label": "Other",
               "type": "checkbox"

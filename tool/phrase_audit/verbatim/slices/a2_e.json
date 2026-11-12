@@ -51,6 +51,14 @@
               [
                 "a2t_cottage",
                 "cottage"
+              ],
+              [
+                "a2t_house",
+                "house"
+              ],
+              [
+                "a2t_flat",
+                "flat"
               ]
             ],
             "pdf_options": [
@@ -62,7 +70,9 @@
               "converted flat",
               "maisonette",
               "bungalow",
-              "cottage"
+              "cottage",
+              "house",
+              "flat"
             ],
             "label": "The property is a",
             "other": [
