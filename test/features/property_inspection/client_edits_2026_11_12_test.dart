@@ -150,4 +150,25 @@ void main() {
       expect(out, 'Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel and glass materials.');
     });
   });
+  group('N11 Floor tiles: the chosen condition prints, not the whole list', () {
+    const screen = 'activity_in_side_property_floors_tiles';
+    test('Cracked tiles uses the Tile condition choice', () {
+      final out = say(screen, ticks(['f4t_kitchen', 'f4td_cracked'], {'actv_tiles': 'Cracked tiles', 'actv_tile_condition': 'Fair'}));
+      expect(out, contains('Cracked Tiles: The floor tiles appear in fair condition.'));
+      expect(out, isNot(contains('good, reasonable, fair, poor, very poor')));
+      expect(out, contains('Localised cracked floor tiles to the kitchen areas were observed.'));
+    });
+    test('an older survey with no condition chosen still prints the cracked-tiles sentence, without the list', () {
+      final out = say(screen, ticks(['f4t_kitchen', 'f4td_cracked'], {'actv_tiles': 'Cracked tiles'}));
+      expect(out, contains('Cracked Tiles: Localised cracked floor tiles to the kitchen areas were observed.'));
+      expect(out, isNot(contains('very poor')));
+      expect(out, isNot(contains('floor tiles appear in')));
+    });
+    test('No cracked tiles is unchanged, and the condition shows for both choices', () {
+      final out = say(screen, ticks(['f4t_kitchen'], {'actv_tiles': 'No cracked tiles', 'actv_tile_condition': 'Good'}));
+      expect(out, startsWith('No Cracked Tiles: The floor tiles appear in good condition.'));
+      final f = nodes[screen]!.fields.firstWhere((x) => x.id == 'actv_tile_condition');
+      expect(f.conditionalOn, 'actv_tiles=No cracked tiles|actv_tiles=Cracked tiles');
+    });
+  });
 }

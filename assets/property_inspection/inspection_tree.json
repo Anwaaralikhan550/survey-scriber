@@ -9969,7 +9969,7 @@
                 "Poor",
                 "Very poor"
               ],
-              "conditionalOn": "actv_tiles=No cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
               "conditionalMode": "show"
             },
             {

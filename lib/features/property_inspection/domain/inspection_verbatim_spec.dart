@@ -6879,6 +6879,25 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'No cracked tiles',
   ),
   VerbatimRule(
+    'f4_tiles_bad_cond',
+    'activity_in_side_property_floors_tiles',
+    '{F_FLOORS}',
+    '{F4_CRACKED_TILES_CONDITION}',
+    [
+      VerbatimToken(
+        '{TILE_CONDITION}',
+        dropdown: 'actv_tile_condition',
+        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
+        lower: true,
+        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
+      ),
+    ],
+    pdf:
+        'Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition.',
+    whenField: 'actv_tiles',
+    whenValue: 'Cracked tiles',
+  ),
+  VerbatimRule(
     'f4_tiles_bad',
     'activity_in_side_property_floors_tiles',
     '{F_FLOORS}',

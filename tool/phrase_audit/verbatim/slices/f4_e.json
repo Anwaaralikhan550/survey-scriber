@@ -373,7 +373,7 @@
               "very poor"
             ],
             "lower": true,
-            "cond": "actv_tiles=No cracked tiles"
+            "cond": "actv_tiles=No cracked tiles|Cracked tiles"
           },
           {
             "kind": "checks",
@@ -441,12 +441,51 @@
         ]
       },
       {
+        "id": "f4_tiles_bad_cond",
+        "masters": [
+          "{F_FLOORS}"
+        ],
+        "sub": "{F4_CRACKED_TILES_CONDITION}",
+        "text": "Cracked Tiles: The floor tiles appear in {TILE_CONDITION} condition.",
+        "tokens": [
+          {
+            "kind": "dropdown",
+            "token": "{TILE_CONDITION}",
+            "dropdown": "actv_tile_condition",
+            "field_label": "Tile condition",
+            "dropdown_options": [
+              "Good",
+              "Reasonable",
+              "Fair",
+              "Poor",
+              "Very poor"
+            ],
+            "pdf_options": [
+              "good",
+              "reasonable",
+              "fair",
+              "poor",
+              "very poor"
+            ],
+            "lower": true,
+            "cond": "actv_tiles=No cracked tiles|Cracked tiles"
+          }
+        ],
+        "pdf": [
+          "Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition."
+        ],
+        "when": [
+          "actv_tiles",
+          "Cracked tiles"
+        ]
+      },
+      {
         "id": "f4_tiles_bad",
         "masters": [
           "{F_FLOORS}"
         ],
         "sub": "{F4_CRACKED_TILES}",
-        "text": "Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition. Where visible, the floor tiles in the {TILE_LOCATIONS} areas showed no evidence of cracking at the time of my inspection. No repairs are currently required. Routine maintenance only is recommended. Cracked Tiles: Localised {TILE_DEFECTS} floor tiles to the {TILE_LOCATIONS} areas were observed. Repairs should be undertaken to maintain the floor finish and reduce the risk of further deterioration.",
+        "text": "Where visible, the floor tiles in the {TILE_LOCATIONS} areas showed no evidence of cracking at the time of my inspection. No repairs are currently required. Routine maintenance only is recommended. Cracked Tiles: Localised {TILE_DEFECTS} floor tiles to the {TILE_LOCATIONS} areas were observed. Repairs should be undertaken to maintain the floor finish and reduce the risk of further deterioration.",
         "tokens": [
           {
             "kind": "checks",
