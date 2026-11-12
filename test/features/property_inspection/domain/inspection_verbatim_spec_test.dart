@@ -78,10 +78,12 @@ void main() {
             final f = fields![t.dropdown]!;
             expect(f['type'], 'dropdown', reason: t.dropdown);
             expect(f['options'], t.dropdownOptions, reason: t.dropdown);
+            // "Other" typed by the surveyor is not one of the PDF's listed words.
+            final listed = t.dropdownOptions
+                .where((o) => o != 'Other' || t.pdfOptions.contains('other'))
+                .toList();
             expect(
-              t.lower
-                  ? t.dropdownOptions.map((o) => o.toLowerCase()).toList()
-                  : t.dropdownOptions,
+              t.lower ? listed.map((o) => o.toLowerCase()).toList() : listed,
               t.pdfOptions,
               reason: t.dropdown,
             );
@@ -165,6 +167,8 @@ void main() {
         for (final t in rule.tokens) {
           if (t.dropdown != null) {
             for (final v in t.dropdownOptions) {
+              // Other prints what was typed (client_edits_2026_11_12_test.dart covers it).
+              if (v == 'Other' && !t.pdfOptions.contains('other')) continue;
               final a = base()..[t.dropdown!] = v;
               final out = run(a);
               expect(

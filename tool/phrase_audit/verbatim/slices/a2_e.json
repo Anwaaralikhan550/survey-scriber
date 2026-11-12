@@ -475,7 +475,8 @@
               "First floor",
               "Second floor",
               "Third floor",
-              "Fourth floor"
+              "Fourth floor",
+              "Other"
             ],
             "pdf_options": [
               "lower ground floor",
@@ -496,7 +497,8 @@
               "One",
               "Two",
               "Three",
-              "Four"
+              "Four",
+              "Other"
             ],
             "pdf_options": [
               "one",

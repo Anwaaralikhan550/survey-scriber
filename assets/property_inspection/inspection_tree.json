@@ -1004,8 +1004,17 @@
                 "First floor",
                 "Second floor",
                 "Third floor",
-                "Fourth floor"
+                "Fourth floor",
+                "Other"
               ]
+            },
+            {
+              "id": "actv_a2_floor_other_text",
+              "label": "Other floor",
+              "type": "text",
+              "conditionalOn": "actv_a2_floor=Other",
+              "conditionalValue": "",
+              "conditionalMode": "show"
             },
             {
               "id": "actv_a2_storeys",
@@ -1015,8 +1024,17 @@
                 "One",
                 "Two",
                 "Three",
-                "Four"
+                "Four",
+                "Other"
               ]
+            },
+            {
+              "id": "actv_a2_storeys_other_text",
+              "label": "Other (number of storeys)",
+              "type": "text",
+              "conditionalOn": "actv_a2_storeys=Other",
+              "conditionalValue": "",
+              "conditionalMode": "show"
             },
             {
               "id": "actv_a2_access",

@@ -34,4 +34,36 @@ void main() {
       expect(both, contains('detached and flat'));
     });
   });
+  group('N2 Flat: Other floor and Other number of storeys, typed', () {
+    const screen = 'activity_property_flate';
+    test('both dropdowns end with Other and each has its text box', () {
+      final f = {for (final x in nodes[screen]!.fields) x.id: x};
+      expect(f['actv_a2_floor']!.options!.last, 'Other');
+      expect(f['actv_a2_storeys']!.options!.last, 'Other');
+      expect(f['actv_a2_floor_other_text']!.conditionalOn, 'actv_a2_floor=Other');
+      expect(f['actv_a2_storeys_other_text']!.conditionalOn, 'actv_a2_storeys=Other');
+    });
+    test('typed words print', () {
+      final out = say(screen, {
+        'cb_a2_flat': 'true',
+        'actv_a2_floor': 'Other',
+        'actv_a2_floor_other_text': 'sixth floor',
+        'actv_a2_storeys': 'Other',
+        'actv_a2_storeys_other_text': 'seven',
+        'actv_a2_access': 'Private door',
+        'actv_a2_elevation': 'Rear',
+      });
+      expect(out, contains('The property is located on the sixth floor of a seven storey building.'));
+    });
+    test('listed choices are unchanged, Other with nothing typed prints nothing', () {
+      expect(
+        say(screen, {'cb_a2_flat': 'true', 'actv_a2_floor': 'Second floor', 'actv_a2_storeys': 'Three', 'actv_a2_access': 'Communal door', 'actv_a2_elevation': 'Front'}),
+        contains('located on the second floor of a three storey building'),
+      );
+      expect(
+        say(screen, {'cb_a2_flat': 'true', 'actv_a2_floor': 'Other', 'actv_a2_storeys': 'Three', 'actv_a2_access': 'Communal door', 'actv_a2_elevation': 'Front'}),
+        isNot(contains('located on')),
+      );
+    });
+  });
 }

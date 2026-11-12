@@ -11709,14 +11709,14 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       VerbatimToken(
         '{A2_FLOOR}',
         dropdown: 'actv_a2_floor',
-        dropdownOptions: ['Lower ground floor', 'Ground floor', 'First floor', 'Second floor', 'Third floor', 'Fourth floor'],
+        dropdownOptions: ['Lower ground floor', 'Ground floor', 'First floor', 'Second floor', 'Third floor', 'Fourth floor', 'Other'],
         lower: true,
         pdfOptions: ['lower ground floor', 'ground floor', 'first floor', 'second floor', 'third floor', 'fourth floor'],
       ),
       VerbatimToken(
         '{A2_STOREYS}',
         dropdown: 'actv_a2_storeys',
-        dropdownOptions: ['One', 'Two', 'Three', 'Four'],
+        dropdownOptions: ['One', 'Two', 'Three', 'Four', 'Other'],
         lower: true,
         pdfOptions: ['one', 'two', 'three', 'four'],
       ),
@@ -13537,7 +13537,10 @@ extension _VerbatimSpec on InspectionPhraseEngine {
     if (token.constant != null) return [token.constant!];
     if (token.dropdown != null) {
       final stored = (answers[token.dropdown] ?? '').trim();
-      final v = optionLabels.show(screenId, token.dropdown!, stored);
+      // "Other" in a list is worded by what the surveyor typed; nothing typed prints nothing.
+      final v = stored.toLowerCase() == 'other'
+          ? (answers['${token.dropdown}_other_text'] ?? '').trim()
+          : optionLabels.show(screenId, token.dropdown!, stored);
       return v.isEmpty ? const [] : [token.lower ? v.toLowerCase() : v];
     }
     if (token.text != null) {
