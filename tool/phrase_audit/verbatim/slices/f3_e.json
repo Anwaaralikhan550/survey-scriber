@@ -311,7 +311,7 @@
           "{F_WALLS_AND_PARTITIONS}"
         ],
         "sub": "{F3_CONDENSATION}",
-        "text": "Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the {CONDENSATION_AREAS} area(s). Condensation is commonly associated with occupancy patterns, heating, insulation, and ventilation. Maintaining a suitable balance between heating and ventilation should assist in reducing condensation. Extractor fans may be installed, and windows opened regularly.",
+        "text": "Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the {CONDENSATION_AREAS}. Condensation is commonly associated with occupancy patterns, heating, insulation, and ventilation. Maintaining a suitable balance between heating and ventilation should assist in reducing condensation. Extractor fans may be installed, and windows opened regularly.",
         "tokens": [
           {
             "kind": "checks",
@@ -348,7 +348,7 @@
           }
         ],
         "pdf": [
-          "Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other area(s)."
+          "Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other."
         ]
       }
     ]

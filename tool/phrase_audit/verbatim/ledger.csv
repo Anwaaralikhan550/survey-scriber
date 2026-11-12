@@ -777,9 +777,9 @@ e46e750375,E9,Repairs should be undertaken where deterioration affects structura
 7a333addc2,E9,Routine maintenance appropriate to the porch canopy material should be expected.,EXACT,{E_OTHER_AREA}::{E9_PORCH_CONDITION},100,DONE
 edf39ce771,E9,"Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel, aluminium, glass, other materials.",MENU,,0,VERIFIED
 98b09980c1,E9,"Condition: Where visible, it appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
-485616b6a5,E9,Guarding should remain securely fixed and free from significant corrosion or damage.,EXACT,{E_OTHER_AREA}::{E9_BALCONY},100,DONE
+485616b6a5,E9,Guarding should remain securely fixed and free from significant corrosion or damage.,EXACT,{E_OTHER_AREA}::{E9_JULIET_CONDITION},100,DONE
 1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-aa7f281f92,E9,Routine maintenance appropriate to the Juliet balcony material should be expected.,EXACT,{E_OTHER_AREA}::{E9_BALCONY},100,DONE
+aa7f281f92,E9,Routine maintenance appropriate to the Juliet balcony material should be expected.,EXACT,{E_OTHER_AREA}::{E9_JULIET_CONDITION},100,DONE
 eeb66e1eea,E9,"Balcony: The property incorporates a timber, steel, concrete, cantilevered balcony(s).",MENU,,0,VERIFIED
 3ca4736875,E9,"Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.",MENU,,0,VERIFIED
 25d2f44e89,E9,"Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.",MENU,,0,VERIFIED
@@ -1062,7 +1062,7 @@ c33bcb4ad5,F3,"Structural Movement: Evidence of historic, localised, progressive
 f95f37efc6,F3,"Although stable at the time of inspection, affected areas may become loose or detached over time.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
 22c324b22c,F3,"Localised repairs may be possible; however, where deterioration is more extensive, or the plaster becomes unstable, it may be more practical and cost-effective to remove and replace the affected section.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
 d398f61866,F3,"Repairs can be undertaken as part of routine maintenance or redecoration, as necessary.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_HOLLOW_PLASTER},100,DONE
-cffb83972a,F3,"Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other area(s).",MENU,,0,VERIFIED
+cffb83972a,F3,"Condensation: Evidence of condensation and localised mould growth was observed on wall surfaces, ceilings or window reveals, in the lounge, bedrooms, bathrooms, kitchens, other area(s).",MENU,,0,UNVERIFIED
 c054c7a162,F3,"Condensation is commonly associated with occupancy patterns, heating, insulation, and ventilation.",MENU,,0,VERIFIED
 12a8c85c12,F3,Maintaining a suitable balance between heating and ventilation should assist in reducing condensation.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDENSATION},100,DONE
 4fbbacc2ad,F3,"Extractor fans may be installed, and windows opened regularly.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDENSATION},100,DONE

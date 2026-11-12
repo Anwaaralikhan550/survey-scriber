@@ -131,4 +131,23 @@ void main() {
       expect(ground, isNot(contains('Ground Source Heat Pump: Ground Source')));
     });
   });
+  group('N9 Walls condensation: no "area(s)" at the end', () {
+    test('the sentence ends with the places', () {
+      final out = say('activity_in_side_property_wap_repair_condensation', ticks(['f3c_lounge', 'f3c_bedrooms']));
+      expect(out, contains('on wall surfaces, ceilings or window reveals, in the lounge and bedrooms. Condensation is commonly associated'));
+      expect(out, isNot(contains('area(s)')));
+    });
+  });
+  group('N10 Balcony: only the Balcony sentence, no Juliet or hardcoded lists', () {
+    test('Balcony construction prints the selection only', () {
+      final out = say('activity_outside_property_other_other_external__construction__3', ticks(['e93c_steel', 'e93c_timber']));
+      expect(out, 'Balcony: The property incorporates a timber and steel balcony(s).');
+      expect(out, isNot(contains('Juliet')));
+      expect(out, isNot(contains('aluminium')));
+    });
+    test('Juliet balcony still prints its own selection', () {
+      final out = say('activity_outside_property_other_other_external__construction__4', ticks(['e94c_steel', 'e94c_glass']));
+      expect(out, 'Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel and glass materials.');
+    });
+  });
 }
