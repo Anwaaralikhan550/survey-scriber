@@ -251,7 +251,7 @@ void main() {
     final slope = nodes.values
         .expand((n) => n.fields)
         .firstWhere((f) => f.id == 'actv_j2_slope');
-    expect(slope.label, 'Slope Gradient (J2 Risk to grounds)');
+    expect(slope.label, 'Slope Gradient'); // client file 6 (13 Nov 2026): no (J2 ...)
     expect(label('activity_in_side_property_wap_removed_wall', 'actv_ia_outcome'), 'Condition');
   });
 

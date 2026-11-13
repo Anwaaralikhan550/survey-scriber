@@ -23,8 +23,8 @@ d6a87464df,Overall opinion,"Unless documentary evidence is available, the stated
 5d7e858f5a,Overall opinion,"Where the construction date cannot be confirmed, the age assessment is based upon the property's apparent style and construction.",EXACT,{D_YEAR_BUILT}::{A2_YEAR_BAND},100,DONE
 91edc36ddb,Overall opinion,"Not Extended: From observable physical evidence, the property does not appear to have been extended.",EXACT,{D_EXTENDED}::{A2_NOT_EXTENDED},100,DONE
 429298bc94,Overall opinion,"Extended: The property has been extended to provide side, rear, front, single-storey, two-storey, roof, loft accommodation.",MENU,,0,VERIFIED
-d6993743e2,Overall opinion,The extension appears compatible with the original building in terms of construction and appearance.,EXACT,{D_EXTENDED}::{A2_EXTENDED},100,DONE
-1a46619dc5,Overall opinion,"This assessment is based on a visual inspection only, and no opening-up or verification of concealed construction was undertaken.",EXACT,{D_EXTENDED}::{A2_EXTENDED},100,DONE
+d6993743e2,Overall opinion,The extension appears compatible with the original building in terms of construction and appearance.,ACCEPT,{D_YEAR_BUILT}::{A2_YEAR_BAND},54,DONE
+1a46619dc5,Overall opinion,"This assessment is based on a visual inspection only, and no opening-up or verification of concealed construction was undertaken.",ACCEPT,{D_EXTENDED}::{A2_EXTENDED},99,DONE
 dacf403f00,Overall opinion,"Your legal adviser should confirm that all necessary statutory approvals, including planning permission, Building Regulations approval, and any completion certificates or guarantees, have been obtained where required.",EXACT,{D_EXTENDED}::{A2_EXTENDED},100,DONE
 4f507e4df0,Overall opinion,Not converted: The property has not been converted.,EXACT,{D_CONVERTED}::{A2_NOT_CONVERTED},100,DONE
 eb5eee599f,Overall opinion,Converted: The property has been converted from its original use.,EXACT,{D_CONVERTED}::{A2_CONVERTED},100,DONE
@@ -127,7 +127,7 @@ e5cda31a07,E1,"Description: The chimney stack(s) are constructed of brick, stone
 d445f70e8a,E1,"Location: The chimney stack(s) are located to the front, rear, side, centre, other locations.",MENU,,0,VERIFIED
 8fb1b1a096,E1,"Pots: The chimney stack(s) are fitted with clay pots, terracotta pots, metal flues, cowls, caps, other pot(s).",MENU,,0,VERIFIED
 2bb3fba9ae,E1,"Condition: Where visible, the chimney stack(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
-318b31ff53,E1,No repair: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+318b31ff53,E1,No repair: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 4eb9d1a7a9,E1,Routine inspection and maintenance should be expected as part of normal property ownership.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
 6efba7639f,E1,"Flashings: The waterproofing between the chimney stack and the roof covering (called the flashing) appears to be formed in lead, lead substitute, mortar, bricks, tiles, other material.",MENU,,0,VERIFIED
 676a77b58f,E1,"Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
@@ -199,7 +199,7 @@ c1b89d1645,E1,Appropriate remedial works should be undertaken without delay.,EXA
 e747bfcd4a,E2,"As the roof is exposed to the weather, it should be inspected regularly and maintained as necessary to identify and address any defects at an early stage.",EXACT,{E_CHIMNEY}::{E1L_NOT_INSPECTED},100,DONE
 01d4a9e23d,E2,"Description: The pitched, mansard, flat roof covering to the main building, extension, porch, or bay window, other is formed in original or replacement clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, aluminium sheets, composite slate, asbestos sheet, other material.",MENU,,0,VERIFIED
 e7b5a53452,E2,"Condition: Where visible, the covering appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
-44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 648e2fe649,E2,The roof covering appears to be adequately performing its function.,EXACT,{E_ROOF_COVERING}::{RC_ABOUT_TYPE_CONDITION},100,DONE
 5bb8c5ad8d,E2,Routine maintenance appropriate to the age of the roof covering should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE
 ed4bb8f85d,E2,"Old roof covering: The roof covering over the building is old and may have reached, or be nearing, the end of its useful life and will need to be stripped and renewed soon.",EXACT,{E_ROOF_COVERING_REPAIR}::{END_OF_USEFUL_LIFE},100,DONE
@@ -222,7 +222,7 @@ e0efed9da6,E2,"Parapet walls: The parapet wall(s) are constructed of brick, ston
 f521df8d28,E2,"Coping: The parapet coping is formed in stone, tiles, concrete, engineering brick, metal, other material.",MENU,,0,VERIFIED
 a9c2b8683d,E2,"Condition: Where visible, these elements appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 b5817579c5,E2,Defective copings or pointing should be repaired to prevent water penetration.,EXACT,{E_ROOF_COVERING}::{E_RC_PARAPET_WALL_CONDITION},100,DONE
-44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 ddecf9e273,E2,Routine maintenance appropriate to the age of the wall should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_PARAPET_WALL_CONDITION},100,DONE
 121989d3f1,E2,"Repair parapet: The rendering, copping, flashing, other of the parapet(s) of the roof are damaged, loose, partly missing, cracked, poorly secured, other.",MENU,,0,VERIFIED
 5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
@@ -243,7 +243,7 @@ e7b5a53452,E2,"Condition: Where visible, the covering appears in good, reasonabl
 5e025d9c51,E2,Flat felt roof coverings have a comparatively short life and will require regular maintenance checks.,EXACT,{E_ROOF_COVERING_MATERIAL}::{FLAT_MATERIAL_MINERAL_FELT},100,DONE
 664546de9b,E2,"Even though the general condition of the felt may appear satisfactory for its type and age, repairs or replacement must be expected in the future.",EXACT,{E_ROOF_COVERING_MATERIAL}::{FLAT_MATERIAL_MINERAL_FELT},100,DONE
 d3c40de8b2,E2,"It is difficult to predict when this will be required as felt roofs can break down with little warning, even when visually appearing sound.",EXACT,{E_ROOF_COVERING_MATERIAL}::{FLAT_MATERIAL_MINERAL_FELT},100,DONE
-44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 85af95929d,E2,The flat roof covering appears to be adequately performing its function.,EXACT,{E_ROOF_COVERING}::{RC_FLAT_NO_REPAIR},100,DONE
 5bb8c5ad8d,E2,Routine maintenance appropriate to the age of the roof covering should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE
 94af7f43ff,E2,"If the composite slates or asbestos sheet is selected, add the Asbestos: Parts of the roof covering and verge may contain asbestos.",EXACT,{E_ROOF_COVERING_MATERIAL}::{MATERIAL_COMPOSITE},100,DONE
@@ -258,7 +258,7 @@ dd44aa6d75,E2,"Because of the possible asbestos content, you should get advice f
 6012072319,E2,"Flashings: The waterproofing at the junction of the roof covering and wall (called the flashing) appears to be formed in lead, mortar, clay tiles, mineral felt, bitumen tape, lead substitute, other.",MENU,,0,VERIFIED
 c07f94654e,E2,"Condition: Where visible, the flashings appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 cbea8fb9a4,E2,Defective flashings should be repaired to reduce the risk of water penetration.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE
-44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 5bb8c5ad8d,E2,Routine maintenance appropriate to the age of the roof covering should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_FLASHING_CONDITION},100,DONE
 6bc4cd17a2,E2,Repair flashing: The waterproofing at the junction of the roof covering and wall is damaged or defective.,MENU,,0,VERIFIED
 5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
@@ -269,8 +269,8 @@ bcf569c2db,E2,"Causing damp: This is causing damp penetration to the adjoining b
 501c58b1cc,E2,Further defects and damage may be revealed from an intrusive or closer inspection by a qualified person.,EXACT,{E_RC_FLASHING_REPAIR}::{CAUSING_DAMP},100,DONE
 10957c0b01,E2,"Ridge tiles: The covering along the top of the roof structure, called the ridge tiles, is assumed to be formed in clay, concrete, other material.",MENU,,0,VERIFIED
 91e3cb03f8,E2,"Condition: Where visible, they appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
-5efa104ad3,E2,Loose or defective ridge tiles should be rebedded or mechanically fixed as appropriate.,EXACT,{E_ROOF_COVERING}::{E_RC_RIDGE_TILES_CONDITION},100,DONE
-44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+5efa104ad3,E2,Loose or defective ridge tiles should be rebedded or mechanically fixed as appropriate.,ACCEPT,{E_ROOF_COVERING}::{E_RC_RIDGE_TILES_CONDITION},97,DONE
+44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 c9e5c23c1b,E2,Routine maintenance appropriate to the age of the ridge tiles should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_RIDGE_TILES_CONDITION},100,DONE
 eb8ec2fd4c,E2,"Repair ridge tiles: The covering along the top of the roof structure called, the ridge tiles, is damaged or defective.",MENU,,0,VERIFIED
 5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
@@ -280,7 +280,7 @@ eb8ec2fd4c,E2,"Repair ridge tiles: The covering along the top of the roof struct
 a5d9d05527,E2,"Hip tiles: The covering along the junction of the roof slopes, called the hip tiles, is assumed to be formed in clay, concrete, other material.",MENU,,0,VERIFIED
 91e3cb03f8,E2,"Condition: Where visible, they appear in good, reasonable, poor, defective condition.",MENU,,0,VERIFIED
 91b4cf15c3,E2,Repairs should be undertaken where movement or deterioration is evident.,EXACT,{E_ROOF_COVERING}::{E_RC_HIP_TILES_CONDITION},100,DONE
-44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 0123ecccd1,E2,Routine maintenance appropriate to the age of the hip tiles should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_HIP_TILES_CONDITION},100,DONE
 d21d57c057,E2,Repair hip tile: The covering along the slope of the roof structure (called the hip tiles) is damaged or defective.,MENU,,0,VERIFIED
 5c217262ff,E2,"This should be repaired soon, repaired now.",MENU,,0,VERIFIED
@@ -290,7 +290,7 @@ d21d57c057,E2,Repair hip tile: The covering along the slope of the roof structur
 b6453fee49,E2,"Valley Gutters: The valley gutters are formed in lead, mortar, other material.",MENU,,0,VERIFIED
 91d103b79a,E2,"Condition: Where visible, they appear in good, reasonable, poor, blocked condition.",MENU,,0,VERIFIED
 6c304f237d,E2,"Blocked or defective valley gutters should be cleared, repaired, or replaced as necessary to ensure effective drainage and prevent water penetration into the building.",EXACT,{E_ROOF_COVERING}::{E_RC_VALLEY_GUTTERS_CONDITION},100,DONE
-44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+44f615c559,E2,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 ef68cb786c,E2,Routine maintenance appropriate to the age of the guttering should be expected.,EXACT,{E_ROOF_COVERING}::{E_RC_VALLEY_GUTTERS_CONDITION},100,DONE
 2adee3533c,E2,"Repair valley gutters: The valley gutter at the junction of the roofs to all, front, side, rear, of the building is blocked, has loose mortar, poorly aligned.",MENU,,0,VERIFIED
 aaa269d923,E2,"This should be repaired soon, now.",MENU,,0,VERIFIED
@@ -325,7 +325,7 @@ ff1f75406d,E3,Not Inspected: The rainwater goods could not be inspected due to a
 01d5d549f7,E3,"Condition: Where visible, the rainwater goods appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 0aa13fdde9,E3,No parts of the rainwater installation were dismantled or tested.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},100,DONE
 3f1d400da6,E3,The adequacy of underground drainage has not been assessed as part of this inspection.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},100,DONE
-1cc47eeecf,E3,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+1cc47eeecf,E3,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 113e2c7e23,E3,The rainwater goods appear to be adequately performing their function.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},100,DONE
 fb19cc7862,E3,Routine maintenance appropriate to the age and type of the rainwater goods should be expected.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{RWG_ABOUT_CONDITION},100,DONE
 032cf159a9,E3,Rainwater runoffs: Some rainwater pipes have not been connected to gullies or extended sufficiently away from the building and allowed to drain directly to the ground.,EXACT,{E_RAINWATER_GOODS_ABOUT}::{E0_RUNOFFS},100,DONE
@@ -370,8 +370,8 @@ d556f0aa85,E4,"Description: The external walls of the main building, extension(s
 9ce34a783c,E4,"Cladding: The external wall finish or cladding comprises facing brickwork, natural or reconstituted stone, timber cladding, plastic panelling boards.",MENU,,0,VERIFIED
 7296b0705b,E4,"weatherboarding, fibre cement boards, uPVC cladding, fibre cement panels, composite cladding panels, glass curtain walling, hanging tiles (including shingle or plain tiles), aluminium cladding panels, terracotta cladding tiles, other finishes.",MENU,,0,VERIFIED
 6c69340469,E4,"Condition: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.",MENU,,0,VERIFIED
-c4a40e4ca0,E4,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-0330779511,E4,The external walls appear to be adequately performing their function.,EXACT,{E_MAIN_WALLS}::{E4_CONDITION},100,DONE
+c4a40e4ca0,E4,No repair required: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
+0330779511,E4,The external walls appear to be adequately performing their function.,EXACT,{E_MAIN_WALLS}::{WALL_CONDITION},100,DONE
 67f95949e7,E4,Routine maintenance appropriate to the age and construction of the building should be expected.,EXACT,{E_MAIN_WALLS}::{E4_CONDITION},100,DONE
 a854d21f15,E4,"Painted Walls: The external wall surfaces, or parts of them, have been painted.",EXACT,{E_MAIN_WALLS}::{E4_PAINTED},100,DONE
 3bed6515e2,E4,"Painting masonry can reduce its ability to breathe, trapping moisture within the wall.",EXACT,{E_MAIN_WALLS}::{E4_PAINTED},100,DONE
@@ -547,8 +547,8 @@ e32d884b45,E5,"BS EN noted: Visible British Standard, BS EN, or other permanent 
 9687bc4a30,E5,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 883968ba53,E5,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 4bf4ec55e8,E5,"Condition: Where visible and operated during the inspection, the windows appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
-b06c220d4f,E5,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-c9c2d74cdb,E5,Routine maintenance appropriate to the age of window material should be expected.,EXACT,{E_WINDOWS}::{E5_CONDITION},100,DONE
+b06c220d4f,E5,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
+c9c2d74cdb,E5,Routine maintenance appropriate to the age of window material should be expected.,ACCEPT,{E_WINDOWS}::{E5_CONDITION},98,DONE
 84c9859b1e,E5,"If very poor is selected, add this: Windows that are in poor condition or in disrepair will require comprehensive repair.",EXACT,{E_WINDOWS_REPAIR}::{WINDOWS_DEFECT_IF_IN_DISREPAIR},100,DONE
 a0f072b81c,E5,"In some cases, it may be more economical to replace the windows entirely.",EXACT,{E_WINDOWS_REPAIR}::{WINDOWS_DEFECT_IF_IN_DISREPAIR},100,DONE
 7e8f9a6914,E5,"This work should be done under an appropriate FENSA, CERTASS, or Building Regulation approval scheme where applicable.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_VERY_POOR},100,DONE
@@ -613,7 +613,7 @@ d93549dc6f,E6,The presence of safety glazing cannot be confirmed by visual inspe
 80ee6e0447,E6,The presence of visible markings indicates that safety glazing has been installed.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 02e3810ae9,E6,"Where confirmation is required, your legal adviser should verify any available certification relating to replacement windows.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_BS_EN_NOTED},100,DONE
 170e3dd974,E6,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
-1015d63015,E6,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+1015d63015,E6,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 abf3231871,E6,Routine maintenance appropriate to the door material should be expected.,EXACT,{E_OUTSIDE_DOORS}::{DOOR_CONDITION},100,DONE
 a266a5e3dc,E6,"If very poor is selected, add this: Doors that are in poor condition or in disrepair will require comprehensive repair.",EXACT,{E_OUTSIDE_DOORS}::{E6_VERY_POOR},100,DONE
 1aa0418a9c,E6,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_VERY_POOR},100,DONE
@@ -668,7 +668,7 @@ dcd0c7bd51,E7,"BS EN noted: Visible British Standard, BS EN, or other permanent 
 9e7a7d495d,E7,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 5609d069d0,E7,Conservatories require routine maintenance appropriate to their age and construction.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_CONDITION},100,DONE
 762dfb518d,E7,"Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability.",MENU,,0,VERIFIED
-7e49dd84fb,E7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+7e49dd84fb,E7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 8f47c5a91e,E7,Routine maintenance appropriate to the conservatory material should be expected.,EXACT,{E_CONSERVATORY_PORCHES}::{CP_CONDITION},100,DONE
 a029db939f,E7,"If very poor condition is selected, add this: Conservatories that are in poor condition or in disrepair will require comprehensive repair.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_VERY_POOR},100,DONE
 747fd29896,E7,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_VERY_POOR},100,DONE
@@ -698,7 +698,7 @@ dcd0c7bd51,E7,"BS EN noted: Visible British Standard, BS EN, or other permanent 
 9e7a7d495d,E7,"Condition: Where visible and operated during the inspection, the doors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type.",MENU,,0,VERIFIED
 d53974d068,E7,Porches require routine maintenance appropriate to their age and construction.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_P_CONDITION},100,DONE
 762dfb518d,E7,"Glazing, roof coverings, sealants, rainwater goods, and external decorations should be inspected periodically and repaired where necessary to maintain weather resistance and serviceability.",MENU,,0,VERIFIED
-7e49dd84fb,E7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+7e49dd84fb,E7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 409c92f3cc,E7,Routine maintenance appropriate to the porch material should be expected.,EXACT,{E_CONSERVATORY_PORCHES}::{E7_P_CONDITION},100,DONE
 6cb2658b57,E7,"If very poor is selected, add this: Porches that are in poor condition or in disrepair will require comprehensive repair.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_P_VERY_POOR},100,DONE
 747fd29896,E7,"In some cases, it may be more economical to replace the doors entirely.",EXACT,{E_CONSERVATORY_PORCHES}::{E7_C_VERY_POOR},100,DONE
@@ -718,7 +718,7 @@ e1711fae2e,E7,"Your legal adviser should confirm whether any necessary Building 
 85ff88a73a,E8,"Consequently, I am unable to comment on their condition.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_NOT_INSPECTED},100,DONE
 b75f27f205,E8,"These elements are typically formed in timber and should be regularly inspected, maintained, and redecorated as necessary to protect them from weathering, prevent decay, and prolong their service life.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_NOT_INSPECTED},100,DONE
 b01f186d67,E8,Inspected: Inspection was carried out from ground level and other reasonably accessible positions.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
-18145792a8,E8,High-level joinery was inspected using binoculars where appropriate.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
+18145792a8,E8,High-level joinery was inspected using binoculars where appropriate.,ACCEPT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_GENERAL_MAINTENANCE},54,DONE
 068c47ab35,E8,"Concealed sections behind gutters, roof coverings or other finishes could not be inspected.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
 1bee6e7472,E8,No opening up or dismantling of components was undertaken.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_INSPECTED},100,DONE
 f7148334f2,E8,"This section relates to external joinery and finishes not covered elsewhere within this report, including fascias, soffits, bargeboards, eaves joinery, verge clips, cladding, decorative timberwork, or other associated external finishes.",MENU,,0,VERIFIED
@@ -730,7 +730,7 @@ f637ecc6a0,E8,Routine inspection and maintenance appropriate to the material sho
 e5053d2d48,E8,"Decorations: The external painted or stained finishes appear in good, reasonable, fair, weathered, poor condition.",MENU,,0,VERIFIED
 232399bed1,E8,External decorations are intended to provide weather protection as well as appearance.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_DECORATIONS},100,DONE
 55c5c7a520,E8,"Condition: Where visible, these elements appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
-d715372ceb,E8,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+d715372ceb,E8,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 0f5dcf12c8,E8,Routine maintenance appropriate to the joinery material should be expected.,EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{CONDITION},100,DONE
 eedcda3382,E8,"Repair: The fascias, soffits, barge boards, verge clips, timber cladding, other to the main building, back addition, extension, bay window, garage, other are rotted, damaged, poorly secured, incomplete, missing, other.",MENU,,0,VERIFIED
 fc3f987502,E8,"Repairs should be carried out as soon as practicable to restore their integrity and prevent further deterioration, moisture ingress, or the risk of sections becoming detached.",EXACT,{E_OTHER_JOINERY_AND_FINISHES}::{E8_REPAIR},100,DONE
@@ -767,18 +767,18 @@ ca2aedd809,E9,"Roof: The roof is of pitched, flat, lean-to construction and cove
 25d2f44e89,E9,"Floor: The floor is formed in concrete, block paving, tarmac, gravel, other finish.",MENU,,0,VERIFIED
 6314b578ba,E9,"Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 7a055bb249,E9,Routine maintenance appropriate to its age and construction should be expected.,EXACT,{E_OTHER_AREA}::{E9_BALCONY_CONDITION},100,DONE
-1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 22f36033e4,E9,Routine maintenance appropriate to the carport material should be expected.,EXACT,{E_OTHER_AREA}::{E9_CARPORT_CONDITION},100,DONE
 c669aa77d6,E9,"Porch Canopy: The property incorporates a porch canopy constructed of timber, steel, concrete, plastic, other material.",MENU,,0,VERIFIED
 9fab2ac635,E9,"Roof: The roof covering comprises tiles, slates, felt, polycarbonate, plastic, other material.",MENU,,0,VERIFIED
 6c4d589018,E9,"Condition: Where visible, the canopy appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 e46e750375,E9,Repairs should be undertaken where deterioration affects structural stability or weather resistance.,EXACT,{E_OTHER_AREA}::{E9_PORCH_CONDITION},100,DONE
-1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 7a333addc2,E9,Routine maintenance appropriate to the porch canopy material should be expected.,EXACT,{E_OTHER_AREA}::{E9_PORCH_CONDITION},100,DONE
 edf39ce771,E9,"Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel, aluminium, glass, other materials.",MENU,,0,VERIFIED
 98b09980c1,E9,"Condition: Where visible, it appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 485616b6a5,E9,Guarding should remain securely fixed and free from significant corrosion or damage.,EXACT,{E_OTHER_AREA}::{E9_JULIET_CONDITION},100,DONE
-1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 aa7f281f92,E9,Routine maintenance appropriate to the Juliet balcony material should be expected.,EXACT,{E_OTHER_AREA}::{E9_JULIET_CONDITION},100,DONE
 eeb66e1eea,E9,"Balcony: The property incorporates a timber, steel, concrete, cantilevered balcony(s).",MENU,,0,VERIFIED
 3ca4736875,E9,"Walls: The walls or balustrades are formed in bricks, timber, steel, glass, aluminium, other materials.",MENU,,0,VERIFIED
@@ -788,7 +788,7 @@ cc35c315c8,E9,"Drains: The drains are laid with bitumen, felt, concrete, other m
 c406a49ec0,E9,"Any defective, blocked, or damaged drainage channels should be cleared and repaired promptly to ensure they continue to function effectively.",EXACT,{E_OTHER_AREA}::{E9_BALCONY_DRAINS},100,DONE
 6314b578ba,E9,"Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 7a055bb249,E9,Routine maintenance appropriate to its age and construction should be expected.,EXACT,{E_OTHER_AREA}::{E9_BALCONY_CONDITION},100,DONE
-1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 38d8d5a64e,E9,Routine maintenance appropriate to the balcony material should be expected.,EXACT,{E_OTHER_AREA}::{E9_BALCONY_CONDITION},100,DONE
 43d843cb81,E9,Roof Terrace: The property incorporates a roof terrace.,EXACT,{E_OTHER_AREA}::{E9_TERRACE},100,DONE
 250ee97641,E9,"The structure is formed in timber, concrete, steel, other materials.",MENU,,0,VERIFIED
@@ -800,16 +800,16 @@ bc359f8b89,E9,"Drains: The drains are laid with bitumen, felt, concrete or other
 c406a49ec0,E9,"Any defective, blocked, or damaged drainage channels should be cleared and repaired promptly to ensure they continue to function effectively.",EXACT,{E_OTHER_AREA}::{E9_BALCONY_DRAINS},100,DONE
 6314b578ba,E9,"Condition: Where visible, the structure appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 4ec0af77c6,E9,Routine maintenance appropriate to its age and construction of the roof terrace should be expected.,EXACT,{E_OTHER_AREA}::{E9_TERRACE_CONDITION},100,DONE
-1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 616baffbbe,E9,Routine maintenance appropriate to the roof terrace material should be expected.,EXACT,{E_OTHER_AREA}::{E9_TERRACE_CONDITION},100,DONE
 2a9fb0fbd0,E9,"External Staircase: The property incorporates an external staircase constructed of concrete, steel, timber, brick, other materials.",MENU,,0,VERIFIED
 ab3ed1e86a,E9,"Element (s): The handrails, landing, and steps are formed in steel, timber, aluminium, other materials.",MENU,,0,VERIFIED
 bfa1c98246,E9,"Condition: Where visible, the staircase appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
-1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 44f12adf54,E9,Routine maintenance appropriate to the staircase material should be expected.,EXACT,{E_OTHER_AREA}::{E9_STAIRS_CONDITION},100,DONE
 38804091e1,E9,"Retaining Walls: The property incorporates brick, stone, concrete, gabion, timber retaining walls.",MENU,,0,VERIFIED
 bea711cf4c,E9,"Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
-1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 1eb10152c6,E9,Routine maintenance appropriate to the retaining wall material should be expected.,EXACT,{E_OTHER_AREA}::{E9_RETAINING_CONDITION},100,DONE
 c40331abe6,E9,"Defects noted: Evidence of movement, bulging, instability, damage, other was noted to parts or all retaining walls.",MENU,,0,VERIFIED
 4f7d433b6d,E9,You should arrange for further investigation by an appropriately qualified person.,EXACT,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},100,DONE
@@ -821,8 +821,8 @@ c74ff6b761,E9,"Where the retaining wall is shared with, or forms a boundary with
 627ab67876,E9,"Before any work is undertaken, your legal adviser should investigate ownership, maintenance responsibilities and any associated rights or liabilities, and explain the implications to you.",EXACT,{E_OTHER_AREA}::{E9_RETAINING_DEFECTS},100,DONE
 bd54e61187,E9,"Other External Structures: Other external structures include bin stores, cycle stores, garden walls, pergolas, gazebos, covered walkways, storage compounds, other ancillary structures.",MENU,,0,VERIFIED
 bea711cf4c,E9,"Condition: Where visible, these appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
-62cc321eb3,E9,Routine maintenance appropriate to their age and construction installation should be expected.,EXACT,{E_OTHER_AREA}::{E9_OTHER_CONDITION},100,DONE
-1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+62cc321eb3,E9,Routine maintenance appropriate to their age and construction installation should be expected.,ACCEPT,{E_OTHER_AREA}::{E9_OTHER_CONDITION},93,DONE
+1d0f60c900,E9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 37ee9fd9b0,E9,Routine maintenance appropriate to the installation material should be expected.,EXACT,{E_OTHER_AREA}::{E9_OTHER_CONDITION},100,DONE
 beab227157,E9,"Repairs Roof: The flashing, roof tile, sheet, or slate covering of the roof over the carport, balcony, canopy, other is missing, slipped, cracked, lifted, in disrepair, leaking, damaged, poorly secured, dilapidated, other.",MENU,,0,VERIFIED
 72962196da,E9,"Repairs should be undertaken as soon as practicable by a competent roofing contractor to prevent water ingress, further deterioration, and the risk of loose materials becoming dislodged.",EXACT,{E_OTHER_AREA}::{E9_E9_R_ROOF},100,DONE
@@ -874,7 +874,7 @@ f6262defc5,F1,"Consequently, I am unable to comment on the condition of the conc
 c521fa4bff,F1,The roof structure was inspected from the roof access hatch where available and from those areas that were safely accessible at the time of the inspection.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INTRO},100,DONE
 e7b2859ec4,F1,"Description: The roof structure is formed in traditional cut timber, prefabricated trussed rafters, steel, other construction.",MENU,,0,VERIFIED
 17483d6529,F1,"Condition: Where visible, the roof structure appears in good, reasonable, fair, poor, very poor condition, consistent with its age and construction.",MENU,,0,VERIFIED
-ebcdc800ff,F1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+ebcdc800ff,F1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 340bc86497,F1,Routine maintenance appropriate to the roof structure material should be expected.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_CONDITION},100,DONE
 e22c980456,F1,"Roof Underlay No Underlay: The absence of a roof underlay could result in water leakage, lower internal temperatures, higher heating costs, condensation, and mould growth.",MENU,,0,DONE
 81a97c978c,F1,I recommend that you contact a qualified person to inspect the roof covering and confirm its watertightness.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_UNDERLAY},100,DONE
@@ -882,7 +882,7 @@ c74bb81e77,F1,"Underlay present: The underside of the roof covering incorporates
 97c5d64f4c,F1,"Where visible, the underlay appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 905c01b7e3,F1,"Where no underlay is present, this is likely to reflect the age and type of construction and is not necessarily a defect.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNDERLAY_PRESENT},100,DONE
 cb672ee9b3,F1,"However, installing a suitable breathable underlay when the roof covering is next renewed would improve weather protection and thermal performance.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNDERLAY_PRESENT},100,DONE
-ebcdc800ff,F1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+ebcdc800ff,F1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 5844aaa6c4,F1,Routine maintenance appropriate to the underlay material should be expected.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNDERLAY_PRESENT},100,DONE
 883ff79fd1,F1,"Defects noted: The roof underlay is worn, torn, missing, damaged in places, reducing its effectiveness as a secondary barrier against wind-driven rain and dust.",MENU,,0,VERIFIED
 4e98ab36a0,F1,I recommend that a qualified roofing contractor inspect the roof covering to confirm its weathertightness and carry out any necessary repairs.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_UNDERLAY_DEFECTS},100,DONE
@@ -899,14 +899,14 @@ e835c34040,F1,Significantly damaged or rotted timbers should be replaced.,EXACT,
 7ebac515c9,F1,"Thermal Insulation: The roof space floor insulation appears adequate, limited, insufficient, poorly fitted, other based upon the visible areas only.",MENU,,0,VERIFIED
 9aa91b374d,F1,The thickness and continuity of insulation cannot be confirmed without disturbing the insulation.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_THERMAL_INSULATION},100,DONE
 b6b00f77e4,F1,Reference should also be made to the Energy Performance Certificate where available.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_THERMAL_INSULATION},100,DONE
-183abd2959,F1,Adequate insulation: The insulation to the loft floor appears adequate where visible.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_ADEQUATE},100,DONE
+183abd2959,F1,Adequate insulation: The insulation to the loft floor appears adequate where visible.,ACCEPT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_ADEQUATE},98,DONE
 518ffab3a5,F1,"Where insulation is inadequate or absent, you should upgrade it to a depth of 270-300 mm to meet current recommended standards, taking care not to obstruct roof ventilation.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_ADEQUATE},100,DONE
 604e1b4406,F1,Inadequate/no insulation: The loft insulation is below the current recommended standard of 270-300 mm or is absent.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_INADEQUATE},100,DONE
 8d885fe056,F1,"This can lead to heat loss, higher heating costs, and an increased risk of condensation and mould.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_INADEQUATE},100,DONE
 b896748bbe,F1,"I recommend upgrading the insulation to current standards, ensuring roof ventilation is not obstructed.",EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_INSULATION_INADEQUATE},100,DONE
 a4a369a752,F1,"Water Storage Tanks: The roof space contains plastic, galvanised steel, asbestos cement, fibreglass, other cold water storage tanks.",MENU,,0,VERIFIED
 000c57ac38,F1,"Condition: Where visible, the tank appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
-36859a0ad9,F1,No defects noted: No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_CONDITION},100,DONE
+36859a0ad9,F1,No defects noted: No evidence of leakage or significant defects was observed at the time of inspection unless otherwise stated.,ACCEPT,{F_ABOUT_ROOF_STRUCTURE}::{ROOF_STRUCTURE_CONDITION},62,DONE
 12ae0e1688,F1,Routine maintenance appropriate to the tank material should be expected.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_CONDITION},100,DONE
 0ea5773f72,F1,Leaking: The water tank is leaking or in disrepair.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_LEAKING},100,DONE
 e1f6964975,F1,You should repair or replace this promptly to prevent further dampness and damage to nearby elements.,EXACT,{F_ABOUT_ROOF_STRUCTURE}::{F1_TANK_LEAKING},100,DONE
@@ -995,7 +995,7 @@ fc83754e97,F2,No opening up or destructive investigation has been undertaken.,EX
 6632c80c6c,F2,"Description: The ceilings are formed in plaster, plasterboard, lath and plaster, other ceilings.",MENU,,0,VERIFIED
 203105ebf1,F2,"The ceiling finishes comprise painted, textured coating, papered, timber-clad, tiled, wallpapered, decorative panelled, other finishes.",MENU,,0,VERIFIED
 aba7f2b69e,F2,"Condition: Where visible, the ceilings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
-68669c64db,F2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+68669c64db,F2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 3c9f7e4745,F2,Routine maintenance appropriate to the ceiling material should be expected.,EXACT,{F_CEILINGS}::{ABOUT_CONDITION},100,DONE
 893dc7c293,F2,"If lath and plaster is selected, add this - The ceilings are fully or partially made of older plaster supported on thin wooden strips (called 'lath and plaster'), typical of properties built before the 1940s.",EXACT,{F_CEILINGS}::{F2_LATH_PLASTER},100,DONE
 908778fdcc,F2,"While no significant defects were noted at the time of inspection, these ceilings can deteriorate with age as the plaster loses its bond with the timber laths.",EXACT,{F_CEILINGS}::{F2_LATH_PLASTER},100,DONE
@@ -1043,7 +1043,7 @@ c50e44f24a,F3,"Description: The walls are formed in solid masonry, timber stud p
 2b96c3d542,F3,"The wall finish comprises paint, plaster, wallpaper, tiling, timber panelling, textured coating, decorative panelling, other finishes.",MENU,,0,VERIFIED
 e19589b9f3,F3,"Condition: Where visible, the walls and partitions appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
 9453533e6b,F3,Routine redecoration appropriate to the age and condition of the property should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDITION},100,DONE
-444ee8a699,F3,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+444ee8a699,F3,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 54ae15774f,F3,Routine maintenance appropriate to the wall material should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_CONDITION},100,DONE
 e77621e54d,F3,"If lath and plaster is selected, add this - The walls are fully or partially made of older plaster supported on thin wooden strips, called lath and plaster, typical of properties built before the 1940s.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_LATH_PLASTER},100,DONE
 9413100427,F3,"While no significant defects were noted at the time of inspection, these walls can deteriorate with age as the plaster loses its bond with the timber laths.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_LATH_PLASTER},100,DONE
@@ -1085,7 +1085,7 @@ a045ed6b68,F3,"Where fitted units, such as kitchen cabinets, conceal wall surfac
 c1dcfdf363,F3,I recommend further investigation by a suitably qualified damp specialist to confirm the cause and advise on any necessary repairs.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_SUSPECTED_RISING_DAMP},100,DONE
 f6202283cd,F3,"Internal Alterations: Evidence was observed that an internal wall has been removed, partially removed, altered, new opening created, has been formed.",MENU,,0,VERIFIED
 5bf2a90138,F3,"Where an internal wall has been removed or altered, other parts of the property must be properly supported.",EXACT,{F_WALLS_AND_PARTITIONS}::{F3_INTERNAL_ALTERATIONS},100,DONE
-444ee8a699,F3,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+444ee8a699,F3,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 88b17e901a,F3,Routine maintenance appropriate to the building material should be expected.,EXACT,{F_WALLS_AND_PARTITIONS}::{F3_ALTERATIONS_NO_DEFECTS},100,DONE
 bb79b43c15,F3,Defects noted: An original internal wall has been removed to form an opening at (type in location).,MENU,,0,VERIFIED
 98f3a42186,F3,"Distortion, cracking, inadequate support, other issues were noted around the altered area.",MENU,,0,VERIFIED
@@ -1104,8 +1104,8 @@ a8af214a2c,F3,Minor cracking and decorative defects should be repaired during ro
 791d28859b,F4,"Description: The floors are formed in solid concrete, suspended timber, beam and block, other construction.",MENU,,0,VERIFIED
 ef275b7896,F4,"The floor finishes comprise floorboards, carpet, tiles, ceramic tiles, laminate flooring, wood flooring, vinyl, stone tiles, other finishes.",MENU,,0,VERIFIED
 e0a8883db7,F4,"Condition: Where visible, the floors appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
-096e3f741d,F4,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-6a0d7726da,F4,Routine maintenance appropriate to the flooring material should be expected.,EXACT,{F_FLOORS}::{F4_CONDITION},100,DONE
+096e3f741d,F4,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
+6a0d7726da,F4,Routine maintenance appropriate to the flooring material should be expected.,EXACT,{F_FLOORS}::{FLOOR_CONDITION},100,DONE
 f023f5a213,F4,"No Creaking floor: I walked over the accessible suspended floor surfaces and found them to be firm and level underfoot, with no evidence of excessive springiness or distortion.",EXACT,{F_FLOORS}::{F4_NO_CREAKING},100,DONE
 0b1461d5b6,F4,"This is based on a visual inspection only, and the condition of concealed floor timbers cannot be confirmed without opening up the structure.",EXACT,{F_FLOORS}::{F4_NO_CREAKING},100,DONE
 eed6c2698f,F4,Creaking floor noted: I walked over the accessible suspended floor surfaces and found them to be firm underfoot.,EXACT,{F_FLOORS}::{F4_CREAKING_NOTED},100,DONE
@@ -1118,8 +1118,8 @@ dcbb7cb79b,F4,"This is common with floors of this age and construction, and thes
 d80983e0e9,F4,"However, where the defect is significant, repair must be carried out promptly by a qualified professional.",EXACT,{F_FLOORS}::{F4_REPAIR_TIMBER_FLOOR},100,DONE
 103a059cb9,F4,"No Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 39bc540978,F4,"Where visible, the floor tiles in the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas showed no evidence of cracking at the time of my inspection.",MENU,,0,VERIFIED
-58e9030aff,F4,No repairs are currently required.,EXACT,{F_FLOORS}::{F4_CRACKED_TILES},100,DONE
-c45e780b68,F4,Routine maintenance only is recommended.,EXACT,{F_FLOORS}::{F4_CRACKED_TILES},100,DONE
+58e9030aff,F4,No repairs are currently required.,EXACT,{F_FLOORS}::{F4_NO_CRACKED_TILES},100,DONE
+c45e780b68,F4,Routine maintenance only is recommended.,EXACT,{F_FLOORS}::{F4_NO_CRACKED_TILES},100,DONE
 f4813cf0b6,F4,"Cracked Tiles: Localised cracked, loose, damaged floor tiles to the kitchen, utility room, bathroom, toilet, conservatory, porch, other areas were observed.",MENU,,0,VERIFIED
 9619d878be,F4,Repairs should be undertaken to maintain the floor finish and reduce the risk of further deterioration.,EXACT,{F_FLOORS}::{F4_CRACKED_TILES},100,DONE
 c4fab3d8c7,F4,Loose Floorboards: Loose and creaking floor finishes were noted and will require local repair or renewal.,EXACT,{F_FLOORS}::{F4_LOOSE_FLOORBOARDS},100,DONE
@@ -1161,7 +1161,7 @@ afe35f74a4,F5,The adequacy of ventilation has not been assessed during this insp
 60a01aa206,F5,"Description: The property incorporates open fireplaces, gas fires, electric fires, solid fuel stoves, wood-burning stoves, multi-fuel stoves, decorative fireplaces.",MENU,,0,VERIFIED
 52bde0c6a1,F5,"Condition: Where visible, the fireplace(s) and chimney breast(s) appear in good, reasonable, fair, poor, very poor condition, consistent with their age and construction.",MENU,,0,VERIFIED
 9f1bfb68be,F5,"If the flues are to be used, they should be inspected and assessed by an appropriately qualified chimney specialist before use.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_CONDITION},100,DONE
-5cfa1c1815,F5,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+5cfa1c1815,F5,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 a992d05ca6,F5,"Routine maintenance appropriate to the fireplaces, chimney breasts and flues material should be expected.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_CONDITION},100,DONE
 026d33278c,F5,"Vented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other are vented.",MENU,,0,VERIFIED
 13a689f525,F5,"Unvented blocked fireplace: The fireplace(s) in the lounge, dining room, bedroom, kitchen, hallway, other have been sealed, but no ventilation to the redundant flue was evident.",MENU,,0,VERIFIED
@@ -1177,7 +1177,7 @@ acc7b4d479,F5,"Where structural adequacy is uncertain, further investigation by 
 24d48ac9f6,F5,I saw evidence that indicates this has not been done properly.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_REMOVED_DEFECTS},100,DONE
 166619886c,F5,You should ask an appropriately qualified person to investigate this problem and recommend any repairs.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_REMOVED_DEFECTS},100,DONE
 3a5b707a1c,F5,"This may involve removing parts of the floor and wall, and you should discuss this with the property owner.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_REMOVED_DEFECTS},100,DONE
-b9aeeea06c,F5,"Boiler Flues: Where a heating appliance discharges through an external wall or roof, the visible flue terminal appears secure, adequately positioned, and free from obvious obstruction.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_BOILER_FLUES},100,DONE
+b9aeeea06c,F5,"Boiler Flues: Where a heating appliance discharges through an external wall or roof, the visible flue terminal appears secure, adequately positioned, and free from obvious obstruction.",ACCEPT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_BOILER_FLUES},96,DONE
 e1493d3235,F5,The installation has not been assessed.,EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{F5_BOILER_FLUES},100,DONE
 7030a40f0d,F5,Fireplace defects: One or more of the following defects were observed: • cracked fire surround • damaged hearth • loose fireplace components • cracked chimney breast • distorted fireplace opening • localised damp staining • surface deterioration Repairs should be undertaken where deterioration affects safety or continued use.,MENU,,0,VERIFIED
 cd5c3e450c,F5,"If you plan to use the fireplace again, you should ask an appropriately qualified person to inspect and repair the fireplace.",EXACT,{F_FIREPLACES_AND_CHIMNEYS}::{DAMAGED_GATE},100,DONE
@@ -1196,7 +1196,7 @@ fc72608430,F6,Wall and floor surfaces concealed behind fitted units could not be
 50595d550b,F6,"Fittings: The kitchen, utility room, other units are formed in timber, vinyl-wrapped timber, laminated MDF, other materials.",MENU,,0,VERIFIED
 444e6bd905,F6,"Condition: Where visible, they appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 e886c9c4be,F6,Routine adjustment and maintenance should be expected with normal use.,EXACT,{F_BUILT_IN_FITTINGS}::{BUILT_IN_FITTINGS},100,DONE
-905622e3a9,F6,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+905622e3a9,F6,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 3678b1703f,F6,Routine maintenance appropriate to the built-in fittings should be expected.,EXACT,{F_BUILT_IN_FITTINGS}::{F6_CONDITION},100,DONE
 bed1873edd,F6,"Fittings defects: One or more cupboard doors or drawers require adjustment, repair, replacement due to wear or damage.",EXACT,{F_BUILT_IN_FITTINGS}::{F6_FITTINGS_DEFECTS},100,DONE
 9ec64c4112,F6,"Kitchen Sink: The kitchen, utility room, other sink(s) is formed in stainless steel, ceramic, composite, stone, other material.",MENU,,0,VERIFIED
@@ -1218,13 +1218,13 @@ c36773b60d,F6,"Cupboard hinges, runners, and door furniture should be adjusted o
 accd85d608,F7,"Description: The joinery items comprise internal doors, door frames, skirting boards, architraves, staircases, balustrades, handrails, window boards, timber cladding, wardrobe(s), cupboards, built-in joinery, other timber components.",MENU,,0,VERIFIED
 26925b80e4,F7,"Condition: Where visible and operated during the inspection, they appear in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 32f4ac4ec5,F7,Routine adjustment and maintenance appropriate to their age and construction should be expected.,EXACT,{F_WOODWORK}::{F7_CONDITION},100,DONE
-3cbc7545c1,F7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+3cbc7545c1,F7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 97090c037f,F7,Routine maintenance appropriate to the timber joinery should be expected.,EXACT,{F_WOODWORK}::{F7_CONDITION},100,DONE
 dadd8d9203,F7,"Defect noted: One or more internal joinery elements, including doors, locks, door frames, skirting boards, architraves, the staircase, balustrades, handrails, window boards, timber cladding, cupboards, built-in joinery, other timber fittings, were found to be worn, loose, poorly fitted, damaged, inadequately secured, missing, affected by decay, other.",MENU,,0,VERIFIED
 43a5ca701a,F7,"Where the defects are minor, repairs can be undertaken as part of routine maintenance.",EXACT,{F_WOODWORK}::{F7_DEFECT_NOTED},100,DONE
 4f33c77cb3,F7,"Otherwise, where the defects are significant or affect safety, security or normal operation, repairs or replacement should be carried out without delay by a suitably qualified contractor.",EXACT,{F_WOODWORK}::{F7_DEFECT_NOTED},100,DONE
 a96d4e886b,F7,"Door operation: The internal doors selected for operation opened and closed freely, with resistance, with difficulty.",MENU,,0,VERIFIED
-3cbc7545c1,F7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+3cbc7545c1,F7,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 921f086110,F7,Routine maintenance appropriate to the timber joinery material should be expected.,ACCEPT,{F_WOODWORK}::{F7_CONDITION},94,DONE
 fbc1e22a06,F7,"If with minor resistance, or with difficulty is selected, add this.",MENU,,0,DONE
 fdb06ea33e,F7,One or more internal doors do not close properly or operate with resistance.,EXACT,{F_WOODWORK}::{F7_DOOR_OPERATION_ADDON},100,DONE
@@ -1271,7 +1271,7 @@ d91cacc5ae,F8,"Description: The property incorporates a family bathroom(s), show
 50937cd3d5,F8,"Sanitary ware: These are fitted with a combination of sanitaryware including a bathtub(s), shower(s), wash hand basin(s), WCs, bidet(s), mains pressure shower, electric shower, thermostatic shower, shower enclosure, wet room, other installation.",MENU,,0,VERIFIED
 afe7ce255e,F8,"Wall finishes: Wall finishes comprise ceramic tiles, stone tiles, water-resistant wall panels, painted plaster, other finishes.",MENU,,0,VERIFIED
 0c4b893fdd,F8,"Condition: Where visible, the bathroom fittings appear in good, reasonable, fair, poor, very poor condition, consistent with their age and use.",MENU,,0,VERIFIED
-554263c85b,F8,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+554263c85b,F8,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 dcd4b29097,F8,Routine maintenance appropriate to the fittings should be expected.,EXACT,{F_BATHROOM_FITTINGS}::{BATHROOM_FITTINGS},100,DONE
 eca8ee0ffb,F8,"Sealants: Sealant around the bath, shower tray, basin, and sanitary fittings appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 50911c5a61,F8,Defective or deteriorated sealant should be renewed to reduce the risk of water penetration into concealed areas.,EXACT,{F_BATHROOM_FITTINGS}::{F8_SEALANTS},100,DONE
@@ -1289,7 +1289,7 @@ ddd821c8d5,F8,Adequate heating and ventilation should be maintained to reduce co
 e598cd4d6a,F9,Not inspected: Access to the communal areas was not available at the time of inspection.,EXACT,{F_OTHER}::{F9_COMMUNAL_NOT_INSPECTED},100,DONE
 5349e59716,F9,"Consequently, I was unable to inspect these areas and cannot comment on their condition.",EXACT,{F_OTHER}::{F9_COMMUNAL_NOT_INSPECTED},100,DONE
 76b957a9c5,F9,"Description: Internal communal parts to the property comprise entrance lobby, hallway, landing, staircases, lift lobby, fire lobby, balcony, communal storage, common room, other internal areas.",MENU,,0,VERIFIED
-a5d55ac6da,F9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+a5d55ac6da,F9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 1fe5a35d4f,F9,Routine maintenance appropriate to the installations should be expected.,EXACT,{F_OTHER}::{F9_COMMUNAL_NO_DEFECTS},100,DONE
 b111049731,F9,"Wear and tear noted: I noted normal wear and tear, or decorative discolouration, or shrinkage cracks or minor movement cracks.",EXACT,{F_OTHER}::{F9_COMMUNAL_WEAR},100,DONE
 6d9d61e979,F9,"Subject to these observations, the communal areas appear to be in reasonable condition based on a visual inspection and appear to have been adequately maintained.",EXACT,{F_OTHER}::{F9_COMMUNAL_WEAR},100,DONE
@@ -1307,11 +1307,11 @@ c2df02b7b9,F9,"Walls: The property incorporates a cellar, basement and the walls
 d32a2ed9d9,F9,"Floor: The floor is constructed of solid concrete, timber, stone, loose soil, other.",MENU,,0,VERIFIED
 b68b6c2578,F9,"Condition: Where visible, the cellar appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 091d4ada89,F9,Minor dampness may be expected in older cellars below ground level and does not necessarily indicate a defect.,EXACT,{F_OTHER}::{CELLAR_DAMP},100,DONE
-a5d55ac6da,F9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
-fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
+a5d55ac6da,F9,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
+fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{F9_BASEMENT_CONDITION},100,DONE
 68b3c4492f,F9,Not in use: The property has a cellar which is currently unused.,EXACT,{F_OTHER}::{F9_CELLAR_NOT_IN_USE},100,DONE
 d298c8a592,F9,No significant defects were apparent from the limited inspection.,EXACT,{F_OTHER}::{F9_BASEMENT_NOT_IN_USE},100,DONE
-fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
+fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{F9_BASEMENT_CONDITION},100,DONE
 54b855ccdf,F9,In use: The cellar or basement has been adapted for use as storage or other uses.,EXACT,{F_OTHER}::{F9_CELLAR_IN_USE},100,DONE
 ce85c8196a,F9,It appeared to be in reasonable condition at the time of inspection.,EXACT,{F_OTHER}::{F9_BASEMENT_IN_USE},100,DONE
 7345ca08f5,F9,Continue normal maintenance.,EXACT,{F_OTHER}::{F9_BASEMENT_IN_USE},100,DONE
@@ -1381,7 +1381,7 @@ a9b2986430,G2,"Certification: The homeowner should be able to provide appropriat
 1327efb576,G2,Capped gas: The gas supply is capped off.,EXACT,{G_GAS_AND_OIL}::{G2_CAPPED_GAS},100,DONE
 082ab1c60b,G2,You should ask an appropriately qualified person to inspect the gas installation system.,EXACT,{G_GAS_AND_OIL}::{G2_CAPPED_GAS},100,DONE
 834da05254,G2,"Metre: There is a mains gas connection to the property, and the meter unit is located under the stairs, in an outside box, in the kitchen, in the garage, in a communal cupboard, other.",MENU,,0,VERIFIED
-702f469176,G2,"No smell of gas was detected during my inspection, and no other defects were noted that require urgent or significant repairs to the installation.",EXACT,{G_GAS_AND_OIL}::{G2_METER},100,DONE
+702f469176,G2,"No smell of gas was detected during my inspection, and no other defects were noted that require urgent or significant repairs to the installation.",ACCEPT,{G_GAS_AND_OIL}::{CONDITION_OK_GAS_SMELL},50,DONE
 bd2aa512ad,G2,Metre not found: I did not find the gas meter.,EXACT,{G_GAS_AND_OIL}::{G2_METER_NOT_FOUND},100,DONE
 1b93e0ced6,G2,"Please ask the vendor about the location of the gas meter, as you must know where it is located.",EXACT,{G_GAS_AND_OIL}::{G2_METER_NOT_FOUND},100,DONE
 2abbead75f,G2,Dated or Old: The installation appears dated or older and may require upgrading to current standards.,EXACT,{G_GAS_AND_OIL}::{G2_DATED_OR_OLD},100,DONE
@@ -1498,7 +1498,7 @@ fa0f3d8552,G6,"Cesspit (Cesspool): The property is connected to a cesspit (cessp
 fc5c4e8836,G6,Public Sewer: The property is connected to the public sewer.,EXACT,{G_DRAINAGE}::{G6_PUBLIC_SEWER},100,DONE
 4bdec25a21,G6,The drainage system is either combined (foul and surface water sharing the same pipework) or separate (foul and surface water discharged through separate pipework).,EXACT,{G_DRAINAGE}::{G6_PUBLIC_SEWER},100,DONE
 b4889dfb4d,G6,Parts of the drainage system may pass through neighbouring properties or surrounding lands.,EXACT,{G_DRAINAGE}::{G6_PUBLIC_SEWER},100,DONE
-0c8a705541,G6,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+0c8a705541,G6,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 3e6a685cef,G6,Routine maintenance appropriate to the frame material should be expected.,EXACT,{G_DRAINAGE}::{G6_NO_DEFECTS_NOTED},100,DONE
 1fefbcd71e,G6,Inspection Chamber: The inspection chamber cover(s) were lifted where possible.,EXACT,{G_DRAINAGE}::{G6_INSPECTION_CHAMBER},100,DONE
 59e856afce,G6,"No blockage, recent blockage, significant defect, other was noted.",MENU,,0,VERIFIED
@@ -1555,10 +1555,10 @@ e53eb0f349,H1,"Your legal adviser should verify that any necessary planning perm
 5cfdfbafad,H1,Minor cracking and surface wear are common and do not necessarily indicate structural movement.,EXACT,{H_GARAGE}::{H1_FLOOR},100,DONE
 9d7b474ff5,H1,"Garage Doors: The garage is fitted with a manually, electrically operated up-and-over, roller shutter, side-hinged door, rear or side door, other constructed of steel, timber, aluminium, uPVC, GRP (fibreglass), other material.",MENU,,0,VERIFIED
 5f967fa23f,H1,The door(s) appeared serviceable at the time of my inspection.,EXACT,{H_GARAGE}::{H1_DOORS},100,DONE
-7a1ae5f4ac,H1,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
+7a1ae5f4ac,H1,Routine maintenance is recommended.,EXACT,{F_OTHER}::{F9_BASEMENT_CONDITION},100,DONE
 ba78e08e2c,H1,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 783f809e61,H1,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE
-ade8e3fc1e,H1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+ade8e3fc1e,H1,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 6d6841a17a,H1,"If felt sheets is selected, add this.",MENU,,0,DONE
 21639dfd1d,H1,Flat felt roofs have a limited-service life compared with pitched roof coverings and require regular inspection and maintenance.,EXACT,{H_GARAGE}::{H1_FELT_ROOF},100,DONE
 e7b0cedfad,H1,"Although the covering may appear satisfactory at the time of inspection, repairs or replacement should be anticipated as it approaches the end of its serviceable life.",EXACT,{H_GARAGE}::{H1_FELT_ROOF},100,DONE
@@ -1589,7 +1589,7 @@ eb0028f79e,H2,"Fence: The boundaries comprise timber fencing, brick walls, hedgi
 60bffeffa4,H2,Your legal adviser should confirm ownership and maintenance responsibilities from the title documentation and the vendor(s).,EXACT,{H_OTHER}::{H2_BOUNDARIES},100,DONE
 8f27724315,H2,"Condition: Where visible, the garage appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 278a560e78,H2,Routine maintenance appropriate to the age and construction of the garage should be expected.,EXACT,{H_GARAGE}::{ABOUT_GARAGE_ROOF},100,DONE
-d0cb3abd7f,H2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+d0cb3abd7f,H2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 aa41b9bc88,H2,"Repair fence: Parts of the boundary fencing are cracked, broken, unstable, leaning, loose in places, severely damaged, rotten, missing in places, other.",MENU,,0,VERIFIED
 02de263680,H2,You should arrange to repair or replace the affected fencing soon.,EXACT,{H_OTHER}::{H2_REPAIR_FENCE},100,DONE
 aa5bfa9d15,H2,"if the damage is significant, repair should be carried out promptly and may be expensive.",EXACT,{H_OTHER}::{H2_REPAIR_FENCE},100,DONE
@@ -1615,10 +1615,10 @@ ea17e5df13,H2,"Minor cracking, shrinkage, and surface wear to concrete floors ar
 3ee9267e87,H2,"The floor was inspected visually only, and concealed areas beneath floor coverings or finishes could not be examined.",EXACT,{H_OTHER}::{H2_OB_FLOOR},100,DONE
 9ec6c9b4fe,H2,"Doors and windows: The outbuilding(s) are fitted with door(s) and/or window(s) formed of timber uPVC, aluminium, metal, other framed units.",MENU,,0,VERIFIED
 1b71ce7387,H2,These appeared serviceable at the time of my inspection.,EXACT,{H_OTHER}::{H2_OB_DOORS},100,DONE
-4c5eb18bf3,H2,Routine maintenance is recommended.,EXACT,{F_OTHER}::{BASEMENT_IN_USE},100,DONE
+4c5eb18bf3,H2,Routine maintenance is recommended.,EXACT,{F_OTHER}::{F9_BASEMENT_CONDITION},100,DONE
 da7c8dddb5,H2,"Condition: Where visible, the building appears in good, reasonable, fair, poor, very poor condition.",MENU,,0,VERIFIED
 7eb48cc8ec,H2,Routine maintenance appropriate to the age and construction of the outbuilding should be expected.,EXACT,{H_OTHER}::{H2_OB_CONDITION},100,DONE
-d0cb3abd7f,H2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY_MULTI_STACK}::{CONDITION},100,DONE
+d0cb3abd7f,H2,No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below.,EXACT,{E_CHIMNEY}::{E1L_NO_REPAIR},100,DONE
 d1c3e28e49,H2,"Repair outbuilding: Parts of the shed, workshop, annex, summer house, office, studio, other permanent outbuilding are damaged, have broken parts, is unstable, is rotted in places, have missing sections, other.",MENU,,0,VERIFIED
 6c81972f5e,H2,"This should be repaired soon, and if the defects are significant or present a hazard, it should be promptly repaired.",EXACT,{H_OTHER}::{H2_REPAIR_OUTBUILDING},100,DONE
 b38dee8da7,H2,"Retaining Wall: The retaining wall(s) is cracked, leaning, distorted, unstable, weak, damaged, in poor condition and may present a potential safety hazard.",MENU,,0,VERIFIED

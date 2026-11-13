@@ -11,6 +11,7 @@ import '../../../../core/database/app_database.dart';
 import '../../../../core/database/database_providers.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/survey_tree/tree_sync.dart';
+import '../../../../core/phrases/phrase_bank_fill.dart';
 import '../../../../core/phrases/phrase_bank_sync.dart';
 import '../../../../core/sync/sync_manager.dart';
 import '../../../../core/sync/sync_state.dart';
@@ -99,10 +100,13 @@ final valuationPhraseCatalogProvider =
   Future<String> bundled() =>
       rootBundle.loadString('assets/property_valuation/phrase_texts.json');
 
-  ValuationPhraseCatalog? parse(String? raw) {
+  // Wording added after the last publish fills what the published bank lacks.
+  Future<ValuationPhraseCatalog?> parse(String? raw) async {
     if (raw == null) return null;
     try {
-      return ValuationPhraseCatalog.fromRawJson(raw);
+      return ValuationPhraseCatalog.fromRawJson(
+        fillMissingPhrasesRaw(raw, await bundled()),
+      );
     } catch (e) {
       debugPrint('[valuationPhraseCatalogProvider] Unreadable phrase bank: $e');
       return null;
@@ -117,7 +121,7 @@ final valuationPhraseCatalogProvider =
     final dir = await getApplicationDocumentsDirectory();
     final localFile = File('${dir.path}/admin/valuation_v2_phrase_texts.json');
     if (await localFile.exists()) {
-      final local = parse(await localFile.readAsString());
+      final local = await parse(await localFile.readAsString());
       if (local != null && !(kReleaseMode && !local.isApproved)) return local;
       if (local != null) {
         debugPrint('[valuationPhraseCatalogProvider] Ignoring unapproved local '
@@ -128,7 +132,7 @@ final valuationPhraseCatalogProvider =
     debugPrint('[valuationPhraseCatalogProvider] Failed to load local override, '
         'falling back: $e\n$stack');
   }
-  final cached = parse(await sync.readCached(PhraseBank.valuation));
+  final cached = await parse(await sync.readCached(PhraseBank.valuation));
   if (cached != null) return cached;
   return ValuationPhraseCatalog.fromRawJson(await bundled());
 });

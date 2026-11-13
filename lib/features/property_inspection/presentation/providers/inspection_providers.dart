@@ -11,6 +11,7 @@ import '../../../../core/database/app_database.dart';
 import '../../../../core/database/database_providers.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/survey_tree/tree_sync.dart';
+import '../../../../core/phrases/phrase_bank_fill.dart';
 import '../../../../core/phrases/phrase_bank_sync.dart';
 import '../../../../core/sync/legacy_main_walls_sync_mapping.dart';
 import '../../../../core/sync/sync_manager.dart';
@@ -94,22 +95,31 @@ final inspectionPhraseTextsProvider =
     }
   }
 
+  Future<String> bundledRaw() =>
+      rootBundle.loadString('assets/property_inspection/phrase_texts.json');
+
+  // Wording the app added after the last publish only exists in the bundled bank:
+  // it fills any key the published bank lacks, and never overrides one it has.
+  Future<Map<String, String>?> withBundledKeys(String? raw) async {
+    if (raw == null) return null;
+    return decode(fillMissingPhrasesRaw(raw, await bundledRaw()));
+  }
+
   try {
     final dir = await getApplicationDocumentsDirectory();
     final localFile = File('${dir.path}/admin/inspection_v2_phrase_texts.json');
     if (await localFile.exists()) {
-      final local = decode(await localFile.readAsString());
+      final local = await withBundledKeys(await localFile.readAsString());
       if (local != null) return local;
     }
   } catch (e, stack) {
     debugPrint('[inspectionPhraseTextsProvider] Failed to load local override, '
         'falling back: $e\n$stack');
   }
-  final cached = decode(await sync.readCached(PhraseBank.inspection));
+  final cached =
+      await withBundledKeys(await sync.readCached(PhraseBank.inspection));
   if (cached != null) return cached;
-  return decode(await rootBundle
-          .loadString('assets/property_inspection/phrase_texts.json')) ??
-      <String, String>{};
+  return decode(await bundledRaw()) ?? <String, String>{};
 });
 
 final inspectionPhraseEngineProvider = Provider<InspectionPhraseEngine?>((ref) {

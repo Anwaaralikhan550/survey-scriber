@@ -38,12 +38,24 @@
         "when": [
           "actv_type",
           "Level"
+        ]
+      },
+      {
+        "id": "h2_topo_slope",
+        "masters": [
+          "{H_OTHER}"
+        ],
+        "sub": "{H2_GROUNDS_SLOPE}",
+        "text": "Grounds: The subject property is set within {H2_SLOPE_GRADIENT} {H2_TOPOGRAPHY} grounds.",
+        "tokens": [],
+        "pdf": [
+          "Grounds: The subject property is set within gently, moderately, steeply sloping, hilly, undulating grounds."
+        ],
+        "when": [
+          "actv_type",
+          "Sloping"
         ],
         "when_any": [
-          [
-            "actv_type",
-            "Sloping"
-          ],
           [
             "actv_type",
             "Hilly"

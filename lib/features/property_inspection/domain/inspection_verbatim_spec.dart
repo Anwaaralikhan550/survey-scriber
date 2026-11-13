@@ -30,6 +30,7 @@ class VerbatimToken {
     this.pdfOptions = const [],
     this.prefixKeys = const {},
     this.fallback,
+    this.joint,
   });
 
   /// Placeholder in the bank sentence, e.g. `{CS_STACK_CONSTRUCTION}`.
@@ -74,6 +75,10 @@ class VerbatimToken {
 
   /// Printed when a free-text field was left empty, instead of dropping the sentence.
   final String? fallback;
+
+  /// Printed instead of the joined choices when more than one is ticked
+  /// (a heading that names both, e.g. "Aerials and satellite dishes").
+  final String? joint;
 
   /// Option ids that describe the others (e.g. "replacement" windows) and
   /// are printed in front of them instead of joined with "and":
@@ -372,6 +377,29 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Leaning chimney: The chimney stack appears slightly leaning, significantly leaning.',
     first: true,
   ),
+  // Where the leaning chimney is (client file 6, 13 Nov 2026: front, rear, side, centre, other).
+  VerbatimRule(
+    'e1_leaning_location',
+    'activity_outside_property_leaning_chimney',
+    '{E_CHIMNEY}',
+    '{LEANING_CHIMNEY_LOCATION}',
+    [
+      VerbatimToken(
+        '{CS_LEANING_LOCATIONS}',
+        options: {
+          'cl_front': 'front',
+          'cl_rear': 'rear',
+          'cl_side': 'side',
+          'cl_centre': 'centre',
+        },
+        otherCheckbox: 'cl_other',
+        otherText: 'cl_other_text',
+        pdfOptions: ['front', 'rear', 'side', 'centre'],
+      ),
+    ],
+    pdf:
+        'Leaning chimney location: The leaning chimney stack is located to the front, rear, side, centre, other.',
+  ),
   VerbatimRule(
     'e1_aerials_attached',
     'activity_outside_property_chimney_aerials',
@@ -386,6 +414,15 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         },
         pdfOptions: ['an aerial', 'a satellite dish'],
         cap: true,
+      ),
+      // Heading names only what is ticked (client file 6, 13 Nov 2026).
+      VerbatimToken(
+        '{CS_ATTACHED_HEADING}',
+        options: {
+          'ca_aerial': 'Aerial',
+          'ca_satellite': 'Satellite dish',
+        },
+        joint: 'Aerials and satellite dishes',
       ),
     ],
     pdf:
@@ -6862,25 +6899,6 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'No cracked tiles',
   ),
   VerbatimRule(
-    'f4_tiles_bad_cond',
-    'activity_in_side_property_floors_tiles',
-    '{F_FLOORS}',
-    '{F4_CRACKED_TILES_CONDITION}',
-    [
-      VerbatimToken(
-        '{TILE_CONDITION}',
-        dropdown: 'actv_tile_condition',
-        dropdownOptions: ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'],
-        lower: true,
-        pdfOptions: ['good', 'reasonable', 'fair', 'poor', 'very poor'],
-      ),
-    ],
-    pdf:
-        'Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition.',
-    whenField: 'actv_tiles',
-    whenValue: 'Cracked tiles',
-  ),
-  VerbatimRule(
     'f4_tiles_bad',
     'activity_in_side_property_floors_tiles',
     '{F_FLOORS}',
@@ -9985,7 +10003,35 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         'Grounds: The subject property is set within level, sloping, hilly, undulating grounds.',
     whenField: 'actv_type',
     whenValue: 'Level',
-    whenAny: [['actv_type', 'Sloping'], ['actv_type', 'Hilly'], ['actv_type', 'Undulating']],
+  ),
+  // Sloping, hilly or undulating prints only with the slope gradient chosen too
+  // (client file 6, 13 Nov 2026): "set within gently sloping grounds".
+  VerbatimRule(
+    'h2_topo_slope',
+    'activity_grounds_other_grounds',
+    '{H_OTHER}',
+    '{H2_GROUNDS_SLOPE}',
+    [
+      VerbatimToken(
+        '{H2_SLOPE_GRADIENT}',
+        dropdown: 'actv_j2_slope',
+        dropdownOptions: ['Gently', 'Moderately', 'Steeply'],
+        lower: true,
+        pdfOptions: ['gently', 'moderately', 'steeply'],
+      ),
+      VerbatimToken(
+        '{H2_TOPOGRAPHY}',
+        dropdown: 'actv_type',
+        dropdownOptions: ['Level', 'Sloping', 'Hilly', 'Undulating'],
+        lower: true,
+        pdfOptions: ['level', 'sloping', 'hilly', 'undulating'],
+      ),
+    ],
+    pdf:
+        'Grounds: The subject property is set within gently, moderately, steeply sloping, hilly, undulating grounds.',
+    whenField: 'actv_type',
+    whenValue: 'Sloping',
+    whenAny: [['actv_type', 'Hilly'], ['actv_type', 'Undulating']],
   ),
   VerbatimRule(
     'h2_shared_areas',
@@ -13166,14 +13212,31 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{OO_PLEASED}',
     [
       VerbatimToken(
+        '{OO_RATING_LABEL}',
+        dropdown: 'android_material_design_spinner5',
+        dropdownOptions: ['Reasonable', 'Good', 'Fair', 'Poor'],
+        lower: true,
+        cap: true,
+        pdfOptions: ['reasonable', 'good', 'fair', 'poor'],
+      ),
+      VerbatimToken(
+        '{OO_RATING}',
+        dropdown: 'android_material_design_spinner5',
+        dropdownOptions: ['Reasonable', 'Good', 'Fair', 'Poor'],
+        lower: true,
+        pdfOptions: ['reasonable', 'good', 'fair', 'poor'],
+      ),
+      VerbatimToken(
         '{OO_PRICE}',
         text: 'android_material_design_spinner',
       ),
     ],
+    // Good and Fair carry the purchase price too (client file 6, 13 Nov 2026).
     pdf:
         'Reasonable: I am pleased to advise you that this property is believed to be a reasonable proposition for purchase at £390,500.00 [Three Hundred Ninety Thousand and five hundred Pounds].',
     whenField: 'android_material_design_spinner5',
     whenValue: 'Reasonable',
+    whenAny: [['android_material_design_spinner5', 'Good'], ['android_material_design_spinner5', 'Fair']],
   ),
   VerbatimRule(
     'oo_opinion',
@@ -13383,7 +13446,9 @@ extension _VerbatimSpec on InspectionPhraseEngine {
           break;
         }
         if (count == 0) count = items.length;
-        var value = _joinWithPrefixes(token, items, answers);
+        var value = token.joint != null && items.length > 1
+            ? token.joint!
+            : _joinWithPrefixes(token, items, answers);
         if (token.cap) value = InspectionPhraseEngine._capitalizeFirst(value);
         text = text.replaceAll(token.token, value);
       }

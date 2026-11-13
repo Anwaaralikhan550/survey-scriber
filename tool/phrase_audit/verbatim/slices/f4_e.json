@@ -441,45 +441,6 @@
         ]
       },
       {
-        "id": "f4_tiles_bad_cond",
-        "masters": [
-          "{F_FLOORS}"
-        ],
-        "sub": "{F4_CRACKED_TILES_CONDITION}",
-        "text": "Cracked Tiles: The floor tiles appear in {TILE_CONDITION} condition.",
-        "tokens": [
-          {
-            "kind": "dropdown",
-            "token": "{TILE_CONDITION}",
-            "dropdown": "actv_tile_condition",
-            "field_label": "Tile condition",
-            "dropdown_options": [
-              "Good",
-              "Reasonable",
-              "Fair",
-              "Poor",
-              "Very poor"
-            ],
-            "pdf_options": [
-              "good",
-              "reasonable",
-              "fair",
-              "poor",
-              "very poor"
-            ],
-            "lower": true,
-            "cond": "actv_tiles=No cracked tiles|Cracked tiles"
-          }
-        ],
-        "pdf": [
-          "Cracked Tiles: The floor tiles appear in good, reasonable, fair, poor, very poor condition."
-        ],
-        "when": [
-          "actv_tiles",
-          "Cracked tiles"
-        ]
-      },
-      {
         "id": "f4_tiles_bad",
         "masters": [
           "{F_FLOORS}"

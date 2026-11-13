@@ -2493,7 +2493,7 @@
             },
             {
               "id": "actv_j2_slope",
-              "label": "Slope Gradient (J2 Risk to grounds)",
+              "label": "Slope Gradient",
               "type": "dropdown",
               "options": [
                 "Gently",
@@ -3662,7 +3662,7 @@
             },
             {
               "id": "actv_j2_tree_size",
-              "label": "Tree size (J2 Risk to grounds)",
+              "label": "Tree size",
               "type": "dropdown",
               "options": [
                 "Small",
@@ -9836,7 +9836,7 @@
                 "Poor",
                 "Very poor"
               ],
-              "conditionalOn": "actv_tiles=No cracked tiles|actv_tiles=Cracked tiles",
+              "conditionalOn": "actv_tiles=No cracked tiles",
               "conditionalMode": "show"
             },
             {
@@ -21287,6 +21287,44 @@
                 "slightly leaning",
                 "significantly leaning"
               ]
+            },
+            {
+              "id": "label_leaning_location",
+              "label": "Location",
+              "type": "label"
+            },
+            {
+              "id": "cl_front",
+              "label": "front",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_rear",
+              "label": "rear",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_side",
+              "label": "side",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_centre",
+              "label": "centre",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cl_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             },
             {
               "id": "android_material_design_spinner4",

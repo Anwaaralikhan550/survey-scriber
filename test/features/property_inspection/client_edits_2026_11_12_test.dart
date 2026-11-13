@@ -150,25 +150,19 @@ void main() {
       expect(out, 'Juliet Balcony: The property incorporates Juliet balcony(s) formed in steel and glass materials.');
     });
   });
-  group('N11 Floor tiles: the chosen condition prints, not the whole list', () {
+  group('N11 / C13 Floor tiles: each option prints its own phrase', () {
     const screen = 'activity_in_side_property_floors_tiles';
-    test('Cracked tiles uses the Tile condition choice', () {
+    test('Cracked tiles prints only the cracked-tiles sentence, no condition line', () {
       final out = say(screen, ticks(['f4t_kitchen', 'f4td_cracked'], {'actv_tiles': 'Cracked tiles', 'actv_tile_condition': 'Fair'}));
-      expect(out, contains('Cracked Tiles: The floor tiles appear in fair condition.'));
-      expect(out, isNot(contains('good, reasonable, fair, poor, very poor')));
-      expect(out, contains('Localised cracked floor tiles to the kitchen areas were observed.'));
-    });
-    test('an older survey with no condition chosen still prints the cracked-tiles sentence, without the list', () {
-      final out = say(screen, ticks(['f4t_kitchen', 'f4td_cracked'], {'actv_tiles': 'Cracked tiles'}));
-      expect(out, contains('Cracked Tiles: Localised cracked floor tiles to the kitchen areas were observed.'));
-      expect(out, isNot(contains('very poor')));
+      expect(out, contains('Cracked Tiles: Localised cracked floor tiles in the kitchen areas were observed.'));
       expect(out, isNot(contains('floor tiles appear in')));
+      expect(out, isNot(contains('No evidence')));
     });
-    test('No cracked tiles is unchanged, and the condition shows for both choices', () {
+    test('No cracked tiles prints the condition, and the condition shows only for it', () {
       final out = say(screen, ticks(['f4t_kitchen'], {'actv_tiles': 'No cracked tiles', 'actv_tile_condition': 'Good'}));
       expect(out, startsWith('No Cracked Tiles: The floor tiles appear in good condition.'));
       final f = nodes[screen]!.fields.firstWhere((x) => x.id == 'actv_tile_condition');
-      expect(f.conditionalOn, 'actv_tiles=No cracked tiles|actv_tiles=Cracked tiles');
+      expect(f.conditionalOn, 'actv_tiles=No cracked tiles');
     });
   });
   group('N12 Repair Tiles: Leaking is its own tick', () {
@@ -308,6 +302,46 @@ void main() {
     });
     test('nothing ticked and nothing chosen prints nothing', () {
       expect(say(screen, {}), isEmpty);
+    });
+  });
+  group('C1 C2 C3 C4 C10 (client answers 13 Nov)', () {
+    test('C1 Slope Gradient and Tree size labels carry no (J2 ...) text', () {
+      final all = jsonEncode(tree.sections.map((s) => s.nodes.map((n) => n.fields.map((f) => f.label).toList()).toList()).toList());
+      expect(all, isNot(contains('(J2')));
+      expect(labels('activity_grounds_other_grounds'), contains('Slope Gradient'));
+    });
+    test('C10 level prints on its own, sloping only with a gradient', () {
+      const s = 'activity_grounds_other_grounds';
+      expect(say(s, {'actv_type': 'Level'}), contains('Grounds: The subject property is set within level grounds.'));
+      expect(say(s, {'actv_type': 'Sloping'}), isNot(contains('set within')));
+      expect(say(s, {'actv_j2_slope': 'Gently'}), isNot(contains('set within')));
+      expect(say(s, {'actv_type': 'Sloping', 'actv_j2_slope': 'Gently'}), contains('Grounds: The subject property is set within gently sloping grounds.'));
+      expect(say(s, {'actv_type': 'Hilly', 'actv_j2_slope': 'Steeply'}), contains('set within steeply hilly grounds.'));
+    });
+    test('C2 Good and Fair print the price, Poor does not', () {
+      const s = 'activity_over_all_openion';
+      for (final r in ['Good', 'Fair']) {
+        expect(say(s, {'android_material_design_spinner5': r, 'android_material_design_spinner': '£400,000'}),
+            contains('$r: I am pleased to advise you that this property is believed to be a ${r.toLowerCase()} proposition for purchase at £400,000.'));
+      }
+      expect(say(s, {'android_material_design_spinner5': 'Poor', 'android_material_design_spinner': '£400,000'}), isNot(contains('I am pleased')));
+    });
+    test('C3 Leaning Chimney location', () {
+      const s = 'activity_outside_property_leaning_chimney';
+      expect(labels(s), containsAll(['front', 'rear', 'side', 'centre', 'Other']));
+      expect(say(s, ticks(['cl_front', 'cl_rear'])), contains('Leaning chimney location: The leaning chimney stack is located to the front and rear.'));
+      expect(say(s, ticks(['cl_other'], {'cl_other_text': 'gable end'})), contains('located to the gable end.'));
+      expect(say(s, {}), isNot(contains('Leaning chimney location')));
+    });
+    test('C4 aerial and satellite heading names only what is ticked', () {
+      const s = 'activity_outside_property_chimney_aerials';
+      expect(say(s, ticks(['ca_aerial'])), contains('Aerial: An aerial is attached to the chimney stack. Where secure, no action is currently required.'));
+      expect(say(s, ticks(['ca_satellite'])), contains('Satellite dish: A satellite dish is attached to the chimney stack.'));
+      expect(say(s, ticks(['ca_aerial', 'ca_satellite'])), contains('Aerials and satellite dishes: An aerial and a satellite dish are attached to the chimney stack.'));
+    });
+    test('C4 repair aerial and repair satellite dish are separate sentences', () {
+      expect(say('activity_outside_property_repair_chimney_dish_aerial', ticks(['cb_e1l_ae_def', 'e1l_ae_d_loose'])), contains('Repair aerial: The aerial attached to the property is loose.'));
+      expect(say('activity_outside_property_repair_chimney_dish_aerial__satellite', ticks(['cb_e1l_sa_def', 'e1l_sa_d_rusted'])), contains('Repair satellite dish: The satellite dish attached to the property is rusted.'));
     });
   });
 }

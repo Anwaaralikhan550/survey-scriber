@@ -171,6 +171,8 @@ def main():
         '{H_OTHER}::{H2_COMMUNAL_FENCE}',
         '{H_OTHER}::{H2_NO_FENCING}',
         '{H_OTHER}::{H2_COMMUNAL_CONDITION}',
+        '{F_ABOUT_ROOF_STRUCTURE}::{ROOF_STRUCTURE_CONDITION}',  # client removed the hardcoded No defects in the portal (v84)
+        '{G_GAS_AND_OIL}::{CONDITION_OK_GAS_SMELL}',
     }
     # ---- T7 coverage: the bank key behind every ledger sentence must be reachable (named in the Dart code / rules)
     unreachable = []

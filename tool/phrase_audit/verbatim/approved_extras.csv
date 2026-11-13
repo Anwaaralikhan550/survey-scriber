@@ -12,3 +12,6 @@
 {F_OTHER}::{F9_BASEMENT_NOT_IN_USE},client 11 Nov 2026 (file 5): Cellar and Basement are separate elements; the approved Cellar sentence with the word basement for cellar
 {F_OTHER}::{F9_BASEMENT_UNSUITABLE},client 11 Nov 2026 (file 5): Cellar and Basement are separate elements; the approved Cellar sentence with the word basement for cellar
 {F_OTHER}::{F9_BASEMENT_FLOODED},client 11 Nov 2026 (file 5): Cellar and Basement are separate elements; the approved Cellar sentence with the word basement for cellar
+{E_CHIMNEY}::{LEANING_CHIMNEY_LOCATION},client 13 Nov 2026 (file 6 answers): Leaning Chimney location ticks front/rear/side/centre/other; sentence derived from the Location sentence
+{E_CHIMNEY}::{E1L_REPAIR_AERIAL_E1L_AE},client 13 Nov 2026 (file 6 answers): repair aerial and satellite dish always separate headings
+{E_CHIMNEY}::{E1L_REPAIR_AERIAL_E1L_SA},client 13 Nov 2026 (file 6 answers): repair aerial and satellite dish always separate headings

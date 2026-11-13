@@ -10,7 +10,7 @@
           "{OVERALL_OPINION}"
         ],
         "sub": "{OO_PLEASED}",
-        "text": "Reasonable: I am pleased to advise you that this property is believed to be a reasonable proposition for purchase at {OO_PRICE}.",
+        "text": "{OO_RATING_LABEL}: I am pleased to advise you that this property is believed to be a {OO_RATING} proposition for purchase at {OO_PRICE}.",
         "tokens": [
           {
             "kind": "text",
@@ -25,6 +25,16 @@
         "when": [
           "android_material_design_spinner5",
           "Reasonable"
+        ],
+        "when_any": [
+          [
+            "android_material_design_spinner5",
+            "Good"
+          ],
+          [
+            "android_material_design_spinner5",
+            "Fair"
+          ]
         ]
       },
       {

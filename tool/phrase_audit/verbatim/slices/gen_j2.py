@@ -25,6 +25,6 @@ def add(screen, fid, label, options):
     edit_screen_fields(screen, fn)
 
 
-add('activity_other_repair_nearby_trees', 'actv_j2_tree_size', 'Tree size (J2 Risk to grounds)', ['Small', 'Medium', 'Large'])
+add('activity_other_repair_nearby_trees', 'actv_j2_tree_size', 'Tree size', ['Small', 'Medium', 'Large'])
 add('activity_grounds_other_grounds', 'actv_j2_slope', 'Slope (J2 Risk to grounds)', ['Gently', 'Moderately', 'Steeply'])
 print('J2 keys and fields done')
