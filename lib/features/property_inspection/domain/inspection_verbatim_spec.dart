@@ -5629,6 +5629,19 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     // Surveys saved before Condensation became its own tick still print it.
     whenAny: [['actv_ventilation', 'Condensation noted']],
   ),
+  // Client file 6 (13 Nov 2026): a "No insulation" tick with his own sentence.
+  VerbatimRule(
+    'f1_no_insulation',
+    'activity_inside_property_roof_insulation',
+    '{F_ABOUT_ROOF_STRUCTURE}',
+    '{F1_NO_INSULATION}',
+    [
+    ],
+    pdf:
+        'No insulation: The loft floor is insulated. This can lead to heat loss, higher heating costs, and an increased risk of condensation and mould. I recommend upgrading the insulation to current standard of 270–300 mm, ensuring roof ventilation is not obstructed.',
+    whenField: 'cb_f1i_none',
+    whenValue: 'true',
+  ),
   VerbatimRule(
     'f1_in',
     'activity_inside_property_roof_insulation',
@@ -7107,7 +7120,22 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{F_FLOORS}',
     '{F4_EXCESSIVE_VIBRATION}',
     [
+      VerbatimToken(
+        '{FV_LOCATIONS}',
+        options: {
+          'fv_lounge': 'lounge',
+          'fv_dining_room': 'dining room',
+          'fv_bedroom': 'bedroom',
+          'fv_kitchen': 'kitchen',
+          'fv_bathroom': 'bathroom',
+        },
+        otherCheckbox: 'fv_other',
+        otherText: 'fv_other_text',
+        pdfOptions: ['lounge', 'dining room', 'bedroom', 'kitchen', 'bathroom'],
+      ),
     ],
+    pdf:
+        'Floor Vibration: The floor was found to vibrate excessively underfoot in lounge, dining room, bedroom, kitchen, bathroom, other. Thus, suggesting inadequate support and/or deterioration of the timber structure, such as fungal decay or wood-boring insect attack.',
     whenField: 'cb_floor_vibration_excessive',
     whenValue: 'true',
   ),

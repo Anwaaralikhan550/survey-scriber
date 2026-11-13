@@ -362,4 +362,20 @@ void main() {
       expect(say(s, ticks(['cb_dr_not_inspected'])), contains('Inspection chamber not inspected: The inspection chamber cover(s) could not be lifted'));
     });
   });
+  group('C7 Roof insulation: No insulation tick', () {
+    const s = 'activity_inside_property_roof_insulation';
+    test('prints the client sentence word for word', () {
+      expect(labels(s), contains('No insulation'));
+      expect(say(s, ticks(['cb_f1i_none'])), 'No insulation: The loft floor is insulated. This can lead to heat loss, higher heating costs, and an increased risk of condensation and mould. I recommend upgrading the insulation to current standard of 270–300 mm, ensuring roof ventilation is not obstructed.');
+      expect(say(s, {}), isNot(contains('No insulation')));
+    });
+  });
+  group('C8 Floor Vibration locations', () {
+    const s = 'activity_in_side_property_floors_repair_floor_vibration';
+    test('prints the client sentence with the ticked locations', () {
+      expect(labels(s), containsAll(['lounge', 'dining room', 'bedroom', 'kitchen', 'bathroom', 'Other']));
+      expect(say(s, ticks(['cb_floor_vibration_excessive', 'fv_lounge', 'fv_bedroom'])), 'Floor Vibration: The floor was found to vibrate excessively underfoot in lounge and bedroom. Thus, suggesting inadequate support and/or deterioration of the timber structure, such as fungal decay or wood-boring insect attack.');
+      expect(say(s, ticks(['cb_floor_vibration_excessive', 'fv_other'], {'fv_other_text': 'hallway'})), contains('underfoot in hallway.'));
+    });
+  });
 }

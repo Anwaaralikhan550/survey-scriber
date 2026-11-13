@@ -15,3 +15,5 @@
 {E_CHIMNEY}::{LEANING_CHIMNEY_LOCATION},client 13 Nov 2026 (file 6 answers): Leaning Chimney location ticks front/rear/side/centre/other; sentence derived from the Location sentence
 {E_CHIMNEY}::{E1L_REPAIR_AERIAL_E1L_AE},client 13 Nov 2026 (file 6 answers): repair aerial and satellite dish always separate headings
 {E_CHIMNEY}::{E1L_REPAIR_AERIAL_E1L_SA},client 13 Nov 2026 (file 6 answers): repair aerial and satellite dish always separate headings
+{F_ABOUT_ROOF_STRUCTURE}::{F1_NO_INSULATION},client 13 Nov 2026 (file 6 answers): No insulation tick with the client own sentence (verbatim, including "is insulated")
+{F_FLOORS}::{F4_EXCESSIVE_VIBRATION},client 13 Nov 2026 (file 6 answers): Floor Vibration with location ticks, his own sentence

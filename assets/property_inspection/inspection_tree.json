@@ -9649,6 +9649,11 @@
               "conditionalOn": "f1i_other",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_f1i_none",
+              "label": "No insulation",
+              "type": "checkbox"
             }
           ]
         },
@@ -9938,6 +9943,49 @@
               "id": "cb_floor_vibration_excessive",
               "label": "Excessive floor vibration",
               "type": "checkbox"
+            },
+            {
+              "id": "label_vibration_location",
+              "label": "Floor vibrates in",
+              "type": "label"
+            },
+            {
+              "id": "fv_lounge",
+              "label": "lounge",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_dining_room",
+              "label": "dining room",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_bedroom",
+              "label": "bedroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_kitchen",
+              "label": "kitchen",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_bathroom",
+              "label": "bathroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "fv_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
