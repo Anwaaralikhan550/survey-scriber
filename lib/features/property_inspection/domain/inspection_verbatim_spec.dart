@@ -6501,8 +6501,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{F3_MINOR_CRACKING}',
     [
     ],
-    whenField: 'android_material_design_spinner3',
-    whenValue: 'Minor cracking',
+    whenField: 'cb_f3_minor',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'f3_crack_major',
@@ -6511,8 +6511,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{F3_SIGNIFICANT_CRACKING}',
     [
     ],
-    whenField: 'android_material_design_spinner3',
-    whenValue: 'Significant cracking',
+    whenField: 'cb_f3_significant',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'f3_movement',
@@ -6532,8 +6532,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'Structural Movement: Evidence of historic, localised, progressive movement was observed.',
-    whenField: 'android_material_design_spinner3',
-    whenValue: 'Structural Movement',
+    whenField: 'cb_f3_structural',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'f3_hollow',

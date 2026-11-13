@@ -173,6 +173,7 @@ def main():
         '{H_OTHER}::{H2_COMMUNAL_CONDITION}',
         '{F_ABOUT_ROOF_STRUCTURE}::{ROOF_STRUCTURE_CONDITION}',  # client removed the hardcoded No defects in the portal (v84)
         '{G_GAS_AND_OIL}::{CONDITION_OK_GAS_SMELL}',
+        '{F_FLOORS}::{TILES_CONDITION_OK}',  # old PDF vibration follow-up sentence replaced by the client's own (13 Nov 2026); stale fuzzy match
     }
     # ---- T7 coverage: the bank key behind every ledger sentence must be reachable (named in the Dart code / rules)
     unreachable = []

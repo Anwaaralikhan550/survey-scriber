@@ -10425,41 +10425,50 @@
           "order": 8,
           "fields": [
             {
-              "id": "android_material_design_spinner3",
-              "label": "Cracking",
-              "type": "dropdown",
-              "options": [
-                "Minor cracking",
-                "Significant cracking",
-                "Structural Movement"
-              ]
+              "id": "cb_f3_minor",
+              "label": "Minor cracking",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f3_significant",
+              "label": "Significant cracking",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f3_structural",
+              "label": "Structural Movement",
+              "type": "checkbox"
             },
             {
               "id": "label_wall_movement",
               "label": "Movement observed",
               "type": "label",
-              "conditionalOn": "android_material_design_spinner3=Structural Movement",
+              "conditionalOn": "cb_f3_structural",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f3mv_historic",
               "label": "historic",
               "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner3=Structural Movement",
+              "conditionalOn": "cb_f3_structural",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f3mv_localised",
               "label": "localised",
               "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner3=Structural Movement",
+              "conditionalOn": "cb_f3_structural",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f3mv_progressive",
               "label": "progressive",
               "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner3=Structural Movement",
+              "conditionalOn": "cb_f3_structural",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]

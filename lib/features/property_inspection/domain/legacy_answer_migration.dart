@@ -16,6 +16,14 @@ const _dropdownToTicks = <String, Map<String, Map<String, String>>>{
       'Restraint steel rods': 'mv_restraint_steel_rods',
     },
   },
+  // Movement Cracks: the three choices became separate ticks (client file 6, 13 Nov 2026).
+  'activity_in_side_property_wap_movement_cracks': {
+    'android_material_design_spinner3': {
+      'Minor cracking': 'cb_f3_minor',
+      'Significant cracking': 'cb_f3_significant',
+      'Structural Movement': 'cb_f3_structural',
+    },
+  },
   'activity_services_heating_main_screen': {
     'actv_location': {
       'Kitchen': 'g4b_kitchen',

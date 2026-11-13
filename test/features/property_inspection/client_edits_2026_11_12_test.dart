@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_scriber/features/property_inspection/domain/inspection_phrase_engine.dart';
+import 'package:survey_scriber/features/property_inspection/domain/legacy_answer_migration.dart';
 import 'package:survey_scriber/features/property_inspection/domain/models/inspection_models.dart';
 
 void main() {
@@ -376,6 +377,22 @@ void main() {
       expect(labels(s), containsAll(['lounge', 'dining room', 'bedroom', 'kitchen', 'bathroom', 'Other']));
       expect(say(s, ticks(['cb_floor_vibration_excessive', 'fv_lounge', 'fv_bedroom'])), 'Floor Vibration: The floor was found to vibrate excessively underfoot in lounge and bedroom. Thus, suggesting inadequate support and/or deterioration of the timber structure, such as fungal decay or wood-boring insect attack.');
       expect(say(s, ticks(['cb_floor_vibration_excessive', 'fv_other'], {'fv_other_text': 'hallway'})), contains('underfoot in hallway.'));
+    });
+  });
+  group('C9 Movement Cracks: separate ticks', () {
+    const s = 'activity_in_side_property_wap_movement_cracks';
+    test('three ticks, each prints its own sentence and several can be ticked', () {
+      expect(labels(s), containsAll(['Minor cracking', 'Significant cracking', 'Structural Movement']));
+      final out = say(s, ticks(['cb_f3_minor', 'cb_f3_significant']));
+      expect(out, contains('Minor cracking: Minor shrinkage or settlement cracking was observed'));
+      expect(out, contains('Significant cracking: Significant cracking was observed on some of the walls.'));
+      expect(out, isNot(contains('Structural Movement')));
+      expect(say(s, ticks(['cb_f3_structural', 'f3mv_historic'])), contains('Structural Movement: Evidence of historic movement was observed.'));
+    });
+    test('an older survey with the dropdown value still prints', () {
+      final migrated = migrateLegacyAnswers(s, {'android_material_design_spinner3': 'Significant cracking'});
+      expect(migrated['cb_f3_significant'], 'true');
+      expect(say(s, migrated), contains('Significant cracking: Significant cracking was observed'));
     });
   });
 }
