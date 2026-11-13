@@ -14415,6 +14415,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -16778,6 +16783,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -18511,6 +18521,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -19679,6 +19694,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -20246,6 +20266,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -20305,6 +20330,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -20363,6 +20393,11 @@
             {
               "id": "cb_painted",
               "label": "Painted walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
               "type": "checkbox"
             }
           ]

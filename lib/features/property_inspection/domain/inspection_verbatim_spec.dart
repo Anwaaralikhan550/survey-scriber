@@ -1737,6 +1737,90 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenValue: 'true',
   ),
   VerbatimRule(
+    'e4_rendered_solid',
+    'activity_outside_property_main_walls_about_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDERED_WALL}',
+    [
+    ],
+    pdf:
+        'Rendered Wall: The walls are partially or fully rendered.',
+    whenField: 'cb_rendered_wall',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_rendered_cbrick',
+    'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDERED_WALL}',
+    [
+    ],
+    pdf:
+        'Rendered Wall: The walls are partially or fully rendered.',
+    whenField: 'cb_rendered_wall',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_rendered_cblock',
+    'activity_outside_property_main_walls_about_wall__cavity_block_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDERED_WALL}',
+    [
+    ],
+    pdf:
+        'Rendered Wall: The walls are partially or fully rendered.',
+    whenField: 'cb_rendered_wall',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_rendered_cstud',
+    'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDERED_WALL}',
+    [
+    ],
+    pdf:
+        'Rendered Wall: The walls are partially or fully rendered.',
+    whenField: 'cb_rendered_wall',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_rendered_other',
+    'activity_outside_property_main_walls_about_wall__other',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDERED_WALL}',
+    [
+    ],
+    pdf:
+        'Rendered Wall: The walls are partially or fully rendered.',
+    whenField: 'cb_rendered_wall',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_rendered_rendered',
+    'activity_outside_property_main_walls_about_wall__rendered_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDERED_WALL}',
+    [
+    ],
+    pdf:
+        'Rendered Wall: The walls are partially or fully rendered.',
+    whenField: 'cb_rendered_wall',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
+    'e4_rendered_pebble',
+    'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
+    '{E_MAIN_WALLS}',
+    '{E4_RENDERED_WALL}',
+    [
+    ],
+    pdf:
+        'Rendered Wall: The walls are partially or fully rendered.',
+    whenField: 'cb_rendered_wall',
+    whenValue: 'true',
+  ),
+  VerbatimRule(
     'e4_desc_cbrick',
     'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
     '{E_MAIN_WALLS}',

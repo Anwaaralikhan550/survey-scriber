@@ -395,4 +395,21 @@ void main() {
       expect(say(s, migrated), contains('Significant cracking: Significant cracking was observed'));
     });
   });
+  group('C11 Main Walls: rendered wall tick', () {
+    test('every wall type screen has the tick and prints the client sentence', () {
+      for (final s in [
+        'activity_outside_property_main_walls_about_wall',
+        'activity_outside_property_main_walls_about_wall__cavity_brick_wall',
+        'activity_outside_property_main_walls_about_wall__cavity_block_wall',
+        'activity_outside_property_main_walls_about_wall__cavity_stud_wall',
+        'activity_outside_property_main_walls_about_wall__other',
+        'activity_outside_property_main_walls_about_wall__rendered_masonry',
+        'activity_outside_property_main_walls_about_wall__pebble_dash_masonry',
+      ]) {
+        expect(labels(s), contains('rendered wall'), reason: s);
+        expect(say(s, ticks(['cb_rendered_wall'])), 'Rendered Wall: The walls are partially or fully rendered.', reason: s);
+        expect(say(s, {}), isNot(contains('Rendered Wall')), reason: s);
+      }
+    });
+  });
 }

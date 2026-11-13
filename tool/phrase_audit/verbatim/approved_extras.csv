@@ -17,3 +17,4 @@
 {E_CHIMNEY}::{E1L_REPAIR_AERIAL_E1L_SA},client 13 Nov 2026 (file 6 answers): repair aerial and satellite dish always separate headings
 {F_ABOUT_ROOF_STRUCTURE}::{F1_NO_INSULATION},client 13 Nov 2026 (file 6 answers): No insulation tick with the client own sentence (verbatim, including "is insulated")
 {F_FLOORS}::{F4_EXCESSIVE_VIBRATION},client 13 Nov 2026 (file 6 answers): Floor Vibration with location ticks, his own sentence
+{E_MAIN_WALLS}::{E4_RENDERED_WALL},client 13 Nov 2026 (file 6 answers): rendered wall tick on the main wall type screens; sentence is the client own
