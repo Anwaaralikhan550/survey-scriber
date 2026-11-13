@@ -24,6 +24,15 @@ const _dropdownToTicks = <String, Map<String, Map<String, String>>>{
       'Structural Movement': 'cb_f3_structural',
     },
   },
+  // Other Communal Areas: the dropdown became separate ticks (client file 6, 13 Nov 2026).
+  'activity_in_side_property_other_communal_area': {
+    'actv_status': {
+      'Not inspected': 'cb_f9_not_inspected',
+      'No defects noted': 'cb_f9_no_defects',
+      'Wear and tear noted': 'cb_f9_wear',
+      'Poor condition': 'cb_f9_poor',
+    },
+  },
   'activity_services_heating_main_screen': {
     'actv_location': {
       'Kitchen': 'g4b_kitchen',

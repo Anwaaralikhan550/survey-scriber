@@ -412,4 +412,23 @@ void main() {
       }
     });
   });
+  group('C12 Other Communal Areas: separate ticks', () {
+    const s = 'activity_in_side_property_other_communal_area';
+    test('four ticks, each prints its client sentence; several can be ticked', () {
+      expect(labels(s), containsAll(['Not inspected', 'No defects noted', 'Wear and tear noted', 'Poor condition']));
+      final out = say(s, ticks(['cb_f9_no_defects', 'cb_f9_wear']));
+      expect(out, contains('No defects noted: No significant defects requiring immediate attention were identified unless otherwise stated below. Routine maintenance appropriate to the installations should be expected.'));
+      expect(out, contains('Wear and tear noted: I noted normal wear and tear, or decorative discolouration, or shrinkage cracks or minor movement cracks.'));
+      expect(say(s, ticks(['cb_f9_not_inspected'])), contains('Not inspected: Access to the communal areas was not available'));
+      expect(say(s, ticks(['cb_f9_poor', 'f9p_repairs', 'f9p_redecoration'])), contains('Poor condition: The internal communal areas are in poor condition and require repairs and redecoration. These defects may result in increased service charges'));
+    });
+    test('the remedial choices show only with Poor condition', () {
+      final f = nodes[s]!.fields.firstWhere((x) => x.id == 'f9p_repairs');
+      expect(f.conditionalOn, 'cb_f9_poor');
+    });
+    test('an older survey with the dropdown still prints', () {
+      final m = migrateLegacyAnswers(s, {'actv_status': 'Wear and tear noted'});
+      expect(say(s, m), contains('Wear and tear noted: I noted normal wear and tear'));
+    });
+  });
 }

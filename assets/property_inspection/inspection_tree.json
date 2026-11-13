@@ -7721,15 +7721,24 @@
           "order": 2,
           "fields": [
             {
-              "id": "actv_status",
-              "label": "Communal areas",
-              "type": "dropdown",
-              "options": [
-                "Not inspected",
-                "No defects noted",
-                "Wear and tear noted",
-                "Poor condition"
-              ]
+              "id": "cb_f9_not_inspected",
+              "label": "Not inspected",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f9_no_defects",
+              "label": "No defects noted",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f9_wear",
+              "label": "Wear and tear noted",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f9_poor",
+              "label": "Poor condition",
+              "type": "checkbox"
             },
             {
               "id": "label_communal_parts",
@@ -7798,49 +7807,55 @@
               "id": "label_communal_remedial",
               "label": "Areas require",
               "type": "label",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_repairs",
               "label": "repairs",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_general_maintenance",
               "label": "general maintenance",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_redecoration",
               "label": "redecoration",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_refurbishment",
               "label": "refurbishment",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_status=Poor condition&f9p_other",
+              "conditionalOn": "cb_f9_poor&f9p_other",
               "conditionalMode": "show"
             }
           ]

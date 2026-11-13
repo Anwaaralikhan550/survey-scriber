@@ -8173,8 +8173,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{F9_COMMUNAL_NOT_INSPECTED}',
     [
     ],
-    whenField: 'actv_status',
-    whenValue: 'Not inspected',
+    whenField: 'cb_f9_not_inspected',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'f9_ca_desc',
@@ -8210,8 +8210,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{F9_COMMUNAL_NO_DEFECTS}',
     [
     ],
-    whenField: 'actv_status',
-    whenValue: 'No defects noted',
+    whenField: 'cb_f9_no_defects',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'f9_ca_wear',
@@ -8220,8 +8220,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{F9_COMMUNAL_WEAR}',
     [
     ],
-    whenField: 'actv_status',
-    whenValue: 'Wear and tear noted',
+    whenField: 'cb_f9_wear',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'f9_ca_poor',
@@ -8244,8 +8244,8 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     ],
     pdf:
         'Poor condition: The internal communal areas are in poor condition and require repairs, general maintenance, redecoration, refurbishment, other remedial works.',
-    whenField: 'actv_status',
-    whenValue: 'Poor condition',
+    whenField: 'cb_f9_poor',
+    whenValue: 'true',
   ),
   VerbatimRule(
     'f9_repair',
