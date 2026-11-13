@@ -1633,8 +1633,8 @@ d19068ec8c,H2,An appropriately qualified specialist should inspect the wall with
 9008ccdca8,H2,"Tree roots can, in certain ground conditions, influence foundations, particularly where mature trees are close to buildings and during prolonged dry periods.",EXACT,{H_OTHER}::{H2_NEARBY_TREES},100,DONE
 c6a3d9406c,H2,"With groups of trees, the risk is usually greatest during prolonged dry spells.",EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
 490d6d6ab9,H2,"Detrimental effects on the property, fencing, finished grounds, outbuilding, other were noted that include significant cracks, subsidence movement.",MENU,,0,VERIFIED
-76d636c593,H2,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
-e823d63ef4,H2,"Also, the trees should be regularly pruned to restrict future growth and minimise the risk of further defects occurring.",EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
+76d636c593,H2,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{H2_TREES_EFFECTS},100,DONE
+e823d63ef4,H2,"Also, the trees should be regularly pruned to restrict future growth and minimise the risk of further defects occurring.",EXACT,{H_OTHER}::{H2_TREES_EFFECTS},100,DONE
 d082d5d4ac,H2,Subsoil: The exact nature of the subsoil has not been investigated as part of this survey.,EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
 fa55f27465,H2,"However, the subsoil in the area may include shrinkable clay.",EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
 78283f4074,H2,"Where present, this type of subsoil can be susceptible to seasonal moisture changes, which may result in movement due to shrinking during dry periods and expansion during wetter conditions.",EXACT,{H_OTHER}::{H2_SUBSOIL},100,DONE
@@ -1748,7 +1748,7 @@ e663fa7d19,J1,"I am unable to confirm, from a single visual inspection, whether 
 79d0562fd9,J1,"I recommend that you instruct a suitably qualified structural engineer to investigate the cause, extent, and current activity of the movement before you exchange contracts.",EXACT,{E_MAIN_WALLS}::{E4_MOVE_1},100,DONE
 3f01e7e42a,J1,Tree defects: One or more trees are located close to the property.,EXACT,{H_OTHER}::{H2_NEARBY_TREES},100,DONE
 750d3e78cf,J1,Detrimental effects on the property were noted.,EXACT,{RISK_TO_BUILDING}::{J1_TREE_DEFECTS},100,DONE
-da58607b1c,J1,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{H2_TREES_DEFECTS},100,DONE
+da58607b1c,J1,You should contact a qualified person for further investigation and advice.,EXACT,{H_OTHER}::{H2_TREES_EFFECTS},100,DONE
 e028281c9b,J2,"Influencing trees: There are small, medium or large trees within influencing distance of the property.",TOKENISED,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},84,DONE
 003846ae76,J2,"Where no evidence of damage was observed, no further action is required.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE
 9a30c52b3e,J2,"However, where damage is evident, further investigation should be undertaken by a qualified tree specialist.",EXACT,{RISK_TO_GROUNDS}::{GROUNDS_INFLUENCING_TREES},100,DONE

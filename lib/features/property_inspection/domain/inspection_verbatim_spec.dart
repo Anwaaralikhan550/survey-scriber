@@ -10691,10 +10691,10 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     '{H2_NEARBY_TREES}',
     [
     ],
+    // "Nearby Trees:" belongs with "No defects" only; Defects noted has its own wording
+    // (client file 6, 13 Nov 2026).
     whenField: 'actv_condition',
     whenValue: 'No defects',
-    // Ticking an effect or a defect counts as "Defects noted" (client file 6, 12 Nov 2026).
-    whenAny: [['actv_condition', 'Defects noted'], ['h2ta_property', 'true'], ['h2ta_fencing', 'true'], ['h2ta_finished_grounds', 'true'], ['h2ta_outbuilding', 'true'], ['h2ta_other', 'true'], ['cb_significant_cracks', 'true'], ['cb_subsidence_movement', 'true']],
   ),
   VerbatimRule(
     'h2_trees_none',
@@ -10706,11 +10706,24 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
     whenField: 'actv_condition',
     whenValue: 'No defects',
   ),
+  // Defects noted, then the detrimental effects as their own sentence (client file 6, 13 Nov 2026).
+  // Ticking an effect or a defect counts as "Defects noted" (12 Nov 2026).
   VerbatimRule(
     'h2_trees_defects',
     'activity_other_repair_nearby_trees',
     '{H_OTHER}',
     '{H2_TREES_DEFECTS}',
+    [
+    ],
+    whenField: 'actv_condition',
+    whenValue: 'Defects noted',
+    whenAny: [['h2ta_property', 'true'], ['h2ta_fencing', 'true'], ['h2ta_finished_grounds', 'true'], ['h2ta_outbuilding', 'true'], ['h2ta_other', 'true'], ['cb_significant_cracks', 'true'], ['cb_subsidence_movement', 'true']],
+  ),
+  VerbatimRule(
+    'h2_trees_effects',
+    'activity_other_repair_nearby_trees',
+    '{H_OTHER}',
+    '{H2_TREES_EFFECTS}',
     [
       VerbatimToken(
         '{H2_TREE_AFFECTED}',

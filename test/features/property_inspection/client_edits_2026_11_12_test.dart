@@ -292,7 +292,8 @@ void main() {
     test('ticks alone (dropdown left empty) print the defects sentence', () {
       final out = say(screen, ticks(['h2ta_property', 'h2ta_fencing', 'cb_significant_cracks']));
       expect(out, contains('Detrimental effects on the property and fencing were noted that include significant cracks.'));
-      expect(out, contains('Nearby Trees: One or more trees are located close to the property.'));
+      expect(out, contains('Defects noted: One or more trees are located close to the property.'));
+      expect(out, isNot(contains('Nearby Trees:')));
     });
     test('with the dropdown set it still prints, and No defects is unchanged', () {
       final defects = say(screen, ticks(['h2ta_outbuilding', 'cb_subsidence_movement'], {'actv_condition': 'Defects noted'}));
@@ -429,6 +430,25 @@ void main() {
     test('an older survey with the dropdown still prints', () {
       final m = migrateLegacyAnswers(s, {'actv_status': 'Wear and tear noted'});
       expect(say(s, m), contains('Wear and tear noted: I noted normal wear and tear'));
+    });
+  });
+  group('C14 Nearby Trees: separate sentences', () {
+    const s = 'activity_other_repair_nearby_trees';
+    test('No defects prints Nearby Trees then No defects', () {
+      final out = say(s, {'actv_condition': 'No defects'});
+      expect(out, startsWith('Nearby Trees: One or more trees are located close to the property.'));
+      expect(out, contains('No defects: No significant detrimental effects'));
+      expect(out, isNot(contains('Defects noted')));
+    });
+    test('Defects noted ends at the dry spells sentence; effects are their own sentence', () {
+      final defects = engine.buildPhrases(s, {'actv_condition': 'Defects noted'});
+      expect(defects.last, endsWith('the risk is usually greatest during prolonged dry spells.'));
+      final both = engine.buildPhrases(s, ticks(['h2ta_property', 'h2ta_outbuilding', 'cb_subsidence_movement'], {'actv_condition': 'Defects noted'}));
+      expect(both, contains('Detrimental effects on the property and outbuilding were noted that include subsidence movement. You should contact a qualified person for further investigation and advice. Also, the trees should be regularly pruned to restrict future growth and minimise the risk of further defects occurring.'));
+    });
+    test('Subsoil ends at the wetter conditions sentence', () {
+      final out = say('activity_other_repair_shrinkable_clay', ticks(['cb_shrinkable_clay']));
+      expect(out, endsWith('shrinking during dry periods and expansion during wetter conditions.'));
     });
   });
 }
