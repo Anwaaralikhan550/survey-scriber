@@ -9400,13 +9400,13 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
       VerbatimToken(
         '{DRAIN_CHAMBER_FINDING}',
         options: {
-          'g6cf_blockage': 'blockage',
+          'g6cf_blockage': 'No blockage',
           'g6cf_recent_blockage': 'recent blockage',
           'g6cf_significant_defect': 'significant defect',
         },
         otherCheckbox: 'g6cf_other',
         otherText: 'g6cf_other_text',
-        pdfOptions: ['blockage', 'recent blockage', 'significant defect'],
+        pdfOptions: ['No blockage', 'recent blockage', 'significant defect'],
       ),
     ],
     pdf:

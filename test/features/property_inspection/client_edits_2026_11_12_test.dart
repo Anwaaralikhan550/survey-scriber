@@ -344,4 +344,22 @@ void main() {
       expect(say('activity_outside_property_repair_chimney_dish_aerial__satellite', ticks(['cb_e1l_sa_def', 'e1l_sa_d_rusted'])), contains('Repair satellite dish: The satellite dish attached to the property is rusted.'));
     });
   });
+  group('C5 Electricity landing: the duplicate Dated tick is gone', () {
+    test('landing has no Dated tick, Mains Electricity keeps its own', () {
+      expect(labels('activity_services_electricity_main_screen'), isNot(contains('Dated electrical system')));
+      expect(labels('activity_service_about_electricity'), contains('Dated or old installation'));
+      expect(say('activity_service_about_electricity', ticks(['cb_dated_electrical_system'])), contains('Dated or Old: The installation appears'));
+    });
+  });
+  group('C6 Inspection Chamber wording', () {
+    const s = 'activity_services_drainage';
+    test('tick, finding and sentence follow the client wording', () {
+      expect(labels(s), containsAll(['Inspection chamber is inspected', 'No blockage']));
+      expect(say(s, ticks(['cb_dr_chamber', 'g6cf_blockage'])), contains('Inspection chamber is inspected: The inspection chamber cover(s) were lifted where possible. No blockage was noted.'));
+      expect(say(s, ticks(['cb_dr_chamber', 'g6cf_recent_blockage'])), contains('recent blockage was noted.'));
+    });
+    test('not inspected heading', () {
+      expect(say(s, ticks(['cb_dr_not_inspected'])), contains('Inspection chamber not inspected: The inspection chamber cover(s) could not be lifted'));
+    });
+  });
 }

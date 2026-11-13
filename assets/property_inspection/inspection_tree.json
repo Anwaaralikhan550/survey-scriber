@@ -4573,7 +4573,7 @@
             },
             {
               "id": "cb_dr_chamber",
-              "label": "Inspection chamber",
+              "label": "Inspection chamber is inspected",
               "type": "checkbox"
             },
             {
@@ -4583,7 +4583,7 @@
             },
             {
               "id": "g6cf_blockage",
-              "label": "blockage",
+              "label": "No blockage",
               "type": "checkbox"
             },
             {
@@ -4852,11 +4852,6 @@
               "id": "label_describe_3",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "cb_dated_electrical_system",
-              "label": "Dated electrical system",
-              "type": "checkbox"
             },
             {
               "id": "android_material_design_spinner4",
