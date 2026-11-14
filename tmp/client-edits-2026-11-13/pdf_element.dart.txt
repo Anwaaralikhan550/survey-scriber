@@ -1,0 +1,62 @@
+  /// One element of the valuation report (client sample, 13 Nov 2026): the element name in a shaded
+  /// left cell, its sentences on the right.
+  pw.Widget _valuationElement(ReportScreen screen) {
+    final paragraphs = <String>[];
+    if (_config.includePhrases && screen.phrases.isNotEmpty) {
+      paragraphs.addAll(screen.phrases);
+    } else {
+      for (final f in screen.fields) {
+        if (f.displayValue.isNotEmpty) paragraphs.add('${f.label}: ${f.displayValue}');
+      }
+    }
+    if (paragraphs.isEmpty) return pw.SizedBox();
+    final border = pw.BorderSide(color: PdfColor.fromHex('#595959'), width: 0.8);
+    return pw.Padding(
+      padding: const pw.EdgeInsets.only(bottom: 3),
+      child: pw.Table(
+        border: pw.TableBorder(
+          top: border,
+          bottom: border,
+          left: border,
+          right: border,
+          verticalInside: border,
+        ),
+        columnWidths: {
+          0: const pw.FlexColumnWidth(1),
+          1: const pw.FlexColumnWidth(3),
+        },
+        children: [
+          pw.TableRow(
+            children: [
+              pw.Container(
+                color: PdfColor.fromHex('#EAF1F4'),
+                alignment: pw.Alignment.centerLeft,
+                padding: const pw.EdgeInsets.all(7),
+                child: pw.Text(sanitize(screen.title),
+                    style: pw.TextStyle(
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 9,
+                        color: PdfColor.fromHex('#24566A'))),
+              ),
+              pw.Padding(
+                padding: const pw.EdgeInsets.all(7),
+                child: pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    for (final text in paragraphs)
+                      pw.Padding(
+                        padding: const pw.EdgeInsets.only(bottom: 4),
+                        child: pw.Text(sanitize(text),
+                            textAlign: pw.TextAlign.justify,
+                            style: const pw.TextStyle(fontSize: 9)),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+

@@ -57,7 +57,8 @@ class DocxGeneratorService {
     _addMediaFiles(archive, images);
 
     // word/styles.xml
-    _addStyles(archive, isInspection: isInspection);
+    // The valuation report uses the home survey's type styles (client sample, 13 Nov 2026).
+    _addStyles(archive, isInspection: true);
 
     // word/header1.xml + word/footer1.xml — the running page header and footer
     _addHeaderFooter(archive, doc);
@@ -296,13 +297,15 @@ class DocxGeneratorService {
         doc,
         section.title,
         color: PdfSharedUtils.sectionColor(section.key, _config.accentColor),
-        // The first page already ended with a page break.
-        newPage: section != doc.sections.first ||
-            (doc.aiExecutiveSummary?.isNotEmpty ?? false),
+        // The first page already ended with a page break. The valuation report flows on
+        // from section to section, as the client's sample does.
+        newPage: doc.reportType == ReportType.inspection &&
+            (section != doc.sections.first ||
+                (doc.aiExecutiveSummary?.isNotEmpty ?? false)),
       );
       var accommodationWritten = false;
       if (doc.reportType == ReportType.valuation &&
-          section.key.trim().toLowerCase() == 'property_assessment' &&
+          section.key.trim().toUpperCase() == 'D' &&
           doc.accommodationSchedule.isNotEmpty) {
         _writeAccommodationSchedule(buf, doc.accommodationSchedule);
         accommodationWritten = true;
@@ -354,6 +357,8 @@ class DocxGeneratorService {
               ratingBarHex: sideBarHex,
             );
           }
+        } else if (doc.reportType == ReportType.valuation) {
+          _writeValuationElement(buf, screen, includePhrases: _config.includePhrases);
         } else {
           // ── Individual screen ──
           _writeHeading(buf, screen.title, 'Heading3', barHex: sideBarHex);
@@ -399,7 +404,7 @@ class DocxGeneratorService {
 
     // Signatures section — embeds signature images when available
     if (_config.includeSignatures && doc.signatures.isNotEmpty) {
-      _writeMainHeading(buf, doc, 'Signatures', newPage: true);
+      _writeMainHeading(buf, doc, 'Signatures', newPage: true, color: _closingBarColor(doc));
       var sigImgId = 1;
       for (final sig in doc.signatures) {
         final imgRef = images.signatureLookup[sig.filePath];
@@ -415,7 +420,7 @@ class DocxGeneratorService {
     if (_config.includePhotos && images.photoImages.isNotEmpty) {
       // Page break before photos
       buf.write('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');
-      _writeMainHeading(buf, doc, 'Property Photos');
+      _writeMainHeading(buf, doc, 'Property Photos', color: _closingBarColor(doc));
       var photoImgId = 1000; // Offset to avoid signature ID collisions
       for (final imgRef in images.photoImages) {
         _writeInlineImage(buf, imgRef, photoImgId++);
@@ -442,6 +447,42 @@ class DocxGeneratorService {
     ));
   }
 
+  /// One element of the valuation report (client sample, 13 Nov 2026): a two-column box with the
+  /// element name in a shaded left cell and its sentences on the right.
+  void _writeValuationElement(StringBuffer buf, ReportScreen screen, {required bool includePhrases}) {
+    const border = '<w:top w:val="single" w:sz="8" w:space="0" w:color="595959"/>'
+        '<w:left w:val="single" w:sz="8" w:space="0" w:color="595959"/>'
+        '<w:bottom w:val="single" w:sz="8" w:space="0" w:color="595959"/>'
+        '<w:right w:val="single" w:sz="8" w:space="0" w:color="595959"/>';
+    final paragraphs = <String>[];
+    if (includePhrases && screen.phrases.isNotEmpty) {
+      paragraphs.addAll(screen.phrases);
+    } else {
+      for (final f in screen.fields) {
+        if (f.displayValue.isNotEmpty) paragraphs.add('${f.label}: ${f.displayValue}');
+      }
+    }
+    if (paragraphs.isEmpty) return;
+    buf.write('<w:tbl><w:tblPr>${_fullWidthTable(120)}<w:tblBorders>$border'
+        '<w:insideH w:val="single" w:sz="8" w:space="0" w:color="595959"/>'
+        '<w:insideV w:val="single" w:sz="8" w:space="0" w:color="595959"/></w:tblBorders>'
+        '<w:tblCellMar><w:top w:w="80" w:type="dxa"/><w:left w:w="140" w:type="dxa"/>'
+        '<w:bottom w:w="40" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tblCellMar></w:tblPr>'
+        '<w:tblGrid><w:gridCol w:w="2400"/><w:gridCol w:w="7238"/></w:tblGrid>');
+    buf.write('<w:tr><w:trPr><w:cantSplit/></w:trPr>');
+    buf.write('<w:tc><w:tcPr><w:tcW w:w="2400" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="EAF1F4"/>'
+        '<w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:spacing w:after="0"/></w:pPr>'
+        '<w:r><w:rPr><w:b/><w:color w:val="24566A"/><w:sz w:val="18"/></w:rPr>'
+        '<w:t xml:space="preserve">${_escapeXml(screen.title)}</w:t></w:r></w:p></w:tc>');
+    buf.write('<w:tc><w:tcPr><w:tcW w:w="7238" w:type="dxa"/></w:tcPr>');
+    for (final text in paragraphs) {
+      buf.write('<w:p><w:pPr><w:spacing w:after="80"/><w:jc w:val="both"/></w:pPr>'
+          '<w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">${_escapeXml(text)}</w:t></w:r></w:p>');
+    }
+    buf.write('</w:tc></w:tr></w:tbl>');
+    buf.write('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="60" w:lineRule="exact"/></w:pPr></w:p>');
+  }
+
   void _writeHeader(
     StringBuffer buf,
     ReportDocument doc,
@@ -452,6 +493,11 @@ class DocxGeneratorService {
   }
 
   /// Main section header: coloured banner in the home survey report.
+  /// Signatures and Property Photos: the valuation sample uses 24566A, the home survey the accent.
+  PdfColor? _closingBarColor(ReportDocument doc) => doc.reportType == ReportType.valuation
+      ? PdfSharedUtils.valuationSectionColors['valuation_completion']
+      : null;
+
   void _writeMainHeading(
     StringBuffer buf,
     ReportDocument doc,
@@ -459,10 +505,6 @@ class DocxGeneratorService {
     PdfColor? color,
     bool newPage = false,
   }) {
-    if (doc.reportType != ReportType.inspection) {
-      _writeHeading(buf, text, 'Heading1');
-      return;
-    }
     if (newPage) {
       // A near-zero-height paragraph, so the banner sits at the top of the page.
       buf.write('<w:p><w:pPr><w:pageBreakBefore/>'
@@ -475,11 +517,11 @@ class DocxGeneratorService {
     buf.write('</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="9638"/></w:tblGrid>');
     buf.write('<w:tr><w:tc><w:tcPr><w:tcW w:w="9638" w:type="dxa"/>');
     buf.write('<w:shd w:val="clear" w:color="auto" w:fill="$fill"/></w:tcPr>');
-    buf.write('<w:p><w:pPr><w:pStyle w:val="Heading1"/><w:spacing w:before="0" w:after="0"/></w:pPr>');
+    buf.write('<w:p><w:pPr><w:pStyle w:val="Heading1"/><w:keepNext/><w:spacing w:before="0" w:after="0"/></w:pPr>');
     buf.write('<w:r><w:rPr><w:b/><w:color w:val="FFFFFF"/><w:sz w:val="28"/></w:rPr>');
     buf.write('<w:t xml:space="preserve">${_escapeXml(text)}</w:t></w:r></w:p>');
     buf.write('</w:tc></w:tr></w:tbl>');
-    buf.write('<w:p><w:pPr><w:spacing w:after="60"/></w:pPr></w:p>');
+    buf.write('<w:p><w:pPr><w:keepNext/><w:spacing w:after="60"/></w:pPr></w:p>');
   }
 
   void _addHeaderFooter(Archive archive, ReportDocument doc) {
@@ -508,7 +550,7 @@ class DocxGeneratorService {
         '<w:pBdr><w:bottom w:val="single" w:sz="4" w:space="4" w:color="$accentHex"/></w:pBdr>'
         '</w:pPr>'
         '${run(reportLabel, bold: true, color: accentHex)}$tab'
-        '${run(doc.surveyMeta.title)}$tab'
+        '${run(doc.reportType == ReportType.valuation && (doc.surveyMeta.jobRef ?? '').trim().isNotEmpty ? 'Valuation - ${doc.surveyMeta.jobRef!.trim()}' : doc.surveyMeta.title)}$tab'
         '${run(_config.companyName)}'
         '</w:p></w:hdr>';
     final footer = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
@@ -566,24 +608,25 @@ class DocxGeneratorService {
       lines: [
         if (company.isNotEmpty) (text: company, size: 40, bold: true),
         (
-          text: isInspection ? 'Home Buyer Report' : 'Valuation Report',
+          text: isInspection ? 'Home Buyer Report' : 'Property Valuation Report',
           size: company.isEmpty ? 56 : 32,
           bold: true,
         ),
-        (
-          text: isInspection ? meta.reportLevel : 'Mortgage Valuation Report',
-          size: 28,
-          bold: false,
-        ),
-        if (!isInspection)
-          (text: 'Professional property valuation report', size: 22, bold: true),
+        if (isInspection)
+          (
+            text: meta.reportLevel,
+            size: 28,
+            bold: false,
+          ),
       ],
     );
 
     buf.write('<w:p><w:pPr><w:spacing w:before="480" w:after="120"/></w:pPr></w:p>');
-    _writeCenteredText(buf, meta.title, size: 36, bold: true, color: '333333');
-    if (meta.address != null && meta.address != meta.title) {
-      _writeCenteredText(buf, meta.address!, size: 24, color: '999999');
+    if (isInspection) {
+      _writeCenteredText(buf, meta.title, size: 36, bold: true, color: '333333');
+      if (meta.address != null && meta.address != meta.title) {
+        _writeCenteredText(buf, meta.address!, size: 24, color: '999999');
+      }
     }
     buf.write('<w:p><w:pPr><w:spacing w:before="240" w:after="120"/></w:pPr></w:p>');
 

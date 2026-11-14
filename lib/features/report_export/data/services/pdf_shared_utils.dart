@@ -235,7 +235,7 @@ class PdfSharedUtils {
     'property_assessment': PdfColor(0.08, 0.40, 0.75), // Blue
     'property_inspection': PdfColor(0.18, 0.49, 0.20), // Green
     'condition_restrictions': PdfColor(0.83, 0.18, 0.18), // Red
-    'valuation_completion': PdfColor(0.40, 0.23, 0.72), // Deep Purple
+    'valuation_completion': PdfColor(0.141, 0.337, 0.416), // 24566A, as the client sample
   };
 
   /// Look up the color for a section key, falling back to [fallback].

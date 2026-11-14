@@ -301,6 +301,31 @@
           ]
         },
         {
+          "id": "val_external_joinery",
+          "title": "Windows",
+          "type": "screen",
+          "parentId": "outside_property",
+          "order": 5,
+          "fields": [
+            { "id": "label_ext_joinery", "label": "Windows", "type": "label" },
+            { "id": "cb_wn_replacement", "label": "replacement", "type": "checkbox" },
+            { "id": "cb_wn_original", "label": "original", "type": "checkbox" },
+            { "id": "cb_wn_old", "label": "old", "type": "checkbox" },
+            { "id": "cb_wn_pvcu", "label": "PVCu", "type": "checkbox" },
+            { "id": "cb_wn_timber", "label": "timber", "type": "checkbox" },
+            { "id": "cb_wn_old_sash", "label": "old style timber sash", "type": "checkbox" },
+            { "id": "cb_wn_pvc_sash", "label": "modern PVC sash", "type": "checkbox" },
+            { "id": "cb_wn_timber_sash", "label": "modern timber sash", "type": "checkbox" },
+            { "id": "cb_wn_aluminium", "label": "aluminium", "type": "checkbox" },
+            { "id": "cb_wn_composite", "label": "composite", "type": "checkbox" },
+            { "id": "cb_wn_other", "label": "other framed units", "type": "checkbox" },
+            { "id": "et_wn_other_text", "label": "Other framed units", "type": "text", "conditionalOn": "cb_wn_other", "conditionalValue": "true", "conditionalMode": "show" },
+            { "id": "actv_condition_ext_joinery", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_ext_joinery", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_ext_joinery=Fair|actv_condition_ext_joinery=Poor|actv_condition_ext_joinery=Very poor" },
+            { "id": "et_general_remarks_ext_joinery", "label": "General Remarks", "type": "text" }
+          ]
+        },
+        {
           "id": "val_wall_tie_corrosion",
           "title": "Wall Tie Corrosion",
           "type": "screen",
@@ -367,7 +392,7 @@
         },
         {
           "id": "val_decorations_ext",
-          "title": "External Decorations",
+          "title": "External Decorations/finishes",
           "type": "screen",
           "parentId": "outside_property",
           "order": 10,
@@ -554,31 +579,6 @@
             { "id": "actv_condition_chimney_br", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
             { "id": "et_notes_chimney_br", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_chimney_br=Fair|actv_condition_chimney_br=Poor|actv_condition_chimney_br=Very poor" },
             { "id": "et_general_remarks_chimney_br", "label": "General Remarks", "type": "text" }
-          ]
-        },
-        {
-          "id": "val_external_joinery",
-          "title": "Windows",
-          "type": "screen",
-          "parentId": "inside_property",
-          "order": 5,
-          "fields": [
-            { "id": "label_ext_joinery", "label": "Windows", "type": "label" },
-            { "id": "cb_wn_replacement", "label": "replacement", "type": "checkbox" },
-            { "id": "cb_wn_original", "label": "original", "type": "checkbox" },
-            { "id": "cb_wn_old", "label": "old", "type": "checkbox" },
-            { "id": "cb_wn_pvcu", "label": "PVCu", "type": "checkbox" },
-            { "id": "cb_wn_timber", "label": "timber", "type": "checkbox" },
-            { "id": "cb_wn_old_sash", "label": "old style timber sash", "type": "checkbox" },
-            { "id": "cb_wn_pvc_sash", "label": "modern PVC sash", "type": "checkbox" },
-            { "id": "cb_wn_timber_sash", "label": "modern timber sash", "type": "checkbox" },
-            { "id": "cb_wn_aluminium", "label": "aluminium", "type": "checkbox" },
-            { "id": "cb_wn_composite", "label": "composite", "type": "checkbox" },
-            { "id": "cb_wn_other", "label": "other framed units", "type": "checkbox" },
-            { "id": "et_wn_other_text", "label": "Other framed units", "type": "text", "conditionalOn": "cb_wn_other", "conditionalValue": "true", "conditionalMode": "show" },
-            { "id": "actv_condition_ext_joinery", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
-            { "id": "et_notes_ext_joinery", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_ext_joinery=Fair|actv_condition_ext_joinery=Poor|actv_condition_ext_joinery=Very poor" },
-            { "id": "et_general_remarks_ext_joinery", "label": "General Remarks", "type": "text" }
           ]
         },
         {

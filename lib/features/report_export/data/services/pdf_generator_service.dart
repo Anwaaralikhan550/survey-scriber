@@ -993,7 +993,7 @@ class PdfGeneratorService {
     pages.add(_coverPage(doc, dateFormat, accent));
 
     // Table of contents
-    if (_config.showTableOfContents) {
+    if (_config.showTableOfContents && doc.reportType == ReportType.inspection) {
       pages.add(_tocPage(doc, accent));
     }
 
@@ -1025,6 +1025,10 @@ class PdfGeneratorService {
             if (doc.reportType == ReportType.inspection) {
               // Every main section of the home survey starts on a new page.
               widgets.add(pw.NewPage());
+            } else if (doc.reportType == ReportType.valuation) {
+              // The banner never sits alone at the foot of a page.
+              widgets.add(pw.SizedBox(height: 8));
+              widgets.add(pw.NewPage(freeSpace: 150));
             } else {
               widgets.add(pw.SizedBox(height: 6));
               widgets.add(pw.Divider(
@@ -1080,7 +1084,7 @@ class PdfGeneratorService {
 
           var accommodationWritten = false;
           if (doc.reportType == ReportType.valuation &&
-              section.key.trim().toLowerCase() == 'property_assessment' &&
+              section.key.trim().toUpperCase() == 'D' &&
               doc.accommodationSchedule.isNotEmpty) {
             widgets.addAll(
                 _accommodationSchedule(doc.accommodationSchedule, accent));
@@ -1167,6 +1171,8 @@ class PdfGeneratorService {
                   ratingBar: sideBar,
                 ));
               }
+            } else if (doc.reportType == ReportType.valuation) {
+              widgets.add(_valuationElement(screen));
             } else {
               // ── Individual screen — lighter heading ─────────────────
               final barBeforeRating = sideBar != null &&
@@ -1306,7 +1312,9 @@ class PdfGeneratorService {
             width: double.infinity,
             padding: const pw.EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: pw.BoxDecoration(
-              color: accent,
+              color: doc.reportType == ReportType.valuation
+                  ? PdfSharedUtils.valuationSectionColors['valuation_completion']
+                  : accent,
               borderRadius: pw.BorderRadius.circular(4),
             ),
             child: pw.Text('Signatures',
@@ -1344,10 +1352,9 @@ class PdfGeneratorService {
   ) {
     final meta = doc.surveyMeta;
     final isInspection = doc.reportType == ReportType.inspection;
-    final mainTitle = isInspection ? 'Home Buyer Report' : 'Valuation Report';
+    final mainTitle = isInspection ? 'Home Buyer Report' : 'Property Valuation Report';
     final subtitle =
         isInspection ? meta.reportLevel : 'Mortgage Valuation Report';
-    const valuationLine = 'Professional property valuation report';
     final company = _config.reportCompanyName.trim();
     final logo = _config.reportCompanyLogo;
 
@@ -1368,16 +1375,10 @@ class PdfGeneratorService {
                 fontSize: company.isEmpty ? 28 : 16,
                 fontWeight: pw.FontWeight.bold,
                 color: PdfColors.white)),
-        pw.SizedBox(height: 4),
-        pw.Text(subtitle,
-            style: const pw.TextStyle(fontSize: 14, color: PdfColors.white)),
-        if (!isInspection) ...[
+        if (isInspection) ...[
           pw.SizedBox(height: 4),
-          pw.Text(valuationLine,
-              style: pw.TextStyle(
-                  fontSize: 11,
-                  fontWeight: pw.FontWeight.bold,
-                  color: PdfColors.white)),
+          pw.Text(subtitle,
+              style: const pw.TextStyle(fontSize: 14, color: PdfColors.white)),
         ],
       ],
     );
@@ -1436,19 +1437,21 @@ class PdfGeneratorService {
 
             pw.SizedBox(height: 30),
 
-            // ── Property name ──────────────────────────────────────
-            pw.Text(meta.title,
-                textAlign: pw.TextAlign.center,
-                style: pw.TextStyle(
-                    fontSize: 18,
-                    fontWeight: pw.FontWeight.bold,
-                    color: PdfSharedUtils.headerDark)),
-            if (meta.address != null && meta.address != meta.title) ...[
-              pw.SizedBox(height: 6),
-              pw.Text(meta.address!,
+            // ── Property name (the valuation cover goes straight to the table) ──
+            if (isInspection) ...[
+              pw.Text(meta.title,
                   textAlign: pw.TextAlign.center,
-                  style: const pw.TextStyle(
-                      fontSize: 12, color: PdfSharedUtils.grey)),
+                  style: pw.TextStyle(
+                      fontSize: 18,
+                      fontWeight: pw.FontWeight.bold,
+                      color: PdfSharedUtils.headerDark)),
+              if (meta.address != null && meta.address != meta.title) ...[
+                pw.SizedBox(height: 6),
+                pw.Text(meta.address!,
+                    textAlign: pw.TextAlign.center,
+                    style: const pw.TextStyle(
+                        fontSize: 12, color: PdfSharedUtils.grey)),
+              ],
             ],
 
             pw.SizedBox(height: 30),
@@ -1492,23 +1495,25 @@ class PdfGeneratorService {
 
             pw.Spacer(),
 
-            // ── Bottom disclaimer ──────────────────────────────────
-            pw.Text(
-              'This report is for the sole use of the named client and should '
-              'not be relied upon by any third party.',
-              textAlign: pw.TextAlign.center,
-              style: pw.TextStyle(
-                  fontSize: 8,
-                  fontStyle: pw.FontStyle.italic,
-                  color: PdfSharedUtils.grey),
-            ),
-            pw.SizedBox(height: 10),
-            pw.Text('SurveyScriber Professional Report',
+            // ── Bottom disclaimer (home survey cover only) ─────────
+            if (isInspection) ...[
+              pw.Text(
+                'This report is for the sole use of the named client and should '
+                'not be relied upon by any third party.',
                 textAlign: pw.TextAlign.center,
                 style: pw.TextStyle(
-                    fontSize: 9,
-                    fontWeight: pw.FontWeight.bold,
-                    color: accent)),
+                    fontSize: 8,
+                    fontStyle: pw.FontStyle.italic,
+                    color: PdfSharedUtils.grey),
+              ),
+              pw.SizedBox(height: 10),
+              pw.Text('SurveyScriber Professional Report',
+                  textAlign: pw.TextAlign.center,
+                  style: pw.TextStyle(
+                      fontSize: 9,
+                      fontWeight: pw.FontWeight.bold,
+                      color: accent)),
+            ],
           ],
         );
       },
@@ -1582,7 +1587,11 @@ class PdfGeneratorService {
               style: pw.TextStyle(
                   fontSize: 8, fontWeight: pw.FontWeight.bold, color: accent)),
           pw.Expanded(
-            child: pw.Text(doc.surveyMeta.title,
+            child: pw.Text(
+                doc.reportType == ReportType.valuation &&
+                        (doc.surveyMeta.jobRef ?? '').trim().isNotEmpty
+                    ? 'Valuation - ${doc.surveyMeta.jobRef!.trim()}'
+                    : doc.surveyMeta.title,
                 textAlign: pw.TextAlign.center,
                 style: const pw.TextStyle(
                     fontSize: 8, color: PdfSharedUtils.headerDark)),
@@ -1620,6 +1629,69 @@ class PdfGeneratorService {
                 textAlign: pw.TextAlign.right,
                 style: const pw.TextStyle(
                     fontSize: 7, color: PdfSharedUtils.headerDark)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// One element of the valuation report (client sample, 13 Nov 2026): the element name in a shaded
+  /// left cell, its sentences on the right.
+  pw.Widget _valuationElement(ReportScreen screen) {
+    final paragraphs = <String>[];
+    if (_config.includePhrases && screen.phrases.isNotEmpty) {
+      paragraphs.addAll(screen.phrases);
+    } else {
+      for (final f in screen.fields) {
+        if (f.displayValue.isNotEmpty) paragraphs.add('${f.label}: ${f.displayValue}');
+      }
+    }
+    if (paragraphs.isEmpty) return pw.SizedBox();
+    final border = pw.BorderSide(color: PdfColor.fromHex('#595959'), width: 0.8);
+    return pw.Padding(
+      padding: const pw.EdgeInsets.only(bottom: 3),
+      child: pw.Table(
+        border: pw.TableBorder(
+          top: border,
+          bottom: border,
+          left: border,
+          right: border,
+          verticalInside: border,
+        ),
+        defaultVerticalAlignment: pw.TableCellVerticalAlignment.full,
+        columnWidths: {
+          0: const pw.FlexColumnWidth(1),
+          1: const pw.FlexColumnWidth(3),
+        },
+        children: [
+          pw.TableRow(
+            children: [
+              pw.Container(
+                color: PdfColor.fromHex('#EAF1F4'),
+                alignment: pw.Alignment.centerLeft,
+                padding: const pw.EdgeInsets.all(7),
+                child: pw.Text(sanitize(screen.title),
+                    style: pw.TextStyle(
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 9,
+                        color: PdfColor.fromHex('#24566A'))),
+              ),
+              pw.Padding(
+                padding: const pw.EdgeInsets.all(7),
+                child: pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    for (final text in paragraphs)
+                      pw.Padding(
+                        padding: const pw.EdgeInsets.only(bottom: 4),
+                        child: pw.Text(sanitize(text),
+                            textAlign: pw.TextAlign.justify,
+                            style: const pw.TextStyle(fontSize: 9)),
+                      ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),

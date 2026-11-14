@@ -52,7 +52,7 @@ void main() {
       signatureRows: const [],
     );
     const config = ExportConfig(
-        includePhotos: false, includeSignatures: false, includeRecommendations: false);
+        includePhotos: false, includeSignatures: false, includeRecommendations: false, reportCompanyName: 'Francis Blackstone Surveyors');
     final doc = ReportBuilder(
             valuationPhraseEngine: ValuationPhraseEngine.catalog(catalog))
         .build(raw, config);

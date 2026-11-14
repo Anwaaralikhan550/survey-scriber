@@ -1,0 +1,36 @@
+  /// One element of the valuation report (client sample, 13 Nov 2026): a two-column box with the
+  /// element name in a shaded left cell and its sentences on the right.
+  void _writeValuationElement(StringBuffer buf, ReportScreen screen, {required bool includePhrases}) {
+    const border = '<w:top w:val="single" w:sz="8" w:space="0" w:color="595959"/>'
+        '<w:left w:val="single" w:sz="8" w:space="0" w:color="595959"/>'
+        '<w:bottom w:val="single" w:sz="8" w:space="0" w:color="595959"/>'
+        '<w:right w:val="single" w:sz="8" w:space="0" w:color="595959"/>';
+    final paragraphs = <String>[];
+    if (includePhrases && screen.phrases.isNotEmpty) {
+      paragraphs.addAll(screen.phrases);
+    } else {
+      for (final f in screen.fields) {
+        if (f.displayValue.isNotEmpty) paragraphs.add('${f.label}: ${f.displayValue}');
+      }
+    }
+    if (paragraphs.isEmpty) return;
+    buf.write('<w:tbl><w:tblPr>${_fullWidthTable(120)}<w:tblBorders>$border'
+        '<w:insideH w:val="single" w:sz="8" w:space="0" w:color="595959"/>'
+        '<w:insideV w:val="single" w:sz="8" w:space="0" w:color="595959"/></w:tblBorders>'
+        '<w:tblCellMar><w:top w:w="80" w:type="dxa"/><w:left w:w="140" w:type="dxa"/>'
+        '<w:bottom w:w="40" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tblCellMar></w:tblPr>'
+        '<w:tblGrid><w:gridCol w:w="2400"/><w:gridCol w:w="7238"/></w:tblGrid>');
+    buf.write('<w:tr><w:trPr><w:cantSplit/></w:trPr>');
+    buf.write('<w:tc><w:tcPr><w:tcW w:w="2400" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="EAF1F4"/>'
+        '<w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:spacing w:after="0"/></w:pPr>'
+        '<w:r><w:rPr><w:b/><w:color w:val="24566A"/><w:sz w:val="18"/></w:rPr>'
+        '<w:t xml:space="preserve">${_escapeXml(screen.title)}</w:t></w:r></w:p></w:tc>');
+    buf.write('<w:tc><w:tcPr><w:tcW w:w="7238" w:type="dxa"/></w:tcPr>');
+    for (final text in paragraphs) {
+      buf.write('<w:p><w:pPr><w:spacing w:after="80"/><w:jc w:val="both"/></w:pPr>'
+          '<w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">${_escapeXml(text)}</w:t></w:r></w:p>');
+    }
+    buf.write('</w:tc></w:tr></w:tbl>');
+    buf.write('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="60" w:lineRule="exact"/></w:pPr></w:p>');
+  }
+

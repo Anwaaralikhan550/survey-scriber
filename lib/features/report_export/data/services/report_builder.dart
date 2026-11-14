@@ -197,7 +197,7 @@ class ReportBuilder {
         surveyDuration: surveyDuration,
         reportLevel: rawData.survey.type.reportLevel,
       ),
-      sections: sections,
+      sections: isInspection ? sections : _regroupValuationSections(sections, rawData.tree),
       signatures: config.includeSignatures ? signatures : [],
       photoFilePaths: config.includePhotos ? rawData.photoFilePaths : [],
       accommodationSchedule: isInspection
@@ -280,6 +280,92 @@ class ReportBuilder {
               : '$otherCount $otherName',
     );
     return row.hasAnyRooms ? [row] : const [];
+  }
+
+  ReportScreen _retitled(ReportScreen s, String title) => ReportScreen(
+        screenId: s.screenId,
+        title: title,
+        fields: s.fields,
+        phrases: s.phrases,
+        userNote: s.userNote,
+        parentId: s.parentId,
+        isCompleted: s.isCompleted,
+        isMergedGroup: s.isMergedGroup,
+      );
+
+  /// The valuation report reads like the client's sample (13 Nov 2026): About Inspection, About
+  /// Property, Outside Property, F Inside Property, G Services, Restrictions, Valuation. The tree keeps
+  /// its own sections; only the report regroups the screens.
+  List<ReportSection> _regroupValuationSections(
+    List<ReportSection> sections,
+    InspectionTreePayload tree,
+  ) {
+    final parentOf = <String, String?>{
+      for (final s in tree.sections)
+        for (final n in s.nodes) n.id: n.parentId,
+    };
+    String groupOf(String screenId) {
+      var id = screenId;
+      for (var i = 0; i < 6 && parentOf[id] != null; i++) {
+        id = parentOf[id]!;
+      }
+      return id;
+    }
+
+    const services = {
+      'val_electric_material',
+      'val_gas',
+      'val_water',
+      'val_hot_water_central_heating',
+      'val_smoke_detectors',
+    };
+    const titles = {
+      'A': 'About Inspection',
+      'D': 'About Property',
+      'E': 'Outside Property',
+      'F': 'F Inside Property',
+      'G': 'G Services',
+      'H': 'Restrictions',
+      'valuation_completion': 'Valuation',
+    };
+    const order = ['A', 'D', 'E', 'F', 'G', 'H', 'valuation_completion'];
+    final buckets = {for (final k in order) k: <ReportScreen>[]};
+    for (final section in sections) {
+      for (final screen in section.screens) {
+        final String key;
+        switch (section.key) {
+          case 'valuation_details':
+            key = 'A';
+          case 'property_assessment':
+            key = 'D';
+          case 'condition_restrictions':
+            key = 'H';
+          case 'valuation_completion':
+            key = 'valuation_completion';
+          default:
+            if (services.contains(screen.screenId)) {
+              key = 'G';
+            } else if (groupOf(screen.screenId) == 'outside_property') {
+              key = 'E';
+            } else {
+              key = 'F';
+            }
+        }
+        // The client's list calls this element "Roof".
+        buckets[key]!.add(screen.screenId == 'val_pitched_roof' ? _retitled(screen, 'Roof') : screen);
+      }
+    }
+    return [
+      for (var i = 0; i < order.length; i++)
+        if (buckets[order[i]]!.isNotEmpty)
+          ReportSection(
+            key: order[i],
+            title: titles[order[i]]!,
+            description: '',
+            screens: buckets[order[i]]!,
+            displayOrder: i,
+          ),
+    ];
   }
 
   List<InspectionSectionDefinition> _orderedSectionsForReport(

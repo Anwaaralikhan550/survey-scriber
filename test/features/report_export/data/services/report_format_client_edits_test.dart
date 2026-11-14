@@ -95,8 +95,10 @@ void main() {
 
     test('valuation first page has the same bar and table as its PDF', () async {
       final xml = await _xml(_doc(type: ReportType.valuation));
-      expect(xml, contains('Valuation Report'));
-      expect(xml, contains('Mortgage Valuation Report'));
+      // Client sample, 13 Nov 2026: "Property Valuation Report", no second or third line.
+      expect(xml, contains('Property Valuation Report'));
+      expect(xml, isNot(contains('Mortgage Valuation Report')));
+      expect(xml, isNot(contains('Professional property valuation report')));
       expect(xml, contains('w:fill="1461BF"'));
       expect(xml, contains('Property Address'));
       expect(xml, contains('Report Generated'));
@@ -213,11 +215,11 @@ void main() {
       expect(company, lessThan(footer.indexOf('PAGE')));
     });
 
-    test('valuation keeps its plain headings and Calibri', () async {
+    test('valuation takes the home survey look: colour banners and Noto Sans (client sample, 13 Nov 2026)', () async {
       final doc = _doc(type: ReportType.valuation, sections: sections);
       final xml = await _xml(doc);
-      expect(xml, isNot(contains('w:fill="2E7D33"')));
-      expect(await _xml(doc, 'word/styles.xml'), contains('w:ascii="Calibri"'));
+      expect(xml, contains('w:fill="2E7D33"'));
+      expect(await _xml(doc, 'word/styles.xml'), contains('w:ascii="Noto Sans"'));
     });
   });
 
