@@ -1,0 +1,37 @@
+  static const _elecMeterIds = {
+    'cb_em_stairs': 'under the stairs',
+    'cb_em_outside': 'in an outside box',
+    'cb_em_hall': 'in the entrance hall',
+    'cb_em_kitchen': 'in the kitchen',
+    'cb_em_garage': 'in the garage',
+    'cb_em_cupboard': 'in a communal cupboard',
+  };
+  static const _gasMeterIds = {
+    'cb_gm_stairs': 'under the stairs',
+    'cb_gm_outside': 'in an outside box',
+    'cb_gm_kitchen': 'in the kitchen',
+    'cb_gm_garage': 'in the garage',
+    'cb_gm_cupboard': 'in a communal cupboard',
+  };
+  static const _stopcockIds = {
+    'cb_sc_stairs': 'under the stairs',
+    'cb_sc_sink': 'under the kitchen sink',
+    'cb_sc_bathroom': 'in the bathroom',
+    'cb_sc_hall': 'in the hall',
+    'cb_sc_garage': 'in the garage',
+  };
+  static const _heatingIds = {
+    'cb_h_combi': 'a combination boiler',
+    'cb_h_conventional': 'a conventional boiler',
+    'cb_h_sealed': 'a sealed boiler system',
+    'cb_h_electric': 'an electrical boiler',
+    'cb_h_oil': 'an oil-fired boiler',
+  };
+  static const _hotWaterIds = {
+    'cb_hw_combi': 'the combination boiler',
+    'cb_hw_conventional': 'the conventional boiler',
+    'cb_hw_sealed': 'the sealed boiler system',
+    'cb_hw_electric': 'the electrical boiler',
+    'cb_hw_oil': 'the oil-fired boiler',
+  };
+

@@ -1,0 +1,27 @@
+
+  group('V12 Flat Roof and Main Wall (handwritten note)', () {
+    test('Flat Roof has no Partial View and no Visibility Condition', () {
+      final f = screens['val_flat_roof']!.keys;
+      for (final gone in ['cb_partial_view_fr', 'actv_visibility_condition_fr', 'et_visibility_notes_fr']) {
+        expect(f, isNot(contains(gone)));
+      }
+      expect(say('val_flat_roof', {'cb_partial_view_fr': 'true', 'actv_visibility_condition_fr': 'Unsatisfactory', 'et_visibility_notes_fr': 'x'}), isEmpty);
+      // Pitched and Other roof keep theirs (the client only named Flat roof).
+      expect(screens['val_pitched_roof']!.keys, contains('cb_partial_view_pr'));
+      expect(screens['val_other_roof']!.keys, contains('cb_partial_view_or'));
+    });
+    test('Flat Roof still prints its material and condition', () {
+      expect(say('val_flat_roof', {'cb_felt_fr': 'true', 'actv_condition_flat_roof': 'Good'}),
+          allOf(startsWith('The flat roof covering is of mineral felt construction.'), contains('The flat roof covering is considered good')));
+    });
+    test('Main Wall Building movement: none / minor movement / significant movement', () {
+      expect(screens['val_walls_type']!['actv_building_movement']!['options'], ['None', 'Minor movement', 'Significant movement']);
+      expect(say('val_walls_type', {'actv_building_movement': 'None'}),
+          'A careful examination was made of all accessible wall surfaces for evidence of structural movement, including cracking, distortion, bulging, or displacement of masonry.');
+      expect(say('val_walls_type', {'actv_building_movement': 'Minor movement'}), contains('Evidence of building movement was noted: minor movement.'));
+      expect(say('val_walls_type', {'actv_building_movement': 'Significant movement'}), contains('Evidence of building movement was noted: significant movement.'));
+    });
+    test('older answers (Structural Movement, Underpinning) still print', () {
+      expect(say('val_walls_type', {'actv_building_movement': 'Underpinning'}), contains('Evidence of building movement was noted: underpinning.'));
+    });
+  });

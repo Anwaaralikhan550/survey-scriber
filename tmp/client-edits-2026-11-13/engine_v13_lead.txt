@@ -1,0 +1,6 @@
+      case 'val_roof_space':
+        final l = _clientList(a, _roofStructureIds, otherCb: 'cb_rs_other', otherText: 'et_rs_other_text');
+        return l.isEmpty ? const [] : ['The roof structure is formed in $l.'];
+      case 'val_walls_internal':
+        final l = _clientList(a, _internalWallIds, otherCb: 'cb_wi_other', otherText: 'et_wi_other_text');
+        return l.isEmpty ? const [] : ['The walls are formed in $l.'];

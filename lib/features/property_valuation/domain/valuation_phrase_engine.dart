@@ -163,6 +163,91 @@ class ValuationPhraseEngine {
     'cb_o_studio': 'a studio',
   };
 
+  static const _roofStructureIds = {
+    'cb_rs_timber': 'traditional cut timber',
+    'cb_rs_trussed': 'prefabricated trussed rafters',
+    'cb_rs_steel': 'steel',
+  };
+  static const _internalWallIds = {
+    'cb_wi_masonry': 'solid masonry',
+    'cb_wi_stud': 'timber stud partitions',
+    'cb_wi_plasterboard': 'plasterboard partitions',
+    'cb_wi_lath': 'lath and plaster',
+  };
+  static const _kitchenWhere = {
+    'cb_k_loc_kitchen': 'kitchen',
+    'cb_k_loc_utility': 'utility room',
+  };
+  static const _worktopIds = {
+    'cb_k_laminate': 'laminate particle board',
+    'cb_k_timber': 'solid timber',
+    'cb_k_granite': 'granite',
+    'cb_k_quartz': 'quartz',
+    'cb_k_stone': 'stone',
+    'cb_k_corian': 'Corian',
+    'cb_k_composite': 'compressed composite',
+    'cb_k_marble': 'marble',
+    'cb_k_steel': 'steel',
+  };
+  static const _bathroomIds = {
+    'cb_b_family': 'family bathroom(s)',
+    'cb_b_shower': 'shower room(s)',
+    'cb_b_ensuite_shower': 'ensuite shower room(s)',
+    'cb_b_ensuite_bath': 'ensuite bathroom(s)',
+    'cb_b_toilet': 'separate toilet(s)',
+    'cb_b_utility': 'utility room',
+  };
+  static const _dampWhere = {
+    'cb_dw_lounge': 'lounge',
+    'cb_dw_dining': 'dining room',
+    'cb_dw_bedroom': 'bedroom',
+    'cb_dw_kitchen': 'kitchen',
+    'cb_dw_bathroom': 'bathroom',
+  };
+  static const _dampSource = {
+    'cb_ds_rainwater': 'defective rainwater goods',
+    'cb_ds_gullies': 'blocked gullies',
+    'cb_ds_pipework': 'leaking pipework',
+    'cb_ds_dpc': 'bridged damp-proof course',
+  };
+
+  static const _elecMeterIds = {
+    'cb_em_stairs': 'under the stairs',
+    'cb_em_outside': 'in an outside box',
+    'cb_em_hall': 'in the entrance hall',
+    'cb_em_kitchen': 'in the kitchen',
+    'cb_em_garage': 'in the garage',
+    'cb_em_cupboard': 'in a communal cupboard',
+  };
+  static const _gasMeterIds = {
+    'cb_gm_stairs': 'under the stairs',
+    'cb_gm_outside': 'in an outside box',
+    'cb_gm_kitchen': 'in the kitchen',
+    'cb_gm_garage': 'in the garage',
+    'cb_gm_cupboard': 'in a communal cupboard',
+  };
+  static const _stopcockIds = {
+    'cb_sc_stairs': 'under the stairs',
+    'cb_sc_sink': 'under the kitchen sink',
+    'cb_sc_bathroom': 'in the bathroom',
+    'cb_sc_hall': 'in the hall',
+    'cb_sc_garage': 'in the garage',
+  };
+  static const _heatingIds = {
+    'cb_h_combi': 'a combination boiler',
+    'cb_h_conventional': 'a conventional boiler',
+    'cb_h_sealed': 'a sealed boiler system',
+    'cb_h_electric': 'an electrical boiler',
+    'cb_h_oil': 'an oil-fired boiler',
+  };
+  static const _hotWaterIds = {
+    'cb_hw_combi': 'the combination boiler',
+    'cb_hw_conventional': 'the conventional boiler',
+    'cb_hw_sealed': 'the sealed boiler system',
+    'cb_hw_electric': 'the electrical boiler',
+    'cb_hw_oil': 'the oil-fired boiler',
+  };
+
   /// The client's own sentences for the Outside Property elements.
   List<String> _clientLead(String screenId, Map<String, String> a) {
     switch (screenId) {
@@ -204,6 +289,24 @@ class ValuationPhraseEngine {
           items.add('${_article(t)} $t');
         }
         return items.isEmpty ? const [] : ['The property incorporates ${_toWords(items)}.'];
+      case 'val_roof_space':
+        final l = _clientList(a, _roofStructureIds, otherCb: 'cb_rs_other', otherText: 'et_rs_other_text');
+        return l.isEmpty ? const [] : ['The roof structure is formed in $l.'];
+      case 'val_walls_internal':
+        final l = _clientList(a, _internalWallIds, otherCb: 'cb_wi_other', otherText: 'et_wi_other_text');
+        return l.isEmpty ? const [] : ['The walls are formed in $l.'];
+      case 'val_electric_material':
+        final l = _clientList(a, _elecMeterIds, otherCb: 'cb_em_other', otherText: 'et_em_other_text');
+        return l.isEmpty
+            ? const []
+            : ['There is a mains electricity supply connected to the property, and the meter unit is located $l.'];
+      case 'val_hot_water_central_heating':
+        final heat = _clientList(a, _heatingIds, otherCb: 'cb_h_other', otherText: 'et_h_other_text');
+        final water = _clientList(a, _hotWaterIds, otherCb: 'cb_hw_other', otherText: 'et_hw_other_text');
+        return [
+          if (heat.isNotEmpty) 'The property is heated by $heat.',
+          if (water.isNotEmpty) 'The hot water is provided by $water.',
+        ];
       default:
         return const [];
     }
@@ -245,6 +348,70 @@ class ValuationPhraseEngine {
       _addConditionNotes(phrases, a, 'actv_condition_floor_ext', 'et_notes_floor_ext', component: 'floors');
       _addRemarks(phrases, a, 'et_general_remarks_floor_ext');
       return phrases;
+    }
+    if (screenId == 'val_kitchen') {
+      final phrases = <String>[];
+      final where = _clientList(a, _kitchenWhere, otherCb: 'cb_k_loc_other', otherText: 'et_k_loc_other_text');
+      final what = _clientList(a, _worktopIds, otherCb: 'cb_k_other', otherText: 'et_k_other_text');
+      if (what.isNotEmpty) {
+        phrases.add('The ${where.isEmpty ? '' : '$where '}worktops comprise $what.');
+      }
+      _addConditionNotes(phrases, a, 'actv_condition_kitchen', 'et_notes_kitchen', component: 'kitchen');
+      _addRemarks(phrases, a, 'et_general_remarks_kitchen');
+      return phrases;
+    }
+    if (screenId == 'val_bathroom') {
+      final phrases = <String>[];
+      final l = _clientList(a, _bathroomIds, otherCb: 'cb_b_other', otherText: 'et_b_other_text');
+      if (l.isNotEmpty) phrases.add('The property incorporates $l.');
+      _addConditionNotes(phrases, a, 'actv_condition_bathroom', 'et_notes_bathroom', component: 'bathroom');
+      _addRemarks(phrases, a, 'et_general_remarks_bathroom');
+      return phrases;
+    }
+    if (screenId == 'val_damp_meter' && _val(a, 'et_damp_found').isEmpty) {
+      final phrases = <String>[];
+      final meter = _val(a, 'actv_damp_meter');
+      if (meter.isNotEmpty) {
+        if (meter == 'Damp Found') {
+          final where = _clientList(a, _dampWhere, otherCb: 'cb_dw_other', otherText: 'et_dw_other_text');
+          phrases.add(where.isEmpty
+              ? 'Moisture readings were taken with a calibrated electronic moisture meter at representative points '
+                  'to the internal faces of external walls. Elevated moisture levels were detected.'
+              : 'Elevated moisture readings were recorded to sections of the wall surfaces in $where.');
+          final source = _clientList(a, _dampSource, otherCb: 'cb_ds_other', otherText: 'et_ds_other_text');
+          if (source.isNotEmpty) phrases.add('Dampness is suspected to be caused by $source.');
+        } else if (meter.toLowerCase() == 'no damp') {
+          phrases.add('Moisture readings were taken with a calibrated electronic moisture meter at representative points '
+              'to the internal faces of external walls at both ground and upper floor levels where accessible. '
+              'At the time of my inspection, the readings obtained were within acceptable parameters, '
+              'and no visible signs of dampness, staining, or efflorescence were observed.');
+        } else {
+          phrases.add('Damp meter readings indicated: ${_say(a, 'actv_damp_meter').toLowerCase()}.');
+        }
+      }
+      _addConditionNotes(phrases, a, 'actv_condition_damp', 'et_notes_damp', component: 'dampness');
+      _addRemarks(phrases, a, 'et_general_remarks_damp');
+      return phrases;
+    }
+    if (screenId == 'val_gas' && _val(a, 'actv_gas_supply').toLowerCase() == 'mains') {
+      final l = _clientList(a, _gasMeterIds, otherCb: 'cb_gm_other', otherText: 'et_gm_other_text');
+      if (l.isNotEmpty) {
+        final usual = _buildPhrasesLegacy(screenId, a);
+        return [
+          'There is a mains gas connection to the property, and the meter unit is located $l.',
+          ...usual.skip(1),
+        ];
+      }
+    }
+    if (screenId == 'val_water' && _val(a, 'actv_water_supply').toLowerCase() == 'mains') {
+      final l = _clientList(a, _stopcockIds, otherCb: 'cb_sc_other', otherText: 'et_sc_other_text');
+      if (l.isNotEmpty) {
+        final usual = _buildPhrasesLegacy(screenId, a);
+        return [
+          'There is an independent mains water supply to the property. The stopcock within the property is located $l.',
+          ...usual.skip(1),
+        ];
+      }
     }
     return null;
   }
@@ -1183,20 +1350,6 @@ class ValuationPhraseEngine {
         phrases, answers, 'actv_condition_flat_roof', 'et_notes_flat_roof',
         component: 'flat roof covering');
 
-    if (_isChecked(answers['cb_partial_view_fr'])) {
-      phrases.add(
-          'Only a partial view of the flat roof was possible at the time of inspection. '
-          'A full inspection from an elevated position may reveal additional defects not visible from the ground.');
-    }
-    final visCond = _val(answers, 'actv_visibility_condition_fr');
-    if (visCond.isNotEmpty) {
-      phrases.add(_conditionPhrase(visCond,
-          component: 'visible portion of the flat roof'));
-    }
-    if (visCond.toLowerCase() == 'unsatisfactory') {
-      final vn = _val(answers, 'et_visibility_notes_fr');
-      if (vn.isNotEmpty) phrases.add(_capitalizeFirst(vn));
-    }
     _addRemarks(phrases, answers, 'et_general_remarks_flat_roof');
     return phrases;
   }

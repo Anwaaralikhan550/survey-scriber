@@ -1,0 +1,70 @@
+
+  group('V14 Services: the client sentences', () {
+    List<String> labelsOf(String screen, String from, String to) {
+      final f = screens[screen]!;
+      final ids = f.keys.toList();
+      return [for (final id in ids.sublist(ids.indexOf(from), ids.indexOf(to) + 1)) f[id]!['label'] as String];
+    }
+
+    test('Electricity Metre', () {
+      expect(labelsOf('val_electric_material', 'cb_em_stairs', 'cb_em_other'),
+          ['under the stairs', 'in an outside box', 'in the entrance hall', 'in the kitchen', 'in the garage', 'in a communal cupboard', 'other']);
+      const base = 'There is a mains electricity supply connected to the property, and the meter unit is located';
+      const where = {
+        'cb_em_stairs': 'under the stairs', 'cb_em_outside': 'in an outside box', 'cb_em_hall': 'in the entrance hall',
+        'cb_em_kitchen': 'in the kitchen', 'cb_em_garage': 'in the garage', 'cb_em_cupboard': 'in a communal cupboard',
+      };
+      where.forEach((id, w) => expect(say('val_electric_material', {id: 'true'}), '$base $w.', reason: id));
+      expect(say('val_electric_material', {'cb_em_hall': 'true', 'cb_em_garage': 'true'}), '$base in the entrance hall and in the garage.');
+      expect(say('val_electric_material', {'cb_em_other': 'true', 'et_em_other_text': 'in the loft'}), '$base in the loft.');
+      expect(say('val_electric_material', {'cb_old': 'true'}), startsWith('The electrical installation appears dated.'));
+    });
+
+    test('Gas: meter location shows and prints for Mains', () {
+      expect(labelsOf('val_gas', 'cb_gm_stairs', 'cb_gm_other'),
+          ['under the stairs', 'in an outside box', 'in the kitchen', 'in the garage', 'in a communal cupboard', 'other']);
+      expect(screens['val_gas']!['cb_gm_stairs']!['conditionalOn'], 'actv_gas_supply=Mains');
+      const base = 'There is a mains gas connection to the property, and the meter unit is located';
+      expect(say('val_gas', {'actv_gas_supply': 'Mains', 'cb_gm_outside': 'true'}), '$base in an outside box.');
+      expect(say('val_gas', {'actv_gas_supply': 'Mains', 'cb_gm_kitchen': 'true', 'cb_gm_garage': 'true', 'actv_condition_gas': 'Good'}),
+          startsWith('$base in the kitchen and in the garage. The gas installation is considered good'));
+      expect(say('val_gas', {'actv_gas_supply': 'Mains', 'cb_gm_other': 'true', 'et_gm_other_text': 'in the porch'}), '$base in the porch.');
+      // Without a location the usual Mains sentence stays.
+      expect(say('val_gas', {'actv_gas_supply': 'Mains'}), startsWith('The property is connected to mains gas supply.'));
+      expect(say('val_gas', {'actv_gas_supply': 'LPG', 'cb_gm_stairs': 'true'}), isNot(contains('meter unit')));
+    });
+
+    test('Water: stopcock location shows and prints for Mains', () {
+      expect(labelsOf('val_water', 'cb_sc_stairs', 'cb_sc_other'),
+          ['under the stairs', 'under the kitchen sink', 'in the bathroom', 'in the hall', 'in the garage', 'other']);
+      expect(screens['val_water']!['cb_sc_stairs']!['conditionalOn'], 'actv_water_supply=Mains');
+      const base = 'There is an independent mains water supply to the property. The stopcock within the property is located';
+      expect(say('val_water', {'actv_water_supply': 'Mains', 'cb_sc_sink': 'true'}), '$base under the kitchen sink.');
+      expect(say('val_water', {'actv_water_supply': 'Mains', 'cb_sc_hall': 'true', 'cb_sc_bathroom': 'true'}), '$base in the bathroom and in the hall.');
+      expect(say('val_water', {'actv_water_supply': 'Mains', 'cb_sc_other': 'true', 'et_sc_other_text': 'in the cellar'}), '$base in the cellar.');
+      expect(say('val_water', {'actv_water_supply': 'Mains'}), startsWith('The property is connected to mains water supply.'));
+    });
+
+    test('Heating and Water Heating', () {
+      expect(labelsOf('val_hot_water_central_heating', 'cb_h_combi', 'cb_h_other'),
+          ['combination boiler', 'conventional boiler', 'sealed boiler system', 'electrical boiler', 'oil-fired boiler', 'other']);
+      expect(labelsOf('val_hot_water_central_heating', 'cb_hw_combi', 'cb_hw_other'),
+          ['combination boiler', 'conventional boiler', 'sealed boiler system', 'electrical boiler', 'oil-fired boiler', 'other']);
+      const heat = {
+        'cb_h_combi': 'a combination boiler', 'cb_h_conventional': 'a conventional boiler', 'cb_h_sealed': 'a sealed boiler system',
+        'cb_h_electric': 'an electrical boiler', 'cb_h_oil': 'an oil-fired boiler',
+      };
+      heat.forEach((id, w) => expect(say('val_hot_water_central_heating', {id: 'true'}), 'The property is heated by $w.', reason: id));
+      const water = {
+        'cb_hw_combi': 'the combination boiler', 'cb_hw_conventional': 'the conventional boiler', 'cb_hw_sealed': 'the sealed boiler system',
+        'cb_hw_electric': 'the electrical boiler', 'cb_hw_oil': 'the oil-fired boiler',
+      };
+      water.forEach((id, w) => expect(say('val_hot_water_central_heating', {id: 'true'}), 'The hot water is provided by $w.', reason: id));
+      expect(say('val_hot_water_central_heating', {'cb_h_combi': 'true', 'cb_h_oil': 'true', 'cb_hw_combi': 'true'}),
+          'The property is heated by a combination boiler and an oil-fired boiler. The hot water is provided by the combination boiler.');
+      expect(say('val_hot_water_central_heating', {'cb_h_other': 'true', 'et_h_other_text': 'a heat pump', 'cb_hw_other': 'true', 'et_hw_other_text': 'a solar cylinder'}),
+          'The property is heated by a heat pump. The hot water is provided by a solar cylinder.');
+      expect(say('val_hot_water_central_heating', {'cb_gas_hw': 'true', 'cb_radiators': 'true'}),
+          startsWith('The hot water and central heating system is fuelled by gas.'));
+    });
+  });

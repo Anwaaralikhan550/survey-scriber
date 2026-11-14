@@ -39,16 +39,13 @@
  },
  "val_flat_roof": {
   "cb_felt": "true",
-  "actv_condition_flat_roof": "Satisfactory",
-  "cb_partial_view_fr": "true",
-  "actv_visibility_condition_fr": "Unsatisfactory",
-  "et_visibility_notes_fr": "Limited view"
+  "actv_condition_flat_roof": "Satisfactory"
  },
  "val_walls_type": {
   "cb_w_cavity": "true",
   "cb_w_solid": "true",
   "actv_condition_walls": "Reasonable",
-  "actv_building_movement": "None",
+  "actv_building_movement": "Minor movement",
   "et_wall_thickness": "300"
  },
  "val_external_joinery": {
@@ -58,17 +55,18 @@
  },
  "val_gas": {
   "actv_gas_supply": "Mains",
-  "actv_condition_gas": "Very poor"
+  "cb_gm_outside": "true",
+  "actv_condition_gas": "Good"
  },
  "val_water": {
   "actv_water_supply": "Mains",
-  "actv_condition_water": "Poor"
+  "cb_sc_sink": "true",
+  "actv_condition_water": "Good"
  },
  "val_hot_water_central_heating": {
-  "cb_gas_hw": "true",
-  "cb_radiators": "true",
-  "cb_full": "true",
-  "actv_condition_hw_ch": "Satisfactory"
+  "cb_h_combi": "true",
+  "cb_hw_combi": "true",
+  "actv_condition_hw_ch": "Good"
  },
  "overall_condition": {
   "actv_overall_condition": "Good"
@@ -113,5 +111,39 @@
  "val_outbuildings": {
   "cb_o_summer": "true",
   "actv_condition_outbuildings": "Reasonable"
+ },
+ "val_roof_space": {
+  "cb_rs_trussed": "true",
+  "actv_condition_roof_space": "Reasonable",
+  "cb_stored_items": "true"
+ },
+ "val_walls_internal": {
+  "cb_wi_masonry": "true",
+  "cb_wi_stud": "true",
+  "actv_condition_walls_int": "Good"
+ },
+ "val_kitchen": {
+  "cb_k_loc_kitchen": "true",
+  "cb_k_loc_utility": "true",
+  "cb_k_granite": "true",
+  "cb_k_quartz": "true",
+  "actv_condition_kitchen": "Good"
+ },
+ "val_bathroom": {
+  "cb_b_family": "true",
+  "cb_b_ensuite_shower": "true",
+  "actv_condition_bathroom": "Reasonable"
+ },
+ "val_damp_meter": {
+  "actv_damp_meter": "Damp Found",
+  "cb_dw_bathroom": "true",
+  "cb_dw_lounge": "true",
+  "cb_ds_rainwater": "true",
+  "actv_condition_damp": "Fair"
+ },
+ "val_electric_material": {
+  "cb_em_hall": "true",
+  "cb_rubber_cable": "true",
+  "actv_condition_electric": "Reasonable"
  }
 }

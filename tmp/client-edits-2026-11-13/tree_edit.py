@@ -45,3 +45,31 @@ def get_fields(node_id):
             if n['id'] == node_id: return n['fields']
 def COND(prefix): return [dd('actv_condition_' + prefix, 'Condition', ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'])]
 def notes(prefix, nid): c = 'actv_condition_' + prefix; return txt(nid, 'Notes', f'{c}=Fair|{c}=Poor|{c}=Very poor')
+
+def node_lines(nid, title, parent, order, fields):
+    pj = 'null' if parent is None else json.dumps(parent)
+    out = ['        {', '          "id": %s,' % json.dumps(nid), '          "title": %s,' % json.dumps(title), '          "type": "screen",',
+           '          "parentId": %s,' % pj, '          "order": %d,' % order, '          "fields": [']
+    ind = ' ' * 12
+    out += [_line(d, ind) + (',' if n < len(fields) - 1 else '') for n, d in enumerate(fields)]
+    out += ['          ]', '        }']
+    return out
+def replace_node(old_id, new_nodes):
+    """Replace node old_id by the given nodes (list of node_lines lists)."""
+    s = open(P, encoding='utf8', newline='').read()
+    nl = '\r\n' if '\r\n' in s else '\n'
+    lines = s.split(nl)
+    i = next(k for k, l in enumerate(lines) if l.strip() == '"id": "%s",' % old_id)
+    st = i - 1
+    assert lines[st].strip() == '{'
+    ind = len(lines[st]) - len(lines[st].lstrip())
+    en = next(k for k in range(i, len(lines)) if lines[k].strip() in ('}', '},') and len(lines[k]) - len(lines[k].lstrip()) == ind)
+    tail_comma = lines[en].strip() == '},'
+    block = []
+    for n, nodelines in enumerate(new_nodes):
+        nodelines = list(nodelines)
+        if n < len(new_nodes) - 1 or tail_comma: nodelines[-1] = nodelines[-1] + ','
+        block += nodelines
+    lines[st:en + 1] = block
+    s2 = nl.join(lines); json.loads(s2)
+    open(P, 'w', encoding='utf8', newline='').write(s2)

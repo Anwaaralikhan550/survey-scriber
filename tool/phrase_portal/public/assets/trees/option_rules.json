@@ -885,8 +885,16 @@
     "Very poor"
    ]
   },
-  "val_internal_fittings": {
-   "actv_condition_int_fittings": [
+  "val_kitchen": {
+   "actv_condition_kitchen": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_bathroom": {
+   "actv_condition_bathroom": [
     "Good",
     "Reasonable",
     "Fair",

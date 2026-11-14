@@ -3871,6 +3871,133 @@
       "screenId": "*",
       "text": "The floors are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
       "allowedTokens": []
+    },
+    "VAL_N13_V12_0001": {
+      "screenId": "*",
+      "text": "A careful examination was made of all accessible wall surfaces for evidence of structural movement, including cracking, distortion, bulging, or displacement of masonry. Evidence of building movement was noted: minor movement. So far as can be seen from this single inspection, the movement appears to be generally consistent with properties of this age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V12_0002": {
+      "screenId": "*",
+      "text": "A careful examination was made of all accessible wall surfaces for evidence of structural movement, including cracking, distortion, bulging, or displacement of masonry. Evidence of building movement was noted: significant movement. So far as can be seen from this single inspection, the movement appears to be generally consistent with properties of this age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V13_0001": {
+      "screenId": "*",
+      "text": "The roof structure is formed in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V13_0002": {
+      "screenId": "*",
+      "text": "The walls are formed in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V13_0003": {
+      "screenId": "*",
+      "text": "The [free text] worktops comprise [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V13_0004": {
+      "screenId": "*",
+      "text": "The worktops comprise [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V13_0005": {
+      "screenId": "*",
+      "text": "Elevated moisture readings were recorded to sections of the wall surfaces in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V13_0006": {
+      "screenId": "*",
+      "text": "Dampness is suspected to be caused by [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V13c1_0001": {
+      "screenId": "*",
+      "text": "The bathroom has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V13c1_0002": {
+      "screenId": "*",
+      "text": "The bathroom has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V13c1_0003": {
+      "screenId": "*",
+      "text": "The bathroom is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V13c1_0004": {
+      "screenId": "*",
+      "text": "The bathroom is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V13c1_0005": {
+      "screenId": "*",
+      "text": "The kitchen has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V13c1_0006": {
+      "screenId": "*",
+      "text": "The kitchen has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V13c1_0007": {
+      "screenId": "*",
+      "text": "The kitchen is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V13c1_0008": {
+      "screenId": "*",
+      "text": "The kitchen is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V14_0001": {
+      "screenId": "*",
+      "text": "There is a mains electricity supply connected to the property, and the meter unit is located [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V14_0002": {
+      "screenId": "*",
+      "text": "There is a mains gas connection to the property, and the meter unit is located [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V14_0003": {
+      "screenId": "*",
+      "text": "There is an independent mains water supply to the property. The stopcock within the property is located [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V14_0004": {
+      "screenId": "*",
+      "text": "The property is heated by [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V14_0005": {
+      "screenId": "*",
+      "text": "The hot water is provided by [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
     }
   }
 }

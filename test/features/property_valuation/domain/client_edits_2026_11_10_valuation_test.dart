@@ -41,12 +41,13 @@ void main() {
       expect(fields['val_pitched_roof']!.keys.any((k) => k.contains('ventilation')), isTrue);
     });
 
-    test('C12 Hot Water: no Full/Part, Solid reads Solid Fuel', () {
+    test('C12 Hot Water: no Full/Part (old ticks replaced by the client lists on 13 Nov)', () {
       final hw = fields['val_hot_water_central_heating']!;
       expect(hw.keys, isNot(contains('cb_full')));
       expect(hw.keys, isNot(contains('cb_part')));
-      expect(hw['cb_none_hw'], 'None');
-      expect(hw['cb_solid_hw'], 'Solid Fuel');
+      // 13 Nov 2026: the client's own Heating / Water Heating lists replaced these ticks.
+      expect(hw.keys, isNot(contains('cb_none_hw')));
+      expect(hw.keys, isNot(contains('cb_solid_hw')));
     });
 
     test('C12 the remaining answers still print', () {

@@ -1,0 +1,12 @@
+      case 'val_electric_material':
+        final l = _clientList(a, _elecMeterIds, otherCb: 'cb_em_other', otherText: 'et_em_other_text');
+        return l.isEmpty
+            ? const []
+            : ['There is a mains electricity supply connected to the property, and the meter unit is located $l.'];
+      case 'val_hot_water_central_heating':
+        final heat = _clientList(a, _heatingIds, otherCb: 'cb_h_other', otherText: 'et_h_other_text');
+        final water = _clientList(a, _hotWaterIds, otherCb: 'cb_hw_other', otherText: 'et_hw_other_text');
+        return [
+          if (heat.isNotEmpty) 'The property is heated by $heat.',
+          if (water.isNotEmpty) 'The hot water is provided by $water.',
+        ];

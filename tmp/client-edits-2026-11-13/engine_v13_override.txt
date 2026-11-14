@@ -1,0 +1,44 @@
+    if (screenId == 'val_kitchen') {
+      final phrases = <String>[];
+      final where = _clientList(a, _kitchenWhere, otherCb: 'cb_k_loc_other', otherText: 'et_k_loc_other_text');
+      final what = _clientList(a, _worktopIds, otherCb: 'cb_k_other', otherText: 'et_k_other_text');
+      if (what.isNotEmpty) {
+        phrases.add('The ${where.isEmpty ? '' : '$where '}worktops comprise $what.');
+      }
+      _addConditionNotes(phrases, a, 'actv_condition_kitchen', 'et_notes_kitchen', component: 'kitchen');
+      _addRemarks(phrases, a, 'et_general_remarks_kitchen');
+      return phrases;
+    }
+    if (screenId == 'val_bathroom') {
+      final phrases = <String>[];
+      final l = _clientList(a, _bathroomIds, otherCb: 'cb_b_other', otherText: 'et_b_other_text');
+      if (l.isNotEmpty) phrases.add('The property incorporates $l.');
+      _addConditionNotes(phrases, a, 'actv_condition_bathroom', 'et_notes_bathroom', component: 'bathroom');
+      _addRemarks(phrases, a, 'et_general_remarks_bathroom');
+      return phrases;
+    }
+    if (screenId == 'val_damp_meter' && _val(a, 'et_damp_found').isEmpty) {
+      final phrases = <String>[];
+      final meter = _val(a, 'actv_damp_meter');
+      if (meter.isNotEmpty) {
+        if (meter == 'Damp Found') {
+          final where = _clientList(a, _dampWhere, otherCb: 'cb_dw_other', otherText: 'et_dw_other_text');
+          phrases.add(where.isEmpty
+              ? 'Moisture readings were taken with a calibrated electronic moisture meter at representative points '
+                  'to the internal faces of external walls. Elevated moisture levels were detected.'
+              : 'Elevated moisture readings were recorded to sections of the wall surfaces in $where.');
+          final source = _clientList(a, _dampSource, otherCb: 'cb_ds_other', otherText: 'et_ds_other_text');
+          if (source.isNotEmpty) phrases.add('Dampness is suspected to be caused by $source.');
+        } else if (meter.toLowerCase() == 'no damp') {
+          phrases.add('Moisture readings were taken with a calibrated electronic moisture meter at representative points '
+              'to the internal faces of external walls at both ground and upper floor levels where accessible. '
+              'At the time of my inspection, the readings obtained were within acceptable parameters, '
+              'and no visible signs of dampness, staining, or efflorescence were observed.');
+        } else {
+          phrases.add('Damp meter readings indicated: ${_say(a, 'actv_damp_meter').toLowerCase()}.');
+        }
+      }
+      _addConditionNotes(phrases, a, 'actv_condition_damp', 'et_notes_damp', component: 'dampness');
+      _addRemarks(phrases, a, 'et_general_remarks_damp');
+      return phrases;
+    }

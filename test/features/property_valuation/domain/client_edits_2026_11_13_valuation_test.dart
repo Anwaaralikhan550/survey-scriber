@@ -256,8 +256,8 @@ void main() {
           if (f.value['label'] == 'Condition' && f.value['type'] == 'dropdown') f.key,
     ];
     String screenOf(String field) => screens.entries.firstWhere((e) => e.value.containsKey(field)).key;
-    test('all 28 Condition dropdowns carry exactly the client list (Floor became one block in V11)', () {
-      expect(condIds, hasLength(28));
+    test('all 29 Condition dropdowns carry exactly the client list (Floor one block in V11, Kitchen + Bathroom in V13)', () {
+      expect(condIds, hasLength(29));
       for (final id in condIds) {
         expect(screens[screenOf(id)]![id]!['options'], five, reason: id);
       }
@@ -413,6 +413,181 @@ void main() {
           'The property incorporates an annex, an office and a studio.');
       expect(say('val_outbuildings', {'cb_o_other': 'true', 'et_o_other_text': 'Gazebo'}), 'The property incorporates a gazebo.');
       expect(say('val_outbuildings', {'et_outbuilding_describe': 'Summer house'}), startsWith('The property includes outbuildings comprising Summer house.'));
+    });
+  });
+
+  group('V12 Flat Roof and Main Wall (handwritten note)', () {
+    test('Flat Roof has no Partial View and no Visibility Condition', () {
+      final f = screens['val_flat_roof']!.keys;
+      for (final gone in ['cb_partial_view_fr', 'actv_visibility_condition_fr', 'et_visibility_notes_fr']) {
+        expect(f, isNot(contains(gone)));
+      }
+      expect(say('val_flat_roof', {'cb_partial_view_fr': 'true', 'actv_visibility_condition_fr': 'Unsatisfactory', 'et_visibility_notes_fr': 'x'}), isEmpty);
+      // Pitched and Other roof keep theirs (the client only named Flat roof).
+      expect(screens['val_pitched_roof']!.keys, contains('cb_partial_view_pr'));
+      expect(screens['val_other_roof']!.keys, contains('cb_partial_view_or'));
+    });
+    test('Flat Roof still prints its material and condition', () {
+      expect(say('val_flat_roof', {'cb_felt_fr': 'true', 'actv_condition_flat_roof': 'Good'}),
+          allOf(startsWith('The flat roof covering is of mineral felt construction.'), contains('The flat roof covering is considered good')));
+    });
+    test('Main Wall Building movement: none / minor movement / significant movement', () {
+      expect(screens['val_walls_type']!['actv_building_movement']!['options'], ['None', 'Minor movement', 'Significant movement']);
+      expect(say('val_walls_type', {'actv_building_movement': 'None'}),
+          'A careful examination was made of all accessible wall surfaces for evidence of structural movement, including cracking, distortion, bulging, or displacement of masonry.');
+      expect(say('val_walls_type', {'actv_building_movement': 'Minor movement'}), contains('Evidence of building movement was noted: minor movement.'));
+      expect(say('val_walls_type', {'actv_building_movement': 'Significant movement'}), contains('Evidence of building movement was noted: significant movement.'));
+    });
+    test('older answers (Structural Movement, Underpinning) still print', () {
+      expect(say('val_walls_type', {'actv_building_movement': 'Underpinning'}), contains('Evidence of building movement was noted: underpinning.'));
+    });
+  });
+
+  group('V13 Inside Property: the client sentences', () {
+    List<String> labelsOf(String screen, String from, String to) {
+      final f = screens[screen]!;
+      final ids = f.keys.toList();
+      return [for (final id in ids.sublist(ids.indexOf(from), ids.indexOf(to) + 1)) f[id]!['label'] as String];
+    }
+
+    test('Roof Space', () {
+      expect(labelsOf('val_roof_space', 'cb_rs_timber', 'cb_rs_other'),
+          ['traditional cut timber', 'prefabricated trussed rafters', 'steel', 'other construction']);
+      expect(say('val_roof_space', {'cb_rs_timber': 'true'}), 'The roof structure is formed in traditional cut timber.');
+      expect(say('val_roof_space', {'cb_rs_trussed': 'true', 'cb_rs_steel': 'true'}), 'The roof structure is formed in prefabricated trussed rafters and steel.');
+      expect(say('val_roof_space', {'cb_rs_other': 'true', 'et_rs_other_text': 'Green oak'}), 'The roof structure is formed in green oak.');
+      expect(say('val_roof_space', {'cb_trussed': 'true'}), startsWith('The roof space was entered and inspected where accessible.'));
+    });
+
+    test('Walls', () {
+      final node = tree['sections'].expand((s) => s['nodes'] as List).firstWhere((n) => n['id'] == 'val_walls_internal') as Map;
+      expect(node['title'], 'Walls');
+      expect(labelsOf('val_walls_internal', 'cb_wi_masonry', 'cb_wi_other'),
+          ['solid masonry', 'timber stud partitions', 'plasterboard partitions', 'lath and plaster', 'other construction']);
+      expect(say('val_walls_internal', {'cb_wi_masonry': 'true'}), 'The walls are formed in solid masonry.');
+      expect(say('val_walls_internal', {'cb_wi_stud': 'true', 'cb_wi_lath': 'true'}), 'The walls are formed in timber stud partitions and lath and plaster.');
+      expect(say('val_walls_internal', {'cb_wi_other': 'true', 'et_wi_other_text': 'Brick nogging'}), 'The walls are formed in brick nogging.');
+      expect(say('val_walls_internal', {'cb_solid_wi': 'true'}), startsWith('The internal walls and partitions are of solid construction.'));
+    });
+
+    test('Kitchen and Bathroom are two screens, Internal Fittings is gone', () {
+      expect(screens.keys, containsAll(['val_kitchen', 'val_bathroom']));
+      expect(screens.keys, isNot(contains('val_internal_fittings')));
+    });
+
+    test('Kitchen worktops', () {
+      expect(labelsOf('val_kitchen', 'cb_k_laminate', 'cb_k_other'), [
+        'laminate particle board', 'solid timber', 'granite', 'quartz', 'stone', 'Corian', 'compressed composite', 'marble', 'steel', 'other material',
+      ]);
+      expect(labelsOf('val_kitchen', 'cb_k_loc_kitchen', 'cb_k_loc_other'), ['kitchen', 'utility room', 'other']);
+      expect(say('val_kitchen', {'cb_k_loc_kitchen': 'true', 'cb_k_laminate': 'true'}), 'The kitchen worktops comprise laminate particle board.');
+      expect(say('val_kitchen', {'cb_k_loc_kitchen': 'true', 'cb_k_loc_utility': 'true', 'cb_k_granite': 'true', 'cb_k_quartz': 'true'}),
+          'The kitchen and utility room worktops comprise granite and quartz.');
+      expect(say('val_kitchen', {'cb_k_loc_other': 'true', 'et_k_loc_other_text': 'pantry', 'cb_k_marble': 'true'}), 'The pantry worktops comprise marble.');
+      expect(say('val_kitchen', {'cb_k_other': 'true', 'et_k_other_text': 'Slate', 'cb_k_loc_kitchen': 'true'}), 'The kitchen worktops comprise slate.');
+      expect(say('val_kitchen', {'cb_k_steel': 'true', 'actv_condition_kitchen': 'Fair', 'et_notes_kitchen': 'chipped'}),
+          allOf(startsWith('The worktops comprise steel.'), contains('The kitchen has been assessed as fair.'), endsWith('Chipped')));
+    });
+
+    test('Bathroom', () {
+      expect(labelsOf('val_bathroom', 'cb_b_family', 'cb_b_other'), [
+        'family bathroom(s)', 'shower room(s)', 'ensuite shower room(s)', 'ensuite bathroom(s)', 'separate toilet(s)', 'utility room', 'other',
+      ]);
+      expect(say('val_bathroom', {'cb_b_family': 'true'}), 'The property incorporates family bathroom(s).');
+      expect(say('val_bathroom', {'cb_b_shower': 'true', 'cb_b_ensuite_bath': 'true', 'cb_b_toilet': 'true'}),
+          'The property incorporates shower room(s), ensuite bathroom(s) and separate toilet(s).');
+      expect(say('val_bathroom', {'cb_b_other': 'true', 'et_b_other_text': 'wet room'}), 'The property incorporates wet room.');
+      expect(say('val_bathroom', {'cb_b_utility': 'true', 'actv_condition_bathroom': 'Good'}),
+          startsWith('The property incorporates utility room. The bathroom is considered good'));
+    });
+
+    test('Damp: locations and Damp Source only with Damp Found', () {
+      expect(labelsOf('val_damp_meter', 'cb_dw_lounge', 'cb_dw_other'), ['lounge', 'dining room', 'bedroom', 'kitchen', 'bathroom', 'other']);
+      expect(labelsOf('val_damp_meter', 'cb_ds_rainwater', 'cb_ds_other'),
+          ['defective rainwater goods', 'blocked gullies', 'leaking pipework', 'bridged damp-proof course', 'other']);
+      for (final id in ['cb_dw_lounge', 'cb_ds_rainwater']) {
+        expect(screens['val_damp_meter']![id]!['conditionalOn'], 'actv_damp_meter=Damp Found');
+      }
+      expect(say('val_damp_meter', {'actv_damp_meter': 'Damp Found', 'cb_dw_lounge': 'true', 'cb_dw_bathroom': 'true'}),
+          'Elevated moisture readings were recorded to sections of the wall surfaces in lounge and bathroom.');
+      expect(say('val_damp_meter', {'actv_damp_meter': 'Damp Found', 'cb_dw_other': 'true', 'et_dw_other_text': 'hall'}),
+          'Elevated moisture readings were recorded to sections of the wall surfaces in hall.');
+      expect(say('val_damp_meter', {'actv_damp_meter': 'Damp Found', 'cb_ds_rainwater': 'true', 'cb_ds_dpc': 'true'}),
+          allOf(contains('Elevated moisture levels were detected.'), contains('Dampness is suspected to be caused by defective rainwater goods and bridged damp-proof course.')));
+      expect(say('val_damp_meter', {'actv_damp_meter': 'Damp Found', 'cb_ds_other': 'true', 'et_ds_other_text': 'condensation', 'cb_dw_kitchen': 'true'}),
+          'Elevated moisture readings were recorded to sections of the wall surfaces in kitchen. Dampness is suspected to be caused by condensation.');
+      expect(say('val_damp_meter', {'actv_damp_meter': 'Damp Not Found'}), 'Damp meter readings indicated: damp not found.');
+      expect(say('val_damp_meter', {'actv_damp_meter': 'Damp Found', 'et_damp_found': 'bathroom'}), contains('Elevated readings were noted at bathroom.'));
+    });
+  });
+
+  group('V14 Services: the client sentences', () {
+    List<String> labelsOf(String screen, String from, String to) {
+      final f = screens[screen]!;
+      final ids = f.keys.toList();
+      return [for (final id in ids.sublist(ids.indexOf(from), ids.indexOf(to) + 1)) f[id]!['label'] as String];
+    }
+
+    test('Electricity Metre', () {
+      expect(labelsOf('val_electric_material', 'cb_em_stairs', 'cb_em_other'),
+          ['under the stairs', 'in an outside box', 'in the entrance hall', 'in the kitchen', 'in the garage', 'in a communal cupboard', 'other']);
+      const base = 'There is a mains electricity supply connected to the property, and the meter unit is located';
+      const where = {
+        'cb_em_stairs': 'under the stairs', 'cb_em_outside': 'in an outside box', 'cb_em_hall': 'in the entrance hall',
+        'cb_em_kitchen': 'in the kitchen', 'cb_em_garage': 'in the garage', 'cb_em_cupboard': 'in a communal cupboard',
+      };
+      where.forEach((id, w) => expect(say('val_electric_material', {id: 'true'}), '$base $w.', reason: id));
+      expect(say('val_electric_material', {'cb_em_hall': 'true', 'cb_em_garage': 'true'}), '$base in the entrance hall and in the garage.');
+      expect(say('val_electric_material', {'cb_em_other': 'true', 'et_em_other_text': 'in the loft'}), '$base in the loft.');
+      expect(say('val_electric_material', {'cb_old': 'true'}), startsWith('The electrical installation appears dated.'));
+    });
+
+    test('Gas: meter location shows and prints for Mains', () {
+      expect(labelsOf('val_gas', 'cb_gm_stairs', 'cb_gm_other'),
+          ['under the stairs', 'in an outside box', 'in the kitchen', 'in the garage', 'in a communal cupboard', 'other']);
+      expect(screens['val_gas']!['cb_gm_stairs']!['conditionalOn'], 'actv_gas_supply=Mains');
+      const base = 'There is a mains gas connection to the property, and the meter unit is located';
+      expect(say('val_gas', {'actv_gas_supply': 'Mains', 'cb_gm_outside': 'true'}), '$base in an outside box.');
+      expect(say('val_gas', {'actv_gas_supply': 'Mains', 'cb_gm_kitchen': 'true', 'cb_gm_garage': 'true', 'actv_condition_gas': 'Good'}),
+          startsWith('$base in the kitchen and in the garage. The gas installation is considered good'));
+      expect(say('val_gas', {'actv_gas_supply': 'Mains', 'cb_gm_other': 'true', 'et_gm_other_text': 'in the porch'}), '$base in the porch.');
+      // Without a location the usual Mains sentence stays.
+      expect(say('val_gas', {'actv_gas_supply': 'Mains'}), startsWith('The property is connected to mains gas supply.'));
+      expect(say('val_gas', {'actv_gas_supply': 'LPG', 'cb_gm_stairs': 'true'}), isNot(contains('meter unit')));
+    });
+
+    test('Water: stopcock location shows and prints for Mains', () {
+      expect(labelsOf('val_water', 'cb_sc_stairs', 'cb_sc_other'),
+          ['under the stairs', 'under the kitchen sink', 'in the bathroom', 'in the hall', 'in the garage', 'other']);
+      expect(screens['val_water']!['cb_sc_stairs']!['conditionalOn'], 'actv_water_supply=Mains');
+      const base = 'There is an independent mains water supply to the property. The stopcock within the property is located';
+      expect(say('val_water', {'actv_water_supply': 'Mains', 'cb_sc_sink': 'true'}), '$base under the kitchen sink.');
+      expect(say('val_water', {'actv_water_supply': 'Mains', 'cb_sc_hall': 'true', 'cb_sc_bathroom': 'true'}), '$base in the bathroom and in the hall.');
+      expect(say('val_water', {'actv_water_supply': 'Mains', 'cb_sc_other': 'true', 'et_sc_other_text': 'in the cellar'}), '$base in the cellar.');
+      expect(say('val_water', {'actv_water_supply': 'Mains'}), startsWith('The property is connected to mains water supply.'));
+    });
+
+    test('Heating and Water Heating', () {
+      expect(labelsOf('val_hot_water_central_heating', 'cb_h_combi', 'cb_h_other'),
+          ['combination boiler', 'conventional boiler', 'sealed boiler system', 'electrical boiler', 'oil-fired boiler', 'other']);
+      expect(labelsOf('val_hot_water_central_heating', 'cb_hw_combi', 'cb_hw_other'),
+          ['combination boiler', 'conventional boiler', 'sealed boiler system', 'electrical boiler', 'oil-fired boiler', 'other']);
+      const heat = {
+        'cb_h_combi': 'a combination boiler', 'cb_h_conventional': 'a conventional boiler', 'cb_h_sealed': 'a sealed boiler system',
+        'cb_h_electric': 'an electrical boiler', 'cb_h_oil': 'an oil-fired boiler',
+      };
+      heat.forEach((id, w) => expect(say('val_hot_water_central_heating', {id: 'true'}), 'The property is heated by $w.', reason: id));
+      const water = {
+        'cb_hw_combi': 'the combination boiler', 'cb_hw_conventional': 'the conventional boiler', 'cb_hw_sealed': 'the sealed boiler system',
+        'cb_hw_electric': 'the electrical boiler', 'cb_hw_oil': 'the oil-fired boiler',
+      };
+      water.forEach((id, w) => expect(say('val_hot_water_central_heating', {id: 'true'}), 'The hot water is provided by $w.', reason: id));
+      expect(say('val_hot_water_central_heating', {'cb_h_combi': 'true', 'cb_h_oil': 'true', 'cb_hw_combi': 'true'}),
+          'The property is heated by a combination boiler and an oil-fired boiler. The hot water is provided by the combination boiler.');
+      expect(say('val_hot_water_central_heating', {'cb_h_other': 'true', 'et_h_other_text': 'a heat pump', 'cb_hw_other': 'true', 'et_hw_other_text': 'a solar cylinder'}),
+          'The property is heated by a heat pump. The hot water is provided by a solar cylinder.');
+      expect(say('val_hot_water_central_heating', {'cb_gas_hw': 'true', 'cb_radiators': 'true'}),
+          startsWith('The hot water and central heating system is fuelled by gas.'));
     });
   });
 }

@@ -1,0 +1,48 @@
+  static const _roofStructureIds = {
+    'cb_rs_timber': 'traditional cut timber',
+    'cb_rs_trussed': 'prefabricated trussed rafters',
+    'cb_rs_steel': 'steel',
+  };
+  static const _internalWallIds = {
+    'cb_wi_masonry': 'solid masonry',
+    'cb_wi_stud': 'timber stud partitions',
+    'cb_wi_plasterboard': 'plasterboard partitions',
+    'cb_wi_lath': 'lath and plaster',
+  };
+  static const _kitchenWhere = {
+    'cb_k_loc_kitchen': 'kitchen',
+    'cb_k_loc_utility': 'utility room',
+  };
+  static const _worktopIds = {
+    'cb_k_laminate': 'laminate particle board',
+    'cb_k_timber': 'solid timber',
+    'cb_k_granite': 'granite',
+    'cb_k_quartz': 'quartz',
+    'cb_k_stone': 'stone',
+    'cb_k_corian': 'Corian',
+    'cb_k_composite': 'compressed composite',
+    'cb_k_marble': 'marble',
+    'cb_k_steel': 'steel',
+  };
+  static const _bathroomIds = {
+    'cb_b_family': 'family bathroom(s)',
+    'cb_b_shower': 'shower room(s)',
+    'cb_b_ensuite_shower': 'ensuite shower room(s)',
+    'cb_b_ensuite_bath': 'ensuite bathroom(s)',
+    'cb_b_toilet': 'separate toilet(s)',
+    'cb_b_utility': 'utility room',
+  };
+  static const _dampWhere = {
+    'cb_dw_lounge': 'lounge',
+    'cb_dw_dining': 'dining room',
+    'cb_dw_bedroom': 'bedroom',
+    'cb_dw_kitchen': 'kitchen',
+    'cb_dw_bathroom': 'bathroom',
+  };
+  static const _dampSource = {
+    'cb_ds_rainwater': 'defective rainwater goods',
+    'cb_ds_gullies': 'blocked gullies',
+    'cb_ds_pipework': 'leaking pipework',
+    'cb_ds_dpc': 'bridged damp-proof course',
+  };
+

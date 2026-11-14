@@ -1,0 +1,20 @@
+    if (screenId == 'val_gas' && _val(a, 'actv_gas_supply').toLowerCase() == 'mains') {
+      final l = _clientList(a, _gasMeterIds, otherCb: 'cb_gm_other', otherText: 'et_gm_other_text');
+      if (l.isNotEmpty) {
+        final usual = _buildPhrasesLegacy(screenId, a);
+        return [
+          'There is a mains gas connection to the property, and the meter unit is located $l.',
+          ...usual.skip(1),
+        ];
+      }
+    }
+    if (screenId == 'val_water' && _val(a, 'actv_water_supply').toLowerCase() == 'mains') {
+      final l = _clientList(a, _stopcockIds, otherCb: 'cb_sc_other', otherText: 'et_sc_other_text');
+      if (l.isNotEmpty) {
+        final usual = _buildPhrasesLegacy(screenId, a);
+        return [
+          'There is an independent mains water supply to the property. The stopcock within the property is located $l.',
+          ...usual.skip(1),
+        ];
+      }
+    }

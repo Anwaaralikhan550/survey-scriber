@@ -64,7 +64,6 @@ const _picksAWrittenSentence = {
   'val_water/actv_water_supply/Private',
   'overall_condition/actv_overall_condition/Good',
   'overall_condition/actv_overall_condition/Average',
-  // Condition sentences of the valuation are written in the engine (client, 13 Nov 2026).
   'val_pitched_roof/actv_condition_pitched_roof/Good',
   'val_pitched_roof/actv_condition_pitched_roof/Reasonable',
   'val_pitched_roof/actv_condition_pitched_roof/Fair',
@@ -145,10 +144,14 @@ const _picksAWrittenSentence = {
   'val_external_joinery/actv_condition_ext_joinery/Reasonable',
   'val_external_joinery/actv_condition_ext_joinery/Fair',
   'val_external_joinery/actv_condition_ext_joinery/Very poor',
-  'val_internal_fittings/actv_condition_int_fittings/Good',
-  'val_internal_fittings/actv_condition_int_fittings/Reasonable',
-  'val_internal_fittings/actv_condition_int_fittings/Fair',
-  'val_internal_fittings/actv_condition_int_fittings/Very poor',
+  'val_kitchen/actv_condition_kitchen/Good',
+  'val_kitchen/actv_condition_kitchen/Reasonable',
+  'val_kitchen/actv_condition_kitchen/Fair',
+  'val_kitchen/actv_condition_kitchen/Very poor',
+  'val_bathroom/actv_condition_bathroom/Good',
+  'val_bathroom/actv_condition_bathroom/Reasonable',
+  'val_bathroom/actv_condition_bathroom/Fair',
+  'val_bathroom/actv_condition_bathroom/Very poor',
   'val_decorations_int/actv_condition_dec_int/Good',
   'val_decorations_int/actv_condition_dec_int/Reasonable',
   'val_decorations_int/actv_condition_dec_int/Fair',
@@ -177,6 +180,7 @@ const _picksAWrittenSentence = {
   'val_hot_water_central_heating/actv_condition_hw_ch/Reasonable',
   'val_hot_water_central_heating/actv_condition_hw_ch/Fair',
   'val_hot_water_central_heating/actv_condition_hw_ch/Very poor',
+  // Condition sentences of the valuation are written in the engine (client, 13 Nov 2026).
 };
 
 class _Miss {
