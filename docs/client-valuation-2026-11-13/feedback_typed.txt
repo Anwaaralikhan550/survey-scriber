@@ -1,0 +1,62 @@
+Valuation Feed back
+Report format changes attached
+Valuation details/General Details (About Inspection)
+Remove: Estate type
+Keep the rest and amend as below
+Property Type: The property is a detached house, semi-detached house, end-of-terrace house, mid-terrace house, purpose-built flat, converted flat, maisonette, bungalow, cottage, other providing one, two, three, four, five, six or more bedrooms.
+Construction: The property is believed to be constructed using traditional masonry, solid wall, cavity wall, timber frame, steel frame, concrete wall, precast concrete panels, system-built, other construction. 
+Year Built: Year built: The property is understood to have been built in (enter year), pre-1900, 1900–1929, 1930–1949, 1950–1969, 1970–1989, 1990–2009, 2010 onwards, or the exact construction date is unknown. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.
+Extension: Extended: The property has been extended to provide side, rear, front, single-storey, two-storey, roof, loft accommodation. 
+Listed Building: The property is understood to be a listed building. 
+New Built; Remove this section.
+Accommodation: (One Screen)
+Floor
+Living
+Beds
+Bath / shower
+WC
+Kitchen
+Utility
+Conservatory
+Other
+Property total
+1
+3
+2
+1
+-
+1
+1
+1 Garage
+Location &amp; Amenities + Road – Remove the two sections
+Property Inspection
+Outside Property: 
+Roof: The roof covering is formed in clay tiles, concrete tiles, natural slate, artificial slate, fibre cement slates, metal sheeting, mineral felt, rubber membrane, single-ply membrane, other. Condition: good, reasonable, fair, poor, very poor.
+Rainwater Goods: The rainwater goods comprise PVC, cast iron, aluminium, steel, concrete, asbestos cement, other, gutters, downpipes, hoppers, and associated fittings. Condition: good, reasonable, fair, poor, very poor.
+Chimney: The property is installed with chimney stack(s) of brick, stone, rendered masonry, other construction and the chimney stack(s) appear original, replaced, rebuilt.
+Main Walls: External walls: The external walls are constructed of solid brick, cavity brick, stone, timber frame, steel frame, rendered masonry, other construction. Condition: good, reasonable, fair, poor, very poor.
+Windows: The windows are formed of replacement, original, old, PVCu, timber, old style timber sash, modern PVC sash, modern timber sash, aluminium, composite, other framed units.
+External Decorations/finishes: Where visible, the walls appear in good, reasonable, fair, poor, very poor condition, consistent with their age and type of construction.
+Floor: Floors are of solid concrete, suspended timber, beam and block, other construction. Condition: good, reasonable, fair, poor, very poor.
+Garage: The property incorporates a garage in a block of garages, an attached, a detached, an integral, garage, under croft, other garage(s). Condition: good, reasonable, fair, poor, very poor.
+Outbuilding: The property incorporates a(an) large shed, workshop, annex, summer house, office, studio, other. Condition: good, reasonable, fair, poor, very poor.
+Inside Property: 
+Roof Space: The roof structure is formed in traditional cut timber, prefabricated trussed rafters, steel, other construction. Condition: good, reasonable, fair, poor, very poor.
+Walls: The walls are formed in solid masonry, timber stud partitions, plasterboard partitions, lath and plaster, other construction. Condition: good, reasonable, fair, poor, very poor.
+Kitchen: The kitchen, utility room, other worktops comprise laminate particle board, solid timber, granite, quartz, stone, Corian, compressed composite, marble, steel, other material. Condition: good, reasonable, fair, poor, very poor.
+Bathroom: The property incorporates a family bathroom(s), shower room(s), ensuite shower room(s), ensuite bathroom(s), separate toilet(s), utility room, other. Condition: good, reasonable, fair, poor, very poor.
+Damp: Elevated moisture readings were recorded to sections of the wall surfaces in lounge, dining room, bedroom, kitchen, bathroom, other. 
+Damp Source: Dampness is suspected to be caused by defective rainwater goods, blocked gullies, leaking pipework, bridged damp-proof course, other. 
+Services: 
+Electricity Metre: There is a mains electricity supply connected to the property, and the meter unit is located under the stairs, in an outside box, in the entrance hall, in the kitchen, in the garage, in a communal cupboard, other. 
+Gas: There is a mains gas connection to the property, and the meter unit is located under the stairs, in an outside box, in the kitchen, in the garage, in a communal cupboard, other. 
+Water: There is an independent mains water supply to the property. The stopcock within the property is located under the stairs, under the kitchen sink, in the bathroom, in the hall, in the garage, other. 
+Heating: The property is heated by a combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other.
+Water Heating: The hot water is provided by the combination boiler, conventional boiler, sealed boiler system, electrical boiler, oil-fired boiler, other.
+Overall Condition: 
+Reasonable: I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction.  
+Reasonable with repair: I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction. You should be prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported. 
+Other Matter/Energy performance – remove these two sections.
+Valuation
+Valuation Amount 000,000,000.00 (Words): Based on an analysis of recent comparable sales for similar properties in the locality, the agreed purchase price of 000,000,000.00 (Words) appears reasonable in current market conditions. 
+Purpose of Valuation: Market Value/Shared Ownership/Staircasing/ Help to Buy/ Compulsory Purchase/Other. 
