@@ -1,11 +1,11 @@
 # Inspection tree audit
 
-Nodes: 439 (344 screens). Element landings checked: 23.
+Nodes: 451 (356 screens). Element landings checked: 23.
 
 | Code | Check | Findings |
 |---|---|---|
-| L1 | Landing does not follow the Roof Covering pattern | 0 |
-| L2 | Condition rating screen not the inline header of the main group | 0 |
+| L1 | Landing does not follow the Roof Covering pattern | 2 |
+| L2 | Condition rating screen not the inline header of the main group | 1 |
 | L3 | Repairs / Not inspected in the wrong position | 0 |
 | L4 | Duplicate Condition Rating screens in one element | 0 |
 | L5 | App order (placement) differs from the "order" attribute | 6 |
@@ -18,6 +18,15 @@ Nodes: 439 (344 screens). Element landings checked: 23.
 | F3 | Duplicate field id | 0 |
 | E1 | Empty group or screen | 2 |
 
+## L1: Landing does not follow the Roof Covering pattern (2)
+
+- **G Services > Heating** (`group_g4_heating_92`): landing starts with "Heating" (screen), expected the main group first. Landing = ['Heating', 'Repairs', 'Heating']
+- **G Services > Heating** (`group_g4_heating_92`): extra items besides [main, Repairs, Not inspected]: ['Heating']. Landing = ['Heating', 'Repairs', 'Heating']
+
+## L2: Condition rating screen not the inline header of the main group (1)
+
+- **G Services > Heating > Heating** (`activity_services_heating_main_screen`): inline header sits directly on the landing, not inside the main group
+
 ## L5: App order (placement) differs from the "order" attribute (6)
 
 - **Outside Property > Rain Water Goods > Rainwater Goods** (`group_rainwater_goods_14`): app shows ['Weather Condition', 'About RWG', 'Insufficient slope', 'Leakage', 'Corrosion', 'Blocked RWG', 'Blocked gullies', 'Open runoffs'] but "order" says ['Weather Condition', 'About RWG', 'Blocked RWG', 'Insufficient slope', 'Leakage', 'Blocked gullies', 'Corrosion', 'Open runoffs']
@@ -29,9 +38,9 @@ Nodes: 439 (344 screens). Element landings checked: 23.
 
 ## T1: Title style (3)
 
-- **Outside Property > Chimney > Not Inspected** (`activity_outside_property_chimney_not_inspected`): "Not Inspected" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})
-- **Outside Property > Roof Covering > Not Inspected** (`activity_outside_property_roof_not_inspected`): "Not Inspected" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})
-- **F Inside Property > Roof Structure > Not Inspected** (`activity_inside_property_roof_structure_not_inspected`): "Not Inspected" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})
+- **Outside Property > Chimney > Not Inspected** (`activity_outside_property_chimney_not_inspected`): "Not Inspected" (spellings in use: {'Not inspected': 5, 'Not Inspected': 3})
+- **Outside Property > Roof Covering > Not Inspected** (`activity_outside_property_roof_not_inspected`): "Not Inspected" (spellings in use: {'Not inspected': 5, 'Not Inspected': 3})
+- **F Inside Property > Roof Structure > Not Inspected** (`activity_inside_property_roof_structure_not_inspected`): "Not Inspected" (spellings in use: {'Not inspected': 5, 'Not Inspected': 3})
 
 ## E1: Empty group or screen (2)
 

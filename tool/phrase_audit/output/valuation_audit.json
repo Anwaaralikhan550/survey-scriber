@@ -22,8 +22,8 @@
    "sectionKey": "valuation_details",
    "screenId": "general_details",
    "title": "General Details",
-   "dataFieldCount": 31,
-   "permutationCount": 87,
+   "dataFieldCount": 33,
+   "permutationCount": 89,
    "severities": [],
    "phraseStats": {
     "total": 33,
@@ -41,13 +41,13 @@
    "sectionKey": "valuation_details",
    "screenId": "new_build_property",
    "title": "New Build Property",
-   "dataFieldCount": 5,
-   "permutationCount": 19,
+   "dataFieldCount": 7,
+   "permutationCount": 21,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 11,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
+    "approvedCurrentBankOnly": 11,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -98,13 +98,13 @@
    "sectionKey": "property_assessment",
    "screenId": "location_amenities",
    "title": "Location & Amenities",
-   "dataFieldCount": 11,
-   "permutationCount": 27,
+   "dataFieldCount": 12,
+   "permutationCount": 28,
    "severities": [],
    "phraseStats": {
-    "total": 15,
+    "total": 16,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 14,
+    "approvedCurrentBankOnly": 15,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -155,13 +155,13 @@
    "sectionKey": "property_inspection",
    "screenId": "val_flat_roof",
    "title": "Flat Roof",
-   "dataFieldCount": 13,
-   "permutationCount": 21,
+   "dataFieldCount": 12,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 13,
+    "total": 11,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 12,
+    "approvedCurrentBankOnly": 10,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -362,13 +362,13 @@
    "sectionKey": "property_inspection",
    "screenId": "val_garage",
    "title": "Garage",
-   "dataFieldCount": 5,
-   "permutationCount": 19,
+   "dataFieldCount": 6,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 11,
+    "total": 12,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 11,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -666,13 +666,13 @@
    "sectionKey": "property_inspection",
    "screenId": "val_hot_water_central_heating",
    "title": "Hot Water / Central Heating",
-   "dataFieldCount": 16,
-   "permutationCount": 20,
+   "dataFieldCount": 14,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 17,
+    "total": 15,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 16,
+    "approvedCurrentBankOnly": 14,
     "unapproved": 0
    },
    "editedBankSamples": [

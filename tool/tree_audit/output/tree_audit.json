@@ -1,5 +1,26 @@
 [
  {
+  "code": "L1",
+  "section": "G",
+  "id": "group_g4_heating_92",
+  "path": "G Services > Heating",
+  "msg": "landing starts with \"Heating\" (screen), expected the main group first. Landing = ['Heating', 'Repairs', 'Heating']"
+ },
+ {
+  "code": "L1",
+  "section": "G",
+  "id": "group_g4_heating_92",
+  "path": "G Services > Heating",
+  "msg": "extra items besides [main, Repairs, Not inspected]: ['Heating']. Landing = ['Heating', 'Repairs', 'Heating']"
+ },
+ {
+  "code": "L2",
+  "section": "G",
+  "id": "activity_services_heating_main_screen",
+  "path": "G Services > Heating > Heating",
+  "msg": "inline header sits directly on the landing, not inside the main group"
+ },
+ {
   "code": "L5",
   "section": "E",
   "id": "group_rainwater_goods_14",
@@ -46,21 +67,21 @@
   "section": "E",
   "id": "activity_outside_property_chimney_not_inspected",
   "path": "Outside Property > Chimney > Not Inspected",
-  "msg": "\"Not Inspected\" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})"
+  "msg": "\"Not Inspected\" (spellings in use: {'Not inspected': 5, 'Not Inspected': 3})"
  },
  {
   "code": "T1",
   "section": "E",
   "id": "activity_outside_property_roof_not_inspected",
   "path": "Outside Property > Roof Covering > Not Inspected",
-  "msg": "\"Not Inspected\" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})"
+  "msg": "\"Not Inspected\" (spellings in use: {'Not inspected': 5, 'Not Inspected': 3})"
  },
  {
   "code": "T1",
   "section": "F",
   "id": "activity_inside_property_roof_structure_not_inspected",
   "path": "F Inside Property > Roof Structure > Not Inspected",
-  "msg": "\"Not Inspected\" (spellings in use: {'Not inspected': 4, 'Not Inspected': 3})"
+  "msg": "\"Not Inspected\" (spellings in use: {'Not inspected': 5, 'Not Inspected': 3})"
  },
  {
   "code": "E1",
