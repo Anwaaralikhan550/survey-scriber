@@ -35,6 +35,7 @@ const done = [
   'Services: Electricity Metre, Gas, Water, Heating, Water Heating with your location and boiler lists.',
   'Overall Condition: Reasonable / Reasonable with repair. Other Matters and Energy Performance (EPC) removed.',
   'Valuation: the "agreed purchase price of ... appears reasonable" sentence with figures and words. Purpose of Valuation now has Staircasing.',
+  'New section "Significant Valuation Consideration" (Roof, External Wall Cladding, Building Movement, Damp, Timber Defects, Other Concerns) with your lists and sentences.',
   'Every "Other" opens a text box.',
   'Report: same section names, colour bars, two-column element boxes, cover, header and footer as your sample, in Word and PDF.',
 ];
@@ -50,6 +51,8 @@ const Q = [
   [9, 'Your sample report has a "Limitations" block under Restrictions. Should the valuation app get a Limitations screen? (It is not in your typed list.)'],
   [10, 'Your sample report has an "FBS Valuation Matrix" (comparables table) under Valuation. Should the app produce it? What data does it need?'],
   [11, 'Rainwater Goods: "and associated fittings" is a tick in the list. Kitchen: the worktop locations (kitchen, utility room, other) print before "worktops comprise". Please check these two sentences.'],
+  [12, 'Significant Valuation Consideration, Timber Defects: "Extensive Dry Rot" is written twice in your file. We made one tick. Was another item meant (for example Wet Rot)?'],
+  [13, 'Significant Valuation Consideration: which colour should its section bar have? (Not given; red was used.)'],
 ];
 
 const doc = new Document({

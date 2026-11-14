@@ -836,6 +836,98 @@
             { "id": "actv_overall_condition", "label": "Overall Condition", "type": "dropdown", "options": ["Reasonable", "Reasonable with repair"] },
             { "id": "et_restrictions", "label": "Restrictions", "type": "text" }
           ]
+        },
+        {
+          "id": "val_significant",
+          "title": "Significant Valuation Consideration",
+          "type": "group",
+          "parentId": null,
+          "order": 2
+        },
+        {
+          "id": "val_sv_roof",
+          "title": "Roof",
+          "type": "screen",
+          "parentId": "val_significant",
+          "order": 1,
+          "fields": [
+            { "id": "label_sv_roof", "label": "Additional concerns", "type": "label" },
+            { "id": "cb_svr_structural", "label": "Poor Structural Condition", "type": "checkbox" },
+            { "id": "cb_svr_covering", "label": "Old/Dilapidated Roof Covering", "type": "checkbox" },
+            { "id": "cb_svr_spray", "label": "Spray Form Insulation", "type": "checkbox" },
+            { "id": "cb_svr_other", "label": "Others", "type": "checkbox" },
+            { "id": "et_svr_other_text", "label": "Others (describe)", "type": "text", "conditionalOn": "cb_svr_other", "conditionalValue": "true", "conditionalMode": "show" }
+          ]
+        },
+        {
+          "id": "val_sv_cladding",
+          "title": "External Wall Cladding",
+          "type": "screen",
+          "parentId": "val_significant",
+          "order": 2,
+          "fields": [
+            { "id": "label_sv_cladding", "label": "Additional concerns", "type": "label" },
+            { "id": "cb_svc_ews1", "label": "No Compliant Fire Inspection Form (EWS1)", "type": "checkbox" },
+            { "id": "cb_svc_remediation", "label": "EWS1 Remediation Required", "type": "checkbox" },
+            { "id": "cb_svc_ongoing", "label": "Ongoing Remediation Work", "type": "checkbox" },
+            { "id": "cb_svc_other", "label": "Others", "type": "checkbox" },
+            { "id": "et_svc_other_text", "label": "Others (describe)", "type": "text", "conditionalOn": "cb_svc_other", "conditionalValue": "true", "conditionalMode": "show" }
+          ]
+        },
+        {
+          "id": "val_sv_movement",
+          "title": "Building Movement",
+          "type": "screen",
+          "parentId": "val_significant",
+          "order": 3,
+          "fields": [
+            { "id": "label_sv_movement", "label": "Additional concerns", "type": "label" },
+            { "id": "cb_svm_structural", "label": "Structural Movement", "type": "checkbox" },
+            { "id": "cb_svm_subsidence", "label": "Subsidence", "type": "checkbox" },
+            { "id": "cb_svm_bowing", "label": "Bowing Walls", "type": "checkbox" },
+            { "id": "cb_svm_tie", "label": "Wall Tie Failure", "type": "checkbox" },
+            { "id": "cb_svm_other", "label": "Others", "type": "checkbox" },
+            { "id": "et_svm_other_text", "label": "Others (describe)", "type": "text", "conditionalOn": "cb_svm_other", "conditionalValue": "true", "conditionalMode": "show" }
+          ]
+        },
+        {
+          "id": "val_sv_damp",
+          "title": "Damp",
+          "type": "screen",
+          "parentId": "val_significant",
+          "order": 4,
+          "fields": [
+            { "id": "label_sv_damp", "label": "Additional concerns", "type": "label" },
+            { "id": "cb_svd_penetrating", "label": "Significant Penetrating Damp", "type": "checkbox" },
+            { "id": "cb_svd_rising", "label": "Rising Damp", "type": "checkbox" },
+            { "id": "cb_svd_other", "label": "Others", "type": "checkbox" },
+            { "id": "et_svd_other_text", "label": "Others (describe)", "type": "text", "conditionalOn": "cb_svd_other", "conditionalValue": "true", "conditionalMode": "show" }
+          ]
+        },
+        {
+          "id": "val_sv_timber",
+          "title": "Timber Defects",
+          "type": "screen",
+          "parentId": "val_significant",
+          "order": 5,
+          "fields": [
+            { "id": "label_sv_timber", "label": "Additional concerns", "type": "label" },
+            { "id": "cb_svt_insects", "label": "Wood-boring Insects", "type": "checkbox" },
+            { "id": "cb_svt_rot", "label": "Extensive Dry Rot", "type": "checkbox" },
+            { "id": "cb_svt_other", "label": "Others", "type": "checkbox" },
+            { "id": "et_svt_other_text", "label": "Others (describe)", "type": "text", "conditionalOn": "cb_svt_other", "conditionalValue": "true", "conditionalMode": "show" }
+          ]
+        },
+        {
+          "id": "val_sv_other",
+          "title": "Other Concerns",
+          "type": "screen",
+          "parentId": "val_significant",
+          "order": 6,
+          "fields": [
+            { "id": "label_sv_other", "label": "Other valuation concerns include", "type": "label" },
+            { "id": "et_sv_other_notes", "label": "Notes", "type": "text" }
+          ]
         }
       ]
     },

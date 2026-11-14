@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "valuation_v2",
-  "screensAudited": 38,
+  "screensAudited": 44,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 485,
+   "distinctEmitted": 505,
    "approvedLegacyBank": 0,
-   "approvedCurrentBankOnly": 453,
+   "approvedCurrentBankOnly": 473,
    "unapproved": 0
   }
  },
@@ -678,6 +678,118 @@
     "I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction.",
     "I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction. You should be prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported.",
     "The following restrictions or matters that may affect the value or use of the property should be noted: sample detail"
+   ]
+  },
+  {
+   "sectionKey": "condition_restrictions",
+   "screenId": "val_sv_roof",
+   "title": "Roof",
+   "dataFieldCount": 5,
+   "permutationCount": 7,
+   "severities": [],
+   "phraseStats": {
+    "total": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 4,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "The following are the additional roof related valuation concerns: Poor Structural Condition.",
+    "The following are the additional roof related valuation concerns: Old/Dilapidated Roof Covering.",
+    "The following are the additional roof related valuation concerns: Spray Form Insulation."
+   ]
+  },
+  {
+   "sectionKey": "condition_restrictions",
+   "screenId": "val_sv_cladding",
+   "title": "External Wall Cladding",
+   "dataFieldCount": 5,
+   "permutationCount": 7,
+   "severities": [],
+   "phraseStats": {
+    "total": 4,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 4,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "The following are the additional external wall cladding related valuation concerns: No Compliant Fire Inspection Form (EWS1).",
+    "The following are the additional external wall cladding related valuation concerns: EWS1 Remediation Required.",
+    "The following are the additional external wall cladding related valuation concerns: Ongoing Remediation Work."
+   ]
+  },
+  {
+   "sectionKey": "condition_restrictions",
+   "screenId": "val_sv_movement",
+   "title": "Building Movement",
+   "dataFieldCount": 6,
+   "permutationCount": 8,
+   "severities": [],
+   "phraseStats": {
+    "total": 5,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 5,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "The following are the additional building movement related valuation concerns: Structural Movement.",
+    "The following are the additional building movement related valuation concerns: Subsidence.",
+    "The following are the additional building movement related valuation concerns: Bowing Walls."
+   ]
+  },
+  {
+   "sectionKey": "condition_restrictions",
+   "screenId": "val_sv_damp",
+   "title": "Damp",
+   "dataFieldCount": 4,
+   "permutationCount": 6,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "The following are the additional damp related valuation concerns: Significant Penetrating Damp.",
+    "The following are the additional damp related valuation concerns: Rising Damp.",
+    "The following are the additional damp related valuation concerns: Significant Penetrating Damp, Rising Damp and sample detail."
+   ]
+  },
+  {
+   "sectionKey": "condition_restrictions",
+   "screenId": "val_sv_timber",
+   "title": "Timber Defects",
+   "dataFieldCount": 4,
+   "permutationCount": 6,
+   "severities": [],
+   "phraseStats": {
+    "total": 3,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 3,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "The following are the additional timber defects related valuation concerns: Wood-boring Insects.",
+    "The following are the additional timber defects related valuation concerns: Extensive Dry Rot.",
+    "The following are the additional timber defects related valuation concerns: Wood-boring Insects, Extensive Dry Rot and sample detail."
+   ]
+  },
+  {
+   "sectionKey": "condition_restrictions",
+   "screenId": "val_sv_other",
+   "title": "Other Concerns",
+   "dataFieldCount": 1,
+   "permutationCount": 3,
+   "severities": [],
+   "phraseStats": {
+    "total": 1,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 1,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "Other valuation concerns include: sample detail."
    ]
   },
   {
