@@ -308,8 +308,8 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
                             },
                           ),
               ),
-              if (phraseText.isNotEmpty || state.userNote.isNotEmpty)
-                Column(
+              // Always shown (client file 6, 13 Nov 2026); empty until something is chosen.
+              Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Collapsible header bar
@@ -369,7 +369,19 @@ class _InspectionScreenPageState extends ConsumerState<InspectionScreenPage> {
                       ),
                     ),
                     // Expandable preview content
-                    if (_previewExpanded)
+                    if (_previewExpanded && phraseText.isEmpty && state.userNote.isEmpty)
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                        color: Theme.of(context).colorScheme.surface,
+                        child: Text(
+                          'Nothing selected yet',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                              ),
+                        ),
+                      )
+                    else if (_previewExpanded)
                       Container(
                         constraints: const BoxConstraints(maxHeight: 280),
                         decoration: BoxDecoration(

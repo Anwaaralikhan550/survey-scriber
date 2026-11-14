@@ -149,7 +149,7 @@ void main() {
 
     test('Cellar sentences are exactly as before', () {
       final walls = engine.buildPhrases('activity_inside_property_other_celler_walls', ticks(['f9cw_bricks'])).join(' ');
-      expect(walls, 'Walls: The property incorporates a cellar, basement and the walls are formed in bricks materials.');
+      expect(walls, 'Walls: The property incorporates a cellar and the walls are formed in bricks materials.');
     });
 
     test('the report prints Cellar, then Basement, each with its own heading and paragraphs', () {

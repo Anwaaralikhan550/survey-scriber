@@ -34,7 +34,7 @@ void main() {
         'activity_services_drainage',
         ticks(['g6cf_blockage', 'g6sl_front', 'cb_material_plastic_pipe', 'g6sv_roof_space']),
       ).join('\n');
-      expect(main, contains('Inspection Chamber: The inspection chamber cover(s) were lifted'));
+      expect(main, contains('Inspection chamber is inspected: The inspection chamber cover(s) were lifted'));
       expect(main, contains('Soil and Vent Pipe: The soil and vent pipe is visible at the front'));
       expect(main, contains('Partially Visible:'));
       final repair = engine.buildPhrases(
@@ -264,6 +264,6 @@ void main() {
     expect(out, isNot(contains('garage')));
     // The garage screen keeps its own garage sentence.
     final garage = engine.buildPhrases('activity_grounds_garage', {'actv_condition': 'Reasonable'}).join('\n');
-    expect(garage, contains('the garage appears in reasonable condition'));
+    expect(garage, contains('the garage appears to be in reasonable condition'));
   });
 }

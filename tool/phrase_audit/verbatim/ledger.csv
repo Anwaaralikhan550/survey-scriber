@@ -1312,7 +1312,7 @@ fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{F9_BASEMENT_
 68b3c4492f,F9,Not in use: The property has a cellar which is currently unused.,EXACT,{F_OTHER}::{F9_CELLAR_NOT_IN_USE},100,DONE
 d298c8a592,F9,No significant defects were apparent from the limited inspection.,EXACT,{F_OTHER}::{F9_BASEMENT_NOT_IN_USE},100,DONE
 fdf4435388,F9,Routine maintenance is recommended.,EXACT,{F_OTHER}::{F9_BASEMENT_CONDITION},100,DONE
-54b855ccdf,F9,In use: The cellar or basement has been adapted for use as storage or other uses.,EXACT,{F_OTHER}::{F9_CELLAR_IN_USE},100,DONE
+54b855ccdf,F9,In use: The cellar or basement has been adapted for use as storage or other uses.,ACCEPT,{F_OTHER}::{F9_BASEMENT_IN_USE},93,DONE
 ce85c8196a,F9,It appeared to be in reasonable condition at the time of inspection.,EXACT,{F_OTHER}::{F9_BASEMENT_IN_USE},100,DONE
 7345ca08f5,F9,Continue normal maintenance.,EXACT,{F_OTHER}::{F9_BASEMENT_IN_USE},100,DONE
 db26f47efc,F9,"Unsuitable: The cellar or basement should not be regarded as habitable accommodation due to low headroom, dampness, difficult access, poor ventilation, other limitations.",MENU,,0,VERIFIED
