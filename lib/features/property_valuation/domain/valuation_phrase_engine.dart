@@ -726,6 +726,37 @@ class ValuationPhraseEngine {
       }
     }
 
+    // Construction (client, 13 Nov 2026): "The property is believed to be constructed using
+    // traditional masonry, solid wall, ... other construction."
+    final built = _checkedLabels(answers, [
+      'cb_c_masonry',
+      'cb_c_solid',
+      'cb_c_cavity',
+      'cb_c_timber',
+      'cb_c_steel',
+      'cb_c_concrete',
+      'cb_c_precast',
+      'cb_c_system',
+    ], {
+      'cb_c_masonry': 'traditional masonry',
+      'cb_c_solid': 'solid wall',
+      'cb_c_cavity': 'cavity wall',
+      'cb_c_timber': 'timber frame',
+      'cb_c_steel': 'steel frame',
+      'cb_c_concrete': 'concrete wall',
+      'cb_c_precast': 'precast concrete panels',
+      'cb_c_system': 'system-built',
+    });
+    if (_isChecked(answers['cb_c_other'])) {
+      final typed = _val(answers, 'et_c_other_text');
+      if (typed.isNotEmpty) built.add(typed.toLowerCase());
+    }
+    if (built.isNotEmpty) {
+      phrases.add(
+          'The property is believed to be constructed using ${_toWords(built)}.');
+    }
+
+    // Surveys saved with the earlier Construction ticks keep their old wording.
     final construction = _checkedLabels(answers, [
       'cb_non_traditional_construction',
       'cb_LPS',
@@ -751,20 +782,43 @@ class ValuationPhraseEngine {
           '$text. Your legal adviser should confirm whether a structural certificate or warranty is available.');
     }
 
+    // Year Built (client, 13 Nov 2026): the year, or the period, or "unknown".
     final age = _val(answers, 'et_age');
-    final extAge = _val(answers, 'et_age_extension');
+    final band = _say(answers, 'actv_year_band');
+    const yearTail = 'This assessment is based on available information, the apparent age and style of construction, '
+        'and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.';
     if (age.isNotEmpty) {
-      var text =
-          'Based on my professional knowledge of the area, construction methods, and architectural styles, I estimate the property was built circa $age';
-      if (extAge.isNotEmpty)
-        text += ', with an extension or alteration added circa $extAge';
-      phrases.add(
-          '$text. This estimate is provided for guidance purposes and should be verified by your legal adviser through title deeds or local authority records where appropriate.');
+      phrases.add('The property is understood to have been built in $age. $yearTail');
+    } else if (_val(answers, 'actv_year_band') == 'Exact construction date unknown') {
+      phrases.add('The exact construction date is unknown. $yearTail');
+    } else if (band.isNotEmpty) {
+      phrases.add('The property is understood to have been built in $band. $yearTail');
+    }
+
+    // Extension (client, 13 Nov 2026): "The property has been extended to provide side, rear, ... accommodation."
+    final extended = _checkedLabels(answers, [
+      'cb_ext_side',
+      'cb_ext_rear',
+      'cb_ext_front',
+      'cb_ext_single',
+      'cb_ext_two',
+      'cb_ext_roof',
+      'cb_ext_loft',
+    ], {
+      'cb_ext_side': 'side',
+      'cb_ext_rear': 'rear',
+      'cb_ext_front': 'front',
+      'cb_ext_single': 'single-storey',
+      'cb_ext_two': 'two-storey',
+      'cb_ext_roof': 'roof',
+      'cb_ext_loft': 'loft',
+    });
+    if (extended.isNotEmpty) {
+      phrases.add('The property has been extended to provide ${_toWords(extended)} accommodation.');
     }
 
     if (_isChecked(answers['cb_is_listed_building'])) {
-      phrases.add(
-          'The property is a listed building. Your legal adviser should advise on the implications of this building status, including restrictions on alterations and maintenance obligations.');
+      phrases.add('The property is understood to be a listed building.');
     }
 
     return phrases;

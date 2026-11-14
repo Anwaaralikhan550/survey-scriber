@@ -64,6 +64,13 @@ class ValuationAnswerValidator {
     _requireOtherDetail(
       errors,
       answers,
+      checkboxId: 'cb_c_other',
+      detailId: 'et_c_other_text',
+      label: 'construction',
+    );
+    _requireOtherDetail(
+      errors,
+      answers,
       checkboxId: 'cb_other_909',
       detailId: 'et_other_777',
       label: 'roof construction',

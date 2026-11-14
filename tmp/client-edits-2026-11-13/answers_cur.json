@@ -1,0 +1,95 @@
+{
+ "general_details": {
+  "actv_status": "Occupied",
+  "actv_finishes": "Fully furnished",
+  "actv_carpeted": "Fully",
+  "actv_vl_reason": "Market Value",
+  "actv_weather": "Dry",
+  "actv_tenure": "Freehold",
+  "actv_type": "Semi-detached house",
+  "cb_non_traditional_construction": "true",
+  "cb_concrete": "true",
+  "et_age": "1968",
+  "actv_bedrooms": "Three"
+ },
+ "no_of_rooms": {
+  "et_liv": "1",
+  "et_kit": "1",
+  "et_bed": "3",
+  "et_bath": "2",
+  "et_wc": "1",
+  "et_ut": "1",
+  "et_con": "1",
+  "et_other": "1",
+  "et_other_name": "Garage"
+ },
+ "accommodation_summary": {
+  "cb_garage": "true",
+  "cb_double": "true",
+  "actv_parking_location": "Onsite",
+  "cb_external_outbuildings": "true",
+  "et_describe": "Summer house",
+  "cb_external_garden": "true"
+ },
+ "location_amenities": {
+  "actv_location": "Town",
+  "cb_local_amenities": "true"
+ },
+ "road": {
+  "cb_adopted": "true",
+  "cb_made": "true"
+ },
+ "val_pitched_roof": {
+  "cb_tile": "true",
+  "actv_condition_pitched_roof": "Satisfactory"
+ },
+ "val_flat_roof": {
+  "cb_felt": "true",
+  "actv_condition_flat_roof": "Satisfactory",
+  "cb_partial_view_fr": "true",
+  "actv_visibility_condition_fr": "Unsatisfactory",
+  "et_visibility_notes_fr": "Limited view"
+ },
+ "val_walls_type": {
+  "cb_cavity_wt": "true",
+  "cb_brick_wt": "true",
+  "actv_condition_walls": "Satisfactory",
+  "actv_building_movement": "None"
+ },
+ "val_external_joinery": {
+  "cb_upvc_ej": "true",
+  "cb_double_glazed": "true",
+  "actv_condition_ext_joinery": "Satisfactory"
+ },
+ "val_gas": {
+  "actv_gas_supply": "Mains",
+  "actv_condition_gas": "Satisfactory"
+ },
+ "val_water": {
+  "actv_water_supply": "Mains",
+  "actv_condition_water": "Satisfactory"
+ },
+ "val_hot_water_central_heating": {
+  "cb_gas_hw": "true",
+  "cb_radiators": "true",
+  "cb_full": "true",
+  "actv_condition_hw_ch": "Satisfactory"
+ },
+ "overall_condition": {
+  "actv_overall_condition": "Good"
+ },
+ "other_matters": {
+  "cb_flooding": "true",
+  "et_notes_flooding": "Low risk"
+ },
+ "energy_performance": {
+  "actv_epc_current_rating": "C",
+  "et_epc_current_score": "72",
+  "actv_epc_potential_rating": "B",
+  "et_epc_potential_score": "84"
+ },
+ "valuation": {
+  "et_purchase_price": "325000",
+  "cb_open_market_value": "true"
+ }
+}

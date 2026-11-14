@@ -2714,6 +2714,475 @@
       "allowedTokens": [
         "FREE_TEXT"
       ]
+    },
+    "VAL_N13_V2_0001": {
+      "screenId": "*",
+      "text": "The property is a detached house providing one bedroom.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0002": {
+      "screenId": "*",
+      "text": "The property is a detached house providing two bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0003": {
+      "screenId": "*",
+      "text": "The property is a detached house providing three bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0004": {
+      "screenId": "*",
+      "text": "The property is a detached house providing four bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0005": {
+      "screenId": "*",
+      "text": "The property is a detached house providing five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0006": {
+      "screenId": "*",
+      "text": "The property is a detached house providing six or more bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0007": {
+      "screenId": "*",
+      "text": "The property is a semi-detached house.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0008": {
+      "screenId": "*",
+      "text": "The property is a semi-detached house providing one bedroom.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0009": {
+      "screenId": "*",
+      "text": "The property is a semi-detached house providing two bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0010": {
+      "screenId": "*",
+      "text": "The property is a semi-detached house providing three bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0011": {
+      "screenId": "*",
+      "text": "The property is a semi-detached house providing four bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0012": {
+      "screenId": "*",
+      "text": "The property is a semi-detached house providing five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0013": {
+      "screenId": "*",
+      "text": "The property is a semi-detached house providing six or more bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0014": {
+      "screenId": "*",
+      "text": "The property is an end-of-terrace house.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0015": {
+      "screenId": "*",
+      "text": "The property is an end-of-terrace house providing one bedroom.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0016": {
+      "screenId": "*",
+      "text": "The property is an end-of-terrace house providing two bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0017": {
+      "screenId": "*",
+      "text": "The property is an end-of-terrace house providing three bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0018": {
+      "screenId": "*",
+      "text": "The property is an end-of-terrace house providing four bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0019": {
+      "screenId": "*",
+      "text": "The property is an end-of-terrace house providing five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0020": {
+      "screenId": "*",
+      "text": "The property is an end-of-terrace house providing six or more bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0021": {
+      "screenId": "*",
+      "text": "The property is a mid-terrace house.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0022": {
+      "screenId": "*",
+      "text": "The property is a mid-terrace house providing one bedroom.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0023": {
+      "screenId": "*",
+      "text": "The property is a mid-terrace house providing two bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0024": {
+      "screenId": "*",
+      "text": "The property is a mid-terrace house providing three bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0025": {
+      "screenId": "*",
+      "text": "The property is a mid-terrace house providing four bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0026": {
+      "screenId": "*",
+      "text": "The property is a mid-terrace house providing five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0027": {
+      "screenId": "*",
+      "text": "The property is a mid-terrace house providing six or more bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0028": {
+      "screenId": "*",
+      "text": "The property is a purpose-built flat.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0029": {
+      "screenId": "*",
+      "text": "The property is a purpose-built flat providing one bedroom.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0030": {
+      "screenId": "*",
+      "text": "The property is a purpose-built flat providing two bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0031": {
+      "screenId": "*",
+      "text": "The property is a purpose-built flat providing three bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0032": {
+      "screenId": "*",
+      "text": "The property is a purpose-built flat providing four bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0033": {
+      "screenId": "*",
+      "text": "The property is a purpose-built flat providing five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0034": {
+      "screenId": "*",
+      "text": "The property is a purpose-built flat providing six or more bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0035": {
+      "screenId": "*",
+      "text": "The property is a converted flat.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0036": {
+      "screenId": "*",
+      "text": "The property is a converted flat providing one bedroom.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0037": {
+      "screenId": "*",
+      "text": "The property is a converted flat providing two bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0038": {
+      "screenId": "*",
+      "text": "The property is a converted flat providing three bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0039": {
+      "screenId": "*",
+      "text": "The property is a converted flat providing four bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0040": {
+      "screenId": "*",
+      "text": "The property is a converted flat providing five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0041": {
+      "screenId": "*",
+      "text": "The property is a converted flat providing six or more bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0042": {
+      "screenId": "*",
+      "text": "The property is a maisonette.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0043": {
+      "screenId": "*",
+      "text": "The property is a maisonette providing one bedroom.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0044": {
+      "screenId": "*",
+      "text": "The property is a maisonette providing two bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0045": {
+      "screenId": "*",
+      "text": "The property is a maisonette providing three bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0046": {
+      "screenId": "*",
+      "text": "The property is a maisonette providing four bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0047": {
+      "screenId": "*",
+      "text": "The property is a maisonette providing five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0048": {
+      "screenId": "*",
+      "text": "The property is a maisonette providing six or more bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0049": {
+      "screenId": "*",
+      "text": "The property is a bungalow providing one bedroom.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0050": {
+      "screenId": "*",
+      "text": "The property is a bungalow providing two bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0051": {
+      "screenId": "*",
+      "text": "The property is a bungalow providing three bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0052": {
+      "screenId": "*",
+      "text": "The property is a bungalow providing four bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0053": {
+      "screenId": "*",
+      "text": "The property is a bungalow providing five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0054": {
+      "screenId": "*",
+      "text": "The property is a bungalow providing six or more bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0055": {
+      "screenId": "*",
+      "text": "The property is a cottage.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0056": {
+      "screenId": "*",
+      "text": "The property is a cottage providing one bedroom.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0057": {
+      "screenId": "*",
+      "text": "The property is a cottage providing two bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0058": {
+      "screenId": "*",
+      "text": "The property is a cottage providing three bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0059": {
+      "screenId": "*",
+      "text": "The property is a cottage providing four bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0060": {
+      "screenId": "*",
+      "text": "The property is a cottage providing five bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0061": {
+      "screenId": "*",
+      "text": "The property is a cottage providing six or more bedrooms.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V2_0062": {
+      "screenId": "*",
+      "text": "The property is a [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0063": {
+      "screenId": "*",
+      "text": "The property is an [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0064": {
+      "screenId": "*",
+      "text": "The property is a [free text] providing one bedroom.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0065": {
+      "screenId": "*",
+      "text": "The property is an [free text] providing one bedroom.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0066": {
+      "screenId": "*",
+      "text": "The property is a [free text] providing two bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0067": {
+      "screenId": "*",
+      "text": "The property is an [free text] providing two bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0068": {
+      "screenId": "*",
+      "text": "The property is a [free text] providing three bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0069": {
+      "screenId": "*",
+      "text": "The property is an [free text] providing three bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0070": {
+      "screenId": "*",
+      "text": "The property is a [free text] providing four bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0071": {
+      "screenId": "*",
+      "text": "The property is an [free text] providing four bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0072": {
+      "screenId": "*",
+      "text": "The property is a [free text] providing five bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0073": {
+      "screenId": "*",
+      "text": "The property is an [free text] providing five bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0074": {
+      "screenId": "*",
+      "text": "The property is a [free text] providing six or more bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V2_0075": {
+      "screenId": "*",
+      "text": "The property is an [free text] providing six or more bedrooms.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V3_0001": {
+      "screenId": "*",
+      "text": "The property is believed to be constructed using [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V456_0001": {
+      "screenId": "*",
+      "text": "The property is understood to have been built in [number]. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.",
+      "allowedTokens": [
+        "NUMBER"
+      ]
+    },
+    "VAL_N13_V456_0002": {
+      "screenId": "*",
+      "text": "The exact construction date is unknown. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V456_0003": {
+      "screenId": "*",
+      "text": "The property is understood to have been built in Pre-1900. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V456_0004": {
+      "screenId": "*",
+      "text": "The property is understood to have been built in 1900–1929. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V456_0005": {
+      "screenId": "*",
+      "text": "The property is understood to have been built in 1930–1949. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V456_0006": {
+      "screenId": "*",
+      "text": "The property is understood to have been built in 1950–1969. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V456_0007": {
+      "screenId": "*",
+      "text": "The property is understood to have been built in 1970–1989. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V456_0008": {
+      "screenId": "*",
+      "text": "The property is understood to have been built in 1990–2009. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V456_0009": {
+      "screenId": "*",
+      "text": "The property is understood to have been built in 2010 onwards. This assessment is based on available information, the apparent age and style of construction, and a visual inspection only. Unless documentary evidence is available, the stated age should be regarded as an approximation.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V456_0010": {
+      "screenId": "*",
+      "text": "The property has been extended to provide [free text] accommodation.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V456_0011": {
+      "screenId": "*",
+      "text": "The property is understood to be a listed building.",
+      "allowedTokens": []
     }
   }
 }
