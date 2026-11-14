@@ -1,3 +1,4 @@
+import '../../../core/utils/number_to_words.dart';
 import '../../property_inspection/domain/models/inspection_models.dart';
 import '../../property_inspection/domain/option_labels.dart';
 import 'valuation_phrase_catalog.dart';
@@ -413,6 +414,20 @@ class ValuationPhraseEngine {
         ];
       }
     }
+    if (screenId == 'overall_condition' &&
+        const {'reasonable', 'reasonable with repair'}.contains(_val(a, 'actv_overall_condition').toLowerCase())) {
+      final phrases = <String>[
+        'I am pleased to advise you that this property is believed to be in reasonable condition '
+            'consistent with the age and type of construction.'
+            '${_val(a, 'actv_overall_condition').toLowerCase() == 'reasonable with repair' ? ' You should be prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported.' : ''}',
+      ];
+      final restrictions = _val(a, 'et_restrictions');
+      if (restrictions.isNotEmpty) {
+        phrases.add(
+            'The following restrictions or matters that may affect the value or use of the property should be noted: $restrictions');
+      }
+      return phrases;
+    }
     return null;
   }
 
@@ -662,10 +677,6 @@ class ValuationPhraseEngine {
       // ── Condition & Restrictions ──
       case 'overall_condition':
         return _overallCondition(answers);
-      case 'other_matters':
-        return _otherMatters(answers);
-      case 'energy_performance':
-        return _energyPerformance(answers);
 
       // ── Valuation & Completion ──
       case 'valuation':
@@ -2105,137 +2116,6 @@ class ValuationPhraseEngine {
     return phrases;
   }
 
-  List<String> _otherMatters(Map<String, String> answers) {
-    final phrases = <String>[];
-
-    final _matters = {
-      'cb_building_regs': (String notes) => notes.isNotEmpty
-          ? 'Your legal adviser should confirm that Building Regulations approval and, where applicable, '
-              'planning permission were obtained for all relevant works carried out to the property. $notes'
-          : 'Your legal adviser should confirm that Building Regulations approval and, where applicable, '
-              'planning permission were obtained for all relevant works carried out to the property.',
-      'cb_guarantees': (String notes) => notes.isNotEmpty
-          ? 'The property benefits from guarantees or warranties. $notes '
-              'Your legal adviser should confirm the precise terms, duration, and transferability of these guarantees.'
-          : 'The property benefits from guarantees or warranties. '
-              'Your legal adviser should confirm the precise terms, duration, and transferability of these guarantees.',
-      'cb_rights_of_way': (String notes) => notes.isNotEmpty
-          ? 'Rights of way or easements may affect the property. $notes '
-              'Your legal adviser should make full enquiries regarding any rights of way, easements, or wayleaves that may exist.'
-          : 'Rights of way or easements may affect the property. '
-              'Your legal adviser should make full enquiries regarding any such rights.',
-      'cb_contamination': (String notes) => notes.isNotEmpty
-          ? 'The property may be affected by land contamination. $notes '
-              'An environmental search and, if appropriate, a Phase 1 desktop environmental assessment is recommended.'
-          : 'The property may be affected by land contamination. '
-              'An environmental search and, if appropriate, a Phase 1 desktop environmental assessment is recommended.',
-      'cb_flooding': (String notes) => notes.isNotEmpty
-          ? 'The property may be at risk of flooding from one or more sources. $notes '
-              'A comprehensive flood risk search is recommended and the availability and cost of flood insurance should be confirmed.'
-          : 'The property may be at risk of flooding from one or more sources. '
-              'A comprehensive flood risk search is recommended and the availability and cost of flood insurance should be confirmed.',
-      'cb_emfs_om': (String notes) => notes.isNotEmpty
-          ? 'The property may be affected by electromagnetic fields from nearby sources such as overhead power lines or substations. $notes'
-          : 'The property may be affected by electromagnetic fields from nearby sources such as overhead power lines or substations.',
-      'cb_mining': (String notes) => notes.isNotEmpty
-          ? 'The property may be affected by historical or current mining activity in the area. $notes '
-              'A mining search is recommended to establish the extent of any mining-related risk.'
-          : 'The property may be affected by historical or current mining activity in the area. '
-              'A mining search is recommended to establish the extent of any mining-related risk.',
-      'cb_flying_freehold': (String notes) => notes.isNotEmpty
-          ? 'The property includes a flying freehold element. $notes '
-              'Your legal adviser should confirm the legal implications, including any indemnity insurance requirements and maintenance obligations.'
-          : 'The property includes a flying freehold element. '
-              'Your legal adviser should confirm the legal implications, including any indemnity insurance requirements and maintenance obligations.',
-      'cb_radon': (String notes) => notes.isNotEmpty
-          ? 'The property is situated in an area identified as being potentially affected by radon gas. $notes '
-              'A radon test is recommended, and appropriate mitigation measures should be considered if elevated levels are detected.'
-          : 'The property is situated in an area identified as being potentially affected by radon gas. '
-              'A radon test is recommended, and appropriate mitigation measures should be considered if elevated levels are detected.',
-    };
-
-    final _notesKeys = {
-      'cb_building_regs': 'et_notes_building_regs',
-      'cb_guarantees': 'et_notes_guarantees',
-      'cb_rights_of_way': 'et_notes_rights',
-      'cb_contamination': 'et_notes_contamination',
-      'cb_flooding': 'et_notes_flooding',
-      'cb_emfs_om': 'et_notes_emfs',
-      'cb_mining': 'et_notes_mining',
-      'cb_flying_freehold': 'et_notes_flying',
-      'cb_radon': 'et_notes_radon',
-    };
-
-    for (final cbKey in _matters.keys) {
-      if (_isChecked(answers[cbKey])) {
-        final notes = _capitalizeFirst(_val(answers, _notesKeys[cbKey]!));
-        phrases.add(_matters[cbKey]!(notes));
-      }
-    }
-
-    return phrases;
-  }
-
-  List<String> _energyPerformance(Map<String, String> answers) {
-    final phrases = <String>[];
-
-    phrases.add(
-        'We have not prepared the Energy Performance Certificate (EPC) for this property. '
-        'Where an EPC has been made available to us, the ratings are presented below for information purposes only. '
-        'We have not verified these ratings and cannot comment on their accuracy or completeness.');
-
-    final currentRating = _say(answers, 'actv_epc_current_rating');
-    final currentScore = _val(answers, 'et_epc_current_score');
-    final potentialRating = _say(answers, 'actv_epc_potential_rating');
-    final potentialScore = _val(answers, 'et_epc_potential_score');
-
-    String rating(String band, String score) {
-      if (band.isEmpty && score.isEmpty) return '';
-      if (band.isEmpty) return 'a score of $score';
-      if (score.isEmpty) return 'Band $band';
-      return 'Band $band (score $score)';
-    }
-
-    final current = rating(currentRating, currentScore);
-    final potential = rating(potentialRating, potentialScore);
-    if (current.isNotEmpty && potential.isNotEmpty) {
-      phrases.add(
-          'The EPC records a current energy efficiency rating of $current and a potential rating of $potential.');
-    } else if (current.isNotEmpty) {
-      phrases.add(
-          'The EPC records a current energy efficiency rating of $current.');
-    } else if (potential.isNotEmpty) {
-      phrases.add(
-          'The EPC records a potential energy efficiency rating of $potential.');
-    }
-
-    final envCurrent = _val(answers, 'et_env_impact_current');
-    final envPotential = _val(answers, 'et_env_impact_potential');
-    if (envCurrent.isNotEmpty || envPotential.isNotEmpty) {
-      if (envCurrent.isNotEmpty && envPotential.isNotEmpty) {
-        phrases.add(
-            'The Environmental Impact rating is recorded as $envCurrent currently and $envPotential potentially.');
-      } else if (envCurrent.isNotEmpty) {
-        phrases.add(
-            'The current Environmental Impact rating is recorded as $envCurrent.');
-      } else {
-        phrases.add(
-            'The potential Environmental Impact rating is recorded as $envPotential.');
-      }
-    }
-
-    final ref = _val(answers, 'et_epc_reference');
-    if (ref.isNotEmpty) {
-      phrases.add(
-          'The EPC certificate reference recorded for the property is $ref.');
-    }
-
-    final notes = _val(answers, 'et_epc_notes');
-    if (notes.isNotEmpty) phrases.add(_capitalizeFirst(notes));
-
-    return phrases;
-  }
-
   // ═══════════════════════════════════════════════════════════════════════
   //  VALUATION & COMPLETION
   // ═══════════════════════════════════════════════════════════════════════
@@ -2245,8 +2125,11 @@ class ValuationPhraseEngine {
 
     final purchasePrice = _val(answers, 'et_purchase_price');
     if (purchasePrice.isNotEmpty) {
+      // Client sentence (13 Nov 2026): amount in figures and words.
+      final amount = formatPriceBracketed(purchasePrice).replaceAll('[', '(').replaceAll(']', ')');
       phrases.add(
-          'I am advised that the agreed purchase price for the property is ${_formatMoney(purchasePrice)}.');
+          'Based on an analysis of recent comparable sales for similar properties in the locality, '
+          'the agreed purchase price of $amount appears reasonable in current market conditions.');
     }
     final estimatedValue = _val(answers, 'et_estimated_value');
     if (estimatedValue.isNotEmpty) {

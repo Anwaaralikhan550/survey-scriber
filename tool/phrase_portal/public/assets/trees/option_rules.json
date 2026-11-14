@@ -728,9 +728,8 @@
   },
   "overall_condition": {
    "actv_overall_condition": [
-    "Good",
-    "Average",
-    "Poor"
+    "Reasonable",
+    "Reasonable with repair"
    ]
   },
   "val_pitched_roof": {

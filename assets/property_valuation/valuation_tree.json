@@ -16,7 +16,7 @@
             { "id": "actv_status", "label": "Status", "type": "dropdown", "options": ["Occupied", "Vacant", "Tenanted"] },
             { "id": "actv_finishes", "label": "Finishes", "type": "dropdown", "options": ["Unfurnished", "Partially furnished", "Fully furnished"] },
             { "id": "actv_carpeted", "label": "Carpeted", "type": "dropdown", "options": ["Fully", "Partially"] },
-            { "id": "actv_vl_reason", "label": "Valuation Reason", "type": "dropdown", "options": ["Market Value", "Shared Ownership Buyback", "Right to Buy", "Help to buy", "Compulsory Order Purchase", "Other"] },
+            { "id": "actv_vl_reason", "label": "Valuation Reason", "type": "dropdown", "options": ["Market Value", "Shared Ownership", "Staircasing", "Help to Buy", "Compulsory Purchase", "Other"] },
             { "id": "actv_vl_reason_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_vl_reason=Other", "conditionalValue": "", "conditionalMode": "show" },
             { "id": "actv_weather", "label": "Weather", "type": "dropdown", "options": ["Dry", "Wet", "Snow"] },
             { "id": "actv_tenure", "label": "Tenure", "type": "dropdown", "options": ["Freehold", "Feuhold", "Leasehold", "Commonhold"] },
@@ -833,54 +833,8 @@
           "parentId": null,
           "order": 1,
           "fields": [
-            { "id": "actv_overall_condition", "label": "Overall Condition", "type": "dropdown", "options": ["Good", "Average", "Poor"] },
+            { "id": "actv_overall_condition", "label": "Overall Condition", "type": "dropdown", "options": ["Reasonable", "Reasonable with repair"] },
             { "id": "et_restrictions", "label": "Restrictions", "type": "text" }
-          ]
-        },
-        {
-          "id": "other_matters",
-          "title": "Other Matters",
-          "type": "screen",
-          "parentId": null,
-          "order": 2,
-          "fields": [
-            { "id": "cb_building_regs", "label": "Building Regulations", "type": "checkbox" },
-            { "id": "et_notes_building_regs", "label": "Notes", "type": "text", "conditionalOn": "cb_building_regs" },
-            { "id": "cb_guarantees", "label": "Guarantees", "type": "checkbox" },
-            { "id": "et_notes_guarantees", "label": "Notes", "type": "text", "conditionalOn": "cb_guarantees" },
-            { "id": "cb_rights_of_way", "label": "Rights of Way", "type": "checkbox" },
-            { "id": "et_notes_rights", "label": "Notes", "type": "text", "conditionalOn": "cb_rights_of_way" },
-            { "id": "cb_contamination", "label": "Contamination", "type": "checkbox" },
-            { "id": "et_notes_contamination", "label": "Notes", "type": "text", "conditionalOn": "cb_contamination" },
-            { "id": "cb_flooding", "label": "Flooding", "type": "checkbox" },
-            { "id": "et_notes_flooding", "label": "Notes", "type": "text", "conditionalOn": "cb_flooding" },
-            { "id": "cb_emfs_om", "label": "EMFs", "type": "checkbox" },
-            { "id": "et_notes_emfs", "label": "Notes", "type": "text", "conditionalOn": "cb_emfs_om" },
-            { "id": "cb_mining", "label": "Mining", "type": "checkbox" },
-            { "id": "et_notes_mining", "label": "Notes", "type": "text", "conditionalOn": "cb_mining" },
-            { "id": "cb_flying_freehold", "label": "Flying Freehold", "type": "checkbox" },
-            { "id": "et_notes_flying", "label": "Notes", "type": "text", "conditionalOn": "cb_flying_freehold" },
-            { "id": "cb_radon", "label": "Radon", "type": "checkbox" },
-            { "id": "et_notes_radon", "label": "Notes", "type": "text", "conditionalOn": "cb_radon" }
-          ]
-        },
-        {
-          "id": "energy_performance",
-          "title": "Energy Performance",
-          "type": "screen",
-          "parentId": null,
-          "order": 3,
-          "fields": [
-            { "id": "label_epc", "label": "Energy Performance Certificate (EPC)", "type": "label" },
-            { "id": "actv_epc_current_rating", "label": "Current EPC Rating", "type": "dropdown", "options": ["A", "B", "C", "D", "E", "F", "G"] },
-            { "id": "et_epc_current_score", "label": "Current EPC Score (1-100)", "type": "number" },
-            { "id": "actv_epc_potential_rating", "label": "Potential EPC Rating", "type": "dropdown", "options": ["A", "B", "C", "D", "E", "F", "G"] },
-            { "id": "et_epc_potential_score", "label": "Potential EPC Score (1-100)", "type": "number" },
-            { "id": "label_env_impact", "label": "Environmental Impact", "type": "label" },
-            { "id": "et_env_impact_current", "label": "Current Environmental Impact (1-100)", "type": "number" },
-            { "id": "et_env_impact_potential", "label": "Potential Environmental Impact (1-100)", "type": "number" },
-            { "id": "et_epc_reference", "label": "EPC Certificate Reference", "type": "text" },
-            { "id": "et_epc_notes", "label": "Notes", "type": "text" }
           ]
         }
       ]

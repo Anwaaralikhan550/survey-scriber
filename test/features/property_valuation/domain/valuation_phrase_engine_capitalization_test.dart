@@ -28,17 +28,6 @@ void main() {
       expect(phrases.first, startsWith('The secondary roof is covered with'));
     });
 
-    test('other-matters note is capitalized when appended mid-sentence', () {
-      final phrases = engine.buildPhrases('other_matters', {
-        'cb_building_regs': 'true',
-        'et_notes_building_regs': 'permit was granted in 2019',
-      });
-
-      expect(phrases, hasLength(1));
-      expect(phrases.first, contains('. Permit was granted in 2019'));
-      expect(phrases.first, isNot(contains('. permit was granted')));
-    });
-
     test('condition notes are capitalized as their own sentence', () {
       final phrases = engine.buildPhrases('val_pitched_roof', {
         'cb_tile': 'true',

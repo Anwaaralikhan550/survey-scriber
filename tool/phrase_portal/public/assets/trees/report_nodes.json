@@ -386,11 +386,9 @@
  ],
  "valuation": [
   "accommodation_summary",
-  "energy_performance",
   "general_details",
   "general_remarks",
   "no_of_rooms",
-  "other_matters",
   "overall_condition",
   "scan_floor_plan",
   "val_bathroom",

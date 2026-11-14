@@ -590,4 +590,51 @@ void main() {
           startsWith('The hot water and central heating system is fuelled by gas.'));
     });
   });
+
+  group('V15 Overall Condition, Other Matters / EPC removed, Valuation, Purpose', () {
+    test('Overall Condition: the two client options and sentences', () {
+      expect(screens['overall_condition']!['actv_overall_condition']!['options'], ['Reasonable', 'Reasonable with repair']);
+      expect(say('overall_condition', {'actv_overall_condition': 'Reasonable'}),
+          'I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction.');
+      expect(say('overall_condition', {'actv_overall_condition': 'Reasonable with repair'}),
+          'I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction. '
+          'You should be prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported.');
+      expect(say('overall_condition', {'actv_overall_condition': 'Reasonable', 'et_restrictions': 'no access to the loft'}),
+          endsWith('should be noted: no access to the loft'));
+    });
+    test('Overall Condition: surveys saved with Good / Average / Poor keep their wording', () {
+      expect(say('overall_condition', {'actv_overall_condition': 'Good'}), contains('considered good'));
+      expect(say('overall_condition', {'actv_overall_condition': 'Poor'}), contains('considered unsatisfactory'));
+    });
+    test('Other Matters and Energy Performance are gone', () {
+      expect(screens.keys, isNot(contains('other_matters')));
+      expect(screens.keys, isNot(contains('energy_performance')));
+      expect(say('other_matters', {'cb_flooding': 'true', 'et_notes_flooding': 'low'}), isEmpty);
+      expect(say('energy_performance', {'actv_epc_current_rating': 'C'}), isEmpty);
+      expect(
+          ValuationAnswerValidator.validateSurvey({'energy_performance': {'et_epc_current_score': '999'}}, liveScreens: screens.keys.toSet()),
+          isEmpty);
+    });
+    test('Valuation: the client sentence with the amount in figures and words', () {
+      expect(say('valuation', {'et_purchase_price': '325000'}),
+          'Based on an analysis of recent comparable sales for similar properties in the locality, the agreed purchase price of '
+          '£325,000.00 (Three Hundred and Twenty Five Thousand Pounds) appears reasonable in current market conditions.');
+      expect(say('valuation', {'et_purchase_price': '£1,250,500'}),
+          contains('£1,250,500.00 (One Million Two Hundred and Fifty Thousand Five Hundred Pounds)'));
+      expect(say('valuation', {}), isEmpty);
+    });
+    test('Valuation: the other fields stay and still print', () {
+      expect(screens['valuation']!.keys, containsAll(['et_estimated_value', 'cb_open_market_value', 'et_value_of_share', 'et_share', 'et_after_works_value', 'et_retention', 'cb_suitable_security']));
+      expect(say('valuation', {'et_retention': '5000'}), contains('A retention of £5,000 is recommended'));
+    });
+    test('Purpose of Valuation: the client list, Staircasing added', () {
+      final f = screens['general_details']!['actv_vl_reason']!;
+      expect(f['options'], ['Market Value', 'Shared Ownership', 'Staircasing', 'Help to Buy', 'Compulsory Purchase', 'Other']);
+      for (final o in (f['options'] as List).take(5)) {
+        expect(say('general_details', {'actv_vl_reason': o as String}), 'The purpose of this valuation is for $o.', reason: o);
+      }
+      expect(say('general_details', {'actv_vl_reason': 'Other', 'actv_vl_reason_other_text': 'probate'}), 'The purpose of this valuation is for probate.');
+      expect(say('general_details', {'actv_vl_reason': 'Right to Buy'}), 'The purpose of this valuation is for Right to Buy.');
+    });
+  });
 }

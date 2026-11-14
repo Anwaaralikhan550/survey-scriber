@@ -3998,6 +3998,28 @@
       "allowedTokens": [
         "FREE_TEXT"
       ]
+    },
+    "VAL_N13_V15_0001": {
+      "screenId": "*",
+      "text": "I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V15_0002": {
+      "screenId": "*",
+      "text": "I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction. You should be prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V15_0003": {
+      "screenId": "*",
+      "text": "Based on an analysis of recent comparable sales for similar properties in the locality, the agreed purchase price of [free text] appears reasonable in current market conditions.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V15_0004": {
+      "screenId": "*",
+      "text": "The purpose of this valuation is for Staircasing.",
+      "allowedTokens": []
     }
   }
 }

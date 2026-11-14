@@ -13,7 +13,7 @@ base = {
     'val_gas': {'actv_gas_supply': ['Mains', 'None']},
     'val_water': {'actv_water_supply': ['Mains', 'Private']},
     'val_damp_meter': {'actv_damp_meter': ['Damp Found', 'No damp']},
-    'overall_condition': {'actv_overall_condition': ['Good', 'Average', 'Poor']},
+    'overall_condition': {'actv_overall_condition': ['Reasonable', 'Reasonable with repair']},
 }
 for i, sc in ids.items(): base.setdefault(sc, {})[i] = ['Good', 'Reasonable', 'Fair', 'Very poor']
 q = lambda l: '[' + ', '.join("'%s'" % x for x in l) + ']'
@@ -26,7 +26,7 @@ open(p, 'w', encoding='utf8', newline='').write(s[:i] + body + "};" + s[j:])
 p = 'E:/survey-scriber/test/features/property_inspection/option_labels_report_test.dart'
 s = open(p, encoding='utf8', newline='').read(); nl = '\r\n' if '\r\n' in s else '\n'
 s = re.sub(r"  '[a-z_]+/actv_condition_[a-z_]+/(Good|Reasonable|Fair|Very poor)',\r?\n", '', s)
-a = "  'overall_condition/actv_overall_condition/Average'," + nl
+a = "  'overall_condition/actv_overall_condition/Reasonable with repair'," + nl
 assert a in s
 s = s.replace(a, a + ''.join("  '%s/%s/%s',%s" % (sc, i, o, nl) for i, sc in ids.items() for o in ['Good', 'Reasonable', 'Fair', 'Very poor']))
 open(p, 'w', encoding='utf8', newline='').write(s)

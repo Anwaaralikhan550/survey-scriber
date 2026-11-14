@@ -103,7 +103,7 @@ test('both real trees: every dropdown is listed', () => {
   const inspection = load('assets/property_inspection/inspection_tree.json');
   const valuation = load('assets/property_valuation/valuation_tree.json');
   assert.ok(TL.dropdowns(inspection).length >= 196);
-  assert.strictEqual(TL.dropdowns(valuation).length, 52);
+  assert.strictEqual(TL.dropdowns(valuation).length, 50);
   assert.deepStrictEqual(TL.problems(inspection), []);
   assert.deepStrictEqual(TL.problems(valuation), []);
 });

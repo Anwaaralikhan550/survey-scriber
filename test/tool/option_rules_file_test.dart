@@ -17,7 +17,7 @@ const _valuation = <String, Map<String, List<String>>>{
   'val_gas': {'actv_gas_supply': ['Mains', 'None'], 'actv_condition_gas': ['Good', 'Reasonable', 'Fair', 'Very poor']},
   'val_water': {'actv_water_supply': ['Mains', 'Private'], 'actv_condition_water': ['Good', 'Reasonable', 'Fair', 'Very poor']},
   'val_damp_meter': {'actv_damp_meter': ['Damp Found', 'No damp'], 'actv_condition_damp': ['Good', 'Reasonable', 'Fair', 'Very poor']},
-  'overall_condition': {'actv_overall_condition': ['Good', 'Average', 'Poor']},
+  'overall_condition': {'actv_overall_condition': ['Reasonable', 'Reasonable with repair']},
   'val_pitched_roof': {'actv_condition_pitched_roof': ['Good', 'Reasonable', 'Fair', 'Very poor']},
   'val_flat_roof': {'actv_condition_flat_roof': ['Good', 'Reasonable', 'Fair', 'Very poor']},
   'val_other_roof': {'actv_condition_other_roof': ['Good', 'Reasonable', 'Fair', 'Very poor']},
