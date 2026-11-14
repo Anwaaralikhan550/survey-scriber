@@ -25,7 +25,7 @@ const _valuation = <String, Map<String, List<String>>>{
   'val_rainwater_goods': {'actv_condition_rainwater': ['Good', 'Reasonable', 'Fair', 'Very poor']},
   'val_chimney_stacks': {'actv_condition_chimney': ['Good', 'Reasonable', 'Fair', 'Very poor']},
   'val_walls_type': {'actv_condition_walls': ['Good', 'Reasonable', 'Fair', 'Very poor']},
-  'val_floor_ext': {'actv_condition_floor_ext': ['Good', 'Reasonable', 'Fair', 'Very poor'], 'actv_condition_upper_floor': ['Good', 'Reasonable', 'Fair', 'Very poor']},
+  'val_floor_ext': {'actv_condition_floor_ext': ['Good', 'Reasonable', 'Fair', 'Very poor']},
   'val_dpc': {'actv_condition_dpc': ['Good', 'Reasonable', 'Fair', 'Very poor']},
   'val_decorations_ext': {'actv_condition_dec_ext': ['Good', 'Reasonable', 'Fair', 'Very poor']},
   'val_garage': {'actv_condition_garage': ['Good', 'Reasonable', 'Fair', 'Very poor']},

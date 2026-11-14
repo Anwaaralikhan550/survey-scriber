@@ -3763,6 +3763,114 @@
       "screenId": "*",
       "text": "The upper floors have been assessed as very poor.",
       "allowedTokens": []
+    },
+    "VAL_N13_V11_0001": {
+      "screenId": "*",
+      "text": "The roof covering is formed in [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V11_0002": {
+      "screenId": "*",
+      "text": "The rainwater goods comprise [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V11_0003": {
+      "screenId": "*",
+      "text": "The property is installed with chimney stack(s) of [free text] construction.",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V11_0004": {
+      "screenId": "*",
+      "text": "The property is installed with chimney stack(s) of [free text] construction and the chimney stack(s) appear [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V11_0005": {
+      "screenId": "*",
+      "text": "The chimney stack(s) appear [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V11_0006": {
+      "screenId": "*",
+      "text": "External walls: The external walls are constructed of [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V11_0007": {
+      "screenId": "*",
+      "text": "The windows are formed of [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V11_0008": {
+      "screenId": "*",
+      "text": "Floors are of [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V11_0009": {
+      "screenId": "*",
+      "text": "The property incorporates [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V11_0010": {
+      "screenId": "*",
+      "text": "Where visible, the walls appear in good condition, consistent with their age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V11_0011": {
+      "screenId": "*",
+      "text": "Where visible, the walls appear in reasonable condition, consistent with their age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V11_0012": {
+      "screenId": "*",
+      "text": "Where visible, the walls appear in fair condition, consistent with their age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V11_0013": {
+      "screenId": "*",
+      "text": "Where visible, the walls appear in poor condition, consistent with their age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V11_0014": {
+      "screenId": "*",
+      "text": "Where visible, the walls appear in very poor condition, consistent with their age and type of construction.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V11c1_0001": {
+      "screenId": "*",
+      "text": "The floors are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V11c1_0002": {
+      "screenId": "*",
+      "text": "The floors have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V11c1_0003": {
+      "screenId": "*",
+      "text": "The floors have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V11g_0001": {
+      "screenId": "*",
+      "text": "The floors are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
     }
   }
 }

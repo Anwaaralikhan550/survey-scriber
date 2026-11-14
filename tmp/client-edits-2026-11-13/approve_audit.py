@@ -4,7 +4,7 @@ sys.path.insert(0,'E:/survey-scriber/tmp/client-edits-2026-11-13')
 from add_templates import add
 d=json.load(open('E:/survey-scriber/tool/phrase_audit/output/valuation_audit.json',encoding='utf8'))
 sc=d['screens']; it=sc.items() if isinstance(sc,dict) else enumerate(sc)
-pat=re.compile(r'(are|is) considered (good|reasonable) |(have|has) been assessed as (fair|very poor)\.$')
+pat=re.compile(r'(are|is) considered (good|reasonable)|(have|has) been assessed as (fair|very poor)\.$')
 tot=set()
 for k,s in it:
     for x in s.get('unapprovedSamples',[]) or []: tot.add(x)

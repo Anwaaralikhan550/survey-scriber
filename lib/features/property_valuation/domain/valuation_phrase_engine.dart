@@ -61,7 +61,195 @@ class ValuationPhraseEngine {
         .toList(growable: false);
   }
 
+  /// Client list sentences (13 Nov 2026) come first; surveys saved with the earlier ticks keep
+  /// printing theirs through [_buildPhrasesLegacy], which is empty for the new ticks.
   List<String> _buildPhrasesRaw(String screenId, Map<String, String> answers) {
+    final override = _clientOverride(screenId, answers);
+    if (override != null) return override;
+    return [
+      ..._clientLead(screenId, answers),
+      ..._buildPhrasesLegacy(screenId, answers),
+    ];
+  }
+
+  static bool _hasAny(Map<String, String> a, Iterable<String> ids) =>
+      ids.any((id) => _val(a, id).isNotEmpty && _val(a, id).toLowerCase() != 'false');
+
+  /// "a, b and c" from the ticked items of [labels] (client order) plus the typed Other words.
+  static String _clientList(
+    Map<String, String> a,
+    Map<String, String> labels, {
+    String? otherCb,
+    String? otherText,
+  }) {
+    final items = _checkedLabels(a, labels.keys.toList(), labels);
+    if (otherCb != null && otherText != null) _addOther(items, a, otherCb, otherText);
+    return _toWords(items);
+  }
+
+  static const _roofIds = {
+    'cb_r_clay': 'clay tiles',
+    'cb_r_concrete': 'concrete tiles',
+    'cb_r_natural': 'natural slate',
+    'cb_r_artificial': 'artificial slate',
+    'cb_r_fibre': 'fibre cement slates',
+    'cb_r_metal': 'metal sheeting',
+    'cb_r_felt': 'mineral felt',
+    'cb_r_rubber': 'rubber membrane',
+    'cb_r_single': 'single-ply membrane',
+  };
+  static const _rainwaterIds = {
+    'cb_rw_pvc': 'PVC',
+    'cb_rw_cast': 'cast iron',
+    'cb_rw_alum': 'aluminium',
+    'cb_rw_steel': 'steel',
+    'cb_rw_concrete': 'concrete',
+    'cb_rw_asbestos': 'asbestos cement',
+    'cb_rw_gutters': 'gutters',
+    'cb_rw_down': 'downpipes',
+    'cb_rw_hoppers': 'hoppers',
+    'cb_rw_fittings': 'associated fittings',
+  };
+  static const _chimneyIds = {
+    'cb_ch_brick': 'brick',
+    'cb_ch_stone': 'stone',
+    'cb_ch_rendered': 'rendered masonry',
+  };
+  static const _chimneyAppear = {
+    'cb_ch_original': 'original',
+    'cb_ch_replaced': 'replaced',
+    'cb_ch_rebuilt': 'rebuilt',
+  };
+  static const _wallIds = {
+    'cb_w_solid': 'solid brick',
+    'cb_w_cavity': 'cavity brick',
+    'cb_w_stone': 'stone',
+    'cb_w_timber': 'timber frame',
+    'cb_w_steel': 'steel frame',
+    'cb_w_rendered': 'rendered masonry',
+  };
+  static const _windowPrefix = {
+    'cb_wn_replacement': 'replacement',
+    'cb_wn_original': 'original',
+    'cb_wn_old': 'old',
+  };
+  static const _windowIds = {
+    'cb_wn_pvcu': 'PVCu',
+    'cb_wn_timber': 'timber',
+    'cb_wn_old_sash': 'old style timber sash',
+    'cb_wn_pvc_sash': 'modern PVC sash',
+    'cb_wn_timber_sash': 'modern timber sash',
+    'cb_wn_aluminium': 'aluminium',
+    'cb_wn_composite': 'composite',
+  };
+  static const _floorIds = {
+    'cb_f_concrete': 'solid concrete',
+    'cb_f_timber': 'suspended timber',
+    'cb_f_beam': 'beam and block',
+  };
+  static const _garageIds = {
+    'cb_g_block': 'a garage in a block of garages',
+    'cb_g_attached': 'an attached garage',
+    'cb_g_detached': 'a detached garage',
+    'cb_g_integral': 'an integral garage',
+    'cb_g_croft': 'an under croft garage',
+  };
+  static const _outbuildingIds = {
+    'cb_o_shed': 'a large shed',
+    'cb_o_workshop': 'a workshop',
+    'cb_o_annex': 'an annex',
+    'cb_o_summer': 'a summer house',
+    'cb_o_office': 'an office',
+    'cb_o_studio': 'a studio',
+  };
+
+  /// The client's own sentences for the Outside Property elements.
+  List<String> _clientLead(String screenId, Map<String, String> a) {
+    switch (screenId) {
+      case 'val_pitched_roof':
+        final l = _clientList(a, _roofIds, otherCb: 'cb_r_other', otherText: 'et_r_other_text');
+        return l.isEmpty ? const [] : ['The roof covering is formed in $l.'];
+      case 'val_rainwater_goods':
+        final l = _clientList(a, _rainwaterIds, otherCb: 'cb_rw_other', otherText: 'et_rw_other_text');
+        return l.isEmpty ? const [] : ['The rainwater goods comprise $l.'];
+      case 'val_chimney_stacks':
+        final built = _clientList(a, _chimneyIds, otherCb: 'cb_ch_other', otherText: 'et_ch_other_text');
+        final appear = _clientList(a, _chimneyAppear);
+        if (built.isNotEmpty) {
+          return [
+            'The property is installed with chimney stack(s) of $built construction'
+                '${appear.isEmpty ? '' : ' and the chimney stack(s) appear $appear'}.'
+          ];
+        }
+        return appear.isEmpty ? const [] : ['The chimney stack(s) appear $appear.'];
+      case 'val_walls_type':
+        final l = _clientList(a, _wallIds, otherCb: 'cb_w_other', otherText: 'et_w_other_text');
+        return l.isEmpty ? const [] : ['External walls: The external walls are constructed of $l.'];
+      case 'val_external_joinery':
+        final prefix = _clientList(a, _windowPrefix);
+        final rest = _clientList(a, _windowIds, otherCb: 'cb_wn_other', otherText: 'et_wn_other_text');
+        final words = [if (prefix.isNotEmpty) prefix.replaceAll(' and ', ' '), if (rest.isNotEmpty) rest].join(' ');
+        return words.isEmpty ? const [] : ['The windows are formed of $words.'];
+      case 'val_garage':
+        final items = _checkedLabels(a, _garageIds.keys.toList(), _garageIds);
+        if (_isChecked(a['cb_g_other']) && _val(a, 'et_g_other_text').isNotEmpty) {
+          final t = _val(a, 'et_g_other_text').toLowerCase();
+          items.add('${_article(t)} $t garage(s)');
+        }
+        return items.isEmpty ? const [] : ['The property incorporates ${_toWords(items)}.'];
+      case 'val_outbuildings':
+        final items = _checkedLabels(a, _outbuildingIds.keys.toList(), _outbuildingIds);
+        if (_isChecked(a['cb_o_other']) && _val(a, 'et_o_other_text').isNotEmpty) {
+          final t = _val(a, 'et_o_other_text').toLowerCase();
+          items.add('${_article(t)} $t');
+        }
+        return items.isEmpty ? const [] : ['The property incorporates ${_toWords(items)}.'];
+      default:
+        return const [];
+    }
+  }
+
+  /// Screens whose whole output changes with the client's wording (null = use the usual path).
+  List<String>? _clientOverride(String screenId, Map<String, String> a) {
+    const conditions = {'good', 'reasonable', 'fair', 'poor', 'very poor'};
+    if (screenId == 'val_decorations_ext' &&
+        !_hasAny(a, const ['cb_lead_de', 'cb_paint_de', 'cb_stain_de', 'cb_other_895'])) {
+      final phrases = <String>[];
+      final c = _val(a, 'actv_condition_dec_ext');
+      if (conditions.contains(c.toLowerCase())) {
+        phrases.add('Where visible, the walls appear in ${_say(a, 'actv_condition_dec_ext').toLowerCase()} condition, '
+            'consistent with their age and type of construction.');
+        final lc = c.toLowerCase();
+        if (lc == 'fair' || lc == 'poor' || lc == 'very poor') {
+          final n = _val(a, 'et_notes_dec_ext');
+          if (n.isNotEmpty) phrases.add(_capitalizeFirst(n));
+        }
+      }
+      _addRemarks(phrases, a, 'et_general_remarks_dec_ext');
+      return phrases;
+    }
+    if (screenId == 'val_floor_ext' &&
+        !_hasAny(a, const [
+          'cb_solid_gf',
+          'cb_timber_gf',
+          'cb_other_327',
+          'cb_solid_uf',
+          'cb_timber_uf',
+          'cb_other_327_u',
+          'actv_condition_upper_floor',
+          'et_general_remarks_upper_floor',
+        ])) {
+      final phrases = <String>[];
+      final l = _clientList(a, _floorIds, otherCb: 'cb_f_other', otherText: 'et_f_other_text');
+      if (l.isNotEmpty) phrases.add('Floors are of $l.');
+      _addConditionNotes(phrases, a, 'actv_condition_floor_ext', 'et_notes_floor_ext', component: 'floors');
+      _addRemarks(phrases, a, 'et_general_remarks_floor_ext');
+      return phrases;
+    }
+    return null;
+  }
+
+  List<String> _buildPhrasesLegacy(String screenId, Map<String, String> answers) {
     switch (screenId) {
       // ── Valuation Details ──
       case 'general_details':

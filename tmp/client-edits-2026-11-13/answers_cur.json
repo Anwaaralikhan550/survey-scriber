@@ -34,7 +34,7 @@
   "cb_external_garden": "true"
  },
  "val_pitched_roof": {
-  "cb_tile": "true",
+  "cb_r_natural": "true",
   "actv_condition_pitched_roof": "Good"
  },
  "val_flat_roof": {
@@ -45,14 +45,15 @@
   "et_visibility_notes_fr": "Limited view"
  },
  "val_walls_type": {
-  "cb_cavity_wt": "true",
-  "cb_brick_wt": "true",
+  "cb_w_cavity": "true",
+  "cb_w_solid": "true",
   "actv_condition_walls": "Reasonable",
-  "actv_building_movement": "None"
+  "actv_building_movement": "None",
+  "et_wall_thickness": "300"
  },
  "val_external_joinery": {
-  "cb_upvc_ej": "true",
-  "cb_double_glazed": "true",
+  "cb_wn_replacement": "true",
+  "cb_wn_pvcu": "true",
   "actv_condition_ext_joinery": "Fair"
  },
  "val_gas": {
@@ -85,5 +86,32 @@
  "valuation": {
   "et_purchase_price": "325000",
   "cb_open_market_value": "true"
+ },
+ "val_rainwater_goods": {
+  "cb_rw_pvc": "true",
+  "cb_rw_gutters": "true",
+  "cb_rw_down": "true",
+  "actv_condition_rainwater": "Reasonable"
+ },
+ "val_chimney_stacks": {
+  "cb_ch_brick": "true",
+  "cb_ch_original": "true",
+  "actv_condition_chimney": "Good"
+ },
+ "val_decorations_ext": {
+  "actv_condition_dec_ext": "Good"
+ },
+ "val_floor_ext": {
+  "cb_f_concrete": "true",
+  "cb_f_timber": "true",
+  "actv_condition_floor_ext": "Good"
+ },
+ "val_garage": {
+  "cb_g_detached": "true",
+  "actv_condition_garage": "Good"
+ },
+ "val_outbuildings": {
+  "cb_o_summer": "true",
+  "actv_condition_outbuildings": "Reasonable"
  }
 }

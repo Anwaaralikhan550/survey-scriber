@@ -249,12 +249,17 @@ void main() {
   });
 
   group('V10 Standardised Condition: good, reasonable, fair, poor, very poor', () {
-    final condIds = (jsonDecode(File('tmp/client-edits-2026-11-13/condition_ids.json').readAsStringSync()) as List).cast<String>();
+    const five = ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'];
+    final condIds = [
+      for (final e in screens.entries)
+        for (final f in e.value.entries)
+          if (f.value['label'] == 'Condition' && f.value['type'] == 'dropdown') f.key,
+    ];
     String screenOf(String field) => screens.entries.firstWhere((e) => e.value.containsKey(field)).key;
-    test('all 29 Condition dropdowns carry exactly the client list', () {
-      expect(condIds, hasLength(29));
+    test('all 28 Condition dropdowns carry exactly the client list (Floor became one block in V11)', () {
+      expect(condIds, hasLength(28));
       for (final id in condIds) {
-        expect(screens[screenOf(id)]![id]!['options'], ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'], reason: id);
+        expect(screens[screenOf(id)]![id]!['options'], five, reason: id);
       }
     });
     test('the Notes box of each shows for Fair, Poor and Very poor', () {
@@ -267,6 +272,7 @@ void main() {
     test('every screen prints a sentence for every option', () {
       for (final id in condIds) {
         final screen = screenOf(id);
+        if (screen == 'val_decorations_ext') continue; // own client sentence, tested in V11
         for (final entry in {
           'Good': 'considered good',
           'Reasonable': 'considered reasonable',
@@ -292,6 +298,121 @@ void main() {
       expect(say('val_chimney_stacks', {'actv_condition_chimney': 'Satisfactory'}), contains('considered satisfactory'));
       expect(say('val_chimney_stacks', {'actv_condition_chimney': 'Unsatisfactory', 'et_notes_chimney': 'loose'}),
           allOf(contains('considered unsatisfactory and remedial work is necessary'), contains('Loose')));
+    });
+  });
+
+  group('V11 Outside Property: the client sentences', () {
+    List<String> labelsOf(String screen, String from, String to) {
+      final f = screens[screen]!;
+      final ids = f.keys.toList();
+      return [for (final id in ids.sublist(ids.indexOf(from), ids.indexOf(to) + 1)) f[id]!['label'] as String];
+    }
+
+    test('Roof: the client list in his order, one sentence per tick', () {
+      expect(labelsOf('val_pitched_roof', 'cb_r_clay', 'cb_r_other'), [
+        'clay tiles', 'concrete tiles', 'natural slate', 'artificial slate', 'fibre cement slates',
+        'metal sheeting', 'mineral felt', 'rubber membrane', 'single-ply membrane', 'other',
+      ]);
+      const words = {
+        'cb_r_clay': 'clay tiles', 'cb_r_concrete': 'concrete tiles', 'cb_r_natural': 'natural slate',
+        'cb_r_artificial': 'artificial slate', 'cb_r_fibre': 'fibre cement slates', 'cb_r_metal': 'metal sheeting',
+        'cb_r_felt': 'mineral felt', 'cb_r_rubber': 'rubber membrane', 'cb_r_single': 'single-ply membrane',
+      };
+      words.forEach((id, w) => expect(say('val_pitched_roof', {id: 'true'}), 'The roof covering is formed in $w.', reason: id));
+      expect(say('val_pitched_roof', {'cb_r_clay': 'true', 'cb_r_metal': 'true', 'cb_r_other': 'true', 'et_r_other_text': 'Copper'}),
+          'The roof covering is formed in clay tiles, metal sheeting and copper.');
+      expect(say('val_pitched_roof', {'cb_r_other': 'true'}), isEmpty);
+      expect(say('val_pitched_roof', {'cb_r_clay': 'true', 'actv_condition_pitched_roof': 'Reasonable'}),
+          startsWith('The roof covering is formed in clay tiles. The pitched roof covering is considered reasonable'));
+    });
+    test('Roof: surveys saved with the earlier ticks keep their sentence', () {
+      expect(say('val_pitched_roof', {'cb_tile': 'true'}), startsWith('The main roof is of pitched construction, covered with tile materials'));
+    });
+
+    test('Rainwater Goods', () {
+      expect(labelsOf('val_rainwater_goods', 'cb_rw_pvc', 'cb_rw_fittings'), [
+        'PVC', 'cast iron', 'aluminium', 'steel', 'concrete', 'asbestos cement', 'other', 'Other (describe)',
+        'gutters', 'downpipes', 'hoppers', 'associated fittings',
+      ]);
+      expect(say('val_rainwater_goods', {'cb_rw_pvc': 'true'}), 'The rainwater goods comprise PVC.');
+      expect(say('val_rainwater_goods', {'cb_rw_cast': 'true', 'cb_rw_gutters': 'true', 'cb_rw_down': 'true'}),
+          'The rainwater goods comprise cast iron, gutters and downpipes.');
+      expect(say('val_rainwater_goods', {'cb_rw_asbestos': 'true', 'cb_rw_fittings': 'true'}),
+          'The rainwater goods comprise asbestos cement and associated fittings.');
+      expect(say('val_rainwater_goods', {'cb_rw_other': 'true', 'et_rw_other_text': 'Lead', 'cb_rw_hoppers': 'true'}),
+          'The rainwater goods comprise hoppers and lead.');
+    });
+
+    test('Chimney', () {
+      expect(say('val_chimney_stacks', {'cb_ch_brick': 'true'}), 'The property is installed with chimney stack(s) of brick construction.');
+      expect(say('val_chimney_stacks', {'cb_ch_stone': 'true', 'cb_ch_rendered': 'true', 'cb_ch_original': 'true'}),
+          'The property is installed with chimney stack(s) of stone and rendered masonry construction and the chimney stack(s) appear original.');
+      expect(say('val_chimney_stacks', {'cb_ch_other': 'true', 'et_ch_other_text': 'Concrete block', 'cb_ch_rebuilt': 'true'}),
+          'The property is installed with chimney stack(s) of concrete block construction and the chimney stack(s) appear rebuilt.');
+      expect(say('val_chimney_stacks', {'cb_ch_replaced': 'true'}), 'The chimney stack(s) appear replaced.');
+    });
+
+    test('Main Walls', () {
+      expect(labelsOf('val_walls_type', 'cb_w_solid', 'cb_w_other'),
+          ['solid brick', 'cavity brick', 'stone', 'timber frame', 'steel frame', 'rendered masonry', 'other construction']);
+      expect(say('val_walls_type', {'cb_w_cavity': 'true'}), 'External walls: The external walls are constructed of cavity brick.');
+      expect(say('val_walls_type', {'cb_w_solid': 'true', 'cb_w_rendered': 'true', 'cb_w_other': 'true', 'et_w_other_text': 'cob'}),
+          'External walls: The external walls are constructed of solid brick, rendered masonry and cob.');
+    });
+
+    test('Windows', () {
+      expect(labelsOf('val_external_joinery', 'cb_wn_replacement', 'cb_wn_other'), [
+        'replacement', 'original', 'old', 'PVCu', 'timber', 'old style timber sash', 'modern PVC sash',
+        'modern timber sash', 'aluminium', 'composite', 'other framed units',
+      ]);
+      expect(say('val_external_joinery', {'cb_wn_pvcu': 'true'}), 'The windows are formed of PVCu.');
+      expect(say('val_external_joinery', {'cb_wn_replacement': 'true', 'cb_wn_pvcu': 'true', 'cb_wn_timber': 'true'}),
+          'The windows are formed of replacement PVCu and timber.');
+      expect(say('val_external_joinery', {'cb_wn_composite': 'true', 'cb_wn_other': 'true', 'et_wn_other_text': 'steel'}),
+          'The windows are formed of composite and steel.');
+    });
+
+    test('External Decorations/finishes', () {
+      for (final c in ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor']) {
+        expect(say('val_decorations_ext', {'actv_condition_dec_ext': c}),
+            'Where visible, the walls appear in ${c.toLowerCase()} condition, consistent with their age and type of construction.');
+      }
+      expect(say('val_decorations_ext', {'actv_condition_dec_ext': 'Poor', 'et_notes_dec_ext': 'flaking'}), endsWith('Flaking'));
+      expect(screens['val_decorations_ext']!.keys, isNot(contains('cb_paint_de')));
+      expect(say('val_decorations_ext', {'cb_paint_de': 'true', 'actv_condition_dec_ext': 'Satisfactory'}),
+          startsWith('The external decorations comprise paint finishes.'));
+    });
+
+    test('Floor', () {
+      expect(labelsOf('val_floor_ext', 'cb_f_concrete', 'cb_f_other'), ['solid concrete', 'suspended timber', 'beam and block', 'other construction']);
+      expect(screens['val_floor_ext']!.keys, isNot(contains('actv_condition_upper_floor')));
+      expect(say('val_floor_ext', {'cb_f_concrete': 'true'}), 'Floors are of solid concrete.');
+      expect(say('val_floor_ext', {'cb_f_timber': 'true', 'cb_f_beam': 'true', 'actv_condition_floor_ext': 'Good'}),
+          startsWith('Floors are of suspended timber and beam and block. The floors are considered good'));
+      expect(say('val_floor_ext', {'cb_f_other': 'true', 'et_f_other_text': 'Stone flags'}), 'Floors are of stone flags.');
+      expect(say('val_floor_ext', {'cb_solid_gf': 'true'}), startsWith('The ground floor is of solid concrete construction.'));
+    });
+
+    test('Garage', () {
+      expect(labelsOf('val_garage', 'cb_g_block', 'cb_g_other'),
+          ['a garage in a block of garages', 'attached', 'detached', 'integral', 'under croft', 'other garage(s)']);
+      expect(say('val_garage', {'cb_g_block': 'true'}), 'The property incorporates a garage in a block of garages.');
+      expect(say('val_garage', {'cb_g_attached': 'true'}), 'The property incorporates an attached garage.');
+      expect(say('val_garage', {'cb_g_detached': 'true'}), 'The property incorporates a detached garage.');
+      expect(say('val_garage', {'cb_g_integral': 'true'}), 'The property incorporates an integral garage.');
+      expect(say('val_garage', {'cb_g_croft': 'true'}), 'The property incorporates an under croft garage.');
+      expect(say('val_garage', {'cb_g_other': 'true', 'et_g_other_text': 'Linked'}), 'The property incorporates a linked garage(s).');
+      expect(say('val_garage', {'actv_garage_type': 'Detached', 'actv_number_of_garage': 'Double'}),
+          startsWith('The property includes a double detached garage'));
+    });
+
+    test('Outbuilding', () {
+      expect(labelsOf('val_outbuildings', 'cb_o_shed', 'cb_o_other'), ['large shed', 'workshop', 'annex', 'summer house', 'office', 'studio', 'other']);
+      expect(say('val_outbuildings', {'cb_o_shed': 'true'}), 'The property incorporates a large shed.');
+      expect(say('val_outbuildings', {'cb_o_annex': 'true', 'cb_o_office': 'true', 'cb_o_studio': 'true'}),
+          'The property incorporates an annex, an office and a studio.');
+      expect(say('val_outbuildings', {'cb_o_other': 'true', 'et_o_other_text': 'Gazebo'}), 'The property incorporates a gazebo.');
+      expect(say('val_outbuildings', {'et_outbuilding_describe': 'Summer house'}), startsWith('The property includes outbuildings comprising Summer house.'));
     });
   });
 }

@@ -795,12 +795,6 @@
     "Reasonable",
     "Fair",
     "Very poor"
-   ],
-   "actv_condition_upper_floor": [
-    "Good",
-    "Reasonable",
-    "Fair",
-    "Very poor"
    ]
   },
   "val_dpc": {
