@@ -9,13 +9,6 @@ import 'package:survey_scriber/features/property_valuation/domain/valuation_phra
 void main() {
   final engine = ValuationPhraseEngine();
 
-  test('C2 Road: Adopted + Made prints the existing road sentence', () {
-    expect(
-      engine.buildPhrases('road', {'cb_adopted': 'true', 'cb_made': 'true'}),
-      ['The property fronts onto an adopted highway maintained at public expense and a made-up road.'],
-    );
-  });
-
   test('C6 Building movement None does not claim movement was noted', () {
     final none = engine.buildPhrases('val_walls_type', {'actv_building_movement': 'None'}).join(' ');
     expect(none, contains('A careful examination was made of all accessible wall surfaces'));
@@ -99,23 +92,6 @@ void main() {
       expect(
         engine.buildPhrases('general_details', {'actv_vl_reason': 'Other'}).join(' '),
         isNot(contains('The purpose of this valuation')),
-      );
-    });
-
-    test('Location and warranty use the typed words', () {
-      expect(
-        engine.buildPhrases('location_amenities', {
-          'actv_location': 'Other',
-          'actv_location_other_text': 'Coastal',
-        }).join(' '),
-        contains('within an established coastal area'),
-      );
-      expect(
-        engine.buildPhrases('new_build_property', {
-          'actv_warranty': 'Other',
-          'actv_warranty_other_text': 'Premier Guarantee',
-        }).join(' '),
-        contains('benefits from a Premier Guarantee structural warranty'),
       );
     });
 

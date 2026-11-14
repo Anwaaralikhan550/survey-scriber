@@ -24,22 +24,6 @@ class ValuationAnswerValidator {
       );
     }
 
-    // Two separate questions: who maintains the road, and its surface.
-    // "Adopted" + "Made" is a normal answer (client file 3, 10 Nov 2026).
-    if (screenId == 'road' &&
-        _countChecked(answers, const ['cb_adopted', 'cb_private']) > 1) {
-      errors.add('Select either Adopted or Private for the road.');
-    }
-    if (screenId == 'road' &&
-        _countChecked(answers, const [
-              'cb_made',
-              'cb_partly_made',
-              'cb_unmade',
-            ]) >
-            1) {
-      errors.add('Select one road surface: Made, Partly Made or Unmade.');
-    }
-
     if (screenId == 'general_details') {
       _validateYear(errors, answers, 'et_age', 'Year Built');
       _validateYear(errors, answers, 'et_age_extension', 'Age of Extension');
@@ -87,12 +71,17 @@ class ValuationAnswerValidator {
 
   /// All screens' errors. With [titles] (screen id -> screen title) each
   /// error names the screen to open, e.g. "Road: Select one road surface...".
+  ///
+  /// With [liveScreens] only screens still in the tree are checked: answers saved on a screen the
+  /// client later removed (New Build, Location & Amenities, Road ...) are ignored and cannot block export.
   static List<String> validateSurvey(
     Map<String, Map<String, String>> answersByScreen, {
     Map<String, String> titles = const {},
+    Set<String>? liveScreens,
   }) {
     final errors = <String>[];
     for (final entry in answersByScreen.entries) {
+      if (liveScreens != null && !liveScreens.contains(entry.key)) continue;
       final title = titles[entry.key];
       for (final error in validateScreen(entry.key, entry.value)) {
         errors.add(title == null || title.isEmpty ? error : '$title: $error');

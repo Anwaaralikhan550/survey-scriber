@@ -58,7 +58,6 @@ bool _holds(List<String> phrases, String option) {
 const _picksAWrittenSentence = {
   'activity_outside_property_conservatory_porch_repairs/actv_cp/Conservatory',
   'activity_outside_property_conservatory_porch_repairs/actv_cp/Porch',
-  'new_build_property/actv_work_stage/Complete',
   'val_sub_floor_vents/actv_sub_floor_vents/Adequate',
   'val_gas/actv_gas_supply/Mains',
   'val_water/actv_water_supply/Mains',

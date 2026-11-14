@@ -98,19 +98,6 @@ void main() {
       expect(joined, isNot(contains('weather conditions were snow.')));
       expect(joined, isNot(contains('purpose of this valuation is for Other')));
     });
-
-    test('generic other warranty is not emitted without a real warranty name',
-        () {
-      final phrases = engine.buildPhrases('new_build_property', {
-        'actv_work_stage': 'Complete',
-        'actv_warranty': 'Other',
-      });
-
-      final joined = phrases.join('\n');
-      expect(joined, isNot(contains('Other structural warranty')));
-      expect(joined, contains('construction works were complete'));
-      expect(joined, isNot(contains('complete stage')));
-    });
   });
 
   test('phrase catalog does not approve arbitrary prose through free text', () {

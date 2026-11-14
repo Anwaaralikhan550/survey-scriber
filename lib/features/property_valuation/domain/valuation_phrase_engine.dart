@@ -66,18 +66,12 @@ class ValuationPhraseEngine {
       // ── Valuation Details ──
       case 'general_details':
         return _generalDetails(answers);
-      case 'new_build_property':
-        return _newBuildProperty(answers);
 
       // ── Property Assessment ──
       case 'no_of_rooms':
         return _noOfRooms(answers);
       case 'accommodation_summary':
         return _accommodationSummary(answers);
-      case 'location_amenities':
-        return _locationAmenities(answers);
-      case 'road':
-        return _road(answers);
 
       // ── Property Inspection – Outside ──
       case 'val_pitched_roof':
@@ -824,56 +818,6 @@ class ValuationPhraseEngine {
     return phrases;
   }
 
-  List<String> _newBuildProperty(Map<String, String> answers) {
-    final phrases = <String>[];
-    final builder = _val(answers, 'et_builder_name');
-    if (builder.isNotEmpty) {
-      phrases.add(
-          'The property is a new build development constructed by $builder.');
-    }
-
-    final stage = _val(answers, 'actv_work_stage');
-    if (stage.isNotEmpty) {
-      final normalizedStage = stage.toLowerCase();
-      if (normalizedStage == 'complete') {
-        phrases.add(
-            'At the time of my inspection, the construction works were complete. '
-            'The valuation is provided on the basis that the completed works have been carried out to a satisfactory standard '
-            'in accordance with the approved plans and specifications.');
-      } else if (OptionLabels.named(answers, 'actv_work_stage')) {
-        phrases.add(
-            'At the time of my inspection, the construction works were at the ${_say(answers, 'actv_work_stage').toLowerCase()} stage. '
-            'The valuation is provided on the basis that the property will be completed to a satisfactory standard '
-            'in accordance with the approved plans and specifications.');
-      }
-    }
-
-    final warranty = _val(answers, 'actv_warranty');
-    if (warranty.isNotEmpty && OptionLabels.named(answers, 'actv_warranty')) {
-      phrases.add(
-        'The property benefits from ${_article(_say(answers, 'actv_warranty'))} ${_say(answers, 'actv_warranty')} '
-        'structural warranty. Your legal adviser should confirm the '
-        'precise terms, duration, and transferability of this warranty '
-        'cover.',
-      );
-    }
-
-    final incentives = _val(answers, 'et_incentives');
-    if (incentives.isNotEmpty) {
-      phrases.add(
-          'I am advised that the following incentives are being offered by the developer: $incentives. '
-          'These incentives have been taken into consideration in arriving at my valuation figure, '
-          'in accordance with RICS guidance on the treatment of incentives.');
-    }
-
-    final date = _val(answers, 'in_date');
-    if (date.isNotEmpty) {
-      phrases.add('The inspection was carried out on $date.');
-    }
-
-    return phrases;
-  }
-
   // ═══════════════════════════════════════════════════════════════════════
   //  PROPERTY ASSESSMENT
   // ═══════════════════════════════════════════════════════════════════════
@@ -937,13 +881,6 @@ class ValuationPhraseEngine {
           'Off-street parking is provided by way of ${_toWords(parking)}.');
     }
 
-    final location = _val(answers, 'actv_parking_location');
-    if (location.toLowerCase() == 'onsite') {
-      phrases.add('The parking provision is located on site.');
-    } else if (location.toLowerCase() == 'offsite') {
-      phrases.add('The parking provision is located off site.');
-    }
-
     if (_isChecked(answers['cb_external_outbuildings'])) {
       final desc = _val(answers, 'et_describe');
       if (desc.isNotEmpty) {
@@ -961,82 +898,6 @@ class ValuationPhraseEngine {
           'The gardens were inspected as part of this survey.');
     }
 
-    return phrases;
-  }
-
-  List<String> _locationAmenities(Map<String, String> answers) {
-    final phrases = <String>[];
-
-    final location = _val(answers, 'actv_location');
-    if (location.isNotEmpty && OptionLabels.named(answers, 'actv_location')) {
-      phrases.add(
-          'The property is situated within an established ${_say(answers, 'actv_location').toLowerCase()} area, '
-          'which is considered to be a desirable location for properties of this type.');
-    }
-
-    final closeTo = _checkedLabels(answers, [
-      'cb_local_amenities',
-      'cb_conservation_area',
-    ], {
-      'cb_local_amenities':
-          'local amenities including schools, shops, and transport links',
-      'cb_conservation_area': 'a designated conservation area',
-    });
-    _addOther(closeTo, answers, 'cb_other_close_to', 'et_other_close_to');
-    if (closeTo.isNotEmpty) {
-      phrases.add(
-          'The property is conveniently located close to ${_toWords(closeTo)}.');
-    }
-
-    final env = _checkedLabels(answers, [
-      'cb_pollution',
-      'cb_emfs',
-      'cb_adverse_neighbouring',
-    ], {
-      'cb_pollution': 'potential pollution sources',
-      'cb_emfs': 'electromagnetic field sources',
-      'cb_adverse_neighbouring': 'adverse neighbouring uses',
-    });
-    _addOther(env, answers, 'cb_other_env', 'et_other_env');
-    if (env.isNotEmpty) {
-      phrases.add('I noted ${_toWords(env)} in the vicinity of the property, '
-          'which may have an adverse effect on the value, saleability, or desirability of the property. '
-          'Further enquiries with the relevant local authority are recommended.');
-    }
-
-    if (_isChecked(answers['cb_adverse_neighbouring'])) {
-      final desc = _val(answers, 'et_adverse_describe');
-      if (desc.isNotEmpty) phrases.add(desc);
-    }
-
-    return phrases;
-  }
-
-  List<String> _road(Map<String, String> answers) {
-    final phrases = <String>[];
-    final types = _checkedLabels(answers, [
-      'cb_adopted',
-      'cb_private',
-      'cb_made',
-      'cb_partly_made',
-      'cb_unmade',
-    ], {
-      'cb_adopted': 'an adopted highway maintained at public expense',
-      'cb_private': 'a private road',
-      'cb_made': 'a made-up road',
-      'cb_partly_made': 'a partly made-up road',
-      'cb_unmade': 'an unmade road',
-    });
-    if (types.isNotEmpty) {
-      phrases.add('The property fronts onto ${_toWords(types)}.');
-    }
-    final cost = _val(answers, 'et_cost_of_making_up');
-    if (cost.isNotEmpty) {
-      phrases.add(
-          'The estimated cost of making up the road to an adoptable standard is $cost. '
-          'Your legal adviser should confirm any potential liability for road-making charges and '
-          'whether any Section 38 agreement is in place with the highway authority.');
-    }
     return phrases;
   }
 

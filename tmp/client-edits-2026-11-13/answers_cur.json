@@ -7,10 +7,13 @@
   "actv_weather": "Dry",
   "actv_tenure": "Freehold",
   "actv_type": "Semi-detached house",
-  "cb_non_traditional_construction": "true",
-  "cb_concrete": "true",
   "et_age": "1968",
-  "actv_bedrooms": "Three"
+  "actv_bedrooms": "Three",
+  "cb_c_masonry": "true",
+  "cb_c_cavity": "true",
+  "cb_ext_rear": "true",
+  "cb_ext_single": "true",
+  "cb_is_listed_building": "true"
  },
  "no_of_rooms": {
   "et_liv": "1",
@@ -26,18 +29,9 @@
  "accommodation_summary": {
   "cb_garage": "true",
   "cb_double": "true",
-  "actv_parking_location": "Onsite",
   "cb_external_outbuildings": "true",
   "et_describe": "Summer house",
   "cb_external_garden": "true"
- },
- "location_amenities": {
-  "actv_location": "Town",
-  "cb_local_amenities": "true"
- },
- "road": {
-  "cb_adopted": "true",
-  "cb_made": "true"
  },
  "val_pitched_roof": {
   "cb_tile": "true",

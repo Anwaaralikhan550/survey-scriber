@@ -15,43 +15,6 @@ void main() {
       expect(errors, isNotEmpty);
     });
 
-    test('blocks more than one mutually exclusive road type', () {
-      final errors = ValuationAnswerValidator.validateScreen(
-        'road',
-        const {
-          'cb_adopted': 'true',
-          'cb_private': 'true',
-        },
-      );
-
-      expect(errors.single, contains('Adopted or Private'));
-    });
-
-    test('accepts one owner plus one surface (Adopted + Made)', () {
-      expect(
-        ValuationAnswerValidator.validateScreen(
-          'road',
-          const {'cb_adopted': 'true', 'cb_made': 'true'},
-        ),
-        isEmpty,
-      );
-      expect(
-        ValuationAnswerValidator.validateScreen(
-          'road',
-          const {'cb_private': 'true', 'cb_unmade': 'true'},
-        ),
-        isEmpty,
-      );
-    });
-
-    test('blocks two road surfaces', () {
-      final errors = ValuationAnswerValidator.validateScreen(
-        'road',
-        const {'cb_made': 'true', 'cb_unmade': 'true'},
-      );
-      expect(errors.single, contains('one road surface'));
-    });
-
     test('requires a detail when Other parking is selected', () {
       final errors = ValuationAnswerValidator.validateScreen(
         'accommodation_summary',

@@ -13,7 +13,6 @@ const _file = 'tool/phrase_portal/public/assets/trees/option_rules.json';
 
 /// The valuation report's sentences are written in its engine, not in rules.
 const _valuation = <String, Map<String, List<String>>>{
-  'new_build_property': {'actv_work_stage': ['Complete']},
   'val_sub_floor_vents': {'actv_sub_floor_vents': ['Adequate', 'Inadequate']},
   'val_gas': {'actv_gas_supply': ['Mains', 'None']},
   'val_water': {'actv_water_supply': ['Mains', 'Private']},

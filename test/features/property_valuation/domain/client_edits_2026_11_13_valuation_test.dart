@@ -185,4 +185,66 @@ void main() {
       expect(say('general_details', {}), isEmpty);
     });
   });
+
+  group('V7 New Build Property removed', () {
+    test('the screen is gone from the tree', () {
+      expect(screens.keys, isNot(contains('new_build_property')));
+    });
+    test('answers saved on it do not block the export', () {
+      final all = {
+        'new_build_property': {'actv_warranty': 'Other'},
+        'general_details': {'actv_type': 'Bungalow'},
+      };
+      final live = screens.keys.toSet();
+      expect(ValuationAnswerValidator.validateSurvey(all, liveScreens: live), isEmpty);
+    });
+    test('the engine prints nothing for the removed screen', () {
+      expect(say('new_build_property', {'et_builder_name': 'Acme', 'actv_work_stage': 'Complete'}), isEmpty);
+    });
+  });
+
+  group('V8 Accommodation like Inspection, Parking Locations removed', () {
+    test('one Accommodation screen whose fields and labels equal the Inspection floor screen', () {
+      final insp = jsonDecode(File('assets/property_inspection/inspection_tree.json').readAsStringSync()) as Map<String, dynamic>;
+      final ground = [
+        for (final sec in insp['sections'] as List)
+          for (final n in (sec as Map)['nodes'] as List)
+            if ((n as Map)['id'] == 'activity_no_of_rooms__ground') n,
+      ].single as Map;
+      final inspLabels = [for (final f in ground['fields'] as List) (f as Map)['label']];
+      final valLabels = [for (final f in screens['no_of_rooms']!.values) f['label']];
+      expect(valLabels, inspLabels);
+      expect([for (final f in screens['no_of_rooms']!.values) f['type']],
+          [for (final f in ground['fields'] as List) (f as Map)['type']]);
+      final node = [
+        for (final sec in tree['sections'] as List)
+          for (final n in (sec as Map)['nodes'] as List)
+            if ((n as Map)['id'] == 'no_of_rooms') n,
+      ].single as Map;
+      expect(node['title'], 'Accommodation');
+      expect(screens.keys.where((k) => k == 'no_of_rooms').length, 1);
+    });
+    test('Parking Location is gone and prints nothing', () {
+      expect(screens['accommodation_summary']!.keys, isNot(contains('actv_parking_location')));
+      expect(say('accommodation_summary', {'cb_garage': 'true', 'actv_parking_location': 'Onsite'}),
+          isNot(contains('parking provision')));
+      expect(say('accommodation_summary', {'cb_garage': 'true'}), 'Off-street parking is provided by way of a garage.');
+    });
+  });
+
+  group('V9 Location & Amenities and Road removed', () {
+    test('both screens are gone from the tree', () {
+      expect(screens.keys, isNot(contains('location_amenities')));
+      expect(screens.keys, isNot(contains('road')));
+    });
+    test('answers saved on them print nothing and do not block the export', () {
+      expect(say('location_amenities', {'actv_location': 'Town', 'cb_local_amenities': 'true'}), isEmpty);
+      expect(say('road', {'cb_adopted': 'true', 'cb_made': 'true'}), isEmpty);
+      final all = {
+        'road': {'cb_made': 'true', 'cb_unmade': 'true'},
+        'location_amenities': {'actv_location': 'Other'},
+      };
+      expect(ValuationAnswerValidator.validateSurvey(all, liveScreens: screens.keys.toSet()), isEmpty);
+    });
+  });
 }

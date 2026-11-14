@@ -59,22 +59,6 @@
             { "id": "et_age_extension", "label": "Age of Extension (Date of Extension)", "type": "number" },
             { "id": "cb_is_listed_building", "label": "Listed Building", "type": "checkbox" }
           ]
-        },
-        {
-          "id": "new_build_property",
-          "title": "New Build Property",
-          "type": "screen",
-          "parentId": null,
-          "order": 2,
-          "fields": [
-            { "id": "et_builder_name", "label": "Builder Name", "type": "text" },
-            { "id": "actv_work_stage", "label": "Work Stage", "type": "dropdown", "options": ["Complete", "Under construction", "Re-inspection", "Other"] },
-            { "id": "actv_work_stage_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_work_stage=Other", "conditionalValue": "", "conditionalMode": "show" },
-            { "id": "actv_warranty", "label": "Warranty", "type": "dropdown", "options": ["NHBC", "Zurich", "Arch Cert", "Other"] },
-            { "id": "actv_warranty_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_warranty=Other", "conditionalValue": "", "conditionalMode": "show" },
-            { "id": "et_incentives", "label": "Incentives", "type": "text" },
-            { "id": "in_date", "label": "Date", "type": "text" }
-          ]
         }
       ]
     },
@@ -85,21 +69,20 @@
       "nodes": [
         {
           "id": "no_of_rooms",
-          "title": "Number of Rooms",
+          "title": "Accommodation",
           "type": "screen",
           "parentId": null,
           "order": 1,
           "fields": [
-            { "id": "label_no_of_rooms", "label": "Number of Rooms", "type": "label" },
             { "id": "et_liv", "label": "Living Rooms", "type": "number" },
-            { "id": "et_kit", "label": "Kitchen", "type": "number" },
             { "id": "et_bed", "label": "Bed Rooms", "type": "number" },
-            { "id": "et_bath", "label": "Bathroom", "type": "number" },
-            { "id": "et_wc", "label": "Toilet/WC", "type": "number" },
+            { "id": "et_bath", "label": "Bath or Shower", "type": "number" },
+            { "id": "et_wc", "label": "Separate Toilet", "type": "number" },
+            { "id": "et_kit", "label": "Kitchen", "type": "number" },
             { "id": "et_ut", "label": "Utility Room", "type": "number" },
             { "id": "et_con", "label": "Conservatory", "type": "number" },
-            { "id": "et_other_name", "label": "Name(s) of Other Rooms", "type": "text" },
-            { "id": "et_other", "label": "Number of Other Rooms", "type": "number" }
+            { "id": "et_other_name", "label": "Name of other", "type": "text" },
+            { "id": "et_other", "label": "No.of room for other", "type": "number" }
           ]
         },
         {
@@ -118,50 +101,10 @@
             { "id": "cb_none", "label": "None", "type": "checkbox" },
             { "id": "cb_other_720", "label": "Other", "type": "checkbox" },
             { "id": "et_other_792", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_720" },
-            { "id": "actv_parking_location", "label": "Parking Location", "type": "dropdown", "options": ["Onsite", "Offsite"] },
             { "id": "label_external_features", "label": "External Features", "type": "label" },
             { "id": "cb_external_outbuildings", "label": "Outbuildings", "type": "checkbox" },
             { "id": "et_describe", "label": "Describe", "type": "text", "conditionalOn": "cb_external_outbuildings" },
             { "id": "cb_external_garden", "label": "Garden", "type": "checkbox" }
-          ]
-        },
-        {
-          "id": "location_amenities",
-          "title": "Location & Amenities",
-          "type": "screen",
-          "parentId": null,
-          "order": 3,
-          "fields": [
-            { "id": "actv_location", "label": "Location", "type": "dropdown", "options": ["City", "Town", "Village", "Suburb", "Residential", "Commercial", "Rural", "Other"] },
-            { "id": "actv_location_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_location=Other", "conditionalValue": "", "conditionalMode": "show" },
-            { "id": "label_property_close_to", "label": "Property Close To", "type": "label" },
-            { "id": "cb_local_amenities", "label": "Local Amenities", "type": "checkbox" },
-            { "id": "cb_conservation_area", "label": "Conservation Area", "type": "checkbox" },
-            { "id": "cb_other_close_to", "label": "Other", "type": "checkbox" },
-            { "id": "et_other_close_to", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_close_to" },
-            { "id": "label_environment", "label": "Environment", "type": "label" },
-            { "id": "cb_pollution", "label": "Pollution", "type": "checkbox" },
-            { "id": "cb_emfs", "label": "EMFs", "type": "checkbox" },
-            { "id": "cb_adverse_neighbouring", "label": "Adverse Neighbouring", "type": "checkbox" },
-            { "id": "et_adverse_describe", "label": "Describe Adverse", "type": "text", "conditionalOn": "cb_adverse_neighbouring" },
-            { "id": "cb_other_env", "label": "Other", "type": "checkbox" },
-            { "id": "et_other_env", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_env" }
-          ]
-        },
-        {
-          "id": "road",
-          "title": "Road",
-          "type": "screen",
-          "parentId": null,
-          "order": 4,
-          "fields": [
-            { "id": "label_road_type", "label": "Road Type", "type": "label" },
-            { "id": "cb_adopted", "label": "Adopted", "type": "checkbox" },
-            { "id": "cb_private", "label": "Private", "type": "checkbox" },
-            { "id": "cb_made", "label": "Made", "type": "checkbox" },
-            { "id": "cb_partly_made", "label": "Partly Made", "type": "checkbox" },
-            { "id": "cb_unmade", "label": "Unmade", "type": "checkbox" },
-            { "id": "et_cost_of_making_up", "label": "Cost of Making Up", "type": "text" }
           ]
         }
       ]

@@ -70,10 +70,10 @@ void main() {
   test('validation errors name the screen', () {
     final errors = ValuationAnswerValidator.validateSurvey(
       {
-        'road': {'cb_made': 'true', 'cb_unmade': 'true'},
+        'general_details': {'cb_c_other': 'true'},
       },
-      titles: {'road': 'Road'},
+      titles: {'general_details': 'General Details'},
     );
-    expect(errors.single, startsWith('Road: Select one road surface'));
+    expect(errors.single, startsWith('General Details: Provide a description when Other construction is selected.'));
   });
 }

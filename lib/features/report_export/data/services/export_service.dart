@@ -99,6 +99,10 @@ class ExportService {
     final rawData = await dataService.loadValuationData(surveyId);
     final validationErrors = ValuationAnswerValidator.validateSurvey(
       rawData.allAnswers,
+      liveScreens: {
+        for (final section in rawData.tree.sections)
+          for (final node in section.nodes) node.id,
+      },
       titles: {
         for (final section in rawData.tree.sections)
           for (final node in section.nodes) node.id: node.title,

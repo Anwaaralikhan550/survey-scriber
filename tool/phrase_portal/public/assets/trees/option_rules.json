@@ -678,11 +678,6 @@
   }
  },
  "valuation": {
-  "new_build_property": {
-   "actv_work_stage": [
-    "Complete"
-   ]
-  },
   "val_sub_floor_vents": {
    "actv_sub_floor_vents": [
     "Adequate",
