@@ -637,4 +637,45 @@ void main() {
       expect(say('general_details', {'actv_vl_reason': 'Right to Buy'}), 'The purpose of this valuation is for Right to Buy.');
     });
   });
+
+  group('V16 Every Other opens a text box (strict)', () {
+    final all = <String, List<Map<String, dynamic>>>{
+      for (final s in tree['sections'] as List)
+        for (final n in (s as Map)['nodes'] as List)
+          (n as Map)['id'] as String: [for (final f in (n['fields'] as List? ?? const [])) (f as Map).cast<String, dynamic>()],
+    };
+    test('every dropdown with an Other option has <id>_other_text shown exactly when Other is chosen', () {
+      var seen = 0;
+      all.forEach((screen, fields) {
+        for (final f in fields) {
+          final opts = (f['options'] as List?)?.cast<String>() ?? const [];
+          if (f['type'] != 'dropdown' || !opts.any((o) => o.toLowerCase().startsWith('other'))) continue;
+          seen++;
+          final box = fields.where((x) => x['id'] == '${f['id']}_other_text').toList();
+          expect(box, hasLength(1), reason: '$screen ${f['id']}');
+          expect(box.single['type'], 'text', reason: '$screen ${f['id']}');
+          expect(box.single['conditionalOn'], '${f['id']}=Other', reason: '$screen ${f['id']}');
+        }
+      });
+      expect(seen, greaterThanOrEqualTo(2)); // Property Type and Valuation Reason
+    });
+    test('every Other tick has its own text box that shows when the tick is on', () {
+      var seen = 0;
+      all.forEach((screen, fields) {
+        for (final f in fields) {
+          if (f['type'] != 'checkbox' || !(f['label'] as String).toLowerCase().startsWith('other')) continue;
+          seen++;
+          final box = fields.where((x) => x['type'] == 'text' && x['conditionalOn'] == f['id']).toList();
+          expect(box, hasLength(1), reason: '$screen ${f['id']}');
+        }
+      });
+      expect(seen, greaterThan(30));
+    });
+    test('the typed words print for both dropdowns and nothing prints without them', () {
+      expect(say('general_details', {'actv_type': 'Other', 'actv_type_other_text': 'chalet'}), 'The property is a chalet.');
+      expect(say('general_details', {'actv_vl_reason': 'Other', 'actv_vl_reason_other_text': 'probate'}), 'The purpose of this valuation is for probate.');
+      expect(say('general_details', {'actv_type': 'Other'}), isEmpty);
+      expect(say('general_details', {'actv_vl_reason': 'Other'}), isEmpty);
+    });
+  });
 }
