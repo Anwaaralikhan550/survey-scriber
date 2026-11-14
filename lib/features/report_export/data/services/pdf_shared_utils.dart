@@ -235,6 +235,7 @@ class PdfSharedUtils {
     'property_assessment': PdfColor(0.08, 0.40, 0.75), // Blue
     'property_inspection': PdfColor(0.18, 0.49, 0.20), // Green
     'condition_restrictions': PdfColor(0.83, 0.18, 0.18), // Red
+    'S': PdfColor(0.83, 0.18, 0.18), // red: the concerns block (colour not given by the client)
     'valuation_completion': PdfColor(0.141, 0.337, 0.416), // 24566A, as the client sample
   };
 

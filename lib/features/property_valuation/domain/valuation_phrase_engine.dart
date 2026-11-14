@@ -428,6 +428,70 @@ class ValuationPhraseEngine {
       }
       return phrases;
     }
+    // Significant Valuation Consideration (client file, 13 Nov 2026, second version).
+    const significant = {
+      'val_sv_roof': (
+        'The following are the additional roof related valuation concerns:',
+        {
+          'cb_svr_structural': 'Poor Structural Condition',
+          'cb_svr_covering': 'Old/Dilapidated Roof Covering',
+          'cb_svr_spray': 'Spray Form Insulation',
+        },
+        'cb_svr_other',
+        'et_svr_other_text',
+      ),
+      'val_sv_cladding': (
+        'The following are the additional external wall cladding related valuation concerns:',
+        {
+          'cb_svc_ews1': 'No Compliant Fire Inspection Form (EWS1)',
+          'cb_svc_remediation': 'EWS1 Remediation Required',
+          'cb_svc_ongoing': 'Ongoing Remediation Work',
+        },
+        'cb_svc_other',
+        'et_svc_other_text',
+      ),
+      'val_sv_movement': (
+        'The following are the additional building movement related valuation concerns:',
+        {
+          'cb_svm_structural': 'Structural Movement',
+          'cb_svm_subsidence': 'Subsidence',
+          'cb_svm_bowing': 'Bowing Walls',
+          'cb_svm_tie': 'Wall Tie Failure',
+        },
+        'cb_svm_other',
+        'et_svm_other_text',
+      ),
+      'val_sv_damp': (
+        'The following are the additional damp related valuation concerns:',
+        {
+          'cb_svd_penetrating': 'Significant Penetrating Damp',
+          'cb_svd_rising': 'Rising Damp',
+        },
+        'cb_svd_other',
+        'et_svd_other_text',
+      ),
+      'val_sv_timber': (
+        'The following are the additional timber defects related valuation concerns:',
+        {
+          'cb_svt_insects': 'Wood-boring Insects',
+          'cb_svt_rot': 'Extensive Dry Rot',
+        },
+        'cb_svt_other',
+        'et_svt_other_text',
+      ),
+    };
+    final sv = significant[screenId];
+    if (sv != null) {
+      final items = _checkedLabels(a, sv.$2.keys.toList(), sv.$2);
+      if (_isChecked(a[sv.$3]) && _val(a, sv.$4).isNotEmpty) items.add(_val(a, sv.$4));
+      return items.isEmpty ? const [] : ['${sv.$1} ${_toWords(items)}.'];
+    }
+    if (screenId == 'val_sv_other') {
+      final notes = _val(a, 'et_sv_other_notes');
+      if (notes.isEmpty) return const [];
+      final end = notes.trimRight();
+      return ['Other valuation concerns include: $end${RegExp(r'[.!?]$').hasMatch(end) ? '' : '.'}'];
+    }
     return null;
   }
 

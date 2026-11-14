@@ -4020,6 +4020,48 @@
       "screenId": "*",
       "text": "The purpose of this valuation is for Staircasing.",
       "allowedTokens": []
+    },
+    "VAL_N13_V19_0001": {
+      "screenId": "*",
+      "text": "The following are the additional roof related valuation concerns: [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V19_0002": {
+      "screenId": "*",
+      "text": "The following are the additional external wall cladding related valuation concerns: [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V19_0003": {
+      "screenId": "*",
+      "text": "The following are the additional building movement related valuation concerns: [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V19_0004": {
+      "screenId": "*",
+      "text": "The following are the additional damp related valuation concerns: [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V19_0005": {
+      "screenId": "*",
+      "text": "The following are the additional timber defects related valuation concerns: [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
+    },
+    "VAL_N13_V19_0006": {
+      "screenId": "*",
+      "text": "Other valuation concerns include: [free text].",
+      "allowedTokens": [
+        "FREE_TEXT"
+      ]
     }
   }
 }

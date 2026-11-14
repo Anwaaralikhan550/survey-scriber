@@ -326,9 +326,10 @@ class ReportBuilder {
       'F': 'F Inside Property',
       'G': 'G Services',
       'H': 'Restrictions',
+      'S': 'Significant Valuation Consideration',
       'valuation_completion': 'Valuation',
     };
-    const order = ['A', 'D', 'E', 'F', 'G', 'H', 'valuation_completion'];
+    const order = ['A', 'D', 'E', 'F', 'G', 'H', 'S', 'valuation_completion'];
     final buckets = {for (final k in order) k: <ReportScreen>[]};
     for (final section in sections) {
       for (final screen in section.screens) {
@@ -339,7 +340,7 @@ class ReportBuilder {
           case 'property_assessment':
             key = 'D';
           case 'condition_restrictions':
-            key = 'H';
+            key = groupOf(screen.screenId) == 'val_significant' ? 'S' : 'H';
           case 'valuation_completion':
             key = 'valuation_completion';
           default:

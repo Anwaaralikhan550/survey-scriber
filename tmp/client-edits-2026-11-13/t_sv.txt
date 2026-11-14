@@ -1,0 +1,83 @@
+
+  group('V19 Significant Valuation Consideration (client file, second version)', () {
+    List<String> labelsOf(String screen) => [for (final f in screens[screen]!.values) f['label'] as String];
+
+    test('a group with six screens sits after Overall Condition and before the Valuation section', () {
+      final sections = tree['sections'] as List;
+      final ids = [for (final n in (sections[3] as Map)['nodes'] as List) (n as Map)['id']];
+      expect(ids, ['overall_condition', 'val_significant', 'val_sv_roof', 'val_sv_cladding', 'val_sv_movement', 'val_sv_damp', 'val_sv_timber', 'val_sv_other']);
+      final group = ((sections[3] as Map)['nodes'] as List).firstWhere((n) => (n as Map)['id'] == 'val_significant') as Map;
+      expect(group['title'], 'Significant Valuation Consideration');
+      expect((sections[4] as Map)['key'], 'valuation_completion');
+    });
+
+    test('each list is exactly the client list and Others has its text box', () {
+      expect(labelsOf('val_sv_roof'), ['Additional concerns', 'Poor Structural Condition', 'Old/Dilapidated Roof Covering', 'Spray Form Insulation', 'Others', 'Others (describe)']);
+      expect(labelsOf('val_sv_cladding'), ['Additional concerns', 'No Compliant Fire Inspection Form (EWS1)', 'EWS1 Remediation Required', 'Ongoing Remediation Work', 'Others', 'Others (describe)']);
+      expect(labelsOf('val_sv_movement'), ['Additional concerns', 'Structural Movement', 'Subsidence', 'Bowing Walls', 'Wall Tie Failure', 'Others', 'Others (describe)']);
+      expect(labelsOf('val_sv_damp'), ['Additional concerns', 'Significant Penetrating Damp', 'Rising Damp', 'Others', 'Others (describe)']);
+      expect(labelsOf('val_sv_timber'), ['Additional concerns', 'Wood-boring Insects', 'Extensive Dry Rot', 'Others', 'Others (describe)']);
+      for (final (screen, tick) in [('val_sv_roof', 'cb_svr_other'), ('val_sv_cladding', 'cb_svc_other'), ('val_sv_movement', 'cb_svm_other'), ('val_sv_damp', 'cb_svd_other'), ('val_sv_timber', 'cb_svt_other')]) {
+        final box = screens[screen]!.values.where((f) => f['type'] == 'text' && f['conditionalOn'] == tick);
+        expect(box, hasLength(1), reason: screen);
+      }
+    });
+
+    test('Roof sentences', () {
+      const frame = 'The following are the additional roof related valuation concerns:';
+      expect(say('val_sv_roof', {'cb_svr_structural': 'true'}), '$frame Poor Structural Condition.');
+      expect(say('val_sv_roof', {'cb_svr_covering': 'true'}), '$frame Old/Dilapidated Roof Covering.');
+      expect(say('val_sv_roof', {'cb_svr_spray': 'true'}), '$frame Spray Form Insulation.');
+      expect(say('val_sv_roof', {'cb_svr_structural': 'true', 'cb_svr_spray': 'true'}), '$frame Poor Structural Condition and Spray Form Insulation.');
+      expect(say('val_sv_roof', {'cb_svr_covering': 'true', 'cb_svr_other': 'true', 'et_svr_other_text': 'Lightning damage'}), '$frame Old/Dilapidated Roof Covering and Lightning damage.');
+      expect(say('val_sv_roof', {'cb_svr_other': 'true'}), isEmpty);
+      expect(say('val_sv_roof', {}), isEmpty);
+    });
+    test('External Wall Cladding sentences', () {
+      const frame = 'The following are the additional external wall cladding related valuation concerns:';
+      expect(say('val_sv_cladding', {'cb_svc_ews1': 'true'}), '$frame No Compliant Fire Inspection Form (EWS1).');
+      expect(say('val_sv_cladding', {'cb_svc_remediation': 'true'}), '$frame EWS1 Remediation Required.');
+      expect(say('val_sv_cladding', {'cb_svc_ongoing': 'true', 'cb_svc_ews1': 'true'}), '$frame No Compliant Fire Inspection Form (EWS1) and Ongoing Remediation Work.');
+      expect(say('val_sv_cladding', {'cb_svc_other': 'true', 'et_svc_other_text': 'Combustible insulation'}), '$frame Combustible insulation.');
+    });
+    test('Building Movement sentences', () {
+      const frame = 'The following are the additional building movement related valuation concerns:';
+      expect(say('val_sv_movement', {'cb_svm_structural': 'true'}), '$frame Structural Movement.');
+      expect(say('val_sv_movement', {'cb_svm_subsidence': 'true'}), '$frame Subsidence.');
+      expect(say('val_sv_movement', {'cb_svm_bowing': 'true'}), '$frame Bowing Walls.');
+      expect(say('val_sv_movement', {'cb_svm_tie': 'true'}), '$frame Wall Tie Failure.');
+      expect(say('val_sv_movement', {'cb_svm_subsidence': 'true', 'cb_svm_bowing': 'true', 'cb_svm_tie': 'true'}), '$frame Subsidence, Bowing Walls and Wall Tie Failure.');
+      expect(say('val_sv_movement', {'cb_svm_other': 'true', 'et_svm_other_text': 'Heave'}), '$frame Heave.');
+    });
+    test('Damp sentences', () {
+      const frame = 'The following are the additional damp related valuation concerns:';
+      expect(say('val_sv_damp', {'cb_svd_penetrating': 'true'}), '$frame Significant Penetrating Damp.');
+      expect(say('val_sv_damp', {'cb_svd_rising': 'true'}), '$frame Rising Damp.');
+      expect(say('val_sv_damp', {'cb_svd_rising': 'true', 'cb_svd_penetrating': 'true'}), '$frame Significant Penetrating Damp and Rising Damp.');
+      expect(say('val_sv_damp', {'cb_svd_other': 'true', 'et_svd_other_text': 'Condensation'}), '$frame Condensation.');
+    });
+    test('Timber Defects sentences', () {
+      const frame = 'The following are the additional timber defects related valuation concerns:';
+      expect(say('val_sv_timber', {'cb_svt_insects': 'true'}), '$frame Wood-boring Insects.');
+      expect(say('val_sv_timber', {'cb_svt_rot': 'true'}), '$frame Extensive Dry Rot.');
+      expect(say('val_sv_timber', {'cb_svt_insects': 'true', 'cb_svt_rot': 'true'}), '$frame Wood-boring Insects and Extensive Dry Rot.');
+      expect(say('val_sv_timber', {'cb_svt_other': 'true', 'et_svt_other_text': 'Wet rot'}), '$frame Wet rot.');
+    });
+    test('Other Concerns prints the typed notes', () {
+      expect(say('val_sv_other', {'et_sv_other_notes': 'Flying freehold to the rear'}), 'Other valuation concerns include: Flying freehold to the rear.');
+      expect(say('val_sv_other', {'et_sv_other_notes': 'Mining risk.'}), 'Other valuation concerns include: Mining risk.');
+      expect(say('val_sv_other', {}), isEmpty);
+    });
+    test('Others without text is refused by the validator, with text it passes', () {
+      for (final (screen, tick, box) in [
+        ('val_sv_roof', 'cb_svr_other', 'et_svr_other_text'),
+        ('val_sv_cladding', 'cb_svc_other', 'et_svc_other_text'),
+        ('val_sv_movement', 'cb_svm_other', 'et_svm_other_text'),
+        ('val_sv_damp', 'cb_svd_other', 'et_svd_other_text'),
+        ('val_sv_timber', 'cb_svt_other', 'et_svt_other_text'),
+      ]) {
+        expect(ValuationAnswerValidator.validateScreen(screen, {tick: 'true'}), hasLength(1), reason: screen);
+        expect(ValuationAnswerValidator.validateScreen(screen, {tick: 'true', box: 'x'}), isEmpty, reason: screen);
+      }
+    });
+  });

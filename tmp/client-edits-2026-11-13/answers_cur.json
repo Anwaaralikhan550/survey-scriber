@@ -145,5 +145,15 @@
   "cb_em_hall": "true",
   "cb_rubber_cable": "true",
   "actv_condition_electric": "Reasonable"
+ },
+ "val_sv_roof": {
+  "cb_svr_structural": "true",
+  "cb_svr_spray": "true"
+ },
+ "val_sv_damp": {
+  "cb_svd_rising": "true"
+ },
+ "val_sv_other": {
+  "et_sv_other_notes": "Flying freehold to the rear"
  }
 }

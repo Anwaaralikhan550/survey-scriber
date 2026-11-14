@@ -48,6 +48,41 @@ class ValuationAnswerValidator {
     _requireOtherDetail(
       errors,
       answers,
+      checkboxId: 'cb_svr_other',
+      detailId: 'et_svr_other_text',
+      label: 'roof concern',
+    );
+    _requireOtherDetail(
+      errors,
+      answers,
+      checkboxId: 'cb_svc_other',
+      detailId: 'et_svc_other_text',
+      label: 'external wall cladding concern',
+    );
+    _requireOtherDetail(
+      errors,
+      answers,
+      checkboxId: 'cb_svm_other',
+      detailId: 'et_svm_other_text',
+      label: 'building movement concern',
+    );
+    _requireOtherDetail(
+      errors,
+      answers,
+      checkboxId: 'cb_svd_other',
+      detailId: 'et_svd_other_text',
+      label: 'damp concern',
+    );
+    _requireOtherDetail(
+      errors,
+      answers,
+      checkboxId: 'cb_svt_other',
+      detailId: 'et_svt_other_text',
+      label: 'timber defects concern',
+    );
+    _requireOtherDetail(
+      errors,
+      answers,
       checkboxId: 'cb_c_other',
       detailId: 'et_c_other_text',
       label: 'construction',

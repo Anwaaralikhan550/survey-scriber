@@ -75,13 +75,6 @@
    ]
   },
   "activity_grounds_shared_access": {
-   "actv_h2_comm_cond": [
-    "Fair",
-    "Good",
-    "Poor",
-    "Reasonable",
-    "Very poor"
-   ],
    "actv_h2_shared_cond": [
     "Fair",
     "Good",
@@ -120,14 +113,6 @@
     "No cracked tiles"
    ]
   },
-  "activity_in_side_property_other_communal_area": {
-   "actv_status": [
-    "No defects noted",
-    "Not inspected",
-    "Poor condition",
-    "Wear and tear noted"
-   ]
-  },
   "activity_in_side_property_wap_dampness": {
    "actv_status_91": [
     "Damp source known",
@@ -137,13 +122,6 @@
     "No damp",
     "Penetrating damp noted",
     "Suspected rising damp"
-   ]
-  },
-  "activity_in_side_property_wap_movement_cracks": {
-   "android_material_design_spinner3": [
-    "Minor cracking",
-    "Significant cracking",
-    "Structural Movement"
    ]
   },
   "activity_in_side_property_wap_removed_wall": {
@@ -229,6 +207,12 @@
     "3"
    ]
   },
+  "activity_inside_property_other_basement_inspected": {
+   "actv_used_as": [
+    "In use",
+    "Not in use"
+   ]
+  },
   "activity_inside_property_other_celler_inspected": {
    "actv_used_as": [
     "In use",
@@ -253,12 +237,6 @@
     "Not inspected",
     "Poor support",
     "Risk of collapse"
-   ]
-  },
-  "activity_inside_property_roof_insulation": {
-   "actv_insulation_outcome": [
-    "Adequate insulation",
-    "Inadequate/no insulation"
    ]
   },
   "activity_inside_property_roof_structure_main_screen": {
@@ -700,40 +678,258 @@
   }
  },
  "valuation": {
-  "new_build_property": {
-   "actv_work_stage": [
-    "Complete"
-   ]
-  },
   "val_sub_floor_vents": {
    "actv_sub_floor_vents": [
     "Adequate",
     "Inadequate"
+   ],
+   "actv_condition_sub_floor": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
    ]
   },
   "val_gas": {
    "actv_gas_supply": [
     "Mains",
     "None"
+   ],
+   "actv_condition_gas": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
    ]
   },
   "val_water": {
    "actv_water_supply": [
     "Mains",
     "Private"
+   ],
+   "actv_condition_water": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
    ]
   },
   "val_damp_meter": {
    "actv_damp_meter": [
     "Damp Found",
     "No damp"
+   ],
+   "actv_condition_damp": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
    ]
   },
   "overall_condition": {
    "actv_overall_condition": [
+    "Reasonable",
+    "Reasonable with repair"
+   ]
+  },
+  "val_pitched_roof": {
+   "actv_condition_pitched_roof": [
     "Good",
-    "Average",
-    "Poor"
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_flat_roof": {
+   "actv_condition_flat_roof": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_other_roof": {
+   "actv_condition_other_roof": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_flashings": {
+   "actv_condition_flashings": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_rainwater_goods": {
+   "actv_condition_rainwater": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_chimney_stacks": {
+   "actv_condition_chimney": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_walls_type": {
+   "actv_condition_walls": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_floor_ext": {
+   "actv_condition_floor_ext": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_dpc": {
+   "actv_condition_dpc": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_decorations_ext": {
+   "actv_condition_dec_ext": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_garage": {
+   "actv_condition_garage": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_outbuildings": {
+   "actv_condition_outbuildings": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_site": {
+   "actv_condition_site": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_drainage": {
+   "actv_condition_drainage": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_roof_space": {
+   "actv_condition_roof_space": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_ceilings": {
+   "actv_condition_ceilings": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_walls_internal": {
+   "actv_condition_walls_int": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_chimney_breasts": {
+   "actv_condition_chimney_br": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_external_joinery": {
+   "actv_condition_ext_joinery": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_kitchen": {
+   "actv_condition_kitchen": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_bathroom": {
+   "actv_condition_bathroom": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_decorations_int": {
+   "actv_condition_dec_int": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_timber_defects": {
+   "actv_condition_timber": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_electric_material": {
+   "actv_condition_electric": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
+   ]
+  },
+  "val_hot_water_central_heating": {
+   "actv_condition_hw_ch": [
+    "Good",
+    "Reasonable",
+    "Fair",
+    "Very poor"
    ]
   }
  }

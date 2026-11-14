@@ -67,6 +67,16 @@
               "type": "checkbox"
             },
             {
+              "id": "a2t_house",
+              "label": "house",
+              "type": "checkbox"
+            },
+            {
+              "id": "a2t_flat",
+              "label": "flat",
+              "type": "checkbox"
+            },
+            {
               "id": "a2t_other",
               "label": "Other",
               "type": "checkbox"
@@ -287,12 +297,12 @@
             },
             {
               "id": "a3_roof_cover_0_natural_slate",
-              "label": "natural slate",
+              "label": "natural slates",
               "type": "checkbox"
             },
             {
               "id": "a3_roof_cover_0_artificial_slate",
-              "label": "artificial slate",
+              "label": "artificial slates",
               "type": "checkbox"
             },
             {
@@ -843,6 +853,136 @@
           ]
         },
         {
+          "id": "activity_other_garden",
+          "title": "Other Garden",
+          "type": "screen",
+          "parentId": "group_ground_3",
+          "order": 9,
+          "fields": [
+            {
+              "id": "og_location",
+              "label": "Garden location (for example Side Garden)",
+              "type": "text"
+            },
+            {
+              "id": "cb_other_garden_type",
+              "label": "Other garden finishes",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_og_finishes",
+              "label": "Laid to",
+              "type": "label"
+            },
+            {
+              "id": "og_type_0_lawn",
+              "label": "lawn",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_artificial_lawn",
+              "label": "artificial lawn",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_paving",
+              "label": "paving",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_timber_decking",
+              "label": "timber decking",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_gravel",
+              "label": "gravel",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_stones",
+              "label": "stones",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_hardstanding",
+              "label": "hardstanding",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_type_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "og_type_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_other_garden_fence",
+              "label": "Other garden boundaries",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_a4_og_boundaries",
+              "label": "Boundaries formed by",
+              "type": "label"
+            },
+            {
+              "id": "og_fence_0_timber_fencing",
+              "label": "timber fencing",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_brick_wall",
+              "label": "brick wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_block_wall",
+              "label": "block wall",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_hedging",
+              "label": "hedging",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_wire_mesh",
+              "label": "wire mesh",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_concrete_sections",
+              "label": "concrete sections",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_metal_railings",
+              "label": "metal railings",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "og_fence_0_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "og_fence_0_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
           "id": "activity_property_flate",
           "title": "Flat Maisonettes",
           "type": "screen",
@@ -864,8 +1004,17 @@
                 "First floor",
                 "Second floor",
                 "Third floor",
-                "Fourth floor"
+                "Fourth floor",
+                "Other"
               ]
+            },
+            {
+              "id": "actv_a2_floor_other_text",
+              "label": "Other floor",
+              "type": "text",
+              "conditionalOn": "actv_a2_floor=Other",
+              "conditionalValue": "",
+              "conditionalMode": "show"
             },
             {
               "id": "actv_a2_storeys",
@@ -875,8 +1024,17 @@
                 "One",
                 "Two",
                 "Three",
-                "Four"
+                "Four",
+                "Other"
               ]
+            },
+            {
+              "id": "actv_a2_storeys_other_text",
+              "label": "Other (number of storeys)",
+              "type": "text",
+              "conditionalOn": "actv_a2_storeys=Other",
+              "conditionalValue": "",
+              "conditionalMode": "show"
             },
             {
               "id": "actv_a2_access",
@@ -1760,44 +1918,6 @@
               "type": "checkbox"
             },
             {
-              "id": "cb_h1_converted",
-              "label": "Converted garage",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_h1_converted_to",
-              "label": "Converted into",
-              "type": "label"
-            },
-            {
-              "id": "h1cv_habitable_accommodation",
-              "label": "habitable accommodation",
-              "type": "checkbox"
-            },
-            {
-              "id": "h1cv_an_office",
-              "label": "an office",
-              "type": "checkbox"
-            },
-            {
-              "id": "h1cv_a_workshop",
-              "label": "a workshop",
-              "type": "checkbox"
-            },
-            {
-              "id": "h1cv_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "h1cv_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "h1cv_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
               "id": "cb_shared_access",
               "label": "Shared garage access",
               "type": "checkbox"
@@ -2159,6 +2279,44 @@
               "id": "cb_h1_no_defects",
               "label": "No defects noted",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_h1_converted",
+              "label": "Converted garage",
+              "type": "checkbox"
+            },
+            {
+              "id": "label_h1_converted_to",
+              "label": "Converted into",
+              "type": "label"
+            },
+            {
+              "id": "h1cv_habitable_accommodation",
+              "label": "habitable accommodation",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1cv_an_office",
+              "label": "an office",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1cv_a_workshop",
+              "label": "a workshop",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1cv_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "h1cv_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "h1cv_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -2335,7 +2493,7 @@
             },
             {
               "id": "actv_j2_slope",
-              "label": "Slope Gradient (J2 Risk to grounds)",
+              "label": "Slope Gradient",
               "type": "dropdown",
               "options": [
                 "Gently",
@@ -2987,134 +3145,6 @@
           "order": 10,
           "fields": [
             {
-              "id": "cb_h2_h2_shared_garden",
-              "label": "Shared garden",
-              "type": "checkbox"
-            },
-            {
-              "id": "cb_h2_h2_comm_surface",
-              "label": "Communal garden surfaces",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_h2_comm_surface",
-              "label": "Communal garden is",
-              "type": "label"
-            },
-            {
-              "id": "h2_comm_surface_0_paved",
-              "label": "paved",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_surface_0_lawned",
-              "label": "lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_surface_0_decked",
-              "label": "decked",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_surface_0_artificially_lawned",
-              "label": "artificially lawned",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_surface_0_laid_with_stones",
-              "label": "laid with stones",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_surface_0_laid_with_tile_chippings",
-              "label": "laid with tile chippings",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_surface_0_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_surface_0_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "h2_comm_surface_0_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_h2_h2_comm_fence",
-              "label": "Communal garden fences",
-              "type": "checkbox"
-            },
-            {
-              "id": "label_h2_comm_fence",
-              "label": "Boundary fences formed in",
-              "type": "label"
-            },
-            {
-              "id": "h2_comm_fence_0_timber",
-              "label": "timber",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_fence_0_brick",
-              "label": "brick",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_fence_0_concrete",
-              "label": "concrete",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_fence_0_wire_mesh",
-              "label": "wire mesh",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_fence_0_hedges",
-              "label": "hedges",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_fence_0_shrubs",
-              "label": "shrubs",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_fence_0_other",
-              "label": "Other",
-              "type": "checkbox"
-            },
-            {
-              "id": "h2_comm_fence_0_other_text",
-              "label": "Other",
-              "type": "text",
-              "conditionalOn": "h2_comm_fence_0_other",
-              "conditionalValue": "true",
-              "conditionalMode": "show"
-            },
-            {
-              "id": "cb_h2_h2_comm_no_fence",
-              "label": "No fencing",
-              "type": "checkbox"
-            },
-            {
-              "id": "actv_h2_comm_cond",
-              "label": "Communal garden condition",
-              "type": "dropdown",
-              "options": [
-                "Good",
-                "Reasonable",
-                "Fair",
-                "Poor",
-                "Very poor"
-              ]
-            },
-            {
               "id": "cb_h2_h2_shared_areas",
               "label": "Shared areas",
               "type": "checkbox"
@@ -3632,7 +3662,7 @@
             },
             {
               "id": "actv_j2_tree_size",
-              "label": "Tree size (J2 Risk to grounds)",
+              "label": "Tree size",
               "type": "dropdown",
               "options": [
                 "Small",
@@ -4227,17 +4257,17 @@
             },
             {
               "id": "g4l_kitchen",
-              "label": "kitchen",
+              "label": "the kitchen",
               "type": "checkbox"
             },
             {
               "id": "g4l_utility_room",
-              "label": "utility room",
+              "label": "the utility room",
               "type": "checkbox"
             },
             {
               "id": "g4l_bedroom",
-              "label": "bedroom",
+              "label": "the bedroom",
               "type": "checkbox"
             },
             {
@@ -4247,12 +4277,12 @@
             },
             {
               "id": "g4l_garage",
-              "label": "garage",
+              "label": "the garage",
               "type": "checkbox"
             },
             {
               "id": "g4l_airing_cupboard",
-              "label": "airing cupboard",
+              "label": "the airing cupboard",
               "type": "checkbox"
             },
             {
@@ -4543,7 +4573,7 @@
             },
             {
               "id": "cb_dr_chamber",
-              "label": "Inspection chamber",
+              "label": "Inspection chamber is inspected",
               "type": "checkbox"
             },
             {
@@ -4553,7 +4583,7 @@
             },
             {
               "id": "g6cf_blockage",
-              "label": "blockage",
+              "label": "No blockage",
               "type": "checkbox"
             },
             {
@@ -4662,7 +4692,7 @@
             },
             {
               "id": "cb_dr_svp_visible",
-              "label": "Visible / partially visible",
+              "label": "Partially visible",
               "type": "checkbox"
             },
             {
@@ -4822,11 +4852,6 @@
               "id": "label_describe_3",
               "label": "Describe:",
               "type": "label"
-            },
-            {
-              "id": "cb_dated_electrical_system",
-              "label": "Dated electrical system",
-              "type": "checkbox"
             },
             {
               "id": "android_material_design_spinner4",
@@ -7696,15 +7721,24 @@
           "order": 2,
           "fields": [
             {
-              "id": "actv_status",
-              "label": "Communal areas",
-              "type": "dropdown",
-              "options": [
-                "Not inspected",
-                "No defects noted",
-                "Wear and tear noted",
-                "Poor condition"
-              ]
+              "id": "cb_f9_not_inspected",
+              "label": "Not inspected",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f9_no_defects",
+              "label": "No defects noted",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f9_wear",
+              "label": "Wear and tear noted",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f9_poor",
+              "label": "Poor condition",
+              "type": "checkbox"
             },
             {
               "id": "label_communal_parts",
@@ -7773,49 +7807,55 @@
               "id": "label_communal_remedial",
               "label": "Areas require",
               "type": "label",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_repairs",
               "label": "repairs",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_general_maintenance",
               "label": "general maintenance",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_redecoration",
               "label": "redecoration",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_refurbishment",
               "label": "refurbishment",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_other",
               "label": "Other",
               "type": "checkbox",
-              "conditionalOn": "actv_status=Poor condition",
+              "conditionalOn": "cb_f9_poor",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f9p_other_text",
               "label": "Other",
               "type": "text",
-              "conditionalOn": "actv_status=Poor condition&f9p_other",
+              "conditionalOn": "cb_f9_poor&f9p_other",
               "conditionalMode": "show"
             }
           ]
@@ -7852,6 +7892,43 @@
               "label": "Other",
               "type": "text",
               "conditionalOn": "cb_other_704",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_basement_no_access",
+          "title": "Not inspected",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 2,
+          "fields": [
+            {
+              "id": "label_basement_access",
+              "label": "Could not be inspected due to",
+              "type": "label"
+            },
+            {
+              "id": "f9bna_restricted_access",
+              "label": "restricted access",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bna_no_access",
+              "label": "no access",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_704b",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_other_412b",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cb_other_704b",
               "conditionalValue": "true",
               "conditionalMode": "show"
             }
@@ -7903,6 +7980,51 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_walls",
+          "title": "Walls",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 3,
+          "fields": [
+            {
+              "id": "label_basement_walls",
+              "label": "Walls formed in",
+              "type": "label"
+            },
+            {
+              "id": "f9bcw_bricks",
+              "label": "bricks",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_loose_soil",
+              "label": "loose soil",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_concrete",
+              "label": "concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcw_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f9bcw_other"
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_other_celler_floor",
           "title": "Floor",
           "type": "screen",
@@ -7948,10 +8070,76 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_floor",
+          "title": "Floor",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 4,
+          "fields": [
+            {
+              "id": "label_basement_floor",
+              "label": "Floor constructed of",
+              "type": "label"
+            },
+            {
+              "id": "f9bcf_solid_concrete",
+              "label": "solid concrete",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_timber",
+              "label": "timber",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_stone",
+              "label": "stone",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_loose_soil",
+              "label": "loose soil",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bcf_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "f9bcf_other"
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_other_celler_condition",
           "title": "Condition",
           "type": "screen",
           "parentId": "group_cellar_83",
+          "order": 5,
+          "fields": [
+            {
+              "id": "actv_condition",
+              "label": "Condition",
+              "type": "dropdown",
+              "options": [
+                "Good",
+                "Reasonable",
+                "Fair",
+                "Poor",
+                "Very poor"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_basement_condition",
+          "title": "Condition",
+          "type": "screen",
+          "parentId": "group_basement_84",
           "order": 5,
           "fields": [
             {
@@ -9087,10 +9275,17 @@
         },
         {
           "id": "group_cellar_83",
-          "title": "Cellar/Basement",
+          "title": "Cellar",
           "type": "group",
           "parentId": "group_other_82",
           "order": 4
+        },
+        {
+          "id": "group_basement_84",
+          "title": "Basement",
+          "type": "group",
+          "parentId": "group_other_82",
+          "order": 5
         },
         {
           "id": "activity_in_side_property_other_repair",
@@ -9403,8 +9598,7 @@
               "type": "dropdown",
               "options": [
                 "No ventilation",
-                "Ventilation noted",
-                "Condensation noted"
+                "Ventilation noted"
               ]
             },
             {
@@ -9418,6 +9612,11 @@
               ],
               "conditionalOn": "actv_ventilation=Ventilation noted",
               "conditionalMode": "show"
+            },
+            {
+              "id": "cb_roof_condensation",
+              "label": "Condensation noted",
+              "type": "checkbox"
             }
           ]
         },
@@ -9467,13 +9666,9 @@
               "conditionalMode": "show"
             },
             {
-              "id": "actv_insulation_outcome",
-              "label": "Insulation outcome",
-              "type": "dropdown",
-              "options": [
-                "Adequate insulation",
-                "Inadequate/no insulation"
-              ]
+              "id": "cb_f1i_none",
+              "label": "No insulation",
+              "type": "checkbox"
             }
           ]
         },
@@ -9763,6 +9958,49 @@
               "id": "cb_floor_vibration_excessive",
               "label": "Excessive floor vibration",
               "type": "checkbox"
+            },
+            {
+              "id": "label_vibration_location",
+              "label": "Floor vibrates in",
+              "type": "label"
+            },
+            {
+              "id": "fv_lounge",
+              "label": "lounge",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_dining_room",
+              "label": "dining room",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_bedroom",
+              "label": "bedroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_kitchen",
+              "label": "kitchen",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_bathroom",
+              "label": "bathroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "fv_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "fv_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
             }
           ]
         },
@@ -9945,6 +10183,24 @@
 {
               "id": "actv_used_as",
               "label": "Use of cellar",
+              "type": "dropdown",
+              "options": [
+                "Not in use",
+                "In use"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_basement_inspected",
+          "title": "Used as",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 6,
+          "fields": [
+{
+              "id": "actv_used_as",
+              "label": "Use of basement",
               "type": "dropdown",
               "options": [
                 "Not in use",
@@ -10184,41 +10440,50 @@
           "order": 8,
           "fields": [
             {
-              "id": "android_material_design_spinner3",
-              "label": "Cracking",
-              "type": "dropdown",
-              "options": [
-                "Minor cracking",
-                "Significant cracking",
-                "Structural Movement"
-              ]
+              "id": "cb_f3_minor",
+              "label": "Minor cracking",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f3_significant",
+              "label": "Significant cracking",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_f3_structural",
+              "label": "Structural Movement",
+              "type": "checkbox"
             },
             {
               "id": "label_wall_movement",
               "label": "Movement observed",
               "type": "label",
-              "conditionalOn": "android_material_design_spinner3=Structural Movement",
+              "conditionalOn": "cb_f3_structural",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f3mv_historic",
               "label": "historic",
               "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner3=Structural Movement",
+              "conditionalOn": "cb_f3_structural",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f3mv_localised",
               "label": "localised",
               "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner3=Structural Movement",
+              "conditionalOn": "cb_f3_structural",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             },
             {
               "id": "f3mv_progressive",
               "label": "progressive",
               "type": "checkbox",
-              "conditionalOn": "android_material_design_spinner3=Structural Movement",
+              "conditionalOn": "cb_f3_structural",
+              "conditionalValue": "true",
               "conditionalMode": "show"
             }
           ]
@@ -10550,6 +10815,53 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_not_habitable",
+          "title": "Unsuitable",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 8,
+          "fields": [
+            {
+              "id": "label_basement_limitations",
+              "label": "Should not be regarded as habitable due to",
+              "type": "label"
+            },
+            {
+              "id": "f9bun_low_headroom",
+              "label": "low headroom",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bun_dampness",
+              "label": "dampness",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bun_difficult_access",
+              "label": "difficult access",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bun_poor_ventilation",
+              "label": "poor ventilation",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_other_697b",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_other_427b",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cb_other_697b",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_repair_insect_infestation",
           "title": "Insect infestation",
           "type": "screen",
@@ -10784,6 +11096,24 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_flooded",
+          "title": "Flooded",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 10,
+          "fields": [
+            {
+              "id": "actv_possible_flooded",
+              "label": "Flooded",
+              "type": "dropdown",
+              "options": [
+                "Partially",
+                "Significantly"
+              ]
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_repair_timber_rot",
           "title": "Timber rot",
           "type": "screen",
@@ -10952,6 +11282,58 @@
           ]
         },
         {
+          "id": "activity_inside_property_other_basement_damp",
+          "title": "Damp",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 12,
+          "fields": [
+            {
+              "id": "label_basement_damp_areas",
+              "label": "Dampness noted on",
+              "type": "label"
+            },
+            {
+              "id": "f9bdm_lower_walls",
+              "label": "lower walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bdm_upper_walls",
+              "label": "upper walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bdm_throughout_the_basement",
+              "label": "throughout the basement",
+              "type": "checkbox"
+            },
+            {
+              "id": "f9bdm_exposed_floor_joists",
+              "label": "exposed floor joists",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_others_389b",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "et_others_471b",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cb_others_389b",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
+              "id": "cb_serious_dump_b",
+              "label": "Waterproofing failure",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
           "id": "activity_inside_property_repair_under_size_timber",
           "title": "Undersize timber",
           "type": "screen",
@@ -11097,6 +11479,20 @@
           "fields": [
             {
               "id": "cb_joists_decay",
+              "label": "Timber decay",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "id": "activity_inside_property_other_basement_joists_decay",
+          "title": "Timber decay",
+          "type": "screen",
+          "parentId": "group_basement_84",
+          "order": 14,
+          "fields": [
+            {
+              "id": "cb_joists_decay_b",
               "label": "Timber decay",
               "type": "checkbox"
             }
@@ -11987,7 +12383,7 @@
             },
             {
               "id": "etNoOfRoomsOther",
-              "label": "Name of other",
+              "label": "Number",
               "type": "number"
             }
           ]
@@ -13157,9 +13553,13 @@
               "type": "dropdown",
               "options": [
                 "Repair soon",
-                "Repair now",
-                "Leaking"
+                "Repair now"
               ]
+            },
+            {
+              "id": "rc_rt_leaking",
+              "label": "Leaking",
+              "type": "checkbox"
             },
             {
               "id": "label_rc_roof_repair_tiles_issue",
@@ -14030,6 +14430,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -14135,11 +14540,6 @@
               "type": "label"
             },
             {
-              "id": "e6t_replacement",
-              "label": "replacement",
-              "type": "checkbox"
-            },
-            {
               "id": "e6t_original",
               "label": "original",
               "type": "checkbox"
@@ -14191,6 +14591,16 @@
               "conditionalOn": "cb_other_859",
               "conditionalValue": "true",
               "conditionalMode": "show"
+            },
+            {
+              "id": "label_door_replacement",
+              "label": "Replacement",
+              "type": "label"
+            },
+            {
+              "id": "e6t_replacement",
+              "label": "Doors replaced",
+              "type": "checkbox"
             },
             {
               "id": "label_door_materials",
@@ -16388,6 +16798,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -18121,6 +18536,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -18593,17 +19013,17 @@
             },
             {
               "id": "e5sd_adequate",
-              "label": "adequate",
+              "label": "inadequate",
               "type": "checkbox"
             },
             {
               "id": "e5sd_properly_installed",
-              "label": "properly installed",
+              "label": "poorly installed",
               "type": "checkbox"
             },
             {
               "id": "e5sd_properly_drained",
-              "label": "properly drained",
+              "label": "poorly drained",
               "type": "checkbox"
             },
             {
@@ -19289,6 +19709,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -19856,6 +20281,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -19915,6 +20345,11 @@
               "id": "cb_painted",
               "label": "Painted walls",
               "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
+              "type": "checkbox"
             }
           ]
         },
@@ -19973,6 +20408,11 @@
             {
               "id": "cb_painted",
               "label": "Painted walls",
+              "type": "checkbox"
+            },
+            {
+              "id": "cb_rendered_wall",
+              "label": "rendered wall",
               "type": "checkbox"
             }
           ]
@@ -20951,6 +21391,44 @@
               ]
             },
             {
+              "id": "label_leaning_location",
+              "label": "Location",
+              "type": "label"
+            },
+            {
+              "id": "cl_front",
+              "label": "front",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_rear",
+              "label": "rear",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_side",
+              "label": "side",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_centre",
+              "label": "centre",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_other",
+              "label": "Other",
+              "type": "checkbox"
+            },
+            {
+              "id": "cl_other_text",
+              "label": "Other",
+              "type": "text",
+              "conditionalOn": "cl_other",
+              "conditionalValue": "true",
+              "conditionalMode": "show"
+            },
+            {
               "id": "android_material_design_spinner4",
               "label": "Condition",
               "type": "dropdown",
@@ -21449,7 +21927,7 @@
         },
         {
           "id": "activity_outside_property_other_repairs_decorations",
-          "title": "Perished Decorations",
+          "title": "Stair/Steps Decoration",
           "type": "screen",
           "parentId": "group_carport_43",
           "order": 18,

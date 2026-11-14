@@ -61,8 +61,8 @@ void main() {
   test('the report reads in the sample order, with the sample section names', () {
     final doc = build();
     expect([for (final s in doc.sections) s.title],
-        ['About Inspection', 'About Property', 'Outside Property', 'F Inside Property', 'G Services', 'Restrictions', 'Valuation']);
-    expect([for (final s in doc.sections) s.key], ['A', 'D', 'E', 'F', 'G', 'H', 'valuation_completion']);
+        ['About Inspection', 'About Property', 'Outside Property', 'F Inside Property', 'G Services', 'Restrictions', 'Significant Valuation Consideration', 'Valuation']);
+    expect([for (final s in doc.sections) s.key], ['A', 'D', 'E', 'F', 'G', 'H', 'S', 'valuation_completion']);
   });
 
   test('elements land in the right section, Windows under Outside, Services apart', () {
@@ -73,6 +73,7 @@ void main() {
     expect(ids('F'), isNot(contains('val_external_joinery')));
     expect(ids('G'), containsAll(['val_electric_material', 'val_gas', 'val_water', 'val_hot_water_central_heating']));
     expect(ids('H'), ['overall_condition']);
+    expect(ids('S'), ['val_sv_roof', 'val_sv_damp', 'val_sv_other']); // the ones with answers
     expect(ids('valuation_completion'), ['valuation']);
     final outside = doc.sections.firstWhere((s) => s.key == 'E').screens;
     expect(outside.map((s) => s.title), contains('Roof'));
@@ -88,6 +89,7 @@ void main() {
       'F Inside Property': '9C26B0',
       'G Services': 'FF7000',
       'Restrictions': '00786B',
+      'Significant Valuation Consideration': 'D42E2E',
       'Valuation': '24566A',
     }.entries) {
       final bar = RegExp('w:fill="([0-9A-F]{6})"/></w:tcPr><w:p><w:pPr><w:pStyle w:val="Heading1"/>.{0,200}?<w:t xml:space="preserve">${entry.key}</w:t>')
