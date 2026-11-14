@@ -51,10 +51,47 @@ const _dropdownToTicks = <String, Map<String, Map<String, String>>>{
   },
 };
 
+/// Valuation General Details: Property Type, Sub Type, Flat Type and Build Type became one
+/// Property Type list (client, 13 Nov 2026). What maps cleanly moves to the new option;
+/// the rest (for example a plain "House") keeps its old answers and old wording.
+Map<String, String> _migrateValuationPropertyType(Map<String, String> answers) {
+  final type = (answers['actv_type'] ?? '').trim();
+  String? next;
+  if (type == 'House') {
+    next = switch ((answers['actv_sub_type'] ?? '').trim()) {
+      'Detached' => 'Detached house',
+      'Semi' => 'Semi-detached house',
+      'End' => 'End-of-terrace house',
+      'Mid' => 'Mid-terrace house',
+      _ => null,
+    };
+  } else if (type == 'Flat') {
+    if ((answers['actv_flat_type'] ?? '').trim() == 'Maisonette') {
+      next = 'Maisonette';
+    } else {
+      next = switch ((answers['actv_build_type'] ?? '').trim()) {
+        'Purpose built' => 'Purpose-built flat',
+        'Conversion' => 'Converted flat',
+        _ => null,
+      };
+    }
+  }
+  if (next == null) return answers;
+  return Map<String, String>.from(answers)
+    ..['actv_type'] = next
+    ..remove('actv_sub_type')
+    ..remove('actv_sub_type_other_text')
+    ..remove('actv_flat_type')
+    ..remove('actv_build_type');
+}
+
 Map<String, String> migrateLegacyAnswers(
   String screenId,
   Map<String, String> answers,
 ) {
+  if (screenId == 'general_details') {
+    return _migrateValuationPropertyType(answers);
+  }
   final fields = _dropdownToTicks[screenId];
   if (fields == null) return answers;
 

@@ -673,9 +673,26 @@ class ValuationPhraseEngine {
           'Your legal adviser should confirm the precise terms and any obligations arising from the tenure.');
     }
 
+    // Property Type + bedrooms in one sentence (client, 13 Nov 2026):
+    // "The property is a detached house providing three bedrooms."
     final type = _val(answers, 'actv_type');
-    final subType = _val(answers, 'actv_sub_type');
-    if (type.isNotEmpty && type.toLowerCase() != 'other') {
+    final legacyType = const {'flat', 'house'}.contains(type.toLowerCase()) ||
+        (type.toLowerCase() == 'bungalow' &&
+            _val(answers, 'actv_sub_type').isNotEmpty);
+    if (type.isNotEmpty && !legacyType && OptionLabels.named(answers, 'actv_type')) {
+      final typeWords = _say(answers, 'actv_type');
+      final isOther = type.toLowerCase() == 'other';
+      final words = isOther ? typeWords : typeWords.toLowerCase();
+      var text = 'The property is ${_article(words)} $words';
+      final bedrooms = _say(answers, 'actv_bedrooms').toLowerCase();
+      if (bedrooms.isNotEmpty) {
+        text += ' providing $bedrooms ${_val(answers, 'actv_bedrooms') == 'One' ? 'bedroom' : 'bedrooms'}';
+      }
+      phrases.add('$text.');
+    }
+
+    // Surveys saved before the single Property Type list keep their old wording.
+    if (type.isNotEmpty && legacyType) {
       final safeSubType = type == 'Flat' ||
               !OptionLabels.named(answers, 'actv_sub_type')
           ? ''
@@ -707,14 +724,6 @@ class ValuationPhraseEngine {
               .add('The flat is within a ${buildType.toLowerCase()} building.');
         }
       }
-    }
-
-    final estateType = _say(answers, 'actv_estate_type');
-    if (estateType.isNotEmpty) {
-      phrases.add(
-        'The property is situated on ${_article(estateType)} '
-        '${estateType.toLowerCase()} estate.',
-      );
     }
 
     final construction = _checkedLabels(answers, [
