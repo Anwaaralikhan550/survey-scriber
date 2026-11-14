@@ -9519,6 +9519,7 @@ const List<VerbatimRule> kVerbatimRules = <VerbatimRule>[
         otherCheckbox: 'g6cf_other',
         otherText: 'g6cf_other_text',
         pdfOptions: ['No blockage', 'recent blockage', 'significant defect'],
+        cap: true,
       ),
     ],
     pdf:

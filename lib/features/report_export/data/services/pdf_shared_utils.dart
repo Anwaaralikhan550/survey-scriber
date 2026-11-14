@@ -291,6 +291,8 @@ class PdfSharedUtils {
   static bool _isLabel(String label) {
     if (label.split(RegExp(r'\s+')).length > 8) return false;
     if (_sentenceWord.hasMatch(label)) return false;
+    // Client wording (13 Nov 2026): a heading that carries "is".
+    if (label.startsWith('Inspection chamber is inspected')) return true;
     return !RegExp(r'\bis\b', caseSensitive: false).hasMatch(label) ||
         label.startsWith('If ');
   }

@@ -250,6 +250,8 @@ void main() {
         if (entry.key.startsWith('{A_') || entry.key.startsWith('{D_')) continue;
         final colon = RegExp(r'^([^:]{1,70}):\s').firstMatch(entry.value);
         if (colon == null) continue;
+        // A heading filled in from the answers ({CS_ATTACHED_HEADING}) is checked below.
+        if (colon.group(1)!.startsWith('{')) continue;
         final found = _labels(entry.value);
         if (found.isNotEmpty && found.first.startsWith(colon.group(1)!)) {
           accepted.add(colon.group(1)!);

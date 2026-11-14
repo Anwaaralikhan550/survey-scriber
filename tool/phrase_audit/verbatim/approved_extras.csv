@@ -22,3 +22,4 @@
 {F_OTHER}::{F9_CELLAR_WALLS},client 13 Nov 2026 (file 6 answers): Cellar and Basement are separate sections; cellar sentences say cellar only
 {F_OTHER}::{F9_CELLAR_IN_USE},client 13 Nov 2026 (file 6 answers): Cellar and Basement are separate sections; cellar sentences say cellar only
 {F_OTHER}::{F9_CELLAR_UNSUITABLE},client 13 Nov 2026 (file 6 answers): Cellar and Basement are separate sections; cellar sentences say cellar only
+{G_GAS_AND_OIL}::{G2_METER_NO_LOCATION},Metre chosen with no location: the client portal version of the Metre sentence without the location clause

@@ -39,9 +39,9 @@ class InspectionPhraseEngine {
         (e.value.trim().toLowerCase() == 'true' ||
             (e.key == 'g2m_other_text' && e.value.trim().isNotEmpty)));
     if (anyLocation) return const [];
-    final text = phraseTexts['{G_GAS_AND_OIL}::{G2_METER}'];
+    final text = phraseTexts['{G_GAS_AND_OIL}::{G2_METER_NO_LOCATION}'];
     if (text == null) return const [];
-    return [text.replaceFirst(', and the meter unit is located {GAS_METER_LOCATION}', '')];
+    return [text];
   }
 
   List<String> buildPhrases(String screenId, Map<String, String> rawAnswers) {

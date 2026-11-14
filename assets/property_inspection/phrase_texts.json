@@ -972,6 +972,7 @@
   "{F_ABOUT_ROOF_STRUCTURE}::{REPAIR_TANK_POOR_COVER}": "The water tank does not have a close-fitting lid, which could allow debris to enter the water. An appropriate close-fitting lid should be installed soon.",
   "{G_GAS_AND_OIL}::{G2_GAS_SMELL}": "Gas smell noted: Gas smell was noted during my inspection. This is a serious problem and should be resolved now.",
   "{G_GAS_AND_OIL}::{G2_CAPPED_GAS}": "Capped gas: The gas supply is capped off. You should ask an appropriately qualified person to inspect the gas installation system.",
+  "{G_GAS_AND_OIL}::{G2_METER_NO_LOCATION}": "Metre: There is a mains gas connection to the property.",
   "{G_GAS_AND_OIL}::{G2_METER}": "Metre: There is a mains gas connection to the property, and the meter unit is located {GAS_METER_LOCATION}. ",
   "{G_GAS_AND_OIL}::{G2_METER_NOT_FOUND}": "Metre not found: I did not find the gas meter. Please ask the vendor about the location of the gas meter, as you must know where it is located.",
   "{G_GAS_AND_OIL}::{G2_DATED_OR_OLD}": "Dated or Old: The installation appears dated or older and may require upgrading to current standards.",

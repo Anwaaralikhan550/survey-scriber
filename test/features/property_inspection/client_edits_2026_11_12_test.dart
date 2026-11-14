@@ -358,7 +358,7 @@ void main() {
     test('tick, finding and sentence follow the client wording', () {
       expect(labels(s), containsAll(['Inspection chamber is inspected', 'No blockage']));
       expect(say(s, ticks(['cb_dr_chamber', 'g6cf_blockage'])), contains('Inspection chamber is inspected: The inspection chamber cover(s) were lifted where possible. No blockage was noted.'));
-      expect(say(s, ticks(['cb_dr_chamber', 'g6cf_recent_blockage'])), contains('recent blockage was noted.'));
+      expect(say(s, ticks(['cb_dr_chamber', 'g6cf_recent_blockage'])), contains('Recent blockage was noted.'));
     });
     test('not inspected heading', () {
       expect(say(s, ticks(['cb_dr_not_inspected'])), contains('Inspection chamber not inspected: The inspection chamber cover(s) could not be lifted'));
