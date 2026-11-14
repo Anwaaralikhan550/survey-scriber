@@ -1,7 +1,7 @@
 {
  "summary": {
   "tree": "valuation_v2",
-  "screensAudited": 42,
+  "screensAudited": 38,
   "screensWithFindings": 0,
   "bySeverity": {
    "GAP": 0,
@@ -11,9 +11,9 @@
    "ENGINE_ERROR": 0
   },
   "phrases": {
-   "distinctEmitted": 437,
+   "distinctEmitted": 485,
    "approvedLegacyBank": 0,
-   "approvedCurrentBankOnly": 404,
+   "approvedCurrentBankOnly": 453,
    "unapproved": 0
   }
  },
@@ -22,13 +22,13 @@
    "sectionKey": "valuation_details",
    "screenId": "general_details",
    "title": "General Details",
-   "dataFieldCount": 33,
-   "permutationCount": 89,
+   "dataFieldCount": 41,
+   "permutationCount": 115,
    "severities": [],
    "phraseStats": {
-    "total": 33,
+    "total": 53,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 33,
+    "approvedCurrentBankOnly": 53,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -38,28 +38,9 @@
    ]
   },
   {
-   "sectionKey": "valuation_details",
-   "screenId": "new_build_property",
-   "title": "New Build Property",
-   "dataFieldCount": 7,
-   "permutationCount": 21,
-   "severities": [],
-   "phraseStats": {
-    "total": 11,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 11,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The property is a new build development constructed by sample detail.",
-    "At the time of my inspection, the construction works were complete. The valuation is provided on the basis that the completed works have been carried out to a satisfactory standard in accordance with the approved plans and specifications.",
-    "At the time of my inspection, the construction works were at the under construction stage. The valuation is provided on the basis that the property will be completed to a satisfactory standard in accordance with the approved plans and specifications."
-   ]
-  },
-  {
    "sectionKey": "property_assessment",
    "screenId": "no_of_rooms",
-   "title": "Number of Rooms",
+   "title": "Accommodation",
    "dataFieldCount": 9,
    "permutationCount": 11,
    "severities": [],
@@ -71,21 +52,21 @@
    },
    "editedBankSamples": [
     "The property provides accommodation comprising five reception rooms.",
-    "The property provides accommodation comprising five kitchens.",
-    "The property provides accommodation comprising five bedrooms."
+    "The property provides accommodation comprising five bedrooms.",
+    "The property provides accommodation comprising five bathrooms."
    ]
   },
   {
    "sectionKey": "property_assessment",
    "screenId": "accommodation_summary",
    "title": "Accommodation Summary",
-   "dataFieldCount": 12,
-   "permutationCount": 16,
+   "dataFieldCount": 11,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 8,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -95,68 +76,30 @@
    ]
   },
   {
-   "sectionKey": "property_assessment",
-   "screenId": "location_amenities",
-   "title": "Location & Amenities",
-   "dataFieldCount": 12,
-   "permutationCount": 28,
-   "severities": [],
-   "phraseStats": {
-    "total": 16,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 15,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The property is situated within an established city area, which is considered to be a desirable location for properties of this type.",
-    "The property is situated within an established town area, which is considered to be a desirable location for properties of this type.",
-    "The property is situated within an established village area, which is considered to be a desirable location for properties of this type."
-   ]
-  },
-  {
-   "sectionKey": "property_assessment",
-   "screenId": "road",
-   "title": "Road",
-   "dataFieldCount": 6,
-   "permutationCount": 8,
-   "severities": [],
-   "phraseStats": {
-    "total": 6,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "The property fronts onto an adopted highway maintained at public expense.",
-    "The property fronts onto a private road.",
-    "The property fronts onto a made-up road."
-   ]
-  },
-  {
    "sectionKey": "property_inspection",
    "screenId": "val_pitched_roof",
    "title": "Pitched Roof",
-   "dataFieldCount": 17,
-   "permutationCount": 27,
+   "dataFieldCount": 19,
+   "permutationCount": 35,
    "severities": [],
    "phraseStats": {
-    "total": 18,
+    "total": 23,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 17,
+    "approvedCurrentBankOnly": 22,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The main roof is of pitched construction, covered with tile materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
-    "The main roof is of pitched construction, covered with natural slate materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment.",
-    "The main roof is of pitched construction, covered with artificial slate materials, which is a typical covering for a property of this age and construction type. The roof surfaces were inspected from ground level using binoculars where necessary to supplement the visual assessment."
+    "The roof covering is formed in clay tiles.",
+    "The roof covering is formed in concrete tiles.",
+    "The roof covering is formed in natural slate."
    ]
   },
   {
    "sectionKey": "property_inspection",
    "screenId": "val_flat_roof",
    "title": "Flat Roof",
-   "dataFieldCount": 12,
-   "permutationCount": 18,
+   "dataFieldCount": 9,
+   "permutationCount": 19,
    "severities": [],
    "phraseStats": {
     "total": 11,
@@ -175,12 +118,12 @@
    "screenId": "val_other_roof",
    "title": "Other Roof",
    "dataFieldCount": 23,
-   "permutationCount": 31,
+   "permutationCount": 37,
    "severities": [],
    "phraseStats": {
-    "total": 20,
+    "total": 23,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 19,
+    "approvedCurrentBankOnly": 22,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -194,12 +137,12 @@
    "screenId": "val_flashings",
    "title": "Flashings",
    "dataFieldCount": 10,
-   "permutationCount": 14,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 12,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 11,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -212,57 +155,76 @@
    "sectionKey": "property_inspection",
    "screenId": "val_rainwater_goods",
    "title": "Rainwater Goods",
-   "dataFieldCount": 9,
-   "permutationCount": 13,
+   "dataFieldCount": 15,
+   "permutationCount": 25,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 17,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 7,
+    "approvedCurrentBankOnly": 16,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The rainwater goods are of cast iron construction, which is consistent with the original building specification for a property of this age and type.",
-    "The rainwater goods are of aluminium construction, which is consistent with the original building specification for a property of this age and type.",
-    "The rainwater goods are of UPVC construction, which is consistent with the original building specification for a property of this age and type."
+    "The rainwater goods comprise PVC.",
+    "The rainwater goods comprise cast iron.",
+    "The rainwater goods comprise aluminium."
    ]
   },
   {
    "sectionKey": "property_inspection",
    "screenId": "val_chimney_stacks",
    "title": "Chimney Stacks",
-   "dataFieldCount": 8,
-   "permutationCount": 12,
+   "dataFieldCount": 11,
+   "permutationCount": 21,
    "severities": [],
    "phraseStats": {
-    "total": 7,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 12,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The chimney stacks are of brick construction.",
-    "The chimney stacks are of stone construction.",
-    "The chimney stacks are of rendered construction."
+    "The property is installed with chimney stack(s) of brick construction.",
+    "The property is installed with chimney stack(s) of stone construction.",
+    "The property is installed with chimney stack(s) of rendered masonry construction."
    ]
   },
   {
    "sectionKey": "property_inspection",
    "screenId": "val_walls_type",
    "title": "Main Walls",
-   "dataFieldCount": 15,
-   "permutationCount": 23,
+   "dataFieldCount": 14,
+   "permutationCount": 28,
    "severities": [],
    "phraseStats": {
-    "total": 16,
+    "total": 18,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 15,
+    "approvedCurrentBankOnly": 17,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The principal external walls comprise solid construction, which is consistent with the original building specification for a property of this age and type.",
-    "The principal external walls comprise cavity construction, which is consistent with the original building specification for a property of this age and type.",
-    "The principal external walls comprise timber frame construction, which is consistent with the original building specification for a property of this age and type."
+    "External walls: The external walls are constructed of solid brick.",
+    "External walls: The external walls are constructed of cavity brick.",
+    "External walls: The external walls are constructed of stone."
+   ]
+  },
+  {
+   "sectionKey": "property_inspection",
+   "screenId": "val_external_joinery",
+   "title": "Windows",
+   "dataFieldCount": 15,
+   "permutationCount": 25,
+   "severities": [],
+   "phraseStats": {
+    "total": 17,
+    "approvedLegacy": 0,
+    "approvedCurrentBankOnly": 16,
+    "unapproved": 0
+   },
+   "editedBankSamples": [
+    "The windows are formed of replacement.",
+    "The windows are formed of original.",
+    "The windows are formed of old."
    ]
   },
   {
@@ -286,19 +248,19 @@
    "sectionKey": "property_inspection",
    "screenId": "val_floor_ext",
    "title": "Floor",
-   "dataFieldCount": 14,
-   "permutationCount": 20,
+   "dataFieldCount": 8,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 11,
+    "total": 10,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 9,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The ground floor is of solid concrete construction. The floor coverings were not lifted during the inspection, and the condition of the floor structure could only be assessed from the general feel and level of the floors when walked upon.",
-    "The ground floor is of suspended timber construction. The floor coverings were not lifted during the inspection, and the condition of the floor structure could only be assessed from the general feel and level of the floors when walked upon.",
-    "The ground floor is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration."
+    "Floors are of solid concrete.",
+    "Floors are of suspended timber.",
+    "Floors are of beam and block."
    ]
   },
   {
@@ -306,12 +268,12 @@
    "screenId": "val_dpc",
    "title": "DPC",
    "dataFieldCount": 11,
-   "permutationCount": 15,
+   "permutationCount": 21,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
+    "approvedCurrentBankOnly": 12,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -325,12 +287,12 @@
    "screenId": "val_sub_floor_vents",
    "title": "Sub Floor Vents",
    "dataFieldCount": 4,
-   "permutationCount": 12,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 6,
+    "total": 9,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 5,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -342,27 +304,27 @@
   {
    "sectionKey": "property_inspection",
    "screenId": "val_decorations_ext",
-   "title": "External Decorations",
-   "dataFieldCount": 8,
-   "permutationCount": 12,
+   "title": "External Decorations/finishes",
+   "dataFieldCount": 3,
+   "permutationCount": 13,
    "severities": [],
    "phraseStats": {
-    "total": 7,
+    "total": 6,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 5,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The external decorations comprise lead finishes.",
-    "The external decorations comprise paint finishes.",
-    "The external decorations comprise stain finishes."
+    "Where visible, the walls appear in good condition, consistent with their age and type of construction.",
+    "Where visible, the walls appear in reasonable condition, consistent with their age and type of construction.",
+    "Where visible, the walls appear in fair condition, consistent with their age and type of construction."
    ]
   },
   {
    "sectionKey": "property_inspection",
    "screenId": "val_garage",
    "title": "Garage",
-   "dataFieldCount": 6,
+   "dataFieldCount": 10,
    "permutationCount": 20,
    "severities": [],
    "phraseStats": {
@@ -372,28 +334,28 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property includes an integral garage, which was inspected as part of this survey.",
-    "The property includes a semi-detached garage, which was inspected as part of this survey.",
-    "The property includes a detached garage, which was inspected as part of this survey."
+    "The property incorporates a garage in a block of garages.",
+    "The property incorporates an attached garage.",
+    "The property incorporates a detached garage."
    ]
   },
   {
    "sectionKey": "property_inspection",
    "screenId": "val_outbuildings",
    "title": "Outbuildings",
-   "dataFieldCount": 4,
-   "permutationCount": 8,
+   "dataFieldCount": 11,
+   "permutationCount": 21,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 3,
+    "approvedCurrentBankOnly": 12,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The property includes outbuildings comprising sample detail. The outbuildings were inspected as part of this survey where accessible.",
-    "The outbuildings are considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
-    "The outbuildings are considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works."
+    "The property incorporates a large shed.",
+    "The property incorporates a workshop.",
+    "The property incorporates an annex."
    ]
   },
   {
@@ -401,12 +363,12 @@
    "screenId": "val_site",
    "title": "Site / Boundaries",
    "dataFieldCount": 14,
-   "permutationCount": 18,
+   "permutationCount": 24,
    "severities": [],
    "phraseStats": {
-    "total": 13,
+    "total": 16,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 12,
+    "approvedCurrentBankOnly": 15,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -420,12 +382,12 @@
    "screenId": "val_drainage",
    "title": "Drainage",
    "dataFieldCount": 11,
-   "permutationCount": 15,
+   "permutationCount": 21,
    "severities": [],
    "phraseStats": {
-    "total": 10,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 9,
+    "approvedCurrentBankOnly": 12,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -439,18 +401,18 @@
    "screenId": "val_roof_space",
    "title": "Roof Space",
    "dataFieldCount": 14,
-   "permutationCount": 18,
+   "permutationCount": 24,
    "severities": [],
    "phraseStats": {
-    "total": 13,
+    "total": 15,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 12,
+    "approvedCurrentBankOnly": 14,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The roof space was entered and inspected where accessible. The roof structure is of trussed rafter construction, which is consistent with the original building specification for a property of this age and type.",
-    "The roof space was entered and inspected where accessible. The roof structure is of traditional rafter and purlin construction, which is consistent with the original building specification for a property of this age and type.",
-    "The roof space was entered and inspected where accessible. The roof structure is of purlin construction, which is consistent with the original building specification for a property of this age and type."
+    "The roof structure is formed in traditional cut timber.",
+    "The roof structure is formed in prefabricated trussed rafters.",
+    "The roof structure is formed in steel."
    ]
   },
   {
@@ -458,12 +420,12 @@
    "screenId": "val_ceilings",
    "title": "Ceilings",
    "dataFieldCount": 10,
-   "permutationCount": 14,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 9,
+    "total": 12,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 8,
+    "approvedCurrentBankOnly": 11,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -475,20 +437,20 @@
   {
    "sectionKey": "property_inspection",
    "screenId": "val_walls_internal",
-   "title": "Internal Walls",
+   "title": "Walls",
    "dataFieldCount": 9,
-   "permutationCount": 13,
+   "permutationCount": 19,
    "severities": [],
    "phraseStats": {
-    "total": 8,
+    "total": 11,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 7,
+    "approvedCurrentBankOnly": 10,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The internal walls and partitions are of solid construction.",
-    "The internal walls and partitions are of stud partition construction.",
-    "The internal walls and partitions are of dry-lined construction."
+    "The walls are formed in solid masonry.",
+    "The walls are formed in timber stud partitions.",
+    "The walls are formed in plasterboard partitions."
    ]
   },
   {
@@ -496,12 +458,12 @@
    "screenId": "val_chimney_breasts",
    "title": "Chimney Breasts",
    "dataFieldCount": 10,
-   "permutationCount": 14,
+   "permutationCount": 20,
    "severities": [],
    "phraseStats": {
-    "total": 11,
+    "total": 14,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 13,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -512,40 +474,40 @@
   },
   {
    "sectionKey": "property_inspection",
-   "screenId": "val_external_joinery",
-   "title": "Windows",
-   "dataFieldCount": 12,
-   "permutationCount": 16,
+   "screenId": "val_kitchen",
+   "title": "Kitchen",
+   "dataFieldCount": 18,
+   "permutationCount": 28,
    "severities": [],
    "phraseStats": {
-    "total": 11,
+    "total": 16,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 10,
+    "approvedCurrentBankOnly": 15,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The windows and external joinery are of timber frame construction. The windows were inspected from both the interior and exterior of the property where accessible.",
-    "The windows and external joinery are of galvanised steel frame construction. The windows were inspected from both the interior and exterior of the property where accessible.",
-    "The windows and external joinery are of aluminium frame construction. The windows were inspected from both the interior and exterior of the property where accessible."
+    "The worktops comprise laminate particle board.",
+    "The worktops comprise solid timber.",
+    "The worktops comprise granite."
    ]
   },
   {
    "sectionKey": "property_inspection",
-   "screenId": "val_internal_fittings",
-   "title": "Internal Fittings",
-   "dataFieldCount": 8,
-   "permutationCount": 12,
+   "screenId": "val_bathroom",
+   "title": "Bathroom",
+   "dataFieldCount": 11,
+   "permutationCount": 21,
    "severities": [],
    "phraseStats": {
-    "total": 7,
+    "total": 13,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 12,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The internal fittings include kitchen units and worktops. These were visually inspected as part of this survey. No tests were carried out to the plumbing or waste systems.",
-    "The internal fittings include utility room fittings. These were visually inspected as part of this survey. No tests were carried out to the plumbing or waste systems.",
-    "The internal fittings include bathroom and sanitary fittings. These were visually inspected as part of this survey. No tests were carried out to the plumbing or waste systems."
+    "The property incorporates family bathroom(s).",
+    "The property incorporates shower room(s).",
+    "The property incorporates ensuite shower room(s)."
    ]
   },
   {
@@ -553,12 +515,12 @@
    "screenId": "val_decorations_int",
    "title": "Internal Decorations",
    "dataFieldCount": 8,
-   "permutationCount": 12,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 7,
+    "total": 10,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 9,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -571,13 +533,13 @@
    "sectionKey": "property_inspection",
    "screenId": "val_damp_meter",
    "title": "Damp",
-   "dataFieldCount": 5,
-   "permutationCount": 13,
+   "dataFieldCount": 17,
+   "permutationCount": 31,
    "severities": [],
    "phraseStats": {
-    "total": 7,
+    "total": 11,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 10,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -591,12 +553,12 @@
    "screenId": "val_timber_defects",
    "title": "Timber Defects",
    "dataFieldCount": 8,
-   "permutationCount": 12,
+   "permutationCount": 18,
    "severities": [],
    "phraseStats": {
-    "total": 7,
+    "total": 10,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 6,
+    "approvedCurrentBankOnly": 9,
     "unapproved": 0
    },
    "editedBankSamples": [
@@ -609,76 +571,76 @@
    "sectionKey": "property_inspection",
    "screenId": "val_electric_material",
    "title": "Electricity",
-   "dataFieldCount": 17,
-   "permutationCount": 23,
+   "dataFieldCount": 25,
+   "permutationCount": 37,
    "severities": [],
    "phraseStats": {
-    "total": 14,
+    "total": 24,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 13,
+    "approvedCurrentBankOnly": 23,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Where visible, the electrical wiring is rubber sheathed cable. Only a limited visual inspection of the electrical installation was possible, as the majority of the wiring is concealed within the building fabric.",
-    "Where visible, the electrical wiring is modern PVC sheathed cable. Only a limited visual inspection of the electrical installation was possible, as the majority of the wiring is concealed within the building fabric.",
-    "Where visible, the electrical wiring is a mixture of old and new wiring. Only a limited visual inspection of the electrical installation was possible, as the majority of the wiring is concealed within the building fabric."
+    "There is a mains electricity supply connected to the property, and the meter unit is located under the stairs.",
+    "There is a mains electricity supply connected to the property, and the meter unit is located in an outside box.",
+    "There is a mains electricity supply connected to the property, and the meter unit is located in the entrance hall."
    ]
   },
   {
    "sectionKey": "property_inspection",
    "screenId": "val_gas",
    "title": "Gas Supply",
-   "dataFieldCount": 4,
-   "permutationCount": 10,
+   "dataFieldCount": 11,
+   "permutationCount": 23,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 9,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
     "The property is connected to mains gas supply. The gas installation was not tested as part of this inspection. A current Gas Safety Certificate, issued by a Gas Safe registered engineer, should be obtained to confirm the safety and adequacy of the installation.",
     "The gas supply is lpg. A current Gas Safety Certificate, issued by a Gas Safe registered engineer, should be obtained.",
-    "The gas installation is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration."
+    "The gas installation is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration."
    ]
   },
   {
    "sectionKey": "property_inspection",
    "screenId": "val_water",
    "title": "Water Supply",
-   "dataFieldCount": 4,
-   "permutationCount": 10,
+   "dataFieldCount": 11,
+   "permutationCount": 23,
    "severities": [],
    "phraseStats": {
-    "total": 5,
+    "total": 9,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 8,
     "unapproved": 0
    },
    "editedBankSamples": [
     "The property is connected to mains water supply. The water supply system was not tested as part of this inspection.",
     "The property is served by a private water supply. Your legal adviser should confirm the adequacy, quality, and any regulatory requirements associated with the private supply, including water testing and maintenance obligations.",
-    "The water supply is considered satisfactory, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration."
+    "The water supply is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration."
    ]
   },
   {
    "sectionKey": "property_inspection",
    "screenId": "val_hot_water_central_heating",
    "title": "Hot Water / Central Heating",
-   "dataFieldCount": 14,
-   "permutationCount": 18,
+   "dataFieldCount": 17,
+   "permutationCount": 27,
    "severities": [],
    "phraseStats": {
-    "total": 15,
+    "total": 18,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 14,
+    "approvedCurrentBankOnly": 17,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "The hot water and central heating system is fuelled by LPG.",
-    "The heating system was not tested as part of this inspection. A current service record should be obtained to confirm the system has been regularly maintained. The boiler and associated system should be serviced annually by a suitably qualified engineer in accordance with the manufacturer's instructions and current regulations.",
-    "The hot water and central heating system is fuelled by gas."
+    "The property is heated by a combination boiler.",
+    "The property is heated by a conventional boiler.",
+    "The property is heated by a sealed boiler system."
    ]
   },
   {
@@ -704,56 +666,18 @@
    "screenId": "overall_condition",
    "title": "Overall Condition",
    "dataFieldCount": 2,
-   "permutationCount": 8,
+   "permutationCount": 6,
    "severities": [],
    "phraseStats": {
-    "total": 4,
+    "total": 3,
     "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 4,
+    "approvedCurrentBankOnly": 3,
     "unapproved": 0
    },
    "editedBankSamples": [
-    "Having regard to the age, type, and style of the property, and based upon my thorough inspection, The overall condition of the property is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
-    "Having regard to the age, type, and style of the property, and based upon my thorough inspection, The overall condition of the property has been assessed as Average.",
-    "Having regard to the age, type, and style of the property, and based upon my thorough inspection, The overall condition of the property is considered unsatisfactory and remedial work is necessary. It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation and to advise on the scope and cost of the necessary remedial works."
-   ]
-  },
-  {
-   "sectionKey": "condition_restrictions",
-   "screenId": "other_matters",
-   "title": "Other Matters",
-   "dataFieldCount": 18,
-   "permutationCount": 20,
-   "severities": [],
-   "phraseStats": {
-    "total": 18,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 18,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "Your legal adviser should confirm that Building Regulations approval and, where applicable, planning permission were obtained for all relevant works carried out to the property.",
-    "The property benefits from guarantees or warranties. Your legal adviser should confirm the precise terms, duration, and transferability of these guarantees.",
-    "Rights of way or easements may affect the property. Your legal adviser should make full enquiries regarding any such rights."
-   ]
-  },
-  {
-   "sectionKey": "condition_restrictions",
-   "screenId": "energy_performance",
-   "title": "Energy Performance",
-   "dataFieldCount": 8,
-   "permutationCount": 34,
-   "severities": [],
-   "phraseStats": {
-    "total": 35,
-    "approvedLegacy": 0,
-    "approvedCurrentBankOnly": 34,
-    "unapproved": 0
-   },
-   "editedBankSamples": [
-    "We have not prepared the Energy Performance Certificate (EPC) for this property. Where an EPC has been made available to us, the ratings are presented below for information purposes only. We have not verified these ratings and cannot comment on their accuracy or completeness.",
-    "The EPC records a current energy efficiency rating of Band A.",
-    "The EPC records a current energy efficiency rating of Band B."
+    "I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction.",
+    "I am pleased to advise you that this property is believed to be in reasonable condition consistent with the age and type of construction. You should be prepared to cover the costs and accept the inconvenience of dealing with any repairs or improvement works reported.",
+    "The following restrictions or matters that may affect the value or use of the property should be noted: sample detail"
    ]
   },
   {
@@ -770,7 +694,7 @@
     "unapproved": 0
    },
    "editedBankSamples": [
-    "I am advised that the agreed purchase price for the property is sample detail.",
+    "Based on an analysis of recent comparable sales for similar properties in the locality, the agreed purchase price of sample detail appears reasonable in current market conditions.",
     "The pre-inspection estimated value provided to us was sample detail.",
     "In my opinion, the open market value of the property, subject to the assumptions, special assumptions, and conditions set out in this report, is considered to be adequate security for the proposed mortgage advance. The valuation opinion is provided for the stated purpose and remains subject to the assumptions, special assumptions, and limiting conditions in this report."
    ]

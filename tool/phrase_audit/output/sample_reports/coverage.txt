@@ -1,0 +1,27 @@
+report_1: 343 screens answered, 642 phrase lines, PDF 372498 bytes
+report_2: 337 screens answered, 620 phrase lines, PDF 353970 bytes
+report_3: 338 screens answered, 613 phrase lines, PDF 347612 bytes
+report_4: 336 screens answered, 614 phrase lines, PDF 352386 bytes
+report_5: 335 screens answered, 625 phrase lines, PDF 350823 bytes
+
+checkboxes: 2280 total, 2280 ticked in at least one report, 0 never ticked
+dropdowns: 202 total, 188 with every option picked, 14 with options never picked
+
+NEVER TICKED (conditional parent never set, or hidden):
+
+
+DROPDOWN OPTIONS NEVER PICKED (more than 5 options, or hidden by a condition):
+activity_energy_effiency/android_material_design_spinner  -> never picked: D | G
+activity_energy_effiency/android_material_design_spinner2  -> never picked: D | G
+activity_in_side_property_floors_tiles/actv_tile_condition  -> never picked: Reasonable | Very poor
+activity_in_side_property_wap_dampness/actv_status_91  -> never picked: Unknown damp source
+activity_inside_property_roof_underlay/actv_ul_condition  -> never picked: Good | Very poor
+activity_inside_property_roof_ventilation/actv_vent_level  -> never picked: Adequate
+activity_outside_property_main_walls_movements/actv_movement_status  -> never picked: No structural movement | Recurring defects | Restraint steel rods
+activity_outside_property_windows_sill_projection/actv_condition  -> never picked: Fairly
+activity_property_built_year/actv_a2_year_band  -> never picked: 1930–1949 | 1990–2009 | the exact construction date is unknown
+activity_property_facing/android_material_design_spinner  -> never picked: East | South-west | North-west
+activity_property_flate/actv_a2_floor  -> never picked: Fourth floor
+activity_property_type/actv_a2_bedrooms  -> never picked: Six or more
+activity_property_weather/android_material_design_spinner  -> never picked: Overcast | Windy | Snowing
+activity_property_weather/android_material_design_spinner2  -> never picked: Overcast | Windy | Snowing

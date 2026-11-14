@@ -1,0 +1,19 @@
+scenario 1: 343 screens answered
+scenario 2: 339 screens answered
+scenario 3: 341 screens answered
+scenario 4: 338 screens answered
+scenario 5: 339 screens answered
+scenario 6: 334 screens answered
+scenario 7: 337 screens answered
+scenario 8: 341 screens answered
+MASTER: 2796 phrase lines, PDF 1406211 bytes
+
+checkboxes: 2289 total, 2289 ticked in at least one report, 0 never ticked
+dropdowns: 202 total, 200 with every option picked, 2 with options never picked
+
+NEVER TICKED (conditional parent never set, or hidden):
+
+
+DROPDOWN OPTIONS NEVER PICKED (more than 8 options, or hidden by a condition):
+activity_in_side_property_floors_tiles/actv_tile_condition  -> never picked: Very poor
+activity_inside_property_roof_underlay/actv_ul_condition  -> never picked: Very poor

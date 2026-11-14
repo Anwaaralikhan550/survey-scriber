@@ -32,12 +32,13 @@ const day = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.
   await sleep(14000);
   for (const t of targets) {
     const [sec, screen] = t.split(':');
-    await page.evaluate((h) => { location.hash = h; }, `#/survey/${id}/valuation/section/${sec}/screen/${screen}`);
+    const hash = sec === '-' ? `#/survey/${id}/valuation` : screen === '-' ? `#/survey/${id}/valuation/section/${sec}` : `#/survey/${id}/valuation/section/${sec}/screen/${screen}`;
+    await page.evaluate((h) => { location.hash = h; }, hash);
     await sleep(3200);
     await F.enable(page);
     const words = (await F.nodes(page)).map((n) => n.label).filter(Boolean);
     console.log(`\n[${screen}] ${words.join(' | ').slice(0, 900)}`);
-    await page.screenshot({ path: L.path.join(OUT, `${tag}_${screen}.png`) });
+    await page.screenshot({ path: L.path.join(OUT, `${tag}_${sec === '-' ? 'overview' : sec}_${screen}.png`) });
   }
   await browser.close();
 })().catch((e) => { console.error('CRASH', e); process.exit(1); });
