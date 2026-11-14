@@ -35,7 +35,7 @@
  },
  "val_pitched_roof": {
   "cb_tile": "true",
-  "actv_condition_pitched_roof": "Satisfactory"
+  "actv_condition_pitched_roof": "Good"
  },
  "val_flat_roof": {
   "cb_felt": "true",
@@ -47,21 +47,21 @@
  "val_walls_type": {
   "cb_cavity_wt": "true",
   "cb_brick_wt": "true",
-  "actv_condition_walls": "Satisfactory",
+  "actv_condition_walls": "Reasonable",
   "actv_building_movement": "None"
  },
  "val_external_joinery": {
   "cb_upvc_ej": "true",
   "cb_double_glazed": "true",
-  "actv_condition_ext_joinery": "Satisfactory"
+  "actv_condition_ext_joinery": "Fair"
  },
  "val_gas": {
   "actv_gas_supply": "Mains",
-  "actv_condition_gas": "Satisfactory"
+  "actv_condition_gas": "Very poor"
  },
  "val_water": {
   "actv_water_supply": "Mains",
-  "actv_condition_water": "Satisfactory"
+  "actv_condition_water": "Poor"
  },
  "val_hot_water_central_heating": {
   "cb_gas_hw": "true",

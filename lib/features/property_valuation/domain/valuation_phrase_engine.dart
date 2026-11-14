@@ -488,6 +488,11 @@ class ValuationPhraseEngine {
         return '$prefix $verb considered unsatisfactory and remedial work is necessary. '
             'It is recommended that a suitably qualified specialist be instructed to carry out a detailed investigation '
             'and to advise on the scope and cost of the necessary remedial works.';
+      case 'fair':
+      case 'very poor':
+        // Client list (13 Nov 2026): good, reasonable, fair, poor, very poor. No separate sentence
+        // was supplied for these two, so the general wording is used (client question).
+        return '$prefix ${_isPluralComponent(component) ? 'have' : 'has'} been assessed as $lc.';
       case '1':
         return '$prefix has been assessed as Condition Rating 1. '
             'No immediate repair work is considered necessary at this stage. '
@@ -522,6 +527,8 @@ class ValuationPhraseEngine {
     }
     final lc = condition.toLowerCase();
     if (lc == 'unsatisfactory' ||
+        lc == 'fair' ||
+        lc == 'very poor' ||
         lc == 'poor' ||
         lc == 'unsatisfactory and poor' ||
         lc == '3') {

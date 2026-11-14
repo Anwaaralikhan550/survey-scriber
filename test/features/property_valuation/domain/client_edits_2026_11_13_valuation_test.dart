@@ -247,4 +247,51 @@ void main() {
       expect(ValuationAnswerValidator.validateSurvey(all, liveScreens: screens.keys.toSet()), isEmpty);
     });
   });
+
+  group('V10 Standardised Condition: good, reasonable, fair, poor, very poor', () {
+    final condIds = (jsonDecode(File('tmp/client-edits-2026-11-13/condition_ids.json').readAsStringSync()) as List).cast<String>();
+    String screenOf(String field) => screens.entries.firstWhere((e) => e.value.containsKey(field)).key;
+    test('all 29 Condition dropdowns carry exactly the client list', () {
+      expect(condIds, hasLength(29));
+      for (final id in condIds) {
+        expect(screens[screenOf(id)]![id]!['options'], ['Good', 'Reasonable', 'Fair', 'Poor', 'Very poor'], reason: id);
+      }
+    });
+    test('the Notes box of each shows for Fair, Poor and Very poor', () {
+      for (final id in condIds) {
+        final notes = screens[screenOf(id)]!.values.where((f) => (f['conditionalOn'] as String? ?? '').startsWith('$id='));
+        expect(notes, hasLength(1), reason: id);
+        expect(notes.single['conditionalOn'], '$id=Fair|$id=Poor|$id=Very poor', reason: id);
+      }
+    });
+    test('every screen prints a sentence for every option', () {
+      for (final id in condIds) {
+        final screen = screenOf(id);
+        for (final entry in {
+          'Good': 'considered good',
+          'Reasonable': 'considered reasonable',
+          'Poor': 'considered unsatisfactory and remedial work is necessary',
+          'Fair': 'assessed as fair',
+          'Very poor': 'assessed as very poor',
+        }.entries) {
+          expect(say(screen, {id: entry.key}), contains(entry.value), reason: '$screen $id ${entry.key}');
+        }
+      }
+    });
+    test('typed notes print for Fair, Poor and Very poor but not for Good or Reasonable', () {
+      const id = 'actv_condition_chimney';
+      const notesId = 'et_notes_chimney';
+      for (final c in ['Fair', 'Poor', 'Very poor']) {
+        expect(say('val_chimney_stacks', {id: c, notesId: 'cracked pots'}), contains('Cracked pots'), reason: c);
+      }
+      for (final c in ['Good', 'Reasonable']) {
+        expect(say('val_chimney_stacks', {id: c, notesId: 'cracked pots'}), isNot(contains('Cracked pots')), reason: c);
+      }
+    });
+    test('surveys saved with Satisfactory / Unsatisfactory keep their wording', () {
+      expect(say('val_chimney_stacks', {'actv_condition_chimney': 'Satisfactory'}), contains('considered satisfactory'));
+      expect(say('val_chimney_stacks', {'actv_condition_chimney': 'Unsatisfactory', 'et_notes_chimney': 'loose'}),
+          allOf(contains('considered unsatisfactory and remedial work is necessary'), contains('Loose')));
+    });
+  });
 }

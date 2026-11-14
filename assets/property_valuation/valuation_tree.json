@@ -145,8 +145,8 @@
             { "id": "cb_replaced_pr", "label": "Replaced", "type": "checkbox" },
             { "id": "cb_other_909", "label": "Other", "type": "checkbox" },
             { "id": "et_other_777", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_909" },
-            { "id": "actv_condition_pitched_roof", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_pitched_roof", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_pitched_roof=Unsatisfactory" },
+            { "id": "actv_condition_pitched_roof", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_pitched_roof", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_pitched_roof=Fair|actv_condition_pitched_roof=Poor|actv_condition_pitched_roof=Very poor" },
             { "id": "cb_partial_view_pr", "label": "Partial View", "type": "checkbox" },
             { "id": "actv_visibility_pr", "label": "Visibility", "type": "dropdown", "options": ["Visible", "Not Visible"] },
             { "id": "actv_visibility_condition_pr", "label": "Visibility Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
@@ -169,8 +169,8 @@
             { "id": "cb_zinc_fr", "label": "Zinc", "type": "checkbox" },
             { "id": "cb_other_883", "label": "Other", "type": "checkbox" },
             { "id": "et_other_824", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_883" },
-            { "id": "actv_condition_flat_roof", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_flat_roof", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_flat_roof=Unsatisfactory" },
+            { "id": "actv_condition_flat_roof", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_flat_roof", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_flat_roof=Fair|actv_condition_flat_roof=Poor|actv_condition_flat_roof=Very poor" },
             { "id": "cb_partial_view_fr", "label": "Partial View", "type": "checkbox" },
             { "id": "actv_visibility_condition_fr", "label": "Visibility Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
             { "id": "et_visibility_notes_fr", "label": "Visibility Notes", "type": "text", "conditionalOn": "actv_visibility_condition_fr=Unsatisfactory" },
@@ -201,8 +201,8 @@
             { "id": "cb_zinc_or", "label": "Zinc", "type": "checkbox" },
             { "id": "cb_other_883_or", "label": "Other (Flat)", "type": "checkbox" },
             { "id": "et_other_824_or", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_883_or" },
-            { "id": "actv_condition_other_roof", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_other_roof", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_other_roof=Unsatisfactory" },
+            { "id": "actv_condition_other_roof", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_other_roof", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_other_roof=Fair|actv_condition_other_roof=Poor|actv_condition_other_roof=Very poor" },
             { "id": "cb_partial_view_or", "label": "Partial View", "type": "checkbox" },
             { "id": "actv_visibility_condition_or", "label": "Visibility Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
             { "id": "et_visibility_notes_or", "label": "Visibility Notes", "type": "text", "conditionalOn": "actv_visibility_condition_or=Unsatisfactory" },
@@ -225,8 +225,8 @@
             { "id": "cb_vented_fl", "label": "Vented", "type": "checkbox" },
             { "id": "cb_other_429", "label": "Other", "type": "checkbox" },
             { "id": "et_other_222", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_429" },
-            { "id": "actv_condition_flashings", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_flashings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_flashings=Unsatisfactory" },
+            { "id": "actv_condition_flashings", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_flashings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_flashings=Fair|actv_condition_flashings=Poor|actv_condition_flashings=Very poor" },
             { "id": "et_general_remarks_flashings", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -244,8 +244,8 @@
             { "id": "cb_asbestos_rw", "label": "Asbestos", "type": "checkbox" },
             { "id": "cb_other_723", "label": "Other", "type": "checkbox" },
             { "id": "et_other_477", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_723" },
-            { "id": "actv_condition_rainwater", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_rainwater", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_rainwater=Unsatisfactory" },
+            { "id": "actv_condition_rainwater", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_rainwater", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_rainwater=Fair|actv_condition_rainwater=Poor|actv_condition_rainwater=Very poor" },
             { "id": "et_general_remarks_rainwater", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -262,8 +262,8 @@
             { "id": "cb_rendered_cs", "label": "Rendered", "type": "checkbox" },
             { "id": "cb_other_922", "label": "Other", "type": "checkbox" },
             { "id": "et_other_177", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_922" },
-            { "id": "actv_condition_chimney", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_chimney", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_chimney=Unsatisfactory" },
+            { "id": "actv_condition_chimney", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_chimney", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_chimney=Fair|actv_condition_chimney=Poor|actv_condition_chimney=Very poor" },
             { "id": "et_general_remarks_chimney", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -284,8 +284,8 @@
             { "id": "cb_render_wt", "label": "Render", "type": "checkbox" },
             { "id": "cb_other_1009", "label": "Other", "type": "checkbox" },
             { "id": "et_other_142", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_1009" },
-            { "id": "actv_condition_walls", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_walls", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_walls=Unsatisfactory" },
+            { "id": "actv_condition_walls", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_walls", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_walls=Fair|actv_condition_walls=Poor|actv_condition_walls=Very poor" },
             { "id": "et_wall_thickness", "label": "Wall Thickness", "type": "text" },
             { "id": "actv_building_movement", "label": "Building Movement", "type": "dropdown", "options": ["Structural Movement", "Underpinning", "None"] },
             { "id": "cb_risk_of_further_movement", "label": "Risk of Further Movement Likely", "type": "checkbox" },
@@ -316,16 +316,16 @@
             { "id": "cb_timber_gf", "label": "Timber", "type": "checkbox" },
             { "id": "cb_other_327", "label": "Other", "type": "checkbox" },
             { "id": "et_other_469", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_327" },
-            { "id": "actv_condition_floor_ext", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_floor_ext", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_floor_ext=Unsatisfactory" },
+            { "id": "actv_condition_floor_ext", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_floor_ext", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_floor_ext=Fair|actv_condition_floor_ext=Poor|actv_condition_floor_ext=Very poor" },
             { "id": "et_general_remarks_floor_ext", "label": "General Remarks", "type": "text" },
             { "id": "label_upper_floor", "label": "Upper Floor", "type": "label" },
             { "id": "cb_solid_uf", "label": "Solid", "type": "checkbox" },
             { "id": "cb_timber_uf", "label": "Timber", "type": "checkbox" },
             { "id": "cb_other_327_u", "label": "Other", "type": "checkbox" },
             { "id": "et_other_469_u", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_327_u" },
-            { "id": "actv_condition_upper_floor", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_upper_floor", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_upper_floor=Unsatisfactory" },
+            { "id": "actv_condition_upper_floor", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_upper_floor", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_upper_floor=Fair|actv_condition_upper_floor=Poor|actv_condition_upper_floor=Very poor" },
             { "id": "et_general_remarks_upper_floor", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -345,8 +345,8 @@
             { "id": "cb_electro_osmotic", "label": "Electro Osmotic", "type": "checkbox" },
             { "id": "cb_other_457", "label": "Other", "type": "checkbox" },
             { "id": "et_other_115", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_457" },
-            { "id": "actv_condition_dpc", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_dpc", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_dpc=Unsatisfactory" },
+            { "id": "actv_condition_dpc", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_dpc", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_dpc=Fair|actv_condition_dpc=Poor|actv_condition_dpc=Very poor" },
             { "id": "et_general_remarks_dpc", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -359,8 +359,8 @@
           "fields": [
             { "id": "label_sub_floor_vents", "label": "Sub Floor Vents", "type": "label" },
             { "id": "actv_sub_floor_vents", "label": "Sub Floor Vents", "type": "dropdown", "options": ["Adequate", "Inadequate Number", "None"] },
-            { "id": "actv_condition_sub_floor", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_sub_floor", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_sub_floor=Unsatisfactory" },
+            { "id": "actv_condition_sub_floor", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_sub_floor", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_sub_floor=Fair|actv_condition_sub_floor=Poor|actv_condition_sub_floor=Very poor" },
             { "id": "et_general_remarks_sub_floor", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -377,8 +377,8 @@
             { "id": "cb_stain_de", "label": "Stain", "type": "checkbox" },
             { "id": "cb_other_895", "label": "Other", "type": "checkbox" },
             { "id": "et_other_315", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_895" },
-            { "id": "actv_condition_dec_ext", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_dec_ext", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_dec_ext=Unsatisfactory" },
+            { "id": "actv_condition_dec_ext", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_dec_ext", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_dec_ext=Fair|actv_condition_dec_ext=Poor|actv_condition_dec_ext=Very poor" },
             { "id": "et_general_remarks_dec_ext", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -393,8 +393,8 @@
             { "id": "actv_garage_type", "label": "Garage Type", "type": "dropdown", "options": ["Integral", "Semi-Detached", "Detached", "Block of Garage"] },
             { "id": "actv_number_of_garage", "label": "Number of Garages", "type": "dropdown", "options": ["Single", "Double", "Other"] },
             { "id": "actv_number_of_garage_other_text", "label": "Other", "type": "text", "conditionalOn": "actv_number_of_garage=Other", "conditionalValue": "", "conditionalMode": "show" },
-            { "id": "actv_condition_garage", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_garage", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_garage=Unsatisfactory" },
+            { "id": "actv_condition_garage", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_garage", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_garage=Fair|actv_condition_garage=Poor|actv_condition_garage=Very poor" },
             { "id": "et_general_remarks_garage", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -407,8 +407,8 @@
           "fields": [
             { "id": "label_outbuildings", "label": "Outbuildings", "type": "label" },
             { "id": "et_outbuilding_describe", "label": "Describe", "type": "text" },
-            { "id": "actv_condition_outbuildings", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_outbuildings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_outbuildings=Unsatisfactory" },
+            { "id": "actv_condition_outbuildings", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_outbuildings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_outbuildings=Fair|actv_condition_outbuildings=Poor|actv_condition_outbuildings=Very poor" },
             { "id": "et_general_remarks_outbuildings", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -432,8 +432,8 @@
             { "id": "et_other_792_site", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_720_site" },
             { "id": "cb_boundaries_well_defined", "label": "Boundaries Well Defined", "type": "checkbox" },
             { "id": "cb_trees_within_root", "label": "Trees Within Root Influencing Distance", "type": "checkbox" },
-            { "id": "actv_condition_site", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_site", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_site=Unsatisfactory" },
+            { "id": "actv_condition_site", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_site", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_site=Fair|actv_condition_site=Poor|actv_condition_site=Very poor" },
             { "id": "et_general_remarks_site", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -453,8 +453,8 @@
             { "id": "cb_other_299", "label": "Other", "type": "checkbox" },
             { "id": "et_other_120", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_299" },
             { "id": "cb_test_required", "label": "Test Required", "type": "checkbox" },
-            { "id": "actv_condition_drainage", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_drainage", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_drainage=Unsatisfactory" },
+            { "id": "actv_condition_drainage", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_drainage", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_drainage=Fair|actv_condition_drainage=Poor|actv_condition_drainage=Very poor" },
             { "id": "et_general_remarks_drainage", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -486,8 +486,8 @@
             { "id": "cb_insulation", "label": "Insulation", "type": "checkbox" },
             { "id": "cb_other_766", "label": "Other", "type": "checkbox" },
             { "id": "et_other_580", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_766" },
-            { "id": "actv_condition_roof_space", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_roof_space", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_roof_space=Unsatisfactory" },
+            { "id": "actv_condition_roof_space", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_roof_space", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_roof_space=Fair|actv_condition_roof_space=Poor|actv_condition_roof_space=Very poor" },
             { "id": "et_general_remarks_roof_space", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -506,8 +506,8 @@
             { "id": "cb_polystyrene_tiles", "label": "Polystyrene Tiles", "type": "checkbox" },
             { "id": "cb_other_690", "label": "Other", "type": "checkbox" },
             { "id": "et_other_571", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_690" },
-            { "id": "actv_condition_ceilings", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_ceilings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_ceilings=Unsatisfactory" },
+            { "id": "actv_condition_ceilings", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_ceilings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_ceilings=Fair|actv_condition_ceilings=Poor|actv_condition_ceilings=Very poor" },
             { "id": "et_general_remarks_ceilings", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -525,8 +525,8 @@
             { "id": "cb_removed_wi", "label": "Removed", "type": "checkbox" },
             { "id": "cb_other_914", "label": "Other", "type": "checkbox" },
             { "id": "et_other_791", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_914" },
-            { "id": "actv_condition_walls_int", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_walls_int", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_walls_int=Unsatisfactory" },
+            { "id": "actv_condition_walls_int", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_walls_int", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_walls_int=Fair|actv_condition_walls_int=Poor|actv_condition_walls_int=Very poor" },
             { "id": "et_general_remarks_walls_int", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -545,8 +545,8 @@
             { "id": "cb_removed_cb", "label": "Removed", "type": "checkbox" },
             { "id": "cb_other_1033", "label": "Other", "type": "checkbox" },
             { "id": "et_other_829", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_1033" },
-            { "id": "actv_condition_chimney_br", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_chimney_br", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_chimney_br=Unsatisfactory" },
+            { "id": "actv_condition_chimney_br", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_chimney_br", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_chimney_br=Fair|actv_condition_chimney_br=Poor|actv_condition_chimney_br=Very poor" },
             { "id": "et_general_remarks_chimney_br", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -567,8 +567,8 @@
             { "id": "cb_triple_glazed", "label": "Triple Glazed", "type": "checkbox" },
             { "id": "cb_other_948", "label": "Other", "type": "checkbox" },
             { "id": "et_other_438", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_948" },
-            { "id": "actv_condition_ext_joinery", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_ext_joinery", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_ext_joinery=Unsatisfactory" },
+            { "id": "actv_condition_ext_joinery", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_ext_joinery", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_ext_joinery=Fair|actv_condition_ext_joinery=Poor|actv_condition_ext_joinery=Very poor" },
             { "id": "et_general_remarks_ext_joinery", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -585,8 +585,8 @@
             { "id": "cb_bath_fittings", "label": "Bath Fittings", "type": "checkbox" },
             { "id": "cb_other_673", "label": "Other", "type": "checkbox" },
             { "id": "et_other_534", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_673" },
-            { "id": "actv_condition_int_fittings", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_int_fittings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_int_fittings=Unsatisfactory" },
+            { "id": "actv_condition_int_fittings", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_int_fittings", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_int_fittings=Fair|actv_condition_int_fittings=Poor|actv_condition_int_fittings=Very poor" },
             { "id": "et_general_remarks_int_fittings", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -603,8 +603,8 @@
             { "id": "cb_wallpaper", "label": "Wallpaper", "type": "checkbox" },
             { "id": "cb_other_504", "label": "Other", "type": "checkbox" },
             { "id": "et_other_278", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_504" },
-            { "id": "actv_condition_dec_int", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_dec_int", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_dec_int=Unsatisfactory" },
+            { "id": "actv_condition_dec_int", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_dec_int", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_dec_int=Fair|actv_condition_dec_int=Poor|actv_condition_dec_int=Very poor" },
             { "id": "et_general_remarks_dec_int", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -618,8 +618,8 @@
             { "id": "label_damp_meter", "label": "Damp", "type": "label" },
             { "id": "actv_damp_meter", "label": "Damp Meter", "type": "dropdown", "options": ["Damp Found", "Damp Not Found", "Inspection Limitations"] },
             { "id": "et_damp_found", "label": "Damp Found Location", "type": "text", "conditionalOn": "actv_damp_meter=Damp Found" },
-            { "id": "actv_condition_damp", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_damp", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_damp=Unsatisfactory" },
+            { "id": "actv_condition_damp", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_damp", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_damp=Fair|actv_condition_damp=Poor|actv_condition_damp=Very poor" },
             { "id": "et_general_remarks_damp", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -636,8 +636,8 @@
             { "id": "cb_beetle_infestation", "label": "Beetle Infestation", "type": "checkbox" },
             { "id": "cb_other_375", "label": "Other", "type": "checkbox" },
             { "id": "et_other_835", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_375" },
-            { "id": "actv_condition_timber", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_timber", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_timber=Unsatisfactory" },
+            { "id": "actv_condition_timber", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_timber", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_timber=Fair|actv_condition_timber=Poor|actv_condition_timber=Very poor" },
             { "id": "et_general_remarks_timber", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -654,8 +654,8 @@
             { "id": "cb_mixed_el", "label": "Mixed", "type": "checkbox" },
             { "id": "cb_other_194", "label": "Other", "type": "checkbox" },
             { "id": "et_other_423", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_194" },
-            { "id": "actv_condition_electric", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_electric", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_electric=Unsatisfactory" },
+            { "id": "actv_condition_electric", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_electric", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_electric=Fair|actv_condition_electric=Poor|actv_condition_electric=Very poor" },
             { "id": "et_general_remarks_electric", "label": "General Remarks", "type": "text" },
             { "id": "label_electric_age", "label": "Age", "type": "label" },
             { "id": "cb_modern", "label": "Modern", "type": "checkbox" },
@@ -678,8 +678,8 @@
           "fields": [
             { "id": "label_gas", "label": "Gas Supply", "type": "label" },
             { "id": "actv_gas_supply", "label": "Gas Supply", "type": "dropdown", "options": ["Mains", "LPG"] },
-            { "id": "actv_condition_gas", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_gas", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_gas=Unsatisfactory" },
+            { "id": "actv_condition_gas", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_gas", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_gas=Fair|actv_condition_gas=Poor|actv_condition_gas=Very poor" },
             { "id": "et_general_remarks_gas", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -692,8 +692,8 @@
           "fields": [
             { "id": "label_water", "label": "Water Supply", "type": "label" },
             { "id": "actv_water_supply", "label": "Water Supply", "type": "dropdown", "options": ["Mains", "Private"] },
-            { "id": "actv_condition_water", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_water", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_water=Unsatisfactory" },
+            { "id": "actv_condition_water", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_water", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_water=Fair|actv_condition_water=Poor|actv_condition_water=Very poor" },
             { "id": "et_general_remarks_water", "label": "General Remarks", "type": "text" }
           ]
         },
@@ -716,8 +716,8 @@
             { "id": "cb_none_hw", "label": "None", "type": "checkbox" },
             { "id": "cb_other_657", "label": "Other", "type": "checkbox" },
             { "id": "et_other_301", "label": "Other (describe)", "type": "text", "conditionalOn": "cb_other_657" },
-            { "id": "actv_condition_hw_ch", "label": "Condition", "type": "dropdown", "options": ["Satisfactory", "Unsatisfactory"] },
-            { "id": "et_notes_hw_ch", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_hw_ch=Unsatisfactory" },
+            { "id": "actv_condition_hw_ch", "label": "Condition", "type": "dropdown", "options": ["Good", "Reasonable", "Fair", "Poor", "Very poor"] },
+            { "id": "et_notes_hw_ch", "label": "Notes", "type": "text", "conditionalOn": "actv_condition_hw_ch=Fair|actv_condition_hw_ch=Poor|actv_condition_hw_ch=Very poor" },
             { "id": "et_general_remarks_hw_ch", "label": "General Remarks", "type": "text" }
           ]
         },

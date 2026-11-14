@@ -3183,6 +3183,586 @@
       "screenId": "*",
       "text": "The property is understood to be a listed building.",
       "allowedTokens": []
+    },
+    "VAL_N13_V10_0001": {
+      "screenId": "*",
+      "text": "The ceilings are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0002": {
+      "screenId": "*",
+      "text": "The ceilings are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0003": {
+      "screenId": "*",
+      "text": "The ceilings have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0004": {
+      "screenId": "*",
+      "text": "The ceilings have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0005": {
+      "screenId": "*",
+      "text": "The chimney breasts are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0006": {
+      "screenId": "*",
+      "text": "The chimney breasts are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0007": {
+      "screenId": "*",
+      "text": "The chimney breasts have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0008": {
+      "screenId": "*",
+      "text": "The chimney breasts have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0009": {
+      "screenId": "*",
+      "text": "The chimney stacks are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0010": {
+      "screenId": "*",
+      "text": "The chimney stacks are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0011": {
+      "screenId": "*",
+      "text": "The chimney stacks have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0012": {
+      "screenId": "*",
+      "text": "The chimney stacks have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0013": {
+      "screenId": "*",
+      "text": "The damp proof course has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0014": {
+      "screenId": "*",
+      "text": "The damp proof course has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0015": {
+      "screenId": "*",
+      "text": "The damp proof course is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0016": {
+      "screenId": "*",
+      "text": "The damp proof course is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0017": {
+      "screenId": "*",
+      "text": "The dampness has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0018": {
+      "screenId": "*",
+      "text": "The dampness has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0019": {
+      "screenId": "*",
+      "text": "The dampness is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0020": {
+      "screenId": "*",
+      "text": "The dampness is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0021": {
+      "screenId": "*",
+      "text": "The drainage has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0022": {
+      "screenId": "*",
+      "text": "The drainage has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0023": {
+      "screenId": "*",
+      "text": "The drainage is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0024": {
+      "screenId": "*",
+      "text": "The drainage is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0025": {
+      "screenId": "*",
+      "text": "The electrical installation has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0026": {
+      "screenId": "*",
+      "text": "The electrical installation has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0027": {
+      "screenId": "*",
+      "text": "The electrical installation is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0028": {
+      "screenId": "*",
+      "text": "The electrical installation is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0029": {
+      "screenId": "*",
+      "text": "The external decorations are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0030": {
+      "screenId": "*",
+      "text": "The external decorations are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0031": {
+      "screenId": "*",
+      "text": "The external decorations have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0032": {
+      "screenId": "*",
+      "text": "The external decorations have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0033": {
+      "screenId": "*",
+      "text": "The external walls are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0034": {
+      "screenId": "*",
+      "text": "The external walls are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0035": {
+      "screenId": "*",
+      "text": "The external walls have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0036": {
+      "screenId": "*",
+      "text": "The external walls have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0037": {
+      "screenId": "*",
+      "text": "The flashings are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0038": {
+      "screenId": "*",
+      "text": "The flashings are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0039": {
+      "screenId": "*",
+      "text": "The flashings have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0040": {
+      "screenId": "*",
+      "text": "The flashings have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0041": {
+      "screenId": "*",
+      "text": "The flat roof covering has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0042": {
+      "screenId": "*",
+      "text": "The flat roof covering has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0043": {
+      "screenId": "*",
+      "text": "The flat roof covering is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0044": {
+      "screenId": "*",
+      "text": "The flat roof covering is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0045": {
+      "screenId": "*",
+      "text": "The garage has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0046": {
+      "screenId": "*",
+      "text": "The garage has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0047": {
+      "screenId": "*",
+      "text": "The garage is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0048": {
+      "screenId": "*",
+      "text": "The garage is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0049": {
+      "screenId": "*",
+      "text": "The gas installation has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0050": {
+      "screenId": "*",
+      "text": "The gas installation has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0051": {
+      "screenId": "*",
+      "text": "The gas installation is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0052": {
+      "screenId": "*",
+      "text": "The gas installation is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0053": {
+      "screenId": "*",
+      "text": "The ground floor has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0054": {
+      "screenId": "*",
+      "text": "The ground floor has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0055": {
+      "screenId": "*",
+      "text": "The ground floor is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0056": {
+      "screenId": "*",
+      "text": "The ground floor is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0057": {
+      "screenId": "*",
+      "text": "The heating system has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0058": {
+      "screenId": "*",
+      "text": "The heating system has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0059": {
+      "screenId": "*",
+      "text": "The heating system is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0060": {
+      "screenId": "*",
+      "text": "The heating system is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0061": {
+      "screenId": "*",
+      "text": "The internal decorations are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0062": {
+      "screenId": "*",
+      "text": "The internal decorations are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0063": {
+      "screenId": "*",
+      "text": "The internal decorations have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0064": {
+      "screenId": "*",
+      "text": "The internal decorations have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0065": {
+      "screenId": "*",
+      "text": "The internal fittings are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0066": {
+      "screenId": "*",
+      "text": "The internal fittings are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0067": {
+      "screenId": "*",
+      "text": "The internal fittings have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0068": {
+      "screenId": "*",
+      "text": "The internal fittings have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0069": {
+      "screenId": "*",
+      "text": "The internal walls and partitions are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0070": {
+      "screenId": "*",
+      "text": "The internal walls and partitions are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0071": {
+      "screenId": "*",
+      "text": "The internal walls and partitions have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0072": {
+      "screenId": "*",
+      "text": "The internal walls and partitions have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0073": {
+      "screenId": "*",
+      "text": "The outbuildings are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0074": {
+      "screenId": "*",
+      "text": "The outbuildings are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0075": {
+      "screenId": "*",
+      "text": "The outbuildings have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0076": {
+      "screenId": "*",
+      "text": "The outbuildings have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0077": {
+      "screenId": "*",
+      "text": "The pitched roof covering has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0078": {
+      "screenId": "*",
+      "text": "The pitched roof covering has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0079": {
+      "screenId": "*",
+      "text": "The pitched roof covering is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0080": {
+      "screenId": "*",
+      "text": "The pitched roof covering is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0081": {
+      "screenId": "*",
+      "text": "The rainwater goods are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0082": {
+      "screenId": "*",
+      "text": "The rainwater goods are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0083": {
+      "screenId": "*",
+      "text": "The rainwater goods have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0084": {
+      "screenId": "*",
+      "text": "The rainwater goods have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0085": {
+      "screenId": "*",
+      "text": "The roof space has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0086": {
+      "screenId": "*",
+      "text": "The roof space has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0087": {
+      "screenId": "*",
+      "text": "The roof space is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0088": {
+      "screenId": "*",
+      "text": "The roof space is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0089": {
+      "screenId": "*",
+      "text": "The secondary roof covering has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0090": {
+      "screenId": "*",
+      "text": "The secondary roof covering has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0091": {
+      "screenId": "*",
+      "text": "The secondary roof covering is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0092": {
+      "screenId": "*",
+      "text": "The secondary roof covering is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0093": {
+      "screenId": "*",
+      "text": "The site boundaries are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0094": {
+      "screenId": "*",
+      "text": "The site boundaries are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0095": {
+      "screenId": "*",
+      "text": "The site boundaries have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0096": {
+      "screenId": "*",
+      "text": "The site boundaries have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0097": {
+      "screenId": "*",
+      "text": "The sub-floor ventilation has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0098": {
+      "screenId": "*",
+      "text": "The sub-floor ventilation has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0099": {
+      "screenId": "*",
+      "text": "The sub-floor ventilation is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0100": {
+      "screenId": "*",
+      "text": "The sub-floor ventilation is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0101": {
+      "screenId": "*",
+      "text": "The timber has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0102": {
+      "screenId": "*",
+      "text": "The timber has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0103": {
+      "screenId": "*",
+      "text": "The timber is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0104": {
+      "screenId": "*",
+      "text": "The timber is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0105": {
+      "screenId": "*",
+      "text": "The upper floors are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0106": {
+      "screenId": "*",
+      "text": "The water supply has been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0107": {
+      "screenId": "*",
+      "text": "The water supply has been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0108": {
+      "screenId": "*",
+      "text": "The water supply is considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0109": {
+      "screenId": "*",
+      "text": "The water supply is considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0110": {
+      "screenId": "*",
+      "text": "The windows and external joinery are considered good, commensurate with the age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be undertaken to preserve the current condition and prevent deterioration.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0111": {
+      "screenId": "*",
+      "text": "The windows and external joinery are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0112": {
+      "screenId": "*",
+      "text": "The windows and external joinery have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10_0113": {
+      "screenId": "*",
+      "text": "The windows and external joinery have been assessed as very poor.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10c1_0001": {
+      "screenId": "*",
+      "text": "The upper floors are considered reasonable for a property of this age and type of construction. No immediate repair work is considered necessary at this stage. Ongoing routine maintenance should be carried out in the normal way to preserve the current condition.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10c1_0002": {
+      "screenId": "*",
+      "text": "The upper floors have been assessed as fair.",
+      "allowedTokens": []
+    },
+    "VAL_N13_V10c1_0003": {
+      "screenId": "*",
+      "text": "The upper floors have been assessed as very poor.",
+      "allowedTokens": []
     }
   }
 }
