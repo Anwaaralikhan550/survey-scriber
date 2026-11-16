@@ -133,6 +133,7 @@ export class AiGeminiService implements OnModuleInit {
 
   async onModuleInit() {
     this.apiKey = this.configService.get<string>('GEMINI_API_KEY') || '';
+    this.baseUrl = this.configService.get<string>('GEMINI_API_BASE_URL') || this.baseUrl;
 
     if (!this.apiKey) {
       this.logger.warn('GEMINI_API_KEY not configured - AI features disabled');

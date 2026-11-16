@@ -1,0 +1,82 @@
+[
+  {
+    "name": "reviewer approved in the browser",
+    "ok": true
+  },
+  {
+    "name": "finalise is refused before the owner has approved (409 INVALID_STATE)",
+    "ok": true
+  },
+  {
+    "name": "owner approves",
+    "ok": true
+  },
+  {
+    "name": "owner finalises (200, FINALISED, final version = approved version)",
+    "ok": true
+  },
+  {
+    "name": "the late edit is refused: the editor says it can no longer be changed",
+    "ok": true
+  },
+  {
+    "name": "nothing from the late edit reached the report",
+    "ok": true
+  },
+  {
+    "name": "the screen turns read-only at once: chip says Finalised, edit tools are gone, Save is off",
+    "ok": true
+  },
+  {
+    "name": "reloading shows \"This report has been finalised\", not a bare error",
+    "ok": true
+  },
+  {
+    "name": "the old session cannot read the report any more (403)",
+    "ok": true
+  },
+  {
+    "name": "the old link says the report is finalised",
+    "ok": true
+  },
+  {
+    "name": "the owner can still read the final text (sync 200)",
+    "ok": true
+  },
+  {
+    "name": "history shows round 1 finalised",
+    "ok": true
+  },
+  {
+    "name": "reopen: draft, round 2",
+    "ok": true
+  },
+  {
+    "name": "the first link stays dead after reopen (not revived)",
+    "ok": true
+  },
+  {
+    "name": "the new session opens a draft that can be edited",
+    "ok": true
+  },
+  {
+    "name": "edit is saved in round 2 (version moves up)",
+    "ok": true
+  },
+  {
+    "name": "history keeps round 1 with the reason",
+    "ok": true
+  },
+  {
+    "name": "the first final version is still stored unchanged",
+    "ok": true
+  },
+  {
+    "name": "review starts again from Draft with no approval carried over",
+    "ok": true
+  },
+  {
+    "name": "no page errors",
+    "ok": true
+  }
+]

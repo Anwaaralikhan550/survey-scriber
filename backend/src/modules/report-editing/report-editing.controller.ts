@@ -11,6 +11,8 @@ import { ReportPhotosService } from './report-photos.service';
 import { RestoreVersionDto, UploadSnapshotDto } from './dto/editing.dto';
 import { AssignPhotosDto, ReviewActionDto, ReviewDecisionDto } from './dto/photos.dto';
 import { ReviewService } from './review.service';
+import { FinalisationService } from './finalisation.service';
+import { FinaliseDto, ReopenDto } from './dto/finalise.dto';
 
 /** App (owner) endpoints, spec section 16. {id} is the report id, which is the survey id. */
 @ApiTags('Report editing')
@@ -23,6 +25,7 @@ export class ReportEditingController {
     private readonly service: ReportEditingService,
     private readonly photos: ReportPhotosService,
     private readonly review: ReviewService,
+    private readonly finalisation: FinalisationService,
   ) {}
 
   @Put(':id/snapshot')
@@ -81,7 +84,7 @@ export class ReportEditingController {
   @Get(':id/review')
   async reviewView(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string) {
     await this.service.latest(user, id);
-    return this.review.view(id);
+    return this.review.view(id, true);
   }
 
   @Post(':id/review/submit')
@@ -118,6 +121,25 @@ export class ReportEditingController {
   async reviewReset(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: ReviewActionDto, @Req() req: Request) {
     await this.service.latest(user, id);
     return this.review.act(id, { kind: 'owner', userId: user.id }, 'reset', { expectedVersion: dto.expectedReportVersion, comment: dto.comment }, req);
+  }
+
+  /** Only the owner finalises, and only a version they approved. Ends every link and browser session. */
+  @Post(':id/finalise')
+  @HttpCode(HttpStatus.OK)
+  finalise(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: FinaliseDto, @Req() req: Request) {
+    return this.finalisation.finalise(user, id, dto.expectedReportVersion, req);
+  }
+
+  /** Explicit reopen of a finalised report: a new edit cycle; the earlier final version stays on record. */
+  @Post(':id/reopen')
+  @HttpCode(HttpStatus.OK)
+  reopen(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: ReopenDto, @Req() req: Request) {
+    return this.finalisation.reopen(user, id, dto.expectedReportVersion, dto.reason, req);
+  }
+
+  @Get(':id/finalisations')
+  finalisations(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string) {
+    return this.finalisation.history(user, id);
   }
 
   @Get(':id/versions')

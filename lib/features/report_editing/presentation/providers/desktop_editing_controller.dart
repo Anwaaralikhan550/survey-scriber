@@ -311,6 +311,23 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
         _setReview(await api.requestChanges(surveyId, expectedVersion: state.cloudVersion!, comment: comment));
       }, done: 'Sent back with your comment.');
 
+  /// The owner finalises the version they approved: the report is locked and every browser link ends.
+  Future<void> finaliseReport() => _guarded(() async {
+        _requireInSync();
+        final version = state.cloudVersion!;
+        await api.finalise(surveyId, expectedVersion: version);
+        _setReview(await api.review(surveyId));
+        _set(state.copyWith(linkActive: false, linkId: null, linkExpiresAt: null, linkUrl: null));
+        await store.vault.write(surveyId, null);
+      }, done: 'The report is final. Every browser link has ended and nobody can change it unless you reopen it.');
+
+  /// Open a final report again as a new edit round. [reason] is kept with the earlier final version.
+  Future<void> reopenReport(String reason) => _guarded(() async {
+        _requireInSync();
+        await api.reopen(surveyId, expectedVersion: state.cloudVersion!, reason: reason.trim());
+        _setReview(await api.review(surveyId));
+      }, done: 'The report is open again as a draft. The earlier final version is kept.');
+
   /// Start again from Draft; every approval is withdrawn.
   Future<void> resetReview() => _guarded(() async {
         _requireInSync();

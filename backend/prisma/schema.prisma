@@ -1168,6 +1168,7 @@ model Report {
   versions ReportVersion[]
   reviews  Review[]
   sessions EditorSession[]
+  finalisations ReportFinalisation[]
 
   @@index([ownerUserId])
   @@index([status])
@@ -1192,6 +1193,26 @@ model ReportVersion {
   @@unique([reportId, idempotencyKey])
   @@index([reportId])
   @@map("report_versions")
+}
+
+/// ReportFinalisation - one row per edit cycle that ended in a final version. Reopening keeps the row (it records who reopened and why)
+/// and starts the next cycle, so every earlier final version stays on record (client spec v1.3 sections 15 and 22).
+model ReportFinalisation {
+  id           String    @id @default(uuid()) @db.Uuid
+  reportId     String    @map("report_id") @db.Uuid
+  cycle        Int
+  version      Int
+  finalisedBy  String    @map("finalised_by") @db.Uuid
+  finalisedAt  DateTime  @default(now()) @map("finalised_at")
+  reopenedBy   String?   @map("reopened_by") @db.Uuid
+  reopenedAt   DateTime? @map("reopened_at")
+  reopenReason String?   @map("reopen_reason") @db.VarChar(500)
+
+  report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@unique([reportId, cycle])
+  @@index([reportId])
+  @@map("report_finalisations")
 }
 
 /// EditLink - a bearer link to edit one report in the browser. Only the SHA-256 hash of the token is stored.

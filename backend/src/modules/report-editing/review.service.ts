@@ -34,8 +34,8 @@ export class ReviewService {
   ) {}
 
   /** Status, who decided what on which version, and whether each approval still stands. */
-  async view(reportId: string) {
-    const report = await this.prisma.report.findUnique({ where: { id: reportId }, select: { status: true, version: true } });
+  async view(reportId: string, forOwner = false) {
+    const report = await this.prisma.report.findUnique({ where: { id: reportId }, select: { status: true, version: true, editCycle: true, finalVersion: true, finalisedAt: true } });
     if (!report) throw Errors.notFound();
     const rows = await this.prisma.review.findMany({ where: { reportId }, orderBy: { createdAt: 'desc' }, take: 50 });
     const reviews = rows.map((r) => ({
@@ -49,7 +49,23 @@ export class ReviewService {
     }));
     const live = (d: ReviewDecision) => reviews.find((r) => r.decision === d && !r.invalidated) ?? null;
     const submitted = rows.find((r) => r.decision === ReviewDecision.SUBMITTED);
+    // The owner also sees which edit round this is and every earlier final version with the reason it was reopened. Link holders do not.
+    const finalisation = forOwner
+      ? {
+          cycle: report.editCycle,
+          finalVersion: report.finalVersion,
+          finalisedAt: report.finalisedAt,
+          history: (await this.prisma.reportFinalisation.findMany({ where: { reportId }, orderBy: { cycle: 'desc' } })).map((f) => ({
+            cycle: f.cycle,
+            version: f.version,
+            finalisedAt: f.finalisedAt,
+            reopenedAt: f.reopenedAt,
+            reopenReason: f.reopenReason,
+          })),
+        }
+      : undefined;
     return {
+      ...(finalisation ? { finalisation } : {}),
       reportId,
       status: report.status,
       version: report.version,
@@ -166,6 +182,6 @@ export class ReviewService {
       metadata: { from: out.from, to: out.to, version: out.version, ...(actor.kind === 'session' ? { sessionId: actor.ctx.session.id, linkId: actor.ctx.link.id } : {}), hasComment: comment !== null },
       request: req,
     });
-    return this.view(reportId);
+    return this.view(reportId, actor.kind === 'owner');
   }
 }

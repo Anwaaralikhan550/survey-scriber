@@ -68,6 +68,16 @@ class ReviewEntry {
   final String? comment;
 }
 
+/// One edit round that reached a final version. Reopening keeps it, with who reopened and why.
+class FinalRound {
+  const FinalRound({required this.cycle, required this.version, required this.finalisedAt, this.reopenedAt, this.reopenReason});
+  final int cycle;
+  final int version;
+  final DateTime finalisedAt;
+  final DateTime? reopenedAt;
+  final String? reopenReason;
+}
+
 /// Where the review workflow stands (spec section 14): status, the versions involved, and who decided what.
 class ReviewInfo {
   const ReviewInfo({
@@ -78,6 +88,10 @@ class ReviewInfo {
     this.ownerApprovalVersion,
     this.lastAmendment,
     this.entries = const [],
+    this.cycle = 1,
+    this.finalVersion,
+    this.finalisedAt,
+    this.rounds = const [],
   });
 
   const ReviewInfo.draft(int version) : this(status: 'DRAFT', version: version);
@@ -89,6 +103,12 @@ class ReviewInfo {
   final int? ownerApprovalVersion;
   final ReviewEntry? lastAmendment;
   final List<ReviewEntry> entries;
+
+  /// Edit round (1 for a first report; +1 each time a final report is reopened).
+  final int cycle;
+  final int? finalVersion;
+  final DateTime? finalisedAt;
+  final List<FinalRound> rounds;
 
   bool get finalised => status == 'FINALISING' || status == 'FINALISED';
   bool get ownerApproved => status == 'OWNER_FINAL_APPROVAL';
@@ -102,6 +122,14 @@ class ReviewInfo {
         comment: raw['comment'] as String?,
       );
 
+  static FinalRound _round(Map raw) => FinalRound(
+        cycle: raw['cycle'] as int,
+        version: raw['version'] as int,
+        finalisedAt: DateTime.parse(raw['finalisedAt'] as String),
+        reopenedAt: raw['reopenedAt'] == null ? null : DateTime.parse(raw['reopenedAt'] as String),
+        reopenReason: raw['reopenReason'] as String?,
+      );
+
   factory ReviewInfo.fromJson(Map<String, dynamic> b) => ReviewInfo(
         status: b['status'] as String,
         version: b['version'] as int,
@@ -110,6 +138,10 @@ class ReviewInfo {
         ownerApprovalVersion: (b['ownerApproval'] as Map?)?['version'] as int?,
         lastAmendment: b['lastAmendmentRequest'] == null ? null : _entry(b['lastAmendmentRequest'] as Map),
         entries: [for (final r in (b['reviews'] as List? ?? const [])) _entry(r as Map)],
+        cycle: ((b['finalisation'] as Map?)?['cycle'] as int?) ?? 1,
+        finalVersion: (b['finalisation'] as Map?)?['finalVersion'] as int?,
+        finalisedAt: (b['finalisation'] as Map?)?['finalisedAt'] == null ? null : DateTime.parse((b['finalisation'] as Map)['finalisedAt'] as String),
+        rounds: [for (final r in ((b['finalisation'] as Map?)?['history'] as List? ?? const [])) _round(r as Map)],
       );
 }
 
@@ -245,6 +277,16 @@ class ReportEditingApi {
   Future<ReviewInfo> requestChanges(String surveyId, {required int expectedVersion, required String comment}) async => ReviewInfo.fromJson(
         await _call('POST', 'reports/$surveyId/review/decision', data: {'expectedReportVersion': expectedVersion, 'decision': 'AMENDMENTS_REQUIRED', 'comment': comment}),
       );
+
+  /// Finalise exactly [expectedVersion], the version the owner approved. Locks the report and ends every link.
+  Future<void> finalise(String surveyId, {required int expectedVersion}) async {
+    await _call('POST', 'reports/$surveyId/finalise', data: {'expectedReportVersion': expectedVersion});
+  }
+
+  /// Open a finalised report again as a new edit round. The earlier final version stays on record with [reason].
+  Future<void> reopen(String surveyId, {required int expectedVersion, required String reason}) async {
+    await _call('POST', 'reports/$surveyId/reopen', data: {'expectedReportVersion': expectedVersion, 'reason': reason});
+  }
 
   /// Back to Draft: every approval is withdrawn.
   Future<ReviewInfo> resetReview(String surveyId, {required int expectedVersion}) async =>

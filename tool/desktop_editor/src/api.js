@@ -115,6 +115,11 @@ export const reviewApi = {
   decide: (reportId, body) => call('POST', `/editor/reports/${reportId}/review/decision`, body),
 };
 
+export const aiApi = {
+  suggest: (reportId, body) => call('POST', `/editor/reports/${reportId}/ai/suggest`, body),
+  outcome: (reportId, body) => call('POST', `/editor/reports/${reportId}/ai/outcome`, body),
+};
+
 export const api = {
   /** Exchange the link token for the session cookie. The caller removes the token from the address bar. */
   async open(token) {

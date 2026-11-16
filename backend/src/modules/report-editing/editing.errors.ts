@@ -12,7 +12,8 @@ export type EditingErrorCode =
   | 'VALIDATION_ERROR'
   | 'NOT_FOUND'
   | 'CSRF_INVALID'
-  | 'INVALID_STATE';
+  | 'INVALID_STATE'
+  | 'AI_UNAVAILABLE';
 
 export function editingError(status: HttpStatus, code: EditingErrorCode, message: string, details?: unknown): HttpException {
   return new HttpException({ error: code, message, ...(details !== undefined ? { details } : {}) }, status);
@@ -29,5 +30,7 @@ export const Errors = {
   forbidden: () => editingError(HttpStatus.FORBIDDEN, 'FORBIDDEN', 'You do not have permission for this action'),
   notFound: () => editingError(HttpStatus.NOT_FOUND, 'NOT_FOUND', 'Report not found'),
   validation: (message: string, path: string) => editingError(HttpStatus.BAD_REQUEST, 'VALIDATION_ERROR', message, { path }),
+  aiUnavailable: (message = 'The AI assistant is not available right now. Your report is unchanged; please edit it by hand or try again later.') =>
+    editingError(HttpStatus.SERVICE_UNAVAILABLE, 'AI_UNAVAILABLE', message),
   csrf: () => editingError(HttpStatus.FORBIDDEN, 'CSRF_INVALID', 'Missing or wrong CSRF token'),
 };

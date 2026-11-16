@@ -54,6 +54,8 @@ export class EditorSessionService {
   async open(rawToken: string, req?: Request) {
     const link = await this.prisma.editLink.findUnique({ where: { tokenHash: sha256(rawToken) }, include: { report: true } });
     if (!link) throw Errors.linkInvalid();
+    // A finalised report is closed for good: say so, whatever happened to the link.
+    if (LOCKED.includes(link.report.status)) throw Errors.finalised();
     if (link.status === EditLinkStatus.ACTIVE && link.expiresAt <= new Date()) {
       await this.prisma.editLink.update({ where: { id: link.id }, data: { status: EditLinkStatus.EXPIRED, endedAt: new Date() } });
       await this.log('EDIT_LINK_EXPIRED', link.reportId, req, { linkId: link.id });
@@ -61,7 +63,6 @@ export class EditorSessionService {
     }
     if (link.status === EditLinkStatus.EXPIRED) throw Errors.linkExpired();
     if (link.status !== EditLinkStatus.ACTIVE) throw Errors.linkRevoked();
-    if (LOCKED.includes(link.report.status)) throw Errors.finalised();
 
     const cookie = newToken();
     const csrf = newToken();
@@ -91,7 +92,8 @@ export class EditorSessionService {
     });
     if (!session) throw Errors.linkInvalid();
     if (session.revokedAt && (session.link.status === EditLinkStatus.CANCELLED || session.link.status === EditLinkStatus.REVOKED || session.link.status === EditLinkStatus.INVALIDATED)) {
-      throw Errors.linkRevoked();
+      // Finalising ends every link on purpose: say that, not that the link was cancelled.
+      throw LOCKED.includes(session.report.status) ? Errors.finalised() : Errors.linkRevoked();
     }
     if (session.revokedAt || session.expiresAt <= new Date()) throw Errors.linkInvalid();
     const { link, report } = session;

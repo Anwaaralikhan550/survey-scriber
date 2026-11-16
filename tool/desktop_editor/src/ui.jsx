@@ -35,4 +35,5 @@ export const ICONS = {
   right: 'M4 10h12M11 5l5 5-5 5',
   upload: 'M10 14V4M5 9l5-5 5 5M4 17h12',
   swap: 'M4 7h12l-3-3M16 13H4l3 3',
+  spark: 'M10 3l1.6 4.4L16 9l-4.4 1.6L10 15l-1.6-4.4L4 9l4.4-1.6zM15.5 14.5v3M14 16h3',
 };

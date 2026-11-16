@@ -1,0 +1,186 @@
+[
+  {
+    "name": "Suggest wording is offered on text block a",
+    "ok": true
+  },
+  {
+    "name": "Suggest wording is offered on text block b",
+    "ok": true
+  },
+  {
+    "name": "Suggest wording is offered on text block c",
+    "ok": true
+  },
+  {
+    "name": "Suggest wording is offered on text block d",
+    "ok": true
+  },
+  {
+    "name": "Suggest wording is offered on text block e",
+    "ok": true
+  },
+  {
+    "name": "Suggest wording is offered on text block rec",
+    "ok": true
+  },
+  {
+    "name": "no AI button on a condition rating",
+    "ok": true
+  },
+  {
+    "name": "no AI button on a table",
+    "ok": true
+  },
+  {
+    "name": "notice says AI only rewords, can be wrong, never changes ratings",
+    "ok": true
+  },
+  {
+    "name": "five actions offered",
+    "ok": true
+  },
+  {
+    "name": "result arrives",
+    "ok": true
+  },
+  {
+    "name": "both texts shown side by side",
+    "ok": true
+  },
+  {
+    "name": "the new wording is marked",
+    "ok": true
+  },
+  {
+    "name": "no warnings for a faithful rewording",
+    "ok": true
+  },
+  {
+    "name": "nothing is applied while the dialog is open",
+    "ok": true
+  },
+  {
+    "name": "the editor text is unchanged too",
+    "ok": true
+  },
+  {
+    "name": "Reject closes the dialog and changes nothing",
+    "ok": true
+  },
+  {
+    "name": "the rejection is logged",
+    "ok": true
+  },
+  {
+    "name": "Accept puts the suggestion into the paragraph",
+    "ok": true
+  },
+  {
+    "name": "and it is saved like any other edit (version moves, text saved)",
+    "ok": true
+  },
+  {
+    "name": "acceptance logged with lengths only",
+    "ok": true
+  },
+  {
+    "name": "Undo brings the old wording back (it is an ordinary edit)",
+    "ok": true
+  },
+  {
+    "name": "the model got a placeholder, not the phone number",
+    "ok": true
+  },
+  {
+    "name": "the phone number is back in the suggestion shown to the surveyor",
+    "ok": true
+  },
+  {
+    "name": "and no warning is raised for it",
+    "ok": true
+  },
+  {
+    "name": "the model is told to keep facts, never invent ratings",
+    "ok": true
+  },
+  {
+    "name": "accepted wording kept the number",
+    "ok": true
+  },
+  {
+    "name": "new figure is flagged",
+    "ok": true
+  },
+  {
+    "name": "missing figure is flagged",
+    "ok": true
+  },
+  {
+    "name": "new severity wording is flagged",
+    "ok": true
+  },
+  {
+    "name": "the warning asks to check against notes",
+    "ok": true
+  },
+  {
+    "name": "Copy and modify opens an editable copy of the suggestion",
+    "ok": true
+  },
+  {
+    "name": "own edited version is what gets saved",
+    "ok": true
+  },
+  {
+    "name": "logged as accepted-modified, with the final length",
+    "ok": true
+  },
+  {
+    "name": "recommendations are suggested for and saved in their own field",
+    "ok": true
+  },
+  {
+    "name": "an answer that writes a rating is not shown; the report is untouched",
+    "ok": true
+  },
+  {
+    "name": "Try again returns to the choice of actions",
+    "ok": true
+  },
+  {
+    "name": "Escape closes the dialog",
+    "ok": true
+  },
+  {
+    "name": "when the AI is down the surveyor is told plainly and can carry on by hand",
+    "ok": true
+  },
+  {
+    "name": "the text is still editable after a failure",
+    "ok": true
+  },
+  {
+    "name": "failure is logged without text",
+    "ok": true
+  },
+  {
+    "name": "no report text, phone number or answer in any AI audit row",
+    "ok": true
+  },
+  {
+    "name": "dialog fits an iPad without sideways scrolling",
+    "ok": true
+  },
+  {
+    "name": "finalised report: no AI buttons at all",
+    "ok": true
+  },
+  {
+    "name": "and the server refuses a direct request too",
+    "ok": true
+  },
+  {
+    "name": "no page errors",
+    "ok": true
+  }
+]

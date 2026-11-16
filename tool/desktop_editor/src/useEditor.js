@@ -46,7 +46,7 @@ export function useEditor(initial) {
   const retryKey = useRef({ sig: '', key: '' });
   const timer = useRef(null);
 
-  const readOnly = server.readOnly || saveState === 'lost';
+  const readOnly = server.readOnly || saveState === 'lost' || saveState === 'readonly';
   const pending = useMemo(() => diffContent(server.content, cur), [server.content, cur]);
   const dirty = pending.length > 0;
 
@@ -153,7 +153,10 @@ export function useEditor(initial) {
         try {
           await loadLatest();
         } catch {
-          /* keep the working copy visible */
+          // The session was ended with the report (finalised): the server cannot be read any more, but the screen must
+          // still turn read-only at once, with the working copy left visible.
+          const cur = serverRef.current;
+          setServerNow({ ...cur, readOnly: true, readOnlyReason: e.code, status: e.code === 'REPORT_FINALISED' ? 'FINALISED' : cur.status });
         }
       }
       setSaveState(next);
@@ -233,5 +236,5 @@ export function useEditor(initial) {
     setServer((s) => ({ ...s, status }));
   }, []);
 
-  return { syncStatus, syncVersion, refreshServer: loadLatest, server, cur, pending, dirty, readOnly, saveState, lastSavedAt, message, conflict, canUndo: past.length > 0, canRedo: future.length > 0, edit, undo, redo, save, flush, reloadLatest, reapplyMine };
+  return { curRef, syncStatus, syncVersion, refreshServer: loadLatest, server, cur, pending, dirty, readOnly, saveState, lastSavedAt, message, conflict, canUndo: past.length > 0, canRedo: future.length > 0, edit, undo, redo, save, flush, reloadLatest, reapplyMine };
 }

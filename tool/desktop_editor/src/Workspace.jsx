@@ -5,6 +5,7 @@ import { api } from './api.js';
 import { Dialog, Icon, ICONS } from './ui.jsx';
 import Photos from './Photos.jsx';
 import Review, { STATUS_LABEL } from './Review.jsx';
+import Suggest from './Suggest.jsx';
 import { usePhotos } from './usePhotos.js';
 
 const TYPE_NAMES = { L2: 'Home Survey Level 2', L3: 'Home Survey Level 3', VALUATION: 'Valuation' };
@@ -39,7 +40,7 @@ const SAVE_LABEL = {
   lost: 'Access ended',
 };
 
-function Block({ block, index, count, sections, sectionId, readOnly, active, onActivate, onEdit, onMove, onDelete, onMoveTo, onBlur }) {
+function Block({ block, index, count, sections, sectionId, readOnly, active, onActivate, onEdit, onMove, onDelete, onMoveTo, onBlur, onSuggest }) {
   const label = BLOCK_LABEL[block.type] || 'Block';
   const field = block.type === 'recommendation' ? 'recommendation' : 'text';
   const body = (() => {
@@ -111,6 +112,11 @@ function Block({ block, index, count, sections, sectionId, readOnly, active, onA
         {block.required ? <span className="badge" title="Template field: can be edited, not deleted">Template field</span> : null}
         {!readOnly && (
           <span className="block-tools">
+            {onSuggest && (block.type === 'paragraph' || block.type === 'recommendation') && block.role !== 'rating' && (block[field] ?? '').trim() ? (
+              <button type="button" className="secondary ai-btn" aria-label="Suggest wording with AI" title="Suggest better wording. You decide whether to accept it." onClick={onSuggest}>
+                <Icon d={ICONS.spark} /> Suggest wording
+              </button>
+            ) : null}
             <button type="button" className="icon" aria-label="Move up" disabled={index === 0} onClick={() => onMove(-1)}>
               <Icon d={ICONS.up} />
             </button>
@@ -364,6 +370,7 @@ export default function Workspace({ initial, onExit }) {
                 onMoveTo={(to) => ops.moveTo(b.id, to)}
                 onDelete={() => setDialog({ type: 'delete', id: b.id })}
                 onBlur={() => ed.flush()}
+                onSuggest={readOnly ? null : () => setDialog({ type: 'ai', id: b.id })}
               />
               {!readOnly && (
                 <div className="insert">
@@ -409,6 +416,24 @@ export default function Workspace({ initial, onExit }) {
           <p className="muted small">Autosave runs a couple of seconds after you stop typing. Use SAVE TO SURVEYSCRIBER to save at once.</p>
         </aside>
       </div>
+
+      {dialog && dialog.type === 'ai' && (() => {
+        const target = section.blocks.find((x) => x.id === dialog.id);
+        if (!target) return null;
+        const field = target.type === 'recommendation' ? 'recommendation' : 'text';
+        const live = () => ed.curRef.current.flatMap((s) => s.blocks).find((x) => x.id === dialog.id)?.[field] ?? '';
+        return (
+          <Suggest
+            reportId={server.reportId}
+            editor={ed}
+            blockId={target.id}
+            blockLabel={BLOCK_LABEL[target.type]}
+            getText={live}
+            onApply={(text) => ed.edit((c) => (c.flatMap((s) => s.blocks).find((x) => x.id === dialog.id)[field] = text), `${dialog.id}:ai`)}
+            onClose={() => setDialog(null)}
+          />
+        );
+      })()}
 
       {dialog && dialog.type === 'delete' && (
         <Dialog

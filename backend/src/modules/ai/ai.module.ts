@@ -22,6 +22,6 @@ import { PrismaModule } from '../prisma/prisma.module';
     EnhancedReportService,
     ExcelPhraseGeneratorService,
   ],
-  exports: [AiService],
+  exports: [AiService, AiGeminiService],
 })
 export class AiModule {}
