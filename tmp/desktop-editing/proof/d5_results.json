@@ -1,0 +1,158 @@
+[
+ {
+  "name": "header shows the status \"Draft\" and a Submit for review button",
+  "ok": true
+ },
+ {
+  "name": "the side panel shows the status too",
+  "ok": true
+ },
+ {
+  "name": "Review tab explains the draft state and lists no history",
+  "ok": true
+ },
+ {
+  "name": "only Submit is offered in Draft",
+  "ok": true
+ },
+ {
+  "name": "submitting shows \"Submitted for review\" with the saved version",
+  "ok": true
+ },
+ {
+  "name": "the unsaved edit was saved first and the submission is for that version",
+  "ok": true
+ },
+ {
+  "name": "history shows who, what, which version and the comment",
+  "ok": true
+ },
+ {
+  "name": "header chip and side panel follow",
+  "ok": true
+ },
+ {
+  "name": "the Submit button disappears from the header once submitted",
+  "ok": true
+ },
+ {
+  "name": "no editing dialog is open after submitting (the save queue and the review agree on the version)",
+  "ok": true
+ },
+ {
+  "name": "Start review moves to Under review",
+  "ok": true
+ },
+ {
+  "name": "asking for changes without a comment is refused on screen, nothing is sent",
+  "ok": true
+ },
+ {
+  "name": "with a comment the report goes back as \"Changes requested\" and shows the request",
+  "ok": true
+ },
+ {
+  "name": "the requested changes quote the comment and the version",
+  "ok": true
+ },
+ {
+  "name": "the header offers Submit for review again",
+  "ok": true
+ },
+ {
+  "name": "resubmitting works",
+  "ok": true
+ },
+ {
+  "name": "approving shows \"Approved by a reviewer\" at this version",
+  "ok": true
+ },
+ {
+  "name": "the server holds the approval for the current version",
+  "ok": true
+ },
+ {
+  "name": "the screen says the approval stands and quotes its comment",
+  "ok": true
+ },
+ {
+  "name": "no owner buttons exist in the browser",
+  "ok": true
+ },
+ {
+  "name": "setup: the owner gave final approval",
+  "ok": true
+ },
+ {
+  "name": "after reload the browser shows the owner's final approval",
+  "ok": true
+ },
+ {
+  "name": "no review actions are offered once the owner approved",
+  "ok": true
+ },
+ {
+  "name": "the edit saves",
+  "ok": true
+ },
+ {
+  "name": "both approvals are out of date and the report is back to \"Submitted for review\"",
+  "ok": true
+ },
+ {
+  "name": "the header chip changed too",
+  "ok": true
+ },
+ {
+  "name": "server: both approvals invalidated, status Submitted for Review",
+  "ok": true
+ },
+ {
+  "name": "adding a photo after the approval also withdraws it",
+  "ok": true
+ },
+ {
+  "name": "state moved under the page: an action that is no longer possible is refused clearly and the view refreshes",
+  "ok": true
+ },
+ {
+  "name": "the message says why",
+  "ok": true
+ },
+ {
+  "name": "expired link: status and history are readable, no action buttons",
+  "ok": true
+ },
+ {
+  "name": "expired link: no Submit for review in the header",
+  "ok": true
+ },
+ {
+  "name": "finalised: opening the link shows the finalised message",
+  "ok": true
+ },
+ {
+  "name": "cancelled link: the action fails with a clear message and nothing changes",
+  "ok": true
+ },
+ {
+  "name": "Layout ipad_portrait: no horizontal page scroll",
+  "ok": true
+ },
+ {
+  "name": "Layout ipad_portrait: no script or console errors",
+  "ok": true
+ },
+ {
+  "name": "Layout laptop: no horizontal page scroll",
+  "ok": true
+ },
+ {
+  "name": "Layout laptop: no script or console errors",
+  "ok": true
+ },
+ {
+  "name": "no script or console errors during the main run",
+  "ok": true
+ }
+]

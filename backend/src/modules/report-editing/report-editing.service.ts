@@ -7,6 +7,7 @@ import { AuditService } from '../audit/audit.service';
 import { ContentValidationError, ReportContent, cleanContent } from './report-content';
 import { Errors } from './editing.errors';
 import { newToken } from './token.util';
+import { invalidateApprovalsAfterChange } from './review-effects';
 
 export interface Owner {
   id: string;
@@ -100,7 +101,7 @@ export class ReportEditingService {
         await tx.reportVersion.create({
           data: { reportId: surveyId, version: 1, content: content as unknown as Prisma.InputJsonValue, savedBy: `owner:${user.id}`, reason: 'SNAPSHOT' },
         });
-        return { version: created.version, updatedAt: created.updatedAt, created: true };
+        return { version: created.version, updatedAt: created.updatedAt, created: true, invalidated: false };
       }
       const locked = await this.lockReport(tx, surveyId);
       if (LOCKED.includes(locked.status)) throw Errors.finalised();
@@ -113,9 +114,11 @@ export class ReportEditingService {
       await tx.reportVersion.create({
         data: { reportId: surveyId, version: next, content: content as unknown as Prisma.InputJsonValue, savedBy: `owner:${user.id}`, reason: 'SNAPSHOT' },
       });
-      return { version: next, updatedAt: updated.updatedAt, created: false };
+      const invalidated = (await invalidateApprovalsAfterChange(tx, surveyId, locked.status)) !== null;
+      return { version: next, updatedAt: updated.updatedAt, created: false, invalidated };
     });
     await this.log('REPORT_SNAPSHOT_UPLOADED', user, surveyId, req, { version: result.version, created: result.created });
+    if (result.invalidated) await this.log('REVIEW_INVALIDATED', user, surveyId, req, { version: result.version, cause: 'new upload from the phone' });
     return { reportId: surveyId, version: result.version, updatedAt: result.updatedAt };
   }
 
@@ -213,9 +216,11 @@ export class ReportEditingService {
       await tx.reportVersion.create({
         data: { reportId, version: next, content: old.content as Prisma.InputJsonValue, savedBy: `owner:${user.id}`, reason: 'RESTORE' },
       });
-      return next;
+      const invalidated = (await invalidateApprovalsAfterChange(tx, reportId, locked.status)) !== null;
+      return { next, invalidated };
     });
-    await this.log('REPORT_VERSION_RESTORED', user, reportId, req, { restoredFrom: version, version: out });
-    return { reportId, version: out, restoredFrom: version };
+    await this.log('REPORT_VERSION_RESTORED', user, reportId, req, { restoredFrom: version, version: out.next });
+    if (out.invalidated) await this.log('REVIEW_INVALIDATED', user, reportId, req, { version: out.next, cause: 'restore' });
+    return { reportId, version: out.next, restoredFrom: version };
   }
 }

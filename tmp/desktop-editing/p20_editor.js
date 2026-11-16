@@ -106,6 +106,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     const roof = s.content[2];
     const p1 = roof.blocks[0];
     await page.locator(`[data-block-id="${p1.id}"] .textview`).click();
+    await page.locator('.pm:focus').waitFor({ timeout: 5000 });
     await page.locator(`[data-block-id="${p1.id}"] .pm`).waitFor();
     await page.keyboard.press('End');
     await page.keyboard.type(' Edited in the browser.');
@@ -179,6 +180,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     check('Conflict setup: a colleague saved a newer version', theirs.status === 200, `status=${theirs.status} ${JSON.stringify(theirs.body).slice(0, 200)}`);
     await page.locator('.sections li button', { hasText: 'A. About the inspection' }).click();
     await page.locator(`[data-block-id="${target.id}"] .textview`).click();
+    await page.locator('.pm:focus').waitFor({ timeout: 5000 });
     await page.keyboard.press('End');
     await page.keyboard.type(' My own addition.');
     await page.getByRole('button', { name: 'SAVE TO SURVEYSCRIBER' }).click();
@@ -198,6 +200,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     // conflict where re-apply is impossible: colleague deletes the paragraph I edit
     const victim = rep.content[0].blocks[1];
     await page.locator(`[data-block-id="${victim.id}"] .textview`).click();
+    await page.locator('.pm:focus').waitFor({ timeout: 5000 });
     await page.keyboard.press('End');
     await page.keyboard.type(' Late edit.');
     await mate.patch(s.surveyId, { baseVersion: (await mate.read(s.surveyId)).version, changes: [{ op: 'deleteBlock', sectionId: rep.content[0].id, blockId: victim.id }] });
@@ -212,6 +215,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     // ---------- Offline and network failure ----------
     const first = (await serverReport(s)).content[0].blocks[0];
     await page.locator(`[data-block-id="${first.id}"] .textview`).click();
+    await page.locator('.pm:focus').waitFor({ timeout: 5000 });
     await ctx.setOffline(true);
     await page.keyboard.press('End');
     await page.keyboard.type(' Typed while offline.');
@@ -259,6 +263,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     await page.locator('.sections li button', { hasText: 'F. Walls' }).click();
     const w = s.content[4].blocks[0];
     await page.locator(`[data-block-id="${w.id}"] .textview`).click();
+    await page.locator('.pm:focus').waitFor({ timeout: 5000 });
     await page.keyboard.press('End');
     await page.keyboard.type(' Shortcut text.');
     await page.keyboard.press('Control+S');
@@ -301,6 +306,7 @@ async function openEditor(browser, s, link, viewport = { width: 1440, height: 90
     await call(s.token, 'DELETE', `/reports/${s.surveyId}/edit-links/${link.linkId}`);
     await page.locator('.sections li button', { hasText: 'F. Walls' }).click();
     await page.locator(`[data-block-id="${s.content[4].blocks[0].id}"] .textview`).click();
+    await page.locator('.pm:focus').waitFor({ timeout: 5000 });
     await page.keyboard.type('x');
     await page.getByRole('button', { name: 'SAVE TO SURVEYSCRIBER' }).click();
     check('Cancelled link: the next save is refused and the editor says access ended', await page.getByText('Your access to this report has ended').waitFor({ timeout: 9000 }).then(() => true).catch(() => false));

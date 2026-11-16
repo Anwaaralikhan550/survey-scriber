@@ -57,6 +57,62 @@ class CloudPhotos {
   final List<CloudPhoto> photos;
 }
 
+/// One decision in the review history.
+class ReviewEntry {
+  const ReviewEntry({required this.decision, required this.version, required this.by, required this.createdAt, required this.invalidated, this.comment});
+  final String decision;
+  final int version;
+  final String by;
+  final DateTime createdAt;
+  final bool invalidated;
+  final String? comment;
+}
+
+/// Where the review workflow stands (spec section 14): status, the versions involved, and who decided what.
+class ReviewInfo {
+  const ReviewInfo({
+    required this.status,
+    required this.version,
+    this.submittedVersion,
+    this.reviewerApprovalVersion,
+    this.ownerApprovalVersion,
+    this.lastAmendment,
+    this.entries = const [],
+  });
+
+  const ReviewInfo.draft(int version) : this(status: 'DRAFT', version: version);
+
+  final String status;
+  final int version;
+  final int? submittedVersion;
+  final int? reviewerApprovalVersion;
+  final int? ownerApprovalVersion;
+  final ReviewEntry? lastAmendment;
+  final List<ReviewEntry> entries;
+
+  bool get finalised => status == 'FINALISING' || status == 'FINALISED';
+  bool get ownerApproved => status == 'OWNER_FINAL_APPROVAL';
+
+  static ReviewEntry _entry(Map raw) => ReviewEntry(
+        decision: raw['decision'] as String,
+        version: raw['version'] as int,
+        by: raw['by'] as String,
+        createdAt: DateTime.parse(raw['createdAt'] as String),
+        invalidated: raw['invalidated'] == true,
+        comment: raw['comment'] as String?,
+      );
+
+  factory ReviewInfo.fromJson(Map<String, dynamic> b) => ReviewInfo(
+        status: b['status'] as String,
+        version: b['version'] as int,
+        submittedVersion: b['submittedVersion'] as int?,
+        reviewerApprovalVersion: (b['reviewerApproval'] as Map?)?['version'] as int?,
+        ownerApprovalVersion: (b['ownerApproval'] as Map?)?['version'] as int?,
+        lastAmendment: b['lastAmendmentRequest'] == null ? null : _entry(b['lastAmendmentRequest'] as Map),
+        entries: [for (final r in (b['reviews'] as List? ?? const [])) _entry(r as Map)],
+      );
+}
+
 class SyncedReport {
   const SyncedReport({required this.version, required this.status, required this.sections});
   final int version;
@@ -178,6 +234,21 @@ class ReportEditingApi {
     if (status >= 400 || res.data == null) throw ReportEditingException(code: 'ERROR', message: 'Could not download the photo', status: status);
     return res.data!;
   }
+
+  Future<ReviewInfo> review(String surveyId) async => ReviewInfo.fromJson(await _call('GET', 'reports/$surveyId/review'));
+
+  /// The owner's final approval of exactly [expectedVersion] (spec section 14: only the owner can do this).
+  Future<ReviewInfo> ownerApprove(String surveyId, {required int expectedVersion, String? comment}) async =>
+      ReviewInfo.fromJson(await _call('POST', 'reports/$surveyId/owner-approval', data: {'expectedReportVersion': expectedVersion, if (comment != null) 'comment': comment}));
+
+  /// Send the report back with a comment saying what has to change.
+  Future<ReviewInfo> requestChanges(String surveyId, {required int expectedVersion, required String comment}) async => ReviewInfo.fromJson(
+        await _call('POST', 'reports/$surveyId/review/decision', data: {'expectedReportVersion': expectedVersion, 'decision': 'AMENDMENTS_REQUIRED', 'comment': comment}),
+      );
+
+  /// Back to Draft: every approval is withdrawn.
+  Future<ReviewInfo> resetReview(String surveyId, {required int expectedVersion}) async =>
+      ReviewInfo.fromJson(await _call('POST', 'reports/$surveyId/review/reset', data: {'expectedReportVersion': expectedVersion}));
 
   Future<SyncedReport> sync(String surveyId) async {
     final b = await _call('POST', 'reports/$surveyId/sync');

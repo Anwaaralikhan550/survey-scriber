@@ -14,7 +14,7 @@ const HISTORY_LIMIT = 100;
  */
 export function useEditor(initial) {
   const [server, setServer] = useState(() => ({ ...initial, content: normalise(initial.content) }));
-  const [cur, setCurState] = useState(() => normalise(initial.content));
+  const [cur, setCurRaw] = useState(() => normalise(initial.content));
   const [past, setPast] = useState([]);
   const [future, setFuture] = useState([]);
   const [saveState, setSaveStateRaw] = useState(initial.readOnly ? 'readonly' : 'saved');
@@ -32,8 +32,16 @@ export function useEditor(initial) {
   const curRef = useRef(cur);
   serverRef.current = server;
   curRef.current = cur;
-  const inFlight = useRef(false);
-  const rerun = useRef(false);
+  // The refs are what the save queue reads. They are updated at the moment the state is set, not at the next render,
+  // so a save that starts right after another one finished never works from the answer before it.
+  const setCurState = useCallback((v) => {
+    curRef.current = v;
+    setCurRaw(v);
+  }, []);
+  const setServerNow = useCallback((v) => {
+    serverRef.current = v;
+    setServer(v);
+  }, []);
   const lastKey = useRef({ key: null, at: 0 });
   const retryKey = useRef({ sig: '', key: '' });
   const timer = useRef(null);
@@ -91,18 +99,16 @@ export function useEditor(initial) {
     return 'failed';
   }, []);
 
+  const loadSeq = useRef(0);
   const loadLatest = useCallback(async () => {
+    const seq = ++loadSeq.current;
     const fresh = await api.read(serverRef.current.reportId);
     fresh.content = normalise(fresh.content);
-    setServer(fresh);
+    if (seq === loadSeq.current) setServerNow(fresh); // a slower, older answer never replaces a newer one
     return fresh;
   }, []);
 
-  const save = useCallback(async () => {
-    if (inFlight.current) {
-      rerun.current = true;
-      return;
-    }
+  const doSave = useCallback(async () => {
     if (['conflict', 'lost', 'readonly'].includes(stateRef.current)) return; // needs the user's decision first
     const base = serverRef.current;
     const ops = diffContent(base.content, curRef.current);
@@ -110,7 +116,6 @@ export function useEditor(initial) {
       if (!base.readOnly) setSaveState('saved');
       return;
     }
-    inFlight.current = true;
     setSaveState('saving');
     setMessage('');
     const sent = curRef.current;
@@ -134,7 +139,6 @@ export function useEditor(initial) {
       }
     } catch (e) {
       const next = fail(e);
-      rerun.current = false; // a failed save is never repeated behind the user's back (conflict dialog, retry timer decide)
       setMessage(e.message || 'Save failed');
       if (next === 'conflict') {
         const serverVersion = e.details?.serverVersion;
@@ -153,14 +157,17 @@ export function useEditor(initial) {
         }
       }
       setSaveState(next);
-    } finally {
-      inFlight.current = false;
-      if (rerun.current) {
-        rerun.current = false;
-        save();
-      }
     }
   }, [fail, loadLatest, setSaveState]);
+
+  // One save at a time, in the order asked for. Anyone who asks (autosave, the Save button, a decision in the
+  // review screen) gets a promise that finishes when the server has really answered, never earlier.
+  const queue = useRef(Promise.resolve());
+  const save = useCallback(() => {
+    const run = queue.current.then(doSave);
+    queue.current = run.catch(() => undefined);
+    return run;
+  }, [doSave]);
 
   // Autosave: 2 s after the last change; transient failures retry by themselves (same idempotency key).
   useEffect(() => {
@@ -180,11 +187,12 @@ export function useEditor(initial) {
     return () => window.removeEventListener('online', online);
   }, [dirty, save]);
 
-  /** Spec 10: flush on blur and navigation. */
+  /** Spec 10: flush on blur and navigation. Resolves when everything pending (and any save already running) is done. */
   const flush = useCallback(() => {
     clearTimeout(timer.current);
-    return dirty && !readOnly ? save() : Promise.resolve();
-  }, [dirty, readOnly, save]);
+    const pendingNow = diffContent(serverRef.current.content, curRef.current).length > 0;
+    return pendingNow && !serverRef.current.readOnly ? save() : queue.current;
+  }, [save]);
 
   /** Reload latest from the server, dropping local edits. */
   const reloadLatest = useCallback(async () => {
@@ -203,7 +211,7 @@ export function useEditor(initial) {
     const theirs = conflict.theirs || (await loadLatest());
     try {
       const merged = normalise(applyOps(theirs.content, conflict.mine));
-      setServer({ ...theirs, content: normalise(theirs.content) });
+      setServerNow({ ...theirs, content: normalise(theirs.content) });
       setCurState(merged);
       setConflict(null);
       setSaveState('unsaved');
@@ -219,5 +227,11 @@ export function useEditor(initial) {
     setServer((s) => ({ ...s, version }));
   }, []);
 
-  return { syncVersion, refreshServer: loadLatest, server, cur, pending, dirty, readOnly, saveState, lastSavedAt, message, conflict, canUndo: past.length > 0, canRedo: future.length > 0, edit, undo, redo, save, flush, reloadLatest, reapplyMine };
+  /** The review workflow moved the report to a new status. */
+  const syncStatus = useCallback((status) => {
+    serverRef.current = { ...serverRef.current, status };
+    setServer((s) => ({ ...s, status }));
+  }, []);
+
+  return { syncStatus, syncVersion, refreshServer: loadLatest, server, cur, pending, dirty, readOnly, saveState, lastSavedAt, message, conflict, canUndo: past.length > 0, canRedo: future.length > 0, edit, undo, redo, save, flush, reloadLatest, reapplyMine };
 }

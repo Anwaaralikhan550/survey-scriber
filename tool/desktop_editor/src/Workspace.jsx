@@ -4,6 +4,7 @@ import { useEditor } from './useEditor.js';
 import { api } from './api.js';
 import { Dialog, Icon, ICONS } from './ui.jsx';
 import Photos from './Photos.jsx';
+import Review, { STATUS_LABEL } from './Review.jsx';
 import { usePhotos } from './usePhotos.js';
 
 const TYPE_NAMES = { L2: 'Home Survey Level 2', L3: 'Home Survey Level 3', VALUATION: 'Valuation' };
@@ -143,7 +144,7 @@ export default function Workspace({ initial, onExit }) {
   const [sectionId, setSectionId] = useState(cur[0]?.id);
   const [activeId, setActiveId] = useState(null);
   const [dialog, setDialog] = useState(null);
-  const [view, setView] = useState('report'); // 'report' | 'photos'
+  const [view, setView] = useState('report'); // 'report' | 'photos' | 'review'
   const photosState = usePhotos({ reportId: server.reportId, editor: ed, readOnly });
   const [now, setNow] = useState(Date.now());
 
@@ -266,6 +267,9 @@ export default function Workspace({ initial, onExit }) {
           <span className={`chip ${saveState === 'lost' ? 'state-lost' : server.readOnly ? 'chip-warn' : 'chip-ok'}`} role={saveState === 'lost' || server.readOnly ? 'status' : undefined}>
             {saveState === 'lost' ? 'Access ended' : server.readOnly ? (server.readOnlyReason === 'REPORT_FINALISED' ? 'Finalised, read-only' : 'Link expired, read-only') : 'Editing'}
           </span>
+          <button type="button" className={`chip chip-btn review-chip review-${server.status}`} title="Open the review screen" onClick={() => (ed.flush(), setView('review'))}>
+            {STATUS_LABEL[server.status] || server.status}
+          </button>
           <span className="chip" title={`Link expires ${fmt(server.linkExpiresAt)}`}>Link: {linkLeft}</span>
         </div>
         <div className="actions">
@@ -278,6 +282,11 @@ export default function Workspace({ initial, onExit }) {
           <button type="button" className="secondary" onClick={() => (dirty ? setDialog('reload') : ed.reloadLatest())}>
             Reload latest
           </button>
+          {!readOnly && (server.status === 'DRAFT' || server.status === 'AMENDMENTS_REQUIRED') ? (
+            <button type="button" className="secondary" onClick={() => (ed.flush(), setView('review'))}>
+              Submit for review
+            </button>
+          ) : null}
           <button type="button" className="primary" disabled={readOnly || saveState === 'saving' || saveState === 'conflict'} onClick={ed.save}>
             SAVE TO SURVEYSCRIBER
           </button>
@@ -319,7 +328,7 @@ export default function Workspace({ initial, onExit }) {
           </ul>
         </nav>
 
-        <main className="pane" aria-label={view === 'photos' ? 'Photographs' : section.title}>
+        <main className="pane" aria-label={view === 'photos' ? 'Photographs' : view === 'review' ? 'Review' : section.title}>
           <div className="tabs" role="tablist" aria-label="Report view">
             <button type="button" role="tab" aria-selected={view === 'report'} className={view === 'report' ? 'is-current' : ''} onClick={() => setView('report')}>
               Report text
@@ -327,8 +336,13 @@ export default function Workspace({ initial, onExit }) {
             <button type="button" role="tab" aria-selected={view === 'photos'} className={view === 'photos' ? 'is-current' : ''} onClick={() => (ed.flush(), setView('photos'))}>
               Photographs <span className="count">{photosState.loading ? '' : photosState.photos.length}</span>
             </button>
+            <button type="button" role="tab" aria-selected={view === 'review'} className={view === 'review' ? 'is-current' : ''} onClick={() => (ed.flush(), setView('review'))}>
+              Review <span className={`count status-dot dot-${server.status}`}>{STATUS_LABEL[server.status] || ''}</span>
+            </button>
           </div>
-          {view === 'photos' ? (
+          {view === 'review' ? (
+            <Review reportId={server.reportId} editor={ed} readOnly={readOnly} onStatus={ed.syncStatus} />
+          ) : view === 'photos' ? (
             <Photos reportId={server.reportId} photosState={photosState} sections={cur.map((s) => ({ key: s.key, title: s.title }))} readOnly={readOnly} />
           ) : (
             <>
@@ -386,7 +400,7 @@ export default function Workspace({ initial, onExit }) {
             <dt>Type</dt>
             <dd>{TYPE_NAMES[server.reportType] || server.reportType}</dd>
             <dt>Status</dt>
-            <dd>{String(server.status).replaceAll('_', ' ').toLowerCase()}</dd>
+            <dd>{STATUS_LABEL[server.status] || server.status}</dd>
             <dt>Last saved</dt>
             <dd>{fmt(ed.lastSavedAt || server.updatedAt)}</dd>
             <dt>Link expires</dt>

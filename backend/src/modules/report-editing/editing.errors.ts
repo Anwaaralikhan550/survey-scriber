@@ -11,7 +11,8 @@ export type EditingErrorCode =
   | 'FORBIDDEN'
   | 'VALIDATION_ERROR'
   | 'NOT_FOUND'
-  | 'CSRF_INVALID';
+  | 'CSRF_INVALID'
+  | 'INVALID_STATE';
 
 export function editingError(status: HttpStatus, code: EditingErrorCode, message: string, details?: unknown): HttpException {
   return new HttpException({ error: code, message, ...(details !== undefined ? { details } : {}) }, status);

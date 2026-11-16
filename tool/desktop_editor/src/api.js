@@ -108,6 +108,13 @@ export const photoApi = {
   remove: (reportId, photoId, expectedReportVersion) => call('DELETE', `/editor/reports/${reportId}/photos/${photoId}?expectedReportVersion=${expectedReportVersion}`),
 };
 
+export const reviewApi = {
+  view: (reportId) => call('GET', `/editor/reports/${reportId}/review`),
+  submit: (reportId, body) => call('POST', `/editor/reports/${reportId}/review/submit`, body),
+  start: (reportId, body) => call('POST', `/editor/reports/${reportId}/review/start`, body),
+  decide: (reportId, body) => call('POST', `/editor/reports/${reportId}/review/decision`, body),
+};
+
 export const api = {
   /** Exchange the link token for the session cookie. The caller removes the token from the address bar. */
   async open(token) {

@@ -135,6 +135,7 @@ const cardByCaption = (page, c) => page.locator('.photo', { has: page.locator(`t
     await page.locator('.sections li button', { hasText: 'A. About the inspection' }).click();
     const firstBlock = s.content[0].blocks[0];
     await page.locator(`[data-block-id="${firstBlock.id}"] .textview`).click();
+    await page.locator('.pm:focus').waitFor({ timeout: 5000 });
     await page.keyboard.press('End');
     await page.keyboard.type(' Edited after photos.');
     check('a text edit after photo changes autosaves with no conflict', await until(async () => (await stateText(page)).trim() === 'Saved', 9000) && (await page.getByRole('dialog').count()) === 0);

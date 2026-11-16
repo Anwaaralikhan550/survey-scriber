@@ -25,6 +25,7 @@ class DesktopEditingState {
     this.appVersion,
     this.hasEdits = false,
     this.checkedAt,
+    this.review,
   });
 
   final bool loading;
@@ -48,6 +49,9 @@ class DesktopEditingState {
   final bool hasEdits;
   final DateTime? checkedAt;
 
+  /// The review workflow state of the cloud report (null until it has been read).
+  final ReviewInfo? review;
+
   bool get hasCloudReport => cloudVersion != null;
   bool get updateAvailable => cloudVersion != null && appVersion != null && cloudVersion! > appVersion!;
   bool get finalised => cloudStatus == 'FINALISING' || cloudStatus == 'FINALISED';
@@ -68,6 +72,7 @@ class DesktopEditingState {
     Object? appVersion = _keep,
     bool? hasEdits,
     DateTime? checkedAt,
+    Object? review = _keep,
   }) {
     return DesktopEditingState(
       loading: loading ?? this.loading,
@@ -84,6 +89,7 @@ class DesktopEditingState {
       appVersion: identical(appVersion, _keep) ? this.appVersion : appVersion as int?,
       hasEdits: hasEdits ?? this.hasEdits,
       checkedAt: checkedAt ?? this.checkedAt,
+      review: identical(review, _keep) ? this.review : review as ReviewInfo?,
     );
   }
 
@@ -157,11 +163,20 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
     try {
       final cloud = await api.latest(surveyId);
       if (cloud == null) {
-        next = next.copyWith(cloudVersion: null, cloudStatus: null, linkActive: false, linkExpiresAt: null, linkId: null, offline: false);
+        next = next.copyWith(cloudVersion: null, cloudStatus: null, linkActive: false, linkExpiresAt: null, linkId: null, offline: false, review: null);
       } else {
         final link = await api.currentLink(surveyId);
         if (!link.active && url != null) await store.vault.write(surveyId, null);
+        ReviewInfo? review = ReviewInfo(status: cloud.status, version: cloud.version);
+        if (cloud.status != 'DRAFT') {
+          try {
+            review = await api.review(surveyId);
+          } on ReportEditingException {
+            /* the status from the cheap call is enough to show */
+          }
+        }
         next = next.copyWith(
+          review: review,
           cloudVersion: cloud.version,
           cloudStatus: cloud.status,
           linkActive: link.active,
@@ -213,6 +228,9 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
       if (e.isConflict) {
         await refresh(quiet: true);
         _set(state.copyWith(busy: false, error: _cloudAhead));
+      } else if (e.code == 'INVALID_STATE') {
+        await refresh(quiet: true);
+        _set(state.copyWith(busy: false, error: '${e.message} The status was refreshed.'));
       } else if (e.code == 'RATE_LIMITED') {
         _set(state.copyWith(busy: false, error: 'Too many requests at once. Wait a few seconds and try again.'));
       } else if (e.isNetwork) {
@@ -270,6 +288,34 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
       _set(state.copyWith(notice: '${state.notice ?? 'Synchronised.'} ${s.describe()}. Synchronise again to retry.'));
     }
   }
+
+  static const _approveNeedsSync = 'Synchronise first, so you approve exactly what you have read.';
+
+  void _requireInSync() {
+    if (state.updateAvailable || state.appVersion == null || state.cloudVersion == null || state.appVersion != state.cloudVersion) {
+      throw const ReportEditingException(code: 'VERSION_CONFLICT', message: _approveNeedsSync);
+    }
+  }
+
+  void _setReview(ReviewInfo r) => _set(state.copyWith(review: r, cloudStatus: r.status, cloudVersion: r.version));
+
+  /// The owner's final approval of the version this phone has (spec section 14: only the owner can give it).
+  Future<void> approveFinal({String? comment}) => _guarded(() async {
+        _requireInSync();
+        _setReview(await api.ownerApprove(surveyId, expectedVersion: state.cloudVersion!, comment: comment));
+      }, done: 'Final approval given for version ${state.cloudVersion}.');
+
+  /// Send the report back to the editors with a note saying what to change.
+  Future<void> requestChanges(String comment) => _guarded(() async {
+        _requireInSync();
+        _setReview(await api.requestChanges(surveyId, expectedVersion: state.cloudVersion!, comment: comment));
+      }, done: 'Sent back with your comment.');
+
+  /// Start again from Draft; every approval is withdrawn.
+  Future<void> resetReview() => _guarded(() async {
+        _requireInSync();
+        _setReview(await api.resetReview(surveyId, expectedVersion: state.cloudVersion!));
+      }, done: 'The report is a draft again. Earlier approvals no longer stand.');
 
   /// Go back to the wording the phone generates from the answers.
   Future<void> discardEdits() => _guarded(() async {

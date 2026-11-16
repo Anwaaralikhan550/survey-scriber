@@ -7,6 +7,7 @@ import { AuditService } from '../audit/audit.service';
 import { ContentValidationError, ReportContent, applyChanges } from './report-content';
 import { Errors } from './editing.errors';
 import { newToken, safeEqualHex, sha256 } from './token.util';
+import { invalidateApprovalsAfterChange } from './review-effects';
 
 const LOCKED: ReportStatus[] = [ReportStatus.FINALISING, ReportStatus.FINALISED];
 
@@ -154,7 +155,7 @@ export class EditorSessionService {
       if (done) return { reportId, version: done.version, savedAt: done.createdAt, replayed: true };
     }
 
-    let result: { version: number; savedAt: Date };
+    let result: { version: number; savedAt: Date; invalidated: boolean };
     try {
       result = await this.prisma.$transaction(async (tx) => {
         const rows = await tx.$queryRaw<{ version: number; status: ReportStatus; content: unknown }[]>`
@@ -177,7 +178,8 @@ export class EditorSessionService {
             idempotencyKey: dto.idempotencyKey,
           },
         });
-        return { version, savedAt: row.createdAt };
+        const invalidated = (await invalidateApprovalsAfterChange(tx, reportId, cur.status)) !== null;
+        return { version, savedAt: row.createdAt, invalidated };
       });
     } catch (e) {
       if (e instanceof ContentValidationError) throw Errors.validation(e.message, e.path);
@@ -187,6 +189,7 @@ export class EditorSessionService {
       throw e;
     }
     await this.log('REPORT_SAVED', reportId, req, { sessionId: ctx.session.id, linkId: ctx.link.id, version: result.version });
+    if (result.invalidated) await this.log('REVIEW_INVALIDATED', reportId, req, { sessionId: ctx.session.id, version: result.version });
     return { reportId, version: result.version, savedAt: result.savedAt, replayed: false };
   }
 }

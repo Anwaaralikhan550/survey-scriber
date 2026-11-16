@@ -9,6 +9,7 @@ import { STORAGE_SERVICE, StorageService } from '../media/storage/storage.interf
 import { processPhoto } from '../media/image-processor';
 import { Errors } from './editing.errors';
 import { sanitizeText } from './report-content';
+import { invalidateApprovalsAfterChange } from './review-effects';
 
 const LOCKED: ReportStatus[] = [ReportStatus.FINALISING, ReportStatus.FINALISED];
 const CAPTION_MAX = 1000;
@@ -148,7 +149,7 @@ export class ReportPhotosService {
     guard: (tx: Prisma.TransactionClient) => Promise<void>,
     fn: (tx: Prisma.TransactionClient) => Promise<T>,
   ): Promise<{ version: number; result: T }> {
-    return this.prisma.$transaction(async (tx) => {
+    const out = await this.prisma.$transaction(async (tx) => {
       const rows = await tx.$queryRaw<{ version: number; status: ReportStatus; content: unknown }[]>`
         SELECT version, status, content FROM reports WHERE id = ${reportId}::uuid FOR UPDATE`;
       if (rows.length === 0) throw Errors.notFound();
@@ -162,8 +163,13 @@ export class ReportPhotosService {
       await tx.reportVersion.create({
         data: { reportId, version, content: cur.content as Prisma.InputJsonValue, savedBy: this.who(actor), reason: 'PHOTO' },
       });
-      return { version, result };
+      const invalidated = (await invalidateApprovalsAfterChange(tx, reportId, cur.status)) !== null;
+      return { version, result, invalidated };
     });
+    if (out.invalidated) {
+      await this.audit.log({ actorType: actor.kind === 'owner' ? ActorType.STAFF : ActorType.SYSTEM, actorId: actor.kind === 'owner' ? actor.userId : undefined, action: 'REVIEW_INVALIDATED', entityType: AuditEntityType.REPORT, entityId: reportId, metadata: { version: out.version, cause: 'photo change' } });
+    }
+    return { version: out.version, result: out.result };
   }
 
   private async nextOrder(tx: Prisma.TransactionClient, surveyId: string, sectionKey: string | null): Promise<number> {

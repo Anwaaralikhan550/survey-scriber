@@ -273,10 +273,13 @@ void main() {
     await store.saveUploaded(_survey, 1);
     await open(tester);
     expect(find.byKey(const Key('update_banner')), findsOneWidget);
+    await tester.scrollUntilVisible(find.byKey(const Key('generate_link')), 300, scrollable: find.byType(Scrollable).first);
     await tester.tap(find.byKey(const Key('generate_link')));
     await tester.pumpAndSettle();
+    await tester.drag(find.byType(ListView), const Offset(0, 2000));
+    await tester.pumpAndSettle();
     expect(find.byKey(const Key('error_banner')), findsOneWidget);
-    expect(find.textContaining('Synchronise first'), findsOneWidget);
+    expect(find.descendant(of: find.byKey(const Key('error_banner')), matching: find.textContaining('Synchronise first')), findsOneWidget);
     expect(find.byKey(const Key('link_url')), findsNothing);
     await _shot(tester, '07_refused_stale');
   });

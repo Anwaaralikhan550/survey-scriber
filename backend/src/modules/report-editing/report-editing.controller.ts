@@ -9,7 +9,8 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { ReportEditingService, Owner } from './report-editing.service';
 import { ReportPhotosService } from './report-photos.service';
 import { RestoreVersionDto, UploadSnapshotDto } from './dto/editing.dto';
-import { AssignPhotosDto } from './dto/photos.dto';
+import { AssignPhotosDto, ReviewActionDto, ReviewDecisionDto } from './dto/photos.dto';
+import { ReviewService } from './review.service';
 
 /** App (owner) endpoints, spec section 16. {id} is the report id, which is the survey id. */
 @ApiTags('Report editing')
@@ -21,6 +22,7 @@ export class ReportEditingController {
   constructor(
     private readonly service: ReportEditingService,
     private readonly photos: ReportPhotosService,
+    private readonly review: ReviewService,
   ) {}
 
   @Put(':id/snapshot')
@@ -73,6 +75,49 @@ export class ReportEditingController {
   async assignPhotos(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: AssignPhotosDto, @Req() req: Request) {
     await this.service.latest(user, id); // owner or admin only
     return this.photos.assign(id, { kind: 'owner', userId: user.id }, { expectedVersion: dto.expectedReportVersion, items: dto.items }, req);
+  }
+
+  // ---- Review workflow (spec section 14). The owner is the only one who can give the final approval. ----
+  @Get(':id/review')
+  async reviewView(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string) {
+    await this.service.latest(user, id);
+    return this.review.view(id);
+  }
+
+  @Post(':id/review/submit')
+  @HttpCode(HttpStatus.OK)
+  async reviewSubmit(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: ReviewActionDto, @Req() req: Request) {
+    await this.service.latest(user, id);
+    return this.review.act(id, { kind: 'owner', userId: user.id }, 'submit', { expectedVersion: dto.expectedReportVersion, comment: dto.comment }, req);
+  }
+
+  @Post(':id/review/start')
+  @HttpCode(HttpStatus.OK)
+  async reviewStart(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: ReviewActionDto, @Req() req: Request) {
+    await this.service.latest(user, id);
+    return this.review.act(id, { kind: 'owner', userId: user.id }, 'start', { expectedVersion: dto.expectedReportVersion, comment: dto.comment }, req);
+  }
+
+  /** The owner can send a report back. Approving as a reviewer is for link holders; the owner uses owner-approval. */
+  @Post(':id/review/decision')
+  @HttpCode(HttpStatus.OK)
+  async reviewDecision(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: ReviewDecisionDto, @Req() req: Request) {
+    await this.service.latest(user, id);
+    return this.review.act(id, { kind: 'owner', userId: user.id }, dto.decision === 'APPROVED' ? 'approve' : 'amend', { expectedVersion: dto.expectedReportVersion, comment: dto.comment }, req);
+  }
+
+  @Post(':id/owner-approval')
+  @HttpCode(HttpStatus.OK)
+  async ownerApproval(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: ReviewActionDto, @Req() req: Request) {
+    await this.service.latest(user, id);
+    return this.review.act(id, { kind: 'owner', userId: user.id }, 'ownerApprove', { expectedVersion: dto.expectedReportVersion, comment: dto.comment }, req);
+  }
+
+  @Post(':id/review/reset')
+  @HttpCode(HttpStatus.OK)
+  async reviewReset(@CurrentUser() user: Owner, @Param('id', ParseUUIDPipe) id: string, @Body() dto: ReviewActionDto, @Req() req: Request) {
+    await this.service.latest(user, id);
+    return this.review.act(id, { kind: 'owner', userId: user.id }, 'reset', { expectedVersion: dto.expectedReportVersion, comment: dto.comment }, req);
   }
 
   @Get(':id/versions')

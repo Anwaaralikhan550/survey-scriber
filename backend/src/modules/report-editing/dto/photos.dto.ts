@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { ArrayMaxSize, IsArray, IsInt, IsOptional, IsString, IsUUID, Max, MaxLength, Min, ValidateNested } from 'class-validator';
+import { ArrayMaxSize, IsArray, IsIn, IsInt, IsOptional, IsString, IsUUID, Max, MaxLength, Min, ValidateNested } from 'class-validator';
 
 export class ReplacePhotoDto {
   @IsInt()
@@ -61,4 +61,16 @@ export class AssignPhotosDto extends ReplacePhotoDto {
   @ValidateNested({ each: true })
   @Type(() => AssignItemDto)
   items!: AssignItemDto[];
+}
+
+export class ReviewActionDto extends ReplacePhotoDto {
+  @IsOptional()
+  @IsString()
+  @MaxLength(4000)
+  comment?: string;
+}
+
+export class ReviewDecisionDto extends ReviewActionDto {
+  @IsIn(['APPROVED', 'AMENDMENTS_REQUIRED'])
+  decision!: 'APPROVED' | 'AMENDMENTS_REQUIRED';
 }
