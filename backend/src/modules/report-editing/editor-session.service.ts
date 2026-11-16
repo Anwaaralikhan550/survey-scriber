@@ -127,6 +127,14 @@ export class EditorSessionService {
     };
   }
 
+  /** Inside a write transaction: the link must still be live and the session not ended. */
+  async assertWritable(tx: Prisma.TransactionClient, ctx: EditorContext): Promise<void> {
+    const link = await tx.editLink.findUnique({ where: { id: ctx.link.id } });
+    if (!link || link.status !== EditLinkStatus.ACTIVE || link.expiresAt <= new Date()) throw Errors.linkExpired();
+    const live = await tx.editorSession.findUnique({ where: { id: ctx.session.id } });
+    if (!live || live.revokedAt) throw Errors.linkRevoked();
+  }
+
   /** Screen G exit: end this browser session now. The link itself stays usable for the next colleague. */
   async close(ctx: EditorContext, req?: Request) {
     await this.prisma.editorSession.update({ where: { id: ctx.session.id }, data: { revokedAt: new Date() } });
@@ -154,10 +162,7 @@ export class EditorSessionService {
         if (rows.length === 0) throw Errors.notFound();
         const cur = rows[0];
         if (LOCKED.includes(cur.status)) throw Errors.finalised();
-        const link = await tx.editLink.findUnique({ where: { id: ctx.link.id } });
-        if (!link || link.status !== EditLinkStatus.ACTIVE || link.expiresAt <= new Date()) throw Errors.linkExpired();
-        const live = await tx.editorSession.findUnique({ where: { id: ctx.session.id } });
-        if (!live || live.revokedAt) throw Errors.linkRevoked();
+        await this.assertWritable(tx, ctx);
         if (dto.baseVersion !== cur.version) throw Errors.conflict(cur.version);
         const next = applyChanges(cur.content as ReportContent, dto.changes);
         const version = cur.version + 1;

@@ -213,5 +213,11 @@ export function useEditor(initial) {
     }
   }, [conflict, loadLatest, setSaveState]);
 
-  return { server, cur, pending, dirty, readOnly, saveState, lastSavedAt, message, conflict, canUndo: past.length > 0, canRedo: future.length > 0, edit, undo, redo, save, flush, reloadLatest, reapplyMine };
+  /** A photo change moved the report to a new version; the text editor must save against that one. */
+  const syncVersion = useCallback((version) => {
+    serverRef.current = { ...serverRef.current, version };
+    setServer((s) => ({ ...s, version }));
+  }, []);
+
+  return { syncVersion, refreshServer: loadLatest, server, cur, pending, dirty, readOnly, saveState, lastSavedAt, message, conflict, canUndo: past.length > 0, canRedo: future.length > 0, edit, undo, redo, save, flush, reloadLatest, reapplyMine };
 }

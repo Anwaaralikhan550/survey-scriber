@@ -13,6 +13,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { StorageService, STORAGE_SERVICE } from './storage/storage.interface';
 import { MediaResponseDto, DeleteMediaResponseDto } from './dto';
 import { ApiUrlBuilder } from '../../common/utils/api-url.util';
+import { processPhoto } from './image-processor';
 
 interface AuthenticatedUser {
   id: string;
@@ -24,6 +25,13 @@ interface UploadedFile {
   mimetype: string;
   size: number;
   buffer: Buffer;
+}
+
+/** What the phone knows about a photo, so the browser editor can show its caption, section and order. */
+export interface UploadMeta {
+  caption?: string;
+  sectionKey?: string;
+  sortOrder?: number;
 }
 
 @Injectable()
@@ -58,6 +66,7 @@ export class MediaService {
     type: MediaType,
     file: UploadedFile,
     user: AuthenticatedUser,
+    meta: UploadMeta = {},
   ): Promise<MediaResponseDto> {
     // 1. Verify survey access
     await this.verifySurveyAccess(surveyId, user);
@@ -65,17 +74,20 @@ export class MediaService {
     // 2. Validate file size and mime type
     this.validateFile(type, file);
 
-    // 3. Generate file ID and extract extension
-    const fileId = this.generateUuid();
-    const extension = this.getExtension(file.originalname, file.mimetype);
+    // 3. Photos are decoded, turned upright and re-encoded without EXIF/GPS (spec section 9)
+    let body = file.buffer;
+    let mimeType = file.mimetype;
+    let extension = this.getExtension(file.originalname, file.mimetype);
+    if (type === MediaType.PHOTO) {
+      const photo = await processPhoto(file.buffer, file.mimetype);
+      body = photo.buffer;
+      mimeType = photo.mimeType;
+      extension = photo.extension;
+    }
 
     // 4. Store file
-    const storagePath = await this.storageService.store(
-      surveyId,
-      fileId,
-      file.buffer,
-      extension,
-    );
+    const fileId = this.generateUuid();
+    const storagePath = await this.storageService.store(surveyId, fileId, body, extension);
 
     // 5. Create DB record
     const media = await this.prisma.media.create({
@@ -84,9 +96,12 @@ export class MediaService {
         surveyId,
         type,
         fileName: file.originalname,
-        mimeType: file.mimetype,
-        size: file.size,
+        mimeType,
+        size: body.length,
         storagePath,
+        caption: meta.caption,
+        sectionKey: meta.sectionKey,
+        sortOrder: meta.sortOrder,
       },
     });
 
@@ -298,10 +313,16 @@ export class MediaService {
     fileName: string;
     mimeType: string;
     size: number;
+    caption?: string | null;
+    sectionKey?: string | null;
+    sortOrder?: number;
     createdAt: Date;
     updatedAt: Date;
   }): MediaResponseDto {
     return {
+      caption: media.caption ?? null,
+      sectionKey: media.sectionKey ?? null,
+      sortOrder: media.sortOrder ?? 0,
       id: media.id,
       surveyId: media.surveyId,
       type: media.type,

@@ -2,6 +2,9 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import TextEditor from './TextEditor.jsx';
 import { useEditor } from './useEditor.js';
 import { api } from './api.js';
+import { Dialog, Icon, ICONS } from './ui.jsx';
+import Photos from './Photos.jsx';
+import { usePhotos } from './usePhotos.js';
 
 const TYPE_NAMES = { L2: 'Home Survey Level 2', L3: 'Home Survey Level 3', VALUATION: 'Valuation' };
 const RATINGS = ['NI', '1', '2', '3'];
@@ -33,39 +36,6 @@ const SAVE_LABEL = {
   conflict: 'Newer version on server',
   readonly: 'Read-only',
   lost: 'Access ended',
-};
-
-function Dialog({ title, children, actions, onClose }) {
-  useEffect(() => {
-    const k = (e) => e.key === 'Escape' && onClose && onClose();
-    window.addEventListener('keydown', k);
-    return () => window.removeEventListener('keydown', k);
-  }, [onClose]);
-  return (
-    <div className="scrim" role="presentation">
-      <div className="dialog" role="dialog" aria-modal="true" aria-label={title}>
-        <h2>{title}</h2>
-        <div className="dialog-body">{children}</div>
-        <div className="dialog-actions">{actions}</div>
-      </div>
-    </div>
-  );
-}
-
-function Icon({ d }) {
-  return (
-    <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d={d} />
-    </svg>
-  );
-}
-const ICONS = {
-  up: 'M10 16V4M5 9l5-5 5 5',
-  down: 'M10 4v12M5 11l5 5 5-5',
-  trash: 'M4 6h12M8 6V4h4v2M6 6l1 10h6l1-10',
-  undo: 'M7 5 3 9l4 4M3 9h9a5 5 0 0 1 0 10h-2',
-  redo: 'M13 5l4 4-4 4M17 9H8a5 5 0 0 0 0 10h2',
-  plus: 'M10 4v12M4 10h12',
 };
 
 function Block({ block, index, count, sections, sectionId, readOnly, active, onActivate, onEdit, onMove, onDelete, onMoveTo, onBlur }) {
@@ -173,6 +143,8 @@ export default function Workspace({ initial, onExit }) {
   const [sectionId, setSectionId] = useState(cur[0]?.id);
   const [activeId, setActiveId] = useState(null);
   const [dialog, setDialog] = useState(null);
+  const [view, setView] = useState('report'); // 'report' | 'photos'
+  const photosState = usePhotos({ reportId: server.reportId, editor: ed, readOnly });
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
@@ -217,6 +189,7 @@ export default function Workspace({ initial, onExit }) {
 
   const goSection = useCallback(
     (id) => {
+      setView('report');
       setActiveId(null);
       ed.flush();
       setSectionId(id);
@@ -346,7 +319,19 @@ export default function Workspace({ initial, onExit }) {
           </ul>
         </nav>
 
-        <main className="pane" aria-label={section.title}>
+        <main className="pane" aria-label={view === 'photos' ? 'Photographs' : section.title}>
+          <div className="tabs" role="tablist" aria-label="Report view">
+            <button type="button" role="tab" aria-selected={view === 'report'} className={view === 'report' ? 'is-current' : ''} onClick={() => setView('report')}>
+              Report text
+            </button>
+            <button type="button" role="tab" aria-selected={view === 'photos'} className={view === 'photos' ? 'is-current' : ''} onClick={() => (ed.flush(), setView('photos'))}>
+              Photographs <span className="count">{photosState.loading ? '' : photosState.photos.length}</span>
+            </button>
+          </div>
+          {view === 'photos' ? (
+            <Photos reportId={server.reportId} photosState={photosState} sections={cur.map((s) => ({ key: s.key, title: s.title }))} readOnly={readOnly} />
+          ) : (
+            <>
           <h1>{section.title}</h1>
           {section.blocks.length === 0 ? <p className="muted">No content in this section yet.</p> : null}
           {section.blocks.map((b, i) => (
@@ -387,6 +372,8 @@ export default function Workspace({ initial, onExit }) {
               <Icon d={ICONS.plus} /> Add paragraph
             </button>
           ) : null}
+            </>
+          )}
         </main>
 
         <aside className="side" aria-label="Report information">

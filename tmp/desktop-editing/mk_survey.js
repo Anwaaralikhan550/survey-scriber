@@ -4,6 +4,7 @@ const { owner, prisma } = require('./lib.js');
   const { user, token } = await owner('desk.phone@example.com');
   await prisma.survey.deleteMany({ where: { userId: user.id, title: 'PHONE E2E' } });
   const s = await prisma.survey.create({ data: { title: 'PHONE E2E', propertyAddress: '54 Gas Lane, Dartford, Kent', jobRef: 'VL1433', userId: user.id } });
-  console.log(JSON.stringify({ token, surveyId: s.id }));
+  const s2 = await prisma.survey.create({ data: { title: 'PHONE E2E', propertyAddress: '12 Photo Lane, Dartford, Kent', jobRef: 'VL1434', userId: user.id } });
+  console.log(JSON.stringify({ token, surveyId: s.id, surveyId2: s2.id }));
   await prisma.$disconnect();
 })();

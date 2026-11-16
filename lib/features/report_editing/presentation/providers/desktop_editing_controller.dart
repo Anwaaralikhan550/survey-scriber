@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../report_export/domain/models/report_document.dart';
 import '../../data/desktop_edit_store.dart';
+import '../../data/photo_sync_service.dart';
 import '../../data/report_editing_api.dart';
 import '../../domain/report_blocks_mapper.dart';
 
@@ -96,6 +97,7 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
     required this.api,
     required this.store,
     required this.buildDocument,
+    this.photos,
     DateTime Function()? now,
   })  : _now = now ?? DateTime.now,
         super(const DesktopEditingState());
@@ -109,6 +111,9 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
 
   /// The phone's report as it would be exported right now.
   final Future<ReportDocument> Function() buildDocument;
+
+  /// Keeps the phone's photos and the cloud's in step. Null where photos are not wanted (tests).
+  final PhotoSyncService? photos;
   final DateTime Function() _now;
   Timer? _poll;
   bool _disposed = false;
@@ -187,6 +192,12 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
       sections: ReportBlocksMapper.toSections(doc),
     );
     await store.saveUploaded(surveyId, up.version);
+    // File the phone's uploaded photos under report sections (only photos nobody organised yet).
+    final filed = await photos?.push(surveyId, doc, up.version);
+    if (filed != null) {
+      await store.saveUploaded(surveyId, filed);
+      return CloudReportInfo(version: filed, status: up.status, updatedAt: up.updatedAt);
+    }
     return up;
   }
 
@@ -244,11 +255,21 @@ class DesktopEditingController extends StateNotifier<DesktopEditingState> {
       }, done: 'Link cancelled. It no longer opens the report.');
 
   /// Take the cloud report, with the browser's edits, as this phone's copy (spec section 12).
-  Future<void> synchronise() => _guarded(() async {
-        final synced = await api.sync(surveyId);
-        await store.saveSynced(surveyId, synced.version, synced.sections);
-        _set(state.copyWith(cloudVersion: synced.version, cloudStatus: synced.status, appVersion: synced.version, hasEdits: true));
-      }, done: 'Synchronised. Your PDF and Word reports now use the edited wording.');
+  Future<void> synchronise() async {
+    PhotoSyncSummary? summary;
+    await _guarded(() async {
+      final synced = await api.sync(surveyId);
+      await store.saveSynced(surveyId, synced.version, synced.sections);
+      _set(state.copyWith(cloudVersion: synced.version, cloudStatus: synced.status, appVersion: synced.version, hasEdits: true));
+      summary = await photos?.pull(surveyId);
+    }, done: 'Synchronised. Your PDF and Word reports now use the edited wording.');
+    final s = summary;
+    if (s != null && s.changedAnything && state.error == null) {
+      _set(state.copyWith(notice: '${state.notice ?? 'Synchronised.'} Photos: ${s.describe()}.'));
+    } else if (s != null && s.failed > 0 && state.error == null) {
+      _set(state.copyWith(notice: '${state.notice ?? 'Synchronised.'} ${s.describe()}. Synchronise again to retry.'));
+    }
+  }
 
   /// Go back to the wording the phone generates from the answers.
   Future<void> discardEdits() => _guarded(() async {

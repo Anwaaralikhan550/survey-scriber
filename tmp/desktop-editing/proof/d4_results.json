@@ -1,0 +1,198 @@
+[
+ {
+  "name": "Photographs tab opens and says there are none yet",
+  "ok": true
+ },
+ {
+  "name": "Add photographs button and drop hint are shown, with the EXIF notice",
+  "ok": true
+ },
+ {
+  "name": "three photographs appear",
+  "ok": true
+ },
+ {
+  "name": "the uploads list empties when they are done",
+  "ok": true
+ },
+ {
+  "name": "the server has three photos and the version rose by three",
+  "ok": true
+ },
+ {
+  "name": "every thumbnail really loaded (cookie-authenticated picture)",
+  "ok": true
+ },
+ {
+  "name": "the tab count shows 3",
+  "ok": true
+ },
+ {
+  "name": "the photo that had GPS and a copyright in it was stored without them",
+  "ok": true
+ },
+ {
+  "name": "the header shows the new report version",
+  "ok": true
+ },
+ {
+  "name": "a text edit after photo changes autosaves with no conflict",
+  "ok": true
+ },
+ {
+  "name": "the text edit reached the server",
+  "ok": true
+ },
+ {
+  "name": "the caption is saved to the server on leaving the field",
+  "ok": true
+ },
+ {
+  "name": "the caption is still there after reloading the page",
+  "ok": true
+ },
+ {
+  "name": "photographs are grouped under the section they were given",
+  "ok": true
+ },
+ {
+  "name": "the server holds the section and a gap-free order",
+  "ok": true
+ },
+ {
+  "name": "both photographs are listed under the roof section",
+  "ok": true
+ },
+ {
+  "name": "Move earlier swaps the order on the server and on screen",
+  "ok": true
+ },
+ {
+  "name": "the first photo cannot move earlier and the last cannot move later",
+  "ok": true
+ },
+ {
+  "name": "the Show filter limits the grid to one section",
+  "ok": true
+ },
+ {
+  "name": "replace shows the new picture, same caption, section and place",
+  "ok": true
+ },
+ {
+  "name": "the replaced photo is marked deleted and no longer listed",
+  "ok": true
+ },
+ {
+  "name": "the new thumbnail loaded and is a different picture",
+  "ok": true
+ },
+ {
+  "name": "a damaged replacement is refused with a message",
+  "ok": true
+ },
+ {
+  "name": "the current photo is untouched: same id, same version, picture still shown",
+  "ok": true
+ },
+ {
+  "name": "a text file is refused before anything is sent",
+  "ok": true
+ },
+ {
+  "name": "a photo over 10 MB is refused before it is sent",
+  "ok": true
+ },
+ {
+  "name": "a file that only pretends to be a photo fails with Retry and Dismiss",
+  "ok": true
+ },
+ {
+  "name": "nothing was added by the refused uploads",
+  "ok": true
+ },
+ {
+  "name": "Dismiss clears the failed upload",
+  "ok": true
+ },
+ {
+  "name": "a small PNG is accepted",
+  "ok": true
+ },
+ {
+  "name": "dropping a file onto the panel adds it",
+  "ok": true
+ },
+ {
+  "name": "Cancel keeps the photograph",
+  "ok": true
+ },
+ {
+  "name": "delete removes it from the screen and the live list",
+  "ok": true
+ },
+ {
+  "name": "the owner list still reports it as deleted so the phone can remove it",
+  "ok": true
+ },
+ {
+  "name": "the remaining photos in each section were renumbered without gaps",
+  "ok": true
+ },
+ {
+  "name": "setup: a colleague saved newer text",
+  "ok": true
+ },
+ {
+  "name": "an upload after a colleague's save still goes through (it takes the newer version)",
+  "ok": true
+ },
+ {
+  "name": "no editing conflict dialog appeared",
+  "ok": true
+ },
+ {
+  "name": "a caption saved against a stale version is refused with a clear message and the photos reload",
+  "ok": true
+ },
+ {
+  "name": "trying again works",
+  "ok": true
+ },
+ {
+  "name": "every photo change left a history row and an audit event",
+  "ok": true
+ },
+ {
+  "name": "no script or console errors on the photograph screens",
+  "ok": true
+ },
+ {
+  "name": "expired link: the photograph is still visible",
+  "ok": true
+ },
+ {
+  "name": "expired link: no add, replace, delete or move controls, caption not editable",
+  "ok": true
+ },
+ {
+  "name": "cancelled link: the upload fails with a clear message and no photo is added",
+  "ok": true
+ },
+ {
+  "name": "Layout ipad_portrait: photograph grid has no horizontal page scroll",
+  "ok": true
+ },
+ {
+  "name": "Layout ipad_portrait: no script or console errors",
+  "ok": true
+ },
+ {
+  "name": "Layout laptop: photograph grid has no horizontal page scroll",
+  "ok": true
+ },
+ {
+  "name": "Layout laptop: no script or console errors",
+  "ok": true
+ }
+]

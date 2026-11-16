@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../app/theme/app_spacing.dart';
-import '../providers/desktop_editing_controller.dart';
 import '../providers/desktop_editing_providers.dart';
 
 /// Owner screen for desktop editing (spec section 7 Screen H): make, copy, share and cancel the edit link,

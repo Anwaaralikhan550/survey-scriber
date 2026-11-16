@@ -24,10 +24,16 @@ async function gate(ms = 450) {
 }
 
 async function call(token, method, path, body) {
-  await gate();
-  const res = await fetch(API + path, { method, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: body ? JSON.stringify(body) : undefined });
-  const data = await res.json().catch(() => ({}));
-  return { status: res.status, body: data };
+  for (let attempt = 0; ; attempt++) {
+    await gate();
+    const res = await fetch(API + path, { method, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: body ? JSON.stringify(body) : undefined });
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 429 && attempt < 6) {
+      await new Promise((r) => setTimeout(r, 1200)); // the browser under test shares the per-address rate limit
+      continue;
+    }
+    return { status: res.status, body: data };
+  }
 }
 
 const P = (text, extra = {}) => ({ id: randomUUID(), type: 'paragraph', text, ...extra });

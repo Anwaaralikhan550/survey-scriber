@@ -122,6 +122,7 @@ export class MediaController {
         buffer: file.buffer,
       },
       user,
+      { caption: dto.caption, sectionKey: dto.sectionKey, sortOrder: dto.sortOrder },
     );
   }
 

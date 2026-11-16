@@ -23,6 +23,15 @@ export class MediaResponseDto {
   @ApiProperty({ example: '/api/v1/media/550e8400-e29b-41d4-a716-446655440000/file' })
   url: string;
 
+  @ApiProperty({ required: false, nullable: true, example: 'Rear elevation' })
+  caption?: string | null;
+
+  @ApiProperty({ required: false, nullable: true, example: 'E/roof' })
+  sectionKey?: string | null;
+
+  @ApiProperty({ example: 0 })
+  sortOrder?: number;
+
   @ApiProperty({ example: '2024-01-15T10:30:00.000Z' })
   createdAt: Date;
 
