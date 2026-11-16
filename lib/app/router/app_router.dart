@@ -76,6 +76,7 @@ import '../../features/settings/presentation/pages/company_branding_page.dart';
 import '../../features/settings/presentation/pages/contact_us_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/signature/presentation/pages/signature_capture_page.dart';
+import '../../features/report_editing/presentation/pages/desktop_editing_page.dart';
 import '../../features/signature/presentation/pages/survey_signatures_page.dart';
 import '../../features/survey_overview/presentation/pages/survey_overview_page.dart';
 import '../../shared/presentation/pages/attachments_signatures_page.dart';
@@ -627,6 +628,18 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           if (id == null) return const _MissingParamErrorPage(paramKey: 'id');
           final title = state.uri.queryParameters['title'] ?? 'Survey';
           return SurveySignaturesPage(surveyId: id, surveyTitle: title);
+        },
+      ),
+      GoRoute(
+        path: Routes.surveyDesktopEditing,
+        builder: (context, state) {
+          final id = _safeParam(state, 'id');
+          if (id == null) return const _MissingParamErrorPage(paramKey: 'id');
+          return DesktopEditingPage(
+            surveyId: id,
+            isValuation: state.uri.queryParameters['valuation'] == 'true',
+            surveyTitle: state.uri.queryParameters['title'] ?? 'Survey',
+          );
         },
       ),
       GoRoute(

@@ -18,6 +18,8 @@ import '../../../ai/domain/entities/ai_response.dart';
 import '../../../property_valuation/domain/valuation_answer_validator.dart';
 import '../../../ai/domain/services/ai_client.dart';
 import '../../../../../../../shared/services/pdf_upload_service.dart';
+import '../../../report_editing/data/desktop_edit_store.dart';
+import '../../../report_editing/domain/report_blocks_mapper.dart';
 import '../../domain/models/export_config.dart';
 import '../../domain/models/report_document.dart';
 import 'docx_generator_service.dart';
@@ -38,6 +40,7 @@ class ExportService {
     this.aiClient,
     this.piiRedactor,
     this.recommendationsDao,
+    this.desktopEdits,
   });
 
   final ReportDataService dataService;
@@ -54,6 +57,9 @@ class ExportService {
 
   /// Optional DAO for loading accepted professional recommendations.
   final SurveyRecommendationsDao? recommendationsDao;
+
+  /// The browser's edits from desktop editing, applied to the report before it is rendered.
+  final DesktopEditStore? desktopEdits;
 
   /// Export an Inspection survey.
   Future<ExportResult> exportInspection(
@@ -81,6 +87,8 @@ class ExportService {
     if (config.includeRecommendations) {
       document = await _attachRecommendations(surveyId, document);
     }
+
+    document = await _applyDesktopEdits(surveyId, document);
 
     return _renderAndSave(surveyId, document, config, onProgress);
   }
@@ -126,7 +134,29 @@ class ExportService {
       document = await _attachRecommendations(surveyId, document);
     }
 
+    document = await _applyDesktopEdits(surveyId, document);
+
     return _renderAndSave(surveyId, document, config, onProgress);
+  }
+
+  /// The report as it would be exported now, without AI or recommendations: what desktop editing sends to the cloud.
+  Future<ReportDocument> buildDocumentForEditing(String surveyId, {required bool valuation}) async {
+    final rawData = valuation ? await dataService.loadValuationData(surveyId) : await dataService.loadInspectionData(surveyId);
+    final duration = await _readTimerDuration(surveyId);
+    return builder.build(
+      rawData,
+      const ExportConfig(includeAiNarrative: false, includeRecommendations: false),
+      surveyDuration: duration,
+    );
+  }
+
+  /// Put the browser's synced edits into the report. A survey with no synced edits is left as it is.
+  Future<ReportDocument> _applyDesktopEdits(String surveyId, ReportDocument document) async {
+    final store = desktopEdits;
+    if (store == null) return document;
+    final record = await store.read(surveyId);
+    if (!record.hasEdits) return document;
+    return ReportBlocksMapper.applyEdits(document, record.syncedSections!);
   }
 
   /// Maximum number of AI retry attempts (initial + retries).

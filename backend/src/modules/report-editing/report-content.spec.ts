@@ -128,4 +128,16 @@ describe('report content', () => {
     expect(out[0].blocks.map((b) => b.id).slice(0, 3)).toEqual([b2, nb, b1]);
     expect(out[0].blocks.map((b) => b.order)).toEqual([0, 1, 2, 3, 4].slice(0, out[0].blocks.length));
   });
+
+  it('keeps a block role from the phone, rejects unknown roles, and never lets the editor set one', () => {
+    const { sec } = sample();
+    const rb = id();
+    const content = cleanContent([{ id: sec, key: 'E1_ROOF/main', title: 'Roof', blocks: [{ id: rb, type: 'paragraph', text: 'x', role: 'phrase' }] }]);
+    expect(content[0].blocks[0].role).toBe('phrase');
+    expect(() => cleanContent([{ id: sec, key: 'k', title: 't', blocks: [{ id: id(), type: 'paragraph', role: 'boss' }] }])).toThrow(/role/);
+    const edited = applyChanges(content, [{ op: 'updateBlock', sectionId: sec, blockId: rb, fields: { text: 'y' } }]);
+    expect(edited[0].blocks[0].role).toBe('phrase');
+    const added = applyChanges(content, [{ op: 'addBlock', sectionId: sec, block: { id: id(), type: 'paragraph', text: 'z', role: 'rating' } as never }]);
+    expect(added[0].blocks[1].role).toBeUndefined();
+  });
 });

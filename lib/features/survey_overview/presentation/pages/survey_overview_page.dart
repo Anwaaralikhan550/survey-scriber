@@ -470,6 +470,32 @@ class _SurveyAppBar extends ConsumerWidget {
                     color: theme.colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(10),
                   ),
+                  child: const Icon(Icons.computer_rounded, size: 20),
+                ),
+                title: const Text(
+                  'Edit on a computer',
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ),
+                subtitle: const Text('Make a link to edit this report in a browser'),
+                onTap: () {
+                  Navigator.pop(context);
+                  context.push(
+                    Routes.surveyDesktopEditingPath(
+                      survey.id,
+                      valuation: survey.type.isValuation,
+                      title: survey.title,
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: const Icon(Icons.history_rounded, size: 20),
                 ),
                 title: const Text(

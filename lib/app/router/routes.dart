@@ -36,6 +36,7 @@ abstract final class Routes {
 
   static const String surveyMedia = '/survey/:id/media';
   static const String surveySignatures = '/survey/:id/signatures';
+  static const String surveyDesktopEditing = '/survey/:id/desktop-editing';
   static const String surveyAttachments = '/survey/:id/attachments';
   static const String signatureCapture = '/survey/:id/signature/capture';
   static const String reinspectionOverview = '/survey/:id/reinspection';
@@ -141,6 +142,8 @@ abstract final class Routes {
 
   static String surveyMediaPath(String id) => '/survey/$id/media';
   static String surveySignaturesPath(String id) => '/survey/$id/signatures';
+  static String surveyDesktopEditingPath(String id, {required bool valuation, String? title}) =>
+      '/survey/$id/desktop-editing?valuation=$valuation${title == null ? '' : '&title=${Uri.encodeQueryComponent(title)}'}';
   static String surveyAttachmentsPath(String id) => '/survey/$id/attachments';
   static String signatureCapturePath(String id) =>
       '/survey/$id/signature/capture';

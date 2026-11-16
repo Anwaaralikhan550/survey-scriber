@@ -8,6 +8,8 @@ import { randomUUID } from 'crypto';
 
 export type BlockType = 'paragraph' | 'rating' | 'recommendation' | 'photo' | 'table';
 export type Rating = 'NI' | '1' | '2' | '3';
+/** What the phone's report builder produced this block from, so edits go back to the right place. */
+export type BlockRole = 'phrase' | 'note' | 'rating' | 'schedule';
 
 export interface TableData {
   headers: string[];
@@ -20,6 +22,7 @@ export interface ContentBlock {
   order: number;
   /** Template field: may be edited but not deleted. */
   required?: boolean;
+  role?: BlockRole;
   text?: string;
   rating?: Rating;
   recommendation?: string;
@@ -69,6 +72,7 @@ export class ContentValidationError extends Error {
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const BLOCK_TYPES: BlockType[] = ['paragraph', 'rating', 'recommendation', 'photo', 'table'];
 const RATINGS: Rating[] = ['NI', '1', '2', '3'];
+const ROLES: BlockRole[] = ['phrase', 'note', 'rating', 'schedule'];
 
 export const LIMITS = {
   maxSections: 200,
@@ -128,6 +132,10 @@ export function cleanBlock(value: unknown, path: string): ContentBlock {
   const type = b.type as BlockType;
   const out: ContentBlock = { id, type, order: 0 };
   if (b.required === true) out.required = true;
+  if (b.role !== undefined) {
+    if (!ROLES.includes(b.role as BlockRole)) throw new ContentValidationError('unknown block role', `${path}.role`);
+    out.role = b.role as BlockRole;
+  }
   if (b.text !== undefined) out.text = cleanString(b.text, `${path}.text`, LIMITS.maxTextLength);
   if (b.recommendation !== undefined) out.recommendation = cleanString(b.recommendation, `${path}.recommendation`, LIMITS.maxTextLength);
   if (b.rating !== undefined) {
@@ -240,6 +248,7 @@ export function applyChanges(content: ReportContent, changes: unknown): ReportCo
           throw new ContentValidationError('block id already exists', `${path}.block.id`);
         }
         delete block.required; // only the template can mark a block required
+        delete block.role; // only the phone's builder sets what a block was made from
         insertAfter(sec, block, c.afterBlockId as string | null | undefined, c.atStart, path);
         break;
       }

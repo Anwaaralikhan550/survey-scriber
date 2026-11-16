@@ -9,6 +9,7 @@ import '../../../ai/presentation/providers/ai_inspection_providers.dart';
 import '../../../property_inspection/presentation/providers/inspection_providers.dart';
 import '../../../property_valuation/domain/valuation_answer_validator.dart';
 import '../../../property_valuation/presentation/providers/valuation_providers.dart';
+import '../../../report_editing/presentation/providers/desktop_edit_store_provider.dart';
 import '../../data/services/export_service.dart';
 import '../../data/services/report_builder.dart';
 import '../../../surveys/presentation/providers/survey_lifecycle.dart';
@@ -50,6 +51,7 @@ final exportServiceProvider = Provider<ExportService>((ref) {
     aiClient: ref.watch(aiInspectionClientProvider),
     piiRedactor: ref.watch(piiRedactorProvider),
     recommendationsDao: ref.watch(surveyRecommendationsDaoProvider),
+    desktopEdits: ref.watch(desktopEditStoreProvider),
   );
 });
 
