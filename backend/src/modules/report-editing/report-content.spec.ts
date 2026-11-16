@@ -117,4 +117,15 @@ describe('report content', () => {
     expect(() => applyChanges(content, Array.from({ length: LIMITS.maxChangesPerSave + 1 }, () => ({ op: 'deleteBlock', sectionId: sec, blockId: id() })))).toThrow(/too many/);
     expect(() => applyChanges(content, [{ op: 'dropTable', sectionId: sec }])).toThrow(/unknown operation/);
   });
+
+  it('atStart puts a new or moved block first; no position puts it last', () => {
+    const { content, sec, b1, b2 } = sample();
+    const nb = id();
+    const out = applyChanges(content, [
+      { op: 'addBlock', sectionId: sec, atStart: true, block: { id: nb, type: 'paragraph', text: 'First of all' } },
+      { op: 'moveBlock', sectionId: sec, blockId: b2, atStart: true },
+    ]);
+    expect(out[0].blocks.map((b) => b.id).slice(0, 3)).toEqual([b2, nb, b1]);
+    expect(out[0].blocks.map((b) => b.order)).toEqual([0, 1, 2, 3, 4].slice(0, out[0].blocks.length));
+  });
 });

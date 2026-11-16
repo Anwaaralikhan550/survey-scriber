@@ -40,9 +40,9 @@ export type ReportContent = ReportSection[];
 
 export type ChangeOp =
   | { op: 'updateBlock'; sectionId: string; blockId: string; fields: Partial<BlockFields> }
-  | { op: 'addBlock'; sectionId: string; afterBlockId?: string | null; block: NewBlock }
+  | { op: 'addBlock'; sectionId: string; afterBlockId?: string | null; atStart?: boolean; block: NewBlock }
   | { op: 'deleteBlock'; sectionId: string; blockId: string }
-  | { op: 'moveBlock'; sectionId: string; blockId: string; afterBlockId?: string | null; toSectionId?: string };
+  | { op: 'moveBlock'; sectionId: string; blockId: string; afterBlockId?: string | null; atStart?: boolean; toSectionId?: string };
 
 export interface BlockFields {
   text: string;
@@ -190,9 +190,12 @@ function reorder(sec: ReportSection): void {
   });
 }
 
-function insertAfter(sec: ReportSection, block: ContentBlock, afterBlockId: string | null | undefined, path: string): void {
+/** Place a block after another one; atStart puts it first; no afterBlockId puts it last. */
+function insertAfter(sec: ReportSection, block: ContentBlock, afterBlockId: string | null | undefined, atStart: unknown, path: string): void {
   if (sec.blocks.length + 1 > LIMITS.maxBlocksPerSection) throw new ContentValidationError('too many blocks', path);
-  if (afterBlockId === undefined || afterBlockId === null) {
+  if (atStart === true) {
+    sec.blocks.unshift(block);
+  } else if (afterBlockId === undefined || afterBlockId === null) {
     sec.blocks.push(block);
   } else {
     const at = sec.blocks.findIndex((b) => b.id === afterBlockId.toLowerCase());
@@ -237,7 +240,7 @@ export function applyChanges(content: ReportContent, changes: unknown): ReportCo
           throw new ContentValidationError('block id already exists', `${path}.block.id`);
         }
         delete block.required; // only the template can mark a block required
-        insertAfter(sec, block, c.afterBlockId as string | null | undefined, path);
+        insertAfter(sec, block, c.afterBlockId as string | null | undefined, c.atStart, path);
         break;
       }
       case 'deleteBlock': {
@@ -259,7 +262,7 @@ export function applyChanges(content: ReportContent, changes: unknown): ReportCo
         if (block.required && target !== sec) {
           throw new ContentValidationError('a template field cannot move to another section', `${path}.toSectionId`);
         }
-        insertAfter(target, block, c.afterBlockId as string | null | undefined, path);
+        insertAfter(target, block, c.afterBlockId as string | null | undefined, c.atStart, path);
         break;
       }
       default:

@@ -1,0 +1,262 @@
+[
+ {
+  "name": "A: landing shows branding, reference, property, expiry and a Continue button",
+  "ok": true
+ },
+ {
+  "name": "A: raw token removed from the address bar after the exchange",
+  "ok": true
+ },
+ {
+  "name": "A: apart from the first page load (the link itself), no request URL carried the token",
+  "ok": true
+ },
+ {
+  "name": "A: no referrer / noindex / CSP meta tags on the page",
+  "ok": true
+ },
+ {
+  "name": "A: session cookie is HttpOnly + SameSite=Strict",
+  "ok": true
+ },
+ {
+  "name": "A: the cookie is not readable by page script",
+  "ok": true
+ },
+ {
+  "name": "B: header shows reference, address, type, version, save state, link expiry and Editing",
+  "ok": true
+ },
+ {
+  "name": "B: left navigation lists all 6 sections",
+  "ok": true
+ },
+ {
+  "name": "B: SAVE TO SURVEYSCRIBER, Undo, Redo, Reload latest and Exit are present",
+  "ok": true
+ },
+ {
+  "name": "B: choosing a section shows its paragraphs, rating and recommendation",
+  "ok": true
+ },
+ {
+  "name": "C: typing shows \"Unsaved changes\"",
+  "ok": true
+ },
+ {
+  "name": "C: autosave reaches \"Saved\" only after the server confirms",
+  "ok": true
+ },
+ {
+  "name": "C: the server now holds the edit and version 2",
+  "ok": true
+ },
+ {
+  "name": "C: block ids are unchanged after the edit",
+  "ok": true
+ },
+ {
+  "name": "B: header shows Version 2",
+  "ok": true
+ },
+ {
+  "name": "C: a paragraph can be added after another",
+  "ok": true
+ },
+ {
+  "name": "C: new paragraph sits right after the one it was added to",
+  "ok": true
+ },
+ {
+  "name": "C: reorder with the Move up control swaps it above the new paragraph",
+  "ok": true
+ },
+ {
+  "name": "C: Cancel on the delete confirmation keeps the paragraph",
+  "ok": true
+ },
+ {
+  "name": "C: delete after confirmation removes it",
+  "ok": true
+ },
+ {
+  "name": "C: Undo brings the deleted paragraph back",
+  "ok": true
+ },
+ {
+  "name": "C: the required rating cannot be deleted (button disabled)",
+  "ok": true
+ },
+ {
+  "name": "C: SAVE TO SURVEYSCRIBER flushes and shows Saved",
+  "ok": true
+ },
+ {
+  "name": "C: server has: new paragraph, deleted block restored, moved order, rating 3",
+  "ok": true
+ },
+ {
+  "name": "C: a table cell edit is saved",
+  "ok": true
+ },
+ {
+  "name": "C: a paragraph can be moved to another section and is saved there",
+  "ok": true
+ },
+ {
+  "name": "Conflict setup: a colleague saved a newer version",
+  "ok": true
+ },
+ {
+  "name": "Conflict: a stale save opens the \"newer version\" explanation, never overwrites",
+  "ok": true
+ },
+ {
+  "name": "Conflict: the dialog counts only my own change (1), not the colleague's",
+  "ok": true
+ },
+ {
+  "name": "Conflict: the colleague change is intact on the server",
+  "ok": true
+ },
+ {
+  "name": "Conflict: my unsaved change is still on screen",
+  "ok": true
+ },
+ {
+  "name": "Conflict: re-apply keeps my edit on top of the newer version",
+  "ok": true
+ },
+ {
+  "name": "Conflict: after re-apply the save goes through",
+  "ok": true
+ },
+ {
+  "name": "Conflict: server holds both my addition and the colleague change",
+  "ok": true
+ },
+ {
+  "name": "Conflict: when the paragraph was deleted meanwhile, it says the changes cannot be re-applied",
+  "ok": true
+ },
+ {
+  "name": "Conflict: reload latest discards my edit and shows the server copy",
+  "ok": true
+ },
+ {
+  "name": "Offline: the editor shows offline/unsaved and never claims Saved",
+  "ok": true
+ },
+ {
+  "name": "Offline: nothing saved on the server",
+  "ok": true
+ },
+ {
+  "name": "Offline: after reconnecting the pending change is saved without loss",
+  "ok": true
+ },
+ {
+  "name": "Offline: the server has the text typed offline",
+  "ok": true
+ },
+ {
+  "name": "Reload latest with unsaved edits asks first",
+  "ok": true
+ },
+ {
+  "name": "Exit with unsaved edits asks first",
+  "ok": true
+ },
+ {
+  "name": "Keep editing closes the exit dialog and nothing was lost",
+  "ok": true
+ },
+ {
+  "name": "Closing the tab with unsaved edits triggers the browser warning",
+  "ok": true
+ },
+ {
+  "name": "Ctrl+S saves",
+  "ok": true
+ },
+ {
+  "name": "Ctrl+Z undoes the last typing step (and keeps the saved text)",
+  "ok": true
+ },
+ {
+  "name": "Reload of /editor keeps the session and shows the report again",
+  "ok": true
+ },
+ {
+  "name": "Exit with nothing unsaved leaves at once",
+  "ok": true
+ },
+ {
+  "name": "After Exit the old session no longer opens the report",
+  "ok": true
+ },
+ {
+  "name": "The same link still works for the next colleague",
+  "ok": true
+ },
+ {
+  "name": "Expired link: header shows read-only and editing controls are off",
+  "ok": true
+ },
+ {
+  "name": "Expired link: the header says read-only once, not twice",
+  "ok": true
+ },
+ {
+  "name": "Expired link: paragraphs are not editable",
+  "ok": true
+ },
+ {
+  "name": "Cancelled link: the next save is refused and the editor says access ended",
+  "ok": true
+ },
+ {
+  "name": "Finalised report: opening the link shows the safe \"finalised\" message",
+  "ok": true
+ },
+ {
+  "name": "Invalid link: safe message, no report content",
+  "ok": true
+ },
+ {
+  "name": "Expired link: safe \"expired\" message",
+  "ok": true
+ },
+ {
+  "name": "Cancelled link: safe \"no longer active\" message",
+  "ok": true
+ },
+ {
+  "name": "Layout ipad_portrait: no horizontal page scroll",
+  "ok": true
+ },
+ {
+  "name": "Layout ipad_portrait: no empty gap between the section picker and the report",
+  "ok": true
+ },
+ {
+  "name": "Layout ipad_portrait: no script errors or console errors",
+  "ok": true
+ },
+ {
+  "name": "Layout ipad_landscape: no horizontal page scroll",
+  "ok": true
+ },
+ {
+  "name": "Layout ipad_landscape: no script errors or console errors",
+  "ok": true
+ },
+ {
+  "name": "Layout laptop: no horizontal page scroll",
+  "ok": true
+ },
+ {
+  "name": "Layout laptop: no script errors or console errors",
+  "ok": true
+ }
+]

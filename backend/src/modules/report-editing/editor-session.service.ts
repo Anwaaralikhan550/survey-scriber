@@ -112,10 +112,11 @@ export class EditorSessionService {
 
   async read(ctx: EditorContext, reportId: string) {
     if (ctx.report.id !== reportId) throw Errors.forbidden();
-    const r = await this.prisma.report.findUniqueOrThrow({ where: { id: reportId } });
+    const r = await this.prisma.report.findUniqueOrThrow({ where: { id: reportId }, include: { survey: { select: { title: true, propertyAddress: true, jobRef: true } } } });
     return {
       reportId,
       reportType: r.reportType,
+      property: { title: r.survey.title, address: r.survey.propertyAddress, jobRef: r.survey.jobRef },
       status: r.status,
       version: r.version,
       updatedAt: r.updatedAt,
@@ -124,6 +125,13 @@ export class EditorSessionService {
       readOnlyReason: ctx.readOnlyReason ?? null,
       content: r.content,
     };
+  }
+
+  /** Screen G exit: end this browser session now. The link itself stays usable for the next colleague. */
+  async close(ctx: EditorContext, req?: Request) {
+    await this.prisma.editorSession.update({ where: { id: ctx.session.id }, data: { revokedAt: new Date() } });
+    await this.log('EDITOR_SESSION_CLOSED', ctx.report.id, req, { sessionId: ctx.session.id, linkId: ctx.link.id });
+    return { closed: true };
   }
 
   /** Spec 10 and 11: version-checked, idempotent, all-or-nothing save. */

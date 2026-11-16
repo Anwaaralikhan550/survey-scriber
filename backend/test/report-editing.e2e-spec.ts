@@ -338,6 +338,33 @@ describe('Desktop report editing (E2E)', () => {
       expect(res.body.linkExpiresAt).toBeDefined();
     });
 
+    it('the editor read shows the property for the header', async () => {
+      const res = await request(API).get(`/editor/reports/${f.surveyId}`).set('Cookie', sess.cookie);
+      expect(res.body.property).toMatchObject({ title: `${TEST_PREFIX}edit`, address: '1 Test Road' });
+    });
+
+    it('atStart places a new paragraph first', async () => {
+      const nb = randomUUID();
+      const res = await request(API).patch(`/editor/reports/${f.surveyId}`).set(sessionOf(sess.cookie, sess.csrf)).send({
+        baseVersion: 1,
+        changes: [{ op: 'addBlock', sectionId: c.sec, atStart: true, block: { id: nb, type: 'paragraph', text: 'Very first' } }],
+      });
+      expect(res.status).toBe(200);
+      const r = await request(API).get(`/editor/reports/${f.surveyId}`).set('Cookie', sess.cookie);
+      expect(r.body.content[0].blocks[0].id).toBe(nb);
+    });
+
+    it('Exit closes only this session: the cookie stops working and the link stays usable', async () => {
+      const close = await request(API).post('/editor/close').set(sessionOf(sess.cookie, sess.csrf));
+      expect(close.status).toBe(200);
+      const after = await request(API).get(`/editor/reports/${f.surveyId}`).set('Cookie', sess.cookie);
+      expect(after.status).toBe(404);
+      const again = await openLink(url);
+      expect(again.res.status).toBe(200);
+      const noCsrf = await request(API).post('/editor/close').set('Cookie', again.cookie!);
+      expect(noCsrf.body.error).toBe('CSRF_INVALID');
+    });
+
     it('refuses a write without the CSRF header or with a wrong one', async () => {
       const none = await request(API).patch(`/editor/reports/${f.surveyId}`).set('Cookie', sess.cookie).send(edit('x'));
       expect(none.status).toBe(403);
