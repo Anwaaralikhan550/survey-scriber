@@ -37,6 +37,11 @@ import { WebhooksModule } from '../src/modules/webhooks/webhooks.module';
 import { ExportsModule } from '../src/modules/exports/exports.module';
 import { MetricsModule } from '../src/modules/metrics/metrics.module';
 import { AiModule } from '../src/modules/ai/ai.module';
+import { ReportEditingModule } from '../src/modules/report-editing/report-editing.module';
+import { AdminUsersModule } from '../src/modules/admin-users/admin-users.module';
+import { EmailTemplatesModule } from '../src/modules/email-templates/email-templates.module';
+import { AppSettingsModule } from '../src/modules/app-settings/app-settings.module';
+import { ContactModule } from '../src/modules/contact/contact.module';
 
 @Module({
   imports: [
@@ -76,6 +81,11 @@ import { AiModule } from '../src/modules/ai/ai.module';
     ExportsModule,
     MetricsModule,
     AiModule,
+    ReportEditingModule,
+    AdminUsersModule,
+    EmailTemplatesModule,
+    AppSettingsModule,
+    ContactModule,
   ],
   // NOTE: No APP_GUARD ThrottlerGuard - this is intentionally omitted
   // to prevent rate limiting from interfering with E2E tests.

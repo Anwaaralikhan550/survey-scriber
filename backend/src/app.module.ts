@@ -29,6 +29,7 @@ import { WebhooksModule } from './modules/webhooks/webhooks.module';
 import { ExportsModule } from './modules/exports/exports.module';
 import { MetricsModule } from './modules/metrics/metrics.module';
 import { AiModule } from './modules/ai/ai.module';
+import { ReportEditingModule } from './modules/report-editing/report-editing.module';
 
 @Module({
   imports: [
@@ -107,6 +108,7 @@ import { AiModule } from './modules/ai/ai.module';
     ExportsModule,
     MetricsModule,
     AiModule,
+    ReportEditingModule,
   ],
   providers: [
     // Global throttler guard

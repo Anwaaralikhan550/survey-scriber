@@ -1,0 +1,137 @@
+
+// ============================================
+// Secure Desktop Report Editing (client spec v1.3)
+// ============================================
+
+/// ReportStatus - review workflow of the editable cloud report (spec section 14)
+enum ReportStatus {
+  DRAFT
+  SUBMITTED_FOR_REVIEW
+  UNDER_REVIEW
+  AMENDMENTS_REQUIRED
+  REVIEWER_APPROVED
+  OWNER_FINAL_APPROVAL
+  FINALISING
+  FINALISED
+}
+
+/// EditLinkStatus - lifecycle of a browser edit link (spec section 5)
+enum EditLinkStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+  REVOKED
+  INVALIDATED
+}
+
+/// ReviewDecision - what a reviewer or the owner decided on one exact version
+enum ReviewDecision {
+  SUBMITTED
+  APPROVED
+  AMENDMENTS_REQUIRED
+  OWNER_APPROVED
+}
+
+/// Report - the one authoritative cloud copy of a survey's editable report.
+/// content is Section[] with ContentBlock[] (stable UUIDs); version rises on every committed save.
+/// The partial unique index edit_links_one_active_per_report lives only in the migration SQL.
+model Report {
+  id               String       @id @default(uuid()) @db.Uuid
+  surveyId         String       @unique @map("survey_id") @db.Uuid
+  ownerUserId      String       @map("owner_user_id") @db.Uuid
+  reportType       String       @map("report_type") @db.VarChar(20) // 'L2' | 'L3' | 'VALUATION'
+  status           ReportStatus @default(DRAFT)
+  content          Json         @db.JsonB
+  version          Int          @default(1)
+  editCycle        Int          @default(1) @map("edit_cycle")
+  activeEditLinkId String?      @map("active_edit_link_id") @db.Uuid
+  finalisedAt      DateTime?    @map("finalised_at")
+  finalVersion     Int?         @map("final_version")
+  createdAt        DateTime     @default(now()) @map("created_at")
+  updatedAt        DateTime     @updatedAt @map("updated_at")
+
+  survey   Survey          @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  owner    User            @relation(fields: [ownerUserId], references: [id], onDelete: Cascade)
+  links    EditLink[]
+  versions ReportVersion[]
+  reviews  Review[]
+  sessions EditorSession[]
+
+  @@index([ownerUserId])
+  @@index([status])
+  @@map("reports")
+}
+
+/// ReportVersion - one snapshot per committed version so the owner can recover an earlier one (spec section 22)
+model ReportVersion {
+  id        String   @id @default(uuid()) @db.Uuid
+  reportId  String   @map("report_id") @db.Uuid
+  version   Int
+  content   Json     @db.JsonB
+  savedBy   String?  @map("saved_by") @db.VarChar(80) // 'owner:<userId>' | 'session:<sessionId>' | 'system'
+  reason    String   @db.VarChar(20) // SNAPSHOT | SAVE | RESTORE | FINALISE
+  createdAt DateTime @default(now()) @map("created_at")
+
+  report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@unique([reportId, version])
+  @@index([reportId])
+  @@map("report_versions")
+}
+
+/// EditLink - a bearer link to edit one report in the browser. Only the SHA-256 hash of the token is stored.
+model EditLink {
+  id        String         @id @default(uuid()) @db.Uuid
+  reportId  String         @map("report_id") @db.Uuid
+  tokenHash String         @unique @map("token_hash") @db.VarChar(64)
+  status    EditLinkStatus @default(ACTIVE)
+  createdBy String         @map("created_by") @db.Uuid
+  createdAt DateTime       @default(now()) @map("created_at")
+  expiresAt DateTime       @map("expires_at")
+  endedAt   DateTime?      @map("ended_at")
+
+  report   Report          @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  sessions EditorSession[]
+
+  @@index([reportId, status])
+  @@map("edit_links")
+}
+
+/// EditorSession - the short-lived browser session a link token is exchanged for.
+/// sessionHash is the SHA-256 of the HttpOnly cookie value, csrfHash of the CSRF token.
+model EditorSession {
+  id          String    @id @default(uuid()) @db.Uuid
+  reportId    String    @map("report_id") @db.Uuid
+  linkId      String    @map("link_id") @db.Uuid
+  sessionHash String    @unique @map("session_hash") @db.VarChar(64)
+  csrfHash    String    @map("csrf_hash") @db.VarChar(64)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  expiresAt   DateTime  @map("expires_at")
+  lastSeenAt  DateTime  @default(now()) @map("last_seen_at")
+  revokedAt   DateTime? @map("revoked_at")
+
+  report Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  link   EditLink @relation(fields: [linkId], references: [id], onDelete: Cascade)
+
+  @@index([reportId])
+  @@index([linkId])
+  @@map("editor_sessions")
+}
+
+/// Review - a submit, reviewer decision or owner approval, tied to the exact report version
+model Review {
+  id             String         @id @default(uuid()) @db.Uuid
+  reportId       String         @map("report_id") @db.Uuid
+  sessionId      String?        @map("session_id") @db.Uuid
+  reviewerUserId String?        @map("reviewer_user_id") @db.Uuid
+  decision       ReviewDecision
+  comment        String?        @db.Text
+  version        Int
+  invalidatedAt  DateTime?      @map("invalidated_at")
+  createdAt      DateTime       @default(now()) @map("created_at")
+
+  report Report @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@index([reportId, version])
+  @@map("reviews")
+}

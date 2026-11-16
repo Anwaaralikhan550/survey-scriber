@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { UserRole, SurveyStatus, SurveyType } from '@prisma/client';
+import { UserRole, SurveyStatus, SurveyType, ReportStatus } from '@prisma/client';
 import {
   completeLinkedBooking,
   unlinkDeletedSurvey,
@@ -312,6 +312,14 @@ export class SyncService {
     user: AuthenticatedUser,
   ): Promise<SyncOperationResultDto> {
     try {
+      // A finalised report is locked: the phone cannot change the survey behind it (desktop editing spec, section 15).
+      if (await this.isReportLocked(tx, operation)) {
+        return {
+          operationId: operation.operationId,
+          success: false,
+          error: 'REPORT_FINALISED: this report has been finalised and can no longer be changed',
+        };
+      }
       switch (operation.entityType) {
         case SyncEntityType.SURVEY:
           return await this.processSurveyOperation(tx, operation, user);
@@ -337,6 +345,30 @@ export class SyncService {
         error: message,
       };
     }
+  }
+
+  /** True when the operation touches a survey whose editable report is finalising or finalised. */
+  private async isReportLocked(
+    tx: Parameters<Parameters<typeof this.prisma.$transaction>[0]>[0],
+    operation: SyncOperationDto,
+  ): Promise<boolean> {
+    if (operation.operationType === SyncOperationType.CREATE) return false;
+    let surveyId: string | undefined;
+    if (operation.entityType === SyncEntityType.SURVEY) {
+      surveyId = operation.entityId;
+    } else if (operation.entityType === SyncEntityType.SECTION) {
+      const section = await tx.section.findUnique({ where: { id: operation.entityId }, select: { surveyId: true } });
+      surveyId = section?.surveyId;
+    } else if (operation.entityType === SyncEntityType.ANSWER) {
+      const answer = await tx.answer.findUnique({
+        where: { id: operation.entityId },
+        select: { section: { select: { surveyId: true } } },
+      });
+      surveyId = answer?.section.surveyId;
+    }
+    if (!surveyId) return false;
+    const report = await tx.report.findUnique({ where: { id: surveyId }, select: { status: true } });
+    return report?.status === ReportStatus.FINALISING || report?.status === ReportStatus.FINALISED;
   }
 
   private async processSurveyOperation(
