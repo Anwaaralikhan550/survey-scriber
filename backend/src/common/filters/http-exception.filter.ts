@@ -24,6 +24,14 @@ interface ErrorResponse {
 export class HttpExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(HttpExceptionFilter.name);
 
+  /** The 4xx status of an http-errors style error (body-parser), or 0 when it is not one. */
+  private clientErrorStatus(exception: unknown): number {
+    if (typeof exception !== 'object' || exception === null) return 0;
+    const e = exception as { status?: unknown; statusCode?: unknown; type?: unknown };
+    const status = typeof e.status === 'number' ? e.status : typeof e.statusCode === 'number' ? e.statusCode : 0;
+    return status >= 400 && status < 500 && typeof e.type === 'string' ? status : 0;
+  }
+
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -54,6 +62,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
           details = responseObj.message;
         }
       }
+    } else if (this.clientErrorStatus(exception)) {
+      // Errors from the body parser (http-errors): a body that is too large or not valid JSON is the caller's mistake.
+      statusCode = this.clientErrorStatus(exception) as number;
+      message = statusCode === HttpStatus.PAYLOAD_TOO_LARGE ? 'The request is too large' : 'The request could not be read';
+      error = statusCode === HttpStatus.PAYLOAD_TOO_LARGE ? 'PayloadTooLarge' : 'BadRequest';
     } else if (exception instanceof Error) {
       // SEC-M4: Never expose raw error messages to clients — they may contain
       // internal paths, SQL fragments, or stack details useful to attackers.
@@ -92,8 +105,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
         );
       }
 
-      // Log request body in development for 4xx errors
-      if (process.env.NODE_ENV !== 'production' && statusCode >= 400 && statusCode < 500 && request.body) {
+      // Log request body in development for 4xx errors, except on the report editing routes: those bodies are report text and
+      // comments (and tokens), which must not reach a log file in any environment.
+      const carriesReportText = /\/(editor|reports)(\/|$|\?)/.test(request.url);
+      if (process.env.NODE_ENV !== 'production' && statusCode >= 400 && statusCode < 500 && request.body && !carriesReportText) {
         this.logger.debug(
           `[${requestId}] Request body: ${JSON.stringify(request.body)}`,
         );

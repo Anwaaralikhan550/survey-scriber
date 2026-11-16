@@ -1,0 +1,33 @@
+# SurveyScriber report editor on its own host name, with TLS (spec section 17: HTTPS everywhere).
+# Copy to /etc/nginx/conf.d/editor.conf and replace EDITOR_HOST and the certificate paths.
+# The four snippet files (editor-http, editor-locations, editor-security-headers, editor-proxy) go in /etc/nginx/snippets/;
+# editor-http.conf is included once at http level (top of nginx.conf: `include /etc/nginx/snippets/editor-http.conf;`).
+# Put the Vite build (tool/desktop_editor/dist) in /var/www/editor. Point `proxy_pass` in editor-locations.conf and
+# editor-proxy at the backend (default 127.0.0.1:3000).
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name EDITOR_HOST;
+    access_log /var/log/nginx/editor-access.log editor_masked;   # a link opened over http would otherwise log its token
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name EDITOR_HOST;
+
+    ssl_certificate     /etc/letsencrypt/live/EDITOR_HOST/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/EDITOR_HOST/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers off;
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:editor_ssl:10m;
+    ssl_session_tickets off;
+
+    # Strict-Transport-Security is in editor-security-headers.conf, which every location includes.
+
+    include /etc/nginx/snippets/editor-locations.conf;
+}

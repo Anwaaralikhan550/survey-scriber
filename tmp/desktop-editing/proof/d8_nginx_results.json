@@ -1,0 +1,134 @@
+[
+  {
+    "name": "the page is served",
+    "ok": true
+  },
+  {
+    "name": "server banner has no version",
+    "ok": true
+  },
+  {
+    "name": "CSP: self only, no framing, no objects, no base tag, no form posts",
+    "ok": true
+  },
+  {
+    "name": "page: all nine security headers present and no-store",
+    "ok": true
+  },
+  {
+    "name": "link page: all nine security headers present and no-store",
+    "ok": true
+  },
+  {
+    "name": "index.html: all nine security headers present and no-store",
+    "ok": true
+  },
+  {
+    "name": "the link page works for any token path (single-page fallback)",
+    "ok": true
+  },
+  {
+    "name": "built assets are cached for a year, immutable, with the security headers",
+    "ok": true
+  },
+  {
+    "name": "not served: /.env",
+    "ok": true
+  },
+  {
+    "name": "not served: /.git/config",
+    "ok": true
+  },
+  {
+    "name": "not served: /src/main.jsx",
+    "ok": true
+  },
+  {
+    "name": "not served: /package.json",
+    "ok": true
+  },
+  {
+    "name": "not served: /assets/",
+    "ok": true
+  },
+  {
+    "name": "not served: /assets/../index.html.bak",
+    "ok": true
+  },
+  {
+    "name": "TRACE is refused",
+    "ok": true
+  },
+  {
+    "name": "API through nginx: wrong token is the backend's plain 404",
+    "ok": true
+  },
+  {
+    "name": "each security header appears once on API answers (no doubled values)",
+    "ok": true
+  },
+  {
+    "name": "API answers keep no-store from the backend",
+    "ok": true
+  },
+  {
+    "name": "nginx stops token guessing (429 after the burst)",
+    "ok": true
+  },
+  {
+    "name": "the token is gone from the address bar (the page now shows /editor)",
+    "ok": true
+  },
+  {
+    "name": "the session cookie is HttpOnly and cannot be read by the page",
+    "ok": true
+  },
+  {
+    "name": "cookie flags as the backend set them: HttpOnly, SameSite=Strict, path /api/v1/editor",
+    "ok": true
+  },
+  {
+    "name": "reloading /editor behind nginx still opens the editor (not a 404)",
+    "ok": true
+  },
+  {
+    "name": "an edit saves through nginx",
+    "ok": true
+  },
+  {
+    "name": "and is in the database",
+    "ok": true
+  },
+  {
+    "name": "a photo upload goes through nginx (201)",
+    "ok": true
+  },
+  {
+    "name": "a 14 MB body is stopped by nginx (413) before it reaches the backend",
+    "ok": true
+  },
+  {
+    "name": "the AI route is proxied (200 with the fake model, or 503 if it is off)",
+    "ok": true
+  },
+  {
+    "name": "the real nginx CSP breaks nothing: no violation, no console error",
+    "ok": true
+  },
+  {
+    "name": "another site cannot show the editor in a frame",
+    "ok": true
+  },
+  {
+    "name": "nginx access log: the link token never appears",
+    "ok": true
+  },
+  {
+    "name": "nginx access log: link page requests are written as /open/[token]",
+    "ok": true
+  },
+  {
+    "name": "nginx error log: the link token never appears",
+    "ok": true
+  }
+]

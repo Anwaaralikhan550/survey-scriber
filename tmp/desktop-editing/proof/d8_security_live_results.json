@@ -1,0 +1,78 @@
+[
+  {
+    "name": "guessing tokens is rate limited (429 appears within 14 tries)",
+    "ok": true
+  },
+  {
+    "name": "before the limit a wrong token is a plain 404, with no detail",
+    "ok": true
+  },
+  {
+    "name": "the limit starts early (within the first 11 tries)",
+    "ok": true
+  },
+  {
+    "name": "a limited request gets no cookie and no report data",
+    "ok": true
+  },
+  {
+    "name": "open: success with HttpOnly, SameSite=Strict cookie limited to /api/v1/editor",
+    "ok": true
+  },
+  {
+    "name": "open: cache-control no-store, referrer-policy no-referrer, noindex",
+    "ok": true
+  },
+  {
+    "name": "a token in a URL does nothing on the API (the page POSTs it; GET is 404)",
+    "ok": true
+  },
+  {
+    "name": "a refused request still carries no-store / no-referrer",
+    "ok": true
+  },
+  {
+    "name": "read: security headers on a normal answer",
+    "ok": true
+  },
+  {
+    "name": "read: no server banner or framework header",
+    "ok": true
+  },
+  {
+    "name": "CORS: the editor origin is allowed, with credentials",
+    "ok": true
+  },
+  {
+    "name": "CORS: another origin gets no permission to read the answer",
+    "ok": true
+  },
+  {
+    "name": "CORS preflight: PATCH with X-CSRF-Token is allowed from the editor origin",
+    "ok": true
+  },
+  {
+    "name": "CORS preflight: another origin is not allowed",
+    "ok": true
+  },
+  {
+    "name": "server log: the link token never appears",
+    "ok": true
+  },
+  {
+    "name": "server log: the session cookie value never appears",
+    "ok": true
+  },
+  {
+    "name": "server log: the CSRF token never appears",
+    "ok": true
+  },
+  {
+    "name": "server log: report wording sent in a refused request is not written either",
+    "ok": true
+  },
+  {
+    "name": "server log: the editor requests are logged (the check is looking at the right file)",
+    "ok": true
+  }
+]

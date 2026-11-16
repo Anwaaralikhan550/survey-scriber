@@ -6,6 +6,12 @@ import { readCookie } from './token.util';
 
 export const EDITOR_COOKIE = 'ss_editor';
 
+function setEditorHeaders(res: Response): void {
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Referrer-Policy', 'no-referrer');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
+}
+
 export type EditorRequest = Request & { editor: EditorContext };
 
 /** Checks the HttpOnly session cookie against the live link, and the CSRF header on every write. */
@@ -15,6 +21,8 @@ export class EditorSessionGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest<EditorRequest>();
+    // Guards run before interceptors, so a refused request would otherwise reach the browser without these headers.
+    setEditorHeaders(context.switchToHttp().getResponse<Response>());
     const ctx = await this.sessions.authenticate(readCookie(req.headers.cookie, EDITOR_COOKIE));
     if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method)) {
       this.sessions.verifyCsrf(ctx, req.headers['x-csrf-token'] as string | undefined);
@@ -28,10 +36,7 @@ export class EditorSessionGuard implements CanActivate {
 @Injectable()
 export class EditorSecurityHeadersInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-    const res = context.switchToHttp().getResponse<Response>();
-    res.setHeader('Cache-Control', 'no-store');
-    res.setHeader('Referrer-Policy', 'no-referrer');
-    res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
+    setEditorHeaders(context.switchToHttp().getResponse<Response>());
     return next.handle();
   }
 }

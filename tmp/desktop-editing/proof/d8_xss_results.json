@@ -1,0 +1,70 @@
+[
+  {
+    "name": "landing page shows the property text as text (address and reference)",
+    "ok": true
+  },
+  {
+    "name": "the address that looked like markup is not parsed (no element made from it)",
+    "ok": true
+  },
+  {
+    "name": "nothing ran on the landing page or while opening the editor",
+    "ok": true
+  },
+  {
+    "name": "no injected element anywhere in the report area (img/svg/script/iframe)",
+    "ok": true
+  },
+  {
+    "name": "no event-handler attribute exists on any element",
+    "ok": true
+  },
+  {
+    "name": "the left-over hostile text is visible as ordinary characters",
+    "ok": true
+  },
+  {
+    "name": "typed markup stays text in the editing surface (no img element created)",
+    "ok": true
+  },
+  {
+    "name": "pasted HTML creates no element (the editing surface knows only plain paragraphs)",
+    "ok": true
+  },
+  {
+    "name": "saved",
+    "ok": true
+  },
+  {
+    "name": "the server removed the typed tag from the stored text",
+    "ok": true
+  },
+  {
+    "name": "still nothing ran",
+    "ok": true
+  },
+  {
+    "name": "a photo with a hostile caption can be uploaded (the caption is cleaned by the server)",
+    "ok": true
+  },
+  {
+    "name": "the caption area has no injected element or handler",
+    "ok": true
+  },
+  {
+    "name": "review comment is shown as text, without markup",
+    "ok": true
+  },
+  {
+    "name": "canary never set: no payload executed anywhere",
+    "ok": true
+  },
+  {
+    "name": "no Content-Security-Policy violation outside the pasted-HTML parse",
+    "ok": true
+  },
+  {
+    "name": "no page errors",
+    "ok": true
+  }
+]

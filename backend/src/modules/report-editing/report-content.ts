@@ -123,6 +123,15 @@ function cleanTable(value: unknown, path: string): TableData {
   return { headers, rows };
 }
 
+/** Which fields each kind of block may carry. A rating cannot sit on a paragraph, a table cannot hold text, and so on. */
+const FIELDS_BY_TYPE: Record<BlockType, string[]> = {
+  paragraph: ['text'],
+  rating: ['rating', 'text'],
+  recommendation: ['recommendation', 'text'],
+  photo: ['photoId', 'text'],
+  table: ['table'],
+};
+
 /** Validate and normalise one block. Throws ContentValidationError for anything malformed. */
 export function cleanBlock(value: unknown, path: string): ContentBlock {
   if (typeof value !== 'object' || value === null) throw new ContentValidationError('must be an object', path);
@@ -130,6 +139,11 @@ export function cleanBlock(value: unknown, path: string): ContentBlock {
   const id = requireUuid(b.id, `${path}.id`);
   if (!BLOCK_TYPES.includes(b.type as BlockType)) throw new ContentValidationError('unknown block type', `${path}.type`);
   const type = b.type as BlockType;
+  for (const key of ['text', 'rating', 'recommendation', 'photoId', 'table']) {
+    if (b[key] !== undefined && !FIELDS_BY_TYPE[type].includes(key)) {
+      throw new ContentValidationError(`a ${type} block cannot have ${key}`, `${path}.${key}`);
+    }
+  }
   const out: ContentBlock = { id, type, order: 0 };
   if (b.required === true) out.required = true;
   if (b.role !== undefined) {
